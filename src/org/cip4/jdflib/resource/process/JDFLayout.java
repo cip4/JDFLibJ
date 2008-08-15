@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,7 @@
  * created 2001-09-05T08:21:57GMT+02:00 
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
+ * @Author sabjon@topmail.de    using a code generator 
  * Warning! very preliminary test version. 
  * Interface subject to change without prior notice! 
  */
@@ -116,8 +116,7 @@ public class JDFLayout extends JDFSurface
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -130,8 +129,7 @@ public class JDFLayout extends JDFSurface
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -164,12 +162,11 @@ public class JDFLayout extends JDFSurface
 		if (isResourceRoot() && version != null)
 		{
 			final boolean newLayout = isNewLayout(this);
-			if (version.getValue() >= EnumVersion.Version_1_3.getValue()
-					&& !newLayout)
+			if (version.getValue() >= EnumVersion.Version_1_3.getValue() && !newLayout)
 			{
 				bRet = toNewLayout();
-			} else if (version.getValue() < EnumVersion.Version_1_3.getValue()
-					&& newLayout)
+			}
+			else if (version.getValue() < EnumVersion.Version_1_3.getValue() && newLayout)
 
 			{
 				bRet = fromNewLayout();
@@ -187,8 +184,7 @@ public class JDFLayout extends JDFSurface
 	 */
 	public boolean toNewLayout()
 	{
-		VElement vSig = getChildElementVector(ElementName.SIGNATURE, null,
-				null, false, 0, false);
+		VElement vSig = getChildElementVector(ElementName.SIGNATURE, null, null, false, 0, false);
 		// loop over all signatures and rename them to Layout
 		for (int iSig = 0; iSig < vSig.size(); iSig++)
 		{
@@ -197,14 +193,12 @@ public class JDFLayout extends JDFSurface
 			{
 				rSig = ((JDFRefElement) rSig).inlineRef();
 			}
-			JDFLayout newLO = (JDFLayout) rSig.renameElement(
-					ElementName.LAYOUT, null);
-			newLO.setPartIDKey(EnumPartIDKey.SignatureName, rSig.getAttribute(
-					AttributeName.NAME, null, "Sig" + String.valueOf(iSig)));
+			JDFLayout newLO = (JDFLayout) rSig.renameElement(ElementName.LAYOUT, null);
+			newLO.setPartIDKey(EnumPartIDKey.SignatureName, rSig.getAttribute(AttributeName.NAME, null, "Sig"
+					+ String.valueOf(iSig)));
 			newLO.cleanLayoutLeaf();
 
-			VElement vSheet = newLO.getChildElementVector(ElementName.SHEET,
-					null, null, false, 0, false);
+			VElement vSheet = newLO.getChildElementVector(ElementName.SHEET, null, null, false, 0, false);
 			// loop over all sheets and rename them to Layout
 			for (int iSheet = 0; iSheet < vSheet.size(); iSheet++)
 			{
@@ -213,15 +207,12 @@ public class JDFLayout extends JDFSurface
 				{
 					rSheet = ((JDFRefElement) rSheet).inlineRef();
 				}
-				newLO = (JDFLayout) rSheet.renameElement(ElementName.LAYOUT,
-						null);
-				newLO.setPartIDKey(EnumPartIDKey.SheetName, rSheet
-						.getAttribute(AttributeName.NAME, null, "Sheet"
-								+ String.valueOf(iSheet)));
+				newLO = (JDFLayout) rSheet.renameElement(ElementName.LAYOUT, null);
+				newLO.setPartIDKey(EnumPartIDKey.SheetName, rSheet.getAttribute(AttributeName.NAME, null, "Sheet"
+						+ String.valueOf(iSheet)));
 				newLO.cleanLayoutLeaf();
 
-				VElement vSurf = newLO.getChildElementVector(
-						ElementName.SURFACE, null, null, false, 0, false);
+				VElement vSurf = newLO.getChildElementVector(ElementName.SURFACE, null, null, false, 0, false);
 				// loop over all surfaces and rename them to Layout
 				for (int iSurf = 0; iSurf < vSurf.size(); iSurf++)
 				{
@@ -230,11 +221,9 @@ public class JDFLayout extends JDFSurface
 					{
 						rSurf = ((JDFRefElement) rSurf).inlineRef();
 					}
-					newLO = (JDFLayout) rSurf.renameElement(ElementName.LAYOUT,
-							null);
-					newLO.setPartIDKey(EnumPartIDKey.Side, rSurf.getAttribute(
-							AttributeName.SIDE, null, "Surf"
-									+ String.valueOf(iSurf)));
+					newLO = (JDFLayout) rSurf.renameElement(ElementName.LAYOUT, null);
+					newLO.setPartIDKey(EnumPartIDKey.Side, rSurf.getAttribute(AttributeName.SIDE, null, "Surf"
+							+ String.valueOf(iSurf)));
 					newLO.cleanLayoutLeaf();
 				}
 			}
@@ -263,8 +252,7 @@ public class JDFLayout extends JDFSurface
 	public boolean fromNewLayout()
 	{
 		// TODO: fix content object placement
-		VElement vLO = getChildElementVector_JDFElement(ElementName.LAYOUT,
-				null, new JDFAttributeMap("SignatureName", ""), false, 0, false);
+		VElement vLO = getChildElementVector_JDFElement(ElementName.LAYOUT, null, new JDFAttributeMap("SignatureName", ""), false, 0, false);
 		VElement vSig = new VElement();
 		if (vLO.isEmpty())
 		{
@@ -272,7 +260,8 @@ public class JDFLayout extends JDFSurface
 			signature.setName("Sig_00");
 			vSig.add(signature);
 			moveElementsTo((JDFLayout) signature);
-		} else
+		}
+		else
 		{
 			JDFSignature sig = null;
 			for (int i = 0; i < vLO.size(); i++)
@@ -281,13 +270,12 @@ public class JDFLayout extends JDFSurface
 				sig = null;
 				if (lo.hasAttribute(AttributeName.SIGNATURENAME))
 				{
-					lo.renameAttribute(AttributeName.SIGNATURENAME,
-							AttributeName.NAME, null, null);
-					sig = (JDFSignature) lo.renameElement(
-							ElementName.SIGNATURE, null);
+					lo.renameAttribute(AttributeName.SIGNATURENAME, AttributeName.NAME, null, null);
+					sig = (JDFSignature) lo.renameElement(ElementName.SIGNATURE, null);
 					sig.cleanResourceAttributes();
 					vSig.add(sig);
-				} else
+				}
+				else
 				{
 					if (vSig.isEmpty())
 					{
@@ -304,20 +292,17 @@ public class JDFLayout extends JDFSurface
 		for (int iSig = 0; iSig < vSig.size(); iSig++)
 		{
 			JDFSignature sig = (JDFSignature) vSig.elementAt(iSig);
-			vLO = sig
-					.getChildElementVector_JDFElement(ElementName.LAYOUT, null,
-							new JDFAttributeMap("SheetName", ""), false, 0,
-							false);
+			vLO = sig.getChildElementVector_JDFElement(ElementName.LAYOUT, null, new JDFAttributeMap("SheetName", ""), false, 0, false);
 			VElement vSheet = new VElement();
 			if (vLO.isEmpty())
 			{
 				nSheet++;
-				final JDFSheet sheet = (JDFSheet) sig
-						.appendElement(ElementName.SHEET);
+				final JDFSheet sheet = (JDFSheet) sig.appendElement(ElementName.SHEET);
 				sheet.setName("Sheet_" + String.valueOf(nSheet));
 				vSheet.add(sheet);
 				((JDFLayout) sig).moveElementsTo((JDFLayout) sheet);
-			} else
+			}
+			else
 			{
 				JDFSheet sheet = null;
 				for (int i = 0; i < vLO.size(); i++)
@@ -326,20 +311,18 @@ public class JDFLayout extends JDFSurface
 					JDFElement lo = (JDFElement) vLO.elementAt(i);
 					if (lo.hasAttribute(AttributeName.SHEETNAME))
 					{
-						lo.renameAttribute(AttributeName.SHEETNAME,
-								AttributeName.NAME, null, null);
-						sheet = (JDFSheet) lo.renameElement(ElementName.SHEET,
-								null);
+						lo.renameAttribute(AttributeName.SHEETNAME, AttributeName.NAME, null, null);
+						sheet = (JDFSheet) lo.renameElement(ElementName.SHEET, null);
 						sheet.cleanResourceAttributes();
 						vSheet.add(sheet);
 						nSheet++;
-					} else
+					}
+					else
 					{
 						if (vSheet.isEmpty())
 						{
 							nSheet++;
-							sheet = (JDFSheet) sig
-									.appendElement(ElementName.SHEET);
+							sheet = (JDFSheet) sig.appendElement(ElementName.SHEET);
 							sheet.setName("Sheet_" + String.valueOf(nSheet));
 							vSheet.add(sheet);
 						}
@@ -352,16 +335,14 @@ public class JDFLayout extends JDFSurface
 			for (int iSheet = 0; iSheet < vSheet.size(); iSheet++)
 			{
 				JDFSheet sheet = (JDFSheet) vSheet.elementAt(iSheet);
-				vLO = sheet.getChildElementVector_JDFElement(
-						ElementName.LAYOUT, null, new JDFAttributeMap("Side",
-								""), false, 0, false);
+				vLO = sheet.getChildElementVector_JDFElement(ElementName.LAYOUT, null, new JDFAttributeMap("Side", ""), false, 0, false);
 				if (vLO.isEmpty())
 				{
-					JDFSurface surf = (JDFSurface) sheet
-							.appendElement(ElementName.SURFACE);
+					JDFSurface surf = (JDFSurface) sheet.appendElement(ElementName.SURFACE);
 					surf.setSide(EnumSide.Front);
 					((JDFLayout) sheet).moveElementsTo((JDFLayout) surf);
-				} else
+				}
+				else
 				{
 					for (int i = 0; i < vLO.size(); i++)
 					{
@@ -374,12 +355,9 @@ public class JDFLayout extends JDFSurface
 				}
 			}
 		}
-		removeFromAttribute(AttributeName.PARTIDKEYS,
-				AttributeName.SIGNATURENAME, null, JDFConstants.BLANK, -1);
-		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SHEETNAME,
-				null, JDFConstants.BLANK, -1);
-		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SIDE, null,
-				JDFConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SIGNATURENAME, null, JDFConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SHEETNAME, null, JDFConstants.BLANK, -1);
+		removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SIDE, null, JDFConstants.BLANK, -1);
 		return true;
 	}
 
@@ -393,8 +371,7 @@ public class JDFLayout extends JDFSurface
 			for (int i = 0; i < vPO.size(); i++)
 				target.moveElement(vPO.elementAt(i), null);
 		}
-		vPO = getChildElementVector_JDFElement(ElementName.LAYOUT, null, null,
-				false, 0, false);
+		vPO = getChildElementVector_JDFElement(ElementName.LAYOUT, null, null, false, 0, false);
 		if (vPO != null)
 		{
 			for (int i = 0; i < vPO.size(); i++)
@@ -457,8 +434,7 @@ public class JDFLayout extends JDFSurface
 	@Override
 	public JDFSignature appendSignature() throws JDFException
 	{
-		return appendLayoutElement(this, ElementName.SIGNATURE,
-				AttributeName.SIGNATURENAME);
+		return appendLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME);
 	}
 
 	/**
@@ -470,8 +446,7 @@ public class JDFLayout extends JDFSurface
 	 */
 	public int numSignatures()
 	{
-		return numLayoutElements(this, ElementName.SIGNATURE,
-				AttributeName.SIGNATURENAME);
+		return numLayoutElements(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME);
 	}
 
 	/**
@@ -502,8 +477,7 @@ public class JDFLayout extends JDFSurface
 	@Override
 	public JDFSignature getSignature(int iSkip)
 	{
-		return getLayoutElement(this, ElementName.SIGNATURE,
-				AttributeName.SIGNATURENAME, iSkip);
+		return getLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, iSkip);
 	}
 
 	/**
@@ -513,8 +487,7 @@ public class JDFLayout extends JDFSurface
 	 */
 	public VElement getSignatureVector()
 	{
-		return getLayoutElementVector(this, ElementName.SIGNATURE,
-				AttributeName.SIGNATURENAME);
+		return getLayoutElementVector(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME);
 	}
 
 } // class JDFLayout

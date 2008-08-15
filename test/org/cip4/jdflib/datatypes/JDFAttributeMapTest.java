@@ -85,6 +85,11 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
+/**
+ * test of JDFAttributemap
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFAttributeMapTest extends JDFTestCaseBase
 {
 	public void testClone()
@@ -130,8 +135,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	public void testPut()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName,
-				"v1");
+		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
 		assertEquals(m1.get("SignatureName"), "v1");
 		m1.put(EnumPartIDKey.SheetName, "s1");
 		assertEquals(m1.get("SheetName"), "s1");
@@ -145,8 +149,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	public void testGet()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName,
-				"v1");
+		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
 		assertEquals(m1.get("SignatureName"), "v1");
 		m1.put(EnumPartIDKey.SheetName, "s1");
 		assertEquals(m1.get(EnumPartIDKey.SignatureName), "v1");
@@ -209,6 +212,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	/**
 	 * @deprecated
 	 */
+	@Deprecated
 	public void testReduceMap()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");

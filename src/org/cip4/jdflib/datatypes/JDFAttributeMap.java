@@ -359,7 +359,8 @@ public class JDFAttributeMap implements Map
 			if (KElement.isWildCard(subMapVal))
 				continue;
 
-			if (!subMapVal.equals(get(subMapKey)))
+			final String val = get(subMapKey);
+			if (val != null && !subMapVal.equals(val))
 				return false;
 		}
 		return true;

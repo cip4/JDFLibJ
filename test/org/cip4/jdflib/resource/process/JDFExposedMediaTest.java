@@ -68,112 +68,35 @@
  *  
  * 
  */
+
 package org.cip4.jdflib.resource.process;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.node.JDFNode;
 
-public class JDFComponentTest extends JDFTestCaseBase
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * test for exposedmedia related stuff
+ */
+public class JDFExposedMediaTest extends JDFTestCaseBase
 {
-	private JDFComponent c;
-	private JDFNode root;
-	private JDFDoc doc;
 
 	/**
-	 * tests the separationlist class
-	 * 
+	 * test
 	 */
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	public final void testSetDimensions()
+	public void testGetMediaDimension()
 	{
-		c.setDimensions(new JDFXYPair(1, 2));
-		assertEquals(new JDFShape(1, 2, 0), c.getDimensions());
+		JDFExposedMedia xm = (JDFExposedMedia) new JDFDoc("JDF").getRoot().appendElement(ElementName.RESOURCEPOOL).appendElement(ElementName.EXPOSEDMEDIA);
+		assertNull(xm.getMediaDimension());
+		JDFMedia m = xm.appendMedia();
+		assertNull(xm.getMediaDimension());
+		JDFXYPair dim = new JDFXYPair(10, 20);
+		m.setDimension(dim);
+		assertEquals(xm.getMediaDimension(), dim);
+		m.makeRootResource(null, null, true);
+		assertEquals(xm.getMediaDimension(), dim);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	@Override
-	protected void setUp() throws Exception
-	{
-		super.setUp();
-		doc = new JDFDoc("JDF");
-		root = doc.getJDFRoot();
-		c = (JDFComponent) root.addResource(ElementName.COMPONENT, EnumUsage.Input);
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// /
-
-	public void testSetComponentTypeAuto()
-	{
-		c.setComponentType(null);
-		assertFalse(c.hasAttribute(AttributeName.COMPONENTTYPE));
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// /
-
-	/**
-	 * 
-	 */
-	public void testGetMediaLayout()
-	{
-		c.setComponentType(null);
-		JDFLayout lo = c.appendLayout();
-		JDFMedia m = lo.appendMedia();
-		assertEquals(m, c.getMedia());
-		lo.makeRootResource(null, null, true);
-		assertEquals(m, c.getMedia());
-	}
-
-	/**
-	 * 
-	 */
-	public void testGetMedia()
-	{
-		c.setComponentType(null);
-		JDFMedia m = (JDFMedia) c.appendElement(ElementName.MEDIA);
-		assertEquals(m, c.getMedia());
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	public void testSetComponentType()
-	{
-		c.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
-		assertTrue(c.hasAttribute(AttributeName.COMPONENTTYPE));
-		assertEquals(c.getComponentType().size(), 2);
-		assertTrue(c.getComponentType().contains(EnumComponentType.PartialProduct));
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	@Override
-	public String toString()
-	{
-		return c.toString();
-	}
-
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	public void testComponentManifest()
-	{
-		root.getLink(c, null).setUsage(EnumUsage.Output);
-		// TODO complete
-
-		doc.write2File(sm_dirTestDataTemp + "ComponentManifest.jdf", 2, false);
-
-	}
-	////////////////////////////////////////////////////////////////////////////
-	// /
-	////////////////////////////////////////////////////////////////////////////
-	// /
 }

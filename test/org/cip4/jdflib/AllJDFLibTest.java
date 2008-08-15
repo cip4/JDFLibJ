@@ -189,6 +189,7 @@ import org.cip4.jdflib.resource.process.JDFContentDataTest;
 import org.cip4.jdflib.resource.process.JDFCutBlockTest;
 import org.cip4.jdflib.resource.process.JDFDieLayoutTest;
 import org.cip4.jdflib.resource.process.JDFEmployeeTest;
+import org.cip4.jdflib.resource.process.JDFExposedMediaTest;
 import org.cip4.jdflib.resource.process.JDFMediaTest;
 import org.cip4.jdflib.resource.process.JDFPRItemTest;
 import org.cip4.jdflib.resource.process.JDFPageDataTest;
@@ -223,6 +224,10 @@ import org.cip4.jdflib.util.VectorMapTest;
  */
 public class AllJDFLibTest extends JDFTestCaseBase
 {
+	/**
+	 * the big suite
+	 * @return this
+	 */
 	public static TestSuite suite()
 	{
 		TestSuite suite = new TestSuite("Tests for org.cip4.jdflib.*");
@@ -372,6 +377,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFContactTest.class);
 		suite.addTestSuite(JDFDieLayoutTest.class);
 		suite.addTestSuite(JDFEmployeeTest.class);
+		suite.addTestSuite(JDFExposedMediaTest.class);
 		suite.addTestSuite(JDFMediaTest.class);
 		suite.addTestSuite(JDFPageDataTest.class);
 		suite.addTestSuite(JDFPersonTest.class);

@@ -105,10 +105,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		if (argV.length > 1 && argV[1].equals("-?"))
 		{
 			// Watch for special case help request
-			String usage = "JDFExample; example usages of the JDF Library\n"
-					+ "Arguments: -a: actions to perform \n"
-					+ "           -i input JDF file\n"
-					+ "           -o output JDF File\n";
+			String usage = "JDFExample; example usages of the JDF Library\n" + "Arguments: -a: actions to perform \n"
+					+ "           -i input JDF file\n" + "           -o output JDF File\n";
 
 			System.out.println(args.usage(usage));
 			return;
@@ -124,10 +122,10 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		}
 
 		String strDocType = action.endsWith("Message") ? ElementName.JMF // 1 =
-																			// JMF
-																			// document
-																			// root
-				: ElementName.JDF; // 0 = JDF document root
+		// JMF
+		// document
+		// root
+		: ElementName.JDF; // 0 = JDF document root
 
 		// use JDFExampleDoc as a container that holds the various example
 		// routines
@@ -145,8 +143,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	 *            outfile name of the output JDF file to write
 	 * @return >=0 if successful
 	 */
-	public int doExample(String strDocType, String action, String inFile,
-			String outFile)
+	public int doExample(String strDocType, String action, String inFile, String outFile)
 	{
 		JDFParser p = new JDFParser();
 		JDFElement root = null;
@@ -156,7 +153,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		{
 			m_doc = p.parseFile(sm_dirTestDataTemp + inFile);
 			root = (JDFElement) m_doc.getRoot();
-		} else
+		}
+		else
 		{ // clean root if it was not parsed
 			m_doc = new JDFDoc(strDocType);
 			root = (JDFElement) m_doc.getRoot();
@@ -169,50 +167,64 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			if (action.equals("CreateSimple"))
 			{
 				iReturn = createSimple();
-			} else if (action.equals("CreateBrochure"))
+			}
+			else if (action.equals("CreateBrochure"))
 			{
 				iReturn = createBrochure();
-			} else if (action.equals("CreateRIP"))
+			}
+			else if (action.equals("CreateRIP"))
 			{
 				iReturn = createRIP();
-			} else if (action.equals("Reprint"))
+			}
+			else if (action.equals("Reprint"))
 			{
 				iReturn = reprint();
-			} else if (action.equals("CreateDigitalPrinting"))
+			}
+			else if (action.equals("CreateDigitalPrinting"))
 			{
 				iReturn = createDigitalPrinting();
-			} else if (action.equals("CreateNarrowWeb"))
+			}
+			else if (action.equals("CreateNarrowWeb"))
 			{
 				iReturn = createNarrowWeb();
-			} else if (action.equals("CreateImposition"))
+			}
+			else if (action.equals("CreateImposition"))
 			{
 				iReturn = createImposition();
-			} else if (action.equals("ParseNodes"))
+			}
+			else if (action.equals("ParseNodes"))
 			{
 				iReturn = parseNodes();
-			} else if (action.equals("DoRunList"))
+			}
+			else if (action.equals("DoRunList"))
 			{
 				iReturn = doRunList();
-			} else if (action.equals("DoAudit"))
+			}
+			else if (action.equals("DoAudit"))
 			{
 				iReturn = doAudit();
-			} else if (action.equals("DoValid"))
+			}
+			else if (action.equals("DoValid"))
 			{
 				iReturn = doValid();
-			} else if (action.equals("ProcessMessage"))
+			}
+			else if (action.equals("ProcessMessage"))
 			{
 				iReturn = processMessage(writeMessage());
-			} else if (action.equals("DoAll"))
+			}
+			else if (action.equals("DoAll"))
 			{
 				iReturn = doAll();
-			} else
+			}
+			else
 			{
 				// oops we don't know this one
 				System.out.println("JDFExampleDoc: unknown action " + action);
 				return -1;
 			}
 
-		} catch (JDFException e)
+		}
+		catch (JDFException e)
 		{
 			System.out.println("Caught a JDF exception :" + e.getMessage());
 		}
@@ -226,7 +238,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			// #dm# remove(outFile);
 			// write the output file
 			m_doc.write2File(sm_dirTestDataTemp + outFile, 0, true);
-		} else
+		}
+		else
 		{
 			// no output file -> Send to console
 			System.out.println(">>>>>>>>>>>>>>> output of " + action);
@@ -257,8 +270,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		doExample(ElementName.JDF, "DoAudit", "RunList.jdf", "RunlistAudit.jdf");
 		doExample(ElementName.JDF, "DoValid", "RunList.jdf", "");
 		doExample(ElementName.JDF, "CreateImposition", "", "Impose.jdf");
-		doExample(ElementName.JDF, "CreateDigitalPrinting", "",
-				"DigitalPrinting.jdf");
+		doExample(ElementName.JDF, "CreateDigitalPrinting", "", "DigitalPrinting.jdf");
 		doExample(ElementName.JDF, "CreateNarrowWeb", "", "NarrowWeb.jdf");
 
 		doExample(ElementName.JMF, "ProcessMessage", "", "ProcessMessage.jdf");
@@ -285,15 +297,14 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		productNode.setType(JDFNode.EnumType.Product.getName(), false);
 
 		// Add an intent resource
-		JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode
-				.appendMatchingResource(ElementName.LAYOUTINTENT,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFLayoutIntent layoutIntent = (JDFLayoutIntent) productNode.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		// set the type attribute
 		try
 		{
 			layoutIntent.setPageNumber(new JDFIntegerRangeList("4"));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			// nop is ok
 		}
@@ -327,9 +338,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 		productNode.setJobPartID("Part1");
 		// define the complete output component (false -> Usage=output
-		JDFComponent compBrochure = (JDFComponent) productNode
-				.appendMatchingResource(ElementName.COMPONENT,
-						JDFNode.EnumProcessUsage.AnyOutput, null);
+		JDFComponent compBrochure = (JDFComponent) productNode.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
 		Vector vComType = new Vector();
 		vComType.add(JDFComponent.EnumComponentType.FinalProduct);
 		compBrochure.setComponentType(vComType);
@@ -338,8 +347,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		compBrochure.setAmount(10000);
 
 		// you can now add all kinds of attributes to bindingIntent
-		productNode.appendMatchingResource(ElementName.BINDINGINTENT,
-				JDFNode.EnumProcessUsage.AnyInput, null);
+		productNode.appendMatchingResource(ElementName.BINDINGINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		// add the component for the cover
 		JDFNode prodCover = productNode.addProduct();
@@ -348,9 +356,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 		// Add a component for the cover that resides in the ResourceLinkPool of
 		// productNode
-		JDFComponent compCover = (JDFComponent) prodCover
-				.appendMatchingResource(ElementName.COMPONENT,
-						JDFNode.EnumProcessUsage.AnyOutput, productNode);
+		JDFComponent compCover = (JDFComponent) prodCover.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, productNode);
 
 		compCover.setDescriptiveName("Cover Component");
 
@@ -359,32 +365,25 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		compCover.setComponentType(vComType);
 
 		// Add an ArtDeliveryIntent to define the input files for the cover
-		JDFArtDeliveryIntent artDeliveryIntent = (JDFArtDeliveryIntent) prodCover
-				.appendMatchingResource(ElementName.ARTDELIVERYINTENT,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFArtDeliveryIntent artDeliveryIntent = (JDFArtDeliveryIntent) prodCover.appendMatchingResource(ElementName.ARTDELIVERYINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		JDFArtDelivery artDeliveryCover = artDeliveryIntent.appendArtDelivery();
 		artDeliveryCover.setArtDeliveryType("DigitalNetwork");
 
 		JDFRunList runListCover = artDeliveryCover.appendRunList();
-		JDFFileSpec fileSpec = runListCover.appendLayoutElement()
-				.appendFileSpec();
+		JDFFileSpec fileSpec = runListCover.appendLayoutElement().appendFileSpec();
 		fileSpec.setURL("File:./cover.pdf");
 		fileSpec.setApplication("Acrobat");
 
 		// link the cover to the brochure node as input
-		productNode.linkMatchingResource(compCover,
-				JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap());
+		productNode.linkMatchingResource(compCover, JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap());
 
-		JDFLayoutIntent layoutIntent = (JDFLayoutIntent) prodCover
-				.appendMatchingResource(ElementName.LAYOUTINTENT,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFLayoutIntent layoutIntent = (JDFLayoutIntent) prodCover.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		layoutIntent.setNumberUp(new JDFXYPair(1, 1));
 		layoutIntent.setSides(JDFLayoutIntent.EnumSides.OneSided);
 
-		prodCover.appendMatchingResource(ElementName.COLORINTENT,
-				JDFNode.EnumProcessUsage.AnyInput, null);
+		prodCover.appendMatchingResource(ElementName.COLORINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		// Add a component for the insert that resides in the ResourceLinkPool
 		// of productNode
@@ -393,42 +392,31 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		prodInsert.setJobPartID("Part3");
 
 		// link the insert to the brochure node as input
-		JDFComponent compInsert = (JDFComponent) prodInsert
-				.appendMatchingResource(ElementName.COMPONENT,
-						JDFNode.EnumProcessUsage.AnyOutput, productNode);
+		JDFComponent compInsert = (JDFComponent) prodInsert.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, productNode);
 
 		compInsert.setDescriptiveName("Insert Component");
 
 		vComType = new Vector();
 		vComType.add(JDFComponent.EnumComponentType.PartialProduct);
 		compInsert.setComponentType(vComType);
-		productNode.linkMatchingResource(compInsert,
-				JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap());
+		productNode.linkMatchingResource(compInsert, JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap());
 
 		// add some intent resources to be filled in later
-		JDFLayoutIntent insertLayoutIntent = (JDFLayoutIntent) prodInsert
-				.appendMatchingResource(ElementName.LAYOUTINTENT,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFLayoutIntent insertLayoutIntent = (JDFLayoutIntent) prodInsert.appendMatchingResource(ElementName.LAYOUTINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		insertLayoutIntent.setNumberUp(new JDFXYPair(1, 1));
-		insertLayoutIntent
-				.setSides(JDFLayoutIntent.EnumSides.TwoSidedHeadToHead);
-		prodInsert.appendMatchingResource(ElementName.COLORINTENT,
-				JDFNode.EnumProcessUsage.AnyInput, null);
+		insertLayoutIntent.setSides(JDFLayoutIntent.EnumSides.TwoSidedHeadToHead);
+		prodInsert.appendMatchingResource(ElementName.COLORINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		// Add an ArtDeliveryIntent to define the input files for the inser
-		artDeliveryIntent = (JDFArtDeliveryIntent) prodInsert
-				.appendMatchingResource(ElementName.ARTDELIVERYINTENT,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		artDeliveryIntent = (JDFArtDeliveryIntent) prodInsert.appendMatchingResource(ElementName.ARTDELIVERYINTENT, JDFNode.EnumProcessUsage.AnyInput, null);
 
-		JDFArtDelivery artDeliveryInsert = artDeliveryIntent
-				.appendArtDelivery();
+		JDFArtDelivery artDeliveryInsert = artDeliveryIntent.appendArtDelivery();
 
 		artDeliveryInsert.setArtDeliveryType("DigitalNetwork");
 
 		JDFRunList runListInsert = artDeliveryInsert.appendRunList();
-		JDFFileSpec insertFileSpec = runListInsert.appendLayoutElement()
-				.appendFileSpec();
+		JDFFileSpec insertFileSpec = runListInsert.appendLayoutElement().appendFileSpec();
 		insertFileSpec.setURL("File:./insert.pdf");
 		insertFileSpec.setApplication("Acrobat");
 
@@ -458,8 +446,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		for (int i = 0; i < vNode.size(); i++)
 		{
 			JDFNode node = (JDFNode) vNode.elementAt(i);
-			System.out.println("JFD Node type: " + node.getType() + " ID:"
-					+ node.getID());
+			System.out.println("JFD Node type: " + node.getType() + " ID:" + node.getID());
 		}
 		System.out.println("end ParseNodes");
 
@@ -484,9 +471,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		impositionNode.setType(JDFNode.EnumType.Imposition.getName(), false);
 
 		// add the runlist
-		JDFRunList runList = (JDFRunList) impositionNode
-				.appendMatchingResource(ElementName.RUNLIST,
-						JDFNode.EnumProcessUsage.Document, null);
+		JDFRunList runList = (JDFRunList) impositionNode.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Document, null);
 
 		// set Npage to 10
 		runList.setNPage(10);
@@ -495,59 +480,34 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		String separationList = "Cyan Magenta Yellow Black SpotGreen";
 
 		// runPart is used to reference the partitioned runlist leaves
-		JDFRunList runPart = runList.addSepRun(StringUtil.tokenize(
-				"Cyan.pdf Magenta.pdf Yellow.pdf Black.pdf Green.pdf", " ",
-				false), StringUtil.tokenize(separationList, " ", false), 0, 1,
-				true);
+		JDFRunList runPart = runList.addSepRun(StringUtil.tokenize("Cyan.pdf Magenta.pdf Yellow.pdf Black.pdf Green.pdf", " ", false), StringUtil.tokenize(separationList, " ", false), 0, 1, true);
 
 		// add a JDF Comment
-		runPart
-				.insertAt("Comment", 0, "", JDFElement.getSchemaURL(),
-						JDFElement.getSchemaURL())
-				.appendText(
-						"Preseparated Runs in multiple files\nAll LayoutElements are inline resources");
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("Preseparated Runs in multiple files\nAll LayoutElements are inline resources");
 
 		VString v = new VString();
 		v.add("PreSepCMYKG.pdf");
 		// add a preseparated run
-		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ",
-				false), 0, 2, true);
-		runPart
-				.insertAt("Comment", 0, "", JDFElement.getSchemaURL(),
-						JDFElement.getSchemaURL())
-				.appendText(
-						"Preseparated Runs in one file CMYKGCMYKG\nLayoutElements are inter-resource links");
+		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ", false), 0, 2, true);
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("Preseparated Runs in one file CMYKGCMYKG\nLayoutElements are inter-resource links");
 
-		runPart = runList.addSepRun(v, StringUtil.tokenize(
-				"Cyan Yellow Black Green", " ", false), 10, 1, true);
+		runPart = runList.addSepRun(v, StringUtil.tokenize("Cyan Yellow Black Green", " ", false), 10, 1, true);
 
-		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(),
-				JDFElement.getSchemaURL()).appendText(
-				"No Magenta, the missing sep does not exist as a page");
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("No Magenta, the missing sep does not exist as a page");
 
 		// add a preseparated run
-		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ",
-				false), 14, 2, true);
-		runPart
-				.insertAt("Comment", 0, "", JDFElement.getSchemaURL(),
-						JDFElement.getSchemaURL())
-				.appendText(
-						"Continuation of Preseparated Runs in one file CMYKGCMYKG - "
-								+ "the missing sep of the previous page does not exist as a page");
+		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ", false), 14, 2, true);
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("Continuation of Preseparated Runs in one file CMYKGCMYKG - "
+				+ "the missing sep of the previous page does not exist as a page");
 
 		v.setElementAt("PreSepCCMMYYKKGG.pdf", 0);
 
 		// add a preseparated run
-		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ",
-				false), 0, 2, false);
-		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(),
-				JDFElement.getSchemaURL()).appendText(
-				"Preseparated Runs in one file CCMMYYKKGG");
+		runPart = runList.addSepRun(v, StringUtil.tokenize(separationList, " ", false), 0, 2, false);
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("Preseparated Runs in one file CCMMYYKKGG");
 
 		runPart = runList.addRun("Combined.pdf", 0, 1);
-		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(),
-				JDFElement.getSchemaURL()).appendText(
-				"Combined Runs in one file ");
+		runPart.insertAt("Comment", 0, "", JDFElement.getSchemaURL(), JDFElement.getSchemaURL()).appendText("Combined Runs in one file ");
 
 		return 0;
 
@@ -575,16 +535,13 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 		// / do something between these calls
 		auditPool.setPhase(JDFElement.EnumNodeStatus.Setup, null, null, null);
-		auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null,
-				null);
-		auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null,
-				null);
+		auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null, null);
+		auditPool.setPhase(JDFElement.EnumNodeStatus.InProgress, null, null, null);
 		auditPool.setPhase(JDFElement.EnumNodeStatus.Cleanup, null, null, null);
 		assertEquals(auditPool.getPoolChildren("PhaseTime", null).size(), 3);
 
 		// get the input runlist
-		final VElement inOutLinks = root.getResourceLinkPool().getInOutLinks(
-				EnumUsage.Input, false, "RunList", null);
+		final VElement inOutLinks = root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList", null);
 		if (inOutLinks != null)
 		{
 			JDFRunList rl = (JDFRunList) inOutLinks.elementAt(0);
@@ -594,12 +551,10 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			JDFResourceAudit resourceAudit = auditPool.addResourceAudit("");
 			resourceAudit.addNewOldLink(true, rl, EnumUsage.Input);
 			resourceAudit.setContentsModified(true);
-			auditPool.setPhase(JDFElement.EnumNodeStatus.Completed, null, null,
-					null);
+			auditPool.setPhase(JDFElement.EnumNodeStatus.Completed, null, null, null);
 
 			// / fill the processrun
-			auditPool.addProcessRun(JDFElement.EnumNodeStatus.Completed, null,
-					null);
+			auditPool.addProcessRun(JDFElement.EnumNodeStatus.Completed, null, null);
 		}
 
 		return 0;
@@ -622,8 +577,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		// set up the root process
 		JDFNode root = (JDFNode) m_doc.getRoot();
 
-		final VElement inOutLinks = root.getResourceLinkPool().getInOutLinks(
-				EnumUsage.Input, false, "RunList", null);
+		final VElement inOutLinks = root.getResourceLinkPool().getInOutLinks(EnumUsage.Input, false, "RunList", null);
 		if (inOutLinks != null)
 		{
 			// get the input runlist
@@ -633,8 +587,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			boolean bValid = rl.isValid(KElement.EnumValidationLevel.Complete);
 
 			// print out validity information
-			System.out.println("DoValid runlist is " + (bValid ? "" : "in")
-					+ "valid !");
+			System.out.println("DoValid runlist is " + (bValid ? "" : "in") + "valid !");
 
 			// cross check with an artificially invalidated runlist
 			rl.setAttribute("InvalidAttribute", "Something really Invalid", "");
@@ -643,22 +596,17 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			bValid = rl.isValid(KElement.EnumValidationLevel.Complete);
 
 			// print out new validity information
-			System.out.println("DoValid runlist is " + (bValid ? "" : "in")
-					+ "valid !");
+			System.out.println("DoValid runlist is " + (bValid ? "" : "in") + "valid !");
 			System.out.println("the following attributes are inValid: ");
 
 			// get the vector of invalid attributes
-			Vector vInvalidAttributes = rl.getInvalidAttributes(
-					KElement.EnumValidationLevel.Complete, true, 9999999);
+			Vector vInvalidAttributes = rl.getInvalidAttributes(KElement.EnumValidationLevel.Complete, true, 9999999);
 
 			// print out the details
 			for (int i = 0; i < vInvalidAttributes.size(); i++)
 			{
-				System.out.println("key: "
-						+ vInvalidAttributes.elementAt(i)
-						+ " value: "
-						+ rl.getAttribute((String) vInvalidAttributes
-								.elementAt(i), "", ""));
+				System.out.println("key: " + vInvalidAttributes.elementAt(i) + " value: "
+						+ rl.getAttribute((String) vInvalidAttributes.elementAt(i), "", ""));
 			}
 
 			System.out.println("end DoValid");
@@ -682,17 +630,16 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		impositionNode.setType(JDFNode.EnumType.Imposition.getName(), false);
 
 		// add the appropriate resources
-		JDFLayout layout = (JDFLayout) impositionNode.appendMatchingResource(
-				ElementName.LAYOUT, JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFLayout layout = (JDFLayout) impositionNode.appendMatchingResource(ElementName.LAYOUT, JDFNode.EnumProcessUsage.AnyInput, null);
 		JDFSignature signature = layout.appendSignature();
 		JDFSheet sheet = signature.appendSheet();
 
 		// set the surfac contents box
 		try
 		{
-			sheet.setSurfaceContentsBox(new JDFRectangle(
-					"0.0 0.0 1842.5197 1417.322800"));
-		} catch (DataFormatException e)
+			sheet.setSurfaceContentsBox(new JDFRectangle("0.0 0.0 1842.5197 1417.322800"));
+		}
+		catch (DataFormatException e)
 		{
 			// add exception handling here
 		}
@@ -706,7 +653,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		try
 		{
 			markObject.setCTM(new JDFMatrix("1 0 0 1 0 0"));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			// add exception handling here
 		}
@@ -718,7 +666,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		try
 		{
 			contentObject.setCTM(new JDFMatrix("1 0 0 1 0 0"));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			// add exception handling here
 		}
@@ -726,9 +675,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		contentObject.setOrd(0);
 
 		// add the document runlist
-		JDFRunList docList = (JDFRunList) impositionNode
-				.appendMatchingResource(ElementName.RUNLIST,
-						JDFNode.EnumProcessUsage.Document, null);
+		JDFRunList docList = (JDFRunList) impositionNode.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Document, null);
 		docList.addRun("Document1.pdf", 0, -1);
 
 		docList.addRun("Document2.pdf", 0, -1);
@@ -736,14 +683,10 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		// separation names
 		String separationList = "Cyan Magenta Yellow Black";
 		// runPart is used to reference the partitioned runlist leaves
-		docList.addSepRun(StringUtil.tokenize(
-				"Cyan.pdf Magenta.pdf Yellow.pdf Black.pdf", " ", false),
-				StringUtil.tokenize(separationList, " ", false), 0, 1, true);
+		docList.addSepRun(StringUtil.tokenize("Cyan.pdf Magenta.pdf Yellow.pdf Black.pdf", " ", false), StringUtil.tokenize(separationList, " ", false), 0, 1, true);
 
 		// add the marks runlist
-		JDFRunList markList = (JDFRunList) impositionNode
-				.appendMatchingResource(ElementName.RUNLIST,
-						JDFNode.EnumProcessUsage.Marks, null);
+		JDFRunList markList = (JDFRunList) impositionNode.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.Marks, null);
 
 		// Append a LayoutElement to the marks runlist
 		JDFLayoutElement markle = markList.appendLayoutElement();
@@ -753,9 +696,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		markfilespec.setURL("marks.pdf");
 
 		// add the output runlist
-		JDFRunList outList = (JDFRunList) impositionNode
-				.appendMatchingResource(ElementName.RUNLIST,
-						JDFNode.EnumProcessUsage.AnyOutput, null);
+		JDFRunList outList = (JDFRunList) impositionNode.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.AnyOutput, null);
 
 		// Append a LayoutElement to the output runlist
 		JDFLayoutElement outle = outList.appendLayoutElement();
@@ -765,8 +706,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		outfilespec.setURL("output.pdf");
 
 		// append an empty generic ApprovalSuccess
-		impositionNode.appendMatchingResource(ElementName.APPROVALSUCCESS,
-				JDFNode.EnumProcessUsage.AnyInput, null);
+		impositionNode.appendMatchingResource(ElementName.APPROVALSUCCESS, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		return 0;
 
@@ -789,50 +729,36 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		// now append the various resources
 		// cast to the individual node types and append the appropriate
 		// resources
-		ripNode.appendMatchingResource(ElementName.INTERPRETINGPARAMS,
-				JDFNode.EnumProcessUsage.AnyInput, null);
+		ripNode.appendMatchingResource(ElementName.INTERPRETINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 
-		JDFRunList inRunList = (JDFRunList) ripNode.appendMatchingResource(
-				ElementName.RUNLIST, JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFRunList inRunList = (JDFRunList) ripNode.appendMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.AnyInput, null);
 		inRunList.addRun("File1.pdf", 0, 1);
 		inRunList.addRun("File2.pdf", 0, 1);
 
-		JDFColorantControl colorantControl = (JDFColorantControl) ripNode
-				.appendMatchingResource(ElementName.COLORANTCONTROL,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFColorantControl colorantControl = (JDFColorantControl) ripNode.appendMatchingResource(ElementName.COLORANTCONTROL, JDFNode.EnumProcessUsage.AnyInput, null);
 		colorantControl.setProcessColorModel("DeviceCMYK");
 
-		ripNode.appendMatchingResource(ElementName.RENDERINGPARAMS,
-				JDFNode.EnumProcessUsage.AnyInput, null);
+		ripNode.appendMatchingResource(ElementName.RENDERINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 
-		ripNode.appendMatchingResource(ElementName.IMAGESETTERPARAMS,
-				JDFNode.EnumProcessUsage.AnyInput, null);
+		ripNode.appendMatchingResource(ElementName.IMAGESETTERPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		// set up the media
-		JDFMedia media = (JDFMedia) ripNode.appendMatchingResource(
-				ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFMedia media = (JDFMedia) ripNode.appendMatchingResource(ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
 		media.setResStatus(JDFMedia.EnumResStatus.Available, false);
 		JDFResourceLink mediaLink = ripNode.getLink(media, null);
 		mediaLink.setAmount(4 * 4, new JDFAttributeMap()); // 4 seps * 8 pages
 
 		// set up the expose output media
-		JDFExposedMedia exposedMedia = (JDFExposedMedia) ripNode
-				.appendMatchingResource(ElementName.EXPOSEDMEDIA,
-						JDFNode.EnumProcessUsage.AnyOutput, null);
+		JDFExposedMedia exposedMedia = (JDFExposedMedia) ripNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyOutput, null);
 
 		// set up one partition / page
-		VElement vExposedMediaPages = exposedMedia.addPartitions(
-				JDFResource.EnumPartIDKey.RunIndex,
-				new VString("0 1 2 3", null));
+		VElement vExposedMediaPages = exposedMedia.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString("0 1 2 3", null));
 
 		for (int iPage = 0; iPage < vExposedMediaPages.size(); iPage++)
 		{
 			// now 4 separations per page
-			JDFExposedMedia exposedMediaPage = (JDFExposedMedia) vExposedMediaPages
-					.elementAt(iPage);
-			exposedMediaPage.addPartitions(
-					JDFResource.EnumPartIDKey.Separation, new VString(
-							"Cyan Magenta Yellow Black", null));
+			JDFExposedMedia exposedMediaPage = (JDFExposedMedia) vExposedMediaPages.elementAt(iPage);
+			exposedMediaPage.addPartitions(JDFResource.EnumPartIDKey.Separation, new VString("Cyan Magenta Yellow Black", null));
 		}
 
 		return 1;
@@ -850,11 +776,9 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		// get the JDF document root element
 		JDFNode ripNode = (JDFNode) m_doc.getRoot();
 
-		JDFResourceLink inRunListLink = ripNode.getMatchingLink(
-				ElementName.RUNLIST, JDFNode.EnumProcessUsage.AnyInput, 0);
+		JDFResourceLink inRunListLink = ripNode.getMatchingLink(ElementName.RUNLIST, JDFNode.EnumProcessUsage.AnyInput, 0);
 
-		JDFResource rr = ripNode.getMatchingResource(ElementName.RUNLIST,
-				JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap(), 0);
+		JDFResource rr = ripNode.getMatchingResource(ElementName.RUNLIST, JDFNode.EnumProcessUsage.AnyInput, new JDFAttributeMap(), 0);
 
 		int i;
 		System.out.println(inRunListLink.getTarget());
@@ -892,17 +816,13 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			System.out.println(inRunListLink.getTargetVector(-1).elementAt(i));
 		}
 
-		JDFResourceLink exposedMediaLink = ripNode
-				.getMatchingLink(ElementName.EXPOSEDMEDIA,
-						JDFNode.EnumProcessUsage.AnyOutput, 0);
+		JDFResourceLink exposedMediaLink = ripNode.getMatchingLink(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyOutput, 0);
 		exposedMediaLink.setPartMap(partMap);
 
 		partMap.clear();
 		partMap.put("Separation", "Cyan");
 
-		JDFResourceLink colorantControlLink = ripNode.getMatchingLink(
-				ElementName.COLORANTCONTROL, JDFNode.EnumProcessUsage.AnyInput,
-				0);
+		JDFResourceLink colorantControlLink = ripNode.getMatchingLink(ElementName.COLORANTCONTROL, JDFNode.EnumProcessUsage.AnyInput, 0);
 		colorantControlLink.setPartMap(partMap);
 
 		return 1;
@@ -926,8 +846,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		jmf.init();
 		jmf.setSenderID("MessageSender");
 		// append a generic query to root and cast to its type
-		JDFQuery queryKnownDevices = (JDFQuery) jmf.appendMessageElement(
-				JDFMessage.EnumFamily.Query, JDFQuery.EnumType.KnownDevices);
+		JDFQuery queryKnownDevices = (JDFQuery) jmf.appendMessageElement(JDFMessage.EnumFamily.Query, JDFQuery.EnumType.KnownDevices);
 		JDFDeviceFilter deviceFilter = queryKnownDevices.appendDeviceFilter();
 		JDFDevice device = deviceFilter.appendDevice();
 		device.setDeviceID("DeviceID1");
@@ -958,16 +877,14 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		// get the output document root element
 		JDFJMF jmfOut = inMessageDoc.getJMFRoot();
 		// get all queries as a vector of elements
-		VElement vMessages = jmfIn.getMessageVector(
-				JDFMessage.EnumFamily.Query, null);
+		VElement vMessages = jmfIn.getMessageVector(JDFMessage.EnumFamily.Query, null);
 
 		// loop over all queries
 		for (int i = 0; i < vMessages.size(); i++)
 		{
 			JDFQuery query = (JDFQuery) vMessages.elementAt(i);
 			// append a response to this docoment
-			JDFResponse response = (JDFResponse) jmfOut.appendMessageElement(
-					JDFMessage.EnumFamily.Response, null);
+			JDFResponse response = (JDFResponse) jmfOut.appendMessageElement(JDFMessage.EnumFamily.Response, null);
 			// set the appropriate query information to the response
 			response.setQuery(query);
 			String typ = query.getType();
@@ -989,7 +906,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 				cs.setCostCenterID("1234");
 				cs.setName("Java Bean Cost Center");
 				// ...
-			} else
+			}
+			else
 			{
 				// query not implemented!
 				response.setAttribute("ReturnCode", 5, "");
@@ -1021,15 +939,12 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		printNode.setType(JDFNode.EnumType.DigitalPrinting.getName(), false);
 
 		// add the appropriate resources
-		JDFMedia media = (JDFMedia) printNode.appendMatchingResource(
-				ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFMedia media = (JDFMedia) printNode.appendMatchingResource(ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
 
 		// partition for Runindex=cover and RunIndex=insert
-		media.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString(
-				"0 -1,1~-2", ","));
+		media.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString("0 -1,1~-2", ","));
 
-		JDFResourceLink mediaLink = printNode.getMatchingLink(
-				ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, 0);
+		JDFResourceLink mediaLink = printNode.getMatchingLink(ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, 0);
 
 		JDFAmountPool aPool = mediaLink.appendAmountPool();
 
@@ -1046,24 +961,17 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		partAmount.setOrientation(JDFResourceLink.EnumOrientation.Rotate0);
 
 		// get the MediaLink and set the attributes
-		JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) printNode
-				.appendMatchingResource(ElementName.DIGITALPRINTINGPARAMS,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) printNode.appendMatchingResource(ElementName.DIGITALPRINTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 
-		dpp.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString(
-				"0 -1,1~-2", ","));
+		dpp.addPartitions(JDFResource.EnumPartIDKey.RunIndex, new VString("0 -1,1~-2", ","));
 
-		JDFAttributeMap m = new JDFAttributeMap(
-				JDFResource.EnumPartIDKey.RunIndex.getName(), "0 -1");
-		JDFDigitalPrintingParams dppLeaf = (JDFDigitalPrintingParams) dpp
-				.getPartition(m, EnumPartUsage.Implicit);
+		JDFAttributeMap m = new JDFAttributeMap(JDFResource.EnumPartIDKey.RunIndex.getName(), "0 -1");
+		JDFDigitalPrintingParams dppLeaf = (JDFDigitalPrintingParams) dpp.getPartition(m, EnumPartUsage.Implicit);
 
-		m.put(JDFResource.EnumPartIDKey.RunIndex.getName(), dppLeaf
-				.refElement(media.getPartition(m, EnumPartUsage.Implicit)));
+		m.put(JDFResource.EnumPartIDKey.RunIndex.getName(), dppLeaf.refElement(media.getPartition(m, EnumPartUsage.Implicit)).getrRef());
 
 		m.put(JDFResource.EnumPartIDKey.RunIndex.getName(), "1 ~ -2");
-		dppLeaf = (JDFDigitalPrintingParams) dpp.getPartition(m,
-				EnumPartUsage.Implicit);
+		dppLeaf = (JDFDigitalPrintingParams) dpp.getPartition(m, EnumPartUsage.Implicit);
 
 		dppLeaf.refElement(media.getPartition(m, EnumPartUsage.Implicit));
 
@@ -1094,46 +1002,31 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 
 		printNode.setTypes(types);
 		// add the appropriate resources
-		JDFMedia media = (JDFMedia) printNode.appendMatchingResource(
-				ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFMedia media = (JDFMedia) printNode.appendMatchingResource(ElementName.MEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
 		media.setDescriptiveName("Input Media");
 		media.setMediaType(EnumMediaType.Paper);
 		media.setMediaUnit(EnumMediaUnit.Roll);
 
-		JDFComponent outComp = (JDFComponent) printNode
-				.appendMatchingResource(ElementName.COMPONENT,
-						JDFNode.EnumProcessUsage.AnyOutput, null);
+		JDFComponent outComp = (JDFComponent) printNode.appendMatchingResource(ElementName.COMPONENT, JDFNode.EnumProcessUsage.AnyOutput, null);
 
-		JDFConventionalPrintingParams cpOffset = (JDFConventionalPrintingParams) printNode
-				.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFConventionalPrintingParams cpOffset = (JDFConventionalPrintingParams) printNode.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 		cpOffset.setDescriptiveName("Offset parameters");
 
-		JDFExposedMedia xmOffset = (JDFExposedMedia) printNode
-				.appendMatchingResource(ElementName.EXPOSEDMEDIA,
-						JDFNode.EnumProcessUsage.Plate, null);
+		JDFExposedMedia xmOffset = (JDFExposedMedia) printNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.Plate, null);
 		xmOffset.setDescriptiveName("Offset Plate");
 		xmOffset.addPartition(EnumPartIDKey.Side, "Front");
 		xmOffset.addPartition(EnumPartIDKey.Side, "Back");
 
-		JDFConventionalPrintingParams cpFlexo = (JDFConventionalPrintingParams) printNode
-				.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFConventionalPrintingParams cpFlexo = (JDFConventionalPrintingParams) printNode.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 		cpFlexo.setDescriptiveName("Flexo parameters");
 
-		JDFExposedMedia xmFlexo = (JDFExposedMedia) printNode
-				.appendMatchingResource(ElementName.EXPOSEDMEDIA,
-						JDFNode.EnumProcessUsage.Plate, null);
+		JDFExposedMedia xmFlexo = (JDFExposedMedia) printNode.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.Plate, null);
 		xmFlexo.setDescriptiveName("Flexo Plate");
 
-		JDFLaminatingParams lamParm = (JDFLaminatingParams) printNode
-				.appendMatchingResource(ElementName.LAMINATINGPARAMS,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFLaminatingParams lamParm = (JDFLaminatingParams) printNode.appendMatchingResource(ElementName.LAMINATINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 		lamParm.setDescriptiveName("laminating parameters");
 
-		JDFShapeCuttingParams cutParm = (JDFShapeCuttingParams) printNode
-				.appendMatchingResource(ElementName.SHAPECUTTINGPARAMS,
-						JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFShapeCuttingParams cutParm = (JDFShapeCuttingParams) printNode.appendMatchingResource(ElementName.SHAPECUTTINGPARAMS, JDFNode.EnumProcessUsage.AnyInput, null);
 		cutParm.setDescriptiveName("cutting parameters");
 
 		// fix resource links
@@ -1173,14 +1066,12 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		JDFNode pgNode = d.getJDFRoot();
 		pgNode.setType(EnumType.ProcessGroup);
 		JDFNode delNode = creatDeliveryNode(pgNode);
-		JDFRunList rl = (JDFRunList) delNode.getMatchingResource(
-				ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
+		JDFRunList rl = (JDFRunList) delNode.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
 
 		JDFNode impNode = createImposition(pgNode);
 		impNode.linkMatchingResource(rl, EnumProcessUsage.Document, null);
 
-		d.write2File(sm_dirTestDataTemp + File.separator
-				+ "DigitalDelivery.jdf", 2, false);
+		d.write2File(sm_dirTestDataTemp + File.separator + "DigitalDelivery.jdf", 2, false);
 
 	}
 
@@ -1196,24 +1087,18 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		JDFNode delNode1 = creatDeliveryNode(null);
 		delNode1.setJobID("Del1ID");
 		JDFDoc delDoc1 = new JDFDoc(delNode1.getOwnerDocument());
-		JDFRunList rl1 = (JDFRunList) delNode1.getMatchingResource(
-				ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
+		JDFRunList rl1 = (JDFRunList) delNode1.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
 		rl1.setProductID("RL1ID");
-		final JDFRegistration reg = (JDFRegistration) delNode1.getNodeInfo()
-				.getJMF(0).getMessageElement(EnumFamily.Registration,
-						JDFMessage.EnumType.Resource, 0);
+		final JDFRegistration reg = (JDFRegistration) delNode1.getNodeInfo().getJMF(0).getMessageElement(EnumFamily.Registration, JDFMessage.EnumType.Resource, 0);
 		JDFResourceCmdParams rc = reg.getResourceCmdParams(0);
 		rc.setProductID("RL1ID");
 		reg.appendSubscription();
 
 		JDFNode delNode2 = creatDeliveryNode(null);
 		JDFDoc delDoc2 = new JDFDoc(delNode2.getOwnerDocument());
-		JDFRunList rl2 = (JDFRunList) delNode2.getMatchingResource(
-				ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
+		JDFRunList rl2 = (JDFRunList) delNode2.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
 		rl2.setProductID("RL2ID");
-		final JDFRegistration reg2 = (JDFRegistration) delNode2.getNodeInfo()
-				.getJMF(0).getMessageElement(EnumFamily.Registration,
-						JDFMessage.EnumType.Resource, 0);
+		final JDFRegistration reg2 = (JDFRegistration) delNode2.getNodeInfo().getJMF(0).getMessageElement(EnumFamily.Registration, JDFMessage.EnumType.Resource, 0);
 		JDFResourceCmdParams rc2 = reg2.getResourceCmdParams(0);
 		reg2.appendSubscription();
 		delNode2.setJobID("Del2ID");
@@ -1226,8 +1111,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		JDFNodeInfo pgNI = pgNode.getCreateNodeInfo();
 
 		JDFNode combNode = createCombine(pgNode);
-		JDFRunList rl = (JDFRunList) combNode.getMatchingResource(
-				ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
+		JDFRunList rl = (JDFRunList) combNode.getMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null, 0);
 
 		JDFNode impNode = createImposition(pgNode);
 		impNode.linkMatchingResource(rl, EnumProcessUsage.Document, null);
@@ -1236,13 +1120,9 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		pgNI.appendGeneralID("GangChildID", delNode1.getJobID(true));
 		pgNI.appendGeneralID("GangChildID", delNode2.getJobID(true));
 
-		delDoc1.write2File(sm_dirTestDataTemp + File.separator
-				+ "GangDelivery1.jdf", 2, false);
-		delDoc2.write2File(sm_dirTestDataTemp + File.separator
-				+ "GangDelivery2.jdf", 2, false);
-		dGang.write2File(
-				sm_dirTestDataTemp + File.separator + "GangImpose.jdf", 2,
-				false);
+		delDoc1.write2File(sm_dirTestDataTemp + File.separator + "GangDelivery1.jdf", 2, false);
+		delDoc2.write2File(sm_dirTestDataTemp + File.separator + "GangDelivery2.jdf", 2, false);
+		dGang.write2File(sm_dirTestDataTemp + File.separator + "GangImpose.jdf", 2, false);
 
 	}
 
@@ -1251,8 +1131,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	private JDFNode createImposition(JDFNode pgNode)
 	{
 		JDFNode impNode = ceateNewNode(EnumType.Imposition, pgNode);
-		impNode.appendMatchingResource(ElementName.LAYOUT,
-				EnumProcessUsage.AnyInput, null);
+		impNode.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		return impNode;
 	}
 
@@ -1261,19 +1140,15 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	private JDFNode createCombine(JDFNode pgNode)
 	{
 		JDFNode combNode = ceateNewNode(EnumType.Combine, pgNode);
-		JDFRunList rl = (JDFRunList) combNode.appendMatchingResource(
-				ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		JDFRunList rl = (JDFRunList) combNode.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
 		rl.setProductID("RL1ID");
 
-		rl = (JDFRunList) combNode.appendMatchingResource(ElementName.RUNLIST,
-				EnumProcessUsage.AnyInput, null);
+		rl = (JDFRunList) combNode.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
 		rl.setProductID("RL2ID");
 
-		rl = (JDFRunList) combNode.appendMatchingResource(ElementName.RUNLIST,
-				EnumProcessUsage.AnyOutput, pgNode);
+		rl = (JDFRunList) combNode.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, pgNode);
 
-		JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.RunSet,
-				"RL1ID");
+		JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.RunSet, "RL1ID");
 		rlp.setDescriptiveName("Partition for first input");
 
 		rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.RunSet, "RL2ID");
@@ -1290,15 +1165,12 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	{
 		JDFNode delNode = null;
 		delNode = ceateNewNode(EnumType.DigitalDelivery, pgNode);
-		delNode.appendMatchingResource(ElementName.DIGITALDELIVERYPARAMS,
-				EnumProcessUsage.AnyInput, null);
-		JDFRunList rl = (JDFRunList) delNode.appendMatchingResource(
-				ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
+		delNode.appendMatchingResource(ElementName.DIGITALDELIVERYPARAMS, EnumProcessUsage.AnyInput, null);
+		JDFRunList rl = (JDFRunList) delNode.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyOutput, null);
 		rl.setResStatus(EnumResStatus.Unavailable, false);
 		JDFNodeInfo ni = delNode.getCreateNodeInfo();
 		JDFJMF jmf = ni.appendJMF();
-		JDFRegistration reg = (JDFRegistration) jmf.appendMessageElement(
-				EnumFamily.Registration, JDFMessage.EnumType.Resource);
+		JDFRegistration reg = (JDFRegistration) jmf.appendMessageElement(EnumFamily.Registration, JDFMessage.EnumType.Resource);
 		JDFResourceCmdParams resCmd = reg.appendResourceCmdParams();
 		resCmd.setResourceName(ElementName.RUNLIST);
 		resCmd.setJobID("GangJobID");
@@ -1315,7 +1187,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			JDFDoc d = new JDFDoc("JDF");
 			delNode = d.getJDFRoot();
 			delNode.setType(enumType);
-		} else
+		}
+		else
 		{
 			delNode = parentNode.addJDFNode(enumType);
 		}
@@ -1335,21 +1208,16 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		JDFNode misNode = d.getJDFRoot();
 		misNode.setJobID("GangJob");
 		misNode.setType(EnumType.Stripping);
-		JDFAssembly as1 = (JDFAssembly) misNode.appendMatchingResource(
-				ElementName.ASSEMBLY, EnumProcessUsage.AnyInput, null);
+		JDFAssembly as1 = (JDFAssembly) misNode.appendMatchingResource(ElementName.ASSEMBLY, EnumProcessUsage.AnyInput, null);
 		as1.setAssemblyIDs(new VString("As1", null));
 		as1.setOrder(EnumOrder.Collecting);
 		as1.setJobID("job1");
-		JDFAssembly as2 = (JDFAssembly) misNode.appendMatchingResource(
-				ElementName.ASSEMBLY, EnumProcessUsage.AnyInput, null);
+		JDFAssembly as2 = (JDFAssembly) misNode.appendMatchingResource(ElementName.ASSEMBLY, EnumProcessUsage.AnyInput, null);
 		as2.setAssemblyIDs(new VString("As2", null));
 		as2.setOrder(EnumOrder.Collecting);
 		as2.setJobID("job2");
-		JDFStrippingParams sp = (JDFStrippingParams) misNode
-				.appendMatchingResource(ElementName.STRIPPINGPARAMS,
-						EnumProcessUsage.AnyInput, null);
-		JDFStrippingParams sp1 = (JDFStrippingParams) sp.addPartition(
-				EnumPartIDKey.BinderySignatureName, "BS1");
+		JDFStrippingParams sp = (JDFStrippingParams) misNode.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumProcessUsage.AnyInput, null);
+		JDFStrippingParams sp1 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS1");
 		sp1.setAssemblyIDs(new VString("As1", null));
 		sp1.setJobID("job1");
 
@@ -1359,13 +1227,13 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		try
 		{
 			pos1.setRelativeBox(new JDFRectangle("0 0 0.5 1"));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			fail("rectangle");
 		}
 
-		JDFStrippingParams sp2 = (JDFStrippingParams) sp.addPartition(
-				EnumPartIDKey.BinderySignatureName, "BS2");
+		JDFStrippingParams sp2 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS2");
 		sp2.setAssemblyIDs(new VString("As2", null));
 		sp2.setJobID("job2");
 
@@ -1374,12 +1242,12 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		try
 		{
 			pos2.setRelativeBox(new JDFRectangle("0.5 0 1 1"));
-		} catch (DataFormatException e)
+		}
+		catch (DataFormatException e)
 		{
 			fail("rectangle");
 		}
-		d.write2File(sm_dirTestDataTemp + File.separator + "StrippingGang.jdf",
-				2, false);
+		d.write2File(sm_dirTestDataTemp + File.separator + "StrippingGang.jdf", 2, false);
 		return 0;
 	}
 

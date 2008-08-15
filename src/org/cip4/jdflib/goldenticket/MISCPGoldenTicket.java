@@ -104,6 +104,7 @@ import org.cip4.jdflib.resource.process.JDFConventionalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
@@ -112,8 +113,8 @@ import org.cip4.jdflib.util.UrlUtil;
 public class MISCPGoldenTicket extends MISGoldenTicket
 {
 	/**
-     * 
-     */
+	 * 
+	 */
 	public static final String MISCPS_PRINTING = "MISCPS.Printing";
 	public boolean splitSheets = false;
 
@@ -122,29 +123,25 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 
 	protected int icsLevel;
 	public boolean previewAvailable = false;
+	public String previewShare = null;
 
 	/**
 	 * create a BaseGoldenTicket
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 * @param _icsLevel the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 * @param misLevel level of MIS ICS to support
+	 * @param _jmfLevel level of jmf ICS to support
+	 * @param _misLevel level of MIS ICS to support
 	 * @param isGrayBox if true, write a grayBox
+	 * @param vPartMap the partmap vector for this node
 	 */
 	public MISCPGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, boolean isGrayBox, VJDFAttributeMap vPartMap)
 	{
 		super(_misLevel, jdfVersion, _jmfLevel);
-
-		grayBox = isGrayBox;
-		fillCatMaps();
-		if (grayBox)
-			setCategory(MISCPS_PRINTING);
-		partIDKeys = new VString("SignatureName,SheetName,Side,Separation", ",");
-		vParts = vPartMap;
 		icsLevel = _icsLevel;
-		// theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
-		theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);
+		vParts = vPartMap;
+		grayBox = isGrayBox;
+		setup();
 	}
 
 	@Override
@@ -157,22 +154,24 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	/**
 	 * create a BaseGoldenTicket
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
-	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 * @param misLevel level of MIS ICS to support
-	 * @param isGrayBox if true, write a grayBox
 	 */
 	public MISCPGoldenTicket(MISCPGoldenTicket parent)
 	{
 		super(parent);
-
 		grayBox = parent.grayBox;
-		fillCatMaps();
+		setup();
+	}
+
+	/**
+	 * @param parent
+	 */
+	private void setup()
+	{
 		if (grayBox)
 			setCategory(MISCPS_PRINTING);
-		theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
+		//		theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
 		theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);
+		previewShare = UrlUtil.fileToUrl(new File("\\\\Share\\Dir\\Preview_"), false);
 	}
 
 	/**
@@ -180,10 +179,13 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	 * 
 	 * @param icsLevel the level to init to (1,2 or 3)
 	 */
+	@Override
 	public void init()
 	{
 		initColsFromParent();
 		initAmountsFromParent();
+		if (partIDKeys == null)
+			partIDKeys = new VString("SignatureName SheetName Side Separation", null);
 
 		// put level methods?
 
@@ -412,6 +414,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	 * prepare an mis fuzzy node and make it runnable by the device
 	 * 
 	 */
+	@Override
 	public void makeReady()
 	{
 		super.makeReady();
@@ -421,8 +424,11 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFPreview pvp = (JDFPreview) v.elementAt(i);
-			pvp.setURL(UrlUtil.fileToUrl(new File("\\\\Share\\Dir\\Preview_" + pvp.getSheetName() + "_"
-					+ pvp.getSide().getName() + "_" + pvp.getSeparation() + ".png"), false));
+			File share = UrlUtil.urlToFile(previewShare);
+			File file = new File(pvp.getSheetName() + "_" + pvp.getSide().getName().substring(0, 1) + "_"
+					+ pvp.getSeparation() + ".png");
+			file = FileUtil.getFileInDirectory(share, file);
+			pvp.setURL(UrlUtil.fileToUrl(file, false));
 		}
 		makeReadyColorantControl();
 
@@ -432,6 +438,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	 * @param icsLevel
 	 * @return
 	 */
+	@Override
 	protected JDFNodeInfo initNodeInfo()
 	{
 		JDFNodeInfo ni = super.initNodeInfo();

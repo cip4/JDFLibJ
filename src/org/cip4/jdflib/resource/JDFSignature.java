@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,7 +71,7 @@
  *========================================================================== class JDFSignature extends JDFAutoSignature
  * created 2001-09-06T10:02:57GMT+02:00 ==========================================================================
  *          @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- *              @Author: sabjon@topmail.de   using a code generator
+ *              @Author sabjon@topmail.de   using a code generator
  * Warning! very preliminary test version. Interface subject to change without prior notice! Revision history:   ...
  */
 
@@ -81,6 +81,7 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoLayout;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -93,8 +94,15 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 
+/**
+ * class that maps both patitioned and non-partitoned layouts
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFSignature extends JDFAutoLayout
 {
 	private static final long serialVersionUID = 1L;
@@ -106,6 +114,7 @@ public class JDFSignature extends JDFAutoLayout
 		elemInfoTable_Sheet[0] = new ElemInfoTable(ElementName.SHEET, 0x33333333);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable_Sheet);
@@ -117,6 +126,7 @@ public class JDFSignature extends JDFAutoLayout
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		AttributeInfo ai = super.getTheAttributeInfo();
@@ -166,6 +176,7 @@ public class JDFSignature extends JDFAutoLayout
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSignature[  --> " + super.toString() + " ]";
@@ -173,6 +184,7 @@ public class JDFSignature extends JDFAutoLayout
 
 	// /////////////////////////////////////////////////////////////////
 
+	@Override
 	public boolean init()
 	{
 		boolean bRet = super.init();
@@ -232,6 +244,7 @@ public class JDFSignature extends JDFAutoLayout
 	 * @param bAnd if true all attributes in the map are AND'ed, else they are OR'ed
 	 * @deprecated use getChildElementVector() instead
 	 */
+	@Deprecated
 	public VElement getSheetVector(JDFAttributeMap mAttrib, boolean bAnd)
 	{
 		VElement myResource = new VElement();
@@ -372,6 +385,7 @@ public class JDFSignature extends JDFAutoLayout
 	 * 
 	 * @return the name of the signature
 	 */
+	@Override
 	public String getSignatureName()
 	{
 		if (getLocalName().equals(ElementName.SIGNATURE))
@@ -395,6 +409,27 @@ public class JDFSignature extends JDFAutoLayout
 			}
 		}
 		return super.getSignatureName();
+	}
+
+	/**
+	 * gets the corresponding media with a given mediatype
+	 * @param mediaType the mediaType - must NOT be null
+	 * @return the media, null if none is there or mediaType==null;
+	 */
+	public JDFMedia getMedia(EnumMediaType mediaType)
+	{
+		if (mediaType == null)
+			return null;
+		VElement v = getChildElementVector(ElementName.MEDIA, null);
+		int siz = v == null ? 0 : v.size();
+		for (int i = 0; i < siz; i++)
+		{
+			JDFMedia m = (JDFMedia) v.get(i);
+			if (mediaType.equals(m.getMediaType()))
+				return m;
+		}
+		return null;
+
 	}
 } // class JDFSignature
 // ==========================================================================
