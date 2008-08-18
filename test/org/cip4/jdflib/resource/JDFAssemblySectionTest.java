@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.Collection;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -91,6 +93,7 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 	private JDFNode n = null;
 	private JDFAssembly as = null;
 
+	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();
@@ -110,4 +113,19 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 		doc.write2File(sm_dirTestDataTemp + "AssemblySection.jdf", 2, false);
 	}
 
+	public void testAssemblySectionCollection()
+	{
+		JDFAssemblySection ass = as.appendAssemblySection();
+		ass = as.appendAssemblySection();
+		JDFAssemblySection asss = ass.appendAssemblySection();
+		asss.setAssemblyIDs(new VString("a b c", " "));
+		ass = as.getAssemblySection(0);
+		ass = as.getAssemblySection(1);
+		ass.setXMLComment("MyComment");
+		ass = as.getAssemblySection(2);
+
+		Collection<JDFAssemblySection> vASS = as.getAllAssemblySection();
+
+		assertTrue(vASS.size() == 2);
+	}
 }
