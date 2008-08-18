@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFCrease;
-    /*
-    *****************************************************************************
-    class JDFAutoCreasingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCreasingParams extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoCreasingParams extends JDFResource
     public JDFCrease getCrease(int iSkip)
     {
         return (JDFCrease) getElement(ElementName.CREASE, null, iSkip);
+    }
+
+    /**
+     * Get all Crease from the current element
+     * 
+     * @return Collection<JDFCrease>
+     */
+    public Collection<JDFCrease> getAllCrease()
+    {
+        Vector<JDFCrease> v = new Vector<JDFCrease>();
+
+        JDFCrease kElem = (JDFCrease) getFirstChildElement(ElementName.CREASE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCrease) kElem.getNextSiblingElement(ElementName.CREASE, null);
+        }
+
+        return v;
     }
 
     /**

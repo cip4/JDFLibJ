@@ -107,12 +107,6 @@ import org.cip4.jdflib.span.JDFSpanBindingLength;
 import org.cip4.jdflib.span.JDFSpanBindingSide;
 import org.cip4.jdflib.span.JDFSpanBindingType;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
-    /*
-    *****************************************************************************
-    class JDFAutoBindingIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBindingIntent extends JDFIntentResource
 {

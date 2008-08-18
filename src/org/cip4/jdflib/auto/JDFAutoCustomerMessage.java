@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,12 +85,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFComChannel;
-    /*
-    *****************************************************************************
-    class JDFAutoCustomerMessage : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCustomerMessage extends JDFElement
 {
@@ -269,6 +266,27 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
     public JDFComChannel getComChannel(int iSkip)
     {
         return (JDFComChannel) getElement(ElementName.COMCHANNEL, null, iSkip);
+    }
+
+    /**
+     * Get all ComChannel from the current element
+     * 
+     * @return Collection<JDFComChannel>
+     */
+    public Collection<JDFComChannel> getAllComChannel()
+    {
+        Vector<JDFComChannel> v = new Vector<JDFComChannel>();
+
+        JDFComChannel kElem = (JDFComChannel) getFirstChildElement(ElementName.COMCHANNEL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFComChannel) kElem.getNextSiblingElement(ElementName.COMCHANNEL, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -79,12 +82,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
-    /*
-    *****************************************************************************
-    class JDFAutoCustomerInfo : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCustomerInfo extends JDFResource
 {
@@ -330,6 +327,27 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     }
 
     /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Contact
      */
     public JDFContact appendContact() throws JDFException
@@ -364,6 +382,27 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     public JDFCustomerMessage getCustomerMessage(int iSkip)
     {
         return (JDFCustomerMessage) getElement(ElementName.CUSTOMERMESSAGE, null, iSkip);
+    }
+
+    /**
+     * Get all CustomerMessage from the current element
+     * 
+     * @return Collection<JDFCustomerMessage>
+     */
+    public Collection<JDFCustomerMessage> getAllCustomerMessage()
+    {
+        Vector<JDFCustomerMessage> v = new Vector<JDFCustomerMessage>();
+
+        JDFCustomerMessage kElem = (JDFCustomerMessage) getFirstChildElement(ElementName.CUSTOMERMESSAGE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCustomerMessage) kElem.getNextSiblingElement(ElementName.CUSTOMERMESSAGE, null);
+        }
+
+        return v;
     }
 
     /**

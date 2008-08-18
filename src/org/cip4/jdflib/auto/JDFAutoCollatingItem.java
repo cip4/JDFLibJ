@@ -89,12 +89,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /*
-    *****************************************************************************
-    class JDFAutoCollatingItem : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCollatingItem extends JDFElement
 {

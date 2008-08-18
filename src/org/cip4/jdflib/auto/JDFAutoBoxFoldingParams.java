@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -90,12 +92,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBoxApplication;
 import org.cip4.jdflib.resource.process.JDFBoxFoldAction;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /*
-    *****************************************************************************
-    class JDFAutoBoxFoldingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBoxFoldingParams extends JDFResource
 {
@@ -368,6 +364,27 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
     }
 
     /**
+     * Get all BoxFoldAction from the current element
+     * 
+     * @return Collection<JDFBoxFoldAction>
+     */
+    public Collection<JDFBoxFoldAction> getAllBoxFoldAction()
+    {
+        Vector<JDFBoxFoldAction> v = new Vector<JDFBoxFoldAction>();
+
+        JDFBoxFoldAction kElem = (JDFBoxFoldAction) getFirstChildElement(ElementName.BOXFOLDACTION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBoxFoldAction) kElem.getNextSiblingElement(ElementName.BOXFOLDACTION, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element BoxFoldAction
      */
     public JDFBoxFoldAction appendBoxFoldAction() throws JDFException
@@ -393,6 +410,27 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
     public JDFGlueLine getGlueLine(int iSkip)
     {
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
+    }
+
+    /**
+     * Get all GlueLine from the current element
+     * 
+     * @return Collection<JDFGlueLine>
+     */
+    public Collection<JDFGlueLine> getAllGlueLine()
+    {
+        Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+
+        JDFGlueLine kElem = (JDFGlueLine) getFirstChildElement(ElementName.GLUELINE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlueLine) kElem.getNextSiblingElement(ElementName.GLUELINE, null);
+        }
+
+        return v;
     }
 
     /**
@@ -430,6 +468,27 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
     public JDFBoxApplication getBoxApplication(int iSkip)
     {
         return (JDFBoxApplication) getElement(ElementName.BOXAPPLICATION, null, iSkip);
+    }
+
+    /**
+     * Get all BoxApplication from the current element
+     * 
+     * @return Collection<JDFBoxApplication>
+     */
+    public Collection<JDFBoxApplication> getAllBoxApplication()
+    {
+        Vector<JDFBoxApplication> v = new Vector<JDFBoxApplication>();
+
+        JDFBoxApplication kElem = (JDFBoxApplication) getFirstChildElement(ElementName.BOXAPPLICATION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBoxApplication) kElem.getNextSiblingElement(ElementName.BOXAPPLICATION, null);
+        }
+
+        return v;
     }
 
     /**

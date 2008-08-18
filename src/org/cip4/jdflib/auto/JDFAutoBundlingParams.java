@@ -75,12 +75,6 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoBundlingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBundlingParams extends JDFResource
 {

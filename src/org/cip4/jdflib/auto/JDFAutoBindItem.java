@@ -102,12 +102,6 @@ import org.cip4.jdflib.resource.process.postpress.JDFThreadSealing;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSewing;
 import org.cip4.jdflib.resource.process.postpress.JDFWireCombBinding;
 import org.cip4.jdflib.span.JDFSpanBindingType;
-    /*
-    *****************************************************************************
-    class JDFAutoBindItem : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBindItem extends JDFElement
 {

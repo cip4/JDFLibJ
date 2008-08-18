@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCIELABMeasuringField;
 import org.cip4.jdflib.resource.process.JDFDensityMeasuringField;
-    /*
-    *****************************************************************************
-    class JDFAutoColorControlStrip : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoColorControlStrip extends JDFResource
 {
@@ -331,6 +327,27 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     }
 
     /**
+     * Get all CIELABMeasuringField from the current element
+     * 
+     * @return Collection<JDFCIELABMeasuringField>
+     */
+    public Collection<JDFCIELABMeasuringField> getAllCIELABMeasuringField()
+    {
+        Vector<JDFCIELABMeasuringField> v = new Vector<JDFCIELABMeasuringField>();
+
+        JDFCIELABMeasuringField kElem = (JDFCIELABMeasuringField) getFirstChildElement(ElementName.CIELABMEASURINGFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCIELABMeasuringField) kElem.getNextSiblingElement(ElementName.CIELABMEASURINGFIELD, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element CIELABMeasuringField
      */
     public JDFCIELABMeasuringField appendCIELABMeasuringField() throws JDFException
@@ -365,6 +382,27 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     public JDFDensityMeasuringField getDensityMeasuringField(int iSkip)
     {
         return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
+    }
+
+    /**
+     * Get all DensityMeasuringField from the current element
+     * 
+     * @return Collection<JDFDensityMeasuringField>
+     */
+    public Collection<JDFDensityMeasuringField> getAllDensityMeasuringField()
+    {
+        Vector<JDFDensityMeasuringField> v = new Vector<JDFDensityMeasuringField>();
+
+        JDFDensityMeasuringField kElem = (JDFDensityMeasuringField) getFirstChildElement(ElementName.DENSITYMEASURINGFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDensityMeasuringField) kElem.getNextSiblingElement(ElementName.DENSITYMEASURINGFIELD, null);
+        }
+
+        return v;
     }
 
     /**

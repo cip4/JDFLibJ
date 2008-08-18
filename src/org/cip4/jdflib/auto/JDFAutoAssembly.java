@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -91,12 +93,6 @@ import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFPageAssignedList;
-    /*
-    *****************************************************************************
-    class JDFAutoAssembly : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoAssembly extends JDFResource
 {
@@ -540,6 +536,27 @@ public abstract class JDFAutoAssembly extends JDFResource
     }
 
     /**
+     * Get all AssemblySection from the current element
+     * 
+     * @return Collection<JDFAssemblySection>
+     */
+    public Collection<JDFAssemblySection> getAllAssemblySection()
+    {
+        Vector<JDFAssemblySection> v = new Vector<JDFAssemblySection>();
+
+        JDFAssemblySection kElem = (JDFAssemblySection) getFirstChildElement(ElementName.ASSEMBLYSECTION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFAssemblySection) kElem.getNextSiblingElement(ElementName.ASSEMBLYSECTION, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element AssemblySection
      */
     public JDFAssemblySection appendAssemblySection() throws JDFException
@@ -600,6 +617,27 @@ public abstract class JDFAutoAssembly extends JDFResource
     public JDFPageAssignedList getPageAssignedList(int iSkip)
     {
         return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
+    }
+
+    /**
+     * Get all PageAssignedList from the current element
+     * 
+     * @return Collection<JDFPageAssignedList>
+     */
+    public Collection<JDFPageAssignedList> getAllPageAssignedList()
+    {
+        Vector<JDFPageAssignedList> v = new Vector<JDFPageAssignedList>();
+
+        JDFPageAssignedList kElem = (JDFPageAssignedList) getFirstChildElement(ElementName.PAGEASSIGNEDLIST, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPageAssignedList) kElem.getNextSiblingElement(ElementName.PAGEASSIGNEDLIST, null);
+        }
+
+        return v;
     }
 
     /**

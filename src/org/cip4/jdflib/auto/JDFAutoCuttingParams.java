@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -79,12 +82,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.postpress.JDFCut;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
-    /*
-    *****************************************************************************
-    class JDFAutoCuttingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCuttingParams extends JDFResource
 {
@@ -195,6 +192,27 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     }
 
     /**
+     * Get all CutBlock from the current element
+     * 
+     * @return Collection<JDFCutBlock>
+     */
+    public Collection<JDFCutBlock> getAllCutBlock()
+    {
+        Vector<JDFCutBlock> v = new Vector<JDFCutBlock>();
+
+        JDFCutBlock kElem = (JDFCutBlock) getFirstChildElement(ElementName.CUTBLOCK, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCutBlock) kElem.getNextSiblingElement(ElementName.CUTBLOCK, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element CutBlock
      */
     public JDFCutBlock appendCutBlock() throws JDFException
@@ -232,6 +250,27 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     }
 
     /**
+     * Get all CutMark from the current element
+     * 
+     * @return Collection<JDFCutMark>
+     */
+    public Collection<JDFCutMark> getAllCutMark()
+    {
+        Vector<JDFCutMark> v = new Vector<JDFCutMark>();
+
+        JDFCutMark kElem = (JDFCutMark) getFirstChildElement(ElementName.CUTMARK, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCutMark) kElem.getNextSiblingElement(ElementName.CUTMARK, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element CutMark
      */
     public JDFCutMark appendCutMark() throws JDFException
@@ -266,6 +305,27 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     public JDFCut getCut(int iSkip)
     {
         return (JDFCut) getElement(ElementName.CUT, null, iSkip);
+    }
+
+    /**
+     * Get all Cut from the current element
+     * 
+     * @return Collection<JDFCut>
+     */
+    public Collection<JDFCut> getAllCut()
+    {
+        Vector<JDFCut> v = new Vector<JDFCut>();
+
+        JDFCut kElem = (JDFCut) getFirstChildElement(ElementName.CUT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCut) kElem.getNextSiblingElement(ElementName.CUT, null);
+        }
+
+        return v;
     }
 
     /**

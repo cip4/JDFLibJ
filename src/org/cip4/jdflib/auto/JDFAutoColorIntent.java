@@ -81,12 +81,6 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoColorIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoColorIntent extends JDFIntentResource
 {

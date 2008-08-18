@@ -88,12 +88,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.VString;
-    /*
-    *****************************************************************************
-    class JDFAutoAncestor : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoAncestor extends JDFElement
 {

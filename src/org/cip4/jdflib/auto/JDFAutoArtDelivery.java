@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -102,12 +104,6 @@ import org.cip4.jdflib.span.JDFSpanDeliveryCharge;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoArtDelivery : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoArtDelivery extends JDFElement
 {
@@ -727,6 +723,27 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     public JDFContact getContact(int iSkip)
     {
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+    }
+
+    /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
     }
 
     /**

@@ -88,12 +88,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFComponent;
-    /*
-    *****************************************************************************
-    class JDFAutoBundleItem : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBundleItem extends JDFElement
 {

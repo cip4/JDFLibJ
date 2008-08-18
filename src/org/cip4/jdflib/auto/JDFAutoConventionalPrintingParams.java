@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -89,12 +91,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFApprovalParams;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
-    /*
-    *****************************************************************************
-    class JDFAutoConventionalPrintingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 {
@@ -984,6 +980,27 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
     public JDFInk getInk(int iSkip)
     {
         return (JDFInk) getElement(ElementName.INK, null, iSkip);
+    }
+
+    /**
+     * Get all Ink from the current element
+     * 
+     * @return Collection<JDFInk>
+     */
+    public Collection<JDFInk> getAllInk()
+    {
+        Vector<JDFInk> v = new Vector<JDFInk>();
+
+        JDFInk kElem = (JDFInk) getFirstChildElement(ElementName.INK, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFInk) kElem.getNextSiblingElement(ElementName.INK, null);
+        }
+
+        return v;
     }
 
     /**

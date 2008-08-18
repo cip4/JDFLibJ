@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFotherwise;
 import org.cip4.jdflib.resource.devicecapability.JDFwhen;
-    /*
-    *****************************************************************************
-    class JDFAutochoice : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutochoice extends JDFElement
 {
@@ -176,6 +173,27 @@ public abstract class JDFAutochoice extends JDFElement
     public JDFwhen getwhen(int iSkip)
     {
         return (JDFwhen) getElement(ElementName.WHEN, null, iSkip);
+    }
+
+    /**
+     * Get all when from the current element
+     * 
+     * @return Collection<JDFwhen>
+     */
+    public Collection<JDFwhen> getAllwhen()
+    {
+        Vector<JDFwhen> v = new Vector<JDFwhen>();
+
+        JDFwhen kElem = (JDFwhen) getFirstChildElement(ElementName.WHEN, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFwhen) kElem.getNextSiblingElement(ElementName.WHEN, null);
+        }
+
+        return v;
     }
 
     /**

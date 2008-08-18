@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoAssetListCreationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoAssetListCreationParams extends JDFResource
 {
@@ -303,6 +299,27 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
     public JDFFileSpec getFileSpec(int iSkip)
     {
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+    }
+
+    /**
+     * Get all FileSpec from the current element
+     * 
+     * @return Collection<JDFFileSpec>
+     */
+    public Collection<JDFFileSpec> getAllFileSpec()
+    {
+        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+
+        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        }
+
+        return v;
     }
 
     /**

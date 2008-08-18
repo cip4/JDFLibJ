@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -89,12 +91,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAssembly;
-    /*
-    *****************************************************************************
-    class JDFAutoCutMark : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCutMark extends JDFResource
 {
@@ -351,6 +347,27 @@ public abstract class JDFAutoCutMark extends JDFResource
     public JDFAssembly getAssembly(int iSkip)
     {
         return (JDFAssembly) getElement(ElementName.ASSEMBLY, null, iSkip);
+    }
+
+    /**
+     * Get all Assembly from the current element
+     * 
+     * @return Collection<JDFAssembly>
+     */
+    public Collection<JDFAssembly> getAllAssembly()
+    {
+        Vector<JDFAssembly> v = new Vector<JDFAssembly>();
+
+        JDFAssembly kElem = (JDFAssembly) getFirstChildElement(ElementName.ASSEMBLY, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFAssembly) kElem.getNextSiblingElement(ElementName.ASSEMBLY, null);
+        }
+
+        return v;
     }
 
     /**

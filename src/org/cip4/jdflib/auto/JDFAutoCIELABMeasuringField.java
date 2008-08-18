@@ -90,12 +90,6 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoCIELABMeasuringField : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCIELABMeasuringField extends JDFResource
 {

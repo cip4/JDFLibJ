@@ -79,12 +79,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoChannelBinding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoChannelBinding extends JDFElement
 {

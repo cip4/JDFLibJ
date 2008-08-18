@@ -81,12 +81,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /*
-    *****************************************************************************
-    class JDFAutoCaseMakingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCaseMakingParams extends JDFResource
 {

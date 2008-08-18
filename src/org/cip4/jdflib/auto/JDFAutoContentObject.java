@@ -85,12 +85,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-    /*
-    *****************************************************************************
-    class JDFAutoContentObject : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoContentObject extends JDFElement
 {

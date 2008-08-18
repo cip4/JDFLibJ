@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContentData;
-    /*
-    *****************************************************************************
-    class JDFAutoContentList : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoContentList extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoContentList extends JDFResource
     public JDFContentData getContentData(int iSkip)
     {
         return (JDFContentData) getElement(ElementName.CONTENTDATA, null, iSkip);
+    }
+
+    /**
+     * Get all ContentData from the current element
+     * 
+     * @return Collection<JDFContentData>
+     */
+    public Collection<JDFContentData> getAllContentData()
+    {
+        Vector<JDFContentData> v = new Vector<JDFContentData>();
+
+        JDFContentData kElem = (JDFContentData) getFirstChildElement(ElementName.CONTENTDATA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContentData) kElem.getNextSiblingElement(ElementName.CONTENTDATA, null);
+        }
+
+        return v;
     }
 
     /**

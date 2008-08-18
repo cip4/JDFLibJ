@@ -82,12 +82,6 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.jmf.JDFMessage;
-    /*
-    *****************************************************************************
-    class JDFAutoCommand : public JDFMessage
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCommand extends JDFMessage
 {

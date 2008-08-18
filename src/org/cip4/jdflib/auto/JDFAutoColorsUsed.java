@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoColorsUsed : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoColorsUsed extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoColorsUsed extends JDFElement
     public JDFSeparationSpec getSeparationSpec(int iSkip)
     {
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+    }
+
+    /**
+     * Get all SeparationSpec from the current element
+     * 
+     * @return Collection<JDFSeparationSpec>
+     */
+    public Collection<JDFSeparationSpec> getAllSeparationSpec()
+    {
+        Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+
+        JDFSeparationSpec kElem = (JDFSeparationSpec) getFirstChildElement(ElementName.SEPARATIONSPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSeparationSpec) kElem.getNextSiblingElement(ElementName.SEPARATIONSPEC, null);
+        }
+
+        return v;
     }
 
     /**

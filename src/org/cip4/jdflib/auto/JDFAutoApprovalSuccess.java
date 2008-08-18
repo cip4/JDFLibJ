@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -79,12 +82,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoApprovalSuccess : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoApprovalSuccess extends JDFResource
 {
@@ -195,6 +192,27 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
     }
 
     /**
+     * Get all ApprovalDetails from the current element
+     * 
+     * @return Collection<JDFApprovalDetails>
+     */
+    public Collection<JDFApprovalDetails> getAllApprovalDetails()
+    {
+        Vector<JDFApprovalDetails> v = new Vector<JDFApprovalDetails>();
+
+        JDFApprovalDetails kElem = (JDFApprovalDetails) getFirstChildElement(ElementName.APPROVALDETAILS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFApprovalDetails) kElem.getNextSiblingElement(ElementName.APPROVALDETAILS, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ApprovalDetails
      */
     public JDFApprovalDetails appendApprovalDetails() throws JDFException
@@ -255,6 +273,27 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
     public JDFContact getContact(int iSkip)
     {
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+    }
+
+    /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
     }
 
     /**

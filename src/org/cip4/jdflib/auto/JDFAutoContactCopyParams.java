@@ -88,12 +88,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
-    /*
-    *****************************************************************************
-    class JDFAutoContactCopyParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoContactCopyParams extends JDFResource
 {

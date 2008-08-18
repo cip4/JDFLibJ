@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,12 +85,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionOp;
-    /*
-    *****************************************************************************
-    class JDFAutoColorCorrectionParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoColorCorrectionParams extends JDFResource
 {
@@ -267,6 +264,27 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
     public JDFColorCorrectionOp getColorCorrectionOp(int iSkip)
     {
         return (JDFColorCorrectionOp) getElement(ElementName.COLORCORRECTIONOP, null, iSkip);
+    }
+
+    /**
+     * Get all ColorCorrectionOp from the current element
+     * 
+     * @return Collection<JDFColorCorrectionOp>
+     */
+    public Collection<JDFColorCorrectionOp> getAllColorCorrectionOp()
+    {
+        Vector<JDFColorCorrectionOp> v = new Vector<JDFColorCorrectionOp>();
+
+        JDFColorCorrectionOp kElem = (JDFColorCorrectionOp) getFirstChildElement(ElementName.COLORCORRECTIONOP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFColorCorrectionOp) kElem.getNextSiblingElement(ElementName.COLORCORRECTIONOP, null);
+        }
+
+        return v;
     }
 
     /**

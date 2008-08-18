@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -91,12 +93,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFDieLayout;
 import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.postpress.JDFFold;
-    /*
-    *****************************************************************************
-    class JDFAutoBinderySignature : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBinderySignature extends JDFResource
 {
@@ -716,6 +712,27 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     }
 
     /**
+     * Get all Fold from the current element
+     * 
+     * @return Collection<JDFFold>
+     */
+    public Collection<JDFFold> getAllFold()
+    {
+        Vector<JDFFold> v = new Vector<JDFFold>();
+
+        JDFFold kElem = (JDFFold) getFirstChildElement(ElementName.FOLD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFold) kElem.getNextSiblingElement(ElementName.FOLD, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Fold
      */
     public JDFFold appendFold() throws JDFException
@@ -741,6 +758,27 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     public JDFSignatureCell getSignatureCell(int iSkip)
     {
         return (JDFSignatureCell) getElement(ElementName.SIGNATURECELL, null, iSkip);
+    }
+
+    /**
+     * Get all SignatureCell from the current element
+     * 
+     * @return Collection<JDFSignatureCell>
+     */
+    public Collection<JDFSignatureCell> getAllSignatureCell()
+    {
+        Vector<JDFSignatureCell> v = new Vector<JDFSignatureCell>();
+
+        JDFSignatureCell kElem = (JDFSignatureCell) getFirstChildElement(ElementName.SIGNATURECELL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSignatureCell) kElem.getNextSiblingElement(ElementName.SIGNATURECELL, null);
+        }
+
+        return v;
     }
 
     /**

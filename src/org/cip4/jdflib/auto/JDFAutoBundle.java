@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,12 +89,6 @@ import org.cip4.jdflib.resource.JDFBundleItem;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
-    /*
-    *****************************************************************************
-    class JDFAutoBundle : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBundle extends JDFResource
 {
@@ -365,6 +361,27 @@ public abstract class JDFAutoBundle extends JDFResource
     }
 
     /**
+     * Get all BundleItem from the current element
+     * 
+     * @return Collection<JDFBundleItem>
+     */
+    public Collection<JDFBundleItem> getAllBundleItem()
+    {
+        Vector<JDFBundleItem> v = new Vector<JDFBundleItem>();
+
+        JDFBundleItem kElem = (JDFBundleItem) getFirstChildElement(ElementName.BUNDLEITEM, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBundleItem) kElem.getNextSiblingElement(ElementName.BUNDLEITEM, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element BundleItem
      */
     public JDFBundleItem appendBundleItem() throws JDFException
@@ -390,6 +407,27 @@ public abstract class JDFAutoBundle extends JDFResource
     public JDFContact getContact(int iSkip)
     {
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+    }
+
+    /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
     }
 
     /**
@@ -427,6 +465,27 @@ public abstract class JDFAutoBundle extends JDFResource
     public JDFIdentificationField getIdentificationField(int iSkip)
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+    }
+
+    /**
+     * Get all IdentificationField from the current element
+     * 
+     * @return Collection<JDFIdentificationField>
+     */
+    public Collection<JDFIdentificationField> getAllIdentificationField()
+    {
+        Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+
+        JDFIdentificationField kElem = (JDFIdentificationField) getFirstChildElement(ElementName.IDENTIFICATIONFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFIdentificationField) kElem.getNextSiblingElement(ElementName.IDENTIFICATIONFIELD, null);
+        }
+
+        return v;
     }
 
     /**

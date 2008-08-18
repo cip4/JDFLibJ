@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFScore;
-    /*
-    *****************************************************************************
-    class JDFAutoCoverApplicationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCoverApplicationParams extends JDFResource
 {
@@ -250,6 +246,27 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
     }
 
     /**
+     * Get all GlueApplication from the current element
+     * 
+     * @return Collection<JDFGlueApplication>
+     */
+    public Collection<JDFGlueApplication> getAllGlueApplication()
+    {
+        Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
+
+        JDFGlueApplication kElem = (JDFGlueApplication) getFirstChildElement(ElementName.GLUEAPPLICATION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlueApplication) kElem.getNextSiblingElement(ElementName.GLUEAPPLICATION, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element GlueApplication
      */
     public JDFGlueApplication appendGlueApplication() throws JDFException
@@ -284,6 +301,27 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
     public JDFScore getScore(int iSkip)
     {
         return (JDFScore) getElement(ElementName.SCORE, null, iSkip);
+    }
+
+    /**
+     * Get all Score from the current element
+     * 
+     * @return Collection<JDFScore>
+     */
+    public Collection<JDFScore> getAllScore()
+    {
+        Vector<JDFScore> v = new Vector<JDFScore>();
+
+        JDFScore kElem = (JDFScore) getFirstChildElement(ElementName.SCORE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFScore) kElem.getNextSiblingElement(ElementName.SCORE, null);
+        }
+
+        return v;
     }
 
     /**

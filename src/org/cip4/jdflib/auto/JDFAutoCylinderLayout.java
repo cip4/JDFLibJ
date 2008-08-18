@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,12 +85,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCylinderPosition;
 import org.cip4.jdflib.resource.process.JDFLayout;
-    /*
-    *****************************************************************************
-    class JDFAutoCylinderLayout : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCylinderLayout extends JDFResource
 {
@@ -267,6 +264,27 @@ public abstract class JDFAutoCylinderLayout extends JDFResource
     public JDFCylinderPosition getCylinderPosition(int iSkip)
     {
         return (JDFCylinderPosition) getElement(ElementName.CYLINDERPOSITION, null, iSkip);
+    }
+
+    /**
+     * Get all CylinderPosition from the current element
+     * 
+     * @return Collection<JDFCylinderPosition>
+     */
+    public Collection<JDFCylinderPosition> getAllCylinderPosition()
+    {
+        Vector<JDFCylinderPosition> v = new Vector<JDFCylinderPosition>();
+
+        JDFCylinderPosition kElem = (JDFCylinderPosition) getFirstChildElement(ElementName.CYLINDERPOSITION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCylinderPosition) kElem.getNextSiblingElement(ElementName.CYLINDERPOSITION, null);
+        }
+
+        return v;
     }
 
     /**

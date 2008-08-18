@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
-    /*
-    *****************************************************************************
-    class JDFAutoBooleanEvaluation : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBooleanEvaluation extends JDFResource
 {
@@ -224,6 +221,27 @@ public abstract class JDFAutoBooleanEvaluation extends JDFResource
     public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
     {
         return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+    }
+
+    /**
+     * Get all BasicPreflightTest from the current element
+     * 
+     * @return Collection<JDFBasicPreflightTest>
+     */
+    public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
+    {
+        Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+
+        JDFBasicPreflightTest kElem = (JDFBasicPreflightTest) getFirstChildElement(ElementName.BASICPREFLIGHTTEST, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBasicPreflightTest) kElem.getNextSiblingElement(ElementName.BASICPREFLIGHTTEST, null);
+        }
+
+        return v;
     }
 
     /**

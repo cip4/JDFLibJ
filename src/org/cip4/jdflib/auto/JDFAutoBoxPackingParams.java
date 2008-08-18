@@ -79,12 +79,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoBoxPackingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBoxPackingParams extends JDFResource
 {

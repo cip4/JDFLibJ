@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -91,12 +93,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFPixelColorant;
-    /*
-    *****************************************************************************
-    class JDFAutoByteMap : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoByteMap extends JDFResource
 {
@@ -441,6 +437,27 @@ public abstract class JDFAutoByteMap extends JDFResource
     }
 
     /**
+     * Get all Band from the current element
+     * 
+     * @return Collection<JDFBand>
+     */
+    public Collection<JDFBand> getAllBand()
+    {
+        Vector<JDFBand> v = new Vector<JDFBand>();
+
+        JDFBand kElem = (JDFBand) getFirstChildElement(ElementName.BAND, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBand) kElem.getNextSiblingElement(ElementName.BAND, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Band
      */
     public JDFBand appendBand() throws JDFException
@@ -504,6 +521,27 @@ public abstract class JDFAutoByteMap extends JDFResource
     }
 
     /**
+     * Get all FileSpec from the current element
+     * 
+     * @return Collection<JDFFileSpec>
+     */
+    public Collection<JDFFileSpec> getAllFileSpec()
+    {
+        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+
+        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
@@ -538,6 +576,27 @@ public abstract class JDFAutoByteMap extends JDFResource
     public JDFPixelColorant getPixelColorant(int iSkip)
     {
         return (JDFPixelColorant) getElement(ElementName.PIXELCOLORANT, null, iSkip);
+    }
+
+    /**
+     * Get all PixelColorant from the current element
+     * 
+     * @return Collection<JDFPixelColorant>
+     */
+    public Collection<JDFPixelColorant> getAllPixelColorant()
+    {
+        Vector<JDFPixelColorant> v = new Vector<JDFPixelColorant>();
+
+        JDFPixelColorant kElem = (JDFPixelColorant) getFirstChildElement(ElementName.PIXELCOLORANT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPixelColorant) kElem.getNextSiblingElement(ElementName.PIXELCOLORANT, null);
+        }
+
+        return v;
     }
 
     /**

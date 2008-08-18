@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColor;
-    /*
-    *****************************************************************************
-    class JDFAutoColorPool : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoColorPool extends JDFResource
 {
@@ -230,6 +227,27 @@ public abstract class JDFAutoColorPool extends JDFResource
     public JDFColor getColor(int iSkip)
     {
         return (JDFColor) getElement(ElementName.COLOR, null, iSkip);
+    }
+
+    /**
+     * Get all Color from the current element
+     * 
+     * @return Collection<JDFColor>
+     */
+    public Collection<JDFColor> getAllColor()
+    {
+        Vector<JDFColor> v = new Vector<JDFColor>();
+
+        JDFColor kElem = (JDFColor) getFirstChildElement(ElementName.COLOR, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFColor) kElem.getNextSiblingElement(ElementName.COLOR, null);
+        }
+
+        return v;
     }
 
     /**

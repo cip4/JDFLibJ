@@ -79,12 +79,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanShape;
-    /*
-    *****************************************************************************
-    class JDFAutoBookCase : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBookCase extends JDFElement
 {

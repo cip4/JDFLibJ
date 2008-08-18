@@ -79,12 +79,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFSpanCoilMaterial;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoCoilBinding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCoilBinding extends JDFElement
 {

@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -86,12 +87,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoColorCorrectionOp : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoColorCorrectionOp extends JDFElement
 {
@@ -431,6 +426,27 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
     public JDFFileSpec getFileSpec(int iSkip)
     {
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+    }
+
+    /**
+     * Get all FileSpec from the current element
+     * 
+     * @return Collection<JDFFileSpec>
+     */
+    public Collection<JDFFileSpec> getAllFileSpec()
+    {
+        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+
+        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        }
+
+        return v;
     }
 
     /**

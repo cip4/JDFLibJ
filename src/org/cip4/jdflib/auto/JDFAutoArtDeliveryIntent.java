@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -95,12 +97,6 @@ import org.cip4.jdflib.span.JDFSpanDeliveryCharge;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoArtDeliveryIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
 {
@@ -524,6 +520,27 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     }
 
     /**
+     * Get all ArtDelivery from the current element
+     * 
+     * @return Collection<JDFArtDelivery>
+     */
+    public Collection<JDFArtDelivery> getAllArtDelivery()
+    {
+        Vector<JDFArtDelivery> v = new Vector<JDFArtDelivery>();
+
+        JDFArtDelivery kElem = (JDFArtDelivery) getFirstChildElement(ElementName.ARTDELIVERY, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFArtDelivery) kElem.getNextSiblingElement(ElementName.ARTDELIVERY, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ArtDelivery
      */
     public JDFArtDelivery appendArtDelivery() throws JDFException
@@ -584,6 +601,27 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     public JDFContact getContact(int iSkip)
     {
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+    }
+
+    /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
     }
 
     /**

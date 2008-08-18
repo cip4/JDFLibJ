@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,12 +85,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
-    /*
-    *****************************************************************************
-    class JDFAutoCompany : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCompany extends JDFResource
 {
@@ -235,6 +232,27 @@ public abstract class JDFAutoCompany extends JDFResource
     }
 
     /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Contact
      */
     public JDFContact appendContact() throws JDFException
@@ -269,6 +287,27 @@ public abstract class JDFAutoCompany extends JDFResource
     public JDFElement getOrganizationalUnit(int iSkip)
     {
         return (JDFElement) getElement(ElementName.ORGANIZATIONALUNIT, null, iSkip);
+    }
+
+    /**
+     * Get all OrganizationalUnit from the current element
+     * 
+     * @return Collection<JDFElement>
+     */
+    public Collection<JDFElement> getAllOrganizationalUnit()
+    {
+        Vector<JDFElement> v = new Vector<JDFElement>();
+
+        JDFElement kElem = (JDFElement) getFirstChildElement(ElementName.ORGANIZATIONALUNIT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFElement) kElem.getNextSiblingElement(ElementName.ORGANIZATIONALUNIT, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBarcodeCompParams;
-    /*
-    *****************************************************************************
-    class JDFAutoBarcodeReproParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBarcodeReproParams extends JDFResource
 {
@@ -464,6 +460,27 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
     public JDFBarcodeCompParams getBarcodeCompParams(int iSkip)
     {
         return (JDFBarcodeCompParams) getElement(ElementName.BARCODECOMPPARAMS, null, iSkip);
+    }
+
+    /**
+     * Get all BarcodeCompParams from the current element
+     * 
+     * @return Collection<JDFBarcodeCompParams>
+     */
+    public Collection<JDFBarcodeCompParams> getAllBarcodeCompParams()
+    {
+        Vector<JDFBarcodeCompParams> v = new Vector<JDFBarcodeCompParams>();
+
+        JDFBarcodeCompParams kElem = (JDFBarcodeCompParams) getFirstChildElement(ElementName.BARCODECOMPPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBarcodeCompParams) kElem.getNextSiblingElement(ElementName.BARCODECOMPPARAMS, null);
+        }
+
+        return v;
     }
 
     /**

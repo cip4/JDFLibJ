@@ -85,12 +85,6 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoDensityMeasuringField : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDensityMeasuringField extends JDFResource
 {

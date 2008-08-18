@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -97,12 +99,6 @@ import org.cip4.jdflib.span.JDFSpanSurplusHandling;
 import org.cip4.jdflib.span.JDFSpanTransfer;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoDeliveryIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
 {
@@ -734,6 +730,27 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     }
 
     /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Contact
      */
     public JDFContact appendContact() throws JDFException
@@ -768,6 +785,27 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     public JDFDropIntent getDropIntent(int iSkip)
     {
         return (JDFDropIntent) getElement(ElementName.DROPINTENT, null, iSkip);
+    }
+
+    /**
+     * Get all DropIntent from the current element
+     * 
+     * @return Collection<JDFDropIntent>
+     */
+    public Collection<JDFDropIntent> getAllDropIntent()
+    {
+        Vector<JDFDropIntent> v = new Vector<JDFDropIntent>();
+
+        JDFDropIntent kElem = (JDFDropIntent) getFirstChildElement(ElementName.DROPINTENT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDropIntent) kElem.getNextSiblingElement(ElementName.DROPINTENT, null);
+        }
+
+        return v;
     }
 
     /**

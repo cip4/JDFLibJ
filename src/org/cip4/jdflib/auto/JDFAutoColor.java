@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -94,12 +96,6 @@ import org.cip4.jdflib.resource.process.JDFDeviceNColor;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFPrintConditionColor;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
-    /*
-    *****************************************************************************
-    class JDFAutoColor : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoColor extends JDFResource
 {
@@ -787,6 +783,27 @@ public abstract class JDFAutoColor extends JDFResource
     }
 
     /**
+     * Get all FileSpec from the current element
+     * 
+     * @return Collection<JDFFileSpec>
+     */
+    public Collection<JDFFileSpec> getAllFileSpec()
+    {
+        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+
+        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
@@ -824,6 +841,27 @@ public abstract class JDFAutoColor extends JDFResource
     }
 
     /**
+     * Get all DeviceNColor from the current element
+     * 
+     * @return Collection<JDFDeviceNColor>
+     */
+    public Collection<JDFDeviceNColor> getAllDeviceNColor()
+    {
+        Vector<JDFDeviceNColor> v = new Vector<JDFDeviceNColor>();
+
+        JDFDeviceNColor kElem = (JDFDeviceNColor) getFirstChildElement(ElementName.DEVICENCOLOR, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDeviceNColor) kElem.getNextSiblingElement(ElementName.DEVICENCOLOR, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element DeviceNColor
      */
     public JDFDeviceNColor appendDeviceNColor() throws JDFException
@@ -852,6 +890,27 @@ public abstract class JDFAutoColor extends JDFResource
     }
 
     /**
+     * Get all PrintConditionColor from the current element
+     * 
+     * @return Collection<JDFPrintConditionColor>
+     */
+    public Collection<JDFPrintConditionColor> getAllPrintConditionColor()
+    {
+        Vector<JDFPrintConditionColor> v = new Vector<JDFPrintConditionColor>();
+
+        JDFPrintConditionColor kElem = (JDFPrintConditionColor) getFirstChildElement(ElementName.PRINTCONDITIONCOLOR, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPrintConditionColor) kElem.getNextSiblingElement(ElementName.PRINTCONDITIONCOLOR, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element PrintConditionColor
      */
     public JDFPrintConditionColor appendPrintConditionColor() throws JDFException
@@ -877,6 +936,27 @@ public abstract class JDFAutoColor extends JDFResource
     public JDFTransferCurve getTransferCurve(int iSkip)
     {
         return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
+    }
+
+    /**
+     * Get all TransferCurve from the current element
+     * 
+     * @return Collection<JDFTransferCurve>
+     */
+    public Collection<JDFTransferCurve> getAllTransferCurve()
+    {
+        Vector<JDFTransferCurve> v = new Vector<JDFTransferCurve>();
+
+        JDFTransferCurve kElem = (JDFTransferCurve) getFirstChildElement(ElementName.TRANSFERCURVE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTransferCurve) kElem.getNextSiblingElement(ElementName.TRANSFERCURVE, null);
+        }
+
+        return v;
     }
 
     /**

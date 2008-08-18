@@ -85,12 +85,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoCutBlock : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCutBlock extends JDFResource
 {

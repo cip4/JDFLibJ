@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -85,12 +88,6 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantAlias;
 import org.cip4.jdflib.resource.process.JDFDeviceNSpace;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
-    /*
-    *****************************************************************************
-    class JDFAutoColorantControl : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoColorantControl extends JDFResource
 {
@@ -266,6 +263,27 @@ public abstract class JDFAutoColorantControl extends JDFResource
     }
 
     /**
+     * Get all ColorantAlias from the current element
+     * 
+     * @return Collection<JDFColorantAlias>
+     */
+    public Collection<JDFColorantAlias> getAllColorantAlias()
+    {
+        Vector<JDFColorantAlias> v = new Vector<JDFColorantAlias>();
+
+        JDFColorantAlias kElem = (JDFColorantAlias) getFirstChildElement(ElementName.COLORANTALIAS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFColorantAlias) kElem.getNextSiblingElement(ElementName.COLORANTALIAS, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ColorantAlias
      */
     public JDFColorantAlias appendColorantAlias() throws JDFException
@@ -390,6 +408,27 @@ public abstract class JDFAutoColorantControl extends JDFResource
     }
 
     /**
+     * Get all ColorSpaceSubstitute from the current element
+     * 
+     * @return Collection<JDFColorSpaceSubstitute>
+     */
+    public Collection<JDFColorSpaceSubstitute> getAllColorSpaceSubstitute()
+    {
+        Vector<JDFColorSpaceSubstitute> v = new Vector<JDFColorSpaceSubstitute>();
+
+        JDFColorSpaceSubstitute kElem = (JDFColorSpaceSubstitute) getFirstChildElement(ElementName.COLORSPACESUBSTITUTE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFColorSpaceSubstitute) kElem.getNextSiblingElement(ElementName.COLORSPACESUBSTITUTE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ColorSpaceSubstitute
      */
     public JDFColorSpaceSubstitute appendColorSpaceSubstitute() throws JDFException
@@ -441,6 +480,27 @@ public abstract class JDFAutoColorantControl extends JDFResource
     public JDFDeviceNSpace getDeviceNSpace(int iSkip)
     {
         return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, iSkip);
+    }
+
+    /**
+     * Get all DeviceNSpace from the current element
+     * 
+     * @return Collection<JDFDeviceNSpace>
+     */
+    public Collection<JDFDeviceNSpace> getAllDeviceNSpace()
+    {
+        Vector<JDFDeviceNSpace> v = new Vector<JDFDeviceNSpace>();
+
+        JDFDeviceNSpace kElem = (JDFDeviceNSpace) getFirstChildElement(ElementName.DEVICENSPACE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDeviceNSpace) kElem.getNextSiblingElement(ElementName.DEVICENSPACE, null);
+        }
+
+        return v;
     }
 
     /**

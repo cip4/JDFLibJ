@@ -85,12 +85,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFNumberList;
-    /*
-    *****************************************************************************
-    class JDFAutoDCTParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDCTParams extends JDFElement
 {

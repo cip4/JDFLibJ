@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFRegisterRibbon;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoBlockPreparationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBlockPreparationParams extends JDFResource
 {
@@ -327,6 +323,27 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
     public JDFRegisterRibbon getRegisterRibbon(int iSkip)
     {
         return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
+    }
+
+    /**
+     * Get all RegisterRibbon from the current element
+     * 
+     * @return Collection<JDFRegisterRibbon>
+     */
+    public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
+    {
+        Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
+
+        JDFRegisterRibbon kElem = (JDFRegisterRibbon) getFirstChildElement(ElementName.REGISTERRIBBON, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRegisterRibbon) kElem.getNextSiblingElement(ElementName.REGISTERRIBBON, null);
+        }
+
+        return v;
     }
 
     /**

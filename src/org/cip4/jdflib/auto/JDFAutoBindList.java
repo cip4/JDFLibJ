@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFBindItem;
-    /*
-    *****************************************************************************
-    class JDFAutoBindList : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoBindList extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoBindList extends JDFElement
     public JDFBindItem getBindItem(int iSkip)
     {
         return (JDFBindItem) getElement(ElementName.BINDITEM, null, iSkip);
+    }
+
+    /**
+     * Get all BindItem from the current element
+     * 
+     * @return Collection<JDFBindItem>
+     */
+    public Collection<JDFBindItem> getAllBindItem()
+    {
+        Vector<JDFBindItem> v = new Vector<JDFBindItem>();
+
+        JDFBindItem kElem = (JDFBindItem) getFirstChildElement(ElementName.BINDITEM, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBindItem) kElem.getNextSiblingElement(ElementName.BINDITEM, null);
+        }
+
+        return v;
     }
 
     /**

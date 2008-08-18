@@ -87,12 +87,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoApprovalDetails : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoApprovalDetails extends JDFElement
 {

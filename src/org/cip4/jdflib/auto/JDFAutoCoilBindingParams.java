@@ -86,12 +86,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
-    /*
-    *****************************************************************************
-    class JDFAutoCoilBindingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCoilBindingParams extends JDFResource
 {

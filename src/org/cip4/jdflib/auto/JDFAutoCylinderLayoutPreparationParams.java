@@ -77,12 +77,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFProductionPath;
-    /*
-    *****************************************************************************
-    class JDFAutoCylinderLayoutPreparationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
 {
