@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
-    /*
-    *****************************************************************************
-    class JDFAutoDeviceList : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDeviceList extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoDeviceList extends JDFElement
     public JDFDeviceInfo getDeviceInfo(int iSkip)
     {
         return (JDFDeviceInfo) getElement(ElementName.DEVICEINFO, null, iSkip);
+    }
+
+    /**
+     * Get all DeviceInfo from the current element
+     * 
+     * @return Collection<JDFDeviceInfo>
+     */
+    public Collection<JDFDeviceInfo> getAllDeviceInfo()
+    {
+        Vector<JDFDeviceInfo> v = new Vector<JDFDeviceInfo>();
+
+        JDFDeviceInfo kElem = (JDFDeviceInfo) getFirstChildElement(ElementName.DEVICEINFO, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDeviceInfo) kElem.getNextSiblingElement(ElementName.DEVICEINFO, null);
+        }
+
+        return v;
     }
 
     /**

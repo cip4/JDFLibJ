@@ -84,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoLaminatingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLaminatingParams extends JDFResource
 {

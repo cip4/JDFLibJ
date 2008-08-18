@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,12 +90,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFDisposition;
 import org.cip4.jdflib.resource.process.JDFFileAlias;
-    /*
-    *****************************************************************************
-    class JDFAutoFileSpec : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoFileSpec extends JDFResource
 {
@@ -900,6 +896,27 @@ public abstract class JDFAutoFileSpec extends JDFResource
         return (JDFContainer) getElement(ElementName.CONTAINER, null, iSkip);
     }
 
+    /**
+     * Get all Container from the current element
+     * 
+     * @return Collection<JDFContainer>
+     */
+    public Collection<JDFContainer> getAllContainer()
+    {
+        Vector<JDFContainer> v = new Vector<JDFContainer>();
+
+        JDFContainer kElem = (JDFContainer) getFirstChildElement(ElementName.CONTAINER, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContainer) kElem.getNextSiblingElement(ElementName.CONTAINER, null);
+        }
+
+        return v;
+    }
+
     /** (25) getCreateContainer
      * 
      * @return JDFContainer the element
@@ -925,6 +942,27 @@ public abstract class JDFAutoFileSpec extends JDFResource
     public JDFDisposition getDisposition(int iSkip)
     {
         return (JDFDisposition) getElement(ElementName.DISPOSITION, null, iSkip);
+    }
+
+    /**
+     * Get all Disposition from the current element
+     * 
+     * @return Collection<JDFDisposition>
+     */
+    public Collection<JDFDisposition> getAllDisposition()
+    {
+        Vector<JDFDisposition> v = new Vector<JDFDisposition>();
+
+        JDFDisposition kElem = (JDFDisposition) getFirstChildElement(ElementName.DISPOSITION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDisposition) kElem.getNextSiblingElement(ElementName.DISPOSITION, null);
+        }
+
+        return v;
     }
 
     /** (25) getCreateDisposition
@@ -962,6 +1000,27 @@ public abstract class JDFAutoFileSpec extends JDFResource
     public JDFFileAlias getFileAlias(int iSkip)
     {
         return (JDFFileAlias) getElement(ElementName.FILEALIAS, null, iSkip);
+    }
+
+    /**
+     * Get all FileAlias from the current element
+     * 
+     * @return Collection<JDFFileAlias>
+     */
+    public Collection<JDFFileAlias> getAllFileAlias()
+    {
+        Vector<JDFFileAlias> v = new Vector<JDFFileAlias>();
+
+        JDFFileAlias kElem = (JDFFileAlias) getFirstChildElement(ElementName.FILEALIAS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFileAlias) kElem.getNextSiblingElement(ElementName.FILEALIAS, null);
+        }
+
+        return v;
     }
 
     /**

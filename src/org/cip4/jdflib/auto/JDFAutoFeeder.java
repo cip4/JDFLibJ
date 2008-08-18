@@ -90,12 +90,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFFeederQualityParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /*
-    *****************************************************************************
-    class JDFAutoFeeder : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoFeeder extends JDFElement
 {

@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
-    /*
-    *****************************************************************************
-    class JDFAutoIDPStitching : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIDPStitching extends JDFElement
 {
@@ -346,6 +342,27 @@ public abstract class JDFAutoIDPStitching extends JDFElement
     public JDFStitchingParams getStitchingParams(int iSkip)
     {
         return (JDFStitchingParams) getElement(ElementName.STITCHINGPARAMS, null, iSkip);
+    }
+
+    /**
+     * Get all StitchingParams from the current element
+     * 
+     * @return Collection<JDFStitchingParams>
+     */
+    public Collection<JDFStitchingParams> getAllStitchingParams()
+    {
+        Vector<JDFStitchingParams> v = new Vector<JDFStitchingParams>();
+
+        JDFStitchingParams kElem = (JDFStitchingParams) getFirstChildElement(ElementName.STITCHINGPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStitchingParams) kElem.getNextSiblingElement(ElementName.STITCHINGPARAMS, null);
+        }
+
+        return v;
     }
 
     /**

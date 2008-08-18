@@ -85,12 +85,6 @@ import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoInkZoneCalculationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
 {

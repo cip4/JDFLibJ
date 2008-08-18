@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -85,12 +88,6 @@ import org.cip4.jdflib.span.JDFSpanJacket;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFSpanStripMaterial;
 import org.cip4.jdflib.span.JDFSpanTightBacking;
-    /*
-    *****************************************************************************
-    class JDFAutoHardCoverBinding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoHardCoverBinding extends JDFElement
 {
@@ -695,6 +692,27 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
     public JDFRegisterRibbon getRegisterRibbon(int iSkip)
     {
         return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
+    }
+
+    /**
+     * Get all RegisterRibbon from the current element
+     * 
+     * @return Collection<JDFRegisterRibbon>
+     */
+    public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
+    {
+        Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
+
+        JDFRegisterRibbon kElem = (JDFRegisterRibbon) getFirstChildElement(ElementName.REGISTERRIBBON, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRegisterRibbon) kElem.getNextSiblingElement(ElementName.REGISTERRIBBON, null);
+        }
+
+        return v;
     }
 
     /**

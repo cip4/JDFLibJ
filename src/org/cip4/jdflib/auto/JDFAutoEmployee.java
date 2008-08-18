@@ -83,12 +83,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.cip4.jdflib.resource.process.JDFPerson;
-    /*
-    *****************************************************************************
-    class JDFAutoEmployee : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoEmployee extends JDFResource
 {

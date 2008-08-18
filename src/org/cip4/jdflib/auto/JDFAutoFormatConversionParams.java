@@ -80,12 +80,6 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
 import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
-    /*
-    *****************************************************************************
-    class JDFAutoFormatConversionParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoFormatConversionParams extends JDFResource
 {

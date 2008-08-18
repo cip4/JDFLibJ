@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlue;
-    /*
-    *****************************************************************************
-    class JDFAutoGluingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoGluingParams extends JDFResource
 {
@@ -230,6 +227,27 @@ public abstract class JDFAutoGluingParams extends JDFResource
     public JDFGlue getGlue(int iSkip)
     {
         return (JDFGlue) getElement(ElementName.GLUE, null, iSkip);
+    }
+
+    /**
+     * Get all Glue from the current element
+     * 
+     * @return Collection<JDFGlue>
+     */
+    public Collection<JDFGlue> getAllGlue()
+    {
+        Vector<JDFGlue> v = new Vector<JDFGlue>();
+
+        JDFGlue kElem = (JDFGlue) getFirstChildElement(ElementName.GLUE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlue) kElem.getNextSiblingElement(ElementName.GLUE, null);
+        }
+
+        return v;
     }
 
     /**

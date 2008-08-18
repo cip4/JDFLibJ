@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFStation;
-    /*
-    *****************************************************************************
-    class JDFAutoDieLayout : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDieLayout extends JDFResource
 {
@@ -225,6 +222,27 @@ public abstract class JDFAutoDieLayout extends JDFResource
     public JDFStation getStation(int iSkip)
     {
         return (JDFStation) getElement(ElementName.STATION, null, iSkip);
+    }
+
+    /**
+     * Get all Station from the current element
+     * 
+     * @return Collection<JDFStation>
+     */
+    public Collection<JDFStation> getAllStation()
+    {
+        Vector<JDFStation> v = new Vector<JDFStation>();
+
+        JDFStation kElem = (JDFStation) getFirstChildElement(ElementName.STATION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStation) kElem.getNextSiblingElement(ElementName.STATION, null);
+        }
+
+        return v;
     }
 
     /**

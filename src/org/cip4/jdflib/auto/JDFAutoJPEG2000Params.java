@@ -84,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFNumberList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-    /*
-    *****************************************************************************
-    class JDFAutoJPEG2000Params : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoJPEG2000Params extends JDFElement
 {

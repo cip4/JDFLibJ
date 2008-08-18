@@ -89,12 +89,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
-    /*
-    *****************************************************************************
-    class JDFAutoInsertSheet : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoInsertSheet extends JDFResource
 {

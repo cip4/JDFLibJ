@@ -82,12 +82,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDeviceMark;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoJobField : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoJobField extends JDFResource
 {

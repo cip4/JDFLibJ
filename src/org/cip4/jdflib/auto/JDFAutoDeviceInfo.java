@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -92,12 +94,6 @@ import org.cip4.jdflib.resource.JDFModuleStatus;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
-    /*
-    *****************************************************************************
-    class JDFAutoDeviceInfo : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDeviceInfo extends JDFElement
 {
@@ -660,6 +656,27 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
     }
 
     /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Employee
      */
     public JDFEmployee appendEmployee() throws JDFException
@@ -688,6 +705,27 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
     }
 
     /**
+     * Get all JobPhase from the current element
+     * 
+     * @return Collection<JDFJobPhase>
+     */
+    public Collection<JDFJobPhase> getAllJobPhase()
+    {
+        Vector<JDFJobPhase> v = new Vector<JDFJobPhase>();
+
+        JDFJobPhase kElem = (JDFJobPhase) getFirstChildElement(ElementName.JOBPHASE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFJobPhase) kElem.getNextSiblingElement(ElementName.JOBPHASE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element JobPhase
      */
     public JDFJobPhase appendJobPhase() throws JDFException
@@ -713,6 +751,27 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
     public JDFModuleStatus getModuleStatus(int iSkip)
     {
         return (JDFModuleStatus) getElement(ElementName.MODULESTATUS, null, iSkip);
+    }
+
+    /**
+     * Get all ModuleStatus from the current element
+     * 
+     * @return Collection<JDFModuleStatus>
+     */
+    public Collection<JDFModuleStatus> getAllModuleStatus()
+    {
+        Vector<JDFModuleStatus> v = new Vector<JDFModuleStatus>();
+
+        JDFModuleStatus kElem = (JDFModuleStatus) getFirstChildElement(ElementName.MODULESTATUS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFModuleStatus) kElem.getNextSiblingElement(ElementName.MODULESTATUS, null);
+        }
+
+        return v;
     }
 
     /**

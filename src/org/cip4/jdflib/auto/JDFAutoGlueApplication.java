@@ -85,12 +85,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /*
-    *****************************************************************************
-    class JDFAutoGlueApplication : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoGlueApplication extends JDFResource
 {

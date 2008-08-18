@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
-    /*
-    *****************************************************************************
-    class JDFAutoDependencies : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDependencies extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoDependencies extends JDFElement
     public JDFLayoutElement getLayoutElement(int iSkip)
     {
         return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, iSkip);
+    }
+
+    /**
+     * Get all LayoutElement from the current element
+     * 
+     * @return Collection<JDFLayoutElement>
+     */
+    public Collection<JDFLayoutElement> getAllLayoutElement()
+    {
+        Vector<JDFLayoutElement> v = new Vector<JDFLayoutElement>();
+
+        JDFLayoutElement kElem = (JDFLayoutElement) getFirstChildElement(ElementName.LAYOUTELEMENT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLayoutElement) kElem.getNextSiblingElement(ElementName.LAYOUTELEMENT, null);
+        }
+
+        return v;
     }
 
     /**

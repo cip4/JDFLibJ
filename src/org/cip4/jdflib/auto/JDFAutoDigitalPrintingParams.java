@@ -91,12 +91,6 @@ import org.cip4.jdflib.resource.process.JDFDisjointing;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
-    /*
-    *****************************************************************************
-    class JDFAutoDigitalPrintingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDigitalPrintingParams extends JDFResource
 {

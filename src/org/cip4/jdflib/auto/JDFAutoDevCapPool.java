@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
-    /*
-    *****************************************************************************
-    class JDFAutoDevCapPool : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDevCapPool extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoDevCapPool extends JDFElement
     public JDFDevCap getDevCap(int iSkip)
     {
         return (JDFDevCap) getElement(ElementName.DEVCAP, null, iSkip);
+    }
+
+    /**
+     * Get all DevCap from the current element
+     * 
+     * @return Collection<JDFDevCap>
+     */
+    public Collection<JDFDevCap> getAllDevCap()
+    {
+        Vector<JDFDevCap> v = new Vector<JDFDevCap>();
+
+        JDFDevCap kElem = (JDFDevCap) getFirstChildElement(ElementName.DEVCAP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevCap) kElem.getNextSiblingElement(ElementName.DEVCAP, null);
+        }
+
+        return v;
     }
 
     /**

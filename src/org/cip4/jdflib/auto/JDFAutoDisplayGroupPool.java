@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFDisplayGroup;
-    /*
-    *****************************************************************************
-    class JDFAutoDisplayGroupPool : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDisplayGroupPool extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
     public JDFDisplayGroup getDisplayGroup(int iSkip)
     {
         return (JDFDisplayGroup) getElement(ElementName.DISPLAYGROUP, null, iSkip);
+    }
+
+    /**
+     * Get all DisplayGroup from the current element
+     * 
+     * @return Collection<JDFDisplayGroup>
+     */
+    public Collection<JDFDisplayGroup> getAllDisplayGroup()
+    {
+        Vector<JDFDisplayGroup> v = new Vector<JDFDisplayGroup>();
+
+        JDFDisplayGroup kElem = (JDFDisplayGroup) getFirstChildElement(ElementName.DISPLAYGROUP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDisplayGroup) kElem.getNextSiblingElement(ElementName.DISPLAYGROUP, null);
+        }
+
+        return v;
     }
 
     /**

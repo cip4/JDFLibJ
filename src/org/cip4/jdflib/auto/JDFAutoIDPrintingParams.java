@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -93,12 +95,6 @@ import org.cip4.jdflib.resource.process.JDFCover;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
 import org.cip4.jdflib.resource.process.JDFIDPLayout;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
-    /*
-    *****************************************************************************
-    class JDFAutoIDPrintingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIDPrintingParams extends JDFResource
 {
@@ -517,6 +513,27 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     }
 
     /**
+     * Get all Cover from the current element
+     * 
+     * @return Collection<JDFCover>
+     */
+    public Collection<JDFCover> getAllCover()
+    {
+        Vector<JDFCover> v = new Vector<JDFCover>();
+
+        JDFCover kElem = (JDFCover) getFirstChildElement(ElementName.COVER, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCover) kElem.getNextSiblingElement(ElementName.COVER, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Cover
      */
     public JDFCover appendCover() throws JDFException
@@ -594,6 +611,27 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     public JDFJobSheet getJobSheet(int iSkip)
     {
         return (JDFJobSheet) getElement(ElementName.JOBSHEET, null, iSkip);
+    }
+
+    /**
+     * Get all JobSheet from the current element
+     * 
+     * @return Collection<JDFJobSheet>
+     */
+    public Collection<JDFJobSheet> getAllJobSheet()
+    {
+        Vector<JDFJobSheet> v = new Vector<JDFJobSheet>();
+
+        JDFJobSheet kElem = (JDFJobSheet) getFirstChildElement(ElementName.JOBSHEET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFJobSheet) kElem.getNextSiblingElement(ElementName.JOBSHEET, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -90,12 +92,6 @@ import org.cip4.jdflib.resource.process.JDFDCTParams;
 import org.cip4.jdflib.resource.process.JDFJBIG2Params;
 import org.cip4.jdflib.resource.process.JDFJPEG2000Params;
 import org.cip4.jdflib.resource.process.JDFLZWParams;
-    /*
-    *****************************************************************************
-    class JDFAutoImageCompression : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoImageCompression extends JDFElement
 {
@@ -698,6 +694,27 @@ public abstract class JDFAutoImageCompression extends JDFElement
     }
 
     /**
+     * Get all JBIG2Params from the current element
+     * 
+     * @return Collection<JDFJBIG2Params>
+     */
+    public Collection<JDFJBIG2Params> getAllJBIG2Params()
+    {
+        Vector<JDFJBIG2Params> v = new Vector<JDFJBIG2Params>();
+
+        JDFJBIG2Params kElem = (JDFJBIG2Params) getFirstChildElement(ElementName.JBIG2PARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFJBIG2Params) kElem.getNextSiblingElement(ElementName.JBIG2PARAMS, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element JBIG2Params
      */
     public JDFJBIG2Params appendJBIG2Params() throws JDFException
@@ -723,6 +740,27 @@ public abstract class JDFAutoImageCompression extends JDFElement
     public JDFJPEG2000Params getJPEG2000Params(int iSkip)
     {
         return (JDFJPEG2000Params) getElement(ElementName.JPEG2000PARAMS, null, iSkip);
+    }
+
+    /**
+     * Get all JPEG2000Params from the current element
+     * 
+     * @return Collection<JDFJPEG2000Params>
+     */
+    public Collection<JDFJPEG2000Params> getAllJPEG2000Params()
+    {
+        Vector<JDFJPEG2000Params> v = new Vector<JDFJPEG2000Params>();
+
+        JDFJPEG2000Params kElem = (JDFJPEG2000Params) getFirstChildElement(ElementName.JPEG2000PARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFJPEG2000Params) kElem.getNextSiblingElement(ElementName.JPEG2000PARAMS, null);
+        }
+
+        return v;
     }
 
     /**

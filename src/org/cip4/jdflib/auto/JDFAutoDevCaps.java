@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -92,12 +94,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
-    /*
-    *****************************************************************************
-    class JDFAutoDevCaps : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDevCaps extends JDFElement
 {
@@ -601,6 +597,27 @@ public abstract class JDFAutoDevCaps extends JDFElement
     }
 
     /**
+     * Get all DevCap from the current element
+     * 
+     * @return Collection<JDFDevCap>
+     */
+    public Collection<JDFDevCap> getAllDevCap()
+    {
+        Vector<JDFDevCap> v = new Vector<JDFDevCap>();
+
+        JDFDevCap kElem = (JDFDevCap) getFirstChildElement(ElementName.DEVCAP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevCap) kElem.getNextSiblingElement(ElementName.DEVCAP, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element DevCap
      */
     public JDFDevCap appendDevCap() throws JDFException
@@ -626,6 +643,27 @@ public abstract class JDFAutoDevCaps extends JDFElement
     public JDFLoc getLoc(int iSkip)
     {
         return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
+    }
+
+    /**
+     * Get all Loc from the current element
+     * 
+     * @return Collection<JDFLoc>
+     */
+    public Collection<JDFLoc> getAllLoc()
+    {
+        Vector<JDFLoc> v = new Vector<JDFLoc>();
+
+        JDFLoc kElem = (JDFLoc) getFirstChildElement(ElementName.LOC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLoc) kElem.getNextSiblingElement(ElementName.LOC, null);
+        }
+
+        return v;
     }
 
     /**

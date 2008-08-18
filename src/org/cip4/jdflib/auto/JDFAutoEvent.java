@@ -76,12 +76,6 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-    /*
-    *****************************************************************************
-    class JDFAutoEvent : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoEvent extends JDFElement
 {

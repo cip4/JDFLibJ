@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFEndSheet;
-    /*
-    *****************************************************************************
-    class JDFAutoEndSheetGluingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoEndSheetGluingParams extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoEndSheetGluingParams extends JDFResource
     public JDFEndSheet getEndSheet(int iSkip)
     {
         return (JDFEndSheet) getElement(ElementName.ENDSHEET, null, iSkip);
+    }
+
+    /**
+     * Get all EndSheet from the current element
+     * 
+     * @return Collection<JDFEndSheet>
+     */
+    public Collection<JDFEndSheet> getAllEndSheet()
+    {
+        Vector<JDFEndSheet> v = new Vector<JDFEndSheet>();
+
+        JDFEndSheet kElem = (JDFEndSheet) getFirstChildElement(ElementName.ENDSHEET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEndSheet) kElem.getNextSiblingElement(ElementName.ENDSHEET, null);
+        }
+
+        return v;
     }
 
     /**

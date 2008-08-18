@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,12 +90,6 @@ import org.cip4.jdflib.resource.intent.JDFMediaIntent;
 import org.cip4.jdflib.resource.process.JDFIDPFinishing;
 import org.cip4.jdflib.resource.process.JDFIDPLayout;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
-    /*
-    *****************************************************************************
-    class JDFAutoIDPJobSheet : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIDPJobSheet extends JDFElement
 {
@@ -372,6 +368,27 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     }
 
     /**
+     * Get all IDPFinishing from the current element
+     * 
+     * @return Collection<JDFIDPFinishing>
+     */
+    public Collection<JDFIDPFinishing> getAllIDPFinishing()
+    {
+        Vector<JDFIDPFinishing> v = new Vector<JDFIDPFinishing>();
+
+        JDFIDPFinishing kElem = (JDFIDPFinishing) getFirstChildElement(ElementName.IDPFINISHING, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFIDPFinishing) kElem.getNextSiblingElement(ElementName.IDPFINISHING, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element IDPFinishing
      */
     public JDFIDPFinishing appendIDPFinishing() throws JDFException
@@ -400,6 +417,27 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     }
 
     /**
+     * Get all IDPLayout from the current element
+     * 
+     * @return Collection<JDFIDPLayout>
+     */
+    public Collection<JDFIDPLayout> getAllIDPLayout()
+    {
+        Vector<JDFIDPLayout> v = new Vector<JDFIDPLayout>();
+
+        JDFIDPLayout kElem = (JDFIDPLayout) getFirstChildElement(ElementName.IDPLAYOUT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFIDPLayout) kElem.getNextSiblingElement(ElementName.IDPLAYOUT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element IDPLayout
      */
     public JDFIDPLayout appendIDPLayout() throws JDFException
@@ -425,6 +463,27 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     public JDFMediaIntent getMediaIntent(int iSkip)
     {
         return (JDFMediaIntent) getElement(ElementName.MEDIAINTENT, null, iSkip);
+    }
+
+    /**
+     * Get all MediaIntent from the current element
+     * 
+     * @return Collection<JDFMediaIntent>
+     */
+    public Collection<JDFMediaIntent> getAllMediaIntent()
+    {
+        Vector<JDFMediaIntent> v = new Vector<JDFMediaIntent>();
+
+        JDFMediaIntent kElem = (JDFMediaIntent) getFirstChildElement(ElementName.MEDIAINTENT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMediaIntent) kElem.getNextSiblingElement(ElementName.MEDIAINTENT, null);
+        }
+
+        return v;
     }
 
     /**
@@ -462,6 +521,27 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     public JDFMediaSource getMediaSource(int iSkip)
     {
         return (JDFMediaSource) getElement(ElementName.MEDIASOURCE, null, iSkip);
+    }
+
+    /**
+     * Get all MediaSource from the current element
+     * 
+     * @return Collection<JDFMediaSource>
+     */
+    public Collection<JDFMediaSource> getAllMediaSource()
+    {
+        Vector<JDFMediaSource> v = new Vector<JDFMediaSource>();
+
+        JDFMediaSource kElem = (JDFMediaSource) getFirstChildElement(ElementName.MEDIASOURCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMediaSource) kElem.getNextSiblingElement(ElementName.MEDIASOURCE, null);
+        }
+
+        return v;
     }
 
     /**

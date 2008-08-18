@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFHoleLine;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFHole;
-    /*
-    *****************************************************************************
-    class JDFAutoHoleList : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoHoleList extends JDFResource
 {
@@ -193,6 +190,27 @@ public abstract class JDFAutoHoleList extends JDFResource
     }
 
     /**
+     * Get all Hole from the current element
+     * 
+     * @return Collection<JDFHole>
+     */
+    public Collection<JDFHole> getAllHole()
+    {
+        Vector<JDFHole> v = new Vector<JDFHole>();
+
+        JDFHole kElem = (JDFHole) getFirstChildElement(ElementName.HOLE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFHole) kElem.getNextSiblingElement(ElementName.HOLE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Hole
      */
     public JDFHole appendHole() throws JDFException
@@ -227,6 +245,27 @@ public abstract class JDFAutoHoleList extends JDFResource
     public JDFHoleLine getHoleLine(int iSkip)
     {
         return (JDFHoleLine) getElement(ElementName.HOLELINE, null, iSkip);
+    }
+
+    /**
+     * Get all HoleLine from the current element
+     * 
+     * @return Collection<JDFHoleLine>
+     */
+    public Collection<JDFHoleLine> getAllHoleLine()
+    {
+        Vector<JDFHoleLine> v = new Vector<JDFHoleLine>();
+
+        JDFHoleLine kElem = (JDFHoleLine) getFirstChildElement(ElementName.HOLELINE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFHoleLine) kElem.getNextSiblingElement(ElementName.HOLELINE, null);
+        }
+
+        return v;
     }
 
     /**

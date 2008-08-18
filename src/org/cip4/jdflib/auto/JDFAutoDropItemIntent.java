@@ -92,12 +92,6 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRollStand;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
-    /*
-    *****************************************************************************
-    class JDFAutoDropItemIntent : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDropItemIntent extends JDFElement
 {

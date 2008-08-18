@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,12 +90,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoImageReplacementParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoImageReplacementParams extends JDFResource
 {
@@ -475,6 +471,27 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
     }
 
     /**
+     * Get all FileSpec from the current element
+     * 
+     * @return Collection<JDFFileSpec>
+     */
+    public Collection<JDFFileSpec> getAllFileSpec()
+    {
+        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+
+        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
@@ -509,6 +526,27 @@ public abstract class JDFAutoImageReplacementParams extends JDFResource
     public JDFElement getSearchPath(int iSkip)
     {
         return (JDFElement) getElement(ElementName.SEARCHPATH, null, iSkip);
+    }
+
+    /**
+     * Get all SearchPath from the current element
+     * 
+     * @return Collection<JDFElement>
+     */
+    public Collection<JDFElement> getAllSearchPath()
+    {
+        Vector<JDFElement> v = new Vector<JDFElement>();
+
+        JDFElement kElem = (JDFElement) getFirstChildElement(ElementName.SEARCHPATH, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFElement) kElem.getNextSiblingElement(ElementName.SEARCHPATH, null);
+        }
+
+        return v;
     }
 
     /**

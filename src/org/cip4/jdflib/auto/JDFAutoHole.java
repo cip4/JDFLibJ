@@ -83,12 +83,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoHole : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoHole extends JDFResource
 {

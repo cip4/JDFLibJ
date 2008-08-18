@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -90,12 +92,6 @@ import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFDropItem;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoDrop : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDrop extends JDFElement
 {
@@ -482,6 +478,27 @@ public abstract class JDFAutoDrop extends JDFElement
     }
 
     /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Contact
      */
     public JDFContact appendContact() throws JDFException
@@ -516,6 +533,27 @@ public abstract class JDFAutoDrop extends JDFElement
     public JDFDropItem getDropItem(int iSkip)
     {
         return (JDFDropItem) getElement(ElementName.DROPITEM, null, iSkip);
+    }
+
+    /**
+     * Get all DropItem from the current element
+     * 
+     * @return Collection<JDFDropItem>
+     */
+    public Collection<JDFDropItem> getAllDropItem()
+    {
+        Vector<JDFDropItem> v = new Vector<JDFDropItem>();
+
+        JDFDropItem kElem = (JDFDropItem) getFirstChildElement(ElementName.DROPITEM, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDropItem) kElem.getNextSiblingElement(ElementName.DROPITEM, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFEmbossingItem;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
-    /*
-    *****************************************************************************
-    class JDFAutoEmbossingIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
     public JDFEmbossingItem getEmbossingItem(int iSkip)
     {
         return (JDFEmbossingItem) getElement(ElementName.EMBOSSINGITEM, null, iSkip);
+    }
+
+    /**
+     * Get all EmbossingItem from the current element
+     * 
+     * @return Collection<JDFEmbossingItem>
+     */
+    public Collection<JDFEmbossingItem> getAllEmbossingItem()
+    {
+        Vector<JDFEmbossingItem> v = new Vector<JDFEmbossingItem>();
+
+        JDFEmbossingItem kElem = (JDFEmbossingItem) getFirstChildElement(ElementName.EMBOSSINGITEM, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmbossingItem) kElem.getNextSiblingElement(ElementName.EMBOSSINGITEM, null);
+        }
+
+        return v;
     }
 
     /**

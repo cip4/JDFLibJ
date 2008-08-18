@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -89,12 +91,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFImageShift;
-    /*
-    *****************************************************************************
-    class JDFAutoIDPLayout : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIDPLayout extends JDFElement
 {
@@ -477,6 +473,27 @@ public abstract class JDFAutoIDPLayout extends JDFElement
     public JDFImageShift getImageShift(int iSkip)
     {
         return (JDFImageShift) getElement(ElementName.IMAGESHIFT, null, iSkip);
+    }
+
+    /**
+     * Get all ImageShift from the current element
+     * 
+     * @return Collection<JDFImageShift>
+     */
+    public Collection<JDFImageShift> getAllImageShift()
+    {
+        Vector<JDFImageShift> v = new Vector<JDFImageShift>();
+
+        JDFImageShift kElem = (JDFImageShift) getFirstChildElement(ElementName.IMAGESHIFT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFImageShift) kElem.getNextSiblingElement(ElementName.IMAGESHIFT, null);
+        }
+
+        return v;
     }
 
     /**

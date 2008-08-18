@@ -90,12 +90,6 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFFitPolicy;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /*
-    *****************************************************************************
-    class JDFAutoImageSetterParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoImageSetterParams extends JDFResource
 {

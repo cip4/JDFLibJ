@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
-    /*
-    *****************************************************************************
-    class JDFAutoIDPFolding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIDPFolding extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoIDPFolding extends JDFElement
     public JDFFoldingParams getFoldingParams(int iSkip)
     {
         return (JDFFoldingParams) getElement(ElementName.FOLDINGPARAMS, null, iSkip);
+    }
+
+    /**
+     * Get all FoldingParams from the current element
+     * 
+     * @return Collection<JDFFoldingParams>
+     */
+    public Collection<JDFFoldingParams> getAllFoldingParams()
+    {
+        Vector<JDFFoldingParams> v = new Vector<JDFFoldingParams>();
+
+        JDFFoldingParams kElem = (JDFFoldingParams) getFirstChildElement(ElementName.FOLDINGPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFoldingParams) kElem.getNextSiblingElement(ElementName.FOLDINGPARAMS, null);
+        }
+
+        return v;
     }
 
     /**

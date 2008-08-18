@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -88,12 +90,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFFold;
-    /*
-    *****************************************************************************
-    class JDFAutoFoldingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoFoldingParams extends JDFResource
 {
@@ -408,6 +404,27 @@ public abstract class JDFAutoFoldingParams extends JDFResource
     public JDFFold getFold(int iSkip)
     {
         return (JDFFold) getElement(ElementName.FOLD, null, iSkip);
+    }
+
+    /**
+     * Get all Fold from the current element
+     * 
+     * @return Collection<JDFFold>
+     */
+    public Collection<JDFFold> getAllFold()
+    {
+        Vector<JDFFold> v = new Vector<JDFFold>();
+
+        JDFFold kElem = (JDFFold) getFirstChildElement(ElementName.FOLD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFold) kElem.getNextSiblingElement(ElementName.FOLD, null);
+        }
+
+        return v;
     }
 
     /**

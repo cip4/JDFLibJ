@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFImageCompression;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoImageCompressionParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoImageCompressionParams extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoImageCompressionParams extends JDFResource
     public JDFImageCompression getImageCompression(int iSkip)
     {
         return (JDFImageCompression) getElement(ElementName.IMAGECOMPRESSION, null, iSkip);
+    }
+
+    /**
+     * Get all ImageCompression from the current element
+     * 
+     * @return Collection<JDFImageCompression>
+     */
+    public Collection<JDFImageCompression> getAllImageCompression()
+    {
+        Vector<JDFImageCompression> v = new Vector<JDFImageCompression>();
+
+        JDFImageCompression kElem = (JDFImageCompression) getFirstChildElement(ElementName.IMAGECOMPRESSION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFImageCompression) kElem.getNextSiblingElement(ElementName.IMAGECOMPRESSION, null);
+        }
+
+        return v;
     }
 
     /**

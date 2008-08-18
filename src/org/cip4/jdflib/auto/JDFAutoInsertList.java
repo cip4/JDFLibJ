@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFInsert;
-    /*
-    *****************************************************************************
-    class JDFAutoInsertList : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoInsertList extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoInsertList extends JDFElement
     public JDFInsert getInsert(int iSkip)
     {
         return (JDFInsert) getElement(ElementName.INSERT, null, iSkip);
+    }
+
+    /**
+     * Get all Insert from the current element
+     * 
+     * @return Collection<JDFInsert>
+     */
+    public Collection<JDFInsert> getAllInsert()
+    {
+        Vector<JDFInsert> v = new Vector<JDFInsert>();
+
+        JDFInsert kElem = (JDFInsert) getFirstChildElement(ElementName.INSERT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFInsert) kElem.getNextSiblingElement(ElementName.INSERT, null);
+        }
+
+        return v;
     }
 
     /**

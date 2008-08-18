@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams;
-    /*
-    *****************************************************************************
-    class JDFAutoIDPTrimming : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIDPTrimming extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoIDPTrimming extends JDFElement
     public JDFTrimmingParams getTrimmingParams(int iSkip)
     {
         return (JDFTrimmingParams) getElement(ElementName.TRIMMINGPARAMS, null, iSkip);
+    }
+
+    /**
+     * Get all TrimmingParams from the current element
+     * 
+     * @return Collection<JDFTrimmingParams>
+     */
+    public Collection<JDFTrimmingParams> getAllTrimmingParams()
+    {
+        Vector<JDFTrimmingParams> v = new Vector<JDFTrimmingParams>();
+
+        JDFTrimmingParams kElem = (JDFTrimmingParams) getFirstChildElement(ElementName.TRIMMINGPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTrimmingParams) kElem.getNextSiblingElement(ElementName.TRIMMINGPARAMS, null);
+        }
+
+        return v;
     }
 
     /**

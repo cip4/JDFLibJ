@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,12 +90,6 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 import org.cip4.jdflib.span.JDFSpanGlueType;
 import org.cip4.jdflib.span.JDFSpanMethod;
-    /*
-    *****************************************************************************
-    class JDFAutoInsert : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoInsert extends JDFElement
 {
@@ -394,6 +390,27 @@ public abstract class JDFAutoInsert extends JDFElement
     public JDFGlueLine getGlueLine(int iSkip)
     {
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
+    }
+
+    /**
+     * Get all GlueLine from the current element
+     * 
+     * @return Collection<JDFGlueLine>
+     */
+    public Collection<JDFGlueLine> getAllGlueLine()
+    {
+        Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+
+        JDFGlueLine kElem = (JDFGlueLine) getFirstChildElement(ElementName.GLUELINE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlueLine) kElem.getNextSiblingElement(ElementName.GLUELINE, null);
+        }
+
+        return v;
     }
 
     /**

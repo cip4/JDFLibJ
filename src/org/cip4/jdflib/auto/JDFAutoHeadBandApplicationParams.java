@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /*
-    *****************************************************************************
-    class JDFAutoHeadBandApplicationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 {
@@ -454,6 +450,27 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
     public JDFGlueLine getGlueLine(int iSkip)
     {
         return (JDFGlueLine) getElement(ElementName.GLUELINE, null, iSkip);
+    }
+
+    /**
+     * Get all GlueLine from the current element
+     * 
+     * @return Collection<JDFGlueLine>
+     */
+    public Collection<JDFGlueLine> getAllGlueLine()
+    {
+        Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+
+        JDFGlueLine kElem = (JDFGlueLine) getFirstChildElement(ElementName.GLUELINE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlueLine) kElem.getNextSiblingElement(ElementName.GLUELINE, null);
+        }
+
+        return v;
     }
 
     /**

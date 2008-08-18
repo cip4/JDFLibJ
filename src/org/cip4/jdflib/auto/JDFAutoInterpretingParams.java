@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -91,12 +93,6 @@ import org.cip4.jdflib.resource.JDFPDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFObjectResolution;
-    /*
-    *****************************************************************************
-    class JDFAutoInterpretingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoInterpretingParams extends JDFResource
 {
@@ -616,6 +612,27 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     }
 
     /**
+     * Get all ObjectResolution from the current element
+     * 
+     * @return Collection<JDFObjectResolution>
+     */
+    public Collection<JDFObjectResolution> getAllObjectResolution()
+    {
+        Vector<JDFObjectResolution> v = new Vector<JDFObjectResolution>();
+
+        JDFObjectResolution kElem = (JDFObjectResolution) getFirstChildElement(ElementName.OBJECTRESOLUTION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFObjectResolution) kElem.getNextSiblingElement(ElementName.OBJECTRESOLUTION, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ObjectResolution
      */
     public JDFObjectResolution appendObjectResolution() throws JDFException
@@ -685,6 +702,27 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     public JDFMedia getMedia(int iSkip)
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
+    }
+
+    /**
+     * Get all Media from the current element
+     * 
+     * @return Collection<JDFMedia>
+     */
+    public Collection<JDFMedia> getAllMedia()
+    {
+        Vector<JDFMedia> v = new Vector<JDFMedia>();
+
+        JDFMedia kElem = (JDFMedia) getFirstChildElement(ElementName.MEDIA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMedia) kElem.getNextSiblingElement(ElementName.MEDIA, null);
+        }
+
+        return v;
     }
 
     /**

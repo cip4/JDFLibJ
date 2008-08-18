@@ -83,12 +83,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoLabelingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLabelingParams extends JDFResource
 {

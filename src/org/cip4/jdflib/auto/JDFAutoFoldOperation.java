@@ -72,12 +72,6 @@ package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoFoldOperation : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoFoldOperation extends JDFResource
 {

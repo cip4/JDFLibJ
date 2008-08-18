@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -96,12 +97,6 @@ import org.cip4.jdflib.resource.devicecapability.JDFFeaturePool;
 import org.cip4.jdflib.resource.devicecapability.JDFMacroPool;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
-    /*
-    *****************************************************************************
-    class JDFAutoDeviceCap : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDeviceCap extends JDFElement
 {
@@ -630,6 +625,27 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     }
 
     /**
+     * Get all DevCaps from the current element
+     * 
+     * @return Collection<JDFDevCaps>
+     */
+    public Collection<JDFDevCaps> getAllDevCaps()
+    {
+        Vector<JDFDevCaps> v = new Vector<JDFDevCaps>();
+
+        JDFDevCaps kElem = (JDFDevCaps) getFirstChildElement(ElementName.DEVCAPS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevCaps) kElem.getNextSiblingElement(ElementName.DEVCAPS, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element DevCaps
      */
     public JDFDevCaps appendDevCaps() throws JDFException
@@ -759,6 +775,27 @@ public abstract class JDFAutoDeviceCap extends JDFElement
     public JDFPerformance getPerformance(int iSkip)
     {
         return (JDFPerformance) getElement(ElementName.PERFORMANCE, null, iSkip);
+    }
+
+    /**
+     * Get all Performance from the current element
+     * 
+     * @return Collection<JDFPerformance>
+     */
+    public Collection<JDFPerformance> getAllPerformance()
+    {
+        Vector<JDFPerformance> v = new Vector<JDFPerformance>();
+
+        JDFPerformance kElem = (JDFPerformance) getFirstChildElement(ElementName.PERFORMANCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPerformance) kElem.getNextSiblingElement(ElementName.PERFORMANCE, null);
+        }
+
+        return v;
     }
 
     /**

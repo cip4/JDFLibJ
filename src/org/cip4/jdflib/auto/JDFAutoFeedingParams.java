@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCollatingItem;
 import org.cip4.jdflib.resource.process.JDFFeeder;
-    /*
-    *****************************************************************************
-    class JDFAutoFeedingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoFeedingParams extends JDFResource
 {
@@ -193,6 +190,27 @@ public abstract class JDFAutoFeedingParams extends JDFResource
     }
 
     /**
+     * Get all Feeder from the current element
+     * 
+     * @return Collection<JDFFeeder>
+     */
+    public Collection<JDFFeeder> getAllFeeder()
+    {
+        Vector<JDFFeeder> v = new Vector<JDFFeeder>();
+
+        JDFFeeder kElem = (JDFFeeder) getFirstChildElement(ElementName.FEEDER, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFeeder) kElem.getNextSiblingElement(ElementName.FEEDER, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Feeder
      */
     public JDFFeeder appendFeeder() throws JDFException
@@ -218,6 +236,27 @@ public abstract class JDFAutoFeedingParams extends JDFResource
     public JDFCollatingItem getCollatingItem(int iSkip)
     {
         return (JDFCollatingItem) getElement(ElementName.COLLATINGITEM, null, iSkip);
+    }
+
+    /**
+     * Get all CollatingItem from the current element
+     * 
+     * @return Collection<JDFCollatingItem>
+     */
+    public Collection<JDFCollatingItem> getAllCollatingItem()
+    {
+        Vector<JDFCollatingItem> v = new Vector<JDFCollatingItem>();
+
+        JDFCollatingItem kElem = (JDFCollatingItem) getFirstChildElement(ElementName.COLLATINGITEM, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCollatingItem) kElem.getNextSiblingElement(ElementName.COLLATINGITEM, null);
+        }
+
+        return v;
     }
 
     /**

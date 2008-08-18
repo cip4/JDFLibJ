@@ -83,12 +83,6 @@ import org.cip4.jdflib.span.JDFSpanLevel;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoEmbossingItem : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoEmbossingItem extends JDFElement
 {

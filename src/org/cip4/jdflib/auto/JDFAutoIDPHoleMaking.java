@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
-    /*
-    *****************************************************************************
-    class JDFAutoIDPHoleMaking : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIDPHoleMaking extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
     public JDFHoleMakingParams getHoleMakingParams(int iSkip)
     {
         return (JDFHoleMakingParams) getElement(ElementName.HOLEMAKINGPARAMS, null, iSkip);
+    }
+
+    /**
+     * Get all HoleMakingParams from the current element
+     * 
+     * @return Collection<JDFHoleMakingParams>
+     */
+    public Collection<JDFHoleMakingParams> getAllHoleMakingParams()
+    {
+        Vector<JDFHoleMakingParams> v = new Vector<JDFHoleMakingParams>();
+
+        JDFHoleMakingParams kElem = (JDFHoleMakingParams) getFirstChildElement(ElementName.HOLEMAKINGPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFHoleMakingParams) kElem.getNextSiblingElement(ElementName.HOLEMAKINGPARAMS, null);
+        }
+
+        return v;
     }
 
     /**

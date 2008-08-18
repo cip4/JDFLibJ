@@ -84,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoIdentificationField : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIdentificationField extends JDFResource
 {

@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -90,12 +92,6 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoJMF : public JDFPool
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoJMF extends JDFPool
 {
@@ -368,6 +364,27 @@ public abstract class JDFAutoJMF extends JDFPool
     }
 
     /**
+     * Get all Command from the current element
+     * 
+     * @return Collection<JDFCommand>
+     */
+    public Collection<JDFCommand> getAllCommand()
+    {
+        Vector<JDFCommand> v = new Vector<JDFCommand>();
+
+        JDFCommand kElem = (JDFCommand) getFirstChildElement(ElementName.COMMAND, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCommand) kElem.getNextSiblingElement(ElementName.COMMAND, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Command
      */
     public JDFCommand appendCommand() throws JDFException
@@ -393,6 +410,27 @@ public abstract class JDFAutoJMF extends JDFPool
     public JDFAcknowledge getAcknowledge(int iSkip)
     {
         return (JDFAcknowledge) getElement(ElementName.ACKNOWLEDGE, null, iSkip);
+    }
+
+    /**
+     * Get all Acknowledge from the current element
+     * 
+     * @return Collection<JDFAcknowledge>
+     */
+    public Collection<JDFAcknowledge> getAllAcknowledge()
+    {
+        Vector<JDFAcknowledge> v = new Vector<JDFAcknowledge>();
+
+        JDFAcknowledge kElem = (JDFAcknowledge) getFirstChildElement(ElementName.ACKNOWLEDGE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFAcknowledge) kElem.getNextSiblingElement(ElementName.ACKNOWLEDGE, null);
+        }
+
+        return v;
     }
 
     /**
@@ -424,6 +462,27 @@ public abstract class JDFAutoJMF extends JDFPool
     }
 
     /**
+     * Get all Response from the current element
+     * 
+     * @return Collection<JDFResponse>
+     */
+    public Collection<JDFResponse> getAllResponse()
+    {
+        Vector<JDFResponse> v = new Vector<JDFResponse>();
+
+        JDFResponse kElem = (JDFResponse) getFirstChildElement(ElementName.RESPONSE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFResponse) kElem.getNextSiblingElement(ElementName.RESPONSE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Response
      */
     public JDFResponse appendResponse() throws JDFException
@@ -449,6 +508,27 @@ public abstract class JDFAutoJMF extends JDFPool
     public JDFSignal getSignal(int iSkip)
     {
         return (JDFSignal) getElement(ElementName.SIGNAL, null, iSkip);
+    }
+
+    /**
+     * Get all Signal from the current element
+     * 
+     * @return Collection<JDFSignal>
+     */
+    public Collection<JDFSignal> getAllSignal()
+    {
+        Vector<JDFSignal> v = new Vector<JDFSignal>();
+
+        JDFSignal kElem = (JDFSignal) getFirstChildElement(ElementName.SIGNAL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSignal) kElem.getNextSiblingElement(ElementName.SIGNAL, null);
+        }
+
+        return v;
     }
 
     /**
@@ -480,6 +560,27 @@ public abstract class JDFAutoJMF extends JDFPool
     }
 
     /**
+     * Get all Query from the current element
+     * 
+     * @return Collection<JDFQuery>
+     */
+    public Collection<JDFQuery> getAllQuery()
+    {
+        Vector<JDFQuery> v = new Vector<JDFQuery>();
+
+        JDFQuery kElem = (JDFQuery) getFirstChildElement(ElementName.QUERY, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFQuery) kElem.getNextSiblingElement(ElementName.QUERY, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Query
      */
     public JDFQuery appendQuery() throws JDFException
@@ -505,6 +606,27 @@ public abstract class JDFAutoJMF extends JDFPool
     public JDFRegistration getRegistration(int iSkip)
     {
         return (JDFRegistration) getElement(ElementName.REGISTRATION, null, iSkip);
+    }
+
+    /**
+     * Get all Registration from the current element
+     * 
+     * @return Collection<JDFRegistration>
+     */
+    public Collection<JDFRegistration> getAllRegistration()
+    {
+        Vector<JDFRegistration> v = new Vector<JDFRegistration>();
+
+        JDFRegistration kElem = (JDFRegistration) getFirstChildElement(ElementName.REGISTRATION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRegistration) kElem.getNextSiblingElement(ElementName.REGISTRATION, null);
+        }
+
+        return v;
     }
 
     /**

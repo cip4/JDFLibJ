@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.postpress.JDFFold;
 import org.cip4.jdflib.span.JDFNameSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoFoldingIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoFoldingIntent extends JDFIntentResource
 {
@@ -259,6 +255,27 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
     public JDFFold getFold(int iSkip)
     {
         return (JDFFold) getElement(ElementName.FOLD, null, iSkip);
+    }
+
+    /**
+     * Get all Fold from the current element
+     * 
+     * @return Collection<JDFFold>
+     */
+    public Collection<JDFFold> getAllFold()
+    {
+        Vector<JDFFold> v = new Vector<JDFFold>();
+
+        JDFFold kElem = (JDFFold) getFirstChildElement(ElementName.FOLD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFold) kElem.getNextSiblingElement(ElementName.FOLD, null);
+        }
+
+        return v;
     }
 
     /**

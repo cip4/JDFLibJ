@@ -82,12 +82,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFDevice;
-    /*
-    *****************************************************************************
-    class JDFAutoIDInfo : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIDInfo extends JDFElement
 {

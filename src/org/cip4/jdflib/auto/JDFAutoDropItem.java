@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -94,12 +96,6 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRollStand;
 import org.cip4.jdflib.resource.process.prepress.JDFInk;
-    /*
-    *****************************************************************************
-    class JDFAutoDropItem : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDropItem extends JDFElement
 {
@@ -438,6 +434,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     }
 
     /**
+     * Get all Component from the current element
+     * 
+     * @return Collection<JDFComponent>
+     */
+    public Collection<JDFComponent> getAllComponent()
+    {
+        Vector<JDFComponent> v = new Vector<JDFComponent>();
+
+        JDFComponent kElem = (JDFComponent) getFirstChildElement(ElementName.COMPONENT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFComponent) kElem.getNextSiblingElement(ElementName.COMPONENT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Component
      */
     public JDFComponent appendComponent() throws JDFException
@@ -472,6 +489,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     public JDFExposedMedia getExposedMedia(int iSkip)
     {
         return (JDFExposedMedia) getElement(ElementName.EXPOSEDMEDIA, null, iSkip);
+    }
+
+    /**
+     * Get all ExposedMedia from the current element
+     * 
+     * @return Collection<JDFExposedMedia>
+     */
+    public Collection<JDFExposedMedia> getAllExposedMedia()
+    {
+        Vector<JDFExposedMedia> v = new Vector<JDFExposedMedia>();
+
+        JDFExposedMedia kElem = (JDFExposedMedia) getFirstChildElement(ElementName.EXPOSEDMEDIA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFExposedMedia) kElem.getNextSiblingElement(ElementName.EXPOSEDMEDIA, null);
+        }
+
+        return v;
     }
 
     /**
@@ -512,6 +550,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     }
 
     /**
+     * Get all Ink from the current element
+     * 
+     * @return Collection<JDFInk>
+     */
+    public Collection<JDFInk> getAllInk()
+    {
+        Vector<JDFInk> v = new Vector<JDFInk>();
+
+        JDFInk kElem = (JDFInk) getFirstChildElement(ElementName.INK, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFInk) kElem.getNextSiblingElement(ElementName.INK, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Ink
      */
     public JDFInk appendInk() throws JDFException
@@ -546,6 +605,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     public JDFMedia getMedia(int iSkip)
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
+    }
+
+    /**
+     * Get all Media from the current element
+     * 
+     * @return Collection<JDFMedia>
+     */
+    public Collection<JDFMedia> getAllMedia()
+    {
+        Vector<JDFMedia> v = new Vector<JDFMedia>();
+
+        JDFMedia kElem = (JDFMedia) getFirstChildElement(ElementName.MEDIA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMedia) kElem.getNextSiblingElement(ElementName.MEDIA, null);
+        }
+
+        return v;
     }
 
     /**
@@ -586,6 +666,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     }
 
     /**
+     * Get all Pallet from the current element
+     * 
+     * @return Collection<JDFPallet>
+     */
+    public Collection<JDFPallet> getAllPallet()
+    {
+        Vector<JDFPallet> v = new Vector<JDFPallet>();
+
+        JDFPallet kElem = (JDFPallet) getFirstChildElement(ElementName.PALLET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPallet) kElem.getNextSiblingElement(ElementName.PALLET, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Pallet
      */
     public JDFPallet appendPallet() throws JDFException
@@ -620,6 +721,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     public JDFRegisterRibbon getRegisterRibbon(int iSkip)
     {
         return (JDFRegisterRibbon) getElement(ElementName.REGISTERRIBBON, null, iSkip);
+    }
+
+    /**
+     * Get all RegisterRibbon from the current element
+     * 
+     * @return Collection<JDFRegisterRibbon>
+     */
+    public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
+    {
+        Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
+
+        JDFRegisterRibbon kElem = (JDFRegisterRibbon) getFirstChildElement(ElementName.REGISTERRIBBON, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRegisterRibbon) kElem.getNextSiblingElement(ElementName.REGISTERRIBBON, null);
+        }
+
+        return v;
     }
 
     /**
@@ -660,6 +782,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     }
 
     /**
+     * Get all Strap from the current element
+     * 
+     * @return Collection<JDFStrap>
+     */
+    public Collection<JDFStrap> getAllStrap()
+    {
+        Vector<JDFStrap> v = new Vector<JDFStrap>();
+
+        JDFStrap kElem = (JDFStrap) getFirstChildElement(ElementName.STRAP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStrap) kElem.getNextSiblingElement(ElementName.STRAP, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Strap
      */
     public JDFStrap appendStrap() throws JDFException
@@ -694,6 +837,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     public JDFBundle getBundle(int iSkip)
     {
         return (JDFBundle) getElement(ElementName.BUNDLE, null, iSkip);
+    }
+
+    /**
+     * Get all Bundle from the current element
+     * 
+     * @return Collection<JDFBundle>
+     */
+    public Collection<JDFBundle> getAllBundle()
+    {
+        Vector<JDFBundle> v = new Vector<JDFBundle>();
+
+        JDFBundle kElem = (JDFBundle) getFirstChildElement(ElementName.BUNDLE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBundle) kElem.getNextSiblingElement(ElementName.BUNDLE, null);
+        }
+
+        return v;
     }
 
     /**
@@ -734,6 +898,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     }
 
     /**
+     * Get all DigitalMedia from the current element
+     * 
+     * @return Collection<JDFDigitalMedia>
+     */
+    public Collection<JDFDigitalMedia> getAllDigitalMedia()
+    {
+        Vector<JDFDigitalMedia> v = new Vector<JDFDigitalMedia>();
+
+        JDFDigitalMedia kElem = (JDFDigitalMedia) getFirstChildElement(ElementName.DIGITALMEDIA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDigitalMedia) kElem.getNextSiblingElement(ElementName.DIGITALMEDIA, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element DigitalMedia
      */
     public JDFDigitalMedia appendDigitalMedia() throws JDFException
@@ -771,6 +956,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     }
 
     /**
+     * Get all RollStand from the current element
+     * 
+     * @return Collection<JDFRollStand>
+     */
+    public Collection<JDFRollStand> getAllRollStand()
+    {
+        Vector<JDFRollStand> v = new Vector<JDFRollStand>();
+
+        JDFRollStand kElem = (JDFRollStand) getFirstChildElement(ElementName.ROLLSTAND, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRollStand) kElem.getNextSiblingElement(ElementName.ROLLSTAND, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element RollStand
      */
     public JDFRollStand appendRollStand() throws JDFException
@@ -805,6 +1011,27 @@ public abstract class JDFAutoDropItem extends JDFElement
     public JDFTool getTool(int iSkip)
     {
         return (JDFTool) getElement(ElementName.TOOL, null, iSkip);
+    }
+
+    /**
+     * Get all Tool from the current element
+     * 
+     * @return Collection<JDFTool>
+     */
+    public Collection<JDFTool> getAllTool()
+    {
+        Vector<JDFTool> v = new Vector<JDFTool>();
+
+        JDFTool kElem = (JDFTool) getFirstChildElement(ElementName.TOOL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTool) kElem.getNextSiblingElement(ElementName.TOOL, null);
+        }
+
+        return v;
     }
 
     /**

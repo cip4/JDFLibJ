@@ -79,12 +79,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDuration;
-    /*
-    *****************************************************************************
-    class JDFAutoDevelopingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDevelopingParams extends JDFResource
 {

@@ -80,12 +80,6 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
-    /*
-    *****************************************************************************
-    class JDFAutoFolderProduction : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoFolderProduction extends JDFElement
 {

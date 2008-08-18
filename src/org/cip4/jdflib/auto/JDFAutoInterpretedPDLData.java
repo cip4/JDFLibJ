@@ -72,12 +72,6 @@ package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoInterpretedPDLData : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoInterpretedPDLData extends JDFResource
 {

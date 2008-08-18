@@ -79,12 +79,6 @@ import org.cip4.jdflib.resource.JDFInsertList;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFSpanGlueType;
 import org.cip4.jdflib.span.JDFSpanMethod;
-    /*
-    *****************************************************************************
-    class JDFAutoInsertingIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoInsertingIntent extends JDFIntentResource
 {

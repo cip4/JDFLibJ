@@ -81,12 +81,6 @@ import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanSurface;
 import org.cip4.jdflib.span.JDFSpanTemperature;
-    /*
-    *****************************************************************************
-    class JDFAutoLaminatingIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
 {

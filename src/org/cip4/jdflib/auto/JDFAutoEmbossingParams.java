@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFEmboss;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoEmbossingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoEmbossingParams extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
     public JDFEmboss getEmboss(int iSkip)
     {
         return (JDFEmboss) getElement(ElementName.EMBOSS, null, iSkip);
+    }
+
+    /**
+     * Get all Emboss from the current element
+     * 
+     * @return Collection<JDFEmboss>
+     */
+    public Collection<JDFEmboss> getAllEmboss()
+    {
+        Vector<JDFEmboss> v = new Vector<JDFEmboss>();
+
+        JDFEmboss kElem = (JDFEmboss) getFirstChildElement(ElementName.EMBOSS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmboss) kElem.getNextSiblingElement(ElementName.EMBOSS, null);
+        }
+
+        return v;
     }
 
     /**

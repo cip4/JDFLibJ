@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -83,12 +86,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFLoc;
-    /*
-    *****************************************************************************
-    class JDFAutoDevCap : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDevCap extends JDFElement
 {
@@ -408,6 +405,27 @@ public abstract class JDFAutoDevCap extends JDFElement
     public JDFLoc getLoc(int iSkip)
     {
         return (JDFLoc) getElement(ElementName.LOC, null, iSkip);
+    }
+
+    /**
+     * Get all Loc from the current element
+     * 
+     * @return Collection<JDFLoc>
+     */
+    public Collection<JDFLoc> getAllLoc()
+    {
+        Vector<JDFLoc> v = new Vector<JDFLoc>();
+
+        JDFLoc kElem = (JDFLoc) getFirstChildElement(ElementName.LOC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLoc) kElem.getNextSiblingElement(ElementName.LOC, null);
+        }
+
+        return v;
     }
 
     /**

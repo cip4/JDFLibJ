@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -85,12 +88,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFModule;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
-    /*
-    *****************************************************************************
-    class JDFAutoDevice : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoDevice extends JDFResource
 {
@@ -778,6 +775,27 @@ public abstract class JDFAutoDevice extends JDFResource
     }
 
     /**
+     * Get all DeviceCap from the current element
+     * 
+     * @return Collection<JDFDeviceCap>
+     */
+    public Collection<JDFDeviceCap> getAllDeviceCap()
+    {
+        Vector<JDFDeviceCap> v = new Vector<JDFDeviceCap>();
+
+        JDFDeviceCap kElem = (JDFDeviceCap) getFirstChildElement(ElementName.DEVICECAP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDeviceCap) kElem.getNextSiblingElement(ElementName.DEVICECAP, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element DeviceCap
      */
     public JDFDeviceCap appendDeviceCap() throws JDFException
@@ -829,6 +847,27 @@ public abstract class JDFAutoDevice extends JDFResource
     public JDFModule getModule(int iSkip)
     {
         return (JDFModule) getElement(ElementName.MODULE, null, iSkip);
+    }
+
+    /**
+     * Get all Module from the current element
+     * 
+     * @return Collection<JDFModule>
+     */
+    public Collection<JDFModule> getAllModule()
+    {
+        Vector<JDFModule> v = new Vector<JDFModule>();
+
+        JDFModule kElem = (JDFModule) getFirstChildElement(ElementName.MODULE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFModule) kElem.getNextSiblingElement(ElementName.MODULE, null);
+        }
+
+        return v;
     }
 
     /**

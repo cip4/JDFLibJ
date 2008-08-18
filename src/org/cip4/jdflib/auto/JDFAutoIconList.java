@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFIcon;
-    /*
-    *****************************************************************************
-    class JDFAutoIconList : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoIconList extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoIconList extends JDFElement
     public JDFIcon getIcon(int iSkip)
     {
         return (JDFIcon) getElement(ElementName.ICON, null, iSkip);
+    }
+
+    /**
+     * Get all Icon from the current element
+     * 
+     * @return Collection<JDFIcon>
+     */
+    public Collection<JDFIcon> getAllIcon()
+    {
+        Vector<JDFIcon> v = new Vector<JDFIcon>();
+
+        JDFIcon kElem = (JDFIcon) getFirstChildElement(ElementName.ICON, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFIcon) kElem.getNextSiblingElement(ElementName.ICON, null);
+        }
+
+        return v;
     }
 
     /**
