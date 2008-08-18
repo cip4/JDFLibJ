@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
-    /*
-    *****************************************************************************
-    class JDFAutoLayoutElementPart : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLayoutElementPart extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
     public JDFBarcodeProductionParams getBarcodeProductionParams(int iSkip)
     {
         return (JDFBarcodeProductionParams) getElement(ElementName.BARCODEPRODUCTIONPARAMS, null, iSkip);
+    }
+
+    /**
+     * Get all BarcodeProductionParams from the current element
+     * 
+     * @return Collection<JDFBarcodeProductionParams>
+     */
+    public Collection<JDFBarcodeProductionParams> getAllBarcodeProductionParams()
+    {
+        Vector<JDFBarcodeProductionParams> v = new Vector<JDFBarcodeProductionParams>();
+
+        JDFBarcodeProductionParams kElem = (JDFBarcodeProductionParams) getFirstChildElement(ElementName.BARCODEPRODUCTIONPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBarcodeProductionParams) kElem.getNextSiblingElement(ElementName.BARCODEPRODUCTIONPARAMS, null);
+        }
+
+        return v;
     }
 
     /**

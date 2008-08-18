@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,12 +89,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoModulePhase : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoModulePhase extends JDFElement
 {
@@ -462,6 +458,27 @@ public abstract class JDFAutoModulePhase extends JDFElement
     public JDFEmployee getEmployee(int iSkip)
     {
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
     }
 
     /**

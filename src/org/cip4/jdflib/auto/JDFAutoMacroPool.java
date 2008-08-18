@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFmacro;
-    /*
-    *****************************************************************************
-    class JDFAutoMacroPool : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoMacroPool extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoMacroPool extends JDFElement
     public JDFmacro getmacro(int iSkip)
     {
         return (JDFmacro) getElement(ElementName.MACRO, null, iSkip);
+    }
+
+    /**
+     * Get all macro from the current element
+     * 
+     * @return Collection<JDFmacro>
+     */
+    public Collection<JDFmacro> getAllmacro()
+    {
+        Vector<JDFmacro> v = new Vector<JDFmacro>();
+
+        JDFmacro kElem = (JDFmacro) getFirstChildElement(ElementName.MACRO, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFmacro) kElem.getNextSiblingElement(ElementName.MACRO, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -80,12 +83,6 @@ import org.cip4.jdflib.resource.process.JDFLongFold;
 import org.cip4.jdflib.resource.process.JDFLongGlue;
 import org.cip4.jdflib.resource.process.JDFLongPerforate;
 import org.cip4.jdflib.resource.process.JDFLongSlit;
-    /*
-    *****************************************************************************
-    class JDFAutoLongitudinalRibbonOperationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResource
 {
@@ -197,6 +194,27 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     }
 
     /**
+     * Get all LongFold from the current element
+     * 
+     * @return Collection<JDFLongFold>
+     */
+    public Collection<JDFLongFold> getAllLongFold()
+    {
+        Vector<JDFLongFold> v = new Vector<JDFLongFold>();
+
+        JDFLongFold kElem = (JDFLongFold) getFirstChildElement(ElementName.LONGFOLD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLongFold) kElem.getNextSiblingElement(ElementName.LONGFOLD, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element LongFold
      */
     public JDFLongFold appendLongFold() throws JDFException
@@ -222,6 +240,27 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     public JDFLongGlue getLongGlue(int iSkip)
     {
         return (JDFLongGlue) getElement(ElementName.LONGGLUE, null, iSkip);
+    }
+
+    /**
+     * Get all LongGlue from the current element
+     * 
+     * @return Collection<JDFLongGlue>
+     */
+    public Collection<JDFLongGlue> getAllLongGlue()
+    {
+        Vector<JDFLongGlue> v = new Vector<JDFLongGlue>();
+
+        JDFLongGlue kElem = (JDFLongGlue) getFirstChildElement(ElementName.LONGGLUE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLongGlue) kElem.getNextSiblingElement(ElementName.LONGGLUE, null);
+        }
+
+        return v;
     }
 
     /**
@@ -253,6 +292,27 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     }
 
     /**
+     * Get all LongPerforate from the current element
+     * 
+     * @return Collection<JDFLongPerforate>
+     */
+    public Collection<JDFLongPerforate> getAllLongPerforate()
+    {
+        Vector<JDFLongPerforate> v = new Vector<JDFLongPerforate>();
+
+        JDFLongPerforate kElem = (JDFLongPerforate) getFirstChildElement(ElementName.LONGPERFORATE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLongPerforate) kElem.getNextSiblingElement(ElementName.LONGPERFORATE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element LongPerforate
      */
     public JDFLongPerforate appendLongPerforate() throws JDFException
@@ -278,6 +338,27 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     public JDFLongSlit getLongSlit(int iSkip)
     {
         return (JDFLongSlit) getElement(ElementName.LONGSLIT, null, iSkip);
+    }
+
+    /**
+     * Get all LongSlit from the current element
+     * 
+     * @return Collection<JDFLongSlit>
+     */
+    public Collection<JDFLongSlit> getAllLongSlit()
+    {
+        Vector<JDFLongSlit> v = new Vector<JDFLongSlit>();
+
+        JDFLongSlit kElem = (JDFLongSlit) getFirstChildElement(ElementName.LONGSLIT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLongSlit) kElem.getNextSiblingElement(ElementName.LONGSLIT, null);
+        }
+
+        return v;
     }
 
     /**

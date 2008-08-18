@@ -85,12 +85,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFFlushQueueParams;
-    /*
-    *****************************************************************************
-    class JDFAutoShutDownCmdParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoShutDownCmdParams extends JDFElement
 {

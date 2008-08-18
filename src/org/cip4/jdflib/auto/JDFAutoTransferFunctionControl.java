@@ -85,12 +85,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
-    /*
-    *****************************************************************************
-    class JDFAutoTransferFunctionControl : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTransferFunctionControl extends JDFResource
 {

@@ -89,12 +89,6 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoScanParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoScanParams extends JDFResource
 {

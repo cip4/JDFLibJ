@@ -84,12 +84,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.prepress.JDFTrappingParams;
-    /*
-    *****************************************************************************
-    class JDFAutoTrapRegion : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTrapRegion extends JDFResource
 {

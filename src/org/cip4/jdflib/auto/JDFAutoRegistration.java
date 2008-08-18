@@ -77,12 +77,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFSubscription;
-    /*
-    *****************************************************************************
-    class JDFAutoRegistration : public JDFMessage
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoRegistration extends JDFMessage
 {

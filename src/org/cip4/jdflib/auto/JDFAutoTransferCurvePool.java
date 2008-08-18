@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFTransferCurveSet;
-    /*
-    *****************************************************************************
-    class JDFAutoTransferCurvePool : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTransferCurvePool extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
     public JDFTransferCurveSet getTransferCurveSet(int iSkip)
     {
         return (JDFTransferCurveSet) getElement(ElementName.TRANSFERCURVESET, null, iSkip);
+    }
+
+    /**
+     * Get all TransferCurveSet from the current element
+     * 
+     * @return Collection<JDFTransferCurveSet>
+     */
+    public Collection<JDFTransferCurveSet> getAllTransferCurveSet()
+    {
+        Vector<JDFTransferCurveSet> v = new Vector<JDFTransferCurveSet>();
+
+        JDFTransferCurveSet kElem = (JDFTransferCurveSet) getFirstChildElement(ElementName.TRANSFERCURVESET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTransferCurveSet) kElem.getNextSiblingElement(ElementName.TRANSFERCURVESET, null);
+        }
+
+        return v;
     }
 
     /**

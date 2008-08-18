@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,12 +85,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-    /*
-    *****************************************************************************
-    class JDFAutoPreflightDetail : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreflightDetail extends JDFElement
 {
@@ -254,6 +250,27 @@ public abstract class JDFAutoPreflightDetail extends JDFElement
     public JDFElement getValue(int iSkip)
     {
         return (JDFElement) getElement(ElementName.VALUE, null, iSkip);
+    }
+
+    /**
+     * Get all Value from the current element
+     * 
+     * @return Collection<JDFElement>
+     */
+    public Collection<JDFElement> getAllValue()
+    {
+        Vector<JDFElement> v = new Vector<JDFElement>();
+
+        JDFElement kElem = (JDFElement) getFirstChildElement(ElementName.VALUE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFElement) kElem.getNextSiblingElement(ElementName.VALUE, null);
+        }
+
+        return v;
     }
 
     /**

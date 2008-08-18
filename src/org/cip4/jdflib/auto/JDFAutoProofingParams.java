@@ -89,12 +89,6 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /*
-    *****************************************************************************
-    class JDFAutoProofingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoProofingParams extends JDFResource
 {

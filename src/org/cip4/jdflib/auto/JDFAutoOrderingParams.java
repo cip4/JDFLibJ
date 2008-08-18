@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,12 +85,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
-    /*
-    *****************************************************************************
-    class JDFAutoOrderingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoOrderingParams extends JDFResource
 {
@@ -290,6 +287,27 @@ public abstract class JDFAutoOrderingParams extends JDFResource
     public JDFContact getContact(int iSkip)
     {
         return (JDFContact) getElement(ElementName.CONTACT, null, iSkip);
+    }
+
+    /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
     }
 
     /**

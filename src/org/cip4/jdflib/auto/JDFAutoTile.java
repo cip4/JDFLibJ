@@ -86,12 +86,6 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
-    /*
-    *****************************************************************************
-    class JDFAutoTile : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTile extends JDFResource
 {

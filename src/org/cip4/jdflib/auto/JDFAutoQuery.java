@@ -87,12 +87,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFSubscription;
-    /*
-    *****************************************************************************
-    class JDFAutoQuery : public JDFMessage
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoQuery extends JDFMessage
 {

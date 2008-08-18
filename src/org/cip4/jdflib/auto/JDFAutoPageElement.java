@@ -80,12 +80,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
-    /*
-    *****************************************************************************
-    class JDFAutoPageElement : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPageElement extends JDFElement
 {

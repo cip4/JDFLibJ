@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartStatus;
 import org.cip4.jdflib.pool.JDFPool;
-    /*
-    *****************************************************************************
-    class JDFAutoStatusPool : public JDFPool
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoStatusPool extends JDFPool
 {
@@ -217,6 +214,27 @@ public abstract class JDFAutoStatusPool extends JDFPool
     public JDFPartStatus getPartStatus(int iSkip)
     {
         return (JDFPartStatus) getElement(ElementName.PARTSTATUS, null, iSkip);
+    }
+
+    /**
+     * Get all PartStatus from the current element
+     * 
+     * @return Collection<JDFPartStatus>
+     */
+    public Collection<JDFPartStatus> getAllPartStatus()
+    {
+        Vector<JDFPartStatus> v = new Vector<JDFPartStatus>();
+
+        JDFPartStatus kElem = (JDFPartStatus) getFirstChildElement(ElementName.PARTSTATUS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPartStatus) kElem.getNextSiblingElement(ElementName.PARTSTATUS, null);
+        }
+
+        return v;
     }
 
     /**

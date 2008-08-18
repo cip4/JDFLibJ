@@ -92,12 +92,6 @@ import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFSpanOpacity;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoMediaIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoMediaIntent extends JDFIntentResource
 {

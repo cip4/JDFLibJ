@@ -88,12 +88,6 @@ import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFSpanCutType;
 import org.cip4.jdflib.span.JDFSpanShapeType;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoShapeCut : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoShapeCut extends JDFElement
 {

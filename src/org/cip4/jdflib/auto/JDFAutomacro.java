@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -83,12 +86,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFcall;
 import org.cip4.jdflib.resource.devicecapability.JDFchoice;
 import org.cip4.jdflib.resource.devicecapability.JDFset;
-    /*
-    *****************************************************************************
-    class JDFAutomacro : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutomacro extends JDFElement
 {
@@ -223,6 +220,27 @@ public abstract class JDFAutomacro extends JDFElement
     }
 
     /**
+     * Get all choice from the current element
+     * 
+     * @return Collection<JDFchoice>
+     */
+    public Collection<JDFchoice> getAllchoice()
+    {
+        Vector<JDFchoice> v = new Vector<JDFchoice>();
+
+        JDFchoice kElem = (JDFchoice) getFirstChildElement(ElementName.CHOICE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFchoice) kElem.getNextSiblingElement(ElementName.CHOICE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element choice
      */
     public JDFchoice appendchoice() throws JDFException
@@ -251,6 +269,27 @@ public abstract class JDFAutomacro extends JDFElement
     }
 
     /**
+     * Get all set from the current element
+     * 
+     * @return Collection<JDFset>
+     */
+    public Collection<JDFset> getAllset()
+    {
+        Vector<JDFset> v = new Vector<JDFset>();
+
+        JDFset kElem = (JDFset) getFirstChildElement(ElementName.SET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFset) kElem.getNextSiblingElement(ElementName.SET, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element set
      */
     public JDFset appendset() throws JDFException
@@ -276,6 +315,27 @@ public abstract class JDFAutomacro extends JDFElement
     public JDFcall getcall(int iSkip)
     {
         return (JDFcall) getElement(ElementName.CALL, null, iSkip);
+    }
+
+    /**
+     * Get all call from the current element
+     * 
+     * @return Collection<JDFcall>
+     */
+    public Collection<JDFcall> getAllcall()
+    {
+        Vector<JDFcall> v = new Vector<JDFcall>();
+
+        JDFcall kElem = (JDFcall) getFirstChildElement(ElementName.CALL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFcall) kElem.getNextSiblingElement(ElementName.CALL, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBoxArgument;
 import org.cip4.jdflib.resource.process.JDFBoxToBoxDifference;
-    /*
-    *****************************************************************************
-    class JDFAutoPreflightArgument : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreflightArgument extends JDFElement
 {
@@ -179,6 +176,27 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
     }
 
     /**
+     * Get all BoxArgument from the current element
+     * 
+     * @return Collection<JDFBoxArgument>
+     */
+    public Collection<JDFBoxArgument> getAllBoxArgument()
+    {
+        Vector<JDFBoxArgument> v = new Vector<JDFBoxArgument>();
+
+        JDFBoxArgument kElem = (JDFBoxArgument) getFirstChildElement(ElementName.BOXARGUMENT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBoxArgument) kElem.getNextSiblingElement(ElementName.BOXARGUMENT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element BoxArgument
      */
     public JDFBoxArgument appendBoxArgument() throws JDFException
@@ -204,6 +222,27 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
     public JDFBoxToBoxDifference getBoxToBoxDifference(int iSkip)
     {
         return (JDFBoxToBoxDifference) getElement(ElementName.BOXTOBOXDIFFERENCE, null, iSkip);
+    }
+
+    /**
+     * Get all BoxToBoxDifference from the current element
+     * 
+     * @return Collection<JDFBoxToBoxDifference>
+     */
+    public Collection<JDFBoxToBoxDifference> getAllBoxToBoxDifference()
+    {
+        Vector<JDFBoxToBoxDifference> v = new Vector<JDFBoxToBoxDifference>();
+
+        JDFBoxToBoxDifference kElem = (JDFBoxToBoxDifference) getFirstChildElement(ElementName.BOXTOBOXDIFFERENCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBoxToBoxDifference) kElem.getNextSiblingElement(ElementName.BOXTOBOXDIFFERENCE, null);
+        }
+
+        return v;
     }
 
     /**

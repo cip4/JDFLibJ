@@ -88,12 +88,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFImageSetterParams;
-    /*
-    *****************************************************************************
-    class JDFAutoPreviewGenerationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreviewGenerationParams extends JDFResource
 {

@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFValue;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
-    /*
-    *****************************************************************************
-    class JDFAutoPDFPathEvaluation : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPDFPathEvaluation extends JDFResource
 {
@@ -244,6 +240,27 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
     }
 
     /**
+     * Get all BasicPreflightTest from the current element
+     * 
+     * @return Collection<JDFBasicPreflightTest>
+     */
+    public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
+    {
+        Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+
+        JDFBasicPreflightTest kElem = (JDFBasicPreflightTest) getFirstChildElement(ElementName.BASICPREFLIGHTTEST, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBasicPreflightTest) kElem.getNextSiblingElement(ElementName.BASICPREFLIGHTTEST, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element BasicPreflightTest
      */
     public JDFBasicPreflightTest appendBasicPreflightTest() throws JDFException
@@ -269,6 +286,27 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
     public JDFValue getValue(int iSkip)
     {
         return (JDFValue) getElement(ElementName.VALUE, null, iSkip);
+    }
+
+    /**
+     * Get all Value from the current element
+     * 
+     * @return Collection<JDFValue>
+     */
+    public Collection<JDFValue> getAllValue()
+    {
+        Vector<JDFValue> v = new Vector<JDFValue>();
+
+        JDFValue kElem = (JDFValue) getFirstChildElement(ElementName.VALUE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFValue) kElem.getNextSiblingElement(ElementName.VALUE, null);
+        }
+
+        return v;
     }
 
     /**

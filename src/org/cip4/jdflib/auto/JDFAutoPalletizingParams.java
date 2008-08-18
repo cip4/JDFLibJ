@@ -76,12 +76,6 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoPalletizingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPalletizingParams extends JDFResource
 {

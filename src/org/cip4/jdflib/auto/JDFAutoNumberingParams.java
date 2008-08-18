@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFNumberingParam;
-    /*
-    *****************************************************************************
-    class JDFAutoNumberingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoNumberingParams extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoNumberingParams extends JDFResource
     public JDFNumberingParam getNumberingParam(int iSkip)
     {
         return (JDFNumberingParam) getElement(ElementName.NUMBERINGPARAM, null, iSkip);
+    }
+
+    /**
+     * Get all NumberingParam from the current element
+     * 
+     * @return Collection<JDFNumberingParam>
+     */
+    public Collection<JDFNumberingParam> getAllNumberingParam()
+    {
+        Vector<JDFNumberingParam> v = new Vector<JDFNumberingParam>();
+
+        JDFNumberingParam kElem = (JDFNumberingParam) getFirstChildElement(ElementName.NUMBERINGPARAM, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFNumberingParam) kElem.getNextSiblingElement(ElementName.NUMBERINGPARAM, null);
+        }
+
+        return v;
     }
 
     /**

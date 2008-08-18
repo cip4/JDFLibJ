@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,12 +85,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFPayment;
 import org.cip4.jdflib.resource.intent.JDFPricing;
-    /*
-    *****************************************************************************
-    class JDFAutoPricing : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPricing extends JDFElement
 {
@@ -313,6 +310,27 @@ public abstract class JDFAutoPricing extends JDFElement
     }
 
     /**
+     * Get all Payment from the current element
+     * 
+     * @return Collection<JDFPayment>
+     */
+    public Collection<JDFPayment> getAllPayment()
+    {
+        Vector<JDFPayment> v = new Vector<JDFPayment>();
+
+        JDFPayment kElem = (JDFPayment) getFirstChildElement(ElementName.PAYMENT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPayment) kElem.getNextSiblingElement(ElementName.PAYMENT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Payment
      */
     public JDFPayment appendPayment() throws JDFException
@@ -338,6 +356,27 @@ public abstract class JDFAutoPricing extends JDFElement
     public JDFPricing getPricing(int iSkip)
     {
         return (JDFPricing) getElement(ElementName.PRICING, null, iSkip);
+    }
+
+    /**
+     * Get all Pricing from the current element
+     * 
+     * @return Collection<JDFPricing>
+     */
+    public Collection<JDFPricing> getAllPricing()
+    {
+        Vector<JDFPricing> v = new Vector<JDFPricing>();
+
+        JDFPricing kElem = (JDFPricing) getFirstChildElement(ElementName.PRICING, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPricing) kElem.getNextSiblingElement(ElementName.PRICING, null);
+        }
+
+        return v;
     }
 
     /**

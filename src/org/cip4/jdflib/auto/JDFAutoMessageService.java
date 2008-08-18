@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -91,12 +93,6 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCapPool;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
-    /*
-    *****************************************************************************
-    class JDFAutoMessageService : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoMessageService extends JDFElement
 {
@@ -540,6 +536,27 @@ public abstract class JDFAutoMessageService extends JDFElement
     public JDFDevCaps getDevCaps(int iSkip)
     {
         return (JDFDevCaps) getElement(ElementName.DEVCAPS, null, iSkip);
+    }
+
+    /**
+     * Get all DevCaps from the current element
+     * 
+     * @return Collection<JDFDevCaps>
+     */
+    public Collection<JDFDevCaps> getAllDevCaps()
+    {
+        Vector<JDFDevCaps> v = new Vector<JDFDevCaps>();
+
+        JDFDevCaps kElem = (JDFDevCaps) getFirstChildElement(ElementName.DEVCAPS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevCaps) kElem.getNextSiblingElement(ElementName.DEVCAPS, null);
+        }
+
+        return v;
     }
 
     /**

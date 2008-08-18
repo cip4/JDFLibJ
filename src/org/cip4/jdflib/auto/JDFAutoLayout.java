@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -95,12 +97,6 @@ import org.cip4.jdflib.resource.process.JDFInsertSheet;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
 import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
-    /*
-    *****************************************************************************
-    class JDFAutoLayout : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLayout extends JDFResource
 {
@@ -476,6 +472,27 @@ public abstract class JDFAutoLayout extends JDFResource
     }
 
     /**
+     * Get all ContentObject from the current element
+     * 
+     * @return Collection<JDFContentObject>
+     */
+    public Collection<JDFContentObject> getAllContentObject()
+    {
+        Vector<JDFContentObject> v = new Vector<JDFContentObject>();
+
+        JDFContentObject kElem = (JDFContentObject) getFirstChildElement(ElementName.CONTENTOBJECT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContentObject) kElem.getNextSiblingElement(ElementName.CONTENTOBJECT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ContentObject
      */
     public JDFContentObject appendContentObject() throws JDFException
@@ -501,6 +518,27 @@ public abstract class JDFAutoLayout extends JDFResource
     public JDFInsertSheet getInsertSheet(int iSkip)
     {
         return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
+    }
+
+    /**
+     * Get all InsertSheet from the current element
+     * 
+     * @return Collection<JDFInsertSheet>
+     */
+    public Collection<JDFInsertSheet> getAllInsertSheet()
+    {
+        Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
+
+        JDFInsertSheet kElem = (JDFInsertSheet) getFirstChildElement(ElementName.INSERTSHEET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFInsertSheet) kElem.getNextSiblingElement(ElementName.INSERTSHEET, null);
+        }
+
+        return v;
     }
 
     /**
@@ -567,6 +605,27 @@ public abstract class JDFAutoLayout extends JDFResource
     }
 
     /**
+     * Get all MarkObject from the current element
+     * 
+     * @return Collection<JDFMarkObject>
+     */
+    public Collection<JDFMarkObject> getAllMarkObject()
+    {
+        Vector<JDFMarkObject> v = new Vector<JDFMarkObject>();
+
+        JDFMarkObject kElem = (JDFMarkObject) getFirstChildElement(ElementName.MARKOBJECT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMarkObject) kElem.getNextSiblingElement(ElementName.MARKOBJECT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element MarkObject
      */
     public JDFMarkObject appendMarkObject() throws JDFException
@@ -592,6 +651,27 @@ public abstract class JDFAutoLayout extends JDFResource
     public JDFMedia getMedia(int iSkip)
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
+    }
+
+    /**
+     * Get all Media from the current element
+     * 
+     * @return Collection<JDFMedia>
+     */
+    public Collection<JDFMedia> getAllMedia()
+    {
+        Vector<JDFMedia> v = new Vector<JDFMedia>();
+
+        JDFMedia kElem = (JDFMedia) getFirstChildElement(ElementName.MEDIA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMedia) kElem.getNextSiblingElement(ElementName.MEDIA, null);
+        }
+
+        return v;
     }
 
     /**
@@ -664,6 +744,27 @@ public abstract class JDFAutoLayout extends JDFResource
     public JDFSignature getSignature(int iSkip)
     {
         return (JDFSignature) getElement(ElementName.SIGNATURE, null, iSkip);
+    }
+
+    /**
+     * Get all Signature from the current element
+     * 
+     * @return Collection<JDFSignature>
+     */
+    public Collection<JDFSignature> getAllSignature()
+    {
+        Vector<JDFSignature> v = new Vector<JDFSignature>();
+
+        JDFSignature kElem = (JDFSignature) getFirstChildElement(ElementName.SIGNATURE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSignature) kElem.getNextSiblingElement(ElementName.SIGNATURE, null);
+        }
+
+        return v;
     }
 
     /**

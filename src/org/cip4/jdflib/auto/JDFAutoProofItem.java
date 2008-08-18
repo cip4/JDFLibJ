@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -92,12 +94,6 @@ import org.cip4.jdflib.span.JDFSpanColorType;
 import org.cip4.jdflib.span.JDFSpanImageStrategy;
 import org.cip4.jdflib.span.JDFSpanProofType;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoProofItem : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoProofItem extends JDFElement
 {
@@ -498,6 +494,27 @@ public abstract class JDFAutoProofItem extends JDFElement
     public JDFSeparationSpec getSeparationSpec(int iSkip)
     {
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+    }
+
+    /**
+     * Get all SeparationSpec from the current element
+     * 
+     * @return Collection<JDFSeparationSpec>
+     */
+    public Collection<JDFSeparationSpec> getAllSeparationSpec()
+    {
+        Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+
+        JDFSeparationSpec kElem = (JDFSeparationSpec) getFirstChildElement(ElementName.SEPARATIONSPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSeparationSpec) kElem.getNextSiblingElement(ElementName.SEPARATIONSPEC, null);
+        }
+
+        return v;
     }
 
     /**

@@ -86,12 +86,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoSizeIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoSizeIntent extends JDFIntentResource
 {

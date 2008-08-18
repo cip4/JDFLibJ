@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -90,12 +92,6 @@ import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoQueueEntry : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoQueueEntry extends JDFElement
 {
@@ -562,6 +558,27 @@ public abstract class JDFAutoQueueEntry extends JDFElement
     }
 
     /**
+     * Get all Part from the current element
+     * 
+     * @return Collection<JDFPart>
+     */
+    public Collection<JDFPart> getAllPart()
+    {
+        Vector<JDFPart> v = new Vector<JDFPart>();
+
+        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Part
      */
     public JDFPart appendPart() throws JDFException
@@ -587,6 +604,27 @@ public abstract class JDFAutoQueueEntry extends JDFElement
     public JDFPreview getPreview(int iSkip)
     {
         return (JDFPreview) getElement(ElementName.PREVIEW, null, iSkip);
+    }
+
+    /**
+     * Get all Preview from the current element
+     * 
+     * @return Collection<JDFPreview>
+     */
+    public Collection<JDFPreview> getAllPreview()
+    {
+        Vector<JDFPreview> v = new Vector<JDFPreview>();
+
+        JDFPreview kElem = (JDFPreview) getFirstChildElement(ElementName.PREVIEW, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPreview) kElem.getNextSiblingElement(ElementName.PREVIEW, null);
+        }
+
+        return v;
     }
 
     /**

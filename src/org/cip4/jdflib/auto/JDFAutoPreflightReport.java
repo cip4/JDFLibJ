@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,12 +90,6 @@ import org.cip4.jdflib.resource.process.JDFPRItem;
 import org.cip4.jdflib.resource.process.JDFPreflightParams;
 import org.cip4.jdflib.resource.process.JDFPreflightReportRulePool;
 import org.cip4.jdflib.resource.process.JDFRunList;
-    /*
-    *****************************************************************************
-    class JDFAutoPreflightReport : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreflightReport extends JDFResource
 {
@@ -436,6 +432,27 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     public JDFPRItem getPRItem(int iSkip)
     {
         return (JDFPRItem) getElement(ElementName.PRITEM, null, iSkip);
+    }
+
+    /**
+     * Get all PRItem from the current element
+     * 
+     * @return Collection<JDFPRItem>
+     */
+    public Collection<JDFPRItem> getAllPRItem()
+    {
+        Vector<JDFPRItem> v = new Vector<JDFPRItem>();
+
+        JDFPRItem kElem = (JDFPRItem) getFirstChildElement(ElementName.PRITEM, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPRItem) kElem.getNextSiblingElement(ElementName.PRITEM, null);
+        }
+
+        return v;
     }
 
     /**

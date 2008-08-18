@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFProofItem;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
-    /*
-    *****************************************************************************
-    class JDFAutoProofingIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoProofingIntent extends JDFIntentResource
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
     public JDFProofItem getProofItem(int iSkip)
     {
         return (JDFProofItem) getElement(ElementName.PROOFITEM, null, iSkip);
+    }
+
+    /**
+     * Get all ProofItem from the current element
+     * 
+     * @return Collection<JDFProofItem>
+     */
+    public Collection<JDFProofItem> getAllProofItem()
+    {
+        Vector<JDFProofItem> v = new Vector<JDFProofItem>();
+
+        JDFProofItem kElem = (JDFProofItem) getFirstChildElement(ElementName.PROOFITEM, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFProofItem) kElem.getNextSiblingElement(ElementName.PROOFITEM, null);
+        }
+
+        return v;
     }
 
     /**

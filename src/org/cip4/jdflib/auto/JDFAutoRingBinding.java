@@ -81,12 +81,6 @@ import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanHoleType;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoRingBinding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoRingBinding extends JDFElement
 {

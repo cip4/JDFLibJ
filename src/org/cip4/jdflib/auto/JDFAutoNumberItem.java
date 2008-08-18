@@ -82,12 +82,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
-    /*
-    *****************************************************************************
-    class JDFAutoNumberItem : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoNumberItem extends JDFElement
 {

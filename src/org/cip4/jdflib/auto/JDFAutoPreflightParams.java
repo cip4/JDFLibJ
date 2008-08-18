@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
-    /*
-    *****************************************************************************
-    class JDFAutoPreflightParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreflightParams extends JDFResource
 {
@@ -190,6 +187,27 @@ public abstract class JDFAutoPreflightParams extends JDFResource
     public JDFActionPool getActionPool(int iSkip)
     {
         return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, iSkip);
+    }
+
+    /**
+     * Get all ActionPool from the current element
+     * 
+     * @return Collection<JDFActionPool>
+     */
+    public Collection<JDFActionPool> getAllActionPool()
+    {
+        Vector<JDFActionPool> v = new Vector<JDFActionPool>();
+
+        JDFActionPool kElem = (JDFActionPool) getFirstChildElement(ElementName.ACTIONPOOL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFActionPool) kElem.getNextSiblingElement(ElementName.ACTIONPOOL, null);
+        }
+
+        return v;
     }
 
     /**

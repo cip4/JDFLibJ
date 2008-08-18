@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,12 +89,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
-    /*
-    *****************************************************************************
-    class JDFAutoStrap : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoStrap extends JDFResource
 {
@@ -313,6 +309,27 @@ public abstract class JDFAutoStrap extends JDFResource
     }
 
     /**
+     * Get all Contact from the current element
+     * 
+     * @return Collection<JDFContact>
+     */
+    public Collection<JDFContact> getAllContact()
+    {
+        Vector<JDFContact> v = new Vector<JDFContact>();
+
+        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Contact
      */
     public JDFContact appendContact() throws JDFException
@@ -347,6 +364,27 @@ public abstract class JDFAutoStrap extends JDFResource
     public JDFIdentificationField getIdentificationField(int iSkip)
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+    }
+
+    /**
+     * Get all IdentificationField from the current element
+     * 
+     * @return Collection<JDFIdentificationField>
+     */
+    public Collection<JDFIdentificationField> getAllIdentificationField()
+    {
+        Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+
+        JDFIdentificationField kElem = (JDFIdentificationField) getFirstChildElement(ElementName.IDENTIFICATIONFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFIdentificationField) kElem.getNextSiblingElement(ElementName.IDENTIFICATIONFIELD, null);
+        }
+
+        return v;
     }
 
     /**

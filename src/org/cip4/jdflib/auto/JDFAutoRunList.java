@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -95,12 +97,6 @@ import org.cip4.jdflib.resource.process.JDFDynamicInput;
 import org.cip4.jdflib.resource.process.JDFInsertSheet;
 import org.cip4.jdflib.resource.process.JDFInterpretedPDLData;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
-    /*
-    *****************************************************************************
-    class JDFAutoRunList : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoRunList extends JDFResource
 {
@@ -926,6 +922,27 @@ public abstract class JDFAutoRunList extends JDFResource
     }
 
     /**
+     * Get all DynamicInput from the current element
+     * 
+     * @return Collection<JDFDynamicInput>
+     */
+    public Collection<JDFDynamicInput> getAllDynamicInput()
+    {
+        Vector<JDFDynamicInput> v = new Vector<JDFDynamicInput>();
+
+        JDFDynamicInput kElem = (JDFDynamicInput) getFirstChildElement(ElementName.DYNAMICINPUT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDynamicInput) kElem.getNextSiblingElement(ElementName.DYNAMICINPUT, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element DynamicInput
      */
     public JDFDynamicInput appendDynamicInput() throws JDFException
@@ -951,6 +968,27 @@ public abstract class JDFAutoRunList extends JDFResource
     public JDFInsertSheet getInsertSheet(int iSkip)
     {
         return (JDFInsertSheet) getElement(ElementName.INSERTSHEET, null, iSkip);
+    }
+
+    /**
+     * Get all InsertSheet from the current element
+     * 
+     * @return Collection<JDFInsertSheet>
+     */
+    public Collection<JDFInsertSheet> getAllInsertSheet()
+    {
+        Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
+
+        JDFInsertSheet kElem = (JDFInsertSheet) getFirstChildElement(ElementName.INSERTSHEET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFInsertSheet) kElem.getNextSiblingElement(ElementName.INSERTSHEET, null);
+        }
+
+        return v;
     }
 
     /**

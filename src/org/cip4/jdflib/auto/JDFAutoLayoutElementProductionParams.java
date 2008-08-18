@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
-    /*
-    *****************************************************************************
-    class JDFAutoLayoutElementProductionParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     public JDFLayoutElementPart getLayoutElementPart(int iSkip)
     {
         return (JDFLayoutElementPart) getElement(ElementName.LAYOUTELEMENTPART, null, iSkip);
+    }
+
+    /**
+     * Get all LayoutElementPart from the current element
+     * 
+     * @return Collection<JDFLayoutElementPart>
+     */
+    public Collection<JDFLayoutElementPart> getAllLayoutElementPart()
+    {
+        Vector<JDFLayoutElementPart> v = new Vector<JDFLayoutElementPart>();
+
+        JDFLayoutElementPart kElem = (JDFLayoutElementPart) getFirstChildElement(ElementName.LAYOUTELEMENTPART, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLayoutElementPart) kElem.getNextSiblingElement(ElementName.LAYOUTELEMENTPART, null);
+        }
+
+        return v;
     }
 
     /**

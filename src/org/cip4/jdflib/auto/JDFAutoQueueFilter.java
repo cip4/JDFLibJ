@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -91,12 +92,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoQueueFilter : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoQueueFilter extends JDFElement
 {
@@ -478,6 +473,27 @@ public abstract class JDFAutoQueueFilter extends JDFElement
     }
 
     /**
+     * Get all QueueEntryDef from the current element
+     * 
+     * @return Collection<JDFQueueEntryDef>
+     */
+    public Collection<JDFQueueEntryDef> getAllQueueEntryDef()
+    {
+        Vector<JDFQueueEntryDef> v = new Vector<JDFQueueEntryDef>();
+
+        JDFQueueEntryDef kElem = (JDFQueueEntryDef) getFirstChildElement(ElementName.QUEUEENTRYDEF, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFQueueEntryDef) kElem.getNextSiblingElement(ElementName.QUEUEENTRYDEF, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element QueueEntryDef
      */
     public JDFQueueEntryDef appendQueueEntryDef() throws JDFException
@@ -503,6 +519,27 @@ public abstract class JDFAutoQueueFilter extends JDFElement
     public JDFDevice getDevice(int iSkip)
     {
         return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
+    }
+
+    /**
+     * Get all Device from the current element
+     * 
+     * @return Collection<JDFDevice>
+     */
+    public Collection<JDFDevice> getAllDevice()
+    {
+        Vector<JDFDevice> v = new Vector<JDFDevice>();
+
+        JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
+        }
+
+        return v;
     }
 
     /**

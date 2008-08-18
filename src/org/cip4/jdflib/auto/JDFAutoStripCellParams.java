@@ -83,12 +83,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
-    /*
-    *****************************************************************************
-    class JDFAutoStripCellParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoStripCellParams extends JDFElement
 {

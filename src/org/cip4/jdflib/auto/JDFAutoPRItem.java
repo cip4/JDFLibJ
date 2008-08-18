@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.JDFPRError;
 import org.cip4.jdflib.resource.process.JDFPRGroup;
-    /*
-    *****************************************************************************
-    class JDFAutoPRItem : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPRItem extends JDFElement
 {
@@ -282,6 +278,27 @@ public abstract class JDFAutoPRItem extends JDFElement
     }
 
     /**
+     * Get all PRError from the current element
+     * 
+     * @return Collection<JDFPRError>
+     */
+    public Collection<JDFPRError> getAllPRError()
+    {
+        Vector<JDFPRError> v = new Vector<JDFPRError>();
+
+        JDFPRError kElem = (JDFPRError) getFirstChildElement(ElementName.PRERROR, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPRError) kElem.getNextSiblingElement(ElementName.PRERROR, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element PRError
      */
     public JDFPRError appendPRError() throws JDFException
@@ -307,6 +324,27 @@ public abstract class JDFAutoPRItem extends JDFElement
     public JDFPRGroup getPRGroup(int iSkip)
     {
         return (JDFPRGroup) getElement(ElementName.PRGROUP, null, iSkip);
+    }
+
+    /**
+     * Get all PRGroup from the current element
+     * 
+     * @return Collection<JDFPRGroup>
+     */
+    public Collection<JDFPRGroup> getAllPRGroup()
+    {
+        Vector<JDFPRGroup> v = new Vector<JDFPRGroup>();
+
+        JDFPRGroup kElem = (JDFPRGroup) getFirstChildElement(ElementName.PRGROUP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPRGroup) kElem.getNextSiblingElement(ElementName.PRGROUP, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -80,12 +83,6 @@ import org.cip4.jdflib.jmf.JDFCreateLink;
 import org.cip4.jdflib.jmf.JDFCreateResource;
 import org.cip4.jdflib.jmf.JDFMoveResource;
 import org.cip4.jdflib.jmf.JDFRemoveLink;
-    /*
-    *****************************************************************************
-    class JDFAutoUpdateJDFCmdParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 {
@@ -183,6 +180,27 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     }
 
     /**
+     * Get all CreateLink from the current element
+     * 
+     * @return Collection<JDFCreateLink>
+     */
+    public Collection<JDFCreateLink> getAllCreateLink()
+    {
+        Vector<JDFCreateLink> v = new Vector<JDFCreateLink>();
+
+        JDFCreateLink kElem = (JDFCreateLink) getFirstChildElement(ElementName.CREATELINK, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCreateLink) kElem.getNextSiblingElement(ElementName.CREATELINK, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element CreateLink
      */
     public JDFCreateLink appendCreateLink() throws JDFException
@@ -208,6 +226,27 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     public JDFCreateResource getCreateResource(int iSkip)
     {
         return (JDFCreateResource) getElement(ElementName.CREATERESOURCE, null, iSkip);
+    }
+
+    /**
+     * Get all CreateResource from the current element
+     * 
+     * @return Collection<JDFCreateResource>
+     */
+    public Collection<JDFCreateResource> getAllCreateResource()
+    {
+        Vector<JDFCreateResource> v = new Vector<JDFCreateResource>();
+
+        JDFCreateResource kElem = (JDFCreateResource) getFirstChildElement(ElementName.CREATERESOURCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCreateResource) kElem.getNextSiblingElement(ElementName.CREATERESOURCE, null);
+        }
+
+        return v;
     }
 
     /**
@@ -239,6 +278,27 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     }
 
     /**
+     * Get all MoveResource from the current element
+     * 
+     * @return Collection<JDFMoveResource>
+     */
+    public Collection<JDFMoveResource> getAllMoveResource()
+    {
+        Vector<JDFMoveResource> v = new Vector<JDFMoveResource>();
+
+        JDFMoveResource kElem = (JDFMoveResource) getFirstChildElement(ElementName.MOVERESOURCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMoveResource) kElem.getNextSiblingElement(ElementName.MOVERESOURCE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element MoveResource
      */
     public JDFMoveResource appendMoveResource() throws JDFException
@@ -264,6 +324,27 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     public JDFRemoveLink getRemoveLink(int iSkip)
     {
         return (JDFRemoveLink) getElement(ElementName.REMOVELINK, null, iSkip);
+    }
+
+    /**
+     * Get all RemoveLink from the current element
+     * 
+     * @return Collection<JDFRemoveLink>
+     */
+    public Collection<JDFRemoveLink> getAllRemoveLink()
+    {
+        Vector<JDFRemoveLink> v = new Vector<JDFRemoveLink>();
+
+        JDFRemoveLink kElem = (JDFRemoveLink) getFirstChildElement(ElementName.REMOVELINK, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRemoveLink) kElem.getNextSiblingElement(ElementName.REMOVELINK, null);
+        }
+
+        return v;
     }
 
     /**

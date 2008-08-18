@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.datatypes.JDFShapeRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
-    /*
-    *****************************************************************************
-    class JDFAutoShapeEvaluation : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoShapeEvaluation extends JDFResource
 {
@@ -381,6 +377,27 @@ public abstract class JDFAutoShapeEvaluation extends JDFResource
     public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
     {
         return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, iSkip);
+    }
+
+    /**
+     * Get all BasicPreflightTest from the current element
+     * 
+     * @return Collection<JDFBasicPreflightTest>
+     */
+    public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
+    {
+        Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+
+        JDFBasicPreflightTest kElem = (JDFBasicPreflightTest) getFirstChildElement(ElementName.BASICPREFLIGHTTEST, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBasicPreflightTest) kElem.getNextSiblingElement(ElementName.BASICPREFLIGHTTEST, null);
+        }
+
+        return v;
     }
 
     /**

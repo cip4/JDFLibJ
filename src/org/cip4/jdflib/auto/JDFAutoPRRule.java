@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,12 +85,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
-    /*
-    *****************************************************************************
-    class JDFAutoPRRule : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPRRule extends JDFElement
 {
@@ -220,6 +217,27 @@ public abstract class JDFAutoPRRule extends JDFElement
     public JDFPRRuleAttr getPRRuleAttr(int iSkip)
     {
         return (JDFPRRuleAttr) getElement(ElementName.PRRULEATTR, null, iSkip);
+    }
+
+    /**
+     * Get all PRRuleAttr from the current element
+     * 
+     * @return Collection<JDFPRRuleAttr>
+     */
+    public Collection<JDFPRRuleAttr> getAllPRRuleAttr()
+    {
+        Vector<JDFPRRuleAttr> v = new Vector<JDFPRRuleAttr>();
+
+        JDFPRRuleAttr kElem = (JDFPRRuleAttr) getFirstChildElement(ElementName.PRRULEATTR, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPRRuleAttr) kElem.getNextSiblingElement(ElementName.PRRULEATTR, null);
+        }
+
+        return v;
     }
 
     /**

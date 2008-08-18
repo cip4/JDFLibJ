@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -92,12 +94,6 @@ import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
 import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
-    /*
-    *****************************************************************************
-    class JDFAutoPageList : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPageList extends JDFResource
 {
@@ -706,6 +702,27 @@ public abstract class JDFAutoPageList extends JDFResource
     }
 
     /**
+     * Get all PageData from the current element
+     * 
+     * @return Collection<JDFPageData>
+     */
+    public Collection<JDFPageData> getAllPageData()
+    {
+        Vector<JDFPageData> v = new Vector<JDFPageData>();
+
+        JDFPageData kElem = (JDFPageData) getFirstChildElement(ElementName.PAGEDATA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPageData) kElem.getNextSiblingElement(ElementName.PAGEDATA, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element PageData
      */
     public JDFPageData appendPageData() throws JDFException
@@ -766,6 +783,27 @@ public abstract class JDFAutoPageList extends JDFResource
     public JDFSeparationSpec getSeparationSpec(int iSkip)
     {
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+    }
+
+    /**
+     * Get all SeparationSpec from the current element
+     * 
+     * @return Collection<JDFSeparationSpec>
+     */
+    public Collection<JDFSeparationSpec> getAllSeparationSpec()
+    {
+        Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+
+        JDFSeparationSpec kElem = (JDFSeparationSpec) getFirstChildElement(ElementName.SEPARATIONSPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSeparationSpec) kElem.getNextSiblingElement(ElementName.SEPARATIONSPEC, null);
+        }
+
+        return v;
     }
 
     /**

@@ -84,12 +84,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBindingQualityParams;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoQualityMeasurement : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoQualityMeasurement extends JDFElement
 {

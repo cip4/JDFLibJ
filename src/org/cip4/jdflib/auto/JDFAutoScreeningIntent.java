@@ -79,12 +79,6 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFSpanFrequencySelection;
 import org.cip4.jdflib.span.JDFSpanScreeningType;
-    /*
-    *****************************************************************************
-    class JDFAutoScreeningIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoScreeningIntent extends JDFIntentResource
 {

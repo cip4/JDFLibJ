@@ -81,12 +81,6 @@ import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanGlue;
 import org.cip4.jdflib.span.JDFSpanGlueProcedure;
 import org.cip4.jdflib.span.JDFSpanScoring;
-    /*
-    *****************************************************************************
-    class JDFAutoSoftCoverBinding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoSoftCoverBinding extends JDFElement
 {

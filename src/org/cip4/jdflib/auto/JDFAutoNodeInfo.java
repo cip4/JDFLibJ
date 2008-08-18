@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -91,12 +93,6 @@ import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
-    /*
-    *****************************************************************************
-    class JDFAutoNodeInfo : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoNodeInfo extends JDFResource
 {
@@ -858,6 +854,27 @@ public abstract class JDFAutoNodeInfo extends JDFResource
     }
 
     /**
+     * Get all JMF from the current element
+     * 
+     * @return Collection<JDFJMF>
+     */
+    public Collection<JDFJMF> getAllJMF()
+    {
+        Vector<JDFJMF> v = new Vector<JDFJMF>();
+
+        JDFJMF kElem = (JDFJMF) getFirstChildElement(ElementName.JMF, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFJMF) kElem.getNextSiblingElement(ElementName.JMF, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element JMF
      */
     public JDFJMF appendJMF() throws JDFException
@@ -909,6 +926,27 @@ public abstract class JDFAutoNodeInfo extends JDFResource
     public JDFNotificationFilter getNotificationFilter(int iSkip)
     {
         return (JDFNotificationFilter) getElement(ElementName.NOTIFICATIONFILTER, null, iSkip);
+    }
+
+    /**
+     * Get all NotificationFilter from the current element
+     * 
+     * @return Collection<JDFNotificationFilter>
+     */
+    public Collection<JDFNotificationFilter> getAllNotificationFilter()
+    {
+        Vector<JDFNotificationFilter> v = new Vector<JDFNotificationFilter>();
+
+        JDFNotificationFilter kElem = (JDFNotificationFilter) getFirstChildElement(ElementName.NOTIFICATIONFILTER, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFNotificationFilter) kElem.getNextSiblingElement(ElementName.NOTIFICATIONFILTER, null);
+        }
+
+        return v;
     }
 
     /**

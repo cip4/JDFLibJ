@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
-    /*
-    *****************************************************************************
-    class JDFAutoSpineTapingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoSpineTapingParams extends JDFResource
 {
@@ -404,6 +400,27 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
     public JDFGlueApplication getGlueApplication(int iSkip)
     {
         return (JDFGlueApplication) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
+    }
+
+    /**
+     * Get all GlueApplication from the current element
+     * 
+     * @return Collection<JDFGlueApplication>
+     */
+    public Collection<JDFGlueApplication> getAllGlueApplication()
+    {
+        Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
+
+        JDFGlueApplication kElem = (JDFGlueApplication) getFirstChildElement(ElementName.GLUEAPPLICATION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlueApplication) kElem.getNextSiblingElement(ElementName.GLUEAPPLICATION, null);
+        }
+
+        return v;
     }
 
     /**

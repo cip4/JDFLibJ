@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,12 +89,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.resource.JDFPart;
-    /*
-    *****************************************************************************
-    class JDFAutoNodeInfoCmdParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 {
@@ -337,6 +333,27 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
     public JDFPart getPart(int iSkip)
     {
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * Get all Part from the current element
+     * 
+     * @return Collection<JDFPart>
+     */
+    public Collection<JDFPart> getAllPart()
+    {
+        Vector<JDFPart> v = new Vector<JDFPart>();
+
+        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        }
+
+        return v;
     }
 
     /**

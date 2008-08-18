@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
-    /*
-    *****************************************************************************
-    class JDFAutoModulePool : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoModulePool extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutoModulePool extends JDFElement
     public JDFModuleCap getModuleCap(int iSkip)
     {
         return (JDFModuleCap) getElement(ElementName.MODULECAP, null, iSkip);
+    }
+
+    /**
+     * Get all ModuleCap from the current element
+     * 
+     * @return Collection<JDFModuleCap>
+     */
+    public Collection<JDFModuleCap> getAllModuleCap()
+    {
+        Vector<JDFModuleCap> v = new Vector<JDFModuleCap>();
+
+        JDFModuleCap kElem = (JDFModuleCap) getFirstChildElement(ElementName.MODULECAP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFModuleCap) kElem.getNextSiblingElement(ElementName.MODULECAP, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -85,12 +87,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.JDFPRGroupOccurrence;
 import org.cip4.jdflib.resource.process.JDFPROccurrence;
-    /*
-    *****************************************************************************
-    class JDFAutoPRGroup : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPRGroup extends JDFElement
 {
@@ -259,6 +255,27 @@ public abstract class JDFAutoPRGroup extends JDFElement
     }
 
     /**
+     * Get all PRGroupOccurrence from the current element
+     * 
+     * @return Collection<JDFPRGroupOccurrence>
+     */
+    public Collection<JDFPRGroupOccurrence> getAllPRGroupOccurrence()
+    {
+        Vector<JDFPRGroupOccurrence> v = new Vector<JDFPRGroupOccurrence>();
+
+        JDFPRGroupOccurrence kElem = (JDFPRGroupOccurrence) getFirstChildElement(ElementName.PRGROUPOCCURRENCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPRGroupOccurrence) kElem.getNextSiblingElement(ElementName.PRGROUPOCCURRENCE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element PRGroupOccurrence
      */
     public JDFPRGroupOccurrence appendPRGroupOccurrence() throws JDFException
@@ -284,6 +301,27 @@ public abstract class JDFAutoPRGroup extends JDFElement
     public JDFPROccurrence getPROccurrence(int iSkip)
     {
         return (JDFPROccurrence) getElement(ElementName.PROCCURRENCE, null, iSkip);
+    }
+
+    /**
+     * Get all PROccurrence from the current element
+     * 
+     * @return Collection<JDFPROccurrence>
+     */
+    public Collection<JDFPROccurrence> getAllPROccurrence()
+    {
+        Vector<JDFPROccurrence> v = new Vector<JDFPROccurrence>();
+
+        JDFPROccurrence kElem = (JDFPROccurrence) getFirstChildElement(ElementName.PROCCURRENCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPROccurrence) kElem.getNextSiblingElement(ElementName.PROCCURRENCE, null);
+        }
+
+        return v;
     }
 
     /**

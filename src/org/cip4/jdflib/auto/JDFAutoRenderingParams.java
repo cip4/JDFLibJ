@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,12 +89,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFObjectResolution;
-    /*
-    *****************************************************************************
-    class JDFAutoRenderingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoRenderingParams extends JDFResource
 {
@@ -410,6 +406,27 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     public JDFObjectResolution getObjectResolution(int iSkip)
     {
         return (JDFObjectResolution) getElement(ElementName.OBJECTRESOLUTION, null, iSkip);
+    }
+
+    /**
+     * Get all ObjectResolution from the current element
+     * 
+     * @return Collection<JDFObjectResolution>
+     */
+    public Collection<JDFObjectResolution> getAllObjectResolution()
+    {
+        Vector<JDFObjectResolution> v = new Vector<JDFObjectResolution>();
+
+        JDFObjectResolution kElem = (JDFObjectResolution) getFirstChildElement(ElementName.OBJECTRESOLUTION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFObjectResolution) kElem.getNextSiblingElement(ElementName.OBJECTRESOLUTION, null);
+        }
+
+        return v;
     }
 
     /**

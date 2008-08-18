@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -88,12 +90,6 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
-    /*
-    *****************************************************************************
-    class JDFAutoPhaseTime : public JDFAudit
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
 {
@@ -309,6 +305,27 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     }
 
     /**
+     * Get all Device from the current element
+     * 
+     * @return Collection<JDFDevice>
+     */
+    public Collection<JDFDevice> getAllDevice()
+    {
+        Vector<JDFDevice> v = new Vector<JDFDevice>();
+
+        JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Device
      */
     public JDFDevice appendDevice() throws JDFException
@@ -343,6 +360,27 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     public JDFEmployee getEmployee(int iSkip)
     {
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
     }
 
     /**
@@ -409,6 +447,27 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     }
 
     /**
+     * Get all ModulePhase from the current element
+     * 
+     * @return Collection<JDFModulePhase>
+     */
+    public Collection<JDFModulePhase> getAllModulePhase()
+    {
+        Vector<JDFModulePhase> v = new Vector<JDFModulePhase>();
+
+        JDFModulePhase kElem = (JDFModulePhase) getFirstChildElement(ElementName.MODULEPHASE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFModulePhase) kElem.getNextSiblingElement(ElementName.MODULEPHASE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ModulePhase
      */
     public JDFModulePhase appendModulePhase() throws JDFException
@@ -434,6 +493,27 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     public JDFPart getPart(int iSkip)
     {
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * Get all Part from the current element
+     * 
+     * @return Collection<JDFPart>
+     */
+    public Collection<JDFPart> getAllPart()
+    {
+        Vector<JDFPart> v = new Vector<JDFPart>();
+
+        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        }
+
+        return v;
     }
 
     /**

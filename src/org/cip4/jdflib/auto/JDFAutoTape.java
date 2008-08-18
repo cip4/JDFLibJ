@@ -77,12 +77,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
-    /*
-    *****************************************************************************
-    class JDFAutoTape : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTape extends JDFElement
 {

@@ -81,12 +81,6 @@ import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFShapeSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoPackingIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPackingIntent extends JDFIntentResource
 {

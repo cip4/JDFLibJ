@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -84,12 +86,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstanceDetail;
-    /*
-    *****************************************************************************
-    class JDFAutoPreflightInstance : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreflightInstance extends JDFElement
 {
@@ -254,6 +250,27 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
     public JDFPreflightInstanceDetail getPreflightInstanceDetail(int iSkip)
     {
         return (JDFPreflightInstanceDetail) getElement(ElementName.PREFLIGHTINSTANCEDETAIL, null, iSkip);
+    }
+
+    /**
+     * Get all PreflightInstanceDetail from the current element
+     * 
+     * @return Collection<JDFPreflightInstanceDetail>
+     */
+    public Collection<JDFPreflightInstanceDetail> getAllPreflightInstanceDetail()
+    {
+        Vector<JDFPreflightInstanceDetail> v = new Vector<JDFPreflightInstanceDetail>();
+
+        JDFPreflightInstanceDetail kElem = (JDFPreflightInstanceDetail) getFirstChildElement(ElementName.PREFLIGHTINSTANCEDETAIL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPreflightInstanceDetail) kElem.getNextSiblingElement(ElementName.PREFLIGHTINSTANCEDETAIL, null);
+        }
+
+        return v;
     }
 
     /**

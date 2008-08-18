@@ -93,12 +93,6 @@ import org.cip4.jdflib.span.JDFShapeSpan;
 import org.cip4.jdflib.span.JDFSpanFinishedGrainDirection;
 import org.cip4.jdflib.span.JDFSpanSizePolicy;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoLayoutIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLayoutIntent extends JDFIntentResource
 {

@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFNewComment;
-    /*
-    *****************************************************************************
-    class JDFAutoModifyNodeCmdParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
 {
@@ -316,6 +312,27 @@ public abstract class JDFAutoModifyNodeCmdParams extends JDFElement
     public JDFNewComment getNewComment(int iSkip)
     {
         return (JDFNewComment) getElement(ElementName.NEWCOMMENT, null, iSkip);
+    }
+
+    /**
+     * Get all NewComment from the current element
+     * 
+     * @return Collection<JDFNewComment>
+     */
+    public Collection<JDFNewComment> getAllNewComment()
+    {
+        Vector<JDFNewComment> v = new Vector<JDFNewComment>();
+
+        JDFNewComment kElem = (JDFNewComment) getFirstChildElement(ElementName.NEWCOMMENT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFNewComment) kElem.getNextSiblingElement(ElementName.NEWCOMMENT, null);
+        }
+
+        return v;
     }
 
     /**

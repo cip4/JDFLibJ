@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -80,12 +83,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-    /*
-    *****************************************************************************
-    class JDFAutoPreflightInstanceDetail : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 {
@@ -216,6 +213,27 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
     public JDFElement getValue(int iSkip)
     {
         return (JDFElement) getElement(ElementName.VALUE, null, iSkip);
+    }
+
+    /**
+     * Get all Value from the current element
+     * 
+     * @return Collection<JDFElement>
+     */
+    public Collection<JDFElement> getAllValue()
+    {
+        Vector<JDFElement> v = new Vector<JDFElement>();
+
+        JDFElement kElem = (JDFElement) getFirstChildElement(ElementName.VALUE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFElement) kElem.getNextSiblingElement(ElementName.VALUE, null);
+        }
+
+        return v;
     }
 
     /**

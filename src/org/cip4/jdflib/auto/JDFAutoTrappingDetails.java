@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -83,12 +86,6 @@ import org.cip4.jdflib.resource.process.JDFObjectResolution;
 import org.cip4.jdflib.resource.process.JDFTrapRegion;
 import org.cip4.jdflib.resource.process.prepress.JDFTrappingOrder;
 import org.cip4.jdflib.resource.process.prepress.JDFTrappingParams;
-    /*
-    *****************************************************************************
-    class JDFAutoTrappingDetails : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTrappingDetails extends JDFResource
 {
@@ -368,6 +365,27 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     }
 
     /**
+     * Get all ObjectResolution from the current element
+     * 
+     * @return Collection<JDFObjectResolution>
+     */
+    public Collection<JDFObjectResolution> getAllObjectResolution()
+    {
+        Vector<JDFObjectResolution> v = new Vector<JDFObjectResolution>();
+
+        JDFObjectResolution kElem = (JDFObjectResolution) getFirstChildElement(ElementName.OBJECTRESOLUTION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFObjectResolution) kElem.getNextSiblingElement(ElementName.OBJECTRESOLUTION, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ObjectResolution
      */
     public JDFObjectResolution appendObjectResolution() throws JDFException
@@ -402,6 +420,27 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     public JDFTrapRegion getTrapRegion(int iSkip)
     {
         return (JDFTrapRegion) getElement(ElementName.TRAPREGION, null, iSkip);
+    }
+
+    /**
+     * Get all TrapRegion from the current element
+     * 
+     * @return Collection<JDFTrapRegion>
+     */
+    public Collection<JDFTrapRegion> getAllTrapRegion()
+    {
+        Vector<JDFTrapRegion> v = new Vector<JDFTrapRegion>();
+
+        JDFTrapRegion kElem = (JDFTrapRegion) getFirstChildElement(ElementName.TRAPREGION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTrapRegion) kElem.getNextSiblingElement(ElementName.TRAPREGION, null);
+        }
+
+        return v;
     }
 
     /**

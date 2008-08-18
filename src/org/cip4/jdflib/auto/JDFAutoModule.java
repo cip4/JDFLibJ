@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFModule;
-    /*
-    *****************************************************************************
-    class JDFAutoModule : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoModule extends JDFElement
 {
@@ -469,6 +466,27 @@ public abstract class JDFAutoModule extends JDFElement
     public JDFModule getModule(int iSkip)
     {
         return (JDFModule) getElement(ElementName.MODULE, null, iSkip);
+    }
+
+    /**
+     * Get all Module from the current element
+     * 
+     * @return Collection<JDFModule>
+     */
+    public Collection<JDFModule> getAllModule()
+    {
+        Vector<JDFModule> v = new Vector<JDFModule>();
+
+        JDFModule kElem = (JDFModule) getFirstChildElement(ElementName.MODULE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFModule) kElem.getNextSiblingElement(ElementName.MODULE, null);
+        }
+
+        return v;
     }
 
     /**

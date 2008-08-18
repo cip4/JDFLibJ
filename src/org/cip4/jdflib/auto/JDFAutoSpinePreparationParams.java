@@ -77,12 +77,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoSpinePreparationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoSpinePreparationParams extends JDFResource
 {

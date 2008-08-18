@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -83,12 +86,6 @@ import org.cip4.jdflib.jmf.JDFChangedPath;
 import org.cip4.jdflib.resource.JDFChangedAttribute;
 import org.cip4.jdflib.resource.JDFRemoved;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoTrigger : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTrigger extends JDFResource
 {
@@ -261,6 +258,27 @@ public abstract class JDFAutoTrigger extends JDFResource
     }
 
     /**
+     * Get all ChangedAttribute from the current element
+     * 
+     * @return Collection<JDFChangedAttribute>
+     */
+    public Collection<JDFChangedAttribute> getAllChangedAttribute()
+    {
+        Vector<JDFChangedAttribute> v = new Vector<JDFChangedAttribute>();
+
+        JDFChangedAttribute kElem = (JDFChangedAttribute) getFirstChildElement(ElementName.CHANGEDATTRIBUTE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFChangedAttribute) kElem.getNextSiblingElement(ElementName.CHANGEDATTRIBUTE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element ChangedAttribute
      */
     public JDFChangedAttribute appendChangedAttribute() throws JDFException
@@ -312,6 +330,27 @@ public abstract class JDFAutoTrigger extends JDFResource
     public JDFChangedPath getChangedPath(int iSkip)
     {
         return (JDFChangedPath) getElement(ElementName.CHANGEDPATH, null, iSkip);
+    }
+
+    /**
+     * Get all ChangedPath from the current element
+     * 
+     * @return Collection<JDFChangedPath>
+     */
+    public Collection<JDFChangedPath> getAllChangedPath()
+    {
+        Vector<JDFChangedPath> v = new Vector<JDFChangedPath>();
+
+        JDFChangedPath kElem = (JDFChangedPath) getFirstChildElement(ElementName.CHANGEDPATH, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFChangedPath) kElem.getNextSiblingElement(ElementName.CHANGEDPATH, null);
+        }
+
+        return v;
     }
 
     /**

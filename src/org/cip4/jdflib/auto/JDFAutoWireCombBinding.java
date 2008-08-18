@@ -80,12 +80,6 @@ import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFSpanWireCombMaterial;
 import org.cip4.jdflib.span.JDFSpanWireCombShape;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoWireCombBinding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoWireCombBinding extends JDFElement
 {

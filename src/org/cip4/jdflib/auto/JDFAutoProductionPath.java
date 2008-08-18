@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFProductionSubPath;
-    /*
-    *****************************************************************************
-    class JDFAutoProductionPath : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoProductionPath extends JDFResource
 {
@@ -261,6 +258,27 @@ public abstract class JDFAutoProductionPath extends JDFResource
     }
 
     /**
+     * Get all PostPressComponentPath from the current element
+     * 
+     * @return Collection<JDFProductionSubPath>
+     */
+    public Collection<JDFProductionSubPath> getAllPostPressComponentPath()
+    {
+        Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
+
+        JDFProductionSubPath kElem = (JDFProductionSubPath) getFirstChildElement(ElementName.POSTPRESSCOMPONENTPATH, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFProductionSubPath) kElem.getNextSiblingElement(ElementName.POSTPRESSCOMPONENTPATH, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element PostPressComponentPath
      */
     public JDFProductionSubPath appendPostPressComponentPath() throws JDFException
@@ -286,6 +304,27 @@ public abstract class JDFAutoProductionPath extends JDFResource
     public JDFProductionSubPath getPrintingUnitWebPath(int iSkip)
     {
         return (JDFProductionSubPath) getElement(ElementName.PRINTINGUNITWEBPATH, null, iSkip);
+    }
+
+    /**
+     * Get all PrintingUnitWebPath from the current element
+     * 
+     * @return Collection<JDFProductionSubPath>
+     */
+    public Collection<JDFProductionSubPath> getAllPrintingUnitWebPath()
+    {
+        Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
+
+        JDFProductionSubPath kElem = (JDFProductionSubPath) getFirstChildElement(ElementName.PRINTINGUNITWEBPATH, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFProductionSubPath) kElem.getNextSiblingElement(ElementName.PRINTINGUNITWEBPATH, null);
+        }
+
+        return v;
     }
 
     /**

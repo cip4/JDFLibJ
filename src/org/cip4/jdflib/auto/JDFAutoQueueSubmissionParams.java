@@ -86,12 +86,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFDisposition;
-    /*
-    *****************************************************************************
-    class JDFAutoQueueSubmissionParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoQueueSubmissionParams extends JDFElement
 {

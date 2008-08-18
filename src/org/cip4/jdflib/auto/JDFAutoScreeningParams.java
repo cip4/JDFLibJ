@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -80,12 +83,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFScreenSelector;
-    /*
-    *****************************************************************************
-    class JDFAutoScreeningParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoScreeningParams extends JDFResource
 {
@@ -252,6 +249,27 @@ public abstract class JDFAutoScreeningParams extends JDFResource
     public JDFScreenSelector getScreenSelector(int iSkip)
     {
         return (JDFScreenSelector) getElement(ElementName.SCREENSELECTOR, null, iSkip);
+    }
+
+    /**
+     * Get all ScreenSelector from the current element
+     * 
+     * @return Collection<JDFScreenSelector>
+     */
+    public Collection<JDFScreenSelector> getAllScreenSelector()
+    {
+        Vector<JDFScreenSelector> v = new Vector<JDFScreenSelector>();
+
+        JDFScreenSelector kElem = (JDFScreenSelector) getFirstChildElement(ElementName.SCREENSELECTOR, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFScreenSelector) kElem.getNextSiblingElement(ElementName.SCREENSELECTOR, null);
+        }
+
+        return v;
     }
 
     /**

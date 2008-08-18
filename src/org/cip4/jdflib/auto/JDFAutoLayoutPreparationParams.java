@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -99,12 +101,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate;
 import org.cip4.jdflib.resource.process.JDFInsertSheet;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /*
-    *****************************************************************************
-    class JDFAutoLayoutPreparationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 {
@@ -1169,6 +1165,27 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     }
 
     /**
+     * Get all InsertSheet from the current element
+     * 
+     * @return Collection<JDFInsertSheet>
+     */
+    public Collection<JDFInsertSheet> getAllInsertSheet()
+    {
+        Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
+
+        JDFInsertSheet kElem = (JDFInsertSheet) getFirstChildElement(ElementName.INSERTSHEET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFInsertSheet) kElem.getNextSiblingElement(ElementName.INSERTSHEET, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element InsertSheet
      */
     public JDFInsertSheet appendInsertSheet() throws JDFException
@@ -1308,6 +1325,27 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     public JDFJobField getJobField(int iSkip)
     {
         return (JDFJobField) getElement(ElementName.JOBFIELD, null, iSkip);
+    }
+
+    /**
+     * Get all JobField from the current element
+     * 
+     * @return Collection<JDFJobField>
+     */
+    public Collection<JDFJobField> getAllJobField()
+    {
+        Vector<JDFJobField> v = new Vector<JDFJobField>();
+
+        JDFJobField kElem = (JDFJobField) getFirstChildElement(ElementName.JOBFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFJobField) kElem.getNextSiblingElement(ElementName.JOBFIELD, null);
+        }
+
+        return v;
     }
 
     /**

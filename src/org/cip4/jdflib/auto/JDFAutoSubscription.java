@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -84,12 +86,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFObservationTarget;
 import org.cip4.jdflib.util.JDFDuration;
-    /*
-    *****************************************************************************
-    class JDFAutoSubscription : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoSubscription extends JDFElement
 {
@@ -346,6 +342,27 @@ public abstract class JDFAutoSubscription extends JDFElement
     public JDFObservationTarget getObservationTarget(int iSkip)
     {
         return (JDFObservationTarget) getElement(ElementName.OBSERVATIONTARGET, null, iSkip);
+    }
+
+    /**
+     * Get all ObservationTarget from the current element
+     * 
+     * @return Collection<JDFObservationTarget>
+     */
+    public Collection<JDFObservationTarget> getAllObservationTarget()
+    {
+        Vector<JDFObservationTarget> v = new Vector<JDFObservationTarget>();
+
+        JDFObservationTarget kElem = (JDFObservationTarget) getFirstChildElement(ElementName.OBSERVATIONTARGET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFObservationTarget) kElem.getNextSiblingElement(ElementName.OBSERVATIONTARGET, null);
+        }
+
+        return v;
     }
 
     /**

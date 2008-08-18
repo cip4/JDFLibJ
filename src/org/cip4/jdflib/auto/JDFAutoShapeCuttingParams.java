@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFShapeElement;
 import org.cip4.jdflib.resource.process.JDFDieLayout;
-    /*
-    *****************************************************************************
-    class JDFAutoShapeCuttingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoShapeCuttingParams extends JDFResource
 {
@@ -386,6 +382,27 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
     public JDFShapeElement getShape(int iSkip)
     {
         return (JDFShapeElement) getElement(ElementName.SHAPE, null, iSkip);
+    }
+
+    /**
+     * Get all Shape from the current element
+     * 
+     * @return Collection<JDFShapeElement>
+     */
+    public Collection<JDFShapeElement> getAllShape()
+    {
+        Vector<JDFShapeElement> v = new Vector<JDFShapeElement>();
+
+        JDFShapeElement kElem = (JDFShapeElement) getFirstChildElement(ElementName.SHAPE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFShapeElement) kElem.getNextSiblingElement(ElementName.SHAPE, null);
+        }
+
+        return v;
     }
 
     /**

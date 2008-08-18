@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -89,12 +91,6 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
-    /*
-    *****************************************************************************
-    class JDFAutoResourceCmdParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoResourceCmdParams extends JDFElement
 {
@@ -600,6 +596,27 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
     }
 
     /**
+     * Get all Part from the current element
+     * 
+     * @return Collection<JDFPart>
+     */
+    public Collection<JDFPart> getAllPart()
+    {
+        Vector<JDFPart> v = new Vector<JDFPart>();
+
+        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Part
      */
     public JDFPart appendPart() throws JDFException
@@ -651,6 +668,27 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
     public JDFResource getResource(int iSkip)
     {
         return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
+    }
+
+    /**
+     * Get all Resource from the current element
+     * 
+     * @return Collection<JDFResource>
+     */
+    public Collection<JDFResource> getAllResource()
+    {
+        Vector<JDFResource> v = new Vector<JDFResource>();
+
+        JDFResource kElem = (JDFResource) getFirstChildElement(ElementName.RESOURCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFResource) kElem.getNextSiblingElement(ElementName.RESOURCE, null);
+        }
+
+        return v;
     }
 
     /**

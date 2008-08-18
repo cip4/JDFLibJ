@@ -93,12 +93,6 @@ import org.cip4.jdflib.resource.JDFDeviceMark;
 import org.cip4.jdflib.resource.JDFFitPolicy;
 import org.cip4.jdflib.resource.JDFImageShift;
 import org.cip4.jdflib.resource.process.JDFColor;
-    /*
-    *****************************************************************************
-    class JDFAutoPageCell : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPageCell extends JDFElement
 {

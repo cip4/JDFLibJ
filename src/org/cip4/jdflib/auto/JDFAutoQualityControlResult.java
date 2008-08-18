@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,12 +85,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFBindingQualityParams;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFQualityMeasurement;
-    /*
-    *****************************************************************************
-    class JDFAutoQualityControlResult : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoQualityControlResult extends JDFResource
 {
@@ -317,6 +314,27 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
     public JDFQualityMeasurement getQualityMeasurement(int iSkip)
     {
         return (JDFQualityMeasurement) getElement(ElementName.QUALITYMEASUREMENT, null, iSkip);
+    }
+
+    /**
+     * Get all QualityMeasurement from the current element
+     * 
+     * @return Collection<JDFQualityMeasurement>
+     */
+    public Collection<JDFQualityMeasurement> getAllQualityMeasurement()
+    {
+        Vector<JDFQualityMeasurement> v = new Vector<JDFQualityMeasurement>();
+
+        JDFQualityMeasurement kElem = (JDFQualityMeasurement) getFirstChildElement(ElementName.QUALITYMEASUREMENT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFQualityMeasurement) kElem.getNextSiblingElement(ElementName.QUALITYMEASUREMENT, null);
+        }
+
+        return v;
     }
 
     /**

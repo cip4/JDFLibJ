@@ -80,12 +80,6 @@ import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoPublishingIntent : public JDFIntentResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 {

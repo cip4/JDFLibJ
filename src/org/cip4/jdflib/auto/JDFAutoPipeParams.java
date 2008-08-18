@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoPipeParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPipeParams extends JDFElement
 {
@@ -286,6 +283,27 @@ public abstract class JDFAutoPipeParams extends JDFElement
     public JDFResource getResource(int iSkip)
     {
         return (JDFResource) getElement(ElementName.RESOURCE, null, iSkip);
+    }
+
+    /**
+     * Get all Resource from the current element
+     * 
+     * @return Collection<JDFResource>
+     */
+    public Collection<JDFResource> getAllResource()
+    {
+        Vector<JDFResource> v = new Vector<JDFResource>();
+
+        JDFResource kElem = (JDFResource) getFirstChildElement(ElementName.RESOURCE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFResource) kElem.getNextSiblingElement(ElementName.RESOURCE, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFArgumentValue;
 import org.cip4.jdflib.resource.process.JDFStringListValue;
-    /*
-    *****************************************************************************
-    class JDFAutoPRGroupOccurrence : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 {
@@ -179,6 +176,27 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
     }
 
     /**
+     * Get all StringListValue from the current element
+     * 
+     * @return Collection<JDFStringListValue>
+     */
+    public Collection<JDFStringListValue> getAllStringListValue()
+    {
+        Vector<JDFStringListValue> v = new Vector<JDFStringListValue>();
+
+        JDFStringListValue kElem = (JDFStringListValue) getFirstChildElement(ElementName.STRINGLISTVALUE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStringListValue) kElem.getNextSiblingElement(ElementName.STRINGLISTVALUE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element StringListValue
      */
     public JDFStringListValue appendStringListValue() throws JDFException
@@ -204,6 +222,27 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
     public JDFArgumentValue getArgumentValue(int iSkip)
     {
         return (JDFArgumentValue) getElement(ElementName.ARGUMENTVALUE, null, iSkip);
+    }
+
+    /**
+     * Get all ArgumentValue from the current element
+     * 
+     * @return Collection<JDFArgumentValue>
+     */
+    public Collection<JDFArgumentValue> getAllArgumentValue()
+    {
+        Vector<JDFArgumentValue> v = new Vector<JDFArgumentValue>();
+
+        JDFArgumentValue kElem = (JDFArgumentValue) getFirstChildElement(ElementName.ARGUMENTVALUE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFArgumentValue) kElem.getNextSiblingElement(ElementName.ARGUMENTVALUE, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -84,12 +86,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.process.JDFTransferCurve;
-    /*
-    *****************************************************************************
-    class JDFAutoTransferCurveSet : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTransferCurveSet extends JDFElement
 {
@@ -254,6 +250,27 @@ public abstract class JDFAutoTransferCurveSet extends JDFElement
     public JDFTransferCurve getTransferCurve(int iSkip)
     {
         return (JDFTransferCurve) getElement(ElementName.TRANSFERCURVE, null, iSkip);
+    }
+
+    /**
+     * Get all TransferCurve from the current element
+     * 
+     * @return Collection<JDFTransferCurve>
+     */
+    public Collection<JDFTransferCurve> getAllTransferCurve()
+    {
+        Vector<JDFTransferCurve> v = new Vector<JDFTransferCurve>();
+
+        JDFTransferCurve kElem = (JDFTransferCurve) getFirstChildElement(ElementName.TRANSFERCURVE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTransferCurve) kElem.getNextSiblingElement(ElementName.TRANSFERCURVE, null);
+        }
+
+        return v;
     }
 
     /**

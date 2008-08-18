@@ -72,12 +72,6 @@ package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
-    /*
-    *****************************************************************************
-    class JDFAutoWakeUpCmdParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoWakeUpCmdParams extends JDFElement
 {

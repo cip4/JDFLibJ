@@ -77,12 +77,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
-    /*
-    *****************************************************************************
-    class JDFAutoModuleCap : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoModuleCap extends JDFElement
 {

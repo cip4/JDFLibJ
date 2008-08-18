@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColorantZoneDetails;
-    /*
-    *****************************************************************************
-    class JDFAutoTrappingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoTrappingParams extends JDFResource
 {
@@ -742,6 +738,27 @@ public abstract class JDFAutoTrappingParams extends JDFResource
     public JDFColorantZoneDetails getColorantZoneDetails(int iSkip)
     {
         return (JDFColorantZoneDetails) getElement(ElementName.COLORANTZONEDETAILS, null, iSkip);
+    }
+
+    /**
+     * Get all ColorantZoneDetails from the current element
+     * 
+     * @return Collection<JDFColorantZoneDetails>
+     */
+    public Collection<JDFColorantZoneDetails> getAllColorantZoneDetails()
+    {
+        Vector<JDFColorantZoneDetails> v = new Vector<JDFColorantZoneDetails>();
+
+        JDFColorantZoneDetails kElem = (JDFColorantZoneDetails) getFirstChildElement(ElementName.COLORANTZONEDETAILS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFColorantZoneDetails) kElem.getNextSiblingElement(ElementName.COLORANTZONEDETAILS, null);
+        }
+
+        return v;
     }
 
     /**

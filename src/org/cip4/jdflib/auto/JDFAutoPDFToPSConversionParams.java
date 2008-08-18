@@ -83,12 +83,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoPDFToPSConversionParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
 {

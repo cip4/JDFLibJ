@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFPRRule;
 import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
-    /*
-    *****************************************************************************
-    class JDFAutoPreflightReportRulePool : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreflightReportRulePool extends JDFResource
 {
@@ -231,6 +228,27 @@ public abstract class JDFAutoPreflightReportRulePool extends JDFResource
     public JDFPRRule getPRRule(int iSkip)
     {
         return (JDFPRRule) getElement(ElementName.PRRULE, null, iSkip);
+    }
+
+    /**
+     * Get all PRRule from the current element
+     * 
+     * @return Collection<JDFPRRule>
+     */
+    public Collection<JDFPRRule> getAllPRRule()
+    {
+        Vector<JDFPRRule> v = new Vector<JDFPRRule>();
+
+        JDFPRRule kElem = (JDFPRRule) getFirstChildElement(ElementName.PRRULE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPRRule) kElem.getNextSiblingElement(ElementName.PRRULE, null);
+        }
+
+        return v;
     }
 
     /**

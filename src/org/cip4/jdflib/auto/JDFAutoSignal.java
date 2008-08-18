@@ -82,12 +82,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFTrigger;
 import org.cip4.jdflib.resource.JDFNotification;
-    /*
-    *****************************************************************************
-    class JDFAutoSignal : public JDFMessage
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoSignal extends JDFMessage
 {

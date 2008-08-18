@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFolderProduction;
-    /*
-    *****************************************************************************
-    class JDFAutoWebInlineFinishingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 {
@@ -188,6 +185,27 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
     public JDFFolderProduction getFolderProduction(int iSkip)
     {
         return (JDFFolderProduction) getElement(ElementName.FOLDERPRODUCTION, null, iSkip);
+    }
+
+    /**
+     * Get all FolderProduction from the current element
+     * 
+     * @return Collection<JDFFolderProduction>
+     */
+    public Collection<JDFFolderProduction> getAllFolderProduction()
+    {
+        Vector<JDFFolderProduction> v = new Vector<JDFFolderProduction>();
+
+        JDFFolderProduction kElem = (JDFFolderProduction) getFirstChildElement(ElementName.FOLDERPRODUCTION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFolderProduction) kElem.getNextSiblingElement(ElementName.FOLDERPRODUCTION, null);
+        }
+
+        return v;
     }
 
     /**

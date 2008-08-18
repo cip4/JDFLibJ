@@ -87,12 +87,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
-    /*
-    *****************************************************************************
-    class JDFAutoMediaSource : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoMediaSource extends JDFResource
 {

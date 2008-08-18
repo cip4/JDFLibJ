@@ -90,12 +90,6 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAdvancedParams;
 import org.cip4.jdflib.resource.process.JDFPDFXParams;
 import org.cip4.jdflib.resource.process.JDFThinPDFParams;
-    /*
-    *****************************************************************************
-    class JDFAutoPSToPDFConversionParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPSToPDFConversionParams extends JDFResource
 {

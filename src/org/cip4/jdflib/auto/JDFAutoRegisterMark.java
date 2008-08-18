@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -88,12 +90,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoRegisterMark : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoRegisterMark extends JDFResource
 {
@@ -363,6 +359,27 @@ public abstract class JDFAutoRegisterMark extends JDFResource
     public JDFSeparationSpec getSeparationSpec(int iSkip)
     {
         return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+    }
+
+    /**
+     * Get all SeparationSpec from the current element
+     * 
+     * @return Collection<JDFSeparationSpec>
+     */
+    public Collection<JDFSeparationSpec> getAllSeparationSpec()
+    {
+        Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+
+        JDFSeparationSpec kElem = (JDFSeparationSpec) getFirstChildElement(ElementName.SEPARATIONSPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSeparationSpec) kElem.getNextSiblingElement(ElementName.SEPARATIONSPEC, null);
+        }
+
+        return v;
     }
 
     /**

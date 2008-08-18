@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFTransferFunctionControl;
 import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
-    /*
-    *****************************************************************************
-    class JDFAutoSeparationControlParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoSeparationControlParams extends JDFResource
 {
@@ -193,6 +190,27 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     }
 
     /**
+     * Get all AutomatedOverPrintParams from the current element
+     * 
+     * @return Collection<JDFAutomatedOverPrintParams>
+     */
+    public Collection<JDFAutomatedOverPrintParams> getAllAutomatedOverPrintParams()
+    {
+        Vector<JDFAutomatedOverPrintParams> v = new Vector<JDFAutomatedOverPrintParams>();
+
+        JDFAutomatedOverPrintParams kElem = (JDFAutomatedOverPrintParams) getFirstChildElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFAutomatedOverPrintParams) kElem.getNextSiblingElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element AutomatedOverPrintParams
      */
     public JDFAutomatedOverPrintParams appendAutomatedOverPrintParams() throws JDFException
@@ -227,6 +245,27 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     public JDFTransferFunctionControl getTransferFunctionControl(int iSkip)
     {
         return (JDFTransferFunctionControl) getElement(ElementName.TRANSFERFUNCTIONCONTROL, null, iSkip);
+    }
+
+    /**
+     * Get all TransferFunctionControl from the current element
+     * 
+     * @return Collection<JDFTransferFunctionControl>
+     */
+    public Collection<JDFTransferFunctionControl> getAllTransferFunctionControl()
+    {
+        Vector<JDFTransferFunctionControl> v = new Vector<JDFTransferFunctionControl>();
+
+        JDFTransferFunctionControl kElem = (JDFTransferFunctionControl) getFirstChildElement(ElementName.TRANSFERFUNCTIONCONTROL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTransferFunctionControl) kElem.getNextSiblingElement(ElementName.TRANSFERFUNCTIONCONTROL, null);
+        }
+
+        return v;
     }
 
     /**

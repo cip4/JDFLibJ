@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFOCGControl;
-    /*
-    *****************************************************************************
-    class JDFAutoPDFInterpretingParams : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 {
@@ -589,6 +585,27 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
     public JDFOCGControl getOCGControl(int iSkip)
     {
         return (JDFOCGControl) getElement(ElementName.OCGCONTROL, null, iSkip);
+    }
+
+    /**
+     * Get all OCGControl from the current element
+     * 
+     * @return Collection<JDFOCGControl>
+     */
+    public Collection<JDFOCGControl> getAllOCGControl()
+    {
+        Vector<JDFOCGControl> v = new Vector<JDFOCGControl>();
+
+        JDFOCGControl kElem = (JDFOCGControl) getFirstChildElement(ElementName.OCGCONTROL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFOCGControl) kElem.getNextSiblingElement(ElementName.OCGCONTROL, null);
+        }
+
+        return v;
     }
 
     /**

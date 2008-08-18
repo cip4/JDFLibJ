@@ -84,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoPackingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPackingParams extends JDFResource
 {

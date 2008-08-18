@@ -77,12 +77,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
-    /*
-    *****************************************************************************
-    class JDFAutoPreflightAnalysis : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPreflightAnalysis extends JDFResource
 {

@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -86,12 +88,6 @@ import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
-    /*
-    *****************************************************************************
-    class JDFAutoPrintCondition : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPrintCondition extends JDFResource
 {
@@ -365,6 +361,27 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     public JDFFileSpec getFileSpec(int iSkip)
     {
         return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+    }
+
+    /**
+     * Get all FileSpec from the current element
+     * 
+     * @return Collection<JDFFileSpec>
+     */
+    public Collection<JDFFileSpec> getAllFileSpec()
+    {
+        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+
+        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        }
+
+        return v;
     }
 
     /**

@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -77,12 +80,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.devicecapability.JDFset;
-    /*
-    *****************************************************************************
-    class JDFAutootherwise : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutootherwise extends JDFElement
 {
@@ -174,6 +171,27 @@ public abstract class JDFAutootherwise extends JDFElement
     public JDFset getset(int iSkip)
     {
         return (JDFset) getElement(ElementName.SET, null, iSkip);
+    }
+
+    /**
+     * Get all set from the current element
+     * 
+     * @return Collection<JDFset>
+     */
+    public Collection<JDFset> getAllset()
+    {
+        Vector<JDFset> v = new Vector<JDFset>();
+
+        JDFset kElem = (JDFset) getFirstChildElement(ElementName.SET, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFset) kElem.getNextSiblingElement(ElementName.SET, null);
+        }
+
+        return v;
     }
 
     /**

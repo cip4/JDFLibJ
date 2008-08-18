@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,12 +84,6 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFAddress;
-    /*
-    *****************************************************************************
-    class JDFAutoLocation : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoLocation extends JDFElement
 {
@@ -239,6 +236,27 @@ public abstract class JDFAutoLocation extends JDFElement
     public JDFAddress getAddress(int iSkip)
     {
         return (JDFAddress) getElement(ElementName.ADDRESS, null, iSkip);
+    }
+
+    /**
+     * Get all Address from the current element
+     * 
+     * @return Collection<JDFAddress>
+     */
+    public Collection<JDFAddress> getAllAddress()
+    {
+        Vector<JDFAddress> v = new Vector<JDFAddress>();
+
+        JDFAddress kElem = (JDFAddress) getFirstChildElement(ElementName.ADDRESS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFAddress) kElem.getNextSiblingElement(ElementName.ADDRESS, null);
+        }
+
+        return v;
     }
 
     /**

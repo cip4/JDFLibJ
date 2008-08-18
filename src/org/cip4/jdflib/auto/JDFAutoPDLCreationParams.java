@@ -82,12 +82,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.prepress.JDFPDFToPSConversionParams;
 import org.cip4.jdflib.resource.process.prepress.JDFPSToPDFConversionParams;
-    /*
-    *****************************************************************************
-    class JDFAutoPDLCreationParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPDLCreationParams extends JDFResource
 {

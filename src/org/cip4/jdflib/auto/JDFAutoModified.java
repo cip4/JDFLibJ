@@ -76,12 +76,6 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
-    /*
-    *****************************************************************************
-    class JDFAutoModified : public JDFAudit
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoModified extends JDFAudit
 {

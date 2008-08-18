@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,12 +89,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.resource.JDFDevice;
-    /*
-    *****************************************************************************
-    class JDFAutoQueue : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoQueue extends JDFElement
 {
@@ -321,6 +317,27 @@ public abstract class JDFAutoQueue extends JDFElement
     }
 
     /**
+     * Get all Device from the current element
+     * 
+     * @return Collection<JDFDevice>
+     */
+    public Collection<JDFDevice> getAllDevice()
+    {
+        Vector<JDFDevice> v = new Vector<JDFDevice>();
+
+        JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Device
      */
     public JDFDevice appendDevice() throws JDFException
@@ -346,6 +363,27 @@ public abstract class JDFAutoQueue extends JDFElement
     public JDFQueueEntry getQueueEntry(int iSkip)
     {
         return (JDFQueueEntry) getElement(ElementName.QUEUEENTRY, null, iSkip);
+    }
+
+    /**
+     * Get all QueueEntry from the current element
+     * 
+     * @return Collection<JDFQueueEntry>
+     */
+    public Collection<JDFQueueEntry> getAllQueueEntry()
+    {
+        Vector<JDFQueueEntry> v = new Vector<JDFQueueEntry>();
+
+        JDFQueueEntry kElem = (JDFQueueEntry) getFirstChildElement(ElementName.QUEUEENTRY, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFQueueEntry) kElem.getNextSiblingElement(ElementName.QUEUEENTRY, null);
+        }
+
+        return v;
     }
 
     /**

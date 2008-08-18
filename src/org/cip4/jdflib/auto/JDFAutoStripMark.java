@@ -87,12 +87,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFJobField;
 import org.cip4.jdflib.resource.process.JDFPosition;
-    /*
-    *****************************************************************************
-    class JDFAutoStripMark : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoStripMark extends JDFElement
 {

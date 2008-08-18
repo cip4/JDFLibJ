@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -100,12 +102,6 @@ import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRegisterMark;
 import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
-    /*
-    *****************************************************************************
-    class JDFAutoMarkObject : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoMarkObject extends JDFElement
 {
@@ -606,6 +602,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     }
 
     /**
+     * Get all CIELABMeasuringField from the current element
+     * 
+     * @return Collection<JDFCIELABMeasuringField>
+     */
+    public Collection<JDFCIELABMeasuringField> getAllCIELABMeasuringField()
+    {
+        Vector<JDFCIELABMeasuringField> v = new Vector<JDFCIELABMeasuringField>();
+
+        JDFCIELABMeasuringField kElem = (JDFCIELABMeasuringField) getFirstChildElement(ElementName.CIELABMEASURINGFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCIELABMeasuringField) kElem.getNextSiblingElement(ElementName.CIELABMEASURINGFIELD, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element CIELABMeasuringField
      */
     public JDFCIELABMeasuringField appendCIELABMeasuringField() throws JDFException
@@ -640,6 +657,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     public JDFColorControlStrip getColorControlStrip(int iSkip)
     {
         return (JDFColorControlStrip) getElement(ElementName.COLORCONTROLSTRIP, null, iSkip);
+    }
+
+    /**
+     * Get all ColorControlStrip from the current element
+     * 
+     * @return Collection<JDFColorControlStrip>
+     */
+    public Collection<JDFColorControlStrip> getAllColorControlStrip()
+    {
+        Vector<JDFColorControlStrip> v = new Vector<JDFColorControlStrip>();
+
+        JDFColorControlStrip kElem = (JDFColorControlStrip) getFirstChildElement(ElementName.COLORCONTROLSTRIP, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFColorControlStrip) kElem.getNextSiblingElement(ElementName.COLORCONTROLSTRIP, null);
+        }
+
+        return v;
     }
 
     /**
@@ -680,6 +718,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     }
 
     /**
+     * Get all CutMark from the current element
+     * 
+     * @return Collection<JDFCutMark>
+     */
+    public Collection<JDFCutMark> getAllCutMark()
+    {
+        Vector<JDFCutMark> v = new Vector<JDFCutMark>();
+
+        JDFCutMark kElem = (JDFCutMark) getFirstChildElement(ElementName.CUTMARK, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFCutMark) kElem.getNextSiblingElement(ElementName.CUTMARK, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element CutMark
      */
     public JDFCutMark appendCutMark() throws JDFException
@@ -714,6 +773,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     public JDFDensityMeasuringField getDensityMeasuringField(int iSkip)
     {
         return (JDFDensityMeasuringField) getElement(ElementName.DENSITYMEASURINGFIELD, null, iSkip);
+    }
+
+    /**
+     * Get all DensityMeasuringField from the current element
+     * 
+     * @return Collection<JDFDensityMeasuringField>
+     */
+    public Collection<JDFDensityMeasuringField> getAllDensityMeasuringField()
+    {
+        Vector<JDFDensityMeasuringField> v = new Vector<JDFDensityMeasuringField>();
+
+        JDFDensityMeasuringField kElem = (JDFDensityMeasuringField) getFirstChildElement(ElementName.DENSITYMEASURINGFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDensityMeasuringField) kElem.getNextSiblingElement(ElementName.DENSITYMEASURINGFIELD, null);
+        }
+
+        return v;
     }
 
     /**
@@ -789,6 +869,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     }
 
     /**
+     * Get all DynamicField from the current element
+     * 
+     * @return Collection<JDFDynamicField>
+     */
+    public Collection<JDFDynamicField> getAllDynamicField()
+    {
+        Vector<JDFDynamicField> v = new Vector<JDFDynamicField>();
+
+        JDFDynamicField kElem = (JDFDynamicField) getFirstChildElement(ElementName.DYNAMICFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDynamicField) kElem.getNextSiblingElement(ElementName.DYNAMICFIELD, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element DynamicField
      */
     public JDFDynamicField appendDynamicField() throws JDFException
@@ -814,6 +915,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     public JDFIdentificationField getIdentificationField(int iSkip)
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+    }
+
+    /**
+     * Get all IdentificationField from the current element
+     * 
+     * @return Collection<JDFIdentificationField>
+     */
+    public Collection<JDFIdentificationField> getAllIdentificationField()
+    {
+        Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+
+        JDFIdentificationField kElem = (JDFIdentificationField) getFirstChildElement(ElementName.IDENTIFICATIONFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFIdentificationField) kElem.getNextSiblingElement(ElementName.IDENTIFICATIONFIELD, null);
+        }
+
+        return v;
     }
 
     /**
@@ -851,6 +973,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     public JDFJobField getJobField(int iSkip)
     {
         return (JDFJobField) getElement(ElementName.JOBFIELD, null, iSkip);
+    }
+
+    /**
+     * Get all JobField from the current element
+     * 
+     * @return Collection<JDFJobField>
+     */
+    public Collection<JDFJobField> getAllJobField()
+    {
+        Vector<JDFJobField> v = new Vector<JDFJobField>();
+
+        JDFJobField kElem = (JDFJobField) getFirstChildElement(ElementName.JOBFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFJobField) kElem.getNextSiblingElement(ElementName.JOBFIELD, null);
+        }
+
+        return v;
     }
 
     /**
@@ -926,6 +1069,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     }
 
     /**
+     * Get all RegisterMark from the current element
+     * 
+     * @return Collection<JDFRegisterMark>
+     */
+    public Collection<JDFRegisterMark> getAllRegisterMark()
+    {
+        Vector<JDFRegisterMark> v = new Vector<JDFRegisterMark>();
+
+        JDFRegisterMark kElem = (JDFRegisterMark) getFirstChildElement(ElementName.REGISTERMARK, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRegisterMark) kElem.getNextSiblingElement(ElementName.REGISTERMARK, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element RegisterMark
      */
     public JDFRegisterMark appendRegisterMark() throws JDFException
@@ -960,6 +1124,27 @@ public abstract class JDFAutoMarkObject extends JDFElement
     public JDFScavengerArea getScavengerArea(int iSkip)
     {
         return (JDFScavengerArea) getElement(ElementName.SCAVENGERAREA, null, iSkip);
+    }
+
+    /**
+     * Get all ScavengerArea from the current element
+     * 
+     * @return Collection<JDFScavengerArea>
+     */
+    public Collection<JDFScavengerArea> getAllScavengerArea()
+    {
+        Vector<JDFScavengerArea> v = new Vector<JDFScavengerArea>();
+
+        JDFScavengerArea kElem = (JDFScavengerArea) getFirstChildElement(ElementName.SCAVENGERAREA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFScavengerArea) kElem.getNextSiblingElement(ElementName.SCAVENGERAREA, null);
+        }
+
+        return v;
     }
 
     /**

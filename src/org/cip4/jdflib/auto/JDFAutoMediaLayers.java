@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
@@ -78,12 +81,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
-    /*
-    *****************************************************************************
-    class JDFAutoMediaLayers : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoMediaLayers extends JDFElement
 {
@@ -179,6 +176,27 @@ public abstract class JDFAutoMediaLayers extends JDFElement
     }
 
     /**
+     * Get all GlueLine from the current element
+     * 
+     * @return Collection<JDFGlueLine>
+     */
+    public Collection<JDFGlueLine> getAllGlueLine()
+    {
+        Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+
+        JDFGlueLine kElem = (JDFGlueLine) getFirstChildElement(ElementName.GLUELINE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlueLine) kElem.getNextSiblingElement(ElementName.GLUELINE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element GlueLine
      */
     public JDFGlueLine appendGlueLine() throws JDFException
@@ -213,6 +231,27 @@ public abstract class JDFAutoMediaLayers extends JDFElement
     public JDFMedia getMedia(int iSkip)
     {
         return (JDFMedia) getElement(ElementName.MEDIA, null, iSkip);
+    }
+
+    /**
+     * Get all Media from the current element
+     * 
+     * @return Collection<JDFMedia>
+     */
+    public Collection<JDFMedia> getAllMedia()
+    {
+        Vector<JDFMedia> v = new Vector<JDFMedia>();
+
+        JDFMedia kElem = (JDFMedia) getFirstChildElement(ElementName.MEDIA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMedia) kElem.getNextSiblingElement(ElementName.MEDIA, null);
+        }
+
+        return v;
     }
 
     /**

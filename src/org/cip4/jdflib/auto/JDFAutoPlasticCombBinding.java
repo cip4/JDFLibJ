@@ -79,12 +79,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
-    /*
-    *****************************************************************************
-    class JDFAutoPlasticCombBinding : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoPlasticCombBinding extends JDFElement
 {

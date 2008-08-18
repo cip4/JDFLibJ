@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -83,12 +86,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFEmployee;
-    /*
-    *****************************************************************************
-    class JDFAutoOccupation : public JDFElement
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoOccupation extends JDFElement
 {
@@ -292,6 +289,27 @@ public abstract class JDFAutoOccupation extends JDFElement
     }
 
     /**
+     * Get all Device from the current element
+     * 
+     * @return Collection<JDFDevice>
+     */
+    public Collection<JDFDevice> getAllDevice()
+    {
+        Vector<JDFDevice> v = new Vector<JDFDevice>();
+
+        JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
+        }
+
+        return v;
+    }
+
+    /**
      * (30) append element Device
      */
     public JDFDevice appendDevice() throws JDFException
@@ -343,6 +361,27 @@ public abstract class JDFAutoOccupation extends JDFElement
     public JDFPart getPart(int iSkip)
     {
         return (JDFPart) getElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * Get all Part from the current element
+     * 
+     * @return Collection<JDFPart>
+     */
+    public Collection<JDFPart> getAllPart()
+    {
+        Vector<JDFPart> v = new Vector<JDFPart>();
+
+        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        }
+
+        return v;
     }
 
     /**

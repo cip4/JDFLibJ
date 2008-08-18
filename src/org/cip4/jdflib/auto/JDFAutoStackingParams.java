@@ -84,12 +84,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFDisjointing;
-    /*
-    *****************************************************************************
-    class JDFAutoStackingParams : public JDFResource
-
-    *****************************************************************************
-    */
 
 public abstract class JDFAutoStackingParams extends JDFResource
 {
