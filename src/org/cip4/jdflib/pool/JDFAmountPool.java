@@ -70,6 +70,7 @@
 package org.cip4.jdflib.pool;
 
 import java.util.Set;
+import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAmountPool;
@@ -79,18 +80,103 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.VectorMap;
 
 /**
  * This class represents a JDF-AuditPool
  */
 public class JDFAmountPool extends JDFAutoAmountPool
 {
+	/**
+	 * map of an amountpool that allows quick access to multiple amounts
+	 * Class AmountMap
+	 *
+	 */
+	public class AmountMap extends VectorMap<JDFAttributeMap, JDFPartAmount>
+	{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6548151023982113766L;
+
+		/**
+		 * Constructor AmountMap
+		 * 
+		 * @param vsPartIDKeys
+		 */
+		AmountMap(VString vsPartIDKeys)
+		{
+			final VElement vPartAmount = getChildElementVector(ElementName.PARTAMOUNT, null, null, true, 0, false);
+
+			if (vPartAmount != null)
+			{
+				final int size = vPartAmount.size();
+				for (int i = 0; i < size; i++)
+				{
+					final JDFPartAmount pa = (JDFPartAmount) vPartAmount.elementAt(i);
+					final VJDFAttributeMap vamParts = pa.getPartMapVector();
+
+					final int size2 = vamParts.size();
+					for (int p = 0; p < size2; p++)
+					{
+						final JDFAttributeMap amPart = vamParts.elementAt(p);
+						amPart.reduceMap(vsPartIDKeys);
+						putOne(amPart, pa);
+					}
+				}
+			}
+		}
+
+		/**
+		 * Method getAmountDouble
+		 * 
+		 * @param amParts
+		 * @param strAttributeName
+		 * 
+		 * @return the sum of all matching amounts
+		 */
+
+		double getAmountDouble(JDFAttributeMap amParts, String strAttributeName)
+		{
+			double dValue = -1.0;
+			final Vector<JDFPartAmount> lpa = get(amParts);
+
+			if (lpa != null)
+			{
+				double dTmp = 0.0;
+				boolean isFound = false;
+				for (final JDFPartAmount pa : lpa)
+				{
+					final String strValue = pa.getAttribute(strAttributeName, null, null);
+					if (strValue != null)
+					{
+						final double dAdd = StringUtil.parseDouble(strValue, -1.);
+						if (dAdd >= 0.0)
+						{
+							dTmp += dAdd;
+							isFound = true;
+						}
+					}
+				}
+
+				if (isFound)
+				{
+					dValue = dTmp;
+				}
+			}
+
+			return (dValue);
+		}
+	}
+
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * static helper class that can be delegated from AmountPool containg classes, e.g. ResourceLink
@@ -100,6 +186,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * returns the attribute occurrence in PartAmount, or the default in the ResourceLink
+		 * @param poolParent the pool parent
 		 * 
 		 * @param attrib the attribute name
 		 * @param nameSpaceURI the XML-namespace
@@ -288,6 +375,19 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				dd += StringUtil.parseDouble(ret, 0.0);
 			}
 			return dd;
+		}
+
+		/**
+		 * get an amountmap for the Amountpool of poolParent
+		 * @param poolParent the pool parent
+		 * @param vPartIDKeys
+		 * @return the AmountMap for the Amountpool, null if no amountpool exists
+		 */
+		public static AmountMap getAmountMap(IAmountPoolContainer poolParent, VString vPartIDKeys)
+		{
+			if (poolParent == null || poolParent.getAmountPool() == null)
+				return null;
+			return poolParent.getAmountPool().getAmountMap(vPartIDKeys);
 		}
 
 		/**
@@ -630,6 +730,16 @@ public class JDFAmountPool extends JDFAutoAmountPool
 			if (ciao)
 				pa.deleteNode();
 		}
+	}
+
+	/**
+	 * get an AmountMap for this Amountpool
+	 * @param vPartIDKeys
+	 * @return the AmountMap for the Amountpool, null if no amountpool exists
+	 */
+	public AmountMap getAmountMap(VString vPartIDKeys)
+	{
+		return new AmountMap(vPartIDKeys);
 	}
 
 	/**

@@ -83,19 +83,24 @@ import java.util.HashMap;
 import java.util.Vector;
 
 /**
- * Bidirectional HashMap utility class
+ * HashMap of multiple elements utility class
  * 
- * @author prosirai
+ * @author Rainer Prosi
+ * @param <key> the type used for the key
+ * @param <vectorObject> the type used for individual elements of each vector in the map
  * 
  */
 public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObject>>
 {
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private static final long serialVersionUID = -2180413692846276265L;
 
+	/**
+	 * null constructor
+	 */
 	public VectorMap()
 	{
 		super();
@@ -103,6 +108,9 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 
 	/**
 	 * get the value for key
+	 * @param key the search key
+	 * @param i the index in the vecor matching key; if <0 count from the back of the vector
+	 * @return the matching vectorObject; null if the key does not exist or i is out of range
 	 */
 	public vectorObject getOne(Object key, int i)
 	{
@@ -118,19 +126,23 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	}
 
 	/**
-	 * get the value for key
+	 * get the index of singleObject in the vector of key
+	 * @param key the key of the vector
+	 * @param singleObject the object to search
+	 * @return -2: no such key; -1: no value in key; else the index in the vexctor of key
 	 */
-	public Object getOne(key key, vectorObject singleObject)
+	public int getIndex(key key, vectorObject singleObject)
 	{
 		Vector<vectorObject> keyVector = get(key);
 		if (keyVector == null)
-			return null;
-		int i = keyVector.indexOf(singleObject);
-		return i < 0 ? null : keyVector.get(i);
+			return -2;
+		return keyVector.indexOf(singleObject);
 	}
 
 	/**
 	 * get the size of the vector for key
+	 * @param key the key of the vector
+	 * @return the size of the vector for key, 0 if no key exists
 	 */
 	public int size(key key)
 	{
@@ -142,6 +154,8 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 
 	/**
 	 * put the value for key, ensuring uniqueness
+	 * @param key the key of the vector
+	 * @param val the vector element
 	 */
 	public void putOne(key key, vectorObject val)
 	{
@@ -157,6 +171,9 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 
 	/**
 	 * remove the value for key,also remove key if the vector is empty
+	 *
+	 * @param key the key of the vector
+	 * @param val the vector element
 	 */
 	public void removeOne(key key, vectorObject val)
 	{
@@ -171,6 +188,10 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 
 	/**
 	 * replace the value for key, add if oldObj==null or is not there
+	 * 
+	 * @param key the key of the vector
+	 * @param newObj the new object to set
+	 * @param oldObj the old object to replace
 	 */
 	public void setOne(key key, vectorObject newObj, vectorObject oldObj)
 	{

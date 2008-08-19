@@ -76,16 +76,12 @@ import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author Rainer Prosi
- * 
+ * helper class for amount pools
  */
 public interface IAmountPoolContainer
 {
 	/**
-	 * returns true if subset is a subset of this i.e. subset contains either equivalent elements or null and no
-	 * non-matching elemenets matches(null) always returns true
-	 * 
-	 * @param subset
-	 * @return true if it matches
+	 * @return the matching amountpool
 	 */
 	public JDFAmountPool getAmountPool();
 
@@ -135,7 +131,7 @@ public interface IAmountPoolContainer
 	public void removeAttribute(String attrib, String nameSpaceURI);
 
 	/**
-	 * @return
+	 * @return the AmountPool
 	 */
 	public JDFAmountPool getCreateAmountPool();
 

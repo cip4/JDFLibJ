@@ -73,42 +73,71 @@ package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * tests for the VectorMap class
+ */
 public class VectorMapTest extends JDFTestCaseBase
 {
 	private VectorMap<String, String> m;
 
+	/**
+	 * 
+	 */
 	public void testSize()
 	{
 		assertEquals(m.size("a"), 2);
 	}
 
+	/**
+	 * test for getOne
+	 */
 	public void testGetOne()
 	{
 		assertEquals(m.getOne("a", 0), "b");
-		assertEquals(m.getOne("a", "b"), "b");
 	}
 
+	/**
+	 * test for getIndex
+	 */
+	public void testGetIndex()
+	{
+		assertEquals(m.getIndex("a", "b"), 0);
+		assertEquals(m.getIndex("a", "c"), 1);
+		assertEquals(m.getIndex("a", "d"), -1);
+		assertEquals(m.getIndex("c", "c"), -2);
+	}
+
+	/**
+	 * 
+	 */
 	public void testPutOne()
 	{
 		assertEquals(m.size("a"), 2);
 		m.putOne("a", "b");
 		assertEquals(m.getOne("a", 0), "b");
-		assertEquals(m.getOne("a", "b"), "b");
 	}
 
-	public void testRemoveOne()
+	/**
+	 * 
+	 */
+	public void testremoveOne()
 	{
 		m.removeOne("a", "b");
 		assertEquals(m.getOne("a", 0), "c");
+		assertEquals(-1, m.getIndex("a", "b"));
 		assertEquals(m.size("a"), 1);
 		m.removeOne("a", "c");
-		assertNull(m.getOne("a", "b"));
+		assertEquals(-2, m.getIndex("a", "b"));
 		assertNull(m.get("a"));
 		m.removeOne("a", "c");
-		assertNull(m.getOne("a", "b"));
+		assertEquals(-2, m.getIndex("a", "b"));
 		assertNull(m.get("a"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetOne()
 	{
 		m.setOne("a", "b1", "b");
@@ -127,6 +156,7 @@ public class VectorMapTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

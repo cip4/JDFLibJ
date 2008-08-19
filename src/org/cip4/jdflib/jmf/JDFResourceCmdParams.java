@@ -358,6 +358,21 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 					resTargetPart.setAttributes(map);
 				}
 				JDFResource resCmdPart = resCmd.getPartition(amParts, EnumPartUsage.Implicit);
+				JDFAttributeMap map = resCmdPart.getAttributeMap();
+				VString keys = map.getKeys();
+				int keySize = keys == null ? 0 : keys.size();
+				{
+					for (int k = 0; k < keySize; k++)
+					{
+						final String key = keys.elementAt(k);
+						final String value = map.get(key);
+						if (value == null || JDFConstants.EMPTYSTRING.equals(value))
+						{
+							resCmdPart.removeAttribute(key);
+							resTargetPart.removeAttribute(key);
+						}
+					}
+				}
 				resTargetPart.mergeElement(resCmdPart, false);
 				resTarget.setID(id);
 			}

@@ -577,7 +577,7 @@ public class VJDFAttributeMap
 		if (size != ((VJDFAttributeMap) other).size())
 			return false;
 
-		VJDFAttributeMap vOther = new VJDFAttributeMap(((VJDFAttributeMap) other).getVector());
+		VJDFAttributeMap vOther = new VJDFAttributeMap((JDFAttributeMap[]) ((VJDFAttributeMap) other).getVector().toArray(new JDFAttributeMap[0]));
 		for (int i = 0; i < size; i++)
 		{
 			JDFAttributeMap map = elementAt(i);

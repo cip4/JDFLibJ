@@ -74,6 +74,7 @@ import java.util.Vector;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -219,6 +220,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * apply a resource cmd
+	 */
 	public void testApplyResourceCmd()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -276,6 +280,13 @@ public class JMFResourceTest extends JDFTestCaseBase
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
 		assertEquals("overwrote leaf root dimension", m2Sheet3.getDimension(), new JDFXYPair(400, 600));
 		assertFalse(m2Sheet3.hasAttribute_KElement("ID", null, false));
+
+		mPartRQP.setAttribute(AttributeName.DIMENSION, "");
+		mediaRQP.removeAttribute(AttributeName.DIMENSION);
+		rqp.applyResourceCommand(jdf);
+		JDFMedia m2Sheet4 = (JDFMedia) m2.getPartition(sheetMap, null);
+		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
+		assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
 	}
 
 	/**
@@ -283,8 +294,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-
-	public void testResourceCommand()
+	public void testResourceCommand() throws Exception
 	{
 		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCommandTest.jdf");
 		JDFNode root = jdfDoc.getJDFRoot();

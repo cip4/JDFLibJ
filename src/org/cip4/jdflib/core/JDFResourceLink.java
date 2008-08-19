@@ -95,6 +95,7 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
+import org.cip4.jdflib.pool.JDFAmountPool.AmountMap;
 import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -1463,6 +1464,16 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			}
 		}
 		return bMatch ? d : def;
+	}
+
+	/**
+	 * get an AmountMap for the child Amountpool of this
+	 * @param vPartIDKeys
+	 * @return the AmountMap for the Amountpool, null if no amountpool exists
+	 */
+	public AmountMap getAmountMap(VString vPartIDKeys)
+	{
+		return AmountPoolHelper.getAmountMap(this, vPartIDKeys);
 	}
 
 	/**
