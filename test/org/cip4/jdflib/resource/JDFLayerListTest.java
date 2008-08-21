@@ -132,8 +132,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 
 		setupLayout(false);
 
-		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"),
-				EnumNodeStatus.Completed);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"), EnumNodeStatus.Completed, null);
 		JDFResourceLink rl = n.getLink(rlIn, null);
 		rl.setPartition(EnumPartIDKey.PartVersion, "CMYK De");
 		d.write2File(sm_dirTestDataTemp + File.separator + "LayerList.jdf", 2,
@@ -157,8 +156,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 
 		setupLayout(false);
 
-		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"),
-				EnumNodeStatus.Completed);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"), EnumNodeStatus.Completed, null);
 		JDFResourceLink rl = n.getLink(rlIn, null);
 		rl.setPartition(EnumPartIDKey.PartVersion, "De");
 		d.write2File(sm_dirTestDataTemp + File.separator
@@ -184,8 +182,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 		setupRunList(1);
 		setupLayout(true);
 
-		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"),
-				EnumNodeStatus.Completed);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"), EnumNodeStatus.Completed, null);
 		JDFResourceLink rl = n.getLink(rlIn, null);
 		rl.setPartition(EnumPartIDKey.PartVersion, "De Euro");
 		d.write2File(sm_dirTestDataTemp + File.separator
@@ -220,8 +217,7 @@ public class JDFLayerListTest extends JDFTestCaseBase
 		setupRunList(2);
 		setupLayout(true);
 
-		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"),
-				EnumNodeStatus.Completed);
+		n.setPartStatus(new JDFAttributeMap(EnumPartIDKey.PartVersion, "De"), EnumNodeStatus.Completed, null);
 		JDFResourceLink rl = n.getLink(rlIn, null);
 		rl.setPartition(EnumPartIDKey.PartVersion, "De");
 		d.write2File(sm_dirTestDataTemp + File.separator

@@ -1998,8 +1998,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				niSpawn = spawnedNode.getInheritedNodeInfo(null);
 				assertNotNull("ni", niSpawn);
 
-				spawnedNode
-						.setPartStatus(partmapvector, EnumNodeStatus.Aborted);
+				spawnedNode.setPartStatus(partmapvector, EnumNodeStatus.Aborted, null);
 				assertEquals(spawnedNode.getPartStatus(j == 1 ? partmapvector
 						.elementAt(0) : null), EnumNodeStatus.Aborted);
 
@@ -2123,13 +2122,13 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		vMap.add(map1);
 		vMap.add(map2);
 		JDFNode[] nodes = new JDFNode[3];
-		root.setPartStatus(vMap, EnumNodeStatus.Waiting);
+		root.setPartStatus(vMap, EnumNodeStatus.Waiting, null);
 		nodes[0] = root.addJDFNode(EnumType.Approval);
 		nodes[1] = root.addJDFNode(EnumType.Bending);
 		nodes[2] = root.addJDFNode(EnumType.ImageReplacement);
 		for (int i = 0; i < 3; i++)
 		{
-			nodes[i].setPartStatus(vMap, EnumNodeStatus.Waiting);
+			nodes[i].setPartStatus(vMap, EnumNodeStatus.Waiting, null);
 		}
 
 		vMap.removeElementAt(1);
@@ -2141,7 +2140,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			JDFSpawn spawn = new JDFSpawn(node);
 			spawn.vSpawnParts = vMap;
 			JDFNode spawnedNode = spawn.spawn();
-			spawnedNode.setPartStatus(map1, EnumNodeStatus.Completed);
+			spawnedNode.setPartStatus(map1, EnumNodeStatus.Completed, null);
 			JDFMerge merge = new JDFMerge(node);
 
 			// this is the feature taht is being tested..

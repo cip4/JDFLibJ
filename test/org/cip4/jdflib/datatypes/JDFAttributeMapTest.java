@@ -92,6 +92,22 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
  */
 public class JDFAttributeMapTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
+	public void testShowKeys()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		assertEquals(m1.showKeys(" "), "(a1 = v1)");
+		m1.put("b1", "v2");
+		assertEquals(m1.showKeys(" "), "(a1 = v1) (b1 = v2)");
+		assertEquals(m1.showKeys("\n"), "(a1 = v1)\n(b1 = v2)");
+		assertEquals(m1.showKeys(null), "(a1 = v1)(b1 = v2)");
+	}
+
+	/**
+	 * 
+	 */
 	public void testClone()
 	{
 		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");

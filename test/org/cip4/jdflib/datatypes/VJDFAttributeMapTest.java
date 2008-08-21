@@ -191,6 +191,22 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testShowKeys()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap();
+		m1.put("a2", "v2");
+		JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		m2.put("a3", "v3");
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		assertEquals(v.showKeys("-", " "), "[0](a2 = v2)-[1](a2 = v3) (a3 = v3)");
+	}
+
+	/**
 	 * test Unify
 	 */
 	public void testUnify()

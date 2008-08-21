@@ -113,7 +113,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 		JDFNodeInfo ni = n.getCreateNodeInfo();
 		final JDFAttributeMap map = new JDFAttributeMap(
 				EnumPartIDKey.Separation, "Cyan");
-		n.setPartStatus(map, EnumNodeStatus.Ready);
+		n.setPartStatus(map, EnumNodeStatus.Ready, null);
 		JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
 		assertNotNull(niPart);
 		assertNull(niPart.getAttribute_KElement(AttributeName.PARTUSAGE, null,
@@ -131,7 +131,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 		assertTrue(ni.hasAttribute("WorkStepID"));
 		final JDFAttributeMap map = new JDFAttributeMap(
 				EnumPartIDKey.Separation, "Cyan");
-		n.setPartStatus(map, EnumNodeStatus.Ready);
+		n.setPartStatus(map, EnumNodeStatus.Ready, null);
 		JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
 		assertNotNull(niPart);
 		assertTrue(niPart.hasAttribute("WorkStepID"));

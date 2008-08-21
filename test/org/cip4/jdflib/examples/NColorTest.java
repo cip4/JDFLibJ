@@ -210,7 +210,7 @@ public class NColorTest extends JDFTestCaseBase
 				EnumNodeStatus.Completed, false);
 		// node.getLink(component, null).setAmountPoolAttribute("ActualAmount",
 		// String.valueOf(1000), null, attributeMapS0);
-		node.setPartStatus(attributeMapS0, EnumNodeStatus.Completed);
+		node.setPartStatus(attributeMapS0, EnumNodeStatus.Completed, null);
 		bgt.write2File(sm_dirTestDataTemp + File.separator
 				+ "FrontBack_Back1.jdf", 2);
 	}

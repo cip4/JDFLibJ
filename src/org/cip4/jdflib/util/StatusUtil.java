@@ -359,7 +359,7 @@ public class StatusUtil
 			deviceInfo.setDeviceStatus(deviceStatus);
 			deviceInfo.setStatusDetails(deviceStatusDetails);
 			deviceInfo.setDeviceID(m_deviceID);
-			m_Node.setPartStatus(m_vPartMap, nodeStatus);
+			m_Node.setPartStatus(m_vPartMap, nodeStatus, null);
 			getVResLink(amounts, 2);// update the nodes links
 
 			generateResourceSignal(amounts, jmfRes);

@@ -707,6 +707,29 @@ public class StringUtil
 	}
 
 	/**
+	 * return null if s==null or s==def, else s<br/>
+	 * used e.g. to zapp "" strings
+	 * @param s the String to test 
+	 * @param def the default that is converted to null
+	 * @return the converted String
+	 */
+	public static String getDefaultNull(String s, String def)
+	{
+		return s == null || def.equals(s) ? null : s;
+	}
+
+	/**
+	 * return null if s==null or s=="", else s<br/>
+	 * used e.g. to zapp "" strings
+	 * @param s the String to test 
+	 * @return the converted String
+	 */
+	public static String getNonEmpty(String s)
+	{
+		return s == null || JDFConstants.EMPTYSTRING.equals(s) ? null : s;
+	}
+
+	/**
 	 * replace the .extension of a file name
 	 * 
 	 * @param strWork the file path
