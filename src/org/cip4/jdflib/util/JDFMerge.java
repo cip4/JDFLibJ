@@ -396,7 +396,7 @@ public class JDFMerge
 				if (stat != null && !stat.equals(JDFElement.EnumNodeStatus.Part)
 						&& !stat.equals(JDFElement.EnumNodeStatus.Pool) && numParts > 0)
 				{
-					toMergeLocalNode.setPartStatus(parts, stat);
+					toMergeLocalNode.setPartStatus(parts, stat, null);
 				}
 			}
 		}

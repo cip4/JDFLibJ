@@ -143,8 +143,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		 * 
 		 * @return the sum of all matching amounts
 		 */
-
-		double getAmountDouble(JDFAttributeMap amParts, String strAttributeName)
+		public double getAmountDouble(JDFAttributeMap amParts, String strAttributeName)
 		{
 			double dValue = -1.0;
 			final Vector<JDFPartAmount> lpa = get(amParts);
@@ -193,6 +192,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink
 		 *            root attribute.
 		 * @return value of attribute found, null if not available
+		 * @param iSkip the index of the partAmount to check
 		 * @since 071103
 		 */
 		public static String getAmountPoolAttribute(IAmountPoolContainer poolParent, final String attrib, final String nameSpaceURI, final JDFAttributeMap mPart, final int iSkip)

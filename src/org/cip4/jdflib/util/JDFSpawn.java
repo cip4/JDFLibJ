@@ -968,7 +968,7 @@ public class JDFSpawn
 			EnumNodeStatus partStatus = node.getPartStatus(vLocalSpawnParts.elementAt(0));
 			if (partStatus != null)
 				spawnAudit.setStatus(partStatus);
-			node.setPartStatus(vLocalSpawnParts, EnumNodeStatus.Spawned);
+			node.setPartStatus(vLocalSpawnParts, EnumNodeStatus.Spawned, null);
 		}
 		else
 		// No partitioning - set Audit + Status globally
@@ -1578,7 +1578,7 @@ public class JDFSpawn
 							if ((parent.getPartStatus(parts.elementAt(i)).equals(JDFElement.EnumNodeStatus.Spawned))
 									|| fHasAuditStatus)
 							{
-								parent.setPartStatus(parts.elementAt(i), status);
+								parent.setPartStatus(parts.elementAt(i), status, null);
 							}
 						}
 					}

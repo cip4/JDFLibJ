@@ -296,8 +296,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
@@ -2248,16 +2248,29 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	// --------------------------------------------------------------------------
-	// ------
 
 	/**
-	 * sets the node's partition status
+	 * sets the node's partition status and StatusDetails
+	 * 
+	 * @param vmattr vector Attribute maps of partition
+	 * @param status Status to set
+	 * @return boolean: success or not
+	 * @deprecated use 3 parameter version
+	 */
+	@Deprecated
+	public boolean setPartStatus(VJDFAttributeMap vmattr, EnumNodeStatus status)
+	{
+		return setPartStatus(vmattr, status, null);
+	}
+
+	/**
+	 * sets the node's partition status and StatusDetails
 	 * 
 	 * @param vmattr vector Attribute maps of partition
 	 * @param status Status to set
 	 * @return boolean: success or not
 	 */
-	public boolean setPartStatus(VJDFAttributeMap vmattr, EnumNodeStatus status)
+	public boolean setPartStatus(VJDFAttributeMap vmattr, EnumNodeStatus status, String statusDetails)
 	{
 		boolean bRet = true;
 
@@ -2266,12 +2279,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			for (int i = 0; i < siz; i++)
 			{
-				bRet = setPartStatus(vmattr.elementAt(i), status) && bRet;
+				bRet = setPartStatus(vmattr.elementAt(i), status, statusDetails) && bRet;
 			}
 		}
 		else
 		{
-			bRet = setPartStatus((JDFAttributeMap) null, status);
+			bRet = setPartStatus((JDFAttributeMap) null, status, statusDetails);
 		}
 
 		return bRet;
@@ -2283,11 +2296,25 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param mattr Attribute map of partition
 	 * @param status Status to set
 	 * @return boolean: success or not
+	 * @deprecated use 3 parameter version
 	 */
+	@Deprecated
 	public boolean setPartStatus(JDFAttributeMap mattr, JDFElement.EnumNodeStatus status)
 	{
-		final EnumNodeStatus stat = getStatus();
+		return setPartStatus(mattr, status, null);
+	}
 
+	/**
+	 * set the node's partition status if nodeinfo is partitioned, all leaves NodeStati below part are removed
+	 * 
+	 * @param mattr Attribute map of partition
+	 * @param status Status to set
+	 * @return boolean: success or not
+	 */
+	public boolean setPartStatus(JDFAttributeMap mattr, JDFElement.EnumNodeStatus status, String statusDetails)
+	{
+		final EnumNodeStatus stat = getStatus();
+		statusDetails = StringUtil.getNonEmpty(statusDetails);
 		// 100602 handle nasty combination
 		if (mattr != null
 				&& (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
@@ -2300,6 +2327,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		if (mattr == null || mattr.isEmpty())
 		{
 			setStatus(status);
+			if (statusDetails != null)
+				setStatusDetails(statusDetails);
 			removeChild(ElementName.STATUSPOOL, null, 0);
 			if (getVersion(true).getValue() >= JDFElement.EnumVersion.Version_1_3.getValue())
 			{
@@ -2308,8 +2337,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				{
 					ni.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
 					ni.setNodeStatus(status);
+					if (statusDetails != null)
+					{
+						ni.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
+						ni.setNodeStatusDetails(statusDetails);
+					}
 				}
-
 			}
 			return true;
 		}
@@ -2325,7 +2358,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				setStatus(JDFElement.EnumNodeStatus.Pool);
 			}
 
-			statusPool.setStatus(mattr, status, null);
+			statusPool.setStatus(mattr, status, statusDetails);
 
 			// this can happen if status = the previous status
 			// just remove the pool and reset the status to the original status
@@ -2333,6 +2366,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (statusPool.numChildElements(ElementName.PARTSTATUS, null) == 0)
 			{
 				setStatus(status);
+				if (statusDetails != null)
+					setStatusDetails(statusDetails);
 				statusPool.deleteNode();
 			}
 		}
@@ -2343,7 +2378,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (getStatus() != JDFElement.EnumNodeStatus.Part)
 			{ // set a decent default status for implicit
 				ni.setNodeStatus(getStatus());
-
+				if (statusDetails != null)
+				{
+					ni.setNodeStatusDetails(statusDetails);
+				}
 			}
 
 			ni.getResourceRoot().setPartUsage(JDFResource.EnumPartUsage.Implicit);
@@ -2359,6 +2397,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				ni = (JDFNodeInfo) ve.elementAt(i);
 				ni.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
 				ni.setNodeStatus(status);
+				if (statusDetails != null)
+				{
+					ni.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
+					ni.setNodeStatusDetails(statusDetails);
+				}
 			}
 			setStatus(JDFElement.EnumNodeStatus.Part);
 		}
@@ -2366,14 +2409,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// ////////////
 	/**
 	 * get the node's partition status
 	 * 
 	 * @param mattr Attribute map of partition
-	 * @param bFromLeaves if false, get the directly specified value if true ignore the directly specified value and
-	 *            calculate the value from leaves, if any
-	 * 
 	 * @return JDFElement.EnumNodeStatus: Status of the partition, null if no Status exists
 	 */
 	public JDFElement.EnumNodeStatus getPartStatus(JDFAttributeMap mattr)
@@ -2425,6 +2464,68 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			stat = statusPool.getStatus(mattr);
 		}
 		return stat;
+	}
+
+	/**
+	 * get the node's partition statusdetails
+	 * 
+	 * @param mattr Attribute map of partition
+	 * @param bFromLeaves if false, get the directly specified value if true ignore the directly specified value and
+	 *            calculate the value from leaves, if any
+	 * 
+	 * @return String: Status of the partition, null if no Status exists (note the null return!)
+	 */
+	public String getPartStatusDetails(JDFAttributeMap mattr)
+	{
+		EnumNodeStatus stat = getStatus();
+		String statDetails = null;
+		if ((stat != EnumNodeStatus.Pool) && (stat != EnumNodeStatus.Part))
+		{
+			return StringUtil.getNonEmpty(getStatusDetails());
+		}
+		else if (stat == EnumNodeStatus.Part)
+		{
+			JDFNodeInfo ni = getNodeInfo();
+			if (ni == null)
+			{
+				return null;
+			}
+			ni = (JDFNodeInfo) ni.getPartition(mattr, null);
+			if (ni == null)
+			{
+				return null;
+			}
+			statDetails = ni.getNodeStatusDetails();
+
+			final VElement vLeaves = ni.getLeaves(false);
+			final int size = vLeaves.size();
+
+			for (int i = 0; i < size; i++)
+			{
+				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
+				JDFAttributeMap map = niCmp.getPartMap();
+				if (map != null && !map.overlapMap(mattr))
+				{
+					continue;
+				}
+
+				if (!ContainerUtil.equals(statDetails, niCmp.getNodeStatusDetails()))
+				{
+					return null; // inconsistent
+				}
+			}
+		}
+		else if (stat == EnumNodeStatus.Pool)
+		{
+			final JDFStatusPool statusPool = getStatusPool();
+			if (statusPool == null)
+			{
+				return null;
+			}
+			JDFPartStatus ps = statusPool == null ? null : statusPool.getPartStatus(mattr);
+			statDetails = ps == null ? null : StringUtil.getNonEmpty(ps.getStatusDetails());
+		}
+		return StringUtil.getNonEmpty(statDetails);
 	}
 
 	/**
@@ -3137,10 +3238,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-     *
+	 *
 
-     *
-     */
+	 *
+	 */
 
 	/**
 	 * ResourceTypeEqual<br>
@@ -3793,7 +3894,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				}
 				if (minStatus != null)
 				{
-					setPartStatus(map, minStatus);
+					setPartStatus(map, minStatus, null);
 				}
 			}
 		}

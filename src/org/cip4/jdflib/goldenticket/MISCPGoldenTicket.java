@@ -122,8 +122,18 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	public VString inkProductIDs = null;
 
 	protected int icsLevel;
+	/**
+	 * if true, previews are linked
+	 */
 	public boolean previewAvailable = false;
+	/**
+	 * file location of preview files
+	 */
 	public String previewShare = null;
+	/**
+	 * if true: ppf, else png preview names are generated
+	 */
+	public boolean bPPF = false;
 
 	/**
 	 * create a BaseGoldenTicket
@@ -331,29 +341,45 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		pv.setResStatus(EnumResStatus.Incomplete, false);
 		pv.setPreviewUsage(EnumPreviewUsage.Separation);
 		pv.setPartUsage(EnumPartUsage.Explicit);
-		pv.setPreviewFileType(EnumPreviewFileType.PNG);
+		pv.setPreviewFileType(bPPF ? EnumPreviewFileType.CIP3Single : EnumPreviewFileType.PNG);
 
-		if (vParts != null)
+		VJDFAttributeMap reducedMap = bPPF ? getReducedMap(new VString("Side Separation", " ")) : vParts;
+
+		int size = (reducedMap != null) ? reducedMap.size() : 0;
+		for (int i = 0; i < size; i++)
 		{
-			for (int i = 0; i < vParts.size(); i++)
+			final JDFAttributeMap part = new JDFAttributeMap(reducedMap.elementAt(i));
+			JDFPreview previewPartition = (JDFPreview) pv.getCreatePartition(part, partIDKeys);
+			if (bPPF)
 			{
-				final JDFAttributeMap part = new JDFAttributeMap(vParts.elementAt(i));
-				JDFPreview pvp = (JDFPreview) pv.getCreatePartition(part, partIDKeys);
+				preparePreview(previewPartition);
+			}
+			else
+			{
 				for (int j = 0; j < getNCols(); j++)
 				{
 					part.put(EnumPartIDKey.Separation, cols.stringAt(j));
-					pvp.getCreatePartition(part, partIDKeys);
-					if (previewAvailable)
-					{
-						pvp.setResStatus(EnumResStatus.Available, false);
-						pvp.setURL("http://example.com/?" + part.toString() + ".png");
-					}
-					else
-					{
-						pvp.setResStatus(EnumResStatus.Incomplete, false);
-					}
+					JDFPreview sepPreview = (JDFPreview) previewPartition.getCreatePartition(part, partIDKeys);
+					preparePreview(sepPreview);
 				}
 			}
+		}
+	}
+
+	/**
+	 * prepare a preview partition 
+	 * @param previewPartition
+	 */
+	private void preparePreview(JDFPreview previewPartition)
+	{
+		if (previewAvailable)
+		{
+			setPreviewURL(previewPartition);
+			previewPartition.setResStatus(EnumResStatus.Available, false);
+		}
+		else
+		{
+			previewPartition.setResStatus(EnumResStatus.Incomplete, false);
 		}
 	}
 
@@ -419,19 +445,46 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	{
 		super.makeReady();
 
+		makeReadyPreview();
+		makeReadyColorantControl();
+	}
+
+	/**
+	 * 
+	 */
+	private void makeReadyPreview()
+	{
 		JDFPreview pv = (JDFPreview) theNode.getResource(ElementName.PREVIEW, EnumUsage.Input, 0);
 		VElement v = pv == null ? new VElement() : pv.getLeaves(false);
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFPreview pvp = (JDFPreview) v.elementAt(i);
-			File share = UrlUtil.urlToFile(previewShare);
-			File file = new File(pvp.getSheetName() + "_" + pvp.getSide().getName().substring(0, 1) + "_"
-					+ pvp.getSeparation() + ".png");
-			file = FileUtil.getFileInDirectory(share, file);
-			pvp.setURL(UrlUtil.fileToUrl(file, false));
+			setPreviewURL(pvp);
+			pvp.setResStatus(EnumResStatus.Available, true);
 		}
-		makeReadyColorantControl();
+	}
 
+	/**
+	 * @param previewLeaf
+	 */
+	private void setPreviewURL(final JDFPreview previewLeaf)
+	{
+		File share = UrlUtil.urlToFile(previewShare);
+		File file;
+		if (bPPF)
+		{
+			file = new File(previewLeaf.getSheetName() + ".ppf");
+		}
+		else
+		{
+			file = new File(previewLeaf.getSheetName() + "_" + previewLeaf.getSide().getName().substring(0, 1) + "_"
+					+ previewLeaf.getSeparation() + ".png");
+
+		}
+		file = FileUtil.getFileInDirectory(share, file);
+		previewLeaf.setURL(UrlUtil.fileToUrl(file, false));
+		previewLeaf.setPreviewUsage(EnumPreviewUsage.Separation);
+		previewLeaf.setPreviewFileType(EnumPreviewFileType.CIP3Single);
 	}
 
 	/**
@@ -450,7 +503,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 			if (EnumWorkStyle.Simplex.equals(workStyle) || EnumWorkStyle.Perfecting.equals(workStyle))
 				reduceKeys.remove(AttributeName.SIDE);
 			reducedMap.reduceMap(reduceKeys.getSet());
-			theNode.setPartStatus(reducedMap, EnumNodeStatus.Waiting);
+			theNode.setPartStatus(reducedMap, EnumNodeStatus.Waiting, null);
 			for (int i = 0; i < reducedMap.size(); i++)
 			{
 				final JDFAttributeMap part = reducedMap.elementAt(i);

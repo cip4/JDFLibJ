@@ -387,8 +387,8 @@ public class BaseGoldenTicket
 	 */
 	public void execute(VJDFAttributeMap vMap, boolean bOutAvail, boolean bFirst)
 	{
-		theExpandedNode.setPartStatus(vMap, EnumNodeStatus.Completed);
-		theNode.setPartStatus(vMap, EnumNodeStatus.Completed);
+		theExpandedNode.setPartStatus(vMap, EnumNodeStatus.Completed, null);
+		theNode.setPartStatus(vMap, EnumNodeStatus.Completed, null);
 		runphases(good, waste, bOutAvail, bFirst);
 
 		// VElement vResLinks=theExpandedNode.getResourceLinks(null);
@@ -459,7 +459,7 @@ public class BaseGoldenTicket
 	 */
 	public void schedule(VJDFAttributeMap nodesToCombine, int starthours, int durationhours)
 	{
-		theNode.setPartStatus(nodesToCombine, EnumNodeStatus.Waiting);
+		theNode.setPartStatus(nodesToCombine, EnumNodeStatus.Waiting, null);
 		final JDFNodeInfo ni = theNode.getNodeInfo();
 		if (nodesToCombine == null)
 		{

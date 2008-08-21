@@ -299,8 +299,8 @@ public class MimeUtil extends UrlUtil
 
 	// private static Logger log = Logger.getLogger(MimeUtil.class);
 	/**
-     * 
-     */
+	 * 
+	 */
 
 	public static void setContentID(BodyPart bp, String cid)
 	{
@@ -635,8 +635,8 @@ public class MimeUtil extends UrlUtil
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private static void fillExtensionMap()
 	{
 		if (extensionMap == null)
@@ -692,7 +692,7 @@ public class MimeUtil extends UrlUtil
 	 * @deprecated use 3 parameter version
 	 */
 	@Deprecated
-	static public Multipart buildMimePackage(JDFDoc docJMF, JDFDoc docJDF) 
+	static public Multipart buildMimePackage(JDFDoc docJMF, JDFDoc docJDF)
 	{
 		return buildMimePackage(docJMF, docJDF, true);
 	}
@@ -1293,29 +1293,30 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * gets the JMF document of a submitqueueentry or returnqueuentry and the attached jdf document
 	 * 
-	 * @param bp the array of body parts to search
-	 * @return two JDFDocs: bp[0] is the jmf, bp[1] is the jdf null if the bp does not contain a jmf and at least one
-	 *         jdf
+	 * @param mp the Multipart to search
+	 * @return one or two JDFDocs: bp[0] is the jmf, bp[1] is the jdf, if a JDF is referenced;
 	 */
 	public static JDFDoc[] getJMFSubmission(Multipart mp)
 	{
 		BodyPart bp[] = getBodyParts(mp);
-		if (bp == null || bp.length < 2)
+		if (bp == null || bp.length < 1)
 			return null;
 		JDFDoc jmf = getJDFDoc(bp[0]);
-		if (jmf == null || jmf.getJMFRoot() == null)
+		JDFJMF jmfRoot = jmf == null ? null : jmf.getJMFRoot();
+		if (jmfRoot == null)
 			return null;
-		JDFJMF jmfRoot = jmf.getJMFRoot();
 		String subURL = jmfRoot.getSubmissionURL();
 
 		if (subURL == null)
-			return null;
+		{
+			return new JDFDoc[] { jmf };
+		}
 		BodyPart bpJDF = getPartByCID(mp, subURL);
 		JDFDoc docs[] = new JDFDoc[2];
 		docs[0] = jmf;
 		docs[1] = getJDFDoc(bpJDF);
 		if (docs[1] == null)
-			return null;
+			return new JDFDoc[] { jmf };
 		return docs;
 	}
 }

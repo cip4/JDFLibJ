@@ -675,20 +675,20 @@ public class StatusCounter
 
 		final LinkAmount mainLinkAmount = getLinkAmount(getFirstRefID());
 
-		JDFAuditPool ap = m_Node.getCreateAuditPool();
+		JDFAuditPool auditPool = m_Node.getCreateAuditPool();
 		// TODO rethink when to send 2 phases
-		JDFPhaseTime lastPhase = ap.getLastPhase(m_vPartMap, m_moduleID == null ? null : m_moduleID.stringAt(0));
+		JDFPhaseTime lastPhase = auditPool.getLastPhase(m_vPartMap, m_moduleID == null ? null : m_moduleID.stringAt(0));
 		JDFPhaseTime nextPhase = lastPhase;
 		boolean bEnd = EnumNodeStatus.Completed.equals(nodeStatus) || EnumNodeStatus.Aborted.equals(nodeStatus);
 		boolean bChanged = bEnd || lastPhase == null; // no previous audit or
 		// over and out
 
-		nextPhase = ap.setPhase(nodeStatus, nodeStatusDetails, m_vPartMap, new VElement(vEmployees));
+		nextPhase = auditPool.setPhase(nodeStatus, nodeStatusDetails, m_vPartMap, new VElement(vEmployees));
 		if (bEnd && !bCompleted)
 		{
 			writeAll();
 			appendResourceAudits();
-			appendProcessRun(nodeStatus, ap);
+			appendProcessRun(nodeStatus, auditPool);
 			bCompleted = true;
 		}
 		if (!bEnd) // we have been active again - need to rewrite processruns
@@ -721,7 +721,7 @@ public class StatusCounter
 			}
 			nextPhase.setModules(m_moduleID, m_moduleType);
 
-			updateCurrentJobPhase(nodeStatus, deviceStatus, deviceStatusDetails, jmfStatus, mainLinkAmount, nextPhase, bEnd);
+			updateCurrentJobPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails, jmfStatus, mainLinkAmount, nextPhase, bEnd);
 		}
 
 		jmfStatus.eraseEmptyAttributes(true);
@@ -808,7 +808,7 @@ public class StatusCounter
 
 	}
 
-	private void updateCurrentJobPhase(EnumNodeStatus nodeStatus, EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt2, boolean bEnd)
+	private void updateCurrentJobPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt2, boolean bEnd)
 	{
 		JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		JDFDeviceInfo deviceInfo = respStatus.getCreateDeviceInfo(0);
@@ -821,7 +821,7 @@ public class StatusCounter
 
 		fillDeviceInfo(deviceStatus, deviceStatusDetails, deviceInfo);
 
-		m_Node.setPartStatus(m_vPartMap, nodeStatus);
+		m_Node.setPartStatus(m_vPartMap, nodeStatus, nodeStatusDetails);
 		getVResLink(2);// update the nodes links
 
 		if (bEnd)
@@ -835,8 +835,7 @@ public class StatusCounter
 		}
 	}
 
-	private JDFResponse closeJobPhase(JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt1, 
-			@SuppressWarnings("unused") JDFPhaseTime pt2)
+	private JDFResponse closeJobPhase(JDFJMF jmf, final LinkAmount la, JDFPhaseTime pt1, @SuppressWarnings("unused") JDFPhaseTime pt2)
 	{
 		JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();

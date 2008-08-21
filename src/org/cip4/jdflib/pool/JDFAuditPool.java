@@ -197,8 +197,8 @@ public class JDFAuditPool extends JDFPool
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	public void ensureCreated()
 	{
 		final JDFAudit created = getAudit(0, EnumAuditType.Created, null, null);
@@ -661,12 +661,11 @@ public class JDFAuditPool extends JDFPool
 	/**
 	 * Create or modify a PhaseTime Audit and fill it If the phase is identical to the prior phase that has been set,
 	 * the existing PhaseTime is modified otherwise an existing phaseTime is closed and a new phaseTime is appended
-	 * Phasetime elements with different Parts are treated independantly
+	 * Phasetime elements with different Parts are treated independently
 	 * 
 	 * @param status the node status at this time
 	 * @param statusDetails details of this status
 	 * @param vmParts defines a vector of map of parts for which the PhaseTime is valid
-	 * @param employees Vector of employees that are currently registered for this job
 	 * @return JDFPhaseTime the newly created PhaseTime audit
 	 * 
 	 *         default: SetPhase(status, null,null,null)
@@ -681,7 +680,7 @@ public class JDFAuditPool extends JDFPool
 	/**
 	 * Create or modify a PhaseTime Audit and fill it If the phase is identical to the prior phase that has been set,
 	 * the existing PhaseTime is modified otherwise an existing phaseTime is closed and a new phaseTime is appended
-	 * Phasetime elements with different Parts are treated independantly
+	 * Phasetime elements with different Parts are treated independently
 	 * 
 	 * @param status the node status at this time
 	 * @param statusDetails details of this status
@@ -694,8 +693,7 @@ public class JDFAuditPool extends JDFPool
 	public JDFPhaseTime setPhase(EnumNodeStatus status, String statusDetails, VJDFAttributeMap vmParts, VElement employees)
 	{
 		JDFPhaseTime pt = getLastPhase(vmParts, null);
-		if ("".equals(statusDetails))
-			statusDetails = null;
+		statusDetails = StringUtil.getNonEmpty(statusDetails);
 		boolean bChanged = false;
 		VElement ptEmployees = pt == null ? new VElement() : pt.getChildElementVector(ElementName.EMPLOYEE, null);
 		if (pt == null)
@@ -802,9 +800,7 @@ public class JDFAuditPool extends JDFPool
 	 * @deprecated use JDFMerge.cleanUpMerge
 	 */
 	@Deprecated
-	public void cleanUpMerge(
-			@SuppressWarnings("unused") JDFNode.EnumCleanUpMerge cleanPolicy, 
-			@SuppressWarnings("unused") String spawnID) throws NoSuchMethodException
+	public void cleanUpMerge(@SuppressWarnings("unused") JDFNode.EnumCleanUpMerge cleanPolicy, @SuppressWarnings("unused") String spawnID) throws NoSuchMethodException
 	{
 		throw new NoSuchMethodException("use JDFMerge.cleanUpMergeAudits");
 		// JDFMerge.cleanUpMergeAudits(this, cleanPolicy, spawnID);
