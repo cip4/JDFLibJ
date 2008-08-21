@@ -159,6 +159,28 @@ public class JDFAttributeMap implements Map
 	// **************************************** Methods
 	// *********************************************
 	/**
+	 * showKeys - similar to toString but without class identifier
+	 * @param sep the separator key between key-entry pairs
+	 * 
+	 * @return String
+	 */
+	public String showKeys(String sep)
+	{
+		if (sep == null)
+			sep = "";
+		StringBuffer sb = new StringBuffer();
+		VString vsKeys = this.getKeys();
+		int size = vsKeys.size();
+		for (int k = 0; k < size; k++)
+		{
+			String strKey = vsKeys.stringAt(k);
+			String strValue = this.get(strKey);
+			sb.append(k == 0 ? "" : sep).append("(").append(strKey).append(" = ").append(strValue).append(")");
+		}
+		return (sb.toString());
+	}
+
+	/**
 	 * toString
 	 * 
 	 * @return String
@@ -166,22 +188,7 @@ public class JDFAttributeMap implements Map
 	@Override
 	public String toString()
 	{
-		StringBuffer sb = new StringBuffer();
-
-		sb.append("JDFAttributeMap: {");
-
-		VString vsKeys = this.getKeys();
-
-		for (int k = 0; k < vsKeys.size(); k++)
-		{
-			String strKey = vsKeys.stringAt(k);
-			String strValue = this.get(strKey);
-
-			sb.append(" (" + strKey + " = " + strValue + ")");
-		}
-		sb.append(" }");
-
-		return (sb.toString());
+		return "JDFAttributeMap: {" + showKeys(JDFConstants.BLANK) + " ";
 	}
 
 	/**

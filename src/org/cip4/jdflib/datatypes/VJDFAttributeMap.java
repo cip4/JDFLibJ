@@ -144,6 +144,7 @@ public class VJDFAttributeMap
 
 	// **************************************** Methods
 	// *********************************************
+
 	/**
 	 * toString
 	 * 
@@ -152,17 +153,27 @@ public class VJDFAttributeMap
 	@Override
 	public String toString()
 	{
+		return "VJDFAttributeMap: " + showKeys("\n", " ");
+	}
+
+	/**
+	 * @param sepMap the separator between maps
+	 * @param sepEntry the saparator between map entries
+	 * @return the string representation
+	 */
+	public String showKeys(String sepMap, String sepEntry)
+	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("VJDFAttributeMap: ");
 		final int nPartMaps = this.size();
 
 		for (int i = 0; i < nPartMaps; i++)
 		{
 			JDFAttributeMap amParts = this.elementAt(i);
-			sb.append("[" + i + "]" + amParts.toString() + "\n");
+			sb.append("[").append(i).append("]").append(amParts.showKeys(sepEntry));
+			if (i + 1 < nPartMaps)
+				sb.append(sepMap);
 		}
-
-		return (sb.toString());
+		return sb.toString();
 	}
 
 	/**
