@@ -446,16 +446,16 @@ public class DigiPrintTest extends JDFTestCaseBase
 				EnumDeviceStatus.Running, null);
 		ap.getLastPhase(null, null).setXMLComment(
 				"Phase where warm up waste is produced");
-		stCounter.addPhase(mediaRef, 0, 2);
-		stCounter.addPhase(compRef, 0, 20);
+		stCounter.addPhase(mediaRef, 0, 2, true);
+		stCounter.addPhase(compRef, 0, 20, true);
 
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Waste",
 				EnumDeviceStatus.Running, null);
 
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Good",
 				EnumDeviceStatus.Running, null);
-		stCounter.addPhase(mediaRef, 1, 0);
-		stCounter.addPhase(compRef, 10, 0);
+		stCounter.addPhase(mediaRef, 1, 0, true);
+		stCounter.addPhase(compRef, 10, 0, true);
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Good",
 				EnumDeviceStatus.Running, null);
 		ap.getLastPhase(null, null).setXMLComment(
@@ -470,8 +470,8 @@ public class DigiPrintTest extends JDFTestCaseBase
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Good",
 				EnumDeviceStatus.Running, null);
 
-		stCounter.addPhase(mediaRef, 99, 0);
-		stCounter.addPhase(compRef, 990, 0);
+		stCounter.addPhase(mediaRef, 99, 0, true);
+		stCounter.addPhase(compRef, 990, 0, true);
 		stCounter.setPhase(EnumNodeStatus.InProgress, "Good",
 				EnumDeviceStatus.Running, null);
 		ap.getLastPhase(null, null).setXMLComment(

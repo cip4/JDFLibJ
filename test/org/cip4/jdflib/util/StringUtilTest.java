@@ -563,6 +563,9 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testTokenize()
 	{
 		String s = "1 2\n3 \n4   5";
@@ -575,8 +578,29 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.tokenize(s, " \n", false), v);
 	}
 
+	/**
+	 * 
+	 */
+	public void testTokenizeDelim()
+	{
+		String s = "http://aa/b?c";
+		VString v = new VString();
+		v.add("http:");
+		v.add("/");
+		v.add("/");
+		v.add("aa");
+		v.add("/");
+		v.add("b");
+		v.add("?");
+		v.add("c");
+		assertEquals(StringUtil.tokenize(s, "/?", true), v);
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testConcatStrings()
 	{
 		VString v = StringUtil.tokenize("a b c", " ", false);

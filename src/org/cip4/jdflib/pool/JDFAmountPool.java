@@ -331,6 +331,12 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		// //////////////////////////////////////////////////////////////////////
 
 		/**
+		 * gets the sum of all matching tags, with the assumpzion that no condition defaults to good
+		 * 
+		 * @param poolParent 
+		 * @param attName 
+		 * @param vPart 
+		 * @return the sum
 		 * 
 		 */
 		public static double getAmountPoolSumDouble(IAmountPoolContainer poolParent, final String attName, VJDFAttributeMap vPart)
@@ -361,11 +367,24 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 			if (vParts.isEmpty())
 				return poolParent.getRealAttribute(attName, null, 0.0);
-
+			boolean isWaste = vPart != null && vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
+			if (!isWaste && (vPart == null || !vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"))))
+			{
+				vPart = new VJDFAttributeMap(vPart);
+				vPart.add(new JDFAttributeMap(AttributeName.CONDITION, "Good"));
+			}
 			for (int j = 0; j < vParts.size(); j++)
 			{
 				final JDFPartAmount pa = (JDFPartAmount) vParts.elementAt(j);
-				if (!pa.getPartMapVector().overlapsMap(vm))
+				VJDFAttributeMap partMapVector = pa.getPartMapVector();
+				if (isWaste)
+				{
+					boolean hasCondition = partMapVector.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"));
+					if (!hasCondition)
+						continue;
+
+				}
+				if (!partMapVector.overlapsMap(vm))
 					continue;
 				String ret = null;
 				ret = pa.getAttribute(attName, null, null);

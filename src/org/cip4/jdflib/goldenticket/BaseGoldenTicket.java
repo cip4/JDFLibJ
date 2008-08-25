@@ -492,7 +492,7 @@ public class BaseGoldenTicket
 			// only consume input for first set of runs
 			if (!bFirst && EnumUsage.Input.equals(rl.getUsage()))
 				_good = 0;
-			theStatusCounter.addPhase(rl.getrRef(), _good, waste);
+			theStatusCounter.addPhase(rl.getrRef(), _good, waste, true);
 		}
 	}
 

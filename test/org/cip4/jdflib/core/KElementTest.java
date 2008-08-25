@@ -586,6 +586,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testMoveMe()
 	{
 		XMLDoc doc = new XMLDoc("Test", "www.test.com");
@@ -605,6 +608,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testMoveElement()
 	{
 		XMLDoc doc = new XMLDoc("Test", null);
@@ -616,8 +622,12 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(c, c2);
 		KElement c3 = a.moveElement(c2, null);
 		assertEquals(c, c3);
+		assertEquals(a.getElement("c"), c3);
 	}
 
+	/**
+	 * 
+	 */
 	public void testMoveAttribute()
 	{
 		XMLDoc doc = new XMLDoc("Test", "www.test.com");

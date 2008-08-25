@@ -102,7 +102,8 @@ public class DocumentJDFImpl extends DocumentImpl
 		clon.docElement = ((KElement) docElement).cloneRoot(new XMLDoc(clon));
 		clon.ownerDocument = clon;
 		clon.firstChild = clon.docElement;
-		userData.remove(clon); // otherwise, clon is indefinitely retained in userdata of the original document and we have a memory leak problem....
+		userData.clear(); // otherwise, clon is indefinitely retained in userdata of the original document and we have a memory leak problem....
+		clon.userData.clear();
 		return clon;
 	}
 

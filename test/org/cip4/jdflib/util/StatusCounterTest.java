@@ -92,6 +92,10 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class StatusCounterTest extends JDFTestCaseBase
 {
 	protected JDFDoc d;
@@ -102,6 +106,9 @@ public class StatusCounterTest extends JDFTestCaseBase
 	private JDFExposedMedia xpMedia;
 	private JDFEmployee employee;
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
 	@Override
 	public void setUp()
 	{
@@ -115,11 +122,14 @@ public class StatusCounterTest extends JDFTestCaseBase
 		sc.setDeviceID(deviceID);
 		resID = xpMedia.getID();
 		sc.setFirstRefID(resID);
-		sc.addPhase(resID, 200, 0);
+		sc.addPhase(resID, 200, 0, true);
 		employee = (JDFEmployee) new JDFDoc("Employee").getRoot();
 		employee.setPersonalID("P1");
 	}
 
+	/**
+	 * 
+	 */
 	public void testDeviceID()
 	{
 		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
@@ -131,6 +141,9 @@ public class StatusCounterTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testAddPhase()
 	{
 		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
@@ -139,7 +152,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		JDFJobPhase jp = sig.getDeviceInfo(0).getJobPhase(0);
 		assertEquals(jp.getAmount(), 200, 0);
-		sc.addPhase(resID, 0, 100);
+		sc.addPhase(resID, 0, 100, true);
 		sc.setTrackWaste(resID, true);
 		JDFResourceLink rlXM = n.getLink(xpMedia, null);
 		for (int loop = 1; loop < 4; loop++)
@@ -152,7 +165,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 			assertEquals("multiple setPhase calls do not modify", jp.getAmount(), 200, 0);
 			assertEquals("multiple setPhase calls do not modify: " + loop, rlXM.getActualAmount(new JDFAttributeMap("Condition", "Good")), 200, 0);
 			assertEquals("% " + loop, jp.getPercentCompleted(), 200.0, 0);
-			sc.addPhase(resID, 0, 100);
+			sc.addPhase(resID, 0, 100, true);
 			assertEquals("" + loop, jp.getWaste(), loop * 100, 0);
 			assertEquals("multiple setPhase calls do Stack: " + loop, rlXM.getActualAmount(new JDFAttributeMap("Condition", "Waste")), 100 * loop, 0);
 		}
@@ -171,7 +184,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);
 
 		sc.setFirstRefID("dummy");
-		sc.addPhase(resID, 0, 100);
+		sc.addPhase(resID, 0, 100, true);
 		sc.setTrackWaste(resID, true);
 		sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		docJMF = sc.getDocJMFPhaseTime();
@@ -181,11 +194,14 @@ public class StatusCounterTest extends JDFTestCaseBase
 		assertEquals(jp.getMISDetails().getWorkType(), EnumWorkType.Alteration);
 	}
 
+	/**
+	 * 
+	 */
 	public void testEvent()
 	{
 		assertNull(sc.getDocJMFNotification(false));
 		sc.setEvent("id", "value", "blah blah");
-		JDFDoc d = sc.getDocJMFNotification(false);
+		d = sc.getDocJMFNotification(false);
 		JDFDoc d2 = sc.getDocJMFNotification(false);
 		assertTrue(d.getRoot().isEqual(d2.getRoot()));
 		d = sc.getDocJMFNotification(true);
@@ -210,6 +226,26 @@ public class StatusCounterTest extends JDFTestCaseBase
 		assertNull(d);
 	}
 
+	/**
+	 * test for memory leaks in clone
+	 */
+	public void testMemLeak()
+	{
+		JDFDoc docJMF = sc.getDocJMFPhaseTime();
+		long l = docJMF.getDocMemoryUsed();
+		for (int i = 0; i < 50000; i++)
+		{
+			sc.getDocJMFPhaseTime();
+			sc.getDocJMFNotification(true);
+			sc.getDocJMFResource();
+		}
+		long l2 = docJMF.getDocMemoryUsed();
+		assertTrue(l2 - l < 100000);
+	}
+
+	/**
+	 * 
+	 */
 	public void testEmployee()
 	{
 		assertFalse(sc.removeEmployee(employee));
@@ -226,9 +262,11 @@ public class StatusCounterTest extends JDFTestCaseBase
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		deviceInfo = sig.getDeviceInfo(0);
 		assertNull(deviceInfo.getEmployee(0));
-
 	}
 
+	/**
+	 * 
+	 */
 	public void testIdle()
 	{
 		JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
@@ -239,7 +277,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
 		JDFJobPhase jp = deviceInfo.getJobPhase(0);
 		assertEquals(jp.getAmount(), 200, 0);
-		sc.addPhase(resID, 0, 100);
+		sc.addPhase(resID, 0, 100, true);
 		sc.setTrackWaste(m.getID(), true);
 		bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		assertFalse(bChanged);
@@ -289,6 +327,9 @@ public class StatusCounterTest extends JDFTestCaseBase
 	//
 	// }
 
+	/**
+	 * 
+	 */
 	public void testMultiModule()
 	{
 		StatusCounter scRIP = new StatusCounter(n, null, null);
@@ -301,9 +342,9 @@ public class StatusCounterTest extends JDFTestCaseBase
 		msc.addModule(scSetter);
 
 		JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
-		String resID = m.getID();
+		resID = m.getID();
 		scRIP.setFirstRefID(resID);
-		scRIP.addPhase(resID, 200, 0);
+		scRIP.addPhase(resID, 200, 0, true);
 		boolean bChanged = scRIP.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		assertTrue(bChanged);
 		JDFDoc docJMF = scRIP.getDocJMFPhaseTime();
@@ -311,7 +352,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
 		JDFJobPhase jp = deviceInfo.getJobPhase(0);
 		assertEquals(jp.getAmount(), 200, 0);
-		scRIP.addPhase(resID, 0, 100);
+		scRIP.addPhase(resID, 0, 100, true);
 		scRIP.setTrackWaste(m.getID(), true);
 		bChanged = scRIP.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		assertFalse(bChanged);
@@ -319,7 +360,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 1);
 		scSetter.setPhase(EnumNodeStatus.InProgress, "seti", EnumDeviceStatus.Running, "run");
 		scSetter.setFirstRefID(resID);
-		scSetter.addPhase(resID, 400, 0);
+		scSetter.addPhase(resID, 400, 0, true);
 		dJMFAll = msc.getStatusResponse();
 		assertEquals("1 RIP, 1 setter", dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 2);
 

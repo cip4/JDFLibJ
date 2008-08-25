@@ -410,21 +410,38 @@ public class StatusCounter
 	}
 
 	/**
+	 * set the phase the amount specified by amount and waste to the resource with id refID
+	 * 
+	 * @param refID , type or usage of the resource, if null all are updated
+	 * @param amount the amount for this phase
+	 * @param waste the waste for this phase
+	 */
+	public synchronized void setPhase(String refID, double amount, double waste)
+	{
+		LinkAmount la = getLinkAmount(refID);
+		if (la == null)
+			return;
+		la.addPhase(amount, waste, true, false);
+		if (amount >= 0)
+			updatePercentComplete(la);
+	}
+
+	/**
 	 * add the amount specified by amount and waste to the resource with id refID
 	 * 
 	 * @param refID , type or usage of the resource, if null all are updated
 	 * @param amount
 	 * @param waste
+	 * @param sumTotal if true, also sum up the total amounts, else only phase
 	 */
-	public synchronized void addPhase(String refID, double amount, double waste)
+	public synchronized void addPhase(String refID, double amount, double waste, boolean sumTotal)
 	{
 		LinkAmount la = getLinkAmount(refID);
 		if (la == null)
 			return;
-		la.addPhase(amount, waste, false);
+		la.addPhase(amount, waste, false, sumTotal);
 		if (amount >= 0)
 			updatePercentComplete(la);
-
 	}
 
 	/**
@@ -852,7 +869,7 @@ public class StatusCounter
 		{
 			for (int i = 0; i < vLinkAmount.length; i++)
 			{
-				vLinkAmount[i].addPhase(0, 0, true);
+				vLinkAmount[i].addPhase(0, 0, true, true);
 			}
 		}
 		return respStatus;
@@ -1089,11 +1106,15 @@ public class StatusCounter
 			 * @param amount
 			 * @param waste
 			 * @param bNewPhase
+			 * @param sumTotal if true, also sum up the total amounts, else only phase
 			 */
-			protected void addPhase(double amount, double waste, boolean bNewPhase)
+			protected void addPhase(double amount, double waste, boolean bNewPhase, boolean sumTotal)
 			{
-				totalAmount += amount;
-				totalWaste += waste;
+				if (sumTotal)
+				{
+					totalAmount += amount;
+					totalWaste += waste;
+				}
 				if (bNewPhase)
 				{
 					phaseAmount = amount;
@@ -1277,7 +1298,7 @@ public class StatusCounter
 		protected JDFResourceLink getResourceInfoLink()
 		{
 			cleanAmounts();
-			return setPhaseAmounts();
+			return setTotalAmounts();
 		}
 
 		private JDFResourceLink setPhaseAmounts()
@@ -1398,10 +1419,11 @@ public class StatusCounter
 		 * @param amount
 		 * @param waste
 		 * @param bNewPhase
+		 * @param sumTotal if true, also sum up the total amounts, else only phase
 		 */
-		protected void addPhase(double amount, double waste, boolean bNewPhase)
+		protected void addPhase(double amount, double waste, boolean bNewPhase, boolean sumTotal)
 		{
-			lastBag.addPhase(amount, waste, bNewPhase);
+			lastBag.addPhase(amount, waste, bNewPhase, sumTotal);
 		}
 
 		/*

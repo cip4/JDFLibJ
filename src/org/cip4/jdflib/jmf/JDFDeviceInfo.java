@@ -157,7 +157,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * @deprecated use numChildElements(ElementName.JOBPHASE,null)
 	 */
 	@Deprecated
-	public int getJobCount() 
+	public int getJobCount()
 	{
 		return getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, 0).size();
 	}
@@ -258,9 +258,9 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	/**
 	 * returns true if this is the same phase, i.e. the
 	 * 
-	 * @param lastphase the phase to compare with
+	 * @param lastInfo the deviceInfo to compare with
 	 * @param bExact if true, use startTime as hook, else compare stati
-	 * @return
+	 * @return true if same
 	 */
 	public boolean isSamePhase(JDFDeviceInfo lastInfo, boolean bExact)
 	{
@@ -301,7 +301,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	/**
 	 * creates a new deviceInfo that spans lastphase and this phase
 	 * 
-	 * @param lastphase the phase to merge
+	 * @param lastInfo the deviceInfo to merge
 	 * @return true if successful
 	 */
 	public boolean mergeLastPhase(JDFDeviceInfo lastInfo)

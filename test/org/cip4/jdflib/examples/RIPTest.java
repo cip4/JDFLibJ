@@ -73,8 +73,8 @@ public class RIPTest extends JDFTestCaseBase
 		statCounter.setWorkType(EnumWorkType.Rework);
 		statCounter.setPhase(EnumNodeStatus.InProgress, "Imaging",
 				EnumDeviceStatus.Running, null);
-		statCounter.addPhase(refMedia, 1, 0);
-		statCounter.addPhase(refXM, 1, 0);
+		statCounter.addPhase(refMedia, 1, 0, true);
+		statCounter.addPhase(refXM, 1, 0, true);
 		statCounter.setPhase(EnumNodeStatus.InProgress, "Imaging",
 				EnumDeviceStatus.Running, null);
 		JDFDoc d2 = statCounter.getDocJMFResource();
@@ -179,8 +179,8 @@ public class RIPTest extends JDFTestCaseBase
 
 			statCounter.setPhase(EnumNodeStatus.InProgress, "Imaging",
 					EnumDeviceStatus.Running, null);
-			statCounter.addPhase(refMedia, 5, 0);
-			statCounter.addPhase(refXM, 5, 0);
+			statCounter.addPhase(refMedia, 5, 0, true);
+			statCounter.addPhase(refXM, 5, 0, true);
 			statCounter.setPhase(EnumNodeStatus.InProgress, "Imaging",
 					EnumDeviceStatus.Running, null);
 

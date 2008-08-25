@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,8 +78,36 @@
  */
 package org.cip4.jdflib.core;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * Standard JDF runtime exception class
+ */
 public class JDFException extends RuntimeException
 {
+	/**
+	 * equals that includes the value of id
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @param obj
+	 * @return true if obj is the same type of exception
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof JDFException))
+			return false;
+		return id != 0 ? id == ((JDFException) obj).id : super.equals(obj);
+	}
+
+	/**
+	 * @see java.lang.Object#hashCode()
+	 * @return the hashcode that takes id into account
+	 */
+	@Override
+	public int hashCode()
+	{
+		return getID();
+	}
+
 	private static final long serialVersionUID = 1L;
 	private int id = 0;
 
@@ -110,8 +138,8 @@ public class JDFException extends RuntimeException
 	/**
 	 * constructor
 	 * 
-	 * @param String message
-	 * @param boolean bPrintStack print Stacktrace if true
+	 * @param message
+	 * @param bPrintStack print Stacktrace if true
 	 * @deprecated print the stack trace in the application
 	 */
 	@Deprecated
@@ -143,8 +171,8 @@ public class JDFException extends RuntimeException
 	 * 
 	 * @return int the id
 	 */
-	int getID()
+	public int getID()
 	{
-		return id == 0 ? hashCode() : id;
+		return id == 0 ? super.hashCode() : id;
 	}
 }

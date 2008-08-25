@@ -163,7 +163,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * @param rootName ElementName.JDF or ElementName.JMF
-	 * @return
+	 * @return either the JDF or JMF root
 	 */
 	private KElement getJXFRoot(String rootName)
 	{

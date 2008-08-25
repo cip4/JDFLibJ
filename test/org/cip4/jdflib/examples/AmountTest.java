@@ -229,8 +229,8 @@ public class AmountTest extends JDFTestCaseBase
 							EnumDeviceStatus.Stopped, "PowerOn");
 				stUtil.setPhase(EnumNodeStatus.Setup, "FormChange",
 						EnumDeviceStatus.Setup, "FormChange");
-				stUtil.addPhase(refMedia, 0, 200);
-				stUtil.addPhase(refComp, 0, 200);
+				stUtil.addPhase(refMedia, 0, 200, true);
+				stUtil.addPhase(refComp, 0, 200, true);
 				stUtil.setPhase(EnumNodeStatus.Setup, "FormChange",
 						EnumDeviceStatus.Setup, "FormChange");
 
@@ -242,7 +242,7 @@ public class AmountTest extends JDFTestCaseBase
 					stUtil.setResourceAudit(refComp, EnumReason.ProcessResult);
 
 					stUtil.clearAmounts(refMedia);
-					stUtil.addPhase(refMedia, 50, 0);
+					stUtil.addPhase(refMedia, 50, 0, true);
 					JDFResourceAudit ra2 = stUtil.setResourceAudit(refMedia,
 							EnumReason.OperatorInput);
 					ra2.setRef(ra);
@@ -252,25 +252,25 @@ public class AmountTest extends JDFTestCaseBase
 				}
 				stUtil.setPhase(EnumNodeStatus.InProgress, "Good",
 						EnumDeviceStatus.Running, null);
-				stUtil.addPhase(refMedia, 4000, 0);
-				stUtil.addPhase(refComp, 4000, 0);
+				stUtil.addPhase(refMedia, 4000, 0, true);
+				stUtil.addPhase(refComp, 4000, 0, true);
 				stUtil.setPhase(EnumNodeStatus.Cleanup,
 						"Washup during processing", EnumDeviceStatus.Cleanup,
 						"Washup");
 				stUtil.setPhase(EnumNodeStatus.InProgress, "Waste",
 						EnumDeviceStatus.Running, null);
 
-				stUtil.addPhase(refMedia, 0, i == 0 ? 40 : 30);
-				stUtil.addPhase(refComp, 0, i == 0 ? 40 : 30);
+				stUtil.addPhase(refMedia, 0, i == 0 ? 40 : 30, true);
+				stUtil.addPhase(refComp, 0, i == 0 ? 40 : 30, true);
 				stUtil.setPhase(EnumNodeStatus.InProgress, "Good",
 						EnumDeviceStatus.Running, null);
 
-				stUtil.addPhase(refMedia, 1000, 0);
-				stUtil.addPhase(refComp, 1000, 0);
+				stUtil.addPhase(refMedia, 1000, 0, true);
+				stUtil.addPhase(refComp, 1000, 0, true);
 				stUtil.setPhase(EnumNodeStatus.InProgress, "Good",
 						EnumDeviceStatus.Running, null);
-				stUtil.addPhase(refMedia, i == 0 ? 5200 : 5400, 0);
-				stUtil.addPhase(refComp, i == 0 ? 5200 : 5400, 0);
+				stUtil.addPhase(refMedia, i == 0 ? 5200 : 5400, 0, true);
+				stUtil.addPhase(refComp, i == 0 ? 5200 : 5400, 0, true);
 				stUtil.setPhase(EnumNodeStatus.InProgress, "Good",
 						EnumDeviceStatus.Running, null);
 
@@ -282,7 +282,7 @@ public class AmountTest extends JDFTestCaseBase
 					stUtil.setResourceAudit(refComp, EnumReason.ProcessResult);
 
 					stUtil.clearAmounts(refMedia);
-					stUtil.addPhase(refMedia, 1 == 0 ? 10100 : 10200, 0);
+					stUtil.addPhase(refMedia, 1 == 0 ? 10100 : 10200, 0, true);
 					JDFResourceAudit ra2 = stUtil.setResourceAudit(refMedia,
 							EnumReason.OperatorInput);
 					ra2.setRef(ra);

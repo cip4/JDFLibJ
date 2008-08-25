@@ -125,7 +125,7 @@ import org.w3c.dom.traversal.TreeWalker;
 
 /**
  * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/DocumentImpl.html"
- *      >Xerces-Documentation< /a>
+ *      Xerces-Documentation< /a>
  */
 
 public class XMLDoc
@@ -1450,7 +1450,7 @@ public class XMLDoc
 			if (protocol.equalsIgnoreCase("File"))
 			{
 				write2File(UrlUtil.urlToFile(strURL), 0, true);
-				docResponse =  new XMLDoc();
+				docResponse = new XMLDoc();
 			}
 			else
 			{
@@ -1468,7 +1468,7 @@ public class XMLDoc
 		{
 			ex = null;
 		}
-		
+
 		return docResponse;
 	}
 
