@@ -1,6 +1,174 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD514 (27.08.2008)
+
+
+performance enhancements in JDFDate, RangeLists
+synchronization when importing nodes
+fix node status when applying resource command with NodeInfo
+more on memory leaks in clone
+added Statusdetails to setPartStatus()
+added AmountPool.AmountMap for quick loops over large AmountPools
+remove "" attributes in merge element
+
+
+
+Revision: 3517
+Author: prosi
+Date: 16:09:22, Mittwoch, 27. August 2008
+Message:
+performance enhancements in JDFDate, RangeLists
+synchronization when importing nodes
+fix node status when applying resource command with NodeInfo
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/DocumentJDFImpl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFRangeList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueEntry.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourceLinkPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/FileUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFDate.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/EmptyNamespace.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/JDFTestCaseBase.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFRefElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFSourceResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JMFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFPageListTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/process/JDFContentDataTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/ContainerUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FileUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFDateTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StatusCounterTest.java
+
+Revision: 3514
+Author: prosi
+Date: 13:47:51, Montag, 25. August 2008
+Message:
+Bambi Proxy Enhancements
+more on memory leaks in clone
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/DocumentJDFImpl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFException.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFDeviceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/AllJDFLibTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFElementTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFExceptionTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/AmountTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/DigiPrintTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/RIPTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StatusCounterTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+
+Revision: 3496
+Author: prosi
+Date: 09:44:03, Donnerstag, 21. August 2008
+Message:
+Bambi Proxy updates
+Bambi UI improvements
+added Statusdetails to setPartStatus()
+imprved Editor.sendToDevice to allow JMF
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/VJDFAttributeMap.java
+
+Revision: 3495
+Author: prosi
+Date: 09:43:29, Donnerstag, 21. August 2008
+Message:
+Bambi Proxy updates
+Bambi UI improvements
+added Statusdetails to setPartStatus()
+imprved Editor.sendToDevice to allow JMF
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAuditPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+
+Revision: 3494
+Author: prosi
+Date: 09:42:37, Donnerstag, 21. August 2008
+Message:
+Bambi Proxy updates
+Bambi UI improvements
+added Statusdetails to setPartStatus()
+imprved Editor.sendToDevice to allow JMF
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFNodeInfoTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/datatypes/JDFAttributeMapTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/datatypes/VJDFAttributeMapTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/NColorTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFLayerListTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+
+Revision: 3477
+Author: prosi
+Date: 13:52:33, Dienstag, 19. August 2008
+Message:
+added AmountPool.AmountMap for quick loops over large AmountPools
+remove "" attributes in merge element
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/VJDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/ifaces/IAmountPoolContainer.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/VectorMap.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/JDFExampleDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JMFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/pool/JDFAmountPoolTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/VectorMapTest.java
+
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD514) && !lbtype(JDFLIBJ_2.1.3BLD513)}" -print
+.\core\DocumentJDFImpl.java@@\main\95
+.\core\JDFException.java@@\main\12
+.\core\KElement.java@@\main\265
+.\core\XMLDoc.java@@\main\95
+.\datatypes\JDFAttributeMap.java@@\main\39
+.\datatypes\JDFRangeList.java@@\main\20
+.\datatypes\VJDFAttributeMap.java@@\main\33
+.\goldenticket\BaseGoldenTicket.java@@\main\12
+.\goldenticket\MISCPGoldenTicket.java@@\main\12
+.\jmf\JDFQueueEntry.java@@\main\32
+.\jmf\JDFResourceCmdParams.java@@\main\28
+.\node\JDFNode.java@@\main\275
+.\pool\JDFAmountPool.java@@\main\31
+.\pool\JDFAuditPool.java@@\main\107
+.\pool\JDFResourceLinkPool.java@@\main\84
+.\util\FileUtil.java@@\main\9
+.\util\JDFDate.java@@\main\53
+.\util\JDFMerge.java@@\main\28
+.\util\JDFSpawn.java@@\main\28
+.\util\MimeUtil.java@@\main\25
+.\util\StatusCounter.java@@\main\19
+.\util\StatusUtil.java@@\main\13
+.\util\StringUtil.java@@\main\72
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD513 (21.08.2008)
 
 Revision: 3477
