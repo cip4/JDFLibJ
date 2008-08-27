@@ -93,6 +93,10 @@ import java.util.zip.DataFormatException;
 import org.apache.commons.lang.time.FastDateFormat;
 import org.cip4.jdflib.core.JDFConstants;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDate>
 {
 	private static final long serialVersionUID = 1L;
@@ -122,6 +126,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		m_TimeZoneOffsetInMillis = t.getOffset(lTimeInMillis);
 	}
 
+	/**
+	 * @param other the  date to clone
+	 */
 	public JDFDate(final JDFDate other)
 	{
 		this();
@@ -186,6 +193,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * <li>"PT30M"</li>
 	 * 
 	 * @param strDateTime formatted date and time
+	 * @throws DataFormatException thrown if the string is not a reasonable iso date or date time
 	 */
 	private void init(String strDateTime) throws DataFormatException
 	{
@@ -283,26 +291,19 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				}
 			}
 
-			// interprete string
-			final int iYear = new Integer(strDateTime.substring(0, 4)).intValue();
-			final int iMonth = new Integer(strDateTime.substring(5, 7)).intValue() - 1; // months
-			// are
-			// zero
-			// based
-			// in
-			// Java
-			final int iDay = new Integer(strDateTime.substring(8, 10)).intValue();
-			final int iHour = new Integer(strDateTime.substring(11, 13)).intValue();
-			final int iMinute = new Integer(strDateTime.substring(14, 16)).intValue();
-			final int iSecond = new Integer(strDateTime.substring(17, 19)).intValue();
-			if (!strDateTime.substring(4, 5).equals("-") || !strDateTime.substring(7, 8).equals("-")
-					|| !strDateTime.substring(10, 11).equals("T") || !strDateTime.substring(13, 14).equals(":")
-					|| !strDateTime.substring(16, 17).equals(":") || strDateTime.length() - decimalLength != 25) // 6
-			// digit
-			// tz
+			// interpret the string - low level enhances performance quite a bit...
+			byte[] b = strDateTime.getBytes();
+			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':'
+					|| strDateTime.length() - decimalLength != 25) // 6 digit tz
 			{
 				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
 			}
+			final int iYear = getIntFromPos(b, 0, 4);
+			final int iMonth = getIntFromPos(b, 5, 7) - 1; // months are zero based in Java
+			final int iDay = getIntFromPos(b, 8, 10);
+			final int iHour = getIntFromPos(b, 11, 13);
+			final int iMinute = getIntFromPos(b, 14, 16);
+			final int iSecond = getIntFromPos(b, 17, 19);
 			// set seconds, minutes, hours, days, years to GregorianCalendar
 			final GregorianCalendar gregcal = new GregorianCalendar();
 			gregcal.setTimeZone(new SimpleTimeZone(getTimeZoneOffsetInMillis(), JDFConstants.EMPTYSTRING));
@@ -313,15 +314,15 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			{ // now handle fractions of seconds
 				if (decimalLength == 2)
 				{
-					lTimeInMillis += new Integer(strDateTime.substring(20, 21)).intValue() * 100;
+					lTimeInMillis += getIntFromPos(b, 20, 21) * 100;
 				}
 				else if (decimalLength == 3)
 				{
-					lTimeInMillis += new Integer(strDateTime.substring(20, 22)).intValue() * 10;
+					lTimeInMillis += getIntFromPos(b, 20, 22) * 10;
 				}
 				else
 				{
-					lTimeInMillis += new Integer(strDateTime.substring(20, 23)).intValue();
+					lTimeInMillis += getIntFromPos(b, 20, 23);
 				}
 				// gregcal.setTimeInMillis(lTimeInMillis);
 			}
@@ -336,6 +337,25 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
 		}
+	}
+
+	/**
+	 * parse a substring for integers - this is a bit faster then the original substring.intvalue...
+	 * @param strDateTime
+	 * @param pos1 
+	 * @param pos2 
+	 * @return the parsed integer value
+	 */
+	private int getIntFromPos(byte[] strDateTime, int pos1, int pos2)
+	{
+		int ret = 0;
+		int f = 1;
+		for (int i = pos2 - 1; i >= pos1; i--)
+		{
+			ret += f * (strDateTime[i] - '0');
+			f *= 10;
+		}
+		return ret;
 	}
 
 	/**
@@ -395,18 +415,22 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public String getDateTimeISO()
 	{
 		final String timePattern = "yyyy'-'MM'-'dd'T'HH:mm:ssZZ";
-		return getDateFormat(timePattern).format(createCalendar());
+		return getDateFormat(timePattern).format(lTimeInMillis);
 	}
 
+	/**
+	 * format the date with no time added
+	 * @return date and time as String of form yyyy-mm-dd
+	 */
 	public String getDateTimeISOBD()
 	{
 		final String timePatternBD = "yyyy'-'MM'-'dd'";
-		return getDateFormat(timePatternBD).format(createCalendar());
+		return getDateFormat(timePatternBD).format(lTimeInMillis);
 	}
 
 	/**
 	 * @param timePattern
-	 * @return
+	 * @return a date formatter
 	 */
 	private FastDateFormat getDateFormat(final String timePattern)
 	{
@@ -421,7 +445,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public String getDateISO()
 	{
 		final String timePattern = "yyyy'-'MM'-'dd";
-		return getDateFormat(timePattern).format(createCalendar());
+		return getDateFormat(timePattern).format(lTimeInMillis);
 	}
 
 	/**
@@ -432,7 +456,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public String getTimeISO()
 	{
 		final String timePattern = "HH:mm:ss";
-		return getDateFormat(timePattern).format(createCalendar());
+		return getDateFormat(timePattern).format(lTimeInMillis);
 	}
 
 	/**
@@ -443,7 +467,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public String getTimeZoneISO()
 	{
 		final String timePattern = "ZZ";
-		return getDateFormat(timePattern).format(createCalendar());
+		return getDateFormat(timePattern).format(lTimeInMillis);
 	}
 
 	/**
@@ -490,11 +514,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		lTimeInMillis = l;
 	}
 
-	private long createCalendar()
-	{
-		return lTimeInMillis;
-	}
-
+	/**
+	 * @return the GregorianCalendar for this date
+	 */
 	public GregorianCalendar getCalendar()
 	{
 		final GregorianCalendar gregorianCalendar = new GregorianCalendar(new SimpleTimeZone(m_TimeZoneOffsetInMillis, JDFConstants.EMPTYSTRING));
@@ -506,7 +528,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * true, if this is before other, also true if other==null
 	 * 
 	 * @param other JDFDate to compare
-	 * @return
+	 * @return true if this is before other
 	 */
 	public boolean before(final JDFDate other)
 	{

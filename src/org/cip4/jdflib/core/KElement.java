@@ -3884,24 +3884,29 @@ public class KElement extends ElementNSImpl
 
 	private static Node copyNode(Node parent, Node src, Node beforeChild)
 	{
+
 		if (src == null)
 			return null;
 
-		Node childNode = null;
-		if (src.getOwnerDocument() == parent.getOwnerDocument())
+		synchronized (parent)
 		{
-			childNode = src.cloneNode(true);
-		}
-		else
-		{
-			childNode = parent.getOwnerDocument().importNode(src, true);
-		}
 
-		if (beforeChild != null && beforeChild.getParentNode() != parent)
-		{
-			throw new JDFException("KElement.copyElement" + " beforeChild is not child of this");
+			Node childNode = null;
+			if (src.getOwnerDocument() == parent.getOwnerDocument())
+			{
+				childNode = src.cloneNode(true);
+			}
+			else
+			{
+				childNode = parent.getOwnerDocument().importNode(src, true);
+			}
+
+			if (beforeChild != null && beforeChild.getParentNode() != parent)
+			{
+				throw new JDFException("KElement.copyElement" + " beforeChild is not child of this");
+			}
+			return parent.insertBefore(childNode, beforeChild);
 		}
-		return parent.insertBefore(childNode, beforeChild);
 	}
 
 	/**
@@ -6270,6 +6275,8 @@ public class KElement extends ElementNSImpl
 
 	/**
 	 * clones the root and also correctly sets the owner document
+	 * @param d the document to clone the root into
+	 * @return the cloned root element
 	 */
 	KElement cloneRoot(XMLDoc d)
 	{

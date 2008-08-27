@@ -95,14 +95,12 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
-	static public final String sm_dirTestSchema = ".." + File.separator
-			+ "schema" + File.separator + "Version_1_3" + File.separator;
-	static public final String sm_dirTestData = "test" + File.separator
-			+ "data" + File.separator;
-	static public final String sm_dirTestDataTemp = sm_dirTestData + "temp"
+	static protected final String sm_dirTestSchema = ".." + File.separator + "schema" + File.separator + "Version_1_3"
 			+ File.separator;
+	static protected final String sm_dirTestData = "test" + File.separator + "data" + File.separator;
+	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
 
-	public static JDFDoc creatXMDoc()
+	protected static JDFDoc creatXMDoc()
 	{
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);
 		JDFDoc doc = new JDFDoc("JDF");
@@ -112,18 +110,14 @@ public abstract class JDFTestCaseBase extends TestCase
 		n.setType("ConventionalPrinting", true);
 		n.appendElement("NS:Foobar", "www.foobar.com");
 
-		n.appendMatchingResource("Layout", JDFNode.EnumProcessUsage.AnyInput,
-				null);
-		JDFComponent comp = (JDFComponent) n.appendMatchingResource(
-				"Component", JDFNode.EnumProcessUsage.AnyOutput, null);
-		JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource(
-				"ExposedMedia", JDFNode.EnumProcessUsage.Plate, null);
+		n.appendMatchingResource("Layout", JDFNode.EnumProcessUsage.AnyInput, null);
+		JDFComponent comp = (JDFComponent) n.appendMatchingResource("Component", JDFNode.EnumProcessUsage.AnyOutput, null);
+		JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.Plate, null);
 		JDFNodeInfo ni = n.appendNodeInfo();
 		JDFMedia m = xm.appendMedia();
 		m.appendElement("NS:FoobarMedia", "www.foobar.com");
 
-		assertEquals("m Class", m.getResourceClass(),
-				EnumResourceClass.Consumable);
+		assertEquals("m Class", m.getResourceClass(), EnumResourceClass.Consumable);
 
 		VString vs = new VString();
 		vs.add("SignatureName");
@@ -182,10 +176,12 @@ public abstract class JDFTestCaseBase extends TestCase
 	private String agentName;
 	private String agentVersion;
 	private String author;
+	protected long mem;
 
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -194,6 +190,19 @@ public abstract class JDFTestCaseBase extends TestCase
 		agentName = JDFAudit.getStaticAgentName();
 		agentVersion = JDFAudit.getStaticAgentVersion();
 		author = JDFAudit.getStaticAuthor();
+		mem = getCurrentMem();
+
+	}
+
+	/**
+	 * get the currently used memory
+	 * @return the used memory
+	 */
+	protected long getCurrentMem()
+	{
+		System.gc();
+		final Runtime rt = Runtime.getRuntime();
+		return rt.totalMemory() - rt.freeMemory();
 	}
 
 	/*
@@ -201,6 +210,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	 * 
 	 * @see junit.framework.TestCase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		super.tearDown();

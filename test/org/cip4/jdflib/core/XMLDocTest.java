@@ -1,71 +1,72 @@
 /*--------------------------------------------------------------------------------------------------
- * The CIP4 Software License, Version 1.0
- *
- *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
- * reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
- *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
- *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
- *    Processes in  Prepress, Press and Postpress" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact info@cip4.org.
- *
- * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
- *    permission of the CIP4 organization
- *
- * Usage of this software in commercial products is subject to restrictions. For
- * details please consult info@cip4.org.
- *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
- * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
- *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
- * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the
- * Integration of Processes in  Prepress, Press and Postpress , please see
- * <http://www.cip4.org/>.
- *
- */
+* The CIP4 Software License, Version 1.0
+*
+*
+* Copyright (c) 2001-2008 The International Cooperation for the Integration of
+* Processes in  Prepress, Press and Postpress (CIP4).  All rights
+* reserved.
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions
+* are met:
+	*
+	* 1. Redistributions of source code must retain the above copyright
+	*    notice, this list of conditions and the following disclaimer.
+	*
+	* 2. Redistributions in binary form must reproduce the above copyright
+	*    notice, this list of conditions and the following disclaimer in
+	*    the documentation and/or other materials provided with the
+	*    distribution.
+	*
+	* 3. The end-user documentation included with the redistribution,
+	*    if any, must include the following acknowledgment:
+		*       "This product includes software developed by the
+		*        The International Cooperation for the Integration of
+		*        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+*    Alternately, this acknowledgment may appear in the software itself,
+*    if and wherever such third-party acknowledgments normally appear.
+*
+* 4. The names "CIP4" and "The International Cooperation for the Integration of
+*    Processes in  Prepress, Press and Postpress" must
+*    not be used to endorse or promote products derived from this
+*    software without prior written permission. For written
+*    permission, please contact info@cip4.org.
+*
+* 5. Products derived from this software may not be called "CIP4",
+*    nor may "CIP4" appear in their name, without prior written
+*    permission of the CIP4 organization
+*
+* Usage of this software in commercial products is subject to restrictions. For
+* details please consult info@cip4.org.
+*
+* THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+* DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+* THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+* ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+* SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+* LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+* USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+* OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+* SUCH DAMAGE.
+* ====================================================================
+*
+* This software consists of voluntary contributions made by many
+* individuals on behalf of the The International Cooperation for the Integration
+* of Processes in Prepress, Press and Postpress and was
+* originally based on software
+* copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+* copyright (c) 1999-2001, Agfa-Gevaert N.V.
+*
+* For more information on The International Cooperation for the
+* Integration of Processes in  Prepress, Press and Postpress , please see
+* <http://www.cip4.org/>.
+*
+*/
+
 package org.cip4.jdflib.core;
 
 import java.io.File;
@@ -87,24 +88,60 @@ import org.w3c.dom.NodeList;
 public class XMLDocTest extends JDFTestCaseBase
 {
 
-	protected class MyExceptionHook
-	{
-		public Exception e = null;
-	}
-
 	protected abstract class MyThread implements Runnable
 	{
 
 		public XMLDoc d;
 		public int iLoop;
-		public MyExceptionHook hook;
+		public Exception hook = null;
+		private Object mutex = null;
 
-		/*
+		protected void waitComplete()
+		{
+			if (mutex == null)
+				return;
+			synchronized (mutex)
+			{
+				try
+				{
+					mutex.wait();
+				}
+				catch (InterruptedException x)
+				{
+					// nop
+				}
+			}
+		}
+
+		protected abstract void runMyThread();
+
+		/**
 		 * (non-Javadoc)
 		 * 
 		 * @see java.lang.Runnable#run()
 		 */
-		public abstract void run();
+		public void run()
+		{
+			try
+			{
+				mutex = new Object();
+				System.out.println("Starting " + iLoop);
+				runMyThread();
+				System.out.println("Completing " + iLoop);
+			}
+			catch (Exception e)
+			{
+				hook = e;
+			}
+			finally
+			{
+				synchronized (mutex)
+				{
+					mutex.notifyAll();
+					mutex = null;
+				}
+			}
+		}
 	}
 
 	protected class MyReadThread extends MyThread
@@ -116,56 +153,80 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		public void runMyThread()
 		{
-			try
+			KElement root = d.getRoot();
+			NodeList nl = root.getElementsByTagName("elem" + iLoop % 3);
+			for (int i = 0; i < nl.getLength(); i++)
 			{
-				System.out.println("Starting " + iLoop);
-				KElement root = d.getRoot();
-				NodeList nl = root.getElementsByTagName("elem" + iLoop % 3);
-				for (int i = 0; i < nl.getLength(); i++)
-				{
-					// Node n=
-					nl.item(i);
-				}
-				System.out.println("Completing " + iLoop);
-			}
-			catch (Exception e)
-			{
-				hook.e = e;
+				// Node n=
+				nl.item(i);
 			}
 		}
 	}
 
 	protected class MyWriteThread extends MyThread
 	{
-
-		/*
+		/**
 		 * (non-Javadoc)
 		 * 
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
-		public void run()
+		public void runMyThread()
 		{
-			try
+			KElement root = d.getRoot();
+			NodeList nl = root.getChildNodes();
+			for (int i = 0; i < nl.getLength(); i++)
 			{
-				System.out.println("Starting " + iLoop);
-				KElement root = d.getRoot();
-				NodeList nl = root.getChildNodes();
-				for (int i = 0; i < nl.getLength(); i++)
-				{
-					Node n = nl.item(i);
-					if (i % 73 == 0)
-						root.removeChild(n);
-				}
-				System.out.println("Completing " + iLoop);
+				Node n = nl.item(i);
+				if (i % 73 == 0)
+					root.removeChild(n);
 			}
-			catch (Exception e)
-			{
-				hook.e = e;
-			}
+			System.out.println("Completing " + iLoop);
+		}
+	}
 
+	/**
+	 * thread class that writes a lot of documents
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 *
+	 */
+	protected class MyManyWriteThread extends MyThread
+	{
+		protected int outerLoop = 10;
+
+		/**
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Runnable#run()
+		 */
+		@Override
+		public void runMyThread()
+		{
+			KElement root = d.getRoot();
+			String baseDir = sm_dirTestDataTemp + File.separator + "threadDir";
+			new File(baseDir).mkdirs();
+			String base = baseDir + File.separator + "ThreadWrite_" + iLoop + "_";
+			for (int j = 0; j < outerLoop; j++)
+			{
+				if (j % 100 == 0)
+					System.out.println(iLoop);
+				root.appendElement("bar");
+				System.out.print(".");
+				for (int i = 0; i < 100; i++)
+				{
+					String fn = base + i + ".jdf";
+					File file = new File(fn);
+					file.delete();
+					//assertTrue(file.createNewFile());
+					if (!d.write2File(file, 0, true))
+					{
+						System.out.println("snafu " + iLoop);
+						throw new JDFException("Snafu");
+					}
+				}
+			}
 		}
 	}
 
@@ -512,8 +573,8 @@ public class XMLDocTest extends JDFTestCaseBase
 		s = bos.toString();
 		assertTrue(s.indexOf(text) > 0);
 		JDFParser p = new JDFParser();
-//		JDFDoc dd = 
-			p.parseStream(bos.getInputStream());
+		//		JDFDoc dd = 
+		p.parseStream(bos.getInputStream());
 		bos = new ByteArrayIOStream();
 		d.write2Stream(bos, 2, false);
 		s = bos.toString();
@@ -531,13 +592,13 @@ public class XMLDocTest extends JDFTestCaseBase
 			root.appendElement("elem2").appendElement("elem3").setAttribute("foo", "bar" + i);
 		}
 
-		MyExceptionHook h = new MyExceptionHook();
+		MyReadThread[] mrs = new MyReadThread[100];
 		for (int i = 0; i < 100; i++)
 		{
 			MyReadThread mr = new MyReadThread();
 			mr.d = d;
 			mr.iLoop = i;
-			mr.hook = h;
+			mrs[i] = mr;
 			new Thread(mr).start();
 
 		}
@@ -547,11 +608,15 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		File f = new File(out);
 		assertTrue(f.canRead());
-		if (h.e != null)
-			fail("exception: " + h.e);
+		for (int i = 0; i < 100; i++)
+			if (mrs[i].hook != null)
+				fail("exception: " + mrs[i].hook);
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testWriteToFileThreadWrite()
 	{
 		XMLDoc d = new XMLDoc("doc", null);
@@ -562,30 +627,62 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			root.appendElement("elem0").appendElement("elem1").appendElement("elem2").setAttribute("foo", "bar" + i);
 		}
-
-		MyExceptionHook h = new MyExceptionHook();
+		MyWriteThread[] mrs = new MyWriteThread[10];
 		for (int i = 0; i < 10; i++)
 		{
 			MyWriteThread mr = new MyWriteThread();
 			mr.d = d;
 			mr.iLoop = i;
-			mr.hook = h;
+			mrs[i] = mr;
 			new Thread(mr).start();
 
 		}
 		System.out.println("Writing start");
 		assertTrue(d.write2File(out, 2, true));
 		System.out.println("Writing done");
-		if (h.e != null)
-		{
-			// fail("exception: "+h.e);
-			System.out.println("******** Xerces known defect: not threadsafe: " + h.e);
-		}
+		for (int i = 0; i < 10; i++)
+			if (mrs[i].hook != null)
+			{
+				// fail("exception: "+h.e);
+				System.out.println("******** Xerces known defect: not threadsafe: " + mrs[i].hook);
+			}
 
 		File f = new File(out);
 		assertTrue(f.canRead());
 	}
 
+	/**
+	 *  test many many writes in parallel threads
+	 *  note that the documents themselves are independent
+	 */
+	public void testWriteToFileThreadWriteMany()
+	{
+		MyManyWriteThread[] threads = new MyManyWriteThread[10];
+		for (int i = 0; i < 10; i++)
+		{
+			MyManyWriteThread mr = new MyManyWriteThread();
+			mr.d = new XMLDoc("doc", null);
+			mr.iLoop = i;
+			mr.outerLoop = 1;//10000000; // make high number for over night tests
+			threads[i] = mr;
+			new Thread(mr).start();
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			threads[i].waitComplete();
+			if (threads[i].hook != null)
+			{
+				System.out.println("exception " + threads[i].hook);
+				break;
+			}
+			System.out.println("done " + i);
+		}
+		System.out.println("all done ");
+	}
+
+	/**
+	 * 
+	 */
 	public void testWriteToFileFile()
 	{
 		XMLDoc d = new XMLDoc("doc", null);
@@ -608,6 +705,9 @@ public class XMLDocTest extends JDFTestCaseBase
 		assertTrue(f.canRead());
 	}
 
+	/**
+	 * 
+	 */
 	public void testWriteToFileURL()
 	{
 		XMLDoc d = new XMLDoc("doc", null);
@@ -636,7 +736,6 @@ public class XMLDocTest extends JDFTestCaseBase
 	 * tests all kinds of special characters in file names - including %, € and
 	 * umlauts
 	 * 
-	 * @throws Exception
 	 */
 	public void testUmlaut()
 	{
@@ -655,7 +754,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		File f = new File(out2);
 		f.delete();
-		assertNotNull(d.write2File(out2, 0, true));
+		assertTrue(d.write2File(out2, 0, true));
 		assertTrue(f.canRead());
 
 		JDFParser p = new JDFParser();
@@ -697,6 +796,9 @@ public class XMLDocTest extends JDFTestCaseBase
 		assertTrue("mem", mem + 10000 > s.length());
 	}
 
+	/**
+	 * 
+	 */
 	public void testCreateBig()
 	{
 		for (int ii = 0; ii < 4; ii++)

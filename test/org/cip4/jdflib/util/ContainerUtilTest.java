@@ -81,7 +81,7 @@ import org.cip4.jdflib.ifaces.IMatches;
 /**
  * general utilities for containers and objects
  * 
- * @author prosirai
+ * @author Rainer Prosi
  * 
  */
 public class ContainerUtilTest extends JDFTestCaseBase
@@ -89,7 +89,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	private class SimpleMatch implements IMatches
 	{
 
-		private int i;
+		private final int i;
 
 		public SimpleMatch(int i)
 		{

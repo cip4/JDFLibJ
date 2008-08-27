@@ -104,7 +104,7 @@ public class FileUtil
 	 * list all files with a given extension (directories are skipped
 	 * 
 	 * @param dir the directory to search
-	 * @param comma separated list of extensions to check for (null = list all)
+	 * @param extension comma separated list of extensions to check for (null = list all)
 	 * @return Files[] the matching files, null if none are found
 	 */
 	public static File[] listFiles(File dir, String extension)
@@ -133,9 +133,6 @@ public class FileUtil
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// //////
-	// //////////////////////////////////////////////////////////////////////////
-	// //////
 
 	/************************
 	 * Inner class ***********************
@@ -148,8 +145,8 @@ public class FileUtil
 		private Set<String> m_extension;
 
 		/**
-         * 
-         */
+		 * 
+		 */
 		public SimpleFileFilter(String fileExtension)
 		{
 			if (fileExtension != null)
@@ -197,8 +194,8 @@ public class FileUtil
 	public static class DirectoryFileFilter implements FileFilter
 	{
 		/**
-         * 
-         */
+		 * 
+		 */
 		public DirectoryFileFilter()
 		{ /* nop */
 		}
@@ -354,5 +351,51 @@ public class FileUtil
 		if (localFile == null)
 			return null;
 		return new File(dir.getPath() + File.separator + localFile.getPath());
+	}
+
+	/**
+	 * @param f the file to cleanup 
+	 * @return the cleaned file
+	 */
+	public static File cleanURL(File f)
+	{
+		String s = UrlUtil.fileToUrl(f, false);
+		return UrlUtil.urlToFile(s);
+	}
+
+	/**
+	 * @param f the file to test 
+	 * @return true if s is absolute
+	 */
+	public static boolean isAbsoluteFile(File f)
+	{
+		String s = f.getPath();
+		return isAbsoluteFile(s);
+	}
+
+	/**
+	 * @param f the file path to test 
+	 * @return true if s is absolute
+	 */
+	public static boolean isAbsoluteFile(String f)
+	{
+		if (f == null)
+			return false;
+
+		if (f.startsWith(File.separator))
+			return true;
+
+		File[] roots = File.listRoots();
+		if (roots != null)
+		{
+			f = f.toLowerCase();
+			for (int i = 0; i < roots.length; i++)
+			{
+				if (f.startsWith(roots[i].getPath().toLowerCase()))
+					return true;
+			}
+		}
+		return false;
+
 	}
 }

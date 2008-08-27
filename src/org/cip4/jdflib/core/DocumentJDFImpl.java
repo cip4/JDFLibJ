@@ -570,7 +570,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		return false;
 	}
 
-	/*
+	/**
 	 * Attention! this only sets the initial parent for deep=true
 	 * 
 	 * (non-Javadoc)
@@ -579,10 +579,15 @@ public class DocumentJDFImpl extends DocumentImpl
 	 */
 	// TODO revisit setting parent nodes when importing
 	@Override
-	public Node importNode(Node importedNode, boolean deep)
+	public synchronized Node importNode(Node importedNode, boolean deep)
 	{
-		setParentNode(importedNode.getParentNode());
-		return super.importNode(importedNode, deep);
+		if (importedNode == null)
+			return null;
+		synchronized (importedNode)
+		{
+			setParentNode(importedNode.getParentNode());
+			return super.importNode(importedNode, deep);
+		}
 	}
 
 	/**

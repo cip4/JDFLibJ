@@ -11,19 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 
-public class EmptyNamespace extends TestCase
+public class EmptyNamespace extends JDFTestCaseBase
 {
-	static final String fileSeparator = System.getProperty("file.separator");
-	static final String sm_dirTestData = "test" + fileSeparator + "data"
-			+ fileSeparator;
-	static final String sm_dirTestDataTemp = sm_dirTestData + "temp"
-			+ fileSeparator;
 
 	public void testDefaultNamespace()
 	{
@@ -39,8 +32,7 @@ public class EmptyNamespace extends TestCase
 
 		// assertXMLEqual (jdfDocResult.getMemberDocument (),
 		// jdfDoc.getMemberDocument ());
-		assertEquals(jdfDocResult.getDocumentElement().getNamespaceURI(),
-				jdfDoc.getDocumentElement().getNamespaceURI());
+		assertEquals(jdfDocResult.getDocumentElement().getNamespaceURI(), jdfDoc.getDocumentElement().getNamespaceURI());
 
 	}
 
@@ -70,18 +62,19 @@ public class EmptyNamespace extends TestCase
 				if (!namespaceOk)
 				{
 					String help = xml.substring(xml.indexOf("<AuditPool"));
-					assertTrue(
-							"This version of Apache Xerces has a namespace problem : "
-									+ help, namespaceOk);
+					assertTrue("This version of Apache Xerces has a namespace problem : " + help, namespaceOk);
 				}
 			}
-		} catch (FileNotFoundException e)
+		}
+		catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
-		} finally
+		}
+		finally
 		{
 			try
 			{
@@ -89,7 +82,8 @@ public class EmptyNamespace extends TestCase
 				{
 					reader.close();
 				}
-			} catch (IOException e1)
+			}
+			catch (IOException e1)
 			{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

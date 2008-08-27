@@ -99,12 +99,16 @@ import org.w3c.dom.Element;
 
 /**
  * test class for KElement
+ * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  *
  */
 public class KElementTest extends JDFTestCaseBase
 {
 
+	/**
+	 * 
+	 */
 	public void testAncestorDistance()
 	{
 		KElement e = new JDFDoc("a").getRoot();
@@ -117,6 +121,37 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(e1.ancestorDistance(e2), -1);
 	}
 
+	/**
+	 * check for memory leaks
+	 */
+	public void testDeleteNode()
+	{
+		KElement k = new XMLDoc("root", null).getRoot();
+		for (int i = 0; i < 50000; i++)
+			k.appendElement("DOA").deleteNode();
+		assertEquals(getCurrentMem(), mem, 50000);
+	}
+
+	/**
+	 * check for memory leaks
+	 */
+	public void testImportNode()
+	{
+		KElement k = new XMLDoc("root", null).getRoot();
+		for (int i = 0; i < 50000; i++)
+		{
+			KElement d2 = new XMLDoc("mama", null).getRoot();
+
+			for (int j = 0; j < 100; j++)
+				d2.appendElement("kid");
+			k.moveElement(d2.appendElement("kid"), null);
+		}
+		assertEquals(getCurrentMem(), mem, 100 * 50000); // allow 100 per element
+	}
+
+	/**
+	 * 
+	 */
 	public void testEnumValid()
 	{
 		EnumValidationLevel level = EnumValidationLevel.RecursiveComplete;
@@ -127,7 +162,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(EnumValidationLevel.RecursiveIncomplete, EnumValidationLevel.setNoWarning(level, false));
 	}
 
-	/*
+	/**
 	 * Test for void RemoveAttribute(String, String) - PR-AKMP-000001
 	 */
 	public void testRemoveAttributeStringString()
@@ -150,8 +185,10 @@ public class KElementTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	// /////////////////////////////////////////////////////////
-
 	public void testRenameElement()
 	{
 		XMLDoc d = new XMLDoc("root", "www.root.com");
@@ -169,6 +206,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetElementsWithMultipleID()
 	{
 		XMLDoc d = new XMLDoc("e1", null);
@@ -623,6 +663,39 @@ public class KElementTest extends JDFTestCaseBase
 		KElement c3 = a.moveElement(c2, null);
 		assertEquals(c, c3);
 		assertEquals(a.getElement("c"), c3);
+	}
+
+	/**
+	 * 
+	 */
+	public void testCopyElementMem()
+	{
+		KElement k = new XMLDoc("root", null).getRoot();
+		for (int i = 0; i < 50000; i++)
+		{
+			KElement d2 = new XMLDoc("mama", null).getRoot();
+
+			for (int j = 0; j < 100; j++)
+				d2.appendElement("kid");
+			k.copyElement(d2.appendElement("kid"), null);
+		}
+		assertEquals(getCurrentMem(), mem, 100 * 50000); // allow 100 per element
+	}
+
+	/**
+	 * 
+	 */
+	public void testCloneElementMem()
+	{
+		XMLDoc doc = new XMLDoc("root", null);
+		KElement k = doc.getRoot();
+		for (int i = 0; i < 50000; i++)
+		{
+			KElement d2 = new XMLDoc("mama", null).getRoot();
+			d2.cloneNode(true);
+			doc.cloneNode(true);
+		}
+		assertEquals(getCurrentMem(), mem, 100000);
 	}
 
 	/**

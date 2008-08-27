@@ -82,10 +82,42 @@ import java.io.FileInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class FileUtilTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
+	public void testisAbsoluteFile() throws Exception
+	{
+		assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
+		assertFalse(FileUtil.isAbsoluteFile("foo"));
+		assertTrue(FileUtil.isAbsoluteFile(new File("c:\\")));
+		assertTrue(FileUtil.isAbsoluteFile("c:\\"));
+		assertTrue(FileUtil.isAbsoluteFile(new File("c:\\a")));
+		assertTrue(FileUtil.isAbsoluteFile("c:\\a"));
+		assertTrue(FileUtil.isAbsoluteFile(new File("c:/a")));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testisCleanURLFile() throws Exception
+	{
+		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
+		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));
+		assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:\\a")));
+		assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:/a")));
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testListFiles() throws Exception
 	{
 		File f = new File(sm_dirTestDataTemp + "/foo");
@@ -98,8 +130,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				File f2 = new File(f.getAbsolutePath() + File.separator + i
-						+ "." + c);
+				File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
 				assertTrue(f2.createNewFile());
 			}
 		}
@@ -119,6 +150,9 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
 	public void testListDirectories() throws Exception
 	{
 		File f = new File(sm_dirTestDataTemp + File.separator + "foo");
@@ -127,19 +161,19 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(f.mkdir());
 		assertNull(FileUtil.listDirectories(null));
 		assertNull(FileUtil.listDirectories(f));
-		File f1 = new File(sm_dirTestDataTemp + File.separator + "foo"
-				+ File.separator + "bar1");
+		File f1 = new File(sm_dirTestDataTemp + File.separator + "foo" + File.separator + "bar1");
 		assertTrue(f1.mkdir());
-		File f2 = new File(sm_dirTestDataTemp + File.separator + "foo"
-				+ File.separator + "bar2");
+		File f2 = new File(sm_dirTestDataTemp + File.separator + "foo" + File.separator + "bar2");
 		assertTrue(f2.createNewFile());
 		assertEquals(FileUtil.listDirectories(f).length, 1);
-		assertEquals("skipping bar2 - not a directory", FileUtil
-				.listDirectories(f)[0], f1);
+		assertEquals("skipping bar2 - not a directory", FileUtil.listDirectories(f)[0], f1);
 
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
 	public void testMoveFile() throws Exception
 	{
 		byte[] b = new byte[55555];
@@ -174,6 +208,9 @@ public class FileUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testMoveFileToDir() throws Exception
 	{
 		byte[] b = new byte[55555];
@@ -201,6 +238,9 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
 	public void testStreamToFile() throws Exception
 	{
 		byte[] b = new byte[55555];
@@ -234,8 +274,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		fis.close();
 
 		FileInputStream fis2 = new FileInputStream(f);
-		File f2 = FileUtil.streamToFile(fis2, sm_dirTestDataTemp
-				+ "stream2.dat");
+		File f2 = FileUtil.streamToFile(fis2, sm_dirTestDataTemp + "stream2.dat");
 		assertTrue(f2.canRead());
 		assertTrue(f.delete());
 		assertTrue(f2.delete());
@@ -243,33 +282,23 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetFileInDirectory()
 	{
-		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(
-				new File("a"), new File("b")));
-		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(
-				new File("a/"), new File("b")));
-		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File(
-				"a\\"), new File("b")));
-		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(
-				new File("a/"), new File("/b")));
-		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File(
-				"a\\"), new File("\\b")));
-		assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File(
-				"a"), new File("c/b")));
-		assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(
-				new File("a/aa"), new File("c/b")));
-		assertEquals(FileUtil
-				.getFileInDirectory(new File("a/b"), new File("c")), new File(
-				"a/b/c"));
-		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File(
-				"c/d")), new File("a/b/c/d"));
-		assertEquals(FileUtil.getFileInDirectory(new File("a/b"),
-				new File("/c")), new File("a/b/c"));
-		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File(
-				"/c/d")), new File("a/b/c/d"));
-		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File(
-				"/c/d/")), new File("a/b/c/d"));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a"), new File("b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("/b")));
+		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("\\b")));
+		assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File("a"), new File("c/b")));
+		assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(new File("a/aa"), new File("c/b")));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c")), new File("a/b/c"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c/d")), new File("a/b/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c")), new File("a/b/c"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
 
 	}
 

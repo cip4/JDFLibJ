@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,20 +76,13 @@
  */
 package org.cip4.jdflib.core;
 
-import junit.framework.TestCase;
-
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
 
-public class JDFSourceResourceTest extends TestCase
+public class JDFSourceResourceTest extends JDFTestCaseBase
 {
-	static final String fileSeparator = System.getProperty("file.separator");
-	static final String sm_dirTestData = "test" + fileSeparator + "data"
-			+ fileSeparator;
-	static final String sm_dirTestDataTemp = sm_dirTestData + "temp"
-			+ fileSeparator;
 
 	////////////////////////////////////////////////////////////////////////////
 	// /
@@ -98,15 +91,12 @@ public class JDFSourceResourceTest extends TestCase
 	{
 		JDFDoc doc = JDFTestCaseBase.creatXMDoc();
 		JDFNode n = doc.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource(
-				"ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
-		JDFNodeInfo ni = (JDFNodeInfo) n.getMatchingResource("NodeInfo",
-				JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		JDFNodeInfo ni = (JDFNodeInfo) n.getMatchingResource("NodeInfo", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		xm.createSourceResource(ni);
 		assertEquals("", ni, xm.getSourceResource(0).getLinkRoot());
 		assertEquals("", ni, xm.getSourceResource(0).getTarget());
-		assertEquals(ni.getNodeName(), xm.getSourceResource(0)
-				.getSourcefNodeName());
+		assertEquals(ni.getNodeName(), xm.getSourceResource(0).getSourcefNodeName());
 		JDFSourceResource sr = xm.appendSourceResource();
 		assertNull(sr.getLinkRoot());
 		assertNull(sr.getTarget());

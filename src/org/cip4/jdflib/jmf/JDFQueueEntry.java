@@ -268,7 +268,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable
 		if (ni == null)
 			return false;
 		NodeIdentifier niThis = new NodeIdentifier(this);
-		return niThis.equals(ni);
+		return niThis.matches(ni);
 	}
 
 	/**

@@ -415,11 +415,13 @@ public class JDFResourceLinkPool extends JDFPool
 	 */
 	public JDFResourceLink linkResource(JDFResource r, JDFResourceLink.EnumUsage usage, EnumProcessUsage processUsage)
 	{
-		final String s = r.getID();
-
-		if (usage == null || s.equals(JDFConstants.EMPTYSTRING))
+		if (r == null || usage == null)
 			return null;
-
+		String s = r.getID();
+		if (isWildCard(s))
+		{
+			s = r.getResourceRoot().appendAnchor(null);
+		}
 		final JDFResourceLink rl = (JDFResourceLink) appendElement(r.getLinkString(), r.getNamespaceURI());
 		rl.setTarget(r);
 		rl.setUsage(usage);

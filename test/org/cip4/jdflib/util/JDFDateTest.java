@@ -162,6 +162,18 @@ public class JDFDateTest extends TestCase
 	/**
 	 * Method testdateTimeISO.
 	 */
+	public void testdateTimeZone() throws Exception
+	{
+		JDFDate date = new JDFDate();
+		String strDate = date.getDateTimeISO();
+		JDFDate date2 = new JDFDate(strDate);
+		assertEquals(date, date2);
+
+	}
+
+	/**
+	 * Method testdateTimeISO.
+	 */
 	public void testdateTimeISO() throws Exception
 	{
 		JDFDate date = new JDFDate();

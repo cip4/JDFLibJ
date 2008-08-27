@@ -1696,7 +1696,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * @see IMatches
 		 * @param o the nodeidentifier that this should match<br/> if o is a String, check for match with jobID
 		 * 
-		 * @return true, id this matches o
+		 * @return true, if this matches o
 		 */
 		public boolean matches(Object o)
 		{
@@ -1709,7 +1709,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				return false;
 			NodeIdentifier mt = ((INodeIdentifiable) o).getIdentifier();
 			boolean b = isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobID, _jobID);
-			b = b && (isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobPartID, _jobPartID));
+			b = b && (isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobPartID, _jobPartID))
+					|| (_jobPartID != null && mt._jobPartID != null && mt._jobPartID.startsWith(_jobPartID + "."));
 			return b
 					&& ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(mt._partMapVector)));
 		}

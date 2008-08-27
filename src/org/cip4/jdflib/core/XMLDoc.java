@@ -441,7 +441,7 @@ public class XMLDoc
 				}
 				catch (IOException e1)
 				{
-					e1.printStackTrace();
+					//nop
 				}
 			}
 		}
@@ -472,29 +472,43 @@ public class XMLDoc
 	 */
 	public void write2Stream(OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException
 	{
-		final OutputFormat format = new OutputFormat(m_doc);
-
-		if (bPreserveSpace)
-			format.setPreserveSpace(true);
-
-		if (indent < 1)
+		for (int i = 0; i < 3; i++)
 		{
-			format.setIndenting(false);
-		}
-		else
-		{
-			format.setIndenting(true);
-			format.setIndent(indent);
-			// TODO remove schema defaulted attributes when serializing
-		}
+			try
+			{
+				final OutputFormat format = new OutputFormat(m_doc);
 
-		final XMLSerializer serial = new XMLSerializer(outStream, format);
-		// serial.setNamespaces(false); // ###DOM_1_nodes
-		serial.setNamespaces(true);
-		serial.asDOMSerializer();
-		synchronized (m_doc)
-		{
-			serial.serialize(m_doc);
+				if (bPreserveSpace)
+					format.setPreserveSpace(true);
+
+				if (indent < 1)
+				{
+					format.setIndenting(false);
+				}
+				else
+				{
+					format.setIndenting(true);
+					format.setIndent(indent);
+					// TODO remove schema defaulted attributes when serializing
+				}
+
+				final XMLSerializer serial = new XMLSerializer(outStream, format);
+				// serial.setNamespaces(false); // ###DOM_1_nodes
+				serial.setNamespaces(true);
+				serial.asDOMSerializer();
+				synchronized (m_doc)
+				{
+					serial.serialize(m_doc);
+				}
+				return; // all is well here
+			}
+			catch (IOException x)
+			{
+				if (i >= 3)
+					throw x; // try three times, else ciao
+				StatusCounter.sleep(1000 * (i + 1));
+				System.out.println("retry exception " + i + " for " + getOriginalFileName());
+			}
 		}
 	}
 

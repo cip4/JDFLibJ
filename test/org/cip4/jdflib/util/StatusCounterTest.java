@@ -107,10 +107,11 @@ public class StatusCounterTest extends JDFTestCaseBase
 	private JDFEmployee employee;
 
 	/**
+	 * @throws Exception 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public void setUp()
+	public void setUp() throws Exception
 	{
 		d = creatXMDoc();
 		n = d.getJDFRoot();
@@ -125,6 +126,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		sc.addPhase(resID, 200, 0, true);
 		employee = (JDFEmployee) new JDFDoc("Employee").getRoot();
 		employee.setPersonalID("P1");
+		super.setUp();
 	}
 
 	/**
@@ -231,16 +233,13 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 */
 	public void testMemLeak()
 	{
-		JDFDoc docJMF = sc.getDocJMFPhaseTime();
-		long l = docJMF.getDocMemoryUsed();
-		for (int i = 0; i < 50000; i++)
+		for (int i = 0; i < 100000; i++)
 		{
 			sc.getDocJMFPhaseTime();
 			sc.getDocJMFNotification(true);
 			sc.getDocJMFResource();
 		}
-		long l2 = docJMF.getDocMemoryUsed();
-		assertTrue(l2 - l < 100000);
+		assertEquals(mem, getCurrentMem(), 100000);
 	}
 
 	/**

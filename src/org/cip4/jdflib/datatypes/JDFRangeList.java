@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -182,7 +182,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	}
 
 	/**
-	 * getString - serialize to string
+	 * toString - serialize to string
 	 * 
 	 * @return String - a list of ranges in the format PT30M30S~PT35M (duration (JDFDuration) has a
 	 *         format=P1Y2M3DT12H30M30S)
@@ -190,17 +190,17 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	@Override
 	public final String toString()
 	{
-		String s = JDFConstants.EMPTYSTRING;
 		int sz = rangeList.size();
+		StringBuffer s = new StringBuffer((sz + 1) * 16);
 		for (int i = 0; i < sz; i++)
 		{
-			s += rangeList.elementAt(i).toString();
+			s.append(rangeList.elementAt(i).toString());
 			if (i < (sz - 1))
 			{
-				s += JDFConstants.BLANK;
+				s.append(JDFConstants.BLANK);
 			}
 		}
-		return s;
+		return s.toString();
 	}
 
 	/**
@@ -335,7 +335,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 
 	/**
 	 * isUniqueOrdered - tests if <code>this</this> has only unique values and if 
-     * the values are ordered
+	 * the values are ordered
 	 * 
 	 * @return true if values are unique and ordered, otherwise false
 	 */

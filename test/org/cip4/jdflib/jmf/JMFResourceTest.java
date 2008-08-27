@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -104,6 +105,9 @@ import org.cip4.jdflib.resource.process.JDFUsageCounter;
  */
 public class JMFResourceTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
 	public void testResourceQuParams()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -113,12 +117,11 @@ public class JMFResourceTest extends JDFTestCaseBase
 		jmf.setSenderID("MISSenderID");
 		c.setType(EnumType.Resource);
 		JDFResourceQuParams rqp = c.getCreateResourceQuParams(0);
-		Vector vClasses = new Vector();
+		Vector<EnumResourceClass> vClasses = new Vector<EnumResourceClass>();
 		vClasses.add(EnumResourceClass.Consumable);
 		vClasses.add(EnumResourceClass.Handling);
 		rqp.setClasses(vClasses);
 		assertEquals(rqp.getClasses().toString(), vClasses.toString());
-
 	}
 
 	// //////////////////////////////////////////
@@ -142,6 +145,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testUsageCounter()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -170,6 +176,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testMedia()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -192,6 +201,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testMediaRef()
 	{
 
@@ -223,6 +235,54 @@ public class JMFResourceTest extends JDFTestCaseBase
 	/**
 	 * apply a resource cmd
 	 */
+	public void testApplyResourceCmdNodeInfo()
+	{
+		JDFDoc doc = new JDFDoc(ElementName.JMF);
+		JDFJMF jmf = doc.getJMFRoot();
+
+		JDFCommand c = jmf.appendCommand();
+		jmf.setSenderID("DeviceSenderID");
+
+		c.setType(EnumType.Resource);
+		JDFResourceCmdParams rqp = c.appendResourceCmdParams();
+		rqp.setJobID("JobID");
+		rqp.setJobPartID("JobPartID");
+		rqp.setResourceName(ElementName.NODEINFO);
+		rqp.setUsage(EnumUsage.Input);
+		JDFNodeInfo niRQP = (JDFNodeInfo) rqp.appendElement(ElementName.NODEINFO);
+
+		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
+		rqp.setPartMap(sheetMap);
+		JDFNodeInfo niRQPS1 = (JDFNodeInfo) niRQP.getCreatePartition(sheetMap, null);
+		niRQPS1.setNodeStatus(EnumNodeStatus.Aborted);
+		JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		JDFNode jdf = docJDF.getJDFRoot();
+		jdf.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
+		jdf.setStatus(EnumNodeStatus.Waiting);
+		jdf.setJobID("JobID");
+		jdf.setJobPartID("JobPartID");
+
+		assertEquals(jdf.getPartStatus(null), EnumNodeStatus.Waiting);
+		assertEquals(jdf.getStatus(), EnumNodeStatus.Waiting);
+		rqp.applyResourceCommand(jdf);
+		assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
+		assertEquals(jdf.getNodeInfo().getNodeStatus(), EnumNodeStatus.Waiting);
+		assertEquals(jdf.getPartStatus(sheetMap), EnumNodeStatus.Aborted);
+
+		sheetMap = new JDFAttributeMap("SheetName", "S2");
+		rqp.setPartMap(sheetMap);
+		niRQPS1.setAttributes(sheetMap);
+		niRQPS1.setNodeStatus(EnumNodeStatus.Completed);
+
+		rqp.applyResourceCommand(jdf);
+		assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
+		assertEquals(jdf.getNodeInfo().getNodeStatus(), EnumNodeStatus.Waiting);
+		assertEquals(jdf.getPartStatus(sheetMap), EnumNodeStatus.Completed);
+	}
+
+	/**
+	* apply a resource cmd
+	*/
 	public void testApplyResourceCmd()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -311,7 +371,6 @@ public class JMFResourceTest extends JDFTestCaseBase
 			JDFAttributeMap amParts = new JDFAttributeMap();
 			if (i == 0)
 			{
-
 				amParts.put("SignatureName", "Sig001");
 				amParts.put("SheetName", "FB 001");
 				amParts.put("Side", "Front");
@@ -340,14 +399,8 @@ public class JMFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * Method createResourceParams
+	 * Method testResourceCommandPartIDKeys
 	 * 
-	 * @param strJobPartID
-	 * @param strResourceID
-	 * @param amParts
-	 * @param amAttr
-	 * 
-	 * @return
 	 */
 	public void testResourceCommandPartIDKeys()
 	{

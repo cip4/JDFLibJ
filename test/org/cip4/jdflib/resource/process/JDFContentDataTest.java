@@ -77,16 +77,21 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFContentDataTest extends JDFTestCaseBase
 {
 
 	JDFContentList cl;
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
@@ -97,8 +102,10 @@ public class JDFContentDataTest extends JDFTestCaseBase
 		cl = (JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
 	}
 
+	/**
+	 * 
+	 */
 	// ///////////////////////////////////////////////////////////////////////
-
 	public void testGetIndex()
 	{
 		for (int i = 0; i < 10; i++)

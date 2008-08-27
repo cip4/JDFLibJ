@@ -72,7 +72,7 @@
  ==========================================================================
  @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
  ALL RIGHTS RESERVED
- @Author: sabjon@topmail.de   using a code generator
+ @Author sabjon@topmail.de   using a code generator
  Warning! very preliminary test version. Interface subject to change without prior notice!
  Revision history:    ...
  **/
@@ -87,9 +87,12 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
@@ -98,6 +101,7 @@ import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * class that wraps a ResourceCmdParams element
@@ -108,6 +112,192 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements INodeIdentifiable
 {
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * container for applying resource commands to commands
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 *
+	 */
+	protected class ApplyCommand
+	{
+
+		/**
+		 * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children
+		 * 
+		 * @param parentNode the node to search in
+		 */
+		void applyResourceCommand(JDFNode parentNode)
+		{
+			if (parentNode == null)
+				return;
+			VElement vNodes = parentNode.getvJDFNode(null, null, false);
+
+			final int size = vNodes.size();
+			for (int i = 0; i < size; i++)
+			{
+				final JDFNode node = (JDFNode) vNodes.elementAt(i);
+				if (!matchesNode(node))
+					continue;
+				JDFResource resCmd = getResource(null);
+				if (resCmd == null)
+					continue;
+
+				final boolean isIncremental = (getUpdateMethod() == EnumUpdateMethod.Incremental);
+
+				// commented out, statements have no effect
+				// double dAmount = -1.0;
+				// if (hasAttribute (AttributeName.PRODUCTIONAMOUNT))
+				// {
+				// dAmount = getProductionAmount (); // TODO: set ProductionAmount
+				// }
+				// final String strProcessUsage = getProcessUsage(); // TODO: use
+				// ProcessUsage
+				// final JDFElement.EnumNodeStatus status = getStatus(); // TODO:
+				// set Status
+
+				final VJDFAttributeMap vamParts = getPartMapVector();
+				JDFResource resTarget = getTargetResource(node);
+				if (resTarget == null)
+				{
+					resTarget = createNewResource(node, resCmd);
+					if (resTarget == null)
+						continue;
+				}
+
+				// get the most granular list of partIDKeys from the cmd or resource
+				VString vsPartIDKeys = resTarget.getPartIDKeys();
+				final VString vsPartIDKeysCmd = resCmd.getPartIDKeys();
+				final int sizTarget = vsPartIDKeys == null ? 0 : vsPartIDKeys.size();
+				final int sizCmd = vsPartIDKeysCmd == null ? 0 : vsPartIDKeysCmd.size();
+				if (sizCmd > sizTarget)
+					vsPartIDKeys = vsPartIDKeysCmd;
+
+				final int sizeParts = vamParts == null ? 1 : vamParts.size();
+				for (int j = 0; j < sizeParts; j++)
+				{
+					JDFAttributeMap amParts = vamParts == null ? null : vamParts.elementAt(j);
+					final JDFResource resTargetPart = resTarget.getCreatePartition(amParts, vsPartIDKeys);
+					if (resTargetPart == null)
+						continue;
+					final String id = resTargetPart.getID();
+					if (!isIncremental)
+					{
+						final JDFAttributeMap map = resTargetPart.getPartMap();
+						resTargetPart.flush();
+						resTargetPart.setAttributes(map);
+					}
+					JDFResource resCmdPart = resCmd.getPartition(amParts, EnumPartUsage.Implicit);
+					JDFAttributeMap map = resCmdPart.getAttributeMap();
+					VString keys = map.getKeys();
+					int keySize = keys == null ? 0 : keys.size();
+					for (int k = 0; k < keySize; k++)
+					{
+						final String key = keys.elementAt(k);
+						final String value = map.get(key);
+						if (value == null || JDFConstants.EMPTYSTRING.equals(value))
+						{
+							resCmdPart.removeAttribute(key);
+							resTargetPart.removeAttribute(key);
+						}
+					}
+					resTargetPart.mergeElement(resCmdPart, false);
+					resTarget.setID(id);
+				}
+				if (sizeParts > 0 && resTarget instanceof JDFNodeInfo)
+				{
+					fixNodeStatusFromNodeInfo(node, resTarget);
+				}
+			}
+		}
+
+		/**
+		 * @param node
+		 * @return the target resource
+		 */
+		private JDFResource getTargetResource(JDFNode node)
+		{
+			if (node == null)
+				return null;
+			JDFResourceLinkPool rlp = node.getResourceLinkPool();
+			if (rlp == null)
+				return null;
+			String resID = getResourceID();
+			if (resID != null && !resID.equals(""))
+			{
+				VElement vRes = rlp.getLinkedResources(null, null, new JDFAttributeMap(AttributeName.ID, resID), false);
+				if (vRes.size() > 0)
+					return (JDFResource) vRes.elementAt(0);
+			}
+
+			String resName = getResourceName();
+			if (resName != null && !resName.equals(""))
+			{
+				VElement vRes = rlp.getLinkedResources(resName, null, null, false);
+				if (vRes.size() > 0)
+					return (JDFResource) vRes.elementAt(0);
+
+				// TODO link usage, process usage etc.
+
+			}
+			return null;
+		}
+
+		/**
+		 * @param node
+		 * @return true if it matches
+		 */
+		private boolean matchesNode(JDFNode node)
+		{
+			if (node == null)
+				return false;
+			boolean bMatch = true;
+			String jobID = StringUtil.getNonEmpty(getJobID());
+			if (jobID != null)
+				bMatch = jobID.equals(node.getJobID(true));
+			if (!bMatch)
+				return false;
+			String jobPartID = StringUtil.getNonEmpty(getJobPartID());
+			if (jobPartID != null)
+				bMatch = jobPartID.equals(node.getJobPartID(true));
+			return bMatch;
+		}
+
+		/**
+		 * @param node
+		 * @param resCmd
+		 * @return the new resource
+		 */
+		private JDFResource createNewResource(final JDFNode node, JDFResource resCmd)
+		{
+			JDFResource resTarget = null;
+			EnumUsage u = getUsage();
+			if (u != null)
+			{
+				resTarget = (JDFResource) node.getCreateResourcePool().copyElement(resCmd, null);
+				JDFResourceLink rl = node.linkResource(resTarget, u, null);
+				rl.copyAttribute(AttributeName.PROCESSUSAGE, JDFResourceCmdParams.this);
+				resTarget = getTargetResource(node);
+			}
+			return resTarget;
+		}
+
+		/**
+		 * @param node the jdf node
+		 * @param resTarget
+		 */
+		private void fixNodeStatusFromNodeInfo(final JDFNode node, JDFResource resTarget)
+		{
+			EnumNodeStatus nodeStatus = node.getStatus();
+			if (!EnumNodeStatus.Part.equals(nodeStatus) && !EnumNodeStatus.Pool.equals(node.getStatus()))
+			{
+				node.setStatus(EnumNodeStatus.Part);
+				JDFNodeInfo ni = (JDFNodeInfo) resTarget;
+				if (!ni.hasAttribute(AttributeName.NODESTATUS))
+					ni.setNodeStatus(nodeStatus);
+			}
+		}
+
+	}
 
 	/**
 	 * Constructor for JDFResourceCmdParams
@@ -298,117 +488,14 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 
 	/**
 	 * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children
+	 * if no matching resource exists in the node, Usage MUST be set in this JDFResourceCmdParams, 
+	 * otherwise it is not possible to correctly link the newly created resource
 	 * 
 	 * @param parentNode the node to search in
 	 */
 	public void applyResourceCommand(JDFNode parentNode)
 	{
-		if (parentNode == null)
-			return;
-		VElement vNodes = parentNode.getvJDFNode(null, null, false);
-
-		final int size = vNodes.size();
-		for (int i = 0; i < size; i++)
-		{
-			final JDFNode node = (JDFNode) vNodes.elementAt(i);
-			if (!matchesNode(node))
-				continue;
-			JDFResource resCmd = getResource(null);
-			if (resCmd == null)
-				continue;
-
-			final boolean isIncremental = (getUpdateMethod() == EnumUpdateMethod.Incremental);
-
-			// commented out, statements have no effect
-			// double dAmount = -1.0;
-			// if (hasAttribute (AttributeName.PRODUCTIONAMOUNT))
-			// {
-			// dAmount = getProductionAmount (); // TODO: set ProductionAmount
-			// }
-			// final String strProcessUsage = getProcessUsage(); // TODO: use
-			// ProcessUsage
-			// final JDFElement.EnumNodeStatus status = getStatus(); // TODO:
-			// set Status
-
-			final VJDFAttributeMap vamParts = getPartMapVector();
-			JDFResource resTarget = getTargetResource(node);
-			if (resTarget == null)
-				continue;
-
-			// get the most granular list of partIDKeys from the cmd or resource
-			VString vsPartIDKeys = resTarget.getPartIDKeys();
-			final VString vsPartIDKeysCmd = resCmd.getPartIDKeys();
-			final int sizTarget = vsPartIDKeys == null ? 0 : vsPartIDKeys.size();
-			final int sizCmd = vsPartIDKeysCmd == null ? 0 : vsPartIDKeysCmd.size();
-			if (sizCmd > sizTarget)
-				vsPartIDKeys = vsPartIDKeysCmd;
-
-			final int sizeParts = vamParts == null ? 1 : vamParts.size();
-			for (int j = 0; j < sizeParts; j++)
-			{
-				JDFAttributeMap amParts = vamParts == null ? null : vamParts.elementAt(j);
-				final JDFResource resTargetPart = resTarget.getCreatePartition(amParts, vsPartIDKeys);
-				if (resTargetPart == null)
-					continue;
-				final String id = resTargetPart.getID();
-				if (!isIncremental)
-				{
-					final JDFAttributeMap map = resTargetPart.getPartMap();
-					resTargetPart.flush();
-					resTargetPart.setAttributes(map);
-				}
-				JDFResource resCmdPart = resCmd.getPartition(amParts, EnumPartUsage.Implicit);
-				JDFAttributeMap map = resCmdPart.getAttributeMap();
-				VString keys = map.getKeys();
-				int keySize = keys == null ? 0 : keys.size();
-				{
-					for (int k = 0; k < keySize; k++)
-					{
-						final String key = keys.elementAt(k);
-						final String value = map.get(key);
-						if (value == null || JDFConstants.EMPTYSTRING.equals(value))
-						{
-							resCmdPart.removeAttribute(key);
-							resTargetPart.removeAttribute(key);
-						}
-					}
-				}
-				resTargetPart.mergeElement(resCmdPart, false);
-				resTarget.setID(id);
-			}
-		}
-	}
-
-	/**
-	 * @param node
-	 * @return
-	 */
-	private JDFResource getTargetResource(JDFNode node)
-	{
-		if (node == null)
-			return null;
-		JDFResourceLinkPool rlp = node.getResourceLinkPool();
-		if (rlp == null)
-			return null;
-		String resID = getResourceID();
-		if (resID != null && !resID.equals(""))
-		{
-			VElement vRes = rlp.getLinkedResources(null, null, new JDFAttributeMap(AttributeName.ID, resID), false);
-			if (vRes.size() > 0)
-				return (JDFResource) vRes.elementAt(0);
-		}
-
-		String resName = getResourceName();
-		if (resName != null && !resName.equals(""))
-		{
-			VElement vRes = rlp.getLinkedResources(resName, null, null, false);
-			if (vRes.size() > 0)
-				return (JDFResource) vRes.elementAt(0);
-
-			// TODO link usage, process usage etc.
-
-		}
-		return null;
+		new ApplyCommand().applyResourceCommand(parentNode);
 	}
 
 	/**
@@ -421,14 +508,24 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
 	}
 
+	/* ---------------------------------------------------------------------
+	Methods for Attribute Usage
+	--------------------------------------------------------------------- */
 	/**
-	 * @param node
-	 * @return
-	 */
-	private boolean matchesNode(JDFNode node)
+	  * (5) set attribute Usage
+	  * @param enumVar  the enumVar to set the attribute to
+	  */
+	public void setUsage(JDFResourceLink.EnumUsage enumVar)
 	{
-		if (node == null)
-			return false;
-		return getIdentifier().matches(node.getIdentifier());
+		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute Usage
+	  * @return the value of the attribute
+	  */
+	public JDFResourceLink.EnumUsage getUsage()
+	{
+		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
 }

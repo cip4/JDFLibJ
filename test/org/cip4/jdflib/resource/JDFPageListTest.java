@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.zip.DataFormatException;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -78,25 +80,42 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContentData;
 import org.cip4.jdflib.resource.process.JDFContentList;
 import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFPageData;
+import org.cip4.jdflib.resource.process.JDFPageElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFPageListTest extends JDFTestCaseBase
 {
+	JDFContentList cl;
+	JDFPageList pl;
+	JDFDoc d;
+	JDFNode n;
+
+	/**
+	 * 
+	 */
 	public void testContentData()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		d = new JDFDoc("JDF");
+		n = d.getJDFRoot();
 		n.setType(EnumType.Approval);
-		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST,
-				EnumUsage.Input);
-		JDFPageList pl = rl.appendPageList();
+		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		pl = rl.appendPageList();
 		pl.makeRootResource("PageList", null, true);
-		JDFContentList cl = pl.appendContentList();
+
+		cl = pl.appendContentList();
 		cl.makeRootResource("ContentList", null, true);
 		JDFContentData cd0 = cl.appendContentData();
 		cd0.setAttribute(AttributeName.CONTENTLISTINDEX, "1 2 3");
@@ -105,23 +124,50 @@ public class JDFPageListTest extends JDFTestCaseBase
 		JDFComment abstrakt = (JDFComment) book.appendElement("Comment");
 		abstrakt.setName("Abstract");
 		abstrakt.setText("Abstract of the book\nin english");
-		JDFEmployee editor = (JDFEmployee) book
-				.appendElement(ElementName.EMPLOYEE);
+		JDFEmployee editor = (JDFEmployee) book.appendElement(ElementName.EMPLOYEE);
 		editor.appendPerson().setFamilyName("authorName");
 		editor.setRoles(new VString("Editor", null));
 		book.setAttribute("Title", "book thing");
+		int p = 1;
 		for (int i = 1; i < 4; i++)
 		{
 			JDFContentData cd = cl.appendContentData();
+			cd.setAttribute("ID", "CD_" + i);
 			KElement chap = cd.appendElement("ContentMetaData");
 			chap.setAttribute("Title", "Chapter " + i);
-			JDFEmployee author = (JDFEmployee) chap
-					.appendElement(ElementName.EMPLOYEE);
+			JDFEmployee author = (JDFEmployee) chap.appendElement(ElementName.EMPLOYEE);
 			author.appendPerson().setFamilyName("authorName" + i);
 			author.setRoles(new VString("Author", null));
+
+			JDFPageData pd = pl.appendPageData();
+			JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
+			integerRangeList.append(p, p + i);
+			p += i + 1;
+			pd.setAttribute("PageIndex", integerRangeList.toString());
+			JDFPageElement pe = pd.appendPageElement();
+			pe.setAttribute("ContentDataRefs", cd.getID());
 		}
+		pl.setXMLComment("Note that multiple page elements may but need not be specified\nit is also possible to reference only on pageEleemnt that spans the entire book");
 
 		d.write2File(sm_dirTestDataTemp + "ContentMetaData.jdf", 2, false);
+
+	}
+
+	/**
+	 * test that creates a contentdata for a component with multiple blocks
+	 * @throws DataFormatException
+	 */
+	public void testContentDataFinishing() throws DataFormatException
+	{
+		testContentData();
+		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFComponent c1 = (JDFComponent) c.addPartition(EnumPartIDKey.BlockName, "Stack1");
+		JDFComponent c2 = (JDFComponent) c.addPartition(EnumPartIDKey.BlockName, "Stack2");
+		c.refElement(pl);
+		c1.setPageListIndex(new JDFIntegerRangeList("0~8"));
+		c2.setPageListIndex(new JDFIntegerRangeList("9~16"));
+		c.setXMLComment("this is the output component with two stacks\n the imposition engine is aware of the pagelist index and can set it appropriately");
+		d.write2File(sm_dirTestDataTemp + "ContentMetaDataStack.jdf", 2, false);
 
 	}
 	// //////////////////////////////////////////////////////////////
