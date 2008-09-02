@@ -80,6 +80,10 @@ import java.io.File;
 import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 
 public class UrlUtilTest extends JDFTestCaseBase
 {
@@ -150,7 +154,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	public void testStringToURL() throws Exception
 	{
-
 		// test for an existing directory (a trailing slash is appended by
 		// StringToURL)
 		assertTrue(UrlUtil.StringToURL("c:\\temp\\").getPath().startsWith(new URL("File:/c:/temp").getPath()));
@@ -158,19 +161,13 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.StringToURL("c:\\temp").getPath().startsWith(new URL("File:/c:/temp").getPath()));
 		assertTrue(UrlUtil.StringToURL("File:/c:/temp").getPath().startsWith(new URL("File:/c:/temp").getPath()));
 
-		// test a non existing file
-		File file = File.createTempFile("Testfile", "");
-		if (file.isFile())
-		{
-			// test for a file or a non existing object (trailing slash is
-			// removed by StringToURL)
-			assertEquals(UrlUtil.StringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
-			assertEquals(UrlUtil.StringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
-			assertEquals(UrlUtil.StringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
-			assertEquals(UrlUtil.StringToURL("File:/c:/xyz").getPath(), new URL("File:/c:/xyz").getPath());
-
-			file.delete();
-		}
+		// test for a file or a non existing object (trailing slash is
+		// removed by StringToURL)
+		assertEquals(UrlUtil.StringToURL("File:/c:/blöd .pdf"), new URL(UrlUtil.fileToUrl(new File("c:/blöd .pdf"), true)));
+		assertEquals(UrlUtil.StringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
+		assertEquals(UrlUtil.StringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
+		assertEquals(UrlUtil.StringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
+		assertEquals(UrlUtil.StringToURL("File:/c:/xyz").getPath(), new URL("File:/c:/xyz").getPath());
 
 		assertEquals(UrlUtil.StringToURL("http://foo"), new URL("http://foo"));
 		assertEquals(UrlUtil.StringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
@@ -203,27 +200,65 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
+	public void testNonAsciiFileURL() throws Exception
+	{
+		for (int i = 0; i < 2; i++) // loop over escape and non-escape
+		{
+			File f = new File("4€5%äö.txt");
+			File f2 = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), f);
+			f2.delete();
+			assertTrue(f2.createNewFile());
+			assertTrue(f2.canRead());
+			String url = UrlUtil.fileToUrl(f2, i == 0);
+			XMLDoc doc = new XMLDoc("URL", null);
+			KElement root = doc.getRoot();
+			root.setAttribute("url", url);
+			doc.write2File(sm_dirTestDataTemp + "url.xml", 2, false);
+			JDFParser p = new JDFParser();
+			p.bKElementOnly = true;
+			JDFDoc d = p.parseFile(sm_dirTestDataTemp + "url.xml");
+			KElement root2 = d.getRoot();
+			String urlParse = root2.getAttribute("url");
+			assertEquals(url, urlParse);
+			File f3 = UrlUtil.urlToFile(urlParse);
+			assertEquals(f2.getAbsolutePath(), f3.getAbsolutePath());
+			assertTrue(f3.canRead());
+		}
+
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+
 	public void testURLToFile() throws Exception
 	{
-		File f = UrlUtil.urlToFile(".");
-		assertTrue(f.isDirectory());
-		File f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));
-		assertTrue(f2.isDirectory());
-		assertEquals(f2.getCanonicalPath(), f.getCanonicalPath());
+		for (int i = 0; i < 2; i++)
+		{
+			File f = UrlUtil.urlToFile(".");
+			assertTrue(f.isDirectory());
+			File f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
+			assertTrue(f2.isDirectory());
+			assertEquals(f2.getCanonicalPath(), f.getCanonicalPath());
 
-		f = new File(".\\simple.pdf");
-		f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));
-		assertEquals("asccii", f.getCanonicalPath(), f2.getCanonicalPath());
+			f = new File(".\\simple.pdf");
+			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
+			assertEquals("asccii", f.getCanonicalPath(), f2.getCanonicalPath());
 
-		f = new File("blöd .pdf");
-		f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, true));
-		assertEquals("non asccii", f.getCanonicalPath(), f2.getCanonicalPath());
+			f = new File("blöd .pdf");
+			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
+			assertEquals("non asccii", f.getCanonicalPath(), f2.getCanonicalPath());
 
-		f = new File("blöd ist es 10@€.pdf");
-		final String fileToUrl = UrlUtil.fileToUrl(f, true);
-		f2 = UrlUtil.urlToFile(fileToUrl);
-		assertEquals("escape %20", f.getCanonicalPath(), f2.getCanonicalPath());
+			f = new File("bl%öd .pdf");
+			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
+			assertEquals("non asccii", f.getCanonicalPath(), f2.getCanonicalPath());
 
+			f = new File("blöd ist es 10@%€.pdf");
+			final String fileToUrl = UrlUtil.fileToUrl(f, i == 0);
+			f2 = UrlUtil.urlToFile(fileToUrl);
+			assertEquals("escape %20", f.getCanonicalPath(), f2.getCanonicalPath());
+		}
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
@@ -211,7 +212,7 @@ public class XMLDocTest extends JDFTestCaseBase
 			for (int j = 0; j < outerLoop; j++)
 			{
 				if (j % 100 == 0)
-					System.out.println(iLoop);
+					System.out.print("\n" + iLoop + " " + j + " " + new JDFDate().getTimeISO() + " - ");
 				root.appendElement("bar");
 				System.out.print(".");
 				for (int i = 0; i < 100; i++)

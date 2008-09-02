@@ -72,6 +72,7 @@ import java.io.File;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
@@ -196,6 +197,43 @@ public class JMFResourceTest extends JDFTestCaseBase
 		JDFResourceInfo ri = s.appendResourceInfo();
 		ri.getCreateAmountPool();
 		// TODO continue
+	}
+
+	/**
+	 * 
+	 */
+	public void testMediaCatalog()
+	{
+		JDFDoc doc = new JDFDoc(ElementName.JMF);
+		JDFJMF jmf = doc.getJMFRoot();
+		jmf.setSenderID("DeviceSenderID");
+
+		JDFQuery q = jmf.appendQuery(EnumType.Resource);
+		q.setXMLComment("This is the query for a catalog");
+
+		JDFResourceQuParams rqp = q.appendResourceQuParams();
+		rqp.setExact(true);
+		rqp.setXMLComment("we need a way to describe that we want a complet list of all known resources");
+		rqp.setResourceName(ElementName.MEDIA);
+
+		JDFResponse r = q.createResponse().getResponse(0);
+		r = (JDFResponse) jmf.moveElement(r, null);
+		r.setXMLComment("This is the response to the query - generally it will be in it's own jmf...\nThe list of ResourceInfo + the ResourceQuParams could also be specified in a Signal.");
+
+		for (int i = 1; i < 5; i++)
+		{
+			JDFResourceInfo ri = r.appendResourceInfo();
+			ri.setResourceName("Media");
+			JDFMedia m = (JDFMedia) ri.appendResource("Media");
+			m.setDescriptiveName("Description of Media #" + i);
+			m.setDimensionCM(new JDFXYPair(i * 10, 13 + i % 2 * 20));
+			m.setBrand("Brand #" + i);
+			m.setProductID("ProductID_" + i);
+			m.setMediaType(EnumMediaType.Paper);
+			ri.setXMLComment("More attributes can be added as needed");
+		}
+		doc.write2File(sm_dirTestDataTemp + "MediaCatalog.jmf", 2, false);
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
 	// ///////////////////////////////////////////////////////////////////

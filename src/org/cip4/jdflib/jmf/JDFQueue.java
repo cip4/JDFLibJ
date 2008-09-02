@@ -296,7 +296,7 @@ public class JDFQueue extends JDFAutoQueue
 		VElement v = getQueueEntryVector();
 		if (nid == null || v == null)
 			return v;
-		
+
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
 			JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
@@ -305,7 +305,7 @@ public class JDFQueue extends JDFAutoQueue
 				v.remove(i);
 			}
 		}
-		
+
 		return (v.size() == 0) ? null : v;
 	}
 
@@ -464,7 +464,6 @@ public class JDFQueue extends JDFAutoQueue
 		if (nodeID == null)
 			return null;
 		VElement v = getQueueEntryVector();
-		NodeIdentifier ni2 = new NodeIdentifier();
 		int siz = v == null ? 0 : v.size();
 		int n = 0;
 		if (nSkip >= 0)
@@ -472,7 +471,7 @@ public class JDFQueue extends JDFAutoQueue
 			for (int i = 0; i < siz; i++)
 			{
 				JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-				ni2.setQueueEntry(qe);
+				NodeIdentifier ni2 = qe.getIdentifier();
 				if (ni2.matches(nodeID) && n++ >= nSkip)
 					return qe;
 			}
@@ -482,7 +481,7 @@ public class JDFQueue extends JDFAutoQueue
 			for (int i = siz - 1; i >= 0; i--)
 			{
 				JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-				ni2.setQueueEntry(qe);
+				NodeIdentifier ni2 = qe.getIdentifier();
 				if (ni2.matches(nodeID) && --n <= nSkip)
 					return qe;
 			}

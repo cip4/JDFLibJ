@@ -162,7 +162,6 @@ import org.cip4.jdflib.elementwalker.UnLinkFinder;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -1079,7 +1078,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		// links
 		",o_ i_,i?,i?");
 
-		mapPut(EnumType.CylinderLayoutPreparation.getName(), ",CylinderLayoutPreparationParams,Layout,Runlist,CylinderLayout",
+		mapPut(EnumType.CylinderLayoutPreparation.getName(), ",CylinderLayoutPreparationParams,Layout,RunList,CylinderLayout",
 		// links
 		",i?,i_,i_,o_");
 
@@ -1623,29 +1622,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		/**
-		 * creates a NodeIdentifier from a given JDF node uses the AncestorPool or NodeInfo or output resource in that
+		 * sets a NodeIdentifier to a given JDF node identifier uses the AncestorPool or NodeInfo or output resource in that
 		 * sequence to determine the partmap
 		 * 
 		 * @param n
 		 */
-		public NodeIdentifier(JDFNode n)
-		{
-			this();
-			setNode(n);
-		}
-
-		/**
-		 * sets a NodeIdentifier to a given JDF node uses the AncestorPool or NodeInfo or output resource in that
-		 * sequence to determine the partmap
-		 * 
-		 * @param n
-		 */
-		public void setNode(JDFNode n)
+		public void setIdentifier(NodeIdentifier n)
 		{
 			if (n == null)
 				setTo(null, null, null);
 			else
-				setTo(n.getJobID(true), n.getJobPartID(false), n.getNodeInfoPartMapVector());
+				setTo(n._jobID, n._jobPartID, n._partMapVector);
 		}
 
 		/**
@@ -1653,12 +1640,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * 
 		 * @param n
 		 */
-		public void setQueueEntry(JDFQueueEntry qe)
+		public void setTo(INodeIdentifiable qe)
 		{
 			if (qe == null)
 				setTo(null, null, null);
 			else
-				setTo(qe.getJobID(), qe.getJobPartID(), qe.getPartMapVector());
+				setIdentifier(qe.getIdentifier());
 		}
 
 		/**
@@ -1666,10 +1653,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * 
 		 * @param qe the queueEntry
 		 */
-		public NodeIdentifier(JDFQueueEntry qe)
+		public NodeIdentifier(INodeIdentifiable ni)
 		{
 			this();
-			setQueueEntry(qe);
+			setTo(ni);
 		}
 
 		/*
@@ -1707,12 +1694,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 			if (!(o instanceof INodeIdentifiable))
 				return false;
-			NodeIdentifier mt = ((INodeIdentifiable) o).getIdentifier();
-			boolean b = isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobID, _jobID);
-			b = b && (isWildCard(mt._jobID) || ContainerUtil.equals(mt._jobPartID, _jobPartID))
-					|| (_jobPartID != null && mt._jobPartID != null && mt._jobPartID.startsWith(_jobPartID + "."));
+			NodeIdentifier niInput = ((INodeIdentifiable) o).getIdentifier();
+			boolean b = isWildCard(niInput._jobID) || ContainerUtil.equals(niInput._jobID, _jobID);
+			b = b
+					&& (isWildCard(niInput._jobID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID))
+					|| (_jobPartID != null && niInput._jobPartID != null && niInput._jobPartID.startsWith(_jobPartID
+							+ "."));
 			return b
-					&& ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(mt._partMapVector)));
+					&& ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
 		}
 
 		/*
@@ -2407,6 +2396,48 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			setStatus(JDFElement.EnumNodeStatus.Part);
 		}
 		return true;
+	}
+
+	/**
+	 * get the status for the vector v
+	 * @param vMap the vevtor of partmaps
+	 * @return the status, null if the value is not consistent
+	 */
+	public EnumNodeStatus getVectorPartStatus(VJDFAttributeMap vMap)
+	{
+		if (vMap == null || vMap.size() == 0)
+			return getPartStatus(null);
+		EnumNodeStatus status = getPartStatus(vMap.elementAt(0));
+		if (status == null)
+			return null;
+		for (int i = 1; i < vMap.size(); i++)
+		{
+			EnumNodeStatus status2 = getPartStatus(vMap.elementAt(i));
+			if (!status.equals(status2))
+				return null;
+		}
+		return status;
+	}
+
+	/**
+	 * get the statusdetails for the vector v
+	 * @param vMap the vevtor of partmaps
+	 * @return the status, null if the value is not consistent
+	 */
+	public String getVectorPartStatusDetails(VJDFAttributeMap vMap)
+	{
+		if (vMap == null || vMap.size() == 0)
+			return getPartStatusDetails(null);
+		String status = getPartStatusDetails(vMap.elementAt(0));
+		if (status == null)
+			return null;
+		for (int i = 1; i < vMap.size(); i++)
+		{
+			String status2 = getPartStatusDetails(vMap.elementAt(i));
+			if (!status.equals(status2))
+				return null;
+		}
+		return status;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -5857,7 +5888,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public NodeIdentifier getIdentifier()
 	{
-		return new NodeIdentifier(this);
+		return new NodeIdentifier(getJobID(true), getJobPartID(false), getNodeInfoPartMapVector());
 	}
 
 	/**
@@ -8987,4 +9018,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			c.setDescriptiveName("automatically generated by toGrayBox");
 		}
 	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
+	 * @param ni
+	 */
+	public void setIdentifier(NodeIdentifier ni)
+	{
+		if (ni == null)
+			ni = new NodeIdentifier();
+
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+		setPartMapVector(ni.getPartMapVector());
+	}
+
 }

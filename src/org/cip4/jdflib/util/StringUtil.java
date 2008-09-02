@@ -1600,11 +1600,7 @@ public class StringUtil
 
 				String strIsEscaped = new String(escapeSeq); // get the escaped
 				// str 'd6'
-				Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and
-				// get
-				// the
-				// int
-				// value
+				Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and get the int value
 				byteEscape[n++] = (byte) integer.intValue();
 			}
 		}

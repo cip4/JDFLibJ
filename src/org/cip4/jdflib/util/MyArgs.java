@@ -367,7 +367,8 @@ public class MyArgs
 	public String usage(String paramString)
 	{
 		m_usageTable = "\n.\n.\n.usage: ";
-		m_usageTable += m_argV.stringAt(0);
+		if (m_argV.size() > 0)
+			m_usageTable += m_argV.stringAt(0);
 
 		if (m_switchParameterString != null)
 		{

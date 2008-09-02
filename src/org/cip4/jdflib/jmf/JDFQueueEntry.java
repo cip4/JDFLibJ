@@ -92,6 +92,7 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -102,7 +103,7 @@ import org.cip4.jdflib.util.JDFDate;
  * @author prosirai
  *
  */
-public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable
+public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INodeIdentifiable
 {
 	public static class QueueEntryComparator implements Comparator
 	{
@@ -267,7 +268,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable
 	{
 		if (ni == null)
 			return false;
-		NodeIdentifier niThis = new NodeIdentifier(this);
+		final NodeIdentifier niThis = getIdentifier();
 		return niThis.matches(ni);
 	}
 

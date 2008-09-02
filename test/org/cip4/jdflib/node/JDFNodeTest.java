@@ -1060,14 +1060,14 @@ public class JDFNodeTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setJobID("j1");
 		n.setJobPartID("p1");
-		ni.setNode(n);
+		ni.setTo(n);
 		assertNotSame(ni, ni2);
-		ni2.setNode(n);
+		ni2.setTo(n);
 		assertEquals(ni, ni2);
 		n.appendAncestorPool().appendPart().setPartMap(new JDFAttributeMap("a", "b"));
-		ni.setNode(n);
+		ni.setTo(n);
 		assertNotSame(ni, ni2);
-		ni2.setNode(n);
+		ni2.setTo(n);
 		assertEquals(ni, ni2);
 	}
 
@@ -1089,7 +1089,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		NodeIdentifier ni2 = new NodeIdentifier(n.getJobID(true), n.getJobPartID(true), v);
 		assertEquals(ni, ni2);
 		n.setPartStatus(new JDFAttributeMap("SignatureName", "Sig1"), EnumNodeStatus.InProgress, null);
-		ni.setNode(n);
+		ni.setTo(n);
 		assertNotSame(ni, ni2);
 
 	}
@@ -1103,18 +1103,18 @@ public class JDFNodeTest extends JDFTestCaseBase
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setJobID("j1");
 		n.setJobPartID("p1");
-		ni.setNode(n);
+		ni.setTo(n);
 		assertTrue(ni.matches(ni2));
 		assertTrue("ok if jobID matches", ni.matches("j1"));
 		assertFalse(ni.matches("p1"));
 		final JDFAncestorPool aPool = n.appendAncestorPool();
 		aPool.appendPart().setPartMap(new JDFAttributeMap("a", "b"));
-		ni.setNode(n);
+		ni.setTo(n);
 		assertTrue(ni.matches(ni2));
-		ni2.setNode(n);
+		ni2.setTo(n);
 		assertTrue(ni.matches(ni2));
 		aPool.appendPart().setPartMap(new JDFAttributeMap("a", "c"));
-		ni.setNode(n);
+		ni.setTo(n);
 		assertTrue(ni.matches(ni2));
 
 	}
@@ -1441,6 +1441,44 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testGetVectorPartStatus()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		for (int i = 0; i < 3; i++)
+			v.add(new JDFAttributeMap("SheetName", "s" + i));
+		n.setPartStatus(v, EnumNodeStatus.Cleanup, null);
+		assertEquals(n.getVectorPartStatus(v), EnumNodeStatus.Cleanup);
+		v.removeElementAt(2);
+		assertEquals(n.getVectorPartStatus(v), EnumNodeStatus.Cleanup);
+		n.setPartStatus(new JDFAttributeMap("SheetName", "s1"), EnumNodeStatus.Setup, null);
+		assertNull(n.getVectorPartStatus(v));
+	}
+
+	// /////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testGetVectorPartStatusDetails()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		for (int i = 0; i < 3; i++)
+			v.add(new JDFAttributeMap("SheetName", "s" + i));
+		n.setPartStatus(v, EnumNodeStatus.Cleanup, "dummy");
+		assertEquals(n.getVectorPartStatusDetails(v), "dummy");
+		v.removeElementAt(2);
+		assertEquals(n.getVectorPartStatusDetails(v), "dummy");
+		n.setPartStatus(new JDFAttributeMap("SheetName", "s1"), EnumNodeStatus.Cleanup, "foobar");
+		assertNull(n.getVectorPartStatusDetails(v));
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetPartStatus()
 	{
 		JDFDoc doc = JDFTestCaseBase.creatXMDoc();
@@ -1479,6 +1517,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGenericResources()
 	{
 		JDFDoc d = new JDFDoc("JDF");
@@ -1732,6 +1773,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws DataFormatException
+	 */
 	public void testGetNodeInfo() throws DataFormatException
 	{
 		JDFDoc d = new JDFDoc("JDF");

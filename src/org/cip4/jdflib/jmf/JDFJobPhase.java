@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFModulePhase;
@@ -103,7 +104,7 @@ import org.cip4.jdflib.util.JDFDate;
  * 
  * Note that the old EnumStatus local class has been move to @see JDFNode.EnumNodeStatus
  */
-public class JDFJobPhase extends JDFAutoJobPhase
+public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 {
 	private static final long serialVersionUID = 1L;
 
@@ -149,6 +150,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * @see org.cip4.jdflib.auto.JDFAutoJobPhase#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFJobPhase[  --> " + super.toString() + " ]";
@@ -160,6 +162,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 		elemInfoTable[0] = new ElemInfoTable(ElementName.JDF, 0x33333333);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
@@ -170,6 +173,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String getStatusDetails()
 	{
 		return getAttribute(AttributeName.STATUSDETAILS);
@@ -180,6 +184,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String getQueueEntryID()
 	{
 		return getInheritedStatusQuParamsAttribute(AttributeName.QUEUEENTRYID, null);
@@ -190,6 +195,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String getJobID()
 	{
 		return getInheritedStatusQuParamsAttribute(AttributeName.JOBID, null);
@@ -200,6 +206,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String getJobPartID()
 	{
 		return getInheritedStatusQuParamsAttribute(AttributeName.JOBPARTID, null);
@@ -210,6 +217,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * 
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
+	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
 		return super.getPartMapVector();
@@ -220,6 +228,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
@@ -230,6 +239,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * 
 	 * @param mPart attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -240,6 +250,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
@@ -251,6 +262,7 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	 * @param mPart attribute map for the part to remove
 	 * @return boolean - returns true if the part exists
 	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
@@ -274,6 +286,26 @@ public class JDFJobPhase extends JDFAutoJobPhase
 	public JDFNode appendNode()
 	{
 		return (JDFNode) appendElementN(ElementName.JDF, 1, null);
+	}
+
+	/**
+	 * apply all values of a JDF Node to this
+	 * @param node the node to apply
+	 */
+	public void applyNode(JDFNode node)
+	{
+		NodeIdentifier ni = node == null ? new NodeIdentifier() : node.getIdentifier();
+
+		setIdentifier(ni);
+		if (node != null)
+		{
+			JDFNode.EnumActivation activation = node.getActivation(true);
+			if (activation != null)
+				setActivation(EnumActivation.getEnum(activation.getName()));
+			VJDFAttributeMap vMap = ni.getPartMapVector();
+			setStatus(node.getVectorPartStatus(vMap));
+			setStatusDetails(node.getVectorPartStatusDetails(vMap));
+		}
 	}
 
 	/**
@@ -313,6 +345,20 @@ public class JDFJobPhase extends JDFAutoJobPhase
 		NodeIdentifier ni = new NodeIdentifier();
 		ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
 		return ni;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
+	 * @param ni
+	 */
+	public void setIdentifier(NodeIdentifier ni)
+	{
+		if (ni == null)
+			ni = new NodeIdentifier();
+
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+		setPartMapVector(ni.getPartMapVector());
 	}
 
 	private String getInheritedStatusQuParamsAttribute(String key, String nameSpaceURI)

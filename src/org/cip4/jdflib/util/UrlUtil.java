@@ -532,6 +532,7 @@ public class UrlUtil
 				urlString = urlString.substring(2);
 		}
 
+		urlString = new String(StringUtil.setUTF8String(urlString)); // ensure that any non-utf8 gets encoded to utf-8
 		urlString = StringUtil.unEscape(urlString, "%", 16, 2);
 		urlString = StringUtil.getUTF8String(urlString.getBytes());
 
@@ -548,20 +549,20 @@ public class UrlUtil
 	{
 		if (urlString == null)
 			return null;
+
 		if (isEscaped(urlString))
 			urlString = StringUtil.unEscape(urlString, "%", 16, 2);
 
 		try
 		{
 			if (isCID(urlString) || isHttp(urlString))
+			{
 				return new URL(urlString);
-
-			if (urlString.toLowerCase().startsWith("file:"))
-				urlString = urlString.substring(5); // remove "file:"
-			urlString = StringUtil.unEscape(urlString, "%", 16, 2);
-			urlString = StringUtil.getUTF8String(urlString.getBytes());
-
-			return new URL(fileToUrl(new File(urlString), false));
+			}
+			else
+			{
+				return new URL(fileToUrl(urlToFile(urlString), true));
+			}
 		}
 		catch (MalformedURLException x)
 		{

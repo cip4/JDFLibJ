@@ -145,10 +145,11 @@ public class JDFMessage extends JDFAutoMessage
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.XSITYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SENDERID, 0x33333111, AttributeInfo.EnumAttributeType.shortString, null, null);
 	}
 
 	@Override

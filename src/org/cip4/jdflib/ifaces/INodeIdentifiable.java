@@ -83,4 +83,9 @@ public interface INodeIdentifiable
 	 */
 	public NodeIdentifier getIdentifier();
 
+	/**
+	 * @param ni the nodeidentifier that this should be set to
+	 */
+	public void setIdentifier(NodeIdentifier ni);
+
 }

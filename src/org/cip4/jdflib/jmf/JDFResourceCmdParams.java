@@ -528,4 +528,18 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
 	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
+	 * @param ni
+	 */
+	public void setIdentifier(NodeIdentifier ni)
+	{
+		if (ni == null)
+			ni = new NodeIdentifier();
+
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+		setPartMapVector(ni.getPartMapVector());
+	}
 }
