@@ -77,10 +77,17 @@
  */
 package org.cip4.jdflib.core;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.FileUtil;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFParserTest extends JDFTestCaseBase
 {
 	String s;
@@ -125,8 +132,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		long l1 = System.nanoTime();
 		JDFDoc d = parser.parseFile(sm_dirTestData + "bigWhite.jdf");
 		assertNotNull(d);
-		System.out
-				.println("big parse:   " + (System.nanoTime() - l1) / 1000000);
+		System.out.println("big parse:   " + (System.nanoTime() - l1) / 1000000);
 	}
 
 	/**
@@ -136,8 +142,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testBadNS()
 	{
 		String s2 = "<JMF/>";
-		assertEquals(new JDFParser().parseString(s2).getRoot().getLocalName(),
-				"JMF");
+		assertEquals(new JDFParser().parseString(s2).getRoot().getLocalName(), "JMF");
 	}
 
 	/**
@@ -160,12 +165,40 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testSkipParse()
+	public void testSkipParse() throws Exception
 	{
 		JDFParser.m_searchStream = true;
 		String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF/>";
 		JDFParser.m_searchStream = false;
 		assertNull(new JDFParser().parseString(s2));
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas
+	 * this test catches corrupt xmöl schemas
+	 * @throws Exception
+	 */
+	public void testSchema() throws Exception
+	{
+		File foo = new File(sm_dirTestSchema).getParentFile();
+
+		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
+		File[] dirs = FileUtil.listFilesWithExpression(foo, ".*Version_.*");
+		assertTrue(dirs.length > 3);
+		int nCheck = 0;
+		for (int i = 0; i < dirs.length; i++)
+		{
+			File dir = dirs[i];
+			if (!dir.isDirectory())
+				continue;
+			final File jdfxsd = new File(dir + File.separator + "JDF.xsd");
+			assertTrue(jdfxsd.canRead());
+			JDFParser p = new JDFParser();
+			p.setJDFSchemaLocation(jdfxsd);
+			assertNotNull("oops in" + jdfxsd, p.parseString(s));
+			nCheck++;
+		}
+		assertTrue(nCheck >= 3);
 	}
 
 	/*

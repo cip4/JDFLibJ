@@ -107,11 +107,26 @@ public class FileUtil
 	 * @param extension comma separated list of extensions to check for (null = list all)
 	 * @return Files[] the matching files, null if none are found
 	 */
-	public static File[] listFiles(File dir, String extension)
+	public static File[] listFilesWithExtension(File dir, String extension)
 	{
 		if (dir == null)
 			return null;
-		File[] files = dir.listFiles(new SimpleFileFilter(extension));
+		File[] files = dir.listFiles(new ExtensionFileFilter(extension));
+		return (files == null || files.length == 0) ? null : files;
+	}
+
+	/**
+	 * list all files matching given regexp 
+	 * 
+	 * @param dir the directory to search
+	 * @param expression regular expression
+	 * @return Files[] the matching files, null if none are found
+	 */
+	public static File[] listFilesWithExpression(File dir, String expression)
+	{
+		if (dir == null)
+			return null;
+		File[] files = dir.listFiles(new ExpressionFileFilter(expression));
 		return (files == null || files.length == 0) ? null : files;
 	}
 
@@ -140,14 +155,14 @@ public class FileUtil
 	 * UtilFileFilter
 	 * 
 	 ************************************************************/
-	public static class SimpleFileFilter implements FileFilter
+	public static class ExtensionFileFilter implements FileFilter
 	{
 		private Set<String> m_extension;
 
 		/**
 		 * 
 		 */
-		public SimpleFileFilter(String fileExtension)
+		protected ExtensionFileFilter(String fileExtension)
 		{
 			if (fileExtension != null)
 			{
@@ -191,14 +206,8 @@ public class FileUtil
 	 * @author prosirai
 	 * 
 	 */
-	public static class DirectoryFileFilter implements FileFilter
+	protected static class DirectoryFileFilter implements FileFilter
 	{
-		/**
-		 * 
-		 */
-		public DirectoryFileFilter()
-		{ /* nop */
-		}
 
 		/*
 		 * (non-Javadoc)
@@ -208,6 +217,36 @@ public class FileUtil
 		public boolean accept(File checkFile)
 		{
 			return checkFile != null && checkFile.isDirectory();
+		}
+	}
+
+	/**
+	 * simple file filter that lists all files that match a regular expression
+	 * 
+	 * @author Rainer Prosi
+	 * 
+	 */
+	protected static class ExpressionFileFilter implements FileFilter
+	{
+		private final String regExp;
+
+		/**
+		 * @param _regExp the regular expression to match
+		 * 
+		 */
+		public ExpressionFileFilter(String _regExp)
+		{
+			regExp = _regExp;
+		}
+
+		/**
+		 * true if a file matches a regular expression
+		 * 
+		 * @see java.io.FileFilter#accept(java.io.File)
+		 */
+		public boolean accept(File checkFile)
+		{
+			return checkFile != null && StringUtil.matches(checkFile.getName(), regExp);
 		}
 	}
 

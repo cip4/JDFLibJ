@@ -124,7 +124,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		f.mkdir(); // make sure we have one
 		assertTrue(FileUtil.deleteAll(f));
 		assertTrue(f.mkdir());
-		assertNull(FileUtil.listFiles(null, null));
+		assertNull(FileUtil.listFilesWithExtension(null, null));
 
 		for (char c = 'a'; c < 'g'; c++)
 		{
@@ -134,18 +134,18 @@ public class FileUtilTest extends JDFTestCaseBase
 				assertTrue(f2.createNewFile());
 			}
 		}
-		assertEquals(FileUtil.listFiles(f, "a").length, 3);
-		assertEquals(FileUtil.listFiles(f, "C")[0].getName(), "0.c");
-		assertEquals(FileUtil.listFiles(f, "a,b,.c")[0].getName(), "0.a");
-		assertEquals(FileUtil.listFiles(f, "a,b,.c")[8].getName(), "2.c");
-		assertEquals(FileUtil.listFiles(f, null).length, 18);
-		assertNull(FileUtil.listFiles(f, "CC"));
-		assertNull(FileUtil.listFiles(f, ".CC,.dd"));
+		assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
+		assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(), "0.c");
+		assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
+		assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8].getName(), "2.c");
+		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 18);
+		assertNull(FileUtil.listFilesWithExtension(f, "CC"));
+		assertNull(FileUtil.listFilesWithExtension(f, ".CC,.dd"));
 		new File(f.getAbsolutePath() + File.separator + "a").createNewFile();
-		assertEquals(FileUtil.listFiles(f, null).length, 19);
-		assertEquals(FileUtil.listFiles(f, ".").length, 1);
+		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 19);
+		assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 1);
 		new File(f.getAbsolutePath() + File.separator + "b.").createNewFile();
-		assertEquals(FileUtil.listFiles(f, ".").length, 2);
+		assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 2);
 
 	}
 

@@ -513,6 +513,18 @@ public class JDFParser extends DOMParser
 	}
 
 	/**
+	 * @param _schemaLocation the schema location
+	 */
+	public void setJDFSchemaLocation(File _schemaLocation)
+	{
+		if (_schemaLocation != null && _schemaLocation.length() != 0)
+		{
+			final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
+			m_SchemaLocation = "http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
+		}
+	}
+
+	/**
 	 * @see org.apache.xerces.parsers.AbstractDOMParser#startDocument(org.apache.xerces.xni.XMLLocator,
 	 *      java.lang.String, org.apache.xerces.xni.NamespaceContext, org.apache.xerces.xni.Augmentations)
 	 */

@@ -78,6 +78,7 @@ package org.cip4.jdflib.util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -101,7 +102,6 @@ import javax.mail.Session;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.util.SharedFileInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.AttributeName;
@@ -568,12 +568,15 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static Multipart getMultiPart(String fileName)
 	{
-		File f = new File(fileName);
+		File f = urlToFile(fileName);
 		try
 		{
-			SharedFileInputStream fis = new SharedFileInputStream(f);
+			// was SharedFileInputStrea which was very nasty in terms of retaining handles...
+			BufferedInputStream fis = new BufferedInputStream(new FileInputStream(f));
 
 			Multipart mp = MimeUtil.getMultiPart(fis);
+			fis.close();
+
 			return mp;
 		}
 		catch (FileNotFoundException e)

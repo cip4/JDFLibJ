@@ -176,7 +176,7 @@ public class HotFolder implements Runnable
 			// touched?
 			{
 				lastModified = lastMod;
-				File[] files = FileUtil.listFiles(dir, extension);
+				File[] files = FileUtil.listFilesWithExtension(dir, extension);
 				int fileListLength = files != null ? files.length : 0;
 
 				for (int i = lastFileTime.size() - 1; i >= 0; i--)
