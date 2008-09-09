@@ -1,6 +1,113 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD520 (09.09.2008)
+
+
+Layout get and set by name
+getQueueEntryIDMap in queue
+undo stream modification in MimeUtil
+URL handling for non-ascii characters
+
+
+Revision: 3554
+Author: prosi
+Date: 08:26:40, Dienstag, 9. September 2008
+Message:
+Layout get and set by name
+getQueueEntryIDMap in queue
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFParser.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFDeviceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAuditPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFSignature.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFLayout.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFParserTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/QueueTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFLayoutTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/process/JDFRunListTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StatusCounterTest.java
+
+Revision: 3541
+Author: prosi
+Date: 09:24:30, Mittwoch, 3. September 2008
+Message:
+undo stream modification in MimeUtil
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+
+Revision: 3540
+Author: prosi
+Date: 08:30:39, Mittwoch, 3. September 2008
+Message:
+Bambi Message Sender Persistency
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFParser.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/FileUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/HotFolder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFParserTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FileUtilTest.java
+
+Revision: 3534
+Author: prosi
+Date: 08:24:30, Dienstag, 2. September 2008
+Message:
+Bambi upgrades
+URL handling for non-ascii characters
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/ifaces/INodeIdentifiable.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJobPhase.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueEntry.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFStatusQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MyArgs.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFJobPhaseTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JMFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/UrlUtilTest.java
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD515) && !lbtype(JDFLIBJ_2.1.3BLD514)}" -print
+.\core\JDFElement.java@@\main\250
+.\core\JDFParser.java@@\main\50
+.\core\KElement.java@@\main\266
+.\ifaces\INodeIdentifiable.java@@\main\2
+.\jmf\JDFDeviceInfo.java@@\main\28
+.\jmf\JDFJobPhase.java@@\main\27
+.\jmf\JDFMessage.java@@\main\79
+.\jmf\JDFQueue.java@@\main\36
+.\jmf\JDFQueueEntry.java@@\main\33
+.\jmf\JDFResourceCmdParams.java@@\main\29
+.\jmf\JDFResourceQuParams.java@@\main\19
+.\jmf\JDFStatusQuParams.java@@\main\19
+.\node\JDFNode.java@@\main\276
+.\pool\JDFAuditPool.java@@\main\108
+.\resource\JDFSignature.java@@\main\23
+.\resource\process\JDFLayout.java@@\main\24
+.\util\FileUtil.java@@\main\10
+.\util\HotFolder.java@@\main\4
+.\util\MimeUtil.java@@\main\26
+.\util\MyArgs.java@@\main\30
+.\util\StatusCounter.java@@\main\20
+.\util\UrlUtil.java@@\main\20
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD514 (27.08.2008)
 
 
