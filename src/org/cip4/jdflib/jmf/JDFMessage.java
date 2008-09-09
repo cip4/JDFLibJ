@@ -105,6 +105,11 @@ import org.cip4.jdflib.resource.JDFQueueEntryDefList;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 import org.cip4.jdflib.util.EnumUtil;
 
+/**
+ * super class for all message families Signal, Command,...
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFMessage extends JDFAutoMessage
 {
 	private static final long serialVersionUID = 1L;

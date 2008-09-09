@@ -382,6 +382,11 @@ public class JDFAuditPool extends JDFPool
 		myAudit.setStart(new JDFDate());
 		myAudit.setEnd(new JDFDate());
 		myAudit.setPartMapVector(vmParts);
+		final JDFNode parentJDF = getParentJDF();
+		if (parentJDF != null)
+		{
+			myAudit.setSpawnID(StringUtil.getNonEmpty(parentJDF.getSpawnID(true)));
+		}
 
 		return myAudit;
 	}

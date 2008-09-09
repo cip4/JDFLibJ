@@ -94,6 +94,10 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFSignature;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFLayout extends JDFSurface
 {
 	private static final long serialVersionUID = 1L;
@@ -101,7 +105,7 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * Constructor for JDFLayout
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFLayout(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -112,8 +116,8 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * Constructor for JDFLayout
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
@@ -124,10 +128,10 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * Constructor for JDFLayout
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
@@ -478,6 +482,31 @@ public class JDFLayout extends JDFSurface
 	public JDFSignature getSignature(int iSkip)
 	{
 		return getLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, iSkip);
+	}
+
+	/**
+	 * gets a signature in both old and new Layouts if old: a <Signature>
+	 * element if new: a SignatureName partition leaf
+	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
+	 * 
+	 * @return the signature
+	 */
+	public JDFSignature getSignature(String signatureName)
+	{
+		return getLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, signatureName);
+	}
+
+	/**
+	 * gets a signature in both old and new Layouts if old: a <Signature>creates it if it does not exist
+	 * element if new: a SignatureName partition leaf
+	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
+	 * 
+	 * @return the signature
+	 * @throws JDFException 
+	 */
+	public JDFSignature getCreateSignature(String signatureName) throws JDFException
+	{
+		return getCreateLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, signatureName);
 	}
 
 	/**

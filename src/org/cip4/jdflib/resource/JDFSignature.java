@@ -227,6 +227,31 @@ public class JDFSignature extends JDFAutoLayout
 	}
 
 	/**
+	 * gets a signature in both old and new Layouts if old: a <Signature>
+	 * element if new: a SignatureName partition leaf
+	 * @param sheetName the SheetName partition key value(new) or Sheet/@Name(old)
+	 * 
+	 * @return the signature
+	 */
+	public JDFSheet getSheet(String sheetName)
+	{
+		return getLayoutElement(this, ElementName.SHEET, AttributeName.SHEETNAME, sheetName);
+	}
+
+	/**
+	 * gets a signature in both old and new Layouts if old: a <Signature>creates it if it does not exist
+	 * element if new: a SignatureName partition leaf
+	 * @param sheetName the SheetName partition key value(new) or Sheet/@Name(old)
+	 * 
+	 * @return the signature
+	 * @throws JDFException 
+	 */
+	public JDFSheet getCreateSheet(String sheetName) throws JDFException
+	{
+		return getCreateLayoutElement(this, ElementName.SHEET, AttributeName.SHEETNAME, sheetName);
+	}
+
+	/**
 	 * counts the number of Sheets in both old and new Layouts <li>if old: a <code>Sheet</code> element <li>if new: a
 	 * <code>SheetName</code> partition leaf
 	 * 
@@ -292,8 +317,12 @@ public class JDFSignature extends JDFAutoLayout
 	/**
 	 * appends a signature in both old and new Layouts if old: a <code>< Signature></code> element if new: a
 	 * SignatureName partition leaf
+	 * @param layout 
+	 * @param elementName 
+	 * @param partitionKeyName 
 	 * 
 	 * @return JDFLayout
+	 * @throws JDFException 
 	 */
 	protected static JDFLayout appendLayoutElement(JDFResource layout, String elementName, String partitionKeyName) throws JDFException
 	{
@@ -331,6 +360,7 @@ public class JDFSignature extends JDFAutoLayout
 	 * @param layout
 	 * @param elementName
 	 * @param partitionKeyName
+	 * @param iSkip the index of the element, negative values count backwards from the end
 	 * @return JDFLayout: the element
 	 */
 	protected static JDFLayout getLayoutElement(JDFResource layout, String elementName, String partitionKeyName, int iSkip)
@@ -338,14 +368,74 @@ public class JDFSignature extends JDFAutoLayout
 		JDFLayout s = null;
 		if (JDFLayout.isNewLayout(layout))
 		{
-			VElement v = layout.getChildElementVector_KElement(ElementName.LAYOUT, null, new JDFAttributeMap(partitionKeyName, (String) null), true, iSkip + 1);
-			if (v.size() > iSkip)
+			VElement v = layout.getLeaves(true);
+			VElement v2 = new VElement();
+			for (int i = 0; i < v.size(); i++)
+			{
+				if (v.get(i).hasAttribute_KElement(partitionKeyName, null, false))
+					v2.add(v.get(i));
+			}
+			v = v2;
+			if (iSkip < 0)
+				iSkip = v.size() + iSkip;
+
+			if (iSkip >= 0 && v.size() > iSkip)
 				s = (JDFLayout) v.elementAt(iSkip);
 		}
 		else
 		{
 			s = (JDFLayout) layout.getElement(elementName, null, iSkip);
 
+		}
+		return s;
+	}
+
+	/**
+	 * get a specific layout element by name
+	 * 
+	 * @param layout
+	 * @param elementName
+	 * @param partitionKeyName
+	 * @param objectName 
+	 * @return JDFLayout: the element
+	 */
+	protected static JDFLayout getLayoutElement(JDFResource layout, String elementName, String partitionKeyName, String objectName)
+	{
+		JDFLayout s = null;
+		if (JDFLayout.isNewLayout(layout))
+		{
+			s = (JDFLayout) layout.getPartition(new JDFAttributeMap(partitionKeyName, objectName), null);
+		}
+		else
+		{
+			s = (JDFLayout) layout.getChildWithAttribute(elementName, AttributeName.NAME, null, objectName, 0, true);
+		}
+		return s;
+	}
+
+	/**
+	 * get a specific layout element by name, creates it if it does not exist
+	 * 
+	 * @param layout
+	 * @param elementName
+	 * @param partitionKeyName
+	 * @param objectName 
+	 * @return JDFLayout: the element
+	 * @throws JDFException if the location of a newly created element is not well defined 
+	 */
+	protected static JDFLayout getCreateLayoutElement(JDFResource layout, String elementName, String partitionKeyName, String objectName)
+	{
+		JDFLayout s = getLayoutElement(layout, elementName, partitionKeyName, objectName);
+		if (s != null)
+			return s;
+		if (JDFLayout.isNewLayout(layout))
+		{
+			s = (JDFLayout) layout.addPartition(EnumPartIDKey.getEnum(partitionKeyName), objectName);
+		}
+		else
+		{
+			s = (JDFLayout) layout.appendElement(elementName);
+			s.setName(objectName);
 		}
 		return s;
 	}

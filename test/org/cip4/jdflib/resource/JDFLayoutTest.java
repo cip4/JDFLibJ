@@ -121,6 +121,14 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		JDFElement.setLongID(false);
+		reset();
+	}
+
+	/**
+	 * 
+	 */
+	private void reset()
+	{
 		doc = new JDFDoc("JDF");
 		n = doc.getJDFRoot();
 		n.setType(EnumType.Imposition);
@@ -276,6 +284,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 */
 	public void testBuildOldLayout()
 	{
+		reset();
+
 		n.setVersion(EnumVersion.Version_1_2);
 		JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		assertFalse("lo 1.3", JDFLayout.isNewLayout(lo));
@@ -350,6 +360,8 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	 */
 	public void testBuildNewLayout()
 	{
+		reset();
+
 		JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
 		assertTrue("lo 1.3", JDFLayout.isNewLayout(lo));
 		JDFSignature si = lo.appendSignature();
@@ -609,6 +621,38 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testGetSignatureByName()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			if (i == 0)
+				testBuildNewLayout();
+			else
+			{
+				testBuildOldLayout();
+				JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
+				lo.getSignature(0).setName("SignatureName1");
+				lo.getSignature(1).setName("SignatureName2");
+				lo.getSignature(1).getSheet(0).setName("SheetName1");
+			}
+			JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
+			assertNull(lo.getSignature("fooBar"));
+			assertEquals(lo.getSignature("SignatureName1"), lo.getSignature(0));
+			assertEquals(lo.getSheet("SheetName1"), lo.getSheet(0));
+			JDFSignature signature2 = lo.getSignature("SignatureName2");
+			assertEquals(signature2.getSheet("SheetName1"), lo.getSignature(1).getSheet(0));
+			assertEquals(lo.getCreateSignature("fooBar"), lo.getSignature(-1));
+		}
+
+	}
+
+	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetSignatureName_New()
 	{
 		testBuildNewLayout();

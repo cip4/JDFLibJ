@@ -79,6 +79,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.xerces.parsers.DOMParser;
 import org.apache.xerces.xni.Augmentations;
@@ -272,7 +273,15 @@ public class JDFParser extends DOMParser
 	{
 		if (stringInput == null)
 			return null;
-		ByteArrayInputStream is = new ByteArrayInputStream(stringInput.getBytes());
+		ByteArrayInputStream is;
+		try
+		{
+			is = new ByteArrayInputStream(stringInput.getBytes("UTF-8"));
+		}
+		catch (UnsupportedEncodingException x)
+		{
+			is = new ByteArrayInputStream(stringInput.getBytes());
+		}
 		return parseStream(is);
 	}
 

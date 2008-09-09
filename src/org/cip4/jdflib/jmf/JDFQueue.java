@@ -76,6 +76,8 @@
 package org.cip4.jdflib.jmf;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -284,6 +286,25 @@ public class JDFQueue extends JDFAutoQueue
 			}
 		}
 		return (v == null || v.size() == 0) ? null : v;
+	}
+
+	/**
+	 * get a map of queueentries that uses QueueEntryID as key
+	 * @return the map, null if this is empty
+	 */
+	public synchronized Map<String, JDFQueueEntry> getQueueEntryIDMap()
+	{
+		VElement v = getQueueEntryVector();
+		int siz = v == null ? 0 : v.size();
+		if (siz == 0)
+			return null;
+		HashMap<String, JDFQueueEntry> map = new HashMap<String, JDFQueueEntry>(siz);
+		for (int i = 0; i < siz; i++)
+		{
+			JDFQueueEntry qe = (JDFQueueEntry) v.get(i);
+			map.put(qe.getQueueEntryID(), qe);
+		}
+		return map;
 	}
 
 	/**
@@ -673,7 +694,7 @@ public class JDFQueue extends JDFAutoQueue
 	}
 
 	/**
-	 * return true if the number of entries running is exceeded - performance
+	 * @return true if the number of entries running is exceeded - performance
 	 */
 	private boolean maxRunning()
 	{
@@ -681,7 +702,7 @@ public class JDFQueue extends JDFAutoQueue
 	}
 
 	/**
-	 * return true if the number of entries running is exceeded - performance
+	 * @return true if the number of entries running is exceeded - performance
 	 */
 	private boolean maxWaiting()
 	{
@@ -691,7 +712,7 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * make this a smart queue when modifying queueentries
 	 * 
-	 * @param_automated automate if true
+	 * @param _automated automate if true
 	 */
 	public void setAutomated(boolean _automated)
 	{
@@ -703,7 +724,7 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * is this a smart queue when modifying queueentries
 	 * 
-	 * @param_automated automate if true
+	 * @return  true if this is automated
 	 */
 	public boolean isAutomated()
 	{
@@ -769,7 +790,6 @@ public class JDFQueue extends JDFAutoQueue
 			{
 				newStatus = EnumQueueStatus.Blocked;
 			}
-
 		}
 
 		if (newStatus != null)

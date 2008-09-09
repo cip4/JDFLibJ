@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.jmf;
 
+import java.util.Map;
+
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
@@ -148,6 +150,16 @@ public class QueueTest extends TestCase
 		assertNull("qe6", q.getQueueEntry("qe6"));
 		assertEquals("qe6", -1, q.getQueueEntryPos("qe6"));
 		assertEquals("qe2", 1, q.getQueueEntryPos("qe2"));
+	}
+	
+	/**
+	 * 
+	 */
+	public void testGetQueueEntryMap()
+	{
+		Map<String,JDFQueueEntry> map=q.getQueueEntryIDMap();
+		assertEquals(map.size(), q.numEntries(null));
+		assertEquals(map.get("qe2"), q.getQueueEntry("qe2"));
 	}
 
 	public void testCreateQueueEntry()

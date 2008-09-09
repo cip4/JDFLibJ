@@ -1643,7 +1643,7 @@ public class KElement extends ElementNSImpl
 	 * 
 	 * @return KElement[] the array of direct children
 	 */
-	public KElement[] getChildElementArray()
+	public synchronized KElement[] getChildElementArray()
 	{
 		VElement v = new VElement();
 		v.ensureCapacity(10); // good guess to avoid resizing too often
@@ -1736,7 +1736,7 @@ public class KElement extends ElementNSImpl
 	 * 
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public VElement getChildElementVector_KElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize)
+	public synchronized VElement getChildElementVector_KElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize)
 	{
 		final VElement v = new VElement();
 		if (isWildCard(nodeName))

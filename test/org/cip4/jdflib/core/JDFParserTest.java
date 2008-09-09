@@ -82,6 +82,7 @@ import java.io.File;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
 
 /**
@@ -133,6 +134,16 @@ public class JDFParserTest extends JDFTestCaseBase
 		JDFDoc d = parser.parseFile(sm_dirTestData + "bigWhite.jdf");
 		assertNotNull(d);
 		System.out.println("big parse:   " + (System.nanoTime() - l1) / 1000000);
+	}
+
+	/**
+	 * check simple parsestring
+	 * 
+	 */
+	public void testParseString()
+	{
+		JDFParser parser = new JDFParser();
+		assertNotNull(parser.parseString(s));
 	}
 
 	/**
@@ -212,7 +223,8 @@ public class JDFParserTest extends JDFTestCaseBase
 		super.setUp();
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
-		n.addResource("RunList", EnumUsage.Input);
+		JDFResource rl = n.addResource("RunList", EnumUsage.Input);
+		rl.setDescriptiveName("Runlist für 10 € &&&"); // sum special characters
 		s = d.write2String(2);
 		bSearch = JDFParser.m_searchStream;
 	}

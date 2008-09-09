@@ -3188,7 +3188,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated use JDFMerge.mergeSpawnIDS
 	 */
 	@Deprecated
-	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs) 
+	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs)
 	{
 		if (!getID().equals(resToMerge.getID()))
 		{

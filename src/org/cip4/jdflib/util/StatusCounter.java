@@ -477,6 +477,24 @@ public class StatusCounter
 			la.lastBag.totalAmount = amount;
 			updatePercentComplete(la);
 		}
+		long t = System.currentTimeMillis();
+		if (la.lastBag.lastCall == 0)
+		{
+			la.lastBag.speed = 0;
+			la.lastBag.lastCall = t;
+			la.lastBag.amountLast = 0;
+		}
+		else
+		{
+			double dt = t - la.lastBag.lastCall;
+			if (dt > 30000)
+			{
+				dt /= 3600000.;
+				la.lastBag.speed = (la.lastBag.totalAmount + la.lastBag.totalWaste - la.lastBag.amountLast) / dt;
+				la.lastBag.amountLast = la.lastBag.totalAmount + la.lastBag.totalWaste;
+				la.lastBag.lastCall = t;
+			}
+		}
 	}
 
 	/**
@@ -801,7 +819,7 @@ public class StatusCounter
 		docJMFPhaseTime = new JDFDoc(ElementName.JMF);
 		JDFResponse newResponse = docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status);
 		JDFDeviceInfo newDevInfo = newResponse.getCreateDeviceInfo(0);
-		fillDeviceInfo(deviceStatus, deviceStatusDetails, newDevInfo);
+		fillDeviceInfo(deviceStatus, deviceStatusDetails, newDevInfo, null);
 		newDevInfo.setIdleStartTime(startDate);
 
 		return bChanged;
@@ -812,12 +830,14 @@ public class StatusCounter
 	 * @param deviceStatusDetails
 	 * @param newDevInfo
 	 */
-	private void fillDeviceInfo(EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFDeviceInfo newDevInfo)
+	private void fillDeviceInfo(EnumDeviceStatus deviceStatus, String deviceStatusDetails, JDFDeviceInfo newDevInfo, LinkAmount la)
 	{
 		newDevInfo.setDeviceStatus(deviceStatus);
 		newDevInfo.setStatusDetails(deviceStatusDetails);
 		newDevInfo.setDeviceOperationMode(operationMode);
 		newDevInfo.setDeviceID(m_deviceID);
+		if (la != null)
+			newDevInfo.setSpeed(la.getAmount(la.lastBag.speed));
 		for (int i = 0; i < vEmployees.size(); i++)
 		{
 			newDevInfo.copyElement(vEmployees.get(i), null);
@@ -836,7 +856,7 @@ public class StatusCounter
 		jp.setQueueEntryID(queueEntryID);
 		// }
 
-		fillDeviceInfo(deviceStatus, deviceStatusDetails, deviceInfo);
+		fillDeviceInfo(deviceStatus, deviceStatusDetails, deviceInfo, la);
 
 		m_Node.setPartStatus(m_vPartMap, nodeStatus, nodeStatusDetails);
 		getVResLink(2);// update the nodes links
@@ -1061,6 +1081,9 @@ public class StatusCounter
 			protected double phaseAmount;
 			protected double totalWaste;
 			protected double phaseWaste;
+			protected long lastCall = 0;
+			protected double speed = 0.0;
+			protected double amountLast = 0;
 
 			@Override
 			public String toString()
@@ -1124,6 +1147,31 @@ public class StatusCounter
 				{
 					phaseAmount += amount;
 					phaseWaste += waste;
+				}
+				long t = System.currentTimeMillis();
+				if ((totalAmount + totalWaste) == 0) // else total takes over
+				{
+					if (lastCall == 0)
+					{
+						lastCall = t;
+						amountLast = 0.0;
+
+					}
+					// wait at least 30 seconds to calculate speed -else bad fluctuations...
+					else if (t - lastCall < 30000 && !bNewPhase)
+					{
+						amountLast += amount + waste;
+					}
+					else
+					// calculate current speed
+					{
+						amountLast += amount + waste;
+						double deltaT = t - lastCall;
+						deltaT /= 3600000.0; // milliseconds / hour
+						speed = deltaT == 0.0 ? 0.0 : amountLast / deltaT;
+						amountLast = 0.0;
+						lastCall = t;
+					}
 				}
 			}
 		} // end AmountBag
@@ -1439,7 +1487,10 @@ public class StatusCounter
 			sb.append(refID);
 			sb.append("\n");
 			sb.append(vResPartMap);
-			sb.append("\n");
+			sb.append("\nstartAmount: ");
+			sb.append(startAmount);
+			sb.append("\nstartWaste: ");
+			sb.append(startWaste);
 			sb.append(lastBag);
 
 			return sb.toString();
@@ -1459,8 +1510,9 @@ public class StatusCounter
 			if (keys == null)
 				return false;
 
-			return keys.contains(rl.getNamedProcessUsage()) || keys.contains(rl.getLinkedResourceName())
-					|| keys.contains(refID) || keys.contains(rl.getAttribute(AttributeName.USAGE));
+			return keys.contains("*") || keys.contains(rl.getNamedProcessUsage())
+					|| keys.contains(rl.getLinkedResourceName()) || keys.contains(refID)
+					|| keys.contains(rl.getAttribute(AttributeName.USAGE));
 		}
 
 		/**
@@ -1521,7 +1573,7 @@ public class StatusCounter
 	/**
 	 * set waste tracking on or off for the resourcelink rl
 	 * 
-	 * @param rl the resourcelink to the resource to track
+	 * @param resID the resource id to the resource to track
 	 * @param b tracking on or off
 	 */
 	public void setTrackWaste(String resID, boolean b)

@@ -78,9 +78,13 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
@@ -89,8 +93,10 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFNotification;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -140,7 +146,34 @@ public class StatusCounterTest extends JDFTestCaseBase
 		JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
 		assertEquals(deviceInfo.getDeviceID(), deviceID);
+	}
 
+	/**
+	 * 
+	 */
+	public void testWasteAmount()
+	{
+		VJDFAttributeMap singleMap = new VJDFAttributeMap();
+		singleMap.add(xpMedia.getPartMapVector(false).elementAt(0));
+
+		MISCPGoldenTicket gt = new MISCPGoldenTicket(2, EnumVersion.Version_1_3, 2, 2, false, singleMap);
+		gt.good = 1000;
+		gt.waste = 100;
+		gt.assign(null);
+		n = gt.getNode();
+		JDFComponent c = (JDFComponent) n.getResource(ElementName.COMPONENT, null, 0);
+		JDFMedia m = (JDFMedia) n.getResource(ElementName.MEDIA, null, 0);
+		JDFResourceLink rl = n.getLink(c, null);
+		JDFResourceLink rlMedia = n.getLink(m, null);
+		VElement vRL = new VElement();
+		vRL.add(rl);
+		vRL.add(rlMedia);
+		sc = new StatusCounter(null, null, null);
+		sc.setTrackWaste(rl.getrRef(), true);
+		sc.setTrackWaste(rlMedia.getrRef(), true);
+		sc.setActiveNode(n, c.getPartMapVector(false), vRL);
+		assertEquals(100, sc.getPlannedWaste(rlMedia.getrRef()), 0);
+		assertEquals(1000, sc.getPlannedAmount(rl.getrRef()), 0);
 	}
 
 	/**
@@ -372,6 +405,5 @@ public class StatusCounterTest extends JDFTestCaseBase
 		bChanged = scSetter.setPhase(null, null, EnumDeviceStatus.Idle, null);
 		dJMFAll = msc.getStatusResponse();
 		assertEquals(dJMFAll.getRoot().getChildrenByTagName(ElementName.JOBPHASE, null, null, false, true, -1).size(), 0);
-
 	}
 }

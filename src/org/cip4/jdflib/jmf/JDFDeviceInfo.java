@@ -97,6 +97,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StringUtil;
 
 //----------------------------------
 public class JDFDeviceInfo extends JDFAutoDeviceInfo
@@ -208,12 +209,11 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		JDFNode node = pt.getParentJDF();
 
 		jp.setJobID(node.getJobID(true));
-		jp.setJobPartID(node.getJobPartID(true));
+		jp.setJobPartID(StringUtil.getNonEmpty(node.getJobPartID(true)));
 		final VJDFAttributeMap partMapVector = pt.getPartMapVector();
 		jp.setPartMapVector(partMapVector);
-		jp.setStatus(pt.getStatus());
-		final String statusDetails = pt.getStatusDetails();
-		jp.setStatusDetails(statusDetails);
+		jp.copyAttribute(AttributeName.STATUS, pt);
+		jp.copyAttribute(AttributeName.STATUSDETAILS, pt);
 		jp.setPhaseStartTime(pt.getStart());
 		JDFResourceLink rl = pt.getLink(0);
 		if (rl != null)
