@@ -515,10 +515,10 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	@Override
-	protected void runphases(int good, int waste, boolean bOutAvail, boolean bFirst)
+	protected void runphases(int pgood, int pwaste, boolean bOutAvail, boolean bFirst)
 	{
 		theStatusCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, "Printing");
-		runSinglePhase(good, waste, bOutAvail, bFirst);
+		runSinglePhase(pgood, pwaste, bOutAvail, bFirst);
 		finalize(); // prior to processRun
 		theStatusCounter.setPhase(EnumNodeStatus.Completed, "Done", EnumDeviceStatus.Idle, "Waiting");
 	}

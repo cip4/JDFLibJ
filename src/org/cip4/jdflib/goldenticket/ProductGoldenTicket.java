@@ -487,7 +487,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	@Override
-	protected void runphases(int good, int waste, boolean bOutAvail, boolean bFirst)
+	protected void runphases(int pgood, int pwaste, boolean bOutAvail, boolean bFirst)
 	{
 		// nop for products
 	}

@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StatusUtil;
 
+@SuppressWarnings("deprecation")
 public class ContentCreationTest extends PreflightTest
 {
 	/**
@@ -326,7 +327,6 @@ public class ContentCreationTest extends PreflightTest
 	 * 
 	 * @throws Exception
 	 */
-	@SuppressWarnings("deprecation")
 	public void testLayoutPreflight() throws Exception
 	{
 		JDFElement.setLongID(false);

@@ -136,11 +136,20 @@ public class JDFAncestor extends JDFAutoAncestor
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public void setVersion(EnumVersion enumVar)
 	{
 		setAttribute(AttributeName.VERSION, enumVar.getName(), null);
 	}
 
+	/**
+	 * overrides the deprecated method JDFElement.getVersion()
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#getVersion()
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings(value={"deprecation"})
 	public EnumVersion getVersion()
 	{
 		return EnumVersion.getEnum(getAttribute(AttributeName.VERSION, null, null));
@@ -156,6 +165,7 @@ public class JDFAncestor extends JDFAutoAncestor
 	 * @param version version that the resulting element should correspond to
 	 * @return true if successful
 	 */
+	@Override
 	public boolean fixVersion(EnumVersion version)
 	{
 		boolean bRet = true;

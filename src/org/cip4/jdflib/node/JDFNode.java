@@ -2554,9 +2554,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				return null;
 			}
-			JDFPartStatus ps = statusPool == null ? null : statusPool.getPartStatus(mattr);
+			
+			JDFPartStatus ps = statusPool.getPartStatus(mattr);
 			statDetails = ps == null ? null : StringUtil.getNonEmpty(ps.getStatusDetails());
 		}
+		
 		return StringUtil.getNonEmpty(statDetails);
 	}
 

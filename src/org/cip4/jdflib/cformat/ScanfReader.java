@@ -123,6 +123,7 @@ public class ScanfReader extends Reader
 	 * 
 	 * @throws IOException An I/O error occurred
 	 */
+	@Override
 	public void close() throws IOException
 	{
 		reader.close();
@@ -158,14 +159,14 @@ public class ScanfReader extends Reader
 	 */
 	public int getLookAheadChar()
 	{
+		int i = 0;
+		
 		if (curCharValid)
 		{
-			return curChar;
+			i = curChar;
 		}
-		else
-		{
-			return 0;
-		}
+		
+		return i;
 	}
 
 	/**
@@ -188,6 +189,7 @@ public class ScanfReader extends Reader
 	 * @return The number of characters read, or -1 if the end of the stream is reached.
 	 * @throws IOException An I/O error occurred
 	 */
+	@Override
 	public int read(char[] cbuf, int off, int len) throws IOException
 	{
 		int n;
@@ -223,24 +225,23 @@ public class ScanfReader extends Reader
 		{
 			return -1;
 		}
-		else
+		
+		
+		for (int i = 0; i < n; i++)
 		{
-			for (int i = 0; i < n; i++)
+			c = cbuf[off + i];
+
+			if ((c == '\r') || ((c == '\n') && (lastChar != '\r')))
 			{
-				c = cbuf[off + i];
-
-				if ((c == '\r') || ((c == '\n') && (lastChar != '\r')))
-				{
-					lineCnt++;
-				}
-
-				lastChar = c;
+				lineCnt++;
 			}
 
-			charCnt += n;
-
-			return n + n0;
+			lastChar = c;
 		}
+
+		charCnt += n;
+
+		return n + n0;
 	}
 
 	/**
@@ -572,10 +573,8 @@ public class ScanfReader extends Reader
 			{
 				throw new EOFException("EOF");
 			}
-			else
-			{
-				throw new ScanfMatchException("Malformed floating point number: no digits");
-			}
+			
+			throw new ScanfMatchException("Malformed floating point number: no digits");
 		}
 
 		acceptDigits(w);
@@ -588,10 +587,8 @@ public class ScanfReader extends Reader
 				{
 					throw new EOFException("EOF");
 				}
-				else
-				{
-					throw new ScanfMatchException("Malformed floating point number: no digits in exponent");
-				}
+				
+				throw new ScanfMatchException("Malformed floating point number: no digits in exponent");
 			}
 
 			acceptDigits(w);
@@ -926,20 +923,16 @@ public class ScanfReader extends Reader
 						{
 							throw new ScanfMatchException("Malformed hex integer");
 						}
-						else
-						{
-							consumeAndReplaceChar();
-							ccnt++;
+						
+						consumeAndReplaceChar();
+						ccnt++;
 
-							if (Character.isWhitespace((char) curChar))
-							{
-								throw new ScanfMatchException("Malformed hex integer");
-							}
-							else
-							{
-								val = scanHex(defaultHexFmt, width - ccnt);
-							}
+						if (Character.isWhitespace((char) curChar))
+						{
+							throw new ScanfMatchException("Malformed hex integer");
 						}
+						
+						val = scanHex(defaultHexFmt, width - ccnt);
 					}
 					else
 					{
@@ -1189,6 +1182,8 @@ public class ScanfReader extends Reader
 
 	private final boolean acceptChar(char c, int width) throws IOException
 	{
+		boolean accept = false;
+		
 		if ((curChar == c) && (bcnt < width))
 		{
 			buffer[bcnt++] = (char) curChar;
@@ -1202,12 +1197,10 @@ public class ScanfReader extends Reader
 				consumeChar();
 			}
 
-			return true;
+			accept = true;
 		}
-		else
-		{
-			return false;
-		}
+		
+		return accept;
 	}
 
 	private final boolean acceptDigits(int width) throws IOException

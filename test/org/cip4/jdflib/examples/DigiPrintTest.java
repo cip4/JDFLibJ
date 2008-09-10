@@ -125,6 +125,7 @@ import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StatusUtil;
 import org.cip4.jdflib.util.StatusUtil.AmountBag;
 
+@SuppressWarnings("deprecation")
 public class DigiPrintTest extends JDFTestCaseBase
 {
 	private JDFDoc doc;
@@ -490,12 +491,10 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("deprecation")
 	public void testAmount() throws Exception
 	{
 		rlComp.setAmount(20, null);
-		rlComp
-				.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
+		rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
 
 		JDFMiscConsumable mc = (JDFMiscConsumable) n.appendMatchingResource(
 				ElementName.MISCCONSUMABLE, EnumProcessUsage.AnyInput, null);

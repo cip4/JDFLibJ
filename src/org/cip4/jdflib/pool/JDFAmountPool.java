@@ -273,6 +273,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		public static double getAmountPoolDouble(IAmountPoolContainer poolParent, final String attName, final JDFAttributeMap mPart)
 		{
 			double d = 0;
+			
 			int n = 0;
 			boolean bFound = false;
 			JDFAmountPool ap = poolParent.getAmountPool();
@@ -285,18 +286,18 @@ public class JDFAmountPool extends JDFAutoAmountPool
 					{
 						return bFound ? d : -1;
 					}
-					else
-					{
-						n++;
-						continue;
-					}
+					
+					n++;
+					continue;
 				}
+				
 				final double dd = StringUtil.parseDouble(w, -1.234567);
 				if (dd == -1.234567)
 				{
 					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName
 							+ " has an invalid value");
 				}
+				
 				d += dd;
 				bFound = true;
 				n++;

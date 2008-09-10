@@ -88,13 +88,12 @@ public class ContainerUtilTest extends JDFTestCaseBase
 {
 	private class SimpleMatch implements IMatches
 	{
-
 		private final int i;
 
-		public SimpleMatch(int i)
+		public SimpleMatch(int pi)
 		{
 			super();
-			this.i = i;
+			this.i = pi;
 		}
 
 		/*

@@ -101,245 +101,247 @@ import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author prosirai class that generates golden tickets based on ICS levels etc
+ * @author prosirai
+ * class that generates golden tickets based on ICS levels etc
  */
 public class MISGoldenTicket extends BaseGoldenTicket
 {
-	protected int misICSLevel;
-	protected int jmfICSLevel;
-	protected Map<String, VString> catMap = new HashMap<String, VString>();
-	private String category = null;
-	/**
-	 * seconds ago that this started
-	 */
-	public int preStart = 600;
-	/**
-	 * seconds this was active
-	 */
-	public int duration = preStart / 2;
-	protected boolean grayBox = true;
+    protected int misICSLevel;
+    protected int jmfICSLevel;
+    protected Map<String,VString> catMap=new HashMap<String, VString>();
+    private String category=null;
+    /**
+     * seconds ago that this started
+     */
+    public int preStart=600;
+    /**
+     * seconds this was active
+     */
+    public int duration=preStart/2;
+    protected boolean grayBox=true;
+    /**
+     * create a BaseGoldenTicket
+     * @param icsLevel the level to init to (1,2 or 3)
+     * @param jdfVersion the version to generate a golden ticket for
+     * @param jmfLevel level of jmf ICS to support
+     */
+    public MISGoldenTicket(int icsLevel, EnumVersion jdfVersion, int jmfLevel)
+    {
+        super(2,jdfVersion); // mis always requires base 2
+        misICSLevel=icsLevel;
+        jmfICSLevel=jmfLevel;
+        fillCatMaps();
+    }
 
-	/**
-	 * create a BaseGoldenTicket
-	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
-	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 */
-	public MISGoldenTicket(int icsLevel, EnumVersion jdfVersion, int jmfLevel)
-	{
-		super(2, jdfVersion); // mis always requires base 2
-		misICSLevel = icsLevel;
-		jmfICSLevel = jmfLevel;
-		fillCatMaps();
-	}
-
-	public MISGoldenTicket(MISGoldenTicket parent)
-	{
-		super(parent); // mis always requires base 2
-		misICSLevel = parent.misICSLevel;
-		jmfICSLevel = parent.jmfICSLevel;
-		getNIFromParent = parent.getNIFromParent;
-		duration = parent.duration;
-		category = parent.category;
-		fillCatMaps();
-
-	}
-
-	/**
+    public MISGoldenTicket(MISGoldenTicket parent)
+    {
+        super(parent); // mis always requires base 2
+        misICSLevel=parent.misICSLevel;
+        jmfICSLevel=parent.jmfICSLevel;
+        getNIFromParent=parent.getNIFromParent;
+        duration=parent.duration;
+        category=parent.category;
+        fillCatMaps();
+        
+    }
+    /**
      * 
      */
+    @Override
 	public void assign(JDFNode node)
-	{
+    {
 
-		super.assign(node);
-		if (jmfICSLevel > 0)
-		{
-			final JMFGoldenTicket goldenTicket = new JMFGoldenTicket(jmfICSLevel, theVersion);
-			goldenTicket.devID = null;
-			goldenTicket.assign(theNode);
+        super.assign(node);
+        if(jmfICSLevel>0)
+        {
+            final JMFGoldenTicket goldenTicket = new JMFGoldenTicket(jmfICSLevel,theVersion);
+            goldenTicket.devID=null;
+            goldenTicket.assign(theNode);
+    
+        }
+        super.init(); 
+    }
 
-		}
-		super.init();
-	}
-
-	/**
-	 * @param icsLevel
-	 */
+    /**
+     * @param icsLevel
+     */
+    @Override
 	protected JDFNodeInfo initNodeInfo()
-	{
+    {
 
-		JDFNodeInfo ni = super.initNodeInfo();
+        JDFNodeInfo ni=super.initNodeInfo();
 
-		if (theParentNode == null)
-		{
-			JDFEmployee emp = ni.appendEmployee();
-			emp.setPersonalID("personalID1");
-			emp.setRoles(new VString("CSR", null));
-			if (returnURL != null)
-				ni.setTargetRoute(returnURL);
+        if(theParentNode==null)
+        {
+            JDFEmployee emp=ni.appendEmployee();
+            emp.setPersonalID("personalID1");
+            emp.setRoles(new VString("CSR",null));
+            if(returnURL!=null)
+                ni.setTargetRoute(returnURL);
+            
+            if(jmfICSLevel>=1 && misICSLevel>=2 || misURL!=null)
+            {
+                JDFJMF jmf=ni.appendJMF();
+                jmf.setSenderID("MISGTSender");
+                JDFQuery q=jmf.appendQuery(EnumType.Status);
+                final JDFStatusQuParams statusQuParams = q.appendStatusQuParams();
+                statusQuParams.setJobID(theNode.getJobID(true));
+                statusQuParams.setJobPartID(theNode.getJobPartID(false));
+                statusQuParams.setJobDetails(EnumJobDetails.Brief);
+                final JDFSubscription subscription = q.appendSubscription();
+                subscription.setRepeatTime(600);
+                subscription.setURL(misURL==null?"http://MIS.printer.com/JMFSignal":misURL);
+            }
+        }
+        return ni;
+    }
+    
+    /**
+     * simulate execution of this node
+     * the internal node will be modified to reflect the excution
+     */
+    @Override
+    public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail,boolean bFirst)
+    {
+        JDFComment c=theExpandedNode.appendComment();
+        c.setName("OperatorText");
+        c.setText(StringUtil.getRandomString());
 
-			if (jmfICSLevel >= 1 && misICSLevel >= 2 || misURL != null)
-			{
-				JDFJMF jmf = ni.appendJMF();
-				jmf.setSenderID("MISGTSender");
-				JDFQuery q = jmf.appendQuery(EnumType.Status);
-				final JDFStatusQuParams statusQuParams = q.appendStatusQuParams();
-				statusQuParams.setJobID(theNode.getJobID(true));
-				statusQuParams.setJobPartID(theNode.getJobPartID(false));
-				statusQuParams.setJobDetails(EnumJobDetails.Brief);
-				final JDFSubscription subscription = q.appendSubscription();
-				subscription.setRepeatTime(600);
-				subscription.setURL(misURL == null ? "http://MIS.printer.com/JMFSignal" : misURL);
-			}
-		}
-		return ni;
-	}
+        super.execute(vNodeMap,bOutAvail, bFirst);
 
-	/**
-	 * simulate execution of this node the internal node will be modified to reflect the excution
-	 */
-	@Override
-	public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail, boolean bFirst)
-	{
-		JDFComment c = theExpandedNode.appendComment();
-		c.setName("OperatorText");
-		c.setText(StringUtil.getRandomString());
 
-		super.execute(vNodeMap, bOutAvail, bFirst);
+    }
 
-	}
-
-	/**
-	 * initializes this node to a given ICS version
-	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
-	 */
+    /**
+     * initializes this node to a given ICS version
+     * @param icsLevel the level to init to (1,2 or 3)
+     */
+    @Override
 	public void init()
-	{
-		if (misICSLevel < 0)
-			return;
-		String icsTag = "MIS_L" + misICSLevel + "-" + theVersion.getName();
-		theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
-		if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
-			theNode.setDescriptiveName("MIS Golden Ticket Example Job - version: " + JDFAudit.software());
-		if (!theNode.hasAncestorAttribute(AttributeName.JOBID, null))
-			theNode.setJobID("Job" + JDFElement.uniqueID(0));
-		final VString types = getTypes();
-		if (types != null)
-		{
-			theNode.setCategory(getCategory());
-			theNode.setCombined(types);
-			if (grayBox)
-				theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
-		}
-		initNodeInfo();
-		initCustomerInfo();
-	}
+    {
+        if(misICSLevel<0)
+            return;
+        String icsTag="MIS_L"+misICSLevel+"-"+theVersion.getName();
+        theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
+        if(!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
+            theNode.setDescriptiveName("MIS Golden Ticket Example Job - version: "+JDFAudit.software());
+        if(!theNode.hasAncestorAttribute(AttributeName.JOBID,null))
+            theNode.setJobID("Job"+JDFElement.uniqueID(0));
+        final VString types = getTypes();
+        if(types!=null)
+        {
+            theNode.setCategory(getCategory());
+            theNode.setCombined(types);
+            if(grayBox)
+                theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
+        }
+        initNodeInfo();
+        initCustomerInfo();
+    }
+ 
+    /**
+     * @param icsLevel
+     */
+    protected JDFCustomerInfo initCustomerInfo()
+    {
+        if(theParentNode!=null)
+        {
+            final JDFCustomerInfo customerInfo = theParentNode.getCustomerInfo();
+            if(customerInfo!=null)
+            {
+                theNode.linkResource(customerInfo, EnumUsage.Input, null);
+                return customerInfo;
+            }
+        }
+        JDFCustomerInfo ci=theNode.getCreateCustomerInfo();
+        ci.setResStatus(EnumResStatus.Available, false);
 
-	/**
-	 * @param icsLevel
-	 */
-	protected JDFCustomerInfo initCustomerInfo()
-	{
-		if (theParentNode != null)
-		{
-			final JDFCustomerInfo customerInfo = theParentNode.getCustomerInfo();
-			if (customerInfo != null)
-			{
-				theNode.linkResource(customerInfo, EnumUsage.Input, null);
-				return customerInfo;
-			}
-		}
-		JDFCustomerInfo ci = theNode.getCreateCustomerInfo();
-		ci.setResStatus(EnumResStatus.Available, false);
+        ci.setCustomerID("customerID");
+        ci.setCustomerJobName("customer job name");
+        ci.setCustomerOrderID("customerOrder_1");
+        JDFContact contact=ci.appendContact();
+        contact.makeRootResource(null, null, true);
+        contact.setContactTypes(new VString("Customer Administrator"," "));
+        JDFPerson person=contact.appendPerson();
+        person.setFamilyName("Töpfer");
+        person.setFirstName("Harald");
+        JDFCompany comp=contact.appendCompany();
+        comp.setOrganizationName("The Pits");
+        return ci;
+    }
 
-		ci.setCustomerID("customerID");
-		ci.setCustomerJobName("customer job name");
-		ci.setCustomerOrderID("customerOrder_1");
-		JDFContact contact = ci.appendContact();
-		contact.makeRootResource(null, null, true);
-		contact.setContactTypes(new VString("Customer Administrator", " "));
-		JDFPerson person = contact.appendPerson();
-		person.setFamilyName("Töpfer");
-		person.setFirstName("Harald");
-		JDFCompany comp = contact.appendCompany();
-		comp.setOrganizationName("The Pits");
-		return ci;
-	}
 
-	@Override
-	protected JDFDevice initDevice(JDFNode reuseNode)
-	{
-		JDFDevice dev = super.initDevice(reuseNode);
-		if (misICSLevel < 2)
-			return dev;
-		if (dev == null)
-		{
-			JDFResourceLink rl = null;
-			if (reuseNode != null)
-				rl = theNode.linkResource(reuseNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0), EnumUsage.Input, null);
-			if (rl == null && theParentNode != null)
-				rl = theNode.linkResource(theParentNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0), EnumUsage.Input, null);
-		}
-		if (devID != null)
-		{
-			dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
-			dev.setResStatus(EnumResStatus.Available, false);
-			dev.setDeviceID(devID);
-			dev.setDescriptiveName("Device " + devID);
-		}
-		return dev;
-	}
+    @Override
+    protected JDFDevice initDevice(JDFNode reuseNode)
+    {
+        JDFDevice dev=super.initDevice(reuseNode);
+        if(misICSLevel<2)
+            return dev;
+        if(dev==null)
+        {
+            JDFResourceLink rl=null;
+            if(reuseNode!=null)
+                rl=theNode.linkResource(reuseNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0),EnumUsage.Input,null);
+            if(rl==null && theParentNode!=null)
+                rl=theNode.linkResource(theParentNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0),EnumUsage.Input,null);
+        }
+        if(devID!=null)
+        {
+            dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
+            dev.setResStatus(EnumResStatus.Available, false);
+            dev.setDeviceID(devID);
+            dev.setDescriptiveName("Device "+devID);
+        }
+        return dev;
+    }
 
-	/**
-	 * add the type of amount link for resource audits etc
-	 * 
-	 * @param link
-	 */
+    /**
+     * add the type of amount link for resource audits etc
+     * @param link
+     */
+    @Override
 	public void addAmountLink(String link)
-	{
-		if (amountLinks == null)
-			amountLinks = new VString();
-		amountLinks.appendUnique(link);
-	}
+    {
+        if(amountLinks==null)
+            amountLinks=new VString();
+        amountLinks.appendUnique(link);
+    }
 
-	public String getCategory()
-	{
-		return category;
-	}
+    public String getCategory()
+    {
+        return category;
+    }
 
-	public void setCategory(String _category)
-	{
-		category = _category;
-	}
+    public void setCategory(String _category)
+    {
+        category = _category;
+    }
 
-	/**
-	 * get the correct Types from category
-	 * 
-	 * @return
-	 */
-	public VString getTypes()
-	{
-		if (category == null)
-			return null;
-		return catMap.get(category);
-	}
+    /**
+     * get the correct Types from category
+     * @return
+     */
+    public VString getTypes()
+    {
+        if(category==null)
+            return null;
+        return catMap.get(category);
+    }
 
-	/**
-	 * @param grayBox the grayBox to set
-	 */
-	public void setGrayBox(boolean grayBox)
-	{
-		this.grayBox = grayBox;
-	}
+    /**
+     * @param grayBox the grayBox to set
+     */
+    public void setGrayBox(boolean pgrayBox)
+    {
+        this.grayBox = pgrayBox;
+    }
 
-	/**
+    /**
      * 
      */
-	protected void fillCatMaps()
-	{
-		// nop
-
-	}
+    protected void fillCatMaps()
+    {
+       // nop
+        
+    }
 }

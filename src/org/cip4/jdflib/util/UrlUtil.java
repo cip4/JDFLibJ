@@ -547,8 +547,10 @@ public class UrlUtil
 	 */
 	public static URL StringToURL(String urlString)
 	{
+		URL url = null;
+		
 		if (urlString == null)
-			return null;
+			return url;
 
 		if (isEscaped(urlString))
 			urlString = StringUtil.unEscape(urlString, "%", 16, 2);
@@ -557,18 +559,19 @@ public class UrlUtil
 		{
 			if (isCID(urlString) || isHttp(urlString))
 			{
-				return new URL(urlString);
+				url = new URL(urlString);
 			}
 			else
 			{
-				return new URL(fileToUrl(urlToFile(urlString), true));
+				url = new URL(fileToUrl(urlToFile(urlString), true));
 			}
 		}
 		catch (MalformedURLException x)
 		{
 			// nop
 		}
-		return null;
+		
+		return url;
 	}
 
 	/**

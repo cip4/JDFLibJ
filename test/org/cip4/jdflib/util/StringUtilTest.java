@@ -121,7 +121,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getDefaultNull
 	 * @throws Exception
 	 */
-	public void testGetDefaultNull() throws Exception
+	public void testGetDefaultNull()
 	{
 		assertNull(StringUtil.getDefaultNull("", ""));
 		assertNull(StringUtil.getDefaultNull(null, ""));
@@ -132,7 +132,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 * test for getNonEmpty
 	 * @throws Exception
 	 */
-	public void testGetNonEmpty() throws Exception
+	public void testGetNonEmpty()
 	{
 		assertNull(StringUtil.getNonEmpty(""));
 		assertNull(StringUtil.getNonEmpty(null));

@@ -688,7 +688,8 @@ public class KElementTest extends JDFTestCaseBase
 	public void testCloneElementMem()
 	{
 		XMLDoc doc = new XMLDoc("root", null);
-		KElement k = doc.getRoot();
+//		KElement k = 
+			doc.getRoot();
 		for (int i = 0; i < 50000; i++)
 		{
 			KElement d2 = new XMLDoc("mama", null).getRoot();

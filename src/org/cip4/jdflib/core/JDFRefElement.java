@@ -310,12 +310,16 @@ public class JDFRefElement extends JDFElement
 	}
 
 	/**
-	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or
-	 * explicit partitions<br>
+	 * get the referenced target resource 
+	 * The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
 	 * may return null
+	 * 
+	 * overrides the deprecated method JDFElement.getTarget()
 	 * 
 	 * @return JDFResource - the reference target partition
 	 */
+	@Override
+	@SuppressWarnings(value={"deprecation"})
 	public JDFResource getTarget()
 	{
 		JDFResource targetRoot = getTargetRoot();

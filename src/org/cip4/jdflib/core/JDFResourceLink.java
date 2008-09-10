@@ -808,10 +808,15 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * gets the first resource leaf that this resourcelink refers to<br>
 	 * see the description of {@link #getTargetVector(int) getTargetVector} for details
 	 * 
-	 * @since 102103 GetTarget returns the lowest common denominator if all children of a resource are referenced
+	 * overrides the deprecated method JDFElement.getTarget()
+	 * 
+	 * @since 102103 GetTarget returns the lowest common denominator 
+	 * 				 if all children of a resource are referenced
+	 * 
 	 * @return JDFResource - the first leaf that is referenced by this ResourceLink
 	 */
 	@Override
+	@SuppressWarnings(value={"deprecation"})
 	public JDFResource getTarget()
 	{
 		final VElement v = getTargetVector(-1);

@@ -561,17 +561,20 @@ public class PrintfFormat
 	 */
 	public String tostr(int x)
 	{
+		String intStr;
+		
 		long lx = x;
 
 		if ((type == 'd') || (type == 'i'))
 		{
-			return tostr(lx);
+			intStr = tostr(lx);
 		}
 		else
 		{ // unsigned; clear high bits
-
-			return tostr(lx & 0xffffffffL);
+			intStr = tostr(lx & 0xffffffffL);
 		}
+		
+		return intStr;
 	}
 
 	/**
@@ -742,12 +745,12 @@ public class PrintfFormat
 	// }
 	// }
 
-	private void expFormat(DecDouble dd, int p)
+	private void expFormat(DecDouble pdd, int p)
 	{
 		int i;
 
 		i = 0;
-		output.append(dd.digits[i++]);
+		output.append(pdd.digits[i++]);
 
 		if ((p > 0) || alternate)
 		{
@@ -758,18 +761,18 @@ public class PrintfFormat
 		{
 			int kend = p + output.k0 + 2;
 
-			while ((i < dd.numd) && (output.kn < kend))
+			while ((i < pdd.numd) && (output.kn < kend))
 			{
-				output.append(dd.digits[i++]);
+				output.append(pdd.digits[i++]);
 			}
 
-			if ((i == dd.numd) && (output.kn < kend) && (((type != 'g') && (type != 'G')) || alternate))
+			if ((i == pdd.numd) && (output.kn < kend) && (((type != 'g') && (type != 'G')) || alternate))
 			{
 				output.append('0', kend - output.kn);
 			}
 		}
 
-		if ((i < dd.numd) && (dd.digits[i] >= '5'))
+		if ((i < pdd.numd) && (pdd.digits[i] >= '5'))
 		{
 			roundUpFixedOutput(output);
 
@@ -777,15 +780,15 @@ public class PrintfFormat
 			{
 				output.buf[output.k0 + 1] = '.';
 				output.buf[output.k0 + 2] = '0';
-				dd.exp++;
+				pdd.exp++;
 				output.kn--;
 			}
 		}
 
 		output.append(((type == 'G') || (type == 'E')) ? 'E' : 'e');
-		output.append((dd.exp >= 0) ? '+' : '-');
+		output.append((pdd.exp >= 0) ? '+' : '-');
 
-		String expStr = Long.toString(Math.abs(dd.exp));
+		String expStr = Long.toString(Math.abs(pdd.exp));
 
 		if (expStr.length() < 2)
 		{
@@ -877,23 +880,23 @@ public class PrintfFormat
 		output.append(expStr);
 	}
 
-	private void fixedFormat(DecDouble dd, int p)
+	private void fixedFormat(DecDouble pdd, int p)
 	{
 		int kend;
 		boolean freeFormat = ((type == 'g') || (type == 'G'));
 
 		int i = 0;
 
-		if (dd.exp >= 0)
+		if (pdd.exp >= 0)
 		{
-			while ((output.kn <= (output.k0 + dd.exp)) && (i < dd.numd))
+			while ((output.kn <= (output.k0 + pdd.exp)) && (i < pdd.numd))
 			{
-				output.append(dd.digits[i++]);
+				output.append(pdd.digits[i++]);
 			}
 
-			if (output.kn <= (output.k0 + dd.exp))
+			if (output.kn <= (output.k0 + pdd.exp))
 			{
-				output.append('0', (output.k0 + 1 + dd.exp) - output.kn);
+				output.append('0', (output.k0 + 1 + pdd.exp) - output.kn);
 			}
 		}
 		else
@@ -901,7 +904,7 @@ public class PrintfFormat
 			output.append('0');
 		}
 
-		if (((p > 0) && (!freeFormat || (i < dd.numd))) || alternate)
+		if (((p > 0) && (!freeFormat || (i < pdd.numd))) || alternate)
 		{
 			output.append('.');
 		}
@@ -911,14 +914,14 @@ public class PrintfFormat
 			kend = output.kn + p;
 
 			// pad if needed
-			if (dd.exp < -1)
+			if (pdd.exp < -1)
 			{
-				output.append('0', Math.min(p, -dd.exp - 1));
+				output.append('0', Math.min(p, -pdd.exp - 1));
 			}
 
-			while ((output.kn < kend) && (i < dd.numd))
+			while ((output.kn < kend) && (i < pdd.numd))
 			{
-				output.append(dd.digits[i++]);
+				output.append(pdd.digits[i++]);
 			}
 
 			if ((output.kn < kend) && (!freeFormat || alternate))
@@ -927,23 +930,23 @@ public class PrintfFormat
 			}
 		}
 
-		if ((i < dd.numd) && (dd.digits[i] >= '5'))
+		if ((i < pdd.numd) && (pdd.digits[i] >= '5'))
 		{
 			roundUpFixedOutput(output);
 		}
 	}
 
-	private void freeFormat(DecDouble dd, int prec)
+	private void freeFormat(DecDouble pdd, int pprec)
 	{
-		int p = Math.max(1, prec);
+		int p = Math.max(1, pprec);
 
-		if ((dd.exp >= -4) && (dd.exp < p))
+		if ((pdd.exp >= -4) && (pdd.exp < p))
 		{
-			fixedFormat(dd, p - dd.exp - 1);
+			fixedFormat(pdd, p - pdd.exp - 1);
 		}
 		else
 		{
-			expFormat(dd, p - 1);
+			expFormat(pdd, p - 1);
 		}
 	}
 

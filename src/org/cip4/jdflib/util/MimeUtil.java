@@ -1047,6 +1047,8 @@ public class MimeUtil extends UrlUtil
 
 	public static HttpURLConnection writeToURL(Multipart mp, String strUrl, MIMEDetails ms) throws IOException, MessagingException
 	{
+		HttpURLConnection httpURLconnection = null;
+		
 		if (ms == null)
 			ms = new MIMEDetails();
 
@@ -1054,12 +1056,11 @@ public class MimeUtil extends UrlUtil
 		if ("File".equalsIgnoreCase(url.getProtocol()))
 		{
 			writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath(), ms);
-			return null;
 		}
 		else
 		// assume http
 		{
-			HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
+			httpURLconnection = (HttpURLConnection) url.openConnection();
 			httpURLconnection.setRequestMethod(POST);
 			httpURLconnection.setRequestProperty("Connection", "close");
 			String contentType = mp.getContentType();
@@ -1069,6 +1070,7 @@ public class MimeUtil extends UrlUtil
 			httpURLconnection.setDoOutput(true);
 			if (ms.httpDetails != null)
 				ms.httpDetails.applyTo(httpURLconnection);
+			
 			try
 			{
 				final OutputStream out = httpURLconnection.getOutputStream();
@@ -1078,9 +1080,9 @@ public class MimeUtil extends UrlUtil
 			{
 				httpURLconnection = null;
 			}
-
-			return httpURLconnection;
 		}
+		
+		return httpURLconnection;
 	}
 
 	/**
@@ -1094,10 +1096,13 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static JDFDoc writeToQueue(JDFDoc docJMF, JDFDoc docJDF, String strUrl, MIMEDetails urlDet) throws IOException, MessagingException
 	{
+		JDFDoc doc = null;
+		
 		Multipart mp = buildMimePackage(docJMF, docJDF, true);
 		HttpURLConnection uc = writeToURL(mp, strUrl, urlDet);
 		if (uc == null)
-			return null; // file
+			return doc; // file
+		
 		int rc = uc.getResponseCode();
 		if (rc == 200)
 		{
@@ -1110,23 +1115,26 @@ public class MimeUtil extends UrlUtil
 				try
 				{
 					BodyPart bp = mpRet.getBodyPart(0);
-					return getJDFDoc(bp);
+					doc = getJDFDoc(bp);
+					return doc;
 				}
 				catch (MessagingException e)
 				{
 					// nop - try simple doc
 				}
 			}
+			
 			bis.reset();
-			JDFDoc d = new JDFParser().parseStream(bis);
-			if (d != null)
-				return d;
-			JDFCommand c = docJMF.getJMFRoot().getCommand(0);
-			final JDFJMF respJMF = c.createResponse();
-			JDFResponse r = respJMF.getResponse(0);
-			r.setErrorText("Invalid attached JDF");
-			r.setReturnCode(3); // TODO correct rcs
-			return respJMF.getOwnerDocument_JDFElement();
+			doc = new JDFParser().parseStream(bis);
+			if (doc == null)
+			{
+				JDFCommand c = docJMF.getJMFRoot().getCommand(0);
+				final JDFJMF respJMF = c.createResponse();
+				JDFResponse r = respJMF.getResponse(0);
+				r.setErrorText("Invalid attached JDF");
+				r.setReturnCode(3); // TODO correct rcs
+				doc = respJMF.getOwnerDocument_JDFElement();
+			}
 		}
 		else
 		{
@@ -1135,9 +1143,10 @@ public class MimeUtil extends UrlUtil
 			JDFResponse r = respJMF.getResponse(0);
 			r.setErrorText("Invalid http response - RC=" + rc);
 			r.setReturnCode(3); // TODO correct rcs
-			return respJMF.getOwnerDocument_JDFElement();
-
+			doc = respJMF.getOwnerDocument_JDFElement();
 		}
+		
+		return doc;
 	}
 
 	/**

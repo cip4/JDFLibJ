@@ -172,6 +172,14 @@ public class JDFSourceResource extends JDFElement
 		return r;
 	}
 
+	/**
+	 * overrides the deprecated method JDFElement.getTarget()
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#getTarget()
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings(value={"deprecation"})
 	public JDFResource getTarget()
 	{
 		final JDFRefElement refElement = getRefElement();

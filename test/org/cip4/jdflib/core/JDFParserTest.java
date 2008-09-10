@@ -176,7 +176,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testSkipParse() throws Exception
+	public void testSkipParse()
 	{
 		JDFParser.m_searchStream = true;
 		String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF/>";
@@ -189,7 +189,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * this test catches corrupt xmöl schemas
 	 * @throws Exception
 	 */
-	public void testSchema() throws Exception
+	public void testSchema()
 	{
 		File foo = new File(sm_dirTestSchema).getParentFile();
 

@@ -135,13 +135,13 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		VJDFAttributeMap v = new VJDFAttributeMap();
 		JDFAttributeMap testMap = new JDFAttributeMap(EnumPartIDKey.Condition, "Good");
 		v.add(testMap);
-		JDFAmountPool ap = rl.getAmountPool();
-		assertEquals("15 pa entries", ap.numChildElements(ElementName.PARTAMOUNT, null), 15);
-		ap.reducePartAmounts(v);
-		assertEquals("5 pa entries", ap.numChildElements(ElementName.PARTAMOUNT, null), 5);
+		JDFAmountPool aplocal = rl.getAmountPool();
+		assertEquals("15 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 15);
+		aplocal.reducePartAmounts(v);
+		assertEquals("5 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 5);
 		testMap.put("SheetName", "Sheet3");
-		ap.reducePartAmounts(v);
-		assertEquals("1 pa entries", ap.numChildElements(ElementName.PARTAMOUNT, null), 1);
+		aplocal.reducePartAmounts(v);
+		assertEquals("1 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 1);
 	} // /////////////////////////////////////////////////////
 
 	/**
@@ -196,14 +196,14 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		mPart.put("Condition", "Waste");
 		xmLink.setAmount(1, mPart);
 
-		JDFAmountPool ap = xmLink.getAmountPool();
-		assertNotNull(ap);
+		JDFAmountPool aplocal = xmLink.getAmountPool();
+		assertNotNull(aplocal);
 		mPart.remove("Condition");
 
-		VElement v = ap.getMatchingPartAmountVector(mPart);
+		VElement v = aplocal.getMatchingPartAmountVector(mPart);
 		assertEquals(v.size(), 2);
 		mPart.put("Side", "Moebius");
-		v = ap.getMatchingPartAmountVector(mPart);
+		v = aplocal.getMatchingPartAmountVector(mPart);
 		assertNull("there certainly is no moebius side ...", v);
 	}
 
@@ -242,15 +242,15 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(map);
 		vMap.add(map2);
-		JDFAmountPool ap = rl.appendAmountPool();
-		JDFPartAmount pa = ap.appendPartAmount(vMap);
+		JDFAmountPool aplocal = rl.appendAmountPool();
+		JDFPartAmount pa = aplocal.appendPartAmount(vMap);
 		assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
 		rl.setActualAmount(42, map);
 		rl.setActualAmount(21, map2);
 		assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
 		assertEquals(rl.getActualAmount(map), 42., 0.);
 		assertEquals(rl.getActualAmount(mapSig), 42. + 21., 0.);
-		assertEquals(pa, ap.getPartAmount(vMap));
+		assertEquals(pa, aplocal.getPartAmount(vMap));
 	}
 
 	/**
@@ -281,7 +281,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetAmountMap() throws Exception
+	public void testGetAmountMap()
 	{
 		JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
 		JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");

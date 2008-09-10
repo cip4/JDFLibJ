@@ -360,11 +360,11 @@ public class QueueTest extends TestCase
 	protected class TestCanExecute extends ExecuteCallback
 	{
 
-		public TestCanExecute(String deviceID, String proxy)
+		public TestCanExecute(String pdeviceID, String pproxy)
 		{
 			super();
-			this.deviceID = deviceID;
-			this.proxy = proxy;
+			this.deviceID = pdeviceID;
+			this.proxy = pproxy;
 		}
 
 		String deviceID;
@@ -423,9 +423,9 @@ public class QueueTest extends TestCase
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
+	@SuppressWarnings("synthetic-access")
 	public void testCleanup()
 	{
-
 		JDFQueueEntry qe = q.appendQueueEntry();
 		MyClean myClean = new MyClean();
 		assertEquals(myClean.i, 0);

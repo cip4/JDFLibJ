@@ -144,11 +144,11 @@ public class GoldenTicketTest extends JDFTestCaseBase
 	public void testProductCreatePostCards()
 	{
 
-		ProductGoldenTicket pgt = new ProductGoldenTicket(0,
+		ProductGoldenTicket pgtlocal = new ProductGoldenTicket(0,
 				EnumVersion.Version_1_3, 0, 0);
-		pgt.assign(null);
-		pgt.createPostCards();
-		final JDFNode node = pgt.getNode();
+		pgtlocal.assign(null);
+		pgtlocal.createPostCards();
+		final JDFNode node = pgtlocal.getNode();
 		node.getOwnerDocument_JDFElement().write2File(
 				sm_dirTestDataTemp + "postcard.jdf", 2, false);
 		node.setJobID("6913");

@@ -315,10 +315,10 @@ public class JDFMerge
 	 * @param overWriteNode
 	 * @param subJDFNode the source node of the audit pool to merge into this
 	 */
-	private void mergeAuditPool(JDFNode overWriteNode, JDFNode toMerge)
+	private void mergeAuditPool(JDFNode poverWriteNode, JDFNode toMerge)
 	{
 		// merge audit pool
-		final JDFAuditPool overWriteAuditPool = overWriteNode.getAuditPool();
+		final JDFAuditPool overWriteAuditPool = poverWriteNode.getAuditPool();
 		final JDFAuditPool toMergeAuditPool = toMerge.getAuditPool();
 
 		// the node that is overwritten has an audit pool that must be merged
@@ -365,9 +365,9 @@ public class JDFMerge
 
 	// ////////////////////////////////////////////////////////////////////
 
-	private void mergeComments(JDFNode overWriteNode, JDFNode toMerge)
+	private void mergeComments(JDFNode poverWriteNode, JDFNode toMerge)
 	{
-		VElement v = overWriteNode.getChildElementVector(ElementName.COMMENT, null, null, false, 0, false);
+		VElement v = poverWriteNode.getChildElementVector(ElementName.COMMENT, null, null, false, 0, false);
 		VElement vToMerge = toMerge.getChildElementVector(ElementName.COMMENT, null, null, false, 0, false);
 		final int siz = vToMerge.size(); // size prior to appending
 		vToMerge.appendUnique(v);
@@ -1183,16 +1183,16 @@ public class JDFMerge
 	 * @param subJDFNode the source node of the status pool to merge into this
 	 * @param parts the partitions to merge
 	 */
-	private void mergeStatusPool(JDFNode overWriteNode, JDFNode toMerge, VJDFAttributeMap parts)
+	private void mergeStatusPool(JDFNode poverWriteNode, JDFNode toMerge, VJDFAttributeMap parts)
 	{
 		if (toMerge.hasChildElement(ElementName.STATUSPOOL, null)
-				|| overWriteNode.hasChildElement(ElementName.STATUSPOOL, null))
+				|| poverWriteNode.hasChildElement(ElementName.STATUSPOOL, null))
 		{
-			final JDFStatusPool overWriteStatusPool = overWriteNode.getCreateStatusPool();
-			if (!overWriteNode.getStatus().equals(JDFElement.EnumNodeStatus.Pool))
+			final JDFStatusPool overWriteStatusPool = poverWriteNode.getCreateStatusPool();
+			if (!poverWriteNode.getStatus().equals(JDFElement.EnumNodeStatus.Pool))
 			{
-				overWriteStatusPool.setStatus(overWriteNode.getStatus());
-				overWriteNode.setStatus(JDFElement.EnumNodeStatus.Pool);
+				overWriteStatusPool.setStatus(poverWriteNode.getStatus());
+				poverWriteNode.setStatus(JDFElement.EnumNodeStatus.Pool);
 			}
 
 			final JDFStatusPool toMergeStatusPool = toMerge.getStatusPool();

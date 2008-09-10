@@ -93,7 +93,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testisAbsoluteFile() throws Exception
+	public void testisAbsoluteFile()
 	{
 		assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
 		assertFalse(FileUtil.isAbsoluteFile("foo"));
@@ -107,7 +107,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testisCleanURLFile() throws Exception
+	public void testisCleanURLFile()
 	{
 		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
 		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));

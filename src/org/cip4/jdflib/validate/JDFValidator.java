@@ -2686,8 +2686,8 @@ public class JDFValidator
 	/**
 	 * @param validatorFactory the validatorFactory to set
 	 */
-	public void setValidatorFactory(ICheckValidatorFactory validatorFactory)
+	public void setValidatorFactory(ICheckValidatorFactory pvalidatorFactory)
 	{
-		this.validatorFactory = validatorFactory;
+		this.validatorFactory = pvalidatorFactory;
 	}
 }

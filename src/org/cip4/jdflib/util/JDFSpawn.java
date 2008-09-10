@@ -875,9 +875,10 @@ public class JDFSpawn
 			for (int kk = 0; kk < vMainPart.size(); kk++)
 			{
 				JDFResource rMainPart = (JDFResource) vMainPart.elementAt(kk);
-				VElement leaves = rMainPart.getLeaves(true);
 				if (rMainPart == null)
 					continue;
+				
+				VElement leaves = rMainPart.getLeaves(true);
 				boolean bSpawnID = false;
 
 				// if any child node or leaf has this spawnID we need not do

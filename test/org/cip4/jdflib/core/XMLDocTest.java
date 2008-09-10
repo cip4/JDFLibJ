@@ -202,6 +202,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * 
 		 * @see java.lang.Runnable#run()
 		 */
+		@SuppressWarnings("synthetic-access")
 		@Override
 		public void runMyThread()
 		{
@@ -771,15 +772,15 @@ public class XMLDocTest extends JDFTestCaseBase
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
 		XMLDoc d = new XMLDoc("JDF:foo", null);
-		long mem = d.getDocMemoryUsed();
+		long memlocal = d.getDocMemoryUsed();
 		String s = d.write2String(0);
-		assertTrue("mem", mem + 100000 > s.length());
+		assertTrue("mem", memlocal + 100000 > s.length());
 		// the gc is messy and sometimes returns +/- a few 10k
-		assertTrue("mem", mem + 100000 > s.length());
+		assertTrue("mem", memlocal + 100000 > s.length());
 		d = JDFTestCaseBase.creatXMDoc();
-		mem = d.getDocMemoryUsed();
+		memlocal = d.getDocMemoryUsed();
 		s = d.write2String(0);
-		assertTrue("mem", mem + 10000 > s.length());
+		assertTrue("mem", memlocal + 10000 > s.length());
 		d = new XMLDoc("foo", null);
 		KElement e = d.getRoot();
 		KElement e2 = e.appendElement("e2");
@@ -792,9 +793,9 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			e2.copyElement(e3, null);
 		}
-		mem = d.getDocMemoryUsed();
+		memlocal = d.getDocMemoryUsed();
 		s = d.write2String(0);
-		assertTrue("mem", mem + 10000 > s.length());
+		assertTrue("mem", memlocal + 10000 > s.length());
 	}
 
 	/**

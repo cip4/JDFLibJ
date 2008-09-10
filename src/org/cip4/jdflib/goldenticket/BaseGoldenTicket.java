@@ -446,10 +446,10 @@ public class BaseGoldenTicket
 
 	}
 
-	protected void runphases(int good, int waste, boolean bOutAvail, boolean bFirst)
+	protected void runphases(int pgood, int pwaste, boolean bOutAvail, boolean bFirst)
 	{
 		theStatusCounter.setPhase(EnumNodeStatus.InProgress, "NodeDetails", EnumDeviceStatus.Running, "DeviceDetails");
-		runSinglePhase(good, waste, bOutAvail, bFirst);
+		runSinglePhase(pgood, pwaste, bOutAvail, bFirst);
 		finalize(); // prior to processRun
 		theStatusCounter.setPhase(EnumNodeStatus.Completed, "NodeDetails", EnumDeviceStatus.Idle, "DeviceDetails");
 	}
@@ -481,18 +481,18 @@ public class BaseGoldenTicket
 	 * @param good
 	 * @param waste
 	 */
-	final protected void runSinglePhase(int good, int waste, @SuppressWarnings("unused") boolean bOutAvail, boolean bFirst)
+	final protected void runSinglePhase(int pgood, int pwaste, @SuppressWarnings("unused") boolean bOutAvail, boolean bFirst)
 	{
 		VElement vResLinks = theExpandedNode.getResourceLinks(null);
 		int siz = vResLinks != null ? vResLinks.size() : 0;
 		for (int i = 0; i < siz; i++)
 		{
-			int _good = good;
+			int _good = pgood;
 			JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
 			// only consume input for first set of runs
 			if (!bFirst && EnumUsage.Input.equals(rl.getUsage()))
 				_good = 0;
-			theStatusCounter.addPhase(rl.getrRef(), _good, waste, true);
+			theStatusCounter.addPhase(rl.getrRef(), _good, pwaste, true);
 		}
 	}
 
@@ -668,9 +668,9 @@ public class BaseGoldenTicket
 		return deviceURL;
 	}
 
-	public static void setDeviceURL(String deviceURL)
+	public static void setDeviceURL(String pdeviceURL)
 	{
-		BaseGoldenTicket.deviceURL = deviceURL;
+		BaseGoldenTicket.deviceURL = pdeviceURL;
 	}
 
 	public static String getMisURL()

@@ -392,7 +392,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testResourceCommand() throws Exception
+	public void testResourceCommand()
 	{
 		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCommandTest.jdf");
 		JDFNode root = jdfDoc.getJDFRoot();
