@@ -101,6 +101,7 @@ public class DumpDir
 	{
 		public int i = 0;
 
+		@Override
 		public String toString()
 		{
 			return String.valueOf(i);
@@ -110,7 +111,7 @@ public class DumpDir
 	// ////////////////////////////////////////////////////////////////////////
 	private File baseDir = null;
 	private static HashMap<File, MyInt> listMap = new HashMap<File, MyInt>();
-	private int maxKeep = 500;
+	private final int maxKeep = 500;
 	/**
 	 * if true, no printouts
 	 */
@@ -203,27 +204,31 @@ public class DumpDir
 
 	public File newFileFromStream(String header, InputStream is)
 	{
+		InputStream isLocal = is;
+		
 		File dump = newFile(null);
-		if (!(is instanceof BufferedInputStream))
+		if (!(isLocal instanceof BufferedInputStream))
 		{
-			is = new BufferedInputStream(is);
-			is.mark(100000);
+			isLocal = new BufferedInputStream(isLocal);
+			isLocal.mark(100000);
 		}
+		
 		FileOutputStream fs = newHeader(header, dump, false);
 		if (fs != null)
 		{
 			try
 			{
-				IOUtils.copy(is, fs);
+				IOUtils.copy(isLocal, fs);
 				fs.flush();
 				fs.close();
-				is.reset();
+				isLocal.reset();
 			}
 			catch (IOException x)
 			{
 				// nop
 			}
 		}
+		
 		return dump;
 	}
 

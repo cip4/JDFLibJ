@@ -136,6 +136,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPhaseTime[  --> " + super.toString() + " ]";
@@ -146,6 +147,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
@@ -156,6 +158,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * 
 	 * @param mPart attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -166,6 +169,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
@@ -177,6 +181,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
@@ -193,10 +198,9 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * 
 	 *         !!! Do not change the signature of this method
 	 */
+	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourceLinkPool, nMax);
 	}
 

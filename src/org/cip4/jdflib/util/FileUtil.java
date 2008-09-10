@@ -418,22 +418,25 @@ public class FileUtil
 	 */
 	public static boolean isAbsoluteFile(String f)
 	{
-		if (f == null)
+		String fLocal = f;
+		
+		if (fLocal == null)
 			return false;
 
-		if (f.startsWith(File.separator))
+		if (fLocal.startsWith(File.separator))
 			return true;
 
 		File[] roots = File.listRoots();
 		if (roots != null)
 		{
-			f = f.toLowerCase();
+			fLocal = fLocal.toLowerCase();
 			for (int i = 0; i < roots.length; i++)
 			{
-				if (f.startsWith(roots[i].getPath().toLowerCase()))
+				if (fLocal.startsWith(roots[i].getPath().toLowerCase()))
 					return true;
 			}
 		}
+		
 		return false;
 
 	}

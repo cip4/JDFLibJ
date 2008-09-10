@@ -459,16 +459,18 @@ public class BaseGoldenTicket
 	 */
 	public void schedule(VJDFAttributeMap nodesToCombine, int starthours, int durationhours)
 	{
-		theNode.setPartStatus(nodesToCombine, EnumNodeStatus.Waiting, null);
+		VJDFAttributeMap nodesToCombineLocal = nodesToCombine;
+		
+		theNode.setPartStatus(nodesToCombineLocal, EnumNodeStatus.Waiting, null);
 		final JDFNodeInfo ni = theNode.getNodeInfo();
-		if (nodesToCombine == null)
+		if (nodesToCombineLocal == null)
 		{
-			nodesToCombine = new VJDFAttributeMap();
-			nodesToCombine.add(null);
+			nodesToCombineLocal = new VJDFAttributeMap();
+			nodesToCombineLocal.add(null);
 		}
-		for (int i = 0; i < nodesToCombine.size(); i++)
+		for (int i = 0; i < nodesToCombineLocal.size(); i++)
 		{
-			JDFNodeInfo nip = (JDFNodeInfo) ni.getCreatePartition(nodesToCombine.elementAt(i), null);
+			JDFNodeInfo nip = (JDFNodeInfo) ni.getCreatePartition(nodesToCombineLocal.elementAt(i), null);
 			JDFDate d = new JDFDate();
 			d.addOffset(0, 0, starthours, 0);
 			nip.setStart(d);

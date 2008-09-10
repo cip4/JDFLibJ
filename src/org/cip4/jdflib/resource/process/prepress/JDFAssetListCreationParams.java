@@ -132,6 +132,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFAssetListCreationParams[  --> " + super.toString() + " ]";
@@ -139,6 +140,8 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 
 	public JDFFileSpec getSearchPath(int iSkip)
 	{
+		int iSkipLocal = iSkip;
+		
 		JDFFileSpec res = null;
 		VElement v = getChildElementVector(ElementName.FILESPEC, null, null,
 				true, 0, false);
@@ -151,10 +154,11 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 			{
 				if (res.getResourceUsage() == "SearchPath")
 				{
-					if (iSkip >= 0)
+					if (iSkipLocal >= 0)
 					{
-						iSkip--;
-					} else
+						iSkipLocal--;
+					} 
+					else
 					{
 						break;
 					}
@@ -186,6 +190,7 @@ public class JDFAssetListCreationParams extends JDFAutoAssetListCreationParams
 		return res;
 	}
 
+	@Override
 	public VString getInvalidElements(EnumValidationLevel level,
 			boolean bIgnorePrivate, int nMax)
 	{

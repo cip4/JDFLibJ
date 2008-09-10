@@ -122,20 +122,22 @@ public class MyArgs
 
 	private void initMyArgs(String[] argv, String strSwitchParameter, String strArgumentParameter, String strRequiredParameter)
 	{
-		if (argv == null)
-			argv = new String[0];
+		String[] argvLocal = argv;
+		
+		if (argvLocal == null)
+			argvLocal = new String[0];
 
 		m_switchParameterString = strSwitchParameter;
 		m_argumentParameterString = strArgumentParameter;
 		m_requiredParameterString = strRequiredParameter;
 
-		m_argV = new VString(argv);
+		m_argV = new VString(argvLocal);
 		m_onlyArgs = new VString();
 
 		// cut of the "-" from the options, but don't remove it from file names
-		for (int i = 0; i < argv.length; i++)
+		for (int i = 0; i < argvLocal.length; i++)
 		{
-			String tempString = argv[i];
+			String tempString = argvLocal[i];
 			if (tempString.startsWith("-"))
 			{
 				String whazzLeft = tempString.substring(1);
@@ -150,9 +152,9 @@ public class MyArgs
 					else if (m_argumentParameterString != null && m_argumentParameterString.indexOf(flag) >= 0)
 					{
 						String wl2 = whazzLeft.substring(1);
-						if (wl2.length() == 0 && argv.length > i + 1)
+						if (wl2.length() == 0 && argvLocal.length > i + 1)
 						{
-							wl2 = argv[i + 1];
+							wl2 = argvLocal[i + 1];
 							i++;
 						}
 						m_Parameters.put(flag, wl2);

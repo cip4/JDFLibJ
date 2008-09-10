@@ -200,8 +200,10 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate) // dummy to soothe compiler warning
-			bIgnorePrivate = false;
+		boolean bIgnorePrivateLocal = bIgnorePrivate;
+		
+		if (bIgnorePrivateLocal) // dummy to soothe compiler warning
+			bIgnorePrivateLocal = false;
 
 		return getUnknownPoolElements(JDFElement.EnumPoolType.PipeParams, nMax);
 	}
@@ -290,14 +292,16 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 */
 	public JDFResourceLink appendResourceLink(String linkName, boolean bInput)
 	{
-		if (!linkName.endsWith("Link"))
-			linkName += "Link";
+		String linkNameLocal = linkName;
+		
+		if (!linkNameLocal.endsWith("Link"))
+			linkNameLocal += "Link";
 
 		JDFResourceLink rl = null;
 		if (getResourceLink() != null)
 			throw new JDFException("JDFpipeParams.appendResourceLink tried to append an additional link");
 
-		KElement e = appendElement(linkName, null);
+		KElement e = appendElement(linkNameLocal, null);
 		if (e instanceof JDFResourceLink)
 		{
 			rl = (JDFResourceLink) e;
@@ -306,8 +310,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
 		else
 		{
 			throw new JDFException("JDFpipeParams.appendResourceLink tried to return a JDFElement instead of a JDFResourceLink: "
-					+ linkName);
+					+ linkNameLocal);
 		}
+		
 		return rl;
 	}
 

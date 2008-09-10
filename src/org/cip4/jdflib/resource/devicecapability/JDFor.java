@@ -126,6 +126,7 @@ public class JDFor extends JDFNodeTerm
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return " JDFor[  --> " + super.toString() + " ]";
@@ -147,6 +148,7 @@ public class JDFor extends JDFNodeTerm
 	 *            key-value pair attribute map
 	 * @return boolean - true, if boolean “or” expression evaluates to “true”
 	 */
+	@Override
 	public boolean fitsMap(JDFAttributeMap m)
 	{
 		VElement v = getChildElementVector(null, null, null, true, 0, false);
@@ -172,30 +174,36 @@ public class JDFor extends JDFNodeTerm
 	 *            JDFNode we test iot know if the Device can accept it
 	 * @return boolean - true, if boolean “or” expression evaluates to “true”
 	 */
+	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
+		KElement reportRootLocal = reportRoot;
+		
 		VElement v = getTermVector(null);
 		int siz = v.size();
-		if (reportRoot != null)
-			reportRoot = reportRoot.appendElement("or");
+		if (reportRootLocal != null)
+			reportRootLocal = reportRootLocal.appendElement("or");
 
 		boolean b = false;
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFTerm t = (JDFTerm) v.elementAt(i);
-			boolean b2 = t.fitsJDF(jdf, reportRoot);
-			if (b2 && reportRoot == null)
+			boolean b2 = t.fitsJDF(jdf, reportRootLocal);
+			if (b2 && reportRootLocal == null)
 				return true; // don't need complete report and it is true; ciao
+			
 			b = b || b2;
 		}
 
-		if (reportRoot != null)
-			reportRoot.setAttribute("Value", b, null);
+		if (reportRootLocal != null)
+			reportRootLocal.setAttribute("Value", b, null);
+		
 		return b;
 	}
 
 	// ///////////////////////////////////////////////////////
 
+	@Override
 	public VString getMissingElements(int nMax)
 	{
 		VString v = super.getMissingElements(nMax);

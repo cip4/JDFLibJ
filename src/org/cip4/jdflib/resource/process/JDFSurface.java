@@ -175,15 +175,19 @@ public class JDFSurface extends JDFSheet
 	 */
 	public IPlacedObject getPlacedObject(int nSkip)
 	{
-		if (nSkip < 0)
+		int nSkipLocal = nSkip;
+		
+		if (nSkipLocal < 0)
 		{
 			VElement v = getPlacedObjectVector();
 			if (v == null)
 				return null;
-			nSkip = nSkip + v.size();
-			if (nSkip < 0)
+			
+			nSkipLocal = nSkipLocal + v.size();
+			if (nSkipLocal < 0)
 				return null;
-			return (IPlacedObject) v.elementAt(nSkip);
+			
+			return (IPlacedObject) v.elementAt(nSkipLocal);
 		}
 
 		int nFound = 0;
@@ -192,12 +196,15 @@ public class JDFSurface extends JDFSheet
 		{
 			if (n instanceof IPlacedObject)
 			{
-				if (nFound >= nSkip)
+				if (nFound >= nSkipLocal)
 					return (IPlacedObject) n;
+				
 				nFound++;
 			}
+			
 			n = n.getNextSibling();
 		}
+		
 		return null;
 	}
 

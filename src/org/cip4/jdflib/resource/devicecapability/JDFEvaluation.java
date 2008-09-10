@@ -224,19 +224,23 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
+		KElement reportRootLocal = reportRoot;
+		
 		String xPath = getEvalXPath(jdf);
-		if (reportRoot != null)
-			reportRoot = reportRoot.appendElement(getLocalName());
+		if (reportRootLocal != null)
+			reportRootLocal = reportRootLocal.appendElement(getLocalName());
+		
 		boolean b = false;
 		if (xPath != null)
 		{
-			b = fitsPath(jdf, xPath, reportRoot);
+			b = fitsPath(jdf, xPath, reportRootLocal);
 		}
-		if (reportRoot != null)
+		
+		if (reportRootLocal != null)
 		{
-			reportRoot.setAttribute("Value", b, null);
-			reportRoot.setAttribute("CapXPath", getRefTargetNamePath());
-			reportRoot.setAttribute("Name", getRefTargetName());
+			reportRootLocal.setAttribute("Value", b, null);
+			reportRootLocal.setAttribute("CapXPath", getRefTargetNamePath());
+			reportRootLocal.setAttribute("Name", getRefTargetName());
 		}
 
 		return b;

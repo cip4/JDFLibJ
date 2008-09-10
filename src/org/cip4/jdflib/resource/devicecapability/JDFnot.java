@@ -125,6 +125,7 @@ public class JDFnot extends JDFNodeTerm
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return " JDFnot[  --> " + super.toString() + " ]";
@@ -143,6 +144,7 @@ public class JDFnot extends JDFNodeTerm
 	 *            key-value pair attribute map
 	 * @return boolean - true, if boolean “not” expression evaluates to “true”
 	 */
+	@Override
 	public boolean fitsMap(JDFAttributeMap m)
 	{
 		JDFTerm t = getTerm(null, 0);
@@ -162,24 +164,29 @@ public class JDFnot extends JDFNodeTerm
 	 *            is requested.
 	 * @return boolean - true, if boolean “not” expression evaluates to “true”
 	 */
+	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
+		KElement reportRootLocal = reportRoot;
+		
 		VElement v = getTermVector(null);
 		int siz = v.size();
 		boolean b = false;
-		if (reportRoot != null)
-			reportRoot = reportRoot.appendElement("not");
+		if (reportRootLocal != null)
+			reportRootLocal = reportRootLocal.appendElement("not");
+		
 		int count = 0;
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFTerm t = (JDFTerm) v.elementAt(i);
-			b = !t.fitsJDF(jdf, reportRoot);
+			b = !t.fitsJDF(jdf, reportRootLocal);
 			count++;
-			if (reportRoot != null)
-				reportRoot.setAttribute("Value", b, null);
+			if (reportRootLocal != null)
+				reportRootLocal.setAttribute("Value", b, null);
 		}
-		if (reportRoot != null && count != 1)
-			reportRoot.setAttribute("SyntaxWarning",
+		
+		if (reportRootLocal != null && count != 1)
+			reportRootLocal.setAttribute("SyntaxWarning",
 					"Warning: not element with more than one term, count="
 							+ String.valueOf(count));
 
@@ -188,21 +195,27 @@ public class JDFnot extends JDFNodeTerm
 
 	// //////////////////////////////////////////////////
 
+	@Override
 	public VString getInvalidElements(EnumValidationLevel level,
 			boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
-		VString v = super.getInvalidElements(level, bIgnorePrivate, nMax);
+		boolean bIgnorePrivateLocal = bIgnorePrivate;
+		
+		if (bIgnorePrivateLocal)
+			bIgnorePrivateLocal = false; // dummy to fool compiler
+		
+		VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
 		if (v.size() >= nMax)
 			return v;
 
 		v.appendUnique(getInvalidTerms(1));
+		
 		return v;
 	}
 
 	// ///////////////////////////////////////////////////////
 
+	@Override
 	public VString getMissingElements(int nMax)
 	{
 		VString v = super.getMissingElements(nMax);

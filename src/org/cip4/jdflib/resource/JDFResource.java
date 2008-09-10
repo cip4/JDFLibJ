@@ -975,11 +975,14 @@ public class JDFResource extends JDFElement
 	 */
 	public static JDFResource getResourceRoot(KElement elem)
 	{
-		if (elem == null)
+		KElement elemLocal = elem;
+		
+		if (elemLocal == null)
 			return null;
-		elem = elem.getDeepParent(elem.getLocalName(), Integer.MAX_VALUE);
+		
+		elemLocal = elemLocal.getDeepParent(elemLocal.getLocalName(), Integer.MAX_VALUE);
 
-		KElement parentNode = elem.getParentNode_KElement();
+		KElement parentNode = elemLocal.getParentNode_KElement();
 		if (parentNode != null)
 		{
 			String parentName = parentNode.getLocalName();
@@ -993,41 +996,34 @@ public class JDFResource extends JDFElement
 						return getResourceRoot(parentNode);
 					}
 				}
-				return (JDFResource) ((elem instanceof JDFResource) ? elem : null);
+				
+				return (JDFResource) ((elemLocal instanceof JDFResource) ? elemLocal : null);
 			}
+			
 			if ((parentNode instanceof JDFNode) || (parentNode instanceof JDFJMF))
 			{
-				if ((elem instanceof JDFNodeInfo) || (elem instanceof JDFCustomerInfo))
+				if ((elemLocal instanceof JDFNodeInfo) || (elemLocal instanceof JDFCustomerInfo))
 				{
-					return (JDFResource) elem;
+					return (JDFResource) elemLocal;
 				}
+				
 				return null; // not a resource
 			}
-			if ((elem instanceof JDFResource) && !(parentNode instanceof JDFResource))
-				return (JDFResource) elem;
+			
+			if ((elemLocal instanceof JDFResource) && !(parentNode instanceof JDFResource))
+				return (JDFResource) elemLocal;
 
 			return getResourceRoot(parentNode);
 		}
-		if (elem instanceof JDFResource)// parentNode == null, this is a
+		
+		if (elemLocal instanceof JDFResource)// parentNode == null, this is a
 		// standalone resource
 		{
-			return (JDFResource) elem;
+			return (JDFResource) elemLocal;
 		}
+		
 		return null;
 	}
-
-	// dm /**
-	// * Call this function to get information about the node name of the 'this'
-	// resource
-	// *
-	// * @deprecated use getNodeName or getLocalName
-	// * @return String the node name of 'this' resource
-	// */
-	// @Deprecated
-	// public String getResourceType()
-	// {
-	// return getNodeName();
-	// }
 
 	/**
 	 * Gets the resourcepool that 'this' lives in
@@ -1087,6 +1083,8 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource makeRootResource(String alias, JDFElement parentPool, boolean bLinkHere)
 	{
+		String aliasLocal = alias;
+		
 		JDFResource retRes = this;
 
 		// if this is already in the resource pool do nothing
@@ -1099,11 +1097,12 @@ public class JDFResource extends JDFElement
 				// create a RefElement at the same (in front of) position as
 				// this
 				link = (JDFElement) getParentNode_KElement().insertBefore(getNodeName() + JDFConstants.REF, this, null);
-				if (isWildCard(alias))
+				if (isWildCard(aliasLocal))
 				{
-					alias = getIDPrefix() + uniqueID(0);
+					aliasLocal = getIDPrefix() + uniqueID(0);
 				}
-				link.appendHRef(this, null, alias);
+				
+				link.appendHRef(this, null, aliasLocal);
 			}
 
 			// use the local pool if no other is specified
@@ -1927,12 +1926,15 @@ public class JDFResource extends JDFElement
 
 	protected VElement getDeepPartVector(JDFAttributeMap m_in, EnumPartUsage partUsage, int matchingDepth, VString partIDKeys)
 	{
+		EnumPartUsage partUsageLocal = partUsage;
+		int matchingDepthLocal = matchingDepth;
+		
 		JDFAttributeMap m = new JDFAttributeMap(m_in);
 		VElement vReturn = new VElement();
 		removeImplicitPartions(m);
-		if (partUsage == null)
+		if (partUsageLocal == null)
 		{
-			partUsage = getPartUsage();
+			partUsageLocal = getPartUsage();
 		}
 
 		if (m.isEmpty())
@@ -1942,9 +1944,9 @@ public class JDFResource extends JDFElement
 		}
 
 		int msiz = m.size();
-		if (matchingDepth == -1) // first call - check validity of the map
+		if (matchingDepthLocal == -1) // first call - check validity of the map
 		{
-			matchingDepth = 0;
+			matchingDepthLocal = 0;
 			JDFAttributeMap thisMap = getPartMap(partIDKeys);
 
 			Iterator<String> it = m.getKeyIterator();
@@ -1967,7 +1969,7 @@ public class JDFResource extends JDFElement
 
 					if (thisMapValue != null && JDFPart.matchesPart(strKey, thisMapValue, mMapValue))
 					{
-						matchingDepth++;
+						matchingDepthLocal++;
 					}
 				}
 			}
@@ -1995,10 +1997,10 @@ public class JDFResource extends JDFElement
 			// the identity map is always complete from the root, we therefore
 			// can start searching
 			// in the root
-			return getResourceRoot().getDeepPartVector(m, partUsage, -1, partIDKeys);
+			return getResourceRoot().getDeepPartVector(m, partUsageLocal, -1, partIDKeys);
 		}
 
-		if (msiz == matchingDepth)
+		if (msiz == matchingDepthLocal)
 		{
 			vReturn.add(this);
 			return vReturn;
@@ -2012,7 +2014,7 @@ public class JDFResource extends JDFElement
 		{
 			// 150802 RP removed different treatment for leaves and no matching
 			// elements
-			if (partUsage.getValue() >= EnumPartUsage.Sparse.getValue()) // allow
+			if (partUsageLocal.getValue() >= EnumPartUsage.Sparse.getValue()) // allow
 			// incomplete
 			// parts
 			{
@@ -2100,7 +2102,7 @@ public class JDFResource extends JDFElement
 
 			if (!badChild)
 			{
-				VElement dpv = resourceElement.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
+				VElement dpv = resourceElement.getDeepPartVector(m, partUsageLocal, hasMatchingAttribute ? matchingDepthLocal + 1 : matchingDepthLocal, partIDKeys);
 
 				if (dpv.size() > 0)
 				{
@@ -2179,7 +2181,7 @@ public class JDFResource extends JDFElement
 			{
 				// none match and this is the last with bad kids and we want
 				// incomplete stuff
-				if (toAppend.isEmpty() && hasBadChildren && (partUsage.equals(EnumPartUsage.Implicit))
+				if (toAppend.isEmpty() && hasBadChildren && (partUsageLocal.equals(EnumPartUsage.Implicit))
 						&& !hasMatchingAttribute)
 				{
 					JDFResource root = getResourceRoot();
@@ -3188,7 +3190,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated use JDFMerge.mergeSpawnIDS
 	 */
 	@Deprecated
-	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs)
+	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs) 
 	{
 		if (!getID().equals(resToMerge.getID()))
 		{
@@ -7024,12 +7026,15 @@ public class JDFResource extends JDFElement
 	 */
 	private EnumValidationLevel incompleteLevel(EnumValidationLevel level, boolean bForce)
 	{
+		EnumValidationLevel levelLocal = level;
+		
 		EnumResStatus es = getResStatus(false);
 		if ((es == EnumResStatus.Incomplete) || isResourceUpdate() || bForce)
 		{
-			level = EnumValidationLevel.incompleteLevel(level);
+			levelLocal = EnumValidationLevel.incompleteLevel(levelLocal);
 		}
-		return level;
+		
+		return levelLocal;
 	}
 
 	/**
@@ -7041,17 +7046,19 @@ public class JDFResource extends JDFElement
 	@Override
 	public boolean isValid(EnumValidationLevel level)
 	{
+		EnumValidationLevel levelLocal = level;
+		
 		boolean bRet = true;
 
 		// it is supposed to be incomplete -> don't check for completeness
-		level = incompleteLevel(level, false);
+		levelLocal = incompleteLevel(levelLocal, false);
 
 		final boolean bLeaf = isLeaf();
 		final EnumPartUsage partUsage = getResourceRoot().getPartUsage();
 		boolean bForceIncomplete = !(partUsage == EnumPartUsage.Implicit) || (partUsage == EnumPartUsage.Sparse);
 		if (bLeaf)
 		{
-			if (!super.isValid(level))
+			if (!super.isValid(levelLocal))
 			{
 				return false;
 			}
@@ -7066,7 +7073,7 @@ public class JDFResource extends JDFElement
 		}
 		else
 		{
-			if (this.getInvalidAttributes(incompleteLevel(level, bForceIncomplete), true, 1).size() > 0)
+			if (this.getInvalidAttributes(incompleteLevel(levelLocal, bForceIncomplete), true, 1).size() > 0)
 			{
 				return false;
 			}
@@ -7074,7 +7081,7 @@ public class JDFResource extends JDFElement
 			final VElement v = getChildElementVector_KElement(getNodeName(), null, null, true, 0);
 			for (int i = 0; i < v.size(); i++)
 			{
-				if (!((JDFResource) v.elementAt(i)).isValid(level))
+				if (!((JDFResource) v.elementAt(i)).isValid(levelLocal))
 				{
 					return false;
 				}
@@ -7101,7 +7108,7 @@ public class JDFResource extends JDFElement
 		}
 		else if (!bLeaf && !bForceIncomplete)
 		{
-			if (!super.isValid(level))
+			if (!super.isValid(levelLocal))
 			{
 				return false;
 			}

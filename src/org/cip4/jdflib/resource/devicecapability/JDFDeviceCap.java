@@ -1136,9 +1136,11 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 */
 	private static KElement cleanActionPoolReport(KElement actionPoolReport)
 	{
-		if (actionPoolReport != null)
+		KElement actionPoolReportLocal = actionPoolReport;
+		
+		if (actionPoolReportLocal != null)
 		{
-			VElement vARL = actionPoolReport.getChildElementVector(
+			VElement vARL = actionPoolReportLocal.getChildElementVector(
 					"ActionReportList", null, null, true, 0, false);
 			for (int i = 0; i < vARL.size(); i++)
 			{
@@ -1168,13 +1170,13 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 				}
 			}
 
-			if (!actionPoolReport.hasChildElements())
+			if (!actionPoolReportLocal.hasChildElements())
 			{
-				actionPoolReport.deleteNode();
-				actionPoolReport = null;
+				actionPoolReportLocal.deleteNode();
+				actionPoolReportLocal = null;
 			}
 		}
-		return actionPoolReport;
+		return actionPoolReportLocal;
 	}
 
 	// //////////////////////////////////////////////////

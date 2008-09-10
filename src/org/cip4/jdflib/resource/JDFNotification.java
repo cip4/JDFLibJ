@@ -492,11 +492,14 @@ public class JDFNotification extends JDFAutoNotification
 	 */
 	public void setNode(NodeIdentifier identifier)
 	{
-		if (identifier == null)
-			identifier = new NodeIdentifier((JDFNode) null);
-		setJobID(identifier.getJobID());
-		setJobPartID(identifier.getJobPartID());
-		setPartMapVector(identifier.getPartMapVector());
+		NodeIdentifier identifierLocal = identifier;
+		
+		if (identifierLocal == null)
+			identifierLocal = new NodeIdentifier((JDFNode) null);
+		
+		setJobID(identifierLocal.getJobID());
+		setJobPartID(identifierLocal.getJobPartID());
+		setPartMapVector(identifierLocal.getPartMapVector());
 	}
 
 	/**

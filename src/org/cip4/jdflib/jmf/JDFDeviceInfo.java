@@ -170,9 +170,12 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 */
 	public void setIdleStartTime(JDFDate value)
 	{
-		if (value == null)
-			value = new JDFDate();
-		setAttribute(AttributeName.IDLESTARTTIME, value.getDateTimeISO(), null);
+		JDFDate valueLocal = value;
+		
+		if (valueLocal == null)
+			valueLocal = new JDFDate();
+		
+		setAttribute(AttributeName.IDLESTARTTIME, valueLocal.getDateTimeISO(), null);
 	}
 
 	/**

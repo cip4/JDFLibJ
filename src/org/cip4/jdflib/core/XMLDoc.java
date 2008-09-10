@@ -379,11 +379,15 @@ public class XMLDoc
 	 */
 	public boolean write2File(String oFilePath, int indent, boolean bPreserveSpace)
 	{
-		if (oFilePath == null)
-			oFilePath = m_doc.m_OriginalFileName;
-		if (oFilePath == null)
+		String oFilePathLocal = oFilePath;
+		
+		if (oFilePathLocal == null)
+			oFilePathLocal = m_doc.m_OriginalFileName;
+		
+		if (oFilePathLocal == null)
 			return false;
-		return write2File(new File(oFilePath), indent, bPreserveSpace);
+		
+		return write2File(new File(oFilePathLocal), indent, bPreserveSpace);
 	}
 
 	/**
@@ -399,8 +403,9 @@ public class XMLDoc
 	 */
 	public boolean write2File(File file, int indent, boolean bPreserveSpace)
 	{
+		File fileLocal = file;
 
-		if (file == null)
+		if (fileLocal == null)
 			return false;
 
 		boolean fSuccess = true;
@@ -408,27 +413,28 @@ public class XMLDoc
 
 		try
 		{
-			if (file.isDirectory() && getOriginalFileName() != null)
+			if (fileLocal.isDirectory() && getOriginalFileName() != null)
 			{
 				File orig = new File(getOriginalFileName());
-				file = new File(file + File.separator + orig.getName());
+				fileLocal = new File(fileLocal + File.separator + orig.getName());
 			}
+			
 			// ensure having an empty file in case it did not exist
-			file.delete();
-			if (file.createNewFile())
+			fileLocal.delete();
+			if (fileLocal.createNewFile())
 			{
-				outStream = new FileOutputStream(file);
+				outStream = new FileOutputStream(fileLocal);
 				write2Stream(outStream, indent, bPreserveSpace);
 			}
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+			System.out.println("Write2File: " + fileLocal.getAbsolutePath() + " : " + e);
 			fSuccess = false;
 		}
 		catch (IOException e)
 		{
-			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+			System.out.println("Write2File: " + fileLocal.getAbsolutePath() + " : " + e);
 			fSuccess = false;
 		}
 		finally

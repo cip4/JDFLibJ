@@ -224,15 +224,17 @@ public class StringUtil
 	 */
 	public static String sprintf(String format, String template)
 	{
-		if (template == null || format == null)
+		String templateLocal = template;
+		
+		if (templateLocal == null || format == null)
 			return null;
-		template = StringUtil.replaceString(template, "\\,", "__comma__€ß-eher selten"); // quick
+		templateLocal = StringUtil.replaceString(templateLocal, "\\,", "__comma__€ß-eher selten"); // quick
 		// hack
 		// ;
 		// -
 		// )
 
-		VString vTemplate = tokenize(template, ",", false);
+		VString vTemplate = tokenize(templateLocal, ",", false);
 		Object[] vObj = new Object[vTemplate.size()];
 		for (int i = 0; i < vObj.length; i++)
 		{
@@ -269,15 +271,18 @@ public class StringUtil
 	 */
 	public static String sprintf(String format, Object[] objects)
 	{
-		if (objects == null || format == null)
+		String formatLocal = format;
+		
+		if (objects == null || formatLocal == null)
 			return null;
-		format = StringUtil.replaceString(format, "%%", "__percent__€ß-eher selten"); // quick
+		
+		formatLocal = StringUtil.replaceString(formatLocal, "%%", "__percent__€ß-eher selten"); // quick
 		// hack
 		// ;
 		// -
 		// )
-		boolean bStart = format.startsWith("%");
-		VString tokens = tokenize(format, "%", false);
+		boolean bStart = formatLocal.startsWith("%");
+		VString tokens = tokenize(formatLocal, "%", false);
 		final int nStart = (bStart ? 0 : 1);
 		if (tokens.size() > objects.length + nStart)
 			throw new IllegalArgumentException("not enough tokens to satisfy format");
@@ -298,10 +303,9 @@ public class StringUtil
 				s += f.tostr((Double) ob);
 			else if (ob instanceof ValuedEnum)
 				s += f.tostr(((ValuedEnum) ob).getName());
-
 		}
-		return replaceString(s, "__percent__€ß-eher selten", "%"); // undo quick
-		// hack ;-)
+		
+		return replaceString(s, "__percent__€ß-eher selten", "%"); // undo quick hack ;-)
 	}
 
 	/**
@@ -397,17 +401,22 @@ public class StringUtil
 	 */
 	public static String leftStr(String strWork, int n)
 	{
+		int nLocal = n;
+		
 		if (strWork == null)
 			return null;
-		if (n < 0)
+		
+		if (nLocal < 0)
 		{
-			n = strWork.length() + n;
+			nLocal = strWork.length() + nLocal;
 		}
-		if (n <= 0)
+		
+		if (nLocal <= 0)
 		{
 			return null;
 		}
-		return strWork.substring(0, n <= strWork.length() ? n : strWork.length());
+		
+		return strWork.substring(0, nLocal <= strWork.length() ? nLocal : strWork.length());
 	}
 
 	/**
@@ -421,22 +430,27 @@ public class StringUtil
 	 */
 	public static String rightStr(String strWork, int n)
 	{
+		int nLocal = n;
+		
 		if (strWork == null)
 			return null;
-		if (n < 0)
+		
+		if (nLocal < 0)
 		{
-			n = strWork.length() + n;
+			nLocal = strWork.length() + nLocal;
 		}
 
-		if (n <= 0)
+		if (nLocal <= 0)
 		{
 			return null;
 		}
-		if (n > strWork.length())
+		
+		if (nLocal > strWork.length())
 		{
 			return strWork;
 		}
-		return strWork.substring(strWork.length() - n);
+		
+		return strWork.substring(strWork.length() - nLocal);
 	}
 
 	/**
@@ -452,16 +466,18 @@ public class StringUtil
 	 */
 	public static VString tokenize(String strWork, String delim, boolean delim2token)
 	{
-		delim = delim == null ? JDFConstants.BLANK : delim;
+		String delimLocal = delim;
+		
+		delimLocal = delimLocal == null ? JDFConstants.BLANK : delimLocal;
 		VString v = new VString();
 		if (strWork != null)
 		{
-			if (delim.length() == 1 && strWork.indexOf(delim) < 0)
+			if (delimLocal.length() == 1 && strWork.indexOf(delimLocal) < 0)
 			{
 				v.add(strWork);
 				return v;
 			}
-			StringTokenizer st = new StringTokenizer(strWork, delim, delim2token);
+			StringTokenizer st = new StringTokenizer(strWork, delimLocal, delim2token);
 			while (st.hasMoreTokens())
 			{
 				v.add(st.nextToken());
@@ -546,37 +562,46 @@ public class StringUtil
 	 */
 	public static String token(String strWork, int index, String delim)
 	{
+		int indexLocal = index;
+		
+		String delimLocal = delim;
+		
 		if (strWork == null)
 			return null; // null bleibt null
-		if (delim == null)
-			delim = JDFConstants.BLANK;
+		
+		if (delimLocal == null)
+			delimLocal = JDFConstants.BLANK;
 
-		final int pos = delim.length() == 1 ? strWork.indexOf(delim) : 0;
+		final int pos = delimLocal.length() == 1 ? strWork.indexOf(delimLocal) : 0;
 		if (pos < 0) // speed up incase we only have one entry
 		{
-			return (index == -1 || index == 0) ? strWork : null;
+			return (indexLocal == -1 || indexLocal == 0) ? strWork : null;
 		}
 
-		if (index < 0)
+		if (indexLocal < 0)
 		{
-			VString v = StringUtil.tokenize(strWork, delim, false);
-			index = v.size() + index;
-			if (index < 0)
+			VString v = StringUtil.tokenize(strWork, delimLocal, false);
+			indexLocal = v.size() + indexLocal;
+			if (indexLocal < 0)
 				return null;
-			if (index < v.size())
-				return v.stringAt(index);
+			
+			if (indexLocal < v.size())
+				return v.stringAt(indexLocal);
+			
 			return null;
 		}
+		
 		// index >0 don't need to calculate # of tokens
-		StringTokenizer st = new StringTokenizer(strWork, delim, false);
+		StringTokenizer st = new StringTokenizer(strWork, delimLocal, false);
 		int n = 0;
 		String s = null;
 		while (st.hasMoreTokens())
 		{
 			s = st.nextToken();
-			if (n++ == index)
+			if (n++ == indexLocal)
 				return s;
 		}
+		
 		return null;
 	}
 
@@ -593,11 +618,13 @@ public class StringUtil
 	 */
 	public static String replaceCharSet(String strWork, String charSet, String replaceString, int offset)
 	{
+		String strWorkLocal = strWork;
+		
 		if (charSet == null)
-			return strWork;
+			return strWorkLocal;
 		for (int i = 0; i < charSet.length(); i++)
-			strWork = replaceChar(strWork, charSet.charAt(i), replaceString, offset);
-		return strWork;
+			strWorkLocal = replaceChar(strWorkLocal, charSet.charAt(i), replaceString, offset);
+		return strWorkLocal;
 	}
 
 	/**
@@ -652,36 +679,44 @@ public class StringUtil
 	 */
 	public static String replaceString(String strWork, String toReplace, String replaceBy)
 	{
-		if (strWork == null)
-			return strWork;
-		int lenIn = strWork.length();
-		int indexOf = strWork.indexOf(toReplace);
+		String strWorkLocal = strWork;
+		
+		if (strWorkLocal == null)
+			return strWorkLocal;
+		
+		int lenIn = strWorkLocal.length();
+		int indexOf = strWorkLocal.indexOf(toReplace);
 		if (indexOf < 0)
-			return strWork;
+			return strWorkLocal;
 
 		int len = toReplace.length();
-		StringBuffer b = new StringBuffer(strWork.length() * 2);
+		StringBuffer b = new StringBuffer(strWorkLocal.length() * 2);
 		do
 		{
-			b.append(strWork.substring(0, indexOf));
+			b.append(strWorkLocal.substring(0, indexOf));
 			if (replaceBy != null)
 				b.append(replaceBy);
-			strWork = strWork.substring(indexOf + len);
-			indexOf = strWork.indexOf(toReplace);
+			strWorkLocal = strWorkLocal.substring(indexOf + len);
+			indexOf = strWorkLocal.indexOf(toReplace);
 		}
 		while (indexOf >= 0);
-		b.append(strWork);
+		
+		b.append(strWorkLocal);
 
 		final String outString = b.toString();
 		int lenOut = outString.length();
+		
 		return lenOut == lenIn ? outString : replaceString(outString, toReplace, replaceBy);
 	}
 
 	public static String xmlNameEscape(String strWork)
 	{
-		strWork = replaceChar(strWork, '*', "_star_", 0);
-		strWork = replaceChar(strWork, '&', "_and_", 0);
-		return strWork;
+		String strWorkLocal = strWork;
+		
+		strWorkLocal = replaceChar(strWorkLocal, '*', "_star_", 0);
+		strWorkLocal = replaceChar(strWorkLocal, '&', "_and_", 0);
+		
+		return strWorkLocal;
 	}
 
 	/**
@@ -738,12 +773,15 @@ public class StringUtil
 	 */
 	public static String newExtension(String strWork, String newExt)
 	{
-		if (newExt == null)
+		String newExtLocal = newExt;
+		
+		if (newExtLocal == null)
 			return StringUtil.prefix(strWork);
 
-		if (!newExt.startsWith("."))
-			newExt = "." + newExt;
-		return StringUtil.prefix(strWork) + newExt;
+		if (!newExtLocal.startsWith("."))
+			newExtLocal = "." + newExtLocal;
+		
+		return StringUtil.prefix(strWork) + newExtLocal;
 	}
 
 	/**
@@ -957,7 +995,9 @@ public class StringUtil
 	 */
 	public static String wipeInvalidXML10Chars(String strText, String replace)
 	{
-		char[] chars = strText.toCharArray();
+		String strTextLocal = strText;
+		
+		char[] chars = strTextLocal.toCharArray();
 
 		boolean found = false;
 		int n = 0;
@@ -979,12 +1019,12 @@ public class StringUtil
 		if (found)
 		{
 
-			strText = new String(chars);
+			strTextLocal = new String(chars);
 			if (n > 0)
-				strText = strText.substring(0, chars.length - n);
+				strTextLocal = strTextLocal.substring(0, chars.length - n);
 		}
 
-		return strText;
+		return strTextLocal;
 	}
 
 	private static boolean isValidXML10Char(final char c)
@@ -1094,10 +1134,11 @@ public class StringUtil
 	 */
 	public static String setRawBytes(byte[] buffer, int len)
 	{
+		int lenLocal = len;
 
-		if (len < 0)
+		if (lenLocal < 0)
 		{
-			len = buffer.length;
+			lenLocal = buffer.length;
 		}
 
 		char[] target = null;
@@ -1105,11 +1146,11 @@ public class StringUtil
 		if (!(buffer.length < 0))
 		{
 
-			if (len > 0)
+			if (lenLocal > 0)
 			{
-				target = new char[len];
+				target = new char[lenLocal];
 
-				for (int i = 0; i < len; i++)
+				for (int i = 0; i < lenLocal; i++)
 				{
 					target[i] = (char) buffer[i];
 				}
@@ -1158,19 +1199,21 @@ public class StringUtil
 
 	public static String setHexBinaryBytes(byte[] buffer, int len)
 	{
+		int lenLocal = len;
+
 		char[] target = null;
 
 		if (buffer.length >= 0)
 		{
-			if (len < 0)
+			if (lenLocal < 0)
 			{
-				len = buffer.length;
-				target = new char[len * 2];
+				lenLocal = buffer.length;
+				target = new char[lenLocal * 2];
 			}
-			if (len > 0)
+			if (lenLocal > 0)
 			{
-				target = new char[len * 2];
-				for (int i = 0; i < len; i++)
+				target = new char[lenLocal * 2];
+				for (int i = 0; i < lenLocal; i++)
 				{
 					char c = (char) ((buffer[i] & 0x00f0) >> 4);
 					target[2 * i] = (c >= 10) ? (char) ('A' - 10 + c) : (char) ('0' + c);
@@ -1463,15 +1506,19 @@ public class StringUtil
 	 * 
 	 * @return the string where all illegal sequences have been replaced by their escaped representation
 	 */
-	public static String escape(String strToEscape, String strCharSet, String strEscapeChar, int iRadix, int iEscapeLen, int iEscapeBelow, int iEscapeAbove)
+	public static String escape(String strToEscape, String strCharSet, String strEscapeChar, 
+			int iRadix, int iEscapeLen, int iEscapeBelow, int iEscapeAbove)
 	{
-		if (strEscapeChar == null)
+		int iEscapeAboveLocal = iEscapeAbove;
+		String strEscapeCharLocal = strEscapeChar;
+		
+		if (strEscapeCharLocal == null)
 		{
-			strEscapeChar = "\\";
+			strEscapeCharLocal = "\\";
 		}
 
-		if (iEscapeAbove < 0)
-			iEscapeAbove = 0x7fffffff;
+		if (iEscapeAboveLocal < 0)
+			iEscapeAboveLocal = 0x7fffffff;
 
 		// String escapedString = JDFConstants.EMPTYSTRING;
 		byte[] a_toEscape = strToEscape.getBytes();
@@ -1479,7 +1526,7 @@ public class StringUtil
 		int cToEscape;
 		byte[] escaped = new byte[a_toEscape.length * 4];
 		int posE = 0;
-		byte[] escapeCharbytes = strEscapeChar.getBytes();
+		byte[] escapeCharbytes = strEscapeCharLocal.getBytes();
 
 		for (int i = 0; i < l; i++)
 		{
@@ -1487,7 +1534,7 @@ public class StringUtil
 			if (cToEscape < 0)
 				cToEscape = 256 + cToEscape;
 
-			if ((cToEscape > iEscapeAbove) || (cToEscape < iEscapeBelow)
+			if ((cToEscape > iEscapeAboveLocal) || (cToEscape < iEscapeBelow)
 					|| (strCharSet != null && strCharSet.indexOf(cToEscape) != -1))
 			{ // the character must be escaped
 				for (int ee = 0; ee < escapeCharbytes.length; ee++)
@@ -1495,6 +1542,7 @@ public class StringUtil
 					escaped[posE] = escapeCharbytes[ee];
 					posE++;
 				}
+				
 				if (iRadix > 0)
 				{ // radix is a flag to convert to octal, hex etc.
 					StringBuffer buf = new StringBuffer();
@@ -1503,7 +1551,6 @@ public class StringUtil
 					{
 						buf.append(Integer.toBinaryString(cToEscape));
 					}
-
 					else if (iRadix == 8)
 					{
 						buf.append(Integer.toOctalString(cToEscape));
@@ -1563,7 +1610,9 @@ public class StringUtil
 				posE++;
 			}
 		}
+		
 		String escapedString = new String(escaped, 0, posE);
+		
 		return escapedString;
 	}
 
@@ -1600,7 +1649,11 @@ public class StringUtil
 
 				String strIsEscaped = new String(escapeSeq); // get the escaped
 				// str 'd6'
-				Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and get the int value
+				Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and
+				// get
+				// the
+				// int
+				// value
 				byteEscape[n++] = (byte) integer.intValue();
 			}
 		}
@@ -1638,22 +1691,28 @@ public class StringUtil
 	 */
 	public static double parseDouble(String s, double def)
 	{
-		if (KElement.isWildCard(s))
+		String sLocal = s;
+		
+		if (KElement.isWildCard(sLocal))
 			return def;
+		
 		double d = def;
-		s = s.trim();
-		if (s.equals(JDFConstants.POSINF))
+		sLocal = sLocal.trim();
+		if (sLocal.equals(JDFConstants.POSINF))
 			return Double.MAX_VALUE;
-		if (s.equals(JDFConstants.NEGINF))
+		
+		if (sLocal.equals(JDFConstants.NEGINF))
 			return -Double.MAX_VALUE;
+		
 		try
 		{
-			d = Double.parseDouble(s);
+			d = Double.parseDouble(sLocal);
 		}
 		catch (NumberFormatException nfe)
 		{
 			d = def;
 		}
+		
 		return d;
 	}
 
@@ -1667,13 +1726,18 @@ public class StringUtil
 	 */
 	public static boolean parseBoolean(String s, boolean def)
 	{
-		if (KElement.isWildCard(s))
+		String sLocal = s;
+		
+		if (KElement.isWildCard(sLocal))
 			return def;
-		s = s.trim().toLowerCase();
-		if ("false".equals(s))
+		
+		sLocal = sLocal.trim().toLowerCase();
+		if ("false".equals(sLocal))
 			return false;
-		if ("true".equals(s))
+		
+		if ("true".equals(sLocal))
 			return true;
+		
 		return def;
 	}
 
@@ -1687,23 +1751,28 @@ public class StringUtil
 	 */
 	public static int parseInt(String s, int def)
 	{
-		if (KElement.isWildCard(s))
+		String sLocal = s;
+		
+		if (KElement.isWildCard(sLocal))
 			return def;
+		
 		int i = def;
-		s = s.trim();
-		if (s.equals(JDFConstants.POSINF))
+		sLocal = sLocal.trim();
+		if (sLocal.equals(JDFConstants.POSINF))
 			return Integer.MAX_VALUE;
-		if (s.equals(JDFConstants.NEGINF))
+		
+		if (sLocal.equals(JDFConstants.NEGINF))
 			return Integer.MIN_VALUE;
 
 		try
 		{
-			i = Integer.parseInt(s);
+			i = Integer.parseInt(sLocal);
 		}
 		catch (NumberFormatException nfe)
 		{
 			i = def;
 		}
+		
 		return i;
 	}
 
@@ -1960,24 +2029,29 @@ public class StringUtil
 	 */
 	public static boolean matches(String str, String regExp)
 	{
+		String regExpLocal = regExp;
+		
 		if (str == null)
 			return false;
+		
 		// the null expression is assumed to match anything
-		if ((regExp == null) || (regExp.length() == 0))
+		if ((regExpLocal == null) || (regExpLocal.length() == 0))
 			return true;
+		
 		// this is a really common mistake
-		if (regExp.equals("*"))
-			regExp = ".*";
+		if (regExpLocal.equals("*"))
+			regExpLocal = ".*";
 
 		boolean b;
 		try
 		{
-			b = str.matches(regExp);
+			b = str.matches(regExpLocal);
 		}
 		catch (PatternSyntaxException e)
 		{
 			b = false;
 		}
+		
 		return b;
 	}
 
@@ -2119,20 +2193,27 @@ public class StringUtil
 	 */
 	public static String stripPrefix(String str, String prefix, boolean bIgnoreCase)
 	{
-		if (str == null)
+		String strLocal = str;
+		String prefixLocal = prefix;
+		
+		if (strLocal == null)
 			return null;
-		if (prefix == null)
-			return str;
+		
+		if (prefixLocal == null)
+			return strLocal;
+		
 		if (bIgnoreCase)
 		{
-			str = str.toLowerCase();
-			prefix = prefix.toLowerCase();
+			strLocal = strLocal.toLowerCase();
+			prefixLocal = prefixLocal.toLowerCase();
 		}
-		if (str.startsWith(prefix))
+		
+		if (strLocal.startsWith(prefixLocal))
 		{
-			str = StringUtil.rightStr(str, -prefix.length());
+			strLocal = StringUtil.rightStr(strLocal, -prefixLocal.length());
 		}
-		return str;
+		
+		return strLocal;
 	}
 
 	/**

@@ -330,8 +330,6 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
 		return getUnknownPoolElements(EnumPoolType.ResourceLinkPool, nMax);
 	}
 

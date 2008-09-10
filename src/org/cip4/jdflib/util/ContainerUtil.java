@@ -162,25 +162,32 @@ public class ContainerUtil
 	 */
 	public static <a> IMatches getMatch(Collection<? extends IMatches> c, a obj, int iSkip)
 	{
+		int iSkipLocal = iSkip;
+		
 		if (c == null)
 			return null;
-		if (iSkip < 0)
+		
+		if (iSkipLocal < 0)
 		{
 			Vector<IMatches> v = getMatches(c, obj);
 			if (v == null)
 				return null;
-			iSkip = v.size() + iSkip;
-			if (iSkip < 0)
+			
+			iSkipLocal = v.size() + iSkipLocal;
+			if (iSkipLocal < 0)
 				return null;
-			return v.get(iSkip);
+			
+			return v.get(iSkipLocal);
 		}
+		
 		Iterator<? extends IMatches> it = c.iterator();
 		while (it.hasNext())
 		{
 			IMatches m = it.next();
-			if (m.matches(obj) && iSkip-- <= 0)
+			if (m.matches(obj) && iSkipLocal-- <= 0)
 				return m;
 		}
+		
 		return null;
 	}
 

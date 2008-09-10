@@ -542,21 +542,25 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static boolean matchesCID(BodyPart bp, String cid)
 	{
-		if (cid == null)
+		String cidLocal = cid;
+		
+		if (cidLocal == null)
 			return true; // wildcard
 
-		if (cid.startsWith("<"))
-			cid = cid.substring(1);
-		if (cid.toLowerCase().startsWith("cid:"))
-			cid = cid.substring(4);
-		if (cid.endsWith(">"))
-			cid = cid.substring(0, cid.length() - 1);
+		if (cidLocal.startsWith("<"))
+			cidLocal = cidLocal.substring(1);
+		
+		if (cidLocal.toLowerCase().startsWith("cid:"))
+			cidLocal = cidLocal.substring(4);
+		
+		if (cidLocal.endsWith(">"))
+			cidLocal = cidLocal.substring(0, cidLocal.length() - 1);
 
 		String s = getContentID(bp);
 		if (s == null)
 			return false;
 
-		return cid.equalsIgnoreCase(s);
+		return cidLocal.equalsIgnoreCase(s);
 	}
 
 	/**
@@ -669,14 +673,17 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static boolean isJDFMimeType(String mimeType)
 	{
-		if (mimeType == null)
+		String mimeTypeLocal = mimeType;
+		
+		if (mimeTypeLocal == null)
 			return false;
-		int posSemicolon = mimeType.indexOf(";");
+		
+		int posSemicolon = mimeTypeLocal.indexOf(";");
 		if (posSemicolon > 0)
-			mimeType = mimeType.substring(0, posSemicolon);
+			mimeTypeLocal = mimeTypeLocal.substring(0, posSemicolon);
 
-		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType)
-				|| JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType);
+		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeTypeLocal) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeTypeLocal)
+				|| JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeTypeLocal);
 	}
 
 	// public static MimeMessage parseMime(InputStream mimeStream) {
@@ -877,16 +884,21 @@ public class MimeUtil extends UrlUtil
 
 	private static String urlToCid(String urlString)
 	{
-		if (urlString == null)
+		String urlStringLocal = urlString;
+		
+		if (urlStringLocal == null)
 			return null;
-		if (urlString.startsWith("<"))
-			urlString = urlString.substring(1);
-		if (urlString.toLowerCase().startsWith("cid:"))
-			urlString = urlString.substring(4);
-		if (urlString.endsWith(">"))
-			urlString = urlString.substring(0, urlString.length() - 1);
+		
+		if (urlStringLocal.startsWith("<"))
+			urlStringLocal = urlStringLocal.substring(1);
+		
+		if (urlStringLocal.toLowerCase().startsWith("cid:"))
+			urlStringLocal = urlStringLocal.substring(4);
+		
+		if (urlStringLocal.endsWith(">"))
+			urlStringLocal = urlStringLocal.substring(0, urlStringLocal.length() - 1);
 
-		return "cid:" + new File(urlString).getName(); // 
+		return "cid:" + new File(urlStringLocal).getName(); // 
 	}
 
 	/**
@@ -927,25 +939,29 @@ public class MimeUtil extends UrlUtil
 
 	public static BodyPart updateXMLMultipart(Multipart multipart, XMLDoc xmlDoc, String cid)
 	{
+		String cidLocal = cid;
+		
 		if (xmlDoc == null)
 			return null;
+		
 		String originalFileName = xmlDoc.getOriginalFileName();
-		if (cid == null)
-			cid = originalFileName;
-		if (cid == null)
+		if (cidLocal == null)
+			cidLocal = originalFileName;
+		
+		if (cidLocal == null)
 		{
 			final KElement root = xmlDoc.getRoot();
-			cid = "CID_"
-					+ ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? ((JDFNode) root).getID() : JDFElement.uniqueID(0));
-
+			cidLocal = "CID_"
+					+ ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) 
+							? ((JDFNode) root).getID() : JDFElement.uniqueID(0));
 		}
 
-		BodyPart messageBodyPart = getCreatePartByCID(multipart, cid);
+		BodyPart messageBodyPart = getCreatePartByCID(multipart, cidLocal);
 		try
 		{
 			setFileName(messageBodyPart, originalFileName);
 			setContent(messageBodyPart, xmlDoc);
-			setContentID(messageBodyPart, cid);
+			setContentID(messageBodyPart, cidLocal);
 		}
 		catch (MessagingException x)
 		{
@@ -1047,15 +1063,17 @@ public class MimeUtil extends UrlUtil
 
 	public static HttpURLConnection writeToURL(Multipart mp, String strUrl, MIMEDetails ms) throws IOException, MessagingException
 	{
+		MIMEDetails msLocal = ms;
+		
 		HttpURLConnection httpURLconnection = null;
 		
-		if (ms == null)
-			ms = new MIMEDetails();
+		if (msLocal == null)
+			msLocal = new MIMEDetails();
 
 		URL url = new URL(strUrl);
 		if ("File".equalsIgnoreCase(url.getProtocol()))
 		{
-			writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath(), ms);
+			writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath(), msLocal);
 		}
 		else
 		// assume http
@@ -1068,13 +1086,13 @@ public class MimeUtil extends UrlUtil
 			contentType = StringUtil.token(contentType, 0, "\n");
 			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
 			httpURLconnection.setDoOutput(true);
-			if (ms.httpDetails != null)
-				ms.httpDetails.applyTo(httpURLconnection);
+			if (msLocal.httpDetails != null)
+				msLocal.httpDetails.applyTo(httpURLconnection);
 			
 			try
 			{
 				final OutputStream out = httpURLconnection.getOutputStream();
-				writeToStream(mp, out, ms);
+				writeToStream(mp, out, msLocal);
 			}
 			catch (ConnectException x)
 			{
@@ -1219,16 +1237,20 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static void writeToStream(Multipart m, OutputStream outStream, MIMEDetails md) throws IOException, MessagingException
 	{
+		OutputStream outStreamLocal = outStream;
+		
 		MimeMessage mm = new MimeMessage((Session) null);
 		mm.setContent(m);
 		// buffers are good - the encoders decoders otherwise hit stream
 		// read/write once per byte...
-		if (!(outStream instanceof BufferedOutputStream))
-			outStream = new BufferedOutputStream(outStream);
+		if (!(outStreamLocal instanceof BufferedOutputStream))
+			outStreamLocal = new BufferedOutputStream(outStreamLocal);
+		
 		if (md != null && md.modifyBoundarySemicolon)
 		{
-			outStream = new FixSemiColonStream(outStream);
+			outStreamLocal = new FixSemiColonStream(outStreamLocal);
 		}
+		
 		if (md != null && md.transferEncoding != null)
 		{
 			BodyPart bp[] = getBodyParts(m);
@@ -1238,10 +1260,10 @@ public class MimeUtil extends UrlUtil
 				bp[i].setHeader(UrlUtil.CONTENT_TRANSFER_ENCODING, md.transferEncoding);
 			}
 		}
-		mm.writeTo(outStream);
-		outStream.flush();
-		outStream.close();
-
+		
+		mm.writeTo(outStreamLocal);
+		outStreamLocal.flush();
+		outStreamLocal.close();
 	}
 
 	/**

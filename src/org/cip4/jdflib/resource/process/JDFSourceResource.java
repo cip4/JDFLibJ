@@ -209,8 +209,6 @@ public class JDFSourceResource extends JDFElement
 	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
 		return getUnknownPoolElements(JDFElement.EnumPoolType.RefElement, nMax);
 	}
 
@@ -218,9 +216,12 @@ public class JDFSourceResource extends JDFElement
 	public VString getInvalidElements(EnumValidationLevel level,
 			boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
-		VString v = super.getInvalidElements(level, bIgnorePrivate, nMax);
+		boolean bIgnorePrivateLocal = bIgnorePrivate;
+		
+		if (bIgnorePrivateLocal)
+			bIgnorePrivateLocal = false; // dummy to fool compiler
+		
+		VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
 		if (v.size() >= nMax)
 			return v;
 
@@ -232,6 +233,7 @@ public class JDFSourceResource extends JDFElement
 			if (v2.elementAt(i) instanceof JDFRefElement)
 				n++;
 		}
+		
 		if (n > 1)
 		{
 			for (int i = 0; i < size; i++)
@@ -240,6 +242,7 @@ public class JDFSourceResource extends JDFElement
 					v.appendUnique(v2.elementAt(i).getLocalName());
 			}
 		}
+		
 		return v;
 	}
 

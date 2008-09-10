@@ -1214,18 +1214,20 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	@Override
 	public boolean isValid(EnumValidationLevel level)
 	{
-		if (level == null)
-			level = EnumValidationLevel.Complete;
+		EnumValidationLevel levelLocal = level;
+		
+		if (levelLocal == null)
+			levelLocal = EnumValidationLevel.Complete;
 
-		boolean b = super.isValid(level);
+		boolean b = super.isValid(levelLocal);
 		if (!b)
 			return false;
 
 		if (this instanceof JDFPartAmount)
 			return true;
 
-		if ((level != EnumValidationLevel.Complete) && (level != EnumValidationLevel.Incomplete)
-				&& (level != EnumValidationLevel.RecursiveIncomplete))
+		if ((levelLocal != EnumValidationLevel.Complete) && (levelLocal != EnumValidationLevel.Incomplete)
+				&& (levelLocal != EnumValidationLevel.RecursiveIncomplete))
 			return true;
 
 		if (!validResourcePosition())
@@ -1233,13 +1235,13 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 
 		final VElement vRes = getTargetVector(0);
 		if ((vRes == null || vRes.isEmpty())
-				&& ((level == EnumValidationLevel.Complete) || (level == EnumValidationLevel.RecursiveComplete)))
+				&& ((levelLocal == EnumValidationLevel.Complete) || (levelLocal == EnumValidationLevel.RecursiveComplete)))
 		{
 			// if any partition points to nirvana and we are validating
 			// complete, the entire resource is invalid
 			return false;
 		}
-		if (level.equals(EnumValidationLevel.Complete))
+		if (levelLocal.equals(EnumValidationLevel.Complete))
 			return true;
 
 		for (int iRes = 0; iRes < vRes.size(); iRes++)
@@ -1252,9 +1254,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			if (!getNodeName().equals(r.getLinkString()))
 				return false;
 
-			if (level.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
+			if (levelLocal.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
 			{
-				final EnumValidationLevel valDown = (level == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
+				final EnumValidationLevel valDown = (levelLocal == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
 
 				if (!r.isValid(valDown))
 					return false;
@@ -1824,9 +1826,12 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 */
 	public void setCombinedProcessIndex(JDFIntegerList value)
 	{
-		if (value != null && value.size() == 0)
-			value = null;
-		setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
+		JDFIntegerList valueLocal = value;
+		
+		if (valueLocal != null && valueLocal.size() == 0)
+			valueLocal = null;
+		
+		setAttribute(AttributeName.COMBINEDPROCESSINDEX, valueLocal, null);
 	}
 
 	/**
@@ -2195,11 +2200,14 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 */
 	public void setDuration(JDFDuration value)
 	{
-		if (value == null)
+		JDFDuration valueLocal = value;
+		
+		if (valueLocal == null)
 		{
-			value = new JDFDuration();
+			valueLocal = new JDFDuration();
 		}
-		setAttribute(AttributeName.DURATION, value.getDurationISO());
+		
+		setAttribute(AttributeName.DURATION, valueLocal.getDurationISO());
 	}
 
 	/**
@@ -2247,11 +2255,13 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 */
 	public void setStart(JDFDate value)
 	{
-		if (value == null)
+		JDFDate valueLocal = value;
+		
+		if (valueLocal == null)
 		{
-			value = new JDFDate();
+			valueLocal = new JDFDate();
 		}
-		setAttribute(AttributeName.START, value.getDateTimeISO());
+		setAttribute(AttributeName.START, valueLocal.getDateTimeISO());
 	}
 
 	/**
@@ -2279,11 +2289,13 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 */
 	public void setStartOffset(JDFDuration value)
 	{
-		if (value == null)
+		JDFDuration valueLocal = value;
+		
+		if (valueLocal == null)
 		{
-			value = new JDFDuration();
+			valueLocal = new JDFDuration();
 		}
-		setAttribute(AttributeName.STARTOFFSET, value.getDurationISO());
+		setAttribute(AttributeName.STARTOFFSET, valueLocal.getDurationISO());
 	}
 
 	/**

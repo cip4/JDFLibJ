@@ -98,6 +98,7 @@ public class JDFTestRef extends JDFTerm
 				AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -145,6 +146,7 @@ public class JDFTestRef extends JDFTerm
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return " JDFTestRef[  --> " + super.toString() + " ]";
@@ -175,16 +177,22 @@ public class JDFTestRef extends JDFTerm
 
 	// ///////////////////////////////////////////////////////////
 
+	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
-		if (reportRoot != null)
-			reportRoot = reportRoot.appendElement("TestRef");
+		KElement reportRootLocal = reportRoot;
+		
+		if (reportRootLocal != null)
+			reportRootLocal = reportRootLocal.appendElement("TestRef");
+		
 		final JDFTest testElm = getTest();
-		return testElm.fitsJDF(jdf, reportRoot);
+		
+		return testElm.fitsJDF(jdf, reportRootLocal);
 	}
 
 	// ///////////////////////////////////////////////////////////
 
+	@Override
 	public boolean fitsContext(KElement jdf)
 	{
 		final JDFTest testElm = getTest();
@@ -205,6 +213,7 @@ public class JDFTestRef extends JDFTerm
 	 *            key-value pair attribute map
 	 * @return boolean - true, if boolean “not” expression evaluates to “true”
 	 */
+	@Override
 	public boolean fitsMap(JDFAttributeMap m)
 	{
 		final JDFTest testElm = getTest();

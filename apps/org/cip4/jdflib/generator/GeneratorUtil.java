@@ -620,29 +620,30 @@ public class GeneratorUtil
      */
     public static SchemaComplexType unifyComplexTypNames (SchemaComplexType nComplexType, String strType)
     {
-        boolean isMessage   = "Message".equals (strType);
-        boolean isNode      = "Node".equals (strType);
+    	SchemaComplexType nComplexTypeLocal = nComplexType;
+        boolean isMessage   				= "Message".equals (strType);
+        boolean isNode      				= "Node".equals (strType);
 
-        if (nComplexType.m_kElem.getAttribute ("name", "", "").length () != 0)
+        if (nComplexTypeLocal.m_kElem.getAttribute ("name", "", "").length () != 0)
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_kElem.getAttribute ("name", "", "");
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_kElem.getAttribute ("name", "", "");
         }
         else
         {
             // looks like an inlined element (refer to example at beginning of file)
-            nComplexType = new SchemaComplexType (nComplexType.m_kElem.getParentNode_KElement ());
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_kElem.getAttribute ("name", "", "");
-            nComplexType.isElementOnly = true;
+            nComplexTypeLocal = new SchemaComplexType (nComplexTypeLocal.m_kElem.getParentNode_KElement ());
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_kElem.getAttribute ("name", "", "");
+            nComplexTypeLocal.isElementOnly = true;
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("__"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("__"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 2);
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 2);
         }
 
         // NODE: the '_' and '__' NEED this to follow THIS (first '__' then '_' sequence!!
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_"))
         {
             if (isNode)
             {
@@ -650,253 +651,253 @@ public class GeneratorUtil
             }
             else
             {
-                nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                        nComplexType.m_SchemaComplexTypeName.length () - 1);
-                nComplexType.isResource = true;
+                nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                        nComplexTypeLocal.m_SchemaComplexTypeName.length () - 1);
+                nComplexTypeLocal.isResource = true;
             }
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.startsWith ("IDPrintingParams_")
-                && !"IDPrintingParams_r".equals (nComplexType.m_SchemaComplexTypeName))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("IDPrintingParams_")
+                && !"IDPrintingParams_r".equals (nComplexTypeLocal.m_SchemaComplexTypeName))
         {
-            if (!nComplexType.m_SchemaComplexTypeName.endsWith ("Params_ru"))
+            if (!nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("Params_ru"))
             {
-                nComplexType.m_SchemaComplexTypeName = "IDP"
-                        + nComplexType.m_SchemaComplexTypeName.substring (17, nComplexType.m_SchemaComplexTypeName
+                nComplexTypeLocal.m_SchemaComplexTypeName = "IDP"
+                        + nComplexTypeLocal.m_SchemaComplexTypeName.substring (17, nComplexTypeLocal.m_SchemaComplexTypeName
                                 .length ());
             }
         }
 
         // there are a couple of Device Caps in the Schema. All starting with DeviceCap_
         // all expect one need to cut away this start extension (refer to schema, search for DeviceCap_)
-        if (nComplexType.m_SchemaComplexTypeName.startsWith ("DeviceCap_"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("DeviceCap_"))
         {
-            if (!"DeviceCap_re".equals (nComplexType.m_SchemaComplexTypeName))
+            if (!"DeviceCap_re".equals (nComplexTypeLocal.m_SchemaComplexTypeName))
             {
-                nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (10,
-                        nComplexType.m_SchemaComplexTypeName.length ());
+                nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (10,
+                        nComplexTypeLocal.m_SchemaComplexTypeName.length ());
             }
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.startsWith ("Delivery_Params"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("Delivery_Params"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (15,
-                    nComplexType.m_SchemaComplexTypeName.length ());
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (15,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length ());
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_r"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_r"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 2);
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 2);
 
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_ru"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_ru"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 3);
-            nComplexType.isPartitionalResource = true;
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 3);
+            nComplexTypeLocal.isPartitionalResource = true;
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("ResLinkPool_"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("ResLinkPool_"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 12);
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 12);
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_rue"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_rue"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 4);
-            nComplexType.isPartitionalResource = true;
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 4);
+            nComplexTypeLocal.isPartitionalResource = true;
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_rp"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_rp"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 3);
-            nComplexType.isPartitionalResource = true;
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 3);
+            nComplexTypeLocal.isPartitionalResource = true;
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_l"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_l"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 2);
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 2);
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_re"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_re"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 3);
-            nComplexType.isResourceElement = true;
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 3);
+            nComplexTypeLocal.isResourceElement = true;
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_lu"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_lu"))
         {
-            nComplexType.m_SchemaComplexTypeName = "";
+            nComplexTypeLocal.m_SchemaComplexTypeName = "";
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_lr"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_lr"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 3);
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 3);
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_m"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_m"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 2);
-            if ("TriggerElement".equals (nComplexType.m_SchemaComplexTypeName) ||
-                "SubscriptionElement".equals (nComplexType.m_SchemaComplexTypeName))
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 2);
+            if ("TriggerElement".equals (nComplexTypeLocal.m_SchemaComplexTypeName) ||
+                "SubscriptionElement".equals (nComplexTypeLocal.m_SchemaComplexTypeName))
             {
                 // cut off Element
-                nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.
-                    substring (0, nComplexType.m_SchemaComplexTypeName.length () - 7);
+                nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.
+                    substring (0, nComplexTypeLocal.m_SchemaComplexTypeName.length () - 7);
             }
-            nComplexType.hasMessage = true;
+            nComplexTypeLocal.hasMessage = true;
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_u"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_u"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 2);
-            int iIndexOf = nComplexType.m_SchemaComplexTypeName.indexOf ("_");
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (iIndexOf + 1,
-                    nComplexType.m_SchemaComplexTypeName.length ());
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 2);
+            int iIndexOf = nComplexTypeLocal.m_SchemaComplexTypeName.indexOf ("_");
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (iIndexOf + 1,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length ());
         }
 
         // the extension is cutt off not its time to write this name as a paramater into the
         // complex type. This is needed to find its parent and the version information
-        nComplexType.strVersionInfoPath = nComplexType.m_SchemaComplexTypeName;
+        nComplexTypeLocal.strVersionInfoPath = nComplexTypeLocal.m_SchemaComplexTypeName;
 
-        if (nComplexType.m_SchemaComplexTypeName.startsWith ("BindingIntent"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("BindingIntent"))
         {
-            if (!nComplexType.m_SchemaComplexTypeName.endsWith ("BindingIntent"))
+            if (!nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("BindingIntent"))
             {
-                nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (13,
-                        nComplexType.m_SchemaComplexTypeName.length ());
+                nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (13,
+                        nComplexTypeLocal.m_SchemaComplexTypeName.length ());
             }
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("_Type"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("_Type"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 5);
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 5);
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("Element_m"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("Element_m"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 9);
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 9);
         }
 
-        if (nComplexType.m_SchemaComplexTypeName.endsWith ("Ack"))
+        if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("Ack"))
         {
-            nComplexType.m_SchemaComplexTypeName = "A"
-                    + nComplexType.m_SchemaComplexTypeName.substring (0, nComplexType.m_SchemaComplexTypeName
+            nComplexTypeLocal.m_SchemaComplexTypeName = "A"
+                    + nComplexTypeLocal.m_SchemaComplexTypeName.substring (0, nComplexTypeLocal.m_SchemaComplexTypeName
                             .length () - 3);
-            nComplexType.isAcknowledge = true;
+            nComplexTypeLocal.isAcknowledge = true;
         }
 
-        if ((nComplexType.m_SchemaComplexTypeName.endsWith ("Audit"))
-                && (!nComplexType.m_SchemaComplexTypeName.endsWith ("ResourceAudit")))
+        if ((nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("Audit"))
+                && (!nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("ResourceAudit")))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (0,
-                    nComplexType.m_SchemaComplexTypeName.length () - 5);
-            nComplexType.isAudit = true;
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length () - 5);
+            nComplexTypeLocal.isAudit = true;
         }
-        else if (nComplexType.m_SchemaComplexTypeName.endsWith ("Command") && isMessage)
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("Command") && isMessage)
         {
-            nComplexType.m_SchemaComplexTypeName = "C"
-                    + nComplexType.m_SchemaComplexTypeName.substring (0, nComplexType.m_SchemaComplexTypeName
+            nComplexTypeLocal.m_SchemaComplexTypeName = "C"
+                    + nComplexTypeLocal.m_SchemaComplexTypeName.substring (0, nComplexTypeLocal.m_SchemaComplexTypeName
                             .length () - 7);
 
-            nComplexType.isCommand = true;
+            nComplexTypeLocal.isCommand = true;
         }
-        else if (nComplexType.m_SchemaComplexTypeName.endsWith ("Response") && isMessage)
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("Response") && isMessage)
         {
-            nComplexType.m_SchemaComplexTypeName = "R"
-                    + nComplexType.m_SchemaComplexTypeName.substring (0, nComplexType.m_SchemaComplexTypeName
+            nComplexTypeLocal.m_SchemaComplexTypeName = "R"
+                    + nComplexTypeLocal.m_SchemaComplexTypeName.substring (0, nComplexTypeLocal.m_SchemaComplexTypeName
                             .length () - 8);
-            nComplexType.isResponse = true;
+            nComplexTypeLocal.isResponse = true;
         }
-        else if (nComplexType.m_SchemaComplexTypeName.endsWith ("Signal") && isMessage)
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("Signal") && isMessage)
         {
-            nComplexType.m_SchemaComplexTypeName = "S"
-                    + nComplexType.m_SchemaComplexTypeName.substring (0, nComplexType.m_SchemaComplexTypeName
+            nComplexTypeLocal.m_SchemaComplexTypeName = "S"
+                    + nComplexTypeLocal.m_SchemaComplexTypeName.substring (0, nComplexTypeLocal.m_SchemaComplexTypeName
                             .length () - 6);
-            nComplexType.isSignal = true;
+            nComplexTypeLocal.isSignal = true;
         }
-        else if (nComplexType.m_SchemaComplexTypeName.endsWith ("Query") && isMessage)
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.endsWith ("Query") && isMessage)
         {
-            nComplexType.m_SchemaComplexTypeName = "Q"
-                    + nComplexType.m_SchemaComplexTypeName.substring (0, nComplexType.m_SchemaComplexTypeName
+            nComplexTypeLocal.m_SchemaComplexTypeName = "Q"
+                    + nComplexTypeLocal.m_SchemaComplexTypeName.substring (0, nComplexTypeLocal.m_SchemaComplexTypeName
                             .length () - 5);
-            nComplexType.isQuery = true;
+            nComplexTypeLocal.isQuery = true;
         }
-        else if (nComplexType.m_SchemaComplexTypeName.startsWith ("Generic"))
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("Generic"))
         {
-            nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (7,
-                    nComplexType.m_SchemaComplexTypeName.length ());
+            nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (7,
+                    nComplexTypeLocal.m_SchemaComplexTypeName.length ());
         }
-        else if (nComplexType.m_SchemaComplexTypeName.startsWith ("AuditElement"))
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("AuditElement"))
         {
-            nComplexType.m_SchemaComplexTypeName = "Audit";
-        }
-
-        else if (nComplexType.m_SchemaComplexTypeName.startsWith ("AcknowledgeBaseType"))
-        {
-            nComplexType.m_SchemaComplexTypeName = "Acknowledge";
+            nComplexTypeLocal.m_SchemaComplexTypeName = "Audit";
         }
 
-        else if (nComplexType.m_SchemaComplexTypeName.startsWith ("JMFRootMessage"))
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("AcknowledgeBaseType"))
         {
-            nComplexType.m_SchemaComplexTypeName = "JMF";
+            nComplexTypeLocal.m_SchemaComplexTypeName = "Acknowledge";
         }
 
-        else if (nComplexType.m_SchemaComplexTypeName.startsWith ("ColorantControl_CO_CP_DCO"))
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("JMFRootMessage"))
         {
-            nComplexType.m_SchemaComplexTypeName = "SeparationList";
+            nComplexTypeLocal.m_SchemaComplexTypeName = "JMF";
+        }
+
+        else if (nComplexTypeLocal.m_SchemaComplexTypeName.startsWith ("ColorantControl_CO_CP_DCO"))
+        {
+            nComplexTypeLocal.m_SchemaComplexTypeName = "SeparationList";
         }
 
         // some messages are defined in the core part, these need to be changed here!!
-        if ("Signal".equals (nComplexType.m_SchemaComplexTypeName)
-                || "Acknowledge".equals (nComplexType.m_SchemaComplexTypeName)
-                || "Query".equals (nComplexType.m_SchemaComplexTypeName)
-                || "Registration".equals (nComplexType.m_SchemaComplexTypeName)
-                || "Response".equals (nComplexType.m_SchemaComplexTypeName))
+        if ("Signal".equals (nComplexTypeLocal.m_SchemaComplexTypeName)
+                || "Acknowledge".equals (nComplexTypeLocal.m_SchemaComplexTypeName)
+                || "Query".equals (nComplexTypeLocal.m_SchemaComplexTypeName)
+                || "Registration".equals (nComplexTypeLocal.m_SchemaComplexTypeName)
+                || "Response".equals (nComplexTypeLocal.m_SchemaComplexTypeName))
         {
-            nComplexType.isResource = false;
-            nComplexType.isMessage = true;
+            nComplexTypeLocal.isResource = false;
+            nComplexTypeLocal.isMessage = true;
         }
 
-        if (!nComplexType.isNode)
+        if (!nComplexTypeLocal.isNode)
         {
             int iIndexOf = 0;
             while (iIndexOf != -1)
             {
-                iIndexOf = nComplexType.m_SchemaComplexTypeName.indexOf ("_");
+                iIndexOf = nComplexTypeLocal.m_SchemaComplexTypeName.indexOf ("_");
                 if (iIndexOf != -1)
                 {
-                    nComplexType.setStrMotherOfComplexType (nComplexType.m_SchemaComplexTypeName.substring (0,
+                    nComplexTypeLocal.setStrMotherOfComplexType (nComplexTypeLocal.m_SchemaComplexTypeName.substring (0,
                             iIndexOf));
                 }
                 else
                 {
-                    nComplexType.setStrMotherOfComplexType (nComplexType.m_SchemaComplexTypeName);
+                    nComplexTypeLocal.setStrMotherOfComplexType (nComplexTypeLocal.m_SchemaComplexTypeName);
                 }
 
-                nComplexType.m_SchemaComplexTypeName = nComplexType.m_SchemaComplexTypeName.substring (iIndexOf + 1,
-                        nComplexType.m_SchemaComplexTypeName.length ());
+                nComplexTypeLocal.m_SchemaComplexTypeName = nComplexTypeLocal.m_SchemaComplexTypeName.substring (iIndexOf + 1,
+                        nComplexTypeLocal.m_SchemaComplexTypeName.length ());
             }
         }
 
-        if ("Shape".equals (nComplexType.m_SchemaComplexTypeName))
+        if ("Shape".equals (nComplexTypeLocal.m_SchemaComplexTypeName))
         {
-            nComplexType.m_SchemaComplexTypeName = "ShapeElement";
+            nComplexTypeLocal.m_SchemaComplexTypeName = "ShapeElement";
         }
 
-        return nComplexType;
+        return nComplexTypeLocal;
     } // unifyComplexTypNames
 
     /**
@@ -912,9 +913,10 @@ public class GeneratorUtil
      */
     private static VElement groups2Attributes (VElement vAttributesGroup)
     {
+    	VElement vAttributesGroupLocal = vAttributesGroup;
         VElement v = new VElement();
 
-        Iterator attributesGroupIter = vAttributesGroup.iterator();
+        Iterator attributesGroupIter = vAttributesGroupLocal.iterator();
         while (attributesGroupIter.hasNext())
         {
             final KElement attributesGroup = (KElement) attributesGroupIter.next();
@@ -931,10 +933,10 @@ public class GeneratorUtil
                         getChildrenByTagName("xs:attribute", "", new JDFAttributeMap(), true, true, 0);
                     v.addAll(vAttributes);
 
-                    vAttributesGroup = nKElement.
+                    vAttributesGroupLocal = nKElement.
                         getChildrenByTagName("xs:attributeGroup", "", new JDFAttributeMap(), true, true, 0);
 
-                    v.addAll(groups2Attributes(vAttributesGroup));
+                    v.addAll(groups2Attributes(vAttributesGroupLocal));
                 }
             }
         }
@@ -954,9 +956,10 @@ public class GeneratorUtil
      */
     private static VElement groups2Elements (VElement vElementsGroup)
     {
+    	VElement vElementsGroupLocal = vElementsGroup;
         VElement v = new VElement();
 
-        Iterator elementsGroupIter = vElementsGroup.iterator();
+        Iterator elementsGroupIter = vElementsGroupLocal.iterator();
         while (elementsGroupIter.hasNext())
         {
             final KElement elementsGroup = (KElement) elementsGroupIter.next();
@@ -975,10 +978,10 @@ public class GeneratorUtil
                         getChildrenByTagName("xs:element", "", new JDFAttributeMap(), true, true, 0);
                     v.addAll(vElements);
 
-                    vElementsGroup = nKElement.
+                    vElementsGroupLocal = nKElement.
                         getChildrenByTagName("xs:group", "", new JDFAttributeMap(), true, true, 0);
 
-                    v.addAll(groups2Elements(vElementsGroup));
+                    v.addAll(groups2Elements(vElementsGroupLocal));
                 }
             }
         }
@@ -1056,14 +1059,16 @@ public class GeneratorUtil
 
     private static KElement getEnumSimpleType (SchemaAttribute sa, String strType, Vector nSimpleTypes)
     {
-        if (strType.startsWith("jdftyp:"))
+    	String strTypeLocal = strType;
+    	
+        if (strTypeLocal.startsWith("jdftyp:"))
         {
-            strType = strType.substring("jdftyp:".length());
+            strTypeLocal = strTypeLocal.substring("jdftyp:".length());
         }
 
-        if (strType.startsWith("jdf:"))
+        if (strTypeLocal.startsWith("jdf:"))
         {
-            strType = strType.substring("jdf:".length());
+            strTypeLocal = strTypeLocal.substring("jdf:".length());
         }
 
         KElement nChild = null;
@@ -1075,8 +1080,8 @@ public class GeneratorUtil
         {
             KElement nKElement = (KElement) nSimpleTypes.elementAt(i);
 
-            if ((strType + "_").equals(nKElement.getAttribute("name", "", ""))
-                    || nKElement.getAttribute("name", "", "").equals(strType))
+            if ((strTypeLocal + "_").equals(nKElement.getAttribute("name", "", ""))
+                    || nKElement.getAttribute("name", "", "").equals(strTypeLocal))
             // found it!
             {
                 nChild = (KElement) nSimpleTypes.elementAt(i);
@@ -1351,13 +1356,14 @@ public class GeneratorUtil
             String[] parents, VElement vAppInfoElements,
             SchemaComplexType complexType)
     {
-        if (complexType.isNode)
+        SchemaComplexType complexTypeLocal = complexType;
+		if (complexTypeLocal.isNode)
         {
-            complexType = getNodeUsageString (complexType, parents, vAppInfoElements);
-            complexType = getNodeLinkNames (complexType);
+			complexTypeLocal = getNodeUsageString (complexTypeLocal, parents, vAppInfoElements);
+			complexTypeLocal = getNodeLinkNames (complexTypeLocal);
         }
 
-        return complexType;
+        return complexTypeLocal;
     }
 
     private static SchemaComplexType getNodeLinkNames (SchemaComplexType nSchemaComplexType)
@@ -1488,246 +1494,248 @@ public class GeneratorUtil
     {   // note!!! The Return type will be overwritten if the Attribute is an Enum
         // refer to StringHandling classes.
 
-        if (strType.startsWith("jdftyp:"))
+    	String strTypeLocal = strType;
+    	
+        if (strTypeLocal.startsWith("jdftyp:"))
         {
-            strType = strType.substring(7, strType.length());
+            strTypeLocal = strTypeLocal.substring(7, strTypeLocal.length());
         }
-        else if (strType.startsWith("jdf:"))
+        else if (strTypeLocal.startsWith("jdf:"))
         {
-            strType = strType.substring(4, strType.length());
-        }
-
-        if (strType.endsWith("_r"))
-        {
-            strType = strType.substring(0, strType.length() - 2);
-        }
-        else if (strType.endsWith("_"))
-        {
-            strType = strType.substring(0, strType.length() - 1);
-        }
-        else if (strType.endsWith("_re"))
-        {
-            strType = strType.substring(0, strType.length() - 3);
-        }
-        else if (strType.endsWith("_ru"))
-        {
-            strType = strType.substring(0, strType.length() - 3);
-        }
-        else if (strType.endsWith("_rue"))
-        {
-            strType = strType.substring(0, strType.length() - 4);
-        }
-        else if (strType.endsWith("_lu"))
-        {
-            strType = strType.substring(0, strType.length() - 3);
-        }
-        else if (strType.endsWith("_lr"))
-        {
-            strType = strType.substring(0, strType.length() - 3);
-        }
-        else if (strType.endsWith("_rp"))
-        {
-            strType = strType.substring(0, strType.length() - 3);
-        }
-        else if (strType.endsWith("_m"))
-        {
-            strType = strType.substring(0, strType.length() - 2);
-        }
-        else if (strType.endsWith("_me"))
-        {
-            strType = strType.substring(0, strType.length() - 3);
+            strTypeLocal = strTypeLocal.substring(4, strTypeLocal.length());
         }
 
-        int iFirst = strType.indexOf("_");
+        if (strTypeLocal.endsWith("_r"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 2);
+        }
+        else if (strTypeLocal.endsWith("_"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 1);
+        }
+        else if (strTypeLocal.endsWith("_re"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 3);
+        }
+        else if (strTypeLocal.endsWith("_ru"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 3);
+        }
+        else if (strTypeLocal.endsWith("_rue"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 4);
+        }
+        else if (strTypeLocal.endsWith("_lu"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 3);
+        }
+        else if (strTypeLocal.endsWith("_lr"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 3);
+        }
+        else if (strTypeLocal.endsWith("_rp"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 3);
+        }
+        else if (strTypeLocal.endsWith("_m"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 2);
+        }
+        else if (strTypeLocal.endsWith("_me"))
+        {
+            strTypeLocal = strTypeLocal.substring(0, strTypeLocal.length() - 3);
+        }
+
+        int iFirst = strTypeLocal.indexOf("_");
         if (iFirst != -1)
         {
-            strType = strType.substring(iFirst + 1, strType.length());
+            strTypeLocal = strTypeLocal.substring(iFirst + 1, strTypeLocal.length());
         }
 
 
 
         String strReturnType = isJava ? "String" : "KString";
 
-        if (       strType.equals("string")
-                || strType.equals("regExp")
-                || strType.equals("XPath")
-                || strType.equals("hexBinary")
-                || strType.equals("PDFPath")
-                || strType.equals("gYearMonth")
-                || strType.equals("longString")
-                || strType.equals("shortString")
-                || strType.equals("JDFJMFVersions")
-                || strType.equals("LanguagesOrAll")
-                || strType.equals("MatrixShift")
-                || strType.equals("NMTOKEN")
-                || strType.equals("language")
-                || strType.equals("URI")
-                || strType.equals("URL")
-                || strType.equals("ID")
-                || strType.equals("IDREF")
-                || strType.endsWith("Classes")
+        if (       strTypeLocal.equals("string")
+                || strTypeLocal.equals("regExp")
+                || strTypeLocal.equals("XPath")
+                || strTypeLocal.equals("hexBinary")
+                || strTypeLocal.equals("PDFPath")
+                || strTypeLocal.equals("gYearMonth")
+                || strTypeLocal.equals("longString")
+                || strTypeLocal.equals("shortString")
+                || strTypeLocal.equals("JDFJMFVersions")
+                || strTypeLocal.equals("LanguagesOrAll")
+                || strTypeLocal.equals("MatrixShift")
+                || strTypeLocal.equals("NMTOKEN")
+                || strTypeLocal.equals("language")
+                || strTypeLocal.equals("URI")
+                || strTypeLocal.equals("URL")
+                || strTypeLocal.equals("ID")
+                || strTypeLocal.equals("IDREF")
+                || strTypeLocal.endsWith("Classes")
             )
         {
             strReturnType = isJava ? "String" : "KString";
         }
-        else if ("LongInteger".equals(strType))
+        else if ("LongInteger".equals(strTypeLocal))
         {
             strReturnType = isJava ? "String" : "KString";
         }
-        else if ("booleanList".equals(strType))
+        else if ("booleanList".equals(strTypeLocal))
         {
             strReturnType = isJava ? "String" : "KString";      // while there is no JDFBooleanList use String
         }
-        else if ("boolean".equals(strType))
+        else if ("boolean".equals(strTypeLocal))
         {
             strReturnType = isJava ? "boolean" : "bool";
         }
-        else if ("NMTOKENS".equals(strType)
-                || "languages".equals(strType)
-                || "IDREFS".equals(strType))
+        else if ("NMTOKENS".equals(strTypeLocal)
+                || "languages".equals(strTypeLocal)
+                || "IDREFS".equals(strTypeLocal))
         {
             strReturnType = isJava ? "VString" : "vKString";
         }
-        else if ("Integer".equals(strType) || "Integer0To100".equals(strType))
+        else if ("Integer".equals(strTypeLocal) || "Integer0To100".equals(strTypeLocal))
         {
             strReturnType = "int";
         }
-        else if ("double".equals(strType))
+        else if ("double".equals(strTypeLocal))
         {
             strReturnType = "double";
         }
-        else if ("telem".equals(strType))
+        else if ("telem".equals(strTypeLocal))
         {
             strReturnType = "JDFElement";
         }
-        else if ("DoubleList".equals(strType))
+        else if ("DoubleList".equals(strTypeLocal))
         {
             strReturnType = "JDFNumberList";
         }
-        else if ("DoubleRange".equals(strType))
+        else if ("DoubleRange".equals(strTypeLocal))
         {
             strReturnType = "JDFNumberRange";
         }
-        else if ("DoubleRangeList".equals(strType))
+        else if ("DoubleRangeList".equals(strTypeLocal))
         {
             strReturnType = "JDFNumberRangeList";
         }
-        else if ("CO_CP_DCO".equals(strType))
+        else if ("CO_CP_DCO".equals(strTypeLocal))
         {
             strReturnType = "JDFSeparationList";
         }
-        else if ("ColorsUsed".equals(strType))
+        else if ("ColorsUsed".equals(strTypeLocal))
         {
             strReturnType = "JDFSeparationList";
         }
-        else if ("matrix".equals(strType))
+        else if ("matrix".equals(strTypeLocal))
         {
             strReturnType = "JDFMatrix";
         }
-        else if ("rectangle".equals(strType))
+        else if ("rectangle".equals(strTypeLocal))
         {
             strReturnType = "JDFRectangle";
         }
-        else if ("dateTime".equals(strType))
+        else if ("dateTime".equals(strTypeLocal))
         {
             strReturnType = "JDFDate";
         }
-        else if ("duration".equals(strType))
+        else if ("duration".equals(strTypeLocal))
         {
             strReturnType = "JDFDuration";
         }
-        else if ("sRGBColor".equals(strType))
+        else if ("sRGBColor".equals(strTypeLocal))
         {
             strReturnType = "JDFRGBColor";
         }
-        else if ("NamedColor".equals(strType))
+        else if ("NamedColor".equals(strTypeLocal))
         {
             strReturnType = "EnumNamedColor";
         }
-        else if ("CMYKColor".equals(strType))
+        else if ("CMYKColor".equals(strTypeLocal))
         {
             strReturnType = "JDFCMYKColor";
         }
-        else if ("LabColor".equals(strType))
+        else if ("LabColor".equals(strTypeLocal))
         {
             strReturnType = "JDFLabColor";
         }
-        else if ("shape".equals(strType))
+        else if ("shape".equals(strTypeLocal))
         {
             strReturnType = "JDFShape";
         }
-        else if ("Shape".equals(strType))
+        else if ("Shape".equals(strTypeLocal))
         {
             strReturnType = "JDFShapeElement";
         }
-        else if ("StepRepeat".equals(strType))
+        else if ("StepRepeat".equals(strTypeLocal))
         {
             strReturnType = "JDFIntegerRange";
         }
-        else if ("eEndStatusOfNode".equals(strType))
+        else if ("eEndStatusOfNode".equals(strTypeLocal))
         {
             strReturnType = "EnumNodeStatus";
         }
-        else if (strType.startsWith("p"))
+        else if (strTypeLocal.startsWith("p"))
         {
         	// Part attributes are hard coded here (see JDFTypes.xsd)
-            if ("pSorting".equals(strType)) {
+            if ("pSorting".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pBundleItemIndex".equals(strType)) {
+            } else if ("pBundleItemIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pCellIndex".equals(strType)) {
+            } else if ("pCellIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pDocIndex".equals(strType)) {
+            } else if ("pDocIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pDocCopies".equals(strType)) {
+            } else if ("pDocCopies".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pDocRunIndex".equals(strType)) {
+            } else if ("pDocRunIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pDocSheetIndex".equals(strType)) {
+            } else if ("pDocSheetIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pFountainNumber".equals(strType)) {
+            } else if ("pFountainNumber".equals(strTypeLocal)) {
             	strReturnType = "int";
-            } else if ("pLayerIDs".equals(strType)) {
+            } else if ("pLayerIDs".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pPageNumber".equals(strType)) {
+            } else if ("pPageNumber".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pPreviewType".equals(strType)) {
+            } else if ("pPreviewType".equals(strTypeLocal)) {
             	strReturnType = "EnumPreviewType";
-            } else if ("pRunIndex".equals(strType)) {
+            } else if ("pRunIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pRunPage".equals(strType)) {
+            } else if ("pRunPage".equals(strTypeLocal)) {
             	strReturnType = "int";
-            } else if ("pSectionIndex".equals(strType)) {
+            } else if ("pSectionIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pSetDocIndex".equals(strType)) {
+            } else if ("pSetDocIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pSetRunIndex".equals(strType)) {
+            } else if ("pSetRunIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pSetSheetIndex".equals(strType)) {
+            } else if ("pSetSheetIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pSetIndex".equals(strType)) {
+            } else if ("pSetIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pSheetIndex".equals(strType)) {
+            } else if ("pSheetIndex".equals(strTypeLocal)) {
             	strReturnType = "JDFIntegerRangeList";
-            } else if ("pTileID".equals(strType)) {
+            } else if ("pTileID".equals(strTypeLocal)) {
             	strReturnType = "JDFXYPair";
             } else {
             	strReturnType = isJava ? "String" : "KString";
             }
         }
-        else if ("PreflightCommonPool".equals(strType)
-                || "PreflightValue".equals(strType)
-                || "PreflightCommonConstraintPool".equals(strType)
+        else if ("PreflightCommonPool".equals(strTypeLocal)
+                || "PreflightValue".equals(strTypeLocal)
+                || "PreflightCommonConstraintPool".equals(strTypeLocal)
                 || "PayTerm".equals(strName)
                 )
         {
             strReturnType = "JDFElement";   // pre 1.3, keep it simple
         }
-        else if ("OrientationList".equals(strType))
+        else if ("OrientationList".equals(strTypeLocal))
         {
             strReturnType = isJava ? "String" : "KString"; // pre 1.3, keep it simple
         }
-        else if (strType.startsWith("ePresentationDirection"))
+        else if (strTypeLocal.startsWith("ePresentationDirection"))
         {
             strReturnType = isJava ? "String" : "KString";  // pre 1.3, keep it simple
         }
@@ -1735,8 +1743,8 @@ public class GeneratorUtil
         {
             strReturnType = "JDF" + strName;  // pre 1.3
         }
-        // ------ strType and strName
-        else if ("EnumerationSpan".equals(strType))
+        // ------ strTypeLocal and strName
+        else if ("EnumerationSpan".equals(strTypeLocal))
         {
             // type for spans
             strReturnType = "JDFSpan" + strName;
@@ -1758,14 +1766,14 @@ public class GeneratorUtil
                 strReturnType = "JDFSpanCoatings";
             }
         }
-        else if (JDFConstants.EMPTYSTRING.equals(strType)
-                    || strType.startsWith(strName) || strType.endsWith(strName))
+        else if (JDFConstants.EMPTYSTRING.equals(strTypeLocal)
+                    || strTypeLocal.startsWith(strName) || strTypeLocal.endsWith(strName))
         {
             strReturnType = "JDF" + strName;
         }
         else
         {
-            strReturnType = "JDF" + strType;
+            strReturnType = "JDF" + strTypeLocal;
         }
 
         return strReturnType;

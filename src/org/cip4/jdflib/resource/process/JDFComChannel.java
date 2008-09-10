@@ -126,6 +126,7 @@ public class JDFComChannel extends JDFAutoComChannel
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFComChannel[  --> " + super.toString() + " ]";
@@ -143,19 +144,22 @@ public class JDFComChannel extends JDFAutoComChannel
 	 */
 	public void setEMailLocator(String eMail)
 	{
-		if (eMail != null)
-			eMail = eMail.trim();
+		String eMailLocal = eMail;
+		
+		if (eMailLocal != null)
+			eMailLocal = eMailLocal.trim();
 
-		if (eMail == null
-				|| !StringUtil.matchesIgnoreCase(eMail,
-						JDFConstants.REGEXP_EMAIL))
+		if (eMailLocal == null
+				|| !StringUtil.matchesIgnoreCase(eMailLocal, JDFConstants.REGEXP_EMAIL))
 		{
-			throw new IllegalArgumentException("illegal email address:" + eMail);
+			throw new IllegalArgumentException("illegal email address:" + eMailLocal);
 		}
+		
 		setChannelType(EnumChannelType.Email);
-		if (!eMail.toLowerCase().startsWith(MAILTO))
-			eMail = MAILTO + eMail;
-		setLocator(eMail);
+		if (!eMailLocal.toLowerCase().startsWith(MAILTO))
+			eMailLocal = MAILTO + eMailLocal;
+		
+		setLocator(eMailLocal);
 	}
 
 	/**
@@ -217,23 +221,27 @@ public class JDFComChannel extends JDFAutoComChannel
 	public void setPhoneNumber(String phone, String replaceForBlank,
 			EnumChannelType channelType)
 	{
+		String phoneLocal = phone;
+		
 		if (!EnumChannelType.Fax.equals(channelType)
 				&& !EnumChannelType.Phone.equals(channelType))
-			throw new IllegalArgumentException("illegal channelType: "
-					+ channelType);
-		if (phone != null)
-			phone = phone.trim();
+			throw new IllegalArgumentException("illegal channelType: " + channelType);
+		
+		if (phoneLocal != null)
+			phoneLocal = phoneLocal.trim();
 
-		phone = StringUtil.replaceCharSet(phone, " ", replaceForBlank, 0);
-		if (phone == null
-				|| !StringUtil.matches(phone, JDFConstants.REGEXP_PHONE))
+		phoneLocal = StringUtil.replaceCharSet(phoneLocal, " ", replaceForBlank, 0);
+		if (phoneLocal == null
+				|| !StringUtil.matches(phoneLocal, JDFConstants.REGEXP_PHONE))
 		{
-			throw new IllegalArgumentException("illegal phone number:" + phone);
+			throw new IllegalArgumentException("illegal phone number:" + phoneLocal);
 		}
+		
 		setChannelType(channelType);
-		if (!phone.toLowerCase().startsWith(TEL))
-			phone = TEL + phone;
-		setLocator(phone);
+		if (!phoneLocal.toLowerCase().startsWith(TEL))
+			phoneLocal = TEL + phoneLocal;
+		
+		setLocator(phoneLocal);
 	}
 
 }

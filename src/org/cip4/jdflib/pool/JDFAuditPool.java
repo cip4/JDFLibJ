@@ -440,11 +440,13 @@ public class JDFAuditPool extends JDFPool
 	 */
 	public JDFMerged addMerged(JDFNode merged, VString rRefsOverwritten, String by, VJDFAttributeMap vmParts)
 	{
+		VString rRefsOverwrittenLocal = rRefsOverwritten;
+		
 		final JDFMerged mergedAudit = (JDFMerged) addAudit(JDFAudit.EnumAuditType.Merged, by);
 		mergedAudit.setjRef(merged.getID());
-		if (rRefsOverwritten != null && rRefsOverwritten.isEmpty())
-			rRefsOverwritten = null;
-		mergedAudit.setrRefsOverwritten(rRefsOverwritten);
+		if (rRefsOverwrittenLocal != null && rRefsOverwrittenLocal.isEmpty())
+			rRefsOverwrittenLocal = null;
+		mergedAudit.setrRefsOverwritten(rRefsOverwrittenLocal);
 
 		mergedAudit.setPartMapVector(vmParts);
 		return mergedAudit;
@@ -542,8 +544,10 @@ public class JDFAuditPool extends JDFPool
 	 * 
 	 *         default: getAudits(null, null, null)
 	 */
-	public VElement getAudits(JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes, VJDFAttributeMap vParts)
+	public VElement getAudits(JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes, 
+			VJDFAttributeMap vParts)
 	{
+		VJDFAttributeMap vPartsLocal = vParts;
 		String strAuditType = null;
 		if (typ != null)
 		{
@@ -551,8 +555,8 @@ public class JDFAuditPool extends JDFPool
 		}
 
 		final VElement vElem = getPoolChildrenGeneric(strAuditType, mAttributes, null);
-		if (vParts != null && vParts.size() == 0)
-			vParts = null;
+		if (vPartsLocal != null && vPartsLocal.size() == 0)
+			vPartsLocal = null;
 
 		for (int i = vElem.size() - 1; i >= 0; i--)
 		{ // remove known comments - this would be aught in the next check but
@@ -564,7 +568,7 @@ public class JDFAuditPool extends JDFPool
 			}
 
 			final JDFAudit audit = (JDFAudit) vElem.elementAt(i);
-			if (vParts != null && !vParts.equals(audit.getPartMapVector()))
+			if (vPartsLocal != null && !vPartsLocal.equals(audit.getPartMapVector()))
 			{
 				vElem.removeElementAt(i);
 				continue; // look at next element
@@ -607,17 +611,19 @@ public class JDFAuditPool extends JDFPool
 	 */
 	public JDFAudit getAudit(int index, JDFAudit.EnumAuditType typ, JDFAttributeMap mAttributes, VJDFAttributeMap vParts)
 	{
+		int indexLocal = index;
+		
 		final VElement v = getAudits(typ, mAttributes, vParts);
-		if (index < 0)
+		if (indexLocal < 0)
 		{
-			index = v.size() + index;
+			indexLocal = v.size() + indexLocal;
 		}
-		if (index >= v.size() || index < 0)
+		if (indexLocal >= v.size() || indexLocal < 0)
 		{
 			return null;
 		}
 
-		return (JDFAudit) v.elementAt(index);
+		return (JDFAudit) v.elementAt(indexLocal);
 	}
 
 	/**
@@ -697,8 +703,10 @@ public class JDFAuditPool extends JDFPool
 	 */
 	public JDFPhaseTime setPhase(EnumNodeStatus status, String statusDetails, VJDFAttributeMap vmParts, VElement employees)
 	{
+		String statusDetailsLocal = statusDetails;
+		
 		JDFPhaseTime pt = getLastPhase(vmParts, null);
-		statusDetails = StringUtil.getNonEmpty(statusDetails);
+		statusDetailsLocal = StringUtil.getNonEmpty(statusDetailsLocal);
 		boolean bChanged = false;
 		VElement ptEmployees = pt == null ? new VElement() : pt.getChildElementVector(ElementName.EMPLOYEE, null);
 		if (pt == null)
@@ -706,7 +714,7 @@ public class JDFAuditPool extends JDFPool
 			bChanged = true;
 		}
 		else if (!ContainerUtil.equals(pt.getStatus(), status)
-				|| !ContainerUtil.equals(statusDetails, pt.getAttribute(AttributeName.STATUSDETAILS, null, null))
+				|| !ContainerUtil.equals(statusDetailsLocal, pt.getAttribute(AttributeName.STATUSDETAILS, null, null))
 				|| !ptEmployees.isEqual(employees))
 		{
 			pt.setEnd(new JDFDate());
@@ -715,7 +723,7 @@ public class JDFAuditPool extends JDFPool
 		if (bChanged)
 		{
 			pt = addPhaseTime(status, null, vmParts);
-			pt.setStatusDetails(statusDetails);
+			pt.setStatusDetails(statusDetailsLocal);
 			pt.copyElements(employees, null);
 		}
 		return pt;

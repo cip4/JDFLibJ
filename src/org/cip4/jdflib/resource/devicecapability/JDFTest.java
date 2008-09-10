@@ -99,6 +99,7 @@ public class JDFTest extends JDFNodeTerm
 				AttributeInfo.EnumAttributeType.XPath, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -142,6 +143,7 @@ public class JDFTest extends JDFNodeTerm
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return " JDFTest[  --> " + super.toString() + " ]";
@@ -160,6 +162,7 @@ public class JDFTest extends JDFNodeTerm
 		setAttribute(AttributeName.ID, value, null);
 	}
 
+	@Override
 	public String getID()
 	{
 		return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
@@ -174,6 +177,7 @@ public class JDFTest extends JDFNodeTerm
 	 * @return boolean - true, if the boolean expression (child Term element)
 	 *         evaluates to “true”
 	 */
+	@Override
 	public boolean fitsMap(JDFAttributeMap m)
 	{
 		JDFTerm t = getTerm();
@@ -193,10 +197,13 @@ public class JDFTest extends JDFNodeTerm
 	 * @return boolean - true, if boolean expression (child Term element)
 	 *         evaluates to “true”
 	 */
+	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
-		if (reportRoot != null)
-			reportRoot = reportRoot.appendElement("TestReport");
+		KElement reportRootLocal = reportRoot;
+		
+		if (reportRootLocal != null)
+			reportRootLocal = reportRootLocal.appendElement("TestReport");
 		JDFTerm t = getTerm();
 		if (t == null)
 			return true; // no term --> assume it is a non test; i.e. ok
@@ -208,9 +215,9 @@ public class JDFTest extends JDFNodeTerm
 		}
 		if (checkContext && !t.fitsContext(jdf))
 			return true;
-		boolean b = t.fitsJDF(jdf, reportRoot);
-		if (reportRoot != null)
-			reportRoot.setAttribute("Value", b, null);
+		boolean b = t.fitsJDF(jdf, reportRootLocal);
+		if (reportRootLocal != null)
+			reportRootLocal.setAttribute("Value", b, null);
 		return b;
 	}
 
@@ -225,6 +232,7 @@ public class JDFTest extends JDFNodeTerm
 		return getTerm(null, 0);
 	}
 
+	@Override
 	public boolean init()
 	{
 		appendAnchor(null);
@@ -236,6 +244,7 @@ public class JDFTest extends JDFNodeTerm
 	 * 
 	 * @return the default ID prefix of non-overwritten JDF elements
 	 */
+	@Override
 	protected String getIDPrefix()
 	{
 		return "T";
@@ -243,21 +252,27 @@ public class JDFTest extends JDFNodeTerm
 
 	// //////////////////////////////////////////////////
 
+	@Override
 	public VString getInvalidElements(EnumValidationLevel level,
 			boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
-		VString v = super.getInvalidElements(level, bIgnorePrivate, nMax);
+		boolean bIgnorePrivateLocal = bIgnorePrivate;
+		
+		if (bIgnorePrivateLocal)
+			bIgnorePrivateLocal = false; // dummy to fool compiler
+		
+		VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
 		if (v.size() >= nMax)
 			return v;
 
 		v.appendUnique(getInvalidTerms(1));
+		
 		return v;
 	}
 
 	// ///////////////////////////////////////////////////////
 
+	@Override
 	public VString getMissingElements(int nMax)
 	{
 		VString v = super.getMissingElements(nMax);
@@ -273,6 +288,7 @@ public class JDFTest extends JDFNodeTerm
 	 * check whether the boolean logic defined by a Test and a test's
 	 * subelements makes sense in the context of the tested element jdf
 	 */
+	@Override
 	public boolean fitsContext(KElement testElement)
 	{
 		if (hasAttribute(AttributeName.CONTEXT))

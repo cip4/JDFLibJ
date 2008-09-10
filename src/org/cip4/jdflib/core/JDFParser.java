@@ -174,11 +174,9 @@ public class JDFParser extends DOMParser
 	 * @param strDocType
 	 */
 	@Deprecated
-	public JDFParser(String strDocType)
+	public JDFParser(@SuppressWarnings("unused") String strDocType)
 	{
 		this();
-		if (strDocType != null) // dummy to fool compiler
-			strDocType = null;
 	}
 
 	/**
@@ -406,15 +404,15 @@ public class JDFParser extends DOMParser
 
 		try
 		{
-			if (schemaLocation == null || schemaLocation.equals(JDFConstants.EMPTYSTRING))
+			if (m_SchemaLocation == null || m_SchemaLocation.equals(JDFConstants.EMPTYSTRING))
 			{
 				this.setFeature("http://xml.org/sax/features/validation", false);
 				this.setFeature("http://apache.org/xml/features/validation/schema", false);
 			}
 			else
 			{
-				if (!schemaLocation.startsWith(JDFElement.getSchemaURL()))
-					schemaLocation = JDFElement.getSchemaURL() + " " + schemaLocation;
+				if (!m_SchemaLocation.startsWith(JDFElement.getSchemaURL()))
+					m_SchemaLocation = JDFElement.getSchemaURL() + " " + m_SchemaLocation;
 				this.setFeature("http://xml.org/sax/features/validation", true);
 				this.setFeature("http://apache.org/xml/features/validation/schema", true);
 				// this.setFeature(
@@ -423,7 +421,7 @@ public class JDFParser extends DOMParser
 				// this.setFeature(
 				// "http://apache.org/xml/features/validation/schema/normalized-value"
 				// , false);
-				this.setProperty("http://apache.org/xml/properties/schema/external-schemaLocation", schemaLocation);
+				this.setProperty("http://apache.org/xml/properties/schema/external-schemaLocation", m_SchemaLocation);
 			}
 
 			// use our own JDF document for creating JDF elements

@@ -142,6 +142,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFProcessRun[  --> " + super.toString() + " ]";
@@ -185,6 +186,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @return JDFDuration the duration
 	 */
+	@Override
 	public JDFDuration getDuration()
 	{
 		JDFDuration dur = super.getDuration();
@@ -204,6 +206,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
@@ -214,6 +217,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @param mPart attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -224,6 +228,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
@@ -235,6 +240,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
@@ -318,9 +324,12 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 */
 	public void setSubmissionTime(JDFDate value)
 	{
-		if (value == null)
-			value = new JDFDate();
-		setAttribute(AttributeName.SUBMISSIONTIME, value.getDateTimeISO(), null);
+		JDFDate valueLocal = value;
+		
+		if (valueLocal == null)
+			valueLocal = new JDFDate();
+		
+		setAttribute(AttributeName.SUBMISSIONTIME, valueLocal.getDateTimeISO(), null);
 	}
 
 	/**
@@ -350,9 +359,12 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 */
 	public void setReturnTime(JDFDate value)
 	{
-		if (value == null)
-			value = new JDFDate();
-		setAttribute(AttributeName.RETURNTIME, value.getDateTimeISO(), null);
+		JDFDate valueLocal = value;
+		
+		if (valueLocal == null)
+			valueLocal = new JDFDate();
+
+		setAttribute(AttributeName.RETURNTIME, valueLocal.getDateTimeISO(), null);
 	}
 
 	/**

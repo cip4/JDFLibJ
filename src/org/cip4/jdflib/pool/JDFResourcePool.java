@@ -539,21 +539,23 @@ public class JDFResourcePool extends JDFPool
 	 */
 	private JDFResource getPoolChild_JDFResourcePool(int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
 	{
+		int iLocal = i;
+		
 		final VElement v = getPoolChildren(strName, mAttrib, nameSpaceURI);
-		if (i < 0)
+		if (iLocal < 0)
 		{
-			i = v.size() + i;
-			if (i < 0)
+			iLocal = v.size() + iLocal;
+			if (iLocal < 0)
 			{
 				return null;
 			}
 		}
-		if (v.size() <= i)
+		if (v.size() <= iLocal)
 		{
 			return null;
 		}
 
-		final JDFResource jdfResource = (JDFResource) v.elementAt(i);
+		final JDFResource jdfResource = (JDFResource) v.elementAt(iLocal);
 		return jdfResource;
 	}
 
@@ -569,9 +571,6 @@ public class JDFResourcePool extends JDFPool
 	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate) // dummy to soothe compiler warning
-			bIgnorePrivate = false;
-
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
 
 	}
@@ -599,15 +598,17 @@ public class JDFResourcePool extends JDFPool
 	@Override
 	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
 	{
+		HashSet vDoneRefsLocal = vDoneRefs;
+		
 		VElement vResources = getPoolChildren(null, null, null);
 		final int size = vResources.size();
 		for (int i = 0; i < size; i++)
 		{
 			JDFResource r = (JDFResource) vResources.elementAt(i);
-			vDoneRefs = r.getResourceRoot().getAllRefs(vDoneRefs, bRecurse);
+			vDoneRefsLocal = r.getResourceRoot().getAllRefs(vDoneRefsLocal, bRecurse);
 		}
 
-		return vDoneRefs;
+		return vDoneRefsLocal;
 	}
 
 	// ////////////////////////////////////////////////////////////////////

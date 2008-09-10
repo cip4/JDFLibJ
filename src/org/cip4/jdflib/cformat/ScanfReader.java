@@ -192,6 +192,9 @@ public class ScanfReader extends Reader
 	@Override
 	public int read(char[] cbuf, int off, int len) throws IOException
 	{
+		int offLocal = off;
+		int lenLocal = len;
+		
 		int n;
 		int c;
 		int n0 = 0;
@@ -202,8 +205,8 @@ public class ScanfReader extends Reader
 
 			if (curChar != -1)
 			{
-				cbuf[off++] = (char) curChar;
-				len--;
+				cbuf[offLocal++] = (char) curChar;
+				lenLocal--;
 				n0 = 1;
 			}
 			else
@@ -212,9 +215,9 @@ public class ScanfReader extends Reader
 			}
 		}
 
-		if (len > 0)
+		if (lenLocal > 0)
 		{
-			n = reader.read(cbuf, off, len);
+			n = reader.read(cbuf, offLocal, lenLocal);
 		}
 		else
 		{
@@ -229,7 +232,7 @@ public class ScanfReader extends Reader
 		
 		for (int i = 0; i < n; i++)
 		{
-			c = cbuf[off + i];
+			c = cbuf[offLocal + i];
 
 			if ((c == '\r') || ((c == '\n') && (lastChar != '\r')))
 			{
@@ -1327,12 +1330,14 @@ public class ScanfReader extends Reader
 	 */
 	private char[] scanChars(ScanfFormat fmt, int w) throws IOException, IllegalArgumentException
 	{
-		if (w == -1)
+		int wLocal = w;
+		
+		if (wLocal == -1)
 		{
-			w = 1;
+			wLocal = 1;
 		}
 
-		char[] value = new char[w];
+		char[] value = new char[wLocal];
 		checkTypeAndScanPrefix(fmt, "c[");
 		initChar();
 
@@ -1341,7 +1346,7 @@ public class ScanfReader extends Reader
 			throw new EOFException("EOF");
 		}
 
-		for (int i = 0; i < w; i++)
+		for (int i = 0; i < wLocal; i++)
 		{
 			value[i] = (char) curChar;
 
@@ -1365,9 +1370,11 @@ public class ScanfReader extends Reader
 	 */
 	private long scanDec(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
 	{
-		if (width == -1)
+		int widthLocal = width;
+		
+		if (widthLocal == -1)
 		{
-			width = 1000000000;
+			widthLocal = 1000000000;
 		}
 
 		long val;
@@ -1383,8 +1390,8 @@ public class ScanfReader extends Reader
 		}
 		else
 		{
-			int skippedSpaces = skipWhiteSpace(width);
-			width -= skippedSpaces;
+			int skippedSpaces = skipWhiteSpace(widthLocal);
+			widthLocal -= skippedSpaces;
 		}
 
 		if ((curChar == '-') || (curChar == '+'))
@@ -1406,7 +1413,7 @@ public class ScanfReader extends Reader
 		val = 0;
 		i = 0;
 
-		while ((Character.isDigit((char) curChar)) && (i < width))
+		while ((Character.isDigit((char) curChar)) && (i < widthLocal))
 		{
 			val = (val * 10) + (curChar - '0');
 			consumeAndReplaceChar();
@@ -1430,9 +1437,11 @@ public class ScanfReader extends Reader
 	 */
 	private long scanHex(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
 	{
-		if (width == -1)
+		int widthLocal = width;
+		
+		if (widthLocal == -1)
 		{
-			width = 1000000000;
+			widthLocal = 1000000000;
 		}
 
 		long val;
@@ -1447,8 +1456,8 @@ public class ScanfReader extends Reader
 		}
 		else
 		{
-			int skippedSpaces = skipWhiteSpace(width);
-			width -= skippedSpaces;
+			int skippedSpaces = skipWhiteSpace(widthLocal);
+			widthLocal -= skippedSpaces;
 		}
 
 		if (curChar == -1)
@@ -1464,7 +1473,7 @@ public class ScanfReader extends Reader
 		val = 0;
 		i = 0;
 
-		while (((k = hexChars.indexOf(curChar)) != -1) && (i < width))
+		while (((k = hexChars.indexOf(curChar)) != -1) && (i < widthLocal))
 		{
 			if (k > 15)
 			{
@@ -1488,9 +1497,11 @@ public class ScanfReader extends Reader
 	 */
 	private long scanOct(ScanfFormat fmt, int width) throws IOException, IllegalArgumentException
 	{
-		if (width == -1)
+		int widthLocal = width;
+		
+		if (widthLocal == -1)
 		{
-			width = 1000000000;
+			widthLocal = 1000000000;
 		}
 
 		long val;
@@ -1505,8 +1516,8 @@ public class ScanfReader extends Reader
 		}
 		else
 		{
-			int skippedSpaces = skipWhiteSpace(width);
-			width -= skippedSpaces;
+			int skippedSpaces = skipWhiteSpace(widthLocal);
+			widthLocal -= skippedSpaces;
 		}
 
 		if (curChar == -1)
@@ -1522,7 +1533,7 @@ public class ScanfReader extends Reader
 		val = 0;
 		i = 0;
 
-		while (((k = octChars.indexOf(curChar)) != -1) && (i < width))
+		while (((k = octChars.indexOf(curChar)) != -1) && (i < widthLocal))
 		{
 			val = (val * 8) + k;
 			consumeAndReplaceChar();

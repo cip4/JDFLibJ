@@ -166,8 +166,10 @@ public class JDFAttributeMap implements Map
 	 */
 	public String showKeys(String sep)
 	{
-		if (sep == null)
-			sep = "";
+		String sepLocal = sep;
+		
+		if (sepLocal == null)
+			sepLocal = "";
 		StringBuffer sb = new StringBuffer();
 		VString vsKeys = this.getKeys();
 		int size = vsKeys.size();
@@ -175,7 +177,7 @@ public class JDFAttributeMap implements Map
 		{
 			String strKey = vsKeys.stringAt(k);
 			String strValue = this.get(strKey);
-			sb.append(k == 0 ? "" : sep).append("(").append(strKey).append(" = ").append(strValue).append(")");
+			sb.append(k == 0 ? "" : sepLocal).append("(").append(strKey).append(" = ").append(strValue).append(")");
 		}
 		return (sb.toString());
 	}
@@ -238,16 +240,20 @@ public class JDFAttributeMap implements Map
 	 */
 	public boolean put(String key, String value)
 	{
+		String valueLocal = value;
+		
 		// check input parameter (valid or invalid)
 		if (key == null || key.equals(JDFConstants.EMPTYSTRING))
 		{
 			return false;
 		}
-		if (value == null)
-			value = "";
+		
+		if (valueLocal == null)
+			valueLocal = "";
 		// put key value to hashmap. The map returns null if the key was new
 		// or an object (the old value) if the value was replaced
-		m_hashTable.put(key, value);
+		m_hashTable.put(key, valueLocal);
+		
 		return true;
 	}
 
@@ -538,9 +544,12 @@ public class JDFAttributeMap implements Map
 	 */
 	public Object remove(Object key)
 	{
-		if (key instanceof ValuedEnum)
-			key = ((ValuedEnum) key).getName();
-		return m_hashTable.remove(key);
+		Object keyLocal = key;
+		
+		if (keyLocal instanceof ValuedEnum)
+			keyLocal = ((ValuedEnum) keyLocal).getName();
+		
+		return m_hashTable.remove(keyLocal);
 	}
 
 	/**
@@ -610,9 +619,12 @@ public class JDFAttributeMap implements Map
 	 */
 	public Object get(Object key)
 	{
-		if (key instanceof ValuedEnum)
-			key = ((ValuedEnum) key).getName();
-		return m_hashTable.get(key);
+		Object keyLocal = key;
+		
+		if (keyLocal instanceof ValuedEnum)
+			keyLocal = ((ValuedEnum) keyLocal).getName();
+		
+		return m_hashTable.get(keyLocal);
 	}
 
 	/*
@@ -622,11 +634,16 @@ public class JDFAttributeMap implements Map
 	 */
 	public Object put(Object key, Object value)
 	{
-		if (key instanceof ValuedEnum)
-			key = ((ValuedEnum) key).getName();
-		if (value instanceof ValuedEnum)
-			value = ((ValuedEnum) value).getName();
-		return m_hashTable.put((String) key, (String) value);
+		Object keyLocal = key;
+		Object valueLocal = value;
+		
+		if (keyLocal instanceof ValuedEnum)
+			keyLocal = ((ValuedEnum) keyLocal).getName();
+		
+		if (valueLocal instanceof ValuedEnum)
+			valueLocal = ((ValuedEnum) valueLocal).getName();
+		
+		return m_hashTable.put((String) keyLocal, (String) valueLocal);
 	}
 
 	/**

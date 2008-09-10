@@ -543,11 +543,15 @@ public class KElement extends ElementNSImpl
 		 */
 		public static EnumValidationLevel setNoWarning(EnumValidationLevel level, boolean noWarning)
 		{
-			if (noWarning && !isNoWarn(level))
-				level = isRequired(level) ? EnumValidationLevel.NoWarnComplete : EnumValidationLevel.NoWarnIncomplete;
-			if (!noWarning && isNoWarn(level))
-				level = isRequired(level) ? EnumValidationLevel.Complete : EnumValidationLevel.Incomplete;
-			return level;
+			EnumValidationLevel levelLocal = level;
+			
+			if (noWarning && !isNoWarn(levelLocal))
+				levelLocal = isRequired(levelLocal) ? EnumValidationLevel.NoWarnComplete : EnumValidationLevel.NoWarnIncomplete;
+
+			if (!noWarning && isNoWarn(levelLocal))
+				levelLocal = isRequired(levelLocal) ? EnumValidationLevel.Complete : EnumValidationLevel.Incomplete;
+
+			return levelLocal;
 		}
 
 		/**
@@ -558,19 +562,21 @@ public class KElement extends ElementNSImpl
 		 */
 		public static EnumValidationLevel incompleteLevel(EnumValidationLevel level)
 		{
-			if (EnumValidationLevel.Complete.equals(level))
+			EnumValidationLevel levelLocal = level;
+			
+			if (EnumValidationLevel.Complete.equals(levelLocal))
 			{
-				level = EnumValidationLevel.Incomplete;
+				levelLocal = EnumValidationLevel.Incomplete;
 			}
-			else if (EnumValidationLevel.RecursiveComplete.equals(level))
+			else if (EnumValidationLevel.RecursiveComplete.equals(levelLocal))
 			{
-				level = EnumValidationLevel.RecursiveIncomplete;
+				levelLocal = EnumValidationLevel.RecursiveIncomplete;
 			}
-			else if (EnumValidationLevel.NoWarnComplete.equals(level))
+			else if (EnumValidationLevel.NoWarnComplete.equals(levelLocal))
 			{
-				level = EnumValidationLevel.NoWarnIncomplete;
+				levelLocal = EnumValidationLevel.NoWarnIncomplete;
 			}
-			return level;
+			return levelLocal;
 		}
 	}
 
@@ -643,8 +649,10 @@ public class KElement extends ElementNSImpl
 	 */
 	public Attr getDOMAttr(String attrib, String nameSpaceURI, boolean bInherit)
 	{
+		String nameSpaceURILocal = nameSpaceURI;
+		
 		Attr a = null;
-		if ((nameSpaceURI == null) || nameSpaceURI.equals(JDFConstants.EMPTYSTRING))
+		if ((nameSpaceURILocal == null) || nameSpaceURILocal.equals(JDFConstants.EMPTYSTRING))
 		{
 			a = getAttributeNode(attrib);
 			if (a != null)
@@ -652,7 +660,7 @@ public class KElement extends ElementNSImpl
 				return a;
 			}
 
-			nameSpaceURI = null;
+			nameSpaceURILocal = null;
 
 			final String attribPrefix = xmlnsPrefix(attrib);
 			final String elementPrefix = getPrefix();
@@ -667,30 +675,33 @@ public class KElement extends ElementNSImpl
 
 			if ((a == null) && !attrib.startsWith(JDFConstants.XMLNS))
 			{
-				nameSpaceURI = getNamespaceURIFromPrefix(attribPrefix);
+				nameSpaceURILocal = getNamespaceURIFromPrefix(attribPrefix);
 			}
 		}
+		
 		// either we have an explicit ns or we haven't found anything in dom
 		// level 1 - assume the namespace of this
-		if ((a == null) && (nameSpaceURI != null))
+		if ((a == null) && (nameSpaceURILocal != null))
 		{
 			// the xmlNSLocalName here is just in case - actually you shouldn't
 			// be calling both ns and prefix
-			a = getAttributeNodeNS(nameSpaceURI, KElement.xmlnsLocalName(attrib));
-			if ((a == null) && nameSpaceURI.equals(getNamespaceURI()))
+			a = getAttributeNodeNS(nameSpaceURILocal, KElement.xmlnsLocalName(attrib));
+			if ((a == null) && nameSpaceURILocal.equals(getNamespaceURI()))
 			{
 				a = getAttributeNodeNS(null, KElement.xmlnsLocalName(attrib));
 			}
 
 		}
+		
 		if (a == null && bInherit)
 		{
 			KElement parent = getParentNode_KElement();
 			if (parent != null)
 			{
-				return parent.getDOMAttr(attrib, nameSpaceURI, bInherit);
+				return parent.getDOMAttr(attrib, nameSpaceURILocal, bInherit);
 			}
 		}
+		
 		return a;
 	}
 
@@ -712,14 +723,16 @@ public class KElement extends ElementNSImpl
 	 */
 	public void setAttribute(String key, String value, String nameSpaceURI)
 	{
+		String nameSpaceURILocal = nameSpaceURI;
+		
 		boolean bDirty = false;
 		if (value == null)
 		{
-			removeAttribute(key, nameSpaceURI);
+			removeAttribute(key, nameSpaceURILocal);
 			return;
 		}
 
-		if ((nameSpaceURI == null) || (nameSpaceURI.equals(JDFConstants.EMPTYSTRING)))
+		if ((nameSpaceURILocal == null) || (nameSpaceURILocal.equals(JDFConstants.EMPTYSTRING)))
 		{ // //////////// DOM Level 1 ///////////////////
 			// must explicitely set xmlns as DOM level 2 because the xerces
 			// serializer checks for DOM level 2
@@ -789,13 +802,13 @@ public class KElement extends ElementNSImpl
 							else
 							{
 								String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
-								if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
+								if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURILocal))
 								{
 									throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: "
 											+ xmlnsPrefix(key)
 											+ "; existing URI: "
 											+ nsURI2
-											+ "; attempting to set URI: " + nameSpaceURI);
+											+ "; attempting to set URI: " + nameSpaceURILocal);
 								}
 								try
 								{
@@ -815,15 +828,15 @@ public class KElement extends ElementNSImpl
 		}
 		else
 		{ // //////////// DOM Level 2 ///////////////////
-			if (AttributeName.XMLNSURI.equals(nameSpaceURI))
+			if (AttributeName.XMLNSURI.equals(nameSpaceURILocal))
 			{
 				// never ever set "xmlns:foo="" !
 				if (value.equals(JDFConstants.EMPTYSTRING))
 				{
 					bDirty = true;
-					removeAttributeNS(nameSpaceURI, key);
+					removeAttributeNS(nameSpaceURILocal, key);
 				}
-				else if (!value.equals(getInheritedAttribute(xmlnsLocalName(key), nameSpaceURI, null)))
+				else if (!value.equals(getInheritedAttribute(xmlnsLocalName(key), nameSpaceURILocal, null)))
 				{
 					bDirty = true;
 					super.setAttributeNS(AttributeName.XMLNSURI, key, value);
@@ -832,7 +845,7 @@ public class KElement extends ElementNSImpl
 			else
 			// standard attribute (not xmlns)
 			{
-				Node a = getAttributeNodeNS(nameSpaceURI, xmlnsLocalName(key));
+				Node a = getAttributeNodeNS(nameSpaceURILocal, xmlnsLocalName(key));
 				if (a == null || !value.equals(a.getNodeValue()))
 				{
 					bDirty = true;
@@ -843,7 +856,7 @@ public class KElement extends ElementNSImpl
 						if (!key.equals(nodeName))
 						{ // overwrite default namespace with qualified
 							// namespace or vice versa
-							super.setAttributeNS(nameSpaceURI, key, value);
+							super.setAttributeNS(nameSpaceURILocal, key, value);
 						}
 						else
 						{ // same qualified name, simply overwrite the value
@@ -855,29 +868,29 @@ public class KElement extends ElementNSImpl
 						String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 
 						if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2)
-								&& !namespaceURI2.equals(nameSpaceURI))
+								&& !namespaceURI2.equals(nameSpaceURILocal))
 						{ // in case multiple namespace uris are defined for the
 							// same prefix,
 							// all we can do is to bail out loudly
 							throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: "
 									+ xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-									+ "; attempting to set URI: " + nameSpaceURI);
+									+ "; attempting to set URI: " + nameSpaceURILocal);
 						}
 
 						// remove any twin dom lvl 1 attributes - just in case
 						removeAttribute(key);
-						if (nameSpaceURI.equals(getNamespaceURI()))
+						if (nameSpaceURILocal.equals(getNamespaceURI()))
 						{
 							// clean up any attribute that may be in the same ns
 							// but with a different prefix
-							removeAttributeNS(nameSpaceURI, xmlnsLocalName(key));
+							removeAttributeNS(nameSpaceURILocal, xmlnsLocalName(key));
 							if (xmlnsPrefix(key) == null)
 							{
-								nameSpaceURI = null; // avoid spurios NS1 prefix
+								nameSpaceURILocal = null; // avoid spurios NS1 prefix
 							}
 						}
 
-						super.setAttributeNS(nameSpaceURI, key, value);
+						super.setAttributeNS(nameSpaceURILocal, key, value);
 					}
 				}
 			}
@@ -1142,6 +1155,8 @@ public class KElement extends ElementNSImpl
 	 */
 	public void appendAttribute(String key, String value, String nameSpaceURI, String sep, boolean bUnique)
 	{
+		String sepLocal = sep;
+		
 		if (value == null)
 		{
 			return;
@@ -1155,12 +1170,12 @@ public class KElement extends ElementNSImpl
 		else
 		// something is there
 		{
-			if (sep == null)
+			if (sepLocal == null)
 			{
-				sep = JDFConstants.BLANK;
+				sepLocal = JDFConstants.BLANK;
 			}
 
-			if (!bUnique || !StringUtil.hasToken(oldVal, value, sep, 0)) // it
+			if (!bUnique || !StringUtil.hasToken(oldVal, value, sepLocal, 0)) // it
 			// is
 			// either
 			// not
@@ -1173,7 +1188,7 @@ public class KElement extends ElementNSImpl
 			// >
 			// append
 			{
-				setAttribute(key, oldVal + sep + value, nameSpaceURI);
+				setAttribute(key, oldVal + sepLocal + value, nameSpaceURI);
 			}
 		}
 	}
@@ -1696,9 +1711,10 @@ public class KElement extends ElementNSImpl
 	 * 
 	 * @default getChildElementVector(null, null, null, true, 0, true)
 	 */
-	public VElement getChildElementVector(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
+	public VElement getChildElementVector(String nodeName, String nameSpaceURI, 
+			JDFAttributeMap mAttrib, boolean bAnd, int maxSize, 
+			@SuppressWarnings("unused") boolean bResolveTarget)
 	{
-		bResolveTarget = bResolveTarget && true; // fool compiler
 		return getChildElementVector_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize);
 	}
 
@@ -1736,33 +1752,40 @@ public class KElement extends ElementNSImpl
 	 * 
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public synchronized VElement getChildElementVector_KElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize)
+	public synchronized VElement getChildElementVector_KElement(
+			String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize)
 	{
+		String nodeNameLocal 			= nodeName;
+		String nameSpaceURILocal 		= nameSpaceURI;
+		JDFAttributeMap mAttribLocal	= mAttrib;
+		
 		final VElement v = new VElement();
-		if (isWildCard(nodeName))
+		if (isWildCard(nodeNameLocal))
 		{
-			nodeName = null;
+			nodeNameLocal = null;
 		}
-		if (isWildCard(nameSpaceURI))
+		
+		if (isWildCard(nameSpaceURILocal))
 		{
-			nameSpaceURI = null;
+			nameSpaceURILocal = null;
 		}
-		if (mAttrib != null && mAttrib.isEmpty())
+		
+		if (mAttribLocal != null && mAttribLocal.isEmpty())
 		{
-			mAttrib = null;
+			mAttribLocal = null;
 		}
 
-		final boolean bAlwaysFit = nodeName == null && nameSpaceURI == null;
-		final boolean bMapEmpty = mAttrib == null;
+		final boolean bAlwaysFit = nodeNameLocal == null && nameSpaceURILocal == null;
+		final boolean bMapEmpty = mAttribLocal == null;
 
 		int iSize = 0;
 		KElement kElem = getFirstChildElement();
 
 		while (kElem != null)
 		{
-			if (bAlwaysFit || kElem.fitsName_KElement(nodeName, nameSpaceURI))
+			if (bAlwaysFit || kElem.fitsName_KElement(nodeNameLocal, nameSpaceURILocal))
 			{
-				if (bMapEmpty || kElem.includesAttributes(mAttrib, bAnd))
+				if (bMapEmpty || kElem.includesAttributes(mAttribLocal, bAnd))
 				{
 					v.addElement(kElem);
 
@@ -1772,8 +1795,10 @@ public class KElement extends ElementNSImpl
 					}
 				}
 			}
+			
 			kElem = kElem.getNextSiblingElement();
 		}
+		
 		return v;
 	}
 
@@ -2045,17 +2070,19 @@ public class KElement extends ElementNSImpl
 	 */
 	public VElement getElementsByTagName_KElement(String s, String nameSpaceURI)
 	{
+		String sLocal = s;
+		
 		VElement vEle = null;
-		if (s == null)
-			s = JDFConstants.STAR;
+		if (sLocal == null)
+			sLocal = JDFConstants.STAR;
 
 		if ((nameSpaceURI == null) || nameSpaceURI.equals(JDFConstants.EMPTYSTRING))
 		{
-			vEle = new VElement(getElementsByTagName(s));
+			vEle = new VElement(getElementsByTagName(sLocal));
 		}
 		else
 		{
-			vEle = new VElement(getElementsByTagNameNS(nameSpaceURI, s));
+			vEle = new VElement(getElementsByTagNameNS(nameSpaceURI, sLocal));
 		}
 
 		return vEle;
@@ -2242,14 +2269,16 @@ public class KElement extends ElementNSImpl
 	 */
 	public KElement getElement_KElement(String nodeName, String nameSpaceURI, int iSkip)
 	{
+		int iSkipLocal = iSkip;
+		
 		KElement kElem = getFirstChildElement();
 		int i = 0;
-		if (iSkip < 0)
+		if (iSkipLocal < 0)
 		{
-			iSkip = numChildElements_KElement(nodeName, nameSpaceURI) + iSkip;
+			iSkipLocal = numChildElements_KElement(nodeName, nameSpaceURI) + iSkipLocal;
 		}
 
-		if (iSkip < 0)
+		if (iSkipLocal < 0)
 		{
 			return null;
 		}
@@ -2259,7 +2288,7 @@ public class KElement extends ElementNSImpl
 			if (kElem.fitsName_KElement(nodeName, nameSpaceURI))
 			{
 				// this guy is the one
-				if (i++ == iSkip)
+				if (i++ == iSkipLocal)
 				{
 					return kElem;
 				}
@@ -2796,20 +2825,22 @@ public class KElement extends ElementNSImpl
 	 */
 	public KElement getTarget_KElement(String id, String attrib)
 	{
+		String attribLocal = attrib;
+		
 		if (id == null || id.equals(JDFConstants.EMPTYSTRING))
 		{
 			return null;
 		}
 		boolean bID = false;
 		KElement kRet = null;
-		if (attrib == null)
+		if (attribLocal == null)
 		{
-			attrib = AttributeName.ID;
+			attribLocal = AttributeName.ID;
 		}
 
 		// try to find the target ID in the cached list
 		XMLDocUserData userData = getXMLDocUserData();
-		if (attrib.equals(AttributeName.ID) && userData != null)
+		if (attribLocal.equals(AttributeName.ID) && userData != null)
 		{
 			kRet = userData.getTarget(id);
 			bID = true;
@@ -2831,7 +2862,7 @@ public class KElement extends ElementNSImpl
 
 			while (root != null && !bFound)
 			{
-				KElement deepElement = root.getDeepElementByID(attrib, id, excludeElement, userData);
+				KElement deepElement = root.getDeepElementByID(attribLocal, id, excludeElement, userData);
 
 				// search tree one level higher
 				if (deepElement == null)
@@ -2854,6 +2885,7 @@ public class KElement extends ElementNSImpl
 				}
 			}
 		}
+		
 		return kRet;
 	}
 
@@ -3064,8 +3096,11 @@ public class KElement extends ElementNSImpl
 	 */
 	public VString getUnknownAttributeVector(Vector vKnownKeys, Vector vInNameSpace, int nMax)
 	{
-		if (nMax < 0)
-			nMax = Integer.MAX_VALUE;
+		int nMaxLocal = nMax;
+		
+		if (nMaxLocal < 0)
+			nMaxLocal = Integer.MAX_VALUE;
+		
 		final VString vAtts = getAttributeVector_KElement();
 		final VString vUnknown = new VString();
 		if (vKnownKeys.contains("*"))
@@ -3084,7 +3119,7 @@ public class KElement extends ElementNSImpl
 			}
 		}
 
-		for (int i = 0; i < vAtts.size() && vUnknown.size() < nMax; i++)
+		for (int i = 0; i < vAtts.size() && vUnknown.size() < nMaxLocal; i++)
 		{
 			String strAtts = vAtts.elementAt(i);
 			String ns = KElement.xmlnsPrefix(strAtts);
@@ -3120,6 +3155,7 @@ public class KElement extends ElementNSImpl
 	{
 		final VString v1 = knownElements();
 		final VString v2 = StringUtil.tokenize(" :JDF", JDFConstants.COLON, false);
+		
 		return getUnknownElementVector(v1, bIgnorePrivate ? v2 : new Vector(), nMax);
 	}
 
@@ -3254,9 +3290,11 @@ public class KElement extends ElementNSImpl
 	 */
 	public boolean isValid(EnumValidationLevel level)
 	{
-		if (level == null)
+		EnumValidationLevel levelLocal = level;
+		
+		if (levelLocal == null)
 		{
-			level = EnumValidationLevel.Complete;// makes compiler happy
+			levelLocal = EnumValidationLevel.Complete;// makes compiler happy
 		}
 		return getOwnerDocument() != null;
 	}
@@ -3439,6 +3477,8 @@ public class KElement extends ElementNSImpl
 	 */
 	public int removeFromAttribute(String key, String value, String nameSpaceURI, String sep, int nMax)
 	{
+		int nMaxLocal = nMax;
+		
 		final String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
 		if (strAttrValue == null || strAttrValue.indexOf(value) < 0)
 			return 0;
@@ -3450,7 +3490,7 @@ public class KElement extends ElementNSImpl
 			if (v.elementAt(i).equals(value))
 			{
 				v.removeElementAt(i);
-				if (--nMax == 0)
+				if (--nMaxLocal == 0)
 				{
 					break;
 				}
@@ -3922,40 +3962,42 @@ public class KElement extends ElementNSImpl
 	 */
 	public KElement replaceElement(KElement src)
 	{
-		if (src == this)
+		KElement srcLocal = src;
+		
+		if (srcLocal == this)
 		{
 			return this; // nop
 		}
 
-		KElement kRet = src;
+		KElement kRet = srcLocal;
 
-		if (src != null)
+		if (srcLocal != null)
 		{
 			// workaround for the document element
 			// TBD: there must be a better way
 			if (getParentNode_KElement() == null)
 			{
-				kRet = replaceElement_isDocRoot(src);
+				kRet = replaceElement_isDocRoot(srcLocal);
 			}
 			else
 			{
-				final KElement srcParentNode = src.getParentNode_KElement();
+				final KElement srcParentNode = srcLocal.getParentNode_KElement();
 				if (srcParentNode != null)
 				{
 					// removes the resource from the to merge document
-					src = (KElement) srcParentNode.removeChild(src);
+					srcLocal = (KElement) srcParentNode.removeChild(srcLocal);
 				}
 
 				// this and src are in the same document
-				if (src.getOwnerDocument() == getOwnerDocument())
+				if (srcLocal.getOwnerDocument() == getOwnerDocument())
 				{
-					getParentNode_KElement().replaceChild(src, this);
-					fixParent(src, null);
-					kRet = src;
+					getParentNode_KElement().replaceChild(srcLocal, this);
+					fixParent(srcLocal, null);
+					kRet = srcLocal;
 				}
 				else
 				{ // import from other document
-					KElement dn = (KElement) getOwnerDocument().importNode(src, true);
+					KElement dn = (KElement) getOwnerDocument().importNode(srcLocal, true);
 					getParentNode_KElement().replaceChild(dn, this);
 					fixParent(dn, null);
 					kRet = dn;
@@ -4147,8 +4189,10 @@ public class KElement extends ElementNSImpl
 	 */
 	public void appendXMLComment(String commentText, KElement beforeChild)
 	{
-		commentText = StringUtil.replaceString(commentText, "--", "__");
-		final Comment newChild = getOwnerDocument().createComment(commentText);
+		String commentTextLocal = commentText;
+		
+		commentTextLocal = StringUtil.replaceString(commentTextLocal, "--", "__");
+		final Comment newChild = getOwnerDocument().createComment(commentTextLocal);
 		insertBefore(newChild, beforeChild);
 	}
 
@@ -4162,11 +4206,13 @@ public class KElement extends ElementNSImpl
 	 */
 	public void setXMLComment(String commentText)
 	{
+		String commentTextLocal = commentText;
+		
 		KElement e = getParentNode_KElement();
 		if (e == null)
 		{
-			commentText = StringUtil.replaceString(commentText, "--", "__");
-			final Comment newChild = getOwnerDocument().createComment(commentText);
+			commentTextLocal = StringUtil.replaceString(commentTextLocal, "--", "__");
+			final Comment newChild = getOwnerDocument().createComment(commentTextLocal);
 			getOwnerDocument().insertBefore(newChild, this);
 			Node last = newChild.getPreviousSibling();
 			if (last != null && last.getNodeType() == Node.COMMENT_NODE)
@@ -4177,7 +4223,7 @@ public class KElement extends ElementNSImpl
 		else
 		{
 			Node last = getPreviousSibling();
-			e.appendXMLComment(commentText, this);
+			e.appendXMLComment(commentTextLocal, this);
 			if (last != null && last.getNodeType() == Node.COMMENT_NODE)
 			{
 				e.removeChild(last);
@@ -4315,18 +4361,23 @@ public class KElement extends ElementNSImpl
 	 * 
 	 * @return KElement the element which matches the above conditions
 	 */
-	public KElement getChildWithAttribute(String nodeName, String attName, String nameSpaceURI, String attVal, int index, boolean bDirect)
+	public KElement getChildWithAttribute(
+			String nodeName, String attName, String nameSpaceURI, String attVal, int index, boolean bDirect)
 	{
+		String nodeNameLocal = nodeName;
+		String nameSpaceURILocal = nameSpaceURI;
+		String attValLocal = attVal;
+		
 		KElement kRet = null;
 		XMLDocUserData userData = null;
 
 		final boolean bID = attName.equals(AttributeName.ID);
-		if (bID && !isWildCard(attVal))
+		if (bID && !isWildCard(attValLocal))
 		{
 			userData = getXMLDocUserData();
 			if (userData != null)
 			{
-				kRet = userData.getTarget(attVal);
+				kRet = userData.getTarget(attValLocal);
 				if (kRet != null
 						&& ((bDirect && kRet.getParentNode_KElement() != this) || kRet.getOwnerDocument() != getOwnerDocument()))
 				{
@@ -4339,17 +4390,17 @@ public class KElement extends ElementNSImpl
 			}
 		}
 
-		if (isWildCard(nodeName))
+		if (isWildCard(nodeNameLocal))
 		{
-			nodeName = null;
+			nodeNameLocal = null;
 		}
-		if (isWildCard(nameSpaceURI))
+		if (isWildCard(nameSpaceURILocal))
 		{
-			nameSpaceURI = null;
+			nameSpaceURILocal = null;
 		}
-		if (isWildCard(attVal))
+		if (isWildCard(attValLocal))
 		{
-			attVal = null;
+			attValLocal = null;
 		}
 
 		if (bDirect)
@@ -4357,7 +4408,7 @@ public class KElement extends ElementNSImpl
 			KElement e0 = getFirstChildElement();
 			if (e0 != null)
 			{
-				final boolean bAlwaysFit = nodeName == null && nameSpaceURI == null;
+				final boolean bAlwaysFit = nodeNameLocal == null && nameSpaceURILocal == null;
 				do
 				{
 					KElement e = e0;
@@ -4370,8 +4421,8 @@ public class KElement extends ElementNSImpl
 
 					if (e != null)
 					{
-						if ((bAlwaysFit || e.fitsName(nodeName, nameSpaceURI))
-								&& (e.includesAttribute(attName, attVal)))
+						if ((bAlwaysFit || e.fitsName(nodeNameLocal, nameSpaceURILocal))
+								&& (e.includesAttribute(attName, attValLocal)))
 						{
 							kRet = e;
 						}
@@ -4396,8 +4447,8 @@ public class KElement extends ElementNSImpl
 		}
 		else
 		{
-			final JDFAttributeMap m = new JDFAttributeMap(attName, attVal);
-			kRet = getChildByTagName(nodeName, nameSpaceURI, index, m, bDirect, true);
+			final JDFAttributeMap m = new JDFAttributeMap(attName, attValLocal);
+			kRet = getChildByTagName(nodeNameLocal, nameSpaceURILocal, index, m, bDirect, true);
 		}
 
 		return kRet;
@@ -4712,9 +4763,11 @@ public class KElement extends ElementNSImpl
 	 */
 	public VElement getChildrenFromList(VString nodeNames, JDFAttributeMap map, boolean bDirect, VElement v)
 	{
-		if (v == null)
+		VElement vLocal = v;
+		
+		if (vLocal == null)
 		{
-			v = new VElement();
+			vLocal = new VElement();
 		}
 		KElement kElem = getFirstChildElement();
 
@@ -4724,16 +4777,16 @@ public class KElement extends ElementNSImpl
 			{
 				if (map == null || kElem.includesAttributes(map, true))
 				{
-					v.addElement(kElem);
+					vLocal.addElement(kElem);
 				}
 			}
 			if (!bDirect)
 			{
-				kElem.getChildrenFromList(nodeNames, map, bDirect, v);
+				kElem.getChildrenFromList(nodeNames, map, bDirect, vLocal);
 			}
 			kElem = kElem.getNextSiblingElement();
 		}
-		return v;
+		return vLocal;
 	}
 
 	// ************************** end of methods needed in JDFSurface
@@ -5111,13 +5164,15 @@ public class KElement extends ElementNSImpl
 	 */
 	private VElement getXPathElementVectorInternal(String path, int maxSize, boolean bLocal)
 	{
-		if (path == null)
+		String pathLocal = path;
+		
+		if (pathLocal == null)
 		{
 			return null;
 		}
 
 		VElement vRet = new VElement();
-		if (JDFConstants.EMPTYSTRING.equals(path))
+		if (JDFConstants.EMPTYSTRING.equals(pathLocal))
 		{
 			if (bLocal)
 				vRet.add(this);
@@ -5125,86 +5180,93 @@ public class KElement extends ElementNSImpl
 				vRet = getChildrenByTagName(null, null, null, false, true, 0);
 			return vRet;
 		}
-		if (path.startsWith(JDFConstants.SLASH))
+		
+		if (pathLocal.startsWith(JDFConstants.SLASH))
 		{
-			if (path.startsWith("//"))
+			if (pathLocal.startsWith("//"))
 			{
-				return getDocRoot().getXPathElementVectorInternal(path.substring(2), maxSize, false);
+				return getDocRoot().getXPathElementVectorInternal(pathLocal.substring(2), maxSize, false);
 			}
+			
 			KElement r = getDocRoot();
 			final String rootNodeName = r.getNodeName();
-			int nextPos = path.indexOf("/", 2);
-			final String rootPath = nextPos > 0 ? path.substring(1, nextPos) : path.substring(1);
-			final String nextPath = nextPos > 0 ? path.substring(nextPos + 1) : "";
+			int nextPos = pathLocal.indexOf("/", 2);
+			final String rootPath = nextPos > 0 ? pathLocal.substring(1, nextPos) : pathLocal.substring(1);
+			final String nextPath = nextPos > 0 ? pathLocal.substring(nextPos + 1) : "";
 			if (rootPath.equals(rootNodeName) || isWildCard(rootPath))
 			{
 				return r.getXPathElementVectorInternal(nextPath, maxSize, true);
 			}
+			
 			throw new IllegalArgumentException("Invalid root node name");
 
 		}
-		else if (path.startsWith(JDFConstants.DOT))
+		else if (pathLocal.startsWith(JDFConstants.DOT))
 		{
-			if (path.startsWith(JDFConstants.DOTSLASH))
+			if (pathLocal.startsWith(JDFConstants.DOTSLASH))
 			{
-				return getXPathElementVectorInternal(path.substring(JDFConstants.DOTSLASH.length()), maxSize, true);
+				return getXPathElementVectorInternal(pathLocal.substring(JDFConstants.DOTSLASH.length()), maxSize, true);
 			}
-			if (path.startsWith(JDFConstants.DOTDOTSLASH))
+			
+			if (pathLocal.startsWith(JDFConstants.DOTDOTSLASH))
 			{
 				final KElement parent = getParentNode_KElement();
 				if (parent == null)
 				{
 					return null;
 				}
-				return parent.getXPathElementVectorInternal(path.substring(JDFConstants.DOTDOTSLASH.length()), maxSize, true);
+				
+				return parent.getXPathElementVectorInternal(pathLocal.substring(JDFConstants.DOTDOTSLASH.length()), maxSize, true);
 			}
-			else if (path.equals(JDFConstants.DOT))
+			else if (pathLocal.equals(JDFConstants.DOT))
 			{
 				vRet.add(this);
 				return vRet;
 			}
-			else if (path.equals(".."))
+			else if (pathLocal.equals(".."))
 			{
 				KElement parent = getParentNode_KElement();
 				if (parent == null)
 				{
 					return null;
 				}
+				
 				vRet.add(parent);
 				return vRet;
 			}
 		}
 
-		path = StringUtil.replaceString(path, "[@", "|||");
-		int posB0 = path.indexOf("[");
-		int posBAt = path.indexOf("|||");
+		pathLocal = StringUtil.replaceString(pathLocal, "[@", "|||");
+		int posB0 = pathLocal.indexOf("[");
+		int posBAt = pathLocal.indexOf("|||");
 		int iSkip = 0;
-		String newPath = path;
+		String newPath = pathLocal;
 		int pos = newPath.indexOf(JDFConstants.SLASH);
 		JDFAttributeMap map = null;
 		boolean bExplicitSkip = false;
 
 		if (posB0 != -1 && (posB0 < pos || pos == -1)) // parse for [n]
 		{
-			int posB1 = path.indexOf("]");
+			int posB1 = pathLocal.indexOf("]");
 
 			// TODO fix escape attribute values
 
-			String n = path.substring(posB0 + 1, posB1);
+			String n = pathLocal.substring(posB0 + 1, posB1);
 			iSkip = StringUtil.parseInt(n, 0);
 			if (iSkip <= 0)
 				throw new IllegalArgumentException("getXPathVector: bad index:" + iSkip);
+			
 			iSkip--;
 			bExplicitSkip = true;
-			newPath = path.substring(0, posB0) + path.substring(posB1 + 1);
+			newPath = pathLocal.substring(0, posB0) + pathLocal.substring(posB1 + 1);
 			pos = newPath.indexOf(JDFConstants.SLASH);
 		}
 		else if (posBAt != -1 && (posBAt < pos || pos == -1)) // parse for
 		// [@a="b"]
 		{
-			int posB1 = path.indexOf("]");
-			map = getXPathAtMap(path, posBAt, posB1);
-			newPath = path.substring(0, posBAt) + path.substring(posB1 + 1);
+			int posB1 = pathLocal.indexOf("]");
+			map = getXPathAtMap(pathLocal, posBAt, posB1);
+			newPath = pathLocal.substring(0, posBAt) + pathLocal.substring(posB1 + 1);
 			pos = newPath.indexOf(JDFConstants.SLASH);
 		}
 
@@ -5222,10 +5284,12 @@ public class KElement extends ElementNSImpl
 				if (getLocalName().equals(elmName) || isWildCard(newPath))
 					ve.add(this);
 			}
+			
 			if (ve == null || ve.size() <= iSkip)
 			{
 				return null;
 			}
+			
 			int iFirst = bExplicitSkip ? iSkip : 0;
 			int iLast = bExplicitSkip ? iSkip + 1 : ve.size();
 			for (int i = iFirst; i < iLast; i++) // loop in case multiple
@@ -5238,11 +5302,13 @@ public class KElement extends ElementNSImpl
 				{
 					eRet = ee.getXPathElementVectorInternal(newPath.substring(pos + 1), maxSize, true);
 				}
+				
 				if (eRet != null)
 				{
 					vRet.addAll(eRet);
 				}
 			}
+			
 			return vRet.size() > 0 ? vRet : null;
 		}
 		// last element
@@ -5253,9 +5319,11 @@ public class KElement extends ElementNSImpl
 			{
 				return null;
 			}
+			
 			vRet.add(e);
 			return vRet;
 		}
+		
 		if (bLocal)
 		{
 			vRet = getChildElementVector_KElement(newPath, null, map, true, 0);
@@ -5266,6 +5334,7 @@ public class KElement extends ElementNSImpl
 			if (getLocalName().equals(newPath) || isWildCard(newPath))
 				vRet.add(this);
 		}
+		
 		return vRet;
 	}
 
@@ -5680,20 +5749,22 @@ public class KElement extends ElementNSImpl
 	 */
 	public void copyAttribute(String attrib, KElement src, String srcAttrib, String nameSpaceURI, String srcNameSpaceURI)
 	{
-		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFConstants.EMPTYSTRING) ? attrib : srcAttrib;
+		String attribLocal = attrib;
+		
+		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFConstants.EMPTYSTRING) ? attribLocal : srcAttrib;
 		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
-		if (strNameSpace != null && KElement.xmlnsPrefix(attrib) == null)
+		if (strNameSpace != null && KElement.xmlnsPrefix(attribLocal) == null)
 		{
 			Attr an = src.getDOMAttr(strSrcAttrib, srcNameSpaceURI, false);
 			if (an != null)
 			{
 				String pre = an.getPrefix();
 				if (!isWildCard(pre))
-					attrib = pre + ":" + attrib;
-
+					attribLocal = pre + ":" + attribLocal;
 			}
 		}
-		setAttribute(attrib, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
+		
+		setAttribute(attribLocal, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
 	}
 
 	/**
@@ -5722,27 +5793,33 @@ public class KElement extends ElementNSImpl
 	 */
 	public void moveAttribute(String attrib, KElement src, String srcAttrib, String nameSpaceURI, String srcNameSpaceURI)
 	{
-		if (src == null)
-			src = this;
+		KElement srcLocal = src;
+		String nameSpaceURILocal = nameSpaceURI;
+		
+		if (srcLocal == null)
+			srcLocal = this;
+		
 		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFConstants.EMPTYSTRING) ? attrib : srcAttrib;
-		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
-		if (xmlnsPrefix(attrib) != null && nameSpaceURI == null)
+		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURILocal : srcNameSpaceURI;
+		if (xmlnsPrefix(attrib) != null && nameSpaceURILocal == null)
 		{
-			boolean b = src.hasAttribute(strSrcAttrib, strNameSpace, false);
+			boolean b = srcLocal.hasAttribute(strSrcAttrib, strNameSpace, false);
 			if (b)
 			{
-				final Attr attr = src.getDOMAttr(strSrcAttrib, strNameSpace, true);
+				final Attr attr = srcLocal.getDOMAttr(strSrcAttrib, strNameSpace, true);
 				if (attr != null)
 				{
-					nameSpaceURI = attr.getNamespaceURI();
+					nameSpaceURILocal = attr.getNamespaceURI();
 				}
 			}
 		}
-		final String attribute = src.getAttribute(strSrcAttrib, strNameSpace, null);
+		
+		final String attribute = srcLocal.getAttribute(strSrcAttrib, strNameSpace, null);
 		if (attribute != null)
 		{
-			src.removeAttribute(strSrcAttrib, strNameSpace);
+			srcLocal.removeAttribute(strSrcAttrib, strNameSpace);
 		}
+		
 		setAttribute(attrib, attribute);
 	}
 

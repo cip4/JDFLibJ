@@ -216,8 +216,11 @@ public class StatusCounter
 	 */
 	public void setActiveNode(JDFNode node, VJDFAttributeMap vPartMap, VElement vResLinks)
 	{
+		VElement vResLinksLocal = vResLinks;
+		
 		if (node == null)
 			setTrackWaste.clear();
+		
 		bCompleted = false;
 		m_Node = node;
 		m_vPartMap = vPartMap;
@@ -243,18 +246,20 @@ public class StatusCounter
 		{
 			nodeID.setTo(node.getJobID(true), node.getJobPartID(false), m_vPartMap);
 		}
-		if (vResLinks == null && m_Node != null)
+		
+		if (vResLinksLocal == null && m_Node != null)
 		{
-			vResLinks = m_Node.getResourceLinks(null);
-			int siz = vResLinks == null ? 0 : vResLinks.size();
+			vResLinksLocal = m_Node.getResourceLinks(null);
+			int siz = vResLinksLocal == null ? 0 : vResLinksLocal.size();
 			for (int i = siz - 1; i >= 0; i--)
 			{
-				JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
+				JDFResourceLink rl = (JDFResourceLink) vResLinksLocal.elementAt(i);
 				if (!rl.isPhysical())
-					vResLinks.remove(i);
+					vResLinksLocal.remove(i);
 			}
 		}
-		setUpResLinks(vResLinks);
+		
+		setUpResLinks(vResLinksLocal);
 	}
 
 	/**
@@ -282,20 +287,24 @@ public class StatusCounter
 	 */
 	protected LinkAmount getLinkAmount(String refID)
 	{
+		String refIDLocal = refID;
+		
 		if (vLinkAmount == null || vLinkAmount.length == 0)
 		{
 			return null;
 		}
-		if (refID == null)
-			refID = getFirstRefID();
+		
+		if (refIDLocal == null)
+			refIDLocal = getFirstRefID();
 
 		for (int i = 0; i < vLinkAmount.length; i++)
 		{
-			if (vLinkAmount[i].linkFitsKey(refID))
+			if (vLinkAmount[i].linkFitsKey(refIDLocal))
 			{
 				return vLinkAmount[i];
 			}
 		}
+		
 		return null;
 	}
 
@@ -307,20 +316,24 @@ public class StatusCounter
 	 */
 	public String getLinkID(String refID)
 	{
+		String refIDLocal = refID;
+		
 		if (vLinkAmount == null || vLinkAmount.length == 0)
 		{
 			return null;
 		}
-		if (refID == null)
-			refID = getFirstRefID();
+		
+		if (refIDLocal == null)
+			refIDLocal = getFirstRefID();
 
 		for (int i = 0; i < vLinkAmount.length; i++)
 		{
-			if (vLinkAmount[i].linkFitsKey(refID))
+			if (vLinkAmount[i].linkFitsKey(refIDLocal))
 			{
 				return vLinkAmount[i].rl.getrRef();
 			}
 		}
+		
 		return null;
 	}
 

@@ -227,8 +227,10 @@ public class UrlUtil
 	 */
 	public static String getRelativePath(File f, File fCWD)
 	{
-		if (fCWD == null)
-			fCWD = new File(System.getProperty("user.dir"));
+		File fCWDLocal = fCWD;
+		
+		if (fCWDLocal == null)
+			fCWDLocal = new File(System.getProperty("user.dir"));
 
 		String cPath = null;
 		String cwd = null;
@@ -236,7 +238,7 @@ public class UrlUtil
 		{
 			cPath = f.getCanonicalPath();
 			// just in case...
-			cwd = fCWD.getCanonicalPath();
+			cwd = fCWDLocal.getCanonicalPath();
 			if (cPath.charAt(0) != cwd.charAt(0))
 				return null; // incompatible abs paths
 
@@ -508,35 +510,36 @@ public class UrlUtil
 	 */
 	public static File urlToFile(String urlString)
 	{
+		String urlStringLocal = urlString;
 
-		if (urlString == null)
+		if (urlStringLocal == null)
 			return null;
 
-		if (isCID(urlString) || isHttp(urlString))
+		if (isCID(urlStringLocal) || isHttp(urlStringLocal))
 			return null;
 
-		if (urlString.toLowerCase().startsWith("file:"))
-			urlString = urlString.substring(5); // remove "file:"
+		if (urlStringLocal.toLowerCase().startsWith("file:"))
+			urlStringLocal = urlStringLocal.substring(5); // remove "file:"
 
-		File f = new File(urlString);
+		File f = new File(urlStringLocal);
 		if (f.canRead())
 			return f;
 		if (File.separator.equals("\\")) // on windows
 		{
-			if (urlString.startsWith("///") && urlString.length() > 5 && urlString.charAt(4) == '/')
-				urlString = urlString.charAt(3) + ":" + urlString.substring(4);
-			else if (urlString.startsWith("/") && urlString.length() > 3 && urlString.charAt(2) == '/'
-					&& urlString.charAt(1) != '/')
-				urlString = urlString.charAt(1) + ":" + urlString.substring(2);
-			else if (urlString.startsWith("///"))
-				urlString = urlString.substring(2);
+			if (urlStringLocal.startsWith("///") && urlStringLocal.length() > 5 && urlStringLocal.charAt(4) == '/')
+				urlStringLocal = urlStringLocal.charAt(3) + ":" + urlStringLocal.substring(4);
+			else if (urlStringLocal.startsWith("/") && urlStringLocal.length() > 3 && urlStringLocal.charAt(2) == '/'
+					&& urlStringLocal.charAt(1) != '/')
+				urlStringLocal = urlStringLocal.charAt(1) + ":" + urlStringLocal.substring(2);
+			else if (urlStringLocal.startsWith("///"))
+				urlStringLocal = urlStringLocal.substring(2);
 		}
 
-		urlString = new String(StringUtil.setUTF8String(urlString)); // ensure that any non-utf8 gets encoded to utf-8
-		urlString = StringUtil.unEscape(urlString, "%", 16, 2);
-		urlString = StringUtil.getUTF8String(urlString.getBytes());
+		urlStringLocal = new String(StringUtil.setUTF8String(urlStringLocal)); // ensure that any non-utf8 gets encoded to utf-8
+		urlStringLocal = StringUtil.unEscape(urlStringLocal, "%", 16, 2);
+		urlStringLocal = StringUtil.getUTF8String(urlStringLocal.getBytes());
 
-		return new File(urlString);
+		return new File(urlStringLocal);
 	}
 
 	/**
@@ -547,23 +550,25 @@ public class UrlUtil
 	 */
 	public static URL StringToURL(String urlString)
 	{
+		String urlStringLocal = urlString;
+
 		URL url = null;
 		
-		if (urlString == null)
+		if (urlStringLocal == null)
 			return url;
 
-		if (isEscaped(urlString))
-			urlString = StringUtil.unEscape(urlString, "%", 16, 2);
+		if (isEscaped(urlStringLocal))
+			urlStringLocal = StringUtil.unEscape(urlStringLocal, "%", 16, 2);
 
 		try
 		{
-			if (isCID(urlString) || isHttp(urlString))
+			if (isCID(urlStringLocal) || isHttp(urlStringLocal))
 			{
-				url = new URL(urlString);
+				url = new URL(urlStringLocal);
 			}
 			else
 			{
-				url = new URL(fileToUrl(urlToFile(urlString), true));
+				url = new URL(fileToUrl(urlToFile(urlStringLocal), true));
 			}
 		}
 		catch (MalformedURLException x)
@@ -615,11 +620,13 @@ public class UrlUtil
 	 */
 	public static boolean isCID(String url)
 	{
-		if (url == null)
+		String urlLocal = url;
+		
+		if (urlLocal == null)
 			return false;
-		if (url.startsWith("<"))
-			url = url.substring(1);
-		final String lowerURL = url.toLowerCase();
+		if (urlLocal.startsWith("<"))
+			urlLocal = urlLocal.substring(1);
+		final String lowerURL = urlLocal.toLowerCase();
 		return lowerURL.startsWith("cid:");
 	}
 
@@ -685,10 +692,13 @@ public class UrlUtil
 	 */
 	public static boolean isMIMEExtenstension(String lower)
 	{
-		lower = extension(lower);
-		if (lower == null)
+		String lowerLocal = lower;
+		
+		lowerLocal = extension(lowerLocal);
+		if (lowerLocal == null)
 			return false;
-		return lower.equalsIgnoreCase("mjm") || lower.equalsIgnoreCase("mjd") || lower.equalsIgnoreCase("mim");
+		
+		return lowerLocal.equalsIgnoreCase("mjm") || lowerLocal.equalsIgnoreCase("mjd") || lowerLocal.equalsIgnoreCase("mim");
 	}
 
 	/**
@@ -765,22 +775,27 @@ public class UrlUtil
 	 */
 	public static String getURLWithDirectory(String directory, String url)
 	{
-		if (directory == null || JDFConstants.EMPTYSTRING.equals(directory))
-			return url;
-		if (url == null)
-			return directory;
+		String directoryLocal = directory;
+		String urlLocal = url;
+		
+		if (directoryLocal == null || JDFConstants.EMPTYSTRING.equals(directoryLocal))
+			return urlLocal;
+		
+		if (urlLocal == null)
+			return directoryLocal;
 
-		if (url.indexOf(":") > 0 && ((url.indexOf("/") < 0) || url.indexOf("/") > url.indexOf(":"))) // has
+		if (urlLocal.indexOf(":") > 0 && ((urlLocal.indexOf("/") < 0) || urlLocal.indexOf("/") > urlLocal.indexOf(":"))) // has
 			// scheme
-			return url;
-		if (url.startsWith("/"))
+			return urlLocal;
+		
+		if (urlLocal.startsWith("/"))
 		{
 			try
 			{
-				URI dirURI = new URI(directory);
-				directory = dirURI.getScheme() + ":";
-				if (!url.startsWith("//"))
-					url = "/" + url;
+				URI dirURI = new URI(directoryLocal);
+				directoryLocal = dirURI.getScheme() + ":";
+				if (!urlLocal.startsWith("//"))
+					urlLocal = "/" + urlLocal;
 			}
 			catch (URISyntaxException x)
 			{
@@ -788,10 +803,10 @@ public class UrlUtil
 			}
 		}
 
-		if (!directory.endsWith("/") && !url.startsWith("/"))
-			directory += "/";
+		if (!directoryLocal.endsWith("/") && !urlLocal.startsWith("/"))
+			directoryLocal += "/";
 
-		return cleanDots(directory + url);
+		return cleanDots(directoryLocal + urlLocal);
 	}
 
 	/**
@@ -852,14 +867,16 @@ public class UrlUtil
 	 */
 	public static UrlPart writeToURL(String strUrl, InputStream stream, String method, String contentType, HTTPDetails details)
 	{
+		String contentTypeLocal = contentType;
+		
 		try
 		{
 			URL url = new URL(strUrl);
 			HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
 			httpURLconnection.setRequestMethod(method);
 			httpURLconnection.setRequestProperty("Connection", "close");
-			contentType = StringUtil.token(contentType, 0, "\r\n");
-			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
+			contentTypeLocal = StringUtil.token(contentTypeLocal, 0, "\r\n");
+			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentTypeLocal);
 			httpURLconnection.setDoOutput(true);
 			if (details != null)
 				details.applyTo(httpURLconnection);
@@ -871,12 +888,14 @@ public class UrlUtil
 
 			out.flush();
 			out.close();
+			
 			return new UrlPart(httpURLconnection);
 		}
 		catch (Exception x)
 		{
 			// System.out.print(x);
 		}
+		
 		return null;
 	}
 }

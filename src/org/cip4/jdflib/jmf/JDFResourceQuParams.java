@@ -262,12 +262,14 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 */
 	public void setIdentifier(NodeIdentifier ni)
 	{
-		if (ni == null)
-			ni = new NodeIdentifier();
+		NodeIdentifier niLocal = ni;
+		
+		if (niLocal == null)
+			niLocal = new NodeIdentifier();
 
-		setJobID(ni.getJobID());
-		setJobPartID(ni.getJobPartID());
-		setPartMapVector(ni.getPartMapVector());
+		setJobID(niLocal.getJobID());
+		setJobPartID(niLocal.getJobPartID());
+		setPartMapVector(niLocal.getPartMapVector());
 	}
 
 }

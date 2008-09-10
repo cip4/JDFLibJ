@@ -1143,8 +1143,11 @@ public class JDFSpawn
 	 * 
 	 * @return VString vector of resource names that have been copied
 	 */
-	private void copySpawnedResource(JDFResourcePool p, JDFResource r, JDFResource.EnumSpawnStatus copyStatus, VJDFAttributeMap vParts, String spawnID, VString vRWResources, HashSet vRWIDs, HashSet vROIDs, HashSet allIDsCopied)
+	private void copySpawnedResource(JDFResourcePool p, JDFResource r, JDFResource.EnumSpawnStatus copyStatus, 
+			VJDFAttributeMap vParts, String spawnID, VString vRWResources, HashSet vRWIDs, HashSet vROIDs, 
+			HashSet allIDsCopied)
 	{
+		JDFResource.EnumSpawnStatus copyStatusLocal = copyStatus;
 
 		if (r == null)
 		{
@@ -1152,7 +1155,7 @@ public class JDFSpawn
 		}
 
 		// r is not yet here copy r
-		final boolean bRW = copyStatus == JDFResource.EnumSpawnStatus.SpawnedRW;
+		final boolean bRW = copyStatusLocal == JDFResource.EnumSpawnStatus.SpawnedRW;
 		final String rID = r.getID();
 		if (!allIDsCopied.contains(rID))
 		{
@@ -1163,8 +1166,9 @@ public class JDFSpawn
 			{
 				reducePartitions(rNew);
 			}
-			spawnPart(r, spawnID, copyStatus, vParts, true);
-			spawnPart(rNew, spawnID, copyStatus, vParts, false);
+			
+			spawnPart(r, spawnID, copyStatusLocal, vParts, true);
+			spawnPart(rNew, spawnID, copyStatusLocal, vParts, false);
 
 			if (bRW)
 			{
@@ -1174,6 +1178,7 @@ public class JDFSpawn
 			{
 				vROIDs.add(rID);
 			}
+			
 			allIDsCopied.add(rID);
 		}
 
@@ -1198,10 +1203,10 @@ public class JDFSpawn
 					// list
 					if (bRW)
 					{
-						copyStatus = resFitsRWRes(next, vRWResources) ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
+						copyStatusLocal = resFitsRWRes(next, vRWResources) ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
 					}
 					// recurse into refelements
-					copySpawnedResource(p, next, copyStatus, vParts, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
+					copySpawnedResource(p, next, copyStatusLocal, vParts, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
 				}
 			}
 		}

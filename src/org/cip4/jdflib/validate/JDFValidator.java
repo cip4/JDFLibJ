@@ -790,16 +790,20 @@ public class JDFValidator
 		}
 	}
 
-	private void printAttributeList(int indent, KElement testElement, JDFElement part, boolean printMissElms, VString attributeVector, String whatType, String message)
+	private void printAttributeList(int indent, KElement testElement, JDFElement part, 
+			boolean printMissElms, VString attributeVector, String whatType, String message)
 	{
+		String messageLocal = message;
+		
 		if (attributeVector == null)
 			return;
+		
 		attributeVector.unify();
-		String originalMessage = message;
+		String originalMessage = messageLocal;
 		int j;
 		for (j = 0; j < attributeVector.size(); j++)
 		{
-			message = originalMessage;
+			messageLocal = originalMessage;
 			String invalidAt = attributeVector.elementAt(j);
 			if (!((KElement) part).hasAttribute_KElement(invalidAt, "", false)) // exactly
 			// this
@@ -864,7 +868,7 @@ public class JDFValidator
 					if (v != null)
 					{
 						e.setAttribute("FirstVersion", v.getName());
-						message += " First valid Version: " + v.getName();
+						messageLocal += " First valid Version: " + v.getName();
 					}
 				}
 				else if (whatType.equals("Deprecated"))
@@ -873,16 +877,18 @@ public class JDFValidator
 					if (v != null)
 					{
 						e.setAttribute("LastVersion", v.getName());
-						message += " Last valid Version: " + v.getName();
+						messageLocal += " Last valid Version: " + v.getName();
 					}
 				}
-				setErrorType(e, whatType + "Attribute", invalidAt + " " + message);
+				
+				setErrorType(e, whatType + "Attribute", invalidAt + " " + messageLocal);
 				e.setAttribute("NodeName", invalidAt);
 				e.setAttribute("XPath", part.buildXPath(null, 1) + "/@" + invalidAt);
 				e.setAttribute("Value", part.getAttribute(invalidAt));
 
 			}
 		}
+		
 		if (attributeVector.size() > 0)
 		{
 			testElement.setAttribute(whatType + "Attributes", StringUtil.setvString(attributeVector, JDFConstants.BLANK, null, null));
@@ -1161,6 +1167,8 @@ public class JDFValidator
 
 	private boolean checkType(final JDFNode jdfNode, int indent, KElement testElement, boolean isValid)
 	{
+		boolean isValidLocal = isValid;
+		
 		String errMessage = indent(indent) + "!!! InValid Element: " + jdfNode.buildXPath(null, 1) + " "
 				+ jdfNode.getID() + " !!! ";
 		if (jdfNode.hasAttribute(AttributeName.TYPE))
@@ -1196,10 +1204,12 @@ public class JDFValidator
 								{
 									continue;
 								}
+								
 								if (n++ > 0)
 								{
 									msg += "; ";
 								}
+								
 								msg += t;
 							}
 						}
@@ -1224,8 +1234,8 @@ public class JDFValidator
 				e.setAttribute("XPath", jdfNode.buildXPath(null, 1) + "/@Type");
 				e.setAttribute("NodeName", "Type");
 				e.setAttribute("Value", typeString);
-
 			}
+			
 			if (typeString.equals(JDFConstants.PRODUCT))
 			{
 				JDFNode n = jdfNode.getParentJDF();
@@ -1233,7 +1243,7 @@ public class JDFValidator
 				{
 					if (!JDFConstants.PRODUCT.equals(n.getType()))
 					{
-						isValid = false;
+						isValidLocal = false;
 						sysOut.println(errMessage);
 						sysOut.println(nodeType);
 						sysOut.println(indent(indent) + "Invalid Parent for JDF Product: Type= " + n.getType());
@@ -1246,7 +1256,8 @@ public class JDFValidator
 				}
 			}
 		}
-		return isValid;
+		
+		return isValidLocal;
 	}
 
 	/**
@@ -2485,6 +2496,8 @@ public class JDFValidator
 
 	private long evalDevCaps(KElement testFileRoot, long lDevCapsTime, JDFElement root)
 	{
+		long lDevCapsTimeLocal = lDevCapsTime;
+		
 		long lStartTime_TestDevCap;
 		long lEndTime_TestDevCap;
 		if (devCapFile != null)
@@ -2497,17 +2510,20 @@ public class JDFValidator
 			printDevCap(root, devCapTest);
 
 			lEndTime_TestDevCap = System.currentTimeMillis();
-			lDevCapsTime = (lEndTime_TestDevCap - lStartTime_TestDevCap);
+			lDevCapsTimeLocal = (lEndTime_TestDevCap - lStartTime_TestDevCap);
 			if (bTiming && devCapTest != null)
 			{
-				devCapTest.setAttribute("DeviceCapTestTime", lDevCapsTime + " ms");
+				devCapTest.setAttribute("DeviceCapTestTime", lDevCapsTimeLocal + " ms");
 			}
 		}
-		return lDevCapsTime;
+		
+		return lDevCapsTimeLocal;
 	}
 
 	private void printMultipleIDs(String url, String xmlFile, KElement root, KElement outRoot)
 	{
+		KElement outRootLocal = outRoot;
+		
 		if (bMultiID)
 		{
 			if (bQuiet)
@@ -2518,16 +2534,17 @@ public class JDFValidator
 				{
 					sysOut.println("           " + url);
 				}
+				
 				sysOut.println("**********************************************************\n");
 			}
 
 			vMultiID = root.getMultipleIDs("ID");
 			if (vMultiID != null)
 			{
-				if (outRoot != null)
+				if (outRootLocal != null)
 				{
-					outRoot = outRoot.appendElement("MultiIDs");
-					outRoot.setAttribute("IsValid", false, null);
+					outRootLocal = outRootLocal.appendElement("MultiIDs");
+					outRootLocal.setAttribute("IsValid", false, null);
 				}
 
 				sysOut.println("Multiple ID elements:\n");
@@ -2539,20 +2556,20 @@ public class JDFValidator
 					{
 						v.add(root);
 					}
+					
 					for (int ii = 0; ii < v.size(); ii++)
 					{
 						KElement e = v.item(ii);
 						sysOut.println(id + " \t:" + e.buildXPath(null, 2));
-						if (outRoot != null)
+						if (outRootLocal != null)
 						{
-							KElement idRoot = outRoot.getChildWithAttribute("MultiID", "ID", null, e.getAttribute("ID"), 0, true);
+							KElement idRoot = outRootLocal.getChildWithAttribute("MultiID", "ID", null, e.getAttribute("ID"), 0, true);
 							if (idRoot == null)
-								idRoot = outRoot.appendElement("MultiID");
+								idRoot = outRootLocal.appendElement("MultiID");
 							idRoot.setAttribute("ID", e.getAttribute("ID"));
 							final KElement idInst = idRoot.appendElement("IDInstance");
 							idInst.setAttribute("XPath", e.buildXPath(null, 2));
 							idInst.setAttribute("Name", e.getNodeName());
-
 						}
 					}
 				}

@@ -276,16 +276,18 @@ public class JDFIntegerRangeList extends JDFRangeList
 
 	public int getElement(int i) throws NoSuchElementException
 	{
+		int iLocal = i;
+		
 		int n = this.getElementCount();
 
-		if ((i >= n) || (i < -n))
+		if ((iLocal >= n) || (iLocal < -n))
 		{
 			throw new NoSuchElementException("JDFIntegerRangeList::Element out of range error!");
 		}
 
-		if (i < 0)
+		if (iLocal < 0)
 		{
-			return getElement(n + i);
+			return getElement(n + iLocal);
 		}
 
 		n = 0;
@@ -294,14 +296,14 @@ public class JDFIntegerRangeList extends JDFRangeList
 		{
 			JDFIntegerRange r = (JDFIntegerRange) rangeList.elementAt(j);
 			int k = r.getElementCount();
-			if (i >= k)
+			if (iLocal >= k)
 			{
 				// go to next range
-				i -= k;
+				iLocal -= k;
 			}
 			else
 			{
-				return r.getElement(i);
+				return r.getElement(iLocal);
 			}
 		}
 

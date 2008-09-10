@@ -60,12 +60,14 @@ public class SchemaAttribute implements Serializable
 
     public void setStrAttributeName (String s)
     {
-        if ("Length".equals (s))
+    	String sLocal = s;
+    	
+        if ("Length".equals (sLocal))
         {
-            s = "LengthJDF";
+            sLocal = "LengthJDF";
         }
 
-        this.m_strAttributeName = s;
+        this.m_strAttributeName = sLocal;
     }
 
     public void setStrEnumName (String nAttributeName)

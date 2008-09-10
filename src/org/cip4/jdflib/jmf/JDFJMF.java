@@ -579,12 +579,14 @@ public class JDFJMF extends JDFAutoJMF
 	 */
 	public JDFMessage getMessageElement(JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
 	{
-		if (i < 0) // search from back
+		int iLocal = i;
+		
+		if (iLocal < 0) // search from back
 		{
 			VElement v = getMessageVector(family, typ);
 			int siz = v == null ? 0 : v.size();
-			i = siz + i;
-			return (JDFMessage) (i >= 0 ? v.get(i) : null);
+			iLocal = siz + iLocal;
+			return (JDFMessage) (iLocal >= 0 ? v.get(iLocal) : null);
 		}
 		final String typString = typ == null ? null : typ.getName();
 		final String familyString = family == null ? null : family.getName();
@@ -598,7 +600,7 @@ public class JDFJMF extends JDFAutoJMF
 			{
 				if (typString == null || typString.equals(((JDFMessage) e).getType()))
 				{
-					if (n++ >= i)
+					if (n++ >= iLocal)
 						return (JDFMessage) e;
 				}
 			}

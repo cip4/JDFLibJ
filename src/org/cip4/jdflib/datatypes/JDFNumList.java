@@ -317,13 +317,15 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public Object elementAt(int i)
 	{
+		int iLocal = i;
+		
 		final Vector numList = m_numList;
-		if (i < 0)
-			i = numList.size() + i;
+		if (iLocal < 0)
+			iLocal = numList.size() + iLocal;
 
-		if (i < 0 || i >= numList.size())
+		if (iLocal < 0 || iLocal >= numList.size())
 			return null;
-		return numList.elementAt(i);
+		return numList.elementAt(iLocal);
 	}
 
 	/**
@@ -375,12 +377,15 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public boolean removeElementAt(int i)
 	{
-		if (i < 0)
-			i = i + size();
+		int iLocal = i;
+		
+		if (iLocal < 0)
+			iLocal = iLocal + size();
 
-		if ((i < size()) && (i >= 0))
+		if ((iLocal < size()) && (iLocal >= 0))
 		{
-			m_numList.removeElementAt(i);
+			m_numList.removeElementAt(iLocal);
+			
 			return true;
 		}
 
@@ -396,12 +401,16 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public boolean replaceElementAt(Object obj, int i)
 	{
-		if (i < 0)
-			i = i + size();
-		if ((i < m_numList.size()) && (i > -1))
+		int iLocal = i;
+		
+		if (iLocal < 0)
+			iLocal = iLocal + size();
+		
+		if ((iLocal < m_numList.size()) && (iLocal > -1))
 		{
-			m_numList.removeElementAt(i);
-			m_numList.insertElementAt(obj, i);
+			m_numList.removeElementAt(iLocal);
+			m_numList.insertElementAt(obj, iLocal);
+			
 			return true;
 		}
 

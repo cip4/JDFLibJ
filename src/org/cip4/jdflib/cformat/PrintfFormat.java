@@ -585,15 +585,17 @@ public class PrintfFormat
 	 */
 	public String tostr(long x)
 	{
+		long xLocal = x;
+		
 		String p = null;
 
 		output.init(Math.max(width, 32));
 
 		if ((type == 'd') || (type == 'i'))
 		{
-			if (x < 0)
+			if (xLocal < 0)
 			{
-				x = -x;
+				xLocal = -xLocal;
 				p = "-";
 			}
 			else
@@ -608,18 +610,18 @@ public class PrintfFormat
 				}
 			}
 
-			if ((prec != 0) || (x != 0))
+			if ((prec != 0) || (xLocal != 0))
 			{
-				output.append(Long.toString(x));
+				output.append(Long.toString(xLocal));
 			}
 		}
 		else if (type == 'u')
 		{
-			uconv(x, 10, ddigits);
+			uconv(xLocal, 10, ddigits);
 		}
 		else if (type == 'o')
 		{
-			uconv(x, 8, ddigits);
+			uconv(xLocal, 8, ddigits);
 
 			if (alternate && (output.buf[output.k0] != '0'))
 			{
@@ -628,7 +630,7 @@ public class PrintfFormat
 		}
 		else if (type == 'x')
 		{
-			uconv(x, 16, xdigits);
+			uconv(xLocal, 16, xdigits);
 
 			if (alternate)
 			{
@@ -637,7 +639,7 @@ public class PrintfFormat
 		}
 		else if (type == 'X')
 		{
-			uconv(x, 16, Xdigits);
+			uconv(xLocal, 16, Xdigits);
 
 			if (alternate)
 			{
@@ -800,6 +802,8 @@ public class PrintfFormat
 
 	private void expHexFormat(double d, int p)
 	{
+		int pLocal = p;
+		
 		char[] digits = null;
 		long bits;
 		int e;
@@ -827,12 +831,12 @@ public class PrintfFormat
 			}
 		}
 
-		if ((p > 0) && (p < 13))
+		if ((pLocal > 0) && (pLocal < 13))
 		{ // then round up if necessary
 
-			if ((0xf & (m >> (4 * (12 - p)))) >= 8)
+			if ((0xf & (m >> (4 * (12 - pLocal)))) >= 8)
 			{
-				m += (1L << (4 * (13 - p)));
+				m += (1L << (4 * (13 - pLocal)));
 
 				if ((m & 0x20000000000000L) != 0)
 				{
@@ -857,19 +861,19 @@ public class PrintfFormat
 
 		output.append(((m & 0x10000000000000L) != 0) ? '1' : '0');
 
-		if ((p > 0) || ((p == -1) && (m != 0)) || alternate)
+		if ((pLocal > 0) || ((pLocal == -1) && (m != 0)) || alternate)
 		{
 			output.append('.');
 		}
 
-		while ((p > 0) || ((p == -1) && ((m & 0xfffffffffffffL) != 0)))
+		while ((pLocal > 0) || ((pLocal == -1) && ((m & 0xfffffffffffffL) != 0)))
 		{
 			output.append(digits[(int) ((m & 0xf000000000000L) >> 48)]);
 			m = m << 4;
 
-			if (p > 0)
+			if (pLocal > 0)
 			{
-				p--;
+				pLocal--;
 			}
 		}
 
@@ -1040,7 +1044,9 @@ public class PrintfFormat
 
 	private void uconv(long val, int radix, char[] digits)
 	{
-		if (val == 0)
+		long valLocal = val;
+		
+		if (valLocal == 0)
 		{
 			if (prec != 0)
 			{
@@ -1050,30 +1056,30 @@ public class PrintfFormat
 			return;
 		}
 
-		if (val < 0)
+		if (valLocal < 0)
 		{ // have to compute the first val/radix and val%radix in a
 			// complicated way
 
 			long halfval;
 			int mod;
 
-			halfval = val >>> 1;
-			mod = (int) ((2 * (halfval % radix)) + (val & 0x1));
-			val = 2 * (halfval / radix);
+			halfval = valLocal >>> 1;
+			mod = (int) ((2 * (halfval % radix)) + (valLocal & 0x1));
+			valLocal = 2 * (halfval / radix);
 
 			if (mod >= radix)
 			{
 				mod -= radix;
-				val += 1;
+				valLocal += 1;
 			}
 
 			output.prepend(digits[mod]);
 		}
 
-		while (val != 0)
+		while (valLocal != 0)
 		{
-			output.prepend(digits[(int) (val % radix)]);
-			val /= radix;
+			output.prepend(digits[(int) (valLocal % radix)]);
+			valLocal /= radix;
 		}
 	}
 
@@ -1106,28 +1112,30 @@ public class PrintfFormat
 
 		void set(double d)
 		{
+			double dLocal = d;
+			
 			numd = 0;
 			exp = 0;
 
-			setSignAndAlt(d);
+			setSignAndAlt(dLocal);
 
 			if (alt != null)
 			{
 				return;
 			}
-			else if (d == 0)
+			else if (dLocal == 0)
 			{
 				digits[0] = '0';
 				numd = 1;
 			}
 			else
 			{
-				if (d < 0)
+				if (dLocal < 0)
 				{
-					d = -d;
+					dLocal = -dLocal;
 				}
 
-				String s = Double.toString(d);
+				String s = Double.toString(dLocal);
 
 				int k;
 				int len;
@@ -1266,7 +1274,9 @@ public class PrintfFormat
 
 		final int append(char c, int n)
 		{
-			while (n-- > 0)
+			int nLocal = n;
+			
+			while (nLocal-- > 0)
 			{
 				buf[kn++] = c;
 			}
@@ -1301,7 +1311,9 @@ public class PrintfFormat
 
 		final int prepend(char c, int n)
 		{
-			while (n-- > 0)
+			int nLocal = n;
+			
+			while (nLocal-- > 0)
 			{
 				buf[--k0] = c;
 			}

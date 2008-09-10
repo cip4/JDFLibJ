@@ -1294,16 +1294,19 @@ public class JDFElement extends KElement
 	 */
 	public JDFElement appendHRef(String idRef, String refAttribute, String nameSpaceURI)
 	{
+		String refAttributeLocal = refAttribute;
+		
 		if (idRef == null || idRef.length() < 1)
 		{
 			return null;
 		}
-		if (refAttribute == null || refAttribute.equals(JDFConstants.EMPTYSTRING))
+		
+		if (refAttributeLocal == null || refAttributeLocal.equals(JDFConstants.EMPTYSTRING))
 		{
-			refAttribute = JDFConstants.RREF;
+			refAttributeLocal = JDFConstants.RREF;
 		}
 
-		setAttribute(refAttribute, idRef, nameSpaceURI);
+		setAttribute(refAttributeLocal, idRef, nameSpaceURI);
 
 		return this;
 	}
@@ -2267,35 +2270,42 @@ public class JDFElement extends KElement
 	 * @param bResolveTarget - additional control how refelements are followed
 	 * @return
 	 */
-	public synchronized VElement getChildElementVector_JDFElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
+	public synchronized VElement getChildElementVector_JDFElement(
+			String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, 
+			boolean bAnd, int maxSize, boolean bResolveTarget)
 	{
+		String nodeNameLocal = nodeName;
+		String nameSpaceURILocal = nameSpaceURI;
+		JDFAttributeMap mAttribLocal = mAttrib;
+		int maxSizeLocal = maxSize;
+		
 		final VElement v = new VElement();
-		if (isWildCard(nodeName))
+		if (isWildCard(nodeNameLocal))
 		{
-			nodeName = null;
+			nodeNameLocal = null;
 		}
-		if (isWildCard(nameSpaceURI))
+		if (isWildCard(nameSpaceURILocal))
 		{
-			nameSpaceURI = null;
+			nameSpaceURILocal = null;
 		}
-		if (mAttrib != null && mAttrib.isEmpty())
+		if (mAttribLocal != null && mAttribLocal.isEmpty())
 		{
-			mAttrib = null;
+			mAttribLocal = null;
 		}
-		if (maxSize == 0)
+		if (maxSizeLocal == 0)
 		{
-			maxSize = -1;
+			maxSizeLocal = -1;
 		}
 
-		final boolean bAlwaysFit = nodeName == null && nameSpaceURI == null;
-		final boolean bMapEmpty = mAttrib == null;
+		final boolean bAlwaysFit = nodeNameLocal == null && nameSpaceURILocal == null;
+		final boolean bMapEmpty = mAttribLocal == null;
 
 		int iSize = 0;
 		KElement kElem = getFirstChildElement();
 
 		while (kElem != null)
 		{
-			if (bAlwaysFit || kElem.fitsName(nodeName, nameSpaceURI))
+			if (bAlwaysFit || kElem.fitsName(nodeNameLocal, nameSpaceURILocal))
 			{
 				if (bResolveTarget && (kElem instanceof JDFRefElement))
 				{
@@ -2309,7 +2319,7 @@ public class JDFElement extends KElement
 						if (target != null)
 						{ // we want the jdfElem version of IncludesAttributes,
 							// so we must upcast
-							if (bMapEmpty || target.includesAttributes(mAttrib, bAnd))
+							if (bMapEmpty || target.includesAttributes(mAttribLocal, bAnd))
 							{
 								v.addElement(target);
 								iSize++;
@@ -2321,12 +2331,12 @@ public class JDFElement extends KElement
 						// simply skip invalid refelements
 					}
 				}
-				else if (bMapEmpty || kElem.includesAttributes(mAttrib, bAnd))
+				else if (bMapEmpty || kElem.includesAttributes(mAttribLocal, bAnd))
 				{
 					v.addElement(kElem);
 					iSize++;
 				}
-				if (iSize == maxSize)
+				if (iSize == maxSizeLocal)
 				{
 					break;
 				}
@@ -2389,11 +2399,12 @@ public class JDFElement extends KElement
 	 */
 	public KElement getElement_JDFElement(String nodeName, String nameSpaceURI, int iSkip)
 	{
+		int iSkipLocal = iSkip;
 		// loop over the list
 		int i = 0;
-		if (iSkip < 0)
-			iSkip = numChildElements_JDFElement(nodeName, nameSpaceURI) + iSkip;
-		if (iSkip < 0)
+		if (iSkipLocal < 0)
+			iSkipLocal = numChildElements_JDFElement(nodeName, nameSpaceURI) + iSkipLocal;
+		if (iSkipLocal < 0)
 			return null;
 		KElement jdfElem = getFirstChildElement();
 		final boolean bExplicitRefElement = (nodeName != null) && (nodeName.endsWith(JDFConstants.REF));
@@ -2403,7 +2414,7 @@ public class JDFElement extends KElement
 			if (jdfElem.fitsName(nodeName, nameSpaceURI))
 			{
 				// this guy is the one
-				if (i++ == iSkip)
+				if (i++ == iSkipLocal)
 				{
 					// follow valid (!) refElements, invalid refelements are
 					// ignored
@@ -2568,11 +2579,13 @@ public class JDFElement extends KElement
 	 */
 	public String appendAnchor(String strName)
 	{
+		String strNameLocal = strName;
+		
 		if (hasAttribute(AttributeName.ID))
 		{
 			return this.getAttribute(AttributeName.ID, null, null);
 		}
-		else if ((strName == null) || strName.equals(JDFConstants.EMPTYSTRING))
+		else if ((strNameLocal == null) || strNameLocal.equals(JDFConstants.EMPTYSTRING))
 		{
 			String local = "";
 			final JDFNode n = getJDFRoot();
@@ -2594,11 +2607,11 @@ public class JDFElement extends KElement
 				}
 			}
 
-			strName = getIDPrefix() + local + uniqueID(0);
+			strNameLocal = getIDPrefix() + local + uniqueID(0);
 		}
-		setAttribute(AttributeName.ID, strName, null);
+		setAttribute(AttributeName.ID, strNameLocal, null);
 
-		return strName;
+		return strNameLocal;
 	}
 
 	/**
@@ -2609,11 +2622,13 @@ public class JDFElement extends KElement
 	 */
 	public void setAttributeNameTimeStamp(String attributeName, JDFDate timestamp)
 	{
-		if (timestamp == null)
+		JDFDate timestampLocal = timestamp;
+		
+		if (timestampLocal == null)
 		{
-			timestamp = new JDFDate();
+			timestampLocal = new JDFDate();
 		}
-		setAttribute(attributeName, timestamp.getDateTimeISO(), null);
+		setAttribute(attributeName, timestampLocal.getDateTimeISO(), null);
 	}
 
 	/**
@@ -2805,6 +2820,7 @@ public class JDFElement extends KElement
 		{
 			vBad.appendUnique(new VString(getMissingElements(nMax)));
 		}
+		
 		vBad.appendUnique(new VString(getUnknownElements(bIgnorePrivate, nMax)));
 
 		return vBad;
@@ -3543,10 +3559,11 @@ public class JDFElement extends KElement
 	 */
 	public VString getHRefs(VString vDoneRefs, boolean bRecurse, boolean bExpand)
 	{
+		VString vDoneRefsLocal = vDoneRefs;
 
-		if (vDoneRefs == null)
+		if (vDoneRefsLocal == null)
 		{
-			vDoneRefs = new VString();
+			vDoneRefsLocal = new VString();
 		}
 
 		HashSet h = new HashSet();
@@ -3564,28 +3581,28 @@ public class JDFElement extends KElement
 		{
 			fillHashSet(AttributeName.RREF, null, h);
 		}
-		final int iFirstPos = vDoneRefs.size(); // get the previous size
+		final int iFirstPos = vDoneRefsLocal.size(); // get the previous size
 		VString v2 = new VString();
 		v2.addAll(h);
 
-		vDoneRefs.appendUnique(v2); // get the new size
+		vDoneRefsLocal.appendUnique(v2); // get the new size
 		if (bRecurse)
 		{
-			final int iLastPos = vDoneRefs.size();
+			final int iLastPos = vDoneRefsLocal.size();
 
 			// recurse only the new rrefs
 			for (int i = iFirstPos; i < iLastPos; i++)
 			{
-				final String s = vDoneRefs.elementAt(i);
+				final String s = vDoneRefsLocal.elementAt(i);
 				final KElement e = getTarget(s, AttributeName.ID);
 				if (e instanceof JDFElement)
 				{
-					vDoneRefs = ((JDFElement) e).getHRefs(vDoneRefs, true, bExpand);
+					vDoneRefsLocal = ((JDFElement) e).getHRefs(vDoneRefsLocal, true, bExpand);
 				}
 			}
 		}
 
-		return vDoneRefs;
+		return vDoneRefsLocal;
 	}
 
 	/**
@@ -3990,6 +4007,8 @@ public class JDFElement extends KElement
 	@Deprecated
 	public JDFElement getChildElement(int n)
 	{
+		int nLocal = n;
+		
 		JDFElement eReturn = null;
 
 		final NodeList children = getChildNodes();
@@ -4002,9 +4021,9 @@ public class JDFElement extends KElement
 
 			if (node.getNodeType() == Node.ELEMENT_NODE)
 			{
-				n--;
+				nLocal--;
 
-				if (n == 0)
+				if (nLocal == 0)
 				{
 					eReturn = (JDFElement) node;
 				}
@@ -4423,9 +4442,11 @@ public class JDFElement extends KElement
 	 */
 	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
 	{
-		if (vDoneRefs.contains(this))
+		HashSet vDoneRefsLocal = vDoneRefs;
+		
+		if (vDoneRefsLocal.contains(this))
 		{
-			return vDoneRefs;
+			return vDoneRefsLocal;
 		}
 
 		VElement v = getChildElementVector_KElement(null, null, null, true, 0); // grabemall
@@ -4437,25 +4458,25 @@ public class JDFElement extends KElement
 			if (e instanceof JDFRefElement)
 			{
 				final JDFRefElement ref = (JDFRefElement) e;
-				if (!vDoneRefs.contains(ref))
+				if (!vDoneRefsLocal.contains(ref))
 				{
-					vDoneRefs.add(ref);
+					vDoneRefsLocal.add(ref);
 					if (bRecurse)
 					{
 						JDFResource r = ref.getTarget();
 						if (r != null)
 						{
-							vDoneRefs = r.getAllRefs(vDoneRefs, bRecurse);
+							vDoneRefsLocal = r.getAllRefs(vDoneRefsLocal, bRecurse);
 						}
 					}
 				}
 			}
 			else if (e instanceof JDFElement)
 			{ // recurse tree
-				vDoneRefs = ((JDFElement) e).getAllRefs(vDoneRefs, bRecurse);
+				vDoneRefsLocal = ((JDFElement) e).getAllRefs(vDoneRefsLocal, bRecurse);
 			}
 		}
-		return vDoneRefs;
+		return vDoneRefsLocal;
 	}
 
 	/**

@@ -644,15 +644,18 @@ public class JDFMerge
 		return root;
 	}
 
-	private void mergeLocalResource(JDFResource.EnumAmountMerge amountPolicy, final JDFResourcePool poolToMerge, JDFResource res1)
+	private void mergeLocalResource(JDFResource.EnumAmountMerge amountPolicy, 
+			final JDFResourcePool poolToMerge, JDFResource res1)
 	{
-		final String resID = res1.getID();
+		JDFResource res1Local = res1;
+		
+		final String resID = res1Local.getID();
 		final JDFResource res2 = poolToMerge.getResourceByID(resID);
 
 		if (res2 != null)
 		{
-			mergeSpawnIDs(res2, res1, false);
-			res1 = mergePartition(res1, res2, spawnID, amountPolicy, true); // esp
+			mergeSpawnIDs(res2, res1Local, false);
+			res1Local = mergePartition(res1Local, res2, spawnID, amountPolicy, true); // esp
 			// .
 			// deletes
 			// res2
@@ -661,9 +664,9 @@ public class JDFMerge
 			// node
 		}
 		// copy resource from orig to spawned node
-		poolToMerge.copyElement(res1, null);
-		res1 = poolToMerge.getResourceByID(resID);
-		final VElement resLeafsSpawned = res1.getNodesWithSpawnID(spawnID);
+		poolToMerge.copyElement(res1Local, null);
+		res1Local = poolToMerge.getResourceByID(resID);
+		final VElement resLeafsSpawned = res1Local.getNodesWithSpawnID(spawnID);
 		for (int leaf = 0; leaf < resLeafsSpawned.size(); leaf++)
 		{
 			final JDFResource leafRes = (JDFResource) resLeafsSpawned.elementAt(leaf);

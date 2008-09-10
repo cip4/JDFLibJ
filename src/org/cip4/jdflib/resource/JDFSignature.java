@@ -363,8 +363,11 @@ public class JDFSignature extends JDFAutoLayout
 	 * @param iSkip the index of the element, negative values count backwards from the end
 	 * @return JDFLayout: the element
 	 */
-	protected static JDFLayout getLayoutElement(JDFResource layout, String elementName, String partitionKeyName, int iSkip)
+	protected static JDFLayout getLayoutElement(JDFResource layout, String elementName, 
+			String partitionKeyName, int iSkip)
 	{
+		int iSkipLocal = iSkip;
+		
 		JDFLayout s = null;
 		if (JDFLayout.isNewLayout(layout))
 		{
@@ -376,15 +379,15 @@ public class JDFSignature extends JDFAutoLayout
 					v2.add(v.get(i));
 			}
 			v = v2;
-			if (iSkip < 0)
-				iSkip = v.size() + iSkip;
+			if (iSkipLocal < 0)
+				iSkipLocal = v.size() + iSkipLocal;
 
-			if (iSkip >= 0 && v.size() > iSkip)
-				s = (JDFLayout) v.elementAt(iSkip);
+			if (iSkipLocal >= 0 && v.size() > iSkipLocal)
+				s = (JDFLayout) v.elementAt(iSkipLocal);
 		}
 		else
 		{
-			s = (JDFLayout) layout.getElement(elementName, null, iSkip);
+			s = (JDFLayout) layout.getElement(elementName, null, iSkipLocal);
 
 		}
 		return s;

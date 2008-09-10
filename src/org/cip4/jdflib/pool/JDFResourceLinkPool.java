@@ -213,10 +213,12 @@ public class JDFResourceLinkPool extends JDFPool
 	 */
 	public VElement getLinkedResources(String resName, JDFAttributeMap mLinkAtt, JDFAttributeMap mResAtt, boolean bFollowRefs)
 	{
+		String resNameLocal = resName;
+		
 		final VElement v = getPoolChildren(null, mLinkAtt, null);
 		final VElement vL = new VElement();
-		if (resName != null && resName.endsWith(JDFConstants.LINK))
-			resName = resName.substring(0, resName.length() - 4); // remove link
+		if (resNameLocal != null && resNameLocal.endsWith(JDFConstants.LINK))
+			resNameLocal = resNameLocal.substring(0, resNameLocal.length() - 4); // remove link
 
 		final int size = (v == null) ? 0 : v.size();
 		for (int i = 0; i < size; i++)
@@ -225,7 +227,7 @@ public class JDFResourceLinkPool extends JDFPool
 
 			JDFResource linkRoot = l.getLinkRoot();
 			if ((linkRoot != null)
-					&& ((resName == null) || resName.equals(JDFConstants.EMPTYSTRING) || linkRoot.getLocalName().equals(resName)))
+					&& ((resNameLocal == null) || resNameLocal.equals(JDFConstants.EMPTYSTRING) || linkRoot.getLocalName().equals(resNameLocal)))
 			{
 				if (linkRoot.includesAttributes(mResAtt, true))
 				{
@@ -354,8 +356,10 @@ public class JDFResourceLinkPool extends JDFPool
 	@Deprecated
 	public JDFResourceLink appendResource(JDFResource r, boolean input, boolean bForce)
 	{
-		if (bForce)
-			bForce = true; // fool compiler
+		boolean bForceLocal = bForce;
+		
+		if (bForceLocal)
+			bForceLocal = true; // fool compiler
 
 		return linkResource(r, input ? EnumUsage.Input : EnumUsage.Output, null);
 	}
@@ -415,29 +419,34 @@ public class JDFResourceLinkPool extends JDFPool
 	 */
 	public JDFResourceLink linkResource(JDFResource r, JDFResourceLink.EnumUsage usage, EnumProcessUsage processUsage)
 	{
-		if (r == null || usage == null)
+		JDFResource rLocal = r;
+		
+		if (rLocal == null || usage == null)
 			return null;
-		String s = r.getID();
+		
+		String s = rLocal.getID();
 		if (isWildCard(s))
 		{
-			s = r.getResourceRoot().appendAnchor(null);
+			s = rLocal.getResourceRoot().appendAnchor(null);
 		}
-		final JDFResourceLink rl = (JDFResourceLink) appendElement(r.getLinkString(), r.getNamespaceURI());
-		rl.setTarget(r);
+		
+		final JDFResourceLink rl = (JDFResourceLink) appendElement(rLocal.getLinkString(), rLocal.getNamespaceURI());
+		rl.setTarget(rLocal);
 		rl.setUsage(usage);
 		rl.setProcessUsage(processUsage);
 
 		// move the resource to the closest common ancestor if it is not already
 		// an ancestor of this
-		JDFNode parent = r.getParentJDF();
+		JDFNode parent = rLocal.getParentJDF();
 
 		// move the resource to the closest common ancestor if it is not already
 		// an ancestor of this
 		while (parent != null && !parent.isAncestor(this))
 		{
-			parent = r.getParentJDF();
+			parent = rLocal.getParentJDF();
 			if (parent == null)
 				break;
+			
 			parent = parent.getParentJDF();
 			if (parent == null)
 			{
@@ -445,7 +454,7 @@ public class JDFResourceLinkPool extends JDFPool
 				throw new JDFException("JDFResourceLink appendResource resource is not in the same document");
 			}
 
-			r = (JDFResource) parent.getCreateResourcePool().moveElement(r, null);
+			rLocal = (JDFResource) parent.getCreateResourcePool().moveElement(rLocal, null);
 		}
 
 		return rl;
@@ -670,23 +679,25 @@ public class JDFResourceLinkPool extends JDFPool
 	 */
 	public JDFResourceLink getPoolChild(int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
 	{
+		int iLocal = i;
+		
 		final VElement v = getPoolChildren(strName, mAttrib, nameSpaceURI);
 		final int size = (v == null) ? 0 : v.size();
-		if (i < 0)
+		if (iLocal < 0)
 		{
-			i = size + i;
-			if (i < 0)
+			iLocal = size + iLocal;
+			if (iLocal < 0)
 			{
 				return null;
 			}
 		}
 
-		if (size <= i)
+		if (size <= iLocal)
 		{
 			return null;
 		}
 
-		return (JDFResourceLink) v.elementAt(i);
+		return (JDFResourceLink) v.elementAt(iLocal);
 	}
 
 	/**
@@ -703,7 +714,6 @@ public class JDFResourceLinkPool extends JDFPool
 	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		bIgnorePrivate = !bIgnorePrivate; // nop to kill compiler warning
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourceLinkPool, nMax);
 	}
 
@@ -717,26 +727,28 @@ public class JDFResourceLinkPool extends JDFPool
 	@Override
 	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
 	{
+		HashSet vDoneRefsLocal = vDoneRefs;
+		
 		VElement vResourceLinks = getPoolChildren(null, null, null);
 		final int size = (vResourceLinks == null) ? 0 : vResourceLinks.size();
 		for (int i = 0; i < size; i++)
 		{
 			JDFResourceLink rl = (JDFResourceLink) vResourceLinks.elementAt(i);
-			if (!vDoneRefs.contains(rl))
+			if (!vDoneRefsLocal.contains(rl))
 			{
-				vDoneRefs.add(rl);
+				vDoneRefsLocal.add(rl);
 				if (bRecurse)
 				{
 					JDFResource r = rl.getLinkRoot();
-					if (r != null && !vDoneRefs.contains(r))
+					if (r != null && !vDoneRefsLocal.contains(r))
 					{
-						vDoneRefs = r.getAllRefs(vDoneRefs, bRecurse);
+						vDoneRefsLocal = r.getAllRefs(vDoneRefsLocal, bRecurse);
 					}
 				}
 			}
 		}
 
-		return vDoneRefs;
+		return vDoneRefsLocal;
 	}
 
 }

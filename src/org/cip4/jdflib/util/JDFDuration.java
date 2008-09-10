@@ -205,6 +205,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * 
 	 * @return Object informations
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDuration[ m_lDuration=(" + m_lDuration + ")  --> " + super.toString() + " ]";
@@ -220,19 +221,22 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 */
 	private void init(String strDuration) throws DataFormatException
 	{
-		strDuration = StringUtil.zappTokenWS(strDuration, " ");
+		String strDurationLocal = strDuration;
+		
+		strDurationLocal = StringUtil.zappTokenWS(strDurationLocal, " ");
 
-		boolean bComplete = strDuration.matches(REGEX_DURATION);
+		boolean bComplete = strDurationLocal.matches(REGEX_DURATION);
 		m_lDuration = 0;
 
 		if (bComplete)
 		{
-			bComplete = setDurationISO(strDuration);
+			bComplete = setDurationISO(strDurationLocal);
 		}
+		
 		if (!bComplete)
 		{
 			// its not a DateTime nor a Duration
-			throw new DataFormatException("JDFDuration.init: invalid duration String " + strDuration);
+			throw new DataFormatException("JDFDuration.init: invalid duration String " + strDurationLocal);
 		}
 	}
 
@@ -530,6 +534,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * <code>JDFDuration</code> object that represents the same duration, as this object.
 	 * <p>
 	 */
+	@Override
 	public boolean equals(Object other)
 	{
 		if (this == other)
@@ -545,6 +550,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 	/**
 	 * hashCode: complements equals() to fulfill the equals/hashCode contract
 	 */
+	@Override
 	public int hashCode()
 	{
 		return HashUtil.hashCode(0, m_lDuration);

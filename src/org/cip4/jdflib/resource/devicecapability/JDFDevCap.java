@@ -1692,13 +1692,16 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 			EnumValidationLevel level, boolean ignoreExtensions,
 			boolean bRecurse, KElement parentReport)
 	{
+		boolean bRecurseLocal = bRecurse;
+		KElement parentReportLocal = parentReport;
+		
 		// 'e' in DeviceCapabilities is described by this DevCap
 
 		// first test if there are any subelements of 'e' that are not described
 		// by DevCap
 		if (!(e instanceof JDFNode) && !ignoreExtensions)
 		{
-			missingDevCap(e, parentReport);
+			missingDevCap(e, parentReportLocal);
 		}
 
 		// DevCap contains: (1) description of parts;
@@ -1707,7 +1710,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 
 		// (1) Test Partition Leaves: 'e' - is partitioned, its leaves must be
 		// described by 'this' DevCap
-		if (e instanceof JDFResource && bRecurse)
+		if (e instanceof JDFResource && bRecurseLocal)
 		{
 			JDFResource res = (JDFResource) e;
 			final JDFResource resourceRoot = res.getResourceRoot();
@@ -1721,7 +1724,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 				for (int i = 0; i < size; i++)
 				{
 					JDFResource leaf = (JDFResource) vLeaves.elementAt(i);
-					KElement p = parentReport
+					KElement p = parentReportLocal
 							.appendElement("InvalidPartitionLeaf");
 					KElement partTestResult = stateReport(leaf, testlists,
 							level, ignoreExtensions, false, p);
@@ -1740,26 +1743,26 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 				}
 			} else
 			{
-				bRecurse = false; // not partitioned - just pass through e
+				bRecurseLocal = false; // not partitioned - just pass through e
 			}
 		} else
 		{
-			bRecurse = false;
+			bRecurseLocal = false;
 		}
 
-		if (!bRecurse)
+		if (!bRecurseLocal)
 		{
-			subelementsTest(e, testlists, level, ignoreExtensions, parentReport);
+			subelementsTest(e, testlists, level, ignoreExtensions, parentReportLocal);
 
 			// (3) Test Attributes, Spans and Comments - described by States
 			spanAndAttributesTest(e, testlists, level, ignoreExtensions,
-					parentReport);
+					parentReportLocal);
 		}
-		if (!parentReport.hasChildElements())
+		if (!parentReportLocal.hasChildElements())
 		{
-			parentReport = null;
+			parentReportLocal = null;
 		}
-		return parentReport;
+		return parentReportLocal;
 	}
 
 	/**
@@ -1786,6 +1789,8 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 			EnumFitsValue testlists, EnumValidationLevel level,
 			boolean ignoreExtensions, KElement parentReport)
 	{
+		KElement parentReportLocal = parentReport;
+
 		VElement vDevCap = getDevCapVector(null, true); // vDevCap - contains
 														// DevCap elements of
 														// this DevCap
@@ -1816,7 +1821,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 				for (int j = 0; j < occurs; j++)
 				{
 					KElement subEl = vElem.item(j);
-					r = parentReport.appendElement("InvalidElement");
+					r = parentReportLocal.appendElement("InvalidElement");
 					r.setAttribute("CapXPath", dc.getNamePath(true));
 					r.setAttribute("XPath", subEl.buildXPath(null, 1));
 					r.setAttribute("Name", dcName);
@@ -1828,7 +1833,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 			} else if (occurs < minOccurs
 					&& EnumValidationLevel.isRequired(level))
 			{
-				r = parentReport.appendElement("MissingElement");
+				r = parentReportLocal.appendElement("MissingElement");
 				r.setAttribute("CapXPath", dc.getNamePath(true));
 				r.setAttribute("XPath", testElem.buildXPath(null, 1) + "/"
 						+ dcName);
@@ -1845,7 +1850,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 				KElement subEl = vElem.item(j);
 				if (goodElems.contains(subEl))
 					continue;
-				r = parentReport.appendElement("InvalidElement");
+				r = parentReportLocal.appendElement("InvalidElement");
 				KElement recursionResult = dc.stateReport(subEl, testlists,
 						level, ignoreExtensions, true, r);
 
@@ -1874,12 +1879,12 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 			}
 		}
 
-		if (!parentReport.hasChildElements())
+		if (!parentReportLocal.hasChildElements())
 		{
-			parentReport = null;
+			parentReportLocal = null;
 		}
 
-		return parentReport;
+		return parentReportLocal;
 	}
 
 	/**
@@ -1906,9 +1911,11 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 			EnumFitsValue testlists, EnumValidationLevel level,
 			boolean ignoreExtensions, KElement parentReport)
 	{
-		KElement msp = parentReport.appendElement("UnknownAttributes");
-		KElement map = parentReport.appendElement("MissingAttributes");
-		KElement iap = parentReport.appendElement("InvalidAttributes");
+		KElement parentReportLocal = parentReport;
+
+		KElement msp = parentReportLocal.appendElement("UnknownAttributes");
+		KElement map = parentReportLocal.appendElement("MissingAttributes");
+		KElement iap = parentReportLocal.appendElement("InvalidAttributes");
 
 		// vSubElem - contains all subelements of this DevCap
 		VElement vStates = getStates(true, null);
@@ -2085,20 +2092,20 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 		}
 
 		if (!map.hasChildElements())
-			parentReport.removeChild(map);
+			parentReportLocal.removeChild(map);
 
 		if (!iap.hasChildElements())
-			parentReport.removeChild(iap);
+			parentReportLocal.removeChild(iap);
 
 		if (!msp.hasChildElements())
-			parentReport.removeChild(msp);
+			parentReportLocal.removeChild(msp);
 
-		if (!parentReport.hasChildElements())
+		if (!parentReportLocal.hasChildElements())
 		{
-			parentReport = null;
+			parentReportLocal = null;
 		}
 
-		return parentReport;
+		return parentReportLocal;
 	}
 
 	/**

@@ -223,9 +223,6 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		/* !!! Do not change the signature of this method */
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
 	}
 

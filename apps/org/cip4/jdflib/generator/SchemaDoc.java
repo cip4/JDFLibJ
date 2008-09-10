@@ -106,33 +106,33 @@ public class SchemaDoc extends XMLDoc
         
         // First all names of the complextypes need to be shortened. Some end on '__' '_r' '_re' etc. 
         // these "extensions" are not needed here. Cut them away.
-        complexType = GeneratorUtil.unifyComplexTypNames(complexType, strType);
+    	SchemaComplexType complexTypeLocal = GeneratorUtil.unifyComplexTypNames(complexType, strType);
     
         // set the kind of element "who am i" need for all generation later.
         // set Kind of Code to generate at the moment
-        complexType.isJava = isJava;
+        complexTypeLocal.isJava = isJava;
         // typesafe all ComplexTypes for further use
         if ("Message".equals(strType))
         {
-            complexType.isMessage = true;
+            complexTypeLocal.isMessage = true;
         }
         else if ("Core".equals(strType))
         {
-            complexType.isCore = true;
+            complexTypeLocal.isCore = true;
         }
         else if ("Node".equals(strType))
         {
-            complexType.isNode = true;
+            complexTypeLocal.isNode = true;
         }
         else if ("CoreMessage".equals(strType))
         {
-            complexType.isCore     = true;
-            complexType.hasMessage = true;
+            complexTypeLocal.isCore     = true;
+            complexTypeLocal.hasMessage = true;
         }
     
-        String[] parents          = GeneratorUtil.fillParents(complexType);
+        String[] parents          = GeneratorUtil.fillParents(complexTypeLocal);
         VElement vAppInfoElements = new VElement();
-        String motherOf           = complexType.getStrMotherOfComplexType();
+        String motherOf           = complexTypeLocal.getStrMotherOfComplexType();
 
         if (!JDFConstants.EMPTYSTRING.equals(motherOf))
         {
@@ -141,16 +141,16 @@ public class SchemaDoc extends XMLDoc
         }
         
         // Take a member out of the schema, process the attributes and put it back into the vector
-        complexType = GeneratorUtil.getAllValidAttributes(
-                schemaElement, vComplexTypes, vAllSimpleTypes, parents, vAppInfoElements, complexType);
+        complexTypeLocal = GeneratorUtil.getAllValidAttributes(
+                schemaElement, vComplexTypes, vAllSimpleTypes, parents, vAppInfoElements, complexTypeLocal);
     
         // Take a member out of the schema, process the elements and put it back into the vector
-        complexType = GeneratorUtil.getAllValidElements(parents, vAppInfoElements, complexType);
+        complexTypeLocal = GeneratorUtil.getAllValidElements(parents, vAppInfoElements, complexTypeLocal);
     
         // Now its time to get the rest info (enumerations, node String infos etc)
-        complexType = GeneratorUtil.getRestInfo(parents, vAppInfoElements, complexType);
+        complexTypeLocal = GeneratorUtil.getRestInfo(parents, vAppInfoElements, complexTypeLocal);
         
-        return complexType;
+        return complexTypeLocal;
     }
 
     
@@ -159,6 +159,8 @@ public class SchemaDoc extends XMLDoc
      */
     private Vector removeDuplicates(Vector vMyCompleteSchema)
     {
+    	Vector vMyCompleteSchemaLocal = vMyCompleteSchema;
+    	
         SchemaComplexType nOldSchemaComplexType;
         SchemaComplexType nNewSchemaComplexType;
         
@@ -166,18 +168,18 @@ public class SchemaDoc extends XMLDoc
         // But quit a few of em are double or triple. Those will now be ripped out.
         Vector nJustALittleHelper = new Vector ();
 
-        while (vMyCompleteSchema.size () != 0)
+        while (vMyCompleteSchemaLocal.size () != 0)
         {
             // Ok first dump the first Element in the helper Vector
-            nJustALittleHelper.add (vMyCompleteSchema.elementAt (0));
+            nJustALittleHelper.add (vMyCompleteSchemaLocal.elementAt (0));
             // Delete the first element.. its dumped in the Second Vector and no longer needed
-            vMyCompleteSchema.removeElementAt (0);
+            vMyCompleteSchemaLocal.removeElementAt (0);
 
             // now find the elements with same name...transfer the elements and atttributes unique and delete them
-            for (int j = 0; j < vMyCompleteSchema.size (); j++)
+            for (int j = 0; j < vMyCompleteSchemaLocal.size (); j++)
             {
                 // ALTER TYP
-                nOldSchemaComplexType = (SchemaComplexType) vMyCompleteSchema.elementAt (j);
+                nOldSchemaComplexType = (SchemaComplexType) vMyCompleteSchemaLocal.elementAt (j);
                 // NEUER TYP
                 nNewSchemaComplexType = (SchemaComplexType) nJustALittleHelper
                         .elementAt (nJustALittleHelper.size () - 1);
@@ -211,7 +213,7 @@ public class SchemaDoc extends XMLDoc
                             nNewSchemaComplexType.getAllDataFromComplexType (nOldSchemaComplexType);
                         }
                     }
-                    vMyCompleteSchema.removeElementAt (j);
+                    vMyCompleteSchemaLocal.removeElementAt (j);
                     // Because i deleted one element it is now needed to decrement j again.
                     // The old element x was deleted. The Element x+1 is now Element x
                     // If we justwould increment x in the next loop we would let out the old x+1 element
@@ -236,31 +238,31 @@ public class SchemaDoc extends XMLDoc
             }
         }
 
-        vMyCompleteSchema = nJustALittleHelper;
+        vMyCompleteSchemaLocal = nJustALittleHelper;
 
         // 'init' all members (this writes some elementar informations into the complex-types
         // e.g. names, extends, return values etc..
-        for (int i = 0; i < vMyCompleteSchema.size (); i++)
+        for (int i = 0; i < vMyCompleteSchemaLocal.size (); i++)
         {
-            SchemaComplexType nSchemaComplexType = (SchemaComplexType) vMyCompleteSchema.elementAt (i);
+            SchemaComplexType nSchemaComplexType = (SchemaComplexType) vMyCompleteSchemaLocal.elementAt (i);
             nSchemaComplexType.setStrSchemaComplexType (); // test
             nSchemaComplexType.m_ExtendOff = GeneratorUtil.getStrExtendsOff (nSchemaComplexType.m_kElem);
         }
 
         // last but not least, filter out those you dont want
-        for (int i = 0; i < vMyCompleteSchema.size (); i++)
+        for (int i = 0; i < vMyCompleteSchemaLocal.size (); i++)
         {
-            String strComplexTypeName = ((SchemaComplexType) vMyCompleteSchema.elementAt (i)).m_SchemaComplexTypeName;
+            String strComplexTypeName = ((SchemaComplexType) vMyCompleteSchemaLocal.elementAt (i)).m_SchemaComplexTypeName;
             if (!GeneratorUtil.isComplexTypeToGenerate (strComplexTypeName))
             {
-                vMyCompleteSchema.removeElementAt (i);
+                vMyCompleteSchemaLocal.removeElementAt (i);
                 i -= 1;
             }
         }
 
-        for (int i = 0; i < vMyCompleteSchema.size (); i++)
+        for (int i = 0; i < vMyCompleteSchemaLocal.size (); i++)
         {
-            KElement nPlaceHolder = ((SchemaComplexType) vMyCompleteSchema.elementAt (i)).
+            KElement nPlaceHolder = ((SchemaComplexType) vMyCompleteSchemaLocal.elementAt (i)).
                 m_kElem.getElement ("xs:complexContent", "", 0);
             
             if (nPlaceHolder != null)
@@ -275,13 +277,13 @@ public class SchemaDoc extends XMLDoc
                         base = "jdf:Parameter";
                     }
                     
-                    SchemaComplexType sct = (SchemaComplexType) vMyCompleteSchema.elementAt (i);
+                    SchemaComplexType sct = (SchemaComplexType) vMyCompleteSchemaLocal.elementAt (i);
                     sct.setBase (base);
                 }
             }
         }
         
-        return vMyCompleteSchema;
+        return vMyCompleteSchemaLocal;
     }
 
 
@@ -363,12 +365,12 @@ public class SchemaDoc extends XMLDoc
      */   
     public static boolean write2file(String strPath, String fName, boolean overwriteFile, String content)
     {
-//        String warning = "------> WARNING: ";
-//        String error   = "===============> ERROR: ";
+    	String strPathLocal = strPath;
+
         FileOutputStream fos = null;
         try
         {// global path for library
-            File path= new File(strPath);
+            File path= new File(strPathLocal);
             if (!path.exists() )
             {
                 path.mkdirs();
@@ -378,11 +380,11 @@ public class SchemaDoc extends XMLDoc
                 return false;
             }
             // just the output-file
-            if ( ! strPath.endsWith("/"))
+            if ( ! strPathLocal.endsWith("/"))
             {
-                strPath += "/";
+                strPathLocal += "/";
             }
-            File file= new File(strPath+fName);
+            File file= new File(strPathLocal+fName);
             if (file.exists())
             {
                 //System.err.println(warning +"["+file+"] exists.");

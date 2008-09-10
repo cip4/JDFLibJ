@@ -114,15 +114,20 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 */
 	public vectorObject getOne(Object key, int i)
 	{
+		int iLocal = i;
+		
 		Vector<vectorObject> c = get(key);
 		if (c == null)
 			return null;
+		
 		int n = c.size();
-		if (i < 0)
-			i = n + i;
-		if (i < 0 || i >= n)
+		if (iLocal < 0)
+			iLocal = n + iLocal;
+		
+		if (iLocal < 0 || iLocal >= n)
 			return null;
-		return c.get(i);
+		
+		return c.get(iLocal);
 	}
 
 	/**

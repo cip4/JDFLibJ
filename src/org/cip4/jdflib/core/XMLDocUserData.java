@@ -372,14 +372,17 @@ public class XMLDocUserData
 	 */
 	public void setTarget(KElement targetElement, String id)
 	{
+		String idLocal = id;
+		
 		if (!useIDCache || m_mapTarget == null)
 			return;
 
-		if (id == null)
-			id = targetElement.getAttribute(AttributeName.ID, null, null);
-		if (id != null)
+		if (idLocal == null)
+			idLocal = targetElement.getAttribute(AttributeName.ID, null, null);
+		
+		if (idLocal != null)
 		{
-			m_mapTarget.put(id, targetElement); // put the correct in
+			m_mapTarget.put(idLocal, targetElement); // put the correct in
 		}
 	}
 

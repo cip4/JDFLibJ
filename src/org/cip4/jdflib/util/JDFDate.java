@@ -197,7 +197,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	private void init(String strDateTime) throws DataFormatException
 	{
-		if (strDateTime == null || strDateTime.equals(JDFConstants.EMPTYSTRING))
+		String strDateTimeLocal = strDateTime;
+		
+		if (strDateTimeLocal == null || strDateTimeLocal.equals(JDFConstants.EMPTYSTRING))
 		{
 			lTimeInMillis = System.currentTimeMillis();
 			return;
@@ -206,12 +208,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		try
 		{
 
-			if (strDateTime.indexOf("T") == -1)
-				strDateTime += "T00:00:00" + getTimeZoneISO();
+			if (strDateTimeLocal.indexOf("T") == -1)
+				strDateTimeLocal += "T00:00:00" + getTimeZoneISO();
 
 			// check for zulu style time zone
-			final int length = strDateTime.length();
-			String lastChar = strDateTime.substring(length - 1);
+			final int length = strDateTimeLocal.length();
+			String lastChar = strDateTimeLocal.substring(length - 1);
 
 			// not necessarily valid but let's not be too picky
 			if ((lastChar.compareTo("a") >= 0) && (lastChar.compareTo("z") <= 0))
@@ -224,7 +226,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			// The last character is a ZULU style timezone
 			if (bZulu)
 			{
-				final String strBuffer = strDateTime.substring(0, length - 1);
+				final String strBuffer = strDateTimeLocal.substring(0, length - 1);
 				String bias = null;
 				if (iCmp >= 0 && iCmp <= 8) // A-I
 				{
@@ -232,7 +234,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				}
 				else if (iCmp == 9) // J
 				{
-					throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+					throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
 				}
 				else if (iCmp >= 10 && iCmp <= 12) // K-M
 				{
@@ -250,13 +252,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				{
 					bias = "+00";
 				}
+				
 				bias += ":00";
 
-				strDateTime = strBuffer + bias; // add the alphabetical timezone
+				strDateTimeLocal = strBuffer + bias; // add the alphabetical timezone
 			}
 
 			int decimalLength = 0;
-			final int indexOfDecimal = strDateTime.indexOf('.');
+			final int indexOfDecimal = strDateTimeLocal.indexOf('.');
 			if (indexOfDecimal != -1)
 			{
 				if (indexOfDecimal != 19)
@@ -266,7 +269,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				else
 				{
 					decimalLength++;
-					while ("0123456789".indexOf(strDateTime.charAt(indexOfDecimal + decimalLength)) != -1)
+					while ("0123456789".indexOf(strDateTimeLocal.charAt(indexOfDecimal + decimalLength)) != -1)
 					{
 						decimalLength++;
 					}
@@ -276,7 +279,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			// if the time looks like 2004-07-14T18:21:47
 			// check if there is an +xx:00 or -xx:00 at the end specifying the
 			// timezone
-			if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
+			if ((strDateTimeLocal.indexOf('+', 19) == -1) && (strDateTimeLocal.indexOf('-', 19) == -1))
 			{
 				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
 			}
@@ -284,20 +287,21 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			{
 				// handle sign explicitly, because "+02" is no valid Integer,
 				// while "-02" and "02" are valid Integer
-				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTime.substring(20 + decimalLength, 22 + decimalLength)).intValue());
-				if (strDateTime.charAt(19 + decimalLength) == '-')
+				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTimeLocal.substring(20 + decimalLength, 22 + decimalLength)).intValue());
+				if (strDateTimeLocal.charAt(19 + decimalLength) == '-')
 				{
 					setTimeZoneOffsetInMillis(-getTimeZoneOffsetInMillis());
 				}
 			}
 
 			// interpret the string - low level enhances performance quite a bit...
-			byte[] b = strDateTime.getBytes();
+			byte[] b = strDateTimeLocal.getBytes();
 			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':'
-					|| strDateTime.length() - decimalLength != 25) // 6 digit tz
+					|| strDateTimeLocal.length() - decimalLength != 25) // 6 digit tz
 			{
-				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
 			}
+			
 			final int iYear = getIntFromPos(b, 0, 4);
 			final int iMonth = getIntFromPos(b, 5, 7) - 1; // months are zero based in Java
 			final int iDay = getIntFromPos(b, 8, 10);
@@ -331,11 +335,11 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 			// now that we no longer check the string for validation we have no
 			// catch this
-			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
 		}
 		catch (final NumberFormatException ne)
 		{
-			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
 		}
 	}
 

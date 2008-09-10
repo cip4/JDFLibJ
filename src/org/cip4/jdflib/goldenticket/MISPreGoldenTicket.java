@@ -504,10 +504,11 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	@Override
 	public void execute(VJDFAttributeMap parts, boolean outputAvailable, boolean bFirst)
 	{
+		VJDFAttributeMap partsLocal = parts;
 
-		parts = null; // alwways execute all in pp
-		setActivePart(parts, bFirst);
-		super.execute(parts, outputAvailable, bFirst);
+		partsLocal = null; // alwways execute all in pp
+		setActivePart(partsLocal, bFirst);
+		super.execute(partsLocal, outputAvailable, bFirst);
 		if (MISPRE_IMPOSITIONPREPARATION.equals(getCategory()))
 		{
 			executeGBImpositionPreparation();

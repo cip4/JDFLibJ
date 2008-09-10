@@ -72,14 +72,13 @@ public class JDFProductionIntent extends JDFAutoProductionIntent
 	 *            maximum number of elements to return
 	 * @return
 	 */
+	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
-		return getUnknownPoolElements(JDFElement.EnumPoolType.ProductionIntent,
-				nMax);
+		return getUnknownPoolElements(JDFElement.EnumPoolType.ProductionIntent, nMax);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFProductionIntent[  --> " + super.toString() + " ]";

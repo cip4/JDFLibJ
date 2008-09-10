@@ -76,14 +76,17 @@ public class HashUtil extends Object
 
 	public static final int hashCode(int source, Object[] x)
 	{
+		int sourceLocal = source;
+		
 		if (null != x)
 		{
 			int len = x.length;
 			for (int i = 0; i < len; i++)
 			{
-				source = hashCode(source, x[i]);
+				sourceLocal = hashCode(sourceLocal, x[i]);
 			}
 		}
-		return source;
+		
+		return sourceLocal;
 	}
 }

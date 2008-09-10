@@ -67,6 +67,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDropItemIntent[  --> " + super.toString() + " ]";
@@ -77,12 +78,10 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	 * 
 	 * @default getUnknownElements(bIgnorePrivate, 99999999)
 	 */
+	@Override
 	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
 	{
-		if (bIgnorePrivate)
-			bIgnorePrivate = false; // dummy to fool compiler
-		return getUnknownPoolElements(JDFElement.EnumPoolType.ProductionIntent,
-				nMax);
+		return getUnknownPoolElements(JDFElement.EnumPoolType.ProductionIntent, nMax);
 	}
 
 	/**

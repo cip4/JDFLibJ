@@ -135,6 +135,7 @@ public class JDFand extends JDFNodeTerm
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return " JDFand[  --> " + super.toString() + " ]";
@@ -156,6 +157,7 @@ public class JDFand extends JDFNodeTerm
 	 *            key-value pair attribute map
 	 * @return boolean - true, if boolean “and” expression evaluates to “true”
 	 */
+	@Override
 	public boolean fitsMap(JDFAttributeMap m)
 	{
 		VElement v = getTermVector(null);
@@ -179,31 +181,39 @@ public class JDFand extends JDFNodeTerm
 	 *            accept it
 	 * @return boolean - true, if boolean “and” expression evaluates to “true”
 	 */
+	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot) // const JDFNode
 	{
+		KElement reportRootLocal = reportRoot;
+		
 		VElement v = getTermVector(null);
-		if (reportRoot != null)
-			reportRoot = reportRoot.appendElement("and");
+		if (reportRootLocal != null)
+			reportRootLocal = reportRootLocal.appendElement("and");
+		
 		int siz = v.size();
 		boolean b = true;
 		for (int i = 0; i < siz; i++)
 		{
 			final JDFTerm t = (JDFTerm) v.elementAt(i);
-			boolean b2 = t.fitsJDF(jdf, reportRoot);
+			boolean b2 = t.fitsJDF(jdf, reportRootLocal);
 			if (!b2)
 			{
-				if (reportRoot == null)
+				if (reportRootLocal == null)
 					return false;
 			}
+			
 			b = b && b2;
 		}
-		if (reportRoot != null)
-			reportRoot.setAttribute("Value", b, null);
+		
+		if (reportRootLocal != null)
+			reportRootLocal.setAttribute("Value", b, null);
+		
 		return b;
 	}
 
 	// ///////////////////////////////////////////////////////
 
+	@Override
 	public VString getMissingElements(int nMax)
 	{
 		VString v = super.getMissingElements(nMax);
