@@ -213,8 +213,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 		JDFResourceQuParams rqp = q.appendResourceQuParams();
 		rqp.setExact(true);
-		rqp.setXMLComment("we need a way to describe that we want a complet list of all known resources");
+		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complet list of all known resources");
 		rqp.setResourceName(ElementName.MEDIA);
+		//		rqp.setAttribute("Scope", "Allowed");
 
 		JDFResponse r = q.createResponse().getResponse(0);
 		r = (JDFResponse) jmf.moveElement(r, null);
@@ -230,7 +231,8 @@ public class JMFResourceTest extends JDFTestCaseBase
 			m.setBrand("Brand #" + i);
 			m.setProductID("ProductID_" + i);
 			m.setMediaType(EnumMediaType.Paper);
-			ri.setXMLComment("More attributes can be added as needed");
+			m.setResStatus((i < 2 ? EnumResStatus.Available : EnumResStatus.Unavailable), false);
+			ri.setXMLComment("More attributes can be added as needed; Available = loaded");
 		}
 		doc.write2File(sm_dirTestDataTemp + "MediaCatalog.jmf", 2, false);
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));

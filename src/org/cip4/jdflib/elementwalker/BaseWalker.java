@@ -84,9 +84,9 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 	protected int depth;
 
 	/**
-	 * the mother routine for walking.... (non-Javadoc)
+	 * the mother routine for walking.... 
 	 * 
-	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(java.lang.Object)
+	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(KElement)
 	 */
 	public boolean walk(KElement e)
 	{
@@ -107,9 +107,9 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * this is the check whether or not to use this walker for a given element should be overwritten
 	 * 
 	 * @param e the element to check
-	 * @return
+	 * @return true if matches - must be true for base
 	 */
-	public boolean matches(@SuppressWarnings("unused") KElement e)
+	public boolean matches(KElement e)
 	{
 		return true;
 	}
@@ -119,9 +119,9 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 */
 	private void addToFactory(BaseWalkerFactory factory)
 	{
-		Class cBase = BaseWalker.class;
-		Class c = this.getClass().getSuperclass();
-		// calculate the nuber of intermediate classes
+		Class<BaseWalker> cBase = BaseWalker.class;
+		Class<?> c = this.getClass().getSuperclass();
+		// calculate the number of intermediate classes
 		while (cBase.isAssignableFrom(c))
 		{
 			c = c.getSuperclass();
@@ -131,7 +131,7 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 	}
 
 	/**
-	 * @return
+	 * @return the class hierarchy depth
 	 */
 	public int getDepth()
 	{
@@ -140,6 +140,8 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * note the reverse order - high depth means up in list so that abstract classes get checked later (non-Javadoc)
+	 * @param arg0  the other Basewalker
+	 * @return int
 	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
@@ -148,6 +150,10 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 		return (arg0 == null ? 0 : arg0.depth) - depth;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return the string
+	 */
 	@Override
 	public String toString()
 	{

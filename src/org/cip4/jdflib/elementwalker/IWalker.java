@@ -75,16 +75,17 @@ package org.cip4.jdflib.elementwalker;
 import org.cip4.jdflib.core.KElement;
 
 /**
- * @author prosirai
+ * @author Rainer Prosi
  * 
  */
 public interface IWalker
 {
 	/**
 	 * called for every IWalker that the factory returns
+	 * @param e the element to walk
 	 * 
 	 * @return true if this element remains after walking, <br/> false if it was deleted and therefor the walker should
-	 *         skip this and allits descendants
+	 *         skip this and all its descendants
 	 */
 	public boolean walk(KElement e);
 }

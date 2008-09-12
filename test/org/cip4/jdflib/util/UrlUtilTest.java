@@ -232,6 +232,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testURLToFile() throws Exception
 	{
 		for (int i = 0; i < 2; i++)
@@ -258,11 +261,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 			final String fileToUrl = UrlUtil.fileToUrl(f, i == 0);
 			f2 = UrlUtil.urlToFile(fileToUrl);
 			assertEquals("escape %20", f.getCanonicalPath(), f2.getCanonicalPath());
+
 		}
+		File fi1 = new File("\\\\fooBar\\4ü€.txt");
+		File fi = UrlUtil.urlToFile("file://fooBar/4ü%e2%82%ac.txt");
+		assertEquals("escape %20", fi.getCanonicalPath(), fi1.getCanonicalPath());
+
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testisUNC()
 	{
 		assertTrue(UrlUtil.isUNC("\\\\foo\\bar"));

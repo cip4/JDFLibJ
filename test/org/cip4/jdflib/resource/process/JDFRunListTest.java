@@ -386,9 +386,12 @@ public class JDFRunListTest extends JDFTestCaseBase
 	{
 		KElement tagMap = rl.appendElement(METADATA_MAP);
 		tagMap.setXMLComment("This tagmap specifies The path for the NMTOKEN \"ObjectTag\"");
-		tagMap.setAttribute("Name", "ObjectTag");
+		tagMap.setAttribute("Name", "ObjectTags");
 		tagMap.setAttribute(AttributeName.VALUEFORMAT, "%s");
+		tagMap.setAttribute(AttributeName.CONTEXT, "Object");
+		tagMap.setAttribute(AttributeName.DATATYPE, "NMTOKEN");
 		tagMap.setAttribute(AttributeName.VALUETEMPLATE, "AnyName1");
+		tagMap.addNameSpace("TIFFXMP", "http://ns.adobe.com/tiff/1.0");
 		String[] ss = new String[] { "Acme", "Bcme", "Ccme" };
 		for (int i = 0; i < ss.length; i++)
 		{
@@ -396,10 +399,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 			KElement tagSet = tagMap.appendElement(EXPR);
 			tagSet.setAttribute("Name", "AnyName1");
 			tagSet.setAttribute("Value", s);
-			tagSet.setXMLComment("Note is not quite correct yet, as Path needs to be an XPath rather than a URI\n the Calculated value is the extracted make as a literal string");
 
 			JDFStringEvaluation eval = (JDFStringEvaluation) tagSet.appendElement(ElementName.STRINGEVALUATION);
-			eval.setAttribute("Path", "http://ns.adobe.com/tiff/1.0/Make");
+			eval.setAttribute("Path", "TIFFXMP:Make");
 			eval.setRegExp("(.*)" + s + "(.*)");
 			eval.setXMLComment("Any acme camera is mapped to \"" + s + "\"");
 		}
