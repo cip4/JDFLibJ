@@ -466,16 +466,20 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 */
 	public JDFQuery getCreateJMFQuery(EnumType queryType)
 	{
-		VElement v = getChildElementVector(ElementName.JMF, null);
-		int siz = v == null ? 0 : v.size();
 		JDFQuery q = null;
-		for (int i = 0; i < siz; i++)
+		VElement v = getChildElementVector(ElementName.JMF, null);
+		if (v != null)
 		{
-			JDFJMF jmf = (JDFJMF) v.elementAt(i);
-			q = (JDFQuery) jmf.getMessageElement(EnumFamily.Query, queryType, 0);
-			if (q != null)
-				break;
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
+			{
+				JDFJMF jmf = (JDFJMF) v.elementAt(i);
+				q = (JDFQuery) jmf.getMessageElement(EnumFamily.Query, queryType, 0);
+				if (q != null)
+					break;
+			}
 		}
+		
 		if (q == null)
 		{
 			q = appendJMF().appendQuery(queryType);

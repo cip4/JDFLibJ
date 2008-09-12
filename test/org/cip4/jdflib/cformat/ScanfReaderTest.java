@@ -506,7 +506,8 @@ public class ScanfReaderTest
 		try
 		{
 			res = reader.scanString(s);
-		} catch (Exception e)
+		} 
+		catch (Exception e)
 		{
 			ex = e;
 		}
@@ -518,7 +519,7 @@ public class ScanfReaderTest
 			return;
 		}
 
-		if (!res.equals(val))
+		if (res != null && !res.equals(val))
 		{
 			System.out.println("Expected string " + val + ", got " + res);
 			(new Throwable()).printStackTrace();
@@ -584,7 +585,8 @@ public class ScanfReaderTest
 		try
 		{
 			k = reader.read(buf, 0, n);
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			System.exit(1);
@@ -593,25 +595,31 @@ public class ScanfReaderTest
 		if ((k == -1) && (s != null))
 		{
 			System.out.println("read returns -1, expected " + s.length());
-		} else if ((s == null) && (k != -1))
+		}
+		else if (s == null)
 		{
-			System.out.println("read returns " + k + ", expected -1");
-		} else if ((s == null) && (k == -1))
+			if (k != -1)
+			{
+				System.out.println("read returns " + k + ", expected -1");
+			}
+			else
+			{
+				pass = true;
+			}
+		}
+		else if (s.length() != k)
 		{
-			pass = true;
-		} else if (s.length() != k)
-		{
-			System.out
-					.println("read returns " + k + ", expected " + s.length());
-		} else
+			System.out.println("read returns " + k + ", expected " + s.length());
+		}
+		else
 		{
 			String res = new String(buf, 0, k);
 
 			if (!res.equals(s))
 			{
-				System.out.println("read returns '" + res + "', expected '" + s
-						+ "'");
-			} else
+				System.out.println("read returns '" + res + "', expected '" + s + "'");
+			}
+			else
 			{
 				pass = true;
 			}

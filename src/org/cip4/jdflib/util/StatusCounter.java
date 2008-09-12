@@ -242,7 +242,7 @@ public class StatusCounter
 		}
 
 		nodeID = node != null ? node.getIdentifier() : null;
-		if (m_vPartMap != null && nodeID != null)
+		if (m_vPartMap != null && nodeID != null && node != null)
 		{
 			nodeID.setTo(node.getJobID(true), node.getJobPartID(false), m_vPartMap);
 		}
@@ -250,12 +250,15 @@ public class StatusCounter
 		if (vResLinksLocal == null && m_Node != null)
 		{
 			vResLinksLocal = m_Node.getResourceLinks(null);
-			int siz = vResLinksLocal == null ? 0 : vResLinksLocal.size();
-			for (int i = siz - 1; i >= 0; i--)
+			if (vResLinksLocal != null)
 			{
-				JDFResourceLink rl = (JDFResourceLink) vResLinksLocal.elementAt(i);
-				if (!rl.isPhysical())
-					vResLinksLocal.remove(i);
+				int siz = vResLinksLocal.size();
+				for (int i = siz - 1; i >= 0; i--)
+				{
+					JDFResourceLink rl = (JDFResourceLink) vResLinksLocal.elementAt(i);
+					if (!rl.isPhysical())
+						vResLinksLocal.remove(i);
+				}
 			}
 		}
 		
@@ -1317,17 +1320,20 @@ public class StatusCounter
 			{
 
 				VElement vRes = nodeLink.getTargetVector(-1);
-				int size = vRes == null ? 0 : vRes.size();
-				for (int i = 0; i < size; i++)
+				if (vRes != null)
 				{
-					JDFResource r = (JDFResource) vRes.get(i);
-					VElement leaves = r.getLeaves(false);
-					for (int j = 0; j < leaves.size(); j++)
+					int size = vRes.size();
+					for (int i = 0; i < size; i++)
 					{
-						JDFResource rr = (JDFResource) leaves.get(j);
-						VJDFAttributeMap vMap = rr.getPartMapVector(false);
-						if (m_vPartMap != null && m_vPartMap.overlapsMap(vMap))
-							rr.setResStatus(EnumResStatus.Available, true);
+						JDFResource r = (JDFResource) vRes.get(i);
+						VElement leaves = r.getLeaves(false);
+						for (int j = 0; j < leaves.size(); j++)
+						{
+							JDFResource rr = (JDFResource) leaves.get(j);
+							VJDFAttributeMap vMap = rr.getPartMapVector(false);
+							if (m_vPartMap != null && m_vPartMap.overlapsMap(vMap))
+								rr.setResStatus(EnumResStatus.Available, true);
+						}
 					}
 				}
 			}

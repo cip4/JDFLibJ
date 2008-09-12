@@ -1430,6 +1430,8 @@ public class JDFRunList extends JDFAutoRunList
 	@Override
 	public int getNPage()
 	{
+		int n = 0;
+
 		if (!getIsPage())
 			return 0;
 
@@ -1441,17 +1443,20 @@ public class JDFRunList extends JDFAutoRunList
 			return pages.getElementCount();
 		}
 
-		VElement v = getChildElementVector_KElement(getLocalName(),
-				getNamespaceURI(), null, true, 0);
-		int n = 0;
-		int siz = v == null ? 0 : v.size();
-		for (int i = 0; i < siz; i++)
+		VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
+		if (v != null)
 		{
-			final int page = ((JDFRunList) v.elementAt(i)).getNPage();
-			if (page < 0)
-				return -1;
-			n += page;
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
+			{
+				final int page = ((JDFRunList) v.elementAt(i)).getNPage();
+				if (page < 0)
+					return -1;
+				
+				n += page;
+			}
 		}
+		
 		return n; // TODO what is the default
 	}
 
@@ -1606,37 +1611,49 @@ public class JDFRunList extends JDFAutoRunList
 	 */
 	public void fixNPage()
 	{
+		int siz = 0;
+		
 		VElement v = getPageLeaves();
-		int siz = v == null ? 0 : v.size();
-		for (int i = 0; i < siz; i++)
+		if (v != null)
 		{
-			JDFRunList rl = (JDFRunList) v.elementAt(i);
-			final int page = rl.getNPage();
-			if (page > 0)
-				rl.setNPage(page);
+			siz = v.size();
+			for (int i = 0; i < siz; i++)
+			{
+				JDFRunList rl = (JDFRunList) v.elementAt(i);
+				final int page = rl.getNPage();
+				if (page > 0)
+					rl.setNPage(page);
+			}
 		}
 
 		VElement v2 = getLeaves(true);
-
-		siz = v2 == null ? 0 : v2.size();
-		for (int i = siz - 1; i >= 0; i--)
+		if (v2 != null)
 		{
-			JDFRunList rl = (JDFRunList) v2.elementAt(i);
-			if (v != null && v.contains(rl))
+			siz = v2.size();
+			for (int i = siz - 1; i >= 0; i--)
 			{
-				v2.remove(rl); // it's a leaf
-			} else
-			{
-				rl.removeAttribute(AttributeName.NPAGE);
+				JDFRunList rl = (JDFRunList) v2.elementAt(i);
+				if (v != null && v.contains(rl))
+				{
+					v2.remove(rl); // it's a leaf
+				}
+				else
+				{
+					rl.removeAttribute(AttributeName.NPAGE);
+				}
 			}
 		}
-		siz = v2 == null ? 0 : v2.size();
-		for (int i = siz - 1; i >= 0; i--)
+		
+		if (v2 != null)
 		{
-			JDFRunList rl = (JDFRunList) v2.elementAt(i);
-			final int page = rl.getNPage();
-			if (page > 0)
-				rl.setNPage(page);
+			siz = v2.size();
+			for (int i = siz - 1; i >= 0; i--)
+			{
+				JDFRunList rl = (JDFRunList) v2.elementAt(i);
+				final int page = rl.getNPage();
+				if (page > 0)
+					rl.setNPage(page);
+			}
 		}
 	}
 
@@ -1672,17 +1689,19 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		if (!getIsPage())
 			return false;
-		VElement v = getChildElementVector_KElement(getLocalName(),
-				getNamespaceURI(), null, true, 0);
-		int siz = v == null ? 0 : v.size();
-		if (siz == 0)
-			return true;
-		for (int i = 0; i < v.size(); i++)
+		
+		VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
+		if (v != null)
 		{
-			JDFRunList rl = (JDFRunList) v.elementAt(i);
-			if (rl.getIsPage())
-				return false;
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
+			{
+				JDFRunList rl = (JDFRunList) v.elementAt(i);
+				if (rl.getIsPage())
+					return false;
+			}
 		}
+		
 		return true;
 	}
 

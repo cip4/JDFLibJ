@@ -507,13 +507,19 @@ public class JDFAuditPool extends JDFPool
 	{
 		if (KElement.isWildCard(moduleID))
 			return (JDFPhaseTime) getAudit(-1, EnumAuditType.PhaseTime, null, vPartMap);
+		
 		VElement e = getAudits(EnumAuditType.PhaseTime, null, vPartMap);
-		for (int i = (e == null ? -1 : e.size() - 1); i >= 0; i--)
+		if (e != null)
 		{
-			JDFPhaseTime pt = (JDFPhaseTime) e.elementAt(i);
-			if (pt.getChildWithAttribute(ElementName.MODULEPHASE, AttributeName.MODULEID, null, moduleID, 0, true) != null)
-				return pt;
+			int size = e.size() - 1;
+			for (int i = size; i >= 0; i--)
+			{
+				JDFPhaseTime pt = (JDFPhaseTime) e.elementAt(i);
+				if (pt.getChildWithAttribute(ElementName.MODULEPHASE, AttributeName.MODULEID, null, moduleID, 0, true) != null)
+					return pt;
+			}
 		}
+		
 		return null;
 	}
 

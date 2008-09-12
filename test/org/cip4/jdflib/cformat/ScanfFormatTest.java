@@ -75,19 +75,29 @@ public class ScanfFormatTest
 	// }
 	private static boolean streq(String s1, String s2)
 	{
-		if ((s1 == null) && (s2 != null))
+//		if ((s1 == null) && (s2 != null))
+//		{
+//			return false;
+//		}
+//		else if ((s1 != null) && (s2 == null))
+//		{
+//			return false;
+//		}
+//		else if ((s1 == null) && (s2 == null))
+//		{
+//			return true;
+//		}
+//		else
+//		{
+//			return s1.equals(s2);
+//		}
+
+		if (s1 == null)
 		{
-			return false;
-		} else if ((s1 != null) && (s2 == null))
-		{
-			return false;
-		} else if ((s1 == null) && (s2 == null))
-		{
-			return true;
-		} else
-		{
-			return s1.equals(s2);
+			return s2 == null;
 		}
+		
+		return s1.equals(s2);
 	}
 
 	// private static void test(String s, String errMsg)

@@ -130,6 +130,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		{
 			if (parentNode == null)
 				return;
+			
 			VElement vNodes = parentNode.getvJDFNode(null, null, false);
 
 			final int size = vNodes.size();
@@ -179,6 +180,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 					final JDFResource resTargetPart = resTarget.getCreatePartition(amParts, vsPartIDKeys);
 					if (resTargetPart == null)
 						continue;
+					
 					final String id = resTargetPart.getID();
 					if (!isIncremental)
 					{
@@ -186,23 +188,29 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 						resTargetPart.flush();
 						resTargetPart.setAttributes(map);
 					}
+					
 					JDFResource resCmdPart = resCmd.getPartition(amParts, EnumPartUsage.Implicit);
 					JDFAttributeMap map = resCmdPart.getAttributeMap();
 					VString keys = map.getKeys();
-					int keySize = keys == null ? 0 : keys.size();
-					for (int k = 0; k < keySize; k++)
+					if (keys != null)
 					{
-						final String key = keys.elementAt(k);
-						final String value = map.get(key);
-						if (value == null || JDFConstants.EMPTYSTRING.equals(value))
+						int keySize = keys.size();
+						for (int k = 0; k < keySize; k++)
 						{
-							resCmdPart.removeAttribute(key);
-							resTargetPart.removeAttribute(key);
+							final String key = keys.elementAt(k);
+							final String value = map.get(key);
+							if (value == null || JDFConstants.EMPTYSTRING.equals(value))
+							{
+								resCmdPart.removeAttribute(key);
+								resTargetPart.removeAttribute(key);
+							}
 						}
 					}
+					
 					resTargetPart.mergeElement(resCmdPart, false);
 					resTarget.setID(id);
 				}
+				
 				if (sizeParts > 0 && resTarget instanceof JDFNodeInfo)
 				{
 					fixNodeStatusFromNodeInfo(node, resTarget);

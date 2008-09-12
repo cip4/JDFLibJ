@@ -287,16 +287,19 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		if (vParts != null)
 		{
 			VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation", " "));
-			final int size = reducedMap == null ? 0 : reducedMap.size();
-			for (int i = 0; i < size; i++)
+			if (reducedMap != null)
 			{
-				final JDFAttributeMap part = reducedMap.elementAt(i);
-				JDFAttributeMap newMap = new JDFAttributeMap(part);
-				newMap.put(AttributeName.CONDITION, "Good");
-				rl.setAmount(good, newMap);
-				rl.setMaxAmount(good + waste, newMap);
-				newMap.put(AttributeName.CONDITION, "Waste");
-				rl.setMaxAmount(waste, newMap);
+				final int size = reducedMap.size();
+				for (int i = 0; i < size; i++)
+				{
+					final JDFAttributeMap part = reducedMap.elementAt(i);
+					JDFAttributeMap newMap = new JDFAttributeMap(part);
+					newMap.put(AttributeName.CONDITION, "Good");
+					rl.setAmount(good, newMap);
+					rl.setMaxAmount(good + waste, newMap);
+					newMap.put(AttributeName.CONDITION, "Waste");
+					rl.setMaxAmount(waste, newMap);
+				}
 			}
 
 		}
@@ -344,23 +347,25 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		pv.setPreviewFileType(bPPF ? EnumPreviewFileType.CIP3Single : EnumPreviewFileType.PNG);
 
 		VJDFAttributeMap reducedMap = bPPF ? getReducedMap(new VString("Side Separation", " ")) : vParts;
-
-		int size = (reducedMap != null) ? reducedMap.size() : 0;
-		for (int i = 0; i < size; i++)
+		if (reducedMap != null)
 		{
-			final JDFAttributeMap part = new JDFAttributeMap(reducedMap.elementAt(i));
-			JDFPreview previewPartition = (JDFPreview) pv.getCreatePartition(part, partIDKeys);
-			if (bPPF)
+			int size = reducedMap.size();
+			for (int i = 0; i < size; i++)
 			{
-				preparePreview(previewPartition);
-			}
-			else
-			{
-				for (int j = 0; j < getNCols(); j++)
+				final JDFAttributeMap part = new JDFAttributeMap(reducedMap.elementAt(i));
+				JDFPreview previewPartition = (JDFPreview) pv.getCreatePartition(part, partIDKeys);
+				if (bPPF)
 				{
-					part.put(EnumPartIDKey.Separation, cols.stringAt(j));
-					JDFPreview sepPreview = (JDFPreview) previewPartition.getCreatePartition(part, partIDKeys);
-					preparePreview(sepPreview);
+					preparePreview(previewPartition);
+				}
+				else
+				{
+					for (int j = 0; j < getNCols(); j++)
+					{
+						part.put(EnumPartIDKey.Separation, cols.stringAt(j));
+						JDFPreview sepPreview = (JDFPreview) previewPartition.getCreatePartition(part, partIDKeys);
+						preparePreview(sepPreview);
+					}
 				}
 			}
 		}
@@ -401,23 +406,27 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	{
 		if (misICSLevel < 2)
 			return null;
+		
 		super.initDevice(reuseNode);
 
-		VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation", " "));
-
 		JDFDevice dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
-		final int size = reducedMap == null ? 0 : reducedMap.size();
-		if (devID != null && splitSheets)
+		VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation", " "));
+		if (reducedMap != null)
 		{
-			for (int i = 0; i < size; i++)
+			if (devID != null && splitSheets)
 			{
-				final JDFAttributeMap part = reducedMap.elementAt(i);
-				JDFDevice devPart = (JDFDevice) dev.getCreatePartition(part, partIDKeys);
+				final int size = reducedMap.size();
+				for (int i = 0; i < size; i++)
+				{
+					final JDFAttributeMap part = reducedMap.elementAt(i);
+					JDFDevice devPart = (JDFDevice) dev.getCreatePartition(part, partIDKeys);
 
-				devPart.setResStatus(EnumResStatus.Available, false);
-				devPart.setDeviceID(devID);
+					devPart.setResStatus(EnumResStatus.Available, false);
+					devPart.setDeviceID(devID);
+				}
 			}
 		}
+		
 		return dev;
 	}
 

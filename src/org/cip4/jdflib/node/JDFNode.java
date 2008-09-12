@@ -2271,16 +2271,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	public boolean setPartStatus(VJDFAttributeMap vmattr, EnumNodeStatus status, String statusDetails)
 	{
 		boolean bRet = true;
+		int siz = 0;
 
-		int siz = vmattr == null ? 0 : vmattr.size();
-		if (siz > 0)
+		if (vmattr != null)
 		{
+			siz = vmattr.size();
 			for (int i = 0; i < siz; i++)
 			{
 				bRet = setPartStatus(vmattr.elementAt(i), status, statusDetails) && bRet;
 			}
 		}
-		else
+		
+		if (vmattr == null || siz == 0)
 		{
 			bRet = setPartStatus((JDFAttributeMap) null, status, statusDetails);
 		}
@@ -2807,7 +2809,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		if (iLocal < 0)
 			iLocal += siz;
 		
-		if (siz == 0 || iLocal < 0 || iLocal >= siz)
+		if (siz == 0 || iLocal < 0 || iLocal >= siz || velem == null)
 			return null;
 		
 		return (JDFResource) velem.elementAt(iLocal);
@@ -5943,19 +5945,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (rlp != null)
 			{
 				VElement v = rlp.getPoolChildren(elementName + "Link", new JDFAttributeMap(AttributeName.USAGE, "Input"), null);
-				int siz = v == null ? 0 : v.size();
-				final VString types = getTypes();
-
-				for (int i = 0; i < siz; i++)
+				if (v != null)
 				{
-					JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
-					final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
-					if (combinedProcessIndex == null || (types != null && combinedProcessIndex.size() == types.size()))
+					int siz = v.size();
+					final VString types = getTypes();
+
+					for (int i = 0; i < siz; i++)
 					{
-						// in case of multiple parts - grab root - else
-						// potential performance hit
-						nici = rl.getPart(1) == null ? rl.getTarget() : rl.getLinkRoot();
-						break;
+						JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
+						final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
+						if (combinedProcessIndex == null
+								|| (types != null && combinedProcessIndex.size() == types.size()))
+						{
+							// in case of multiple parts - grab root - else
+							// potential performance hit
+							nici = rl.getPart(1) == null ? rl.getTarget() : rl.getLinkRoot();
+							break;
+						}
 					}
 				}
 			}
@@ -8919,13 +8925,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		VElement v = getvJDFNode(null, null, false);
 		if (ni == null)
 			return v;
-		int siz = v == null ? 0 : v.size();
-		for (int i = siz - 1; i >= 0; i--)
+		
+		int siz = 0;
+		if (v != null)
 		{
-			JDFNode n = (JDFNode) v.get(i);
-			if (!n.getIdentifier().matches(ni))
-				v.remove(i);
+			siz = v.size();
+			for (int i = siz - 1; i >= 0; i--)
+			{
+				JDFNode n = (JDFNode) v.get(i);
+				if (!n.getIdentifier().matches(ni))
+					v.remove(i);
+			}
 		}
+		
 		siz = v == null ? 0 : v.size();
 		return siz == 0 ? null : v;
 	}
@@ -8991,15 +9003,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					{
 						JDFAmountPool parentAmountPool = parentLink.getCreateAmountPool();
 						VElement parts = amountPool.getMatchingPartAmountVector(vParts.elementAt(j));
-						int pSiz = parts == null ? 0 : parts.size();
-						for (int k = 0; k < pSiz; k++)
+						if (parts != null)
 						{
-							JDFPartAmount pa = (JDFPartAmount) parts.elementAt(k);
-							if (pa.hasAttribute(AttributeName.ACTUALAMOUNT))
+							int pSiz = parts.size();
+							for (int k = 0; k < pSiz; k++)
 							{
-								VJDFAttributeMap vPAMap = pa.getPartMapVector();
-								JDFPartAmount parentPA = parentAmountPool.getCreatePartAmount(vPAMap);
-								parentPA.copyAttribute(AttributeName.ACTUALAMOUNT, pa, null, null, null);
+								JDFPartAmount pa = (JDFPartAmount) parts.elementAt(k);
+								if (pa.hasAttribute(AttributeName.ACTUALAMOUNT))
+								{
+									VJDFAttributeMap vPAMap = pa.getPartMapVector();
+									JDFPartAmount parentPA = parentAmountPool.getCreatePartAmount(vPAMap);
+									parentPA.copyAttribute(AttributeName.ACTUALAMOUNT, pa, null, null, null);
+								}
 							}
 						}
 					}

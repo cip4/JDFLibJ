@@ -145,15 +145,17 @@ public class JDFColorPool extends JDFAutoColorPool
 
 	public void removeColor(String strColorName)
 	{
-		VElement vElem = getChildElementVector(ElementName.COLOR, null, null,
-				true, 0, false);
-		final int size = vElem == null ? 0 : vElem.size();
-		for (int i = 0; i < size; i++)
+		VElement vElem = getChildElementVector(ElementName.COLOR, null, null, true, 0, false);
+		if (vElem != null)
 		{
-			JDFColor c = (JDFColor) vElem.elementAt(i);
-			if (strColorName.equals(c.getActualColorName()))
+			final int size = vElem.size();
+			for (int i = 0; i < size; i++)
 			{
-				c.deleteNode();
+				JDFColor c = (JDFColor) vElem.elementAt(i);
+				if (strColorName.equals(c.getActualColorName()))
+				{
+					c.deleteNode();
+				}
 			}
 		}
 	}
@@ -234,32 +236,38 @@ public class JDFColorPool extends JDFAutoColorPool
 	 */
 	public JDFColor getColorWithName(String colorName)
 	{
+		JDFColor color = null;
+		
 		if (colorName == null)
 		{
 			throw new JDFException("Bad colorname:" + colorName);
 		}
 
-		VElement v = getChildElementVector(ElementName.COLOR, null, null, true,
-				0, false);
-		int siz = v == null ? 0 : v.size();
-		int pos = -1;
-		for (int i = 0; i < siz; i++)
+		VElement v = getChildElementVector(ElementName.COLOR, null, null, true, 0, false);
+		if (v != null)
 		{
-			JDFColor c = (JDFColor) v.elementAt(i);
-			if (colorName.equals(c.getName())
-					|| colorName.equals(c.getActualColorName()))
+			int pos = -1;
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
 			{
-				if (pos < 0)
+				color = (JDFColor) v.elementAt(i);
+				if (colorName.equals(color.getName()) || colorName.equals(color.getActualColorName()))
 				{
-					pos = i;
-				} else
-				{
-					throw new JDFException("Multiple colors exist for:"
-							+ colorName);
+					if (pos < 0)
+					{
+						pos = i;
+					}
+					else
+					{
+						throw new JDFException("Multiple colors exist for:" + colorName);
+					}
 				}
 			}
+			
+			color = (JDFColor) (pos == -1 ? null : v.elementAt(pos));
 		}
-		return (JDFColor) (pos == -1 ? null : v.elementAt(pos));
+		
+		return color;
 	}
 
 	/**

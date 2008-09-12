@@ -927,45 +927,42 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	{
 		KElement root = parentReport.appendElement("UnknownResources");
 		VElement vLinks = jdfRoot.getResourceLinks(null);
-
-		final int linkSize = vLinks == null ? 0 : vLinks.size();
-		for (int j = 0; j < linkSize; j++)
+		if (vLinks != null)
 		{
-			JDFResourceLink link = (JDFResourceLink) vLinks.elementAt(j);
-			final String resName = link.getLinkedResourceName();
-			final String processUsage = link.getProcessUsage();
-
-			JDFAttributeMap map = new JDFAttributeMap(AttributeName.NAME,
-					resName);
-			VElement vDevCaps = getChildElementVector(ElementName.DEVCAPS,
-					null, map, true, 0, false);
-
-			boolean bFound = false;
-			final int size = vDevCaps.size();
-			for (int k = 0; k < size && !bFound; k++)
+			final int linkSize = vLinks.size();
+			for (int j = 0; j < linkSize; j++)
 			{
-				JDFDevCaps dc = (JDFDevCaps) vDevCaps.elementAt(k);
-				if ((!dc.hasAttribute(AttributeName.LINKUSAGE) || dc
-						.getLinkUsage().getName().equals(
-								link.getUsage().getName()))
-						&& (dc.getProcessUsage().equals(processUsage)))
+				JDFResourceLink link = (JDFResourceLink) vLinks.elementAt(j);
+				final String resName = link.getLinkedResourceName();
+				final String processUsage = link.getProcessUsage();
+
+				JDFAttributeMap map = new JDFAttributeMap(AttributeName.NAME, resName);
+				VElement vDevCaps = getChildElementVector(ElementName.DEVCAPS, null, map, true, 0, false);
+
+				boolean bFound = false;
+				final int size = vDevCaps.size();
+				for (int k = 0; k < size && !bFound; k++)
 				{
-					bFound = true;
+					JDFDevCaps dc = (JDFDevCaps) vDevCaps.elementAt(k);
+					if ((!dc.hasAttribute(AttributeName.LINKUSAGE) || dc.getLinkUsage().getName().equals(link.getUsage().getName()))
+							&& (dc.getProcessUsage().equals(processUsage)))
+					{
+						bFound = true;
+					}
 				}
-			}
-			if (!bFound)
-			{ // no DevCaps with Name=resName and the corresponding LinkUsage
-				// were found
-				KElement r = root.appendElement("UnknownResource");
-				r.setAttribute("XPath", link.buildXPath(null, 1));
-				r.setAttribute("Name", resName);
-				if (link.hasAttribute(AttributeName.USAGE, null, false)
-						&& !link.getUsage().getName().equals("Unknown"))
-				{
-					r.setAttribute("Usage", link.getUsage().getName());
+				if (!bFound)
+				{ // no DevCaps with Name=resName and the corresponding LinkUsage
+					// were found
+					KElement r = root.appendElement("UnknownResource");
+					r.setAttribute("XPath", link.buildXPath(null, 1));
+					r.setAttribute("Name", resName);
+					if (link.hasAttribute(AttributeName.USAGE, null, false)
+							&& !link.getUsage().getName().equals("Unknown"))
+					{
+						r.setAttribute("Usage", link.getUsage().getName());
+					}
+					r.setAttribute("Message", "Found no DevCaps description for this resource");
 				}
-				r.setAttribute("Message",
-						"Found no DevCaps description for this resource");
 			}
 		}
 
@@ -1189,20 +1186,21 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 */
 	public void createModuleCaps(String includeNameExpression)
 	{
-		VElement devcaps = getChildElementVector(ElementName.DEVCAPS, null,
-				null, true, 0, true);
-		int siz = devcaps == null ? 0 : devcaps.size();
-		for (int i = 0; i < siz; i++)
+		VElement devcaps = getChildElementVector(ElementName.DEVCAPS, null, null, true, 0, true);
+		if (devcaps != null)
 		{
-			JDFDevCaps dcs = (JDFDevCaps) devcaps.elementAt(i);
-
-			String _name = dcs.getName();
-			if (StringUtil.matches(_name, includeNameExpression))
+			int siz = devcaps.size();
+			for (int i = 0; i < siz; i++)
 			{
-				JDFModuleCap mc = dcs.appendModuleRef("Module_" + _name);
-				mc.setAvailability(EnumAvailability.Installed);
-				mc.setDescriptiveName("Module that implements the resource: "
-						+ _name);
+				JDFDevCaps dcs = (JDFDevCaps) devcaps.elementAt(i);
+
+				String _name = dcs.getName();
+				if (StringUtil.matches(_name, includeNameExpression))
+				{
+					JDFModuleCap mc = dcs.appendModuleRef("Module_" + _name);
+					mc.setAvailability(EnumAvailability.Installed);
+					mc.setDescriptiveName("Module that implements the resource: " + _name);
+				}
 			}
 		}
 	}

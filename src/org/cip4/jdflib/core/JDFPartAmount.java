@@ -199,21 +199,24 @@ public class JDFPartAmount extends JDFResourceLink
 		if (rl != null)
 		{
 			JDFAttributeMap rlMap = rl.getAttributeMap();
-
-			JDFAttributeMap map = rlMap == null ? null : getAttributeMap();
-			if (map != null)
+			if (rlMap != null)
 			{
-				Iterator<String> it = map.getKeyIterator();
-				while (it.hasNext())
+				JDFAttributeMap map = getAttributeMap();
+				if (map != null)
 				{
-					String s = it.next();
-					if (rlMap.containsKey(s))
+					Iterator<String> it = map.getKeyIterator();
+					while (it.hasNext())
 					{
-						v.add(s);
+						String s = it.next();
+						if (rlMap.containsKey(s))
+						{
+							v.add(s);
+						}
 					}
 				}
 			}
 		}
+		
 		return v;
 	}
 

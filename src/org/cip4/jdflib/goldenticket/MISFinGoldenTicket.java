@@ -215,24 +215,29 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 		if (vParts != null)
 		{
 			VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation", " "));
-			final int size = reducedMap == null ? 0 : reducedMap.size();
-			for (int i = 0; i < size; i++)
+			if (reducedMap != null)
 			{
-				final JDFAttributeMap part = reducedMap.elementAt(i);
-				JDFResource partComp = outComp.getCreatePartition(part, partIDKeys);
-				partComp.setDescriptiveName("Description for Component part# " + i);
-				JDFAttributeMap newMap = new JDFAttributeMap(part);
-				newMap.put(AttributeName.CONDITION, "Good");
-				rl.setAmount(good, newMap);
+				final int size = reducedMap.size();
+				for (int i = 0; i < size; i++)
+				{
+					final JDFAttributeMap part = reducedMap.elementAt(i);
+					JDFResource partComp = outComp.getCreatePartition(part, partIDKeys);
+					partComp.setDescriptiveName("Description for Component part# " + i);
+					JDFAttributeMap newMap = new JDFAttributeMap(part);
+					newMap.put(AttributeName.CONDITION, "Good");
+					rl.setAmount(good, newMap);
+				}
 			}
 		}
 		else
 		{
 			outComp.setDescriptiveName("MIS-Fin output Component");
 		}
+		
 		// outComp.getCreateLayout();
 		JDFMedia inMedia = (JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
 		outComp.setDimensions(inMedia.getDimension());
+		
 		return outComp;
 
 	}

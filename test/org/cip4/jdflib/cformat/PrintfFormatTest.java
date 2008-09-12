@@ -515,30 +515,25 @@ public class PrintfFormatTest extends JDFTestCaseBase
 		try
 		{
 			fmt = new PrintfFormat(s);
-		} catch (Exception e)
+		} 
+		catch (Exception e)
 		{
 			fail("bad expression");
 		}
 
-		assertEquals("type is '" + fmt.type + "' vs. '" + type + "'", fmt.type,
-				type);
-		assertEquals("prefix is '" + fmt.prefix + "' vs. '" + pfx + "'",
-				fmt.prefix, pfx);
-		assertEquals("suffix is '" + fmt.suffix + "' vs. '" + sfx + "'",
-				fmt.suffix, sfx);
-		assertEquals("width is '" + fmt.width + "' vs. '" + w + "'", fmt.width,
-				w);
-		assertEquals("prec is '" + fmt.prec + "' vs. '" + p + "'", fmt.prec, p);
-		assertEquals("alternate is '" + fmt.alternate + "' vs. '" + alt + "'",
-				fmt.alternate, alt);
-		assertEquals("zeropad is '" + fmt.zeropad + "' vs. '" + zeropad + "'",
-				fmt.zeropad, zeropad);
-		assertEquals("leftAdjust is '" + fmt.leftAdjust + "' vs. '" + left
-				+ "'", fmt.leftAdjust, left);
-		assertEquals("addBlank is '" + fmt.addBlank + "' vs. '" + blank + "'",
-				fmt.addBlank, blank);
-		assertEquals("addSign is '" + fmt.addSign + "' vs. '" + sign + "'",
-				fmt.addSign, sign);
+		if (fmt != null)
+		{
+			assertEquals("type is '" + fmt.type + "' vs. '" + type + "'", fmt.type, type);
+			assertEquals("prefix is '" + fmt.prefix + "' vs. '" + pfx + "'", fmt.prefix, pfx);
+			assertEquals("suffix is '" + fmt.suffix + "' vs. '" + sfx + "'", fmt.suffix, sfx);
+			assertEquals("width is '" + fmt.width + "' vs. '" + w + "'", fmt.width, w);
+			assertEquals("prec is '" + fmt.prec + "' vs. '" + p + "'", fmt.prec, p);
+			assertEquals("alternate is '" + fmt.alternate + "' vs. '" + alt + "'", fmt.alternate, alt);
+			assertEquals("zeropad is '" + fmt.zeropad + "' vs. '" + zeropad + "'", fmt.zeropad, zeropad);
+			assertEquals("leftAdjust is '" + fmt.leftAdjust + "' vs. '" + left + "'", fmt.leftAdjust, left);
+			assertEquals("addBlank is '" + fmt.addBlank + "' vs. '" + blank + "'", fmt.addBlank, blank);
+			assertEquals("addSign is '" + fmt.addSign + "' vs. '" + sign + "'", fmt.addSign, sign);
+		}
 	}
 
 	private static void printUsage()

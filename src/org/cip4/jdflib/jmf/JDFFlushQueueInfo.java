@@ -131,6 +131,7 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 	 * @see org.cip4.jdflib.auto.JDFAutoFlushQueueInfo#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFlushQueueInfo[  --> " + super.toString() + " ]";
@@ -143,9 +144,12 @@ public class JDFFlushQueueInfo extends JDFAutoFlushQueueInfo
 	 */
 	public void setQueueEntryDefsFromQE(VElement zapped)
 	{
-		int zs = zapped == null ? 0 : zapped.size();
-		JDFQueueFilter qf = appendQueueFilter();
-		for (int i = 0; i < zs; i++)
-			qf.appendQueueEntryDef(((JDFQueueEntry) zapped.get(i)).getQueueEntryID());
+		if (zapped != null)
+		{
+			int zs = zapped.size();
+			JDFQueueFilter qf = appendQueueFilter();
+			for (int i = 0; i < zs; i++)
+				qf.appendQueueEntryDef(((JDFQueueEntry) zapped.get(i)).getQueueEntryID());
+		}
 	}
 }

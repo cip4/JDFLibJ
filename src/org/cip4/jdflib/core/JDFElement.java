@@ -1920,15 +1920,19 @@ public class JDFElement extends KElement
 
 			n = next;
 		}
+		
 		NamedNodeMap nm = getAttributes();
-		int siz = nm == null ? 0 : nm.getLength();
-		for (int i = siz - 1; i >= 0; i--)
+		if (nm != null)
 		{
-			Node na = nm.item(i);
-			final String nsuri = na.getNamespaceURI();
-			if (!isInJDFNameSpaceStatic(nsuri))
+			int siz = nm.getLength();
+			for (int i = siz - 1; i >= 0; i--)
 			{
-				removeAttributeNode((Attr) na);
+				Node na = nm.item(i);
+				final String nsuri = na.getNamespaceURI();
+				if (!isInJDFNameSpaceStatic(nsuri))
+				{
+					removeAttributeNode((Attr) na);
+				}
 			}
 		}
 	}
@@ -1979,20 +1983,23 @@ public class JDFElement extends KElement
 		String id = target.getID();
 
 		VElement v = getChildrenByTagName(target.getLocalName() + JDFConstants.REF, target.getNamespaceURI(), new JDFAttributeMap(AttributeName.RREF, id), false, true, 0);
-
-		int siz = v == null ? 0 : v.size();
-		for (int i = 0; i < siz; i++)
+		if (v != null)
 		{
-			JDFRefElement re = (JDFRefElement) v.elementAt(i);
-			JDFAttributeMap partMap = re.getPartMap();
-			if (partMap != null && partMap.size() == 0)
-				partMap = null;
-
-			if (ContainerUtil.equals(partMap, map))
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
 			{
-				return re;
+				JDFRefElement re = (JDFRefElement) v.elementAt(i);
+				JDFAttributeMap partMap = re.getPartMap();
+				if (partMap != null && partMap.size() == 0)
+					partMap = null;
+
+				if (ContainerUtil.equals(partMap, map))
+				{
+					return re;
+				}
 			}
 		}
+		
 		return null;
 	}
 
@@ -2249,12 +2256,16 @@ public class JDFElement extends KElement
 		if (bFollowRefs == false)
 			return v; // do not folow refs if explicit refs are requested
 
-		final int size = v == null ? 0 : v.size();
-		for (int i = 0; i < size; i++)
+		if (v != null)
 		{
-			if (v.elementAt(i) instanceof JDFRefElement)
-				v.set(i, ((JDFRefElement) v.elementAt(i)).getTarget());
+			final int size = v.size();
+			for (int i = 0; i < size; i++)
+			{
+				if (v.elementAt(i) instanceof JDFRefElement)
+					v.set(i, ((JDFRefElement) v.elementAt(i)).getTarget());
+			}
 		}
+		
 		return v;
 	}
 
@@ -4608,6 +4619,7 @@ public class JDFElement extends KElement
 		{
 			return "Waiting";
 		}
+		
 		if (attName.equals("Status") && (e instanceof JDFResource))
 		{
 			return "Unavailable";
@@ -4628,38 +4640,52 @@ public class JDFElement extends KElement
 		if (attName.equals("PreviewType"))
 			return "Separation";
 
-		EnumAttributeType attyp = e.getAtrType(attName);
-		if (attyp != null)
+		if (e != null)
 		{
-			if (EnumAttributeType.boolean_.equals(attyp))
-				return "true";
-			if (EnumAttributeType.CMYKColor.equals(attyp))
-				return "0 0 0 1";
-			if (EnumAttributeType.RGBColor.equals(attyp))
-				return "1 1 1";
-			if (EnumAttributeType.dateTime.equals(attyp) || EnumAttributeType.DateTimeRange.equals(attyp)
-					|| EnumAttributeType.DateTimeRangeList.equals(attyp))
-				return new JDFDate().getDateTimeISO();
-			if (EnumAttributeType.double_.equals(attyp))
-				return "0.0";
-			if (EnumAttributeType.duration.equals(attyp) || EnumAttributeType.DurationRange.equals(attyp)
-					|| EnumAttributeType.DurationRangeList.equals(attyp))
-				return "PT1H";
-			// TODO evaluate durations
-			// if(EnumAttributeType.enumeration.equals(attyp) ||
-			// EnumAttributeType.enumerations.equals(attyp))
-			// return "";
-			if (EnumAttributeType.integer.equals(attyp) || EnumAttributeType.IntegerRange.equals(attyp)
-					|| EnumAttributeType.IntegerRangeList.equals(attyp) || EnumAttributeType.IntegerList.equals(attyp))
-				return "0";
-			if (EnumAttributeType.JDFJMFVersion.equals(attyp))
-				return "1.3";
-			if (EnumAttributeType.matrix.equals(attyp))
-				return "1 0 0 1 0 0";
-			if (EnumAttributeType.XYPair.equals(attyp) || EnumAttributeType.XYPairRange.equals(attyp)
-					|| EnumAttributeType.XYPairRangeList.equals(attyp))
-				return "0 0";
+			EnumAttributeType attyp = e.getAtrType(attName);
+			if (attyp != null)
+			{
+				if (EnumAttributeType.boolean_.equals(attyp))
+					return "true";
+
+				if (EnumAttributeType.CMYKColor.equals(attyp))
+					return "0 0 0 1";
+
+				if (EnumAttributeType.RGBColor.equals(attyp))
+					return "1 1 1";
+
+				if (EnumAttributeType.dateTime.equals(attyp) || EnumAttributeType.DateTimeRange.equals(attyp)
+						|| EnumAttributeType.DateTimeRangeList.equals(attyp))
+					return new JDFDate().getDateTimeISO();
+
+				if (EnumAttributeType.double_.equals(attyp))
+					return "0.0";
+
+				if (EnumAttributeType.duration.equals(attyp) || EnumAttributeType.DurationRange.equals(attyp)
+						|| EnumAttributeType.DurationRangeList.equals(attyp))
+					return "PT1H";
+
+				// TODO evaluate durations
+				// if(EnumAttributeType.enumeration.equals(attyp) ||
+				// EnumAttributeType.enumerations.equals(attyp))
+				// return "";
+				if (EnumAttributeType.integer.equals(attyp) || EnumAttributeType.IntegerRange.equals(attyp)
+						|| EnumAttributeType.IntegerRangeList.equals(attyp)
+						|| EnumAttributeType.IntegerList.equals(attyp))
+					return "0";
+
+				if (EnumAttributeType.JDFJMFVersion.equals(attyp))
+					return "1.3";
+
+				if (EnumAttributeType.matrix.equals(attyp))
+					return "1 0 0 1 0 0";
+
+				if (EnumAttributeType.XYPair.equals(attyp) || EnumAttributeType.XYPairRange.equals(attyp)
+						|| EnumAttributeType.XYPairRangeList.equals(attyp))
+					return "0 0";
+			}
 		}
+		
 		return "New Value";
 	}
 

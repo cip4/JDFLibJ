@@ -938,20 +938,23 @@ public class JDFValidator
 			if (rlp != null)
 			{
 				final VElement vLinks = rlp.getPoolChildren(null, null, null);
-				final int size2 = (vLinks == null) ? 0 : vLinks.size();
-				for (j = size2 - 1; j >= 0; j--)
+				if (vLinks != null)
 				{
-					JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(j);
-					if (!n.isValidLink(level, rl, null, null))
+					final int size2 = vLinks.size();
+					for (j = size2 - 1; j >= 0; j--)
 					{
-						vBadResourceLinks.appendUnique(rl);
-					}
-					else
-					{
-						JDFElement target = rl.getTarget();
-						if (target == null)
+						JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(j);
+						if (!n.isValidLink(level, rl, null, null))
 						{
 							vBadResourceLinks.appendUnique(rl);
+						}
+						else
+						{
+							JDFElement target = rl.getTarget();
+							if (target == null)
+							{
+								vBadResourceLinks.appendUnique(rl);
+							}
 						}
 					}
 				}
@@ -1271,31 +1274,35 @@ public class JDFValidator
 	 */
 	private void printResourceLinkPool(final String rlpXPath, KElement testElement, VString vLinks, String missBad)
 	{
-		int size = vLinks == null ? 0 : vLinks.size();
-		for (int i = 0; i < size; i++)
+		if (vLinks != null)
 		{
-			String missResLink = vLinks.stringAt(0);
-			if (testElement != null)
+			int size = vLinks.size();
+			for (int i = 0; i < size; i++)
 			{
-				KElement e = testElement.appendElement("TestElement");
-
-				String name = missResLink.indexOf(":") > 0 ? StringUtil.token(missResLink, 0, ":") : missResLink;
-				String procUsage = missResLink.indexOf(":") > 0 ? StringUtil.token(missResLink, 1, ":") : "";
-				if (procUsage.startsWith("Any"))
+				String missResLink = vLinks.stringAt(0);
+				if (testElement != null)
 				{
-					procUsage = procUsage.substring(3);
+					KElement e = testElement.appendElement("TestElement");
+
+					String name = missResLink.indexOf(":") > 0 ? StringUtil.token(missResLink, 0, ":") : missResLink;
+					String procUsage = missResLink.indexOf(":") > 0 ? StringUtil.token(missResLink, 1, ":") : "";
+					if (procUsage.startsWith("Any"))
+					{
+						procUsage = procUsage.substring(3);
+					}
+
+					setErrorType(e, missBad + "ResourceLink", missBad + procUsage + " resourceLink ");
+					e.setAttribute("NodeName", name);
+					if (!procUsage.equals(JDFConstants.EMPTYSTRING))
+					{
+						e.setAttribute("ProcessUsage", procUsage);
+					}
+
+					e.setAttribute("XPath", rlpXPath + "/" + name + "[1]");
 				}
 
-				setErrorType(e, missBad + "ResourceLink", missBad + procUsage + " resourceLink ");
-				e.setAttribute("NodeName", name);
-				if (!procUsage.equals(JDFConstants.EMPTYSTRING))
-				{
-					e.setAttribute("ProcessUsage", procUsage);
-				}
-
-				e.setAttribute("XPath", rlpXPath + "/" + name + "[1]");
+				vLinks.removeElement(missResLink);
 			}
-			vLinks.removeElement(missResLink);
 		}
 	}
 
@@ -1548,23 +1555,27 @@ public class JDFValidator
 								if (!rl.hasAttribute(AttributeName.PROCESSUSAGE))
 								{
 									VString vMissingLinks = n.getMissingLinkVector(9999);
-									final int missLinkSize = vMissingLinks == null ? 0 : vMissingLinks.size();
-									for (int ii = 0; ii < missLinkSize; ii++)
+									if (vMissingLinks != null)
 									{
-										VString vs = new VString(StringUtil.tokenize(vMissingLinks.elementAt(ii), ":", false));
-										if (vs.size() == 2)
+										final int missLinkSize = vMissingLinks.size();
+										for (int ii = 0; ii < missLinkSize; ii++)
 										{
-											String linkName = vs.elementAt(0);
-											if (linkName.equals(rl.getNodeName()))
+											VString vs = new VString(StringUtil.tokenize(vMissingLinks.elementAt(ii), ":", false));
+											if (vs.size() == 2)
 											{
-												sysOut.print(" (Potential missing ProcessUsage: " + vs.elementAt(1)
-														+ ")");
-												setErrorType(testElement, "MissingProcessUsage", "Potential missing ProcessUsage: "
-														+ vs.elementAt(1));
-												foundMissing = true;
+												String linkName = vs.elementAt(0);
+												if (linkName.equals(rl.getNodeName()))
+												{
+													sysOut.print(" (Potential missing ProcessUsage: " + vs.elementAt(1)
+															+ ")");
+													setErrorType(testElement, "MissingProcessUsage", "Potential missing ProcessUsage: "
+															+ vs.elementAt(1));
+													foundMissing = true;
+												}
 											}
 										}
 									}
+									
 									if (!foundMissing)
 									{
 										setErrorType(testElement, "UnknownResourceLink", "Incorrect ResourceLink @Usage or @ProcessUsage for Process "
@@ -1582,9 +1593,11 @@ public class JDFValidator
 							}
 						}
 					}
+					
 					sysOut.println();
 				}
 			}
+			
 			vBadResourceLinks.removeElement(rl);
 		}
 

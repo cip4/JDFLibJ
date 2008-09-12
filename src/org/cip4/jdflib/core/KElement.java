@@ -1229,7 +1229,7 @@ public class KElement extends ElementNSImpl
 		{
 			String s = getNodeName();
 			bNameOK = s.endsWith(nodeName);
-			if (bNameOK && !s.equals(nodeName))
+			if (bNameOK && !s.equals(nodeName) && nodeName != null)
 			{
 				bNameOK = nodeName.equals(xmlnsLocalName(s));
 			}
@@ -1485,9 +1485,6 @@ public class KElement extends ElementNSImpl
 		if (kElem == null)
 			return 0;
 
-		final NamedNodeMap nm = kElem.getAttributes();
-
-		final int siz = (nm == null) ? 0 : nm.getLength();
 		KElement parent = null;
 		if (kElem instanceof JDFResource)
 		{
@@ -1505,17 +1502,26 @@ public class KElement extends ElementNSImpl
 					il2.add(AttributeName.CLASS);
 					il2.appendUnique(r.getPartIDKeys());
 				}
+				
 				setAttributes(parent, il2);
 			}
 		}
-		for (int i = 0; i < siz; i++)
+		
+		int siz = 0;
+		final NamedNodeMap nm = kElem.getAttributes();
+		if (nm != null)
 		{
-			final Node a = nm.item(i);
-			if (ignoreList == null || !ignoreList.contains(a.getLocalName()))
+			siz = nm.getLength();
+			for (int i = 0; i < siz; i++)
 			{
-				setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
+				final Node a = nm.item(i);
+				if (ignoreList == null || !ignoreList.contains(a.getLocalName()))
+				{
+					setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
+				}
 			}
 		}
+		
 		return siz;
 	}
 
@@ -1528,14 +1534,16 @@ public class KElement extends ElementNSImpl
 	{
 		final JDFAttributeMap m = new JDFAttributeMap();
 		final NamedNodeMap nm = getAttributes();
-
-		final int siz = (nm == null) ? 0 : nm.getLength();
-
-		for (int i = 0; i < siz; i++)
+		if (nm != null)
 		{
-			final Node a = nm.item(i);
-			final String nodeName = a.getNodeName();
-			m.put(nodeName, a.getNodeValue());
+			final int siz = nm.getLength();
+
+			for (int i = 0; i < siz; i++)
+			{
+				final Node a = nm.item(i);
+				final String nodeName = a.getNodeName();
+				m.put(nodeName, a.getNodeValue());
+			}
 		}
 
 		return m;
@@ -2396,13 +2404,15 @@ public class KElement extends ElementNSImpl
 	{
 		final VString v = new VString();
 		final NamedNodeMap nm = getAttributes();
-
-		final int siz = (nm == null) ? 0 : nm.getLength();
-
-		for (int i = 0; i < siz; i++)
+		if (nm != null)
 		{
-			final Node a = nm.item(i);
-			v.addElement(a.getNodeName());
+			final int siz = nm.getLength();
+
+			for (int i = 0; i < siz; i++)
+			{
+				final Node a = nm.item(i);
+				v.addElement(a.getNodeName());
+			}
 		}
 
 		return v;
@@ -3563,11 +3573,14 @@ public class KElement extends ElementNSImpl
 		if (attribs == null)
 		{
 			final NamedNodeMap nm = getAttributes();
-			final int siz = (nm == null) ? 0 : nm.getLength();
-
-			for (int i = siz - 1; i >= 0; i--)
+			if (nm != null)
 			{
-				removeAttribute(nm.item(i).getNodeName());
+				final int siz = nm.getLength();
+
+				for (int i = siz - 1; i >= 0; i--)
+				{
+					removeAttribute(nm.item(i).getNodeName());
+				}
 			}
 		}
 		else
@@ -3577,7 +3590,6 @@ public class KElement extends ElementNSImpl
 				removeAttribute(attribs.elementAt(i));
 			}
 		}
-
 	}
 
 	/**
@@ -3588,16 +3600,20 @@ public class KElement extends ElementNSImpl
 	public void eraseEmptyAttributes(boolean bRecurse)
 	{
 		final NamedNodeMap nm = getAttributes();
-		final int siz = (nm == null) ? 0 : nm.getLength();
-
-		for (int i = siz - 1; i >= 0; i--)
+		if (nm != null)
 		{
-			final Node item = nm.item(i);
-			if (item.getNodeValue().equals(JDFConstants.EMPTYSTRING))
+			final int siz = nm.getLength();
+
+			for (int i = siz - 1; i >= 0; i--)
 			{
-				removeAttribute(item.getNodeName());
+				final Node item = nm.item(i);
+				if (item.getNodeValue().equals(JDFConstants.EMPTYSTRING))
+				{
+					removeAttribute(item.getNodeName());
+				}
 			}
 		}
+		
 		if (bRecurse)
 		{
 			KElement e = getFirstChildElement();
@@ -3620,17 +3636,21 @@ public class KElement extends ElementNSImpl
 		if (aMap != null)
 		{
 			final NamedNodeMap nm = getAttributes();
-			final int siz = (nm == null) ? 0 : nm.getLength();
-			for (int i = siz - 1; i >= 0; i--)
+			if (nm != null)
 			{
-				final Node item = nm.item(i);
-				final String attVal = item.getNodeName();
-				if (aMap.containsKey(attVal) && item.getNodeValue().equals(aMap.get(attVal)))
+				final int siz = nm.getLength();
+				for (int i = siz - 1; i >= 0; i--)
 				{
-					removeAttribute(attVal);
+					final Node item = nm.item(i);
+					final String attVal = item.getNodeName();
+					if (aMap.containsKey(attVal) && item.getNodeValue().equals(aMap.get(attVal)))
+					{
+						removeAttribute(attVal);
+					}
 				}
 			}
 		}
+		
 		if (bRecurse)
 		{
 			KElement e = getFirstChildElement();
@@ -3755,6 +3775,7 @@ public class KElement extends ElementNSImpl
 	{
 		if (nsURI == null)
 			return;
+		
 		KElement n = getFirstChildElement();
 		while (n != null)
 		{
@@ -3772,15 +3793,19 @@ public class KElement extends ElementNSImpl
 
 			n = next;
 		}
+		
 		NamedNodeMap nm = getAttributes();
-		int siz = nm == null ? 0 : nm.getLength();
-		for (int i = siz - 1; i >= 0; i--)
+		if (nm != null)
 		{
-			Node na = nm.item(i);
-			final String nsuri = na.getNamespaceURI();
-			if (nsURI.equals(nsuri))
+			int siz = nm.getLength();
+			for (int i = siz - 1; i >= 0; i--)
 			{
-				removeAttributeNode((Attr) na);
+				Node na = nm.item(i);
+				final String nsuri = na.getNamespaceURI();
+				if (nsURI.equals(nsuri))
+				{
+					removeAttributeNode((Attr) na);
+				}
 			}
 		}
 	}

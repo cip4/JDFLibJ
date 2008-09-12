@@ -145,6 +145,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQueueFilter[  --> " + super.toString() + " ]";
@@ -155,6 +156,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * 
 	 * @return VJDFAttributeMap
 	 */
+	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
 		return super.getPartMapVector();
@@ -165,6 +167,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * 
 	 * @param vPart
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vPart)
 	{
 		super.setPartMapVector(vPart);
@@ -218,15 +221,21 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 */
 	public Set<String> getQueueEntryDefSet()
 	{
+		HashSet<String> set = null;
+		
 		VElement v = getChildElementVector(ElementName.QUEUEENTRYDEF, null);
-		final int siz = v == null ? 0 : v.size();
-		HashSet<String> set = siz == 0 ? null : new HashSet<String>();
-		for (int i = 0; i < siz; i++)
+		if (v != null)
 		{
-			String qeid = ((JDFQueueEntryDef) v.elementAt(i)).getQueueEntryID();
-			if (!isWildCard(qeid))
-				set.add(qeid);
+			final int siz = v.size();
+			set = siz == 0 ? null : new HashSet<String>();
+			for (int i = 0; i < siz; i++)
+			{
+				String qeid = ((JDFQueueEntryDef) v.elementAt(i)).getQueueEntryID();
+				if (!isWildCard(qeid))
+					set.add(qeid);
+			}
 		}
+		
 		return set != null && set.size() > 0 ? set : null;
 	}
 
@@ -237,15 +246,22 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 */
 	public Set getDeviceIDSet()
 	{
+		int siz = 0;
+		HashSet set = null;
+		
 		VElement v = getChildElementVector(ElementName.DEVICE, null);
-		final int siz = v == null ? 0 : v.size();
-		HashSet set = siz == 0 ? null : new HashSet();
-		for (int i = 0; i < siz; i++)
+		if (v != null)
 		{
-			String qeid = ((JDFDevice) v.elementAt(i)).getDeviceID();
-			if (!isWildCard(qeid))
-				set.add(qeid);
+			siz = v.size();
+			set = siz == 0 ? null : new HashSet();
+			for (int i = 0; i < siz; i++)
+			{
+				String qeid = ((JDFDevice) v.elementAt(i)).getDeviceID();
+				if (!isWildCard(qeid))
+					set.add(qeid);
+			}
 		}
+		
 		return set != null && set.size() > 0 ? set : null;
 	}
 
@@ -261,26 +277,21 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		int maxEntries = hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
 
 		VElement v = theQueue.getQueueEntryVector();
-		final int size = v == null ? 0 : v.size();
-		theQueue.setQueueSize(size);
-
-		for (int i = 0; i < size; i++)
+		if (v != null)
 		{
-			JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-			match(qe);
+			final int size = v.size();
+			theQueue.setQueueSize(size);
+
+			for (int i = 0; i < size; i++)
+			{
+				JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
+				match(qe);
+			}
 		}
 
 		for (int i = theQueue.numEntries(null) - 1; i >= maxEntries; i--)
-			theQueue.removeChild(ElementName.QUEUEENTRY, null, maxEntries); // always
-		// zapp
-		// first
-		// -
-		// it
-		// is
-		// faster
-		// to
-		// find
-
+			theQueue.removeChild(ElementName.QUEUEENTRY, null, maxEntries); 
+			// always zapp first - it is faster to find
 	}
 
 	/**

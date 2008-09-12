@@ -227,11 +227,15 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		JDFMISDetails md = pt.getMISDetails();
 		jp.copyElement(md, null);
 		VElement modules = pt.getChildElementVector(ElementName.MODULEPHASE, null);
-		int mLen = modules == null ? 0 : modules.size();
-		for (int i = 0; i < mLen; i++)
+		if (modules != null)
 		{
-			jp.createModuleStatusFromModulePhase((JDFModulePhase) modules.elementAt(i));
+			int mLen = modules.size();
+			for (int i = 0; i < mLen; i++)
+			{
+				jp.createModuleStatusFromModulePhase((JDFModulePhase) modules.elementAt(i));
+			}
 		}
+		
 		// TODO set more
 		jp.eraseEmptyAttributes(true);
 		return jp;

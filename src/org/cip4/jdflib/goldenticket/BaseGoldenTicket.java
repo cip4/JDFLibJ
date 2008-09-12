@@ -297,9 +297,12 @@ public class BaseGoldenTicket
 		{
 			theExpandedNode = theNode.addCombined(theNode.getTypes());
 			VElement resLinks = theNode.getResourceLinks(null);
-			final int size = resLinks == null ? 0 : resLinks.size();
-			for (int i = 0; i < size; i++)
-				((JDFResourceLink) resLinks.get(i)).removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
+			if (resLinks != null)
+			{
+				final int size = resLinks.size();
+				for (int i = 0; i < size; i++)
+					((JDFResourceLink) resLinks.get(i)).removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
+			}
 
 			initAuditPool(theExpandedNode);
 			theExpandedNode.copyElement(theNode.getResourceLinkPool(), null);
@@ -312,21 +315,24 @@ public class BaseGoldenTicket
 		theStatusCounter.setActiveNode(theExpandedNode, null, nodeLinks);
 
 		VElement vResLinks = theExpandedNode.getResourceLinks(null);
-		int siz = vResLinks != null ? vResLinks.size() : 0;
-		for (int i = 0; i < siz; i++)
+		if (vResLinks != null)
 		{
-			JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
-
-			if (EnumUsage.Input.equals(rl.getUsage()))
+			int siz = vResLinks.size();
+			for (int i = 0; i < siz; i++)
 			{
-				VElement vRes = rl.getTargetVector(-1);
-				for (int j = 0; j < vRes.size(); j++)
+				JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
+
+				if (EnumUsage.Input.equals(rl.getUsage()))
 				{
-					VElement leaves = ((JDFResource) vRes.elementAt(j)).getLeaves(false);
-					for (int k = 0; k < leaves.size(); k++)
+					VElement vRes = rl.getTargetVector(-1);
+					for (int j = 0; j < vRes.size(); j++)
 					{
-						JDFResource r = (JDFResource) leaves.elementAt(k);
-						r.setResStatus(EnumResStatus.Available, true);
+						VElement leaves = ((JDFResource) vRes.elementAt(j)).getLeaves(false);
+						for (int k = 0; k < leaves.size(); k++)
+						{
+							JDFResource r = (JDFResource) leaves.elementAt(k);
+							r.setResStatus(EnumResStatus.Available, true);
+						}
 					}
 				}
 			}
@@ -486,15 +492,18 @@ public class BaseGoldenTicket
 	final protected void runSinglePhase(int pgood, int pwaste, @SuppressWarnings("unused") boolean bOutAvail, boolean bFirst)
 	{
 		VElement vResLinks = theExpandedNode.getResourceLinks(null);
-		int siz = vResLinks != null ? vResLinks.size() : 0;
-		for (int i = 0; i < siz; i++)
+		if (vResLinks != null)
 		{
-			int _good = pgood;
-			JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
-			// only consume input for first set of runs
-			if (!bFirst && EnumUsage.Input.equals(rl.getUsage()))
-				_good = 0;
-			theStatusCounter.addPhase(rl.getrRef(), _good, pwaste, true);
+			int siz = vResLinks.size();
+			for (int i = 0; i < siz; i++)
+			{
+				int _good = pgood;
+				JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
+				// only consume input for first set of runs
+				if (!bFirst && EnumUsage.Input.equals(rl.getUsage()))
+					_good = 0;
+				theStatusCounter.addPhase(rl.getrRef(), _good, pwaste, true);
+			}
 		}
 	}
 
@@ -611,17 +620,21 @@ public class BaseGoldenTicket
 		{
 			nodeLinks = new VElement();
 			VElement resLinks = theExpandedNode.getResourceLinks(null);
-			for (int i = 0; i < amountLinks.size(); i++)
+			if (resLinks != null)
 			{
-				final int resLinkSize = resLinks == null ? 0 : resLinks.size();
-				for (int j = 0; j < resLinkSize; j++)
+				final int resLinkSize = resLinks.size();
+				for (int i = 0; i < amountLinks.size(); i++)
 				{
-					JDFResourceLink rl = (JDFResourceLink) resLinks.elementAt(j);
-					if (rl.matchesString(amountLinks.elementAt(i)))
-						nodeLinks.add(rl);
+					for (int j = 0; j < resLinkSize; j++)
+					{
+						JDFResourceLink rl = (JDFResourceLink) resLinks.elementAt(j);
+						if (rl.matchesString(amountLinks.elementAt(i)))
+							nodeLinks.add(rl);
+					}
 				}
 			}
 		}
+		
 		return nodeLinks;
 	}
 
@@ -777,12 +790,15 @@ public class BaseGoldenTicket
 				if (media == null)
 				{
 					VElement v = thePreviousNode.getPredecessors(true, false);
-					int siz = v == null ? 0 : v.size();
-					for (int i = 0; i < siz; i++)
+					if (v != null)
 					{
-						media = getMediaFromNode((JDFNode) v.get(i));
-						if (media != null)
-							break;
+						int siz = v.size();
+						for (int i = 0; i < siz; i++)
+						{
+							media = getMediaFromNode((JDFNode) v.get(i));
+							if (media != null)
+								break;
+						}
 					}
 				}
 			}
@@ -997,15 +1013,18 @@ public class BaseGoldenTicket
 		if (vParts != null)
 		{
 			VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation", " "));
-			final int size = reducedMap == null ? 0 : reducedMap.size();
-			for (int i = 0; i < size; i++)
+			if (reducedMap != null)
 			{
-				final JDFAttributeMap part = reducedMap.elementAt(i);
-				JDFResource partComp = outComp.getCreatePartition(part, partIDKeys);
-				partComp.setDescriptiveName("Description for Component part# " + i);
-				JDFAttributeMap newMap = new JDFAttributeMap(part);
-				newMap.put(AttributeName.CONDITION, "Good");
-				rl.setAmount(good, newMap);
+				final int size = reducedMap.size();
+				for (int i = 0; i < size; i++)
+				{
+					final JDFAttributeMap part = reducedMap.elementAt(i);
+					JDFResource partComp = outComp.getCreatePartition(part, partIDKeys);
+					partComp.setDescriptiveName("Description for Component part# " + i);
+					JDFAttributeMap newMap = new JDFAttributeMap(part);
+					newMap.put(AttributeName.CONDITION, "Good");
+					rl.setAmount(good, newMap);
+				}
 			}
 		}
 		else

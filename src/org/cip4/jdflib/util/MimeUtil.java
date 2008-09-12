@@ -736,9 +736,12 @@ public class MimeUtil extends UrlUtil
 		{
 			KElement e = docJMF.getRoot();
 			VElement v = e.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
-			int siz = v == null ? 0 : v.size();
-			for (int i = 0; i < siz; i++)
-				v.item(i).setAttribute(AttributeName.URL, cid);
+			if (v != null)
+			{
+				int siz = v.size();
+				for (int i = 0; i < siz; i++)
+					v.item(i).setAttribute(AttributeName.URL, cid);
+			}
 			updateXMLMultipart(multipart, docJMF, null);
 		}
 
@@ -756,6 +759,7 @@ public class MimeUtil extends UrlUtil
 		{
 			return null;
 		}
+		
 		return multipart;
 	}
 
@@ -771,96 +775,106 @@ public class MimeUtil extends UrlUtil
 	private static int extendMultipart(Multipart multipart, JDFDoc docJDF, String cid)
 	{
 		int n = 0;
+		
 		if (docJDF == null)
 		{
 			return 0;
 		}
+		
 		// Get all FileSpec elements
 		final KElement e = docJDF.getRoot();
 		final VElement fileSpecs = e.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
-		final int vSize = fileSpecs == null ? 0 : fileSpecs.size();
-		String[] urlStrings = listURLs(fileSpecs);
-		for (int i = 0; i < urlStrings.length; i++)
+		if (fileSpecs != null)
 		{
-			if (urlStrings[i] != null)
+			final int vSize = fileSpecs.size();
+			
+			String[] urlStrings = listURLs(fileSpecs);
+			for (int i = 0; i < urlStrings.length; i++)
 			{
-				// Convert URL to CID and update FileSpec
-				File f = UrlUtil.urlToFile(urlStrings[i]);
-				if (f != null && !f.isAbsolute())
+				if (urlStrings[i] != null)
 				{
-					// Resolve relative URLs
-					if (docJDF.getOriginalFileName() != null)
+					// Convert URL to CID and update FileSpec
+					File f = UrlUtil.urlToFile(urlStrings[i]);
+					if (f != null && !f.isAbsolute())
 					{
-						File jdfFile = new File(docJDF.getOriginalFileName());
-						f = new File(jdfFile.getParent(), f.getPath());
-						try
+						// Resolve relative URLs
+						if (docJDF.getOriginalFileName() != null)
 						{
-							urlStrings[i] = f.toURL().toExternalForm();
-						}
-						catch (MalformedURLException e1)
-						{
-							// nop
+							File jdfFile = new File(docJDF.getOriginalFileName());
+							f = new File(jdfFile.getParent(), f.getPath());
+							try
+							{
+								urlStrings[i] = f.toURL().toExternalForm();
+							}
+							catch (MalformedURLException e1)
+							{
+								// nop
+							}
 						}
 					}
-				}
-				if (f == null || !f.canRead())
-				{
-					// Ignore unreadable files
-					urlStrings[i] = null;
-				}
-				else
-				{
-					// Update FileSpec's URL
-					fileSpecs.item(i).setAttribute(AttributeName.URL, urlToCid(urlStrings[i]), null);
-				}
-				// Set duplicate URLs to null so that the file is only added
-				// once to multipart
-				for (int j = 0; j < i; j++)
-				{
-					if (urlStrings[i] != null && urlStrings[i].equals(urlStrings[j]))
+					if (f == null || !f.canRead())
 					{
+						// Ignore unreadable files
 						urlStrings[i] = null;
 					}
+					else
+					{
+						// Update FileSpec's URL
+						fileSpecs.item(i).setAttribute(AttributeName.URL, urlToCid(urlStrings[i]), null);
+					}
+					// Set duplicate URLs to null so that the file is only added
+					// once to multipart
+					for (int j = 0; j < i; j++)
+					{
+						if (urlStrings[i] != null && urlStrings[i].equals(urlStrings[j]))
+						{
+							urlStrings[i] = null;
+						}
+					}
 				}
 			}
-		}
-		updateXMLMultipart(multipart, docJDF, cid);
 
-		// add a new body part for each url
-		for (int i = 0; i < vSize; i++)
-		{
-			final String urlString = urlStrings[i];
-			if (urlString != null)
+			updateXMLMultipart(multipart, docJDF, cid);
+
+			// add a new body part for each url
+			for (int i = 0; i < vSize; i++)
 			{
-				try
+				final String urlString = urlStrings[i];
+				if (urlString != null)
 				{
-					DataSource dataSrc = null;
-					File f = UrlUtil.urlToFile(urlString);
-					if (f != null && f.canRead())
+					try
 					{
-						dataSrc = new FileDataSource(f);
-					}
-					if (dataSrc == null)
-					{
-						continue; // no data source
-					}
-					BodyPart messageBodyPart = new MimeBodyPart();
-					messageBodyPart.setDataHandler(new DataHandler(dataSrc));
+						DataSource dataSrc = null;
+						File f = UrlUtil.urlToFile(urlString);
+						if (f != null && f.canRead())
+						{
+							dataSrc = new FileDataSource(f);
+						}
 
-					setFileName(messageBodyPart, f == null ? null : f.getAbsolutePath());
-					// messageBodyPart.setHeader("Content-Type",
-					// JMFServlet.JDF_CONTENT_TYPE); // JDF:
-					// application/vnd.cip4-jdf+xml
-					setContentID(messageBodyPart, urlString);
-					multipart.addBodyPart(messageBodyPart);
-					n++;
-				}
-				catch (MessagingException e1)
-				{
-					// nop
+						if (dataSrc == null)
+						{
+							continue; // no data source
+						}
+
+						BodyPart messageBodyPart = new MimeBodyPart();
+						messageBodyPart.setDataHandler(new DataHandler(dataSrc));
+
+						setFileName(messageBodyPart, f == null ? null : f.getAbsolutePath());
+						// messageBodyPart.setHeader("Content-Type",
+						// JMFServlet.JDF_CONTENT_TYPE); // JDF:
+						// application/vnd.cip4-jdf+xml
+						setContentID(messageBodyPart, urlString);
+						multipart.addBodyPart(messageBodyPart);
+						n++;
+					}
+					catch (MessagingException e1)
+					{
+						// nop
+					}
 				}
 			}
 		}
+		
 		return n;
 	}
 
@@ -873,12 +887,18 @@ public class MimeUtil extends UrlUtil
 	 */
 	private static String[] listURLs(VElement fileSpecs)
 	{
-		final int vSize = fileSpecs == null ? 0 : fileSpecs.size();
-		String[] urlStrings = new String[vSize];
-		for (int i = 0; i < vSize; i++)
+		String[] urlStrings = new String[0];
+		
+		if (fileSpecs != null)
 		{
-			urlStrings[i] = fileSpecs.item(i).getAttribute(AttributeName.URL, null, null);
+			final int vSize = fileSpecs.size();
+			urlStrings = new String[vSize];
+			for (int i = 0; i < vSize; i++)
+			{
+				urlStrings[i] = fileSpecs.item(i).getAttribute(AttributeName.URL, null, null);
+			}
 		}
+		
 		return urlStrings;
 	}
 
@@ -1254,10 +1274,13 @@ public class MimeUtil extends UrlUtil
 		if (md != null && md.transferEncoding != null)
 		{
 			BodyPart bp[] = getBodyParts(m);
-			int siz = bp == null ? 0 : bp.length;
-			for (int i = 0; i < siz; i++)
+			if (bp != null)
 			{
-				bp[i].setHeader(UrlUtil.CONTENT_TRANSFER_ENCODING, md.transferEncoding);
+				int siz = bp.length;
+				for (int i = 0; i < siz; i++)
+				{
+					bp[i].setHeader(UrlUtil.CONTENT_TRANSFER_ENCODING, md.transferEncoding);
+				}
 			}
 		}
 		

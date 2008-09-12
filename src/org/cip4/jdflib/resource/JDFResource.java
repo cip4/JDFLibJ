@@ -324,18 +324,21 @@ public class JDFResource extends JDFElement
 		}
 
 		final VString partIDKeys = getPartIDKeys();
-		final int siz = partIDKeys == null ? 0 : partIDKeys.size();
-		for (int i = 0; i < siz; i++)
+		if (partIDKeys != null)
 		{
-			String partIDKey = partIDKeys.stringAt(i);
-			for (int j = 0; j < atrInfoTable_PartIDKeys.length; j++)
+			final int siz = partIDKeys.size();
+			for (int i = 0; i < siz; i++)
 			{
-				AtrInfoTable keyTable = atrInfoTable_PartIDKeys[j];
-				String key = keyTable.getAttributeName();
-				if (key.equals(partIDKey))
+				String partIDKey = partIDKeys.stringAt(i);
+				for (int j = 0; j < atrInfoTable_PartIDKeys.length; j++)
 				{
-					ai.updateAdd(keyTable);
-					break;
+					AtrInfoTable keyTable = atrInfoTable_PartIDKeys[j];
+					String key = keyTable.getAttributeName();
+					if (key.equals(partIDKey))
+					{
+						ai.updateAdd(keyTable);
+						break;
+					}
 				}
 			}
 		}
@@ -1286,6 +1289,7 @@ public class JDFResource extends JDFElement
 		{
 			return null;
 		}
+		
 		final String resID = getID();
 
 		final JDFAttributeMap mID = new JDFAttributeMap(AttributeName.RREF, resID);
@@ -1294,6 +1298,7 @@ public class JDFResource extends JDFElement
 		{
 			refList.add(getLinkString());
 		}
+		
 		if (bRef)
 		{
 			refList.add(getRefString());
@@ -1304,6 +1309,7 @@ public class JDFResource extends JDFElement
 		{
 			return null;
 		}
+		
 		VElement vRet = null;
 		if (bRef)
 		{
@@ -1317,15 +1323,19 @@ public class JDFResource extends JDFElement
 			for (int i = 0; i < size; i++)
 			{
 				VElement vTmp = ((JDFNode) vNodes.elementAt(i)).getResourceLinks(null);
-				final int size2 = vTmp == null ? 0 : vTmp.size();
-				for (int j = 0; j < size2; j++)
+				if (vTmp != null)
 				{
-					final JDFResourceLink link = (JDFResourceLink) vTmp.item(j);
-					if (resID.equals(link.getrRef()))
-						vRet.add(link);
+					final int size2 = vTmp.size();
+					for (int j = 0; j < size2; j++)
+					{
+						final JDFResourceLink link = (JDFResourceLink) vTmp.item(j);
+						if (resID.equals(link.getrRef()))
+							vRet.add(link);
+					}
 				}
 			}
 		}
+		
 		JDFAttributeMap mPart = getPartMap();
 		if (mPart != null && mPart.size() > 0)
 		{
@@ -1351,6 +1361,7 @@ public class JDFResource extends JDFElement
 				{
 					continue; // the link refers to the root, thus also to this
 				}
+				
 				int nZapp = 0;
 				final int size = linkMapVector.size();
 				for (int j = 0; j < size; j++)
@@ -1361,6 +1372,7 @@ public class JDFResource extends JDFElement
 						nZapp++;
 					}
 				}
+				
 				if (nZapp == size) // no matching parts at all
 				{
 					vRet.remove(i);
@@ -2749,11 +2761,14 @@ public class JDFResource extends JDFElement
 		}
 		else
 		{
-			final String parentPart = vs.stringAt(posOfType - 1);
-			if (!hasAttribute_KElement(parentPart, null, false))
+			if (vs != null)
 			{
-				throw new JDFException("addPartion: adding inconsistent partition - parent must have partIDKey: "
-						+ parentPart);
+				final String parentPart = vs.stringAt(posOfType - 1);
+				if (!hasAttribute_KElement(parentPart, null, false))
+				{
+					throw new JDFException("addPartion: adding inconsistent partition - parent must have partIDKey: "
+							+ parentPart);
+				}
 			}
 		}
 
@@ -3021,17 +3036,20 @@ public class JDFResource extends JDFElement
 			{
 				JDFAttributeMap map = vValidParts_.elementAt(i);
 				VElement v = getPartitionVector(map, EnumPartUsage.Implicit);
-				int vSize = v == null ? 0 : v.size();
-				for (int j = 0; j < vSize; j++)
+				if (v != null)
 				{
-					JDFResource r = (JDFResource) v.elementAt(j);
-					vValidParts.add(r.getPartMap(partIDKeys));
+					int vSize = v.size();
+					for (int j = 0; j < vSize; j++)
+					{
+						JDFResource r = (JDFResource) v.elementAt(j);
+						vValidParts.add(r.getPartMap(partIDKeys));
+					}
 				}
 			}
 		}
 
 		final int size = vValidParts == null ? 0 : vValidParts.size();
-		if (size != 0 && getPartIDKeys().size() > 0)
+		if (size != 0 && vValidParts != null && getPartIDKeys().size() > 0)
 		{
 			boolean bBadParents = false;
 			final VElement leaves = getLeaves(false);
@@ -4107,97 +4125,100 @@ public class JDFResource extends JDFElement
 		boolean mustWrite = hasAttribute(AttributeName.AMOUNT);
 
 		final VElement resLinks = getLinks(getLinkString(), null);
-		final int linkSize = resLinks == null ? 0 : resLinks.size();
-
-		for (int i = 0; i < linkSize; i++)
+		if (resLinks != null)
 		{
-			final JDFResourceLink rl = (JDFResourceLink) resLinks.elementAt(i);
+			final int linkSize = resLinks.size();
 
-			final JDFNode n = rl.getParentJDF();
-			if (n != null)
+			for (int i = 0; i < linkSize; i++)
 			{
-				final JDFNode.EnumType typ = EnumType.getEnum(n.getType());
-				if (!JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ))
+				final JDFResourceLink rl = (JDFResourceLink) resLinks.elementAt(i);
+
+				final JDFNode n = rl.getParentJDF();
+				if (n != null)
 				{
-					double rlActualAmount = 0;
-					double rlAmount = 0;
-					boolean hasConditionAmount = false;
-					boolean hasConditionActualAmount = false;
-
-					if (partMapGood != null) // first get good only, in case it
-					// exists
+					final JDFNode.EnumType typ = EnumType.getEnum(n.getType());
+					if (!JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ))
 					{
-						rlActualAmount = rl.getActualAmount(partMapCond);
-						rlAmount = rl.getAmount(partMapCond);
-						if (rlActualAmount > 0)
-						{
-							hasConditionActualAmount = true;
-							rlActualAmount = rl.getActualAmount(partMapGood);
-						}
-						if (rlAmount > 0)
-						{
-							hasConditionAmount = true;
-							rlAmount = rl.getAmount(partMapGood);
-						}
+						double rlActualAmount = 0;
+						double rlAmount = 0;
+						boolean hasConditionAmount = false;
+						boolean hasConditionActualAmount = false;
 
-					}
-
-					if (!hasConditionActualAmount) // if noo virtual good
-						// exists, try complete
-						rlActualAmount = rl.getActualAmount(partMap);
-
-					if (!hasConditionAmount)
-						rlAmount = rl.getAmount(partMap);
-
-					if (JDFResourceLink.EnumUsage.Input.equals(rl.getUsage()))
-					{
-						if (rlActualAmount > 0)
+						if (partMapGood != null) // first get good only, in case it
+						// exists
 						{
-							amount -= rlActualAmount;
-							mustWrite = true;
-						}
-						if (rlAmount > 0)
-						{
-							amountRequired += rlAmount;
-							mustWrite = true;
-						}
-					}
-					else
-					{
-						if (rlActualAmount >= 0)
-						{
-							mustWrite = true;
-							amount += rlActualAmount;
-							amountProduced += rlActualAmount;
+							rlActualAmount = rl.getActualAmount(partMapCond);
+							rlAmount = rl.getAmount(partMapCond);
+							if (rlActualAmount > 0)
+							{
+								hasConditionActualAmount = true;
+								rlActualAmount = rl.getActualAmount(partMapGood);
+							}
+							if (rlAmount > 0)
+							{
+								hasConditionAmount = true;
+								rlAmount = rl.getAmount(partMapGood);
+							}
+
 						}
 
-						hasOutputLink = true;
+						if (!hasConditionActualAmount) // if noo virtual good
+							// exists, try complete
+							rlActualAmount = rl.getActualAmount(partMap);
+
+						if (!hasConditionAmount)
+							rlAmount = rl.getAmount(partMap);
+
+						if (JDFResourceLink.EnumUsage.Input.equals(rl.getUsage()))
+						{
+							if (rlActualAmount > 0)
+							{
+								amount -= rlActualAmount;
+								mustWrite = true;
+							}
+							if (rlAmount > 0)
+							{
+								amountRequired += rlAmount;
+								mustWrite = true;
+							}
+						}
+						else
+						{
+							if (rlActualAmount >= 0)
+							{
+								mustWrite = true;
+								amount += rlActualAmount;
+								amountProduced += rlActualAmount;
+							}
+
+							hasOutputLink = true;
+						}
 					}
 				}
-			}
 
-			// only update the amounts by the previous values if no onput
-			// creates the resource, e.g. consumables
-			if (!hasOutputLink)
-			{
-				amount += deltaAmount;
-			}
-
-			if (mustWrite)
-			{
-				if (amount > 0)
+				// only update the amounts by the previous values if no onput
+				// creates the resource, e.g. consumables
+				if (!hasOutputLink)
 				{
-					setAmount(amount);
+					amount += deltaAmount;
 				}
 
-				if (amountProduced > 0)
+				if (mustWrite)
 				{
-					setAmountProduced(amountProduced);
-				}
+					if (amount > 0)
+					{
+						setAmount(amount);
+					}
 
-				if (amountRequired > 0)
-				{
-					setAmountRequired(amountRequired);
+					if (amountProduced > 0)
+					{
+						setAmountProduced(amountProduced);
+					}
+
+					if (amountRequired > 0)
+					{
+						setAmountRequired(amountRequired);
+					}
 				}
 			}
 		}
@@ -6771,16 +6792,20 @@ public class JDFResource extends JDFElement
 	 */
 	public EnumResStatus getStatusFromLeaves(boolean bAll)
 	{
-		VElement v = getLeaves(bAll);
-		int siz = v == null ? 0 : v.size();
 		EnumResStatus minStatus = null;
-		for (int i = 0; i < siz; i++)
+
+		VElement v = getLeaves(bAll);
+		if (v != null)
 		{
-			JDFResource r = (JDFResource) v.elementAt(i);
-			if (minStatus == null)
-				minStatus = r.getResStatus(false);
-			else
-				minStatus = (EnumResStatus) EnumUtil.min(minStatus, r.getResStatus(false));
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
+			{
+				JDFResource r = (JDFResource) v.elementAt(i);
+				if (minStatus == null)
+					minStatus = r.getResStatus(false);
+				else
+					minStatus = (EnumResStatus) EnumUtil.min(minStatus, r.getResStatus(false));
+			}
 		}
 
 		return minStatus;

@@ -1833,10 +1833,9 @@ public class StringUtil
 	 */
 	public static boolean matchesAttribute(String smallAtt, final String bigAtt, AttributeInfo.EnumAttributeType dataType)
 	{
-		final boolean bAny = dataType == null || dataType.equals(AttributeInfo.EnumAttributeType.Any);
-		if (bAny)
+		if (dataType == null || dataType.equals(AttributeInfo.EnumAttributeType.Any))
 			return bigAtt.equals(smallAtt);
-
+		
 		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS))
 				|| (dataType.equals(AttributeInfo.EnumAttributeType.enumerations))
 				|| (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
@@ -1850,6 +1849,7 @@ public class StringUtil
 					return false;
 				}
 			}
+			
 			return true;
 		}
 
@@ -2016,6 +2016,7 @@ public class StringUtil
 				// do nothing
 			}
 		}
+		
 		return false;
 	}
 

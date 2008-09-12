@@ -371,15 +371,19 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 		{
 			JDFMessageService serv = (JDFMessageService) getParentNode();
 			Vector<EnumFamily> vf = serv.getFamilies();
-			final int size = vf == null ? 0 : vf.size();
-			for (int i = 0; i < size; i++)
+			if (vf != null)
 			{
-				vResult.add("JMF/" + vf.elementAt(i).getName() + "/"
-						+ result.substring(4));
+				final int size = vf.size();
+				for (int i = 0; i < size; i++)
+				{
+					vResult.add("JMF/" + vf.elementAt(i).getName() + "/" + result.substring(4));
+				}
 			}
+			
 			if (EnumJMFRole.Sender.equals(serv.getJMFRole()))
 				vResult.add("JMF/Response/" + result.substring(4));
-		} else
+		} 
+		else
 		{
 			if (cont.equals(EnumContext.Link))
 			{
@@ -680,6 +684,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	private VElement getMatchingElementsFromNode(JDFNode node)
 	{
 		VElement vElem = new VElement();
+		
 		final String nam = getName();
 		final EnumContext context = getContext();
 		JDFResourceLinkPool resLinkPool = node.getResourceLinkPool();
@@ -689,12 +694,14 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			if (nam.equals(ElementName.JDF))
 			{
 				vElem.add(node);
-			} else
+			} 
+			else
 			{
 				vElem = node.getChildElementVector(nam, null, null, true, 0,
 						false);
 			}
-		} else if (context.equals(EnumContext.Link)
+		} 
+		else if (context.equals(EnumContext.Link)
 				|| context.equals(EnumContext.Resource))
 		{
 			if (resLinkPool != null)
@@ -702,19 +709,18 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 				final EnumUsage linkUsage = getLinkUsage();
 				final String procUsage = getProcessUsage();
 				boolean bLink = context.equals(EnumContext.Link);
-				VElement vElemLinks = resLinkPool.getInOutLinks(linkUsage,
-						true, nam, null);
-
-				final int linkSize = (vElemLinks == null) ? -1 : vElemLinks
-						.size() - 1;
-				for (int j = linkSize; j >= 0; j--)
+				VElement vElemLinks = resLinkPool.getInOutLinks(linkUsage, true, nam, null);
+				if (vElemLinks != null)
 				{
-					JDFResourceLink rl = (JDFResourceLink) vElemLinks
-							.elementAt(j);
-					final String rlProcessUsage = rl.getProcessUsage();
-					if (!rlProcessUsage.equals(procUsage))
+					final int linkSize = vElemLinks.size() - 1;
+					for (int j = linkSize; j >= 0; j--)
 					{
-						vElemLinks.remove(j);
+						JDFResourceLink rl = (JDFResourceLink) vElemLinks.elementAt(j);
+						final String rlProcessUsage = rl.getProcessUsage();
+						if (!rlProcessUsage.equals(procUsage))
+						{
+							vElemLinks.remove(j);
+						}
 					}
 				}
 
@@ -722,15 +728,18 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 				{
 					vElem = JDFResourceLinkPool
 							.resourceVector(vElemLinks, null);
-				} else
+				} 
+				else
 				{
 					vElem = vElemLinks;
 				}
 			}
-		} else if (context.equals(EnumContext.JMF))
+		} 
+		else if (context.equals(EnumContext.JMF))
 		{
 			// TODO __Lena__ ...
-		} else
+		} 
+		else
 		{// Context_Unknown
 			throw new JDFException("JDFDevCaps wrong attribute Context value");
 		}
@@ -794,21 +803,24 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	public KElement appendMatchingElementsToNode(JDFNode node, boolean bAll,
 			VectorMap indexResMap, boolean bLink)
 	{
-		final String nam = getName();
+		KElement e = null;
+
 		final EnumContext context = getContext();
 		if (!bLink && EnumContext.Link.equals(context))
 			return null;
+		
 		if (bLink && !EnumContext.Link.equals(context))
 			return null;
 
 		final JDFDevCap devCap = getDevCap();
 		if (devCap == null)
 			return null;
+		
 		int minOcc = devCap.getMinOccurs();
 		if (minOcc == 0 && bAll)
 			minOcc = 1;
 
-		KElement e = null;
+		final String nam = getName();
 		for (int i = 0; i < minOcc; i++)
 		{
 			if (context.equals(EnumContext.Element))
@@ -816,11 +828,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 				if (nam.equals(ElementName.JDF))
 				{
 					// nop - should actually never get here
-				} else
+				} 
+				else
 				{
 					e = node.getCreateElement(nam, getDevNS(), i);
 				}
-			} else if (context.equals(EnumContext.Resource)
+			} 
+			else if (context.equals(EnumContext.Resource)
 					|| context.equals(EnumContext.Link))
 			{
 				final EnumUsage linkUsage = getLinkUsage();
@@ -833,10 +847,12 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 					map.put(AttributeName.PROCESSUSAGE, procUsage);
 					pu = EnumProcessUsage.getEnum(procUsage);
 				}
+				
 				if (linkUsage != null)
 				{
 					map.put(AttributeName.USAGE, linkUsage.getName());
 				}
+				
 				VElement links = node.getResourceLinks(nam, map, null);
 				// now look for the correct combinedprocessindex - remove all
 				// non-matching
@@ -854,6 +870,7 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 							links.remove(ll);
 					}
 				}
+				
 				if (links == null || links.size() <= i)
 				{
 					JDFResource r = null;
@@ -864,19 +881,22 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 								: tocNum2.getInt(0);
 						if (EnumUsage.Input.equals(linkUsage))
 							kk--;
-						Vector<JDFResource> v = (Vector) indexResMap
-								.get(new Integer(kk));
-						int sv = v == null ? 0 : v.size();
-						for (int kkk = 0; kkk < sv; kkk++)
+						Vector<JDFResource> v = (Vector) indexResMap.get(new Integer(kk));
+						if (v != null)
 						{
-							JDFResource rr = v.elementAt(kkk);
-							if (rr.getLocalName().equals(nam))
+							int sv = v.size();
+							for (int kkk = 0; kkk < sv; kkk++)
 							{
-								r = rr;
-								break;
+								JDFResource rr = v.elementAt(kkk);
+								if (rr.getLocalName().equals(nam))
+								{
+									r = rr;
+									break;
+								}
 							}
 						}
 					}
+					
 					// we found no matching existing res - make a new one
 					if (r == null)
 					{
@@ -902,11 +922,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 																			// support
 																			// 1
 																			// now
-					} else
+					} 
+					else
 					// preexisting resource - just link it
 					{
 						e = node.linkResource(r, linkUsage, pu);
 					}
+					
 					e = node.getLink(r, linkUsage);
 					if (e != null)
 					{
@@ -931,15 +953,18 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 									sk = "0~-1";
 								keyMap.put(key, sk);
 							}
+							
 							r.getCreatePartition(keyMap, keys);
 						}
 					}
 				}
-			} else if (context.equals(EnumContext.JMF))
+			} 
+			else if (context.equals(EnumContext.JMF))
 			{
 				// TODO __Lena__ ...
 			}
 		}
+		
 		return e;
 	}
 
@@ -957,14 +982,18 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	public boolean setDefaultsFromCaps(JDFNode node, boolean bAll)
 	{
 		boolean modified = false;
+		
 		final JDFDevCap dc = getDevCap();
 		if (dc != null)
 		{
 			VElement v = getMatchingElementsFromNode(node);
-			final int size = v == null ? 0 : v.size();
-			for (int i = 0; i < size; i++)
+			if (v != null)
 			{
-				modified = dc.setDefaultsFromCaps(v.item(i), bAll) || modified;
+				final int size = v.size();
+				for (int i = 0; i < size; i++)
+				{
+					modified = dc.setDefaultsFromCaps(v.item(i), bAll) || modified;
+				}
 			}
 		}
 
@@ -979,14 +1008,19 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	public int getMaxOccurs()
 	{
 		int m = 0;
+		
 		VElement vDC = getDevCapVector();
-		int svDC = vDC == null ? 0 : vDC.size();
-		for (int i = 0; i < svDC; i++)
+		if (vDC != null)
 		{
-			JDFDevCap dc = (JDFDevCap) vDC.elementAt(i);
-			if (m < dc.getMaxOccurs())
-				m = dc.getMaxOccurs();
+			int svDC = vDC.size();
+			for (int i = 0; i < svDC; i++)
+			{
+				JDFDevCap dc = (JDFDevCap) vDC.elementAt(i);
+				if (m < dc.getMaxOccurs())
+					m = dc.getMaxOccurs();
+			}
 		}
+		
 		return m;
 
 	}
@@ -999,16 +1033,22 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 	public int getMinOccurs()
 	{
 		int m = Integer.MAX_VALUE;
+		
 		VElement vDC = getDevCapVector();
-		int svDC = vDC == null ? 0 : vDC.size();
-		for (int i = 0; i < svDC; i++)
+		if (vDC != null)
 		{
-			JDFDevCap dc = (JDFDevCap) vDC.elementAt(i);
-			if (m > dc.getMinOccurs())
-				m = dc.getMinOccurs();
+			int svDC = vDC.size();
+			for (int i = 0; i < svDC; i++)
+			{
+				JDFDevCap dc = (JDFDevCap) vDC.elementAt(i);
+				if (m > dc.getMinOccurs())
+					m = dc.getMinOccurs();
+			}
 		}
+		
 		if (m <= 0 && getRequired())
 			m = 1;
+		
 		return m;
 
 	}
@@ -1040,12 +1080,13 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			xpathRoot = jdfNode.getResourceLinkPool();
 			if (xpathRoot == null)
 				xpathRoot = testRoot;
-		} else
+		} 
+		else
 		{
 			vElemResources = getMatchingElementsFromJMF((JDFMessage) testRoot);
 		}
-		int svElemResources = vElemResources == null ? 0 : vElemResources
-				.size();
+		
+		int svElemResources = vElemResources == null ? 0 : vElemResources.size();
 
 		final EnumContext context = getContext();
 		KElement r = null;
@@ -1059,7 +1100,8 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 				r = mrp.appendElement("MissingElement");
 				r.setAttribute("XPath", xpathRoot.buildXPath(null, 1) + "/"
 						+ getName());
-			} else
+			} 
+			else
 			{
 				final EnumUsage linkUsage = getLinkUsage();
 				final String procUsage = getProcessUsage();
@@ -1079,16 +1121,17 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			r.setAttribute("CapXPath", getName());
 			r.setAttribute("Occurrences", svElemResources, null);
 			r.setAttribute("MinOccurs", getMinOccurs(), null);
-		} else if (svElemResources > getMaxOccurs()
+		} 
+		else if (svElemResources > getMaxOccurs()
 				|| !EnumAvailability.Installed.equals(av))
 		{
 			if (context.equals(EnumContext.Element)
 					|| context.equals(EnumContext.JMF))
 			{
 				r = irp.appendElement("ManyElement");
-				r.setAttribute("XPath", testRoot.buildXPath(null, 1) + "/"
-						+ getName());
-			} else
+				r.setAttribute("XPath", testRoot.buildXPath(null, 1) + "/" + getName());
+			} 
+			else
 			{
 				final EnumUsage linkUsage = getLinkUsage();
 				final String procUsage = getProcessUsage();
@@ -1097,13 +1140,15 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 				{
 					r.setAttribute("Usage", linkUsage.getName());
 				}
+				
 				if (procUsage != null && procUsage.length() > 0)
 				{
 					r.setAttribute("ProcessUsage", procUsage);
 				}
-				r.setAttribute("XPath", xpathRoot.buildXPath(null, 1) + "/"
-						+ getName());
+				
+				r.setAttribute("XPath", xpathRoot.buildXPath(null, 1) + "/" + getName());
 			}
+			
 			r.setAttribute("Name", getName());
 			r.setAttribute("CapXPath", getName());
 			r.setAttribute("Occurrences", svElemResources, null);
@@ -1111,22 +1156,25 @@ public class JDFDevCaps extends JDFAutoDevCaps implements ICapabilityElement
 			r.setAttribute("Availability", av == null ? "None" : av.getName());
 		}
 
-		for (int j = 0; j < svElemResources; j++)
+		if (vElemResources != null)
 		{
-			final KElement elem = vElemResources.item(j);
-			if (!goodElems.contains(elem))
+			for (int j = 0; j < svElemResources; j++)
 			{
-				KElement report = devCapReport(elem, testlists, level,
-						ignoreExtensions, irp); // InvalidResources
-				if (report == null)
+				final KElement elem = vElemResources.item(j);
+				if (!goodElems.contains(elem))
 				{
-					goodElems.add(elem);
-					KElement badReport = (KElement) badElems.get(elem);
-					if (badReport != null)
-						badReport.deleteNode();
-				} else
-				{
-					badElems.put(elem, report);
+					KElement report = devCapReport(elem, testlists, level, ignoreExtensions, irp); // InvalidResources
+					if (report == null)
+					{
+						goodElems.add(elem);
+						KElement badReport = (KElement) badElems.get(elem);
+						if (badReport != null)
+							badReport.deleteNode();
+					}
+					else
+					{
+						badElems.put(elem, report);
+					}
 				}
 			}
 		}

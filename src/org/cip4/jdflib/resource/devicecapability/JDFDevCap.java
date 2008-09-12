@@ -1810,13 +1810,13 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 
 			// vElem - direct children of the Node.
 			// If 'dcName' is a partition Leaf - gets only children of the Leaf.
-			VElement vElem = dc
-					.getMatchingElementsFromParent(testElem, vDevCap);
+			VElement vElem = dc.getMatchingElementsFromParent(testElem, vDevCap);
+			
 			int occurs = vElem == null ? 0 : vElem.size();
 			KElement r;
 			final int minOccurs = dc.getMinOccurs();
 			final int maxOccurs = dc.getMaxOccurs();
-			if (occurs > maxOccurs)
+			if (occurs > maxOccurs && vElem != null)
 			{
 				for (int j = 0; j < occurs; j++)
 				{
@@ -1825,56 +1825,57 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 					r.setAttribute("CapXPath", dc.getNamePath(true));
 					r.setAttribute("XPath", subEl.buildXPath(null, 1));
 					r.setAttribute("Name", dcName);
-					r.setAttribute("Message",
-							"Element occurrence exceeds value of MaxOccurs");
+					r.setAttribute("Message", "Element occurrence exceeds value of MaxOccurs");
 					r.setAttribute("MaxOccurs", maxOccurs, null); // MaxOccurs
 					r.setAttribute("FoundElements", occurs, null);
 				}
-			} else if (occurs < minOccurs
-					&& EnumValidationLevel.isRequired(level))
+			} 
+			else if (occurs < minOccurs && EnumValidationLevel.isRequired(level))
 			{
 				r = parentReportLocal.appendElement("MissingElement");
 				r.setAttribute("CapXPath", dc.getNamePath(true));
-				r.setAttribute("XPath", testElem.buildXPath(null, 1) + "/"
-						+ dcName);
+				r.setAttribute("XPath", testElem.buildXPath(null, 1) + "/" + dcName);
 				r.setAttribute("Name", dcName);
-				r.setAttribute("Message",
-						"Element occurrence is less than value of MinOccurs");
+				r.setAttribute("Message", "Element occurrence is less than value of MinOccurs");
 				r.setAttribute("MinOccurs", minOccurs, null);
 				r.setAttribute("FoundElements", occurs, null);
 			}
-			// there were elements that didn't pass some of the tests - assume
-			// that these are actually invalid and report on them
-			for (int j = 0; j < occurs; j++)
+			
+			if (vElem != null)
 			{
-				KElement subEl = vElem.item(j);
-				if (goodElems.contains(subEl))
-					continue;
-				r = parentReportLocal.appendElement("InvalidElement");
-				KElement recursionResult = dc.stateReport(subEl, testlists,
-						level, ignoreExtensions, true, r);
+				// there were elements that didn't pass some of the tests - assume
+				// that these are actually invalid and report on them
+				for (int j = 0; j < occurs; j++)
+				{
+					KElement subEl = vElem.item(j);
+					if (goodElems.contains(subEl))
+						continue;
+					r = parentReportLocal.appendElement("InvalidElement");
+					KElement recursionResult = dc.stateReport(subEl, testlists, level, ignoreExtensions, true, r);
 
-				if (recursionResult == null)
-				{
-					goodElems.add(subEl);
-					KElement badReport = (KElement) badElems.get(subEl);
-					if (badReport != null)
-						badReport.deleteNode();
-				} else
-				{
-					recursionResult.appendAttribute("DevCapRefs", dc.getID(),
-							null, " ", true);
-					badElems.put(subEl, recursionResult);
-				}
+					if (recursionResult == null)
+					{
+						goodElems.add(subEl);
+						KElement badReport = (KElement) badElems.get(subEl);
+						if (badReport != null)
+							badReport.deleteNode();
+					}
+					else
+					{
+						recursionResult.appendAttribute("DevCapRefs", dc.getID(), null, " ", true);
+						badElems.put(subEl, recursionResult);
+					}
 
-				if (recursionResult != null)
-				{
-					r.setAttribute("CapXPath", dc.getNamePath(true));
-					r.setAttribute("XPath", subEl.buildXPath(null, 1));
-					r.setAttribute("Name", dcName);
-				} else
-				{
-					r.deleteNode();
+					if (recursionResult != null)
+					{
+						r.setAttribute("CapXPath", dc.getNamePath(true));
+						r.setAttribute("XPath", subEl.buildXPath(null, 1));
+						r.setAttribute("Name", dcName);
+					}
+					else
+					{
+						r.deleteNode();
+					}
 				}
 			}
 		}
@@ -1933,94 +1934,91 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 		VString vKeys = m.getKeys(); // we'll use "keys" to find the appropriate
 										// State elements in DevCap
 
-		final int sizeStates = vStates == null ? 0 : vStates.size();
-		for (int j = 0; j < sizeStates; j++) // SubElem can be DevCap, can be
-												// Loc, can be any State element
-		{ // here we need only States
-			JDFAbstractState state = (JDFAbstractState) vStates.item(j);
-			String nam = state.getName();
-			EnumAvailability av = state.getModuleAvailability();
-			if (!EnumAvailability.Installed.equals(av))
-				continue;
+		if (vStates != null)
+		{
+			final int sizeStates = vStates.size();
+			for (int j = 0; j < sizeStates; j++) // SubElem can be DevCap, can be
+			// Loc, can be any State element
+			{ // here we need only States
+				JDFAbstractState state = (JDFAbstractState) vStates.item(j);
+				String nam = state.getName();
+				EnumAvailability av = state.getModuleAvailability();
+				if (!EnumAvailability.Installed.equals(av))
+					continue;
 
-			int size = vKeys.size();
-			for (int i = size - 1; i >= 0; i--)
-			{
-				String key = vKeys.elementAt(i);
-				if (nam.equals(key)
-						|| (key.equals("CommentText") && nam.length() == 0)) // if
-																				// name
-																				// is
-																				// absent
-																				// -
-																				// state
-																				// describes
-																				// a
-																				// Comment
+				int size = vKeys.size();
+				for (int i = size - 1; i >= 0; i--)
 				{
-					String value = nam.length() != 0 ? m.get(key) : m
-							.get("CommentText");
-					if (!state.fitsValue(value, testlists))
-					{ // The attribute/span was found but it has the wrong value
+					String key = vKeys.elementAt(i);
+					if (nam.equals(key) || (key.equals("CommentText") && nam.length() == 0)) // if
+					// name
+					// is
+					// absent
+					// -
+					// state
+					// describes
+					// a
+					// Comment
+					{
+						String value = nam.length() != 0 ? m.get(key) : m.get("CommentText");
+						if (!state.fitsValue(value, testlists))
+						{ // The attribute/span was found but it has the wrong value
 
-						KElement r;
-						if (!am.containsKey(key) && !key.equals("CommentText")) // it
-																				// is
-																				// Span
-																				// but
-																				// not
-																				// Attribute
-						{
-							r = iap.appendElement("InvalidSpan");
-							r.setAttribute("XPath", e.buildXPath(null, 1) + "/"
-									+ key);
-							r
-									.setAttribute("Message",
-											"Span value doesn't fit this State description");
-						} else if (key.equals("CommentText"))
-						{
-							r = iap.appendElement("InvalidComment");
-							r.setAttribute("XPath", e.buildXPath(null, 1) + "/"
-									+ key);
-							r
-									.setAttribute("Message",
-											"Comment doesn't fit this State description");
-						} else
-						{
-							r = iap.appendElement("InvalidAttribute");
-							r.setAttribute("XPath", e.buildXPath(null, 1)
-									+ "/@" + key);
-							r
-									.setAttribute("Message",
-											"Attribute value doesn't fit this State description");
+							KElement r;
+							if (!am.containsKey(key) && !key.equals("CommentText")) // it
+							// is
+							// Span
+							// but
+							// not
+							// Attribute
+							{
+								r = iap.appendElement("InvalidSpan");
+								r.setAttribute("XPath", e.buildXPath(null, 1) + "/" + key);
+								r.setAttribute("Message", "Span value doesn't fit this State description");
+							}
+							else if (key.equals("CommentText"))
+							{
+								r = iap.appendElement("InvalidComment");
+								r.setAttribute("XPath", e.buildXPath(null, 1) + "/" + key);
+								r.setAttribute("Message", "Comment doesn't fit this State description");
+							}
+							else
+							{
+								r = iap.appendElement("InvalidAttribute");
+								r.setAttribute("XPath", e.buildXPath(null, 1) + "/@" + key);
+								r.setAttribute("Message", "Attribute value doesn't fit this State description");
+							}
+
+							r.setAttribute("Name", key);
+							r.setAttribute("CapXPath", state.getNamePath());
+							r.setAttribute("Value", value);
+							r.copyElement(state, null);
+
 						}
-						r.setAttribute("Name", key);
-						r.setAttribute("CapXPath", state.getNamePath());
-						r.setAttribute("Value", value);
-						r.copyElement(state, null);
 
+						vKeys.removeElementAt(i); // The attribute/span was found,
+						// checked, so we don't need it
+						// any more in vKeys
+						break; // go to next State
 					}
-					vKeys.removeElementAt(i); // The attribute/span was found,
-												// checked, so we don't need it
-												// any more in vKeys
-					break; // go to next State
 				}
-			}
 
-			if ((size == vKeys.size()) && state.getRequired()
-					&& EnumValidationLevel.isRequired(level))
-			{ // No attribute/span found but state is required
+				if ((size == vKeys.size()) && state.getRequired() && EnumValidationLevel.isRequired(level))
+				{ // No attribute/span found but state is required
 
-				if (state.getListType().equals(EnumListType.Span))
-				{
-					missMap.put(nam, "Span");
-				} else
-				{
-					missMap.put(nam, "Attribute");
+					if (state.getListType().equals(EnumListType.Span))
+					{
+						missMap.put(nam, "Span");
+					}
+					else
+					{
+						missMap.put(nam, "Attribute");
+					}
+					capMap.put(nam, state.getNamePath());
 				}
-				capMap.put(nam, state.getNamePath());
 			}
 		}
+		
 		EnumValidationLevel l2 = level;
 		if (e instanceof JDFResource)
 		{
@@ -2682,42 +2680,45 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 			int minOccurs = subDevCap.getMinOccurs();
 			if (minOccurs == 0 && bAll)
 				minOccurs = 1;
-			VElement subElms = subDevCap.getMatchingElementsFromParent(element,
-					vSubDevCap);
+			VElement subElms = subDevCap.getMatchingElementsFromParent(element, vSubDevCap);
 			if (minOccurs > 0)
 			{
 				int occurs = subElms == null ? 0 : subElms.size();
 				if (occurs < minOccurs && subElms == null)
 					subElms = new VElement();
 
-				for (int ii = occurs; ii < minOccurs; ii++)
+				if (subElms != null)
 				{
-					final String id = subDevCap.getID();
-					KElement isThere = id == null ? null : element
-							.getOwnerDocument_KElement().getRoot().getTarget(
-									id, AttributeName.ID);
-					if (!(isThere instanceof JDFResource)
-							|| !(element instanceof JDFElement))
+					for (int ii = occurs; ii < minOccurs; ii++)
 					{
-						KElement newSub = element.appendElement(subDevCap
-								.getName(), subDevCap.getDevNS());
-						subElms.add(newSub);
-					} else
-					{
-						JDFRefElement re = ((JDFElement) element)
-								.refElement((JDFResource) isThere);
-						subElms.add(re.getTarget());
+						final String id = subDevCap.getID();
+						KElement isThere = id == null ? null : element.getOwnerDocument_KElement().getRoot().getTarget(id, AttributeName.ID);
+						if (!(isThere instanceof JDFResource) || !(element instanceof JDFElement))
+						{
+							KElement newSub = element.appendElement(subDevCap.getName(), subDevCap.getDevNS());
+							subElms.add(newSub);
+						}
+						else
+						{
+							JDFRefElement re = ((JDFElement) element).refElement((JDFResource) isThere);
+							subElms.add(re.getTarget());
+						}
+
+						success = true;
 					}
-					success = true;
 				}
 			}
-			final int subSize = subElms == null ? 0 : subElms.size();
-			for (int ii = 0; ii < subSize; ii++)
+			
+			if (subElms != null)
 			{
-				success = subDevCap.setDefaultsFromCaps(subElms.item(ii), bAll)
-						|| success;
+				final int subSize = subElms.size();
+				for (int ii = 0; ii < subSize; ii++)
+				{
+					success = subDevCap.setDefaultsFromCaps(subElms.item(ii), bAll) || success;
+				}
 			}
 		}
+		
 		// states
 		VElement vStates = getStates(true, null);
 		for (int i = 0; i < vStates.size(); i++)

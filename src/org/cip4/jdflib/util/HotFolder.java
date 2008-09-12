@@ -97,11 +97,11 @@ public class HotFolder implements Runnable
 	// and the thread ends
 	private static int nThread = 0;
 
-	private File dir;
+	private final File dir;
 	private long lastModified = -1;
-	private Vector<FileTime> lastFileTime;
-	private HotFolderListener hfl;
-	private String extension;
+	private final Vector<FileTime> lastFileTime;
+	private final HotFolderListener hfl;
+	private final String extension;
 	private Thread runThread;
 
 	/**
@@ -182,54 +182,58 @@ public class HotFolder implements Runnable
 				for (int i = lastFileTime.size() - 1; i >= 0; i--)
 				{
 					boolean found = false;
-					for (int j = 0; j < fileListLength; j++) // loop over all
-					// matching
-					// files in the
-					// directory
+					for (int j = 0; j < fileListLength; j++) 
+						// loop over all matching files in the directory
 					{
-						final FileTime lftAt = lastFileTime.elementAt(i);
-						if (files[j] != null && files[j].equals(lftAt.f))
+						if (files != null)
 						{
-							found = true;
-							if (files[j].lastModified() == lftAt.modified)
+							final FileTime lftAt = lastFileTime.elementAt(i);
+							if (files[j] != null && files[j].equals(lftAt.f))
 							{
-								if (files[j].exists())
+								found = true;
+								if (files[j].lastModified() == lftAt.modified)
 								{
-									hfl.hotFile(files[j]); // exists and
-									// stabilized - call
-									// callback
+									if (files[j].exists())
+									{
+										hfl.hotFile(files[j]); // exists and stabilized - call callback
+									}
+									else
+									{
+										found = false;
+									}
 								}
 								else
 								{
-									found = false;
+									lftAt.modified = files[j].lastModified();
 								}
+
+								files[j] = null; // this file has been processed,
+								// remove from list for performance
 							}
-							else
-							{
-								lftAt.modified = files[j].lastModified();
-							}
-							files[j] = null; // this file has been processed,
-							// remove from list for
-							// performance
 						}
 					}
+					
 					if (!found)
 					{
 						lastFileTime.remove(i); // not there anymore
 					}
 				}
-				for (int i = 0; i < fileListLength; i++) // the file is new -
-				// add to list for
-				// nextr check
+				
+				if (files != null)
 				{
-					if (files[i] != null)
-						lastFileTime.add(new FileTime(files[i]));
+					for (int i = 0; i < fileListLength; i++) // the file is new -
+					// add to list for nextr check
+					{
+						if (files[i] != null)
+							lastFileTime.add(new FileTime(files[i]));
+					}
 				}
 			}
+			
 			StatusCounter.sleep(stabilizeTime);
 		}
+		
 		Thread.currentThread().interrupt();
-
 	}
 
 	/**

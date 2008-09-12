@@ -139,6 +139,7 @@ public class JDFModulePool extends JDFAutoModulePool
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFModulePool[  --> " + super.toString() + " ]";
@@ -183,21 +184,27 @@ public class JDFModulePool extends JDFAutoModulePool
 	 */
 	public Map getModuleMap()
 	{
-		VElement v = getChildElementVector(ElementName.MODULECAP, null, null,
-				true, 0, true);
-		int siz = v == null ? 0 : v.size();
-
-		HashMap h = new HashMap();
-		for (int i = 0; i < siz; i++)
+		HashMap hashMap = null;
+		
+		VElement v = getChildElementVector(ElementName.MODULECAP, null, null, true, 0, true);
+		if (v != null)
 		{
-			JDFModuleCap mc = (JDFModuleCap) v.elementAt(i);
-			String id = mc.getID();
-			if (!isWildCard(id))
+			int siz = v.size();
+			hashMap = new HashMap();
+			for (int i = 0; i < siz; i++)
 			{
-				h.put(id, mc);
+				JDFModuleCap mc = (JDFModuleCap) v.elementAt(i);
+				String id = mc.getID();
+				if (!isWildCard(id))
+				{
+					hashMap.put(id, mc);
+				}
 			}
+			
+			hashMap = hashMap.size() == 0 ? null : hashMap;
 		}
-		return h.size() == 0 ? null : h;
+		
+		return hashMap;
 	}
 
 	/**

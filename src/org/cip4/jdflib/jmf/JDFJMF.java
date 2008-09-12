@@ -583,11 +583,18 @@ public class JDFJMF extends JDFAutoJMF
 		
 		if (iLocal < 0) // search from back
 		{
+			JDFMessage message = null;
 			VElement v = getMessageVector(family, typ);
-			int siz = v == null ? 0 : v.size();
-			iLocal = siz + iLocal;
-			return (JDFMessage) (iLocal >= 0 ? v.get(iLocal) : null);
+			if (v != null)
+			{
+				int siz = v.size();
+				iLocal = siz + iLocal;
+				message = (JDFMessage) (iLocal >= 0 ? v.get(iLocal) : null);
+			}
+			
+			return message;
 		}
+		
 		final String typString = typ == null ? null : typ.getName();
 		final String familyString = family == null ? null : family.getName();
 
@@ -604,6 +611,7 @@ public class JDFJMF extends JDFAutoJMF
 						return (JDFMessage) e;
 				}
 			}
+			
 			e = e.getNextSiblingElement(familyString, null);
 		}
 

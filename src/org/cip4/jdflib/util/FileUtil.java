@@ -260,14 +260,19 @@ public class FileUtil
 	{
 		if (dirToZapp == null)
 			return false;
+		
 		boolean b = true;
 		if (dirToZapp.isDirectory())
 		{
 			File[] ff = dirToZapp.listFiles();
-			int siz = (ff == null) ? 0 : ff.length;
-			for (int i = 0; i < siz; i++)
-				b = deleteAll(ff[i]) && b;
+			if (ff != null)
+			{
+				int siz = ff.length;
+				for (int i = 0; i < siz; i++)
+					b = deleteAll(ff[i]) && b;
+			}
 		}
+		
 		return dirToZapp.delete() && b;
 	}
 

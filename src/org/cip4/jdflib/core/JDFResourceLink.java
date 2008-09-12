@@ -980,10 +980,11 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			final int siz = vPart == null ? 0 : vPart.size();
 			if (bImplicit)
 			{
-				if (siz == 0)
+				if (siz == 0 || vPart == null)
 				{
 					return true;
 				}
+				
 				for (int i = 0; i < siz; i++)
 				{
 					if (vPart.elementAt(i).overlapMap(partMap))
@@ -997,16 +998,19 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 					return true;
 				}
 
-				for (int i = 0; i < siz; i++)
+				if (vPart != null)
 				{
-					final JDFAttributeMap part = vPart.elementAt(i);
-					if (part == null || part.size() == 0)
-						return true;
+					for (int i = 0; i < siz; i++)
+					{
+						final JDFAttributeMap part = vPart.elementAt(i);
+						if (part == null || part.size() == 0)
+							return true;
 
-					// RP 050120 swap of vPart[i] and partmap
-					// RP 070511 swap back of vPart[i] and partmap
-					if (part.subMap(partMap))
-						return true;
+						// RP 050120 swap of vPart[i] and partmap
+						// RP 070511 swap back of vPart[i] and partmap
+						if (part.subMap(partMap))
+							return true;
+					}
 				}
 			}
 		}
@@ -1034,10 +1038,13 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			return true;
 		}
 
-		for (int i = 0; i < siz; i++)
+		if (vPart != null)
 		{
-			if (vPart.elementAt(i).overlapMap(partMap))
-				return true;
+			for (int i = 0; i < siz; i++)
+			{
+				if (vPart.elementAt(i).overlapMap(partMap))
+					return true;
+			}
 		}
 
 		return false;
@@ -1129,12 +1136,13 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		final VJDFAttributeMap vPartMap = getPartMapVector();
 		final int nPartChildren = vPartMap == null ? 0 : vPartMap.size();
 		final JDFResource root = getLinkRoot();
+		
 		final VElement leaves = root.getLeaves(false);
 		// loop over resource leaves
 		for (int i = 0; i < leaves.size(); i++)
 		{
 			final JDFAttributeMap leafMap = ((JDFResource) leaves.elementAt(i)).getPartMap();
-			if (nPartChildren > 0)
+			if (nPartChildren > 0 && vPartMap != null) // suppress possible NPE warning for vPartMap
 			{ // it's reduced
 				for (int j = 0; j < nPartChildren; j++)
 				{
@@ -1143,17 +1151,18 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 					{
 						continue;
 					}
+					
 					// got one; break both loops and continue with the next leaf
 					vMap.addElement(leafMap.orMap(mPart));
 				}
 			}
 			else
 			{
-				// no parts in the resourcelink -> simply append the resources
-				// partmap
+				// no parts in the resourcelink -> simply append the resources partmap
 				vMap.addElement(leafMap);
 			}
 		}
+		
 		return vMap.size() == 0 ? null : vMap;
 	}
 
@@ -1234,34 +1243,40 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			return false;
 
 		final VElement vRes = getTargetVector(0);
-		if ((vRes == null || vRes.isEmpty())
-				&& ((levelLocal == EnumValidationLevel.Complete) || (levelLocal == EnumValidationLevel.RecursiveComplete)))
+		if ((vRes == null || vRes.isEmpty()) && 
+			((levelLocal == EnumValidationLevel.Complete) || 
+			(levelLocal == EnumValidationLevel.RecursiveComplete)))
 		{
 			// if any partition points to nirvana and we are validating
 			// complete, the entire resource is invalid
 			return false;
 		}
+		
 		if (levelLocal.equals(EnumValidationLevel.Complete))
 			return true;
 
-		for (int iRes = 0; iRes < vRes.size(); iRes++)
+		if (vRes != null)
 		{
-			final JDFResource r = (JDFResource) vRes.elementAt(iRes);
-			// reslinks that point to nothing may be valid
-
-			// but they certainly aren't valid if they point to the wrong
-			// resource
-			if (!getNodeName().equals(r.getLinkString()))
-				return false;
-
-			if (levelLocal.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
+			for (int iRes = 0; iRes < vRes.size(); iRes++)
 			{
-				final EnumValidationLevel valDown = (levelLocal == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
+				final JDFResource r = (JDFResource) vRes.elementAt(iRes);
+				// reslinks that point to nothing may be valid
 
-				if (!r.isValid(valDown))
+				// but they certainly aren't valid if they point to the wrong
+				// resource
+				if (!getNodeName().equals(r.getLinkString()))
 					return false;
+
+				if (levelLocal.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
+				{
+					final EnumValidationLevel valDown = (levelLocal == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
+
+					if (!r.isValid(valDown))
+						return false;
+				}
 			}
 		}
+		
 		return true;
 	}
 
@@ -2389,19 +2404,23 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		bMatch = bMatch || namedResLink.equals(getNodeName());
 		bMatch = bMatch || namedResLink.equals(getrRef());
 		bMatch = bMatch || namedResLink.equals(getAttribute(AttributeName.USAGE));
-		bMatch = bMatch
-				|| namedResLink.equals(getLinkedResourceName() + JDFConstants.COLON + getAttribute(AttributeName.USAGE));
+		bMatch = bMatch || namedResLink.equals(
+				getLinkedResourceName() + JDFConstants.COLON + getAttribute(AttributeName.USAGE));
 
 		if (!bMatch && StringUtil.token(namedResLink, 0, JDFConstants.COLON).equals(getLinkedResourceName()))
 		{
 			VElement v = getTargetVector(0);
-			int siz = v == null ? 0 : v.size();
-			for (int i = 0; i < siz; i++)
+			if (v != null)
 			{
-				if (((JDFResource) v.elementAt(i)).matchesString(namedResLink))
-					return true;
+				int siz = v.size();
+				for (int i = 0; i < siz; i++)
+				{
+					if (((JDFResource) v.elementAt(i)).matchesString(namedResLink))
+						return true;
+				}
 			}
 		}
+		
 		return bMatch;
 	}
 

@@ -208,9 +208,12 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	{
 		VString vResult = new VString();
 		Vector<EnumFamily> families = getFamilies();
-		int siz = families == null ? 0 : families.size();
-		for (int i = 0; i < siz; i++)
-			vResult.add(families.get(i).getName());
+		if (families != null)
+		{
+			int siz = families.size();
+			for (int i = 0; i < siz; i++)
+				vResult.add(families.get(i).getName());
+		}
 
 		return vResult;
 	}

@@ -294,16 +294,23 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	public synchronized Map<String, JDFQueueEntry> getQueueEntryIDMap()
 	{
+		HashMap<String, JDFQueueEntry> map = null;
+		
 		VElement v = getQueueEntryVector();
-		int siz = v == null ? 0 : v.size();
-		if (siz == 0)
-			return null;
-		HashMap<String, JDFQueueEntry> map = new HashMap<String, JDFQueueEntry>(siz);
-		for (int i = 0; i < siz; i++)
+		if (v != null)
 		{
-			JDFQueueEntry qe = (JDFQueueEntry) v.get(i);
-			map.put(qe.getQueueEntryID(), qe);
+			int siz = v.size();
+			if (siz > 0)
+			{
+				map = new HashMap<String, JDFQueueEntry>(siz);
+				for (int i = 0; i < siz; i++)
+				{
+					JDFQueueEntry qe = (JDFQueueEntry) v.get(i);
+					map.put(qe.getQueueEntryID(), qe);
+				}
+			}
 		}
+		
 		return map;
 	}
 
@@ -368,25 +375,33 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	public synchronized VElement flushQueue(JDFQueueFilter qf)
 	{
+		int siz = 0;
+		
 		VElement ve = getQueueEntryVector();
-		int siz = ve == null ? 0 : ve.size();
-		for (int i = siz - 1; i >= 0; i--)
+		if (ve != null)
 		{
-			JDFQueueEntry qe = (JDFQueueEntry) ve.get(i);
-			if (qe.matchesQueueFilter(qf))
+			siz = ve.size();
+			for (int i = siz - 1; i >= 0; i--)
 			{
-				if (cleanupCallback != null)
-					cleanupCallback.cleanEntry(qe);
-				qe.deleteNode();
-			}
-			else
-			{
-				ve.remove(i);
-				siz--;
+				JDFQueueEntry qe = (JDFQueueEntry) ve.get(i);
+				if (qe.matchesQueueFilter(qf))
+				{
+					if (cleanupCallback != null)
+						cleanupCallback.cleanEntry(qe);
+					
+					qe.deleteNode();
+				}
+				else
+				{
+					ve.remove(i);
+					siz--;
+				}
 			}
 		}
+		
 		if (automated)
 			setStatusFromEntries();
+		
 		return siz == 0 ? null : ve;
 
 	}
@@ -484,32 +499,35 @@ public class JDFQueue extends JDFAutoQueue
 	{
 		if (nodeID == null)
 			return null;
+		
 		VElement v = getQueueEntryVector();
-		int siz = v == null ? 0 : v.size();
-		int n = 0;
-		if (nSkip >= 0)
+		if (v != null)
 		{
-			for (int i = 0; i < siz; i++)
+			int siz = v.size();
+			int n = 0;
+			if (nSkip >= 0)
 			{
-				JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-				NodeIdentifier ni2 = qe.getIdentifier();
-				if (ni2.matches(nodeID) && n++ >= nSkip)
-					return qe;
+				for (int i = 0; i < siz; i++)
+				{
+					JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
+					NodeIdentifier ni2 = qe.getIdentifier();
+					if (ni2.matches(nodeID) && n++ >= nSkip)
+						return qe;
+				}
+			}
+			else
+			{
+				for (int i = siz - 1; i >= 0; i--)
+				{
+					JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
+					NodeIdentifier ni2 = qe.getIdentifier();
+					if (ni2.matches(nodeID) && --n <= nSkip)
+						return qe;
+				}
 			}
 		}
-		else
-		{
-			for (int i = siz - 1; i >= 0; i--)
-			{
-				JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-				NodeIdentifier ni2 = qe.getIdentifier();
-				if (ni2.matches(nodeID) && --n <= nSkip)
-					return qe;
-			}
 
-		}
 		return null;
-
 	}
 
 	// ////////////////////////////////////////////////////////////////////////
@@ -547,28 +565,33 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	public synchronized JDFQueueEntry getNextExecutableQueueEntry()
 	{
-		if (!canExecute())
-			return null;
-		VElement v = getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, EnumQueueEntryStatus.Waiting), null);
-		int siz = v == null ? 0 : v.size();
 		JDFQueueEntry theEntry = null;
-		for (int i = 0; i < siz; i++)
+
+		if (!canExecute())
+			return theEntry;
+		
+		VElement v = getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, EnumQueueEntryStatus.Waiting), null);
+		if (v != null)
 		{
-			final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-
-			if (executeCallback != null && !executeCallback.canExecute(qe))
-				continue;
-
-			if (theEntry == null)
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
 			{
-				theEntry = qe;
-			}
-			else if (qe.compareTo(theEntry) < 0)
-			{
-				theEntry = qe;
-			}
+				final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
 
+				if (executeCallback != null && !executeCallback.canExecute(qe))
+					continue;
+
+				if (theEntry == null)
+				{
+					theEntry = qe;
+				}
+				else if (qe.compareTo(theEntry) < 0)
+				{
+					theEntry = qe;
+				}
+			}
 		}
+		
 		return theEntry;
 	}
 
@@ -626,29 +649,34 @@ public class JDFQueue extends JDFAutoQueue
 	public synchronized void cleanup()
 	{
 		VElement v = getQueueEntryVector();
-		int siz = v == null ? 0 : v.size();
-		int nBad = 0;
-		for (int i = 0; i < siz; i++)
+		if (v != null)
 		{
-			JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-			EnumQueueEntryStatus status = qe.getQueueEntryStatus();
-			if (EnumQueueEntryStatus.Removed.equals(status))
+			int siz = v.size();
+			int nBad = 0;
+			for (int i = 0; i < siz; i++)
 			{
-				if (cleanupCallback != null)
-					cleanupCallback.cleanEntry(qe);
-				qe.deleteNode();
-			}
-			else if (qe.isCompleted())
-			{
-				if (nBad++ >= maxCompletedEntries)
+				JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
+				EnumQueueEntryStatus status = qe.getQueueEntryStatus();
+				if (EnumQueueEntryStatus.Removed.equals(status))
 				{
 					if (cleanupCallback != null)
 						cleanupCallback.cleanEntry(qe);
 
 					qe.deleteNode();
 				}
+				else if (qe.isCompleted())
+				{
+					if (nBad++ >= maxCompletedEntries)
+					{
+						if (cleanupCallback != null)
+							cleanupCallback.cleanEntry(qe);
+
+						qe.deleteNode();
+					}
+				}
 			}
 		}
+		
 		setStatusFromEntries();
 	}
 

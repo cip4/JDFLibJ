@@ -135,6 +135,7 @@ public class JDFColor extends JDFAutoColor
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColor[  --> " + super.toString() + " ]";
@@ -159,6 +160,7 @@ public class JDFColor extends JDFAutoColor
 	 * @return String Name of the color extracted from RawName, or if this is
 	 *         missing from Name, using the default transcoder
 	 */
+	@Override
 	public String getActualColorName()
 	{
 		final String strName = getAttribute(AttributeName.ACTUALCOLORNAME,
@@ -190,20 +192,23 @@ public class JDFColor extends JDFAutoColor
 
 	public JDFFileSpec getColorProfile()
 	{
-		VElement v = getChildElementVector(ElementName.FILESPEC, null, null,
-				true, 0, false);
-		int siz = v == null ? 0 : v.size();
-		for (int i = 0; i < siz; i++)
+		VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
+		if (v != null)
 		{
-			JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
-			if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
 			{
-				if (res.getResourceUsage().equals("ColorProfile"))
+				JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
+				if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
 				{
-					return res;
+					if (res.getResourceUsage().equals("ColorProfile"))
+					{
+						return res;
+					}
 				}
 			}
 		}
+		
 		return null;
 	}
 

@@ -123,13 +123,18 @@ public class UnLinkFinder extends BaseElementWalker
 	public void eraseUnlinkedResources(JDFNode n)
 	{
 		VElement v = getUnlinkedResources(n);
-		int siz = v == null ? 0 : v.size();
-		for (int i = 0; i < siz; i++)
-			v.get(i).deleteNode();
-		if (siz > 0)
-			eraseUnlinkedResources(n);
+		if (v != null)
+		{
+			int siz = v.size();
+			for (int i = 0; i < siz; i++)
+				v.get(i).deleteNode();
+			
+			if (siz > 0)
+				eraseUnlinkedResources(n);
+		}
 	}
 
+	@Override
 	protected BaseWalkerFactory getFactory()
 	{
 		return (BaseWalkerFactory) theFactory;

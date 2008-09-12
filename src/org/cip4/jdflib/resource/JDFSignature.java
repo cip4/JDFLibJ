@@ -513,14 +513,19 @@ public class JDFSignature extends JDFAutoLayout
 	{
 		if (mediaType == null)
 			return null;
+		
 		VElement v = getChildElementVector(ElementName.MEDIA, null);
-		int siz = v == null ? 0 : v.size();
-		for (int i = 0; i < siz; i++)
+		if (v != null)
 		{
-			JDFMedia m = (JDFMedia) v.get(i);
-			if (mediaType.equals(m.getMediaType()))
-				return m;
+			int siz =  v.size();
+			for (int i = 0; i < siz; i++)
+			{
+				JDFMedia m = (JDFMedia) v.get(i);
+				if (mediaType.equals(m.getMediaType()))
+					return m;
+			}
 		}
+		
 		return null;
 
 	}

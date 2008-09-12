@@ -375,23 +375,26 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 		if (vParts != null)
 		{
 			VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation PartVersion", " "));
-			final int size = reducedMap == null ? 0 : reducedMap.size();
-			for (int i = 0; i < size; i++)
+			if (reducedMap != null)
 			{
-				final JDFAttributeMap part = reducedMap.elementAt(i);
-				JDFResource partSP = sp.getCreatePartition(part, partIDKeys);
-				JDFBinderySignature bs = partSP.getSheetName().toLowerCase().contains("cover") ? bs0 : bs1;
-				partSP.refElement(bs);
-				JDFResourceLink rl = theNode.getLink(bs, null);
-				if (rl != null)
-					rl.deleteNode();
-
+				final int size = reducedMap.size();
+				for (int i = 0; i < size; i++)
+				{
+					final JDFAttributeMap part = reducedMap.elementAt(i);
+					JDFResource partSP = sp.getCreatePartition(part, partIDKeys);
+					JDFBinderySignature bs = partSP.getSheetName().toLowerCase().contains("cover") ? bs0 : bs1;
+					partSP.refElement(bs);
+					JDFResourceLink rl = theNode.getLink(bs, null);
+					if (rl != null)
+						rl.deleteNode();
+				}
 			}
 		}
 		else
 		{
 			sp.refElement(bs0);
 		}
+		
 		sp.appendDevice().setDeviceID("Press_ID");
 		sp.appendPosition().setRelativeBox(new JDFRectangle(0, 0, 0.5, 1));
 		sp.appendPosition().setRelativeBox(new JDFRectangle(0.5, 1, 1, 1));
@@ -565,18 +568,22 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 		{
 			VJDFAttributeMap reducedMap = getReducedMap(new VString("Separation PartVersion", " "));
 			lo.setResStatus(EnumResStatus.Available, true);
-			final int size = reducedMap == null ? 0 : reducedMap.size();
-			for (int i = 0; i < size; i++)
+			if (reducedMap != null)
 			{
-				final JDFAttributeMap part = reducedMap.elementAt(i);
-				if (bSingleSided == true && "Back".equals(part.get("Side")))
-					continue;
-				JDFLayout partLO = (JDFLayout) lo.getCreatePartition(part, partIDKeys);
-				for (int j = 0; j < 4; j++)
+				final int size = reducedMap.size();
+				for (int i = 0; i < size; i++)
 				{
-					final JDFContentObject co = partLO.appendContentObject();
-					co.setCTM(new JDFMatrix(1 + 10 * j, 2 + 20 * j, 3 + 30 * j, 4 + 40 * j, 5 + 50 * j, 6 + 0 * j));
-					co.setOrd(j + i * 4);
+					final JDFAttributeMap part = reducedMap.elementAt(i);
+					if (bSingleSided == true && "Back".equals(part.get("Side")))
+						continue;
+					
+					JDFLayout partLO = (JDFLayout) lo.getCreatePartition(part, partIDKeys);
+					for (int j = 0; j < 4; j++)
+					{
+						final JDFContentObject co = partLO.appendContentObject();
+						co.setCTM(new JDFMatrix(1 + 10 * j, 2 + 20 * j, 3 + 30 * j, 4 + 40 * j, 5 + 50 * j, 6 + 0 * j));
+						co.setOrd(j + i * 4);
+					}
 				}
 			}
 		}

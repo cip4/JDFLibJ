@@ -548,7 +548,7 @@ public class VJDFAttributeMap
 
 	/**
 	 * Method overlapsMap.
-	 * returns true if at least one eleemnt exists that has no non-matching key value pairs
+	 * returns true if at least one element exists that has no non-matching key value pairs
 	 * 
 	 * @param vMap the vector to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
@@ -558,11 +558,16 @@ public class VJDFAttributeMap
 		final int size = vMap == null ? 0 : vMap.size();
 		if (size == 0)
 			return true;
-		for (int i = 0; i < size; i++)
+		
+		if (vMap != null)
 		{
-			if (overlapsMap(vMap.elementAt(i)))
-				return true;
+			for (int i = 0; i < size; i++)
+			{
+				if (overlapsMap(vMap.elementAt(i)))
+					return true;
+			}
 		}
+		
 		return false;
 	}
 

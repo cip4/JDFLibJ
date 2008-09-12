@@ -771,6 +771,7 @@ public class JDFMerge
 	{
 		if (newSpawnMap != null)
 			return;
+		
 		newSpawnMap = new HashMap<String, JDFSpawned>();
 		// VElement v=m_ParentNode.getChildrenByTagName(ElementName.SPAWNED,
 		// null, null, false, true, 0, false);
@@ -780,14 +781,17 @@ public class JDFMerge
 			JDFNode n = (JDFNode) v.get(i);
 			JDFAuditPool ap = n.getAuditPool();
 			VElement v2 = ap == null ? null : ap.getAudits(EnumAuditType.Spawned, null, null);
-			// JDFSpawned s=(JDFSpawned) v.get(i);
-			int siz = v2 == null ? 0 : v2.size();
-			for (int j = 0; j < siz; j++)
+			if (v2 != null)
 			{
-				JDFSpawned s = (JDFSpawned) v2.get(j);
-				String nsID = s.getNewSpawnID();
-				if (!KElement.isWildCard(nsID))
-					newSpawnMap.put(nsID, s);
+				// JDFSpawned s=(JDFSpawned) v.get(i);
+				int siz = v2.size();
+				for (int j = 0; j < siz; j++)
+				{
+					JDFSpawned s = (JDFSpawned) v2.get(j);
+					String nsID = s.getNewSpawnID();
+					if (!KElement.isWildCard(nsID))
+						newSpawnMap.put(nsID, s);
+				}
 			}
 		}
 
@@ -800,15 +804,15 @@ public class JDFMerge
 		// add the merged audit - maintain sychronicity of spawned and merged
 		JDFNode overWriteParent = null;
 		JDFAuditPool ap = subJDFNode.getAuditPool();
-		JDFSpawned sa = null;
+		JDFSpawned spawnedAudit = null;
 
 		if (ap != null)
 		{
-			sa = (JDFSpawned) ap.getChildWithAttribute(ElementName.SPAWNED, AttributeName.NEWSPAWNID, null, spawnID, 0, true);
+			spawnedAudit = (JDFSpawned) ap.getChildWithAttribute(ElementName.SPAWNED, AttributeName.NEWSPAWNID, null, spawnID, 0, true);
 			overWriteParent = overWriteNode;
 		}
 
-		if (sa == null)
+		if (spawnedAudit == null)
 		{
 			overWriteParent = overWriteNode.getParentJDF();
 			if (overWriteParent == null)
@@ -818,10 +822,10 @@ public class JDFMerge
 
 			ap = overWriteParent.getAuditPool();
 			if (ap != null)
-				sa = (JDFSpawned) ap.getChildWithAttribute(ElementName.SPAWNED, AttributeName.NEWSPAWNID, null, spawnID, 0, true);
+				spawnedAudit = (JDFSpawned) ap.getChildWithAttribute(ElementName.SPAWNED, AttributeName.NEWSPAWNID, null, spawnID, 0, true);
 		}
 
-		if (sa == null)
+		if (spawnedAudit == null || overWriteParent == null || ap == null)
 		{
 			// ????
 			throw new JDFException("mergeMainPools - corrupt audit structure; no Spawn Audit found");
@@ -843,8 +847,10 @@ public class JDFMerge
 			{
 				url = "File://" + url;
 			}
+			
 			mergeAudit.setURL(url);
 		}
+		
 		mergeAudit.setMergeID(spawnID);
 
 		// if something went wrong, also add a notification
@@ -882,6 +888,7 @@ public class JDFMerge
 		{
 			subJDFNode.setSpawnID(preSpawn);
 		}
+		
 		return mergeAudit;
 	}
 
@@ -1041,13 +1048,16 @@ public class JDFMerge
 		if (resourceLinkPool != null)
 		{
 			final VElement links = resourceLinkPool.getPoolChildren(null, null, null);
-			final int size = (links == null) ? 0 : links.size();
-			for (int i = 0; i < size; i++)
+			if (links != null)
 			{
-				JDFResourceLink rl = (JDFResourceLink) links.elementAt(i);
-				// 071214 only expand if rw
-				if (vsRW.contains(rl.getrRef()))
-					rl.expandTarget(false);
+				final int size = links.size();
+				for (int i = 0; i < size; i++)
+				{
+					JDFResourceLink rl = (JDFResourceLink) links.elementAt(i);
+					// 071214 only expand if rw
+					if (vsRW.contains(rl.getrRef()))
+						rl.expandTarget(false);
+				}
 			}
 		}
 	}
@@ -1139,45 +1149,44 @@ public class JDFMerge
 					oldRes = overWriteNode.getTargetResource(s);
 				}
 			}
-			if (oldRes == null)
-			{
-				continue;
-			}
 
-			final JDFResource newRes = subJDFNode.getTargetResource(s);
+			if (oldRes != null)
+			{
+				final JDFResource newRes = subJDFNode.getTargetResource(s);
 
-			// merge all potential new spawnIds from this to subJDFNode before
-			// merging them
-			mergeSpawnIDs(oldRes, newRes, false);
-			// do both, since some leaves may be RO
-			mergeSpawnIDs(newRes, oldRes, false);
+				// merge all potential new spawnIds from this to subJDFNode before
+				// merging them
+				mergeSpawnIDs(oldRes, newRes, false);
+				// do both, since some leaves may be RO
+				mergeSpawnIDs(newRes, oldRes, false);
 
-			try
-			{
-				// merge the resource from the spawned node into the lower level
-				// resourcepool
-				oldRes = mergePartition(oldRes, newRes, spawnID, amountPolicy, false);
-			}
-			catch (Exception e)
-			{
-				throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + oldRes.getID() + " SpawnID="
-						+ spawnID);
-			}
+				try
+				{
+					// merge the resource from the spawned node into the lower level resourcepool
+					oldRes = mergePartition(oldRes, newRes, spawnID, amountPolicy, false);
+				}
+				catch (Exception e)
+				{
+					throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + 
+							(oldRes == null ? ">>> oldRes is null !!! <<<" : oldRes.getID()) + " SpawnID=" + spawnID);
+				}
 
-			final String oldID = oldRes.getID();
-			final JDFResource myRes = (JDFResource) overWriteNode.getTarget(oldID, AttributeName.ID);
-			if (myRes == null)
-			{
-				throw new JDFException("JDFNode.mergeJDF: Merged Resource not found! Cant remove SpawnIDs");
-			}
-			final VElement oldResLeafsSpawned = myRes.getNodesWithSpawnID(spawnID);
-			for (int leaf = 0; leaf < oldResLeafsSpawned.size(); leaf++)
-			{
-				final JDFResource leafRes = (JDFResource) oldResLeafsSpawned.elementAt(leaf);
-				leafRes.removeFromSpawnIDs(spawnID);
-				calcSpawnStatus(leafRes, false);
+				final String oldID = oldRes.getID();
+				final JDFResource myRes = (JDFResource) overWriteNode.getTarget(oldID, AttributeName.ID);
+				if (myRes == null)
+				{
+					throw new JDFException("JDFNode.mergeJDF: Merged Resource not found! Cant remove SpawnIDs");
+				}
+				final VElement oldResLeafsSpawned = myRes.getNodesWithSpawnID(spawnID);
+				for (int leaf = 0; leaf < oldResLeafsSpawned.size(); leaf++)
+				{
+					final JDFResource leafRes = (JDFResource) oldResLeafsSpawned.elementAt(leaf);
+					leafRes.removeFromSpawnIDs(spawnID);
+					calcSpawnStatus(leafRes, false);
+				}
 			}
 		}
+
 	}
 
 	/**
@@ -1202,43 +1211,50 @@ public class JDFMerge
 			final int size = parts == null ? 0 : parts.size();
 			if (JDFElement.EnumNodeStatus.Pool.equals(toMerge.getStatus()))
 			{
-				for (int i = 0; i < size; i++)
+				if (parts != null)
 				{
-					// clean up the pool to overwrite
-					final VElement vpso = overWriteStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
-					for (int j = 0; j < vpso.size(); j++)
+					for (int i = 0; i < size; i++)
 					{
-						// remove all matching partstatus elements in case they
-						// were expanded in the spawned node
-						((JDFPartStatus) vpso.elementAt(j)).deleteNode();
-					}
+						// clean up the pool to overwrite
+						final VElement vpso = overWriteStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
+						for (int j = 0; j < vpso.size(); j++)
+						{
+							// remove all matching partstatus elements in case 
+							// they were expanded in the spawned node
+							((JDFPartStatus) vpso.elementAt(j)).deleteNode();
+						}
 
-					// extract data from spawned node
-					final VElement vps = toMergeStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
-					for (int j = 0; j < vps.size(); j++)
-					{
-						final JDFPartStatus ps = (JDFPartStatus) vps.elementAt(j);
-						final JDFAttributeMap m = ps.getPartMap();
-						overWriteStatusPool.setStatus(m, ps.getStatus(), ps.getStatusDetails());
-					}
+						// extract data from spawned node
+						final VElement vps = toMergeStatusPool.getMatchingPartStatusVector(parts.elementAt(i));
+						for (int j = 0; j < vps.size(); j++)
+						{
+							final JDFPartStatus ps = (JDFPartStatus) vps.elementAt(j);
+							final JDFAttributeMap m = ps.getPartMap();
+							overWriteStatusPool.setStatus(m, ps.getStatus(), ps.getStatusDetails());
+						}
 
-					// 100305 RP the following lines cause problems with nested
-					// spawn and therefore are commented out
-					// final JDFPartStatus
-					// ps=overWriteStatusPool.getPartStatus(parts.elementAt(i));
-					// just in case someone updated detailed partstatus elements
-					// if (ps != null && ps.getStatus() ==
-					// EnumNodeStatus.Spawned)
-					// ps.deleteNode();
+						// 100305 RP the following lines cause problems with nested
+						// spawn and therefore are commented out
+						// final JDFPartStatus
+						// ps=overWriteStatusPool.getPartStatus(parts.elementAt(i));
+						// just in case someone updated detailed partstatus elements
+						// if (ps != null && ps.getStatus() ==
+						// EnumNodeStatus.Spawned)
+						// ps.deleteNode();
+					}
 				}
+				
 				toMergeStatusPool.replaceElement(overWriteStatusPool);
 			}
 			else
 			{
 				// this part of the program will probably never be executed,
 				// but...
-				for (int i = 0; i < size; i++)
-					overWriteStatusPool.setStatus(parts.elementAt(i), toMerge.getStatus(), null);
+				if (parts != null)
+				{
+					for (int i = 0; i < size; i++)
+						overWriteStatusPool.setStatus(parts.elementAt(i), toMerge.getStatus(), null);
+				}
 				if (toMergeStatusPool != null)
 					toMergeStatusPool.deleteNode();
 				toMerge.setStatus(JDFElement.EnumNodeStatus.Pool);

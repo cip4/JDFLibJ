@@ -163,7 +163,7 @@ public class JDFDoc extends XMLDoc
 
 	/**
 	 * @param rootName ElementName.JDF or ElementName.JMF
-	 * @return either the JDF or JMF root
+	 * @return
 	 */
 	private KElement getJXFRoot(String rootName)
 	{
@@ -290,7 +290,7 @@ public class JDFDoc extends XMLDoc
 			final JDFResource r = (JDFResource) vResources.elementAt(i);
 			if (!(vLinkedResources.index(r) >= 0))
 			{
-				if (bCollectAll || nodeNames.contains(r.getLocalName()))
+				if (bCollectAll || (nodeNames != null && nodeNames.contains(r.getLocalName())))
 				{
 					r.deleteNode();
 					nDeleted++;
@@ -300,6 +300,7 @@ public class JDFDoc extends XMLDoc
 		// run gc a few times to really clean up
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
+		
 		return nDeleted;
 	}
 
