@@ -109,7 +109,7 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * @param e the element to check
 	 * @return true if matches - must be true for base
 	 */
-	public boolean matches(KElement e)
+	public boolean matches(@SuppressWarnings("unused") KElement e)
 	{
 		return true;
 	}

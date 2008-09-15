@@ -1,14 +1,196 @@
 ___________________________________________________________
 
 
-Label JDFLIBJ_2.1.3BLD520 (09.09.2008)
+Label JDFLIBJ_2.1.3BLD520 (15.09.2008)
 
 
+cleanup warnings "Potential null pointer access"
+cleanup warnings "assignment to parameter"
 Layout get and set by name
 getQueueEntryIDMap in queue
 undo stream modification in MimeUtil
 URL handling for non-ascii characters
 
+
+Revision: 3564
+Author: mucha
+Date: 18:37:20, Freitag, 12. September 2008
+Message:
+cleanup warnings "Potential null pointer access"
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFNodeInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFPartAmount.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/VJDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/UnLinkFinder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISFinGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISPreGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFDeviceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFFlushQueueInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJMF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFMessageService.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAuditPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourceLinkPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFSignature.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDevCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDevCaps.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDeviceCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFModulePool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFColorPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFRunList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/FileUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/HotFolder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/validate/JDFValidator.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/cformat/PrintfFormatTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/cformat/ScanfFormatTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/cformat/ScanfReaderTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFElementTest.java
+
+Revision: 3561
+Author: prosi
+Date: 09:59:04, Freitag, 12. September 2008
+Message:
+remove orphaned subscriptions in bambi queue
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/BaseWalker.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/IWalker.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JMFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/process/JDFRunListTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/UrlUtilTest.java
+
+Revision: 3558
+Author: mucha
+Date: 18:08:09, Mittwoch, 10. September 2008
+Message:
+cleanup warnings "assignment to parameter"
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/GeneratorUtil.java
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/JavaCoreStringUtil.java
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/SchemaAttribute.java
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/SchemaDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/cformat/PrintfFormat.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/cformat/ScanfReader.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFParser.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/VString.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDocUserData.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFIntegerList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFIntegerRangeList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFNumList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/IDPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISPreGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFDeviceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJMF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJobPhase.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFPipeParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFStatusQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAuditPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourceLinkPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourcePool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFNotification.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFPhaseTime.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFProcessRun.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResourceAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFSignature.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDevCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDeviceCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFTest.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFTestRef.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFand.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFnot.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFxor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/intent/JDFDropItemIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/intent/JDFProductionIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFComChannel.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFSourceResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFSurface.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/prepress/JDFAssetListCreationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ContainerUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/DumpDir.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/FileUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/HashUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFDate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFDuration.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MyArgs.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/QueueHotFolder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/VectorMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/validate/JDFValidator.java
+
+Revision: 3557
+Author: mucha
+Date: 14:10:13, Mittwoch, 10. September 2008
+Message:
+cleanup warnings
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/cformat/PrintfFormat.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/cformat/PrintfStream.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/cformat/PrintfWriter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/cformat/ScanfReader.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFRefElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISFinGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/ProductGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFAncestor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFSourceResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/validate/JDFValidator.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFParserTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/ContentCreationTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/DigiPrintTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/GoldenTicketTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JMFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/QueueTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/pool/JDFAmountPoolTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/ContainerUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FileUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
 
 Revision: 3554
 Author: prosi
@@ -82,29 +264,104 @@ Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
 Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/UrlUtilTest.java
 
 
->ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD515) && !lbtype(JDFLIBJ_2.1.3BLD514)}" -print
-.\core\JDFElement.java@@\main\250
-.\core\JDFParser.java@@\main\50
-.\core\KElement.java@@\main\266
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD520) && !lbtype(JDFLIBJ_2.1.3BLD514)}" -print
+.\cformat\PrintfFormat.java@@\main\7
+.\cformat\PrintfStream.java@@\main\2
+.\cformat\PrintfWriter.java@@\main\2
+.\cformat\ScanfReader.java@@\main\7
+.\core\JDFAudit.java@@\main\94
+.\core\JDFDoc.java@@\main\82
+.\core\JDFElement.java@@\main\252
+.\core\JDFNodeInfo.java@@\main\60
+.\core\JDFParser.java@@\main\51
+.\core\JDFPartAmount.java@@\main\31
+.\core\JDFRefElement.java@@\main\66
+.\core\JDFResourceLink.java@@\main\150
+.\core\KElement.java@@\main\268
+.\core\VString.java@@\main\43
+.\core\XMLDoc.java@@\main\96
+.\core\XMLDocUserData.java@@\main\32
+.\datatypes\JDFAttributeMap.java@@\main\40
+.\datatypes\JDFIntegerList.java@@\main\18
+.\datatypes\JDFIntegerRangeList.java@@\main\36
+.\datatypes\JDFNumList.java@@\main\34
+.\datatypes\VJDFAttributeMap.java@@\main\34
+.\elementwalker\BaseWalker.java@@\main\3
+.\elementwalker\IWalker.java@@\main\2
+.\elementwalker\UnLinkFinder.java@@\main\3
+.\goldenticket\BaseGoldenTicket.java@@\main\15
+.\goldenticket\IDPGoldenTicket.java@@\main\2
+.\goldenticket\MISCPGoldenTicket.java@@\main\14
+.\goldenticket\MISFinGoldenTicket.java@@\main\4
+.\goldenticket\MISGoldenTicket.java@@\main\13
+.\goldenticket\MISPreGoldenTicket.java@@\main\6
+.\goldenticket\ProductGoldenTicket.java@@\main\7
 .\ifaces\INodeIdentifiable.java@@\main\2
-.\jmf\JDFDeviceInfo.java@@\main\28
-.\jmf\JDFJobPhase.java@@\main\27
+.\jmf\JDFDeviceInfo.java@@\main\30
+.\jmf\JDFFlushQueueInfo.java@@\main\6
+.\jmf\JDFJMF.java@@\main\73
+.\jmf\JDFJobPhase.java@@\main\28
 .\jmf\JDFMessage.java@@\main\79
-.\jmf\JDFQueue.java@@\main\36
+.\jmf\JDFMessageService.java@@\main\20
+.\jmf\JDFPipeParams.java@@\main\24
+.\jmf\JDFQueue.java@@\main\37
 .\jmf\JDFQueueEntry.java@@\main\33
-.\jmf\JDFResourceCmdParams.java@@\main\29
-.\jmf\JDFResourceQuParams.java@@\main\19
-.\jmf\JDFStatusQuParams.java@@\main\19
-.\node\JDFNode.java@@\main\276
-.\pool\JDFAuditPool.java@@\main\108
-.\resource\JDFSignature.java@@\main\23
+.\jmf\JDFQueueFilter.java@@\main\14
+.\jmf\JDFResourceCmdParams.java@@\main\31
+.\jmf\JDFResourceInfo.java@@\main\33
+.\jmf\JDFResourceQuParams.java@@\main\20
+.\jmf\JDFStatusQuParams.java@@\main\20
+.\node\JDFAncestor.java@@\main\35
+.\node\JDFNode.java@@\main\279
+.\pool\JDFAmountPool.java@@\main\33
+.\pool\JDFAuditPool.java@@\main\110
+.\pool\JDFPool.java@@\main\39
+.\pool\JDFResourceLinkPool.java@@\main\86
+.\pool\JDFResourcePool.java@@\main\72
+.\resource\devicecapability\JDFand.java@@\main\12
+.\resource\devicecapability\JDFDevCap.java@@\main\60
+.\resource\devicecapability\JDFDevCaps.java@@\main\46
+.\resource\devicecapability\JDFDeviceCap.java@@\main\58
+.\resource\devicecapability\JDFEvaluation.java@@\main\31
+.\resource\devicecapability\JDFModulePool.java@@\main\10
+.\resource\devicecapability\JDFnot.java@@\main\14
+.\resource\devicecapability\JDFor.java@@\main\13
+.\resource\devicecapability\JDFTest.java@@\main\28
+.\resource\devicecapability\JDFTestRef.java@@\main\16
+.\resource\devicecapability\JDFxor.java@@\main\14
+.\resource\intent\JDFDropItemIntent.java@@\main\21
+.\resource\intent\JDFProductionIntent.java@@\main\22
+.\resource\JDFNotification.java@@\main\21
+.\resource\JDFPhaseTime.java@@\main\34
+.\resource\JDFProcessRun.java@@\main\36
+.\resource\JDFResource.java@@\main\237
+.\resource\JDFResourceAudit.java@@\main\36
+.\resource\JDFSignature.java@@\main\25
+.\resource\process\JDFColor.java@@\main\29
+.\resource\process\JDFColorPool.java@@\main\31
+.\resource\process\JDFComChannel.java@@\main\18
 .\resource\process\JDFLayout.java@@\main\24
-.\util\FileUtil.java@@\main\10
-.\util\HotFolder.java@@\main\4
-.\util\MimeUtil.java@@\main\26
-.\util\MyArgs.java@@\main\30
-.\util\StatusCounter.java@@\main\20
-.\util\UrlUtil.java@@\main\20
+.\resource\process\JDFRunList.java@@\main\58
+.\resource\process\JDFSourceResource.java@@\main\11
+.\resource\process\JDFSurface.java@@\main\39
+.\resource\process\prepress\JDFAssetListCreationParams.java@@\main\4
+.\util\ContainerUtil.java@@\main\8
+.\util\DumpDir.java@@\main\7
+.\util\FileUtil.java@@\main\12
+.\util\HashUtil.java@@\main\5
+.\util\HotFolder.java@@\main\5
+.\util\JDFDate.java@@\main\54
+.\util\JDFDuration.java@@\main\11
+.\util\JDFMerge.java@@\main\31
+.\util\JDFSpawn.java@@\main\30
+.\util\MimeUtil.java@@\main\29
+.\util\MyArgs.java@@\main\31
+.\util\QueueHotFolder.java@@\main\6
+.\util\StatusCounter.java@@\main\22
+.\util\StringUtil.java@@\main\74
+.\util\UrlUtil.java@@\main\22
+.\util\VectorMap.java@@\main\6
+.\validate\JDFValidator.java@@\main\5
 ___________________________________________________________
 
 
