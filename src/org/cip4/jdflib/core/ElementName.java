@@ -939,7 +939,27 @@ public final class ElementName
 	public static final String XYPAIREVALUATION = "XYPairEvaluation";
 	public static final String XYPAIRSTATE = "XYPairState";
 	public static final String YPOSITION = "YPosition";
-
+	
+	
 	// muss noch einsortiert werden!
-
+	// JDF 1.4
+	  public static final String BACKCOVERCOLORDETAILS = null;
+	  public static final String BINDINGCOLORDETAILS = null;
+	  public static final String COLORANTCONVERTPROCESS = null;
+	  public static final String COLORNAMEDETAILS = null;
+	  public static final String CONTENTMETADATA = null;
+	  public static final String COVERCOLORDETAILS = null;
+	  public static final String FLUTE = null;
+	  public static final String FLUTEDIRECTION = null;
+	  public static final String FOILCOLORDETAILS = null;
+	  public static final String HEADBANDCOLORDETAILS = null;
+	  public static final String MARKACTIVATION = null;
+	  public static final String MEDIAQUALITY = null;
+	  public static final String PAGECONDITION = null;
+	  public static final String POSITIONOBJ = null;
+	  public static final String REFANCHOR = null;
+	  public static final String RULELENGTH = null;
+	  public static final String SHAPEDEF = null;
+	  public static final String TABDIMENSIONS = null;
+	  public static final String TABMYLARCOLORDETAILS = null;
 }
