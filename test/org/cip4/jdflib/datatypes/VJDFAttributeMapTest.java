@@ -78,7 +78,9 @@
 package org.cip4.jdflib.datatypes;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -296,7 +298,9 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		VJDFAttributeMap v4 = new VJDFAttributeMap((VJDFAttributeMap) null);
 		v4.put("a1", "b1");
 		assertEquals(v4.size(), 1);
-
+		VJDFAttributeMap v5 = new VJDFAttributeMap();
+		v5.put(EnumPartIDKey.Side, EnumSide.Front);
+		assertEquals(v5.size(), 1);
 	}
 
 	// /////////////////////////////////////////////////////////////

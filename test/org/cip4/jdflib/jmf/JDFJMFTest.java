@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -93,17 +94,12 @@ public class JDFJMFTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = doc.getJMFRoot();
-		JDFCommand command = (JDFCommand) jmf.appendMessageElement(
-				EnumFamily.Command, EnumType.Status);
-		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(0),
-				command);
+		JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.Status);
+		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(0), command);
 		assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 1);
-		JDFSignal signal = (JDFSignal) jmf.appendMessageElement(
-				EnumFamily.Signal, EnumType.Status);
-		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(0),
-				command);
-		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(1),
-				signal);
+		JDFSignal signal = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
+		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(0), command);
+		assertEquals(jmf.getMessageVector(null, EnumType.Status).elementAt(1), signal);
 		assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 2);
 	}
 
@@ -185,7 +181,34 @@ public class JDFJMFTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// /
 	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testCollectICSVersions()
+	{
+		JDFDoc doc = new JDFDoc(ElementName.JMF);
+		JDFJMF jmf = doc.getJMFRoot();
+		VString s12 = new VString("s1 s2", null);
+		jmf.appendSignal().setICSVersions(s12);
+		assertTrue(s12.containsAll(jmf.collectICSVersions()));
+		assertTrue(jmf.collectICSVersions().containsAll(s12));
 
+		jmf.appendSignal().setICSVersions(s12);
+		assertTrue(s12.containsAll(jmf.collectICSVersions()));
+		assertTrue(jmf.collectICSVersions().containsAll(s12));
+
+		jmf.setICSVersions(new VString("j1 j1 j2", null));
+		s12.add("j1");
+		s12.add("j2");
+
+		assertTrue(s12.containsAll(jmf.collectICSVersions()));
+		assertTrue(jmf.collectICSVersions().containsAll(s12));
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testConvertResponse()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -230,8 +253,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 
 	public void testCreateJMF()
 	{
-		JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response,
-				EnumType.AbortQueueEntry);
+		JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		assertEquals(jmf.getResponse(0).getEnumType(), EnumType.AbortQueueEntry);
 		assertEquals(jmf.getResponse(0).getLocalName(), "Response");
 	}
@@ -240,11 +262,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 	public void testSenderIDBlank()
 	{
 		JDFJMF.setTheSenderID("a b");
-		JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response,
-				EnumType.AbortQueueEntry);
+		JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		final JDFResponse response = jmf.getResponse(0);
-		assertTrue("thge sender id was added but stripped", response.getID()
-				.indexOf(".ab.") > 0);
+		assertTrue("thge sender id was added but stripped", response.getID().indexOf(".ab.") > 0);
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -253,8 +273,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = doc.getJMFRoot();
-		JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				null);
+		JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, null);
 		s.setType("Status");
 		JDFStatusQuParams sqp = s.appendStatusQuParams();
 		sqp.setDeviceDetails(EnumDeviceDetails.Brief);
@@ -262,8 +281,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		di.setDeviceStatus(EnumDeviceStatus.Unknown);
 		JDFJobPhase jp = di.appendJobPhase();
 		assertEquals("", jp, di.getJobPhase(0));
-		jp = (JDFJobPhase) di.appendElement("jdf:JobPhase", JDFElement
-				.getSchemaURL());
+		jp = (JDFJobPhase) di.appendElement("jdf:JobPhase", JDFElement.getSchemaURL());
 		assertEquals("", jp, di.getJobPhase(1));
 		assertNull("", di.getJobPhase(2));
 		jp.appendNode();
@@ -276,8 +294,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = doc.getJMFRoot();
-		JDFResponse r = (JDFResponse) jmf.appendMessageElement(
-				EnumFamily.Response, null);
+		JDFResponse r = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, null);
 		r.setType("Status");
 		r.setrefID("r1");
 		JDFNotification n = r.setErrorText("blub");
@@ -292,23 +309,17 @@ public class JDFJMFTest extends JDFTestCaseBase
 	{
 		JDFDoc d = new JDFDoc("JMF");
 		JDFJMF jmf = d.getJMFRoot();
-		JDFCommand c = (JDFCommand) jmf.appendMessageElement(
-				EnumFamily.Command, EnumType.Events);
-		assertEquals(c, jmf.getMessageElement(EnumFamily.Command,
-				EnumType.Events, 0));
+		JDFCommand c = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.Events);
+		assertEquals(c, jmf.getMessageElement(EnumFamily.Command, EnumType.Events, 0));
 		jmf.appendComment();
 
-		JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				EnumType.Events);
-		assertEquals(s, jmf.getMessageElement(EnumFamily.Signal,
-				EnumType.Events, 0));
+		JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Events);
+		assertEquals(s, jmf.getMessageElement(EnumFamily.Signal, EnumType.Events, 0));
 		assertEquals(s, jmf.getMessageElement(null, EnumType.Events, 1));
 		assertEquals(s, jmf.getMessageElement(null, null, 1));
 
-		JDFSignal s2 = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				EnumType.Status);
-		assertEquals(s2, jmf.getMessageElement(EnumFamily.Signal,
-				EnumType.Status, 0));
+		JDFSignal s2 = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
+		assertEquals(s2, jmf.getMessageElement(EnumFamily.Signal, EnumType.Status, 0));
 		assertEquals(s2, jmf.getMessageElement(EnumFamily.Signal, null, 1));
 		assertEquals(s2, jmf.getMessageElement(null, null, 2));
 		assertEquals(s2, jmf.getMessageElement(null, null, -1));
@@ -323,16 +334,14 @@ public class JDFJMFTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = doc.getJMFRoot();
-		JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				null);
+		JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, null);
 		s.setType("Status");
 		JDFStatusQuParams sqp = s.appendStatusQuParams();
 		sqp.setDeviceDetails(EnumDeviceDetails.Brief);
 		JDFDeviceInfo di = s.appendDeviceInfo();
 		JDFJobPhase jp = di.appendJobPhase();
 		assertEquals("", jp, di.getJobPhase(0));
-		jp = (JDFJobPhase) di.appendElement("jdf:JobPhase", JDFElement
-				.getSchemaURL());
+		jp = (JDFJobPhase) di.appendElement("jdf:JobPhase", JDFElement.getSchemaURL());
 		assertEquals("", jp, di.getJobPhase(1));
 		assertNull("", di.getJobPhase(2));
 		jp.appendNode();
@@ -366,18 +375,14 @@ public class JDFJMFTest extends JDFTestCaseBase
 				r.appendSubscription();
 			}
 
-			assertTrue(" added messages",
-					jmf.getMessageVector(f, null).size() == 1);
-			assertTrue("xsi type", jmf.getMessageElement(f, null, 0)
-					.hasAttribute(AttributeName.XSITYPE));
-			assertEquals("xsi type", jmf.getMessageElement(f, null, 0)
-					.getAttribute(AttributeName.XSITYPE), f.getName()
+			assertTrue(" added messages", jmf.getMessageVector(f, null).size() == 1);
+			assertTrue("xsi type", jmf.getMessageElement(f, null, 0).hasAttribute(AttributeName.XSITYPE));
+			assertEquals("xsi type", jmf.getMessageElement(f, null, 0).getAttribute(AttributeName.XSITYPE), f.getName()
 					+ "KnownMessages");
 
 		}
 
-		assertTrue(" added messages",
-				jmf.getMessageVector(null, null).size() == 6);
+		assertTrue(" added messages", jmf.getMessageVector(null, null).size() == 6);
 		assertTrue("valid", jmf.isValid(EnumValidationLevel.Complete));
 	}
 
@@ -385,8 +390,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = doc.getJMFRoot();
-		JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				null);
+		JDFSignal s = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, null);
 		s.setType("foo:test");
 		s.appendDevice();
 		assertNull(s.getXSIType());
@@ -397,14 +401,12 @@ public class JDFJMFTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = doc.getJMFRoot();
-		JDFCommand c = (JDFCommand) jmf.appendMessageElement(
-				EnumFamily.Command, null);
+		JDFCommand c = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, null);
 		c.setType("ReturnQueueEntry");
 		JDFReturnQueueEntryParams rqe = c.appendReturnQueueEntryParams();
 		rqe.setURL("http://foo.jdf");
 		rqe.setQueueEntryID("dummyID");
-		assertTrue("JDFReturnQueueEntryParams", rqe
-				.isValid(EnumValidationLevel.Complete));
+		assertTrue("JDFReturnQueueEntryParams", rqe.isValid(EnumValidationLevel.Complete));
 	}
 
 	/*
@@ -412,6 +414,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	 * 
 	 * @see junit.framework.TestCase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		JDFJMF.setTheSenderID(null);

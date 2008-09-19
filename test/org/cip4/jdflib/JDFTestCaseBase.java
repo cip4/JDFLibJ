@@ -73,7 +73,9 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
+import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -84,8 +86,11 @@ import org.cip4.jdflib.datatypes.JDFIntegerRange;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFPerson;
+import org.cip4.jdflib.util.JDFDate;
 
 /**
  * base class for JDFLib test case classes
@@ -220,6 +225,42 @@ public abstract class JDFTestCaseBase extends TestCase
 		JDFAudit.setStaticAgentVersion(agentVersion);
 		JDFAudit.setStaticAuthor(author);
 		JDFNodeInfo.setDefaultWorkStepID(false);
+	}
+
+	/**
+	 * create a standard customerInfo
+	 * @param doc the doc to preparein
+	 * @return the new customerInfo
+	 */
+	protected JDFCustomerInfo prepareCustomerInfo(JDFDoc doc)
+	{
+		JDFNode n = doc.getJDFRoot();
+		JDFCustomerInfo info = n.appendCustomerInfo();
+		info.setCustomerID("MISCustomerID");
+		VString vct = new VString();
+		vct.add("Customer");
+		JDFContact contact = info.appendContact();
+		contact.setContactTypes(vct);
+		JDFPerson p = contact.appendPerson();
+		p.setFamilyName("LastName");
+		p.setFirstName("FirstName");
+		p.appendComChannel().setPhoneNumber("+49 123 4567", null, EnumChannelType.Phone);
+		p.appendComChannel().setPhoneNumber("+49 123 4568", null, EnumChannelType.Fax);
+		p.appendComChannel().setEMailLocator("customer@company.com");
+		info.setCustomerJobName("Customer Job Identifier or Name");
+		return info;
+	}
+
+	protected JDFNodeInfo prepareNodeInfo(JDFDoc doc) throws Exception
+	{
+		JDFNode n = doc.getJDFRoot();
+		JDFNodeInfo ni = n.getCreateNodeInfo();
+		JDFDate date = new JDFDate();
+		ni.setFirstStart(date);
+		date.addOffset(0, 0, 0, 5);
+		ni.setLastEnd(date);
+		ni.setDescriptiveName("must be done 5 days after start");
+		return ni;
 	}
 
 }

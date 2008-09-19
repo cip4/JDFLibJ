@@ -115,10 +115,12 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testSpeed1()
 	{
 		long l1 = System.nanoTime();
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
-			new JDFParser();
+			new JDFParser().parseString(s);
 		}
+		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
+		assertTrue(getCurrentMem() - mem < 1000000);
 		System.out.println("new:   " + (System.nanoTime() - l1) / 1000000);
 	}
 
@@ -164,10 +166,12 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		long l1 = System.nanoTime();
 		JDFParser p = new JDFParser();
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
 			p.parseString(s);
 		}
+		System.out.println("mem reuse:   " + getCurrentMem() + " " + mem);
+		assertTrue(getCurrentMem() - mem < 1000000);
 		System.out.println("reuse: " + (System.nanoTime() - l1) / 1000000);
 	}
 
@@ -176,20 +180,24 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testSkipParse()
+	public void testSkipParse() throws Exception
 	{
 		JDFParser.m_searchStream = true;
-		String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF/>";
+		String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
+		for (int i = 0; i < 100000; i++)
+			assertNotNull(new JDFParser().parseString(s2));
+		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
+		assertTrue(getCurrentMem() - mem < 1000000);
 		JDFParser.m_searchStream = false;
 		assertNull(new JDFParser().parseString(s2));
 	}
 
 	/**
 	 * parse a simple JDF against all official schemas
-	 * this test catches corrupt xmöl schemas
+	 * this test catches corrupt xml schemas
 	 * @throws Exception
 	 */
-	public void testSchema()
+	public void testSchema() throws Exception
 	{
 		File foo = new File(sm_dirTestSchema).getParentFile();
 

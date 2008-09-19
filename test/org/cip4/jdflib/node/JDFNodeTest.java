@@ -1841,6 +1841,21 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testGetAncestorElement()
+	{
+		JDFDoc doc = new JDFDoc("JDF");
+		JDFNode root = doc.getJDFRoot();
+		JDFNodeInfo ni = root.appendAncestorPool().appendAncestor().appendNodeInfo();
+		assertEquals(ni, root.getAncestorElement(ElementName.NODEINFO, null));
+	}
+
+	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetActivation()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
@@ -1869,6 +1884,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetAllTypes()
 	{
 		JDFDoc doc = new JDFDoc("JDF");

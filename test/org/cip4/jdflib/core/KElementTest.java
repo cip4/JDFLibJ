@@ -671,15 +671,16 @@ public class KElementTest extends JDFTestCaseBase
 	public void testCopyElementMem()
 	{
 		KElement k = new XMLDoc("root", null).getRoot();
-		for (int i = 0; i < 50000; i++)
+		for (int i = 0; i < 100000; i++)
 		{
 			KElement d2 = new XMLDoc("mama", null).getRoot();
 
 			for (int j = 0; j < 100; j++)
-				d2.appendElement("kid");
-			k.copyElement(d2.appendElement("kid"), null);
+				d2.appendElement("kid").appendElement("grandKid");
+			k.copyElement(d2.getElement("kid"), null);
 		}
-		assertEquals(getCurrentMem(), mem, 100 * 50000); // allow 100 per element
+		k.removeChildren("kid", null, null);
+		assertEquals(getCurrentMem(), mem, 100000); // allow 100 per element
 	}
 
 	/**
@@ -688,8 +689,8 @@ public class KElementTest extends JDFTestCaseBase
 	public void testCloneElementMem()
 	{
 		XMLDoc doc = new XMLDoc("root", null);
-//		KElement k = 
-			doc.getRoot();
+		//		KElement k = 
+		doc.getRoot();
 		for (int i = 0; i < 50000; i++)
 		{
 			KElement d2 = new XMLDoc("mama", null).getRoot();
@@ -760,6 +761,9 @@ public class KElementTest extends JDFTestCaseBase
 			KElement e3 = e.copyElement(((XMLDoc) d2.clone()).getRoot(), null);
 			assertNull(e3.getNamespaceURI());
 		}
+		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
+		assertTrue(getCurrentMem() - mem < 1000000);
+
 	}
 
 	/**

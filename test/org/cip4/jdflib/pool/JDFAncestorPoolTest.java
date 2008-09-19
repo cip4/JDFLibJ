@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,8 +70,11 @@
 package org.cip4.jdflib.pool;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -84,6 +87,18 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
  */
 public class JDFAncestorPoolTest extends JDFTestCaseBase
 {
+	private JDFNode n;
+	private JDFAncestorPool ap;
+
+	@Override
+	protected void setUp() throws Exception
+	{
+		// TODO Auto-generated method stub
+		super.setUp();
+		JDFDoc d = new JDFDoc("JDF");
+		n = d.getJDFRoot();
+		ap = n.appendAncestorPool();
+	}
 
 	// /////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////
@@ -94,14 +109,12 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	 */
 	public void testCopyNodeData() throws Exception
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.Product);
 		JDFNode n1 = n = n.addJDFNode(EnumType.BlockPreparation);
 		n1.setAttribute("foo:bar", "fnarf", "www.foobar.com");
 
 		JDFDoc dA = new JDFDoc("JDF");
-		JDFAncestorPool ap = dA.getJDFRoot().appendAncestorPool();
+		ap = dA.getJDFRoot().appendAncestorPool();
 		ap.appendAncestor().setNodeID(n1.getID());
 		ap.copyNodeData(n, true, true, false);
 		JDFAncestor a0 = ap.getAncestor(0);
@@ -111,9 +124,30 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 		JDFParser p = new JDFParser();
 		JDFDoc test = p.parseString(s);
 		assertNotNull(test);
-
 	}
 
 	// /////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
+	public void testgeAncestorElement() throws Exception
+	{
+		JDFAncestor a1 = ap.appendAncestor();
+		JDFAncestor a2 = ap.appendAncestor();
+		JDFAncestor a3 = ap.appendAncestor();
+		JDFNodeInfo ni2 = a2.appendNodeInfo();
+		ni2.appendJMF().appendQuery(JDFMessage.EnumType.Status).appendSubscription();
+		assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni2);
+		ni2.makeRootResource(null, null, true);
+		assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni2);
+
+		JDFNodeInfo ni3 = a3.appendNodeInfo();
+		ni3.appendJMF().appendQuery(JDFMessage.EnumType.Status).appendSubscription();
+		assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Status\"]"), ni3);
+
+		JDFNodeInfo ni1 = a1.appendNodeInfo();
+		ni1.appendJMF().appendQuery(JDFMessage.EnumType.Resource).appendSubscription();
+		assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Resource\"]"), ni1);
+	}
 }

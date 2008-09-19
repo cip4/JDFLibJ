@@ -85,17 +85,37 @@ import org.cip4.jdflib.resource.process.JDFContact;
 
 public class JDFCustomerInfoTest extends JDFTestCaseBase
 {
+
+	@Override
+	protected JDFCustomerInfo prepareCustomerInfo(JDFDoc doc)
+	{
+		JDFNode n = doc.getJDFRoot();
+		JDFCustomerInfo info = n.appendCustomerInfo();
+		VString vct = new VString();
+		vct.add("Customer");
+		info.appendContact().setContactTypes(vct);
+		vct.add("Administrator");
+		info.appendContact().setContactTypes(vct);
+		JDFContact c = info.appendContact();
+		vct = new VString();
+		vct.add("Delivery");
+		c.setContactTypes(vct);
+		c.makeRootResource(null, null, true);
+		vct.add("Customer");
+		info.appendContact().setContactTypes(vct);
+		return info;
+	}
+
 	public void testgetContactVector()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
-		JDFCustomerInfo info = prepareInfo(doc);
+		JDFCustomerInfo info = prepareCustomerInfo(doc);
 
 		Vector v = null;
 		info = doc.getJDFRoot().getCustomerInfo();
 		if (info != null)
 		{
-			v = info.getChildElementVector(ElementName.CONTACT, null, null,
-					true, 0, false);
+			v = info.getChildElementVector(ElementName.CONTACT, null, null, true, 0, false);
 			assertEquals("v does not contain 4 contact", v.size(), 4);
 		}
 
@@ -103,8 +123,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		info = doc.getJDFRoot().getCustomerInfo();
 		if (info != null)
 		{
-			v = info.getChildElementVector(ElementName.CONTACT, null, null,
-					true, 0, false);
+			v = info.getChildElementVector(ElementName.CONTACT, null, null, true, 0, false);
 			assertTrue("v does not contain 4 contacts", v.size() == 4);
 		}
 	}
@@ -114,7 +133,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	public void testGetContactWithContactType()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
-		JDFCustomerInfo info = prepareInfo(doc);
+		JDFCustomerInfo info = prepareCustomerInfo(doc);
 
 		JDFContact cc = info.getContactWithContactType("Customer", 0);
 		assertNotNull("cc", cc);
@@ -136,7 +155,7 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 	public void testGetContactVectorWithContactType()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
-		JDFCustomerInfo info = prepareInfo(doc);
+		JDFCustomerInfo info = prepareCustomerInfo(doc);
 
 		VElement v = info.getContactVectorWithContactType("Customer");
 		assertNotNull(v);
@@ -146,27 +165,6 @@ public class JDFCustomerInfoTest extends JDFTestCaseBase
 		assertEquals(v.size(), 1);
 		v = info.getContactVectorWithContactType("beagle");
 		assertNull(v);
-	}
-
-	// ///////////////////////////////////////////////////////////////////////
-
-	private JDFCustomerInfo prepareInfo(JDFDoc doc)
-	{
-		JDFNode n = doc.getJDFRoot();
-		JDFCustomerInfo info = n.appendCustomerInfo();
-		VString vct = new VString();
-		vct.add("Customer");
-		info.appendContact().setContactTypes(vct);
-		vct.add("Administrator");
-		info.appendContact().setContactTypes(vct);
-		JDFContact c = info.appendContact();
-		vct = new VString();
-		vct.add("Delivery");
-		c.setContactTypes(vct);
-		c.makeRootResource(null, null, true);
-		vct.add("Customer");
-		info.appendContact().setContactTypes(vct);
-		return info;
 	}
 
 	// ///////////////////////////////////////////////////////////////////////

@@ -308,9 +308,13 @@ public class CheckJDFTest extends JDFTestCaseBase
 	{
 
 		File zip = new File(sm_dirTestData + "checkjdf.zip");
+		zip = new File("c:/data/many.zip");
 		JDFValidator checker = new JDFValidator();
 		XMLDoc d = checker.processZipFile(zip);
 		KElement root = d.getRoot();
+		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
+		assertEquals(getCurrentMem(), mem, 1000000);
+
 		assertEquals("checkJDF.zip has 17 files", root.numChildElements("TestFile", null), 17);
 	}
 

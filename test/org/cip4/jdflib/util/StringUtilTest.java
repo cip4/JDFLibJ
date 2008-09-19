@@ -95,6 +95,9 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
  */
 public class StringUtilTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
 	public void testWipeInvalidXML10Chars()
 	{
 		char[] cs = new char[] { 'a', 0x7, 0x3, 'b', 0x5 };
@@ -103,6 +106,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.wipeInvalidXML10Chars("abc", null), "abc");
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetRelativePath()
 	{
 		File f = new File("./a");
@@ -212,6 +218,26 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals("Input and Outputstring are not equal", strTestString, strResultString);
 	}
 
+	/**
+	 * 
+	 */
+	public void testGetUTF8Bytes()
+	{
+		// String strTestString = "€";
+		String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÖÄÜöäü€";
+		byte[] utf8Buf = StringUtil.setUTF8String(strTestString);
+		String newString = StringUtil.getUTF8String(utf8Buf);
+		byte[] charBuf = strTestString.getBytes();
+		String newString2 = StringUtil.getUTF8String(charBuf);
+		assertEquals(newString, newString2);
+		byte[] green = new byte[] { 'g', 'r', (byte) 0xfc, 'n' };
+		String greenString = StringUtil.getUTF8String(green);
+		assertEquals("incorrectly encoded grün is also heuristically fixed", greenString, "grün");
+	}
+
+	/**
+	 * 
+	 */
 	public void testSetUTF8Bytes()
 	{
 		// String strTestString = "€";
@@ -425,6 +451,37 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertNull(StringUtil.leftStr("abc", -55));
 	}
 
+	/**
+	 * 
+	 */
+	public void testParseLong()
+	{
+		assertEquals(StringUtil.parseLong("", 0L), 0L);
+		assertEquals(StringUtil.parseLong("1234567890123456", 0L), 1234567890123456L);
+		assertEquals(StringUtil.parseLong("INF", 0L), Long.MAX_VALUE);
+		assertEquals(StringUtil.parseLong("-inf", 0L), Long.MIN_VALUE);
+		assertEquals(StringUtil.parseLong("12341234561234567834556", 0), Long.MAX_VALUE);
+		assertEquals(StringUtil.parseLong("-12341234561234567834556", 0), Long.MIN_VALUE);
+		assertEquals(StringUtil.parseLong("-1.0e44", 0), Long.MIN_VALUE);
+	}
+
+	/**
+	 * 
+	 */
+	public void testParseInt()
+	{
+		assertEquals(StringUtil.parseInt("", 0), 0);
+		assertEquals(StringUtil.parseInt("1234123456", 0), 1234123456);
+		assertEquals(StringUtil.parseInt("1234123456.0", 0), 1234123456);
+		assertEquals(StringUtil.parseInt("12341234561234567834556", 0), Integer.MAX_VALUE);
+		assertEquals(StringUtil.parseInt("-12341234561234567834556", 0), Integer.MAX_VALUE);
+		assertEquals(StringUtil.parseInt("INF", 0), Integer.MAX_VALUE);
+		assertEquals(StringUtil.parseInt("-inf", 0), Integer.MIN_VALUE);
+	}
+
+	/**
+	 * 
+	 */
 	public void testParseBoolean()
 	{
 		assertEquals(StringUtil.parseBoolean("", false), false);
@@ -433,6 +490,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.parseBoolean(" FalSe ", true), false);
 	}
 
+	/**
+	 * 
+	 */
 	public void testParseDouble()
 	{
 		String s = "INF";
@@ -441,7 +501,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		s = "-INF";
 		assertEquals(StringUtil.parseDouble(s, 0), -Double.MAX_VALUE, 0.0);
 		assertTrue(StringUtil.isNumber(s));
-		s = "123.45e3";
+		s = "123.45e3 ";
+		assertEquals(StringUtil.parseDouble(s, 0), 123450., 0.);
+		assertTrue(StringUtil.isNumber(s));
 		assertEquals(StringUtil.parseDouble(s, 0), 123450., 0.);
 		assertTrue(StringUtil.isNumber(s));
 		s = "123.45E3";
@@ -473,6 +535,22 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.find_last_not_of("abc", "_"), 2);
 	}
 
+	/**
+	 * 
+	 */
+	public void testFormatLong()
+	{
+		long l = 13;
+		while (l > 0) // breaks over top
+		{
+			l *= 7;
+			assertEquals(StringUtil.parseLong(StringUtil.formatLong(l), -1), l);
+		}
+	}
+
+	/**
+	* 
+	*/
 	public void testFormatDouble()
 	{
 		double d = 0.12345678901234;
