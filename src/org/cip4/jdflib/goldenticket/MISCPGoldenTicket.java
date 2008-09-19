@@ -185,6 +185,19 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#getICSVersions()
+	 * @return the ics versions
+	 */
+	@Override
+	public VString getICSVersions()
+	{
+		VString v = super.getICSVersions();
+		final String icsTag = "MISCPS_L" + icsLevel + "-" + theVersion.getName();
+		v.appendUnique(icsTag);
+		return v;
+	}
+
+	/**
 	 * initializes this node to a given ICS version
 	 * 
 	 * @param icsLevel the level to init to (1,2 or 3)
@@ -206,8 +219,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		if (icsLevel < 0)
 			return;
 
-		String icsTag = "MISCPS_L" + icsLevel + "-" + theVersion.getName();
-		theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
 		if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
 			theNode.setDescriptiveName("MISCPS Golden Ticket Example Job - version: " + JDFAudit.software());
 
@@ -406,7 +417,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	{
 		if (misICSLevel < 2)
 			return null;
-		
+
 		super.initDevice(reuseNode);
 
 		JDFDevice dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
@@ -426,7 +437,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 				}
 			}
 		}
-		
+
 		return dev;
 	}
 

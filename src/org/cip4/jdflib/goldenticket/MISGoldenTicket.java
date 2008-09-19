@@ -106,6 +106,20 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class MISGoldenTicket extends BaseGoldenTicket
 {
+	/**
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#getICSVersions()
+	 * @return the ics versions
+	 */
+	@Override
+	public VString getICSVersions()
+	{
+		VString v = super.getICSVersions();
+		final String icsTag = "MIS_L" + misICSLevel + "-" + theVersion.getName();
+		v.appendUnique(icsTag);
+		return v;
+
+	}
+
 	protected int misICSLevel;
 	protected int jmfICSLevel;
 	protected Map<String, VString> catMap = new HashMap<String, VString>();
@@ -119,6 +133,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	 */
 	public int duration = preStart / 2;
 	protected boolean grayBox = true;
+
 	/**
 	 * create a BaseGoldenTicket
 	 * @param icsLevel the level to init to (1,2 or 3)
@@ -144,10 +159,11 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		fillCatMaps();
 
 	}
+
 	/**
 	 * 
 	 */
-    @Override
+	@Override
 	public void assign(JDFNode node)
 	{
 
@@ -165,7 +181,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	/**
 	 * @param icsLevel
 	 */
-    @Override
+	@Override
 	protected JDFNodeInfo initNodeInfo()
 	{
 
@@ -190,7 +206,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 				statusQuParams.setJobPartID(theNode.getJobPartID(false));
 				statusQuParams.setJobDetails(EnumJobDetails.Brief);
 				final JDFSubscription subscription = q.appendSubscription();
-				subscription.setRepeatTime(600);
+				subscription.setRepeatTime(15);
 				subscription.setURL(misURL == null ? "http://MIS.printer.com/JMFSignal" : misURL);
 			}
 		}
@@ -198,8 +214,8 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	}
 
 	/**
-     * simulate execution of this node
-     * the internal node will be modified to reflect the excution
+	 * simulate execution of this node
+	 * the internal node will be modified to reflect the excution
 	 */
 	@Override
 	public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail, boolean bFirst)
@@ -210,20 +226,17 @@ public class MISGoldenTicket extends BaseGoldenTicket
 
 		super.execute(vNodeMap, bOutAvail, bFirst);
 
-
 	}
 
 	/**
 	 * initializes this node to a given ICS version
 	 * @param icsLevel the level to init to (1,2 or 3)
 	 */
-    @Override
+	@Override
 	public void init()
 	{
 		if (misICSLevel < 0)
 			return;
-		String icsTag = "MIS_L" + misICSLevel + "-" + theVersion.getName();
-		theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
 		if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
 			theNode.setDescriptiveName("MIS Golden Ticket Example Job - version: " + JDFAudit.software());
 		if (!theNode.hasAncestorAttribute(AttributeName.JOBID, null))
@@ -271,7 +284,6 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		return ci;
 	}
 
-
 	@Override
 	protected JDFDevice initDevice(JDFNode reuseNode)
 	{
@@ -300,7 +312,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	 * add the type of amount link for resource audits etc
 	 * @param link
 	 */
-    @Override
+	@Override
 	public void addAmountLink(String link)
 	{
 		if (amountLinks == null)
@@ -332,9 +344,9 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	/**
 	 * @param grayBox the grayBox to set
 	 */
-    public void setGrayBox(boolean pgrayBox)
+	public void setGrayBox(boolean pgrayBox)
 	{
-        this.grayBox = pgrayBox;
+		this.grayBox = pgrayBox;
 	}
 
 	/**

@@ -95,6 +95,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
@@ -511,7 +512,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param family
 	 * @return
 	 * @deprecated use appendMessageElement (family, null);
-	 */ 
+	 */
 	@Deprecated
 	public JDFMessage appendMessageElement(JDFMessage.EnumFamily family)
 	{
@@ -580,7 +581,7 @@ public class JDFJMF extends JDFAutoJMF
 	public JDFMessage getMessageElement(JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
 	{
 		int iLocal = i;
-		
+
 		if (iLocal < 0) // search from back
 		{
 			JDFMessage message = null;
@@ -591,10 +592,10 @@ public class JDFJMF extends JDFAutoJMF
 				iLocal = siz + iLocal;
 				message = (JDFMessage) (iLocal >= 0 ? v.get(iLocal) : null);
 			}
-			
+
 			return message;
 		}
-		
+
 		final String typString = typ == null ? null : typ.getName();
 		final String familyString = family == null ? null : family.getName();
 
@@ -611,7 +612,7 @@ public class JDFJMF extends JDFAutoJMF
 						return (JDFMessage) e;
 				}
 			}
-			
+
 			e = e.getNextSiblingElement(familyString, null);
 		}
 
@@ -836,6 +837,26 @@ public class JDFJMF extends JDFAutoJMF
 			}
 		}
 		return jmf;
+	}
+
+	/**
+	 * collect ICSVersions from all message children
+	 * also removes duplicate entries from this
+	 * 
+	 * @return VString of all ICS versions
+	 */
+	public VString collectICSVersions()
+	{
+		VElement v = getMessageVector(null, null);
+		VString vICS = getICSVersions();
+		for (int i = 0; i < v.size(); i++)
+		{
+			JDFMessage m = (JDFMessage) v.elementAt(i);
+			if (m.hasAttribute(AttributeName.ICSVERSIONS))
+				vICS.addAll(m.getICSVersions());
+		}
+		vICS.unify();
+		return vICS;
 	}
 
 	/**

@@ -84,7 +84,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * stream class that allows allows skipping a
+ * stream class that allows allows skipping until a certain tag is found
  * 
  * @author prosirai
  * 
@@ -92,9 +92,14 @@ import java.io.InputStream;
 public class SkipInputStream extends BufferedInputStream
 {
 
-	private int searchSize;
+	private final int searchSize;
 	private boolean ignoreCase = false;
 
+	/**
+	 * @param searchTag
+	 * @param stream2
+	 * @param ignorecase
+	 */
 	public SkipInputStream(String searchTag, InputStream stream2, boolean ignorecase)
 	{
 		super(stream2);
@@ -116,6 +121,7 @@ public class SkipInputStream extends BufferedInputStream
 	}
 
 	/**
+	 * @param searchTag 
 	 * @throws IOException
 	 * 
 	 */

@@ -69,6 +69,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
@@ -641,11 +642,26 @@ public class VJDFAttributeMap
 	 * 
 	 * @param key the key to set - may be either String or Enum
 	 * @param value the value to set - may be either String or Enum
+	 * @throws IllegalArgumentException if key or value have the wrong type
 	 */
 	public void put(Object key, Object value)
 	{
-		for (int i = 0; i < size(); i++)
-			elementAt(i).put(key, value);
+		String s1 = null;
+		if (key instanceof String)
+			s1 = (String) key;
+		else if (key instanceof ValuedEnum)
+			s1 = ((ValuedEnum) key).getName();
+
+		String s2 = null;
+		if (value instanceof String)
+			s2 = (String) value;
+		else if (value instanceof ValuedEnum)
+			s2 = ((ValuedEnum) value).getName();
+
+		if (s1 != null && s2 != null)
+			put(s1, s2);
+		else
+			throw new IllegalArgumentException("wrong key and value types in put: " + key + " " + value);
 	}
 
 	/**

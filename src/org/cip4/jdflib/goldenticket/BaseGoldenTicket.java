@@ -115,6 +115,7 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
@@ -166,8 +167,8 @@ public class BaseGoldenTicket
 	public String returnURL = null;
 	public boolean getNIFromParent = false;
 	/**
-     * 
-     */
+	 * 
+	 */
 	public String m_pdfFile = "file:///here/file.pdf";
 
 	/**
@@ -466,7 +467,7 @@ public class BaseGoldenTicket
 	public void schedule(VJDFAttributeMap nodesToCombine, int starthours, int durationhours)
 	{
 		VJDFAttributeMap nodesToCombineLocal = nodesToCombine;
-		
+
 		theNode.setPartStatus(nodesToCombineLocal, EnumNodeStatus.Waiting, null);
 		final JDFNodeInfo ni = theNode.getNodeInfo();
 		if (nodesToCombineLocal == null)
@@ -544,8 +545,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	protected JDFDevice initDevice(@SuppressWarnings("unused") JDFNode previousNode)
 	{
 		JDFDevice dev = (JDFDevice) theNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0);
@@ -570,8 +571,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	public void initAuditPool(JDFNode node)
 	{
 		final JDFAuditPool auditPool = node.getCreateAuditPool();
@@ -594,11 +595,11 @@ public class BaseGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	protected void initJDF()
 	{
-		String icsTag = "Base_L" + baseICSLevel + "-" + theVersion.getName();
+		String icsTag = StringUtil.setvString(getICSVersions(), " ", null, null);
 		theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
 		theNode.setVersion(theVersion);
 		theNode.setMaxVersion(theVersion);
@@ -608,6 +609,15 @@ public class BaseGoldenTicket
 
 		if (theParentNode == null && !theNode.hasAttribute(AttributeName.COMMENTURL))
 			theNode.setCommentURL(UrlUtil.StringToURL("http://www.example.com").toExternalForm());
+	}
+
+	/**
+	 * @return
+	 */
+	public VString getICSVersions()
+	{
+		final String icsTag = "Base_L" + baseICSLevel + "-" + theVersion.getName();
+		return new VString(icsTag, null);
 	}
 
 	/**
@@ -634,7 +644,7 @@ public class BaseGoldenTicket
 				}
 			}
 		}
-		
+
 		return nodeLinks;
 	}
 
@@ -968,8 +978,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	protected JDFRunList initDocumentRunList()
 	{
 		JDFRunList rl = (JDFRunList) theNode.getCreateResource(ElementName.RUNLIST, EnumUsage.Input, 0);

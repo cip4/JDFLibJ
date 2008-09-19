@@ -157,6 +157,43 @@ public class StatusCounter
 	private NodeIdentifier nodeID = null;
 	private final Vector<JDFEmployee> vEmployees = new Vector<JDFEmployee>();
 
+	private double totalCounter = -1;
+	private VString icsVersions = null;
+
+	/**
+	 * @return the total counter value
+	 */
+	public double getTotalCounter()
+	{
+		return totalCounter;
+	}
+
+	/**
+	 * @param _totalCounter
+	 */
+	public void setTotalCounter(double _totalCounter)
+	{
+		totalCounter = _totalCounter;
+	}
+
+	/**
+	 * @return the value of currentCounter
+	 */
+	public double getCurrentCounter()
+	{
+		return currentCounter;
+	}
+
+	/**
+	 * @param _currentCounter
+	 */
+	public void setCurrentCounter(double _currentCounter)
+	{
+		this.currentCounter = _currentCounter;
+	}
+
+	private double currentCounter = -1;
+
 	public int addEmployee(JDFEmployee employee)
 	{
 		JDFEmployee eOld = (JDFEmployee) ContainerUtil.getMatch(vEmployees, employee, 0);
@@ -217,10 +254,10 @@ public class StatusCounter
 	public void setActiveNode(JDFNode node, VJDFAttributeMap vPartMap, VElement vResLinks)
 	{
 		VElement vResLinksLocal = vResLinks;
-		
+
 		if (node == null)
 			setTrackWaste.clear();
-		
+
 		bCompleted = false;
 		m_Node = node;
 		m_vPartMap = vPartMap;
@@ -231,6 +268,7 @@ public class StatusCounter
 		startDate = new JDFDate();
 		nodeID = null;
 		percentComplete = 0;
+
 		if (node == null)
 		{
 			setPhase(null, null, EnumDeviceStatus.Idle, null);
@@ -246,7 +284,7 @@ public class StatusCounter
 		{
 			nodeID.setTo(node.getJobID(true), node.getJobPartID(false), m_vPartMap);
 		}
-		
+
 		if (vResLinksLocal == null && m_Node != null)
 		{
 			vResLinksLocal = m_Node.getResourceLinks(null);
@@ -261,7 +299,7 @@ public class StatusCounter
 				}
 			}
 		}
-		
+
 		setUpResLinks(vResLinksLocal);
 	}
 
@@ -291,12 +329,12 @@ public class StatusCounter
 	protected LinkAmount getLinkAmount(String refID)
 	{
 		String refIDLocal = refID;
-		
+
 		if (vLinkAmount == null || vLinkAmount.length == 0)
 		{
 			return null;
 		}
-		
+
 		if (refIDLocal == null)
 			refIDLocal = getFirstRefID();
 
@@ -307,7 +345,7 @@ public class StatusCounter
 				return vLinkAmount[i];
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -320,12 +358,12 @@ public class StatusCounter
 	public String getLinkID(String refID)
 	{
 		String refIDLocal = refID;
-		
+
 		if (vLinkAmount == null || vLinkAmount.length == 0)
 		{
 			return null;
 		}
-		
+
 		if (refIDLocal == null)
 			refIDLocal = getFirstRefID();
 
@@ -336,7 +374,7 @@ public class StatusCounter
 				return vLinkAmount[i].rl.getrRef();
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -456,6 +494,8 @@ public class StatusCounter
 		if (la == null)
 			return;
 		la.addPhase(amount, waste, false, sumTotal);
+		if (sumTotal)
+			la.updateSpeed();
 		if (amount >= 0)
 			updatePercentComplete(la);
 	}
@@ -493,24 +533,7 @@ public class StatusCounter
 			la.lastBag.totalAmount = amount;
 			updatePercentComplete(la);
 		}
-		long t = System.currentTimeMillis();
-		if (la.lastBag.lastCall == 0)
-		{
-			la.lastBag.speed = 0;
-			la.lastBag.lastCall = t;
-			la.lastBag.amountLast = 0;
-		}
-		else
-		{
-			double dt = t - la.lastBag.lastCall;
-			if (dt > 30000)
-			{
-				dt /= 3600000.;
-				la.lastBag.speed = (la.lastBag.totalAmount + la.lastBag.totalWaste - la.lastBag.amountLast) / dt;
-				la.lastBag.amountLast = la.lastBag.totalAmount + la.lastBag.totalWaste;
-				la.lastBag.lastCall = t;
-			}
-		}
+		la.updateSpeed();
 	}
 
 	/**
@@ -664,6 +687,8 @@ public class StatusCounter
 		JDFNotification notif = createBaseNotification();
 		JDFJMF jmf = createNotificationJMF();
 		JDFSignal s = jmf.appendSignal(EnumType.Notification);
+		s.copyAttribute(AttributeName.ICSVERSIONS, jmf);
+
 		notif.setEvent(eventID, eventValue, comment);
 		s.copyElement(notif, null);
 		return notif;
@@ -807,11 +832,17 @@ public class StatusCounter
 		return docJMFPhaseTime.getJMFRoot();
 	}
 
+	/**
+	 * creates the base jmf
+	 * @return the @see JDFDoc representing the JMF
+	 */
 	private JDFDoc createJMFDoc()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JMF);
 		JDFJMF jmf = d.getJMFRoot();
 		jmf.setSenderID(m_deviceID);
+		if (icsVersions != null)
+			jmf.setICSVersions(icsVersions);
 		return d;
 	}
 
@@ -832,8 +863,9 @@ public class StatusCounter
 				|| !ContainerUtil.equals(deviceStatusDetails, lastDevInfo == null ? null : lastDevInfo.getAttribute(AttributeName.STATUSDETAILS, null, null));
 		startDate = (lastDevInfo == null || lastDevInfo.getIdleStartTime() == null || bChanged) ? new JDFDate() : lastDevInfo.getIdleStartTime();
 
-		docJMFPhaseTime = new JDFDoc(ElementName.JMF);
-		JDFResponse newResponse = docJMFPhaseTime.getJMFRoot().appendResponse(EnumType.Status);
+		JDFJMF jmf = createPhaseTimeJMF();
+		JDFResponse newResponse = jmf.appendResponse(EnumType.Status);
+		newResponse.copyAttribute(AttributeName.ICSVERSIONS, jmf);
 		JDFDeviceInfo newDevInfo = newResponse.getCreateDeviceInfo(0);
 		fillDeviceInfo(deviceStatus, deviceStatusDetails, newDevInfo, null);
 		newDevInfo.setIdleStartTime(startDate);
@@ -852,6 +884,11 @@ public class StatusCounter
 		newDevInfo.setStatusDetails(deviceStatusDetails);
 		newDevInfo.setDeviceOperationMode(operationMode);
 		newDevInfo.setDeviceID(m_deviceID);
+		if (currentCounter >= 0)
+			newDevInfo.setProductionCounter(currentCounter);
+		if (totalCounter >= 0)
+			newDevInfo.setTotalProductionCounter(totalCounter);
+
 		if (la != null)
 			newDevInfo.setSpeed(la.getAmount(la.lastBag.speed));
 		for (int i = 0; i < vEmployees.size(); i++)
@@ -892,7 +929,7 @@ public class StatusCounter
 	{
 		JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
-		deviceInfo.setDeviceOperationMode(operationMode);
+		fillDeviceInfo(status, statusDetails, deviceInfo, la);
 		JDFJobPhase jp = deviceInfo.createJobPhaseFromPhaseTime(pt1);
 		jp.setJobID(m_Node.getJobID(true));
 		jp.setJobPartID(m_Node.getJobPartID(false));
@@ -931,6 +968,8 @@ public class StatusCounter
 	{
 		VElement vResResourceInfo = getVResLink(3);
 		JDFSignal sig = jmfRes.appendSignal(EnumType.Resource);
+		sig.copyAttribute(AttributeName.ICSVERSIONS, jmfRes);
+
 		JDFResourceQuParams rqp = sig.appendResourceQuParams();
 		rqp.setJDF(m_Node);
 		rqp.setExact(false);
@@ -1202,6 +1241,11 @@ public class StatusCounter
 		protected VJDFAttributeMap vResPartMap;
 		private boolean bInteger = false;
 
+		protected LinkAmount()
+		{
+			lastBag = new AmountBag();
+		}
+
 		protected LinkAmount(JDFResourceLink _rl)
 		{
 			JDFNode dump = new JDFDoc("JDF").getJDFRoot();
@@ -1335,6 +1379,31 @@ public class StatusCounter
 								rr.setResStatus(EnumResStatus.Available, true);
 						}
 					}
+				}
+			}
+		}
+
+		/**
+		 * update the speed based on new amounts
+		 */
+		void updateSpeed()
+		{
+			long t = System.currentTimeMillis();
+			if (lastBag.lastCall == 0)
+			{
+				lastBag.speed = 0;
+				lastBag.lastCall = t;
+				lastBag.amountLast = 0;
+			}
+			else
+			{
+				double dt = t - lastBag.lastCall;
+				if (dt > 30000)
+				{
+					dt /= 3600000.;
+					lastBag.speed = (lastBag.totalAmount + lastBag.totalWaste - lastBag.amountLast) / dt;
+					lastBag.amountLast = lastBag.totalAmount + lastBag.totalWaste;
+					lastBag.lastCall = t;
 				}
 			}
 		}
@@ -1745,6 +1814,22 @@ public class StatusCounter
 	public void updatePercentComplete(double percent)
 	{
 		percentComplete += percent;
+	}
+
+	/**
+	 * @param icsVersions the icsVersions to set
+	 */
+	public void setIcsVersions(VString icsVersions)
+	{
+		this.icsVersions = icsVersions;
+	}
+
+	/**
+	 * @return the icsVersions
+	 */
+	public VString getIcsVersions()
+	{
+		return icsVersions;
 	}
 
 }

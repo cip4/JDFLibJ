@@ -59,7 +59,9 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * the original file name if an element was parsed, else null
 	 */
 	public String m_OriginalFileName = null;
-	// the xml output of the schema validation
+	/**
+	 *  the xml output of the schema validation
+	 */
 	public XMLDoc m_validationResult = null;
 	/**
 	 * the mime bodypart that this document was parsed from

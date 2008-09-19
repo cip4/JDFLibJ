@@ -1295,12 +1295,12 @@ public class JDFElement extends KElement
 	public JDFElement appendHRef(String idRef, String refAttribute, String nameSpaceURI)
 	{
 		String refAttributeLocal = refAttribute;
-		
+
 		if (idRef == null || idRef.length() < 1)
 		{
 			return null;
 		}
-		
+
 		if (refAttributeLocal == null || refAttributeLocal.equals(JDFConstants.EMPTYSTRING))
 		{
 			refAttributeLocal = JDFConstants.RREF;
@@ -1920,7 +1920,7 @@ public class JDFElement extends KElement
 
 			n = next;
 		}
-		
+
 		NamedNodeMap nm = getAttributes();
 		if (nm != null)
 		{
@@ -1999,7 +1999,7 @@ public class JDFElement extends KElement
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -2265,7 +2265,7 @@ public class JDFElement extends KElement
 					v.set(i, ((JDFRefElement) v.elementAt(i)).getTarget());
 			}
 		}
-		
+
 		return v;
 	}
 
@@ -2281,15 +2281,13 @@ public class JDFElement extends KElement
 	 * @param bResolveTarget - additional control how refelements are followed
 	 * @return
 	 */
-	public synchronized VElement getChildElementVector_JDFElement(
-			String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, 
-			boolean bAnd, int maxSize, boolean bResolveTarget)
+	public synchronized VElement getChildElementVector_JDFElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
 	{
 		String nodeNameLocal = nodeName;
 		String nameSpaceURILocal = nameSpaceURI;
 		JDFAttributeMap mAttribLocal = mAttrib;
 		int maxSizeLocal = maxSize;
-		
+
 		final VElement v = new VElement();
 		if (isWildCard(nodeNameLocal))
 		{
@@ -2591,7 +2589,7 @@ public class JDFElement extends KElement
 	public String appendAnchor(String strName)
 	{
 		String strNameLocal = strName;
-		
+
 		if (hasAttribute(AttributeName.ID))
 		{
 			return this.getAttribute(AttributeName.ID, null, null);
@@ -2634,7 +2632,7 @@ public class JDFElement extends KElement
 	public void setAttributeNameTimeStamp(String attributeName, JDFDate timestamp)
 	{
 		JDFDate timestampLocal = timestamp;
-		
+
 		if (timestampLocal == null)
 		{
 			timestampLocal = new JDFDate();
@@ -2831,7 +2829,7 @@ public class JDFElement extends KElement
 		{
 			vBad.appendUnique(new VString(getMissingElements(nMax)));
 		}
-		
+
 		vBad.appendUnique(new VString(getUnknownElements(bIgnorePrivate, nMax)));
 
 		return vBad;
@@ -3035,7 +3033,7 @@ public class JDFElement extends KElement
 	{
 		if (id != 0)
 		{
-			m_lStoreID = id;
+			m_lStoreID = id % 100000;
 		}
 		final String s = "00000" + Integer.toString(m_lStoreID);
 		m_lStoreID = ++m_lStoreID % 100000;
@@ -4019,7 +4017,7 @@ public class JDFElement extends KElement
 	public JDFElement getChildElement(int n)
 	{
 		int nLocal = n;
-		
+
 		JDFElement eReturn = null;
 
 		final NodeList children = getChildNodes();
@@ -4454,7 +4452,7 @@ public class JDFElement extends KElement
 	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
 	{
 		HashSet vDoneRefsLocal = vDoneRefs;
-		
+
 		if (vDoneRefsLocal.contains(this))
 		{
 			return vDoneRefsLocal;
@@ -4619,7 +4617,7 @@ public class JDFElement extends KElement
 		{
 			return "Waiting";
 		}
-		
+
 		if (attName.equals("Status") && (e instanceof JDFResource))
 		{
 			return "Unavailable";
@@ -4685,7 +4683,7 @@ public class JDFElement extends KElement
 					return "0 0";
 			}
 		}
-		
+
 		return "New Value";
 	}
 

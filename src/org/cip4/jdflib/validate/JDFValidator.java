@@ -790,14 +790,13 @@ public class JDFValidator
 		}
 	}
 
-	private void printAttributeList(int indent, KElement testElement, JDFElement part, 
-			boolean printMissElms, VString attributeVector, String whatType, String message)
+	private void printAttributeList(int indent, KElement testElement, JDFElement part, boolean printMissElms, VString attributeVector, String whatType, String message)
 	{
 		String messageLocal = message;
-		
+
 		if (attributeVector == null)
 			return;
-		
+
 		attributeVector.unify();
 		String originalMessage = messageLocal;
 		int j;
@@ -880,7 +879,7 @@ public class JDFValidator
 						messageLocal += " Last valid Version: " + v.getName();
 					}
 				}
-				
+
 				setErrorType(e, whatType + "Attribute", invalidAt + " " + messageLocal);
 				e.setAttribute("NodeName", invalidAt);
 				e.setAttribute("XPath", part.buildXPath(null, 1) + "/@" + invalidAt);
@@ -888,7 +887,7 @@ public class JDFValidator
 
 			}
 		}
-		
+
 		if (attributeVector.size() > 0)
 		{
 			testElement.setAttribute(whatType + "Attributes", StringUtil.setvString(attributeVector, JDFConstants.BLANK, null, null));
@@ -1171,7 +1170,7 @@ public class JDFValidator
 	private boolean checkType(final JDFNode jdfNode, int indent, KElement testElement, boolean isValid)
 	{
 		boolean isValidLocal = isValid;
-		
+
 		String errMessage = indent(indent) + "!!! InValid Element: " + jdfNode.buildXPath(null, 1) + " "
 				+ jdfNode.getID() + " !!! ";
 		if (jdfNode.hasAttribute(AttributeName.TYPE))
@@ -1207,12 +1206,12 @@ public class JDFValidator
 								{
 									continue;
 								}
-								
+
 								if (n++ > 0)
 								{
 									msg += "; ";
 								}
-								
+
 								msg += t;
 							}
 						}
@@ -1238,7 +1237,7 @@ public class JDFValidator
 				e.setAttribute("NodeName", "Type");
 				e.setAttribute("Value", typeString);
 			}
-			
+
 			if (typeString.equals(JDFConstants.PRODUCT))
 			{
 				JDFNode n = jdfNode.getParentJDF();
@@ -1259,7 +1258,7 @@ public class JDFValidator
 				}
 			}
 		}
-		
+
 		return isValidLocal;
 	}
 
@@ -1575,7 +1574,7 @@ public class JDFValidator
 											}
 										}
 									}
-									
+
 									if (!foundMissing)
 									{
 										setErrorType(testElement, "UnknownResourceLink", "Incorrect ResourceLink @Usage or @ProcessUsage for Process "
@@ -1593,11 +1592,11 @@ public class JDFValidator
 							}
 						}
 					}
-					
+
 					sysOut.println();
 				}
 			}
-			
+
 			vBadResourceLinks.removeElement(rl);
 		}
 
@@ -1988,16 +1987,25 @@ public class JDFValidator
 		try
 		{
 			ZipFile zip = new ZipFile(argFile);
-			Enumeration zipEnum = zip.entries();
+			Enumeration<? extends ZipEntry> zipEnum = zip.entries();
+			int n = 0;
 			while (zipEnum.hasMoreElements())
 			{
-				ZipEntry ze = (ZipEntry) zipEnum.nextElement();
+				ZipEntry ze = zipEnum.nextElement();
+
 				String nam = ze.getName();
 				// TODO handle non-ascii
 				if (!ze.isDirectory())
 				{
+					if (!bQuiet)
+					{
+						System.out.println(++n + " " + nam);
+					}
 					InputStream inStream = zip.getInputStream(ze);
 					processSingleStream(inStream, nam, null);
+					if (inStream != null)
+						inStream.close();
+
 					bTryKeep = bTryKeep && bTryFormats;
 				}
 			}
@@ -2510,7 +2518,7 @@ public class JDFValidator
 	private long evalDevCaps(KElement testFileRoot, long lDevCapsTime, JDFElement root)
 	{
 		long lDevCapsTimeLocal = lDevCapsTime;
-		
+
 		long lStartTime_TestDevCap;
 		long lEndTime_TestDevCap;
 		if (devCapFile != null)
@@ -2529,14 +2537,14 @@ public class JDFValidator
 				devCapTest.setAttribute("DeviceCapTestTime", lDevCapsTimeLocal + " ms");
 			}
 		}
-		
+
 		return lDevCapsTimeLocal;
 	}
 
 	private void printMultipleIDs(String url, String xmlFile, KElement root, KElement outRoot)
 	{
 		KElement outRootLocal = outRoot;
-		
+
 		if (bMultiID)
 		{
 			if (bQuiet)
@@ -2547,7 +2555,7 @@ public class JDFValidator
 				{
 					sysOut.println("           " + url);
 				}
-				
+
 				sysOut.println("**********************************************************\n");
 			}
 
@@ -2569,7 +2577,7 @@ public class JDFValidator
 					{
 						v.add(root);
 					}
-					
+
 					for (int ii = 0; ii < v.size(); ii++)
 					{
 						KElement e = v.item(ii);

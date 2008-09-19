@@ -225,7 +225,7 @@ public class StringUtil
 	public static String sprintf(String format, String template)
 	{
 		String templateLocal = template;
-		
+
 		if (templateLocal == null || format == null)
 			return null;
 		templateLocal = StringUtil.replaceString(templateLocal, "\\,", "__comma__€ß-eher selten"); // quick
@@ -272,10 +272,10 @@ public class StringUtil
 	public static String sprintf(String format, Object[] objects)
 	{
 		String formatLocal = format;
-		
+
 		if (objects == null || formatLocal == null)
 			return null;
-		
+
 		formatLocal = StringUtil.replaceString(formatLocal, "%%", "__percent__€ß-eher selten"); // quick
 		// hack
 		// ;
@@ -304,7 +304,7 @@ public class StringUtil
 			else if (ob instanceof ValuedEnum)
 				s += f.tostr(((ValuedEnum) ob).getName());
 		}
-		
+
 		return replaceString(s, "__percent__€ß-eher selten", "%"); // undo quick hack ;-)
 	}
 
@@ -402,20 +402,20 @@ public class StringUtil
 	public static String leftStr(String strWork, int n)
 	{
 		int nLocal = n;
-		
+
 		if (strWork == null)
 			return null;
-		
+
 		if (nLocal < 0)
 		{
 			nLocal = strWork.length() + nLocal;
 		}
-		
+
 		if (nLocal <= 0)
 		{
 			return null;
 		}
-		
+
 		return strWork.substring(0, nLocal <= strWork.length() ? nLocal : strWork.length());
 	}
 
@@ -431,10 +431,10 @@ public class StringUtil
 	public static String rightStr(String strWork, int n)
 	{
 		int nLocal = n;
-		
+
 		if (strWork == null)
 			return null;
-		
+
 		if (nLocal < 0)
 		{
 			nLocal = strWork.length() + nLocal;
@@ -444,12 +444,12 @@ public class StringUtil
 		{
 			return null;
 		}
-		
+
 		if (nLocal > strWork.length())
 		{
 			return strWork;
 		}
-		
+
 		return strWork.substring(strWork.length() - nLocal);
 	}
 
@@ -467,7 +467,7 @@ public class StringUtil
 	public static VString tokenize(String strWork, String delim, boolean delim2token)
 	{
 		String delimLocal = delim;
-		
+
 		delimLocal = delimLocal == null ? JDFConstants.BLANK : delimLocal;
 		VString v = new VString();
 		if (strWork != null)
@@ -563,12 +563,12 @@ public class StringUtil
 	public static String token(String strWork, int index, String delim)
 	{
 		int indexLocal = index;
-		
+
 		String delimLocal = delim;
-		
+
 		if (strWork == null)
 			return null; // null bleibt null
-		
+
 		if (delimLocal == null)
 			delimLocal = JDFConstants.BLANK;
 
@@ -584,13 +584,13 @@ public class StringUtil
 			indexLocal = v.size() + indexLocal;
 			if (indexLocal < 0)
 				return null;
-			
+
 			if (indexLocal < v.size())
 				return v.stringAt(indexLocal);
-			
+
 			return null;
 		}
-		
+
 		// index >0 don't need to calculate # of tokens
 		StringTokenizer st = new StringTokenizer(strWork, delimLocal, false);
 		int n = 0;
@@ -601,7 +601,7 @@ public class StringUtil
 			if (n++ == indexLocal)
 				return s;
 		}
-		
+
 		return null;
 	}
 
@@ -619,7 +619,7 @@ public class StringUtil
 	public static String replaceCharSet(String strWork, String charSet, String replaceString, int offset)
 	{
 		String strWorkLocal = strWork;
-		
+
 		if (charSet == null)
 			return strWorkLocal;
 		for (int i = 0; i < charSet.length(); i++)
@@ -680,10 +680,10 @@ public class StringUtil
 	public static String replaceString(String strWork, String toReplace, String replaceBy)
 	{
 		String strWorkLocal = strWork;
-		
+
 		if (strWorkLocal == null)
 			return strWorkLocal;
-		
+
 		int lenIn = strWorkLocal.length();
 		int indexOf = strWorkLocal.indexOf(toReplace);
 		if (indexOf < 0)
@@ -700,22 +700,22 @@ public class StringUtil
 			indexOf = strWorkLocal.indexOf(toReplace);
 		}
 		while (indexOf >= 0);
-		
+
 		b.append(strWorkLocal);
 
 		final String outString = b.toString();
 		int lenOut = outString.length();
-		
+
 		return lenOut == lenIn ? outString : replaceString(outString, toReplace, replaceBy);
 	}
 
 	public static String xmlNameEscape(String strWork)
 	{
 		String strWorkLocal = strWork;
-		
+
 		strWorkLocal = replaceChar(strWorkLocal, '*', "_star_", 0);
 		strWorkLocal = replaceChar(strWorkLocal, '&', "_and_", 0);
-		
+
 		return strWorkLocal;
 	}
 
@@ -774,13 +774,13 @@ public class StringUtil
 	public static String newExtension(String strWork, String newExt)
 	{
 		String newExtLocal = newExt;
-		
+
 		if (newExtLocal == null)
 			return StringUtil.prefix(strWork);
 
 		if (!newExtLocal.startsWith("."))
 			newExtLocal = "." + newExtLocal;
-		
+
 		return StringUtil.prefix(strWork) + newExtLocal;
 	}
 
@@ -996,7 +996,7 @@ public class StringUtil
 	public static String wipeInvalidXML10Chars(String strText, String replace)
 	{
 		String strTextLocal = strText;
-		
+
 		char[] chars = strTextLocal.toCharArray();
 
 		boolean found = false;
@@ -1339,6 +1339,8 @@ public class StringUtil
 
 	/**
 	 * get the unicode string representing the UTF8 representation of the byte buffer
+	 * fall back on default encoding in case someone accidentally sends in non utf-8
+	 * @param utf8 the utf-8 encoded byte array
 	 * 
 	 * @return String - the unicode string representation of the utf8 bytes assigned to this, <code>null</code> if an
 	 *         error occurrred
@@ -1349,7 +1351,10 @@ public class StringUtil
 		{
 			try
 			{
-				return new String(utf8, "UTF-8");
+				String s = new String(utf8, "UTF-8");
+				if (s.indexOf(0xfffd) >= 0) // encoding snafu - try default encoding
+					s = new String(utf8);
+				return s;
 			}
 			catch (UnsupportedEncodingException e)
 			{
@@ -1426,7 +1431,7 @@ public class StringUtil
 	 * returns a formatted integer, replaces string constants with according int constants
 	 * 
 	 * @param i the integer to format
-	 * @return the formatted string that represents i TBD handle exp format
+	 * @return the formatted string that represents i 
 	 */
 	public static String formatInteger(int i)
 	{
@@ -1437,6 +1442,31 @@ public class StringUtil
 			s = JDFConstants.POSINF;
 		}
 		else if (i == Integer.MIN_VALUE)
+		{
+			s = JDFConstants.NEGINF;
+		}
+		else
+		{
+			s = String.valueOf(i);
+		}
+		return s;
+	}
+
+	/**
+	 * returns a formatted integer, replaces string constants with according int constants
+	 * 
+	 * @param i the integer to format
+	 * @return the formatted string that represents i 
+	 */
+	public static String formatLong(long i)
+	{
+		String s = null;
+
+		if (i == Long.MAX_VALUE)
+		{
+			s = JDFConstants.POSINF;
+		}
+		else if (i == Long.MIN_VALUE)
 		{
 			s = JDFConstants.NEGINF;
 		}
@@ -1506,12 +1536,11 @@ public class StringUtil
 	 * 
 	 * @return the string where all illegal sequences have been replaced by their escaped representation
 	 */
-	public static String escape(String strToEscape, String strCharSet, String strEscapeChar, 
-			int iRadix, int iEscapeLen, int iEscapeBelow, int iEscapeAbove)
+	public static String escape(String strToEscape, String strCharSet, String strEscapeChar, int iRadix, int iEscapeLen, int iEscapeBelow, int iEscapeAbove)
 	{
 		int iEscapeAboveLocal = iEscapeAbove;
 		String strEscapeCharLocal = strEscapeChar;
-		
+
 		if (strEscapeCharLocal == null)
 		{
 			strEscapeCharLocal = "\\";
@@ -1542,7 +1571,7 @@ public class StringUtil
 					escaped[posE] = escapeCharbytes[ee];
 					posE++;
 				}
-				
+
 				if (iRadix > 0)
 				{ // radix is a flag to convert to octal, hex etc.
 					StringBuffer buf = new StringBuffer();
@@ -1610,9 +1639,9 @@ public class StringUtil
 				posE++;
 			}
 		}
-		
+
 		String escapedString = new String(escaped, 0, posE);
-		
+
 		return escapedString;
 	}
 
@@ -1691,28 +1720,26 @@ public class StringUtil
 	 */
 	public static double parseDouble(String s, double def)
 	{
-		String sLocal = s;
-		
-		if (KElement.isWildCard(sLocal))
+		if (KElement.isWildCard(s))
 			return def;
-		
+
 		double d = def;
-		sLocal = sLocal.trim();
-		if (sLocal.equals(JDFConstants.POSINF))
+		s = s.trim();
+		if (s.equals(JDFConstants.POSINF))
 			return Double.MAX_VALUE;
-		
-		if (sLocal.equals(JDFConstants.NEGINF))
+
+		if (s.equals(JDFConstants.NEGINF))
 			return -Double.MAX_VALUE;
-		
+
 		try
 		{
-			d = Double.parseDouble(sLocal);
+			d = Double.parseDouble(s);
 		}
 		catch (NumberFormatException nfe)
 		{
 			d = def;
 		}
-		
+
 		return d;
 	}
 
@@ -1727,22 +1754,22 @@ public class StringUtil
 	public static boolean parseBoolean(String s, boolean def)
 	{
 		String sLocal = s;
-		
+
 		if (KElement.isWildCard(sLocal))
 			return def;
-		
+
 		sLocal = sLocal.trim().toLowerCase();
 		if ("false".equals(sLocal))
 			return false;
-		
+
 		if ("true".equals(sLocal))
 			return true;
-		
+
 		return def;
 	}
 
 	/**
-	 * parses a string to double and catches any format exception
+	 * parses a string to integer and catches any format exception
 	 * 
 	 * @param s the string to parse
 	 * @param def the default to return in case of error
@@ -1751,28 +1778,84 @@ public class StringUtil
 	 */
 	public static int parseInt(String s, int def)
 	{
-		String sLocal = s;
-		
-		if (KElement.isWildCard(sLocal))
+
+		if (KElement.isWildCard(s))
 			return def;
-		
+
 		int i = def;
-		sLocal = sLocal.trim();
-		if (sLocal.equals(JDFConstants.POSINF))
+		s = s.trim();
+		if (s.equalsIgnoreCase(JDFConstants.POSINF))
 			return Integer.MAX_VALUE;
-		
-		if (sLocal.equals(JDFConstants.NEGINF))
+
+		if (s.equalsIgnoreCase(JDFConstants.NEGINF))
 			return Integer.MIN_VALUE;
 
 		try
 		{
-			i = Integer.parseInt(sLocal);
+			i = Integer.parseInt(s);
 		}
 		catch (NumberFormatException nfe)
 		{
-			i = def;
+			try
+			{
+				double d = Double.parseDouble(s);
+				if (d > Integer.MAX_VALUE)
+					i = Integer.MAX_VALUE;
+				else if (d < Integer.MIN_VALUE)
+					i = Integer.MIN_VALUE;
+				i = (int) (d + 0.4999);
+			}
+			catch (NumberFormatException nfe2)
+			{
+				i = def;
+			}
 		}
-		
+
+		return i;
+	}
+
+	/**
+	 * parses a string to long and catches any format exception
+	 * 
+	 * @param s the string to parse
+	 * @param def the default to return in case of error
+	 * @return the parsed double of s
+	 * @since 080404 handles "" gracefully
+	 */
+	public static long parseLong(String s, long def)
+	{
+		if (KElement.isWildCard(s))
+			return def;
+
+		long i = def;
+		s = s.trim();
+		if (s.equalsIgnoreCase(JDFConstants.POSINF))
+			return Long.MAX_VALUE;
+
+		if (s.equalsIgnoreCase(JDFConstants.NEGINF))
+			return Long.MIN_VALUE;
+
+		try
+		{
+			i = Long.parseLong(s);
+		}
+		catch (NumberFormatException nfe)
+		{
+			try
+			{
+				double d = Double.parseDouble(s);
+				if (d > Long.MAX_VALUE)
+					i = Long.MAX_VALUE;
+				else if (d < Long.MIN_VALUE)
+					i = Long.MIN_VALUE;
+				i = (long) (d + 0.4999);
+			}
+			catch (NumberFormatException nfe2)
+			{
+				i = def;
+			}
+		}
+
 		return i;
 	}
 
@@ -1835,7 +1918,7 @@ public class StringUtil
 	{
 		if (dataType == null || dataType.equals(AttributeInfo.EnumAttributeType.Any))
 			return bigAtt.equals(smallAtt);
-		
+
 		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS))
 				|| (dataType.equals(AttributeInfo.EnumAttributeType.enumerations))
 				|| (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
@@ -1849,7 +1932,7 @@ public class StringUtil
 					return false;
 				}
 			}
-			
+
 			return true;
 		}
 
@@ -2016,7 +2099,7 @@ public class StringUtil
 				// do nothing
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -2031,14 +2114,14 @@ public class StringUtil
 	public static boolean matches(String str, String regExp)
 	{
 		String regExpLocal = regExp;
-		
+
 		if (str == null)
 			return false;
-		
+
 		// the null expression is assumed to match anything
 		if ((regExpLocal == null) || (regExpLocal.length() == 0))
 			return true;
-		
+
 		// this is a really common mistake
 		if (regExpLocal.equals("*"))
 			regExpLocal = ".*";
@@ -2052,7 +2135,7 @@ public class StringUtil
 		{
 			b = false;
 		}
-		
+
 		return b;
 	}
 
@@ -2196,24 +2279,24 @@ public class StringUtil
 	{
 		String strLocal = str;
 		String prefixLocal = prefix;
-		
+
 		if (strLocal == null)
 			return null;
-		
+
 		if (prefixLocal == null)
 			return strLocal;
-		
+
 		if (bIgnoreCase)
 		{
 			strLocal = strLocal.toLowerCase();
 			prefixLocal = prefixLocal.toLowerCase();
 		}
-		
+
 		if (strLocal.startsWith(prefixLocal))
 		{
 			strLocal = StringUtil.rightStr(strLocal, -prefixLocal.length());
 		}
-		
+
 		return strLocal;
 	}
 

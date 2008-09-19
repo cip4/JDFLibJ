@@ -544,7 +544,7 @@ public class KElement extends ElementNSImpl
 		public static EnumValidationLevel setNoWarning(EnumValidationLevel level, boolean noWarning)
 		{
 			EnumValidationLevel levelLocal = level;
-			
+
 			if (noWarning && !isNoWarn(levelLocal))
 				levelLocal = isRequired(levelLocal) ? EnumValidationLevel.NoWarnComplete : EnumValidationLevel.NoWarnIncomplete;
 
@@ -563,7 +563,7 @@ public class KElement extends ElementNSImpl
 		public static EnumValidationLevel incompleteLevel(EnumValidationLevel level)
 		{
 			EnumValidationLevel levelLocal = level;
-			
+
 			if (EnumValidationLevel.Complete.equals(levelLocal))
 			{
 				levelLocal = EnumValidationLevel.Incomplete;
@@ -650,7 +650,7 @@ public class KElement extends ElementNSImpl
 	public Attr getDOMAttr(String attrib, String nameSpaceURI, boolean bInherit)
 	{
 		String nameSpaceURILocal = nameSpaceURI;
-		
+
 		Attr a = null;
 		if ((nameSpaceURILocal == null) || nameSpaceURILocal.equals(JDFConstants.EMPTYSTRING))
 		{
@@ -678,7 +678,7 @@ public class KElement extends ElementNSImpl
 				nameSpaceURILocal = getNamespaceURIFromPrefix(attribPrefix);
 			}
 		}
-		
+
 		// either we have an explicit ns or we haven't found anything in dom
 		// level 1 - assume the namespace of this
 		if ((a == null) && (nameSpaceURILocal != null))
@@ -692,7 +692,7 @@ public class KElement extends ElementNSImpl
 			}
 
 		}
-		
+
 		if (a == null && bInherit)
 		{
 			KElement parent = getParentNode_KElement();
@@ -701,7 +701,7 @@ public class KElement extends ElementNSImpl
 				return parent.getDOMAttr(attrib, nameSpaceURILocal, bInherit);
 			}
 		}
-		
+
 		return a;
 	}
 
@@ -724,7 +724,7 @@ public class KElement extends ElementNSImpl
 	public void setAttribute(String key, String value, String nameSpaceURI)
 	{
 		String nameSpaceURILocal = nameSpaceURI;
-		
+
 		boolean bDirty = false;
 		if (value == null)
 		{
@@ -1156,7 +1156,7 @@ public class KElement extends ElementNSImpl
 	public void appendAttribute(String key, String value, String nameSpaceURI, String sep, boolean bUnique)
 	{
 		String sepLocal = sep;
-		
+
 		if (value == null)
 		{
 			return;
@@ -1502,11 +1502,11 @@ public class KElement extends ElementNSImpl
 					il2.add(AttributeName.CLASS);
 					il2.appendUnique(r.getPartIDKeys());
 				}
-				
+
 				setAttributes(parent, il2);
 			}
 		}
-		
+
 		int siz = 0;
 		final NamedNodeMap nm = kElem.getAttributes();
 		if (nm != null)
@@ -1521,7 +1521,7 @@ public class KElement extends ElementNSImpl
 				}
 			}
 		}
-		
+
 		return siz;
 	}
 
@@ -1719,9 +1719,7 @@ public class KElement extends ElementNSImpl
 	 * 
 	 * @default getChildElementVector(null, null, null, true, 0, true)
 	 */
-	public VElement getChildElementVector(String nodeName, String nameSpaceURI, 
-			JDFAttributeMap mAttrib, boolean bAnd, int maxSize, 
-			@SuppressWarnings("unused") boolean bResolveTarget)
+	public VElement getChildElementVector(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, @SuppressWarnings("unused") boolean bResolveTarget)
 	{
 		return getChildElementVector_KElement(nodeName, nameSpaceURI, mAttrib, bAnd, maxSize);
 	}
@@ -1760,24 +1758,23 @@ public class KElement extends ElementNSImpl
 	 * 
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public synchronized VElement getChildElementVector_KElement(
-			String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize)
+	public synchronized VElement getChildElementVector_KElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize)
 	{
-		String nodeNameLocal 			= nodeName;
-		String nameSpaceURILocal 		= nameSpaceURI;
-		JDFAttributeMap mAttribLocal	= mAttrib;
-		
+		String nodeNameLocal = nodeName;
+		String nameSpaceURILocal = nameSpaceURI;
+		JDFAttributeMap mAttribLocal = mAttrib;
+
 		final VElement v = new VElement();
 		if (isWildCard(nodeNameLocal))
 		{
 			nodeNameLocal = null;
 		}
-		
+
 		if (isWildCard(nameSpaceURILocal))
 		{
 			nameSpaceURILocal = null;
 		}
-		
+
 		if (mAttribLocal != null && mAttribLocal.isEmpty())
 		{
 			mAttribLocal = null;
@@ -1803,10 +1800,10 @@ public class KElement extends ElementNSImpl
 					}
 				}
 			}
-			
+
 			kElem = kElem.getNextSiblingElement();
 		}
-		
+
 		return v;
 	}
 
@@ -2079,7 +2076,7 @@ public class KElement extends ElementNSImpl
 	public VElement getElementsByTagName_KElement(String s, String nameSpaceURI)
 	{
 		String sLocal = s;
-		
+
 		VElement vEle = null;
 		if (sLocal == null)
 			sLocal = JDFConstants.STAR;
@@ -2278,7 +2275,7 @@ public class KElement extends ElementNSImpl
 	public KElement getElement_KElement(String nodeName, String nameSpaceURI, int iSkip)
 	{
 		int iSkipLocal = iSkip;
-		
+
 		KElement kElem = getFirstChildElement();
 		int i = 0;
 		if (iSkipLocal < 0)
@@ -2836,7 +2833,7 @@ public class KElement extends ElementNSImpl
 	public KElement getTarget_KElement(String id, String attrib)
 	{
 		String attribLocal = attrib;
-		
+
 		if (id == null || id.equals(JDFConstants.EMPTYSTRING))
 		{
 			return null;
@@ -2895,7 +2892,7 @@ public class KElement extends ElementNSImpl
 				}
 			}
 		}
-		
+
 		return kRet;
 	}
 
@@ -3107,10 +3104,10 @@ public class KElement extends ElementNSImpl
 	public VString getUnknownAttributeVector(Vector vKnownKeys, Vector vInNameSpace, int nMax)
 	{
 		int nMaxLocal = nMax;
-		
+
 		if (nMaxLocal < 0)
 			nMaxLocal = Integer.MAX_VALUE;
-		
+
 		final VString vAtts = getAttributeVector_KElement();
 		final VString vUnknown = new VString();
 		if (vKnownKeys.contains("*"))
@@ -3165,7 +3162,7 @@ public class KElement extends ElementNSImpl
 	{
 		final VString v1 = knownElements();
 		final VString v2 = StringUtil.tokenize(" :JDF", JDFConstants.COLON, false);
-		
+
 		return getUnknownElementVector(v1, bIgnorePrivate ? v2 : new Vector(), nMax);
 	}
 
@@ -3301,7 +3298,7 @@ public class KElement extends ElementNSImpl
 	public boolean isValid(EnumValidationLevel level)
 	{
 		EnumValidationLevel levelLocal = level;
-		
+
 		if (levelLocal == null)
 		{
 			levelLocal = EnumValidationLevel.Complete;// makes compiler happy
@@ -3488,7 +3485,7 @@ public class KElement extends ElementNSImpl
 	public int removeFromAttribute(String key, String value, String nameSpaceURI, String sep, int nMax)
 	{
 		int nMaxLocal = nMax;
-		
+
 		final String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
 		if (strAttrValue == null || strAttrValue.indexOf(value) < 0)
 			return 0;
@@ -3613,7 +3610,7 @@ public class KElement extends ElementNSImpl
 				}
 			}
 		}
-		
+
 		if (bRecurse)
 		{
 			KElement e = getFirstChildElement();
@@ -3650,7 +3647,7 @@ public class KElement extends ElementNSImpl
 				}
 			}
 		}
-		
+
 		if (bRecurse)
 		{
 			KElement e = getFirstChildElement();
@@ -3775,7 +3772,7 @@ public class KElement extends ElementNSImpl
 	{
 		if (nsURI == null)
 			return;
-		
+
 		KElement n = getFirstChildElement();
 		while (n != null)
 		{
@@ -3793,7 +3790,7 @@ public class KElement extends ElementNSImpl
 
 			n = next;
 		}
-		
+
 		NamedNodeMap nm = getAttributes();
 		if (nm != null)
 		{
@@ -3988,7 +3985,7 @@ public class KElement extends ElementNSImpl
 	public KElement replaceElement(KElement src)
 	{
 		KElement srcLocal = src;
-		
+
 		if (srcLocal == this)
 		{
 			return this; // nop
@@ -4074,14 +4071,8 @@ public class KElement extends ElementNSImpl
 	 */
 	public long getLongAttribute(String attrib, String nameSpaceURI, long def)
 	{
-		long lRet = def;
 		final String s = getAttribute(attrib, nameSpaceURI, null);
-
-		if (s != null)
-		{
-			lRet = Long.parseLong(s);
-		}
-		return lRet;
+		return StringUtil.parseLong(s, def);
 	}
 
 	/**
@@ -4215,7 +4206,7 @@ public class KElement extends ElementNSImpl
 	public void appendXMLComment(String commentText, KElement beforeChild)
 	{
 		String commentTextLocal = commentText;
-		
+
 		commentTextLocal = StringUtil.replaceString(commentTextLocal, "--", "__");
 		final Comment newChild = getOwnerDocument().createComment(commentTextLocal);
 		insertBefore(newChild, beforeChild);
@@ -4232,7 +4223,7 @@ public class KElement extends ElementNSImpl
 	public void setXMLComment(String commentText)
 	{
 		String commentTextLocal = commentText;
-		
+
 		KElement e = getParentNode_KElement();
 		if (e == null)
 		{
@@ -4386,13 +4377,12 @@ public class KElement extends ElementNSImpl
 	 * 
 	 * @return KElement the element which matches the above conditions
 	 */
-	public KElement getChildWithAttribute(
-			String nodeName, String attName, String nameSpaceURI, String attVal, int index, boolean bDirect)
+	public KElement getChildWithAttribute(String nodeName, String attName, String nameSpaceURI, String attVal, int index, boolean bDirect)
 	{
 		String nodeNameLocal = nodeName;
 		String nameSpaceURILocal = nameSpaceURI;
 		String attValLocal = attVal;
-		
+
 		KElement kRet = null;
 		XMLDocUserData userData = null;
 
@@ -4789,7 +4779,7 @@ public class KElement extends ElementNSImpl
 	public VElement getChildrenFromList(VString nodeNames, JDFAttributeMap map, boolean bDirect, VElement v)
 	{
 		VElement vLocal = v;
-		
+
 		if (vLocal == null)
 		{
 			vLocal = new VElement();
@@ -5190,7 +5180,7 @@ public class KElement extends ElementNSImpl
 	private VElement getXPathElementVectorInternal(String path, int maxSize, boolean bLocal)
 	{
 		String pathLocal = path;
-		
+
 		if (pathLocal == null)
 		{
 			return null;
@@ -5205,14 +5195,14 @@ public class KElement extends ElementNSImpl
 				vRet = getChildrenByTagName(null, null, null, false, true, 0);
 			return vRet;
 		}
-		
+
 		if (pathLocal.startsWith(JDFConstants.SLASH))
 		{
 			if (pathLocal.startsWith("//"))
 			{
 				return getDocRoot().getXPathElementVectorInternal(pathLocal.substring(2), maxSize, false);
 			}
-			
+
 			KElement r = getDocRoot();
 			final String rootNodeName = r.getNodeName();
 			int nextPos = pathLocal.indexOf("/", 2);
@@ -5222,7 +5212,7 @@ public class KElement extends ElementNSImpl
 			{
 				return r.getXPathElementVectorInternal(nextPath, maxSize, true);
 			}
-			
+
 			throw new IllegalArgumentException("Invalid root node name");
 
 		}
@@ -5232,7 +5222,7 @@ public class KElement extends ElementNSImpl
 			{
 				return getXPathElementVectorInternal(pathLocal.substring(JDFConstants.DOTSLASH.length()), maxSize, true);
 			}
-			
+
 			if (pathLocal.startsWith(JDFConstants.DOTDOTSLASH))
 			{
 				final KElement parent = getParentNode_KElement();
@@ -5240,7 +5230,7 @@ public class KElement extends ElementNSImpl
 				{
 					return null;
 				}
-				
+
 				return parent.getXPathElementVectorInternal(pathLocal.substring(JDFConstants.DOTDOTSLASH.length()), maxSize, true);
 			}
 			else if (pathLocal.equals(JDFConstants.DOT))
@@ -5255,7 +5245,7 @@ public class KElement extends ElementNSImpl
 				{
 					return null;
 				}
-				
+
 				vRet.add(parent);
 				return vRet;
 			}
@@ -5280,7 +5270,7 @@ public class KElement extends ElementNSImpl
 			iSkip = StringUtil.parseInt(n, 0);
 			if (iSkip <= 0)
 				throw new IllegalArgumentException("getXPathVector: bad index:" + iSkip);
-			
+
 			iSkip--;
 			bExplicitSkip = true;
 			newPath = pathLocal.substring(0, posB0) + pathLocal.substring(posB1 + 1);
@@ -5309,12 +5299,12 @@ public class KElement extends ElementNSImpl
 				if (getLocalName().equals(elmName) || isWildCard(newPath))
 					ve.add(this);
 			}
-			
+
 			if (ve == null || ve.size() <= iSkip)
 			{
 				return null;
 			}
-			
+
 			int iFirst = bExplicitSkip ? iSkip : 0;
 			int iLast = bExplicitSkip ? iSkip + 1 : ve.size();
 			for (int i = iFirst; i < iLast; i++) // loop in case multiple
@@ -5327,13 +5317,13 @@ public class KElement extends ElementNSImpl
 				{
 					eRet = ee.getXPathElementVectorInternal(newPath.substring(pos + 1), maxSize, true);
 				}
-				
+
 				if (eRet != null)
 				{
 					vRet.addAll(eRet);
 				}
 			}
-			
+
 			return vRet.size() > 0 ? vRet : null;
 		}
 		// last element
@@ -5344,11 +5334,11 @@ public class KElement extends ElementNSImpl
 			{
 				return null;
 			}
-			
+
 			vRet.add(e);
 			return vRet;
 		}
-		
+
 		if (bLocal)
 		{
 			vRet = getChildElementVector_KElement(newPath, null, map, true, 0);
@@ -5359,7 +5349,7 @@ public class KElement extends ElementNSImpl
 			if (getLocalName().equals(newPath) || isWildCard(newPath))
 				vRet.add(this);
 		}
-		
+
 		return vRet;
 	}
 
@@ -5775,7 +5765,7 @@ public class KElement extends ElementNSImpl
 	public void copyAttribute(String attrib, KElement src, String srcAttrib, String nameSpaceURI, String srcNameSpaceURI)
 	{
 		String attribLocal = attrib;
-		
+
 		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFConstants.EMPTYSTRING) ? attribLocal : srcAttrib;
 		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
 		if (strNameSpace != null && KElement.xmlnsPrefix(attribLocal) == null)
@@ -5788,7 +5778,7 @@ public class KElement extends ElementNSImpl
 					attribLocal = pre + ":" + attribLocal;
 			}
 		}
-		
+
 		setAttribute(attribLocal, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
 	}
 
@@ -5820,10 +5810,10 @@ public class KElement extends ElementNSImpl
 	{
 		KElement srcLocal = src;
 		String nameSpaceURILocal = nameSpaceURI;
-		
+
 		if (srcLocal == null)
 			srcLocal = this;
-		
+
 		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFConstants.EMPTYSTRING) ? attrib : srcAttrib;
 		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURILocal : srcNameSpaceURI;
 		if (xmlnsPrefix(attrib) != null && nameSpaceURILocal == null)
@@ -5838,13 +5828,13 @@ public class KElement extends ElementNSImpl
 				}
 			}
 		}
-		
+
 		final String attribute = srcLocal.getAttribute(strSrcAttrib, strNameSpace, null);
 		if (attribute != null)
 		{
 			srcLocal.removeAttribute(strSrcAttrib, strNameSpace);
 		}
-		
+
 		setAttribute(attrib, attribute);
 	}
 

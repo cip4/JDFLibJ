@@ -273,7 +273,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		public static double getAmountPoolDouble(IAmountPoolContainer poolParent, final String attName, final JDFAttributeMap mPart)
 		{
 			double d = 0;
-			
+
 			int n = 0;
 			boolean bFound = false;
 			JDFAmountPool ap = poolParent.getAmountPool();
@@ -286,18 +286,18 @@ public class JDFAmountPool extends JDFAutoAmountPool
 					{
 						return bFound ? d : -1;
 					}
-					
+
 					n++;
 					continue;
 				}
-				
+
 				final double dd = StringUtil.parseDouble(w, -1.234567);
 				if (dd == -1.234567)
 				{
 					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName
 							+ " has an invalid value");
 				}
-				
+
 				d += dd;
 				bFound = true;
 				n++;
@@ -340,18 +340,13 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		 * @return the sum
 		 * 
 		 */
-		public static double getAmountPoolSumDouble(
-				IAmountPoolContainer poolParent, final String attName, VJDFAttributeMap vPart)
+		public static double getAmountPoolSumDouble(IAmountPoolContainer poolParent, final String attName, VJDFAttributeMap vPart)
 		{
-			VJDFAttributeMap vPartLocal = vPart;
-			
-			if (vPartLocal == null)
-				vPartLocal = poolParent.getPartMapVector();
-			
-			if (poolParent.hasAttribute(attName))
-				return poolParent.getRealAttribute(attName, null, 0);
-			
-			VJDFAttributeMap vm = vPartLocal == null ? null : new VJDFAttributeMap(vPartLocal);
+
+			if (vPart == null)
+				vPart = poolParent.getPartMapVector();
+
+			VJDFAttributeMap vm = vPart == null ? null : new VJDFAttributeMap(vPart);
 			final JDFResource linkRoot = poolParent.getLinkRoot();
 			if (linkRoot != null && vm != null)
 			{
@@ -359,30 +354,24 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				set.add(AttributeName.CONDITION); // retain good / waste
 				vm.reduceMap(set);
 			}
-			
+
 			if (vm == null)
 			{
 				vm = new VJDFAttributeMap();
 				vm.add((JDFAttributeMap) null);
 			}
-			
+
 			double dd = 0;
 			JDFAmountPool ap = poolParent.getAmountPool();
-			if (ap == null)
-				return poolParent.getRealAttribute(attName, null, 0.0);
+			VElement vParts = ap == null ? new VElement() : ap.getChildElementVector(ElementName.PARTAMOUNT, null);
 
-			VElement vParts = ap.getChildElementVector(ElementName.PARTAMOUNT, null);
-
-			if (vParts.isEmpty())
-				return poolParent.getRealAttribute(attName, null, 0.0);
-			
-			boolean isWaste = vPartLocal != null && vPartLocal.subMap(new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
-			if (!isWaste && (vPartLocal == null || !vPartLocal.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"))))
+			boolean isWaste = vPart != null && vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
+			if (!isWaste && (vPart == null || !vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"))))
 			{
-				vPartLocal = new VJDFAttributeMap(vPartLocal);
-				vPartLocal.add(new JDFAttributeMap(AttributeName.CONDITION, "Good"));
+				vPart = new VJDFAttributeMap(vPart);
+				vPart.add(new JDFAttributeMap(AttributeName.CONDITION, "Good"));
 			}
-			
+			boolean gotOne = false;
 			for (int j = 0; j < vParts.size(); j++)
 			{
 				final JDFPartAmount pa = (JDFPartAmount) vParts.elementAt(j);
@@ -394,18 +383,21 @@ public class JDFAmountPool extends JDFAutoAmountPool
 						continue;
 
 				}
-				
+
 				if (!partMapVector.overlapsMap(vm))
 					continue;
-				
+
 				String ret = null;
 				ret = pa.getAttribute(attName, null, null);
 				if (ret == null)
 					ret = poolParent.getAttribute(attName, null, null);
 
 				dd += StringUtil.parseDouble(ret, 0.0);
+				gotOne = true;
 			}
-			
+			if (!gotOne && !isWaste)
+				dd = poolParent.getRealAttribute(attName, null, 0.0);
+
 			return dd;
 		}
 

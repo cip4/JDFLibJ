@@ -104,6 +104,7 @@ import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.resource.JDFQueueEntryDefList;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * super class for all message families Signal, Command,...
@@ -2840,6 +2841,33 @@ public class JDFMessage extends JDFAutoMessage
 
 	// //////////////////////////////////////////////////////////////////////////
 	// ////
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ICSVersions
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ICSVersions
+	  * @param value: the value to set the attribute to
+	  */
+	public void setICSVersions(VString value)
+	{
+		setAttribute(AttributeName.ICSVERSIONS, value, null);
+	}
+
+	/**
+	  * (21) get VString attribute ICSVersions, grab from parent JMF if none exists here
+	  * @return VString the value of the attribute
+	  * 
+	  */
+	public VString getICSVersions()
+	{
+		String s = getAttribute(AttributeName.ICSVERSIONS, null, null);
+		if (s != null)
+			return StringUtil.tokenize(s, null, false);
+		KElement parentJMF = getParentNode_KElement();
+		if (parentJMF instanceof JDFJMF)
+			return ((JDFJMF) parentJMF).getICSVersions();
+		return null;
+	}
 
 	/**
 	 * sets the senderID of this message
