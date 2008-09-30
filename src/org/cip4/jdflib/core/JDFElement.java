@@ -3033,6 +3033,8 @@ public class JDFElement extends KElement
 	{
 		if (id != 0)
 		{
+			if (id < 0)
+				id = -id; // just in case someone accidentally uses too large random numbers
 			m_lStoreID = id % 100000;
 		}
 		final String s = "00000" + Integer.toString(m_lStoreID);

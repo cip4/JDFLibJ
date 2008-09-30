@@ -89,25 +89,27 @@ public class JDFColorPoolTest extends TestCase
 {
 	JDFColorPool cp;
 
+	/**
+	 * @see junit.framework.TestCase#setUp()
+	 */
 	@Override
 	public void setUp()
 	{
 		try
 		{
 			super.setUp();
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			//
 		}
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
 		n.setType("Interpreting", false);
-		cp = (JDFColorPool) n.addResource("ColorPool", null, EnumUsage.Input,
-				null, null, null, null);
+		cp = (JDFColorPool) n.addResource("ColorPool", null, EnumUsage.Input, null, null, null, null);
 		cp.appendColorWithName("Cyan", "true");
 		cp.appendColorWithName("Grün", "Grün");
-		((JDFColor) cp.appendElement("jdf:Color", JDFElement.getSchemaURL()))
-				.setName("foo");
+		((JDFColor) cp.appendElement("jdf:Color", JDFElement.getSchemaURL())).setName("foo");
 	}
 
 	/**
@@ -115,14 +117,15 @@ public class JDFColorPoolTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetColorWithName()
+	public void testGetColorWithName() throws Exception
 	{
 		assertNotNull("grün", cp.getColorWithName("Grün"));
 		boolean caught = false;
 		try
 		{
 			cp.appendColorWithName("Grün", "Grün");
-		} catch (JDFException e)
+		}
+		catch (JDFException e)
 		{
 			caught = true;
 		}
@@ -134,11 +137,14 @@ public class JDFColorPoolTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetCreateColorWithName()
+	public void testGetCreateColorWithName() throws Exception
 	{
 		assertNotNull("grün", cp.getCreateColorWithName("Grün", null));
 	}
 
+	/**
+	 * 
+	 */
 	public void testRemoveColor()
 	{
 		assertEquals("num", cp.numChildElements("Color", null), 3);
@@ -151,6 +157,9 @@ public class JDFColorPoolTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testDuplicateColor()
 	{
 		assertNull(cp.getDuplicateColors());
@@ -159,9 +168,12 @@ public class JDFColorPoolTest extends TestCase
 		c.set8BitNames("Grün".getBytes());
 		c.setName("grun");
 		assertTrue(cp.getDuplicateColors().contains("grun"));
-
 	}
 
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 * @return the string
+	 */
 	@Override
 	public String toString()
 	{

@@ -111,8 +111,7 @@ public class HotFolderTest extends JDFTestCaseBase
 			boolean zapp = false;
 			if (bZapp)
 				zapp = hotFile.delete();
-			System.out.println(System.currentTimeMillis() + " "
-					+ hotFile.getPath() + "," + bZapp + "," + zapp);
+			System.out.println(System.currentTimeMillis() + " " + hotFile.getPath() + "," + bZapp + "," + zapp);
 
 		}
 
@@ -126,6 +125,9 @@ public class HotFolderTest extends JDFTestCaseBase
 		theHF.mkdirs();
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testStartNull() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(false));
@@ -136,6 +138,9 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testRestartMany() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
@@ -152,6 +157,9 @@ public class HotFolderTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testStopStart() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
@@ -173,6 +181,9 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertFalse(file.exists());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testExtension() throws Exception
 	{
 		hf = new HotFolder(theHF, ".txt,.xml", new MyListener(true));
@@ -192,12 +203,14 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file2.exists());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testDir() throws Exception
 	{
 		hf = new HotFolder(theHF, ".txt,.xml", new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1.txt");
-		final File file1 = new File(theHF + File.separator + "f2.xml"
-				+ File.separator + "f1.xml");
+		final File file1 = new File(theHF + File.separator + "f2.xml" + File.separator + "f1.xml");
 		final File file2 = new File(theHF + File.separator + "f2.xml");
 		file.createNewFile();
 		file2.mkdir();
@@ -209,6 +222,9 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file2.exists());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testStartNullDelete() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
@@ -219,6 +235,9 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertFalse(file.exists());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testBig() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));

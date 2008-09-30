@@ -73,7 +73,7 @@
  * ==========================================================================
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de   using a code generator 
+ * @Author : sabjon@topmail.de   using a code generator 
  * Warning! very preliminary test version. 
  * Interface subject to change without prior notice! 
  * Revision history:   ...
@@ -95,10 +95,15 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 
-public class JDFNotification extends JDFAutoNotification
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
+public class JDFNotification extends JDFAutoNotification implements INodeIdentifiable
 {
 	private static final long serialVersionUID = 1L;
 
@@ -493,10 +498,10 @@ public class JDFNotification extends JDFAutoNotification
 	public void setNode(NodeIdentifier identifier)
 	{
 		NodeIdentifier identifierLocal = identifier;
-		
+
 		if (identifierLocal == null)
 			identifierLocal = new NodeIdentifier((JDFNode) null);
-		
+
 		setJobID(identifierLocal.getJobID());
 		setJobPartID(identifierLocal.getJobPartID());
 		setPartMapVector(identifierLocal.getPartMapVector());
@@ -597,6 +602,30 @@ public class JDFNotification extends JDFAutoNotification
 	public JDFMilestone getMilestone()
 	{
 		return (JDFMilestone) getNotificationDetails();
+	}
+
+	/**
+	 * gets the NodeIdetifier that matches this
+	 * 
+	 * @return the matching node identifier
+	 */
+	public NodeIdentifier getIdentifier()
+	{
+		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
+	 * @param ni
+	 */
+	public void setIdentifier(NodeIdentifier ni)
+	{
+		if (ni == null)
+			ni = new NodeIdentifier();
+
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+		setPartMapVector(ni.getPartMapVector());
 	}
 
 } // class JDFNotification

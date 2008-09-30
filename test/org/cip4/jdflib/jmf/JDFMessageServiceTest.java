@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,9 +78,16 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFMessageServiceTest extends TestCase
 {
 
+	/**
+	 * 
+	 */
 	public void testgetFamilies()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
@@ -96,7 +103,9 @@ public class JDFMessageServiceTest extends TestCase
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	// /////////////////
+	/**
+	 * 
+	 */
 	public void testsetFamily()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
@@ -106,12 +115,14 @@ public class JDFMessageServiceTest extends TestCase
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	// /////////////////
+	/**
+	 * 
+	 */
 	public void testsetFamilies()
 	{
 		JDFDoc doc = new JDFDoc(ElementName.MESSAGESERVICE);
 		JDFMessageService ms = (JDFMessageService) doc.getRoot();
-		Vector v = new Vector();
+		Vector<EnumFamily> v = new Vector<EnumFamily>();
 		v.add(EnumFamily.Query);
 		v.add(EnumFamily.Command);
 		ms.setFamilies(v);

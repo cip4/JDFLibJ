@@ -163,23 +163,23 @@ public class ContainerUtil
 	public static <a> IMatches getMatch(Collection<? extends IMatches> c, a obj, int iSkip)
 	{
 		int iSkipLocal = iSkip;
-		
+
 		if (c == null)
 			return null;
-		
+
 		if (iSkipLocal < 0)
 		{
 			Vector<IMatches> v = getMatches(c, obj);
 			if (v == null)
 				return null;
-			
+
 			iSkipLocal = v.size() + iSkipLocal;
 			if (iSkipLocal < 0)
 				return null;
-			
+
 			return v.get(iSkipLocal);
 		}
-		
+
 		Iterator<? extends IMatches> it = c.iterator();
 		while (it.hasNext())
 		{
@@ -187,7 +187,7 @@ public class ContainerUtil
 			if (m.matches(obj) && iSkipLocal-- <= 0)
 				return m;
 		}
-		
+
 		return null;
 	}
 
@@ -216,6 +216,8 @@ public class ContainerUtil
 
 	/**
 	 * create a Vector of entry values from a map
+	 * @param <a> 
+	 * @param <b> 
 	 * 
 	 * @param m the map to dump to an array 
 	 * @param sortByKey , if true, sort the entries by key
@@ -311,6 +313,7 @@ public class ContainerUtil
 	 * @param c1
 	 * @return -1 if c0<c1, 0 if equal, 1 if c0>c1
 	 */
+	@SuppressWarnings("unchecked")
 	public static int compare(Comparable c0, Comparable c1)
 	{
 		if (c0 == null)

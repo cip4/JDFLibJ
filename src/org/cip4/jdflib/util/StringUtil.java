@@ -857,7 +857,8 @@ public class StringUtil
 			return false;
 		if (strWork.length() >= 64)
 			return false;
-
+		if ("*".equals(strWork))
+			return true;
 		// if an error occurs for XmlNames do an "Organize Imports" (different
 		// packages in Java 1.4 and 5.0)
 		return XmlNames.isNmtoken(strWork);

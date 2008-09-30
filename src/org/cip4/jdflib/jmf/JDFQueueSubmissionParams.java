@@ -84,6 +84,7 @@ import java.net.URL;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 
@@ -127,6 +128,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	/**
 	 * toString() return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQueueSubmissionParams[  --> " + super.toString() + " ]";
@@ -152,7 +154,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 		}
 		if (theQueue == null)
 		{
-			resp.setErrorText("No Queue specified");
+			resp.setErrorText("No Queue specified", EnumClass.Error);
 			resp.setReturnCode(2); // 
 			return resp;
 		}
@@ -187,6 +189,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	 * 
 	 * @return the document
 	 */
+	@Override
 	public JDFDoc getURLDoc()
 	{
 		return super.getURLDoc();

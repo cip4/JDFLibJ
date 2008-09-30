@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -181,6 +182,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	private String agentName;
 	private String agentVersion;
 	private String author;
+	protected String senderID;
 	protected long mem;
 
 	////////////////////////////////////////////////////////////////////////////
@@ -190,6 +192,8 @@ public abstract class JDFTestCaseBase extends TestCase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
+		senderID = "TestSender";
+		JDFJMF.setTheSenderID(senderID);
 		JDFElement.uniqueID(1);
 		JDFIntegerRange.setDefaultDef(0);
 		agentName = JDFAudit.getStaticAgentName();

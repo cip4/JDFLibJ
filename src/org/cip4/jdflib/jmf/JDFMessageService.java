@@ -75,7 +75,6 @@
  ==========================================================================
  @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
  ALL RIGHTS RESERVED
- @Author: sabjon@topmail.de   using a code generator
  Warning! very preliminary test version. Interface subject to change without prior notice!
  Revision history:    ...
  **/
@@ -97,6 +96,10 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 
 //----------------------------------
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFMessageService extends JDFAutoMessageService implements IDeviceCapable
 {
 	private static final long serialVersionUID = 1L;
@@ -137,10 +140,9 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoMessageService#toString()
+	 * @return the string
 	 */
 	@Override
 	public String toString()
@@ -204,6 +206,10 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		return dcs;
 	}
 
+	/**
+	 * @see org.cip4.jdflib.ifaces.IDeviceCapable#getNamePathVector()
+	 * @return the vector of name paths
+	 */
 	public final VString getNamePathVector()
 	{
 		VString vResult = new VString();
@@ -223,7 +229,7 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	 * 
 	 * @return EnumFamily[] the list of supported families
 	 */
-	public Vector getFamilies()
+	public Vector<EnumFamily> getFamilies()
 	{
 		Vector<EnumFamily> fams = new Vector<EnumFamily>();
 		if (getCommand())
@@ -244,13 +250,14 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	 * 
 	 * @param fams the Vector of EnumFamily of supported families
 	 */
-	public void setFamilies(Vector fams)
+	public void setFamilies(Vector<EnumFamily> fams)
 	{
 		setCommand(false);
 		setSignal(false);
 		setQuery(false);
 		setRegistration(false);
 		setAcknowledge(false);
+		setPersistent(false);
 
 		if (fams == null)
 			return;
@@ -258,7 +265,10 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 		{
 			try
 			{
-				setFamily((EnumFamily) fams.elementAt(i));
+				EnumFamily family = fams.elementAt(i);
+				setFamily(family);
+				if (EnumFamily.Signal.equals(family))
+					setPersistent(true);
 			}
 			catch (JDFException x)
 			{ /* nop */
@@ -279,8 +289,10 @@ public class JDFMessageService extends JDFAutoMessageService implements IDeviceC
 	}
 
 	/**
-     * 
-     */
+	 * @param id 
+	 * @return the capabilty description
+	 * 
+	 */
 	public ICapabilityElement getTargetCap(String id)
 	{
 		KElement e = getTarget(id, null);

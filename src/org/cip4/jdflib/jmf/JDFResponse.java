@@ -85,9 +85,14 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResponse;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.resource.JDFNotification;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFResponse extends JDFAutoResponse // JDFMessage
 {
 	private static final long serialVersionUID = 1L;
@@ -141,11 +146,19 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 			super(status, m_startValue++);
 		}
 
+		/**
+		 * @param status
+		 * @return
+		 */
 		public static EnumError getEnum(String status)
 		{
 			return (EnumError) getEnum(EnumError.class, status);
 		}
 
+		/**
+		 * @param value
+		 * @return
+		 */
 		public static EnumError getEnum(int value)
 		{
 			return (EnumError) getEnum(EnumError.class, value);
@@ -193,12 +206,30 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 	 * 
 	 * @param errorText new error text
 	 * @return JDFNotification the newly created Notification element
+	 * @deprecated use 	public JDFNotification setErrorText(String errorText, EnumClass errorClass)
 	 */
+	@Deprecated
 	public JDFNotification setErrorText(String errorText)
+	{
+		return setErrorText(errorText, null);
+	}
+
+	/**
+	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error
+	 * doesn't create a notification if ErroerText=null
+	 * 
+	 * @param errorText new error text
+	 * @param errorClass the error class
+	 * @return JDFNotification the newly created Notification element
+	 */
+	public JDFNotification setErrorText(String errorText, EnumClass errorClass)
 	{
 		final JDFNotification n = getCreateNotification();
 		n.setType("Error");
-		n.setClass(JDFNotification.EnumClass.Error);
+		if (errorClass == null)
+			errorClass = JDFNotification.EnumClass.Error;
+
+		n.setClass(errorClass);
 		if (errorText != null)
 		{
 			JDFComment c = n.getComment(0);
@@ -209,5 +240,6 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 			c.appendText(errorText);
 		}
 		return n;
+
 	}
 }

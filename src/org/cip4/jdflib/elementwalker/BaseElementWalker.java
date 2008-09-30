@@ -18,6 +18,9 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class BaseElementWalker extends ElementWalker
 {
+	/**
+	 * @param _theFactory
+	 */
 	public BaseElementWalker(BaseWalkerFactory _theFactory)
 	{
 		super(_theFactory);
@@ -32,7 +35,7 @@ public class BaseElementWalker extends ElementWalker
 	 */
 	protected void constructWalkers(String classPrefix)
 	{
-		Class[] cs = this.getClass().getDeclaredClasses();
+		Class<?>[] cs = this.getClass().getDeclaredClasses();
 		for (int i = 0; i < cs.length; i++)
 		{
 			String s = cs[i].getName();
@@ -41,7 +44,7 @@ public class BaseElementWalker extends ElementWalker
 			{
 				try
 				{
-					Constructor con = cs[i].getDeclaredConstructor(new Class[] { this.getClass() });
+					Constructor<?> con = cs[i].getDeclaredConstructor(new Class[] { this.getClass() });
 					con.newInstance(new Object[] { this });
 
 				}

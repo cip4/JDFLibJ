@@ -200,7 +200,7 @@ public class JDFIntegerRange extends JDFRange
 			{
 				// the min and the max values are equal
 				m_left = StringUtil.parseInt(strArray[0], xdef);
-				if (m_left == xdef && !StringUtil.isInteger(strArray[0]))
+				if (!StringUtil.isInteger(strArray[0]))
 					throw new DataFormatException("JDFIntegerRange illegal string: " + s);
 				m_right = m_left;
 			}

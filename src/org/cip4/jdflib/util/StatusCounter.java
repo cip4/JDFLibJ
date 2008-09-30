@@ -1379,6 +1379,23 @@ public class StatusCounter
 								rr.setResStatus(EnumResStatus.Available, true);
 						}
 					}
+					// update intermediate resources
+					for (int i = 0; i < size; i++)
+					{
+						JDFResource r = (JDFResource) vRes.get(i);
+						VElement leaves = r.getLeaves(true);
+						for (int j = 0; j < leaves.size(); j++)
+						{
+							JDFResource rr = (JDFResource) leaves.get(j);
+							if (rr.isLeaf())
+								continue;
+							if (EnumResStatus.Available.equals(rr.getStatusFromLeaves(false)))
+							{
+								rr.setResStatus(EnumResStatus.Available, false);
+							}
+						}
+					}
+
 				}
 			}
 		}

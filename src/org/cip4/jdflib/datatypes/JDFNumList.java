@@ -151,7 +151,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	public JDFNumList(String sl) throws DataFormatException
 	{
 		VString v = StringUtil.tokenize(sl, null, false);
-		final int size = v.size();
+		final int size = v == null ? 0 : v.size();
 		for (int i = 0; i < size; i++)
 		{
 			String s = v.stringAt(i);
@@ -190,7 +190,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * @deprecated 060418 - use toString
 	 */
 	@Deprecated
-	public String getString() 
+	public String getString()
 	{
 		return toString();
 	}
@@ -318,7 +318,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	public Object elementAt(int i)
 	{
 		int iLocal = i;
-		
+
 		final Vector numList = m_numList;
 		if (iLocal < 0)
 			iLocal = numList.size() + iLocal;
@@ -378,14 +378,14 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	public boolean removeElementAt(int i)
 	{
 		int iLocal = i;
-		
+
 		if (iLocal < 0)
 			iLocal = iLocal + size();
 
 		if ((iLocal < size()) && (iLocal >= 0))
 		{
 			m_numList.removeElementAt(iLocal);
-			
+
 			return true;
 		}
 
@@ -402,15 +402,15 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	public boolean replaceElementAt(Object obj, int i)
 	{
 		int iLocal = i;
-		
+
 		if (iLocal < 0)
 			iLocal = iLocal + size();
-		
+
 		if ((iLocal < m_numList.size()) && (iLocal > -1))
 		{
 			m_numList.removeElementAt(iLocal);
 			m_numList.insertElementAt(obj, iLocal);
-			
+
 			return true;
 		}
 
@@ -423,6 +423,25 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * @return boolean - true if all instances are Double or Integer types
 	 */
 	public abstract void isValid() throws DataFormatException;
+
+	/**
+	 * isValidString - true if all instances are Double or Integer types
+	 * @param st the string to check
+	 * 
+	 * @return boolean - true if all instances are Double or Integer types
+	 */
+	public boolean isValidString(String st)
+	{
+		VString v = StringUtil.tokenize(st, null, false);
+		final int size = v == null ? 0 : v.size();
+		for (int i = 0; i < size; i++)
+		{
+			String s = v.stringAt(i);
+			if (!StringUtil.isNumber(s))
+				return false;
+		}
+		return true;
+	}
 
 	/**
 	 * scale all values of this by factor

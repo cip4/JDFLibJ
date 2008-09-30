@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
@@ -87,13 +88,23 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
  */
 public class JDFAncestorPoolTest extends JDFTestCaseBase
 {
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 * @return the string
+	 */
+	@Override
+	public String toString()
+	{
+
+		return n != null ? n.toString() : super.toString();
+	}
+
 	private JDFNode n;
 	private JDFAncestorPool ap;
 
 	@Override
 	protected void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
 		JDFDoc d = new JDFDoc("JDF");
 		n = d.getJDFRoot();
@@ -131,7 +142,25 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testgeAncestorElement() throws Exception
+	public void testMakeRootResource() throws Exception
+	{
+		JDFAncestor a1 = ap.appendAncestor();
+		JDFAncestor a2 = ap.appendAncestor();
+		JDFAncestor a3 = ap.appendAncestor();
+		JDFNodeInfo ni2 = a2.appendNodeInfo();
+		ni2.makeRootResource(null, null, true);
+		assertNotNull(a2.getElement("NodeInfoRef", null, 0));
+		n.linkResource(ni2, EnumUsage.Input, null);
+		assertEquals(n.getNodeInfo(), ni2);
+
+	}
+
+	// /////////////////////////////////////////////////////
+
+	/**
+	 * @throws Exception
+	 */
+	public void testgetAncestorElement() throws Exception
 	{
 		JDFAncestor a1 = ap.appendAncestor();
 		JDFAncestor a2 = ap.appendAncestor();
@@ -150,4 +179,5 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 		ni1.appendJMF().appendQuery(JDFMessage.EnumType.Resource).appendSubscription();
 		assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Resource\"]"), ni1);
 	}
+
 }

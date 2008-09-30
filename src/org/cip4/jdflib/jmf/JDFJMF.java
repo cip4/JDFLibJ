@@ -180,7 +180,6 @@ public class JDFJMF extends JDFAutoJMF
 	/**
 	 * get attribute MaxVersion, defaults to version if not set
 	 * 
-	 * @param bInherit if true recurse through ancestors when searching
 	 * @return EnumVersion - attribute value
 	 * 
 	 *         default - getMaxVersion(false)
@@ -841,7 +840,7 @@ public class JDFJMF extends JDFAutoJMF
 
 	/**
 	 * collect ICSVersions from all message children
-	 * also removes duplicate entries from this
+	 * also removes duplicate entries from this and remove ""
 	 * 
 	 * @return VString of all ICS versions
 	 */
@@ -856,13 +855,14 @@ public class JDFJMF extends JDFAutoJMF
 				vICS.addAll(m.getICSVersions());
 		}
 		vICS.unify();
+		setICSVersions(vICS.size() == 0 ? null : vICS);
 		return vICS;
 	}
 
 	/**
 	 * convert all responses that match the query q to signals
+	 * @param q  the query to convert
 	 * 
-	 * @return the newly created JMF with multiple responses
 	 */
 	public void convertResponses(JDFQuery q)
 	{
@@ -885,7 +885,7 @@ public class JDFJMF extends JDFAutoJMF
 	/**
 	 * get the @URL of this message if it is either a submitQueueEntry, a returnQueuentry or a resubmitqueueentry
 	 * 
-	 * @return
+	 * @return the String
 	 */
 	public String getSubmissionURL()
 	{

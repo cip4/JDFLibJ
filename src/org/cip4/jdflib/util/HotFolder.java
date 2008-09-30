@@ -90,14 +90,29 @@ import java.util.Vector;
  */
 public class HotFolder implements Runnable
 {
-	public int stabilizeTime = 1000; // time between reads in milliseconds -
-	// also minimum lenght of
-	// non-modification
+	/**
+	 * the default time time in milliseconds to wait for stabilization
+	 */
+	public static int defaultStabilizeTime = 2222; // time between reads in milliseconds -
+	/**
+	 * the time in milliseconds to wait for stabilization
+	 */
+	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds -
+	// also minimum length of non-modification
 	private boolean interrupt = false; // if set to true, the watcher interupted
 	// and the thread ends
 	private static int nThread = 0;
 
 	private final File dir;
+
+	/**
+	 * @return the hot folder directory
+	 */
+	public File getDir()
+	{
+		return dir;
+	}
+
 	private long lastModified = -1;
 	private final Vector<FileTime> lastFileTime;
 	private final HotFolderListener hfl;
@@ -110,11 +125,12 @@ public class HotFolder implements Runnable
 	 * @param _dir the Directory to watch
 	 * @param ext the extension filter - case is ignored and lists of extensions may be specified as a comma separated
 	 *            list e.g. ".txt,.xml"
-	 * @param _hfl
+	 * @param _hfl the listener callback
 	 */
 	public HotFolder(File _dir, String ext, HotFolderListener _hfl)
 	{
 		dir = _dir;
+		dir.mkdirs();
 		extension = ext;
 		lastFileTime = new Vector<FileTime>();
 		hfl = _hfl;
@@ -122,6 +138,9 @@ public class HotFolder implements Runnable
 		restart();
 	}
 
+	/**
+	 * restart the thread
+	 */
 	public synchronized void restart()
 	{
 		if (runThread != null)
@@ -143,13 +162,10 @@ public class HotFolder implements Runnable
 			synchronized (runThread)
 			{
 				runThread.notifyAll();
-
 				try
 				{
-					runThread.join(); // kill the old thread with extreme
-					// prejudice -
-					// otherwise we may have multiple concurring hf watcher
-					// threads
+					// kill the old thread with extreme prejudice -otherwise we may have multiple concurring hf watcher threads
+					runThread.join();
 				}
 				catch (InterruptedException x)
 				{
@@ -160,9 +176,8 @@ public class HotFolder implements Runnable
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 * run the listener thread...
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run()
@@ -170,10 +185,8 @@ public class HotFolder implements Runnable
 		while (!interrupt)
 		{
 			long lastMod = dir.lastModified();
-			if (lastMod > lastModified || lastFileTime.size() > 0) // has the
-			// directory
-			// been
-			// touched?
+			if (lastMod > lastModified || lastFileTime.size() > 0)
+			// has the directory been touched?
 			{
 				lastModified = lastMod;
 				File[] files = FileUtil.listFilesWithExtension(dir, extension);
@@ -182,8 +195,8 @@ public class HotFolder implements Runnable
 				for (int i = lastFileTime.size() - 1; i >= 0; i--)
 				{
 					boolean found = false;
-					for (int j = 0; j < fileListLength; j++) 
-						// loop over all matching files in the directory
+					for (int j = 0; j < fileListLength; j++)
+					// loop over all matching files in the directory
 					{
 						if (files != null)
 						{
@@ -212,13 +225,13 @@ public class HotFolder implements Runnable
 							}
 						}
 					}
-					
+
 					if (!found)
 					{
 						lastFileTime.remove(i); // not there anymore
 					}
 				}
-				
+
 				if (files != null)
 				{
 					for (int i = 0; i < fileListLength; i++) // the file is new -
@@ -229,11 +242,21 @@ public class HotFolder implements Runnable
 					}
 				}
 			}
-			
-			StatusCounter.sleep(stabilizeTime);
+
+			try
+			{
+				synchronized (runThread)
+				{
+					runThread.wait(stabilizeTime);
+				}
+			}
+			catch (InterruptedException x)
+			{
+				// nop
+			}
 		}
-		
-		Thread.currentThread().interrupt();
+
+		runThread.interrupt();
 	}
 
 	/**

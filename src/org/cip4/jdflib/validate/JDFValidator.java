@@ -1991,6 +1991,19 @@ public class JDFValidator
 			int n = 0;
 			while (zipEnum.hasMoreElements())
 			{
+				// no use here - it looks as if the dom documents leak
+				//				if ((n % 10) == 9) // close all and gc!
+				//				{
+				//					zip.close();
+				//					zip = null;
+				//					System.gc();
+				//					zip = new ZipFile(argFile);
+				//
+				//					zipEnum = zip.entries();
+				//					for (int i = 0; i < n; i++)
+				//						zipEnum.nextElement();
+				//				}
+
 				ZipEntry ze = zipEnum.nextElement();
 
 				String nam = ze.getName();

@@ -116,6 +116,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 
@@ -543,16 +544,16 @@ public class MimeUtil extends UrlUtil
 	public static boolean matchesCID(BodyPart bp, String cid)
 	{
 		String cidLocal = cid;
-		
+
 		if (cidLocal == null)
 			return true; // wildcard
 
 		if (cidLocal.startsWith("<"))
 			cidLocal = cidLocal.substring(1);
-		
+
 		if (cidLocal.toLowerCase().startsWith("cid:"))
 			cidLocal = cidLocal.substring(4);
-		
+
 		if (cidLocal.endsWith(">"))
 			cidLocal = cidLocal.substring(0, cidLocal.length() - 1);
 
@@ -674,15 +675,16 @@ public class MimeUtil extends UrlUtil
 	public static boolean isJDFMimeType(String mimeType)
 	{
 		String mimeTypeLocal = mimeType;
-		
+
 		if (mimeTypeLocal == null)
 			return false;
-		
+
 		int posSemicolon = mimeTypeLocal.indexOf(";");
 		if (posSemicolon > 0)
 			mimeTypeLocal = mimeTypeLocal.substring(0, posSemicolon);
 
-		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeTypeLocal) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeTypeLocal)
+		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeTypeLocal)
+				|| JDFConstants.MIME_JMF.equalsIgnoreCase(mimeTypeLocal)
 				|| JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeTypeLocal);
 	}
 
@@ -734,6 +736,16 @@ public class MimeUtil extends UrlUtil
 
 		if (docJMF != null && cid != null)
 		{
+			String originalFileName = docJMF.getOriginalFileName();
+			if (KElement.isWildCard(originalFileName))
+			{
+				JDFJMF jmf = docJMF.getJMFRoot();
+
+				JDFMessage m = jmf == null ? null : jmf.getMessageElement(null, null, 0);
+				originalFileName = m == null ? "TheJMF.jmf" : m.getType() + ".jmf";
+				docJMF.setOriginalFileName(originalFileName);
+			}
+
 			KElement e = docJMF.getRoot();
 			VElement v = e.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
 			if (v != null)
@@ -759,7 +771,7 @@ public class MimeUtil extends UrlUtil
 		{
 			return null;
 		}
-		
+
 		return multipart;
 	}
 
@@ -775,19 +787,19 @@ public class MimeUtil extends UrlUtil
 	private static int extendMultipart(Multipart multipart, JDFDoc docJDF, String cid)
 	{
 		int n = 0;
-		
+
 		if (docJDF == null)
 		{
 			return 0;
 		}
-		
+
 		// Get all FileSpec elements
 		final KElement e = docJDF.getRoot();
 		final VElement fileSpecs = e.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
 		if (fileSpecs != null)
 		{
 			final int vSize = fileSpecs.size();
-			
+
 			String[] urlStrings = listURLs(fileSpecs);
 			for (int i = 0; i < urlStrings.length; i++)
 			{
@@ -874,7 +886,7 @@ public class MimeUtil extends UrlUtil
 				}
 			}
 		}
-		
+
 		return n;
 	}
 
@@ -888,7 +900,7 @@ public class MimeUtil extends UrlUtil
 	private static String[] listURLs(VElement fileSpecs)
 	{
 		String[] urlStrings = new String[0];
-		
+
 		if (fileSpecs != null)
 		{
 			final int vSize = fileSpecs.size();
@@ -898,23 +910,23 @@ public class MimeUtil extends UrlUtil
 				urlStrings[i] = fileSpecs.item(i).getAttribute(AttributeName.URL, null, null);
 			}
 		}
-		
+
 		return urlStrings;
 	}
 
 	private static String urlToCid(String urlString)
 	{
 		String urlStringLocal = urlString;
-		
+
 		if (urlStringLocal == null)
 			return null;
-		
+
 		if (urlStringLocal.startsWith("<"))
 			urlStringLocal = urlStringLocal.substring(1);
-		
+
 		if (urlStringLocal.toLowerCase().startsWith("cid:"))
 			urlStringLocal = urlStringLocal.substring(4);
-		
+
 		if (urlStringLocal.endsWith(">"))
 			urlStringLocal = urlStringLocal.substring(0, urlStringLocal.length() - 1);
 
@@ -960,20 +972,19 @@ public class MimeUtil extends UrlUtil
 	public static BodyPart updateXMLMultipart(Multipart multipart, XMLDoc xmlDoc, String cid)
 	{
 		String cidLocal = cid;
-		
+
 		if (xmlDoc == null)
 			return null;
-		
+
 		String originalFileName = xmlDoc.getOriginalFileName();
 		if (cidLocal == null)
 			cidLocal = originalFileName;
-		
+
 		if (cidLocal == null)
 		{
 			final KElement root = xmlDoc.getRoot();
 			cidLocal = "CID_"
-					+ ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) 
-							? ((JDFNode) root).getID() : JDFElement.uniqueID(0));
+					+ ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? ((JDFNode) root).getID() : JDFElement.uniqueID(0));
 		}
 
 		BodyPart messageBodyPart = getCreatePartByCID(multipart, cidLocal);
@@ -1084,9 +1095,9 @@ public class MimeUtil extends UrlUtil
 	public static HttpURLConnection writeToURL(Multipart mp, String strUrl, MIMEDetails ms) throws IOException, MessagingException
 	{
 		MIMEDetails msLocal = ms;
-		
+
 		HttpURLConnection httpURLconnection = null;
-		
+
 		if (msLocal == null)
 			msLocal = new MIMEDetails();
 
@@ -1108,7 +1119,7 @@ public class MimeUtil extends UrlUtil
 			httpURLconnection.setDoOutput(true);
 			if (msLocal.httpDetails != null)
 				msLocal.httpDetails.applyTo(httpURLconnection);
-			
+
 			try
 			{
 				final OutputStream out = httpURLconnection.getOutputStream();
@@ -1119,7 +1130,7 @@ public class MimeUtil extends UrlUtil
 				httpURLconnection = null;
 			}
 		}
-		
+
 		return httpURLconnection;
 	}
 
@@ -1135,12 +1146,12 @@ public class MimeUtil extends UrlUtil
 	public static JDFDoc writeToQueue(JDFDoc docJMF, JDFDoc docJDF, String strUrl, MIMEDetails urlDet) throws IOException, MessagingException
 	{
 		JDFDoc doc = null;
-		
+
 		Multipart mp = buildMimePackage(docJMF, docJDF, true);
 		HttpURLConnection uc = writeToURL(mp, strUrl, urlDet);
 		if (uc == null)
 			return doc; // file
-		
+
 		int rc = uc.getResponseCode();
 		if (rc == 200)
 		{
@@ -1161,7 +1172,7 @@ public class MimeUtil extends UrlUtil
 					// nop - try simple doc
 				}
 			}
-			
+
 			bis.reset();
 			doc = new JDFParser().parseStream(bis);
 			if (doc == null)
@@ -1169,7 +1180,7 @@ public class MimeUtil extends UrlUtil
 				JDFCommand c = docJMF.getJMFRoot().getCommand(0);
 				final JDFJMF respJMF = c.createResponse();
 				JDFResponse r = respJMF.getResponse(0);
-				r.setErrorText("Invalid attached JDF");
+				r.setErrorText("Invalid attached JDF", null);
 				r.setReturnCode(3); // TODO correct rcs
 				doc = respJMF.getOwnerDocument_JDFElement();
 			}
@@ -1179,11 +1190,11 @@ public class MimeUtil extends UrlUtil
 			JDFCommand c = docJMF.getJMFRoot().getCommand(0);
 			final JDFJMF respJMF = c.createResponse();
 			JDFResponse r = respJMF.getResponse(0);
-			r.setErrorText("Invalid http response - RC=" + rc);
+			r.setErrorText(("Invalid http response - RC=" + rc), null);
 			r.setReturnCode(3); // TODO correct rcs
 			doc = respJMF.getOwnerDocument_JDFElement();
 		}
-		
+
 		return doc;
 	}
 
@@ -1191,7 +1202,7 @@ public class MimeUtil extends UrlUtil
 	 * @deprecated
 	 * @param m
 	 * @param fileName
-	 * @return
+	 * @return the File that was written
 	 */
 	@Deprecated
 	public static File writeToFile(Multipart m, String fileName)
@@ -1258,19 +1269,19 @@ public class MimeUtil extends UrlUtil
 	public static void writeToStream(Multipart m, OutputStream outStream, MIMEDetails md) throws IOException, MessagingException
 	{
 		OutputStream outStreamLocal = outStream;
-		
+
 		MimeMessage mm = new MimeMessage((Session) null);
 		mm.setContent(m);
 		// buffers are good - the encoders decoders otherwise hit stream
 		// read/write once per byte...
 		if (!(outStreamLocal instanceof BufferedOutputStream))
 			outStreamLocal = new BufferedOutputStream(outStreamLocal);
-		
+
 		if (md != null && md.modifyBoundarySemicolon)
 		{
 			outStreamLocal = new FixSemiColonStream(outStreamLocal);
 		}
-		
+
 		if (md != null && md.transferEncoding != null)
 		{
 			BodyPart bp[] = getBodyParts(m);
@@ -1283,7 +1294,7 @@ public class MimeUtil extends UrlUtil
 				}
 			}
 		}
-		
+
 		mm.writeTo(outStreamLocal);
 		outStreamLocal.flush();
 		outStreamLocal.close();

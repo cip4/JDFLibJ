@@ -474,7 +474,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.parseInt("1234123456", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("1234123456.0", 0), 1234123456);
 		assertEquals(StringUtil.parseInt("12341234561234567834556", 0), Integer.MAX_VALUE);
-		assertEquals(StringUtil.parseInt("-12341234561234567834556", 0), Integer.MAX_VALUE);
+		assertEquals(StringUtil.parseInt("-12341234561234567834556", 0), Integer.MIN_VALUE);
 		assertEquals(StringUtil.parseInt("INF", 0), Integer.MAX_VALUE);
 		assertEquals(StringUtil.parseInt("-inf", 0), Integer.MIN_VALUE);
 	}
