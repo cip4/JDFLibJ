@@ -151,13 +151,13 @@ public class QueueTest extends TestCase
 		assertEquals("qe6", -1, q.getQueueEntryPos("qe6"));
 		assertEquals("qe2", 1, q.getQueueEntryPos("qe2"));
 	}
-	
+
 	/**
 	 * 
 	 */
 	public void testGetQueueEntryMap()
 	{
-		Map<String,JDFQueueEntry> map=q.getQueueEntryIDMap();
+		Map<String, JDFQueueEntry> map = q.getQueueEntryIDMap();
 		assertEquals(map.size(), q.numEntries(null));
 		assertEquals(map.get("qe2"), q.getQueueEntry("qe2"));
 	}
@@ -308,6 +308,7 @@ public class QueueTest extends TestCase
 		}
 		while (iThread > 0)
 			StatusCounter.sleep(100); // wait for threads to be over
+		StatusCounter.sleep(1000); // wait for threads to be over
 		assertEquals(q.getQueueSize(), 1000);
 		VElement v = q.getQueueEntryVector();
 		JDFQueueEntry qeLast = null;
