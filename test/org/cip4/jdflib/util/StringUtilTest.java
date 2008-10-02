@@ -102,6 +102,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		assertEquals(StringUtil.simpleRegExptoRegExp("ab"), "ab");
 		assertEquals(StringUtil.simpleRegExptoRegExp("a.b"), "a\\.b");
+		assertEquals(StringUtil.simpleRegExptoRegExp("a(.+)b"), "a(.+)b");
 		assertEquals(StringUtil.simpleRegExptoRegExp("a\\.b"), "a\\.b");
 		assertEquals(StringUtil.simpleRegExptoRegExp("*.b"), "(.*)\\.b");
 		assertTrue(StringUtil.matches("foo.txt", StringUtil.simpleRegExptoRegExp("*.tx*")));

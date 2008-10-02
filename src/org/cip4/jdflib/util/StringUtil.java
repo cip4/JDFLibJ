@@ -2134,8 +2134,9 @@ public class StringUtil
 				int pos2 = local.indexOf(out[i], lastPos);
 				if (pos >= 0)
 				{
+					int pos3 = local.indexOf("(", lastPos);
 					b.append(local.substring(lastPos, pos));
-					b.append(pos2 + delta == pos ? in[i] : out[i]);
+					b.append(pos2 + delta == pos || (pos3 >= 0 && pos3 < pos) ? in[i] : out[i]);
 				}
 				else
 				{
