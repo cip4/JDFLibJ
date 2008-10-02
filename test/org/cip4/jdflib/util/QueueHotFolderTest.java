@@ -133,15 +133,13 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		assertFalse(stFile.exists());
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertFalse(file.exists());
 		assertTrue(stFile.exists());
 		assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
-		assertEquals(elementAt.getCommand(0).getEnumType(),
-				JDFMessage.EnumType.SubmitQueueEntry);
-		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0)
-				.getURL(), UrlUtil.fileToUrl(stFile, false));
+		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
+		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.fileToUrl(stFile, false));
 	}
 
 	public void teststopStart() throws Exception
@@ -154,20 +152,18 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertFalse(stFile.exists());
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
 		hf.stop();
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertTrue(file.exists());
 		assertFalse("File is still there after stop", stFile.exists());
 		assertEquals(myListener.vJMF.size(), 0);
 		hf.restart();
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertFalse("File is gone after stop", file.exists());
 		assertTrue(stFile.exists());
 		assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
-		assertEquals(elementAt.getCommand(0).getEnumType(),
-				JDFMessage.EnumType.SubmitQueueEntry);
-		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0)
-				.getURL(), UrlUtil.fileToUrl(stFile, false));
+		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
+		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.fileToUrl(stFile, false));
 	}
 
 	/*

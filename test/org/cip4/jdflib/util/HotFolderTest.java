@@ -134,7 +134,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertTrue(file.exists());
 	}
 
@@ -166,18 +166,18 @@ public class HotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertFalse(file.exists());
 		hf.stop();
 		hf.stop();
 		file.createNewFile();
 		assertTrue(file.exists());
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertTrue(file.exists());
 		hf.restart();
 		hf.restart();
 		hf.restart();
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertFalse(file.exists());
 	}
 
@@ -197,7 +197,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file1.exists());
 		file2.createNewFile();
 		assertTrue(file2.exists());
-		StatusCounter.sleep(4000);
+		StatusCounter.sleep(6000);
 		assertFalse(file.exists());
 		assertFalse(file1.exists());
 		assertTrue(file2.exists());
@@ -216,7 +216,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		file2.mkdir();
 		file1.createNewFile();
 		assertTrue(file.exists());
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertFalse(file.exists());
 		assertTrue("in subdir", file1.exists());
 		assertTrue(file2.exists());
@@ -231,7 +231,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertFalse(file.exists());
 	}
 
@@ -257,7 +257,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		fos.close();
 
-		StatusCounter.sleep(3000);
+		StatusCounter.sleep(5000);
 		assertFalse(file.exists());
 
 	}
