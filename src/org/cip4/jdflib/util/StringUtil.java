@@ -679,29 +679,28 @@ public class StringUtil
 	 */
 	public static String replaceString(String strWork, String toReplace, String replaceBy)
 	{
-		String strWorkLocal = strWork;
 
-		if (strWorkLocal == null)
-			return strWorkLocal;
+		if (strWork == null)
+			return strWork;
 
-		int lenIn = strWorkLocal.length();
-		int indexOf = strWorkLocal.indexOf(toReplace);
+		int lenIn = strWork.length();
+		int indexOf = strWork.indexOf(toReplace);
 		if (indexOf < 0)
-			return strWorkLocal;
+			return strWork;
 
 		int len = toReplace.length();
-		StringBuffer b = new StringBuffer(strWorkLocal.length() * 2);
+		StringBuffer b = new StringBuffer(strWork.length() * 2);
 		do
 		{
-			b.append(strWorkLocal.substring(0, indexOf));
+			b.append(strWork.substring(0, indexOf));
 			if (replaceBy != null)
 				b.append(replaceBy);
-			strWorkLocal = strWorkLocal.substring(indexOf + len);
-			indexOf = strWorkLocal.indexOf(toReplace);
+			strWork = strWork.substring(indexOf + len);
+			indexOf = strWork.indexOf(toReplace);
 		}
 		while (indexOf >= 0);
 
-		b.append(strWorkLocal);
+		b.append(strWork);
 
 		final String outString = b.toString();
 		int lenOut = outString.length();
@@ -709,6 +708,10 @@ public class StringUtil
 		return lenOut == lenIn ? outString : replaceString(outString, toReplace, replaceBy);
 	}
 
+	/**
+	 * @param strWork
+	 * @return the escaped string
+	 */
 	public static String xmlNameEscape(String strWork)
 	{
 		String strWorkLocal = strWork;
@@ -2105,6 +2108,48 @@ public class StringUtil
 	}
 
 	/**
+	 * converts a simple regexp to a real regexp
+	 * * --> (.*)
+	 * . --> \.
+	 * @param simpleRegExp the simple regexp
+	 * @return the converted real regexp
+	 */
+	public static String simpleRegExptoRegExp(String simpleRegExp)
+	{
+		if (simpleRegExp == null)
+			return null;
+
+		// attention note sequence, otherwise we get unwanted side effects
+		String[] in = new String[] { ".", "*" };
+		String[] out = new String[] { "\\.", "(.*)" };
+		String local = simpleRegExp;
+		for (int i = 0; i < in.length; i++)
+		{
+			int delta = out[i].indexOf(in[i]);
+			StringBuffer b = new StringBuffer(local.length() * 2);
+			int lastPos = 0;
+			while (lastPos >= 0)
+			{
+				int pos = local.indexOf(in[i], lastPos);
+				int pos2 = local.indexOf(out[i], lastPos);
+				if (pos >= 0)
+				{
+					b.append(local.substring(lastPos, pos));
+					b.append(pos2 + delta == pos ? in[i] : out[i]);
+				}
+				else
+				{
+					b.append(local.substring(lastPos));
+				}
+				lastPos = pos >= 0 ? pos + 1 : pos;
+			}
+
+			local = b.toString();
+		}
+		return local;
+	}
+
+	/**
 	 * match a regular expression using String.matches(), but also catch exceptions and handle simplified regexp. The
 	 * <code>null</code> expression is assumed to match anything.
 	 * 
@@ -2114,23 +2159,21 @@ public class StringUtil
 	 */
 	public static boolean matches(String str, String regExp)
 	{
-		String regExpLocal = regExp;
-
 		if (str == null)
 			return false;
 
 		// the null expression is assumed to match anything
-		if ((regExpLocal == null) || (regExpLocal.length() == 0))
+		if ((regExp == null) || (regExp.length() == 0))
 			return true;
 
 		// this is a really common mistake
-		if (regExpLocal.equals("*"))
-			regExpLocal = ".*";
+		if (regExp.equals("*"))
+			regExp = ".*";
 
 		boolean b;
 		try
 		{
-			b = str.matches(regExpLocal);
+			b = str.matches(regExp);
 		}
 		catch (PatternSyntaxException e)
 		{

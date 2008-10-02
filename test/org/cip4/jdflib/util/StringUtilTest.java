@@ -98,6 +98,18 @@ public class StringUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testSimpleRegexp()
+	{
+		assertEquals(StringUtil.simpleRegExptoRegExp("ab"), "ab");
+		assertEquals(StringUtil.simpleRegExptoRegExp("a.b"), "a\\.b");
+		assertEquals(StringUtil.simpleRegExptoRegExp("a\\.b"), "a\\.b");
+		assertEquals(StringUtil.simpleRegExptoRegExp("*.b"), "(.*)\\.b");
+		assertTrue(StringUtil.matches("foo.txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
+	}
+
+	/**
+	 * 
+	 */
 	public void testWipeInvalidXML10Chars()
 	{
 		char[] cs = new char[] { 'a', 0x7, 0x3, 'b', 0x5 };
@@ -125,7 +137,6 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test for getDefaultNull
-	 * @throws Exception
 	 */
 	public void testGetDefaultNull()
 	{
@@ -136,7 +147,6 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	/**
 	 * test for getNonEmpty
-	 * @throws Exception
 	 */
 	public void testGetNonEmpty()
 	{
@@ -163,6 +173,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(v.size() > 5);
 	}
 
+	/**
+	 * 
+	 */
 	public void testSprintfString()
 	{
 		assertEquals(StringUtil.sprintf("abc%03idef", "5"), "abc005def");
@@ -177,6 +190,9 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testSprintf()
 	{
 		Object[] o = new Object[1];
@@ -208,6 +224,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.sprintf("%02i%7sdef", o), "05 foobardef");
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetHexBinaryBytes()
 	{
 		String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ÖÄÜöäü€";

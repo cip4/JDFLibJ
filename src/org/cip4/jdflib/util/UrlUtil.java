@@ -228,7 +228,7 @@ public class UrlUtil
 	public static String getRelativePath(File f, File fCWD)
 	{
 		File fCWDLocal = fCWD;
-		
+
 		if (fCWDLocal == null)
 			fCWDLocal = new File(System.getProperty("user.dir"));
 
@@ -510,36 +510,34 @@ public class UrlUtil
 	 */
 	public static File urlToFile(String urlString)
 	{
-		String urlStringLocal = urlString;
-
-		if (urlStringLocal == null)
+		if (urlString == null)
 			return null;
 
-		if (isCID(urlStringLocal) || isHttp(urlStringLocal))
+		if (isCID(urlString) || isHttp(urlString))
 			return null;
 
-		if (urlStringLocal.toLowerCase().startsWith("file:"))
-			urlStringLocal = urlStringLocal.substring(5); // remove "file:"
+		if (urlString.toLowerCase().startsWith("file:"))
+			urlString = urlString.substring(5); // remove "file:"
 
-		File f = new File(urlStringLocal);
+		File f = new File(urlString);
 		if (f.canRead())
 			return f;
 		if (File.separator.equals("\\")) // on windows
 		{
-			if (urlStringLocal.startsWith("///") && urlStringLocal.length() > 5 && urlStringLocal.charAt(4) == '/')
-				urlStringLocal = urlStringLocal.charAt(3) + ":" + urlStringLocal.substring(4);
-			else if (urlStringLocal.startsWith("/") && urlStringLocal.length() > 3 && urlStringLocal.charAt(2) == '/'
-					&& urlStringLocal.charAt(1) != '/')
-				urlStringLocal = urlStringLocal.charAt(1) + ":" + urlStringLocal.substring(2);
-			else if (urlStringLocal.startsWith("///"))
-				urlStringLocal = urlStringLocal.substring(2);
+			if (urlString.startsWith("///") && urlString.length() > 5 && urlString.charAt(4) == '/')
+				urlString = urlString.charAt(3) + ":" + urlString.substring(4);
+			else if (urlString.startsWith("/") && urlString.length() > 3 && urlString.charAt(2) == '/'
+					&& urlString.charAt(1) != '/')
+				urlString = urlString.charAt(1) + ":" + urlString.substring(2);
+			else if (urlString.startsWith("///"))
+				urlString = urlString.substring(2);
 		}
 
-		urlStringLocal = new String(StringUtil.setUTF8String(urlStringLocal)); // ensure that any non-utf8 gets encoded to utf-8
-		urlStringLocal = StringUtil.unEscape(urlStringLocal, "%", 16, 2);
-		urlStringLocal = StringUtil.getUTF8String(urlStringLocal.getBytes());
+		urlString = new String(StringUtil.setUTF8String(urlString)); // ensure that any non-utf8 gets encoded to utf-8
+		urlString = StringUtil.unEscape(urlString, "%", 16, 2);
+		urlString = StringUtil.getUTF8String(urlString.getBytes());
 
-		return new File(urlStringLocal);
+		return new File(urlString);
 	}
 
 	/**
@@ -553,7 +551,7 @@ public class UrlUtil
 		String urlStringLocal = urlString;
 
 		URL url = null;
-		
+
 		if (urlStringLocal == null)
 			return url;
 
@@ -575,7 +573,7 @@ public class UrlUtil
 		{
 			// nop
 		}
-		
+
 		return url;
 	}
 
@@ -621,7 +619,7 @@ public class UrlUtil
 	public static boolean isCID(String url)
 	{
 		String urlLocal = url;
-		
+
 		if (urlLocal == null)
 			return false;
 		if (urlLocal.startsWith("<"))
@@ -693,12 +691,13 @@ public class UrlUtil
 	public static boolean isMIMEExtenstension(String lower)
 	{
 		String lowerLocal = lower;
-		
+
 		lowerLocal = extension(lowerLocal);
 		if (lowerLocal == null)
 			return false;
-		
-		return lowerLocal.equalsIgnoreCase("mjm") || lowerLocal.equalsIgnoreCase("mjd") || lowerLocal.equalsIgnoreCase("mim");
+
+		return lowerLocal.equalsIgnoreCase("mjm") || lowerLocal.equalsIgnoreCase("mjd")
+				|| lowerLocal.equalsIgnoreCase("mim");
 	}
 
 	/**
@@ -777,17 +776,17 @@ public class UrlUtil
 	{
 		String directoryLocal = directory;
 		String urlLocal = url;
-		
+
 		if (directoryLocal == null || JDFConstants.EMPTYSTRING.equals(directoryLocal))
 			return urlLocal;
-		
+
 		if (urlLocal == null)
 			return directoryLocal;
 
 		if (urlLocal.indexOf(":") > 0 && ((urlLocal.indexOf("/") < 0) || urlLocal.indexOf("/") > urlLocal.indexOf(":"))) // has
 			// scheme
 			return urlLocal;
-		
+
 		if (urlLocal.startsWith("/"))
 		{
 			try
@@ -868,7 +867,7 @@ public class UrlUtil
 	public static UrlPart writeToURL(String strUrl, InputStream stream, String method, String contentType, HTTPDetails details)
 	{
 		String contentTypeLocal = contentType;
-		
+
 		try
 		{
 			URL url = new URL(strUrl);
@@ -888,14 +887,14 @@ public class UrlUtil
 
 			out.flush();
 			out.close();
-			
+
 			return new UrlPart(httpURLconnection);
 		}
 		catch (Exception x)
 		{
 			// System.out.print(x);
 		}
-		
+
 		return null;
 	}
 }

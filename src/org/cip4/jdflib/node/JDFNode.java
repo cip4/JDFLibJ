@@ -2384,12 +2384,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				}
 			}
 
-			ni.getResourceRoot().setPartUsage(JDFResource.EnumPartUsage.Implicit);
+			JDFResource niRoot = ni.getResourceRoot();
+			niRoot.setPartUsage(JDFResource.EnumPartUsage.Implicit);
 			VElement ve = ni.getPartitionVector(mattr, EnumPartUsage.Explicit);
 			if (ve.isEmpty()) // no preexisting matching partition - attempt to
 			// create it
 			{
-				ve.add(ni.getCreatePartition(mattr, null));
+				ve.add(niRoot.getCreatePartition(mattr, null));
 			}
 
 			for (int i = 0; i < ve.size(); i++)

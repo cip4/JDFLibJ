@@ -1382,6 +1382,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////
 
 	// /////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetPartStatusNull()
 	{
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -1401,6 +1404,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 	////////////////////////////////////////////////////////////////////////////
 	// ///////////
 
+	/**
+	 * 
+	 */
 	public void testGetPartStatusImplicit()
 	{
 		JDFNode createJDF = new JDFDoc("JDF").getJDFRoot();
@@ -1419,6 +1425,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetPartStatusPerformance()
 	{
 		JDFNode node = new JDFDoc("JDF").getJDFRoot();

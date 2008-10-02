@@ -979,10 +979,10 @@ public class JDFResource extends JDFElement
 	public static JDFResource getResourceRoot(KElement elem)
 	{
 		KElement elemLocal = elem;
-		
+
 		if (elemLocal == null)
 			return null;
-		
+
 		elemLocal = elemLocal.getDeepParent(elemLocal.getLocalName(), Integer.MAX_VALUE);
 
 		KElement parentNode = elemLocal.getParentNode_KElement();
@@ -999,32 +999,32 @@ public class JDFResource extends JDFElement
 						return getResourceRoot(parentNode);
 					}
 				}
-				
+
 				return (JDFResource) ((elemLocal instanceof JDFResource) ? elemLocal : null);
 			}
-			
+
 			if ((parentNode instanceof JDFNode) || (parentNode instanceof JDFJMF))
 			{
 				if ((elemLocal instanceof JDFNodeInfo) || (elemLocal instanceof JDFCustomerInfo))
 				{
 					return (JDFResource) elemLocal;
 				}
-				
+
 				return null; // not a resource
 			}
-			
+
 			if ((elemLocal instanceof JDFResource) && !(parentNode instanceof JDFResource))
 				return (JDFResource) elemLocal;
 
 			return getResourceRoot(parentNode);
 		}
-		
+
 		if (elemLocal instanceof JDFResource)// parentNode == null, this is a
 		// standalone resource
 		{
 			return (JDFResource) elemLocal;
 		}
-		
+
 		return null;
 	}
 
@@ -1087,7 +1087,7 @@ public class JDFResource extends JDFElement
 	public JDFResource makeRootResource(String alias, JDFElement parentPool, boolean bLinkHere)
 	{
 		String aliasLocal = alias;
-		
+
 		JDFResource retRes = this;
 
 		// if this is already in the resource pool do nothing
@@ -1104,7 +1104,7 @@ public class JDFResource extends JDFElement
 				{
 					aliasLocal = getIDPrefix() + uniqueID(0);
 				}
-				
+
 				link.appendHRef(this, null, aliasLocal);
 			}
 
@@ -1289,7 +1289,7 @@ public class JDFResource extends JDFElement
 		{
 			return null;
 		}
-		
+
 		final String resID = getID();
 
 		final JDFAttributeMap mID = new JDFAttributeMap(AttributeName.RREF, resID);
@@ -1298,7 +1298,7 @@ public class JDFResource extends JDFElement
 		{
 			refList.add(getLinkString());
 		}
-		
+
 		if (bRef)
 		{
 			refList.add(getRefString());
@@ -1309,7 +1309,7 @@ public class JDFResource extends JDFElement
 		{
 			return null;
 		}
-		
+
 		VElement vRet = null;
 		if (bRef)
 		{
@@ -1335,7 +1335,7 @@ public class JDFResource extends JDFElement
 				}
 			}
 		}
-		
+
 		JDFAttributeMap mPart = getPartMap();
 		if (mPart != null && mPart.size() > 0)
 		{
@@ -1361,7 +1361,7 @@ public class JDFResource extends JDFElement
 				{
 					continue; // the link refers to the root, thus also to this
 				}
-				
+
 				int nZapp = 0;
 				final int size = linkMapVector.size();
 				for (int j = 0; j < size; j++)
@@ -1372,7 +1372,7 @@ public class JDFResource extends JDFElement
 						nZapp++;
 					}
 				}
-				
+
 				if (nZapp == size) // no matching parts at all
 				{
 					vRet.remove(i);
@@ -1593,7 +1593,8 @@ public class JDFResource extends JDFElement
 		final JDFAttributeMap thisMap = getPartMap();
 		if (!JDFPart.overlapPartMap(thisMap, localPartMap))
 		{
-			throw new JDFException("JDFResource.GetCreatePartition: non-matching partitions");
+			throw new JDFException("JDFResource.GetCreatePartition: non-matching partitions: leaf map:" + thisMap
+					+ " create map:" + localPartMap + " PartIDKeys:" + getPartIDKeys());
 		}
 
 		if (thisMap != null)
@@ -1940,7 +1941,7 @@ public class JDFResource extends JDFElement
 	{
 		EnumPartUsage partUsageLocal = partUsage;
 		int matchingDepthLocal = matchingDepth;
-		
+
 		JDFAttributeMap m = new JDFAttributeMap(m_in);
 		VElement vReturn = new VElement();
 		removeImplicitPartions(m);
@@ -3208,7 +3209,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated use JDFMerge.mergeSpawnIDS
 	 */
 	@Deprecated
-	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs) 
+	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs)
 	{
 		if (!getID().equals(resToMerge.getID()))
 		{
@@ -7052,13 +7053,13 @@ public class JDFResource extends JDFElement
 	private EnumValidationLevel incompleteLevel(EnumValidationLevel level, boolean bForce)
 	{
 		EnumValidationLevel levelLocal = level;
-		
+
 		EnumResStatus es = getResStatus(false);
 		if ((es == EnumResStatus.Incomplete) || isResourceUpdate() || bForce)
 		{
 			levelLocal = EnumValidationLevel.incompleteLevel(levelLocal);
 		}
-		
+
 		return levelLocal;
 	}
 
@@ -7072,7 +7073,7 @@ public class JDFResource extends JDFElement
 	public boolean isValid(EnumValidationLevel level)
 	{
 		EnumValidationLevel levelLocal = level;
-		
+
 		boolean bRet = true;
 
 		// it is supposed to be incomplete -> don't check for completeness

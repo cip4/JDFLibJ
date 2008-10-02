@@ -88,7 +88,7 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * 
 	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(KElement)
 	 */
-	public boolean walk(KElement e)
+	public boolean walk(@SuppressWarnings("unused") KElement e)
 	{
 		return true;
 	}

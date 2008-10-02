@@ -79,6 +79,7 @@ package org.cip4.jdflib.util;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
@@ -93,7 +94,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testisAbsoluteFile()
+	public void testisAbsoluteFile() throws Exception
 	{
 		assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
 		assertFalse(FileUtil.isAbsoluteFile("foo"));
@@ -107,12 +108,26 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testisCleanURLFile()
+	public void testisCleanURLFile() throws Exception
 	{
 		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
 		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));
 		assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:\\a")));
 		assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:/a")));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testListTree() throws Exception
+	{
+		File root = new File(sm_dirTestData + File.separator + "dir1");
+		Vector<File> list = FileUtil.listFilesInTree(root, "dir(.+)/");
+		assertEquals(list.size(), 2);
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
+		list = FileUtil.listFilesInTree(root, StringUtil.simpleRegExptoRegExp("dir*/*.txt"));
+		assertEquals(list.size(), 4);
 	}
 
 	/**

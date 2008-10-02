@@ -17,6 +17,9 @@ public class ElementWalker
 {
 	protected IWalkerFactory theFactory;
 
+	/**
+	 * @param _theFactory used to find the individual instances for the children
+	 */
 	public ElementWalker(IWalkerFactory _theFactory)
 	{
 		super();
@@ -44,10 +47,8 @@ public class ElementWalker
 		}
 		if (b) // follow kids if still alive
 		{
-			VElement v = e.getChildElementVector_KElement(null, null, null, true, -1); // do
-			// not
-			// follow
-			// refelements
+			// do not follow refelements
+			VElement v = e.getChildElementVector_KElement(null, null, null, true, -1);
 			final int size = v.size();
 			for (int i = 0; i < size; i++)
 			{
