@@ -295,7 +295,7 @@ public class JDFQueue extends JDFAutoQueue
 	public synchronized Map<String, JDFQueueEntry> getQueueEntryIDMap()
 	{
 		HashMap<String, JDFQueueEntry> map = null;
-		
+
 		VElement v = getQueueEntryVector();
 		if (v != null)
 		{
@@ -310,7 +310,7 @@ public class JDFQueue extends JDFAutoQueue
 				}
 			}
 		}
-		
+
 		return map;
 	}
 
@@ -376,7 +376,7 @@ public class JDFQueue extends JDFAutoQueue
 	public synchronized VElement flushQueue(JDFQueueFilter qf)
 	{
 		int siz = 0;
-		
+
 		VElement ve = getQueueEntryVector();
 		if (ve != null)
 		{
@@ -388,7 +388,7 @@ public class JDFQueue extends JDFAutoQueue
 				{
 					if (cleanupCallback != null)
 						cleanupCallback.cleanEntry(qe);
-					
+
 					qe.deleteNode();
 				}
 				else
@@ -398,10 +398,10 @@ public class JDFQueue extends JDFAutoQueue
 				}
 			}
 		}
-		
+
 		if (automated)
 			setStatusFromEntries();
-		
+
 		return siz == 0 ? null : ve;
 
 	}
@@ -499,7 +499,7 @@ public class JDFQueue extends JDFAutoQueue
 	{
 		if (nodeID == null)
 			return null;
-		
+
 		VElement v = getQueueEntryVector();
 		if (v != null)
 		{
@@ -569,7 +569,7 @@ public class JDFQueue extends JDFAutoQueue
 
 		if (!canExecute())
 			return theEntry;
-		
+
 		VElement v = getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, EnumQueueEntryStatus.Waiting), null);
 		if (v != null)
 		{
@@ -591,7 +591,7 @@ public class JDFQueue extends JDFAutoQueue
 				}
 			}
 		}
-		
+
 		return theEntry;
 	}
 
@@ -676,7 +676,7 @@ public class JDFQueue extends JDFAutoQueue
 				}
 			}
 		}
-		
+
 		setStatusFromEntries();
 	}
 

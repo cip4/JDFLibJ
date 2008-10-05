@@ -83,9 +83,11 @@ public interface IWalker
 	/**
 	 * called for every IWalker that the factory returns
 	 * @param e the element to walk
+	 * @param trackElem TODO
 	 * 
-	 * @return true if this element remains after walking, <br/> false if it was deleted and therefor the walker should
+	 * @return !=null if this element remains after walking, <br/> null if it was deleted and therefor the walker should
 	 *         skip this and all its descendants
+	 *         the element may either be this or a converted element to continue with
 	 */
-	public boolean walk(KElement e);
+	public KElement walk(KElement e, KElement trackElem);
 }

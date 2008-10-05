@@ -1351,17 +1351,12 @@ public class KElementTest extends JDFTestCaseBase
 		assertNotSame("", e, root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[5]"));
 		assertEquals("", root.getElement("foo").getElement("bar").numChildElements("fnarf", null), 0);
 		assertEquals("", root.getElement("foo").getElement("bar").getNextSiblingElement("bar", null).numChildElements("fnarf", null), 5);
-		try
-		{
-			root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]");
-			fail("cannot create by attribute value");
-		}
-		catch (IllegalArgumentException x)
-		{
-			/* */
-		}
+		assertNotNull("create by attribute value now implemented", root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testBuildXPath()
 	{
 		XMLDoc d = new XMLDoc("d", null);
@@ -1386,11 +1381,16 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetXPathAttribute()
 	{
 		JDFAudit.setStaticAuthor(JDFAudit.software());
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		JDFNode root = (JDFNode) jdfDoc.getRoot();
+		root.setID("rootID");
+		assertEquals(root.getXPathAttribute("@ID", null), "rootID");
 
 		String nodeName = "Created";
 		String attribute = "Author";
@@ -1416,6 +1416,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetDOMAttr()
 	{
 		XMLDoc xd = new XMLDoc("a", null);
@@ -1428,6 +1431,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertNotNull("", child.getDOMAttr("at", null, true));
 	}
 
+	/**
+	 * 
+	 */
 	public void testRemoveXPathAttribute()
 	{
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -1445,6 +1451,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue("", attValue.equals("dummydefault"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetXPathAttribute()
 	{
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -1464,9 +1473,21 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testSetXPathValue()
+	{
+		XMLDoc doc = new XMLDoc("root", null);
+		KElement root = doc.getRoot();
+		root.setXPathValue("foo/bar", "snafu");
+		assertEquals(root.getXPathElement("foo/bar").getText(), "snafu");
+		root.setXPathValue("foo/bar/@c", "d");
+		assertEquals(root.getXPathAttribute("foo/bar/@c", null), "d");
+	}
+
+	/**
 	 * Method testGetDeepParentChild.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetDeepParentChild()
 	{

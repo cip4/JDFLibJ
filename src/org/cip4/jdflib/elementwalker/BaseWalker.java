@@ -74,10 +74,10 @@ import org.cip4.jdflib.core.KElement;
  *
  */
 /**
- * @author prosirai
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
  */
-public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
+public class BaseWalker implements IWalker, Comparable<BaseWalker>
 {
 	// depth is calculated automatically from the class hierarchy and used to
 	// sort walkers from explicit to abstract
@@ -86,11 +86,12 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 	/**
 	 * the mother routine for walking.... 
 	 * 
-	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(KElement)
+	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(KElement, KElement)
 	 */
-	public boolean walk(@SuppressWarnings("unused") KElement e)
+	@SuppressWarnings("unused")
+	public KElement walk(KElement e, KElement trackElem)
 	{
-		return true;
+		return e;
 	}
 
 	/**
@@ -115,6 +116,7 @@ public abstract class BaseWalker implements IWalker, Comparable<BaseWalker>
 	}
 
 	/**
+	 * adds an element to a factory automagically
 	 * @param factory
 	 */
 	private void addToFactory(BaseWalkerFactory factory)

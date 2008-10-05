@@ -516,30 +516,49 @@ public class KElement extends ElementNSImpl
 		 * @param level the level to check
 		 * @return true if required
 		 */
-		public static boolean isRequired(EnumValidationLevel vl)
+		public static boolean isRequired(EnumValidationLevel level)
 		{
-			return EnumValidationLevel.Complete.equals(vl) || EnumValidationLevel.RecursiveComplete.equals(vl)
-					|| EnumValidationLevel.NoWarnComplete.equals(vl);
+			return EnumValidationLevel.Complete.equals(level) || EnumValidationLevel.RecursiveComplete.equals(level)
+					|| EnumValidationLevel.NoWarnComplete.equals(level);
 		}
 
+		/**
+		 * ignore warnings and allow missing traits
+		 */
 		public static final EnumValidationLevel NoWarnIncomplete = new EnumValidationLevel("NoWarnIncomplete");
 
+		/**
+		 * ignore warnings and require all traits
+		 */
 		public static final EnumValidationLevel NoWarnComplete = new EnumValidationLevel("NoWarnComplete");
 
+		/**
+		 * show warnings and allow missing traits
+		 */
 		public static final EnumValidationLevel Incomplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_INCOMPLETE);
 
+		/**
+		 * show warnings and require all traits
+		 */
 		public static final EnumValidationLevel Complete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_COMPLETE);
 
+		/**
+		 * show warnings and allow missing traits- also recurse referenced elements
+		 */
 		public static final EnumValidationLevel RecursiveIncomplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_RECURSIVEINCOMPLETE);
 
+		/**
+		 * show warnings and require all traits - also recurse referenced elements
+		 */
 		public static final EnumValidationLevel RecursiveComplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_RECURSIVECOMPLETE);
 
 		/**
 		 * 
 		 * calculate the corresponding nowarn level based on level
+		 * @param level the level to strip warnings from
 		 * 
 		 * @param noWarning if true, set to nowarne, else set to standard
-		 * @return
+		 * @return the validationlevel withot warnings
 		 */
 		public static EnumValidationLevel setNoWarning(EnumValidationLevel level, boolean noWarning)
 		{
@@ -4982,6 +5001,34 @@ public class KElement extends ElementNSImpl
 	 *            <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
 	 * @param value string to be set as attribute value
 	 * 
+	 */
+	public void setXPathValue(String path, String value)
+	{
+		final int pos = path.lastIndexOf(JDFConstants.AET);
+		if (pos >= 0)
+		{
+			setXPathAttribute(path, value);
+		}
+		else
+		{
+			KElement kEle = getXPathElement(path);
+			if (kEle == null)
+			{
+				kEle = getCreateXPathElement(path);
+			}
+			kEle.setText(value);
+		}
+	}
+
+	/**
+	 * Sets an attribute as defined by XPath to value <br>
+	 * 
+	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
+	 * 
+	 * @param path XPath abbreviated syntax representation of the attribute, e.g.:
+	 *            <code>parentElement/thisElement@thisAtt</code> <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement/thisElement[@foo=\"bar\"]/@thisAtt</code>
+	 * @param value string to be set as attribute value
+	 * 
 	 * @throws JDFException if the defined path is a bad attribute path
 	 */
 	public void setXPathAttribute(String path, String value)
@@ -5436,18 +5483,52 @@ public class KElement extends ElementNSImpl
 		int iSkip = 0;
 		String newPath = path;
 		int pos = newPath.indexOf(JDFConstants.SLASH);
+		String attName = null;
+		String attVal = null;
 		if (posB0 != -1 && (posB0 < pos || pos == -1))
 		{
 			int posB1 = path.indexOf("]");
 			final String siSkip = path.substring(posB0 + 1, posB1);
-			if (!StringUtil.isInteger(siSkip))
-			{
-				throw new IllegalArgumentException("GetCreateXPath: illegal path:" + path);
-			}
-			iSkip = StringUtil.parseInt(siSkip, 1);
-			iSkip--;
 			newPath = path.substring(0, posB0) + path.substring(posB1 + 1);
 			pos = newPath.indexOf(JDFConstants.SLASH);
+			if (!StringUtil.isInteger(siSkip))
+			{
+				iSkip = -1; // flag for snafu
+				if (siSkip.startsWith("@"))
+				{
+					VString v = StringUtil.tokenize(siSkip, "=", false);
+					if (v.size() == 2)
+					{
+						attName = v.get(0);
+						attVal = v.get(1);
+						if (attName.length() > 1 && attVal.startsWith("\"") && attVal.endsWith("\""))
+						{
+							attName = attName.substring(1); // remove "@"
+							attVal = attVal.substring(1, attVal.length() - 1);
+							String kidName = pos >= 0 ? newPath.substring(0, pos) : newPath;
+							VElement vNewChild = getChildElementVector(kidName, null);
+							for (int j = 0; j < vNewChild.size(); j++)
+							{
+								KElement tryKid = vNewChild.get(j);
+								if (attName.equals(tryKid.getAttribute(attName)))
+								{
+									iSkip = j + 1;
+									break;
+								}
+							}
+							if (iSkip == -1)
+								iSkip = vNewChild.size();
+						}
+					}
+				}
+				if (iSkip < 0)
+					throw new IllegalArgumentException("GetCreateXPath: illegal path:" + path);
+			}
+			else
+			{
+				iSkip = StringUtil.parseInt(siSkip, 1);
+				iSkip--;
+			}
 		}
 		if (pos != -1)
 		{
@@ -5457,6 +5538,8 @@ public class KElement extends ElementNSImpl
 				appendElement(newPath.substring(0, pos), null);
 			}
 			e = getCreateElement(newPath.substring(0, pos), null, iSkip);
+			if (attName != null && !e.hasAttribute(attName)) // update for [qa=b syntax
+				e.setAttribute(attName, attVal);
 			return e.getCreateXPathElement(newPath.substring(pos + 1));
 		}
 		int n = numChildElements(newPath, null);
@@ -5792,7 +5875,6 @@ public class KElement extends ElementNSImpl
 	 */
 	public void copyAttribute(String attrib, KElement src)
 	{
-
 		copyAttribute(attrib, src, null, null, null);
 	}
 
@@ -5836,6 +5918,18 @@ public class KElement extends ElementNSImpl
 		}
 
 		setAttribute(attrib, attribute);
+	}
+
+	/**
+	 * moves an attribute from src to this, the attribute will be removed from src and moved to this.
+	 * <p>
+	 * 
+	 * @param attrib where to move the attribute
+	 * @param src element to move from
+	 */
+	public void moveAttribute(String attrib, KElement src)
+	{
+		moveAttribute(attrib, src, null, null, null);
 	}
 
 	/**

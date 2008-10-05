@@ -88,10 +88,10 @@ public class BaseWalkerFactory implements IWalkerFactory
 	protected int maxDepth = 0;
 	protected Vector<BaseWalker> v = new Vector<BaseWalker>();
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalkers(org.cip4.jdflib .core.KElement)
+	 * get the appropriate walker for a given element
+	 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalker(org.cip4.jdflib .core.KElement)
 	 */
 	public IWalker getWalker(KElement toCheck)
 	{

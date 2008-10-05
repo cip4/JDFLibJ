@@ -115,10 +115,10 @@ public class BaseWalkerTest extends JDFTestCaseBase
 		XMLDoc d = new XMLDoc("a", null);
 		ElementWalker ew = new ElementWalker(bf);
 		KElement root = d.getRoot();
-		assertEquals(ew.walk(root), 1);
+		assertEquals(ew.walkTree(root, null), 1);
 		for (int i = 1; i <= 10; i++)
 			root.getCreateXPathElement("b/c/d[" + i + "]");
-		assertEquals("a,b,c+10*d=13", ew.walk(root), 13);
+		assertEquals("a,b,c+10*d=13", ew.walkTree(root, null), 13);
 
 	}
 }

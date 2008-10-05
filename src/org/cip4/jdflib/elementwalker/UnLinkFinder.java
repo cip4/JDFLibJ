@@ -89,28 +89,28 @@ import org.cip4.jdflib.util.ContainerUtil;
  */
 public class UnLinkFinder extends BaseElementWalker
 {
-	/**
-	 * @param _theFactory
-	 * @param _callBack
-	 */
 	protected LinkData ld;
 
+	/**
+	 * 
+	 */
 	public UnLinkFinder()
 	{
 		super(new BaseWalkerFactory());
 		ld = this.new LinkData();
+		new BaseWalker(getFactory()); // need a default walker
 	}
 
 	/**
 	 * get a vector of all unlinked resources of n and its children
 	 * 
 	 * @param n the node to walk
-	 * @return
+	 * @return the vector of unlinked resources
 	 */
 	public VElement getUnlinkedResources(JDFNode n)
 	{
 		ld.clear();
-		walk(n);
+		walkTree(n, null);
 		Vector<KElement> toValueVector = ContainerUtil.toValueVector(ld.resMap, false);
 		return toValueVector == null ? null : new VElement(toValueVector);
 	}
@@ -128,7 +128,7 @@ public class UnLinkFinder extends BaseElementWalker
 			int siz = v.size();
 			for (int i = 0; i < siz; i++)
 				v.get(i).deleteNode();
-			
+
 			if (siz > 0)
 				eraseUnlinkedResources(n);
 		}
@@ -178,23 +178,34 @@ public class UnLinkFinder extends BaseElementWalker
 			super(getFactory());
 		}
 
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e
+		 * @param trackElem
+		 * @return the element to continue walking 
+		 */
 		@Override
-		public boolean walk(KElement e)
+		public KElement walk(KElement e, KElement trackElem)
 		{
 			JDFResource r = (JDFResource) e;
 			String id = r.getID();
 			if (ld.doneSet.contains(id))
-				return true;
+				return e;
 			if (ld.refSet.contains(id))
 			{
 				ld.doneSet.add(id);
 				ld.refSet.remove(id);
-				return true;
+				return e;
 			}
 			ld.resMap.put(id, r);
-			return true;
+			return e;
 		}
 
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
 		@Override
 		public boolean matches(KElement toCheck)
 		{
@@ -221,25 +232,36 @@ public class UnLinkFinder extends BaseElementWalker
 			super(getFactory());
 		}
 
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e
+		 * @param trackElem
+		 * @return
+		 */
 		@Override
-		public boolean walk(KElement e)
+		public KElement walk(KElement e, KElement trackElem)
 		{
 			String id = e.getAttribute(AttributeName.RREF, null, null);
 			if (id == null)
-				return true;
+				return e;
 			if (ld.doneSet.contains(id))
-				return true;
+				return e;
 
 			if (ld.resMap.containsKey(id))
 			{
 				ld.doneSet.add(id);
 				ld.resMap.remove(id);
-				return true;
+				return e;
 			}
 			ld.refSet.add(id);
-			return true;
+			return e;
 		}
 
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
 		@Override
 		public boolean matches(KElement toCheck)
 		{

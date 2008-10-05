@@ -91,41 +91,24 @@ import org.apache.commons.io.IOUtils;
 public class DumpDir
 {
 
-	/**
-	 * very simple and fast mutable integer class
-	 * 
-	 * @author prosirai
-	 * 
-	 */
-	protected class MyInt
-	{
-		public int i = 0;
-
-		@Override
-		public String toString()
-		{
-			return String.valueOf(i);
-		}
-	}
-
 	// ////////////////////////////////////////////////////////////////////////
 	private File baseDir = null;
-	private static HashMap<File, MyInt> listMap = new HashMap<File, MyInt>();
+	private static HashMap<File, MyInteger> listMap = new HashMap<File, MyInteger>();
 	private final int maxKeep = 500;
 	/**
 	 * if true, no printouts
 	 */
 	public boolean quiet = true;
 	/**
-     * 
-     */
+	 * 
+	 */
 	private static final long serialVersionUID = -8902151736333089036L;
 
 	private int increment()
 	{
 		synchronized (listMap)
 		{
-			MyInt i = listMap.get(baseDir);
+			MyInteger i = listMap.get(baseDir);
 			return i.i++;
 		}
 	}
@@ -139,10 +122,10 @@ public class DumpDir
 		baseDir.mkdirs();
 		synchronized (listMap)
 		{
-			MyInt index = listMap.get(baseDir);
+			MyInteger index = listMap.get(baseDir);
 			if (index == null)
 			{
-				index = new MyInt();
+				index = new MyInteger(0);
 				listMap.put(baseDir, index);
 			}
 			String[] names = baseDir.list();
@@ -205,14 +188,14 @@ public class DumpDir
 	public File newFileFromStream(String header, InputStream is)
 	{
 		InputStream isLocal = is;
-		
+
 		File dump = newFile(null);
 		if (!(isLocal instanceof BufferedInputStream))
 		{
 			isLocal = new BufferedInputStream(isLocal);
 			isLocal.mark(100000);
 		}
-		
+
 		FileOutputStream fs = newHeader(header, dump, false);
 		if (fs != null)
 		{
@@ -228,7 +211,7 @@ public class DumpDir
 				// nop
 			}
 		}
-		
+
 		return dump;
 	}
 

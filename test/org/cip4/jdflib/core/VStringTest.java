@@ -15,8 +15,15 @@ import junit.framework.TestCase;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class VStringTest extends TestCase
 {
+	/**
+	 * 
+	 */
 	public void testGetAllString()
 	{
 		VString v = new VString();
@@ -24,11 +31,13 @@ public class VStringTest extends TestCase
 		v.appendUnique("b");
 		v.appendUnique("c");
 		v.appendUnique("c");
-		assertEquals("a b c", StringUtil.setvString(v, " ", null, null),
-				"a b c");
+		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testContainsAny()
 	{
 		VString v = new VString();
@@ -45,6 +54,9 @@ public class VStringTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testSort()
 	{
 		VString v = new VString();
@@ -52,18 +64,31 @@ public class VStringTest extends TestCase
 		v.add("c");
 		v.add("b");
 		v.sort();
-		assertEquals("a b c", StringUtil.setvString(v, " ", null, null),
-				"a b c");
-
+		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
 	}
 
+	/**
+	 * 
+	 */
+	public void testSetNull()
+	{
+		VString v = new VString();
+		v.add((String) null);
+		v.add("b");
+		v.add("c");
+		assertEquals("b c", StringUtil.setvString(v, " ", null, null), "b c");
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetSet()
 	{
 		VString v = new VString();
 		v.add("a");
 		v.add("c");
 		v.add("b");
-		Set s = v.getSet();
+		Set<?> s = v.getSet();
 		assertEquals(v.size(), s.size());
 		assertTrue(s.contains("c"));
 
@@ -71,6 +96,9 @@ public class VStringTest extends TestCase
 
 	// /////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testUnify()
 	{
 		VString v = new VString();
@@ -86,14 +114,15 @@ public class VStringTest extends TestCase
 		w.add("d");
 
 		v.unify();
-		assertEquals("a b c", StringUtil.setvString(v, " ", null, null),
-				"a b c");
+		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
 		v.appendUnique(w);
-		assertEquals("a b c d", StringUtil.setvString(v, " ", null, null),
-				"a b c d");
+		assertEquals("a b c d", StringUtil.setvString(v, " ", null, null), "a b c d");
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testAddAll()
 	{
 		VString v = new VString();
@@ -101,31 +130,34 @@ public class VStringTest extends TestCase
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		HashSet h = new HashSet();
+		HashSet<String> h = new HashSet<String>();
 		h.add("c");
 		h.add("b");
 		h.add("a");
 		h.add("d");
 
 		v.unify();
-		assertEquals("a b c", StringUtil.setvString(v, " ", null, null),
-				"a b c");
+		assertEquals("a b c", StringUtil.setvString(v, " ", null, null), "a b c");
 		v.addAll(h);
 		v.unify();
-		assertEquals("a b c d", StringUtil.setvString(v, " ", null, null),
-				"a b c d");
+		assertEquals("a b c d", StringUtil.setvString(v, " ", null, null), "a b c d");
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testadd()
 	{
 		VString v = new VString();
 		v.add(EnumType.AdhesiveBinding);
-		assertEquals(StringUtil.setvString(v, " ", null, null),
-				EnumType.AdhesiveBinding.getName());
+		assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.getName());
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetElementAt()
 	{
 		VString v = new VString();

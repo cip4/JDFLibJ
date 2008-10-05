@@ -82,6 +82,8 @@ import java.util.Iterator;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart;
 import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.StringUtil;
@@ -155,6 +157,45 @@ public class JDFPart extends JDFAutoPart
 				retMap.put(key, am.get(key));
 		}
 		return retMap;
+	}
+
+	/**
+	 * heuristically guess the partidkey order
+	 * @return
+	 */
+	public VString guessPartIDKeys()
+	{
+		JDFAttributeMap map = getPartMap();
+		if (map == null || map.size() == 0)
+			return null;
+		VString v = new VString();
+		VString keys = map.getKeys();
+		if (map.size() == 1)
+		{
+			return map.getKeys();
+		}
+		if (keys.contains(AttributeName.SIGNATURENAME))
+		{
+			v.add(AttributeName.SIGNATURENAME);
+			keys.remove(AttributeName.SIGNATURENAME);
+		}
+		if (keys.contains(AttributeName.SHEETNAME))
+		{
+			v.add(AttributeName.SHEETNAME);
+			keys.remove(AttributeName.SHEETNAME);
+		}
+		if (keys.contains(AttributeName.SIDE))
+		{
+			v.add(AttributeName.SIDE);
+			keys.remove(AttributeName.SIDE);
+		}
+		if (keys.contains(AttributeName.SEPARATION))
+		{
+			v.add(AttributeName.SEPARATION);
+			keys.remove(AttributeName.SEPARATION);
+		}
+		v.addAll(keys);
+		return v;
 	}
 
 	/**

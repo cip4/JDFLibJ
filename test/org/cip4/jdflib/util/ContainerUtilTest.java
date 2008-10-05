@@ -76,6 +76,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IMatches;
 
 /**
@@ -119,6 +120,9 @@ public class ContainerUtilTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testEquals()
 	{
 		assertTrue(ContainerUtil.equals(null, null));
@@ -128,6 +132,9 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		assertTrue(ContainerUtil.equals("a", "a"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetMatch()
 	{
 		Vector<SimpleMatch> v = new Vector<SimpleMatch>();
@@ -138,6 +145,9 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
 	}
 
+	/**
+	 * 
+	 */
 	public void testToHashSetArray()
 	{
 		String[] a = { "a", "b" };
@@ -148,6 +158,9 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		assertEquals(s.size(), a.length);
 	}
 
+	/**
+	 * 
+	 */
 	public void testToValueVector()
 	{
 		HashMap<String, String> hm = new HashMap<String, String>();
@@ -161,5 +174,18 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		for (int i = 1; i < 10; i++)
 			assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
 
+	}
+
+	/**
+	 * 
+	 */
+	public void testEnsureSize()
+	{
+		VString v = new VString();
+		ContainerUtil.ensureSize(4, v);
+		assertEquals(v.size(), 4);
+		v.set(2, "foo");
+		assertEquals(v.get(2), "foo");
+		assertNull(v.get(0));
 	}
 }

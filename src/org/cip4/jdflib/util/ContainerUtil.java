@@ -323,4 +323,17 @@ public class ContainerUtil
 		return c0.compareTo(c1);
 	}
 
+	/**
+	 * ensure that a collection has at least size elements and fill any newly created entries with nulls
+	 * @param <a> anything - needed for the cast 
+	 * @param size
+	 * @param coll
+	 */
+	public static <a> void ensureSize(int size, Collection<a> coll)
+	{
+		int s2 = coll.size();
+		if (s2 < size)
+			for (int i = s2; i < size; i++)
+				coll.add((a) null);
+	}
 }

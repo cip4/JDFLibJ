@@ -365,9 +365,10 @@ public class StringUtil
 		if (front != null)
 			buf.append(front);
 
+		boolean next = false;
 		for (int i = 0; i < siz; i++)
 		{
-			if (i > 0 && sep != null)
+			if (next && sep != null)
 			{
 				buf.append(sep);
 			}
@@ -375,12 +376,14 @@ public class StringUtil
 			if (elementAt instanceof String)
 			{
 				buf.append((String) elementAt);
+				next = true;
 			}
 			else if (elementAt instanceof ValuedEnum)
 			{
 				buf.append(((ValuedEnum) elementAt).getName());
+				next = true;
 			}
-			else
+			else if (elementAt != null)
 				throw new IllegalArgumentException("illegal vector contents");
 
 		}
