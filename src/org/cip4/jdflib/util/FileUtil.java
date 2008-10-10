@@ -101,6 +101,7 @@ import org.cip4.jdflib.core.VString;
  */
 public class FileUtil
 {
+
 	/**
 	 * list all files with a given extension (directories are skipped
 	 * 
@@ -226,6 +227,26 @@ public class FileUtil
 				for (int i = 0; i < list.size(); i++)
 				{
 					String st = list.stringAt(i);
+					if (st.startsWith("."))
+						st = st.substring(1);
+					st = st.toLowerCase();
+					m_extension.add(st);
+				}
+			}
+		}
+
+		/**
+		 * @param fileExtensionVector Vector of valid regular expressions
+		 * 
+		 */
+		protected ExtensionFileFilter(VString fileExtensionVector)
+		{
+			if (fileExtensionVector != null)
+			{
+				m_extension = new HashSet<String>();
+				for (int i = 0; i < fileExtensionVector.size(); i++)
+				{
+					String st = fileExtensionVector.stringAt(i);
 					if (st.startsWith("."))
 						st = st.substring(1);
 					st = st.toLowerCase();
@@ -498,5 +519,14 @@ public class FileUtil
 
 		return false;
 
+	}
+
+	/**
+	 * @param file
+	 * @return the file extension
+	 */
+	public static String getExtension(File file)
+	{
+		return file == null ? null : UrlUtil.extension(file.getName());
 	}
 }

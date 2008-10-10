@@ -82,6 +82,9 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.util.Vector;
 
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+
 /**
  * a very simple hotfolder watcher subdirectories are ignored
  * 
@@ -113,11 +116,55 @@ public class HotFolder implements Runnable
 		return dir;
 	}
 
+	private String getAllExtensions()
+	{
+		if (hfl == null)
+			return null;
+		VString allextensions = new VString();
+		for (int i = 0; i < hfl.size(); i++)
+		{
+			String ext = hfl.get(i).extension;
+			if (ext != null)
+				allextensions.add(ext);
+
+		}
+		allextensions.unify();
+		return allextensions.size() == 0 ? null : StringUtil.setvString(allextensions, ",", null, null);
+	}
+
 	private long lastModified = -1;
 	private final Vector<FileTime> lastFileTime;
-	private final HotFolderListener hfl;
-	private final String extension;
+	protected final Vector<ExtensionListener> hfl;
 	private Thread runThread;
+
+	/**
+	 * constructor for a simple hotfolder watcher that is automagically started in its own thread
+	 * 
+	 * @param _dir the Directory to watch
+	 * @param ext the extension filter - case is ignored and lists of extensions may be specified as a comma separated
+	 *            list e.g. ".txt,.xml"
+	 * @param _hfl the listener callback
+	 */
+	public HotFolder(File _dir)
+	{
+		dir = _dir;
+		dir.mkdirs();
+		lastFileTime = new Vector<FileTime>();
+		hfl = new Vector<ExtensionListener>();
+		runThread = null;
+		restart();
+	}
+
+	/**
+	 * @param _hfl
+	 * @param ext
+	 */
+	public synchronized void addListener(HotFolderListener _hfl, String ext)
+	{
+		if (hfl != null)
+			hfl.add(new ExtensionListener(_hfl, ext));
+		lastModified = 0;
+	}
 
 	/**
 	 * constructor for a simple hotfolder watcher that is automagically started in its own thread
@@ -131,9 +178,9 @@ public class HotFolder implements Runnable
 	{
 		dir = _dir;
 		dir.mkdirs();
-		extension = ext;
 		lastFileTime = new Vector<FileTime>();
-		hfl = _hfl;
+		hfl = new Vector<ExtensionListener>();
+		addListener(_hfl, ext);
 		runThread = null;
 		restart();
 	}
@@ -182,6 +229,7 @@ public class HotFolder implements Runnable
 	 */
 	public void run()
 	{
+
 		while (!interrupt)
 		{
 			long lastMod = dir.lastModified();
@@ -189,7 +237,7 @@ public class HotFolder implements Runnable
 			// has the directory been touched?
 			{
 				lastModified = lastMod;
-				File[] files = FileUtil.listFilesWithExtension(dir, extension);
+				File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
 				int fileListLength = files != null ? files.length : 0;
 
 				for (int i = lastFileTime.size() - 1; i >= 0; i--)
@@ -201,14 +249,18 @@ public class HotFolder implements Runnable
 						if (files != null)
 						{
 							final FileTime lftAt = lastFileTime.elementAt(i);
-							if (files[j] != null && files[j].equals(lftAt.f))
+							File fileJ = files[j];
+							if (fileJ != null && fileJ.equals(lftAt.f))
 							{
 								found = true;
-								if (files[j].lastModified() == lftAt.modified)
+								if (fileJ.lastModified() == lftAt.modified)
 								{
-									if (files[j].exists())
+									if (fileJ.exists())
 									{
-										hfl.hotFile(files[j]); // exists and stabilized - call callback
+										for (int k = 0; k < hfl.size(); k++)
+										{
+											hfl.get(k).hotFile(fileJ); // exists and stabilized - call callbacks
+										}
 									}
 									else
 									{
@@ -235,7 +287,7 @@ public class HotFolder implements Runnable
 				if (files != null)
 				{
 					for (int i = 0; i < fileListLength; i++) // the file is new -
-					// add to list for nextr check
+					// add to list for next check
 					{
 						if (files[i] != null)
 							lastFileTime.add(new FileTime(files[i]));
@@ -243,17 +295,7 @@ public class HotFolder implements Runnable
 				}
 			}
 
-			try
-			{
-				synchronized (runThread)
-				{
-					runThread.wait(stabilizeTime);
-				}
-			}
-			catch (InterruptedException x)
-			{
-				// nop
-			}
+			ThreadUtil.wait(runThread, stabilizeTime);
 		}
 
 		runThread.interrupt();
@@ -275,6 +317,49 @@ public class HotFolder implements Runnable
 			f = _f;
 			modified = -1;
 		}
+	}
+
+	/**
+	 * simple container class that retains the last known mod date of a file
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	protected class ExtensionListener
+	{
+		protected HotFolderListener fl;
+		protected String extension;
+
+		protected ExtensionListener(HotFolderListener _hfl, String ext)
+		{
+			fl = _hfl;
+			ext = StringUtil.getNonEmpty(ext);
+			if (ext != null)
+			{
+				if (ext.startsWith("."))
+					ext = ext.substring(1);
+				ext = ext.toLowerCase();
+			}
+			extension = ext;
+		}
+
+		/**
+		 * @param file
+		 */
+		public void hotFile(File file)
+		{
+			if (file == null)
+				return;
+			if (!KElement.isWildCard(extension))
+			{
+				String fileExt = FileUtil.getExtension(file);
+				if (!extension.equalsIgnoreCase(fileExt))
+					return;
+			}
+			fl.hotFile(file);
+
+		}
+
 	}
 
 }

@@ -116,6 +116,10 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	private JDFNode n = null;
 	private JDFRunList rl = null;
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @throws Exception
+	 */
 	@Override
 	public void setUp() throws Exception
 	{
@@ -269,6 +273,13 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @param mark0
+	 * @param anchor
+	 * @param anchorType
+	 * @param rRef
+	 * @return
+	 */
 	public static KElement appendRefAnchor(JDFMarkObject mark0, String anchor, String anchorType, String rRef)
 	{
 		KElement refAnchor = mark0.getCreateElement("RefAnchor", null, 0);
@@ -413,6 +424,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testFixToNewLayout()
 	{
 		testBuildOldLayout();
@@ -424,8 +438,28 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		assertFalse(si.hasAttribute(AttributeName.CLASS));
 	}
 
+	/**
+	 * 
+	 */
+	public void testFixToNewLayoutWithPartIDKeys()
+	{
+		testBuildOldLayout();
+		JDFLayout loOld = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
+		loOld.setPartIDKeys(new VString("SignatureName SheetName Side", null));
+		assertFalse(JDFLayout.isNewLayout(loOld));
+		n.fixVersion(EnumVersion.Version_1_3);
+		JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
+		assertTrue(JDFLayout.isNewLayout(lo));
+		JDFSignature si = lo.getSignature(0);
+		assertEquals(si.getSignatureName(), "Sig1");
+		assertFalse(si.hasAttribute(AttributeName.CLASS));
+	}
+
 	// ///////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testFixFromNewLayout()
 	{
 		testBuildNewLayout();

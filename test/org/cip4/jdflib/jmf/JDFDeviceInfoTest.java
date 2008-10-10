@@ -80,6 +80,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
+import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * @author Rainer Prosi
@@ -138,7 +139,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 
 		JDFJobPhase jp2 = (JDFJobPhase) di2.copyElement(jp, null);
 		jp2.setPhaseStartTime(new JDFDate());
-		StatusCounter.sleep(1000);
+		ThreadUtil.sleep(1000);
 		jp2.setPhaseAmount(300);
 		jp2.setPhaseWaste(30);
 		jp2.setAmount(500);

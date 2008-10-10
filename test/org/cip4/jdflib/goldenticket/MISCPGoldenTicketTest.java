@@ -85,11 +85,20 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 {
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
+	private final boolean bExpandGB = false;
+
+	/**
+	 * 
+	 */
 	public void testMISCPGrayBoxFrontBack()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
@@ -146,6 +155,9 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testMISCPGrayBoxSimplexPoster()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
@@ -161,6 +173,7 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 		cpGoldenTicket.assign(null);
 		cpGoldenTicket.good = 1000;
 		cpGoldenTicket.waste = 90;
+		cpGoldenTicket.bExpandGrayBox = bExpandGB;
 
 		BaseGoldenTicketTest.write3GTFiles(cpGoldenTicket, "MISCPS_SimplexPoster");
 	}
@@ -168,6 +181,9 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testMISCPGrayBox41Poster()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
@@ -202,6 +218,9 @@ public class MISCPGoldenTicketTest extends BaseGoldenTicketTest
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testMISCPProductGrayBoxBrochure()
 	{
 

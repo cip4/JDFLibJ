@@ -77,6 +77,10 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class BaseGoldenTicketTest extends JDFTestCaseBase
 {
 	String agentName;
@@ -88,6 +92,7 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
@@ -103,6 +108,7 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
@@ -118,26 +124,18 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * @param good
 	 * @param waste
 	 */
-	protected static void write3GTFiles(BaseGoldenTicket goldenTicket,
-			String templateName)
+	protected static void write3GTFiles(BaseGoldenTicket goldenTicket, String templateName)
 	{
-		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp
-				+ "GoldenTicket_Manager_" + templateName + ".jdf", 2);
-		Assert.assertTrue(goldenTicket.getNode().isValid(
-				EnumValidationLevel.Complete));
+		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Manager_" + templateName + ".jdf", 2);
+		Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
 		goldenTicket.makeReadyAll();
-		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp
-				+ "GoldenTicket_MakeReady_" + templateName + ".jdf", 2);
-		Assert.assertTrue(JDFTestCaseBase.sm_dirTestDataTemp
-				+ "GoldenTicket_MakeReady_" + templateName + ".jdf",
-				goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
+		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_MakeReady_" + templateName + ".jdf", 2);
+		Assert.assertTrue(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_MakeReady_" + templateName + ".jdf", goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 
 		goldenTicket.executeAll(null);
-		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp
-				+ "GoldenTicket_Worker_" + templateName + ".jdf", 2);
-		Assert.assertTrue(goldenTicket.getNode().isValid(
-				EnumValidationLevel.Complete));
+		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Worker_" + templateName + ".jdf", 2);
+		Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));
 	}
 
 }

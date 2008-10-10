@@ -129,6 +129,10 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	 */
 	public int preStart = 600;
 	/**
+	 * true if subscriptions should be in nodeinfo
+	 */
+	public boolean bNodeInfoSubscription = true;
+	/**
 	 * seconds this was active
 	 */
 	public int duration = preStart / 2;
@@ -195,7 +199,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 			if (returnURL != null)
 				ni.setTargetRoute(returnURL);
 
-			if (jmfICSLevel >= 1 && misICSLevel >= 2 || misURL != null)
+			if (bNodeInfoSubscription && (jmfICSLevel >= 1 && misICSLevel >= 2 || misURL != null))
 			{
 				JDFJMF jmf = ni.appendJMF();
 				jmf.setSenderID("MISGTSender");

@@ -822,16 +822,15 @@ public class BaseGoldenTicket
 		paperMedia.setDescriptiveName("the paper to print on");
 		paperMedia.setResStatus(EnumResStatus.Unavailable, false);
 		paperMedia.setMediaType(EnumMediaType.Paper);
-		paperMedia.setDimensionCM(new JDFXYPair(70, 102));
+		paperMedia.setDimensionCM(new JDFXYPair(102, 70));
 		paperMedia.setWeight(90);
 		paperMedia.setThickness(90 / 0.8);
 		return paperMedia;
 	}
 
 	/**
-	 * @param media
 	 * @param sNode
-	 * @return
+	 * @return the media
 	 */
 	private JDFMedia getMediaFromNode(JDFNode sNode)
 	{
@@ -857,7 +856,7 @@ public class BaseGoldenTicket
 	 * get a reduced partionmap missing the keys in reduceKeys
 	 * 
 	 * @param reduceKeys
-	 * @return
+	 * @return the reduced map
 	 */
 	protected VJDFAttributeMap getReducedMap(VString reduceKeys)
 	{
@@ -938,8 +937,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param xm
-	 * @return
+	 * @return the Media
 	 */
 	protected JDFMedia initPlateMedia()
 	{
@@ -967,7 +965,7 @@ public class BaseGoldenTicket
 		}
 		else
 		{
-			m.setDimensionCM(new JDFXYPair(70, 102));
+			m.setDimensionCM(new JDFXYPair(103, 71));
 		}
 		return m;
 	}

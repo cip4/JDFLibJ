@@ -279,6 +279,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.setvString(v, " ", null, null), "Input Output");
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetVString()
 	{
 		VString v = new VString();
@@ -300,6 +303,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals("s", "1 22 333 4444", s);
 	}
 
+	/**
+	 * 
+	 */
 	public void testEscape()
 	{
 		String iri = "file://myHost/a/c%20äöü%25&?.txtß€";
@@ -313,6 +319,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals("a_äa", StringUtil.escape("aäa", null, "_", 0, 0, 0x21, 127));
 	}
 
+	/**
+	 * 
+	 */
 	public void testExtension()
 	{
 		String iri = "file://my.Host/a.n/c%20äöü%25&?.txtß";

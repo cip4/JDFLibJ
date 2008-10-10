@@ -134,7 +134,7 @@ public class StringUtil
 
 	/**
 	 * returns a random string really important routine - written on a friday afternoon ;-) please add more at your
-	 * leisure.... parts (c) Monty Python
+	 * leisure.... parts (c) Monty Python, Star Trek, Douglas Adams
 	 * 
 	 */
 	private static String[] strings = {
@@ -171,10 +171,31 @@ public class StringUtil
 			"I've got this pain in all the diodes down my left side",
 			"I would like to say that it is a very great pleasure, honour and privilege for me to open this bridge, but I can't because my lying circuits are all out of commission",
 			"Do you want me to sit in the corner and rust, or just fall apart where I'm standing?",
-			"You may think you've read Hamlet before, but you can't really appreciate it until you've read it in the original Klingon."
+			"You may think you've read Hamlet before, but you can't really appreciate it until you've read it in the original Klingon.",
+			"What's this, then? \"Romanes eunt domus\"? People called Romanes, they go, the house?",
+			"Life's a piece of shit when you look at it. Life's a laugh and death's a joke; it's true.",
+			"Excuse me. Are you the Judean People's Front? Fuck off! We're the People's Front of Judea",
+			"How many Romans? - Aaaaagh ! Plural, plural, er, \"ite\" ! - \"Domus\"? Nominative? \"Go home\" is motion towards, isn't it? - Dative ! -  Aaagh ! Not the dative, not the dative ! Er, er, accusative, \"Domum\" ! - But \"Domus\" takes the locative, which is...? Er, \"Domum\" ! ",
+			"Making it worse? How can it be worse? Jehovah! Jehovah! Jehovah! ",
+			"No, I'm only joking. I'm not really Brian. No, I'm not Brian. I was only - It was a joke. I'm only pulling your leg! It's a joke! I'm not him! I'm just having you on! Put me back! Bloody Romans! Can't take a joke! ",
+			"Er, well, um, if you're dropping by again, do pop in. Heh. And thanks a lot for the gold and frankincense, er, but don't worry too much about the myrrh next time. All right? Heh. Thank you. Good-bye.",
+			"Under the terms of the Roman occupancy, we're entitled to be crucified in a purely Jewish area.",
+			"Amongst our weaponry are such diverse elements as: fear, surprise, ruthless efficiency, an almost fanatical devotion to the Pope, and nice red uniforms - Oh damn!",
+			"NOBODY expects the Spanish Inquisition!",
+			"Hm! She is made of harder stuff! Cardinal Fang! Fetch...THE COMFY CHAIR!",
+			"So you think you are strong because you can survive the soft cushions. Well, we shall see. Biggles! Put her in the Comfy Chair!",
+			"Tungsten carbide drills? What the bloody hell's tungsten carbide drills? - It's something they use in coal mining, father.' Your bloody fancy talk since you left London.",
+			"I'll tell you what's wrong with it, my lad. It's dead, that's what's wrong with it!",
+			"All right then, if it's restin', I'll wake him up! (shouts into cage) Hello Polly! I've got a nice cuttlefish for you when you wake up, Polly Parrot!",
+			"Look, I took the liberty of examining that parrot, and I discovered the only reason that it had been sitting on its perch in the first place was that it had been nailed there.",
+			"Look matey (picks up the parrot) this parrot wouldn't voom if you put four thousand volts through it! It's bleedin' demised!",
+			"It's not pining, it's passed on. This parrot is no more! It has ceased to be. It's expired and gone to meet its maker.This is a late parrot. It's a stiff. Bereft of life, it rests in peace. If you hadn't nailed it to the perch it would be pushing up the daisies. It's rung down the curtain and joined the choir invisible. This is an ex-parrot.",
+			"Pining for the fjords, what kind of talk is that? Look, why did it fall flat on its back the moment I got it home?" };
 
-	};
-
+	/**
+	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy
+	 * @return a random string 
+	 */
 	public static String getRandomString()
 	{
 		int pos = (int) (strings.length * Math.random() * 0.99999);
@@ -311,7 +332,7 @@ public class StringUtil
 	/**
 	 * create a string from an array of tokens
 	 * 
-	 * @param v the token array
+	 * @param a the token array
 	 * @param sep the separator between the tokens
 	 * @param front the front end of the string
 	 * @param back the back end of the string

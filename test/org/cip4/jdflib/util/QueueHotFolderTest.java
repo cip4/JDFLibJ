@@ -133,7 +133,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		assertFalse(stFile.exists());
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
-		StatusCounter.sleep(5000);
+		ThreadUtil.sleep(5000);
 		assertFalse(file.exists());
 		assertTrue(stFile.exists());
 		assertEquals(myListener.vJMF.size(), 1);
@@ -152,12 +152,12 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertFalse(stFile.exists());
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
 		hf.stop();
-		StatusCounter.sleep(5000);
+		ThreadUtil.sleep(5000);
 		assertTrue(file.exists());
 		assertFalse("File is still there after stop", stFile.exists());
 		assertEquals(myListener.vJMF.size(), 0);
 		hf.restart();
-		StatusCounter.sleep(5000);
+		ThreadUtil.sleep(5000);
 		assertFalse("File is gone after stop", file.exists());
 		assertTrue(stFile.exists());
 		assertEquals(myListener.vJMF.size(), 1);

@@ -106,7 +106,7 @@ import org.cip4.jdflib.resource.JDFProcessRun;
 public class QueueHotFolder implements HotFolderListener
 {
 	private final File storageDir; // the physical storage where files are dumped after removal fro the hotfolder
-	private final HotFolder hf; // the active hot folder
+	protected final HotFolder hf; // the active hot folder
 
 	/**
 	 * @return the hotfolder directory
@@ -181,7 +181,7 @@ public class QueueHotFolder implements HotFolderListener
 		newCommand.removeAttribute(AttributeName.ID);
 		newCommand.appendAnchor(null);
 		EnumType cType = newCommand.getEnumType();
-		JDFDoc jdfDoc = JDFDoc.parseFile(storedFile.getPath());
+		JDFDoc jdfDoc = getJDFFromFile(storedFile);
 
 		JDFNode jdfRoot = jdfDoc == null ? null : jdfDoc.getJDFRoot();
 
@@ -194,6 +194,17 @@ public class QueueHotFolder implements HotFolderListener
 			extractSubmitParams(stringURL, newCommand, jdfRoot);
 		}
 		qhfl.submitted(jmfRoot);
+	}
+
+	/**
+	 * extract the JDF document from the file
+	 * @param storedFile
+	 * @return the JDFDoc for the file
+	 */
+	protected JDFDoc getJDFFromFile(File storedFile)
+	{
+		JDFDoc jdfDoc = JDFDoc.parseFile(storedFile.getPath());
+		return jdfDoc;
 	}
 
 	/**

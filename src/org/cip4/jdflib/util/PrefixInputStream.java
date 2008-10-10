@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,15 +87,19 @@ import java.io.InputStream;
 /**
  * stream class that allows allows prefixing of a stream without requiring a copy
  * 
- * @author prosirai
+ * @author Rainer Prosi
  * 
  */
 public class PrefixInputStream extends FilterInputStream
 {
 
-	private InputStream streamPre;
+	private final InputStream streamPre;
 	private boolean bDone;
 
+	/**
+	 * @param stream1
+	 * @param stream2
+	 */
 	public PrefixInputStream(InputStream stream1, InputStream stream2)
 	{
 		super(stream2);
@@ -103,6 +107,10 @@ public class PrefixInputStream extends FilterInputStream
 		streamPre = stream1;
 	}
 
+	/**
+	 * @param prefix
+	 * @param stream2
+	 */
 	public PrefixInputStream(String prefix, InputStream stream2)
 	{
 		super(stream2);
@@ -110,11 +118,11 @@ public class PrefixInputStream extends FilterInputStream
 		streamPre = new ByteArrayInputStream(prefix.getBytes());
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see java.io.FilterInputStream#read()
 	 */
+	@Override
 	public int read() throws IOException
 	{
 		if (!bDone)
@@ -128,11 +136,11 @@ public class PrefixInputStream extends FilterInputStream
 		return super.read();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see java.io.FilterInputStream#read(byte[], int, int)
 	 */
+	@Override
 	public int read(byte[] b, int off, int len) throws IOException
 	{
 		if (!bDone)
@@ -145,11 +153,11 @@ public class PrefixInputStream extends FilterInputStream
 		return super.read(b, off, len);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	*
 	 * @see java.io.FilterInputStream#read(byte[])
 	 */
+	@Override
 	public int read(byte[] b) throws IOException
 	{
 		if (!bDone)

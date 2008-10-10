@@ -88,6 +88,7 @@ import org.cip4.jdflib.jmf.JDFQueue.ExecuteCallback;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
+import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * @author MuchaD
@@ -307,8 +308,8 @@ public class QueueTest extends TestCase
 			}
 		}
 		while (iThread > 0)
-			StatusCounter.sleep(100); // wait for threads to be over
-		StatusCounter.sleep(1000); // wait for threads to be over
+			ThreadUtil.sleep(100); // wait for threads to be over
+		ThreadUtil.sleep(1000); // wait for threads to be over
 		assertEquals(q.getQueueSize(), 1000);
 		VElement v = q.getQueueEntryVector();
 		JDFQueueEntry qeLast = null;

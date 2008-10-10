@@ -1703,9 +1703,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			NodeIdentifier niInput = ((INodeIdentifiable) o).getIdentifier();
 			boolean b = isWildCard(niInput._jobID) || ContainerUtil.equals(niInput._jobID, _jobID);
 			b = b
-					&& (isWildCard(niInput._jobID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID))
-					|| (_jobPartID != null && niInput._jobPartID != null && _jobPartID.startsWith(niInput._jobPartID
-							+ "."));
+					&& ((isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID)) || (_jobPartID != null
+							&& niInput._jobPartID != null && _jobPartID.startsWith(niInput._jobPartID + ".")));
 			return b
 					&& ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
 		}

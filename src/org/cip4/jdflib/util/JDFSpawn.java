@@ -877,7 +877,7 @@ public class JDFSpawn
 				JDFResource rMainPart = (JDFResource) vMainPart.elementAt(kk);
 				if (rMainPart == null)
 					continue;
-				
+
 				VElement leaves = rMainPart.getLeaves(true);
 				boolean bSpawnID = false;
 
@@ -1041,16 +1041,22 @@ public class JDFSpawn
 
 	/**
 	 * Reduces partition so that only the parts that overlap with vResources remain
-	 * 
-	 * @param vValidParts vector of partmaps that define the individual valid parts.<br>
-	 *            The individual PartMaps are ored to define the final resource.
+	 * @param r 
+	 * @param nodeName 
+	 * @param nsURI 
+	 * @param partIDKeys 
+	 * @param partIDPos 
+	 * @param parentMap 
+	 * @param identical 
+	 * @return the reduced partitions
 	 */
-
 	private VElement reducePartitions(JDFResource r, String nodeName, String nsURI, VString partIDKeys, int partIDPos, JDFAttributeMap parentMap, VElement identical)
 	{
 		VElement children = r.getChildElementVector_KElement(nodeName, nsURI, null, true, -1);
 		VElement bad = new VElement();
-		for (int i = 0; i < children.size(); i++)
+		int kidSize = children == null ? 0 : children.size();
+
+		for (int i = 0; i < kidSize; i++)
 		{
 			JDFResource child = (JDFResource) children.elementAt(i);
 			String key = partIDKeys.get(partIDPos);
@@ -1074,7 +1080,8 @@ public class JDFSpawn
 								partition = (JDFResource) partition.getParentNode_KElement();
 							}
 						}
-						bad.appendUnique(reducePartitions(child, nodeName, nsURI, partIDKeys, partIDPos + 1, testMap, identical));
+						if (partIDPos + 1 < partIDKeys.size()) // array out of bonds in some corrupt jdfs with missing partidkeys
+							bad.appendUnique(reducePartitions(child, nodeName, nsURI, partIDKeys, partIDPos + 1, testMap, identical));
 					}
 					else
 						bad.add(child);
@@ -1143,9 +1150,7 @@ public class JDFSpawn
 	 * 
 	 * @return VString vector of resource names that have been copied
 	 */
-	private void copySpawnedResource(JDFResourcePool p, JDFResource r, JDFResource.EnumSpawnStatus copyStatus, 
-			VJDFAttributeMap vParts, String spawnID, VString vRWResources, HashSet vRWIDs, HashSet vROIDs, 
-			HashSet allIDsCopied)
+	private void copySpawnedResource(JDFResourcePool p, JDFResource r, JDFResource.EnumSpawnStatus copyStatus, VJDFAttributeMap vParts, String spawnID, VString vRWResources, HashSet vRWIDs, HashSet vROIDs, HashSet allIDsCopied)
 	{
 		JDFResource.EnumSpawnStatus copyStatusLocal = copyStatus;
 
@@ -1166,7 +1171,7 @@ public class JDFSpawn
 			{
 				reducePartitions(rNew);
 			}
-			
+
 			spawnPart(r, spawnID, copyStatusLocal, vParts, true);
 			spawnPart(rNew, spawnID, copyStatusLocal, vParts, false);
 
@@ -1178,7 +1183,7 @@ public class JDFSpawn
 			{
 				vROIDs.add(rID);
 			}
-			
+
 			allIDsCopied.add(rID);
 		}
 

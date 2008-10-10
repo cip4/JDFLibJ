@@ -307,17 +307,12 @@ public class StatusCounter
 	 * simple sleep wrapper that catches its exception
 	 * 
 	 * @param millis
+	 * @deprecated use {@link ThreadUtil}.sleep()
 	 */
+	@Deprecated
 	public static void sleep(int millis)
 	{
-		try
-		{
-			Thread.sleep(millis);
-		}
-		catch (InterruptedException x)
-		{
-			// System.out.print(".");
-		}
+		ThreadUtil.sleep(millis);
 	}
 
 	/**

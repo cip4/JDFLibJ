@@ -79,6 +79,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFSpawn;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -548,6 +549,9 @@ public class XMLDocTest extends JDFTestCaseBase
 		assertTrue(f.canRead());
 	}
 
+	/**
+	 * 
+	 */
 	public void testWriteToStringIndent()
 	{
 		XMLDoc d = new XMLDoc("a", null);
@@ -559,6 +563,23 @@ public class XMLDocTest extends JDFTestCaseBase
 		assertTrue(s.endsWith("<a><b/></a>"));
 	}
 
+	/**
+	 * 
+	 */
+	public void testWriteToStringEscape()
+	{
+		XMLDoc d = new XMLDoc("Example", null);
+		KElement e = d.getRoot();
+		e.setAttribute("URL", "file://myHost/a/c%20הצü%25.pdf");
+		String s = d.write2String(2);
+		byte[] b = StringUtil.setUTF8String(s);
+		s = new String(b);
+		assertTrue(s.indexOf("ה") < 0);
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testWriteToStreamIndent() throws Exception
 	{
 		XMLDoc d = new XMLDoc("a", null);

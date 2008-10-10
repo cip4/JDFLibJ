@@ -108,6 +108,15 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
+	public void testGetExtension() throws Exception
+	{
+		assertNull(FileUtil.getExtension(new File("foo")));
+		assertEquals("txt", FileUtil.getExtension(new File("foo.txt")));
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testisCleanURLFile() throws Exception
 	{
 		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));

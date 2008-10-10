@@ -83,6 +83,7 @@ import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StatusCounter;
+import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * @author Rainer Prosi
@@ -220,7 +221,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		JDFDate d1 = jp.getPhaseStartTime();
 		JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
 		jp2.setPhaseStartTime(new JDFDate());
-		StatusCounter.sleep(1000);
+		ThreadUtil.sleep(1000);
 		jp2.setPhaseAmount(300);
 		jp2.setPhaseWaste(30);
 		jp2.setAmount(500);

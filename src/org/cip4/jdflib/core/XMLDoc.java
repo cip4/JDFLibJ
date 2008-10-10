@@ -97,6 +97,7 @@ import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.w3c.dom.Attr;
@@ -512,7 +513,7 @@ public class XMLDoc
 			{
 				if (i >= 3)
 					throw x; // try three times, else ciao
-				StatusCounter.sleep(1000 * (i + 1));
+				ThreadUtil.sleep((1000 * (i + 1)));
 				System.out.println("retry exception " + i + " for " + getOriginalFileName());
 			}
 		}
@@ -1518,7 +1519,7 @@ public class XMLDoc
 			}
 			catch (IOException e)
 			{
-				StatusCounter.sleep(1000); // wait and retry once
+				ThreadUtil.sleep(1000); // wait and retry once
 			}
 		}
 		return null;

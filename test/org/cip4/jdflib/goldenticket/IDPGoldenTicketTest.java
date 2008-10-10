@@ -73,12 +73,19 @@ package org.cip4.jdflib.goldenticket;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.node.JDFNode;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 {
 
 	////////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testIDPSimple()
 	{
 
@@ -107,6 +114,7 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
