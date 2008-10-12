@@ -137,31 +137,30 @@ import org.w3c.dom.Node;
  */
 public class JDFSpawnTest extends JDFTestCaseBase
 {
-	public void testXXX() throws Throwable
-	{
-		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "badpart.jdf");
-		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("06110234.4.C", JDFConstants.EMPTYSTRING);
-		VJDFAttributeMap vamParts = new VJDFAttributeMap();
-		JDFAttributeMap amParts = new JDFAttributeMap();
-		amParts.put("SheetName", "Innenteil1");
-		amParts.put("SignatureName", "Signature1");
-
-		vamParts.add(amParts);
-
-		final JDFSpawn spawn = new JDFSpawn(nodeProc);
-
-		spawn.bFixResources = false;
-		spawn.bSpawnRWPartsMultiple = true;
-
-		JDFNode nodeSubJDF = spawn.spawnInformative("", JDFConstants.EMPTYSTRING, vamParts, true, true, true, false);
-
-		// ArrayIndexOutOfBoundsException in reducePartitions ...
-	}
+	//	public void testXXX() throws Throwable
+	//	{
+	//		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "badpart.jdf");
+	//		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("06110234.4.C", JDFConstants.EMPTYSTRING);
+	//		VJDFAttributeMap vamParts = new VJDFAttributeMap();
+	//		JDFAttributeMap amParts = new JDFAttributeMap();
+	//		amParts.put("SheetName", "Innenteil1");
+	//		amParts.put("SignatureName", "Signature1");
+	//
+	//		vamParts.add(amParts);
+	//
+	//		final JDFSpawn spawn = new JDFSpawn(nodeProc);
+	//
+	//		spawn.bFixResources = false;
+	//		spawn.bSpawnRWPartsMultiple = true;
+	//
+	//		JDFNode nodeSubJDF = spawn.spawnInformative("", JDFConstants.EMPTYSTRING, vamParts, true, true, true, false);
+	//
+	//		// ArrayIndexOutOfBoundsException in reducePartitions ...
+	//	}
 
 	/**
-	 * Method testUnSpawn.
-	 * 
-	 * @throws Exception
+	 * @param strXMLFile
+	 * @param strSpawnID
 	 */
 	private void unSpawn(String strXMLFile, String strSpawnID)
 	{
