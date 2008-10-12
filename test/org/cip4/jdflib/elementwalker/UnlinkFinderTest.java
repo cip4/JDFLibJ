@@ -80,8 +80,8 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 
 /**
- * @author prosirai
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
  */
 public class UnlinkFinderTest extends JDFTestCaseBase
 {
@@ -91,6 +91,9 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	JDFResource xm;
 	JDFResource m;
 
+	/**
+	 * 
+	 */
 	public void testGetUlinked()
 	{
 		UnLinkFinder uf = new UnLinkFinder();
@@ -99,6 +102,9 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 		assertTrue(v.contains(rl));
 	}
 
+	/**
+	 * 
+	 */
 	public void testEraseUlinked()
 	{
 		UnLinkFinder uf = new UnLinkFinder();
