@@ -148,9 +148,17 @@ public class UnLinkFinder extends BaseElementWalker
 	 */
 	protected class LinkData
 	{
-		HashMap<String, KElement> resMap = new HashMap<String, KElement>();
-		HashSet<String> refSet = new HashSet<String>();
-		HashSet<String> doneSet = new HashSet<String>();
+		public LinkData()
+		{
+			super();
+			resMap = new HashMap<String, KElement>();
+			refSet = new HashSet<String>();
+			doneSet = new HashSet<String>();
+		}
+
+		HashMap<String, KElement> resMap;
+		HashSet<String> refSet;
+		HashSet<String> doneSet;
 
 		protected void clear()
 		{
