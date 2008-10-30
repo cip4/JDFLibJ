@@ -1538,6 +1538,53 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test auditpool spawn merge stuff
+	 * to information in the AncestorPool
+	 * 
+	 */
+	public void testSpawnAuditPool()
+	{
+		JDFElement.setLongID(true);
+
+		for (int j = 0; j < 2; j++)
+		{
+
+			JDFDoc d = new JDFDoc("JDF");
+			JDFNode n = d.getJDFRoot();
+			assertEquals("null cid", n.getInheritedCustomerInfo("@CustomerOrderID"), null);
+			n.setType("ProcessGroup", false);
+			n.setVersion(EnumVersion.Version_1_3);
+
+			VString v = new VString();
+			v.add("Interpreting");
+			v.add("Rendering");
+
+			JDFNode n2 = n.addCombined(v);
+			JDFNotification n0 = n2.getCreateAuditPool().addNotification(EnumClass.Event, null, null);
+			final JDFSpawn spawn = new JDFSpawn(n2);
+			JDFNode spawnedNode = spawn.spawn("thisFile", "spawnFile", null, null, true, true, true, true);
+			String spawnID = spawnedNode.getSpawnID(false);
+			JDFAuditPool ap = spawnedNode.getCreateAuditPool();
+			JDFNotification not1 = ap.addNotification(EnumClass.Event, null, null);
+			not1.appendComment();
+			JDFNotification not2 = ap.addNotification(EnumClass.Event, null, null);
+			not2.appendComment();
+			String id1 = not1.getID();
+			String id2 = not2.getID();
+			assertNotSame(id1, id2);
+			JDFMerge merge = new JDFMerge(n);
+			JDFNode mergedNode = merge.mergeJDF(spawnedNode, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.None);
+			JDFAuditPool ap2 = mergedNode.getCreateAuditPool();
+			VElement vNotifs = ap2.getAudits(EnumAuditType.Notification, null, null);
+			assertEquals(vNotifs.size(), 3);
+			assertTrue("ids are correctly copied", vNotifs.get(1).getAttribute("ID").endsWith(id1.substring(2)));
+			assertTrue("ids are correctly copied", vNotifs.get(2).getAttribute("ID").endsWith(id2.substring(2)));
+			assertTrue("ids contain spawnid", vNotifs.get(1).getAttribute("ID").contains(spawnID.substring(spawnID.length() - 6)));
+
+		}
+	}
+
+	/**
 	 * test customerinfo and nodeinfo related stuff including high level access
 	 * to information in the AncestorPool
 	 * 
@@ -1553,7 +1600,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				JDFNode n = d.getJDFRoot();
 				assertEquals("null cid", n.getInheritedCustomerInfo("@CustomerOrderID"), null);
 				n.setType("ProcessGroup", false);
-				final EnumVersion version = i == 0 ? EnumVersion.Version_1_2 : EnumVersion.Version_1_2;
+				final EnumVersion version = i == 0 ? EnumVersion.Version_1_2 : EnumVersion.Version_1_3;
 				n.setVersion(version);
 
 				VString v = new VString();

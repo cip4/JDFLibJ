@@ -94,8 +94,8 @@ import javax.mail.BodyPart;
 import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.HashUtil;
-import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -381,13 +381,13 @@ public class XMLDoc
 	public boolean write2File(String oFilePath, int indent, boolean bPreserveSpace)
 	{
 		String oFilePathLocal = oFilePath;
-		
+
 		if (oFilePathLocal == null)
 			oFilePathLocal = m_doc.m_OriginalFileName;
-		
+
 		if (oFilePathLocal == null)
 			return false;
-		
+
 		return write2File(new File(oFilePathLocal), indent, bPreserveSpace);
 	}
 
@@ -404,38 +404,33 @@ public class XMLDoc
 	 */
 	public boolean write2File(File file, int indent, boolean bPreserveSpace)
 	{
-		File fileLocal = file;
-
-		if (fileLocal == null)
-			return false;
-
 		boolean fSuccess = true;
 		FileOutputStream outStream = null;
 
 		try
 		{
-			if (fileLocal.isDirectory() && getOriginalFileName() != null)
+			if (file.isDirectory() && getOriginalFileName() != null)
 			{
 				File orig = new File(getOriginalFileName());
-				fileLocal = new File(fileLocal + File.separator + orig.getName());
+				file = new File(file + File.separator + orig.getName());
 			}
-			
+
 			// ensure having an empty file in case it did not exist
-			fileLocal.delete();
-			if (fileLocal.createNewFile())
+			file.delete();
+			if (FileUtil.createNewFile(file))
 			{
-				outStream = new FileOutputStream(fileLocal);
+				outStream = new FileOutputStream(file);
 				write2Stream(outStream, indent, bPreserveSpace);
 			}
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("Write2File: " + fileLocal.getAbsolutePath() + " : " + e);
+			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
 			fSuccess = false;
 		}
 		catch (IOException e)
 		{
-			System.out.println("Write2File: " + fileLocal.getAbsolutePath() + " : " + e);
+			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
 			fSuccess = false;
 		}
 		finally

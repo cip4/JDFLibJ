@@ -2272,6 +2272,10 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * getMinID is no longer used in the library
+	 */
+	@SuppressWarnings("deprecation")
 	public void testGetMinID()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
@@ -2293,6 +2297,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetMissingLinks()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
@@ -2313,6 +2320,10 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testGetMissingLinksProduct()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
@@ -2329,8 +2340,10 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetWorkStepID()
 	{
 		JDFDoc doc = new JDFDoc("JDF");

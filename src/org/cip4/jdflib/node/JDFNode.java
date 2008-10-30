@@ -7025,7 +7025,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * loop over all IDs and find the min ID that will create unique new IDs
 	 * 
 	 * @return the new minimum ID that will generate unique IDs
+	 * @deprecated - actually does more harm than good
 	 */
+	@Deprecated
 	public int getMinID()
 	{
 		final VElement v = getChildrenByTagName(null, null, null, false, true, 0);
@@ -7051,11 +7053,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				{
 					if (strID.length() > 7)
 					{
-						strID = strID.substring(strID.length() - 7); // only use
-						// the
-						// last
-						// 5
-						// chars
+						strID = strID.substring(strID.length() - 7); // only use the last 5 chars
 					}
 
 					final int pos = StringUtil.find_last_not_of(strID, "0123456789");

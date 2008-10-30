@@ -198,6 +198,19 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
+	public void testCreateFile() throws Exception
+	{
+		File f = new File(sm_dirTestDataTemp + "/aaa_aaa/b/c.txt");
+		assertTrue(FileUtil.createNewFile(f));
+		assertTrue(FileUtil.createNewFile(f));
+		assertFalse(FileUtil.createNewFile(null));
+		f.delete();
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
 	public void testMoveFile() throws Exception
 	{
 		byte[] b = new byte[55555];

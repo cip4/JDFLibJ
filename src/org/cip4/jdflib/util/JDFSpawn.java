@@ -218,9 +218,8 @@ public class JDFSpawn
 		// merge this node into it
 		rootOut.mergeNode(node, false); // "copy" this node into the new created
 		// document
-		final String spawnID = "Sp" + JDFElement.uniqueID(0); // create a spawn
-		// id for this
-		// transaction
+		final String spawnID = "Sp" + JDFElement.uniqueID(-666); // create a spawn
+		// id for this transaction
 		rootOut.setSpawnID(spawnID);
 		rootOut.setVersion(node.getVersion(true));
 

@@ -834,7 +834,7 @@ public class JDFElementTest extends JDFTestCaseBase
 			System.out.println("Parsing: " + file.getPath());
 			JDFDoc jdfDoc = p.parseFile(file.getPath());
 			assertTrue("parse ok", jdfDoc != null);
-			
+
 			KElement e = null;
 			if (jdfDoc != null)
 			{
@@ -845,7 +845,7 @@ public class JDFElementTest extends JDFTestCaseBase
 			// now with schema validation
 			jdfDoc = p2.parseFile(file.getPath());
 			assertTrue("schema parse ok", jdfDoc != null);
-			
+
 			// TODO fix handling of prerelease default attributes
 			if (jdfDoc != null)
 			{
@@ -902,9 +902,26 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
+	public void testIncrementUniqueID()
+	{
+		JDFElement.setLongID(false);
+		JDFElement.uniqueID(1);
+		assertTrue(JDFElement.uniqueID(0).endsWith("" + 2));
+		JDFElement.uniqueID(10000);
+		assertTrue(JDFElement.uniqueID(0).endsWith("" + 10001));
+		JDFElement.uniqueID(-5000);
+		assertTrue("neg=increment", JDFElement.uniqueID(0).endsWith("" + 15003));
+	}
+
+	/**
+	 * 
+	 */
 	public void testUniqueID()
 	{
-		HashSet m = new HashSet();
+		HashSet<String> m = new HashSet<String>();
 		for (int i = 0; i < 200000; i++)
 		{
 			String s = JDFElement.uniqueID(0);
@@ -916,6 +933,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testInvalidNameSpace()
 	{
 		JDFDoc doc = new JDFDoc("JDF");
@@ -935,7 +955,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	{
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFElement e = doc.getJDFRoot();
-		HashSet m = new HashSet();
+		HashSet<String> m = new HashSet<String>();
 		KElement e2 = e.appendElement("e2");
 		for (int i = 0; i < 10000; i++)
 		{
@@ -964,7 +984,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		JDFElement root = d.getJDFRoot();
 		root.setEnumerationsAttribute("dummy", null, null);
 		assertNull(root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.Aborted, false));
-		Vector v = new Vector();
+		Vector<EnumNodeStatus> v = new Vector<EnumNodeStatus>();
 		v.add(EnumNodeStatus.Cleanup);
 		v.add(EnumNodeStatus.Completed);
 		root.setEnumerationsAttribute("dummy", v, null);

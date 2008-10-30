@@ -529,4 +529,28 @@ public class FileUtil
 	{
 		return file == null ? null : UrlUtil.extension(file.getName());
 	}
+
+	/**
+	 * similar to File.createFile but also creates any required directories
+	 * @param file the file to create
+	 * @return true if the file exists after the call, else false
+	 */
+	public static boolean createNewFile(File file)
+	{
+		if (file == null)
+			return false;
+		if (file.exists())
+			return true;
+		File parent = file.getParentFile();
+		if (parent != null)
+			parent.mkdirs();
+		try
+		{
+			return file.createNewFile();
+		}
+		catch (IOException x)
+		{
+			return false;
+		}
+	}
 }

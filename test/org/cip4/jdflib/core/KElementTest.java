@@ -1554,6 +1554,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue("Preferred!=198", strAtrib2.equals("198"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testInsertBefore()
 	{
 		XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
@@ -1568,6 +1571,29 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
+	public void testIncludesAttributes()
+	{
+		XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
+		KElement e = jdfDoc.getRoot();
+		e.setAttribute("a", "a1");
+		e.setAttribute("b", "b1");
+		e.setAttribute("c", "c1");
+		JDFAttributeMap m = new JDFAttributeMap("a", "a1");
+		m.put("b", "b1");
+		assertTrue(e.includesAttributes(m, false));
+		assertTrue(e.includesAttributes(m, true));
+		m.put("d", "d1");
+		assertTrue(e.includesAttributes(m, false));
+		assertFalse(e.includesAttributes(m, true));
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testHasAttributeNS()
 	{
 		XMLDoc jdfDoc = new XMLDoc("a:Test", "www.a.com");

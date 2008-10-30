@@ -70,6 +70,7 @@
 package org.cip4.jdflib.pool;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -90,11 +91,13 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFMerged;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author MuchaD
@@ -117,11 +120,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 	{
 		// Test AddCreated with one parameter
 		myAuditPool.addCreated("A_Test_Author", null);
-		JDFAudit myAudit = myAuditPool.getAudit(1,
-				JDFAudit.EnumAuditType.Created, new JDFAttributeMap(), null);
+		JDFAudit myAudit = myAuditPool.getAudit(1, JDFAudit.EnumAuditType.Created, new JDFAttributeMap(), null);
 		String myText = myAudit.getAuthor();
-		assertEquals("Error: Author should be \"A_Test_Author\"", myText,
-				"A_Test_Author");
+		assertEquals("Error: Author should be \"A_Test_Author\"", myText, "A_Test_Author");
 		// Test AddCreate with two Parameter
 
 		// Get Create a ResourcePool
@@ -130,14 +131,11 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		myResourcePool.appendElement("BindingIntent", "");
 
 		// Get that element back
-		JDFResource e = (JDFResource) myResourcePool.getElement(
-				"BindingIntent", "", 0);
+		JDFResource e = (JDFResource) myResourcePool.getElement("BindingIntent", "", 0);
 		myAuditPool.addCreated("A Test Author for JUnitTest 2", e);
 
 		String strResourceID = e.buildXPath("/JDF", 1);
-		JDFCreated kResourceAudit = (JDFCreated) myAuditPool
-				.getChildWithAttribute(null, "XPath", null, strResourceID, 0,
-						true);
+		JDFCreated kResourceAudit = (JDFCreated) myAuditPool.getChildWithAttribute(null, "XPath", null, strResourceID, 0, true);
 
 		assertNotNull("Error: Audit not found ", kResourceAudit);
 	}
@@ -177,6 +175,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		assertNotNull(m1);
 	}
 
+	/**
+	 * 
+	 */
 	public void testAddSpawned()
 	{
 		// Test AddCreated with one parameter
@@ -193,39 +194,69 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		assertNull(myAuditPool.getElement(ElementName.PART));
 	}
 
+	/**
+	 * 
+	 */
+	public void testAddNotification()
+	{
+
+		JDFNotification n1 = myAuditPool.addNotification(EnumClass.Event, null, null);
+		String id1 = StringUtil.getNonEmpty(n1.getID());
+		assertNotNull(id1);
+		JDFNotification n2 = myAuditPool.addNotification(EnumClass.Event, null, null);
+		String id2 = StringUtil.getNonEmpty(n2.getID());
+		assertNotSame(id1, id2);
+	}
+
+	/**
+	 * 
+	 */
+	public void testMergePools()
+	{
+
+		JDFNotification n1 = myAuditPool.addNotification(EnumClass.Event, null, null);
+		String id1 = StringUtil.getNonEmpty(n1.getID());
+		assertNotNull(id1);
+		JDFNotification n2 = myAuditPool.addNotification(EnumClass.Event, null, null);
+		String id2 = StringUtil.getNonEmpty(n2.getID());
+		assertNotSame(id1, id2);
+		JDFNode node2 = new JDFDoc("JDF").getJDFRoot();
+		JDFAuditPool ap2 = node2.getCreateAuditPool();
+		ap2.deleteNode();
+		ap2 = (JDFAuditPool) node2.copyElement(myAuditPool, null);
+		int notSize = myAuditPool.numChildElements(ElementName.NOTIFICATION, null);
+		myAuditPool.appendUnique(ap2);
+		assertEquals(notSize, myAuditPool.numChildElements(ElementName.NOTIFICATION, null));
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testSetPhase()
 	{
-		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null,
-				null, null);
+		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null, null, null);
 		assertNotNull(p1);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 1);
-		JDFPhaseTime p2 = myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar",
-				null, null);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 1);
+		JDFPhaseTime p2 = myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null, null);
 		assertNotNull(p2);
 		assertNotSame(p1, p2);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 2);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 2);
 		p2 = myAuditPool.setPhase(EnumNodeStatus.Setup, "foobar", null, null);
 		assertNotNull(p2);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 2);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 2);
 		p2 = myAuditPool.setPhase(EnumNodeStatus.Ready, "foobar", null, null);
 		assertNotNull(p2);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 3);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 3);
 		p1 = myAuditPool.setPhase(EnumNodeStatus.InProgress, null, null, null);
 		assertNotNull(p1);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 4);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 4);
 		p2 = myAuditPool.setPhase(EnumNodeStatus.InProgress, null, null, null);
 		assertNotNull(p2);
 		assertEquals(p1, p2);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 4);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 4);
 		VElement vEmpl = new VElement();
-		JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE)
-				.getRoot();
+		JDFEmployee emp = (JDFEmployee) new JDFDoc(ElementName.EMPLOYEE).getRoot();
 		emp.setPersonalID("p1");
 		vEmpl.add(emp);
 		p2 = myAuditPool.setPhase(EnumNodeStatus.InProgress, null, null, vEmpl);
@@ -242,20 +273,17 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	public void testGetLastPhase()
 	{
-		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null,
-				null, null);
+		JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null, null, null);
 		assertNotNull(p1);
 		assertEquals(p1, myAuditPool.getLastPhase(null, null));
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(new JDFAttributeMap("SheetName", "s1"));
 		VJDFAttributeMap vMap2 = new VJDFAttributeMap();
 		vMap2.add(new JDFAttributeMap("SheetName", "s1"));
-		JDFPhaseTime p2 = myAuditPool.setPhase(EnumNodeStatus.Setup, null,
-				vMap, null);
+		JDFPhaseTime p2 = myAuditPool.setPhase(EnumNodeStatus.Setup, null, vMap, null);
 		assertEquals(p2, myAuditPool.getLastPhase(vMap, null));
 		assertEquals(p2, myAuditPool.getLastPhase(null, null));
-		JDFPhaseTime p3 = myAuditPool.setPhase(EnumNodeStatus.Setup, null,
-				vMap2, null);
+		JDFPhaseTime p3 = myAuditPool.setPhase(EnumNodeStatus.Setup, null, vMap2, null);
 		myAuditPool.addModified(null, jdfRoot);
 		assertEquals(p2, myAuditPool.getLastPhase(vMap, null));
 		assertEquals(p3, myAuditPool.getLastPhase(null, null));
@@ -272,8 +300,7 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 		JDFProcessRun pr = myAuditPool.createSubmitProcessRun(null);
 		assertNotNull(pr.getSubmissionTime());
-		assertFalse("has submissiontime before now", new JDFDate().before(pr
-				.getSubmissionTime()));
+		assertFalse("has submissiontime before now", new JDFDate().before(pr.getSubmissionTime()));
 		assertTrue(pr.getAttribute(AttributeName.QUEUEENTRYID).startsWith("qe"));
 
 		JDFDoc d = new JDFDoc(ElementName.QUEUEENTRY);
@@ -304,27 +331,20 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 		VElement el = myAuditPool.setPhase(jmf);
 		assertNotNull(el);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 1);
-		assertNotNull(((JDFPhaseTime) myAuditPool.getAudit(0,
-				EnumAuditType.PhaseTime, null, null)).getEmployee(0));
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true), el);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 1);
+		assertNotNull(((JDFPhaseTime) myAuditPool.getAudit(0, EnumAuditType.PhaseTime, null, null)).getEmployee(0));
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true), el);
 
 		el = myAuditPool.setPhase(jmf);
 		assertNotNull(el);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 1);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true), el);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 1);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true), el);
 
 		phase.setStatus(EnumNodeStatus.Aborted);
 		el = myAuditPool.setPhase(jmf);
 		assertNotNull(el);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).size(), 2);
-		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME,
-				null, null, true, 0, true).elementAt(1), el.elementAt(0));
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).size(), 2);
+		assertEquals(myAuditPool.getChildElementVector(ElementName.PHASETIME, null, null, true, 0, true).elementAt(1), el.elementAt(0));
 
 	}
 
@@ -335,15 +355,11 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		JDFAudit a3 = myAuditPool.addAudit(EnumAuditType.PhaseTime, null);
 		JDFAudit a4 = myAuditPool.addAudit(EnumAuditType.Deleted, null);
 		assertEquals(myAuditPool.getAudit(-1, null, null, null), a4);
-		assertEquals(
-				myAuditPool.getAudit(1, EnumAuditType.Deleted, null, null), a4);
+		assertEquals(myAuditPool.getAudit(1, EnumAuditType.Deleted, null, null), a4);
 		assertEquals(myAuditPool.getAudit(-2, null, null, null), a3);
-		assertEquals(myAuditPool
-				.getAudit(-2, EnumAuditType.Deleted, null, null), a1);
-		assertEquals(
-				myAuditPool.getAudit(0, EnumAuditType.Deleted, null, null), a1);
-		assertEquals(myAuditPool
-				.getAudit(-1, EnumAuditType.Created, null, null), a2);
+		assertEquals(myAuditPool.getAudit(-2, EnumAuditType.Deleted, null, null), a1);
+		assertEquals(myAuditPool.getAudit(0, EnumAuditType.Deleted, null, null), a1);
+		assertEquals(myAuditPool.getAudit(-1, EnumAuditType.Created, null, null), a2);
 	}
 
 	@Override

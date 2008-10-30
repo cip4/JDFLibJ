@@ -3024,6 +3024,11 @@ public class KElement extends ElementNSImpl
 		{
 			return false;
 		}
+		// performance: count attributes and compare
+		if (numChildNodes(2) != kElem.numChildNodes(2))
+		{
+			return false;
+		}
 		if (!getNodeName().equals(kElem.getNodeName()))
 		{
 			return false;
