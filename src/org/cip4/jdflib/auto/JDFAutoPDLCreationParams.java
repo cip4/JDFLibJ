@@ -94,7 +94,8 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.MIMETYPE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -107,7 +108,8 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.PSTOPDFCONVERSIONPARAMS, 0x66666111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -157,13 +159,15 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPDLCreationParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -171,7 +175,8 @@ public abstract class JDFAutoPDLCreationParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

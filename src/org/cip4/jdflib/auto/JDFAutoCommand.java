@@ -97,7 +97,8 @@ public abstract class JDFAutoCommand extends JDFMessage
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,7 +148,8 @@ public abstract class JDFAutoCommand extends JDFMessage
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoCommand[  --> " + super.toString() + " ]";
     }

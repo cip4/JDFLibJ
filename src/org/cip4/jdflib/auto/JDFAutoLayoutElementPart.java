@@ -92,7 +92,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEPRODUCTIONPARAMS, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLayoutElementPart[  --> " + super.toString() + " ]";
     }

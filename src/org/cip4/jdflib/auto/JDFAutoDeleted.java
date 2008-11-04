@@ -88,7 +88,8 @@ public abstract class JDFAutoDeleted extends JDFAudit
         atrInfoTable[0] = new AtrInfoTable(AttributeName.XPATH, 0x33333333, AttributeInfo.EnumAttributeType.XPath, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,7 +139,8 @@ public abstract class JDFAutoDeleted extends JDFAudit
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDeleted[  --> " + super.toString() + " ]";
     }

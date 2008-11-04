@@ -95,7 +95,8 @@ public abstract class JDFAutoCasingInParams extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CASERADIUS, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -107,7 +108,8 @@ public abstract class JDFAutoCasingInParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x22222221);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -157,13 +159,15 @@ public abstract class JDFAutoCasingInParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoCasingInParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -171,7 +175,8 @@ public abstract class JDFAutoCasingInParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

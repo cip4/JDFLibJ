@@ -102,7 +102,8 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,7 +115,8 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,7 +166,8 @@ public abstract class JDFAutoStopPersChParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoStopPersChParams[  --> " + super.toString() + " ]";
     }

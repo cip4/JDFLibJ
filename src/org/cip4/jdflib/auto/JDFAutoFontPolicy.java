@@ -90,7 +90,8 @@ public abstract class JDFAutoFontPolicy extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.USEFONTEMULATION, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -140,13 +141,15 @@ public abstract class JDFAutoFontPolicy extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoFontPolicy[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -154,7 +157,8 @@ public abstract class JDFAutoFontPolicy extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

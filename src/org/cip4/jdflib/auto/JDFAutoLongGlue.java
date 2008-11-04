@@ -100,7 +100,8 @@ public abstract class JDFAutoLongGlue extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.XOFFSET, 0x44444442, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -150,7 +151,8 @@ public abstract class JDFAutoLongGlue extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLongGlue[  --> " + super.toString() + " ]";
     }

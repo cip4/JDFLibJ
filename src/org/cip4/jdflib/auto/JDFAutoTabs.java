@@ -96,7 +96,8 @@ public abstract class JDFAutoTabs extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -113,7 +114,8 @@ public abstract class JDFAutoTabs extends JDFElement
         elemInfoTable[5] = new ElemInfoTable(ElementName.TABMYLARCOLOR, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -163,7 +165,8 @@ public abstract class JDFAutoTabs extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoTabs[  --> " + super.toString() + " ]";
     }

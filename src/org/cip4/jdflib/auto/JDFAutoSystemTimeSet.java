@@ -92,7 +92,8 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.OLDTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoSystemTimeSet extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoSystemTimeSet[  --> " + super.toString() + " ]";
     }

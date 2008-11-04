@@ -100,7 +100,8 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.MARKPOSITION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumMarkPosition.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -150,13 +151,15 @@ public abstract class JDFAutoDeviceMark extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDeviceMark[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -164,7 +167,8 @@ public abstract class JDFAutoDeviceMark extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

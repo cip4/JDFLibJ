@@ -95,7 +95,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.CIRCULATION, 0x66666111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -145,7 +146,8 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPublishingIntent[  --> " + super.toString() + " ]";
     }

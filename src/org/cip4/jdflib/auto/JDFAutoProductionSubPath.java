@@ -88,7 +88,8 @@ public abstract class JDFAutoProductionSubPath extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.PRODUCTIONPATHID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,7 +139,8 @@ public abstract class JDFAutoProductionSubPath extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoProductionSubPath[  --> " + super.toString() + " ]";
     }

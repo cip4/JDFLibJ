@@ -103,7 +103,8 @@ public abstract class JDFAutoShapeElement extends JDFElement
         atrInfoTable[8] = new AtrInfoTable(AttributeName.TEETHPERDIMENSION, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -153,7 +154,8 @@ public abstract class JDFAutoShapeElement extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoShapeElement[  --> " + super.toString() + " ]";
     }

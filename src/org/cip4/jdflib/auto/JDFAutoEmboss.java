@@ -102,7 +102,8 @@ public abstract class JDFAutoEmboss extends JDFElement
         atrInfoTable[7] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -152,7 +153,8 @@ public abstract class JDFAutoEmboss extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoEmboss[  --> " + super.toString() + " ]";
     }

@@ -306,7 +306,6 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	public void testValidateZip()
 	{
-
 		File zip = new File(sm_dirTestData + "checkjdf.zip");
 		zip = new File("c:/data/many.zip");
 		JDFValidator checker = new JDFValidator();

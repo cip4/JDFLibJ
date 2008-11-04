@@ -89,7 +89,8 @@ public abstract class JDFAutoIdentical extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x55555111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoIdentical extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoIdentical[  --> " + super.toString() + " ]";
     }

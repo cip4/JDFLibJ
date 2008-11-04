@@ -125,7 +125,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
         atrInfoTable[11] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,7 +148,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
         elemInfoTable[10] = new ElemInfoTable(ElementName.SCAVENGERAREA, 0x33333331);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -197,7 +199,8 @@ public abstract class JDFAutoMarkObject extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoMarkObject[  --> " + super.toString() + " ]";
     }

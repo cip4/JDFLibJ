@@ -97,7 +97,8 @@ public abstract class JDFAutoStatusPool extends JDFPool
         atrInfoTable[1] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x44444311, AttributeInfo.EnumAttributeType.shortString, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -109,7 +110,8 @@ public abstract class JDFAutoStatusPool extends JDFPool
         elemInfoTable[0] = new ElemInfoTable(ElementName.PARTSTATUS, 0x44444333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -159,7 +161,8 @@ public abstract class JDFAutoStatusPool extends JDFPool
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoStatusPool[  --> " + super.toString() + " ]";
     }

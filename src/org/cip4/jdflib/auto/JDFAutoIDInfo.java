@@ -100,7 +100,8 @@ public abstract class JDFAutoIDInfo extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.TYPES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -112,7 +113,8 @@ public abstract class JDFAutoIDInfo extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -162,7 +164,8 @@ public abstract class JDFAutoIDInfo extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoIDInfo[  --> " + super.toString() + " ]";
     }

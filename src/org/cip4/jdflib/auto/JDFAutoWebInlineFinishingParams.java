@@ -92,7 +92,8 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDERPRODUCTION, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -142,13 +143,15 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoWebInlineFinishingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -156,7 +159,8 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

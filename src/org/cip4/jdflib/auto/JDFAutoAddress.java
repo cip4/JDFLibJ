@@ -99,7 +99,8 @@ public abstract class JDFAutoAddress extends JDFResource
         atrInfoTable[6] = new AtrInfoTable(AttributeName.STREET, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -111,7 +112,8 @@ public abstract class JDFAutoAddress extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.EXTENDEDADDRESS, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -161,13 +163,15 @@ public abstract class JDFAutoAddress extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoAddress[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -175,7 +179,8 @@ public abstract class JDFAutoAddress extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

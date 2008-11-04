@@ -122,7 +122,8 @@ public abstract class JDFAutoFeaturePool extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoFeaturePool[  --> " + super.toString() + " ]";
     }

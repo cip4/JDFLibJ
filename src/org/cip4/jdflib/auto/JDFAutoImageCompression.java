@@ -118,7 +118,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
         atrInfoTable[14] = new AtrInfoTable(AttributeName.JPXQUALITY, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -134,7 +135,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
         elemInfoTable[4] = new ElemInfoTable(ElementName.LZWPARAMS, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -184,7 +186,8 @@ public abstract class JDFAutoImageCompression extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoImageCompression[  --> " + super.toString() + " ]";
     }

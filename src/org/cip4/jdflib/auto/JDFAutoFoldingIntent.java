@@ -99,7 +99,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.FOLDS, 0x44444443, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -112,7 +113,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.FOLD, 0x33333331);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -162,7 +164,8 @@ public abstract class JDFAutoFoldingIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoFoldingIntent[  --> " + super.toString() + " ]";
     }

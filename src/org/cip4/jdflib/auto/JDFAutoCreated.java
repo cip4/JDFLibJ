@@ -91,7 +91,8 @@ public abstract class JDFAutoCreated extends JDFAudit
         atrInfoTable[3] = new AtrInfoTable(AttributeName.XPATH, 0x33333311, AttributeInfo.EnumAttributeType.XPath, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,7 +142,8 @@ public abstract class JDFAutoCreated extends JDFAudit
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoCreated[  --> " + super.toString() + " ]";
     }

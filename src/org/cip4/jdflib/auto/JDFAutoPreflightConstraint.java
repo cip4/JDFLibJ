@@ -98,7 +98,8 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -110,7 +111,8 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.CONSTRAINTVALUE, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -160,7 +162,8 @@ public abstract class JDFAutoPreflightConstraint extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPreflightConstraint[  --> " + super.toString() + " ]";
     }

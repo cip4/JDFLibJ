@@ -102,7 +102,8 @@ public abstract class JDFAutoQuery extends JDFMessage
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,7 +115,8 @@ public abstract class JDFAutoQuery extends JDFMessage
         elemInfoTable[0] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,7 +166,8 @@ public abstract class JDFAutoQuery extends JDFMessage
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoQuery[  --> " + super.toString() + " ]";
     }

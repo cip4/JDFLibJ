@@ -105,7 +105,8 @@ public abstract class JDFAutoNotification extends JDFAudit
         atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,7 +120,8 @@ public abstract class JDFAutoNotification extends JDFAudit
         elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333331);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,7 +171,8 @@ public abstract class JDFAutoNotification extends JDFAudit
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoNotification[  --> " + super.toString() + " ]";
     }

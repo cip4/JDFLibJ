@@ -112,7 +112,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         atrInfoTable[12] = new AtrInfoTable(AttributeName.TRANSPARENCYRENDERINGQUALITY, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -124,7 +125,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.OCGCONTROL, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -174,7 +176,8 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPDFInterpretingParams[  --> " + super.toString() + " ]";
     }

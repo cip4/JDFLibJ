@@ -94,7 +94,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.SCREENINGTYPE, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,7 +145,8 @@ public abstract class JDFAutoScreeningIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoScreeningIntent[  --> " + super.toString() + " ]";
     }

@@ -93,7 +93,8 @@ public abstract class JDFAutoMessage extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -143,7 +144,8 @@ public abstract class JDFAutoMessage extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoMessage[  --> " + super.toString() + " ]";
     }
@@ -170,7 +172,8 @@ public abstract class JDFAutoMessage extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        public String getID()
+        @Override
+		public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

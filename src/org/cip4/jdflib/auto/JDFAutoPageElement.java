@@ -95,7 +95,8 @@ public abstract class JDFAutoPageElement extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -145,7 +146,8 @@ public abstract class JDFAutoPageElement extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPageElement[  --> " + super.toString() + " ]";
     }

@@ -107,7 +107,8 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
         atrInfoTable[7] = new AtrInfoTable(AttributeName.WIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,7 +120,8 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333331);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,13 +171,15 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoHeadBandApplicationParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -183,7 +187,8 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

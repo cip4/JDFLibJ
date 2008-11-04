@@ -123,7 +123,8 @@ public abstract class JDFAutoPageData extends JDFElement
         atrInfoTable[19] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoPageData extends JDFElement
         elemInfoTable[4] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -189,7 +191,8 @@ public abstract class JDFAutoPageData extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPageData[  --> " + super.toString() + " ]";
     }

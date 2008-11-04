@@ -107,7 +107,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         atrInfoTable[6] = new AtrInfoTable(AttributeName.USAGE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumSheetUsage.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,7 +122,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.SHEET, 0x77777666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,13 +173,15 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoInsertSheet[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -185,7 +189,8 @@ public abstract class JDFAutoInsertSheet extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

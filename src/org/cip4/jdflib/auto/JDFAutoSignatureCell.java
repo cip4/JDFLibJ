@@ -103,7 +103,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         atrInfoTable[8] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, "0");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -153,7 +154,8 @@ public abstract class JDFAutoSignatureCell extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoSignatureCell[  --> " + super.toString() + " ]";
     }

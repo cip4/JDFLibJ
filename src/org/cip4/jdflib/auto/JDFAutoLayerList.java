@@ -92,7 +92,8 @@ public abstract class JDFAutoLayerList extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.LAYERDETAILS, 0x33333331);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoLayerList extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLayerList[  --> " + super.toString() + " ]";
     }

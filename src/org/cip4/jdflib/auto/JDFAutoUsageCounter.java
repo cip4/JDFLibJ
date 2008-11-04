@@ -96,7 +96,8 @@ public abstract class JDFAutoUsageCounter extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.COUNTERTYPES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,13 +147,15 @@ public abstract class JDFAutoUsageCounter extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoUsageCounter[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Consumable);
@@ -160,7 +163,8 @@ public abstract class JDFAutoUsageCounter extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Consumable;
     }

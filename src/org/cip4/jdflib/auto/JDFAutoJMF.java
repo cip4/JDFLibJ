@@ -110,7 +110,8 @@ public abstract class JDFAutoJMF extends JDFPool
         atrInfoTable[6] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -127,7 +128,8 @@ public abstract class JDFAutoJMF extends JDFPool
         elemInfoTable[5] = new ElemInfoTable(ElementName.REGISTRATION, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -177,7 +179,8 @@ public abstract class JDFAutoJMF extends JDFPool
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoJMF[  --> " + super.toString() + " ]";
     }

@@ -101,7 +101,8 @@ public abstract class JDFAutoStripMark extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.STRIPMARKDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,7 +115,8 @@ public abstract class JDFAutoStripMark extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.JOBFIELD, 0x66666111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,7 +166,8 @@ public abstract class JDFAutoStripMark extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoStripMark[  --> " + super.toString() + " ]";
     }

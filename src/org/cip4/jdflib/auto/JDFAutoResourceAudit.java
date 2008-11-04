@@ -102,7 +102,8 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,7 +116,8 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,7 +167,8 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoResourceAudit[  --> " + super.toString() + " ]";
     }

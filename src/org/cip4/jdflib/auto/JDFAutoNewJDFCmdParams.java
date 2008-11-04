@@ -92,7 +92,8 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.JDFDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, "Brief");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -104,7 +105,8 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.IDINFO, 0x55555511);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -154,7 +156,8 @@ public abstract class JDFAutoNewJDFCmdParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoNewJDFCmdParams[  --> " + super.toString() + " ]";
     }

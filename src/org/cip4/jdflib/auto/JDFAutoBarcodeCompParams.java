@@ -93,7 +93,8 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.COMPENSATIONVALUE, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -143,13 +144,15 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBarcodeCompParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -157,7 +160,8 @@ public abstract class JDFAutoBarcodeCompParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

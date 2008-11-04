@@ -110,7 +110,8 @@ public abstract class JDFAutoContentObject extends JDFElement
         atrInfoTable[13] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -160,7 +161,8 @@ public abstract class JDFAutoContentObject extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoContentObject[  --> " + super.toString() + " ]";
     }

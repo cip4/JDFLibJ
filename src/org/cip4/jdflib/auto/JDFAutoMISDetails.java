@@ -96,7 +96,8 @@ public abstract class JDFAutoMISDetails extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKTYPEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,7 +147,8 @@ public abstract class JDFAutoMISDetails extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoMISDetails[  --> " + super.toString() + " ]";
     }

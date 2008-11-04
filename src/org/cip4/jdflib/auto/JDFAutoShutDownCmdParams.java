@@ -97,7 +97,8 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.SHUTDOWNTYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumShutDownType.getEnum(0), "StandBy");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -109,7 +110,8 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.FLUSHQUEUEPARAMS, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -159,7 +161,8 @@ public abstract class JDFAutoShutDownCmdParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoShutDownCmdParams[  --> " + super.toString() + " ]";
     }
