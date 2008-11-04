@@ -57,6 +57,7 @@ public class JDFModified extends JDFAutoModified
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFModified[  --> " + super.toString() + " ]";

@@ -105,6 +105,7 @@ public class RIPTest extends JDFTestCaseBase
 	/**
 	 * @return
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -216,6 +217,7 @@ public class RIPTest extends JDFTestCaseBase
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception
 	{
 		// TODO Auto-generated method stub

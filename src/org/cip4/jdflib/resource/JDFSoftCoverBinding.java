@@ -61,6 +61,7 @@ public class JDFSoftCoverBinding extends JDFAutoSoftCoverBinding
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSoftCoverBinding[  --> " + super.toString() + " ]";

@@ -60,6 +60,7 @@ public class JDFLongSlit extends JDFAutoLongSlit
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFLongSlit[  --> " + super.toString() + " ]";

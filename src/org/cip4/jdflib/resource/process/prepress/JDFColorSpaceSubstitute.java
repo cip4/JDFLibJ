@@ -67,6 +67,7 @@ public class JDFColorSpaceSubstitute extends JDFAutoColorSpaceSubstitute
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorSpaceSubstitute[  --> " + super.toString() + " ]";

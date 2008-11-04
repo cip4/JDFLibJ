@@ -99,7 +99,8 @@ public class OrganizeImports
     {
         new Thread() {
 
-            public void run ()
+            @Override
+			public void run ()
             {
                 setPriority(1);
                 Iterator it = paths.iterator();
@@ -157,7 +158,8 @@ public class OrganizeImports
     private void findImports ()
     {
         new Thread() {
-            public void run ()
+            @Override
+			public void run ()
             {
                 GeneratorUI mainFrame = motherComp.getComplexTypeList().getMainFrame();
                 String frameTitle = mainFrame.getTitle();
@@ -302,7 +304,8 @@ public class OrganizeImports
     private void writeImports ()
     {
         new Thread() {
-            public void run ()
+            @Override
+			public void run ()
             {
                 setPriority(1);
                 StringBuffer buff = new StringBuffer(1000);

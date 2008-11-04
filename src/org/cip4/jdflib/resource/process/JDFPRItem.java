@@ -143,6 +143,7 @@ public class JDFPRItem extends JDFAutoPRItem
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPRItem[  --> " + super.toString() + " ]";

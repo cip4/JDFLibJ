@@ -57,6 +57,7 @@ public class JDFNumberingParams extends JDFAutoNumberingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFNumberingParams[  --> " + super.toString() + " ]";

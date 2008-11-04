@@ -60,6 +60,7 @@ public class JDFHole extends JDFAutoHole
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFHole[  --> " + super.toString() + " ]";

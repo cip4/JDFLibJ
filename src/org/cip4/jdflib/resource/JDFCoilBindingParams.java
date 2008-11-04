@@ -57,6 +57,7 @@ public class JDFCoilBindingParams extends JDFAutoCoilBindingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFCoilBindingParams[  --> " + super.toString() + " ]";

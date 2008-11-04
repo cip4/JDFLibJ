@@ -67,6 +67,7 @@ public class JDFNumberingIntent extends JDFAutoNumberingIntent
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFNumberingIntent[  --> " + super.toString() + " ]";

@@ -63,6 +63,7 @@ public class JDFModuleCap extends JDFAutoModuleCap
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFModuleCap[  --> " + super.toString() + " ]";

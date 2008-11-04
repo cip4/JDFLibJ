@@ -68,6 +68,7 @@ public class JDFAutomatedOverPrintParams extends
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFAutomatedOverPrintParams[  --> " + super.toString() + " ]";

@@ -72,6 +72,7 @@ public class JDFEndSheet extends JDFAutoEndSheet
 						.getEnum(0), null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -98,6 +99,7 @@ public class JDFEndSheet extends JDFAutoEndSheet
 		return EnumSide.getEnum(getAttribute(AttributeName.SIDE, null, null));
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFEndSheet[  --> " + super.toString() + " ]";

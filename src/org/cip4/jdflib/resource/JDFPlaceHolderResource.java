@@ -61,6 +61,7 @@ public class JDFPlaceHolderResource extends JDFAutoPlaceHolderResource
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPlaceHolderResource[  --> " + super.toString() + " ]";

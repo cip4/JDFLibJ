@@ -64,6 +64,7 @@ public class JDFBindItem extends JDFAutoBindItem
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBindItem[  --> " + super.toString() + " ]";
@@ -86,6 +87,7 @@ public class JDFBindItem extends JDFAutoBindItem
 	 * 
 	 * @return JDFSpanBindingType: BindingType value
 	 */
+	@Override
 	public JDFSpanBindingType getBindingType()
 	{
 		if (hasChildElement(ElementName.BINDINGTYPE, null))

@@ -66,6 +66,7 @@ public class JDFResourceDefinitionParams extends
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFResourceDefinitionParams[  --> " + super.toString() + " ]";

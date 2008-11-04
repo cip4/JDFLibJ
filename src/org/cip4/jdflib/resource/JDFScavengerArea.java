@@ -61,6 +61,7 @@ public class JDFScavengerArea extends JDFAutoScavengerArea
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFScavengerArea[  --> " + super.toString() + " ]";

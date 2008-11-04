@@ -147,6 +147,7 @@ public class JDFScore extends JDFAutoScore
 						.getEnum(0), null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -216,6 +217,7 @@ public class JDFScore extends JDFAutoScore
 				null));
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFScore[  --> " + super.toString() + " ]";

@@ -67,6 +67,7 @@ public class JDFApprovalDetails extends JDFAutoApprovalDetails
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFApprovalDetails[  --> " + super.toString() + " ]";

@@ -67,6 +67,7 @@ public class JDFJBIG2Params extends JDFAutoJBIG2Params
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFJBIG2Params[  --> " + super.toString() + " ]";

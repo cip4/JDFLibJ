@@ -58,6 +58,7 @@ public class JDFTabs extends JDFAutoTabs
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFTabs[  --> " + super.toString() + " ]";

@@ -60,6 +60,7 @@ public class JDFSealing extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFSealing[  --> " + super.toString() + " ]";

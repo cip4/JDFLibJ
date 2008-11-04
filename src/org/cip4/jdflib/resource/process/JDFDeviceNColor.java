@@ -61,6 +61,7 @@ public class JDFDeviceNColor extends JDFAutoDeviceNColor
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDeviceNColor[  --> " + super.toString() + " ]";

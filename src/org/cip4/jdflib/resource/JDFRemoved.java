@@ -61,6 +61,7 @@ public class JDFRemoved extends JDFAutoRemoved
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFRemoved[  --> " + super.toString() + " ]";

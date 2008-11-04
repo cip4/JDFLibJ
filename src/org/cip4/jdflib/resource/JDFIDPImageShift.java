@@ -61,6 +61,7 @@ public class JDFIDPImageShift extends JDFAutoIDPImageShift
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIDPImageShift[  --> " + super.toString() + " ]";

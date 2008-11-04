@@ -61,6 +61,7 @@ public class JDFStrappingParams extends JDFAutoStrappingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStrappingParams[  --> " + super.toString() + " ]";

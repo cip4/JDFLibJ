@@ -135,6 +135,7 @@ public class JDFDurationSpan extends JDFSpanBase
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.DurationRange, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -147,6 +148,7 @@ public class JDFDurationSpan extends JDFSpanBase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDurationSpan[ --> " + super.toString() + " ]";
@@ -220,6 +222,7 @@ public class JDFDurationSpan extends JDFSpanBase
 		}
 	}
 
+	@Override
 	public boolean init()
 	{
 		boolean b = super.init();

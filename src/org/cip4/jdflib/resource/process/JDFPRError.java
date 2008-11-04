@@ -66,6 +66,7 @@ public class JDFPRError extends JDFAutoPRError
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPRError[  --> " + super.toString() + " ]";

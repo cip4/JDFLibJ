@@ -131,6 +131,7 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFMarkObject[  --> " + super.toString() + " ]";
@@ -142,6 +143,7 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	 * @param value the value to set the attribute to
 	 * @throws JDFException with stack trace if value < 0
 	 */
+	@Override
 	public void setOrd(int value)
 	{
 
@@ -159,6 +161,7 @@ public class JDFMarkObject extends JDFAutoMarkObject implements IPlacedObject
 	 * @return int: the value of the attribute
 	 * @throws JDFException with stack trace if result < 0
 	 */
+	@Override
 	public int getOrd()
 	{
 		int result = super.getOrd();

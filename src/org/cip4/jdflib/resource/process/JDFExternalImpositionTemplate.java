@@ -68,6 +68,7 @@ public class JDFExternalImpositionTemplate extends
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFExternalImpositionTemplate[  --> " + super.toString() + " ]";

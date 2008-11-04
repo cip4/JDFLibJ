@@ -100,6 +100,7 @@ public class ElemInfo
 		return elemValidityStatus;
 	}
 
+	@Override
 	public String toString()
 	{
 		String s = "Validity: " + Long.toHexString(elemValidityStatus);

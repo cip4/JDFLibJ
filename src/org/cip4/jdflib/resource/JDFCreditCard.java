@@ -59,6 +59,7 @@ public class JDFCreditCard extends JDFAutoCreditCard
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCreditCard[  --> " + super.toString() + " ]";

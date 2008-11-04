@@ -67,6 +67,7 @@ public class JDFPrintConditionColor extends JDFAutoPrintConditionColor
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPrintConditionColor[  --> " + super.toString() + " ]";

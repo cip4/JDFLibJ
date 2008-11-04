@@ -61,6 +61,7 @@ public class JDFQueueEntryPriParams extends JDFAutoQueueEntryPriParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQueueEntryPriParams[  --> " + super.toString() + " ]";
@@ -71,6 +72,7 @@ public class JDFQueueEntryPriParams extends JDFAutoQueueEntryPriParams
 	 * 
 	 * @param strID the ID to set
 	 */
+	@Override
 	public void setQueueEntryID(String strID)
 	{
 		setAttribute(AttributeName.QUEUEENTRYID, strID);
@@ -81,6 +83,7 @@ public class JDFQueueEntryPriParams extends JDFAutoQueueEntryPriParams
 	 * 
 	 * @param nPrio the priority to set
 	 */
+	@Override
 	public void setPriority(int nPrio)
 	{
 		setAttribute(AttributeName.PRIORITY, nPrio, null);

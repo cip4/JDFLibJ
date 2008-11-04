@@ -57,6 +57,7 @@ public class JDFDBSchema extends JDFAutoDBSchema
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDBSchema[  --> " + super.toString() + " ]";

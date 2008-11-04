@@ -134,6 +134,7 @@ public class JDFFlushResourceParams extends JDFAutoFlushResourceParams
 	 * @see org.cip4.jdflib.auto.JDFAutoFlushResourceParams#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFlushResourceParams[  --> " + super.toString() + " ]";

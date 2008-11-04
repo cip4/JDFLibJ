@@ -110,6 +110,7 @@ public class JDFSpanWireCombShape extends JDFEnumerationSpan
 	 * 
 	 * @return Vector - vector representation of the allowed values
 	 */
+	@Override
 	public ValuedEnum getEnumType()
 	{
 		return EnumSpanWireCombShape.getEnum(0);
@@ -120,6 +121,7 @@ public class JDFSpanWireCombShape extends JDFEnumerationSpan
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSpanWireCombShape[  --> " + super.toString() + " ]";

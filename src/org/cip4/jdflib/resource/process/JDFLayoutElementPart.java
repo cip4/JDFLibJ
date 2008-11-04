@@ -62,6 +62,7 @@ public class JDFLayoutElementPart extends JDFAutoLayoutElementPart
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLayoutElementPart[  --> " + super.toString() + " ]";

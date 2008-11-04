@@ -70,6 +70,7 @@ public class JDFImageCompression extends JDFAutoImageCompression
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFImageCompression[  --> " + super.toString() + " ]";

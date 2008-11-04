@@ -59,6 +59,7 @@ public class JDFGatheringParams extends JDFAutoGatheringParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFGatheringParams[  --> " + super.toString() + " ]";

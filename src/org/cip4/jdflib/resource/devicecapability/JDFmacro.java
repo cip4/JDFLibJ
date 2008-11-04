@@ -64,6 +64,7 @@ public class JDFmacro extends JDFAutomacro
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFmacro[  --> " + super.toString() + " ]";

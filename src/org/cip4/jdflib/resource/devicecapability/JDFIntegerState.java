@@ -134,6 +134,7 @@ public class JDFIntegerState extends JDFAbstractState
 				AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -145,6 +146,7 @@ public class JDFIntegerState extends JDFAbstractState
 		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUELOC, 0x33333311);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
@@ -197,6 +199,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIntegerState[ --> " + super.toString() + " ]";
@@ -410,6 +413,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
+	@Override
 	public void addValue(String value, EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
@@ -455,6 +459,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         AllowedValueList and AllowedValueMod are not specified
 	 */
+	@Override
 	public boolean fitsValue(String value, EnumFitsValue testlists)
 	{
 		boolean testResult = true;
@@ -701,6 +706,7 @@ public class JDFIntegerState extends JDFAbstractState
 		return false;
 	}
 
+	@Override
 	public VString getInvalidAttributes(EnumValidationLevel level,
 			boolean bIgnorePrivate, int nMax)
 	{
@@ -712,6 +718,7 @@ public class JDFIntegerState extends JDFAbstractState
 	 * 
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
+	@Override
 	public EnumTerm getEvaluationType()
 	{
 		return EnumTerm.IntegerEvaluation;

@@ -130,6 +130,7 @@ public class JDFPrintCondition extends JDFAutoPrintCondition
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPrintCondition[  --> " + super.toString() + " ]";

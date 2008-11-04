@@ -67,6 +67,7 @@ public class JDFBarcodeReproParams extends JDFAutoBarcodeReproParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBarcodeReproParams[  --> " + super.toString() + " ]";

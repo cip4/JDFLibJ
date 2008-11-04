@@ -58,6 +58,7 @@ public class JDFContactCopyParams extends JDFAutoContactCopyParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFContactCopyParams[  --> " + super.toString() + " ]";

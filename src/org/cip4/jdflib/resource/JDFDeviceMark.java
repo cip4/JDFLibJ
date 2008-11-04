@@ -132,6 +132,7 @@ public class JDFDeviceMark extends JDFAutoDeviceMark
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDeviceMark[  --> " + super.toString() + " ]";

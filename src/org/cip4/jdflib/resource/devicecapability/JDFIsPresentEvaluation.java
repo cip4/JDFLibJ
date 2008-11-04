@@ -138,11 +138,13 @@ public class JDFIsPresentEvaluation extends JDFEvaluation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIsPresentEvaluation[ --> " + super.toString() + " ]";
 	}
 
+	@Override
 	public final boolean fitsValue(String value)
 	{
 		return value != null;

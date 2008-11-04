@@ -61,6 +61,7 @@ public class JDFLaminatingParams extends JDFAutoLaminatingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLaminatingParams[  --> " + super.toString() + " ]";

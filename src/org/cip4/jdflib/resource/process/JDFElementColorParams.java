@@ -67,6 +67,7 @@ public class JDFElementColorParams extends JDFAutoElementColorParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFElementColorParams[  --> " + super.toString() + " ]";

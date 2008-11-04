@@ -132,6 +132,7 @@ public class JDFBundleItem extends JDFAutoBundleItem
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBundleItem[  --> " + super.toString() + " ]";

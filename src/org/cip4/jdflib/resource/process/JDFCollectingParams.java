@@ -65,6 +65,7 @@ public class JDFCollectingParams extends JDFAutoCollectingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCollectingParams[  --> " + super.toString() + " ]";

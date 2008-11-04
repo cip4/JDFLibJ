@@ -64,6 +64,7 @@ public class JDFchoice extends JDFAutochoice
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFchoice[  --> " + super.toString() + " ]";

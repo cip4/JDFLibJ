@@ -134,6 +134,7 @@ public class JDFFlushQueueParams extends JDFAutoFlushQueueParams
 	 * @see org.cip4.jdflib.auto.JDFAutoFlushQueueParams#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFlushQueueParams[  --> " + super.toString() + " ]";

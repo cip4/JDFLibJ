@@ -65,6 +65,7 @@ public class JDFImageSetterParams extends JDFAutoImageSetterParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFImageSetterParams[  --> " + super.toString() + " ]";

@@ -133,6 +133,7 @@ public class JDFIDInfo extends JDFAutoIDInfo
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIDInfo[  --> " + super.toString() + " ]";

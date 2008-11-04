@@ -130,6 +130,7 @@ public class JDFWakeUpCmdParams extends JDFAutoWakeUpCmdParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFWakeUpCmdParams[  --> " + super.toString() + " ]";

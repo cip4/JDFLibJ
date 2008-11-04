@@ -63,6 +63,7 @@ public class JDFWireCombBindingParams extends JDFAutoWireCombBindingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFWireCombBindingParams[  --> " + super.toString() + " ]";

@@ -143,6 +143,7 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFUsageCounter[  --> " + super.toString() + " ]";

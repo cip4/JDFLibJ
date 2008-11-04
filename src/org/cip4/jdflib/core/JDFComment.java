@@ -106,6 +106,7 @@ public class JDFComment extends JDFAutoComment
 	 * 
 	 * @return the ID prefix of JDFNode
 	 */
+	@Override
 	public String getIDPrefix()
 	{
 		return "c";
@@ -143,6 +144,7 @@ public class JDFComment extends JDFAutoComment
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFComment[  --> " + super.toString() + " ]";
@@ -153,6 +155,7 @@ public class JDFComment extends JDFAutoComment
 	 * 
 	 * @return boolean
 	 */
+	@Override
 	public boolean init()
 	{
 		EnumVersion v = getVersion(true);
@@ -175,6 +178,7 @@ public class JDFComment extends JDFAutoComment
 	 * @param version version that the resulting element should correspond to
 	 * @return true if successful
 	 */
+	@Override
 	public boolean fixVersion(EnumVersion version)
 	{
 		if (version != null)
@@ -202,6 +206,7 @@ public class JDFComment extends JDFAutoComment
 	 * @param bTrimWhite trims whitespace of text, default = true
 	 * @return int the number of removed nodes
 	 */
+	@Override
 	public int eraseEmptyNodes(boolean bTrimWhite)
 	{
 		return bTrimWhite ? 0 : 0; // NOP to fool compiler. also retain

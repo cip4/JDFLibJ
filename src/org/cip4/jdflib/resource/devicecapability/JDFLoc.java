@@ -59,6 +59,7 @@ public class JDFLoc extends JDFAutoLoc
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLoc[  --> " + super.toString() + " ]";

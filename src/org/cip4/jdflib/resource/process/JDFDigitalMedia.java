@@ -67,6 +67,7 @@ public class JDFDigitalMedia extends JDFAutoDigitalMedia
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDigitalMedia[  --> " + super.toString() + " ]";

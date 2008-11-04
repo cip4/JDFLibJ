@@ -57,6 +57,7 @@ public class JDFInsertList extends JDFAutoInsertList
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFInsertList[  --> " + super.toString() + " ]";

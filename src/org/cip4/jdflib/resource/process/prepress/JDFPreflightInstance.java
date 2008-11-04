@@ -61,6 +61,7 @@ public class JDFPreflightInstance extends JDFAutoPreflightInstance
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPreflightInstance[  --> " + super.toString() + " ]";

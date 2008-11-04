@@ -60,6 +60,7 @@ public class JDFFold extends JDFAutoFold
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFFold[  --> " + super.toString() + " ]";

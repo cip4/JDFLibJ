@@ -66,6 +66,7 @@ public class JDFStation extends JDFAutoStation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStation[  --> " + super.toString() + " ]";

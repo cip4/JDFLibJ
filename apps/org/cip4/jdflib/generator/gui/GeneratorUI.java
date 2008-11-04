@@ -151,7 +151,8 @@ public class GeneratorUI extends JFrame implements ActionListener, MouseListener
         super(strName);
         addWindowListener(new WindowAdapter()
         {
-            public void windowClosing(WindowEvent event)
+            @Override
+			public void windowClosing(WindowEvent event)
             {
                 event.getID(); //remove event never use warning
                 saveProperties();
@@ -383,7 +384,8 @@ public class GeneratorUI extends JFrame implements ActionListener, MouseListener
             new Thread()
             {
                 
-                public void run()
+                @Override
+				public void run()
                 {
                     try
                     {
@@ -515,7 +517,8 @@ public class GeneratorUI extends JFrame implements ActionListener, MouseListener
     {
         new Thread()
         {
-            public void run() 
+            @Override
+			public void run() 
             {
                 getStatusPanel().getDefaultTableModel().insertRow(0, new Object[]{"Deserializing " + m_serializedSchemaFileName , "Working..."});
                 setPriority(1);

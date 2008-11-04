@@ -60,6 +60,7 @@ public class JDFQualityControlParams extends JDFAutoQualityControlParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQualityControlParams[  --> " + super.toString() + " ]";

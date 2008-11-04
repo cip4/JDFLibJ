@@ -56,6 +56,7 @@ public class JDFHoleMakingParams extends JDFAutoHoleMakingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFHoleMakingParams[  --> " + super.toString() + " ]";

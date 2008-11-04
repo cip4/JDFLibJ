@@ -149,6 +149,7 @@ public class JDFPRGroup extends JDFAutoPRGroup
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPRGroup[  --> " + super.toString() + " ]";

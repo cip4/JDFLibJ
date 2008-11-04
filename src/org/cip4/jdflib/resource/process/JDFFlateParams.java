@@ -59,6 +59,7 @@ public class JDFFlateParams extends JDFAutoFlateParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFlateParams[  --> " + super.toString() + " ]";

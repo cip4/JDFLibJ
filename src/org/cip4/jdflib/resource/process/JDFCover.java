@@ -64,6 +64,7 @@ public class JDFCover extends JDFResource
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCover[  --> " + super.toString() + " ]";

@@ -56,6 +56,7 @@ public class JDFDimensions extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDimensions[  --> " + super.toString() + " ]";

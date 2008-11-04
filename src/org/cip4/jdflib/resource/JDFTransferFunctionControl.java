@@ -61,6 +61,7 @@ public class JDFTransferFunctionControl extends JDFAutoTransferFunctionControl
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFTransferFunctionControl[  --> " + super.toString() + " ]";

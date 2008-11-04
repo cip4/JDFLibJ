@@ -57,6 +57,7 @@ public class JDFInsert extends JDFAutoInsert
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFInsert[  --> " + super.toString() + " ]";

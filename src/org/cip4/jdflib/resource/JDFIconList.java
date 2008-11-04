@@ -61,6 +61,7 @@ public class JDFIconList extends JDFAutoIconList
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIconList[  --> " + super.toString() + " ]";

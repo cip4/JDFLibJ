@@ -67,6 +67,7 @@ public class JDFColorantZoneDetails extends JDFAutoColorantZoneDetails
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorantZoneDetails[  --> " + super.toString() + " ]";

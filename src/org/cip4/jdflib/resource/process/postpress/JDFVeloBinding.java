@@ -61,6 +61,7 @@ public class JDFVeloBinding extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFVeloBinding[  --> " + super.toString() + " ]";

@@ -60,6 +60,7 @@ public class JDFLongFold extends JDFAutoLongFold
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFLongFold[  --> " + super.toString() + " ]";

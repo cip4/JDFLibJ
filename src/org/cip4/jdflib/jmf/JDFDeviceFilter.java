@@ -61,6 +61,7 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter// JDFResource
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoDeviceFilter#toString()
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDeviceFilter[  --> " + super.toString() + " ]";

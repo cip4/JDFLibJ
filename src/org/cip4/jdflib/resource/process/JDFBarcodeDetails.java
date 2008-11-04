@@ -67,6 +67,7 @@ public class JDFBarcodeDetails extends JDFAutoBarcodeDetails
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBarcodeDetails[  --> " + super.toString() + " ]";

@@ -60,6 +60,7 @@ public class JDFManualLaborParams extends JDFAutoManualLaborParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFManualLaborParams[  --> " + super.toString() + " ]";

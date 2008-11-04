@@ -60,6 +60,7 @@ public class JDFPreview extends JDFAutoPreview
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPreview[  --> " + super.toString() + " ]";

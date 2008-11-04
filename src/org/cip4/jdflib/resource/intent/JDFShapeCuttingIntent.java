@@ -62,6 +62,7 @@ public class JDFShapeCuttingIntent extends JDFAutoShapeCuttingIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFShapeCuttingIntent[  --> " + super.toString() + " ]";

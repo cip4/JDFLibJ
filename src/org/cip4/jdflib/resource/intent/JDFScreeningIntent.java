@@ -122,6 +122,7 @@ public class JDFScreeningIntent extends JDFAutoScreeningIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFScreeningIntent[  --> " + super.toString() + " ]";

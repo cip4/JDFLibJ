@@ -135,6 +135,7 @@ public class JDFQuery extends JDFAutoQuery implements IJMFSubscribable
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQuery[  --> " + super.toString() + " ]";

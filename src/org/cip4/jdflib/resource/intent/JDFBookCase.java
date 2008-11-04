@@ -66,6 +66,7 @@ public class JDFBookCase extends JDFAutoBookCase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBookCase[  --> " + super.toString() + " ]";

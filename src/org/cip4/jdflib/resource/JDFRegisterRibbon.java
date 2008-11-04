@@ -132,6 +132,7 @@ public class JDFRegisterRibbon extends JDFAutoRegisterRibbon
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFRegisterRibbon[  --> " + super.toString() + " ]";

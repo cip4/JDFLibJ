@@ -61,6 +61,7 @@ public class JDFFontParams extends JDFAutoFontParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFFontParams[  --> " + super.toString() + " ]";

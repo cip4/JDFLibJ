@@ -62,6 +62,7 @@ public class JDFInkZoneCalculationParams extends
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFInkZoneCalculationParams[  --> " + super.toString() + " ]";

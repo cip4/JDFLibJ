@@ -132,6 +132,7 @@ public class JDFIcon extends JDFAutoIcon
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIcon[  --> " + super.toString() + " ]";

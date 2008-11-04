@@ -99,6 +99,7 @@ public class JDFStrippingTest extends JDFTestCaseBase
 	private JDFStrippingParams sp = null;
 	private JDFBinderySignature bs = null;
 
+	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();

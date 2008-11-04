@@ -134,6 +134,7 @@ public class JDFNameSpan extends JDFSpanBase
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -146,6 +147,7 @@ public class JDFNameSpan extends JDFSpanBase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFNameSpan[ --> " + super.toString() + " ]";
@@ -223,6 +225,7 @@ public class JDFNameSpan extends JDFSpanBase
 		setRange(v);
 	}
 
+	@Override
 	public boolean init()
 	{
 		boolean b = super.init();

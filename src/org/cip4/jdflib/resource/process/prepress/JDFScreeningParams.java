@@ -61,6 +61,7 @@ public class JDFScreeningParams extends JDFAutoScreeningParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFScreeningParams[  --> " + super.toString() + " ]";

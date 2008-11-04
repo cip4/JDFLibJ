@@ -133,6 +133,7 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFResourcePullParams[  --> " + super.toString() + " ]";
@@ -143,6 +144,7 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
 	 * 
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
+	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
 		return super.getPartMapVector();
@@ -153,6 +155,7 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
 	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
@@ -163,6 +166,7 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
 	 * 
 	 * @param mPart attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -173,6 +177,7 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
 	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
@@ -184,6 +189,7 @@ public class JDFResourcePullParams extends JDFAutoResourcePullParams
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);

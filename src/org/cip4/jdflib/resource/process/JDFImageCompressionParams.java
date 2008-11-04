@@ -61,6 +61,7 @@ public class JDFImageCompressionParams extends JDFAutoImageCompressionParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFImageCompressionParams[  --> " + super.toString() + " ]";

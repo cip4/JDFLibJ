@@ -61,6 +61,7 @@ public class JDFChangedAttribute extends JDFAutoChangedAttribute
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFChangedAttribute[  --> " + super.toString() + " ]";

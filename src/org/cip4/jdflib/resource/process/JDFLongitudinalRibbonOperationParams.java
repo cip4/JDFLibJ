@@ -64,6 +64,7 @@ public class JDFLongitudinalRibbonOperationParams extends
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFLongitudinalRibbonOperationParams[  --> " + super.toString()

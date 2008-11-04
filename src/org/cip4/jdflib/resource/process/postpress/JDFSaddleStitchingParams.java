@@ -63,6 +63,7 @@ public class JDFSaddleStitchingParams extends JDFAutoSaddleStitchingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSaddleStitchingParams[  --> " + super.toString() + " ]";

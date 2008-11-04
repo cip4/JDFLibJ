@@ -62,6 +62,7 @@ public class JDFFoldingIntent extends JDFAutoFoldingIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFFoldingIntent[  --> " + super.toString() + " ]";

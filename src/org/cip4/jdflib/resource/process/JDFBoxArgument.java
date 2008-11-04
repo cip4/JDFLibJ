@@ -135,6 +135,7 @@ public class JDFBoxArgument extends JDFAutoBoxArgument
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBoxArgument[  --> " + super.toString() + " ]";

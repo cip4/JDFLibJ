@@ -61,6 +61,7 @@ public class JDFProofItem extends JDFAutoProofItem
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFProofItem[  --> " + super.toString() + " ]";

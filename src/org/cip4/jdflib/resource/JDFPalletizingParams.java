@@ -61,6 +61,7 @@ public class JDFPalletizingParams extends JDFAutoPalletizingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPalletizingParams[  --> " + super.toString() + " ]";

@@ -59,6 +59,7 @@ public class JDFAssembly extends JDFAutoAssembly
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFAssembly[  --> " + super.toString() + " ]";

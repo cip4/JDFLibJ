@@ -67,6 +67,7 @@ public class JDFBoxFoldAction extends JDFAutoBoxFoldAction
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBoxFoldAction[  --> " + super.toString() + " ]";

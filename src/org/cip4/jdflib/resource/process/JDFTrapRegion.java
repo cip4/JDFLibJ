@@ -67,6 +67,7 @@ public class JDFTrapRegion extends JDFAutoTrapRegion
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFTrapRegion[  --> " + super.toString() + " ]";

@@ -57,6 +57,7 @@ public class JDFPreflightAnalysis extends JDFAutoPreflightAnalysis
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPreflightAnalysis[  --> " + super.toString() + " ]";

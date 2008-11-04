@@ -90,6 +90,7 @@ public class JDFQueueEntryTest extends TestCase
 {
 	private JDFQueue q;
 
+	@Override
 	public String toString()
 	{
 		return q == null ? "null" : q.toString();
@@ -234,6 +235,7 @@ public class JDFQueueEntryTest extends TestCase
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub

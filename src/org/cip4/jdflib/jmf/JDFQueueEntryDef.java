@@ -129,6 +129,7 @@ public class JDFQueueEntryDef extends JDFAutoQueueEntryDef
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQueueEntryDef[  --> " + super.toString() + " ]";

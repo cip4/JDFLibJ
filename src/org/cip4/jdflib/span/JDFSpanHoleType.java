@@ -61,6 +61,7 @@ public class JDFSpanHoleType extends JDFEnumerationSpan
 	 * 
 	 * @return Vector - vector representation of the allowed values
 	 */
+	@Override
 	public ValuedEnum getEnumType()
 	{
 		return JDFMedia.EnumHoleType.getEnum(0);
@@ -71,6 +72,7 @@ public class JDFSpanHoleType extends JDFEnumerationSpan
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSpanHoleType[  --> " + super.toString() + " ]";

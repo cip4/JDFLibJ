@@ -67,6 +67,7 @@ public class JDFBoxFoldingParams extends JDFAutoBoxFoldingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBoxFoldingParams[  --> " + super.toString() + " ]";

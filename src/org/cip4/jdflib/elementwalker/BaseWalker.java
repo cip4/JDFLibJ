@@ -88,7 +88,6 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * 
 	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(KElement, KElement)
 	 */
-	@SuppressWarnings("unused")
 	public KElement walk(KElement e, KElement trackElem)
 	{
 		return e;

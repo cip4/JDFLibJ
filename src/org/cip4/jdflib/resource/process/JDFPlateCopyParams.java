@@ -65,6 +65,7 @@ public class JDFPlateCopyParams extends JDFAutoPlateCopyParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPlateCopyParams[  --> " + super.toString() + " ]";

@@ -68,6 +68,7 @@ public class JDFGlueApplication extends JDFAutoGlueApplication
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFGlueApplication[  --> " + super.toString() + " ]";

@@ -65,6 +65,7 @@ public class JDFGangInfo extends JDFAutoGangInfo
 	 * @see org.cip4.jdflib.auto.JDFAutoGangInfo#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFGangInfo[  --> " + super.toString() + " ]";

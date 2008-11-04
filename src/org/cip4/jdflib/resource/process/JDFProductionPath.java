@@ -62,6 +62,7 @@ public class JDFProductionPath extends JDFAutoProductionPath
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFProductionPath[  --> " + super.toString() + " ]";

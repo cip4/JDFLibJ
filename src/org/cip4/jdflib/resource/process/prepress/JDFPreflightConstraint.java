@@ -61,6 +61,7 @@ public class JDFPreflightConstraint extends JDFAutoPreflightConstraint
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPreflightConstraint[  --> " + super.toString() + " ]";

@@ -60,6 +60,7 @@ public class JDFGlue extends JDFAutoGlue
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFGlue[  --> " + super.toString() + " ]";

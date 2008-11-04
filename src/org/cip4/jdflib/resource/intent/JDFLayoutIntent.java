@@ -62,6 +62,7 @@ public class JDFLayoutIntent extends JDFAutoLayoutIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFLayoutIntent[  --> " + super.toString() + " ]";

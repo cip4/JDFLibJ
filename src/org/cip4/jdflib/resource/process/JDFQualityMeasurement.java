@@ -67,6 +67,7 @@ public class JDFQualityMeasurement extends JDFAutoQualityMeasurement
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQualityMeasurement[  --> " + super.toString() + " ]";

@@ -28,7 +28,7 @@ public class SScanf extends ScanfReader implements Iterator
 	 * @param theString the String to scan
 	 * @param format the formatting String to apply according to c++ sscanf rools
 	 */
-	private VString vFmt;
+	private final VString vFmt;
 	private int pos = 0;
 
 	public SScanf(String theString, String format)
@@ -75,6 +75,7 @@ public class SScanf extends ScanfReader implements Iterator
 	 * 
 	 * @see org.cip4.jdflib.cformat.ScanfReader#scanDouble(org.cip4.jdflib.cformat .ScanfFormat)
 	 */
+	@Override
 	public double scanDouble(ScanfFormat fmt) throws IOException, ScanfMatchException, IllegalArgumentException
 	{
 		if ("dxoi".indexOf(fmt.type) >= 0) // also gracefully handle int as
@@ -88,6 +89,7 @@ public class SScanf extends ScanfReader implements Iterator
 	 * 
 	 * @see org.cip4.jdflib.cformat.ScanfReader#scanString(org.cip4.jdflib.cformat .ScanfFormat)
 	 */
+	@Override
 	public String scanString(ScanfFormat fmt) throws IOException, IllegalArgumentException
 	{
 		if ("di".indexOf(fmt.type) >= 0) // also gracefully handle int as double

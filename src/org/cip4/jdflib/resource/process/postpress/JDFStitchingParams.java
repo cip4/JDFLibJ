@@ -61,6 +61,7 @@ public class JDFStitchingParams extends JDFAutoStitchingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFStitchingParams[  --> " + super.toString() + " ]";

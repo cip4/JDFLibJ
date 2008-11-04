@@ -62,6 +62,7 @@ public class JDFHoleMakingIntent extends JDFAutoHoleMakingIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFHoleMakingIntent[  --> " + super.toString() + " ]";

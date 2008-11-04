@@ -67,6 +67,7 @@ public class JDFQualityControlResult extends JDFAutoQualityControlResult
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQualityControlResult[  --> " + super.toString() + " ]";

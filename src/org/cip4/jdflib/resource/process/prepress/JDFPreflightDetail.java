@@ -61,6 +61,7 @@ public class JDFPreflightDetail extends JDFAutoPreflightDetail
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPreflightDetail[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFSeparationSpec extends JDFAutoSeparationSpec
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFSeparationSpec[  --> " + super.toString() + " ]";

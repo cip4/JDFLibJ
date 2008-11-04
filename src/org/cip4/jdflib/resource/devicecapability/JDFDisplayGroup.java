@@ -65,6 +65,7 @@ public class JDFDisplayGroup extends JDFAutoDisplayGroup
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDisplayGroup[  --> " + super.toString() + " ]";

@@ -59,6 +59,7 @@ public class JDFDCTParams extends JDFAutoDCTParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDCTParams[  --> " + super.toString() + " ]";

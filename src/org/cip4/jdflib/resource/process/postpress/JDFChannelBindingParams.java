@@ -65,6 +65,7 @@ public class JDFChannelBindingParams extends JDFAutoChannelBindingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFChannelBindingParams[  --> " + super.toString() + " ]";

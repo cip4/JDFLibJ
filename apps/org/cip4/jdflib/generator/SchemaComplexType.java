@@ -32,7 +32,8 @@ public class SchemaComplexType implements Serializable
         m_kElem = other;
     }
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return "SchemaComplexType[ --> " + m_kElem + " ]";
     }

@@ -63,6 +63,7 @@ public class JDFConventionalPrintingParams extends
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFConventionalPrintingParams[  --> " + super.toString() + " ]";

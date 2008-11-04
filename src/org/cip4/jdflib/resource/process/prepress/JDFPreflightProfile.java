@@ -65,6 +65,7 @@ public class JDFPreflightProfile extends JDFAutoPreflightProfile
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPreflightProfile[  --> " + super.toString() + " ]";

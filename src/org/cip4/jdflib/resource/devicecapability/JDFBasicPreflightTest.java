@@ -65,6 +65,7 @@ public class JDFBasicPreflightTest extends JDFAutoBasicPreflightTest
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBasicPreflightTest[  --> " + super.toString() + " ]";

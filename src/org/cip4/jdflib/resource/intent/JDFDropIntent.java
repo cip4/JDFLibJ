@@ -69,6 +69,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDropIntent[  --> " + super.toString() + " ]";
@@ -91,6 +92,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * 
 	 * @return WString: attribute value
 	 */
+	@Override
 	public int getAdditionalAmount()
 	{
 		if (hasAttribute(AttributeName.ADDITIONALAMOUNT, null, false))
@@ -107,6 +109,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * 
 	 * @return WString: attribute value
 	 */
+	@Override
 	public String getBuyerAccount()
 	{
 		if (hasAttribute(AttributeName.BUYERACCOUNT))
@@ -123,6 +126,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * 
 	 * @return JDFNameSpan: element value
 	 */
+	@Override
 	public JDFNameSpan getMethod()
 	{
 		if (hasChildElement(ElementName.METHOD, null))
@@ -139,6 +143,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * 
 	 * @return JDFNameSpan: element value
 	 */
+	@Override
 	public JDFNameSpan getReturnMethod()
 	{
 		if (hasChildElement(ElementName.RETURNMETHOD, null))
@@ -155,6 +160,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * 
 	 * @return JDFStringSpan: element value
 	 */
+	@Override
 	public JDFStringSpan getServiceLevel()
 	{
 		if (hasChildElement(ElementName.SERVICELEVEL, null))
@@ -171,6 +177,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * 
 	 * @return JDFSpanSurplusHandling: element value
 	 */
+	@Override
 	public JDFSpanSurplusHandling getSurplusHandling()
 	{
 		if (hasChildElement(ElementName.SURPLUSHANDLING, null))
@@ -187,6 +194,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * 
 	 * @return JDFSpanTransfer: element value
 	 */
+	@Override
 	public JDFSpanTransfer getTransfer()
 	{
 		if (hasChildElement(ElementName.TRANSFER, null))
@@ -202,6 +210,7 @@ public class JDFDropIntent extends JDFAutoDropIntent
 	 * 
 	 * @return JDFContact: the found element
 	 */
+	@Override
 	public JDFContact getContact(int iSkip)
 	{
 		if (hasChildElement(ElementName.CONTACT, null))

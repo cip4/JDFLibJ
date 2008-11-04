@@ -67,6 +67,7 @@ public class JDFBendingParams extends JDFAutoBendingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBendingParams[  --> " + super.toString() + " ]";

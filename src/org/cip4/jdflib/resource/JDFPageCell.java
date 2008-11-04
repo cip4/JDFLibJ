@@ -61,6 +61,7 @@ public class JDFPageCell extends JDFAutoPageCell
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPageCell[  --> " + super.toString() + " ]";

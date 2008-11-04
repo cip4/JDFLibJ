@@ -139,6 +139,7 @@ public class JDFTile extends JDFAutoTile
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFTile[  --> " + super.toString() + " ]";
@@ -150,6 +151,7 @@ public class JDFTile extends JDFAutoTile
 		elemInfoTable[0] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33331111);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);

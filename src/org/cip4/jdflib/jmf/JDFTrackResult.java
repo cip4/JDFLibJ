@@ -130,6 +130,7 @@ public class JDFTrackResult extends JDFAutoTrackResult
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFTrackResult[  --> " + super.toString() + " ]";
@@ -140,6 +141,7 @@ public class JDFTrackResult extends JDFAutoTrackResult
 	 * 
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
+	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
 		return super.getPartMapVector();
@@ -150,6 +152,7 @@ public class JDFTrackResult extends JDFAutoTrackResult
 	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
@@ -160,6 +163,7 @@ public class JDFTrackResult extends JDFAutoTrackResult
 	 * 
 	 * @param mPart attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -170,6 +174,7 @@ public class JDFTrackResult extends JDFAutoTrackResult
 	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
@@ -181,6 +186,7 @@ public class JDFTrackResult extends JDFAutoTrackResult
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);

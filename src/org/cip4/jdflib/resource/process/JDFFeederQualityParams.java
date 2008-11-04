@@ -60,6 +60,7 @@ public class JDFFeederQualityParams extends JDFAutoFeederQualityParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFeederQualityParams[  --> " + super.toString() + " ]";

@@ -62,6 +62,7 @@ public class JDFColorsUsed extends JDFResource
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorsUsed[  --> " + super.toString() + " ]";

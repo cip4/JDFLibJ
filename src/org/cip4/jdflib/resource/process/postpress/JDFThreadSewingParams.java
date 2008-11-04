@@ -65,6 +65,7 @@ public class JDFThreadSewingParams extends JDFAutoThreadSewingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFThreadSewingParams[  --> " + super.toString() + " ]";

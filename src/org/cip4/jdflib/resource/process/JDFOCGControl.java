@@ -67,6 +67,7 @@ public class JDFOCGControl extends JDFAutoOCGControl
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFOCGControl[  --> " + super.toString() + " ]";

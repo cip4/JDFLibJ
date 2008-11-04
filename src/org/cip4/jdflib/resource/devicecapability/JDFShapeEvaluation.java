@@ -115,6 +115,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 				AttributeInfo.EnumAttributeType.NumberRangeList, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -171,6 +172,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFShapeEvaluation[  --> " + super.toString() + " ]";
@@ -261,6 +263,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 		setAttribute(AttributeName.TOLERANCE, value.toString(), null);
 	}
 
+	@Override
 	public JDFXYPair getTolerance()
 	{
 		return super.getTolerance();
@@ -279,6 +282,7 @@ public class JDFShapeEvaluation extends JDFEvaluation
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         testlists are not specified
 	 */
+	@Override
 	public boolean fitsValue(String value)
 	{
 		if (!fitsListType(value))

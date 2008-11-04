@@ -62,6 +62,7 @@ public class JDFPackingIntent extends JDFAutoPackingIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPackingIntent[  --> " + super.toString() + " ]";

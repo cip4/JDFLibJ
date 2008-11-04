@@ -132,6 +132,7 @@ public class JDFBundle extends JDFAutoBundle
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBundle[  --> " + super.toString() + " ]";

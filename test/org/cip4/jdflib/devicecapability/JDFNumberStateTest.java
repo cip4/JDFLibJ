@@ -95,6 +95,7 @@ public class JDFNumberStateTest extends JDFTestCaseBase
 
 	JDFNumberState iState = null;
 
+	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();

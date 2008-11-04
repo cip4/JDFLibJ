@@ -130,6 +130,7 @@ public class JDFSubscription extends JDFAutoSubscription
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSubscription[  --> " + super.toString() + " ]";

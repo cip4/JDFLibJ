@@ -67,6 +67,7 @@ public class JDFColorControlStrip extends JDFAutoColorControlStrip
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorControlStrip[  --> " + super.toString() + " ]";

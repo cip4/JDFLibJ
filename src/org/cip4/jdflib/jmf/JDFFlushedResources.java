@@ -134,6 +134,7 @@ public class JDFFlushedResources extends JDFAutoFlushedResources
 	 * @see org.cip4.jdflib.auto.JDFAutoFlushedResources#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFlushedResources[  --> " + super.toString() + " ]";

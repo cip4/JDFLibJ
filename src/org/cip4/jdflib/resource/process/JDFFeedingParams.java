@@ -60,6 +60,7 @@ public class JDFFeedingParams extends JDFAutoFeedingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFeedingParams[  --> " + super.toString() + " ]";

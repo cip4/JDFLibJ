@@ -45,6 +45,7 @@ public class JDFTestType extends JDFElement
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -71,6 +72,7 @@ public class JDFTestType extends JDFElement
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFTestType[  --> " + super.toString() + " ]";
@@ -88,6 +90,7 @@ public class JDFTestType extends JDFElement
 	 *            : version that the resulting element should correspond to
 	 * @return true if successful
 	 */
+	@Override
 	public boolean fixVersion(EnumVersion version)
 	{
 		if (version.getValue() >= EnumVersion.Version_1_3.getValue())

@@ -61,6 +61,7 @@ public class JDFImageReplacementParams extends JDFAutoImageReplacementParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFImageReplacementParams[  --> " + super.toString() + " ]";

@@ -136,6 +136,7 @@ public class JDFContentObject extends JDFAutoContentObject implements
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFContentObject[  --> " + super.toString() + " ]";

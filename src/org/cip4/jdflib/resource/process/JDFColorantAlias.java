@@ -146,6 +146,7 @@ public class JDFColorantAlias extends JDFAutoColorantAlias
 				AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -158,6 +159,7 @@ public class JDFColorantAlias extends JDFAutoColorantAlias
 				0x22222222);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);
@@ -170,6 +172,7 @@ public class JDFColorantAlias extends JDFAutoColorantAlias
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorantAlias[  --> " + super.toString() + " ]";
@@ -186,6 +189,7 @@ public class JDFColorantAlias extends JDFAutoColorantAlias
 	 * @param value
 	 *            : the value to set the attribute to
 	 */
+	@Override
 	public void setReplacementColorantName(String value)
 	{
 		setAttribute(AttributeName.REPLACEMENTCOLORANTNAME, value, null);
@@ -196,6 +200,7 @@ public class JDFColorantAlias extends JDFAutoColorantAlias
 	 * 
 	 * @return the value of the attribute
 	 */
+	@Override
 	public String getReplacementColorantName()
 	{
 		return getAttribute(AttributeName.REPLACEMENTCOLORANTNAME, null,

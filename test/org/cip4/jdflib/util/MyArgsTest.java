@@ -23,6 +23,7 @@ public class MyArgsTest extends TestCase
 
 	MyArgs _myArgs;
 
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();

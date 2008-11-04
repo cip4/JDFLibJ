@@ -61,6 +61,7 @@ public class JDFStackingParams extends JDFAutoStackingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStackingParams[  --> " + super.toString() + " ]";

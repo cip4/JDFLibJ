@@ -61,6 +61,7 @@ public class JDFFoldingParams extends JDFAutoFoldingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFFoldingParams[  --> " + super.toString() + " ]";

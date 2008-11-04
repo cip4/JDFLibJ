@@ -128,6 +128,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFModuleStatus[  --> " + super.toString() + " ]";
@@ -143,6 +144,7 @@ public class JDFModuleStatus extends JDFAutoModuleStatus
 	 * 
 	 * @default getMissingAttributes(9999999)
 	 */
+	@Override
 	public VString getMissingAttributes(int nMax)
 	{
 		final VString v = super.getMissingAttributes(nMax);

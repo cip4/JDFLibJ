@@ -60,6 +60,7 @@ public class JDFPrintRollingParams extends JDFAutoPrintRollingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPrintRollingParams[  --> " + super.toString() + " ]";

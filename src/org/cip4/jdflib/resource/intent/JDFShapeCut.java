@@ -61,6 +61,7 @@ public class JDFShapeCut extends JDFAutoShapeCut
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFShapeCut[  --> " + super.toString() + " ]";

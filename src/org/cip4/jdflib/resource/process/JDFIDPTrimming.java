@@ -61,6 +61,7 @@ public class JDFIDPTrimming extends JDFAutoIDPTrimming
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFIDPTrimming[  --> " + super.toString() + " ]";

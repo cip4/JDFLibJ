@@ -67,6 +67,7 @@ public class JDFBoxApplication extends JDFAutoBoxApplication
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBoxApplication[  --> " + super.toString() + " ]";

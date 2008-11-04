@@ -61,6 +61,7 @@ public class JDFBoxPackingParams extends JDFAutoBoxPackingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBoxPackingParams[  --> " + super.toString() + " ]";

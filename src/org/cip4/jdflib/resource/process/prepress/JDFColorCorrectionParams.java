@@ -60,6 +60,7 @@ public class JDFColorCorrectionParams extends JDFAutoColorCorrectionParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFColorCorrectionParams[  --> " + super.toString() + " ]";

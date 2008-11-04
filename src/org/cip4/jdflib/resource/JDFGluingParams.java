@@ -61,6 +61,7 @@ public class JDFGluingParams extends JDFAutoGluingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFGluingParams[  --> " + super.toString() + " ]";

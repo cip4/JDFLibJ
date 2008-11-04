@@ -119,6 +119,7 @@ public class JDFDeleted extends JDFAutoDeleted
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDeleted[  --> " + super.toString() + " ]";

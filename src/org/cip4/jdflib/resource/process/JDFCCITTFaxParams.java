@@ -60,6 +60,7 @@ public class JDFCCITTFaxParams extends JDFAutoCCITTFaxParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCCITTFaxParams[  --> " + super.toString() + " ]";

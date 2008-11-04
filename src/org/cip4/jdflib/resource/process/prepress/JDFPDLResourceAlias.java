@@ -61,6 +61,7 @@ public class JDFPDLResourceAlias extends JDFAutoPDLResourceAlias
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPDLResourceAlias[  --> " + super.toString() + " ]";

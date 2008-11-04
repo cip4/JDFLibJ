@@ -67,6 +67,7 @@ public class JDFFoldOperation extends JDFAutoFoldOperation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFoldOperation[  --> " + super.toString() + " ]";

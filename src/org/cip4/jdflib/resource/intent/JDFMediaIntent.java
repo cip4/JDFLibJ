@@ -97,6 +97,7 @@ public class JDFMediaIntent extends JDFAutoMediaIntent
 				AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -145,6 +146,7 @@ public class JDFMediaIntent extends JDFAutoMediaIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFMediaIntent[  --> " + super.toString() + " ]";

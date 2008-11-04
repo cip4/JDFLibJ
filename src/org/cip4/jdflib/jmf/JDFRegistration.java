@@ -120,6 +120,7 @@ public class JDFRegistration extends JDFAutoRegistration implements IJMFSubscrib
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFRegistration[  --> " + super.toString() + " ]";

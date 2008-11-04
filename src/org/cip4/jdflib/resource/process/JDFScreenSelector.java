@@ -133,6 +133,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFScreenSelector[  --> " + super.toString() + " ]";
@@ -145,6 +146,7 @@ public class JDFScreenSelector extends JDFAutoScreenSelector
 				0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);

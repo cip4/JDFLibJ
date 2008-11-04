@@ -131,6 +131,7 @@ public class JDFMedia extends JDFAutoMedia
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFMedia[  --> " + super.toString() + " ]";

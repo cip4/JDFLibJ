@@ -132,6 +132,7 @@ public class JDFFitPolicy extends JDFAutoFitPolicy
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFitPolicy[  --> " + super.toString() + " ]";

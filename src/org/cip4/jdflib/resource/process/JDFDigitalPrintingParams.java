@@ -61,6 +61,7 @@ public class JDFDigitalPrintingParams extends JDFAutoDigitalPrintingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDigitalPrintingParams[  --> " + super.toString() + " ]";

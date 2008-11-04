@@ -140,6 +140,7 @@ public class JDFPRGroupOccurrence extends JDFAutoPRGroupOccurrence
 				AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -152,6 +153,7 @@ public class JDFPRGroupOccurrence extends JDFAutoPRGroupOccurrence
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPRGroupOccurrence[  --> " + super.toString() + " ]";

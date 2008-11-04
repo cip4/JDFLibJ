@@ -61,6 +61,7 @@ public class JDFThreadSealing extends JDFAutoThreadSealing
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFThreadSealing[  --> " + super.toString() + " ]";

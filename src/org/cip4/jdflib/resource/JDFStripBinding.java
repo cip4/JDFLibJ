@@ -61,6 +61,7 @@ public class JDFStripBinding extends JDFAutoStripBinding
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStripBinding[  --> " + super.toString() + " ]";

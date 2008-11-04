@@ -143,6 +143,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.XYPairRangeList, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -155,6 +156,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFXYPairSpan[ --> " + super.toString() + " ]";
@@ -211,6 +213,7 @@ public class JDFXYPairSpan extends JDFSpanBase
 		}
 	}
 
+	@Override
 	public boolean init()
 	{
 		boolean b = super.init();

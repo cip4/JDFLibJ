@@ -59,6 +59,7 @@ public class JDFDensityMeasuringField extends JDFAutoDensityMeasuringField
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDensityMeasuringField[  --> " + super.toString() + " ]";

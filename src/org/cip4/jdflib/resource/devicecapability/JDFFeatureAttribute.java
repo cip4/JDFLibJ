@@ -65,6 +65,7 @@ public class JDFFeatureAttribute extends JDFAutoFeatureAttribute
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFeatureAttribute[  --> " + super.toString() + " ]";

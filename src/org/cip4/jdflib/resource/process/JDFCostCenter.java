@@ -65,6 +65,7 @@ public class JDFCostCenter extends JDFAutoCostCenter
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCostCenter[  --> " + super.toString() + " ]";

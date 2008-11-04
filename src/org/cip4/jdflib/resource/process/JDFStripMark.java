@@ -67,6 +67,7 @@ public class JDFStripMark extends JDFAutoStripMark
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStripMark[  --> " + super.toString() + " ]";

@@ -66,6 +66,7 @@ public class JDFPosition extends JDFAutoPosition
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPosition[  --> " + super.toString() + " ]";

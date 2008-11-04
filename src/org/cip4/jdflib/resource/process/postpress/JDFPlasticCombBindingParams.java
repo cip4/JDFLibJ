@@ -64,6 +64,7 @@ public class JDFPlasticCombBindingParams extends
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPlasticCombBindingParams[  --> " + super.toString() + " ]";

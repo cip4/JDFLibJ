@@ -61,6 +61,7 @@ public class JDFFileAlias extends JDFAutoFileAlias
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFFileAlias[  --> " + super.toString() + " ]";

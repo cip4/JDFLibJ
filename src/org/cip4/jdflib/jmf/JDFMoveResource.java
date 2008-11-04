@@ -58,6 +58,7 @@ public class JDFMoveResource extends JDFAutoMoveResource
 	 * 
 	 * @return string
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFMoveResource[  --> " + super.toString() + " ]";

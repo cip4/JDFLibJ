@@ -132,6 +132,7 @@ public class JDFSpanNamedColor extends JDFEnumerationSpan
 	 * 
 	 * @return Vector - vector representation of the allowed values
 	 */
+	@Override
 	public ValuedEnum getEnumType()
 	{
 		return EnumNamedColor.getEnum(0);
@@ -142,6 +143,7 @@ public class JDFSpanNamedColor extends JDFEnumerationSpan
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSpanNamedColor[  --> " + super.toString() + " ]";

@@ -63,6 +63,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	/**
 	 * @return
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();

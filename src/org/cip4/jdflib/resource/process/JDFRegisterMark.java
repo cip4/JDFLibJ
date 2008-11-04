@@ -133,6 +133,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFRegisterMark[  --> " + super.toString() + " ]";

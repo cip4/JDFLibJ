@@ -61,6 +61,7 @@ public class JDFLayerList extends JDFAutoLayerList
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLayerList[  --> " + super.toString() + " ]";

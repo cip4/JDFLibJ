@@ -135,6 +135,7 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSeparationList[ -->" + super.toString() + "]";

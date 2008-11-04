@@ -131,6 +131,7 @@ public class JDFTool extends JDFAutoTool
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFTool[  --> " + super.toString() + " ]";
@@ -138,6 +139,7 @@ public class JDFTool extends JDFAutoTool
 
 	// //////////////////////////////////////////////////////////////////////
 
+	@Override
 	public boolean fixVersion(EnumVersion version)
 	{
 		if (version != null && version.getValue() >= EnumVersion.Version_1_3.getValue())

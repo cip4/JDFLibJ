@@ -80,8 +80,8 @@ import org.apache.commons.lang.enums.ValuedEnum;
 
 public class AtrInfoTable
 {
-	private String attributeName;
-	private AtrInfo info;
+	private final String attributeName;
+	private final AtrInfo info;
 
 	/**
 	 * @param n
@@ -96,6 +96,7 @@ public class AtrInfoTable
 		info = new AtrInfo(s, t, e, def);
 	}
 
+	@Override
 	public String toString()
 	{
 		return attributeName + ": " + info.toString();

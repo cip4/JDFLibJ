@@ -61,6 +61,7 @@ public class JDFGangQuFilter extends JDFAutoGangQuFilter
 	 * @see org.cip4.jdflib.auto.JDFAutoGangQuFilter#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFGangQuFilter[  --> " + super.toString() + " ]";

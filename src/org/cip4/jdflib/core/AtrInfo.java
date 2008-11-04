@@ -81,8 +81,8 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
 public class AtrInfo
 {
-	private long atrValidityStatus;
-	private AttributeInfo.EnumAttributeType atrType;
+	private final long atrValidityStatus;
+	private final AttributeInfo.EnumAttributeType atrType;
 	private ValuedEnum enumEnum = null;
 	private String atrDefault = null;
 
@@ -128,6 +128,7 @@ public class AtrInfo
 		return atrDefault;
 	}
 
+	@Override
 	public String toString()
 	{
 		String s = "Type: " + atrType.toString();

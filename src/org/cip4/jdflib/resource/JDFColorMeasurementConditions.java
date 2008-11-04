@@ -132,6 +132,7 @@ public class JDFColorMeasurementConditions extends JDFAutoColorMeasurementCondit
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorMeasurementConditions[  --> " + super.toString() + " ]";

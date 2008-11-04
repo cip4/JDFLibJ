@@ -106,6 +106,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 				AttributeInfo.EnumAttributeType.IntegerRange, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -117,6 +118,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
@@ -169,6 +171,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPDFPathEvaluation[ --> " + super.toString() + " ]";
@@ -255,6 +258,7 @@ public class JDFPDFPathEvaluation extends JDFEvaluation
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         testlists are not specified
 	 */
+	@Override
 	public final boolean fitsValue(String value)
 	{
 		// TBD __Lena__ Ihhalt! Test of 20 symbols

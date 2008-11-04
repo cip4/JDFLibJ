@@ -68,6 +68,7 @@ public class JDFWebInlineFinishingParams extends
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFWebInlineFinishingParams[  --> " + super.toString() + " ]";

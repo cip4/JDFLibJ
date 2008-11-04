@@ -110,6 +110,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 				AttributeInfo.EnumAttributeType.RegExp, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -121,6 +122,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);
@@ -175,6 +177,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStringEvaluation[ --> " + super.toString() + " ]";
@@ -296,6 +299,7 @@ public class JDFStringEvaluation extends JDFEvaluation
 	 * @return boolean - true, if <code>value</code> matches the testlists or if
 	 *         testlists are not specified
 	 */
+	@Override
 	public final boolean fitsValue(String value)
 	{
 		return fitsLength(value) && fitsRegExp(value) && fitsValueElem(value);

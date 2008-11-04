@@ -59,6 +59,7 @@ public class JDFLZWParams extends JDFAutoLZWParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLZWParams[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFInkZoneProfile extends JDFAutoInkZoneProfile
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFInkZoneProfile[  --> " + super.toString() + " ]";

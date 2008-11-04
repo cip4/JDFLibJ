@@ -61,6 +61,7 @@ public class JDFObjectResolution extends JDFAutoObjectResolution
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFObjectResolution[  --> " + super.toString() + " ]";

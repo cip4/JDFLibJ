@@ -170,6 +170,7 @@ public class JDFCMYKColor extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
+	@Override
 	public void isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_CMYK_COLOR)

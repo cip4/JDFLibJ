@@ -65,6 +65,7 @@ public class JDFPreflightInventory extends JDFAutoPreflightInventory
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPreflightInventory[  --> " + super.toString() + " ]";

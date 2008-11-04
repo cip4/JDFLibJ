@@ -61,6 +61,7 @@ public class JDFShrinkingParams extends JDFAutoShrinkingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFShrinkingParams[  --> " + super.toString() + " ]";

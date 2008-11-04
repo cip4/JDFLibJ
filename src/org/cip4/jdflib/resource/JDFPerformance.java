@@ -59,6 +59,7 @@ public class JDFPerformance extends JDFAutoPerformance
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPerformance[  --> " + super.toString() + " ]";

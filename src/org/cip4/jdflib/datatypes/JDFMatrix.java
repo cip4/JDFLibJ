@@ -280,6 +280,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
+	@Override
 	public void isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_MATRIX_DIMENSION)
@@ -421,6 +422,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @return boolean - true if equal otherwise false
 	 */
+	@Override
 	public boolean equals(Object other)
 	{
 		if (this == other)
@@ -446,6 +448,7 @@ public class JDFMatrix extends JDFNumList
 	/**
 	 * hashCode complements equals() to fulfill the equals/hashCode contract
 	 */
+	@Override
 	public int hashCode()
 	{
 		return HashUtil.hashCode(super.hashCode(), this.toString());

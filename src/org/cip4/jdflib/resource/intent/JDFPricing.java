@@ -61,6 +61,7 @@ public class JDFPricing extends JDFAutoPricing
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPricing[  --> " + super.toString() + " ]";

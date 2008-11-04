@@ -63,14 +63,16 @@ public class StatusTable extends JTable implements ActionListener
         
         this.addMouseListener(new MouseAdapter() 
         {
-            public void mousePressed(MouseEvent evt) 
+            @Override
+			public void mousePressed(MouseEvent evt) 
             {
                 if (evt.isPopupTrigger()) 
                 {
                     menu.show(evt.getComponent(), evt.getX(), evt.getY());
                 }
             }
-            public void mouseReleased(MouseEvent evt) 
+            @Override
+			public void mouseReleased(MouseEvent evt) 
             {
                 if (evt.isPopupTrigger()) 
                 {

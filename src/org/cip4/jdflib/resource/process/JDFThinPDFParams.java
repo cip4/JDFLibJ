@@ -61,6 +61,7 @@ public class JDFThinPDFParams extends JDFAutoThinPDFParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFThinPDFParams[  --> " + super.toString() + " ]";

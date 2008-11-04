@@ -136,6 +136,7 @@ public class JDFMerged extends JDFAutoMerged
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFMerged[  --> " + super.toString() + " ]";
@@ -146,6 +147,7 @@ public class JDFMerged extends JDFAutoMerged
 	 * 
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
+	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
 		return super.getPartMapVector();
@@ -156,6 +158,7 @@ public class JDFMerged extends JDFAutoMerged
 	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
@@ -166,6 +169,7 @@ public class JDFMerged extends JDFAutoMerged
 	 * 
 	 * @param JDFAttributeMap mPart: attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -176,6 +180,7 @@ public class JDFMerged extends JDFAutoMerged
 	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
@@ -187,6 +192,7 @@ public class JDFMerged extends JDFAutoMerged
 	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);

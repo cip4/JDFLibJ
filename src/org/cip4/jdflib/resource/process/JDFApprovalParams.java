@@ -65,6 +65,7 @@ public class JDFApprovalParams extends JDFAutoApprovalParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFApprovalParams[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFJDFController extends JDFAutoJDFController
 	 * @see org.cip4.jdflib.auto.JDFAutoJDFController#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFJDFController[  --> " + super.toString() + " ]";

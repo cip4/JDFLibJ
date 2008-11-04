@@ -67,6 +67,7 @@ public class JDFAdhesiveBinding extends JDFAutoAdhesiveBinding
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFAdhesiveBinding[  --> " + super.toString() + " ]";

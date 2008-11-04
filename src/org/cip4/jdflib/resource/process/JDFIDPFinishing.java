@@ -61,6 +61,7 @@ public class JDFIDPFinishing extends JDFAutoIDPFinishing
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFIDPFinishing[  --> " + super.toString() + " ]";

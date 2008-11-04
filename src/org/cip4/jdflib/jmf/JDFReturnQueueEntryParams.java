@@ -63,6 +63,7 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams
 	 * 
 	 * @return the document
 	 */
+	@Override
 	public JDFDoc getURLDoc()
 	{
 		return super.getURLDoc();
@@ -75,6 +76,7 @@ public class JDFReturnQueueEntryParams extends JDFAutoReturnQueueEntryParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFReturnQueueEntryParams[  --> " + super.toString() + " ]";

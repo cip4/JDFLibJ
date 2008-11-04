@@ -61,6 +61,7 @@ public class JDFSideSewing extends JDFAutoSideSewing
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFSideSewing[  --> " + super.toString() + " ]";

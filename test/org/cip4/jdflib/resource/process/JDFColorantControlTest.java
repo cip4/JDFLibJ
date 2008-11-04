@@ -212,6 +212,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	/**
 	 * @return
 	 */
+	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();

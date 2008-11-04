@@ -61,6 +61,7 @@ public class JDFShapeCuttingParams extends JDFAutoShapeCuttingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFShapeCuttingParams[  --> " + super.toString() + " ]";

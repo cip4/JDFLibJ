@@ -61,6 +61,7 @@ public class JDFPayment extends JDFAutoPayment
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPayment[  --> " + super.toString() + " ]";

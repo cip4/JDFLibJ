@@ -138,6 +138,7 @@ public class JDFEnumerationEvaluation extends JDFNameEvaluation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFEnumerationEvaluation[ --> " + super.toString() + " ]";

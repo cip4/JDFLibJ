@@ -66,6 +66,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFNodeInfoCmdParams[  --> " + super.toString() + " ]";
@@ -76,6 +77,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 	 * 
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
+	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
 		return super.getPartMapVector();
@@ -86,6 +88,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
@@ -96,6 +99,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 	 * 
 	 * @param mPart attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -106,6 +110,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
@@ -117,6 +122,7 @@ public class JDFNodeInfoCmdParams extends JDFAutoNodeInfoCmdParams
 	 * @param mPart attribute map to check for
 	 * @return boolean - returns true if the part exists
 	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);

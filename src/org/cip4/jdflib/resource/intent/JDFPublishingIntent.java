@@ -67,6 +67,7 @@ public class JDFPublishingIntent extends JDFAutoPublishingIntent
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPublishingIntent[  --> " + super.toString() + " ]";

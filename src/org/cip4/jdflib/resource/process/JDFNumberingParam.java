@@ -68,6 +68,7 @@ public class JDFNumberingParam extends JDFAutoNumberingParam
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFNumberingParam[  --> " + super.toString() + " ]";

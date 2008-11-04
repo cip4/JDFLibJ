@@ -61,6 +61,7 @@ public class JDFTrimmingParams extends JDFAutoTrimmingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFTrimmingParams[  --> " + super.toString() + " ]";

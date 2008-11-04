@@ -61,6 +61,7 @@ public class JDFDocumentResultsPool extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDocumentResultsPool[  --> " + super.toString() + " ]";

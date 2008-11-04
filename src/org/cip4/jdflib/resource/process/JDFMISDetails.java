@@ -67,6 +67,7 @@ public class JDFMISDetails extends JDFAutoMISDetails
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFMISDetails[  --> " + super.toString() + " ]";

@@ -67,6 +67,7 @@ public class JDFMiscConsumable extends JDFAutoMiscConsumable
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFMiscConsumable[  --> " + super.toString() + " ]";

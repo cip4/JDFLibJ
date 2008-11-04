@@ -59,6 +59,7 @@ public class JDFError extends JDFAutoError
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFError[  --> " + super.toString() + " ]";

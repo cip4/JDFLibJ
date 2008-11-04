@@ -61,6 +61,7 @@ public class JDFEdgeGluing extends JDFAutoEdgeGluing
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFEdgeGluing[  --> " + super.toString() + " ]";

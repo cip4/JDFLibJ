@@ -67,6 +67,7 @@ public class JDFCollatingItem extends JDFAutoCollatingItem
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCollatingItem[  --> " + super.toString() + " ]";

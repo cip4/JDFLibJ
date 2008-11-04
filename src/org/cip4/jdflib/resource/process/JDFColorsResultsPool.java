@@ -67,6 +67,7 @@ public class JDFColorsResultsPool extends JDFResource
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorsResultsPool[  --> " + super.toString() + " ]";

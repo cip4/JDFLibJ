@@ -61,6 +61,7 @@ public class JDFHardCoverBinding extends JDFAutoHardCoverBinding
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFHardCoverBinding[  --> " + super.toString() + " ]";

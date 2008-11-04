@@ -125,6 +125,7 @@ public class JDFGangCmdFilter extends JDFAutoGangCmdFilter
 	 * @see org.cip4.jdflib.auto.JDFAutoGangCmdFilter#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFGangCmdFilter[  --> " + super.toString() + " ]";

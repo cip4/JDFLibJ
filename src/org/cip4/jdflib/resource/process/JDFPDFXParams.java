@@ -67,6 +67,7 @@ public class JDFPDFXParams extends JDFAutoPDFXParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPDFXParams[  --> " + super.toString() + " ]";

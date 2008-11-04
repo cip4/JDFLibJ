@@ -132,6 +132,7 @@ public class JDFSpineTapingParams extends JDFAutoSpineTapingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSpineTapingParams[  --> " + super.toString() + " ]";

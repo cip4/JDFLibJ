@@ -61,6 +61,7 @@ public class JDFLayerDetails extends JDFAutoLayerDetails
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLayerDetails[  --> " + super.toString() + " ]";

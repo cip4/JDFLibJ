@@ -87,6 +87,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 				0x33333311);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);
@@ -142,6 +143,7 @@ public class JDFAssemblySection extends JDFAutoAssemblySection
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFAssemblySection[  --> " + super.toString() + " ]";

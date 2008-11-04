@@ -132,6 +132,7 @@ public class JDFCoverApplicationParams extends JDFAutoCoverApplicationParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCoverApplicationParams[  --> " + super.toString() + " ]";

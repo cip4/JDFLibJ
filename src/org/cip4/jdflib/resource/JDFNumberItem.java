@@ -61,6 +61,7 @@ public class JDFNumberItem extends JDFAutoNumberItem
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFNumberItem[  --> " + super.toString() + " ]";

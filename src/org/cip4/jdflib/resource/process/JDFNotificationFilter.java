@@ -57,6 +57,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFNotificationFilter[  --> " + super.toString() + " ]";
@@ -67,6 +68,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 	 * 
 	 * @return VJDFAttributeMap: vector of attribute maps, one for each part
 	 */
+	@Override
 	public VJDFAttributeMap getPartMapVector()
 	{
 		return super.getPartMapVector();
@@ -78,6 +80,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 	 * @param VJDFAttributeMap
 	 *            vParts: vector of attribute maps for the parts
 	 */
+	@Override
 	public void setPartMapVector(VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
@@ -89,6 +92,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 	 * @param JDFAttributeMap
 	 *            mPart: attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -100,6 +104,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 	 * @param JDFAttributeMap
 	 *            mPart: attribute map for the part to remove
 	 */
+	@Override
 	public void removePartMap(JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
@@ -112,6 +117,7 @@ public class JDFNotificationFilter extends JDFAutoNotificationFilter
 	 *            mPart: attribute map for the part to remove
 	 * @return boolean - returns true if the part exists
 	 */
+	@Override
 	public boolean hasPartMap(JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);

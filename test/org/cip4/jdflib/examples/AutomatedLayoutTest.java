@@ -140,6 +140,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	/**
      * 
      */
+	@Override
 	protected void setUp()
 	{
 		JDFElement.setLongID(false);

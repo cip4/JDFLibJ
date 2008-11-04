@@ -61,6 +61,7 @@ public class JDFIDPCover extends JDFAutoIDPCover
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIDPCover[  --> " + super.toString() + " ]";

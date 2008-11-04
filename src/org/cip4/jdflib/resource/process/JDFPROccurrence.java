@@ -152,6 +152,7 @@ public class JDFPROccurrence extends JDFAutoPROccurrence
 				AttributeInfo.EnumAttributeType.Any, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -164,6 +165,7 @@ public class JDFPROccurrence extends JDFAutoPROccurrence
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPROccurrence[  --> " + super.toString() + " ]";

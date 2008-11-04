@@ -59,6 +59,7 @@ public class JDFModulePhase extends JDFAutoModulePhase
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFModulePhase[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFSideStitching extends JDFAutoSideStitching
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFSideStitching[  --> " + super.toString() + " ]";

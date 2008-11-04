@@ -67,6 +67,7 @@ public class JDFDisposition extends JDFAutoDisposition
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDisposition[  --> " + super.toString() + " ]";

@@ -58,6 +58,7 @@ public class JDFLocation extends JDFAutoLocation
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFLocation[  --> " + super.toString() + " ]";

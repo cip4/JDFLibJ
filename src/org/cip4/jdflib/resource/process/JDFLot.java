@@ -61,6 +61,7 @@ public class JDFLot extends JDFAutoLot
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLot[  --> " + super.toString() + " ]";

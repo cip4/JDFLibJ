@@ -67,6 +67,7 @@ public class JDFArtDeliveryIntent extends JDFAutoArtDeliveryIntent
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFArtDeliveryIntent[  --> " + super.toString() + " ]";

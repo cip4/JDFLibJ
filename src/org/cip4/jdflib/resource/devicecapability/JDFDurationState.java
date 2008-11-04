@@ -115,6 +115,7 @@ public class JDFDurationState extends JDFAbstractState
 				null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -126,6 +127,7 @@ public class JDFDurationState extends JDFAbstractState
 		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUELOC, 0x33333311);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
@@ -178,6 +180,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDurationState[ --> " + super.toString() + " ]";
@@ -282,6 +285,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
+	@Override
 	public void addValue(String value, EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
@@ -328,6 +332,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * @return boolean - true, if the value matches test list or if
 	 *         AllowedValueList is not specified
 	 */
+	@Override
 	public final boolean fitsValue(String value, EnumFitsValue testlists)
 	{
 		if (fitsListType(value))
@@ -505,6 +510,7 @@ public class JDFDurationState extends JDFAbstractState
 	 * 
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
+	@Override
 	public EnumTerm getEvaluationType()
 	{
 		return EnumTerm.DurationEvaluation;

@@ -67,6 +67,7 @@ public class JDFBusinessInfo extends JDFAutoBusinessInfo
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBusinessInfo[  --> " + super.toString() + " ]";

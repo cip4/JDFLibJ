@@ -61,6 +61,7 @@ public class JDFObservationTarget extends JDFAutoObservationTarget
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFObservationTarget[  --> " + super.toString() + " ]";

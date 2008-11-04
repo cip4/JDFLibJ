@@ -60,6 +60,7 @@ public class JDFDigitalDeliveryParams extends JDFAutoDigitalDeliveryParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDigitalDeliveryParams[  --> " + super.toString() + " ]";

@@ -65,6 +65,7 @@ public class JDFFontsResultsPool extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFFontsResultsPool[  --> " + super.toString() + " ]";

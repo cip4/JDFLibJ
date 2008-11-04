@@ -64,6 +64,7 @@ public class JDFDBRules extends JDFAutoDBRules
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDBRules[  --> " + super.toString() + " ]";

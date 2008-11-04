@@ -134,6 +134,7 @@ public class JDFCommand extends JDFAutoCommand
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCommand[  --> " + super.toString() + " ]";

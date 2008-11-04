@@ -60,6 +60,7 @@ public class JDFSubmissionMethods extends JDFAutoSubmissionMethods
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSubmissionMethods[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFLabelingParams extends JDFAutoLabelingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFLabelingParams[  --> " + super.toString() + " ]";

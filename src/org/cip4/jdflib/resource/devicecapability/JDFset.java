@@ -64,6 +64,7 @@ public class JDFset extends JDFAutoset
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFset[  --> " + super.toString() + " ]";

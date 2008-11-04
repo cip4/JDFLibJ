@@ -61,6 +61,7 @@ public class JDFEmbossingItem extends JDFAutoEmbossingItem
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFEmbossingItem[  --> " + super.toString() + " ]";

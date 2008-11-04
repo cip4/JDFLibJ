@@ -67,6 +67,7 @@ public class JDFStringListValue extends JDFAutoStringListValue
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStringListValue[  --> " + super.toString() + " ]";

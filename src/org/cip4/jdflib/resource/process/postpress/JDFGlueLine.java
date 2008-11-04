@@ -60,6 +60,7 @@ public class JDFGlueLine extends JDFAutoGlueLine
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFGlueLine[  --> " + super.toString() + " ]";

@@ -65,6 +65,7 @@ public class JDFStripCellParams extends JDFAutoStripCellParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStripCellParams[ --> " + super.toString() + " ]";

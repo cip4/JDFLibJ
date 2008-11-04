@@ -62,6 +62,7 @@ public class JDFLaminatingIntent extends JDFAutoLaminatingIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFLaminatingIntent[  --> " + super.toString() + " ]";

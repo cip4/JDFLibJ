@@ -57,6 +57,7 @@ public class JDFCustomerMessage extends JDFAutoCustomerMessage
 	 * 
 	 * @return StringJDFAutoCustomerMessage
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCustomerMessage[  --> " + super.toString() + " ]";

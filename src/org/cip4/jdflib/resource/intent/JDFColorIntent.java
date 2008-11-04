@@ -133,6 +133,7 @@ public class JDFColorIntent extends JDFAutoColorIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFColorIntent[  --> " + super.toString() + " ]";

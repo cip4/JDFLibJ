@@ -68,6 +68,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIdentical[  --> " + super.toString() + " ]";
@@ -79,6 +80,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * @param JDFAttributeMap
 	 *            mPart: attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -89,6 +91,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * 
 	 * @return JDFAttributeMap: the map of parts
 	 */
+	@Override
 	public JDFAttributeMap getPartMap()
 	{
 		return super.getPartMap();

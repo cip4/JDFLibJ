@@ -132,6 +132,7 @@ public class JDFPerson extends JDFAutoPerson
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPerson[  --> " + super.toString() + " ]";
@@ -144,6 +145,7 @@ public class JDFPerson extends JDFAutoPerson
 	 * @param familyName
 	 *            the family name to set
 	 */
+	@Override
 	public void setFamilyName(String familyName)
 	{
 		String oldName = getAttribute(AttributeName.FAMILYNAME, null, null);
@@ -172,6 +174,7 @@ public class JDFPerson extends JDFAutoPerson
 	 * @param firstName
 	 *            the family name to set
 	 */
+	@Override
 	public void setFirstName(String firstName)
 	{
 		String oldName = getAttribute(AttributeName.FIRSTNAME, null, null);
@@ -198,6 +201,7 @@ public class JDFPerson extends JDFAutoPerson
 	 * 
 	 * @see java.lang.Object#clone()
 	 */
+	@Override
 	protected Object clone() throws CloneNotSupportedException
 	{
 		// TODO Auto-generated method stub

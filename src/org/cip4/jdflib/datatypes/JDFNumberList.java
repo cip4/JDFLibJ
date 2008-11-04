@@ -53,6 +53,7 @@ public class JDFNumberList extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
+	@Override
 	public void isValid() throws DataFormatException
 	{
 		for (int i = 0; i < m_numList.size(); i++)

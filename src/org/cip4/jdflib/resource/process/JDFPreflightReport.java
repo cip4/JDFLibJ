@@ -144,6 +144,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPreflightReport[  --> " + super.toString() + " ]";
@@ -254,6 +255,7 @@ public class JDFPreflightReport extends JDFAutoPreflightReport
 	 * generic initialization routine - normally called automagically
 	 * initializes required attributes to 0
 	 */
+	@Override
 	public boolean init()
 	{
 		boolean b = super.init();

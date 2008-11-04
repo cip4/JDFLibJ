@@ -93,6 +93,7 @@ public class JDFDurationStateTest extends JDFTestCaseBase
 
 	JDFDurationState iState = null;
 
+	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();

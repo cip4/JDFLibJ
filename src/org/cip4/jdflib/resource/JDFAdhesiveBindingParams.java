@@ -62,6 +62,7 @@ public class JDFAdhesiveBindingParams extends JDFAutoAdhesiveBindingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFAdhesiveBindingParams[  --> " + super.toString() + " ]";

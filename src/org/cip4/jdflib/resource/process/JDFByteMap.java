@@ -65,6 +65,7 @@ public class JDFByteMap extends JDFAutoByteMap
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFByteMap[  --> " + super.toString() + " ]";
@@ -134,6 +135,7 @@ public class JDFByteMap extends JDFAutoByteMap
 	 * 
 	 *         default: getMissingElements(99999999)
 	 */
+	@Override
 	public VString getMissingElements(int nMax)
 	{
 		final VString v = super.getMissingElements(nMax);

@@ -70,7 +70,8 @@ public class SchemaElement implements Serializable
         this.m_vProcessUsage.add("Any");
     }
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return "SchemaElement[ --> " + m_schemaKElem + " ]";
     }

@@ -59,6 +59,7 @@ public class JDFBarcode extends JDFAutoBarcode
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBarcode[  --> " + super.toString() + " ]";

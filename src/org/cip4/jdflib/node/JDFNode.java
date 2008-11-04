@@ -5187,7 +5187,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param doneIndexList Vector of Integer
 	 * @return true if valid
 	 */
-	public boolean isValidLink(EnumValidationLevel level, JDFResourceLink rl, Vector doneNameList, Vector doneIndexList)
+	public boolean isValidLink(@SuppressWarnings("unused") EnumValidationLevel level, 
+			JDFResourceLink rl, Vector doneNameList, Vector doneIndexList)
 	{
 		Vector doneNameListLocal = doneNameList;
 		Vector doneIndexListLocal = doneIndexList;

@@ -153,7 +153,8 @@ public class AddXSDDialog extends JDialog implements ActionListener
     {
         private static final long serialVersionUID = 1L;
 
-        public void paint(Graphics g)
+        @Override
+		public void paint(Graphics g)
         {
             super.paint(g);
             int x           = getWidth();
@@ -167,14 +168,16 @@ public class AddXSDDialog extends JDialog implements ActionListener
     
     static class XSDFilter extends javax.swing.filechooser.FileFilter 
     {
-        public boolean accept(File f) 
+        @Override
+		public boolean accept(File f) 
         {
             boolean bRet = false; 
             if(f.getName().endsWith(".xsd")){ bRet = true; }
             else if(f.isDirectory()){ bRet = true; }
             return bRet;
         }
-        public String getDescription() 
+        @Override
+		public String getDescription() 
         {
             return "XSD Files";
         }

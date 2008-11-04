@@ -60,6 +60,7 @@ public class JDFCreateResource extends JDFAutoCreateResource
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoCreateResource#toString()
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCreateResource[  --> " + super.toString() + " ]";

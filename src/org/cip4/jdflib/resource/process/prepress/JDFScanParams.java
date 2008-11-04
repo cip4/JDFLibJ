@@ -61,6 +61,7 @@ public class JDFScanParams extends JDFAutoScanParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFScanParams[  --> " + super.toString() + " ]";

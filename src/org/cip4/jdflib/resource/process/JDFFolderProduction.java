@@ -67,6 +67,7 @@ public class JDFFolderProduction extends JDFAutoFolderProduction
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFolderProduction[  --> " + super.toString() + " ]";

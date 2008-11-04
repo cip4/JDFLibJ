@@ -67,6 +67,7 @@ public class JDFBarcodeCompParams extends JDFAutoBarcodeCompParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBarcodeCompParams[  --> " + super.toString() + " ]";

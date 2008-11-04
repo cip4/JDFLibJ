@@ -61,6 +61,7 @@ public class JDFRingBinding extends JDFAutoRingBinding
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFRingBinding[  --> " + super.toString() + " ]";

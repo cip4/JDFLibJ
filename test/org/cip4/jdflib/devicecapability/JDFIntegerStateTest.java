@@ -113,6 +113,7 @@ public class JDFIntegerStateTest extends JDFTestCaseBase
 				new JDFIntegerRangeList("49"));
 	}
 
+	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();

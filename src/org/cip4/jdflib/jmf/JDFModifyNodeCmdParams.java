@@ -60,6 +60,7 @@ public class JDFModifyNodeCmdParams extends JDFAutoModifyNodeCmdParams
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoModifyNodeCmdParams#toString()
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFModifyNodeCmdParams[  --> " + super.toString() + " ]";

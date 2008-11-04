@@ -129,6 +129,7 @@ public class JDFInk extends JDFAutoInk
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFInk[  --> " + super.toString() + " ]";

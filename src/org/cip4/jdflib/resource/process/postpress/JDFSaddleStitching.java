@@ -61,6 +61,7 @@ public class JDFSaddleStitching extends JDFAutoSaddleStitching
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFSaddleStitching[  --> " + super.toString() + " ]";

@@ -64,6 +64,7 @@ public class JDFPartStatus extends JDFAutoPartStatus
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFAudit[ -->" + super.toString() + "]";
@@ -72,6 +73,7 @@ public class JDFPartStatus extends JDFAutoPartStatus
 	/**
 	 * @return JDFAttributeMap the attribute map of this
 	 */
+	@Override
 	public JDFAttributeMap getPartMap()
 	{
 		return super.getPartMap();
@@ -82,6 +84,7 @@ public class JDFPartStatus extends JDFAutoPartStatus
 	 * 
 	 * @param mPart attribute map for the part to set
 	 */
+	@Override
 	public void setPartMap(JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
@@ -92,6 +95,7 @@ public class JDFPartStatus extends JDFAutoPartStatus
 	 * 
 	 * @return String: the attribute value
 	 */
+	@Override
 	public String getStatusDetails()
 	{
 		if (hasAttribute(AttributeName.STATUSDETAILS))
@@ -107,6 +111,7 @@ public class JDFPartStatus extends JDFAutoPartStatus
 	 * 
 	 * @return EnumNodeStatus: the attribute value
 	 */
+	@Override
 	public EnumNodeStatus getStatus()
 	{
 		if (hasAttribute(AttributeName.STATUS))

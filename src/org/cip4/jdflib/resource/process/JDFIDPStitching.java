@@ -61,6 +61,7 @@ public class JDFIDPStitching extends JDFAutoIDPStitching
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFIDPStitching[  --> " + super.toString() + " ]";

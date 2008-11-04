@@ -67,6 +67,7 @@ public class JDFSignatureCell extends JDFAutoSignatureCell
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSignatureCell[  --> " + super.toString() + " ]";

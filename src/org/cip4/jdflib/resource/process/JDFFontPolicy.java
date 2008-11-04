@@ -61,6 +61,7 @@ public class JDFFontPolicy extends JDFAutoFontPolicy
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFFontPolicy[  --> " + super.toString() + " ]";

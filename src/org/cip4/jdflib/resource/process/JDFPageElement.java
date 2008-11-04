@@ -67,6 +67,7 @@ public class JDFPageElement extends JDFAutoPageElement
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPageElement[  --> " + super.toString() + " ]";

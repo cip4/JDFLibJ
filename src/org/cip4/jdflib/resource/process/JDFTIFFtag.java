@@ -59,6 +59,7 @@ public class JDFTIFFtag extends JDFAutoTIFFtag
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFTifftag[  --> " + super.toString() + " ]";

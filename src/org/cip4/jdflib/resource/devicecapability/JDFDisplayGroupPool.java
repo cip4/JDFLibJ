@@ -65,6 +65,7 @@ public class JDFDisplayGroupPool extends JDFAutoDisplayGroupPool
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDisplayGroupPool[  --> " + super.toString() + " ]";

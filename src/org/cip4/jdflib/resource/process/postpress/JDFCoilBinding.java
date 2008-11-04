@@ -67,6 +67,7 @@ public class JDFCoilBinding extends JDFAutoCoilBinding
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCoilBinding[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFTransferCurveSet extends JDFAutoTransferCurveSet
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFTransferCurveSet[  --> " + super.toString() + " ]";

@@ -67,6 +67,7 @@ public class JDFRollStand extends JDFAutoRollStand
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFRollStand[  --> " + super.toString() + " ]";

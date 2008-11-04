@@ -61,6 +61,7 @@ public class JDFStrap extends JDFAutoStrap
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStrap[  --> " + super.toString() + " ]";

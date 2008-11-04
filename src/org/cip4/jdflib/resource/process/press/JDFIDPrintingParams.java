@@ -60,6 +60,7 @@ public class JDFIDPrintingParams extends JDFAutoIDPrintingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFIDPrintingParams[  --> " + super.toString() + " ]";

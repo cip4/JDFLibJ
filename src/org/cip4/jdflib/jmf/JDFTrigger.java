@@ -58,6 +58,7 @@ public class JDFTrigger extends JDFAutoTrigger
 	/**
 	 * toString String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFTrigger[  --> " + super.toString() + " ]";

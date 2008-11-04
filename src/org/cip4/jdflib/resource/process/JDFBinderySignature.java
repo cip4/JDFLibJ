@@ -62,6 +62,7 @@ public class JDFBinderySignature extends JDFAutoBinderySignature
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBinderySignature[  --> " + super.toString() + " ]";

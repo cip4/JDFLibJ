@@ -60,6 +60,7 @@ public class JDFDropItem extends JDFAutoDropItem
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDropItem[  --> " + super.toString() + " ]";

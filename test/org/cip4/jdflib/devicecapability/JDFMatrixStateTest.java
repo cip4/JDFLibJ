@@ -88,6 +88,7 @@ public class JDFMatrixStateTest extends JDFTestCaseBase
 
 	JDFMatrixState sState = null;
 
+	@Override
 	public void setUp() throws Exception
 	{
 		super.setUp();

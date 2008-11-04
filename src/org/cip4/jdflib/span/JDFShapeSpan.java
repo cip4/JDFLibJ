@@ -132,6 +132,7 @@ public class JDFShapeSpan extends JDFSpanBase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFShapeSpan[ --> " + super.toString() + " ]";
@@ -146,6 +147,7 @@ public class JDFShapeSpan extends JDFSpanBase
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFERRANGE, 0x33333111, AttributeInfo.EnumAttributeType.shape, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -202,6 +204,7 @@ public class JDFShapeSpan extends JDFSpanBase
 		}
 	}
 
+	@Override
 	public boolean init()
 	{
 		boolean b = super.init();

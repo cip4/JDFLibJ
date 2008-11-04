@@ -61,6 +61,7 @@ public class JDFBand extends JDFAutoBand
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBand[  --> " + super.toString() + " ]";

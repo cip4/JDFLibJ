@@ -64,6 +64,7 @@ public class JDFKnownMsgQuParams extends JDFAutoKnownMsgQuParams
 	 * @see org.cip4.jdflib.auto.JDFAutoKnownMsgQuParams#toString()
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFKnownMsgQuParams[  --> " + super.toString() + " ]";

@@ -66,6 +66,7 @@ public class JDFCutMark extends JDFAutoCutMark
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCutMark[  --> " + super.toString() + " ]";

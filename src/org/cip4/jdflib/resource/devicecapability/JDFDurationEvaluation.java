@@ -102,6 +102,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
 				AttributeInfo.EnumAttributeType.DurationRangeList, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -154,6 +155,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDurationEvaluation[ --> " + super.toString() + " ]";
@@ -205,6 +207,7 @@ public class JDFDurationEvaluation extends JDFEvaluation
 	 * @return boolean - true, if the value matches ValueList or if ValueList is
 	 *         not specified
 	 */
+	@Override
 	public final boolean fitsValue(String value)
 	{
 		if (!fitsListType(value))

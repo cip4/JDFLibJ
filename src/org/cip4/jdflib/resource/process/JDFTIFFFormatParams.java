@@ -67,6 +67,7 @@ public class JDFTIFFFormatParams extends JDFAutoTIFFFormatParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFTIFFFormatParams[  --> " + super.toString() + " ]";

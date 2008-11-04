@@ -57,6 +57,7 @@ public class JDFWeight extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFWeight[  --> " + super.toString() + " ]";

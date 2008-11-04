@@ -62,6 +62,7 @@ public class JDFCoverColor extends JDFResource
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCoverColor[  --> " + super.toString() + " ]";

@@ -58,6 +58,7 @@ public class JDFDevelopingParams extends JDFAutoDevelopingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDevelopingParams[  --> " + super.toString() + " ]";

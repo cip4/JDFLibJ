@@ -58,6 +58,7 @@ public class JDFQueueEntryPosParams extends JDFAutoQueueEntryPosParams
 	/**
 	 * toString() return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFQueueEntryPosParams[  --> " + super.toString() + " ]";

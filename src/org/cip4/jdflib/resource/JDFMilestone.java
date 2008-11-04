@@ -55,6 +55,7 @@ public class JDFMilestone extends JDFAutoMilestone
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFMilestone[  --> " + super.toString() + " ]";

@@ -64,6 +64,7 @@ public class JDFDeviceNSpace extends JDFAutoDeviceNSpace
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDeviceNSpace[  --> " + super.toString() + " ]";

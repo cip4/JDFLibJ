@@ -67,6 +67,7 @@ public class JDFBindingIntent extends JDFAutoBindingIntent
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBindingIntent[  --> " + super.toString() + " ]";

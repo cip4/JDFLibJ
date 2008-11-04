@@ -66,6 +66,7 @@ public class JDFCompany extends JDFAutoCompany
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCompany[  --> " + super.toString() + " ]";

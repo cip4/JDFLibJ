@@ -132,6 +132,7 @@ public class JDFXYPairState extends JDFAbstractState
 				AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -143,6 +144,7 @@ public class JDFXYPairState extends JDFAbstractState
 		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUELOC, 0x33333311);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
@@ -194,6 +196,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFXYPairState[ --> " + super.toString() + " ]";
@@ -415,6 +418,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
+	@Override
 	public void addValue(String value, EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
@@ -461,6 +465,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * @return boolean - true, if the value is in the valuelist or if
 	 *         AllowedValueList is not specified
 	 */
+	@Override
 	public boolean fitsValue(String value, EnumFitsValue testlists)
 	{
 		if (!fitsListType(value))
@@ -699,6 +704,7 @@ public class JDFXYPairState extends JDFAbstractState
 	 * 
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
+	@Override
 	public EnumTerm getEvaluationType()
 	{
 		return EnumTerm.XYPairEvaluation;

@@ -98,6 +98,7 @@ public class JMFGoldenTicket extends BaseGoldenTicket
 	 * 
 	 * @param icsLevel the level to init to (1,2 or 3)
 	 */
+	@Override
 	public void init()
 	{
 		if (jmfICSLevel > 0)

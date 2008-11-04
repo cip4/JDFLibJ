@@ -67,6 +67,7 @@ public class JDFCIELABMeasuringField extends JDFAutoCIELABMeasuringField
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCIELABMeasuringField[  --> " + super.toString() + " ]";

@@ -57,6 +57,7 @@ public class JDFInsertingParams extends JDFAutoInsertingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFInsertingParams[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFTrappingOrder extends JDFAutoTrappingOrder
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFTrappingOrder[  --> " + super.toString() + " ]";

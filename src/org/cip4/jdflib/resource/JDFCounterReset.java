@@ -59,6 +59,7 @@ public class JDFCounterReset extends JDFAutoCounterReset
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCounterReset[  --> " + super.toString() + " ]";

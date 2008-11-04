@@ -61,6 +61,7 @@ public class JDFProofingParams extends JDFAutoProofingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFProofingParams[  --> " + super.toString() + " ]";

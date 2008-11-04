@@ -62,6 +62,7 @@ public class JDFModule extends JDFAutoModule
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFModule[  --> " + super.toString() + " ]";

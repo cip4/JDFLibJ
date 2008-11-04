@@ -66,6 +66,7 @@ public class JDFCut extends JDFAutoCut
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFCut[  --> " + super.toString() + " ]";

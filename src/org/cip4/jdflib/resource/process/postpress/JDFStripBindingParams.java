@@ -72,6 +72,7 @@ public class JDFStripBindingParams extends JDFAutoStripBindingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStripBindingParams[  --> " + super.toString() + " ]";

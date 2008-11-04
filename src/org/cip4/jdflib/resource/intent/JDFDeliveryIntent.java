@@ -62,6 +62,7 @@ public class JDFDeliveryIntent extends JDFAutoDeliveryIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDeliveryIntent[  --> " + super.toString() + " ]";

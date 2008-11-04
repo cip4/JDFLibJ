@@ -60,6 +60,7 @@ public class JDFNotificationDef extends JDFAutoNotificationDef
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFNotificationDef[  --> " + super.toString() + " ]";

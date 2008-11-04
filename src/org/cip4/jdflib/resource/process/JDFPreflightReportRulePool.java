@@ -67,6 +67,7 @@ public class JDFPreflightReportRulePool extends JDFAutoPreflightReportRulePool
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPreflightReportRulePool[  --> " + super.toString() + " ]";

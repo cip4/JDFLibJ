@@ -67,6 +67,7 @@ public class JDFArtDeliveryType extends JDFResource
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFArtDeliveryType[  --> " + super.toString() + " ]";

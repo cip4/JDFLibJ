@@ -57,6 +57,7 @@ public class JDFImageShift extends JDFAutoImageShift
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFImageShift[  --> " + super.toString() + " ]";

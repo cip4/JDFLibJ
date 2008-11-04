@@ -61,6 +61,7 @@ public class JDFIDPHoleMaking extends JDFAutoIDPHoleMaking
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFIDPHoleMaking[  --> " + super.toString() + " ]";

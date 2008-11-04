@@ -68,6 +68,7 @@ public class JDFFeaturePool extends JDFAutoFeaturePool
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFeaturePool[  --> " + super.toString() + " ]";
@@ -103,6 +104,7 @@ public class JDFFeaturePool extends JDFAutoFeaturePool
 				0x33333333);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);

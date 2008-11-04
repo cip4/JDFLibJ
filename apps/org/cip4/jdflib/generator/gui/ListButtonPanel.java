@@ -359,7 +359,8 @@ public class ListButtonPanel extends JPanel implements  ActionListener,
     {
         new Thread()
         {
-            public void run()
+            @Override
+			public void run()
             {
                 com_Generate.setEnabled(false);
                 setPriority(1);
@@ -479,7 +480,8 @@ public class ListButtonPanel extends JPanel implements  ActionListener,
             m_schemaFiles = files;
         }
 
-        public void run()
+        @Override
+		public void run()
         {
             setPriority(1);
             

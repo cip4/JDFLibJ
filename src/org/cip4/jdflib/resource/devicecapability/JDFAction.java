@@ -136,6 +136,7 @@ public class JDFAction extends JDFAutoAction
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFAction[  --> " + super.toString() + " ]";
@@ -199,6 +200,7 @@ public class JDFAction extends JDFAutoAction
 	 * 
 	 * @see org.cip4.jdflib.core.KElement#init()
 	 */
+	@Override
 	public boolean init()
 	{
 		appendAnchor(null);
@@ -210,6 +212,7 @@ public class JDFAction extends JDFAutoAction
 	 * 
 	 * @return String: the default ID prefix of non-overwritten JDF elements
 	 */
+	@Override
 	protected String getIDPrefix()
 	{
 		return "A";

@@ -61,6 +61,7 @@ public class JDFHeadBandApplicationParams extends JDFAutoHeadBandApplicationPara
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFHeadBandApplicationParams[  --> " + super.toString() + " ]";

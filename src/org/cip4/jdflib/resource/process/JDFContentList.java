@@ -67,6 +67,7 @@ public class JDFContentList extends JDFAutoContentList
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFContentList[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFWireCombBinding extends JDFAutoWireCombBinding
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFWireCombBinding[  --> " + super.toString() + " ]";

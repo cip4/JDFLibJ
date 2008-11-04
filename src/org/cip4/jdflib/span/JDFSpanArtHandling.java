@@ -114,6 +114,7 @@ public class JDFSpanArtHandling extends JDFEnumerationSpan
 	 * 
 	 * @return Vector - vector representation of the allowed values
 	 */
+	@Override
 	public ValuedEnum getEnumType()
 	{
 		return EnumSpanArtHandling.getEnum(0);
@@ -127,6 +128,7 @@ public class JDFSpanArtHandling extends JDFEnumerationSpan
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSpanArtHandling[  --> " + super.toString() + " ]";

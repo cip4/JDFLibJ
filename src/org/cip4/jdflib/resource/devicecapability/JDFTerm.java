@@ -178,6 +178,7 @@ public abstract class JDFTerm extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
+		@Override
 		public String toString()
 		{
 			return getName();

@@ -65,6 +65,7 @@ public class JDFDBSelection extends JDFAutoDBSelection
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDBSelection[  --> " + super.toString() + " ]";

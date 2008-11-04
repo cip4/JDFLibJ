@@ -128,6 +128,7 @@ public class JDFEmployeeDef extends JDFAutoEmployeeDef
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoEmployeeDef#toString()
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFEmployeeDef[  --> " + super.toString() + " ]";

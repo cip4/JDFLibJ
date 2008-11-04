@@ -60,6 +60,7 @@ public class JDFLongPerforate extends JDFAutoLongPerforate
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFLongPerforate[  --> " + super.toString() + " ]";

@@ -68,6 +68,7 @@ public class JDFApprovalPerson extends JDFAutoApprovalPerson
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFApprovalPerson[  --> " + super.toString() + " ]";

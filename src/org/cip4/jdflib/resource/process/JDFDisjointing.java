@@ -61,6 +61,7 @@ public class JDFDisjointing extends JDFAutoDisjointing
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDisjointing[  --> " + super.toString() + " ]";

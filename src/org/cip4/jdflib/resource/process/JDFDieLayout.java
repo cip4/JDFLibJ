@@ -67,6 +67,7 @@ public class JDFDieLayout extends JDFAutoDieLayout
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDieLayout[  --> " + super.toString() + " ]";

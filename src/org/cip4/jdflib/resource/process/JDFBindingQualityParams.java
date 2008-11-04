@@ -67,6 +67,7 @@ public class JDFBindingQualityParams extends JDFAutoBindingQualityParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBindingQualityParams[  --> " + super.toString() + " ]";

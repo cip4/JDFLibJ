@@ -75,6 +75,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFArtDelivery[  --> " + super.toString() + " ]";
@@ -97,6 +98,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 * 
 	 * @return JDFSpanArtHandling: element value
 	 */
+	@Override
 	public JDFSpanArtHandling getArtHandling()
 	{
 		if (hasChildElement(ElementName.ARTHANDLING, null))
@@ -113,6 +115,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 * 
 	 * @return JDFSpanDeliveryCharge: element value
 	 */
+	@Override
 	public JDFSpanDeliveryCharge getDeliveryCharge()
 	{
 		if (hasChildElement(ElementName.DELIVERYCHARGE, null))
@@ -129,6 +132,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 * 
 	 * @return JDFNameSpan: element value
 	 */
+	@Override
 	public JDFNameSpan getMethod()
 	{
 		if (hasChildElement(ElementName.METHOD, null))
@@ -161,6 +165,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 * 
 	 * @return JDFNameSpan: element value
 	 */
+	@Override
 	public JDFNameSpan getReturnMethod()
 	{
 		if (hasChildElement(ElementName.RETURNMETHOD, null))
@@ -177,6 +182,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 * 
 	 * @return JDFStringSpan: element value
 	 */
+	@Override
 	public JDFStringSpan getServiceLevel()
 	{
 		if (hasChildElement(ElementName.SERVICELEVEL, null))
@@ -193,6 +199,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 * 
 	 * @return JDFSpanTransfer: element value
 	 */
+	@Override
 	public JDFSpanTransfer getTransfer()
 	{
 		if (hasChildElement(ElementName.TRANSFER, null))
@@ -208,6 +215,7 @@ public class JDFArtDelivery extends JDFAutoArtDelivery
 	 * 
 	 * @return JDFContact: the found element
 	 */
+	@Override
 	public JDFContact getContact(int iSkip)
 	{
 		if (hasChildElement(ElementName.CONTACT, JDFConstants.EMPTYSTRING))

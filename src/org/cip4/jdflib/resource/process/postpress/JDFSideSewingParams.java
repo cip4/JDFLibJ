@@ -63,6 +63,7 @@ public class JDFSideSewingParams extends JDFAutoSideSewingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFSideSewingParams[  --> " + super.toString() + " ]";

@@ -110,6 +110,7 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
+	@Override
 	public void isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_RECTANGLE_DIMENSION)
@@ -131,6 +132,7 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @return int
 	 */
+	@Override
 	public int hashCode()
 	{
 		return HashUtil.hashCode(super.hashCode(), this.toString());

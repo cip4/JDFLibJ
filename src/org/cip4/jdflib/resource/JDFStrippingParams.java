@@ -61,6 +61,7 @@ public class JDFStrippingParams extends JDFAutoStrippingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStrippingParams[  --> " + super.toString() + " ]";

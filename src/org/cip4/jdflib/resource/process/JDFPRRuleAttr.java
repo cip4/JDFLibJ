@@ -67,6 +67,7 @@ public class JDFPRRuleAttr extends JDFAutoPRRuleAttr
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPRRuleAttr[  --> " + super.toString() + " ]";

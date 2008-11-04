@@ -55,6 +55,7 @@ public class JDFNewComment extends JDFAutoNewComment
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFNewComment[  --> " + super.toString() + " ]";

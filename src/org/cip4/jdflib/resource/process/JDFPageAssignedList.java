@@ -67,6 +67,7 @@ public class JDFPageAssignedList extends JDFAutoPageAssignedList
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPageAssignedList[  --> " + super.toString() + " ]";

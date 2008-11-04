@@ -127,6 +127,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
@@ -147,6 +148,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFEnumerationSpan[  --> " + super.toString() + " ]";
@@ -273,6 +275,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 		setEnumerationsAttribute(AttributeName.OFFERRANGE, value, null);
 	}
 
+	@Override
 	public boolean init()
 	{
 		boolean b = super.init();

@@ -63,6 +63,7 @@ public class JDFRingBindingParams extends JDFAutoRingBindingParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFRingBindingParams[  --> " + super.toString() + " ]";

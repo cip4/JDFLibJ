@@ -61,6 +61,7 @@ public class JDFTrappingParams extends JDFAutoTrappingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFTrappingParams[  --> " + super.toString() + " ]";

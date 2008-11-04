@@ -82,7 +82,6 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.util.JDFDate;
-import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.util.ThreadUtil;
 
 /**

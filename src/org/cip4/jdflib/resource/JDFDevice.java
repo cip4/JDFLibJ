@@ -135,6 +135,7 @@ public class JDFDevice extends JDFAutoDevice
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFDevice[  --> " + super.toString() + " ]";

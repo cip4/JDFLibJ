@@ -57,6 +57,7 @@ public class JDFPages extends JDFResource
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPages[  --> " + super.toString() + " ]";

@@ -117,6 +117,7 @@ public class JDFStringState extends JDFAbstractState
 				0x33333311, AttributeInfo.EnumAttributeType.RegExp, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -128,6 +129,7 @@ public class JDFStringState extends JDFAbstractState
 		elemInfoTable[0] = new ElemInfoTable(ElementName.VALUE, 0x33333331);
 	}
 
+	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return new ElementInfo(super.getTheElementInfo(), elemInfoTable);
@@ -179,6 +181,7 @@ public class JDFStringState extends JDFAbstractState
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStringState[ --> " + super.toString() + " ]";
@@ -215,6 +218,7 @@ public class JDFStringState extends JDFAbstractState
 		setAttribute(AttributeName.ALLOWEDREGEXP, value);
 	}
 
+	@Override
 	public String getAllowedRegExp()
 	{
 		return getAttribute(AttributeName.ALLOWEDREGEXP);
@@ -225,6 +229,7 @@ public class JDFStringState extends JDFAbstractState
 		setAttribute(AttributeName.PRESENTREGEXP, value);
 	}
 
+	@Override
 	public String getPresentRegExp()
 	{
 		if (hasAttribute(AttributeName.PRESENTREGEXP))
@@ -266,6 +271,7 @@ public class JDFStringState extends JDFAbstractState
 	 *            <code>Loc</code> element)
 	 * @return JDFLoc: the matching Loc element
 	 */
+	@Override
 	public JDFLoc getValueLocLoc(int iSkip, int jSkip)
 	{
 		JDFValue val = (JDFValue) getElement(ElementName.VALUE, null, iSkip);
@@ -282,6 +288,7 @@ public class JDFStringState extends JDFAbstractState
 	 *            first <code>Value</code> element)
 	 * @return JDFLoc: newly created <code>Loc</code> element
 	 */
+	@Override
 	public JDFLoc appendValueLocLoc(int iSkip)
 	{
 		JDFValue val = getValue(iSkip);
@@ -353,6 +360,7 @@ public class JDFStringState extends JDFAbstractState
 	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
 	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
+	@Override
 	public void addValue(String value, EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
@@ -393,6 +401,7 @@ public class JDFStringState extends JDFAbstractState
 	 * @return boolean - true, if <code>value</code> matches testlists or if
 	 *         AllowedValueList and AllowedValueMod are not specified
 	 */
+	@Override
 	public final boolean fitsValue(String value, EnumFitsValue testlists)
 	{
 		return (fitsLength(value, testlists) && fitsRegExp(value, testlists) && fitsValueElem(
@@ -442,21 +451,25 @@ public class JDFStringState extends JDFAbstractState
 		return !hasValue;
 	}
 
+	@Override
 	public void setAllowedLength(JDFIntegerRange value)
 	{
 		super.setPresentLength(value);
 	}
 
+	@Override
 	public JDFIntegerRange getAllowedLength()
 	{
 		return super.getAllowedLength();
 	}
 
+	@Override
 	public void setPresentLength(JDFIntegerRange value)
 	{
 		super.setAllowedLength(value);
 	}
 
+	@Override
 	public JDFIntegerRange getPresentLength()
 	{
 		return super.getPresentLength();
@@ -467,6 +480,7 @@ public class JDFStringState extends JDFAbstractState
 	 * 
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
 	 */
+	@Override
 	public EnumTerm getEvaluationType()
 	{
 		return EnumTerm.StringEvaluation;

@@ -53,6 +53,7 @@ public class JDFBarcodeProductionParams extends JDFAutoBarcodeProductionParams
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBarcodeProductionParams[  --> " + super.toString() + " ]";

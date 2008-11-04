@@ -144,6 +144,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFStatusPool[ -->" + super.toString() + "]";
@@ -334,6 +335,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
 	 * 
 	 * @param s the status to set
 	 */
+	@Override
 	public void setStatus(JDFElement.EnumNodeStatus s)
 	{
 		final JDFNode n = (JDFNode) getParentNode_KElement();

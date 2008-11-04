@@ -61,6 +61,7 @@ public class JDFShapeElement extends JDFAutoShapeElement
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFShapeElement[  --> " + super.toString() + " ]";

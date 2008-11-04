@@ -61,6 +61,7 @@ public class JDFIDPFolding extends JDFAutoIDPFolding
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFIDPFolding[  --> " + super.toString() + " ]";

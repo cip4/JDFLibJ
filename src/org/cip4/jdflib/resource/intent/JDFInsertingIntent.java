@@ -62,6 +62,7 @@ public class JDFInsertingIntent extends JDFAutoInsertingIntent
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFInsertingIntent[  --> " + super.toString() + " ]";

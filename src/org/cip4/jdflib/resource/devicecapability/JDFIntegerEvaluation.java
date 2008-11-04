@@ -107,6 +107,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 				AttributeInfo.EnumAttributeType.XYPair, null, null);
 	}
 
+	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
@@ -159,6 +160,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFIntegerEvaluation[ --> " + super.toString() + " ]";
@@ -251,6 +253,7 @@ public class JDFIntegerEvaluation extends JDFEvaluation
 	 * @return boolean - true, if 'value' matches testlists or if testlists are
 	 *         not specified
 	 */
+	@Override
 	public boolean fitsValue(String value)
 	{
 		if (fitsListType(value))

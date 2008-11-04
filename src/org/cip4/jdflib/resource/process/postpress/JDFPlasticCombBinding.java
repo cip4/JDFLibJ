@@ -61,6 +61,7 @@ public class JDFPlasticCombBinding extends JDFAutoPlasticCombBinding
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPlasticCombBinding[  --> " + super.toString() + " ]";

@@ -61,6 +61,7 @@ public class JDFPallet extends JDFAutoPallet
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFPallet[  --> " + super.toString() + " ]";

@@ -57,6 +57,7 @@ public class JDFEndSheetGluingParams extends JDFAutoEndSheetGluingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFEndSheetGluingParams[  --> " + super.toString() + " ]";

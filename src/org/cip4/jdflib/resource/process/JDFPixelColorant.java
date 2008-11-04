@@ -61,6 +61,7 @@ public class JDFPixelColorant extends JDFAutoPixelColorant
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFPixelColorant[  --> " + super.toString() + " ]";

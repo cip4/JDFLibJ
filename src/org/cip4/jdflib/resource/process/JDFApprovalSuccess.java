@@ -138,6 +138,7 @@ public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFApprovalSuccess[  --> " + super.toString() + " ]";
@@ -149,6 +150,7 @@ public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
 	 * 
 	 * @see org.cip4.jdflib.resource.JDFResource#fixVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
 	 */
+	@Override
 	public boolean fixVersion(EnumVersion version)
 	{
 		boolean bRet = true;

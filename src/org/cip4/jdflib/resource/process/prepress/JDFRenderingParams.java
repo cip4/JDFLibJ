@@ -61,6 +61,7 @@ public class JDFRenderingParams extends JDFAutoRenderingParams
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	@Override
 	public String toString()
 	{
 		return "JDFRenderingParams[  --> " + super.toString() + " ]";

@@ -93,6 +93,7 @@ public class JMFStatusTest extends JDFTestCaseBase
 	private JDFSignal signal;
 	private JDFStatusQuParams sqp;
 
+	@Override
 	public void setUp()
 	{
 		JDFElement.setLongID(false);

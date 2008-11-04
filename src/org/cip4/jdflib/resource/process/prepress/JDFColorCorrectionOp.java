@@ -67,6 +67,7 @@ public class JDFColorCorrectionOp extends JDFAutoColorCorrectionOp
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFColorCorrectionOp[  --> " + super.toString() + " ]";

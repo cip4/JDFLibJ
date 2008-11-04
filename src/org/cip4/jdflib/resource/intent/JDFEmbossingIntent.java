@@ -67,6 +67,7 @@ public class JDFEmbossingIntent extends JDFAutoEmbossingIntent
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFEmbossingIntent[  --> " + super.toString() + " ]";

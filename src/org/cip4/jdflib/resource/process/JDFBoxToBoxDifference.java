@@ -67,6 +67,7 @@ public class JDFBoxToBoxDifference extends JDFAutoBoxToBoxDifference
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFBoxToBoxDifference[  --> " + super.toString() + " ]";

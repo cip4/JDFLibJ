@@ -66,6 +66,7 @@ public class JDFFeeder extends JDFAutoFeeder
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFFeeder[  --> " + super.toString() + " ]";

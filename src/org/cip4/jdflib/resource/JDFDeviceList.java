@@ -136,6 +136,7 @@ public class JDFDeviceList extends JDFAutoDeviceList
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		return "JDFDeviceList[  --> " + super.toString() + " ]";
