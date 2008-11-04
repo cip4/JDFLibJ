@@ -2281,7 +2281,9 @@ public class JDFElement extends KElement
 	 * @param bResolveTarget - additional control how refelements are followed
 	 * @return
 	 */
-	public synchronized VElement getChildElementVector_JDFElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
+	public synchronized VElement getChildElementVector_JDFElement(
+			String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, 
+			boolean bAnd, int maxSize, boolean bResolveTarget)
 	{
 		String nodeNameLocal = nodeName;
 		String nameSpaceURILocal = nameSpaceURI;
