@@ -1,6 +1,15 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD521 (24.09.2008)
+
+#BF fix deadlock : remove synchronize from getChildElementVector_JDFElement
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD521) && !lbtype(JDFLIBJ_2.1.3BLD520)}" -print
+.\core\JDFElement.java@@\main\253
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD520 (15.09.2008)
 
 

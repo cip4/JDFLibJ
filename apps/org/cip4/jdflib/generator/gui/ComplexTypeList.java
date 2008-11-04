@@ -101,13 +101,15 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         myList.addMouseListener(this);
         myList.addMouseListener(new MouseAdapter() 
         {
- 			public void mousePressed(MouseEvent evt) 
+ 			@Override
+			public void mousePressed(MouseEvent evt) 
             {
                 if (evt.isPopupTrigger()) 
                 {
                     popmenu.show(evt.getComponent(), evt.getX(), evt.getY());
                 }
             }
+			@Override
 			public void mouseReleased(MouseEvent evt) 
             {
                 if (evt.isPopupTrigger()) 
@@ -462,6 +464,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoContainer.java");
         defaultlistModel.addElement("JDFAutoContentData.java");
         defaultlistModel.addElement("JDFAutoContentList.java");
+        defaultlistModel.addElement("JDFAutoContentMetaData.java");
         defaultlistModel.addElement("JDFAutoContentObject.java");
         defaultlistModel.addElement("JDFAutoConventionalPrintingParams.java");
         defaultlistModel.addElement("JDFAutoCostCenter.java");
@@ -642,6 +645,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoMacroPool.java");
         defaultlistModel.addElement("JDFAutomacros.java");
         defaultlistModel.addElement("JDFAutoManualLaborParams.java");
+        defaultlistModel.addElement("JDFAutoMarkActivation.java");
         defaultlistModel.addElement("JDFAutoMarkObject.java");
         defaultlistModel.addElement("JDFAutoMatrixEvaluation.java");
         defaultlistModel.addElement("JDFAutoMedia.java");
@@ -691,6 +695,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoPackingParams.java");
         defaultlistModel.addElement("JDFAutoPageAssignedList.java");
         defaultlistModel.addElement("JDFAutoPageCell.java");
+        defaultlistModel.addElement("JDFAutoPageCondition.java");
         defaultlistModel.addElement("JDFAutoPageData.java");
         defaultlistModel.addElement("JDFAutoPageElement.java");
         defaultlistModel.addElement("JDFAutoPageList.java");
@@ -717,6 +722,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoPlasticCombBindingParams.java");
         defaultlistModel.addElement("JDFAutoPlateCopyParams.java");
         defaultlistModel.addElement("JDFAutoPosition.java");
+        defaultlistModel.addElement("JDFAutoPositionObj.java");
         defaultlistModel.addElement("JDFAutoPreflightAction.java");
         defaultlistModel.addElement("JDFAutoPreflightAnalysis.java");
         defaultlistModel.addElement("JDFAutoPreflightArgument.java");
@@ -770,6 +776,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoQueueFilter.java");
         defaultlistModel.addElement("JDFAutoQueueSubmissionParams.java");
         defaultlistModel.addElement("JDFAutoRectangleEvaluation.java");
+        defaultlistModel.addElement("JDFAutoRefAnchor.java");
         defaultlistModel.addElement("JDFAutoRegisterMark.java");
         defaultlistModel.addElement("JDFAutoRegisterRibbon.java");
         defaultlistModel.addElement("JDFAutoRegistration.java");
@@ -790,6 +797,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoRingBinding.java");
         defaultlistModel.addElement("JDFAutoRingBindingParams.java");
         defaultlistModel.addElement("JDFAutoRollStand.java");
+        defaultlistModel.addElement("JDFAutoRuleLength.java");
         defaultlistModel.addElement("JDFAutoRunList.java");
         defaultlistModel.addElement("JDFAutoSaddleStitching.java");
         defaultlistModel.addElement("JDFAutoSaddleStitchingParams.java");
@@ -806,6 +814,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoShapeCut.java");
         defaultlistModel.addElement("JDFAutoShapeCuttingIntent.java");
         defaultlistModel.addElement("JDFAutoShapeCuttingParams.java");
+        defaultlistModel.addElement("JDFAutoShapeDef.java");
         defaultlistModel.addElement("JDFAutoShapeElement.java");
         defaultlistModel.addElement("JDFAutoShapeEvaluation.java");
         defaultlistModel.addElement("JDFAutoShrinkingParams.java");
@@ -841,6 +850,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoSubmissionMethods.java");
         defaultlistModel.addElement("JDFAutoSubscription.java");
         defaultlistModel.addElement("JDFAutoSystemTimeSet.java");
+        defaultlistModel.addElement("JDFAutoTabDimensions.java");
         defaultlistModel.addElement("JDFAutoTabs.java");
         defaultlistModel.addElement("JDFAutoTape.java");
         defaultlistModel.addElement("JDFAutoTest.java");
