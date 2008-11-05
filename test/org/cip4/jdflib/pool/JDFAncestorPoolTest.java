@@ -144,9 +144,11 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	 */
 	public void testMakeRootResource() throws Exception
 	{
-		JDFAncestor a1 = ap.appendAncestor();
+//		JDFAncestor a1 = 
+			ap.appendAncestor();
 		JDFAncestor a2 = ap.appendAncestor();
-		JDFAncestor a3 = ap.appendAncestor();
+//		JDFAncestor a3 = 
+			ap.appendAncestor();
 		JDFNodeInfo ni2 = a2.appendNodeInfo();
 		ni2.makeRootResource(null, null, true);
 		assertNotNull(a2.getElement("NodeInfoRef", null, 0));

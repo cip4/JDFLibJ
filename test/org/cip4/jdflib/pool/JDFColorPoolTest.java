@@ -117,7 +117,7 @@ public class JDFColorPoolTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetColorWithName() throws Exception
+	public void testGetColorWithName()
 	{
 		assertNotNull("grün", cp.getColorWithName("Grün"));
 		boolean caught = false;
@@ -137,7 +137,7 @@ public class JDFColorPoolTest extends TestCase
 	 * 
 	 * @throws Exception
 	 */
-	public void testGetCreateColorWithName() throws Exception
+	public void testGetCreateColorWithName()
 	{
 		assertNotNull("grün", cp.getCreateColorWithName("Grün", null));
 	}

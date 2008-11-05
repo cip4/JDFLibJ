@@ -1831,9 +1831,9 @@ public class StatusCounter
 	/**
 	 * @param icsVersions the icsVersions to set
 	 */
-	public void setIcsVersions(VString icsVersions)
+	public void setIcsVersions(VString pICSVersions)
 	{
-		this.icsVersions = icsVersions;
+		this.icsVersions = pICSVersions;
 	}
 
 	/**

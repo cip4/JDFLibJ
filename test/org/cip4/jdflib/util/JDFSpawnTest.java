@@ -1560,7 +1560,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			v.add("Rendering");
 
 			JDFNode n2 = n.addCombined(v);
-			JDFNotification n0 = n2.getCreateAuditPool().addNotification(EnumClass.Event, null, null);
+//			JDFNotification n0 = 
+				n2.getCreateAuditPool().addNotification(EnumClass.Event, null, null);
 			final JDFSpawn spawn = new JDFSpawn(n2);
 			JDFNode spawnedNode = spawn.spawn("thisFile", "spawnFile", null, null, true, true, true, true);
 			String spawnID = spawnedNode.getSpawnID(false);

@@ -94,7 +94,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testisAbsoluteFile() throws Exception
+	public void testisAbsoluteFile()
 	{
 		assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
 		assertFalse(FileUtil.isAbsoluteFile("foo"));
@@ -108,7 +108,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testGetExtension() throws Exception
+	public void testGetExtension()
 	{
 		assertNull(FileUtil.getExtension(new File("foo")));
 		assertEquals("txt", FileUtil.getExtension(new File("foo.txt")));
@@ -117,7 +117,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testisCleanURLFile() throws Exception
+	public void testisCleanURLFile()
 	{
 		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
 		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));
@@ -128,7 +128,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testListTree() throws Exception
+	public void testListTree()
 	{
 		File root = new File(sm_dirTestData + File.separator + "dir1");
 		Vector<File> list = FileUtil.listFilesInTree(root, "dir(.+)/");
@@ -198,7 +198,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testCreateFile() throws Exception
+	public void testCreateFile()
 	{
 		File f = new File(sm_dirTestDataTemp + "/aaa_aaa/b/c.txt");
 		assertTrue(FileUtil.createNewFile(f));

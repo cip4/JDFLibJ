@@ -255,7 +255,7 @@ public abstract class JDFTestCaseBase extends TestCase
 		return info;
 	}
 
-	protected JDFNodeInfo prepareNodeInfo(JDFDoc doc) throws Exception
+	protected JDFNodeInfo prepareNodeInfo(JDFDoc doc)
 	{
 		JDFNode n = doc.getJDFRoot();
 		JDFNodeInfo ni = n.getCreateNodeInfo();

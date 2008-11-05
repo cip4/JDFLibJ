@@ -1051,43 +1051,46 @@ public class JDFSpawn
 	 */
 	private VElement reducePartitions(JDFResource r, String nodeName, String nsURI, VString partIDKeys, int partIDPos, JDFAttributeMap parentMap, VElement identical)
 	{
-		VElement children = r.getChildElementVector_KElement(nodeName, nsURI, null, true, -1);
 		VElement bad = new VElement();
-		int kidSize = children == null ? 0 : children.size();
-
-		for (int i = 0; i < kidSize; i++)
+		VElement children = r.getChildElementVector_KElement(nodeName, nsURI, null, true, -1);
+		if (children != null)
 		{
-			JDFResource child = (JDFResource) children.elementAt(i);
-			String key = partIDKeys.get(partIDPos);
-			if (key != null)
+			int kidSize = children.size();
+			for (int i = 0; i < kidSize; i++)
 			{
-				String val = child.getAttribute_KElement(key, null, null);
-				if (val != null)
+				JDFResource child = (JDFResource) children.elementAt(i);
+				String key = partIDKeys.get(partIDPos);
+				if (key != null)
 				{
-					JDFAttributeMap testMap = new JDFAttributeMap(parentMap);
-					testMap.put(key, val);
-					if (vSpawnParts.overlapsMap(testMap))
+					String val = child.getAttribute_KElement(key, null, null);
+					if (val != null)
 					{
-						JDFIdentical id = child.getIdentical();
-						if (id != null)
+						JDFAttributeMap testMap = new JDFAttributeMap(parentMap);
+						testMap.put(key, val);
+						if (vSpawnParts.overlapsMap(testMap))
 						{
-							JDFResource resourceRoot = r.getResourceRoot();
-							JDFResource partition = resourceRoot.getPartition(testMap, null);
-							while (partition != resourceRoot)
+							JDFIdentical id = child.getIdentical();
+							if (id != null)
 							{
-								identical.add(partition);
-								partition = (JDFResource) partition.getParentNode_KElement();
+								JDFResource resourceRoot = r.getResourceRoot();
+								JDFResource partition = resourceRoot.getPartition(testMap, null);
+								while (partition != resourceRoot)
+								{
+									identical.add(partition);
+									partition = (JDFResource) partition.getParentNode_KElement();
+								}
 							}
+							if (partIDPos + 1 < partIDKeys.size()) // array out of bonds in some corrupt jdfs with missing partidkeys
+								bad.appendUnique(reducePartitions(child, nodeName, nsURI, partIDKeys, partIDPos + 1, testMap, identical));
 						}
-						if (partIDPos + 1 < partIDKeys.size()) // array out of bonds in some corrupt jdfs with missing partidkeys
-							bad.appendUnique(reducePartitions(child, nodeName, nsURI, partIDKeys, partIDPos + 1, testMap, identical));
+						else
+							bad.add(child);
 					}
-					else
-						bad.add(child);
 				}
-			}
 
+			}
 		}
+		
 		return bad;
 	}
 

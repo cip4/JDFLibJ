@@ -141,48 +141,53 @@ public class FileUtil
 	 */
 	public static Vector<File> listFilesInTree(File dir, String expression)
 	{
+		Vector<File> v = null;
+		
 		if (dir == null || expression == null)
-			return null;
+			return v;
 
 		int posSlash = expression.indexOf('/');
 		if (posSlash < 0)
 		{
 			File[] f = listFilesWithExpression(dir, expression);
-			return ContainerUtil.toVector(f);
+			v = ContainerUtil.toVector(f);
 		}
 		else
 		{
 			String nextDir = expression.substring(0, posSlash);
 			File[] f = listFilesWithExpression(dir, nextDir);
-			if (f == null)
-				return null;
-			Vector<File> v = new Vector<File>();
-			for (int i = 0; i < f.length; i++)
+			if (f != null)
 			{
-				if (f[i].isDirectory())
-					v.add(f[i]);
-			}
-			if (v.size() == 0)
-				v = null;
-			if (posSlash + 1 == expression.length()) // last token ends with /	
-			{
-				return v;
-			}
-			else
-			{
-				if (v == null)
-					return v;
-				Vector<File> ret = new Vector<File>();
-				String next = expression.substring(posSlash + 1);
-				for (int i = 0; i < v.size(); i++)
+				v = new Vector<File>();
+				for (int i = 0; i < f.length; i++)
 				{
-					Vector<File> v2 = listFilesInTree(v.get(i), next);
-					if (v2 != null)
-						ret.addAll(v2);
+					if (f[i].isDirectory())
+						v.add(f[i]);
 				}
-				return ret.size() == 0 ? null : ret;
+
+				if (v.size() == 0)
+					v = null;
+
+				if (posSlash + 1 != expression.length()) // last token ends not with /	
+				{
+					if (v != null)
+					{
+						Vector<File> ret = new Vector<File>();
+						String next = expression.substring(posSlash + 1);
+						for (int i = 0; i < v.size(); i++)
+						{
+							Vector<File> v2 = listFilesInTree(v.get(i), next);
+							if (v2 != null)
+								ret.addAll(v2);
+						}
+
+						v = ret.size() == 0 ? null : ret;
+					}
+				}
 			}
 		}
+		
+		return v;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -539,11 +544,14 @@ public class FileUtil
 	{
 		if (file == null)
 			return false;
+		
 		if (file.exists())
 			return true;
+		
 		File parent = file.getParentFile();
 		if (parent != null)
 			parent.mkdirs();
+		
 		try
 		{
 			return file.createNewFile();

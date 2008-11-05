@@ -104,13 +104,17 @@ public class JDFIntegerList extends JDFNumList
 	public boolean isValidString(String st)
 	{
 		VString v = StringUtil.tokenize(st, null, false);
-		final int size = v == null ? 0 : v.size();
-		for (int i = 0; i < size; i++)
+		if (v != null)
 		{
-			String s = v.stringAt(i);
-			if (!StringUtil.isInteger(s))
-				return false;
+			final int size = v.size();
+			for (int i = 0; i < size; i++)
+			{
+				String s = v.stringAt(i);
+				if (!StringUtil.isInteger(s))
+					return false;
+			}
 		}
+		
 		return true;
 	}
 

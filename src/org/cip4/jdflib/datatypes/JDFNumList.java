@@ -151,21 +151,25 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	public JDFNumList(String sl) throws DataFormatException
 	{
 		VString v = StringUtil.tokenize(sl, null, false);
-		final int size = v == null ? 0 : v.size();
-		for (int i = 0; i < size; i++)
+		if (v != null)
 		{
-			String s = v.stringAt(i);
-			if (!StringUtil.isNumber(s))
-				throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-			if (this instanceof JDFIntegerList)
+			final int size = v.size();
+			for (int i = 0; i < size; i++)
 			{
-				m_numList.addElement(new Integer(StringUtil.parseInt(s, 0)));
-			}
-			else
-			{
-				m_numList.addElement(new Double(StringUtil.parseDouble(s, 0)));
+				String s = v.stringAt(i);
+				if (!StringUtil.isNumber(s))
+					throw new DataFormatException("JDFNumList: bad numeric value: " + s);
+				if (this instanceof JDFIntegerList)
+				{
+					m_numList.addElement(new Integer(StringUtil.parseInt(s, 0)));
+				}
+				else
+				{
+					m_numList.addElement(new Double(StringUtil.parseDouble(s, 0)));
+				}
 			}
 		}
+		
 		isValid();
 	}
 
@@ -433,13 +437,17 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	public boolean isValidString(String st)
 	{
 		VString v = StringUtil.tokenize(st, null, false);
-		final int size = v == null ? 0 : v.size();
-		for (int i = 0; i < size; i++)
+		if (v != null)
 		{
-			String s = v.stringAt(i);
-			if (!StringUtil.isNumber(s))
-				return false;
+			final int size = v.size();
+			for (int i = 0; i < size; i++)
+			{
+				String s = v.stringAt(i);
+				if (!StringUtil.isNumber(s))
+					return false;
+			}
 		}
+		
 		return true;
 	}
 

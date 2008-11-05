@@ -307,14 +307,13 @@ public class CheckJDFTest extends JDFTestCaseBase
 	public void testValidateZip()
 	{
 		File zip = new File(sm_dirTestData + "checkjdf.zip");
-		zip = new File("c:/data/many.zip");
 		JDFValidator checker = new JDFValidator();
 		XMLDoc d = checker.processZipFile(zip);
 		KElement root = d.getRoot();
 		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
 		//TODO fix mem leak in zip		assertEquals(getCurrentMem(), mem, 1000000);
 
-		assertEquals("checkJDF.zip has 17 files", root.numChildElements("TestFile", null), 167);
+		assertEquals("checkJDF.zip has 17 files", root.numChildElements("TestFile", null), 17);
 	}
 
 	public void testValidateMime() throws Exception
