@@ -1,6 +1,15 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.3BLD522 (02.10.2008)
+
+Jdfnode #BF 2008/12546 : fix JDF-PPF-Merge: Sequenzen werden nicht angezogen 
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.3BLD522) && !lbtype(JDFLIBJ_2.1.3BLD521)}" -print
+.\src\org\cip4\jdflib\node\JDFNode.java@@\main\280
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.3BLD521 (24.09.2008)
 
 #BF fix deadlock : remove synchronize from getChildElementVector_JDFElement
