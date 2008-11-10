@@ -3018,7 +3018,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @return JDFResourceLink the link
 	 * 
-	 * @default LinkResource(r, usage, null)
+	 * @default ensureLink(r, usage, null)
 	 */
 	public JDFResourceLink ensureLink(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage)
 	{

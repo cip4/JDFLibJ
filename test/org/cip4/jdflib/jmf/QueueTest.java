@@ -303,6 +303,7 @@ public class QueueTest extends TestCase
 			if (qex != null)
 			{
 				qex.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+				ThreadUtil.sleep(10);
 				qex.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
 			}
 		}

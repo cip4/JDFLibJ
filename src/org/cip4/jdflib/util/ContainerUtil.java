@@ -81,6 +81,7 @@ package org.cip4.jdflib.util;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -93,99 +94,134 @@ import org.cip4.jdflib.ifaces.IMatches;
 
 /**
  * class with utilities for containers, e.g. Vectors, sets etc. also simple object utils
- * 
  * @author prosirai
- * 
  */
 public class ContainerUtil
 {
 	/**
 	 * create a HashSet from a List (Vector...)
 	 * @param <a> the data typeof the sets
-	 * 
+	 * @param enumeration
+	 * @return a Set created from list
+	 */
+	public static <a> Set<a> toHashSet(final Enumeration<a> enumeration)
+	{
+		if (enumeration == null)
+		{
+			return null;
+		}
+		final Set<a> s = new HashSet<a>();
+		while (enumeration.hasMoreElements())
+		{
+			s.add(enumeration.nextElement());
+		}
+
+		return s;
+	}
+
+	/**
+	 * create a HashSet from a List (Vector...)
+	 * @param <a> the data typeof the sets
 	 * @param list
 	 * @return a Set created from list
 	 */
-	public static <a> Set<a> toHashSet(List<a> list)
+	public static <a> Set<a> toHashSet(final List<a> list)
 	{
 		if (list == null)
+		{
 			return null;
-		Set<a> s = new HashSet<a>();
+		}
+		final Set<a> s = new HashSet<a>();
 		for (int i = 0; i < list.size(); i++)
+		{
 			s.add(list.get(i));
+		}
 		return s;
 	}
 
 	/**
 	 * create a HashSet from an Array
 	 * @param <a> the data typeof the sets
-	 * 
 	 * @param l
 	 * @return a Set created from list
 	 */
-	public static <a> Set<a> toHashSet(a[] l)
+	public static <a> Set<a> toHashSet(final a[] l)
 	{
 		if (l == null)
+		{
 			return null;
-		Set<a> s = new HashSet<a>();
+		}
+		final Set<a> s = new HashSet<a>();
 		for (int i = 0; i < l.length; i++)
+		{
 			s.add(l[i]);
+		}
 		return s;
 	}
 
 	/**
 	 * create a Vector from an Array
-	 * @param <a> 
-	 * 
+	 * @param <a>
 	 * @param l
 	 * @return a Vector<a>
 	 */
-	public static <a> Vector<a> toVector(a[] l)
+	public static <a> Vector<a> toVector(final a[] l)
 	{
 		if (l == null)
+		{
 			return null;
-		Vector<a> v = new Vector<a>();
+		}
+		final Vector<a> v = new Vector<a>();
 		v.ensureCapacity(l.length);
 		for (int i = 0; i < l.length; i++)
+		{
 			v.add(l[i]);
+		}
 		return v;
 	}
 
 	/**
 	 * return a matching element from a collection of Imatches
 	 * @param <a> the data type
-	 * 
 	 * @param c the collection to search
 	 * @param obj the search key for matches
 	 * @param iSkip which one to grab, may be negative in which case we count -1=last, -2=second last...
 	 * @return the matching <a>
 	 */
-	public static <a> IMatches getMatch(Collection<? extends IMatches> c, a obj, int iSkip)
+	public static <a> IMatches getMatch(final Collection<? extends IMatches> c, final a obj, final int iSkip)
 	{
 		int iSkipLocal = iSkip;
 
 		if (c == null)
+		{
 			return null;
+		}
 
 		if (iSkipLocal < 0)
 		{
-			Vector<IMatches> v = getMatches(c, obj);
+			final Vector<IMatches> v = getMatches(c, obj);
 			if (v == null)
+			{
 				return null;
+			}
 
 			iSkipLocal = v.size() + iSkipLocal;
 			if (iSkipLocal < 0)
+			{
 				return null;
+			}
 
 			return v.get(iSkipLocal);
 		}
 
-		Iterator<? extends IMatches> it = c.iterator();
+		final Iterator<? extends IMatches> it = c.iterator();
 		while (it.hasNext())
 		{
-			IMatches m = it.next();
+			final IMatches m = it.next();
 			if (m.matches(obj) && iSkipLocal-- <= 0)
+			{
 				return m;
+			}
 		}
 
 		return null;
@@ -194,61 +230,70 @@ public class ContainerUtil
 	/**
 	 * return a matching element from a collection of IMatches
 	 * @param <a> the data type
-	 * 
 	 * @param c the collection to search
 	 * @param obj the search key for matches
 	 * @return Vector of matching a
 	 */
-	public static <a> Vector<IMatches> getMatches(Collection<? extends IMatches> c, a obj)
+	public static <a> Vector<IMatches> getMatches(final Collection<? extends IMatches> c, final a obj)
 	{
 		if (c == null)
+		{
 			return null;
-		Iterator<? extends IMatches> it = c.iterator();
-		Vector<IMatches> v = new Vector<IMatches>();
+		}
+		final Iterator<? extends IMatches> it = c.iterator();
+		final Vector<IMatches> v = new Vector<IMatches>();
 		while (it.hasNext())
 		{
-			IMatches m = it.next();
+			final IMatches m = it.next();
 			if (m.matches(obj))
+			{
 				v.add(m);
+			}
 		}
 		return v.size() == 0 ? null : v;
 	}
 
 	/**
 	 * create a Vector of entry values from a map
-	 * @param <a> 
-	 * @param <b> 
-	 * 
-	 * @param m the map to dump to an array 
+	 * @param <a>
+	 * @param <b>
+	 * @param m the map to dump to an array
 	 * @param sortByKey , if true, sort the entries by key
-	 * 
 	 * @return the vector
 	 */
-	public static <a extends Comparable<? super a>, b> Vector<b> toValueVector(Map<a, b> m, boolean sortByKey)
+	public static <a extends Comparable<? super a>, b> Vector<b> toValueVector(final Map<a, b> m, final boolean sortByKey)
 	{
 		if (!sortByKey)
+		{
 			return toValueVector(m);
+		}
 
 		if (m == null)
+		{
 			return null;
+		}
 
 		synchronized (m)
 		{
 			final Set<Entry<a, b>> entrySet = m.entrySet();
 			if (entrySet.size() == 0)
+			{
 				return null;
+			}
 
-			Vector<b> v = new Vector<b>();
+			final Vector<b> v = new Vector<b>();
 			v.ensureCapacity(entrySet.size());
-			Iterator<Entry<a, b>> it = entrySet.iterator();
-			Vector<a> keys = new Vector<a>();
+			final Iterator<Entry<a, b>> it = entrySet.iterator();
+			final Vector<a> keys = new Vector<a>();
 			keys.ensureCapacity(entrySet.size());
 
 			while (it.hasNext())
 			{
-				a key = it.next().getKey();
+				final a key = it.next().getKey();
 				if (key != null)
+				{
 					keys.add(key);
+				}
 			}
 
 			Collections.sort(keys);
@@ -264,27 +309,31 @@ public class ContainerUtil
 	 * create a Vector of entry values from a map
 	 * @param <a> data type of the map key
 	 * @param <b> data type of the map value
-	 * 
-	 * @param m the map to dump to an array 
-	 * 
+	 * @param m the map to dump to an array
 	 * @return the vector
 	 */
-	public static <a, b> Vector<b> toValueVector(Map<a, b> m)
+	public static <a, b> Vector<b> toValueVector(final Map<a, b> m)
 	{
 		if (m == null)
+		{
 			return null;
+		}
 
 		synchronized (m)
 		{
 			final Set<Entry<a, b>> entrySet = m.entrySet();
 			if (entrySet.size() == 0)
+			{
 				return null;
-			Vector<b> v = new Vector<b>();
+			}
+			final Vector<b> v = new Vector<b>();
 			v.ensureCapacity(entrySet.size());
-			Iterator<Entry<a, b>> it = entrySet.iterator();
+			final Iterator<Entry<a, b>> it = entrySet.iterator();
 
 			while (it.hasNext())
+			{
 				v.add(it.next().getValue());
+			}
 
 			return v;
 		}
@@ -292,48 +341,58 @@ public class ContainerUtil
 
 	/**
 	 * return true if a equals b or both are null
-	 * 
 	 * @param a Object to compare
 	 * @param b Object to compare
 	 * @return boolean true if a equals b or both are null
 	 */
-	public static boolean equals(Object a, Object b)
+	public static boolean equals(final Object a, final Object b)
 	{
 		if (a == null)
+		{
 			return b == null;
+		}
 		if (b == null)
+		{
 			return false;
+		}
 		return a.equals(b);
 	}
 
 	/**
-	 * static implementation of compare for any comparable object that gracefully handles null
-	 * null is always the smallest
-	 * @param c0 
+	 * static implementation of compare for any comparable object that gracefully handles null null is always the smallest
+	 * @param c0
 	 * @param c1
 	 * @return -1 if c0<c1, 0 if equal, 1 if c0>c1
 	 */
 	@SuppressWarnings("unchecked")
-	public static int compare(Comparable c0, Comparable c1)
+	public static int compare(final Comparable c0, final Comparable c1)
 	{
 		if (c0 == null)
+		{
 			return c1 == null ? 0 : 1;
+		}
 		if (c1 == null)
+		{
 			return -1;
+		}
 		return c0.compareTo(c1);
 	}
 
 	/**
 	 * ensure that a collection has at least size elements and fill any newly created entries with nulls
-	 * @param <a> anything - needed for the cast 
+	 * @param <a> anything - needed for the cast
 	 * @param size
 	 * @param coll
 	 */
-	public static <a> void ensureSize(int size, Collection<a> coll)
+	public static <a> void ensureSize(final int size, final Collection<a> coll)
 	{
-		int s2 = coll.size();
+		final int s2 = coll.size();
 		if (s2 < size)
+		{
 			for (int i = s2; i < size; i++)
+			{
 				coll.add((a) null);
+			}
+		}
 	}
 }

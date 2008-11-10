@@ -16,6 +16,9 @@
 		<echo>Make sure you have a directory named 'lib' containing the JAR files of the library dependencies (see lib/DEPENDENCIES.txt).</echo>
 		<property name="lib.dir" value="./lib" />
 		<tstamp />
+
+		<property name="ant.build.javac.target" value="1.5" />
+
 		<property file="version.properties"/>
 		<property name="base.filename" value="JDFLibJ-${major.version}.${minor.version}" />		
 		<property name="major.filename" value="JDFLibJ-${major.version}" />		

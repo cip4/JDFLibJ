@@ -83,6 +83,8 @@ import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -102,47 +104,55 @@ import org.cip4.jdflib.util.StringUtil;
 //----------------------------------
 public class JDFDeviceInfo extends JDFAutoDeviceInfo
 {
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.IDLESTARTTIME, 0x33333000, AttributeInfo.EnumAttributeType.dateTime, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFDeviceInfo
-	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFDeviceInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFDeviceInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeviceInfo
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFDeviceInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFDeviceInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeviceInfo
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFDeviceInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFDeviceInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoDeviceInfo#toString()
 	 */
 	@Override
@@ -153,7 +163,6 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * Method getJobCount.
-	 * 
 	 * @return int
 	 * @deprecated use numChildElements(ElementName.JOBPHASE,null)
 	 */
@@ -165,22 +174,22 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * (11) set attribute IdleStartTime
-	 * 
 	 * @param value : the value to set the attribute to or null
 	 */
-	public void setIdleStartTime(JDFDate value)
+	public void setIdleStartTime(final JDFDate value)
 	{
 		JDFDate valueLocal = value;
-		
+
 		if (valueLocal == null)
+		{
 			valueLocal = new JDFDate();
-		
+		}
+
 		setAttribute(AttributeName.IDLESTARTTIME, valueLocal.getDateTimeISO(), null);
 	}
 
 	/**
 	 * (12) get JDFDate attribute IdleStartTime
-	 * 
 	 * @return JDFDate the value of the attribute
 	 */
 	public JDFDate getIdleStartTime()
@@ -192,7 +201,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 			{
 				return new JDFDate(str);
 			}
-			catch (DataFormatException dfe)
+			catch (final DataFormatException dfe)
 			{
 				// nop
 			}
@@ -202,14 +211,13 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * create a JobPhase message from a phaseTime Audit
-	 * 
 	 * @param pt the phasetime audit
 	 * @return JDFJobPhase: the jobphase element that has been filled by the phaseTime
 	 */
 	public JDFJobPhase createJobPhaseFromPhaseTime(final JDFPhaseTime pt)
 	{
-		JDFJobPhase jp = appendJobPhase();
-		JDFNode node = pt.getParentJDF();
+		final JDFJobPhase jp = appendJobPhase();
+		final JDFNode node = pt.getParentJDF();
 
 		jp.setJobID(node.getJobID(true));
 		jp.setJobPartID(StringUtil.getNonEmpty(node.getJobPartID(true)));
@@ -218,24 +226,26 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		jp.copyAttribute(AttributeName.STATUS, pt);
 		jp.copyAttribute(AttributeName.STATUSDETAILS, pt);
 		jp.setPhaseStartTime(pt.getStart());
-		JDFResourceLink rl = pt.getLink(0);
+		final JDFResourceLink rl = pt.getLink(0);
 		if (rl != null)
 		{
 			if (rl.getAmountPoolAttribute(AttributeName.ACTUALAMOUNT, null, null, 0) != null)
+			{
 				jp.setPhaseAmount(rl.getActualAmount(null));
+			}
 		}
-		JDFMISDetails md = pt.getMISDetails();
+		final JDFMISDetails md = pt.getMISDetails();
 		jp.copyElement(md, null);
-		VElement modules = pt.getChildElementVector(ElementName.MODULEPHASE, null);
+		final VElement modules = pt.getChildElementVector(ElementName.MODULEPHASE, null);
 		if (modules != null)
 		{
-			int mLen = modules.size();
+			final int mLen = modules.size();
 			for (int i = 0; i < mLen; i++)
 			{
 				jp.createModuleStatusFromModulePhase((JDFModulePhase) modules.elementAt(i));
 			}
 		}
-		
+
 		// TODO set more
 		jp.eraseEmptyAttributes(true);
 		return jp;
@@ -243,83 +253,108 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 
 	/**
 	 * gets the deviceID from @DeviceID if it exists, otherwise searches Device/@DeviceID
-	 * 
 	 * @return the appropriate deviceID for this deviceInfo
 	 */
 	@Override
 	public String getDeviceID()
 	{
 		if (hasAttribute(AttributeName.DEVICEID))
+		{
 			return super.getDeviceID();
-		JDFDevice d = getDevice();
+		}
+		final JDFDevice d = getDevice();
 		String ret = d == null ? null : d.getDeviceID();
 		if (ret == null)
 		{
-			KElement km = getParentNode_KElement();
+			final KElement km = getParentNode_KElement();
 			if (km instanceof JDFMessage)
+			{
 				ret = ((JDFMessage) km).getSenderID();
+			}
 		}
 		return ret;
 	}
 
 	/**
 	 * returns true if this is the same phase, i.e. the
-	 * 
 	 * @param lastInfo the deviceInfo to compare with
 	 * @param bExact if true, use startTime as hook, else compare stati
 	 * @return true if same
 	 */
-	public boolean isSamePhase(JDFDeviceInfo lastInfo, boolean bExact)
+	public boolean isSamePhase(final JDFDeviceInfo lastInfo, final boolean bExact)
 	{
 		if (lastInfo == null)
+		{
 			return false;
+		}
 		if (!ContainerUtil.equals(getDeviceID(), lastInfo.getDeviceID()))
+		{
 			return false;
+		}
 		if (!ContainerUtil.equals(getDeviceOperationMode(), lastInfo.getDeviceOperationMode()))
+		{
 			return false;
+		}
 		if (!ContainerUtil.equals(getDeviceStatus(), lastInfo.getDeviceStatus()))
+		{
 			return false;
+		}
 		if (!ContainerUtil.equals(getStatusDetails(), lastInfo.getStatusDetails()))
+		{
 			return false;
-		int numEmployees = numChildElements(ElementName.EMPLOYEE, null);
+		}
+		final int numEmployees = numChildElements(ElementName.EMPLOYEE, null);
 		if (numEmployees != lastInfo.numChildElements(ElementName.EMPLOYEE, null))
+		{
 			return false;
+		}
 		boolean bGood = true;
 		for (int i = 0; i < numEmployees && bGood; i++)
 		{
-			JDFEmployee employee = lastInfo.getEmployee(i);
+			final JDFEmployee employee = lastInfo.getEmployee(i);
 			if (employee != null)
+			{
 				bGood = bGood && getEmployee(i).matches(employee);
+			}
 
 		}
 		if (!bGood)
+		{
 			return false;
+		}
 
-		int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
+		final int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
 		if (numJobPhases != lastInfo.numChildElements(ElementName.JOBPHASE, null))
+		{
 			return false;
+		}
 		bGood = true;
 
 		for (int i = 0; i < numJobPhases; i++)
+		{
 			bGood = bGood || getJobPhase(i).isSamePhase(lastInfo.getJobPhase(i), bExact);
+		}
 		return bGood;
 	}
 
 	/**
 	 * creates a new deviceInfo that spans lastphase and this phase
-	 * 
 	 * @param lastInfo the deviceInfo to merge
 	 * @return true if successful
 	 */
-	public boolean mergeLastPhase(JDFDeviceInfo lastInfo)
+	public boolean mergeLastPhase(final JDFDeviceInfo lastInfo)
 	{
 		if (!isSamePhase(lastInfo, false))
+		{
 			return false;
+		}
 
-		int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
+		final int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
 		boolean bGood = true;
 		for (int i = 0; i < numJobPhases; i++)
+		{
 			bGood = getJobPhase(i).mergeLastPhase(lastInfo.getJobPhase(i)) || bGood;
+		}
 		return bGood;
 	}
 

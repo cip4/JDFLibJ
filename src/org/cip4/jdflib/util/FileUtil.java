@@ -95,125 +95,128 @@ import org.cip4.jdflib.core.VString;
 
 /**
  * collection of helper routines to work with files
- * 
  * @author prosirai
- * 
  */
 public class FileUtil
 {
 
 	/**
 	 * list all files with a given extension (directories are skipped
-	 * 
 	 * @param dir the directory to search
 	 * @param extension comma separated list of extensions to check for (null = list all)
 	 * @return Files[] the matching files, null if none are found
 	 */
-	public static File[] listFilesWithExtension(File dir, String extension)
+	public static File[] listFilesWithExtension(final File dir, final String extension)
 	{
 		if (dir == null)
+		{
 			return null;
-		File[] files = dir.listFiles(new ExtensionFileFilter(extension));
+		}
+		final File[] files = dir.listFiles(new ExtensionFileFilter(extension));
 		return (files == null || files.length == 0) ? null : files;
 	}
 
 	/**
-	 * list all files matching given regexp 
-	 * 
+	 * list all files matching given regexp
 	 * @param dir the directory to search
 	 * @param expression regular expression
 	 * @return Files[] the matching files, null if none are found
 	 */
-	public static File[] listFilesWithExpression(File dir, String expression)
+	public static File[] listFilesWithExpression(final File dir, final String expression)
 	{
 		if (dir == null)
+		{
 			return null;
-		File[] files = dir.listFiles(new ExpressionFileFilter(expression));
+		}
+		final File[] files = dir.listFiles(new ExpressionFileFilter(expression));
 		return (files == null || files.length == 0) ? null : files;
 	}
 
 	/**
-	 * list all files matching given regexp 
-	 * 
+	 * list all files matching given regexp
 	 * @param dir the directory to search
 	 * @param expression comma separated list of regular expression of a tree with slashes separating directories
 	 * @return Files[] the matching files, null if none are found
 	 */
-	public static Vector<File> listFilesInTree(File dir, String expression)
+	public static Vector<File> listFilesInTree(final File dir, final String expression)
 	{
-		Vector<File> v = null;
-		
 		if (dir == null || expression == null)
-			return v;
+		{
+			return null;
+		}
 
-		int posSlash = expression.indexOf('/');
+		final int posSlash = expression.indexOf('/');
 		if (posSlash < 0)
 		{
-			File[] f = listFilesWithExpression(dir, expression);
-			v = ContainerUtil.toVector(f);
+			final File[] f = listFilesWithExpression(dir, expression);
+			return ContainerUtil.toVector(f);
 		}
 		else
 		{
-			String nextDir = expression.substring(0, posSlash);
-			File[] f = listFilesWithExpression(dir, nextDir);
-			if (f != null)
+			final String nextDir = expression.substring(0, posSlash);
+			final File[] f = listFilesWithExpression(dir, nextDir);
+			if (f == null)
 			{
-				v = new Vector<File>();
-				for (int i = 0; i < f.length; i++)
+				return null;
+			}
+			Vector<File> v = new Vector<File>();
+			for (int i = 0; i < f.length; i++)
+			{
+				if (f[i].isDirectory())
 				{
-					if (f[i].isDirectory())
-						v.add(f[i]);
-				}
-
-				if (v.size() == 0)
-					v = null;
-
-				if (posSlash + 1 != expression.length()) // last token ends not with /	
-				{
-					if (v != null)
-					{
-						Vector<File> ret = new Vector<File>();
-						String next = expression.substring(posSlash + 1);
-						for (int i = 0; i < v.size(); i++)
-						{
-							Vector<File> v2 = listFilesInTree(v.get(i), next);
-							if (v2 != null)
-								ret.addAll(v2);
-						}
-
-						v = ret.size() == 0 ? null : ret;
-					}
+					v.add(f[i]);
 				}
 			}
+			if (v.size() == 0)
+			{
+				v = null;
+			}
+			if (posSlash + 1 == expression.length()) // last token ends with /
+			{
+				return v;
+			}
+			else
+			{
+				if (v == null)
+				{
+					return v;
+				}
+				final Vector<File> ret = new Vector<File>();
+				final String next = expression.substring(posSlash + 1);
+				for (int i = 0; i < v.size(); i++)
+				{
+					final Vector<File> v2 = listFilesInTree(v.get(i), next);
+					if (v2 != null)
+					{
+						ret.addAll(v2);
+					}
+				}
+				return ret.size() == 0 ? null : ret;
+			}
 		}
-		
-		return v;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
 	// //////
 	/**
 	 * list all direct child directories
-	 * 
 	 * @param dir the directory to search
-	 * 
 	 * @return Files[] the matching directories, null if none are found
 	 */
-	public static File[] listDirectories(File dir)
+	public static File[] listDirectories(final File dir)
 	{
 		if (dir == null)
+		{
 			return null;
-		File[] files = dir.listFiles(new DirectoryFileFilter());
+		}
+		final File[] files = dir.listFiles(new DirectoryFileFilter());
 		return (files == null || files.length == 0) ? null : files;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
 
 	/************************
-	 * Inner class ***********************
-	 * 
-	 * UtilFileFilter
-	 * 
+	 * Inner class *********************** UtilFileFilter
 	 ************************************************************/
 	public static class ExtensionFileFilter implements FileFilter
 	{
@@ -221,19 +224,20 @@ public class FileUtil
 
 		/**
 		 * @param fileExtension comma separated list of valid regular expressions
-		 * 
 		 */
-		protected ExtensionFileFilter(String fileExtension)
+		protected ExtensionFileFilter(final String fileExtension)
 		{
 			if (fileExtension != null)
 			{
-				VString list = StringUtil.tokenize(fileExtension, ",", false);
+				final VString list = StringUtil.tokenize(fileExtension, ",", false);
 				m_extension = new HashSet<String>();
 				for (int i = 0; i < list.size(); i++)
 				{
 					String st = list.stringAt(i);
 					if (st.startsWith("."))
+					{
 						st = st.substring(1);
+					}
 					st = st.toLowerCase();
 					m_extension.add(st);
 				}
@@ -242,9 +246,8 @@ public class FileUtil
 
 		/**
 		 * @param fileExtensionVector Vector of valid regular expressions
-		 * 
 		 */
-		protected ExtensionFileFilter(VString fileExtensionVector)
+		protected ExtensionFileFilter(final VString fileExtensionVector)
 		{
 			if (fileExtensionVector != null)
 			{
@@ -253,7 +256,9 @@ public class FileUtil
 				{
 					String st = fileExtensionVector.stringAt(i);
 					if (st.startsWith("."))
+					{
 						st = st.substring(1);
+					}
 					st = st.toLowerCase();
 					m_extension.add(st);
 				}
@@ -262,20 +267,27 @@ public class FileUtil
 
 		/**
 		 * (non-Javadoc)
-		 * 
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
-		public boolean accept(File checkFile)
+		public boolean accept(final File checkFile)
 		{
 			if ((checkFile == null) || !checkFile.isFile())
+			{
 				return false;
+			}
 			if (m_extension == null)
+			{
 				return true;
+			}
 			String xt = UrlUtil.extension(checkFile.getPath());
 			if (xt == null)
+			{
 				xt = "";
+			}
 			else
+			{
 				xt = xt.toLowerCase();
+			}
 
 			return m_extension.contains(xt);
 		}
@@ -283,9 +295,7 @@ public class FileUtil
 
 	/**
 	 * simple file filter that lists all directories
-	 * 
 	 * @author prosirai
-	 * 
 	 */
 	protected static class DirectoryFileFilter implements FileFilter
 	{
@@ -295,7 +305,7 @@ public class FileUtil
 		 * 
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
-		public boolean accept(File checkFile)
+		public boolean accept(final File checkFile)
 		{
 			return checkFile != null && checkFile.isDirectory();
 		}
@@ -303,9 +313,7 @@ public class FileUtil
 
 	/**
 	 * simple file filter that lists all files that match a regular expression
-	 * 
 	 * @author Rainer Prosi
-	 * 
 	 */
 	protected static class ExpressionFileFilter implements FileFilter
 	{
@@ -313,19 +321,17 @@ public class FileUtil
 
 		/**
 		 * @param _regExp the simplified regular expression to match
-		 * 
 		 */
-		public ExpressionFileFilter(String _regExp)
+		public ExpressionFileFilter(final String _regExp)
 		{
 			regExp = StringUtil.simpleRegExptoRegExp(_regExp);
 		}
 
 		/**
 		 * true if a file matches a regular expression
-		 * 
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
-		public boolean accept(File checkFile)
+		public boolean accept(final File checkFile)
 		{
 			return checkFile != null && StringUtil.matches(checkFile.getName(), regExp);
 		}
@@ -333,24 +339,27 @@ public class FileUtil
 
 	/**
 	 * very brutal tree zapper that will delete a file or directory tree recursively
-	 * 
 	 * @param dirToZapp the file directory to utterly anihilate
 	 * @return true if ciao
 	 */
-	public static boolean deleteAll(File dirToZapp)
+	public static boolean deleteAll(final File dirToZapp)
 	{
 		if (dirToZapp == null)
+		{
 			return false;
+		}
 
 		boolean b = true;
 		if (dirToZapp.isDirectory())
 		{
-			File[] ff = dirToZapp.listFiles();
+			final File[] ff = dirToZapp.listFiles();
 			if (ff != null)
 			{
-				int siz = ff.length;
+				final int siz = ff.length;
 				for (int i = 0; i < siz; i++)
+				{
 					b = deleteAll(ff[i]) && b;
+				}
 			}
 		}
 
@@ -361,33 +370,34 @@ public class FileUtil
 	// //////
 	/**
 	 * dump a stream to a newly created file
-	 * 
 	 * @param fis the inputstream to read
 	 * @param fileName the file to stream to
 	 * @return the file created by the stream, null if snafu
 	 */
-	public static File streamToFile(InputStream fis, String fileName)
+	public static File streamToFile(final InputStream fis, final String fileName)
 	{
 		if (fis == null)
+		{
 			return null;
-		File tmp = UrlUtil.urlToFile(fileName);
+		}
+		final File tmp = UrlUtil.urlToFile(fileName);
 		if (tmp == null)
 		{
 			return null;
 		}
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(tmp);
+			final FileOutputStream fos = new FileOutputStream(tmp);
 			IOUtils.copy(fis, fos);
 			fos.flush();
 			fos.close();
 			fis.close();
 		}
-		catch (FileNotFoundException x)
+		catch (final FileNotFoundException x)
 		{
 			return null;
 		}
-		catch (IOException x)
+		catch (final IOException x)
 		{
 			return null;
 		}
@@ -396,64 +406,71 @@ public class FileUtil
 	}
 
 	/**
-	 * moves a File to directory by trying to rename, if this fails, a copy with subsequent delete is performed. if toFile
-	 * exists, it is brutally overwritten
-	 * 
+	 * moves a File to directory by trying to rename, if this fails, a copy with subsequent delete is performed. if toFile exists, it is brutally overwritten
 	 * @param fromFile the File to move
 	 * @param toDir the Directory to move to
 	 * @return File the moved File if success, else null, i.e. toFile exists with the contents of fromFile
 	 */
-	public static File moveFileToDir(File fromFile, File toDir)
+	public static File moveFileToDir(final File fromFile, final File toDir)
 	{
 		if (fromFile == null || toDir == null)
+		{
 			return null;
+		}
 		final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
-		boolean b = moveFile(fromFile, newFile);
+		final boolean b = moveFile(fromFile, newFile);
 		return b ? newFile : null;
 	}
 
 	/**
-	 * moves a File by trying to rename, if this fails, a copy with subsequent delete is performed. if toFile exists, it
-	 * is brutally overwritten
-	 * 
+	 * moves a File by trying to rename, if this fails, a copy with subsequent delete is performed. if toFile exists, it is brutally overwritten
 	 * @param fromFile the File to move
 	 * @param toFile the File to create
 	 * @return boolean true if success, i.e. toFile exists with the contents of fromFile
 	 */
-	public static boolean moveFile(File fromFile, File toFile)
+	public static boolean moveFile(final File fromFile, final File toFile)
 	{
 		if (fromFile.equals(toFile))
+		{
 			return true;
+		}
 		if (fromFile.renameTo(toFile))
+		{
 			return true;
+		}
 		if (!copyFile(fromFile, toFile))
+		{
 			return false;
+		}
 		return fromFile.delete();
 
 	}
 
 	/**
 	 * copy a file
-	 * 
 	 * @param fromFile the source File
 	 * @param toFile the destination File
 	 * @return true if success
 	 */
-	public static boolean copyFile(File fromFile, File toFile)
+	public static boolean copyFile(final File fromFile, final File toFile)
 	{
 		if (toFile.exists())
+		{
 			toFile.delete();
+		}
 		try
 		{
 			if (!toFile.createNewFile())
+			{
 				return false;
-			FileOutputStream fos = new FileOutputStream(toFile);
-			FileInputStream fis = new FileInputStream(fromFile);
+			}
+			final FileOutputStream fos = new FileOutputStream(toFile);
+			final FileInputStream fis = new FileInputStream(fromFile);
 			IOUtils.copy(fis, fos);
 			fis.close();
 			fos.close();
 		}
-		catch (IOException x)
+		catch (final IOException x)
 		{
 			return false;
 		}
@@ -461,64 +478,71 @@ public class FileUtil
 	}
 
 	/**
-	 * returns a File object corresponding to an instance of localFile placed in dir - No OS calls are made and File is
-	 * NOT created
-	 * 
+	 * returns a File object corresponding to an instance of localFile placed in dir - No OS calls are made and File is NOT created
 	 * @param dir the File Object representing the directory
 	 * @param localFile the local file to place in dir, note that only the path is copied - this does copy trees
 	 * @return File the File object that represents localFile in Dir
 	 */
-	public static File getFileInDirectory(File dir, File localFile)
+	public static File getFileInDirectory(final File dir, final File localFile)
 	{
 		if (dir == null)
+		{
 			return localFile;
+		}
 		if (localFile == null)
+		{
 			return null;
+		}
 		return new File(dir.getPath() + File.separator + localFile.getPath());
 	}
 
 	/**
-	 * @param f the file to cleanup 
+	 * @param f the file to cleanup
 	 * @return the cleaned file
 	 */
-	public static File cleanURL(File f)
+	public static File cleanURL(final File f)
 	{
-		String s = UrlUtil.fileToUrl(f, false);
+		final String s = UrlUtil.fileToUrl(f, false);
 		return UrlUtil.urlToFile(s);
 	}
 
 	/**
-	 * @param f the file to test 
-	 * @return true if s is absolute
+	 * check whether a file is absolute
+	 * @param f the file to test
+	 * @return true if f is absolute;
 	 */
-	public static boolean isAbsoluteFile(File f)
+	public static boolean isAbsoluteFile(final File f)
 	{
-		String s = f.getPath();
+		final String s = f == null ? null : f.getPath();
 		return isAbsoluteFile(s);
 	}
 
 	/**
-	 * @param f the file path to test 
+	 * @param f the file path to test
 	 * @return true if s is absolute
 	 */
 	public static boolean isAbsoluteFile(String f)
 	{
-		String fLocal = f;
-
-		if (fLocal == null)
+		if (f == null)
+		{
 			return false;
+		}
 
-		if (fLocal.startsWith(File.separator))
+		if (f.startsWith(File.separator))
+		{
 			return true;
+		}
 
-		File[] roots = File.listRoots();
+		final File[] roots = File.listRoots();
 		if (roots != null)
 		{
-			fLocal = fLocal.toLowerCase();
+			f = f.toLowerCase();
 			for (int i = 0; i < roots.length; i++)
 			{
-				if (fLocal.startsWith(roots[i].getPath().toLowerCase()))
+				if (f.startsWith(roots[i].getPath().toLowerCase()))
+				{
 					return true;
+				}
 			}
 		}
 
@@ -530,7 +554,7 @@ public class FileUtil
 	 * @param file
 	 * @return the file extension
 	 */
-	public static String getExtension(File file)
+	public static String getExtension(final File file)
 	{
 		return file == null ? null : UrlUtil.extension(file.getName());
 	}
@@ -540,23 +564,26 @@ public class FileUtil
 	 * @param file the file to create
 	 * @return true if the file exists after the call, else false
 	 */
-	public static boolean createNewFile(File file)
+	public static boolean createNewFile(final File file)
 	{
 		if (file == null)
+		{
 			return false;
-		
+		}
 		if (file.exists())
+		{
 			return true;
-		
-		File parent = file.getParentFile();
+		}
+		final File parent = file.getParentFile();
 		if (parent != null)
+		{
 			parent.mkdirs();
-		
+		}
 		try
 		{
 			return file.createNewFile();
 		}
-		catch (IOException x)
+		catch (final IOException x)
 		{
 			return false;
 		}
