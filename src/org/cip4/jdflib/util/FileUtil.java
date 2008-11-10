@@ -140,6 +140,8 @@ public class FileUtil
 	 */
 	public static Vector<File> listFilesInTree(final File dir, final String expression)
 	{
+		Vector<File> v = null;
+		
 		if (dir == null || expression == null)
 		{
 			return null;
@@ -149,51 +151,50 @@ public class FileUtil
 		if (posSlash < 0)
 		{
 			final File[] f = listFilesWithExpression(dir, expression);
-			return ContainerUtil.toVector(f);
+			v = ContainerUtil.toVector(f);
 		}
 		else
 		{
 			final String nextDir = expression.substring(0, posSlash);
 			final File[] f = listFilesWithExpression(dir, nextDir);
-			if (f == null)
+			if (f != null)
 			{
-				return null;
-			}
-			Vector<File> v = new Vector<File>();
-			for (int i = 0; i < f.length; i++)
-			{
-				if (f[i].isDirectory())
+				v = new Vector<File>();
+				for (int i = 0; i < f.length; i++)
 				{
-					v.add(f[i]);
-				}
-			}
-			if (v.size() == 0)
-			{
-				v = null;
-			}
-			if (posSlash + 1 == expression.length()) // last token ends with /
-			{
-				return v;
-			}
-			else
-			{
-				if (v == null)
-				{
-					return v;
-				}
-				final Vector<File> ret = new Vector<File>();
-				final String next = expression.substring(posSlash + 1);
-				for (int i = 0; i < v.size(); i++)
-				{
-					final Vector<File> v2 = listFilesInTree(v.get(i), next);
-					if (v2 != null)
+					if (f[i].isDirectory())
 					{
-						ret.addAll(v2);
+						v.add(f[i]);
 					}
 				}
-				return ret.size() == 0 ? null : ret;
+
+				if (v.size() == 0)
+				{
+					v = null;
+				}
+
+				if (posSlash + 1 != expression.length()) // last token ends with /
+				{
+					if (v != null)
+					{
+						final Vector<File> ret = new Vector<File>();
+						final String next = expression.substring(posSlash + 1);
+						for (int i = 0; i < v.size(); i++)
+						{
+							final Vector<File> v2 = listFilesInTree(v.get(i), next);
+							if (v2 != null)
+							{
+								ret.addAll(v2);
+							}
+						}
+
+						v = ret.size() == 0 ? null : ret;
+					}
+				}
 			}
 		}
+		
+		return v;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

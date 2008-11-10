@@ -14,18 +14,19 @@ import org.cip4.jdflib.core.JDFConstants;
 /**
  * all constants of the JDF library
  */
-// TODO need implementation
+//TODO need implementation
 public class JDFXYRelation
 {
 	String m_Relation = JDFConstants.EMPTYSTRING;
-
+	
 	public JDFXYRelation(String s)
 	{
-		m_Relation = s;
+	    m_Relation = s;
 	}
-
+    
+    @Override
 	public String toString()
-	{
-		return m_Relation;
-	}
+    {
+        return m_Relation;
+    }
 }

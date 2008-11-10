@@ -108,6 +108,7 @@ public class ElemInfoTable
 		return validityStatus;
 	}
 
+	@Override
 	public String toString()
 	{
 		return elementName + ": " + Long.toHexString(validityStatus);

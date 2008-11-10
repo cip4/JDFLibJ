@@ -182,6 +182,7 @@ public class JDFDurationRange extends JDFRange
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String toString()
 	{
 		if (m_left.equals(m_right))
@@ -231,6 +232,7 @@ public class JDFDurationRange extends JDFRange
 	 * 
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
+	@Override
 	public boolean isPartOfRange(JDFRange ra)
 	{
 		JDFDurationRange r = (JDFDurationRange) ra;
@@ -301,16 +303,19 @@ public class JDFDurationRange extends JDFRange
 		return (m_left.isShorter(m_right) ? m_left : m_right);
 	}
 
+	@Override
 	protected Object getRightObject()
 	{
 		return m_right;
 	}
 
+	@Override
 	protected Object getLeftObject()
 	{
 		return m_left;
 	}
 
+	@Override
 	protected boolean inObjectRange(Object other)
 	{
 		return inRange((JDFDuration) other);
