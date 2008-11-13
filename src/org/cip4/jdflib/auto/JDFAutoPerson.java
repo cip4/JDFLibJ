@@ -104,7 +104,8 @@ public abstract class JDFAutoPerson extends JDFResource
         atrInfoTable[6] = new AtrInfoTable(AttributeName.NAMESUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -117,7 +118,8 @@ public abstract class JDFAutoPerson extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,13 +169,15 @@ public abstract class JDFAutoPerson extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPerson[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -181,7 +185,8 @@ public abstract class JDFAutoPerson extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

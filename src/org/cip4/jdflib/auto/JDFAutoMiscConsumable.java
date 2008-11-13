@@ -97,7 +97,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CONSUMABLETYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -110,7 +111,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -160,13 +162,15 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoMiscConsumable[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Consumable);
@@ -174,7 +178,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Consumable;
     }
@@ -255,7 +260,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
     /**
      * (30) append element Contact
      */
-    public JDFContact appendContact() throws JDFException
+    @Override
+	public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -274,7 +280,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      */
-    public JDFIdentificationField getCreateIdentificationField(int iSkip)
+    @Override
+	public JDFIdentificationField getCreateIdentificationField(int iSkip)
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -284,7 +291,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      * default is getIdentificationField(0)     */
-    public JDFIdentificationField getIdentificationField(int iSkip)
+    @Override
+	public JDFIdentificationField getIdentificationField(int iSkip)
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -313,7 +321,8 @@ public abstract class JDFAutoMiscConsumable extends JDFResource
     /**
      * (30) append element IdentificationField
      */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
+    @Override
+	public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

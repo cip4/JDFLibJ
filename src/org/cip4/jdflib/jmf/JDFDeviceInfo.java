@@ -176,6 +176,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * (11) set attribute IdleStartTime
 	 * @param value : the value to set the attribute to or null
 	 */
+	@Override
 	public void setIdleStartTime(final JDFDate value)
 	{
 		JDFDate valueLocal = value;
@@ -192,6 +193,7 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	 * (12) get JDFDate attribute IdleStartTime
 	 * @return JDFDate the value of the attribute
 	 */
+	@Override
 	public JDFDate getIdleStartTime()
 	{
 		final String str = getAttribute(AttributeName.IDLESTARTTIME, null, null);

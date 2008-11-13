@@ -131,7 +131,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
         atrInfoTable[36] = new AtrInfoTable(AttributeName.BOUNDINGBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -181,13 +182,15 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPDFToPSConversionParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -195,7 +198,8 @@ public abstract class JDFAutoPDFToPSConversionParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

@@ -112,7 +112,8 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         atrInfoTable[6] = new AtrInfoTable(AttributeName.SHAPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -126,7 +127,8 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.REGISTERMARK, 0x66666661);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -176,13 +178,15 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoHoleMakingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -190,7 +194,8 @@ public abstract class JDFAutoHoleMakingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

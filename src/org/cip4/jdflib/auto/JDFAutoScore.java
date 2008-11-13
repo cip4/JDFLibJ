@@ -87,7 +87,8 @@ public abstract class JDFAutoScore extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.OFFSET, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -137,7 +138,8 @@ public abstract class JDFAutoScore extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoScore[  --> " + super.toString() + " ]";
     }

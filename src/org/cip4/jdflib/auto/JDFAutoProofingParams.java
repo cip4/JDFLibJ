@@ -108,7 +108,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
         atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOLUTION, 0x44444433, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,7 +122,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x77777766);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,13 +173,15 @@ public abstract class JDFAutoProofingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoProofingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -185,7 +189,8 @@ public abstract class JDFAutoProofingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

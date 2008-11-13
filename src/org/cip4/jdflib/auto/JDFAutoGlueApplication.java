@@ -97,7 +97,8 @@ public abstract class JDFAutoGlueApplication extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGTECHNIQUE, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumGluingTechnique.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -109,7 +110,8 @@ public abstract class JDFAutoGlueApplication extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x55555551);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -159,13 +161,15 @@ public abstract class JDFAutoGlueApplication extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoGlueApplication[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -173,7 +177,8 @@ public abstract class JDFAutoGlueApplication extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

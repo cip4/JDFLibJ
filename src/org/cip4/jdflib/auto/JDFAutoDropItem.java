@@ -116,7 +116,8 @@ public abstract class JDFAutoDropItem extends JDFElement
         atrInfoTable[8] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,7 +139,8 @@ public abstract class JDFAutoDropItem extends JDFElement
         elemInfoTable[10] = new ElemInfoTable(ElementName.TOOL, 0x22222222);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -188,7 +190,8 @@ public abstract class JDFAutoDropItem extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDropItem[  --> " + super.toString() + " ]";
     }

@@ -122,7 +122,8 @@ public abstract class JDFAutoBusinessInfo extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBusinessInfo[  --> " + super.toString() + " ]";
     }

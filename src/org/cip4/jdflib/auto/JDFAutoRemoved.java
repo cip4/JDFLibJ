@@ -122,7 +122,8 @@ public abstract class JDFAutoRemoved extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoRemoved[  --> " + super.toString() + " ]";
     }

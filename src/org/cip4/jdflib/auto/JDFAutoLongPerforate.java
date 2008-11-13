@@ -93,7 +93,8 @@ public abstract class JDFAutoLongPerforate extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.XOFFSET, 0x44444442, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -143,7 +144,8 @@ public abstract class JDFAutoLongPerforate extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLongPerforate[  --> " + super.toString() + " ]";
     }

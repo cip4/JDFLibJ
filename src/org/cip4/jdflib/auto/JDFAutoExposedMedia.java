@@ -116,7 +116,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -133,7 +134,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
         elemInfoTable[5] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -183,13 +185,15 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoExposedMedia[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Handling);
@@ -197,7 +201,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Handling;
     }
@@ -802,7 +807,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     /**
      * (30) append element Contact
      */
-    public JDFContact appendContact() throws JDFException
+    @Override
+	public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -821,7 +827,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      */
-    public JDFIdentificationField getCreateIdentificationField(int iSkip)
+    @Override
+	public JDFIdentificationField getCreateIdentificationField(int iSkip)
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -831,7 +838,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      * default is getIdentificationField(0)     */
-    public JDFIdentificationField getIdentificationField(int iSkip)
+    @Override
+	public JDFIdentificationField getIdentificationField(int iSkip)
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -860,7 +868,8 @@ public abstract class JDFAutoExposedMedia extends JDFResource
     /**
      * (30) append element IdentificationField
      */
-    public JDFIdentificationField appendIdentificationField() throws JDFException
+    @Override
+	public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

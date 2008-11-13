@@ -122,7 +122,8 @@ public abstract class JDFAutoDevice extends JDFResource
         atrInfoTable[22] = new AtrInfoTable(AttributeName.UPC, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -137,7 +138,8 @@ public abstract class JDFAutoDevice extends JDFResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.MODULE, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -187,13 +189,15 @@ public abstract class JDFAutoDevice extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDevice[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Implementation);
@@ -201,7 +205,8 @@ public abstract class JDFAutoDevice extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Implementation;
     }

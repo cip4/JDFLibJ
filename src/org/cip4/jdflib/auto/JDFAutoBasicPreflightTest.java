@@ -105,7 +105,8 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -117,7 +118,8 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTARGUMENT, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,7 +169,8 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBasicPreflightTest[  --> " + super.toString() + " ]";
     }

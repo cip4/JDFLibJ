@@ -95,7 +95,8 @@ public abstract class JDFAutoApprovalParams extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.MINAPPROVALS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -107,7 +108,8 @@ public abstract class JDFAutoApprovalParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.APPROVALPERSON, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -157,13 +159,15 @@ public abstract class JDFAutoApprovalParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoApprovalParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -171,7 +175,8 @@ public abstract class JDFAutoApprovalParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

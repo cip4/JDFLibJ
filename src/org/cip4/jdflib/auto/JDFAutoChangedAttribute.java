@@ -92,7 +92,8 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.NEWVALUE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoChangedAttribute extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoChangedAttribute[  --> " + super.toString() + " ]";
     }

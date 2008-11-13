@@ -88,7 +88,8 @@ public abstract class JDFAutoGangInfo extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,7 +139,8 @@ public abstract class JDFAutoGangInfo extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoGangInfo[  --> " + super.toString() + " ]";
     }

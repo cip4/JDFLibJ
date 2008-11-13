@@ -322,6 +322,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @param value : the value to set the attribute to or null if null, set to the current time
 	 */
+	@Override
 	public void setSubmissionTime(JDFDate value)
 	{
 		JDFDate valueLocal = value;
@@ -337,6 +338,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @return JDFDate the value of the attribute
 	 */
+	@Override
 	public JDFDate getSubmissionTime()
 	{
 		final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
@@ -357,6 +359,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @param value : the value to set the attribute to or null if null, set to the current time
 	 */
+	@Override
 	public void setReturnTime(JDFDate value)
 	{
 		JDFDate valueLocal = value;
@@ -372,6 +375,7 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	 * 
 	 * @return JDFDate the value of the attribute
 	 */
+	@Override
 	public JDFDate getReturnTime()
 	{
 		final String str = getAttribute(AttributeName.RETURNTIME, null, null);

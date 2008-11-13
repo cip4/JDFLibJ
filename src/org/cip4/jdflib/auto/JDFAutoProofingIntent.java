@@ -92,7 +92,8 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.PROOFITEM, 0x33333331);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoProofingIntent[  --> " + super.toString() + " ]";
     }

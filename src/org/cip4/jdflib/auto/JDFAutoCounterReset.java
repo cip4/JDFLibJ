@@ -89,7 +89,8 @@ public abstract class JDFAutoCounterReset extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.LASTCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoCounterReset extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoCounterReset[  --> " + super.toString() + " ]";
     }

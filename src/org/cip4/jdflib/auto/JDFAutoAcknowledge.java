@@ -103,7 +103,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
         atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "0");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,7 +117,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
         elemInfoTable[1] = new ElemInfoTable(ElementName.NOTIFICATION, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,7 +168,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoAcknowledge[  --> " + super.toString() + " ]";
     }
@@ -230,7 +233,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
           * (36) set attribute refID
           * @param value: the value to set the attribute to
           */
-        public void setrefID(String value)
+        @Override
+		public void setrefID(String value)
         {
             setAttribute(AttributeName.REFID, value, null);
         }
@@ -239,7 +243,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
           * (23) get String attribute refID
           * @return the value of the attribute
           */
-        public String getrefID()
+        @Override
+		public String getrefID()
         {
             return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
         }
@@ -283,7 +288,8 @@ public abstract class JDFAutoAcknowledge extends JDFMessage
           * (15) get int attribute ReturnCode
           * @return int the value of the attribute
           */
-        public int getReturnCode()
+        @Override
+		public int getReturnCode()
         {
             return getIntAttribute(AttributeName.RETURNCODE, null, 0);
         }

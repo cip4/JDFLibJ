@@ -103,7 +103,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGES, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,7 +120,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
         elemInfoTable[4] = new ElemInfoTable(ElementName.TEETHPERDIMENSION, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,7 +171,8 @@ public abstract class JDFAutoShapeCut extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoShapeCut[  --> " + super.toString() + " ]";
     }

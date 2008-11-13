@@ -96,7 +96,8 @@ public abstract class JDFAutoLot extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.CONSUMPTION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumConsumption.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,7 +147,8 @@ public abstract class JDFAutoLot extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLot[  --> " + super.toString() + " ]";
     }

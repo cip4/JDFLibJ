@@ -111,7 +111,8 @@ public abstract class JDFAutoAssembly extends JDFResource
         atrInfoTable[6] = new AtrInfoTable(AttributeName.PHYSICALSECTION, 0x33333111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -125,7 +126,8 @@ public abstract class JDFAutoAssembly extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -175,13 +177,15 @@ public abstract class JDFAutoAssembly extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoAssembly[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -189,7 +193,8 @@ public abstract class JDFAutoAssembly extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

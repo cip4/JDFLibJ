@@ -101,7 +101,8 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.TILESIZE, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -151,7 +152,8 @@ public abstract class JDFAutoJPEG2000Params extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoJPEG2000Params[  --> " + super.toString() + " ]";
     }

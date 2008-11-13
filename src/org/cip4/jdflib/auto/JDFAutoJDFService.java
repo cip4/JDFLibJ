@@ -97,7 +97,8 @@ public abstract class JDFAutoJDFService extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPES, 0x44444433, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,7 +148,8 @@ public abstract class JDFAutoJDFService extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoJDFService[  --> " + super.toString() + " ]";
     }

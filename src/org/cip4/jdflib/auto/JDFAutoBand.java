@@ -92,7 +92,8 @@ public abstract class JDFAutoBand extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.WIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoBand extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBand[  --> " + super.toString() + " ]";
     }

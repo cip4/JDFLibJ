@@ -103,7 +103,8 @@ public abstract class JDFAutoBundleItem extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,7 +116,8 @@ public abstract class JDFAutoBundleItem extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x55555551);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,7 +167,8 @@ public abstract class JDFAutoBundleItem extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBundleItem[  --> " + super.toString() + " ]";
     }

@@ -92,7 +92,8 @@ public abstract class JDFAutowhen extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.SET, 0x22222211);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutowhen extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutowhen[  --> " + super.toString() + " ]";
     }

@@ -132,13 +132,15 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoCustomerInfo[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -146,7 +148,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -350,7 +353,8 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     /**
      * (30) append element Contact
      */
-    public JDFContact appendContact() throws JDFException
+    @Override
+	public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

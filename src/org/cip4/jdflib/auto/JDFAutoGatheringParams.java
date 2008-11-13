@@ -89,7 +89,8 @@ public abstract class JDFAutoGatheringParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.DISJOINTING, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -139,13 +140,15 @@ public abstract class JDFAutoGatheringParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoGatheringParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -153,7 +156,8 @@ public abstract class JDFAutoGatheringParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

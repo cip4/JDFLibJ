@@ -96,7 +96,8 @@ public abstract class JDFAutoEndSheet extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.OFFSET, 0x44444333, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -108,7 +109,8 @@ public abstract class JDFAutoEndSheet extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x55555555);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -158,7 +160,8 @@ public abstract class JDFAutoEndSheet extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoEndSheet[  --> " + super.toString() + " ]";
     }

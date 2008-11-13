@@ -98,7 +98,8 @@ public abstract class JDFAutoImageShift extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.SHIFTFRONT, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -148,7 +149,8 @@ public abstract class JDFAutoImageShift extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoImageShift[  --> " + super.toString() + " ]";
     }

@@ -105,7 +105,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
         atrInfoTable[10] = new AtrInfoTable(AttributeName.PDFXTRIMBOXTOMEDIABOXOFFSET, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -155,7 +156,8 @@ public abstract class JDFAutoPDFXParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPDFXParams[  --> " + super.toString() + " ]";
     }

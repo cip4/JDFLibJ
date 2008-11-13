@@ -96,7 +96,8 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.CONTACT, 0x44444311);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -146,13 +147,15 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoApprovalSuccess[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -160,7 +163,8 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -299,7 +303,8 @@ public abstract class JDFAutoApprovalSuccess extends JDFResource
     /**
      * (30) append element Contact
      */
-    public JDFContact appendContact() throws JDFException
+    @Override
+	public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

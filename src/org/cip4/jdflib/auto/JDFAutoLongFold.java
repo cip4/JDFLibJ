@@ -92,7 +92,8 @@ public abstract class JDFAutoLongFold extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.XOFFSET, 0x44444442, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoLongFold extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLongFold[  --> " + super.toString() + " ]";
     }

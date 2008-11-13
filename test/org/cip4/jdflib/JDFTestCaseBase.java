@@ -101,7 +101,7 @@ import org.cip4.jdflib.util.JDFDate;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
-	static protected final String sm_dirTestSchema = ".." + File.separator + "schema" + File.separator + "Version_1_3"
+	static protected final String sm_dirTestSchema = ".." + File.separator + "schema" + File.separator + "Version_1_4"
 			+ File.separator;
 	static protected final String sm_dirTestData = "test" + File.separator + "data" + File.separator;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;

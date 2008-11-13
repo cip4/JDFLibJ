@@ -100,7 +100,8 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.WIREBRAND, 0x44444443, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -150,13 +151,15 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoSaddleStitchingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -164,7 +167,8 @@ public abstract class JDFAutoSaddleStitchingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

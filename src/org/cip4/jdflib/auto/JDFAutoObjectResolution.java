@@ -100,7 +100,8 @@ public abstract class JDFAutoObjectResolution extends JDFResource
         atrInfoTable[3] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -150,13 +151,15 @@ public abstract class JDFAutoObjectResolution extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoObjectResolution[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -164,7 +167,8 @@ public abstract class JDFAutoObjectResolution extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

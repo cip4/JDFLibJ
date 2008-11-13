@@ -92,7 +92,8 @@ public abstract class JDFAutoIDPFolding extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.FOLDINGPARAMS, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoIDPFolding extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoIDPFolding[  --> " + super.toString() + " ]";
     }

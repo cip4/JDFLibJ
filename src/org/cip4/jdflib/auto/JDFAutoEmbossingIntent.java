@@ -92,7 +92,8 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.EMBOSSINGITEM, 0x22222221);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoEmbossingIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoEmbossingIntent[  --> " + super.toString() + " ]";
     }

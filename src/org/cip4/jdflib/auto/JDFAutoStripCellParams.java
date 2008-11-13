@@ -113,7 +113,8 @@ public abstract class JDFAutoStripCellParams extends JDFElement
         atrInfoTable[18] = new AtrInfoTable(AttributeName.MASK, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumMask.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -163,7 +164,8 @@ public abstract class JDFAutoStripCellParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoStripCellParams[  --> " + super.toString() + " ]";
     }

@@ -97,7 +97,8 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.BADFEEDS, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,7 +148,8 @@ public abstract class JDFAutoFeederQualityParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoFeederQualityParams[  --> " + super.toString() + " ]";
     }

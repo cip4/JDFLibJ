@@ -89,7 +89,8 @@ public abstract class JDFAutoStripBinding extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoStripBinding extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoStripBinding[  --> " + super.toString() + " ]";
     }

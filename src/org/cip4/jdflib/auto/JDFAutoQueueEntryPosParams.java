@@ -91,7 +91,8 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.POSITION, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,7 +142,8 @@ public abstract class JDFAutoQueueEntryPosParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoQueueEntryPosParams[  --> " + super.toString() + " ]";
     }

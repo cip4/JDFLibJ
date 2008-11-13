@@ -106,7 +106,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
         elemInfoTable[13] = new ElemInfoTable(ElementName.SPINESHREDDING, 0x66666661);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -156,7 +157,8 @@ public abstract class JDFAutoSoftCoverBinding extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoSoftCoverBinding[  --> " + super.toString() + " ]";
     }

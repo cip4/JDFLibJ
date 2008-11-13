@@ -92,7 +92,8 @@ public abstract class JDFAutoWrappingParams extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.WRAPPINGKIND, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumWrappingKind.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,13 +143,15 @@ public abstract class JDFAutoWrappingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoWrappingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -156,7 +159,8 @@ public abstract class JDFAutoWrappingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

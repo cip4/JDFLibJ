@@ -106,7 +106,8 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEINFO, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,7 +119,8 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -168,7 +170,8 @@ public abstract class JDFAutoStatusQuParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoStatusQuParams[  --> " + super.toString() + " ]";
     }

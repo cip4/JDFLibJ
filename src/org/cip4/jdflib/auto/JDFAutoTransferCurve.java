@@ -92,7 +92,8 @@ public abstract class JDFAutoTransferCurve extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,13 +143,15 @@ public abstract class JDFAutoTransferCurve extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoTransferCurve[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -156,7 +159,8 @@ public abstract class JDFAutoTransferCurve extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -208,7 +212,8 @@ public abstract class JDFAutoTransferCurve extends JDFResource
           * (36) set attribute Separation
           * @param value: the value to set the attribute to
           */
-        public void setSeparation(String value)
+        @Override
+		public void setSeparation(String value)
         {
             setAttribute(AttributeName.SEPARATION, value, null);
         }
@@ -217,7 +222,8 @@ public abstract class JDFAutoTransferCurve extends JDFResource
           * (23) get String attribute Separation
           * @return the value of the attribute
           */
-        public String getSeparation()
+        @Override
+		public String getSeparation()
         {
             return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
         }

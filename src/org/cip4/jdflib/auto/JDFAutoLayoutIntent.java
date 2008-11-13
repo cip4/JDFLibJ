@@ -109,7 +109,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -127,7 +128,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
         elemInfoTable[6] = new ElemInfoTable(ElementName.SIZEPOLICY, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -177,7 +179,8 @@ public abstract class JDFAutoLayoutIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLayoutIntent[  --> " + super.toString() + " ]";
     }

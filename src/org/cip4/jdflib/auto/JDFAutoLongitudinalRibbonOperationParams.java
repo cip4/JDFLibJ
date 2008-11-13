@@ -98,7 +98,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
         elemInfoTable[3] = new ElemInfoTable(ElementName.LONGSLIT, 0x44444443);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -148,13 +149,15 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLongitudinalRibbonOperationParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -162,7 +165,8 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

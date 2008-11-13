@@ -88,7 +88,8 @@ public abstract class JDFAutoBundlingParams extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,13 +139,15 @@ public abstract class JDFAutoBundlingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBundlingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -152,7 +155,8 @@ public abstract class JDFAutoBundlingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

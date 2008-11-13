@@ -114,7 +114,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
         atrInfoTable[14] = new AtrInfoTable(AttributeName.STANDARDAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -126,7 +127,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.DISJOINTING, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -176,13 +178,15 @@ public abstract class JDFAutoStackingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoStackingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -190,7 +194,8 @@ public abstract class JDFAutoStackingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

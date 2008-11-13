@@ -166,7 +166,8 @@ public abstract class JDFAutoPart extends JDFElement
         atrInfoTable[68] = new AtrInfoTable(AttributeName.WEBSETUP, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -216,7 +217,8 @@ public abstract class JDFAutoPart extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPart[  --> " + super.toString() + " ]";
     }

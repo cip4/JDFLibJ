@@ -97,7 +97,8 @@ public abstract class JDFAutoTIFFtag extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.BINARYVALUE, 0x33333311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,7 +148,8 @@ public abstract class JDFAutoTIFFtag extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoTIFFtag[  --> " + super.toString() + " ]";
     }

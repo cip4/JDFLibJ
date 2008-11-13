@@ -89,7 +89,8 @@ public abstract class JDFAutoEdgeGluing extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.EDGEGLUE, 0x66666661);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoEdgeGluing extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoEdgeGluing[  --> " + super.toString() + " ]";
     }

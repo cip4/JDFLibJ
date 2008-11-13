@@ -89,7 +89,8 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAMES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoGangCmdFilter extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoGangCmdFilter[  --> " + super.toString() + " ]";
     }

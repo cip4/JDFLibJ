@@ -101,7 +101,8 @@ public abstract class JDFAutoComment extends JDFElement
         atrInfoTable[9] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x33333111, AttributeInfo.EnumAttributeType.dateTime, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -151,7 +152,8 @@ public abstract class JDFAutoComment extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoComment[  --> " + super.toString() + " ]";
     }
@@ -300,7 +302,8 @@ public abstract class JDFAutoComment extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        public String getID()
+        @Override
+		public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

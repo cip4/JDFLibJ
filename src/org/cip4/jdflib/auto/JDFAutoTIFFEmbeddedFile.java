@@ -93,7 +93,8 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.TAGTYPE, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -105,7 +106,8 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x55555511);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -155,7 +157,8 @@ public abstract class JDFAutoTIFFEmbeddedFile extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoTIFFEmbeddedFile[  --> " + super.toString() + " ]";
     }

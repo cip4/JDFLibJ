@@ -108,7 +108,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
         atrInfoTable[16] = new AtrInfoTable(AttributeName.USEPROLOGUE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -158,7 +159,8 @@ public abstract class JDFAutoAdvancedParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoAdvancedParams[  --> " + super.toString() + " ]";
     }

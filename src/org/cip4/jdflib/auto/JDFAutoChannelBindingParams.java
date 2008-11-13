@@ -96,7 +96,8 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.CLAMPSIZE, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,13 +147,15 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoChannelBindingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -160,7 +163,8 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -200,7 +204,8 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
           * (36) set attribute Brand
           * @param value: the value to set the attribute to
           */
-        public void setBrand(String value)
+        @Override
+		public void setBrand(String value)
         {
             setAttribute(AttributeName.BRAND, value, null);
         }
@@ -209,7 +214,8 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
           * (23) get String attribute Brand
           * @return the value of the attribute
           */
-        public String getBrand()
+        @Override
+		public String getBrand()
         {
             return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
         }

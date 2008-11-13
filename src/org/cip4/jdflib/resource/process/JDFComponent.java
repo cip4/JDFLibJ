@@ -237,6 +237,7 @@ public class JDFComponent extends JDFAutoComponent
 	 * get the media that is associated with this component, either directly or in the layout
 	 * @return the media, null if none there 
 	 */
+	@Override
 	public JDFMedia getMedia()
 	{
 		JDFMedia m = (JDFMedia) getElement(ElementName.MEDIA);

@@ -102,7 +102,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.EXTENT, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,7 +116,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.HOLELIST, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,7 +167,8 @@ public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoHoleMakingIntent[  --> " + super.toString() + " ]";
     }

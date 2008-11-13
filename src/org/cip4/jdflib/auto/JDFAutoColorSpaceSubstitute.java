@@ -94,7 +94,8 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x22222222);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,7 +145,8 @@ public abstract class JDFAutoColorSpaceSubstitute extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoColorSpaceSubstitute[  --> " + super.toString() + " ]";
     }

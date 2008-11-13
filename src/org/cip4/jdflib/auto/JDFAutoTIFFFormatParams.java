@@ -109,7 +109,8 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATIONNAMETAG, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "270");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -122,7 +123,8 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.TIFFEMBEDDEDFILE, 0x33333311);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -172,7 +174,8 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoTIFFFormatParams[  --> " + super.toString() + " ]";
     }

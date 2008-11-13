@@ -95,7 +95,8 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.POSTEXPOSETIME, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -145,13 +146,15 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDevelopingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -159,7 +162,8 @@ public abstract class JDFAutoDevelopingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

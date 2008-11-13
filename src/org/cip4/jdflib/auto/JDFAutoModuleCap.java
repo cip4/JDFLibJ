@@ -91,7 +91,8 @@ public abstract class JDFAutoModuleCap extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,7 +142,8 @@ public abstract class JDFAutoModuleCap extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoModuleCap[  --> " + super.toString() + " ]";
     }
@@ -190,7 +192,8 @@ public abstract class JDFAutoModuleCap extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        public String getID()
+        @Override
+		public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

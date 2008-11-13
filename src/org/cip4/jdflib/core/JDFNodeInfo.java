@@ -323,6 +323,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * 
 	 * @param workStep
 	 */
+	@Override
 	public void setWorkStepID(String workStep)
 	{
 		setAttribute(AttributeName.WORKSTEPID, workStep, null);
@@ -334,6 +335,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * @return the workstepid
 	 * 
 	 */
+	@Override
 	public String getWorkStepID()
 	{
 		return getAttribute(AttributeName.WORKSTEPID, null, "");

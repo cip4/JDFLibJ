@@ -94,7 +94,8 @@ public abstract class JDFAutoPRError extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x22222211, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -144,7 +145,8 @@ public abstract class JDFAutoPRError extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPRError[  --> " + super.toString() + " ]";
     }

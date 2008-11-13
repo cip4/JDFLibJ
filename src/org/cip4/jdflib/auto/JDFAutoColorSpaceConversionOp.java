@@ -112,7 +112,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCERENDERINGINTENT, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumSourceRenderingIntent.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -126,7 +127,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333311);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -176,7 +178,8 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoColorSpaceConversionOp[  --> " + super.toString() + " ]";
     }

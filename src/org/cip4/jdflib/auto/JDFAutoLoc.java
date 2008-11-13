@@ -91,7 +91,8 @@ public abstract class JDFAutoLoc extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,7 +142,8 @@ public abstract class JDFAutoLoc extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLoc[  --> " + super.toString() + " ]";
     }

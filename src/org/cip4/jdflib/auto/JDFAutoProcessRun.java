@@ -109,7 +109,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         atrInfoTable[5] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x22221111, AttributeInfo.EnumAttributeType.dateTime, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -122,7 +123,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
         elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -172,7 +174,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoProcessRun[  --> " + super.toString() + " ]";
     }
@@ -310,7 +313,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           * (5) set attribute EndStatus
           * @param enumVar: the enumVar to set the attribute to
           */
-        public void setEndStatus(EnumNodeStatus enumVar)
+        @Override
+		public void setEndStatus(EnumNodeStatus enumVar)
         {
             setAttribute(AttributeName.ENDSTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
@@ -319,7 +323,8 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           * (9) get attribute EndStatus
           * @return the value of the attribute
           */
-        public EnumNodeStatus getEndStatus()
+        @Override
+		public EnumNodeStatus getEndStatus()
         {
             return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
         }
