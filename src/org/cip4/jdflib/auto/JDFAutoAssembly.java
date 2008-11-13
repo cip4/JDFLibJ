@@ -103,7 +103,7 @@ public abstract class JDFAutoAssembly extends JDFResource
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.JOGSIDE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumJogSide.getEnum(0), "Top");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.ORDER, 0x44443311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
         atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDINGSIDE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumBindingSide.getEnum(0), "Left");
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444311, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
@@ -111,8 +111,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         atrInfoTable[6] = new AtrInfoTable(AttributeName.PHYSICALSECTION, 0x33333111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -126,8 +125,7 @@ public abstract class JDFAutoAssembly extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x33333111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -177,15 +175,13 @@ public abstract class JDFAutoAssembly extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAssembly[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -193,8 +189,7 @@ public abstract class JDFAutoAssembly extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

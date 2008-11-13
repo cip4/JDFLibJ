@@ -71,15 +71,25 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRuleLength;
 import org.cip4.jdflib.resource.process.JDFStation;
 
 public abstract class JDFAutoDieLayout extends JDFResource
@@ -87,11 +97,30 @@ public abstract class JDFAutoDieLayout extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.STATION, 0x33333111);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.DIESIDE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumDieSide.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.MEDIASIDE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumMediaSide.getEnum(0), null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.ROTATED, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.WASTE, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+    }
+    
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33331111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66666111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x66661111);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.RULELENGTH, 0x33331111);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.STATION, 0x33333111);
     }
     
     @Override
@@ -168,10 +197,251 @@ public abstract class JDFAutoDieLayout extends JDFResource
     }
 
 
+        /**
+        * Enumeration strings for DieSide
+        */
+
+        public static class EnumDieSide extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumDieSide(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumDieSide getEnum(String enumName)
+            {
+                return (EnumDieSide) getEnum(EnumDieSide.class, enumName);
+            }
+
+            public static EnumDieSide getEnum(int enumValue)
+            {
+                return (EnumDieSide) getEnum(EnumDieSide.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumDieSide.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumDieSide.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumDieSide.class);
+            }
+
+            public static final EnumDieSide Up = new EnumDieSide("Up");
+            public static final EnumDieSide Down = new EnumDieSide("Down");
+        }      
+
+
+
+        /**
+        * Enumeration strings for MediaSide
+        */
+
+        public static class EnumMediaSide extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumMediaSide(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumMediaSide getEnum(String enumName)
+            {
+                return (EnumMediaSide) getEnum(EnumMediaSide.class, enumName);
+            }
+
+            public static EnumMediaSide getEnum(int enumValue)
+            {
+                return (EnumMediaSide) getEnum(EnumMediaSide.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumMediaSide.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumMediaSide.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumMediaSide.class);
+            }
+
+            public static final EnumMediaSide Front = new EnumMediaSide("Front");
+            public static final EnumMediaSide Back = new EnumMediaSide("Back");
+            public static final EnumMediaSide Both = new EnumMediaSide("Both");
+        }      
+
+
+
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute DieSide
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute DieSide
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setDieSide(EnumDieSide enumVar)
+        {
+            setAttribute(AttributeName.DIESIDE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute DieSide
+          * @return the value of the attribute
+          */
+        public EnumDieSide getDieSide()
+        {
+            return EnumDieSide.getEnum(getAttribute(AttributeName.DIESIDE, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute MediaSide
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute MediaSide
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setMediaSide(EnumMediaSide enumVar)
+        {
+            setAttribute(AttributeName.MEDIASIDE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute MediaSide
+          * @return the value of the attribute
+          */
+        public EnumMediaSide getMediaSide()
+        {
+            return EnumMediaSide.getEnum(getAttribute(AttributeName.MEDIASIDE, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Rotated
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Rotated
+          * @param value: the value to set the attribute to
+          */
+        public void setRotated(boolean value)
+        {
+            setAttribute(AttributeName.ROTATED, value, null);
+        }
+
+        /**
+          * (18) get boolean attribute Rotated
+          * @return boolean the value of the attribute
+          */
+        public boolean getRotated()
+        {
+            return getBoolAttribute(AttributeName.ROTATED, null, false);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Waste
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Waste
+          * @param value: the value to set the attribute to
+          */
+        public void setWaste(double value)
+        {
+            setAttribute(AttributeName.WASTE, value, null);
+        }
+
+        /**
+          * (17) get double attribute Waste
+          * @return double the value of the attribute
+          */
+        public double getWaste()
+        {
+            return getRealAttribute(AttributeName.WASTE, null, 0.0);
+        }
+
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /** (26) getCreateDevice
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFDevice the element
+     */
+    public JDFDevice getCreateDevice(int iSkip)
+    {
+        return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Device
+     * @param iSkip number of elements to skip
+     * @return JDFDevice the element
+     * default is getDevice(0)     */
+    public JDFDevice getDevice(int iSkip)
+    {
+        return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
+    }
+
+    /**
+     * Get all Device from the current element
+     * 
+     * @return Collection<JDFDevice>
+     */
+    public Collection<JDFDevice> getAllDevice()
+    {
+        Vector<JDFDevice> v = new Vector<JDFDevice>();
+
+        JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Device
+     */
+    public JDFDevice appendDevice() throws JDFException
+    {
+        return (JDFDevice) appendElement(ElementName.DEVICE, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refDevice(JDFDevice refTarget)
+    {
+        refElement(refTarget);
+    }
 
     /**
      * (24) const get element FileSpec
@@ -206,6 +476,90 @@ public abstract class JDFAutoDieLayout extends JDFResource
     public void refFileSpec(JDFFileSpec refTarget)
     {
         refElement(refTarget);
+    }
+
+    /**
+     * (24) const get element Media
+     * @return JDFMedia the element
+     */
+    public JDFMedia getMedia()
+    {
+        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+    }
+
+    /** (25) getCreateMedia
+     * 
+     * @return JDFMedia the element
+     */
+    public JDFMedia getCreateMedia()
+    {
+        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+    }
+
+    /**
+     * (29) append element Media
+     */
+    public JDFMedia appendMedia() throws JDFException
+    {
+        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refMedia(JDFMedia refTarget)
+    {
+        refElement(refTarget);
+    }
+
+    /** (26) getCreateRuleLength
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFRuleLength the element
+     */
+    public JDFRuleLength getCreateRuleLength(int iSkip)
+    {
+        return (JDFRuleLength)getCreateElement_KElement(ElementName.RULELENGTH, null, iSkip);
+    }
+
+    /**
+     * (27) const get element RuleLength
+     * @param iSkip number of elements to skip
+     * @return JDFRuleLength the element
+     * default is getRuleLength(0)     */
+    public JDFRuleLength getRuleLength(int iSkip)
+    {
+        return (JDFRuleLength) getElement(ElementName.RULELENGTH, null, iSkip);
+    }
+
+    /**
+     * Get all RuleLength from the current element
+     * 
+     * @return Collection<JDFRuleLength>
+     */
+    public Collection<JDFRuleLength> getAllRuleLength()
+    {
+        Vector<JDFRuleLength> v = new Vector<JDFRuleLength>();
+
+        JDFRuleLength kElem = (JDFRuleLength) getFirstChildElement(ElementName.RULELENGTH, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRuleLength) kElem.getNextSiblingElement(ElementName.RULELENGTH, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element RuleLength
+     */
+    public JDFRuleLength appendRuleLength() throws JDFException
+    {
+        return (JDFRuleLength) appendElement(ElementName.RULELENGTH, null);
     }
 
     /** (26) getCreateStation

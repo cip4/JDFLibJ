@@ -91,18 +91,18 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHOVERALL, 0x22222221, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.VISIBLELENGTH, 0x22222221, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RIBBONCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHOVERALL, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.MATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.RIBBONCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.RIBBONCOLORDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.RIBBONEND, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.VISIBLELENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +115,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,15 +165,13 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRegisterRibbon[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Consumable);
@@ -182,8 +179,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Consumable;
     }
@@ -213,28 +209,6 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         public double getLengthOverall()
         {
             return getRealAttribute(AttributeName.LENGTHOVERALL, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute VisibleLength
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute VisibleLength
-          * @param value: the value to set the attribute to
-          */
-        public void setVisibleLength(double value)
-        {
-            setAttribute(AttributeName.VISIBLELENGTH, value, null);
-        }
-
-        /**
-          * (17) get double attribute VisibleLength
-          * @return double the value of the attribute
-          */
-        public double getVisibleLength()
-        {
-            return getRealAttribute(AttributeName.VISIBLELENGTH, null, 0.0);
         }
 
         
@@ -287,6 +261,28 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute RibbonColorDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute RibbonColorDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setRibbonColorDetails(String value)
+        {
+            setAttribute(AttributeName.RIBBONCOLORDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute RibbonColorDetails
+          * @return the value of the attribute
+          */
+        public String getRibbonColorDetails()
+        {
+            return getAttribute(AttributeName.RIBBONCOLORDETAILS, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute RibbonEnd
         --------------------------------------------------------------------- */
         /**
@@ -305,6 +301,28 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
         public String getRibbonEnd()
         {
             return getAttribute(AttributeName.RIBBONEND, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute VisibleLength
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute VisibleLength
+          * @param value: the value to set the attribute to
+          */
+        public void setVisibleLength(double value)
+        {
+            setAttribute(AttributeName.VISIBLELENGTH, value, null);
+        }
+
+        /**
+          * (17) get double attribute VisibleLength
+          * @return double the value of the attribute
+          */
+        public double getVisibleLength()
+        {
+            return getRealAttribute(AttributeName.VISIBLELENGTH, null, 0.0);
         }
 
 /* ***********************************************************************
@@ -356,8 +374,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
     /**
      * (30) append element Contact
      */
-    @Override
-	public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -376,8 +393,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      */
-    @Override
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+    public JDFIdentificationField getCreateIdentificationField(int iSkip)
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -387,8 +403,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      * default is getIdentificationField(0)     */
-    @Override
-	public JDFIdentificationField getIdentificationField(int iSkip)
+    public JDFIdentificationField getIdentificationField(int iSkip)
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -417,8 +432,7 @@ public abstract class JDFAutoRegisterRibbon extends JDFResource
     /**
      * (30) append element IdentificationField
      */
-    @Override
-	public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

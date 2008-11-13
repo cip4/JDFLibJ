@@ -70,13 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.process.JDFShapeDef;
 
 public abstract class JDFAutoStation extends JDFElement
 {
@@ -95,6 +103,19 @@ public abstract class JDFAutoStation extends JDFElement
 	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPEDEF, 0x33331111);
+    }
+    
+    @Override
+	protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -221,5 +242,68 @@ public abstract class JDFAutoStation extends JDFElement
         {
             return getAttribute(AttributeName.STATIONNAME, null, JDFConstants.EMPTYSTRING);
         }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /** (26) getCreateShapeDef
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFShapeDef the element
+     */
+    public JDFShapeDef getCreateShapeDef(int iSkip)
+    {
+        return (JDFShapeDef)getCreateElement_KElement(ElementName.SHAPEDEF, null, iSkip);
+    }
+
+    /**
+     * (27) const get element ShapeDef
+     * @param iSkip number of elements to skip
+     * @return JDFShapeDef the element
+     * default is getShapeDef(0)     */
+    public JDFShapeDef getShapeDef(int iSkip)
+    {
+        return (JDFShapeDef) getElement(ElementName.SHAPEDEF, null, iSkip);
+    }
+
+    /**
+     * Get all ShapeDef from the current element
+     * 
+     * @return Collection<JDFShapeDef>
+     */
+    public Collection<JDFShapeDef> getAllShapeDef()
+    {
+        Vector<JDFShapeDef> v = new Vector<JDFShapeDef>();
+
+        JDFShapeDef kElem = (JDFShapeDef) getFirstChildElement(ElementName.SHAPEDEF, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFShapeDef) kElem.getNextSiblingElement(ElementName.SHAPEDEF, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element ShapeDef
+     */
+    public JDFShapeDef appendShapeDef() throws JDFException
+    {
+        return (JDFShapeDef) appendElement(ElementName.SHAPEDEF, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refShapeDef(JDFShapeDef refTarget)
+    {
+        refElement(refTarget);
+    }
 
 }// end namespace JDF

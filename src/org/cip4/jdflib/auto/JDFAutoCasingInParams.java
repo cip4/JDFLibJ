@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 public abstract class JDFAutoCasingInParams extends JDFResource
@@ -95,21 +96,20 @@ public abstract class JDFAutoCasingInParams extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CASERADIUS, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x22222221);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x33331111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x44443333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -159,15 +159,13 @@ public abstract class JDFAutoCasingInParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCasingInParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -175,8 +173,7 @@ public abstract class JDFAutoCasingInParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -212,6 +209,64 @@ public abstract class JDFAutoCasingInParams extends JDFResource
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /** (26) getCreateGlueApplication
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFGlueLine the element
+     */
+    public JDFGlueLine getCreateGlueApplication(int iSkip)
+    {
+        return (JDFGlueLine)getCreateElement_KElement(ElementName.GLUEAPPLICATION, null, iSkip);
+    }
+
+    /**
+     * (27) const get element GlueApplication
+     * @param iSkip number of elements to skip
+     * @return JDFGlueLine the element
+     * default is getGlueApplication(0)     */
+    public JDFGlueLine getGlueApplication(int iSkip)
+    {
+        return (JDFGlueLine) getElement(ElementName.GLUEAPPLICATION, null, iSkip);
+    }
+
+    /**
+     * Get all GlueApplication from the current element
+     * 
+     * @return Collection<JDFGlueLine>
+     */
+    public Collection<JDFGlueLine> getAllGlueApplication()
+    {
+        Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+
+        JDFGlueLine kElem = (JDFGlueLine) getFirstChildElement(ElementName.GLUEAPPLICATION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFGlueLine) kElem.getNextSiblingElement(ElementName.GLUEAPPLICATION, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element GlueApplication
+     */
+    public JDFGlueLine appendGlueApplication() throws JDFException
+    {
+        return (JDFGlueLine) appendElement(ElementName.GLUEAPPLICATION, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refGlueApplication(JDFGlueApplication refTarget)
+    {
+        refElement(refTarget);
+    }
 
     /** (26) getCreateGlueLine
      * 

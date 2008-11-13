@@ -70,6 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,15 +87,15 @@ public abstract class JDFAutoJDFController extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTROLLERID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.URLTYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumURLType.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -140,11 +145,58 @@ public abstract class JDFAutoJDFController extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoJDFController[  --> " + super.toString() + " ]";
     }
+
+
+        /**
+        * Enumeration strings for URLType
+        */
+
+        public static class EnumURLType extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumURLType(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumURLType getEnum(String enumName)
+            {
+                return (EnumURLType) getEnum(EnumURLType.class, enumName);
+            }
+
+            public static EnumURLType getEnum(int enumValue)
+            {
+                return (EnumURLType) getEnum(EnumURLType.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumURLType.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumURLType.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumURLType.class);
+            }
+
+            public static final EnumURLType JDFError = new EnumURLType("JDFError");
+            public static final EnumURLType JDFInput = new EnumURLType("JDFInput");
+            public static final EnumURLType JDFOutput = new EnumURLType("JDFOutput");
+            public static final EnumURLType JMF = new EnumURLType("JMF");
+            public static final EnumURLType SecureJMF = new EnumURLType("SecureJMF");
+        }      
+
 
 
 /* ************************************************************************
@@ -193,6 +245,28 @@ public abstract class JDFAutoJDFController extends JDFElement
         public String getURL()
         {
             return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute URLType
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute URLType
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setURLType(EnumURLType enumVar)
+        {
+            setAttribute(AttributeName.URLTYPE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute URLType
+          * @return the value of the attribute
+          */
+        public EnumURLType getURLType()
+        {
+            return EnumURLType.getEnum(getAttribute(AttributeName.URLTYPE, null, null));
         }
 
 }// end namespace JDF

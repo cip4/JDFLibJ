@@ -90,8 +90,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.SIDELINEIMAGES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,8 +140,7 @@ public abstract class JDFAutoThinPDFParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoThinPDFParams[  --> " + super.toString() + " ]";
     }

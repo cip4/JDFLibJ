@@ -70,6 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -82,11 +87,12 @@ public abstract class JDFAutoGeneralID extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.IDUSAGE, 0x22222111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.IDVALUE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.DATATYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumDataType.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.IDUSAGE, 0x22222111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.IDVALUE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
     @Override
@@ -147,10 +153,82 @@ public abstract class JDFAutoGeneralID extends JDFElement
     }
 
 
+        /**
+        * Enumeration strings for DataType
+        */
+
+        public static class EnumDataType extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumDataType(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumDataType getEnum(String enumName)
+            {
+                return (EnumDataType) getEnum(EnumDataType.class, enumName);
+            }
+
+            public static EnumDataType getEnum(int enumValue)
+            {
+                return (EnumDataType) getEnum(EnumDataType.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumDataType.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumDataType.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumDataType.class);
+            }
+
+            public static final EnumDataType string = new EnumDataType("string");
+            public static final EnumDataType integer = new EnumDataType("integer");
+            public static final EnumDataType double_ = new EnumDataType("double");
+            public static final EnumDataType NMTOKEN = new EnumDataType("NMTOKEN");
+            public static final EnumDataType boolean_ = new EnumDataType("boolean");
+            public static final EnumDataType dateTime = new EnumDataType("dateTime");
+            public static final EnumDataType duration = new EnumDataType("duration");
+        }
+
+
+
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute DataType
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute DataType
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setDataType(EnumDataType enumVar)
+        {
+            setAttribute(AttributeName.DATATYPE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute DataType
+          * @return the value of the attribute
+          */
+        public EnumDataType getDataType()
+        {
+            return EnumDataType.getEnum(getAttribute(AttributeName.DATATYPE, null, null));
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute IDUsage

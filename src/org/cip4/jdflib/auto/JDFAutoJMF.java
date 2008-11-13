@@ -91,6 +91,7 @@ import org.cip4.jdflib.jmf.JDFRegistration;
 import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.pool.JDFPool;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoJMF extends JDFPool
@@ -98,38 +99,39 @@ public abstract class JDFAutoJMF extends JDFPool
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXVERSION, 0x33333111, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RESPONSEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SENDERID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x33333111, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.RESPONSEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x22221111, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.VERSION, 0x22221111, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[7];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COMMAND, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.ACKNOWLEDGE, 0x33333333);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.RESPONSE, 0x33333333);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.SIGNAL, 0x33333333);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.QUERY, 0x33333333);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.REGISTRATION, 0x33333333);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.COMMAND, 0x33333333);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.ACKNOWLEDGE, 0x33333333);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.RESPONSE, 0x33333333);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.SIGNAL, 0x33333333);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.QUERY, 0x33333333);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.REGISTRATION, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -179,8 +181,7 @@ public abstract class JDFAutoJMF extends JDFPool
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoJMF[  --> " + super.toString() + " ]";
     }
@@ -190,6 +191,50 @@ public abstract class JDFAutoJMF extends JDFPool
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute AgentName
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute AgentName
+          * @param value: the value to set the attribute to
+          */
+        public void setAgentName(String value)
+        {
+            setAttribute(AttributeName.AGENTNAME, value, null);
+        }
+
+        /**
+          * (23) get String attribute AgentName
+          * @return the value of the attribute
+          */
+        public String getAgentName()
+        {
+            return getAttribute(AttributeName.AGENTNAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute AgentVersion
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute AgentVersion
+          * @param value: the value to set the attribute to
+          */
+        public void setAgentVersion(String value)
+        {
+            setAttribute(AttributeName.AGENTVERSION, value, null);
+        }
+
+        /**
+          * (23) get String attribute AgentVersion
+          * @return the value of the attribute
+          */
+        public String getAgentVersion()
+        {
+            return getAttribute(AttributeName.AGENTVERSION, null, JDFConstants.EMPTYSTRING);
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute DeviceID
@@ -345,6 +390,55 @@ public abstract class JDFAutoJMF extends JDFPool
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /** (26) getCreateEmployee
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee getCreateEmployee(int iSkip)
+    {
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Employee
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     * default is getEmployee(0)     */
+    public JDFEmployee getEmployee(int iSkip)
+    {
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
+    {
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+    }
 
     /** (26) getCreateCommand
      * 

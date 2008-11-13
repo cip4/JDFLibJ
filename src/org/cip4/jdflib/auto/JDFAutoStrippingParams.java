@@ -103,18 +103,23 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.SECTIONLIST, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.AUTOMATED, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.INNERMOSTSHINGLING, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.OUTERMOSTSHINGLING, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.SECTIONLIST, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -132,8 +137,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         elemInfoTable[6] = new ElemInfoTable(ElementName.STRIPMARK, 0x33333111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -183,15 +187,13 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoStrippingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -199,8 +201,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -246,8 +247,8 @@ public abstract class JDFAutoStrippingParams extends JDFResource
             }
 
             public static final EnumWorkStyle Simplex = new EnumWorkStyle("Simplex");
-            public static final EnumWorkStyle WorkAndBack = new EnumWorkStyle("WorkAndBack");
             public static final EnumWorkStyle Perfecting = new EnumWorkStyle("Perfecting");
+            public static final EnumWorkStyle WorkAndBack = new EnumWorkStyle("WorkAndBack");
             public static final EnumWorkStyle WorkAndTurn = new EnumWorkStyle("WorkAndTurn");
             public static final EnumWorkStyle WorkAndTumble = new EnumWorkStyle("WorkAndTumble");
             public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");
@@ -308,6 +309,50 @@ public abstract class JDFAutoStrippingParams extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute Automated
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Automated
+          * @param value: the value to set the attribute to
+          */
+        public void setAutomated(boolean value)
+        {
+            setAttribute(AttributeName.AUTOMATED, value, null);
+        }
+
+        /**
+          * (18) get boolean attribute Automated
+          * @return boolean the value of the attribute
+          */
+        public boolean getAutomated()
+        {
+            return getBoolAttribute(AttributeName.AUTOMATED, null, false);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute InnermostShingling
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute InnermostShingling
+          * @param value: the value to set the attribute to
+          */
+        public void setInnermostShingling(double value)
+        {
+            setAttribute(AttributeName.INNERMOSTSHINGLING, value, null);
+        }
+
+        /**
+          * (17) get double attribute InnermostShingling
+          * @return double the value of the attribute
+          */
+        public double getInnermostShingling()
+        {
+            return getRealAttribute(AttributeName.INNERMOSTSHINGLING, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute JobID
         --------------------------------------------------------------------- */
         /**
@@ -326,6 +371,28 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         public String getJobID()
         {
             return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute OutermostShingling
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute OutermostShingling
+          * @param value: the value to set the attribute to
+          */
+        public void setOutermostShingling(double value)
+        {
+            setAttribute(AttributeName.OUTERMOSTSHINGLING, value, null);
+        }
+
+        /**
+          * (17) get double attribute OutermostShingling
+          * @return double the value of the attribute
+          */
+        public double getOutermostShingling()
+        {
+            return getRealAttribute(AttributeName.OUTERMOSTSHINGLING, null, 0.0);
         }
 
         
@@ -360,6 +427,72 @@ public abstract class JDFAutoStrippingParams extends JDFResource
                 return null;
             }
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SheetNameFormat
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SheetNameFormat
+          * @param value: the value to set the attribute to
+          */
+        public void setSheetNameFormat(String value)
+        {
+            setAttribute(AttributeName.SHEETNAMEFORMAT, value, null);
+        }
+
+        /**
+          * (23) get String attribute SheetNameFormat
+          * @return the value of the attribute
+          */
+        public String getSheetNameFormat()
+        {
+            return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SheetNameTemplate
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SheetNameTemplate
+          * @param value: the value to set the attribute to
+          */
+        public void setSheetNameTemplate(String value)
+        {
+            setAttribute(AttributeName.SHEETNAMETEMPLATE, value, null);
+        }
+
+        /**
+          * (23) get String attribute SheetNameTemplate
+          * @return the value of the attribute
+          */
+        public String getSheetNameTemplate()
+        {
+            return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute StackDepth
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute StackDepth
+          * @param value: the value to set the attribute to
+          */
+        public void setStackDepth(int value)
+        {
+            setAttribute(AttributeName.STACKDEPTH, value, null);
+        }
+
+        /**
+          * (15) get int attribute StackDepth
+          * @return int the value of the attribute
+          */
+        public int getStackDepth()
+        {
+            return getIntAttribute(AttributeName.STACKDEPTH, null, 0);
         }
 
         

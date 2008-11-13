@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFAddress;
 import org.cip4.jdflib.resource.process.JDFComChannel;
@@ -91,19 +92,19 @@ public abstract class JDFAutoPerson extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ADDITIONALNAMES, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.FAMILYNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.FIRSTNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBTITLE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.NAMEPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.NAMESUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.LANGUAGES, 0x33331111, AttributeInfo.EnumAttributeType.languages, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.NAMEPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.NAMESUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +117,7 @@ public abstract class JDFAutoPerson extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,15 +167,13 @@ public abstract class JDFAutoPerson extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPerson[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -183,8 +181,7 @@ public abstract class JDFAutoPerson extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -280,6 +277,31 @@ public abstract class JDFAutoPerson extends JDFResource
         public String getJobTitle()
         {
             return getAttribute(AttributeName.JOBTITLE, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Languages
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Languages
+          * @param value: the value to set the attribute to
+          */
+        public void setLanguages(VString value)
+        {
+            setAttribute(AttributeName.LANGUAGES, value, null);
+        }
+
+        /**
+          * (21) get VString attribute Languages
+          * @return VString the value of the attribute
+          */
+        public VString getLanguages()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.LANGUAGES, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         

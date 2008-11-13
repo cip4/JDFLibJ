@@ -105,8 +105,7 @@ public abstract class JDFAutoCutMark extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,8 +117,7 @@ public abstract class JDFAutoCutMark extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLY, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,15 +167,13 @@ public abstract class JDFAutoCutMark extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCutMark[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -185,8 +181,7 @@ public abstract class JDFAutoCutMark extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

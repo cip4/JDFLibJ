@@ -98,8 +98,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVELINK, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -149,8 +148,7 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoUpdateJDFCmdParams[  --> " + super.toString() + " ]";
     }

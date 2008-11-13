@@ -101,8 +101,7 @@ public abstract class JDFAutoInk extends JDFResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.SPECIFICYIELD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +114,7 @@ public abstract class JDFAutoInk extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,15 +164,13 @@ public abstract class JDFAutoInk extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoInk[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Consumable);
@@ -182,8 +178,7 @@ public abstract class JDFAutoInk extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Consumable;
     }
@@ -352,8 +347,7 @@ public abstract class JDFAutoInk extends JDFResource
     /**
      * (30) append element Contact
      */
-    @Override
-	public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -372,8 +366,7 @@ public abstract class JDFAutoInk extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      */
-    @Override
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+    public JDFIdentificationField getCreateIdentificationField(int iSkip)
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -383,8 +376,7 @@ public abstract class JDFAutoInk extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      * default is getIdentificationField(0)     */
-    @Override
-	public JDFIdentificationField getIdentificationField(int iSkip)
+    public JDFIdentificationField getIdentificationField(int iSkip)
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -413,8 +405,7 @@ public abstract class JDFAutoInk extends JDFResource
     /**
      * (30) append element IdentificationField
      */
-    @Override
-	public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

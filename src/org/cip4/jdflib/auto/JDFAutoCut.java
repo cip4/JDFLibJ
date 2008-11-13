@@ -89,18 +89,18 @@ public abstract class JDFAutoCut extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CUTWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.RELATIVESTARTPOSITION, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.RELATIVEWORKINGPATH, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.STARTPOSITION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.WORKINGPATH, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -150,8 +150,7 @@ public abstract class JDFAutoCut extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCut[  --> " + super.toString() + " ]";
     }
@@ -206,6 +205,28 @@ public abstract class JDFAutoCut extends JDFElement
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute CutWidth
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute CutWidth
+          * @param value: the value to set the attribute to
+          */
+        public void setCutWidth(double value)
+        {
+            setAttribute(AttributeName.CUTWIDTH, value, null);
+        }
+
+        /**
+          * (17) get double attribute CutWidth
+          * @return double the value of the attribute
+          */
+        public double getCutWidth()
+        {
+            return getRealAttribute(AttributeName.CUTWIDTH, null, 0.0);
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute RelativeStartPosition

@@ -89,7 +89,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[10];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.DIRECTION, 0x55555551);
@@ -97,14 +97,14 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.EDGESHAPE, 0x66666661);
         elemInfoTable[3] = new ElemInfoTable(ElementName.EMBOSSINGTYPE, 0x66666661);
         elemInfoTable[4] = new ElemInfoTable(ElementName.FOILCOLOR, 0x66666661);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.HEIGHT, 0x66666661);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.IMAGESIZE, 0x66666661);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.LEVEL, 0x66666661);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.POSITION, 0x66666661);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.FOILCOLORDETAILS, 0x66661111);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.HEIGHT, 0x66666661);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.IMAGESIZE, 0x66666661);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.LEVEL, 0x66666661);
+        elemInfoTable[9] = new ElemInfoTable(ElementName.POSITION, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -154,8 +154,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoEmbossingItem[  --> " + super.toString() + " ]";
     }
@@ -294,6 +293,32 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     public JDFSpanNamedColor appendFoilColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.FOILCOLOR, 1, null);
+    }
+
+    /**
+     * (24) const get element FoilColorDetails
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getFoilColorDetails()
+    {
+        return (JDFStringSpan) getElement(ElementName.FOILCOLORDETAILS, null, 0);
+    }
+
+    /** (25) getCreateFoilColorDetails
+     * 
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getCreateFoilColorDetails()
+    {
+        return (JDFStringSpan) getCreateElement_KElement(ElementName.FOILCOLORDETAILS, null, 0);
+    }
+
+    /**
+     * (29) append element FoilColorDetails
+     */
+    public JDFStringSpan appendFoilColorDetails() throws JDFException
+    {
+        return (JDFStringSpan) appendElementN(ElementName.FOILCOLORDETAILS, 1, null);
     }
 
     /**

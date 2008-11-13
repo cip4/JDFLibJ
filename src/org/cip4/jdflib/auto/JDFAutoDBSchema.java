@@ -92,8 +92,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.DBSCHEMATYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumDBSchemaType.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -143,15 +142,13 @@ public abstract class JDFAutoDBSchema extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDBSchema[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -159,8 +156,7 @@ public abstract class JDFAutoDBSchema extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

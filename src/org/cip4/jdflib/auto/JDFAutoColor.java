@@ -102,7 +102,7 @@ public abstract class JDFAutoColor extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[19];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.MAPPINGSELECTION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumMappingSelection.getEnum(0), "UsePDLValues");
@@ -113,19 +113,20 @@ public abstract class JDFAutoColor extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.COLORBOOKENTRY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORBOOKPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.COLORBOOKSUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.COLORNAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.COLORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.DENSITY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.LAB, 0x33333333, AttributeInfo.EnumAttributeType.LabColor, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.RAWNAME, 0x33333311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.SRGB, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.USEPDLALTERNATECS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.COLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.COLORNAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.COLORTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumColorType.getEnum(0), null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.DENSITY, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.GRAY, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.LAB, 0x33333333, AttributeInfo.EnumAttributeType.LabColor, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.NEUTRALDENSITY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.RAWNAME, 0x33333311, AttributeInfo.EnumAttributeType.hexBinary, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.SRGB, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[18] = new AtrInfoTable(AttributeName.USEPDLALTERNATECS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,8 +142,7 @@ public abstract class JDFAutoColor extends JDFResource
         elemInfoTable[4] = new ElemInfoTable(ElementName.TRANSFERCURVE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -192,15 +192,13 @@ public abstract class JDFAutoColor extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoColor[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -208,8 +206,7 @@ public abstract class JDFAutoColor extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -503,6 +500,28 @@ public abstract class JDFAutoColor extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute ColorDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ColorDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setColorDetails(String value)
+        {
+            setAttribute(AttributeName.COLORDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute ColorDetails
+          * @return the value of the attribute
+          */
+        public String getColorDetails()
+        {
+            return getAttribute(AttributeName.COLORDETAILS, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute ColorName
         --------------------------------------------------------------------- */
         /**
@@ -569,6 +588,28 @@ public abstract class JDFAutoColor extends JDFResource
         public double getDensity()
         {
             return getRealAttribute(AttributeName.DENSITY, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Gray
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Gray
+          * @param value: the value to set the attribute to
+          */
+        public void setGray(double value)
+        {
+            setAttribute(AttributeName.GRAY, value, null);
+        }
+
+        /**
+          * (17) get double attribute Gray
+          * @return double the value of the attribute
+          */
+        public double getGray()
+        {
+            return getRealAttribute(AttributeName.GRAY, null, 0.0);
         }
 
         

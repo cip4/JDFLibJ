@@ -107,8 +107,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.PICKUP, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -132,8 +131,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
         elemInfoTable[12] = new ElemInfoTable(ElementName.PRICING, 0x77777666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -183,8 +181,7 @@ public abstract class JDFAutoDropIntent extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDropIntent[  --> " + super.toString() + " ]";
     }

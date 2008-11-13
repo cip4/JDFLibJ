@@ -99,23 +99,23 @@ public abstract class JDFAutoMessageService extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.COMMAND, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.GENERICATTRIBUTES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.JMFROLE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumJMFRole.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.QUERY, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.REGISTRATION, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.SIGNAL, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.COMMAND, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.GENERICATTRIBUTES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.JMFROLE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumJMFRole.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.QUERY, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.REGISTRATION, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.SIGNAL, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -131,8 +131,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         elemInfoTable[4] = new ElemInfoTable(ElementName.TESTPOOL, 0x66666111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -182,11 +181,55 @@ public abstract class JDFAutoMessageService extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoMessageService[  --> " + super.toString() + " ]";
     }
+
+
+        /**
+        * Enumeration strings for ChannelMode
+        */
+
+        public static class EnumChannelMode extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumChannelMode(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumChannelMode getEnum(String enumName)
+            {
+                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
+            }
+
+            public static EnumChannelMode getEnum(int enumValue)
+            {
+                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumChannelMode.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumChannelMode.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumChannelMode.class);
+            }
+
+            public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
+            public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
+        }      
+
 
 
         /**
@@ -258,6 +301,28 @@ public abstract class JDFAutoMessageService extends JDFElement
         public boolean getAcknowledge()
         {
             return getBoolAttribute(AttributeName.ACKNOWLEDGE, null, false);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ChannelMode
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute ChannelMode
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setChannelMode(EnumChannelMode enumVar)
+        {
+            setAttribute(AttributeName.CHANNELMODE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute ChannelMode
+          * @return the value of the attribute
+          */
+        public EnumChannelMode getChannelMode()
+        {
+            return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
         }
 
         

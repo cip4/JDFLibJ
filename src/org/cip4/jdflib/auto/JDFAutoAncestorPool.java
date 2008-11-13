@@ -94,8 +94,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
         elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -145,8 +144,7 @@ public abstract class JDFAutoAncestorPool extends JDFPool
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAncestorPool[  --> " + super.toString() + " ]";
     }

@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
@@ -90,10 +91,11 @@ public abstract class JDFAutoColorantAlias extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.REPLACEMENTCOLORANTNAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.RAWNAMES, 0x33331111, AttributeInfo.EnumAttributeType.Any, null, null);
     }
     
     @Override
@@ -207,6 +209,33 @@ public abstract class JDFAutoColorantAlias extends JDFResource
         public String getReplacementColorantName()
         {
             return getAttribute(AttributeName.REPLACEMENTCOLORANTNAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute RawNames
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute RawNames
+          * @param value: the value to set the attribute to
+          */
+        public void setRawNames(VString value)
+        {
+            setAttribute(AttributeName.RAWNAMES, value, null);
+        }
+
+        /**
+          * (20) get JDFhexBinaryList attribute RawNames
+          * @return JDFhexBinaryList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFhexBinaryList
+          */
+        public VString getRawNames()
+        {
+            String strAttrName = "";
+            VString nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.RAWNAMES, null, JDFConstants.EMPTYSTRING);
+            nPlaceHolder = new VString(strAttrName, null);
+            return nPlaceHolder;
         }
 
 /* ***********************************************************************

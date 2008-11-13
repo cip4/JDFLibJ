@@ -88,8 +88,7 @@ public abstract class JDFAutoBindingQualityParams extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.PULLOUTVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,8 +138,7 @@ public abstract class JDFAutoBindingQualityParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBindingQualityParams[  --> " + super.toString() + " ]";
     }

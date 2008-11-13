@@ -82,6 +82,7 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -90,16 +91,16 @@ public abstract class JDFAutoObjectResolution extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.RESOLUTION, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
         atrInfoTable[2] = new AtrInfoTable(AttributeName.ANTIALIASING, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -149,15 +150,13 @@ public abstract class JDFAutoObjectResolution extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoObjectResolution[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -165,8 +164,7 @@ public abstract class JDFAutoObjectResolution extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -301,6 +299,31 @@ public abstract class JDFAutoObjectResolution extends JDFResource
         public String getAntiAliasing()
         {
             return getAttribute(AttributeName.ANTIALIASING, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ObjectTags
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ObjectTags
+          * @param value: the value to set the attribute to
+          */
+        public void setObjectTags(VString value)
+        {
+            setAttribute(AttributeName.OBJECTTAGS, value, null);
+        }
+
+        /**
+          * (21) get VString attribute ObjectTags
+          * @return VString the value of the attribute
+          */
+        public VString getObjectTags()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
 }// end namespace JDF

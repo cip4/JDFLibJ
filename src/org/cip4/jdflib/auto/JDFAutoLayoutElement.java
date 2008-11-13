@@ -87,11 +87,13 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.resource.process.JDFContentList;
 import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFElementColorParams;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
@@ -104,46 +106,47 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNOREPDLCOPIES, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.IGNOREPDLIMPOSITION, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
         atrInfoTable[2] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumElementType.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.ISBLANK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.ISPRINTABLE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumElementType.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.ISBLANK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.ISPRINTABLE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.SOURCEMEDIABOX, 0x33331111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666611);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.DEPENDENCIES, 0x66666611);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x66666611);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x66666611);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.PAGELIST, 0x66666611);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666611);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.CONTENTLIST, 0x33331111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.DEPENDENCIES, 0x66666611);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x66666611);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x66666611);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.PAGELIST, 0x66666611);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666611);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -193,15 +196,13 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLayoutElement[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -209,8 +210,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -342,6 +342,31 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         public String getClipPath()
         {
             return getAttribute(AttributeName.CLIPPATH, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ContentDataRefs
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ContentDataRefs
+          * @param value: the value to set the attribute to
+          */
+        public void setContentDataRefs(VString value)
+        {
+            setAttribute(AttributeName.CONTENTDATAREFS, value, null);
+        }
+
+        /**
+          * (21) get VString attribute ContentDataRefs
+          * @return VString the value of the attribute
+          */
+        public VString getContentDataRefs()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         
@@ -558,6 +583,40 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute SourceMediaBox
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SourceMediaBox
+          * @param value: the value to set the attribute to
+          */
+        public void setSourceMediaBox(JDFRectangle value)
+        {
+            setAttribute(AttributeName.SOURCEMEDIABOX, value, null);
+        }
+
+        /**
+          * (20) get JDFRectangle attribute SourceMediaBox
+          * @return JDFRectangle the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFRectangle
+          */
+        public JDFRectangle getSourceMediaBox()
+        {
+            String strAttrName = "";
+            JDFRectangle nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SOURCEMEDIABOX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFRectangle(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute SourceTrimBox
         --------------------------------------------------------------------- */
         /**
@@ -648,6 +707,64 @@ public abstract class JDFAutoLayoutElement extends JDFResource
       * @param refTarget the element that is referenced
       */
     public void refColorPool(JDFColorPool refTarget)
+    {
+        refElement(refTarget);
+    }
+
+    /** (26) getCreateContentList
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFContentList the element
+     */
+    public JDFContentList getCreateContentList(int iSkip)
+    {
+        return (JDFContentList)getCreateElement_KElement(ElementName.CONTENTLIST, null, iSkip);
+    }
+
+    /**
+     * (27) const get element ContentList
+     * @param iSkip number of elements to skip
+     * @return JDFContentList the element
+     * default is getContentList(0)     */
+    public JDFContentList getContentList(int iSkip)
+    {
+        return (JDFContentList) getElement(ElementName.CONTENTLIST, null, iSkip);
+    }
+
+    /**
+     * Get all ContentList from the current element
+     * 
+     * @return Collection<JDFContentList>
+     */
+    public Collection<JDFContentList> getAllContentList()
+    {
+        Vector<JDFContentList> v = new Vector<JDFContentList>();
+
+        JDFContentList kElem = (JDFContentList) getFirstChildElement(ElementName.CONTENTLIST, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContentList) kElem.getNextSiblingElement(ElementName.CONTENTLIST, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element ContentList
+     */
+    public JDFContentList appendContentList() throws JDFException
+    {
+        return (JDFContentList) appendElement(ElementName.CONTENTLIST, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refContentList(JDFContentList refTarget)
     {
         refElement(refTarget);
     }

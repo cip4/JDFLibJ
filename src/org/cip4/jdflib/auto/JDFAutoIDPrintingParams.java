@@ -114,8 +114,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         atrInfoTable[7] = new AtrInfoTable(AttributeName.SHEETCOLLATE, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -132,8 +131,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
         elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -183,15 +181,13 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoIDPrintingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -199,8 +195,7 @@ public abstract class JDFAutoIDPrintingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -80,27 +81,46 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 
 public abstract class JDFAutoCommand extends JDFMessage
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ACKNOWLEDGEFORMAT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.ACKNOWLEDGETEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.ACKNOWLEDGEURL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ACKNOWLEDGETYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumAcknowledgeType.getEnum(0), "Completed");
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATEDCOMMANDS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.TRANSACTIONID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+    }
+    
+    protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -148,8 +168,7 @@ public abstract class JDFAutoCommand extends JDFMessage
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCommand[  --> " + super.toString() + " ]";
     }
@@ -292,5 +311,106 @@ public abstract class JDFAutoCommand extends JDFMessage
         {
             return getEnumerationsAttribute(AttributeName.ACKNOWLEDGETYPE, null, EnumAcknowledgeType.Completed, false);
         }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute RelatedCommands
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute RelatedCommands
+          * @param value: the value to set the attribute to
+          */
+        public void setRelatedCommands(VString value)
+        {
+            setAttribute(AttributeName.RELATEDCOMMANDS, value, null);
+        }
+
+        /**
+          * (21) get VString attribute RelatedCommands
+          * @return VString the value of the attribute
+          */
+        public VString getRelatedCommands()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.RELATEDCOMMANDS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute TransactionID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute TransactionID
+          * @param value: the value to set the attribute to
+          */
+        public void setTransactionID(String value)
+        {
+            setAttribute(AttributeName.TRANSACTIONID, value, null);
+        }
+
+        /**
+          * (23) get String attribute TransactionID
+          * @return the value of the attribute
+          */
+        public String getTransactionID()
+        {
+            return getAttribute(AttributeName.TRANSACTIONID, null, JDFConstants.EMPTYSTRING);
+        }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /** (26) getCreateEmployee
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee getCreateEmployee(int iSkip)
+    {
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Employee
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     * default is getEmployee(0)     */
+    public JDFEmployee getEmployee(int iSkip)
+    {
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
+    {
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+    }
 
 }// end namespace JDF

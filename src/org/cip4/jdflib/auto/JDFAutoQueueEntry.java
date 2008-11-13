@@ -90,7 +90,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.resource.JDFPart;
-import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoQueueEntry extends JDFElement
@@ -113,23 +112,20 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         atrInfoTable[9] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.JOBPHASE, 0x66666611);
         elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333311);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.PREVIEW, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -179,8 +175,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoQueueEntry[  --> " + super.toString() + " ]";
     }
@@ -587,55 +582,6 @@ public abstract class JDFAutoQueueEntry extends JDFElement
     public JDFPart appendPart() throws JDFException
     {
         return (JDFPart) appendElement(ElementName.PART, null);
-    }
-
-    /** (26) getCreatePreview
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFPreview the element
-     */
-    public JDFPreview getCreatePreview(int iSkip)
-    {
-        return (JDFPreview)getCreateElement_KElement(ElementName.PREVIEW, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Preview
-     * @param iSkip number of elements to skip
-     * @return JDFPreview the element
-     * default is getPreview(0)     */
-    public JDFPreview getPreview(int iSkip)
-    {
-        return (JDFPreview) getElement(ElementName.PREVIEW, null, iSkip);
-    }
-
-    /**
-     * Get all Preview from the current element
-     * 
-     * @return Collection<JDFPreview>
-     */
-    public Collection<JDFPreview> getAllPreview()
-    {
-        Vector<JDFPreview> v = new Vector<JDFPreview>();
-
-        JDFPreview kElem = (JDFPreview) getFirstChildElement(ElementName.PREVIEW, null);
-
-        while (kElem != null)
-        {
-            v.add(kElem);
-
-            kElem = (JDFPreview) kElem.getNextSiblingElement(ElementName.PREVIEW, null);
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Preview
-     */
-    public JDFPreview appendPreview() throws JDFException
-    {
-        return (JDFPreview) appendElement(ElementName.PREVIEW, null);
     }
 
 }// end namespace JDF

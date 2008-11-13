@@ -100,8 +100,7 @@ public abstract class JDFAutoTrackFilter extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.STATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumNodeStatus.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -113,8 +112,7 @@ public abstract class JDFAutoTrackFilter extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,8 +162,7 @@ public abstract class JDFAutoTrackFilter extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTrackFilter[  --> " + super.toString() + " ]";
     }

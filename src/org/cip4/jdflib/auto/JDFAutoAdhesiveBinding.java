@@ -93,8 +93,7 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.TAPEBINDING, 0x77777776);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoAdhesiveBinding extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAdhesiveBinding[  --> " + super.toString() + " ]";
     }

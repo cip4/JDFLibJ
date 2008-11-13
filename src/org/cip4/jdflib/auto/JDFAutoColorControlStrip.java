@@ -87,6 +87,7 @@ import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCIELABMeasuringField;
 import org.cip4.jdflib.resource.process.JDFDensityMeasuringField;
+import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 public abstract class JDFAutoColorControlStrip extends JDFResource
 {
@@ -96,28 +97,27 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SIZE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.SIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPTYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.CIELABMEASURINGFIELD, 0x33333331);
         elemInfoTable[1] = new ElemInfoTable(ElementName.DENSITYMEASURINGFIELD, 0x33333331);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,15 +167,13 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoColorControlStrip[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -183,8 +181,7 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -230,6 +227,28 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute Rotation
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Rotation
+          * @param value: the value to set the attribute to
+          */
+        public void setRotation(double value)
+        {
+            setAttribute(AttributeName.ROTATION, value, null);
+        }
+
+        /**
+          * (17) get double attribute Rotation
+          * @return double the value of the attribute
+          */
+        public double getRotation()
+        {
+            return getRealAttribute(AttributeName.ROTATION, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute Size
         --------------------------------------------------------------------- */
         /**
@@ -260,28 +279,6 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
                 return null;
             }
             return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute Rotation
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute Rotation
-          * @param value: the value to set the attribute to
-          */
-        public void setRotation(double value)
-        {
-            setAttribute(AttributeName.ROTATION, value, null);
-        }
-
-        /**
-          * (17) get double attribute Rotation
-          * @return double the value of the attribute
-          */
-        public double getRotation()
-        {
-            return getRealAttribute(AttributeName.ROTATION, null, 0.0);
         }
 
         
@@ -425,6 +422,55 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     public void refDensityMeasuringField(JDFDensityMeasuringField refTarget)
     {
         refElement(refTarget);
+    }
+
+    /** (26) getCreateSeparationSpec
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFSeparationSpec the element
+     */
+    public JDFSeparationSpec getCreateSeparationSpec(int iSkip)
+    {
+        return (JDFSeparationSpec)getCreateElement_KElement(ElementName.SEPARATIONSPEC, null, iSkip);
+    }
+
+    /**
+     * (27) const get element SeparationSpec
+     * @param iSkip number of elements to skip
+     * @return JDFSeparationSpec the element
+     * default is getSeparationSpec(0)     */
+    public JDFSeparationSpec getSeparationSpec(int iSkip)
+    {
+        return (JDFSeparationSpec) getElement(ElementName.SEPARATIONSPEC, null, iSkip);
+    }
+
+    /**
+     * Get all SeparationSpec from the current element
+     * 
+     * @return Collection<JDFSeparationSpec>
+     */
+    public Collection<JDFSeparationSpec> getAllSeparationSpec()
+    {
+        Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+
+        JDFSeparationSpec kElem = (JDFSeparationSpec) getFirstChildElement(ElementName.SEPARATIONSPEC, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFSeparationSpec) kElem.getNextSiblingElement(ElementName.SEPARATIONSPEC, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element SeparationSpec
+     */
+    public JDFSeparationSpec appendSeparationSpec() throws JDFException
+    {
+        return (JDFSeparationSpec) appendElement(ElementName.SEPARATIONSPEC, null);
     }
 
 }// end namespace JDF

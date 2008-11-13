@@ -91,7 +91,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BLOCKSIZE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -99,12 +99,12 @@ public abstract class JDFAutoCutBlock extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.BLOCKTRF, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, "1 0 0 1 0 0");
         atrInfoTable[3] = new AtrInfoTable(AttributeName.BLOCKTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumBlockType.getEnum(0), null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.CUTWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -154,15 +154,13 @@ public abstract class JDFAutoCutBlock extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCutBlock[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -170,8 +168,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -420,6 +417,28 @@ public abstract class JDFAutoCutBlock extends JDFResource
             String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute CutWidth
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute CutWidth
+          * @param value: the value to set the attribute to
+          */
+        public void setCutWidth(double value)
+        {
+            setAttribute(AttributeName.CUTWIDTH, value, null);
+        }
+
+        /**
+          * (17) get double attribute CutWidth
+          * @return double the value of the attribute
+          */
+        public double getCutWidth()
+        {
+            return getRealAttribute(AttributeName.CUTWIDTH, null, 0.0);
         }
 
         

@@ -92,8 +92,7 @@ public abstract class JDFAutoTestPool extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.TEST, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,8 +142,7 @@ public abstract class JDFAutoTestPool extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTestPool[  --> " + super.toString() + " ]";
     }

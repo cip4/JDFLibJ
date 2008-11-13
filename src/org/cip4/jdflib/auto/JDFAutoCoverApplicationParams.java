@@ -99,8 +99,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.COVEROFFSET, 0x44444431, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -113,8 +112,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.SCORE, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,15 +162,13 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCoverApplicationParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -180,8 +176,7 @@ public abstract class JDFAutoCoverApplicationParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

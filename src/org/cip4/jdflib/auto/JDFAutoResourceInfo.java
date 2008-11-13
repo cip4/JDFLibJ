@@ -94,6 +94,7 @@ import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
+import org.cip4.jdflib.resource.process.JDFLot;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 
 public abstract class JDFAutoResourceInfo extends JDFElement
@@ -101,44 +102,45 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[16];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTUALAMOUNT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.AMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.AVAILABLEAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.LEVEL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), "OK");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.LOCATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.COMMANDRESULT, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumCommandResult.getEnum(0), null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.LEVEL, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumLevel.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.LOCATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.LOTCONTROLLED, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.UNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.USAGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.AMOUNTPOOL, 0x66666111);
         elemInfoTable[1] = new ElemInfoTable(ElementName.COSTCENTER, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.PART, 0x33333311);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.LOT, 0x33331111);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666611);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.PART, 0x33333311);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -188,11 +190,58 @@ public abstract class JDFAutoResourceInfo extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoResourceInfo[  --> " + super.toString() + " ]";
     }
+
+
+        /**
+        * Enumeration strings for CommandResult
+        */
+
+        public static class EnumCommandResult extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumCommandResult(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumCommandResult getEnum(String enumName)
+            {
+                return (EnumCommandResult) getEnum(EnumCommandResult.class, enumName);
+            }
+
+            public static EnumCommandResult getEnum(int enumValue)
+            {
+                return (EnumCommandResult) getEnum(EnumCommandResult.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumCommandResult.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumCommandResult.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumCommandResult.class);
+            }
+
+            public static final EnumCommandResult Rejected = new EnumCommandResult("Rejected");
+            public static final EnumCommandResult Removed = new EnumCommandResult("Removed");
+            public static final EnumCommandResult New = new EnumCommandResult("New");
+            public static final EnumCommandResult Merged = new EnumCommandResult("Merged");
+            public static final EnumCommandResult Replaced = new EnumCommandResult("Replaced");
+        }      
+
 
 
         /**
@@ -313,6 +362,28 @@ public abstract class JDFAutoResourceInfo extends JDFElement
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute CommandResult
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute CommandResult
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setCommandResult(EnumCommandResult enumVar)
+        {
+            setAttribute(AttributeName.COMMANDRESULT, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute CommandResult
+          * @return the value of the attribute
+          */
+        public EnumCommandResult getCommandResult()
+        {
+            return EnumCommandResult.getEnum(getAttribute(AttributeName.COMMANDRESULT, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute Level
         --------------------------------------------------------------------- */
         /**
@@ -330,7 +401,7 @@ public abstract class JDFAutoResourceInfo extends JDFElement
           */
         public EnumLevel getLevel()
         {
-            return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, "OK"));
+            return EnumLevel.getEnum(getAttribute(AttributeName.LEVEL, null, null));
         }
 
         
@@ -353,6 +424,28 @@ public abstract class JDFAutoResourceInfo extends JDFElement
         public String getLocation()
         {
             return getAttribute(AttributeName.LOCATION, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute LotControlled
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute LotControlled
+          * @param value: the value to set the attribute to
+          */
+        public void setLotControlled(boolean value)
+        {
+            setAttribute(AttributeName.LOTCONTROLLED, value, null);
+        }
+
+        /**
+          * (18) get boolean attribute LotControlled
+          * @return boolean the value of the attribute
+          */
+        public boolean getLotControlled()
+        {
+            return getBoolAttribute(AttributeName.LOTCONTROLLED, null, false);
         }
 
         
@@ -620,6 +713,55 @@ public abstract class JDFAutoResourceInfo extends JDFElement
     public JDFCostCenter appendCostCenter() throws JDFException
     {
         return (JDFCostCenter) appendElementN(ElementName.COSTCENTER, 1, null);
+    }
+
+    /** (26) getCreateLot
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFLot the element
+     */
+    public JDFLot getCreateLot(int iSkip)
+    {
+        return (JDFLot)getCreateElement_KElement(ElementName.LOT, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Lot
+     * @param iSkip number of elements to skip
+     * @return JDFLot the element
+     * default is getLot(0)     */
+    public JDFLot getLot(int iSkip)
+    {
+        return (JDFLot) getElement(ElementName.LOT, null, iSkip);
+    }
+
+    /**
+     * Get all Lot from the current element
+     * 
+     * @return Collection<JDFLot>
+     */
+    public Collection<JDFLot> getAllLot()
+    {
+        Vector<JDFLot> v = new Vector<JDFLot>();
+
+        JDFLot kElem = (JDFLot) getFirstChildElement(ElementName.LOT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFLot) kElem.getNextSiblingElement(ElementName.LOT, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Lot
+     */
+    public JDFLot appendLot() throws JDFException
+    {
+        return (JDFLot) appendElement(ElementName.LOT, null);
     }
 
     /**

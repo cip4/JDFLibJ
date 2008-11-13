@@ -118,8 +118,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         atrInfoTable[18] = new AtrInfoTable(AttributeName.VERSION, 0x33333333, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -132,8 +131,7 @@ public abstract class JDFAutoAncestor extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.NODEINFO, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -183,8 +181,7 @@ public abstract class JDFAutoAncestor extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAncestor[  --> " + super.toString() + " ]";
     }

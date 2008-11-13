@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.resource.JDFPageList;
@@ -103,13 +104,13 @@ public abstract class JDFAutoRunList extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[23];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[25];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPONENTGRANULARITY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumComponentGranularity.getEnum(0), "Document");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ISPAGE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGECOPIES, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.SETCOPIES, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ISPAGE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.PAGECOPIES, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.SETCOPIES, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPONENTGRANULARITY, 0x44443311, AttributeInfo.EnumAttributeType.enumeration, EnumComponentGranularity.getEnum(0), null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.DOCNAMES, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.DOCS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
@@ -117,22 +118,23 @@ public abstract class JDFAutoRunList extends JDFResource
         atrInfoTable[8] = new AtrInfoTable(AttributeName.ENDOFDOCUMENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[9] = new AtrInfoTable(AttributeName.ENDOFSET, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[10] = new AtrInfoTable(AttributeName.FIRSTPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.LOGICALPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.NDOC, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.NPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.NSET, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.PAGENAMES, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[17] = new AtrInfoTable(AttributeName.PAGES, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[18] = new AtrInfoTable(AttributeName.RUNTAG, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[19] = new AtrInfoTable(AttributeName.SETNAMES, 0x33333331, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[20] = new AtrInfoTable(AttributeName.SETS, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[21] = new AtrInfoTable(AttributeName.SKIPPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[22] = new AtrInfoTable(AttributeName.SORTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.IGNORECONTEXT, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.LOGICALPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.NDOC, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.NPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.NSET, 0x44444431, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.PAGENAMES, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[18] = new AtrInfoTable(AttributeName.PAGES, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[19] = new AtrInfoTable(AttributeName.RUNTAG, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[20] = new AtrInfoTable(AttributeName.SETNAMES, 0x33333331, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[21] = new AtrInfoTable(AttributeName.SETS, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[22] = new AtrInfoTable(AttributeName.SHEETSIDES, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetSides.getEnum(0), null);
+        atrInfoTable[23] = new AtrInfoTable(AttributeName.SKIPPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[24] = new AtrInfoTable(AttributeName.SORTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,7 +144,7 @@ public abstract class JDFAutoRunList extends JDFResource
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.BYTEMAP, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.DYNAMICINPUT, 0x33333333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.DYNAMICINPUT, 0x44443333);
         elemInfoTable[2] = new ElemInfoTable(ElementName.INSERTSHEET, 0x33333333);
         elemInfoTable[3] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x66666666);
         elemInfoTable[4] = new ElemInfoTable(ElementName.INTERPRETEDPDLDATA, 0x66666611);
@@ -150,8 +152,7 @@ public abstract class JDFAutoRunList extends JDFResource
         elemInfoTable[6] = new ElemInfoTable(ElementName.PAGELIST, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -201,15 +202,13 @@ public abstract class JDFAutoRunList extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRunList[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -217,8 +216,7 @@ public abstract class JDFAutoRunList extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -272,32 +270,57 @@ public abstract class JDFAutoRunList extends JDFResource
 
 
 
+        /**
+        * Enumeration strings for SheetSides
+        */
+
+        public static class EnumSheetSides extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumSheetSides(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumSheetSides getEnum(String enumName)
+            {
+                return (EnumSheetSides) getEnum(EnumSheetSides.class, enumName);
+            }
+
+            public static EnumSheetSides getEnum(int enumValue)
+            {
+                return (EnumSheetSides) getEnum(EnumSheetSides.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumSheetSides.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumSheetSides.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumSheetSides.class);
+            }
+
+            public static final EnumSheetSides Front = new EnumSheetSides("Front");
+            public static final EnumSheetSides Back = new EnumSheetSides("Back");
+            public static final EnumSheetSides FrontBack = new EnumSheetSides("FrontBack");
+            public static final EnumSheetSides BackFront = new EnumSheetSides("BackFront");
+        }      
+
+
+
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
  */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ComponentGranularity
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute ComponentGranularity
-          * @param enumVar: the enumVar to set the attribute to
-          */
-        public void setComponentGranularity(EnumComponentGranularity enumVar)
-        {
-            setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute ComponentGranularity
-          * @return the value of the attribute
-          */
-        public EnumComponentGranularity getComponentGranularity()
-        {
-            return EnumComponentGranularity.getEnum(getAttribute(AttributeName.COMPONENTGRANULARITY, null, "Document"));
-        }
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute IsPage
@@ -362,6 +385,28 @@ public abstract class JDFAutoRunList extends JDFResource
         public int getSetCopies()
         {
             return getIntAttribute(AttributeName.SETCOPIES, null, 1);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ComponentGranularity
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute ComponentGranularity
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setComponentGranularity(EnumComponentGranularity enumVar)
+        {
+            setAttribute(AttributeName.COMPONENTGRANULARITY, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute ComponentGranularity
+          * @return the value of the attribute
+          */
+        public EnumComponentGranularity getComponentGranularity()
+        {
+            return EnumComponentGranularity.getEnum(getAttribute(AttributeName.COMPONENTGRANULARITY, null, null));
         }
 
         
@@ -540,6 +585,31 @@ public abstract class JDFAutoRunList extends JDFResource
         public int getFirstPage()
         {
             return getIntAttribute(AttributeName.FIRSTPAGE, null, 0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute IgnoreContext
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute IgnoreContext
+          * @param value: the value to set the attribute to
+          */
+        public void setIgnoreContext(VString value)
+        {
+            setAttribute(AttributeName.IGNORECONTEXT, value, null);
+        }
+
+        /**
+          * (21) get VString attribute IgnoreContext
+          * @return VString the value of the attribute
+          */
+        public VString getIgnoreContext()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.IGNORECONTEXT, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         
@@ -820,6 +890,28 @@ public abstract class JDFAutoRunList extends JDFResource
                 return null;
             }
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SheetSides
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute SheetSides
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setSheetSides(EnumSheetSides enumVar)
+        {
+            setAttribute(AttributeName.SHEETSIDES, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute SheetSides
+          * @return the value of the attribute
+          */
+        public EnumSheetSides getSheetSides()
+        {
+            return EnumSheetSides.getEnum(getAttribute(AttributeName.SHEETSIDES, null, null));
         }
 
         

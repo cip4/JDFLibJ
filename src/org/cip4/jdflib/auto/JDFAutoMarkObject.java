@@ -93,6 +93,8 @@ import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFDeviceMark;
 import org.cip4.jdflib.resource.JDFJobField;
+import org.cip4.jdflib.resource.JDFMarkActivation;
+import org.cip4.jdflib.resource.JDFRefAnchor;
 import org.cip4.jdflib.resource.JDFScavengerArea;
 import org.cip4.jdflib.resource.process.JDFCIELABMeasuringField;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
@@ -108,21 +110,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TRIMCTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ORDID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.LAYOUTELEMENTPAGENUM, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "0");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SOURCECLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.CLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.LAYERID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.LAYOUTELEMENTPAGENUM, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "0");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.SOURCECLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.LAYERID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.COMPENSATIONCTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.STACKORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.TRIMCTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.ORDID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.CLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.ANCHOR, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.TRIMCLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
     }
     
     @Override
@@ -132,7 +139,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[11];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[13];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.CIELABMEASURINGFIELD, 0x33333333);
@@ -144,8 +151,10 @@ public abstract class JDFAutoMarkObject extends JDFElement
         elemInfoTable[6] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
         elemInfoTable[7] = new ElemInfoTable(ElementName.JOBFIELD, 0x33333331);
         elemInfoTable[8] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x66666666);
-        elemInfoTable[9] = new ElemInfoTable(ElementName.REGISTERMARK, 0x33333333);
-        elemInfoTable[10] = new ElemInfoTable(ElementName.SCAVENGERAREA, 0x33333331);
+        elemInfoTable[9] = new ElemInfoTable(ElementName.MARKACTIVATION, 0x33333333);
+        elemInfoTable[10] = new ElemInfoTable(ElementName.REFANCHOR, 0x33333333);
+        elemInfoTable[11] = new ElemInfoTable(ElementName.REGISTERMARK, 0x33333333);
+        elemInfoTable[12] = new ElemInfoTable(ElementName.SCAVENGERAREA, 0x33333331);
     }
     
     @Override
@@ -251,6 +260,58 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
 
 
+        /**
+        * Enumeration strings for Anchor
+        */
+
+        public static class EnumAnchor extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumAnchor(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumAnchor getEnum(String enumName)
+            {
+                return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
+            }
+
+            public static EnumAnchor getEnum(int enumValue)
+            {
+                return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumAnchor.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumAnchor.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumAnchor.class);
+            }
+
+            public static final EnumAnchor TopLeft = new EnumAnchor("TopLeft");
+            public static final EnumAnchor TopCenter = new EnumAnchor("TopCenter");
+            public static final EnumAnchor TopRight = new EnumAnchor("TopRight");
+            public static final EnumAnchor CenterLeft = new EnumAnchor("CenterLeft");
+            public static final EnumAnchor Center = new EnumAnchor("Center");
+            public static final EnumAnchor CenterRight = new EnumAnchor("CenterRight");
+            public static final EnumAnchor BottomLeft = new EnumAnchor("BottomLeft");
+            public static final EnumAnchor BottomCenter = new EnumAnchor("BottomCenter");
+            public static final EnumAnchor BottomRight = new EnumAnchor("BottomRight");
+        }      
+
+
+
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
@@ -275,62 +336,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         public EnumType getType()
         {
             return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TrimCTM
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TrimCTM
-          * @param value: the value to set the attribute to
-          */
-        public void setTrimCTM(JDFMatrix value)
-        {
-            setAttribute(AttributeName.TRIMCTM, value, null);
-        }
-
-        /**
-          * (20) get JDFMatrix attribute TrimCTM
-          * @return JDFMatrix the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFMatrix
-          */
-        public JDFMatrix getTrimCTM()
-        {
-            String strAttrName = "";
-            JDFMatrix nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TRIMCTM, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFMatrix(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OrdID
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OrdID
-          * @param value: the value to set the attribute to
-          */
-        public void setOrdID(int value)
-        {
-            setAttribute(AttributeName.ORDID, value, null);
-        }
-
-        /**
-          * (15) get int attribute OrdID
-          * @return int the value of the attribute
-          */
-        public int getOrdID()
-        {
-            return getIntAttribute(AttributeName.ORDID, null, 0);
         }
 
         
@@ -379,36 +384,24 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute ClipBox
+        Methods for Attribute ContentRef
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute ClipBox
+          * (36) set attribute ContentRef
           * @param value: the value to set the attribute to
           */
-        public void setClipBox(JDFRectangle value)
+        public void setContentRef(String value)
         {
-            setAttribute(AttributeName.CLIPBOX, value, null);
+            setAttribute(AttributeName.CONTENTREF, value, null);
         }
 
         /**
-          * (20) get JDFRectangle attribute ClipBox
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
+          * (23) get String attribute ContentRef
+          * @return the value of the attribute
           */
-        public JDFRectangle getClipBox()
+        public String getContentRef()
         {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CLIPBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
-            return nPlaceHolder;
+            return getAttribute(AttributeName.CONTENTREF, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -431,6 +424,40 @@ public abstract class JDFAutoMarkObject extends JDFElement
         public int getLayerID()
         {
             return getIntAttribute(AttributeName.LAYERID, null, 0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute CompensationCTM
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute CompensationCTM
+          * @param value: the value to set the attribute to
+          */
+        public void setCompensationCTM(JDFMatrix value)
+        {
+            setAttribute(AttributeName.COMPENSATIONCTM, value, null);
+        }
+
+        /**
+          * (20) get JDFMatrix attribute CompensationCTM
+          * @return JDFMatrix the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFMatrix
+          */
+        public JDFMatrix getCompensationCTM()
+        {
+            String strAttrName = "";
+            JDFMatrix nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.COMPENSATIONCTM, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFMatrix(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -469,24 +496,24 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute ClipPath
+        Methods for Attribute StackOrd
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute ClipPath
+          * (36) set attribute StackOrd
           * @param value: the value to set the attribute to
           */
-        public void setClipPath(String value)
+        public void setStackOrd(int value)
         {
-            setAttribute(AttributeName.CLIPPATH, value, null);
+            setAttribute(AttributeName.STACKORD, value, null);
         }
 
         /**
-          * (23) get String attribute ClipPath
-          * @return the value of the attribute
+          * (15) get int attribute StackOrd
+          * @return int the value of the attribute
           */
-        public String getClipPath()
+        public int getStackOrd()
         {
-            return getAttribute(AttributeName.CLIPPATH, null, JDFConstants.EMPTYSTRING);
+            return getIntAttribute(AttributeName.STACKORD, null, 0);
         }
 
         
@@ -577,6 +604,162 @@ public abstract class JDFAutoMarkObject extends JDFElement
                 return null;
             }
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute TrimCTM
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute TrimCTM
+          * @param value: the value to set the attribute to
+          */
+        public void setTrimCTM(JDFMatrix value)
+        {
+            setAttribute(AttributeName.TRIMCTM, value, null);
+        }
+
+        /**
+          * (20) get JDFMatrix attribute TrimCTM
+          * @return JDFMatrix the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFMatrix
+          */
+        public JDFMatrix getTrimCTM()
+        {
+            String strAttrName = "";
+            JDFMatrix nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.TRIMCTM, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFMatrix(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute OrdID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute OrdID
+          * @param value: the value to set the attribute to
+          */
+        public void setOrdID(int value)
+        {
+            setAttribute(AttributeName.ORDID, value, null);
+        }
+
+        /**
+          * (15) get int attribute OrdID
+          * @return int the value of the attribute
+          */
+        public int getOrdID()
+        {
+            return getIntAttribute(AttributeName.ORDID, null, 0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ClipBox
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ClipBox
+          * @param value: the value to set the attribute to
+          */
+        public void setClipBox(JDFRectangle value)
+        {
+            setAttribute(AttributeName.CLIPBOX, value, null);
+        }
+
+        /**
+          * (20) get JDFRectangle attribute ClipBox
+          * @return JDFRectangle the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFRectangle
+          */
+        public JDFRectangle getClipBox()
+        {
+            String strAttrName = "";
+            JDFRectangle nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.CLIPBOX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFRectangle(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Anchor
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute Anchor
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setAnchor(EnumAnchor enumVar)
+        {
+            setAttribute(AttributeName.ANCHOR, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute Anchor
+          * @return the value of the attribute
+          */
+        public EnumAnchor getAnchor()
+        {
+            return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ClipPath
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ClipPath
+          * @param value: the value to set the attribute to
+          */
+        public void setClipPath(String value)
+        {
+            setAttribute(AttributeName.CLIPPATH, value, null);
+        }
+
+        /**
+          * (23) get String attribute ClipPath
+          * @return the value of the attribute
+          */
+        public String getClipPath()
+        {
+            return getAttribute(AttributeName.CLIPPATH, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute TrimClipPath
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute TrimClipPath
+          * @param value: the value to set the attribute to
+          */
+        public void setTrimClipPath(String value)
+        {
+            setAttribute(AttributeName.TRIMCLIPPATH, value, null);
+        }
+
+        /**
+          * (23) get String attribute TrimClipPath
+          * @return the value of the attribute
+          */
+        public String getTrimClipPath()
+        {
+            return getAttribute(AttributeName.TRIMCLIPPATH, null, JDFConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************
@@ -1049,6 +1232,104 @@ public abstract class JDFAutoMarkObject extends JDFElement
     public void refLayoutElement(JDFLayoutElement refTarget)
     {
         refElement(refTarget);
+    }
+
+    /** (26) getCreateMarkActivation
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFMarkActivation the element
+     */
+    public JDFMarkActivation getCreateMarkActivation(int iSkip)
+    {
+        return (JDFMarkActivation)getCreateElement_KElement(ElementName.MARKACTIVATION, null, iSkip);
+    }
+
+    /**
+     * (27) const get element MarkActivation
+     * @param iSkip number of elements to skip
+     * @return JDFMarkActivation the element
+     * default is getMarkActivation(0)     */
+    public JDFMarkActivation getMarkActivation(int iSkip)
+    {
+        return (JDFMarkActivation) getElement(ElementName.MARKACTIVATION, null, iSkip);
+    }
+
+    /**
+     * Get all MarkActivation from the current element
+     * 
+     * @return Collection<JDFMarkActivation>
+     */
+    public Collection<JDFMarkActivation> getAllMarkActivation()
+    {
+        Vector<JDFMarkActivation> v = new Vector<JDFMarkActivation>();
+
+        JDFMarkActivation kElem = (JDFMarkActivation) getFirstChildElement(ElementName.MARKACTIVATION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMarkActivation) kElem.getNextSiblingElement(ElementName.MARKACTIVATION, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element MarkActivation
+     */
+    public JDFMarkActivation appendMarkActivation() throws JDFException
+    {
+        return (JDFMarkActivation) appendElement(ElementName.MARKACTIVATION, null);
+    }
+
+    /** (26) getCreateRefAnchor
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFRefAnchor the element
+     */
+    public JDFRefAnchor getCreateRefAnchor(int iSkip)
+    {
+        return (JDFRefAnchor)getCreateElement_KElement(ElementName.REFANCHOR, null, iSkip);
+    }
+
+    /**
+     * (27) const get element RefAnchor
+     * @param iSkip number of elements to skip
+     * @return JDFRefAnchor the element
+     * default is getRefAnchor(0)     */
+    public JDFRefAnchor getRefAnchor(int iSkip)
+    {
+        return (JDFRefAnchor) getElement(ElementName.REFANCHOR, null, iSkip);
+    }
+
+    /**
+     * Get all RefAnchor from the current element
+     * 
+     * @return Collection<JDFRefAnchor>
+     */
+    public Collection<JDFRefAnchor> getAllRefAnchor()
+    {
+        Vector<JDFRefAnchor> v = new Vector<JDFRefAnchor>();
+
+        JDFRefAnchor kElem = (JDFRefAnchor) getFirstChildElement(ElementName.REFANCHOR, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFRefAnchor) kElem.getNextSiblingElement(ElementName.REFANCHOR, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element RefAnchor
+     */
+    public JDFRefAnchor appendRefAnchor() throws JDFException
+    {
+        return (JDFRefAnchor) appendElement(ElementName.REFANCHOR, null);
     }
 
     /** (26) getCreateRegisterMark

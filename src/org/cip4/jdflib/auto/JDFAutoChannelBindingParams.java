@@ -85,18 +85,18 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CLAMPSYSTEM, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.BRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.CLAMPCOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.CLAMPD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.CLAMPSIZE, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.CLAMPCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.CLAMPD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.CLAMPSIZE, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,15 +146,13 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoChannelBindingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -162,8 +160,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -203,8 +200,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
           * (36) set attribute Brand
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setBrand(String value)
+        public void setBrand(String value)
         {
             setAttribute(AttributeName.BRAND, value, null);
         }
@@ -213,8 +209,7 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
           * (23) get String attribute Brand
           * @return the value of the attribute
           */
-        @Override
-		public String getBrand()
+        public String getBrand()
         {
             return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
         }
@@ -243,6 +238,28 @@ public abstract class JDFAutoChannelBindingParams extends JDFResource
             strAttrName = getAttribute(AttributeName.CLAMPCOLOR, null, JDFConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ClampColorDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ClampColorDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setClampColorDetails(String value)
+        {
+            setAttribute(AttributeName.CLAMPCOLORDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute ClampColorDetails
+          * @return the value of the attribute
+          */
+        public String getClampColorDetails()
+        {
+            return getAttribute(AttributeName.CLAMPCOLORDETAILS, null, JDFConstants.EMPTYSTRING);
         }
 
         

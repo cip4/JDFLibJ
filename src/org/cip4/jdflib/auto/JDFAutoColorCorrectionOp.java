@@ -84,8 +84,10 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 public abstract class JDFAutoColorCorrectionOp extends JDFElement
@@ -93,7 +95,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
@@ -104,10 +106,10 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.ADJUSTHUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.ADJUSTLIGHTNESS, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.ADJUSTSATURATION, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,8 +121,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -170,8 +171,7 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoColorCorrectionOp[  --> " + super.toString() + " ]";
     }
@@ -404,6 +404,31 @@ public abstract class JDFAutoColorCorrectionOp extends JDFElement
         public double getAdjustSaturation()
         {
             return getRealAttribute(AttributeName.ADJUSTSATURATION, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ObjectTags
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ObjectTags
+          * @param value: the value to set the attribute to
+          */
+        public void setObjectTags(VString value)
+        {
+            setAttribute(AttributeName.OBJECTTAGS, value, null);
+        }
+
+        /**
+          * (21) get VString attribute ObjectTags
+          * @return VString the value of the attribute
+          */
+        public VString getObjectTags()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
 /* ***********************************************************************

@@ -110,8 +110,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.RETURNLIST, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, "None");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -133,8 +132,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
         elemInfoTable[10] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -184,8 +182,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoArtDeliveryIntent[  --> " + super.toString() + " ]";
     }
@@ -630,8 +627,7 @@ public abstract class JDFAutoArtDeliveryIntent extends JDFIntentResource
     /**
      * (30) append element Contact
      */
-    @Override
-	public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

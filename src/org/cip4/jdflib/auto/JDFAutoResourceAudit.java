@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 
 public abstract class JDFAutoResourceAudit extends JDFAudit
@@ -102,22 +103,21 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333111);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.MISDETAILS, 0x66666111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,8 +167,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoResourceAudit[  --> " + super.toString() + " ]";
     }
@@ -294,6 +293,55 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /** (26) getCreateEmployee
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee getCreateEmployee(int iSkip)
+    {
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Employee
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     * default is getEmployee(0)     */
+    public JDFEmployee getEmployee(int iSkip)
+    {
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
+    {
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+    }
 
     /**
      * (24) const get element MISDetails

@@ -88,13 +88,14 @@ import org.cip4.jdflib.span.JDFSpanJacket;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
 import org.cip4.jdflib.span.JDFSpanStripMaterial;
 import org.cip4.jdflib.span.JDFSpanTightBacking;
+import org.cip4.jdflib.span.JDFStringSpan;
 
 public abstract class JDFAutoHardCoverBinding extends JDFElement
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[20];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[21];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.BLOCKTHREADSEWING, 0x66666661);
@@ -102,25 +103,25 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.ENDSHEETS, 0x66666661);
         elemInfoTable[3] = new ElemInfoTable(ElementName.HEADBANDS, 0x66666661);
         elemInfoTable[4] = new ElemInfoTable(ElementName.HEADBANDCOLOR, 0x66666661);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.JACKET, 0x66666661);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.JACKETFOLDINGWIDTH, 0x66666111);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.JAPANBIND, 0x66666661);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.SPINEBRUSHING, 0x66666661);
-        elemInfoTable[9] = new ElemInfoTable(ElementName.SPINEFIBERROUGHING, 0x66666661);
-        elemInfoTable[10] = new ElemInfoTable(ElementName.SPINEGLUE, 0x66666661);
-        elemInfoTable[11] = new ElemInfoTable(ElementName.SPINELEVELLING, 0x66666661);
-        elemInfoTable[12] = new ElemInfoTable(ElementName.SPINEMILLING, 0x66666661);
-        elemInfoTable[13] = new ElemInfoTable(ElementName.SPINENOTCHING, 0x66666661);
-        elemInfoTable[14] = new ElemInfoTable(ElementName.SPINESANDING, 0x66666661);
-        elemInfoTable[15] = new ElemInfoTable(ElementName.SPINESHREDDING, 0x66666661);
-        elemInfoTable[16] = new ElemInfoTable(ElementName.STRIPMATERIAL, 0x66666661);
-        elemInfoTable[17] = new ElemInfoTable(ElementName.TIGHTBACKING, 0x66666661);
-        elemInfoTable[18] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
-        elemInfoTable[19] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333331);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.HEADBANDCOLORDETAILS, 0x33331111);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.JACKET, 0x66666661);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.JACKETFOLDINGWIDTH, 0x66666111);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.JAPANBIND, 0x66666661);
+        elemInfoTable[9] = new ElemInfoTable(ElementName.SPINEBRUSHING, 0x66666661);
+        elemInfoTable[10] = new ElemInfoTable(ElementName.SPINEFIBERROUGHING, 0x66666661);
+        elemInfoTable[11] = new ElemInfoTable(ElementName.SPINEGLUE, 0x66666661);
+        elemInfoTable[12] = new ElemInfoTable(ElementName.SPINELEVELLING, 0x66666661);
+        elemInfoTable[13] = new ElemInfoTable(ElementName.SPINEMILLING, 0x66666661);
+        elemInfoTable[14] = new ElemInfoTable(ElementName.SPINENOTCHING, 0x66666661);
+        elemInfoTable[15] = new ElemInfoTable(ElementName.SPINESANDING, 0x66666661);
+        elemInfoTable[16] = new ElemInfoTable(ElementName.SPINESHREDDING, 0x66666661);
+        elemInfoTable[17] = new ElemInfoTable(ElementName.STRIPMATERIAL, 0x66666661);
+        elemInfoTable[18] = new ElemInfoTable(ElementName.TIGHTBACKING, 0x66666661);
+        elemInfoTable[19] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
+        elemInfoTable[20] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -170,8 +171,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoHardCoverBinding[  --> " + super.toString() + " ]";
     }
@@ -310,6 +310,55 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
     public JDFSpanNamedColor appendHeadBandColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.HEADBANDCOLOR, 1, null);
+    }
+
+    /** (26) getCreateHeadBandColorDetails
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getCreateHeadBandColorDetails(int iSkip)
+    {
+        return (JDFStringSpan)getCreateElement_KElement(ElementName.HEADBANDCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * (27) const get element HeadBandColorDetails
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     * default is getHeadBandColorDetails(0)     */
+    public JDFStringSpan getHeadBandColorDetails(int iSkip)
+    {
+        return (JDFStringSpan) getElement(ElementName.HEADBANDCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * Get all HeadBandColorDetails from the current element
+     * 
+     * @return Collection<JDFStringSpan>
+     */
+    public Collection<JDFStringSpan> getAllHeadBandColorDetails()
+    {
+        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+
+        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.HEADBANDCOLORDETAILS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.HEADBANDCOLORDETAILS, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element HeadBandColorDetails
+     */
+    public JDFStringSpan appendHeadBandColorDetails() throws JDFException
+    {
+        return (JDFStringSpan) appendElement(ElementName.HEADBANDCOLORDETAILS, null);
     }
 
     /**

@@ -71,11 +71,17 @@
 package org.cip4.jdflib.auto;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.process.JDFContentList;
 import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFStringSpan;
@@ -86,13 +92,27 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+    static
+    {
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.Any, null, null);
+    }
+    
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.ISSUEDATE, 0x55555111);
         elemInfoTable[1] = new ElemInfoTable(ElementName.ISSUENAME, 0x55555111);
         elemInfoTable[2] = new ElemInfoTable(ElementName.ISSUETYPE, 0x55555111);
         elemInfoTable[3] = new ElemInfoTable(ElementName.CIRCULATION, 0x66666111);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.CONTENTLIST, 0x66661111);
     }
     
     @Override
@@ -152,6 +172,37 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         return " JDFAutoPublishingIntent[  --> " + super.toString() + " ]";
     }
 
+
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ContentDataRefs
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ContentDataRefs
+          * @param value: the value to set the attribute to
+          */
+        public void setContentDataRefs(VString value)
+        {
+            setAttribute(AttributeName.CONTENTDATAREFS, value, null);
+        }
+
+        /**
+          * (20) get VString attribute ContentDataRefs
+          * @return VString the value of the attribute, null if a the
+          *         attribute value is not a valid to create a VString
+          */
+        public VString getContentDataRefs()
+        {
+            String strAttrName = "";
+            VString nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFConstants.EMPTYSTRING);
+            nPlaceHolder = new VString(strAttrName, null);
+            return nPlaceHolder;
+        }
 
 /* ***********************************************************************
  * Element getter / setter
@@ -260,6 +311,41 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
     public JDFIntegerSpan appendCirculation() throws JDFException
     {
         return (JDFIntegerSpan) appendElementN(ElementName.CIRCULATION, 1, null);
+    }
+
+    /**
+     * (24) const get element ContentList
+     * @return JDFContentList the element
+     */
+    public JDFContentList getContentList()
+    {
+        return (JDFContentList) getElement(ElementName.CONTENTLIST, null, 0);
+    }
+
+    /** (25) getCreateContentList
+     * 
+     * @return JDFContentList the element
+     */
+    public JDFContentList getCreateContentList()
+    {
+        return (JDFContentList) getCreateElement_KElement(ElementName.CONTENTLIST, null, 0);
+    }
+
+    /**
+     * (29) append element ContentList
+     */
+    public JDFContentList appendContentList() throws JDFException
+    {
+        return (JDFContentList) appendElementN(ElementName.CONTENTLIST, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refContentList(JDFContentList refTarget)
+    {
+        refElement(refTarget);
     }
 
 }// end namespace JDF

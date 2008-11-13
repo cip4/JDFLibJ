@@ -115,8 +115,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         atrInfoTable[12] = new AtrInfoTable(AttributeName.SIDES, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -128,13 +127,12 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x66666661);
         elemInfoTable[1] = new ElemInfoTable(ElementName.APPROVALPARAMS, 0x66666611);
         elemInfoTable[2] = new ElemInfoTable(ElementName.DISJOINTING, 0x66666661);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.INK, 0x66666111);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.INK, 0x77776111);
         elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x66666661);
         elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -184,15 +182,13 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDigitalPrintingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -200,8 +196,7 @@ public abstract class JDFAutoDigitalPrintingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

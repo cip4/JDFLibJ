@@ -101,27 +101,26 @@ public abstract class JDFAutoColorantControl extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.PROCESSCOLORMODEL, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[7];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.COLORANTALIAS, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTORDER, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.COLORANTPARAMS, 0x66666666);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.COLORSPACESUBSTITUTE, 0x33333333);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.DEVICECOLORANTORDER, 0x66666666);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x33333333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTCONVERTPROCESS, 0x66661111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.COLORANTORDER, 0x66666666);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.COLORANTPARAMS, 0x66666666);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.COLORSPACESUBSTITUTE, 0x33333333);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.DEVICECOLORANTORDER, 0x66666666);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,15 +170,13 @@ public abstract class JDFAutoColorantControl extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoColorantControl[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -187,8 +184,7 @@ public abstract class JDFAutoColorantControl extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -303,6 +299,32 @@ public abstract class JDFAutoColorantControl extends JDFResource
     public void refColorantAlias(JDFColorantAlias refTarget)
     {
         refElement(refTarget);
+    }
+
+    /**
+     * (24) const get element ColorantConvertProcess
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getColorantConvertProcess()
+    {
+        return (JDFSeparationList) getElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
+    }
+
+    /** (25) getCreateColorantConvertProcess
+     * 
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getCreateColorantConvertProcess()
+    {
+        return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
+    }
+
+    /**
+     * (29) append element ColorantConvertProcess
+     */
+    public JDFSeparationList appendColorantConvertProcess() throws JDFException
+    {
+        return (JDFSeparationList) appendElementN(ElementName.COLORANTCONVERTPROCESS, 1, null);
     }
 
     /**

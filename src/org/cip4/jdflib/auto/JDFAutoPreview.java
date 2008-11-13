@@ -89,7 +89,7 @@ public abstract class JDFAutoPreview extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewFileType.getEnum(0), "PNG");
@@ -98,10 +98,10 @@ public abstract class JDFAutoPreview extends JDFResource
         atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -151,15 +151,13 @@ public abstract class JDFAutoPreview extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPreview[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -167,8 +165,7 @@ public abstract class JDFAutoPreview extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -462,6 +459,28 @@ public abstract class JDFAutoPreview extends JDFResource
         public String getDirectory()
         {
             return getAttribute(AttributeName.DIRECTORY, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute MimeTypeDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MimeTypeDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setMimeTypeDetails(String value)
+        {
+            setAttribute(AttributeName.MIMETYPEDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute MimeTypeDetails
+          * @return the value of the attribute
+          */
+        public String getMimeTypeDetails()
+        {
+            return getAttribute(AttributeName.MIMETYPEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
 
 }// end namespace JDF

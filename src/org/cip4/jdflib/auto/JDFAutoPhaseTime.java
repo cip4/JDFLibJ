@@ -105,8 +105,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
         atrInfoTable[3] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -122,8 +121,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
         elemInfoTable[4] = new ElemInfoTable(ElementName.PART, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -173,8 +171,7 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPhaseTime[  --> " + super.toString() + " ]";
     }

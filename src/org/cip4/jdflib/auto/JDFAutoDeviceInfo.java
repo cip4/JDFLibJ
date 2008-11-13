@@ -100,24 +100,24 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.COUNTERUNIT, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.DEVICECONDITION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceCondition.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEOPERATIONMODE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceOperationMode.getEnum(0), null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.DEVICESTATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumDeviceStatus.getEnum(0), null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.HOURCOUNTER, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.POWERONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.PRODUCTIONCOUNTER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.SPEED, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.TOTALPRODUCTIONCOUNTER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.IDLESTARTTIME, 0x33331111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.POWERONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.PRODUCTIONCOUNTER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.SPEED, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.TOTALPRODUCTIONCOUNTER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -132,8 +132,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.MODULESTATUS, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -183,8 +182,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDeviceInfo[  --> " + super.toString() + " ]";
     }
@@ -479,6 +477,44 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
                 return null;
             }
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute IdleStartTime
+        --------------------------------------------------------------------- */
+        /**
+          * (11) set attribute IdleStartTime
+          * @param value: the value to set the attribute to or null
+          */
+        public void setIdleStartTime(JDFDate value)
+        {
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.IDLESTARTTIME, date.getDateTimeISO(), null);
+        }
+
+        /**
+          * (12) get JDFDate attribute IdleStartTime
+          * @return JDFDate the value of the attribute
+          */
+        public JDFDate getIdleStartTime()
+        {
+            JDFDate nMyDate = null;
+            String str = JDFConstants.EMPTYSTRING;
+            str = getAttribute(AttributeName.IDLESTARTTIME, null, JDFConstants.EMPTYSTRING);
+            if (!JDFConstants.EMPTYSTRING.equals(str))
+            {
+                try
+                {
+                    nMyDate = new JDFDate(str);
+                }
+                catch(DataFormatException dfe)
+                {
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
+                }
+            }
+            return nMyDate;
         }
 
         

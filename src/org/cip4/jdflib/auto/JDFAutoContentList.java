@@ -89,11 +89,10 @@ public abstract class JDFAutoContentList extends JDFResource
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTDATA, 0x22222111);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTDATA, 0x22221111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,15 +142,13 @@ public abstract class JDFAutoContentList extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoContentList[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -159,8 +156,7 @@ public abstract class JDFAutoContentList extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -107,6 +109,7 @@ import org.cip4.jdflib.span.JDFSpanBindingLength;
 import org.cip4.jdflib.span.JDFSpanBindingSide;
 import org.cip4.jdflib.span.JDFSpanBindingType;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
+import org.cip4.jdflib.span.JDFStringSpan;
 
 public abstract class JDFAutoBindingIntent extends JDFIntentResource
 {
@@ -119,45 +122,46 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDINGORDER, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumBindingOrder.getEnum(0), "Gathering");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[25];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[28];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOVERCOLOR, 0x66666661);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.BINDINGTYPE, 0x55555555);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.BINDINGCOLOR, 0x66666666);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.BINDINGLENGTH, 0x66666666);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.BINDINGSIDE, 0x66666666);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.COVERCOLOR, 0x66666666);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.ADHESIVEBINDING, 0x77777776);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.BINDLIST, 0x66666661);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.BOOKCASE, 0x77777776);
-        elemInfoTable[9] = new ElemInfoTable(ElementName.CHANNELBINDING, 0x66666666);
-        elemInfoTable[10] = new ElemInfoTable(ElementName.COILBINDING, 0x66666666);
-        elemInfoTable[11] = new ElemInfoTable(ElementName.EDGEGLUING, 0x66666661);
-        elemInfoTable[12] = new ElemInfoTable(ElementName.HARDCOVERBINDING, 0x66666661);
-        elemInfoTable[13] = new ElemInfoTable(ElementName.PLASTICCOMBBINDING, 0x66666666);
-        elemInfoTable[14] = new ElemInfoTable(ElementName.RINGBINDING, 0x66666666);
-        elemInfoTable[15] = new ElemInfoTable(ElementName.SADDLESTITCHING, 0x66666666);
-        elemInfoTable[16] = new ElemInfoTable(ElementName.SIDESEWING, 0x66666666);
-        elemInfoTable[17] = new ElemInfoTable(ElementName.SIDESTITCHING, 0x66666666);
-        elemInfoTable[18] = new ElemInfoTable(ElementName.SOFTCOVERBINDING, 0x66666661);
-        elemInfoTable[19] = new ElemInfoTable(ElementName.TAPE, 0x66666661);
-        elemInfoTable[20] = new ElemInfoTable(ElementName.TABS, 0x66666666);
-        elemInfoTable[21] = new ElemInfoTable(ElementName.THREADSEALING, 0x66666666);
-        elemInfoTable[22] = new ElemInfoTable(ElementName.THREADSEWING, 0x66666666);
-        elemInfoTable[23] = new ElemInfoTable(ElementName.STRIPBINDING, 0x66666661);
-        elemInfoTable[24] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x66666666);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.BACKCOVERCOLORDETAILS, 0x33331111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.BINDINGTYPE, 0x55555555);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.BINDINGCOLOR, 0x66666666);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.BINDINGCOLORDETAILS, 0x33331111);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.BINDINGLENGTH, 0x66666666);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.BINDINGSIDE, 0x66666666);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.COVERCOLOR, 0x66666666);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.COVERCOLORDETAILS, 0x33331111);
+        elemInfoTable[9] = new ElemInfoTable(ElementName.ADHESIVEBINDING, 0x77777776);
+        elemInfoTable[10] = new ElemInfoTable(ElementName.BINDLIST, 0x66666661);
+        elemInfoTable[11] = new ElemInfoTable(ElementName.BOOKCASE, 0x77777776);
+        elemInfoTable[12] = new ElemInfoTable(ElementName.CHANNELBINDING, 0x66666666);
+        elemInfoTable[13] = new ElemInfoTable(ElementName.COILBINDING, 0x66666666);
+        elemInfoTable[14] = new ElemInfoTable(ElementName.EDGEGLUING, 0x66666661);
+        elemInfoTable[15] = new ElemInfoTable(ElementName.HARDCOVERBINDING, 0x66666661);
+        elemInfoTable[16] = new ElemInfoTable(ElementName.PLASTICCOMBBINDING, 0x66666666);
+        elemInfoTable[17] = new ElemInfoTable(ElementName.RINGBINDING, 0x66666666);
+        elemInfoTable[18] = new ElemInfoTable(ElementName.SADDLESTITCHING, 0x66666666);
+        elemInfoTable[19] = new ElemInfoTable(ElementName.SIDESEWING, 0x66666666);
+        elemInfoTable[20] = new ElemInfoTable(ElementName.SIDESTITCHING, 0x66666666);
+        elemInfoTable[21] = new ElemInfoTable(ElementName.SOFTCOVERBINDING, 0x66666661);
+        elemInfoTable[22] = new ElemInfoTable(ElementName.TAPE, 0x66666661);
+        elemInfoTable[23] = new ElemInfoTable(ElementName.TABS, 0x66666666);
+        elemInfoTable[24] = new ElemInfoTable(ElementName.THREADSEALING, 0x66666666);
+        elemInfoTable[25] = new ElemInfoTable(ElementName.THREADSEWING, 0x66666666);
+        elemInfoTable[26] = new ElemInfoTable(ElementName.STRIPBINDING, 0x66666661);
+        elemInfoTable[27] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -207,8 +211,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBindingIntent[  --> " + super.toString() + " ]";
     }
@@ -317,6 +320,55 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
         return (JDFSpanNamedColor) appendElementN(ElementName.BACKCOVERCOLOR, 1, null);
     }
 
+    /** (26) getCreateBackCoverColorDetails
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getCreateBackCoverColorDetails(int iSkip)
+    {
+        return (JDFStringSpan)getCreateElement_KElement(ElementName.BACKCOVERCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * (27) const get element BackCoverColorDetails
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     * default is getBackCoverColorDetails(0)     */
+    public JDFStringSpan getBackCoverColorDetails(int iSkip)
+    {
+        return (JDFStringSpan) getElement(ElementName.BACKCOVERCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * Get all BackCoverColorDetails from the current element
+     * 
+     * @return Collection<JDFStringSpan>
+     */
+    public Collection<JDFStringSpan> getAllBackCoverColorDetails()
+    {
+        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+
+        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.BACKCOVERCOLORDETAILS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.BACKCOVERCOLORDETAILS, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element BackCoverColorDetails
+     */
+    public JDFStringSpan appendBackCoverColorDetails() throws JDFException
+    {
+        return (JDFStringSpan) appendElement(ElementName.BACKCOVERCOLORDETAILS, null);
+    }
+
     /**
      * (24) const get element BindingType
      * @return JDFSpanBindingType the element
@@ -367,6 +419,55 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
     public JDFSpanNamedColor appendBindingColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.BINDINGCOLOR, 1, null);
+    }
+
+    /** (26) getCreateBindingColorDetails
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getCreateBindingColorDetails(int iSkip)
+    {
+        return (JDFStringSpan)getCreateElement_KElement(ElementName.BINDINGCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * (27) const get element BindingColorDetails
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     * default is getBindingColorDetails(0)     */
+    public JDFStringSpan getBindingColorDetails(int iSkip)
+    {
+        return (JDFStringSpan) getElement(ElementName.BINDINGCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * Get all BindingColorDetails from the current element
+     * 
+     * @return Collection<JDFStringSpan>
+     */
+    public Collection<JDFStringSpan> getAllBindingColorDetails()
+    {
+        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+
+        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.BINDINGCOLORDETAILS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.BINDINGCOLORDETAILS, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element BindingColorDetails
+     */
+    public JDFStringSpan appendBindingColorDetails() throws JDFException
+    {
+        return (JDFStringSpan) appendElement(ElementName.BINDINGCOLORDETAILS, null);
     }
 
     /**
@@ -445,6 +546,55 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
     public JDFSpanNamedColor appendCoverColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.COVERCOLOR, 1, null);
+    }
+
+    /** (26) getCreateCoverColorDetails
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getCreateCoverColorDetails(int iSkip)
+    {
+        return (JDFStringSpan)getCreateElement_KElement(ElementName.COVERCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * (27) const get element CoverColorDetails
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     * default is getCoverColorDetails(0)     */
+    public JDFStringSpan getCoverColorDetails(int iSkip)
+    {
+        return (JDFStringSpan) getElement(ElementName.COVERCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * Get all CoverColorDetails from the current element
+     * 
+     * @return Collection<JDFStringSpan>
+     */
+    public Collection<JDFStringSpan> getAllCoverColorDetails()
+    {
+        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+
+        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.COVERCOLORDETAILS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.COVERCOLORDETAILS, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element CoverColorDetails
+     */
+    public JDFStringSpan appendCoverColorDetails() throws JDFException
+    {
+        return (JDFStringSpan) appendElement(ElementName.COVERCOLORDETAILS, null);
     }
 
     /**

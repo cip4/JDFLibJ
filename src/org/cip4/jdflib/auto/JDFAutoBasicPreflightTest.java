@@ -85,6 +85,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.process.JDFPreflightArgument;
 
 public abstract class JDFAutoBasicPreflightTest extends JDFElement
@@ -92,18 +93,19 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0), null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MINOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.NAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.CLASSNAME, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, "http://www.CIP4.org/JDFSchema_1_1");
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumListType.getEnum(0), "SingleValue");
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.MINOCCURS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +117,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTARGUMENT, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,8 +167,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBasicPreflightTest[  --> " + super.toString() + " ]";
     }
@@ -236,6 +236,53 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
  */
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute Classes
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Classes
+          * @param value: the value to set the attribute to
+          */
+        public void setClasses(VString value)
+        {
+            setAttribute(AttributeName.CLASSES, value, null);
+        }
+
+        /**
+          * (21) get VString attribute Classes
+          * @return VString the value of the attribute
+          */
+        public VString getClasses()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.CLASSES, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ClassName
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ClassName
+          * @param value: the value to set the attribute to
+          */
+        public void setClassName(String value)
+        {
+            setAttribute(AttributeName.CLASSNAME, value, null);
+        }
+
+        /**
+          * (23) get String attribute ClassName
+          * @return the value of the attribute
+          */
+        public String getClassName()
+        {
+            return getAttribute(AttributeName.CLASSNAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute DevNS
         --------------------------------------------------------------------- */
         /**
@@ -275,7 +322,7 @@ public abstract class JDFAutoBasicPreflightTest extends JDFElement
           */
         public EnumListType getListType()
         {
-            return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, null));
+            return EnumListType.getEnum(getAttribute(AttributeName.LISTTYPE, null, "SingleValue"));
         }
 
         

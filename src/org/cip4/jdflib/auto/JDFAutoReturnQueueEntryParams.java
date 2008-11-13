@@ -93,8 +93,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x22222211, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoReturnQueueEntryParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoReturnQueueEntryParams[  --> " + super.toString() + " ]";
     }

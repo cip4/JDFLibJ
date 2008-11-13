@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
@@ -100,13 +101,12 @@ public abstract class JDFAutoRegisterMark extends JDFResource
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CENTER, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MARKTYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.MARKTYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.MARKUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumMarkUsage.getEnum(0), null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ROTATION, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,8 +118,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,15 +168,13 @@ public abstract class JDFAutoRegisterMark extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRegisterMark[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -185,8 +182,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -233,6 +229,7 @@ public abstract class JDFAutoRegisterMark extends JDFResource
 
             public static final EnumMarkUsage Color = new EnumMarkUsage("Color");
             public static final EnumMarkUsage PaperPath = new EnumMarkUsage("PaperPath");
+            public static final EnumMarkUsage Tile = new EnumMarkUsage("Tile");
         }      
 
 
@@ -283,18 +280,21 @@ public abstract class JDFAutoRegisterMark extends JDFResource
           * (36) set attribute MarkType
           * @param value: the value to set the attribute to
           */
-        public void setMarkType(String value)
+        public void setMarkType(VString value)
         {
             setAttribute(AttributeName.MARKTYPE, value, null);
         }
 
         /**
-          * (23) get String attribute MarkType
-          * @return the value of the attribute
+          * (21) get VString attribute MarkType
+          * @return VString the value of the attribute
           */
-        public String getMarkType()
+        public VString getMarkType()
         {
-            return getAttribute(AttributeName.MARKTYPE, null, JDFConstants.EMPTYSTRING);
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.MARKTYPE, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         

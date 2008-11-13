@@ -87,9 +87,11 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFLayerList;
 import org.cip4.jdflib.resource.JDFMarkObject;
+import org.cip4.jdflib.resource.JDFPageCondition;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFSignature;
 import org.cip4.jdflib.resource.process.JDFContentObject;
@@ -103,17 +105,25 @@ public abstract class JDFAutoLayout extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[16];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTOMATED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXDOCORD, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSETORD, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.NAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MAXORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXDOCORD, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSETORD, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.ORDRESET, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumOrdReset.getEnum(0), "Continue");
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETCOUNTRESET, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetCountReset.getEnum(0), "Continue");
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x44443331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.MAXCOLLECT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.MAXORD, 0x44443333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.MINCOLLECT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.ORDSCONSUMED, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
     @Override
@@ -123,7 +133,7 @@ public abstract class JDFAutoLayout extends JDFResource
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTOBJECT, 0x33333333);
@@ -132,8 +142,9 @@ public abstract class JDFAutoLayout extends JDFResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33333333);
         elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x33333331);
         elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.SIGNATURE, 0x44444333);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666661);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.PAGECONDITION, 0x33331111);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.SIGNATURE, 0x44444333);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666661);
     }
     
     @Override
@@ -211,6 +222,98 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
         /**
+        * Enumeration strings for OrdReset
+        */
+
+        public static class EnumOrdReset extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumOrdReset(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumOrdReset getEnum(String enumName)
+            {
+                return (EnumOrdReset) getEnum(EnumOrdReset.class, enumName);
+            }
+
+            public static EnumOrdReset getEnum(int enumValue)
+            {
+                return (EnumOrdReset) getEnum(EnumOrdReset.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumOrdReset.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumOrdReset.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumOrdReset.class);
+            }
+
+            public static final EnumOrdReset Continue = new EnumOrdReset("Continue");
+            public static final EnumOrdReset PagePool = new EnumOrdReset("PagePool");
+            public static final EnumOrdReset PagePoolList = new EnumOrdReset("PagePoolList");
+        }      
+
+
+
+        /**
+        * Enumeration strings for SheetCountReset
+        */
+
+        public static class EnumSheetCountReset extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumSheetCountReset(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumSheetCountReset getEnum(String enumName)
+            {
+                return (EnumSheetCountReset) getEnum(EnumSheetCountReset.class, enumName);
+            }
+
+            public static EnumSheetCountReset getEnum(int enumValue)
+            {
+                return (EnumSheetCountReset) getEnum(EnumSheetCountReset.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumSheetCountReset.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumSheetCountReset.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumSheetCountReset.class);
+            }
+
+            public static final EnumSheetCountReset Continue = new EnumSheetCountReset("Continue");
+            public static final EnumSheetCountReset PagePool = new EnumSheetCountReset("PagePool");
+            public static final EnumSheetCountReset PagePoolList = new EnumSheetCountReset("PagePoolList");
+        }      
+
+
+
+        /**
         * Enumeration strings for SourceWorkStyle
         */
 
@@ -250,8 +353,8 @@ public abstract class JDFAutoLayout extends JDFResource
             }
 
             public static final EnumSourceWorkStyle Simplex = new EnumSourceWorkStyle("Simplex");
-            public static final EnumSourceWorkStyle WorkAndBack = new EnumSourceWorkStyle("WorkAndBack");
             public static final EnumSourceWorkStyle Perfecting = new EnumSourceWorkStyle("Perfecting");
+            public static final EnumSourceWorkStyle WorkAndBack = new EnumSourceWorkStyle("WorkAndBack");
             public static final EnumSourceWorkStyle WorkAndTurn = new EnumSourceWorkStyle("WorkAndTurn");
             public static final EnumSourceWorkStyle WorkAndTumble = new EnumSourceWorkStyle("WorkAndTumble");
             public static final EnumSourceWorkStyle WorkAndTwist = new EnumSourceWorkStyle("WorkAndTwist");
@@ -353,6 +456,50 @@ public abstract class JDFAutoLayout extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute OrdReset
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute OrdReset
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setOrdReset(EnumOrdReset enumVar)
+        {
+            setAttribute(AttributeName.ORDRESET, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute OrdReset
+          * @return the value of the attribute
+          */
+        public EnumOrdReset getOrdReset()
+        {
+            return EnumOrdReset.getEnum(getAttribute(AttributeName.ORDRESET, null, "Continue"));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SheetCountReset
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute SheetCountReset
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setSheetCountReset(EnumSheetCountReset enumVar)
+        {
+            setAttribute(AttributeName.SHEETCOUNTRESET, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute SheetCountReset
+          * @return the value of the attribute
+          */
+        public EnumSheetCountReset getSheetCountReset()
+        {
+            return EnumSheetCountReset.getEnum(getAttribute(AttributeName.SHEETCOUNTRESET, null, "Continue"));
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute Name
         --------------------------------------------------------------------- */
         /**
@@ -371,6 +518,28 @@ public abstract class JDFAutoLayout extends JDFResource
         public String getName()
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute MaxCollect
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MaxCollect
+          * @param value: the value to set the attribute to
+          */
+        public void setMaxCollect(int value)
+        {
+            setAttribute(AttributeName.MAXCOLLECT, value, null);
+        }
+
+        /**
+          * (15) get int attribute MaxCollect
+          * @return int the value of the attribute
+          */
+        public int getMaxCollect()
+        {
+            return getIntAttribute(AttributeName.MAXCOLLECT, null, 0);
         }
 
         
@@ -397,6 +566,106 @@ public abstract class JDFAutoLayout extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute MinCollect
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MinCollect
+          * @param value: the value to set the attribute to
+          */
+        public void setMinCollect(int value)
+        {
+            setAttribute(AttributeName.MINCOLLECT, value, null);
+        }
+
+        /**
+          * (15) get int attribute MinCollect
+          * @return int the value of the attribute
+          */
+        public int getMinCollect()
+        {
+            return getIntAttribute(AttributeName.MINCOLLECT, null, 0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute OrdsConsumed
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute OrdsConsumed
+          * @param value: the value to set the attribute to
+          */
+        public void setOrdsConsumed(JDFIntegerRangeList value)
+        {
+            setAttribute(AttributeName.ORDSCONSUMED, value, null);
+        }
+
+        /**
+          * (20) get JDFIntegerRangeList attribute OrdsConsumed
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
+          */
+        public JDFIntegerRangeList getOrdsConsumed()
+        {
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.ORDSCONSUMED, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SheetNameFormat
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SheetNameFormat
+          * @param value: the value to set the attribute to
+          */
+        public void setSheetNameFormat(String value)
+        {
+            setAttribute(AttributeName.SHEETNAMEFORMAT, value, null);
+        }
+
+        /**
+          * (23) get String attribute SheetNameFormat
+          * @return the value of the attribute
+          */
+        public String getSheetNameFormat()
+        {
+            return getAttribute(AttributeName.SHEETNAMEFORMAT, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SheetNameTemplate
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SheetNameTemplate
+          * @param value: the value to set the attribute to
+          */
+        public void setSheetNameTemplate(String value)
+        {
+            setAttribute(AttributeName.SHEETNAMETEMPLATE, value, null);
+        }
+
+        /**
+          * (23) get String attribute SheetNameTemplate
+          * @return the value of the attribute
+          */
+        public String getSheetNameTemplate()
+        {
+            return getAttribute(AttributeName.SHEETNAMETEMPLATE, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute SourceWorkStyle
         --------------------------------------------------------------------- */
         /**
@@ -415,6 +684,28 @@ public abstract class JDFAutoLayout extends JDFResource
         public EnumSourceWorkStyle getSourceWorkStyle()
         {
             return EnumSourceWorkStyle.getEnum(getAttribute(AttributeName.SOURCEWORKSTYLE, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute StackDepth
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute StackDepth
+          * @param value: the value to set the attribute to
+          */
+        public void setStackDepth(int value)
+        {
+            setAttribute(AttributeName.STACKDEPTH, value, null);
+        }
+
+        /**
+          * (15) get int attribute StackDepth
+          * @return int the value of the attribute
+          */
+        public int getStackDepth()
+        {
+            return getIntAttribute(AttributeName.STACKDEPTH, null, 0);
         }
 
         
@@ -729,6 +1020,55 @@ public abstract class JDFAutoLayout extends JDFResource
     public void refMediaSource(JDFMediaSource refTarget)
     {
         refElement(refTarget);
+    }
+
+    /** (26) getCreatePageCondition
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFPageCondition the element
+     */
+    public JDFPageCondition getCreatePageCondition(int iSkip)
+    {
+        return (JDFPageCondition)getCreateElement_KElement(ElementName.PAGECONDITION, null, iSkip);
+    }
+
+    /**
+     * (27) const get element PageCondition
+     * @param iSkip number of elements to skip
+     * @return JDFPageCondition the element
+     * default is getPageCondition(0)     */
+    public JDFPageCondition getPageCondition(int iSkip)
+    {
+        return (JDFPageCondition) getElement(ElementName.PAGECONDITION, null, iSkip);
+    }
+
+    /**
+     * Get all PageCondition from the current element
+     * 
+     * @return Collection<JDFPageCondition>
+     */
+    public Collection<JDFPageCondition> getAllPageCondition()
+    {
+        Vector<JDFPageCondition> v = new Vector<JDFPageCondition>();
+
+        JDFPageCondition kElem = (JDFPageCondition) getFirstChildElement(ElementName.PAGECONDITION, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPageCondition) kElem.getNextSiblingElement(ElementName.PAGECONDITION, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element PageCondition
+     */
+    public JDFPageCondition appendPageCondition() throws JDFException
+    {
+        return (JDFPageCondition) appendElement(ElementName.PAGECONDITION, null);
     }
 
     /** (26) getCreateSignature

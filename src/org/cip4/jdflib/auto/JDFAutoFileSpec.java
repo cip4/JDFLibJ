@@ -96,7 +96,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[24];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[25];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPRESSION, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, "None");
@@ -106,27 +106,27 @@ public abstract class JDFAutoFileSpec extends JDFResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.CHECKSUM, 0x33333331, AttributeInfo.EnumAttributeType.hexBinary, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.DISPOSITION, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumDisposition.getEnum(0), null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.DOCUMENTNATURALLANG, 0x33333311, AttributeInfo.EnumAttributeType.language, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.FILEFORMAT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.FILESIZE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.FILETARGETDEVICEMODEL, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.FILETEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.FILEVERSION, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.MIMETYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.MIMETYPEVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.OVERWRITEPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOverwritePolicy.getEnum(0), null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.OSVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.PAGEORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPageOrder.getEnum(0), null);
-        atrInfoTable[17] = new AtrInfoTable(AttributeName.PASSWORD, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[18] = new AtrInfoTable(AttributeName.REQUESTQUALITY, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[19] = new AtrInfoTable(AttributeName.RESOURCEUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[20] = new AtrInfoTable(AttributeName.SEARCHDEPTH, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[21] = new AtrInfoTable(AttributeName.UID, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[22] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[23] = new AtrInfoTable(AttributeName.USERFILENAME, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.ENCODING, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.FILEFORMAT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.FILESIZE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.FILETARGETDEVICEMODEL, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.FILETEMPLATE, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.FILEVERSION, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.MIMETYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.MIMETYPEVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.OVERWRITEPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOverwritePolicy.getEnum(0), null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.OSVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.PAGEORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPageOrder.getEnum(0), null);
+        atrInfoTable[18] = new AtrInfoTable(AttributeName.PASSWORD, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[19] = new AtrInfoTable(AttributeName.REQUESTQUALITY, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[20] = new AtrInfoTable(AttributeName.RESOURCEUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[21] = new AtrInfoTable(AttributeName.SEARCHDEPTH, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[22] = new AtrInfoTable(AttributeName.UID, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[23] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+        atrInfoTable[24] = new AtrInfoTable(AttributeName.USERFILENAME, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -140,8 +140,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.FILEALIAS, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -191,15 +190,13 @@ public abstract class JDFAutoFileSpec extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFileSpec[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -207,8 +204,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -510,6 +506,28 @@ public abstract class JDFAutoFileSpec extends JDFResource
         public String getDocumentNaturalLang()
         {
             return getAttribute(AttributeName.DOCUMENTNATURALLANG, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Encoding
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Encoding
+          * @param value: the value to set the attribute to
+          */
+        public void setEncoding(String value)
+        {
+            setAttribute(AttributeName.ENCODING, value, null);
+        }
+
+        /**
+          * (23) get String attribute Encoding
+          * @return the value of the attribute
+          */
+        public String getEncoding()
+        {
+            return getAttribute(AttributeName.ENCODING, null, JDFConstants.EMPTYSTRING);
         }
 
         

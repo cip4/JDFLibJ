@@ -91,8 +91,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x55555111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -142,8 +141,7 @@ public abstract class JDFAutoBarcodeProductionParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBarcodeProductionParams[  --> " + super.toString() + " ]";
     }

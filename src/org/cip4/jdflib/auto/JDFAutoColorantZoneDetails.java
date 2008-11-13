@@ -90,8 +90,7 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.TRAPCOLORSCALING, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,8 +140,7 @@ public abstract class JDFAutoColorantZoneDetails extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoColorantZoneDetails[  --> " + super.toString() + " ]";
     }

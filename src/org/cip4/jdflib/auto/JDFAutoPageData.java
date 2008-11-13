@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.process.JDFElementColorParams;
 import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
@@ -98,7 +99,7 @@ public abstract class JDFAutoPageData extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[20];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[21];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
@@ -112,19 +113,19 @@ public abstract class JDFAutoPageData extends JDFElement
         atrInfoTable[8] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[9] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[10] = new AtrInfoTable(AttributeName.PAGEFORMAT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.PAGELABEL, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.PAGELABELPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.PAGELABELSUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.PAGESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[17] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[18] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[19] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.PAGEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.PAGELABEL, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.PAGELABELPREFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.PAGELABELSUFFIX, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.PAGESTATUS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[18] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[19] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[20] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -140,8 +141,7 @@ public abstract class JDFAutoPageData extends JDFElement
         elemInfoTable[4] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -191,8 +191,7 @@ public abstract class JDFAutoPageData extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPageData[  --> " + super.toString() + " ]";
     }
@@ -457,6 +456,40 @@ public abstract class JDFAutoPageData extends JDFElement
         public String getPageFormat()
         {
             return getAttribute(AttributeName.PAGEFORMAT, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute PageIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute PageIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setPageIndex(JDFIntegerRangeList value)
+        {
+            setAttribute(AttributeName.PAGEINDEX, value, null);
+        }
+
+        /**
+          * (20) get JDFIntegerRangeList attribute PageIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
+          */
+        public JDFIntegerRangeList getPageIndex()
+        {
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.PAGEINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         

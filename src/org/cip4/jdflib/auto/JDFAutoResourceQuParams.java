@@ -71,8 +71,12 @@
 package org.cip4.jdflib.auto;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -84,6 +88,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 
@@ -92,7 +97,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[14];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, JDFResource.EnumResourceClass.getEnum(0), null);
@@ -100,16 +105,18 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.LOCATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.USAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.LOTDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumLotDetails.getEnum(0), "Brief");
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.LOTID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.PROCESSUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.RESOURCEDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumResourceDetails.getEnum(0), "Full");
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,8 +128,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -172,11 +178,101 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoResourceQuParams[  --> " + super.toString() + " ]";
     }
+
+
+        /**
+        * Enumeration strings for LotDetails
+        */
+
+        public static class EnumLotDetails extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumLotDetails(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumLotDetails getEnum(String enumName)
+            {
+                return (EnumLotDetails) getEnum(EnumLotDetails.class, enumName);
+            }
+
+            public static EnumLotDetails getEnum(int enumValue)
+            {
+                return (EnumLotDetails) getEnum(EnumLotDetails.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumLotDetails.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumLotDetails.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumLotDetails.class);
+            }
+
+            public static final EnumLotDetails Brief = new EnumLotDetails("Brief");
+            public static final EnumLotDetails Full = new EnumLotDetails("Full");
+            public static final EnumLotDetails Amount = new EnumLotDetails("Amount");
+        }      
+
+
+
+        /**
+        * Enumeration strings for ResourceDetails
+        */
+
+        public static class EnumResourceDetails extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumResourceDetails(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumResourceDetails getEnum(String enumName)
+            {
+                return (EnumResourceDetails) getEnum(EnumResourceDetails.class, enumName);
+            }
+
+            public static EnumResourceDetails getEnum(int enumValue)
+            {
+                return (EnumResourceDetails) getEnum(EnumResourceDetails.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumResourceDetails.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumResourceDetails.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumResourceDetails.class);
+            }
+
+            public static final EnumResourceDetails Brief = new EnumResourceDetails("Brief");
+            public static final EnumResourceDetails Full = new EnumResourceDetails("Full");
+        }      
+
 
 
 /* ************************************************************************
@@ -295,6 +391,50 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute LotDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute LotDetails
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setLotDetails(EnumLotDetails enumVar)
+        {
+            setAttribute(AttributeName.LOTDETAILS, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute LotDetails
+          * @return the value of the attribute
+          */
+        public EnumLotDetails getLotDetails()
+        {
+            return EnumLotDetails.getEnum(getAttribute(AttributeName.LOTDETAILS, null, "Brief"));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute LotID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute LotID
+          * @param value: the value to set the attribute to
+          */
+        public void setLotID(String value)
+        {
+            setAttribute(AttributeName.LOTID, value, null);
+        }
+
+        /**
+          * (23) get String attribute LotID
+          * @return the value of the attribute
+          */
+        public String getLotID()
+        {
+            return getAttribute(AttributeName.LOTID, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute ProcessUsage
         --------------------------------------------------------------------- */
         /**
@@ -361,6 +501,28 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute ResourceDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute ResourceDetails
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setResourceDetails(EnumResourceDetails enumVar)
+        {
+            setAttribute(AttributeName.RESOURCEDETAILS, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute ResourceDetails
+          * @return the value of the attribute
+          */
+        public EnumResourceDetails getResourceDetails()
+        {
+            return EnumResourceDetails.getEnum(getAttribute(AttributeName.RESOURCEDETAILS, null, "Full"));
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute ResourceID
         --------------------------------------------------------------------- */
         /**
@@ -389,18 +551,21 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
           * (36) set attribute ResourceName
           * @param value: the value to set the attribute to
           */
-        public void setResourceName(String value)
+        public void setResourceName(VString value)
         {
             setAttribute(AttributeName.RESOURCENAME, value, null);
         }
 
         /**
-          * (23) get String attribute ResourceName
-          * @return the value of the attribute
+          * (21) get VString attribute ResourceName
+          * @return VString the value of the attribute
           */
-        public String getResourceName()
+        public VString getResourceName()
         {
-            return getAttribute(AttributeName.RESOURCENAME, null, JDFConstants.EMPTYSTRING);
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.RESOURCENAME, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         

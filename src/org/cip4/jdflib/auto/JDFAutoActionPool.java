@@ -92,8 +92,7 @@ public abstract class JDFAutoActionPool extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.ACTION, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,8 +142,7 @@ public abstract class JDFAutoActionPool extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoActionPool[  --> " + super.toString() + " ]";
     }

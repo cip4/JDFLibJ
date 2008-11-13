@@ -94,8 +94,7 @@ public abstract class JDFAutoPartStatus extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x44444311, AttributeInfo.EnumAttributeType.shortString, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -107,8 +106,7 @@ public abstract class JDFAutoPartStatus extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x77777555);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -158,8 +156,7 @@ public abstract class JDFAutoPartStatus extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPartStatus[  --> " + super.toString() + " ]";
     }

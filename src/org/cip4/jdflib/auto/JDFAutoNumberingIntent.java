@@ -82,22 +82,23 @@ import org.cip4.jdflib.resource.JDFNumberItem;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.span.JDFSpanNamedColor;
+import org.cip4.jdflib.span.JDFStringSpan;
 
 public abstract class JDFAutoNumberingIntent extends JDFIntentResource
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.COLORNAME, 0x66666666);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.NUMBERITEM, 0x22222222);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.COLORNAMEDETAILS, 0x33331111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.NUMBERITEM, 0x22222222);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -147,8 +148,7 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNumberingIntent[  --> " + super.toString() + " ]";
     }
@@ -183,6 +183,55 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
     public JDFSpanNamedColor appendColorName() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.COLORNAME, 1, null);
+    }
+
+    /** (26) getCreateColorNameDetails
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getCreateColorNameDetails(int iSkip)
+    {
+        return (JDFStringSpan)getCreateElement_KElement(ElementName.COLORNAMEDETAILS, null, iSkip);
+    }
+
+    /**
+     * (27) const get element ColorNameDetails
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     * default is getColorNameDetails(0)     */
+    public JDFStringSpan getColorNameDetails(int iSkip)
+    {
+        return (JDFStringSpan) getElement(ElementName.COLORNAMEDETAILS, null, iSkip);
+    }
+
+    /**
+     * Get all ColorNameDetails from the current element
+     * 
+     * @return Collection<JDFStringSpan>
+     */
+    public Collection<JDFStringSpan> getAllColorNameDetails()
+    {
+        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+
+        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.COLORNAMEDETAILS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.COLORNAMEDETAILS, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element ColorNameDetails
+     */
+    public JDFStringSpan appendColorNameDetails() throws JDFException
+    {
+        return (JDFStringSpan) appendElement(ElementName.COLORNAMEDETAILS, null);
     }
 
     /**

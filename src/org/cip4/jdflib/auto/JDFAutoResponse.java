@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,6 +84,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.resource.JDFNotification;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 
 public abstract class JDFAutoResponse extends JDFMessage
 {
@@ -96,21 +100,20 @@ public abstract class JDFAutoResponse extends JDFMessage
         atrInfoTable[3] = new AtrInfoTable(AttributeName.SUBSCRIBED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.NOTIFICATION, 0x66666666);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.NOTIFICATION, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -160,8 +163,7 @@ public abstract class JDFAutoResponse extends JDFMessage
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoResponse[  --> " + super.toString() + " ]";
     }
@@ -201,8 +203,7 @@ public abstract class JDFAutoResponse extends JDFMessage
           * (36) set attribute refID
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setrefID(String value)
+        public void setrefID(String value)
         {
             setAttribute(AttributeName.REFID, value, null);
         }
@@ -211,8 +212,7 @@ public abstract class JDFAutoResponse extends JDFMessage
           * (23) get String attribute refID
           * @return the value of the attribute
           */
-        @Override
-		public String getrefID()
+        public String getrefID()
         {
             return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
         }
@@ -234,8 +234,7 @@ public abstract class JDFAutoResponse extends JDFMessage
           * (15) get int attribute ReturnCode
           * @return int the value of the attribute
           */
-        @Override
-		public int getReturnCode()
+        public int getReturnCode()
         {
             return getIntAttribute(AttributeName.RETURNCODE, null, 0);
         }
@@ -266,6 +265,55 @@ public abstract class JDFAutoResponse extends JDFMessage
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /** (26) getCreateEmployee
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee getCreateEmployee(int iSkip)
+    {
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Employee
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     * default is getEmployee(0)     */
+    public JDFEmployee getEmployee(int iSkip)
+    {
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
+    {
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+    }
 
     /**
      * (24) const get element Notification

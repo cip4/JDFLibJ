@@ -90,8 +90,7 @@ public abstract class JDFAutoNewJDFQuParams extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,8 +140,7 @@ public abstract class JDFAutoNewJDFQuParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNewJDFQuParams[  --> " + super.toString() + " ]";
     }

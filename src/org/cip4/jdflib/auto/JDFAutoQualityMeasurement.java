@@ -99,8 +99,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.START, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -112,8 +111,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.BINDINGQUALITYMEASUREMENT, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -163,8 +161,7 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoQualityMeasurement[  --> " + super.toString() + " ]";
     }

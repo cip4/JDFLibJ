@@ -70,6 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -89,21 +92,21 @@ public abstract class JDFAutoTabs extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.TABBANKS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.TABCOUNT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.TABSPERBANK, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[7];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.TABBRAND, 0x66666111);
@@ -112,10 +115,10 @@ public abstract class JDFAutoTabs extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.TABBINDMYLAR, 0x66666666);
         elemInfoTable[4] = new ElemInfoTable(ElementName.TABBODYCOPY, 0x66666666);
         elemInfoTable[5] = new ElemInfoTable(ElementName.TABMYLARCOLOR, 0x66666666);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.TABMYLARCOLORDETAILS, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,8 +168,7 @@ public abstract class JDFAutoTabs extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTabs[  --> " + super.toString() + " ]";
     }
@@ -196,6 +198,28 @@ public abstract class JDFAutoTabs extends JDFElement
         public int getTabBanks()
         {
             return getIntAttribute(AttributeName.TABBANKS, null, 1);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute TabCount
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute TabCount
+          * @param value: the value to set the attribute to
+          */
+        public void setTabCount(int value)
+        {
+            setAttribute(AttributeName.TABCOUNT, value, null);
+        }
+
+        /**
+          * (15) get int attribute TabCount
+          * @return int the value of the attribute
+          */
+        public int getTabCount()
+        {
+            return getIntAttribute(AttributeName.TABCOUNT, null, 0);
         }
 
         
@@ -379,6 +403,55 @@ public abstract class JDFAutoTabs extends JDFElement
     public JDFSpanNamedColor appendTabMylarColor() throws JDFException
     {
         return (JDFSpanNamedColor) appendElementN(ElementName.TABMYLARCOLOR, 1, null);
+    }
+
+    /** (26) getCreateTabMylarColorDetails
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getCreateTabMylarColorDetails(int iSkip)
+    {
+        return (JDFStringSpan)getCreateElement_KElement(ElementName.TABMYLARCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * (27) const get element TabMylarColorDetails
+     * @param iSkip number of elements to skip
+     * @return JDFStringSpan the element
+     * default is getTabMylarColorDetails(0)     */
+    public JDFStringSpan getTabMylarColorDetails(int iSkip)
+    {
+        return (JDFStringSpan) getElement(ElementName.TABMYLARCOLORDETAILS, null, iSkip);
+    }
+
+    /**
+     * Get all TabMylarColorDetails from the current element
+     * 
+     * @return Collection<JDFStringSpan>
+     */
+    public Collection<JDFStringSpan> getAllTabMylarColorDetails()
+    {
+        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+
+        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.TABMYLARCOLORDETAILS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.TABMYLARCOLORDETAILS, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element TabMylarColorDetails
+     */
+    public JDFStringSpan appendTabMylarColorDetails() throws JDFException
+    {
+        return (JDFStringSpan) appendElement(ElementName.TABMYLARCOLORDETAILS, null);
     }
 
 }// end namespace JDF

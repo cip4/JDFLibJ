@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoMessage extends JDFElement
@@ -85,16 +86,20 @@ public abstract class JDFAutoMessage extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.TIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.SENDERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.TIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.VERSION, 0x33333333, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -144,8 +149,7 @@ public abstract class JDFAutoMessage extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoMessage[  --> " + super.toString() + " ]";
     }
@@ -155,6 +159,75 @@ public abstract class JDFAutoMessage extends JDFElement
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute AgentName
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute AgentName
+          * @param value: the value to set the attribute to
+          */
+        public void setAgentName(String value)
+        {
+            setAttribute(AttributeName.AGENTNAME, value, null);
+        }
+
+        /**
+          * (23) get String attribute AgentName
+          * @return the value of the attribute
+          */
+        public String getAgentName()
+        {
+            return getAttribute(AttributeName.AGENTNAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute AgentVersion
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute AgentVersion
+          * @param value: the value to set the attribute to
+          */
+        public void setAgentVersion(String value)
+        {
+            setAttribute(AttributeName.AGENTVERSION, value, null);
+        }
+
+        /**
+          * (23) get String attribute AgentVersion
+          * @return the value of the attribute
+          */
+        public String getAgentVersion()
+        {
+            return getAttribute(AttributeName.AGENTVERSION, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ICSVersions
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ICSVersions
+          * @param value: the value to set the attribute to
+          */
+        public void setICSVersions(VString value)
+        {
+            setAttribute(AttributeName.ICSVERSIONS, value, null);
+        }
+
+        /**
+          * (21) get VString attribute ICSVersions
+          * @return VString the value of the attribute
+          */
+        public VString getICSVersions()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.ICSVERSIONS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ID
@@ -172,10 +245,31 @@ public abstract class JDFAutoMessage extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        @Override
-		public String getID()
+        public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SenderID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SenderID
+          * @param value: the value to set the attribute to
+          */
+        public void setSenderID(String value)
+        {
+            setAttribute(AttributeName.SENDERID, value, null);
+        }
+
+        /**
+          * (23) get String attribute SenderID
+          * @return the value of the attribute
+          */
+        public String getSenderID()
+        {
+            return getAttribute(AttributeName.SENDERID, null, JDFConstants.EMPTYSTRING);
         }
 
         

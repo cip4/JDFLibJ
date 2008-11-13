@@ -70,17 +70,24 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.resource.JDFPart;
 
 public abstract class JDFAutoNewComment extends JDFElement
 {
@@ -95,10 +102,21 @@ public abstract class JDFAutoNewComment extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
+    }
+    
+    protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -146,8 +164,7 @@ public abstract class JDFAutoNewComment extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNewComment[  --> " + super.toString() + " ]";
     }
@@ -269,5 +286,59 @@ public abstract class JDFAutoNewComment extends JDFElement
         {
             return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
         }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /** (26) getCreatePart
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFPart the element
+     */
+    public JDFPart getCreatePart(int iSkip)
+    {
+        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Part
+     * @param iSkip number of elements to skip
+     * @return JDFPart the element
+     * default is getPart(0)     */
+    public JDFPart getPart(int iSkip)
+    {
+        return (JDFPart) getElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * Get all Part from the current element
+     * 
+     * @return Collection<JDFPart>
+     */
+    public Collection<JDFPart> getAllPart()
+    {
+        Vector<JDFPart> v = new Vector<JDFPart>();
+
+        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
+    {
+        return (JDFPart) appendElement(ElementName.PART, null);
+    }
 
 }// end namespace JDF

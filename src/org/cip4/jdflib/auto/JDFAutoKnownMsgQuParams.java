@@ -70,6 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -81,19 +86,19 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.EXACT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.LISTCOMMANDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.LISTQUERIES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTREGISTRATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.LISTSIGNALS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.EXACT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.LISTCOMMANDS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.LISTQUERIES, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.LISTREGISTRATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.LISTSIGNALS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -143,17 +148,83 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoKnownMsgQuParams[  --> " + super.toString() + " ]";
     }
+
+
+        /**
+        * Enumeration strings for ChannelMode
+        */
+
+        public static class EnumChannelMode extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumChannelMode(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumChannelMode getEnum(String enumName)
+            {
+                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumName);
+            }
+
+            public static EnumChannelMode getEnum(int enumValue)
+            {
+                return (EnumChannelMode) getEnum(EnumChannelMode.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumChannelMode.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumChannelMode.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumChannelMode.class);
+            }
+
+            public static final EnumChannelMode FireAndForget = new EnumChannelMode("FireAndForget");
+            public static final EnumChannelMode Reliable = new EnumChannelMode("Reliable");
+        }      
+
 
 
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ChannelMode
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute ChannelMode
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setChannelMode(EnumChannelMode enumVar)
+        {
+            setAttribute(AttributeName.CHANNELMODE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute ChannelMode
+          * @return the value of the attribute
+          */
+        public EnumChannelMode getChannelMode()
+        {
+            return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Exact

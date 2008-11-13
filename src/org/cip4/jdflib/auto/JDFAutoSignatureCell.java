@@ -89,22 +89,22 @@ public abstract class JDFAutoSignatureCell extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[9];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKFACEPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.BACKFACEPAGES, 0x44443311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.BACKPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.BOTTLEANGLE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTLEAXIS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumBottleAxis.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.FRONTFACEPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.FRONTPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), "Up");
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "0");
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, "0");
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.FACECELLS, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.FRONTFACEPAGES, 0x44443311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.FRONTPAGES, 0x33333311, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.ORIENTATION, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrientation.getEnum(0), "Up");
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.SECTIONINDEX, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "0");
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, "0");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -154,8 +154,7 @@ public abstract class JDFAutoSignatureCell extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSignatureCell[  --> " + super.toString() + " ]";
     }
@@ -369,6 +368,40 @@ public abstract class JDFAutoSignatureCell extends JDFElement
         public EnumBottleAxis getBottleAxis()
         {
             return EnumBottleAxis.getEnum(getAttribute(AttributeName.BOTTLEAXIS, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute FaceCells
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute FaceCells
+          * @param value: the value to set the attribute to
+          */
+        public void setFaceCells(JDFIntegerList value)
+        {
+            setAttribute(AttributeName.FACECELLS, value, null);
+        }
+
+        /**
+          * (20) get JDFIntegerList attribute FaceCells
+          * @return JDFIntegerList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerList
+          */
+        public JDFIntegerList getFaceCells()
+        {
+            String strAttrName = "";
+            JDFIntegerList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.FACECELLS, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         

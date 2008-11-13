@@ -104,8 +104,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -117,8 +116,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x33333111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -168,8 +166,7 @@ public abstract class JDFAutoAssemblySection extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAssemblySection[  --> " + super.toString() + " ]";
     }

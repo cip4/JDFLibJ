@@ -83,6 +83,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.process.JDFContentMetaData;
 import org.cip4.jdflib.resource.process.JDFElementColorParams;
 import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
@@ -93,17 +95,19 @@ public abstract class JDFAutoContentData extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CATALOGID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.CATALOGDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.CONTENTTYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.ISBLANK, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.JOBID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.CONTENTREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTTYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.HASBLEEDS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.ID, 0x33331111, AttributeInfo.EnumAttributeType.ID, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.ISBLANK, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.JOBID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
     @Override
@@ -113,13 +117,14 @@ public abstract class JDFAutoContentData extends JDFElement
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x66666111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x66666111);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666111);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333111);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTMETADATA, 0x22222111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x66666111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.IMAGECOMPRESSIONPARAMS, 0x66666111);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.SCREENINGPARAMS, 0x66666111);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333111);
     }
     
     @Override
@@ -230,6 +235,31 @@ public abstract class JDFAutoContentData extends JDFElement
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute ContentRefs
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ContentRefs
+          * @param value: the value to set the attribute to
+          */
+        public void setContentRefs(VString value)
+        {
+            setAttribute(AttributeName.CONTENTREFS, value, null);
+        }
+
+        /**
+          * (21) get VString attribute ContentRefs
+          * @return VString the value of the attribute
+          */
+        public VString getContentRefs()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.CONTENTREFS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute ContentType
         --------------------------------------------------------------------- */
         /**
@@ -270,6 +300,29 @@ public abstract class JDFAutoContentData extends JDFElement
         public boolean getHasBleeds()
         {
             return getBoolAttribute(AttributeName.HASBLEEDS, null, false);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ID
+          * @param value: the value to set the attribute to
+          */
+        public void setID(String value)
+        {
+            setAttribute(AttributeName.ID, value, null);
+        }
+
+        /**
+          * (23) get String attribute ID
+          * @return the value of the attribute
+          */
+        @Override
+		public String getID()
+        {
+            return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -364,6 +417,55 @@ public abstract class JDFAutoContentData extends JDFElement
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /** (26) getCreateContentMetaData
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFContentMetaData the element
+     */
+    public JDFContentMetaData getCreateContentMetaData(int iSkip)
+    {
+        return (JDFContentMetaData)getCreateElement_KElement(ElementName.CONTENTMETADATA, null, iSkip);
+    }
+
+    /**
+     * (27) const get element ContentMetaData
+     * @param iSkip number of elements to skip
+     * @return JDFContentMetaData the element
+     * default is getContentMetaData(0)     */
+    public JDFContentMetaData getContentMetaData(int iSkip)
+    {
+        return (JDFContentMetaData) getElement(ElementName.CONTENTMETADATA, null, iSkip);
+    }
+
+    /**
+     * Get all ContentMetaData from the current element
+     * 
+     * @return Collection<JDFContentMetaData>
+     */
+    public Collection<JDFContentMetaData> getAllContentMetaData()
+    {
+        Vector<JDFContentMetaData> v = new Vector<JDFContentMetaData>();
+
+        JDFContentMetaData kElem = (JDFContentMetaData) getFirstChildElement(ElementName.CONTENTMETADATA, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFContentMetaData) kElem.getNextSiblingElement(ElementName.CONTENTMETADATA, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element ContentMetaData
+     */
+    public JDFContentMetaData appendContentMetaData() throws JDFException
+    {
+        return (JDFContentMetaData) appendElement(ElementName.CONTENTMETADATA, null);
+    }
 
     /**
      * (24) const get element ElementColorParams

@@ -99,8 +99,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -150,15 +149,13 @@ public abstract class JDFAutoFitPolicy extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFitPolicy[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -166,8 +163,7 @@ public abstract class JDFAutoFitPolicy extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

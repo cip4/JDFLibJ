@@ -92,8 +92,7 @@ public abstract class JDFAutoInsertList extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.INSERT, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,8 +142,7 @@ public abstract class JDFAutoInsertList extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoInsertList[  --> " + super.toString() + " ]";
     }

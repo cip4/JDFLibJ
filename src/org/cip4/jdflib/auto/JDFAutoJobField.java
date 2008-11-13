@@ -88,16 +88,17 @@ public abstract class JDFAutoJobField extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.SHOWLIST, 0x22222221, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.USERTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBFORMAT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBTEMPLATE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.OPERATORTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -106,11 +107,10 @@ public abstract class JDFAutoJobField extends JDFResource
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x77776666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -160,15 +160,13 @@ public abstract class JDFAutoJobField extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoJobField[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -176,8 +174,7 @@ public abstract class JDFAutoJobField extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -210,6 +207,50 @@ public abstract class JDFAutoJobField extends JDFResource
             String  s = getAttribute(AttributeName.SHOWLIST, null, JDFConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute JobFormat
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute JobFormat
+          * @param value: the value to set the attribute to
+          */
+        public void setJobFormat(String value)
+        {
+            setAttribute(AttributeName.JOBFORMAT, value, null);
+        }
+
+        /**
+          * (23) get String attribute JobFormat
+          * @return the value of the attribute
+          */
+        public String getJobFormat()
+        {
+            return getAttribute(AttributeName.JOBFORMAT, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute JobTemplate
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute JobTemplate
+          * @param value: the value to set the attribute to
+          */
+        public void setJobTemplate(String value)
+        {
+            setAttribute(AttributeName.JOBTEMPLATE, value, null);
+        }
+
+        /**
+          * (23) get String attribute JobTemplate
+          * @return the value of the attribute
+          */
+        public String getJobTemplate()
+        {
+            return getAttribute(AttributeName.JOBTEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
 
         

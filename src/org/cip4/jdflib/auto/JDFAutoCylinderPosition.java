@@ -98,8 +98,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.DEVICEMODULEINDEX, 0x22222111, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -149,8 +148,7 @@ public abstract class JDFAutoCylinderPosition extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCylinderPosition[  --> " + super.toString() + " ]";
     }

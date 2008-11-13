@@ -99,8 +99,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.SHOWLIST, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -112,8 +111,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.COMCHANNEL, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -163,8 +161,7 @@ public abstract class JDFAutoCustomerMessage extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCustomerMessage[  --> " + super.toString() + " ]";
     }

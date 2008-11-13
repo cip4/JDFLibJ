@@ -86,11 +86,10 @@ public abstract class JDFAutoTape extends JDFElement
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TAPECOLOR, 0x66666661);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.TAPECOLOR, 0x77776661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -140,8 +139,7 @@ public abstract class JDFAutoTape extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTape[  --> " + super.toString() + " ]";
     }

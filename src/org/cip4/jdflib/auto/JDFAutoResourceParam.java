@@ -95,8 +95,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTPRIORITY, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumDefaultPriority.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,8 +145,7 @@ public abstract class JDFAutoResourceParam extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoResourceParam[  --> " + super.toString() + " ]";
     }

@@ -70,6 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -83,6 +85,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMediaSource;
@@ -99,22 +102,21 @@ public abstract class JDFAutoTile extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777766);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33331111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777766);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,15 +166,13 @@ public abstract class JDFAutoTile extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTile[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -180,8 +180,7 @@ public abstract class JDFAutoTile extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -263,6 +262,55 @@ public abstract class JDFAutoTile extends JDFResource
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /** (26) getCreateMarkObject
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFMarkObject the element
+     */
+    public JDFMarkObject getCreateMarkObject(int iSkip)
+    {
+        return (JDFMarkObject)getCreateElement_KElement(ElementName.MARKOBJECT, null, iSkip);
+    }
+
+    /**
+     * (27) const get element MarkObject
+     * @param iSkip number of elements to skip
+     * @return JDFMarkObject the element
+     * default is getMarkObject(0)     */
+    public JDFMarkObject getMarkObject(int iSkip)
+    {
+        return (JDFMarkObject) getElement(ElementName.MARKOBJECT, null, iSkip);
+    }
+
+    /**
+     * Get all MarkObject from the current element
+     * 
+     * @return Collection<JDFMarkObject>
+     */
+    public Collection<JDFMarkObject> getAllMarkObject()
+    {
+        Vector<JDFMarkObject> v = new Vector<JDFMarkObject>();
+
+        JDFMarkObject kElem = (JDFMarkObject) getFirstChildElement(ElementName.MARKOBJECT, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFMarkObject) kElem.getNextSiblingElement(ElementName.MARKOBJECT, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element MarkObject
+     */
+    public JDFMarkObject appendMarkObject() throws JDFException
+    {
+        return (JDFMarkObject) appendElement(ElementName.MARKOBJECT, null);
+    }
 
     /**
      * (24) const get element Media

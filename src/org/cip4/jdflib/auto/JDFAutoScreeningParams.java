@@ -96,8 +96,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.ABORTJOBWHENSCREENMATCHINGFAILS, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -109,8 +108,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.SCREENSELECTOR, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -160,15 +158,13 @@ public abstract class JDFAutoScreeningParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoScreeningParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -176,8 +172,7 @@ public abstract class JDFAutoScreeningParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

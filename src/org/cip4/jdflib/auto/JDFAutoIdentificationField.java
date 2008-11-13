@@ -107,8 +107,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         atrInfoTable[11] = new AtrInfoTable(AttributeName.VALUETEMPLATE, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -158,15 +157,13 @@ public abstract class JDFAutoIdentificationField extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoIdentificationField[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -174,8 +171,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -224,6 +220,7 @@ public abstract class JDFAutoIdentificationField extends JDFResource
             public static final EnumEncoding Barcode = new EnumEncoding("Barcode");
             public static final EnumEncoding BarCode1D = new EnumEncoding("BarCode1D");
             public static final EnumEncoding BarCode2D = new EnumEncoding("BarCode2D");
+            public static final EnumEncoding Braille = new EnumEncoding("Braille");
             public static final EnumEncoding RFID = new EnumEncoding("RFID");
         }      
 

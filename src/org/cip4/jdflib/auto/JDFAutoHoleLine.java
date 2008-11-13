@@ -92,8 +92,7 @@ public abstract class JDFAutoHoleLine extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.PITCH, 0x22222221, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -105,8 +104,7 @@ public abstract class JDFAutoHoleLine extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.HOLE, 0x55555551);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -156,15 +154,13 @@ public abstract class JDFAutoHoleLine extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoHoleLine[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -172,8 +168,7 @@ public abstract class JDFAutoHoleLine extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

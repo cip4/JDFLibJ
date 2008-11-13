@@ -93,8 +93,7 @@ public abstract class JDFAutoChannelBinding extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.THICKNESS, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoChannelBinding extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoChannelBinding[  --> " + super.toString() + " ]";
     }

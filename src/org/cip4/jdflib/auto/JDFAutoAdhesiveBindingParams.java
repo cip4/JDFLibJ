@@ -99,8 +99,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.FLEXVALUE, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +114,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.COVERAPPLICATIONPARAMS, 0x44444442);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,15 +164,13 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAdhesiveBindingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -182,8 +178,7 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

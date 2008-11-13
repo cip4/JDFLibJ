@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFMediaLayers;
+import org.cip4.jdflib.resource.process.JDFTabDimensions;
 import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
 
 public abstract class JDFAutoMedia extends JDFResource
@@ -102,51 +103,57 @@ public abstract class JDFAutoMedia extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[42];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[48];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.HOLETYPE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumHoleType.getEnum(0), "None");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.MEDIAUNIT, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMediaUnit.getEnum(0), "Sheet");
         atrInfoTable[2] = new AtrInfoTable(AttributeName.PREPRINTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.BACKCOATINGS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBackCoatings.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.BACKGLOSSVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.BRIGHTNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.CIETINT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.CIEWHITENESS, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.COLORNAME, 0x44444431, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.COREWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.DIMENSION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.FLUTE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.FLUTEDIRECTION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumFluteDirection.getEnum(0), null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.FRONTCOATINGS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFrontCoatings.getEnum(0), null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.FRONTGLOSSVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.GRADE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.GRAINDIRECTION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumGrainDirection.getEnum(0), null);
-        atrInfoTable[17] = new AtrInfoTable(AttributeName.HOLECOUNT, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[18] = new AtrInfoTable(AttributeName.IMAGABLESIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumImagableSide.getEnum(0), null);
-        atrInfoTable[19] = new AtrInfoTable(AttributeName.INSIDELOSS, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[20] = new AtrInfoTable(AttributeName.LABCOLORVALUE, 0x33333311, AttributeInfo.EnumAttributeType.LabColor, null, null);
-        atrInfoTable[21] = new AtrInfoTable(AttributeName.MEDIACOLORNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[22] = new AtrInfoTable(AttributeName.MEDIACOLORNAMEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[23] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[24] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMediaType.getEnum(0), null);
-        atrInfoTable[25] = new AtrInfoTable(AttributeName.MEDIATYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[26] = new AtrInfoTable(AttributeName.OPACITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumOpacity.getEnum(0), null);
-        atrInfoTable[27] = new AtrInfoTable(AttributeName.OPACITYLEVEL, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[28] = new AtrInfoTable(AttributeName.OUTERCOREDIAMETER, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[29] = new AtrInfoTable(AttributeName.OUTSIDEGAIN, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[30] = new AtrInfoTable(AttributeName.PLATETECHNOLOGY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateTechnology.getEnum(0), null);
-        atrInfoTable[31] = new AtrInfoTable(AttributeName.POLARITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), null);
-        atrInfoTable[32] = new AtrInfoTable(AttributeName.RECYCLED, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[33] = new AtrInfoTable(AttributeName.RECYCLEDPERCENTAGE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[34] = new AtrInfoTable(AttributeName.ROLLDIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[35] = new AtrInfoTable(AttributeName.SHRINKINDEX, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[36] = new AtrInfoTable(AttributeName.STOCKTYPE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[37] = new AtrInfoTable(AttributeName.TEXTURE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[38] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[39] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[40] = new AtrInfoTable(AttributeName.WEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[41] = new AtrInfoTable(AttributeName.WRAPPERWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.BACKCOATINGDETAIL, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.BACKCOATINGS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBackCoatings.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.BACKGLOSSVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.BRIGHTNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.CIETINT, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.CIEWHITENESS, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.COLORNAME, 0x44444431, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.COREWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.DIMENSION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.FLUTE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.FLUTEDIRECTION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumFluteDirection.getEnum(0), null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.FRONTCOATINGDETAIL, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.FRONTCOATINGS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFrontCoatings.getEnum(0), null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.FRONTGLOSSVALUE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.GRADE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[18] = new AtrInfoTable(AttributeName.GRAINDIRECTION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumGrainDirection.getEnum(0), null);
+        atrInfoTable[19] = new AtrInfoTable(AttributeName.HOLECOUNT, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[20] = new AtrInfoTable(AttributeName.IMAGABLESIDE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumImagableSide.getEnum(0), null);
+        atrInfoTable[21] = new AtrInfoTable(AttributeName.INSIDELOSS, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[22] = new AtrInfoTable(AttributeName.LABCOLORVALUE, 0x33333311, AttributeInfo.EnumAttributeType.LabColor, null, null);
+        atrInfoTable[23] = new AtrInfoTable(AttributeName.MEDIACOLORNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[24] = new AtrInfoTable(AttributeName.MEDIACOLORNAMEDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[25] = new AtrInfoTable(AttributeName.MEDIAQUALITY, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[26] = new AtrInfoTable(AttributeName.MEDIASETCOUNT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[27] = new AtrInfoTable(AttributeName.MEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumMediaType.getEnum(0), null);
+        atrInfoTable[28] = new AtrInfoTable(AttributeName.MEDIATYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[29] = new AtrInfoTable(AttributeName.OPACITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumOpacity.getEnum(0), null);
+        atrInfoTable[30] = new AtrInfoTable(AttributeName.OPACITYLEVEL, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[31] = new AtrInfoTable(AttributeName.OUTERCOREDIAMETER, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[32] = new AtrInfoTable(AttributeName.OUTSIDEGAIN, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[33] = new AtrInfoTable(AttributeName.PLATETECHNOLOGY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumPlateTechnology.getEnum(0), null);
+        atrInfoTable[34] = new AtrInfoTable(AttributeName.POLARITY, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPolarity.getEnum(0), null);
+        atrInfoTable[35] = new AtrInfoTable(AttributeName.PRINTINGTECHNOLOGY, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[36] = new AtrInfoTable(AttributeName.RECYCLED, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[37] = new AtrInfoTable(AttributeName.RECYCLEDPERCENTAGE, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[38] = new AtrInfoTable(AttributeName.RELIEFTHICKNESS, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[39] = new AtrInfoTable(AttributeName.ROLLDIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[40] = new AtrInfoTable(AttributeName.SHRINKINDEX, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[41] = new AtrInfoTable(AttributeName.SLEEVEINTERLOCK, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[42] = new AtrInfoTable(AttributeName.STOCKTYPE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[43] = new AtrInfoTable(AttributeName.TEXTURE, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[44] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[45] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x44444443, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[46] = new AtrInfoTable(AttributeName.WEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[47] = new AtrInfoTable(AttributeName.WRAPPERWEIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
     @Override
@@ -156,15 +163,16 @@ public abstract class JDFAutoMedia extends JDFResource
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[6];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[7];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.COLOR, 0x77777776);
         elemInfoTable[1] = new ElemInfoTable(ElementName.COLORMEASUREMENTCONDITIONS, 0x66666611);
         elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x66666111);
         elemInfoTable[3] = new ElemInfoTable(ElementName.HOLELIST, 0x66666611);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.CONTACT, 0x33333333);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.TABDIMENSIONS, 0x33333333);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.CONTACT, 0x33333333);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
     }
     
     @Override
@@ -660,10 +668,12 @@ public abstract class JDFAutoMedia extends JDFResource
             public static final EnumMediaType GravureCylinder = new EnumMediaType("GravureCylinder");
             public static final EnumMediaType ImagingCylinder = new EnumMediaType("ImagingCylinder");
             public static final EnumMediaType LaminatingFoil = new EnumMediaType("LaminatingFoil");
+            public static final EnumMediaType MountingTape = new EnumMediaType("MountingTape");
             public static final EnumMediaType Other = new EnumMediaType("Other");
             public static final EnumMediaType Paper = new EnumMediaType("Paper");
             public static final EnumMediaType Plate = new EnumMediaType("Plate");
             public static final EnumMediaType SelfAdhesive = new EnumMediaType("SelfAdhesive");
+            public static final EnumMediaType Sleeve = new EnumMediaType("Sleeve");
             public static final EnumMediaType ShrinkFoil = new EnumMediaType("ShrinkFoil");
             public static final EnumMediaType Transparency = new EnumMediaType("Transparency");
             public static final EnumMediaType Unknown = new EnumMediaType("Unknown");
@@ -756,6 +766,11 @@ public abstract class JDFAutoMedia extends JDFResource
                 return iterator(EnumPlateTechnology.class);
             }
 
+            public static final EnumPlateTechnology FlexoAnalogSolvent = new EnumPlateTechnology("FlexoAnalogSolvent");
+            public static final EnumPlateTechnology FlexoAnalogThermal = new EnumPlateTechnology("FlexoAnalogThermal");
+            public static final EnumPlateTechnology FlexoDigitalSolvent = new EnumPlateTechnology("FlexoDigitalSolvent");
+            public static final EnumPlateTechnology FlexoDigitalThermal = new EnumPlateTechnology("FlexoDigitalThermal");
+            public static final EnumPlateTechnology FlexoDirectEngraving = new EnumPlateTechnology("FlexoDirectEngraving");
             public static final EnumPlateTechnology InkJet = new EnumPlateTechnology("InkJet");
             public static final EnumPlateTechnology Thermal = new EnumPlateTechnology("Thermal");
             public static final EnumPlateTechnology UV = new EnumPlateTechnology("UV");
@@ -877,6 +892,28 @@ public abstract class JDFAutoMedia extends JDFResource
         public boolean getPrePrinted()
         {
             return getBoolAttribute(AttributeName.PREPRINTED, null, false);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute BackCoatingDetail
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute BackCoatingDetail
+          * @param value: the value to set the attribute to
+          */
+        public void setBackCoatingDetail(String value)
+        {
+            setAttribute(AttributeName.BACKCOATINGDETAIL, value, null);
+        }
+
+        /**
+          * (23) get String attribute BackCoatingDetail
+          * @return the value of the attribute
+          */
+        public String getBackCoatingDetail()
+        {
+            return getAttribute(AttributeName.BACKCOATINGDETAIL, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -1109,6 +1146,28 @@ public abstract class JDFAutoMedia extends JDFResource
         public EnumFluteDirection getFluteDirection()
         {
             return EnumFluteDirection.getEnum(getAttribute(AttributeName.FLUTEDIRECTION, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute FrontCoatingDetail
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute FrontCoatingDetail
+          * @param value: the value to set the attribute to
+          */
+        public void setFrontCoatingDetail(String value)
+        {
+            setAttribute(AttributeName.FRONTCOATINGDETAIL, value, null);
+        }
+
+        /**
+          * (23) get String attribute FrontCoatingDetail
+          * @return the value of the attribute
+          */
+        public String getFrontCoatingDetail()
+        {
+            return getAttribute(AttributeName.FRONTCOATINGDETAIL, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -1349,6 +1408,28 @@ public abstract class JDFAutoMedia extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute MediaQuality
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MediaQuality
+          * @param value: the value to set the attribute to
+          */
+        public void setMediaQuality(String value)
+        {
+            setAttribute(AttributeName.MEDIAQUALITY, value, null);
+        }
+
+        /**
+          * (23) get String attribute MediaQuality
+          * @return the value of the attribute
+          */
+        public String getMediaQuality()
+        {
+            return getAttribute(AttributeName.MEDIAQUALITY, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute MediaSetCount
         --------------------------------------------------------------------- */
         /**
@@ -1547,6 +1628,28 @@ public abstract class JDFAutoMedia extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute PrintingTechnology
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute PrintingTechnology
+          * @param value: the value to set the attribute to
+          */
+        public void setPrintingTechnology(String value)
+        {
+            setAttribute(AttributeName.PRINTINGTECHNOLOGY, value, null);
+        }
+
+        /**
+          * (23) get String attribute PrintingTechnology
+          * @return the value of the attribute
+          */
+        public String getPrintingTechnology()
+        {
+            return getAttribute(AttributeName.PRINTINGTECHNOLOGY, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute Recycled
         --------------------------------------------------------------------- */
         /**
@@ -1587,6 +1690,28 @@ public abstract class JDFAutoMedia extends JDFResource
         public double getRecycledPercentage()
         {
             return getRealAttribute(AttributeName.RECYCLEDPERCENTAGE, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ReliefThickness
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ReliefThickness
+          * @param value: the value to set the attribute to
+          */
+        public void setReliefThickness(double value)
+        {
+            setAttribute(AttributeName.RELIEFTHICKNESS, value, null);
+        }
+
+        /**
+          * (17) get double attribute ReliefThickness
+          * @return double the value of the attribute
+          */
+        public double getReliefThickness()
+        {
+            return getRealAttribute(AttributeName.RELIEFTHICKNESS, null, 0.0);
         }
 
         
@@ -1643,6 +1768,28 @@ public abstract class JDFAutoMedia extends JDFResource
                 return null;
             }
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SleeveInterlock
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SleeveInterlock
+          * @param value: the value to set the attribute to
+          */
+        public void setSleeveInterlock(String value)
+        {
+            setAttribute(AttributeName.SLEEVEINTERLOCK, value, null);
+        }
+
+        /**
+          * (23) get String attribute SleeveInterlock
+          * @return the value of the attribute
+          */
+        public String getSleeveInterlock()
+        {
+            return getAttribute(AttributeName.SLEEVEINTERLOCK, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -1902,6 +2049,55 @@ public abstract class JDFAutoMedia extends JDFResource
     public JDFHoleList appendHoleList() throws JDFException
     {
         return (JDFHoleList) appendElementN(ElementName.HOLELIST, 1, null);
+    }
+
+    /** (26) getCreateTabDimensions
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFTabDimensions the element
+     */
+    public JDFTabDimensions getCreateTabDimensions(int iSkip)
+    {
+        return (JDFTabDimensions)getCreateElement_KElement(ElementName.TABDIMENSIONS, null, iSkip);
+    }
+
+    /**
+     * (27) const get element TabDimensions
+     * @param iSkip number of elements to skip
+     * @return JDFTabDimensions the element
+     * default is getTabDimensions(0)     */
+    public JDFTabDimensions getTabDimensions(int iSkip)
+    {
+        return (JDFTabDimensions) getElement(ElementName.TABDIMENSIONS, null, iSkip);
+    }
+
+    /**
+     * Get all TabDimensions from the current element
+     * 
+     * @return Collection<JDFTabDimensions>
+     */
+    public Collection<JDFTabDimensions> getAllTabDimensions()
+    {
+        Vector<JDFTabDimensions> v = new Vector<JDFTabDimensions>();
+
+        JDFTabDimensions kElem = (JDFTabDimensions) getFirstChildElement(ElementName.TABDIMENSIONS, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTabDimensions) kElem.getNextSiblingElement(ElementName.TABDIMENSIONS, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element TabDimensions
+     */
+    public JDFTabDimensions appendTabDimensions() throws JDFException
+    {
+        return (JDFTabDimensions) appendElement(ElementName.TABDIMENSIONS, null);
     }
 
     /** (26) getCreateContact

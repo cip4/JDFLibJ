@@ -106,8 +106,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         atrInfoTable[8] = new AtrInfoTable(AttributeName.RESOURCEUSAGE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,8 +118,7 @@ public abstract class JDFAutoDevCap extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -170,8 +168,7 @@ public abstract class JDFAutoDevCap extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDevCap[  --> " + super.toString() + " ]";
     }
@@ -267,8 +264,7 @@ public abstract class JDFAutoDevCap extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        @Override
-		public String getID()
+        public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

@@ -100,7 +100,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[18];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ACTIVATION, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumActivation.getEnum(0), null);
@@ -119,11 +119,11 @@ public abstract class JDFAutoJobPhase extends JDFElement
         atrInfoTable[13] = new AtrInfoTable(AttributeName.STATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumNodeStatus.getEnum(0), null);
         atrInfoTable[14] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[15] = new AtrInfoTable(AttributeName.TOTALAMOUNT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.WASTE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.URL, 0x22221111, AttributeInfo.EnumAttributeType.URL, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.WASTE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,8 +138,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.PART, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -189,8 +188,7 @@ public abstract class JDFAutoJobPhase extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoJobPhase[  --> " + super.toString() + " ]";
     }
@@ -667,6 +665,28 @@ public abstract class JDFAutoJobPhase extends JDFElement
         public double getTotalAmount()
         {
             return getRealAttribute(AttributeName.TOTALAMOUNT, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute URL
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute URL
+          * @param value: the value to set the attribute to
+          */
+        public void setURL(String value)
+        {
+            setAttribute(AttributeName.URL, value, null);
+        }
+
+        /**
+          * (23) get String attribute URL
+          * @return the value of the attribute
+          */
+        public String getURL()
+        {
+            return getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
         }
 
         

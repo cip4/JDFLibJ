@@ -72,12 +72,18 @@ package org.cip4.jdflib.auto;
 
 import java.util.Collection;
 import java.util.Vector;
+import java.util.zip.DataFormatException;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFCutBlock;
 import org.cip4.jdflib.resource.process.postpress.JDFCut;
@@ -88,6 +94,18 @@ public abstract class JDFAutoCuttingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+    static
+    {
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.NUPSEPARATION, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+    }
+    
+    protected AttributeInfo getTheAttributeInfo()
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
     static
     {
@@ -96,8 +114,7 @@ public abstract class JDFAutoCuttingParams extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.CUT, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -147,15 +164,13 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCuttingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -163,12 +178,49 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
 
+
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute NUpSeparation
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute NUpSeparation
+          * @param value: the value to set the attribute to
+          */
+        public void setNUpSeparation(JDFXYPair value)
+        {
+            setAttribute(AttributeName.NUPSEPARATION, value, null);
+        }
+
+        /**
+          * (20) get JDFXYPair attribute NUpSeparation
+          * @return JDFXYPair the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFXYPair
+          */
+        public JDFXYPair getNUpSeparation()
+        {
+            String strAttrName = "";
+            JDFXYPair nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.NUPSEPARATION, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFXYPair(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
 
 /* ***********************************************************************
  * Element getter / setter

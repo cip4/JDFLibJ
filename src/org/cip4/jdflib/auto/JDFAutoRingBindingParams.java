@@ -92,24 +92,25 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDERCOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDERMATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDERNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RINGDIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.RINGMECHANIC, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.RINGSHAPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.RINGSYSTEM, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumRingSystem.getEnum(0), null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.RIVETSEXPOSED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.SPINECOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.SPINEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.VIEWBINDER, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDERCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDERMATERIAL, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.BINDERNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.RINGDIAMETER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.RINGMECHANIC, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.RINGSHAPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.RINGSYSTEM, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumRingSystem.getEnum(0), null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.RIVETSEXPOSED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.SPINECOLOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.SPINECOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.SPINEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.VIEWBINDER, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,8 +122,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -172,15 +172,13 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRingBindingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -188,8 +186,7 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -269,6 +266,28 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             strAttrName = getAttribute(AttributeName.BINDERCOLOR, null, JDFConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute BinderColorDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute BinderColorDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setBinderColorDetails(String value)
+        {
+            setAttribute(AttributeName.BINDERCOLORDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute BinderColorDetails
+          * @return the value of the attribute
+          */
+        public String getBinderColorDetails()
+        {
+            return getAttribute(AttributeName.BINDERCOLORDETAILS, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -449,6 +468,28 @@ public abstract class JDFAutoRingBindingParams extends JDFResource
             strAttrName = getAttribute(AttributeName.SPINECOLOR, null, JDFConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SpineColorDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SpineColorDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setSpineColorDetails(String value)
+        {
+            setAttribute(AttributeName.SPINECOLORDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute SpineColorDetails
+          * @return the value of the attribute
+          */
+        public String getSpineColorDetails()
+        {
+            return getAttribute(AttributeName.SPINECOLORDETAILS, null, JDFConstants.EMPTYSTRING);
         }
 
         

@@ -101,6 +101,7 @@ import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFDisjointing;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 
 public abstract class JDFAutoComponent extends JDFResource
@@ -108,14 +109,14 @@ public abstract class JDFAutoComponent extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[18];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[19];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.COMPONENTTYPE, 0x22222222, AttributeInfo.EnumAttributeType.enumerations, EnumComponentType.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ISWASTE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.CARTONTOPFLAPS, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.DIMENSIONS, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.CARTONTOPFLAPS, 0x33333111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.DIMENSIONS, 0x33333333, AttributeInfo.EnumAttributeType.shape, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.ISWASTE, 0x44443333, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.MAXHEAT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.OVERFOLD, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.OVERFOLDSIDE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumOverfoldSide.getEnum(0), null);
@@ -127,18 +128,18 @@ public abstract class JDFAutoComponent extends JDFResource
         atrInfoTable[13] = new AtrInfoTable(AttributeName.SOURCERIBBON, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[14] = new AtrInfoTable(AttributeName.SOURCESHEET, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[15] = new AtrInfoTable(AttributeName.SOURCEWEB, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.SURFACECOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[17] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x44444443, AttributeInfo.EnumAttributeType.matrix, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.SPINETHICKNESS, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.SURFACECOUNT, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[18] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x44444443, AttributeInfo.EnumAttributeType.matrix, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.ASSEMBLY, 0x66666111);
@@ -146,13 +147,13 @@ public abstract class JDFAutoComponent extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.DISJOINTING, 0x66666666);
         elemInfoTable[3] = new ElemInfoTable(ElementName.SHEET, 0x77777766);
         elemInfoTable[4] = new ElemInfoTable(ElementName.LAYOUT, 0x66666611);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.PAGELIST, 0x66666111);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.CONTACT, 0x33333333);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIA, 0x66661111);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.PAGELIST, 0x66666111);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.CONTACT, 0x33333333);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -202,15 +203,13 @@ public abstract class JDFAutoComponent extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoComponent[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Quantity);
@@ -218,8 +217,7 @@ public abstract class JDFAutoComponent extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Quantity;
     }
@@ -349,28 +347,6 @@ public abstract class JDFAutoComponent extends JDFResource
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute IsWaste
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IsWaste
-          * @param value: the value to set the attribute to
-          */
-        public void setIsWaste(boolean value)
-        {
-            setAttribute(AttributeName.ISWASTE, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute IsWaste
-          * @return boolean the value of the attribute
-          */
-        public boolean getIsWaste()
-        {
-            return getBoolAttribute(AttributeName.ISWASTE, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
         Methods for Attribute AssemblyIDs
         --------------------------------------------------------------------- */
         /**
@@ -460,6 +436,28 @@ public abstract class JDFAutoComponent extends JDFResource
                 return null;
             }
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute IsWaste
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute IsWaste
+          * @param value: the value to set the attribute to
+          */
+        public void setIsWaste(boolean value)
+        {
+            setAttribute(AttributeName.ISWASTE, value, null);
+        }
+
+        /**
+          * (18) get boolean attribute IsWaste
+          * @return boolean the value of the attribute
+          */
+        public boolean getIsWaste()
+        {
+            return getBoolAttribute(AttributeName.ISWASTE, null, false);
         }
 
         
@@ -730,6 +728,28 @@ public abstract class JDFAutoComponent extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute SpineThickness
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SpineThickness
+          * @param value: the value to set the attribute to
+          */
+        public void setSpineThickness(double value)
+        {
+            setAttribute(AttributeName.SPINETHICKNESS, value, null);
+        }
+
+        /**
+          * (17) get double attribute SpineThickness
+          * @return double the value of the attribute
+          */
+        public double getSpineThickness()
+        {
+            return getRealAttribute(AttributeName.SPINETHICKNESS, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute SurfaceCount
         --------------------------------------------------------------------- */
         /**
@@ -956,6 +976,41 @@ public abstract class JDFAutoComponent extends JDFResource
     }
 
     /**
+     * (24) const get element Media
+     * @return JDFMedia the element
+     */
+    public JDFMedia getMedia()
+    {
+        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+    }
+
+    /** (25) getCreateMedia
+     * 
+     * @return JDFMedia the element
+     */
+    public JDFMedia getCreateMedia()
+    {
+        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+    }
+
+    /**
+     * (29) append element Media
+     */
+    public JDFMedia appendMedia() throws JDFException
+    {
+        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refMedia(JDFMedia refTarget)
+    {
+        refElement(refTarget);
+    }
+
+    /**
      * (24) const get element PageList
      * @return JDFPageList the element
      */
@@ -1034,8 +1089,7 @@ public abstract class JDFAutoComponent extends JDFResource
     /**
      * (30) append element Contact
      */
-    @Override
-	public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }
@@ -1054,8 +1108,7 @@ public abstract class JDFAutoComponent extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      */
-    @Override
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+    public JDFIdentificationField getCreateIdentificationField(int iSkip)
     {
         return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -1065,8 +1118,7 @@ public abstract class JDFAutoComponent extends JDFResource
      * @param iSkip number of elements to skip
      * @return JDFIdentificationField the element
      * default is getIdentificationField(0)     */
-    @Override
-	public JDFIdentificationField getIdentificationField(int iSkip)
+    public JDFIdentificationField getIdentificationField(int iSkip)
     {
         return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
     }
@@ -1095,8 +1147,7 @@ public abstract class JDFAutoComponent extends JDFResource
     /**
      * (30) append element IdentificationField
      */
-    @Override
-	public JDFIdentificationField appendIdentificationField() throws JDFException
+    public JDFIdentificationField appendIdentificationField() throws JDFException
     {
         return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
     }

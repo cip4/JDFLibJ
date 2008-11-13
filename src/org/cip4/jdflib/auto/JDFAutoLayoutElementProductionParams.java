@@ -79,17 +79,23 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
+import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
+import org.cip4.jdflib.resource.process.JDFShapeDef;
 
 public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.LAYOUTELEMENTPART, 0x33333111);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x33331111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.LAYOUTELEMENTPART, 0x33331111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.SHAPEDEF, 0x66661111);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.TESTPOOL, 0x33331111);
     }
     
     @Override
@@ -171,6 +177,55 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
  * ***********************************************************************
  */
 
+    /** (26) getCreateActionPool
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFActionPool the element
+     */
+    public JDFActionPool getCreateActionPool(int iSkip)
+    {
+        return (JDFActionPool)getCreateElement_KElement(ElementName.ACTIONPOOL, null, iSkip);
+    }
+
+    /**
+     * (27) const get element ActionPool
+     * @param iSkip number of elements to skip
+     * @return JDFActionPool the element
+     * default is getActionPool(0)     */
+    public JDFActionPool getActionPool(int iSkip)
+    {
+        return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, iSkip);
+    }
+
+    /**
+     * Get all ActionPool from the current element
+     * 
+     * @return Collection<JDFActionPool>
+     */
+    public Collection<JDFActionPool> getAllActionPool()
+    {
+        Vector<JDFActionPool> v = new Vector<JDFActionPool>();
+
+        JDFActionPool kElem = (JDFActionPool) getFirstChildElement(ElementName.ACTIONPOOL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFActionPool) kElem.getNextSiblingElement(ElementName.ACTIONPOOL, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element ActionPool
+     */
+    public JDFActionPool appendActionPool() throws JDFException
+    {
+        return (JDFActionPool) appendElement(ElementName.ACTIONPOOL, null);
+    }
+
     /** (26) getCreateLayoutElementPart
      * 
      * @param iSkip number of elements to skip
@@ -218,6 +273,90 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     public JDFLayoutElementPart appendLayoutElementPart() throws JDFException
     {
         return (JDFLayoutElementPart) appendElement(ElementName.LAYOUTELEMENTPART, null);
+    }
+
+    /**
+     * (24) const get element ShapeDef
+     * @return JDFShapeDef the element
+     */
+    public JDFShapeDef getShapeDef()
+    {
+        return (JDFShapeDef) getElement(ElementName.SHAPEDEF, null, 0);
+    }
+
+    /** (25) getCreateShapeDef
+     * 
+     * @return JDFShapeDef the element
+     */
+    public JDFShapeDef getCreateShapeDef()
+    {
+        return (JDFShapeDef) getCreateElement_KElement(ElementName.SHAPEDEF, null, 0);
+    }
+
+    /**
+     * (29) append element ShapeDef
+     */
+    public JDFShapeDef appendShapeDef() throws JDFException
+    {
+        return (JDFShapeDef) appendElementN(ElementName.SHAPEDEF, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refShapeDef(JDFShapeDef refTarget)
+    {
+        refElement(refTarget);
+    }
+
+    /** (26) getCreateTestPool
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFTestPool the element
+     */
+    public JDFTestPool getCreateTestPool(int iSkip)
+    {
+        return (JDFTestPool)getCreateElement_KElement(ElementName.TESTPOOL, null, iSkip);
+    }
+
+    /**
+     * (27) const get element TestPool
+     * @param iSkip number of elements to skip
+     * @return JDFTestPool the element
+     * default is getTestPool(0)     */
+    public JDFTestPool getTestPool(int iSkip)
+    {
+        return (JDFTestPool) getElement(ElementName.TESTPOOL, null, iSkip);
+    }
+
+    /**
+     * Get all TestPool from the current element
+     * 
+     * @return Collection<JDFTestPool>
+     */
+    public Collection<JDFTestPool> getAllTestPool()
+    {
+        Vector<JDFTestPool> v = new Vector<JDFTestPool>();
+
+        JDFTestPool kElem = (JDFTestPool) getFirstChildElement(ElementName.TESTPOOL, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFTestPool) kElem.getNextSiblingElement(ElementName.TESTPOOL, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element TestPool
+     */
+    public JDFTestPool appendTestPool() throws JDFException
+    {
+        return (JDFTestPool) appendElement(ElementName.TESTPOOL, null);
     }
 
 }// end namespace JDF

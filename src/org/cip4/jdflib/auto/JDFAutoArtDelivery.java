@@ -122,8 +122,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightStatus.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -150,8 +149,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         elemInfoTable[15] = new ElemInfoTable(ElementName.TOOL, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -201,8 +199,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoArtDelivery[  --> " + super.toString() + " ]";
     }

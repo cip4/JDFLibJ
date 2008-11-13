@@ -94,19 +94,20 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.TOPEXCESS, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, "0.0");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.HORIZONTALEXCESS, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.STRIPBRAND, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.STRIPLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumStripMaterial.getEnum(0), null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.HORIZONTALEXCESSBACK, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.STRIPBRAND, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.STRIPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.STRIPCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.STRIPLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumStripMaterial.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,8 +119,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.GLUEAPPLICATION, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,15 +169,13 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSpineTapingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -185,8 +183,7 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -292,6 +289,28 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute HorizontalExcessBack
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute HorizontalExcessBack
+          * @param value: the value to set the attribute to
+          */
+        public void setHorizontalExcessBack(double value)
+        {
+            setAttribute(AttributeName.HORIZONTALEXCESSBACK, value, null);
+        }
+
+        /**
+          * (17) get double attribute HorizontalExcessBack
+          * @return double the value of the attribute
+          */
+        public double getHorizontalExcessBack()
+        {
+            return getRealAttribute(AttributeName.HORIZONTALEXCESSBACK, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute StripBrand
         --------------------------------------------------------------------- */
         /**
@@ -336,6 +355,28 @@ public abstract class JDFAutoSpineTapingParams extends JDFResource
             strAttrName = getAttribute(AttributeName.STRIPCOLOR, null, JDFConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute StripColorDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute StripColorDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setStripColorDetails(String value)
+        {
+            setAttribute(AttributeName.STRIPCOLORDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute StripColorDetails
+          * @return the value of the attribute
+          */
+        public String getStripColorDetails()
+        {
+            return getAttribute(AttributeName.STRIPCOLORDETAILS, null, JDFConstants.EMPTYSTRING);
         }
 
         

@@ -95,20 +95,20 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.DEVICEID, 0x44443333, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SIGNALTYPES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, "Notification");
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.TYPES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumClasses.getEnum(0), null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.MILESTONETYPES, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.SIGNALTYPES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, "Notification");
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.TYPES, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.CLASSES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumClasses.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -120,8 +120,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,8 +170,7 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNotificationFilter[  --> " + super.toString() + " ]";
     }
@@ -294,6 +292,31 @@ public abstract class JDFAutoNotificationFilter extends JDFElement
         public String getJobPartID()
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute MilestoneTypes
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MilestoneTypes
+          * @param value: the value to set the attribute to
+          */
+        public void setMilestoneTypes(VString value)
+        {
+            setAttribute(AttributeName.MILESTONETYPES, value, null);
+        }
+
+        /**
+          * (21) get VString attribute MilestoneTypes
+          * @return VString the value of the attribute
+          */
+        public VString getMilestoneTypes()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.MILESTONETYPES, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         

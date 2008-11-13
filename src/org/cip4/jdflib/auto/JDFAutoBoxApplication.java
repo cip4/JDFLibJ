@@ -96,11 +96,10 @@ public abstract class JDFAutoBoxApplication extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATIONAREA, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.APPLICATIONAREA, 0x44443111, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -109,12 +108,11 @@ public abstract class JDFAutoBoxApplication extends JDFElement
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x33333111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.COMPONENT, 0x44443333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x44443333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,8 +162,7 @@ public abstract class JDFAutoBoxApplication extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBoxApplication[  --> " + super.toString() + " ]";
     }

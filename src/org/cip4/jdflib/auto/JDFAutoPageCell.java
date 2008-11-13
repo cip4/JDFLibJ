@@ -109,8 +109,7 @@ public abstract class JDFAutoPageCell extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -125,8 +124,7 @@ public abstract class JDFAutoPageCell extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -176,8 +174,7 @@ public abstract class JDFAutoPageCell extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPageCell[  --> " + super.toString() + " ]";
     }

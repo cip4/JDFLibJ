@@ -93,15 +93,14 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.FILE, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.HOTFOLDER, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.HOTFOLDER, 0x44443333, AttributeInfo.EnumAttributeType.URL, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.HTTPGET, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.PACKAGING, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumPackaging.getEnum(0), null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.MIME, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -151,8 +150,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSubmissionMethods[  --> " + super.toString() + " ]";
     }
@@ -198,6 +196,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
             }
 
             public static final EnumPackaging MIME = new EnumPackaging("MIME");
+            public static final EnumPackaging None = new EnumPackaging("None");
         }      
 
 

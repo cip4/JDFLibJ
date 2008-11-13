@@ -105,9 +105,9 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.FIRSTSURFACE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFirstSurface.getEnum(0), null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.FOUNTAINSOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumFountainSolution.getEnum(0), null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.MEDIALOCATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEAVAILABLEINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEAVAILABLEINDEX, 0x44443331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEDRYING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumModuleDrying.getEnum(0), null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x44443333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
         atrInfoTable[8] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINBOTTOM, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[9] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINLEFT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[10] = new AtrInfoTable(AttributeName.NONPRINTABLEMARGINRIGHT, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
@@ -120,8 +120,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
         atrInfoTable[17] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -130,12 +129,11 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.INK, 0x33333333);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.INK, 0x44443333);
         elemInfoTable[1] = new ElemInfoTable(ElementName.APPROVALPARAMS, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -185,15 +183,13 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoConventionalPrintingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -201,8 +197,7 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -529,8 +524,8 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
             }
 
             public static final EnumWorkStyle Simplex = new EnumWorkStyle("Simplex");
-            public static final EnumWorkStyle WorkAndBack = new EnumWorkStyle("WorkAndBack");
             public static final EnumWorkStyle Perfecting = new EnumWorkStyle("Perfecting");
+            public static final EnumWorkStyle WorkAndBack = new EnumWorkStyle("WorkAndBack");
             public static final EnumWorkStyle WorkAndTurn = new EnumWorkStyle("WorkAndTurn");
             public static final EnumWorkStyle WorkAndTumble = new EnumWorkStyle("WorkAndTumble");
             public static final EnumWorkStyle WorkAndTwist = new EnumWorkStyle("WorkAndTwist");

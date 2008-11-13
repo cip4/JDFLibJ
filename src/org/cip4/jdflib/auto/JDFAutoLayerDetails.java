@@ -85,11 +85,10 @@ public abstract class JDFAutoLayerDetails extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x44443331, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,8 +138,7 @@ public abstract class JDFAutoLayerDetails extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLayerDetails[  --> " + super.toString() + " ]";
     }

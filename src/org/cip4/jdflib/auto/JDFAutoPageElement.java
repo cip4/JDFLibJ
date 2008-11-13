@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 
@@ -86,17 +87,17 @@ public abstract class JDFAutoPageElement extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTLISTINDEX, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ELEMENTPAGES, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.CONTENTTYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTENTLISTINDEX, 0x44443111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.ELEMENTPAGES, 0x33333111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTTYPE, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,8 +147,7 @@ public abstract class JDFAutoPageElement extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPageElement[  --> " + super.toString() + " ]";
     }
@@ -157,6 +157,31 @@ public abstract class JDFAutoPageElement extends JDFElement
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ContentDataRefs
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ContentDataRefs
+          * @param value: the value to set the attribute to
+          */
+        public void setContentDataRefs(VString value)
+        {
+            setAttribute(AttributeName.CONTENTDATAREFS, value, null);
+        }
+
+        /**
+          * (21) get VString attribute ContentDataRefs
+          * @return VString the value of the attribute
+          */
+        public VString getContentDataRefs()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute ContentListIndex

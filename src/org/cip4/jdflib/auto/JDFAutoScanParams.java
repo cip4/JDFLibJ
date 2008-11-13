@@ -111,8 +111,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         atrInfoTable[10] = new AtrInfoTable(AttributeName.SPLITDOCUMENTS, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -124,8 +123,7 @@ public abstract class JDFAutoScanParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -175,15 +173,13 @@ public abstract class JDFAutoScanParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoScanParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -191,8 +187,7 @@ public abstract class JDFAutoScanParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

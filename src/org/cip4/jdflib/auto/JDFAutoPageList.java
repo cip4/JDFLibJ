@@ -118,8 +118,7 @@ public abstract class JDFAutoPageList extends JDFResource
         atrInfoTable[12] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,8 +137,7 @@ public abstract class JDFAutoPageList extends JDFResource
         elemInfoTable[7] = new ElemInfoTable(ElementName.ELEMENTCOLORPARAMS, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -189,15 +187,13 @@ public abstract class JDFAutoPageList extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPageList[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -205,8 +201,7 @@ public abstract class JDFAutoPageList extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

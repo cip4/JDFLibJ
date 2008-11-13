@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 
 public abstract class JDFAutoScreenSelector extends JDFElement
@@ -90,23 +91,23 @@ public abstract class JDFAutoScreenSelector extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ANGLE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.ANGLEMAP, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.DOTSIZE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.FREQUENCY, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SCREENINGFAMILY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.SCREENINGTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumScreeningType.getEnum(0), null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "All");
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.SOURCEFREQUENCY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.SPOTFUNCTION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.SCREENINGFAMILY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.SCREENINGTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumScreeningType.getEnum(0), null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "All");
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.SOURCEFREQUENCY, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.SPOTFUNCTION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -156,8 +157,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoScreenSelector[  --> " + super.toString() + " ]";
     }
@@ -351,6 +351,31 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         public double getFrequency()
         {
             return getRealAttribute(AttributeName.FREQUENCY, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ObjectTags
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ObjectTags
+          * @param value: the value to set the attribute to
+          */
+        public void setObjectTags(VString value)
+        {
+            setAttribute(AttributeName.OBJECTTAGS, value, null);
+        }
+
+        /**
+          * (21) get VString attribute ObjectTags
+          * @return VString the value of the attribute
+          */
+        public VString getObjectTags()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.OBJECTTAGS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
         

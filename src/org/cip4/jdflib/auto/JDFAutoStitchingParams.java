@@ -89,24 +89,24 @@ public abstract class JDFAutoStitchingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[11];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ANGLE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.OFFSET, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.REFERENCEEDGE, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumReferenceEdge.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0), null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.STITCHFROMFRONT, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.STITCHTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStitchType.getEnum(0), null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.WIREBRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.STITCHORIGIN, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumStitchOrigin.getEnum(0), "UntrimmedJogSide");
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.ANGLE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.NUMBEROFSTITCHES, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.OFFSET, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.REFERENCEEDGE, 0x44444431, AttributeInfo.EnumAttributeType.enumeration, EnumReferenceEdge.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.STAPLESHAPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStapleShape.getEnum(0), null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.STITCHFROMFRONT, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.STITCHPOSITIONS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.STITCHTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStitchType.getEnum(0), null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.STITCHWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.WIREGAUGE, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.WIREBRAND, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -156,15 +156,13 @@ public abstract class JDFAutoStitchingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoStitchingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -172,11 +170,56 @@ public abstract class JDFAutoStitchingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
+
+
+        /**
+        * Enumeration strings for StitchOrigin
+        */
+
+        public static class EnumStitchOrigin extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumStitchOrigin(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumStitchOrigin getEnum(String enumName)
+            {
+                return (EnumStitchOrigin) getEnum(EnumStitchOrigin.class, enumName);
+            }
+
+            public static EnumStitchOrigin getEnum(int enumValue)
+            {
+                return (EnumStitchOrigin) getEnum(EnumStitchOrigin.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumStitchOrigin.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumStitchOrigin.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumStitchOrigin.class);
+            }
+
+            public static final EnumStitchOrigin TrimBoxCenter = new EnumStitchOrigin("TrimBoxCenter");
+            public static final EnumStitchOrigin TrimBoxJogSide = new EnumStitchOrigin("TrimBoxJogSide");
+            public static final EnumStitchOrigin UntrimmedJogSide = new EnumStitchOrigin("UntrimmedJogSide");
+        }      
+
 
 
         /**
@@ -324,6 +367,28 @@ public abstract class JDFAutoStitchingParams extends JDFResource
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute StitchOrigin
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute StitchOrigin
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setStitchOrigin(EnumStitchOrigin enumVar)
+        {
+            setAttribute(AttributeName.STITCHORIGIN, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute StitchOrigin
+          * @return the value of the attribute
+          */
+        public EnumStitchOrigin getStitchOrigin()
+        {
+            return EnumStitchOrigin.getEnum(getAttribute(AttributeName.STITCHORIGIN, null, "UntrimmedJogSide"));
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute Angle

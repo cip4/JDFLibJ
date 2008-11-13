@@ -93,8 +93,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.TOBOX, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumToBox.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoBoxToBoxDifference extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBoxToBoxDifference[  --> " + super.toString() + " ]";
     }

@@ -98,8 +98,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.UNIT, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -112,8 +111,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.CONTACT, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -163,15 +161,13 @@ public abstract class JDFAutoOrderingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoOrderingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -179,8 +175,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -198,8 +193,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
           * (36) set attribute Amount
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setAmount(double value)
+        public void setAmount(double value)
         {
             setAttribute(AttributeName.AMOUNT, value, null);
         }
@@ -208,8 +202,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
           * (17) get double attribute Amount
           * @return double the value of the attribute
           */
-        @Override
-		public double getAmount()
+        public double getAmount()
         {
             return getRealAttribute(AttributeName.AMOUNT, null, 0.0);
         }
@@ -222,8 +215,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
           * (36) set attribute Unit
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setUnit(String value)
+        public void setUnit(String value)
         {
             setAttribute(AttributeName.UNIT, value, null);
         }
@@ -232,8 +224,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
           * (23) get String attribute Unit
           * @return the value of the attribute
           */
-        @Override
-		public String getUnit()
+        public String getUnit()
         {
             return getAttribute(AttributeName.UNIT, null, JDFConstants.EMPTYSTRING);
         }
@@ -322,8 +313,7 @@ public abstract class JDFAutoOrderingParams extends JDFResource
     /**
      * (30) append element Contact
      */
-    @Override
-	public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

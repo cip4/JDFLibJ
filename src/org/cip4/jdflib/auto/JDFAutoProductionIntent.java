@@ -96,8 +96,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -147,8 +146,7 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoProductionIntent[  --> " + super.toString() + " ]";
     }

@@ -104,8 +104,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.FRONTSIDE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -120,8 +119,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,8 +169,7 @@ public abstract class JDFAutoIDPCover extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoIDPCover[  --> " + super.toString() + " ]";
     }

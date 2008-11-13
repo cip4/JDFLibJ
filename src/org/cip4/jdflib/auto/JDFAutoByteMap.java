@@ -99,20 +99,20 @@ public abstract class JDFAutoByteMap extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.FRAMEHEIGHT, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.FRAMEWIDTH, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.HALFTONED, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.RESOLUTION, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.BANDORDERING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.BANDORDERING, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBandOrdering.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.ELEMENTTYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumElementType.getEnum(0), null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.FRAMEHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.FRAMEWIDTH, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.HALFTONED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.PIXELSKIP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOLUTION, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -124,11 +124,10 @@ public abstract class JDFAutoByteMap extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.BAND, 0x22222222);
         elemInfoTable[1] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666611);
         elemInfoTable[2] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.PIXELCOLORANT, 0x22222222);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.PIXELCOLORANT, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -178,15 +177,13 @@ public abstract class JDFAutoByteMap extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoByteMap[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -194,8 +191,7 @@ public abstract class JDFAutoByteMap extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -246,10 +242,112 @@ public abstract class JDFAutoByteMap extends JDFResource
 
 
 
+        /**
+        * Enumeration strings for ElementType
+        */
+
+        public static class EnumElementType extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumElementType(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumElementType getEnum(String enumName)
+            {
+                return (EnumElementType) getEnum(EnumElementType.class, enumName);
+            }
+
+            public static EnumElementType getEnum(int enumValue)
+            {
+                return (EnumElementType) getEnum(EnumElementType.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumElementType.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumElementType.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumElementType.class);
+            }
+
+            public static final EnumElementType Auxiliary = new EnumElementType("Auxiliary");
+            public static final EnumElementType Barcode = new EnumElementType("Barcode");
+            public static final EnumElementType Composed = new EnumElementType("Composed");
+            public static final EnumElementType Document = new EnumElementType("Document");
+            public static final EnumElementType Graphic = new EnumElementType("Graphic");
+            public static final EnumElementType IdentificationField = new EnumElementType("IdentificationField");
+            public static final EnumElementType Image = new EnumElementType("Image");
+            public static final EnumElementType MultiDocument = new EnumElementType("MultiDocument");
+            public static final EnumElementType MultiSet = new EnumElementType("MultiSet");
+            public static final EnumElementType Page = new EnumElementType("Page");
+            public static final EnumElementType Reservation = new EnumElementType("Reservation");
+            public static final EnumElementType Surface = new EnumElementType("Surface");
+            public static final EnumElementType Text = new EnumElementType("Text");
+            public static final EnumElementType Tile = new EnumElementType("Tile");
+            public static final EnumElementType Unknown = new EnumElementType("Unknown");
+        }      
+
+
+
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
  */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute BandOrdering
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute BandOrdering
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setBandOrdering(EnumBandOrdering enumVar)
+        {
+            setAttribute(AttributeName.BANDORDERING, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute BandOrdering
+          * @return the value of the attribute
+          */
+        public EnumBandOrdering getBandOrdering()
+        {
+            return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ElementType
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute ElementType
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setElementType(EnumElementType enumVar)
+        {
+            setAttribute(AttributeName.ELEMENTTYPE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute ElementType
+          * @return the value of the attribute
+          */
+        public EnumElementType getElementType()
+        {
+            return EnumElementType.getEnum(getAttribute(AttributeName.ELEMENTTYPE, null, null));
+        }
+
         
         /* ---------------------------------------------------------------------
         Methods for Attribute FrameHeight
@@ -340,6 +438,28 @@ public abstract class JDFAutoByteMap extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute PixelSkip
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute PixelSkip
+          * @param value: the value to set the attribute to
+          */
+        public void setPixelSkip(int value)
+        {
+            setAttribute(AttributeName.PIXELSKIP, value, null);
+        }
+
+        /**
+          * (15) get int attribute PixelSkip
+          * @return int the value of the attribute
+          */
+        public int getPixelSkip()
+        {
+            return getIntAttribute(AttributeName.PIXELSKIP, null, 0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute Resolution
         --------------------------------------------------------------------- */
         /**
@@ -370,50 +490,6 @@ public abstract class JDFAutoByteMap extends JDFResource
                 return null;
             }
             return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BandOrdering
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute BandOrdering
-          * @param enumVar: the enumVar to set the attribute to
-          */
-        public void setBandOrdering(EnumBandOrdering enumVar)
-        {
-            setAttribute(AttributeName.BANDORDERING, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute BandOrdering
-          * @return the value of the attribute
-          */
-        public EnumBandOrdering getBandOrdering()
-        {
-            return EnumBandOrdering.getEnum(getAttribute(AttributeName.BANDORDERING, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PixelSkip
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PixelSkip
-          * @param value: the value to set the attribute to
-          */
-        public void setPixelSkip(int value)
-        {
-            setAttribute(AttributeName.PIXELSKIP, value, null);
-        }
-
-        /**
-          * (15) get int attribute PixelSkip
-          * @return int the value of the attribute
-          */
-        public int getPixelSkip()
-        {
-            return getIntAttribute(AttributeName.PIXELSKIP, null, 0);
         }
 
 /* ***********************************************************************

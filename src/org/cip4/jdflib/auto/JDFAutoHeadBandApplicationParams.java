@@ -94,21 +94,22 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BOTTOMBRAND, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.BOTTOMCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.BOTTOMLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TOPBRAND, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.TOPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.TOPLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumStripMaterial.getEnum(0), null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.WIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.BOTTOMCOLORDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.BOTTOMLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.TOPBRAND, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.TOPCOLOR, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.TOPCOLORDETAILS, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.TOPLENGTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.STRIPMATERIAL, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumStripMaterial.getEnum(0), null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.WIDTH, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -120,8 +121,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,15 +171,13 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoHeadBandApplicationParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -187,8 +185,7 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -298,6 +295,28 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute BottomColorDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute BottomColorDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setBottomColorDetails(String value)
+        {
+            setAttribute(AttributeName.BOTTOMCOLORDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute BottomColorDetails
+          * @return the value of the attribute
+          */
+        public String getBottomColorDetails()
+        {
+            return getAttribute(AttributeName.BOTTOMCOLORDETAILS, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute BottomLength
         --------------------------------------------------------------------- */
         /**
@@ -364,6 +383,28 @@ public abstract class JDFAutoHeadBandApplicationParams extends JDFResource
             strAttrName = getAttribute(AttributeName.TOPCOLOR, null, JDFConstants.EMPTYSTRING);
             nPlaceHolder = EnumNamedColor.getEnum(strAttrName);
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute TopColorDetails
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute TopColorDetails
+          * @param value: the value to set the attribute to
+          */
+        public void setTopColorDetails(String value)
+        {
+            setAttribute(AttributeName.TOPCOLORDETAILS, value, null);
+        }
+
+        /**
+          * (23) get String attribute TopColorDetails
+          * @return the value of the attribute
+          */
+        public String getTopColorDetails()
+        {
+            return getAttribute(AttributeName.TOPCOLORDETAILS, null, JDFConstants.EMPTYSTRING);
         }
 
         

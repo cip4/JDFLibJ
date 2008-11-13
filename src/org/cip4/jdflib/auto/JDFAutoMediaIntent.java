@@ -80,11 +80,13 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.process.JDFMediaLayers;
 import org.cip4.jdflib.span.JDFIntegerSpan;
 import org.cip4.jdflib.span.JDFNameSpan;
 import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFSpanCoatings;
+import org.cip4.jdflib.span.JDFSpanFluteDirection;
 import org.cip4.jdflib.span.JDFSpanGrainDirection;
 import org.cip4.jdflib.span.JDFSpanMediaType;
 import org.cip4.jdflib.span.JDFSpanMediaUnit;
@@ -113,33 +115,37 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[24];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[28];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.BACKCOATINGS, 0x66666666);
         elemInfoTable[1] = new ElemInfoTable(ElementName.BRIGHTNESS, 0x66666666);
         elemInfoTable[2] = new ElemInfoTable(ElementName.BUYERSUPPLIED, 0x66666666);
         elemInfoTable[3] = new ElemInfoTable(ElementName.DIMENSIONS, 0x77777766);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x66666666);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.GRADE, 0x66666666);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x66666611);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.HOLECOUNT, 0x77777776);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
-        elemInfoTable[9] = new ElemInfoTable(ElementName.MEDIACOLOR, 0x66666666);
-        elemInfoTable[10] = new ElemInfoTable(ElementName.MEDIACOLORDETAILS, 0x66666611);
-        elemInfoTable[11] = new ElemInfoTable(ElementName.MEDIATYPE, 0x66666661);
-        elemInfoTable[12] = new ElemInfoTable(ElementName.MEDIATYPEDETAILS, 0x66666111);
-        elemInfoTable[13] = new ElemInfoTable(ElementName.MEDIAUNIT, 0x77777766);
-        elemInfoTable[14] = new ElemInfoTable(ElementName.OPACITY, 0x66666666);
-        elemInfoTable[15] = new ElemInfoTable(ElementName.OPACITYLEVEL, 0x66666611);
-        elemInfoTable[16] = new ElemInfoTable(ElementName.RECYCLED, 0x77777766);
-        elemInfoTable[17] = new ElemInfoTable(ElementName.RECYCLEDPERCENTAGE, 0x66666611);
-        elemInfoTable[18] = new ElemInfoTable(ElementName.STOCKBRAND, 0x66666666);
-        elemInfoTable[19] = new ElemInfoTable(ElementName.STOCKTYPE, 0x66666666);
-        elemInfoTable[20] = new ElemInfoTable(ElementName.TEXTURE, 0x66666666);
-        elemInfoTable[21] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
-        elemInfoTable[22] = new ElemInfoTable(ElementName.USWEIGHT, 0x77777766);
-        elemInfoTable[23] = new ElemInfoTable(ElementName.WEIGHT, 0x66666666);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.FLUTE, 0x66661111);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.FLUTEDIRECTION, 0x66661111);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.FRONTCOATINGS, 0x66666666);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.GRADE, 0x66666666);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.GRAINDIRECTION, 0x66666611);
+        elemInfoTable[9] = new ElemInfoTable(ElementName.HOLECOUNT, 0x77777776);
+        elemInfoTable[10] = new ElemInfoTable(ElementName.HOLETYPE, 0x66666661);
+        elemInfoTable[11] = new ElemInfoTable(ElementName.MEDIACOLOR, 0x66666666);
+        elemInfoTable[12] = new ElemInfoTable(ElementName.MEDIACOLORDETAILS, 0x66666611);
+        elemInfoTable[13] = new ElemInfoTable(ElementName.MEDIAQUALITY, 0x66661111);
+        elemInfoTable[14] = new ElemInfoTable(ElementName.MEDIATYPE, 0x66666661);
+        elemInfoTable[15] = new ElemInfoTable(ElementName.MEDIATYPEDETAILS, 0x66666111);
+        elemInfoTable[16] = new ElemInfoTable(ElementName.MEDIAUNIT, 0x77777766);
+        elemInfoTable[17] = new ElemInfoTable(ElementName.OPACITY, 0x66666666);
+        elemInfoTable[18] = new ElemInfoTable(ElementName.OPACITYLEVEL, 0x66666611);
+        elemInfoTable[19] = new ElemInfoTable(ElementName.RECYCLED, 0x77777766);
+        elemInfoTable[20] = new ElemInfoTable(ElementName.RECYCLEDPERCENTAGE, 0x66666611);
+        elemInfoTable[21] = new ElemInfoTable(ElementName.STOCKBRAND, 0x66666666);
+        elemInfoTable[22] = new ElemInfoTable(ElementName.STOCKTYPE, 0x66666666);
+        elemInfoTable[23] = new ElemInfoTable(ElementName.TEXTURE, 0x66666666);
+        elemInfoTable[24] = new ElemInfoTable(ElementName.THICKNESS, 0x66666661);
+        elemInfoTable[25] = new ElemInfoTable(ElementName.USWEIGHT, 0x77777766);
+        elemInfoTable[26] = new ElemInfoTable(ElementName.WEIGHT, 0x66666666);
+        elemInfoTable[27] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x66661111);
     }
     
     @Override
@@ -380,6 +386,58 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     }
 
     /**
+     * (24) const get element Flute
+     * @return JDFNameSpan the element
+     */
+    public JDFNameSpan getFlute()
+    {
+        return (JDFNameSpan) getElement(ElementName.FLUTE, null, 0);
+    }
+
+    /** (25) getCreateFlute
+     * 
+     * @return JDFNameSpan the element
+     */
+    public JDFNameSpan getCreateFlute()
+    {
+        return (JDFNameSpan) getCreateElement_KElement(ElementName.FLUTE, null, 0);
+    }
+
+    /**
+     * (29) append element Flute
+     */
+    public JDFNameSpan appendFlute() throws JDFException
+    {
+        return (JDFNameSpan) appendElementN(ElementName.FLUTE, 1, null);
+    }
+
+    /**
+     * (24) const get element FluteDirection
+     * @return JDFSpanFluteDirection the element
+     */
+    public JDFSpanFluteDirection getFluteDirection()
+    {
+        return (JDFSpanFluteDirection) getElement(ElementName.FLUTEDIRECTION, null, 0);
+    }
+
+    /** (25) getCreateFluteDirection
+     * 
+     * @return JDFSpanFluteDirection the element
+     */
+    public JDFSpanFluteDirection getCreateFluteDirection()
+    {
+        return (JDFSpanFluteDirection) getCreateElement_KElement(ElementName.FLUTEDIRECTION, null, 0);
+    }
+
+    /**
+     * (29) append element FluteDirection
+     */
+    public JDFSpanFluteDirection appendFluteDirection() throws JDFException
+    {
+        return (JDFSpanFluteDirection) appendElementN(ElementName.FLUTEDIRECTION, 1, null);
+    }
+
+    /**
      * (24) const get element FrontCoatings
      * @return JDFSpanCoatings the element
      */
@@ -559,6 +617,32 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     public JDFStringSpan appendMediaColorDetails() throws JDFException
     {
         return (JDFStringSpan) appendElementN(ElementName.MEDIACOLORDETAILS, 1, null);
+    }
+
+    /**
+     * (24) const get element MediaQuality
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getMediaQuality()
+    {
+        return (JDFStringSpan) getElement(ElementName.MEDIAQUALITY, null, 0);
+    }
+
+    /** (25) getCreateMediaQuality
+     * 
+     * @return JDFStringSpan the element
+     */
+    public JDFStringSpan getCreateMediaQuality()
+    {
+        return (JDFStringSpan) getCreateElement_KElement(ElementName.MEDIAQUALITY, null, 0);
+    }
+
+    /**
+     * (29) append element MediaQuality
+     */
+    public JDFStringSpan appendMediaQuality() throws JDFException
+    {
+        return (JDFStringSpan) appendElementN(ElementName.MEDIAQUALITY, 1, null);
     }
 
     /**
@@ -897,6 +981,32 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     public JDFNumberSpan appendWeight() throws JDFException
     {
         return (JDFNumberSpan) appendElementN(ElementName.WEIGHT, 1, null);
+    }
+
+    /**
+     * (24) const get element MediaLayers
+     * @return JDFMediaLayers the element
+     */
+    public JDFMediaLayers getMediaLayers()
+    {
+        return (JDFMediaLayers) getElement(ElementName.MEDIALAYERS, null, 0);
+    }
+
+    /** (25) getCreateMediaLayers
+     * 
+     * @return JDFMediaLayers the element
+     */
+    public JDFMediaLayers getCreateMediaLayers()
+    {
+        return (JDFMediaLayers) getCreateElement_KElement(ElementName.MEDIALAYERS, null, 0);
+    }
+
+    /**
+     * (29) append element MediaLayers
+     */
+    public JDFMediaLayers appendMediaLayers() throws JDFException
+    {
+        return (JDFMediaLayers) appendElementN(ElementName.MEDIALAYERS, 1, null);
     }
 
 }// end namespace JDF

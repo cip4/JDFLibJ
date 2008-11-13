@@ -89,6 +89,7 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
@@ -97,30 +98,31 @@ public abstract class JDFAutoProcessRun extends JDFAudit
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.END, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.ENDSTATUS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumEndStatus.getEnum(0), null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.RETURNTIME, 0x22221111, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.START, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x22221111, AttributeInfo.EnumAttributeType.dateTime, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333331);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -170,8 +172,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoProcessRun[  --> " + super.toString() + " ]";
     }
@@ -309,8 +310,7 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           * (5) set attribute EndStatus
           * @param enumVar: the enumVar to set the attribute to
           */
-        @Override
-		public void setEndStatus(EnumNodeStatus enumVar)
+        public void setEndStatus(EnumNodeStatus enumVar)
         {
             setAttribute(AttributeName.ENDSTATUS, enumVar==null ? null : enumVar.getName(), null);
         }
@@ -319,10 +319,47 @@ public abstract class JDFAutoProcessRun extends JDFAudit
           * (9) get attribute EndStatus
           * @return the value of the attribute
           */
-        @Override
-		public EnumNodeStatus getEndStatus()
+        public EnumNodeStatus getEndStatus()
         {
             return EnumNodeStatus.getEnum(getAttribute(AttributeName.ENDSTATUS, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ReturnTime
+        --------------------------------------------------------------------- */
+        /**
+          * (11) set attribute ReturnTime
+          * @param value: the value to set the attribute to or null
+          */
+        public void setReturnTime(JDFDate value)
+        {
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.RETURNTIME, date.getDateTimeISO(), null);
+        }
+
+        /**
+          * (12) get JDFDate attribute ReturnTime
+          * @return JDFDate the value of the attribute
+          */
+        public JDFDate getReturnTime()
+        {
+            JDFDate nMyDate = null;
+            String str = JDFConstants.EMPTYSTRING;
+            str = getAttribute(AttributeName.RETURNTIME, null, JDFConstants.EMPTYSTRING);
+            if (!JDFConstants.EMPTYSTRING.equals(str))
+            {
+                try
+                {
+                    nMyDate = new JDFDate(str);
+                }
+                catch(DataFormatException dfe)
+                {
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
+                }
+            }
+            return nMyDate;
         }
 
         
@@ -363,10 +400,97 @@ public abstract class JDFAutoProcessRun extends JDFAudit
             return nMyDate;
         }
 
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SubmissionTime
+        --------------------------------------------------------------------- */
+        /**
+          * (11) set attribute SubmissionTime
+          * @param value: the value to set the attribute to or null
+          */
+        public void setSubmissionTime(JDFDate value)
+        {
+            JDFDate date = value;
+            if (date == null) date = new JDFDate();
+            setAttribute(AttributeName.SUBMISSIONTIME, date.getDateTimeISO(), null);
+        }
+
+        /**
+          * (12) get JDFDate attribute SubmissionTime
+          * @return JDFDate the value of the attribute
+          */
+        public JDFDate getSubmissionTime()
+        {
+            JDFDate nMyDate = null;
+            String str = JDFConstants.EMPTYSTRING;
+            str = getAttribute(AttributeName.SUBMISSIONTIME, null, JDFConstants.EMPTYSTRING);
+            if (!JDFConstants.EMPTYSTRING.equals(str))
+            {
+                try
+                {
+                    nMyDate = new JDFDate(str);
+                }
+                catch(DataFormatException dfe)
+                {
+                    // throw new JDFException("not a valid date string. Malformed JDF - return null");
+                }
+            }
+            return nMyDate;
+        }
+
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /** (26) getCreateEmployee
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee getCreateEmployee(int iSkip)
+    {
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Employee
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     * default is getEmployee(0)     */
+    public JDFEmployee getEmployee(int iSkip)
+    {
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
+    {
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+    }
 
     /** (26) getCreatePart
      * 

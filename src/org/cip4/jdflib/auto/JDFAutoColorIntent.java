@@ -99,8 +99,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
         elemInfoTable[6] = new ElemInfoTable(ElementName.COLORSUSED, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -150,8 +149,7 @@ public abstract class JDFAutoColorIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoColorIntent[  --> " + super.toString() + " ]";
     }

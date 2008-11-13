@@ -70,11 +70,22 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFBundle;
 import org.cip4.jdflib.resource.JDFResource;
 
 public abstract class JDFAutoPalletizingParams extends JDFResource
@@ -82,18 +93,32 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PATTERN, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.LAYERAMOUNT, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXHEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXWEIGHT, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERHANG, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.OVERHANGOFFSET, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.PATTERN, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.BUNDLE, 0x33331111);
+    }
+    
+    protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -141,15 +166,13 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPalletizingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -157,8 +180,7 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -170,24 +192,36 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
  */
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute Pattern
+        Methods for Attribute LayerAmount
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute Pattern
+          * (36) set attribute LayerAmount
           * @param value: the value to set the attribute to
           */
-        public void setPattern(String value)
+        public void setLayerAmount(JDFIntegerList value)
         {
-            setAttribute(AttributeName.PATTERN, value, null);
+            setAttribute(AttributeName.LAYERAMOUNT, value, null);
         }
 
         /**
-          * (23) get String attribute Pattern
-          * @return the value of the attribute
+          * (20) get JDFIntegerList attribute LayerAmount
+          * @return JDFIntegerList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerList
           */
-        public String getPattern()
+        public JDFIntegerList getLayerAmount()
         {
-            return getAttribute(AttributeName.PATTERN, null, JDFConstants.EMPTYSTRING);
+            String strAttrName = "";
+            JDFIntegerList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.LAYERAMOUNT, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -233,5 +267,158 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
         {
             return getRealAttribute(AttributeName.MAXWEIGHT, null, 0.0);
         }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Overhang
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Overhang
+          * @param value: the value to set the attribute to
+          */
+        public void setOverhang(JDFXYPair value)
+        {
+            setAttribute(AttributeName.OVERHANG, value, null);
+        }
+
+        /**
+          * (20) get JDFXYPair attribute Overhang
+          * @return JDFXYPair the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFXYPair
+          */
+        public JDFXYPair getOverhang()
+        {
+            String strAttrName = "";
+            JDFXYPair nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.OVERHANG, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFXYPair(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute OverhangOffset
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute OverhangOffset
+          * @param value: the value to set the attribute to
+          */
+        public void setOverhangOffset(JDFXYPair value)
+        {
+            setAttribute(AttributeName.OVERHANGOFFSET, value, null);
+        }
+
+        /**
+          * (20) get JDFXYPair attribute OverhangOffset
+          * @return JDFXYPair the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFXYPair
+          */
+        public JDFXYPair getOverhangOffset()
+        {
+            String strAttrName = "";
+            JDFXYPair nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.OVERHANGOFFSET, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFXYPair(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Pattern
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Pattern
+          * @param value: the value to set the attribute to
+          */
+        public void setPattern(String value)
+        {
+            setAttribute(AttributeName.PATTERN, value, null);
+        }
+
+        /**
+          * (23) get String attribute Pattern
+          * @return the value of the attribute
+          */
+        public String getPattern()
+        {
+            return getAttribute(AttributeName.PATTERN, null, JDFConstants.EMPTYSTRING);
+        }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /** (26) getCreateBundle
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFBundle the element
+     */
+    public JDFBundle getCreateBundle(int iSkip)
+    {
+        return (JDFBundle)getCreateElement_KElement(ElementName.BUNDLE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Bundle
+     * @param iSkip number of elements to skip
+     * @return JDFBundle the element
+     * default is getBundle(0)     */
+    public JDFBundle getBundle(int iSkip)
+    {
+        return (JDFBundle) getElement(ElementName.BUNDLE, null, iSkip);
+    }
+
+    /**
+     * Get all Bundle from the current element
+     * 
+     * @return Collection<JDFBundle>
+     */
+    public Collection<JDFBundle> getAllBundle()
+    {
+        Vector<JDFBundle> v = new Vector<JDFBundle>();
+
+        JDFBundle kElem = (JDFBundle) getFirstChildElement(ElementName.BUNDLE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFBundle) kElem.getNextSiblingElement(ElementName.BUNDLE, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Bundle
+     */
+    public JDFBundle appendBundle() throws JDFException
+    {
+        return (JDFBundle) appendElement(ElementName.BUNDLE, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refBundle(JDFBundle refTarget)
+    {
+        refElement(refTarget);
+    }
 
 }// end namespace JDF

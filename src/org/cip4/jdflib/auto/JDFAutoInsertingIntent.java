@@ -93,8 +93,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.METHOD, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoInsertingIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoInsertingIntent[  --> " + super.toString() + " ]";
     }

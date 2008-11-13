@@ -98,8 +98,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.OVERLAP, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -149,8 +148,7 @@ public abstract class JDFAutoBoxArgument extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBoxArgument[  --> " + super.toString() + " ]";
     }

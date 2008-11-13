@@ -75,6 +75,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -87,6 +88,8 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFCostCenter;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -96,17 +99,20 @@ public abstract class JDFAutoNotification extends JDFAudit
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumClass.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.MODULEID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULETYPE, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -120,8 +126,7 @@ public abstract class JDFAutoNotification extends JDFAudit
         elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,8 +176,7 @@ public abstract class JDFAutoNotification extends JDFAudit
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNotification[  --> " + super.toString() + " ]";
     }
@@ -254,6 +258,40 @@ public abstract class JDFAutoNotification extends JDFAudit
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute CombinedProcessIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute CombinedProcessIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setCombinedProcessIndex(JDFIntegerList value)
+        {
+            setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
+        }
+
+        /**
+          * (20) get JDFIntegerList attribute CombinedProcessIndex
+          * @return JDFIntegerList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerList
+          */
+        public JDFIntegerList getCombinedProcessIndex()
+        {
+            String strAttrName = "";
+            JDFIntegerList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute JobID
         --------------------------------------------------------------------- */
         /**
@@ -294,6 +332,84 @@ public abstract class JDFAutoNotification extends JDFAudit
         public String getJobPartID()
         {
             return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ModuleID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ModuleID
+          * @param value: the value to set the attribute to
+          */
+        public void setModuleID(String value)
+        {
+            setAttribute(AttributeName.MODULEID, value, null);
+        }
+
+        /**
+          * (23) get String attribute ModuleID
+          * @return the value of the attribute
+          */
+        public String getModuleID()
+        {
+            return getAttribute(AttributeName.MODULEID, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ModuleIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ModuleIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setModuleIndex(JDFIntegerRangeList value)
+        {
+            setAttribute(AttributeName.MODULEINDEX, value, null);
+        }
+
+        /**
+          * (20) get JDFIntegerRangeList attribute ModuleIndex
+          * @return JDFIntegerRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFIntegerRangeList
+          */
+        public JDFIntegerRangeList getModuleIndex()
+        {
+            String strAttrName = "";
+            JDFIntegerRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.MODULEINDEX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFIntegerRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ModuleType
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ModuleType
+          * @param value: the value to set the attribute to
+          */
+        public void setModuleType(String value)
+        {
+            setAttribute(AttributeName.MODULETYPE, value, null);
+        }
+
+        /**
+          * (23) get String attribute ModuleType
+          * @return the value of the attribute
+          */
+        public String getModuleType()
+        {
+            return getAttribute(AttributeName.MODULETYPE, null, JDFConstants.EMPTYSTRING);
         }
 
         

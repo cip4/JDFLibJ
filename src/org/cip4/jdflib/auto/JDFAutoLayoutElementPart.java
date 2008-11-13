@@ -70,26 +70,44 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.resource.process.JDFBarcodeProductionParams;
+import org.cip4.jdflib.resource.process.JDFLayoutElement;
+import org.cip4.jdflib.resource.process.JDFPositionObj;
 
 public abstract class JDFAutoLayoutElementPart extends JDFElement
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEPRODUCTIONPARAMS, 0x33333111);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x33331111, AttributeInfo.EnumAttributeType.Any, null, null);
+    }
+    
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEPRODUCTIONPARAMS, 0x66666111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.LAYOUTELEMENT, 0x66661111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.POSITIONOBJ, 0x66661111);
     }
     
     @Override
@@ -150,58 +168,128 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
     }
 
 
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ID
+          * @param value: the value to set the attribute to
+          */
+        public void setID(String value)
+        {
+            setAttribute(AttributeName.ID, value, null);
+        }
+
+        /**
+          * (20) get String attribute ID
+          * @return String the value of the attribute, null if a the
+          *         attribute value is not a valid to create a String
+          */
+        @Override
+		public String getID()
+        {
+            String strAttrName = "";
+            String nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+            nPlaceHolder = strAttrName;
+            return nPlaceHolder;
+        }
+
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
  */
 
-    /** (26) getCreateBarcodeProductionParams
-     * 
-     * @param iSkip number of elements to skip
+    /**
+     * (24) const get element BarcodeProductionParams
      * @return JDFBarcodeProductionParams the element
      */
-    public JDFBarcodeProductionParams getCreateBarcodeProductionParams(int iSkip)
+    public JDFBarcodeProductionParams getBarcodeProductionParams()
     {
-        return (JDFBarcodeProductionParams)getCreateElement_KElement(ElementName.BARCODEPRODUCTIONPARAMS, null, iSkip);
+        return (JDFBarcodeProductionParams) getElement(ElementName.BARCODEPRODUCTIONPARAMS, null, 0);
     }
 
-    /**
-     * (27) const get element BarcodeProductionParams
-     * @param iSkip number of elements to skip
-     * @return JDFBarcodeProductionParams the element
-     * default is getBarcodeProductionParams(0)     */
-    public JDFBarcodeProductionParams getBarcodeProductionParams(int iSkip)
-    {
-        return (JDFBarcodeProductionParams) getElement(ElementName.BARCODEPRODUCTIONPARAMS, null, iSkip);
-    }
-
-    /**
-     * Get all BarcodeProductionParams from the current element
+    /** (25) getCreateBarcodeProductionParams
      * 
-     * @return Collection<JDFBarcodeProductionParams>
+     * @return JDFBarcodeProductionParams the element
      */
-    public Collection<JDFBarcodeProductionParams> getAllBarcodeProductionParams()
+    public JDFBarcodeProductionParams getCreateBarcodeProductionParams()
     {
-        Vector<JDFBarcodeProductionParams> v = new Vector<JDFBarcodeProductionParams>();
-
-        JDFBarcodeProductionParams kElem = (JDFBarcodeProductionParams) getFirstChildElement(ElementName.BARCODEPRODUCTIONPARAMS, null);
-
-        while (kElem != null)
-        {
-            v.add(kElem);
-
-            kElem = (JDFBarcodeProductionParams) kElem.getNextSiblingElement(ElementName.BARCODEPRODUCTIONPARAMS, null);
-        }
-
-        return v;
+        return (JDFBarcodeProductionParams) getCreateElement_KElement(ElementName.BARCODEPRODUCTIONPARAMS, null, 0);
     }
 
     /**
-     * (30) append element BarcodeProductionParams
+     * (29) append element BarcodeProductionParams
      */
     public JDFBarcodeProductionParams appendBarcodeProductionParams() throws JDFException
     {
-        return (JDFBarcodeProductionParams) appendElement(ElementName.BARCODEPRODUCTIONPARAMS, null);
+        return (JDFBarcodeProductionParams) appendElementN(ElementName.BARCODEPRODUCTIONPARAMS, 1, null);
+    }
+
+    /**
+     * (24) const get element LayoutElement
+     * @return JDFLayoutElement the element
+     */
+    public JDFLayoutElement getLayoutElement()
+    {
+        return (JDFLayoutElement) getElement(ElementName.LAYOUTELEMENT, null, 0);
+    }
+
+    /** (25) getCreateLayoutElement
+     * 
+     * @return JDFLayoutElement the element
+     */
+    public JDFLayoutElement getCreateLayoutElement()
+    {
+        return (JDFLayoutElement) getCreateElement_KElement(ElementName.LAYOUTELEMENT, null, 0);
+    }
+
+    /**
+     * (29) append element LayoutElement
+     */
+    public JDFLayoutElement appendLayoutElement() throws JDFException
+    {
+        return (JDFLayoutElement) appendElementN(ElementName.LAYOUTELEMENT, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refLayoutElement(JDFLayoutElement refTarget)
+    {
+        refElement(refTarget);
+    }
+
+    /**
+     * (24) const get element PositionObj
+     * @return JDFPositionObj the element
+     */
+    public JDFPositionObj getPositionObj()
+    {
+        return (JDFPositionObj) getElement(ElementName.POSITIONOBJ, null, 0);
+    }
+
+    /** (25) getCreatePositionObj
+     * 
+     * @return JDFPositionObj the element
+     */
+    public JDFPositionObj getCreatePositionObj()
+    {
+        return (JDFPositionObj) getCreateElement_KElement(ElementName.POSITIONOBJ, null, 0);
+    }
+
+    /**
+     * (29) append element PositionObj
+     */
+    public JDFPositionObj appendPositionObj() throws JDFException
+    {
+        return (JDFPositionObj) appendElementN(ElementName.POSITIONOBJ, 1, null);
     }
 
 }// end namespace JDF

@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -80,9 +82,16 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFTool;
+import org.cip4.jdflib.resource.process.JDFIdentificationField;
+import org.cip4.jdflib.resource.process.JDFMedia;
 
 public abstract class JDFAutoEmboss extends JDFElement
 {
@@ -102,10 +111,23 @@ public abstract class JDFAutoEmboss extends JDFElement
         atrInfoTable[7] = new AtrInfoTable(AttributeName.POSITION, 0x33333331, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.IDENTIFICATIONFIELD, 0x33333331);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x66661111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.TOOL, 0x66661111);
+    }
+    
+    protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -153,8 +175,7 @@ public abstract class JDFAutoEmboss extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoEmboss[  --> " + super.toString() + " ]";
     }
@@ -550,5 +571,138 @@ public abstract class JDFAutoEmboss extends JDFElement
             }
             return nPlaceHolder;
         }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /** (26) getCreateIdentificationField
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFIdentificationField the element
+     */
+    public JDFIdentificationField getCreateIdentificationField(int iSkip)
+    {
+        return (JDFIdentificationField)getCreateElement_KElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+    }
+
+    /**
+     * (27) const get element IdentificationField
+     * @param iSkip number of elements to skip
+     * @return JDFIdentificationField the element
+     * default is getIdentificationField(0)     */
+    public JDFIdentificationField getIdentificationField(int iSkip)
+    {
+        return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
+    }
+
+    /**
+     * Get all IdentificationField from the current element
+     * 
+     * @return Collection<JDFIdentificationField>
+     */
+    public Collection<JDFIdentificationField> getAllIdentificationField()
+    {
+        Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+
+        JDFIdentificationField kElem = (JDFIdentificationField) getFirstChildElement(ElementName.IDENTIFICATIONFIELD, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFIdentificationField) kElem.getNextSiblingElement(ElementName.IDENTIFICATIONFIELD, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element IdentificationField
+     */
+    public JDFIdentificationField appendIdentificationField() throws JDFException
+    {
+        return (JDFIdentificationField) appendElement(ElementName.IDENTIFICATIONFIELD, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refIdentificationField(JDFIdentificationField refTarget)
+    {
+        refElement(refTarget);
+    }
+
+    /**
+     * (24) const get element Media
+     * @return JDFMedia the element
+     */
+    public JDFMedia getMedia()
+    {
+        return (JDFMedia) getElement(ElementName.MEDIA, null, 0);
+    }
+
+    /** (25) getCreateMedia
+     * 
+     * @return JDFMedia the element
+     */
+    public JDFMedia getCreateMedia()
+    {
+        return (JDFMedia) getCreateElement_KElement(ElementName.MEDIA, null, 0);
+    }
+
+    /**
+     * (29) append element Media
+     */
+    public JDFMedia appendMedia() throws JDFException
+    {
+        return (JDFMedia) appendElementN(ElementName.MEDIA, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refMedia(JDFMedia refTarget)
+    {
+        refElement(refTarget);
+    }
+
+    /**
+     * (24) const get element Tool
+     * @return JDFMedia the element
+     */
+    public JDFMedia getTool()
+    {
+        return (JDFMedia) getElement(ElementName.TOOL, null, 0);
+    }
+
+    /** (25) getCreateTool
+     * 
+     * @return JDFMedia the element
+     */
+    public JDFMedia getCreateTool()
+    {
+        return (JDFMedia) getCreateElement_KElement(ElementName.TOOL, null, 0);
+    }
+
+    /**
+     * (29) append element Tool
+     */
+    public JDFMedia appendTool() throws JDFException
+    {
+        return (JDFMedia) appendElementN(ElementName.TOOL, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refTool(JDFTool refTarget)
+    {
+        refElement(refTarget);
+    }
 
 }// end namespace JDF

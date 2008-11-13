@@ -92,8 +92,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.TEXTSIZETHRESHOLD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -143,15 +142,13 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAutomatedOverPrintParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -159,8 +156,7 @@ public abstract class JDFAutoAutomatedOverPrintParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

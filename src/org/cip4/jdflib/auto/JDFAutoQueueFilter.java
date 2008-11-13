@@ -91,6 +91,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoQueueFilter extends JDFElement
@@ -98,33 +99,36 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.GANGNAMES, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.MAXENTRIES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.OLDERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.NEWERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.QUEUEENTRYDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryDetails.getEnum(0), "Brief");
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.STATUSLIST, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumStatusList.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.JOBID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBPARTID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXENTRIES, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.OLDERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.PREVIEWUSAGES, 0x33331111, AttributeInfo.EnumAttributeType.enumerations, EnumPreviewUsages.getEnum(0), "Separation");
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.NEWERTHAN, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYDETAILS, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumQueueEntryDetails.getEnum(0), "Brief");
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.STATUSLIST, 0x33333311, AttributeInfo.EnumAttributeType.enumerations, EnumStatusList.getEnum(0), null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.UPDATEGRANULARITY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateGranularity.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEENTRYDEF, 0x33333311);
         elemInfoTable[1] = new ElemInfoTable(ElementName.DEVICE, 0x33333311);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -174,11 +178,60 @@ public abstract class JDFAutoQueueFilter extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoQueueFilter[  --> " + super.toString() + " ]";
     }
+
+
+        /**
+        * Enumeration strings for PreviewUsages
+        */
+
+        public static class EnumPreviewUsages extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumPreviewUsages(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumPreviewUsages getEnum(String enumName)
+            {
+                return (EnumPreviewUsages) getEnum(EnumPreviewUsages.class, enumName);
+            }
+
+            public static EnumPreviewUsages getEnum(int enumValue)
+            {
+                return (EnumPreviewUsages) getEnum(EnumPreviewUsages.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumPreviewUsages.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumPreviewUsages.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumPreviewUsages.class);
+            }
+
+            public static final EnumPreviewUsages         PreviewUsages_3D = new EnumPreviewUsages("3D");
+            public static final EnumPreviewUsages Animation = new EnumPreviewUsages("Animation");
+            public static final EnumPreviewUsages Separation = new EnumPreviewUsages("Separation");
+            public static final EnumPreviewUsages SeparationRaw = new EnumPreviewUsages("SeparationRaw");
+            public static final EnumPreviewUsages SeparatedThumbNail = new EnumPreviewUsages("SeparatedThumbNail");
+            public static final EnumPreviewUsages ThumbNail = new EnumPreviewUsages("ThumbNail");
+            public static final EnumPreviewUsages Viewable = new EnumPreviewUsages("Viewable");
+        }      
+
 
 
         /**
@@ -279,6 +332,51 @@ public abstract class JDFAutoQueueFilter extends JDFElement
 
 
 
+        /**
+        * Enumeration strings for UpdateGranularity
+        */
+
+        public static class EnumUpdateGranularity extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumUpdateGranularity(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumUpdateGranularity getEnum(String enumName)
+            {
+                return (EnumUpdateGranularity) getEnum(EnumUpdateGranularity.class, enumName);
+            }
+
+            public static EnumUpdateGranularity getEnum(int enumValue)
+            {
+                return (EnumUpdateGranularity) getEnum(EnumUpdateGranularity.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumUpdateGranularity.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumUpdateGranularity.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumUpdateGranularity.class);
+            }
+
+            public static final EnumUpdateGranularity All = new EnumUpdateGranularity("All");
+            public static final EnumUpdateGranularity ChangesOnly = new EnumUpdateGranularity("ChangesOnly");
+        }      
+
+
+
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
@@ -306,6 +404,50 @@ public abstract class JDFAutoQueueFilter extends JDFElement
             String  s = getAttribute(AttributeName.GANGNAMES, null, JDFConstants.EMPTYSTRING);
             vStrAttrib.setAllStrings(s, " ");
             return vStrAttrib;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute JobID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute JobID
+          * @param value: the value to set the attribute to
+          */
+        public void setJobID(String value)
+        {
+            setAttribute(AttributeName.JOBID, value, null);
+        }
+
+        /**
+          * (23) get String attribute JobID
+          * @return the value of the attribute
+          */
+        public String getJobID()
+        {
+            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute JobPartID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute JobPartID
+          * @param value: the value to set the attribute to
+          */
+        public void setJobPartID(String value)
+        {
+            setAttribute(AttributeName.JOBPARTID, value, null);
+        }
+
+        /**
+          * (23) get String attribute JobPartID
+          * @return the value of the attribute
+          */
+        public String getJobPartID()
+        {
+            return getAttribute(AttributeName.JOBPARTID, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -366,6 +508,28 @@ public abstract class JDFAutoQueueFilter extends JDFElement
                 }
             }
             return nMyDate;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute PreviewUsages
+        --------------------------------------------------------------------- */
+        /**
+          * (5.2) set attribute PreviewUsages
+          * @param v vector of the enumeration values
+          */
+        public void setPreviewUsages(Vector v)
+        {
+            setEnumerationsAttribute(AttributeName.PREVIEWUSAGES, v, null);
+        }
+
+        /**
+          * (9.2) get PreviewUsages attribute PreviewUsages
+          * @return Vector of the enumerations
+          */
+        public Vector getPreviewUsages()
+        {
+            return getEnumerationsAttribute(AttributeName.PREVIEWUSAGES, null, EnumPreviewUsages.Separation, false);
         }
 
         
@@ -448,6 +612,28 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         public Vector getStatusList()
         {
             return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumStatusList.getEnum(0), false);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute UpdateGranularity
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute UpdateGranularity
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setUpdateGranularity(EnumUpdateGranularity enumVar)
+        {
+            setAttribute(AttributeName.UPDATEGRANULARITY, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute UpdateGranularity
+          * @return the value of the attribute
+          */
+        public EnumUpdateGranularity getUpdateGranularity()
+        {
+            return EnumUpdateGranularity.getEnum(getAttribute(AttributeName.UPDATEGRANULARITY, null, null));
         }
 
 /* ***********************************************************************
@@ -551,6 +737,55 @@ public abstract class JDFAutoQueueFilter extends JDFElement
     public JDFDevice appendDevice() throws JDFException
     {
         return (JDFDevice) appendElement(ElementName.DEVICE, null);
+    }
+
+    /** (26) getCreatePart
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFPart the element
+     */
+    public JDFPart getCreatePart(int iSkip)
+    {
+        return (JDFPart)getCreateElement_KElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Part
+     * @param iSkip number of elements to skip
+     * @return JDFPart the element
+     * default is getPart(0)     */
+    public JDFPart getPart(int iSkip)
+    {
+        return (JDFPart) getElement(ElementName.PART, null, iSkip);
+    }
+
+    /**
+     * Get all Part from the current element
+     * 
+     * @return Collection<JDFPart>
+     */
+    public Collection<JDFPart> getAllPart()
+    {
+        Vector<JDFPart> v = new Vector<JDFPart>();
+
+        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Part
+     */
+    public JDFPart appendPart() throws JDFException
+    {
+        return (JDFPart) appendElement(ElementName.PART, null);
     }
 
 }// end namespace JDF

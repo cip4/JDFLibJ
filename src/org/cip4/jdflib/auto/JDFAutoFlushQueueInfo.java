@@ -89,8 +89,7 @@ public abstract class JDFAutoFlushQueueInfo extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x55555511);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -140,8 +139,7 @@ public abstract class JDFAutoFlushQueueInfo extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFlushQueueInfo[  --> " + super.toString() + " ]";
     }

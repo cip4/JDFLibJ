@@ -99,23 +99,25 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDERYSIGNATURETYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBinderySignatureType.getEnum(0), "Fold");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.BINDINGEDGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumBindingEdge.getEnum(0), "Left");
         atrInfoTable[2] = new AtrInfoTable(AttributeName.JOGEDGE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumJogEdge.getEnum(0), "Top");
         atrInfoTable[3] = new AtrInfoTable(AttributeName.NUMBERUP, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, "1 1");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.ALIGNMENTREFERENCEWEB, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.BINDINGORIENTATION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBindingOrientation.getEnum(0), null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.OUTSIDEGUTTER, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.STAGGERCOLUMNS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.STAGGERCONTINUOUS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.STAGGERROWS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.FOLDCATALOG, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.FOLDLAY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumFoldLay.getEnum(0), null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.OUTSIDEGUTTER, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.STAGGERCOLUMNS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.STAGGERCONTINUOUS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.STAGGERROWS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.WEBCELLALIGNMENT, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -129,8 +131,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.SIGNATURECELL, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -180,15 +181,13 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBinderySignature[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -196,8 +195,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -396,6 +394,57 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
 
 
+        /**
+        * Enumeration strings for FoldLay
+        */
+
+        public static class EnumFoldLay extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumFoldLay(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumFoldLay getEnum(String enumName)
+            {
+                return (EnumFoldLay) getEnum(EnumFoldLay.class, enumName);
+            }
+
+            public static EnumFoldLay getEnum(int enumValue)
+            {
+                return (EnumFoldLay) getEnum(EnumFoldLay.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumFoldLay.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumFoldLay.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumFoldLay.class);
+            }
+
+            public static final EnumFoldLay Rotate0 = new EnumFoldLay("Rotate0");
+            public static final EnumFoldLay Rotate90 = new EnumFoldLay("Rotate90");
+            public static final EnumFoldLay Rotate180 = new EnumFoldLay("Rotate180");
+            public static final EnumFoldLay Rotate270 = new EnumFoldLay("Rotate270");
+            public static final EnumFoldLay Flip0 = new EnumFoldLay("Flip0");
+            public static final EnumFoldLay Flip90 = new EnumFoldLay("Flip90");
+            public static final EnumFoldLay Flip180 = new EnumFoldLay("Flip180");
+            public static final EnumFoldLay Flip270 = new EnumFoldLay("Flip270");
+        }      
+
+
+
 /* ************************************************************************
  * Attribute getter / setter
  * ************************************************************************
@@ -502,24 +551,24 @@ public abstract class JDFAutoBinderySignature extends JDFResource
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute FoldCatalog
+        Methods for Attribute AlignmentReferenceWeb
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute FoldCatalog
+          * (36) set attribute AlignmentReferenceWeb
           * @param value: the value to set the attribute to
           */
-        public void setFoldCatalog(String value)
+        public void setAlignmentReferenceWeb(String value)
         {
-            setAttribute(AttributeName.FOLDCATALOG, value, null);
+            setAttribute(AttributeName.ALIGNMENTREFERENCEWEB, value, null);
         }
 
         /**
-          * (23) get String attribute FoldCatalog
+          * (23) get String attribute AlignmentReferenceWeb
           * @return the value of the attribute
           */
-        public String getFoldCatalog()
+        public String getAlignmentReferenceWeb()
         {
-            return getAttribute(AttributeName.FOLDCATALOG, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.ALIGNMENTREFERENCEWEB, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -542,6 +591,50 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         public EnumBindingOrientation getBindingOrientation()
         {
             return EnumBindingOrientation.getEnum(getAttribute(AttributeName.BINDINGORIENTATION, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute FoldCatalog
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute FoldCatalog
+          * @param value: the value to set the attribute to
+          */
+        public void setFoldCatalog(String value)
+        {
+            setAttribute(AttributeName.FOLDCATALOG, value, null);
+        }
+
+        /**
+          * (23) get String attribute FoldCatalog
+          * @return the value of the attribute
+          */
+        public String getFoldCatalog()
+        {
+            return getAttribute(AttributeName.FOLDCATALOG, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute FoldLay
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute FoldLay
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setFoldLay(EnumFoldLay enumVar)
+        {
+            setAttribute(AttributeName.FOLDLAY, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute FoldLay
+          * @return the value of the attribute
+          */
+        public EnumFoldLay getFoldLay()
+        {
+            return EnumFoldLay.getEnum(getAttribute(AttributeName.FOLDLAY, null, null));
         }
 
         
@@ -648,6 +741,40 @@ public abstract class JDFAutoBinderySignature extends JDFResource
             try
             {
                 nPlaceHolder = new JDFNumberList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute WebCellAlignment
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute WebCellAlignment
+          * @param value: the value to set the attribute to
+          */
+        public void setWebCellAlignment(JDFXYPair value)
+        {
+            setAttribute(AttributeName.WEBCELLALIGNMENT, value, null);
+        }
+
+        /**
+          * (20) get JDFXYPair attribute WebCellAlignment
+          * @return JDFXYPair the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFXYPair
+          */
+        public JDFXYPair getWebCellAlignment()
+        {
+            String strAttrName = "";
+            JDFXYPair nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.WEBCELLALIGNMENT, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFXYPair(strAttrName);
             }
             catch(DataFormatException e)
             {
