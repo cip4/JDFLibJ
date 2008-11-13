@@ -83,6 +83,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
@@ -217,7 +218,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 		if (r.hasAttribute(AttributeName.PRODUCTID))
 			setProductID(r.getProductID());
 		setResourceID(r.getID());
-		setResourceName(r.getLocalName());
+		setResourceName(new VString(r.getLocalName(),null));
 		setUsage(resourceLink.getUsage());
 		setPartMapVector(resourceLink.getPartMapVector());
 

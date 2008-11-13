@@ -161,7 +161,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		JDFResourceQuParams rqp = s.appendResourceQuParams();
 		rqp.setJobID("JobID");
 		rqp.setJobPartID("JobPartID");
-		rqp.setResourceName(ElementName.USAGECOUNTER);
+		rqp.setResourceName(new VString(ElementName.USAGECOUNTER,null));
 
 		JDFResourceInfo ri = s.appendResourceInfo();
 		ri.setActualAmount(42);
@@ -192,7 +192,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		JDFResourceQuParams rqp = s.appendResourceQuParams();
 		rqp.setJobID("JobID");
 		rqp.setJobPartID("JobPartID");
-		rqp.setResourceName(ElementName.MEDIA);
+		rqp.setResourceName(new VString(ElementName.MEDIA,null));
 
 		JDFResourceInfo ri = s.appendResourceInfo();
 		ri.getCreateAmountPool();
@@ -214,7 +214,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		JDFResourceQuParams rqp = q.appendResourceQuParams();
 		rqp.setExact(true);
 		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complet list of all known resources");
-		rqp.setResourceName(ElementName.MEDIA);
+		rqp.setResourceName(new VString(ElementName.MEDIA,null));
 		//		rqp.setAttribute("Scope", "Allowed");
 
 		JDFResponse r = q.createResponse().getResponse(0);
@@ -257,7 +257,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		JDFResourceQuParams rqp = s.appendResourceQuParams();
 		rqp.setJobID("JobID");
 		rqp.setJobPartID("JobPartID");
-		rqp.setResourceName(ElementName.EXPOSEDMEDIA);
+		rqp.setResourceName(new VString(ElementName.EXPOSEDMEDIA,null));
 
 		JDFResourceInfo ri = s.appendResourceInfo();
 		JDFExposedMedia xm = (JDFExposedMedia) ri.appendElement("ExposedMedia");

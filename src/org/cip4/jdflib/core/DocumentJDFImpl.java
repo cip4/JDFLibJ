@@ -445,8 +445,7 @@ public class DocumentJDFImpl extends DocumentImpl
 			strClassPath = sm_PackageNames.get(qualifiedName);
 			if (strClassPath == null
 					&& (null == strNameSpaceURI || jdfNSURI.equals(strNameSpaceURI) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
-			{ // the maps only contain local names for jdf - recheck in case of
-				// prefix
+			{ // the maps only contain local names for jdf - recheck in case of prefix
 				strClassPath = sm_PackageNames.get(localPart);
 			}
 		}
@@ -533,7 +532,10 @@ public class DocumentJDFImpl extends DocumentImpl
 			}
 			else
 			{
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) ? (String) sm_PackageNames.get("EleDefault") : (String) sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || 
+							    JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) 
+									? (String) sm_PackageNames.get("EleDefault") 
+									: (String) sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 
@@ -735,6 +737,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.CONTAINER, "org.cip4.jdflib.resource.process.JDFContainer");
 		sm_PackageNames.put(ElementName.CONTENTDATA, "org.cip4.jdflib.resource.process.JDFContentData");
 		sm_PackageNames.put(ElementName.CONTENTLIST, "org.cip4.jdflib.resource.process.JDFContentList");
+		sm_PackageNames.put(ElementName.CONTENTMETADATA, "org.cip4.jdflib.resource.process.JDFContentMetaData");
 		sm_PackageNames.put(ElementName.CONTENTOBJECT, "org.cip4.jdflib.resource.process.JDFContentObject");
 		sm_PackageNames.put(ElementName.CONVENTIONALPRINTINGPARAMS, "org.cip4.jdflib.resource.process.JDFConventionalPrintingParams");
 		sm_PackageNames.put(ElementName.COSTCENTER, "org.cip4.jdflib.resource.process.JDFCostCenter");
@@ -847,6 +850,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.FLUSHQUEUEINFO, "org.cip4.jdflib.jmf.JDFFlushQueueInfo");
 		sm_PackageNames.put(ElementName.FLUSHQUEUEPARAMS, "org.cip4.jdflib.jmf.JDFFlushQueueParams");
 		sm_PackageNames.put(ElementName.FLUSHRESOURCEPARAMS, "org.cip4.jdflib.jmf.JDFFlushResourceParams");
+		sm_PackageNames.put(ElementName.FLUTEDIRECTION, "org.cip4.jdflib.span.JDFSpanFluteDirection");
 		sm_PackageNames.put(ElementName.FOILCOLOR, "org.cip4.jdflib.span.JDFSpanNamedColor");
 		sm_PackageNames.put(ElementName.FOLD, "org.cip4.jdflib.resource.process.postpress.JDFFold");
 		sm_PackageNames.put(ElementName.FOLDERPRODUCTION, "org.cip4.jdflib.resource.process.JDFFolderProduction");
@@ -962,6 +966,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.MACROPOOL, "org.cip4.jdflib.resource.devicecapability.JDFMacroPool");
 		sm_PackageNames.put(ElementName.MANUALLABORPARAMS, "org.cip4.jdflib.resource.process.JDFManualLaborParams");
 		sm_PackageNames.put(ElementName.MARKOBJECT, "org.cip4.jdflib.resource.JDFMarkObject");
+		sm_PackageNames.put(ElementName.MARKACTIVATION, "org.cip4.jdflib.resource.JDFMarkActivation");
 		sm_PackageNames.put(ElementName.MATERIAL, "org.cip4.jdflib.span.JDFStringSpan");
 		sm_PackageNames.put(ElementName.MATRIXEVALUATION, "org.cip4.jdflib.resource.devicecapability.JDFMatrixEvaluation");
 		sm_PackageNames.put(ElementName.MATRIXSTATE, "org.cip4.jdflib.resource.devicecapability.JDFMatrixState");
@@ -1024,6 +1029,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.PACKINGPARAMS, "org.cip4.jdflib.resource.process.JDFPackingParams");
 		sm_PackageNames.put(ElementName.PAGEASSIGNEDLIST, "org.cip4.jdflib.resource.process.JDFPageAssignedList");
 		sm_PackageNames.put(ElementName.PAGECELL, "org.cip4.jdflib.resource.JDFPageCell");
+		sm_PackageNames.put(ElementName.PAGECONDITION, "org.cip4.jdflib.resource.JDFPageCondition");
 		sm_PackageNames.put(ElementName.PAGEDATA, "org.cip4.jdflib.resource.process.JDFPageData");
 		sm_PackageNames.put(ElementName.PAGEELEMENT, "org.cip4.jdflib.resource.process.JDFPageElement");
 		sm_PackageNames.put(ElementName.PAGELIST, "org.cip4.jdflib.resource.JDFPageList");
@@ -1063,6 +1069,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.PLASTICCOMBTYPE, "org.cip4.jdflib.span.JDFNameSpan");
 		sm_PackageNames.put(ElementName.PLATECOPYPARAMS, "org.cip4.jdflib.resource.process.JDFPlateCopyParams");
 		sm_PackageNames.put(ElementName.POSITION, "org.cip4.jdflib.resource.process.JDFPosition");
+		sm_PackageNames.put(ElementName.POSITIONOBJ, "org.cip4.jdflib.resource.process.JDFPositionObj");
 		sm_PackageNames.put(ElementName.PREFLIGHTACTION, "org.cip4.jdflib.resource.process.JDFPreflightAction");
 		sm_PackageNames.put(ElementName.PREFLIGHTANALYSIS, "org.cip4.jdflib.resource.JDFPreflightAnalysis");
 		sm_PackageNames.put(ElementName.PREFLIGHTARGUMENT, "org.cip4.jdflib.resource.process.JDFPreflightArgument");
@@ -1119,6 +1126,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.RECTANGLEEVALUATION, "org.cip4.jdflib.resource.devicecapability.JDFRectangleEvaluation");
 		sm_PackageNames.put(ElementName.RECTANGLESTATE, "org.cip4.jdflib.resource.devicecapability.JDFRectangleState");
 		sm_PackageNames.put(ElementName.RECYCLED, "org.cip4.jdflib.span.JDFOptionSpan");
+		sm_PackageNames.put(ElementName.REFANCHOR, "org.cip4.jdflib.resource.JDFRefAnchor");
 		sm_PackageNames.put(ElementName.REFELEMENT, "org.cip4.jdflib.core.JDFRefElement");
 		sm_PackageNames.put(ElementName.REGISTERMARK, "org.cip4.jdflib.resource.process.JDFRegisterMark");
 		sm_PackageNames.put(ElementName.REGISTERRIBBON, "org.cip4.jdflib.resource.JDFRegisterRibbon");
@@ -1151,6 +1159,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.RINGSYSTEM, "org.cip4.jdflib.span.JDFNameSpan");
 		sm_PackageNames.put(ElementName.RIVETSEXPOSED, "org.cip4.jdflib.span.JDFOptionSpan");
 		sm_PackageNames.put(ElementName.ROLLSTAND, "org.cip4.jdflib.resource.process.JDFRollStand");
+		sm_PackageNames.put(ElementName.RULELENGTH, "org.cip4.jdflib.resource.process.JDFRuleLength");
 		sm_PackageNames.put(ElementName.RUNLIST, "org.cip4.jdflib.resource.process.JDFRunList");
 		sm_PackageNames.put(ElementName.SADDLESTITCHING, "org.cip4.jdflib.resource.process.postpress.JDFSaddleStitching");
 		sm_PackageNames.put(ElementName.SADDLESTITCHINGPARAMS, "org.cip4.jdflib.resource.process.postpress.JDFSaddleStitchingParams");
@@ -1173,6 +1182,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.SHAPECUT, "org.cip4.jdflib.resource.intent.JDFShapeCut");
 		sm_PackageNames.put(ElementName.SHAPECUTTINGINTENT, "org.cip4.jdflib.resource.intent.JDFShapeCuttingIntent");
 		sm_PackageNames.put(ElementName.SHAPECUTTINGPARAMS, "org.cip4.jdflib.resource.JDFShapeCuttingParams");
+		sm_PackageNames.put(ElementName.SHAPEDEF, "org.cip4.jdflib.resource.process.JDFShapeDef");
 		sm_PackageNames.put(ElementName.SHAPEDEPTH, "org.cip4.jdflib.span.JDFNumberSpan");
 		sm_PackageNames.put(ElementName.SHAPEEVALUATION, "org.cip4.jdflib.resource.devicecapability.JDFShapeEvaluation");
 		sm_PackageNames.put(ElementName.SHAPESTATE, "org.cip4.jdflib.resource.devicecapability.JDFShapeState");
@@ -1228,6 +1238,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.SYSTEMTIMESET, "org.cip4.jdflib.resource.JDFSystemTimeSet");
 		sm_PackageNames.put(ElementName.TABBINDMYLAR, "org.cip4.jdflib.span.JDFOptionSpan");
 		sm_PackageNames.put(ElementName.TABBODYCOPY, "org.cip4.jdflib.span.JDFOptionSpan");
+		sm_PackageNames.put(ElementName.TABDIMENSIONS, "org.cip4.jdflib.resource.process.JDFTabDimensions");
 		sm_PackageNames.put(ElementName.TABEXTENSIONDISTANCE, "org.cip4.jdflib.span.JDFNumberSpan");
 		sm_PackageNames.put(ElementName.TABEXTENSIONMYLAR, "org.cip4.jdflib.span.JDFOptionSpan");
 		sm_PackageNames.put(ElementName.TABMYLARCOLOR, "org.cip4.jdflib.span.JDFSpanNamedColor");

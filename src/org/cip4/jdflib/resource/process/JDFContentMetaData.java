@@ -1,8 +1,8 @@
-/*--------------------------------------------------------------------------------------------------
+/*
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -58,82 +58,78 @@
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
  * originally based on software
- * copyright (c) 1999-2006, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
  * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
+ *
  */
-package org.cip4.jdflib.auto;
+/**
+ * Copyright (c) 2008 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ *
+ * JDFContentMetaData.java
+ */
+package org.cip4.jdflib.resource.process;
 
-import java.io.File;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoContentMetaData;
 
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFNode;
-import org.w3c.dom.DOMException;
-
-public class DirectoryInstantiateVisitor implements DirectoryVisitor
+public class JDFContentMetaData extends JDFAutoContentMetaData
 {
-	public void enterDirectory(File dir)
-	{ /**/
-	}
+	private static final long serialVersionUID = 1L;
 
-	public void leaveDirectory(File dir)
-	{ /**/
-	}
-
-	public void visitFile(File file)
+	/**
+	 * Constructor for JDFContentMetaData
+	 * 
+	 * @param ownerDocument
+	 * @param qualifiedName
+	 */
+	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
-		testJDFClass(file.getName());
+		super(myOwnerDocument, qualifiedName);
 	}
 
-	private void testJDFClass(final String fileName)
+	/**
+	 * Constructor for JDFContentMetaData
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName)
 	{
-		boolean result = false;
-
-		String elementName = fileName;
-		String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
-
-		elementName = elementName.substring(prefix.length(), elementName
-				.length()
-				- ".java".length());
-
-		// adjust the element name
-		if (elementName.startsWith("Span"))
-			elementName = elementName.substring("Span".length());
-		else if (elementName.equals("ShapeElement"))
-			elementName = "Shape";
-		else if (elementName.equals("Node"))
-			elementName = "JDF";
-
-		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
-		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
-
-		// create a class for elementName
-		KElement kElem = jdfRoot.appendElement(elementName);
-
-		String createdClass = kElem.getClass().toString();
-		createdClass = createdClass
-				.substring(createdClass.lastIndexOf(".") + 1);
-
-		result = fileName.equals(createdClass + ".java")
-				|| (fileName.startsWith("JDFAuto") && createdClass
-						.equals(JDFConstants.JDFELEMENT))
-				|| fileName.equals(JDFConstants.JDFNODE)
-				|| !createdClass.equals(JDFConstants.JDFELEMENT);
-
-		if (!result)
-		{
-			throw new DOMException(DOMException.NOT_FOUND_ERR, 
-					"DirectoryInstantiateVisitor: Class "
-					+ elementName + " (" + fileName
-					+ ") could not be instantiated!"
-					+ " --> missing entry in DocumentJDFImpl ???");
-		}
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
+
+	/**
+	 * Constructor for JDFContentMetaData
+	 * 
+	 * @param ownerDocument
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localName
+	 */
+	public JDFContentMetaData(CoreDocumentImpl myOwnerDocument,
+			String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	// **************************************** Methods
+	// *********************************************
+	/**
+	 * toString
+	 * 
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+		return "JDFContentMetaData[  --> " + super.toString() + " ]";
+	}
+
 }

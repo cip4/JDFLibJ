@@ -1,8 +1,8 @@
-/*--------------------------------------------------------------------------------------------------
+/*
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -58,82 +58,117 @@
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
  * originally based on software
- * copyright (c) 1999-2006, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
  * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
+ *
  */
-package org.cip4.jdflib.auto;
+/**
+ *========================================================================== class JDFPageCondition extends JDFAutoSignature
+ * created 2001-09-06T10:02:57GMT+02:00 ==========================================================================
+ *          @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
+ *              @Author sabjon@topmail.de   using a code generator
+ * Warning! very preliminary test version. Interface subject to change without prior notice! Revision history:   ...
+ */
 
-import java.io.File;
+package org.cip4.jdflib.resource;
 
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.auto.JDFAutoPageCondition;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.node.JDFNode;
-import org.w3c.dom.DOMException;
 
-public class DirectoryInstantiateVisitor implements DirectoryVisitor
+/**
+ * class that maps both patitioned and non-partitoned layouts
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
+public class JDFPageCondition extends JDFAutoPageCondition
 {
-	public void enterDirectory(File dir)
-	{ /**/
-	}
+	private static final long serialVersionUID = 1L;
 
-	public void leaveDirectory(File dir)
-	{ /**/
-	}
-
-	public void visitFile(File file)
+	// Handle partitioned layouts
+	private static ElemInfoTable[] elemInfoTable_Sheet = new ElemInfoTable[1];
+	static
 	{
-		testJDFClass(file.getName());
+		elemInfoTable_Sheet[0] = new ElemInfoTable(ElementName.SHEET, 0x33333333);
 	}
 
-	private void testJDFClass(final String fileName)
+	@Override
+	protected ElementInfo getTheElementInfo()
 	{
-		boolean result = false;
-
-		String elementName = fileName;
-		String prefix = elementName.startsWith("JDFAuto") ? "JDFAuto" : "JDF";
-
-		elementName = elementName.substring(prefix.length(), elementName
-				.length()
-				- ".java".length());
-
-		// adjust the element name
-		if (elementName.startsWith("Span"))
-			elementName = elementName.substring("Span".length());
-		else if (elementName.equals("ShapeElement"))
-			elementName = "Shape";
-		else if (elementName.equals("Node"))
-			elementName = "JDF";
-
-		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
-		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
-
-		// create a class for elementName
-		KElement kElem = jdfRoot.appendElement(elementName);
-
-		String createdClass = kElem.getClass().toString();
-		createdClass = createdClass
-				.substring(createdClass.lastIndexOf(".") + 1);
-
-		result = fileName.equals(createdClass + ".java")
-				|| (fileName.startsWith("JDFAuto") && createdClass
-						.equals(JDFConstants.JDFELEMENT))
-				|| fileName.equals(JDFConstants.JDFNODE)
-				|| !createdClass.equals(JDFConstants.JDFELEMENT);
-
-		if (!result)
-		{
-			throw new DOMException(DOMException.NOT_FOUND_ERR, 
-					"DirectoryInstantiateVisitor: Class "
-					+ elementName + " (" + fileName
-					+ ") could not be instantiated!"
-					+ " --> missing entry in DocumentJDFImpl ???");
-		}
+		return new ElementInfo(super.getTheElementInfo(), elemInfoTable_Sheet);
 	}
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		AttributeInfo ai = super.getTheAttributeInfo();
+		if (getLocalName().equals(ElementName.SIGNATURE))
+			ai.updateReplace(atrInfoTable);
+		return ai;
+	}
+
+	/**
+	 * Constructor for JDFPageCondition
+	 * 
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	public JDFPageCondition(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFPageCondition
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	public JDFPageCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFPageCondition
+	 * 
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	public JDFPageCondition(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * toString()
+	 * 
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+		return "JDFPageCondition[  --> " + super.toString() + " ]";
+	}
+
 }

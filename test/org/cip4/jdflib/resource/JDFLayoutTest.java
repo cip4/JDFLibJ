@@ -792,7 +792,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		jf = mark.appendJobField();
 		mark.appendXMLComment("The coordinate system origin is defined by the anchor in the center, i.e. 0 0\n the separartions are excluding black", null);
 		JDFRegisterMark rm = mark.appendRegisterMark();
-		rm.setMarkType("Arc Cross");
+		rm.setMarkType(new VString("Arc Cross",null));
 		rm.setMarkUsage(EnumMarkUsage.Color);
 		rm.setCenter(new JDFXYPair("0 0"));
 		rm.setSeparations(new VString("Cyan Magent Yellow", " "));

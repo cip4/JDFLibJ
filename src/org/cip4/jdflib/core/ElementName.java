@@ -120,21 +120,23 @@ public final class ElementName
 	public static final String AUDIT = "Audit";
 	public static final String AUDITPOOL = "AuditPool";
 	public static final String AUTOMATEDOVERPRINTPARAMS = "AutomatedOverPrintParams";
-
+	
 	public static final String BACKCOATINGS = "BackCoatings";
 	public static final String BACKCOVERCOLOR = "BackCoverColor";
+	public static final String BACKCOVERCOLORDETAILS = "BackCoverColorDetails";
 	public static final String BAND = "Band";
 	public static final String BARCODE = "Barcode";
-	public static final String BARCODEDETAILS = "BarcodeDetails";
 	public static final String BARCODECOMPPARAMS = "BarcodeCompParams";
+	public static final String BARCODEDETAILS = "BarcodeDetails";
 	public static final String BARCODEPRODUCTIONPARAMS = "BarcodeProductionParams";
 	public static final String BARCODEREPROPARAMS = "BarcodeReproParams";
 	public static final String BASICPREFLIGHTTEST = "BasicPreflightTest";
 	public static final String BENDINGPARAMS = "BendingParams";
 	public static final String BINDERBRAND = "BinderBrand";
-	public static final String BINDERYSIGNATURE = "BinderySignature";
 	public static final String BINDERMATERIAL = "BinderMaterial";
+	public static final String BINDERYSIGNATURE = "BinderySignature";
 	public static final String BINDINGCOLOR = "BindingColor";
+	public static final String BINDINGCOLORDETAILS = "BindingColorDetails";
 	public static final String BINDINGINTENT = "BindingIntent";
 	public static final String BINDINGLENGTH = "BindingLength";
 	public static final String BINDINGQUALITYMEASUREMENT = "BindingQualityMeasurement";
@@ -146,9 +148,9 @@ public final class ElementName
 	public static final String BLOCKPREPARATION = "BlockPreparation";
 	public static final String BLOCKPREPARATIONPARAMS = "BlockPreparationParams";
 	public static final String BLOCKTHREADSEWING = "BlockThreadSewing";
+	public static final String BOOKCASE = "BookCase";
 	public static final String BOOLEANEVALUATION = "BooleanEvaluation";
 	public static final String BOOLEANSTATE = "BooleanState";
-	public static final String BOOKCASE = "BookCase";
 	public static final String BOXAPPLICATION = "BoxApplication";
 	public static final String BOXARGUMENT = "BoxArgument";
 	public static final String BOXEDQUANTITY = "BoxedQuantity";
@@ -169,7 +171,7 @@ public final class ElementName
 	public static final String BUSINESSINFO = "BusinessInfo";
 	public static final String BUYERSUPPLIED = "BuyerSupplied";
 	public static final String BYTEMAP = "ByteMap";
-
+	
 	public static final String CALL = "call";
 	public static final String CARTONMAXWEIGHT = "CartonMaxWeight";
 	public static final String CARTONQUANTITY = "CartonQuantity";
@@ -193,12 +195,13 @@ public final class ElementName
 	public static final String COILBINDINGPARAMS = "CoilBindingParams";
 	public static final String COILBRAND = "CoilBrand";
 	public static final String COILMATERIAL = "CoilMaterial";
-	public static final String COLLECTING = "Collecting";
 	public static final String COLLATINGITEM = "CollatingItem";
+	public static final String COLLECTING = "Collecting";
 	public static final String COLLECTINGPARAMS = "CollectingParams";
 	public static final String COLOR = "Color";
 	public static final String COLORANTALIAS = "ColorantAlias";
 	public static final String COLORANTCONTROL = "ColorantControl";
+	public static final String COLORANTCONVERTPROCESS = "ColorantConvertProcess";
 	public static final String COLORANTORDER = "ColorantOrder";
 	public static final String COLORANTPARAMS = "ColorantParams";
 	public static final String COLORANTZONEDETAILS = "ColorantZoneDetails";
@@ -210,9 +213,10 @@ public final class ElementName
 	public static final String COLORINTENT = "ColorIntent";
 	public static final String COLORMEASUREMENTCONDITIONS = "ColorMeasurementConditions";
 	public static final String COLORNAME = "ColorName";
+	public static final String COLORNAMEDETAILS = "ColorNameDetails";
 	public static final String COLORPOOL = "ColorPool";
 	public static final String COLORSCONSTRAINTSPOOL = "ColorsConstraintsPool";
-	/** @deprecated */
+	/** @deprecated COLORSPACECONVERSION */
 	@Deprecated
 	public static final String COLORSPACECONVERSION = "ColorSpaceConversion";
 	public static final String COLORSPACECONVERSIONOP = "ColorSpaceConversionOp";
@@ -223,10 +227,10 @@ public final class ElementName
 	public static final String COLORSUSED = "ColorsUsed";
 	public static final String COLORTYPE = "ColorType";
 	public static final String COMBBRAND = "CombBrand";
-	/** @deprecated use EnumType.xxx.getName() */
+	/** @deprecated use COMBINE EnumType.xxx.getName() */
 	@Deprecated
 	public static final String COMBINE = "Combine";
-	/** @deprecated use EnumType.xxx.getName() */
+	/** @deprecated COMBINED use EnumType.xxx.getName() */
 	@Deprecated
 	public static final String COMBINED = "Combined";
 	public static final String COMCHANNEL = "ComChannel";
@@ -236,16 +240,17 @@ public final class ElementName
 	public static final String COMPONENT = "Component";
 	public static final String CONSTRAINTVALUE = "ConstraintValue";
 	public static final String CONTACT = "Contact";
-	/** @deprecated use EnumType.xxx.getName() */
+	/** @deprecated CONTACTCOPYING use EnumType.xxx.getName() */
 	@Deprecated
 	public static final String CONTACTCOPYING = "ContactCopying";
 	public static final String CONTACTCOPYPARAMS = "ContactCopyParams";
 	public static final String CONTAINER = "Container";
 	public static final String CONTENTDATA = "ContentData";
 	public static final String CONTENTLIST = "ContentList";
+	public static final String CONTENTMETADATA = "ContentMetaData";
 	public static final String CONTENTOBJECT = "ContentObject";
 	public static final String CONTONECALIBRATION = "ContoneCalibration";
-	/** @deprecated */
+	/** @deprecated CONVENTIONALPRINTING */
 	@Deprecated
 	public static final String CONVENTIONALPRINTING = "ConventionalPrinting";
 	public static final String CONVENTIONALPRINTINGPARAMS = "ConventionalPrintingParams";
@@ -253,11 +258,12 @@ public final class ElementName
 	public static final String COUNTERRESET = "CounterReset";
 	public static final String COVER = "Cover";
 	public static final String COVERAGE = "Coverage";
-	/** @deprecated */
+	/** @deprecated COVERAPPLICATION */
 	@Deprecated
 	public static final String COVERAPPLICATION = "CoverApplication";
 	public static final String COVERAPPLICATIONPARAMS = "CoverApplicationParams";
 	public static final String COVERCOLOR = "CoverColor";
+	public static final String COVERCOLORDETAILS = "CoverColorDetails";
 	public static final String COVERSTYLE = "CoverStyle";
 	public static final String CREASE = "Crease";
 	public static final String CREASING = "Creasing";
@@ -277,7 +283,7 @@ public final class ElementName
 	public static final String CYLINDERLAYOUT = "CylinderLayout";
 	public static final String CYLINDERLAYOUTPREPARATIONPARAMS = "CylinderLayoutPreparationParams";
 	public static final String CYLINDERPOSITION = "CylinderPosition";
-
+	
 	public static final String DATETIMEEVALUATION = "DateTimeEvaluation";
 	public static final String DATETIMESTATE = "DateTimeState";
 	public static final String DBDOCTEMPLATELAYOUT = "DBDocTemplateLayout";
@@ -309,14 +315,14 @@ public final class ElementName
 	public static final String DEVICENSPACE = "DeviceNSpace";
 	public static final String DIELAYOUT = "DieLayout";
 	/**
-	 * @deprecated use EnumType.Delivery.getName();
+	 * @deprecated DIGITALDELIVERY use EnumType.Delivery.getName();
 	 */
 	@Deprecated
 	public static final String DIGITALDELIVERY = "DigitalDelivery";
 	public static final String DIGITALDELIVERYPARAMS = "DigitalDeliveryParams";
 	public static final String DIGITALMEDIA = "DigitalMedia";
 	/**
-	 * @deprecated use EnumType.DigitalPrinting.getName();
+	 * @deprecated DIGITALPRINTING use EnumType.DigitalPrinting.getName();
 	 */
 	@Deprecated
 	public static final String DIGITALPRINTING = "DigitalPrinting";
@@ -340,6 +346,7 @@ public final class ElementName
 	public static final String DURATIONSTATE = "DurationState";
 	public static final String DYNAMICFIELD = "DynamicField";
 	public static final String DYNAMICINPUT = "DynamicInput";
+	
 	public static final String EARLIEST = "Earliest";
 	public static final String EARLIESTDURATION = "EarliestDuration";
 	public static final String EDGEANGLE = "EdgeAngle";
@@ -368,6 +375,7 @@ public final class ElementName
 	public static final String EXTENDEDADDRESS = "ExtendedAddress";
 	public static final String EXTERNALIMPOSITIONTEMPLATE = "ExternalImpositionTemplate";
 	public static final String EXTRAVALUES = "ExtraValues";
+	
 	public static final String FCNKEY = "FCNKey";
 	public static final String FEATUREATTRIBUTE = "FeatureAttribute";
 	public static final String FEATUREPOOL = "FeaturePool";
@@ -389,7 +397,10 @@ public final class ElementName
 	public static final String FLUSHQUEUEINFO = "FlushQueueInfo";
 	public static final String FLUSHQUEUEPARAMS = "FlushQueueParams";
 	public static final String FLUSHRESOURCEPARAMS = "FlushResourceParams";
+	public static final String FLUTE = "Flute";
+	public static final String FLUTEDIRECTION = "FluteDirection";
 	public static final String FOILCOLOR = "FoilColor";
+	public static final String FOILCOLORDETAILS = "FoilColorDetails";
 	public static final String FOLD = "Fold";
 	public static final String FOLDERPRODUCTION = "FolderProduction";
 	public static final String FOLDERSUPERSTRUCTUREWEBPATH = "FolderSuperStructureWebPath";
@@ -409,7 +420,7 @@ public final class ElementName
 	public static final String FREQUENCY = "Frequency";
 	public static final String FREQUENCYSELECTION = "FrequencySelection";
 	public static final String FRONTCOATINGS = "FrontCoatings";
-
+	
 	public static final String GANGCMDFILTER = "GangCmdFilter";
 	public static final String GANGINFO = "GangInfo";
 	public static final String GANGQUFILTER = "GangQuFilter";
@@ -425,11 +436,13 @@ public final class ElementName
 	public static final String GLUINGPARAMS = "GluingParams";
 	public static final String GRADE = "Grade";
 	public static final String GRAINDIRECTION = "GrainDirection";
+	
 	public static final String HALFTONE = "HalfTone";
 	public static final String HARDCOVERBINDING = "HardCoverBinding";
 	public static final String HEADBANDAPPLICATION = "HeadBandApplication";
 	public static final String HEADBANDAPPLICATIONPARAMS = "HeadBandApplicationParams";
 	public static final String HEADBANDCOLOR = "HeadBandColor";
+	public static final String HEADBANDCOLORDETAILS = "HeadBandColorDetails";
 	public static final String HEADBANDS = "HeadBands";
 	public static final String HEIGHT = "Height";
 	public static final String HOLE = "Hole";
@@ -440,6 +453,7 @@ public final class ElementName
 	public static final String HOLEMAKINGINTENT = "HoleMakingIntent";
 	public static final String HOLEMAKINGPARAMS = "HoleMakingParams";
 	public static final String HOLETYPE = "HoleType";
+	
 	public static final String ICON = "Icon";
 	public static final String ICONLIST = "IconList";
 	public static final String IDENTICAL = "Identical";
@@ -489,7 +503,7 @@ public final class ElementName
 	public static final String ISSUEDATE = "IssueDate";
 	public static final String ISSUENAME = "IssueName";
 	public static final String ISSUETYPE = "IssueType";
-
+	
 	public static final String JACKET = "Jacket";
 	public static final String JACKETFOLDINGWIDTH = "JacketFoldingWidth";
 	public static final String JACKETING = "Jacketing";
@@ -505,7 +519,9 @@ public final class ElementName
 	public static final String JOBPHASE = "JobPhase";
 	public static final String JOBSHEET = "JobSheet";
 	public static final String JPEG2000PARAMS = "JPEG2000Params";
+	
 	public static final String KNOWNMSGQUPARAMS = "KnownMsgQuParams";
+	
 	public static final String LABELING = "Labeling";
 	public static final String LABELINGPARAMS = "LabelingParams";
 	public static final String LAMINATED = "Laminated";
@@ -533,11 +549,12 @@ public final class ElementName
 	public static final String LONGSLIT = "LongSlit";
 	public static final String LOT = "Lot";
 	public static final String LZWPARAMS = "LZWParams";
-
+	
 	public static final String MACRO = "macro";
 	public static final String MACROPOOL = "MacroPool";
 	public static final String MANUALLABOR = "ManualLabor";
 	public static final String MANUALLABORPARAMS = "ManualLaborParams";
+	public static final String MARKACTIVATION = "MarkActivation";
 	public static final String MARKOBJECT = "MarkObject";
 	public static final String MATERIAL = "Material";
 	public static final String MATRIXEVALUATION = "MatrixEvaluation";
@@ -547,6 +564,7 @@ public final class ElementName
 	public static final String MEDIACOLORDETAILS = "MediaColorDetails";
 	public static final String MEDIAINTENT = "MediaIntent";
 	public static final String MEDIALAYERS = "MediaLayers";
+	public static final String MEDIAQUALITY = "MediaQuality";
 	public static final String MEDIASOURCE = "MediaSource";
 	public static final String MEDIATYPE = "MediaType";
 	public static final String MEDIATYPEDETAILS = "MediaTypeDetails";
@@ -567,7 +585,7 @@ public final class ElementName
 	public static final String MODULESTATUS = "ModuleStatus";
 	public static final String MOVERESOURCE = "MoveResource";
 	public static final String MSGFILTER = "MsgFilter";
-
+	
 	public static final String NAMEEVALUATION = "NameEvaluation";
 	public static final String NAMESTATE = "NameState";
 	public static final String NEWCOMMENT = "NewComment";
@@ -581,14 +599,14 @@ public final class ElementName
 	public static final String NOTIFICATION = "Notification";
 	public static final String NOTIFICATIONDEF = "NotificationDef";
 	public static final String NOTIFICATIONFILTER = "NotificationFilter";
+	public static final String NUMBEREVALUATION = "NumberEvaluation";
 	public static final String NUMBERING = "Numbering";
 	public static final String NUMBERINGINTENT = "NumberingIntent";
 	public static final String NUMBERINGPARAM = "NumberingParam";
 	public static final String NUMBERINGPARAMS = "NumberingParams";
 	public static final String NUMBERITEM = "NumberItem";
-	public static final String NUMBEREVALUATION = "NumberEvaluation";
 	public static final String NUMBERSTATE = "NumberState";
-
+	
 	public static final String OBJECTRESOLUTION = "ObjectResolution";
 	public static final String OBSERVATIONTARGET = "ObservationTarget";
 	public static final String OCCUPATION = "Occupation";
@@ -603,12 +621,13 @@ public final class ElementName
 	public static final String ORIENTATION = "Orientation";
 	public static final String OTHERWISE = "otherwise";
 	public static final String OVERAGE = "Overage";
-
+	
 	public static final String PACKING = "Packing";
 	public static final String PACKINGINTENT = "PackingIntent";
 	public static final String PACKINGPARAMS = "PackingParams";
 	public static final String PAGEASSIGNEDLIST = "PageAssignedList";
 	public static final String PAGECELL = "PageCell";
+	public static final String PAGECONDITION = "PageCondition";
 	public static final String PAGEDATA = "PageData";
 	public static final String PAGEELEMENT = "PageElement";
 	public static final String PAGELIST = "PageList";
@@ -654,6 +673,7 @@ public final class ElementName
 	public static final String PLASTICCOMBTYPE = "PlasticCombType";
 	public static final String PLATECOPYPARAMS = "PlateCopyParams";
 	public static final String POSITION = "Position";
+	public static final String POSITIONOBJ = "PositionObj";
 	public static final String POSTPRESSCOMPONENTPATH = "PostPressComponentPath";
 	public static final String PREFLIGHT = "Preflight";
 	public static final String PREFLIGHTACTION = "PreflightAction";
@@ -724,13 +744,14 @@ public final class ElementName
 	public static final String QUEUEENTRYPRIPARAMS = "QueueEntryPriParams";
 	public static final String QUEUEFILTER = "QueueFilter";
 	public static final String QUEUESUBMISSIONPARAMS = "QueueSubmissionParams";
-
+	
 	public static final String RANGE = "Range";
 	public static final String RASTERREADINGPARAMS = "RasterReadingParams";
 	public static final String RECTANGLEEVALUATION = "RectangleEvaluation";
 	public static final String RECTANGLESTATE = "RectangleState";
 	public static final String RECYCLED = "Recycled";
 	public static final String RECYCLEDPERCENTAGE = "RecycledPercentage";
+	public static final String REFANCHOR = "RefAnchor";
 	public static final String REFELEMENT = "RefElement";
 	public static final String REGISTERMARK = "RegisterMark";
 	public static final String REGISTERRIBBON = "RegisterRibbon";
@@ -767,8 +788,9 @@ public final class ElementName
 	public static final String RINGSYSTEM = "RingSystem";
 	public static final String RIVETSEXPOSED = "RivetsExposed";
 	public static final String ROLLSTAND = "RollStand";
+	public static final String RULELENGTH = "RuleLength";
 	public static final String RUNLIST = "RunList";
-
+	
 	public static final String SADDLESTITCHING = "SaddleStitching";
 	public static final String SADDLESTITCHINGPARAMS = "SaddleStitchingParams";
 	public static final String SCANNING = "Scanning";
@@ -794,6 +816,7 @@ public final class ElementName
 	public static final String SHAPECUTTING = "ShapeCutting";
 	public static final String SHAPECUTTINGINTENT = "ShapeCuttingIntent";
 	public static final String SHAPECUTTINGPARAMS = "ShapeCuttingParams";
+	public static final String SHAPEDEF = "ShapeDef";
 	public static final String SHAPEDEPTH = "ShapeDepth";
 	public static final String SHAPEELEMENT = "ShapeElement";
 	public static final String SHAPEEVALUATION = "ShapeEvaluation";
@@ -843,8 +866,8 @@ public final class ElementName
 	public static final String STRAP = "Strap";
 	public static final String STRAPPING = "Strapping";
 	public static final String STRAPPINGPARAMS = "StrappingParams";
-	public static final String STRINGLISTVALUE = "StringListValue";
 	public static final String STRINGEVALUATION = "StringEvaluation";
+	public static final String STRINGLISTVALUE = "StringListValue";
 	public static final String STRINGSTATE = "StringState";
 	public static final String STRIPBINDING = "StripBinding";
 	public static final String STRIPBINDINGPARAMS = "StripBindingParams";
@@ -859,13 +882,15 @@ public final class ElementName
 	public static final String SURFACE = "Surface";
 	public static final String SURPLUSHANDLING = "SurplusHandling";
 	public static final String SYSTEMTIMESET = "SystemTimeSet";
-
+	
 	public static final String TABBINDMYLAR = "TabBindMylar";
 	public static final String TABBODYCOPY = "TabBodyCopy";
 	public static final String TABBRAND = "TabBrand";
+	public static final String TABDIMENSIONS = "TabDimensions";
 	public static final String TABEXTENSIONDISTANCE = "TabExtensionDistance";
 	public static final String TABEXTENSIONMYLAR = "TabExtensionMylar";
 	public static final String TABMYLARCOLOR = "TabMylarColor";
+	public static final String TABMYLARCOLORDETAILS = "TabMylarColorDetails";
 	public static final String TABS = "Tabs";
 	public static final String TAPE = "Tape";
 	public static final String TAPEBINDING = "TapeBinding";
@@ -884,8 +909,8 @@ public final class ElementName
 	public static final String THREADSEWING = "ThreadSewing";
 	public static final String THREADSEWINGPARAMS = "ThreadSewingParams";
 	public static final String TIFFEMBEDDEDFILE = "TIFFEmbeddedFile";
-	public static final String TIFFTAG = "TIFFtag";
 	public static final String TIFFFORMATPARAMS = "TIFFFormatParams";
+	public static final String TIFFTAG = "TIFFtag";
 	public static final String TIGHTBACKING = "TightBacking";
 	public static final String TILE = "Tile";
 	public static final String TILING = "Tiling";
@@ -905,14 +930,14 @@ public final class ElementName
 	public static final String TRIGGER = "Trigger";
 	public static final String TRIMMING = "Trimming";
 	public static final String TRIMMINGPARAMS = "TrimmingParams";
-
+	
 	public static final String UNDERAGE = "Underage";
 	public static final String UPDATE = "Update";
 	public static final String UPDATEJDFCMDPARAMS = "UpdateJDFCmdParams";
 	public static final String URL = "URL";
 	public static final String USAGECOUNTER = "UsageCounter";
 	public static final String USWEIGHT = "USWeight";
-
+	
 	public static final String VALUE = "Value";
 	public static final String VALUELOC = "ValueLoc";
 	public static final String VELOBINDING = "VeloBinding";
@@ -933,33 +958,11 @@ public final class ElementName
 	public static final String WRAPPING = "Wrapping";
 	public static final String WRAPPINGMATERIAL = "WrappingMaterial";
 	public static final String WRAPPINGPARAMS = "WrappingParams";
-
+	
 	public static final String XOR = "xor";
 	public static final String XPOSITION = "XPosition";
 	public static final String XYPAIREVALUATION = "XYPairEvaluation";
 	public static final String XYPAIRSTATE = "XYPairState";
+	
 	public static final String YPOSITION = "YPosition";
-	
-	
-	// muss noch einsortiert werden!
-	// JDF 1.4
-	  public static final String BACKCOVERCOLORDETAILS = null;
-	  public static final String BINDINGCOLORDETAILS = null;
-	  public static final String COLORANTCONVERTPROCESS = null;
-	  public static final String COLORNAMEDETAILS = null;
-	  public static final String CONTENTMETADATA = null;
-	  public static final String COVERCOLORDETAILS = null;
-	  public static final String FLUTE = null;
-	  public static final String FLUTEDIRECTION = null;
-	  public static final String FOILCOLORDETAILS = null;
-	  public static final String HEADBANDCOLORDETAILS = null;
-	  public static final String MARKACTIVATION = null;
-	  public static final String MEDIAQUALITY = null;
-	  public static final String PAGECONDITION = null;
-	  public static final String POSITIONOBJ = null;
-	  public static final String REFANCHOR = null;
-	  public static final String RULELENGTH = null;
-	  public static final String SHAPEDEF = null;
-	  public static final String TABDIMENSIONS = null;
-	  public static final String TABMYLARCOLORDETAILS = null;
 }
