@@ -384,6 +384,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoAmountPool.java");
         defaultlistModel.addElement("JDFAutoAncestor.java");
         defaultlistModel.addElement("JDFAutoAncestorPool.java");
+        defaultlistModel.addElement("JDFAutoAnchor.java");
         defaultlistModel.addElement("JDFAutoand.java");
         defaultlistModel.addElement("JDFAutoApprovalDetails.java");
         defaultlistModel.addElement("JDFAutoApprovalParams.java");
@@ -632,6 +633,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoLayoutElementProductionParams.java");
         defaultlistModel.addElement("JDFAutoLayoutIntent.java");
         defaultlistModel.addElement("JDFAutoLayoutPreparationParams.java");
+        defaultlistModel.addElement("JDFAutoLayoutShift.java");
         defaultlistModel.addElement("JDFAutoLoc.java");
         defaultlistModel.addElement("JDFAutoLocation.java");
         defaultlistModel.addElement("JDFAutoLongFold.java");
@@ -694,6 +696,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoPackingIntent.java");
         defaultlistModel.addElement("JDFAutoPackingParams.java");
         defaultlistModel.addElement("JDFAutoPageAssignedList.java");
+        defaultlistModel.addElement("JDFAutoPageAssignParams.java");
         defaultlistModel.addElement("JDFAutoPageCell.java");
         defaultlistModel.addElement("JDFAutoPageCondition.java");
         defaultlistModel.addElement("JDFAutoPageData.java");
@@ -817,7 +820,8 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
         defaultlistModel.addElement("JDFAutoShapeDef.java");
         defaultlistModel.addElement("JDFAutoShapeElement.java");
         defaultlistModel.addElement("JDFAutoShapeEvaluation.java");
-        defaultlistModel.addElement("JDFAutoShrinkingParams.java");
+        defaultlistModel.addElement("JDFAutoShapeEvaluation.java");
+        defaultlistModel.addElement("JDFAutoShiftPoint.java");
         defaultlistModel.addElement("JDFAutoShutDownCmdParams.java");
         defaultlistModel.addElement("JDFAutoSideSewing.java");
         defaultlistModel.addElement("JDFAutoSideSewingParams.java");

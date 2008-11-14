@@ -70,10 +70,13 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;                          
+import java.util.Vector;                            
 import java.util.zip.DataFormatException;           
 
 import org.apache.xerces.dom.CoreDocumentImpl;      
 import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.resource.process.*;          
 import org.cip4.jdflib.util.*;           
     /*
     *****************************************************************************
@@ -90,20 +93,33 @@ public abstract class JDFAutoMessage extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SENDERID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.SENDERID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.TIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.TYPE, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.VERSION, 0x33333333, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.VERSION, 0x33331111, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
     }
     
     @Override
 	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
+    }
+    
+    @Override
+	protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -335,5 +351,59 @@ public abstract class JDFAutoMessage extends JDFElement
         {
             return getAttribute(AttributeName.TYPE, null, JDFConstants.EMPTYSTRING);
         }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /** (26) getCreateEmployee
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee getCreateEmployee(int iSkip)
+    {
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Employee
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     * default is getEmployee(0)     */
+    public JDFEmployee getEmployee(int iSkip)
+    {
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+        while (kElem != null)
+        {
+            v.add(kElem);
+
+            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
+    {
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
+    }
 
 }// end namespace JDF

@@ -70,39 +70,38 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
+
 import org.apache.xerces.dom.CoreDocumentImpl;      
 import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.resource.process.*;
+import org.cip4.jdflib.datatypes.*;
 
-public abstract class JDFAutoRegistration extends JDFMessage
+public abstract class JDFAutoShiftPoint extends JDFElement
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CTM, 0x22221111, AttributeInfo.EnumAttributeType.matrix, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x22221111, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
     @Override
-	protected ElementInfo getTheElementInfo()
+	protected AttributeInfo getTheAttributeInfo()
     {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoShiftPoint
      * @param myOwnerDocument
      * @param qualifiedName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoShiftPoint(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
@@ -110,12 +109,12 @@ public abstract class JDFAutoRegistration extends JDFMessage
     }
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoShiftPoint
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoShiftPoint(
         CoreDocumentImpl myOwnerDocument,
         String myNamespaceURI,
         String qualifiedName)
@@ -124,13 +123,13 @@ public abstract class JDFAutoRegistration extends JDFMessage
     }
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoShiftPoint
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
      * @param myLocalName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoShiftPoint(
         CoreDocumentImpl myOwnerDocument,
         String myNamespaceURI,
         String qualifiedName,
@@ -143,92 +142,80 @@ public abstract class JDFAutoRegistration extends JDFMessage
     @Override
 	public String toString()
     {
-        return " JDFAutoRegistration[  --> " + super.toString() + " ]";
+        return " JDFAutoShiftPoint[  --> " + super.toString() + " ]";
     }
 
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
  */
-
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    @Override
-	public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    @Override
-	public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
-
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>
-     */
-    @Override
-	public Collection<JDFEmployee> getAllEmployee()
-    {
-        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-
-        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
-
-        while (kElem != null)
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute CTM
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute CTM
+          * @param value: the value to set the attribute to
+          */
+        public void setCTM(JDFMatrix value)
         {
-            v.add(kElem);
-
-            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+            setAttribute(AttributeName.CTM, value, null);
         }
 
-        return v;
-    }
+        /**
+          * (20) get JDFMatrix attribute CTM
+          * @return JDFMatrix the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFMatrix
+          */
+        public JDFMatrix getCTM()
+        {
+            String strAttrName = "";
+            JDFMatrix nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.CTM, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFMatrix(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
 
-    /**
-     * (30) append element Employee
-     */
-    @Override
-	public JDFEmployee appendEmployee() throws JDFException
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Position
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Position
+          * @param value: the value to set the attribute to
+          */
+        public void setPosition(JDFXYPair value)
+        {
+            setAttribute(AttributeName.POSITION, value, null);
+        }
 
-    /**
-     * (24) const get element Subscription
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getSubscription()
-    {
-        return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /** (25) getCreateSubscription
-     * 
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getCreateSubscription()
-    {
-        return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /**
-     * (29) append element Subscription
-     */
-    public JDFSubscription appendSubscription() throws JDFException
-    {
-        return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
-    }
+        /**
+          * (20) get JDFXYPair attribute Position
+          * @return JDFXYPair the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFXYPair
+          */
+        public JDFXYPair getPosition()
+        {
+            String strAttrName = "";
+            JDFXYPair nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.POSITION, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFXYPair(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
 
 }// end namespace JDF

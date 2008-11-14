@@ -100,7 +100,7 @@ public abstract class JDFAutoResourceQuParams extends JDFElement
         atrInfoTable[9] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[10] = new AtrInfoTable(AttributeName.RESOURCEDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumResourceDetails.getEnum(0), "Full");
         atrInfoTable[11] = new AtrInfoTable(AttributeName.RESOURCEID, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.RESOURCENAME, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[13] = new AtrInfoTable(AttributeName.USAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, JDFResourceLink.EnumUsage.getEnum(0), null);
     }
     

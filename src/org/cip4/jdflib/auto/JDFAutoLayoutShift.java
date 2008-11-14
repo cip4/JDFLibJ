@@ -70,23 +70,26 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
 
-public abstract class JDFAutoRegistration extends JDFMessage
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.resource.process.JDFLayoutShift;
+import org.cip4.jdflib.resource.process.JDFShiftPoint;
+
+public abstract class JDFAutoLayoutShift extends JDFLayoutShift
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.SHIFTPOINT, 0x22221111);
     }
     
     @Override
@@ -98,11 +101,11 @@ public abstract class JDFAutoRegistration extends JDFMessage
 
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoLayoutShift
      * @param myOwnerDocument
      * @param qualifiedName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoLayoutShift(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
@@ -110,12 +113,12 @@ public abstract class JDFAutoRegistration extends JDFMessage
     }
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoLayoutShift
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoLayoutShift(
         CoreDocumentImpl myOwnerDocument,
         String myNamespaceURI,
         String qualifiedName)
@@ -124,13 +127,13 @@ public abstract class JDFAutoRegistration extends JDFMessage
     }
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoLayoutShift
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
      * @param myLocalName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoLayoutShift(
         CoreDocumentImpl myOwnerDocument,
         String myNamespaceURI,
         String qualifiedName,
@@ -143,7 +146,7 @@ public abstract class JDFAutoRegistration extends JDFMessage
     @Override
 	public String toString()
     {
-        return " JDFAutoRegistration[  --> " + super.toString() + " ]";
+        return " JDFAutoLayoutShift[  --> " + super.toString() + " ]";
     }
 
 
@@ -152,83 +155,53 @@ public abstract class JDFAutoRegistration extends JDFMessage
  * ***********************************************************************
  */
 
-    /** (26) getCreateEmployee
+    /** (26) getCreateShiftPoint
      * 
      * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
+     * @return JDFShiftPoint the element
      */
-    @Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+    public JDFShiftPoint getCreateShiftPoint(int iSkip)
     {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+        return (JDFShiftPoint)getCreateElement_KElement(ElementName.SHIFTPOINT, null, iSkip);
     }
 
     /**
-     * (27) const get element Employee
+     * (27) const get element ShiftPoint
      * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    @Override
-	public JDFEmployee getEmployee(int iSkip)
+     * @return JDFShiftPoint the element
+     * default is getShiftPoint(0)     */
+    public JDFShiftPoint getShiftPoint(int iSkip)
     {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+        return (JDFShiftPoint) getElement(ElementName.SHIFTPOINT, null, iSkip);
     }
 
     /**
-     * Get all Employee from the current element
+     * Get all ShiftPoint from the current element
      * 
-     * @return Collection<JDFEmployee>
+     * @return Collection<JDFShiftPoint>
      */
-    @Override
-	public Collection<JDFEmployee> getAllEmployee()
+    public Collection<JDFShiftPoint> getAllShiftPoint()
     {
-        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+        Vector<JDFShiftPoint> v = new Vector<JDFShiftPoint>();
 
-        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+        JDFShiftPoint kElem = (JDFShiftPoint) getFirstChildElement(ElementName.SHIFTPOINT, null);
 
         while (kElem != null)
         {
             v.add(kElem);
 
-            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+            kElem = (JDFShiftPoint) kElem.getNextSiblingElement(ElementName.SHIFTPOINT, null);
         }
 
         return v;
     }
 
     /**
-     * (30) append element Employee
+     * (30) append element ShiftPoint
      */
-    @Override
-	public JDFEmployee appendEmployee() throws JDFException
+    public JDFShiftPoint appendShiftPoint() throws JDFException
     {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
-
-    /**
-     * (24) const get element Subscription
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getSubscription()
-    {
-        return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /** (25) getCreateSubscription
-     * 
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getCreateSubscription()
-    {
-        return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /**
-     * (29) append element Subscription
-     */
-    public JDFSubscription appendSubscription() throws JDFException
-    {
-        return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
+        return (JDFShiftPoint) appendElement(ElementName.SHIFTPOINT, null);
     }
 
 }// end namespace JDF

@@ -98,12 +98,12 @@ public abstract class JDFAutoJMF extends JDFPool
         atrInfoTable[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.DEVICEID, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x33333111, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.RESPONSEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x22222111, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x22222222, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.VERSION, 0x22221111, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
     }
     
     @Override

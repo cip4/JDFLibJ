@@ -965,4 +965,7 @@ public final class ElementName
 	public static final String XYPAIRSTATE = "XYPairState";
 	
 	public static final String YPOSITION = "YPosition";
+	public static final String SHIFTPOINT = "ShiftPoint";
+	public static final String LAYOUTSHIFT = "LayoutShift";
+	public static final String PAGEASSIGNPARAMS = "PageAssignParams";
 }

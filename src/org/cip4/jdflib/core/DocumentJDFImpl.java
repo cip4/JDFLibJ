@@ -952,6 +952,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.LAYOUTELEMENTPRODUCTIONPARAMS, "org.cip4.jdflib.resource.process.JDFLayoutElementProductionParams");
 		sm_PackageNames.put(ElementName.LAYOUTINTENT, "org.cip4.jdflib.resource.intent.JDFLayoutIntent");
 		sm_PackageNames.put(ElementName.LAYOUTPREPARATIONPARAMS, "org.cip4.jdflib.resource.JDFLayoutPreparationParams");
+		sm_PackageNames.put(ElementName.LAYOUTSHIFT, "org.cip4.jdflib.resource.process.JDFLayoutShift");
 		sm_PackageNames.put(ElementName.LEVEL, "org.cip4.jdflib.span.JDFSpanLevel");
 		sm_PackageNames.put(ElementName.LOC, "org.cip4.jdflib.resource.devicecapability.JDFLoc");
 		sm_PackageNames.put(ElementName.LOCATION, "org.cip4.jdflib.resource.JDFLocation");
@@ -1028,6 +1029,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.PACKINGINTENT, "org.cip4.jdflib.resource.intent.JDFPackingIntent");
 		sm_PackageNames.put(ElementName.PACKINGPARAMS, "org.cip4.jdflib.resource.process.JDFPackingParams");
 		sm_PackageNames.put(ElementName.PAGEASSIGNEDLIST, "org.cip4.jdflib.resource.process.JDFPageAssignedList");
+		sm_PackageNames.put(ElementName.PAGEASSIGNPARAMS, "org.cip4.jdflib.resource.process.JDFPageAssignParams");
 		sm_PackageNames.put(ElementName.PAGECELL, "org.cip4.jdflib.resource.JDFPageCell");
 		sm_PackageNames.put(ElementName.PAGECONDITION, "org.cip4.jdflib.resource.JDFPageCondition");
 		sm_PackageNames.put(ElementName.PAGEDATA, "org.cip4.jdflib.resource.process.JDFPageData");
@@ -1188,6 +1190,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.SHAPESTATE, "org.cip4.jdflib.resource.devicecapability.JDFShapeState");
 		sm_PackageNames.put(ElementName.SHAPETYPE, "org.cip4.jdflib.span.JDFSpanShapeType");
 		sm_PackageNames.put(ElementName.SHEET, "org.cip4.jdflib.resource.process.JDFLayout");
+		sm_PackageNames.put(ElementName.SHIFTPOINT, "org.cip4.jdflib.resource.process.JDFShiftPoint");
 		sm_PackageNames.put(ElementName.SHRINKINGPARAMS, "org.cip4.jdflib.resource.JDFShrinkingParams");
 		sm_PackageNames.put(ElementName.SHUTDOWNCMDPARAMS, "org.cip4.jdflib.jmf.JDFShutDownCmdParams");
 		sm_PackageNames.put(ElementName.SIDESEWING, "org.cip4.jdflib.resource.process.postpress.JDFSideSewing");

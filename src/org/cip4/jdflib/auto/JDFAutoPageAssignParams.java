@@ -70,39 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
 import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.resource.process.*;
+import org.cip4.jdflib.resource.*;
 
-public abstract class JDFAutoRegistration extends JDFMessage
+public abstract class JDFAutoPageAssignParams extends JDFResource
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
-    }
-    
-    @Override
-	protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
-
-
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoPageAssignParams
      * @param myOwnerDocument
      * @param qualifiedName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoPageAssignParams(
         CoreDocumentImpl myOwnerDocument,
         String qualifiedName)
     {
@@ -110,12 +92,12 @@ public abstract class JDFAutoRegistration extends JDFMessage
     }
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoPageAssignParams
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoPageAssignParams(
         CoreDocumentImpl myOwnerDocument,
         String myNamespaceURI,
         String qualifiedName)
@@ -124,13 +106,13 @@ public abstract class JDFAutoRegistration extends JDFMessage
     }
 
     /**
-     * Constructor for JDFAutoRegistration
+     * Constructor for JDFAutoPageAssignParams
      * @param myOwnerDocument
      * @param myNamespaceURI
      * @param qualifiedName
      * @param myLocalName
      */
-    protected JDFAutoRegistration(
+    protected JDFAutoPageAssignParams(
         CoreDocumentImpl myOwnerDocument,
         String myNamespaceURI,
         String qualifiedName,
@@ -143,92 +125,24 @@ public abstract class JDFAutoRegistration extends JDFMessage
     @Override
 	public String toString()
     {
-        return " JDFAutoRegistration[  --> " + super.toString() + " ]";
+        return " JDFAutoPageAssignParams[  --> " + super.toString() + " ]";
     }
 
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
     @Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+	public boolean  init()
     {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+        boolean bRet = super.init();
+        setResourceClass(JDFResource.EnumResourceClass.Parameter);
+        return bRet;
     }
 
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
+
     @Override
-	public JDFEmployee getEmployee(int iSkip)
+	public EnumResourceClass getValidClass()
     {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+        return JDFResource.EnumResourceClass.Parameter;
     }
 
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>
-     */
-    @Override
-	public Collection<JDFEmployee> getAllEmployee()
-    {
-        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-
-        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
-
-        while (kElem != null)
-        {
-            v.add(kElem);
-
-            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Employee
-     */
-    @Override
-	public JDFEmployee appendEmployee() throws JDFException
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
-
-    /**
-     * (24) const get element Subscription
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getSubscription()
-    {
-        return (JDFSubscription) getElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /** (25) getCreateSubscription
-     * 
-     * @return JDFSubscription the element
-     */
-    public JDFSubscription getCreateSubscription()
-    {
-        return (JDFSubscription) getCreateElement_KElement(ElementName.SUBSCRIPTION, null, 0);
-    }
-
-    /**
-     * (29) append element Subscription
-     */
-    public JDFSubscription appendSubscription() throws JDFException
-    {
-        return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
-    }
 
 }// end namespace JDF
