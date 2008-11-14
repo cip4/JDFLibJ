@@ -186,6 +186,7 @@ public class JavaCoreStringUtil
 
 		strbufResult.append("package ").append(strPackage).append(";").append(strLineEnd).append(strLineEnd);
 
+		strbufResult.append("import java.util.Collection;                          ").append(strLineEnd);
 		strbufResult.append("import java.util.Iterator;                          ").append(strLineEnd);
 		strbufResult.append("import java.util.List;                              ").append(strLineEnd);
 		strbufResult.append("import java.util.Map;                               ").append(strLineEnd);
@@ -633,6 +634,9 @@ public class JavaCoreStringUtil
 						enumName = enumName.replace('.', '_');
 						enumName = enumName.replace('-', '_');
 					}
+
+					if ("boolean".equals(enumName) || "double".equals(enumName)) 
+						enumName = enumName + "_";	// lex GeneralID JDF 1.4
 
 					strbufResult.append(enumName);
 
@@ -1471,7 +1475,13 @@ public class JavaCoreStringUtil
 						strbufResult.append(strDepth1).append("  * (31) create inter-resource link to refTarget").append(strLineEnd);
 						strbufResult.append(strDepth1).append("  * @param refTarget the element that is referenced").append(strLineEnd);
 						strbufResult.append(strDepth1).append("  */").append(strLineEnd);
-						strbufResult.append(strDepth1).append("public void ref").append(strElementName).append("(JDF").append(strElementName).append(" refTarget)").append(strLineEnd);
+						if ("JDFShapeElement".equals(strReturnType))
+							strbufResult.append(strDepth1).append("public void ref").append(strElementName).
+								append("(JDFShapeElement").append(" refTarget)").append(strLineEnd);
+						else
+							strbufResult.append(strDepth1).append("public void ref").append(strElementName).
+								append("(JDF").append(strElementName).append(" refTarget)").append(strLineEnd);
+						
 						strbufResult.append(strDepth1).append("{").append(strLineEnd);
 						strbufResult.append(strDepth2).append("refElement(refTarget);").append(strLineEnd);
 						strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);

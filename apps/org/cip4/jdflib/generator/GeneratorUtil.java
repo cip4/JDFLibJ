@@ -1592,6 +1592,7 @@ public class GeneratorUtil
         }
         else if ("NMTOKENS".equals(strTypeLocal)
                 || "languages".equals(strTypeLocal)
+                || "hexBinaryList".equals(strTypeLocal)
                 || "IDREFS".equals(strTypeLocal))
         {
             strReturnType = isJava ? "VString" : "vKString";
@@ -1907,12 +1908,8 @@ public class GeneratorUtil
 		} else if (isEnum) {
 			strType = "enumeration";
 		} else {
-//			JDFAutoPart : AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.Any
 			String value = (String) typeInfo.get(strType);
 			strType = AttributeInfo.EnumAttributeType.getEnum(value).getName();
-//			JDFAutoPart : AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean
-//			strType = (String) typeInfo.get(strType);
-//			strType = (strType == null) ? "Any" : strType;
 		}
 
 		return strType;

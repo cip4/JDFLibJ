@@ -70,17 +70,12 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;
 
 public abstract class JDFAutoGeneralID extends JDFElement
 {
@@ -199,7 +194,7 @@ public abstract class JDFAutoGeneralID extends JDFElement
             public static final EnumDataType boolean_ = new EnumDataType("boolean");
             public static final EnumDataType dateTime = new EnumDataType("dateTime");
             public static final EnumDataType duration = new EnumDataType("duration");
-        }
+        }      
 
 
 

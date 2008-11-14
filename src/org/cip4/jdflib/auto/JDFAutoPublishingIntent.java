@@ -70,22 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.intent.JDFIntentResource;
-import org.cip4.jdflib.resource.process.JDFContentList;
-import org.cip4.jdflib.span.JDFIntegerSpan;
-import org.cip4.jdflib.span.JDFNameSpan;
-import org.cip4.jdflib.span.JDFStringSpan;
-import org.cip4.jdflib.span.JDFTimeSpan;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoPublishingIntent extends JDFIntentResource
 {
@@ -95,7 +84,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.Any, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
     }
     
     @Override
@@ -191,17 +180,15 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         }
 
         /**
-          * (20) get VString attribute ContentDataRefs
-          * @return VString the value of the attribute, null if a the
-          *         attribute value is not a valid to create a VString
+          * (21) get VString attribute ContentDataRefs
+          * @return VString the value of the attribute
           */
         public VString getContentDataRefs()
         {
-            String strAttrName = "";
-            VString nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFConstants.EMPTYSTRING);
-            nPlaceHolder = new VString(strAttrName, null);
-            return nPlaceHolder;
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.CONTENTDATAREFS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
 /* ***********************************************************************

@@ -70,19 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.span.JDFNumberSpan;
-import org.cip4.jdflib.span.JDFSpanDirection;
-import org.cip4.jdflib.span.JDFSpanEdgeShape;
-import org.cip4.jdflib.span.JDFSpanLevel;
-import org.cip4.jdflib.span.JDFSpanNamedColor;
-import org.cip4.jdflib.span.JDFStringSpan;
-import org.cip4.jdflib.span.JDFXYPairSpan;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.span.*;
 
 public abstract class JDFAutoEmbossingItem extends JDFElement
 {

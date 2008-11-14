@@ -70,17 +70,12 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
+import java.util.Collection;                          
+import java.util.Vector;                            
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
 
 public abstract class JDFAutoMediaLayers extends JDFElement
 {

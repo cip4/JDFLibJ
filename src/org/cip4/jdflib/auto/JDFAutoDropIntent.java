@@ -70,29 +70,13 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
-import org.cip4.jdflib.resource.intent.JDFPricing;
-import org.cip4.jdflib.resource.process.JDFCompany;
-import org.cip4.jdflib.resource.process.JDFContact;
-import org.cip4.jdflib.span.JDFDurationSpan;
-import org.cip4.jdflib.span.JDFNameSpan;
-import org.cip4.jdflib.span.JDFSpanSurplusHandling;
-import org.cip4.jdflib.span.JDFSpanTransfer;
-import org.cip4.jdflib.span.JDFStringSpan;
-import org.cip4.jdflib.span.JDFTimeSpan;
+import java.util.Collection;                          
+import java.util.Vector;                            
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoDropIntent extends JDFElement
 {

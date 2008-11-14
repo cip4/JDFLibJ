@@ -70,22 +70,12 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.jmf.JDFAdded;
-import org.cip4.jdflib.jmf.JDFChangedPath;
-import org.cip4.jdflib.resource.JDFChangedAttribute;
-import org.cip4.jdflib.resource.JDFRemoved;
-import org.cip4.jdflib.resource.JDFResource;
+import java.util.Collection;                          
+import java.util.Vector;                            
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.resource.*;
 
 public abstract class JDFAutoTrigger extends JDFResource
 {

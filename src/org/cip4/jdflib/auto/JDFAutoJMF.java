@@ -70,29 +70,22 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
-import java.util.zip.DataFormatException;
+import java.util.Collection;                          
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.jmf.JDFAcknowledge;
-import org.cip4.jdflib.jmf.JDFCommand;
-import org.cip4.jdflib.jmf.JDFQuery;
-import org.cip4.jdflib.jmf.JDFRegistration;
-import org.cip4.jdflib.jmf.JDFResponse;
-import org.cip4.jdflib.jmf.JDFSignal;
-import org.cip4.jdflib.pool.JDFPool;
-import org.cip4.jdflib.resource.process.JDFEmployee;
-import org.cip4.jdflib.util.JDFDate;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.util.*;           
+    /*
+    *****************************************************************************
+    class JDFAutoJMF : public JDFPool
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoJMF extends JDFPool
 {
@@ -108,7 +101,7 @@ public abstract class JDFAutoJMF extends JDFPool
         atrInfoTable[3] = new AtrInfoTable(AttributeName.ICSVERSIONS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.MAXVERSION, 0x33333111, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.RESPONSEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x22221111, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.SENDERID, 0x22222111, AttributeInfo.EnumAttributeType.shortString, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x22222222, AttributeInfo.EnumAttributeType.dateTime, null, null);
         atrInfoTable[8] = new AtrInfoTable(AttributeName.VERSION, 0x22221111, AttributeInfo.EnumAttributeType.JDFJMFVersion, null, null);
     }

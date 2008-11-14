@@ -70,25 +70,12 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.JDFRegisterRibbon;
-import org.cip4.jdflib.span.JDFNameSpan;
-import org.cip4.jdflib.span.JDFNumberSpan;
-import org.cip4.jdflib.span.JDFOptionSpan;
-import org.cip4.jdflib.span.JDFSpanGlue;
-import org.cip4.jdflib.span.JDFSpanJacket;
-import org.cip4.jdflib.span.JDFSpanNamedColor;
-import org.cip4.jdflib.span.JDFSpanStripMaterial;
-import org.cip4.jdflib.span.JDFSpanTightBacking;
-import org.cip4.jdflib.span.JDFStringSpan;
+import java.util.Collection;                          
+import java.util.Vector;                            
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.resource.*;
 
 public abstract class JDFAutoHardCoverBinding extends JDFElement
 {

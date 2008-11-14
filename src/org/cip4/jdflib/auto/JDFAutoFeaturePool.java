@@ -70,8 +70,8 @@
 
 package org.cip4.jdflib.auto;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.JDFElement;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;
 
 public abstract class JDFAutoFeaturePool extends JDFElement
 {

@@ -70,28 +70,12 @@
 
 package org.cip4.jdflib.auto;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.JDFBundle;
-import org.cip4.jdflib.resource.JDFPallet;
-import org.cip4.jdflib.resource.JDFRegisterRibbon;
-import org.cip4.jdflib.resource.JDFStrap;
-import org.cip4.jdflib.resource.JDFTool;
-import org.cip4.jdflib.resource.intent.JDFPricing;
-import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.resource.process.JDFDigitalMedia;
-import org.cip4.jdflib.resource.process.JDFExposedMedia;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.JDFRollStand;
-import org.cip4.jdflib.resource.process.prepress.JDFInk;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.prepress.*;
 
 public abstract class JDFAutoDropItemIntent extends JDFElement
 {

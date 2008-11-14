@@ -92,13 +92,6 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFRectangle;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.process.JDFColorPool;
-import org.cip4.jdflib.resource.process.JDFContentList;
-import org.cip4.jdflib.resource.process.JDFDependencies;
-import org.cip4.jdflib.resource.process.JDFElementColorParams;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
-import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
-import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFScreeningParams;
 
 public abstract class JDFAutoLayoutElement extends JDFResource

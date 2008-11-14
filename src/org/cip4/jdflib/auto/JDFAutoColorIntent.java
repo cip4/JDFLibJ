@@ -70,17 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFSeparationList;
-import org.cip4.jdflib.resource.intent.JDFIntentResource;
-import org.cip4.jdflib.resource.process.JDFColorPool;
-import org.cip4.jdflib.span.JDFNameSpan;
-import org.cip4.jdflib.span.JDFNumberSpan;
-import org.cip4.jdflib.span.JDFStringSpan;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoColorIntent extends JDFIntentResource
 {

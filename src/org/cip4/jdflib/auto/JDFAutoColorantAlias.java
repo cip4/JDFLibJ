@@ -70,21 +70,12 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.process.JDFSeparationSpec;
+import java.util.Collection;                          
+import java.util.Vector;                            
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoColorantAlias extends JDFResource
 {
@@ -225,17 +216,15 @@ public abstract class JDFAutoColorantAlias extends JDFResource
         }
 
         /**
-          * (20) get JDFhexBinaryList attribute RawNames
-          * @return JDFhexBinaryList the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFhexBinaryList
+          * (21) get VString attribute RawNames
+          * @return VString the value of the attribute
           */
         public VString getRawNames()
         {
-            String strAttrName = "";
-            VString nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.RAWNAMES, null, JDFConstants.EMPTYSTRING);
-            nPlaceHolder = new VString(strAttrName, null);
-            return nPlaceHolder;
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.RAWNAMES, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
         }
 
 /* ***********************************************************************
