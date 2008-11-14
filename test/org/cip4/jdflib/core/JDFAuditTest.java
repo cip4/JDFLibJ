@@ -85,9 +85,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.JDFDate;
 
 /**
- * @author MuchaD
- * 
- *         This implements the first fixture with unit tests for class JDFAudit.
+ * @author MuchaD This implements the first fixture with unit tests for class JDFAudit.
  */
 public class JDFAuditTest extends JDFTestCaseBase
 {
@@ -95,21 +93,19 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	public void testInit()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created,
-				null, null);
+		final JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
 		assertTrue(crea.hasAttribute("ID"));
 		assertTrue(crea.getID().startsWith("a"));
-		JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, "me",
-				null);
+		final JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, "me", null);
 		assertTrue(pr.hasAttribute("End"));
 		assertTrue(pr.hasAttribute("ID"));
 		n.setVersion(JDFElement.EnumVersion.Version_1_2);
-		JDFModified mod = ap.addModified("me", n);
+		final JDFModified mod = ap.addModified("me", n);
 		assertFalse(mod.hasAttribute("ID"));
 	}
 
@@ -117,13 +113,12 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	public void testFixVersion()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created,
-				null, null);
+		final JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
 		assertTrue(crea.hasAttribute("ID"));
 		n.fixVersion(JDFElement.EnumVersion.Version_1_2);
 		assertFalse(crea.hasAttribute("ID"));
@@ -133,14 +128,13 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	public void testSetRef()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
-		JDFPhaseTime pt2 = ap
-				.setPhase(EnumNodeStatus.Aborted, null, null, null);
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
+		final JDFPhaseTime pt2 = ap.setPhase(EnumNodeStatus.Aborted, null, null, null);
 		pt2.setRef(pt);
 		assertEquals(pt.getID(), pt2.getrefID());
 	}
@@ -149,13 +143,15 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	public void testCreateUpdate()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
-		JDFPhaseTime pt2 = (JDFPhaseTime) pt.createUpdateAudit();
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
+		ap.addAudit(EnumAuditType.Modified, null);
+		ap.addAudit(EnumAuditType.PhaseTime, null);
+		final JDFPhaseTime pt2 = (JDFPhaseTime) pt.createUpdateAudit();
 		assertEquals(pt.getID(), pt2.getrefID());
 		assertNotSame(pt.getID(), "");
 		assertNotSame(pt2.getID(), "");
@@ -164,22 +160,39 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
+	public void testGetUpdatedPreviousAudit()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		n.setType("ConventionalPrinting", true);
+		final JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.Stopped, null, null, null);
+		ap.addAudit(EnumAuditType.Modified, null);
+		ap.addAudit(EnumAuditType.PhaseTime, null);
+		final JDFPhaseTime pt2 = (JDFPhaseTime) pt.createUpdateAudit();
+		assertEquals(pt2.getUpdatedPreviousAudit(), pt);
+		assertNull(pt.getUpdatedPreviousAudit());
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+
 	public void testCreated()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFNode n2 = n.addJDFNode(EnumType.CaseMaking);
-		JDFCreated c1 = ap.addCreated("foo", n2);
-		assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1),
-				c1.getXPath());
-		JDFResource r = n2.addResource("CaseMakingParams", null,
-				EnumUsage.Input, null, null, null, null);
-		JDFCreated c2 = ap.addCreated("foo", r);
-		assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1), c2
-				.getXPath());
+		final JDFNode n2 = n.addJDFNode(EnumType.CaseMaking);
+		final JDFCreated c1 = ap.addCreated("foo", n2);
+		assertEquals(n2.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1), c1.getXPath());
+		final JDFResource r = n2.addResource("CaseMakingParams", null, EnumUsage.Input, null, null, null, null);
+		final JDFCreated c2 = ap.addCreated("foo", r);
+		assertEquals(r.buildXPath(ap.getParentJDF().buildXPath(null, 1), 1), c2.getXPath());
 
 		d.write2File(sm_dirTestDataTemp + "createdTest.jdf", 0, false);
 
@@ -189,12 +202,11 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	public void testProcessRun()
 	{
-		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null,
-				null);
+		final JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		assertEquals(p1.getTimeStampDate(), new JDFDate());
 	}
 
@@ -202,18 +214,16 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	public void testSpawnID()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setSpawnID("spawn");
 		n.setType(EnumType.ProcessGroup);
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null,
-				null);
+		final JDFProcessRun p1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		assertEquals(p1.getSpawnID(), n.getSpawnID(false));
-		JDFNode n2 = n.addJDFNode(EnumType.CaseMaking);
-		JDFProcessRun p2 = n.getCreateAuditPool().addProcessRun(
-				EnumNodeStatus.Completed, null, null);
+		final JDFNode n2 = n.addJDFNode(EnumType.CaseMaking);
+		final JDFProcessRun p2 = n.getCreateAuditPool().addProcessRun(EnumNodeStatus.Completed, null, null);
 		assertEquals(p2.getSpawnID(), n2.getSpawnID(true));
 		assertEquals(p2.getSpawnID(), n.getSpawnID(false));
 	}
@@ -227,13 +237,11 @@ public class JDFAuditTest extends JDFTestCaseBase
 		n.setType("ConventionalPrinting", true);
 		JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created,
-				null, null);
+		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
 		assertEquals(crea.getAgentName(), JDFAudit.getStaticAgentName());
 
 		JDFResource.setAutoAgent(true);
-		JDFResource r = n.appendMatchingResource(
-				ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
+		JDFResource r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
 		assertEquals(r.getAgentName(), JDFAudit.getStaticAgentName());
 		assertEquals(r.getAgentVersion(), JDFAudit.getStaticAgentVersion());
 		JDFAudit.setStaticAgentName(null);
@@ -248,8 +256,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 		assertEquals(crea.getAgentName(), "");
 		assertEquals(crea.getAgentVersion(), "");
 		assertEquals(crea.getAuthor(), "");
-		r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS,
-				null, null);
+		r = n.appendMatchingResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, null);
 		assertFalse(r.hasAttribute(AttributeName.AGENTNAME));
 		assertFalse(r.hasAttribute(AttributeName.AGENTVERSION));
 	}

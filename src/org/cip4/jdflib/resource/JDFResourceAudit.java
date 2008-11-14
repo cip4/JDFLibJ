@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,8 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
@@ -101,8 +103,22 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.ISignalAudit;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JDFResourceQuParams;
+import org.cip4.jdflib.jmf.JDFSignal;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.StringUtil;
 
-public class JDFResourceAudit extends JDFAutoResourceAudit
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 14.11.2008
+ */
+public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAudit
 {
 	private static final long serialVersionUID = 1L;
 
@@ -112,7 +128,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFResourceAudit(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFResourceAudit(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -124,7 +140,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFResourceAudit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFResourceAudit(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,7 +153,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFResourceAudit(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFResourceAudit(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,12 +162,12 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * add a link to the new resource
 	 * 
 	 * @param r the resource that is valid after modification<br>
-	 *            if r is not specified, return the link that already exists
+	 * if r is not specified, return the link that already exists
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 * @deprecated use addNewOldLink(true,...)
 	 */
 	@Deprecated
-	public JDFResourceLink addNewLink(JDFResource r, boolean bInput)
+	public JDFResourceLink addNewLink(final JDFResource r, final boolean bInput)
 	{
 		return addNewOldLink(true, r, bInput);
 	}
@@ -160,13 +176,13 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * add a link to the new resource
 	 * 
 	 * @param r the resource that is valid after modification<br>
-	 *            if r is not specified, return the link that already exists
+	 * if r is not specified, return the link that already exists
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 * @deprecated use addNewOldLink(false,...)
 	 * 
 	 */
 	@Deprecated
-	public JDFResourceLink addOldLink(JDFResource r, boolean bInput)
+	public JDFResourceLink addOldLink(final JDFResource r, final boolean bInput)
 	{
 		return addNewOldLink(false, r, bInput);
 	}
@@ -182,7 +198,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 */
 
 	@Deprecated
-	public JDFResourceLink addNewOldLink(boolean bNew, JDFResource r, boolean bInput)
+	public JDFResourceLink addNewOldLink(final boolean bNew, final JDFResource r, final boolean bInput)
 	{
 		return addNewOldLink(bNew, r, bInput ? EnumUsage.Input : EnumUsage.Output);
 	}
@@ -196,21 +212,23 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 */
 
-	public JDFResourceLink addNewOldLink(boolean bNew, JDFResource r, EnumUsage usage)
+	public JDFResourceLink addNewOldLink(final boolean bNew, final JDFResource r, final EnumUsage usage)
 	{
-		VElement v = getChildElementVector(null, null, null, true, 0, false);
-		int iNew = bNew ? 0 : 1;
+		final VElement v = getChildElementVector(null, null, null, true, 0, false);
+		final int iNew = bNew ? 0 : 1;
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
 			if (!(v.elementAt(i) instanceof JDFResourceLink))
+			{
 				v.removeElementAt(i);
+			}
 		}
 
 		if (v.size() != iNew)
 		{
 			throw new JDFException("JDFResourceLink::AddNewOldLink invalid  ResourceAudit");
 		}
-		JDFResourceLink l = (JDFResourceLink) appendElement(r.getLinkString(), JDFConstants.EMPTYSTRING);
+		final JDFResourceLink l = (JDFResourceLink) appendElement(r.getLinkString(), JDFConstants.EMPTYSTRING);
 		l.setTarget(r);
 		l.setUsage(usage);
 		return l;
@@ -241,18 +259,20 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * 
 	 * @param bNew new or original?
 	 * @param r the resource that was valid before modification<br>
-	 *            if r is not specified, return the link that already exists
+	 * if r is not specified, return the link that already exists
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 */
-	public JDFResourceLink getNewOldLink(boolean bNew)
+	public JDFResourceLink getNewOldLink(final boolean bNew)
 	{
-		VElement v = getChildElementVector(null, null, null, true, 0, false);
-		int iNew = bNew ? 0 : 1;
+		final VElement v = getChildElementVector(null, null, null, true, 0, false);
+		final int iNew = bNew ? 0 : 1;
 		// remove any non-reslinks, e.g. comments
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
 			if (!(v.elementAt(i) instanceof JDFResourceLink))
+			{
 				v.removeElementAt(i);
+			}
 		}
 
 		if (v.size() < iNew)
@@ -269,9 +289,9 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param newLink node to insert
 	 * @return the updated element
 	 */
-	public JDFResourceLink updateLink(JDFResourceLink newLink)
+	public JDFResourceLink updateLink(final JDFResourceLink newLink)
 	{
-		VElement v = getResourceLinkVector();
+		final VElement v = getResourceLinkVector();
 
 		if (v.size() > 2)
 		{
@@ -303,10 +323,10 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 */
 	public VElement getResourceLinkVector()
 	{
-		VElement v = getChildElementVector(null, null, null, true, 0, false);
+		final VElement v = getChildElementVector(null, null, null, true, 0, false);
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
-			JDFElement e = (JDFElement) v.elementAt(i);
+			final JDFElement e = (JDFElement) v.elementAt(i);
 
 			if (!(e instanceof JDFResourceLink))
 			{
@@ -325,10 +345,10 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param nMax maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
 	 * 
-	 *         !!! Do not change the signature of this method
+	 * !!! Do not change the signature of this method
 	 */
 	@Override
-	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(EnumPoolType.ResourceLinkPool, nMax);
 	}
@@ -339,19 +359,23 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param nMax maximum size of the returned vector
 	 */
 	@Override
-	public VString getMissingElements(int nMax)
+	public VString getMissingElements(final int nMax)
 	{
 		VString vs = getTheElementInfo().requiredElements();
 		vs = getMissingElementVector(vs, nMax);
-		VElement v2 = getChildElementVector_KElement(null, null, null, true, 0);
+		final VElement v2 = getChildElementVector_KElement(null, null, null, true, 0);
 		int n = 0;
 		for (int i = 0; i < v2.size(); i++)
 		{
 			if (v2.elementAt(i) instanceof JDFResourceLink)
+			{
 				n++;
+			}
 		}
 		if (n == 0)
+		{
 			vs.add("ResourceLink");
+		}
 
 		return vs;
 	}
@@ -364,7 +388,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
@@ -375,7 +399,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
@@ -386,7 +410,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
@@ -398,9 +422,44 @@ public class JDFResourceAudit extends JDFAutoResourceAudit
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.ISignalAudit#toSignalJMF()
+	 */
+	public JDFJMF toSignalJMF()
+	{
+		final JDFJMF newJMF = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Resource);
+		final JDFSignal s = newJMF.getSignal(0);
+		final JDFResourceQuParams rqp = s.appendResourceQuParams();
+		final JDFResourceInfo ri = s.appendResourceInfo();
+		final JDFNode parentJDF = getParentJDF();
+		if (parentJDF != null)
+		{
+			rqp.setJobID(parentJDF.getJobID(true));
+			rqp.setJobPartID(StringUtil.getNonEmpty(parentJDF.getJobPartID(false)));
+		}
+		final JDFResourceLink rl = getNewLink();
+		if (rl != null)
+		{
+			ri.setResourceName(rl.getLinkedResourceName());
+			ri.copyAttribute(AttributeName.PROCESSUSAGE, rl);
+			ri.copyAttribute(AttributeName.USAGE, rl);
+			if (rl.hasChildElement(ElementName.AMOUNTPOOL, null))
+			{
+				ri.copyElement(rl.getAmountPool(), null);
+			}
+			else
+			{
+				ri.copyAttribute(AttributeName.AMOUNT, rl);
+				ri.copyAttribute(AttributeName.ACTUALAMOUNT, rl);
+			}
+		}
+
+		return newJMF;
 	}
 
 }

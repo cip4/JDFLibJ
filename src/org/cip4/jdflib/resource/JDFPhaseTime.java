@@ -71,7 +71,7 @@
  *========================================================================== class JDFPhaseTime extends JDFAutoPhaseTime
  * created 2001-09-06T10:02:57GMT+02:00 ==========================================================================
  *          @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- *              @Author: sabjon@topmail.de   using a code generator
+ *              @Author  sabjon@topmail.de   using a code generator
  * Warning! very preliminary test version. Interface subject to change without prior notice! Revision history:   ...
  */
 
@@ -81,6 +81,8 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPhaseTime;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -88,10 +90,27 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.ISignalAudit;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFSignal;
+import org.cip4.jdflib.jmf.JDFStatusQuParams;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFMISDetails;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
+import org.cip4.jdflib.util.StringUtil;
 
-public class JDFPhaseTime extends JDFAutoPhaseTime
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 14.11.2008
+ */
+public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 {
 	private static final long serialVersionUID = 1L;
 
@@ -101,7 +120,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPhaseTime(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPhaseTime(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -113,7 +132,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPhaseTime(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPhaseTime(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -126,7 +145,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPhaseTime(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPhaseTime(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -148,7 +167,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
@@ -159,7 +178,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
@@ -170,7 +189,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
@@ -182,7 +201,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}
@@ -196,10 +215,10 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param nMax maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
 	 * 
-	 *         !!! Do not change the signature of this method
+	 * !!! Do not change the signature of this method
 	 */
 	@Override
-	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourceLinkPool, nMax);
 	}
@@ -207,25 +226,29 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	/**
 	 * copy a Vector of resourceLinks into this PhaseTime
 	 * 
-	 * @param vRL the Vector of resourceLinks to copy - the order is significant, because the first rl will be used to
-	 *            fill the Amount in Signal/DeviceInfo/JobPhase
+	 * @param vRL the Vector of resourceLinks to copy - the order is significant, because the first rl will be used to fill the Amount in
+	 * Signal/DeviceInfo/JobPhase
 	 */
-	public void setLinks(VElement vRL)
+	public void setLinks(final VElement vRL)
 	{
 		if (vRL == null)
+		{
 			return;
+		}
 		final int size = vRL.size();
 		if (size == 0)
+		{
 			return;
+		}
 
 		for (int i = 0; i < size; i++)
 		{
-			JDFResourceLink rl = (JDFResourceLink) vRL.elementAt(i);
+			final JDFResourceLink rl = (JDFResourceLink) vRL.elementAt(i);
 			removeChildren(rl.getLocalName(), rl.getNamespaceURI(), null);
 		}
 		for (int i = 0; i < size; i++)
 		{
-			JDFResourceLink rl = (JDFResourceLink) vRL.elementAt(i);
+			final JDFResourceLink rl = (JDFResourceLink) vRL.elementAt(i);
 			copyElement(rl, null);
 		}
 	}
@@ -236,7 +259,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @param iSkip the nTh resourceLink to retrieve
 	 * @return JDFResourceLink - <code>this</code> phaseTimes ResourceLink
 	 */
-	public JDFResourceLink getLink(int iSkip)
+	public JDFResourceLink getLink(final int iSkip)
 	{
 		KElement e = getFirstChildElement();
 		int n = 0;
@@ -245,7 +268,9 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 			if (e instanceof JDFResourceLink)
 			{
 				if (n++ >= iSkip)
+				{
 					return (JDFResourceLink) e;
+				}
 			}
 			e = e.getNextSiblingElement();
 		}
@@ -261,7 +286,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	public VElement getLinkVector()
 	{
 		KElement e = getFirstChildElement();
-		VElement vRet = new VElement();
+		final VElement vRet = new VElement();
 		while (e != null)
 		{
 			if (e instanceof JDFResourceLink)
@@ -280,13 +305,17 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 */
 	public JDFDuration getDuration()
 	{
-		JDFDate dStart = getStart();
-		JDFDate dEnd = getEnd();
+		final JDFDate dStart = getStart();
+		final JDFDate dEnd = getEnd();
 		if (dStart == null || dEnd == null)
+		{
 			return null;
+		}
 		int dur = (int) ((dEnd.getTimeInMillis() - dStart.getTimeInMillis()) / 1000);
 		if (dur < 0)
+		{
 			dur = 0;
+		}
 		return new JDFDuration(dur);
 	}
 
@@ -295,13 +324,17 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 	 * @return the list of ModulePhase element
 	 * @throws IllegalArgumentException if the vectors have different lengths
 	 */
-	public VElement setModules(VString moduleIDs, VString moduleTypes)
+	public VElement setModules(final VString moduleIDs, final VString moduleTypes)
 	{
 		if (moduleIDs == null || moduleIDs.size() == 0)
+		{
 			return null;
+		}
 		if (moduleTypes == null || moduleTypes.size() == 0 || moduleTypes.size() != moduleIDs.size())
+		{
 			throw new IllegalArgumentException("Inconsistent vector lengths");
-		VElement v = new VElement();
+		}
+		final VElement v = new VElement();
 		for (int i = 0; i < moduleIDs.size(); i++)
 		{
 			final JDFModulePhase modulePhase = getCreateModulePhase(i);
@@ -310,6 +343,60 @@ public class JDFPhaseTime extends JDFAutoPhaseTime
 			modulePhase.setModuleType(moduleTypes.stringAt(i));
 		}
 		return v;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.ISignalAudit#toSignalJMF()
+	 */
+	public JDFJMF toSignalJMF()
+	{
+		final JDFJMF newJMF = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
+		final JDFSignal s = newJMF.getSignal(0);
+		final JDFStatusQuParams sqp = s.appendStatusQuParams();
+		final JDFDeviceInfo di = s.appendDeviceInfo();
+		final JDFJobPhase jp = di.appendJobPhase();
+		final JDFNode parentJDF = getParentJDF();
+		if (parentJDF != null)
+		{
+			sqp.setJobID(parentJDF.getJobID(true));
+			sqp.setJobPartID(StringUtil.getNonEmpty(parentJDF.getJobPartID(false)));
+			jp.setJobID(parentJDF.getJobID(true));
+			jp.setJobPartID(StringUtil.getNonEmpty(parentJDF.getJobPartID(false)));
+
+		}
+		final JDFDevice dev = getDevice(0);
+		if (dev != null)
+		{
+			di.setDevice(dev, true);
+		}
+
+		jp.setStatus(getStatus());
+		jp.copyAttribute(AttributeName.STATUSDETAILS, this);
+		final JDFMISDetails md = getMISDetails();
+		if (md != null)
+		{
+			jp.copyElement(md, null);
+		}
+		final VJDFAttributeMap vP = getPartMapVector();
+		jp.setPartMapVector(vP);
+		s.setTime(getEnd());
+		jp.setPhaseStartTime(getStart());
+		return newJMF;
+	}
+
+	/**
+	 * sort by timestamp using the end time
+	 * @param a1 an audit
+	 * @param a2 another audit
+	 * @return @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public int compare(final JDFAudit a1, final JDFAudit a2)
+	{
+		final JDFDate d1 = (a1 instanceof JDFPhaseTime) ? ((JDFPhaseTime) a1).getEnd() : a1.getTimeStampDate();
+		final JDFDate d2 = (a2 instanceof JDFPhaseTime) ? ((JDFPhaseTime) a2).getEnd() : a2.getTimeStampDate();
+		return ContainerUtil.compare(d1, d2);
 	}
 
 } // class JDFPhaseTime

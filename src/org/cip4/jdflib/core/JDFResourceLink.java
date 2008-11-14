@@ -112,26 +112,29 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel,
-	 * boolean, int)
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
 	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		final VString v = super.getInvalidAttributes(level, bIgnorePrivate, nMax);
 		if (!v.contains(AttributeName.COMBINEDPROCESSINDEX) && !validCombinedProcessIndex())
+		{
 			v.add(AttributeName.COMBINEDPROCESSINDEX);
+		}
 		return v;
 	}
 
 	public void generateCombinedProcessIndex()
 	{
-		JDFNode n = getParentJDF();
+		final JDFNode n = getParentJDF();
 		if (n != null)
 		{
-			VString types = n.getTypes();
+			final VString types = n.getTypes();
 			if (types != null)
+			{
 				CombinedProcessIndexHelper.generateCombinedProcessIndex(getLinkRoot(), getUsage(), getEnumProcessUsage(), this, types);
+			}
 		}
 	}
 
@@ -142,7 +145,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	{
 		final JDFIntegerList vCombined = getCombinedProcessIndex();
 		if (vCombined == null)
+		{
 			return true;
+		}
 		final JDFNode parentJDF = getParentJDF();
 		if (parentJDF == null)
 		{
@@ -244,7 +249,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	{
 		final ElementInfo ei = super.getTheElementInfo().updateReplace(elemInfoTable);
 		if (this.isPhysical())
+		{
 			ei.updateAdd(physInfoTable);
+		}
 		return ei;
 	}
 
@@ -406,8 +413,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * version fixing routine for JDF
 	 * 
 	 * uses heuristics to modify this element and its children to be compatible with a given version<br>
-	 * in general, it will be able to move from low to high versions, but potentially fail when attempting to move from
-	 * higher to lower versions
+	 * in general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions
 	 * 
 	 * @param version version that the resulting element should correspond to
 	 * @return true if successful
@@ -423,7 +429,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				if (hasAttribute(AttributeName.DRAFTOK))
 				{
 					if (!hasAttribute(AttributeName.MINSTATUS))
+					{
 						setMinStatus(EnumResStatus.Draft);
+					}
 					removeAttribute(AttributeName.DRAFTOK);
 				}
 			}
@@ -432,7 +440,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				if (hasAttribute(AttributeName.MINSTATUS))
 				{
 					if (!hasAttribute(AttributeName.DRAFTOK))
+					{
 						setDraftOK(true);
+					}
 					removeAttribute(AttributeName.MINSTATUS);
 				}
 				removeAttribute(AttributeName.MINLATESTATUS);
@@ -443,8 +453,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * setTarget - sets the link to the target defined by partLeaf. Automatically generates a part subelement, if
-	 * partleaf is not the root resource
+	 * setTarget - sets the link to the target defined by partLeaf. Automatically generates a part subelement, if partleaf is not the root resource
 	 * 
 	 * @param resourceTarget the resource that this ResourceLink shoud refer to
 	 * 
@@ -454,7 +463,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	public boolean setTarget(final JDFResource resourceTarget)
 	{
 		if (resourceTarget.isResourceElement())
+		{
 			throw new JDFException("attempting to link to a resource subelement");
+		}
 
 		appendHRef(resourceTarget.getResourceRoot(), JDFConstants.RREF, null);
 
@@ -665,8 +676,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * getParts - get the vector of part elements, note that a resource link with multiple part elements is effectively
-	 * an OR of these parts
+	 * getParts - get the vector of part elements, note that a resource link with multiple part elements is effectively an OR of these parts
 	 * 
 	 * @return VElement
 	 */
@@ -717,12 +727,11 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * isExecutable - checks whether the resource link links to a resource, which is in a state that will allow a node
-	 * to execute
+	 * isExecutable - checks whether the resource link links to a resource, which is in a state that will allow a node to execute
 	 * 
 	 * @param partMap the attribute map of parts
-	 * @param bCheckChildren if true, calculates the availability status of a resource from all child partition leaves,
-	 *            else the status is taken from the appropriate leaf itself
+	 * @param bCheckChildren if true, calculates the availability status of a resource from all child partition leaves, else the status is taken from the
+	 * appropriate leaf itself
 	 * 
 	 * @return boolean - true if the node is executable, false if not
 	 * 
@@ -762,7 +771,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				JDFResource leaf = (JDFResource) leaves2.elementAt(i);
 				leaf = leaf.getPartition(partMap, null);
 				if (leaf != null)
+				{
 					leaves.add(leaf);
+				}
 			}
 		}
 		leaves.unify();
@@ -771,7 +782,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		{
 			final JDFResource leaf = (JDFResource) leaves.elementAt(i);
 			if (partMap != null && !partMap.isEmpty() && !partMap.overlapMap(leaf.getPartMap()))
+			{
 				continue;
+			}
 
 			final JDFResource.EnumResStatus status = leaf.getResStatus(true);
 			if (status.equals(JDFResource.EnumResStatus.InUse))
@@ -810,13 +823,13 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * overrides the deprecated method JDFElement.getTarget()
 	 * 
-	 * @since 102103 GetTarget returns the lowest common denominator 
-	 * 				 if all children of a resource are referenced
+	 * @since 102103 GetTarget returns the lowest common denominator if all children of a resource are referenced
 	 * 
 	 * @return JDFResource - the first leaf that is referenced by this ResourceLink
 	 */
 	@Override
-	@SuppressWarnings(value={"deprecation"})
+	@SuppressWarnings(value =
+	{ "deprecation" })
 	public JDFResource getTarget()
 	{
 		final VElement v = getTargetVector(-1);
@@ -828,13 +841,12 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * Method getTargetVector gets the resource nodes this resourcelink refers to. Skips links that do not exist or
-	 * where the name mangling is illegal.<br>
+	 * Method getTargetVector gets the resource nodes this resourcelink refers to. Skips links that do not exist or where the name mangling is illegal.<br>
 	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
 	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
 	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
-	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes
-	 * (e.g. RunIndex of a RunList) and ignored when searching the part.
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored
+	 * when searching the part.
 	 * 
 	 * @param nMax maximum number of requested resources; -1= all
 	 * 
@@ -851,13 +863,12 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * Gets the resource nodes this resourcelink refers to. Skips links that do not exist or where the name mangling is
-	 * illegal.<br>
+	 * Gets the resource nodes this resourcelink refers to. Skips links that do not exist or where the name mangling is illegal.<br>
 	 * Actual behavior varies according to the value of PartUsage of the referenced resource:<br>
 	 * if PartUsage="Explicit", all elements that are referenced in PartIDKeys and the ResourceLink must exist and fit<br>
 	 * if PartUsage="Implicit", the best fitting intermediate node of the partitioned resource is returned.<br>
-	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes
-	 * (e.g. RunIndex of a RunList) and ignored when searching the part.
+	 * Attributes in the Part elements, that are not referenced in PartIDKeys, are assumed to be logical attributes (e.g. RunIndex of a RunList) and ignored
+	 * when searching the part.
 	 * 
 	 * @param vmParts target map to use
 	 * @param nMax maximum number of requested resources; -1= all
@@ -933,7 +944,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @default HasResourcePartMap(partMap, false)
 	 */
-	public boolean hasResourcePartMap(final JDFAttributeMap partMap, boolean bCheckResource)
+	public boolean hasResourcePartMap(final JDFAttributeMap partMap, final boolean bCheckResource)
 	{
 		// TODO remove implicit partitions
 		// Attention !!!
@@ -943,7 +954,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		// for routing.
 		final JDFResource linkRoot = getLinkRoot();
 		if (linkRoot == null)
+		{
 			return false;
+		}
 
 		VJDFAttributeMap vPart;
 		final EnumPartUsage partUsage = linkRoot.getPartUsage();
@@ -984,11 +997,13 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				{
 					return true;
 				}
-				
+
 				for (int i = 0; i < siz; i++)
 				{
 					if (vPart.elementAt(i).overlapMap(partMap))
+					{
 						return true;
+					}
 				}
 			}
 			else
@@ -1004,12 +1019,16 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 					{
 						final JDFAttributeMap part = vPart.elementAt(i);
 						if (part == null || part.size() == 0)
+						{
 							return true;
+						}
 
 						// RP 050120 swap of vPart[i] and partmap
 						// RP 070511 swap back of vPart[i] and partmap
 						if (part.subMap(partMap))
+						{
 							return true;
+						}
 					}
 				}
 			}
@@ -1043,7 +1062,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			for (int i = 0; i < siz; i++)
 			{
 				if (vPart.elementAt(i).overlapMap(partMap))
+				{
 					return true;
+				}
 			}
 		}
 
@@ -1056,8 +1077,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param resourceToCheck The resource which may be selected by the ResourceLink.
 	 * 
-	 *            This ResourceLink must always be the full ResourceLink, i.e. Part Elements are not allowed as
-	 *            parameters.
+	 * This ResourceLink must always be the full ResourceLink, i.e. Part Elements are not allowed as parameters.
 	 * 
 	 * @return true, if the resource link selects the resource
 	 */
@@ -1136,7 +1156,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		final VJDFAttributeMap vPartMap = getPartMapVector();
 		final int nPartChildren = vPartMap == null ? 0 : vPartMap.size();
 		final JDFResource root = getLinkRoot();
-		
+
 		final VElement leaves = root.getLeaves(false);
 		// loop over resource leaves
 		for (int i = 0; i < leaves.size(); i++)
@@ -1151,7 +1171,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 					{
 						continue;
 					}
-					
+
 					// got one; break both loops and continue with the next leaf
 					vMap.addElement(leafMap.orMap(mPart));
 				}
@@ -1162,8 +1182,48 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				vMap.addElement(leafMap);
 			}
 		}
-		
+
 		return vMap.size() == 0 ? null : vMap;
+	}
+
+	/**
+	 * 
+	 * @return the vector of referenced leaves
+	 */
+	VElement getLeafVector()
+	{
+		final VJDFAttributeMap vmParts = getPartMapVector();
+		final JDFResource resRoot = getLinkRoot();
+		final VElement v = new VElement();
+
+		if (vmParts == null)
+		{
+			return resRoot.getLeaves(false);
+		}
+		else
+		{
+			final EnumPartUsage partUsage = resRoot.getPartUsage();
+
+			for (int i = 0; i < vmParts.size(); i++)
+			{
+				final VElement vr = resRoot.getPartitionVector(vmParts.elementAt(i), partUsage);
+				for (int j = 0; j < vr.size(); j++)
+				{
+					final JDFResource targ = (JDFResource) vr.get(j);
+					final VElement leaves = targ.getLeaves(false);
+					for (int k = 0; k < leaves.size(); k++)
+					{
+						JDFResource leaf = (JDFResource) leaves.get(k);
+						while (!leaf.getPartMap().overlapMap(vmParts.elementAt(i)) && !leaf.isResourceRoot())
+						{
+							leaf = (JDFResource) leaf.getParentNode();
+						}
+						v.appendUnique(leaf);
+					}
+				}
+			}
+		}
+		return v.isEmpty() ? null : v;
 	}
 
 	/**
@@ -1176,14 +1236,16 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		final String nodeName = getNodeName();
 		final int length = nodeName.length();
 		if (length <= 4)
+		{
 			throw new JDFException("invalid nodename for resource link");
+		}
 		return nodeName.substring(0, length - JDFConstants.LINK.length());
 
 	}
 
 	/**
-	 * Get the expected name of the linked resource and an optional processusage in name:usage format. If no
-	 * processusage is available, return GetLinkedResourceName:input / GetLinkedResourceName:output respectively.
+	 * Get the expected name of the linked resource and an optional processusage in name:usage format. If no processusage is available, return
+	 * GetLinkedResourceName:input / GetLinkedResourceName:output respectively.
 	 * 
 	 * @return String
 	 */
@@ -1221,39 +1283,48 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.KElement.EnumValidationLevel)
 	 */
 	@Override
-	public boolean isValid(EnumValidationLevel level)
+	public boolean isValid(final EnumValidationLevel level)
 	{
 		EnumValidationLevel levelLocal = level;
-		
-		if (levelLocal == null)
-			levelLocal = EnumValidationLevel.Complete;
 
-		boolean b = super.isValid(levelLocal);
+		if (levelLocal == null)
+		{
+			levelLocal = EnumValidationLevel.Complete;
+		}
+
+		final boolean b = super.isValid(levelLocal);
 		if (!b)
+		{
 			return false;
+		}
 
 		if (this instanceof JDFPartAmount)
+		{
 			return true;
+		}
 
-		if ((levelLocal != EnumValidationLevel.Complete) && (levelLocal != EnumValidationLevel.Incomplete)
-				&& (levelLocal != EnumValidationLevel.RecursiveIncomplete))
+		if ((levelLocal != EnumValidationLevel.Complete) && (levelLocal != EnumValidationLevel.Incomplete) && (levelLocal != EnumValidationLevel.RecursiveIncomplete))
+		{
 			return true;
+		}
 
 		if (!validResourcePosition())
+		{
 			return false;
+		}
 
 		final VElement vRes = getTargetVector(0);
-		if ((vRes == null || vRes.isEmpty()) && 
-			((levelLocal == EnumValidationLevel.Complete) || 
-			(levelLocal == EnumValidationLevel.RecursiveComplete)))
+		if ((vRes == null || vRes.isEmpty()) && ((levelLocal == EnumValidationLevel.Complete) || (levelLocal == EnumValidationLevel.RecursiveComplete)))
 		{
 			// if any partition points to nirvana and we are validating
 			// complete, the entire resource is invalid
 			return false;
 		}
-		
+
 		if (levelLocal.equals(EnumValidationLevel.Complete))
+		{
 			return true;
+		}
 
 		if (vRes != null)
 		{
@@ -1265,18 +1336,22 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				// but they certainly aren't valid if they point to the wrong
 				// resource
 				if (!getNodeName().equals(r.getLinkString()))
+				{
 					return false;
+				}
 
 				if (levelLocal.getValue() >= EnumValidationLevel.RecursiveIncomplete.getValue())
 				{
 					final EnumValidationLevel valDown = (levelLocal == EnumValidationLevel.RecursiveIncomplete) ? EnumValidationLevel.Incomplete : EnumValidationLevel.Complete;
 
 					if (!r.isValid(valDown))
+					{
 						return false;
+					}
 				}
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -1353,7 +1428,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @param n the index of the element
 	 * @return the nth Lot, null if it does not exist
 	 */
-	public JDFLot getLot(int n)
+	public JDFLot getLot(final int n)
 	{
 		return (JDFLot) getElement(ElementName.LOT, null, n);
 	}
@@ -1364,7 +1439,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @param n the index of the element
 	 * @return the nth Lot, creates all Lots in case of n-1 does not exist
 	 */
-	public JDFLot getCreateLot(int n)
+	public JDFLot getCreateLot(final int n)
 	{
 		return (JDFLot) getCreateElement_KElement(ElementName.LOT, null, n);
 	}
@@ -1380,8 +1455,8 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * reduce the parts to the canonical representation. If all children of a parent node are in defined in parts, they
-	 * are replaced by their parent. E.g. the canonical representation of all leaves is the root.
+	 * reduce the parts to the canonical representation. If all children of a parent node are in defined in parts, they are replaced by their parent. E.g. the
+	 * canonical representation of all leaves is the root.
 	 */
 	public void reduceParts()
 	{
@@ -1409,7 +1484,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	{
 		final JDFResource r = getLinkRoot();
 		if (r == null)
+		{
 			return; // bail out!
+		}
 
 		// loop over parts for partusage explicit
 		if (r.getPartUsage() == JDFResource.EnumPartUsage.Explicit || bForce)
@@ -1421,7 +1498,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				{
 					final VElement vExist = r.getPartitionVector(apParts.elementAt(i), null);
 					if (vExist.isEmpty())
+					{
 						r.getCreatePartition(apParts.elementAt(i), null);
+					}
 				}
 			}
 		}
@@ -1434,7 +1513,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	{
 		final VJDFAttributeMap apParts = getResourcePartMapVector();
 		if (apParts == null)
+		{
 			return;
+		}
 
 		final VString attribs = new VString();
 		attribs.add(AttributeName.AMOUNT);
@@ -1459,8 +1540,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace URI
-	 * @param mPart defines which part of this ResourceLink the amount belongs to. If empty get the ResourceLink root
-	 *            attribute.
+	 * @param mPart defines which part of this ResourceLink the amount belongs to. If empty get the ResourceLink root attribute.
 	 * @param def the default value id, if no matching attribute is found
 	 * @return double - the value of attribute found, def if no matches found
 	 * @since 060630
@@ -1469,7 +1549,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	{
 		final JDFAmountPool ap = getAmountPool();
 		if (ap == null)
+		{
 			return def;
+		}
 		final VElement vPartAmount = ap.getMatchingPartAmountVector(mPart);
 
 		boolean bMatch = false;
@@ -1493,7 +1575,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @param vPartIDKeys
 	 * @return the AmountMap for the Amountpool, null if no amountpool exists
 	 */
-	public AmountMap getAmountMap(VString vPartIDKeys)
+	public AmountMap getAmountMap(final VString vPartIDKeys)
 	{
 		return AmountPoolHelper.getAmountMap(this, vPartIDKeys);
 	}
@@ -1503,8 +1585,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root
-	 *            attribute.
+	 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root attribute.
 	 * @return value of attribute found, null if not available
 	 * @since 071103
 	 */
@@ -1518,8 +1599,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
-	 * @param vPart defines which part of this ResourceLink the Amount belongs to. If null get the ResourceLink root
-	 *            attribute.
+	 * @param vPart defines which part of this ResourceLink the Amount belongs to. If null get the ResourceLink root attribute.
 	 * @return value of attribute found, null if not available
 	 * @since 071103
 	 */
@@ -1545,31 +1625,29 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the
-	 * AmountPool and/or PartAmount(s) if they are not yet there
+	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount(s) if they are not
+	 * yet there
 	 * 
 	 * @param attrib the attribute name
 	 * @param value value to set in string form.
 	 * @param nameSpaceURI the XML-namespace
-	 * @param vPart defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root
-	 *            attribute.
+	 * @param vPart defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root attribute.
 	 * @throws JDFException when called directly on a PartAmount
 	 * @since 060630
 	 */
-	public void setAmountPoolAttribute(final String attrib, final String value, final String nameSpaceURI, VJDFAttributeMap vPart)
+	public void setAmountPoolAttribute(final String attrib, final String value, final String nameSpaceURI, final VJDFAttributeMap vPart)
 	{
 		AmountPoolHelper.setAmountPoolAttribute(this, attrib, value, nameSpaceURI, vPart);
 	}
 
 	/**
-	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the
-	 * AmountPool and/or PartAmount if it is not yet there
+	 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount if it is not yet
+	 * there
 	 * 
 	 * @param attrib the attribute name
 	 * @param value value to set in string form.
 	 * @param nameSpaceURI the XML-namespace
-	 * @param mPart defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root
-	 *            attribute
+	 * @param mPart defines which part of this ResourceLink the Amount belongs to, if empty set the ResourceLink root attribute
 	 * @throws JDFException when called directly on a PartAmount
 	 * @since 071103
 	 */
@@ -1581,7 +1659,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	// //////////////////////////////////////////////////////////////////////////
 	// ////
 
-	public double getAmountPoolSumDouble(final String attName, VJDFAttributeMap vPart)
+	public double getAmountPoolSumDouble(final String attName, final VJDFAttributeMap vPart)
 	{
 		return AmountPoolHelper.getAmountPoolSumDouble(this, attName, vPart);
 	}
@@ -1600,8 +1678,8 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match
-	 * those in PartAmount, i.e. mPart is a submap of the searche PartAmount elements
+	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a
+	 * submap of the searche PartAmount elements
 	 * 
 	 * 
 	 * @param attName the Attribute name , e.g Amount, ActualAmount
@@ -1684,8 +1762,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * getUsage - get the usage of the ResourceLink in a JDF node. If no usage is available, default to the resource
-	 * name.
+	 * getUsage - get the usage of the ResourceLink in a JDF node. If no usage is available, default to the resource name.
 	 * 
 	 * @return EnumUsage
 	 */
@@ -1705,8 +1782,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * getMinStatus - get the minimum status of the ResourceLink in a JDF node. If usage is input or not available,
-	 * check DraftOK as well.
+	 * getMinStatus - get the minimum status of the ResourceLink in a JDF node. If usage is input or not available, check DraftOK as well.
 	 * 
 	 * @return the status of the ResourceLink
 	 */
@@ -1754,7 +1830,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	public JDFResource.EnumResStatus getMinLateStatus()
 	{
 		if (!this.hasAttribute(AttributeName.MINLATESTATUS))
+		{
 			return getMinStatus();
+		}
 
 		return JDFResource.EnumResStatus.getEnum(getAttribute(AttributeName.MINLATESTATUS, null, null));
 	}
@@ -1799,7 +1877,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		final VString vPipePartIDKeys = new VString();
 		final Vector v = getPipePartIDKeysEnum();
 		for (int i = 0; i < v.size(); i++)
+		{
 			vPipePartIDKeys.add(((EnumPartIDKey) v.elementAt(i)).getName());
+		}
 
 		return vPipePartIDKeys;
 	}
@@ -1827,8 +1907,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		{
 			if (!vPartIDKeys.contains((v.elementAt(i)).getName()))
 			{
-				throw new JDFException("JDFResourceLink.getPipePartIDKeys: key " + v.elementAt(i)
-						+ " is not subset of PartIDKey");
+				throw new JDFException("JDFResourceLink.getPipePartIDKeys: key " + v.elementAt(i) + " is not subset of PartIDKey");
 			}
 		}
 		return v;
@@ -1839,13 +1918,15 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param value attribute value to set
 	 */
-	public void setCombinedProcessIndex(JDFIntegerList value)
+	public void setCombinedProcessIndex(final JDFIntegerList value)
 	{
 		JDFIntegerList valueLocal = value;
-		
+
 		if (valueLocal != null && valueLocal.size() == 0)
+		{
 			valueLocal = null;
-		
+		}
+
 		setAttribute(AttributeName.COMBINEDPROCESSINDEX, valueLocal, null);
 	}
 
@@ -1913,7 +1994,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			{
 				final int index = intArray[i];
 				if (index < size)
+				{
 					vs.add(vTypes.stringAt(index));
+				}
 			}
 		}
 		else if (hasAttribute(AttributeName.COMBINEDPROCESSTYPE))
@@ -1926,7 +2009,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		{
 			vs.unify();
 			if (vs.size() == 0)
+			{
 				vs = null;
+			}
 		}
 		return vs;
 	}
@@ -1968,7 +2053,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 
 		// try to infer draftok from the JDF 1.3 MinStatus flag
 		if (!hasAttribute(AttributeName.MINSTATUS))
+		{
 			return false;
+		}
 
 		return getMinStatus().getValue() <= JDFResource.EnumResStatus.Draft.getValue();
 	}
@@ -2213,15 +2300,15 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param value attribute value to set
 	 */
-	public void setDuration(JDFDuration value)
+	public void setDuration(final JDFDuration value)
 	{
 		JDFDuration valueLocal = value;
-		
+
 		if (valueLocal == null)
 		{
 			valueLocal = new JDFDuration();
 		}
-		
+
 		setAttribute(AttributeName.DURATION, valueLocal.getDurationISO());
 	}
 
@@ -2268,10 +2355,10 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param value attribute value to set
 	 */
-	public void setStart(JDFDate value)
+	public void setStart(final JDFDate value)
 	{
 		JDFDate valueLocal = value;
-		
+
 		if (valueLocal == null)
 		{
 			valueLocal = new JDFDate();
@@ -2302,10 +2389,10 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param value - attribute value to set
 	 */
-	public void setStartOffset(JDFDuration value)
+	public void setStartOffset(final JDFDuration value)
 	{
 		JDFDuration valueLocal = value;
-		
+
 		if (valueLocal == null)
 		{
 			valueLocal = new JDFDuration();
@@ -2393,10 +2480,12 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @param namedResLink
 	 * @return
 	 */
-	public boolean matchesString(String namedResLink)
+	public boolean matchesString(final String namedResLink)
 	{
 		if (namedResLink == null)
+		{
 			return false;
+		}
 
 		boolean bMatch = namedResLink.equals(getNamedProcessUsage());
 		bMatch = bMatch || namedResLink.equals(getLinkedResourceName());
@@ -2404,23 +2493,24 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		bMatch = bMatch || namedResLink.equals(getNodeName());
 		bMatch = bMatch || namedResLink.equals(getrRef());
 		bMatch = bMatch || namedResLink.equals(getAttribute(AttributeName.USAGE));
-		bMatch = bMatch || namedResLink.equals(
-				getLinkedResourceName() + JDFConstants.COLON + getAttribute(AttributeName.USAGE));
+		bMatch = bMatch || namedResLink.equals(getLinkedResourceName() + JDFConstants.COLON + getAttribute(AttributeName.USAGE));
 
 		if (!bMatch && StringUtil.token(namedResLink, 0, JDFConstants.COLON).equals(getLinkedResourceName()))
 		{
-			VElement v = getTargetVector(0);
+			final VElement v = getTargetVector(0);
 			if (v != null)
 			{
-				int siz = v.size();
+				final int siz = v.size();
 				for (int i = 0; i < siz; i++)
 				{
 					if (((JDFResource) v.elementAt(i)).matchesString(namedResLink))
+					{
 						return true;
+					}
 				}
 			}
 		}
-		
+
 		return bMatch;
 	}
 

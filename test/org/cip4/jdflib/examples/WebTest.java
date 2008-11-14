@@ -47,59 +47,45 @@ public class WebTest extends JDFTestCaseBase
 
 		JDFElement.setLongID(false);
 		doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
+		final JDFNode n = doc.getJDFRoot();
 		final JDFResourcePool rp = n.getCreateResourcePool();
-		JDFResource lo = n.addResource("Layout", EnumResourceClass.Parameter,
-				EnumUsage.Input, null, null, null, null);
-		JDFLayout losh = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName,
-				"Sheet1");
-		JDFLayout lofr = (JDFLayout) losh.addPartition(EnumPartIDKey.Side,
-				EnumSide.Front.getName());
+		final JDFResource lo = n.addResource("Layout", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFLayout losh = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "Sheet1");
+		final JDFLayout lofr = (JDFLayout) losh.addPartition(EnumPartIDKey.Side, EnumSide.Front.getName());
 
-		rp
-				.appendXMLComment(
-						"LayoutShift SHOULD be partitioned: at least Side and Separation will make sense",
-						null);
+		rp.appendXMLComment("LayoutShift SHOULD be partitioned: at least Side and Separation will make sense", null);
 
-		JDFResource los = n.addResource("LayoutShift",
-				EnumResourceClass.Parameter, EnumUsage.Input, null, null, null,
-				null);
-		los
-				.appendXMLComment(
-						"Note that the interpolation algorithm between positions is implementation dependent",
-						null);
+		JDFResource los = n.addResource("LayoutShift", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		los.appendXMLComment("Note that the interpolation algorithm between positions is implementation dependent", null);
 		los = los.addPartition(EnumPartIDKey.Side, "Front");
-		VString vSep = new VString("Cyan Magenta Yellow Black", " ");
+		final VString vSep = new VString("Cyan Magenta Yellow Black", " ");
 
 		for (int i = 0; i < 16; i++)
 		{
-			int x = 720 * (i % 4);
-			int y = 1000 * (i / 4);
-			int ord = i % 8;
-			JDFContentObject co = lofr.appendContentObject();
+			final int x = 720 * (i % 4);
+			final int y = 1000 * (i / 4);
+			final int ord = i % 8;
+			final JDFContentObject co = lofr.appendContentObject();
 			co.setOrd(ord);
 			co.setOrdID(i);
 			co.setCTM(new JDFMatrix(1, 0, 0, 1, x, y));
-			JDFMarkObject mo = lofr.appendMarkObject();
+			final JDFMarkObject mo = lofr.appendMarkObject();
 			mo.setOrd(ord);
 			mo.setOrdID(i + 100);
 			mo.setCTM(new JDFMatrix(1, 0, 0, 1, x + 700, y + 900));
 		}
 		for (int j = 0; j < vSep.size(); j++)
 		{
-			final KElement sepShift = los.addPartition(
-					EnumPartIDKey.Separation, vSep.stringAt(j));
+			final KElement sepShift = los.addPartition(EnumPartIDKey.Separation, vSep.stringAt(j));
 			for (int i = 0; i < 16; i += 2)
 			{
 
-				int x = 720 * (i % 4);
-				int y = 1000 * (i / 4);
-				KElement shiftObject = sepShift.appendElement("ShiftPoint");
+				final int x = 720 * (i % 4);
+				final int y = 1000 * (i / 4);
+				final KElement shiftObject = sepShift.appendElement("ShiftPoint");
 
-				shiftObject.setAttribute("Position", new JDFXYPair(x + 360,
-						y + 500).toString());
-				shiftObject.setAttribute("CTM", new JDFMatrix(1, 0, 0, 1, j + i
-						/ 4, j + i % 4).toString());
+				shiftObject.setAttribute("Position", new JDFXYPair(x + 360, y + 500).toString());
+				shiftObject.setAttribute("CTM", new JDFMatrix(1, 0, 0, 1, j + i / 4, j + i % 4).toString());
 			}
 		}
 		doc.write2File(sm_dirTestDataTemp + "WebgrowthPartition.jdf", 2, false);
@@ -116,26 +102,21 @@ public class WebTest extends JDFTestCaseBase
 		doc = new JDFDoc("JDF");
 		node = doc.getJDFRoot();
 		node.setType(EnumType.Combined);
-		VString vTypes = new VString("ImageSetting ConventionalPrinting", " ");
+		final VString vTypes = new VString("ImageSetting ConventionalPrinting", " ");
 		node.setTypes(vTypes);
 		nodeInfo = node.appendNodeInfo();
 		nodeInfo.setResStatus(EnumResStatus.Available, true);
-		JDFRunList rl = (JDFRunList) node.appendMatchingResource(
-				ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
-		JDFByteMap bm = rl.appendByteMap();
+		final JDFRunList rl = (JDFRunList) node.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		final JDFByteMap bm = rl.appendByteMap();
 		bm.appendFileSpec().setURL("File:///foo.tif");
-		JDFExposedMedia xm = (JDFExposedMedia) node.appendMatchingResource(
-				ElementName.EXPOSEDMEDIA, EnumProcessUsage.Plate, null);
+		final JDFExposedMedia xm = (JDFExposedMedia) node.appendMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.Plate, null);
 		xm.setDescriptiveName("Real Plate");
 		xm.appendMedia();
-		JDFExposedMedia xmCyl = (JDFExposedMedia) node.appendMatchingResource(
-				ElementName.EXPOSEDMEDIA, EnumProcessUsage.Cylinder, null);
+		final JDFExposedMedia xmCyl = (JDFExposedMedia) node.appendMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.Cylinder, null);
 		xmCyl.setDescriptiveName("Optional cylinder");
 		node.linkMatchingResource(xmCyl, EnumProcessUsage.AnyOutput, null);
-		assertEquals("2 for cylinder one for plate", node.getResourceLinkPool()
-				.numChildElements("ExposedMediaLink", null), 3);
-		doc.write2File(sm_dirTestDataTemp + File.separator + "webDirect.jdf",
-				2, false);
+		assertEquals("2 for cylinder one for plate", node.getResourceLinkPool().numChildElements("ExposedMediaLink", null), 3);
+		doc.write2File(sm_dirTestDataTemp + File.separator + "webDirect.jdf", 2, false);
 
 	}
 

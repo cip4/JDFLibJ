@@ -78,6 +78,7 @@ package org.cip4.jdflib.resource;
 import java.util.Iterator;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -85,13 +86,19 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 ////////////////////////////////////////////////////////////////
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG 13.11.2008
+ */
 public class JDFPartTest extends JDFTestCaseBase
 {
+	JDFPart part = null;
+
+	/**
+	 * 
+	 */
 	public void testSetPartMap()
 	{
-		JDFDoc doc = new JDFDoc("Part");
-		JDFPart part = (JDFPart) doc.getRoot();
-		JDFAttributeMap map = new JDFAttributeMap("Side", "Front");
+		final JDFAttributeMap map = new JDFAttributeMap("Side", "Front");
 		part.setPartMap(map);
 		assertEquals(part.getPartMap(), map);
 		map.put("Side", "Back");
@@ -102,19 +109,44 @@ public class JDFPartTest extends JDFTestCaseBase
 		assertEquals(part.getPartMap(), new JDFAttributeMap());
 	}
 
+	/**
+	 * @return
+	 */
+	@Override
+	protected void setUp()
+	{
+		final JDFDoc doc = new JDFDoc("Part");
+		part = (JDFPart) doc.getRoot();
+	}
+
 	// //////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testPartIDConsistency()
 	{
-		JDFDoc doc = new JDFDoc("Part");
-		JDFPart p = (JDFPart) doc.getRoot();
-		VString knownAtts = p.knownAttributes();
-		Iterator it = EnumPartIDKey.iterator();
+		final VString knownAtts = part.knownAttributes();
+		final Iterator it = EnumPartIDKey.iterator();
 		while (it.hasNext())
 		{
 			final String name = ((EnumPartIDKey) it.next()).getName();
-			assertTrue("name missing in Part: " + name, knownAtts
-					.contains(name));
+			assertTrue("name missing in Part: " + name, knownAtts.contains(name));
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testMatchesPartPartVersion()
+	{
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng"));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra"));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng"));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "eng"));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng"));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng"));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng"));
+
 	}
 	// //////////////////////////////////////////////////////////////
 }

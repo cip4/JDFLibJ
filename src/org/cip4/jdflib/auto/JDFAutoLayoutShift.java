@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -78,130 +78,130 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.process.JDFLayoutShift;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFShiftPoint;
 
-public abstract class JDFAutoLayoutShift extends JDFLayoutShift
+public abstract class JDFAutoLayoutShift extends JDFResource
 {
+	@Override
+	public boolean init()
+	{
+		final boolean bRet = super.init();
+		setResourceClass(JDFResource.EnumResourceClass.Parameter);
+		return bRet;
+	}
 
-    private static final long serialVersionUID = 1L;
+	@Override
+	public EnumResourceClass getValidClass()
+	{
+		return JDFResource.EnumResourceClass.Parameter;
+	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.SHIFTPOINT, 0x22221111);
-    }
-    
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.SHIFTPOINT, 0x22221111);
+	}
+
+	@Override
 	protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
+	/**
+	 * Constructor for JDFAutoLayoutShift
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLayoutShift(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
 
+	/**
+	 * Constructor for JDFAutoLayoutShift
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoLayoutShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
 
-    /**
-     * Constructor for JDFAutoLayoutShift
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoLayoutShift(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
+	/**
+	 * Constructor for JDFAutoLayoutShift
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoLayoutShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
 
-    /**
-     * Constructor for JDFAutoLayoutShift
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoLayoutShift(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoLayoutShift
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoLayoutShift(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-
-    @Override
+	@Override
 	public String toString()
-    {
-        return " JDFAutoLayoutShift[  --> " + super.toString() + " ]";
-    }
+	{
+		return " JDFAutoLayoutShift[  --> " + super.toString() + " ]";
+	}
 
+	/*
+	 * Element getter / setter
+	 */
 
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
+	/**
+	 * (26) getCreateShiftPoint
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFShiftPoint the element
+	 */
+	public JDFShiftPoint getCreateShiftPoint(final int iSkip)
+	{
+		return (JDFShiftPoint) getCreateElement_KElement(ElementName.SHIFTPOINT, null, iSkip);
+	}
 
-    /** (26) getCreateShiftPoint
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFShiftPoint the element
-     */
-    public JDFShiftPoint getCreateShiftPoint(int iSkip)
-    {
-        return (JDFShiftPoint)getCreateElement_KElement(ElementName.SHIFTPOINT, null, iSkip);
-    }
+	/**
+	 * (27) const get element ShiftPoint
+	 * @param iSkip number of elements to skip
+	 * @return JDFShiftPoint the element default is getShiftPoint(0)
+	 */
+	public JDFShiftPoint getShiftPoint(final int iSkip)
+	{
+		return (JDFShiftPoint) getElement(ElementName.SHIFTPOINT, null, iSkip);
+	}
 
-    /**
-     * (27) const get element ShiftPoint
-     * @param iSkip number of elements to skip
-     * @return JDFShiftPoint the element
-     * default is getShiftPoint(0)     */
-    public JDFShiftPoint getShiftPoint(int iSkip)
-    {
-        return (JDFShiftPoint) getElement(ElementName.SHIFTPOINT, null, iSkip);
-    }
+	/**
+	 * Get all ShiftPoint from the current element
+	 * 
+	 * @return Collection<JDFShiftPoint>
+	 */
+	public Collection<JDFShiftPoint> getAllShiftPoint()
+	{
+		final Vector<JDFShiftPoint> v = new Vector<JDFShiftPoint>();
 
-    /**
-     * Get all ShiftPoint from the current element
-     * 
-     * @return Collection<JDFShiftPoint>
-     */
-    public Collection<JDFShiftPoint> getAllShiftPoint()
-    {
-        Vector<JDFShiftPoint> v = new Vector<JDFShiftPoint>();
+		JDFShiftPoint kElem = (JDFShiftPoint) getFirstChildElement(ElementName.SHIFTPOINT, null);
 
-        JDFShiftPoint kElem = (JDFShiftPoint) getFirstChildElement(ElementName.SHIFTPOINT, null);
+		while (kElem != null)
+		{
+			v.add(kElem);
 
-        while (kElem != null)
-        {
-            v.add(kElem);
+			kElem = (JDFShiftPoint) kElem.getNextSiblingElement(ElementName.SHIFTPOINT, null);
+		}
 
-            kElem = (JDFShiftPoint) kElem.getNextSiblingElement(ElementName.SHIFTPOINT, null);
-        }
+		return v;
+	}
 
-        return v;
-    }
-
-    /**
-     * (30) append element ShiftPoint
-     */
-    public JDFShiftPoint appendShiftPoint() throws JDFException
-    {
-        return (JDFShiftPoint) appendElement(ElementName.SHIFTPOINT, null);
-    }
+	/**
+	 * (30) append element ShiftPoint
+	 */
+	public JDFShiftPoint appendShiftPoint() throws JDFException
+	{
+		return (JDFShiftPoint) appendElement(ElementName.SHIFTPOINT, null);
+	}
 
 }// end namespace JDF

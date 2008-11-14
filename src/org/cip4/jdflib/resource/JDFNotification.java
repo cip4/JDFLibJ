@@ -96,49 +96,49 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
+import org.cip4.jdflib.ifaces.ISignalAudit;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
  */
-public class JDFNotification extends JDFAutoNotification implements INodeIdentifiable
+public class JDFNotification extends JDFAutoNotification implements INodeIdentifiable, ISignalAudit
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFNotification
-	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNotification(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFNotification(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNotification
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNotification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFNotification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFNotification
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNotification(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNotification(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -148,17 +148,17 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumNotificationDetails(String name)
+		private EnumNotificationDetails(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumNotificationDetails getEnum(String enumName)
+		public static EnumNotificationDetails getEnum(final String enumName)
 		{
 			return (EnumNotificationDetails) getEnum(EnumNotificationDetails.class, enumName);
 		}
 
-		public static EnumNotificationDetails getEnum(int enumValue)
+		public static EnumNotificationDetails getEnum(final int enumValue)
 		{
 			return (EnumNotificationDetails) getEnum(EnumNotificationDetails.class, enumValue);
 		}
@@ -189,7 +189,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * toString()
-	 * 
 	 * @return String
 	 */
 	@Override
@@ -218,7 +217,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get part map vector
-	 * 
 	 * @return VJDFAttributeMap: vector of mAttribute, one for each part
 	 */
 	@Override
@@ -229,52 +227,47 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * set all parts to those defined in vParts
-	 * 
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
 
 	/**
 	 * set all parts to those defined by mPart
-	 * 
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
 
 	/**
 	 * remove the part defined by mPart
-	 * 
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
 
 	/**
 	 * check whether the part defined in mPart is included
-	 * 
 	 * @param mPart attribute map for the part to remove
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}
 
 	/**
 	 * get element <code>Barcode</code>, create if it doesn't exist
-	 * 
 	 * @return JDFBarcode: the element
 	 */
 	public JDFBarcode getCreateBarcode()
@@ -284,7 +277,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>Barcode</code>
-	 * 
 	 * @return JDFBarcode: the element
 	 */
 	public JDFBarcode appendBarcode()
@@ -294,7 +286,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Barcode</code>
-	 * 
 	 * @return JDFBarcode: the element
 	 */
 	public JDFBarcode getBarcode()
@@ -304,7 +295,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>FCNKey</code>, create if it doesn't exist
-	 * 
 	 * @return JDFFCNKey: the element
 	 */
 	public JDFFCNKey getCreateFCNKey()
@@ -314,7 +304,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>FCNKey</code>
-	 * 
 	 * @return JDFFCNKey: the element
 	 */
 	public JDFFCNKey appendFCNKey()
@@ -324,7 +313,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>FCNKey</code>
-	 * 
 	 * @return JDFFCNKey: the element
 	 */
 	public JDFFCNKey getFCNKey()
@@ -334,7 +322,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>SystemTimeSet</code>, create if it doesn't exist
-	 * 
 	 * @return JDFSystemTimeSet: the element
 	 */
 	public JDFSystemTimeSet getCreateSystemTimeSet()
@@ -344,7 +331,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>SystemTimeSet</code>
-	 * 
 	 * @return JDFSystemTimeSet: the element
 	 */
 	public JDFSystemTimeSet appendSystemTimeSet()
@@ -354,7 +340,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>SystemTimeSet</code>
-	 * 
 	 * @return JDFSystemTimeSet: the element
 	 */
 	public JDFSystemTimeSet getSystemTimeSet()
@@ -364,7 +349,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>CreateCounterReset</code>, create if it doesn't exist
-	 * 
 	 * @return JDFCreateCounterReset: the element
 	 */
 	public JDFCounterReset getCreateCounterReset()
@@ -374,7 +358,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>CreateCounterReset</code>
-	 * 
 	 * @return JDFCreateCounterReset: the element
 	 */
 	public JDFCounterReset appendCounterReset()
@@ -384,7 +367,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>CreateCounterReset</code>
-	 * 
 	 * @return JDFCreateCounterReset: the element
 	 */
 	public JDFCounterReset getCounterReset()
@@ -393,34 +375,33 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	}
 
 	/**
-	 * get comment text if available, 
-	 * 
+	 * get comment text if available,
 	 * @return String the comment text, else null
 	 */
 	public String getCommentText()
 	{
-		JDFComment c = getComment(0);
+		final JDFComment c = getComment(0);
 		if (c == null)
+		{
 			return null;
+		}
 		return c.getText();
 	}
 
 	/**
 	 * set comment text , also creates the comment if not there
 	 * @param text the comment text to set
-	 * 
-	 * @return {@link JDFComment} the comment 
+	 * @return {@link JDFComment} the comment
 	 */
-	public JDFComment setCommentText(String text)
+	public JDFComment setCommentText(final String text)
 	{
-		JDFComment c = getCreateComment(0);
+		final JDFComment c = getCreateComment(0);
 		c.setText(text);
 		return c;
 	}
 
 	/**
 	 * get element <code>Error</code>, create if it doesn't exist
-	 * 
 	 * @return JDFError: the element
 	 */
 	public JDFError getCreateError()
@@ -430,7 +411,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>Error</code>
-	 * 
 	 * @return JDFError: the element
 	 */
 	public JDFError appendError()
@@ -440,7 +420,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Error</code>
-	 * 
 	 * @return JDFError: the element
 	 */
 	public JDFError getError()
@@ -450,7 +429,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Event</code>, create if it doesn't exist
-	 * 
 	 * @return JDFEvent: the element
 	 */
 	public JDFEvent getCreateEvent()
@@ -460,7 +438,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>Event</code>
-	 * 
 	 * @return JDFEvent: the element
 	 */
 	public JDFEvent appendEvent()
@@ -469,25 +446,27 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	}
 
 	/**
-	 * set this to an event, append the Event element and optionally the comment<br/> overwrites existing values
-	 * 
+	 * set this to an event, append the Event element and optionally the comment<br/>
+	 * overwrites existing values
 	 * @param eventID Event/@EventID to set
 	 * @param eventValue Event/@EventValue to set
 	 * @param comment the comment text, if null no comment is set
 	 * @return the newly created event
 	 */
-	public JDFEvent setEvent(String eventID, String eventValue, String comment)
+	public JDFEvent setEvent(final String eventID, final String eventValue, final String comment)
 	{
-		JDFEvent event = getCreateEvent();
+		final JDFEvent event = getCreateEvent();
 		if (event == null)
+		{
 			return null;
+		}
 		event.setEventID(eventID);
 		event.setEventValue(eventValue);
 		setCommentText(comment);
 		return event;
 	}
 
-	public void setNode(JDFNode n)
+	public void setNode(final JDFNode n)
 	{
 		setNode(new NodeIdentifier(n));
 	}
@@ -495,12 +474,14 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	/**
 	 * @param identifier
 	 */
-	public void setNode(NodeIdentifier identifier)
+	public void setNode(final NodeIdentifier identifier)
 	{
 		NodeIdentifier identifierLocal = identifier;
 
 		if (identifierLocal == null)
+		{
 			identifierLocal = new NodeIdentifier((JDFNode) null);
+		}
 
 		setJobID(identifierLocal.getJobID());
 		setJobPartID(identifierLocal.getJobPartID());
@@ -509,47 +490,52 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append one of the predefined notification details
-	 * 
 	 * @param details
 	 * @return
 	 */
-	public JDFElement appendNotificationDetails(EnumNotificationDetails details)
+	public JDFElement appendNotificationDetails(final EnumNotificationDetails details)
 	{
-		EnumNotificationDetails det = getNotificationDetailsType();
+		final EnumNotificationDetails det = getNotificationDetailsType();
 		if (det != null && !det.equals(details))
+		{
 			return null;
+		}
 		setType(details.getName());
 		return (JDFElement) appendElementN(details.getName(), 1, null);
 	}
 
 	/**
 	 * append one of the predefined notification details
-	 * 
 	 * @param details
 	 * @return
 	 */
-	public JDFElement getCreateNotificationDetails(EnumNotificationDetails details)
+	public JDFElement getCreateNotificationDetails(final EnumNotificationDetails details)
 	{
-		JDFElement e = getNotificationDetails();
+		final JDFElement e = getNotificationDetails();
 		if (e == null)
+		{
 			return appendNotificationDetails(details);
+		}
 		if (!details.getName().equals(e.getLocalName()))
+		{
 			return null;
+		}
 		setType(details.getName());
 		return e;
 	}
 
 	/**
 	 * get the predefined notification details
-	 * 
 	 * @param details
 	 * @return
 	 */
 	public JDFElement getNotificationDetails()
 	{
-		EnumNotificationDetails det = getNotificationDetailsType();
+		final EnumNotificationDetails det = getNotificationDetailsType();
 		if (det == null)
+		{
 			return null;
+		}
 		return (JDFElement) getElement(det.getName(), null, 0);
 	}
 
@@ -558,15 +544,16 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	 */
 	public EnumNotificationDetails getNotificationDetailsType()
 	{
-		String s = getType();
+		final String s = getType();
 		if (isWildCard(s))
+		{
 			return null;
+		}
 		return EnumNotificationDetails.getEnum(s);
 	}
 
 	/**
 	 * get element <code>Event</code>
-	 * 
 	 * @return JDFEvent: the element
 	 */
 	public JDFEvent getEvent()
@@ -576,7 +563,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Milestone</code>, create if it doesn't exist
-	 * 
 	 * @return JDFMilestone: the element
 	 */
 	public JDFMilestone getCreateMilestone()
@@ -586,7 +572,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * append element <code>Milestone</code>
-	 * 
 	 * @return JDFMilestone: the element
 	 */
 	public JDFMilestone appendMilestone()
@@ -596,7 +581,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * get element <code>Milestone</code>
-	 * 
 	 * @return JDFMilestone: the element
 	 */
 	public JDFMilestone getMilestone()
@@ -606,7 +590,6 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 
 	/**
 	 * gets the NodeIdetifier that matches this
-	 * 
 	 * @return the matching node identifier
 	 */
 	public NodeIdentifier getIdentifier()
@@ -621,11 +604,24 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 	public void setIdentifier(NodeIdentifier ni)
 	{
 		if (ni == null)
+		{
 			ni = new NodeIdentifier();
+		}
 
 		setJobID(ni.getJobID());
 		setJobPartID(ni.getJobPartID());
 		setPartMapVector(ni.getPartMapVector());
+	}
+
+	/**
+	 * creates a JDFJMF that corresponds to this
+	 * @see org.cip4.jdflib.ifaces.ISignalAudit#toSignalJMF()
+	 */
+	public JDFJMF toSignalJMF()
+	{
+		final JDFJMF newJMF = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Notification);
+		newJMF.getSignal(0).copyElement(this, null);
+		return newJMF;
 	}
 
 } // class JDFNotification

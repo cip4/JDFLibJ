@@ -72,10 +72,10 @@
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoShiftPoint;
+import org.cip4.jdflib.auto.JDFAutoLayoutShift;
 import org.w3c.dom.DOMException;
 
-public class JDFLayoutShift extends JDFAutoShiftPoint
+public class JDFLayoutShift extends JDFAutoLayoutShift
 {
 	private static final long serialVersionUID = 1L;
 
@@ -86,8 +86,7 @@ public class JDFLayoutShift extends JDFAutoShiftPoint
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLayoutShift(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFLayoutShift(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -100,8 +99,7 @@ public class JDFLayoutShift extends JDFAutoShiftPoint
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFLayoutShift(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFLayoutShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -115,9 +113,7 @@ public class JDFLayoutShift extends JDFAutoShiftPoint
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFLayoutShift(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFLayoutShift(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

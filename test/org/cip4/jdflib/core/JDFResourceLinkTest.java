@@ -96,19 +96,18 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 /**
  * @author MuchaD
  * 
- *         This implements the first fixture with unit tests for class
- *         JDFElement.
+ * This implements the first fixture with unit tests for class JDFElement.
  */
 public class JDFResourceLinkTest extends JDFTestCaseBase
 {
 	public void testAmount()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType("ConventionalPrinting", true);
-		JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
-		JDFResourceLink rl = n.getLink(m, null);
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = n.getLink(m, null);
 
 		m.setAmount(42);
 		assertEquals("m amount!=42", m.getAttribute(AttributeName.AMOUNT), "42");
@@ -125,14 +124,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testAmountCondition()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType("ConventionalPrinting", true);
-		JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
-		JDFResourceLink rl = n.getLink(m, null);
-		JDFAttributeMap map = new JDFAttributeMap("SheetName", "s1");
-		JDFAttributeMap mapC = new JDFAttributeMap(map);
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = n.getLink(m, null);
+		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "s1");
+		final JDFAttributeMap mapC = new JDFAttributeMap(map);
 		mapC.put("Condition", "Good");
 
 		m.setAmount(42);
@@ -160,7 +159,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertEquals("no good in rl", rl.getMinAmount(map), 44., 0.1);
 		assertEquals("no good in rl", rl.getMaxAmount(map), 44., 0.1);
 
-		JDFAttributeMap mapW = new JDFAttributeMap(map);
+		final JDFAttributeMap mapW = new JDFAttributeMap(map);
 		mapW.put("Condition", "Waste");
 		rl.setAmount(4, mapW);
 		assertEquals("sum g/w in rl", rl.getAmount(map), 48., 0.1);
@@ -170,15 +169,15 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testAppendAmountPool()
 	{
-		JDFDoc d = new JDFDoc("MediaLink");
-		JDFResourceLink rl = (JDFResourceLink) d.getRoot();
+		final JDFDoc d = new JDFDoc("MediaLink");
+		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
 		assertNotNull(rl.appendAmountPool());
 		try
 		{
 			rl.appendAmountPool();
 			fail("AmountPool #2");
 		}
-		catch (JDFException x)
+		catch (final JDFException x)
 		{
 			// nop
 		}
@@ -187,12 +186,12 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testDraftOK() throws Exception
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType("ProcessGroup", true);
-		JDFCustomerInfo ci = (JDFCustomerInfo) n.addResource(ElementName.CUSTOMERINFO, null, EnumUsage.Input, null, null, null, null);
-		JDFComponent co = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+		final JDFCustomerInfo ci = (JDFCustomerInfo) n.addResource(ElementName.CUSTOMERINFO, null, EnumUsage.Input, null, null, null, null);
+		final JDFComponent co = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
 		JDFResourceLink rl = n.getLink(ci, null);
 		assertEquals("available", rl.getMinStatus(), JDFResource.EnumResStatus.Available);
 
@@ -228,13 +227,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testGetMinAmountPoolAttribute()
 	{
-		JDFDoc d = new JDFDoc("TestLink");
-		JDFResourceLink rl = (JDFResourceLink) d.getRoot();
+		final JDFDoc d = new JDFDoc("TestLink");
+		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
 		rl.setActualAmount(12, new JDFAttributeMap("SignatureName", "1"));
 		rl.setActualAmount(14, new JDFAttributeMap("SignatureName", "2"));
 		assertEquals(rl.getMinAmountPoolAttribute("ActualAmount", null, null, 42), 12., 0.);
 
-		JDFAttributeMap map = new JDFAttributeMap("SignatureName", "3");
+		final JDFAttributeMap map = new JDFAttributeMap("SignatureName", "3");
 		map.put("SheetName", "a");
 		rl.setActualAmount(24, map);
 		map.put("SheetName", "b");
@@ -244,13 +243,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testExpandAmountPool()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType("ConventionalPrinting", true);
-		JDFComponent comp = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+		final JDFComponent comp = (JDFComponent) n.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
 		comp.addPartitions(EnumPartIDKey.SheetName, new VString("S1 S2 S3", null));
-		JDFResourceLink rl = n.getLink(comp, null);
+		final JDFResourceLink rl = n.getLink(comp, null);
 		rl.setAmount(42, null);
 		rl.setPipeProtocol("JDF");
 		assertEquals(rl.getAmount(null), 42., 0.1);
@@ -265,11 +264,11 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testGenerateCPI() throws Exception
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
-		JDFResource r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		JDFResourceLink rl = n.getLink(r, null);
+		final JDFResource r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, null);
 		assertNull(rl.getCombinedProcessIndex());
 		n.setCombined(new VString("ImageSetting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
@@ -281,8 +280,8 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testGetAmountPoolDouble()
 	{
-		JDFDoc d = new JDFDoc("TestLink");
-		JDFResourceLink rl = (JDFResourceLink) d.getRoot();
+		final JDFDoc d = new JDFDoc("TestLink");
+		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
 		rl.setActualAmount(12, new JDFAttributeMap("SignatureName", "1"));
 		rl.setActualAmount(14, new JDFAttributeMap("SignatureName", "2"));
 		assertEquals(rl.getActualAmount(null), 26., 0.1);
@@ -298,15 +297,15 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testGetAmountPoolSumDouble()
 	{
-		JDFNode d = new JDFDoc("JDF").getJDFRoot();
-		JDFResource m = d.addResource("Media", EnumUsage.Input);
+		final JDFNode d = new JDFDoc("JDF").getJDFRoot();
+		final JDFResource m = d.addResource("Media", EnumUsage.Input);
 		m.addPartition(EnumPartIDKey.SignatureName, "1");
-		JDFResourceLink rl = d.getLink(m, EnumUsage.Input);
-		JDFAttributeMap map = new JDFAttributeMap("SignatureName", "1");
+		final JDFResourceLink rl = d.getLink(m, EnumUsage.Input);
+		final JDFAttributeMap map = new JDFAttributeMap("SignatureName", "1");
 		map.put("Condition", "Good");
 
 		rl.setActualAmount(12, map);
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(new JDFAttributeMap("SignatureName", "1"));
 		JDFAttributeMap sig1 = new JDFAttributeMap("SignatureName", "2");
 		vMap.add(sig1);
@@ -327,9 +326,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testGetAmountPoolVector()
 	{
-		JDFDoc d = new JDFDoc("TestLink");
-		JDFResourceLink rl = (JDFResourceLink) d.getRoot();
-		VJDFAttributeMap vM = new VJDFAttributeMap();
+		final JDFDoc d = new JDFDoc("TestLink");
+		final JDFResourceLink rl = (JDFResourceLink) d.getRoot();
+		final VJDFAttributeMap vM = new VJDFAttributeMap();
 		vM.add(new JDFAttributeMap("SignatureName", "1"));
 		vM.add(new JDFAttributeMap("SignatureName", "2"));
 		rl.setAmountPoolAttribute("Amount", "42", null, vM);
@@ -341,28 +340,27 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * tests whether the convoluted inheritence of partAmount and ResourceLink
-	 * function correctly
+	 * tests whether the convoluted inheritence of partAmount and ResourceLink function correctly
 	 * 
 	 * @throws Exception
 	 */
 	public void testPartAmount() throws Exception
 	{
 
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType("ConventionalPrinting", true);
-		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null, EnumUsage.Input, null, null, null, null);
-		JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(JDFResource.EnumPartIDKey.SheetName, "Sheet1");
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null, EnumUsage.Input, null, null, null, null);
+		final JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(JDFResource.EnumPartIDKey.SheetName, "Sheet1");
 		xm.addPartition(JDFResource.EnumPartIDKey.SheetName, "Sheet2");
 		xm1.setAmount(1.);
 		xm.setAmount(2.);
-		JDFAttributeMap map1 = new JDFAttributeMap(JDFResource.EnumPartIDKey.SheetName.getName(), "Sheet1");
-		JDFAttributeMap map2 = new JDFAttributeMap(JDFResource.EnumPartIDKey.SheetName.getName(), "Sheet2");
+		final JDFAttributeMap map1 = new JDFAttributeMap(JDFResource.EnumPartIDKey.SheetName.getName(), "Sheet1");
+		final JDFAttributeMap map2 = new JDFAttributeMap(JDFResource.EnumPartIDKey.SheetName.getName(), "Sheet2");
 
-		JDFResourceLink rl = n.getLink(xm, null);
-		JDFPartAmount pa = rl.getCreateAmountPool().getCreatePartAmount(new JDFAttributeMap("SheetName", "Sheet1"));
+		final JDFResourceLink rl = n.getLink(xm, null);
+		final JDFPartAmount pa = rl.getCreateAmountPool().getCreatePartAmount(new JDFAttributeMap("SheetName", "Sheet1"));
 		pa.setDraftOK(true);
 		assertTrue("draft", pa.getMinStatus() == JDFResource.EnumResStatus.Draft);
 		assertTrue("has no draft", !pa.hasAttribute(AttributeName.DRAFTOK));
@@ -386,22 +384,21 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * tests whether the convoluted inheritence of partAmount and ResourceLink
-	 * function correctly
+	 * tests whether the convoluted inheritence of partAmount and ResourceLink function correctly
 	 * 
 	 * @throws Exception
 	 */
 	public void testPartAmountVirtual()
 	{
 
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType("ConventionalPrinting", true);
-		JDFComponent comp = (JDFComponent) n.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyOutput, null);
+		final JDFComponent comp = (JDFComponent) n.appendMatchingResource(ElementName.COMPONENT, EnumProcessUsage.AnyOutput, null);
 
-		JDFResourceLink cpLink = n.getLink(comp, null);
-		JDFAttributeMap mapBad = new JDFAttributeMap("Condition", "Waste");
+		final JDFResourceLink cpLink = n.getLink(comp, null);
+		final JDFAttributeMap mapBad = new JDFAttributeMap("Condition", "Waste");
 		cpLink.setActualAmount(42, mapBad);
 		assertEquals(cpLink.getActualAmount(mapBad), 42., 0);
 		assertTrue("allow partamounts to non-existing partitions", n.isValid(EnumValidationLevel.Incomplete));
@@ -414,7 +411,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertTrue("allow partamounts to non-existing partitions", n.isValid(EnumValidationLevel.Incomplete));
 		mapBad.put(EnumPartIDKey.SheetName.getName(), "Sheet2");
 		assertEquals(cpLink.getActualAmount(mapBad), 0., 0);
-		JDFAttributeMap m2 = new JDFAttributeMap("Condition", "Waste");
+		final JDFAttributeMap m2 = new JDFAttributeMap("Condition", "Waste");
 		assertEquals(cpLink.getActualAmount(m2), 42., 0);
 		m2.put("SheetName", "Sheet1");
 		assertEquals(cpLink.getActualAmount(m2), 42., 0);
@@ -425,9 +422,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testSetAmountPoolAttribute()
 	{
-		JDFDoc d = new JDFDoc("ResourceLinkPool");
-		JDFResourceLinkPool rlp = (JDFResourceLinkPool) d.getRoot();
-		JDFResourceLink foo = (JDFResourceLink) rlp.appendElement("FooLink");
+		final JDFDoc d = new JDFDoc("ResourceLinkPool");
+		final JDFResourceLinkPool rlp = (JDFResourceLinkPool) d.getRoot();
+		final JDFResourceLink foo = (JDFResourceLink) rlp.appendElement("FooLink");
 		VJDFAttributeMap vPart = new VJDFAttributeMap();
 		vPart.add(new JDFAttributeMap());
 		foo.setAmountPoolAttribute("blub", "123", null, vPart);
@@ -448,18 +445,56 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testGetLinkRootJMF() throws Exception
 	{
-		JDFDoc d = new JDFDoc("JMF");
-		JDFJMF jmf = d.getJMFRoot();
+		final JDFDoc d = new JDFDoc("JMF");
+		final JDFJMF jmf = d.getJMFRoot();
 		jmf.setSenderID("Elvis");
-		JDFCommand c = jmf.appendCommand();
+		final JDFCommand c = jmf.appendCommand();
 		c.setType("PipePull");
-		JDFPipeParams pp = c.appendPipeParams();
+		final JDFPipeParams pp = c.appendPipeParams();
 		pp.setAttribute(AttributeName.PIPEID, "foo", null);
-		JDFRunList ruli = (JDFRunList) pp.appendResource(ElementName.RUNLIST);
-		JDFResourceLink rl = pp.appendResourceLink("RunListLink", true);
+		final JDFRunList ruli = (JDFRunList) pp.appendResource(ElementName.RUNLIST);
+		final JDFResourceLink rl = pp.appendResourceLink("RunListLink", true);
 		rl.setrRef(ruli.getID());
 		assertTrue("valid param", jmf.isValid(EnumValidationLevel.Complete));
 		assertEquals(ruli, rl.getTarget());
+	}
+
+	/**
+	 * Method testGetTarget
+	 * 
+	 * @throws Exception any exception
+	 */
+	public void testGetLeafVector()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", null);
+		final JDFResourceLink rl = n.ensureLink(xm, EnumUsage.Input, null);
+		assertEquals(rl.getLeafVector().get(0), xm);
+		assertEquals(rl.getLeafVector().size(), 1);
+
+		final JDFExposedMedia[] vxm = new JDFExposedMedia[5];
+		for (int i = 0; i < 5; i++)
+		{
+			vxm[i] = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.SheetName, "S" + i);
+		}
+		assertEquals(rl.getLeafVector().size(), 5);
+		assertEquals(rl.getLeafVector().get(3), vxm[3]);
+		rl.appendPart().setPartMap(new JDFAttributeMap("SheetName", "S1"));
+		assertEquals(rl.getLeafVector().size(), 1);
+		assertEquals(rl.getLeafVector().get(0), vxm[1]);
+
+		rl.appendPart().setPartMap(new JDFAttributeMap("SheetName", "S3"));
+		assertEquals(rl.getLeafVector().size(), 2);
+		assertEquals(rl.getLeafVector().get(1), vxm[3]);
+
+		rl.removeChildren("Part", null, null);
+		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S4");
+		map.put("Separation", "green");
+		rl.appendPart().setPartMap(map);
+
+		assertNull(rl.getLeafVector());
+
 	}
 
 	/**
@@ -469,13 +504,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testGetTargetVector()
 	{
-		JDFDoc d = JDFTestCaseBase.creatXMDoc();
-		JDFNode n = d.getJDFRoot();
-		JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SheetName", "S1");
-		JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
+		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 		rl.setPartMap(mPart);
-		VElement v = rl.getTargetVector(0);
+		final VElement v = rl.getTargetVector(0);
 		assertEquals("The target vector is the node with two leaves", v.size(), 1);
 
 	}
@@ -487,14 +522,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testGetTargetVectorSparse()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) n.getCreateResource("ExposedMedia", EnumUsage.Input, 0);
-		JDFExposedMedia xmb = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.Separation, "Black");
-		JDFExposedMedia xmbe = (JDFExposedMedia) xmb.addPartition(EnumPartIDKey.PartVersion, "EN");
-		JDFExposedMedia xmbd = (JDFExposedMedia) xmb.addPartition(EnumPartIDKey.PartVersion, "DE");
-		JDFExposedMedia xmc = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.Separation, "Cyan");
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getCreateResource("ExposedMedia", EnumUsage.Input, 0);
+		final JDFExposedMedia xmb = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.Separation, "Black");
+		final JDFExposedMedia xmbe = (JDFExposedMedia) xmb.addPartition(EnumPartIDKey.PartVersion, "EN");
+		final JDFExposedMedia xmbd = (JDFExposedMedia) xmb.addPartition(EnumPartIDKey.PartVersion, "DE");
+		final JDFExposedMedia xmc = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.Separation, "Cyan");
 		xm.setPartUsage(EnumPartUsage.Sparse);
-		JDFResourceLink rl = n.getLink(xm, null);
+		final JDFResourceLink rl = n.getLink(xm, null);
 		rl.setPartMap(new JDFAttributeMap("PartVersion", "DE"));
 		VElement v = rl.getTargetVector(-1);
 		assertEquals("DE/Black + Cyan", v.size(), 2);
@@ -524,9 +559,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testGetTargetVectorNullPart()
 	{
-		JDFDoc d = JDFTestCaseBase.creatXMDoc();
-		JDFNode n = d.getJDFRoot();
-		JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 		rl.appendPart();
 		VElement v = rl.getTargetVector(0);
 		assertEquals("The target vector is the node with two leaves", v.size(), 1);
@@ -539,7 +574,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 		linkRoot.setPartUsage(EnumPartUsage.Explicit);
 
-		JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SheetName", "S1");
 		rl.setPartMap(mPart);
 		rl.appendPart();
@@ -561,22 +596,22 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testGetTarget() throws Exception
 	{
-		JDFDoc d = JDFTestCaseBase.creatXMDoc();
-		JDFNode n = d.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
-		JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SignatureName", "S12234");
 		mPart.put("SheetName", "S12");
 		mPart.put("Side", "Front");
 
-		JDFAttributeMap mPart2 = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFAttributeMap mPart2 = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart2.put("SignatureName", "Sig1");
 		mPart2.put("SheetName", "S1");
 		mPart2.put("Side", "Front");
-		JDFExposedMedia xmPart = (JDFExposedMedia) xm.getPartition(mPart2, null);
+		final JDFExposedMedia xmPart = (JDFExposedMedia) xm.getPartition(mPart2, null);
 		assertNotNull(xmPart);
 
-		JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
+		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
 
 		rl.setPartMap(mPart);
 		assertNull(rl.getTarget());
@@ -632,13 +667,13 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testGetCombinedProcessTypes() throws Exception
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("Combined", true);
 		n.setTypes(new VString("a b c d e f e f", " "));
-		JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
-		JDFResourceLink rl = n.getLink(r, null);
-		VString nodeTypes = n.getTypes();
+		final JDFResource r = n.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, null);
+		final VString nodeTypes = n.getTypes();
 		nodeTypes.unify();
 		assertEquals(rl.getCombinedProcessTypes(), nodeTypes);
 		rl.setCombinedProcessType("c");
@@ -659,42 +694,42 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	public void testGetLinkRoot()
 	{
 
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ProcessGroup", true);
-		JDFNode n2 = n.addJDFNode("ConventionalPrinting");
-		JDFCustomerInfo ci = (JDFCustomerInfo) n.addResource(ElementName.CUSTOMERINFO, null, EnumUsage.Input, null, null, null, null);
-		JDFResourceLink ciLink = n.getLink(ci, null);
+		final JDFNode n2 = n.addJDFNode("ConventionalPrinting");
+		final JDFCustomerInfo ci = (JDFCustomerInfo) n.addResource(ElementName.CUSTOMERINFO, null, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink ciLink = n.getLink(ci, null);
 		assertTrue("getLinkRoot in same node", ci == ciLink.getLinkRoot());
 		assertTrue("getLinkTarget in same node", ci == ciLink.getTarget());
 		assertTrue("getTarget in same node", ci == ciLink.getTarget());
 
-		JDFResourceLink ciLink2 = n2.linkResource(ci, EnumUsage.Input, null);
+		final JDFResourceLink ciLink2 = n2.linkResource(ci, EnumUsage.Input, null);
 		assertTrue("getLinkRoot in child node", ci == ciLink2.getLinkRoot());
 		assertTrue("getLinkTarget in child node", ci == ciLink2.getTarget());
 		assertTrue("getTarget in child node", ci == ciLink2.getTarget());
 
-		JDFNodeInfo ni = (JDFNodeInfo) n2.addResource(ElementName.NODEINFO, null, null, null, null, null, null);
-		JDFResourceLink niLink = n2.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
+		final JDFNodeInfo ni = (JDFNodeInfo) n2.addResource(ElementName.NODEINFO, null, null, null, null, null, null);
+		final JDFResourceLink niLink = n2.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
 		assertTrue("getLinkRoot both in child node", ni == niLink.getLinkRoot());
 		assertTrue("getLinkTarget both in child node", ni == niLink.getTarget());
 		assertTrue("getTarget both in child node", ni == niLink.getTarget());
 
-		JDFResourceLink niLink2 = (JDFResourceLink) n.getCreateResourceLinkPool().appendElement("NodeInfoLink", null);
+		final JDFResourceLink niLink2 = (JDFResourceLink) n.getCreateResourceLinkPool().appendElement("NodeInfoLink", null);
 		niLink2.setrRef(ni.getID());
 		assertTrue("getLinkRoot illegal in child node", niLink2.getLinkRoot() == null);
 		assertTrue("getLinkTarget illegal in child node", niLink2.getTarget() == null);
 		assertTrue("getTarget illegal in child node", niLink2.getTarget() == null);
 
-		JDFDoc d22 = new JDFDoc(ElementName.JDF);
-		JDFNode n22 = d22.getJDFRoot();
-		JDFResourceLinkPool rlp = n22.getCreateResourceLinkPool();
+		final JDFDoc d22 = new JDFDoc(ElementName.JDF);
+		final JDFNode n22 = d22.getJDFRoot();
+		final JDFResourceLinkPool rlp = n22.getCreateResourceLinkPool();
 		boolean bCaught = false;
 		try
 		{
 			rlp.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
 		}
-		catch (JDFException e)
+		catch (final JDFException e)
 		{
 			bCaught = true;
 		}
@@ -705,9 +740,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testLinkRootDeadLoop()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
-		JDFNode node = jdfDoc.getJDFRoot();
-		JDFResource r = node.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFDoc jdfDoc = new JDFDoc("JDF");
+		final JDFNode node = jdfDoc.getJDFRoot();
+		final JDFResource r = node.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
 		node.getResourcePool().insertBefore(ElementName.ADHESIVEBINDINGPARAMS + "Ref", r, null).setAttribute("rRef", "badLink");
 		final JDFResourceLink link = node.getLink(r, null);
 		assertNotNull(link.getLinkRoot()); // Endlos-Schleife !!!!
@@ -715,9 +750,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testMatchesString()
 	{
-		JDFDoc jdfDoc = new JDFDoc("JDF");
-		JDFNode node = jdfDoc.getJDFRoot();
-		JDFResource r = node.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
+		final JDFDoc jdfDoc = new JDFDoc("JDF");
+		final JDFNode node = jdfDoc.getJDFRoot();
+		final JDFResource r = node.addResource(ElementName.ADHESIVEBINDINGPARAMS, EnumUsage.Input);
 		final JDFResourceLink link = node.getLink(r, null);
 		assertTrue(link.matchesString(ElementName.ADHESIVEBINDINGPARAMS));
 		assertTrue(link.matchesString("Input"));
@@ -739,18 +774,18 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testSetPartMap()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType("ConventionalPrinting", true);
-		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null, EnumUsage.Input, null, null, null, null);
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null, EnumUsage.Input, null, null, null, null);
 		xm.addPartition(JDFResource.EnumPartIDKey.SheetName, "Sheet1");
 		xm.addPartition(JDFResource.EnumPartIDKey.SheetName, "Sheet2");
-		JDFAttributeMap map1 = new JDFAttributeMap(JDFResource.EnumPartIDKey.SheetName.getName(), "Sheet1");
-		JDFAttributeMap map2 = new JDFAttributeMap(JDFResource.EnumPartIDKey.SheetName.getName(), "Sheet2");
-		JDFResourceLink rl = n.getLink(xm, null);
+		final JDFAttributeMap map1 = new JDFAttributeMap(JDFResource.EnumPartIDKey.SheetName.getName(), "Sheet1");
+		final JDFAttributeMap map2 = new JDFAttributeMap(JDFResource.EnumPartIDKey.SheetName.getName(), "Sheet2");
+		final JDFResourceLink rl = n.getLink(xm, null);
 
-		VJDFAttributeMap v = new VJDFAttributeMap();
+		final VJDFAttributeMap v = new VJDFAttributeMap();
 		v.add(map1);
 		v.add(map2);
 		rl.setPartMapVector(v);
@@ -758,24 +793,24 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	public void testSetTarget() throws Exception
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
 		n.setType("ConventionalPrinting", true);
-		JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null, EnumUsage.Input, null, null, null, null);
-		JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(JDFResource.EnumPartIDKey.SignatureName, "Sig1");
-		VJDFAttributeMap vSig1 = new VJDFAttributeMap();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, null, EnumUsage.Input, null, null, null, null);
+		final JDFExposedMedia xm1 = (JDFExposedMedia) xm.addPartition(JDFResource.EnumPartIDKey.SignatureName, "Sig1");
+		final VJDFAttributeMap vSig1 = new VJDFAttributeMap();
 		vSig1.add(xm1.getPartMap());
 		// want a lower leaf partition
 		xm1.addPartition(JDFResource.EnumPartIDKey.SheetName, "Sheet1");
-		JDFMedia m = xm.appendMedia();
-		JDFResourceLink rl = n.linkResource(xm, EnumUsage.Input, null);
+		final JDFMedia m = xm.appendMedia();
+		final JDFResourceLink rl = n.linkResource(xm, EnumUsage.Input, null);
 		try
 		{
 			rl.setTarget(m);
 			fail("no link to subelem");
 		}
-		catch (JDFException x)
+		catch (final JDFException x)
 		{
 			// nop
 		}
@@ -792,10 +827,10 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testGetUsage()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
-		JDFResourceLinkPool rlp = n.appendResourceLinkPool();
-		JDFResourceLink rl = (JDFResourceLink) rlp.appendElement("FooLink");
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final JDFResourceLinkPool rlp = n.appendResourceLinkPool();
+		final JDFResourceLink rl = (JDFResourceLink) rlp.appendElement("FooLink");
 		assertNull(rl.getUsage());
 	}
 
@@ -806,11 +841,11 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testHasResourcePartMap()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
-		JDFResource r = n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final JDFResource r = n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
 
-		JDFResourceLink rl = n.getLink(r, null);
+		final JDFResourceLink rl = n.getLink(r, null);
 		// the root always exists
 		assertTrue(rl.hasResourcePartMap(null, false));
 		assertTrue(rl.hasResourcePartMap(null, true));
@@ -826,7 +861,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 		r.setPartUsage(EnumPartUsage.Explicit);
 
-		JDFResource rSig = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		final JDFResource rSig = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
 
 		// the root always exists
 		assertTrue(rl.hasResourcePartMap(null, false));
@@ -872,10 +907,10 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testIsExecutable()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
-		JDFResource r = n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
-		JDFResourceLink rl = n.getLink(r, null);
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final JDFResource r = n.addResource(ElementName.SCREENINGINTENT, null, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = n.getLink(r, null);
 
 		r.setResStatus(EnumResStatus.Available, true);
 		assertTrue(rl.isExecutable(null, true));
@@ -896,8 +931,8 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.setDraftOK(true);
 		assertTrue(rl.isExecutable(null, true));
 
-		JDFResource rSig = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
-		JDFResource rSheet = rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
+		final JDFResource rSig = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		final JDFResource rSheet = rSig.addPartition(EnumPartIDKey.SheetName, "sh1");
 		rSheet.setResStatus(EnumResStatus.Available, false);
 		r.setResStatus(EnumResStatus.Unavailable, true);
 		rSheet.setResStatus(EnumResStatus.Available, true);
@@ -905,7 +940,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
 		assertFalse(rl.isExecutable(map, false));
 		assertTrue(rl.isExecutable(map, true));
-		JDFResource rSheet2 = rSig.addPartition(EnumPartIDKey.SheetName, "sh2");
+		final JDFResource rSheet2 = rSig.addPartition(EnumPartIDKey.SheetName, "sh2");
 		rSheet2.setResStatus(EnumResStatus.Unavailable, false);
 		assertFalse(rl.isExecutable(map, false));
 		assertFalse(rl.isExecutable(map, true));
@@ -929,11 +964,11 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testValidName()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
-		JDFResourceLinkPool rlp = n.appendResourceLinkPool();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		final JDFResourceLinkPool rlp = n.appendResourceLinkPool();
 		JDFResourceLink rl = (JDFResourceLink) rlp.appendElement("FooLink");
-		JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		rl.setrRef(rBar.getID());
 		assertFalse((rl.isValid(null)));
 		rl = n.getLink(rBar, null);
@@ -948,14 +983,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testValidPosition()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
-		JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
-		JDFResourceLink rl = n.getLink(rBar, null);
+		final JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = n.getLink(rBar, null);
 		assertNotNull(rl);
 		assertTrue((rl.isValid(null)));
-		JDFNode n2 = n.addJDFNode("Whatever");
+		final JDFNode n2 = n.addJDFNode("Whatever");
 		n2.moveElement(n.getResourcePool(), null);
 		assertFalse((rl.isValid(null)));
 		assertFalse((rl.validResourcePosition()));
@@ -968,11 +1003,11 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testValidAttributesAmountPool()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.Strapping);
-		JDFResource rBar = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
-		JDFResourceLink rl = n.getLink(rBar, null);
+		final JDFResource rBar = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(rBar, null);
 		rl.setActualAmount(42, null);
 		assertFalse(rl.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 99).contains(AttributeName.ACTUALAMOUNT));
 		// rl.appendAmountPool();
@@ -987,15 +1022,15 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testValidCombinedProcessIndex()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.Strapping);
-		JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
-		JDFResourceLink rl = n.getLink(rBar, null);
+		final JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = n.getLink(rBar, null);
 		assertTrue(rl.validCombinedProcessIndex());
 		rl.setCombinedProcessIndex(null);
 		assertTrue(rl.validCombinedProcessIndex());
-		JDFIntegerList il = new JDFIntegerList();
+		final JDFIntegerList il = new JDFIntegerList();
 		rl.setCombinedProcessIndex(il);
 		assertTrue(rl.validCombinedProcessIndex());
 		il.add(0);
@@ -1024,14 +1059,14 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testSetCombinedProcessIndex()
 	{
-		JDFDoc d = new JDFDoc(ElementName.JDF);
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.Strapping);
-		JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
-		JDFResourceLink rl = n.getLink(rBar, null);
+		final JDFResource rBar = n.addResource("Bar", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = n.getLink(rBar, null);
 		rl.setCombinedProcessIndex(null);
 		assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
-		JDFIntegerList il = new JDFIntegerList();
+		final JDFIntegerList il = new JDFIntegerList();
 		rl.setCombinedProcessIndex(il);
 		assertFalse(rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
 		il.add(0);

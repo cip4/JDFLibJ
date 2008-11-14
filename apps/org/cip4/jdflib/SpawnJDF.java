@@ -113,13 +113,15 @@ import org.cip4.jdflib.util.StringUtil;
 
 public class SpawnJDF
 {
-	private static boolean fileExists(String name)
+	private static boolean fileExists(final String name)
 	{
 		if (name == null)
+		{
 			return false;
+		}
 		boolean exists = false;
 
-		File file = new File(name);
+		final File file = new File(name);
 		if (file.length() != 0.0)
 		{
 			exists = file.exists();
@@ -128,35 +130,32 @@ public class SpawnJDF
 		return exists;
 	}
 
-	public static void main(String argv[])
+	public static void main(final String argv[])
 	{
 		// -i bookintent.jdf -o spawned.jdf -p 4
 		// -i bookintent.jdf -o spawned.jdf -p 0 -w r0007
 		// -iic2.jdf -ospawnic.jdf -pp1 -wOutput
-		String prg = "SpawnJDF" + ":\t";
+		final String prg = "SpawnJDF" + ":\t";
 		System.out.print(prg + "START.");
 
-		MyArgs args = new MyArgs(argv, "adenv", "iopkwt", null);
+		final MyArgs args = new MyArgs(argv, "adenvT", "iopkwt", null);
 		System.out.println("MyArgs-args:" + args);
 
-		String usage = "SpawnJDF: JDF spawn processor;\n" + "-i input JDF;\n"
-				+ "-o output JDF;\n" + "-p jobpartId;\n"
-				+ "-k keys comma separated list of part keys\n"
-				+ "-w spawn global resources rw(default=ro)\n"
-				+ "-d delete node from original file" + "-n export as new jdf";
+		final String usage = "SpawnJDF: JDF spawn processor;\n" + "-i input JDF;\n" + "-o output JDF;\n" + "-p jobpartId;\n" + "-T <Timing>;\n" + "-k keys comma separated list of part keys\n"
+				+ "-w spawn global resources rw(default=ro)\n" + "-d delete node from original file" + "-n export as new jdf";
 
-		boolean doEscapes = args.boolParameter('e', false);
+		final boolean doEscapes = args.boolParameter('e', false);
+		final boolean bTime = args.boolParameter('T', false);
 		System.out.println(prg + "e: doEscapes=" + doEscapes);
 
-		boolean useVDOMParser = args.boolParameter('v', false);
+		final boolean useVDOMParser = args.boolParameter('v', false);
 		System.out.println(prg + "v: useVDOMParser=" + useVDOMParser);
 
-		VString vRWResources = new VString(StringUtil.tokenize(args
-				.parameter('w'), ",", false));
+		final VString vRWResources = new VString(StringUtil.tokenize(args.parameter('w'), ",", false));
 		System.out.println(prg + "w: resRW=" + args.parameter('w'));
 
 		// -//HDM//-//Check command line and extract arguments.
-		String xmlFile = args.parameter('i');
+		final String xmlFile = args.parameter('i');
 		System.out.println(prg + "i: xmlFile=" + xmlFile);
 
 		if (!fileExists(xmlFile))
@@ -165,31 +164,33 @@ public class SpawnJDF
 			System.exit(1);
 		}
 
-		String outFile = args.parameter('o');
+		final long lTime = System.currentTimeMillis();
+		final String outFile = args.parameter('o');
 		System.out.println(prg + "o: outFile=" + outFile);
 
-		String task = args.parameter('t');
+		final String task = args.parameter('t');
 		System.out.println(prg + "t: task=" + task);
 
-		boolean v = args.boolParameter('v', false);
+		final boolean v = args.boolParameter('v', false);
 		System.out.println(prg + "v: =" + v);
 
-		String strPartID = args.parameter('p');
+		final String strPartID = args.parameter('p');
 		System.out.println(prg + "p: =" + strPartID);
 
 		// start spawning
 		// ==============
-		JDFParser p = new JDFParser();
-		JDFDoc docIn = p.parseFile(xmlFile);
+		final JDFParser p = new JDFParser();
+		final JDFDoc docIn = p.parseFile(xmlFile);
 
 		if (docIn == null)
 		{
 			System.err.println(args.usage(""));
 			System.exit(1);
-		} else
+		}
+		else
 		{
 
-			JDFNode rootIn = (JDFNode) docIn.getRoot();
+			final JDFNode rootIn = (JDFNode) docIn.getRoot();
 			// always assume jdf 1.3 or higher when spawning to jdf 2.0
 			if (args.boolParameter('n', false))
 			{
@@ -200,7 +201,8 @@ public class SpawnJDF
 			if (strPartID.equals(""))
 			{
 				pCut = rootIn;
-			} else
+			}
+			else
 			{
 				pCut = rootIn.getJobPart(strPartID, "");
 			}
@@ -209,42 +211,45 @@ public class SpawnJDF
 			{
 				System.err.println("No such JobPartID: " + strPartID);
 				System.exit(1);
-			} else
+			}
+			else
 			{
-				VJDFAttributeMap vSpawnParts = new VJDFAttributeMap();
-				JDFAttributeMap part1 = new JDFAttributeMap();
-				Vector partKeys = StringUtil.tokenize(args.parameter('k'), ",",
-						false);
+				final VJDFAttributeMap vSpawnParts = new VJDFAttributeMap();
+				final JDFAttributeMap part1 = new JDFAttributeMap();
+				final Vector partKeys = StringUtil.tokenize(args.parameter('k'), ",", false);
 				for (int iKey = 1; iKey < partKeys.size(); iKey += 2)
 				{
-					part1.put((String) partKeys.elementAt(iKey - 1),
-							(String) partKeys.elementAt(iKey));
+					part1.put((String) partKeys.elementAt(iKey - 1), (String) partKeys.elementAt(iKey));
 				}
 
 				vSpawnParts.add(part1);
 				final JDFSpawn spawn = new JDFSpawn(pCut);
 
-				JDFNode node = spawn.spawn(xmlFile, outFile, vRWResources,
-						vSpawnParts, false, true, true, true);
+				final JDFNode node = spawn.spawn(xmlFile, outFile, vRWResources, vSpawnParts, false, true, true, true);
 				final KElement rootOut;
 
 				if (args.boolParameter('n', false))
 				{
 					rootOut = makeNewJDF(node, rootIn);
-				} else
+				}
+				else
 				{
 					rootOut = node;
 				}
 
 				// neu gespawntes File rausschreiben
-				XMLDoc docOut = rootOut.getOwnerDocument_KElement();
+				final XMLDoc docOut = rootOut.getOwnerDocument_KElement();
 				docOut.write2File(outFile, 0, false);
 
 				// verändertes Ausgangsfile rausschreiben
-				String strOutXMLFile = "_" + xmlFile;
+				final String strOutXMLFile = "_" + xmlFile;
 				rootIn.eraseEmptyNodes(true);
 				docIn.write2File(strOutXMLFile, 2, false);
 
+				if (bTime)
+				{
+					System.out.println("Time (ms): " + (System.currentTimeMillis() - lTime));
+				}
 				System.out.print(prg + "ENDE.");
 				System.exit(0);
 			}
@@ -255,10 +260,10 @@ public class SpawnJDF
 	 * @param node
 	 * @return
 	 */
-	private static KElement makeNewJDF(JDFNode node, JDFNode rootIn)
+	private static KElement makeNewJDF(final JDFNode node, final JDFNode rootIn)
 	{
-		JDFDoc newDoc = new JDFDoc("XJDF");
-		KElement newRoot = newDoc.getRoot();
+		final JDFDoc newDoc = new JDFDoc("XJDF");
+		final KElement newRoot = newDoc.getRoot();
 		setRootAttributes(node, newRoot);
 		setProduct(node, rootIn);
 		setResources(newRoot, node, null);
@@ -270,14 +275,13 @@ public class SpawnJDF
 	 * @param node
 	 * @param newRoot
 	 */
-	private static void setElements(JDFNode node, KElement newRoot)
+	private static void setElements(final JDFNode node, final KElement newRoot)
 	{
 		setAudits(newRoot, node);
-		VElement v = node.getChildElementVector(null, null, null, true, 0,
-				false);
+		final VElement v = node.getChildElementVector(null, null, null, true, 0, false);
 		for (int i = 0; i < v.size(); i++)
 		{
-			KElement e = v.item(i);
+			final KElement e = v.item(i);
 			if (e instanceof JDFResourceLinkPool)
 			{
 				continue;
@@ -302,19 +306,19 @@ public class SpawnJDF
 	 * @param newRoot
 	 * @param node
 	 */
-	private static void setAudits(KElement newRoot, JDFNode node)
+	private static void setAudits(final KElement newRoot, final JDFNode node)
 	{
-		JDFAuditPool ap = node.getAuditPool();
+		final JDFAuditPool ap = node.getAuditPool();
 		if (ap == null)
 		{
 			return;
 		}
-		VElement audits = ap.getAudits(null, null, null);
-		KElement newPool = newRoot.appendElement("AuditPool");
+		final VElement audits = ap.getAudits(null, null, null);
+		final KElement newPool = newRoot.appendElement("AuditPool");
 		int n = 0;
 		for (int i = 0; i < audits.size(); i++)
 		{
-			JDFAudit audit = (JDFAudit) audits.elementAt(i);
+			final JDFAudit audit = (JDFAudit) audits.elementAt(i);
 			if (audit instanceof JDFSpawned)
 			{
 				continue;
@@ -336,7 +340,7 @@ public class SpawnJDF
 	 * @param node
 	 * @param rootIn
 	 */
-	private static String setProduct(JDFNode node, JDFNode rootIn)
+	private static String setProduct(final JDFNode node, final JDFNode rootIn)
 	{
 		if (rootIn == null)
 		{
@@ -346,15 +350,14 @@ public class SpawnJDF
 		{
 			return null;
 		}
-		KElement list = node.getCreateElement("ProductList");
-		KElement product = list.appendElement("Product");
+		final KElement list = node.getCreateElement("ProductList");
+		final KElement product = list.appendElement("Product");
 		product.setAttributes(rootIn);
 		setProductResources(product, rootIn);
-		VElement subProducts = rootIn.getvJDFNode("Product", null, true);
+		final VElement subProducts = rootIn.getvJDFNode("Product", null, true);
 		for (int i = 0; i < subProducts.size(); i++)
 		{
-			String childID = setProduct(node, (JDFNode) subProducts
-					.elementAt(i));
+			final String childID = setProduct(node, (JDFNode) subProducts.elementAt(i));
 			product.appendAttribute("Children", childID, null, " ", true);
 		}
 		return product.getAttribute("ID");
@@ -364,13 +367,13 @@ public class SpawnJDF
 	 * @param product
 	 * @param rootIn
 	 */
-	private static void setProductResources(KElement product, JDFNode rootIn)
+	private static void setProductResources(final KElement product, final JDFNode rootIn)
 	{
-		VElement prodLinks = rootIn.getResourceLinks(null);
-		HashMap componentMap = new HashMap();
+		final VElement prodLinks = rootIn.getResourceLinks(null);
+		final HashMap componentMap = new HashMap();
 		for (int i = prodLinks.size() - 1; i >= 0; i--)
 		{
-			JDFResourceLink rl = (JDFResourceLink) prodLinks.elementAt(i);
+			final JDFResourceLink rl = (JDFResourceLink) prodLinks.elementAt(i);
 			final JDFResource linkRoot = rl.getLinkRoot();
 			if (linkRoot instanceof JDFComponent)
 			{
@@ -383,17 +386,14 @@ public class SpawnJDF
 			}
 		}
 		setResources(product, rootIn, prodLinks);
-		VElement vDropItems = product.getChildrenByTagName(
-				ElementName.DROPITEMINTENT, null, null, false, true, 0);
+		final VElement vDropItems = product.getChildrenByTagName(ElementName.DROPITEMINTENT, null, null, false, true, 0);
 		for (int i = 0; i < vDropItems.size(); i++)
 		{
-			final JDFDropItemIntent dropItemIntent = (JDFDropItemIntent) vDropItems
-					.item(i);
-			JDFComponent c = dropItemIntent.getComponent();
+			final JDFDropItemIntent dropItemIntent = (JDFDropItemIntent) vDropItems.item(i);
+			final JDFComponent c = dropItemIntent.getComponent();
 			if (c != null)
 			{
-				String id = (String) componentMap.get(c.getAttribute("tmp_id",
-						null, ""));
+				final String id = (String) componentMap.get(c.getAttribute("tmp_id", null, ""));
 				if (id != null)
 				{
 					dropItemIntent.setAttribute("ProductRef", id);
@@ -408,18 +408,16 @@ public class SpawnJDF
 	 * @param rootIn
 	 * @return
 	 */
-	private static void setResources(KElement newRoot, JDFNode rootIn,
-			VElement resLinks)
+	private static void setResources(final KElement newRoot, final JDFNode rootIn, final VElement resLinks)
 	{
-		VElement vResLinks = resLinks == null ? rootIn.getResourceLinks(null)
-				: resLinks;
+		final VElement vResLinks = resLinks == null ? rootIn.getResourceLinks(null) : resLinks;
 		if (vResLinks == null)
 		{
 			return;
 		}
 		for (int i = 0; i < vResLinks.size(); i++)
 		{
-			JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
+			final JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
 			final JDFResource linkRoot = rl.getLinkRoot();
 			setResource(newRoot, rl, linkRoot);
 		}
@@ -431,35 +429,33 @@ public class SpawnJDF
 	 * @param rl
 	 * @param linkRoot
 	 */
-	private static void setResource(KElement newRoot, JDFResourceLink rl,
-			final JDFResource linkRoot)
+	private static void setResource(final KElement newRoot, final JDFResourceLink rl, final JDFResource linkRoot)
 	{
-		String className = getClassName(linkRoot);
+		final String className = getClassName(linkRoot);
 		if (className == null)
 		{
 			return;
 		}
-		KElement resourceSet = newRoot.appendElement(className + "Set");
+		final KElement resourceSet = newRoot.appendElement(className + "Set");
 
 		setLinkAttributes(resourceSet, rl, linkRoot);
 
-		VElement vRes = rl.getTargetVector(0);
+		final VElement vRes = rl.getTargetVector(0);
 		int dot = 0;
-		String resID = linkRoot.getID();
+		final String resID = linkRoot.getID();
 		for (int j = 0; j < vRes.size(); j++)
 		{
-			JDFResource r = (JDFResource) vRes.elementAt(j);
-			VElement vLeaves = r.getLeaves(false);
+			final JDFResource r = (JDFResource) vRes.elementAt(j);
+			final VElement vLeaves = r.getLeaves(false);
 			for (int k = 0; k < vLeaves.size(); k++)
 			{
-				JDFResource leaf = (JDFResource) vLeaves.elementAt(k);
+				final JDFResource leaf = (JDFResource) vLeaves.elementAt(k);
 				// TODO this is just a quick hack - generating true id, idref
 				// pairs would be better
 				leaf.inlineRefElements(null, null, false);
-				KElement newLeaf = resourceSet.appendElement(className);
+				final KElement newLeaf = resourceSet.appendElement(className);
 				setLeafAttributes(leaf, rl, newLeaf);
-				newLeaf.setAttribute("ID", resID + "."
-						+ StringUtil.formatInteger(dot++));
+				newLeaf.setAttribute("ID", resID + "." + StringUtil.formatInteger(dot++));
 			}
 		}
 	}
@@ -468,19 +464,18 @@ public class SpawnJDF
 	 * @param leaf
 	 * @param newLeaf
 	 */
-	private static void setLeafAttributes(JDFResource leaf, JDFResourceLink rl,
-			KElement newLeaf)
+	private static void setLeafAttributes(final JDFResource leaf, final JDFResourceLink rl, final KElement newLeaf)
 	{
-		JDFAttributeMap partMap = leaf.getPartMap();
+		final JDFAttributeMap partMap = leaf.getPartMap();
 		// JDFAttributeMap attMap=leaf.getAttributeMap();
 		// attMap.remove("ID");
-		JDFAmountPool ap = rl.getAmountPool();
+		final JDFAmountPool ap = rl.getAmountPool();
 		if (ap != null)
 		{
-			VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
+			final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
 			if (vPartAmounts != null)
 			{
-				KElement amountPool = newLeaf.appendElement("AmountPool");
+				final KElement amountPool = newLeaf.appendElement("AmountPool");
 				for (int i = 0; i < vPartAmounts.size(); i++)
 				{
 					amountPool.copyElement(vPartAmounts.item(i), null);
@@ -493,7 +488,7 @@ public class SpawnJDF
 			// attMap.removeKeys(partMap.keySet());
 		}
 
-		KElement newResLeaf = newLeaf.copyElement(leaf, null);
+		final KElement newResLeaf = newLeaf.copyElement(leaf, null);
 		newResLeaf.removeAttribute(AttributeName.ID);
 		newResLeaf.removeAttribute(AttributeName.SPAWNID);
 		newResLeaf.removeAttribute(AttributeName.SPAWNIDS);
@@ -506,7 +501,7 @@ public class SpawnJDF
 	/**
 	 * @param r
 	 */
-	private static String getClassName(JDFResource r)
+	private static String getClassName(final JDFResource r)
 	{
 		if (r == null)
 		{
@@ -518,8 +513,7 @@ public class SpawnJDF
 			return null;
 		}
 		String className = "Resource";
-		if (resourceClass.equals(EnumResourceClass.Parameter)
-				|| resourceClass.equals(EnumResourceClass.Intent))
+		if (resourceClass.equals(EnumResourceClass.Parameter) || resourceClass.equals(EnumResourceClass.Intent))
 		{
 			className = resourceClass.getName();
 		}
@@ -534,8 +528,7 @@ public class SpawnJDF
 	 * @param newRoot
 	 * @param rl
 	 */
-	private static void setLinkAttributes(KElement resourceSet, KElement rl,
-			JDFResource linkRoot)
+	private static void setLinkAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
 	{
 		resourceSet.setAttribute("Name", linkRoot.getNodeName());
 		resourceSet.copyAttribute("ID", linkRoot, null, null, null);
@@ -544,20 +537,16 @@ public class SpawnJDF
 		resourceSet.removeAttribute(AttributeName.RSUBREF);
 		if (rl instanceof JDFResourceLink)
 		{
-			JDFResourceLink resLink = (JDFResourceLink) rl;
-			VElement vCreators = linkRoot.getCreator(EnumUsage.Input
-					.equals(resLink.getUsage()));
-			Iterator vCreatorsIterator = vCreators.iterator();
+			final JDFResourceLink resLink = (JDFResourceLink) rl;
+			final VElement vCreators = linkRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
+			final Iterator vCreatorsIterator = vCreators.iterator();
 			while (vCreatorsIterator.hasNext())
 			{
-				JDFNode depNode = (JDFNode) vCreatorsIterator.next();
-				KElement dependent = resourceSet.appendElement("Dependent");
-				dependent.setAttribute(AttributeName.JOBID, depNode
-						.getJobID(true));
-				dependent.copyAttribute(AttributeName.JMFURL, depNode, null,
-						null, null);
-				dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null,
-						null, null);
+				final JDFNode depNode = (JDFNode) vCreatorsIterator.next();
+				final KElement dependent = resourceSet.appendElement("Dependent");
+				dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
+				dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
+				dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
 			}
 		}
 	}
@@ -566,7 +555,7 @@ public class SpawnJDF
 	 * @param node
 	 * @param newRoot
 	 */
-	private static void setRootAttributes(JDFNode node, KElement newRoot)
+	private static void setRootAttributes(final JDFNode node, final KElement newRoot)
 	{
 		newRoot.setAttributes(node);
 	}

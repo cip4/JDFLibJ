@@ -70,18 +70,27 @@
 package org.cip4.jdflib.resource;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.resource.JDFNotification.EnumNotificationDetails;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG 13.11.2008
+ */
 public class JDFNotificationTest extends JDFTestCaseBase
 {
 
 	JDFNotification n;
 
+	/**
+	 * 
+	 */
 	public void testappendNotificationDetails()
 	{
-		JDFMilestone ms = n.appendMilestone();
+		final JDFMilestone ms = n.appendMilestone();
 		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Milestone);
 		assertNotNull(ms);
 		assertEquals(ms.getLocalName(), ElementName.MILESTONE);
@@ -89,18 +98,36 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertNull(n.getCreateBarcode());
 	}
 
+	/**
+	 * 
+	 */
 	public void testgetNotificationDetails()
 	{
-		JDFBarcode ms = n.appendBarcode();
+		final JDFBarcode ms = n.appendBarcode();
 		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.Barcode);
 		assertNotNull(ms);
 		assertEquals(ms.getLocalName(), ElementName.BARCODE);
 		assertEquals(n.getNotificationDetails(), ms);
 	}
 
+	/**
+	 * 
+	 */
+	public void testToSignalJMF()
+	{
+		n.setClass(EnumClass.Information);
+		assertTrue(n.isValid(EnumValidationLevel.Complete));
+		final JDFJMF jmf = n.toSignalJMF();
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "notification.xml", 2, false);
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 */
 	public void testgetCreateNotificationDetails()
 	{
-		JDFSystemTimeSet ms = n.getCreateSystemTimeSet();
+		final JDFSystemTimeSet ms = n.getCreateSystemTimeSet();
 		assertEquals(n.getNotificationDetailsType(), EnumNotificationDetails.SystemTimeSet);
 		assertNotNull(ms);
 		assertEquals(ms.getLocalName(), ElementName.SYSTEMTIMESET);
@@ -108,6 +135,9 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertNull(n.getCreateBarcode());
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetCommentText()
 	{
 		n.setCommentText("fooBar");
@@ -116,13 +146,16 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertEquals(n.getCommentText(), "fooBar");
 	}
 
+	/**
+	 * 
+	 */
 	public void testsetEvent()
 	{
 		JDFEvent e = n.setEvent("id", "value", "bullshit");
 		assertEquals(e.getEventID(), "id");
 		assertEquals(e.getEventValue(), "value");
 		assertEquals(n.getComment(0).getText(), "bullshit");
-		JDFEvent ee = n.setEvent("id2", "value2", "bullshit2");
+		final JDFEvent ee = n.setEvent("id2", "value2", "bullshit2");
 		assertEquals(ee, e);
 		e = (JDFEvent) n.getNotificationDetails();
 		assertEquals(e.getEventID(), "id2");
@@ -134,15 +167,12 @@ public class JDFNotificationTest extends JDFTestCaseBase
 		assertEquals(n.getComment(0).getText(), "bullshit2");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
 	protected void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
 		n = (JDFNotification) new JDFDoc("Notification").getRoot();
 	}

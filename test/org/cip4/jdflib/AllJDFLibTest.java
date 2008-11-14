@@ -157,6 +157,7 @@ import org.cip4.jdflib.jmf.JMFResourceInfoTest;
 import org.cip4.jdflib.jmf.JMFResourceTest;
 import org.cip4.jdflib.jmf.JMFStatusTest;
 import org.cip4.jdflib.jmf.QueueTest;
+import org.cip4.jdflib.node.AuditToJMFTest;
 import org.cip4.jdflib.node.JDFNodeProductTest;
 import org.cip4.jdflib.node.JDFNodeTest;
 import org.cip4.jdflib.pool.JDFAmountPoolTest;
@@ -231,7 +232,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 	 */
 	public static TestSuite suite()
 	{
-		TestSuite suite = new TestSuite("Tests for org.cip4.jdflib.*");
+		final TestSuite suite = new TestSuite("Tests for org.cip4.jdflib.*");
 
 		suite.addTestSuite(JDFClassInstantiationTest.class);
 
@@ -340,6 +341,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(QueueTest.class);
 
 		// Node
+		suite.addTestSuite(AuditToJMFTest.class);
 		suite.addTestSuite(JDFNodeProductTest.class);
 		suite.addTestSuite(JDFNodeTest.class);
 

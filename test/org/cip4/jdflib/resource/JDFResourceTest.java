@@ -1856,6 +1856,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testGetResStatus()
 	{
 		final JDFDoc doc = creatXMDoc();

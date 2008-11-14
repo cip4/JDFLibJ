@@ -86,30 +86,30 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 	String agentName;
 	VJDFAttributeMap vMap;
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testMISPreContentCreation()
 	{
-		MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, null, 2, 2,
-				vMap);
+		final MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, EnumVersion.Version_1_4, 2, 2, vMap);
 		goldenTicket.nCols[0] = goldenTicket.nCols[1] = 4;
 		goldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
 		goldenTicket.setCategory(MISPreGoldenTicket.MISPRE_CONTENTCREATION);
 
-		ProductGoldenTicket pgt = new ProductGoldenTicket(0,
-				EnumVersion.Version_1_3, 0, 0);
+		final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_4, 0, 0);
 		pgt.assign(null);
 		pgt.createHDCity();
-		JDFNode node = pgt.getNode();
-		JDFNode nodePre = node.addJDFNode(EnumType.ProcessGroup);
+		final JDFNode node = pgt.getNode();
+		final JDFNode nodePre = node.addJDFNode(EnumType.ProcessGroup);
 
 		goldenTicket.assign(nodePre);
-		BaseGoldenTicketTest.write3GTFiles(goldenTicket,
-				"MISPre_ContentCreation");
+		BaseGoldenTicketTest.write3GTFiles(goldenTicket, "MISPre_ContentCreation");
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testMISPreImpositionPreparation()
@@ -117,32 +117,28 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 		for (int i = 0; i < 4; i++)
 		{
 
-			MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, null,
-					2, 2, vMap);
+			final MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, null, 2, 2, vMap);
 			goldenTicket.bStripping = i % 2 == 1;
 			goldenTicket.nCols[0] = goldenTicket.nCols[1] = 4;
 			goldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
-			goldenTicket
-					.setCategory(MISPreGoldenTicket.MISPRE_IMPOSITIONPREPARATION);
+			goldenTicket.setCategory(MISPreGoldenTicket.MISPRE_IMPOSITIONPREPARATION);
 
 			JDFNode nodePre = null;
 			if (i < 2)
 			{
-				ProductGoldenTicket pgt = new ProductGoldenTicket(0,
-						EnumVersion.Version_1_3, 0, 0);
+				final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
 				pgt.assign(null);
 				pgt.createHDCity();
-				JDFNode node = pgt.getNode();
+				final JDFNode node = pgt.getNode();
 				nodePre = node.addJDFNode(EnumType.ProcessGroup);
-			} else
+			}
+			else
 			{
 				// nop
 			}
 
 			goldenTicket.assign(nodePre);
-			BaseGoldenTicketTest.write3GTFiles(goldenTicket, "MISPre_"
-					+ (i < 2 ? "GB_" : "") + "ImpositionPreparation"
-					+ (goldenTicket.bStripping ? "Strip" : ""));
+			BaseGoldenTicketTest.write3GTFiles(goldenTicket, "MISPre_" + (i < 2 ? "GB_" : "") + "ImpositionPreparation" + (goldenTicket.bStripping ? "Strip" : ""));
 		}
 	}
 
@@ -158,67 +154,53 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 		{
 			for (int ii = 0; ii < 2; ii++)
 			{
-				boolean bExpand = ii == 0;
-				ProductGoldenTicket pgt = new ProductGoldenTicket(0,
-						EnumVersion.Version_1_3, 0, 0);
+				final boolean bExpand = ii == 0;
+				final ProductGoldenTicket pgt = new ProductGoldenTicket(0, EnumVersion.Version_1_3, 0, 0);
 				pgt.assign(null);
 				pgt.createHDCity();
-				JDFNode node = pgt.getNode();
+				final JDFNode node = pgt.getNode();
 
-				JDFNode nodePre = node.addJDFNode(EnumType.ProcessGroup);
-				MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1,
-						null, 2, 2, null);
+				final JDFNode nodePre = node.addJDFNode(EnumType.ProcessGroup);
+				final MISPreGoldenTicket goldenTicket = new MISPreGoldenTicket(1, null, 2, 2, null);
 				goldenTicket.nCols[0] = goldenTicket.nCols[1] = 4;
 				goldenTicket.workStyle = EnumWorkStyle.WorkAndTurn;
 				goldenTicket.bExpandGrayBox = bExpand;
 
-				goldenTicket
-						.setCategory(MISPreGoldenTicket.MISPRE_PREPRESSPREPARATION);
+				goldenTicket.setCategory(MISPreGoldenTicket.MISPRE_PREPRESSPREPARATION);
 				goldenTicket.assign(nodePre);
 				pgt.addKid(goldenTicket);
 
-				MISPreGoldenTicket goldenTicket2 = new MISPreGoldenTicket(
-						goldenTicket, vMap);
+				final MISPreGoldenTicket goldenTicket2 = new MISPreGoldenTicket(goldenTicket, vMap);
 				goldenTicket2.bStripping = i % 2 == 1;
 				goldenTicket2.bExpandGrayBox = bExpand;
 
-				JDFNode nodeImp = node.addJDFNode(EnumType.ProcessGroup);
-				goldenTicket2
-						.setCategory(MISPreGoldenTicket.MISPRE_IMPOSITIONPREPARATION);
+				final JDFNode nodeImp = node.addJDFNode(EnumType.ProcessGroup);
+				goldenTicket2.setCategory(MISPreGoldenTicket.MISPRE_IMPOSITIONPREPARATION);
 				goldenTicket2.assign(nodeImp);
 				pgt.addKid(goldenTicket2);
 
-				MISPreGoldenTicket goldenTicket3 = new MISPreGoldenTicket(
-						goldenTicket2, null);
-				JDFNode nodeRIP = node.addJDFNode(EnumType.ProcessGroup);
+				final MISPreGoldenTicket goldenTicket3 = new MISPreGoldenTicket(goldenTicket2, null);
+				final JDFNode nodeRIP = node.addJDFNode(EnumType.ProcessGroup);
 				goldenTicket3.bExpandGrayBox = bExpand;
-				goldenTicket3
-						.setCategory(i < 2 ? MISPreGoldenTicket.MISPRE_IMPOSITIONRIPING
-								: MISPreGoldenTicket.MISPRE_PLATEMAKING);
+				goldenTicket3.setCategory(i < 2 ? MISPreGoldenTicket.MISPRE_IMPOSITIONRIPING : MISPreGoldenTicket.MISPRE_PLATEMAKING);
 				goldenTicket3.assign(nodeRIP);
 				pgt.addKid(goldenTicket3);
 
 				if (i < 2)
 				{
-					MISPreGoldenTicket goldenTicket4 = new MISPreGoldenTicket(
-							goldenTicket3, null);
-					JDFNode nodePlateSet = node
-							.addJDFNode(EnumType.ProcessGroup);
-					goldenTicket4
-							.setCategory(MISPreGoldenTicket.MISPRE_PLATESETTING);
+					final MISPreGoldenTicket goldenTicket4 = new MISPreGoldenTicket(goldenTicket3, null);
+					final JDFNode nodePlateSet = node.addJDFNode(EnumType.ProcessGroup);
+					goldenTicket4.setCategory(MISPreGoldenTicket.MISPRE_PLATESETTING);
 					goldenTicket4.assign(nodePlateSet);
 					pgt.addKid(goldenTicket4);
 				}
 
-				BaseGoldenTicketTest.write3GTFiles(pgt, "MISPre_ComplexPlate"
-						+ (i >= 2 ? "Making" : "Setting")
-						+ (goldenTicket2.bStripping ? "Strip" : "")
-						+ (bExpand ? "Expand" : ""));
+				BaseGoldenTicketTest.write3GTFiles(pgt, "MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "") + (bExpand ? "Expand" : ""));
 			}
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	/*
 	 * (non-Javadoc)
@@ -233,7 +215,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 		JDFAudit.setStaticAgentName("JDF MISPre golden ticket generator");
 		super.setUp();
 		vMap = new VJDFAttributeMap();
-		JDFAttributeMap map = new JDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -247,7 +229,7 @@ public class MISPreGoldenTicketTest extends JDFTestCaseBase
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	/*
 	 * (non-Javadoc)

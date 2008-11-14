@@ -110,6 +110,9 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.IDLESTARTTIME, 0x33333000, AttributeInfo.EnumAttributeType.dateTime, null, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoDeviceInfo#getTheAttributeInfo()
+	 */
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
@@ -358,6 +361,24 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 			bGood = getJobPhase(i).mergeLastPhase(lastInfo.getJobPhase(i)) || bGood;
 		}
 		return bGood;
+	}
+
+	/**
+	 * set the parameters of this to the values from device
+	 * @param device the device to copy here
+	 * @param bCopy if true, also copy the device element
+	 */
+	public void setDevice(final JDFDevice device, final boolean bCopy)
+	{
+		if (device == null)
+		{
+			return;
+		}
+		copyAttribute(AttributeName.DEVICEID, device);
+		if (bCopy && getDevice() == null)
+		{
+			copyElement(device, null);
+		}
 	}
 
 }

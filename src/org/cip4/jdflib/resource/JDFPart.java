@@ -94,43 +94,39 @@ public class JDFPart extends JDFAutoPart
 
 	/**
 	 * Constructor for JDFPart
-	 * 
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPart(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPart(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPart
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPart(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPart
-	 * 
 	 * @param myOwnerDocument
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPart(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPart(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * toString()
-	 * 
 	 * @return String
 	 */
 	@Override
@@ -141,20 +137,21 @@ public class JDFPart extends JDFAutoPart
 
 	/**
 	 * gets a map of all Partition key value pairs, empty if no partition keys exist
-	 * 
 	 * @return JDFAttributeMap
 	 */
 	@Override
 	public JDFAttributeMap getPartMap()
 	{
-		JDFAttributeMap am = getAttributeMap();
-		Iterator<String> it = am.getKeyIterator();
-		JDFAttributeMap retMap = new JDFAttributeMap();
+		final JDFAttributeMap am = getAttributeMap();
+		final Iterator<String> it = am.getKeyIterator();
+		final JDFAttributeMap retMap = new JDFAttributeMap();
 		while (it.hasNext())
 		{
 			final String key = it.next();
 			if (EnumPartIDKey.getEnum(key) != null)
+			{
 				retMap.put(key, am.get(key));
+			}
 		}
 		return retMap;
 	}
@@ -165,11 +162,13 @@ public class JDFPart extends JDFAutoPart
 	 */
 	public VString guessPartIDKeys()
 	{
-		JDFAttributeMap map = getPartMap();
+		final JDFAttributeMap map = getPartMap();
 		if (map == null || map.size() == 0)
+		{
 			return null;
-		VString v = new VString();
-		VString keys = map.getKeys();
+		}
+		final VString v = new VString();
+		final VString keys = map.getKeys();
 		if (map.size() == 1)
 		{
 			return map.getKeys();
@@ -200,51 +199,64 @@ public class JDFPart extends JDFAutoPart
 
 	/**
 	 * sets the attributes of this to partmap removes all other attributes
-	 * 
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		removeAttributes(null);
 		setAttributes(mPart);
 	}
 
 	/**
-	 * check whether the partition values match
-	 * 
+	 * check whether the partition values match partversions match if either only one token is specified, and the large list contains that token or vice versa
 	 * @param key the partition key
 	 * @param resourceValue the value of key in the resource
 	 * @param linkValue the value of key in the part element or ref
 	 * @return boolean: true if linkValue matches the value or list in resourceValue
-	 * 
 	 */
-	public static boolean matchesPart(String key, String resourceValue, String linkValue)
+	public static boolean matchesPart(final String key, final String resourceValue, final String linkValue)
 	{
-		EnumPartIDKey eKey = EnumPartIDKey.getEnum(key);
+		final EnumPartIDKey eKey = EnumPartIDKey.getEnum(key);
 		if (eKey == null)
+		{
 			return resourceValue.equals(linkValue);
-		boolean b;
+		}
 
+		boolean b;
 		if (
 		// EnumPartIDKey.PartVersion.equals(eKey)
-		EnumPartIDKey.DocTags.equals(eKey) || EnumPartIDKey.ItemNames.equals(eKey)
-				|| EnumPartIDKey.PageTags.equals(eKey) || EnumPartIDKey.RunTags.equals(eKey)
-				|| EnumPartIDKey.SetTags.equals(eKey))
+		EnumPartIDKey.DocTags.equals(eKey) || EnumPartIDKey.ItemNames.equals(eKey) || EnumPartIDKey.PageTags.equals(eKey) || EnumPartIDKey.RunTags.equals(eKey) || EnumPartIDKey.SetTags.equals(eKey))
 		{
 			b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
 		}
-
-		else if (EnumPartIDKey.DocCopies.equals(eKey) || EnumPartIDKey.DocIndex.equals(eKey)
-				|| EnumPartIDKey.DocRunIndex.equals(eKey) || EnumPartIDKey.DocSheetIndex.equals(eKey)
-				|| EnumPartIDKey.LayerIDs.equals(eKey) || EnumPartIDKey.PageNumber.equals(eKey)
-				|| EnumPartIDKey.RunIndex.equals(eKey) || EnumPartIDKey.SectionIndex.equals(eKey)
-				|| EnumPartIDKey.SetIndex.equals(eKey) || EnumPartIDKey.SetRunIndex.equals(eKey)
-				|| EnumPartIDKey.SetSheetIndex.equals(eKey) || EnumPartIDKey.SheetIndex.equals(eKey))
+		else if (EnumPartIDKey.DocCopies.equals(eKey) || EnumPartIDKey.DocIndex.equals(eKey) || EnumPartIDKey.DocRunIndex.equals(eKey) || EnumPartIDKey.DocSheetIndex.equals(eKey)
+				|| EnumPartIDKey.LayerIDs.equals(eKey) || EnumPartIDKey.PageNumber.equals(eKey) || EnumPartIDKey.RunIndex.equals(eKey) || EnumPartIDKey.SectionIndex.equals(eKey)
+				|| EnumPartIDKey.SetIndex.equals(eKey) || EnumPartIDKey.SetRunIndex.equals(eKey) || EnumPartIDKey.SetSheetIndex.equals(eKey) || EnumPartIDKey.SheetIndex.equals(eKey))
 		{
 			b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.IntegerRangeList);
 		}
-
+		else if (EnumPartIDKey.PartVersion.equals(eKey))
+		{
+			final VString resTokens = StringUtil.tokenize(resourceValue, null, false);
+			final VString linkTokens = StringUtil.tokenize(linkValue, null, false);
+			if (resTokens.size() == linkTokens.size())
+			{
+				b = resourceValue.equals(linkValue);
+			}
+			else if (resTokens.size() == 1)
+			{
+				b = StringUtil.matchesAttribute(resourceValue, linkValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+			}
+			else if (linkTokens.size() == 1)
+			{
+				b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+			}
+			else
+			{
+				b = false;
+			}
+		}
 		else
 		{
 			b = resourceValue.equals(linkValue);
@@ -255,25 +267,25 @@ public class JDFPart extends JDFAutoPart
 	/**
 	 * overlapMap - identical keys must have the same values in both maps<br>
 	 * similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
-	 * 
 	 * @param subMap the map to compare
-	 * 
 	 * @return boolean: true if identical keys have the same values in both maps
 	 */
-	public static boolean overlapPartMap(JDFAttributeMap resourceMap, JDFAttributeMap linkMap)
+	public static boolean overlapPartMap(final JDFAttributeMap resourceMap, final JDFAttributeMap linkMap)
 	{
 		if ((resourceMap == null) || (linkMap == null))
+		{
 			return true; // null always overlaps with anything
+		}
 
-		Enumeration subMapEnum = linkMap.keys();
+		final Enumeration subMapEnum = linkMap.keys();
 		while (subMapEnum.hasMoreElements())
 		{
-			String key = (String) subMapEnum.nextElement();
-			String resVal = resourceMap.get(key);
+			final String key = (String) subMapEnum.nextElement();
+			final String resVal = resourceMap.get(key);
 
 			if (resVal != null)
 			{
-				String linkVal = linkMap.get(key);
+				final String linkVal = linkMap.get(key);
 				if (!matchesPart(key, resVal, linkVal))
 				{
 					return false;
