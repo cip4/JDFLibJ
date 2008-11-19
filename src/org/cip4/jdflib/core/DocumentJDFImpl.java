@@ -27,15 +27,14 @@ import org.w3c.dom.Node;
 /**
  * implementation of the JDFLib class factory
  * @author prosirai
- *
+ * 
  */
 public class DocumentJDFImpl extends DocumentImpl
 {
 
 	private static final long serialVersionUID = 1L;
 	/**
-	 * if true, the factory is bypassed and only KElements are 
-	 * created rather than the typesafe element classes
+	 * if true, the factory is bypassed and only KElements are created rather than the typesafe element classes
 	 */
 	public boolean bKElementOnly = false;
 	private boolean ignoreNSDefault = false;
@@ -60,7 +59,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 */
 	public String m_OriginalFileName = null;
 	/**
-	 *  the xml output of the schema validation
+	 * the xml output of the schema validation
 	 */
 	public XMLDoc m_validationResult = null;
 	/**
@@ -78,9 +77,11 @@ public class DocumentJDFImpl extends DocumentImpl
 	public long getDocMemoryUsed()
 	{
 		final Runtime rt = Runtime.getRuntime();
-		long mem = rt.totalMemory() - rt.freeMemory();
+		final long mem = rt.totalMemory() - rt.freeMemory();
 		if (mem < initialMem)
+		{
 			initialMem = mem;
+		}
 		return mem - initialMem;
 	}
 
@@ -95,7 +96,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		{
 			clon = (DocumentJDFImpl) super.clone();
 		}
-		catch (CloneNotSupportedException x)
+		catch (final CloneNotSupportedException x)
 		{
 			clon = new DocumentJDFImpl();
 		}
@@ -123,7 +124,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param strElement local name
 	 * @param elemClass package path
 	 */
-	public static void registerCustomClass(String strElement, String packagepath)
+	public static void registerCustomClass(final String strElement, final String packagepath)
 	{
 		synchronized (sm_PackageNames)
 		{
@@ -138,7 +139,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param qualifiedName
 	 * @return the new {@link KElement}
 	 */
-	KElement factoryCreate(ParentNode parent, String qualifiedName)
+	KElement factoryCreate(final ParentNode parent, final String qualifiedName)
 	{
 		setParentNode(parent); // set the parent in the factory for
 		// private Elements
@@ -151,7 +152,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param qualifiedName
 	 * @return
 	 */
-	KElement factoryCreate(ParentNode parent, String namespaceURI, String qualifiedName)
+	KElement factoryCreate(final ParentNode parent, final String namespaceURI, final String qualifiedName)
 	{
 		setParentNode(parent); // set the parent in the factory for
 		// private Elements
@@ -181,10 +182,10 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#createElement(java.lang.String)
 	 */
 	@Override
-	public Element createElement(String qualifiedName)
+	public Element createElement(final String qualifiedName)
 	{
-		String namespaceURI = null;
-		String localPart = KElement.xmlnsLocalName(qualifiedName);
+		final String namespaceURI = null;
+		final String localPart = KElement.xmlnsLocalName(qualifiedName);
 
 		return createElementNS(namespaceURI, qualifiedName, localPart);
 	}
@@ -195,9 +196,9 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#createElementNS(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Element createElementNS(String namespaceURI, String qualifiedName)
+	public Element createElementNS(final String namespaceURI, final String qualifiedName)
 	{
-		String localPart = KElement.xmlnsLocalName(qualifiedName);
+		final String localPart = KElement.xmlnsLocalName(qualifiedName);
 		return createElementNS(namespaceURI, qualifiedName, localPart);
 	}
 
@@ -207,7 +208,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#createElementNS(String, String, String)
 	 */
 	@Override
-	public Element createElementNS(String namespaceURI, String qualifiedName, String localPart)
+	public Element createElementNS(final String namespaceURI, final String qualifiedName, final String localPart)
 	{
 		Constructor constructi;
 		Class classOfConstructor = null;
@@ -217,8 +218,7 @@ public class DocumentJDFImpl extends DocumentImpl
 			return new KElement(this, namespaceURI, qualifiedName, localPart);
 		}
 
-		if (!bInJDFJMF
-				&& (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || ElementName.JMF.equals(localPart)))
+		if (!bInJDFJMF && (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || ElementName.JMF.equals(localPart)))
 		{
 			bInJDFJMF = true;
 		}
@@ -237,26 +237,27 @@ public class DocumentJDFImpl extends DocumentImpl
 					classOfConstructor = getFactoryClass(namespaceURI, qualifiedName, localPart);
 					if (classOfConstructor != null)
 					{
-						final Class[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class,
-								java.lang.String.class, java.lang.String.class, java.lang.String.class, };
+						final Class[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, };
 
 						constructi = classOfConstructor.getDeclaredConstructor(constructorParameters);
 						putConstructorToHashMap(sm_hashCtorElementNS, qualifiedName, constructi);
 					}
 				}
-				catch (ClassNotFoundException e)
+				catch (final ClassNotFoundException e)
 				{
 					// internal error
-					String message = "(DocumentJDFImpl.createElementNS) getFactoryClass() " + "class " + e.getMessage()
-							+ " could not be created" + " (surplus line in sm_PackageNames or non existing class ???)";
+					final String message = "(DocumentJDFImpl.createElementNS) getFactoryClass() " + "class " + e.getMessage() + " could not be created"
+							+ " (surplus line in sm_PackageNames or non existing class ???)";
 					throw new DOMException(DOMException.NOT_FOUND_ERR, message);
 				}
-				catch (NoSuchMethodException e)
+				catch (final NoSuchMethodException e)
 				{
 					// internal error
 					String message = "(DocumentJDFImpl.createElementNS) getDeclaredConstructor() not found: ";
 					if (classOfConstructor != null)
+					{
 						message += classOfConstructor.getName() + "(CoreDocumentImpl, String, String, String)";
+					}
 					throw new DOMException(DOMException.NOT_FOUND_ERR, message);
 				}
 			}
@@ -273,7 +274,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param qualifiedName
 	 * @param constructi
 	 */
-	private void putConstructorToHashMap(HashMap hashCtorElement, String qualifiedName, Constructor constructi)
+	private void putConstructorToHashMap(final HashMap hashCtorElement, final String qualifiedName, final Constructor constructi)
 	{
 		// only put the constructor into the map if its not a Resource or an
 		// element
@@ -292,12 +293,10 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param className
 	 * @return
 	 */
-	private boolean isSpecialClass(String qualifiedName, final String className)
+	private boolean isSpecialClass(final String qualifiedName, final String className)
 	{
-		final boolean bSpecialClass = !className.endsWith("JDFResource") && !className.endsWith("JDFElement")
-				&& !className.endsWith("KElement") && !qualifiedName.equals("HoleType")
-				&& !qualifiedName.equals("Method") && !qualifiedName.equals("Shape")
-				&& !qualifiedName.equals("Position") && !qualifiedName.equals("Surface");
+		final boolean bSpecialClass = !className.endsWith("JDFResource") && !className.endsWith("JDFElement") && !className.endsWith("KElement") && !qualifiedName.equals("HoleType")
+				&& !qualifiedName.equals("Method") && !qualifiedName.equals("Shape") && !qualifiedName.equals("Position") && !qualifiedName.equals("Surface");
 		return bSpecialClass;
 	}
 
@@ -308,7 +307,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param constructorArguments
 	 * @return KElement (always != <code>null</code>)
 	 */
-	private KElement createKElement(Constructor constructi, Object[] constructorArguments)
+	private KElement createKElement(final Constructor constructi, final Object[] constructorArguments)
 	{
 		KElement newElement = null;
 		String message = null;
@@ -318,20 +317,19 @@ public class DocumentJDFImpl extends DocumentImpl
 			newElement = (KElement) constructi.newInstance(constructorArguments);
 		}
 		// re-throw on error is done below
-		catch (IllegalAccessException e)
+		catch (final IllegalAccessException e)
 		{
 			message = "(DocumentJDFImpl.createKElement) IllegalAccessException caught :" + e.getMessage();
 		}
-		catch (InstantiationException e)
+		catch (final InstantiationException e)
 		{
-			message = "(DocumentJDFImpl.createKElement) InstantiationException caught (abstract class?) : "
-					+ constructi.getName() + "(CoreDocumentImpl, String, String, String)";
+			message = "(DocumentJDFImpl.createKElement) InstantiationException caught (abstract class?) : " + constructi.getName() + "(CoreDocumentImpl, String, String, String)";
 		}
-		catch (InvocationTargetException e)
+		catch (final InvocationTargetException e)
 		{
 			message = "(DocumentJDFImpl.createKElement) InvocationTargetException caught :" + e.getMessage();
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			message = "(DocumentJDFImpl.createKElement) Exception caught :" + e.getMessage();
 		}
@@ -339,8 +337,9 @@ public class DocumentJDFImpl extends DocumentImpl
 		if (newElement == null)
 		{
 			if (message == null)
-				message = "(DocumentJDFImpl.createKElement) Could not create an element with " + constructi.getName()
-						+ "(CoreDocumentImpl, String, String, String)";
+			{
+				message = "(DocumentJDFImpl.createKElement) Could not create an element with " + constructi.getName() + "(CoreDocumentImpl, String, String, String)";
+			}
 			// something went wrong
 			throw new DOMException(DOMException.SYNTAX_ERR, message);
 		}
@@ -349,17 +348,16 @@ public class DocumentJDFImpl extends DocumentImpl
 	}
 
 	/**
-	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class
-	 * is returned if the element is in a resource pool else if the element is in the default name space
-	 * JDFElement.class is returned else KElement.class is returned
+	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class is returned if the element is in a
+	 * resource pool else if the element is in the default name space JDFElement.class is returned else KElement.class is returned
 	 * 
-	 * @param strNameSpaceURI the namespace of the class. only http://www.CIP4.org/JDFSchema_1_1 is the valid namespace
-	 *            for JDF Elements all other namespaces will return JDFElement.class or JDFResource.class only.
+	 * @param strNameSpaceURI the namespace of the class. only http://www.CIP4.org/JDFSchema_1_1 is the valid namespace for JDF Elements all other namespaces
+	 * will return JDFElement.class or JDFResource.class only.
 	 * @param qualifiedName the qualified name of the class
 	 * @param localPart the local part of the qualified name
 	 * @return
 	 */
-	public Class getFactoryClass(String qualifiedName)
+	public Class getFactoryClass(final String qualifiedName)
 	{
 		Class packageNameClass = null;
 
@@ -367,14 +365,14 @@ public class DocumentJDFImpl extends DocumentImpl
 		{
 			packageNameClass = getFactoryClass(null, qualifiedName, qualifiedName);
 		}
-		catch (ClassNotFoundException e)
+		catch (final ClassNotFoundException e)
 		{ /**/
 		}
 
 		return packageNameClass;
 	}
 
-	private Class getFactoryClass(String strNameSpaceURI, String qualifiedName, String localPart) throws ClassNotFoundException
+	private Class getFactoryClass(final String strNameSpaceURI, final String qualifiedName, final String localPart) throws ClassNotFoundException
 	{
 		Class packageNameClass = sm_ClassAlreadyInstantiated.get(qualifiedName);
 
@@ -401,7 +399,7 @@ public class DocumentJDFImpl extends DocumentImpl
 				{
 					packageNameClass = Class.forName(strClassPath);
 				}
-				catch (ClassNotFoundException e)
+				catch (final ClassNotFoundException e)
 				{
 					// TODO Auto-generated catch block
 					throw new ClassNotFoundException(e.getMessage(), e);
@@ -422,11 +420,13 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param localPart
 	 * @return
 	 */
-	private String getFactoryClassPath(String strNameSpaceURI, String qualifiedName, String localPart)
+	private String getFactoryClassPath(final String strNameSpaceURI, final String qualifiedName, final String localPart)
 	{
 		// we are not yet in a JDF or JMF - it must be a KElement
 		if (!bInJDFJMF)
+		{
 			return "org.cip4.jdflib.core.KElement";
+		}
 
 		String strClassPath = null;
 
@@ -443,8 +443,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		else
 		{
 			strClassPath = sm_PackageNames.get(qualifiedName);
-			if (strClassPath == null
-					&& (null == strNameSpaceURI || jdfNSURI.equals(strNameSpaceURI) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
+			if (strClassPath == null && (null == strNameSpaceURI || jdfNSURI.equals(strNameSpaceURI) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
 			{ // the maps only contain local names for jdf - recheck in case of prefix
 				strClassPath = sm_PackageNames.get(localPart);
 			}
@@ -453,11 +452,11 @@ public class DocumentJDFImpl extends DocumentImpl
 	}
 
 	/**
-	 * @param nameSpaceURI 
+	 * @param nameSpaceURI
 	 * @param strName
 	 * @return Sting the class name
 	 */
-	private String getSpecialClassPath(String nameSpaceURI, String strName)
+	private String getSpecialClassPath(final String nameSpaceURI, final String strName)
 	{
 		String strClassPath = null;
 
@@ -481,8 +480,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		}
 		else if (ElementName.METHOD.equals(strName))
 		{
-			if ("org.cip4.jdflib.resource.intent.JDFInsertingIntent".equals(strParentNodeClass)
-					|| "org.cip4.jdflib.resource.JDFInsert".equals(strParentNodeClass))
+			if ("org.cip4.jdflib.resource.intent.JDFInsertingIntent".equals(strParentNodeClass) || "org.cip4.jdflib.resource.JDFInsert".equals(strParentNodeClass))
 			{
 				strClassPath = "org.cip4.jdflib.span.JDFSpanMethod";
 			}
@@ -532,10 +530,8 @@ public class DocumentJDFImpl extends DocumentImpl
 			}
 			else
 			{
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || 
-							    JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) 
-									? (String) sm_PackageNames.get("EleDefault") 
-									: (String) sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) ? (String) sm_PackageNames.get("EleDefault") : (String) sm_PackageNames
+						.get("OtherNSDefault");
 			}
 		}
 
@@ -556,17 +552,21 @@ public class DocumentJDFImpl extends DocumentImpl
 		return super.toString();
 	}
 
-	void setParentNode(Node node)
+	void setParentNode(final Node node)
 	{
 		m_ParentNode = node;
 	}
 
-	private boolean isDeepResource(String strName)
+	private boolean isDeepResource(final String strName)
 	{
 		if (m_ParentNode == null)
+		{
 			return false;
-		if (m_ParentNode instanceof JDFResourcePool) // direct child of an rp
+		}
+		if (m_ParentNode instanceof JDFResourcePool)
+		{
 			return true;
+		}
 		if (m_ParentNode instanceof JDFResource) // partitioned resource leaf
 		{
 			return m_ParentNode.getLocalName().equals(strName);
@@ -583,10 +583,12 @@ public class DocumentJDFImpl extends DocumentImpl
 	 */
 	// TODO revisit setting parent nodes when importing
 	@Override
-	public synchronized Node importNode(Node importedNode, boolean deep)
+	public synchronized Node importNode(final Node importedNode, final boolean deep)
 	{
 		if (importedNode == null)
+		{
 			return null;
+		}
 		synchronized (importedNode)
 		{
 			setParentNode(importedNode.getParentNode());
@@ -595,8 +597,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	}
 
 	/**
-	 * register all default classes in the factory mapping of the element names which occur during parsing to the
-	 * corresponding classes
+	 * register all default classes in the factory mapping of the element names which occur during parsing to the corresponding classes
 	 * 
 	 * @param strElement
 	 * @param elemClass
@@ -643,6 +644,9 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.ASSETLISTCREATIONPARAMS, "org.cip4.jdflib.resource.process.prepress.JDFAssetListCreationParams");
 		sm_PackageNames.put(ElementName.AUDIT, "org.cip4.jdflib.core.JDFAudit");
 		sm_PackageNames.put(ElementName.AUDITPOOL, "org.cip4.jdflib.pool.JDFAuditPool");
+		sm_PackageNames.put(ElementName.AUTHENTICATIONCMDPARAMS, "org.cip4.jdflib.jmf.JDFAuthenticationCmdParams");
+		sm_PackageNames.put(ElementName.AUTHENTICATIONQUPARAMS, "org.cip4.jdflib.jmf.JDFAuthenticationQuParams");
+		sm_PackageNames.put(ElementName.AUTHENTICATIONRESP, "org.cip4.jdflib.jmf.JDFAuthenticationResp");
 		sm_PackageNames.put(ElementName.AUTOMATEDOVERPRINTPARAMS, "org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams");
 		sm_PackageNames.put(ElementName.BACKCOATINGS, "org.cip4.jdflib.span.JDFSpanCoatings");
 		sm_PackageNames.put(ElementName.BACKCOVERCOLOR, "org.cip4.jdflib.span.JDFSpanNamedColor");
@@ -694,6 +698,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.CASEMAKINGPARAMS, "org.cip4.jdflib.resource.JDFCaseMakingParams");
 		sm_PackageNames.put(ElementName.CASINGINPARAMS, "org.cip4.jdflib.resource.JDFCasingInParams");
 		sm_PackageNames.put(ElementName.CCITTFAXPARAMS, "org.cip4.jdflib.resource.process.JDFCCITTFaxParams");
+		sm_PackageNames.put(ElementName.CERTIFICATE, "org.cip4.jdflib.jmf.JDFCertificate");
 		sm_PackageNames.put(ElementName.CHANGEDATTRIBUTE, "org.cip4.jdflib.resource.JDFChangedAttribute");
 		sm_PackageNames.put(ElementName.CHANGEDPATH, "org.cip4.jdflib.jmf.JDFChangedPath");
 		sm_PackageNames.put(ElementName.CHANNELBINDING, "org.cip4.jdflib.resource.process.postpress.JDFChannelBinding");
@@ -739,7 +744,9 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.CONTENTLIST, "org.cip4.jdflib.resource.process.JDFContentList");
 		sm_PackageNames.put(ElementName.CONTENTMETADATA, "org.cip4.jdflib.resource.process.JDFContentMetaData");
 		sm_PackageNames.put(ElementName.CONTENTOBJECT, "org.cip4.jdflib.resource.process.JDFContentObject");
+		sm_PackageNames.put(ElementName.CONTROLLERFILTER, "org.cip4.jdflib.jmf.JDFControllerFilter");
 		sm_PackageNames.put(ElementName.CONVENTIONALPRINTINGPARAMS, "org.cip4.jdflib.resource.process.JDFConventionalPrintingParams");
+		sm_PackageNames.put(ElementName.CONVERTINGCONFIG, "org.cip4.jdflib.resource.process.JDFConvertingConfig");
 		sm_PackageNames.put(ElementName.COSTCENTER, "org.cip4.jdflib.resource.process.JDFCostCenter");
 		sm_PackageNames.put(ElementName.COUNTERRESET, "org.cip4.jdflib.resource.JDFCounterReset");
 		sm_PackageNames.put(ElementName.COVER, "org.cip4.jdflib.resource.process.JDFCover");
@@ -789,6 +796,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.DEVICENCOLOR, "org.cip4.jdflib.resource.process.JDFDeviceNColor");
 		sm_PackageNames.put(ElementName.DEVICENSPACE, "org.cip4.jdflib.resource.process.JDFDeviceNSpace");
 		sm_PackageNames.put(ElementName.DIELAYOUT, "org.cip4.jdflib.resource.process.JDFDieLayout");
+		sm_PackageNames.put(ElementName.DIELAYOUTPRODUCTIONPARAMS, "org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams");
 		sm_PackageNames.put(ElementName.DIGITALDELIVERYPARAMS, "org.cip4.jdflib.resource.process.prepress.JDFDigitalDeliveryParams");
 		sm_PackageNames.put(ElementName.DIGITALMEDIA, "org.cip4.jdflib.resource.process.JDFDigitalMedia");
 		sm_PackageNames.put(ElementName.DIGITALPRINTINGPARAMS, "org.cip4.jdflib.resource.process.JDFDigitalPrintingParams");
@@ -1136,6 +1144,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.REMOVED, "org.cip4.jdflib.resource.JDFRemoved");
 		sm_PackageNames.put(ElementName.REMOVELINK, "org.cip4.jdflib.jmf.JDFRemoveLink");
 		sm_PackageNames.put(ElementName.RENDERINGPARAMS, "org.cip4.jdflib.resource.process.prepress.JDFRenderingParams");
+		sm_PackageNames.put(ElementName.REPEATDESC, "org.cip4.jdflib.resource.process.JDFRepeatDesc");
 		sm_PackageNames.put(ElementName.REQUESTQUEUEENTRYPARAMS, "org.cip4.jdflib.jmf.JDFRequestQueueEntryParams");
 		sm_PackageNames.put(ElementName.REQUIRED, "org.cip4.jdflib.span.JDFTimeSpan");
 		sm_PackageNames.put(ElementName.RESOURCE, "org.cip4.jdflib.resource.JDFResource");
@@ -1235,6 +1244,8 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.STRIPPINGPARAMS, "org.cip4.jdflib.resource.JDFStrippingParams");
 		sm_PackageNames.put(ElementName.SUBMISSIONMETHODS, "org.cip4.jdflib.jmf.JDFSubmissionMethods");
 		sm_PackageNames.put(ElementName.SUBSCRIPTION, "org.cip4.jdflib.jmf.JDFSubscription");
+		sm_PackageNames.put(ElementName.SUBSCRIPTIONFILTER, "org.cip4.jdflib.jmf.JDFSubscriptionFilter");
+		sm_PackageNames.put(ElementName.SUBSCRIPTIONINFO, "org.cip4.jdflib.jmf.JDFSubscriptionInfo");
 		// "Surface" is context sensitive, see handleOtherElements() and
 		// putConstructorToHashMap()
 		sm_PackageNames.put(ElementName.SURPLUSHANDLING, "org.cip4.jdflib.span.JDFSpanSurplusHandling");
@@ -1327,11 +1338,13 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#removeChild(org.w3c.dom.Node)
 	 */
 	@Override
-	public Node removeChild(Node arg0) throws DOMException
+	public Node removeChild(final Node arg0) throws DOMException
 	{
 		final XMLDocUserData ud = getXMLDocUserData();
 		if (ud != null)
+		{
 			ud.clearTargets();
+		}
 
 		return super.removeChild(arg0);
 	}
@@ -1340,11 +1353,13 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#replaceChild(org.w3c.dom.Node, org.w3c.dom.Node)
 	 */
 	@Override
-	public Node replaceChild(Node arg0, Node arg1) throws DOMException
+	public Node replaceChild(final Node arg0, final Node arg1) throws DOMException
 	{
 		final XMLDocUserData ud = getXMLDocUserData();
 		if (ud != null)
+		{
 			ud.clearTargets();
+		}
 		return super.replaceChild(arg0, arg1);
 	}
 
@@ -1361,7 +1376,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * 
 	 * @param _setIgnoreNSDefault the setIgnoreNSDefault to set
 	 */
-	public void setIgnoreNSDefault(boolean _setIgnoreNSDefault)
+	public void setIgnoreNSDefault(final boolean _setIgnoreNSDefault)
 	{
 		this.ignoreNSDefault = _setIgnoreNSDefault;
 	}

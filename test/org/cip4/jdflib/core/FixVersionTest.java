@@ -111,8 +111,7 @@ public class FixVersionTest extends TestCase
 	public void testApprovalSuccess()
 	{
 		n.setType("Approval", true);
-		JDFApprovalSuccess as = (JDFApprovalSuccess) n.appendMatchingResource(
-				ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null);
+		JDFApprovalSuccess as = (JDFApprovalSuccess) n.appendMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null);
 		n.setVersion(EnumVersion.Version_1_2);
 		as.appendContact();
 		as.appendFileSpec();
@@ -124,10 +123,8 @@ public class FixVersionTest extends TestCase
 		assertNull("approvaldetails", as.getApprovalDetails(0));
 		bRet = n.fixVersion(EnumVersion.Version_1_3);
 		assertTrue("fix ok", bRet);
-		as = (JDFApprovalSuccess) n.getMatchingResource(
-				ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null,
-				0);
-		JDFApprovalDetails ad = as.getApprovalDetails(0);
+		as = (JDFApprovalSuccess) n.getMatchingResource(ElementName.APPROVALSUCCESS, EnumProcessUsage.AnyOutput, null, 0);
+		final JDFApprovalDetails ad = as.getApprovalDetails(0);
 		ad.setApprovalState(EnumApprovalState.Rejected);
 		bRet = n.fixVersion(EnumVersion.Version_1_2);
 		assertFalse("fix not ok", bRet);
@@ -137,7 +134,7 @@ public class FixVersionTest extends TestCase
 
 	public void testRRefs()
 	{
-		JDFResourcePool rp = n.appendResourcePool();
+		final JDFResourcePool rp = n.appendResourcePool();
 		rp.setAttribute(AttributeName.RREFS, "a b", null);
 		n.fixVersion(null);
 		assertFalse(rp.hasAttribute(AttributeName.RREFS));
@@ -148,11 +145,11 @@ public class FixVersionTest extends TestCase
 
 	public void testAudit()
 	{
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNotNull(ap);
-		JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created,
-				null, null);
-		String agent = crea.getAgentName();
+		final JDFCreated crea = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
+		final String agent = crea.getAgentName();
+		crea.setAuthor(agent);
 		assertNotNull(agent);
 		String author = crea.getAuthor();
 		assertNotNull(author);
@@ -183,8 +180,7 @@ public class FixVersionTest extends TestCase
 
 	public void testResourceStatus()
 	{
-		JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input,
-				null, null, null, null);
+		final JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
 		m.setResStatus(EnumResStatus.Available, true);
 		assertEquals(m.getResStatus(true), EnumResStatus.Available);
 		assertTrue(m.fixVersion(EnumVersion.Version_1_1));
@@ -196,8 +192,7 @@ public class FixVersionTest extends TestCase
 	// //////////////////////////////////////////////////////////////////////
 	public void testTool()
 	{
-		JDFTool t = (JDFTool) n.addResource("Tool", null, EnumUsage.Input,
-				null, null, null, null);
+		final JDFTool t = (JDFTool) n.addResource("Tool", null, EnumUsage.Input, null, null, null, null);
 		t.setResStatus(EnumResStatus.Available, true);
 		t.setProductID("toolID");
 		assertTrue(t.fixVersion(EnumVersion.Version_1_1));

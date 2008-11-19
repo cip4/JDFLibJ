@@ -196,9 +196,8 @@ import org.w3c.dom.Node;
 public class JDFNode extends JDFElement implements INodeIdentifiable
 {
 	/**
-	 * 0x22222222 is the HexValue used so programmers know which attribute/element is REQUIRED when
-	 * "Add Required elements/attributes" is selected. The validation tool will also throw an error until the
-	 * attribute/element is added.
+	 * 0x22222222 is the HexValue used so programmers know which attribute/element is REQUIRED when "Add Required elements/attributes" is selected. The
+	 * validation tool will also throw an error until the attribute/element is added.
 	 */
 	private static AtrInfoTable[] atrInfoTable_abstract = new AtrInfoTable[21];
 	static
@@ -252,7 +251,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
-		AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_abstract);
+		final AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_abstract);
 		final String nodeType = getType();
 		if (JDFConstants.PROCESSGROUP.equals(nodeType) && !hasChildElement(ElementName.JDF, null))
 		{
@@ -300,7 +299,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
-		ElementInfo ei = super.getTheElementInfo().updateReplace(elemInfoTable_abstract);
+		final ElementInfo ei = super.getTheElementInfo().updateReplace(elemInfoTable_abstract);
 
 		final String typ = getType();
 		if (JDFConstants.PROCESSGROUP.equals(typ) || JDFConstants.PRODUCT.equals(typ))
@@ -322,7 +321,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNode(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFNode(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -334,7 +333,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNode(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFNode(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -347,7 +346,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNode(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNode(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -370,9 +369,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			JDFConstants.INPUT_ZEROTOINFINITY // USAGECOUNTER
 	};
 
-	private static String[] m_strGenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO,
-			ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE, ElementName.NODEINFO,
-			ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
+	private static String[] m_strGenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
+			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	private static final long serialVersionUID = 1L;
 
@@ -396,17 +394,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			return getName();
 		}
 
-		protected EnumCleanUpMerge(String name)
+		protected EnumCleanUpMerge(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumCleanUpMerge getEnum(String enumName)
+		public static EnumCleanUpMerge getEnum(final String enumName)
 		{
 			return (EnumCleanUpMerge) getEnum(EnumCleanUpMerge.class, enumName);
 		}
 
-		public static EnumCleanUpMerge getEnum(int enumValue)
+		public static EnumCleanUpMerge getEnum(final int enumValue)
 		{
 			return (EnumCleanUpMerge) getEnum(EnumCleanUpMerge.class, enumValue);
 		}
@@ -444,17 +442,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		private static int m_startValue = 0;
 
-		protected EnumActivation(String name)
+		protected EnumActivation(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumActivation getEnum(String enumName)
+		public static EnumActivation getEnum(final String enumName)
 		{
 			return (EnumActivation) getEnum(EnumActivation.class, enumName);
 		}
 
-		public static EnumActivation getEnum(int enumValue)
+		public static EnumActivation getEnum(final int enumValue)
 		{
 			return (EnumActivation) getEnum(EnumActivation.class, enumValue);
 		}
@@ -516,18 +514,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		private static int m_startValue = 0;
 
-		protected EnumType(String name)
+		protected EnumType(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumType getEnum(String enumName)
+		public static EnumType getEnum(final String enumName)
 		{
-			EnumType myEnum = (EnumType) getEnum(EnumType.class, enumName);
+			final EnumType myEnum = (EnumType) getEnum(EnumType.class, enumName);
 			return myEnum;
 		}
 
-		public static EnumType getEnum(int enumValue)
+		public static EnumType getEnum(final int enumValue)
 		{
 			return (EnumType) getEnum(EnumType.class, enumValue);
 		}
@@ -573,6 +571,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		public static final EnumType CylinderLayoutPreparation = new EnumType(JDFConstants.TYPE_CYLINDERLAYOUTPREPARATION);
 		public static final EnumType DBDocTemplateLayout = new EnumType(JDFConstants.TYPE_DBDOCTEMPLATELAYOUT);
 		public static final EnumType DBTemplateMerging = new EnumType(JDFConstants.TYPE_DBTEMPLATEMERGING);
+		public static final EnumType DieDesign = new EnumType("DieDesign");
+		public static final EnumType DieLayoutProduction = new EnumType("DieLayoutProduction");
 		public static final EnumType DigitalDelivery = new EnumType(JDFConstants.TYPE_DIGITALDELIVERY);
 		public static final EnumType FilmToPlateCopying = new EnumType(JDFConstants.TYPE_FILMTOPLATECOPYING);
 		public static final EnumType FormatConversion = new EnumType(JDFConstants.TYPE_FORMATCONVERSION);
@@ -583,6 +583,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		public static final EnumType Interpreting = new EnumType(JDFConstants.TYPE_INTERPRETING);
 		public static final EnumType LayoutElementProduction = new EnumType(JDFConstants.TYPE_LAYOUTELEMENTPRODUCTION);
 		public static final EnumType LayoutPreparation = new EnumType(JDFConstants.TYPE_LAYOUTPREPARATION);
+		public static final EnumType LayoutShifting = new EnumType("LayoutShifting");
+		public static final EnumType PageAssigning = new EnumType("PageAssigning");
 		public static final EnumType PDFToPSConversion = new EnumType(JDFConstants.TYPE_PDFTOPSCONVERSION);
 		public static final EnumType PDLCreation = new EnumType(JDFConstants.TYPE_PDLCREATION);
 		public static final EnumType Preflight = new EnumType(JDFConstants.TYPE_PREFLIGHT);
@@ -604,6 +606,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		public static final EnumType ConventionalPrinting = new EnumType(JDFConstants.TYPE_CONVENTIONALPRINTING);
 		public static final EnumType DigitalPrinting = new EnumType(JDFConstants.TYPE_DIGITALPRINTING);
 		public static final EnumType IDPrinting = new EnumType(JDFConstants.TYPE_IDPRINTING);
+		public static final EnumType Varnishing = new EnumType("Varnishing");
 
 		// postpress
 		public static final EnumType AdhesiveBinding = new EnumType(JDFConstants.TYPE_ADHESIVEBINDING);
@@ -619,6 +622,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		public static final EnumType CoverApplication = new EnumType(JDFConstants.TYPE_COVERAPPLICATION);
 		public static final EnumType Creasing = new EnumType(JDFConstants.TYPE_CREASING);
 		public static final EnumType Cutting = new EnumType(JDFConstants.TYPE_CUTTING);
+		public static final EnumType DieMaking = new EnumType("DieMaking");
 		public static final EnumType Dividing = new EnumType(JDFConstants.TYPE_DIVIDING);
 		public static final EnumType Embossing = new EnumType(JDFConstants.TYPE_EMBOSSING);
 		public static final EnumType EndSheetGluing = new EnumType(JDFConstants.TYPE_ENDSHEETGLUING);
@@ -641,11 +645,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		public static final EnumType RingBinding = new EnumType(JDFConstants.TYPE_RINGBINDING);
 		public static final EnumType SaddleStitching = new EnumType(JDFConstants.TYPE_SADDLESTITCHING);
 		public static final EnumType ShapeCutting = new EnumType(JDFConstants.TYPE_SHAPECUTTING);
+		public static final EnumType ShapeDefProduction = new EnumType("ShapeDefProduction");
 		public static final EnumType Shrinking = new EnumType(JDFConstants.TYPE_SHRINKING);
 		public static final EnumType SideSewing = new EnumType(JDFConstants.TYPE_SIDESEWING);
 		public static final EnumType SpinePreparation = new EnumType(JDFConstants.TYPE_SPINEPREPARATION);
 		public static final EnumType SpineTaping = new EnumType(JDFConstants.TYPE_SPINETAPING);
 		public static final EnumType Stacking = new EnumType(JDFConstants.TYPE_STACKING);
+		public static final EnumType StaticBlocking = new EnumType("StaticBlocking");
 		public static final EnumType Stitching = new EnumType(JDFConstants.TYPE_STITCHING);
 		public static final EnumType Strapping = new EnumType(JDFConstants.TYPE_STRAPPING);
 		public static final EnumType StripBinding = new EnumType(JDFConstants.TYPE_STRIPBINDING);
@@ -962,10 +968,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param mMaps
 	 * @param hm HashMap to add the new entry to
 	 */
-	private static void nameMapPut(String key, String addon, String[] mMaps, HashMap hm)
+	private static void nameMapPut(final String key, final String addon, final String[] mMaps, final HashMap hm)
 	{
-		VString vs = StringUtil.tokenize(addon, JDFConstants.COMMA, false);
-		String[] v = new String[mMaps.length + vs.size()];
+		final VString vs = StringUtil.tokenize(addon, JDFConstants.COMMA, false);
+		final String[] v = new String[mMaps.length + vs.size()];
 		int i = 0;
 		for (; i < mMaps.length; i++)
 		{
@@ -985,7 +991,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param nameAddon value of the new entry in m_strGenericLinkNames
 	 * @param linkAddon value of the new entry in m_GenericLinkInfo
 	 */
-	private static void mapPut(String key, String nameAddon, String linkAddon)
+	private static void mapPut(final String key, final String nameAddon, final String linkAddon)
 	{
 		nameMapPut(key, nameAddon, m_strGenericLinkNames, m_LinkNamesMap);
 		nameMapPut(key, linkAddon, m_GenericLinkInfo, m_LinkInfoMap);
@@ -998,455 +1004,466 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				+ "HoleMakingIntent,InsertingIntent,LaminatingIntent,LayoutIntent,MediaIntent,NumberingIntent,"
 				+ "PackingIntent,ProductionIntent,ProofingIntent,ScreeningIntent,ShapeCuttingIntent,SizeIntent"
 		// links
-		, ",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?," + "i?,i?,i?,i?,i?,i?," + "i?,i?,i?,i?,i?,i?");
+				, ",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?");
 
 		mapPut(EnumType.ProcessGroup.getName(), ",*",
 		// links
-		",i* o*");
+				",i* o*");
 
 		mapPut(EnumType.Combined.getName(), ",",
 		// links
-		",");
+				",");
 
 		// ----- general -----
 		mapPut(EnumType.Approval.getName(), ",*,ApprovalSuccess,ApprovalParams",
 		// links
-		",o*Rejected o*Accepted i*,o_,i_");
+				",o*Rejected o*Accepted i*,o_,i_");
 
 		mapPut(EnumType.Buffer.getName(), ",*,BufferParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.Combine.getName(), ",*",
 		// links
-		",o_ i+");
+				",o_ i+");
 
 		mapPut(EnumType.Delivery.getName(), ",*,DeliveryParams",
 		// links
-		",o+ i?,i_");
+				",o+ i?,i_");
 
 		mapPut(EnumType.ManualLabor.getName(), ",*,ManualLaborParams",
 		// links
-		",o_ i*,i_");
+				",o* i*,i_");
 
 		mapPut(EnumType.Ordering.getName(), ",*,OrderingParams",
 		// links
-		",o+,i_");
+				",o+,i_");
 
 		mapPut(EnumType.Packing.getName(), ",*,PackingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.QualityControl.getName(), ",*,QualityControlResult,QualityControlParams",
 		// links
-		",o_ i_,o_,i_");
+				",o_ i_,o_,i_");
 
 		mapPut(EnumType.ResourceDefinition.getName(), ",*,ResourceDefinitionParams",
 		// links
-		",o+ i*,i?");
+				",o+ i*,i?");
 
 		mapPut(EnumType.Split.getName(), ",*",
 		// links
-		",o+ i_");
+				",o+ i_");
 
 		mapPut(EnumType.Verification.getName(), ",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema",
 		// links
-		",o? i?,o? i?,o?,i_,i*,i?");
+				",o? i?,o? i?,o?,i_,i*,i?");
 
 		// ----- prepress -----
 		mapPut(EnumType.AssetListCreation.getName(), ",AssetListCreationParams,RunList",
 		// links
-		",i_,i_ o_");
+				",i_,i_ o_");
 
 		mapPut(EnumType.Bending.getName(), ",BendingParams,ExposedMedia,Media",
 		// links
-		",i_,i? o_,i?");
+				",i_,i? o_,i?");
 
 		mapPut(EnumType.ColorCorrection.getName(), ",ColorantControl,ColorCorrectionParams,RunList",
 		// links
-		",i?,i_,o_ i_");
+				",i?,i_,o_ i_");
 
 		mapPut(EnumType.ColorSpaceConversion.getName(), ",ColorantControl,ColorSpaceConversionParams,RunList",
 		// links
-		",i?,i_,o_ i_");
+				",i?,i_,o_ i_");
 
 		mapPut(EnumType.ContactCopying.getName(), ",ContactCopyParams,DevelopingParams,ExposedMedia,Media,PlateCopyParams",
 		// links
-		",i_,i?,o_ i+,i_,i?");
+				",i_,i?,o_ i+,i_,i?");
 
 		mapPut(EnumType.ContoneCalibration.getName(), ",RunList,ScreeningParams,TransferFunctionControl",
 		// links
-		",o_ i_,i?,i?");
+				",o_ i_,i?,i?");
 
 		mapPut(EnumType.CylinderLayoutPreparation.getName(), ",CylinderLayoutPreparationParams,Layout,RunList,CylinderLayout",
 		// links
-		",i?,i_,i_,o_");
+				",i?,i_,i_,o_");
 
 		mapPut(EnumType.DBDocTemplateLayout.getName(), ",DBRules,DBSchema,LayoutElement",
 		// links
-		",i_,i_,o* i*");
+				",i_,i_,o* i*");
 
 		mapPut(EnumType.DBTemplateMerging.getName(), ",DBMergeParams,DBSelection,LayoutElement,RunList",
 		// links
-		",i_,i_,i*,o_");
+				",i_,i_,i*,o_");
+
+		mapPut(EnumType.DieDesign.getName(), ",DieLayout",
+		// links
+				",i_ o+");
+
+		mapPut(EnumType.DieLayoutProduction.getName(), ",DieLayout,DieLayoutProductionParams",
+		// links
+				",i+ o+,i_");
 
 		mapPut(EnumType.DigitalDelivery.getName(), ",DigitalDeliveryParams,RunList",
 		// links
-		",i_,o+ i*");
+				",i_,o+ i*");
 
 		mapPut(EnumType.FilmToPlateCopying.getName(), ",DevelopingParams,ExposedMedia,Media,PlateCopyParams",
 		// links
-		",i?,o_ i_,i_,i_");
+				",i?,o_ i_,i_,i_");
 
 		mapPut(EnumType.FormatConversion.getName(), ",FormatConversionParams,RunList",
 		// links
-		",i_,o_ i_");
+				",i_,o_ i_");
 
 		mapPut(EnumType.ImageReplacement.getName(), ",ImageCompressionParams,ImageReplacementParams,RunList",
 		// links
-		",i?,i_,o_ i_");
+				",i?,i_,o_ i_");
 
-		mapPut(EnumType.ImageSetting.getName(), ",ColorantControl,DevelopingParams,ImageSetterParams,Media,"
-				+ "RunList,TransferCurvePool,ExposedMedia",
+		mapPut(EnumType.ImageSetting.getName(), ",ColorantControl,DevelopingParams,ImageSetterParams,Media,RunList,TransferCurvePool,ExposedMedia",
 		// links
-		",i?,i?,i?,i?," + "i_,i?,o_ i?");
+				",i?,i?,i?,i?,i_,i?,o_ i?");
 
 		mapPut(EnumType.Imposition.getName(), ",Layout,RunList",
 		// links
-		",i_,o_ i?Marks i_Document");
+				",i_,o_ i?Marks i_Document");
 
-		mapPut(EnumType.InkZoneCalculation.getName(), ",InkZoneCalculationParams,InkZoneProfile,Layout,"
-				+ "TransferCurvePool,Sheet,Preview",
+		mapPut(EnumType.InkZoneCalculation.getName(), ",InkZoneCalculationParams,InkZoneProfile,Layout,TransferCurvePool,Sheet,Preview",
 		// links
-		",i?,o_,i?," + "i?,i?,i_");
+				",i?,o_,i?,i?,i?,i_");
 
-		mapPut(EnumType.Interpreting.getName(), ",ColorantControl,FontPolicy,InterpretedPDLData"
-				+ ",InterpretingParams,PDLResourceAlias,RunList",
+		mapPut(EnumType.Interpreting.getName(), ",ColorantControl,FontPolicy,InterpretedPDLData,InterpretingParams,PDLResourceAlias,RunList",
 		// links
-		",i?,i?,o?" + ",i_,i*,o? i_");
+				",i?,i?,o?,i_,i*,o? i_");
 
 		mapPut(EnumType.LayoutElementProduction.getName(), ",LayoutElement,RunList,LayoutElementProductionParams",
 		// links
-		",o? i*,i* o?,i?");
+				",o? i*,i* o?,i?");
 
 		mapPut(EnumType.LayoutPreparation.getName(), ",LayoutPreparationParams,RunList,Layout,TransferCurvePool",
 		// links
-		",i_,o?Marks i?Marks i?Document,o_,o?");
+				",i_,o?Marks i?Marks i?Document,o_,o?");
+
+		mapPut(EnumType.PageAssigning.getName(), ",PageAssignParams,RunList",
+		// links
+				",i_,o_ i+");
 
 		mapPut(EnumType.PDFToPSConversion.getName(), ",PDFToPSConversionParams,RunList",
 		// links
-		",i_,o_ i_");
+				",i_,o_ i_");
 
 		mapPut(EnumType.PDLCreation.getName(), ",ImageCompressionParams,PDLCreationParams,RunList",
 		// links
-		",i?,i?,o_ i_");
+				",i?,i?,o_ i_");
 
 		mapPut(EnumType.Preflight.getName(), ",PreflightParams,PreflightReportRulePool,RunList,PreflightReport",
 		// links
-		",i_,i_,i_,o_");
+				",i_,i_,i_,o_");
 
-		mapPut(EnumType.PreviewGeneration.getName(), ",ColorantControl,ExposedMedia,PreviewGenerationParams"
-				+ ",RunList,TransferCurvePool,Preview",
+		mapPut(EnumType.PreviewGeneration.getName(), ",ColorantControl,ExposedMedia,PreviewGenerationParams,RunList,TransferCurvePool,Preview",
 		// links
-		",i?,i?,i_" + ",i?,i?,o_ i?");
+				",i?,i?,i_,i?,i?,o_ i?");
 
-		mapPut(EnumType.Proofing.getName(), ",ColorantControl,ColorSpaceConversionParams"
-				+ ",ExposedMedia,Layout,Media,ProofingParams,RunList",
+		mapPut(EnumType.Proofing.getName(), ",ColorantControl,ColorSpaceConversionParams,ExposedMedia,Layout,Media,ProofingParams,RunList",
 		// links
-		",i?,i?" + ",o_,i?,i_,i_,i?Marks i_Document");
+				",i?,i?,o_,i?,i_,i_,i?Marks i_Document");
 
-		mapPut(EnumType.PSToPDFConversion.getName(), ",FontParams,ImageCompressionParams"
-				+ ",PSToPDFConversionParams,RunList",
+		mapPut(EnumType.PSToPDFConversion.getName(), ",FontParams,ImageCompressionParams,PSToPDFConversionParams,RunList",
 		// links
-		",i?,i?" + ",i?,o_ i_");
+				",i?,i?,i?,o_ i_");
 
 		mapPut(EnumType.RasterReading.getName(), ",RasterReadingParams,RunList",
 		// links
-		",i?,o_ i_");
+				",i?,o_ i_");
 
 		mapPut(EnumType.Rendering.getName(), ",InterpretedPDLData,Media,RenderingParams,RunList",
 		// links
-		",i?,i?,i?,o_ i?");
+				",i?,i?,i?,o_ i?");
 
 		mapPut(EnumType.Scanning.getName(), ",ExposedMedia,ScanParams,RunList",
 		// links
-		",i_,i_,o_");
+				",i_,i_,o_");
 
 		mapPut(EnumType.Screening.getName(), ",RunList,ScreeningParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.Separation.getName(), ",ColorantControl,RunList,SeparationControlParams",
 		// links
-		",i?,o_ i_,i_");
+				",i?,o_ i_,i_");
 
-		mapPut(EnumType.SoftProofing.getName(), ",ColorantControl,ColorSpaceConversionParams,Layout"
-				+ ",ProofingParams,RunList",
+		mapPut(EnumType.SoftProofing.getName(), ",ColorantControl,ColorSpaceConversionParams,Layout,ProofingParams,RunList",
 		// links
-		",i?,i?,i?" + ",i_,i?Marks i_Document");
+				",i?,i?,i?,i_,i?Marks i_Document");
 
 		mapPut(EnumType.Stripping.getName(), ",RunList,Layout,Assembly,TransferCurvePool,StrippingParams,ColorantControl",
 		// links
-		",o?Marks o?Document i?Document,o_,i+,i?,i_,i?");
+				",o?Marks o?Document i?Document,o_,i+,i?,i_,i?");
 
 		mapPut(EnumType.Tiling.getName(), ",RunList,Tile",
 		// links
-		",o_ i?Marks i_Surface,i_");
+				",o_ i?Marks i_Surface,i_");
 
 		mapPut(EnumType.Trapping.getName(), ",ColorantControl,RunList,TrappingDetails,FontPolicy",
 		// links
-		",i?,o_ i_,i_,i?");
+				",i?,o_ i_,i_,i?");
 
 		// ----- press -----
-		mapPut(EnumType.ConventionalPrinting.getName(), ",ColorantControl,Component,ConventionalPrintingParams"
-				+ ",ExposedMedia,Ink,InkZoneProfile,Layout,Media" + ",PrintCondition,Sheet,TransferCurvePool",
+		mapPut(EnumType.ConventionalPrinting.getName(), ",ColorantControl,Component,ConventionalPrintingParams,ExposedMedia,Ink,InkZoneProfile,Layout,Media"
+				+ ",PrintCondition,Sheet,TransferCurvePool",
 		// link info
-		",i?,o?Waste o_ i?Proof i?Input i?,i_," + "i?Plate i?Cylinder i?Proof,i?,i?,i?,i?," + "i?,i?,i?");
+				",i?,o?Waste o_ i?Proof i?Input i?,i_,i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,i?,i?,i? i?MountingTape");
 
-		mapPut(EnumType.DigitalPrinting.getName(), ",ColorantControl,Component,DigitalPrintingParams"
-				+ ",ExposedMedia,Ink,PrintCondition,Media,RunList" + ",Layout,Sheet,TransferCurvePool",
+		mapPut(EnumType.DigitalPrinting.getName(), ",ColorantControl,Component,DigitalPrintingParams,ExposedMedia,Ink,PrintCondition,Media,RunList,Layout,Sheet,TransferCurvePool",
 		// links
-		",i?,o?Waste o_ i?Proof i*Input i*,i_" + ",i?,i?,i?,i*,i_" + ",i?,i?,i?");
+				",i?,o?Waste o_ i?Proof i*Input i*,i_,i?,i?,i?,i*,i_,i?,i?,i?");
 
-		mapPut(EnumType.IDPrinting.getName(), ",ColorantControl,Component,ExposedMedia,FontPolicy"
-				+ ",Ink,InterpretingParams,IDPrintingParams,Media" + ",RenderingParams,RunList,ScreeningParams"
+		mapPut(EnumType.IDPrinting.getName(), ",ColorantControl,Component,ExposedMedia,FontPolicy,Ink,InterpretingParams,IDPrintingParams,Media,RenderingParams,RunList,ScreeningParams"
 				+ ",TransferFunctionControl",
 		// links
-		",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?" + ",i?,i*,i?,i?" + ",i?,i_,i?" + ",i?");
+				",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?,i?,i*,i?,i?,i?,i_,i?,i?");
+
+		mapPut(EnumType.Varnishing.getName(), ",Component,ExposedMedia,Ink,Media,VarnishingParams",
+		// links
+				",i? o_,o*,i?,i?,i?");
 
 		// ----- postpress -----
 		mapPut(EnumType.AdhesiveBinding.getName(), ",AdhesiveBindingParams,Component",
 		// links
-		",i_,o_ i?Cover i_BookBlock");
+				",i_,o_ i?Cover i_BookBlock");
 
 		mapPut(EnumType.BlockPreparation.getName(), ",Component,BlockPreparationParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.BoxFolding.getName(), ",Component,BoxFoldingParams",
 		// links
-		",o_ i*Application i_,i_");
+				",o_ i*Application i_,i_");
 
 		mapPut(EnumType.BoxPacking.getName(), ",Component,BoxPackingParams",
 		// links
-		",o_ i?Box i_,i_");
+				",o_ i?Box i_,i_");
 
 		mapPut(EnumType.Bundling.getName(), ",Component,BundlingParams,Media",
 		// links
-		",o_ i_,i_,i?");
+				",o_ i_,i_,i?");
 
 		mapPut(EnumType.CaseMaking.getName(), ",Component,CaseMakingParams,Media",
 		// links
-		",o_ i?CoverMaterial,i_,i?SpineBoard i_CoverBoard i?CoverMaterial");
+				",o_ i?CoverMaterial,i_,i?SpineBoard i_CoverBoard i?CoverMaterial");
 
 		mapPut(EnumType.CasingIn.getName(), ",Component,CasingInParams",
 		// links
-		",o_ i_Case i_,i_");
+				",o_ i_Case i_,i_");
 
 		mapPut(EnumType.ChannelBinding.getName(), ",ChannelBindingParams,Component",
 		// links
-		",i_,o_ i?Cover i_BookBlock");
+				",i_,o_ i?Cover i_BookBlock");
 
 		mapPut(EnumType.CoilBinding.getName(), ",CoilBindingParams,Component",
 		// links
-		",i_,o_ i_");
+				",i_,o_ i_");
 
-		mapPut(EnumType.Collecting.getName(), ",CollectingParams,Component,DBRules,DBSelection"
-				+ ",IdentificationField,Assembly",
+		mapPut(EnumType.Collecting.getName(), ",CollectingParams,Component,DBRules,DBSelection,IdentificationField,Assembly",
 		// links
-		",i?,o_ i+,i*,i?" + ",i?,i?");
+				",i?,o_ i+,i*,i?,i?,i?");
 
 		mapPut(EnumType.CoverApplication.getName(), ",Component,CoverApplicationParams",
 		// links
-		",o_ i_Cover i_,i_");
+				",o_ i_Cover i_,i_");
 
 		mapPut(EnumType.Creasing.getName(), ",CreasingParams,Component",
 		// links
-		",i_,o_ i_");
+				",i_,o_ i_");
 
 		mapPut(EnumType.Cutting.getName(), ",Component,CutBlock,CutMark,CuttingParams,Media",
 		// links
-		",o* i?,i*,i*,i_,o* i?");
+				",o* i?,i*,i*,i_,o* i?");
 
 		mapPut(EnumType.Dividing.getName(), ",Component,DividingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.Embossing.getName(), ",Component,EmbossingParams,Media,Tool",
 		// links
-		",o_ i_,i_,i?,i?");
+				",o_ i_,i_,i?,i?");
 
 		mapPut(EnumType.EndSheetGluing.getName(), ",Component,EndSheetGluingParams",
 		// links
-		",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_");
+				",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_");
 
 		mapPut(EnumType.Feeding.getName(), ",Component,FeedingParams,Media",
 		// links
-		",o* i*,i_,o* i*");
+				",o* i*,i_,o* i*");
 
 		mapPut(EnumType.Folding.getName(), ",Component,FoldingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
-		mapPut(EnumType.Gathering.getName(), ",Assembly,Component,DBRules,DBSelection"
-				+ ",GatheringParams,IdentificationField",
+		mapPut(EnumType.Gathering.getName(), ",Assembly,Component,DBRules,DBSelection,GatheringParams,IdentificationField",
 		// links
-		",i?,o_ i+,i*,i?" + ",i_,i?");
+				",i?,o_ i+,i*,i?,i_,i?");
 
 		mapPut(EnumType.Gluing.getName(), ",Component,GluingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.HeadBandApplication.getName(), ",Component,HeadBandApplicationParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.HoleMaking.getName(), ",Component,HoleMakingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
-		mapPut(EnumType.Inserting.getName(), ",Component,DBRules,DBSelection" + ",IdentificationField,InsertingParams",
+		mapPut(EnumType.Inserting.getName(), ",Component,DBRules,DBSelection,IdentificationField,InsertingParams",
 		// links
-		",o_ i_Child i?Mother i?,i?,i?" + ",i?,i_");
+				",o_ i_Child i?Mother i?,i?,i?,i?,i_");
 
 		mapPut(EnumType.Jacketing.getName(), ",Component,JacketingParams",
 		// links
-		",o_ i_Jacket i_Book,i_");
+				",o_ i_Jacket i_Book,i_");
 
 		mapPut(EnumType.Labeling.getName(), ",Component,LabelingParams",
 		// links
-		",o_ i?Label i_,i_");
+				",o_ i?Label i_,i_");
 
 		mapPut(EnumType.Laminating.getName(), ",Component,LaminatingParams,Media",
 		// links
-		",o_ i_,i_,i?");
+				",o_ i_,i_,i?");
 
 		mapPut(EnumType.LongitudinalRibbonOperations.getName(), ",Component,LongitudinalRibbonOperationParams",
 		// links
-		",o+ i_,i_");
+				",o+ i_,i_");
 
 		mapPut(EnumType.Numbering.getName(), ",Component,NumberingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.Palletizing.getName(), ",Component,PalletizingParams,Pallet",
 		// links
-		",o_ i_,i_,i_");
+				",o_ i_,i_,i_");
 
 		mapPut(EnumType.Perforating.getName(), ",PerforatingParams,Component",
 		// links
-		",i_,o_ i_");
+				",i_,o_ i_");
 
 		mapPut(EnumType.PlasticCombBinding.getName(), ",Component,PlasticCombBindingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.PrintRolling.getName(), ",Component,PrintRollingParams,RollStand",
 		// links
-		",o_ i_,i?,i?");
+				",o_ i_,i?,i?");
 
 		mapPut(EnumType.RingBinding.getName(), ",Component,RingBindingParams",
 		// links
-		",o_ i?RingBinder i_BookBlock,i_");
+				",o_ i?RingBinder i_BookBlock,i_");
 
 		mapPut(EnumType.SaddleStitching.getName(), ",Component,SaddleStitchingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.ShapeCutting.getName(), ",Component,ShapeCuttingParams,Tool",
 		// links
-		",o+ i_,i?,i*");
+				",o+ i_,i?,i*");
+		mapPut(EnumType.ShapeDefProduction.getName(), ",LayoutElement,ShapeDefProductionParams,ShapeDef",
+		// links
+				",i?,i_,o+");
 
 		mapPut(EnumType.Shrinking.getName(), ",Component,ShrinkingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.SideSewing.getName(), ",Component,SideSewingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.SpinePreparation.getName(), ",Component,SpinePreparationParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.SpineTaping.getName(), ",Component,SpineTapingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.Stacking.getName(), ",Component,StackingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
+
+		mapPut(EnumType.StaticBlocking.getName(), ",Component,StaticBlockingParams",
+		// links
+				",o_ i_,i_");
 
 		mapPut(EnumType.Stitching.getName(), ",Component,StitchingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.Strapping.getName(), ",Component,StrappingParams,Strap",
 		// links
-		",o_ i_,i_,i?");
+				",o_ i_,i_,i?");
 
 		mapPut(EnumType.StripBinding.getName(), ",Component,StripBindingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.ThreadSealing.getName(), ",Component,ThreadSealingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.ThreadSewing.getName(), ",Component,ThreadSewingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.Trimming.getName(), ",Component,TrimmingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
-		mapPut(EnumType.WebInlineFinishing.getName(), ",Assembly,Component,ProductionPath"
-				+ ",StrippingParams,WebInlineFinishingParams",
+		mapPut(EnumType.WebInlineFinishing.getName(), ",Assembly,Component,ProductionPath,StrippingParams,WebInlineFinishingParams",
 		// links
-		",i?,o_ i_,i?" + ",i?,i?");
+				",i?,o_ i_,i?,i?,i?");
 
 		mapPut(EnumType.WireCombBinding.getName(), ",Component,WireCombBindingParams",
 		// links
-		",o_ i_,i_");
+				",o_ i_,i_");
 
 		mapPut(EnumType.Wrapping.getName(), ",Component,WrappingParams,Media",
 		// links
-		",o_ i_,i_,i?");
+				",o_ i_,i_,i?");
 
 		mapPut(EnumType.PrepressPreparation.getName(), ",RunList,*",
 		// links
-		",i_Document o_Document,i* o*");
+				",i_Document o_Document,i* o*");
 
 		mapPut(EnumType.ImpositionPreparation.getName(), ",Layout,RunList,*",
 		// links
-		",o_,i?Document o?Document o_Marks,,i* o*");
+				",o_,i?Document o?Document o_Marks,,i* o*");
 		mapPut(EnumType.RIPing.getName(), ",InterpretingParams,RenderingParams,RunList,*",
 		// links
-		",i?,i?,o_ i_Document i?Marks,i* o*");
+				",i?,i?,o_ i_Document i?Marks,i* o*");
 
 		mapPut(EnumType.PlateSetting.getName(), ",*,ExposedMedia,Preview",
 		// links
-		",i* o*,o_,o*");
+				",i* o*,o_,o*");
 		mapPut(EnumType.PlateMaking.getName(), ",*,RunList,ExposedMedia,Preview,Media",
 		// links
-		",i* o*,i_Document i?Marks,o_,o*,i_");
+				",i* o*,i_Document i?Marks,o_,o*,i_");
 		mapPut(EnumType.ProofAndPlateMaking.getName(), ",*,RunList,ExposedMedia,Preview,Media",
 		// links
-		",i* o*,i_Document i?Marks,o+,o*,i_");
+				",i* o*,i_Document i?Marks,o+,o*,i_");
 		mapPut(EnumType.ImpositionProofing.getName(), ",*,RunList,ExposedMedia,Media",
 		// links
-		",i* o*,i_Document i?Marks,o+,i_");
+				",i* o*,i_Document i?Marks,o+,i_");
 		mapPut(EnumType.PageProofing.getName(), ",*,RunList,ExposedMedia,Media",
 		// links
-		",i* o*,i_Document i?Marks,o+,i_");
+				",i* o*,i_Document i?Marks,o+,i_");
 
 		mapPut(EnumType.PageSoftProofing.getName(), ",*,RunList",
 		// links
-		",i* o*,i_Document i?Marks");
+				",i* o*,i_Document i?Marks");
 		mapPut(EnumType.ProofImaging.getName(), ",InterpretingParams,RenderingParams,RunList,*",
 		// links
-		",i?,i?,i? i?Document i?Marks,i* o*");
+				",i?,i?,i? i?Document i?Marks,i* o*");
 
 	}
 
@@ -1463,9 +1480,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * @param resourceLink
 		 * @param types
 		 */
-		public static void generateCombinedProcessIndex(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage, JDFResourceLink resourceLink, final VString types)
+		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFResourceLink resourceLink,
+				final VString types)
 		{
-			JDFIntegerList cpi = new JDFIntegerList();
+			final JDFIntegerList cpi = new JDFIntegerList();
 			final String resName = jdfResource.getLocalName();
 			final int typSize = types.size();
 			int lastGot = -2; // not -1!!!
@@ -1479,7 +1497,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				{
 					// if we already added a cpi, but this is an exchange
 					// resource, only set cpi for the last one
-					int iPos = ArrayUtils.indexOf(typeLinkNames, resName);
+					final int iPos = ArrayUtils.indexOf(typeLinkNames, resName);
 					final VString typeInfo = StringUtil.tokenize(typeLinkInfo(t)[iPos], " ", false);
 					boolean bMatchUsage = false;
 					String inOut = null;
@@ -1490,7 +1508,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 					for (int ti = 0; ti < typeInfo.size(); ti++)
 					{
-						String sti = typeInfo.stringAt(ti);
+						final String sti = typeInfo.stringAt(ti);
 						if (inOut == null || sti.startsWith(inOut))
 						{
 							if (processUsage == null || processUsage.getName().equals(sti.substring(2)))
@@ -1532,11 +1550,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * @param typeInfo
 		 * @return boolean
 		 */
-		protected static boolean cleanCombinedProcessIndex(EnumUsage usage, final VString types, JDFIntegerList cpi, final String resName, int lastGot, String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
+		protected static boolean cleanCombinedProcessIndex(final EnumUsage usage, final VString types, final JDFIntegerList cpi, final String resName, final int lastGot,
+				final String[] typeLinkNamesLast, final boolean bAddCPI, final VString typeInfo)
 		{
 			boolean bAddCPILocal = bAddCPI;
 
-			int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast, resName);
+			final int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast, resName);
 			// the i* i?pu ... list of this
 			// the o* i?pu ... list of the previous type
 			final VString typeInfoLast = StringUtil.tokenize(typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast], " ", false);
@@ -1594,8 +1613,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * class to identify nodes even after parsing, e.g in hashmaps <br/> uses JobID, JobPartID and the partMapVector as
-	 * identifier
+	 * class to identify nodes even after parsing, e.g in hashmaps <br/>
+	 * uses JobID, JobPartID and the partMapVector as identifier
 	 * 
 	 */
 	public static final class NodeIdentifier implements IMatches, INodeIdentifiable
@@ -1604,7 +1623,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		private String _jobPartID;
 		private VJDFAttributeMap _partMapVector;
 
-		public NodeIdentifier(String jobID, String jobPartID, VJDFAttributeMap partMapVector)
+		public NodeIdentifier(final String jobID, final String jobPartID, final VJDFAttributeMap partMapVector)
 		{
 			setTo(jobID, jobPartID, partMapVector);
 		}
@@ -1614,7 +1633,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * @param jobPartID
 		 * @param partMapVector
 		 */
-		public void setTo(String jobID, String jobPartID, VJDFAttributeMap partMapVector)
+		public void setTo(final String jobID, final String jobPartID, final VJDFAttributeMap partMapVector)
 		{
 			_jobID = isWildCard(jobID) ? null : jobID;
 			_jobPartID = isWildCard(jobPartID) ? null : jobPartID;
@@ -1628,17 +1647,20 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		/**
-		 * sets a NodeIdentifier to a given JDF node identifier uses the AncestorPool or NodeInfo or output resource in that
-		 * sequence to determine the partmap
+		 * sets a NodeIdentifier to a given JDF node identifier uses the AncestorPool or NodeInfo or output resource in that sequence to determine the partmap
 		 * 
 		 * @param n
 		 */
-		public void setIdentifier(NodeIdentifier n)
+		public void setIdentifier(final NodeIdentifier n)
 		{
 			if (n == null)
+			{
 				setTo(null, null, null);
+			}
 			else
+			{
 				setTo(n._jobID, n._jobPartID, n._partMapVector);
+			}
 		}
 
 		/**
@@ -1646,12 +1668,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * 
 		 * @param n
 		 */
-		public void setTo(INodeIdentifiable qe)
+		public void setTo(final INodeIdentifiable qe)
 		{
 			if (qe == null)
+			{
 				setTo(null, null, null);
+			}
 			else
+			{
 				setIdentifier(qe.getIdentifier());
+			}
 		}
 
 		/**
@@ -1659,7 +1685,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * 
 		 * @param qe the queueEntry
 		 */
-		public NodeIdentifier(INodeIdentifiable ni)
+		public NodeIdentifier(final INodeIdentifiable ni)
 		{
 			this();
 			setTo(ni);
@@ -1671,11 +1697,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
 		@Override
-		public boolean equals(Object inObject)
+		public boolean equals(final Object inObject)
 		{
 			if (!(inObject instanceof INodeIdentifiable))
+			{
 				return false;
-			NodeIdentifier mt = ((INodeIdentifiable) inObject).getIdentifier();
+			}
+			final NodeIdentifier mt = ((INodeIdentifiable) inObject).getIdentifier();
 			boolean b = ContainerUtil.equals(mt._jobID, _jobID);
 			b = b && ContainerUtil.equals(mt._jobPartID, _jobPartID);
 			return b && ContainerUtil.equals(mt._partMapVector, _partMapVector);
@@ -1683,30 +1711,35 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		/**
-		 * return true if the nodeIdentifier matches this, i.e. if all parameters match or o has matching wildcards, or
-		 * o==null
+		 * return true if the nodeIdentifier matches this, i.e. if all parameters match or o has matching wildcards, or o==null
 		 * 
 		 * @see IMatches
-		 * @param o the nodeidentifier that this should match<br/> if o is a String, check for match with jobID
+		 * @param o the nodeidentifier that this should match<br/>
+		 * if o is a String, check for match with jobID
 		 * 
 		 * @return true, if this matches o
 		 */
-		public boolean matches(Object o)
+		public boolean matches(final Object o)
 		{
 			if (o == null)
+			{
 				return true;
-			if (o instanceof String) // check for JobID only
+			}
+			if (o instanceof String)
+			{
 				return ContainerUtil.equals(_jobID, o);
+			}
 
 			if (!(o instanceof INodeIdentifiable))
+			{
 				return false;
-			NodeIdentifier niInput = ((INodeIdentifiable) o).getIdentifier();
+			}
+			final NodeIdentifier niInput = ((INodeIdentifiable) o).getIdentifier();
 			boolean b = isWildCard(niInput._jobID) || ContainerUtil.equals(niInput._jobID, _jobID);
 			b = b
-					&& ((isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID)) || (_jobPartID != null
-							&& niInput._jobPartID != null && _jobPartID.startsWith(niInput._jobPartID + ".")));
-			return b
-					&& ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
+					&& ((isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID)) || (_jobPartID != null && niInput._jobPartID != null && _jobPartID
+							.startsWith(niInput._jobPartID + ".")));
+			return b && ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
 		}
 
 		/*
@@ -1717,8 +1750,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		@Override
 		public int hashCode()
 		{
-			return (_jobID == null ? 0 : _jobID.hashCode()) + (_jobPartID == null ? 0 : _jobPartID.hashCode())
-					+ (_partMapVector == null ? 0 : _partMapVector.hashCode());
+			return (_jobID == null ? 0 : _jobID.hashCode()) + (_jobPartID == null ? 0 : _jobPartID.hashCode()) + (_partMapVector == null ? 0 : _partMapVector.hashCode());
 		}
 
 		/*
@@ -1768,17 +1800,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		private static int m_startValue = 0;
 
-		protected EnumProcessUsage(String name)
+		protected EnumProcessUsage(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumProcessUsage getEnum(String enumName)
+		public static EnumProcessUsage getEnum(final String enumName)
 		{
 			return (EnumProcessUsage) getEnum(EnumProcessUsage.class, enumName);
 		}
 
-		public static EnumProcessUsage getEnum(int enumValue)
+		public static EnumProcessUsage getEnum(final int enumValue)
 		{
 			return (EnumProcessUsage) getEnum(EnumProcessUsage.class, enumValue);
 		}
@@ -1836,8 +1868,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * constants EnumProcessUsage use EnumProcessUsage.xxx instead of the deprecated constants
-	 * EnumProcessUsage.ProcessUsage_xxx
+	 * constants EnumProcessUsage use EnumProcessUsage.xxx instead of the deprecated constants EnumProcessUsage.ProcessUsage_xxx
 	 */
 	/** @deprecated use EnumProcessUsage.xxx */
 	@Deprecated
@@ -1953,7 +1984,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			return false; // has previously been initialized
 		}
 
-		String id = appendAnchor(null);
+		final String id = appendAnchor(null);
 		// 080612 moved from root only to all nodes
 		ensureCreated();
 		if (isJDFRoot())
@@ -2067,13 +2098,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param types
 	 */
-	private VString expandGrayBoxTypes(VString types)
+	private VString expandGrayBoxTypes(final VString types)
 	{
 		if (types == null)
 		{
 			return null;
 		}
-		VString vNew = new VString();
+		final VString vNew = new VString();
 		for (int i = 0; i < types.size(); i++)
 		{
 			final String typ = types.stringAt(i);
@@ -2219,7 +2250,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @return String list of resource names that may be linked
 	 */
-	protected static String[] typeLinkNames(EnumType typeNum)
+	protected static String[] typeLinkNames(final EnumType typeNum)
 	{
 		if (typeNum == null)
 		{
@@ -2236,7 +2267,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param typeNum EnumType to get LinkInfo for
 	 * @return String list of resource information usages that may be linked for this EnumType
 	 */
-	protected static String[] typeLinkInfo(EnumType typeNum)
+	protected static String[] typeLinkInfo(final EnumType typeNum)
 	{
 		final String[] strValueOfEnum = (String[]) m_LinkInfoMap.get(typeNum.getName());
 		return (strValueOfEnum == null) ? m_GenericLinkInfo : strValueOfEnum;
@@ -2253,7 +2284,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use 3 parameter version
 	 */
 	@Deprecated
-	public boolean setPartStatus(VJDFAttributeMap vmattr, EnumNodeStatus status)
+	public boolean setPartStatus(final VJDFAttributeMap vmattr, final EnumNodeStatus status)
 	{
 		return setPartStatus(vmattr, status, null);
 	}
@@ -2265,7 +2296,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param status Status to set
 	 * @return boolean: success or not
 	 */
-	public boolean setPartStatus(VJDFAttributeMap vmattr, EnumNodeStatus status, String statusDetails)
+	public boolean setPartStatus(final VJDFAttributeMap vmattr, final EnumNodeStatus status, final String statusDetails)
 	{
 		boolean bRet = true;
 		int siz = 0;
@@ -2296,7 +2327,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use 3 parameter version
 	 */
 	@Deprecated
-	public boolean setPartStatus(JDFAttributeMap mattr, JDFElement.EnumNodeStatus status)
+	public boolean setPartStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status)
 	{
 		return setPartStatus(mattr, status, null);
 	}
@@ -2308,15 +2339,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param status Status to set
 	 * @return boolean: success or not
 	 */
-	public boolean setPartStatus(JDFAttributeMap mattr, JDFElement.EnumNodeStatus status, String statusDetails)
+	public boolean setPartStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, final String statusDetails)
 	{
 		String statusDetailsLocal = statusDetails;
 
 		final EnumNodeStatus stat = getStatus();
 		statusDetailsLocal = StringUtil.getNonEmpty(statusDetailsLocal);
 		// 100602 handle nasty combination
-		if (mattr != null
-				&& (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
+		if (mattr != null && (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
 		{
 			// throw an exception??? this is a snafu to set an individual part
 			// status to pool
@@ -2327,11 +2357,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			setStatus(status);
 			if (statusDetailsLocal != null)
+			{
 				setStatusDetails(statusDetailsLocal);
+			}
 			removeChild(ElementName.STATUSPOOL, null, 0);
 			if (getVersion(true).getValue() >= JDFElement.EnumVersion.Version_1_3.getValue())
 			{
-				JDFNodeInfo ni = getNodeInfo();
+				final JDFNodeInfo ni = getNodeInfo();
 				if (ni != null)
 				{
 					ni.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
@@ -2366,7 +2398,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				setStatus(status);
 				if (statusDetailsLocal != null)
+				{
 					setStatusDetails(statusDetailsLocal);
+				}
 				statusPool.deleteNode();
 			}
 		}
@@ -2383,9 +2417,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				}
 			}
 
-			JDFResource niRoot = ni.getResourceRoot();
+			final JDFResource niRoot = ni.getResourceRoot();
 			niRoot.setPartUsage(JDFResource.EnumPartUsage.Implicit);
-			VElement ve = ni.getPartitionVector(mattr, EnumPartUsage.Explicit);
+			final VElement ve = ni.getPartitionVector(mattr, EnumPartUsage.Explicit);
 			if (ve.isEmpty()) // no preexisting matching partition - attempt to
 			// create it
 			{
@@ -2413,18 +2447,24 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param vMap the vevtor of partmaps
 	 * @return the status, null if the value is not consistent
 	 */
-	public EnumNodeStatus getVectorPartStatus(VJDFAttributeMap vMap)
+	public EnumNodeStatus getVectorPartStatus(final VJDFAttributeMap vMap)
 	{
 		if (vMap == null || vMap.size() == 0)
+		{
 			return getPartStatus(null);
-		EnumNodeStatus status = getPartStatus(vMap.elementAt(0));
+		}
+		final EnumNodeStatus status = getPartStatus(vMap.elementAt(0));
 		if (status == null)
+		{
 			return null;
+		}
 		for (int i = 1; i < vMap.size(); i++)
 		{
-			EnumNodeStatus status2 = getPartStatus(vMap.elementAt(i));
+			final EnumNodeStatus status2 = getPartStatus(vMap.elementAt(i));
 			if (!status.equals(status2))
+			{
 				return null;
+			}
 		}
 		return status;
 	}
@@ -2434,18 +2474,24 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param vMap the vevtor of partmaps
 	 * @return the status, null if the value is not consistent
 	 */
-	public String getVectorPartStatusDetails(VJDFAttributeMap vMap)
+	public String getVectorPartStatusDetails(final VJDFAttributeMap vMap)
 	{
 		if (vMap == null || vMap.size() == 0)
+		{
 			return getPartStatusDetails(null);
-		String status = getPartStatusDetails(vMap.elementAt(0));
+		}
+		final String status = getPartStatusDetails(vMap.elementAt(0));
 		if (status == null)
+		{
 			return null;
+		}
 		for (int i = 1; i < vMap.size(); i++)
 		{
-			String status2 = getPartStatusDetails(vMap.elementAt(i));
+			final String status2 = getPartStatusDetails(vMap.elementAt(i));
 			if (!status.equals(status2))
+			{
 				return null;
+			}
 		}
 		return status;
 	}
@@ -2457,7 +2503,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param mattr Attribute map of partition
 	 * @return JDFElement.EnumNodeStatus: Status of the partition, null if no Status exists
 	 */
-	public JDFElement.EnumNodeStatus getPartStatus(JDFAttributeMap mattr)
+	public JDFElement.EnumNodeStatus getPartStatus(final JDFAttributeMap mattr)
 	{
 		EnumNodeStatus stat = getStatus();
 		if ((stat != EnumNodeStatus.Pool) && (stat != EnumNodeStatus.Part))
@@ -2483,8 +2529,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 			for (int i = 0; i < size; i++)
 			{
-				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
-				JDFAttributeMap map = niCmp.getPartMap();
+				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
+				final JDFAttributeMap map = niCmp.getPartMap();
 				if (map != null && !map.overlapMap(mattr))
 				{
 					continue;
@@ -2512,14 +2558,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * get the node's partition statusdetails
 	 * 
 	 * @param mattr Attribute map of partition
-	 * @param bFromLeaves if false, get the directly specified value if true ignore the directly specified value and
-	 *            calculate the value from leaves, if any
+	 * @param bFromLeaves if false, get the directly specified value if true ignore the directly specified value and calculate the value from leaves, if any
 	 * 
 	 * @return String: Status of the partition, null if no Status exists (note the null return!)
 	 */
-	public String getPartStatusDetails(JDFAttributeMap mattr)
+	public String getPartStatusDetails(final JDFAttributeMap mattr)
 	{
-		EnumNodeStatus stat = getStatus();
+		final EnumNodeStatus stat = getStatus();
 		String statDetails = null;
 		if ((stat != EnumNodeStatus.Pool) && (stat != EnumNodeStatus.Part))
 		{
@@ -2544,8 +2589,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 			for (int i = 0; i < size; i++)
 			{
-				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
-				JDFAttributeMap map = niCmp.getPartMap();
+				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
+				final JDFAttributeMap map = niCmp.getPartMap();
 				if (map != null && !map.overlapMap(mattr))
 				{
 					continue;
@@ -2565,7 +2610,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				return null;
 			}
 
-			JDFPartStatus ps = statusPool.getPartStatus(mattr);
+			final JDFPartStatus ps = statusPool.getPartStatus(mattr);
 			statDetails = ps == null ? null : StringUtil.getNonEmpty(ps.getStatusDetails());
 		}
 
@@ -2573,8 +2618,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * Set the Status and StatusDetails of this node update the PhaseTime audit or append a new phasetime as appropriate
-	 * also generate a status JMF
+	 * Set the Status and StatusDetails of this node update the PhaseTime audit or append a new phasetime as appropriate also generate a status JMF
 	 * 
 	 * @param nodeStatus the new status of the node
 	 * @param nodeStatusDetails the new statusDetails of the node
@@ -2586,16 +2630,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use the version with deviceID
 	 */
 	@Deprecated
-	public JDFDoc setPhase(EnumNodeStatus nodeStatus, String nodeStatusDetails, EnumDeviceStatus deviceStatus, String deviceStatusDetails, VJDFAttributeMap vPartMap)
+	public JDFDoc setPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final VJDFAttributeMap vPartMap)
 	{
-		StatusCounter sc = new StatusCounter(this, vPartMap, null);
+		final StatusCounter sc = new StatusCounter(this, vPartMap, null);
 		sc.setPhase(nodeStatus, nodeStatusDetails, deviceStatus, deviceStatusDetails);
 		return sc.getDocJMFPhaseTime();
 	}
 
 	/**
-	 * return the partMapVector defined by nodeInfo partitioning null if nodeInfo is not partitioned or if the node
-	 * status is neither pool nor part
+	 * return the partMapVector defined by nodeInfo partitioning null if nodeInfo is not partitioned or if the node status is neither pool nor part
 	 * 
 	 * @return the vector of PartMaps
 	 */
@@ -2604,14 +2647,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final EnumNodeStatus status = getStatus();
 		if (EnumNodeStatus.Pool.equals(status))
 		{
-			JDFStatusPool pool = getStatusPool();
+			final JDFStatusPool pool = getStatusPool();
 			if (pool != null)
 			{
-				VJDFAttributeMap vMap = new VJDFAttributeMap();
-				VElement vParts = pool.getPartStatusVector(null);
+				final VJDFAttributeMap vMap = new VJDFAttributeMap();
+				final VElement vParts = pool.getPartStatusVector(null);
 				for (int i = 0; i < vParts.size(); i++)
 				{
-					JDFPartStatus ps = (JDFPartStatus) vParts.item(i);
+					final JDFPartStatus ps = (JDFPartStatus) vParts.item(i);
 					vMap.appendUnique(ps.getPartMap());
 				}
 				vMap.unify();
@@ -2620,7 +2663,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 		else if (EnumNodeStatus.Part.equals(status))
 		{
-			JDFNodeInfo ni = getNodeInfo();
+			final JDFNodeInfo ni = getNodeInfo();
 			if (ni != null)
 			{
 				return ni.getPartMapVector(true);
@@ -2631,8 +2674,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * return the partMapVector defined in AncestorPool, null if no AncestorPool exists, or AncestorPool has no Part
-	 * elements
+	 * return the partMapVector defined in AncestorPool, null if no AncestorPool exists, or AncestorPool has no Part elements
 	 * 
 	 * @return the vector of PartMaps
 	 */
@@ -2648,8 +2690,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * return the partMapVector defined in AncestorPool or NodeInfo or output resource in that sequence, null if no
-	 * NodeInfo exists, or NodeInfo has no Part elements
+	 * return the partMapVector defined in AncestorPool or NodeInfo or output resource in that sequence, null if no NodeInfo exists, or NodeInfo has no Part
+	 * elements
 	 * 
 	 * @return the vector of PartMaps
 	 */
@@ -2658,11 +2700,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		VJDFAttributeMap vm = getPartMapVector();
 		if (vm == null)
 		{
-			JDFNodeInfo ni = getNodeInfo();
+			final JDFNodeInfo ni = getNodeInfo();
 			vm = ni == null ? null : ni.getPartMapVector(false);
 			if (vm == null)
 			{
-				JDFResource output = getResource(null, EnumUsage.Output, null, 0);
+				final JDFResource output = getResource(null, EnumUsage.Output, null, 0);
 				vm = output == null ? null : output.getPartMapVector(false);
 			}
 
@@ -2685,12 +2727,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	/**
 	 * get attribute Activation; defaults to Active
 	 * 
-	 * @param bWalkThroughAnchestors if true, walks through all anchestors which may overwrite the local activation
-	 *            state
+	 * @param bWalkThroughAnchestors if true, walks through all anchestors which may overwrite the local activation state
 	 * 
 	 * @return the enumeration value of the attribute
 	 */
-	public JDFNode.EnumActivation getActivation(boolean bWalkThroughAnchestors)
+	public JDFNode.EnumActivation getActivation(final boolean bWalkThroughAnchestors)
 	{
 		EnumActivation res = null;
 		if (bWalkThroughAnchestors)
@@ -2702,12 +2743,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				// walk through through all anchestors, to parent to grandparent
 				// to grandgrandparent
 				// and so on until root and compare the Activation state
-				EnumActivation a = EnumActivation.getEnum(p.getAttribute(AttributeName.ACTIVATION, null, null));
+				final EnumActivation a = EnumActivation.getEnum(p.getAttribute(AttributeName.ACTIVATION, null, null));
 				if (a != null)
 				{
 					final int value = a.getValue();
-					if ((value <= EnumActivation.TestRun.getValue())
-							|| (res.getValue() < EnumActivation.Active.getValue()))
+					if ((value <= EnumActivation.TestRun.getValue()) || (res.getValue() < EnumActivation.Active.getValue()))
 					{
 						res = (value < res.getValue()) ? a : res; // smaller
 						// enums are
@@ -2742,7 +2782,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param bActive the value to set the attribute to
 	 */
-	public void setActivation(EnumActivation bActive)
+	public void setActivation(final EnumActivation bActive)
 	{
 		setAttribute(AttributeName.ACTIVATION, bActive.getName(), JDFConstants.EMPTYSTRING);
 	}
@@ -2754,7 +2794,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @return JDFAudit
 	 */
-	public JDFAudit addModified(String by)
+	public JDFAudit addModified(final String by)
 	{
 		return getCreateAuditPool().addModified(by, null);
 	}
@@ -2767,7 +2807,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param int i the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
-	public JDFResource getResource(String strName, EnumUsage usage, int i)
+	public JDFResource getResource(final String strName, final EnumUsage usage, final int i)
 	{
 		return getResource(strName, usage, null, i);
 	}
@@ -2781,7 +2821,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param int i the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
-	public JDFResource getResource(String strName, EnumUsage usage, EnumProcessUsage processUsage, int i)
+	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, final int i)
 	{
 		int iLocal = i;
 
@@ -2792,23 +2832,33 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			JDFAttributeMap mALink = new JDFAttributeMap(); // map of requesetd
 			// link attributes
 			if (usage != null)
+			{
 				mALink.put(AttributeName.USAGE, usage);
+			}
 
 			if (processUsage != null)
+			{
 				mALink.put(AttributeName.PROCESSUSAGE, processUsage);
+			}
 
 			if (mALink.size() == 0)
+			{
 				mALink = null;
+			}
 
 			velem = rlp.getLinkedResources(strName, mALink, null, false);
 		}
 
-		int siz = velem == null ? 0 : velem.size();
+		final int siz = velem == null ? 0 : velem.size();
 		if (iLocal < 0)
+		{
 			iLocal += siz;
+		}
 
 		if (siz == 0 || iLocal < 0 || iLocal >= siz || velem == null)
+		{
 			return null;
+		}
 
 		return (JDFResource) velem.elementAt(iLocal);
 	}
@@ -2823,11 +2873,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @throws JDFException if resource does not exist and EnumUsage is null
 	 */
-	public JDFResource getCreateResource(String strName, EnumUsage usage, int i)
+	public JDFResource getCreateResource(final String strName, final EnumUsage usage, final int i)
 	{
 		JDFResource r = getResource(strName, usage, i);
 		if (r == null)
+		{
 			r = addResource(strName, usage);
+		}
 		return r;
 	}
 
@@ -2842,12 +2894,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param nameSpaceURI the nsURI of the resource, if null take the default ns
 	 * 
 	 * @return JDFResource
-	 * @deprecated use addResource(String strName, JDFResource.EnumResourceClass resClass, EnumUsage usage,
-	 *             EnumProcessUsage processUsage, JDFNode resRoot, String nameSpaceURI)
+	 * @deprecated use addResource(String strName, JDFResource.EnumResourceClass resClass, EnumUsage usage, EnumProcessUsage processUsage, JDFNode resRoot,
+	 * String nameSpaceURI)
 	 * @default addResource(name, null, bInput, null, true, null)
 	 */
 	@Deprecated
-	public JDFResource addResource(String strName, JDFResource.EnumResourceClass resClass, boolean bInput, JDFNode resRoot, boolean bLink, String nameSpaceURI)
+	public JDFResource addResource(final String strName, final JDFResource.EnumResourceClass resClass, final boolean bInput, final JDFNode resRoot, final boolean bLink, final String nameSpaceURI)
 	{
 		EnumUsage usage = null;
 		if (bLink)
@@ -2866,7 +2918,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default addResource(name, null, usage, null, null, null,null)
 	 */
-	public JDFResource addResource(String strName, EnumUsage usage)
+	public JDFResource addResource(final String strName, final EnumUsage usage)
 	{
 		return addResource(strName, null, usage, null, null, null, null);
 	}
@@ -2878,15 +2930,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param resClass the JFD/@Class of the resource; if null, find the resource class from factory
 	 * @param usage the Usage attribute of the ResourceLink. If null, the resource is not linked
 	 * @param processUsage the processUsage attribute of the link to the resource
-	 * @param resRoot the node to add the Resource to, defaults to 'this' if null. Note that the link is always in
-	 *            'this'
+	 * @param resRoot the node to add the Resource to, defaults to 'this' if null. Note that the link is always in 'this'
 	 * @param nameSpaceURI the nsURI of the resource, if null take the default ns
 	 * @param toReplace the resource to replace by this - also add a resource audit
 	 * @return JDFResource
 	 * 
 	 * @default addResource(name, null, usage, null, null, null,null)
 	 */
-	public JDFResource addResource(String strName, JDFResource.EnumResourceClass resClass, EnumUsage usage, EnumProcessUsage processUsage, JDFNode resRoot, String nameSpaceURI, JDFResource toReplace)
+	public JDFResource addResource(final String strName, final JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFNode resRoot,
+			final String nameSpaceURI, final JDFResource toReplace)
 	{
 		JDFResource.EnumResourceClass resClassLocal = resClass;
 		JDFNode resRootLocal = resRoot;
@@ -2916,8 +2968,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		// parameters and consumables are assumed to be available by default
-		if (EnumUsage.Input.equals(usage)
-				&& resClassLocal != null
+		if (EnumUsage.Input.equals(usage) && resClassLocal != null
 				&& ((resClassLocal.equals(JDFResource.EnumResourceClass.Parameter)) || (resClassLocal.equals(JDFResource.EnumResourceClass.Consumable))))
 		{
 			r.setResStatus(EnumResStatus.Available, false);
@@ -2928,17 +2979,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 		if (toReplace != null)
 		{
-			JDFAuditPool auditPool = getCreateAuditPool();
-			JDFResourceAudit resourceAudit = auditPool.addResourceAudit(null);
+			final JDFAuditPool auditPool = getCreateAuditPool();
+			final JDFResourceAudit resourceAudit = auditPool.addResourceAudit(null);
 			resourceAudit.addNewOldLink(true, r, usage);
 			resourceAudit.addNewOldLink(false, toReplace, usage);
 			final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
-			VElement vRL = (resourceLinkPool == null) ? null : resourceLinkPool.getInOutLinks(usage, true, null, null);
+			final VElement vRL = (resourceLinkPool == null) ? null : resourceLinkPool.getInOutLinks(usage, true, null, null);
 			if (vRL != null)
 			{
 				for (int i = 0; i < vRL.size(); i++)
 				{
-					JDFResourceLink l = (JDFResourceLink) vRL.elementAt(i);
+					final JDFResourceLink l = (JDFResourceLink) vRL.elementAt(i);
 					if (l.getTarget() == toReplace)
 					{
 						l.deleteNode();
@@ -2950,8 +3001,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * LinkResource: create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the
-	 * appropriate combined process index
+	 * LinkResource: create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the appropriate combined process index
 	 * 
 	 * 
 	 * @param jdfResource the resource or partition to link to
@@ -2963,7 +3013,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @default LinkResource(r, true, false)
 	 */
 	@Deprecated
-	public JDFResourceLink linkResource(JDFResource jdfResource, boolean input, boolean bForce)
+	public JDFResourceLink linkResource(final JDFResource jdfResource, final boolean input, final boolean bForce)
 	{
 		boolean bForceLocal = bForce;
 
@@ -2976,8 +3026,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * LinkResource: create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the
-	 * appropriate combined process index
+	 * LinkResource: create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the appropriate combined process index
 	 * 
 	 * 
 	 * @param jdfResource the resource or partition to link to
@@ -2988,7 +3037,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default LinkResource(r, usage, null)
 	 */
-	public JDFResourceLink linkResource(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage)
+	public JDFResourceLink linkResource(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage)
 	{
 		if (jdfResource == null)
 		{
@@ -2996,11 +3045,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		final JDFResourceLinkPool resourceLinkPool = getCreateResourceLinkPool();
-		JDFResourceLink resourceLink = resourceLinkPool.linkResource(jdfResource, usage, processUsage);
+		final JDFResourceLink resourceLink = resourceLinkPool.linkResource(jdfResource, usage, processUsage);
 		final VString types = getTypes();
 		// generate
-		if (types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass())
-				&& !(jdfResource instanceof JDFNodeInfo))
+		if (types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass()) && !(jdfResource instanceof JDFNodeInfo))
 		{
 			CombinedProcessIndexHelper.generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
 		}
@@ -3008,8 +3056,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * ensureLink: if it does not yet exist, create a resourceLink in the resourceLinkPool that refers to the resource
-	 * jdfResource also sets the appropriate combined process index
+	 * ensureLink: if it does not yet exist, create a resourceLink in the resourceLinkPool that refers to the resource jdfResource also sets the appropriate
+	 * combined process index
 	 * 
 	 * 
 	 * @param jdfResource the resource or partition to link to
@@ -3020,18 +3068,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default ensureLink(r, usage, null)
 	 */
-	public JDFResourceLink ensureLink(JDFResource jdfResource, EnumUsage usage, EnumProcessUsage processUsage)
+	public JDFResourceLink ensureLink(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage)
 	{
 		if (jdfResource == null)
+		{
 			return null;
-		JDFAttributeMap m = new JDFAttributeMap();
+		}
+		final JDFAttributeMap m = new JDFAttributeMap();
 		if (usage != null)
+		{
 			m.put(AttributeName.USAGE, usage);
+		}
 		if (processUsage != null)
+		{
 			m.put(AttributeName.PROCESSUSAGE, processUsage);
+		}
 		JDFResourceLink rl = getLink(0, jdfResource.getNodeName(), m, null);
 		if (rl == null)
+		{
 			rl = linkResource(jdfResource, usage, processUsage);
+		}
 		return rl;
 	}
 
@@ -3054,7 +3110,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @return VElement - the vector of ResourceLinks, null if none exist:
 	 */
-	public VElement getResourceLinks(JDFAttributeMap mLinkAtt)
+	public VElement getResourceLinks(final JDFAttributeMap mLinkAtt)
 	{
 		final JDFResourceLinkPool resList = getResourceLinkPool();
 		if (resList == null)
@@ -3077,7 +3133,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getLinkedResources(null, false)
 	 */
-	public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)
+	public VElement getLinkedResources(final JDFAttributeMap mResAtt, final boolean bFollowRefs)
 	{
 		final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
 		VElement vLinkedResources = new VElement();
@@ -3125,7 +3181,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return vElement vector with all
 	 * 
 	 */
-	public VElement getUnlinkedResources(boolean bLocal)
+	public VElement getUnlinkedResources(final boolean bLocal)
 	{
 		final JDFResourcePool resourcePool = getResourcePool();
 		if (resourcePool == null)
@@ -3141,7 +3197,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			vUnlinkedResources = new VElement();
 		}
-		VElement children = getvJDFNode(null, null, true);
+		final VElement children = getvJDFNode(null, null, true);
 		for (int i = 0; i < children.size(); i++)
 		{
 			vUnlinkedResources.addAll(((JDFNode) children.elementAt(i)).getUnlinkedResources(bLocal));
@@ -3158,7 +3214,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 *@deprecated use getPredecessors(bPre,false);
 	 */
 	@Deprecated
-	public Vector getPredecessors(boolean bPre)
+	public Vector getPredecessors(final boolean bPre)
 	{
 		return getPredecessors(bPre, false);
 	}
@@ -3171,13 +3227,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @return Vector of pre / post decessor nodes
 	 */
-	public VElement getPredecessors(boolean bPre, boolean bDirect)
+	public VElement getPredecessors(final boolean bPre, final boolean bDirect)
 	{
-		HashSet<KElement> hashSet = new HashSet<KElement>();
+		final HashSet<KElement> hashSet = new HashSet<KElement>();
 		getPredecessorImpl(bPre, bDirect, hashSet);
 
-		VElement v = new VElement();
-		Iterator<KElement> it = hashSet.iterator();
+		final VElement v = new VElement();
+		final Iterator<KElement> it = hashSet.iterator();
 		while (it.hasNext())
 		{
 			v.add(it.next());
@@ -3186,7 +3242,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	}
 
-	private void getPredecessorImpl(boolean bPre, boolean bDirect, HashSet<KElement> h)
+	private void getPredecessorImpl(final boolean bPre, final boolean bDirect, final HashSet<KElement> h)
 	{
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 
@@ -3198,7 +3254,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final Iterator<KElement> vLocIterator = vLoc.iterator();
 			while (vLocIterator.hasNext())
 			{
-				JDFResource r = (JDFResource) vLocIterator.next();
+				final JDFResource r = (JDFResource) vLocIterator.next();
 				// get all creator or consumer processes
 				final VElement vc = r.getCreator(bPre);
 
@@ -3207,7 +3263,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					final Iterator<KElement> vcIterator = vc.iterator();
 					while (vcIterator.hasNext())
 					{
-						JDFNode p = (JDFNode) vcIterator.next();
+						final JDFNode p = (JDFNode) vcIterator.next();
 						if (h.contains(p))
 						{
 							continue; // snafu
@@ -3225,25 +3281,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * isExecutable - checks whether a node is executable by checking the resources linked by the resourcelinkpool and @Status
-	 * or NodeInfo/@NodeStatus
+	 * isExecutable - checks whether a node is executable by checking the resources linked by the resourcelinkpool and @Status or NodeInfo/@NodeStatus
 	 * 
 	 * @param partMap the Attribute to check
-	 * @param bCheckChildren if true, calculates the availability Status of a resource from all child partition leaves,
-	 *            else the Status is taken from the appropriate leaf itself
+	 * @param bCheckChildren if true, calculates the availability Status of a resource from all child partition leaves, else the Status is taken from the
+	 * appropriate leaf itself
 	 * 
 	 * @return boolean - true if the node is executable, false if not
 	 * 
-	 *         default: isExecutable(null, true)
+	 * default: isExecutable(null, true)
 	 */
 
-	public boolean isExecutable(JDFAttributeMap partMap, boolean bCheckChildren)
+	public boolean isExecutable(final JDFAttributeMap partMap, final boolean bCheckChildren)
 	{
 		final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
 		if (resourceLinkPool == null)
+		{
 			return false;
+		}
 		final VElement v = resourceLinkPool.getPoolChildren(null, null, null);
-		EnumNodeStatus status = getPartStatus(partMap);
+		final EnumNodeStatus status = getPartStatus(partMap);
 		if ((status != EnumNodeStatus.Waiting) && (status != EnumNodeStatus.Ready))
 		{
 			return false;
@@ -3266,15 +3323,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * gets the status of a certain partition of the node. The partition is given by a map of partition attributes or by
-	 * a JDFResource object containing such a map.
+	 * gets the status of a certain partition of the node. The partition is given by a map of partition attributes or by a JDFResource object containing such a
+	 * map.
 	 * 
 	 * @param mattr
 	 * @deprecated use getPartStatus()
 	 */
 
 	@Deprecated
-	public JDFElement.EnumNodeStatus getProcessStatus(JDFAttributeMap mattr)
+	public JDFElement.EnumNodeStatus getProcessStatus(final JDFAttributeMap mattr)
 	{
 		JDFElement.EnumNodeStatus stat = getStatus();
 
@@ -3302,17 +3359,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 * ResourceTypeEqual<br>
-	 * Checks whether the given resources are of the same type. Resources are considered equal by this method if they
-	 * have identical Class attributes and their resource type is equal. Basically the resource type is the node name.<br>
-	 * Two resources with different node names are considered equal if their Type attributes from the ToolConfig.xml
-	 * file are equal. This is not implemented yet. Instead of it is hard-coded that "RunList" and "HDM:ReportList" are
-	 * of the same type.
+	 * Checks whether the given resources are of the same type. Resources are considered equal by this method if they have identical Class attributes and their
+	 * resource type is equal. Basically the resource type is the node name.<br>
+	 * Two resources with different node names are considered equal if their Type attributes from the ToolConfig.xml file are equal. This is not implemented
+	 * yet. Instead of it is hard-coded that "RunList" and "HDM:ReportList" are of the same type.
 	 * 
 	 * @param res1 first resource
 	 * @param res2 second resource
 	 * @return boolean
 	 */
-	static public boolean resourceTypeEqual(JDFResource res1, JDFResource res2)
+	static public boolean resourceTypeEqual(final JDFResource res1, final JDFResource res2)
 	{
 		final JDFResource.EnumResourceClass res1_class = res1.getResourceClass();
 		final JDFResource.EnumResourceClass res2_class = res2.getResourceClass();
@@ -3348,12 +3404,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param nodeType : node Type attribute
 	 * @param active : Activation of the requesetd nodes, if null ignore activation
-	 * @param bDirect : if true, get direct children only, else recurse down the tree and include this, i.e. return a
-	 *            complete tree starting at this
+	 * @param bDirect : if true, get direct children only, else recurse down the tree and include this, i.e. return a complete tree starting at this
 	 * 
 	 * @return: VElement of JDF nodes
 	 * 
-	 *          default: getvJDFNode(null, JDFNode.EnumActivation.Unknown, false)
+	 * default: getvJDFNode(null, JDFNode.EnumActivation.Unknown, false)
 	 */
 
 	/**
@@ -3361,13 +3416,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param task node type
 	 * @param active Activation of the requested nodes, if null ignore activation
-	 * @param bDirect if true, get direct children only, else recurse down the tree and include this, i.e. return a
-	 *            complete tree starting at this
+	 * @param bDirect if true, get direct children only, else recurse down the tree and include this, i.e. return a complete tree starting at this
 	 * 
 	 * @return VElement of JDF nodes
 	 * @default getvJDFNode(null, null, false)
 	 */
-	public VElement getvJDFNode(String task, EnumActivation active, boolean bDirect)
+	public VElement getvJDFNode(final String task, final EnumActivation active, final boolean bDirect)
 	{
 
 		final VElement v = new VElement();
@@ -3403,7 +3457,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use public Vector getvJDFNode(task, JDFNode.EnumActivation.Unknown, false)
 	 */
 	@Deprecated
-	public Vector getvJDFNode(String task, boolean active)
+	public Vector getvJDFNode(final String task, final boolean active)
 	{
 		return getvJDFNode(task, null, active);
 	}
@@ -3427,7 +3481,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return boolean
 	 */
 	@Deprecated
-	public boolean isActive(boolean bWalkThroughAnchestors)
+	public boolean isActive(final boolean bWalkThroughAnchestors)
 	{
 		return fitsActivation(EnumActivation.Active, bWalkThroughAnchestors);
 	}
@@ -3438,11 +3492,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * the activation state of this node
 	 * 
 	 * @param active
-	 * @param bWalkThroughAnchestors if true, walks through all anchestors which may overwrite the local activation
-	 *            state
+	 * @param bWalkThroughAnchestors if true, walks through all anchestors which may overwrite the local activation state
 	 * @return boolean
 	 */
-	public boolean fitsActivation(EnumActivation active, boolean bWalkThroughAnchestors)
+	public boolean fitsActivation(final EnumActivation active, final boolean bWalkThroughAnchestors)
 	{
 		if (active == null)
 		{
@@ -3472,7 +3525,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated
 	 */
 	@Deprecated
-	public void removeNode(boolean bLeaveSubmit)
+	public void removeNode(final boolean bLeaveSubmit)
 	{
 		if (bLeaveSubmit)
 		{
@@ -3497,7 +3550,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return JDFNode
 	 */
 	@Deprecated
-	public JDFNode addTask(String task, VString tasks)
+	public JDFNode addTask(final String task, final VString tasks)
 	{
 		if (task.equals(JDFConstants.EMPTYSTRING))
 		{
@@ -3530,7 +3583,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use addJDFNode
 	 */
 	@Deprecated
-	public JDFNode addTask(String task)
+	public JDFNode addTask(final String task)
 	{
 		return addTask(task, null);
 	}
@@ -3540,7 +3593,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param typ the new type to set this to
 	 */
-	public void setType(EnumType typ)
+	public void setType(final EnumType typ)
 	{
 		setType(typ == null ? null : typ.getName(), true);
 	}
@@ -3555,7 +3608,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @throws JDFException if type is not a known JDF type
 	 * @default setType(newType, false)
 	 */
-	public boolean setType(String newType, boolean checkName)
+	public boolean setType(final String newType, final boolean checkName)
 	{
 		final EnumType eTyp = EnumType.getEnum(newType);
 		if (!checkName || eTyp != null)
@@ -3595,22 +3648,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public String getTypesString()
 	{
-		String s = getAttribute(AttributeName.TYPES, null, null);
+		final String s = getAttribute(AttributeName.TYPES, null, null);
 		return s == null ? getType() : s;
 	}
 
 	/**
 	 * version fixing routine for JDF
 	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will
-	 * be able to move from low to high versions but potentially fail when attempting to move from higher to lower
-	 * versions
+	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
+	 * versions but potentially fail when attempting to move from higher to lower versions
 	 * 
 	 * @param version version that the resulting element should correspond to
 	 * @return true if successful
 	 */
 	@Override
-	public boolean fixVersion(EnumVersion version)
+	public boolean fixVersion(final EnumVersion version)
 	{
 		boolean bRet = true;
 		if (version != null)
@@ -3630,7 +3682,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 		final EnumType enumType = getEnumType();
 		if (enumType != null)
+		{
 			setType(enumType); // fixes xsi:type stuff
+		}
 
 		return super.fixVersion(version) && bRet;
 	}
@@ -3643,15 +3697,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param version target version
 	 * @return
 	 */
-	private boolean fixNiCi(EnumVersion version)
+	private boolean fixNiCi(final EnumVersion version)
 	{
 		boolean bRet = true;
 
 		// fix NodeInfo and CustomerInfo
 		for (int i = 0; i < 2; i++)
 		{
-			String nam = (i > 0) ? ElementName.NODEINFO : ElementName.CUSTOMERINFO;
-			String linkNam = nam + JDFConstants.LINK;
+			final String nam = (i > 0) ? ElementName.NODEINFO : ElementName.CUSTOMERINFO;
+			final String linkNam = nam + JDFConstants.LINK;
 			if (version.getValue() >= EnumVersion.Version_1_3.getValue())
 			{
 				bRet = fixNiCiToResource(i, nam, linkNam);
@@ -3664,14 +3718,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		return bRet;
 	}
 
-	private void fixNiCiToElement(int i, String nam, String linkNam)
+	private void fixNiCiToElement(final int i, final String nam, final String linkNam)
 	{
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp != null && rlp.hasChildElement(linkNam, null))
 		{
-			JDFResourceLink rl = rlp.getPoolChild(0, linkNam, null, null);
-			JDFResource root = rl.getLinkRoot();
-			JDFElement e = (JDFElement) getCreateElement(nam);
+			final JDFResourceLink rl = rlp.getPoolChild(0, linkNam, null, null);
+			final JDFResource root = rl.getLinkRoot();
+			final JDFElement e = (JDFElement) getCreateElement(nam);
 
 			// not partitioned, simply copy into nodeinfo element
 			if (!root.hasAttribute(AttributeName.PARTIDKEYS))
@@ -3694,13 +3748,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				if (i == 1)
 				{ // copy nodeinfo stati into statuspool
 					setStatus(EnumNodeStatus.Pool);
-					VElement vLeaves = root.getLeaves(false);
-					JDFStatusPool sp = getCreateStatusPool();
+					final VElement vLeaves = root.getLeaves(false);
+					final JDFStatusPool sp = getCreateStatusPool();
 					sp.removeChildren(null, null, null);
 					for (int j = 0; j < vLeaves.size(); j++)
 					{
-						JDFNodeInfo ni = (JDFNodeInfo) vLeaves.elementAt(j);
-						JDFPartStatus ps = sp.appendPartStatus();
+						final JDFNodeInfo ni = (JDFNodeInfo) vLeaves.elementAt(j);
+						final JDFPartStatus ps = sp.appendPartStatus();
 						ps.setPartMap(ni.getPartMap());
 						ps.setAttribute(AttributeName.STATUS, ni.getAttribute(AttributeName.NODESTATUS));
 						if (ni.hasAttribute(AttributeName.STATUSDETAILS))
@@ -3712,7 +3766,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				// merge the most fitting resource partition into the
 				// unpartitioned
 				// nodeinfo or customerinfo
-				JDFResource target = rl.getTarget();
+				final JDFResource target = rl.getTarget();
 				target.removeChildren(target.getNodeName(), null, null);
 				target.expand(false);
 				e.mergeElement(target, false);
@@ -3733,17 +3787,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	// ///////////////////////////////////////////////////////////////////////
 
-	private boolean fixNiCiToResource(int i, String nam, String linkNam)
+	private boolean fixNiCiToResource(final int i, final String nam, final String linkNam)
 	{
 		boolean bRet = true;
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (hasChildElement(nam, null) || ((i == 1) && hasChildElement(ElementName.STATUSPOOL, null)))
 		{
-			JDFElement e = (JDFElement) getElement(nam);
+			final JDFElement e = (JDFElement) getElement(nam);
 			// move nodeinfo or CustomerInfo into the resource
 			if (rlp == null || !rlp.hasChildElement(linkNam, null))
 			{
-				JDFResource r = addResource(nam, null, EnumUsage.Input, null, null, null, null);
+				final JDFResource r = addResource(nam, null, EnumUsage.Input, null, null, null, null);
 				if (e != null)
 				{
 					r.mergeElement(e, false);
@@ -3756,28 +3810,28 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					{
 
 						// get PartStatus vector
-						JDFStatusPool statusPool = getStatusPool();
-						VElement vPartStatus = statusPool.getPoolChildren(null);
+						final JDFStatusPool statusPool = getStatusPool();
+						final VElement vPartStatus = statusPool.getPoolChildren(null);
 						setStatus(EnumNodeStatus.Part);
 						JDFAttributeMap mps = null;
 						if (!vPartStatus.isEmpty())
 						{
-							JDFPartStatus ps = (JDFPartStatus) vPartStatus.elementAt(0);
+							final JDFPartStatus ps = (JDFPartStatus) vPartStatus.elementAt(0);
 							mps = ps.getPartMap();
 						}
-						VString partIDKeys = getPartIDKeys(mps);
+						final VString partIDKeys = getPartIDKeys(mps);
 
 						ni.setAttribute(AttributeName.NODESTATUS, statusPool.getAttribute(AttributeName.STATUS));
 						ni.setAttribute(AttributeName.NODESTATUSDETAILS, statusPool.getStatusDetails());
 						for (int ips = 0; ips < vPartStatus.size(); ips++)
 						{
-							JDFPartStatus ps = (JDFPartStatus) vPartStatus.elementAt(ips);
+							final JDFPartStatus ps = (JDFPartStatus) vPartStatus.elementAt(ips);
 							try
 							{ // see if the partstatus is consistent with what
 								// we have
 								ni = (JDFNodeInfo) r.getCreatePartition(ps.getPartMap(), partIDKeys);
 							}
-							catch (JDFException ex)
+							catch (final JDFException ex)
 							{
 								// couldn't create a partiton - flag failure and
 								// move on
@@ -3812,7 +3866,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return true if this node is valid
 	 */
 	@Override
-	public boolean isValid(EnumValidationLevel level)
+	public boolean isValid(final EnumValidationLevel level)
 	{
 		boolean bValid = super.isValid(level);
 		if (!bValid)
@@ -3823,7 +3877,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		bValid = !hasInvalidLinks(level);
 		if (bValid && EnumType.Product.equals(getEnumType()))
 		{
-			JDFNode n = getParentJDF();
+			final JDFNode n = getParentJDF();
 			if (n != null)
 			{
 				bValid = EnumType.Product.equals(n.getEnumType());
@@ -3840,7 +3894,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default public boolean hasInvalidLinks (ValidationLevel_Complete)
 	 */
-	public boolean hasInvalidLinks(EnumValidationLevel level)
+	public boolean hasInvalidLinks(final EnumValidationLevel level)
 	{
 		return getInvalidLinks(level, 1).size() > 0;
 	}
@@ -3854,7 +3908,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getInvalidLinks (ValidationLevel_Complete, Integer.MAX_VALUE)
 	 */
-	public VString getInvalidLinks(EnumValidationLevel level, int nMax)
+	public VString getInvalidLinks(final EnumValidationLevel level, final int nMax)
 	{
 		final VString vElem = new VString();
 		final Vector<Integer> foundSingleLinks = new Vector<Integer>();
@@ -3892,15 +3946,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param updateKids if true, also recursively update all kids, if false move to root without updating kids
 	 * @param updateParents if true, recurse down to the root, updatimg the satus based on modifications in this
 	 */
-	public void updatePartStatus(VJDFAttributeMap vMap, boolean updateKids, boolean updateParents)
+	public void updatePartStatus(final VJDFAttributeMap vMap, final boolean updateKids, final boolean updateParents)
 	{
-		VElement vNodes = getvJDFNode(null, null, true);
+		final VElement vNodes = getvJDFNode(null, null, true);
 		if (vNodes != null && !vNodes.isEmpty())
 		{
 
 			final int kidsize = vNodes.size();
 			// clean kids first and then start algorithm based on clean kids
-			VJDFAttributeMap statusMaps = new VJDFAttributeMap();
+			final VJDFAttributeMap statusMaps = new VJDFAttributeMap();
 			for (int i = 0; i < kidsize; i++)
 			{
 				final JDFNode node = (JDFNode) vNodes.item(i);
@@ -3915,7 +3969,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				for (int i = statusMaps.size() - 1; i >= 0; i--)
 				{
-					JDFAttributeMap map = statusMaps.elementAt(i);
+					final JDFAttributeMap map = statusMaps.elementAt(i);
 					if (!map.subMap(vMap))
 					{
 						statusMaps.removeElementAt(i);
@@ -3932,13 +3986,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			}
 			for (int i = 0; i < statusMaps.size(); i++)
 			{
-				JDFAttributeMap map = statusMaps.elementAt(i);
+				final JDFAttributeMap map = statusMaps.elementAt(i);
 				EnumNodeStatus minStatus = EnumNodeStatus.Completed;
 				for (int j = 0; j < kidsize; j++)
 				{
 					final JDFNode node = (JDFNode) vNodes.item(j);
 
-					EnumNodeStatus status = node.getPartStatus(map);
+					final EnumNodeStatus status = node.getPartStatus(map);
 					if (status == null)
 					{
 						minStatus = null;
@@ -3959,7 +4013,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		// recurse down to root
 		if (updateParents)
 		{
-			JDFNode parent = getParentJDF();
+			final JDFNode parent = getParentJDF();
 			if (parent != null)
 			{
 				parent.updatePartStatus(vMap, false, true);
@@ -4022,7 +4076,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getJobPart(jobPartID, JDFConstants.EMPTYSTRING)
 	 */
-	public JDFNode getJobPart(String jobPartID, String jobID)
+	public JDFNode getJobPart(final String jobPartID, final String jobID)
 	{
 		final JDFAttributeMap jobPartIDMap = new JDFAttributeMap(AttributeName.JOBPARTID, jobPartID);
 		if (jobID != null && !jobID.equals(JDFConstants.EMPTYSTRING))
@@ -4036,19 +4090,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * add any resources that live in ancestor nodes to this node
 	 * 
 	 * @param vRWResources vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
-	 *            the format is one of:<br>
-	 *            <li>ResName</li><br>
-	 *            <li>ResName:Input</li><br>
-	 *            <li>ResName:Output</li><br>
-	 *            <li>ResName:ProcessUsage</li><br>
-	 *            <li>ID<br>
+	 * the format is one of:<br>
+	 * <li>ResName</li><br>
+	 * <li>ResName:Input</li><br>
+	 * <li>ResName:Output</li><br>
+	 * <li>ResName:ProcessUsage</li><br>
+	 * <li>ID<br>
 	 * @param vSpawnParts vector of JDFAttributeMaps that describe the parts to spawn
 	 * 
 	 * @return HashSet of resources or resource partitions that would be spawned rw multiple times
 	 */
-	public Collection checkSpawnedResources(VString vRWResources, VJDFAttributeMap vSpawnParts)
+	public Collection checkSpawnedResources(final VString vRWResources, final VJDFAttributeMap vSpawnParts)
 	{
-		JDFSpawn spawn = new JDFSpawn(this);
+		final JDFSpawn spawn = new JDFSpawn(this);
 		spawn.vSpawnParts = vSpawnParts;
 		spawn.vRWResources_in = new VString(vRWResources);
 		return spawn.checkSpawnedResources();
@@ -4063,7 +4117,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return HashSet of referenced resource refs and links
 	 */
 	@Override
-	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
+	public HashSet getAllRefs(final HashSet vDoneRefs, final boolean bRecurse)
 	{
 		HashSet v1 = vDoneRefs != null ? vDoneRefs : new LinkedHashSet();
 		// the following code probably does more harm than hel in the standard
@@ -4086,13 +4140,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		// }
 		// }
 		// }
-		JDFResourcePool rp = getResourcePool();
+		final JDFResourcePool rp = getResourcePool();
 		if (rp != null && bRecurse)
 		{
 			v1 = rp.getAllRefs(v1, bRecurse);
 		}
 
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp != null)
 		{
 			v1 = rlp.getAllRefs(v1, bRecurse);
@@ -4100,7 +4154,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		// only 1.2 direct element - resources are retrieved from the
 		// ResourcePool
-		JDFCustomerInfo ci = (JDFCustomerInfo) getElement(ElementName.CUSTOMERINFO);
+		final JDFCustomerInfo ci = (JDFCustomerInfo) getElement(ElementName.CUSTOMERINFO);
 		if (ci != null)
 		{
 			v1 = ci.getAllRefs(v1, bRecurse);
@@ -4108,19 +4162,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		// only 1.2 direct element - resources are retrieved from the
 		// ResourcePool
-		JDFNodeInfo ni = (JDFNodeInfo) getElement(ElementName.NODEINFO);
+		final JDFNodeInfo ni = (JDFNodeInfo) getElement(ElementName.NODEINFO);
 		if (ni != null)
 		{
 			v1 = ni.getAllRefs(v1, bRecurse);
 		}
 
-		JDFAncestorPool ap = getAncestorPool();
+		final JDFAncestorPool ap = getAncestorPool();
 		if (ap != null)
 		{
 			v1 = ap.getAllRefs(v1, true);
 		}
 
-		VElement vNodes = getvJDFNode(null, null, true);
+		final VElement vNodes = getvJDFNode(null, null, true);
 		final int size = vNodes.size();
 		for (int i = 0; i < size; i++)
 		{
@@ -4135,7 +4189,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param vCombiNodes
 	 */
-	public void setCombined(VString vCombiNodes)
+	public void setCombined(final VString vCombiNodes)
 	{
 		setType(JDFConstants.COMBINED, false);
 		setTypes(vCombiNodes);
@@ -4172,9 +4226,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @default addComponent(cType, bInput, null, true)
 	 */
 	@Deprecated
-	public JDFComponent addComponent(String cType, boolean bInput, JDFNode resRoot, boolean bLink)
+	public JDFComponent addComponent(final String cType, final boolean bInput, final JDFNode resRoot, final boolean bLink)
 	{
-		JDFComponent c = (JDFComponent) addResource(ElementName.COMPONENT, JDFResource.EnumResourceClass.Quantity, bInput, resRoot, bLink, null);
+		final JDFComponent c = (JDFComponent) addResource(ElementName.COMPONENT, JDFResource.EnumResourceClass.Quantity, bInput, resRoot, bLink, null);
 
 		if (c != null)
 		{
@@ -4191,26 +4245,24 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSpawnID(String value)
+	public void setSpawnID(final String value)
 	{
 		setAttribute(JDFConstants.SPAWNID, value, null);
 	}
 
 	/**
-	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names
-	 * if no usage exists for the process) that are spawned RW, all others are spawned read only; vParts is the vector
-	 * of part maps that are to be spawned, defaults to no part, i.e. the whole thing
+	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names if no usage exists for the process) that
+	 * are spawned RW, all others are spawned read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
 	 * 
 	 * @param parentURL
 	 * @param spawnURL URL of the spawned JDF file
 	 * @param vRWResources_in vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
-	 *            the format is one of:<br>
-	 *            ResName:Input<br>
-	 *            ResName:Output<br>
-	 *            ResName:ProcessUsage<br>
+	 * the format is one of:<br>
+	 * ResName:Input<br>
+	 * ResName:Output<br>
+	 * ResName:ProcessUsage<br>
 	 * @param vSpawnParts vector of mAttributes that describe the parts to spawn, only valid PartIDKeys are allowed
-	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else
-	 *            the complete resource is spawned
+	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
 	 * @param bCopyNodeInfo copy the NodeInfo elements into the Ancestors
 	 * @param bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
 	 * @param bCopyComments copy the Comment elements into the Ancestors
@@ -4222,7 +4274,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @default spawn(parentURL, null, null, null, false, false, false, false)
 	 */
 	@Deprecated
-	public JDFNode spawn(String parentURL, String spawnURL, Vector vRWResources_in, VJDFAttributeMap vSpawnParts, boolean bSpawnROPartsOnly, boolean bCopyNodeInfo, boolean bCopyCustomerInfo, boolean bCopyComments)
+	public JDFNode spawn(final String parentURL, final String spawnURL, final Vector vRWResources_in, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo,
+			final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn spawn = new JDFSpawn(this);
 		return spawn.spawn(parentURL, spawnURL, vRWResources_in, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -4231,17 +4284,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the
-	 * parameters except for the list of rw resources, which are by definition empty, are identical to those of Spawn
+	 * spawn a node in informative mode without modifying the root JDF; url is the file name of the new node, the parameters except for the list of rw
+	 * resources, which are by definition empty, are identical to those of Spawn
 	 * 
-	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all
-	 * others are spawned read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e.
-	 * the whole thing
+	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the
+	 * vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
 	 * 
 	 * @param spawnURL URL of the spawned JDF file
 	 * @param vSpawnParts vector of mAttributes that describe the parts to spawn
-	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else
-	 *            the complete resource is spawned
+	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
 	 * @param bCopyNodeInfo copy the NodeInfo elements into the Ancestors
 	 * @param bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
 	 * @param bCopyComments copy the Comment elements into the Ancestors
@@ -4251,7 +4302,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use JDFSpawn.spawnInformative()
 	 */
 	@Deprecated
-	public JDFNode spawnInformative(String parentURL, String spawnURL, VJDFAttributeMap vSpawnParts, boolean bSpawnROPartsOnly, boolean bCopyNodeInfo, boolean bCopyCustomerInfo, boolean bCopyComments)
+	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo,
+			final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn _spawn = new JDFSpawn(this);
 		return _spawn.spawnInformative(parentURL, spawnURL, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -4267,7 +4319,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use new JDFSpawn(this).unSpawn(spawnID);
 	 */
 	@Deprecated
-	public JDFNode unSpawn(String spawnID)
+	public JDFNode unSpawn(final String spawnID)
 	{
 		return new JDFSpawn(this).unSpawn(spawnID);
 	}
@@ -4281,7 +4333,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return JDFNode: the merged node element
 	 */
 	// JDFNode MergeNode(JDFNode e,bool bDelete);
-	public JDFNode mergeNode(JDFNode e, boolean bDelete)
+	public JDFNode mergeNode(final JDFNode e, final boolean bDelete)
 	{
 		// merge nodes in a way that no duplicate elements are created
 		// attention - this kills pools....
@@ -4292,8 +4344,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final KElement m = v.elementAt(i);
 			final String strName = m.getNodeName();
 			KElement mHere = null;
-			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO))
-					|| (strName.equals(ElementName.RESOURCEPOOL)) || (strName.equals(ElementName.RESOURCELINKPOOL))
+			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO)) || (strName.equals(ElementName.RESOURCEPOOL)) || (strName.equals(ElementName.RESOURCELINKPOOL))
 					|| (strName.equals(ElementName.ANCESTORPOOL)) || (strName.equals(ElementName.AUDITPOOL)))
 			{
 				mHere = getElement_JDFElement(m.getNodeName(), null, 0);
@@ -4335,7 +4386,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use getLink(resource, EnumUsage)
 	 */
 	@Deprecated
-	public JDFResourceLink getLink(JDFResource r, boolean bInput)
+	public JDFResourceLink getLink(final JDFResource r, final boolean bInput)
 	{
 		return getLink(r, bInput ? EnumUsage.Input : EnumUsage.Output);
 	}
@@ -4349,7 +4400,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return JDFResourceLink - the resource link you was searching for or if not found, null
 	 * 
 	 */
-	public JDFResourceLink getLink(JDFResource r, EnumUsage usage)
+	public JDFResourceLink getLink(final JDFResource r, final EnumUsage usage)
 	{
 		// get the reslink pool
 		final JDFResourceLinkPool p = getResourceLinkPool();
@@ -4370,8 +4421,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
 
-				if (resLink != null && resLink.getrRef().equals(r.getID())
-						&& resLink.getNodeName().equals(r.getLinkString()))
+				if (resLink != null && resLink.getrRef().equals(r.getID()) && resLink.getNodeName().equals(r.getLinkString()))
 				{
 					return resLink;
 				}
@@ -4409,7 +4459,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final String pid = me.getID();
 			vs.addElement(pid);
 
-			KElement parent = me.getParentNode_KElement();
+			final KElement parent = me.getParentNode_KElement();
 
 			if (parent == null)
 			{
@@ -4441,7 +4491,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return JDFNode - the ancestor node
 	 */
 	@Deprecated
-	public JDFNode getAncestorNode(int nSkip)
+	public JDFNode getAncestorNode(final int nSkip)
 	{
 		KElement parent = getParentNode_KElement();
 		JDFNode node = (JDFNode) parent;
@@ -4464,8 +4514,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * searches for the first element occurence in the parent nodes and then the ancestor elements of the root
-	 * ancestorpool
+	 * searches for the first element occurence in the parent nodes and then the ancestor elements of the root ancestorpool
 	 * 
 	 * @param attrib the element name
 	 * @param nameSpaceURI the XML-namespace
@@ -4475,9 +4524,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getAncestorAttribute(attrib, null, null)
 	 */
-	public String getAncestorAttribute(String attrib, String nameSpaceURI, String def)
+	public String getAncestorAttribute(final String attrib, final String nameSpaceURI, final String def)
 	{
-		String s = getInheritedAttribute(attrib, nameSpaceURI, null);
+		final String s = getInheritedAttribute(attrib, nameSpaceURI, null);
 		if (s != null)
 		{
 			return s;
@@ -4497,8 +4546,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * true if a non default attribute occurence in the parent nodes and then the ancestor elements of the root
-	 * ancestorpool exists
+	 * true if a non default attribute occurence in the parent nodes and then the ancestor elements of the root ancestorpool exists
 	 * 
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
@@ -4507,7 +4555,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default hasAncestorAttribute(attrib, null)
 	 */
-	public boolean hasAncestorAttribute(String attrib, String nameSpaceURI)
+	public boolean hasAncestorAttribute(final String attrib, final String nameSpaceURI)
 	{
 		return getAncestorAttribute(attrib, nameSpaceURI, null) != null;
 	}
@@ -4519,7 +4567,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return true if attribute Activation exists
 	 */
 	// bool hasActivation(bool bInherit=false) ;
-	public boolean hasActivation(boolean bInherit)
+	public boolean hasActivation(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -4536,7 +4584,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated
 	 */
 	@Deprecated
-	public boolean hasJobID(boolean bInherit)
+	public boolean hasJobID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -4553,9 +4601,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @since 180502
 	 * @return the KElement found
 	 */
-	public KElement getAncestorElement(String element, String nameSpaceURI)
+	public KElement getAncestorElement(final String element, final String nameSpaceURI)
 	{
-		JDFElement e = (JDFElement) getInheritedElement(element, nameSpaceURI, 0);
+		final JDFElement e = (JDFElement) getInheritedElement(element, nameSpaceURI, 0);
 		if (e != null)
 		{
 			return e;
@@ -4567,7 +4615,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			return null;
 		}
 		// not in the inherited nodes, check the root node's AncestorPool
-		JDFAncestorPool ap = root.getAncestorPool();
+		final JDFAncestorPool ap = root.getAncestorPool();
 		if (ap == null)
 		{
 			return null;
@@ -4577,8 +4625,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * true if a non default attribute occurs in the parent nodes and then the ancestor elements of the root
-	 * ancestorpool exists
+	 * true if a non default attribute occurs in the parent nodes and then the ancestor elements of the root ancestorpool exists
 	 * 
 	 *@deprecated
 	 * @param element the attribute name
@@ -4587,7 +4634,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return boolean - true if the attribute exists
 	 */
 	@Deprecated
-	public boolean hasAncestorElement(String element, String nameSpaceURI)
+	public boolean hasAncestorElement(final String element, final String nameSpaceURI)
 	{
 
 		return getAncestorElement(element, nameSpaceURI) != null;
@@ -4605,7 +4652,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use addResource(strName, JDFResource.EnumClass.Parameter, bInput, resRoot, bLink, null)
 	 */
 	@Deprecated
-	public JDFResource addParameter(String strName, boolean bInput, JDFNode resRoot, boolean bLink)
+	public JDFResource addParameter(final String strName, final boolean bInput, final JDFNode resRoot, final boolean bLink)
 	{
 		return addResource(strName, JDFResource.EnumResourceClass.Parameter, bInput, resRoot, bLink, null);
 	}
@@ -4624,7 +4671,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @default addResource(name, null, true, null, true)
 	 */
 	@Deprecated
-	public JDFResource addConsumable(String strName, boolean bInput, JDFNode resRoot, boolean bLink)
+	public JDFResource addConsumable(final String strName, final boolean bInput, final JDFNode resRoot, final boolean bLink)
 	{
 		return addResource(strName, JDFResource.EnumResourceClass.Consumable, bInput, resRoot, bLink, null);
 	}
@@ -4643,7 +4690,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @default addResource(name, JDFResource.EnumClass.Handling, true, null, true)
 	 */
 	@Deprecated
-	public JDFResource addHandling(String strName, boolean bInput, JDFNode resRoot, boolean bLink)
+	public JDFResource addHandling(final String strName, final boolean bInput, final JDFNode resRoot, final boolean bLink)
 	{
 		return addResource(strName, JDFResource.EnumResourceClass.Handling, bInput, resRoot, bLink, null);
 	}
@@ -4692,8 +4739,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	public boolean isGroupNode()
 	{
 		final EnumType type2 = getEnumType();
-		return EnumType.ProcessGroup.equals(type2) && !hasAttribute(AttributeName.TYPES)
-				|| EnumType.Product.equals(type2);
+		return EnumType.ProcessGroup.equals(type2) && !hasAttribute(AttributeName.TYPES) || EnumType.Product.equals(type2);
 	}
 
 	/**
@@ -4728,7 +4774,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param bInherit recurse through ancestors when searching
 	 * @return String - attribute value
 	 */
-	public String getJobID(boolean bInherit)
+	public String getJobID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -4757,7 +4803,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getJobPartID(flase)
 	 */
-	public String getJobPartID(boolean bInherit)
+	public String getJobPartID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -4771,7 +4817,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param jobPartID the value to set the attribute to
 	 */
-	public void setJobPartID(String jobPartID)
+	public void setJobPartID(final String jobPartID)
 	{
 		setAttribute(AttributeName.JOBPARTID, jobPartID, null);
 	}
@@ -4781,7 +4827,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setJobID(String value)
+	public void setJobID(final String value)
 	{
 		setAttribute(AttributeName.JOBID, value, null);
 	}
@@ -4818,7 +4864,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getSpawnID(false)
 	 */
-	public String getSpawnID(boolean bInherit)
+	public String getSpawnID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -4883,7 +4929,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param namIndex index of the named list, if<0 tokenize all
 	 * @return list of resource process usages that may be linked
 	 */
-	private VString vLinkInfo(int namIndex)
+	private VString vLinkInfo(final int namIndex)
 	{
 		int namIndexLocal = namIndex;
 
@@ -4919,9 +4965,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param nOccur for looping over combined nodes
 	 * @return -1 if it does not fit
 	 */
-	private int[] getMatchingNamIndex(JDFResourceLink rl, int nOccur)
+	private int[] getMatchingNamIndex(final JDFResourceLink rl, final int nOccur)
 	{
-		int[] ret = new int[2];
+		final int[] ret = new int[2];
 		ret[0] = ret[1] = -1;
 		if (rl == null)
 		{
@@ -5010,13 +5056,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * get a vector of Link names that may be inserted in this element if the links need a processusage, the format is
-	 * LinkName:ProcessUsage
+	 * get a vector of Link names that may be inserted in this element if the links need a processusage, the format is LinkName:ProcessUsage
 	 * 
 	 * @param nMax maximum size of the returned vector
 	 * @return vector of strings that contains insertable link names
 	 */
-	public VString getInsertLinkVector(int nMax)
+	public VString getInsertLinkVector(final int nMax)
 	{
 		final VString names = linkNames();
 		final VString vInsert = new VString();
@@ -5060,9 +5105,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return the enumerated process usage of this checked link
 	 * @default getEnumProcessUsage(info, 0)
 	 */
-	public EnumProcessUsage getEnumProcessUsage(String info, int i)
+	public EnumProcessUsage getEnumProcessUsage(final String info, final int i)
 	{
-		String iToken = StringUtil.token(info, i, JDFConstants.BLANK);
+		final String iToken = StringUtil.token(info, i, JDFConstants.BLANK);
 		if (iToken.equals(JDFConstants.EMPTYSTRING))
 		{
 			return null;
@@ -5108,7 +5153,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated
 	 */
 	@Deprecated
-	public boolean hasProjectID(boolean bInherit)
+	public boolean hasProjectID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -5134,7 +5179,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param strValue the value to set the attribute to
 	 */
-	public void setProjectID(String strValue)
+	public void setProjectID(final String strValue)
 	{
 		setAttribute(JDFConstants.PROJECTID, strValue, null);
 	}
@@ -5145,7 +5190,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param bInherit recurse through ancestors when searching
 	 * @return the value of the attribute
 	 */
-	public String getProjectID(boolean bInherit)
+	public String getProjectID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -5187,8 +5232,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param doneIndexList Vector of Integer
 	 * @return true if valid
 	 */
-	public boolean isValidLink(@SuppressWarnings("unused") EnumValidationLevel level, 
-			JDFResourceLink rl, Vector doneNameList, Vector doneIndexList)
+	public boolean isValidLink(@SuppressWarnings("unused") final EnumValidationLevel level, final JDFResourceLink rl, final Vector doneNameList, final Vector doneIndexList)
 	{
 		Vector doneNameListLocal = doneNameList;
 		Vector doneIndexListLocal = doneIndexList;
@@ -5223,7 +5267,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			// on the C++ side the following two methods are represented with
 			// a method getMatchingIndex(rl, iIndex, nOccur) that
 			// has 3 parameters, one of them is a reference(!) at iIndex
-			int[] ii = getMatchingNamIndex(rl, nOccur);
+			final int[] ii = getMatchingNamIndex(rl, nOccur);
 			namIndex = ii[0];
 			iIndex = ii[1];
 
@@ -5231,8 +5275,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (namIndex < 0)
 			{
 				final EnumType enumType = getEnumType();
-				if (enumType == null || enumType.equals(EnumType.ProcessGroup)
-						|| (enumType.equals(EnumType.Combined) && getEnumTypes() == null))
+				if (enumType == null || enumType.equals(EnumType.ProcessGroup) || (enumType.equals(EnumType.Combined) && getEnumTypes() == null))
 				{
 					return true;
 				}
@@ -5246,8 +5289,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 			for (int i = 0; i < dns; i++)
 			{
-				if (((Integer) doneNameListLocal.elementAt(i)).intValue() == namIndex
-						&& ((Integer) doneIndexListLocal.elementAt(i)).intValue() == iIndex)
+				if (((Integer) doneNameListLocal.elementAt(i)).intValue() == namIndex && ((Integer) doneIndexListLocal.elementAt(i)).intValue() == iIndex)
 				{
 					nOccur++; // this one is gone, try next
 					bTryNext = true;
@@ -5283,7 +5325,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return VString
 	 */
 	@Deprecated
-	public VString getMissingLinks(int nMax)
+	public VString getMissingLinks(final int nMax)
 	{
 		return getMissingLinkVector(nMax);
 	}
@@ -5291,16 +5333,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	// ///////////////////////////////////////////////////////////////////////
 
 	/**
-	 * get the links that match the typesafe resource name if the Resource type is not defined for the process
-	 * represented by this node see chapter 6 JDFSpec, then the links are ignored
+	 * get the links that match the typesafe resource name if the Resource type is not defined for the process represented by this node see chapter 6 JDFSpec,
+	 * then the links are ignored
 	 * 
 	 * @param resName of the resource to remove
 	 * @param bLink if false, returns the linked resources, else if true, returns the ResourceLink elements
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or
-	 *            processusage are requested
+	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @return vector of resourcelink elements
 	 */
-	public VElement getMatchingLinks(String resName, boolean bLink, EnumProcessUsage processUsage)
+	public VElement getMatchingLinks(final String resName, final boolean bLink, final EnumProcessUsage processUsage)
 	{
 		VElement vE = null;
 
@@ -5348,7 +5389,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				String linkName = null;
 				if (resName != null && !resName.endsWith("Link"))
+				{
 					linkName = resName + "Link";
+				}
 				vE = rlp.getPoolChildren(linkName, null, null);
 				if (!bLink)
 				{
@@ -5366,7 +5409,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					final Iterator<KElement> vEIterator = vE.iterator();
 					while (vEIterator.hasNext())
 					{
-						JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
+						final JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
 						if (rl.getPipeProtocol().equals(JDFConstants.INTERNAL))
 						{
 							vEIterator.remove();
@@ -5385,7 +5428,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					final Iterator<KElement> vEIterator = vE.iterator();
 					while (vEIterator.hasNext())
 					{
-						JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
+						final JDFResourceLink rl = (JDFResourceLink) vEIterator.next();
 						if (JDFConstants.INTERNAL.equals(rl.getPipeProtocol()))
 						{
 							vEIterator.remove();
@@ -5404,7 +5447,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param nMax maximum size of the returned vector
 	 * @return VString vector of strings that contains missing Link names
 	 */
-	public VString getMissingLinkVector(int nMax)
+	public VString getMissingLinkVector(final int nMax)
 	{
 		final VString names = linkNames();
 		if (names == null)
@@ -5421,7 +5464,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final int nameSize = names.size();
 		for (int i = 0; i < nameSize; i++)
 		{
-			String nam = names.stringAt(i);
+			final String nam = names.stringAt(i);
 			boolean namDone = false;
 			for (int k = 0; k < i; k++)
 			{
@@ -5444,7 +5487,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				final Iterator<String> typesIterator = types.iterator();
 				while (typesIterator.hasNext())
 				{
-					String typesAt = typesIterator.next();
+					final String typesAt = typesIterator.next();
 					if (typesAt.charAt(1) == '+' || typesAt.charAt(1) == '_')
 					{
 						// 110602 added
@@ -5478,12 +5521,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param processUsage
 	 * @param partMap
 	 * @param pos
-	 * @deprecated use getMatchingResource(String resName, EnumProcessUsage processUsage, JDFAttributeMap partMap, int
-	 *             pos))
+	 * @deprecated use getMatchingResource(String resName, EnumProcessUsage processUsage, JDFAttributeMap partMap, int pos))
 	 * @return JDFResource
 	 */
 	@Deprecated
-	public JDFResource getMatchingResource(String resName, int processUsage, JDFAttributeMap partMap, int pos)
+	public JDFResource getMatchingResource(final String resName, final int processUsage, final JDFAttributeMap partMap, final int pos)
 	{
 		final JDFResourceLink rl = getMatchingLink(resName, EnumProcessUsage.getEnum(processUsage), pos);
 
@@ -5502,17 +5544,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * get the resource that matches a typesafe resource name if the Resource type is not defined for the process
-	 * represented by this node see chapter 6 JDFSpec, then the resource is ignored
+	 * get the resource that matches a typesafe resource name if the Resource type is not defined for the process represented by this node see chapter 6
+	 * JDFSpec, then the resource is ignored
 	 * 
 	 * @param resName of the resource to remove
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or
-	 *            processusage are requested
+	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param partMap
 	 * @param pos the position of the link if multiple matching links exist
 	 * @return JDFResource - the resourcelink element
 	 */
-	public JDFResource getMatchingResource(String resName, EnumProcessUsage processUsage, JDFAttributeMap partMap, int pos)
+	public JDFResource getMatchingResource(final String resName, final EnumProcessUsage processUsage, final JDFAttributeMap partMap, final int pos)
 	{
 		final JDFResourceLink rl = getMatchingLink(resName, processUsage, pos);
 		if (rl == null)
@@ -5536,16 +5577,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 * get the link that matches the typesafe resource name<br>
-	 * if the Resource type is not defined for the process represented by this node, the link is ignored (see JDF Spec
-	 * Chapter 6)
+	 * if the Resource type is not defined for the process represented by this node, the link is ignored (see JDF Spec Chapter 6)
 	 * 
 	 * @param resName name of the resource to remove
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or
-	 *            processusage are requested
+	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param pos the position of the link (if multiple matching links exist)
 	 * @return JDFResourceLink - the resourcelink
 	 */
-	public JDFResourceLink getMatchingLink(String resName, EnumProcessUsage processUsage, int pos)
+	public JDFResourceLink getMatchingLink(final String resName, final EnumProcessUsage processUsage, final int pos)
 	{
 		JDFResourceLink rl = null;
 
@@ -5558,28 +5597,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * Method AppendMatchingResource. Appends a resource and link it to this if it is listed in the list of valid nodes
-	 * for for a JDF with the given type also creates the matching resource link in this
+	 * Method AppendMatchingResource. Appends a resource and link it to this if it is listed in the list of valid nodes for for a JDF with the given type also
+	 * creates the matching resource link in this
 	 * 
 	 * @param resName the name of the resource to add
-	 * @param processUsage the processUsage of the resourcelink of the resource to add: <li>null
-	 *            EnumProcessUsage.AnyOutput - for input but no processUsage</li> <li>EnumProcessUsage.AnyOutput - for
-	 *            output but no processUsage</li>
+	 * @param processUsage the processUsage of the resourcelink of the resource to add: <li>null EnumProcessUsage.AnyOutput - for input but no processUsage</li>
+	 * <li>EnumProcessUsage.AnyOutput - for output but no processUsage</li>
 	 * 
-	 * @param resourceRoot the root JDF node, that is the parent of the resourcepool where the resource should be added.
-	 *            If null, this node is assumed.
+	 * @param resourceRoot the root JDF node, that is the parent of the resourcepool where the resource should be added. If null, this node is assumed.
 	 * 
 	 * @return JDFResource the newly created resource
 	 */
-	public JDFResource appendMatchingResource(String resName, EnumProcessUsage processUsage, JDFNode resourceRoot)
+	public JDFResource appendMatchingResource(final String resName, final EnumProcessUsage processUsage, final JDFNode resourceRoot)
 	{
 		// TODO check comment for processUsage
 		final VString vtyp = getMatchType(resName, processUsage);
 		if (vtyp == null) // anything goes
 		{
-			boolean bInput = !EnumProcessUsage.AnyOutput.equals(processUsage);
-			JDFResource r = addResource(resName, null, bInput, resourceRoot, true, null);
-			JDFResourceLink rl = getLink(r, null);
+			final boolean bInput = !EnumProcessUsage.AnyOutput.equals(processUsage);
+			final JDFResource r = addResource(resName, null, bInput, resourceRoot, true, null);
+			final JDFResourceLink rl = getLink(r, null);
 			if (processUsage != null && processUsage.getValue() > EnumProcessUsage.AnyOutput.getValue())
 			{
 				rl.setProcessUsage(processUsage);
@@ -5649,7 +5686,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param processUsage
 	 * @return null if anything goes, an empty list if nothing goes, else the list of valid entries
 	 */
-	private VString getMatchType(String resName, EnumProcessUsage processUsage)
+	private VString getMatchType(final String resName, final EnumProcessUsage processUsage)
 	{
 		final VString vRet = new VString();
 		final VString linkNames = linkNames();
@@ -5713,15 +5750,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * remove the link that matches the typesafe link resource name
 	 * 
 	 * @param resName name of the resource to remove
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or
-	 *            processusage are requested
+	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param bRemoveResource also remove the resource, if it is not linked by any other process
 	 * @param pos the position of the link, if multiple matching links exist
 	 * @return true if successful
 	 * 
 	 * @default removeMatchingLink(resName, processUsage, false, 0)
 	 */
-	public boolean removeMatchingLink(String resName, int processUsage, boolean bRemoveResource, int pos)
+	public boolean removeMatchingLink(final String resName, final int processUsage, final boolean bRemoveResource, final int pos)
 	{
 		JDFResourceLink l = null;
 		l = getMatchingLink(resName, EnumProcessUsage.getEnum(processUsage), pos);
@@ -5745,14 +5781,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * remove the link that matches the typesafe link resource name
 	 * 
 	 * @param resName name of the resource to remove
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or
-	 *            processusage are requested
+	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param bRemoveResource also remove the resource, if it is not linked by any other process
 	 * @return true if successful
 	 * 
 	 * @default removeMatchingLink(resName, processUsage, false, 0)
 	 */
-	public boolean removeMatchingLinks(String resName, EnumProcessUsage processUsage, boolean bRemoveResource)
+	public boolean removeMatchingLinks(final String resName, final EnumProcessUsage processUsage, final boolean bRemoveResource)
 	{
 		final VElement v = getMatchingLinks(resName, true, processUsage);
 		for (int i = 0; i < v.size(); i++)
@@ -5775,14 +5810,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * Append a resource that matches the typesafe link described by resource name
 	 * 
 	 * @param resource the resource to link
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or
-	 *            processusage are requested
+	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @param partMap the Attribute map of parts
 	 * @return the new link, null if failure
 	 * 
 	 * @default linkMatchingResource(resource, processUsage, null)
 	 */
-	public JDFResourceLink linkMatchingResource(JDFResource resource, EnumProcessUsage processUsage, JDFAttributeMap partMap)
+	public JDFResourceLink linkMatchingResource(final JDFResource resource, final EnumProcessUsage processUsage, final JDFAttributeMap partMap)
 	{
 		JDFResourceLink rl = null;
 
@@ -5794,7 +5828,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final Iterator<String> vtypIterator = vtyp.iterator();
 			while (vtypIterator.hasNext())
 			{
-				String typ = vtypIterator.next();
+				final String typ = vtypIterator.next();
 				if ((typ.charAt(1) == '?') || (typ.charAt(1) == '_'))
 				{
 					if (numMatchingLinks(resName, false, processUsage) > 0)
@@ -5824,13 +5858,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param resName name of the resources to match
 	 * @param bLink if false: returns the linked resources, if true: returns the ResourceLink elements
-	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or
-	 *            processusage are requested
+	 * @param processUsage enum that defines if all links matching the name or only those matching the name usage and/or processusage are requested
 	 * @return int - the number of resourcelink elements
 	 * 
 	 * @default numMatchingLinks(resName, true, ProcessUsage_Any.getValue())
 	 */
-	public int numMatchingLinks(String resName, boolean bLink, EnumProcessUsage processUsage)
+	public int numMatchingLinks(final String resName, final boolean bLink, final EnumProcessUsage processUsage)
 	{
 		int iNumMatchingLinks = 0;
 		final VElement v = getMatchingLinks(resName, bLink, processUsage);
@@ -5929,30 +5962,29 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param xPath
 	 * @return the existing CustomerInfo or NodeInfo
 	 */
-	private KElement getNiCi(String elementName, boolean bInherit, String xPath)
+	private KElement getNiCi(final String elementName, final boolean bInherit, final String xPath)
 	{
 		// always get the element
 		KElement nici = getElement(elementName);
-		EnumVersion eVer = getVersion(true);
+		final EnumVersion eVer = getVersion(true);
 
 		// if version>=1.0 or no direct element is there try the resource
 		if (eVer != null && eVer.getValue() >= EnumVersion.Version_1_3.getValue() || (nici == null))
 		{
-			JDFResourceLinkPool rlp = getResourceLinkPool();
+			final JDFResourceLinkPool rlp = getResourceLinkPool();
 			if (rlp != null)
 			{
-				VElement v = rlp.getPoolChildren(elementName + "Link", new JDFAttributeMap(AttributeName.USAGE, "Input"), null);
+				final VElement v = rlp.getPoolChildren(elementName + "Link", new JDFAttributeMap(AttributeName.USAGE, "Input"), null);
 				if (v != null)
 				{
-					int siz = v.size();
+					final int siz = v.size();
 					final VString types = getTypes();
 
 					for (int i = 0; i < siz; i++)
 					{
-						JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
+						final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
 						final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
-						if (combinedProcessIndex == null
-								|| (types != null && combinedProcessIndex.size() == types.size()))
+						if (combinedProcessIndex == null || (types != null && combinedProcessIndex.size() == types.size()))
 						{
 							// in case of multiple parts - grab root - else
 							// potential performance hit
@@ -5970,9 +6002,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		while (nici2 != null && (xPath != null) && (!nici2.hasXPathNode(xPath)))
 		{
 			if ((nici2 instanceof JDFResource) && !((JDFResource) nici2).isResourceRoot())
+			{
 				nici2 = nici2.getParentNode_KElement();
+			}
 			else
+			{
 				nici = nici2 = null;
+			}
 		}
 
 		if (nici != null || !bInherit)
@@ -5980,12 +6016,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			return nici;
 		}
 
-		JDFNode parent = getParentJDF();
+		final JDFNode parent = getParentJDF();
 		if (parent != null)
 		{
 			return parent.getNiCi(elementName, bInherit, xPath);
 		}
-		JDFAncestorPool ap = getAncestorPool();
+		final JDFAncestorPool ap = getAncestorPool();
 		if (ap != null)
 		{
 			return ap.getAncestorElement(elementName, null, xPath);
@@ -6007,18 +6043,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * gets the existing NodeInfo or creates a new one if none exists this method will check if a NodeInfo/CustomerInfo
-	 * exists,
+	 * gets the existing NodeInfo or creates a new one if none exists this method will check if a NodeInfo/CustomerInfo exists,
 	 * 
 	 * @return the found or created NodeInfo/CustomerInfo
 	 */
-	private KElement getCreateNiCi(String s)
+	private KElement getCreateNiCi(final String s)
 	{
 		// check if this already has a Nodeinfo/CustomerInfo
 		KElement nici = getNiCi(s, false, null);
 		if (nici == null)
 		{
-			EnumVersion eVer = getVersion(true);
+			final EnumVersion eVer = getVersion(true);
 			if (eVer != null && eVer.getValue() >= EnumVersion.Version_1_3.getValue())
 			{
 				nici = addResource(s, null, EnumUsage.Input, null, this, null, null);
@@ -6052,17 +6087,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return the appended NodeInfo
 	 * @throws JDFException if combinedProcessIndex is outside the legal range implied by @Types
 	 */
-	public JDFNodeInfo appendNodeInfo(int combinedProcessIndex)
+	public JDFNodeInfo appendNodeInfo(final int combinedProcessIndex)
 	{
 		if (combinedProcessIndex < 0 || combinedProcessIndex >= getTypes().size())
-			throw new JDFException("appendNodeInfo: appending ni for non existing ccombinedProcessIndex:"
-					+ combinedProcessIndex + " types=" + getTypes());
+		{
+			throw new JDFException("appendNodeInfo: appending ni for non existing ccombinedProcessIndex:" + combinedProcessIndex + " types=" + getTypes());
+		}
 		if (getNodeInfo(combinedProcessIndex) != null)
 		{
 			throw new JDFException("JDFNodeInfo.appendNodeInfo: NodeInfo already exists");
 		}
-		JDFNodeInfo ni = (JDFNodeInfo) addResource(ElementName.NODEINFO, EnumUsage.Input);
-		JDFResourceLink rl = getLink(ni, null);
+		final JDFNodeInfo ni = (JDFNodeInfo) addResource(ElementName.NODEINFO, EnumUsage.Input);
+		final JDFResourceLink rl = getLink(ni, null);
 		rl.setCombinedProcessIndex(new JDFIntegerList(combinedProcessIndex));
 		return ni;
 	}
@@ -6073,16 +6109,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param combinedProcessIndex the combinedprocessindex that must be explicitly specified in the link
 	 * @return the existing NodeInfo.
 	 */
-	public JDFNodeInfo getNodeInfo(int combinedProcessIndex)
+	public JDFNodeInfo getNodeInfo(final int combinedProcessIndex)
 	{
 		if (combinedProcessIndex < 0 || combinedProcessIndex >= getTypes().size())
+		{
 			return null;
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		}
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp == null)
+		{
 			return null;
-		JDFResourceLink rl = (JDFResourceLink) rlp.getChildWithMatchingAttribute("NodeInfoLink", AttributeName.COMBINEDPROCESSINDEX, null, String.valueOf(combinedProcessIndex), 0, true, AttributeInfo.EnumAttributeType.IntegerList);
+		}
+		final JDFResourceLink rl = (JDFResourceLink) rlp.getChildWithMatchingAttribute("NodeInfoLink", AttributeName.COMBINEDPROCESSINDEX, null, String.valueOf(combinedProcessIndex), 0, true,
+				AttributeInfo.EnumAttributeType.IntegerList);
 		if (rl == null)
+		{
 			return null;
+		}
 
 		return (JDFNodeInfo) rl.getTarget();
 	}
@@ -6104,11 +6147,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * get first NodeInfo element from child list or child list of any ancestor
 	 * 
 	 * @param xPath the xPath to an element or attribute that must exist in the queried CustomerInfo<br>
-	 *            note that attributes must be marked with an "@", if xPath=null, simply return the next in line
+	 * note that attributes must be marked with an "@", if xPath=null, simply return the next in line
 	 * 
 	 * @return JDFNodeInfo The matching NodeInfo element
 	 */
-	public JDFNodeInfo getInheritedNodeInfo(String xPath)
+	public JDFNodeInfo getInheritedNodeInfo(final String xPath)
 	{
 		return (JDFNodeInfo) getNiCi(ElementName.NODEINFO, true, xPath);
 	}
@@ -6148,7 +6191,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param elmName name of the element to remove
 	 */
-	private void removeNiCi(String elmName)
+	private void removeNiCi(final String elmName)
 	{
 		// just in case : zapp them both
 		removeResource(elmName, 0);
@@ -6165,7 +6208,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	{
 		while (numNodeInfos() > 0)
 		{
-			KElement remRes = removeResource(ElementName.NODEINFO, 0);
+			final KElement remRes = removeResource(ElementName.NODEINFO, 0);
 			if (remRes == null)
 			{
 				// removed all in the resource pool
@@ -6174,7 +6217,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		// remove all direct childs
-		Vector nodeInfoChilds = getChildElementVector(ElementName.NODEINFO, null, null, false, Integer.MAX_VALUE, false);
+		final Vector nodeInfoChilds = getChildElementVector(ElementName.NODEINFO, null, null, false, Integer.MAX_VALUE, false);
 		for (int i = 0; i < nodeInfoChilds.size(); i++)
 		{
 			removeChild((Node) nodeInfoChilds.elementAt(i));
@@ -6196,7 +6239,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		// realy nice (same for removeNodeInfos)!
 		while (hasCustomerInfo())
 		{
-			KElement remRes = removeResource(ElementName.CUSTOMERINFO, 0);
+			final KElement remRes = removeResource(ElementName.CUSTOMERINFO, 0);
 			if (remRes == null)
 			{
 				// remove all in the resource pool
@@ -6205,7 +6248,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		// remove all direct childs
-		Vector nodeInfoChilds = getChildElementVector(ElementName.CUSTOMERINFO, null, null, false, Integer.MAX_VALUE, false);
+		final Vector nodeInfoChilds = getChildElementVector(ElementName.CUSTOMERINFO, null, null, false, Integer.MAX_VALUE, false);
 		for (int i = 0; i < nodeInfoChilds.size(); i++)
 		{
 			removeChild((Node) nodeInfoChilds.elementAt(i));
@@ -6226,30 +6269,28 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		// }
 		// v=getUnlinkedResources(false); // repeat until no unlinked are found
 		// }
-		UnLinkFinder uf = new UnLinkFinder();
+		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinkedResources(this);
 	}
 
 	/**
-	 * removes a Resource from this ResourceLinkPool and from the resourcePool if it is no longer linked to any other
-	 * process
+	 * removes a Resource from this ResourceLinkPool and from the resourcePool if it is no longer linked to any other process
 	 * 
 	 * @param nodeName the Nodename of the Resource "NodeInfo" for example
 	 * @param iSkip number to skip before deleting
-	 * @return KElement the removed resource, null if nothing was found or deleted (e.g. 4 found and the 5th is the one
-	 *         to delete). The link is not returned<br>
-	 *         If the link is deleted and the resource is still linked to another process, null is returned.
+	 * @return KElement the removed resource, null if nothing was found or deleted (e.g. 4 found and the 5th is the one to delete). The link is not returned<br>
+	 * If the link is deleted and the resource is still linked to another process, null is returned.
 	 */
-	public JDFResource removeResource(String nodeName, int iSkip)
+	public JDFResource removeResource(final String nodeName, final int iSkip)
 	{
 		JDFResource kRet = null;
 
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp != null)
 		{
-			String linkName = nodeName + "Link";
+			final String linkName = nodeName + "Link";
 
-			JDFResourceLink rl = (JDFResourceLink) rlp.getChildByTagName(linkName, null, iSkip, null, true, false);
+			final JDFResourceLink rl = (JDFResourceLink) rlp.getChildByTagName(linkName, null, iSkip, null, true, false);
 			if (rl != null)
 			{
 				kRet = rl.getTarget();
@@ -6274,7 +6315,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	{
 		int i = numChildElements(ElementName.NODEINFO, null);
 
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp != null)
 		{
 			final VElement poolChildren = rlp.getPoolChildren("NodeInfoLink", null, null);
@@ -6298,7 +6339,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	{
 		int i = numChildElements(ElementName.CUSTOMERINFO, null);
 
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp != null)
 		{
 			final VElement poolChildren = rlp.getPoolChildren("CustomerInfoLink", null, null);
@@ -6443,7 +6484,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getChildJDFNode(id, false)
 	 */
-	public JDFNode getChildJDFNode(String id, boolean bDirect)
+	public JDFNode getChildJDFNode(final String id, final boolean bDirect)
 	{
 		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.ID, id);
 		return (JDFNode) getTreeElement(ElementName.JDF, null, m, bDirect, true);
@@ -6457,7 +6498,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default hasVersion(false)
 	 */
-	public boolean hasVersion(boolean bInherit)
+	public boolean hasVersion(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -6473,7 +6514,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use JDFElement.setVersion(EnumVersion.getEnum(value))
 	 */
 	@Deprecated
-	public void setVersion(String value)
+	public void setVersion(final String value)
 	{
 		setAttribute(AttributeName.VERSION, value, null);
 	}
@@ -6486,10 +6527,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getVersion(false)
 	 * 
-	 *          this method replaces the C++ methods GetVersion and GetEnumVersion
+	 * this method replaces the C++ methods GetVersion and GetEnumVersion
 	 */
 	@Override
-	public EnumVersion getVersion(boolean bInherit)
+	public EnumVersion getVersion(final boolean bInherit)
 	{
 		String version;
 		if (bInherit)
@@ -6505,20 +6546,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * clone the target resource of this and generate a ResourceAudit in the parent node's AuditPool. Both resourcelinks
-	 * of the ResourceAudit are filled in.<br>
+	 * clone the target resource of this and generate a ResourceAudit in the parent node's AuditPool. Both resourcelinks of the ResourceAudit are filled in.<br>
 	 * The resource selected by this may now be modified. <br>
 	 * The cloned copy has a new Id in the format: (thisID)_old_nnn
 	 * 
 	 * @return the ResourceAudit that was created
 	 */
-	public JDFResourceAudit cloneResourceToModify(JDFResourceLink resLink)
+	public JDFResourceAudit cloneResourceToModify(final JDFResourceLink resLink)
 	{
 		JDFResourceAudit resourceAudit = null;
 
 		final JDFResource r = resLink.getLinkRoot();
 		if (r == null)
+		{
 			return null;
+		}
 		final JDFResourcePool pool = r.getParentJDF().getResourcePool();
 		final JDFResource oldCopy = (JDFResource) pool.copyElement(r, null);
 
@@ -6528,7 +6570,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final String newID = r.newModifiedID();
 			oldCopy.setID(newID);
 			resourceAudit = prepareToModifyLink(resLink);
-			JDFResourceLink resLinkAudit = (JDFResourceLink) resourceAudit.copyElement(resLink, null);
+			final JDFResourceLink resLinkAudit = (JDFResourceLink) resourceAudit.copyElement(resLink, null);
 
 			if (resLinkAudit != null)
 			{
@@ -6542,13 +6584,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	// ////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Generate a ResourceAudit in the parent node's AuditPool an initial copy of the not yet modified resourcelink is
-	 * inserted<br>
+	 * Generate a ResourceAudit in the parent node's AuditPool an initial copy of the not yet modified resourcelink is inserted<br>
 	 * call JDFResourceAudit.UpdateLink with the modified link to finalize
 	 * 
 	 * @return the ResourceAudit that was created
 	 */
-	public JDFResourceAudit prepareToModifyLink(JDFResourceLink resLink)
+	public JDFResourceAudit prepareToModifyLink(final JDFResourceLink resLink)
 	{
 
 		final JDFAuditPool ap = getCreateAuditPool();
@@ -6569,7 +6610,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	public VString getTypes()
 	{
 		if (!isTypesNode())
+		{
 			return null;
+		}
 		final String types = getAttribute(AttributeName.TYPES, null, null);
 		return types == null ? null : new VString(types, null);
 	}
@@ -6578,18 +6621,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * get the Types as a vector of EnumType
 	 * 
 	 * @return vector of enumerated types, null if extensions exist that hinder us from generating a complete vector<br>
-	 *         e.g. extension types or gray box names
+	 * e.g. extension types or gray box names
 	 */
 	public Vector<EnumType> getEnumTypes()
 	{
 		Vector<EnumType> vs = null;
-		VString types = getTypes();
+		final VString types = getTypes();
 		if (types != null)
 		{
-			Iterator<String> typesIterator = types.iterator();
+			final Iterator<String> typesIterator = types.iterator();
 			while (typesIterator.hasNext())
 			{
-				EnumType typ = EnumType.getEnum(typesIterator.next());
+				final EnumType typ = EnumType.getEnum(typesIterator.next());
 				if (typ == null)
 				{
 					return null;
@@ -6611,10 +6654,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param start the position to start searching at - generally 0
 	 * @return int the position of the first occurence after start,-1 if none is found
 	 */
-	public int getCombinedProcessIndex(EnumType typ, int start)
+	public int getCombinedProcessIndex(final EnumType typ, final int start)
 	{
 		if (typ == null)
+		{
 			return -1;
+		}
 		return getCombinedProcessIndex(typ.getName(), start);
 	}
 
@@ -6625,11 +6670,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param start the position to start searching at - generally 0
 	 * @return int the position of the first occurence after start,-1 if none is found
 	 */
-	public int getCombinedProcessIndex(String typ, int start)
+	public int getCombinedProcessIndex(final String typ, final int start)
 	{
-		VString types = getTypes();
+		final VString types = getTypes();
 		if (types == null)
+		{
 			return -1;
+		}
 		return types.indexOf(typ, start);
 	}
 
@@ -6638,10 +6685,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param typ
 	 */
-	public void addTypes(EnumType typ)
+	public void addTypes(final EnumType typ)
 	{
 		if (!isTypesNode() || typ == null)
+		{
 			return;
+		}
 		appendAttribute(AttributeName.TYPES, typ.getName(), null, " ", false);
 	}
 
@@ -6666,13 +6715,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 		else if (myType.equals(JDFConstants.PROCESSGROUP))
 		{
-			VElement vNodes = getvJDFNode(null, null, true);
-			VString vsTypes = getTypes();
+			final VElement vNodes = getvJDFNode(null, null, true);
+			final VString vsTypes = getTypes();
 			final int nodeSize = vNodes.size();
 			for (int i = 0; i < nodeSize; i++)
 			{
-				JDFNode node = (JDFNode) vNodes.elementAt(i);
-				VString allTypes = node.getAllTypes();
+				final JDFNode node = (JDFNode) vNodes.elementAt(i);
+				final VString allTypes = node.getAllTypes();
 				if (allTypes != null)
 				{
 					if (vs == null)
@@ -6708,17 +6757,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	// new since Ver 2.0
 	/*
-	 * Attribute Types must be defined in Combined Nodes (Type="Combined") and may be defined in ProcessGroup Nodes
-	 * (Type="ProcessGroup")
+	 * Attribute Types must be defined in Combined Nodes (Type="Combined") and may be defined in ProcessGroup Nodes (Type="ProcessGroup")
 	 */
 	/**
 	 * set node Types , also set Type to Combined
 	 * 
 	 * @param vCombiNodes vector of types
 	 */
-	public void setTypes(VString vCombiNodes)
+	public void setTypes(final VString vCombiNodes)
 	{
-		EnumType type = EnumType.getEnum(getType());
+		final EnumType type = EnumType.getEnum(getType());
 		// 080408 lets be gracefull in case we are building sequentially
 		if (type == null || EnumType.Combined.equals(type) || EnumType.ProcessGroup.equals(type))
 		{
@@ -6738,15 +6786,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getLinksForCombinedProcessIndex(-1)
 	 */
-	public VElement getLinksForCombinedProcessIndex(int combinedProcessIndex)
+	public VElement getLinksForCombinedProcessIndex(final int combinedProcessIndex)
 	{
-		EnumType typ = getEnumType();
+		final EnumType typ = getEnumType();
 		if (!EnumType.Combined.equals(typ) && !EnumType.ProcessGroup.equals(typ))
 		{
 			return null;
 		}
 
-		VElement vLinks = getResourceLinks(null, null, null);
+		final VElement vLinks = getResourceLinks(null, null, null);
 		if (vLinks == null)
 		{
 			return null;
@@ -6756,9 +6804,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		// loop over all links
 		for (int i = vLinks.size() - 1; i >= 0; i--)
 		{
-			JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-			if (rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX)
-					&& !rl.includesMatchingAttribute(AttributeName.COMBINEDPROCESSINDEX, indexString, AttributeInfo.EnumAttributeType.IntegerList))
+			final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
+			if (rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) && !rl.includesMatchingAttribute(AttributeName.COMBINEDPROCESSINDEX, indexString, AttributeInfo.EnumAttributeType.IntegerList))
 			{
 				vLinks.remove(i);
 			}
@@ -6775,9 +6822,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getLinksForType(type, -1)
 	 */
-	public VElement getLinksForType(EnumType type, int nType)
+	public VElement getLinksForType(final EnumType type, final int nType)
 	{
-		EnumType typ = getEnumType();
+		final EnumType typ = getEnumType();
 		if (typ == null)
 		{
 			return null;
@@ -6795,7 +6842,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		// no types - this is a corrupt node
-		Vector<EnumType> vTypes = getEnumTypes();
+		final Vector<EnumType> vTypes = getEnumTypes();
 		if (vTypes == null)
 		{
 			return null;
@@ -6803,7 +6850,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final int typSize = vTypes.size();
 
 		// no links here at all
-		VElement vLinks = getResourceLinks(null, null, null);
+		final VElement vLinks = getResourceLinks(null, null, null);
 		if (vLinks == null)
 		{
 			return null;
@@ -6812,8 +6859,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		// loop over all links and remove non-matching entries
 		for (int i = vLinks.size() - 1; i >= 0; i--)
 		{
-			JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-			JDFIntegerList cpi = rl.getCombinedProcessIndex();
+			final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
+			final JDFIntegerList cpi = rl.getCombinedProcessIndex();
 			if (cpi != null) // there is a cpi, check if it matches
 			{
 				final int size = cpi.size();
@@ -6821,7 +6868,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				// loop over indeces of CombinedProcessIndex
 				for (int j = 0; j < size; j++)
 				{
-					int index = cpi.getInt(j);
+					final int index = cpi.getInt(j);
 					if (index < typSize) // the index points to a vaild position
 					// in the list
 					{
@@ -6885,10 +6932,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * insert a new Process into @Types at the position pos
 	 * 
 	 * @param type the process type
-	 * @param beforePos the position before which to add the in the list, 0 is first, ... -1 is before the last, very
-	 *            large is append
+	 * @param beforePos the position before which to add the in the list, 0 is first, ... -1 is before the last, very large is append
 	 */
-	public void insertTypeInTypes(EnumType type, int beforePos)
+	public void insertTypeInTypes(final EnumType type, final int beforePos)
 	{
 		int beforePosLocal = beforePos;
 
@@ -6911,13 +6957,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		if (beforePosLocal <= typeSize) // insert somehwere within the list
 		{
-			VElement vResLinks = getResourceLinks(null, new JDFAttributeMap(AttributeName.COMBINEDPROCESSINDEX, ""), null);
+			final VElement vResLinks = getResourceLinks(null, new JDFAttributeMap(AttributeName.COMBINEDPROCESSINDEX, ""), null);
 			if (vResLinks != null)
 			{
 				for (int i = 0; i < vResLinks.size(); i++)
 				{
-					JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
-					int[] cpi = rl.getCombinedProcessIndex().getIntArray();
+					final JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
+					final int[] cpi = rl.getCombinedProcessIndex().getIntArray();
 					for (int j = 0; j < cpi.length; j++)
 					{
 						if (cpi[j] >= beforePosLocal)
@@ -6943,8 +6989,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 * Get an ordered list of the ids of the parents of this node<br>
-	 * the last element in the pool is the direct parent, the second to last is the grandparent etc. The first element
-	 * is the original root element.
+	 * the last element in the pool is the direct parent, the second to last is the grandparent etc. The first element is the original root element.
 	 * 
 	 * @return the list of ids in the order parent, grandparent...
 	 */
@@ -6971,8 +7016,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param cleanPolicy how to clean up the spawn and merge audits after merging
 	 * @param amountPolicy how to clean up the Resource amounts after merging
 	 * @return JDFNode - the merged node in the new document<br>
-	 *         note that the return value used to be boolean. The boolean value is now replaced by exceptions. This
-	 *         always corresponds to <code>true</code>.
+	 * note that the return value used to be boolean. The boolean value is now replaced by exceptions. This always corresponds to <code>true</code>.
 	 * 
 	 * @throws JDFException if toMerge has already been merged
 	 * @throws JDFException if toMerge was not spawned from this
@@ -6982,7 +7026,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use JDFMerge class
 	 */
 	@Deprecated
-	public JDFNode mergeJDF(JDFNode toMerge, String urlMerge, EnumCleanUpMerge cleanPolicy, JDFResource.EnumAmountMerge amountPolicy)
+	public JDFNode mergeJDF(final JDFNode toMerge, final String urlMerge, final EnumCleanUpMerge cleanPolicy, final JDFResource.EnumAmountMerge amountPolicy)
 	{
 		return new JDFMerge(this).mergeJDF(toMerge, urlMerge, cleanPolicy, amountPolicy);
 	}
@@ -6995,7 +7039,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param p the node to check
 	 * @return true if a node with the same ID as one in p's ancestorpool exists
 	 */
-	public boolean hasParent(JDFNode p)
+	public boolean hasParent(final JDFNode p)
 	{
 		final VString vpa = p.getAncestorIDs();
 		final VString vParents = getParentIds();
@@ -7112,7 +7156,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param idPrefix
 	 * @return int
 	 */
-	public int getMaxJobPartId(String idPrefix)
+	public int getMaxJobPartId(final String idPrefix)
 	{
 		final VElement v = getvJDFNode(null, null, false);
 		final int prefixSize = idPrefix.length();
@@ -7122,8 +7166,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			final JDFNode e = (JDFNode) v.elementAt(i);
 			String s = e.getJobPartID(false);
-			if (s.equals(JDFConstants.EMPTYSTRING)
-					|| s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
+			if (s.equals(JDFConstants.EMPTYSTRING) || s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
 			{
 				continue;
 			}
@@ -7160,7 +7203,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param typ type of JDFNode to add
 	 * @return JDFNodethe added JDFNode
 	 */
-	public JDFNode addJDFNode(String typ)
+	public JDFNode addJDFNode(final String typ)
 	{
 		final EnumType t = EnumType.getEnum(getType());
 
@@ -7186,7 +7229,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param typ enum type of JDFNode to add
 	 * @return the added JDFNode
 	 */
-	public JDFNode addJDFNode(EnumType typ)
+	public JDFNode addJDFNode(final EnumType typ)
 	{
 		final JDFNode p = addJDFNode((String) null);
 		p.setType(typ);
@@ -7199,7 +7242,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use addJDFNode(EnumType typ) or addJDFNode(String typ)
 	 */
 	@Deprecated
-	public JDFNode addProcess(String prodName)
+	public JDFNode addProcess(final String prodName)
 	{
 		final JDFNode p = addJDFNode(prodName);
 		return p;
@@ -7215,7 +7258,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default addProcessGroup(null)
 	 */
-	public JDFNode addProcessGroup(VString tasks)
+	public JDFNode addProcessGroup(final VString tasks)
 	{
 		final JDFNode p = addJDFNode(EnumType.ProcessGroup);
 		p.setType(EnumType.ProcessGroup.getName(), false);
@@ -7234,7 +7277,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param tasks types of the node to add
 	 * @return the added node
 	 */
-	public JDFNode addCombined(VString tasks)
+	public JDFNode addCombined(final VString tasks)
 	{
 		final JDFNode cNode = addJDFNode(EnumType.Combined);
 		cNode.setTypes(tasks);
@@ -7305,20 +7348,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	// //////////////////
 
 	/**
-	 * Returns a resource with id anywhere in the tree below this node similar to getTarget(id) but looks only in the
-	 * resource pool's direct children
+	 * Returns a resource with id anywhere in the tree below this node similar to getTarget(id) but looks only in the resource pool's direct children
 	 * 
 	 * @param id the id of the resource
 	 * 
 	 * @return the resource, if available
 	 */
-	public JDFResource getTargetResource(String id)
+	public JDFResource getTargetResource(final String id)
 	{
 
-		XMLDocUserData ud = getXMLDocUserData();
+		final XMLDocUserData ud = getXMLDocUserData();
 		if (ud != null)
 		{
-			KElement e = ud.getTarget(id);
+			final KElement e = ud.getTarget(id);
 			if (e instanceof JDFResource)
 			{
 				return (JDFResource) e;
@@ -7357,7 +7399,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @since 180502
 	 * @return String - value of attribute found, empty string if not available
 	 */
-	public String getAncestorElementAttribute(String element, String attrib, String nameSpaceURI, String def)
+	public String getAncestorElementAttribute(final String element, final String attrib, final String nameSpaceURI, final String def)
 	{
 		JDFNode n = this;
 		while (n != null)
@@ -7372,12 +7414,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			n = getParentJDF();
 		}
 
-		JDFNode root = getJDFRoot();
+		final JDFNode root = getJDFRoot();
 		if (root == null)
 		{
 			return def;
 		}
-		JDFAncestorPool ancestorPool = root.getAncestorPool();
+		final JDFAncestorPool ancestorPool = root.getAncestorPool();
 		if (ancestorPool == null)
 		{
 			return def;
@@ -7387,8 +7429,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * true if a non default attribute occurs in the parent nodes and the ancestor elements subelements of the root
-	 * ancestorpool exists
+	 * true if a non default attribute occurs in the parent nodes and the ancestor elements subelements of the root ancestorpool exists
 	 * 
 	 * @param element
 	 * @param attrib the attribute name
@@ -7396,7 +7437,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @since 180502
 	 * @return true if the attribute exists
 	 */
-	public boolean hasAncestorElementAttribute(String element, String attrib, String nameSpaceURI)
+	public boolean hasAncestorElementAttribute(final String element, final String attrib, final String nameSpaceURI)
 	{
 		return getAncestorElementAttribute(element, attrib, nameSpaceURI, null) != null;
 	}
@@ -7434,12 +7475,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * get a vector of ResourceLink elements that exist but are unknown by this element
 	 * 
 	 * @param vInNameSpace list of namespaces where unknown Links are searched for<br>
-	 *            if null, all namespaces are searched
+	 * if null, all namespaces are searched
 	 * @param nMax maximum size of the returned vector
 	 * @return VElement vector of unknown elements
 	 * @since 060730 return type changed to VElement - but since the routine was utterly broken, we should be ok
 	 */
-	public VElement getUnknownLinkVector(VString vInNameSpace, int nMax)
+	public VElement getUnknownLinkVector(final VString vInNameSpace, final int nMax)
 	{
 		VElement vUnknown = null;
 
@@ -7464,7 +7505,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final Iterator<KElement> veIterator = ve.iterator();
 			while (veIterator.hasNext())
 			{
-				JDFResourceLink rl = (JDFResourceLink) veIterator.next();
+				final JDFResourceLink rl = (JDFResourceLink) veIterator.next();
 				final String nodename = rl.getNodeName().substring(0, rl.getNodeName().length() - 4);
 
 				if (bAllNS || (vInNameSpace != null && vInNameSpace.contains(xmlnsPrefix(nodename))))
@@ -7494,7 +7535,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setCategory(String value)
+	public void setCategory(final String value)
 	{
 		setAttribute(AttributeName.CATEGORY, value);
 	}
@@ -7513,7 +7554,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated - use getCategory() instead
 	 */
 	@Deprecated
-	public String getCategory(boolean bInherit)
+	public String getCategory(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -7527,7 +7568,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setICSVersions(VString value)
+	public void setICSVersions(final VString value)
 	{
 		setAttribute(AttributeName.ICSVERSIONS, value, null);
 	}
@@ -7540,7 +7581,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default getICSVersions(false)
 	 */
-	public VString getICSVersions(boolean bInherit)
+	public VString getICSVersions(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -7554,7 +7595,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value);
 	}
@@ -7575,7 +7616,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param enumVer the EnumVersion to set
 	 */
-	public void setMaxVersion(EnumVersion enumVer)
+	public void setMaxVersion(final EnumVersion enumVer)
 	{
 		setAttribute(AttributeName.MAXVERSION, enumVer.getName(), null);
 	}
@@ -7586,7 +7627,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use setMaxVersion(EnumVersion)
 	 */
 	@Deprecated
-	public void setMaxVersion(String value)
+	public void setMaxVersion(final String value)
 	{
 		setAttribute(AttributeName.MAXVERSION, value);
 	}
@@ -7597,15 +7638,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param bInherit if true recurse through ancestors when searching
 	 * @return EnumVersion - attribute value
 	 * 
-	 *         default - getMaxVersion(false)
+	 * default - getMaxVersion(false)
 	 */
 	@Override
-	public EnumVersion getMaxVersion(boolean bInherit)
+	public EnumVersion getMaxVersion(final boolean bInherit)
 	{
-		String version = (bInherit) ? getAncestorAttribute(AttributeName.MAXVERSION, null, null) : getAttribute(AttributeName.MAXVERSION, null, null);
+		final String version = (bInherit) ? getAncestorAttribute(AttributeName.MAXVERSION, null, null) : getAttribute(AttributeName.MAXVERSION, null, null);
 
 		if (version == null)
+		{
 			return getVersion(bInherit);
+		}
 
 		return EnumVersion.getEnum(version);
 	}
@@ -7615,7 +7658,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setNamedFeatures(VString value)
+	public void setNamedFeatures(final VString value)
 	{
 		final StringBuffer strbuff = new StringBuffer(100);
 		for (int i = 0; i < value.size(); i++)
@@ -7639,7 +7682,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated - use getNamedFeatures() instead
 	 */
 	@Deprecated
-	public VString GetNamedFeatures(boolean bInherit)
+	public VString GetNamedFeatures(final boolean bInherit)
 	{
 		final VString v = new VString();
 		Vector v2;
@@ -7660,7 +7703,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelatedJobID(String value)
+	public void setRelatedJobID(final String value)
 	{
 		setAttribute(AttributeName.RELATEDJOBID, value);
 	}
@@ -7671,7 +7714,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param bInherit recurse through ancestors when searching
 	 * @return the attribute value
 	 */
-	public String getRelatedJobID(boolean bInherit)
+	public String getRelatedJobID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -7685,7 +7728,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setRelatedJobPartID(String value)
+	public void setRelatedJobPartID(final String value)
 	{
 		setAttribute(AttributeName.RELATEDJOBPARTID, value);
 	}
@@ -7696,7 +7739,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param bInherit recurse through ancestors when searching
 	 * @return the attribute value
 	 */
-	public String getRelatedJobPartID(boolean bInherit)
+	public String getRelatedJobPartID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -7710,7 +7753,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setStatusDetails(String value)
+	public void setStatusDetails(final String value)
 	{
 		setAttribute(AttributeName.STATUSDETAILS, value);
 	}
@@ -7729,7 +7772,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated - use getStatusDetails() instead
 	 */
 	@Deprecated
-	public String getStatusDetails(boolean bInherit)
+	public String getStatusDetails(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -7743,7 +7786,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplate(boolean value)
+	public void setTemplate(final boolean value)
 	{
 		setAttribute(AttributeName.TEMPLATE, value, null);
 	}
@@ -7763,7 +7806,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplateID(String value)
+	public void setTemplateID(final String value)
 	{
 		setAttribute(AttributeName.TEMPLATEID, value);
 	}
@@ -7774,7 +7817,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param bInherit recurse through ancestors when searching
 	 * @return the attribute value
 	 */
-	public String getTemplateID(boolean bInherit)
+	public String getTemplateID(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -7788,7 +7831,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setTemplateVersion(String value)
+	public void setTemplateVersion(final String value)
 	{
 		setAttribute(AttributeName.TEMPLATEVERSION, value);
 	}
@@ -7799,7 +7842,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param bInherit recurse through ancestors when searching
 	 * @return the attribute value
 	 */
-	public String getTemplateVersion(boolean bInherit)
+	public String getTemplateVersion(final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -7814,15 +7857,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return the workstepid
 	 * 
 	 */
-	public String getWorkStepID(JDFAttributeMap map)
+	public String getWorkStepID(final JDFAttributeMap map)
 	{
 		JDFNodeInfo ni = getNodeInfo();
 		if (ni == null)
+		{
 			return getJobPartID(false);
+		}
 		ni = (JDFNodeInfo) ni.getPartition(map, null);
 		if (ni == null)
+		{
 			return getJobPartID(false);
-		String wsID = ni.getWorkStepID();
+		}
+		final String wsID = ni.getWorkStepID();
 		return isWildCard(wsID) ? getJobPartID(false) : wsID;
 	}
 
@@ -8122,7 +8169,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
-	public JDFJMF getNodeInfoJMF(int iSkip)
+	public JDFJMF getNodeInfoJMF(final int iSkip)
 	{
 		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
 		if (inheritedNodeInfo == null)
@@ -8136,7 +8183,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
-	public JDFNotificationFilter getNodeInfoNotificationFilter(int iSkip)
+	public JDFNotificationFilter getNodeInfoNotificationFilter(final int iSkip)
 	{
 		final JDFNodeInfo inheritedNodeInfo = getInheritedNodeInfo(null);
 		if (inheritedNodeInfo == null)
@@ -8150,11 +8197,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * get first CustomerInfo element from child list or child list of any ancestor
 	 * 
 	 * @param xPath the the xPath to an element or attribute that must exist in the queried CustomerInfo<br>
-	 *            note that attributes must be marked with an "@", if xPath=null, simply return the next in line
+	 * note that attributes must be marked with an "@", if xPath=null, simply return the next in line
 	 * 
 	 * @return the matching CustomerInfo element
 	 */
-	public JDFCustomerInfo getInheritedCustomerInfo(String xPath)
+	public JDFCustomerInfo getInheritedCustomerInfo(final String xPath)
 	{
 		return (JDFCustomerInfo) getNiCi(ElementName.CUSTOMERINFO, true, xPath);
 	}
@@ -8259,7 +8306,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
-	public JDFContact getCustomerInfoContact(int iSkip)
+	public JDFContact getCustomerInfoContact(final int iSkip)
 	{
 		final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
 		if (inheritedCustomerInfo == null)
@@ -8273,7 +8320,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 *@deprecated 06ß221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
-	public JDFCustomerMessage getCustomerInfoCustomerMessage(int iSkip)
+	public JDFCustomerMessage getCustomerInfoCustomerMessage(final int iSkip)
 	{
 		final JDFCustomerInfo inheritedCustomerInfo = getInheritedCustomerInfo();
 		if (inheritedCustomerInfo == null)
@@ -8291,7 +8338,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return boolean - <code>true</code> if this process is successor of given process
 	 */
 
-	public boolean isSuccessor(JDFNode proc)
+	public boolean isSuccessor(final JDFNode proc)
 	{
 		boolean isSuccessor = false;
 
@@ -8314,11 +8361,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * Returns the input or output resource IDs of this process node.
 	 * 
 	 * @param isInput <li><code>true</code> to get input resource IDs.</li> <li>
-	 *            <code>false</code> to get output resource IDs.</li>
+	 * <code>false</code> to get output resource IDs.</li>
 	 * 
 	 * @return VString - Vector containing resource IDs.
 	 */
-	public VString getResourceIDs(boolean isInput)
+	public VString getResourceIDs(final boolean isInput)
 	{
 		final VString vsLinks = new VString();
 		final JDFResourceLinkPool linkPool = getResourceLinkPool();
@@ -8340,8 +8387,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * Gets the executable partitions of the resource in this node (with corresponding resource link). The part maps
-	 * returned may be nested. If the empty part map is contained, the whole resource is executable.<br>
+	 * Gets the executable partitions of the resource in this node (with corresponding resource link). The part maps returned may be nested. If the empty part
+	 * map is contained, the whole resource is executable.<br>
 	 * 
 	 * Availability of a resource depends on the status, the availability of refered sub-partitions and the part usage.
 	 * 
@@ -8352,12 +8399,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return VJDFAttributeMap - A part map vector containing the executable partitions.
 	 */
 	@Deprecated
-	public VJDFAttributeMap getExecutablePartitions(JDFResourceLink link, JDFResource res, JDFResource.EnumResStatus minStatus)
+	public VJDFAttributeMap getExecutablePartitions(final JDFResourceLink link, final JDFResource res, final JDFResource.EnumResStatus minStatus)
 	{
 		JDFResource resLocal = res;
 
 		if (resLocal != null)
+		{
 			resLocal = null; // satisfy compiler
+		}
 
 		return getExecutablePartitions(link, minStatus);
 	}
@@ -8373,14 +8422,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 
 	@Deprecated
-	public VJDFAttributeMap getExecutablePartitions(JDFResourceLink link, JDFResource.EnumResStatus minStatus)
+	public VJDFAttributeMap getExecutablePartitions(final JDFResourceLink link, final JDFResource.EnumResStatus minStatus)
 	{
 		return (getExecutablePartitions(link, minStatus, true));
 	}
 
 	/**
-	 * Gets the executable partitions of the resource in this node (with corresponding resource link). The part maps
-	 * returned may be nested. If the empty part map is contained, the whole resource is executable.<br>
+	 * Gets the executable partitions of the resource in this node (with corresponding resource link). The part maps returned may be nested. If the empty part
+	 * map is contained, the whole resource is executable.<br>
 	 * 
 	 * Availability of a resource depends on the status, the availability of refered sub-partitions and the part usage.
 	 * 
@@ -8391,22 +8440,25 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return VJDFAttributeMap - A part map vector containing the executable partitions.
 	 */
 
-	public VJDFAttributeMap getExecutablePartitions(JDFResourceLink link, JDFResource.EnumResStatus minStatus, boolean bCheckNodeStatus)
+	public VJDFAttributeMap getExecutablePartitions(final JDFResourceLink link, final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
 	{
 		final VJDFAttributeMap vp = new VJDFAttributeMap();
 		if (link == null)
+		{
 			return null;
-		VElement v = link.getTargetVector(0);
+		}
+		final VElement v = link.getTargetVector(0);
 		for (int i = 0; i < v.size(); i++)
 		{
-			JDFResource res = (JDFResource) v.elementAt(i);
+			final JDFResource res = (JDFResource) v.elementAt(i);
 			addExecutablePartitions(link, res, res.getPartIDKeys(), vp, minStatus, bCheckNodeStatus);
 		}
 		vp.unify();
 		return vp;
 	}
 
-	private ExecPartFlags addExecutablePartitions(JDFResourceLink link, JDFResource res, VString vsPartIDKeys, VJDFAttributeMap vamPartMaps, JDFResource.EnumResStatus minStatus, boolean bCheckNodeStatus)
+	private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps,
+			final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
 	{
 		final JDFAttributeMap amPartMap = res.getPartMap();
 
@@ -8451,8 +8503,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		if (bCheckNodeStatus)
 		{
-			if (((stat == null) && (isLeaf)) || (stat == JDFNode.EnumNodeStatus.Waiting)
-					|| (stat == JDFNode.EnumNodeStatus.Ready))
+			if (((stat == null) && (isLeaf)) || (stat == JDFNode.EnumNodeStatus.Waiting) || (stat == JDFNode.EnumNodeStatus.Ready))
 			{
 				isProcStatOK = true;
 			}
@@ -8462,7 +8513,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			isProcStatOK = true;
 		}
 
-		JDFResource.EnumPartUsage partUsage = res.getPartUsage();
+		final JDFResource.EnumPartUsage partUsage = res.getPartUsage();
 
 		boolean allChildsAvailable = true;
 		for (int i = 0; i < nChildPartitions; i++)
@@ -8543,8 +8594,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 							final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus();
 
-							if ((statPart == JDFNode.EnumNodeStatus.Waiting)
-									|| (statPart == JDFNode.EnumNodeStatus.Ready))
+							if ((statPart == JDFNode.EnumNodeStatus.Waiting) || (statPart == JDFNode.EnumNodeStatus.Ready))
 							{
 								vamPartMaps.appendUnique(niPart.getPartMap());
 							}
@@ -8576,7 +8626,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		private final boolean m_isAvailable;
 		private final boolean m_isProcStatOK;
 
-		protected ExecPartFlags(boolean isAvailable, boolean isProcStatOK)
+		protected ExecPartFlags(final boolean isAvailable, final boolean isProcStatOK)
 		{
 			m_isAvailable = isAvailable;
 			m_isProcStatOK = isProcStatOK;
@@ -8594,8 +8644,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * Gets all child process nodes. This function replaces the JDFDoc.getProcessNodes, which may be implemented as
-	 * getJDFRoot.getProcessNodes();
+	 * Gets all child process nodes. This function replaces the JDFDoc.getProcessNodes, which may be implemented as getJDFRoot.getProcessNodes();
 	 * 
 	 * @deprecated use getvJDFNode(null,null,false) and skip intermediate nodes
 	 * 
@@ -8646,13 +8695,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param indexInput the CombinedProcessIndex of the input ResourceLink to the internal pipe
 	 * @return JDFResource - the newly created resource
 	 */
-	public JDFResource addInternalPipe(String resourceName, int indexOutput, int indexInput)
+	public JDFResource addInternalPipe(final String resourceName, final int indexOutput, final int indexInput)
 	{
 		if (EnumType.getEnum(getType()) != EnumType.Combined)
 		{
 			throw new JDFException("JDFNode.addInternalPipe: adding pipe to node that is not combined " + getType());
 		}
-		JDFResource r = addResource(resourceName, null, null, null, null, null, null);
+		final JDFResource r = addResource(resourceName, null, null, null, null, null, null);
 		r.setPipeProtocol(JDFConstants.INTERNAL);
 
 		JDFResourceLink rl = linkResource(r, EnumUsage.Input, null);
@@ -8673,20 +8722,20 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @return the ordered vector of partIDKeys
 	 */
-	public VString getPartIDKeys(JDFAttributeMap partMap)
+	public VString getPartIDKeys(final JDFAttributeMap partMap)
 	{
 		VString matchingPartIDKeys = new VString();
 		if ((partMap != null) && partMap.size() > 1)
 		{
-			JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
+			final JDFResourceLinkPool resourceLinkPool = getResourceLinkPool();
 			if (resourceLinkPool != null)
 			{
-				VElement linkedResources = resourceLinkPool.getLinkedResources(null, null, null, false);
-				int linkedResourcesSize = linkedResources.size();
+				final VElement linkedResources = resourceLinkPool.getLinkedResources(null, null, null, false);
+				final int linkedResourcesSize = linkedResources.size();
 				for (int i = 0; i < linkedResourcesSize; i++)
 				{
-					JDFResource resource = (JDFResource) linkedResources.elementAt(i);
-					VString partIDKeys = resource.getPartIDKeys();
+					final JDFResource resource = (JDFResource) linkedResources.elementAt(i);
+					final VString partIDKeys = resource.getPartIDKeys();
 					if (partIDKeys.size() >= partMap.size() && partIDKeys.containsAll(partMap.getKeys()))
 					{
 						matchingPartIDKeys = partIDKeys;
@@ -8706,7 +8755,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			// grab output link and partition nodeinfo accordingly
 			VElement vRes = null;
-			JDFResourceLinkPool rp = getResourceLinkPool();
+			final JDFResourceLinkPool rp = getResourceLinkPool();
 			if (rp != null)
 			{
 				vRes = rp.getInOutLinks(EnumUsage.Output, false, null, null);
@@ -8715,8 +8764,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			// get heuristic list of partidkeys from the output
 			if (vRes != null && vRes.size() > 0)
 			{
-				JDFResource r = (JDFResource) vRes.elementAt(0);
-				JDFResource resRoot = r.getResourceRoot();
+				final JDFResource r = (JDFResource) vRes.elementAt(0);
+				final JDFResource resRoot = r.getResourceRoot();
 				if (resRoot != null)
 				{
 					matchingPartIDKeys = resRoot.getPartIDKeys();
@@ -8728,18 +8777,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * prepare the nodeinfo for a list of parts, e.g. for a partitioned spawn if nodeinfo is prepartitioned it will
-	 * return a vector of all matching leaves
+	 * prepare the nodeinfo for a list of parts, e.g. for a partitioned spawn if nodeinfo is prepartitioned it will return a vector of all matching leaves
 	 * 
 	 * @param vSpawnParts the list of parts
 	 * 
 	 * @return the vector of nodeinfo leaves
 	 */
-	public VElement prepareNodeInfo(VJDFAttributeMap vSpawnParts)
+	public VElement prepareNodeInfo(final VJDFAttributeMap vSpawnParts)
 	{
 		// make sure we have a nodeinfo in case we have to merge stati
-		JDFNodeInfo ni = getCreateNodeInfo();
-		VElement vni = new VElement();
+		final JDFNodeInfo ni = getCreateNodeInfo();
+		final VElement vni = new VElement();
 
 		if (ni.hasAttribute(AttributeName.CLASS, null, false))
 		{ // it is a 1.3 style resource
@@ -8754,7 +8802,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					}
 				}
 
-				VString partVector = getPartIDKeys(spawnPart);
+				final VString partVector = getPartIDKeys(spawnPart);
 				if (getStatus() != EnumNodeStatus.Part)
 				{
 					ni.setAttribute(AttributeName.NODESTATUS, getAttribute(AttributeName.STATUS));
@@ -8765,11 +8813,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				{
 					// in case we spawn a subset, try to get the superset list
 					// first
-					VElement vLeaves = ni.getPartitionVector(vSpawnParts.elementAt(i), EnumPartUsage.Explicit);
+					final VElement vLeaves = ni.getPartitionVector(vSpawnParts.elementAt(i), EnumPartUsage.Explicit);
 					// no preexisting leaves - create them
 					if (vLeaves.isEmpty())
 					{
-						JDFNodeInfo niLeaf = (JDFNodeInfo) ni.getCreatePartition(vSpawnParts.elementAt(i), partVector);
+						final JDFNodeInfo niLeaf = (JDFNodeInfo) ni.getCreatePartition(vSpawnParts.elementAt(i), partVector);
 						niLeaf.setAttribute(AttributeName.NODESTATUS, "Waiting");
 						vni.add(niLeaf);
 					}
@@ -8809,7 +8857,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated - use getResourceLinks
 	 */
 	@Deprecated
-	public VElement getLinks(String linkName, JDFAttributeMap mLinkAtt, String linkNS)
+	public VElement getLinks(final String linkName, final JDFAttributeMap mLinkAtt, final String linkNS)
 	{
 		return getResourceLinks(linkName, mLinkAtt, linkNS);
 	}
@@ -8824,11 +8872,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return VElement - all elements matching the condition mLinkAtt,
 	 * @default getLinks(null,null,null)
 	 */
-	public VElement getResourceLinks(String linkName, JDFAttributeMap mLinkAtt, String linkNS)
+	public VElement getResourceLinks(final String linkName, final JDFAttributeMap mLinkAtt, final String linkNS)
 	{
 		String linkNameLocal = linkName;
 
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp == null)
 		{
 			return null;
@@ -8852,11 +8900,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return JDFResourceLink - the ResourceLink matching the condition mLinkAtt
 	 * @default getLinks(null,null,null)
 	 */
-	public JDFResourceLink getLink(int index, String linkName, JDFAttributeMap mLinkAtt, String linkNS)
+	public JDFResourceLink getLink(final int index, final String linkName, final JDFAttributeMap mLinkAtt, final String linkNS)
 	{
 		String linkNameLocal = linkName;
 
-		JDFResourceLinkPool rlp = getResourceLinkPool();
+		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp == null)
 		{
 			return null;
@@ -8880,15 +8928,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @default getLinks(null, null)
 	 */
 	@Deprecated
-	public VElement getLinks(String linkName, String nameSpaceURI)
+	public VElement getLinks(final String linkName, final String nameSpaceURI)
 	{
 		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.RREF, getID());
 		return getDocRoot().getChildrenByTagName(linkName, nameSpaceURI, m, false, false, 0);
 	}
 
 	/**
-	 * sorts all elements alphabetically also recurses into the resourcepool and the sub JDF Node NO other sub-elements
-	 * are sorted
+	 * sorts all elements alphabetically also recurses into the resourcepool and the sub JDF Node NO other sub-elements are sorted
 	 * 
 	 * @see org.cip4.jdflib.core.KElement#sortChildren()
 	 */
@@ -8896,12 +8943,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	public void sortChildren()
 	{
 		super.sortChildren(); // KElement.sortChildren is NOT recursive
-		JDFResourcePool rp = getResourcePool();
+		final JDFResourcePool rp = getResourcePool();
 		if (rp != null)
 		{
 			rp.sortChildren();
 		}
-		VElement vNode = getvJDFNode(null, null, true);
+		final VElement vNode = getvJDFNode(null, null, true);
 		for (int i = 0; i < vNode.size(); i++)
 		{
 			vNode.item(i).sortChildren();
@@ -8914,11 +8961,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param ni the Identifier to match
 	 * @return
 	 */
-	public VElement getMatchingNodes(NodeIdentifier ni)
+	public VElement getMatchingNodes(final NodeIdentifier ni)
 	{
-		VElement v = getvJDFNode(null, null, false);
+		final VElement v = getvJDFNode(null, null, false);
 		if (ni == null)
+		{
 			return v;
+		}
 
 		int siz = 0;
 		if (v != null)
@@ -8926,9 +8975,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			siz = v.size();
 			for (int i = siz - 1; i >= 0; i--)
 			{
-				JDFNode n = (JDFNode) v.get(i);
+				final JDFNode n = (JDFNode) v.get(i);
 				if (!n.getIdentifier().matches(ni))
+				{
 					v.remove(i);
+				}
 			}
 		}
 
@@ -8941,22 +8992,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param thePreviousNode
 	 */
-	public void linkOutputs(JDFNode thePreviousNode)
+	public void linkOutputs(final JDFNode thePreviousNode)
 	{
 		if (thePreviousNode == null)
+		{
 			return;
+		}
 		final JDFResourceLinkPool resourceLinkPool = thePreviousNode.getResourceLinkPool();
 		if (resourceLinkPool == null)
+		{
 			return;
-		VElement v = resourceLinkPool.getInOutLinks(EnumUsage.Output, true, null, null);
-		JDFResourceLinkPool rlp = getCreateResourceLinkPool();
+		}
+		final VElement v = resourceLinkPool.getInOutLinks(EnumUsage.Output, true, null, null);
+		final JDFResourceLinkPool rlp = getCreateResourceLinkPool();
 		for (int i = 0; i < v.size(); i++)
 		{
-			JDFResourceLink rl0 = (JDFResourceLink) v.elementAt(i);
+			final JDFResourceLink rl0 = (JDFResourceLink) v.elementAt(i);
 			JDFResourceLink rl = (JDFResourceLink) rlp.getChildWithAttribute(null, AttributeName.RREF, null, rl0.getrRef(), 0, true);
 			if (rl == null)
 			{
-				JDFResource r = rl0.getLinkRoot();
+				final JDFResource r = rl0.getLinkRoot();
 				rl = linkResource(r, EnumUsage.Input, rl0.getEnumProcessUsage());
 				rl.removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
 			}
@@ -8968,20 +9023,26 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public void synchParentAmounts()
 	{
-		JDFNode parent = getParentJDF();
+		final JDFNode parent = getParentJDF();
 		if (parent == null)
+		{
 			return;
-		JDFResourceLinkPool parentPool = parent.getResourceLinkPool();
-		JDFResourceLinkPool linkPool = getResourceLinkPool();
+		}
+		final JDFResourceLinkPool parentPool = parent.getResourceLinkPool();
+		final JDFResourceLinkPool linkPool = getResourceLinkPool();
 		if (parentPool == null || linkPool == null)
+		{
 			return;
-		VElement links = linkPool.getPoolChildren(null, null, null);
+		}
+		final VElement links = linkPool.getPoolChildren(null, null, null);
 		if (links == null)
+		{
 			return;
+		}
 		for (int i = 0; i < links.size(); i++)
 		{
-			JDFResourceLink link = (JDFResourceLink) links.get(i);
-			JDFResourceLink parentLink = (JDFResourceLink) parentPool.getChildWithAttribute(link.getLocalName(), AttributeName.RREF, null, link.getrRef(), 0, true);
+			final JDFResourceLink link = (JDFResourceLink) links.get(i);
+			final JDFResourceLink parentLink = (JDFResourceLink) parentPool.getChildWithAttribute(link.getLocalName(), AttributeName.RREF, null, link.getrRef(), 0, true);
 			if (parentLink != null)
 			{
 				VJDFAttributeMap vParts = link.getPartMapVector();
@@ -8995,18 +9056,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					final JDFAmountPool amountPool = link.getAmountPool();
 					if (amountPool != null)
 					{
-						JDFAmountPool parentAmountPool = parentLink.getCreateAmountPool();
-						VElement parts = amountPool.getMatchingPartAmountVector(vParts.elementAt(j));
+						final JDFAmountPool parentAmountPool = parentLink.getCreateAmountPool();
+						final VElement parts = amountPool.getMatchingPartAmountVector(vParts.elementAt(j));
 						if (parts != null)
 						{
-							int pSiz = parts.size();
+							final int pSiz = parts.size();
 							for (int k = 0; k < pSiz; k++)
 							{
-								JDFPartAmount pa = (JDFPartAmount) parts.elementAt(k);
+								final JDFPartAmount pa = (JDFPartAmount) parts.elementAt(k);
 								if (pa.hasAttribute(AttributeName.ACTUALAMOUNT))
 								{
-									VJDFAttributeMap vPAMap = pa.getPartMapVector();
-									JDFPartAmount parentPA = parentAmountPool.getCreatePartAmount(vPAMap);
+									final VJDFAttributeMap vPAMap = pa.getPartMapVector();
+									final JDFPartAmount parentPA = parentAmountPool.getCreatePartAmount(vPAMap);
 									parentPA.copyAttribute(AttributeName.ACTUALAMOUNT, pa, null, null, null);
 								}
 							}
@@ -9039,13 +9100,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param bExpand if true, create a parent gray box that wraps this, else simply rename this
 	 */
-	public void toGrayBox(boolean bExpand)
+	public void toGrayBox(final boolean bExpand)
 	{
-		EnumType t = getEnumType();
-		String typeString = getType();
+		final EnumType t = getEnumType();
+		final String typeString = getType();
 
 		if (EnumType.ProcessGroup.equals(t) || EnumType.Product.equals(t))
+		{
 			return;
+		}
 		if (!EnumType.Combined.equals(t))
 		{
 			renameAttribute(AttributeName.TYPE, AttributeName.TYPES, null, null);
@@ -9054,17 +9117,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		setType(EnumType.ProcessGroup);
 		if (bExpand)
 		{
-			JDFNode child = addJDFNode(typeString);
-			String jobPart = getJobPartID(false);
+			final JDFNode child = addJDFNode(typeString);
+			final String jobPart = getJobPartID(false);
 			child.setJobID(jobPart);
 			setJobPartID("pg." + jobPart);
 			child.copyElement(getResourceLinkPool(), null);
 			removeAttribute(AttributeName.TYPES);
-			JDFAuditPool ap = child.getCreateAuditPool();
+			final JDFAuditPool ap = child.getCreateAuditPool();
 			ap.ensureCreated();
 			JDFCreated c = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);
 			if (c == null)
+			{
 				c = ap.addCreated(null, null);
+			}
 			c.setDescriptiveName("automatically generated by toGrayBox");
 		}
 	}
@@ -9076,7 +9141,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	public void setIdentifier(NodeIdentifier ni)
 	{
 		if (ni == null)
+		{
 			ni = new NodeIdentifier();
+		}
 
 		setJobID(ni.getJobID());
 		setJobPartID(ni.getJobPartID());

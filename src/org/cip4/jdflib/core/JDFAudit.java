@@ -75,10 +75,12 @@
  */
 package org.cip4.jdflib.core;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -86,6 +88,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
@@ -103,18 +106,21 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
 	private static String m_strAgentVersion = m_libAgentVersion;
-	private static String m_strAuthor = software();
+	private static String m_strAuthor = null;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHOR, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHOR, 0x44443333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[1] = new AtrInfoTable(AttributeName.SPAWNID, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable[2] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.ID, 0x33333311, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.REFID, 0x33333311, AttributeInfo.EnumAttributeType.IDREF, null, null);
 		atrInfoTable[6] = new AtrInfoTable(AttributeName.TIMESTAMP, 0x33333222, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		// 1.4
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33331111, AttributeInfo.EnumAttributeType.shortString, null, null);
+
 	}
 
 	/**
@@ -124,6 +130,21 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.KElement#getTheElementInfo()
+	 */
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
 	}
 
 	/**
@@ -764,5 +785,53 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	public static synchronized void setStaticAgentVersion(final String agentVersion)
 	{
 		m_strAgentVersion = agentVersion;
+	}
+
+	/**
+	 * (26) getCreateEmployee
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element
+	 */
+	public JDFEmployee getCreateEmployee()
+	{
+		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element Employee
+	 * @param iSkip number of elements to skip
+	 * @return JDFEmployee the element default is getEmployee(0)
+	 */
+	public JDFEmployee getEmployee(final int iSkip)
+	{
+		return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+	}
+
+	/**
+	 * Get all Employee from the current element
+	 * 
+	 * @return Collection<JDFEmployee>
+	 */
+	public Collection<JDFEmployee> getAllEmployee()
+	{
+		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+
+		JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
+
+		while (kElem != null)
+		{
+			v.add(kElem);
+			kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+		}
+		return v;
+	}
+
+	/**
+	 * (30) append element Employee
+	 */
+	public JDFEmployee appendEmployee() throws JDFException
+	{
+		return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
 	}
 }

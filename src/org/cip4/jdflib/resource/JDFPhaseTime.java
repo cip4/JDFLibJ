@@ -81,6 +81,7 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPhaseTime;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
@@ -369,6 +370,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 		{
 			di.setDevice(dev, true);
 		}
+		di.setDeviceStatus(EnumDeviceStatus.Unknown); // I'm offline and it ain't in no audit
 
 		jp.setStatus(getStatus());
 		jp.copyAttribute(AttributeName.STATUSDETAILS, this);

@@ -109,7 +109,6 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.process.JDFContact;
-import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFQualityControlResult;
@@ -132,15 +131,16 @@ public class JDFResource extends JDFElement
 		atrInfoTable_Abstract[0] = new AtrInfoTable(AttributeName.AGENTNAME, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[1] = new AtrInfoTable(AttributeName.AGENTVERSION, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[2] = new AtrInfoTable(AttributeName.AUTHOR, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable_Abstract[3] = new AtrInfoTable(AttributeName.CATALOGID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable_Abstract[4] = new AtrInfoTable(AttributeName.CATALOGDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable_Abstract[3] = new AtrInfoTable(AttributeName.CATALOGID, 0x44443333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable_Abstract[4] = new AtrInfoTable(AttributeName.CATALOGDETAILS, 0x4444333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[5] = new AtrInfoTable(AttributeName.LOCKED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
 		atrInfoTable_Abstract[6] = new AtrInfoTable(AttributeName.PIPEID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[7] = new AtrInfoTable(AttributeName.PIPEPROTOCOL, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
 		atrInfoTable_Abstract[8] = new AtrInfoTable(AttributeName.PIPEURL, 0x33333311, AttributeInfo.EnumAttributeType.URL, null, null);
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RREFS, 0x44444433, AttributeInfo.EnumAttributeType.IDREFS, null, null);
-		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned.getName());
+		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.SPAWNSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSpawnStatus.getEnum(0), EnumSpawnStatus.NotSpawned
+				.getName());
 		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.SPAWNIDS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.SORTING, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
 		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.SORTAMOUNT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
@@ -175,7 +175,8 @@ public class JDFResource extends JDFElement
 	{
 		atrInfoTable_ID_Class_Required[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
 		atrInfoTable_ID_Class_Required[1] = new AtrInfoTable(AttributeName.CLASS, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
-		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit.getName());
+		atrInfoTable_ID_Class_Required[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), EnumPartUsage.Explicit
+				.getName());
 
 	}
 
@@ -280,7 +281,7 @@ public class JDFResource extends JDFElement
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
-		AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
+		final AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
 
 		if (isPhysical())
 		{
@@ -329,11 +330,11 @@ public class JDFResource extends JDFElement
 			final int siz = partIDKeys.size();
 			for (int i = 0; i < siz; i++)
 			{
-				String partIDKey = partIDKeys.stringAt(i);
+				final String partIDKey = partIDKeys.stringAt(i);
 				for (int j = 0; j < atrInfoTable_PartIDKeys.length; j++)
 				{
-					AtrInfoTable keyTable = atrInfoTable_PartIDKeys[j];
-					String key = keyTable.getAttributeName();
+					final AtrInfoTable keyTable = atrInfoTable_PartIDKeys[j];
+					final String key = keyTable.getAttributeName();
 					if (key.equals(partIDKey))
 					{
 						ai.updateAdd(keyTable);
@@ -346,13 +347,12 @@ public class JDFResource extends JDFElement
 		return ai;
 	}
 
-	private static ElemInfoTable[] elemInfoTable_Abstract = new ElemInfoTable[4];
+	private static ElemInfoTable[] elemInfoTable_Abstract = new ElemInfoTable[3];
 	static
 	{
 		elemInfoTable_Abstract[0] = new ElemInfoTable(ElementName.QUALITYCONTROLRESULT, 0x33333311);
-		elemInfoTable_Abstract[1] = new ElemInfoTable(ElementName.GENERALID, 0x33333111);
-		elemInfoTable_Abstract[2] = new ElemInfoTable(ElementName.SOURCERESOURCE, 0x33333111);
-		elemInfoTable_Abstract[3] = new ElemInfoTable(ElementName.IDENTICAL, 0x33333111);
+		elemInfoTable_Abstract[1] = new ElemInfoTable(ElementName.SOURCERESOURCE, 0x33333111);
+		elemInfoTable_Abstract[2] = new ElemInfoTable(ElementName.IDENTICAL, 0x33333111);
 	}
 
 	private static ElemInfoTable[] elemInfoTable_Physical = new ElemInfoTable[3];
@@ -366,7 +366,7 @@ public class JDFResource extends JDFElement
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
-		ElementInfo ei = super.getTheElementInfo().updateAdd(elemInfoTable_Abstract);
+		final ElementInfo ei = super.getTheElementInfo().updateAdd(elemInfoTable_Abstract);
 
 		if (isPhysical())
 		{
@@ -384,8 +384,8 @@ public class JDFResource extends JDFElement
 	}
 
 	/*
-	 * These three constructors are defined first in ElementNSImpl they correspond to the three createElement methods in
-	 * DocumentJDFImpl which are used to create the JDF elements during parsing
+	 * These three constructors are defined first in ElementNSImpl they correspond to the three createElement methods in DocumentJDFImpl which are used to
+	 * create the JDF elements during parsing
 	 * 
 	 * they are necessary in every class, which is inherited from JDFElement
 	 */
@@ -396,7 +396,7 @@ public class JDFResource extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFResource(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFResource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -408,7 +408,7 @@ public class JDFResource extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFResource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -421,7 +421,7 @@ public class JDFResource extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFResource(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -433,28 +433,26 @@ public class JDFResource extends JDFElement
 	 * Enumeration for the policy of merging the amounts from ResourceLinks
 	 * <p>
 	 * <li><b>AmountMerge_none - </b>does not recalculate amounts</li>
-	 * <li><b>AmountMerge_LinkOnly - </b>calculates the Resource Amount based on the Amount values in the ResourceLinks
-	 * only.<br>
+	 * <li><b>AmountMerge_LinkOnly - </b>calculates the Resource Amount based on the Amount values in the ResourceLinks only.<br>
 	 * The original Resource Amount is ignored</li>
-	 * <li><b>AmountMerge_UpdateLink - </b>calculates the Resource Amount based on the difference of previous and
-	 * current resource link amounts</li>
+	 * <li><b>AmountMerge_UpdateLink - </b>calculates the Resource Amount based on the difference of previous and current resource link amounts</li>
 	 */
 	public static final class EnumAmountMerge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumAmountMerge(String name)
+		private EnumAmountMerge(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumAmountMerge getEnum(String enumName)
+		public static EnumAmountMerge getEnum(final String enumName)
 		{
 			return (EnumAmountMerge) getEnum(EnumAmountMerge.class, enumName);
 		}
 
-		public static EnumAmountMerge getEnum(int enumValue)
+		public static EnumAmountMerge getEnum(final int enumValue)
 		{
 			return (EnumAmountMerge) getEnum(EnumAmountMerge.class, enumValue);
 		}
@@ -487,17 +485,17 @@ public class JDFResource extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumResourceClass(String name)
+		private EnumResourceClass(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumResourceClass getEnum(String enumName)
+		public static EnumResourceClass getEnum(final String enumName)
 		{
 			return (EnumResourceClass) getEnum(EnumResourceClass.class, enumName);
 		}
 
-		public static EnumResourceClass getEnum(int enumValue)
+		public static EnumResourceClass getEnum(final int enumValue)
 		{
 			return (EnumResourceClass) getEnum(EnumResourceClass.class, enumValue);
 		}
@@ -534,17 +532,17 @@ public class JDFResource extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumResStatus(String name)
+		private EnumResStatus(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumResStatus getEnum(String enumName)
+		public static EnumResStatus getEnum(final String enumName)
 		{
 			return (EnumResStatus) getEnum(EnumResStatus.class, enumName);
 		}
 
-		public static EnumResStatus getEnum(int enumValue)
+		public static EnumResStatus getEnum(final int enumValue)
 		{
 			return (EnumResStatus) getEnum(EnumResStatus.class, enumValue);
 		}
@@ -583,17 +581,17 @@ public class JDFResource extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumLotControl(String name)
+		private EnumLotControl(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumLotControl getEnum(String enumName)
+		public static EnumLotControl getEnum(final String enumName)
 		{
 			return (EnumLotControl) getEnum(EnumLotControl.class, enumName);
 		}
 
-		public static EnumLotControl getEnum(int enumValue)
+		public static EnumLotControl getEnum(final int enumValue)
 		{
 			return (EnumLotControl) getEnum(EnumLotControl.class, enumValue);
 		}
@@ -626,17 +624,17 @@ public class JDFResource extends JDFElement
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumPartUsage(String name)
+		private EnumPartUsage(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumPartUsage getEnum(String enumName)
+		public static EnumPartUsage getEnum(final String enumName)
 		{
 			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumName);
 		}
 
-		public static EnumPartUsage getEnum(int enumValue)
+		public static EnumPartUsage getEnum(final int enumValue)
 		{
 			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumValue);
 		}
@@ -682,17 +680,17 @@ public class JDFResource extends JDFElement
 			return getName();
 		}
 
-		private EnumPartIDKey(String name)
+		private EnumPartIDKey(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumPartIDKey getEnum(String enumName)
+		public static EnumPartIDKey getEnum(final String enumName)
 		{
 			return (EnumPartIDKey) getEnum(EnumPartIDKey.class, enumName);
 		}
 
-		public static EnumPartIDKey getEnum(int enumValue)
+		public static EnumPartIDKey getEnum(final int enumValue)
 		{
 			return (EnumPartIDKey) getEnum(EnumPartIDKey.class, enumValue);
 		}
@@ -768,10 +766,19 @@ public class JDFResource extends JDFElement
 		public static final EnumPartIDKey SubRun = new EnumPartIDKey(AttributeName.SUBRUN);
 		public static final EnumPartIDKey WebProduct = new EnumPartIDKey(AttributeName.WEBPRODUCT);
 		public static final EnumPartIDKey StationName = new EnumPartIDKey(AttributeName.STATIONNAME); // jdf1
-		// .3
-		// errata
-		// addition
+		// 1.3 errata addition
 		public static final EnumPartIDKey WebSetup = new EnumPartIDKey(AttributeName.WEBSETUP);
+		// JDF 1.4
+		public static final EnumPartIDKey Metadata0 = new EnumPartIDKey(AttributeName.METADATA0);
+		public static final EnumPartIDKey Metadata1 = new EnumPartIDKey(AttributeName.METADATA1);
+		public static final EnumPartIDKey Metadata2 = new EnumPartIDKey(AttributeName.METADATA2);
+		public static final EnumPartIDKey Metadata3 = new EnumPartIDKey(AttributeName.METADATA3);
+		public static final EnumPartIDKey Metadata4 = new EnumPartIDKey(AttributeName.METADATA4);
+		public static final EnumPartIDKey Metadata5 = new EnumPartIDKey(AttributeName.METADATA5);
+		public static final EnumPartIDKey Metadata6 = new EnumPartIDKey(AttributeName.METADATA6);
+		public static final EnumPartIDKey Metadata7 = new EnumPartIDKey(AttributeName.METADATA7);
+		public static final EnumPartIDKey Metadata8 = new EnumPartIDKey(AttributeName.METADATA8);
+		public static final EnumPartIDKey Metadata9 = new EnumPartIDKey(AttributeName.METADATA9);
 	}
 
 	/**
@@ -793,17 +800,17 @@ public class JDFResource extends JDFElement
 			return getName();
 		}
 
-		private EnumSpawnStatus(String name)
+		private EnumSpawnStatus(final String name)
 		{
 			super(name, m_startValue++);
 		}
 
-		public static EnumSpawnStatus getEnum(String enumName)
+		public static EnumSpawnStatus getEnum(final String enumName)
 		{
 			return (EnumSpawnStatus) getEnum(EnumSpawnStatus.class, enumName);
 		}
 
-		public static EnumSpawnStatus getEnum(int enumValue)
+		public static EnumSpawnStatus getEnum(final int enumValue)
 		{
 			return (EnumSpawnStatus) getEnum(EnumSpawnStatus.class, enumValue);
 		}
@@ -844,14 +851,13 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Status related shorthand for really lazy people Sets Status of resource as Available if bAvailable=true or as
-	 * Unavailable if bAvailable=false
+	 * Status related shorthand for really lazy people Sets Status of resource as Available if bAvailable=true or as Unavailable if bAvailable=false
 	 * 
 	 * @param bAvailable
 	 * @deprecated use SetStatus(EnumResStatus) default: setAvailable(true)
 	 */
 	@Deprecated
-	public void setAvailable(boolean bAvailable)
+	public void setAvailable(final boolean bAvailable)
 	{
 		setStatus(bAvailable ? EnumResStatus.Available : EnumResStatus.Unavailable);
 	}
@@ -859,14 +865,14 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests whether Status of resource is Available
 	 * 
-	 * @param bRecurseRefs if bRecurseRefs is set to true, also recurses into all resources linked by rRefs and returns
-	 *            true if the minimum Status is Status_Available
+	 * @param bRecurseRefs if bRecurseRefs is set to true, also recurses into all resources linked by rRefs and returns true if the minimum Status is
+	 * Status_Available
 	 * 
 	 * @return boolean true, if Status is Available
 	 * @deprecated use getStatus default: IsAvailable(false)
 	 */
 	@Deprecated
-	public boolean isAvailable(boolean bRecurseRefs)
+	public boolean isAvailable(final boolean bRecurseRefs)
 	{
 		return EnumResStatus.Available.equals(getResStatus(bRecurseRefs));
 	}
@@ -889,8 +895,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Checks, whether this resourse is a quantity resource. For quantity resource the class of 'this' must be either
-	 * Quantity or Consumable
+	 * Checks, whether this resourse is a quantity resource. For quantity resource the class of 'this' must be either Quantity or Consumable
 	 * 
 	 * @return boolean true, if 'this' is a quantity resource
 	 */
@@ -931,7 +936,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated [BLD009] use setLocked()
 	 */
 	@Deprecated
-	public void lock(boolean bLock)
+	public void lock(final boolean bLock)
 	{
 		if (bLock)
 		{
@@ -950,10 +955,9 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean isPhysical()
 	{
-		EnumResourceClass c = getResourceClass();
+		final EnumResourceClass c = getResourceClass();
 
-		return EnumResourceClass.Consumable.equals(c) || EnumResourceClass.Quantity.equals(c)
-				|| EnumResourceClass.Handling.equals(c);
+		return EnumResourceClass.Consumable.equals(c) || EnumResourceClass.Quantity.equals(c) || EnumResourceClass.Handling.equals(c);
 	}
 
 	/**
@@ -976,24 +980,26 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @throws JDFException if GetResourceRoot ran into the JDF node while searching
 	 */
-	public static JDFResource getResourceRoot(KElement elem)
+	public static JDFResource getResourceRoot(final KElement elem)
 	{
 		KElement elemLocal = elem;
 
 		if (elemLocal == null)
+		{
 			return null;
+		}
 
 		elemLocal = elemLocal.getDeepParent(elemLocal.getLocalName(), Integer.MAX_VALUE);
 
-		KElement parentNode = elemLocal.getParentNode_KElement();
+		final KElement parentNode = elemLocal.getParentNode_KElement();
 		if (parentNode != null)
 		{
-			String parentName = parentNode.getLocalName();
+			final String parentName = parentNode.getLocalName();
 			if (isValidParentNodeName(parentName))
 			{
 				if (parentNode instanceof JDFNodeInfo || parentNode instanceof JDFCustomerInfo)
 				{
-					KElement par = parentNode.getParentNode_KElement();
+					final KElement par = parentNode.getParentNode_KElement();
 					if (par != null && !(par instanceof JDFNode))
 					{
 						return getResourceRoot(parentNode);
@@ -1014,7 +1020,9 @@ public class JDFResource extends JDFElement
 			}
 
 			if ((elemLocal instanceof JDFResource) && !(parentNode instanceof JDFResource))
+			{
 				return (JDFResource) elemLocal;
+			}
 
 			return getResourceRoot(parentNode);
 		}
@@ -1057,7 +1065,7 @@ public class JDFResource extends JDFElement
 			{
 				setResStatus(EnumResStatus.Unavailable, false);
 			}
-			EnumVersion v = getVersion(true);
+			final EnumVersion v = getVersion(true);
 			if (v == null || v.getValue() >= EnumVersion.Version_1_2.getValue() && autoAgent)
 			{
 				setAgentName(JDFAudit.getStaticAgentName());
@@ -1069,22 +1077,21 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Makes from 'this' resource subelement a root resource element (direct child) of the specified parentPool or (in
-	 * default case) of ResourcePool, where it lives. <br>
+	 * Makes from 'this' resource subelement a root resource element (direct child) of the specified parentPool or (in default case) of ResourcePool, where it
+	 * lives. <br>
 	 * 
 	 * The Status and SpawnStatus attribute values of the new root resource are taken from the old root resource.
 	 * 
 	 * @param alias id attribute of the newly created resource
 	 * @param parentPool the pool where the newly created resource is stored <br>
-	 *            if null the local pool is used. Must use JDFElement for the pool because of recursive #defines
-	 * @param bLinkHere if true, creates a refelement (link) to the newly created resource at the position where 'this'
-	 *            originally resided.
+	 * if null the local pool is used. Must use JDFElement for the pool because of recursive #defines
+	 * @param bLinkHere if true, creates a refelement (link) to the newly created resource at the position where 'this' originally resided.
 	 * 
 	 * @return JDFResource the moved resource
 	 * 
 	 * @default makeRootResource(null, null, true)
 	 */
-	public JDFResource makeRootResource(String alias, JDFElement parentPool, boolean bLinkHere)
+	public JDFResource makeRootResource(final String alias, final JDFElement parentPool, final boolean bLinkHere)
 	{
 		String aliasLocal = alias;
 
@@ -1130,7 +1137,7 @@ public class JDFResource extends JDFElement
 			}
 
 			final JDFResource oldRoot = getResourceRoot();
-			JDFResource newRes = rp.appendResource(this);
+			final JDFResource newRes = rp.appendResource(this);
 
 			if (oldRoot.hasAttribute(AttributeName.STATUS))
 			{
@@ -1156,7 +1163,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return VElement list of JDF nodes that create or consume this resource
 	 */
-	public VElement getCreator(boolean bCreate)
+	public VElement getCreator(final boolean bCreate)
 	{
 		// if !bCreate the return value is the consumer ;-)
 		final VElement v = getLinksAndRefs(true, false);
@@ -1193,8 +1200,7 @@ public class JDFResource extends JDFElement
 	 * @param resToMerge the resource leaf to merge into this
 	 * @param spawnID the spawnID of the spawning that will now be merged
 	 * @param amountPolicy how to clean up the Resource amounts after merging
-	 * @param bLocalResource must be true for the local resources in a spawned node and its subnodes, which default to
-	 *            RW
+	 * @param bLocalResource must be true for the local resources in a spawned node and its subnodes, which default to RW
 	 * 
 	 * @throws JDFException if here is an attempt to merge incompatible resources
 	 * @throws JDFException if here is an attempt to merge incompatible partitions
@@ -1202,7 +1208,7 @@ public class JDFResource extends JDFElement
 	 * @default mergePartition (resToMerge, spawnID, EnumAmountMerge.None, false);
 	 */
 	@Deprecated
-	public void mergePartition(JDFResource resToMerge, String spawnID, EnumAmountMerge amountPolicy, boolean bLocalResource)
+	public void mergePartition(final JDFResource resToMerge, final String spawnID, final EnumAmountMerge amountPolicy, final boolean bLocalResource)
 	{
 		JDFMerge.mergePartition(this, resToMerge, spawnID, amountPolicy, bLocalResource);
 	}
@@ -1212,7 +1218,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param partIDKeys the value to set key to
 	 */
-	public void setPartIDKeys(VString partIDKeys)
+	public void setPartIDKeys(final VString partIDKeys)
 	{
 		getResourceRoot().setAttribute(AttributeName.PARTIDKEYS, StringUtil.setvString(partIDKeys, JDFConstants.BLANK, null, null));
 	}
@@ -1224,7 +1230,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return JDFResource merged resource
 	 */
-	public JDFResource mergeCloneResource(JDFResource oldRes)
+	public JDFResource mergeCloneResource(final JDFResource oldRes)
 	{
 		final JDFAttributeMap m = getAttributeMap(); // get all preset
 		// attributes
@@ -1245,7 +1251,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated [BLD009] use getLinks(linkName, null)
 	 */
 	@Deprecated
-	public VElement getLinks(String linkName)
+	public VElement getLinks(final String linkName)
 	{
 		return getLinks(linkName, null);
 	}
@@ -1260,7 +1266,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getLinks(null, null)
 	 */
-	public VElement getLinks(String linkName, String nameSpaceURI)
+	public VElement getLinks(final String linkName, final String nameSpaceURI)
 	{
 		final JDFAttributeMap m = new JDFAttributeMap(AttributeName.RREF, getID());
 		return getParentJDF().getChildrenByTagName(linkName, nameSpaceURI, m, false, false, 0);
@@ -1283,7 +1289,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return VElement - vector of all found elements, null if none found
 	 */
-	public VElement getLinksAndRefs(boolean bLink, boolean bRef)
+	public VElement getLinksAndRefs(final boolean bLink, final boolean bRef)
 	{
 		if (!bLink && !bRef)
 		{
@@ -1317,12 +1323,12 @@ public class JDFResource extends JDFElement
 		}
 		else
 		{
-			VElement vNodes = n.getvJDFNode(null, null, false);
+			final VElement vNodes = n.getvJDFNode(null, null, false);
 			vRet = new VElement();
 			final int size = vNodes.size();
 			for (int i = 0; i < size; i++)
 			{
-				VElement vTmp = ((JDFNode) vNodes.elementAt(i)).getResourceLinks(null);
+				final VElement vTmp = ((JDFNode) vNodes.elementAt(i)).getResourceLinks(null);
 				if (vTmp != null)
 				{
 					final int size2 = vTmp.size();
@@ -1330,18 +1336,20 @@ public class JDFResource extends JDFElement
 					{
 						final JDFResourceLink link = (JDFResourceLink) vTmp.item(j);
 						if (resID.equals(link.getrRef()))
+						{
 							vRet.add(link);
+						}
 					}
 				}
 			}
 		}
 
-		JDFAttributeMap mPart = getPartMap();
+		final JDFAttributeMap mPart = getPartMap();
 		if (mPart != null && mPart.size() > 0)
 		{
 			for (int i = vRet.size() - 1; i >= 0; i--)
 			{
-				KElement e = vRet.elementAt(i);
+				final KElement e = vRet.elementAt(i);
 				VJDFAttributeMap linkMapVector = null;
 				if (e instanceof JDFResourceLink)
 				{
@@ -1366,7 +1374,7 @@ public class JDFResource extends JDFElement
 				final int size = linkMapVector.size();
 				for (int j = 0; j < size; j++)
 				{
-					JDFAttributeMap m2 = linkMapVector.elementAt(j);
+					final JDFAttributeMap m2 = linkMapVector.elementAt(j);
 					if (!m2.overlapMap(mPart))
 					{
 						nZapp++;
@@ -1389,48 +1397,51 @@ public class JDFResource extends JDFElement
 	 * @param nodeName the name of the node to check against
 	 * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
 	 */
-	private static synchronized boolean isValidParentNodeName(String nodeName)
+	private static synchronized boolean isValidParentNodeName(final String nodeName)
 	{
 		if (validParentNodeNameSet == null)
 		{
 			validParentNodeNameSet = new HashSet<String>();
-			final String nodeNames[] = { "ResourcePool", "PipeParams", "ResourceInfo",
-					"ResourceCmdParams",
-					ElementName.OCCUPATION, // copy of validRootParentNodeNames
-					"DeviceInfo", "DropItemIntent", "DropItem", "ProductionIntent", "CustomerInfo", "NodeInfo",
-					"Ancestor", "Occupation", ElementName.PHASETIME };
+			final String nodeNames[] =
+			{ "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", ElementName.OCCUPATION, // copy of validRootParentNodeNames
+					"DeviceInfo", "DropItemIntent", "DropItem", "ProductionIntent", "CustomerInfo", "NodeInfo", "Ancestor", "Occupation", ElementName.PHASETIME };
 			for (int i = 0; i < nodeNames.length; i++)
+			{
 				validParentNodeNameSet.add(nodeNames[i]);
+			}
 		}
 		return validParentNodeNameSet.contains(nodeName);
 	}
 
 	/**
-	 * list of valid node names of potential parents for a resource that impy a real resource root with class, id etc
-	 * list of valid node names of potential parents for a resource
+	 * list of valid node names of potential parents for a resource that impy a real resource root with class, id etc list of valid node names of potential
+	 * parents for a resource
 	 * 
 	 * @param nodeName the name of the node to check against
 	 * @return {@link Boolean} true if nodeName is the name of a valid resource parent element
 	 */
-	private static synchronized boolean isValidRootParentNodeName(String nodeName)
+	private static synchronized boolean isValidRootParentNodeName(final String nodeName)
 	{
 		if (validRootParentNodeNameSet == null)
 		{
 			validRootParentNodeNameSet = new HashSet<String>();
-			final String[] nodeNames = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams" }; // must
+			final String[] nodeNames =
+			{ "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams" }; // must
 			// also
 			// copy
 			// to
 			// validParentNodeNames
 			for (int i = 0; i < nodeNames.length; i++)
+			{
 				validRootParentNodeNameSet.add(nodeNames[i]);
+			}
 		}
 		return validRootParentNodeNameSet.contains(nodeName);
 	}
 
 	/**
-	 * Tests, if the first ancestor with a name different from the node name is not one of
-	 * DropItemIntent,CustomerInfo,NodeInfo,ResourcePool,PipeParams, ResourceInfo,ResourceCmdParams. <br>
+	 * Tests, if the first ancestor with a name different from the node name is not one of DropItemIntent,CustomerInfo,NodeInfo,ResourcePool,PipeParams,
+	 * ResourceInfo,ResourceCmdParams. <br>
 	 * In other words: if this resource is a subelement, but not a resourceroot
 	 * 
 	 * @return boolean true, if this is a subelement but not a root
@@ -1452,14 +1463,14 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
 	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap, <br>
-	 *            e.g. if partitioned by run, RunPage and only Run is specified
+	 * e.g. if partitioned by run, RunPage and only Run is specified
 	 * 
 	 * @return JDFResource - the first matching resource leaf or node
 	 * @deprecated use getPartition(JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
 	 * @default getPartition(m, true)
 	 */
 	@Deprecated
-	public JDFResource getPartition(JDFAttributeMap m, boolean bIncomplete)
+	public JDFResource getPartition(final JDFAttributeMap m, final boolean bIncomplete)
 	{
 		JDFResource retRes = this;
 
@@ -1475,16 +1486,17 @@ public class JDFResource extends JDFElement
 	 * Gets the first part that matches mAttribute
 	 * 
 	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
-	 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by
-	 *            run, RunPage and only Run is specified
+	 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
 	 * 
 	 * @return JDFResource: the first matching resource leaf or node
 	 * @default getPartition(m, null)
 	 */
-	public JDFResource getPartition(JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
+	public JDFResource getPartition(final JDFAttributeMap m, final JDFResource.EnumPartUsage partUsage)
 	{
 		if (m == null || m.isEmpty())
+		{
 			return this;
+		}
 		return getDeepPart(m, partUsage);
 	}
 
@@ -1493,8 +1505,8 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param key the PartIDKey attribute name
 	 * @param value the string value of the partition key
-	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap, e.g. if
-	 *            partitioned by run, RunPage and only Run is specified
+	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is
+	 * specified
 	 * 
 	 * @return JDFResource the first matching resource leaf or node
 	 * 
@@ -1502,7 +1514,7 @@ public class JDFResource extends JDFElement
 	 * @default getPartition(key, value, true)
 	 */
 	@Deprecated
-	public JDFResource getPartition(EnumPartIDKey key, String value, boolean bIncomplete)
+	public JDFResource getPartition(final EnumPartIDKey key, final String value, final boolean bIncomplete)
 	{
 		final JDFAttributeMap mp = new JDFAttributeMap();
 		mp.put(key.toString(), value);
@@ -1519,20 +1531,24 @@ public class JDFResource extends JDFElement
 	 * @param partIDKeys the partIDKeys to clone, if null use the existing list from r
 	 * @throws JDFException if this is already inconsistently partitioned
 	 */
-	public void clonePartitions(JDFResource r, VString partIDKeys)
+	public void clonePartitions(final JDFResource r, final VString partIDKeys)
 	{
 		if (r == null)
+		{
 			return;
-		VString vParts = partIDKeys == null ? r.getPartIDKeys() : partIDKeys;
-		int size = vParts == null ? 0 : vParts.size();
+		}
+		final VString vParts = partIDKeys == null ? r.getPartIDKeys() : partIDKeys;
+		final int size = vParts == null ? 0 : vParts.size();
 		if (size == 0)
+		{
 			return;
-		VElement vLeaves = r.getLeaves(false); // only need the real leaves
-		int leafSize = vLeaves.size();
+		}
+		final VElement vLeaves = r.getLeaves(false); // only need the real leaves
+		final int leafSize = vLeaves.size();
 		for (int i = 0; i < leafSize; i++)
 		{
-			JDFResource leaf = (JDFResource) vLeaves.get(i);
-			JDFAttributeMap partMap = leaf.getPartMap();
+			final JDFResource leaf = (JDFResource) vLeaves.get(i);
+			final JDFAttributeMap partMap = leaf.getPartMap();
 			partMap.reduceMap(vParts);
 			getCreatePartition(partMap, vParts);
 		}
@@ -1543,19 +1559,17 @@ public class JDFResource extends JDFElement
 	 * Recursively adds the partition leaves defined in partMap
 	 * 
 	 * @param partMap the map of part keys
-	 * @param vPartKeys the vector of partIDKeys strings of the resource. If empty (the default), the Resource
-	 *            PartIDKeys attribute is used
+	 * @param vPartKeys the vector of partIDKeys strings of the resource. If empty (the default), the Resource PartIDKeys attribute is used
 	 * 
 	 * @return JDFResource the last created partition leaf
 	 * 
 	 * @throws JDFException if there are in the partMap not matching partitions
 	 * @throws JDFException if there is an attempt to fill non-matching partIDKeys
-	 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than
-	 *             one key
+	 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than one key
 	 * 
 	 * @default getCreatePartition(partMap, null)
 	 */
-	public JDFResource getCreatePartition(JDFAttributeMap partMap, VString vPartKeys)
+	public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
 	{
 		if (partMap == null)
 		{
@@ -1570,12 +1584,12 @@ public class JDFResource extends JDFElement
 		// might
 		// get
 		// modified
-		boolean appendEnd = true;
+		final boolean appendEnd = true;
 		VString vPartIDKeys = reorderPartKeys(vPartKeys);
 
 		// check whether we are already ok
 		int iMore = 0;
-		Iterator<String> it = localPartMap.getKeyIterator();
+		final Iterator<String> it = localPartMap.getKeyIterator();
 		while (it.hasNext())
 		{
 			final String key = it.next();
@@ -1593,8 +1607,7 @@ public class JDFResource extends JDFElement
 		final JDFAttributeMap thisMap = getPartMap();
 		if (!JDFPart.overlapPartMap(thisMap, localPartMap))
 		{
-			throw new JDFException("JDFResource.GetCreatePartition: non-matching partitions: leaf map:" + thisMap
-					+ " create map:" + localPartMap + " PartIDKeys:" + getPartIDKeys());
+			throw new JDFException("JDFResource.GetCreatePartition: non-matching partitions: leaf map:" + thisMap + " create map:" + localPartMap + " PartIDKeys:" + getPartIDKeys());
 		}
 
 		if (thisMap != null)
@@ -1628,7 +1641,7 @@ public class JDFResource extends JDFElement
 				{
 					if (!creating)
 					{
-						JDFResource nextLeaf = leaf.getPartition(new JDFAttributeMap(key, value), EnumPartUsage.Explicit);
+						final JDFResource nextLeaf = leaf.getPartition(new JDFAttributeMap(key, value), EnumPartUsage.Explicit);
 						if (nextLeaf == null)
 						{
 							creating = true;
@@ -1650,8 +1663,7 @@ public class JDFResource extends JDFElement
 				}
 				else
 				{
-					throw new JDFException("GetCreatePartition: Resource ID=" + getID()
-							+ " attempting to fill non-matching partIDKeys");
+					throw new JDFException("GetCreatePartition: Resource ID=" + getID() + " attempting to fill non-matching partIDKeys");
 				}
 			}
 			else
@@ -1681,15 +1693,15 @@ public class JDFResource extends JDFElement
 	 * @param vPartKeys
 	 * @return VString the reordered VString of partIDKeys
 	 */
-	private VString reorderPartKeys(VString vPartKeys)
+	private VString reorderPartKeys(final VString vPartKeys)
 	{
 		if (vPartKeys == null || vPartKeys.isEmpty())
 		{
 			return getPartIDKeys();
 		}
 		VString vPartIDKeys = new VString(vPartKeys);
-		VString vExistingPartKeys = getPartIDKeys();
-		VString vTmpPartIDKeys = new VString();
+		final VString vExistingPartKeys = getPartIDKeys();
+		final VString vTmpPartIDKeys = new VString();
 		if (vExistingPartKeys != null && !vExistingPartKeys.isEmpty())
 		{
 			int n = vExistingPartKeys.size();
@@ -1725,18 +1737,18 @@ public class JDFResource extends JDFElement
 	 * @param vPartIDKeys the known base partidkeys
 	 * @return the best guess vector of partidkeys
 	 */
-	private VString expandKeysFromNode(JDFAttributeMap partMap, VString vPartIDKeys)
+	private VString expandKeysFromNode(final JDFAttributeMap partMap, final VString vPartIDKeys)
 	{
-		JDFNode n = this.getParentJDF();
+		final JDFNode n = this.getParentJDF();
 		if (n == null)
 		{
 			return vPartIDKeys;
 		}
 
-		VString nodeKeys = n.getPartIDKeys(partMap);
-		int nodeKeySize = nodeKeys.size();
+		final VString nodeKeys = n.getPartIDKeys(partMap);
+		final int nodeKeySize = nodeKeys.size();
 
-		int partKeySize = vPartIDKeys != null ? vPartIDKeys.size() : 0;
+		final int partKeySize = vPartIDKeys != null ? vPartIDKeys.size() : 0;
 		if (nodeKeySize <= partKeySize)
 		{
 			return vPartIDKeys;
@@ -1772,7 +1784,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getCreatePartition(key, value, null)
 	 */
-	public JDFResource getCreatePartition(EnumPartIDKey key, String value, VString vPartIDKeys)
+	public JDFResource getCreatePartition(final EnumPartIDKey key, final String value, final VString vPartIDKeys)
 	{
 		final JDFAttributeMap mp = new JDFAttributeMap(key.getName(), value);
 		return getCreatePartition(mp, vPartIDKeys);
@@ -1781,17 +1793,16 @@ public class JDFResource extends JDFElement
 	/**
 	 * version fixing routine
 	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will
-	 * be able to move from low to high versions but potentially fail when attempting to move from higher to lower
-	 * versions
+	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
+	 * versions but potentially fail when attempting to move from higher to lower versions
 	 * 
 	 * @param version version that the resulting element should correspond to
 	 * @return true if successful
 	 */
 	@Override
-	public boolean fixVersion(EnumVersion version)
+	public boolean fixVersion(final EnumVersion version)
 	{
-		boolean bRet = true;
+		final boolean bRet = true;
 		if (!isResourceRootRoot())
 		{
 			// removeAttribute(AttributeName.STATUS);
@@ -1841,13 +1852,13 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return boolean true, if key exists in this leaf is in PartIDKeys
 	 */
-	protected boolean consistentPartIDKeys(EnumPartIDKey key, JDFResource root, VString partIDKeys)
+	protected boolean consistentPartIDKeys(final EnumPartIDKey key, final JDFResource root, final VString partIDKeys)
 	{
 		if (key == null)
 		{
 			return false;
 		}
-		Vector<ValuedEnum> vImplicitKeys = getImplicitPartitions();
+		final Vector<ValuedEnum> vImplicitKeys = getImplicitPartitions();
 		if (vImplicitKeys != null)
 		{
 			if (vImplicitKeys.contains(key))
@@ -1856,11 +1867,11 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		String keyName = key.getName();
+		final String keyName = key.getName();
 		int nDepth = 0;
 		JDFResource r = this;
 		// the key exists but is not in PartIDKeys, oops
-		int index = partIDKeys.indexOf(keyName);
+		final int index = partIDKeys.indexOf(keyName);
 		if (index < 0)
 		{
 			return !hasAttribute(keyName, null, false);
@@ -1909,7 +1920,7 @@ public class JDFResource extends JDFElement
 	 * @param key the PartIDKey attribute name
 	 * @return boolean true, if key exists in this leaf is in PartIDKeys
 	 */
-	public boolean consistentPartIDKeys(EnumPartIDKey key)
+	public boolean consistentPartIDKeys(final EnumPartIDKey key)
 	{
 		final JDFResource root = getResourceRoot();
 		return consistentPartIDKeys(key, root, root.getPartIDKeys());
@@ -1917,13 +1928,13 @@ public class JDFResource extends JDFElement
 
 	// //////////////////////////////////////////////////////////////////////////
 	// /////
-	private void removeImplicitPartions(JDFAttributeMap m)
+	private void removeImplicitPartions(final JDFAttributeMap m)
 	{
 		if (m == null)
 		{
 			return;
 		}
-		Vector<ValuedEnum> v = getImplicitPartitions();
+		final Vector<ValuedEnum> v = getImplicitPartitions();
 		if (v == null)
 		{
 			return;
@@ -1937,13 +1948,13 @@ public class JDFResource extends JDFElement
 	// //////////////////////////////////////////////////////////////////////////
 	// /////
 
-	protected VElement getDeepPartVector(JDFAttributeMap m_in, EnumPartUsage partUsage, int matchingDepth, VString partIDKeys)
+	protected VElement getDeepPartVector(final JDFAttributeMap m_in, final EnumPartUsage partUsage, final int matchingDepth, final VString partIDKeys)
 	{
 		EnumPartUsage partUsageLocal = partUsage;
 		int matchingDepthLocal = matchingDepth;
 
-		JDFAttributeMap m = new JDFAttributeMap(m_in);
-		VElement vReturn = new VElement();
+		final JDFAttributeMap m = new JDFAttributeMap(m_in);
+		final VElement vReturn = new VElement();
 		removeImplicitPartions(m);
 		if (partUsageLocal == null)
 		{
@@ -1956,17 +1967,17 @@ public class JDFResource extends JDFElement
 			return vReturn;
 		}
 
-		int msiz = m.size();
+		final int msiz = m.size();
 		if (matchingDepthLocal == -1) // first call - check validity of the map
 		{
 			matchingDepthLocal = 0;
-			JDFAttributeMap thisMap = getPartMap(partIDKeys);
+			final JDFAttributeMap thisMap = getPartMap(partIDKeys);
 
-			Iterator<String> it = m.getKeyIterator();
+			final Iterator<String> it = m.getKeyIterator();
 			while (it.hasNext())// for(int i = 0; i < msiz; i++)
 			{
-				String strKey = it.next();
-				EnumPartIDKey partIDKey = EnumPartIDKey.getEnum(strKey);
+				final String strKey = it.next();
+				final EnumPartIDKey partIDKey = EnumPartIDKey.getEnum(strKey);
 
 				// check map and throw exception if bad
 				if (partIDKey == null)
@@ -1975,10 +1986,10 @@ public class JDFResource extends JDFElement
 				}
 
 				// check whether we are already in a leaf when initially calling
-				String mMapValue = m.get(strKey);
+				final String mMapValue = m.get(strKey);
 				if (thisMap != null)
 				{
-					String thisMapValue = thisMap.get(strKey);
+					final String thisMapValue = thisMap.get(strKey);
 
 					if (thisMapValue != null && JDFPart.matchesPart(strKey, thisMapValue, mMapValue))
 					{
@@ -2000,10 +2011,10 @@ public class JDFResource extends JDFElement
 		final KElement identical = getElement_KElement(ElementName.IDENTICAL, null, 0);
 		if (identical != null)
 		{
-			JDFPart part = (JDFPart) identical.getElement(ElementName.PART);
+			final JDFPart part = (JDFPart) identical.getElement(ElementName.PART);
 			if (part != null)
 			{
-				JDFAttributeMap identityMap = part.getPartMap();
+				final JDFAttributeMap identityMap = part.getPartMap();
 				m.putAll(identityMap);
 			}
 
@@ -2019,7 +2030,7 @@ public class JDFResource extends JDFElement
 			return vReturn;
 		}
 
-		String nodeName = getNodeName();
+		final String nodeName = getNodeName();
 		// TODO cast not safe!
 		JDFResource resourceElement = (JDFResource) getElement_KElement(nodeName, null, 0);
 
@@ -2037,7 +2048,7 @@ public class JDFResource extends JDFElement
 			return vReturn;
 		}
 
-		VElement toAppend = new VElement(); // we stick all recursively found
+		final VElement toAppend = new VElement(); // we stick all recursively found
 		// candidates into this vector
 		boolean hasBadChildren = false; // loop over all valid elements and
 		// search downward
@@ -2058,7 +2069,7 @@ public class JDFResource extends JDFElement
 			if (matchingKeyPos >= 0) // all other elements except the first
 			// may have a predefined matching key
 			{
-				String sTmp = resourceElement.getAttribute_KElement(matchingKey, null, null);
+				final String sTmp = resourceElement.getAttribute_KElement(matchingKey, null, null);
 				if (sTmp != null) // found a matching key;
 				{
 					if (sTmp.equals(matchingValue))
@@ -2083,14 +2094,14 @@ public class JDFResource extends JDFElement
 			// element, since only one key
 			{ // is allowed and all keys must be in the same sequence;
 				// unless, of course, someone wrote crap JDF (bSnafu=true)
-				Iterator<String> it = m.getKeyIterator();
+				final Iterator<String> it = m.getKeyIterator();
 				int im = 0;
 				while (it.hasNext())// for(int im = 0; im < msiz; im++)
 				{
-					String strKey = it.next();
-					String strValue = m.get(strKey);
+					final String strKey = it.next();
+					final String strValue = m.get(strKey);
 
-					String sTmp = resourceElement.getAttribute_KElement(strKey, null, null);
+					final String sTmp = resourceElement.getAttribute_KElement(strKey, null, null);
 
 					if (sTmp != null)// found a matching key;
 					{
@@ -2115,7 +2126,7 @@ public class JDFResource extends JDFElement
 
 			if (!badChild)
 			{
-				VElement dpv = resourceElement.getDeepPartVector(m, partUsageLocal, hasMatchingAttribute ? matchingDepthLocal + 1 : matchingDepthLocal, partIDKeys);
+				final VElement dpv = resourceElement.getDeepPartVector(m, partUsageLocal, hasMatchingAttribute ? matchingDepthLocal + 1 : matchingDepthLocal, partIDKeys);
 
 				if (dpv.size() > 0)
 				{
@@ -2130,7 +2141,7 @@ public class JDFResource extends JDFElement
 					// match
 					// - we may just stop
 					{
-						JDFResource root = getResourceRoot();
+						final JDFResource root = getResourceRoot();
 						JDFElement closest = (JDFElement) toAppend.elementAt(0);
 						// move to root
 						int leafDepth = 0;
@@ -2150,7 +2161,7 @@ public class JDFResource extends JDFElement
 				break; // nothing at all left to do; jump out of loop
 			}
 
-			KElement k = resourceElement.getNextSiblingElement(nodeName, null);
+			final KElement k = resourceElement.getNextSiblingElement(nodeName, null);
 
 			if (!(k instanceof JDFResource))
 			{
@@ -2164,7 +2175,7 @@ public class JDFResource extends JDFElement
 		if (bSearchSame)
 		{
 			// check whether all sub elements of this are accepted completely
-			int appSize = toAppend.size();
+			final int appSize = toAppend.size();
 			boolean bSame = (!hasMatchingAttribute) && (nChildren == appSize);
 
 			if (bSame)
@@ -2180,7 +2191,7 @@ public class JDFResource extends JDFElement
 						break;
 					}
 
-					KElement k = resourceElement.getNextSiblingElement(nodeName, null);
+					final KElement k = resourceElement.getNextSiblingElement(nodeName, null);
 					if (!(k instanceof JDFResource))
 					{
 						break;
@@ -2194,10 +2205,9 @@ public class JDFResource extends JDFElement
 			{
 				// none match and this is the last with bad kids and we want
 				// incomplete stuff
-				if (toAppend.isEmpty() && hasBadChildren && (partUsageLocal.equals(EnumPartUsage.Implicit))
-						&& !hasMatchingAttribute)
+				if (toAppend.isEmpty() && hasBadChildren && (partUsageLocal.equals(EnumPartUsage.Implicit)) && !hasMatchingAttribute)
 				{
-					JDFResource root = getResourceRoot();
+					final JDFResource root = getResourceRoot();
 					JDFResource closest = this;
 					boolean bClosest = false;
 
@@ -2205,13 +2215,13 @@ public class JDFResource extends JDFElement
 					while (!closest.equals(root))
 					{
 						// used for an explicit (non inherited) attribute check.
-						JDFElement closestElement = closest;
+						final JDFElement closestElement = closest;
 
 						// check whether any parameters of map were found
-						Iterator<String> it = m.getKeyIterator();
+						final Iterator<String> it = m.getKeyIterator();
 						while (it.hasNext())// for(int i = 0; i < msiz; i++)
 						{
-							String strKey = it.next();
+							final String strKey = it.next();
 							if (closestElement.hasAttribute_KElement(strKey, null, false))
 							{
 								bClosest = true;
@@ -2255,8 +2265,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets a matching part from somewhere down there returns the closest ancestor of all matching elements within the
-	 * target vector
+	 * Gets a matching part from somewhere down there returns the closest ancestor of all matching elements within the target vector
 	 * 
 	 * @param m
 	 * @param bIncomplete
@@ -2264,7 +2273,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated use the partUsage dependent version instead
 	 */
 	@Deprecated
-	public JDFResource getDeepPart(JDFAttributeMap m, boolean bIncomplete)
+	public JDFResource getDeepPart(final JDFAttributeMap m, final boolean bIncomplete)
 	{
 		return getDeepPart(m, bIncomplete ? EnumPartUsage.Implicit : EnumPartUsage.Explicit);
 	}
@@ -2274,14 +2283,13 @@ public class JDFResource extends JDFElement
 	 * returns the closest ancestor of all matching elements within the target vector
 	 * 
 	 * @param m map of attributes that should fit
-	 * @param partUsage lso accept nodes that are are not completely specified in the partmap, e.g. if partitioned by
-	 *            run, RunPage and only Run is specified
+	 * @param partUsage lso accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
 	 * @return the first found matching resource node or leaf
 	 */
-	public JDFResource getDeepPart(JDFAttributeMap m, EnumPartUsage partUsage)
+	public JDFResource getDeepPart(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
 		JDFResource retRes = null;
-		VString partIDKeys = getPartIDKeys();
+		final VString partIDKeys = getPartIDKeys();
 		final VElement vRes = getDeepPartVector(m, partUsage, -1, partIDKeys);
 
 		if (vRes != null)
@@ -2327,8 +2335,7 @@ public class JDFResource extends JDFElement
 						retRes = e;
 						break; // while e!=this
 					}
-				}
-				while (e != this);
+				} while (e != this);
 
 				if (e.isResourceRoot())
 				{
@@ -2344,12 +2351,12 @@ public class JDFResource extends JDFElement
 
 		int retSize = -1;
 		JDFResource loopRes = retRes;
-		Set vKeys = m.keySet();
+		final Set vKeys = m.keySet();
 
 		// loop unti we hit this or root, whichever is closer
 		while (true)
 		{
-			JDFAttributeMap returnMap = loopRes.getPartMap();
+			final JDFAttributeMap returnMap = loopRes.getPartMap();
 			// only check the keys, not the values since <Identical> elements
 			// may screw up the values...
 			returnMap.reduceMap(vKeys);
@@ -2382,13 +2389,13 @@ public class JDFResource extends JDFElement
 	 * Gets a list of all direct leaves
 	 * 
 	 * @param bAll if true include all intermediate and leaf nodes including this<br>
-	 *            if false, include only the final leaves
+	 * if false, include only the final leaves
 	 * 
 	 * @return VElement - the vector of all leaves
 	 * 
 	 * @default getLeaves(false)
 	 */
-	public VElement getLeaves(boolean bAll)
+	public VElement getLeaves(final boolean bAll)
 	{
 		// want possibly intermediate nodes, check the kids
 		VElement vAllChildren = getChildElementVector_KElement(getNodeName(), null, null, true, 0);
@@ -2400,7 +2407,7 @@ public class JDFResource extends JDFElement
 		}
 		else
 		{
-			VElement vLeaves = new VElement();
+			final VElement vLeaves = new VElement();
 			// recurse parts tree and sum up the results
 			if (bAll)
 			{
@@ -2438,7 +2445,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return Vector - a list of values of the specifird partition key
 	 */
-	public Vector getPartValues(EnumPartIDKey partType)
+	public Vector getPartValues(final EnumPartIDKey partType)
 	{
 		final VElement v = getLeaves(false);
 		final VString vs = new VString();
@@ -2481,10 +2488,10 @@ public class JDFResource extends JDFElement
 	 * @default getAttribute(attrib, null, JDFConstants.EMPTYSTRING)
 	 */
 	@Override
-	public String getAttribute(String attrib, String nameSpaceURI, String def)
+	public String getAttribute(final String attrib, final String nameSpaceURI, final String def)
 	{
 		String resultAttrib = super.getAttribute(attrib, nameSpaceURI, null);
-		String nodeName = resultAttrib == null ? getNodeName() : null;
+		final String nodeName = resultAttrib == null ? getNodeName() : null;
 		KElement ke = this;
 		while (resultAttrib == null)
 		{
@@ -2534,15 +2541,14 @@ public class JDFResource extends JDFElement
 	 * @default hasAttribute(attrib, null, false)
 	 */
 	@Override
-	public boolean hasAttribute(String attrib, String nameSpaceURI, boolean bInherit)
+	public boolean hasAttribute(final String attrib, final String nameSpaceURI, final boolean bInherit)
 	{
 		return hasAttribute_JDFResource(attrib, nameSpaceURI, bInherit);
 	}
 
 	/**
 	 * Checks if the actual element has a specific attribute<br>
-	 * this version checks within the resource and its partitioned parent xml elements this was added in order to
-	 * implement the c++ JDFResource::HasAttribute
+	 * this version checks within the resource and its partitioned parent xml elements this was added in order to implement the c++ JDFResource::HasAttribute
 	 * 
 	 * @param attrib the name of the attribute to look for
 	 * @param nameSpaceURI the nameSpace to look in
@@ -2552,7 +2558,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default hasAttribute_JDFResource(attrib, null, false)
 	 */
-	private boolean hasAttribute_JDFResource(String attrib, String nameSpaceURI, boolean bInherit)
+	private boolean hasAttribute_JDFResource(final String attrib, final String nameSpaceURI, final boolean bInherit)
 	{
 		if (bInherit)
 		{
@@ -2571,7 +2577,7 @@ public class JDFResource extends JDFElement
 	 * @default numChildElements(JDFConstants.EMPTYSTRING, null)
 	 */
 	@Override
-	public int numChildElements(String nodeName, String nameSpaceURI)
+	public int numChildElements(final String nodeName, final String nameSpaceURI)
 	{
 		int iNumChildElements = super.numChildElements(nodeName, nameSpaceURI);
 
@@ -2598,8 +2604,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Recursive GetElement that also checks parent nodes up to the part root this was added in order to implement the
-	 * c++ JDFResource::GetCreateElement
+	 * Recursive GetElement that also checks parent nodes up to the part root this was added in order to implement the c++ JDFResource::GetCreateElement
 	 * 
 	 * @param nodeName name of the child node to get
 	 * @param nameSpaceURI namespace to search for
@@ -2609,7 +2614,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getCreateElement_JDFResource(nodeName, null, 0)
 	 */
-	public KElement getCreateElement_JDFResource(String nodeName, String nameSpaceURI, int iSkip)
+	public KElement getCreateElement_JDFResource(final String nodeName, final String nameSpaceURI, final int iSkip)
 	{
 		KElement resultKElement = getElement_JDFElement(nodeName, nameSpaceURI, iSkip);
 
@@ -2632,10 +2637,10 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return KElement: the matching element
 	 * 
-	 *         default: getElement(nodeName, null, 0)
+	 * default: getElement(nodeName, null, 0)
 	 */
 	@Override
-	public KElement getElement(String nodeName, String nameSpaceURI, int iSkip)
+	public KElement getElement(final String nodeName, final String nameSpaceURI, final int iSkip)
 	{
 		return getElement_JDFResource(nodeName, nameSpaceURI, iSkip);
 	}
@@ -2652,7 +2657,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getElement_JDFResource(nodeName, null, 0)
 	 */
-	private KElement getElement_JDFResource(String nodeName, String nameSpaceURI, int iSkip)
+	private KElement getElement_JDFResource(final String nodeName, final String nameSpaceURI, final int iSkip)
 	{
 		KElement retEle = null;
 
@@ -2677,15 +2682,14 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Creates parts of part type 'partType' with values as defined in 'values'; the number of values is defined by the
-	 * number of elements in 'values'
+	 * Creates parts of part type 'partType' with values as defined in 'values'; the number of values is defined by the number of elements in 'values'
 	 * 
 	 * @param partType part type of a new part
 	 * @param values its value
 	 * 
 	 * @return VElement - vector of newly created parts
 	 */
-	public VElement addPartitions(EnumPartIDKey partType, VString values)
+	public VElement addPartitions(final EnumPartIDKey partType, final VString values)
 	{
 		if (isResourceElement())
 		{
@@ -2712,15 +2716,14 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Adds a new part to this node, also handles PartIDKeys in the root etc. convenience method to allow for partIDKey
-	 * enums rather than strings
+	 * Adds a new part to this node, also handles PartIDKeys in the root etc. convenience method to allow for partIDKey enums rather than strings
 	 * 
 	 * @param partType part type of a new part
 	 * @param value its value
 	 * 
 	 * @return JDFResource - the newly created part
 	 */
-	public JDFResource addPartition(EnumPartIDKey partType, ValuedEnum enumPart)
+	public JDFResource addPartition(final EnumPartIDKey partType, final ValuedEnum enumPart)
 	{
 		return addPartition(partType, enumPart.getName());
 	}
@@ -2733,7 +2736,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return JDFResource - the newly created part
 	 */
-	public JDFResource addPartition(EnumPartIDKey partType, String value)
+	public JDFResource addPartition(final EnumPartIDKey partType, final String value)
 	{
 		if (isResourceElement())
 		{
@@ -2744,8 +2747,8 @@ public class JDFResource extends JDFElement
 			throw new JDFException("Attempting to add null partition to resource: " + buildXPath(null, 1));
 		}
 
-		VString vs = getPartIDKeys();
-		int posOfType = vs == null ? -1 : vs.indexOf(partType.getName());
+		final VString vs = getPartIDKeys();
+		final int posOfType = vs == null ? -1 : vs.indexOf(partType.getName());
 		if (posOfType < 0)
 		{
 			if (!isLeaf())
@@ -2767,8 +2770,7 @@ public class JDFResource extends JDFElement
 				final String parentPart = vs.stringAt(posOfType - 1);
 				if (!hasAttribute_KElement(parentPart, null, false))
 				{
-					throw new JDFException("addPartion: adding inconsistent partition - parent must have partIDKey: "
-							+ parentPart);
+					throw new JDFException("addPartion: adding inconsistent partition - parent must have partIDKey: " + parentPart);
 				}
 			}
 		}
@@ -2837,7 +2839,7 @@ public class JDFResource extends JDFElement
 	 * @param key attribute key to look for
 	 * @return JDFResource - the parent element that actually contains the attribute key
 	 */
-	public JDFResource getAttributePart(String key)
+	public JDFResource getAttributePart(final String key)
 	{
 		JDFResource result = null;
 
@@ -2868,7 +2870,7 @@ public class JDFResource extends JDFElement
 	 * @param key attribute key to look for
 	 * @return VElement a vector of resource leaf elements that actually contain the attribute key
 	 */
-	public VElement getAttributePartVector(String key)
+	public VElement getAttributePartVector(final String key)
 	{
 		final VElement leaves = getLeaves(false);
 		final VElement v = new VElement();
@@ -2905,10 +2907,10 @@ public class JDFResource extends JDFElement
 	 * @param relativeTo relative path to which to create an xpath
 	 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents
 	 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
-	 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
+	 * <code>null</code> if parent of this is null (e.g. called on rootnode)
 	 */
 	@Override
-	public String buildXPath(String relativeTo, int methCountSiblings)
+	public String buildXPath(final String relativeTo, final int methCountSiblings)
 	{
 		if ((methCountSiblings != 2 && methCountSiblings != 3) || isResourceElement() || isResourceRoot())
 		{
@@ -2916,13 +2918,13 @@ public class JDFResource extends JDFElement
 		}
 
 		String path = "/" + getLocalName(); // tbd handle namespaces
-		String sKey = getLocalPartitionKey();
+		final String sKey = getLocalPartitionKey();
 		if (sKey != null)
 		{
 			path += "[@" + sKey + "=\"" + getAttribute(sKey) + "\"]";
 		}
 
-		KElement parent = getParentNode_KElement();
+		final KElement parent = getParentNode_KElement();
 		return parent.buildXPath(relativeTo, methCountSiblings) + path;
 	}
 
@@ -2935,12 +2937,18 @@ public class JDFResource extends JDFElement
 	{
 		final JDFResource partRoot = getResourceRoot();
 		if (partRoot == null)
+		{
 			return null;
+		}
 		if (partRoot == this)
+		{
 			return null;
-		VString keys = partRoot.getPartIDKeys();
+		}
+		final VString keys = partRoot.getPartIDKeys();
 		if (keys == null)
+		{
 			return null;
+		}
 		int n = 0;
 		KElement par = getParentNode_KElement();
 		while (par != partRoot)
@@ -2949,8 +2957,10 @@ public class JDFResource extends JDFElement
 			par = par.getParentNode_KElement();
 		}
 		if (n >= keys.size())
+		{
 			return null;
-		String s = keys.stringAt(n);
+		}
+		final String s = keys.stringAt(n);
 		return hasAttribute_KElement(s, null, false) ? s : null;
 	}
 
@@ -2965,7 +2975,7 @@ public class JDFResource extends JDFElement
 		removeAttribute(AttributeName.STATUS);
 		removeAttribute(AttributeName.PARTUSAGE);
 		removeAttribute(AttributeName.NOOP);
-		VString v = getPartIDKeys();
+		final VString v = getPartIDKeys();
 		if (v != null)
 		{
 			for (int i = 0; i < v.size(); i++)
@@ -2990,7 +3000,7 @@ public class JDFResource extends JDFElement
 	 * @default removeAttribute(attrib, null)
 	 */
 	@Override
-	public void removeAttribute(String attrib, String nameSpaceURI)
+	public void removeAttribute(final String attrib, final String nameSpaceURI)
 	{
 		if (super.hasAttribute(attrib, nameSpaceURI, false))
 		{
@@ -3013,9 +3023,9 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default removeAttribute(attrib, null)
 	 */
-	public void removeAttributeFromLeaves(String attrib, String nameSpaceURI)
+	public void removeAttributeFromLeaves(final String attrib, final String nameSpaceURI)
 	{
-		VElement v = getLeaves(true);
+		final VElement v = getLeaves(true);
 		v.removeAttribute(attrib, nameSpaceURI);
 	}
 
@@ -3023,9 +3033,9 @@ public class JDFResource extends JDFElement
 	 * Reduces partition so that only the parts that overlap with vResources remain
 	 * 
 	 * @param vValidParts vector of partmaps that define the individual valid parts.<br>
-	 *            The individual PartMaps are ored to define the final resource.
+	 * The individual PartMaps are ored to define the final resource.
 	 */
-	public void reducePartitions(VJDFAttributeMap vValidParts_)
+	public void reducePartitions(final VJDFAttributeMap vValidParts_)
 	{
 		VJDFAttributeMap vValidParts = vValidParts_;
 
@@ -3035,14 +3045,14 @@ public class JDFResource extends JDFElement
 			vValidParts = new VJDFAttributeMap(); // need local copy
 			for (int i = 0; i < vValidParts_.size(); i++)
 			{
-				JDFAttributeMap map = vValidParts_.elementAt(i);
-				VElement v = getPartitionVector(map, EnumPartUsage.Implicit);
+				final JDFAttributeMap map = vValidParts_.elementAt(i);
+				final VElement v = getPartitionVector(map, EnumPartUsage.Implicit);
 				if (v != null)
 				{
-					int vSize = v.size();
+					final int vSize = v.size();
 					for (int j = 0; j < vSize; j++)
 					{
-						JDFResource r = (JDFResource) v.elementAt(j);
+						final JDFResource r = (JDFResource) v.elementAt(j);
 						vValidParts.add(r.getPartMap(partIDKeys));
 					}
 				}
@@ -3094,7 +3104,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated [BLD009] not in C++ anymore, not used internally here
 	 */
 	@Deprecated
-	public void reduceParts(Vector vParts)
+	public void reduceParts(final Vector vParts)
 	{
 		if (!vParts.isEmpty() && getPartIDKeys().size() > 0)
 		{
@@ -3160,14 +3170,14 @@ public class JDFResource extends JDFElement
 	 * @param ids
 	 * @return JDFAttributeMap - the part attribute map for 'this' leaf / node
 	 */
-	public JDFAttributeMap getPartMap(VString ids)
+	public JDFAttributeMap getPartMap(final VString ids)
 	{
 		final JDFAttributeMap m = new JDFAttributeMap();
 
 		final Iterator<String> idsIterator = ids.iterator();
 		while (idsIterator.hasNext())
 		{
-			String id = idsIterator.next();
+			final String id = idsIterator.next();
 			final String atr = getAttribute(id, null, null);
 			if (atr != null)
 			{
@@ -3209,12 +3219,11 @@ public class JDFResource extends JDFElement
 	 * @deprecated use JDFMerge.mergeSpawnIDS
 	 */
 	@Deprecated
-	public void mergeSpawnIDs(JDFResource resToMerge, VString previousMergeIDs)
+	public void mergeSpawnIDs(final JDFResource resToMerge, final VString previousMergeIDs)
 	{
 		if (!getID().equals(resToMerge.getID()))
 		{
-			throw new JDFException("JDFResource.mergeSpawnIDs  merging incompatible resources ID = " + getID()
-					+ " IDMerge = " + resToMerge.getID());
+			throw new JDFException("JDFResource.mergeSpawnIDs  merging incompatible resources ID = " + getID() + " IDMerge = " + resToMerge.getID());
 		}
 
 		final VElement allLeaves = getLeaves(true);
@@ -3240,7 +3249,9 @@ public class JDFResource extends JDFElement
 				}
 
 				if (vSpawnIDs != null)
+				{
 					vSpawnIDs.removeStrings(previousMergeIDs, 999999);
+				}
 
 				if (vSpawnIDs == null || vSpawnIDs.isEmpty())
 				{
@@ -3273,7 +3284,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default expand(false)
 	 */
-	public void expand(boolean bDeleteFromNode)
+	public void expand(final boolean bDeleteFromNode)
 	{
 		final VElement leaves = getLeaves(false);
 		if (leaves.size() == 1 && leaves.elementAt(0) == this)
@@ -3388,7 +3399,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default Collapse(false)
 	 */
-	public void collapse(boolean bCollapseToNode)
+	public void collapse(final boolean bCollapseToNode)
 	{
 		final VElement leaves = getLeaves(false);
 		if (leaves.size() == 1 && leaves.elementAt(0) == this)
@@ -3425,7 +3436,7 @@ public class JDFResource extends JDFElement
 	// //////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////
 
-	private void collapseAttributes(boolean bCollapseToNode, JDFResource leaf, final VString atts, JDFResource parent, final VElement localLeaves)
+	private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves)
 	{
 		final int localSize = localLeaves.size();
 		for (int j = 0; j < atts.size(); j++)
@@ -3463,7 +3474,7 @@ public class JDFResource extends JDFElement
 				}
 			}
 			// remove leaf element attribute if it is defined lower in the tree
-			String parentAttribute = parent.getAttribute(att, null, null);
+			final String parentAttribute = parent.getAttribute(att, null, null);
 			if (parentAttribute != null && parentAttribute.equals(leaf.getAttribute_KElement(att, null, null)))
 			{
 				leaf.removeAttribute(att, null);
@@ -3474,7 +3485,7 @@ public class JDFResource extends JDFElement
 	// //////////////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////
 
-	private void collapseElements(boolean bCollapseToNode, JDFResource leaf, JDFResource parent, final VElement localLeaves)
+	private void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves)
 	{
 		final int localSize = localLeaves.size();
 		final VElement vElm = leaf.getChildElementVector_JDFElement(null, null, null, true, 0, false);
@@ -3598,7 +3609,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated use JDFSpawn.spawnPart
 	 */
 	@Deprecated
-	public void spawnPart(String spawnID, EnumSpawnStatus spawnStatus, VJDFAttributeMap vParts, boolean bStayInMain)
+	public void spawnPart(final String spawnID, final EnumSpawnStatus spawnStatus, final VJDFAttributeMap vParts, final boolean bStayInMain)
 	{
 		if (vParts != null && vParts.size() > 0)
 		{
@@ -3613,8 +3624,7 @@ public class JDFResource extends JDFElement
 					// it
 					if (bStayInMain)
 					{
-						if ((spawnStatus == EnumSpawnStatus.SpawnedRW)
-								|| (pLeaf.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
+						if ((spawnStatus == EnumSpawnStatus.SpawnedRW) || (pLeaf.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
 						{
 							pLeaf.setSpawnStatus(spawnStatus);
 							pLeaf.setLocked(spawnStatus == EnumSpawnStatus.SpawnedRW);
@@ -3654,7 +3664,7 @@ public class JDFResource extends JDFElement
 	 * @param spawnID the SpawnID that it was spawned with
 	 * @param spawnStatus SpawnStatus this resource was spawned with
 	 */
-	public void unSpawnPart(String spawnID, EnumSpawnStatus spawnStatus)
+	public void unSpawnPart(final String spawnID, final EnumSpawnStatus spawnStatus)
 	{
 		final VElement vLeaves = getNodesWithSpawnID(spawnID);
 		for (int i = 0; i < vLeaves.size(); i++)
@@ -3686,15 +3696,14 @@ public class JDFResource extends JDFElement
 	 * @param spawnID the spawnID to look for
 	 * @return VElement - the vector of nodes or leaves of 'this' that contain spawnID
 	 */
-	public VElement getNodesWithSpawnID(String spawnID)
+	public VElement getNodesWithSpawnID(final String spawnID)
 	{
 		final VElement v2 = getLeaves(true);
 
 		for (int i = v2.size() - 1; i >= 0; i--)
 		{
 			final JDFElement e = (JDFElement) v2.elementAt(i);
-			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false)
-					|| !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
+			if (!e.hasAttribute_KElement(AttributeName.SPAWNIDS, null, false) || !e.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, AttributeInfo.EnumAttributeType.NMTOKENS))
 			{
 				v2.remove(i);
 			}
@@ -3707,7 +3716,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
 	 * @param bIncomplete if true, also accept nodes that are are not completely specified in the partmap,<br>
-	 *            e.g. if partitioned by run, RunPage and only Run is specified
+	 * e.g. if partitioned by run, RunPage and only Run is specified
 	 * 
 	 * @return VElement - the vector of matching resource leaves or nodes
 	 * @deprecated use getPartitionVector(JDFAttributeMap m, EnumPartUsage partUsage)
@@ -3715,7 +3724,7 @@ public class JDFResource extends JDFElement
 	 * @default getPartitionVector(m, true)
 	 */
 	@Deprecated
-	public VElement getPartitionVector(JDFAttributeMap m, boolean bIncomplete)
+	public VElement getPartitionVector(final JDFAttributeMap m, final boolean bIncomplete)
 	{
 		return getDeepPartVector(m, bIncomplete ? EnumPartUsage.Implicit : EnumPartUsage.Explicit, 0, getPartIDKeys());
 	}
@@ -3724,14 +3733,13 @@ public class JDFResource extends JDFElement
 	 * Gets the vector of parts (resource leaves or nodes) that match mAttribute
 	 * 
 	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
-	 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by
-	 *            run, RunPage and only Run is specified
+	 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
 	 * 
 	 * @return VElement - the vector of matching resource leaves or nodes
 	 * 
 	 * @default getPartitionVector(m, null)
 	 */
-	public VElement getPartitionVector(JDFAttributeMap m, EnumPartUsage partUsage)
+	public VElement getPartitionVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
 		return getDeepPartVector(m, partUsage, -1, getPartIDKeys());
 	}
@@ -3747,7 +3755,7 @@ public class JDFResource extends JDFElement
 	 * @default getPartitionVector(key, value, true)
 	 */
 	@Deprecated
-	public VElement getPartitionVector(EnumPartIDKey key, String value, boolean bIncomplete)
+	public VElement getPartitionVector(final EnumPartIDKey key, final String value, final boolean bIncomplete)
 	{
 		final JDFAttributeMap mp = new JDFAttributeMap(key.getName(), value);
 		return getPartitionVector(mp, bIncomplete);
@@ -3772,7 +3780,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getPartMapVector(false)
 	 */
-	public VJDFAttributeMap getPartMapVector(boolean bIntermediate)
+	public VJDFAttributeMap getPartMapVector(final boolean bIntermediate)
 	{
 		final VElement allNodes = getLeaves(bIntermediate);
 		final VJDFAttributeMap vReturn = new VJDFAttributeMap();
@@ -3793,21 +3801,23 @@ public class JDFResource extends JDFElement
 				}
 			}
 			if (m.size() > 0)
+			{
 				vReturn.appendUnique(m);
+			}
 		}
 
 		return vReturn;
 	}
 
 	/**
-	 * Finds the canonical vector of parts that defines the vector of parts that fits to vParts. If all children of a
-	 * parent node are in vParts, they are replaced by their parent. <br>
+	 * Finds the canonical vector of parts that defines the vector of parts that fits to vParts. If all children of a parent node are in vParts, they are
+	 * replaced by their parent. <br>
 	 * for example the canonical vector of all leaves is the root
 	 * 
 	 * @param vParts the vector of parts to check against 'this'
 	 * @return VJDFAttributeMap the canonical vector
 	 */
-	public VJDFAttributeMap reducePartVector(VJDFAttributeMap vParts)
+	public VJDFAttributeMap reducePartVector(final VJDFAttributeMap vParts)
 	{
 		final VJDFAttributeMap vTest = new VJDFAttributeMap();
 		vTest.setVector(vParts.getVector());
@@ -3986,8 +3996,7 @@ public class JDFResource extends JDFElement
 
 		if (bTooManyIDs)
 		{
-			throw new JDFException(" JDFResource.newModifiedID too many "
-					+ "equivalent modified resources! Resource ID = " + id);
+			throw new JDFException(" JDFResource.newModifiedID too many " + "equivalent modified resources! Resource ID = " + id);
 		}
 
 		return newModifiedID;
@@ -4003,7 +4012,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @throws JDFException if numberOfValueDigits > numberOfDigits
 	 */
-	private String makeID(String s, int numberOfDigits, int value)
+	private String makeID(final String s, final int numberOfDigits, final int value)
 	{
 		String result = s;
 		final Integer myValue = new Integer(value);
@@ -4036,14 +4045,14 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Tests, whether the first ancestor of 'this' is in ValidParentNodeNames - must be one of:
-	 * DropItemIntent,CustomerInfo,NodeInfo,ResourcePool,PipeParams ,ResourceInfo,ResourceCmdParams
+	 * Tests, whether the first ancestor of 'this' is in ValidParentNodeNames - must be one of: DropItemIntent,CustomerInfo,NodeInfo,ResourcePool,PipeParams
+	 * ,ResourceInfo,ResourceCmdParams
 	 * 
 	 * @return boolean true, if 'this' is a root resource
 	 */
 	public boolean isResourceRoot()
 	{
-		KElement parentNode = this.getParentNode_KElement();
+		final KElement parentNode = this.getParentNode_KElement();
 		if (parentNode == null)
 		{
 			return true;
@@ -4074,7 +4083,7 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean isResourceRootRoot()
 	{
-		KElement parentNode = this.getParentNode_KElement();
+		final KElement parentNode = this.getParentNode_KElement();
 		if (parentNode == null)
 		{
 			return true;
@@ -4090,12 +4099,12 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * update the amount of a resource based on the connected resource links Only Condition="Good" is counted if no
-	 * explicit partioning by condition is specified
+	 * update the amount of a resource based on the connected resource links Only Condition="Good" is counted if no explicit partioning by condition is
+	 * specified
 	 * 
 	 * @param previousAmount the previous resource Amount
 	 */
-	public void updateAmounts(double previousAmount)
+	public void updateAmounts(final double previousAmount)
 	{
 		double amount = getAmount();
 		double amountProduced = 0;
@@ -4163,12 +4172,16 @@ public class JDFResource extends JDFElement
 
 						}
 
-						if (!hasConditionActualAmount) // if noo virtual good
+						if (!hasConditionActualAmount)
+						{
 							// exists, try complete
 							rlActualAmount = rl.getActualAmount(partMap);
+						}
 
 						if (!hasConditionAmount)
+						{
 							rlAmount = rl.getAmount(partMap);
+						}
 
 						if (JDFResourceLink.EnumUsage.Input.equals(rl.getUsage()))
 						{
@@ -4226,8 +4239,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets all children from the actual element matching the given conditions also get the non-overwritten elements in
-	 * the parents for partitioned resources
+	 * Gets all children from the actual element matching the given conditions also get the non-overwritten elements in the parents for partitioned resources
 	 * 
 	 * @param element elementname you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
@@ -4241,7 +4253,7 @@ public class JDFResource extends JDFElement
 	 * @default getChildElementVector(null, null, null, true, 0, false)
 	 */
 	@Override
-	public VElement getChildElementVector(String element, String nameSpaceURI, JDFAttributeMap mAttrib, boolean bAnd, int maxSize, boolean bResolveTarget)
+	public VElement getChildElementVector(final String element, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
 	{
 		VElement v = null;
 		final String nodeName = getNodeName();
@@ -4261,8 +4273,8 @@ public class JDFResource extends JDFElement
 				{
 					try
 					{
-						JDFRefElement ref = (JDFRefElement) kElem;
-						KElement target = ref.getTarget();
+						final JDFRefElement ref = (JDFRefElement) kElem;
+						final KElement target = ref.getTarget();
 
 						// in case there is no element for the REF, target will
 						// be null and will be skipped
@@ -4272,13 +4284,12 @@ public class JDFResource extends JDFElement
 							iSize++;
 						}
 					}
-					catch (JDFException ex)
+					catch (final JDFException ex)
 					{
 						// simply skip invalid refelements
 					}
 				}
-				else if ((bMapEmpty || kElem.includesAttributes(mAttrib, bAnd))
-						&& !nodeName.equals(kElem.getNodeName()))
+				else if ((bMapEmpty || kElem.includesAttributes(mAttrib, bAnd)) && !nodeName.equals(kElem.getNodeName()))
 				{
 					v.addElement(kElem);
 					if (++iSize == maxSize)
@@ -4311,12 +4322,14 @@ public class JDFResource extends JDFElement
 			{
 				final JDFResource r = (JDFResource) n;
 				// recurse into parents
-				VElement v2 = r.getChildElementVector(element, nameSpaceURI, mAttrib, bAnd, maxSize, bResolveTarget);
-				VString nodeNames = v.getElementNameVector(false);
+				final VElement v2 = r.getChildElementVector(element, nameSpaceURI, mAttrib, bAnd, maxSize, bResolveTarget);
+				final VString nodeNames = v.getElementNameVector(false);
 				for (int i = v2.size() - 1; i >= 0; i--)
 				{
 					if (nodeNames.contains(v2.item(i).getLocalName()))
+					{
 						v2.remove(i);
+					}
 				}
 				v.addAll(v2);
 			}
@@ -4326,8 +4339,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets a list of all partition keys that this resource may be implicitly partitioned by, e.g. RunIndex for
-	 * RunList...<br>
+	 * Gets a list of all partition keys that this resource may be implicitly partitioned by, e.g. RunIndex for RunList...<br>
 	 * gets overridden in subclasses
 	 * 
 	 * @return Vector of EnumPartIDKey
@@ -4340,15 +4352,15 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests if the given resources are compatible regarding their partitioning.
 	 * 
-	 * The resources are compatible if the PartIDKeys for the common start sequence of the PartIDKeys vectors are the
-	 * same. The resources are not compatible if one has PartIDKeys and the other not.
+	 * The resources are compatible if the PartIDKeys for the common start sequence of the PartIDKeys vectors are the same. The resources are not compatible if
+	 * one has PartIDKeys and the other not.
 	 * 
 	 * @param other the other resource to check.
 	 * 
 	 * @return boolean - <code>true</code> if partitioning of the other resource is compatible with this resource.
 	 */
 
-	public boolean isPartitioningCompatible(JDFResource other)
+	public boolean isPartitioningCompatible(final JDFResource other)
 	{
 		boolean isCompatible = false;
 
@@ -4364,20 +4376,24 @@ public class JDFResource extends JDFElement
 	/**
 	 * Tests if the resource is compatible with the given partition keys.
 	 * 
-	 * The resource is compatible if all PartIDKeys in vsPartitions are contained in this, regardless of sequence The
-	 * resource is not compatible if one has PartIDKeys and the other not.
+	 * The resource is compatible if all PartIDKeys in vsPartitions are contained in this, regardless of sequence The resource is not compatible if one has
+	 * PartIDKeys and the other not.
 	 * 
 	 * @param vsPartitions the given partition keys to compare
 	 * 
 	 * @return boolean - <code>true</code> if partitioning is compatible with this resource.
 	 */
-	public boolean isPartitioningCompatible(VString vsPartitions)
+	public boolean isPartitioningCompatible(final VString vsPartitions)
 	{
 		if (vsPartitions == null || vsPartitions.isEmpty())
+		{
 			return true;
+		}
 		final VString vsPartIDKeysThis = getPartIDKeys();
 		if (vsPartIDKeysThis == null || vsPartIDKeysThis.isEmpty())
+		{
 			return false;
+		}
 		return vsPartIDKeysThis.containsAll(vsPartitions);
 	}
 
@@ -4403,7 +4419,7 @@ public class JDFResource extends JDFElement
 			// end)
 			for (int i = nPartKeys - 1; i >= 0 && strPartIDKey == null; i--)
 			{
-				String str = vsPartKeys.stringAt(i);
+				final String str = vsPartKeys.stringAt(i);
 
 				if (amPartMap.containsKey(str))
 				{
@@ -4414,11 +4430,8 @@ public class JDFResource extends JDFElement
 			// Check found part ID key.
 			if (strPartIDKey != null)
 			{
-				if ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX))
-						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX))
+				if ((strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCCOPIES)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCRUNINDEX))
+						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_DOCSHEETINDEX)) || (strPartIDKey.equals(JDFConstants.PARTIDKEY_RUNINDEX))
 						|| (strPartIDKey.equals(JDFConstants.PARTIDKEY_SHEETINDEX))
 				// values not allowed according to JDF 1.2, 3.8.2.4
 				// || (strPartIDKey.equals (AttributeName.SORTING))
@@ -4499,9 +4512,9 @@ public class JDFResource extends JDFElement
 	 * @param source the resource to reference
 	 * @return JDFSourceResource - the element
 	 */
-	public JDFSourceResource createSourceResource(JDFResource source)
+	public JDFSourceResource createSourceResource(final JDFResource source)
 	{
-		JDFSourceResource sr = appendSourceResource();
+		final JDFSourceResource sr = appendSourceResource();
 		sr.refElement(source);
 		return sr;
 	}
@@ -4522,21 +4535,21 @@ public class JDFResource extends JDFElement
 	 * @param i the i'th sourceResource to get, 0=first etc.
 	 * @return JDFSourceResource - the sourceresource
 	 */
-	public JDFSourceResource getSourceResource(int i)
+	public JDFSourceResource getSourceResource(final int i)
 	{
 		return (JDFSourceResource) getElement(ElementName.SOURCERESOURCE, null, i);
 	}
 
 	/**
-	 * Gets of 'this' the iSkip-th IdentificationField element, optionally creates it, if it doesn't exist. If iSkip is
-	 * more than one larger than the number of elements, only one will be created and appended.
+	 * Gets of 'this' the iSkip-th IdentificationField element, optionally creates it, if it doesn't exist. If iSkip is more than one larger than the number of
+	 * elements, only one will be created and appended.
 	 * 
 	 * @param iSkip number of child IdentificationField elements to skip
 	 * @return JDFIdentificationField - the matching IdentificationField element
 	 * 
-	 *         default: getIdentificationField(0)
+	 * default: getIdentificationField(0)
 	 */
-	public JDFIdentificationField getCreateIdentificationField(int iSkip)
+	public JDFIdentificationField getCreateIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getCreateElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -4549,7 +4562,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getIdentificationField(0)
 	 */
-	public JDFIdentificationField getIdentificationField(int iSkip)
+	public JDFIdentificationField getIdentificationField(final int iSkip)
 	{
 		return (JDFIdentificationField) getElement(ElementName.IDENTIFICATIONFIELD, null, iSkip);
 	}
@@ -4571,7 +4584,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFAttributeMap getIdenticalMap()
 	{
-		JDFIdentical ident = getIdentical();
+		final JDFIdentical ident = getIdentical();
 		if (ident == null)
 		{
 			return null;
@@ -4613,12 +4626,12 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Sets the 1st-nth element as identical to the 0th elemennt ov vPartMap i.e. the partition leaves that match
-	 * vPartMap[1]...vPartMap[size-1] are set identical to vPartMap[0]
+	 * Sets the 1st-nth element as identical to the 0th elemennt ov vPartMap i.e. the partition leaves that match vPartMap[1]...vPartMap[size-1] are set
+	 * identical to vPartMap[0]
 	 * 
 	 * @param vPartMap VJDFAttributeMap to correspond to
 	 */
-	public void setIdentical(VJDFAttributeMap vPartMap)
+	public void setIdentical(final VJDFAttributeMap vPartMap)
 	{
 		if (vPartMap == null || vPartMap.size() < 2)
 		{
@@ -4636,13 +4649,13 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Appends new child Identifical element that refers to target also removes all subelements and attributes If an
-	 * identical already exists, the part element is overwritten
+	 * Appends new child Identifical element that refers to target also removes all subelements and attributes If an identical already exists, the part element
+	 * is overwritten
 	 * 
 	 * @param target the resource leaf that this leaf should reference as identical
 	 * 
 	 */
-	public void setIdentical(JDFResource target)
+	public void setIdentical(final JDFResource target)
 	{
 		if (target == null)
 		{
@@ -4658,13 +4671,13 @@ public class JDFResource extends JDFElement
 		}
 
 		final JDFAttributeMap targetMap = target.getPartMap();
-		JDFAttributeMap thisPart = getPartMap();
+		final JDFAttributeMap thisPart = getPartMap();
 		if (thisPart.equals(targetMap))
 		{
 			return; // dont set to this
 		}
 
-		JDFAttributeMap thisAllMap = getAttributeMap();
+		final JDFAttributeMap thisAllMap = getAttributeMap();
 		if (thisAllMap != null)
 		{
 			thisAllMap.removeKeys(thisPart.keySet());
@@ -4673,20 +4686,20 @@ public class JDFResource extends JDFElement
 
 		removeChildren(null, null, null);
 
-		JDFIdentical ident = (JDFIdentical) appendElement(ElementName.IDENTICAL);
+		final JDFIdentical ident = (JDFIdentical) appendElement(ElementName.IDENTICAL);
 		ident.setPartMap(targetMap);
 	}
 
 	/**
-	 * Gets of 'this' the iSkip-th QualityControlResult element, optionally creates it, if it doesn't exist. If iSkip is
-	 * more than one larger that the number of elements, only one will be created and appended.
+	 * Gets of 'this' the iSkip-th QualityControlResult element, optionally creates it, if it doesn't exist. If iSkip is more than one larger that the number of
+	 * elements, only one will be created and appended.
 	 * 
 	 * @param iSkip number of child QualityControlResult elements to skip
 	 * @return JDFQualityControlResult - the matching QualityControlResult element
 	 * 
 	 * @default getCreateQualityControlResult(0)
 	 */
-	public JDFQualityControlResult getCreateQualityControlResult(int iSkip)
+	public JDFQualityControlResult getCreateQualityControlResult(final int iSkip)
 	{
 		return (JDFQualityControlResult) getCreateElement(ElementName.QUALITYCONTROLRESULT, null, iSkip);
 	}
@@ -4699,7 +4712,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getQualityControlResult(0)
 	 */
-	public JDFQualityControlResult getQualityControlResult(int iSkip)
+	public JDFQualityControlResult getQualityControlResult(final int iSkip)
 	{
 		return (JDFQualityControlResult) getElement(ElementName.QUALITYCONTROLRESULT, null, iSkip);
 	}
@@ -4731,7 +4744,7 @@ public class JDFResource extends JDFElement
 	 * @default getUpdate(0)
 	 */
 	@Deprecated
-	public JDFResource getUpdate(int iSkip)
+	public JDFResource getUpdate(final int iSkip)
 	{
 		JDFResource updateResource = null;
 		KElement updateElement = null;
@@ -4753,7 +4766,7 @@ public class JDFResource extends JDFElement
 	 * @return JDFResource the matching Update element
 	 */
 	@Deprecated
-	public JDFResource getUpdate(String updateID)
+	public JDFResource getUpdate(final String updateID)
 	{
 		JDFResource updateResource = null;
 		KElement updateElement = null;
@@ -4787,7 +4800,7 @@ public class JDFResource extends JDFElement
 	 * @param updateID UpdateID of the element to remove
 	 */
 	@Deprecated
-	public void removeUpdate(String updateID)
+	public void removeUpdate(final String updateID)
 	{
 		getUpdate(updateID).deleteNode();
 	}
@@ -4801,7 +4814,7 @@ public class JDFResource extends JDFElement
 	 * @default removeUpdate(0)
 	 */
 	@Deprecated
-	public void removeUpdate(int iSkip)
+	public void removeUpdate(final int iSkip)
 	{
 		getUpdate(iSkip).deleteNode();
 	}
@@ -4818,7 +4831,7 @@ public class JDFResource extends JDFElement
 	 * @default appendUpdate(JDFConstants.EMPTYSTRING)
 	 */
 	@Deprecated
-	public JDFResource appendUpdate(String updateID)
+	public JDFResource appendUpdate(final String updateID)
 	{
 		String uid = updateID;
 		JDFResource r = null;
@@ -4887,7 +4900,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentName(String value)
+	public void setAgentName(final String value)
 	{
 		setAttribute(AttributeName.AGENTNAME, value);
 	}
@@ -4907,7 +4920,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setAgentVersion(String value)
+	public void setAgentVersion(final String value)
 	{
 		setAttribute(AttributeName.AGENTVERSION, value);
 	}
@@ -4927,7 +4940,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setAlternateBrand(String value)
+	public void setAlternateBrand(final String value)
 	{
 		setAttribute(AttributeName.ALTERNATEBRAND, value);
 	}
@@ -4947,7 +4960,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param amount value to set the attribute to
 	 */
-	public void setAmount(double amount)
+	public void setAmount(final double amount)
 	{
 		setAttribute(AttributeName.AMOUNT, amount, null);
 	}
@@ -4967,7 +4980,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setAmountProduced(double value)
+	public void setAmountProduced(final double value)
 	{
 		setAttribute(AttributeName.AMOUNTPRODUCED, value, null);
 	}
@@ -4983,111 +4996,11 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * append an empty GeneralID
-	 * 
-	 * @return the newly created GeneralID
-	 */
-	public JDFGeneralID appendGeneralID()
-	{
-		return (JDFGeneralID) appendElement(ElementName.GENERALID, null);
-	}
-
-	/**
-	 * append a GeneralID with idValue, duplicate entries are retained
-	 * 
-	 * @param idUsage the IDUsage attribute of the generalID
-	 * @param idValue the IDValue attribute of the generalID
-	 * @return the newly created GeneralID
-	 */
-	public JDFGeneralID appendGeneralID(String idUsage, String idValue)
-	{
-		JDFGeneralID gid = (JDFGeneralID) appendElement(ElementName.GENERALID);
-		gid.setIDValue(idValue);
-		gid.setIDUsage(idUsage);
-		return gid;
-	}
-
-	/**
-	 * gets attribute GeneralID
-	 * 
-	 * @param i get the i'th element that fits
-	 * @return the attribute value
-	 */
-	public JDFGeneralID getGeneralID(int i)
-	{
-		return (JDFGeneralID) getElement(ElementName.GENERALID, null, i);
-	}
-
-	/**
-	 * Creates or Updates a GeneralID with the IDUsage idUsage and IDValue=idValue all entries with a duplicate idUsage
-	 * are removed
-	 * 
-	 * @param idUsage usage to set the attribute to
-	 * @param idValue value to set the attribute to
-	 */
-	public void setGeneralID(String idUsage, String idValue)
-	{
-		JDFGeneralID gid = null;
-
-		VElement v = getChildElementVector_JDFElement(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
-		if (v.size() == 0)
-		{
-			gid = (JDFGeneralID) appendElement(ElementName.GENERALID);
-		}
-		else if (v.size() >= 1)
-		{
-			gid = (JDFGeneralID) v.elementAt(0);
-
-			for (int i = 1; i < v.size(); i++)
-			{
-				// remove any duplicates
-				(v.elementAt(i)).deleteNode();
-			}
-		}
-
-		if (gid != null)
-		{
-			gid.setIDValue(idValue);
-			gid.setIDUsage(idUsage);
-		}
-	}
-
-	/**
-	 * removes GeneralID with the IDUsage idUsage
-	 * 
-	 * @param idUsage value to set the attribute to
-	 */
-	public void removeGeneralID(String idUsage)
-	{
-		VElement v = getChildElementVector_JDFElement(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
-		for (int i = 0; i < v.size(); i++)
-		{
-			(v.elementAt(i)).deleteNode();
-		}
-	}
-
-	/**
-	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
-	 * 
-	 * @return double the attribute value
-	 */
-	public String getGeneralID(String idUsage)
-	{
-		VElement v = getChildElementVector(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
-		if (v.size() == 0)
-		{
-			return null;
-		}
-		JDFGeneralID gid = (JDFGeneralID) v.elementAt(0);
-		return gid.getIDValue();
-	}
-
-	/**
 	 * Sets attribute AmountRequired
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setAmountRequired(double value)
+	public void setAmountRequired(final double value)
 	{
 		setAttribute(AttributeName.AMOUNTREQUIRED, value, null);
 	}
@@ -5107,7 +5020,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setAuthor(String value)
+	public void setAuthor(final String value)
 	{
 		setAttribute(AttributeName.AUTHOR, value);
 	}
@@ -5127,7 +5040,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setBatchID(String value)
+	public void setBatchID(final String value)
 	{
 		setAttribute(AttributeName.BATCHID, value);
 	}
@@ -5147,7 +5060,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setBinderySignatureName(String value)
+	public void setBinderySignatureName(final String value)
 	{
 		setAttribute(AttributeName.BINDERYSIGNATURENAME, value);
 	}
@@ -5167,7 +5080,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setBlockName(String value)
+	public void setBlockName(final String value)
 	{
 		setAttribute(AttributeName.BLOCKNAME, value);
 	}
@@ -5187,7 +5100,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setBrand(String value)
+	public void setBrand(final String value)
 	{
 		setAttribute(AttributeName.BRAND, value);
 	}
@@ -5207,7 +5120,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setBundleItemIndex(JDFIntegerRangeList value)
+	public void setBundleItemIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.BUNDLEITEMINDEX, value.toString());
 	}
@@ -5219,12 +5132,12 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFIntegerRangeList getBundleItemIndex()
 	{
-		String strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, null);
+		final String strAttrName = getAttribute(AttributeName.BUNDLEITEMINDEX, null, null);
 		try
 		{
 			return new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -5236,7 +5149,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setCatalogDetails(String value)
+	public void setCatalogDetails(final String value)
 	{
 		setAttribute(AttributeName.CATALOGDETAILS, value);
 	}
@@ -5256,7 +5169,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setCatalogID(String value)
+	public void setCatalogID(final String value)
 	{
 		setAttribute(AttributeName.CATALOGID, value);
 	}
@@ -5276,7 +5189,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setCellIndex(JDFIntegerRangeList value)
+	public void setCellIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.CELLINDEX, value.toString());
 	}
@@ -5295,7 +5208,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -5307,7 +5220,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setCondition(String value)
+	public void setCondition(final String value)
 	{
 		setAttribute(AttributeName.CONDITION, value);
 	}
@@ -5327,7 +5240,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocCopies(JDFIntegerRangeList value)
+	public void setDocCopies(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCCOPIES, value.toString());
 	}
@@ -5346,7 +5259,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -5358,7 +5271,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocIndex(JDFIntegerRangeList value)
+	public void setDocIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCINDEX, value.toString());
 	}
@@ -5377,7 +5290,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -5390,7 +5303,7 @@ public class JDFResource extends JDFElement
 	 * @param iUnit a value between 0 and 9 to set DeliveryUnit<iUnit>
 	 * @param value the value to set the attribute to
 	 */
-	public void setDeliveryUnit(int iUnit, String value)
+	public void setDeliveryUnit(final int iUnit, final String value)
 	{
 		if (iUnit < 0 || iUnit > 9)
 		{
@@ -5407,7 +5320,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return String - the attribute value
 	 */
-	public String getDeliveryUnit(int iUnit)
+	public String getDeliveryUnit(final int iUnit)
 	{
 		if (iUnit < 0 || iUnit > 9)
 		{
@@ -5421,7 +5334,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocRunIndex(JDFIntegerRangeList value)
+	public void setDocRunIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCRUNINDEX, value.toString());
 	}
@@ -5440,7 +5353,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -5452,7 +5365,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setDocSheetIndex(JDFIntegerRangeList value)
+	public void setDocSheetIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.DOCSHEETINDEX, value.toString());
 	}
@@ -5471,7 +5384,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -5483,7 +5396,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setFountainNumber(int value)
+	public void setFountainNumber(final int value)
 	{
 		final Integer i = new Integer(value);
 		setAttribute(AttributeName.FOUNTAINNUMBER, i.toString());
@@ -5504,7 +5417,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setItemNames(String value)
+	public void setItemNames(final String value)
 	{
 		setAttribute(AttributeName.ITEMNAMES, value);
 	}
@@ -5524,7 +5437,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setLayerIDs(JDFIntegerRangeList value)
+	public void setLayerIDs(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.LAYERIDS, value.toString());
 	}
@@ -5543,7 +5456,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -5555,7 +5468,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocation(String value)
+	public void setLocation(final String value)
 	{
 		setAttribute(AttributeName.LOCATION, value);
 	}
@@ -5575,12 +5488,12 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setLocked(boolean value)
+	public void setLocked(final boolean value)
 	{
-		String localLock = getAttribute_KElement(AttributeName.LOCKED, null, null);
+		final String localLock = getAttribute_KElement(AttributeName.LOCKED, null, null);
 		if (localLock != null)
 		{
-			boolean b = localLock.equalsIgnoreCase(JDFConstants.TRUE);
+			final boolean b = localLock.equalsIgnoreCase(JDFConstants.TRUE);
 			if (b == value)
 			{
 				return; // don't reset to current value - NOP
@@ -5611,7 +5524,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setNoOp(boolean value)
+	public void setNoOp(final boolean value)
 	{
 		setAttribute(AttributeName.NOOP, value, null);
 	}
@@ -5631,7 +5544,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setOption(String value)
+	public void setOption(final String value)
 	{
 		setAttribute(AttributeName.OPTION, value);
 	}
@@ -5651,7 +5564,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setPageNumber(JDFIntegerRangeList value)
+	public void setPageNumber(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.PAGENUMBER, value.toString());
 	}
@@ -5670,7 +5583,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -5684,7 +5597,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @throws JDFException if here is an attempt to add implicit partition
 	 */
-	protected void addPartIDKey(EnumPartIDKey partType)
+	protected void addPartIDKey(final EnumPartIDKey partType)
 	{
 		final String s = partType.getName();
 		final JDFResource r = getResourceRoot();
@@ -5703,7 +5616,7 @@ public class JDFResource extends JDFElement
 	 * @param key the PartIDKey attribute name
 	 * @param value the value to set key to
 	 */
-	public void setPartIDKey(EnumPartIDKey key, String value)
+	public void setPartIDKey(final EnumPartIDKey key, final String value)
 	{
 		setAttribute(key.getName(), value, null);
 		addPartIDKey(key);
@@ -5730,7 +5643,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value enumeration value of the attribute PartUsage to be set
 	 */
-	public void setPartUsage(EnumPartUsage value)
+	public void setPartUsage(final EnumPartUsage value)
 	{
 		setAttribute(AttributeName.PARTUSAGE, value.getName(), null);
 	}
@@ -5750,7 +5663,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value enumeration value of the attribute PartUsage to be set
 	 */
-	public void setLotControl(EnumLotControl value)
+	public void setLotControl(final EnumLotControl value)
 	{
 		setAttribute(AttributeName.LOTCONTROL, value.getName(), null);
 	}
@@ -5770,7 +5683,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setPartVersion(String value)
+	public void setPartVersion(final String value)
 	{
 		setAttribute(AttributeName.PARTVERSION, value);
 	}
@@ -5790,7 +5703,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeID(String value)
+	public void setPipeID(final String value)
 	{
 		setAttribute(AttributeName.PIPEID, value);
 	}
@@ -5813,7 +5726,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @throws JDFException if the specified key is illegal
 	 */
-	public boolean hasPipePartIDKey(EnumPartIDKey key)
+	public boolean hasPipePartIDKey(final EnumPartIDKey key)
 	{
 		return hasAttribute(key.getName());
 	}
@@ -5824,7 +5737,7 @@ public class JDFResource extends JDFElement
 	 * @param key the PipePartIDKey attribute name
 	 * @return boolean - true, if key exists in this leaf is in PipePartIDKeys
 	 */
-	public boolean consistentPipePartIDKeys(EnumPartIDKey key)
+	public boolean consistentPipePartIDKeys(final EnumPartIDKey key)
 	{
 		final String s = key.getName();
 		if (!hasAttribute(s))
@@ -5849,7 +5762,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @throws JDFException if here is an attempt to add implicit partition
 	 */
-	public void addPipePartIDKey(EnumPartIDKey partType)
+	public void addPipePartIDKey(final EnumPartIDKey partType)
 	{
 		getResourceRoot().appendAttribute(AttributeName.PIPEPARTIDKEYS, partType.getName(), null, JDFConstants.BLANK, true);
 	}
@@ -5860,7 +5773,7 @@ public class JDFResource extends JDFElement
 	 * @param key the PipePartIDKey attribute name
 	 * @param value the value to set key to
 	 */
-	public void setPipePartIDKey(EnumPartIDKey key, String value)
+	public void setPipePartIDKey(final EnumPartIDKey key, final String value)
 	{
 		setAttribute(key.getName(), value);
 		addPipePartIDKey(key);
@@ -5875,14 +5788,13 @@ public class JDFResource extends JDFElement
 	{
 		Vector<ValuedEnum> v = null;
 
-		VString vPartIDKeys = getPartIDKeys();
+		final VString vPartIDKeys = getPartIDKeys();
 		v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
 		for (int i = 0; i < v.size(); i++)
 		{
 			if (!vPartIDKeys.contains(((EnumPartIDKey) v.elementAt(i)).getName()))
 			{
-				throw new JDFException("JDFResource.getPipePartIDKeys: key " + v.elementAt(i)
-						+ " is not subset of PartIDKey");
+				throw new JDFException("JDFResource.getPipePartIDKeys: key " + v.elementAt(i) + " is not subset of PartIDKey");
 			}
 		}
 		return v;
@@ -5897,8 +5809,8 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public VString getPipePartIDKeys()
 	{
-		VString vPipePartIDKeys = new VString();
-		Vector<ValuedEnum> v = getPipePartIDKeysEnum();
+		final VString vPipePartIDKeys = new VString();
+		final Vector<ValuedEnum> v = getPipePartIDKeysEnum();
 		for (int i = 0; i < v.size(); i++)
 		{
 			vPipePartIDKeys.add(((EnumPartIDKey) v.elementAt(i)).getName());
@@ -5912,7 +5824,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeProtocol(String value)
+	public void setPipeProtocol(final String value)
 	{
 		setAttribute(AttributeName.PIPEPROTOCOL, value);
 	}
@@ -5932,7 +5844,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setPipeURL(String value)
+	public void setPipeURL(final String value)
 	{
 		setAttribute(AttributeName.PIPEURL, value);
 	}
@@ -5952,7 +5864,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setPreflightRule(String value)
+	public void setPreflightRule(final String value)
 	{
 		setAttribute(AttributeName.PREFLIGHTRULE, value);
 	}
@@ -5972,7 +5884,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value enumeration value of attribute PreviewType to be set
 	 */
-	public void setPreviewType(JDFPart.EnumPreviewType value)
+	public void setPreviewType(final JDFPart.EnumPreviewType value)
 	{
 		setAttribute(AttributeName.PREVIEWTYPE, value.getName(), null);
 	}
@@ -5992,7 +5904,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setProductID(String value)
+	public void setProductID(final String value)
 	{
 		setAttribute(AttributeName.PRODUCTID, value);
 	}
@@ -6016,7 +5928,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @throws JDFException if here is attempt to set value as Class_Unknown or invalid class value
 	 */
-	public void setResourceClass(EnumResourceClass value)
+	public void setResourceClass(final EnumResourceClass value)
 	{
 		if (value == null)
 		{
@@ -6055,10 +5967,10 @@ public class JDFResource extends JDFElement
 	 * @param level level of attribute validation
 	 * @return boolean - true, if valid
 	 */
-	public boolean validResourceClass(EnumValidationLevel level)
+	public boolean validResourceClass(final EnumValidationLevel level)
 	{
 
-		boolean b = validAttribute(AttributeName.CLASS, null, level);
+		final boolean b = validAttribute(AttributeName.CLASS, null, level);
 		if (!b)
 		{
 			return false;
@@ -6081,7 +5993,7 @@ public class JDFResource extends JDFElement
 	 */
 	final public boolean validClass()
 	{
-		EnumResourceClass c = getValidClass();
+		final EnumResourceClass c = getValidClass();
 		if (c == null)
 		{
 			return true;
@@ -6108,7 +6020,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setGrossWeight(double value)
+	public void setGrossWeight(final double value)
 	{
 		setAttribute(AttributeName.GROSSWEIGHT, Double.toString(value));
 	}
@@ -6128,7 +6040,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setResourceWeight(double value)
+	public void setResourceWeight(final double value)
 	{
 		setAttribute(AttributeName.GROSSWEIGHT, Double.toString(value));
 	}
@@ -6148,7 +6060,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setRibbonName(String value)
+	public void setRibbonName(final String value)
 	{
 		setAttribute(AttributeName.RIBBONNAME, value);
 	}
@@ -6168,7 +6080,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setRun(String value)
+	public void setRun(final String value)
 	{
 		setAttribute(AttributeName.RUN, value, null);
 	}
@@ -6188,7 +6100,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunSet(String value)
+	public void setRunSet(final String value)
 	{
 		setAttribute(AttributeName.RUNSET, value, null);
 	}
@@ -6208,7 +6120,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunIndex(JDFIntegerRangeList value)
+	public void setRunIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.RUNINDEX, value.toString());
 	}
@@ -6227,7 +6139,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6239,7 +6151,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunPage(int value)
+	public void setRunPage(final int value)
 	{
 		setAttribute(AttributeName.RUNPAGE, value, null);
 	}
@@ -6259,7 +6171,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setRunTags(VString value)
+	public void setRunTags(final VString value)
 	{
 		final StringBuffer strBuff = new StringBuffer(100);
 		for (int i = 0; i < value.size(); i++)
@@ -6288,7 +6200,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSectionIndex(JDFIntegerRangeList value)
+	public void setSectionIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SECTIONINDEX, value.toString());
 	}
@@ -6307,7 +6219,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6319,7 +6231,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSeparation(String value)
+	public void setSeparation(final String value)
 	{
 		setAttribute(AttributeName.SEPARATION, value, null);
 	}
@@ -6339,7 +6251,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetDocIndex(JDFIntegerRangeList value)
+	public void setSetDocIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETDOCINDEX, value.toString());
 	}
@@ -6358,7 +6270,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6370,7 +6282,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetIndex(JDFIntegerRangeList value)
+	public void setSetIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETINDEX, value.toString());
 	}
@@ -6389,7 +6301,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6401,7 +6313,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetRunIndex(JDFIntegerRangeList value)
+	public void setSetRunIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETRUNINDEX, value.toString());
 	}
@@ -6420,7 +6332,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6432,7 +6344,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSetSheetIndex(JDFIntegerRangeList value)
+	public void setSetSheetIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SETSHEETINDEX, value.toString());
 	}
@@ -6451,7 +6363,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6463,7 +6375,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetIndex(JDFIntegerRangeList value)
+	public void setSheetIndex(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SHEETINDEX, value.toString());
 	}
@@ -6482,7 +6394,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6494,7 +6406,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSheetName(String value)
+	public void setSheetName(final String value)
 	{
 		setAttribute(AttributeName.SHEETNAME, value);
 	}
@@ -6514,7 +6426,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value enumeration value of attribute Side to be set
 	 */
-	public void setSide(JDFPart.EnumSide value)
+	public void setSide(final JDFPart.EnumSide value)
 	{
 		setAttribute(AttributeName.SIDE, value.getName(), null);
 	}
@@ -6534,7 +6446,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSignatureName(String value)
+	public void setSignatureName(final String value)
 	{
 		setAttribute(AttributeName.SIGNATURENAME, value);
 	}
@@ -6564,7 +6476,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setStationName(String value)
+	public void setStationName(final String value)
 	{
 		setAttribute(AttributeName.STATIONNAME, value);
 	}
@@ -6574,7 +6486,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setSortAmount(boolean value)
+	public void setSortAmount(final boolean value)
 	{
 		setAttribute(AttributeName.SORTAMOUNT, value, null);
 	}
@@ -6594,7 +6506,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setSorting(JDFIntegerRangeList value)
+	public void setSorting(final JDFIntegerRangeList value)
 	{
 		setAttribute(AttributeName.SORTING, value.toString(), null);
 	}
@@ -6613,7 +6525,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFIntegerRangeList(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6625,7 +6537,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the SpawnID token to append
 	 */
-	public void appendSpawnIDs(String value)
+	public void appendSpawnIDs(final String value)
 	{
 		appendAttribute(AttributeName.SPAWNIDS, value, null, JDFConstants.BLANK, true);
 	}
@@ -6636,7 +6548,7 @@ public class JDFResource extends JDFElement
 	 * @param value the SpawnID token to remove from the NMTOKENS list
 	 * @return int - the number of removed tokens
 	 */
-	public int removeFromSpawnIDs(String value)
+	public int removeFromSpawnIDs(final String value)
 	{
 		return removeFromAttribute(AttributeName.SPAWNIDS, value, null, JDFConstants.BLANK, -1);
 	}
@@ -6649,11 +6561,13 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getSpawnIDs(true)
 	 */
-	public VString getSpawnIDs(boolean bInherit)
+	public VString getSpawnIDs(final boolean bInherit)
 	{
 		final String attribute = bInherit ? getAttribute(AttributeName.SPAWNIDS, null, null) : getAttribute_KElement(AttributeName.SPAWNIDS, null, null);
 		if (attribute == null)
+		{
 			return null;
+		}
 		return StringUtil.tokenize(attribute, JDFConstants.BLANK, false);
 	}
 
@@ -6662,7 +6576,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param vStr the value to set the attribute to
 	 */
-	public void setSpawnIDs(VString vStr)
+	public void setSpawnIDs(final VString vStr)
 	{
 		setAttribute(AttributeName.SPAWNIDS, StringUtil.setvString(vStr, JDFConstants.BLANK, null, null), null);
 	}
@@ -6672,7 +6586,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param s enumeration value of the attribute SpawnStatus to be set
 	 */
-	public void setSpawnStatus(EnumSpawnStatus s)
+	public void setSpawnStatus(final EnumSpawnStatus s)
 	{
 		setAttribute(AttributeName.SPAWNSTATUS, s.getName(), null);
 	}
@@ -6694,7 +6608,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated use setResStatus(value, false)
 	 */
 	@Deprecated
-	public void setStatus(EnumResStatus value)
+	public void setStatus(final EnumResStatus value)
 	{
 		setAttribute(AttributeName.STATUS, value.getName(), null);
 	}
@@ -6707,7 +6621,7 @@ public class JDFResource extends JDFElement
 	 * @deprecated use setResStatus(value, bCleanLeaves)
 	 */
 	@Deprecated
-	public void setStatus(EnumResStatus value, boolean bCleanLeaves)
+	public void setStatus(final EnumResStatus value, final boolean bCleanLeaves)
 	{
 		setResStatus(value, bCleanLeaves);
 	}
@@ -6715,15 +6629,14 @@ public class JDFResource extends JDFElement
 	/**
 	 * Gets typesafe enumerated value of attribute Status
 	 * 
-	 * @param bRecurseRefs if bRecurseRefs is set, also recurse into all resources linked by rRefs and return the
-	 *            minimum status
+	 * @param bRecurseRefs if bRecurseRefs is set, also recurse into all resources linked by rRefs and return the minimum status
 	 * @return EnumResStatus attribute enumeration value
 	 * 
 	 * @default getStatus(false)
 	 * @deprecated use getResStatus(bRecurseRefs)
 	 */
 	@Deprecated
-	public JDFResource.EnumResStatus getStatus(boolean bRecurseRefs)
+	public JDFResource.EnumResStatus getStatus(final boolean bRecurseRefs)
 	{
 		return getResStatus(bRecurseRefs);
 	}
@@ -6736,7 +6649,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default setResStatus(value, false)
 	 */
-	public void setResStatus(EnumResStatus value, boolean bCleanLeaves)
+	public void setResStatus(final EnumResStatus value, final boolean bCleanLeaves)
 	{
 		if (bCleanLeaves)
 		{
@@ -6748,13 +6661,12 @@ public class JDFResource extends JDFElement
 	/**
 	 * Gets typesafe enumerated value of attribute Status
 	 * 
-	 * @param bRecurseRefs if bRecurseRefs is set, also recurse into all resources linked by rRefs and return the
-	 *            minimum status
+	 * @param bRecurseRefs if bRecurseRefs is set, also recurse into all resources linked by rRefs and return the minimum status
 	 * @return EnumResStatus - attribute enumeration value
 	 * 
 	 * @default getResStatus(false)
 	 */
-	public JDFResource.EnumResStatus getResStatus(boolean bRecurseRefs)
+	public JDFResource.EnumResStatus getResStatus(final boolean bRecurseRefs)
 	{
 		if (bRecurseRefs)
 		{
@@ -6791,21 +6703,25 @@ public class JDFResource extends JDFElement
 	 * @return EnumResStatus - the minimum Status enumeration value
 	 * 
 	 */
-	public EnumResStatus getStatusFromLeaves(boolean bAll)
+	public EnumResStatus getStatusFromLeaves(final boolean bAll)
 	{
 		EnumResStatus minStatus = null;
 
-		VElement v = getLeaves(bAll);
+		final VElement v = getLeaves(bAll);
 		if (v != null)
 		{
-			int siz = v.size();
+			final int siz = v.size();
 			for (int i = 0; i < siz; i++)
 			{
-				JDFResource r = (JDFResource) v.elementAt(i);
+				final JDFResource r = (JDFResource) v.elementAt(i);
 				if (minStatus == null)
+				{
 					minStatus = r.getResStatus(false);
+				}
 				else
+				{
 					minStatus = (EnumResStatus) EnumUtil.min(minStatus, r.getResStatus(false));
+				}
 			}
 		}
 
@@ -6820,7 +6736,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setTileID(JDFXYPair value)
+	public void setTileID(final JDFXYPair value)
 	{
 		setAttribute(AttributeName.TILEID, value.toString());
 	}
@@ -6839,7 +6755,7 @@ public class JDFResource extends JDFElement
 		{
 			nPlaceHolder = new JDFXYPair(strAttrName);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			// do nothing
 		}
@@ -6852,7 +6768,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setUnit(String value)
+	public void setUnit(final String value)
 	{
 		setAttribute(AttributeName.UNIT, value);
 	}
@@ -6872,7 +6788,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setUpdateID(String value)
+	public void setUpdateID(final String value)
 	{
 		setAttribute(AttributeName.UPDATEID, value, null);
 	}
@@ -6892,7 +6808,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setWebName(String value)
+	public void setWebName(final String value)
 	{
 		setAttribute(AttributeName.WEBNAME, value);
 	}
@@ -6912,7 +6828,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setWebProduct(String value)
+	public void setWebProduct(final String value)
 	{
 		setAttribute(AttributeName.WEBPRODUCT, value);
 	}
@@ -6932,7 +6848,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setWebSetup(String value)
+	public void setWebSetup(final String value)
 	{
 		setAttribute(AttributeName.WEBSETUP, value);
 	}
@@ -6954,7 +6870,7 @@ public class JDFResource extends JDFElement
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * 
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
-	 *            <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
 	 * 
 	 * @return KElement the specified element
 	 * @throws IllegalArgumentException if path is not supported
@@ -6982,25 +6898,23 @@ public class JDFResource extends JDFElement
 	 * Recursively adds the partition leaves defined in vPartMap
 	 * 
 	 * @param vPartMap the vector of maps of part keys
-	 * @param vPartIDKeys the vector of partIDKeys strings of the resource. If empty (the default) the Resource
-	 *            PartIDKeys attribute is used
+	 * @param vPartIDKeys the vector of partIDKeys strings of the resource. If empty (the default) the Resource PartIDKeys attribute is used
 	 * @return VElement - vector of newly created partitions
 	 * 
 	 * @throws JDFException if there are in the partMap not matching partitions
 	 * @throws JDFException if there is an attempt to fill non-matching partIDKeys
-	 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than
-	 *             one key
+	 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than one key
 	 * 
 	 * @default createPartitions(vPartMap, VString.emptyVector)
 	 */
-	public VElement createPartitions(VJDFAttributeMap vPartMap, VString vPartIDKeys)
+	public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
 	{
-		VElement v = new VElement();
-		VString tmp = new VString();
+		final VElement v = new VElement();
+		final VString tmp = new VString();
 		for (int i = 0; i < vPartMap.size(); i++)
 		{
-			JDFAttributeMap map = vPartMap.elementAt(i);
-			VElement vExist = getPartitionVector(map, null);
+			final JDFAttributeMap map = vPartMap.elementAt(i);
+			final VElement vExist = getPartitionVector(map, null);
 			if (vExist.isEmpty())
 			{
 				tmp.clear();
@@ -7027,7 +6941,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
-	public void setID(String value)
+	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);
 	}
@@ -7050,11 +6964,11 @@ public class JDFResource extends JDFElement
 	 * @param bForce
 	 * @return EnumValidationLevel - the modified level
 	 */
-	private EnumValidationLevel incompleteLevel(EnumValidationLevel level, boolean bForce)
+	private EnumValidationLevel incompleteLevel(final EnumValidationLevel level, final boolean bForce)
 	{
 		EnumValidationLevel levelLocal = level;
 
-		EnumResStatus es = getResStatus(false);
+		final EnumResStatus es = getResStatus(false);
 		if ((es == EnumResStatus.Incomplete) || isResourceUpdate() || bForce)
 		{
 			levelLocal = EnumValidationLevel.incompleteLevel(levelLocal);
@@ -7070,18 +6984,18 @@ public class JDFResource extends JDFElement
 	 * @return boolean - true, if 'this' is valid
 	 */
 	@Override
-	public boolean isValid(EnumValidationLevel level)
+	public boolean isValid(final EnumValidationLevel level)
 	{
 		EnumValidationLevel levelLocal = level;
 
-		boolean bRet = true;
+		final boolean bRet = true;
 
 		// it is supposed to be incomplete -> don't check for completeness
 		levelLocal = incompleteLevel(levelLocal, false);
 
 		final boolean bLeaf = isLeaf();
 		final EnumPartUsage partUsage = getResourceRoot().getPartUsage();
-		boolean bForceIncomplete = !(partUsage == EnumPartUsage.Implicit) || (partUsage == EnumPartUsage.Sparse);
+		final boolean bForceIncomplete = !(partUsage == EnumPartUsage.Implicit) || (partUsage == EnumPartUsage.Sparse);
 		if (bLeaf)
 		{
 			if (!super.isValid(levelLocal))
@@ -7154,7 +7068,7 @@ public class JDFResource extends JDFElement
 	 * @default getInvalidAttributes(EnumValidationLevel.Complete, true, 9999999)
 	 */
 	@Override
-	public VString getInvalidAttributes(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
+	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		final VString vAtts = super.getInvalidAttributes(level, bIgnorePrivate, nMax);
 
@@ -7184,7 +7098,7 @@ public class JDFResource extends JDFElement
 			for (int i = 0; i < size; i++)
 			{
 				final String keyName = partIDKeys.stringAt(i);
-				EnumPartIDKey nxt = EnumPartIDKey.getEnum(keyName);
+				final EnumPartIDKey nxt = EnumPartIDKey.getEnum(keyName);
 				if (!consistentPartIDKeys(nxt, root, partIDKeys))
 				{
 					vAtts.appendUnique(keyName);
@@ -7194,13 +7108,16 @@ public class JDFResource extends JDFElement
 					}
 				}
 				if (hasAttribute_KElement(keyName, null, false))
+				{
 					currentPartition = keyName;
+				}
 			}
 			if (currentPartition != null) // check for multiple identical
 			// partition attribute values
 			{
-				KElement parent = getParentNode_KElement();
-				VElement vThis = parent.getChildElementVector_KElement(getNodeName(), getNamespaceURI(), new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true, 999);
+				final KElement parent = getParentNode_KElement();
+				final VElement vThis = parent.getChildElementVector_KElement(getNodeName(), getNamespaceURI(), new JDFAttributeMap(currentPartition, getAttribute_KElement(currentPartition)), true,
+						999);
 				if (vThis.size() > 1)
 				{
 					vAtts.appendUnique(currentPartition);
@@ -7213,9 +7130,11 @@ public class JDFResource extends JDFElement
 		}
 		if (!EnumValidationLevel.isNoWarn(level) && isResourceRoot())
 		{
-			EnumPartUsage pu = getPartUsage();
+			final EnumPartUsage pu = getPartUsage();
 			if (EnumPartUsage.Sparse.equals(pu) && EnumVersion.Version_1_3.isGreater(getVersion(true)))
+			{
 				vAtts.add(AttributeName.PARTUSAGE);
+			}
 		}
 
 		return vAtts;
@@ -7229,23 +7148,27 @@ public class JDFResource extends JDFElement
 	public boolean deleteUnLinked()
 	{
 		boolean bRet = false;
-		VElement vLinks = getLinksAndRefs(true, true);
+		final VElement vLinks = getLinksAndRefs(true, true);
 
 		if (vLinks == null)
 		{
 			VElement vRefs = getRefElements();
 			if (vRefs != null)
 			{
-				VElement v2 = new VElement();
+				final VElement v2 = new VElement();
 				for (int j = 0; j < vRefs.size(); j++)
+				{
 					v2.add(((JDFRefElement) vRefs.get(j)).getTarget());
+				}
 				vRefs = v2;
 			}
 			deleteNode();
 			if (vRefs != null)
 			{
 				for (int j = 0; j < vRefs.size(); j++)
+				{
 					((JDFResource) vRefs.get(j)).deleteUnLinked();
+				}
 			}
 			bRet = true;
 		}
@@ -7263,7 +7186,7 @@ public class JDFResource extends JDFElement
 	/**
 	 * @param autoAgent the autoAgent to set
 	 */
-	public static void setAutoAgent(boolean _autoAgent)
+	public static void setAutoAgent(final boolean _autoAgent)
 	{
 		JDFResource.autoAgent = _autoAgent;
 	}
@@ -7274,10 +7197,12 @@ public class JDFResource extends JDFElement
 	 * @param namedResLink
 	 * @return
 	 */
-	public boolean matchesString(String namedResLink)
+	public boolean matchesString(final String namedResLink)
 	{
 		if (namedResLink == null)
+		{
 			return true;
+		}
 		return getLocalName().equals(namedResLink);
 	}
 

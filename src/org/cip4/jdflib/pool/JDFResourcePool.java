@@ -118,7 +118,7 @@ public class JDFResourcePool extends JDFPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFResourcePool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFResourcePool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -130,7 +130,7 @@ public class JDFResourcePool extends JDFPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFResourcePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFResourcePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -143,7 +143,7 @@ public class JDFResourcePool extends JDFPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFResourcePool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFResourcePool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -153,7 +153,7 @@ public class JDFResourcePool extends JDFPool
 	/**
 	 * this table contains only non standard versioned elements, i.e. first>=1.1 or deprecated
 	 */
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[90];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[91];
 	static
 	{
 		int i = 0;
@@ -221,6 +221,7 @@ public class JDFResourcePool extends JDFPool
 		elemInfoTable[i++] = new ElemInfoTable(ElementName.PREFLIGHTPROFILE, 0x44444433);
 		elemInfoTable[i++] = new ElemInfoTable(ElementName.PREFLIGHTREPORT, 0x33333311);
 		elemInfoTable[i++] = new ElemInfoTable(ElementName.PREFLIGHTREPORTRULEPOOL, 0x33333311);
+		elemInfoTable[i++] = new ElemInfoTable(ElementName.PREVIEW, 0x33333333);
 		elemInfoTable[i++] = new ElemInfoTable(ElementName.PRINTCONDITION, 0x33333311);
 		elemInfoTable[i++] = new ElemInfoTable(ElementName.PRINTROLLINGPARAMS, 0x33333311);
 		elemInfoTable[i++] = new ElemInfoTable(ElementName.PRODUCTIONPATH, 0x33333111);
@@ -253,7 +254,7 @@ public class JDFResourcePool extends JDFPool
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
-		return super.getTheElementInfo().updateAdd(elemInfoTable);
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
 	}
 
 	/**
@@ -264,7 +265,7 @@ public class JDFResourcePool extends JDFPool
 	 */
 	public static ElemInfoTable[] getLinkInfoTable()
 	{
-		ElemInfoTable[] elemInfoTableLink = new ElemInfoTable[elemInfoTable.length];
+		final ElemInfoTable[] elemInfoTableLink = new ElemInfoTable[elemInfoTable.length];
 		for (int i = 0; i < elemInfoTableLink.length; i++)
 		{
 			elemInfoTableLink[i] = new ElemInfoTable(elemInfoTable[i].getElementName() + JDFConstants.LINK, elemInfoTable[i].getValidityStatus());
@@ -318,7 +319,7 @@ public class JDFResourcePool extends JDFPool
 	 * 
 	 * @return JDFResource: the resource you were looking for, <code>null</code> if not found
 	 */
-	public JDFResource getResource(String strName, int i, String nameSpaceURI)
+	public JDFResource getResource(final String strName, final int i, final String nameSpaceURI)
 	{
 		final KElement poolChild = getPoolChild(i, strName, null, nameSpaceURI);
 
@@ -337,7 +338,7 @@ public class JDFResourcePool extends JDFPool
 	 * 
 	 * @return JDFResource: the appended resource
 	 */
-	public JDFResource appendResource(JDFResource res)
+	public JDFResource appendResource(final JDFResource res)
 	{
 		return (JDFResource) moveElement(res, null);
 	}
@@ -353,12 +354,12 @@ public class JDFResourcePool extends JDFPool
 	 * 
 	 * @return JDFResource: the appended resource
 	 */
-	public JDFResource appendResource(String strName, JDFResource.EnumResourceClass resClass, String nameSpaceURI)
+	public JDFResource appendResource(final String strName, final JDFResource.EnumResourceClass resClass, final String nameSpaceURI)
 	{
 		final KElement appElement = appendElement(strName, nameSpaceURI);
 		if (appElement instanceof JDFResource)
 		{
-			JDFResource r = (JDFResource) appElement;
+			final JDFResource r = (JDFResource) appElement;
 			if (!r.hasAttribute(AttributeName.CLASS) && resClass != null)
 			{
 				r.setResourceClass(resClass);
@@ -383,7 +384,7 @@ public class JDFResourcePool extends JDFPool
 	 * 
 	 */
 	@Deprecated
-	public VString copyResource(JDFResource r, JDFResource.EnumSpawnStatus copyStatus, VJDFAttributeMap vParts, String spawnID)
+	public VString copyResource(final JDFResource r, final JDFResource.EnumSpawnStatus copyStatus, final VJDFAttributeMap vParts, final String spawnID)
 	{
 		final Vector ss = getResIds();
 		final VString v = new VString();
@@ -480,9 +481,9 @@ public class JDFResourcePool extends JDFPool
 	 * @param nameSpaceURI
 	 * @return VElement - a vector with all elements in the pool matching the conditions
 	 * 
-	 *         default: GetPoolChildren(null, null, null)
+	 * default: GetPoolChildren(null, null, null)
 	 */
-	public VElement getPoolChildren(String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	public VElement getPoolChildren(final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		return getPoolChildren_JDFResourcePool(strName, mAttrib, nameSpaceURI);
 	}
@@ -496,7 +497,7 @@ public class JDFResourcePool extends JDFPool
 	 * @param nameSpaceURI namespace to search in
 	 * @return VElement - a vector with all elements in the pool matching the conditions
 	 */
-	private VElement getPoolChildren_JDFResourcePool(String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	private VElement getPoolChildren_JDFResourcePool(final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		final VElement v = getPoolChildrenGeneric(strName, mAttrib, nameSpaceURI);
 
@@ -522,7 +523,7 @@ public class JDFResourcePool extends JDFPool
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFResource: the pool child matching the conditions above
 	 */
-	public JDFResource getPoolChild(int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	public JDFResource getPoolChild(final int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		return getPoolChild_JDFResourcePool(i, strName, mAttrib, nameSpaceURI);
 	}
@@ -537,10 +538,10 @@ public class JDFResourcePool extends JDFPool
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFResource: the pool child matching the above conditions
 	 */
-	private JDFResource getPoolChild_JDFResourcePool(int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	private JDFResource getPoolChild_JDFResourcePool(final int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		int iLocal = i;
-		
+
 		final VElement v = getPoolChildren(strName, mAttrib, nameSpaceURI);
 		if (iLocal < 0)
 		{
@@ -569,7 +570,7 @@ public class JDFResourcePool extends JDFPool
 	 * @return Vector of unknown element nodenames
 	 */
 	@Override
-	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
 
@@ -581,7 +582,7 @@ public class JDFResourcePool extends JDFPool
 	 * @param id the ID of the requested resource
 	 * @return JDFResource: the resource, empty element if it does not exist
 	 */
-	public JDFResource getResourceByID(String id)
+	public JDFResource getResourceByID(final String id)
 	{
 		final KElement e = getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		return (e instanceof JDFResource) ? (JDFResource) e : null;
@@ -596,15 +597,15 @@ public class JDFResourcePool extends JDFPool
 	 * @return HashSet: the vector of referenced resource IDs
 	 */
 	@Override
-	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
+	public HashSet getAllRefs(final HashSet vDoneRefs, final boolean bRecurse)
 	{
 		HashSet vDoneRefsLocal = vDoneRefs;
-		
-		VElement vResources = getPoolChildren(null, null, null);
+
+		final VElement vResources = getPoolChildren(null, null, null);
 		final int size = vResources.size();
 		for (int i = 0; i < size; i++)
 		{
-			JDFResource r = (JDFResource) vResources.elementAt(i);
+			final JDFResource r = (JDFResource) vResources.elementAt(i);
 			vDoneRefsLocal = r.getResourceRoot().getAllRefs(vDoneRefsLocal, bRecurse);
 		}
 
@@ -617,17 +618,18 @@ public class JDFResourcePool extends JDFPool
 	 * Mother of all version fixing routines<br>
 	 * 
 	 * Uses heuristics to modify this element and its children to be compatible with a given version.<br>
-	 * In general, it will be able to move from low to high versions, but potentially fail when attempting to move from
-	 * higher to lower versions.
+	 * In general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions.
 	 * 
 	 * @param version version that the resulting element should correspond to
 	 * @return true if successful
 	 */
 	@Override
-	public boolean fixVersion(EnumVersion version)
+	public boolean fixVersion(final EnumVersion version)
 	{
 		if (hasAttribute(AttributeName.RREFS))
+		{
 			removeAttribute(AttributeName.RREFS);
+		}
 		return super.fixVersion(version);
 	}
 
@@ -640,15 +642,19 @@ public class JDFResourcePool extends JDFPool
 	 */
 	public VElement getUnlinkedResources()
 	{
-		VElement v = getPoolChildren(null, null, null);
+		final VElement v = getPoolChildren(null, null, null);
 		if (v == null || v.size() == 0)
+		{
 			return null;
+		}
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
-			JDFResource r = (JDFResource) v.elementAt(i);
-			VElement v2 = r.getLinksAndRefs(true, true);
+			final JDFResource r = (JDFResource) v.elementAt(i);
+			final VElement v2 = r.getLinksAndRefs(true, true);
 			if (v2 != null)
+			{
 				v.removeElementAt(i);
+			}
 		}
 		return v.size() == 0 ? null : v;
 	}

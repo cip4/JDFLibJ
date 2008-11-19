@@ -173,7 +173,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[12];
+	private static AtrInfoTable[] atrInfoTable_Abstract = new AtrInfoTable[15];
 	static
 	{
 		atrInfoTable_Abstract[0] = new AtrInfoTable(AttributeName.COMBINEDPROCESSINDEX, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
@@ -188,6 +188,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		atrInfoTable_Abstract[9] = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
 		atrInfoTable_Abstract[10] = new AtrInfoTable(AttributeName.RSUBREF, 0x44444433, AttributeInfo.EnumAttributeType.IDREF, null, null);
 		atrInfoTable_Abstract[11] = new AtrInfoTable(AttributeName.USAGE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumUsage.getEnum(0), null);
+		atrInfoTable_Abstract[12] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable_Abstract[13] = new AtrInfoTable(AttributeName.START, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
+		atrInfoTable_Abstract[14] = new AtrInfoTable(AttributeName.STARTOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Physical = new AtrInfoTable[10];
@@ -205,13 +208,10 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		atrInfoTable_Physical[2] = new AtrInfoTable(AttributeName.TRANSFORMATION, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
 	}
 
-	private static AtrInfoTable[] atrInfoTable_Implement = new AtrInfoTable[4];
+	private static AtrInfoTable[] atrInfoTable_Implement = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable_Implement[0] = new AtrInfoTable(AttributeName.DURATION, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
-		atrInfoTable_Implement[1] = new AtrInfoTable(AttributeName.RECOMMENDATION, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
-		atrInfoTable_Implement[2] = new AtrInfoTable(AttributeName.START, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
-		atrInfoTable_Implement[3] = new AtrInfoTable(AttributeName.STARTOFFSET, 0x33333333, AttributeInfo.EnumAttributeType.duration, null, null);
+		atrInfoTable_Implement[0] = new AtrInfoTable(AttributeName.RECOMMENDATION, 0x44444433, AttributeInfo.EnumAttributeType.boolean_, null, null);
 	}
 
 	@Override

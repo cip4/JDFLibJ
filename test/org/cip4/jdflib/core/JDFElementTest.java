@@ -120,8 +120,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * @author MuchaD
  * 
- *         This implements the first fixture with unit tests for class
- *         JDFElement.
+ * This implements the first fixture with unit tests for class JDFElement.
  */
 public class JDFElementTest extends JDFTestCaseBase
 {
@@ -138,29 +137,29 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testAppendElement()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		KElement r = d.getRoot();
-		KElement e = r.appendElement("e");
+		final JDFDoc d = new JDFDoc("JDF");
+		final KElement r = d.getRoot();
+		final KElement e = r.appendElement("e");
 		assertEquals(e.getNamespaceURI(), JDFElement.getSchemaURL());
-		KElement foo = e.appendElement("pt:foo", "www.pt.com");
+		final KElement foo = e.appendElement("pt:foo", "www.pt.com");
 		assertEquals(foo.getNamespaceURI(), "www.pt.com");
-		KElement bar = foo.appendElement("bar");
+		final KElement bar = foo.appendElement("bar");
 		assertNotNull(bar.getNamespaceURI());
-		KElement foo2 = bar.appendElement("pt:foo", "www.pt.com");
+		final KElement foo2 = bar.appendElement("pt:foo", "www.pt.com");
 		assertEquals(foo2.getNamespaceURI(), "www.pt.com");
 	}
 
 	public void testCopyElement()
 	{
-		JDFDoc d = new JDFDoc("d1");
-		JDFElement e = (JDFElement) d.getRoot();
-		JDFDoc d2 = new JDFDoc("d2");
-		JDFElement e2 = (JDFElement) d2.getRoot();
-		KElement e3 = e.copyElement(e2, null);
-		JDFParser p = new JDFParser();
-		JDFDoc dp = p.parseString("<Device xmlns=\"www.CIP4.org/JDFSchema_1_1\"/>");
-		KElement ep = dp.getRoot();
-		KElement e4 = e.copyElement(ep, null);
+		final JDFDoc d = new JDFDoc("d1");
+		final JDFElement e = (JDFElement) d.getRoot();
+		final JDFDoc d2 = new JDFDoc("d2");
+		final JDFElement e2 = (JDFElement) d2.getRoot();
+		final KElement e3 = e.copyElement(e2, null);
+		final JDFParser p = new JDFParser();
+		final JDFDoc dp = p.parseString("<Device xmlns=\"www.CIP4.org/JDFSchema_1_1\"/>");
+		final KElement ep = dp.getRoot();
+		final KElement e4 = e.copyElement(ep, null);
 		assertEquals(e4.hasAttribute("xmlns"), ep.hasAttribute("xmlns"));
 		assertEquals(e3.getNamespaceURI(), e.getNamespaceURI());
 		assertFalse(d.toString().indexOf("xmlns=\"\"") >= 0);
@@ -173,10 +172,10 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetElement_KElement()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode root = d.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
-		JDFMedia m = xm.appendMedia();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode root = d.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
+		final JDFMedia m = xm.appendMedia();
 		m.makeRootResource(null, null, true);
 		assertNull(xm.getElement_KElement("Media", null, 0));
 		assertNotNull(xm.getElement_JDFElement("Media", null, 0));
@@ -188,11 +187,11 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetElement_JDFElement()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode root = d.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
-		JDFMedia m = xm.appendMedia();
-		JDFResource r = m.makeRootResource(null, null, true);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode root = d.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
+		final JDFMedia m = xm.appendMedia();
+		final JDFResource r = m.makeRootResource(null, null, true);
 		assertNull(xm.getElement_KElement("Media", null, 0));
 		assertNotNull(xm.getElement_JDFElement("Media", null, 0));
 		assertEquals(xm.getElement_JDFElement("Media", null, 0), r);
@@ -205,10 +204,10 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetChildElementVector_KElement()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode root = d.getJDFRoot();
-		JDFExposedMedia xm = (JDFExposedMedia) root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
-		JDFMedia m = xm.appendMedia();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode root = d.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) root.addResource("ExposedMedia", null, EnumUsage.Input, null, null, null, null);
+		final JDFMedia m = xm.appendMedia();
 		m.makeRootResource(null, null, true);
 		assertEquals(xm.getChildElementVector_KElement("Media", null, null, true, -1).size(), 0);
 		assertEquals(xm.getChildElementVector_JDFElement("Media", null, null, true, -1, true).size(), 1);
@@ -217,11 +216,11 @@ public class JDFElementTest extends JDFTestCaseBase
 	private void _setUp()
 	{
 		// setup the fixture
-		String xmlFile = "bookintent.jdf";
+		final String xmlFile = "bookintent.jdf";
 
 		// test jdf functions
 		// ==================
-		JDFParser p = new JDFParser();
+		final JDFParser p = new JDFParser();
 		m_jdfDoc = p.parseFile(sm_dirTestData + xmlFile);
 
 		assertTrue(sm_dirTestData + xmlFile + ": Parse Error", m_jdfDoc != null);
@@ -234,12 +233,12 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testNameSpaceElement()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JDF);
-		JDFNode root = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode root = doc.getJDFRoot();
 		root.setType("foo:bar", false);
 		root.addNameSpace("foo", "www.foo.com");
-		JDFResource r = root.addResource("foo:res", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
-		JDFResourceLink rl = root.getLink(r, null);
+		final JDFResource r = root.addResource("foo:res", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
+		final JDFResourceLink rl = root.getLink(r, null);
 		rl.setPartMap(new JDFAttributeMap("Side", "Front"));
 		assertEquals(rl.toString().indexOf("xmlns=\"\""), -1);
 		assertEquals(rl.getPart(0).toString().indexOf("xmlns=\"\""), -1);
@@ -247,8 +246,8 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testRemoveExtensions()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.appendElement("a:b", "a.com");
 		n.getAuditPool().appendElement("a:b", "a.com");
 		n.getAuditPool().setAttribute("a:b", "c", "a.com");
@@ -259,21 +258,21 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testRemoveChild()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
-		JDFExposedMedia xmpl = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", EnumProcessUsage.Plate, null);
-		JDFExposedMedia xmpr = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", EnumProcessUsage.Proof, null);
+		final JDFExposedMedia xmpl = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", EnumProcessUsage.Plate, null);
+		final JDFExposedMedia xmpr = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", EnumProcessUsage.Proof, null);
 		JDFMedia m = xmpr.appendMedia();
 		assertNotNull(xmpr.getMedia());
 		m.setID("id1");
-		KElement t1 = n.getTarget("id1", "ID");
+		final KElement t1 = n.getTarget("id1", "ID");
 		m = (JDFMedia) m.makeRootResource(null, null, true);
 		assertEquals(t1, m);
 		assertNotNull(xmpr.getMedia());
 		xmpl.refElement(m);
 		assertNotNull(xmpl.getMedia());
-		JDFResourcePool rp = n.getResourcePool();
+		final JDFResourcePool rp = n.getResourcePool();
 		assertNotNull(rp.getElement("Media"));
 		xmpl.removeChild("Media", null, 0);
 		assertNull(xmpl.getMedia());
@@ -285,15 +284,15 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testGetHRefs()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
-		JDFExposedMedia xmpl = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", EnumProcessUsage.Plate, null);
-		JDFExposedMedia xmpr = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", EnumProcessUsage.Proof, null);
+		final JDFExposedMedia xmpl = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", EnumProcessUsage.Plate, null);
+		final JDFExposedMedia xmpr = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", EnumProcessUsage.Proof, null);
 		JDFMedia m = xmpr.appendMedia();
 		assertNotNull(xmpr.getMedia());
 		m.setID("id1");
-		KElement t1 = n.getTarget("id1", "ID");
+		final KElement t1 = n.getTarget("id1", "ID");
 		m = (JDFMedia) m.makeRootResource(null, null, true);
 		assertEquals(t1, m);
 		assertTrue(n.getHRefs(null, true, false).contains("id1"));
@@ -308,10 +307,10 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testFixVersion()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.Bundling);
-		JDFProcessRun pr = n.getAuditPool().addProcessRun(EnumNodeStatus.Completed, null, null);
+		final JDFProcessRun pr = n.getAuditPool().addProcessRun(EnumNodeStatus.Completed, null, null);
 		pr.setAttribute("Duration", "PT90S", null);
 		assertEquals(pr.getAttribute("Duration"), "PT90S");
 		n.setAttribute("foo3", "a~.doc");
@@ -325,13 +324,14 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testDefaultVersion()
 	{
+
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
-		assertEquals(n.getVersion(true), EnumVersion.Version_1_3);
+		assertEquals(n.getVersion(true), defaultVersion);
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_2);
 		n.setType("ProcessGroup", true);
 		n = n.addJDFNode("Combined");
-		assertEquals(n.getVersion(true), EnumVersion.Version_1_3);
+		assertEquals(n.getVersion(true), defaultVersion);
 
 		doc = new JDFDoc("JDF");
 		n = doc.getJDFRoot();
@@ -341,7 +341,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(n.getVersion(true), EnumVersion.Version_1_2);
 
 		doc = new JDFDoc("JMF");
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFJMF jmf = doc.getJMFRoot();
 		assertEquals(jmf.getVersion(true), EnumVersion.Version_1_2);
 
 	}
@@ -383,8 +383,8 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGenerateDotID()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode e = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode e = doc.getJDFRoot();
 		final String dotID = e.generateDotID("foo", null);
 		e.setAttribute("foo", dotID, null);
 		assertNotNull(dotID);
@@ -429,8 +429,8 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertTrue("isInside (600 800) = ", m_jdfElement.includesMatchingAttribute("Range", "600 800", AttributeInfo.EnumAttributeType.XYPairRangeList));
 		assertFalse("isOutside(500 700) = ", m_jdfElement.includesMatchingAttribute("Range", "500 700", AttributeInfo.EnumAttributeType.XYPairRangeList));
 
-		JDFDoc d = new JDFDoc("JDF");
-		JDFElement e = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFElement e = d.getJDFRoot();
 		e.setAttribute("abc", "a b c");
 		assertTrue("b", e.includesMatchingAttribute("abc", "a", EnumAttributeType.NMTOKENS));
 		assertTrue("b", e.includesMatchingAttribute("abc", "b", EnumAttributeType.NMTOKENS));
@@ -451,13 +451,13 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetRefElement()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFMedia m = (JDFMedia) n.addResource("Media", null);
-		JDFMedia m1 = (JDFMedia) m.addPartition(EnumPartIDKey.Location, "T1");
-		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.Location, "T2");
-		JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", null);
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFMedia m = (JDFMedia) n.addResource("Media", null);
+		final JDFMedia m1 = (JDFMedia) m.addPartition(EnumPartIDKey.Location, "T1");
+		final JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.Location, "T2");
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", null);
 		assertNull(xm.getRefElement(m1));
-		JDFRefElement re = xm.refElement(m2);
+		final JDFRefElement re = xm.refElement(m2);
 		assertEquals(xm.getRefElement(m2), re);
 		assertEquals(xm.getRefElement(m2), re);
 		assertEquals(xm.getMedia(), m2);
@@ -473,9 +473,9 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetCreateElement()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFMedia m = (JDFMedia) n.addResource("Media", null);
-		JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", null);
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFMedia m = (JDFMedia) n.addResource("Media", null);
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", null);
 		xm.refMedia(m);
 		assertEquals(xm.getCreateElement("Media"), m);
 	}
@@ -487,15 +487,15 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetCreateRefElement()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
-		JDFMedia m = (JDFMedia) n.addResource("Media", null);
-		JDFMedia m1 = (JDFMedia) m.addPartition(EnumPartIDKey.Location, "T1");
-		JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.Location, "T2");
-		JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", null);
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFMedia m = (JDFMedia) n.addResource("Media", null);
+		final JDFMedia m1 = (JDFMedia) m.addPartition(EnumPartIDKey.Location, "T1");
+		final JDFMedia m2 = (JDFMedia) m.addPartition(EnumPartIDKey.Location, "T2");
+		final JDFExposedMedia xm = (JDFExposedMedia) n.addResource("ExposedMedia", null);
 		assertNull(xm.getRefElement(m1));
 		for (int i = 0; i < 10; i++)
 		{
-			JDFRefElement re = xm.getCreateRefElement(m2);
+			final JDFRefElement re = xm.getCreateRefElement(m2);
 			assertEquals(xm.getRefElement(m2), re);
 			assertEquals(xm.getRefElement(m2), re);
 			assertEquals(xm.getMedia(), m2);
@@ -505,7 +505,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		}
 		for (int i = 0; i < 10; i++)
 		{
-			JDFRefElement re = xm.getCreateRefElement(m2);
+			final JDFRefElement re = xm.getCreateRefElement(m2);
 			assertEquals(xm.getRefElement(m2), re);
 			assertEquals(xm.getCreateRefElement(m2), re);
 			xm.getCreateRefElement(m);
@@ -525,7 +525,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		_setUp();
 		VElement velem = m_jdfRoot.getChildElementVector(null, null, null, true, 0, false);
 		assertEquals(velem.size(), 5);
-		KElement elem = velem.elementAt(0);
+		final KElement elem = velem.elementAt(0);
 		assertEquals(elem.getNodeName(), "AuditPool");
 		velem = m_jdfRoot.getChildElementVector(null, null, null, true, 3, false);
 		assertEquals(velem.size(), 3);
@@ -538,15 +538,15 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetChildElementVector_or() throws Exception
 	{
-		JDFDoc d = new JDFDoc("AmountPool");
-		JDFAmountPool ap = (JDFAmountPool) d.getRoot();
-		JDFAttributeMap partMap = new JDFAttributeMap("a", "a1");
+		final JDFDoc d = new JDFDoc("AmountPool");
+		final JDFAmountPool ap = (JDFAmountPool) d.getRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap("a", "a1");
 		partMap.put("b", "b1");
-		JDFPartAmount pa1 = ap.appendPartAmount();
+		final JDFPartAmount pa1 = ap.appendPartAmount();
 		pa1.setAttributes(partMap);
 		partMap.put("a", "a2");
 		partMap.put("b", "b2");
-		JDFPartAmount pa2 = ap.appendPartAmount();
+		final JDFPartAmount pa2 = ap.appendPartAmount();
 		pa2.setAttributes(partMap);
 		VElement v = ap.getChildElementVector(ElementName.PARTAMOUNT, null, partMap, false, 0, false);
 		assertEquals(v.size(), 1);
@@ -563,8 +563,8 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetParentJDFStatic()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFElement root = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFElement root = d.getJDFRoot();
 		assertNull(JDFElement.getParentJDF(root));
 		assertNull(JDFElement.getParentJDF(null));
 		KElement k = root.appendElement("NodeInfo");
@@ -579,10 +579,10 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testGetSettingsPolicy()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		assertNull(n.getSettingsPolicy(false));
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 		assertNull(ap.getSettingsPolicy(true));
 		n.setSettingsPolicy(EnumSettingsPolicy.MustHonor);
 		assertEquals(ap.getSettingsPolicy(true), EnumSettingsPolicy.MustHonor);
@@ -596,10 +596,10 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testGetParentJDFNode()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.setType("ProcessGroup", true);
-		JDFNode n2 = n.addJDFNode("Scanning");
+		final JDFNode n2 = n.addJDFNode("Scanning");
 		assertEquals("n2.parent n", n2.getParentJDF(), n);
 		assertNull("n parent", n.getParentJDF());
 		JDFAuditPool ap = n.getCreateAuditPool();
@@ -618,32 +618,38 @@ public class JDFElementTest extends JDFTestCaseBase
 	public void testGetElementByID()
 	{
 		_setUp();
-		KElement kelem = m_jdfRoot.getChildWithAttribute("*", "ID", "*", "n0006", 0, true);
+		final KElement kelem = m_jdfRoot.getChildWithAttribute("*", "ID", "*", "n0006", 0, true);
 		assertTrue("kelem==null", kelem != null);
 		if (kelem == null)
+		{
 			return; // soothe findbugs ;)
-		String strAtrib = kelem.getAttribute("ID", "", "");
+		}
+		final String strAtrib = kelem.getAttribute("ID", "", "");
 		assertTrue("ID!=n0006", strAtrib.equals("n0006"));
 
 		// second try
-		KElement kelem2 = m_jdfRoot.getTarget("n0006", "ID");
+		final KElement kelem2 = m_jdfRoot.getTarget("n0006", "ID");
 		assertTrue("kelem2==null", kelem2 != null);
 		if (kelem2 == null)
+		{
 			return; // soothe findbugs ;)
-		String strAtrib2 = kelem2.getAttribute("ID", "", "");
+		}
+		final String strAtrib2 = kelem2.getAttribute("ID", "", "");
 		assertTrue("ID!=n0006", strAtrib2.equals("n0006"));
 
 		// third try
-		KElement kelem3 = m_jdfRoot.getTarget("198", "Preferred");
+		final KElement kelem3 = m_jdfRoot.getTarget("198", "Preferred");
 		assertTrue("kelem3==null", kelem3 != null);
 		if (kelem3 == null)
+		{
 			return; // soothe findbugs ;)
-		String strAtrib3 = kelem3.getAttribute("Preferred", "", "");
+		}
+		final String strAtrib3 = kelem3.getAttribute("Preferred", "", "");
 		assertTrue("Preferred!=198", strAtrib3.equals("198"));
 
 		// fourth try: GetChildWithAttribute does only find direct children but
 		// no deep children
-		KElement kelem4 = m_jdfRoot.getChildWithAttribute("*", "Preferred", "*", "198", 0, true);
+		final KElement kelem4 = m_jdfRoot.getChildWithAttribute("*", "Preferred", "*", "198", 0, true);
 		assertTrue("kelem4!=null", kelem4 == null);
 	}
 
@@ -685,24 +691,24 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testInheritedVersionInfo()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		JDFNode node = doc.getJDFRoot();
 		node.setVersion(JDFElement.EnumVersion.Version_1_3);
 		node.setType(JDFConstants.PROCESSGROUP, true);
 		node = node.addJDFNode("Scanning");
-		JDFNodeInfo ni = node.appendNodeInfo();
+		final JDFNodeInfo ni = node.appendNodeInfo();
 		assertTrue(ni.hasAttribute(AttributeName.CLASS));
 		assertEquals(ni.getVersion(true), EnumVersion.Version_1_3);
 	}
 
 	public void testMatchesPathKElement()
 	{
-		JDFDoc doc = new JDFDoc("Test"); // make sure we call jdf methods
-		KElement root = doc.getRoot();
-		KElement a = root.appendElement("a");
+		final JDFDoc doc = new JDFDoc("Test"); // make sure we call jdf methods
+		final KElement root = doc.getRoot();
+		final KElement a = root.appendElement("a");
 		root.appendElement("b");
-		KElement a2 = root.appendElement("a");
-		KElement a3 = root.appendElement("a");
+		final KElement a2 = root.appendElement("a");
+		final KElement a3 = root.appendElement("a");
 		a.setAttribute("att", "42");
 		assertTrue(a.matchesPath("//a", false));
 		assertTrue(a.matchesPath("/Test/a", false));
@@ -716,24 +722,24 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testMatchesPath()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JDF);
-		JDFNode node = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode node = doc.getJDFRoot();
 		node.setType("Product", true);
 		node.setVersion(JDFElement.EnumVersion.Version_1_3);
 		JDFNodeInfo ni = node.appendNodeInfo();
 		ni = (JDFNodeInfo) ni.addPartition(EnumPartIDKey.Run, "R1");
-		JDFContact c = (JDFContact) node.addResource(ElementName.CONTACT, null, null, null, null, null, null);
+		final JDFContact c = (JDFContact) node.addResource(ElementName.CONTACT, null, null, null, null, null, null);
 		ni.refElement(c);
-		JDFComChannel cc = (JDFComChannel) node.addResource(ElementName.COMCHANNEL, null, null, null, null, null, null);
+		final JDFComChannel cc = (JDFComChannel) node.addResource(ElementName.COMCHANNEL, null, null, null, null, null, null);
 		c.refElement(cc);
 		assertTrue("contact", ni.getContact() == c);
 		assertTrue("hasrefelement", ni.hasChildElement(ElementName.CONTACT, null));
-		JDFRefElement re = (JDFRefElement) ni.getElement("ContactRef");
+		final JDFRefElement re = (JDFRefElement) ni.getElement("ContactRef");
 		assertTrue("refelementok", re.getTarget() == c);
 		assertTrue("comchannel", c.getComChannel(0) == cc);
 		assertTrue("hasrefelement", c.hasChildElement(ElementName.COMCHANNEL, null));
-		JDFNode n2 = node.addProduct();
-		JDFNodeInfo ni2 = n2.appendNodeInfo();
+		final JDFNode n2 = node.addProduct();
+		final JDFNodeInfo ni2 = n2.appendNodeInfo();
 		ni2.refElement(c);
 		assertTrue("follow refs in matchespath", c.matchesPath("ResourcePool/NodeInfo/Contact", true));
 		assertTrue("follow refs in matchespath", cc.matchesPath("ResourcePool/NodeInfo/Contact/ComChannel", true));
@@ -751,21 +757,21 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testRefElement()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JDF);
-		JDFNode node = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode node = doc.getJDFRoot();
 		node.setType("Product", true);
 		node.setVersion(JDFElement.EnumVersion.Version_1_2);
-		JDFNodeInfo ni = node.appendNodeInfo();
+		final JDFNodeInfo ni = node.appendNodeInfo();
 		ni.appendElement("foo:bar", "www.foo.com"); // want a non jdf ns element
 		// to see if any class casts
 		// occur
 		JDFContact c = (JDFContact) node.addResource(ElementName.CONTACT, null, null, null, null, null, null);
-		VString vCTypes = new VString();
+		final VString vCTypes = new VString();
 		vCTypes.add("Customer");
 		c.setContactTypes(vCTypes);
 
 		ni.refElement(c);
-		JDFComChannel cc = (JDFComChannel) node.addResource(ElementName.COMCHANNEL, null, null, null, null, null, null);
+		final JDFComChannel cc = (JDFComChannel) node.addResource(ElementName.COMCHANNEL, null, null, null, null, null, null);
 		c.refElement(cc);
 
 		assertEquals("contact", ni.getChildWithMatchingAttribute(ElementName.CONTACT, "ContactTypes", null, "Customer", 0, true, null), c);
@@ -777,8 +783,8 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertTrue("refelementok", re.getTarget() == c);
 		assertTrue("comchannel", c.getComChannel(0) == cc);
 		assertTrue("hasrefelement", c.hasChildElement(ElementName.COMCHANNEL, null));
-		JDFNode n2 = node.addProduct();
-		JDFNodeInfo ni2 = n2.appendNodeInfo();
+		final JDFNode n2 = node.addProduct();
+		final JDFNodeInfo ni2 = n2.appendNodeInfo();
 		ni2.refElement(c);
 		assertTrue("follow refs in matchespath", c.matchesPath("NodeInfo/Contact", true));
 		assertTrue("follow refs in matchespath", cc.matchesPath("NodeInfo/Contact/ComChannel", true));
@@ -814,22 +820,31 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testIsValid()
 	{
-		File testData = new File(sm_dirTestData + "SampleFiles");
+		final File testData = new File(sm_dirTestData + "SampleFiles");
 		assertTrue("testData dir", testData.isDirectory());
-		File[] fList = testData.listFiles();
-		JDFParser p = new JDFParser();
-		JDFParser p2 = new JDFParser();
+		final File[] fList = testData.listFiles();
+		final JDFParser p = new JDFParser();
+		final JDFParser p2 = new JDFParser();
 		p2.m_SchemaLocation = sm_dirTestSchema + "JDF.xsd";
 
 		for (int i = 0; i < fList.length; i++)
 		{
-			File file = fList[i];
+			final File file = fList[i];
 			// skip directories in CVS environments
 			if (file.isDirectory())
+			{
 				continue;
+			}
 			// skip schema files
 			if (file.getPath().endsWith(".xsd"))
+			{
 				continue;
+			}
+			// skip schema files
+			if (file.getPath().endsWith(".validate.xml"))
+			{
+				continue;
+			}
 
 			System.out.println("Parsing: " + file.getPath());
 			JDFDoc jdfDoc = p.parseFile(file.getPath());
@@ -855,28 +870,32 @@ public class JDFElementTest extends JDFTestCaseBase
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// ///////
 
 	public void testIsInvalid()
 	{
-		File testData = new File(sm_dirTestData + "BadSampleFiles");
+		final File testData = new File(sm_dirTestData + "BadSampleFiles");
 		assertTrue("testData dir", testData.isDirectory());
-		File[] fList = testData.listFiles();
-		JDFParser p = new JDFParser();
-		JDFParser p2 = new JDFParser();
+		final File[] fList = testData.listFiles();
+		final JDFParser p = new JDFParser();
+		final JDFParser p2 = new JDFParser();
 		p2.m_SchemaLocation = sm_dirTestSchema + "JDF.xsd";
 
 		for (int i = 0; i < fList.length; i++)
 		{
-			File file = fList[i];
+			final File file = fList[i];
 			// skip directories in CVS environments
 			if (file.isDirectory())
+			{
 				continue;
+			}
 
 			// skip schema files
 			if (file.getPath().endsWith(".xsd"))
+			{
 				continue;
+			}
 
 			System.out.println("Parsing: " + file.getPath());
 			JDFDoc jdfDoc = p.parseFile(file.getPath());
@@ -921,12 +940,14 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testUniqueID()
 	{
-		HashSet<String> m = new HashSet<String>();
+		final HashSet<String> m = new HashSet<String>();
 		for (int i = 0; i < 200000; i++)
 		{
-			String s = JDFElement.uniqueID(0);
+			final String s = JDFElement.uniqueID(0);
 			if (m.contains(s))
+			{
 				fail("oops");
+			}
 			m.add(s);
 		}
 	}
@@ -938,8 +959,8 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testInvalidNameSpace()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFElement e = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFElement e = doc.getJDFRoot();
 		String s = JDFConstants.JDFNAMESPACE;
 		s = StringUtil.replaceString(s, "_1_1", "_1_3");
 		JDFElement e2 = (JDFElement) e.appendElement("ResourcePool", s);
@@ -953,16 +974,18 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	public void testAppendAnchor()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFElement e = doc.getJDFRoot();
-		HashSet<String> m = new HashSet<String>();
-		KElement e2 = e.appendElement("e2");
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFElement e = doc.getJDFRoot();
+		final HashSet<String> m = new HashSet<String>();
+		final KElement e2 = e.appendElement("e2");
 		for (int i = 0; i < 10000; i++)
 		{
 			final JDFElement appendElement = (JDFElement) e2.appendElement("FooBar");
-			String s = appendElement.appendAnchor(null);
+			final String s = appendElement.appendAnchor(null);
 			if (m.contains(s))
+			{
 				fail("oops");
+			}
 			assertEquals(s, appendElement.getID());
 			assertTrue(s.indexOf("..") < 0);
 			m.add(s);
@@ -980,11 +1003,11 @@ public class JDFElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 	public void testSetEnumerationsAttribute()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFElement root = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFElement root = d.getJDFRoot();
 		root.setEnumerationsAttribute("dummy", null, null);
 		assertNull(root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.Aborted, false));
-		Vector<EnumNodeStatus> v = new Vector<EnumNodeStatus>();
+		final Vector<EnumNodeStatus> v = new Vector<EnumNodeStatus>();
 		v.add(EnumNodeStatus.Cleanup);
 		v.add(EnumNodeStatus.Completed);
 		root.setEnumerationsAttribute("dummy", v, null);
@@ -1000,80 +1023,90 @@ public class JDFElementTest extends JDFTestCaseBase
 		// compare EnumNodeStatus
 		JDFAuditPool myAuditPool = null;
 
-		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
+		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 
-		JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
+		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
 		assertTrue("No Root found", jdfRoot != null);
 		if (jdfRoot == null)
+		{
 			return; // soothe findbugs ;)
+		}
 
-		JDFAncestor ancestor = jdfRoot.appendAncestorPool().appendAncestor();
+		final JDFAncestor ancestor = jdfRoot.appendAncestorPool().appendAncestor();
 		ancestor.setStatus(EnumNodeStatus.Completed);
 
 		myAuditPool = jdfRoot.getCreateAuditPool();
-		JDFPhaseTime phaseTime = myAuditPool.addPhaseTime(JDFElement.EnumNodeStatus.Completed, null, null);
-		JDFSpawned spawned = myAuditPool.addSpawned(jdfRoot, null, null, null, null);
+		final JDFPhaseTime phaseTime = myAuditPool.addPhaseTime(JDFElement.EnumNodeStatus.Completed, null, null);
+		final JDFSpawned spawned = myAuditPool.addSpawned(jdfRoot, null, null, null, null);
 		spawned.setStatus(JDFElement.EnumNodeStatus.Completed);
 
 		assertEquals(spawned.getStatus(), phaseTime.getStatus());
 		assertEquals(spawned.getStatus(), ancestor.getStatus());
 
-		JDFDoc jmfDoc = new JDFDoc(ElementName.JMF);
+		final JDFDoc jmfDoc = new JDFDoc(ElementName.JMF);
 
-		JDFJMF jmfRoot = jmfDoc.getJMFRoot();
+		final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
 		assertTrue("No Root found", jmfRoot != null);
 		if (jmfRoot == null)
+		{
 			return; // soothe findbugs ;)
+		}
 
-		JDFAcknowledge acknowledge = jmfRoot.appendAcknowledge();
+		final JDFAcknowledge acknowledge = jmfRoot.appendAcknowledge();
 		acknowledge.setType("PipePush"); // Type is required and its existance
 		// is validated for messages
-		JDFJobPhase jobPhase = acknowledge.appendJobPhase();
+		final JDFJobPhase jobPhase = acknowledge.appendJobPhase();
 		jobPhase.setStatus(EnumNodeStatus.Completed);
 
-		JDFMessage message = jmfRoot.appendMessageElement(EnumFamily.Command, null);
+		final JDFMessage message = jmfRoot.appendMessageElement(EnumFamily.Command, null);
 		message.setType("PipePush"); // Type is required and its existance is
 		// validated for messages
-		JDFPipeParams pipeParams = message.appendPipeParams();
+		final JDFPipeParams pipeParams = message.appendPipeParams();
 		pipeParams.setStatus(EnumNodeStatus.Completed);
 
 		assertEquals(jobPhase.getStatus(), pipeParams.getStatus());
 		assertEquals(spawned.getStatus(), pipeParams.getStatus());
 
 		// compare EnumResStatus
-		JDFDoc responseDoc = new JDFDoc(ElementName.RESPONSE);
-		JDFResponse responseRoot = (JDFResponse) responseDoc.getRoot();
+		final JDFDoc responseDoc = new JDFDoc(ElementName.RESPONSE);
+		final JDFResponse responseRoot = (JDFResponse) responseDoc.getRoot();
 		assertTrue("No Root found", responseRoot != null);
 		if (responseRoot == null)
+		{
 			return; // soothe findbugs ;)
+		}
 
 		responseRoot.setType(ElementName.RESOURCE);
-		JDFResourceInfo resInfo = responseRoot.appendResourceInfo();
+		final JDFResourceInfo resInfo = responseRoot.appendResourceInfo();
 		resInfo.setResStatus(EnumResStatus.Available);
 
-		JDFDoc commandDoc = new JDFDoc(ElementName.COMMAND);
-		JDFCommand commandRoot = (JDFCommand) commandDoc.getRoot();
+		final JDFDoc commandDoc = new JDFDoc(ElementName.COMMAND);
+		final JDFCommand commandRoot = (JDFCommand) commandDoc.getRoot();
 		assertTrue("No Root found", commandRoot != null);
 		if (commandRoot == null)
+		{
 			return; // soothe findbugs ;)
+		}
 
 		commandRoot.setType(ElementName.RESOURCE);
-		JDFResourceCmdParams resCmdParams = commandRoot.appendResourceCmdParams();
+		final JDFResourceCmdParams resCmdParams = commandRoot.appendResourceCmdParams();
 		resCmdParams.setResStatus(EnumResStatus.Available);
 
 		assertEquals(resInfo.getStatus(), resCmdParams.getStatus());
 
 		// check EnumQueueStatus
-		JDFDoc queueDoc = new JDFDoc(ElementName.QUEUE);
-		JDFQueue queueRoot = (JDFQueue) queueDoc.getRoot();
+		final JDFDoc queueDoc = new JDFDoc(ElementName.QUEUE);
+		final JDFQueue queueRoot = (JDFQueue) queueDoc.getRoot();
 		assertTrue("No Root found", queueRoot != null);
 		if (queueRoot == null)
+		{
 			return; // soothe findbugs ;)
+		}
 
 		queueRoot.setQueueStatus(EnumQueueStatus.Running);
 
 		// check EnumQueueEntryStatus
-		JDFQueueEntry queueEntry = queueRoot.appendQueueEntry();
+		final JDFQueueEntry queueEntry = queueRoot.appendQueueEntry();
 		queueEntry.setQueueEntryStatus(EnumQueueEntryStatus.Running);
 	}
 

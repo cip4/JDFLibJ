@@ -101,36 +101,35 @@ import org.cip4.jdflib.util.JDFDate;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
-	static protected final String sm_dirTestSchema = ".." + File.separator + "schema" + File.separator + "Version_1_4"
-			+ File.separator;
+	static protected final String sm_dirTestSchema = ".." + File.separator + "schema" + File.separator + "Version_1_4" + File.separator;
 	static protected final String sm_dirTestData = "test" + File.separator + "data" + File.separator;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
+	static protected final EnumVersion defaultVersion = EnumVersion.Version_1_4;
 
 	protected static JDFDoc creatXMDoc()
 	{
-		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
 		n.setJobPartID("P1");
 		n.setJobID("J1");
 		n.setType("ConventionalPrinting", true);
 		n.appendElement("NS:Foobar", "www.foobar.com");
 
 		n.appendMatchingResource("Layout", JDFNode.EnumProcessUsage.AnyInput, null);
-		JDFComponent comp = (JDFComponent) n.appendMatchingResource("Component", JDFNode.EnumProcessUsage.AnyOutput, null);
-		JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.Plate, null);
-		JDFNodeInfo ni = n.appendNodeInfo();
-		JDFMedia m = xm.appendMedia();
+		final JDFComponent comp = (JDFComponent) n.appendMatchingResource("Component", JDFNode.EnumProcessUsage.AnyOutput, null);
+		final JDFExposedMedia xm = (JDFExposedMedia) n.appendMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.Plate, null);
+		final JDFNodeInfo ni = n.appendNodeInfo();
+		final JDFMedia m = xm.appendMedia();
 		m.appendElement("NS:FoobarMedia", "www.foobar.com");
 
 		assertEquals("m Class", m.getResourceClass(), EnumResourceClass.Consumable);
 
-		VString vs = new VString();
+		final VString vs = new VString();
 		vs.add("SignatureName");
 		vs.add("SheetName");
 		vs.add("Side");
 
-		JDFAttributeMap mPart1 = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFAttributeMap mPart1 = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart1.put("SheetName", "S1");
 		mPart1.put("Side", "Front");
 		xm.getCreatePartition(mPart1, vs);
@@ -185,13 +184,14 @@ public abstract class JDFTestCaseBase extends TestCase
 	protected String senderID;
 	protected long mem;
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
+		JDFElement.setDefaultJDFVersion(defaultVersion);
 		senderID = "TestSender";
 		JDFJMF.setTheSenderID(senderID);
 		JDFElement.uniqueID(1);
@@ -236,16 +236,16 @@ public abstract class JDFTestCaseBase extends TestCase
 	 * @param doc the doc to preparein
 	 * @return the new customerInfo
 	 */
-	protected JDFCustomerInfo prepareCustomerInfo(JDFDoc doc)
+	protected JDFCustomerInfo prepareCustomerInfo(final JDFDoc doc)
 	{
-		JDFNode n = doc.getJDFRoot();
-		JDFCustomerInfo info = n.appendCustomerInfo();
+		final JDFNode n = doc.getJDFRoot();
+		final JDFCustomerInfo info = n.appendCustomerInfo();
 		info.setCustomerID("MISCustomerID");
-		VString vct = new VString();
+		final VString vct = new VString();
 		vct.add("Customer");
-		JDFContact contact = info.appendContact();
+		final JDFContact contact = info.appendContact();
 		contact.setContactTypes(vct);
-		JDFPerson p = contact.appendPerson();
+		final JDFPerson p = contact.appendPerson();
 		p.setFamilyName("LastName");
 		p.setFirstName("FirstName");
 		p.appendComChannel().setPhoneNumber("+49 123 4567", null, EnumChannelType.Phone);
@@ -255,11 +255,11 @@ public abstract class JDFTestCaseBase extends TestCase
 		return info;
 	}
 
-	protected JDFNodeInfo prepareNodeInfo(JDFDoc doc)
+	protected JDFNodeInfo prepareNodeInfo(final JDFDoc doc)
 	{
-		JDFNode n = doc.getJDFRoot();
-		JDFNodeInfo ni = n.getCreateNodeInfo();
-		JDFDate date = new JDFDate();
+		final JDFNode n = doc.getJDFRoot();
+		final JDFNodeInfo ni = n.getCreateNodeInfo();
+		final JDFDate date = new JDFDate();
 		ni.setFirstStart(date);
 		date.addOffset(0, 0, 0, 5);
 		ni.setLastEnd(date);

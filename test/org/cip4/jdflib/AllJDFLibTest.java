@@ -196,6 +196,7 @@ import org.cip4.jdflib.resource.process.JDFMediaTest;
 import org.cip4.jdflib.resource.process.JDFPRItemTest;
 import org.cip4.jdflib.resource.process.JDFPageDataTest;
 import org.cip4.jdflib.resource.process.JDFPersonTest;
+import org.cip4.jdflib.resource.process.JDFPreviewTest;
 import org.cip4.jdflib.resource.process.JDFRunListTest;
 import org.cip4.jdflib.resource.process.JDFTileTest;
 import org.cip4.jdflib.resource.process.JDFUsageCounterTest;
@@ -385,6 +386,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFMediaTest.class);
 		suite.addTestSuite(JDFPageDataTest.class);
 		suite.addTestSuite(JDFPersonTest.class);
+		suite.addTestSuite(JDFPreviewTest.class);
 		suite.addTestSuite(JDFPRItemTest.class);
 		suite.addTestSuite(JDFRunListTest.class);
 		suite.addTestSuite(JDFTileTest.class);

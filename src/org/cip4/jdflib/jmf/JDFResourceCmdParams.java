@@ -84,6 +84,9 @@ import java.util.Vector;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
@@ -116,7 +119,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	/**
 	 * container for applying resource commands to commands
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
+	 * 
 	 */
 	protected class ApplyCommand
 	{
@@ -126,22 +129,28 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * 
 		 * @param parentNode the node to search in
 		 */
-		void applyResourceCommand(JDFNode parentNode)
+		void applyResourceCommand(final JDFNode parentNode)
 		{
 			if (parentNode == null)
+			{
 				return;
-			
-			VElement vNodes = parentNode.getvJDFNode(null, null, false);
+			}
+
+			final VElement vNodes = parentNode.getvJDFNode(null, null, false);
 
 			final int size = vNodes.size();
 			for (int i = 0; i < size; i++)
 			{
 				final JDFNode node = (JDFNode) vNodes.elementAt(i);
 				if (!matchesNode(node))
+				{
 					continue;
-				JDFResource resCmd = getResource(null);
+				}
+				final JDFResource resCmd = getResource(null);
 				if (resCmd == null)
+				{
 					continue;
+				}
 
 				final boolean isIncremental = (getUpdateMethod() == EnumUpdateMethod.Incremental);
 
@@ -162,7 +171,9 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 				{
 					resTarget = createNewResource(node, resCmd);
 					if (resTarget == null)
+					{
 						continue;
+					}
 				}
 
 				// get the most granular list of partIDKeys from the cmd or resource
@@ -171,16 +182,20 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 				final int sizTarget = vsPartIDKeys == null ? 0 : vsPartIDKeys.size();
 				final int sizCmd = vsPartIDKeysCmd == null ? 0 : vsPartIDKeysCmd.size();
 				if (sizCmd > sizTarget)
+				{
 					vsPartIDKeys = vsPartIDKeysCmd;
+				}
 
 				final int sizeParts = vamParts == null ? 1 : vamParts.size();
 				for (int j = 0; j < sizeParts; j++)
 				{
-					JDFAttributeMap amParts = vamParts == null ? null : vamParts.elementAt(j);
+					final JDFAttributeMap amParts = vamParts == null ? null : vamParts.elementAt(j);
 					final JDFResource resTargetPart = resTarget.getCreatePartition(amParts, vsPartIDKeys);
 					if (resTargetPart == null)
+					{
 						continue;
-					
+					}
+
 					final String id = resTargetPart.getID();
 					if (!isIncremental)
 					{
@@ -188,13 +203,13 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 						resTargetPart.flush();
 						resTargetPart.setAttributes(map);
 					}
-					
-					JDFResource resCmdPart = resCmd.getPartition(amParts, EnumPartUsage.Implicit);
-					JDFAttributeMap map = resCmdPart.getAttributeMap();
-					VString keys = map.getKeys();
+
+					final JDFResource resCmdPart = resCmd.getPartition(amParts, EnumPartUsage.Implicit);
+					final JDFAttributeMap map = resCmdPart.getAttributeMap();
+					final VString keys = map.getKeys();
 					if (keys != null)
 					{
-						int keySize = keys.size();
+						final int keySize = keys.size();
 						for (int k = 0; k < keySize; k++)
 						{
 							final String key = keys.elementAt(k);
@@ -206,11 +221,11 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 							}
 						}
 					}
-					
+
 					resTargetPart.mergeElement(resCmdPart, false);
 					resTarget.setID(id);
 				}
-				
+
 				if (sizeParts > 0 && resTarget instanceof JDFNodeInfo)
 				{
 					fixNodeStatusFromNodeInfo(node, resTarget);
@@ -222,27 +237,35 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * @param node
 		 * @return the target resource
 		 */
-		private JDFResource getTargetResource(JDFNode node)
+		private JDFResource getTargetResource(final JDFNode node)
 		{
 			if (node == null)
+			{
 				return null;
-			JDFResourceLinkPool rlp = node.getResourceLinkPool();
+			}
+			final JDFResourceLinkPool rlp = node.getResourceLinkPool();
 			if (rlp == null)
+			{
 				return null;
-			String resID = getResourceID();
+			}
+			final String resID = getResourceID();
 			if (resID != null && !resID.equals(""))
 			{
-				VElement vRes = rlp.getLinkedResources(null, null, new JDFAttributeMap(AttributeName.ID, resID), false);
+				final VElement vRes = rlp.getLinkedResources(null, null, new JDFAttributeMap(AttributeName.ID, resID), false);
 				if (vRes.size() > 0)
+				{
 					return (JDFResource) vRes.elementAt(0);
+				}
 			}
 
-			String resName = getResourceName();
+			final String resName = getResourceName();
 			if (resName != null && !resName.equals(""))
 			{
-				VElement vRes = rlp.getLinkedResources(resName, null, null, false);
+				final VElement vRes = rlp.getLinkedResources(resName, null, null, false);
 				if (vRes.size() > 0)
+				{
 					return (JDFResource) vRes.elementAt(0);
+				}
 
 				// TODO link usage, process usage etc.
 
@@ -254,19 +277,27 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * @param node
 		 * @return true if it matches
 		 */
-		private boolean matchesNode(JDFNode node)
+		private boolean matchesNode(final JDFNode node)
 		{
 			if (node == null)
+			{
 				return false;
+			}
 			boolean bMatch = true;
-			String jobID = StringUtil.getNonEmpty(getJobID());
+			final String jobID = StringUtil.getNonEmpty(getJobID());
 			if (jobID != null)
+			{
 				bMatch = jobID.equals(node.getJobID(true));
+			}
 			if (!bMatch)
+			{
 				return false;
-			String jobPartID = StringUtil.getNonEmpty(getJobPartID());
+			}
+			final String jobPartID = StringUtil.getNonEmpty(getJobPartID());
 			if (jobPartID != null)
+			{
 				bMatch = jobPartID.equals(node.getJobPartID(true));
+			}
 			return bMatch;
 		}
 
@@ -275,14 +306,14 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * @param resCmd
 		 * @return the new resource
 		 */
-		private JDFResource createNewResource(final JDFNode node, JDFResource resCmd)
+		private JDFResource createNewResource(final JDFNode node, final JDFResource resCmd)
 		{
 			JDFResource resTarget = null;
-			EnumUsage u = getUsage();
+			final EnumUsage u = getUsage();
 			if (u != null)
 			{
 				resTarget = (JDFResource) node.getCreateResourcePool().copyElement(resCmd, null);
-				JDFResourceLink rl = node.linkResource(resTarget, u, null);
+				final JDFResourceLink rl = node.linkResource(resTarget, u, null);
 				rl.copyAttribute(AttributeName.PROCESSUSAGE, JDFResourceCmdParams.this);
 				resTarget = getTargetResource(node);
 			}
@@ -293,15 +324,17 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		 * @param node the jdf node
 		 * @param resTarget
 		 */
-		private void fixNodeStatusFromNodeInfo(final JDFNode node, JDFResource resTarget)
+		private void fixNodeStatusFromNodeInfo(final JDFNode node, final JDFResource resTarget)
 		{
-			EnumNodeStatus nodeStatus = node.getStatus();
+			final EnumNodeStatus nodeStatus = node.getStatus();
 			if (!EnumNodeStatus.Part.equals(nodeStatus) && !EnumNodeStatus.Pool.equals(node.getStatus()))
 			{
 				node.setStatus(EnumNodeStatus.Part);
-				JDFNodeInfo ni = (JDFNodeInfo) resTarget;
+				final JDFNodeInfo ni = (JDFNodeInfo) resTarget;
 				if (!ni.hasAttribute(AttributeName.NODESTATUS))
+				{
 					ni.setNodeStatus(nodeStatus);
+				}
 			}
 		}
 
@@ -313,7 +346,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFResourceCmdParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFResourceCmdParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -325,7 +358,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFResourceCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFResourceCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -338,9 +371,22 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFResourceCmdParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFResourceCmdParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		int i = 0;
+		elemInfoTable[i++] = new ElemInfoTable(ElementName.PREVIEW, 0x33333333);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
 	}
 
 	/**
@@ -360,10 +406,10 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param resName name of the resource to get/create
 	 * @return JDFResource the element
 	 */
-	public JDFResource getCreateResource(String resName)
+	public JDFResource getCreateResource(final String resName)
 	{
-		JDFResource r = null;
-		KElement e = getCreateElement(resName, JDFConstants.EMPTYSTRING, 0);
+		final JDFResource r = null;
+		final KElement e = getCreateElement(resName, JDFConstants.EMPTYSTRING, 0);
 		if (!(e instanceof JDFResource))
 		{
 			throw new JDFException("JDFResourceCmdParams.getCreateResource tried to create a JDFElement instead of a JDFResource");
@@ -377,11 +423,11 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param resName name of the resource to get, if null get the one and only resource
 	 * @return JDFResource the element, null if none exists
 	 */
-	public JDFResource getResource(String resName)
+	public JDFResource getResource(final String resName)
 	{
 		if (resName != null)
 		{
-			KElement e = getElement(resName, null, 0);
+			final KElement e = getElement(resName, null, 0);
 			if (e instanceof JDFResource)
 			{
 				return (JDFResource) e;
@@ -389,14 +435,18 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		}
 		else
 		{
-			String resName2 = getResourceName();
+			final String resName2 = getResourceName();
 			if (resName2 != null && !resName2.equals(""))
+			{
 				return getResource(resName2);
+			}
 			KElement e2 = getFirstChildElement();
 			while (e2 != null)
 			{
 				if (e2 instanceof JDFResource)
+				{
 					return (JDFResource) e2;
+				}
 				e2 = e2.getNextSiblingElement();
 			}
 		}
@@ -409,9 +459,9 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param resName name of the resource to append
 	 * @return JDFResource the element
 	 */
-	public JDFResource appendResource(String resName)
+	public JDFResource appendResource(final String resName)
 	{
-		KElement e = appendElement(resName, null);
+		final KElement e = appendElement(resName, null);
 		if (!(e instanceof JDFResource))
 		{
 			throw new JDFException("JDFResourceCMDParams.appendResource tried to return a JDFElement instead of a JDFResource");
@@ -431,7 +481,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @return Vector - vector of unknown element nodenames
 	 */
 	@Override
-	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
 	}
@@ -453,7 +503,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
@@ -464,7 +514,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
@@ -475,7 +525,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
@@ -487,19 +537,18 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}
 
 	/**
-	 * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children
-	 * if no matching resource exists in the node, Usage MUST be set in this JDFResourceCmdParams, 
-	 * otherwise it is not possible to correctly link the newly created resource
+	 * apply the parameters in this to all appropriate resources in parentNode or one of parentNode's children if no matching resource exists in the node, Usage
+	 * MUST be set in this JDFResourceCmdParams, otherwise it is not possible to correctly link the newly created resource
 	 * 
 	 * @param parentNode the node to search in
 	 */
-	public void applyResourceCommand(JDFNode parentNode)
+	public void applyResourceCommand(final JDFNode parentNode)
 	{
 		new ApplyCommand().applyResourceCommand(parentNode);
 	}
@@ -514,22 +563,23 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
 	}
 
-	/* ---------------------------------------------------------------------
-	Methods for Attribute Usage
-	--------------------------------------------------------------------- */
+	/*
+	 * --------------------------------------------------------------------- Methods for Attribute Usage
+	 * ---------------------------------------------------------------------
+	 */
 	/**
-	  * (5) set attribute Usage
-	  * @param enumVar  the enumVar to set the attribute to
-	  */
-	public void setUsage(JDFResourceLink.EnumUsage enumVar)
+	 * (5) set attribute Usage
+	 * @param enumVar the enumVar to set the attribute to
+	 */
+	public void setUsage(final JDFResourceLink.EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
 	}
 
 	/**
-	  * (9) get attribute Usage
-	  * @return the value of the attribute
-	  */
+	 * (9) get attribute Usage
+	 * @return the value of the attribute
+	 */
 	public JDFResourceLink.EnumUsage getUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));
@@ -539,12 +589,14 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
 	 * @param ni
 	 */
-	public void setIdentifier(NodeIdentifier ni)
+	public void setIdentifier(final NodeIdentifier ni)
 	{
 		NodeIdentifier niLocal = ni;
-		
+
 		if (niLocal == null)
+		{
 			niLocal = new NodeIdentifier();
+		}
 
 		setJobID(niLocal.getJobID());
 		setJobPartID(niLocal.getJobPartID());

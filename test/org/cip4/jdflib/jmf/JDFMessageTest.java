@@ -85,66 +85,63 @@ public class JDFMessageTest extends TestCase
 
 	public void testIsValidMessageElement()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				EnumType.UpdateJDF);
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertTrue(sig.isValidMessageElement(ElementName.UPDATEJDFCMDPARAMS, 0));
-		assertFalse(sig.isValidMessageElement(ElementName.MODIFYNODECMDPARAMS,
-				0));
+		assertFalse(sig.isValidMessageElement(ElementName.MODIFYNODECMDPARAMS, 0));
 
-		JDFResponse resp = (JDFResponse) jmf.appendMessageElement(
-				EnumFamily.Response, EnumType.RepeatMessages);
+		final JDFResponse resp = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.RepeatMessages);
 		assertTrue(resp.isValidMessageElement(ElementName.SIGNAL, 3));
 		assertTrue(resp.isValidMessageElement(ElementName.REGISTRATION, 3));
 		assertFalse(resp.isValidMessageElement(ElementName.QUEUE, 0));
 
-		JDFRegistration reg = (JDFRegistration) jmf.appendMessageElement(
-				EnumFamily.Registration, EnumType.RepeatMessages);
+		final JDFRegistration reg = (JDFRegistration) jmf.appendMessageElement(EnumFamily.Registration, EnumType.RepeatMessages);
 		assertFalse(reg.isValidMessageElement(ElementName.SIGNAL, 3));
+
+		final JDFQuery q = (JDFQuery) jmf.appendMessageElement(EnumFamily.Query, EnumType.KnownSubscriptions);
+		assertTrue(q.isValidMessageElement(ElementName.SUBSCRIPTIONFILTER, 0));
+		assertFalse(q.isValidMessageElement(ElementName.SUBSCRIPTIONINFO, 0));
+
+		final JDFCommand c = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.RequestForAuthentication);
+		assertTrue(c.isValidMessageElement(ElementName.AUTHENTICATIONCMDPARAMS, 0));
+		assertFalse(c.isValidMessageElement(ElementName.AUTHENTICATIONQUPARAMS, 0));
 
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testAppendValidElement()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				EnumType.UpdateJDF);
-		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS,
-				null));
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
+		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	public void testGetInvalidAttributes()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				EnumType.UpdateJDF);
-		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS,
-				null));
-		assertFalse(sig.getInvalidAttributes(EnumValidationLevel.Complete,
-				true, 999).contains(AttributeName.XSITYPE));
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
+		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
+		assertFalse(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
 		sig.setAttribute("Type", EnumType.AbortQueueEntry.getName());
-		assertTrue(sig.getInvalidAttributes(EnumValidationLevel.Complete, true,
-				999).contains(AttributeName.XSITYPE));
+		assertTrue(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testModifyNode()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal,
-				EnumType.ModifyNode);
-		JDFModifyNodeCmdParams mnp = sig.appendModifyNodeCmdParams();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.ModifyNode);
+		final JDFModifyNodeCmdParams mnp = sig.appendModifyNodeCmdParams();
 		assertNotNull(mnp);
 		JDFModifyNodeCmdParams mnp2 = sig.getModifyNodeCmdParams();
 		assertEquals(mnp, mnp2);
@@ -154,22 +151,22 @@ public class JDFMessageTest extends TestCase
 		{
 			sig.appendModifyNodeCmdParams();
 			fail("oops");
-		} catch (JDFException e)
+		}
+		catch (final JDFException e)
 		{
 			// nop
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testUpdateJDF()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFCommand command = (JDFCommand) jmf.appendMessageElement(
-				EnumFamily.Command, EnumType.UpdateJDF);
-		JDFUpdateJDFCmdParams ujn = command.appendUpdateJDFCmdParams();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
+		final JDFUpdateJDFCmdParams ujn = command.appendUpdateJDFCmdParams();
 		assertNotNull(ujn);
 		JDFUpdateJDFCmdParams ujn2 = command.getUpdateJDFCmdParams();
 		assertEquals(ujn, ujn2);
@@ -179,67 +176,65 @@ public class JDFMessageTest extends TestCase
 		{
 			command.appendUpdateJDFCmdParams();
 			fail("oops");
-		} catch (JDFException e)
+		}
+		catch (final JDFException e)
 		{
 			// nop
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testSetType()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFCommand command = (JDFCommand) jmf.appendMessageElement(
-				EnumFamily.Command, EnumType.UpdateJDF);
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(command.getXSIType(), "CommandUpdateJDF");
 		command.setType("foo:bar");
 		assertNull(command.getXSIType());
 		assertEquals(command.getType(), "foo:bar");
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	public void testSenderID()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFCommand command = (JDFCommand) jmf.appendMessageElement(
-				EnumFamily.Command, EnumType.UpdateJDF);
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(jmf.getSenderID(), command.getSenderID());
 		command.setSenderID("foo:bar");
 		assertEquals(command.getSenderID(), "foo:bar");
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testCreateResponse()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFCommand command = (JDFCommand) jmf.appendMessageElement(
-				EnumFamily.Command, EnumType.UpdateJDF);
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(command.getXSIType(), "CommandUpdateJDF");
 		command.setType("foo:bar");
 		assertNull(command.getXSIType());
 		assertEquals(command.getType(), "foo:bar");
-		JDFJMF resp = command.createResponse();
+		final JDFJMF resp = command.createResponse();
 		final JDFResponse response = resp.getResponse(0);
 		assertEquals(response, resp.getMessageElement(null, null, 0));
 		assertEquals(response.getType(), "foo:bar");
 		assertEquals(response.getrefID(), command.getID());
 
 	}
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 }

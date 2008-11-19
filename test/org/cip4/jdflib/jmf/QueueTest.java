@@ -92,7 +92,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 /**
  * @author MuchaD
  * 
- *         This implements the first fixture with unit tests for class JDFQueue.
+ * This implements the first fixture with unit tests for class JDFQueue.
  */
 public class QueueTest extends TestCase
 {
@@ -103,7 +103,7 @@ public class QueueTest extends TestCase
 	{
 		public void run()
 		{
-			int t = 1000 * iThread++;
+			final int t = 1000 * iThread++;
 			for (int i = 0; i < 100; i++)
 			{
 				final JDFQueueEntry qe = q.appendQueueEntry();
@@ -123,12 +123,10 @@ public class QueueTest extends TestCase
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see
-		 * org.cip4.jdflib.jmf.JDFQueue.CleanupCallback#cleanEntry(org.cip4.
-		 * jdflib.jmf.JDFQueueEntry)
+		 * @see org.cip4.jdflib.jmf.JDFQueue.CleanupCallback#cleanEntry(org.cip4. jdflib.jmf.JDFQueueEntry)
 		 */
 		@Override
-		public void cleanEntry(JDFQueueEntry qe)
+		public void cleanEntry(final JDFQueueEntry qe)
 		{
 			i++;
 		}
@@ -157,7 +155,7 @@ public class QueueTest extends TestCase
 	 */
 	public void testGetQueueEntryMap()
 	{
-		Map<String, JDFQueueEntry> map = q.getQueueEntryIDMap();
+		final Map<String, JDFQueueEntry> map = q.getQueueEntryIDMap();
 		assertEquals(map.size(), q.numEntries(null));
 		assertEquals(map.get("qe2"), q.getQueueEntry("qe2"));
 	}
@@ -241,7 +239,7 @@ public class QueueTest extends TestCase
 	public void testGetQueueEntryByIdentifier()
 	{
 		q.getQueueEntry(1).setJobID("j7");
-		NodeIdentifier ni = new NodeIdentifier("j7", null, null);
+		final NodeIdentifier ni = new NodeIdentifier("j7", null, null);
 		assertEquals(q.getQueueEntry(ni, 0), q.getQueueEntry(1));
 		assertEquals(q.getQueueEntry(ni, -1), q.getQueueEntry(1));
 		assertNull(q.getQueueEntry(ni, -2));
@@ -258,7 +256,7 @@ public class QueueTest extends TestCase
 
 	public void testGetQueueEntryVectorByIdentifier()
 	{
-		NodeIdentifier ni = new NodeIdentifier("j2", null, null);
+		final NodeIdentifier ni = new NodeIdentifier("j2", null, null);
 		assertEquals(q.getQueueEntryVector(ni).elementAt(0), q.getQueueEntry(1));
 		assertEquals(q.getQueueEntryVector(null).elementAt(0), q.getQueueEntry(0));
 		assertEquals(q.getQueueEntryVector(null).size(), q.numChildElements(ElementName.QUEUEENTRY, null));
@@ -266,7 +264,7 @@ public class QueueTest extends TestCase
 
 	public void testGetTimes()
 	{
-		JDFQueueEntry qe = q.getQueueEntry(0);
+		final JDFQueueEntry qe = q.getQueueEntry(0);
 		qe.setQueueEntryID("qe1");
 		JDFDate d = qe.getEndTime();
 		assertNull("date", d);
@@ -277,9 +275,9 @@ public class QueueTest extends TestCase
 
 	public void testFlushQueue()
 	{
-		JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
+		final JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
 		qf.appendQueueEntryDef("qe5");
-		VElement v = q.flushQueue(qf);
+		final VElement v = q.flushQueue(qf);
 		assertEquals(v.size(), 1);
 		assertEquals(((JDFQueueEntry) v.get(0)).getQueueEntryID(), "qe5");
 		assertEquals(q.numEntries(null), 4);
@@ -299,7 +297,7 @@ public class QueueTest extends TestCase
 		// now also zapp some...
 		for (int j = 0; j < 100; j++)
 		{
-			JDFQueueEntry qex = q.getNextExecutableQueueEntry();
+			final JDFQueueEntry qex = q.getNextExecutableQueueEntry();
 			if (qex != null)
 			{
 				qex.setQueueEntryStatus(EnumQueueEntryStatus.Running);
@@ -308,18 +306,22 @@ public class QueueTest extends TestCase
 			}
 		}
 		while (iThread > 0)
+		{
 			ThreadUtil.sleep(100); // wait for threads to be over
+		}
 		ThreadUtil.sleep(1000); // wait for threads to be over
 		assertEquals(q.getQueueSize(), 1000);
 		VElement v = q.getQueueEntryVector();
 		JDFQueueEntry qeLast = null;
 		for (int i = 0; i < v.size(); i++)
 		{
-			JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
+			final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
 			System.out.println(qe.getPriority() + " " + qe.getQueueEntryID() + " " + qe.getQueueEntryStatus());
 			assertTrue(qe.compareTo(qeLast) >= 0);
 			qeLast = qe;
 		}
+		ThreadUtil.sleep(1000); // wait for threads to be over
+
 		v = q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, "Completed"), null);
 		assertEquals(v.size(), 100);
 		v = q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, "Running"), null);
@@ -330,7 +332,7 @@ public class QueueTest extends TestCase
 		assertEquals(v.size(), 400);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testNumEntries()
@@ -356,13 +358,13 @@ public class QueueTest extends TestCase
 		assertTrue("note that this is inconsistent", q.canExecute());
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	protected class TestCanExecute extends ExecuteCallback
 	{
 
-		public TestCanExecute(String pdeviceID, String pproxy)
+		public TestCanExecute(final String pdeviceID, final String pproxy)
 		{
 			super();
 			this.deviceID = pdeviceID;
@@ -372,16 +374,22 @@ public class QueueTest extends TestCase
 		String deviceID;
 		String proxy;
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.cip4.jdflib.jmf.JDFQueue.ExecuteCallback#canExecute(org.cip4.jdflib.jmf.JDFQueueEntry)
 		 */
 		@Override
-		public boolean canExecute(JDFQueueEntry qe)
+		public boolean canExecute(final JDFQueueEntry qe)
 		{
 			if (proxy != null && qe.hasAttribute(proxy))
+			{
 				return false;
+			}
 			if (deviceID != null && !KElement.isWildCard(qe.getDeviceID()) && !deviceID.equals(qe.getDeviceID()))
+			{
 				return false;
+			}
 			return true;
 
 		}
@@ -404,7 +412,7 @@ public class QueueTest extends TestCase
 		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe1"));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testGetNextExecutableQueueEntry()
@@ -422,14 +430,14 @@ public class QueueTest extends TestCase
 
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	@SuppressWarnings("synthetic-access")
 	public void testCleanup()
 	{
-		JDFQueueEntry qe = q.appendQueueEntry();
-		MyClean myClean = new MyClean();
+		final JDFQueueEntry qe = q.appendQueueEntry();
+		final MyClean myClean = new MyClean();
 		assertEquals(myClean.i, 0);
 		q.setCleanupCallback(myClean);
 		qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
@@ -445,13 +453,13 @@ public class QueueTest extends TestCase
 		assertEquals("removed completed and aborted", q.numEntries(null), 4);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
 	public void testCopyToResponse()
 	{
-		JDFResponse r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.AbortQueueEntry).getResponse(0);
-		JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
+		final JDFResponse r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.AbortQueueEntry).getResponse(0);
+		final JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
 		qf.setMaxEntries(3);
 		JDFQueue q2 = q.copyToResponse(r, qf);
 		assertEquals(q2, r.getQueue(0));
@@ -476,7 +484,7 @@ public class QueueTest extends TestCase
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
-		JDFDoc doc = new JDFDoc(ElementName.QUEUE);
+		final JDFDoc doc = new JDFDoc(ElementName.QUEUE);
 		q = (JDFQueue) doc.getRoot();
 		JDFQueueEntry qe = q.appendQueueEntry();
 		qe.setQueueEntryID("qe1");

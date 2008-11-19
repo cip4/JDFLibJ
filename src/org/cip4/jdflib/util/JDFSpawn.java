@@ -102,6 +102,7 @@ import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumSpawnStatus;
@@ -199,7 +200,6 @@ public class JDFSpawn
 	{
 		// need copy in order to fix up 1.3 NodeInfo spawn
 		final VString vRWResources = vRWResources_in == null ? new VString() : vRWResources_in;
-		VJDFAttributeMap vLocalSpawnParts = vSpawnParts;
 
 		if (!bSpawnRWPartsMultiple)
 		{
@@ -232,7 +232,7 @@ public class JDFSpawn
 
 		JDFNode spawnParentNode = null;
 		// we want to spawn a partition
-		if (vLocalSpawnParts != null && !vLocalSpawnParts.isEmpty())
+		if (vSpawnParts != null && !vSpawnParts.isEmpty())
 		{
 			spawnParentNode = node;
 			// don't copy the whole history along
@@ -256,15 +256,15 @@ public class JDFSpawn
 
 				for (int psp = 0; psp < preSpawnedParts.size(); psp++)
 				{
-					final Vector<VJDFAttributeMap> vAttrib = vLocalSpawnParts.getVector();
+					final Vector<VJDFAttributeMap> vAttrib = vSpawnParts.getVector();
 					final VJDFAttributeMap tmpParts = new VJDFAttributeMap(vAttrib);
 					tmpParts.overlapMap(preSpawnedParts.elementAt(psp));
 					allParts.appendUnique(tmpParts);
 				}
-				vLocalSpawnParts = allParts;
+				vSpawnParts = allParts;
 			}
 			// we arrived at a null vector of parts - that ain't no good
-			if (vLocalSpawnParts.isEmpty())
+			if (vSpawnParts.isEmpty())
 			{
 				throw new JDFException("JDFNode.Spawn attempting to spawn incompatible partitions");
 			}
@@ -288,7 +288,7 @@ public class JDFSpawn
 
 		// find resources that must be copied
 		addSpawnedResources(rootOut, spawnAudit);
-		finalizeSpawn(vLocalSpawnParts, rootOut, spawnAudit);
+		finalizeSpawn(rootOut, spawnAudit);
 
 		// return the spawned node
 		return rootOut;
@@ -612,7 +612,7 @@ public class JDFSpawn
 				// get a list of all resources referenced by this link
 				// always do a copyresource in case some dangling rRefs are
 				// waiting
-				copySpawnedResource(rPool, rRoot, copyStatus, vSpawnParts, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
+				copySpawnedResource(rPool, rRoot, copyStatus, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
 				nSpawned += vvRO.size() + vvRW.size();
 				// }
 				// else
@@ -708,8 +708,8 @@ public class JDFSpawn
 					final JDFResource r = (JDFResource) vRes.elementAt(resParts);
 					final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
 
-					spawnPart(rRoot1, spawnID, copyStatus, vSpawnParts, true);
-					spawnPart(r, spawnID, copyStatus, vSpawnParts, false);
+					spawnPart(rRoot1, spawnID, copyStatus, true);
+					spawnPart(r, spawnID, copyStatus, false);
 
 					if (vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
 					{
@@ -810,7 +810,7 @@ public class JDFSpawn
 
 	// ///////////////////////////////////////////////////////////////////////
 
-	private void finalizeSpawn(final VJDFAttributeMap vLocalSpawnParts, final JDFNode rootOut, final JDFSpawned spawnAudit)
+	private void finalizeSpawn(final JDFNode rootOut, final JDFSpawned spawnAudit)
 	{
 		final VElement outLinks = prepareSpawnLinks(rootOut);
 		final VElement mainLinks = prepareSpawnLinks(node);
@@ -818,7 +818,7 @@ public class JDFSpawn
 
 		final String spawnID = spawnAudit.getNewSpawnID();
 		// add parts to resource links if necessary
-		if (vLocalSpawnParts != null && !vLocalSpawnParts.isEmpty())
+		if (vSpawnParts != null && !vSpawnParts.isEmpty())
 		{
 			final int outLinkSize = outLinks.size();
 			for (int i = 0; i < outLinkSize; i++)
@@ -833,7 +833,7 @@ public class JDFSpawn
 				// in the worst caste the spawned JDF is not executable at all
 				if (r != null)
 				{
-					final VJDFAttributeMap vPartMap = getSpawnLinkMap(vLocalSpawnParts, r);
+					final VJDFAttributeMap vPartMap = getSpawnLinkMap(vSpawnParts, r);
 					if (!vPartMap.isEmpty())
 					{
 						final VJDFAttributeMap vNewMap = getSpawnedLinkPartMap(link, vPartMap);
@@ -866,7 +866,7 @@ public class JDFSpawn
 				}
 			}
 		}
-		finalizeStatusAndAudits(vLocalSpawnParts, spawnAudit);
+		finalizeStatusAndAudits(spawnAudit);
 	}
 
 	/**
@@ -971,21 +971,21 @@ public class JDFSpawn
 	 * @param vLocalSpawnParts
 	 * @param spawnAudit
 	 */
-	private void finalizeStatusAndAudits(final VJDFAttributeMap vLocalSpawnParts, final JDFSpawned spawnAudit)
+	private void finalizeStatusAndAudits(final JDFSpawned spawnAudit)
 	{
 		// add partition information to the audits and StatusPool or NodeInfo
 		// 050906 RP move to the back so that it occurs after any global
 		// resources have been copied
-		if (vLocalSpawnParts != null && !vLocalSpawnParts.isEmpty())
+		if (vSpawnParts != null && !vSpawnParts.isEmpty())
 		{
-			spawnAudit.setPartMapVector(vLocalSpawnParts);
+			spawnAudit.setPartMapVector(vSpawnParts);
 
-			final EnumNodeStatus partStatus = node.getPartStatus(vLocalSpawnParts.elementAt(0));
+			final EnumNodeStatus partStatus = node.getPartStatus(vSpawnParts.elementAt(0));
 			if (partStatus != null)
 			{
 				spawnAudit.setStatus(partStatus);
 			}
-			node.setPartStatus(vLocalSpawnParts, EnumNodeStatus.Spawned, null);
+			node.setPartStatus(vSpawnParts, EnumNodeStatus.Spawned, null);
 		}
 		else
 		// No partitioning - set Audit + Status globally
@@ -1086,7 +1086,7 @@ public class JDFSpawn
 					{
 						final JDFAttributeMap testMap = new JDFAttributeMap(parentMap);
 						testMap.put(key, val);
-						if (vSpawnParts.overlapsMap(testMap))
+						if (overlapsPartMap(testMap))
 						{
 							final JDFIdentical id = child.getIdentical();
 							if (id != null)
@@ -1110,11 +1110,44 @@ public class JDFSpawn
 						}
 					}
 				}
-
 			}
 		}
-
 		return bad;
+	}
+
+	/**
+	 * @param testMap
+	 * @return
+	 */
+	private boolean overlapsPartMap(final JDFAttributeMap testMap)
+	{
+		if (vSpawnParts == null || testMap == null)
+		{
+			return true;
+		}
+		final VString keys = testMap.getKeys();
+		final int ks = keys.size();
+
+		for (int i = 0; i < vSpawnParts.size(); i++)
+		{
+			boolean bOK = true;
+			final JDFAttributeMap map = vSpawnParts.elementAt(i);
+			for (int j = 0; j < ks; j++)
+			{
+				final String key = keys.stringAt(j);
+				final String linkValue = map.get(key);
+				if (linkValue != null && !JDFPart.matchesPart(key, testMap.get(key), linkValue))
+				{
+					bOK = false;
+					break;
+				}
+			}
+			if (bOK)
+			{
+				return true;
+			}
+		}
+		return ks <= 0;
 	}
 
 	private void reducePartitions(final JDFResource r)
@@ -1123,11 +1156,38 @@ public class JDFSpawn
 		{
 			return;
 		}
+
 		final VString partIDKeys = r.getPartIDKeys();
 		if (partIDKeys == null || partIDKeys.size() == 0)
 		{
 			return;
 		}
+
+		// in case we spawn lower than, only remove partitions that are parallel to our spawning
+		int nMax = 999;
+		for (int i = 0; i < vSpawnParts.size(); i++)
+		{
+			final VElement vSubParts = r.getPartitionVector(vSpawnParts.elementAt(i), EnumPartUsage.Implicit);
+			for (int j = 0; j < vSubParts.size(); j++)
+			{
+				final JDFResource rr = (JDFResource) vSubParts.get(j);
+				final JDFAttributeMap partMap = rr.getPartMap();
+				final int mapSize = partMap == null ? 0 : partMap.size();
+				if (mapSize < nMax)
+				{
+					nMax = mapSize;
+					if (nMax == 0)
+					{
+						return; // nothing left to do
+					}
+				}
+			}
+		}
+		for (int i = partIDKeys.size() - 1; i >= nMax; i--)
+		{
+			partIDKeys.remove(i);
+		}
+
 		final String nodeName = r.getLocalName();
 		final String nsURI = r.getNamespaceURI();
 		final VElement identical = new VElement();
@@ -1182,8 +1242,8 @@ public class JDFSpawn
 	 * 
 	 * @return VString vector of resource names that have been copied
 	 */
-	private void copySpawnedResource(final JDFResourcePool p, final JDFResource r, final JDFResource.EnumSpawnStatus copyStatus, final VJDFAttributeMap vParts, final String spawnID,
-			final VString vRWResources, final HashSet vRWIDs, final HashSet vROIDs, final HashSet allIDsCopied)
+	private void copySpawnedResource(final JDFResourcePool p, final JDFResource r, final JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources,
+			final HashSet vRWIDs, final HashSet vROIDs, final HashSet allIDsCopied)
 	{
 		JDFResource.EnumSpawnStatus copyStatusLocal = copyStatus;
 
@@ -1205,8 +1265,8 @@ public class JDFSpawn
 				reducePartitions(rNew);
 			}
 
-			spawnPart(r, spawnID, copyStatusLocal, vParts, true);
-			spawnPart(rNew, spawnID, copyStatusLocal, vParts, false);
+			spawnPart(r, spawnID, copyStatusLocal, true);
+			spawnPart(rNew, spawnID, copyStatusLocal, false);
 
 			if (bRW)
 			{
@@ -1244,7 +1304,7 @@ public class JDFSpawn
 						copyStatusLocal = resFitsRWRes(next, vRWResources) ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
 					}
 					// recurse into refelements
-					copySpawnedResource(p, next, copyStatusLocal, vParts, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
+					copySpawnedResource(p, next, copyStatusLocal, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
 				}
 			}
 		}
@@ -1258,22 +1318,16 @@ public class JDFSpawn
 	 * @param copyStatus
 	 * @param vParts
 	 */
-	private void spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final VJDFAttributeMap vParts, final boolean bStayinMain)
+	private void spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
 	{
-		if (vParts != null && vParts.size() > 0)
+		if (vSpawnParts != null && vSpawnParts.size() > 0)
 		{
-			final int size = vParts.size();
+			final int size = vSpawnParts.size();
 			// loop over all part maps to get best matching resource
 			for (int j = 0; j < size; j++)
 			{
-				final VElement vSubParts = r.getPartitionVector(vParts.elementAt(j), EnumPartUsage.Implicit); // alway
-				// implicit
-				// -
-				// in
-				// the
-				// worst case some
-				// partitions may be
-				// multiply spawned
+				final VElement vSubParts = r.getPartitionVector(vSpawnParts.elementAt(j), EnumPartUsage.Implicit);
+				// always implicit - in the worst case some partitions may be multiply spawned
 				for (int k = 0; k < vSubParts.size(); k++)
 				{
 					final JDFResource pLeaf = (JDFResource) vSubParts.item(k);

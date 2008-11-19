@@ -133,6 +133,8 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
@@ -154,7 +156,7 @@ public class JDFElement extends KElement
 {
 	private static final long serialVersionUID = 1L;
 
-	private static EnumVersion defaultVersion = EnumVersion.Version_1_3;
+	private static EnumVersion defaultVersion = EnumVersion.Version_1_4;
 
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
 	static
@@ -168,29 +170,45 @@ public class JDFElement extends KElement
 	}
 	private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyMMdd_kkmmssSS");
 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#getTheAttributeInfo()
+	 */
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return getTheAttributeInfo_JDFElement();
 	}
 
+	/**
+	 * @return the AttributeInfo
+	 */
 	protected AttributeInfo getTheAttributeInfo_JDFElement()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
 	static
 	{
 		elemInfoTable[0] = new ElemInfoTable(ElementName.COMMENT, 0x33333333);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.PREVIEW, 0x33331111);
+		// note the incorrect version which must be retained since this was moved from resource
+		elemInfoTable[2] = new ElemInfoTable(ElementName.GENERALID, 0x33333111);
+
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#getTheElementInfo()
+	 */
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);
 	}
 
+	/**
+	 * @return the elementinfo
+	 */
 	protected ElementInfo getTheElementInfo_JDFElement()
 	{
 		return super.getTheElementInfo().updateReplace(elemInfoTable);
@@ -1154,10 +1172,7 @@ public class JDFElement extends KElement
 			setDirty(true);
 		}
 		boolean bRet = true;
-		final VElement v = getChildElementVector_KElement(null, null, null, true, -1); // do
-		// not
-		// follow
-		// refelements
+		final VElement v = getChildElementVector_KElement(null, null, null, true, -1); // do not follow refelements
 		final int size = v.size();
 		for (int i = 0; i < size; i++)
 		{
@@ -3246,13 +3261,11 @@ public class JDFElement extends KElement
 
 		try
 		{
-			final Class methodArgs[] =
-			{ String.class };
+			final Class methodArgs[] = { String.class };
 			final Method m = enu.getClass().getMethod("getEnum", methodArgs);
 			for (int i = 0; i < vAtts.size(); i++)
 			{
-				final Object args[] =
-				{ vAtts.elementAt(i) };
+				final Object args[] = { vAtts.elementAt(i) };
 				final ValuedEnum ve = (ValuedEnum) m.invoke(null, args);
 				// there was an invalid token
 				if (ve != null)
@@ -4365,6 +4378,105 @@ public class JDFElement extends KElement
 	 */
 
 	// ////////////////////////////////////////////////////////////////////
+	/**
+	 * append an empty GeneralID
+	 * 
+	 * @return the newly created GeneralID
+	 */
+	public JDFGeneralID appendGeneralID()
+	{
+		return (JDFGeneralID) appendElement(ElementName.GENERALID, null);
+	}
+
+	/**
+	 * append a GeneralID with idValue, duplicate entries are retained
+	 * 
+	 * @param idUsage the IDUsage attribute of the generalID
+	 * @param idValue the IDValue attribute of the generalID
+	 * @return the newly created GeneralID
+	 */
+	public JDFGeneralID appendGeneralID(final String idUsage, final String idValue)
+	{
+		final JDFGeneralID gid = (JDFGeneralID) appendElement(ElementName.GENERALID);
+		gid.setIDValue(idValue);
+		gid.setIDUsage(idUsage);
+		return gid;
+	}
+
+	/**
+	 * gets attribute GeneralID
+	 * 
+	 * @param i get the i'th element that fits
+	 * @return the attribute value
+	 */
+	public JDFGeneralID getGeneralID(final int i)
+	{
+		return (JDFGeneralID) getElement(ElementName.GENERALID, null, i);
+	}
+
+	/**
+	 * Creates or Updates a GeneralID with the IDUsage idUsage and IDValue=idValue all entries with a duplicate idUsage are removed
+	 * 
+	 * @param idUsage usage to set the attribute to
+	 * @param idValue value to set the attribute to
+	 */
+	public void setGeneralID(final String idUsage, final String idValue)
+	{
+		JDFGeneralID gid = null;
+
+		final VElement v = getChildElementVector_JDFElement(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
+		if (v.size() == 0)
+		{
+			gid = (JDFGeneralID) appendElement(ElementName.GENERALID);
+		}
+		else if (v.size() >= 1)
+		{
+			gid = (JDFGeneralID) v.elementAt(0);
+
+			for (int i = 1; i < v.size(); i++)
+			{
+				// remove any duplicates
+				(v.elementAt(i)).deleteNode();
+			}
+		}
+
+		if (gid != null)
+		{
+			gid.setIDValue(idValue);
+			gid.setIDUsage(idUsage);
+		}
+	}
+
+	/**
+	 * removes GeneralID with the IDUsage idUsage
+	 * 
+	 * @param idUsage value to set the attribute to
+	 */
+	public void removeGeneralID(final String idUsage)
+	{
+		final VElement v = getChildElementVector_JDFElement(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
+		for (int i = 0; i < v.size(); i++)
+		{
+			(v.elementAt(i)).deleteNode();
+		}
+	}
+
+	/**
+	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
+	 * 
+	 * @return double the attribute value
+	 */
+	public String getGeneralID(final String idUsage)
+	{
+		final VElement v = getChildElementVector(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
+		if (v.size() == 0)
+		{
+			return null;
+		}
+		final JDFGeneralID gid = (JDFGeneralID) v.elementAt(0);
+		return gid.getIDValue();
+	}
+
 	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * Appends element Comment to the end of 'this'
@@ -4414,6 +4526,41 @@ public class JDFElement extends KElement
 	}
 
 	// ////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////
+	/**
+	 * Appends element JDFPreview to the end of 'this'
+	 * 
+	 * @return the newly created JDFPreview
+	 */
+	public JDFPreview appendPreview()
+	{
+		return (JDFPreview) appendElement(ElementName.PREVIEW, null);
+	}
+
+	/**
+	 * Gets the iSkip-th element JDFPreview. If doesn't exist, creates it
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return the newly created JDFPreview
+	 */
+	public JDFPreview getCreatePreview(final int iSkip)
+	{
+		return (JDFPreview) getCreateElement_KElement(ElementName.PREVIEW, null, iSkip);
+	}
+
+	/**
+	 * Gets the iSkip-th element Comment
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFPreview - the matching element
+	 * 
+	 * @default getPreview(0)
+	 */
+	public JDFPreview getPreview(final int iSkip)
+	{
+		return (JDFPreview) getElement(ElementName.PREVIEW, null, iSkip);
+	}
 
 	/**
 	 * Gets a child with matching attributes, also follows refelements
