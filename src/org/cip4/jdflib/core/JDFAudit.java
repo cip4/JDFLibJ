@@ -101,7 +101,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.3 BLD 53";
+	final private static String m_libAgentVersion = "1.4 BLD 54";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;
@@ -793,7 +793,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	 * @param iSkip number of elements to skip
 	 * @return JDFEmployee the element
 	 */
-	public JDFEmployee getCreateEmployee()
+	public JDFEmployee getCreateEmployee(final int iSkip)
 	{
 		return (JDFEmployee) getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
 	}
@@ -816,7 +816,6 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	public Collection<JDFEmployee> getAllEmployee()
 	{
 		final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-
 		JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
 
 		while (kElem != null)
