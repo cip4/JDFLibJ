@@ -77,6 +77,7 @@
 package org.cip4.jdflib.resource;
 
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -91,6 +92,8 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFPart extends JDFAutoPart
 {
 	private static final long serialVersionUID = 1L;
+	private static HashSet<String> tokensSet = null;
+	private static HashSet<String> irlSet = null;
 
 	/**
 	 * Constructor for JDFPart
@@ -217,26 +220,47 @@ public class JDFPart extends JDFAutoPart
 	 */
 	public static boolean matchesPart(final String key, final String resourceValue, final String linkValue)
 	{
-		final EnumPartIDKey eKey = EnumPartIDKey.getEnum(key);
-		if (eKey == null)
+		if (resourceValue.equals(linkValue))
 		{
-			return resourceValue.equals(linkValue);
+			return true;
 		}
-
 		boolean b;
-		if (
-		// EnumPartIDKey.PartVersion.equals(eKey)
-		EnumPartIDKey.DocTags.equals(eKey) || EnumPartIDKey.ItemNames.equals(eKey) || EnumPartIDKey.PageTags.equals(eKey) || EnumPartIDKey.RunTags.equals(eKey) || EnumPartIDKey.SetTags.equals(eKey))
+		if (tokensSet == null)
+		{
+			tokensSet = new HashSet<String>();
+			tokensSet.add(EnumPartIDKey.DocTags.getName());
+			tokensSet.add(EnumPartIDKey.ItemNames.getName());
+			tokensSet.add(EnumPartIDKey.PageTags.getName());
+			tokensSet.add(EnumPartIDKey.RunTags.getName());
+			tokensSet.add(EnumPartIDKey.SetTags.getName());
+		}
+		if (irlSet == null)
+		{
+			irlSet = new HashSet<String>();
+
+			irlSet.add(EnumPartIDKey.DocCopies.getName());
+			irlSet.add(EnumPartIDKey.DocIndex.getName());
+			irlSet.add(EnumPartIDKey.DocRunIndex.getName());
+			irlSet.add(EnumPartIDKey.DocSheetIndex.getName());
+			irlSet.add(EnumPartIDKey.LayerIDs.getName());
+			irlSet.add(EnumPartIDKey.PageNumber.getName());
+			irlSet.add(EnumPartIDKey.RunIndex.getName());
+			irlSet.add(EnumPartIDKey.SectionIndex.getName());
+			irlSet.add(EnumPartIDKey.SetIndex.getName());
+			irlSet.add(EnumPartIDKey.SetRunIndex.getName());
+			irlSet.add(EnumPartIDKey.SetSheetIndex.getName());
+			irlSet.add(EnumPartIDKey.SheetIndex.getName());
+		}
+		if (tokensSet.contains(key))
 		{
 			b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
 		}
-		else if (EnumPartIDKey.DocCopies.equals(eKey) || EnumPartIDKey.DocIndex.equals(eKey) || EnumPartIDKey.DocRunIndex.equals(eKey) || EnumPartIDKey.DocSheetIndex.equals(eKey)
-				|| EnumPartIDKey.LayerIDs.equals(eKey) || EnumPartIDKey.PageNumber.equals(eKey) || EnumPartIDKey.RunIndex.equals(eKey) || EnumPartIDKey.SectionIndex.equals(eKey)
-				|| EnumPartIDKey.SetIndex.equals(eKey) || EnumPartIDKey.SetRunIndex.equals(eKey) || EnumPartIDKey.SetSheetIndex.equals(eKey) || EnumPartIDKey.SheetIndex.equals(eKey))
+
+		else if (irlSet.contains(key))
 		{
 			b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.IntegerRangeList);
 		}
-		else if (EnumPartIDKey.PartVersion.equals(eKey))
+		else if (AttributeName.PARTVERSION.equals(key))
 		{
 			final VString resTokens = StringUtil.tokenize(resourceValue, null, false);
 			final VString linkTokens = StringUtil.tokenize(linkValue, null, false);
@@ -256,6 +280,7 @@ public class JDFPart extends JDFAutoPart
 			{
 				b = false;
 			}
+
 		}
 		else
 		{

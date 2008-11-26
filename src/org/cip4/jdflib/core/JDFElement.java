@@ -2460,16 +2460,15 @@ public class JDFElement extends KElement
 	 * 
 	 * @default getElement_JDFElement(nodeName, null, 0)
 	 */
-	public KElement getElement_JDFElement(final String nodeName, final String nameSpaceURI, final int iSkip)
+	public KElement getElement_JDFElement(final String nodeName, final String nameSpaceURI, int iSkip)
 	{
-		int iSkipLocal = iSkip;
 		// loop over the list
 		int i = 0;
-		if (iSkipLocal < 0)
+		if (iSkip < 0)
 		{
-			iSkipLocal = numChildElements_JDFElement(nodeName, nameSpaceURI) + iSkipLocal;
+			iSkip = numChildElements_JDFElement(nodeName, nameSpaceURI) + iSkip;
 		}
-		if (iSkipLocal < 0)
+		if (iSkip < 0)
 		{
 			return null;
 		}
@@ -2481,7 +2480,7 @@ public class JDFElement extends KElement
 			if (jdfElem.fitsName(nodeName, nameSpaceURI))
 			{
 				// this guy is the one
-				if (i++ == iSkipLocal)
+				if (i++ == iSkip)
 				{
 					// follow valid (!) refElements, invalid refelements are
 					// ignored

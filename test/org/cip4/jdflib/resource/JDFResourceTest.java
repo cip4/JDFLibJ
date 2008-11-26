@@ -1071,6 +1071,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetPartitionVector()
 	{
 
@@ -1081,10 +1084,13 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
 		m.put("RunIndex", "3");
 		VElement v = xm.getPartitionVector(m, null);
+		assertEquals("implicit 1", v.size(), 1);
+		final VElement vLeaf = xm.getPartitionLeafVector(m, null);
+		assertEquals("implicit leaf 4", vLeaf.size(), 4);
+
 		final JDFResource r = xm.getPartition(m, null);
 		assertEquals("same as only sig1", r, xm.getPartition(new JDFAttributeMap("SignatureName", "Sig1"), null));
 		int i = 0;
-		assertTrue("implicit 4", v.size() == 4);
 		for (i = 0; i < v.size(); i++)
 		{
 			final JDFExposedMedia xmp = (JDFExposedMedia) v.elementAt(i);
@@ -1096,7 +1102,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 			final JDFExposedMedia xmp = (JDFExposedMedia) v.elementAt(i);
 			assertTrue("overlap of maps", m.overlapMap(xmp.getPartMap()));
 		}
-		assertTrue("sparse 4", v.size() == 4);
+		assertTrue("sparse 1", v.size() == 1);
 
 		v = xm.getPartitionVector(m, EnumPartUsage.Explicit);
 		assertTrue("no explicit", v.size() == 0);

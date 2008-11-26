@@ -110,7 +110,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @param m
 	 */
-	public VElement(Vector m)
+	public VElement(final Vector m)
 	{
 		super();
 		addAll(m);
@@ -121,7 +121,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @param n
 	 */
-	public VElement(NodeList n)
+	public VElement(final NodeList n)
 	{
 		super();
 
@@ -159,7 +159,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @return int - the index of s in the vector
 	 */
-	public int index(KElement s)
+	public int index(final KElement s)
 	{
 		for (int i = 0; i < size(); i++)
 		{
@@ -180,7 +180,7 @@ public class VElement extends Vector<KElement>
 	 * @return true if s is contained in this
 	 */
 	@Deprecated
-	public boolean hasElement(KElement kElem)
+	public boolean hasElement(final KElement kElem)
 	{
 		return index(kElem) >= 0;
 	}
@@ -192,7 +192,7 @@ public class VElement extends Vector<KElement>
 	 * @deprecated simply use appendUnique
 	 */
 	@Deprecated
-	public void appendUniqueNotNull(KElement v)
+	public void appendUniqueNotNull(final KElement v)
 	{
 		if (v != null && !contains(v))
 		{
@@ -207,7 +207,7 @@ public class VElement extends Vector<KElement>
 	 * @deprecated simply use appendUnique
 	 */
 	@Deprecated
-	public void appendUniqueNotNull(VElement v)
+	public void appendUniqueNotNull(final VElement v)
 	{
 		if (v != null)
 		{
@@ -223,10 +223,12 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @param v the element to append
 	 */
-	public void appendUnique(KElement elem)
+	public void appendUnique(final KElement elem)
 	{
 		if (elem == null)
+		{
 			return;
+		}
 		if (!(index(elem) >= 0))
 		{
 			addElement(elem);
@@ -238,10 +240,12 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @param v the vector of elements to append
 	 */
-	public void addAll(VElement elem)
+	public void addAll(final VElement elem)
 	{
 		if (elem == null)
+		{
 			return;
+		}
 		super.addAll(elem);
 
 	}
@@ -252,39 +256,48 @@ public class VElement extends Vector<KElement>
 	 * @param v the element to look for
 	 * @return true, if v is contained in this
 	 */
-	public boolean containsElement(KElement elem)
+	public boolean containsElement(final KElement elem)
 	{
 		final int size = size();
 		for (int i = 0; i < size; i++)
 		{
 			if (elem.isEqual(item(i)))
+			{
 				return true;
+			}
 		}
 		return false;
 
 	}
 
 	/**
-	 * are the two vectors equivalent, i.e. do thay only contain elements that are isEqual() or if this is empty and the
-	 * comparison is against null
+	 * are the two vectors equivalent, i.e. do thay only contain elements that are isEqual() or if this is empty and the comparison is against null
 	 * 
 	 * @param v the vector to compare
 	 * @return true, if v is equal to this
 	 */
-	public boolean isEqual(VElement v)
+	public boolean isEqual(final VElement v)
 	{
-		int size = size();
+		final int size = size();
 		if (v == null)
+		{
 			return size == 0;
+		}
 		if (size != v.size())
+		{
 			return false;
-		VElement v0 = new VElement(this);
-		VElement v1 = new VElement(v);
+		}
+		final VElement v0 = new VElement(this);
+		final VElement v1 = new VElement(v);
 		v0.sort();
 		v1.sort();
 		for (int i = 0; i < size; i++)
+		{
 			if (!v0.get(i).isEqual(v1.get(i)))
+			{
 				return false;
+			}
+		}
 		return true;
 
 	}
@@ -294,16 +307,15 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @param v the vector of elements to append
 	 */
-	public void appendUnique(VElement v)
+	public void appendUnique(final VElement v)
 	{
 		if (v == null)
-			return;
-
-		final int size = v.size();
-		for (int i = 0; i < size; i++)
 		{
-			appendUnique(v.item(i));
+			return;
 		}
+
+		addAll(v);
+		unifyElement();
 	}
 
 	/**
@@ -315,7 +327,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @default setAttributes(key, vValue, null)
 	 */
-	public void setAttributes(String key, Vector vValue, String nameSpaceURI)
+	public void setAttributes(final String key, final Vector vValue, final String nameSpaceURI)
 	{
 		if (size() != vValue.size())
 		{
@@ -347,7 +359,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @default SetAttributes(key, value, null)
 	 */
-	public void setAttribute(String key, String value, String nameSpaceURI)
+	public void setAttribute(final String key, final String value, final String nameSpaceURI)
 	{
 		final int siz = size();
 		for (int i = 0; i < siz; i++)
@@ -365,7 +377,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @default removeAttributes(key, null)
 	 */
-	public void removeAttribute(String key, String nameSpaceURI)
+	public void removeAttribute(final String key, final String nameSpaceURI)
 	{
 		final int siz = size();
 		for (int i = 0; i < siz; i++)
@@ -380,7 +392,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @param v elements to remove
 	 */
-	public void removeElements(VElement v)
+	public void removeElements(final VElement v)
 	{
 		for (int i = size() - 1; i >= 0; i--)
 		{
@@ -399,7 +411,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @default RemoveElements(e, 0)
 	 */
-	public void removeElements(KElement e, int nMax)
+	public void removeElements(final KElement e, final int nMax)
 	{
 		int j = 0;
 
@@ -423,20 +435,21 @@ public class VElement extends Vector<KElement>
 	 * @param bLocal if true use getLocalName() else getNodeName() o each item
 	 * @return VString vector of node names
 	 */
-	public VString getElementNameVector(boolean bLocal)
+	public VString getElementNameVector(final boolean bLocal)
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		final int size = size();
 		v.ensureCapacity(size);
 		for (int i = 0; i < size; i++)
+		{
 			v.add(bLocal ? item(i).getLocalName() : item(i).getNodeName());
+		}
 		return v;
 	}
 
 	/**
-	 * ToVector - parse a node list for elements spezified through parameters note that the vector is static - i.e. the
-	 * elements are NOT modified by operations to the nodeList. This behavior is different than that of the actual
-	 * nodelist!
+	 * ToVector - parse a node list for elements spezified through parameters note that the vector is static - i.e. the elements are NOT modified by operations
+	 * to the nodeList. This behavior is different than that of the actual nodelist!
 	 * 
 	 * @param element name of the element typ you want
 	 * @param mAttrib a attribute typ you want
@@ -444,7 +457,7 @@ public class VElement extends Vector<KElement>
 	 * @param nameSpaceURI the namespace to search in
 	 * @return VElement - vector of all elements matching the conditions above
 	 */
-	public VElement toVector(String element, JDFAttributeMap mAttrib, boolean bAnd, String nameSpaceURI)
+	public VElement toVector(final String element, final JDFAttributeMap mAttrib, final boolean bAnd, final String nameSpaceURI)
 	{
 		final VElement v = new VElement();
 		final boolean bWantName = KElement.isWildCard(element);
@@ -490,7 +503,7 @@ public class VElement extends Vector<KElement>
 	 * @param index vector index of the element you want
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
-	public KElement item(int index)
+	public KElement item(final int index)
 	{
 		if (size() <= index)
 		{
@@ -508,12 +521,16 @@ public class VElement extends Vector<KElement>
 	 */
 	KElement getCommonAncestor()
 	{
-		int siz = size();
+		final int siz = size();
 		if (siz == 0)
+		{
 			return null;
+		}
 
-		if (siz == 1) // only one - the ancestor is the only entry itself
+		if (siz == 1)
+		{
 			return elementAt(0);
+		}
 
 		KElement ret = elementAt(0); // could all be the same, therefore do not
 		// start with parent node
@@ -548,7 +565,7 @@ public class VElement extends Vector<KElement>
 	 * @deprecated used only to facilitate migration from vResource to vElement
 	 */
 	@Deprecated
-	public JDFResource resource(int i)
+	public JDFResource resource(final int i)
 	{
 		return (JDFResource) elementAt(i);
 	}
@@ -558,7 +575,7 @@ public class VElement extends Vector<KElement>
 	 */
 	public void unify()
 	{
-		HashSet set = new HashSet();
+		final HashSet set = new HashSet();
 		int size = size();
 		for (int i = 0; i < size; i++)
 		{

@@ -112,9 +112,11 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFContentData;
 import org.cip4.jdflib.resource.process.JDFContentList;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFMiscConsumable;
 import org.cip4.jdflib.resource.process.JDFPageData;
@@ -128,7 +130,7 @@ import org.cip4.jdflib.util.StatusUtil.AmountBag;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class DigiPrintTest extends JDFTestCaseBase
 {
@@ -143,18 +145,18 @@ public class DigiPrintTest extends JDFTestCaseBase
 
 	/**
 	 * test amount handling
-	 * @throws Exception 
+	 * @throws Exception
 	 * 
 	 */
 	public void testModules() throws Exception
 	{
-		JDFAuditPool ap = n.getCreateAuditPool();
+		final JDFAuditPool ap = n.getCreateAuditPool();
 		ap.appendXMLComment("JDF 1.3 compatible auditing of module phases - note that modulephase start and end times are set outside of the phasetime start and end times", null);
-		JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
-		JDFPhaseTime pt2 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
+		final JDFPhaseTime pt2 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		final JDFDate date = new JDFDate();
-		JDFModulePhase mpRIP = pt.appendModulePhase();
-		JDFModulePhase mpRIP2 = pt2.appendModulePhase();
+		final JDFModulePhase mpRIP = pt.appendModulePhase();
+		final JDFModulePhase mpRIP2 = pt2.appendModulePhase();
 		mpRIP.setStatus(EnumNodeStatus.InProgress);
 		mpRIP2.setStatus(EnumNodeStatus.InProgress);
 		mpRIP2.setDescriptiveName("This ModulePhase is actually the same as the initial ModulePhase in the setup PhaseTime");
@@ -166,7 +168,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 		date.addOffset(0, 5, 0, 0);
 		pt.setEnd(date);
 
-		JDFModulePhase mpPrint = pt2.appendModulePhase();
+		final JDFModulePhase mpPrint = pt2.appendModulePhase();
 		mpPrint.setStatus(EnumNodeStatus.InProgress);
 		pt2.setStart(date);
 		mpPrint.setStart(date);
@@ -182,22 +184,48 @@ public class DigiPrintTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test amount handling
+	 * @throws Exception
+	 * 
+	 */
+	public void testPDFVTStream() throws Exception
+	{
+		doc = new JDFDoc("JDF");
+		n = doc.getJDFRoot();
+		n.setType(EnumType.Combined);
+		n.setTypes(new VString("Interpreting Reendering DigitalPrinting", null));
+
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource("FileSpec", EnumUsage.Input);
+		fs.setURL("http://fileServer/getFile");
+		fs.setMimeType("application/pdf");
+		final JDFContainer c = fs.appendContainer();
+		for (int i = 0; i < 1; i++)
+		{
+			final JDFFileSpec f2 = c.appendFileSpec();
+
+		}
+		doc.write2File(sm_dirTestDataTemp + "PDFVTStream.jdf", 2, false);
+		final JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
+		rl.appendLayoutElement().refFileSpec(fs);
+	}
+
+	/**
 	 * @throws Exception
 	 */
 	public void testModulesUpdate() throws Exception
 	{
-		JDFAuditPool ap = n.getCreateAuditPool();
+		final JDFAuditPool ap = n.getCreateAuditPool();
 		ap.appendXMLComment("JDF 1.3 compatible auditing of module phases with updates", null);
-		JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
-		JDFPhaseTime pt2 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
-		JDFPhaseTime pt3 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
+		final JDFPhaseTime pt2 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		final JDFPhaseTime pt3 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 		final JDFDate date = new JDFDate();
-		JDFModulePhase mpRIP = pt.appendModulePhase();
+		final JDFModulePhase mpRIP = pt.appendModulePhase();
 		mpRIP.setModuleType("Imaging");
-		JDFModulePhase mpJob = pt.appendModulePhase();
+		final JDFModulePhase mpJob = pt.appendModulePhase();
 		mpJob.setModuleType("Manual");
 		mpJob.setStatus(EnumNodeStatus.InProgress);
-		JDFModulePhase mpPrint = pt.appendModulePhase();
+		final JDFModulePhase mpPrint = pt.appendModulePhase();
 		mpPrint.setModuleType("Printing");
 
 		mpRIP.setStatus(EnumNodeStatus.InProgress);
@@ -227,44 +255,43 @@ public class DigiPrintTest extends JDFTestCaseBase
 
 	/**
 	 * test amount handling
-	 * @throws Exception 
+	 * @throws Exception
 	 * 
 	 */
 	public void testModules14() throws Exception
 	{
-		VString v = new VString("orig fullList end", null);
+		final VString v = new VString("orig fullList end", null);
 		for (int i = 0; i < v.size(); i++)
 		{
 			setUp();
-			String testType = v.stringAt(i);
-			JDFAuditPool ap = n.getCreateAuditPool();
+			final String testType = v.stringAt(i);
+			final JDFAuditPool ap = n.getCreateAuditPool();
 			ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"
-					+ "- note that phases may now arbitrarily overlap\n"
-					+ "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper", null);
+					+ "- note that phases may now arbitrarily overlap\n" + "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper", null);
 			ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)", null);
-			JDFPhaseTime ptRIP = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
+			final JDFPhaseTime ptRIP = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
 			final JDFDate date = new JDFDate();
 			ptRIP.setStart(date);
 
-			JDFDoc jmfDoc = new JDFDoc("JMF");
-			JDFJMF jmf = jmfDoc.getJMFRoot();
+			final JDFDoc jmfDoc = new JDFDoc("JMF");
+			final JDFJMF jmf = jmfDoc.getJMFRoot();
 			jmf.setDescriptiveName("Initial phase when the RIP starts up");
 			JDFSignal signal = jmf.appendSignal(JDFMessage.EnumType.Status);
 			JDFDeviceInfo di = signal.appendDeviceInfo();
 
-			JDFJobPhase jpRIP = di.appendJobPhase();
+			final JDFJobPhase jpRIP = di.appendJobPhase();
 			di.setDeviceStatus(EnumDeviceStatus.Setup);
 			jpRIP.setStartTime(date);
 			jpRIP.setStatus(EnumNodeStatus.Setup);
 			jpRIP.setJobID(n.getJobID(true));
 			jpRIP.setJobPartID(n.getJobPartID(true));
 
-			JDFModuleStatus msRIP = jpRIP.appendModuleStatus();
+			final JDFModuleStatus msRIP = jpRIP.appendModuleStatus();
 			msRIP.setCombinedProcessIndex(new JDFIntegerList("0 1"));
 			msRIP.setModuleType("Imaging");
 			msRIP.setModuleID("ID_Imaging");
 
-			JDFModulePhase mpRIP = ptRIP.appendModulePhase();
+			final JDFModulePhase mpRIP = ptRIP.appendModulePhase();
 			mpRIP.setCombinedProcessIndex(new JDFIntegerList("0 1"));
 			mpRIP.setModuleType("Imaging");
 			mpRIP.setModuleID("ID_Imaging");
@@ -283,7 +310,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 			date.addOffset(0, 5, 0, 0);
 			jmf.setTimeStamp(date);
 
-			JDFJobPhase jpPrint = di.appendJobPhase();
+			final JDFJobPhase jpPrint = di.appendJobPhase();
 			di.setDeviceStatus(EnumDeviceStatus.Running);
 			jpPrint.setStatus(EnumNodeStatus.InProgress);
 			jpPrint.setStartTime(date);
@@ -305,14 +332,14 @@ public class DigiPrintTest extends JDFTestCaseBase
 			jmfDoc.write2File(sm_dirTestDataTemp + "moduleStatus" + testType + "1.jmf", 2, false);
 
 			ap.appendXMLComment("The following phaseTime is executed by two modules - sticher and printer", null);
-			JDFPhaseTime ptPrint = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
-			JDFModulePhase mpPrint = ptPrint.appendModulePhase();
+			final JDFPhaseTime ptPrint = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+			final JDFModulePhase mpPrint = ptPrint.appendModulePhase();
 			mpPrint.setCombinedProcessIndex(new JDFIntegerList("2"));
 			mpPrint.setModuleType("Printer");
 			mpPrint.setModuleID("ID_Printer");
 			ptPrint.setStart(date);
 
-			JDFModulePhase mpStitch = ptPrint.appendModulePhase();
+			final JDFModulePhase mpStitch = ptPrint.appendModulePhase();
 			mpStitch.setCombinedProcessIndex(new JDFIntegerList("3"));
 			mpStitch.setModuleType("Stitcher");
 			mpStitch.setModuleID("ID_Stitcher");
@@ -322,12 +349,12 @@ public class DigiPrintTest extends JDFTestCaseBase
 			JDFDeviceInfo di2 = null;
 			if (i < 2)
 			{
-				JDFSignal signal2 = jmf.appendSignal(JDFMessage.EnumType.Status);
+				final JDFSignal signal2 = jmf.appendSignal(JDFMessage.EnumType.Status);
 				di2 = (JDFDeviceInfo) signal2.copyElement(di, null);
 				di2.removeChild(ElementName.JOBPHASE, null, 0);
 				if (i == 1)
 				{
-					JDFModuleStatus directMSRip = (JDFModuleStatus) di2.copyElement(msRIP, null);
+					final JDFModuleStatus directMSRip = (JDFModuleStatus) di2.copyElement(msRIP, null);
 					directMSRip.setDeviceStatus(EnumDeviceStatus.Idle);
 				}
 			}
@@ -368,19 +395,19 @@ public class DigiPrintTest extends JDFTestCaseBase
 
 	/**
 	 * test devcaps for usagecounters
-	 * @throws Exception 
+	 * @throws Exception
 	 * 
 	 */
 	public void testUsageCounterDevCaps() throws Exception
 	{
-		JDFDoc duc = new JDFDoc("DeviceCap");
-		JDFDeviceCap devicecap = (JDFDeviceCap) duc.getRoot();
-		JDFDevCaps dcs = devicecap.appendDevCaps();
+		final JDFDoc duc = new JDFDoc("DeviceCap");
+		final JDFDeviceCap devicecap = (JDFDeviceCap) duc.getRoot();
+		final JDFDevCaps dcs = devicecap.appendDevCaps();
 		dcs.setName(ElementName.USAGECOUNTER);
-		JDFDevCap dc = dcs.appendDevCapInPool();
+		final JDFDevCap dc = dcs.appendDevCapInPool();
 		dc.setMinOccurs(3);
 		dc.setMaxOccurs(3);
-		JDFNameState counterID = dc.appendNameState(AttributeName.COUNTERID);
+		final JDFNameState counterID = dc.appendNameState(AttributeName.COUNTERID);
 		counterID.setAllowedValueList(new VString("ID_Black ID_Color ID_Total", null));
 		counterID.setListType(EnumListType.SingleValue);
 		duc.write2File(sm_dirTestDataTemp + "DevCapUsageCounter.jdf", 2, false);
@@ -392,18 +419,17 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 */
 	public void testDirectProof()
 	{
-		n.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n"
-				+ "The direct proof is acceptable and included in the good output");
+		n.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n" + "The direct proof is acceptable and included in the good output");
 		digiParams.setDirectProofAmount(1);
 		digiParams.setXMLComment("1 initial proof is requested");
 		rlComp.setAmount(100, null);
-		JDFAuditPool ap = n.getAuditPool();
+		final JDFAuditPool ap = n.getAuditPool();
 
-		VElement vRL = new VElement();
+		final VElement vRL = new VElement();
 		vRL.add(rlComp);
 		vRL.add(rlMedia);
 
-		StatusCounter stCounter = new StatusCounter(n, null, vRL);
+		final StatusCounter stCounter = new StatusCounter(n, null, vRL);
 		stCounter.setDeviceID("MyDevice");
 		final String mediaRef = rlMedia.getrRef();
 		stCounter.setTrackWaste(mediaRef, true);
@@ -442,7 +468,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 
 	/**
 	 * test amount handling
-	 * @throws Exception 
+	 * @throws Exception
 	 * 
 	 */
 	@SuppressWarnings("deprecation")
@@ -451,19 +477,19 @@ public class DigiPrintTest extends JDFTestCaseBase
 		rlComp.setAmount(20, null);
 		rlComp.setDescriptiveName("The link points to 20 planned and 20 good + 2 Waste brochures");
 
-		JDFMiscConsumable mc = (JDFMiscConsumable) n.appendMatchingResource(ElementName.MISCCONSUMABLE, EnumProcessUsage.AnyInput, null);
+		final JDFMiscConsumable mc = (JDFMiscConsumable) n.appendMatchingResource(ElementName.MISCCONSUMABLE, EnumProcessUsage.AnyInput, null);
 		mc.setResStatus(EnumResStatus.Available, false);
 		mc.setConsumableType("FooBar");
 		mc.setUnit("Fnarfs");
 		mc.setDescriptiveName("FooBars are always measured in Fnarfs");
-		JDFResourceLink rlmc = n.getLink(mc, null);
+		final JDFResourceLink rlmc = n.getLink(mc, null);
 		rlmc.setAmount(42, null);
 		rlmc.setDescriptiveName("The link points to 42 actual FooBars");
 
-		JDFUsageCounter uc = (JDFUsageCounter) n.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
+		final JDFUsageCounter uc = (JDFUsageCounter) n.appendMatchingResource(ElementName.USAGECOUNTER, EnumProcessUsage.AnyInput, null);
 		uc.setResStatus(EnumResStatus.Available, false);
 		uc.setCounterTypes(new VString("Click", " "));
-		JDFResourceLink rlu = n.getLink(uc, null);
+		final JDFResourceLink rlu = n.getLink(uc, null);
 		rlu.setAmount(200, null);
 		rlu.setDescriptiveName("The link points to 200 actual clicks");
 
@@ -473,12 +499,12 @@ public class DigiPrintTest extends JDFTestCaseBase
 		Thread.sleep(1000);
 		comp.setResStatus(EnumResStatus.Available, true);
 
-		VElement vRL = new VElement();
+		final VElement vRL = new VElement();
 		vRL.add(rlComp);
 		vRL.add(rlu);
 		vRL.add(rlMedia);
 		vRL.add(rlmc);
-		StatusUtil stUtil = new StatusUtil(n, null, vRL);
+		final StatusUtil stUtil = new StatusUtil(n, null, vRL);
 		stUtil.setDeviceID("MyDevice");
 		stUtil.setTrackWaste(rlMedia, true);
 		stUtil.setTrackWaste(rlComp, true);
@@ -486,7 +512,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 
 		doc.write2File(sm_dirTestDataTemp + File.separator + "DigiPrintAmount_initial.jdf", 2, false);
 
-		AmountBag[] bags = new AmountBag[vRL.size()];
+		final AmountBag[] bags = new AmountBag[vRL.size()];
 		bags[0] = stUtil.new AmountBag(rlComp.getrRef());
 		bags[1] = stUtil.new AmountBag(rlu.getrRef());
 		bags[2] = stUtil.new AmountBag(rlMedia.getrRef());
@@ -548,16 +574,16 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 */
 	public void testContentDataRunList() throws Exception
 	{
-		JDFContentList cl = (JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
-		JDFContentData cover = cl.appendContentData();
-		JDFContentData insert = cl.appendContentData();
-		String idCover = cover.appendAnchor(null);
-		KElement covermd = cover.appendElement("ContentMetaData");
+		final JDFContentList cl = (JDFContentList) n.addResource(ElementName.CONTENTLIST, null);
+		final JDFContentData cover = cl.appendContentData();
+		final JDFContentData insert = cl.appendContentData();
+		final String idCover = cover.appendAnchor(null);
+		final KElement covermd = cover.appendElement("ContentMetaData");
 		JDFPart part = (JDFPart) covermd.appendElement("Part");
 		part.setRunTags("CoverLetter");
 		part.setSheetName("CoverLetterSheet");
-		String idSheet = insert.appendAnchor(null);
-		KElement insertmd = cover.appendElement("ContentMetaData");
+		final String idSheet = insert.appendAnchor(null);
+		final KElement insertmd = cover.appendElement("ContentMetaData");
 		part = (JDFPart) insertmd.appendElement("Part");
 		part.setRunTags("BrochureSheets");
 		part.setSheetName("BrochureSheet");
@@ -566,9 +592,9 @@ public class DigiPrintTest extends JDFTestCaseBase
 		int xMax = 0;
 		for (int i = 0; i < 4; i++)
 		{
-			JDFRunList rl = (JDFRunList) ruli.addPartition(EnumPartIDKey.Run, "" + (i + 1));
+			final JDFRunList rl = (JDFRunList) ruli.addPartition(EnumPartIDKey.Run, "" + (i + 1));
 			rl.setEndOfSet(true);
-			JDFIntegerRangeList irl = new JDFIntegerRangeList();
+			final JDFIntegerRangeList irl = new JDFIntegerRangeList();
 			irl.append(xMin, xMax);
 			rl.setPages(irl);
 			rl.appendLayoutElement().setAttribute("ContentDataRefs", i % 2 == 0 ? idCover : idSheet);
@@ -587,10 +613,10 @@ public class DigiPrintTest extends JDFTestCaseBase
 	{
 		ruli.setXMLComment("the set / doc / ... structure is transferred from the pre-impositioning pdl");
 
-		JDFPageList pl = (JDFPageList) n.addResource(ElementName.PAGELIST, null);
+		final JDFPageList pl = (JDFPageList) n.addResource(ElementName.PAGELIST, null);
 		pl.setResStatus(EnumResStatus.Available, false);
 
-		JDFContentList cl = (JDFContentList) pl.appendContentList().makeRootResource(null, null, true);
+		final JDFContentList cl = (JDFContentList) pl.appendContentList().makeRootResource(null, null, true);
 		cl.setResStatus(EnumResStatus.Available, false);
 		cl.setXMLComment("Should we allow for content-data cross references to forther contentdata fields?");
 		ruli.refPageList(pl);
@@ -599,21 +625,21 @@ public class DigiPrintTest extends JDFTestCaseBase
 		digiParams.setSides(EnumSides.TwoSidedFlipY);
 		digiParams.setXMLComment("the sides attribute may be overridden by explicitly or implicitly missing runlist input elements");
 
-		VString vRun = new VString("Letter BrochureMale BrochureFemale", null);
+		final VString vRun = new VString("Letter BrochureMale BrochureFemale", null);
 
-		JDFStitchingParams sp = (JDFStitchingParams) n.addResource(ElementName.STITCHINGPARAMS, EnumUsage.Input);
+		final JDFStitchingParams sp = (JDFStitchingParams) n.addResource(ElementName.STITCHINGPARAMS, EnumUsage.Input);
 		med.setXMLComment("Media Partitioning is convenience only- the actual media selection is done by the digitalprintingparams MediaRef");
 		for (int i = 0; i < vRun.size(); i++)
 		{
-			String part = vRun.elementAt(i);
+			final String part = vRun.elementAt(i);
 			final JDFMedia partMedia = (JDFMedia) med.addPartition(EnumPartIDKey.Run, part);
 			partMedia.setProductID(part + "Media");
 
-			JDFDigitalPrintingParams digiPart = (JDFDigitalPrintingParams) digiParams.addPartition(EnumPartIDKey.Run, part);
+			final JDFDigitalPrintingParams digiPart = (JDFDigitalPrintingParams) digiParams.addPartition(EnumPartIDKey.Run, part);
 			digiPart.refMedia(partMedia);
 
 			sp.setXMLComment("how are multiple runs stitched together e.g. cover + body?");
-			JDFStitchingParams spPart = (JDFStitchingParams) sp.addPartition(EnumPartIDKey.Run, part);
+			final JDFStitchingParams spPart = (JDFStitchingParams) sp.addPartition(EnumPartIDKey.Run, part);
 			if (i == 0)
 			{
 				spPart.setNoOp(true);
@@ -629,9 +655,9 @@ public class DigiPrintTest extends JDFTestCaseBase
 		// loop over records
 		for (int i = 0; i < 10; i++)
 		{
-			JDFContentData letter = cl.appendContentData();
+			final JDFContentData letter = cl.appendContentData();
 			letter.setContentType("Letter");
-			JDFContentData brochure = cl.appendContentData();
+			final JDFContentData brochure = cl.appendContentData();
 			brochure.setContentType("Brochure");
 			final KElement lMeta = letter.appendElement("ContentMetadata");
 			// TODO apply new example
@@ -643,10 +669,10 @@ public class DigiPrintTest extends JDFTestCaseBase
 			bMeta.setAttribute("Record", "" + i);
 			bMeta.setAttribute("Gender", gender);
 
-			JDFRunList runSet = (JDFRunList) ruli.addPartition(EnumPartIDKey.RunSet, "Record" + i);
+			final JDFRunList runSet = (JDFRunList) ruli.addPartition(EnumPartIDKey.RunSet, "Record" + i);
 			JDFRunList run = runSet.addRun("file://server/tifs/testLetter" + i + ".tif", 0, -1);
 			run.setRun("Letter");
-			JDFComponent compSet = (JDFComponent) comp.addPartition(EnumPartIDKey.RunSet, runSet.getRunSet());
+			final JDFComponent compSet = (JDFComponent) comp.addPartition(EnumPartIDKey.RunSet, runSet.getRunSet());
 			JDFComponent co = (JDFComponent) compSet.addPartition(EnumPartIDKey.Run, run.getRun());
 			int page = (3 * i) % 7 + 1;
 			run.setPageListIndex(new JDFIntegerRangeList(new JDFIntegerRange(pageCount, pageCount + page - 1)));

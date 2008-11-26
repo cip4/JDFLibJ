@@ -70,6 +70,7 @@
 
 package org.cip4.jdflib.resource;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -1402,8 +1403,8 @@ public class JDFResource extends JDFElement
 		if (validParentNodeNameSet == null)
 		{
 			validParentNodeNameSet = new HashSet<String>();
-			final String nodeNames[] =
-			{ "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", ElementName.OCCUPATION, // copy of validRootParentNodeNames
+			final String nodeNames[] = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", ElementName.OCCUPATION, // copy of
+					// validRootParentNodeNames
 					"DeviceInfo", "DropItemIntent", "DropItem", "ProductionIntent", "CustomerInfo", "NodeInfo", "Ancestor", "Occupation", ElementName.PHASETIME };
 			for (int i = 0; i < nodeNames.length; i++)
 			{
@@ -1425,8 +1426,7 @@ public class JDFResource extends JDFElement
 		if (validRootParentNodeNameSet == null)
 		{
 			validRootParentNodeNameSet = new HashSet<String>();
-			final String[] nodeNames =
-			{ "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams" }; // must
+			final String[] nodeNames = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams" }; // must
 			// also
 			// copy
 			// to
@@ -1948,19 +1948,21 @@ public class JDFResource extends JDFElement
 	// //////////////////////////////////////////////////////////////////////////
 	// /////
 
-	protected VElement getDeepPartVector(final JDFAttributeMap m_in, final EnumPartUsage partUsage, final int matchingDepth, final VString partIDKeys)
+	protected VElement getDeepPartVector(final JDFAttributeMap m_in, EnumPartUsage partUsage, final int matchingDepth, final VString partIDKeys)
 	{
-		EnumPartUsage partUsageLocal = partUsage;
 		int matchingDepthLocal = matchingDepth;
 
 		final JDFAttributeMap m = new JDFAttributeMap(m_in);
 		final VElement vReturn = new VElement();
 		removeImplicitPartions(m);
-		if (partUsageLocal == null)
+		if (partUsage == null)
 		{
-			partUsageLocal = getPartUsage();
+			partUsage = getPartUsage();
 		}
-
+		if (!EnumPartUsage.Explicit.equals(partUsage))
+		{
+			m.reduceMap(partIDKeys); // also ok for sparse!
+		}
 		if (m.isEmpty())
 		{
 			vReturn.add(this);
@@ -1977,13 +1979,13 @@ public class JDFResource extends JDFElement
 			while (it.hasNext())// for(int i = 0; i < msiz; i++)
 			{
 				final String strKey = it.next();
-				final EnumPartIDKey partIDKey = EnumPartIDKey.getEnum(strKey);
-
-				// check map and throw exception if bad
-				if (partIDKey == null)
-				{
-					throw new JDFException("GetPartIDKeyEnum: illegal key:" + strKey);
-				}
+				// final EnumPartIDKey partIDKey = EnumPartIDKey.getEnum(strKey);
+				//
+				// // check map and throw exception if bad
+				// if (partIDKey == null)
+				// {
+				// throw new JDFException("GetPartIDKeyEnum: illegal key:" + strKey);
+				// }
 
 				// check whether we are already in a leaf when initially calling
 				final String mMapValue = m.get(strKey);
@@ -2021,7 +2023,7 @@ public class JDFResource extends JDFElement
 			// the identity map is always complete from the root, we therefore
 			// can start searching
 			// in the root
-			return getResourceRoot().getDeepPartVector(m, partUsageLocal, -1, partIDKeys);
+			return getResourceRoot().getDeepPartVector(m, partUsage, -1, partIDKeys);
 		}
 
 		if (msiz == matchingDepthLocal)
@@ -2036,11 +2038,8 @@ public class JDFResource extends JDFElement
 
 		if (resourceElement == null) // got a leaf or found no matching children
 		{
-			// 150802 RP removed different treatment for leaves and no matching
-			// elements
-			if (partUsageLocal.getValue() >= EnumPartUsage.Sparse.getValue()) // allow
-			// incomplete
-			// parts
+			// 150802 RP removed different treatment for leaves and no matching elements
+			if (partUsage.getValue() >= EnumPartUsage.Sparse.getValue()) // allow incomplete parts
 			{
 				vReturn.add(this);
 			}
@@ -2126,7 +2125,7 @@ public class JDFResource extends JDFElement
 
 			if (!badChild)
 			{
-				final VElement dpv = resourceElement.getDeepPartVector(m, partUsageLocal, hasMatchingAttribute ? matchingDepthLocal + 1 : matchingDepthLocal, partIDKeys);
+				final VElement dpv = resourceElement.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepthLocal + 1 : matchingDepthLocal, partIDKeys);
 
 				if (dpv.size() > 0)
 				{
@@ -2205,7 +2204,7 @@ public class JDFResource extends JDFElement
 			{
 				// none match and this is the last with bad kids and we want
 				// incomplete stuff
-				if (toAppend.isEmpty() && hasBadChildren && (partUsageLocal.equals(EnumPartUsage.Implicit)) && !hasMatchingAttribute)
+				if (toAppend.isEmpty() && hasBadChildren && (partUsage.equals(EnumPartUsage.Implicit)) && !hasMatchingAttribute)
 				{
 					final JDFResource root = getResourceRoot();
 					JDFResource closest = this;
@@ -2659,13 +2658,8 @@ public class JDFResource extends JDFElement
 	 */
 	private KElement getElement_JDFResource(final String nodeName, final String nameSpaceURI, final int iSkip)
 	{
-		KElement retEle = null;
-
-		if (super.getElement(nodeName, nameSpaceURI, 0) != null)
-		{
-			retEle = super.getElement(nodeName, nameSpaceURI, iSkip);
-		}
-		else
+		KElement retEle = super.getElement(nodeName, nameSpaceURI, 0);
+		if (retEle == null)
 		{
 			final KElement parent = getParentNode_KElement();
 			if (parent != null && parent.getNodeName().equals(getNodeName()))
@@ -2677,6 +2671,10 @@ public class JDFResource extends JDFElement
 
 				retEle = ((JDFResource) parent).getElement_JDFResource(nodeName, nameSpaceURI, iSkip);
 			}
+		}
+		else if (iSkip != 0)
+		{
+			retEle = super.getElement(nodeName, nameSpaceURI, iSkip);
 		}
 		return retEle;
 	}
@@ -3043,18 +3041,14 @@ public class JDFResource extends JDFElement
 		{
 			final VString partIDKeys = getPartIDKeys();
 			vValidParts = new VJDFAttributeMap(); // need local copy
-			for (int i = 0; i < vValidParts_.size(); i++)
+			final VElement v = getPartitionVector(vValidParts_, EnumPartUsage.Implicit);
+			if (v != null)
 			{
-				final JDFAttributeMap map = vValidParts_.elementAt(i);
-				final VElement v = getPartitionVector(map, EnumPartUsage.Implicit);
-				if (v != null)
+				final int vSize = v.size();
+				for (int j = 0; j < vSize; j++)
 				{
-					final int vSize = v.size();
-					for (int j = 0; j < vSize; j++)
-					{
-						final JDFResource r = (JDFResource) v.elementAt(j);
-						vValidParts.add(r.getPartMap(partIDKeys));
-					}
+					final JDFResource r = (JDFResource) v.elementAt(j);
+					vValidParts.add(r.getPartMap(partIDKeys));
 				}
 			}
 		}
@@ -3173,17 +3167,27 @@ public class JDFResource extends JDFElement
 	public JDFAttributeMap getPartMap(final VString ids)
 	{
 		final JDFAttributeMap m = new JDFAttributeMap();
-
-		final Iterator<String> idsIterator = ids.iterator();
-		while (idsIterator.hasNext())
+		KElement rLocal = this;
+		for (int i = ids.size() - 1; i >= 0; i--)
 		{
-			final String id = idsIterator.next();
-			final String atr = getAttribute(id, null, null);
-			if (atr != null)
+			final String attName = ids.stringAt(i);
+			final String s = rLocal.getAttribute_KElement(attName, null, null);
+			if (s != null)
 			{
-				m.put(id, atr);
+				m.put(attName, s);
+				rLocal = rLocal.getParentNode_KElement();
 			}
 		}
+		// final Iterator<String> idsIterator = ids.iterator();
+		// while (idsIterator.hasNext())
+		// {
+		// final String id = idsIterator.next();
+		// final String atr = getAttribute(id, null, null);
+		// if (atr != null)
+		// {
+		// m.put(id, atr);
+		// }
+		// }
 
 		return m;
 	}
@@ -3727,6 +3731,91 @@ public class JDFResource extends JDFElement
 	public VElement getPartitionVector(final JDFAttributeMap m, final boolean bIncomplete)
 	{
 		return getDeepPartVector(m, bIncomplete ? EnumPartUsage.Implicit : EnumPartUsage.Explicit, 0, getPartIDKeys());
+	}
+
+	/**
+	 * Gets the vector of parts (resource leaves or nodes) that match mAttribute
+	 * 
+	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
+	 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+	 * 
+	 * @return VElement - the vector of matching resource leaves or nodes
+	 * 
+	 * @default getPartitionVector(m, null)
+	 */
+	public VElement getPartitionVector(final VJDFAttributeMap m, EnumPartUsage partUsage)
+	{
+		if (partUsage == null)
+		{
+			partUsage = getPartUsage();
+		}
+
+		final VElement v = getLeaves(true);
+		if (m == null)
+		{
+			return v;
+		}
+		final HashMap<JDFAttributeMap, KElement> leafMap = new HashMap<JDFAttributeMap, KElement>();
+		final VString pk = getPartIDKeys();
+		for (int i = v.size() - 1; i >= 0; i--)
+		{
+			final JDFResource r = (JDFResource) v.get(i);
+			leafMap.put(r.getPartMap(pk), r);
+		}
+		v.clear();
+		boolean bAll = true;
+		for (int i = 0; bAll && i < m.size(); i++)
+		{
+			final JDFAttributeMap map = m.elementAt(i);
+			final KElement element = leafMap.get(map);
+			if (element != null)
+			{
+				v.add(element);
+			}
+			else
+			{
+				bAll = false;
+			}
+		}
+
+		if (!bAll)
+		{
+			v.clear();
+			for (int i = 0; i < m.size(); i++)
+			{
+				v.addAll(getPartitionVector(m.elementAt(i), partUsage));
+			}
+		}
+		return v;
+
+	}
+
+	/**
+	 * Gets the vector of parts (resource leaves or nodes) that match mAttribute
+	 * 
+	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
+	 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+	 * 
+	 * @return VElement - the vector of matching resource leaves or nodes
+	 * 
+	 * @default getPartitionVector(m, null)
+	 */
+	public VElement getPartitionLeafVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
+	{
+		final VElement v = getPartitionVector(m, partUsage);
+		if (v == null)
+		{
+			return null;
+		}
+		final VElement vNew = new VElement();
+		for (int i = 0; i < v.size(); i++)
+		{
+			final JDFResource r = (JDFResource) v.get(i);
+			final VElement vr = r.getLeaves(false);
+			vNew.addAll(vr);
+		}
+		vNew.unify();
+		return vNew;
 	}
 
 	/**
@@ -4600,7 +4689,7 @@ public class JDFResource extends JDFElement
 	public JDFIdentical getIdentical()
 	{
 
-		return (JDFIdentical) getElement(ElementName.IDENTICAL, null, 0);
+		return (JDFIdentical) getElement_KElement(ElementName.IDENTICAL, null, 0);
 	}
 
 	/**
@@ -4611,7 +4700,7 @@ public class JDFResource extends JDFElement
 	public JDFIdentical getCreateIdentical()
 	{
 
-		return (JDFIdentical) getCreateElement(ElementName.IDENTICAL, null, 0);
+		return (JDFIdentical) getCreateElement_KElement(ElementName.IDENTICAL, null, 0);
 	}
 
 	/**

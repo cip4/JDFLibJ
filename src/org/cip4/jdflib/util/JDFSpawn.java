@@ -76,6 +76,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -156,6 +157,7 @@ public class JDFSpawn
 	 */
 	public VJDFAttributeMap vSpawnParts = null;
 
+	private Set<JDFAttributeMap> setSpawnParts = null;
 	/**
 	 * exception id for multiple merge attempt
 	 */
@@ -268,6 +270,8 @@ public class JDFSpawn
 			{
 				throw new JDFException("JDFNode.Spawn attempting to spawn incompatible partitions");
 			}
+			setSpawnParts = ContainerUtil.toHashSet(vSpawnParts.getVector());
+
 			// Spawn a complete node -> no partition handling
 		}
 		else
@@ -392,10 +396,7 @@ public class JDFSpawn
 				}
 				else
 				{
-					for (int j = 0; j < vSpawnParts.size(); j++)
-					{
-						vRes.appendUnique(r.getPartitionVector(vSpawnParts.elementAt(j), null));
-					}
+					vRes.appendUnique(r.getPartitionVector(vSpawnParts, null));
 				}
 				for (int k = 0; k < vRes.size(); k++)
 				{
@@ -1125,6 +1126,11 @@ public class JDFSpawn
 		{
 			return true;
 		}
+		if (setSpawnParts.contains(testMap))
+		{
+			return true;
+		}
+
 		final VString keys = testMap.getKeys();
 		final int ks = keys.size();
 
@@ -1165,21 +1171,18 @@ public class JDFSpawn
 
 		// in case we spawn lower than, only remove partitions that are parallel to our spawning
 		int nMax = 999;
-		for (int i = 0; i < vSpawnParts.size(); i++)
+		final VElement vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+		for (int j = 0; j < vSubParts.size(); j++)
 		{
-			final VElement vSubParts = r.getPartitionVector(vSpawnParts.elementAt(i), EnumPartUsage.Implicit);
-			for (int j = 0; j < vSubParts.size(); j++)
+			final JDFResource rr = (JDFResource) vSubParts.get(j);
+			final JDFAttributeMap partMap = rr.getPartMap(partIDKeys);
+			final int mapSize = partMap == null ? 0 : partMap.size();
+			if (mapSize < nMax)
 			{
-				final JDFResource rr = (JDFResource) vSubParts.get(j);
-				final JDFAttributeMap partMap = rr.getPartMap();
-				final int mapSize = partMap == null ? 0 : partMap.size();
-				if (mapSize < nMax)
+				nMax = mapSize;
+				if (nMax == 0)
 				{
-					nMax = mapSize;
-					if (nMax == 0)
-					{
-						return; // nothing left to do
-					}
+					return; // nothing left to do
 				}
 			}
 		}
@@ -1320,35 +1323,41 @@ public class JDFSpawn
 	 */
 	private void spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
 	{
+
 		if (vSpawnParts != null && vSpawnParts.size() > 0)
 		{
-			final int size = vSpawnParts.size();
-			// loop over all part maps to get best matching resource
-			for (int j = 0; j < size; j++)
+			final VElement vSubParts;
+			final JDFAttributeMap partMap = r.getPartMap();
+			if (setSpawnParts.contains(partMap))
 			{
-				final VElement vSubParts = r.getPartitionVector(vSpawnParts.elementAt(j), EnumPartUsage.Implicit);
-				// always implicit - in the worst case some partitions may be multiply spawned
-				for (int k = 0; k < vSubParts.size(); k++)
+				vSubParts = new VElement();
+				vSubParts.add(r);
+			}
+			else
+			{
+				vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+			}
+			// always implicit - in the worst case some partitions may be multiply spawned
+			for (int k = 0; k < vSubParts.size(); k++)
+			{
+				final JDFResource pLeaf = (JDFResource) vSubParts.item(k);
+				if (pLeaf != null)
 				{
-					final JDFResource pLeaf = (JDFResource) vSubParts.item(k);
-					if (pLeaf != null)
+					// set the lock of the leaf to true if it is RO, else
+					// unlock it
+					if (bStayinMain)
 					{
-						// set the lock of the leaf to true if it is RO, else
-						// unlock it
-						if (bStayinMain)
+						if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (pLeaf.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
 						{
-							if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (pLeaf.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
-							{
-								pLeaf.setSpawnStatus(copyStatus);
-								pLeaf.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
-							}
-							pLeaf.appendSpawnIDs(spawnID);
+							pLeaf.setSpawnStatus(copyStatus);
+							pLeaf.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
 						}
-						else
-						{
-							pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
-							pLeaf.setSpawnIDs(new VString(spawnID, null));
-						}
+						pLeaf.appendSpawnIDs(spawnID);
+					}
+					else
+					{
+						pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
+						pLeaf.setSpawnIDs(new VString(spawnID, null));
 					}
 				}
 			}

@@ -183,6 +183,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testMedia()
 	{
 		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);

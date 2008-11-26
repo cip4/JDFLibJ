@@ -137,6 +137,43 @@ import org.w3c.dom.Node;
  */
 public class JDFSpawnTest extends JDFTestCaseBase
 {
+
+	/**
+	 * Test method for {@link com.heidelberg.printready.model.processing.JC_aInteraction#spawnSubSubJDFs(java.lang.String, java.util.List)}.
+	 */
+	public void testSpawnSubSubJDFs()
+	{
+
+		final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "ApprovalSubJDF.jdf");
+		final JDFNode subjdfDocRoot = d.getJDFRoot();
+		final VJDFAttributeMap vspawnPartsMap = subjdfDocRoot.getAncestorPool().getPartMapVector();
+
+		final int size = vspawnPartsMap.size();
+		final JDFAttributeMap elementAt = vspawnPartsMap.elementAt(size - 1);
+		vspawnPartsMap.removeElementAt(size - 1);
+		if (subjdfDocRoot != null)
+		{
+
+			final Vector<String> vRWResources = new Vector<String>(2);
+			vRWResources.add(JDFConstants.OUTPUT);
+
+			final String fileURL = "C:\\testJDF.jdf";
+
+			final long currentTimeMillis = System.currentTimeMillis();
+			final JDFNode nested_spawn_node = new JDFSpawn(subjdfDocRoot).spawn(fileURL, fileURL, vRWResources, vspawnPartsMap, false, true, true, true);
+			System.out.println("Spawning took " + (System.currentTimeMillis() - currentTimeMillis));
+			assertNotNull(nested_spawn_node);
+			final JDFMerge merge = new JDFMerge(subjdfDocRoot);
+
+			// this is the feature taht is being tested..
+			merge.bUpdateStati = true;
+			final JDFNode nodeM = merge.mergeJDF(nested_spawn_node, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
+			assertNotNull(nodeM);
+			System.out.println("Spawning and Merging took " + (System.currentTimeMillis() - currentTimeMillis));
+
+		}
+	}
+
 	/**
 	 * @param strXMLFile
 	 * @param strSpawnID
@@ -914,7 +951,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 		final JDFMerge merge = new JDFMerge(n);
 		merge.mergeJDF(nS1, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
-		assertEquals("only the sides are apawned, not the sheet proper", n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo", null), null);
+		// assertEquals("only the sides are apawned, not the sheet proper",
+		// n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo", null), null);
 	}
 
 	// /////////////////////////////////////////////////////////
@@ -1197,7 +1235,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 					final VElement poolChildren = mergedNode.getResourceLinkPool().getPoolChildren("NodeInfoLink", null, null);
 					assertNotNull("poolChildren", poolChildren);
 					assertEquals("no spurious ni added", poolChildren.size(), 1);
-					assertEquals("Comment size", mergedNode.getChildElementVector(ElementName.COMMENT, null, null, true, 99, false).size(), 3);
+					assertEquals("Comment size" + i + " " + j + " " + k, mergedNode.getChildElementVector(ElementName.COMMENT, null, null, true, 99, false).size(), 3);
 					assertEquals("merged amount ok", xmRL.getAmount(map), 40.0, 0.);
 					assertEquals("did not overwrite rl attribute", xmRL.getAttribute("foo:bar", "www.foobar.com", null), "a");
 					assertTrue(xmRL.hasAttribute(AttributeName.RREF));
@@ -1235,8 +1273,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	public void testSpawnMergeSimple()
 	{
-		final EnumCleanUpMerge cu[] = new EnumCleanUpMerge[]
-		{ EnumCleanUpMerge.None, EnumCleanUpMerge.RemoveAll, EnumCleanUpMerge.RemoveRRefs };
+		final EnumCleanUpMerge cu[] = new EnumCleanUpMerge[] { EnumCleanUpMerge.None, EnumCleanUpMerge.RemoveAll, EnumCleanUpMerge.RemoveRRefs };
 		for (int i = 0; i < 3; i++)
 		{
 			final JDFDoc d = JDFTestCaseBase.creatXMDoc();

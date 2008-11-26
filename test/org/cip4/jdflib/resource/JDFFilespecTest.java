@@ -93,65 +93,75 @@ import org.cip4.jdflib.util.MimeUtilTest;
 
 ////////////////////////////////////////////////////////////////
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 26.11.2008
+ */
 public class JDFFilespecTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
 	public void testSetAbsoluteURL()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
-		JDFFileSpec fs = (JDFFileSpec) n.addResource("FileSpec", null,
-				EnumUsage.Input, null, null, null, null);
-		JDFFileSpec fs2 = (JDFFileSpec) n.addResource("FileSpec", null,
-				EnumUsage.Input, null, null, null, null);
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		final JDFFileSpec fs = (JDFFileSpec) n.addResource("FileSpec", null, EnumUsage.Input, null, null, null, null);
+		final JDFFileSpec fs2 = (JDFFileSpec) n.addResource("FileSpec", null, EnumUsage.Input, null, null, null, null);
 		fs.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), false);
 		fs2.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), true);
 		assertEquals(fs.getURL(), "file:///C:/ist%20blöd/fnord%20is%20€");
-		assertEquals(fs2.getURL(),
-				"file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
+		assertEquals(fs2.getURL(), "file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
 	}
 
 	// //////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception x
+	 */
 	public void testGetURLCidStream() throws Exception
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF();
-		Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp
-				+ File.separator + "testMimePackageDoc.mjm");
-		BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
-		JDFDoc d = MimeUtil.getJDFDoc(bp);
-		JDFNode n = d.getJDFRoot();
-		JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n
-				.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS,
-						null, null, 0);
+		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
+		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
+		final JDFDoc d = MimeUtil.getJDFDoc(bp);
+		final JDFNode n = d.getJDFRoot();
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
 		assertNotNull(cscp);
-		JDFFileSpec fs = cscp.getFinalTargetDevice();
-		InputStream is = fs.getURLInputStream();
+		final JDFFileSpec fs = cscp.getFinalTargetDevice();
+		final InputStream is = fs.getURLInputStream();
 		assertNotNull(is);
-		byte b[] = new byte[100];
-		int i = is.read(b);
+		final byte b[] = new byte[100];
+		final int i = is.read(b);
 		assertTrue(i > 0);
-		String s = new String(b);
+		final String s = new String(b);
 		assertTrue(s.indexOf("I C C") >= 0);
 
 	}
 
 	// //////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetMimeTypeFromURL()
 	{
 		assertNull(JDFFileSpec.getMimeTypeFromURL(null));
 		assertNull(JDFFileSpec.getMimeTypeFromURL("burp"));
-		assertEquals("application/pdf", JDFFileSpec
-				.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
-		assertEquals("image/tiff", JDFFileSpec
-				.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
+		assertEquals("application/pdf", JDFFileSpec.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
+		assertEquals("image/tiff", JDFFileSpec.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
 	}
 
 	// //////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testSetMimeURL()
 	{
-		JDFDoc d = new JDFDoc("FileSpec");
-		JDFFileSpec fs = (JDFFileSpec) d.getRoot();
+		final JDFDoc d = new JDFDoc("FileSpec");
+		final JDFFileSpec fs = (JDFFileSpec) d.getRoot();
 		fs.setMimeURL("file:/c/test.pdf");
 		assertEquals(fs.getMimeType(), "application/pdf");
 		assertEquals(fs.getURL(), "file:/c/test.pdf");

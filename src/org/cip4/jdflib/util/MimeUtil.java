@@ -715,7 +715,7 @@ public class MimeUtil extends UrlUtil
 	/**
 	 * build a MIME package that contains all references in all FileSpecs of a given JDFDoc the doc is modified so that all URLs are cids
 	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must
-	 *        already be specified as a CID
+	 * already be specified as a CID
 	 * @param docJDF the JDFDoc representation of the JDF to package
 	 * @param extendReferenced if true, also package any further reeferenced files
 	 * @return a Message representing the resulting MIME package, null if an error occured
@@ -903,7 +903,7 @@ public class MimeUtil extends UrlUtil
 	 * Returns the values of the <i>URL</i> attribute of each element in the input list.
 	 * @param fileSpecs a list of elements with <i>URL</i> attributes
 	 * @return an array containing the value of the <i>URL</i> attribute of each element in the input list. The order of values in the returned array
-	 *         corresponds to the order of the elements in the input list.
+	 * corresponds to the order of the elements in the input list.
 	 */
 	private static String[] listURLs(final VElement fileSpecs)
 	{
@@ -1061,21 +1061,20 @@ public class MimeUtil extends UrlUtil
 			// +
 			// xml
 		}
-		else
-			if (root instanceof JDFNode)
-			{
-				messageBodyPart.setHeader(CONTENT_TYPE, JDFConstants.MIME_JDF); // JDF
-				// :
-				// application
-				// /
-				// vnd
-				// .
-				// cip4
-				// -
-				// jmf
-				// +
-				// xml
-			}
+		else if (root instanceof JDFNode)
+		{
+			messageBodyPart.setHeader(CONTENT_TYPE, JDFConstants.MIME_JDF); // JDF
+			// :
+			// application
+			// /
+			// vnd
+			// .
+			// cip4
+			// -
+			// jmf
+			// +
+			// xml
+		}
 
 	}
 
@@ -1104,21 +1103,19 @@ public class MimeUtil extends UrlUtil
 	 * @throws MessagingException
 	 */
 
-	public static HttpURLConnection writeToURL(final Multipart mp, final String strUrl, final MIMEDetails ms) throws IOException, MessagingException
+	public static HttpURLConnection writeToURL(final Multipart mp, final String strUrl, MIMEDetails mimeDetails) throws IOException, MessagingException
 	{
-		MIMEDetails msLocal = ms;
-
 		HttpURLConnection httpURLconnection = null;
 
-		if (msLocal == null)
+		if (mimeDetails == null)
 		{
-			msLocal = new MIMEDetails();
+			mimeDetails = new MIMEDetails();
 		}
 
 		final URL url = new URL(strUrl);
 		if ("File".equalsIgnoreCase(url.getProtocol()))
 		{
-			writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath(), msLocal);
+			writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath(), mimeDetails);
 		}
 		else
 		// assume http
@@ -1131,15 +1128,15 @@ public class MimeUtil extends UrlUtil
 			contentType = StringUtil.token(contentType, 0, "\n");
 			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
 			httpURLconnection.setDoOutput(true);
-			if (msLocal.httpDetails != null)
+			if (mimeDetails.httpDetails != null)
 			{
-				msLocal.httpDetails.applyTo(httpURLconnection);
+				mimeDetails.httpDetails.applyTo(httpURLconnection);
 			}
 
 			try
 			{
 				final OutputStream out = httpURLconnection.getOutputStream();
-				writeToStream(mp, out, msLocal);
+				writeToStream(mp, out, mimeDetails);
 			}
 			catch (final ConnectException x)
 			{
@@ -1402,8 +1399,7 @@ public class MimeUtil extends UrlUtil
 
 		if (subURL == null)
 		{
-			return new JDFDoc[]
-			{ jmf };
+			return new JDFDoc[] { jmf };
 		}
 		final BodyPart bpJDF = getPartByCID(mp, subURL);
 		final JDFDoc docs[] = new JDFDoc[2];
@@ -1411,8 +1407,7 @@ public class MimeUtil extends UrlUtil
 		docs[1] = getJDFDoc(bpJDF);
 		if (docs[1] == null)
 		{
-			return new JDFDoc[]
-			{ jmf };
+			return new JDFDoc[] { jmf };
 		}
 		return docs;
 	}
