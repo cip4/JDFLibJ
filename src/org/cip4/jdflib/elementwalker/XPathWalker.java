@@ -1,0 +1,255 @@
+/*
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses()
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *
+ */
+/**
+ * 
+ */
+package org.cip4.jdflib.elementwalker;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Collections;
+
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * walker that writes XPaths of all elements to a file
+ */
+public class XPathWalker extends BaseElementWalker
+{
+	protected class XPathBuilder
+	{
+		public XPathBuilder(KElement _e, int countSiblings, VString attName)
+		{
+			super();
+			this.elem = _e;
+			methCountSiblings = countSiblings;
+			attributeNames = attName;
+		}
+
+		KElement elem;
+		int methCountSiblings;
+		VString attributeNames;
+
+		/**
+		 * Gets the XPath full tree representation of 'this'
+		 * 
+		 * @param relativeTo relative path to which to create an xpath
+		 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3,
+		 *            add [@ID="id"]
+		 * 
+		 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
+		 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
+		 */
+		public String buildXPath(String relativeTo)
+		{
+			String path = elem.getNodeName();
+			KElement p = elem.getParentNode_KElement();
+
+			boolean bAtt = false;
+			if (methCountSiblings > 0 && attributeNames != null)
+			{
+				for (int i = 0; i < attributeNames.size(); i++)
+				{
+					if (methCountSiblings == 3 && elem.hasAttribute(attributeNames.get(i), null, false))
+					{
+						path += "[@" + attributeNames.get(i) + "=\"" + elem.getAttribute(attributeNames.get(i)) + "\"]";
+						bAtt = true;
+						break;
+					}
+				}
+			}
+			if (!bAtt)
+			{
+				KElement e = (p != null) ? p.getElement(path, null, 0) : null;
+				int i = 1;
+				while (e != null)
+				{
+					if (e.equals(elem))
+					{
+						path += "[" + Integer.toString(i) + "]";
+						break;
+					}
+					do
+					{
+						e = e.getNextSiblingElement();
+					}
+					while (e != null && !e.fitsName(path, null));
+					i++;
+				}
+			}
+
+			path = "/" + path;
+			if (p != null)
+			{
+				path = new XPathBuilder(p, methCountSiblings, attributeNames).buildXPath(relativeTo) + path;
+			}
+
+			if (relativeTo != null)
+			{
+				if (path.startsWith(relativeTo))
+				{
+					path = "." + path.substring(relativeTo.length());
+					if (path.startsWith(".["))
+					{
+						int iB = path.indexOf("]");
+						if (iB > 0)
+						{
+							path = "." + path.substring(iB + 1);
+						}
+					}
+				}
+			}
+			return path;
+		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.elementwalker.ElementWalker#walkTree(org.cip4.jdflib.core.KElement, KElement)
+	 * @param e
+	 * @return the number of elements traversed
+	 */
+	@Override
+	public int walkTree(KElement e, KElement trackElem)
+	{
+		XPathBuilder xb = new XPathBuilder(e, 3, new VString("Name,ChannelType,ContactTypes,IDUsage", ","));
+		String s = xb.buildXPath(null);
+		writer.println(s);
+		if (bAttribute)
+		{
+			VString vkeys = e.getAttributeVector();
+			Collections.sort(vkeys);
+			for (int i = 0; i < vkeys.size(); i++)
+			{
+				writer.print(s + "/@" + vkeys.get(i));
+				if (bAttributeValue)
+					writer.print(" = " + e.getAttribute(vkeys.get(i)));
+				writer.println();
+			}
+		}
+		return super.walkTree(e, trackElem);
+	}
+
+	/**
+	 * @param e
+	 * @return the number of xpaths
+	 */
+	public int walkAll(KElement e)
+	{
+		int n = walkTree(e, null);
+		writer.flush();
+		writer.close();
+		return n;
+	}
+
+	private File outTxt = null;
+	private final PrintWriter writer;
+	boolean bAttribute = false;
+	boolean bAttributeValue = false;
+
+	public void setBAttribute(boolean attribute)
+	{
+		bAttribute = attribute;
+	}
+
+	public void setBAttributeValue(boolean attribute)
+	{
+		bAttributeValue = attribute;
+	}
+
+	/**
+	 * @param xpathOutput
+	 * @throws FileNotFoundException 
+	 */
+	public XPathWalker(File xpathOutput) throws FileNotFoundException
+	{
+		super(new BaseWalkerFactory());
+		outTxt = xpathOutput;
+		writer = new PrintWriter(outTxt);
+	}
+
+	/**
+	 * @param xpathOutput
+	 */
+	public XPathWalker(PrintWriter w)
+	{
+		super(new BaseWalkerFactory());
+		outTxt = null;
+		writer = w;
+	}
+
+	@Override
+	protected BaseWalkerFactory getFactory()
+	{
+		return (BaseWalkerFactory) theFactory;
+	}
+
+}
