@@ -273,6 +273,9 @@ public class QueueTest extends TestCase
 		assertEquals("date", d.getTimeInMillis(), new JDFDate().getTimeInMillis(), 30000);
 	}
 
+	/**
+	 * 
+	 */
 	public void testFlushQueue()
 	{
 		final JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
@@ -284,6 +287,27 @@ public class QueueTest extends TestCase
 
 	}
 
+	/**
+	 * 
+	 */
+	public void testPerformance()
+	{
+		q.setAutomated(false);
+		for (int i = 0; i < 10000; i++)
+		{
+			final JDFQueueEntry qe = q.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+		}
+		final long l1 = System.currentTimeMillis();
+		q.sortChildren();
+		final long l2 = System.currentTimeMillis();
+		assertEquals("Sort time <4 seconds", 2000, (l2 - l1), 2000);
+	}
+
+	/**
+	 * 
+	 */
 	public void testThreads()
 	{
 		q.setAutomated(true);
@@ -335,12 +359,18 @@ public class QueueTest extends TestCase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testNumEntries()
 	{
 		assertEquals(5, q.numEntries(null));
 		assertEquals(2, q.numEntries(EnumQueueEntryStatus.Waiting));
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetQueueEntryVector()
 	{
 		assertEquals(5, q.getQueueEntryVector().size());

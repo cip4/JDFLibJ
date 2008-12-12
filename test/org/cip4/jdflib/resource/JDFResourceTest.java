@@ -364,6 +364,22 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
+	public void testIsPhysical()
+	{
+		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		assertFalse(n.addResource(ElementName.STRAPPINGPARAMS, null).isPhysical());
+		assertFalse(n.addResource(ElementName.MEDIAINTENT, null).isPhysical());
+		assertTrue(n.addResource(ElementName.MEDIA, null).isPhysical());
+		assertTrue(n.addResource(ElementName.COMPONENT, null).isPhysical());
+		assertFalse(n.addResource(ElementName.PLACEHOLDERRESOURCE, null).isPhysical());
+	}
+
+	/**
+	 * 
+	 */
 	public void testIsResourceElement()
 	{
 		// get the JDF document root element
@@ -468,6 +484,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetChildrenByTagName()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -486,6 +505,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetChildElement()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);

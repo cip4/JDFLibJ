@@ -80,63 +80,88 @@
 package org.cip4.jdflib.util;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
  * Bidirectional HashMap utility class
  * 
  * @author prosirai
+ * @param <a> any datatype for the key
+ * @param <b> any datatype for the value
  * 
  */
-public class BiHashMap
+public class BiHashMap<a, b>
 {
 
-	private HashMap mapKey;
-	private HashMap mapVal;
+	private final HashMap<a, b> mapKey;
+	private final HashMap<b, a> mapVal;
 
+	/**
+	 * 
+	 */
 	public BiHashMap()
 	{
-		mapKey = new HashMap();
-		mapVal = new HashMap();
+		mapKey = new HashMap<a, b>();
+		mapVal = new HashMap<b, a>();
 	}
 
 	/**
 	 * get the value for key
+	 * @param key the key
+	 * @return the corresponding value
 	 */
-	public Object getValue(Object key)
+	public b getValue(final a key)
 	{
-		return mapKey.get(key);
+		return key == null ? null : mapKey.get(key);
+	}
+
+	/**
+	 * @return the corresponding key iterator
+	 */
+	public Iterator<a> getKeyIterator()
+	{
+		return mapKey.keySet().iterator();
 	}
 
 	/**
 	 * get the value for key
+	 * @param val the value
+	 * @return the corresponding key
 	 */
-	public Object getKey(Object val)
+	public a getKey(final b val)
 	{
-		return mapVal.get(val);
+		return val == null ? null : mapVal.get(val);
 	}
 
 	/**
 	 * remove key and its associated value
+	 * @param key the key
 	 */
-	public void remove(Object key)
+	public void remove(final a key)
 	{
-		Object val = mapKey.get(key);
+		final b val = mapKey.get(key);
 		mapVal.remove(val);
 		mapKey.remove(key);
 	}
 
 	/**
-	 * get the value for key
+	 * put the value for key
+	 * @param key the key
+	 * @param val the value
 	 */
-	public void put(Object key, Object val)
+	public void put(final a key, final b val)
 	{
-		Object o = mapKey.get(key);
+		final b o = mapKey.get(key);
 		if (o != null)
+		{
 			mapVal.remove(o);
-		o = mapVal.get(val);
-		if (o != null)
-			mapKey.remove(o);
+		}
+		final a o2 = mapVal.get(val);
+		if (o2 != null)
+		{
+			mapKey.remove(o2);
+		}
 
 		mapVal.put(val, key);
 		mapKey.put(key, val);
@@ -156,7 +181,7 @@ public class BiHashMap
 	 * 
 	 * @return
 	 */
-	public Map getKeyMap()
+	public Map<a, b> getKeyMap()
 	{
 		return mapKey;
 	}
@@ -166,7 +191,7 @@ public class BiHashMap
 	 * 
 	 * @return
 	 */
-	public Map getValMap()
+	public Map<b, a> getValMap()
 	{
 		return mapVal;
 	}

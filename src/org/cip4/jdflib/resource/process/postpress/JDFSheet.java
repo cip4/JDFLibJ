@@ -91,41 +91,42 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFSignature;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFSurface;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 09.12.2008
+ */
 public class JDFSheet extends JDFSignature
 {
 	private static final long serialVersionUID = 1L;
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[5];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX,
-				0x44444333, AttributeInfo.EnumAttributeType.rectangle, null,
-				null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCKORIGINS,
-				0x44444333, AttributeInfo.EnumAttributeType.boolean_, null,
-				"false");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x44444333,
-				AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE,
-				0x44444333, AttributeInfo.EnumAttributeType.enumeration,
-				EnumSourceWorkStyle.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX,
-				0x44444333, AttributeInfo.EnumAttributeType.rectangle, null,
-				null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x44444333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.NAME, 0x44444333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x44444333, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x44444333, AttributeInfo.EnumAttributeType.rectangle, null, null);
 	}
 
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
-		AttributeInfo ai = super.getTheAttributeInfo();
+		final AttributeInfo ai = super.getTheAttributeInfo();
 		if (getLocalName().equals(ElementName.SHEET))
+		{
 			ai.updateReplace(atrInfoTable);
+		}
 		return ai;
 	}
 
@@ -133,8 +134,7 @@ public class JDFSheet extends JDFSignature
 	private static ElemInfoTable[] elemInfoTable_Surface = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable_Surface[0] = new ElemInfoTable(ElementName.SURFACE,
-				0x33333333);
+		elemInfoTable_Surface[0] = new ElemInfoTable(ElementName.SURFACE, 0x33333333);
 	}
 
 	@Override
@@ -146,10 +146,10 @@ public class JDFSheet extends JDFSignature
 	/**
 	 * Constructor for JDFSheet
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFSheet(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFSheet(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -157,12 +157,11 @@ public class JDFSheet extends JDFSignature
 	/**
 	 * Constructor for JDFSheet
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -170,17 +169,19 @@ public class JDFSheet extends JDFSignature
 	/**
 	 * Constructor for JDFSheet
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
-	public JDFSheet(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFSheet(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.resource.JDFSignature#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -191,6 +192,9 @@ public class JDFSheet extends JDFSignature
 	// Start FRONT Surface
 	// ________________________________________________________________________________________
 
+	/**
+	 * @return
+	 */
 	public JDFSurface getCreateFrontSurface()
 	{
 		JDFSurface e = getSurface(EnumSide.Front);
@@ -206,18 +210,26 @@ public class JDFSheet extends JDFSignature
 	/**
 	 * const get surface with the correct partition key
 	 */
-	public JDFSurface getSurface(EnumSide side)
+	public JDFSurface getSurface(final EnumSide side)
 	{
 		JDFSurface s = getSurface(0);
 		if (s == null)
+		{
 			return null;
+		}
 		if (s.getSide() == side)
+		{
 			return s;
+		}
 		s = getSurface(1);
 		if (s == null)
+		{
 			return null;
+		}
 		if (s.getSide() == side)
+		{
 			return s;
+		}
 		return null;
 	}
 
@@ -250,7 +262,7 @@ public class JDFSheet extends JDFSignature
 	 */
 	public void removeFrontSurface()
 	{
-		JDFSurface e = getSurface(EnumSide.Front);
+		final JDFSurface e = getSurface(EnumSide.Front);
 		if (e != null)
 		{
 			e.deleteNode();
@@ -258,8 +270,7 @@ public class JDFSheet extends JDFSignature
 	}
 
 	/**
-	 * if this is a new layout, return the partition key signaturename else
-	 * return Signature/@Name of this or its appropriate parent
+	 * if this is a new layout, return the partition key signaturename else return Signature/@Name of this or its appropriate parent
 	 * 
 	 * @return the name of the signature
 	 */
@@ -272,10 +283,32 @@ public class JDFSheet extends JDFSignature
 		}
 		if (getLocalName().equals(ElementName.SURFACE))
 		{
-			JDFSheet sh = (JDFSheet) getParentNode_KElement();
-			return sh.getSheetName();
+			final KElement k = getParentNode_KElement();
+			if (k instanceof JDFSheet)
+			{
+				final JDFSheet sh = (JDFSheet) k;
+				return sh.getSheetName();
+			}
+			else if (k instanceof JDFResourcePool)
+			{
+				final JDFNode n = ((JDFElement) k).getParentJDF();
+				final KElement surfaceRef = n.getChildWithAttribute("SurfaceRef", AttributeName.RREF, null, getID(), 0, false);
+				if (surfaceRef != null)
+				{
+					final KElement shE = surfaceRef.getParentNode_KElement();
+					if (shE instanceof JDFSheet)
+					{
+						final JDFSheet sh = (JDFSheet) shE;
+						return sh.getSheetName();
+					}
+				}
+			}
 		}
-		return super.getSheetName();
+		else
+		{
+			return super.getSheetName();
+		}
+		return null;
 	}
 
 	/**
@@ -291,10 +324,9 @@ public class JDFSheet extends JDFSignature
 	/**
 	 * create inter-resource link to refTarget
 	 * 
-	 * @param JDFSurface
-	 *            refTarget the element that is referenced
+	 * @param JDFSurface refTarget the element that is referenced
 	 */
-	public void refFrontSurface(JDFSurface refTarget)
+	public void refFrontSurface(final JDFSurface refTarget)
 	{
 		refElement(refTarget);
 		refTarget.setSide(EnumSide.Back);
@@ -320,7 +352,7 @@ public class JDFSheet extends JDFSignature
 	 * @deprecated use getSurface(EnumSide side)
 	 */
 	@Deprecated
-	public JDFSurface getBackSurface() 
+	public JDFSurface getBackSurface()
 	{
 		return getSurface(EnumSide.Back);
 	}
@@ -343,7 +375,7 @@ public class JDFSheet extends JDFSignature
 	 */
 	public void removeBackSurface()
 	{
-		JDFSurface e = getSurface(EnumSide.Back);
+		final JDFSurface e = getSurface(EnumSide.Back);
 		if (e != null)
 		{
 			e.deleteNode();
@@ -363,23 +395,20 @@ public class JDFSheet extends JDFSignature
 	/**
 	 * create inter-resource link to refTarget
 	 * 
-	 * @param JDFSurface
-	 *            refTarget the element that is referenced
+	 * @param JDFSurface refTarget the element that is referenced
 	 */
-	public void refBackSurface(JDFSurface refTarget)
+	public void refBackSurface(final JDFSurface refTarget)
 	{
 		refElement(refTarget);
 		refTarget.setSide(EnumSide.Back);
 	}
 
 	/**
-	 * gets or appends a signature in both old and new Layouts if old: a
-	 * <Surface> element if new: a Side partition leaf
+	 * gets or appends a signature in both old and new Layouts if old: a <Surface> element if new: a Side partition leaf
 	 * 
-	 * @param iSkip
-	 *            the number of signatures to skip
+	 * @param iSkip the number of signatures to skip
 	 */
-	public JDFSurface getCreateSurface(int iSkip)
+	public JDFSurface getCreateSurface(final int iSkip)
 	{
 		JDFSurface s = getSurface(iSkip);
 		if (s == null)
@@ -390,35 +419,30 @@ public class JDFSheet extends JDFSignature
 	}
 
 	/**
-	 * gets a Surface in both old and new Layouts if old: a <Surface> element if
-	 * new: a Side partition leaf
+	 * gets a Surface in both old and new Layouts if old: a <Surface> element if new: a Side partition leaf
 	 * 
-	 * @param iSkip
-	 *            the number of signatures to skip
+	 * @param iSkip the number of signatures to skip
 	 */
-	public JDFSurface getSurface(int iSkip)
+	public JDFSurface getSurface(final int iSkip)
 	{
-		return getLayoutElement(this, ElementName.SURFACE, AttributeName.SIDE,
-				iSkip);
+		return getLayoutElement(this, ElementName.SURFACE, AttributeName.SIDE, iSkip);
 	}
 
 	/**
-	 * appends a Surface in both old and new Layouts if old: a <Surface> element
-	 * if new: a Side partition leaf
+	 * appends a Surface in both old and new Layouts if old: a <Surface> element if new: a Side partition leaf
 	 */
 	public JDFSurface appendSurface() throws JDFException
 	{
 		if (numSurfaces() > 1)
-			throw new JDFException(
-					"appendSurface: sheet already has two surfaces");
+		{
+			throw new JDFException("appendSurface: sheet already has two surfaces");
+		}
 
-		return appendLayoutElement(this, ElementName.SURFACE,
-				AttributeName.SIDE);
+		return appendLayoutElement(this, ElementName.SURFACE, AttributeName.SIDE);
 	}
 
 	/**
-	 * counts the number of Surfaces in both old and new Layouts if old: the
-	 * number of <Surface> elements if new: the number of Side partition leaves
+	 * counts the number of Surfaces in both old and new Layouts if old: the number of <Surface> elements if new: the number of Side partition leaves
 	 * 
 	 * @return the number of Surfaces
 	 */
@@ -430,22 +454,19 @@ public class JDFSheet extends JDFSignature
 	/**
 	 * (28) get vector of all direct child elements Surface
 	 * 
-	 * @param JDFAttributeMap
-	 *            mAttrib the map of attributes to select
-	 * @param boolean bAnd if true all attributes in the map are AND'ed, else
-	 *        they are OR'ed
+	 * @param JDFAttributeMap mAttrib the map of attributes to select
+	 * @param boolean bAnd if true all attributes in the map are AND'ed, else they are OR'ed
 	 * @deprecated use getChildElementVector() instead
 	 */
 	@Deprecated
-	public VElement getSurfaceVector(JDFAttributeMap mAttrib, boolean bAnd)
+	public VElement getSurfaceVector(final JDFAttributeMap mAttrib, final boolean bAnd)
 	{
-		VElement myResource = new VElement();
-		Vector vElem = getChildElementVector(ElementName.SURFACE, null,
-				mAttrib, bAnd, 0, true);
+		final VElement myResource = new VElement();
+		final Vector vElem = getChildElementVector(ElementName.SURFACE, null, mAttrib, bAnd, 0, true);
 		for (int i = 0; i < vElem.size(); i++)
 		{
-			JDFElement k = (JDFElement) vElem.elementAt(i);
-			JDFSurface myJDFSurface = (JDFSurface) k;
+			final JDFElement k = (JDFElement) vElem.elementAt(i);
+			final JDFSurface myJDFSurface = (JDFSurface) k;
 			myResource.addElement(myJDFSurface);
 		}
 		return myResource;
@@ -458,21 +479,20 @@ public class JDFSheet extends JDFSignature
 	 */
 	public VElement getSurfaceVector()
 	{
-		return getLayoutElementVector(this, ElementName.SURFACE,
-				AttributeName.SIDE);
+		return getLayoutElementVector(this, ElementName.SURFACE, AttributeName.SIDE);
 	}
 
 	/**
 	 * (31) create inter-resource link to refTarget
 	 * 
-	 * @param JDFSurface
-	 *            refTarget the element that is referenced
+	 * @param JDFSurface refTarget the element that is referenced
 	 */
-	public void refSurface(JDFSurface refTarget)
+	public void refSurface(final JDFSurface refTarget)
 	{
 		if (JDFLayout.isNewLayout(this))
-			throw new JDFException(
-					"refSheet: attempting to reference a partition");
+		{
+			throw new JDFException("refSheet: attempting to reference a partition");
+		}
 		refElement(refTarget);
 	}
 

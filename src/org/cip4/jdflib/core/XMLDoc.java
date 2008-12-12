@@ -125,8 +125,7 @@ import org.w3c.dom.traversal.TreeWalker;
 //TODO: why does XMLDoc know DocumentJDFImpl ??? 
 
 /**
- * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/DocumentImpl.html"
- *      Xerces-Documentation< /a>
+ * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/DocumentImpl.html" Xerces-Documentation< /a>
  */
 
 public class XMLDoc
@@ -146,16 +145,22 @@ public class XMLDoc
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(final Object o)
 	{
 		if (o == null)
+		{
 			return false;
+		}
 		if (!(o instanceof XMLDoc))
+		{
 			return false;
+		}
 
-		XMLDoc d = (XMLDoc) o;
+		final XMLDoc d = (XMLDoc) o;
 		if (m_doc == null)
+		{
 			return d.m_doc == null;
+		}
 
 		return m_doc.equals(d.m_doc);
 	}
@@ -171,7 +176,7 @@ public class XMLDoc
 	 * 
 	 * @param document
 	 */
-	public XMLDoc(Document document)
+	public XMLDoc(final Document document)
 	{
 		if (document == null)
 		{
@@ -184,7 +189,7 @@ public class XMLDoc
 		}
 		else
 		{
-			String s = document.getClass().toString();
+			final String s = document.getClass().toString();
 			throw new JDFException("XMLDoc(Document) not implemented; class=" + s);
 			// m_doc = new DocumentJDFImpl(document); // does not set all fields
 		}
@@ -195,7 +200,7 @@ public class XMLDoc
 	 * 
 	 * @param document
 	 */
-	public XMLDoc(DocumentJDFImpl document)
+	public XMLDoc(final DocumentJDFImpl document)
 	{
 		if (document == null)
 		{
@@ -212,7 +217,7 @@ public class XMLDoc
 	 * @deprecated use XMLDoc(String strDocType, String namespaceURI)
 	 */
 	@Deprecated
-	public XMLDoc(String strDocType)
+	public XMLDoc(final String strDocType)
 	{
 		new XMLDoc(strDocType, null);
 	}
@@ -223,7 +228,7 @@ public class XMLDoc
 	 * @param strDocType ElementName.JDF, ElementName.JMF, "Config" ...
 	 * @param namespaceURI namespace to be used by the new XMLDoc
 	 */
-	public XMLDoc(String strDocType, String namespaceURI)
+	public XMLDoc(final String strDocType, final String namespaceURI)
 	{
 		m_doc = new DocumentJDFImpl();
 		if (namespaceURI == null)
@@ -244,7 +249,7 @@ public class XMLDoc
 	 * 
 	 */
 	@Deprecated
-	public KElement setRoot(String strDocType)
+	public KElement setRoot(final String strDocType)
 	{
 		return setRoot(strDocType, JDFElement.getSchemaURL());
 	}
@@ -260,7 +265,7 @@ public class XMLDoc
 	 * 
 	 * @default setRoot(ElementName.JDF, null)
 	 */
-	public KElement setRoot(String strDocType, String namespaceURI)
+	public KElement setRoot(final String strDocType, final String namespaceURI)
 	{
 		KElement root = (JDFElement) m_doc.getDocumentElement();
 
@@ -304,7 +309,7 @@ public class XMLDoc
 	 * 
 	 * @return JDFElement
 	 * 
-	 *         default: getRoot()
+	 * default: getRoot()
 	 */
 	public KElement getRoot()
 	{
@@ -318,7 +323,7 @@ public class XMLDoc
 	 * 
 	 * @return String - output
 	 */
-	public String write2String(int indent)
+	public String write2String(final int indent)
 	{
 		String strResult = JDFConstants.EMPTYSTRING;
 		ByteArrayOutputStream outStream = null;
@@ -329,7 +334,7 @@ public class XMLDoc
 			write2Stream(outStream, indent, indent == 0);
 			strResult = outStream.toString("UTF-8");
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			System.out.println("write2String: " + outStream + " : " + e);
 		}
@@ -341,7 +346,7 @@ public class XMLDoc
 				{
 					outStream.close();
 				}
-				catch (IOException e1)
+				catch (final IOException e1)
 				{
 					// nop
 				}
@@ -362,7 +367,7 @@ public class XMLDoc
 	 * @default write2File(String oFilePath, 0)
 	 */
 	@Deprecated
-	public boolean write2File(String oFilePath, int indent)
+	public boolean write2File(final String oFilePath, final int indent)
 	{
 		return write2File(oFilePath, indent, true);
 	}
@@ -378,15 +383,19 @@ public class XMLDoc
 	 * 
 	 * @default write2File(String oFilePath, 0)
 	 */
-	public boolean write2File(String oFilePath, int indent, boolean bPreserveSpace)
+	public boolean write2File(final String oFilePath, final int indent, final boolean bPreserveSpace)
 	{
 		String oFilePathLocal = oFilePath;
 
 		if (oFilePathLocal == null)
+		{
 			oFilePathLocal = m_doc.m_OriginalFileName;
+		}
 
 		if (oFilePathLocal == null)
+		{
 			return false;
+		}
 
 		return write2File(new File(oFilePathLocal), indent, bPreserveSpace);
 	}
@@ -402,7 +411,7 @@ public class XMLDoc
 	 * 
 	 * @default write2File(String oFilePath, 0)
 	 */
-	public boolean write2File(File file, int indent, boolean bPreserveSpace)
+	public boolean write2File(File file, final int indent, final boolean bPreserveSpace)
 	{
 		boolean fSuccess = true;
 		FileOutputStream outStream = null;
@@ -411,7 +420,7 @@ public class XMLDoc
 		{
 			if (file.isDirectory() && getOriginalFileName() != null)
 			{
-				File orig = new File(getOriginalFileName());
+				final File orig = new File(getOriginalFileName());
 				file = new File(file + File.separator + orig.getName());
 			}
 
@@ -423,12 +432,12 @@ public class XMLDoc
 				write2Stream(outStream, indent, bPreserveSpace);
 			}
 		}
-		catch (FileNotFoundException e)
+		catch (final FileNotFoundException e)
 		{
 			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
 			fSuccess = false;
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
 			fSuccess = false;
@@ -441,9 +450,9 @@ public class XMLDoc
 				{
 					outStream.close();
 				}
-				catch (IOException e1)
+				catch (final IOException e1)
 				{
-					//nop
+					// nop
 				}
 			}
 		}
@@ -458,7 +467,7 @@ public class XMLDoc
 	 * @throws IOException
 	 */
 	@Deprecated
-	public void write2Stream(OutputStream outStream, int indent) throws IOException
+	public void write2Stream(final OutputStream outStream, final int indent) throws IOException
 	{
 		write2Stream(outStream, indent, indent == 0);
 	}
@@ -472,7 +481,7 @@ public class XMLDoc
 	 * @throws IOException
 	 * @since 080425 synchronized
 	 */
-	public void write2Stream(OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException
+	public void write2Stream(final OutputStream outStream, final int indent, final boolean bPreserveSpace) throws IOException
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -481,7 +490,9 @@ public class XMLDoc
 				final OutputFormat format = new OutputFormat(m_doc);
 
 				if (bPreserveSpace)
+				{
 					format.setPreserveSpace(true);
+				}
 
 				if (indent < 1)
 				{
@@ -504,10 +515,12 @@ public class XMLDoc
 				}
 				return; // all is well here
 			}
-			catch (IOException x)
+			catch (final IOException x)
 			{
 				if (i >= 3)
+				{
 					throw x; // try three times, else ciao
+				}
 				ThreadUtil.sleep((1000 * (i + 1)));
 				System.out.println("retry exception " + i + " for " + getOriginalFileName());
 			}
@@ -522,7 +535,7 @@ public class XMLDoc
 	 * @throws IOException
 	 */
 	@Deprecated
-	public static void write2StreamStatic(Element elem, OutputStream outStream, int indent) throws IOException
+	public static void write2StreamStatic(final Element elem, final OutputStream outStream, final int indent) throws IOException
 	{
 		write2StreamStatic(elem, outStream, indent, true);
 	}
@@ -536,14 +549,16 @@ public class XMLDoc
 	 * @throws IOException
 	 */
 	@Deprecated
-	public static void write2StreamStatic(Element elem, OutputStream outStream, int indent, boolean bPreserveSpace) throws IOException
+	public static void write2StreamStatic(final Element elem, final OutputStream outStream, final int indent, final boolean bPreserveSpace) throws IOException
 	{
 		final Document doc = elem.getOwnerDocument();
 
 		final OutputFormat format = new OutputFormat(doc);
 
 		if (bPreserveSpace)
+		{
 			format.setPreserveSpace(true);
+		}
 
 		if (indent < 1)
 		{
@@ -594,23 +609,27 @@ public class XMLDoc
 	}
 
 	/**
-	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild
-	 * (created in namespace JDFConstants.NONAMESPACE (DOM Level 2)).<br>
+	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace JDFConstants.NONAMESPACE
+	 * (DOM Level 2)).<br>
 	 * Another way would be to use KElement.appendElement(String elementName, String nameSpaceURI)
 	 * 
 	 * @param elementName name of the element that is created
 	 * 
 	 * @return Element - unconnected element that is created
 	 */
-	public Element createElement(String elementName)
+	public Element createElement(final String elementName)
 	{
 		Element elem = null;
 
 		if (m_doc != null)
+		{
 			elem = m_doc.createElement(elementName);
+		}
 
 		if (elem instanceof KElement)
+		{
 			((KElement) elem).init();
+		}
 
 		return elem;
 	}
@@ -632,7 +651,7 @@ public class XMLDoc
 	 * 
 	 * @return Text
 	 */
-	public Text createTextNode(String data)
+	public Text createTextNode(final String data)
 	{
 		return (m_doc == null) ? null : m_doc.createTextNode(data);
 	}
@@ -644,7 +663,7 @@ public class XMLDoc
 	 * 
 	 * @return Comment
 	 */
-	public Comment createComment(String data)
+	public Comment createComment(final String data)
 	{
 		return (m_doc == null) ? null : m_doc.createComment(data);
 	}
@@ -656,7 +675,7 @@ public class XMLDoc
 	 * 
 	 * @return CDATASection
 	 */
-	public CDATASection createCDATASection(String data)
+	public CDATASection createCDATASection(final String data)
 	{
 		return (m_doc == null) ? null : m_doc.createCDATASection(data);
 	}
@@ -666,10 +685,10 @@ public class XMLDoc
 	 * 
 	 * @param url the url of the xslt file
 	 */
-	public void setXSLTURL(String url)
+	public void setXSLTURL(final String url)
 	{
-		String data = "type=\"text/xsl\" href=\"" + url + "\"";
-		ProcessingInstruction pi = createProcessingInstruction("xml-stylesheet", data);
+		final String data = "type=\"text/xsl\" href=\"" + url + "\"";
+		final ProcessingInstruction pi = createProcessingInstruction("xml-stylesheet", data);
 		insertBefore(pi, getRoot());
 	}
 
@@ -681,7 +700,7 @@ public class XMLDoc
 	 * 
 	 * @return ProcessingInstruction
 	 */
-	public ProcessingInstruction createProcessingInstruction(String target, String data)
+	public ProcessingInstruction createProcessingInstruction(final String target, final String data)
 	{
 		return (m_doc == null) ? null : m_doc.createProcessingInstruction(target, data);
 	}
@@ -692,11 +711,13 @@ public class XMLDoc
 	 * @param name attribute name TODO fix handling of namespaces
 	 * @return Attr
 	 */
-	public Attr createAttribute(String name)
+	public Attr createAttribute(final String name)
 	{
 		Attr a = null;
 		if (m_doc == null)
+		{
 			throw new JDFException("Creating an attribute on a null document");
+		}
 
 		if (name.indexOf(":") < 0)
 		{
@@ -727,7 +748,7 @@ public class XMLDoc
 	 * 
 	 * @return the newly created EntityReference
 	 */
-	public EntityReference createEntityReference(String name)
+	public EntityReference createEntityReference(final String name)
 	{
 		return (m_doc == null) ? null : m_doc.createEntityReference(name);
 	}
@@ -739,7 +760,7 @@ public class XMLDoc
 	 * 
 	 * @return NodeList
 	 */
-	public NodeList getElementsByTagName(String tagname)
+	public NodeList getElementsByTagName(final String tagname)
 	{
 		return (m_doc == null) ? null : m_doc.getElementsByTagName(tagname);
 	}
@@ -752,7 +773,7 @@ public class XMLDoc
 	 * 
 	 * @return Node
 	 */
-	public Node importNode(Node importedNode, boolean deep)
+	public Node importNode(final Node importedNode, final boolean deep)
 	{
 		return (m_doc == null) ? null : m_doc.importNode(importedNode, deep);
 	}
@@ -765,7 +786,7 @@ public class XMLDoc
 	 * 
 	 * @return Element - unconnected element that is created
 	 */
-	public Element createElementNS(String namespaceURI, String qualifiedName)
+	public Element createElementNS(final String namespaceURI, final String qualifiedName)
 	{
 		return (m_doc == null) ? null : m_doc.createElementNS(namespaceURI, qualifiedName);
 	}
@@ -778,7 +799,7 @@ public class XMLDoc
 	 * 
 	 * @return Attr - the newly created attribute
 	 */
-	public Attr createAttributeNS(String namespaceURI, String qualifiedName)
+	public Attr createAttributeNS(final String namespaceURI, final String qualifiedName)
 	{
 		return (m_doc == null) ? null : m_doc.createAttributeNS(namespaceURI, qualifiedName);
 	}
@@ -791,7 +812,7 @@ public class XMLDoc
 	 * 
 	 * @return NodeList with all elements found
 	 */
-	public NodeList getElementsByTagNameNS(String namespaceURI, String myLocalName)
+	public NodeList getElementsByTagNameNS(final String namespaceURI, final String myLocalName)
 	{
 		return (m_doc == null) ? null : m_doc.getElementsByTagNameNS(namespaceURI, myLocalName);
 	}
@@ -803,7 +824,7 @@ public class XMLDoc
 	 * 
 	 * @return the Element found
 	 */
-	public Element getElementById(String elementId)
+	public Element getElementById(final String elementId)
 	{
 		final KElement root = getRoot();
 		return root.getTarget(elementId, null);
@@ -834,7 +855,7 @@ public class XMLDoc
 	 * 
 	 * @param nodeValue value to set the node to
 	 */
-	public void setNodeValue(String nodeValue)
+	public void setNodeValue(final String nodeValue)
 	{
 		if (m_doc != null)
 		{
@@ -930,7 +951,7 @@ public class XMLDoc
 	 * 
 	 * @return Node
 	 */
-	public Node insertBefore(Node newChild, Node refChild)
+	public Node insertBefore(final Node newChild, final Node refChild)
 	{
 		return (m_doc == null) ? null : m_doc.insertBefore(newChild, refChild);
 	}
@@ -943,7 +964,7 @@ public class XMLDoc
 	 * 
 	 * @return Node
 	 */
-	public Node replaceChild(Node newChild, Node oldChild)
+	public Node replaceChild(final Node newChild, final Node oldChild)
 	{
 		return (m_doc == null) ? null : m_doc.replaceChild(newChild, oldChild);
 	}
@@ -955,7 +976,7 @@ public class XMLDoc
 	 * 
 	 * @return oldChild, in its new state (removed)
 	 */
-	public Node removeChild(Node oldChild)
+	public Node removeChild(final Node oldChild)
 	{
 		return (m_doc == null) ? null : m_doc.removeChild(oldChild);
 	}
@@ -967,7 +988,7 @@ public class XMLDoc
 	 * 
 	 * @return Node
 	 */
-	public Node appendChild(Node newChild)
+	public Node appendChild(final Node newChild)
 	{
 		return (m_doc == null) ? null : m_doc.appendChild(newChild);
 	}
@@ -989,7 +1010,7 @@ public class XMLDoc
 	 * 
 	 * @return Node - a copy of 'this'
 	 */
-	public Node cloneNode(boolean deep)
+	public Node cloneNode(final boolean deep)
 	{
 		return (m_doc == null) ? null : m_doc.cloneNode(deep);
 	}
@@ -1013,9 +1034,9 @@ public class XMLDoc
 	 * 
 	 * @return boolean - true, if the feature is sopported
 	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)"
-	 *      >Xerxes-Documentation< /a>
+	 * >Xerxes-Documentation< /a>
 	 */
-	public boolean isSupported(String feature, String version)
+	public boolean isSupported(final String feature, final String version)
 	{
 		return (m_doc == null) ? false : m_doc.isSupported(feature, version);
 	}
@@ -1040,7 +1061,7 @@ public class XMLDoc
 	 * 
 	 * @param prefix namespace prefix
 	 */
-	public void setPrefix(String prefix)
+	public void setPrefix(final String prefix)
 	{
 		if (m_doc != null)
 		{
@@ -1087,7 +1108,7 @@ public class XMLDoc
 	 * 
 	 * @return DocumentType
 	 */
-	public DocumentType createDocumentType(String qualifiedName, String publicID, String systemID)
+	public DocumentType createDocumentType(final String qualifiedName, final String publicID, final String systemID)
 	{
 		return (m_doc == null) ? null : m_doc.createDocumentType(qualifiedName, publicID, systemID);
 	}
@@ -1097,7 +1118,7 @@ public class XMLDoc
 	 * 
 	 * @param check true - enable error checking
 	 */
-	public void setErrorChecking(boolean check)
+	public void setErrorChecking(final boolean check)
 	{
 		if (m_doc != null)
 		{
@@ -1122,7 +1143,7 @@ public class XMLDoc
 	 * 
 	 * @return Entity - the newly created entity
 	 */
-	public Entity createEntity(String name)
+	public Entity createEntity(final String name)
 	{
 		return (m_doc == null) ? null : m_doc.createEntity(name);
 	}
@@ -1134,7 +1155,7 @@ public class XMLDoc
 	 * 
 	 * @return Notation - the newly created notation
 	 */
-	public Notation createNotation(String name)
+	public Notation createNotation(final String name)
 	{
 		return (m_doc == null) ? null : m_doc.createNotation(name);
 	}
@@ -1146,7 +1167,7 @@ public class XMLDoc
 	 * 
 	 * @return ElementDefinitionImpl
 	 */
-	public ElementDefinitionImpl createElementDefinition(String name)
+	public ElementDefinitionImpl createElementDefinition(final String name)
 	{
 		return (m_doc == null) ? null : m_doc.createElementDefinition(name);
 	}
@@ -1157,7 +1178,7 @@ public class XMLDoc
 	 * @param idName
 	 * @param element
 	 */
-	public void putIdentifier(String idName, Element element)
+	public void putIdentifier(final String idName, final Element element)
 	{
 		if (m_doc != null)
 		{
@@ -1172,7 +1193,7 @@ public class XMLDoc
 	 * 
 	 * @return Element - the element with "idName"
 	 */
-	public Element getIdentifier(String idName)
+	public Element getIdentifier(final String idName)
 	{
 		return (m_doc == null) ? null : m_doc.getIdentifier(idName);
 	}
@@ -1182,7 +1203,7 @@ public class XMLDoc
 	 * 
 	 * @param idName
 	 */
-	public void removeIdentifier(String idName)
+	public void removeIdentifier(final String idName)
 	{
 		if (m_doc != null)
 		{
@@ -1209,7 +1230,7 @@ public class XMLDoc
 	 * 
 	 * @return the newly created NodeIterator
 	 */
-	public NodeIterator createNodeIterator(Node root, short whatToShow, NodeFilter filter)
+	public NodeIterator createNodeIterator(final Node root, final short whatToShow, final NodeFilter filter)
 	{
 		return (m_doc == null) ? null : m_doc.createNodeIterator(root, whatToShow, filter);
 	}
@@ -1224,7 +1245,7 @@ public class XMLDoc
 	 * 
 	 * @return the newly created NodeIterator
 	 */
-	public NodeIterator createNodeIterator(Node root, int whatToShow, NodeFilter filter, boolean entityReferenceExpansion)
+	public NodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter, final boolean entityReferenceExpansion)
 	{
 		return (m_doc == null) ? null : m_doc.createNodeIterator(root, whatToShow, filter, entityReferenceExpansion);
 	}
@@ -1238,7 +1259,7 @@ public class XMLDoc
 	 * 
 	 * @return the newly created TreeWalker
 	 */
-	public TreeWalker createTreeWalker(Node root, short whatToShow, NodeFilter filter)
+	public TreeWalker createTreeWalker(final Node root, final short whatToShow, final NodeFilter filter)
 	{
 		return (m_doc == null) ? null : m_doc.createTreeWalker(root, whatToShow, filter);
 	}
@@ -1253,7 +1274,7 @@ public class XMLDoc
 	 * 
 	 * @return the newly created TreeWalker
 	 */
-	public TreeWalker createTreeWalker(Node root, int whatToShow, NodeFilter filter, boolean entityReferenceExpansion)
+	public TreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter, final boolean entityReferenceExpansion)
 	{
 		return (m_doc == null) ? null : m_doc.createTreeWalker(root, whatToShow, filter, entityReferenceExpansion);
 	}
@@ -1275,7 +1296,7 @@ public class XMLDoc
 	 * 
 	 * @return the newly created Event
 	 */
-	public Event createEvent(String type)
+	public Event createEvent(final String type)
 	{
 		return (m_doc == null) ? null : m_doc.createEvent(type);
 	}
@@ -1289,7 +1310,7 @@ public class XMLDoc
 	@Override
 	public Object clone()
 	{
-		XMLDoc clon = new XMLDoc();
+		final XMLDoc clon = new XMLDoc();
 		if (m_doc != null)
 		{
 			clon.m_doc = (DocumentJDFImpl) m_doc.clone();
@@ -1383,7 +1404,7 @@ public class XMLDoc
 	 * @param String id the id to be checked
 	 * @return boolean - true if the node with ID=id is dirty
 	 */
-	public boolean isDirty(String strID)
+	public boolean isDirty(final String strID)
 	{
 		final XMLDocUserData docUserData = getXMLDocUserData();
 		return docUserData == null ? false : docUserData.isDirty(strID);
@@ -1430,7 +1451,7 @@ public class XMLDoc
 
 			strXML = osw.toString();
 		}
-		catch (IOException e)
+		catch (final IOException e)
 		{
 			strXML = "XMLDoc.toXML: ### ERROR while serializing " + getClass().getName() + " element.";
 		}
@@ -1438,25 +1459,26 @@ public class XMLDoc
 		return strXML;
 	}
 
-	protected void setMemberDoc(DocumentJDFImpl myDoc)
+	protected void setMemberDoc(final DocumentJDFImpl myDoc)
 	{
 		m_doc = myDoc;
 		if (m_doc != null)
+		{
 			getCreateXMLDocUserData();
+		}
 	}
 
 	/**
-	 * This method sends the contents of this XMLDoc to the URL <code>strURL</code> and receives the response in the
-	 * returned XMLDoc.
+	 * This method sends the contents of this XMLDoc to the URL <code>strURL</code> and receives the response in the returned XMLDoc.
 	 * 
 	 * @param strURL the URL to write to
 	 * @param strContentType the content type to write to
 	 * 
 	 * @return docResponse the response received from URL. if url is a file, an empty doc is returned
 	 * 
-	 *         A Null document if no response was received, or an exception occurred
+	 * A Null document if no response was received, or an exception occurred
 	 */
-	public XMLDoc write2URL(String strURL, String strContentType)
+	public XMLDoc write2URL(final String strURL, final String strContentType)
 	{
 		XMLDoc docResponse = null;
 		try
@@ -1470,7 +1492,7 @@ public class XMLDoc
 			}
 			else
 			{
-				URLConnection urlCon = write2HTTPURL(url, strContentType, null);
+				final URLConnection urlCon = write2HTTPURL(url, strContentType, null);
 				final JDFParser parser = new JDFParser();
 				final InputStream inStream = urlCon.getInputStream();
 
@@ -1491,10 +1513,10 @@ public class XMLDoc
 	/**
 	 * @param url
 	 * @param strContentType
-	 * @return
-	 * @throws IOException
+	 * @param det the details to set
+	 * @return the HttpURLConnection, null if failure
 	 */
-	public HttpURLConnection write2HTTPURL(final URL url, String strContentType, HTTPDetails det)
+	public HttpURLConnection write2HTTPURL(final URL url, final String strContentType, final HTTPDetails det)
 	{
 		for (int i = 0; i < 2; i++) //
 		{
@@ -1512,7 +1534,7 @@ public class XMLDoc
 				write2Stream(urlCon.getOutputStream(), 0, true);
 				return urlCon;
 			}
-			catch (IOException e)
+			catch (final IOException e)
 			{
 				ThreadUtil.sleep(1000); // wait and retry once
 			}
@@ -1526,7 +1548,7 @@ public class XMLDoc
 	 * @param strElement local name
 	 * @param packagepath package path
 	 */
-	public static void registerCustomClass(String strElement, String packagepath)
+	public static void registerCustomClass(final String strElement, final String packagepath)
 	{
 		DocumentJDFImpl.registerCustomClass(strElement, packagepath);
 	}
@@ -1556,7 +1578,7 @@ public class XMLDoc
 	 * 
 	 * @param bodyPart the value to set
 	 */
-	public void setBodyPart(BodyPart bodyPart)
+	public void setBodyPart(final BodyPart bodyPart)
 	{
 		m_doc.m_Bodypart = bodyPart;
 	}
@@ -1572,7 +1594,7 @@ public class XMLDoc
 	/**
 	 * @param originalFileName The OriginalFileName to set.
 	 */
-	public void setOriginalFileName(String originalFileName)
+	public void setOriginalFileName(final String originalFileName)
 	{
 		m_doc.m_OriginalFileName = originalFileName;
 	}
@@ -1589,20 +1611,28 @@ public class XMLDoc
 	 * @param nsURI the namespace uri to get the schema location for
 	 * @return String that corresponds to the schema, null if no schemalocation is defined for nsURI
 	 */
-	public String getSchemaLocation(String nsURI)
+	public String getSchemaLocation(final String nsURI)
 	{
-		KElement root = getRoot();
+		final KElement root = getRoot();
 		if (root == null)
+		{
 			return null;
+		}
 		String schemaloc = root.getAttribute(AttributeName.SCHEMALOCATION, AttributeName.XSI, null);
 		if (schemaloc == null)
+		{
 			return null;
-		VString strings = StringUtil.tokenize(schemaloc, " ", false);
-		int indexOfNS = strings.indexOf(nsURI);
+		}
+		final VString strings = StringUtil.tokenize(schemaloc, " ", false);
+		final int indexOfNS = strings.indexOf(nsURI);
 		if (indexOfNS >= 0 && indexOfNS < strings.size() - 1)
+		{
 			schemaloc = strings.stringAt(indexOfNS + 1);
+		}
 		else
+		{
 			return null;
+		}
 
 		return schemaloc;
 	}
@@ -1611,16 +1641,20 @@ public class XMLDoc
 	 * @param nsURI the namespace uri to get the schema location for
 	 * @return File that corresponds to the schema, null if no readable file is found
 	 */
-	public File getSchemaLocationFile(String nsURI)
+	public File getSchemaLocationFile(final String nsURI)
 	{
 
-		String schemaloc = getSchemaLocation(nsURI);
+		final String schemaloc = getSchemaLocation(nsURI);
 		if (schemaloc == null)
+		{
 			return null;
+		}
 
-		File f = UrlUtil.urlToFile(schemaloc);
-		if (f.canRead())
+		final File f = UrlUtil.urlToFile(schemaloc);
+		if (f != null && f.canRead())
+		{
 			return f;
+		}
 		return null;
 	}
 
@@ -1630,22 +1664,24 @@ public class XMLDoc
 	 * @param nsURI
 	 * @param _schemaLocation
 	 */
-	public void setSchemaLocation(String nsURI, File _schemaLocation)
+	public void setSchemaLocation(final String nsURI, final File _schemaLocation)
 	{
 		if (_schemaLocation != null && _schemaLocation.length() != 0)
 		{
 			final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
-			String schemaLocation = nsURI + " " + fileToUrl;
+			final String schemaLocation = nsURI + " " + fileToUrl;
 			final KElement root = getRoot();
 			if (root != null)
+			{
 				root.setAttribute("xs:" + AttributeName.SCHEMALOCATION, schemaLocation, AttributeName.XSI);
+			}
 		}
 	}
 
 	/**
 	 * @param validationResult the validationResult to set.
 	 */
-	public void setValidationResult(XMLDoc validationResult)
+	public void setValidationResult(final XMLDoc validationResult)
 	{
 		m_doc.m_validationResult = validationResult;
 	}

@@ -88,7 +88,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 /**
  * test of JDFAttributemap
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class JDFAttributeMapTest extends JDFTestCaseBase
 {
@@ -97,7 +97,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	 */
 	public void testShowKeys()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		assertEquals(m1.showKeys(" "), "(a1 = v1)");
 		m1.put("b1", "v2");
 		assertEquals(m1.showKeys(" "), "(a1 = v1) (b1 = v2)");
@@ -110,9 +110,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	 */
 	public void testClone()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
-		JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
 		assertEquals(m1, m2);
 		m2.put("a2", "v3");
 		assertNotSame(m1, m2);
@@ -122,9 +122,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	public void testCloneNull()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap(null);
+		final JDFAttributeMap m1 = new JDFAttributeMap(null);
 		m1.put("a2", "v2");
-		JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
 		assertEquals(m1, m2);
 		m2.put("a2", "v3");
 		assertNotSame(m1, m2);
@@ -134,9 +134,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	public void testEquals()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
-		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
 		assertNotSame(m1, m2);
 		m2.put("a2", "v2");
 		assertEquals(m1, m2);
@@ -151,7 +151,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	public void testPut()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
 		assertEquals(m1.get("SignatureName"), "v1");
 		m1.put(EnumPartIDKey.SheetName, "s1");
 		assertEquals(m1.get("SheetName"), "s1");
@@ -165,7 +165,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	public void testGet()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
 		assertEquals(m1.get("SignatureName"), "v1");
 		m1.put(EnumPartIDKey.SheetName, "s1");
 		assertEquals(m1.get(EnumPartIDKey.SignatureName), "v1");
@@ -175,10 +175,10 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	public void testSubMap()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
 		assertTrue(m1.subMap((JDFAttributeMap) null));
-		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
 		JDFAttributeMap mStar = new JDFAttributeMap("a1", (String) null);
 		assertTrue(m1.subMap(m2));
 		assertTrue(m1.subMap(mStar));
@@ -195,14 +195,58 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertTrue(m1.subMap((JDFAttributeMap) null));
 	}
 
+	/**
+	 * 
+	 */
+	public void testGetAndMap()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		assertEquals(m1.getAndMap(m2), m2);
+		assertEquals(m2.getAndMap(m1), m2);
+		final JDFAttributeMap m3 = new JDFAttributeMap(m2);
+		m3.put("a3", "v2");
+		assertEquals(m1.getAndMap(m3), m2);
+		assertEquals(m3.getAndMap(m1), m2);
+		m3.put("a2", "vbad");
+		assertNull(m1.getAndMap(m3));
+		assertNull(m3.getAndMap(m1));
+
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetOrMap()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		assertEquals(m1.getOrMap(m2), m1);
+		assertEquals(m2.getOrMap(m1), m1);
+		final JDFAttributeMap m3 = new JDFAttributeMap(m2);
+		m3.put("a3", "v2");
+
+		final JDFAttributeMap m4 = new JDFAttributeMap(m3);
+		m4.putAll(m1);
+
+		assertEquals(m1.getOrMap(m3), m4);
+		assertEquals(m3.getOrMap(m1), m4);
+		m3.put("a2", "vbad");
+		assertNull(m1.getOrMap(m3));
+		assertNull(m3.getOrMap(m1));
+
+	}
+
 	// /////////////////////////////////////////////////////////////////
 
 	public void testOverlapMap()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
 		assertTrue(m1.overlapMap((JDFAttributeMap) null));
-		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
 		assertTrue(m1.overlapMap(m2));
 		m2.put("a2", "v2");
 		assertTrue(m1.overlapMap(m2));
@@ -231,10 +275,10 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	@Deprecated
 	public void testReduceMap()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
-		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
-		VString keys = new VString();
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		final VString keys = new VString();
 		keys.add("a1");
 		m1.reduceMap(keys);
 		assertEquals(m1, m2);
@@ -243,10 +287,10 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////
 	public void testReduceMapSet()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
-		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
-		HashSet<String> keys = new HashSet<String>();
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		final HashSet<String> keys = new HashSet<String>();
 		keys.add("a1");
 		m1.reduceMap(keys);
 		assertEquals(m1, m2);
@@ -256,10 +300,10 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	public void testRemoveKeys()
 	{
-		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
-		JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
-		HashSet<String> keys = new HashSet<String>();
+		final JDFAttributeMap m2 = new JDFAttributeMap("a1", "v1");
+		final HashSet<String> keys = new HashSet<String>();
 		keys.add("a2");
 		m1.removeKeys(keys);
 		assertEquals(m1, m2);

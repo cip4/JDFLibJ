@@ -102,7 +102,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFResourceQuParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -114,7 +114,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFResourceQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -127,7 +127,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFResourceQuParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFResourceQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +160,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
@@ -171,7 +171,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
@@ -182,7 +182,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
@@ -194,21 +194,22 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}
 
 	/**
-	 * sets all relevant parameters of <code>this</code> to the values specified in resourceLink or its linked resource
-	 * or JDF node
+	 * sets all relevant parameters of <code>this</code> to the values specified in resourceLink or its linked resource or JDF node
 	 * 
 	 * @param resourceLink the resourceLink to extract the information from
 	 */
-	public void setLink(JDFResourceLink resourceLink)
+	public void setLink(final JDFResourceLink resourceLink)
 	{
 		if (resourceLink == null)
+		{
 			return;
+		}
 		final JDFResource r = resourceLink.getTarget();
 
 		final JDFNode parentJDF = resourceLink.getParentJDF();
@@ -216,9 +217,11 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 		setProcessUsage(resourceLink.getEnumProcessUsage());
 
 		if (r.hasAttribute(AttributeName.PRODUCTID))
+		{
 			setProductID(r.getProductID());
+		}
 		setResourceID(r.getID());
-		setResourceName(new VString(r.getLocalName(),null));
+		setResourceName(new VString(r.getLocalName(), null));
 		setUsage(resourceLink.getUsage());
 		setPartMapVector(resourceLink.getPartMapVector());
 
@@ -232,7 +235,9 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	public void setJDF(final JDFNode parentJDF)
 	{
 		if (parentJDF == null)
+		{
 			return;
+		}
 		setJobID(parentJDF.getJobID(true));
 		setJobPartID(parentJDF.getJobPartID(true));
 	}
@@ -242,7 +247,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * 
 	 * @param processUsage
 	 */
-	public void setProcessUsage(EnumProcessUsage processUsage)
+	public void setProcessUsage(final EnumProcessUsage processUsage)
 	{
 		setAttribute(AttributeName.PROCESSUSAGE, processUsage == null ? null : processUsage.getName(), null);
 	}
@@ -261,16 +266,27 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
 	 * @param ni
 	 */
-	public void setIdentifier(NodeIdentifier ni)
+	public void setIdentifier(final NodeIdentifier ni)
 	{
 		NodeIdentifier niLocal = ni;
-		
+
 		if (niLocal == null)
+		{
 			niLocal = new NodeIdentifier();
+		}
 
 		setJobID(niLocal.getJobID());
 		setJobPartID(niLocal.getJobPartID());
 		setPartMapVector(niLocal.getPartMapVector());
+	}
+
+	/**
+	 * legacy for single nmtoken (pre 1.4) (36) set attribute ResourceName
+	 * @param value: the value to set the attribute to
+	 */
+	public void setResourceName(final String value)
+	{
+		setAttribute(AttributeName.RESOURCENAME, value, null);
 	}
 
 }

@@ -1,3 +1,73 @@
+/*
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
 /**
  *
  * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
@@ -32,7 +102,7 @@ public class VString extends Vector<String>
 	 */
 	final public static VString emptyVector = new VString();
 
-	//**************************************** Constructors ****************************************
+	// **************************************** Constructors ****************************************
 	/**
 	 * constructor
 	 */
@@ -43,14 +113,16 @@ public class VString extends Vector<String>
 
 	/**
 	 * constructor
-	 *
+	 * 
 	 * @param m
 	 */
-	public VString(Vector<String> m)
+	public VString(final Vector<String> m)
 	{
 		super();
 		if (m != null)
+		{
 			addAll(m);
+		}
 	}
 
 	/**
@@ -59,7 +131,7 @@ public class VString extends Vector<String>
 	 * @deprecated use VString (String strIn, null)
 	 */
 	@Deprecated
-	public VString(String strIn)
+	public VString(final String strIn)
 	{
 		this(strIn, null);
 	}
@@ -67,10 +139,10 @@ public class VString extends Vector<String>
 	/**
 	 * 
 	 * constructs a VString by tokenizing a string
-	 * @param strIn  the string to tokenize
+	 * @param strIn the string to tokenize
 	 * @param strSep the separator character
 	 */
-	public VString(String strIn, String strSep)
+	public VString(final String strIn, final String strSep)
 	{
 		super();
 		this.clear();
@@ -80,7 +152,9 @@ public class VString extends Vector<String>
 		if (strIn != null)
 		{
 			if (strSepLocal == null)
+			{
 				strSepLocal = JDFConstants.BLANK;
+			}
 
 			final StringTokenizer sToken = new StringTokenizer(strIn, strSepLocal);
 
@@ -95,22 +169,61 @@ public class VString extends Vector<String>
 	 * creates a VString from an array of Strings
 	 * @param a the array
 	 */
-	public VString(String[] a)
+	public VString(final String[] a)
 	{
 		super(a.length);
 		for (int i = 0; i < a.length; i++)
+		{
 			add(a[i]);
+		}
 	}
 
-	//**************************************** Methods *********************************************
+	// **************************************** Methods *********************************************
+
+	/**
+	 * @param index the index which may be negative to count backwards
+	 * @return the string at index
+	 */
 	public String stringAt(int index)
 	{
+		if (index < 0)
+		{
+			index += size();
+		}
 		return super.elementAt(index);
 	}
 
 	/**
+	 * @param index the index which may be negative to count backwards
+	 * @return the string at index
+	 */
+	@Override
+	public String elementAt(int index)
+	{
+		if (index < 0)
+		{
+			index += size();
+		}
+		return super.elementAt(index);
+	}
+
+	/**
+	 * @param index the index which may be negative to count backwards
+	 * @return the string at index
+	 */
+	@Override
+	public String get(int index)
+	{
+		if (index < 0)
+		{
+			index += size();
+		}
+		return super.get(index);
+	}
+
+	/**
 	 * toString
-	 *
+	 * 
 	 * @return String
 	 */
 	@Override
@@ -126,7 +239,7 @@ public class VString extends Vector<String>
 	 * @deprecated use getString(strSep,null,null)
 	 */
 	@Deprecated
-	public String getAllStrings(String strSep)
+	public String getAllStrings(final String strSep)
 	{
 		return StringUtil.setvString(this, strSep, null, null);
 	}
@@ -143,11 +256,11 @@ public class VString extends Vector<String>
 
 	/**
 	 * Method setAllStrings - put a separated string into the vString<br>
-	 *                        e.g.  "asdf asdf asdf asdf"
-	 * @param strIn  separated string
+	 * e.g. "asdf asdf asdf asdf"
+	 * @param strIn separated string
 	 * @param strSep string separator
 	 */
-	public void setAllStrings(String strIn, String strSep)
+	public void setAllStrings(final String strIn, final String strSep)
 	{
 		if ((strIn != null) && (strSep != null))
 		{
@@ -163,16 +276,18 @@ public class VString extends Vector<String>
 
 	/**
 	 * index - get the index of s in the vector
-	 *
+	 * 
 	 * @param String s
-	 *
+	 * 
 	 * @return int
 	 */
-	public int index(String s)
+	public int index(final String s)
 	{
 		if (s == null)
+		{
 			return -1;
-		int siz = size();
+		}
+		final int siz = size();
 		for (int i = 0; i < siz; i++)
 		{
 			if (s.equals(stringAt(i)))
@@ -184,28 +299,30 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	* hasString - is 's' a member of <code>this</code>?
-	* 
-	* @param s string to find
-	* 
-	* @return boolean - true, if 's' is included in <code>this</code>
-	* @deprecated 2005-02-14 use contains ...
-	*/
+	 * hasString - is 's' a member of <code>this</code>?
+	 * 
+	 * @param s string to find
+	 * 
+	 * @return boolean - true, if 's' is included in <code>this</code>
+	 * @deprecated 2005-02-14 use contains ...
+	 */
 	@Deprecated
-	public boolean hasString(String s)
+	public boolean hasString(final String s)
 	{
 		return index(s) >= 0;
 	}
 
 	/**
 	 * AppendUnique - append a string but ignore multiple entries
-	 *
+	 * 
 	 * @param v the string to append, if null nothing is added
 	 */
-	public void appendUnique(String v)
+	public void appendUnique(final String v)
 	{
 		if (v == null)
+		{
 			return;
+		}
 
 		if (!contains(v))
 		{
@@ -215,51 +332,59 @@ public class VString extends Vector<String>
 
 	/**
 	 * AppendUnique - append a vector but ignore multiple entries
-	 *
+	 * 
 	 * @param v the vector to append, if null nothing is added
 	 */
-	public void appendUnique(VString v)
+	public void appendUnique(final VString v)
 	{
 		if (v == null)
+		{
 			return;
+		}
 		final int size = v.size();
 		if (size == 1) // speedup for single append
 		{
 			final String theOther = v.elementAt(0);
 			if (!this.contains(theOther))
+			{
 				add(theOther);
+			}
 			return;
 		}
 		for (int i = 0; i < size; i++)
+		{
 			add(v.elementAt(i));
+		}
 
 		unify();
 	}
 
 	/**
 	 * removeStrings - remove all occurrences of a string
-	 *
+	 * 
 	 * @param v
 	 * @deprecated use removeStrings(v, Integer.MAX_VALUE);
 	 */
 	@Deprecated
-	public void removeStrings(VString v)
+	public void removeStrings(final VString v)
 	{
 		removeStrings(v, Integer.MAX_VALUE);
 	}
 
 	/**
 	 * removeStrings - remove all occurrences of a string
-	 *
-	 * @param v    the vector of strings to remove from <code>this</code>
+	 * 
+	 * @param v the vector of strings to remove from <code>this</code>
 	 * @param nMax the max number of strings to remove
 	 */
-	public void removeStrings(VString v, int nMax)
+	public void removeStrings(final VString v, final int nMax)
 	{
 		int nMaxLocal = nMax;
 
 		if (v == null)
+		{
 			return;
+		}
 
 		for (int i = this.size() - 1; i >= 0 && nMaxLocal > 0; i--)
 		{
@@ -273,23 +398,23 @@ public class VString extends Vector<String>
 
 	/**
 	 * removeStrings - remove all occurrences of a string
-	 *
+	 * 
 	 * @param String s
 	 * @deprecated use removeStrings(s, Integer.MAX_VALUE);
 	 */
 	@Deprecated
-	public void removeStrings(String s)
+	public void removeStrings(final String s)
 	{
 		removeStrings(s, Integer.MAX_VALUE);
 	}
 
 	/**
 	 * removeStrings - remove nMax occurrences of a string
-	 *
-	 * @param s    the string to remove
+	 * 
+	 * @param s the string to remove
 	 * @param nMax remove s max. nMax times
 	 */
-	public void removeStrings(String s, int nMax)
+	public void removeStrings(final String s, final int nMax)
 	{
 		int nMaxLocal = nMax;
 
@@ -304,45 +429,46 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	* serialize to a string
-	* @param sep   separator between strings
-	* @param front string before the first entry
-	* @param back  string after the last entry
-	* 
-	* @return a tokenized string
-	* @deprecated use StringUtil setVString
-	* default: GetString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
-	*/
+	 * serialize to a string
+	 * @param sep separator between strings
+	 * @param front string before the first entry
+	 * @param back string after the last entry
+	 * 
+	 * @return a tokenized string
+	 * @deprecated use StringUtil setVString default: GetString(sep, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING)
+	 */
 	@Deprecated
-	public String getString(String sep, String front, String back)
+	public String getString(final String sep, final String front, final String back)
 	{
 		return StringUtil.setvString(this, sep, front, back);
 	}
 
 	/**
 	 * create a string from a vector of tokens
-	 * @param v     vector of tokens
-	 * @param sep   separator between tokens
+	 * @param v vector of tokens
+	 * @param sep separator between tokens
 	 * @param front prefix to string (before the first token)
-	 * @param end   suffix to string (after the last token)
+	 * @param end suffix to string (after the last token)
 	 * @return condensed string of tokens separated by sep
 	 * @deprecated use getString
 	 */
 	@Deprecated
-	public String setvString(VString v, String sep, String front, String end)
+	public String setvString(final VString v, final String sep, final String front, final String end)
 	{
 		String s = front == null ? JDFConstants.EMPTYSTRING : front;
 		final int siz = v.size();
 		for (int i = 0; i < siz; i++)
 		{
-			if (i != 0)//add seperator after every add
+			if (i != 0)// add seperator after every add
 			{
 				s += sep;
 			}
 			s += v.elementAt(i);
 		}
 		if (end != null)
+		{
 			s += end;
+		}
 		return s;
 	}
 
@@ -351,7 +477,7 @@ public class VString extends Vector<String>
 	 */
 	public void unify()
 	{
-		HashSet<String> set = new HashSet<String>();
+		final HashSet<String> set = new HashSet<String>();
 		int size = size();
 		for (int i = 0; i < size; i++)
 		{
@@ -370,31 +496,33 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	 * get a string from <code>this</code> 
+	 * get a string from <code>this</code>
 	 * @param s the String you are looking for
 	 * @return the String if found or null if <code>this</code> does not contain s
 	 */
-	public String get(String s)
+	public String get(final String s)
 	{
 		if (contains(s))
 		{
-			int i = indexOf(s);
+			final int i = indexOf(s);
 			return get(i);
 		}
 
 		return null;
 	}
 
-	/** 
+	/**
 	 * gets a set with all entries of the VString
 	 * @return the set corresponding to this
 	 */
 	public Set<String> getSet()
 	{
-		HashSet<String> set = new LinkedHashSet<String>();
-		Iterator<String> it = iterator();
+		final HashSet<String> set = new LinkedHashSet<String>();
+		final Iterator<String> it = iterator();
 		while (it.hasNext())
+		{
 			set.add(it.next());
+		}
 
 		return set;
 	}
@@ -404,7 +532,7 @@ public class VString extends Vector<String>
 	 */
 	public void sort()
 	{
-		Object[] array = this.elementData;
+		final Object[] array = this.elementData;
 		Arrays.sort(array, 0, size());
 	}
 
@@ -412,29 +540,34 @@ public class VString extends Vector<String>
 	 * appends all strings of an array to <code>this</code>
 	 * @param strings the array of strings to append to <code>this</code>
 	 */
-	public void addAll(String[] strings)
+	public void addAll(final String[] strings)
 	{
 		ensureCapacity(size() + strings.length);
 		for (int i = 0; i < strings.length; i++)
+		{
 			add(strings[i]);
+		}
 	}
 
 	/**
-	 * checks whether at least one of a given vector of strings is contained 
-	 * in <code>this</code>
+	 * checks whether at least one of a given vector of strings is contained in <code>this</code>
 	 * 
 	 * @param other the VSTring of values to test
 	 * @return true if at least one String in other is in <code>this</code>
 	 */
-	public boolean containsAny(VString other)
+	public boolean containsAny(final VString other)
 	{
 		if (other == null)
+		{
 			return false;
+		}
 		final int size = other.size();
 		for (int i = 0; i < size; i++)
 		{
 			if (contains(other.elementAt(i)))
+			{
 				return true;
+			}
 		}
 		return false;
 	}
@@ -445,7 +578,7 @@ public class VString extends Vector<String>
 	 * 
 	 * @param enumType the object to append
 	 */
-	public boolean add(EnumType enumType)
+	public boolean add(final EnumType enumType)
 	{
 		return super.add(((ValuedEnum) enumType).getName());
 	}

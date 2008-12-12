@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -131,8 +132,8 @@ public class JDFAuditPool extends JDFPool
 	/**
 	 * Constructor for JDFAuditPool
 	 * 
-	 * @param myOwnerDocument
-	 * @param qualifiedName
+	 * @param myOwnerDocument -
+	 * @param qualifiedName -
 	 */
 	public JDFAuditPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
@@ -142,9 +143,9 @@ public class JDFAuditPool extends JDFPool
 	/**
 	 * Constructor for JDFAuditPool
 	 * 
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
+	 * @param myOwnerDocument -
+	 * @param myNamespaceURI -
+	 * @param qualifiedName -
 	 */
 	public JDFAuditPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
@@ -154,10 +155,10 @@ public class JDFAuditPool extends JDFPool
 	/**
 	 * Constructor for JDFAuditPool
 	 * 
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 * @param myLocalName
+	 * @param myOwnerDocument -
+	 * @param myNamespaceURI -
+	 * @param qualifiedName -
+	 * @param myLocalName -
 	 */
 	public JDFAuditPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -236,6 +237,7 @@ public class JDFAuditPool extends JDFPool
 	 * 
 	 * @param s the node status at this time
 	 * @param by the author keyword
+	 * @param vmParts the vector of parts that tis processrun applies to
 	 * @return the newly created ProcessRun audit
 	 * 
 	 * default: AddProcessRun(s, JDFConstants.EMPTYSTRING)
@@ -313,6 +315,7 @@ public class JDFAuditPool extends JDFPool
 	 * @param modifiedElem the modified element
 	 * 
 	 * default: AddModified(by, null)
+	 * @return the modified audit
 	 */
 	public JDFModified addModified(final String by, final KElement modifiedElem)
 	{
@@ -330,8 +333,8 @@ public class JDFAuditPool extends JDFPool
 	 * Append a Deleted audit element
 	 * 
 	 * @param by the author keyword
-	 * @param modifiedElem the modified element
-	 * @return JDFDeleted the newly created Modified audit
+	 * @param deletedElem the deleted element
+	 * @return JDFDeleted the newly created Deleted audit
 	 * 
 	 * default: AddDeleted(null, null)
 	 */
@@ -407,7 +410,7 @@ public class JDFAuditPool extends JDFPool
 	 * @param rRefsRO a vector of rRefs that are spawned read-only
 	 * @param rRefsRW a vector of rRefs that are spawned read-write
 	 * @param by the author keyword
-	 * @param vmParts
+	 * @param vmParts the vector of parts
 	 * 
 	 * @return JDFAudit - the newly created Spawned audit
 	 * 
@@ -441,6 +444,7 @@ public class JDFAuditPool extends JDFPool
 	 * @param merged the merged node
 	 * @param rRefsOverwritten a vector of rRefs that are overwritten
 	 * @param by the author keyword
+	 * @param vmParts the vector of parts
 	 * 
 	 * @return JDFMerged - the newly created Merged audit
 	 * 
@@ -466,7 +470,8 @@ public class JDFAuditPool extends JDFPool
 	 * Append a Notification audit element with a Class attribute of Severity
 	 * 
 	 * @param by the author keyword
-	 * @param s the severity
+	 * @param severity the severity
+	 * @param vmParts the vector of parts
 	 * 
 	 * @return JDFAudit - the newly created Notification audit
 	 */
@@ -510,9 +515,37 @@ public class JDFAuditPool extends JDFPool
 	}
 
 	/**
+	 * getResourceAudits - get the resourceAudits for a given Resource
+	 * 
+	 * @param vPartMap the list of matching partMaps
+	 * @param id the id of the resource
+	 * @return {@link VElement} - the vector of res audits, null if none found
+	 */
+	public VElement getResourceAudits(final String id, final VJDFAttributeMap vPartMap)
+	{
+		final VElement audits = getAudits(EnumAuditType.ResourceAudit, null, vPartMap);
+		if (audits == null || id == null)
+		{
+			return null;
+		}
+		for (int i = audits.size() - 1; i >= 0; i--)
+		{
+			final JDFResourceAudit ra = (JDFResourceAudit) audits.get(i);
+			final JDFResourceLink rl = ra.getNewLink();
+			if (rl == null || !id.equals(rl.getrRef()))
+			{
+				audits.remove(i);
+			}
+		}
+
+		return audits.size() == 0 ? null : audits;
+	}
+
+	/**
 	 * getLastPhase - get the most recent PhaseTime audit in this pool
 	 * 
 	 * @param vPartMap the list of matching partMaps
+	 * @param moduleID the module to restrict the search to, null if any
 	 * @return JDFAudit - the last PhaseTime audit
 	 */
 	public JDFPhaseTime getLastPhase(final VJDFAttributeMap vPartMap, final String moduleID)
@@ -650,7 +683,7 @@ public class JDFAuditPool extends JDFPool
 	/**
 	 * finds all status messages in a jmf and fills the phaseTime with the appropriate data
 	 * 
-	 * @param jmf
+	 * @param jmf the jmf that contains Status messages to apply to this
 	 * @return vector the vector of all modified phasetime elements
 	 */
 	public VElement setPhase(final JDFJMF jmf)
@@ -832,8 +865,8 @@ public class JDFAuditPool extends JDFPool
 	}
 
 	/**
-	 * @param cleanPolicy
-	 * @param spawnID
+	 * @param cleanPolicy .
+	 * @param spawnID .
 	 * @deprecated use JDFMerge.cleanUpMerge
 	 */
 	@Deprecated

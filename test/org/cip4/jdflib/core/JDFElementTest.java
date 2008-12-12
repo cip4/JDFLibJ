@@ -941,6 +941,7 @@ public class JDFElementTest extends JDFTestCaseBase
 	public void testUniqueID()
 	{
 		final HashSet<String> m = new HashSet<String>();
+		JDFElement.uniqueID(99998);
 		for (int i = 0; i < 200000; i++)
 		{
 			final String s = JDFElement.uniqueID(0);

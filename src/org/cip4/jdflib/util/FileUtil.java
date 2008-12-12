@@ -68,15 +68,7 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
- */
+
 package org.cip4.jdflib.util;
 
 import java.io.File;
@@ -86,6 +78,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -141,7 +134,7 @@ public class FileUtil
 	public static Vector<File> listFilesInTree(final File dir, final String expression)
 	{
 		Vector<File> v = null;
-		
+
 		if (dir == null || expression == null)
 		{
 			return null;
@@ -193,7 +186,7 @@ public class FileUtil
 				}
 			}
 		}
-		
+
 		return v;
 	}
 
@@ -386,9 +379,19 @@ public class FileUtil
 		{
 			return null;
 		}
+		return streamToFile(fis, tmp);
+	}
+
+	/**
+	 * @param fis the inputstream to read
+	 * @param fil the file to stream to
+	 * @return the file created by the stream, null if snafu
+	 */
+	public static File streamToFile(final InputStream fis, final File fil)
+	{
 		try
 		{
-			final FileOutputStream fos = new FileOutputStream(tmp);
+			final FileOutputStream fos = new FileOutputStream(fil);
 			IOUtils.copy(fis, fos);
 			fos.flush();
 			fos.close();
@@ -403,7 +406,48 @@ public class FileUtil
 			return null;
 		}
 
-		return tmp;
+		return fil;
+	}
+
+	/**
+	 * read a file into a byte array
+	 * @param file the file to read into a byte array
+	 * @return the correctly sized byte array, null if no bytes were read
+	 */
+	public static byte[] fileToByteArray(final File file)
+	{
+		if (file == null || !file.canRead())
+		{
+			return null;
+		}
+		FileInputStream fis;
+		try
+		{
+			fis = new FileInputStream(file);
+			final int len = (int) file.length();
+			if (len <= 0)
+			{
+				return null;
+			}
+			byte[] b = new byte[len];
+			final int l = fis.read(b);
+			if (l != len)
+			{
+				if (l == 0)
+				{
+					return null;
+				}
+				final byte[] b2 = Arrays.copyOf(b, l);
+				b = b2;
+			}
+			return b;
+
+		}
+		catch (final Exception e)
+		{
+
+			return null;
+		}
 	}
 
 	/**
@@ -548,7 +592,6 @@ public class FileUtil
 		}
 
 		return false;
-
 	}
 
 	/**

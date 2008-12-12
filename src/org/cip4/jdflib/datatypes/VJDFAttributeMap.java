@@ -70,6 +70,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
@@ -102,7 +103,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param toAdd Vector of elements to clone
 	 */
-	public VJDFAttributeMap(Vector toAdd)
+	public VJDFAttributeMap(final Vector toAdd)
 	{
 		m_vec.clear();
 		for (int i = 0; i < toAdd.size(); i++)
@@ -116,7 +117,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param toAdd the array
 	 */
-	public VJDFAttributeMap(JDFAttributeMap[] toAdd)
+	public VJDFAttributeMap(final JDFAttributeMap[] toAdd)
 	{
 		m_vec.clear();
 		for (int i = 0; i < toAdd.length; i++)
@@ -130,7 +131,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param v the VJDFAttributeMap to copy
 	 */
-	public VJDFAttributeMap(VJDFAttributeMap v)
+	public VJDFAttributeMap(final VJDFAttributeMap v)
 	{
 		if (v != null)
 		{
@@ -162,17 +163,19 @@ public class VJDFAttributeMap
 	 * @param sepEntry the saparator between map entries
 	 * @return the string representation
 	 */
-	public String showKeys(String sepMap, String sepEntry)
+	public String showKeys(final String sepMap, final String sepEntry)
 	{
-		StringBuffer sb = new StringBuffer();
+		final StringBuffer sb = new StringBuffer();
 		final int nPartMaps = this.size();
 
 		for (int i = 0; i < nPartMaps; i++)
 		{
-			JDFAttributeMap amParts = this.elementAt(i);
+			final JDFAttributeMap amParts = this.elementAt(i);
 			sb.append("[").append(i).append("]").append(amParts.showKeys(sepEntry));
 			if (i + 1 < nPartMaps)
+			{
 				sb.append(sepMap);
+			}
 		}
 		return sb.toString();
 	}
@@ -188,11 +191,159 @@ public class VJDFAttributeMap
 	}
 
 	/**
+	 * @param strKey the attribute to get values from
+	 * @param bUnique if true, ensure unique vector, else the vector coressponds to the voctor of maps
+	 * @return the Vector of all values
+	 */
+	public VString getPartValues(final String strKey, final boolean bUnique)
+	{
+		final VString vsPartValues = new VString();
+
+		final int size = size();
+		for (int i = 0; i < size; i++)
+		{
+			final JDFAttributeMap map = elementAt(i);
+			final String strValue = map.get(strKey);
+
+			if (strValue != null)
+			{
+				vsPartValues.add(strValue);
+			}
+			vsPartValues.unify();
+		}
+		return vsPartValues;
+	}
+
+	/**
+	 * replace all maps in this with n maps that have the values strKey, vsValues
+	 * @param strKey the new key to add
+	 * @param vsValues String of values
+	 */
+	public void extendMap(final String strKey, final VString vsValues)
+	{
+		final int vsValueSize = vsValues == null ? 0 : vsValues.size();
+		if (vsValueSize == 0)
+		{
+			return;
+		}
+
+		final Vector<JDFAttributeMap> vec = new Vector<JDFAttributeMap>();
+
+		final int size = size();
+		for (int i = 0; i < size; i++)
+		{
+			final JDFAttributeMap map = elementAt(i);
+			for (int v = 0; v < vsValueSize; v++)
+			{
+				final JDFAttributeMap mapNew = new JDFAttributeMap(map);
+				mapNew.put(strKey, vsValues.stringAt(v));
+				vec.add(mapNew);
+			}
+		}
+
+		if (!vec.isEmpty())
+		{
+			m_vec = vec;
+		}
+	}
+
+	/**
+	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
+	 * 
+	 * @param subMap the given map
+	 * @return the anded map, null if mismatches occurred
+	 */
+	public VJDFAttributeMap getAndMaps(final JDFAttributeMap map)
+	{
+		if (map == null)
+		{
+			return new VJDFAttributeMap(this);
+		}
+		VJDFAttributeMap newMap = new VJDFAttributeMap();
+		for (int i = 0; i < size(); i++)
+		{
+			JDFAttributeMap map0 = get(i);
+			if (map0 != null)
+			{
+				map0 = map0.getAndMap(map);
+			}
+			if (map0 != null)
+			{
+				newMap.add(map0);
+			}
+		}
+		if (newMap.size() > 0)
+		{
+			newMap.unify();
+		}
+		else
+		{
+			newMap = null;
+		}
+		return newMap;
+	}
+
+	/**
+	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
+	 * 
+	 * @param subMap the given map
+	 * @return the anded map, null if mismatches occurred
+	 */
+	public VJDFAttributeMap getOrMaps(final JDFAttributeMap map)
+	{
+		if (map == null)
+		{
+			return new VJDFAttributeMap(this);
+		}
+		VJDFAttributeMap newMap = new VJDFAttributeMap();
+		for (int i = 0; i < size(); i++)
+		{
+			JDFAttributeMap map0 = get(i);
+			if (map0 != null)
+			{
+				map0 = map0.getOrMap(map);
+			}
+			if (map0 != null)
+			{
+				newMap.add(map0);
+			}
+		}
+		if (newMap.size() > 0)
+		{
+			newMap.unify();
+		}
+		else
+		{
+			newMap = null;
+		}
+		return newMap;
+	}
+
+	/**
+	 * @see java.util.Map#containsKey(java.lang.Object)
+	 * @param key the key to check for
+	 * @return true if any of the maps contains key
+	 */
+	public boolean containsKey(final Object key)
+	{
+		boolean isFound = false;
+
+		final int size = size();
+		for (int i = 0; i < size && !isFound; i++)
+		{
+			final JDFAttributeMap map = elementAt(i);
+			isFound = map.containsKey(key);
+		}
+
+		return (isFound);
+	}
+
+	/**
 	 * sets the Vector with JDFAttributeMap elements
 	 * 
 	 * @param vec the Vector with JDFAttributeMap elements
 	 */
-	public void setVector(Vector vec)
+	public void setVector(final Vector vec)
 	{
 		m_vec = vec;
 	}
@@ -218,14 +369,33 @@ public class VJDFAttributeMap
 	}
 
 	/**
-	 * Returns the lemeent at the given position
+	 * Returns the element at the given position
 	 * 
-	 * @param i the given position
+	 * @param i the given position (may be<0 to count backwards)
 	 * @return JDFAttributeMap - the selected element
 	 */
 	public JDFAttributeMap elementAt(int i)
 	{
+		if (i < 0)
+		{
+			i += size();
+		}
 		return m_vec.elementAt(i);
+	}
+
+	/**
+	 * Returns the element at the given position (may be<0 to count backwards)
+	 * 
+	 * @param i the given position
+	 * @return JDFAttributeMap - the selected element
+	 */
+	public JDFAttributeMap get(int i)
+	{
+		if (i < 0)
+		{
+			i += size();
+		}
+		return m_vec.get(i);
 	}
 
 	/**
@@ -233,7 +403,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param index the position of the element to remove
 	 */
-	public void removeElementAt(int index)
+	public void removeElementAt(final int index)
 	{
 		m_vec.removeElementAt(index);
 	}
@@ -243,13 +413,15 @@ public class VJDFAttributeMap
 	 * 
 	 * @param set
 	 */
-	public void removeKeys(Collection set)
+	public void removeKeys(final Collection set)
 	{
 		for (int i = size() - 1; i >= 0; i--)
 		{
 			elementAt(i).removeKeys(set);
 			if (elementAt(i).isEmpty())
+			{
 				removeElementAt(i);
+			}
 		}
 		unify();
 	}
@@ -260,7 +432,7 @@ public class VJDFAttributeMap
 	 * @param obj the element to set
 	 * @param i the given position
 	 */
-	public void setElementAt(JDFAttributeMap obj, int i)
+	public void setElementAt(final JDFAttributeMap obj, final int i)
 	{
 		m_vec.setElementAt(obj, i);
 	}
@@ -270,7 +442,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param obj the given element
 	 */
-	public void add(JDFAttributeMap obj)
+	public void add(final JDFAttributeMap obj)
 	{
 		m_vec.add(obj);
 	}
@@ -280,11 +452,15 @@ public class VJDFAttributeMap
 	 * 
 	 * @param obj the given element
 	 */
-	public void addall(VJDFAttributeMap obj)
+	public void addall(final VJDFAttributeMap obj)
 	{
 		if (obj != null)
+		{
 			for (int i = 0; i < obj.size(); i++)
+			{
 				m_vec.add(obj.elementAt(i));
+			}
+		}
 	}
 
 	/**
@@ -292,7 +468,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param obj the given element
 	 */
-	public void addElement(JDFAttributeMap obj)
+	public void addElement(final JDFAttributeMap obj)
 	{
 		m_vec.addElement(obj);
 	}
@@ -302,10 +478,9 @@ public class VJDFAttributeMap
 	 * 
 	 * @param obj the given JDFAttributeMap element
 	 * 
-	 * @return boolean - true if and only if the specified object is the same as a component in this vector, as
-	 *         determined by the equals method; false otherwise
+	 * @return boolean - true if and only if the specified object is the same as a component in this vector, as determined by the equals method; false otherwise
 	 */
-	public boolean contains(JDFAttributeMap obj)
+	public boolean contains(final JDFAttributeMap obj)
 	{
 		return m_vec.contains(obj);
 	}
@@ -315,11 +490,11 @@ public class VJDFAttributeMap
 	 * 
 	 * @param attmap the given JDFAttributeMap element
 	 * @deprecated use contains
-	 * @return boolean - true if and only if the specified AttributeMap has the some number of keys and values and the
-	 *         same keys and values as a entry in this vector
+	 * @return boolean - true if and only if the specified AttributeMap has the some number of keys and values and the same keys and values as a entry in this
+	 * vector
 	 */
 	@Deprecated
-	public boolean hasEntryWithEqualKeyValuePairs(JDFAttributeMap attmap)
+	public boolean hasEntryWithEqualKeyValuePairs(final JDFAttributeMap attmap)
 	{
 
 		boolean bEquals = false;
@@ -334,7 +509,7 @@ public class VJDFAttributeMap
 
 			// reset for every entry
 			bEquals = false;
-			JDFAttributeMap map = elementAt(i);
+			final JDFAttributeMap map = elementAt(i);
 
 			// only check if both have the same size
 
@@ -345,18 +520,18 @@ public class VJDFAttributeMap
 				// break. If bEquals is still true after all checks, we found
 				// the map
 				bEquals = true;
-				Set mapSet = map.keySet();
-				Iterator<String> it = mapSet.iterator();
+				final Set mapSet = map.keySet();
+				final Iterator<String> it = mapSet.iterator();
 				while (it.hasNext())
 				{
-					String key = it.next();
+					final String key = it.next();
 					if (!attmap.containsKey(key))
 					{
 						bEquals = false;
 						break;
 					}
-					String value1 = map.get(key);
-					String value2 = attmap.get(key);
+					final String value1 = map.get(key);
+					final String value2 = attmap.get(key);
 					if (!value1.equals(value2))
 					{
 						bEquals = false;
@@ -388,13 +563,13 @@ public class VJDFAttributeMap
 	 * @deprecated use redceMap
 	 */
 	@Deprecated
-	public void reduceKey(Vector vKeys)
+	public void reduceKey(final Vector vKeys)
 	{
-		VJDFAttributeMap v = new VJDFAttributeMap();
+		final VJDFAttributeMap v = new VJDFAttributeMap();
 
 		for (int i = 0; i < m_vec.size(); i++)
 		{
-			JDFAttributeMap map = m_vec.elementAt(i);
+			final JDFAttributeMap map = m_vec.elementAt(i);
 			map.reduceMap(vKeys);
 
 			if (!map.isEmpty())
@@ -411,14 +586,14 @@ public class VJDFAttributeMap
 	 * 
 	 * @param keySet
 	 */
-	public void reduceMap(Set keySet)
+	public void reduceMap(final Set keySet)
 	{
-		VJDFAttributeMap v = new VJDFAttributeMap();
+		final VJDFAttributeMap v = new VJDFAttributeMap();
 
 		for (int i = 0; i < m_vec.size(); i++)
 		{
-			JDFAttributeMap map = m_vec.elementAt(i);
-			boolean bNullMap = map.isEmpty();
+			final JDFAttributeMap map = m_vec.elementAt(i);
+			final boolean bNullMap = map.isEmpty();
 			map.reduceMap(keySet);
 
 			if (bNullMap || !map.isEmpty())
@@ -433,7 +608,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param map map to append
 	 */
-	public void appendUnique(JDFAttributeMap map)
+	public void appendUnique(final JDFAttributeMap map)
 	{
 		for (int i = 0; i < m_vec.size(); i++)
 		{
@@ -451,7 +626,7 @@ public class VJDFAttributeMap
 	 */
 	public void unify()
 	{
-		HashSet set = new HashSet();
+		final HashSet set = new HashSet();
 		int size = size();
 		for (int i = 0; i < size; i++)
 		{
@@ -474,7 +649,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param map maps to append
 	 */
-	public void appendUnique(VJDFAttributeMap map)
+	public void appendUnique(final VJDFAttributeMap map)
 	{
 		addall(map);
 		unify();
@@ -485,7 +660,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param map the map to check against
 	 */
-	public void overlapMap(JDFAttributeMap map)
+	public void overlapMap(final JDFAttributeMap map)
 	{
 		for (int i = this.size() - 1; i >= 0; i--)
 		{
@@ -501,7 +676,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param map the map to check against
 	 */
-	public boolean overlapsMap(JDFAttributeMap map)
+	public boolean overlapsMap(final JDFAttributeMap map)
 	{
 		for (int i = size() - 1; i >= 0; i--)
 		{
@@ -519,12 +694,14 @@ public class VJDFAttributeMap
 	 * @param map the submap to check against
 	 * @return true if this has at least one entry that subMap is a submap of
 	 */
-	public boolean subMap(JDFAttributeMap map)
+	public boolean subMap(final JDFAttributeMap map)
 	{
 		for (int i = this.size() - 1; i >= 0; i--)
 		{
 			if (this.elementAt(i).subMap(map))
+			{
 				return true;
+			}
 		}
 		return false;
 	}
@@ -535,40 +712,47 @@ public class VJDFAttributeMap
 	 * @param vMap the vector submaps to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
-	public boolean subMap(VJDFAttributeMap vMap)
+	public boolean subMap(final VJDFAttributeMap vMap)
 	{
 		if (vMap == null)
+		{
 			return true;
+		}
 		for (int i = 0; i < vMap.size(); i++)
 		{
 			if (subMap(vMap.elementAt(i)))
+			{
 				return true;
+			}
 		}
 		return false;
 	}
 
 	/**
-	 * Method overlapsMap.
-	 * returns true if at least one element exists that has no non-matching key value pairs
+	 * Method overlapsMap. returns true if at least one element exists that has no non-matching key value pairs
 	 * 
 	 * @param vMap the vector to check against
 	 * @return true if this has at least one entry that vMap contains at least a submap of
 	 */
-	public boolean overlapsMap(VJDFAttributeMap vMap)
+	public boolean overlapsMap(final VJDFAttributeMap vMap)
 	{
 		final int size = vMap == null ? 0 : vMap.size();
 		if (size == 0)
+		{
 			return true;
-		
+		}
+
 		if (vMap != null)
 		{
 			for (int i = 0; i < size; i++)
 			{
 				if (overlapsMap(vMap.elementAt(i)))
+				{
 					return true;
+				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -581,26 +765,36 @@ public class VJDFAttributeMap
 	 * @return boolean - true if the maps are equal, otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
+		{
 			return true;
+		}
 		if (other == null)
+		{
 			return false;
+		}
 		if (!(other instanceof VJDFAttributeMap))
+		{
 			return false;
+		}
 
 		final int size = size();
 		if (size != ((VJDFAttributeMap) other).size())
+		{
 			return false;
+		}
 
-		VJDFAttributeMap vOther = new VJDFAttributeMap((JDFAttributeMap[]) ((VJDFAttributeMap) other).getVector().toArray(new JDFAttributeMap[0]));
+		final VJDFAttributeMap vOther = new VJDFAttributeMap((JDFAttributeMap[]) ((VJDFAttributeMap) other).getVector().toArray(new JDFAttributeMap[0]));
 		for (int i = 0; i < size; i++)
 		{
-			JDFAttributeMap map = elementAt(i);
-			int index = vOther.indexOf(map);
+			final JDFAttributeMap map = elementAt(i);
+			final int index = vOther.indexOf(map);
 			if (index < 0)
+			{
 				return false;
+			}
 			vOther.removeElementAt(index);
 		}
 		return true;
@@ -622,7 +816,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param map the given JDFAttributeMap
 	 */
-	public int indexOf(JDFAttributeMap map)
+	public int indexOf(final JDFAttributeMap map)
 	{
 		int index = -1;
 		final int size = this.size();
@@ -644,24 +838,36 @@ public class VJDFAttributeMap
 	 * @param value the value to set - may be either String or Enum
 	 * @throws IllegalArgumentException if key or value have the wrong type
 	 */
-	public void put(Object key, Object value)
+	public void put(final Object key, final Object value)
 	{
 		String s1 = null;
 		if (key instanceof String)
+		{
 			s1 = (String) key;
+		}
 		else if (key instanceof ValuedEnum)
+		{
 			s1 = ((ValuedEnum) key).getName();
+		}
 
 		String s2 = null;
 		if (value instanceof String)
+		{
 			s2 = (String) value;
+		}
 		else if (value instanceof ValuedEnum)
+		{
 			s2 = ((ValuedEnum) value).getName();
+		}
 
 		if (s1 != null && s2 != null)
+		{
 			put(s1, s2);
+		}
 		else
+		{
 			throw new IllegalArgumentException("wrong key and value types in put: " + key + " " + value);
+		}
 	}
 
 	/**
@@ -670,15 +876,19 @@ public class VJDFAttributeMap
 	 * @param key the key to set
 	 * @param value the value to set
 	 */
-	public void put(String key, String value)
+	public void put(final String key, final String value)
 	{
-		int size = size();
+		final int size = size();
 		if (size == 0)
+		{
 			add(new JDFAttributeMap(key, value));
+		}
 		else
 		{
 			for (int i = 0; i < size; i++)
+			{
 				elementAt(i).put(key, value);
+			}
 		}
 	}
 }

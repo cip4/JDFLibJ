@@ -99,9 +99,9 @@ import org.cip4.jdflib.ifaces.IMatches;
 public class ContainerUtil
 {
 	/**
-	 * create a HashSet from a List (Vector...)
-	 * @param <a> the data typeof the sets
-	 * @param enumeration
+	 * create a HashSet from an enumeration
+	 * @param <a> the data type of the sets
+	 * @param enumeration the enumeration
 	 * @return a Set created from list
 	 */
 	public static <a> Set<a> toHashSet(final Enumeration<a> enumeration)
@@ -121,8 +121,8 @@ public class ContainerUtil
 
 	/**
 	 * create a HashSet from a List (Vector...)
-	 * @param <a> the data typeof the sets
-	 * @param list
+	 * @param <a> the data type of the sets
+	 * @param list the list
 	 * @return a Set created from list
 	 */
 	public static <a> Set<a> toHashSet(final List<a> list)
@@ -141,8 +141,8 @@ public class ContainerUtil
 
 	/**
 	 * create a HashSet from an Array
-	 * @param <a> the data typeof the sets
-	 * @param l
+	 * @param <a> datatype
+	 * @param l the array
 	 * @return a Set created from list
 	 */
 	public static <a> Set<a> toHashSet(final a[] l)
@@ -340,6 +340,38 @@ public class ContainerUtil
 	}
 
 	/**
+	 * create a Vector of key values from a map
+	 * @param <a> data type of the map key
+	 * @param m the map to dump to an array
+	 * @return the vector of keys - note that this Vector goes NOT reflect changes to the map
+	 */
+	public static <a> Vector<a> getKeyVector(final Map<a, ?> m)
+	{
+		if (m == null)
+		{
+			return null;
+		}
+
+		synchronized (m)
+		{
+			final Set<a> keySet = m.keySet();
+			if (keySet.size() == 0)
+			{
+				return null;
+			}
+			final Vector<a> v = new Vector<a>();
+			v.ensureCapacity(keySet.size());
+			final Iterator<a> it = keySet.iterator();
+
+			while (it.hasNext())
+			{
+				v.add(it.next());
+			}
+			return v;
+		}
+	}
+
+	/**
 	 * return true if a equals b or both are null
 	 * @param a Object to compare
 	 * @param b Object to compare
@@ -362,7 +394,7 @@ public class ContainerUtil
 	 * static implementation of compare for any comparable object that gracefully handles null null is always the smallest
 	 * @param c0
 	 * @param c1
-	 * @return -1 if c0<c1, 0 if equal, 1 if c0>c1
+	 * @return -1 if c0 &lt; c1, 0 if equal, 1 if c0 &gt; c1
 	 */
 	@SuppressWarnings("unchecked")
 	public static int compare(final Comparable c0, final Comparable c1)

@@ -1,9 +1,72 @@
-/**
- * KElementTest.java
- * 
- * @author Dietrich Mucha
+/*
  *
- * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
  */
 package org.cip4.jdflib.core;
 
@@ -17,7 +80,7 @@ import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class VStringTest extends TestCase
 {
@@ -26,7 +89,7 @@ public class VStringTest extends TestCase
 	 */
 	public void testGetAllString()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.appendUnique("a");
 		v.appendUnique("b");
 		v.appendUnique("c");
@@ -38,9 +101,41 @@ public class VStringTest extends TestCase
 	/**
 	 * 
 	 */
+	public void testGet()
+	{
+		final VString v = new VString();
+		v.add("a");
+		v.add("b");
+		v.add("c");
+		v.add("c");
+		assertEquals("a", v.get(0));
+		assertEquals("c", v.get(3));
+		assertEquals("c", v.get(-2));
+		assertEquals("b", v.get(-3));
+	}
+
+	/**
+	 * 
+	 */
+	public void testElementAt()
+	{
+		final VString v = new VString();
+		v.add("a");
+		v.add("b");
+		v.add("c");
+		v.add("c");
+		assertEquals("a", v.elementAt(0));
+		assertEquals("c", v.elementAt(3));
+		assertEquals("c", v.elementAt(-2));
+		assertEquals("b", v.elementAt(-3));
+	}
+
+	/**
+	 * 
+	 */
 	public void testContainsAny()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.appendUnique("a");
 		v.appendUnique("b");
 		v.appendUnique("c");
@@ -59,7 +154,7 @@ public class VStringTest extends TestCase
 	 */
 	public void testSort()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.add("a");
 		v.add("c");
 		v.add("b");
@@ -72,7 +167,7 @@ public class VStringTest extends TestCase
 	 */
 	public void testSetNull()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.add((String) null);
 		v.add("b");
 		v.add("c");
@@ -84,11 +179,11 @@ public class VStringTest extends TestCase
 	 */
 	public void testGetSet()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.add("a");
 		v.add("c");
 		v.add("b");
-		Set<?> s = v.getSet();
+		final Set<?> s = v.getSet();
 		assertEquals(v.size(), s.size());
 		assertTrue(s.contains("c"));
 
@@ -101,12 +196,12 @@ public class VStringTest extends TestCase
 	 */
 	public void testUnify()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.add("a");
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		VString w = new VString();
+		final VString w = new VString();
 		w.add("c");
 		w.add("b");
 		w.add("a");
@@ -125,12 +220,12 @@ public class VStringTest extends TestCase
 	 */
 	public void testAddAll()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.add("a");
 		v.add("b");
 		v.add("c");
 		v.add("c");
-		HashSet<String> h = new HashSet<String>();
+		final HashSet<String> h = new HashSet<String>();
 		h.add("c");
 		h.add("b");
 		h.add("a");
@@ -149,7 +244,7 @@ public class VStringTest extends TestCase
 	 */
 	public void testadd()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.add(EnumType.AdhesiveBinding);
 		assertEquals(StringUtil.setvString(v, " ", null, null), EnumType.AdhesiveBinding.getName());
 
@@ -160,7 +255,7 @@ public class VStringTest extends TestCase
 	 */
 	public void testSetElementAt()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		v.add("a");
 		v.add("b");
 		v.add("c");

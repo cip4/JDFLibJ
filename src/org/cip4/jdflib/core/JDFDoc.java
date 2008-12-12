@@ -114,7 +114,7 @@ public class JDFDoc extends XMLDoc
 	 * 
 	 * @param document
 	 */
-	public JDFDoc(Document document)
+	public JDFDoc(final Document document)
 	{
 		super(document);
 	}
@@ -124,7 +124,7 @@ public class JDFDoc extends XMLDoc
 	 * 
 	 * @param document
 	 */
-	public JDFDoc(DocumentImpl document)
+	public JDFDoc(final DocumentImpl document)
 	{
 		super(document);
 	}
@@ -134,7 +134,7 @@ public class JDFDoc extends XMLDoc
 	 * 
 	 * @param strDocType - ElementName.JDF, ElementName.JMF, "Config" ...
 	 */
-	public JDFDoc(String strDocType)
+	public JDFDoc(final String strDocType)
 	{
 		super(strDocType, JDFElement.getSchemaURL());
 	}
@@ -165,7 +165,7 @@ public class JDFDoc extends XMLDoc
 	 * @param rootName ElementName.JDF or ElementName.JMF
 	 * @return
 	 */
-	private KElement getJXFRoot(String rootName)
+	private KElement getJXFRoot(final String rootName)
 	{
 		KElement root = getRoot();
 
@@ -208,7 +208,7 @@ public class JDFDoc extends XMLDoc
 	 * @return JDFDoc
 	 */
 	@Deprecated
-	public static JDFDoc createJDF(String jdfPath)
+	public static JDFDoc createJDF(final String jdfPath)
 	{
 		final JDFDoc new_doc = new JDFDoc();
 		final JDFNode root = (JDFNode) new_doc.createElement(ElementName.JDF);
@@ -231,7 +231,7 @@ public class JDFDoc extends XMLDoc
 	 * 
 	 */
 	@Deprecated
-	public JDFNode getJDFNodeByID(String id)
+	public JDFNode getJDFNodeByID(final String id)
 	{
 
 		return (JDFNode) getRoot().getTarget(id, AttributeName.ID);
@@ -241,10 +241,11 @@ public class JDFDoc extends XMLDoc
 	 * removes all dangling resources and cleans up the rrefs attributes
 	 * 
 	 * @param nodeNames the list of nodenames to remove, remove all if nodenames is empty
+	 * @return the number of collected resources
 	 * 
 	 * @default CollectGarbageResources(new vString())
 	 */
-	public int collectGarbageResources(VString nodeNames)
+	public int collectGarbageResources(final VString nodeNames)
 	{
 		final boolean bCollectAll = nodeNames == null || nodeNames.isEmpty();
 
@@ -270,7 +271,7 @@ public class JDFDoc extends XMLDoc
 			}
 		}
 
-		VElement vr = new VElement();
+		final VElement vr = new VElement();
 		for (i = 0; i < vResources.size(); i++)
 		{
 			vr.appendUnique(((JDFResource) vResources.elementAt(i)).getResourceRoot());
@@ -300,7 +301,7 @@ public class JDFDoc extends XMLDoc
 		// run gc a few times to really clean up
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
-		
+
 		return nDeleted;
 	}
 
@@ -335,9 +336,9 @@ public class JDFDoc extends XMLDoc
 	 * @param fileName
 	 * @return the parsed JDFDoc
 	 */
-	public static JDFDoc parseFile(String fileName)
+	public static JDFDoc parseFile(final String fileName)
 	{
-		JDFParser p = new JDFParser();
+		final JDFParser p = new JDFParser();
 		return p.parseFile(fileName);
 	}
 
@@ -348,15 +349,21 @@ public class JDFDoc extends XMLDoc
 	 * @param bp the bodypart that the CID url is located in
 	 * @return the parsed JDFDoc
 	 */
-	public static JDFDoc parseURL(String url, BodyPart bp)
+	public static JDFDoc parseURL(final String url, final BodyPart bp)
 	{
-		JDFParser p = new JDFParser();
-		InputStream inStream = UrlUtil.getURLInputStream(url, bp);
-		File f = UrlUtil.urlToFile(url);
-
-		JDFDoc d = p.parseStream(inStream);
+		final JDFParser p = new JDFParser();
+		final InputStream inStream = UrlUtil.getURLInputStream(url, bp);
+		final File f = UrlUtil.urlToFile(url);
+		final JDFDoc d = p.parseStream(inStream);
 		if (f != null && f.canRead())
+		{
 			d.setOriginalFileName(f.getAbsolutePath());
+		}
+		else
+		{
+			final String fn = UrlUtil.urlToFileName(url);
+			d.setOriginalFileName(fn);
+		}
 		return d;
 	}
 
@@ -370,9 +377,9 @@ public class JDFDoc extends XMLDoc
 	 * @default setRoot(ElementName.JDF, null)
 	 */
 	@Override
-	public KElement setRoot(String strDocType, String namespaceURI)
+	public KElement setRoot(final String strDocType, final String namespaceURI)
 	{
-		KElement root = super.setRoot(strDocType, namespaceURI);
+		final KElement root = super.setRoot(strDocType, namespaceURI);
 		if (root != null)
 		{
 			if (root instanceof JDFNode)
@@ -391,32 +398,39 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the
-	 * returned JDFDoc. the content type is automagically set to either text/xml for undefined xml or to
-	 * application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
+	 * This method sends the contents of this JDFDoc to the URL <code>strURL</code> and receives the response in the returned JDFDoc. the content type is
+	 * automagically set to either text/xml for undefined xml or to application/vnd.cip4-jdf+xml or application/vnd.cip4-jmf+xml
 	 * 
 	 * @param strURL the URL to write to
 	 * 
-	 * @return docResponse the response received from URL. A Null document if no response was received, or an exception
-	 *         occurred
+	 * @return docResponse the response received from URL. A Null document if no response was received, or an exception occurred
 	 */
-	public JDFDoc write2URL(String strURL)
+	public JDFDoc write2URL(final String strURL)
 	{
-		KElement e = getRoot();
+		final KElement e = getRoot();
 		if (e == null)
+		{
 			return null;
-		String strContentType = getContentType(e);
+		}
+		final String strContentType = getContentType(e);
 
-		XMLDoc d = super.write2URL(strURL, strContentType);
+		final XMLDoc d = super.write2URL(strURL, strContentType);
 		return d == null ? null : new JDFDoc(d.getMemberDocument());
 	}
 
-	public HttpURLConnection write2HTTPURL(URL strURL, HTTPDetails det)
+	/**
+	 * @param strURL
+	 * @param det
+	 * @return
+	 */
+	public HttpURLConnection write2HTTPURL(final URL strURL, final HTTPDetails det)
 	{
-		KElement e = getRoot();
+		final KElement e = getRoot();
 		if (e == null)
+		{
 			return null;
-		String strContentType = getContentType(e);
+		}
+		final String strContentType = getContentType(e);
 
 		return super.write2HTTPURL(strURL, strContentType, det);
 	}
@@ -427,13 +441,17 @@ public class JDFDoc extends XMLDoc
 	 * @param e
 	 * @return
 	 */
-	public static String getContentType(KElement e)
+	public static String getContentType(final KElement e)
 	{
 		String strContentType = UrlUtil.TEXT_XML;
 		if (e instanceof JDFNode)
+		{
 			strContentType = UrlUtil.VND_JDF;
+		}
 		else if (e instanceof JDFJMF)
+		{
 			strContentType = UrlUtil.VND_JMF;
+		}
 		return strContentType;
 	}
 

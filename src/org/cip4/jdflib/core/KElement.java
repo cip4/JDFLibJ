@@ -1930,6 +1930,59 @@ public class KElement extends ElementNSImpl
 	}
 
 	/**
+	 * Gets children of 'this' by tag name, nameSpaceURI and attribute map, if the attribute map is not empty.<br>
+	 * Searches the entire tree including hidden nodes that are children of non-matching nodes
+	 * @param elementName elementname you are searching for
+	 * @param nameSpaceURI nameSpace you are searching for
+	 * @param mAttrib map of attributes you are looking for <br>
+	 * Wildcards in the attribute map are supported
+	 * @param bDirect if true, return value is a vector only of all direct child elements. <br>
+	 * Otherwise the returned vector contains nodes of arbitrary depth
+	 * @param bAnd if true, a child is only added, if it includes all attributes, specified in mAttrib
+	 * @param maxSize maximum size of the element vector. maxSize is ignored if bDirect is false
+	 * @return VElement: vector with all found elements
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int,
+	 * boolean)
+	 * @default getChildrenByTagName(s,null,null, false, true, 0)
+	 */
+	public VElement getChildrenByTagName_KElement(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize)
+	{
+		if (bDirect)
+		{
+			return getChildElementVector(elementName, nameSpaceURI, mAttrib, bAnd, maxSize, true);
+		}
+
+		// maxSize is ignored in the tree walk!
+		final boolean bHasNoMap = mAttrib == null || mAttrib.isEmpty();
+
+		final VElement v = new VElement();
+		KElement e = getFirstChildElement();
+		final boolean bAlwaysFit = isWildCard(elementName) && isWildCard(nameSpaceURI);
+		while (e != null)
+		{
+			if ((bAlwaysFit || e.fitsName_KElement(elementName, nameSpaceURI)) && (bHasNoMap || e.includesAttributes(mAttrib, bAnd)))
+			{
+				// this guy is the one
+				v.add(e);
+				if (maxSize > 0 && v.size() == maxSize)
+				{
+					return v;
+				}
+			}
+			final int maxSizeRecurse = maxSize > 0 ? maxSize - v.size() : maxSize;
+			final VElement v2 = e.getChildrenByTagName_KElement(elementName, nameSpaceURI, mAttrib, bDirect, bAnd, maxSizeRecurse);
+			v.addAll(v2);
+
+			if (maxSize > 0 && v.size() >= maxSize)
+			{
+				return v;
+			}
+			e = e.getNextSiblingElement();
+		}
+		return v;
+	}
+
+	/**
 	 * wrappers of DOM routines that dont bang on null nodes
 	 * @param s the local name of the elements to match on
 	 * @param nameSpaceURI the namespace URI of the elements to match on
@@ -4319,30 +4372,40 @@ public class KElement extends ElementNSImpl
 	 */
 	public String toXML()
 	{
-		String strXML = JDFConstants.EMPTYSTRING;
+		return toXML(2);
+	}
+
+	/**
+	 * serialize this to a string
+	 * @return String the dom element serialized as a string
+	 * @throws JDFExcepion if an error occurs while serializing
+	 */
+	public String toXML(final int indent)
+	{
 
 		try
 		{
 			final StringWriter osw = new StringWriter();
 			final OutputFormat format = new OutputFormat(getOwnerDocument());
 
-			format.setIndenting(true);
-			format.setIndent(2);
+			format.setIndenting(indent != 0);
+			format.setIndent(indent);
 			format.setEncoding(sm_strENCODING);
 
 			final XMLSerializer serial = new XMLSerializer(osw, format);
-			serial.setNamespaces(true);
+			serial.setNamespaces(false);
 			serial.asDOMSerializer();
 			serial.serialize(this);
 
-			strXML = osw.toString();
+			final String s = osw.toString();
+			final int pos = s.indexOf("?>");
+			return (pos > 0) ? s.substring(pos + 2) : s;
+
 		}
 		catch (final IOException e)
 		{
 			throw new JDFException("ERROR while serializing " + getClass().getName() + " element");
 		}
-
-		return strXML;
 	}
 
 	// ************************** end of methods needed in JDFRoot
@@ -4644,12 +4707,22 @@ public class KElement extends ElementNSImpl
 		}
 		else
 		{
-			KElement kEle = getXPathElement(path);
-			if (kEle == null)
+
+			VElement vEle = getXPathElementVector(path, -1);
+			if (vEle == null)
 			{
-				kEle = getCreateXPathElement(path);
+				vEle = new VElement();
 			}
-			kEle.setText(value);
+			if (vEle.size() == 0)
+			{
+				final KElement kEle = getCreateXPathElement(path);
+				vEle.add(kEle);
+			}
+			for (int i = 0; i < vEle.size(); i++)
+			{
+				vEle.get(i).setText(value);
+			}
+
 		}
 	}
 
@@ -4671,12 +4744,20 @@ public class KElement extends ElementNSImpl
 
 		final String att = path.substring(pos + 1);
 		final String strAttrPath = path.substring(0, pos);
-		KElement kEle = getXPathElement(strAttrPath);
-		if (kEle == null)
+		VElement vEle = getXPathElementVector(strAttrPath, -1);
+		if (vEle == null)
 		{
-			kEle = getCreateXPathElement(strAttrPath);
+			vEle = new VElement();
 		}
-		kEle.setAttribute(att, value, null);
+		if (vEle.size() == 0)
+		{
+			final KElement kEle = getCreateXPathElement(strAttrPath);
+			vEle.add(kEle);
+		}
+		for (int i = 0; i < vEle.size(); i++)
+		{
+			vEle.get(i).setAttribute(att, value, null);
+		}
 	}
 
 	/**

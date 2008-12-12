@@ -576,7 +576,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 * 
 	 */
 	// ///////////////////////////////////////////////////
 	public void testGetLayoutLeavesOld()
@@ -653,6 +653,12 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		assertEquals(s1.getSignatureName(), "Sig2");
 		assertEquals(s1.getSheetName(), "Sheet2_2");
 		final JDFSurface su = s1.getCreateBackSurface();
+		assertEquals(su.getSignatureName(), "Sig2");
+		assertEquals(su.getSheetName(), "Sheet2_2");
+		su.makeRootResource(null, null, true);
+		assertEquals(su.getSignatureName(), "Sig2");
+		assertEquals(su.getSheetName(), "Sheet2_2");
+		s1.makeRootResource(null, null, true);
 		assertEquals(su.getSignatureName(), "Sig2");
 		assertEquals(su.getSheetName(), "Sheet2_2");
 

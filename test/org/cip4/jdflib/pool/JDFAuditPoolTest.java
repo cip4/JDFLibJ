@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
@@ -96,6 +97,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFProcessRun;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
@@ -113,8 +115,24 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	/**
 	 * Method testIncludesAttribute.
+	 * */
+	public void testGetResourceVector()
+	{
+		final JDFResourceAudit ra1 = (JDFResourceAudit) myAuditPool.addAudit(EnumAuditType.ResourceAudit, null);
+		final JDFResourceLink rl1 = (JDFResourceLink) ra1.appendElement("MediaLink");
+		rl1.setrRef("r1");
+		assertNull(myAuditPool.getResourceAudits("r2", null));
+		assertEquals(myAuditPool.getResourceAudits("r1", null).get(0), ra1);
+		final JDFResourceAudit ra2 = (JDFResourceAudit) myAuditPool.addAudit(EnumAuditType.ResourceAudit, null);
+		final JDFResourceLink rl2 = (JDFResourceLink) ra2.appendElement("MediaLink");
+		rl2.setrRef("r2");
+		assertEquals(myAuditPool.getResourceAudits("r1", null).get(0), ra1);
+		assertEquals(myAuditPool.getResourceAudits("r2", null).get(0), ra2);
+		assertEquals(myAuditPool.getResourceAudits("r2", null).size(), 1);
+	}
+
+	/**
 	 * 
-	 * @throws Exception
 	 */
 	public void testAddCreated()
 	{
@@ -160,6 +178,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testAddMerged()
 	{
 		// Test AddCreated with one parameter
@@ -272,6 +293,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetLastPhase()
 	{
 		final JDFPhaseTime p1 = myAuditPool.setPhase(EnumNodeStatus.Setup, null, null, null);
@@ -296,6 +320,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testCreateSubmitProcessRun()
 	{
 
@@ -316,6 +343,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		assertEquals(pr.getAttribute(AttributeName.QUEUEENTRYID), "q1");
 	}
 
+	/**
+	 * @throws Exception x
+	 */
 	public void testSetPhaseJMF() throws Exception
 	{
 
@@ -349,6 +379,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetAudit()
 	{
 		final JDFAudit a1 = myAuditPool.addAudit(EnumAuditType.Deleted, null);
@@ -363,6 +396,9 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		assertEquals(myAuditPool.getAudit(-1, EnumAuditType.Created, null, null), a2);
 	}
 
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 */
 	@Override
 	public String toString()
 	{

@@ -275,7 +275,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 			}
 		}
 
-		if (v.size() < iNew)
+		if (v.size() <= iNew)
 		{
 			return null;
 		}

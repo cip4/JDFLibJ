@@ -116,7 +116,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFResourceLinkPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFResourceLinkPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -128,7 +128,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFResourceLinkPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFResourceLinkPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -141,7 +141,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFResourceLinkPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFResourceLinkPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -176,7 +176,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @deprecated use getPoolChildren()
 	 */
 	@Deprecated
-	public VElement getLinks(JDFAttributeMap mLinkAtt)
+	public VElement getLinks(final JDFAttributeMap mLinkAtt)
 	{
 		return getPoolChildren(null, mLinkAtt, null);
 	}
@@ -194,7 +194,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @deprecated use getPoolChildren()
 	 */
 	@Deprecated
-	public VElement getLinks(String elementName, String nameSpaceURI)
+	public VElement getLinks(final String elementName, final String nameSpaceURI)
 	{
 		return getPoolChildren(elementName, null, nameSpaceURI);
 	}
@@ -211,25 +211,26 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return VElement - vector with all Resources matching the conditions
 	 */
-	public VElement getLinkedResources(String resName, JDFAttributeMap mLinkAtt, JDFAttributeMap mResAtt, boolean bFollowRefs)
+	public VElement getLinkedResources(final String resName, final JDFAttributeMap mLinkAtt, final JDFAttributeMap mResAtt, final boolean bFollowRefs)
 	{
 		String resNameLocal = resName;
-		
+
 		final VElement vL = new VElement();
 		final VElement v = getPoolChildren(null, mLinkAtt, null);
 		if (v != null)
 		{
 			if (resNameLocal != null && resNameLocal.endsWith(JDFConstants.LINK))
+			{
 				resNameLocal = resNameLocal.substring(0, resNameLocal.length() - 4); // remove link
+			}
 
 			final int size = v.size();
 			for (int i = 0; i < size; i++)
 			{
 				final JDFResourceLink l = (JDFResourceLink) v.elementAt(i);
 
-				JDFResource linkRoot = l.getLinkRoot();
-				if ((linkRoot != null)
-						&& ((resNameLocal == null) || resNameLocal.equals(JDFConstants.EMPTYSTRING) || linkRoot.getLocalName().equals(resNameLocal)))
+				final JDFResource linkRoot = l.getLinkRoot();
+				if ((linkRoot != null) && ((resNameLocal == null) || resNameLocal.equals(JDFConstants.EMPTYSTRING) || linkRoot.getLocalName().equals(resNameLocal)))
 				{
 					if (linkRoot.includesAttributes(mResAtt, true))
 					{
@@ -242,7 +243,7 @@ public class JDFResourceLinkPool extends JDFPool
 				}
 			}
 		}
-		
+
 		return vL;
 	}
 
@@ -259,7 +260,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @return VElement - Vector with the found resource links
 	 */
 	@Deprecated
-	public VElement getInOutLinks(boolean bInOut, boolean bLink, String resName, String resProcUsage)
+	public VElement getInOutLinks(final boolean bInOut, final boolean bLink, final String resName, final String resProcUsage)
 	{
 		return getInOutLinks(bInOut ? EnumUsage.Input : EnumUsage.Output, bLink, resName, EnumProcessUsage.getEnum(resProcUsage));
 	}
@@ -276,7 +277,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return VElement - Vector with the found resource links
 	 */
-	public VElement getInOutLinks(EnumUsage usage, boolean bLink, String resName, EnumProcessUsage procUsage)
+	public VElement getInOutLinks(final EnumUsage usage, final boolean bLink, final String resName, final EnumProcessUsage procUsage)
 	{
 		final JDFAttributeMap mA = (usage != null) ? new JDFAttributeMap(AttributeName.USAGE, usage.getName()) : null;
 
@@ -295,7 +296,7 @@ public class JDFResourceLinkPool extends JDFPool
 						continue;
 					}
 				}
-				
+
 				if (procUsage != null && !isWildCard(procUsage.getName()))
 				{
 					if (!procUsage.equals(li.getEnumProcessUsage()))
@@ -323,10 +324,12 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return VElement - the converted vector
 	 */
-	public static VElement resourceVector(VElement linkVector, String resType)
+	public static VElement resourceVector(final VElement linkVector, final String resType)
 	{
 		if (linkVector == null)
+		{
 			return null;
+		}
 
 		final VElement v = new VElement();
 		final boolean bResTypeWildcard = isWildCard(resType);
@@ -362,12 +365,14 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @deprecated
 	 */
 	@Deprecated
-	public JDFResourceLink appendResource(JDFResource r, boolean input, boolean bForce)
+	public JDFResourceLink appendResource(final JDFResource r, final boolean input, final boolean bForce)
 	{
 		boolean bForceLocal = bForce;
-		
+
 		if (bForceLocal)
+		{
 			bForceLocal = true; // fool compiler
+		}
 
 		return linkResource(r, input ? EnumUsage.Input : EnumUsage.Output, null);
 	}
@@ -381,12 +386,12 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @param usage usage of the link (input/output)
 	 * @param processUsage ProcessUsage of the link
 	 * 
-	 * @return JDFResourceLink - the resource link you were searching for. If not found, a new empty JDFResourceLink is
-	 *         returned.
+	 * @return JDFResourceLink - the resource link you were searching for. If not found, a new empty JDFResourceLink is returned.
 	 */
-	public JDFResourceLink getLink(JDFResource r, EnumUsage usage, EnumProcessUsage processUsage)
+	public JDFResourceLink getLink(final JDFResource r, final EnumUsage usage, final EnumProcessUsage processUsage)
 	{
-		if (r == null || !r.hasAttribute(AttributeName.ID))
+		final String id = r == null ? null : r.getID();
+		if (id == null)
 		{
 			return null;
 		}
@@ -401,8 +406,7 @@ public class JDFResourceLinkPool extends JDFPool
 			{
 				final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
 
-				if (resLink != null && resLink.getrRef().equals(r.getID())
-						&& resLink.getNodeName().equals(r.getLinkString()))
+				if (resLink != null && resLink.getrRef().equals(id) && resLink.getNodeName().equals(r.getLinkString()))
 				{
 					return resLink;
 				}
@@ -426,19 +430,21 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @throws JDFException - if <code>r</code> is not in the same document as <code>this</code>
 	 */
-	public JDFResourceLink linkResource(JDFResource r, JDFResourceLink.EnumUsage usage, EnumProcessUsage processUsage)
+	public JDFResourceLink linkResource(final JDFResource r, final JDFResourceLink.EnumUsage usage, final EnumProcessUsage processUsage)
 	{
 		JDFResource rLocal = r;
-		
+
 		if (rLocal == null || usage == null)
+		{
 			return null;
-		
+		}
+
 		String s = rLocal.getID();
 		if (isWildCard(s))
 		{
 			s = rLocal.getResourceRoot().appendAnchor(null);
 		}
-		
+
 		final JDFResourceLink rl = (JDFResourceLink) appendElement(rLocal.getLinkString(), rLocal.getNamespaceURI());
 		rl.setTarget(rLocal);
 		rl.setUsage(usage);
@@ -454,8 +460,10 @@ public class JDFResourceLinkPool extends JDFPool
 		{
 			parent = rLocal.getParentJDF();
 			if (parent == null)
+			{
 				break;
-			
+			}
+
 			parent = parent.getParentJDF();
 			if (parent == null)
 			{
@@ -476,7 +484,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return VJDFAttributeMap - map of all parts linked by this resourcelinkpool
 	 */
-	public VJDFAttributeMap getPartMapVector(boolean bComplete)
+	public VJDFAttributeMap getPartMapVector(final boolean bComplete)
 	{
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 
@@ -626,7 +634,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return Vector - vector with all values of the attribute partType
 	 */
-	public Vector getPartValues(JDFResource.EnumPartIDKey partType)
+	public Vector getPartValues(final JDFResource.EnumPartIDKey partType)
 	{
 		final Vector vs = new Vector();
 		final VElement links = getPoolChildren(null, null, null);
@@ -659,13 +667,15 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return VElement: a vector with all elements in the pool matching the conditions
 	 * 
-	 *         default: getPoolChildren(null, null, null)
+	 * default: getPoolChildren(null, null, null)
 	 */
-	public VElement getPoolChildren(String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	public VElement getPoolChildren(final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		final VElement v = getPoolChildrenGeneric(strName, mAttrib, nameSpaceURI);
 		if (v == null)
+		{
 			return null;
+		}
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
 			if (!(v.elementAt(i) instanceof JDFResourceLink))
@@ -686,12 +696,12 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return JDFElement: the pool child matching the above conditions
 	 */
-	public JDFResourceLink getPoolChild(int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	public JDFResourceLink getPoolChild(final int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		JDFResourceLink resLink = null;
-		
+
 		int iLocal = i;
-		
+
 		final VElement v = getPoolChildren(strName, mAttrib, nameSpaceURI);
 		if (v != null)
 		{
@@ -710,7 +720,7 @@ public class JDFResourceLinkPool extends JDFPool
 				resLink = (JDFResourceLink) v.elementAt(iLocal);
 			}
 		}
-		
+
 		return resLink;
 	}
 
@@ -723,10 +733,10 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @param nMax maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
 	 * 
-	 *         !!! Do not change the signature of this method
+	 * !!! Do not change the signature of this method
 	 */
 	@Override
-	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourceLinkPool, nMax);
 	}
@@ -739,23 +749,23 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @return vElement: the vector of referenced resource ids
 	 */
 	@Override
-	public HashSet getAllRefs(HashSet vDoneRefs, boolean bRecurse)
+	public HashSet getAllRefs(final HashSet vDoneRefs, final boolean bRecurse)
 	{
 		HashSet vDoneRefsLocal = vDoneRefs;
-		
-		VElement vResourceLinks = getPoolChildren(null, null, null);
+
+		final VElement vResourceLinks = getPoolChildren(null, null, null);
 		if (vResourceLinks != null)
 		{
 			final int size = vResourceLinks.size();
 			for (int i = 0; i < size; i++)
 			{
-				JDFResourceLink rl = (JDFResourceLink) vResourceLinks.elementAt(i);
+				final JDFResourceLink rl = (JDFResourceLink) vResourceLinks.elementAt(i);
 				if (!vDoneRefsLocal.contains(rl))
 				{
 					vDoneRefsLocal.add(rl);
 					if (bRecurse)
 					{
-						JDFResource r = rl.getLinkRoot();
+						final JDFResource r = rl.getLinkRoot();
 						if (r != null && !vDoneRefsLocal.contains(r))
 						{
 							vDoneRefsLocal = r.getAllRefs(vDoneRefsLocal, bRecurse);

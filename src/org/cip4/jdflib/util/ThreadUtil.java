@@ -72,22 +72,106 @@ package org.cip4.jdflib.util;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class ThreadUtil
 {
+
+	/**
+	 * placeholder for future use
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * 11.12.2008
+	 */
+	public static class MyMutex
+	{
+		// placeholder
+	}
+
+	/**
+	 * abstract class to run unteruptable stuff in an interruptable thread
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * 11.12.2008
+	 * @param <a> the returned object data type
+	 */
+	public static abstract class WaitTimeout<a> implements Runnable
+	{
+		/**
+		 * this is the handle routine that may take longer it should return the expected object when completed
+		 * 
+		 * @return the object that this whole class is about
+		 */
+		protected abstract a handle();
+
+		/**
+		 * called prior to starting thread, overwrite to initialize in the constructor
+		 */
+		protected void setup()
+		{
+			// nop
+		}
+
+		private MyMutex mutex;
+		private final int waitMillis;
+		private a theObject;
+		private static int threadNumber = 0;
+		private Thread myThread = null;
+
+		/**
+		 * @param millis wait timeout in milliseconds
+		 */
+		public WaitTimeout(final int millis)
+		{
+
+			waitMillis = millis;
+			theObject = null;
+			setup();
+			mutex = new MyMutex();
+			myThread = new Thread(this, "WaitThread" + threadNumber++);
+			myThread.start();
+		}
+
+		/**
+		 * @see java.lang.Runnable#run()
+		 */
+		public final void run()
+		{
+			theObject = handle();
+			synchronized (mutex)
+			{
+				mutex.notifyAll();
+			}
+			mutex = null;
+		}
+
+		/**
+		 * @return the object that you waited for, null if the timeout is reached
+		 */
+		public final a getWaitedObject()
+		{
+			if (mutex != null)
+			{
+				ThreadUtil.wait(mutex, waitMillis);
+				mutex = null;
+			}
+			return theObject;
+		}
+
+	}
+
 	/**
 	 * simple sleep wrapper that catches its exception
 	 * 
 	 * @param millis
 	 */
-	public static void sleep(int millis)
+	public static void sleep(final int millis)
 	{
 		try
 		{
 			Thread.sleep(millis);
 		}
-		catch (InterruptedException x)
+		catch (final InterruptedException x)
 		{
 			// System.out.print(".");
 		}
@@ -95,14 +179,20 @@ public class ThreadUtil
 
 	/**
 	 * simple wait wrapper that synchronizes catches its exception
-	 * @param mutex the object that will wait
 	 * 
-	 * @param millis
+	 * @param mutex the object that will wait
+	 * @param millis milliseconds to wait, 0 or lower: indefinite wait
 	 */
 	public static void wait(Object mutex, int millis)
 	{
+		if (millis < 0)
+		{
+			millis = 0;
+		}
 		if (mutex == null)
-			mutex = new Object();
+		{
+			mutex = new MyMutex();
+		}
 		try
 		{
 			synchronized (mutex)
@@ -110,7 +200,7 @@ public class ThreadUtil
 				mutex.wait(millis);
 			}
 		}
-		catch (InterruptedException x)
+		catch (final InterruptedException x)
 		{
 			// nop
 		}

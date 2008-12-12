@@ -9,9 +9,9 @@ package org.cip4.jdflib.util;
 public class MyInteger
 {
 	/**
-	 * @param _i
+	 * @param _i the integer
 	 */
-	public MyInteger(int _i)
+	public MyInteger(final int _i)
 	{
 		super();
 		this.i = _i;

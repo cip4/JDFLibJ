@@ -101,10 +101,23 @@ import org.w3c.dom.Element;
  * test class for KElement
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class KElementTest extends JDFTestCaseBase
 {
+
+	/**
+	 * really weird, eh?
+	 */
+	public void testBadElementNames()
+	{
+		final JDFDoc doc = new JDFDoc("a");
+		final KElement e = doc.getRoot();
+		e.appendElement("I a=\"c\"");
+
+		final String s = doc.write2String(2);
+		final JDFDoc d2 = new JDFParser().parseString(s);
+	}
 
 	/**
 	 * 
@@ -264,8 +277,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	public void testGetElementById()
 	{
-		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">"
-				+ "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
+		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -701,7 +713,7 @@ public class KElementTest extends JDFTestCaseBase
 	public void testCloneElementMem()
 	{
 		final XMLDoc doc = new XMLDoc("root", null);
-		//		KElement k = 
+		// KElement k =
 		doc.getRoot();
 		for (int i = 0; i < 50000; i++)
 		{
@@ -760,8 +772,7 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * test for copyElement after clone
-	 * check for spurious npes here
+	 * test for copyElement after clone check for spurious npes here
 	 */
 	public void testCopyElementClone()
 	{
@@ -972,11 +983,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(kElement3.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(kElement3.getPrefix().equals(cip4Prefix1));
 
-		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" "
-				+ "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>"
-				+ "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
+		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
+				+ "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>"
+				+ "<jdf:kElement3/>" + "</JDF>";
 
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseString(jdfDocString);
@@ -1112,8 +1121,7 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * tests whether the correct virtual call hierarch is followed in
-	 * getCreateElement
+	 * tests whether the correct virtual call hierarch is followed in getCreateElement
 	 */
 	public void testGetCreateElement()
 	{
@@ -1482,6 +1490,26 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("", root.getXPathAttribute("new@foo2", null), "bar2");
 		final String attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "dummydefault");
 		assertEquals("", attValue, "newAttributeValue");
+
+		for (int i = 0; i < 3; i++)
+		{
+			root.appendElement("Foo3");
+		}
+		root.setXPathAttribute("Foo3/@bar2", "bb");
+		root.setXPathAttribute("Foo3[1]/@bar3", "cc");
+		for (int i = 0; i < 3; i++)
+		{
+			assertEquals(root.getElement("Foo3", null, i).getAttribute("bar2"), "bb");
+			if (i == 0)
+			{
+				assertEquals(root.getElement("Foo3", null, i).getAttribute("bar3"), "cc");
+			}
+			else
+			{
+				assertEquals(root.getElement("Foo3", null, i).getAttribute("bar3"), "");
+			}
+		}
+		root.setXPathAttribute("Foo3/@bar2", "bb");
 	}
 
 	/**
@@ -1658,7 +1686,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(root.getAttribute("long"), longString);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// //
 
 	public void testSetAttributes()
@@ -1676,7 +1704,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(a2.getAttribute("b", "www.b.com", null), "2");
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /////////
 
 	public void testSetAttributesResource()
@@ -1835,9 +1863,33 @@ public class KElementTest extends JDFTestCaseBase
 		assertNotNull(n.getElementsByTagName_KElement(null, null));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// ///
 
+	/**
+	 * 
+	 */
+	public void testGetChildrenByTagNameWildCard()
+	{
+		final KElement root = new XMLDoc("root", null).getRoot();
+		final KElement e1 = root.appendElement("foo");
+		e1.setAttribute("a", "1");
+		final KElement e2 = root.appendElement("foo");
+		e2.setAttribute("a", "2");
+		final KElement e3 = root.appendElement("foo");
+		e3.setAttribute("b", "3");
+		final KElement e4 = e3.appendElement("foo");
+		e4.setAttribute("a", "3");
+		final VElement v = root.getChildrenByTagName("foo", null, new JDFAttributeMap("a", "*"), false, false, 0);
+		assertEquals(v.size(), 3);
+		assertTrue(v.contains(e1));
+		assertTrue(v.contains(e2));
+		assertTrue(v.contains(e4));
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetChildrenByTagName()
 	{
 		final String xmlFile = "getChildrenByTagNameTest.jdf";
@@ -1855,9 +1907,12 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("Wrong number of child elements found", v.size(), 5);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// ///
 
+	/**
+	 * 
+	 */
 	public void testGetChildrenFromList()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", null);
@@ -1871,9 +1926,12 @@ public class KElementTest extends JDFTestCaseBase
 		assertFalse(root.getChildrenFromList(new VString("b:b", " "), null, false, null).contains(b));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// ///
 
+	/**
+	 * 
+	 */
 	public void testGetChildWithAttribute()
 	{
 		final XMLDoc doc = new XMLDoc("Foo", null);
@@ -1938,7 +1996,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(root.getChildElementArray()[1], root.getElement("bar2"));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// ///
 
 	public void testAttributeInfo()
@@ -2226,7 +2284,7 @@ public class KElementTest extends JDFTestCaseBase
 		// now check for parsed document with no default xmlns declaration
 		final JDFParser p = new JDFParser();
 		final int pos = s.indexOf(url);
-		s = s.substring(0, pos - 7) + s.substring(pos + url.length() + 1); //+/-
+		s = s.substring(0, pos - 7) + s.substring(pos + url.length() + 1); // +/-
 		// for
 		// xmlns
 		// =
@@ -2345,7 +2403,7 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 
 	public void testTypeInfo() // commented out due to Java 1.4 1.5 package
 	// incompatibilities
@@ -2356,9 +2414,36 @@ public class KElementTest extends JDFTestCaseBase
 		// assertNotNull(ti);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
+	public void testToString()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement root = d.getRoot();
+		assertTrue(root.toString().trim().endsWith("<doc/>"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testToXML()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement root = d.getRoot();
+		assertEquals(root.toXML().trim(), "<doc/>");
+		root.setAttribute("test", "\"");
+		// System.out.print(root.toXML());
+	}
+
+	// //////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testTextMethods()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
@@ -2424,7 +2509,7 @@ public class KElementTest extends JDFTestCaseBase
 
 		e1.setXPathAttribute("./e2/e3@a", "c");
 		e1.setXPathAttribute("./e3/e4@a", "d");
-		 HashSet<String> h= root.fillHashSet("a", null);
+		HashSet<String> h = root.fillHashSet("a", null);
 
 		assertTrue("", h.contains("aa"));
 		assertTrue("", h.contains("b"));

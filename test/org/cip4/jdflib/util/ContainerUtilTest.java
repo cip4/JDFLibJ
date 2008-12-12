@@ -91,7 +91,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	{
 		private final int i;
 
-		public SimpleMatch(int pi)
+		public SimpleMatch(final int pi)
 		{
 			super();
 			this.i = pi;
@@ -102,7 +102,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		 * 
 		 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 		 */
-		public boolean matches(Object subset)
+		public boolean matches(final Object subset)
 		{
 			return ((SimpleMatch) subset).i == i;
 		}
@@ -113,7 +113,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
 		@Override
-		public boolean equals(Object obj)
+		public boolean equals(final Object obj)
 		{
 			return matches(obj);
 		}
@@ -137,10 +137,12 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 */
 	public void testGetMatch()
 	{
-		Vector<SimpleMatch> v = new Vector<SimpleMatch>();
+		final Vector<SimpleMatch> v = new Vector<SimpleMatch>();
 		for (int i = 0; i < 10; i++)
+		{
 			v.add(new SimpleMatch(i % 2));
-		SimpleMatch simpleMatch1 = new SimpleMatch(1);
+		}
+		final SimpleMatch simpleMatch1 = new SimpleMatch(1);
 		assertEquals(ContainerUtil.getMatches(v, simpleMatch1).size(), 5);
 		assertEquals(ContainerUtil.getMatch(v, simpleMatch1, 0), simpleMatch1);
 	}
@@ -150,8 +152,8 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 */
 	public void testToHashSetArray()
 	{
-		String[] a = { "a", "b" };
-		Set s = ContainerUtil.toHashSet(a);
+		final String[] a = { "a", "b" };
+		final Set s = ContainerUtil.toHashSet(a);
 		assertTrue(s.contains("a"));
 		assertTrue(s.contains("b"));
 		assertFalse(s.contains("c"));
@@ -163,16 +165,42 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 */
 	public void testToValueVector()
 	{
-		HashMap<String, String> hm = new HashMap<String, String>();
+		final HashMap<String, String> hm = new HashMap<String, String>();
 		for (int i = 0; i < 10; i++)
+		{
 			hm.put("" + i, "a" + i);
-		Vector<String> v = ContainerUtil.toValueVector(hm, false);
+		}
+		final Vector<String> v = ContainerUtil.toValueVector(hm, false);
 		assertEquals(v.size(), 10);
-		Vector<String> vs = ContainerUtil.toValueVector(hm, true);
+		final Vector<String> vs = ContainerUtil.toValueVector(hm, true);
 		assertTrue(vs.containsAll(v));
 		assertTrue(v.containsAll(vs));
 		for (int i = 1; i < 10; i++)
+		{
 			assertTrue(vs.get(i - 1).compareTo(vs.get(i)) < 0);
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetKeyVector()
+	{
+		final HashMap<String, String> hm = new HashMap<String, String>();
+		for (int i = 0; i < 10; i++)
+		{
+			hm.put("" + i, "a" + i);
+		}
+		final Vector<String> v = ContainerUtil.getKeyVector(hm);
+		assertEquals(v.size(), 10);
+		final Vector<String> vs = ContainerUtil.getKeyVector(hm);
+		assertTrue(vs.containsAll(v));
+		assertTrue(v.containsAll(vs));
+		for (int i = 0; i < 10; i++)
+		{
+			assertTrue(v.contains("" + i));
+		}
 
 	}
 
@@ -181,7 +209,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	 */
 	public void testEnsureSize()
 	{
-		VString v = new VString();
+		final VString v = new VString();
 		ContainerUtil.ensureSize(4, v);
 		assertEquals(v.size(), 4);
 		v.set(2, "foo");

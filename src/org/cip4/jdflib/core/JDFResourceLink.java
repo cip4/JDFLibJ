@@ -828,8 +828,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @return JDFResource - the first leaf that is referenced by this ResourceLink
 	 */
 	@Override
-	@SuppressWarnings(value =
-	{ "deprecation" })
+	@SuppressWarnings(value = { "deprecation" })
 	public JDFResource getTarget()
 	{
 		final VElement v = getTargetVector(-1);
@@ -1190,10 +1189,14 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @return the vector of referenced leaves
 	 */
-	VElement getLeafVector()
+	public VElement getLeafVector()
 	{
 		final VJDFAttributeMap vmParts = getPartMapVector();
 		final JDFResource resRoot = getLinkRoot();
+		if (resRoot == null) // snafu - link pointing to nirvana
+		{
+			return null;
+		}
 		final VElement v = new VElement();
 
 		if (vmParts == null)

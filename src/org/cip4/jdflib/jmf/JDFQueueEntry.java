@@ -81,6 +81,7 @@
 package org.cip4.jdflib.jmf;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -97,69 +98,99 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.MyInteger;
 
 //----------------------------------
 /**
  * @author prosirai
- *
+ * 
  */
 public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INodeIdentifiable
 {
 	public static class QueueEntryComparator implements Comparator
 	{
+		private static HashMap<String, MyInteger> fastStat = null;
 
 		/*
 		 * (non-Javadoc)
 		 * 
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
-		public int compare(Object a1, Object a2)
+		public int compare(final Object a1, final Object a2)
 		{
 			if (!(a1 instanceof KElement))
+			{
 				return -1;
+			}
 			if (!(a2 instanceof KElement))
+			{
 				return 1;
-			KElement o1 = (KElement) a1;
-			KElement o2 = (KElement) a2;
-			int i = o1.getNodeName().compareTo(o2.getNodeName());
+			}
+			final KElement o1 = (KElement) a1;
+			final KElement o2 = (KElement) a2;
+			final int i = o1.getNodeName().compareTo(o2.getNodeName());
 			if (i != 0)
+			{
 				return i;
+			}
+			if (fastStat == null)
+			{
+				fastStat = new HashMap<String, MyInteger>();
+				final Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
+				while (it.hasNext())
+				{
+					final EnumQueueEntryStatus eqs = it.next();
+					fastStat.put(eqs.getName(), new MyInteger(eqs.getValue()));
+				}
+			}
 			if ((o1 instanceof JDFQueueEntry) && (o2 instanceof JDFQueueEntry))
 			{
-				JDFQueueEntry q1 = (JDFQueueEntry) o1;
-				JDFQueueEntry q2 = (JDFQueueEntry) o2;
-				EnumQueueEntryStatus status1 = q1.getQueueEntryStatus();
-				EnumQueueEntryStatus status2 = q2.getQueueEntryStatus();
-				int s1 = (status1 == null) ? 0 : status1.getValue();
-				int s2 = (status2 == null) ? 0 : status2.getValue();
+				final JDFQueueEntry q1 = (JDFQueueEntry) o1;
+				final JDFQueueEntry q2 = (JDFQueueEntry) o2;
+				final MyInteger m1 = fastStat.get(q1.getAttribute(AttributeName.STATUS, null, null));
+				final MyInteger m2 = fastStat.get(q2.getAttribute(AttributeName.STATUS, null, null));
+				// EnumQueueEntryStatus status2 = q2.getQueueEntryStatus();
+				int s1 = (m1 == null) ? 0 : m1.i;
+				// int s2 = (status2 == null) ? 0 : status2.getValue();
+				int s2 = (m2 == null) ? 0 : m2.i;
 				if (s1 != s2)
+				{
 					return s1 - s2;
+				}
 				if (q1.isCompleted())
 				{
-					JDFDate d1 = q1.getEndTime();
-					JDFDate d2 = q1.getEndTime();
+					final JDFDate d1 = q1.getEndTime();
+					final JDFDate d2 = q1.getEndTime();
 					if (d1 != null && d2 != null)
+					{
 						return d1.compareTo(d2);
+					}
 				}
 				else
 				{
 					s1 = q1.getPriority();
 					s2 = q2.getPriority();
 					if (s1 != s2)
+					{
 						return s2 - s1;
+					}
 				}
 
 				JDFDate d1 = q1.getStartTime();
 				JDFDate d2 = q2.getStartTime();
 				int d = ContainerUtil.compare(d1, d2);
 				if (d != 0)
+				{
 					return d;
+				}
 
 				d1 = q1.getSubmissionTime();
 				d2 = q2.getSubmissionTime();
 				d = ContainerUtil.compare(d1, d2);
 				if (d != 0)
+				{
 					return d;
+				}
 			}
 			return 0;
 		}
@@ -173,7 +204,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFQueueEntry(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFQueueEntry(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -185,7 +216,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFQueueEntry(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFQueueEntry(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -198,7 +229,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFQueueEntry(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFQueueEntry(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -231,7 +262,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
@@ -242,7 +273,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
@@ -253,7 +284,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
@@ -264,10 +295,12 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @param ni
 	 * @return
 	 */
-	public boolean matchesNodeIdentifier(NodeIdentifier ni)
+	public boolean matchesNodeIdentifier(final NodeIdentifier ni)
 	{
 		if (ni == null)
+		{
 			return false;
+		}
 		final NodeIdentifier niThis = getIdentifier();
 		return niThis.matches(ni);
 	}
@@ -278,10 +311,12 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @param ni
 	 * @return
 	 */
-	public boolean matchesQueueFilter(JDFQueueFilter filter)
+	public boolean matchesQueueFilter(final JDFQueueFilter filter)
 	{
 		if (filter == null)
+		{
 			return true;
+		}
 		return filter.matches(this);
 	}
 
@@ -292,7 +327,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}
@@ -303,9 +338,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setPriority(int)
 	 */
 	@Override
-	public void setPriority(int value)
+	public void setPriority(final int value)
 	{
-		int oldVal = hasAttribute(AttributeName.PRIORITY) ? getPriority() : -1;
+		final int oldVal = hasAttribute(AttributeName.PRIORITY) ? getPriority() : -1;
 		if (isAutomated() && value != oldVal)
 		{
 			final JDFQueue queue = (JDFQueue) getParentNode_KElement();
@@ -328,7 +363,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @deprecated call JDFQueue.sortChildren()
 	 */
 	@Deprecated
-	public void sortQueue(@SuppressWarnings("unused") int oldVal)
+	public void sortQueue(@SuppressWarnings("unused") final int oldVal)
 	{
 		final JDFQueue queue = (JDFQueue) getParentNode_KElement();
 		queue.sortChildren();
@@ -339,7 +374,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 */
 	private boolean isAutomated()
 	{
-		KElement e = getParentNode_KElement();
+		final KElement e = getParentNode_KElement();
 		if (e instanceof JDFQueue)
 		{
 			return ((JDFQueue) e).isAutomated();
@@ -348,18 +383,17 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	}
 
 	/**
-	 * sets the QueueEntry/@Status if the queue is automated, also resorts the queue to reflect the new Status and sets
-	 * the Queue/@Status based on the maximum number of concurrently running jobs also sets StartTime and EndTime
-	 * appropriately if the queue is automated
+	 * sets the QueueEntry/@Status if the queue is automated, also resorts the queue to reflect the new Status and sets the Queue/@Status based on the maximum
+	 * number of concurrently running jobs also sets StartTime and EndTime appropriately if the queue is automated
 	 * 
 	 * @param value the queuentry status to set
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setQueueEntryStatus(org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus)
 	 */
 	@Override
-	public void setQueueEntryStatus(EnumQueueEntryStatus value)
+	public void setQueueEntryStatus(final EnumQueueEntryStatus value)
 	{
-		EnumQueueEntryStatus oldVal = getQueueEntryStatus();
+		final EnumQueueEntryStatus oldVal = getQueueEntryStatus();
 		if (isAutomated() && !ContainerUtil.equals(oldVal, value))
 		{
 			final JDFQueue queue = (JDFQueue) getParentNode_KElement();
@@ -369,13 +403,17 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 				if (isCompleted())
 				{
 					if (!hasAttribute(AttributeName.ENDTIME))
+					{
 						super.setEndTime(new JDFDate());
+					}
 					queue.cleanup();
 				}
 				if (EnumQueueEntryStatus.Running.equals(value))
 				{
 					if (!hasAttribute(AttributeName.STARTTIME))
+					{
 						super.setStartTime(new JDFDate());
+					}
 					removeAttribute(AttributeName.ENDTIME);
 
 				}
@@ -396,7 +434,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 */
 	public NodeIdentifier getIdentifier()
 	{
-		NodeIdentifier ni = new NodeIdentifier();
+		final NodeIdentifier ni = new NodeIdentifier();
 		ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
 		return ni;
 	}
@@ -406,10 +444,12 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * 
 	 * @return
 	 */
-	public void setIdentifier(NodeIdentifier ni)
+	public void setIdentifier(final NodeIdentifier ni)
 	{
 		if (ni == null)
+		{
 			return;
+		}
 		setPartMapVector(ni.getPartMapVector());
 		setJobID(ni.getJobID());
 		setJobPartID(ni.getJobPartID());
@@ -436,21 +476,22 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	}
 
 	/**
-	 * get the vector of valid next @Status values for this queue entry based on the current staus based on the table of
-	 * valid queue entry transitions
+	 * get the vector of valid next @Status values for this queue entry based on the current staus based on the table of valid queue entry transitions
 	 * 
 	 * @return Vector<EnumQueueEntryStatus> the vector of valid new stati
 	 */
 	public Vector<EnumQueueEntryStatus> getNextStatusVector()
 	{
-		Vector<EnumQueueEntryStatus> v = new Vector<EnumQueueEntryStatus>();
+		final Vector<EnumQueueEntryStatus> v = new Vector<EnumQueueEntryStatus>();
 
 		final EnumQueueEntryStatus qesThis = getQueueEntryStatus();
 		if (qesThis == null)
 		{
-			Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
+			final Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
 			while (it.hasNext())
+			{
 				v.add(it.next());
+			}
 		}
 		else if (EnumQueueEntryStatus.Running.equals(qesThis))
 		{
@@ -516,10 +557,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 */
 	public boolean isCompleted()
 	{
-		EnumQueueEntryStatus status = getQueueEntryStatus();
+		final EnumQueueEntryStatus status = getQueueEntryStatus();
 		return // (status==null) ||
-		EnumQueueEntryStatus.Completed.equals(status) || EnumQueueEntryStatus.Removed.equals(status)
-				|| EnumQueueEntryStatus.Aborted.equals(status);
+		EnumQueueEntryStatus.Completed.equals(status) || EnumQueueEntryStatus.Removed.equals(status) || EnumQueueEntryStatus.Aborted.equals(status);
 	}
 
 	/**
@@ -534,13 +574,13 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	}
 
 	/**
-	 * return a value based on QueueEntryStatus and Priority to sort the queue the status is the major order whereas the
-	 * priority is used to order within regions of identical status
+	 * return a value based on QueueEntryStatus and Priority to sort the queue the status is the major order whereas the priority is used to order within
+	 * regions of identical status
 	 * 
 	 * @return int a priority for sorting - low value = back of queue, high value = front of queue
 	 */
 	@Deprecated
-	public static int getSortPriority(EnumQueueEntryStatus status, int priority)
+	public static int getSortPriority(final EnumQueueEntryStatus status, final int priority)
 	{
 		int sort = (status == null) ? 0 : 10000 - 1000 * status.getValue();
 		sort += priority;
@@ -552,19 +592,23 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * 
 	 * @param jdf
 	 */
-	public void setFromJDF(JDFNode jdf)
+	public void setFromJDF(final JDFNode jdf)
 	{
 		if (jdf == null)
+		{
 			return;
+		}
 		setJobID(jdf.getJobID(true));
 		setJobPartID(jdf.getJobPartID(false));
 		setPartMapVector(jdf.getPartMapVector());
 
 		if (!hasAttribute(AttributeName.PRIORITY))
 		{
-			JDFNodeInfo ni = jdf.getInheritedNodeInfo("@" + AttributeName.PRIORITY);
+			final JDFNodeInfo ni = jdf.getInheritedNodeInfo("@" + AttributeName.PRIORITY);
 			if (ni != null)
+			{
 				copyAttribute(AttributeName.PRIORITY, ni, null, null, null);
+			}
 		}
 
 		this.eraseEmptyAttributes(true);
@@ -575,7 +619,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	public int compareTo(Object arg0)
+	public int compareTo(final Object arg0)
 	{
 		return new QueueEntryComparator().compare(this, arg0);
 	}

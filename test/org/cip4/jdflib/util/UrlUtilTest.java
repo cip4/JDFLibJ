@@ -88,6 +88,9 @@ import org.cip4.jdflib.core.XMLDoc;
 public class UrlUtilTest extends JDFTestCaseBase
 {
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetLocalURL()
 	{
 		assertNull(UrlUtil.getLocalURL("foo", "foo"));
@@ -98,6 +101,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.getLocalURL("", "foo/bar"), "foo/bar");
 	}
 
+	/**
+	 * 
+	 */
 	public void testWriteToURL()
 	{
 		// assertNotNull(UrlUtil.writeToURL("http://www.example.com", null,
@@ -105,6 +111,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testIsCid()
 	{
 		assertTrue(UrlUtil.isCID("cid:foo"));
@@ -115,6 +124,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testIsHTTP()
 	{
 		assertTrue(UrlUtil.isHttp("http://foo.bar.com"));
@@ -123,6 +135,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testIsIRL()
 	{
 		assertTrue(UrlUtil.isIRL("file://blöd€.txt"));
@@ -170,6 +185,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.StringToURL("File:/c:/xyz").getPath(), new URL("File:/c:/xyz").getPath());
 
 		assertEquals(UrlUtil.StringToURL("http://foo"), new URL("http://foo"));
+		assertNull("empty File: should be null", UrlUtil.StringToURL("File:"));
 		assertEquals(UrlUtil.StringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
 	}
 
@@ -189,7 +205,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	public void testFileToURL()
 	{
-		File f = new File("C:\\IO.SYS");
+		final File f = new File("C:\\IO.SYS");
 		String s = UrlUtil.fileToUrl(f, false);
 		assertEquals(s, "file:///C:/IO.SYS");
 		s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), true);
@@ -207,23 +223,23 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 2; i++) // loop over escape and non-escape
 		{
-			File f = new File("4€5%äö.txt");
-			File f2 = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), f);
+			final File f = new File("4€5%äö.txt");
+			final File f2 = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), f);
 			f2.delete();
 			assertTrue(f2.createNewFile());
 			assertTrue(f2.canRead());
-			String url = UrlUtil.fileToUrl(f2, i == 0);
-			XMLDoc doc = new XMLDoc("URL", null);
-			KElement root = doc.getRoot();
+			final String url = UrlUtil.fileToUrl(f2, i == 0);
+			final XMLDoc doc = new XMLDoc("URL", null);
+			final KElement root = doc.getRoot();
 			root.setAttribute("url", url);
 			doc.write2File(sm_dirTestDataTemp + "url.xml", 2, false);
-			JDFParser p = new JDFParser();
+			final JDFParser p = new JDFParser();
 			p.bKElementOnly = true;
-			JDFDoc d = p.parseFile(sm_dirTestDataTemp + "url.xml");
-			KElement root2 = d.getRoot();
-			String urlParse = root2.getAttribute("url");
+			final JDFDoc d = p.parseFile(sm_dirTestDataTemp + "url.xml");
+			final KElement root2 = d.getRoot();
+			final String urlParse = root2.getAttribute("url");
 			assertEquals(url, urlParse);
-			File f3 = UrlUtil.urlToFile(urlParse);
+			final File f3 = UrlUtil.urlToFile(urlParse);
 			assertEquals(f2.getAbsolutePath(), f3.getAbsolutePath());
 			assertTrue(f3.canRead());
 		}
@@ -231,6 +247,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @throws Exception
+	 */
+	public void testURLToFileName() throws Exception
+	{
+		assertEquals("b.c", UrlUtil.urlToFileName("a:b.c"));
+		assertEquals("b.c", UrlUtil.urlToFileName("http:/b.c?gg"));
+	}
 
 	/**
 	 * @throws Exception
@@ -263,8 +288,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertEquals("escape %20", f.getCanonicalPath(), f2.getCanonicalPath());
 
 		}
-		File fi1 = new File("\\\\fooBar\\4ü€.txt");
-		File fi = UrlUtil.urlToFile("file://fooBar/4ü%e2%82%ac.txt");
+		final File fi1 = new File("\\\\fooBar\\4ü€.txt");
+		final File fi = UrlUtil.urlToFile("file://fooBar/4ü%e2%82%ac.txt");
 		assertEquals("escape %20", fi.getCanonicalPath(), fi1.getCanonicalPath());
 
 	}
@@ -294,7 +319,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testGetRelativeURL()
 	{
 		File file = new File("c:\\a\\b\\c.txt");
-		File cwd = new File("c:\\a\\b1");
+		final File cwd = new File("c:\\a\\b1");
 		assertEquals(UrlUtil.getRelativeURL(file, cwd, true), "../b/c.txt");
 		file = new File("c:\\a\\b1\\c.txt");
 		assertEquals(UrlUtil.getRelativeURL(file, cwd, true), "./c.txt");

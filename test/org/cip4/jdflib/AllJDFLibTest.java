@@ -92,6 +92,7 @@ import org.cip4.jdflib.core.KElementTest;
 import org.cip4.jdflib.core.VElementTest;
 import org.cip4.jdflib.core.VStringTest;
 import org.cip4.jdflib.core.XMLDocTest;
+import org.cip4.jdflib.core.XMLDocUserDataTest;
 import org.cip4.jdflib.datatypes.JDFAttributeMapTest;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeTest;
 import org.cip4.jdflib.datatypes.JDFDurationRangeTest;
@@ -136,6 +137,7 @@ import org.cip4.jdflib.examples.JDFExampleDocTest;
 import org.cip4.jdflib.examples.MISFinTest;
 import org.cip4.jdflib.examples.NColorTest;
 import org.cip4.jdflib.examples.RIPTest;
+import org.cip4.jdflib.examples.SheetOptimizeTest;
 import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
@@ -214,6 +216,7 @@ import org.cip4.jdflib.util.JDFSpawnTest;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.PrefixInputStreamTest;
 import org.cip4.jdflib.util.QueueHotFolderTest;
+import org.cip4.jdflib.util.RollingBackupTest;
 import org.cip4.jdflib.util.SScanfTest;
 import org.cip4.jdflib.util.SkipInputStreamTest;
 import org.cip4.jdflib.util.StatusCounterTest;
@@ -261,6 +264,8 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(VElementTest.class);
 		suite.addTestSuite(VStringTest.class);
 		suite.addTestSuite(XMLDocTest.class);
+		suite.addTestSuite(XMLDocUserDataTest.class);
+
 		// cformat
 		suite.addTestSuite(PrintfFormatTest.class);
 
@@ -315,6 +320,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(MISFinTest.class);
 		suite.addTestSuite(NColorTest.class);
 		suite.addTestSuite(RIPTest.class);
+		suite.addTestSuite(SheetOptimizeTest.class);
 		suite.addTestSuite(StrippingTest.class);
 		suite.addTestSuite(VarnishTest.class);
 		suite.addTestSuite(WebTest.class);
@@ -408,6 +414,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(MimeUtilTest.class);
 		suite.addTestSuite(PrefixInputStreamTest.class);
 		suite.addTestSuite(QueueHotFolderTest.class);
+		suite.addTestSuite(RollingBackupTest.class);
 		suite.addTestSuite(SkipInputStreamTest.class);
 		suite.addTestSuite(SScanfTest.class);
 		suite.addTestSuite(StatusCounterTest.class);

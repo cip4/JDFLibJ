@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2008 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,13 +73,21 @@ package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 08.12.2008
+ */
 public class BiHashMapTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testPut()
 	{
-		BiHashMap hm = new BiHashMap();
+		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
 		hm.put("a", "b");
 		assertEquals(hm.getValue("a"), "b");
 		assertEquals(hm.getKey("b"), "a");

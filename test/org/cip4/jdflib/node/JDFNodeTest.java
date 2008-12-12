@@ -1138,6 +1138,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(ap.numChildElements(ElementName.CREATED, null), 1);
 	}
 
+	/**
+	 * 
+	 */
 	public void testInitDefaultVersion()
 	{
 
@@ -1156,6 +1159,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testIsValid()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);

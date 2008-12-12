@@ -2300,7 +2300,7 @@ public class JDFElement extends KElement
 	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize,
 			final boolean bFollowRefs)
 	{
-		final VElement v = super.getChildrenByTagName(elementName, nameSpaceURI, mAttrib, bDirect, bAnd, maxSize);
+		final VElement v = super.getChildrenByTagName_KElement(bFollowRefs ? null : elementName, nameSpaceURI, mAttrib, bDirect, bAnd, bFollowRefs ? -1 : maxSize);
 
 		if (bFollowRefs == false)
 		{
@@ -2310,15 +2310,25 @@ public class JDFElement extends KElement
 		if (v != null)
 		{
 			final int size = v.size();
-			for (int i = 0; i < size; i++)
+			for (int i = size - 1; i >= 0; i--)
 			{
-				if (v.elementAt(i) instanceof JDFRefElement)
+				if (!v.elementAt(i).fitsName(elementName, nameSpaceURI))
+				{
+					v.remove(i);
+				}
+				else if (v.elementAt(i) instanceof JDFRefElement)
 				{
 					v.set(i, ((JDFRefElement) v.elementAt(i)).getTarget());
 				}
 			}
+			if (maxSize > 0)
+			{
+				for (int i = v.size() - 1; i >= maxSize; i--)
+				{
+					v.remove(i);
+				}
+			}
 		}
-
 		return v;
 	}
 
@@ -3101,10 +3111,10 @@ public class JDFElement extends KElement
 			{
 				id = m_lStoreID - id; // just in case someone accidentally uses too large random numbers
 			}
-			m_lStoreID = id % 100000;
+			m_lStoreID = id % 1000000;
 		}
 		final String s = "00000" + Integer.toString(m_lStoreID);
-		m_lStoreID = ++m_lStoreID % 100000;
+		m_lStoreID = ++m_lStoreID % 1000000;
 		// time + 6 digits (ID)
 		if (bIDDate)
 		{
@@ -3957,19 +3967,33 @@ public class JDFElement extends KElement
 		}
 
 		/**
-		 * casts a String into a corresponding EnumVersion
-		 * 
+		 * casts a String into a corresponding EnumVersion hand coded for speed!
 		 * @param enumName the name of the EnumVersion
 		 * @return the corresponding EnumVersion
 		 */
 		public static EnumVersion getEnum(final String enumName)
 		{
-			EnumVersion myVersion = (EnumVersion) getEnum(EnumVersion.class, enumName);
-			if (myVersion == null)
+			if ("1.4".equals(enumName))
 			{
-				myVersion = EnumVersion.Version_1_3;
+				return EnumVersion.Version_1_4;
 			}
-			return myVersion;
+			else if ("1.3".equals(enumName))
+			{
+				return EnumVersion.Version_1_3;
+			}
+			else if ("1.2".equals(enumName))
+			{
+				return EnumVersion.Version_1_2;
+			}
+			else if ("1.1".equals(enumName))
+			{
+				return EnumVersion.Version_1_1;
+			}
+			else if ("1.0".equals(enumName))
+			{
+				return EnumVersion.Version_1_0;
+			}
+			return EnumVersion.Version_1_3; // the default
 		}
 
 		/**
@@ -4941,7 +4965,9 @@ public class JDFElement extends KElement
 			return null;
 		}
 		final JDFParser p = new JDFParser();
-		return p.parseStream(is);
+		final JDFDoc d = p.parseStream(is);
+		d.setOriginalFileName(UrlUtil.urlToFileName(url));
+		return d;
 	}
 
 }

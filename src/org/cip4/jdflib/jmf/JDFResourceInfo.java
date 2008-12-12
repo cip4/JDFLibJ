@@ -464,7 +464,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * if a Resource is available, return it's name
+	 * if a Resource is available, return it's name, null if none is availabel
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResourceName()
 	 */

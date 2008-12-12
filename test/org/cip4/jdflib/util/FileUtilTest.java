@@ -85,14 +85,14 @@ import org.cip4.jdflib.JDFTestCaseBase;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class FileUtilTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * @throws Exception
+	 * 
 	 */
 	public void testisAbsoluteFile()
 	{
@@ -106,7 +106,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 * 
 	 */
 	public void testGetExtension()
 	{
@@ -115,7 +115,39 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 * @throws Exception x
+	 */
+	public void testFileToByteArray() throws Exception
+	{
+		final byte[] b = new byte[66666];
+		for (int i = 0; i < 66666; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		final File f = new File(sm_dirTestDataTemp + "stream.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
+
+		FileUtil.streamToFile(is, sm_dirTestDataTemp + "stream.dat");
+		assertTrue(f.exists());
+		final byte b2[] = FileUtil.fileToByteArray(f);
+		final byte b3[] = FileUtil.fileToByteArray(f);
+		assertEquals(b.length, b2.length);
+		for (int i = 0; i < 66666; i++)
+		{
+			assertEquals(b[i], b2[i]);
+			assertEquals(b[i], b3[i]);
+		}
+		f.delete();
+		assertNull(FileUtil.fileToByteArray(f));
+	}
+
+	/**
+	 * 
 	 */
 	public void testisCleanURLFile()
 	{
@@ -126,11 +158,11 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 * 
 	 */
 	public void testListTree()
 	{
-		File root = new File(sm_dirTestData + File.separator + "dir1");
+		final File root = new File(sm_dirTestData + File.separator + "dir1");
 		Vector<File> list = FileUtil.listFilesInTree(root, "dir(.+)/");
 		assertEquals(list.size(), 2);
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
@@ -144,7 +176,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	 */
 	public void testListFiles() throws Exception
 	{
-		File f = new File(sm_dirTestDataTemp + "/foo");
+		final File f = new File(sm_dirTestDataTemp + "/foo");
 		f.mkdir(); // make sure we have one
 		assertTrue(FileUtil.deleteAll(f));
 		assertTrue(f.mkdir());
@@ -154,7 +186,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
+				final File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
 				assertTrue(f2.createNewFile());
 			}
 		}
@@ -179,15 +211,15 @@ public class FileUtilTest extends JDFTestCaseBase
 	 */
 	public void testListDirectories() throws Exception
 	{
-		File f = new File(sm_dirTestDataTemp + File.separator + "foo");
+		final File f = new File(sm_dirTestDataTemp + File.separator + "foo");
 		f.mkdir(); // make sure we have one
 		assertTrue(FileUtil.deleteAll(f));
 		assertTrue(f.mkdir());
 		assertNull(FileUtil.listDirectories(null));
 		assertNull(FileUtil.listDirectories(f));
-		File f1 = new File(sm_dirTestDataTemp + File.separator + "foo" + File.separator + "bar1");
+		final File f1 = new File(sm_dirTestDataTemp + File.separator + "foo" + File.separator + "bar1");
 		assertTrue(f1.mkdir());
-		File f2 = new File(sm_dirTestDataTemp + File.separator + "foo" + File.separator + "bar2");
+		final File f2 = new File(sm_dirTestDataTemp + File.separator + "foo" + File.separator + "bar2");
 		assertTrue(f2.createNewFile());
 		assertEquals(FileUtil.listDirectories(f).length, 1);
 		assertEquals("skipping bar2 - not a directory", FileUtil.listDirectories(f)[0], f1);
@@ -196,11 +228,11 @@ public class FileUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * @throws Exception
+	 * 
 	 */
 	public void testCreateFile()
 	{
-		File f = new File(sm_dirTestDataTemp + "/aaa_aaa/b/c.txt");
+		final File f = new File(sm_dirTestDataTemp + "/aaa_aaa/b/c.txt");
 		assertTrue(FileUtil.createNewFile(f));
 		assertTrue(FileUtil.createNewFile(f));
 		assertFalse(FileUtil.createNewFile(null));
@@ -213,30 +245,30 @@ public class FileUtilTest extends JDFTestCaseBase
 	 */
 	public void testMoveFile() throws Exception
 	{
-		byte[] b = new byte[55555];
+		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
 		{
 			b[i] = (byte) (i % 256);
 		}
-		ByteArrayInputStream is = new ByteArrayInputStream(b);
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
 		is.close();
-		File f = new File(sm_dirTestDataTemp + "streamMove.dat");
+		final File f = new File(sm_dirTestDataTemp + "streamMove.dat");
 		if (f.exists())
 		{
 			f.delete();
 		}
 		FileUtil.streamToFile(is, f.getPath());
-		File f2 = new File(sm_dirTestDataTemp + "streamMove2.dat");
+		final File f2 = new File(sm_dirTestDataTemp + "streamMove2.dat");
 
 		assertTrue(FileUtil.moveFile(f, f2));
 		assertFalse(f.exists());
 		assertTrue(f2.length() > 50000);
 		final String newdir = sm_dirTestDataTemp + File.separator + "newDir";
-		File fd = new File(newdir);
+		final File fd = new File(newdir);
 		FileUtil.deleteAll(fd);
 		assertFalse(fd.exists());
 		fd.mkdirs();
-		File f3 = new File(newdir + File.separator + "streamMove3.dat");
+		final File f3 = new File(newdir + File.separator + "streamMove3.dat");
 		assertTrue(FileUtil.moveFile(f2, f3));
 		assertFalse(f2.exists());
 		assertTrue(f3.length() > 50000);
@@ -250,25 +282,25 @@ public class FileUtilTest extends JDFTestCaseBase
 	 */
 	public void testMoveFileToDir() throws Exception
 	{
-		byte[] b = new byte[55555];
+		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
 		{
 			b[i] = (byte) (i % 256);
 		}
-		ByteArrayInputStream is = new ByteArrayInputStream(b);
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
 		is.close();
-		File f = new File(sm_dirTestDataTemp + "streamMove.dat");
+		final File f = new File(sm_dirTestDataTemp + "streamMove.dat");
 		if (f.exists())
 		{
 			f.delete();
 		}
 		FileUtil.streamToFile(is, f.getPath());
 		final String newdir = sm_dirTestDataTemp + File.separator + "newDir2";
-		File fd = new File(newdir);
+		final File fd = new File(newdir);
 		FileUtil.deleteAll(fd);
 		assertFalse(fd.exists());
 		fd.mkdirs();
-		File nf = FileUtil.moveFileToDir(f, fd);
+		final File nf = FileUtil.moveFileToDir(f, fd);
 		assertNotNull(nf);
 		assertEquals(nf.getParentFile(), fd);
 		assertEquals(nf.getName(), f.getName());
@@ -280,14 +312,14 @@ public class FileUtilTest extends JDFTestCaseBase
 	 */
 	public void testStreamToFile() throws Exception
 	{
-		byte[] b = new byte[55555];
+		final byte[] b = new byte[55555];
 		for (int i = 0; i < 55555; i++)
 		{
 			b[i] = (byte) (i % 256);
 		}
-		ByteArrayInputStream is = new ByteArrayInputStream(b);
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
 		is.close();
-		File f = new File(sm_dirTestDataTemp + "stream.dat");
+		final File f = new File(sm_dirTestDataTemp + "stream.dat");
 		if (f.exists())
 		{
 			f.delete();
@@ -296,7 +328,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		FileUtil.streamToFile(is, sm_dirTestDataTemp + "stream.dat");
 		assertTrue(f.exists());
 
-		FileInputStream fis = new FileInputStream(f);
+		final FileInputStream fis = new FileInputStream(f);
 		for (int i = 0; i < 55555; i++)
 		{
 			b[i] = (byte) fis.read();
@@ -306,15 +338,16 @@ public class FileUtilTest extends JDFTestCaseBase
 			}
 		}
 
-		int j = fis.read();
+		final int j = fis.read();
 		assertEquals("eof reached", j, -1);
 		fis.close();
 
-		FileInputStream fis2 = new FileInputStream(f);
-		File f2 = FileUtil.streamToFile(fis2, sm_dirTestDataTemp + "stream2.dat");
+		final FileInputStream fis2 = new FileInputStream(f);
+		final File f2 = FileUtil.streamToFile(fis2, sm_dirTestDataTemp + "stream2.dat");
 		assertTrue(f2.canRead());
 		assertTrue(f.delete());
 		assertTrue(f2.delete());
+		assertFalse(f.delete());
 
 	}
 

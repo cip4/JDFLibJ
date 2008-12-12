@@ -96,183 +96,176 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFProcessRun;
 
 /**
- * a hotfolder that emulates JMF queue functionality by applying a specific
- * queue submission or queue return message to any file that is dropped into it
+ * a hotfolder that emulates JMF queue functionality by applying a specific queue submission or queue return message to any file that is dropped into it
  * 
  * @author prosirai
  * 
  */
-public class QueueHotFolder implements HotFolderListener
+public class QueueHotFolder
 {
-  private final File storageDir; // the physical storage where files are dumped
-  // after removal from the hotfolder
-  protected final HotFolder hf; // the active hot folder
+	protected class MyHotFolderListener implements HotFolderListener
+	{
 
-  /**
-   * @return the hotfolder directory
-   */
-  public File getHfDirectory()
-  {
-    return hf.getDir();
-  }
+		/**
+		 * extract the JDF document from the file
+		 * 
+		 * @param storedFile
+		 * @return the JDFDoc for the file
+		 */
+		protected JDFDoc getJDFFromFile(final File storedFile)
+		{
+			final JDFDoc jdfDoc = JDFDoc.parseFile(storedFile.getPath());
+			return jdfDoc;
+		}
 
-  private final QueueHotFolderListener qhfl; // the callback that is called
-  // whenever a file is dropped
-  private final JDFCommand queueCommand; // the jdf command template that is
+		/**
+		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
+		 * @param hotFile
+		 */
+		public void hotFile(final File hotFile)
+		{
+			final File storedFile = FileUtil.moveFileToDir(hotFile, storageDir);
+			if (storedFile == null)
+			{
+				return; // not good
+			}
+			final String stringURL = UrlUtil.fileToUrl(storedFile, false);
 
-  // used to generate a new message for
-  // each dropped file
+			final JDFDoc jmfDoc = new JDFDoc("JMF");
+			final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
+			final JDFCommand newCommand = (JDFCommand) jmfRoot.copyElement(queueCommand, null);
+			newCommand.removeAttribute(AttributeName.ID);
+			newCommand.appendAnchor(null);
+			final EnumType cType = newCommand.getEnumType();
+			final JDFDoc jdfDoc = getJDFFromFile(storedFile);
 
-  /**
-   * 
-   * constructor for a simple queue based hotfolder watcher that is
-   * automagically started in its own thread
-   * 
-   * @param _hotFolderDir
-   *          the hot folder directory to watch
-   * @param _storageDir
-   *          the storage directory wher hot files are moved to
-   * @param ext
-   *          the file extensions that are moved - if null no filtering
-   * @param hfListener
-   *          callback that receives the generated JMF - the location of the
-   *          stored file will be found in the standard command parameters
-   * @param _queueCommand
-   *          the jmf template that will be used to generate a new message, null
-   *          creates an empty SubmitQueueEntry template
-   */
-  public QueueHotFolder(final File _hotFolderDir, final File _storageDir, final String ext, final QueueHotFolderListener hfListener, JDFJMF _queueCommand)
-  {
-    storageDir = _storageDir;
-    storageDir.mkdirs(); // just in case
-    qhfl = hfListener;
-    if (_queueCommand == null)
-    {
-      _queueCommand = JDFJMF.createJMF(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
-    }
+			final JDFNode jdfRoot = jdfDoc == null ? null : jdfDoc.getJDFRoot();
 
-    queueCommand = _queueCommand.getCommand(0);
-    hf = new HotFolder(_hotFolderDir, ext, this);
-  }
+			if (EnumType.ReturnQueueEntry.equals(cType))
+			{
+				extractReturnParams(stringURL, newCommand, jdfRoot);
+			}
+			else if (EnumType.SubmitQueueEntry.equals(cType))
+			{
+				extractSubmitParams(stringURL, newCommand, jdfRoot);
+			}
+			qhfl.submitted(jmfRoot);
+		}
 
-  /**
-   * stop this hot folder
-   * 
-   */
-  public void stop()
-  {
-    hf.stop();
-  }
+	}
 
-  /**
-   * restart this hot folder, create s a new listner thread and stops the old
-   * one
-   * 
-   */
-  public void restart()
-  {
-    hf.restart();
+	private final File storageDir; // the physical storage where files are dumped
+	// after removal from the hotfolder
+	protected final HotFolder hf; // the active hot folder
 
-  }
+	/**
+	 * @return the hotfolder directory
+	 */
+	public File getHfDirectory()
+	{
+		return hf.getDir();
+	}
 
-  /**
-   * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
-   * @param hotFile
-   */
-  public void hotFile(final File hotFile)
-  {
-    final File storedFile = FileUtil.moveFileToDir(hotFile, storageDir);
-    if (storedFile == null)
-    {
-      return; // not good
-    }
-    final String stringURL = UrlUtil.fileToUrl(storedFile, false);
+	private final QueueHotFolderListener qhfl; // the callback that is called
+	// whenever a file is dropped
+	private final JDFCommand queueCommand; // the jdf command template that is
 
-    final JDFDoc jmfDoc = new JDFDoc("JMF");
-    final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
-    final JDFCommand newCommand = (JDFCommand) jmfRoot.copyElement(queueCommand, null);
-    newCommand.removeAttribute(AttributeName.ID);
-    newCommand.appendAnchor(null);
-    final EnumType cType = newCommand.getEnumType();
-    final JDFDoc jdfDoc = getJDFFromFile(storedFile);
+	// used to generate a new message for
+	// each dropped file
 
-    final JDFNode jdfRoot = jdfDoc == null ? null : jdfDoc.getJDFRoot();
+	/**
+	 * 
+	 * constructor for a simple queue based hotfolder watcher that is automagically started in its own thread
+	 * 
+	 * @param _hotFolderDir the hot folder directory to watch
+	 * @param _storageDir the storage directory wher hot files are moved to
+	 * @param ext the file extensions that are moved - if null no filtering
+	 * @param hfListener callback that receives the generated JMF - the location of the stored file will be found in the standard command parameters
+	 * @param _queueCommand the jmf template that will be used to generate a new message, null creates an empty SubmitQueueEntry template
+	 */
+	public QueueHotFolder(final File _hotFolderDir, final File _storageDir, final String ext, final QueueHotFolderListener hfListener, JDFJMF _queueCommand)
+	{
+		storageDir = _storageDir;
+		storageDir.mkdirs(); // just in case
+		qhfl = hfListener;
+		if (_queueCommand == null)
+		{
+			_queueCommand = JDFJMF.createJMF(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+		}
 
-    if (EnumType.ReturnQueueEntry.equals(cType))
-    {
-      extractReturnParams(stringURL, newCommand, jdfRoot);
-    }
-    else
-      if (EnumType.SubmitQueueEntry.equals(cType))
-      {
-        extractSubmitParams(stringURL, newCommand, jdfRoot);
-      }
-    qhfl.submitted(jmfRoot);
-  }
+		queueCommand = _queueCommand.getCommand(0);
+		hf = new HotFolder(_hotFolderDir, ext, this.new MyHotFolderListener());
+	}
 
-  /**
-   * extract the JDF document from the file
-   * 
-   * @param storedFile
-   * @return the JDFDoc for the file
-   */
-  protected JDFDoc getJDFFromFile(final File storedFile)
-  {
-    final JDFDoc jdfDoc = JDFDoc.parseFile(storedFile.getPath());
-    return jdfDoc;
-  }
+	/**
+	 * stop this hot folder
+	 * 
+	 */
+	public void stop()
+	{
+		hf.stop();
+	}
 
-  /**
-   * overwrite this method in case you want to customize the hotfolder for
-   * submitqueentry and paramtetrizing the QueueSubmissionParams template is
-   * insufficient
-   * 
-   * @param stringURL
-   *          the file url of the hotfolder jdf in the local storage directory
-   *          (NOT the hf)
-   * @param newCommand
-   *          the command that was generated from the template
-   * @param jdfRoot
-   *          the root jdfnode of the dropped file
-   */
-  protected void extractSubmitParams(final String stringURL, final JDFCommand newCommand, final JDFNode jdfRoot)
-  {
-    final JDFQueueSubmissionParams sqp = newCommand.getCreateQueueSubmissionParams(0);
-    sqp.setURL(stringURL);
-    final JDFAuditPool ap = jdfRoot == null ? null : jdfRoot.getCreateAuditPool();
-    if (ap != null)
-    {
-      ap.createSubmitProcessRun(null);
-    }
-  }
+	/**
+	 * restart this hot folder, create s a new listner thread and stops the old one
+	 * 
+	 */
+	public void restart()
+	{
+		hf.restart();
 
-  /**
-   * overwrite this method in case you want to customize the hotfolder for
-   * returnqueueentryparams and paramtetrizing the ReturnQueueEntryParams
-   * template is insufficient
-   * 
-   * @param stringURL
-   *          the file url of the hotfolder jdf in the local storage directory
-   *          (NOT the hf)
-   * @param newCommand
-   *          the command that was generated from the template
-   * @param jdfRoot
-   *          the root jdfnode of the dropped file
-   */
-  protected void extractReturnParams(final String stringURL, final JDFCommand newCommand, final JDFNode jdfRoot)
-  {
-    final JDFReturnQueueEntryParams rqp = newCommand.getCreateReturnQueueEntryParams(0);
-    rqp.setURL(stringURL);
-    final JDFAuditPool ap = jdfRoot == null ? null : jdfRoot.getCreateAuditPool();
-    if (ap != null)
-    {
-      final JDFProcessRun pr = (JDFProcessRun) ap.getAudit(-1, EnumAuditType.ProcessRun, null, null);
-      final String queueEID = pr == null ? null : pr.getAttribute(AttributeName.QUEUEENTRYID);
-      if (!KElement.isWildCard(queueEID))
-      {
-        rqp.setQueueEntryID(queueEID);
-      }
-    }
-  }
+	}
+
+	/**
+	 * overwrite this method in case you want to customize the hotfolder for submitqueentry and paramtetrizing the QueueSubmissionParams template is
+	 * insufficient
+	 * 
+	 * @param stringURL the file url of the hotfolder jdf in the local storage directory (NOT the hf)
+	 * @param newCommand the command that was generated from the template
+	 * @param jdfRoot the root jdfnode of the dropped file
+	 */
+	protected void extractSubmitParams(final String stringURL, final JDFCommand newCommand, final JDFNode jdfRoot)
+	{
+		final JDFQueueSubmissionParams sqp = newCommand.getCreateQueueSubmissionParams(0);
+		sqp.setURL(stringURL);
+		final JDFAuditPool ap = jdfRoot == null ? null : jdfRoot.getCreateAuditPool();
+		if (ap != null)
+		{
+			ap.createSubmitProcessRun(null);
+		}
+	}
+
+	/**
+	 * overwrite this method in case you want to customize the hotfolder for returnqueueentryparams and paramtetrizing the ReturnQueueEntryParams template is
+	 * insufficient
+	 * 
+	 * @param stringURL the file url of the hotfolder jdf in the local storage directory (NOT the hf)
+	 * @param newCommand the command that was generated from the template
+	 * @param jdfRoot the root jdfnode of the dropped file
+	 */
+	protected void extractReturnParams(final String stringURL, final JDFCommand newCommand, final JDFNode jdfRoot)
+	{
+		final JDFReturnQueueEntryParams rqp = newCommand.getCreateReturnQueueEntryParams(0);
+		rqp.setURL(stringURL);
+		final JDFAuditPool ap = jdfRoot == null ? null : jdfRoot.getCreateAuditPool();
+		if (ap != null)
+		{
+			final JDFProcessRun pr = (JDFProcessRun) ap.getAudit(-1, EnumAuditType.ProcessRun, null, null);
+			final String queueEID = pr == null ? null : pr.getAttribute(AttributeName.QUEUEENTRYID);
+			if (!KElement.isWildCard(queueEID))
+			{
+				rqp.setQueueEntryID(queueEID);
+			}
+		}
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "QueueHotFolder: " + hf + "\n" + queueCommand;
+	}
 
 }

@@ -503,14 +503,50 @@ public class VElement extends Vector<KElement>
 	 * @param index vector index of the element you want
 	 * @return KElement - the requested item or null, if index is out of bounds
 	 */
-	public KElement item(final int index)
+	@Override
+	public KElement elementAt(int index)
 	{
+		if (index < 0)
+		{
+			index += size();
+		}
 		if (size() <= index)
 		{
 			return null;
 		}
+		return super.elementAt(index);
+	}
 
-		return this.elementAt(index);
+	/**
+	 * item - returns null if index is out of bounds or the requested item is not an ELEMENT_NODE !
+	 * 
+	 * @param index vector index of the element you want
+	 * @return KElement - the requested item or null, if index is out of bounds
+	 */
+	@Override
+	public KElement get(int index)
+	{
+		if (index < 0)
+		{
+			index += size();
+		}
+		if (size() <= index)
+		{
+			return null;
+		}
+		return super.get(index);
+	}
+
+	/**
+	 * item - returns null if index is out of bounds or the requested item is not an ELEMENT_NODE !
+	 * 
+	 * @param index vector index of the element you want
+	 * @return KElement - the requested item or null, if index is out of bounds
+	 */
+	public KElement item(final int index)
+	{
+
+		return elementAt(index);
 	}
 
 	/**

@@ -99,7 +99,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFQueueSubmissionParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -109,7 +109,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFQueueSubmissionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFQueueSubmissionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFQueueSubmissionParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -135,18 +135,17 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	}
 
 	/**
-	 * add a queueentry to a queue based on the parameters of this you can get the new queueentry by {@link}
-	 * getQueueEntry(0) on the response
+	 * add a queueentry to a queue based on the parameters of this you can get the new queueentry by getQueueEntry(0) on the response
 	 * 
 	 * @param theQueue the queue to submit to, note that the queue IS modified by this call
 	 * @param responseIn the jmf that serves as a container for the new response
 	 * 
 	 * @return the response jmf to the submission message
 	 */
-	public JDFResponse addEntry(JDFQueue theQueue, JDFJMF responseIn)
+	public JDFResponse addEntry(final JDFQueue theQueue, final JDFJMF responseIn)
 	{
-		JDFCommand command = (JDFCommand) getParentNode_KElement();
-		JDFJMF jmf = command.createResponse();
+		final JDFCommand command = (JDFCommand) getParentNode_KElement();
+		final JDFJMF jmf = command.createResponse();
 		JDFResponse resp = jmf.getResponse(0);
 		if (responseIn != null)
 		{
@@ -165,18 +164,24 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 			resp.copyElement(theQueue, null);
 			return resp;
 		}
-		JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
+		final JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
 
 		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY };
 
 		for (int i = 0; i < copyAtts.length; i++)
+		{
 			if (hasAttribute(copyAtts[i]))
+			{
 				qe.copyAttribute(copyAtts[i], this, null, null, null);
+			}
+		}
 
 		// TODO more attributes e.g prev. next...
 		if (hasAttribute(AttributeName.PRIORITY))
+		{
 			qe.setPriority(getPriority()); // calls the automated function,
-		// therfore not in the list above
+			// therefore not in the list above
+		}
 
 		resp.copyElement(theQueue, null);
 		resp.copyElement(qe, null);
@@ -198,9 +203,9 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	/**
 	 * sets ReturnURL to the value of url
 	 * 
-	 * @param url
+	 * @param url the URL to set
 	 */
-	public void setReturnURL(URL url)
+	public void setReturnURL(final URL url)
 	{
 		super.setReturnURL(url == null ? null : url.toExternalForm());
 	}
@@ -208,9 +213,9 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	/**
 	 * sets ReturnURL to the value of url
 	 * 
-	 * @param url
+	 * @param url the URL to set
 	 */
-	public void setReturnJMF(URL url)
+	public void setReturnJMF(final URL url)
 	{
 		super.setReturnJMF(url == null ? null : url.toExternalForm());
 	}
