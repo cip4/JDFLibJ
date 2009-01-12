@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,7 +78,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -437,7 +436,11 @@ public class FileUtil
 				{
 					return null;
 				}
-				final byte[] b2 = Arrays.copyOf(b, l);
+				final byte[] b2 = new byte[l];
+				for (int i = 0; i < l; i++)
+				{
+					b2[i] = b[i];
+				}
 				b = b2;
 			}
 			return b;
