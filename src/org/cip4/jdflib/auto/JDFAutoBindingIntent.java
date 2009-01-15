@@ -70,18 +70,47 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.postpress.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFBindList;
+import org.cip4.jdflib.resource.JDFEdgeGluing;
+import org.cip4.jdflib.resource.JDFHardCoverBinding;
+import org.cip4.jdflib.resource.JDFSoftCoverBinding;
+import org.cip4.jdflib.resource.JDFStripBinding;
+import org.cip4.jdflib.resource.JDFTabs;
+import org.cip4.jdflib.resource.JDFTape;
+import org.cip4.jdflib.resource.intent.JDFBookCase;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.process.postpress.JDFAdhesiveBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFChannelBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFCoilBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFPlasticCombBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFRingBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFSaddleStitching;
+import org.cip4.jdflib.resource.process.postpress.JDFSideSewing;
+import org.cip4.jdflib.resource.process.postpress.JDFSideStitching;
+import org.cip4.jdflib.resource.process.postpress.JDFThreadSealing;
+import org.cip4.jdflib.resource.process.postpress.JDFThreadSewing;
+import org.cip4.jdflib.resource.process.postpress.JDFWireCombBinding;
+import org.cip4.jdflib.span.JDFSpanBindingLength;
+import org.cip4.jdflib.span.JDFSpanBindingSide;
+import org.cip4.jdflib.span.JDFSpanBindingType;
+import org.cip4.jdflib.span.JDFSpanNamedColor;
+import org.cip4.jdflib.span.JDFStringSpan;
 
 public abstract class JDFAutoBindingIntent extends JDFIntentResource
 {
@@ -318,19 +347,20 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
     /**
      * Get all BackCoverColorDetails from the current element
      * 
-     * @return Collection<JDFStringSpan>
+     * @return Collection<JDFStringSpan>, null if none are available
      */
     public Collection<JDFStringSpan> getAllBackCoverColorDetails()
     {
-        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
-
-        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.BACKCOVERCOLORDETAILS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BACKCOVERCOLORDETAILS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.BACKCOVERCOLORDETAILS, null);
+        final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFStringSpan) vc.get(i));
         }
 
         return v;
@@ -419,19 +449,20 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
     /**
      * Get all BindingColorDetails from the current element
      * 
-     * @return Collection<JDFStringSpan>
+     * @return Collection<JDFStringSpan>, null if none are available
      */
     public Collection<JDFStringSpan> getAllBindingColorDetails()
     {
-        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
-
-        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.BINDINGCOLORDETAILS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BINDINGCOLORDETAILS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.BINDINGCOLORDETAILS, null);
+        final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFStringSpan) vc.get(i));
         }
 
         return v;
@@ -546,19 +577,20 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
     /**
      * Get all CoverColorDetails from the current element
      * 
-     * @return Collection<JDFStringSpan>
+     * @return Collection<JDFStringSpan>, null if none are available
      */
     public Collection<JDFStringSpan> getAllCoverColorDetails()
     {
-        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
-
-        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.COVERCOLORDETAILS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.COVERCOLORDETAILS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.COVERCOLORDETAILS, null);
+        final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFStringSpan) vc.get(i));
         }
 
         return v;

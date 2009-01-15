@@ -70,15 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFCIELABMeasuringField;
+import org.cip4.jdflib.resource.process.JDFDensityMeasuringField;
+import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 
 public abstract class JDFAutoColorControlStrip extends JDFResource
 {
@@ -327,19 +337,20 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     /**
      * Get all CIELABMeasuringField from the current element
      * 
-     * @return Collection<JDFCIELABMeasuringField>
+     * @return Collection<JDFCIELABMeasuringField>, null if none are available
      */
     public Collection<JDFCIELABMeasuringField> getAllCIELABMeasuringField()
     {
-        Vector<JDFCIELABMeasuringField> v = new Vector<JDFCIELABMeasuringField>();
-
-        JDFCIELABMeasuringField kElem = (JDFCIELABMeasuringField) getFirstChildElement(ElementName.CIELABMEASURINGFIELD, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CIELABMEASURINGFIELD, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCIELABMeasuringField) kElem.getNextSiblingElement(ElementName.CIELABMEASURINGFIELD, null);
+        final Vector<JDFCIELABMeasuringField> v = new Vector<JDFCIELABMeasuringField>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCIELABMeasuringField) vc.get(i));
         }
 
         return v;
@@ -385,19 +396,20 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     /**
      * Get all DensityMeasuringField from the current element
      * 
-     * @return Collection<JDFDensityMeasuringField>
+     * @return Collection<JDFDensityMeasuringField>, null if none are available
      */
     public Collection<JDFDensityMeasuringField> getAllDensityMeasuringField()
     {
-        Vector<JDFDensityMeasuringField> v = new Vector<JDFDensityMeasuringField>();
-
-        JDFDensityMeasuringField kElem = (JDFDensityMeasuringField) getFirstChildElement(ElementName.DENSITYMEASURINGFIELD, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DENSITYMEASURINGFIELD, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDensityMeasuringField) kElem.getNextSiblingElement(ElementName.DENSITYMEASURINGFIELD, null);
+        final Vector<JDFDensityMeasuringField> v = new Vector<JDFDensityMeasuringField>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDensityMeasuringField) vc.get(i));
         }
 
         return v;
@@ -443,19 +455,20 @@ public abstract class JDFAutoColorControlStrip extends JDFResource
     /**
      * Get all SeparationSpec from the current element
      * 
-     * @return Collection<JDFSeparationSpec>
+     * @return Collection<JDFSeparationSpec>, null if none are available
      */
     public Collection<JDFSeparationSpec> getAllSeparationSpec()
     {
-        Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
-
-        JDFSeparationSpec kElem = (JDFSeparationSpec) getFirstChildElement(ElementName.SEPARATIONSPEC, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.SEPARATIONSPEC, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFSeparationSpec) kElem.getNextSiblingElement(ElementName.SEPARATIONSPEC, null);
+        final Vector<JDFSeparationSpec> v = new Vector<JDFSeparationSpec>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFSeparationSpec) vc.get(i));
         }
 
         return v;

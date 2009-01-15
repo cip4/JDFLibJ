@@ -70,12 +70,23 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.postpress.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFCoverApplicationParams;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFSpinePreparationParams;
+import org.cip4.jdflib.resource.JDFSpineTapingParams;
+import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
 
 public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
 {
@@ -255,19 +266,20 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     /**
      * Get all SpinePreparationParams from the current element
      * 
-     * @return Collection<JDFSpinePreparationParams>
+     * @return Collection<JDFSpinePreparationParams>, null if none are available
      */
     public Collection<JDFSpinePreparationParams> getAllSpinePreparationParams()
     {
-        Vector<JDFSpinePreparationParams> v = new Vector<JDFSpinePreparationParams>();
-
-        JDFSpinePreparationParams kElem = (JDFSpinePreparationParams) getFirstChildElement(ElementName.SPINEPREPARATIONPARAMS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.SPINEPREPARATIONPARAMS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFSpinePreparationParams) kElem.getNextSiblingElement(ElementName.SPINEPREPARATIONPARAMS, null);
+        final Vector<JDFSpinePreparationParams> v = new Vector<JDFSpinePreparationParams>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFSpinePreparationParams) vc.get(i));
         }
 
         return v;
@@ -304,19 +316,20 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     /**
      * Get all GlueApplication from the current element
      * 
-     * @return Collection<JDFGlueApplication>
+     * @return Collection<JDFGlueApplication>, null if none are available
      */
     public Collection<JDFGlueApplication> getAllGlueApplication()
     {
-        Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
-
-        JDFGlueApplication kElem = (JDFGlueApplication) getFirstChildElement(ElementName.GLUEAPPLICATION, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.GLUEAPPLICATION, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFGlueApplication) kElem.getNextSiblingElement(ElementName.GLUEAPPLICATION, null);
+        final Vector<JDFGlueApplication> v = new Vector<JDFGlueApplication>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFGlueApplication) vc.get(i));
         }
 
         return v;
@@ -353,19 +366,20 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     /**
      * Get all SpineTapingParams from the current element
      * 
-     * @return Collection<JDFSpineTapingParams>
+     * @return Collection<JDFSpineTapingParams>, null if none are available
      */
     public Collection<JDFSpineTapingParams> getAllSpineTapingParams()
     {
-        Vector<JDFSpineTapingParams> v = new Vector<JDFSpineTapingParams>();
-
-        JDFSpineTapingParams kElem = (JDFSpineTapingParams) getFirstChildElement(ElementName.SPINETAPINGPARAMS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.SPINETAPINGPARAMS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFSpineTapingParams) kElem.getNextSiblingElement(ElementName.SPINETAPINGPARAMS, null);
+        final Vector<JDFSpineTapingParams> v = new Vector<JDFSpineTapingParams>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFSpineTapingParams) vc.get(i));
         }
 
         return v;
@@ -402,19 +416,20 @@ public abstract class JDFAutoAdhesiveBindingParams extends JDFResource
     /**
      * Get all CoverApplicationParams from the current element
      * 
-     * @return Collection<JDFCoverApplicationParams>
+     * @return Collection<JDFCoverApplicationParams>, null if none are available
      */
     public Collection<JDFCoverApplicationParams> getAllCoverApplicationParams()
     {
-        Vector<JDFCoverApplicationParams> v = new Vector<JDFCoverApplicationParams>();
-
-        JDFCoverApplicationParams kElem = (JDFCoverApplicationParams) getFirstChildElement(ElementName.COVERAPPLICATIONPARAMS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.COVERAPPLICATIONPARAMS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCoverApplicationParams) kElem.getNextSiblingElement(ElementName.COVERAPPLICATIONPARAMS, null);
+        final Vector<JDFCoverApplicationParams> v = new Vector<JDFCoverApplicationParams>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCoverApplicationParams) vc.get(i));
         }
 
         return v;

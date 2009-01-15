@@ -70,12 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.postpress.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.postpress.JDFGlueApplication;
+import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
 
 public abstract class JDFAutoCasingInParams extends JDFResource
 {
@@ -230,19 +239,20 @@ public abstract class JDFAutoCasingInParams extends JDFResource
     /**
      * Get all GlueApplication from the current element
      * 
-     * @return Collection<JDFGlueLine>
+     * @return Collection<JDFGlueLine>, null if none are available
      */
     public Collection<JDFGlueLine> getAllGlueApplication()
     {
-        Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-
-        JDFGlueLine kElem = (JDFGlueLine) getFirstChildElement(ElementName.GLUEAPPLICATION, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.GLUEAPPLICATION, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFGlueLine) kElem.getNextSiblingElement(ElementName.GLUEAPPLICATION, null);
+        final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFGlueLine) vc.get(i));
         }
 
         return v;
@@ -288,19 +298,20 @@ public abstract class JDFAutoCasingInParams extends JDFResource
     /**
      * Get all GlueLine from the current element
      * 
-     * @return Collection<JDFGlueLine>
+     * @return Collection<JDFGlueLine>, null if none are available
      */
     public Collection<JDFGlueLine> getAllGlueLine()
     {
-        Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-
-        JDFGlueLine kElem = (JDFGlueLine) getFirstChildElement(ElementName.GLUELINE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFGlueLine) kElem.getNextSiblingElement(ElementName.GLUELINE, null);
+        final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFGlueLine) vc.get(i));
         }
 
         return v;

@@ -70,16 +70,26 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 
 public abstract class JDFAutoCommand extends JDFMessage
 {
@@ -363,8 +373,7 @@ public abstract class JDFAutoCommand extends JDFMessage
      * @param iSkip number of elements to skip
      * @return JDFEmployee the element
      */
-    @Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+    public JDFEmployee getCreateEmployee(int iSkip)
     {
         return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
@@ -374,8 +383,7 @@ public abstract class JDFAutoCommand extends JDFMessage
      * @param iSkip number of elements to skip
      * @return JDFEmployee the element
      * default is getEmployee(0)     */
-    @Override
-	public JDFEmployee getEmployee(int iSkip)
+    public JDFEmployee getEmployee(int iSkip)
     {
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
@@ -383,20 +391,20 @@ public abstract class JDFAutoCommand extends JDFMessage
     /**
      * Get all Employee from the current element
      * 
-     * @return Collection<JDFEmployee>
+     * @return Collection<JDFEmployee>, null if none are available
      */
-    @Override
-	public Collection<JDFEmployee> getAllEmployee()
+    public Collection<JDFEmployee> getAllEmployee()
     {
-        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-
-        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFEmployee) vc.get(i));
         }
 
         return v;
@@ -405,8 +413,7 @@ public abstract class JDFAutoCommand extends JDFMessage
     /**
      * (30) append element Employee
      */
-    @Override
-	public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }

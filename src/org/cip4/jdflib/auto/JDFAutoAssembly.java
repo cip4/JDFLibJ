@@ -70,19 +70,30 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.resource.JDFPageList;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFAssemblySection;
+import org.cip4.jdflib.resource.process.JDFPageAssignedList;
 
 public abstract class JDFAutoAssembly extends JDFResource
 {
@@ -533,19 +544,20 @@ public abstract class JDFAutoAssembly extends JDFResource
     /**
      * Get all AssemblySection from the current element
      * 
-     * @return Collection<JDFAssemblySection>
+     * @return Collection<JDFAssemblySection>, null if none are available
      */
     public Collection<JDFAssemblySection> getAllAssemblySection()
     {
-        Vector<JDFAssemblySection> v = new Vector<JDFAssemblySection>();
-
-        JDFAssemblySection kElem = (JDFAssemblySection) getFirstChildElement(ElementName.ASSEMBLYSECTION, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.ASSEMBLYSECTION, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFAssemblySection) kElem.getNextSiblingElement(ElementName.ASSEMBLYSECTION, null);
+        final Vector<JDFAssemblySection> v = new Vector<JDFAssemblySection>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFAssemblySection) vc.get(i));
         }
 
         return v;
@@ -617,19 +629,20 @@ public abstract class JDFAutoAssembly extends JDFResource
     /**
      * Get all PageAssignedList from the current element
      * 
-     * @return Collection<JDFPageAssignedList>
+     * @return Collection<JDFPageAssignedList>, null if none are available
      */
     public Collection<JDFPageAssignedList> getAllPageAssignedList()
     {
-        Vector<JDFPageAssignedList> v = new Vector<JDFPageAssignedList>();
-
-        JDFPageAssignedList kElem = (JDFPageAssignedList) getFirstChildElement(ElementName.PAGEASSIGNEDLIST, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PAGEASSIGNEDLIST, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPageAssignedList) kElem.getNextSiblingElement(ElementName.PAGEASSIGNEDLIST, null);
+        final Vector<JDFPageAssignedList> v = new Vector<JDFPageAssignedList>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPageAssignedList) vc.get(i));
         }
 
         return v;

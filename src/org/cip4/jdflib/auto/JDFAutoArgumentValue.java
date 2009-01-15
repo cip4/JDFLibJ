@@ -70,11 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFPreflightArgument;
 
 public abstract class JDFAutoArgumentValue extends JDFElement
 {
@@ -212,19 +222,20 @@ public abstract class JDFAutoArgumentValue extends JDFElement
     /**
      * Get all PreflightArgument from the current element
      * 
-     * @return Collection<JDFPreflightArgument>
+     * @return Collection<JDFPreflightArgument>, null if none are available
      */
     public Collection<JDFPreflightArgument> getAllPreflightArgument()
     {
-        Vector<JDFPreflightArgument> v = new Vector<JDFPreflightArgument>();
-
-        JDFPreflightArgument kElem = (JDFPreflightArgument) getFirstChildElement(ElementName.PREFLIGHTARGUMENT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PREFLIGHTARGUMENT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPreflightArgument) kElem.getNextSiblingElement(ElementName.PREFLIGHTARGUMENT, null);
+        final Vector<JDFPreflightArgument> v = new Vector<JDFPreflightArgument>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPreflightArgument) vc.get(i));
         }
 
         return v;

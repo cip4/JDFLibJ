@@ -70,15 +70,24 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFRegisterRibbon;
+import org.cip4.jdflib.resource.JDFResource;
 
 public abstract class JDFAutoBlockPreparationParams extends JDFResource
 {
@@ -325,19 +334,20 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
     /**
      * Get all RegisterRibbon from the current element
      * 
-     * @return Collection<JDFRegisterRibbon>
+     * @return Collection<JDFRegisterRibbon>, null if none are available
      */
     public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
     {
-        Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
-
-        JDFRegisterRibbon kElem = (JDFRegisterRibbon) getFirstChildElement(ElementName.REGISTERRIBBON, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.REGISTERRIBBON, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFRegisterRibbon) kElem.getNextSiblingElement(ElementName.REGISTERRIBBON, null);
+        final Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFRegisterRibbon) vc.get(i));
         }
 
         return v;

@@ -70,11 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.devicecapability.JDFotherwise;
+import org.cip4.jdflib.resource.devicecapability.JDFwhen;
 
 public abstract class JDFAutochoice extends JDFElement
 {
@@ -174,19 +181,20 @@ public abstract class JDFAutochoice extends JDFElement
     /**
      * Get all when from the current element
      * 
-     * @return Collection<JDFwhen>
+     * @return Collection<JDFwhen>, null if none are available
      */
     public Collection<JDFwhen> getAllwhen()
     {
-        Vector<JDFwhen> v = new Vector<JDFwhen>();
-
-        JDFwhen kElem = (JDFwhen) getFirstChildElement(ElementName.WHEN, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.WHEN, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFwhen) kElem.getNextSiblingElement(ElementName.WHEN, null);
+        final Vector<JDFwhen> v = new Vector<JDFwhen>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFwhen) vc.get(i));
         }
 
         return v;

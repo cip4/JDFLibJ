@@ -70,19 +70,30 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFBand;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFPixelColorant;
 
 public abstract class JDFAutoByteMap extends JDFResource
 {
@@ -515,19 +526,20 @@ public abstract class JDFAutoByteMap extends JDFResource
     /**
      * Get all Band from the current element
      * 
-     * @return Collection<JDFBand>
+     * @return Collection<JDFBand>, null if none are available
      */
     public Collection<JDFBand> getAllBand()
     {
-        Vector<JDFBand> v = new Vector<JDFBand>();
-
-        JDFBand kElem = (JDFBand) getFirstChildElement(ElementName.BAND, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BAND, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFBand) kElem.getNextSiblingElement(ElementName.BAND, null);
+        final Vector<JDFBand> v = new Vector<JDFBand>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFBand) vc.get(i));
         }
 
         return v;
@@ -599,19 +611,20 @@ public abstract class JDFAutoByteMap extends JDFResource
     /**
      * Get all FileSpec from the current element
      * 
-     * @return Collection<JDFFileSpec>
+     * @return Collection<JDFFileSpec>, null if none are available
      */
     public Collection<JDFFileSpec> getAllFileSpec()
     {
-        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
-
-        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFFileSpec) vc.get(i));
         }
 
         return v;
@@ -657,19 +670,20 @@ public abstract class JDFAutoByteMap extends JDFResource
     /**
      * Get all PixelColorant from the current element
      * 
-     * @return Collection<JDFPixelColorant>
+     * @return Collection<JDFPixelColorant>, null if none are available
      */
     public Collection<JDFPixelColorant> getAllPixelColorant()
     {
-        Vector<JDFPixelColorant> v = new Vector<JDFPixelColorant>();
-
-        JDFPixelColorant kElem = (JDFPixelColorant) getFirstChildElement(ElementName.PIXELCOLORANT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PIXELCOLORANT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPixelColorant) kElem.getNextSiblingElement(ElementName.PIXELCOLORANT, null);
+        final Vector<JDFPixelColorant> v = new Vector<JDFPixelColorant>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPixelColorant) vc.get(i));
         }
 
         return v;

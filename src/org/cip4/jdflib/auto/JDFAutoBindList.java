@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFBindItem;
 
 public abstract class JDFAutoBindList extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoBindList extends JDFElement
     /**
      * Get all BindItem from the current element
      * 
-     * @return Collection<JDFBindItem>
+     * @return Collection<JDFBindItem>, null if none are available
      */
     public Collection<JDFBindItem> getAllBindItem()
     {
-        Vector<JDFBindItem> v = new Vector<JDFBindItem>();
-
-        JDFBindItem kElem = (JDFBindItem) getFirstChildElement(ElementName.BINDITEM, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BINDITEM, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFBindItem) kElem.getNextSiblingElement(ElementName.BINDITEM, null);
+        final Vector<JDFBindItem> v = new Vector<JDFBindItem>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFBindItem) vc.get(i));
         }
 
         return v;

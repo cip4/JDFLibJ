@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.devicecapability.JDFAction;
 
 public abstract class JDFAutoActionPool extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoActionPool extends JDFElement
     /**
      * Get all Action from the current element
      * 
-     * @return Collection<JDFAction>
+     * @return Collection<JDFAction>, null if none are available
      */
     public Collection<JDFAction> getAllAction()
     {
-        Vector<JDFAction> v = new Vector<JDFAction>();
-
-        JDFAction kElem = (JDFAction) getFirstChildElement(ElementName.ACTION, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.ACTION, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFAction) kElem.getNextSiblingElement(ElementName.ACTION, null);
+        final Vector<JDFAction> v = new Vector<JDFAction>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFAction) vc.get(i));
         }
 
         return v;

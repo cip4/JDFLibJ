@@ -70,12 +70,20 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFApprovalPerson;
 
 public abstract class JDFAutoApprovalParams extends JDFResource
 {
@@ -229,19 +237,20 @@ public abstract class JDFAutoApprovalParams extends JDFResource
     /**
      * Get all ApprovalPerson from the current element
      * 
-     * @return Collection<JDFApprovalPerson>
+     * @return Collection<JDFApprovalPerson>, null if none are available
      */
     public Collection<JDFApprovalPerson> getAllApprovalPerson()
     {
-        Vector<JDFApprovalPerson> v = new Vector<JDFApprovalPerson>();
-
-        JDFApprovalPerson kElem = (JDFApprovalPerson) getFirstChildElement(ElementName.APPROVALPERSON, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.APPROVALPERSON, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFApprovalPerson) kElem.getNextSiblingElement(ElementName.APPROVALPERSON, null);
+        final Vector<JDFApprovalPerson> v = new Vector<JDFApprovalPerson>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFApprovalPerson) vc.get(i));
         }
 
         return v;

@@ -70,13 +70,22 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.prepress.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.prepress.JDFColorCorrectionOp;
 
 public abstract class JDFAutoColorCorrectionParams extends JDFResource
 {
@@ -99,7 +108,7 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666666);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
         elemInfoTable[1] = new ElemInfoTable(ElementName.COLORCORRECTIONOP, 0x33333333);
     }
     
@@ -208,30 +217,54 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
  * ***********************************************************************
  */
 
-    /**
-     * (24) const get element FileSpec
-     * @return JDFFileSpec the element
-     */
-    public JDFFileSpec getFileSpec()
-    {
-        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
-    }
-
-    /** (25) getCreateFileSpec
+    /** (26) getCreateFileSpec
      * 
+     * @param iSkip number of elements to skip
      * @return JDFFileSpec the element
      */
-    public JDFFileSpec getCreateFileSpec()
+    public JDFFileSpec getCreateFileSpec(int iSkip)
     {
-        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+        return (JDFFileSpec)getCreateElement_KElement(ElementName.FILESPEC, null, iSkip);
     }
 
     /**
-     * (29) append element FileSpec
+     * (27) const get element FileSpec
+     * @param iSkip number of elements to skip
+     * @return JDFFileSpec the element
+     * default is getFileSpec(0)     */
+    public JDFFileSpec getFileSpec(int iSkip)
+    {
+        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, iSkip);
+    }
+
+    /**
+     * Get all FileSpec from the current element
+     * 
+     * @return Collection<JDFFileSpec>, null if none are available
+     */
+    public Collection<JDFFileSpec> getAllFileSpec()
+    {
+        final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
+
+        final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFFileSpec) vc.get(i));
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element FileSpec
      */
     public JDFFileSpec appendFileSpec() throws JDFException
     {
-        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+        return (JDFFileSpec) appendElement(ElementName.FILESPEC, null);
     }
 
     /**
@@ -266,19 +299,20 @@ public abstract class JDFAutoColorCorrectionParams extends JDFResource
     /**
      * Get all ColorCorrectionOp from the current element
      * 
-     * @return Collection<JDFColorCorrectionOp>
+     * @return Collection<JDFColorCorrectionOp>, null if none are available
      */
     public Collection<JDFColorCorrectionOp> getAllColorCorrectionOp()
     {
-        Vector<JDFColorCorrectionOp> v = new Vector<JDFColorCorrectionOp>();
-
-        JDFColorCorrectionOp kElem = (JDFColorCorrectionOp) getFirstChildElement(ElementName.COLORCORRECTIONOP, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.COLORCORRECTIONOP, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFColorCorrectionOp) kElem.getNextSiblingElement(ElementName.COLORCORRECTIONOP, null);
+        final Vector<JDFColorCorrectionOp> v = new Vector<JDFColorCorrectionOp>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFColorCorrectionOp) vc.get(i));
         }
 
         return v;

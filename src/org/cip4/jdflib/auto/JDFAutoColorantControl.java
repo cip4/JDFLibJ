@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
- *
+  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -93,455 +93,467 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
 public abstract class JDFAutoColorantControl extends JDFResource
 {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
-	static
-	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.FORCESEPARATIONS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PROCESSCOLORMODEL, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-	}
-
-	@Override
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+    static
+    {
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.FORCESEPARATIONS, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.PROCESSCOLORMODEL, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+    }
+    
+    @Override
 	protected AttributeInfo getTheAttributeInfo()
-	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-	}
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
-	static
-	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COLORANTALIAS, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTCONVERTPROCESS, 0x66661111);
-		elemInfoTable[2] = new ElemInfoTable(ElementName.COLORANTORDER, 0x66666666);
-		elemInfoTable[3] = new ElemInfoTable(ElementName.COLORANTPARAMS, 0x66666666);
-		elemInfoTable[4] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
-		elemInfoTable[5] = new ElemInfoTable(ElementName.COLORSPACESUBSTITUTE, 0x33333333);
-		elemInfoTable[6] = new ElemInfoTable(ElementName.DEVICECOLORANTORDER, 0x66666666);
-		elemInfoTable[7] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x33333333);
-	}
 
-	@Override
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[8];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.COLORANTALIAS, 0x33333333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.COLORANTCONVERTPROCESS, 0x66661111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.COLORANTORDER, 0x66666666);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.COLORANTPARAMS, 0x66666666);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.COLORPOOL, 0x66666666);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.COLORSPACESUBSTITUTE, 0x33333333);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.DEVICECOLORANTORDER, 0x66666666);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.DEVICENSPACE, 0x33333333);
+    }
+    
+    @Override
 	protected ElementInfo getTheElementInfo()
-	{
-		return super.getTheElementInfo().updateReplace(elemInfoTable);
-	}
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
+    }
 
-	/**
-	 * Constructor for JDFAutoColorantControl
-	 * @param myOwnerDocument
-	 * @param qualifiedName
-	 */
-	protected JDFAutoColorantControl(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
-	{
-		super(myOwnerDocument, qualifiedName);
-	}
 
-	/**
-	 * Constructor for JDFAutoColorantControl
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 */
-	protected JDFAutoColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName);
-	}
 
-	/**
-	 * Constructor for JDFAutoColorantControl
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 * @param myLocalName
-	 */
-	protected JDFAutoColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
+    /**
+     * Constructor for JDFAutoColorantControl
+     * @param myOwnerDocument
+     * @param qualifiedName
+     */
+    protected JDFAutoColorantControl(
+        CoreDocumentImpl myOwnerDocument,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, qualifiedName);
+    }
 
-	@Override
+    /**
+     * Constructor for JDFAutoColorantControl
+     * @param myOwnerDocument
+     * @param myNamespaceURI
+     * @param qualifiedName
+     */
+    protected JDFAutoColorantControl(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName);
+    }
+
+    /**
+     * Constructor for JDFAutoColorantControl
+     * @param myOwnerDocument
+     * @param myNamespaceURI
+     * @param qualifiedName
+     * @param myLocalName
+     */
+    protected JDFAutoColorantControl(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName,
+        String myLocalName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+    }
+
+
+    @Override
 	public String toString()
-	{
-		return " JDFAutoColorantControl[  --> " + super.toString() + " ]";
-	}
+    {
+        return " JDFAutoColorantControl[  --> " + super.toString() + " ]";
+    }
 
-	@Override
-	public boolean init()
-	{
-		final boolean bRet = super.init();
-		setResourceClass(JDFResource.EnumResourceClass.Parameter);
-		return bRet;
-	}
 
-	@Override
+    @Override
+	public boolean  init()
+    {
+        boolean bRet = super.init();
+        setResourceClass(JDFResource.EnumResourceClass.Parameter);
+        return bRet;
+    }
+
+
+    @Override
 	public EnumResourceClass getValidClass()
-	{
-		return JDFResource.EnumResourceClass.Parameter;
-	}
+    {
+        return JDFResource.EnumResourceClass.Parameter;
+    }
 
-	/*
-	 * Attribute getter / setter
-	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ForceSeparations
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute ForceSeparations
-	 * @param value: the value to set the attribute to
-	 */
-	public void setForceSeparations(final boolean value)
-	{
-		setAttribute(AttributeName.FORCESEPARATIONS, value, null);
-	}
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ForceSeparations
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ForceSeparations
+          * @param value: the value to set the attribute to
+          */
+        public void setForceSeparations(boolean value)
+        {
+            setAttribute(AttributeName.FORCESEPARATIONS, value, null);
+        }
 
-	/**
-	 * (18) get boolean attribute ForceSeparations
-	 * @return boolean the value of the attribute
-	 */
-	public boolean getForceSeparations()
-	{
-		return getBoolAttribute(AttributeName.FORCESEPARATIONS, null, false);
-	}
+        /**
+          * (18) get boolean attribute ForceSeparations
+          * @return boolean the value of the attribute
+          */
+        public boolean getForceSeparations()
+        {
+            return getBoolAttribute(AttributeName.FORCESEPARATIONS, null, false);
+        }
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute ProcessColorModel
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute ProcessColorModel
-	 * @param value: the value to set the attribute to
-	 */
-	public void setProcessColorModel(final String value)
-	{
-		setAttribute(AttributeName.PROCESSCOLORMODEL, value, null);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ProcessColorModel
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ProcessColorModel
+          * @param value: the value to set the attribute to
+          */
+        public void setProcessColorModel(String value)
+        {
+            setAttribute(AttributeName.PROCESSCOLORMODEL, value, null);
+        }
 
-	/**
-	 * (23) get String attribute ProcessColorModel
-	 * @return the value of the attribute
-	 */
-	public String getProcessColorModel()
-	{
-		return getAttribute(AttributeName.PROCESSCOLORMODEL, null, JDFConstants.EMPTYSTRING);
-	}
+        /**
+          * (23) get String attribute ProcessColorModel
+          * @return the value of the attribute
+          */
+        public String getProcessColorModel()
+        {
+            return getAttribute(AttributeName.PROCESSCOLORMODEL, null, JDFConstants.EMPTYSTRING);
+        }
 
-	/*
-	 * Element getter / setter
-	 */
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
 
-	/**
-	 * (26) getCreateColorantAlias
-	 * 
-	 * @param iSkip number of elements to skip
-	 * @return JDFColorantAlias the element
-	 */
-	public JDFColorantAlias getCreateColorantAlias(final int iSkip)
-	{
-		return (JDFColorantAlias) getCreateElement_KElement(ElementName.COLORANTALIAS, null, iSkip);
-	}
+    /** (26) getCreateColorantAlias
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFColorantAlias the element
+     */
+    public JDFColorantAlias getCreateColorantAlias(int iSkip)
+    {
+        return (JDFColorantAlias)getCreateElement_KElement(ElementName.COLORANTALIAS, null, iSkip);
+    }
 
-	/**
-	 * (27) const get element ColorantAlias
-	 * @param iSkip number of elements to skip
-	 * @return JDFColorantAlias the element default is getColorantAlias(0)
-	 */
-	public JDFColorantAlias getColorantAlias(final int iSkip)
-	{
-		return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, iSkip);
-	}
+    /**
+     * (27) const get element ColorantAlias
+     * @param iSkip number of elements to skip
+     * @return JDFColorantAlias the element
+     * default is getColorantAlias(0)     */
+    public JDFColorantAlias getColorantAlias(int iSkip)
+    {
+        return (JDFColorantAlias) getElement(ElementName.COLORANTALIAS, null, iSkip);
+    }
 
-	/**
-	 * Get all ColorantAlias from the current element
-	 * 
-	 * @return Collection<JDFColorantAlias>, null if none are available
-	 */
-	public Collection<JDFColorantAlias> getAllColorantAlias()
-	{
-		final VElement vc = getChildElementVector(ElementName.COLORANTALIAS, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
+    /**
+     * Get all ColorantAlias from the current element
+     * 
+     * @return Collection<JDFColorantAlias>, null if none are available
+     */
+    public Collection<JDFColorantAlias> getAllColorantAlias()
+    {
+        final VElement vc = getChildElementVector(ElementName.COLORANTALIAS, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
 
-		final Vector<JDFColorantAlias> v = new Vector<JDFColorantAlias>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFColorantAlias) vc.get(i));
-		}
-		return v;
-	}
+        final Vector<JDFColorantAlias> v = new Vector<JDFColorantAlias>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFColorantAlias) vc.get(i));
+        }
 
-	/**
-	 * (30) append element ColorantAlias
-	 */
-	public JDFColorantAlias appendColorantAlias() throws JDFException
-	{
-		return (JDFColorantAlias) appendElement(ElementName.COLORANTALIAS, null);
-	}
+        return v;
+    }
 
-	/**
-	 * (31) create inter-resource link to refTarget
-	 * @param refTarget the element that is referenced
-	 */
-	public void refColorantAlias(final JDFColorantAlias refTarget)
-	{
-		refElement(refTarget);
-	}
+    /**
+     * (30) append element ColorantAlias
+     */
+    public JDFColorantAlias appendColorantAlias() throws JDFException
+    {
+        return (JDFColorantAlias) appendElement(ElementName.COLORANTALIAS, null);
+    }
 
-	/**
-	 * (24) const get element ColorantConvertProcess
-	 * @return JDFSeparationList the element
-	 */
-	public JDFSeparationList getColorantConvertProcess()
-	{
-		return (JDFSeparationList) getElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
-	}
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refColorantAlias(JDFColorantAlias refTarget)
+    {
+        refElement(refTarget);
+    }
 
-	/**
-	 * (25) getCreateColorantConvertProcess
-	 * 
-	 * @return JDFSeparationList the element
-	 */
-	public JDFSeparationList getCreateColorantConvertProcess()
-	{
-		return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
-	}
+    /**
+     * (24) const get element ColorantConvertProcess
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getColorantConvertProcess()
+    {
+        return (JDFSeparationList) getElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
+    }
 
-	/**
-	 * (29) append element ColorantConvertProcess
-	 */
-	public JDFSeparationList appendColorantConvertProcess() throws JDFException
-	{
-		return (JDFSeparationList) appendElementN(ElementName.COLORANTCONVERTPROCESS, 1, null);
-	}
+    /** (25) getCreateColorantConvertProcess
+     * 
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getCreateColorantConvertProcess()
+    {
+        return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTCONVERTPROCESS, null, 0);
+    }
 
-	/**
-	 * (24) const get element ColorantOrder
-	 * @return JDFSeparationList the element
-	 */
-	public JDFSeparationList getColorantOrder()
-	{
-		return (JDFSeparationList) getElement(ElementName.COLORANTORDER, null, 0);
-	}
+    /**
+     * (29) append element ColorantConvertProcess
+     */
+    public JDFSeparationList appendColorantConvertProcess() throws JDFException
+    {
+        return (JDFSeparationList) appendElementN(ElementName.COLORANTCONVERTPROCESS, 1, null);
+    }
 
-	/**
-	 * (25) getCreateColorantOrder
-	 * 
-	 * @return JDFSeparationList the element
-	 */
-	public JDFSeparationList getCreateColorantOrder()
-	{
-		return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTORDER, null, 0);
-	}
+    /**
+     * (24) const get element ColorantOrder
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getColorantOrder()
+    {
+        return (JDFSeparationList) getElement(ElementName.COLORANTORDER, null, 0);
+    }
 
-	/**
-	 * (29) append element ColorantOrder
-	 */
-	public JDFSeparationList appendColorantOrder() throws JDFException
-	{
-		return (JDFSeparationList) appendElementN(ElementName.COLORANTORDER, 1, null);
-	}
+    /** (25) getCreateColorantOrder
+     * 
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getCreateColorantOrder()
+    {
+        return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTORDER, null, 0);
+    }
 
-	/**
-	 * (24) const get element ColorantParams
-	 * @return JDFSeparationList the element
-	 */
-	public JDFSeparationList getColorantParams()
-	{
-		return (JDFSeparationList) getElement(ElementName.COLORANTPARAMS, null, 0);
-	}
+    /**
+     * (29) append element ColorantOrder
+     */
+    public JDFSeparationList appendColorantOrder() throws JDFException
+    {
+        return (JDFSeparationList) appendElementN(ElementName.COLORANTORDER, 1, null);
+    }
 
-	/**
-	 * (25) getCreateColorantParams
-	 * 
-	 * @return JDFSeparationList the element
-	 */
-	public JDFSeparationList getCreateColorantParams()
-	{
-		return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTPARAMS, null, 0);
-	}
+    /**
+     * (24) const get element ColorantParams
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getColorantParams()
+    {
+        return (JDFSeparationList) getElement(ElementName.COLORANTPARAMS, null, 0);
+    }
 
-	/**
-	 * (29) append element ColorantParams
-	 */
-	public JDFSeparationList appendColorantParams() throws JDFException
-	{
-		return (JDFSeparationList) appendElementN(ElementName.COLORANTPARAMS, 1, null);
-	}
+    /** (25) getCreateColorantParams
+     * 
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getCreateColorantParams()
+    {
+        return (JDFSeparationList) getCreateElement_KElement(ElementName.COLORANTPARAMS, null, 0);
+    }
 
-	/**
-	 * (24) const get element ColorPool
-	 * @return JDFColorPool the element
-	 */
-	public JDFColorPool getColorPool()
-	{
-		return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
-	}
+    /**
+     * (29) append element ColorantParams
+     */
+    public JDFSeparationList appendColorantParams() throws JDFException
+    {
+        return (JDFSeparationList) appendElementN(ElementName.COLORANTPARAMS, 1, null);
+    }
 
-	/**
-	 * (25) getCreateColorPool
-	 * 
-	 * @return JDFColorPool the element
-	 */
-	public JDFColorPool getCreateColorPool()
-	{
-		return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
-	}
+    /**
+     * (24) const get element ColorPool
+     * @return JDFColorPool the element
+     */
+    public JDFColorPool getColorPool()
+    {
+        return (JDFColorPool) getElement(ElementName.COLORPOOL, null, 0);
+    }
 
-	/**
-	 * (29) append element ColorPool
-	 */
-	public JDFColorPool appendColorPool() throws JDFException
-	{
-		return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
-	}
+    /** (25) getCreateColorPool
+     * 
+     * @return JDFColorPool the element
+     */
+    public JDFColorPool getCreateColorPool()
+    {
+        return (JDFColorPool) getCreateElement_KElement(ElementName.COLORPOOL, null, 0);
+    }
 
-	/**
-	 * (31) create inter-resource link to refTarget
-	 * @param refTarget the element that is referenced
-	 */
-	public void refColorPool(final JDFColorPool refTarget)
-	{
-		refElement(refTarget);
-	}
+    /**
+     * (29) append element ColorPool
+     */
+    public JDFColorPool appendColorPool() throws JDFException
+    {
+        return (JDFColorPool) appendElementN(ElementName.COLORPOOL, 1, null);
+    }
 
-	/**
-	 * (26) getCreateColorSpaceSubstitute
-	 * 
-	 * @param iSkip number of elements to skip
-	 * @return JDFColorSpaceSubstitute the element
-	 */
-	public JDFColorSpaceSubstitute getCreateColorSpaceSubstitute(final int iSkip)
-	{
-		return (JDFColorSpaceSubstitute) getCreateElement_KElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
-	}
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refColorPool(JDFColorPool refTarget)
+    {
+        refElement(refTarget);
+    }
 
-	/**
-	 * (27) const get element ColorSpaceSubstitute
-	 * @param iSkip number of elements to skip
-	 * @return JDFColorSpaceSubstitute the element default is getColorSpaceSubstitute(0)
-	 */
-	public JDFColorSpaceSubstitute getColorSpaceSubstitute(final int iSkip)
-	{
-		return (JDFColorSpaceSubstitute) getElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
-	}
+    /** (26) getCreateColorSpaceSubstitute
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFColorSpaceSubstitute the element
+     */
+    public JDFColorSpaceSubstitute getCreateColorSpaceSubstitute(int iSkip)
+    {
+        return (JDFColorSpaceSubstitute)getCreateElement_KElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
+    }
 
-	/**
-	 * Get all ColorSpaceSubstitute from the current element
-	 * 
-	 * @return Collection<JDFColorSpaceSubstitute>
-	 */
-	public Collection<JDFColorSpaceSubstitute> getAllColorSpaceSubstitute()
-	{
-		final Vector<JDFColorSpaceSubstitute> v = new Vector<JDFColorSpaceSubstitute>();
+    /**
+     * (27) const get element ColorSpaceSubstitute
+     * @param iSkip number of elements to skip
+     * @return JDFColorSpaceSubstitute the element
+     * default is getColorSpaceSubstitute(0)     */
+    public JDFColorSpaceSubstitute getColorSpaceSubstitute(int iSkip)
+    {
+        return (JDFColorSpaceSubstitute) getElement(ElementName.COLORSPACESUBSTITUTE, null, iSkip);
+    }
 
-		JDFColorSpaceSubstitute kElem = (JDFColorSpaceSubstitute) getFirstChildElement(ElementName.COLORSPACESUBSTITUTE, null);
+    /**
+     * Get all ColorSpaceSubstitute from the current element
+     * 
+     * @return Collection<JDFColorSpaceSubstitute>, null if none are available
+     */
+    public Collection<JDFColorSpaceSubstitute> getAllColorSpaceSubstitute()
+    {
+        final VElement vc = getChildElementVector(ElementName.COLORSPACESUBSTITUTE, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
 
-		while (kElem != null)
-		{
-			v.add(kElem);
+        final Vector<JDFColorSpaceSubstitute> v = new Vector<JDFColorSpaceSubstitute>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFColorSpaceSubstitute) vc.get(i));
+        }
 
-			kElem = (JDFColorSpaceSubstitute) kElem.getNextSiblingElement(ElementName.COLORSPACESUBSTITUTE, null);
-		}
+        return v;
+    }
 
-		return v;
-	}
+    /**
+     * (30) append element ColorSpaceSubstitute
+     */
+    public JDFColorSpaceSubstitute appendColorSpaceSubstitute() throws JDFException
+    {
+        return (JDFColorSpaceSubstitute) appendElement(ElementName.COLORSPACESUBSTITUTE, null);
+    }
 
-	/**
-	 * (30) append element ColorSpaceSubstitute
-	 */
-	public JDFColorSpaceSubstitute appendColorSpaceSubstitute() throws JDFException
-	{
-		return (JDFColorSpaceSubstitute) appendElement(ElementName.COLORSPACESUBSTITUTE, null);
-	}
+    /**
+     * (24) const get element DeviceColorantOrder
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getDeviceColorantOrder()
+    {
+        return (JDFSeparationList) getElement(ElementName.DEVICECOLORANTORDER, null, 0);
+    }
 
-	/**
-	 * (24) const get element DeviceColorantOrder
-	 * @return JDFSeparationList the element
-	 */
-	public JDFSeparationList getDeviceColorantOrder()
-	{
-		return (JDFSeparationList) getElement(ElementName.DEVICECOLORANTORDER, null, 0);
-	}
+    /** (25) getCreateDeviceColorantOrder
+     * 
+     * @return JDFSeparationList the element
+     */
+    public JDFSeparationList getCreateDeviceColorantOrder()
+    {
+        return (JDFSeparationList) getCreateElement_KElement(ElementName.DEVICECOLORANTORDER, null, 0);
+    }
 
-	/**
-	 * (25) getCreateDeviceColorantOrder
-	 * 
-	 * @return JDFSeparationList the element
-	 */
-	public JDFSeparationList getCreateDeviceColorantOrder()
-	{
-		return (JDFSeparationList) getCreateElement_KElement(ElementName.DEVICECOLORANTORDER, null, 0);
-	}
+    /**
+     * (29) append element DeviceColorantOrder
+     */
+    public JDFSeparationList appendDeviceColorantOrder() throws JDFException
+    {
+        return (JDFSeparationList) appendElementN(ElementName.DEVICECOLORANTORDER, 1, null);
+    }
 
-	/**
-	 * (29) append element DeviceColorantOrder
-	 */
-	public JDFSeparationList appendDeviceColorantOrder() throws JDFException
-	{
-		return (JDFSeparationList) appendElementN(ElementName.DEVICECOLORANTORDER, 1, null);
-	}
+    /** (26) getCreateDeviceNSpace
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFDeviceNSpace the element
+     */
+    public JDFDeviceNSpace getCreateDeviceNSpace(int iSkip)
+    {
+        return (JDFDeviceNSpace)getCreateElement_KElement(ElementName.DEVICENSPACE, null, iSkip);
+    }
 
-	/**
-	 * (26) getCreateDeviceNSpace
-	 * 
-	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceNSpace the element
-	 */
-	public JDFDeviceNSpace getCreateDeviceNSpace(final int iSkip)
-	{
-		return (JDFDeviceNSpace) getCreateElement_KElement(ElementName.DEVICENSPACE, null, iSkip);
-	}
+    /**
+     * (27) const get element DeviceNSpace
+     * @param iSkip number of elements to skip
+     * @return JDFDeviceNSpace the element
+     * default is getDeviceNSpace(0)     */
+    public JDFDeviceNSpace getDeviceNSpace(int iSkip)
+    {
+        return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, iSkip);
+    }
 
-	/**
-	 * (27) const get element DeviceNSpace
-	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceNSpace the element default is getDeviceNSpace(0)
-	 */
-	public JDFDeviceNSpace getDeviceNSpace(final int iSkip)
-	{
-		return (JDFDeviceNSpace) getElement(ElementName.DEVICENSPACE, null, iSkip);
-	}
+    /**
+     * Get all DeviceNSpace from the current element
+     * 
+     * @return Collection<JDFDeviceNSpace>, null if none are available
+     */
+    public Collection<JDFDeviceNSpace> getAllDeviceNSpace()
+    {
+        final VElement vc = getChildElementVector(ElementName.DEVICENSPACE, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
 
-	/**
-	 * Get all DeviceNSpace from the current element
-	 * 
-	 * @return Collection<JDFDeviceNSpace>
-	 */
-	public Collection<JDFDeviceNSpace> getAllDeviceNSpace()
-	{
-		final Vector<JDFDeviceNSpace> v = new Vector<JDFDeviceNSpace>();
+        final Vector<JDFDeviceNSpace> v = new Vector<JDFDeviceNSpace>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDeviceNSpace) vc.get(i));
+        }
 
-		JDFDeviceNSpace kElem = (JDFDeviceNSpace) getFirstChildElement(ElementName.DEVICENSPACE, null);
+        return v;
+    }
 
-		while (kElem != null)
-		{
-			v.add(kElem);
+    /**
+     * (30) append element DeviceNSpace
+     */
+    public JDFDeviceNSpace appendDeviceNSpace() throws JDFException
+    {
+        return (JDFDeviceNSpace) appendElement(ElementName.DEVICENSPACE, null);
+    }
 
-			kElem = (JDFDeviceNSpace) kElem.getNextSiblingElement(ElementName.DEVICENSPACE, null);
-		}
-
-		return v;
-	}
-
-	/**
-	 * (30) append element DeviceNSpace
-	 */
-	public JDFDeviceNSpace appendDeviceNSpace() throws JDFException
-	{
-		return (JDFDeviceNSpace) appendElement(ElementName.DEVICENSPACE, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 * @param refTarget the element that is referenced
-	 */
-	public void refDeviceNSpace(final JDFDeviceNSpace refTarget)
-	{
-		refElement(refTarget);
-	}
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refDeviceNSpace(JDFDeviceNSpace refTarget)
+    {
+        refElement(refTarget);
+    }
 
 }// end namespace JDF

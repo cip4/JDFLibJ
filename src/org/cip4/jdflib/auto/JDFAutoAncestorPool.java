@@ -70,13 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.node.*;                      
-import org.cip4.jdflib.pool.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.node.JDFAncestor;
+import org.cip4.jdflib.pool.JDFPool;
+import org.cip4.jdflib.resource.JDFPart;
 
 public abstract class JDFAutoAncestorPool extends JDFPool
 {
@@ -176,19 +181,20 @@ public abstract class JDFAutoAncestorPool extends JDFPool
     /**
      * Get all Ancestor from the current element
      * 
-     * @return Collection<JDFAncestor>
+     * @return Collection<JDFAncestor>, null if none are available
      */
     public Collection<JDFAncestor> getAllAncestor()
     {
-        Vector<JDFAncestor> v = new Vector<JDFAncestor>();
-
-        JDFAncestor kElem = (JDFAncestor) getFirstChildElement(ElementName.ANCESTOR, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.ANCESTOR, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFAncestor) kElem.getNextSiblingElement(ElementName.ANCESTOR, null);
+        final Vector<JDFAncestor> v = new Vector<JDFAncestor>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFAncestor) vc.get(i));
         }
 
         return v;
@@ -225,19 +231,20 @@ public abstract class JDFAutoAncestorPool extends JDFPool
     /**
      * Get all Part from the current element
      * 
-     * @return Collection<JDFPart>
+     * @return Collection<JDFPart>, null if none are available
      */
     public Collection<JDFPart> getAllPart()
     {
-        Vector<JDFPart> v = new Vector<JDFPart>();
-
-        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PART, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        final Vector<JDFPart> v = new Vector<JDFPart>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPart) vc.get(i));
         }
 
         return v;
