@@ -94,6 +94,8 @@ import org.cip4.jdflib.auto.JDFAutoMessage;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
@@ -163,6 +165,19 @@ public class JDFMessage extends JDFAutoMessage
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
+    }
+    
+    @Override
+	protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
+    }
+
 
 	public static class EnumFamily extends ValuedEnum
 	{
