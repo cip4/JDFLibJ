@@ -70,12 +70,26 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFRegisterRibbon;
+import org.cip4.jdflib.span.JDFNameSpan;
+import org.cip4.jdflib.span.JDFNumberSpan;
+import org.cip4.jdflib.span.JDFOptionSpan;
+import org.cip4.jdflib.span.JDFSpanGlue;
+import org.cip4.jdflib.span.JDFSpanJacket;
+import org.cip4.jdflib.span.JDFSpanNamedColor;
+import org.cip4.jdflib.span.JDFSpanStripMaterial;
+import org.cip4.jdflib.span.JDFSpanTightBacking;
+import org.cip4.jdflib.span.JDFStringSpan;
 
 public abstract class JDFAutoHardCoverBinding extends JDFElement
 {
@@ -324,19 +338,20 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
     /**
      * Get all HeadBandColorDetails from the current element
      * 
-     * @return Collection<JDFStringSpan>
+     * @return Collection<JDFStringSpan>, null if none are available
      */
     public Collection<JDFStringSpan> getAllHeadBandColorDetails()
     {
-        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
-
-        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.HEADBANDCOLORDETAILS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.HEADBANDCOLORDETAILS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.HEADBANDCOLORDETAILS, null);
+        final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFStringSpan) vc.get(i));
         }
 
         return v;
@@ -737,19 +752,20 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
     /**
      * Get all RegisterRibbon from the current element
      * 
-     * @return Collection<JDFRegisterRibbon>
+     * @return Collection<JDFRegisterRibbon>, null if none are available
      */
     public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
     {
-        Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
-
-        JDFRegisterRibbon kElem = (JDFRegisterRibbon) getFirstChildElement(ElementName.REGISTERRIBBON, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.REGISTERRIBBON, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFRegisterRibbon) kElem.getNextSiblingElement(ElementName.REGISTERRIBBON, null);
+        final Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFRegisterRibbon) vc.get(i));
         }
 
         return v;

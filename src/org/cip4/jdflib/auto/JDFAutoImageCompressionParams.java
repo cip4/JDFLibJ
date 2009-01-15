@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFImageCompression;
+import org.cip4.jdflib.resource.JDFResource;
 
 public abstract class JDFAutoImageCompressionParams extends JDFResource
 {
@@ -189,19 +195,20 @@ public abstract class JDFAutoImageCompressionParams extends JDFResource
     /**
      * Get all ImageCompression from the current element
      * 
-     * @return Collection<JDFImageCompression>
+     * @return Collection<JDFImageCompression>, null if none are available
      */
     public Collection<JDFImageCompression> getAllImageCompression()
     {
-        Vector<JDFImageCompression> v = new Vector<JDFImageCompression>();
-
-        JDFImageCompression kElem = (JDFImageCompression) getFirstChildElement(ElementName.IMAGECOMPRESSION, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IMAGECOMPRESSION, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFImageCompression) kElem.getNextSiblingElement(ElementName.IMAGECOMPRESSION, null);
+        final Vector<JDFImageCompression> v = new Vector<JDFImageCompression>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFImageCompression) vc.get(i));
         }
 
         return v;

@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.devicecapability.JDFDisplayGroup;
 
 public abstract class JDFAutoDisplayGroupPool extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
     /**
      * Get all DisplayGroup from the current element
      * 
-     * @return Collection<JDFDisplayGroup>
+     * @return Collection<JDFDisplayGroup>, null if none are available
      */
     public Collection<JDFDisplayGroup> getAllDisplayGroup()
     {
-        Vector<JDFDisplayGroup> v = new Vector<JDFDisplayGroup>();
-
-        JDFDisplayGroup kElem = (JDFDisplayGroup) getFirstChildElement(ElementName.DISPLAYGROUP, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DISPLAYGROUP, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDisplayGroup) kElem.getNextSiblingElement(ElementName.DISPLAYGROUP, null);
+        final Vector<JDFDisplayGroup> v = new Vector<JDFDisplayGroup>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDisplayGroup) vc.get(i));
         }
 
         return v;

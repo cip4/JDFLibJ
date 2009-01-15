@@ -70,18 +70,28 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFNumberRangeList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFImageShift;
 
 public abstract class JDFAutoIDPLayout extends JDFElement
 {
@@ -472,19 +482,20 @@ public abstract class JDFAutoIDPLayout extends JDFElement
     /**
      * Get all ImageShift from the current element
      * 
-     * @return Collection<JDFImageShift>
+     * @return Collection<JDFImageShift>, null if none are available
      */
     public Collection<JDFImageShift> getAllImageShift()
     {
-        Vector<JDFImageShift> v = new Vector<JDFImageShift>();
-
-        JDFImageShift kElem = (JDFImageShift) getFirstChildElement(ElementName.IMAGESHIFT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IMAGESHIFT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFImageShift) kElem.getNextSiblingElement(ElementName.IMAGESHIFT, null);
+        final Vector<JDFImageShift> v = new Vector<JDFImageShift>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFImageShift) vc.get(i));
         }
 
         return v;

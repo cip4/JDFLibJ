@@ -70,16 +70,27 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFContainer;
+import org.cip4.jdflib.resource.process.JDFDisposition;
+import org.cip4.jdflib.resource.process.JDFFileAlias;
 
 public abstract class JDFAutoFileSpec extends JDFResource
 {
@@ -917,19 +928,20 @@ public abstract class JDFAutoFileSpec extends JDFResource
     /**
      * Get all Container from the current element
      * 
-     * @return Collection<JDFContainer>
+     * @return Collection<JDFContainer>, null if none are available
      */
     public Collection<JDFContainer> getAllContainer()
     {
-        Vector<JDFContainer> v = new Vector<JDFContainer>();
-
-        JDFContainer kElem = (JDFContainer) getFirstChildElement(ElementName.CONTAINER, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CONTAINER, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFContainer) kElem.getNextSiblingElement(ElementName.CONTAINER, null);
+        final Vector<JDFContainer> v = new Vector<JDFContainer>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFContainer) vc.get(i));
         }
 
         return v;
@@ -965,19 +977,20 @@ public abstract class JDFAutoFileSpec extends JDFResource
     /**
      * Get all Disposition from the current element
      * 
-     * @return Collection<JDFDisposition>
+     * @return Collection<JDFDisposition>, null if none are available
      */
     public Collection<JDFDisposition> getAllDisposition()
     {
-        Vector<JDFDisposition> v = new Vector<JDFDisposition>();
-
-        JDFDisposition kElem = (JDFDisposition) getFirstChildElement(ElementName.DISPOSITION, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DISPOSITION, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDisposition) kElem.getNextSiblingElement(ElementName.DISPOSITION, null);
+        final Vector<JDFDisposition> v = new Vector<JDFDisposition>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDisposition) vc.get(i));
         }
 
         return v;
@@ -1023,19 +1036,20 @@ public abstract class JDFAutoFileSpec extends JDFResource
     /**
      * Get all FileAlias from the current element
      * 
-     * @return Collection<JDFFileAlias>
+     * @return Collection<JDFFileAlias>, null if none are available
      */
     public Collection<JDFFileAlias> getAllFileAlias()
     {
-        Vector<JDFFileAlias> v = new Vector<JDFFileAlias>();
-
-        JDFFileAlias kElem = (JDFFileAlias) getFirstChildElement(ElementName.FILEALIAS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.FILEALIAS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFFileAlias) kElem.getNextSiblingElement(ElementName.FILEALIAS, null);
+        final Vector<JDFFileAlias> v = new Vector<JDFFileAlias>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFFileAlias) vc.get(i));
         }
 
         return v;

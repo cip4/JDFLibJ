@@ -70,24 +70,29 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.util.*;           
-    /*
-    *****************************************************************************
-    class JDFAutoDrop : public JDFElement
-
-    *****************************************************************************
-    */
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFCompany;
+import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.resource.process.JDFDropItem;
+import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoDrop extends JDFElement
 {
@@ -479,19 +484,20 @@ public abstract class JDFAutoDrop extends JDFElement
     /**
      * Get all Contact from the current element
      * 
-     * @return Collection<JDFContact>
+     * @return Collection<JDFContact>, null if none are available
      */
     public Collection<JDFContact> getAllContact()
     {
-        Vector<JDFContact> v = new Vector<JDFContact>();
-
-        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        final Vector<JDFContact> v = new Vector<JDFContact>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFContact) vc.get(i));
         }
 
         return v;
@@ -537,19 +543,20 @@ public abstract class JDFAutoDrop extends JDFElement
     /**
      * Get all DropItem from the current element
      * 
-     * @return Collection<JDFDropItem>
+     * @return Collection<JDFDropItem>, null if none are available
      */
     public Collection<JDFDropItem> getAllDropItem()
     {
-        Vector<JDFDropItem> v = new Vector<JDFDropItem>();
-
-        JDFDropItem kElem = (JDFDropItem) getFirstChildElement(ElementName.DROPITEM, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DROPITEM, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDropItem) kElem.getNextSiblingElement(ElementName.DROPITEM, null);
+        final Vector<JDFDropItem> v = new Vector<JDFDropItem>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDropItem) vc.get(i));
         }
 
         return v;

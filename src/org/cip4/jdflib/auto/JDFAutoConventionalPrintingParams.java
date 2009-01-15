@@ -70,20 +70,28 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.prepress.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFApprovalParams;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 public abstract class JDFAutoConventionalPrintingParams extends JDFResource
 {
@@ -983,19 +991,20 @@ public abstract class JDFAutoConventionalPrintingParams extends JDFResource
     /**
      * Get all Ink from the current element
      * 
-     * @return Collection<JDFInk>
+     * @return Collection<JDFInk>, null if none are available
      */
     public Collection<JDFInk> getAllInk()
     {
-        Vector<JDFInk> v = new Vector<JDFInk>();
-
-        JDFInk kElem = (JDFInk) getFirstChildElement(ElementName.INK, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.INK, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFInk) kElem.getNextSiblingElement(ElementName.INK, null);
+        final Vector<JDFInk> v = new Vector<JDFInk>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFInk) vc.get(i));
         }
 
         return v;

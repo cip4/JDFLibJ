@@ -70,15 +70,29 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFCCITTFaxParams;
+import org.cip4.jdflib.resource.process.JDFDCTParams;
+import org.cip4.jdflib.resource.process.JDFJBIG2Params;
+import org.cip4.jdflib.resource.process.JDFJPEG2000Params;
+import org.cip4.jdflib.resource.process.JDFLZWParams;
 
 public abstract class JDFAutoImageCompression extends JDFElement
 {
@@ -686,19 +700,20 @@ public abstract class JDFAutoImageCompression extends JDFElement
     /**
      * Get all JBIG2Params from the current element
      * 
-     * @return Collection<JDFJBIG2Params>
+     * @return Collection<JDFJBIG2Params>, null if none are available
      */
     public Collection<JDFJBIG2Params> getAllJBIG2Params()
     {
-        Vector<JDFJBIG2Params> v = new Vector<JDFJBIG2Params>();
-
-        JDFJBIG2Params kElem = (JDFJBIG2Params) getFirstChildElement(ElementName.JBIG2PARAMS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.JBIG2PARAMS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFJBIG2Params) kElem.getNextSiblingElement(ElementName.JBIG2PARAMS, null);
+        final Vector<JDFJBIG2Params> v = new Vector<JDFJBIG2Params>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFJBIG2Params) vc.get(i));
         }
 
         return v;
@@ -735,19 +750,20 @@ public abstract class JDFAutoImageCompression extends JDFElement
     /**
      * Get all JPEG2000Params from the current element
      * 
-     * @return Collection<JDFJPEG2000Params>
+     * @return Collection<JDFJPEG2000Params>, null if none are available
      */
     public Collection<JDFJPEG2000Params> getAllJPEG2000Params()
     {
-        Vector<JDFJPEG2000Params> v = new Vector<JDFJPEG2000Params>();
-
-        JDFJPEG2000Params kElem = (JDFJPEG2000Params) getFirstChildElement(ElementName.JPEG2000PARAMS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.JPEG2000PARAMS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFJPEG2000Params) kElem.getNextSiblingElement(ElementName.JPEG2000PARAMS, null);
+        final Vector<JDFJPEG2000Params> v = new Vector<JDFJPEG2000Params>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFJPEG2000Params) vc.get(i));
         }
 
         return v;

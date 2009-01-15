@@ -70,13 +70,30 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
+import org.cip4.jdflib.resource.intent.JDFPricing;
+import org.cip4.jdflib.resource.process.JDFCompany;
+import org.cip4.jdflib.resource.process.JDFContact;
+import org.cip4.jdflib.span.JDFDurationSpan;
+import org.cip4.jdflib.span.JDFNameSpan;
+import org.cip4.jdflib.span.JDFSpanSurplusHandling;
+import org.cip4.jdflib.span.JDFSpanTransfer;
+import org.cip4.jdflib.span.JDFStringSpan;
+import org.cip4.jdflib.span.JDFTimeSpan;
 
 public abstract class JDFAutoDropIntent extends JDFElement
 {
@@ -541,19 +558,20 @@ public abstract class JDFAutoDropIntent extends JDFElement
     /**
      * Get all Contact from the current element
      * 
-     * @return Collection<JDFContact>
+     * @return Collection<JDFContact>, null if none are available
      */
     public Collection<JDFContact> getAllContact()
     {
-        Vector<JDFContact> v = new Vector<JDFContact>();
-
-        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        final Vector<JDFContact> v = new Vector<JDFContact>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFContact) vc.get(i));
         }
 
         return v;
@@ -599,19 +617,20 @@ public abstract class JDFAutoDropIntent extends JDFElement
     /**
      * Get all DropItemIntent from the current element
      * 
-     * @return Collection<JDFDropItemIntent>
+     * @return Collection<JDFDropItemIntent>, null if none are available
      */
     public Collection<JDFDropItemIntent> getAllDropItemIntent()
     {
-        Vector<JDFDropItemIntent> v = new Vector<JDFDropItemIntent>();
-
-        JDFDropItemIntent kElem = (JDFDropItemIntent) getFirstChildElement(ElementName.DROPITEMINTENT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DROPITEMINTENT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDropItemIntent) kElem.getNextSiblingElement(ElementName.DROPITEMINTENT, null);
+        final Vector<JDFDropItemIntent> v = new Vector<JDFDropItemIntent>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDropItemIntent) vc.get(i));
         }
 
         return v;

@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFIcon;
 
 public abstract class JDFAutoIconList extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoIconList extends JDFElement
     /**
      * Get all Icon from the current element
      * 
-     * @return Collection<JDFIcon>
+     * @return Collection<JDFIcon>, null if none are available
      */
     public Collection<JDFIcon> getAllIcon()
     {
-        Vector<JDFIcon> v = new Vector<JDFIcon>();
-
-        JDFIcon kElem = (JDFIcon) getFirstChildElement(ElementName.ICON, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.ICON, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFIcon) kElem.getNextSiblingElement(ElementName.ICON, null);
+        final Vector<JDFIcon> v = new Vector<JDFIcon>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFIcon) vc.get(i));
         }
 
         return v;

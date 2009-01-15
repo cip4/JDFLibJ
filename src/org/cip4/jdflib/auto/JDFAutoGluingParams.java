@@ -70,12 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.postpress.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.postpress.JDFGlue;
 
 public abstract class JDFAutoGluingParams extends JDFResource
 {
@@ -229,19 +238,20 @@ public abstract class JDFAutoGluingParams extends JDFResource
     /**
      * Get all Glue from the current element
      * 
-     * @return Collection<JDFGlue>
+     * @return Collection<JDFGlue>, null if none are available
      */
     public Collection<JDFGlue> getAllGlue()
     {
-        Vector<JDFGlue> v = new Vector<JDFGlue>();
-
-        JDFGlue kElem = (JDFGlue) getFirstChildElement(ElementName.GLUE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.GLUE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFGlue) kElem.getNextSiblingElement(ElementName.GLUE, null);
+        final Vector<JDFGlue> v = new Vector<JDFGlue>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFGlue) vc.get(i));
         }
 
         return v;

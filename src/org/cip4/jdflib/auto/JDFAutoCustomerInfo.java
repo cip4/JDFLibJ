@@ -70,12 +70,19 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCustomerMessage;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFCompany;
+import org.cip4.jdflib.resource.process.JDFContact;
 
 public abstract class JDFAutoCustomerInfo extends JDFResource
 {
@@ -326,19 +333,20 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     /**
      * Get all Contact from the current element
      * 
-     * @return Collection<JDFContact>
+     * @return Collection<JDFContact>, null if none are available
      */
     public Collection<JDFContact> getAllContact()
     {
-        Vector<JDFContact> v = new Vector<JDFContact>();
-
-        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        final Vector<JDFContact> v = new Vector<JDFContact>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFContact) vc.get(i));
         }
 
         return v;
@@ -385,19 +393,20 @@ public abstract class JDFAutoCustomerInfo extends JDFResource
     /**
      * Get all CustomerMessage from the current element
      * 
-     * @return Collection<JDFCustomerMessage>
+     * @return Collection<JDFCustomerMessage>, null if none are available
      */
     public Collection<JDFCustomerMessage> getAllCustomerMessage()
     {
-        Vector<JDFCustomerMessage> v = new Vector<JDFCustomerMessage>();
-
-        JDFCustomerMessage kElem = (JDFCustomerMessage) getFirstChildElement(ElementName.CUSTOMERMESSAGE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CUSTOMERMESSAGE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCustomerMessage) kElem.getNextSiblingElement(ElementName.CUSTOMERMESSAGE, null);
+        final Vector<JDFCustomerMessage> v = new Vector<JDFCustomerMessage>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCustomerMessage) vc.get(i));
         }
 
         return v;

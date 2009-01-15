@@ -70,16 +70,33 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.prepress.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFShape;
+import org.cip4.jdflib.resource.JDFBundle;
+import org.cip4.jdflib.resource.JDFPallet;
+import org.cip4.jdflib.resource.JDFRegisterRibbon;
+import org.cip4.jdflib.resource.JDFStrap;
+import org.cip4.jdflib.resource.JDFTool;
+import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFDigitalMedia;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRollStand;
+import org.cip4.jdflib.resource.process.prepress.JDFInk;
 
 public abstract class JDFAutoDropItem extends JDFElement
 {
@@ -423,19 +440,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all Component from the current element
      * 
-     * @return Collection<JDFComponent>
+     * @return Collection<JDFComponent>, null if none are available
      */
     public Collection<JDFComponent> getAllComponent()
     {
-        Vector<JDFComponent> v = new Vector<JDFComponent>();
-
-        JDFComponent kElem = (JDFComponent) getFirstChildElement(ElementName.COMPONENT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.COMPONENT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFComponent) kElem.getNextSiblingElement(ElementName.COMPONENT, null);
+        final Vector<JDFComponent> v = new Vector<JDFComponent>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFComponent) vc.get(i));
         }
 
         return v;
@@ -481,19 +499,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all ExposedMedia from the current element
      * 
-     * @return Collection<JDFExposedMedia>
+     * @return Collection<JDFExposedMedia>, null if none are available
      */
     public Collection<JDFExposedMedia> getAllExposedMedia()
     {
-        Vector<JDFExposedMedia> v = new Vector<JDFExposedMedia>();
-
-        JDFExposedMedia kElem = (JDFExposedMedia) getFirstChildElement(ElementName.EXPOSEDMEDIA, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.EXPOSEDMEDIA, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFExposedMedia) kElem.getNextSiblingElement(ElementName.EXPOSEDMEDIA, null);
+        final Vector<JDFExposedMedia> v = new Vector<JDFExposedMedia>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFExposedMedia) vc.get(i));
         }
 
         return v;
@@ -539,19 +558,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all Ink from the current element
      * 
-     * @return Collection<JDFInk>
+     * @return Collection<JDFInk>, null if none are available
      */
     public Collection<JDFInk> getAllInk()
     {
-        Vector<JDFInk> v = new Vector<JDFInk>();
-
-        JDFInk kElem = (JDFInk) getFirstChildElement(ElementName.INK, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.INK, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFInk) kElem.getNextSiblingElement(ElementName.INK, null);
+        final Vector<JDFInk> v = new Vector<JDFInk>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFInk) vc.get(i));
         }
 
         return v;
@@ -597,19 +617,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all Media from the current element
      * 
-     * @return Collection<JDFMedia>
+     * @return Collection<JDFMedia>, null if none are available
      */
     public Collection<JDFMedia> getAllMedia()
     {
-        Vector<JDFMedia> v = new Vector<JDFMedia>();
-
-        JDFMedia kElem = (JDFMedia) getFirstChildElement(ElementName.MEDIA, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MEDIA, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFMedia) kElem.getNextSiblingElement(ElementName.MEDIA, null);
+        final Vector<JDFMedia> v = new Vector<JDFMedia>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFMedia) vc.get(i));
         }
 
         return v;
@@ -655,19 +676,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all Pallet from the current element
      * 
-     * @return Collection<JDFPallet>
+     * @return Collection<JDFPallet>, null if none are available
      */
     public Collection<JDFPallet> getAllPallet()
     {
-        Vector<JDFPallet> v = new Vector<JDFPallet>();
-
-        JDFPallet kElem = (JDFPallet) getFirstChildElement(ElementName.PALLET, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PALLET, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPallet) kElem.getNextSiblingElement(ElementName.PALLET, null);
+        final Vector<JDFPallet> v = new Vector<JDFPallet>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPallet) vc.get(i));
         }
 
         return v;
@@ -713,19 +735,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all RegisterRibbon from the current element
      * 
-     * @return Collection<JDFRegisterRibbon>
+     * @return Collection<JDFRegisterRibbon>, null if none are available
      */
     public Collection<JDFRegisterRibbon> getAllRegisterRibbon()
     {
-        Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
-
-        JDFRegisterRibbon kElem = (JDFRegisterRibbon) getFirstChildElement(ElementName.REGISTERRIBBON, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.REGISTERRIBBON, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFRegisterRibbon) kElem.getNextSiblingElement(ElementName.REGISTERRIBBON, null);
+        final Vector<JDFRegisterRibbon> v = new Vector<JDFRegisterRibbon>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFRegisterRibbon) vc.get(i));
         }
 
         return v;
@@ -771,19 +794,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all Strap from the current element
      * 
-     * @return Collection<JDFStrap>
+     * @return Collection<JDFStrap>, null if none are available
      */
     public Collection<JDFStrap> getAllStrap()
     {
-        Vector<JDFStrap> v = new Vector<JDFStrap>();
-
-        JDFStrap kElem = (JDFStrap) getFirstChildElement(ElementName.STRAP, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.STRAP, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFStrap) kElem.getNextSiblingElement(ElementName.STRAP, null);
+        final Vector<JDFStrap> v = new Vector<JDFStrap>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFStrap) vc.get(i));
         }
 
         return v;
@@ -829,19 +853,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all Bundle from the current element
      * 
-     * @return Collection<JDFBundle>
+     * @return Collection<JDFBundle>, null if none are available
      */
     public Collection<JDFBundle> getAllBundle()
     {
-        Vector<JDFBundle> v = new Vector<JDFBundle>();
-
-        JDFBundle kElem = (JDFBundle) getFirstChildElement(ElementName.BUNDLE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BUNDLE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFBundle) kElem.getNextSiblingElement(ElementName.BUNDLE, null);
+        final Vector<JDFBundle> v = new Vector<JDFBundle>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFBundle) vc.get(i));
         }
 
         return v;
@@ -887,19 +912,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all DigitalMedia from the current element
      * 
-     * @return Collection<JDFDigitalMedia>
+     * @return Collection<JDFDigitalMedia>, null if none are available
      */
     public Collection<JDFDigitalMedia> getAllDigitalMedia()
     {
-        Vector<JDFDigitalMedia> v = new Vector<JDFDigitalMedia>();
-
-        JDFDigitalMedia kElem = (JDFDigitalMedia) getFirstChildElement(ElementName.DIGITALMEDIA, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DIGITALMEDIA, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDigitalMedia) kElem.getNextSiblingElement(ElementName.DIGITALMEDIA, null);
+        final Vector<JDFDigitalMedia> v = new Vector<JDFDigitalMedia>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDigitalMedia) vc.get(i));
         }
 
         return v;
@@ -945,19 +971,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all RollStand from the current element
      * 
-     * @return Collection<JDFRollStand>
+     * @return Collection<JDFRollStand>, null if none are available
      */
     public Collection<JDFRollStand> getAllRollStand()
     {
-        Vector<JDFRollStand> v = new Vector<JDFRollStand>();
-
-        JDFRollStand kElem = (JDFRollStand) getFirstChildElement(ElementName.ROLLSTAND, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.ROLLSTAND, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFRollStand) kElem.getNextSiblingElement(ElementName.ROLLSTAND, null);
+        final Vector<JDFRollStand> v = new Vector<JDFRollStand>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFRollStand) vc.get(i));
         }
 
         return v;
@@ -1003,19 +1030,20 @@ public abstract class JDFAutoDropItem extends JDFElement
     /**
      * Get all Tool from the current element
      * 
-     * @return Collection<JDFTool>
+     * @return Collection<JDFTool>, null if none are available
      */
     public Collection<JDFTool> getAllTool()
     {
-        Vector<JDFTool> v = new Vector<JDFTool>();
-
-        JDFTool kElem = (JDFTool) getFirstChildElement(ElementName.TOOL, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TOOL, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTool) kElem.getNextSiblingElement(ElementName.TOOL, null);
+        final Vector<JDFTool> v = new Vector<JDFTool>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTool) vc.get(i));
         }
 
         return v;

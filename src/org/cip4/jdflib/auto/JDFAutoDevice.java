@@ -70,13 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFIconList;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.resource.devicecapability.JDFModule;
+import org.cip4.jdflib.resource.process.JDFCostCenter;
 
 public abstract class JDFAutoDevice extends JDFResource
 {
@@ -771,19 +783,20 @@ public abstract class JDFAutoDevice extends JDFResource
     /**
      * Get all DeviceCap from the current element
      * 
-     * @return Collection<JDFDeviceCap>
+     * @return Collection<JDFDeviceCap>, null if none are available
      */
     public Collection<JDFDeviceCap> getAllDeviceCap()
     {
-        Vector<JDFDeviceCap> v = new Vector<JDFDeviceCap>();
-
-        JDFDeviceCap kElem = (JDFDeviceCap) getFirstChildElement(ElementName.DEVICECAP, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DEVICECAP, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDeviceCap) kElem.getNextSiblingElement(ElementName.DEVICECAP, null);
+        final Vector<JDFDeviceCap> v = new Vector<JDFDeviceCap>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDeviceCap) vc.get(i));
         }
 
         return v;
@@ -846,19 +859,20 @@ public abstract class JDFAutoDevice extends JDFResource
     /**
      * Get all Module from the current element
      * 
-     * @return Collection<JDFModule>
+     * @return Collection<JDFModule>, null if none are available
      */
     public Collection<JDFModule> getAllModule()
     {
-        Vector<JDFModule> v = new Vector<JDFModule>();
-
-        JDFModule kElem = (JDFModule) getFirstChildElement(ElementName.MODULE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MODULE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFModule) kElem.getNextSiblingElement(ElementName.MODULE, null);
+        final Vector<JDFModule> v = new Vector<JDFModule>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFModule) vc.get(i));
         }
 
         return v;

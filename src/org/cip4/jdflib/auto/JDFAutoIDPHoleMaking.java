@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.postpress.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.postpress.JDFHoleMakingParams;
 
 public abstract class JDFAutoIDPHoleMaking extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoIDPHoleMaking extends JDFElement
     /**
      * Get all HoleMakingParams from the current element
      * 
-     * @return Collection<JDFHoleMakingParams>
+     * @return Collection<JDFHoleMakingParams>, null if none are available
      */
     public Collection<JDFHoleMakingParams> getAllHoleMakingParams()
     {
-        Vector<JDFHoleMakingParams> v = new Vector<JDFHoleMakingParams>();
-
-        JDFHoleMakingParams kElem = (JDFHoleMakingParams) getFirstChildElement(ElementName.HOLEMAKINGPARAMS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.HOLEMAKINGPARAMS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFHoleMakingParams) kElem.getNextSiblingElement(ElementName.HOLEMAKINGPARAMS, null);
+        final Vector<JDFHoleMakingParams> v = new Vector<JDFHoleMakingParams>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFHoleMakingParams) vc.get(i));
         }
 
         return v;

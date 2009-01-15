@@ -70,12 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFContentData;
 
 public abstract class JDFAutoContentList extends JDFResource
 {
@@ -190,19 +195,20 @@ public abstract class JDFAutoContentList extends JDFResource
     /**
      * Get all ContentData from the current element
      * 
-     * @return Collection<JDFContentData>
+     * @return Collection<JDFContentData>, null if none are available
      */
     public Collection<JDFContentData> getAllContentData()
     {
-        Vector<JDFContentData> v = new Vector<JDFContentData>();
-
-        JDFContentData kElem = (JDFContentData) getFirstChildElement(ElementName.CONTENTDATA, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CONTENTDATA, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFContentData) kElem.getNextSiblingElement(ElementName.CONTENTDATA, null);
+        final Vector<JDFContentData> v = new Vector<JDFContentData>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFContentData) vc.get(i));
         }
 
         return v;

@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
- *
+  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -84,301 +84,319 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.resource.JDFDevice;
 
 public abstract class JDFAutoConvertingConfig extends JDFElement
 {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
-	static
-	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.MARGINBOTTOM, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.MARGINLEFT, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.MARGINRIGHT, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.MARGINTOP, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.SHEETHEIGHT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-	}
-
-	@Override
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+    static
+    {
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.MARGINBOTTOM, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.MARGINLEFT, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.MARGINRIGHT, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.MARGINTOP, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.SHEETHEIGHT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+    }
+    
+    @Override
 	protected AttributeInfo getTheAttributeInfo()
-	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-	}
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-	static
-	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x22221111);
-	}
 
-	@Override
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x22221111);
+    }
+    
+    @Override
 	protected ElementInfo getTheElementInfo()
-	{
-		return super.getTheElementInfo().updateReplace(elemInfoTable);
-	}
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
+    }
 
-	/**
-	 * Constructor for JDFAutoConvertingConfig
-	 * @param myOwnerDocument
-	 * @param qualifiedName
-	 */
-	protected JDFAutoConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
-	{
-		super(myOwnerDocument, qualifiedName);
-	}
 
-	/**
-	 * Constructor for JDFAutoConvertingConfig
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 */
-	protected JDFAutoConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName);
-	}
 
-	/**
-	 * Constructor for JDFAutoConvertingConfig
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 * @param myLocalName
-	 */
-	protected JDFAutoConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
+    /**
+     * Constructor for JDFAutoConvertingConfig
+     * @param myOwnerDocument
+     * @param qualifiedName
+     */
+    protected JDFAutoConvertingConfig(
+        CoreDocumentImpl myOwnerDocument,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, qualifiedName);
+    }
 
-	@Override
+    /**
+     * Constructor for JDFAutoConvertingConfig
+     * @param myOwnerDocument
+     * @param myNamespaceURI
+     * @param qualifiedName
+     */
+    protected JDFAutoConvertingConfig(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName);
+    }
+
+    /**
+     * Constructor for JDFAutoConvertingConfig
+     * @param myOwnerDocument
+     * @param myNamespaceURI
+     * @param qualifiedName
+     * @param myLocalName
+     */
+    protected JDFAutoConvertingConfig(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName,
+        String myLocalName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+    }
+
+
+    @Override
 	public String toString()
-	{
-		return " JDFAutoConvertingConfig[  --> " + super.toString() + " ]";
-	}
+    {
+        return " JDFAutoConvertingConfig[  --> " + super.toString() + " ]";
+    }
 
-	/*
-	 * Attribute getter / setter
-	 */
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarginBottom
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute MarginBottom
-	 * @param value: the value to set the attribute to
-	 */
-	public void setMarginBottom(final double value)
-	{
-		setAttribute(AttributeName.MARGINBOTTOM, value, null);
-	}
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute MarginBottom
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MarginBottom
+          * @param value: the value to set the attribute to
+          */
+        public void setMarginBottom(double value)
+        {
+            setAttribute(AttributeName.MARGINBOTTOM, value, null);
+        }
 
-	/**
-	 * (17) get double attribute MarginBottom
-	 * @return double the value of the attribute
-	 */
-	public double getMarginBottom()
-	{
-		return getRealAttribute(AttributeName.MARGINBOTTOM, null, 0.0);
-	}
+        /**
+          * (17) get double attribute MarginBottom
+          * @return double the value of the attribute
+          */
+        public double getMarginBottom()
+        {
+            return getRealAttribute(AttributeName.MARGINBOTTOM, null, 0.0);
+        }
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarginLeft
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute MarginLeft
-	 * @param value: the value to set the attribute to
-	 */
-	public void setMarginLeft(final double value)
-	{
-		setAttribute(AttributeName.MARGINLEFT, value, null);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute MarginLeft
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MarginLeft
+          * @param value: the value to set the attribute to
+          */
+        public void setMarginLeft(double value)
+        {
+            setAttribute(AttributeName.MARGINLEFT, value, null);
+        }
 
-	/**
-	 * (17) get double attribute MarginLeft
-	 * @return double the value of the attribute
-	 */
-	public double getMarginLeft()
-	{
-		return getRealAttribute(AttributeName.MARGINLEFT, null, 0.0);
-	}
+        /**
+          * (17) get double attribute MarginLeft
+          * @return double the value of the attribute
+          */
+        public double getMarginLeft()
+        {
+            return getRealAttribute(AttributeName.MARGINLEFT, null, 0.0);
+        }
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarginRight
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute MarginRight
-	 * @param value: the value to set the attribute to
-	 */
-	public void setMarginRight(final double value)
-	{
-		setAttribute(AttributeName.MARGINRIGHT, value, null);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute MarginRight
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MarginRight
+          * @param value: the value to set the attribute to
+          */
+        public void setMarginRight(double value)
+        {
+            setAttribute(AttributeName.MARGINRIGHT, value, null);
+        }
 
-	/**
-	 * (17) get double attribute MarginRight
-	 * @return double the value of the attribute
-	 */
-	public double getMarginRight()
-	{
-		return getRealAttribute(AttributeName.MARGINRIGHT, null, 0.0);
-	}
+        /**
+          * (17) get double attribute MarginRight
+          * @return double the value of the attribute
+          */
+        public double getMarginRight()
+        {
+            return getRealAttribute(AttributeName.MARGINRIGHT, null, 0.0);
+        }
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute MarginTop
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute MarginTop
-	 * @param value: the value to set the attribute to
-	 */
-	public void setMarginTop(final double value)
-	{
-		setAttribute(AttributeName.MARGINTOP, value, null);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute MarginTop
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute MarginTop
+          * @param value: the value to set the attribute to
+          */
+        public void setMarginTop(double value)
+        {
+            setAttribute(AttributeName.MARGINTOP, value, null);
+        }
 
-	/**
-	 * (17) get double attribute MarginTop
-	 * @return double the value of the attribute
-	 */
-	public double getMarginTop()
-	{
-		return getRealAttribute(AttributeName.MARGINTOP, null, 0.0);
-	}
+        /**
+          * (17) get double attribute MarginTop
+          * @return double the value of the attribute
+          */
+        public double getMarginTop()
+        {
+            return getRealAttribute(AttributeName.MARGINTOP, null, 0.0);
+        }
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetHeight
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute SheetHeight
-	 * @param value: the value to set the attribute to
-	 */
-	public void setSheetHeight(final JDFNumberRange value)
-	{
-		setAttribute(AttributeName.SHEETHEIGHT, value, null);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SheetHeight
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SheetHeight
+          * @param value: the value to set the attribute to
+          */
+        public void setSheetHeight(JDFNumberRange value)
+        {
+            setAttribute(AttributeName.SHEETHEIGHT, value, null);
+        }
 
-	/**
-	 * (20) get JDFNumberRange attribute SheetHeight
-	 * @return JDFNumberRange the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRange
-	 */
-	public JDFNumberRange getSheetHeight()
-	{
-		String strAttrName = "";
-		JDFNumberRange nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SHEETHEIGHT, null, JDFConstants.EMPTYSTRING);
-		try
-		{
-			nPlaceHolder = new JDFNumberRange(strAttrName);
-		}
-		catch (final DataFormatException e)
-		{
-			return null;
-		}
-		return nPlaceHolder;
-	}
+        /**
+          * (20) get JDFNumberRange attribute SheetHeight
+          * @return JDFNumberRange the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNumberRange
+          */
+        public JDFNumberRange getSheetHeight()
+        {
+            String strAttrName = "";
+            JDFNumberRange nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SHEETHEIGHT, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNumberRange(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute SheetWidth
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute SheetWidth
-	 * @param value: the value to set the attribute to
-	 */
-	public void setSheetWidth(final JDFNumberRange value)
-	{
-		setAttribute(AttributeName.SHEETWIDTH, value, null);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SheetWidth
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SheetWidth
+          * @param value: the value to set the attribute to
+          */
+        public void setSheetWidth(JDFNumberRange value)
+        {
+            setAttribute(AttributeName.SHEETWIDTH, value, null);
+        }
 
-	/**
-	 * (20) get JDFNumberRange attribute SheetWidth
-	 * @return JDFNumberRange the value of the attribute, null if a the attribute value is not a valid to create a JDFNumberRange
-	 */
-	public JDFNumberRange getSheetWidth()
-	{
-		String strAttrName = "";
-		JDFNumberRange nPlaceHolder = null;
-		strAttrName = getAttribute(AttributeName.SHEETWIDTH, null, JDFConstants.EMPTYSTRING);
-		try
-		{
-			nPlaceHolder = new JDFNumberRange(strAttrName);
-		}
-		catch (final DataFormatException e)
-		{
-			return null;
-		}
-		return nPlaceHolder;
-	}
+        /**
+          * (20) get JDFNumberRange attribute SheetWidth
+          * @return JDFNumberRange the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNumberRange
+          */
+        public JDFNumberRange getSheetWidth()
+        {
+            String strAttrName = "";
+            JDFNumberRange nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.SHEETWIDTH, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNumberRange(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
 
-	/*
-	 * Element getter / setter
-	 */
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
 
-	/**
-	 * (26) getCreateDevice
-	 * 
-	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element
-	 */
-	public JDFDevice getCreateDevice(final int iSkip)
-	{
-		return (JDFDevice) getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
-	}
+    /** (26) getCreateDevice
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFDevice the element
+     */
+    public JDFDevice getCreateDevice(int iSkip)
+    {
+        return (JDFDevice)getCreateElement_KElement(ElementName.DEVICE, null, iSkip);
+    }
 
-	/**
-	 * (27) const get element Device
-	 * @param iSkip number of elements to skip
-	 * @return JDFDevice the element default is getDevice(0)
-	 */
-	public JDFDevice getDevice(final int iSkip)
-	{
-		return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
-	}
+    /**
+     * (27) const get element Device
+     * @param iSkip number of elements to skip
+     * @return JDFDevice the element
+     * default is getDevice(0)     */
+    public JDFDevice getDevice(int iSkip)
+    {
+        return (JDFDevice) getElement(ElementName.DEVICE, null, iSkip);
+    }
 
-	/**
-	 * Get all Device from the current element
-	 * 
-	 * @return Collection<JDFDevice>
-	 */
-	public Collection<JDFDevice> getAllDevice()
-	{
-		final Vector<JDFDevice> v = new Vector<JDFDevice>();
+    /**
+     * Get all Device from the current element
+     * 
+     * @return Collection<JDFDevice>, null if none are available
+     */
+    public Collection<JDFDevice> getAllDevice()
+    {
+        final VElement vc = getChildElementVector(ElementName.DEVICE, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
 
-		JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
+        final Vector<JDFDevice> v = new Vector<JDFDevice>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDevice) vc.get(i));
+        }
 
-		while (kElem != null)
-		{
-			v.add(kElem);
+        return v;
+    }
 
-			kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
-		}
+    /**
+     * (30) append element Device
+     */
+    public JDFDevice appendDevice() throws JDFException
+    {
+        return (JDFDevice) appendElement(ElementName.DEVICE, null);
+    }
 
-		return v;
-	}
-
-	/**
-	 * (30) append element Device
-	 */
-	public JDFDevice appendDevice() throws JDFException
-	{
-		return (JDFDevice) appendElement(ElementName.DEVICE, null);
-	}
-
-	/**
-	 * (31) create inter-resource link to refTarget
-	 * @param refTarget the element that is referenced
-	 */
-	public void refDevice(final JDFDevice refTarget)
-	{
-		refElement(refTarget);
-	}
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refDevice(JDFDevice refTarget)
+    {
+        refElement(refTarget);
+    }
 
 }// end namespace JDF

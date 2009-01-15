@@ -70,18 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.zip.DataFormatException;           
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.postpress.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.process.postpress.JDFHoleList;
+import org.cip4.jdflib.span.JDFStringSpan;
 
 public abstract class JDFAutoHoleMakingIntent extends JDFIntentResource
 {

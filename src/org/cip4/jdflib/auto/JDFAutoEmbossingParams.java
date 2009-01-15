@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFEmboss;
+import org.cip4.jdflib.resource.JDFResource;
 
 public abstract class JDFAutoEmbossingParams extends JDFResource
 {
@@ -189,19 +195,20 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
     /**
      * Get all Emboss from the current element
      * 
-     * @return Collection<JDFEmboss>
+     * @return Collection<JDFEmboss>, null if none are available
      */
     public Collection<JDFEmboss> getAllEmboss()
     {
-        Vector<JDFEmboss> v = new Vector<JDFEmboss>();
-
-        JDFEmboss kElem = (JDFEmboss) getFirstChildElement(ElementName.EMBOSS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.EMBOSS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFEmboss) kElem.getNextSiblingElement(ElementName.EMBOSS, null);
+        final Vector<JDFEmboss> v = new Vector<JDFEmboss>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFEmboss) vc.get(i));
         }
 
         return v;

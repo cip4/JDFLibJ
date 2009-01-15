@@ -70,16 +70,27 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.intent.JDFMediaIntent;
+import org.cip4.jdflib.resource.process.JDFIDPFinishing;
+import org.cip4.jdflib.resource.process.JDFIDPLayout;
+import org.cip4.jdflib.resource.process.JDFMediaSource;
 
 public abstract class JDFAutoIDPJobSheet extends JDFElement
 {
@@ -363,19 +374,20 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     /**
      * Get all IDPFinishing from the current element
      * 
-     * @return Collection<JDFIDPFinishing>
+     * @return Collection<JDFIDPFinishing>, null if none are available
      */
     public Collection<JDFIDPFinishing> getAllIDPFinishing()
     {
-        Vector<JDFIDPFinishing> v = new Vector<JDFIDPFinishing>();
-
-        JDFIDPFinishing kElem = (JDFIDPFinishing) getFirstChildElement(ElementName.IDPFINISHING, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IDPFINISHING, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFIDPFinishing) kElem.getNextSiblingElement(ElementName.IDPFINISHING, null);
+        final Vector<JDFIDPFinishing> v = new Vector<JDFIDPFinishing>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFIDPFinishing) vc.get(i));
         }
 
         return v;
@@ -412,19 +424,20 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     /**
      * Get all IDPLayout from the current element
      * 
-     * @return Collection<JDFIDPLayout>
+     * @return Collection<JDFIDPLayout>, null if none are available
      */
     public Collection<JDFIDPLayout> getAllIDPLayout()
     {
-        Vector<JDFIDPLayout> v = new Vector<JDFIDPLayout>();
-
-        JDFIDPLayout kElem = (JDFIDPLayout) getFirstChildElement(ElementName.IDPLAYOUT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IDPLAYOUT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFIDPLayout) kElem.getNextSiblingElement(ElementName.IDPLAYOUT, null);
+        final Vector<JDFIDPLayout> v = new Vector<JDFIDPLayout>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFIDPLayout) vc.get(i));
         }
 
         return v;
@@ -461,19 +474,20 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     /**
      * Get all MediaIntent from the current element
      * 
-     * @return Collection<JDFMediaIntent>
+     * @return Collection<JDFMediaIntent>, null if none are available
      */
     public Collection<JDFMediaIntent> getAllMediaIntent()
     {
-        Vector<JDFMediaIntent> v = new Vector<JDFMediaIntent>();
-
-        JDFMediaIntent kElem = (JDFMediaIntent) getFirstChildElement(ElementName.MEDIAINTENT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MEDIAINTENT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFMediaIntent) kElem.getNextSiblingElement(ElementName.MEDIAINTENT, null);
+        final Vector<JDFMediaIntent> v = new Vector<JDFMediaIntent>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFMediaIntent) vc.get(i));
         }
 
         return v;
@@ -519,19 +533,20 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     /**
      * Get all MediaSource from the current element
      * 
-     * @return Collection<JDFMediaSource>
+     * @return Collection<JDFMediaSource>, null if none are available
      */
     public Collection<JDFMediaSource> getAllMediaSource()
     {
-        Vector<JDFMediaSource> v = new Vector<JDFMediaSource>();
-
-        JDFMediaSource kElem = (JDFMediaSource) getFirstChildElement(ElementName.MEDIASOURCE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MEDIASOURCE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFMediaSource) kElem.getNextSiblingElement(ElementName.MEDIASOURCE, null);
+        final Vector<JDFMediaSource> v = new Vector<JDFMediaSource>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFMediaSource) vc.get(i));
         }
 
         return v;

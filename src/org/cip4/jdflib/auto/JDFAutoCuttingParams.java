@@ -70,16 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.postpress.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFCutBlock;
+import org.cip4.jdflib.resource.process.postpress.JDFCut;
+import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
 
 public abstract class JDFAutoCuttingParams extends JDFResource
 {
@@ -247,19 +256,20 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     /**
      * Get all CutBlock from the current element
      * 
-     * @return Collection<JDFCutBlock>
+     * @return Collection<JDFCutBlock>, null if none are available
      */
     public Collection<JDFCutBlock> getAllCutBlock()
     {
-        Vector<JDFCutBlock> v = new Vector<JDFCutBlock>();
-
-        JDFCutBlock kElem = (JDFCutBlock) getFirstChildElement(ElementName.CUTBLOCK, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CUTBLOCK, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCutBlock) kElem.getNextSiblingElement(ElementName.CUTBLOCK, null);
+        final Vector<JDFCutBlock> v = new Vector<JDFCutBlock>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCutBlock) vc.get(i));
         }
 
         return v;
@@ -305,19 +315,20 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     /**
      * Get all CutMark from the current element
      * 
-     * @return Collection<JDFCutMark>
+     * @return Collection<JDFCutMark>, null if none are available
      */
     public Collection<JDFCutMark> getAllCutMark()
     {
-        Vector<JDFCutMark> v = new Vector<JDFCutMark>();
-
-        JDFCutMark kElem = (JDFCutMark) getFirstChildElement(ElementName.CUTMARK, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CUTMARK, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCutMark) kElem.getNextSiblingElement(ElementName.CUTMARK, null);
+        final Vector<JDFCutMark> v = new Vector<JDFCutMark>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCutMark) vc.get(i));
         }
 
         return v;
@@ -363,19 +374,20 @@ public abstract class JDFAutoCuttingParams extends JDFResource
     /**
      * Get all Cut from the current element
      * 
-     * @return Collection<JDFCut>
+     * @return Collection<JDFCut>, null if none are available
      */
     public Collection<JDFCut> getAllCut()
     {
-        Vector<JDFCut> v = new Vector<JDFCut>();
-
-        JDFCut kElem = (JDFCut) getFirstChildElement(ElementName.CUT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CUT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCut) kElem.getNextSiblingElement(ElementName.CUT, null);
+        final Vector<JDFCut> v = new Vector<JDFCut>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCut) vc.get(i));
         }
 
         return v;

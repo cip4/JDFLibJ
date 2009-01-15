@@ -70,12 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.postpress.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFHoleLine;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.postpress.JDFHole;
 
 public abstract class JDFAutoHoleList extends JDFResource
 {
@@ -191,19 +197,20 @@ public abstract class JDFAutoHoleList extends JDFResource
     /**
      * Get all Hole from the current element
      * 
-     * @return Collection<JDFHole>
+     * @return Collection<JDFHole>, null if none are available
      */
     public Collection<JDFHole> getAllHole()
     {
-        Vector<JDFHole> v = new Vector<JDFHole>();
-
-        JDFHole kElem = (JDFHole) getFirstChildElement(ElementName.HOLE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.HOLE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFHole) kElem.getNextSiblingElement(ElementName.HOLE, null);
+        final Vector<JDFHole> v = new Vector<JDFHole>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFHole) vc.get(i));
         }
 
         return v;
@@ -249,19 +256,20 @@ public abstract class JDFAutoHoleList extends JDFResource
     /**
      * Get all HoleLine from the current element
      * 
-     * @return Collection<JDFHoleLine>
+     * @return Collection<JDFHoleLine>, null if none are available
      */
     public Collection<JDFHoleLine> getAllHoleLine()
     {
-        Vector<JDFHoleLine> v = new Vector<JDFHoleLine>();
-
-        JDFHoleLine kElem = (JDFHoleLine) getFirstChildElement(ElementName.HOLELINE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.HOLELINE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFHoleLine) kElem.getNextSiblingElement(ElementName.HOLELINE, null);
+        final Vector<JDFHoleLine> v = new Vector<JDFHoleLine>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFHoleLine) vc.get(i));
         }
 
         return v;

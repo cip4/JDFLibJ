@@ -70,14 +70,26 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.process.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.resource.process.JDFIDPFolding;
+import org.cip4.jdflib.resource.process.JDFIDPHoleMaking;
+import org.cip4.jdflib.resource.process.JDFIDPStitching;
+import org.cip4.jdflib.resource.process.JDFIDPTrimming;
 
 public abstract class JDFAutoIDPFinishing extends JDFElement
 {
@@ -230,19 +242,20 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
     /**
      * Get all IDPFolding from the current element
      * 
-     * @return Collection<JDFIDPFolding>
+     * @return Collection<JDFIDPFolding>, null if none are available
      */
     public Collection<JDFIDPFolding> getAllIDPFolding()
     {
-        Vector<JDFIDPFolding> v = new Vector<JDFIDPFolding>();
-
-        JDFIDPFolding kElem = (JDFIDPFolding) getFirstChildElement(ElementName.IDPFOLDING, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IDPFOLDING, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFIDPFolding) kElem.getNextSiblingElement(ElementName.IDPFOLDING, null);
+        final Vector<JDFIDPFolding> v = new Vector<JDFIDPFolding>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFIDPFolding) vc.get(i));
         }
 
         return v;
@@ -279,19 +292,20 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
     /**
      * Get all IDPHoleMaking from the current element
      * 
-     * @return Collection<JDFIDPHoleMaking>
+     * @return Collection<JDFIDPHoleMaking>, null if none are available
      */
     public Collection<JDFIDPHoleMaking> getAllIDPHoleMaking()
     {
-        Vector<JDFIDPHoleMaking> v = new Vector<JDFIDPHoleMaking>();
-
-        JDFIDPHoleMaking kElem = (JDFIDPHoleMaking) getFirstChildElement(ElementName.IDPHOLEMAKING, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IDPHOLEMAKING, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFIDPHoleMaking) kElem.getNextSiblingElement(ElementName.IDPHOLEMAKING, null);
+        final Vector<JDFIDPHoleMaking> v = new Vector<JDFIDPHoleMaking>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFIDPHoleMaking) vc.get(i));
         }
 
         return v;
@@ -328,19 +342,20 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
     /**
      * Get all IDPStitching from the current element
      * 
-     * @return Collection<JDFIDPStitching>
+     * @return Collection<JDFIDPStitching>, null if none are available
      */
     public Collection<JDFIDPStitching> getAllIDPStitching()
     {
-        Vector<JDFIDPStitching> v = new Vector<JDFIDPStitching>();
-
-        JDFIDPStitching kElem = (JDFIDPStitching) getFirstChildElement(ElementName.IDPSTITCHING, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IDPSTITCHING, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFIDPStitching) kElem.getNextSiblingElement(ElementName.IDPSTITCHING, null);
+        final Vector<JDFIDPStitching> v = new Vector<JDFIDPStitching>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFIDPStitching) vc.get(i));
         }
 
         return v;
@@ -377,19 +392,20 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
     /**
      * Get all IDPTrimming from the current element
      * 
-     * @return Collection<JDFIDPTrimming>
+     * @return Collection<JDFIDPTrimming>, null if none are available
      */
     public Collection<JDFIDPTrimming> getAllIDPTrimming()
     {
-        Vector<JDFIDPTrimming> v = new Vector<JDFIDPTrimming>();
-
-        JDFIDPTrimming kElem = (JDFIDPTrimming) getFirstChildElement(ElementName.IDPTRIMMING, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IDPTRIMMING, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFIDPTrimming) kElem.getNextSiblingElement(ElementName.IDPTRIMMING, null);
+        final Vector<JDFIDPTrimming> v = new Vector<JDFIDPTrimming>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFIDPTrimming) vc.get(i));
         }
 
         return v;

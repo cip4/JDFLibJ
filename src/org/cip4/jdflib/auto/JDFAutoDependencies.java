@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFLayoutElement;
 
 public abstract class JDFAutoDependencies extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoDependencies extends JDFElement
     /**
      * Get all LayoutElement from the current element
      * 
-     * @return Collection<JDFLayoutElement>
+     * @return Collection<JDFLayoutElement>, null if none are available
      */
     public Collection<JDFLayoutElement> getAllLayoutElement()
     {
-        Vector<JDFLayoutElement> v = new Vector<JDFLayoutElement>();
-
-        JDFLayoutElement kElem = (JDFLayoutElement) getFirstChildElement(ElementName.LAYOUTELEMENT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.LAYOUTELEMENT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFLayoutElement) kElem.getNextSiblingElement(ElementName.LAYOUTELEMENT, null);
+        final Vector<JDFLayoutElement> v = new Vector<JDFLayoutElement>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFLayoutElement) vc.get(i));
         }
 
         return v;

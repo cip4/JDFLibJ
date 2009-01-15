@@ -70,38 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.w3c.dom.Element;                         
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.*;                           
-import org.cip4.jdflib.auto.*;                      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.node.*;                      
-import org.cip4.jdflib.pool.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.postpress.*;
-import org.cip4.jdflib.resource.process.press.*;    
-import org.cip4.jdflib.resource.process.prepress.*; 
-import org.cip4.jdflib.util.*;           
-    /*
-    *****************************************************************************
-    class JDFAutoControllerFilter : public JDFElement
-
-    *****************************************************************************
-    */
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
 
 public abstract class JDFAutoControllerFilter extends JDFElement
 {
@@ -115,7 +95,8 @@ public abstract class JDFAutoControllerFilter extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.URLTYPES, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumURLTypes.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -165,7 +146,8 @@ public abstract class JDFAutoControllerFilter extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoControllerFilter[  --> " + super.toString() + " ]";
     }

@@ -70,11 +70,23 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.resource.devicecapability.JDFLoc;
 
 public abstract class JDFAutoDevCap extends JDFElement
 {
@@ -403,19 +415,20 @@ public abstract class JDFAutoDevCap extends JDFElement
     /**
      * Get all Loc from the current element
      * 
-     * @return Collection<JDFLoc>
+     * @return Collection<JDFLoc>, null if none are available
      */
     public Collection<JDFLoc> getAllLoc()
     {
-        Vector<JDFLoc> v = new Vector<JDFLoc>();
-
-        JDFLoc kElem = (JDFLoc) getFirstChildElement(ElementName.LOC, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.LOC, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFLoc) kElem.getNextSiblingElement(ElementName.LOC, null);
+        final Vector<JDFLoc> v = new Vector<JDFLoc>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFLoc) vc.get(i));
         }
 
         return v;

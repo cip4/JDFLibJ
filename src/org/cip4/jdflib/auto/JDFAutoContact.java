@@ -70,12 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFAddress;
+import org.cip4.jdflib.resource.process.JDFComChannel;
+import org.cip4.jdflib.resource.process.JDFCompany;
+import org.cip4.jdflib.resource.process.JDFPerson;
 
 public abstract class JDFAutoContact extends JDFResource
 {
@@ -293,19 +306,20 @@ public abstract class JDFAutoContact extends JDFResource
     /**
      * Get all ComChannel from the current element
      * 
-     * @return Collection<JDFComChannel>
+     * @return Collection<JDFComChannel>, null if none are available
      */
     public Collection<JDFComChannel> getAllComChannel()
     {
-        Vector<JDFComChannel> v = new Vector<JDFComChannel>();
-
-        JDFComChannel kElem = (JDFComChannel) getFirstChildElement(ElementName.COMCHANNEL, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.COMCHANNEL, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFComChannel) kElem.getNextSiblingElement(ElementName.COMCHANNEL, null);
+        final Vector<JDFComChannel> v = new Vector<JDFComChannel>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFComChannel) vc.get(i));
         }
 
         return v;

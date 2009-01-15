@@ -70,12 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFCollatingItem;
+import org.cip4.jdflib.resource.process.JDFFeeder;
 
 public abstract class JDFAutoFeedingParams extends JDFResource
 {
@@ -191,19 +197,20 @@ public abstract class JDFAutoFeedingParams extends JDFResource
     /**
      * Get all Feeder from the current element
      * 
-     * @return Collection<JDFFeeder>
+     * @return Collection<JDFFeeder>, null if none are available
      */
     public Collection<JDFFeeder> getAllFeeder()
     {
-        Vector<JDFFeeder> v = new Vector<JDFFeeder>();
-
-        JDFFeeder kElem = (JDFFeeder) getFirstChildElement(ElementName.FEEDER, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.FEEDER, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFFeeder) kElem.getNextSiblingElement(ElementName.FEEDER, null);
+        final Vector<JDFFeeder> v = new Vector<JDFFeeder>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFFeeder) vc.get(i));
         }
 
         return v;
@@ -240,19 +247,20 @@ public abstract class JDFAutoFeedingParams extends JDFResource
     /**
      * Get all CollatingItem from the current element
      * 
-     * @return Collection<JDFCollatingItem>
+     * @return Collection<JDFCollatingItem>, null if none are available
      */
     public Collection<JDFCollatingItem> getAllCollatingItem()
     {
-        Vector<JDFCollatingItem> v = new Vector<JDFCollatingItem>();
-
-        JDFCollatingItem kElem = (JDFCollatingItem) getFirstChildElement(ElementName.COLLATINGITEM, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.COLLATINGITEM, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCollatingItem) kElem.getNextSiblingElement(ElementName.COLLATINGITEM, null);
+        final Vector<JDFCollatingItem> v = new Vector<JDFCollatingItem>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCollatingItem) vc.get(i));
         }
 
         return v;

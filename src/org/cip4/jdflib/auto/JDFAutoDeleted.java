@@ -70,11 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 
 public abstract class JDFAutoDeleted extends JDFAudit
 {
@@ -194,7 +204,8 @@ public abstract class JDFAutoDeleted extends JDFAudit
      * @param iSkip number of elements to skip
      * @return JDFEmployee the element
      */
-    public JDFEmployee getCreateEmployee(int iSkip)
+    @Override
+	public JDFEmployee getCreateEmployee(int iSkip)
     {
         return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
@@ -204,7 +215,8 @@ public abstract class JDFAutoDeleted extends JDFAudit
      * @param iSkip number of elements to skip
      * @return JDFEmployee the element
      * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
+    @Override
+	public JDFEmployee getEmployee(int iSkip)
     {
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
@@ -212,19 +224,21 @@ public abstract class JDFAutoDeleted extends JDFAudit
     /**
      * Get all Employee from the current element
      * 
-     * @return Collection<JDFEmployee>
+     * @return Collection<JDFEmployee>, null if none are available
      */
-    public Collection<JDFEmployee> getAllEmployee()
+    @Override
+	public Collection<JDFEmployee> getAllEmployee()
     {
-        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-
-        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFEmployee) vc.get(i));
         }
 
         return v;
@@ -233,7 +247,8 @@ public abstract class JDFAutoDeleted extends JDFAudit
     /**
      * (30) append element Employee
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    @Override
+	public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }

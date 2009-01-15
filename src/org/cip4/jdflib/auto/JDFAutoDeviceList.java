@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
 
 public abstract class JDFAutoDeviceList extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoDeviceList extends JDFElement
     /**
      * Get all DeviceInfo from the current element
      * 
-     * @return Collection<JDFDeviceInfo>
+     * @return Collection<JDFDeviceInfo>, null if none are available
      */
     public Collection<JDFDeviceInfo> getAllDeviceInfo()
     {
-        Vector<JDFDeviceInfo> v = new Vector<JDFDeviceInfo>();
-
-        JDFDeviceInfo kElem = (JDFDeviceInfo) getFirstChildElement(ElementName.DEVICEINFO, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DEVICEINFO, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDeviceInfo) kElem.getNextSiblingElement(ElementName.DEVICEINFO, null);
+        final Vector<JDFDeviceInfo> v = new Vector<JDFDeviceInfo>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDeviceInfo) vc.get(i));
         }
 
         return v;
