@@ -60,9 +60,10 @@ public class AutoTest extends TestCase
 		vOptional = markObject.getTheElementInfo().optionalElements();
 		assertTrue(vOptional.contains(ElementName.DEVICEMARK));
 
-		root.setVersion(JDFElement.EnumVersion.Version_1_3);
-		vDeprecated = markObject.getTheElementInfo().deprecatedElements();
-		assertTrue(vDeprecated.contains(ElementName.DEVICEMARK));
+//		DeviceMark is again allowed in 1.4		
+//		root.setVersion(JDFElement.EnumVersion.Version_1_3);
+//		vDeprecated = markObject.getTheElementInfo().deprecatedElements();
+//		assertTrue(vDeprecated.contains(ElementName.DEVICEMARK));
 	}
 
 }
