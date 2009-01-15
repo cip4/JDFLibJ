@@ -704,7 +704,7 @@ public class KElementTest extends JDFTestCaseBase
 			k.copyElement(d2.getElement("kid"), null);
 		}
 		k.removeChildren("kid", null, null);
-		assertEquals(getCurrentMem(), mem, 100000); // allow 100 per element
+		assertEquals(getCurrentMem(), mem, 150000); // allow 150 per element
 	}
 
 	/**
