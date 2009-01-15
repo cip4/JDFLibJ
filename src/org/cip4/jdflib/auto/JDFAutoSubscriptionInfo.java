@@ -70,38 +70,22 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.w3c.dom.Element;                         
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.*;                           
-import org.cip4.jdflib.auto.*;                      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.node.*;                      
-import org.cip4.jdflib.pool.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.postpress.*;
-import org.cip4.jdflib.resource.process.press.*;    
-import org.cip4.jdflib.resource.process.prepress.*; 
-import org.cip4.jdflib.util.*;           
-    /*
-    *****************************************************************************
-    class JDFAutoSubscriptionInfo : public JDFElement
-
-    *****************************************************************************
-    */
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFSubscription;
+import org.cip4.jdflib.resource.JDFPart;
 
 public abstract class JDFAutoSubscriptionInfo extends JDFElement
 {
@@ -120,7 +104,8 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -133,7 +118,8 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -183,7 +169,8 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoSubscriptionInfo[  --> " + super.toString() + " ]";
     }
@@ -375,19 +362,20 @@ public abstract class JDFAutoSubscriptionInfo extends JDFElement
     /**
      * Get all Part from the current element
      * 
-     * @return Collection<JDFPart>
+     * @return Collection<JDFPart>, null if none are available
      */
     public Collection<JDFPart> getAllPart()
     {
-        Vector<JDFPart> v = new Vector<JDFPart>();
-
-        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PART, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        final Vector<JDFPart> v = new Vector<JDFPart>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPart) vc.get(i));
         }
 
         return v;

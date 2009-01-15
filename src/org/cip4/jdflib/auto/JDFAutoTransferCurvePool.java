@@ -70,12 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFTransferCurveSet;
 
 public abstract class JDFAutoTransferCurvePool extends JDFResource
 {
@@ -190,19 +195,20 @@ public abstract class JDFAutoTransferCurvePool extends JDFResource
     /**
      * Get all TransferCurveSet from the current element
      * 
-     * @return Collection<JDFTransferCurveSet>
+     * @return Collection<JDFTransferCurveSet>, null if none are available
      */
     public Collection<JDFTransferCurveSet> getAllTransferCurveSet()
     {
-        Vector<JDFTransferCurveSet> v = new Vector<JDFTransferCurveSet>();
-
-        JDFTransferCurveSet kElem = (JDFTransferCurveSet) getFirstChildElement(ElementName.TRANSFERCURVESET, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TRANSFERCURVESET, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTransferCurveSet) kElem.getNextSiblingElement(ElementName.TRANSFERCURVESET, null);
+        final Vector<JDFTransferCurveSet> v = new Vector<JDFTransferCurveSet>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTransferCurveSet) vc.get(i));
         }
 
         return v;

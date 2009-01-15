@@ -70,12 +70,20 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFScreenSelector;
 
 public abstract class JDFAutoScreeningParams extends JDFResource
 {
@@ -252,19 +260,20 @@ public abstract class JDFAutoScreeningParams extends JDFResource
     /**
      * Get all ScreenSelector from the current element
      * 
-     * @return Collection<JDFScreenSelector>
+     * @return Collection<JDFScreenSelector>, null if none are available
      */
     public Collection<JDFScreenSelector> getAllScreenSelector()
     {
-        Vector<JDFScreenSelector> v = new Vector<JDFScreenSelector>();
-
-        JDFScreenSelector kElem = (JDFScreenSelector) getFirstChildElement(ElementName.SCREENSELECTOR, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.SCREENSELECTOR, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFScreenSelector) kElem.getNextSiblingElement(ElementName.SCREENSELECTOR, null);
+        final Vector<JDFScreenSelector> v = new Vector<JDFScreenSelector>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFScreenSelector) vc.get(i));
         }
 
         return v;

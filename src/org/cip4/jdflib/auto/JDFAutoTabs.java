@@ -70,11 +70,23 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.span.JDFNumberSpan;
+import org.cip4.jdflib.span.JDFOptionSpan;
+import org.cip4.jdflib.span.JDFSpanNamedColor;
+import org.cip4.jdflib.span.JDFStringSpan;
 
 public abstract class JDFAutoTabs extends JDFElement
 {
@@ -420,19 +432,20 @@ public abstract class JDFAutoTabs extends JDFElement
     /**
      * Get all TabMylarColorDetails from the current element
      * 
-     * @return Collection<JDFStringSpan>
+     * @return Collection<JDFStringSpan>, null if none are available
      */
     public Collection<JDFStringSpan> getAllTabMylarColorDetails()
     {
-        Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
-
-        JDFStringSpan kElem = (JDFStringSpan) getFirstChildElement(ElementName.TABMYLARCOLORDETAILS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TABMYLARCOLORDETAILS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFStringSpan) kElem.getNextSiblingElement(ElementName.TABMYLARCOLORDETAILS, null);
+        final Vector<JDFStringSpan> v = new Vector<JDFStringSpan>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFStringSpan) vc.get(i));
         }
 
         return v;

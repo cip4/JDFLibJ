@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.intent.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.intent.JDFShapeCut;
 
 public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
     /**
      * Get all ShapeCut from the current element
      * 
-     * @return Collection<JDFShapeCut>
+     * @return Collection<JDFShapeCut>, null if none are available
      */
     public Collection<JDFShapeCut> getAllShapeCut()
     {
-        Vector<JDFShapeCut> v = new Vector<JDFShapeCut>();
-
-        JDFShapeCut kElem = (JDFShapeCut) getFirstChildElement(ElementName.SHAPECUT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.SHAPECUT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFShapeCut) kElem.getNextSiblingElement(ElementName.SHAPECUT, null);
+        final Vector<JDFShapeCut> v = new Vector<JDFShapeCut>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFShapeCut) vc.get(i));
         }
 
         return v;

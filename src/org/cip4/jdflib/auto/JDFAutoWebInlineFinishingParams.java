@@ -70,12 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFFolderProduction;
 
 public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
 {
@@ -190,19 +195,20 @@ public abstract class JDFAutoWebInlineFinishingParams extends JDFResource
     /**
      * Get all FolderProduction from the current element
      * 
-     * @return Collection<JDFFolderProduction>
+     * @return Collection<JDFFolderProduction>, null if none are available
      */
     public Collection<JDFFolderProduction> getAllFolderProduction()
     {
-        Vector<JDFFolderProduction> v = new Vector<JDFFolderProduction>();
-
-        JDFFolderProduction kElem = (JDFFolderProduction) getFirstChildElement(ElementName.FOLDERPRODUCTION, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.FOLDERPRODUCTION, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFFolderProduction) kElem.getNextSiblingElement(ElementName.FOLDERPRODUCTION, null);
+        final Vector<JDFFolderProduction> v = new Vector<JDFFolderProduction>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFFolderProduction) vc.get(i));
         }
 
         return v;

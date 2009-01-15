@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.devicecapability.JDFTest;
 
 public abstract class JDFAutoTestPool extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoTestPool extends JDFElement
     /**
      * Get all Test from the current element
      * 
-     * @return Collection<JDFTest>
+     * @return Collection<JDFTest>, null if none are available
      */
     public Collection<JDFTest> getAllTest()
     {
-        Vector<JDFTest> v = new Vector<JDFTest>();
-
-        JDFTest kElem = (JDFTest) getFirstChildElement(ElementName.TEST, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TEST, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTest) kElem.getNextSiblingElement(ElementName.TEST, null);
+        final Vector<JDFTest> v = new Vector<JDFTest>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTest) vc.get(i));
         }
 
         return v;

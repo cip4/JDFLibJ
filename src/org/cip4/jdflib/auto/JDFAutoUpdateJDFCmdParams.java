@@ -70,11 +70,20 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFCreateLink;
+import org.cip4.jdflib.jmf.JDFCreateResource;
+import org.cip4.jdflib.jmf.JDFMoveResource;
+import org.cip4.jdflib.jmf.JDFRemoveLink;
 
 public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
 {
@@ -176,19 +185,20 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     /**
      * Get all CreateLink from the current element
      * 
-     * @return Collection<JDFCreateLink>
+     * @return Collection<JDFCreateLink>, null if none are available
      */
     public Collection<JDFCreateLink> getAllCreateLink()
     {
-        Vector<JDFCreateLink> v = new Vector<JDFCreateLink>();
-
-        JDFCreateLink kElem = (JDFCreateLink) getFirstChildElement(ElementName.CREATELINK, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CREATELINK, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCreateLink) kElem.getNextSiblingElement(ElementName.CREATELINK, null);
+        final Vector<JDFCreateLink> v = new Vector<JDFCreateLink>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCreateLink) vc.get(i));
         }
 
         return v;
@@ -225,19 +235,20 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     /**
      * Get all CreateResource from the current element
      * 
-     * @return Collection<JDFCreateResource>
+     * @return Collection<JDFCreateResource>, null if none are available
      */
     public Collection<JDFCreateResource> getAllCreateResource()
     {
-        Vector<JDFCreateResource> v = new Vector<JDFCreateResource>();
-
-        JDFCreateResource kElem = (JDFCreateResource) getFirstChildElement(ElementName.CREATERESOURCE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CREATERESOURCE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFCreateResource) kElem.getNextSiblingElement(ElementName.CREATERESOURCE, null);
+        final Vector<JDFCreateResource> v = new Vector<JDFCreateResource>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFCreateResource) vc.get(i));
         }
 
         return v;
@@ -274,19 +285,20 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     /**
      * Get all MoveResource from the current element
      * 
-     * @return Collection<JDFMoveResource>
+     * @return Collection<JDFMoveResource>, null if none are available
      */
     public Collection<JDFMoveResource> getAllMoveResource()
     {
-        Vector<JDFMoveResource> v = new Vector<JDFMoveResource>();
-
-        JDFMoveResource kElem = (JDFMoveResource) getFirstChildElement(ElementName.MOVERESOURCE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MOVERESOURCE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFMoveResource) kElem.getNextSiblingElement(ElementName.MOVERESOURCE, null);
+        final Vector<JDFMoveResource> v = new Vector<JDFMoveResource>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFMoveResource) vc.get(i));
         }
 
         return v;
@@ -323,19 +335,20 @@ public abstract class JDFAutoUpdateJDFCmdParams extends JDFElement
     /**
      * Get all RemoveLink from the current element
      * 
-     * @return Collection<JDFRemoveLink>
+     * @return Collection<JDFRemoveLink>, null if none are available
      */
     public Collection<JDFRemoveLink> getAllRemoveLink()
     {
-        Vector<JDFRemoveLink> v = new Vector<JDFRemoveLink>();
-
-        JDFRemoveLink kElem = (JDFRemoveLink) getFirstChildElement(ElementName.REMOVELINK, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.REMOVELINK, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFRemoveLink) kElem.getNextSiblingElement(ElementName.REMOVELINK, null);
+        final Vector<JDFRemoveLink> v = new Vector<JDFRemoveLink>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFRemoveLink) vc.get(i));
         }
 
         return v;

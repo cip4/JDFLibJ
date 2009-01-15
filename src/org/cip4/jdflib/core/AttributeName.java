@@ -327,6 +327,8 @@ public final class AttributeName
 	public static final String CLASSNAME = "ClassName";
 	public static final String CLEANUPDURATION = "CleanupDuration";
 	public static final String CLIPBOX = "ClipBox";
+	public static final String CLIPBOXFORMAT = "ClipBoxFormat";
+	public static final String CLIPBOXTEMPLATE = "ClipBoxTemplate";
 	public static final String CLIPOFFSET = "ClipOffset";
 	public static final String CLIPPATH = "ClipPath";
 	public static final String CMYK = "CMYK";
@@ -361,7 +363,8 @@ public final class AttributeName
 	public static final String COMPANY = "Company";
 	public static final String COMPENSATE = "Compensate";
 	public static final String COMPENSATION = "Compensation";
-	public static final String COMPENSATIONCTM = "CompensationCTM";
+	public static final String COMPENSATIONCTMFORMAT = "CompensationCTMFormat";
+	public static final String COMPENSATIONCTMTEMPLATE = "CompensationCTMTemplate";
 	public static final String COMPENSATIONPROCESS = "CompensationProcess";
 	public static final String COMPENSATIONVALUE = "CompensationValue";
 	public static final String COMPLETED = "Completed";
@@ -917,6 +920,7 @@ public final class AttributeName
 	public static final String LOGERRORS = "LogErrors";
 	public static final String LOGICALPAGE = "LogicalPage";
 	public static final String LOGICALPRINTERSECTION = "LogicalPrinterSection";
+	public static final String LOGICALSTACKORD = "LogicalStackOrd";
 	public static final String LOTCONTROL = "LotControl";
 	public static final String LOTCONTROLLED = "LotControlled";
 	public static final String LOTDETAILS = "LotDetails";
@@ -1584,7 +1588,6 @@ public final class AttributeName
 	public static final String SRGB = "sRGB";
 	public static final String STACKCOMPRESSION = "StackCompression";
 	public static final String STACKDEPTH = "StackDepth";
-	public static final String STACKORD = "StackOrd";
 	public static final String STAGGERCOLUMNS = "StaggerColumns";
 	public static final String STAGGERCONTINUOUS = "StaggerContinuous";
 	public static final String STAGGERROWS = "StaggerRows";
@@ -1851,4 +1854,5 @@ public final class AttributeName
 	public static final String ZONESETTINGSY = "ZoneSettingsY";
 	public static final String ZONESY = "ZonesY";
 	public static final String ZONEWIDTH = "ZoneWidth";
+	
 }

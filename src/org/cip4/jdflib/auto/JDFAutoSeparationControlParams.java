@@ -70,12 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFTransferFunctionControl;
+import org.cip4.jdflib.resource.process.JDFAutomatedOverPrintParams;
 
 public abstract class JDFAutoSeparationControlParams extends JDFResource
 {
@@ -191,19 +197,20 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     /**
      * Get all AutomatedOverPrintParams from the current element
      * 
-     * @return Collection<JDFAutomatedOverPrintParams>
+     * @return Collection<JDFAutomatedOverPrintParams>, null if none are available
      */
     public Collection<JDFAutomatedOverPrintParams> getAllAutomatedOverPrintParams()
     {
-        Vector<JDFAutomatedOverPrintParams> v = new Vector<JDFAutomatedOverPrintParams>();
-
-        JDFAutomatedOverPrintParams kElem = (JDFAutomatedOverPrintParams) getFirstChildElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFAutomatedOverPrintParams) kElem.getNextSiblingElement(ElementName.AUTOMATEDOVERPRINTPARAMS, null);
+        final Vector<JDFAutomatedOverPrintParams> v = new Vector<JDFAutomatedOverPrintParams>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFAutomatedOverPrintParams) vc.get(i));
         }
 
         return v;
@@ -249,19 +256,20 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     /**
      * Get all TransferFunctionControl from the current element
      * 
-     * @return Collection<JDFTransferFunctionControl>
+     * @return Collection<JDFTransferFunctionControl>, null if none are available
      */
     public Collection<JDFTransferFunctionControl> getAllTransferFunctionControl()
     {
-        Vector<JDFTransferFunctionControl> v = new Vector<JDFTransferFunctionControl>();
-
-        JDFTransferFunctionControl kElem = (JDFTransferFunctionControl) getFirstChildElement(ElementName.TRANSFERFUNCTIONCONTROL, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TRANSFERFUNCTIONCONTROL, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTransferFunctionControl) kElem.getNextSiblingElement(ElementName.TRANSFERFUNCTIONCONTROL, null);
+        final Vector<JDFTransferFunctionControl> v = new Vector<JDFTransferFunctionControl>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTransferFunctionControl) vc.get(i));
         }
 
         return v;

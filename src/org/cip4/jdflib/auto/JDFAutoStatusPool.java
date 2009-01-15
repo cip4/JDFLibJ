@@ -70,11 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.pool.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFPartStatus;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.pool.JDFPool;
 
 public abstract class JDFAutoStatusPool extends JDFPool
 {
@@ -213,19 +223,20 @@ public abstract class JDFAutoStatusPool extends JDFPool
     /**
      * Get all PartStatus from the current element
      * 
-     * @return Collection<JDFPartStatus>
+     * @return Collection<JDFPartStatus>, null if none are available
      */
     public Collection<JDFPartStatus> getAllPartStatus()
     {
-        Vector<JDFPartStatus> v = new Vector<JDFPartStatus>();
-
-        JDFPartStatus kElem = (JDFPartStatus) getFirstChildElement(ElementName.PARTSTATUS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PARTSTATUS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPartStatus) kElem.getNextSiblingElement(ElementName.PARTSTATUS, null);
+        final Vector<JDFPartStatus> v = new Vector<JDFPartStatus>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPartStatus) vc.get(i));
         }
 
         return v;

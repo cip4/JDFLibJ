@@ -70,15 +70,26 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.resource.JDFMarkObject;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFMediaSource;
 
 public abstract class JDFAutoTile extends JDFResource
 {
@@ -281,19 +292,20 @@ public abstract class JDFAutoTile extends JDFResource
     /**
      * Get all MarkObject from the current element
      * 
-     * @return Collection<JDFMarkObject>
+     * @return Collection<JDFMarkObject>, null if none are available
      */
     public Collection<JDFMarkObject> getAllMarkObject()
     {
-        Vector<JDFMarkObject> v = new Vector<JDFMarkObject>();
-
-        JDFMarkObject kElem = (JDFMarkObject) getFirstChildElement(ElementName.MARKOBJECT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MARKOBJECT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFMarkObject) kElem.getNextSiblingElement(ElementName.MARKOBJECT, null);
+        final Vector<JDFMarkObject> v = new Vector<JDFMarkObject>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFMarkObject) vc.get(i));
         }
 
         return v;

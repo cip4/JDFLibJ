@@ -70,12 +70,23 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFAdded;
+import org.cip4.jdflib.jmf.JDFChangedPath;
+import org.cip4.jdflib.resource.JDFChangedAttribute;
+import org.cip4.jdflib.resource.JDFRemoved;
+import org.cip4.jdflib.resource.JDFResource;
 
 public abstract class JDFAutoTrigger extends JDFResource
 {
@@ -255,19 +266,20 @@ public abstract class JDFAutoTrigger extends JDFResource
     /**
      * Get all ChangedAttribute from the current element
      * 
-     * @return Collection<JDFChangedAttribute>
+     * @return Collection<JDFChangedAttribute>, null if none are available
      */
     public Collection<JDFChangedAttribute> getAllChangedAttribute()
     {
-        Vector<JDFChangedAttribute> v = new Vector<JDFChangedAttribute>();
-
-        JDFChangedAttribute kElem = (JDFChangedAttribute) getFirstChildElement(ElementName.CHANGEDATTRIBUTE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CHANGEDATTRIBUTE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFChangedAttribute) kElem.getNextSiblingElement(ElementName.CHANGEDATTRIBUTE, null);
+        final Vector<JDFChangedAttribute> v = new Vector<JDFChangedAttribute>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFChangedAttribute) vc.get(i));
         }
 
         return v;
@@ -330,19 +342,20 @@ public abstract class JDFAutoTrigger extends JDFResource
     /**
      * Get all ChangedPath from the current element
      * 
-     * @return Collection<JDFChangedPath>
+     * @return Collection<JDFChangedPath>, null if none are available
      */
     public Collection<JDFChangedPath> getAllChangedPath()
     {
-        Vector<JDFChangedPath> v = new Vector<JDFChangedPath>();
-
-        JDFChangedPath kElem = (JDFChangedPath) getFirstChildElement(ElementName.CHANGEDPATH, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CHANGEDPATH, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFChangedPath) kElem.getNextSiblingElement(ElementName.CHANGEDPATH, null);
+        final Vector<JDFChangedPath> v = new Vector<JDFChangedPath>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFChangedPath) vc.get(i));
         }
 
         return v;

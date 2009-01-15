@@ -70,18 +70,28 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.process.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.process.JDFTIFFEmbeddedFile;
+import org.cip4.jdflib.resource.process.JDFTIFFtag;
 
 public abstract class JDFAutoTIFFFormatParams extends JDFElement
 {
@@ -461,19 +471,20 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
     /**
      * Get all TIFFtag from the current element
      * 
-     * @return Collection<JDFTIFFtag>
+     * @return Collection<JDFTIFFtag>, null if none are available
      */
     public Collection<JDFTIFFtag> getAllTIFFtag()
     {
-        Vector<JDFTIFFtag> v = new Vector<JDFTIFFtag>();
-
-        JDFTIFFtag kElem = (JDFTIFFtag) getFirstChildElement(ElementName.TIFFTAG, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TIFFTAG, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTIFFtag) kElem.getNextSiblingElement(ElementName.TIFFTAG, null);
+        final Vector<JDFTIFFtag> v = new Vector<JDFTIFFtag>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTIFFtag) vc.get(i));
         }
 
         return v;
@@ -510,19 +521,20 @@ public abstract class JDFAutoTIFFFormatParams extends JDFElement
     /**
      * Get all TIFFEmbeddedFile from the current element
      * 
-     * @return Collection<JDFTIFFEmbeddedFile>
+     * @return Collection<JDFTIFFEmbeddedFile>, null if none are available
      */
     public Collection<JDFTIFFEmbeddedFile> getAllTIFFEmbeddedFile()
     {
-        Vector<JDFTIFFEmbeddedFile> v = new Vector<JDFTIFFEmbeddedFile>();
-
-        JDFTIFFEmbeddedFile kElem = (JDFTIFFEmbeddedFile) getFirstChildElement(ElementName.TIFFEMBEDDEDFILE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TIFFEMBEDDEDFILE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTIFFEmbeddedFile) kElem.getNextSiblingElement(ElementName.TIFFEMBEDDEDFILE, null);
+        final Vector<JDFTIFFEmbeddedFile> v = new Vector<JDFTIFFEmbeddedFile>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTIFFEmbeddedFile) vc.get(i));
         }
 
         return v;

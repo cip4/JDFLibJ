@@ -70,19 +70,34 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFPosition;
+import org.cip4.jdflib.resource.process.JDFStripCellParams;
+import org.cip4.jdflib.resource.process.JDFStripMark;
 
 public abstract class JDFAutoStrippingParams extends JDFResource
 {
@@ -571,19 +586,20 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     /**
      * Get all Device from the current element
      * 
-     * @return Collection<JDFDevice>
+     * @return Collection<JDFDevice>, null if none are available
      */
     public Collection<JDFDevice> getAllDevice()
     {
-        Vector<JDFDevice> v = new Vector<JDFDevice>();
-
-        JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DEVICE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
+        final Vector<JDFDevice> v = new Vector<JDFDevice>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDevice) vc.get(i));
         }
 
         return v;
@@ -664,19 +680,20 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     /**
      * Get all Media from the current element
      * 
-     * @return Collection<JDFMedia>
+     * @return Collection<JDFMedia>, null if none are available
      */
     public Collection<JDFMedia> getAllMedia()
     {
-        Vector<JDFMedia> v = new Vector<JDFMedia>();
-
-        JDFMedia kElem = (JDFMedia) getFirstChildElement(ElementName.MEDIA, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MEDIA, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFMedia) kElem.getNextSiblingElement(ElementName.MEDIA, null);
+        final Vector<JDFMedia> v = new Vector<JDFMedia>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFMedia) vc.get(i));
         }
 
         return v;
@@ -722,19 +739,20 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     /**
      * Get all Position from the current element
      * 
-     * @return Collection<JDFPosition>
+     * @return Collection<JDFPosition>, null if none are available
      */
     public Collection<JDFPosition> getAllPosition()
     {
-        Vector<JDFPosition> v = new Vector<JDFPosition>();
-
-        JDFPosition kElem = (JDFPosition) getFirstChildElement(ElementName.POSITION, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.POSITION, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPosition) kElem.getNextSiblingElement(ElementName.POSITION, null);
+        final Vector<JDFPosition> v = new Vector<JDFPosition>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPosition) vc.get(i));
         }
 
         return v;
@@ -797,19 +815,20 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     /**
      * Get all StripMark from the current element
      * 
-     * @return Collection<JDFStripMark>
+     * @return Collection<JDFStripMark>, null if none are available
      */
     public Collection<JDFStripMark> getAllStripMark()
     {
-        Vector<JDFStripMark> v = new Vector<JDFStripMark>();
-
-        JDFStripMark kElem = (JDFStripMark) getFirstChildElement(ElementName.STRIPMARK, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.STRIPMARK, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFStripMark) kElem.getNextSiblingElement(ElementName.STRIPMARK, null);
+        final Vector<JDFStripMark> v = new Vector<JDFStripMark>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFStripMark) vc.get(i));
         }
 
         return v;

@@ -70,19 +70,35 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFNameRangeList;
+import org.cip4.jdflib.resource.JDFPageList;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFByteMap;
+import org.cip4.jdflib.resource.process.JDFDisposition;
+import org.cip4.jdflib.resource.process.JDFDynamicInput;
+import org.cip4.jdflib.resource.process.JDFInsertSheet;
+import org.cip4.jdflib.resource.process.JDFInterpretedPDLData;
+import org.cip4.jdflib.resource.process.JDFLayoutElement;
 
 public abstract class JDFAutoRunList extends JDFResource
 {
@@ -1011,19 +1027,20 @@ public abstract class JDFAutoRunList extends JDFResource
     /**
      * Get all DynamicInput from the current element
      * 
-     * @return Collection<JDFDynamicInput>
+     * @return Collection<JDFDynamicInput>, null if none are available
      */
     public Collection<JDFDynamicInput> getAllDynamicInput()
     {
-        Vector<JDFDynamicInput> v = new Vector<JDFDynamicInput>();
-
-        JDFDynamicInput kElem = (JDFDynamicInput) getFirstChildElement(ElementName.DYNAMICINPUT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DYNAMICINPUT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDynamicInput) kElem.getNextSiblingElement(ElementName.DYNAMICINPUT, null);
+        final Vector<JDFDynamicInput> v = new Vector<JDFDynamicInput>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDynamicInput) vc.get(i));
         }
 
         return v;
@@ -1060,19 +1077,20 @@ public abstract class JDFAutoRunList extends JDFResource
     /**
      * Get all InsertSheet from the current element
      * 
-     * @return Collection<JDFInsertSheet>
+     * @return Collection<JDFInsertSheet>, null if none are available
      */
     public Collection<JDFInsertSheet> getAllInsertSheet()
     {
-        Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
-
-        JDFInsertSheet kElem = (JDFInsertSheet) getFirstChildElement(ElementName.INSERTSHEET, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.INSERTSHEET, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFInsertSheet) kElem.getNextSiblingElement(ElementName.INSERTSHEET, null);
+        final Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFInsertSheet) vc.get(i));
         }
 
         return v;

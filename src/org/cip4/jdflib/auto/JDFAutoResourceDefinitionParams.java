@@ -70,15 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResourceParam;
 
 public abstract class JDFAutoResourceDefinitionParams extends JDFResource
 {
@@ -323,19 +333,20 @@ public abstract class JDFAutoResourceDefinitionParams extends JDFResource
     /**
      * Get all ResourceParam from the current element
      * 
-     * @return Collection<JDFResourceParam>
+     * @return Collection<JDFResourceParam>, null if none are available
      */
     public Collection<JDFResourceParam> getAllResourceParam()
     {
-        Vector<JDFResourceParam> v = new Vector<JDFResourceParam>();
-
-        JDFResourceParam kElem = (JDFResourceParam) getFirstChildElement(ElementName.RESOURCEPARAM, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.RESOURCEPARAM, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFResourceParam) kElem.getNextSiblingElement(ElementName.RESOURCEPARAM, null);
+        final Vector<JDFResourceParam> v = new Vector<JDFResourceParam>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFResourceParam) vc.get(i));
         }
 
         return v;

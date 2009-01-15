@@ -70,16 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFColorantZoneDetails;
 
 public abstract class JDFAutoTrappingParams extends JDFResource
 {
@@ -740,19 +749,20 @@ public abstract class JDFAutoTrappingParams extends JDFResource
     /**
      * Get all ColorantZoneDetails from the current element
      * 
-     * @return Collection<JDFColorantZoneDetails>
+     * @return Collection<JDFColorantZoneDetails>, null if none are available
      */
     public Collection<JDFColorantZoneDetails> getAllColorantZoneDetails()
     {
-        Vector<JDFColorantZoneDetails> v = new Vector<JDFColorantZoneDetails>();
-
-        JDFColorantZoneDetails kElem = (JDFColorantZoneDetails) getFirstChildElement(ElementName.COLORANTZONEDETAILS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.COLORANTZONEDETAILS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFColorantZoneDetails) kElem.getNextSiblingElement(ElementName.COLORANTZONEDETAILS, null);
+        final Vector<JDFColorantZoneDetails> v = new Vector<JDFColorantZoneDetails>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFColorantZoneDetails) vc.get(i));
         }
 
         return v;
