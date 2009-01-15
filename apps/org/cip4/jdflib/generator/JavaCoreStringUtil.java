@@ -1329,19 +1329,40 @@ public class JavaCoreStringUtil
 						strbufResult.append(strDepth1).append("/**").append(strLineEnd);
 						strbufResult.append(strDepth1).append(" * Get all ").append(strElementName).append(" from the current element").append(strLineEnd);
 						strbufResult.append(strDepth1).append(" * ").append(strLineEnd);
-						strbufResult.append(strDepth1).append(" * @return Collection<").append(strReturnType).append(">").append(strLineEnd);
+						strbufResult.append(strDepth1).append(" * @return Collection<").append(strReturnType).append(">, null if none are available").append(strLineEnd);
 						strbufResult.append(strDepth1).append(" */").append(strLineEnd);
 						strbufResult.append(strDepth1).append("public Collection<").append(strReturnType).append("> getAll").append(strElementName).append("()").append(strLineEnd);
 						strbufResult.append(strDepth1).append("{").append(strLineEnd);
-						strbufResult.append(strDepth2).append("Vector<").append(strReturnType).append("> v = new Vector<").append(strReturnType).append(">();").append(strLineEnd).append(strLineEnd);
-						strbufResult.append(strDepth2).append(strReturnType).append(" kElem = (").append(strReturnType).append(") getFirstChildElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd).append(strLineEnd);
-						strbufResult.append(strDepth2).append("while (kElem != null)").append(strLineEnd);
+						strbufResult.append(strDepth2).append("final VElement vc = getChildElementVector(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd);
+						strbufResult.append(strDepth2).append("if (vc == null || vc.size() == 0)").append(strLineEnd);
 						strbufResult.append(strDepth2).append("{").append(strLineEnd);
-						strbufResult.append(strDepth3).append("v.add(kElem);").append(strLineEnd).append(strLineEnd);
-						strbufResult.append(strDepth3).append("kElem = (").append(strReturnType).append(") kElem.getNextSiblingElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd);
+						strbufResult.append(strDepth3).append("return null;").append(strLineEnd);
+						strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
+						strbufResult.append(strDepth2).append("final Vector<").append(strReturnType).append("> v = new Vector<").append(strReturnType).append(">();").append(strLineEnd);
+						strbufResult.append(strDepth2).append("for (int i = 0; i < vc.size(); i++)").append(strLineEnd);
+						strbufResult.append(strDepth2).append("{").append(strLineEnd);
+						strbufResult.append(strDepth3).append("v.add((").append(strReturnType).append(") vc.get(i));").append(strLineEnd);
 						strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
 						strbufResult.append(strDepth2).append("return v;").append(strLineEnd);
 						strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);
+
+//						// get Collection
+//						strbufResult.append(strDepth1).append("/**").append(strLineEnd);
+//						strbufResult.append(strDepth1).append(" * Get all ").append(strElementName).append(" from the current element").append(strLineEnd);
+//						strbufResult.append(strDepth1).append(" * ").append(strLineEnd);
+//						strbufResult.append(strDepth1).append(" * @return Collection<").append(strReturnType).append(">").append(strLineEnd);
+//						strbufResult.append(strDepth1).append(" */").append(strLineEnd);
+//						strbufResult.append(strDepth1).append("public Collection<").append(strReturnType).append("> getAll").append(strElementName).append("()").append(strLineEnd);
+//						strbufResult.append(strDepth1).append("{").append(strLineEnd);
+//						strbufResult.append(strDepth2).append("Vector<").append(strReturnType).append("> v = new Vector<").append(strReturnType).append(">();").append(strLineEnd).append(strLineEnd);
+//						strbufResult.append(strDepth2).append(strReturnType).append(" kElem = (").append(strReturnType).append(") getFirstChildElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd).append(strLineEnd);
+//						strbufResult.append(strDepth2).append("while (kElem != null)").append(strLineEnd);
+//						strbufResult.append(strDepth2).append("{").append(strLineEnd);
+//						strbufResult.append(strDepth3).append("v.add(kElem);").append(strLineEnd).append(strLineEnd);
+//						strbufResult.append(strDepth3).append("kElem = (").append(strReturnType).append(") kElem.getNextSiblingElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd);
+//						strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
+//						strbufResult.append(strDepth2).append("return v;").append(strLineEnd);
+//						strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);
 //					    /**
 //					     * (28) const get element Container
 //					     * @param iSkip number of elements to skip
@@ -1425,16 +1446,19 @@ public class JavaCoreStringUtil
 					strbufResult.append(strDepth1).append("/**").append(strLineEnd);
 					strbufResult.append(strDepth1).append(" * Get all ").append(strElementName).append(" from the current element").append(strLineEnd);
 					strbufResult.append(strDepth1).append(" * ").append(strLineEnd);
-					strbufResult.append(strDepth1).append(" * @return Collection<").append(strReturnType).append(">").append(strLineEnd);
+					strbufResult.append(strDepth1).append(" * @return Collection<").append(strReturnType).append(">, null if none are available").append(strLineEnd);
 					strbufResult.append(strDepth1).append(" */").append(strLineEnd);
 					strbufResult.append(strDepth1).append("public Collection<").append(strReturnType).append("> getAll").append(strElementName).append("()").append(strLineEnd);
 					strbufResult.append(strDepth1).append("{").append(strLineEnd);
-					strbufResult.append(strDepth2).append("Vector<").append(strReturnType).append("> v = new Vector<").append(strReturnType).append(">();").append(strLineEnd).append(strLineEnd);
-					strbufResult.append(strDepth2).append(strReturnType).append(" kElem = (").append(strReturnType).append(") getFirstChildElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd).append(strLineEnd);
-					strbufResult.append(strDepth2).append("while (kElem != null)").append(strLineEnd);
+					strbufResult.append(strDepth2).append("final VElement vc = getChildElementVector(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd);
+					strbufResult.append(strDepth2).append("if (vc == null || vc.size() == 0)").append(strLineEnd);
 					strbufResult.append(strDepth2).append("{").append(strLineEnd);
-					strbufResult.append(strDepth3).append("v.add(kElem);").append(strLineEnd).append(strLineEnd);
-					strbufResult.append(strDepth3).append("kElem = (").append(strReturnType).append(") kElem.getNextSiblingElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd);
+					strbufResult.append(strDepth3).append("return null;").append(strLineEnd);
+					strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
+					strbufResult.append(strDepth2).append("final Vector<").append(strReturnType).append("> v = new Vector<").append(strReturnType).append(">();").append(strLineEnd);
+					strbufResult.append(strDepth2).append("for (int i = 0; i < vc.size(); i++)").append(strLineEnd);
+					strbufResult.append(strDepth2).append("{").append(strLineEnd);
+					strbufResult.append(strDepth3).append("v.add((").append(strReturnType).append(") vc.get(i));").append(strLineEnd);
 					strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
 					strbufResult.append(strDepth2).append("return v;").append(strLineEnd);
 					strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);
