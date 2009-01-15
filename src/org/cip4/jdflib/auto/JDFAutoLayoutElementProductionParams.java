@@ -70,13 +70,20 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
+import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
+import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
+import org.cip4.jdflib.resource.process.JDFShapeDef;
 
 public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 {
@@ -194,19 +201,20 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     /**
      * Get all ActionPool from the current element
      * 
-     * @return Collection<JDFActionPool>
+     * @return Collection<JDFActionPool>, null if none are available
      */
     public Collection<JDFActionPool> getAllActionPool()
     {
-        Vector<JDFActionPool> v = new Vector<JDFActionPool>();
-
-        JDFActionPool kElem = (JDFActionPool) getFirstChildElement(ElementName.ACTIONPOOL, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.ACTIONPOOL, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFActionPool) kElem.getNextSiblingElement(ElementName.ACTIONPOOL, null);
+        final Vector<JDFActionPool> v = new Vector<JDFActionPool>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFActionPool) vc.get(i));
         }
 
         return v;
@@ -243,19 +251,20 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     /**
      * Get all LayoutElementPart from the current element
      * 
-     * @return Collection<JDFLayoutElementPart>
+     * @return Collection<JDFLayoutElementPart>, null if none are available
      */
     public Collection<JDFLayoutElementPart> getAllLayoutElementPart()
     {
-        Vector<JDFLayoutElementPart> v = new Vector<JDFLayoutElementPart>();
-
-        JDFLayoutElementPart kElem = (JDFLayoutElementPart) getFirstChildElement(ElementName.LAYOUTELEMENTPART, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.LAYOUTELEMENTPART, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFLayoutElementPart) kElem.getNextSiblingElement(ElementName.LAYOUTELEMENTPART, null);
+        final Vector<JDFLayoutElementPart> v = new Vector<JDFLayoutElementPart>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFLayoutElementPart) vc.get(i));
         }
 
         return v;
@@ -327,19 +336,20 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     /**
      * Get all TestPool from the current element
      * 
-     * @return Collection<JDFTestPool>
+     * @return Collection<JDFTestPool>, null if none are available
      */
     public Collection<JDFTestPool> getAllTestPool()
     {
-        Vector<JDFTestPool> v = new Vector<JDFTestPool>();
-
-        JDFTestPool kElem = (JDFTestPool) getFirstChildElement(ElementName.TESTPOOL, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TESTPOOL, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTestPool) kElem.getNextSiblingElement(ElementName.TESTPOOL, null);
+        final Vector<JDFTestPool> v = new Vector<JDFTestPool>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTestPool) vc.get(i));
         }
 
         return v;

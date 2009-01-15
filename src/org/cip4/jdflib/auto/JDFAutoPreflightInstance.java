@@ -70,14 +70,23 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.process.prepress.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstanceDetail;
 
 public abstract class JDFAutoPreflightInstance extends JDFElement
 {
@@ -250,19 +259,20 @@ public abstract class JDFAutoPreflightInstance extends JDFElement
     /**
      * Get all PreflightInstanceDetail from the current element
      * 
-     * @return Collection<JDFPreflightInstanceDetail>
+     * @return Collection<JDFPreflightInstanceDetail>, null if none are available
      */
     public Collection<JDFPreflightInstanceDetail> getAllPreflightInstanceDetail()
     {
-        Vector<JDFPreflightInstanceDetail> v = new Vector<JDFPreflightInstanceDetail>();
-
-        JDFPreflightInstanceDetail kElem = (JDFPreflightInstanceDetail) getFirstChildElement(ElementName.PREFLIGHTINSTANCEDETAIL, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PREFLIGHTINSTANCEDETAIL, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPreflightInstanceDetail) kElem.getNextSiblingElement(ElementName.PREFLIGHTINSTANCEDETAIL, null);
+        final Vector<JDFPreflightInstanceDetail> v = new Vector<JDFPreflightInstanceDetail>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPreflightInstanceDetail) vc.get(i));
         }
 
         return v;

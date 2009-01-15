@@ -70,12 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 public abstract class JDFAutoIsPresentEvaluation extends JDFResource
 {
@@ -183,19 +188,20 @@ public abstract class JDFAutoIsPresentEvaluation extends JDFResource
     /**
      * Get all BasicPreflightTest from the current element
      * 
-     * @return Collection<JDFBasicPreflightTest>
+     * @return Collection<JDFBasicPreflightTest>, null if none are available
      */
     public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
     {
-        Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
-
-        JDFBasicPreflightTest kElem = (JDFBasicPreflightTest) getFirstChildElement(ElementName.BASICPREFLIGHTTEST, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFBasicPreflightTest) kElem.getNextSiblingElement(ElementName.BASICPREFLIGHTTEST, null);
+        final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFBasicPreflightTest) vc.get(i));
         }
 
         return v;

@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.devicecapability.JDFmacro;
 
 public abstract class JDFAutoMacroPool extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoMacroPool extends JDFElement
     /**
      * Get all macro from the current element
      * 
-     * @return Collection<JDFmacro>
+     * @return Collection<JDFmacro>, null if none are available
      */
     public Collection<JDFmacro> getAllmacro()
     {
-        Vector<JDFmacro> v = new Vector<JDFmacro>();
-
-        JDFmacro kElem = (JDFmacro) getFirstChildElement(ElementName.MACRO, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MACRO, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFmacro) kElem.getNextSiblingElement(ElementName.MACRO, null);
+        final Vector<JDFmacro> v = new Vector<JDFmacro>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFmacro) vc.get(i));
         }
 
         return v;

@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFLayerDetails;
 
 public abstract class JDFAutoLayerList extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoLayerList extends JDFElement
     /**
      * Get all LayerDetails from the current element
      * 
-     * @return Collection<JDFLayerDetails>
+     * @return Collection<JDFLayerDetails>, null if none are available
      */
     public Collection<JDFLayerDetails> getAllLayerDetails()
     {
-        Vector<JDFLayerDetails> v = new Vector<JDFLayerDetails>();
-
-        JDFLayerDetails kElem = (JDFLayerDetails) getFirstChildElement(ElementName.LAYERDETAILS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.LAYERDETAILS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFLayerDetails) kElem.getNextSiblingElement(ElementName.LAYERDETAILS, null);
+        final Vector<JDFLayerDetails> v = new Vector<JDFLayerDetails>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFLayerDetails) vc.get(i));
         }
 
         return v;

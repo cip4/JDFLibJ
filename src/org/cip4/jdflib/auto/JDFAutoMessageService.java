@@ -70,15 +70,30 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCapPool;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
+import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 
 public abstract class JDFAutoMessageService extends JDFElement
 {
@@ -598,19 +613,20 @@ public abstract class JDFAutoMessageService extends JDFElement
     /**
      * Get all DevCaps from the current element
      * 
-     * @return Collection<JDFDevCaps>
+     * @return Collection<JDFDevCaps>, null if none are available
      */
     public Collection<JDFDevCaps> getAllDevCaps()
     {
-        Vector<JDFDevCaps> v = new Vector<JDFDevCaps>();
-
-        JDFDevCaps kElem = (JDFDevCaps) getFirstChildElement(ElementName.DEVCAPS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DEVCAPS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDevCaps) kElem.getNextSiblingElement(ElementName.DEVCAPS, null);
+        final Vector<JDFDevCaps> v = new Vector<JDFDevCaps>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDevCaps) vc.get(i));
         }
 
         return v;

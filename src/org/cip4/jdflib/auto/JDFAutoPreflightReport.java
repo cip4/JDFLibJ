@@ -70,16 +70,27 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFPRItem;
+import org.cip4.jdflib.resource.process.JDFPreflightParams;
+import org.cip4.jdflib.resource.process.JDFPreflightReportRulePool;
+import org.cip4.jdflib.resource.process.JDFRunList;
 
 public abstract class JDFAutoPreflightReport extends JDFResource
 {
@@ -432,19 +443,20 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     /**
      * Get all PRItem from the current element
      * 
-     * @return Collection<JDFPRItem>
+     * @return Collection<JDFPRItem>, null if none are available
      */
     public Collection<JDFPRItem> getAllPRItem()
     {
-        Vector<JDFPRItem> v = new Vector<JDFPRItem>();
-
-        JDFPRItem kElem = (JDFPRItem) getFirstChildElement(ElementName.PRITEM, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PRITEM, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPRItem) kElem.getNextSiblingElement(ElementName.PRITEM, null);
+        final Vector<JDFPRItem> v = new Vector<JDFPRItem>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPRItem) vc.get(i));
         }
 
         return v;

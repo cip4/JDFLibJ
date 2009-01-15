@@ -70,11 +70,23 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.devicecapability.JDFcall;
+import org.cip4.jdflib.resource.devicecapability.JDFchoice;
+import org.cip4.jdflib.resource.devicecapability.JDFset;
 
 public abstract class JDFAutomacro extends JDFElement
 {
@@ -215,19 +227,20 @@ public abstract class JDFAutomacro extends JDFElement
     /**
      * Get all choice from the current element
      * 
-     * @return Collection<JDFchoice>
+     * @return Collection<JDFchoice>, null if none are available
      */
     public Collection<JDFchoice> getAllchoice()
     {
-        Vector<JDFchoice> v = new Vector<JDFchoice>();
-
-        JDFchoice kElem = (JDFchoice) getFirstChildElement(ElementName.CHOICE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CHOICE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFchoice) kElem.getNextSiblingElement(ElementName.CHOICE, null);
+        final Vector<JDFchoice> v = new Vector<JDFchoice>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFchoice) vc.get(i));
         }
 
         return v;
@@ -264,19 +277,20 @@ public abstract class JDFAutomacro extends JDFElement
     /**
      * Get all set from the current element
      * 
-     * @return Collection<JDFset>
+     * @return Collection<JDFset>, null if none are available
      */
     public Collection<JDFset> getAllset()
     {
-        Vector<JDFset> v = new Vector<JDFset>();
-
-        JDFset kElem = (JDFset) getFirstChildElement(ElementName.SET, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.SET, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFset) kElem.getNextSiblingElement(ElementName.SET, null);
+        final Vector<JDFset> v = new Vector<JDFset>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFset) vc.get(i));
         }
 
         return v;
@@ -313,19 +327,20 @@ public abstract class JDFAutomacro extends JDFElement
     /**
      * Get all call from the current element
      * 
-     * @return Collection<JDFcall>
+     * @return Collection<JDFcall>, null if none are available
      */
     public Collection<JDFcall> getAllcall()
     {
-        Vector<JDFcall> v = new Vector<JDFcall>();
-
-        JDFcall kElem = (JDFcall) getFirstChildElement(ElementName.CALL, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CALL, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFcall) kElem.getNextSiblingElement(ElementName.CALL, null);
+        final Vector<JDFcall> v = new Vector<JDFcall>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFcall) vc.get(i));
         }
 
         return v;

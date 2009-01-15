@@ -70,11 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFArgumentValue;
+import org.cip4.jdflib.resource.process.JDFStringListValue;
 
 public abstract class JDFAutoPRGroupOccurrence extends JDFElement
 {
@@ -174,19 +181,20 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
     /**
      * Get all StringListValue from the current element
      * 
-     * @return Collection<JDFStringListValue>
+     * @return Collection<JDFStringListValue>, null if none are available
      */
     public Collection<JDFStringListValue> getAllStringListValue()
     {
-        Vector<JDFStringListValue> v = new Vector<JDFStringListValue>();
-
-        JDFStringListValue kElem = (JDFStringListValue) getFirstChildElement(ElementName.STRINGLISTVALUE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.STRINGLISTVALUE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFStringListValue) kElem.getNextSiblingElement(ElementName.STRINGLISTVALUE, null);
+        final Vector<JDFStringListValue> v = new Vector<JDFStringListValue>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFStringListValue) vc.get(i));
         }
 
         return v;
@@ -223,19 +231,20 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
     /**
      * Get all ArgumentValue from the current element
      * 
-     * @return Collection<JDFArgumentValue>
+     * @return Collection<JDFArgumentValue>, null if none are available
      */
     public Collection<JDFArgumentValue> getAllArgumentValue()
     {
-        Vector<JDFArgumentValue> v = new Vector<JDFArgumentValue>();
-
-        JDFArgumentValue kElem = (JDFArgumentValue) getFirstChildElement(ElementName.ARGUMENTVALUE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.ARGUMENTVALUE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFArgumentValue) kElem.getNextSiblingElement(ElementName.ARGUMENTVALUE, null);
+        final Vector<JDFArgumentValue> v = new Vector<JDFArgumentValue>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFArgumentValue) vc.get(i));
         }
 
         return v;

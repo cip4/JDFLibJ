@@ -70,10 +70,20 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
 
 public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
 {
@@ -212,19 +222,20 @@ public abstract class JDFAutoPreflightInstanceDetail extends JDFElement
     /**
      * Get all Value from the current element
      * 
-     * @return Collection<JDFElement>
+     * @return Collection<JDFElement>, null if none are available
      */
     public Collection<JDFElement> getAllValue()
     {
-        Vector<JDFElement> v = new Vector<JDFElement>();
-
-        JDFElement kElem = (JDFElement) getFirstChildElement(ElementName.VALUE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.VALUE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFElement) kElem.getNextSiblingElement(ElementName.VALUE, null);
+        final Vector<JDFElement> v = new Vector<JDFElement>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFElement) vc.get(i));
         }
 
         return v;

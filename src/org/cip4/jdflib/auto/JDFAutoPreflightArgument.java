@@ -70,11 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFBoxArgument;
+import org.cip4.jdflib.resource.process.JDFBoxToBoxDifference;
 
 public abstract class JDFAutoPreflightArgument extends JDFElement
 {
@@ -174,19 +181,20 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
     /**
      * Get all BoxArgument from the current element
      * 
-     * @return Collection<JDFBoxArgument>
+     * @return Collection<JDFBoxArgument>, null if none are available
      */
     public Collection<JDFBoxArgument> getAllBoxArgument()
     {
-        Vector<JDFBoxArgument> v = new Vector<JDFBoxArgument>();
-
-        JDFBoxArgument kElem = (JDFBoxArgument) getFirstChildElement(ElementName.BOXARGUMENT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BOXARGUMENT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFBoxArgument) kElem.getNextSiblingElement(ElementName.BOXARGUMENT, null);
+        final Vector<JDFBoxArgument> v = new Vector<JDFBoxArgument>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFBoxArgument) vc.get(i));
         }
 
         return v;
@@ -223,19 +231,20 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
     /**
      * Get all BoxToBoxDifference from the current element
      * 
-     * @return Collection<JDFBoxToBoxDifference>
+     * @return Collection<JDFBoxToBoxDifference>, null if none are available
      */
     public Collection<JDFBoxToBoxDifference> getAllBoxToBoxDifference()
     {
-        Vector<JDFBoxToBoxDifference> v = new Vector<JDFBoxToBoxDifference>();
-
-        JDFBoxToBoxDifference kElem = (JDFBoxToBoxDifference) getFirstChildElement(ElementName.BOXTOBOXDIFFERENCE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BOXTOBOXDIFFERENCE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFBoxToBoxDifference) kElem.getNextSiblingElement(ElementName.BOXTOBOXDIFFERENCE, null);
+        final Vector<JDFBoxToBoxDifference> v = new Vector<JDFBoxToBoxDifference>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFBoxToBoxDifference) vc.get(i));
         }
 
         return v;

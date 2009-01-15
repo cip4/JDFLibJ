@@ -70,12 +70,20 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFLongFold;
+import org.cip4.jdflib.resource.process.JDFLongGlue;
+import org.cip4.jdflib.resource.process.JDFLongPerforate;
+import org.cip4.jdflib.resource.process.JDFLongSlit;
 
 public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResource
 {
@@ -193,19 +201,20 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     /**
      * Get all LongFold from the current element
      * 
-     * @return Collection<JDFLongFold>
+     * @return Collection<JDFLongFold>, null if none are available
      */
     public Collection<JDFLongFold> getAllLongFold()
     {
-        Vector<JDFLongFold> v = new Vector<JDFLongFold>();
-
-        JDFLongFold kElem = (JDFLongFold) getFirstChildElement(ElementName.LONGFOLD, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.LONGFOLD, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFLongFold) kElem.getNextSiblingElement(ElementName.LONGFOLD, null);
+        final Vector<JDFLongFold> v = new Vector<JDFLongFold>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFLongFold) vc.get(i));
         }
 
         return v;
@@ -242,19 +251,20 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     /**
      * Get all LongGlue from the current element
      * 
-     * @return Collection<JDFLongGlue>
+     * @return Collection<JDFLongGlue>, null if none are available
      */
     public Collection<JDFLongGlue> getAllLongGlue()
     {
-        Vector<JDFLongGlue> v = new Vector<JDFLongGlue>();
-
-        JDFLongGlue kElem = (JDFLongGlue) getFirstChildElement(ElementName.LONGGLUE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.LONGGLUE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFLongGlue) kElem.getNextSiblingElement(ElementName.LONGGLUE, null);
+        final Vector<JDFLongGlue> v = new Vector<JDFLongGlue>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFLongGlue) vc.get(i));
         }
 
         return v;
@@ -291,19 +301,20 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     /**
      * Get all LongPerforate from the current element
      * 
-     * @return Collection<JDFLongPerforate>
+     * @return Collection<JDFLongPerforate>, null if none are available
      */
     public Collection<JDFLongPerforate> getAllLongPerforate()
     {
-        Vector<JDFLongPerforate> v = new Vector<JDFLongPerforate>();
-
-        JDFLongPerforate kElem = (JDFLongPerforate) getFirstChildElement(ElementName.LONGPERFORATE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.LONGPERFORATE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFLongPerforate) kElem.getNextSiblingElement(ElementName.LONGPERFORATE, null);
+        final Vector<JDFLongPerforate> v = new Vector<JDFLongPerforate>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFLongPerforate) vc.get(i));
         }
 
         return v;
@@ -340,19 +351,20 @@ public abstract class JDFAutoLongitudinalRibbonOperationParams extends JDFResour
     /**
      * Get all LongSlit from the current element
      * 
-     * @return Collection<JDFLongSlit>
+     * @return Collection<JDFLongSlit>, null if none are available
      */
     public Collection<JDFLongSlit> getAllLongSlit()
     {
-        Vector<JDFLongSlit> v = new Vector<JDFLongSlit>();
-
-        JDFLongSlit kElem = (JDFLongSlit) getFirstChildElement(ElementName.LONGSLIT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.LONGSLIT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFLongSlit) kElem.getNextSiblingElement(ElementName.LONGSLIT, null);
+        final Vector<JDFLongSlit> v = new Vector<JDFLongSlit>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFLongSlit) vc.get(i));
         }
 
         return v;

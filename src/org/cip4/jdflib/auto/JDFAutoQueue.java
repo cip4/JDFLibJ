@@ -70,16 +70,26 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFQueueEntry;
+import org.cip4.jdflib.resource.JDFDevice;
 
 public abstract class JDFAutoQueue extends JDFElement
 {
@@ -313,19 +323,20 @@ public abstract class JDFAutoQueue extends JDFElement
     /**
      * Get all Device from the current element
      * 
-     * @return Collection<JDFDevice>
+     * @return Collection<JDFDevice>, null if none are available
      */
     public Collection<JDFDevice> getAllDevice()
     {
-        Vector<JDFDevice> v = new Vector<JDFDevice>();
-
-        JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DEVICE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
+        final Vector<JDFDevice> v = new Vector<JDFDevice>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDevice) vc.get(i));
         }
 
         return v;
@@ -362,19 +373,20 @@ public abstract class JDFAutoQueue extends JDFElement
     /**
      * Get all QueueEntry from the current element
      * 
-     * @return Collection<JDFQueueEntry>
+     * @return Collection<JDFQueueEntry>, null if none are available
      */
     public Collection<JDFQueueEntry> getAllQueueEntry()
     {
-        Vector<JDFQueueEntry> v = new Vector<JDFQueueEntry>();
-
-        JDFQueueEntry kElem = (JDFQueueEntry) getFirstChildElement(ElementName.QUEUEENTRY, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.QUEUEENTRY, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFQueueEntry) kElem.getNextSiblingElement(ElementName.QUEUEENTRY, null);
+        final Vector<JDFQueueEntry> v = new Vector<JDFQueueEntry>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFQueueEntry) vc.get(i));
         }
 
         return v;

@@ -70,14 +70,24 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.process.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.resource.process.JDFPRGroupOccurrence;
+import org.cip4.jdflib.resource.process.JDFPROccurrence;
 
 public abstract class JDFAutoPRGroup extends JDFElement
 {
@@ -251,19 +261,20 @@ public abstract class JDFAutoPRGroup extends JDFElement
     /**
      * Get all PRGroupOccurrence from the current element
      * 
-     * @return Collection<JDFPRGroupOccurrence>
+     * @return Collection<JDFPRGroupOccurrence>, null if none are available
      */
     public Collection<JDFPRGroupOccurrence> getAllPRGroupOccurrence()
     {
-        Vector<JDFPRGroupOccurrence> v = new Vector<JDFPRGroupOccurrence>();
-
-        JDFPRGroupOccurrence kElem = (JDFPRGroupOccurrence) getFirstChildElement(ElementName.PRGROUPOCCURRENCE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PRGROUPOCCURRENCE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPRGroupOccurrence) kElem.getNextSiblingElement(ElementName.PRGROUPOCCURRENCE, null);
+        final Vector<JDFPRGroupOccurrence> v = new Vector<JDFPRGroupOccurrence>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPRGroupOccurrence) vc.get(i));
         }
 
         return v;
@@ -300,19 +311,20 @@ public abstract class JDFAutoPRGroup extends JDFElement
     /**
      * Get all PROccurrence from the current element
      * 
-     * @return Collection<JDFPROccurrence>
+     * @return Collection<JDFPROccurrence>, null if none are available
      */
     public Collection<JDFPROccurrence> getAllPROccurrence()
     {
-        Vector<JDFPROccurrence> v = new Vector<JDFPROccurrence>();
-
-        JDFPROccurrence kElem = (JDFPROccurrence) getFirstChildElement(ElementName.PROCCURRENCE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PROCCURRENCE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPROccurrence) kElem.getNextSiblingElement(ElementName.PROCCURRENCE, null);
+        final Vector<JDFPROccurrence> v = new Vector<JDFPROccurrence>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPROccurrence) vc.get(i));
         }
 
         return v;

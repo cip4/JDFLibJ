@@ -70,13 +70,19 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.intent.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.span.JDFNameSpan;
+import org.cip4.jdflib.span.JDFSpanPrintPreference;
 
 public abstract class JDFAutoProductionIntent extends JDFIntentResource
 {
@@ -229,19 +235,20 @@ public abstract class JDFAutoProductionIntent extends JDFIntentResource
     /**
      * Get all Resource from the current element
      * 
-     * @return Collection<JDFResource>
+     * @return Collection<JDFResource>, null if none are available
      */
     public Collection<JDFResource> getAllResource()
     {
-        Vector<JDFResource> v = new Vector<JDFResource>();
-
-        JDFResource kElem = (JDFResource) getFirstChildElement(ElementName.RESOURCE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.RESOURCE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFResource) kElem.getNextSiblingElement(ElementName.RESOURCE, null);
+        final Vector<JDFResource> v = new Vector<JDFResource>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFResource) vc.get(i));
         }
 
         return v;

@@ -70,11 +70,20 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.process.JDFPRGroup;
 
 public abstract class JDFAutoPROccurrence extends JDFElement
 {
@@ -212,19 +221,20 @@ public abstract class JDFAutoPROccurrence extends JDFElement
     /**
      * Get all PRGroup from the current element
      * 
-     * @return Collection<JDFPRGroup>
+     * @return Collection<JDFPRGroup>, null if none are available
      */
     public Collection<JDFPRGroup> getAllPRGroup()
     {
-        Vector<JDFPRGroup> v = new Vector<JDFPRGroup>();
-
-        JDFPRGroup kElem = (JDFPRGroup) getFirstChildElement(ElementName.PRGROUP, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PRGROUP, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPRGroup) kElem.getNextSiblingElement(ElementName.PRGROUP, null);
+        final Vector<JDFPRGroup> v = new Vector<JDFPRGroup>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPRGroup) vc.get(i));
         }
 
         return v;

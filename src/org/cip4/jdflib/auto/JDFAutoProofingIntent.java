@@ -70,12 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.intent.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFProofItem;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
 
 public abstract class JDFAutoProofingIntent extends JDFIntentResource
 {
@@ -174,19 +179,20 @@ public abstract class JDFAutoProofingIntent extends JDFIntentResource
     /**
      * Get all ProofItem from the current element
      * 
-     * @return Collection<JDFProofItem>
+     * @return Collection<JDFProofItem>, null if none are available
      */
     public Collection<JDFProofItem> getAllProofItem()
     {
-        Vector<JDFProofItem> v = new Vector<JDFProofItem>();
-
-        JDFProofItem kElem = (JDFProofItem) getFirstChildElement(ElementName.PROOFITEM, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PROOFITEM, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFProofItem) kElem.getNextSiblingElement(ElementName.PROOFITEM, null);
+        final Vector<JDFProofItem> v = new Vector<JDFProofItem>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFProofItem) vc.get(i));
         }
 
         return v;

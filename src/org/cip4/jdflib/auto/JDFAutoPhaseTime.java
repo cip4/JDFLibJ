@@ -70,21 +70,27 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.util.*;           
-    /*
-    *****************************************************************************
-    class JDFAutoPhaseTime : public JDFAudit
-
-    *****************************************************************************
-    */
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFModulePhase;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFMISDetails;
+import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
 {
@@ -305,19 +311,20 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     /**
      * Get all Device from the current element
      * 
-     * @return Collection<JDFDevice>
+     * @return Collection<JDFDevice>, null if none are available
      */
     public Collection<JDFDevice> getAllDevice()
     {
-        Vector<JDFDevice> v = new Vector<JDFDevice>();
-
-        JDFDevice kElem = (JDFDevice) getFirstChildElement(ElementName.DEVICE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DEVICE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDevice) kElem.getNextSiblingElement(ElementName.DEVICE, null);
+        final Vector<JDFDevice> v = new Vector<JDFDevice>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDevice) vc.get(i));
         }
 
         return v;
@@ -345,7 +352,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
      * @param iSkip number of elements to skip
      * @return JDFEmployee the element
      */
-    public JDFEmployee getCreateEmployee(int iSkip)
+    @Override
+	public JDFEmployee getCreateEmployee(int iSkip)
     {
         return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
@@ -355,7 +363,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
      * @param iSkip number of elements to skip
      * @return JDFEmployee the element
      * default is getEmployee(0)     */
-    public JDFEmployee getEmployee(int iSkip)
+    @Override
+	public JDFEmployee getEmployee(int iSkip)
     {
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
@@ -363,19 +372,21 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     /**
      * Get all Employee from the current element
      * 
-     * @return Collection<JDFEmployee>
+     * @return Collection<JDFEmployee>, null if none are available
      */
-    public Collection<JDFEmployee> getAllEmployee()
+    @Override
+	public Collection<JDFEmployee> getAllEmployee()
     {
-        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-
-        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
+        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFEmployee) vc.get(i));
         }
 
         return v;
@@ -384,7 +395,8 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     /**
      * (30) append element Employee
      */
-    public JDFEmployee appendEmployee() throws JDFException
+    @Override
+	public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
@@ -447,19 +459,20 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     /**
      * Get all ModulePhase from the current element
      * 
-     * @return Collection<JDFModulePhase>
+     * @return Collection<JDFModulePhase>, null if none are available
      */
     public Collection<JDFModulePhase> getAllModulePhase()
     {
-        Vector<JDFModulePhase> v = new Vector<JDFModulePhase>();
-
-        JDFModulePhase kElem = (JDFModulePhase) getFirstChildElement(ElementName.MODULEPHASE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MODULEPHASE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFModulePhase) kElem.getNextSiblingElement(ElementName.MODULEPHASE, null);
+        final Vector<JDFModulePhase> v = new Vector<JDFModulePhase>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFModulePhase) vc.get(i));
         }
 
         return v;
@@ -496,19 +509,20 @@ public abstract class JDFAutoPhaseTime extends JDFAudit
     /**
      * Get all Part from the current element
      * 
-     * @return Collection<JDFPart>
+     * @return Collection<JDFPart>, null if none are available
      */
     public Collection<JDFPart> getAllPart()
     {
-        Vector<JDFPart> v = new Vector<JDFPart>();
-
-        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PART, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        final Vector<JDFPart> v = new Vector<JDFPart>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPart) vc.get(i));
         }
 
         return v;

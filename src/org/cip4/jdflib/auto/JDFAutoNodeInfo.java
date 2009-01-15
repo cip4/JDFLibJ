@@ -70,27 +70,30 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.util.*;           
-    /*
-    *****************************************************************************
-    class JDFAutoNodeInfo : public JDFResource
-
-    *****************************************************************************
-    */
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFBusinessInfo;
+import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFMISDetails;
+import org.cip4.jdflib.resource.process.JDFNotificationFilter;
+import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.JDFDuration;
 
 public abstract class JDFAutoNodeInfo extends JDFResource
 {
@@ -879,19 +882,20 @@ public abstract class JDFAutoNodeInfo extends JDFResource
     /**
      * Get all JMF from the current element
      * 
-     * @return Collection<JDFJMF>
+     * @return Collection<JDFJMF>, null if none are available
      */
     public Collection<JDFJMF> getAllJMF()
     {
-        Vector<JDFJMF> v = new Vector<JDFJMF>();
-
-        JDFJMF kElem = (JDFJMF) getFirstChildElement(ElementName.JMF, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.JMF, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFJMF) kElem.getNextSiblingElement(ElementName.JMF, null);
+        final Vector<JDFJMF> v = new Vector<JDFJMF>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFJMF) vc.get(i));
         }
 
         return v;
@@ -954,19 +958,20 @@ public abstract class JDFAutoNodeInfo extends JDFResource
     /**
      * Get all NotificationFilter from the current element
      * 
-     * @return Collection<JDFNotificationFilter>
+     * @return Collection<JDFNotificationFilter>, null if none are available
      */
     public Collection<JDFNotificationFilter> getAllNotificationFilter()
     {
-        Vector<JDFNotificationFilter> v = new Vector<JDFNotificationFilter>();
-
-        JDFNotificationFilter kElem = (JDFNotificationFilter) getFirstChildElement(ElementName.NOTIFICATIONFILTER, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.NOTIFICATIONFILTER, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFNotificationFilter) kElem.getNextSiblingElement(ElementName.NOTIFICATIONFILTER, null);
+        final Vector<JDFNotificationFilter> v = new Vector<JDFNotificationFilter>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFNotificationFilter) vc.get(i));
         }
 
         return v;

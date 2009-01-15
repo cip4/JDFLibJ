@@ -70,11 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFQueueEntryDef;
 
 public abstract class JDFAutoQueueEntryDefList extends JDFElement
 {
@@ -173,19 +179,20 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
     /**
      * Get all QueueEntryDef from the current element
      * 
-     * @return Collection<JDFQueueEntryDef>
+     * @return Collection<JDFQueueEntryDef>, null if none are available
      */
     public Collection<JDFQueueEntryDef> getAllQueueEntryDef()
     {
-        Vector<JDFQueueEntryDef> v = new Vector<JDFQueueEntryDef>();
-
-        JDFQueueEntryDef kElem = (JDFQueueEntryDef) getFirstChildElement(ElementName.QUEUEENTRYDEF, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.QUEUEENTRYDEF, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFQueueEntryDef) kElem.getNextSiblingElement(ElementName.QUEUEENTRYDEF, null);
+        final Vector<JDFQueueEntryDef> v = new Vector<JDFQueueEntryDef>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFQueueEntryDef) vc.get(i));
         }
 
         return v;

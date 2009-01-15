@@ -70,11 +70,22 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.process.JDFPRRuleAttr;
 
 public abstract class JDFAutoPRRule extends JDFElement
 {
@@ -215,19 +226,20 @@ public abstract class JDFAutoPRRule extends JDFElement
     /**
      * Get all PRRuleAttr from the current element
      * 
-     * @return Collection<JDFPRRuleAttr>
+     * @return Collection<JDFPRRuleAttr>, null if none are available
      */
     public Collection<JDFPRRuleAttr> getAllPRRuleAttr()
     {
-        Vector<JDFPRRuleAttr> v = new Vector<JDFPRRuleAttr>();
-
-        JDFPRRuleAttr kElem = (JDFPRRuleAttr) getFirstChildElement(ElementName.PRRULEATTR, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PRRULEATTR, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPRRuleAttr) kElem.getNextSiblingElement(ElementName.PRRULEATTR, null);
+        final Vector<JDFPRRuleAttr> v = new Vector<JDFPRRuleAttr>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPRRuleAttr) vc.get(i));
         }
 
         return v;

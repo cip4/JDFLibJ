@@ -70,15 +70,27 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.process.postpress.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.process.postpress.JDFGlueLine;
+import org.cip4.jdflib.span.JDFSpanGlueType;
+import org.cip4.jdflib.span.JDFSpanMethod;
 
 public abstract class JDFAutoInsert extends JDFElement
 {
@@ -387,19 +399,20 @@ public abstract class JDFAutoInsert extends JDFElement
     /**
      * Get all GlueLine from the current element
      * 
-     * @return Collection<JDFGlueLine>
+     * @return Collection<JDFGlueLine>, null if none are available
      */
     public Collection<JDFGlueLine> getAllGlueLine()
     {
-        Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
-
-        JDFGlueLine kElem = (JDFGlueLine) getFirstChildElement(ElementName.GLUELINE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.GLUELINE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFGlueLine) kElem.getNextSiblingElement(ElementName.GLUELINE, null);
+        final Vector<JDFGlueLine> v = new Vector<JDFGlueLine>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFGlueLine) vc.get(i));
         }
 
         return v;

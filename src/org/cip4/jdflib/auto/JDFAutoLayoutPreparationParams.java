@@ -70,19 +70,38 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFDeviceMark;
+import org.cip4.jdflib.resource.JDFFitPolicy;
+import org.cip4.jdflib.resource.JDFImageShift;
+import org.cip4.jdflib.resource.JDFJobField;
+import org.cip4.jdflib.resource.JDFPageCell;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate;
+import org.cip4.jdflib.resource.process.JDFInsertSheet;
+import org.cip4.jdflib.resource.process.JDFMedia;
 
 public abstract class JDFAutoLayoutPreparationParams extends JDFResource
 {
@@ -1154,19 +1173,20 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     /**
      * Get all InsertSheet from the current element
      * 
-     * @return Collection<JDFInsertSheet>
+     * @return Collection<JDFInsertSheet>, null if none are available
      */
     public Collection<JDFInsertSheet> getAllInsertSheet()
     {
-        Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
-
-        JDFInsertSheet kElem = (JDFInsertSheet) getFirstChildElement(ElementName.INSERTSHEET, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.INSERTSHEET, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFInsertSheet) kElem.getNextSiblingElement(ElementName.INSERTSHEET, null);
+        final Vector<JDFInsertSheet> v = new Vector<JDFInsertSheet>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFInsertSheet) vc.get(i));
         }
 
         return v;
@@ -1317,19 +1337,20 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     /**
      * Get all JobField from the current element
      * 
-     * @return Collection<JDFJobField>
+     * @return Collection<JDFJobField>, null if none are available
      */
     public Collection<JDFJobField> getAllJobField()
     {
-        Vector<JDFJobField> v = new Vector<JDFJobField>();
-
-        JDFJobField kElem = (JDFJobField) getFirstChildElement(ElementName.JOBFIELD, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.JOBFIELD, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFJobField) kElem.getNextSiblingElement(ElementName.JOBFIELD, null);
+        final Vector<JDFJobField> v = new Vector<JDFJobField>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFJobField) vc.get(i));
         }
 
         return v;

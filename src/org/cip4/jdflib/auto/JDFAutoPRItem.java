@@ -70,14 +70,24 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.process.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.resource.process.JDFPRError;
+import org.cip4.jdflib.resource.process.JDFPRGroup;
 
 public abstract class JDFAutoPRItem extends JDFElement
 {
@@ -274,19 +284,20 @@ public abstract class JDFAutoPRItem extends JDFElement
     /**
      * Get all PRError from the current element
      * 
-     * @return Collection<JDFPRError>
+     * @return Collection<JDFPRError>, null if none are available
      */
     public Collection<JDFPRError> getAllPRError()
     {
-        Vector<JDFPRError> v = new Vector<JDFPRError>();
-
-        JDFPRError kElem = (JDFPRError) getFirstChildElement(ElementName.PRERROR, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PRERROR, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPRError) kElem.getNextSiblingElement(ElementName.PRERROR, null);
+        final Vector<JDFPRError> v = new Vector<JDFPRError>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPRError) vc.get(i));
         }
 
         return v;
@@ -323,19 +334,20 @@ public abstract class JDFAutoPRItem extends JDFElement
     /**
      * Get all PRGroup from the current element
      * 
-     * @return Collection<JDFPRGroup>
+     * @return Collection<JDFPRGroup>, null if none are available
      */
     public Collection<JDFPRGroup> getAllPRGroup()
     {
-        Vector<JDFPRGroup> v = new Vector<JDFPRGroup>();
-
-        JDFPRGroup kElem = (JDFPRGroup) getFirstChildElement(ElementName.PRGROUP, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PRGROUP, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPRGroup) kElem.getNextSiblingElement(ElementName.PRGROUP, null);
+        final Vector<JDFPRGroup> v = new Vector<JDFPRGroup>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPRGroup) vc.get(i));
         }
 
         return v;

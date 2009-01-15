@@ -70,18 +70,32 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.process.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFCMYKColor;
+import org.cip4.jdflib.datatypes.JDFLabColor;
+import org.cip4.jdflib.datatypes.JDFRGBColor;
+import org.cip4.jdflib.resource.process.JDFDeviceNColor;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFTransferCurve;
 
 public abstract class JDFAutoPrintConditionColor extends JDFElement
 {
@@ -603,19 +617,20 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     /**
      * Get all FileSpec from the current element
      * 
-     * @return Collection<JDFFileSpec>
+     * @return Collection<JDFFileSpec>, null if none are available
      */
     public Collection<JDFFileSpec> getAllFileSpec()
     {
-        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
-
-        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFFileSpec) vc.get(i));
         }
 
         return v;
@@ -661,19 +676,20 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     /**
      * Get all DeviceNColor from the current element
      * 
-     * @return Collection<JDFDeviceNColor>
+     * @return Collection<JDFDeviceNColor>, null if none are available
      */
     public Collection<JDFDeviceNColor> getAllDeviceNColor()
     {
-        Vector<JDFDeviceNColor> v = new Vector<JDFDeviceNColor>();
-
-        JDFDeviceNColor kElem = (JDFDeviceNColor) getFirstChildElement(ElementName.DEVICENCOLOR, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.DEVICENCOLOR, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFDeviceNColor) kElem.getNextSiblingElement(ElementName.DEVICENCOLOR, null);
+        final Vector<JDFDeviceNColor> v = new Vector<JDFDeviceNColor>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFDeviceNColor) vc.get(i));
         }
 
         return v;
@@ -710,19 +726,20 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     /**
      * Get all Media from the current element
      * 
-     * @return Collection<JDFMedia>
+     * @return Collection<JDFMedia>, null if none are available
      */
     public Collection<JDFMedia> getAllMedia()
     {
-        Vector<JDFMedia> v = new Vector<JDFMedia>();
-
-        JDFMedia kElem = (JDFMedia) getFirstChildElement(ElementName.MEDIA, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.MEDIA, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFMedia) kElem.getNextSiblingElement(ElementName.MEDIA, null);
+        final Vector<JDFMedia> v = new Vector<JDFMedia>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFMedia) vc.get(i));
         }
 
         return v;
@@ -768,19 +785,20 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     /**
      * Get all TransferCurve from the current element
      * 
-     * @return Collection<JDFTransferCurve>
+     * @return Collection<JDFTransferCurve>, null if none are available
      */
     public Collection<JDFTransferCurve> getAllTransferCurve()
     {
-        Vector<JDFTransferCurve> v = new Vector<JDFTransferCurve>();
-
-        JDFTransferCurve kElem = (JDFTransferCurve) getFirstChildElement(ElementName.TRANSFERCURVE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TRANSFERCURVE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTransferCurve) kElem.getNextSiblingElement(ElementName.TRANSFERCURVE, null);
+        final Vector<JDFTransferCurve> v = new Vector<JDFTransferCurve>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTransferCurve) vc.get(i));
         }
 
         return v;

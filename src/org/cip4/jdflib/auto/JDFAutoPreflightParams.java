@@ -70,12 +70,18 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
+import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
 
 public abstract class JDFAutoPreflightParams extends JDFResource
 {
@@ -191,19 +197,20 @@ public abstract class JDFAutoPreflightParams extends JDFResource
     /**
      * Get all ActionPool from the current element
      * 
-     * @return Collection<JDFActionPool>
+     * @return Collection<JDFActionPool>, null if none are available
      */
     public Collection<JDFActionPool> getAllActionPool()
     {
-        Vector<JDFActionPool> v = new Vector<JDFActionPool>();
-
-        JDFActionPool kElem = (JDFActionPool) getFirstChildElement(ElementName.ACTIONPOOL, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.ACTIONPOOL, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFActionPool) kElem.getNextSiblingElement(ElementName.ACTIONPOOL, null);
+        final Vector<JDFActionPool> v = new Vector<JDFActionPool>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFActionPool) vc.get(i));
         }
 
         return v;

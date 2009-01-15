@@ -70,14 +70,24 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFBundle;
+import org.cip4.jdflib.resource.JDFResource;
 
 public abstract class JDFAutoPalletizingParams extends JDFResource
 {
@@ -382,19 +392,20 @@ public abstract class JDFAutoPalletizingParams extends JDFResource
     /**
      * Get all Bundle from the current element
      * 
-     * @return Collection<JDFBundle>
+     * @return Collection<JDFBundle>, null if none are available
      */
     public Collection<JDFBundle> getAllBundle()
     {
-        Vector<JDFBundle> v = new Vector<JDFBundle>();
-
-        JDFBundle kElem = (JDFBundle) getFirstChildElement(ElementName.BUNDLE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BUNDLE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFBundle) kElem.getNextSiblingElement(ElementName.BUNDLE, null);
+        final Vector<JDFBundle> v = new Vector<JDFBundle>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFBundle) vc.get(i));
         }
 
         return v;

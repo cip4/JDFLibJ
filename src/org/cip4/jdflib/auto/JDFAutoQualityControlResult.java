@@ -70,12 +70,22 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFBindingQualityParams;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFQualityMeasurement;
 
 public abstract class JDFAutoQualityControlResult extends JDFResource
 {
@@ -315,19 +325,20 @@ public abstract class JDFAutoQualityControlResult extends JDFResource
     /**
      * Get all QualityMeasurement from the current element
      * 
-     * @return Collection<JDFQualityMeasurement>
+     * @return Collection<JDFQualityMeasurement>, null if none are available
      */
     public Collection<JDFQualityMeasurement> getAllQualityMeasurement()
     {
-        Vector<JDFQualityMeasurement> v = new Vector<JDFQualityMeasurement>();
-
-        JDFQualityMeasurement kElem = (JDFQualityMeasurement) getFirstChildElement(ElementName.QUALITYMEASUREMENT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.QUALITYMEASUREMENT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFQualityMeasurement) kElem.getNextSiblingElement(ElementName.QUALITYMEASUREMENT, null);
+        final Vector<JDFQualityMeasurement> v = new Vector<JDFQualityMeasurement>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFQualityMeasurement) vc.get(i));
         }
 
         return v;

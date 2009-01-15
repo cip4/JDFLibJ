@@ -70,16 +70,28 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 public abstract class JDFAutoPreview extends JDFResource
 {
@@ -102,6 +114,20 @@ public abstract class JDFAutoPreview extends JDFResource
 	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.COMMENT, 0x33333333);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.GENERALID, 0x33333333);
+    }
+    
+    @Override
+	protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -483,5 +509,115 @@ public abstract class JDFAutoPreview extends JDFResource
         {
             return getAttribute(AttributeName.MIMETYPEDETAILS, null, JDFConstants.EMPTYSTRING);
         }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /** (26) getCreateComment
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFComment the element
+     */
+    @Override
+	public JDFComment getCreateComment(int iSkip)
+    {
+        return (JDFComment)getCreateElement_KElement(ElementName.COMMENT, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Comment
+     * @param iSkip number of elements to skip
+     * @return JDFComment the element
+     * default is getComment(0)     */
+    @Override
+	public JDFComment getComment(int iSkip)
+    {
+        return (JDFComment) getElement(ElementName.COMMENT, null, iSkip);
+    }
+
+    /**
+     * Get all Comment from the current element
+     * 
+     * @return Collection<JDFComment>, null if none are available
+     */
+    public Collection<JDFComment> getAllComment()
+    {
+        final VElement vc = getChildElementVector(ElementName.COMMENT, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
+
+        final Vector<JDFComment> v = new Vector<JDFComment>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFComment) vc.get(i));
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Comment
+     */
+    @Override
+	public JDFComment appendComment() throws JDFException
+    {
+        return (JDFComment) appendElement(ElementName.COMMENT, null);
+    }
+
+    /** (26) getCreateGeneralID
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFGeneralID the element
+     */
+    public JDFGeneralID getCreateGeneralID(int iSkip)
+    {
+        return (JDFGeneralID)getCreateElement_KElement(ElementName.GENERALID, null, iSkip);
+    }
+
+    /**
+     * (27) const get element GeneralID
+     * @param iSkip number of elements to skip
+     * @return JDFGeneralID the element
+     * default is getGeneralID(0)     */
+    @Override
+	public JDFGeneralID getGeneralID(int iSkip)
+    {
+        return (JDFGeneralID) getElement(ElementName.GENERALID, null, iSkip);
+    }
+
+    /**
+     * Get all GeneralID from the current element
+     * 
+     * @return Collection<JDFGeneralID>, null if none are available
+     */
+    public Collection<JDFGeneralID> getAllGeneralID()
+    {
+        final VElement vc = getChildElementVector(ElementName.GENERALID, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
+
+        final Vector<JDFGeneralID> v = new Vector<JDFGeneralID>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFGeneralID) vc.get(i));
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element GeneralID
+     */
+    @Override
+	public JDFGeneralID appendGeneralID() throws JDFException
+    {
+        return (JDFGeneralID) appendElement(ElementName.GENERALID, null);
+    }
 
 }// end namespace JDF

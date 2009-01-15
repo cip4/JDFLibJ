@@ -70,15 +70,26 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFPart;
 
 public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
 {
@@ -332,19 +343,20 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
     /**
      * Get all Part from the current element
      * 
-     * @return Collection<JDFPart>
+     * @return Collection<JDFPart>, null if none are available
      */
     public Collection<JDFPart> getAllPart()
     {
-        Vector<JDFPart> v = new Vector<JDFPart>();
-
-        JDFPart kElem = (JDFPart) getFirstChildElement(ElementName.PART, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PART, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPart) kElem.getNextSiblingElement(ElementName.PART, null);
+        final Vector<JDFPart> v = new Vector<JDFPart>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPart) vc.get(i));
         }
 
         return v;

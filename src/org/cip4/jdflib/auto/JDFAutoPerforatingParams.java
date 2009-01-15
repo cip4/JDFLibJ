@@ -70,12 +70,17 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFPerforate;
 
 public abstract class JDFAutoPerforatingParams extends JDFResource
 {
@@ -190,19 +195,20 @@ public abstract class JDFAutoPerforatingParams extends JDFResource
     /**
      * Get all Perforate from the current element
      * 
-     * @return Collection<JDFPerforate>
+     * @return Collection<JDFPerforate>, null if none are available
      */
     public Collection<JDFPerforate> getAllPerforate()
     {
-        Vector<JDFPerforate> v = new Vector<JDFPerforate>();
-
-        JDFPerforate kElem = (JDFPerforate) getFirstChildElement(ElementName.PERFORATE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PERFORATE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFPerforate) kElem.getNextSiblingElement(ElementName.PERFORATE, null);
+        final Vector<JDFPerforate> v = new Vector<JDFPerforate>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPerforate) vc.get(i));
         }
 
         return v;

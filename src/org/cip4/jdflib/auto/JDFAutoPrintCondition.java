@@ -70,15 +70,25 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFTransferFunction;
+import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
+import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 public abstract class JDFAutoPrintCondition extends JDFResource
 {
@@ -362,19 +372,20 @@ public abstract class JDFAutoPrintCondition extends JDFResource
     /**
      * Get all FileSpec from the current element
      * 
-     * @return Collection<JDFFileSpec>
+     * @return Collection<JDFFileSpec>, null if none are available
      */
     public Collection<JDFFileSpec> getAllFileSpec()
     {
-        Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
-
-        JDFFileSpec kElem = (JDFFileSpec) getFirstChildElement(ElementName.FILESPEC, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.FILESPEC, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFFileSpec) kElem.getNextSiblingElement(ElementName.FILESPEC, null);
+        final Vector<JDFFileSpec> v = new Vector<JDFFileSpec>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFFileSpec) vc.get(i));
         }
 
         return v;

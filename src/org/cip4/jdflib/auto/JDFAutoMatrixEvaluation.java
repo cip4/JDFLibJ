@@ -70,15 +70,24 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFValue;
+import org.cip4.jdflib.resource.devicecapability.JDFBasicPreflightTest;
 
 public abstract class JDFAutoMatrixEvaluation extends JDFResource
 {
@@ -307,19 +316,20 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
     /**
      * Get all BasicPreflightTest from the current element
      * 
-     * @return Collection<JDFBasicPreflightTest>
+     * @return Collection<JDFBasicPreflightTest>, null if none are available
      */
     public Collection<JDFBasicPreflightTest> getAllBasicPreflightTest()
     {
-        Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
-
-        JDFBasicPreflightTest kElem = (JDFBasicPreflightTest) getFirstChildElement(ElementName.BASICPREFLIGHTTEST, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.BASICPREFLIGHTTEST, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFBasicPreflightTest) kElem.getNextSiblingElement(ElementName.BASICPREFLIGHTTEST, null);
+        final Vector<JDFBasicPreflightTest> v = new Vector<JDFBasicPreflightTest>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFBasicPreflightTest) vc.get(i));
         }
 
         return v;
@@ -356,19 +366,20 @@ public abstract class JDFAutoMatrixEvaluation extends JDFResource
     /**
      * Get all Value from the current element
      * 
-     * @return Collection<JDFValue>
+     * @return Collection<JDFValue>, null if none are available
      */
     public Collection<JDFValue> getAllValue()
     {
-        Vector<JDFValue> v = new Vector<JDFValue>();
-
-        JDFValue kElem = (JDFValue) getFirstChildElement(ElementName.VALUE, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.VALUE, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFValue) kElem.getNextSiblingElement(ElementName.VALUE, null);
+        final Vector<JDFValue> v = new Vector<JDFValue>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFValue) vc.get(i));
         }
 
         return v;

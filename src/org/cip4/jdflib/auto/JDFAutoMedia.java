@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFLabColor;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.resource.JDFColorMeasurementConditions;
@@ -2074,19 +2075,20 @@ public abstract class JDFAutoMedia extends JDFResource
     /**
      * Get all TabDimensions from the current element
      * 
-     * @return Collection<JDFTabDimensions>
+     * @return Collection<JDFTabDimensions>, null if none are available
      */
     public Collection<JDFTabDimensions> getAllTabDimensions()
     {
-        Vector<JDFTabDimensions> v = new Vector<JDFTabDimensions>();
-
-        JDFTabDimensions kElem = (JDFTabDimensions) getFirstChildElement(ElementName.TABDIMENSIONS, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.TABDIMENSIONS, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFTabDimensions) kElem.getNextSiblingElement(ElementName.TABDIMENSIONS, null);
+        final Vector<JDFTabDimensions> v = new Vector<JDFTabDimensions>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFTabDimensions) vc.get(i));
         }
 
         return v;
@@ -2123,19 +2125,20 @@ public abstract class JDFAutoMedia extends JDFResource
     /**
      * Get all Contact from the current element
      * 
-     * @return Collection<JDFContact>
+     * @return Collection<JDFContact>, null if none are available
      */
     public Collection<JDFContact> getAllContact()
     {
-        Vector<JDFContact> v = new Vector<JDFContact>();
-
-        JDFContact kElem = (JDFContact) getFirstChildElement(ElementName.CONTACT, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.CONTACT, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFContact) kElem.getNextSiblingElement(ElementName.CONTACT, null);
+        final Vector<JDFContact> v = new Vector<JDFContact>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFContact) vc.get(i));
         }
 
         return v;
@@ -2184,19 +2187,20 @@ public abstract class JDFAutoMedia extends JDFResource
     /**
      * Get all IdentificationField from the current element
      * 
-     * @return Collection<JDFIdentificationField>
+     * @return Collection<JDFIdentificationField>, null if none are available
      */
     public Collection<JDFIdentificationField> getAllIdentificationField()
     {
-        Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
-
-        JDFIdentificationField kElem = (JDFIdentificationField) getFirstChildElement(ElementName.IDENTIFICATIONFIELD, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.IDENTIFICATIONFIELD, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFIdentificationField) kElem.getNextSiblingElement(ElementName.IDENTIFICATIONFIELD, null);
+        final Vector<JDFIdentificationField> v = new Vector<JDFIdentificationField>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFIdentificationField) vc.get(i));
         }
 
         return v;

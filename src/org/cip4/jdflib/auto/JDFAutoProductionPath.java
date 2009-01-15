@@ -70,12 +70,21 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Vector;                            
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Vector;
+
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFProductionSubPath;
 
 public abstract class JDFAutoProductionPath extends JDFResource
 {
@@ -257,19 +266,20 @@ public abstract class JDFAutoProductionPath extends JDFResource
     /**
      * Get all PostPressComponentPath from the current element
      * 
-     * @return Collection<JDFProductionSubPath>
+     * @return Collection<JDFProductionSubPath>, null if none are available
      */
     public Collection<JDFProductionSubPath> getAllPostPressComponentPath()
     {
-        Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
-
-        JDFProductionSubPath kElem = (JDFProductionSubPath) getFirstChildElement(ElementName.POSTPRESSCOMPONENTPATH, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.POSTPRESSCOMPONENTPATH, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFProductionSubPath) kElem.getNextSiblingElement(ElementName.POSTPRESSCOMPONENTPATH, null);
+        final Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFProductionSubPath) vc.get(i));
         }
 
         return v;
@@ -306,19 +316,20 @@ public abstract class JDFAutoProductionPath extends JDFResource
     /**
      * Get all PrintingUnitWebPath from the current element
      * 
-     * @return Collection<JDFProductionSubPath>
+     * @return Collection<JDFProductionSubPath>, null if none are available
      */
     public Collection<JDFProductionSubPath> getAllPrintingUnitWebPath()
     {
-        Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
-
-        JDFProductionSubPath kElem = (JDFProductionSubPath) getFirstChildElement(ElementName.PRINTINGUNITWEBPATH, null);
-
-        while (kElem != null)
+        final VElement vc = getChildElementVector(ElementName.PRINTINGUNITWEBPATH, null);
+        if (vc == null || vc.size() == 0)
         {
-            v.add(kElem);
+            return null;
+        }
 
-            kElem = (JDFProductionSubPath) kElem.getNextSiblingElement(ElementName.PRINTINGUNITWEBPATH, null);
+        final Vector<JDFProductionSubPath> v = new Vector<JDFProductionSubPath>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFProductionSubPath) vc.get(i));
         }
 
         return v;

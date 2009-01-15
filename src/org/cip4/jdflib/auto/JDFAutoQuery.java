@@ -70,16 +70,26 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                          
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.resource.process.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFSubscription;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 
 public abstract class JDFAutoQuery extends JDFMessage
 {
@@ -105,8 +115,8 @@ public abstract class JDFAutoQuery extends JDFMessage
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x66666666);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x66666666);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
     }
     
     @Override
@@ -310,59 +320,6 @@ public abstract class JDFAutoQuery extends JDFMessage
  * ***********************************************************************
  */
 
-    /** (26) getCreateEmployee
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     */
-    @Override
-	public JDFEmployee getCreateEmployee(int iSkip)
-    {
-        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Employee
-     * @param iSkip number of elements to skip
-     * @return JDFEmployee the element
-     * default is getEmployee(0)     */
-    @Override
-	public JDFEmployee getEmployee(int iSkip)
-    {
-        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
-    }
-
-    /**
-     * Get all Employee from the current element
-     * 
-     * @return Collection<JDFEmployee>
-     */
-    @Override
-	public Collection<JDFEmployee> getAllEmployee()
-    {
-        Vector<JDFEmployee> v = new Vector<JDFEmployee>();
-
-        JDFEmployee kElem = (JDFEmployee) getFirstChildElement(ElementName.EMPLOYEE, null);
-
-        while (kElem != null)
-        {
-            v.add(kElem);
-
-            kElem = (JDFEmployee) kElem.getNextSiblingElement(ElementName.EMPLOYEE, null);
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Employee
-     */
-    @Override
-	public JDFEmployee appendEmployee() throws JDFException
-    {
-        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
-    }
-
     /**
      * (24) const get element Subscription
      * @return JDFSubscription the element
@@ -387,6 +344,56 @@ public abstract class JDFAutoQuery extends JDFMessage
     public JDFSubscription appendSubscription() throws JDFException
     {
         return (JDFSubscription) appendElementN(ElementName.SUBSCRIPTION, 1, null);
+    }
+
+    /** (26) getCreateEmployee
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     */
+    public JDFEmployee getCreateEmployee(int iSkip)
+    {
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Employee
+     * @param iSkip number of elements to skip
+     * @return JDFEmployee the element
+     * default is getEmployee(0)     */
+    public JDFEmployee getEmployee(int iSkip)
+    {
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
+    }
+
+    /**
+     * Get all Employee from the current element
+     * 
+     * @return Collection<JDFEmployee>, null if none are available
+     */
+    public Collection<JDFEmployee> getAllEmployee()
+    {
+        final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
+
+        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFEmployee) vc.get(i));
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Employee
+     */
+    public JDFEmployee appendEmployee() throws JDFException
+    {
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
 
 }// end namespace JDF
