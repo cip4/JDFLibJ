@@ -1,18 +1,80 @@
-//Titel:        JDF TestApplication
-//Version:
-//Copyright:    Copyright (c) 1999
-//Autor:       Sabine Jonas, sjonas@topmail.de
-//Firma:      BU/GH Wuppertal
-//Beschreibung:  first Applications using the JDFLibrary
-//package testApps;
-
+/*
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software restartProcesses()
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *
+ */
 package org.cip4.jdflib.extensions;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
@@ -22,6 +84,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
@@ -29,10 +92,12 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.BaseElementWalker;
+import org.cip4.jdflib.elementwalker.BaseWalker;
+import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -46,32 +111,57 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
 
-public class XJDF20
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 15.01.2009
+ */
+public class XJDF20 extends BaseElementWalker
 {
 
-	private static boolean bInit = false;
-	public static String rootName = "XJDF";
-	private static final String m_spawnInfo = "SpawnInfo";
-	private static VString resAttribs;
+	/**
+	 * @param factory
+	 */
+	public XJDF20()
+	{
+		super(new BaseWalkerFactory());
+		init();
+	}
+
+	public final static String rootName = "XJDF";
+	private final String m_spawnInfo = "SpawnInfo";
+	protected VString resAttribs;
+	protected Set<String> doneRes;
+	protected Set<String> refRes;
+	protected boolean walkingProduct = false;
+	protected boolean first = true;
+	private VJDFAttributeMap vPartMap = null;
 
 	/**
 	 * @param node
+	 * @param rootIn
 	 * @return
 	 */
-	public static KElement makeNewJDF(JDFNode node, JDFNode rootIn)
+	public KElement makeNewJDF(JDFNode node, final VJDFAttributeMap vMap)
 	{
-		init();
-		JDFDoc newDoc = new JDFDoc(rootName);
-		KElement newRoot = newDoc.getRoot();
-		setRootAttributes(node, newRoot);
-		setProduct(node, rootIn);
-		setResources(newRoot, node, null, rootIn);
-		setElements(node, newRoot);
+		vPartMap = vMap;
+		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
+		node = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
+		final JDFNode rootIn = node.getJDFRoot();
+		final JDFDoc newDoc = new JDFDoc(rootName);
+
+		final KElement newRoot = newDoc.getRoot();
+		first = true;
+		walkTree(node, newRoot);
+
+		walkingProduct = true;
+		final KElement productList = newRoot.appendElement("ProductList");
+		walkTree(rootIn, productList);
+		walkingProduct = false;
+
 		newRoot.eraseEmptyNodes(true);
-		newRoot.removeAttribute(AttributeName.ACTIVATION);
 
 		return newRoot;
 	}
@@ -79,138 +169,31 @@ public class XJDF20
 	/**
 	 * 
 	 */
-	private static void init()
+	private void init()
 	{
-		if (bInit)
-			return;
-		bInit = true;
-		JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
-		JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
-		JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
-		JDFResource paramRes = dummyResPool.appendResource("param", EnumResourceClass.Parameter, null);
+		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
+		final JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
+		final JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
+		final JDFResource paramRes = dummyResPool.appendResource("param", EnumResourceClass.Parameter, null);
 		resAttribs = paramRes.knownAttributes();
 		resAttribs.appendUnique(physRes.knownAttributes());
 		resAttribs.appendUnique(intRes.knownAttributes());
-	}
-
-	/**
-	 * @param node
-	 * @return
-	 */
-	public static KElement makeNewJDF(JDFNode node, VJDFAttributeMap vMap)
-	{
-
-		JDFNode root = node.getRoot();
-		final JDFNode spawnedNode;
-		if (root == node)
-		{
-			spawnedNode = node;
-		}
-		else
-		{
-			JDFSpawn spawn = new JDFSpawn(node);
-			spawn.bCopyComments = false;
-			spawn.bCopyCustomerInfo = false;
-			spawn.bCopyNodeInfo = false;
-			spawn.bSpawnROPartsOnly = true;
-			spawn.vRWResources_in = null;
-			spawn.vSpawnParts = vMap;
-			spawnedNode = spawn.spawnInformative();
-		}
-		spawnedNode.fixVersion(EnumVersion.Version_1_3);
-		return makeNewJDF(spawnedNode, root);
-	}
-
-	/**
-	 * @param node
-	 * @param newRoot
-	 */
-	private static void setElements(JDFNode node, KElement newRoot)
-	{
-		setAudits(newRoot, node);
-		VElement v = node.getChildElementVector(null, null, null, true, 0, false);
-		for (int i = 0; i < v.size(); i++)
-		{
-			KElement e = v.item(i);
-			if (e instanceof JDFResourceLinkPool)
-				continue;
-			if (e instanceof JDFResourcePool)
-				continue;
-			if (e instanceof JDFAncestorPool)
-				continue;
-			if (e instanceof JDFAuditPool)
-				continue;
-			if (e instanceof JDFNode)
-				continue;
-			if (e.getLocalName().equals("ProductList"))
-			{
-				newRoot.moveElement(e, null);
-				continue;
-			}
-			newRoot.copyElement(e, null);
-		}
-	}
-
-	/**
-	 * @param newRoot
-	 * @param node
-	 */
-	private static void setAudits(KElement newRoot, JDFNode node)
-	{
-		JDFAuditPool ap = node.getAuditPool();
-		if (ap == null)
-			return;
-		VElement audits = ap.getAudits(null, null, null);
-		KElement newPool = newRoot.appendElement("AuditPool");
-		int n = 0;
-		for (int i = 0; i < audits.size(); i++)
-		{
-			JDFAudit audit = (JDFAudit) audits.elementAt(i);
-			if (audit instanceof JDFSpawned)
-				continue;
-			if (audit instanceof JDFMerged)
-				continue;
-			newPool.copyElement(audit, null);
-			n++;
-		}
-		if (n == 0)
-			newPool.deleteNode();
-	}
-
-	/**
-	 * @param node
-	 * @param rootIn
-	 */
-	private static String setProduct(JDFNode node, JDFNode rootIn)
-	{
-		if (rootIn == null)
-			return null;
-		if (!rootIn.getType().equals("Product"))
-			return null;
-		KElement list = node.getCreateElement("ProductList");
-		KElement product = list.appendElement("Product");
-		product.setAttributes(rootIn);
-		setProductResources(product, rootIn);
-		VElement subProducts = rootIn.getvJDFNode("Product", null, true);
-		for (int i = 0; i < subProducts.size(); i++)
-		{
-			String childID = setProduct(node, (JDFNode) subProducts.elementAt(i));
-			product.appendAttribute("Children", childID, null, " ", true);
-		}
-		return product.getAttribute("ID");
+		refRes = new HashSet<String>();
+		doneRes = new HashSet<String>();
 	}
 
 	/**
 	 * @param product
 	 * @param rootIn
 	 */
-	private static void setProductResources(KElement product, JDFNode rootIn)
+	private void setProductResources(final KElement product, final JDFNode rootIn)
 	{
-		VElement prodLinks = rootIn.getResourceLinks(null);
-		HashMap componentMap = new HashMap();
-		for (int i = prodLinks.size() - 1; i >= 0; i--)
+		final VElement prodLinks = rootIn.getResourceLinks(null);
+		final HashMap componentMap = new HashMap();
+		final int size = prodLinks == null ? 0 : prodLinks.size();
+		for (int i = size - 1; i >= 0; i--)
 		{
-			JDFResourceLink rl = (JDFResourceLink) prodLinks.elementAt(i);
+			final JDFResourceLink rl = (JDFResourceLink) prodLinks.elementAt(i);
 			final JDFResource linkRoot = rl.getLinkRoot();
 			if (linkRoot instanceof JDFNodeInfo)
 			{
@@ -231,14 +214,14 @@ public class XJDF20
 			}
 		}
 		setResources(product, rootIn, prodLinks, null);
-		VElement vDropItems = product.getChildrenByTagName(ElementName.DROPITEMINTENT, null, null, false, true, 0);
+		final VElement vDropItems = product.getChildrenByTagName(ElementName.DROPITEMINTENT, null, null, false, true, 0);
 		for (int i = 0; i < vDropItems.size(); i++)
 		{
 			final JDFDropItemIntent dropItemIntent = (JDFDropItemIntent) vDropItems.item(i);
-			JDFComponent c = dropItemIntent.getComponent();
+			final JDFComponent c = dropItemIntent.getComponent();
 			if (c != null)
 			{
-				String id = (String) componentMap.get(c.getAttribute("tmp_id", null, ""));
+				final String id = (String) componentMap.get(c.getAttribute("tmp_id", null, ""));
 				if (id != null)
 				{
 					dropItemIntent.setAttribute("ProductRef", id);
@@ -248,251 +231,72 @@ public class XJDF20
 		}
 	}
 
-	/**
-	 * @param product
-	 * @param nodeIn
-	 * @return
-	 */
-	private static void setResources(KElement newRoot, JDFNode nodeIn, VElement resLinks, JDFNode rootIn)
+	private void setResources(final KElement newRoot, final JDFNode nodeIn, final VElement resLinks, final JDFNode rootIn)
 	{
-		VElement vResLinks = resLinks == null ? nodeIn.getResourceLinks(null) : resLinks;
+		final VElement vResLinks = resLinks == null ? nodeIn.getResourceLinks(null) : resLinks;
 		if (vResLinks == null)
+		{
 			return;
-		boolean bProduct = EnumType.Product.equals(nodeIn.getEnumType());
+		}
+		final boolean bProduct = EnumType.Product.equals(nodeIn.getEnumType());
 
 		for (int i = 0; i < vResLinks.size(); i++)
 		{
-			JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
+			final JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
 			final JDFResource linkTarget = rl.getLinkRoot();
 			if (bProduct && linkTarget instanceof JDFComponent)
+			{
 				continue;
+			}
 			linkTarget.expand(false);
-			setResource(newRoot, rl, linkTarget, rootIn);
+			// setResource(newRoot, rl, linkTarget);
 		}
 		return;
 	}
 
 	/**
-	 * @param newRoot
-	 * @param rl
-	 * @param linkTarget
-	 */
-	private static void setResource(KElement newRoot, JDFResourceLink rl, final JDFResource linkTarget, JDFNode rootIn)
-	{
-		String className = getClassName(linkTarget);
-		if (className == null)
-			return;
-
-		KElement resourceSet = newRoot.appendElement(className + "Set");
-
-		setLinkAttributes(resourceSet, rl, linkTarget, rootIn);
-
-		VElement vRes = rl.getTargetVector(0);
-		int dot = 0;
-		String resID = linkTarget.getID();
-		for (int j = 0; j < vRes.size(); j++)
-		{
-			JDFResource r = (JDFResource) vRes.elementAt(j);
-			VElement vLeaves = r.getLeaves(false);
-			for (int k = 0; k < vLeaves.size(); k++)
-			{
-				JDFResource leaf = (JDFResource) vLeaves.elementAt(k);
-				KElement newLeaf = resourceSet.appendElement(className);
-				//TODO this is just a quick hack - generating true id, idref pairs would be better
-				leaf.inlineRefElements(null, null, false);
-				//                VElement vRefs=leaf.getRefElements();
-				//                int refSize = vRefs==null ? 0 : vRefs.size();
-				//                for(int kk=0;kk<refSize;kk++)
-				//                {
-				//                    JDFRefElement ref=(JDFRefElement) vRefs.elementAt(kk);
-				//                    JDFResource refRes=ref.getTarget();
-				//                    if(!refRes.hasAttribute_KElement("ID", null, false))
-				//                    {
-				//                        String newID=refRes.getID()+"."+StringUtil.formatInteger(dot++);
-				//                        refRes.setAttribute("xjdf:partID", newID, "xjdf");
-				//                        leaf.appendAttribute(ref.getLocalName(), newID, null, " ", false);
-				//                    }
-				//                    
-				//                }
-				newLeaf.setAttribute("ID", resID + "." + StringUtil.formatInteger(dot++));
-				setLeafAttributes(leaf, rl, newLeaf);
-			}
-		}
-	}
-
-	/**
-	 * @param leaf
-	 * @param newLeaf
-	 */
-	private static void setLeafAttributes(JDFResource leaf, JDFResourceLink rl, KElement newLeaf)
-	{
-		JDFAttributeMap partMap = leaf.getPartMap();
-		//                   JDFAttributeMap attMap=leaf.getAttributeMap();
-		//                   attMap.remove("ID");
-		setAmountPool(rl, newLeaf, partMap);
-		if (partMap != null && partMap.size() > 0)
-		{
-			newLeaf.appendElement("Part").setAttributes(partMap);
-			//                     attMap.removeKeys(partMap.keySet());
-		}
-
-		KElement newResLeaf = newLeaf.copyElement(leaf, null);
-		newResLeaf.removeAttributes(leaf.getPartIDKeys());
-		newResLeaf.removeAttribute(AttributeName.ID);
-		newResLeaf.removeAttribute(AttributeName.CLASS);
-		newResLeaf.removeAttribute(AttributeName.PARTUSAGE);
-		newResLeaf.removeAttribute(AttributeName.LOCKED);
-
-		for (int i = 0; i < resAttribs.size(); i++)
-		{
-			if (newResLeaf.hasAttribute(resAttribs.stringAt(i)))
-				newLeaf.moveAttribute(resAttribs.stringAt(i), newResLeaf, null, null, null);
-		}
-
-		VElement allNewKids = newResLeaf.getChildrenByTagName(null, null, null, false, true, 0);
-		for (int j = 0; j < allNewKids.size(); j++)
-		{
-			KElement kj = allNewKids.item(j);
-			if (kj instanceof JDFResource)
-			{
-				for (int i = 0; i < resAttribs.size(); i++)
-				{
-					kj.removeAttribute(resAttribs.stringAt(i));
-				}
-			}
-		}
-
-		// retain spawn informatiom
-		if (leaf.hasAttribute(AttributeName.SPAWNIDS))
-		{
-			KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(m_spawnInfo, null, 0);
-			KElement spawnID = spawnInfo.appendElement("SpawnID");
-			spawnID.moveAttribute(AttributeName.SPAWNIDS, newLeaf, null, null, null);
-			spawnID.moveAttribute(AttributeName.SPAWNSTATUS, newLeaf, null, null, null);
-			spawnID.copyAttribute(AttributeName.RESOURCEID, newLeaf, AttributeName.ID, null, null);
-		}
-	}
-
-	private static void setAmountPool(JDFResourceLink rl, KElement newLeaf, JDFAttributeMap partMap)
-	{
-		JDFAmountPool ap = rl.getAmountPool();
-		if (ap != null)
-		{
-			VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
-			if (vPartAmounts != null)
-			{
-				for (int i = 0; i < vPartAmounts.size(); i++)
-				{
-					JDFPartAmount pa = (JDFPartAmount) vPartAmounts.item(i);
-					JDFAttributeMap map = pa.getPartMap();
-					map.removeKeys(partMap.keySet());
-					if (map.isEmpty()) // no further subdevision - simply blast into leaf
-					{
-						newLeaf.setAttributes(pa);
-					}
-					else if (map.size() == 1 && map.containsKey(AttributeName.CONDITION))
-					{
-						JDFAttributeMap attMap = pa.getAttributeMap();
-						Iterator it = attMap.getKeyIterator();
-						String condition = map.get(AttributeName.CONDITION);
-						while (it.hasNext())
-						{
-							String key = (String) it.next();
-							//                            if(key.indexOf(AttributeName.AMOUNT)>0)
-							//                            {
-							newLeaf.setAttribute(key + condition, attMap.get(key));
-							//                            }
-						}
-					}
-					else
-					// retain ap
-					{
-						KElement amountPool = newLeaf.getCreateElement("AmountPool");
-						pa = (JDFPartAmount) amountPool.copyElement(pa, null);
-						pa.setPartMap(map);
-					}
-					// TODO special handling for condition
-				}
-			}
-		}
-	}
-
-	/**
 	 * @param r
 	 */
-	private static String getClassName(JDFResource r)
+	private String getClassName(final JDFResource r)
 	{
 		if (r == null)
+		{
 			return null;
+		}
 		final EnumResourceClass resourceClass = r.getResourceClass();
 		if (resourceClass == null)
+		{
 			return null;
+		}
 		String className = "Resource";
 		if (resourceClass.equals(EnumResourceClass.Parameter) || resourceClass.equals(EnumResourceClass.Intent))
+		{
 			className = resourceClass.getName();
+		}
 		if (resourceClass.equals(EnumResourceClass.PlaceHolder))
+		{
 			return null;
+		}
 		return className;
 	}
 
-	/**
-	 * @param newRoot
-	 * @param rl
-	 */
-	private static void setLinkAttributes(KElement resourceSet, KElement rl, JDFResource linkRoot, JDFNode rootIn)
+	protected int myIndex(final KElement e)
 	{
-		resourceSet.setAttribute("Name", linkRoot.getNodeName());
-		resourceSet.copyAttribute("ID", linkRoot, null, null, null);
-		resourceSet.setAttributes(rl);
-		resourceSet.removeAttribute(AttributeName.RREF);
-		resourceSet.removeAttribute(AttributeName.RSUBREF);
-		if (rl instanceof JDFResourceLink)
+		final KElement parent = e.getParentNode_KElement();
+		int n = 0;
+		final String nodeName = e.getNodeName();
+		final String namespaceURI = e.getNamespaceURI();
+		KElement sib = parent.getFirstChildElement(nodeName, namespaceURI);
+		while (sib != e)
 		{
-			JDFResourceLink resLink = (JDFResourceLink) rl;
-
-			JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, "ID", null, resLink.getrRef(), 0, false);
-			if (resInRoot != null)
+			sib = sib.getNextSiblingElement(nodeName, namespaceURI);
+			if (sib == null)
 			{
-				VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
-				final int size = vCreators == null ? 0 : vCreators.size();
-				for (int i = 0; i < size; i++)
-				{
-					JDFNode depNode = (JDFNode) vCreators.elementAt(i);
-					KElement dependent = resourceSet.appendElement("Dependent");
-					dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
-					dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
-					dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
-				}
+				return -1;
 			}
+			n++;
 		}
-	}
-
-	/**
-	 * @param node
-	 * @param newRoot
-	 */
-	private static void setRootAttributes(JDFNode node, KElement newRoot)
-	{
-		newRoot.appendXMLComment("Very preliminary experimental prototype trial version: using: "
-				+ JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
-		newRoot.setAttributes(node);
-		if (!newRoot.hasAttribute(AttributeName.TYPES))
-			newRoot.renameAttribute("Type", "Types", null, null);
-		if (newRoot.hasAttribute(AttributeName.SPAWNID))
-		{
-			KElement spawnInfo = newRoot.appendElement(m_spawnInfo, "www.cip4.org/SpawnInfo");
-			spawnInfo.moveAttribute(AttributeName.SPAWNID, newRoot, null, null, null);
-			final JDFAncestorPool ancestorPool = node.getAncestorPool();
-			if (ancestorPool != null)
-			{
-				VJDFAttributeMap vParts = ancestorPool.getPartMapVector();
-				int size = vParts == null ? 0 : vParts.size();
-				for (int i = 0; i < size; i++)
-				{
-					spawnInfo.appendElement(ElementName.PART).setAttributes(vParts.elementAt(i));
-				}
-			}
-		}
+		return n;
 	}
 
 	/**
@@ -504,9 +308,9 @@ public class XJDF20
 		return rootName.toLowerCase();
 	}
 
-	public static void saveZip(String fileName, JDFNode rootNode, boolean replace)
+	public void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 	{
-		File file = new File(fileName);
+		final File file = new File(fileName);
 		if (file.canRead())
 		{
 			if (replace)
@@ -514,37 +318,41 @@ public class XJDF20
 				file.delete();
 			}
 			else
+			{
 				throw new JDFException("output file exists: " + file.getPath());
+			}
 		}
-		//file.createNewFile(fileName);
+		// file.createNewFile(fileName);
 
 		try
 		{
-			VElement v = rootNode.getvJDFNode(null, null, false);
-			FileOutputStream fos = new FileOutputStream(fileName);
-			ZipOutputStream zos = new ZipOutputStream(fos);
+			final VElement v = rootNode.getvJDFNode(null, null, false);
+			final FileOutputStream fos = new FileOutputStream(fileName);
+			final ZipOutputStream zos = new ZipOutputStream(fos);
 			for (int i = 0; i < v.size(); i++)
 			{
-				JDFNode n = (JDFNode) v.elementAt(i);
+				final JDFNode n = (JDFNode) v.elementAt(i);
 				String nam = n.getJobPartID(false);
 				if (nam == "")
+				{
 					nam = "Node" + i;
+				}
 				try
 				{
 					nam += "." + rootName;
-					ZipEntry ze = new ZipEntry(nam);
+					final ZipEntry ze = new ZipEntry(nam);
 					zos.putNextEntry(ze);
-					KElement newRoot = makeNewJDF(n, n.getRoot());
+					final KElement newRoot = makeNewJDF(n, null);
 					newRoot.getOwnerDocument_KElement().write2Stream(zos, 2, true);
 					zos.closeEntry();
 
 				}
-				catch (ZipException x)
+				catch (final ZipException x)
 				{
 					// TODO Auto-generated catch block
 					x.printStackTrace();
 				}
-				catch (IOException x)
+				catch (final IOException x)
 				{
 					// TODO Auto-generated catch block
 					x.printStackTrace();
@@ -552,10 +360,586 @@ public class XJDF20
 			}
 			zos.close();
 		}
-		catch (IOException x)
+		catch (final IOException x)
 		{
 			// TODO Auto-generated catch block
 			x.printStackTrace();
 		}
+	}
+
+	private void setAmountPool(final JDFResourceLink rl, final KElement newLeaf, final JDFAttributeMap partMap)
+	{
+		JDFAmountPool ap = rl.getAmountPool();
+		if (ap == null)
+		{
+			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT) || rl.hasAttribute(AttributeName.MAXAMOUNT))
+			{
+				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
+				final JDFPartAmount pa = ap.appendPartAmount();
+				pa.copyAttribute(AttributeName.AMOUNT, rl);
+				pa.copyAttribute(AttributeName.ACTUALAMOUNT, rl);
+				pa.copyAttribute(AttributeName.MAXAMOUNT, rl);
+			}
+		}
+		else
+		{
+			final VElement vPartAmounts = ap.getMatchingPartAmountVector(partMap);
+			if (vPartAmounts != null)
+			{
+				for (int i = 0; i < vPartAmounts.size(); i++)
+				{
+					JDFPartAmount pa = (JDFPartAmount) vPartAmounts.item(i);
+					final JDFAttributeMap map = pa.getPartMap();
+					map.removeKeys(partMap.keySet());
+					if (map.isEmpty()) // no further subdevision - simply blast into leaf
+					{
+						newLeaf.setAttributes(pa);
+					}
+					else if (map.size() == 1 && map.containsKey(AttributeName.CONDITION))
+					{
+						final JDFAttributeMap attMap = pa.getAttributeMap();
+						final Iterator it = attMap.getKeyIterator();
+						final String condition = map.get(AttributeName.CONDITION);
+						while (it.hasNext())
+						{
+							final String key = (String) it.next();
+							// if(key.indexOf(AttributeName.AMOUNT)>0)
+							// {
+							newLeaf.setAttribute(key + condition, attMap.get(key));
+							// }
+						}
+					}
+					else
+					// retain ap
+					{
+						final KElement amountPool = newLeaf.getCreateElement("AmountPool");
+						pa = (JDFPartAmount) amountPool.copyElement(pa, null);
+						pa.setPartMap(map);
+					}
+					// TODO special handling for condition
+				}
+			}
+		}
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkResource extends WalkJDFElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFResource r = (JDFResource) jdf;
+			final KElement newResLeaf = super.walk(jdf, xjdf);
+			newResLeaf.removeAttributes(r.getPartIDKeys());
+			newResLeaf.removeAttribute(AttributeName.ID);
+			newResLeaf.removeAttribute(AttributeName.CLASS);
+			newResLeaf.removeAttribute(AttributeName.PARTUSAGE);
+			newResLeaf.removeAttribute(AttributeName.LOCKED);
+
+			final String localName = xjdf.getLocalName();
+			final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
+			for (int i = 0; i < resAttribs.size(); i++)
+			{
+				if (newResLeaf.hasAttribute(resAttribs.stringAt(i)))
+				{
+					if (bRoot)
+					{
+						xjdf.moveAttribute(resAttribs.stringAt(i), newResLeaf, null, null, null);
+					}
+					else
+					{
+						newResLeaf.removeAttribute(resAttribs.stringAt(i));
+					}
+
+				}
+			}
+
+			return newResLeaf;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFResource;
+		}
+	} // //////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkJDFElement extends WalkElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFElement je = (JDFElement) jdf;
+			je.inlineRefElements(null, null, false);
+			return super.walk(jdf, xjdf);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFElement;
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkResLink extends WalkJDFElement
+	{
+		/**
+		 * @param e
+		 * @return thr created resource in this case just remove the pool
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFResourceLink rl = (JDFResourceLink) jdf;
+			final JDFResource linkTarget = rl.getLinkRoot();
+			if (linkTarget == null)
+			{
+				return null;
+			}
+			final boolean bCustomerInfo = linkTarget instanceof JDFCustomerInfo;
+			if (walkingProduct)
+			{
+				if (!bCustomerInfo && !EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+				{
+					return null;
+				}
+			}
+			else
+			{
+				if (bCustomerInfo || EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+				{
+					return null;
+				}
+			}
+			linkTarget.expand(false);
+			setResource(xjdf, rl, linkTarget);
+			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFResourceLink;
+		}
+
+		/**
+		 * @param newRoot
+		 * @param rl
+		 * @param linkTarget
+		 */
+		private void setResource(final KElement newRoot, final JDFResourceLink rl, final JDFResource linkTarget)
+		{
+			final String className = getClassName(linkTarget);
+			if (className == null)
+			{
+				return;
+			}
+
+			final KElement resourceSet = newRoot.appendElement(className + "Set");
+
+			setLinkAttributes(resourceSet, rl, linkTarget);
+
+			final VElement vRes = rl.getTargetVector(0);
+			for (int j = 0; j < vRes.size(); j++)
+			{
+				final JDFResource r = (JDFResource) vRes.elementAt(j);
+				final VElement vLeaves = r.getLeaves(false);
+				for (int k = 0; k < vLeaves.size(); k++)
+				{
+					final JDFResource leaf = (JDFResource) vLeaves.elementAt(k);
+					final KElement newBaseRes = setBaseResource(rl, leaf, resourceSet);
+					walkTree(leaf, newBaseRes);
+				}
+			}
+		}
+
+		/**
+		 * 
+		 */
+		private KElement setBaseResource(final JDFResourceLink rl, final JDFResource r, final KElement xjdfSet)
+		{
+			final KElement newLeaf = xjdfSet.appendElement(StringUtil.leftStr(xjdfSet.getNodeName(), -3));
+			newLeaf.setAttribute("ID", r.getAttribute("ID") + "." + StringUtil.formatInteger(myIndex(newLeaf)));
+			setLeafAttributes(r, rl, newLeaf);
+			return newLeaf;
+		}
+
+		/**
+		 * @param newRoot
+		 * @param rl
+		 */
+		private void setLinkAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
+		{
+			resourceSet.setAttribute("Name", linkRoot.getNodeName());
+			resourceSet.copyAttribute("ID", linkRoot, null, null, null);
+			resourceSet.setAttributes(rl);
+			resourceSet.removeAttribute(AttributeName.RREF);
+			resourceSet.removeAttribute(AttributeName.RSUBREF);
+			if (rl instanceof JDFResourceLink)
+			{
+				final JDFResourceLink resLink = (JDFResourceLink) rl;
+				final JDFNode rootIn = resLink.getJDFRoot();
+
+				final JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, "ID", null, resLink.getrRef(), 0, false);
+				if (resInRoot != null)
+				{
+					final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
+					final int size = vCreators == null ? 0 : vCreators.size();
+					for (int i = 0; i < size; i++)
+					{
+						final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
+						final KElement dependent = resourceSet.appendElement("Dependent");
+						dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
+						dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
+						dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+					}
+				}
+			}
+		}
+
+		/**
+		 * @param leaf
+		 * @param newLeaf
+		 */
+		private void setLeafAttributes(final JDFResource leaf, final JDFResourceLink rl, final KElement newLeaf)
+		{
+			final JDFAttributeMap partMap = leaf.getPartMap();
+			// JDFAttributeMap attMap=leaf.getAttributeMap();
+			// attMap.remove("ID");
+			setAmountPool(rl, newLeaf, partMap);
+
+			// retain spawn informatiom
+			if (leaf.hasAttribute(AttributeName.SPAWNIDS))
+			{
+				final KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(m_spawnInfo, null, 0);
+				final KElement spawnID = spawnInfo.appendElement("SpawnID");
+				spawnID.moveAttribute(AttributeName.SPAWNIDS, newLeaf, null, null, null);
+				spawnID.moveAttribute(AttributeName.SPAWNSTATUS, newLeaf, null, null, null);
+				spawnID.copyAttribute(AttributeName.RESOURCEID, newLeaf, AttributeName.ID, null, null);
+			}
+			if (partMap != null && partMap.size() > 0)
+			{
+				newLeaf.appendElement("Part").setAttributes(partMap);
+				// attMap.removeKeys(partMap.keySet());
+			}
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkResLinkPool extends WalkJDFElement
+	{
+		/**
+		 * @param e
+		 * @return thr created resource in this case just remove the pool
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			return xjdf;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFResourceLinkPool;
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkJDF extends WalkJDFElement
+	{
+		/**
+		 * @param e
+		 * @return thr created resource
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			if (!first)
+			{
+				return null;
+			}
+			first = false;
+			final JDFNode node = (JDFNode) jdf;
+			setRootAttributes(node, xjdf);
+			xjdf.removeAttribute(AttributeName.ACTIVATION);
+			return xjdf;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !walkingProduct && (toCheck instanceof JDFNode);
+		}
+
+		/**
+		 * @param node
+		 * @param newRoot
+		 */
+		private void setRootAttributes(final JDFNode node, final KElement newRoot)
+		{
+			newRoot.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+			newRoot.setAttribute(AttributeName.JOBID, node.getJobID(true));
+			newRoot.setAttributes(node);
+
+			if (!newRoot.hasAttribute(AttributeName.TYPES))
+			{
+				newRoot.renameAttribute("Type", "Types", null, null);
+			}
+			else
+			{
+				newRoot.removeAttribute("Type");
+			}
+			if (newRoot.hasAttribute(AttributeName.SPAWNID))
+			{
+				final KElement spawnInfo = newRoot.appendElement(m_spawnInfo, "www.cip4.org/SpawnInfo");
+				spawnInfo.moveAttribute(AttributeName.SPAWNID, newRoot, null, null, null);
+				final JDFAncestorPool ancestorPool = node.getAncestorPool();
+				if (ancestorPool != null)
+				{
+					final VJDFAttributeMap vParts = ancestorPool.getPartMapVector();
+					final int size = vParts == null ? 0 : vParts.size();
+					for (int i = 0; i < size; i++)
+					{
+						spawnInfo.appendElement(ElementName.PART).setAttributes(vParts.elementAt(i));
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkProduct extends WalkJDFElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final KElement pList = "Product".equals(xjdf.getLocalName()) ? xjdf.getParentNode_KElement() : xjdf;
+			final JDFNode node = (JDFNode) jdf;
+			if (!EnumType.Product.equals(node.getEnumType()))
+			{
+				return null;
+			}
+			final KElement prod = pList.appendElement("Product");
+			prod.setAttributes(jdf);
+			prod.removeAttribute(AttributeName.TYPE);
+			prod.removeAttribute(AttributeName.VERSION);
+			prod.removeAttribute(AttributeName.MAXVERSION);
+			prod.removeAttribute(AttributeName.ICSVERSIONS);
+			prod.removeAttribute(AttributeName.STATUS);
+			prod.removeAttribute(AttributeName.STATUSDETAILS);
+			prod.removeAttribute(AttributeName.XMLNS);
+			prod.removeAttribute(AttributeName.XSITYPE);
+			prod.removeAttribute(AttributeName.JOBID);
+			prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
+			prod.removeAttribute("xmlns:xsi");
+			calcChildren(node, prod);
+			calcAmounts(node, prod);
+			return prod;
+		}
+
+		/**
+		 * @param node
+		 * @param prod
+		 */
+		private void calcAmounts(final JDFNode node, final KElement prod)
+		{
+			final JDFResourceLink cOut = node.getLink(0, "ComponentLink", new JDFAttributeMap("Usage", "Output"), null);
+			if (cOut != null)
+			{
+				setAmountPool(cOut, prod, null);
+			}
+
+		}
+
+		/**
+		 * @param node
+		 */
+		private void calcChildren(final JDFNode node, final KElement prod)
+		{
+			final VElement vComp = node.getPredecessors(true, true);
+			final int siz = vComp == null ? 0 : vComp.size();
+			final VString kids = new VString();
+			for (int i = 0; i < siz; i++)
+			{
+				final JDFNode nPre = (JDFNode) vComp.get(i);
+				if (EnumType.Product.equals(nPre.getEnumType()))
+				{
+					kids.add(nPre.getID());
+				}
+			}
+			if (kids.size() > 0)
+			{
+				prod.setAttribute("ProductRefs", kids, null);
+			}
+			else
+			{
+				final KElement list = prod.getParentNode_KElement();
+				list.appendAttribute("RootProducts", node.getID(), null, null, true);
+			}
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return walkingProduct && toCheck instanceof JDFNode;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkElement extends BaseWalker
+	{
+		public WalkElement()
+		{
+			super(getFactory());
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final KElement eNew = xjdf.copyElement(jdf, null);
+			eNew.removeChildren(null, null, null);
+			return eNew;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkIgnore extends WalkJDFElement
+	{
+
+		public WalkIgnore()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool || toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkAuditPool extends WalkJDFElement
+	{
+
+		public WalkAuditPool()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			if (walkingProduct)
+			{
+				return null;
+			}
+			return super.walk(jdf, xjdf);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFAuditPool;
+		}
+
 	}
 }

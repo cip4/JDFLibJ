@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1047,6 +1047,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSpawnIdentical()
 	{
 		for (int i = 0; i < 2; i++)
@@ -1054,49 +1057,65 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 			n.setType(EnumType.ImageSetting);
 
-			for (int j = 0; j < 2; j++)
+			for (int ii = 1; ii < 2; ii++)
 			{
-				JDFResource r = j == 0 ? n.addResource("ExposedMedia", EnumUsage.Output) : n.addResource("Media", EnumUsage.Input);
-				if (i == 1)
+				for (int j = 0; j < 2; j++) // in or out
 				{
-					r = r.addPartition(EnumPartIDKey.SheetName, "s1");
+					JDFResource r = j == 0 ? n.addResource("ExposedMedia", EnumUsage.Output) : n.addResource("Media", EnumUsage.Input);
+					if (i == 1)
+					{
+						r = r.addPartition(EnumPartIDKey.SheetName, "s1");
+					}
+					final JDFResource rEN = r.addPartition(EnumPartIDKey.PartVersion, "EN");
+					final JDFResource rDE = r.addPartition(EnumPartIDKey.PartVersion, "DE");
+					r.addPartition(EnumPartIDKey.PartVersion, "FR");
+					rEN.setIdentical(rDE);
 				}
-				final JDFResource rEN = r.addPartition(EnumPartIDKey.PartVersion, "EN");
-				final JDFResource rDE = r.addPartition(EnumPartIDKey.PartVersion, "DE");
-				r.addPartition(EnumPartIDKey.PartVersion, "FR");
-				rEN.setIdentical(rDE);
-			}
-			final VString vRWRes = new VString();
-			vRWRes.add(ElementName.EXPOSEDMEDIA);
-			final VJDFAttributeMap vPartMap = new VJDFAttributeMap();
-			final JDFAttributeMap map = new JDFAttributeMap();
-			map.put("PartVersion", "EN");
-			vPartMap.add(map);
-			final JDFSpawn spawn = new JDFSpawn(n); // fudge to test output
-			// counting
+				final VString vRWRes = new VString();
+				vRWRes.add(ElementName.EXPOSEDMEDIA);
+				final VJDFAttributeMap vPartMap = new VJDFAttributeMap();
+				final JDFAttributeMap map = new JDFAttributeMap();
+				map.put("PartVersion", "EN");
+				vPartMap.add(map);
+				final JDFAttributeMap map2 = new JDFAttributeMap();
+				map2.put("PartVersion", "DE");
+				final JDFSpawn spawn = new JDFSpawn(n); // fudge to test output
+				//
+				if (ii == 1)
+				{
+					spawn.bSpawnIdentical = false;
+					// counting
+				}
 
-			final JDFNode spawnedNode = spawn.spawn("thisUrl", "newURL", vRWRes, vPartMap, true, true, true, true);
-			for (int j = 0; j < 2; j++)
-			{
-				final String resName = (j == 0 ? "Exposed" : "") + ElementName.MEDIA;
-				final JDFResource rS = spawnedNode.getResource(resName, null, 0);
-				final JDFResource rs2 = rS.getPartition(map, null);
-				assertNotNull(resName + " loop " + j + " " + i, rs2);
-				assertNull(rS.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion, "FR"), null));
-			}
+				final JDFNode spawnedNode = spawn.spawn("thisUrl", "newURL", vRWRes, vPartMap, true, true, true, true);
+				for (int j = 0; j < 2; j++)
+				{
+					final String resName = (j == 0 ? "Exposed" : "") + ElementName.MEDIA;
+					final JDFResource rS = spawnedNode.getResource(resName, null, 0);
+					final JDFResource rs2 = rS.getPartition(map, null);
+					if (ii == 0)
+					{
+						assertNotNull(resName + " loop " + j + " " + i, rs2);
+					}
+					else if (ii == 1)
+					{
+						assertNull(resName + " loop " + j + " " + i, rs2);
+					}
+					assertNull(rS.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion, "FR"), null));
+				}
 
-			final JDFMerge merge = new JDFMerge(n);
-			merge.bAddMergeToProcessRun = true;
+				final JDFMerge merge = new JDFMerge(n);
+				merge.bAddMergeToProcessRun = true;
 
-			// merge here
-			final JDFNode mergedNode = merge.mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
-			for (int j = 0; j < 2; j++)
-			{
-				final JDFResource rMerge = mergedNode.getResource((j == 0 ? "Exposed" : "") + ElementName.MEDIA, null, 0);
-				assertEquals(rMerge.toString().indexOf("Spawn"), -1);
+				// merge here
+				final JDFNode mergedNode = merge.mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+				for (int j = 0; j < 2; j++)
+				{
+					final JDFResource rMerge = mergedNode.getResource((j == 0 ? "Exposed" : "") + ElementName.MEDIA, null, 0);
+					assertEquals(rMerge.toString().indexOf("Spawn"), -1);
+				}
 			}
 		}
-
 	}
 
 	// /////////////////////////////////////////////////////////

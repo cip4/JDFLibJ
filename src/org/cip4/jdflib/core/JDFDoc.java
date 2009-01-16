@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -181,7 +181,6 @@ public class JDFDoc extends XMLDoc
 	 * clone
 	 * 
 	 * @return Object the cloned JDFDoc
-	 * @throws CloneNotSupportedException
 	 */
 	@Override
 	public Object clone()
@@ -203,7 +202,7 @@ public class JDFDoc extends XMLDoc
 	/**
 	 * CreateJDF
 	 * 
-	 * @param JDFPath
+	 * @param jdfPath
 	 * @deprecated simply use constructor
 	 * @return JDFDoc
 	 */
@@ -216,7 +215,6 @@ public class JDFDoc extends XMLDoc
 		root.init();
 
 		new_doc.appendChild(root);
-
 		new_doc.write2File(jdfPath, 0, true);
 
 		return new_doc;

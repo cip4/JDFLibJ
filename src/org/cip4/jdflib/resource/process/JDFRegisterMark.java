@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,6 @@
  * class JDFRegisterMark
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
  * Warning! very preliminary test version. 
  * Interface subject to change without prior notice! 
  */
@@ -81,24 +80,28 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoRegisterMark;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * <16.01.2009
+ */
 public class JDFRegisterMark extends JDFAutoRegisterMark
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFRegisterMark
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFRegisterMark(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFRegisterMark(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -111,8 +114,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFRegisterMark(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFRegisterMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -126,9 +128,7 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFRegisterMark(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFRegisterMark(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,10 +142,9 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 	/**
 	 * append a separationspec with a given name to this
 	 * 
-	 * @param sep
-	 *            the separation name
+	 * @param sep the separation name
 	 */
-	public void appendSeparation(String sep)
+	public void appendSeparation(final String sep)
 	{
 		appendSeparationSpec().setName(sep);
 	}
@@ -153,15 +152,16 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 	/**
 	 * Get the n'th separation name in the SeparationSpec elements
 	 * 
-	 * @param iSkip
-	 *            the index of the SeparationSpec
+	 * @param iSkip the index of the SeparationSpec
 	 * @return separation names, null if iSkip > nSeparations
 	 */
-	public String getSeparation(int iSkip)
+	public String getSeparation(final int iSkip)
 	{
-		JDFSeparationSpec ss = getSeparationSpec(iSkip);
+		final JDFSeparationSpec ss = getSeparationSpec(iSkip);
 		if (ss == null)
+		{
 			return null;
+		}
 		return ss.getName();
 	}
 
@@ -172,14 +172,13 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 	 */
 	public VString getSeparations()
 	{
-		VString vName = new VString();
-		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null,
-				null, false, 0, false);
-		int nSep = v.size();
+		final VString vName = new VString();
+		final VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
+		final int nSep = v.size();
 		for (int i = 0; i < nSep; i++)
 		{
-			JDFSeparationSpec sep = (JDFSeparationSpec) v.elementAt(i);
-			String sepName = sep.getName();
+			final JDFSeparationSpec sep = (JDFSeparationSpec) v.elementAt(i);
+			final String sepName = sep.getName();
 			vName.appendUnique(sepName);
 		}
 		return vName;
@@ -188,36 +187,47 @@ public class JDFRegisterMark extends JDFAutoRegisterMark
 	/**
 	 * remove a separationspec with a given name from this
 	 * 
-	 * @param sep
-	 *            the separation name
+	 * @param sep the separation name
 	 * @return int the index of the removed separation; -1 if none found
 	 */
-	public int removeSeparation(String sep)
+	public int removeSeparation(final String sep)
 	{
-		VString vs = getSeparations();
+		final VString vs = getSeparations();
 		final int index = vs.index(sep);
 		if (index >= 0)
+		{
 			getSeparationSpec(index).deleteNode();
+		}
 		return index;
 	}
 
 	/**
-	 * set all separation names in the SeparationSpec elements, remove any prior
-	 * elements
+	 * set all separation names in the SeparationSpec elements, remove any prior elements
 	 * 
-	 * @param vSeps
-	 *            the vector of separation names to set
+	 * @param vSeps the vector of separation names to set
 	 */
-	public void setSeparations(VString vSeps)
+	public void setSeparations(final VString vSeps)
 	{
 		removeChildren(ElementName.SEPARATIONSPEC, null, null);
 		if (vSeps == null)
+		{
 			return;
+		}
 
 		for (int i = 0; i < vSeps.size(); i++)
 		{
 			appendSeparation(vSeps.stringAt(i));
 		}
 	}
-} // class JDFIDPLayout
+
+	/**
+	 * legacy method to allow setting a single value as string
+	 * @param value the value to set the attribute to
+	 */
+	public void setMarkType(final String value)
+	{
+		setAttribute(AttributeName.MARKTYPE, value, null);
+	}
+
+} // class JDFRegisterMark
 // ==========================================================================

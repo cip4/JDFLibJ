@@ -133,6 +133,11 @@ public class JDFSpawn
 	public boolean bCopyNodeInfo = true;
 
 	/**
+	 * if true, copy node info
+	 */
+	public boolean bSpawnIdentical = true;
+
+	/**
 	 * if true, copy customer info
 	 */
 	public boolean bCopyCustomerInfo = true;
@@ -618,43 +623,7 @@ public class JDFSpawn
 				// }
 				// else
 				// {
-				if (isThereAlready && bResRW)
-				{
-					vvRW.add(rRoot.getID());
-				}
-				// }
-				VString rRefsRW = spawnAudit.getrRefsRWCopied();
-				VString rRefsRO = spawnAudit.getrRefsROCopied();
-				Iterator<String> iterRefs = vvRW.iterator();
-				while (iterRefs.hasNext())
-				{
-					final String s = iterRefs.next();
-					rRefsRW.add(s);
-					final int ind = rRefsRO.index(s);
-					if (ind >= 0)
-					{
-						rRefsRO.remove(ind);
-					}
-				}
-				iterRefs = vvRO.iterator();
-				while (iterRefs.hasNext())
-				{
-					final String s = iterRefs.next();
-					rRefsRO.add(s);
-				}
-				rRefsRO.unify();
-				rRefsRW.unify();
-				if (rRefsRO.isEmpty())
-				{
-					rRefsRO = null;
-				}
-				if (rRefsRW.isEmpty())
-				{
-					rRefsRW = null;
-				}
 
-				spawnAudit.setrRefsROCopied(rRefsRO);
-				spawnAudit.setrRefsRWCopied(rRefsRW);
 				// get the effected resources
 				VElement vRes = new VElement();
 				VElement vResRoot = new VElement();
@@ -704,6 +673,7 @@ public class JDFSpawn
 				final int siz = vRes.size() < vResRoot.size() ? vRes.size() : vResRoot.size();
 
 				// loop over all partitions
+				boolean bRealyRW = vSpawnParts == null || vSpawnParts.size() == 0;
 				for (int resParts = 0; resParts < siz; resParts++)
 				{
 					final JDFResource r = (JDFResource) vRes.elementAt(resParts);
@@ -711,15 +681,62 @@ public class JDFSpawn
 
 					spawnPart(rRoot1, spawnID, copyStatus, true);
 					spawnPart(r, spawnID, copyStatus, false);
-
 					if (vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
 					{
 						// reduce partitions of all RW resources and of RO
 						// resources if requested
-						// r.getResourceRoot().reducePartitions(vSpawnParts);
 						reducePartitions(r.getResourceRoot());
+						if (EnumSpawnStatus.SpawnedRW.equals(rRoot1.getSpawnStatus()))
+						{
+							bRealyRW = true;
+						}
 					}
 				}
+				if (!bRealyRW && EnumSpawnStatus.SpawnedRW.equals(copyStatus))
+				{
+					bResRW = false;
+					if (!vvRO.contains(rRoot.getID()) && !vvRW.contains(rRoot.getID()))
+					{
+						vvRO.add(rRoot.getID());
+					}
+				}
+				if (isThereAlready && bResRW)
+				{
+					vvRW.add(rRoot.getID());
+				}
+				// }
+				VString rRefsRW = spawnAudit.getrRefsRWCopied();
+				VString rRefsRO = spawnAudit.getrRefsROCopied();
+				Iterator<String> iterRefs = vvRW.iterator();
+				while (iterRefs.hasNext())
+				{
+					final String s = iterRefs.next();
+					rRefsRW.add(s);
+					final int ind = rRefsRO.index(s);
+					if (ind >= 0)
+					{
+						rRefsRO.remove(ind);
+					}
+				}
+				iterRefs = vvRO.iterator();
+				while (iterRefs.hasNext())
+				{
+					final String s = iterRefs.next();
+					rRefsRO.add(s);
+				}
+				rRefsRO.unify();
+				rRefsRW.unify();
+				if (rRefsRO.isEmpty())
+				{
+					rRefsRO = null;
+				}
+				if (rRefsRW.isEmpty())
+				{
+					rRefsRW = null;
+				}
+
+				spawnAudit.setrRefsROCopied(rRefsRO);
+				spawnAudit.setrRefsRWCopied(rRefsRW);
 			}
 		}
 
@@ -737,6 +754,11 @@ public class JDFSpawn
 	 */
 	private void addIdentical(final VElement vRes)
 	{
+		if (!bSpawnIdentical)
+		{
+			return;
+		}
+
 		if (vRes == null || vRes.size() == 0 || vSpawnParts == null || vSpawnParts.size() == 0)
 		{
 			return;
@@ -905,6 +927,14 @@ public class JDFSpawn
 						break;
 					}
 				}
+				if (!bSpawnIdentical && !bSpawnID)
+				{
+					if (!vPartMap.subMap(rMainPart.getPartMap()))
+					{
+						bSpawnID = true; // bluff existing spawnID so that it does not get set below
+					}
+				}
+
 				if (!bSpawnID)
 				{
 					rMainPart.appendSpawnIDs(spawnID);
@@ -1092,12 +1122,19 @@ public class JDFSpawn
 							final JDFIdentical id = child.getIdentical();
 							if (id != null)
 							{
-								final JDFResource resourceRoot = r.getResourceRoot();
-								JDFResource partition = resourceRoot.getPartition(testMap, null);
-								while (partition != resourceRoot)
+								if (bSpawnIdentical)
 								{
-									identical.add(partition);
-									partition = (JDFResource) partition.getParentNode_KElement();
+									final JDFResource resourceRoot = r.getResourceRoot();
+									JDFResource partition = resourceRoot.getPartition(testMap, null);
+									while (partition != resourceRoot)
+									{
+										identical.add(partition);
+										partition = (JDFResource) partition.getParentNode_KElement();
+									}
+								}
+								else
+								{
+									bad.add(child);
 								}
 							}
 							if (partIDPos + 1 < partIDKeys.size())

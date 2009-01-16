@@ -37,7 +37,7 @@ public class XJDFTest extends JDFTestCaseBase
 		r3.setProductID("P1");
 		final JDFExposedMedia xm0 = (JDFExposedMedia) r3;
 		xm0.setPlateType(EnumPlateType.Dummy);
-		final KElement e = XJDF20.makeNewJDF(n, n);
+		final KElement e = new XJDF20().makeNewJDF(n, null);
 
 		final JDFNode n2 = new JDFDoc("JDF").getJDFRoot();
 		n2.setType(EnumType.ConventionalPrinting);

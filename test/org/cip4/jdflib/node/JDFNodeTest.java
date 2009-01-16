@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -469,6 +469,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAddProduct()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -480,6 +483,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAddResource()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -498,6 +504,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAddInternalPipe()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -514,7 +523,24 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testCombinedProcessIndex()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setCombined(new VString("LayoutPreparation Imposition Interpreting DigitalPrinting Folding", null));
+		final JDFResource r = n.addResource("Media", EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, null);
+		final JDFIntegerList cpi = rl.getCombinedProcessIndex();
+		assertTrue(cpi.contains(3));
+		assertFalse(cpi.contains(0));
 
+	}
+
+	/**
+	 * 
+	 */
 	public void testCloneResourceToModify()
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
@@ -531,6 +557,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertTrue("link", ra.getOldLink().hasChildElement("AmountPool", null));
 	}
 
+	/**
+	 * 
+	 */
 	public void testEraseEmptyAttributes()
 	{
 		final JDFDoc d = new JDFDoc("JDF");

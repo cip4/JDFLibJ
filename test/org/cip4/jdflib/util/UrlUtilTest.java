@@ -85,6 +85,11 @@ import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 12.01.2009
+ */
 public class UrlUtilTest extends JDFTestCaseBase
 {
 	// /////////////////////////////////////////////////////////////////////////
@@ -152,6 +157,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isIRL("file:///C:/Documents%20and%20Settings/Israel/My%20Documents/Vio%20Production/Results/TIME_H8789/TIME_H8789.pdf"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testIsURL()
 	{
 		assertTrue(UrlUtil.isURL("file://bl.txt"));
@@ -167,6 +175,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testStringToURL() throws Exception
 	{
 		// test for an existing directory (a trailing slash is appended by
@@ -174,7 +185,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.StringToURL("c:\\temp\\").getPath().startsWith(new URL("File:/c:/temp").getPath()));
 		assertTrue(UrlUtil.StringToURL("File:/c:/temp/").getPath().startsWith(new URL("File:/c:/temp").getPath()));
 		assertTrue(UrlUtil.StringToURL("c:\\temp").getPath().startsWith(new URL("File:/c:/temp").getPath()));
-		assertTrue(UrlUtil.StringToURL("File:/c:/temp").getPath().startsWith(new URL("File:/c:/temp").getPath()));
+		assertTrue(UrlUtil.StringToURL("File:/c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
+		assertTrue(UrlUtil.StringToURL("File:///c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
 
 		// test for a file or a non existing object (trailing slash is
 		// removed by StringToURL)
@@ -182,7 +194,6 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.StringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
 		assertEquals(UrlUtil.StringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
 		assertEquals(UrlUtil.StringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
-		assertEquals(UrlUtil.StringToURL("File:/c:/xyz").getPath(), new URL("File:/c:/xyz").getPath());
 
 		assertEquals(UrlUtil.StringToURL("http://foo"), new URL("http://foo"));
 		assertNull("empty File: should be null", UrlUtil.StringToURL("File:"));
@@ -192,7 +203,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception
+	 * 
 	 */
 	public void testIsEscaped()
 	{
@@ -203,6 +214,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testFileToURL()
 	{
 		final File f = new File("C:\\IO.SYS");
@@ -262,6 +276,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 */
 	public void testURLToFile() throws Exception
 	{
+
 		for (int i = 0; i < 2; i++)
 		{
 			File f = UrlUtil.urlToFile(".");
@@ -288,6 +303,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertEquals("escape %20", f.getCanonicalPath(), f2.getCanonicalPath());
 
 		}
+		final String uC = "file:///C:/Documents%20and%20Settings/All%20Users/Desktop/Prinect_Imposition_Editor/Examples/x.jdf";
+		assertTrue(UrlUtil.urlToFile(uC).getPath().startsWith("C:" + File.separator + "Documents and Settings"));
 		final File fi1 = new File("\\\\fooBar\\4ü€.txt");
 		final File fi = UrlUtil.urlToFile("file://fooBar/4ü%e2%82%ac.txt");
 		assertEquals("escape %20", fi.getCanonicalPath(), fi1.getCanonicalPath());
@@ -306,6 +323,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertFalse(UrlUtil.isUNC("/c/d/e.f"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetRelativeURI()
 	{
 		File f = new File("./a b");
@@ -316,6 +336,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetRelativeURL()
 	{
 		File file = new File("c:\\a\\b\\c.txt");
@@ -331,6 +354,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetURLWithDirectory()
 	{
 		String url = "File://a.b";
@@ -369,6 +395,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testRemoveExtension()
 	{
 		assertEquals(UrlUtil.removeExtension("a.b"), "a");
@@ -380,6 +409,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testCleanDots()
 	{
 		assertEquals(UrlUtil.cleanDots("."), ".");

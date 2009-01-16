@@ -595,9 +595,9 @@ public class UrlUtil
 		}
 		if (File.separator.equals("\\")) // on windows
 		{
-			if (urlString.startsWith("///") && urlString.length() > 5 && urlString.charAt(4) == '/')
+			if (urlString.startsWith("///") && urlString.length() > 6 && urlString.charAt(4) == ':' && urlString.charAt(5) == '/')
 			{
-				urlString = urlString.charAt(3) + ":" + urlString.substring(4);
+				urlString = urlString.charAt(3) + ":" + urlString.substring(5);
 			}
 			else if (urlString.startsWith("/") && urlString.length() > 3 && urlString.charAt(2) == '/' && urlString.charAt(1) != '/')
 			{

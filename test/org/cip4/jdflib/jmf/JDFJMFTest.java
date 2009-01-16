@@ -89,7 +89,7 @@ import org.cip4.jdflib.resource.JDFNotification;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class JDFJMFTest extends JDFTestCaseBase
 {
@@ -110,7 +110,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertEquals(jmf.getMessageVector(null, EnumType.Status).size(), 2);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 
@@ -121,7 +121,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFJMF jmf = doc.getJMFRoot();
 		jmf.setSenderID("sid");
 		final JDFCommand c = jmf.appendCommand();
-		assertTrue(c.getID().indexOf(".sid.") != -1);
+		assertTrue(c.getID().indexOf("." + "sid".hashCode() + ".") != -1);
 		assertTrue(jmf.toString().indexOf("xsi:type=") > 0);
 		assertEquals(jmf.getMaxVersion(), jmf.getVersion(false));
 		assertEquals(jmf.getMaxVersion(), c.getMaxVersion(true));
@@ -140,7 +140,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertEquals(jmf.getMaxVersion(), c.getMaxVersion(true));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	/**
 	 * 
@@ -151,11 +151,11 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFCommand c = jmf.appendCommand();
-		assertTrue(c.getID().indexOf(".sid.") != -1);
+		assertTrue(c.getID().indexOf("." + "sid".hashCode() + ".") != -1);
 		JDFJMF.setTheSenderID(null);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	public void testgetSubmissionParams()
 	{
@@ -170,7 +170,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertEquals("url", jmf.getSubmissionURL());
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	public void testCreateResponse()
 	{
@@ -192,7 +192,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
@@ -288,7 +288,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		JDFJMF.setTheSenderID("a b");
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.AbortQueueEntry);
 		final JDFResponse response = jmf.getResponse(0);
-		assertTrue("thge sender id was added but stripped", response.getID().indexOf(".ab.") > 0);
+		assertTrue("the sender id was added but stripped", response.getID().indexOf("." + "ab".hashCode() + ".") > 0);
 	}
 
 	// ///////////////////////////////////////////////////////////////////
@@ -386,7 +386,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 		{
 			final JDFMessage.EnumFamily f = (JDFMessage.EnumFamily) it.next();
 			if (f == null)
+			{
 				continue;
+			}
 			final JDFMessage m = jmf.appendMessageElement(f, null);
 			m.setType("KnownMessages");
 
@@ -404,8 +406,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 
 			assertTrue(" added messages", jmf.getMessageVector(f, null).size() == 1);
 			assertTrue("xsi type", jmf.getMessageElement(f, null, 0).hasAttribute(AttributeName.XSITYPE));
-			assertEquals("xsi type", jmf.getMessageElement(f, null, 0).getAttribute(AttributeName.XSITYPE), f.getName()
-					+ "KnownMessages");
+			assertEquals("xsi type", jmf.getMessageElement(f, null, 0).getAttribute(AttributeName.XSITYPE), f.getName() + "KnownMessages");
 
 		}
 

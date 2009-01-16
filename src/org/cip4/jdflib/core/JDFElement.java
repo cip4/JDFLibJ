@@ -2653,15 +2653,13 @@ public class JDFElement extends KElement
 	 * 
 	 * @default appendAnchor(null)
 	 */
-	public String appendAnchor(final String strName)
+	public String appendAnchor(String strName)
 	{
-		String strNameLocal = strName;
-
 		if (hasAttribute(AttributeName.ID))
 		{
 			return this.getAttribute(AttributeName.ID, null, null);
 		}
-		else if ((strNameLocal == null) || strNameLocal.equals(JDFConstants.EMPTYSTRING))
+		else if ((strName == null) || strName.equals(JDFConstants.EMPTYSTRING))
 		{
 			String local = "";
 			final JDFNode n = getJDFRoot();
@@ -2681,15 +2679,15 @@ public class JDFElement extends KElement
 				if (!isWildCard(local))
 				{
 					local = StringUtil.replaceCharSet(local, " \t\n\f", null, 0);
-					local = "." + local + ".";
+					local = "." + local.hashCode() + ".";
 				}
 			}
 
-			strNameLocal = getIDPrefix() + local + uniqueID(0);
+			strName = getIDPrefix() + local + uniqueID(0);
 		}
-		setAttribute(AttributeName.ID, strNameLocal, null);
+		setAttribute(AttributeName.ID, strName, null);
 
-		return strNameLocal;
+		return strName;
 	}
 
 	/**

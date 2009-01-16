@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,6 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.AttrNSImpl;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.apache.xerces.dom.ElementNSImpl;
-import org.apache.xerces.dom.NodeImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
@@ -6142,7 +6141,8 @@ public class KElement extends ElementNSImpl
 	{
 		final KElement e = (KElement) cloneNode(true);
 		e.ownerDocument = d.getMemberDocument();
-		e.ownerNode = (NodeImpl) d.getParentNode();
+		e.ownerNode = e.ownerDocument;
+		e.flags = (short) (e.flags | e.OWNED); // otherwise some crap might not work...
 		return e;
 	}
 
