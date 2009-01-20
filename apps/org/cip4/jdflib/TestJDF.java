@@ -33,6 +33,7 @@ public class TestJDF
 		}
 		catch (final FileNotFoundException e)
 		{
+			//
 		}
 
 	}

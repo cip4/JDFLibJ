@@ -390,12 +390,17 @@ public class JDFResourceLinkPool extends JDFPool
 	 */
 	public JDFResourceLink getLink(final JDFResource r, final EnumUsage usage, final EnumProcessUsage processUsage)
 	{
-		final String id = r == null ? null : r.getID();
+		if (r == null)
+		{
+			return null;
+		}
+	
+		final String id = r.getID();
 		if (id == null)
 		{
 			return null;
 		}
-
+	
 		// get any possible links
 		final VElement v = getInOutLinks(usage, true, null, processUsage);
 		if (v != null)
@@ -405,14 +410,14 @@ public class JDFResourceLinkPool extends JDFPool
 			for (int i = 0; i < vSize; i++)
 			{
 				final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
-
+	
 				if (resLink != null && resLink.getrRef().equals(id) && resLink.getNodeName().equals(r.getLinkString()))
 				{
 					return resLink;
 				}
 			}
 		}
-
+	
 		// nothing found
 		return null;
 	}

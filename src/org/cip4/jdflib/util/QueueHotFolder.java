@@ -154,7 +154,7 @@ public class QueueHotFolder
 
 	}
 
-	private final File storageDir; // the physical storage where files are dumped
+	final File storageDir; // the physical storage where files are dumped
 	// after removal from the hotfolder
 	protected final HotFolder hf; // the active hot folder
 
@@ -166,9 +166,9 @@ public class QueueHotFolder
 		return hf.getDir();
 	}
 
-	private final QueueHotFolderListener qhfl; // the callback that is called
+	final QueueHotFolderListener qhfl; // the callback that is called
 	// whenever a file is dropped
-	private final JDFCommand queueCommand; // the jdf command template that is
+	final JDFCommand queueCommand; // the jdf command template that is
 
 	// used to generate a new message for
 	// each dropped file

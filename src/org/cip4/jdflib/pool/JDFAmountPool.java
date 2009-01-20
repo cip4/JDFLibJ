@@ -862,22 +862,27 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		{
 			return null;
 		}
+		
 		final VElement vPA = new VElement();
 		for (int i = 0; i < size; i++)
 		{
 			final JDFPartAmount ps = (JDFPartAmount) vPartAmount.elementAt(i);
 			final VJDFAttributeMap mm = ps.getPartMapVector();
-			final int mmSize = mm == null ? 0 : mm.size();
-			for (int j = 0; j < mmSize; j++)
+			if (mm != null)
 			{
-				final JDFAttributeMap m = mm.elementAt(j);
-				if (m.subMap(mPart))
+				final int mmSize = mm.size();
+				for (int j = 0; j < mmSize; j++)
 				{
-					vPA.add(ps);
-					break;
+					final JDFAttributeMap m = mm.elementAt(j);
+					if (m.subMap(mPart))
+					{
+						vPA.add(ps);
+						break;
+					}
 				}
 			}
 		}
+		
 		return vPA.size() == 0 ? null : vPA;
 	}
 	// /////////////////////////////////////////////////////////////////////

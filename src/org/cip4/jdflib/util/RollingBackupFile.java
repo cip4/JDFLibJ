@@ -89,20 +89,20 @@ public class RollingBackupFile extends File
 	 * @param pathname the base filename
 	 * @param nBackup the number of backups to retain
 	 */
-	public RollingBackupFile(final String pathname, final int nBackup)
+	public RollingBackupFile(final String pathname, final int nBackupp)
 	{
 		super(pathname);
-		this.nBackup = nBackup;
+		this.nBackup = nBackupp;
 	}
 
 	/**
 	 * @param file the base file
 	 * @param nBackup the number of backups to retain
 	 */
-	public RollingBackupFile(final File file, final int nBackup)
+	public RollingBackupFile(final File file, final int nBackupp)
 	{
 		super(file.getPath());
-		this.nBackup = nBackup;
+		this.nBackup = nBackupp;
 	}
 
 	/**

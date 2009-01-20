@@ -467,6 +467,7 @@ public class JDFAttributeMap implements Map
 		{
 			return new JDFAttributeMap(this);
 		}
+		
 		final JDFAttributeMap newMap = new JDFAttributeMap(subMap);
 		final Enumeration<String> keys = keys();
 		while (keys.hasMoreElements())
@@ -478,11 +479,12 @@ public class JDFAttributeMap implements Map
 			{
 				newMap.put(key, val);
 			}
-			else if (subVal != null)
+			else
 			{
 				return null;
 			}
 		}
+		
 		return newMap.size() == 0 ? null : newMap;
 	}
 

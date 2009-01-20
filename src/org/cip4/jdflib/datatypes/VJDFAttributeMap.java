@@ -195,7 +195,7 @@ public class VJDFAttributeMap
 	 * @param bUnique if true, ensure unique vector, else the vector coressponds to the voctor of maps
 	 * @return the Vector of all values
 	 */
-	public VString getPartValues(final String strKey, final boolean bUnique)
+	public VString getPartValues(final String strKey, @SuppressWarnings("unused") final boolean bUnique)
 	{
 		final VString vsPartValues = new VString();
 
@@ -209,8 +209,10 @@ public class VJDFAttributeMap
 			{
 				vsPartValues.add(strValue);
 			}
+			
 			vsPartValues.unify();
 		}
+		
 		return vsPartValues;
 	}
 
@@ -221,7 +223,12 @@ public class VJDFAttributeMap
 	 */
 	public void extendMap(final String strKey, final VString vsValues)
 	{
-		final int vsValueSize = vsValues == null ? 0 : vsValues.size();
+		if (vsValues == null)
+		{
+			return;
+		}
+
+		final int vsValueSize = vsValues.size();
 		if (vsValueSize == 0)
 		{
 			return;

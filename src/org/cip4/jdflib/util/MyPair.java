@@ -15,11 +15,11 @@ public class MyPair<aData, bData>
 	 * @param a aData value
 	 * @param b bData value
 	 */
-	public MyPair(final aData a, final bData b)
+	public MyPair(final aData ap, final bData bp)
 	{
 		super();
-		this.a = a;
-		this.b = b;
+		this.a = ap;
+		this.b = bp;
 	}
 
 	/**
