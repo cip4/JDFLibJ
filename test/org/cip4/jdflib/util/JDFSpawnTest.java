@@ -149,29 +149,26 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final VJDFAttributeMap vspawnPartsMap = subjdfDocRoot.getAncestorPool().getPartMapVector();
 
 		final int size = vspawnPartsMap.size();
-		final JDFAttributeMap elementAt = vspawnPartsMap.elementAt(size - 1);
+		//		final JDFAttributeMap elementAt = 
+		vspawnPartsMap.elementAt(size - 1);
 		vspawnPartsMap.removeElementAt(size - 1);
-		if (subjdfDocRoot != null)
-		{
 
-			final Vector<String> vRWResources = new Vector<String>(2);
-			vRWResources.add(JDFConstants.OUTPUT);
+		final Vector<String> vRWResources = new Vector<String>(2);
+		vRWResources.add(JDFConstants.OUTPUT);
 
-			final String fileURL = "C:\\testJDF.jdf";
+		final String fileURL = "C:\\testJDF.jdf";
 
-			final long currentTimeMillis = System.currentTimeMillis();
-			final JDFNode nested_spawn_node = new JDFSpawn(subjdfDocRoot).spawn(fileURL, fileURL, vRWResources, vspawnPartsMap, false, true, true, true);
-			System.out.println("Spawning took " + (System.currentTimeMillis() - currentTimeMillis));
-			assertNotNull(nested_spawn_node);
-			final JDFMerge merge = new JDFMerge(subjdfDocRoot);
+		final long currentTimeMillis = System.currentTimeMillis();
+		final JDFNode nested_spawn_node = new JDFSpawn(subjdfDocRoot).spawn(fileURL, fileURL, vRWResources, vspawnPartsMap, false, true, true, true);
+		System.out.println("Spawning took " + (System.currentTimeMillis() - currentTimeMillis));
+		assertNotNull(nested_spawn_node);
+		final JDFMerge merge = new JDFMerge(subjdfDocRoot);
 
-			// this is the feature taht is being tested..
-			merge.bUpdateStati = true;
-			final JDFNode nodeM = merge.mergeJDF(nested_spawn_node, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
-			assertNotNull(nodeM);
-			System.out.println("Spawning and Merging took " + (System.currentTimeMillis() - currentTimeMillis));
-
-		}
+		// this is the feature taht is being tested..
+		merge.bUpdateStati = true;
+		final JDFNode nodeM = merge.mergeJDF(nested_spawn_node, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
+		assertNotNull(nodeM);
+		System.out.println("Spawning and Merging took " + (System.currentTimeMillis() - currentTimeMillis));
 	}
 
 	/**
@@ -758,12 +755,15 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode n = d.getJDFRoot();
 			n.setType(EnumType.ProcessGroup);
 			final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
-			final JDFMedia m = (JDFMedia) n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
+//			final JDFMedia m = (JDFMedia) 
+			n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
 
 			final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
 			final JDFComponent cs = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
-			final JDFComponent csEn = (JDFComponent) cs.addPartition(EnumPartIDKey.PartVersion, "EN");
-			final JDFComponent csFr = (JDFComponent) cs.addPartition(EnumPartIDKey.PartVersion, "FR");
+//			final JDFComponent csEn = (JDFComponent) 
+			cs.addPartition(EnumPartIDKey.PartVersion, "EN");
+//			final JDFComponent csFr = (JDFComponent) 
+			cs.addPartition(EnumPartIDKey.PartVersion, "FR");
 
 			final JDFAttributeMap map = new JDFAttributeMap();
 			map.put(EnumPartIDKey.SheetName, "S1");
@@ -805,12 +805,15 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode n = d.getJDFRoot();
 			n.setType(EnumType.ProcessGroup);
 			final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
-			final JDFMedia m = (JDFMedia) n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
+//			final JDFMedia m = (JDFMedia) 
+			n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
 
 			final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
 			final JDFComponent cs = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
-			final JDFComponent csEn = (JDFComponent) cs.addPartition(EnumPartIDKey.PartVersion, "EN EN");
-			final JDFComponent csFr = (JDFComponent) cs.addPartition(EnumPartIDKey.PartVersion, "FR FR");
+//			final JDFComponent csEn = (JDFComponent) 
+			cs.addPartition(EnumPartIDKey.PartVersion, "EN EN");
+//			final JDFComponent csFr = (JDFComponent) 
+			cs.addPartition(EnumPartIDKey.PartVersion, "FR FR");
 
 			final JDFAttributeMap map = new JDFAttributeMap();
 			map.put(EnumPartIDKey.SheetName, "S1");

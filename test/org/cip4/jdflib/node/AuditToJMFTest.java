@@ -102,7 +102,7 @@ public class AuditToJMFTest extends JDFTestCaseBase
 	 * @throws Exception any old exception
 	 * 
 	 */
-	public void testGetLocalJMFs() throws Exception
+	public void testGetLocalJMFs()
 	{
 		final AuditToJMF aj = new AuditToJMF(node, null, true);
 		final VElement vJMF = aj.getLocalJMFs(EnumAuditType.PhaseTime);

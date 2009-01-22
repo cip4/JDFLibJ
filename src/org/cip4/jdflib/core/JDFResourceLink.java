@@ -1203,29 +1203,28 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		{
 			return resRoot.getLeaves(false);
 		}
-		else
-		{
-			final EnumPartUsage partUsage = resRoot.getPartUsage();
+		
+		final EnumPartUsage partUsage = resRoot.getPartUsage();
 
-			for (int i = 0; i < vmParts.size(); i++)
+		for (int i = 0; i < vmParts.size(); i++)
+		{
+			final VElement vr = resRoot.getPartitionVector(vmParts.elementAt(i), partUsage);
+			for (int j = 0; j < vr.size(); j++)
 			{
-				final VElement vr = resRoot.getPartitionVector(vmParts.elementAt(i), partUsage);
-				for (int j = 0; j < vr.size(); j++)
+				final JDFResource targ = (JDFResource) vr.get(j);
+				final VElement leaves = targ.getLeaves(false);
+				for (int k = 0; k < leaves.size(); k++)
 				{
-					final JDFResource targ = (JDFResource) vr.get(j);
-					final VElement leaves = targ.getLeaves(false);
-					for (int k = 0; k < leaves.size(); k++)
+					JDFResource leaf = (JDFResource) leaves.get(k);
+					while (!leaf.getPartMap().overlapMap(vmParts.elementAt(i)) && !leaf.isResourceRoot())
 					{
-						JDFResource leaf = (JDFResource) leaves.get(k);
-						while (!leaf.getPartMap().overlapMap(vmParts.elementAt(i)) && !leaf.isResourceRoot())
-						{
-							leaf = (JDFResource) leaf.getParentNode();
-						}
-						v.appendUnique(leaf);
+						leaf = (JDFResource) leaf.getParentNode();
 					}
+					v.appendUnique(leaf);
 				}
 			}
 		}
+		
 		return v.isEmpty() ? null : v;
 	}
 

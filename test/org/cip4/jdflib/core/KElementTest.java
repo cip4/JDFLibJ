@@ -116,7 +116,8 @@ public class KElementTest extends JDFTestCaseBase
 		e.appendElement("I a=\"c\"");
 
 		final String s = doc.write2String(2);
-		final JDFDoc d2 = new JDFParser().parseString(s);
+//		final JDFDoc d2 = 
+			new JDFParser().parseString(s);
 	}
 
 	/**

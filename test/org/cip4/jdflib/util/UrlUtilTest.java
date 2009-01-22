@@ -265,7 +265,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testURLToFileName() throws Exception
+	public void testURLToFileName()
 	{
 		assertEquals("b.c", UrlUtil.urlToFileName("a:b.c"));
 		assertEquals("b.c", UrlUtil.urlToFileName("http:/b.c?gg"));

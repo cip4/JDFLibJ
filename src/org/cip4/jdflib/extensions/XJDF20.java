@@ -71,7 +71,6 @@ package org.cip4.jdflib.extensions;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -86,7 +85,6 @@ import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -109,8 +107,6 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
-import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
-import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -138,16 +134,16 @@ public class XJDF20 extends BaseElementWalker
 	protected Set<String> refRes;
 	protected boolean walkingProduct = false;
 	protected boolean first = true;
-	private VJDFAttributeMap vPartMap = null;
+//	private VJDFAttributeMap vPartMap = null;
 
 	/**
 	 * @param node
 	 * @param vMap
 	 * @return
 	 */
-	public KElement makeNewJDF(JDFNode node, final VJDFAttributeMap vMap)
+	public KElement makeNewJDF(JDFNode node, @SuppressWarnings("unused") final VJDFAttributeMap vMap)
 	{
-		vPartMap = vMap;
+//		vPartMap = vMap;
 		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
 		node = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
 		if (node == null)
@@ -191,78 +187,81 @@ public class XJDF20 extends BaseElementWalker
 	 * @param product
 	 * @param rootIn
 	 */
-	private void setProductResources(final KElement product, final JDFNode rootIn)
-	{
-		final VElement prodLinks = rootIn.getResourceLinks(null);
-		final HashMap componentMap = new HashMap();
-		final int size = prodLinks == null ? 0 : prodLinks.size();
-		for (int i = size - 1; i >= 0; i--)
-		{
-			final JDFResourceLink rl = (JDFResourceLink) prodLinks.elementAt(i);
-			final JDFResource linkRoot = rl.getLinkRoot();
-			if (linkRoot instanceof JDFNodeInfo)
-			{
-				prodLinks.remove(i);
-			}
-			if (linkRoot instanceof JDFCustomerInfo)
-			{
-				prodLinks.remove(i);
-			}
-			if (linkRoot instanceof JDFComponent)
-			{
-				prodLinks.remove(i);
-				if (EnumUsage.Output.equals(rl.getUsage()))
-				{
-					linkRoot.setAttribute("tmp_id", linkRoot.getID());
-					componentMap.put(linkRoot.getID(), rootIn.getID());
-				}
-			}
-		}
-		setResources(product, rootIn, prodLinks, null);
-		final VElement vDropItems = product.getChildrenByTagName(ElementName.DROPITEMINTENT, null, null, false, true, 0);
-		for (int i = 0; i < vDropItems.size(); i++)
-		{
-			final JDFDropItemIntent dropItemIntent = (JDFDropItemIntent) vDropItems.item(i);
-			final JDFComponent c = dropItemIntent.getComponent();
-			if (c != null)
-			{
-				final String id = (String) componentMap.get(c.getAttribute("tmp_id", null, ""));
-				if (id != null)
-				{
-					dropItemIntent.setAttribute("ProductRef", id);
-					c.deleteNode();
-				}
-			}
-		}
-	}
+//	private void setProductResources(final KElement product, final JDFNode rootIn)
+//	{
+//		final VElement prodLinks = rootIn.getResourceLinks(null);
+//		final HashMap componentMap = new HashMap();
+//		if (prodLinks != null)
+//		{
+//			final int size = prodLinks.size();
+//			for (int i = size - 1; i >= 0; i--)
+//			{
+//				final JDFResourceLink rl = (JDFResourceLink) prodLinks.elementAt(i);
+//				final JDFResource linkRoot = rl.getLinkRoot();
+//				if (linkRoot instanceof JDFNodeInfo)
+//				{
+//					prodLinks.remove(i);
+//				}
+//				
+//				if (linkRoot instanceof JDFCustomerInfo)
+//				{
+//					prodLinks.remove(i);
+//				}
+//				
+//				if (linkRoot instanceof JDFComponent)
+//				{
+//					prodLinks.remove(i);
+//					if (EnumUsage.Output.equals(rl.getUsage()))
+//					{
+//						linkRoot.setAttribute("tmp_id", linkRoot.getID());
+//						componentMap.put(linkRoot.getID(), rootIn.getID());
+//					}
+//				}
+//			}
+//		}
+//		
+//		setResources(product, rootIn, prodLinks, null);
+//		final VElement vDropItems = product.getChildrenByTagName(ElementName.DROPITEMINTENT, null, null, false, true, 0);
+//		for (int i = 0; i < vDropItems.size(); i++)
+//		{
+//			final JDFDropItemIntent dropItemIntent = (JDFDropItemIntent) vDropItems.item(i);
+//			final JDFComponent c = dropItemIntent.getComponent();
+//			if (c != null)
+//			{
+//				final String id = (String) componentMap.get(c.getAttribute("tmp_id", null, ""));
+//				if (id != null)
+//				{
+//					dropItemIntent.setAttribute("ProductRef", id);
+//					c.deleteNode();
+//				}
+//			}
+//		}
+//	}
 
-	private void setResources(final KElement newRoot, final JDFNode nodeIn, final VElement resLinks, final JDFNode rootIn)
-	{
-		final VElement vResLinks = resLinks == null ? nodeIn.getResourceLinks(null) : resLinks;
-		if (vResLinks == null)
-		{
-			return;
-		}
-		final boolean bProduct = EnumType.Product.equals(nodeIn.getEnumType());
+//	private void setResources(final KElement newRoot, final JDFNode nodeIn, final VElement resLinks, final JDFNode rootIn)
+//	{
+//		final VElement vResLinks = resLinks == null ? nodeIn.getResourceLinks(null) : resLinks;
+//		if (vResLinks == null)
+//		{
+//			return;
+//		}
+//		final boolean bProduct = EnumType.Product.equals(nodeIn.getEnumType());
+//
+//		for (int i = 0; i < vResLinks.size(); i++)
+//		{
+//			final JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
+//			final JDFResource linkTarget = rl.getLinkRoot();
+//			if (bProduct && linkTarget instanceof JDFComponent)
+//			{
+//				continue;
+//			}
+//			linkTarget.expand(false);
+//			// setResource(newRoot, rl, linkTarget);
+//		}
+//		return;
+//	}
 
-		for (int i = 0; i < vResLinks.size(); i++)
-		{
-			final JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
-			final JDFResource linkTarget = rl.getLinkRoot();
-			if (bProduct && linkTarget instanceof JDFComponent)
-			{
-				continue;
-			}
-			linkTarget.expand(false);
-			// setResource(newRoot, rl, linkTarget);
-		}
-		return;
-	}
-
-	/**
-	 * @param r
-	 */
-	private String getClassName(final JDFResource r)
+	String getClassName(final JDFResource r)
 	{
 		if (r == null)
 		{
@@ -372,7 +371,7 @@ public class XJDF20 extends BaseElementWalker
 		}
 	}
 
-	private void setAmountPool(final JDFResourceLink rl, final KElement newLeaf, final JDFAttributeMap partMap)
+	void setAmountPool(final JDFResourceLink rl, final KElement newLeaf, final JDFAttributeMap partMap)
 	{
 		JDFAmountPool ap = rl.getAmountPool();
 		if (ap == null)
@@ -621,14 +620,17 @@ public class XJDF20 extends BaseElementWalker
 				if (resInRoot != null)
 				{
 					final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
-					final int size = vCreators == null ? 0 : vCreators.size();
-					for (int i = 0; i < size; i++)
+					if (vCreators != null)
 					{
-						final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
-						final KElement dependent = resourceSet.appendElement("Dependent");
-						dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
-						dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
-						dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+						final int size = vCreators.size();
+						for (int i = 0; i < size; i++)
+						{
+							final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
+							final KElement dependent = resourceSet.appendElement("Dependent");
+							dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
+							dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
+							dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+						}
 					}
 				}
 			}
@@ -749,10 +751,13 @@ public class XJDF20 extends BaseElementWalker
 				if (ancestorPool != null)
 				{
 					final VJDFAttributeMap vParts = ancestorPool.getPartMapVector();
-					final int size = vParts == null ? 0 : vParts.size();
-					for (int i = 0; i < size; i++)
+					if (vParts != null)
 					{
-						spawnInfo.appendElement(ElementName.PART).setAttributes(vParts.elementAt(i));
+						final int size = vParts.size();
+						for (int i = 0; i < size; i++)
+						{
+							spawnInfo.appendElement(ElementName.PART).setAttributes(vParts.elementAt(i));
+						}
 					}
 				}
 			}
@@ -814,20 +819,24 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		private void calcChildren(final JDFNode node, final KElement prod)
 		{
-			final VElement vComp = node.getPredecessors(true, true);
-			final int siz = vComp == null ? 0 : vComp.size();
 			final VString kids = new VString();
-			for (int i = 0; i < siz; i++)
+			final VElement vComp = node.getPredecessors(true, true);
+			if (vComp != null)
 			{
-				final JDFNode nPre = (JDFNode) vComp.get(i);
-				if (EnumType.Product.equals(nPre.getEnumType()))
+				final int siz = vComp.size();
+				for (int i = 0; i < siz; i++)
 				{
-					kids.add(nPre.getID());
+					final JDFNode nPre = (JDFNode) vComp.get(i);
+					if (EnumType.Product.equals(nPre.getEnumType()))
+					{
+						kids.add(nPre.getID());
+					}
 				}
 			}
+			
 			if (kids.size() > 0)
 			{
-				prod.setAttribute("ProductRefs", kids, null);
+				prod.setAttribute("ProductRefs", kids  , null);
 			}
 			else
 			{
@@ -855,6 +864,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	protected class WalkElement extends BaseWalker
 	{
+		@SuppressWarnings("synthetic-access")
 		public WalkElement()
 		{
 			super(getFactory());

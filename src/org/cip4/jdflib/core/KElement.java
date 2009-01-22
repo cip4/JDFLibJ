@@ -92,6 +92,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.AttrNSImpl;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.apache.xerces.dom.ElementNSImpl;
+import org.apache.xerces.dom.NodeImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
@@ -4336,6 +4337,7 @@ public class KElement extends ElementNSImpl
 	 * @return string representativ of this
 	 * @see Object#toString()
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public String toString()
 	{
@@ -4379,6 +4381,7 @@ public class KElement extends ElementNSImpl
 	 * @return String the dom element serialized as a string
 	 * @throws JDFExcepion if an error occurs while serializing
 	 */
+	@SuppressWarnings("deprecation")
 	public String toXML(final int indent)
 	{
 
@@ -6142,7 +6145,7 @@ public class KElement extends ElementNSImpl
 		final KElement e = (KElement) cloneNode(true);
 		e.ownerDocument = d.getMemberDocument();
 		e.ownerNode = e.ownerDocument;
-		e.flags = (short) (e.flags | e.OWNED); // otherwise some crap might not work...
+		e.flags = (short) (e.flags | NodeImpl.OWNED); // otherwise some crap might not work...
 		return e;
 	}
 

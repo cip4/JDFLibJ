@@ -121,19 +121,24 @@ public class SizeWalker extends BaseElementWalker
 				final Sizes ps = getSize(parent.getNodeName());
 				ps.local -= locSize;
 			}
+			
 			siz.n++;
 			final VString atts = e.getAttributeVector_KElement();
-			final int attSize = atts == null ? 0 : atts.size();
-			for (int i = 0; i < attSize; i++)
+			if (atts != null)
 			{
-				final String att = atts.get(i);
-				final Sizes as = getSize("@" + att);
-				as.n++;
-				final String val = e.getAttribute(att);
-				final int l = att.length() + val.length() + 4; // " "=
-				as.total += l;
-				as.local += val.length();
+				final int attSize = atts.size();
+				for (int i = 0; i < attSize; i++)
+				{
+					final String att = atts.get(i);
+					final Sizes as = getSize("@" + att);
+					as.n++;
+					final String val = e.getAttribute(att);
+					final int l = att.length() + val.length() + 4; // " "=
+					as.total += l;
+					as.local += val.length();
+				}
 			}
+			
 			return e;
 		}
 
@@ -179,11 +184,7 @@ public class SizeWalker extends BaseElementWalker
 
 	HashMap<String, Sizes> map = new HashMap<String, Sizes>();
 
-	/**
-	 * @param nam
-	 * @return
-	 */
-	private Sizes getSize(final String nam)
+	Sizes getSize(final String nam)
 	{
 		Sizes s = map.get(nam);
 		if (s == null)

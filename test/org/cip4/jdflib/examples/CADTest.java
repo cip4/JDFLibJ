@@ -56,7 +56,7 @@ public class CADTest extends JDFTestCaseBase
 	 * tests the creation of the initial shapedefproduction (one up) process
 	 * @throws Exception
 	 */
-	public void testStatusJMF() throws Exception
+	public void testStatusJMF()
 	{
 		createShapeDefProduction();
 		StatusCounter sc = new StatusCounter(null, null, null);
@@ -81,7 +81,7 @@ public class CADTest extends JDFTestCaseBase
 	 * tests the creation of the initial shapedefproduction (one up) process
 	 * @throws Exception
 	 */
-	public void testShapeDefProduction() throws Exception
+	public void testShapeDefProduction()
 	{
 		createShapeDefProduction();
 
@@ -122,7 +122,7 @@ public class CADTest extends JDFTestCaseBase
 	 * tests the creation of the initial shapedefproduction (one up) process
 	 * @throws Exception
 	 */
-	public void testDieLayoutProduction() throws Exception
+	public void testDieLayoutProduction()
 	{
 		n.setType("DieLayoutProduction", false);
 		n.setDescriptiveName("This process describes placement of one-up shapes on a sheet");
@@ -159,7 +159,7 @@ public class CADTest extends JDFTestCaseBase
 	 * tests the creation of the initial shapedefproduction (one up) process
 	 * @throws Exception
 	 */
-	public void testDieDesign() throws Exception
+	public void testDieDesign()
 	{
 		createDieDesign();
 		d.write2File(sm_dirTestDataTemp + File.separator + "CAD_DieDesign_out.jdf", 2, false);

@@ -108,6 +108,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		/**
 		 * @param factory
 		 */
+		@SuppressWarnings("synthetic-access")
 		public WalkXElement()
 		{
 			super(getFactory());
@@ -132,15 +133,21 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		protected void cleanRefs(final KElement e)
 		{
 			final JDFAttributeMap map = e.getAttributeMap();
-			final VString keys = map == null ? null : map.getKeys();
-			final int keySize = keys == null ? 0 : keys.size();
-			for (int i = 0; i < keySize; i++)
+			if (map != null)
 			{
-				final String val = keys.get(i);
-				if (val.endsWith("Ref") && !val.equals("rRef"))
+				final VString keys = map.getKeys();
+				if (keys != null)
 				{
-					e.appendElement(val).setAttribute("rRef", map.get(val));
-					e.removeAttribute(val);
+					final int keySize = keys.size();
+					for (int i = 0; i < keySize; i++)
+					{
+						final String val = keys.get(i);
+						if (val.endsWith("Ref") && !val.equals("rRef"))
+						{
+							e.appendElement(val).setAttribute("rRef", map.get(val));
+							e.removeAttribute(val);
+						}
+					}
 				}
 			}
 		}
@@ -304,8 +311,18 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			// test on grandparent
 			KElement parent = toCheck.getParentNode_KElement();
-			parent = parent == null ? null : parent.getParentNode_KElement();
-			final boolean bL1 = parent != null && parent.getLocalName().endsWith("Set");
+			if (parent == null)
+			{
+				return false;
+			}
+			
+			parent = parent.getParentNode_KElement();
+			if (parent == null)
+			{
+				return false;
+			}
+			
+			final boolean bL1 = parent.getLocalName().endsWith("Set");
 			return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals(parent.getAttribute("Name"));
 		}
 	}
@@ -406,14 +423,14 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 * @param trackElem
 		 * @return
 		 */
-		private JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
+		private JDFResource createPartition(@SuppressWarnings("unused") final KElement e, final KElement trackElem, final JDFPart part)
 		{
 			final JDFResource r = (JDFResource) trackElem;
 			final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
-			final JDFResourceLink rl = theNode.getLink(r, null);
-			if (rl != null)
+			final JDFResourceLink rll = theNode.getLink(r, null);
+			if (rll != null)
 			{
-				rl.moveElement(part, null);
+				rll.moveElement(part, null);
 			}
 			return rPart;
 		}
@@ -427,7 +444,12 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			final KElement parent = toCheck.getParentNode_KElement();
-			final boolean bL1 = parent != null && parent.getLocalName().endsWith("Set");
+			if (parent == null)
+			{
+				return false;
+			}
+			
+			final boolean bL1 = parent.getLocalName().endsWith("Set");
 			return bL1 && super.matches(toCheck) && parent.hasAttribute(AttributeName.NAME);
 		}
 

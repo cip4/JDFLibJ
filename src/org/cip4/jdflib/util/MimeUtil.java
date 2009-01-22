@@ -793,6 +793,7 @@ public class MimeUtil extends UrlUtil
 	 * @param cid the CID the JDF document should have in the multipart
 	 * @return the number of files added to the multipart
 	 */
+	@SuppressWarnings("deprecation")
 	private static int extendMultipart(final Multipart multipart, final JDFDoc docJDF, final String cid)
 	{
 		int n = 0;

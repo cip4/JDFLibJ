@@ -26,7 +26,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testToXJDF() throws Exception
+	public void testToXJDF()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -57,10 +57,11 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testFromXJDF() throws Exception
+	public void testFromXJDF()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
-		final XJDFToJDFConverter xc = new XJDFToJDFConverter(d);
+//		final XJDFToJDFConverter xc = 
+			new XJDFToJDFConverter(d);
 	}
 
 }
