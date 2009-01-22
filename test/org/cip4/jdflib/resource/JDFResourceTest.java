@@ -133,11 +133,19 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 20.01.2009
+ */
 public class JDFResourceTest extends JDFTestCaseBase
 {
 
 	private boolean b;
 
+	/**
+	 * 
+	 */
 	public void testGetCreator()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -146,6 +154,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertTrue(xm.getCreator(false).contains(n));
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetAttributeVector()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -948,6 +959,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testIdentical()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -1004,12 +1018,51 @@ public class JDFResourceTest extends JDFTestCaseBase
 		{
 			//
 		}
+		try
+		{
+			c3y.setIdentical(c3y);
+			fail("myself set self");
+		}
+		catch (final JDFException x)
+		{
+			//
+		}
+		try
+		{
+			c3y.setIdentical(c3);
+			fail("myself set identical");
+		}
+		catch (final JDFException x)
+		{
+			//
+		}
+		try
+		{
+			c3y.setIdentical(c1);
+			fail("myself set parent");
+		}
+		catch (final JDFException x)
+		{
+			//
+		}
 		doc.write2File(sm_dirTestDataTemp + "identical.jdf", 2, false);
+		// manually screw up the resource
+		c3y.appendIdentical().setPartMap(c1.getPartMap());
+		try
+		{
+			c.getPartition(c3y.getPartMap(), null);
+			fail("myself set parent");
+		}
+		catch (final JDFException x)
+		{
+			//
+		}
+
 	}
 
-	// ////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////////
-
+	/**
+	 * 
+	 */
 	public void testIdenticalValid()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");

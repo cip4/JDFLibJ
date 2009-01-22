@@ -178,13 +178,46 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the xjdf root
+	 */
+	public class WalkSpan extends WalkXElement
+	{
+		// ///////////////////////////////////////////////////////////////////////////////
+		/**
+		 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+		 * @param e
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			final KElement eNew = trackElem.appendElement(e.getAttribute("Name"));
+			eNew.setAttributes(e);
+			eNew.removeAttribute(AttributeName.NAME);
+			eNew.setAttribute(AttributeName.DATATYPE, e.getLocalName());
+			return eNew;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck.getLocalName().endsWith("Span");
+		}
+	}
+
+	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
 	public class WalkSet extends WalkXElement
 	{
 		/**
 		 * @param e
-		 * @return thr created resource
+		 * @return the created resource
 		 */
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)

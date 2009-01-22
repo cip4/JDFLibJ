@@ -1057,7 +1057,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 			n.setType(EnumType.ImageSetting);
 
-			for (int ii = 1; ii < 2; ii++)
+			for (int ii = 1; ii < 2; ii++) // spawnidentical = true / false
 			{
 				for (int j = 0; j < 2; j++) // in or out
 				{
@@ -1117,8 +1117,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			}
 		}
 	}
-
-	// /////////////////////////////////////////////////////////
 
 	public void testSpawnPart()
 	{

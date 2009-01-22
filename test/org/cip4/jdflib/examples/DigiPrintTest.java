@@ -80,6 +80,7 @@ import org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStitchType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -112,7 +113,6 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFContentData;
 import org.cip4.jdflib.resource.process.JDFContentList;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
@@ -190,23 +190,47 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 */
 	public void testPDFVTStream() throws Exception
 	{
-		doc = new JDFDoc("JDF");
-		n = doc.getJDFRoot();
-		n.setType(EnumType.Combined);
-		n.setTypes(new VString("Interpreting Reendering DigitalPrinting", null));
-
-		final JDFFileSpec fs = (JDFFileSpec) n.addResource("FileSpec", EnumUsage.Input);
-		fs.setURL("http://fileServer/getFile");
-		fs.setMimeType("application/pdf");
-		final JDFContainer c = fs.appendContainer();
-		for (int i = 0; i < 1; i++)
+		for (int strm = 0; strm < 2; strm++)
 		{
-			final JDFFileSpec f2 = c.appendFileSpec();
+			doc = new JDFDoc("JDF");
+			n = doc.getJDFRoot();
+			n.setType(EnumType.Combined);
+			n.setTypes(new VString("Interpreting Reendering DigitalPrinting", null));
 
+			final JDFFileSpec fsContainer = (JDFFileSpec) n.addResource("FileSpec", null);
+			fsContainer.setURL("http://fileServer/getFile");
+			fsContainer.setMimeType("multipart/related");
+			fsContainer.setMimeTypeVersion("application/pdf-vt-stream");
+			final JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
+			if (strm == 0)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					final JDFRunList rlPart = rl.addPDF("foo" + i + ".pdf", 0, -1);
+					final JDFFileSpec f2 = rlPart.getLayoutElement().getFileSpec();
+					f2.appendContainer().refElement(fsContainer);
+
+				}
+			}
+			else if (strm == 1)
+			{
+				final JDFFileSpec fs = rl.appendLayoutElement().appendFileSpec();
+				fs.setMimeType(JDFConstants.MIME_PDF);
+				fs.setFileFormat("cid:streamFile%i.pdf");
+				fs.setFileTemplate("i");
+				fs.appendContainer().refElement(fsContainer);
+			}
+			else
+			{
+				// TODO discuss containers
+				final JDFFileSpec fs = rl.appendLayoutElement().appendFileSpec();
+				fs.setMimeType("PDF/VT");
+				fs.setFileFormat("cid:streamFile%i.pdf");
+				fs.setFileTemplate("i");
+				fs.appendContainer().refElement(fsContainer);
+			}
+			doc.write2File(sm_dirTestDataTemp + "PDFVTStream.jdf" + strm + ".jdf", 2, false);
 		}
-		doc.write2File(sm_dirTestDataTemp + "PDFVTStream.jdf", 2, false);
-		final JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
-		rl.appendLayoutElement().refFileSpec(fs);
 	}
 
 	/**

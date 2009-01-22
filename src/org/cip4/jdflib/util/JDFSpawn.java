@@ -784,7 +784,6 @@ public class JDFSpawn
 				}
 			}
 		}
-
 	}
 
 	/**

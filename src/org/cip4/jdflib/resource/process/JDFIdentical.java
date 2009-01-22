@@ -12,6 +12,7 @@ package org.cip4.jdflib.resource.process;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoIdentical;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFPart;
 import org.w3c.dom.DOMException;
 
 public class JDFIdentical extends JDFAutoIdentical
@@ -25,8 +26,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFIdentical(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFIdentical(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +39,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFIdentical(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFIdentical(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +53,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFIdentical(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFIdentical(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -77,13 +74,12 @@ public class JDFIdentical extends JDFAutoIdentical
 	/**
 	 * set all parts to those define in vParts
 	 * 
-	 * @param JDFAttributeMap
-	 *            mPart: attribute map for the part to set
+	 * @param JDFAttributeMap mPart: attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
-		super.setPartMap(mPart);
+		getCreatePart().setPartMap(mPart);
 	}
 
 	/**
@@ -94,7 +90,8 @@ public class JDFIdentical extends JDFAutoIdentical
 	@Override
 	public JDFAttributeMap getPartMap()
 	{
-		return super.getPartMap();
+		final JDFPart p = getPart();
+		return p == null ? null : p.getPartMap();
 	}
 
 }

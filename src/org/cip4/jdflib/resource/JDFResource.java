@@ -2017,13 +2017,17 @@ public class JDFResource extends JDFElement
 			if (part != null)
 			{
 				final JDFAttributeMap identityMap = part.getPartMap();
+				if (identityMap == null || identityMap.overlapMap(getPartMap(partIDKeys)))
+				{
+					throw new JDFException("Corrupt Identical Structure!");
+				}
 				m.putAll(identityMap);
-			}
 
-			// the identity map is always complete from the root, we therefore
-			// can start searching
-			// in the root
-			return getResourceRoot().getDeepPartVector(m, partUsage, -1, partIDKeys);
+				// the identity map is always complete from the root, we therefore
+				// can start searching
+				// in the root
+				return getResourceRoot().getDeepPartVector(m, partUsage, -1, partIDKeys);
+			}
 		}
 
 		if (msiz == matchingDepthLocal)
@@ -4750,9 +4754,17 @@ public class JDFResource extends JDFElement
 		{
 			throw new JDFException("setIdentical: cannot create Identical in null element");
 		}
+		if (target == this || target.getIdentical() != null)
+		{
+			throw new JDFException("setIdentical: cannot create Identical to identical");
+		}
 		if (isResourceRoot())
 		{
 			throw new JDFException("setIdentical: cannot create Identical in root");
+		}
+		if (target.isAncestor(this) || isAncestor(target))
+		{
+			throw new JDFException("setIdentical: cannot create Identical in Ancestor or Child");
 		}
 		if (target.getResourceRoot() != getResourceRoot())
 		{

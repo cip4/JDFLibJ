@@ -111,6 +111,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -141,7 +142,7 @@ public class XJDF20 extends BaseElementWalker
 
 	/**
 	 * @param node
-	 * @param rootIn
+	 * @param vMap
 	 * @return
 	 */
 	public KElement makeNewJDF(JDFNode node, final VJDFAttributeMap vMap)
@@ -149,6 +150,10 @@ public class XJDF20 extends BaseElementWalker
 		vPartMap = vMap;
 		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
 		node = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
+		if (node == null)
+		{
+			node = root;
+		}
 		final JDFNode rootIn = node.getJDFRoot();
 		final JDFDoc newDoc = new JDFDoc(rootName);
 
@@ -942,4 +947,48 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkSpan extends WalkJDFElement
+	{
+
+		public WalkSpan()
+		{
+			super();
+		}
+
+		/**
+		 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFSpanBase je = (JDFSpanBase) jdf;
+			je.inlineRefElements(null, null, false);
+			final KElement eNew = xjdf.appendElement(je.getDataType().getName());
+			eNew.setAttributes(jdf);
+			eNew.removeAttribute(AttributeName.DATATYPE);
+			eNew.setAttribute(AttributeName.NAME, je.getLocalName());
+			return eNew;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFSpanBase;
+		}
+
+	}
+
 }
