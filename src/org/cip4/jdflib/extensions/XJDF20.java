@@ -71,9 +71,7 @@ package org.cip4.jdflib.extensions;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
@@ -86,6 +84,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartAmount;
+import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -104,11 +103,19 @@ import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.resource.process.JDFContentObject;
+import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
+
+
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -119,7 +126,7 @@ public class XJDF20 extends BaseElementWalker
 {
 
 	/**
-	 * @param factory
+	 * 
 	 */
 	public XJDF20()
 	{
@@ -127,14 +134,20 @@ public class XJDF20 extends BaseElementWalker
 		init();
 	}
 
+	/**
+	 * the root nodename
+	 */
 	public final static String rootName = "XJDF";
 	private final String m_spawnInfo = "SpawnInfo";
 	protected VString resAttribs;
-	protected Set<String> doneRes;
-	protected Set<String> refRes;
+	protected KElement newRoot = null;
 	protected boolean walkingProduct = false;
 	protected boolean first = true;
 //	private VJDFAttributeMap vPartMap = null;
+	/**
+	 * if true add an htmlcolor attribute to color elements for xsl display purposes
+	 */
+	public boolean bHTMLColor = false;
 
 	/**
 	 * @param node
@@ -153,7 +166,7 @@ public class XJDF20 extends BaseElementWalker
 		final JDFNode rootIn = node.getJDFRoot();
 		final JDFDoc newDoc = new JDFDoc(rootName);
 
-		final KElement newRoot = newDoc.getRoot();
+		newRoot = newDoc.getRoot();
 		first = true;
 		walkTree(node, newRoot);
 
@@ -179,87 +192,9 @@ public class XJDF20 extends BaseElementWalker
 		resAttribs = paramRes.knownAttributes();
 		resAttribs.appendUnique(physRes.knownAttributes());
 		resAttribs.appendUnique(intRes.knownAttributes());
-		refRes = new HashSet<String>();
-		doneRes = new HashSet<String>();
 	}
 
-	/**
-	 * @param product
-	 * @param rootIn
-	 */
-//	private void setProductResources(final KElement product, final JDFNode rootIn)
-//	{
-//		final VElement prodLinks = rootIn.getResourceLinks(null);
-//		final HashMap componentMap = new HashMap();
-//		if (prodLinks != null)
-//		{
-//			final int size = prodLinks.size();
-//			for (int i = size - 1; i >= 0; i--)
-//			{
-//				final JDFResourceLink rl = (JDFResourceLink) prodLinks.elementAt(i);
-//				final JDFResource linkRoot = rl.getLinkRoot();
-//				if (linkRoot instanceof JDFNodeInfo)
-//				{
-//					prodLinks.remove(i);
-//				}
-//				
-//				if (linkRoot instanceof JDFCustomerInfo)
-//				{
-//					prodLinks.remove(i);
-//				}
-//				
-//				if (linkRoot instanceof JDFComponent)
-//				{
-//					prodLinks.remove(i);
-//					if (EnumUsage.Output.equals(rl.getUsage()))
-//					{
-//						linkRoot.setAttribute("tmp_id", linkRoot.getID());
-//						componentMap.put(linkRoot.getID(), rootIn.getID());
-//					}
-//				}
-//			}
-//		}
-//		
-//		setResources(product, rootIn, prodLinks, null);
-//		final VElement vDropItems = product.getChildrenByTagName(ElementName.DROPITEMINTENT, null, null, false, true, 0);
-//		for (int i = 0; i < vDropItems.size(); i++)
-//		{
-//			final JDFDropItemIntent dropItemIntent = (JDFDropItemIntent) vDropItems.item(i);
-//			final JDFComponent c = dropItemIntent.getComponent();
-//			if (c != null)
-//			{
-//				final String id = (String) componentMap.get(c.getAttribute("tmp_id", null, ""));
-//				if (id != null)
-//				{
-//					dropItemIntent.setAttribute("ProductRef", id);
-//					c.deleteNode();
-//				}
-//			}
-//		}
-//	}
 
-//	private void setResources(final KElement newRoot, final JDFNode nodeIn, final VElement resLinks, final JDFNode rootIn)
-//	{
-//		final VElement vResLinks = resLinks == null ? nodeIn.getResourceLinks(null) : resLinks;
-//		if (vResLinks == null)
-//		{
-//			return;
-//		}
-//		final boolean bProduct = EnumType.Product.equals(nodeIn.getEnumType());
-//
-//		for (int i = 0; i < vResLinks.size(); i++)
-//		{
-//			final JDFResourceLink rl = (JDFResourceLink) vResLinks.elementAt(i);
-//			final JDFResource linkTarget = rl.getLinkRoot();
-//			if (bProduct && linkTarget instanceof JDFComponent)
-//			{
-//				continue;
-//			}
-//			linkTarget.expand(false);
-//			// setResource(newRoot, rl, linkTarget);
-//		}
-//		return;
-//	}
 
 	String getClassName(final JDFResource r)
 	{
@@ -373,6 +308,10 @@ public class XJDF20 extends BaseElementWalker
 
 	void setAmountPool(final JDFResourceLink rl, final KElement newLeaf, final JDFAttributeMap partMap)
 	{
+		if (rl == null)
+		{
+			return;
+		}
 		JDFAmountPool ap = rl.getAmountPool();
 		if (ap == null)
 		{
@@ -426,12 +365,156 @@ public class XJDF20 extends BaseElementWalker
 		}
 	}
 
+	/**
+	 * 
+	 */
+	private KElement setBaseResource(final JDFResourceLink rl, final JDFResource r, final KElement xjdfSet)
+	{
+		KElement newLeaf = null;
+		final JDFAttributeMap map = r.getPartMap();
+		if (map == null || map.isEmpty())
+		{
+			newLeaf = xjdfSet.getElement(StringUtil.leftStr(xjdfSet.getNodeName(), -3));
+		}
+		else
+		{
+			final KElement oldPart = xjdfSet.getChildByTagName("Part", null, 0, map, false, true);
+			if (oldPart != null)
+			{
+				newLeaf = oldPart.getParentNode_KElement();
+			}
+		}
+		if (newLeaf == null)
+		{
+			newLeaf = xjdfSet.appendElement(StringUtil.leftStr(xjdfSet.getNodeName(), -3));
+			newLeaf.setAttribute("ID", r.getAttribute("ID") + "." + StringUtil.formatInteger(myIndex(newLeaf)));
+		}
+		setLeafAttributes(r, rl, newLeaf);
+		return newLeaf;
+	}
+
+	/**
+	 * @param leaf
+	 * @param newLeaf
+	 */
+	private void setLeafAttributes(final JDFResource leaf, final JDFResourceLink rl, final KElement newLeaf)
+	{
+		final JDFAttributeMap partMap = leaf.getPartMap();
+		// JDFAttributeMap attMap=leaf.getAttributeMap();
+		// attMap.remove("ID");
+		setAmountPool(rl, newLeaf, partMap);
+
+		// retain spawn informatiom
+		if (leaf.hasAttribute(AttributeName.SPAWNIDS))
+		{
+			final KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(m_spawnInfo, null, 0);
+			final KElement spawnID = spawnInfo.appendElement("SpawnID");
+			spawnID.moveAttribute(AttributeName.SPAWNIDS, newLeaf, null, null, null);
+			spawnID.moveAttribute(AttributeName.SPAWNSTATUS, newLeaf, null, null, null);
+			spawnID.copyAttribute(AttributeName.RESOURCEID, newLeaf, AttributeName.ID, null, null);
+		}
+		if (partMap != null && partMap.size() > 0 && newLeaf.getElement("Part") == null)
+		{
+			newLeaf.appendElement("Part").setAttributes(partMap);
+		}
+	}
+
+	/**
+	 * @param newRoot
+	 * @param rl
+	 */
+	private void setLinkAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
+	{
+		resourceSet.setAttribute("Name", linkRoot.getNodeName());
+		resourceSet.setAttributes(rl);
+		resourceSet.removeAttribute(AttributeName.RREF);
+		resourceSet.removeAttribute(AttributeName.RSUBREF);
+		resourceSet.removeAttribute(AttributeName.AMOUNT);
+		resourceSet.removeAttribute(AttributeName.AMOUNTPRODUCED);
+		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
+		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
+		if (rl instanceof JDFResourceLink)
+		{
+			final JDFResourceLink resLink = (JDFResourceLink) rl;
+			final JDFNode rootIn = resLink.getJDFRoot();
+
+			final JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, "ID", null, resLink.getrRef(), 0, false);
+			if (resInRoot != null)
+			{
+				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
+				final int size = vCreators == null ? 0 : vCreators.size();
+				for (int i = 0; i < size; i++)
+				{
+					final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
+					final KElement dependent = resourceSet.appendElement("Dependent");
+					dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
+					dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
+					dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param newRoot
+	 * @param rl
+	 * @param linkTarget
+	 */
+	protected VElement setResource(final JDFResourceLink rl, final JDFResource linkTarget)
+	{
+		final VElement v = new VElement();
+		final String className = getClassName(linkTarget);
+		if (className == null)
+		{
+			return null;
+		}
+		final String resID = linkTarget.getAttribute("ID");
+
+		KElement resourceSet = newRoot.getChildWithAttribute(className + "Set", "ID", null, resID, 0, true);
+		if (resourceSet == null)
+		{
+			resourceSet = newRoot.appendElement(className + "Set");
+			resourceSet.setAttribute("ID", linkTarget.getID());
+
+			setLinkAttributes(resourceSet, rl, linkTarget);
+		}
+		int nLeaves = resourceSet.numChildElements(className, null);
+		final VElement vRes = rl == null ? linkTarget.getLeaves(false) : rl.getTargetVector(0);
+		for (int j = 0; j < vRes.size(); j++)
+		{
+			final JDFResource r = (JDFResource) vRes.elementAt(j);
+			final VElement vLeaves = r.getLeaves(false);
+			for (int k = 0; k < vLeaves.size(); k++)
+			{
+				final JDFResource leaf = (JDFResource) vLeaves.elementAt(k);
+				final KElement newBaseRes = setBaseResource(rl, leaf, resourceSet);
+				final int nn = resourceSet.numChildElements(className, null);
+				if (nn > nLeaves)
+				{
+					nLeaves = nn;
+					walkTree(leaf, newBaseRes);
+				}
+				v.add(newBaseRes);
+			}
+		}
+		return v;
+	}
+
 	// //////////////////////////////////////////////////////////////////////////////
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
 	public class WalkResource extends WalkJDFElement
 	{
+		/**
+		 * 
+		 */
+		public WalkResource()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
 		/**
 		 * @param e
 		 * @return the created resource
@@ -464,7 +547,6 @@ public class XJDF20 extends BaseElementWalker
 
 				}
 			}
-
 			return newResLeaf;
 		}
 
@@ -486,6 +568,15 @@ public class XJDF20 extends BaseElementWalker
 	public class WalkJDFElement extends WalkElement
 	{
 		/**
+		 * 
+		 */
+		public WalkJDFElement()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		/**
 		 * @param e
 		 * @return the created resource
 		 */
@@ -493,8 +584,138 @@ public class XJDF20 extends BaseElementWalker
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
 			final JDFElement je = (JDFElement) jdf;
+			makeRefElements(je);
+			convertRefElements(je);
 			je.inlineRefElements(null, null, false);
 			return super.walk(jdf, xjdf);
+		}
+
+		/**
+		 * @param je
+		 */
+		private void makeRefElements(final JDFElement je)
+		{
+			final VElement v = je.getChildElementVector_KElement(null, null, null, true, 0);
+			for (int i = 0; i < v.size(); i++)
+			{
+				final KElement e = v.get(i);
+				if (e instanceof JDFResource)
+				{
+					final JDFResource r = (JDFResource) e;
+					if (!mustInline(r.getLocalName()))
+					{
+						cleanRefs(je, r);
+					}
+				}
+			}
+		}
+
+		/**
+		 * @param je
+		 * @param r
+		 */
+		private void cleanRefs(final JDFElement je, JDFResource r)
+		{
+			r = r.makeRootResource(null, je.getParentJDF(), false);
+			final JDFResourcePool prevPool = je.getParentJDF().getResourcePool();
+			if (prevPool != null)
+			{
+				r = removeDuplicateRefs(r, prevPool);
+			}
+			je.refElement(r);
+		}
+
+		/**
+		 * @param r
+		 * @param prevPool
+		 * @return
+		 */
+		private JDFResource removeDuplicateRefs(JDFResource r, final JDFResourcePool prevPool)
+		{
+			final JDFAttributeMap m = r.getAttributeMap();
+			final VElement prevs = prevPool.getChildrenByTagName(r.getNodeName(), null, m, true, true, 0);
+			if (prevs != null)
+			{
+				for (int j = 0; j < prevs.size(); j++)
+				{
+					final JDFResource prev = (JDFResource) prevs.get(j);
+					if (r == prev)
+					{
+						continue;
+					}
+					final String id = prev.getID();
+					prev.removeAttribute("ID"); // for comparing
+					if (r.isEqual(prev)) // found duplicate - remove and ref the original
+					{
+						r.deleteNode();
+						r = prev;
+						prev.setID(id);
+						break;
+					}
+					prev.setID(id); // better put it back...
+				}
+			}
+			return r;
+		}
+
+		/**
+		 * @param je
+		 */
+		private void convertRefElements(final JDFElement je)
+		{
+			final VElement v = je.getRefElements();
+			for (int i = 0; i < v.size(); i++)
+			{
+				final JDFRefElement re = (JDFRefElement) v.get(i);
+				if (!mustInline(re))
+				{
+					makeRefAttribute(re);
+				}
+			}
+		}
+
+		/**
+		 * @param re
+		 */
+		private void makeRefAttribute(final JDFRefElement re)
+		{
+			final String attName = getRefName(re);
+			final VElement v = setResource(null, re.getTarget());
+			if (v != null)
+			{
+				for (int i = 0; i < v.size(); i++)
+				{
+					re.getParentNode_KElement().appendAttribute(attName, v.get(i).getAttribute("ID"), null, " ", true);
+				}
+			}
+			re.deleteNode();
+		}
+
+		/**
+		 * @param re
+		 * @return
+		 */
+		protected String getRefName(final JDFRefElement re)
+		{
+			return re.getLocalName();
+		}
+
+		/**
+		 * @param re
+		 * @return
+		 */
+		private boolean mustInline(final JDFRefElement re)
+		{
+			return mustInline(re.getRefLocalName());
+		}
+
+		/**
+		 * @param refLocalName
+		 * @return
+		 */
+		protected boolean mustInline(final String refLocalName)
+		{
+			return ElementName.COMCHANNEL.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName) || ElementName.PERSON.equals(refLocalName);
 		}
 
 		/**
@@ -514,6 +735,15 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public class WalkResLink extends WalkJDFElement
 	{
+		/**
+		 * 
+		 */
+		public WalkResLink()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
 		/**
 		 * @param e
 		 * @return thr created resource in this case just remove the pool
@@ -543,7 +773,7 @@ public class XJDF20 extends BaseElementWalker
 				}
 			}
 			linkTarget.expand(false);
-			setResource(xjdf, rl, linkTarget);
+			setResource(rl, linkTarget);
 			return null;
 		}
 
@@ -557,111 +787,6 @@ public class XJDF20 extends BaseElementWalker
 		{
 			return toCheck instanceof JDFResourceLink;
 		}
-
-		/**
-		 * @param newRoot
-		 * @param rl
-		 * @param linkTarget
-		 */
-		private void setResource(final KElement newRoot, final JDFResourceLink rl, final JDFResource linkTarget)
-		{
-			final String className = getClassName(linkTarget);
-			if (className == null)
-			{
-				return;
-			}
-
-			final KElement resourceSet = newRoot.appendElement(className + "Set");
-
-			setLinkAttributes(resourceSet, rl, linkTarget);
-
-			final VElement vRes = rl.getTargetVector(0);
-			for (int j = 0; j < vRes.size(); j++)
-			{
-				final JDFResource r = (JDFResource) vRes.elementAt(j);
-				final VElement vLeaves = r.getLeaves(false);
-				for (int k = 0; k < vLeaves.size(); k++)
-				{
-					final JDFResource leaf = (JDFResource) vLeaves.elementAt(k);
-					final KElement newBaseRes = setBaseResource(rl, leaf, resourceSet);
-					walkTree(leaf, newBaseRes);
-				}
-			}
-		}
-
-		/**
-		 * 
-		 */
-		private KElement setBaseResource(final JDFResourceLink rl, final JDFResource r, final KElement xjdfSet)
-		{
-			final KElement newLeaf = xjdfSet.appendElement(StringUtil.leftStr(xjdfSet.getNodeName(), -3));
-			newLeaf.setAttribute("ID", r.getAttribute("ID") + "." + StringUtil.formatInteger(myIndex(newLeaf)));
-			setLeafAttributes(r, rl, newLeaf);
-			return newLeaf;
-		}
-
-		/**
-		 * @param newRoot
-		 * @param rl
-		 */
-		private void setLinkAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
-		{
-			resourceSet.setAttribute("Name", linkRoot.getNodeName());
-			resourceSet.copyAttribute("ID", linkRoot, null, null, null);
-			resourceSet.setAttributes(rl);
-			resourceSet.removeAttribute(AttributeName.RREF);
-			resourceSet.removeAttribute(AttributeName.RSUBREF);
-			if (rl instanceof JDFResourceLink)
-			{
-				final JDFResourceLink resLink = (JDFResourceLink) rl;
-				final JDFNode rootIn = resLink.getJDFRoot();
-
-				final JDFResource resInRoot = rootIn == null ? linkRoot : (JDFResource) rootIn.getChildWithAttribute(null, "ID", null, resLink.getrRef(), 0, false);
-				if (resInRoot != null)
-				{
-					final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
-					if (vCreators != null)
-					{
-						final int size = vCreators.size();
-						for (int i = 0; i < size; i++)
-						{
-							final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
-							final KElement dependent = resourceSet.appendElement("Dependent");
-							dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
-							dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
-							dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
-						}
-					}
-				}
-			}
-		}
-
-		/**
-		 * @param leaf
-		 * @param newLeaf
-		 */
-		private void setLeafAttributes(final JDFResource leaf, final JDFResourceLink rl, final KElement newLeaf)
-		{
-			final JDFAttributeMap partMap = leaf.getPartMap();
-			// JDFAttributeMap attMap=leaf.getAttributeMap();
-			// attMap.remove("ID");
-			setAmountPool(rl, newLeaf, partMap);
-
-			// retain spawn informatiom
-			if (leaf.hasAttribute(AttributeName.SPAWNIDS))
-			{
-				final KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(m_spawnInfo, null, 0);
-				final KElement spawnID = spawnInfo.appendElement("SpawnID");
-				spawnID.moveAttribute(AttributeName.SPAWNIDS, newLeaf, null, null, null);
-				spawnID.moveAttribute(AttributeName.SPAWNSTATUS, newLeaf, null, null, null);
-				spawnID.copyAttribute(AttributeName.RESOURCEID, newLeaf, AttributeName.ID, null, null);
-			}
-			if (partMap != null && partMap.size() > 0)
-			{
-				newLeaf.appendElement("Part").setAttributes(partMap);
-				// attMap.removeKeys(partMap.keySet());
-			}
-		}
 	}
 
 	/**
@@ -670,8 +795,17 @@ public class XJDF20 extends BaseElementWalker
 	public class WalkResLinkPool extends WalkJDFElement
 	{
 		/**
+		 * 
+		 */
+		public WalkResLinkPool()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+/**
 		 * @param e
-		 * @return thr created resource in this case just remove the pool
+		 * @return ter created resource in this case just remove the pool
 		 */
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
@@ -696,6 +830,15 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public class WalkJDF extends WalkJDFElement
 	{
+		/**
+		 * 
+		 */
+		public WalkJDF()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
 		/**
 		 * @param e
 		 * @return thr created resource
@@ -965,10 +1108,13 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	protected class WalkSpan extends WalkJDFElement
 	{
-
+		/**
+		 * 
+		 */
 		public WalkSpan()
 		{
 			super();
+			// TODO Auto-generated constructor stub
 		}
 
 		/**
@@ -998,7 +1144,199 @@ public class XJDF20 extends BaseElementWalker
 		{
 			return toCheck instanceof JDFSpanBase;
 		}
-
 	}
 
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkLayout extends WalkResource
+	{
+		/**
+		 * 
+		 */
+		public WalkLayout()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFLayout;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
+		 */
+		@Override
+		protected boolean mustInline(final String refLocalName)
+		{
+			final boolean b = ElementName.LAYERLIST.equals(refLocalName) || ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName)
+					|| ElementName.MARKOBJECT.equals(refLocalName) || ElementName.LAYERDETAILS.equals(refLocalName);
+			return b || super.mustInline(refLocalName);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkInlineAllElement extends WalkJDFElement
+	{
+		/**
+		 * 
+		 */
+		public WalkInlineAllElement()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFContentObject) || (toCheck instanceof JDFMarkObject);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
+		 */
+		@Override
+		protected boolean mustInline(final String refLocalName)
+		{
+			return true;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkInlineAllRes extends WalkResource
+	{
+		/**
+		 * 
+		 */
+		public WalkInlineAllRes()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFRunList);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
+		 */
+		@Override
+		protected boolean mustInline(final String refLocalName)
+		{
+			return true;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkColorPool extends WalkResource
+	{
+		/**
+		 * 
+		 */
+		public WalkColorPool()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFColorPool;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
+		 */
+		@Override
+		protected boolean mustInline(final String refLocalName)
+		{
+			final boolean b = ElementName.COLOR.equals(refLocalName);
+			return b || super.mustInline(refLocalName);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkColor extends WalkResource
+	{
+
+		/**
+		 * 
+		 */
+		public WalkColor()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		/**
+		 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final KElement k = super.walk(jdf, xjdf);
+			if (bHTMLColor)
+			{
+				k.setAttribute("HTMLColor", ((JDFColor) jdf).getHTMLColor());
+			}
+			return k;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFColor;
+		}
+	}
 }
