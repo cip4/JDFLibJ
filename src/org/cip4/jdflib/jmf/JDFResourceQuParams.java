@@ -282,7 +282,7 @@ public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INod
 
 	/**
 	 * legacy for single nmtoken (pre 1.4) (36) set attribute ResourceName
-	 * @param value: the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
 	public void setResourceName(final String value)
 	{

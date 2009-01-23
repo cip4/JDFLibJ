@@ -1,17 +1,8 @@
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFColor.java
- *
- * Last changes
- *
- */
 /*
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,8 +75,15 @@ import org.cip4.jdflib.auto.JDFAutoColor;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFCMYKColor;
+import org.cip4.jdflib.datatypes.JDFRGBColor;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 23.01.2009
+ */
 public class JDFColor extends JDFAutoColor
 {
 	private static final long serialVersionUID = 1L;
@@ -93,10 +91,10 @@ public class JDFColor extends JDFAutoColor
 	/**
 	 * Constructor for JDFColor
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFColor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFColor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -108,8 +106,7 @@ public class JDFColor extends JDFAutoColor
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -122,8 +119,7 @@ public class JDFColor extends JDFAutoColor
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFColor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,46 +138,59 @@ public class JDFColor extends JDFAutoColor
 	}
 
 	/**
-	 * Set the Name and RawName attributes to the value given in pName The value
-	 * in Name uses the default encoding
+	 * Set the Name and RawName attributes to the value given in pName The value in Name uses the default encoding
 	 * 
-	 * @param char[] cName the 8 bit string to set the name to
+	 * @param cName the 8 bit string to set the name to
 	 */
-	public void set8BitNames(byte[] cName)
+	public void set8BitNames(final byte[] cName)
 	{
-		String rawName = StringUtil.setHexBinaryBytes(cName, -1);
+		final String rawName = StringUtil.setHexBinaryBytes(cName, -1);
 		setRawName(rawName);
 		setName(new String(cName));
 	}
 
 	/**
+	 * get the html color representation of this color in the format 0xrrggbb;
+	 */
+	public String getHTMLColor()
+	{
+		JDFRGBColor rgb = new JDFRGBColor();
+		if (hasAttribute(AttributeName.SRGB))
+		{
+			rgb = getsRGB();
+		}
+		else if (hasAttribute(AttributeName.CMYK))
+		{
+			final JDFCMYKColor cmyk = getCMYK();
+			rgb = cmyk.getRGB();
+		}
+		return rgb.getHTMLColor();
+	}
+
+	/**
 	 * Gets the ActualColorName or Name if no ActualColorName is set
 	 * 
-	 * @return String Name of the color extracted from RawName, or if this is
-	 *         missing from Name, using the default transcoder
+	 * @return String Name of the color extracted from RawName, or if this is missing from Name, using the default transcoder
 	 */
 	@Override
 	public String getActualColorName()
 	{
-		final String strName = getAttribute(AttributeName.ACTUALCOLORNAME,
-				null, null);
+		final String strName = getAttribute(AttributeName.ACTUALCOLORNAME, null, null);
 		return strName == null ? getName() : strName;
 	}
 
 	/**
-	 * Gets the 16 bit representation of the 8 bit color name Use String
-	 * GetRawBytes() to extract the 8 bit representation
+	 * Gets the 16 bit representation of the 8 bit color name Use String GetRawBytes() to extract the 8 bit representation
 	 * 
-	 * @return String Name of the color extracted from RawName, or if this is
-	 *         missing from Name, using the default transcoder
+	 * @return String Name of the color extracted from RawName, or if this is missing from Name, using the default transcoder
 	 */
 	public String get8BitName()
 	{
-		String strName = getAttribute(AttributeName.RAWNAME, null, null);
+		final String strName = getAttribute(AttributeName.RAWNAME, null, null);
 		if (strName != null)
 		{
-			byte[] rawName = strName.getBytes();
-			byte[] foundName = StringUtil.getHexBinaryBytes(rawName);
+			final byte[] rawName = strName.getBytes();
+			final byte[] foundName = StringUtil.getHexBinaryBytes(rawName);
 
 			return new String(foundName);
 		}
@@ -192,13 +201,13 @@ public class JDFColor extends JDFAutoColor
 
 	public JDFFileSpec getColorProfile()
 	{
-		VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
+		final VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
 		if (v != null)
 		{
-			int siz = v.size();
+			final int siz = v.size();
 			for (int i = 0; i < siz; i++)
 			{
-				JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
+				final JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
 				if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
 				{
 					if (res.getResourceUsage().equals("ColorProfile"))
@@ -208,7 +217,7 @@ public class JDFColor extends JDFAutoColor
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -228,7 +237,7 @@ public class JDFColor extends JDFAutoColor
 
 	public JDFFileSpec appendColorProfile()
 	{
-		JDFFileSpec res = appendFileSpec();
+		final JDFFileSpec res = appendFileSpec();
 		res.setResourceUsage("ColorProfile");
 
 		return res;
@@ -239,13 +248,12 @@ public class JDFColor extends JDFAutoColor
 
 	public JDFFileSpec getTargetProfile()
 	{
-		VElement v = getChildElementVector(ElementName.FILESPEC, null, null,
-				true, 0, false);
+		final VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
 
-		int siz = v.size();
+		final int siz = v.size();
 		for (int i = 0; i < siz; i++)
 		{
-			JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
+			final JDFFileSpec res = (JDFFileSpec) v.elementAt(i);
 			if (res.hasAttribute(AttributeName.RESOURCEUSAGE))
 			{
 				if (res.getResourceUsage().equals("TargetProfile"))
@@ -273,21 +281,20 @@ public class JDFColor extends JDFAutoColor
 
 	JDFFileSpec appendTargetProfile()
 	{
-		JDFFileSpec res = appendFileSpec();
+		final JDFFileSpec res = appendFileSpec();
 		res.setResourceUsage("TargetProfile");
 
 		return res;
 	}
 
 	@Override
-	public boolean fixVersion(EnumVersion version)
+	public boolean fixVersion(final EnumVersion version)
 	{
 		if (hasAttribute(AttributeName.USEPDLALTERNATECS))
 		{
 			if (!hasAttribute(AttributeName.MAPPINGSELECTION))
 			{
-				setMappingSelection(getUsePDLAlternateCS() ? EnumMappingSelection.UsePDLValues
-						: EnumMappingSelection.UseProcessColorValues);
+				setMappingSelection(getUsePDLAlternateCS() ? EnumMappingSelection.UsePDLValues : EnumMappingSelection.UseProcessColorValues);
 			}
 			removeAttribute(AttributeName.USEPDLALTERNATECS);
 		}

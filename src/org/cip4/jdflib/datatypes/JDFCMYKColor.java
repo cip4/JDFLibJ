@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,8 +83,8 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 /**
- * This class is a representation of a CMYK color (JDFCMYKColor). It is a blank separated list of double values
- * consisting of C the cyan color, M the magenta color, Y the yellow color and K the black color value.
+ * This class is a representation of a CMYK color (JDFCMYKColor). It is a blank separated list of double values consisting of C the cyan color, M the magenta
+ * color, Y the yellow color and K the black color value.
  */
 public class JDFCMYKColor extends JDFNumList
 {
@@ -105,7 +105,7 @@ public class JDFCMYKColor extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFCMYKColor(Vector v) throws DataFormatException
+	public JDFCMYKColor(final Vector v) throws DataFormatException
 	{
 		super(v);
 	}
@@ -113,11 +113,11 @@ public class JDFCMYKColor extends JDFNumList
 	/**
 	 * constructs a CMYK color with the given String
 	 * 
-	 * @param String s - the given String
+	 * @param s - the given String
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFCMYKColor(String s) throws DataFormatException
+	public JDFCMYKColor(final String s) throws DataFormatException
 	{
 		super(s);
 	}
@@ -125,11 +125,11 @@ public class JDFCMYKColor extends JDFNumList
 	/**
 	 * constructs a CMYK color with a given JDFCMYKColor
 	 * 
-	 * @param JDFCMYKColor cmyk - the given CMYK colors
+	 * @param cmyk - the given CMYK colors
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFCMYKColor(JDFCMYKColor cmyk) throws DataFormatException
+	public JDFCMYKColor(final JDFCMYKColor cmyk) throws DataFormatException
 	{
 		this(cmyk.toString());
 	}
@@ -137,11 +137,11 @@ public class JDFCMYKColor extends JDFNumList
 	/**
 	 * constructs a CMYK color with a given JDFNumberList
 	 * 
-	 * @param JDFNumberList nl - the given number list
+	 * @param nl - the given number list
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFCMYKColor(JDFNumberList nl) throws DataFormatException
+	public JDFCMYKColor(final JDFNumberList nl) throws DataFormatException
 	{
 		super(nl);
 	}
@@ -149,12 +149,12 @@ public class JDFCMYKColor extends JDFNumList
 	/**
 	 * constructs a new CMYK color with the given double values
 	 * 
-	 * @param double c - the value c
-	 * @param double m - the value m
-	 * @param double y - the value y
-	 * @param double k - the value k
+	 * @param c - the value c
+	 * @param m - the value m
+	 * @param y - the value y
+	 * @param k - the value k
 	 */
-	public JDFCMYKColor(double c, double m, double y, double k)
+	public JDFCMYKColor(final double c, final double m, final double y, final double k)
 	{
 		super(MAX_CMYK_COLOR);
 		m_numList.set(0, new Double(c));
@@ -202,7 +202,7 @@ public class JDFCMYKColor extends JDFNumList
 	 * 
 	 * @param c the value C of the CMYK color
 	 */
-	public void setC(double c)
+	public void setC(final double c)
 	{
 		m_numList.set(0, new Double(c));
 	}
@@ -222,7 +222,7 @@ public class JDFCMYKColor extends JDFNumList
 	 * 
 	 * @param m the value M of the CMYK color
 	 */
-	public void setM(double m)
+	public void setM(final double m)
 	{
 		m_numList.set(1, new Double(m));
 	}
@@ -242,7 +242,7 @@ public class JDFCMYKColor extends JDFNumList
 	 * 
 	 * @param y the value Y of the CMYK color
 	 */
-	public void setY(double y)
+	public void setY(final double y)
 	{
 		m_numList.set(2, new Double(y));
 	}
@@ -262,9 +262,21 @@ public class JDFCMYKColor extends JDFNumList
 	 * 
 	 * @param k the value K of the CMYK color
 	 */
-	public void setK(double k)
+	public void setK(final double k)
 	{
 		m_numList.set(3, new Double(k));
 	}
 
+	/**
+	 * @return the rgb color that roughly represents this
+	 */
+	public JDFRGBColor getRGB()
+	{
+		final JDFRGBColor rgb = new JDFRGBColor();
+		final double colors = 1.0 - getK();
+		rgb.setR(colors * (1.0 - getC()));
+		rgb.setG(colors * (1.0 - getM()));
+		rgb.setB(colors * (1.0 - getY()));
+		return rgb;
+	}
 }

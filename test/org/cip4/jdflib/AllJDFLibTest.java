@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.VStringTest;
 import org.cip4.jdflib.core.XMLDocTest;
 import org.cip4.jdflib.core.XMLDocUserDataTest;
 import org.cip4.jdflib.datatypes.JDFAttributeMapTest;
+import org.cip4.jdflib.datatypes.JDFCMYKColorTest;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeTest;
 import org.cip4.jdflib.datatypes.JDFDurationRangeTest;
 import org.cip4.jdflib.datatypes.JDFDurationTest;
@@ -105,6 +106,7 @@ import org.cip4.jdflib.datatypes.JDFMatrixTest;
 import org.cip4.jdflib.datatypes.JDFNumListTest;
 import org.cip4.jdflib.datatypes.JDFNumberRangeListTest;
 import org.cip4.jdflib.datatypes.JDFPathTest;
+import org.cip4.jdflib.datatypes.JDFRGBColorTest;
 import org.cip4.jdflib.datatypes.JDFRectangleRangeListTest;
 import org.cip4.jdflib.datatypes.JDFRectangleRangeTest;
 import org.cip4.jdflib.datatypes.JDFRectangleTest;
@@ -271,6 +273,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// datatype
 		suite.addTestSuite(JDFAttributeMapTest.class);
+		suite.addTestSuite(JDFCMYKColorTest.class);
 		suite.addTestSuite(JDFDateTimeRangeTest.class);
 		suite.addTestSuite(JDFDurationTest.class);
 		suite.addTestSuite(JDFDurationRangeTest.class);
@@ -282,6 +285,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFNumberRangeListTest.class);
 		suite.addTestSuite(JDFNumListTest.class);
 		suite.addTestSuite(JDFPathTest.class);
+		suite.addTestSuite(JDFRGBColorTest.class);
 		suite.addTestSuite(JDFURLTest.class);
 		suite.addTestSuite(JDFRectangleRangeListTest.class);
 		suite.addTestSuite(JDFRectangleRangeTest.class);

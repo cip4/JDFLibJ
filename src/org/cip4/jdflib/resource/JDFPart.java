@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,7 +70,6 @@
  *========================================================================== class JDFPart extends JDFAutoPart
  * created 2001-09-06T10:02:57GMT+02:00 ==========================================================================
  *          @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- *              @Author: sabjon@topmail.de   using a code generator
  * Warning! very preliminary test version. Interface subject to change without prior notice! Revision history:   ...
  */
 
@@ -89,6 +88,11 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * 22.01.2009
+ */
 public class JDFPart extends JDFAutoPart
 {
 	private static final long serialVersionUID = 1L;
@@ -292,7 +296,8 @@ public class JDFPart extends JDFAutoPart
 	/**
 	 * overlapMap - identical keys must have the same values in both maps<br>
 	 * similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
-	 * @param subMap the map to compare
+	 * @param resourceMap the map to compare
+	 * @param linkMap the map to compare
 	 * @return boolean: true if identical keys have the same values in both maps
 	 */
 	public static boolean overlapPartMap(final JDFAttributeMap resourceMap, final JDFAttributeMap linkMap)
@@ -302,10 +307,10 @@ public class JDFPart extends JDFAutoPart
 			return true; // null always overlaps with anything
 		}
 
-		final Enumeration subMapEnum = linkMap.keys();
+		final Enumeration<String> subMapEnum = linkMap.keys();
 		while (subMapEnum.hasMoreElements())
 		{
-			final String key = (String) subMapEnum.nextElement();
+			final String key = subMapEnum.nextElement();
 			final String resVal = resourceMap.get(key);
 
 			if (resVal != null)

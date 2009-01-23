@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,59 +68,36 @@
  *  
  * 
  */
-
-package org.cip4.jdflib.resource.process;
+/**
+ * JDFIntegerRangeListTest.java
+ *
+ * @author Elena Skobchenko
+ * 
+ * Copyright (c) 2001-2004 The International Cooperation for the Integration 
+ * of Processes in  Prepress, Press and Postpress (CIP4).  All rights reserved.
+ */
+package org.cip4.jdflib.datatypes;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.datatypes.JDFCMYKColor;
-import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.EnumType;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * 23.01.2009
  */
-public class JDFColorTest extends JDFTestCaseBase
+public class JDFCMYKColorTest extends JDFTestCaseBase
 {
 
-	private JDFColorPool cp;
-
 	/**
 	 * 
 	 */
-	public void testSetRawName()
+	// /////////////////////////////////////////////////////////////////
+	// /////////////////////////////////////////////////////////////////
+	public void testgetRGBLcolor()
 	{
-		final JDFColor c = cp.appendColor();
-		final byte[] b = "grün".getBytes();
-		c.set8BitNames(b);
-		assertEquals(c.get8BitName(), "grün");
-	}
-
-	/**
-	 * 
-	 */
-	public void testGetHTMLColor()
-	{
-		final JDFColor c = cp.appendColor();
-		c.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
-		assertEquals(c.getHTMLColor(), "#000000");
-		c.setCMYK(new JDFCMYKColor(1, 1, 1, 1));
-		assertEquals(c.getHTMLColor(), "#000000");
-		c.setCMYK(new JDFCMYKColor(0, 0, 0, 0));
-		assertEquals(c.getHTMLColor(), "#ffffff");
-	}
-
-	@Override
-	protected void setUp() throws Exception
-	{
-		super.setUp();
-		final JDFDoc doc = new JDFDoc("JDF");
-		final JDFNode n = doc.getJDFRoot();
-		n.setType(EnumType.ColorSpaceConversion);
-		cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, null);
+		final JDFCMYKColor c = new JDFCMYKColor(0, 0, 0, 0);
+		final JDFRGBColor rgb = c.getRGB();
+		assertEquals(rgb, new JDFRGBColor(1, 1, 1));
 	}
 
 }

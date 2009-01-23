@@ -467,7 +467,7 @@ public class JDFAttributeMap implements Map
 		{
 			return new JDFAttributeMap(this);
 		}
-		
+
 		final JDFAttributeMap newMap = new JDFAttributeMap(subMap);
 		final Enumeration<String> keys = keys();
 		while (keys.hasMoreElements())
@@ -484,7 +484,7 @@ public class JDFAttributeMap implements Map
 				return null;
 			}
 		}
-		
+
 		return newMap.size() == 0 ? null : newMap;
 	}
 
@@ -606,7 +606,7 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @return Iterator - an iterator over the elements in this set
 	 */
-	public Iterator getKeyIterator()
+	public Iterator<String> getKeyIterator()
 	{
 		return m_hashTable.keySet().iterator();
 	}
@@ -634,7 +634,7 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @return Enumeration - the enumeration of all keys
 	 */
-	public Enumeration keys()
+	public Enumeration<String> keys()
 	{
 		return m_hashTable.keys();
 	}
@@ -644,14 +644,12 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @return Set - the set of all keys
 	 */
-	public Set keySet()
+	public Set<String> keySet()
 	{
 		return m_hashTable.keySet();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see java.util.Map#containsKey(java.lang.Object)
 	 */
 	public boolean containsKey(final Object key)
@@ -659,9 +657,7 @@ public class JDFAttributeMap implements Map
 		return m_hashTable.containsKey(key);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see java.util.Map#containsValue(java.lang.Object)
 	 */
 	public boolean containsValue(final Object value)
@@ -669,19 +665,15 @@ public class JDFAttributeMap implements Map
 		return m_hashTable.containsValue(value);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see java.util.Map#values()
 	 */
-	public Collection values()
+	public Collection<String> values()
 	{
 		return m_hashTable.values();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see java.util.Map#putAll(java.util.Map)
 	 */
 	public void putAll(final Map t)

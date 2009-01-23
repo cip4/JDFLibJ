@@ -1418,7 +1418,7 @@ public final class AttributeName
 	public static final String RETURNTIME = "ReturnTime";
 	public static final String RETURNURL = "ReturnURL";
 	public static final String REVERSEPAGENUMBER = "ReversePageNumber";
-	public static final String RGB2GRAYBLACK = "RGB2GrayBlack";
+	// public static final String RGB2GRAYBLACK = "RGB2GrayBlack";
 	public static final String RGBGRAY2BLACK = "RGBGray2Black";
 	public static final String RGBGRAY2BLACKTHRESHOLD = "RGBGray2BlackThreshold";
 	public static final String RIBBONCOLOR = "RibbonColor";
@@ -1854,5 +1854,5 @@ public final class AttributeName
 	public static final String ZONESETTINGSY = "ZoneSettingsY";
 	public static final String ZONESY = "ZonesY";
 	public static final String ZONEWIDTH = "ZoneWidth";
-	
+
 }
