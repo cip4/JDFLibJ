@@ -281,8 +281,8 @@ public class XJDF20 extends BaseElementWalker
 					nam += "." + rootName;
 					final ZipEntry ze = new ZipEntry(nam);
 					zos.putNextEntry(ze);
-					final KElement newRoot = makeNewJDF(n, null);
-					newRoot.getOwnerDocument_KElement().write2Stream(zos, 2, true);
+					final KElement newRootL = makeNewJDF(n, null);
+					newRootL.getOwnerDocument_KElement().write2Stream(zos, 2, true);
 					zos.closeEntry();
 
 				}
@@ -433,6 +433,7 @@ public class XJDF20 extends BaseElementWalker
 		resourceSet.removeAttribute(AttributeName.AMOUNTPRODUCED);
 		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
 		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
+		
 		if (rl instanceof JDFResourceLink)
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
@@ -442,14 +443,17 @@ public class XJDF20 extends BaseElementWalker
 			if (resInRoot != null)
 			{
 				final VElement vCreators = resInRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
-				final int size = vCreators == null ? 0 : vCreators.size();
-				for (int i = 0; i < size; i++)
+				if (vCreators != null)
 				{
-					final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
-					final KElement dependent = resourceSet.appendElement("Dependent");
-					dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
-					dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
-					dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+					final int size = vCreators.size();
+					for (int i = 0; i < size; i++)
+					{
+						final JDFNode depNode = (JDFNode) vCreators.elementAt(i);
+						final KElement dependent = resourceSet.appendElement("Dependent");
+						dependent.setAttribute(AttributeName.JOBID, depNode.getJobID(true));
+						dependent.copyAttribute(AttributeName.JMFURL, depNode, null, null, null);
+						dependent.copyAttribute(AttributeName.JOBPARTID, depNode, null, null, null);
+					}
 				}
 			}
 		}
@@ -870,26 +874,26 @@ public class XJDF20 extends BaseElementWalker
 
 		/**
 		 * @param node
-		 * @param newRoot
+		 * @param newRootP
 		 */
-		private void setRootAttributes(final JDFNode node, final KElement newRoot)
+		private void setRootAttributes(final JDFNode node, final KElement newRootP)
 		{
-			newRoot.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
-			newRoot.setAttribute(AttributeName.JOBID, node.getJobID(true));
-			newRoot.setAttributes(node);
+			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+			newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
+			newRootP.setAttributes(node);
 
-			if (!newRoot.hasAttribute(AttributeName.TYPES))
+			if (!newRootP.hasAttribute(AttributeName.TYPES))
 			{
-				newRoot.renameAttribute("Type", "Types", null, null);
+				newRootP.renameAttribute("Type", "Types", null, null);
 			}
 			else
 			{
-				newRoot.removeAttribute("Type");
+				newRootP.removeAttribute("Type");
 			}
-			if (newRoot.hasAttribute(AttributeName.SPAWNID))
+			if (newRootP.hasAttribute(AttributeName.SPAWNID))
 			{
-				final KElement spawnInfo = newRoot.appendElement(m_spawnInfo, "www.cip4.org/SpawnInfo");
-				spawnInfo.moveAttribute(AttributeName.SPAWNID, newRoot, null, null, null);
+				final KElement spawnInfo = newRootP.appendElement(m_spawnInfo, "www.cip4.org/SpawnInfo");
+				spawnInfo.moveAttribute(AttributeName.SPAWNID, newRootP, null, null, null);
 				final JDFAncestorPool ancestorPool = node.getAncestorPool();
 				if (ancestorPool != null)
 				{
