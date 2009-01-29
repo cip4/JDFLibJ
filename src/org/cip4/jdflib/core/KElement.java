@@ -2418,10 +2418,13 @@ public class KElement extends ElementNSImpl
 	 */
 	public VString getMissingAttributeVector(final VString vReqKeys, final int nMax)
 	{
-		final VString vAtts = getAttributeVector();
 		final VString vMissing = new VString(); // is a StringVector like
-		// vReqKeys
+		if (vReqKeys == null || vReqKeys.isEmpty())
+		{
+			return vMissing; // none required - just return null
+		}
 
+		final VString vAtts = getAttributeVector();
 		String prefix = getPrefix();
 		if (prefix != null && !prefix.equals(JDFConstants.EMPTYSTRING))
 		{
@@ -2488,8 +2491,9 @@ public class KElement extends ElementNSImpl
 		for (int i = 0; i < vChildElem.size(); i++)
 		{
 			final String strName = (vChildElem.item(i)).getNodeName();
-			v.appendUnique(strName);
+			v.add(strName);
 		}
+		v.unify();
 		return v;
 	}
 
@@ -2588,8 +2592,12 @@ public class KElement extends ElementNSImpl
 	 */
 	public VString getMissingElementVector(final Vector vRequiredKeys, final int nMax)
 	{
-		final VString vElements = getElementNameVector();
 		final VString vMissing = new VString();
+		if (vRequiredKeys == null || vRequiredKeys.isEmpty())
+		{
+			return vMissing; // none required - just return null
+		}
+		final VString vElements = getElementNameVector();
 
 		for (int i = 0; i < vRequiredKeys.size() && vMissing.size() < nMax; i++)
 		{
@@ -4395,13 +4403,49 @@ public class KElement extends ElementNSImpl
 			format.setEncoding(sm_strENCODING);
 
 			final XMLSerializer serial = new XMLSerializer(osw, format);
+			serial.setNamespaces(true);
+			serial.asDOMSerializer();
+			serial.serialize(this);
+
+			final String s = osw.toString();
+			return s;
+		}
+		catch (final IOException e)
+		{
+			throw new JDFException("ERROR while serializing " + getClass().getName() + " element");
+		}
+	}
+
+	/**
+	 * serialize this to a string
+	 * @param indent
+	 * @return String the dom element serialized as a string
+	 * @throws JDFExcepion if an error occurs while serializing
+	 */
+	@SuppressWarnings("deprecation")
+	public String toDisplayXML(final int indent)
+	{
+		try
+		{
+			final StringWriter osw = new StringWriter();
+			final OutputFormat format = new OutputFormat(getOwnerDocument());
+
+			format.setIndenting(indent != 0);
+			format.setIndent(indent);
+			format.setEncoding(sm_strENCODING);
+
+			final XMLSerializer serial = new XMLSerializer(osw, format);
 			serial.setNamespaces(false);
 			serial.asDOMSerializer();
 			serial.serialize(this);
 
 			final String s = osw.toString();
-			final int pos = s.indexOf("?>");
-			return (pos > 0) ? s.substring(pos + 2) : s;
+			int pos = s.indexOf("?>");
+			if (pos > 0)
+			{
+				pos = s.indexOf("<", pos);
+			}
+			return (pos > 0) ? s.substring(pos) : s;
 
 		}
 		catch (final IOException e)
@@ -5243,7 +5287,12 @@ public class KElement extends ElementNSImpl
 		{
 			appendElement(newPath, null);
 		}
-		return getCreateElement(newPath, null, iSkip);
+		final KElement newElem = getCreateElement(newPath, null, iSkip);
+		if (attName != null && !newElem.hasAttribute(attName))
+		{
+			newElem.setAttribute(attName, attVal);
+		}
+		return newElem;
 	}
 
 	/**
