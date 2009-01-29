@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -116,8 +116,8 @@ public class KElementTest extends JDFTestCaseBase
 		e.appendElement("I a=\"c\"");
 
 		final String s = doc.write2String(2);
-//		final JDFDoc d2 = 
-			new JDFParser().parseString(s);
+		// final JDFDoc d2 =
+		new JDFParser().parseString(s);
 	}
 
 	/**
@@ -1321,26 +1321,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////
-
-	// public void testGetXPathNode()
-	// {
-	// JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
-	// JDFNode root = (JDFNode) jdfDoc.getRoot();
-
-	// String nodeName = "Created";
-	// KElement kElem = (KElement)root.getXPathNode("AuditPool/"+nodeName);
-	// assertEquals(kElem.getNodeName(),nodeName);
-	// assertTrue(kElem.matchesPath("Created",false));
-	// assertTrue(kElem.matchesPath("/JDF/AuditPool/Created",false));
-	// assertTrue(kElem.matchesPath("JDF/AuditPool/Created",false));
-	// assertFalse(kElem.matchesPath("/Created",false));
-
-	// nodeName = "notFound";
-	// kElem = (KElement)root.getXPathNode("AuditPool/"+nodeName);
-	// assertNull(kElem);
-	// }
-
+	/**
+	 * 
+	 */
 	public void testGetCreateXPathElement()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -1373,6 +1356,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("", root.getElement("foo").getElement("bar").numChildElements("fnarf", null), 0);
 		assertEquals("", root.getElement("foo").getElement("bar").getNextSiblingElement("bar", null).numChildElements("fnarf", null), 5);
 		assertNotNull("create by attribute value now implemented", root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]"));
+		assertEquals("getCreate actually sets the attribute", "blahblah", root.getCreateXPathElement("./foo/bar[@blub=\"blahblah\"]").getAttribute("blub"));
 	}
 
 	/**
@@ -2435,9 +2419,21 @@ public class KElementTest extends JDFTestCaseBase
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
-		assertEquals(root.toXML().trim(), "<doc/>");
+		assertTrue(root.toXML().contains("<doc/>"));
 		root.setAttribute("test", "\"");
 		// System.out.print(root.toXML());
+	}
+
+	/**
+	 * 
+	 */
+	public void testToXMLParse()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement root = d.getRoot();
+		final String s = root.toXML();
+		final JDFParser p = new JDFParser();
+		assertNotNull(p.parseString(s));
 	}
 
 	// //////////////////////////////////////////////

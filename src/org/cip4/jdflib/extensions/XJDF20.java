@@ -103,8 +103,11 @@ import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFCreasingParams;
+import org.cip4.jdflib.resource.JDFCuttingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFMerged;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
@@ -112,10 +115,9 @@ import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
-
-
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -143,7 +145,7 @@ public class XJDF20 extends BaseElementWalker
 	protected KElement newRoot = null;
 	protected boolean walkingProduct = false;
 	protected boolean first = true;
-//	private VJDFAttributeMap vPartMap = null;
+	// private VJDFAttributeMap vPartMap = null;
 	/**
 	 * if true add an htmlcolor attribute to color elements for xsl display purposes
 	 */
@@ -156,7 +158,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public KElement makeNewJDF(JDFNode node, @SuppressWarnings("unused") final VJDFAttributeMap vMap)
 	{
-//		vPartMap = vMap;
+		// vPartMap = vMap;
 		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
 		node = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
 		if (node == null)
@@ -173,6 +175,10 @@ public class XJDF20 extends BaseElementWalker
 		walkingProduct = true;
 		final KElement productList = newRoot.appendElement("ProductList");
 		walkTree(rootIn, productList);
+		if (productList.getElement("Product") == null)
+		{
+			productList.deleteNode();
+		}
 		walkingProduct = false;
 
 		newRoot.eraseEmptyNodes(true);
@@ -189,12 +195,12 @@ public class XJDF20 extends BaseElementWalker
 		final JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
 		final JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
 		final JDFResource paramRes = dummyResPool.appendResource("param", EnumResourceClass.Parameter, null);
+		final JDFPart part = (JDFPart) dummyResPool.appendElement(ElementName.PART);
 		resAttribs = paramRes.knownAttributes();
 		resAttribs.appendUnique(physRes.knownAttributes());
 		resAttribs.appendUnique(intRes.knownAttributes());
+		resAttribs.appendUnique(part.knownAttributes());
 	}
-
-
 
 	String getClassName(final JDFResource r)
 	{
@@ -333,7 +339,10 @@ public class XJDF20 extends BaseElementWalker
 				{
 					JDFPartAmount pa = (JDFPartAmount) vPartAmounts.item(i);
 					final JDFAttributeMap map = pa.getPartMap();
-					map.removeKeys(partMap.keySet());
+					if (partMap != null)
+					{
+						map.removeKeys(partMap.keySet());
+					}
 					if (map.isEmpty()) // no further subdevision - simply blast into leaf
 					{
 						newLeaf.setAttributes(pa);
@@ -577,7 +586,6 @@ public class XJDF20 extends BaseElementWalker
 		public WalkJDFElement()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
@@ -591,6 +599,7 @@ public class XJDF20 extends BaseElementWalker
 			makeRefElements(je);
 			convertRefElements(je);
 			je.inlineRefElements(null, null, false);
+			je.removeAttribute(AttributeName.SPAWNID);
 			return super.walk(jdf, xjdf);
 		}
 
@@ -687,9 +696,11 @@ public class XJDF20 extends BaseElementWalker
 			final VElement v = setResource(null, re.getTarget());
 			if (v != null)
 			{
+				final KElement parentElement = re.getParentNode_KElement();
 				for (int i = 0; i < v.size(); i++)
 				{
-					re.getParentNode_KElement().appendAttribute(attName, v.get(i).getAttribute("ID"), null, " ", true);
+					final KElement ref = v.get(i);
+					parentElement.appendAttribute(attName, ref.getAttribute("ID"), null, " ", true);
 				}
 			}
 			re.deleteNode();
@@ -807,7 +818,7 @@ public class XJDF20 extends BaseElementWalker
 			// TODO Auto-generated constructor stub
 		}
 
-/**
+		/**
 		 * @param e
 		 * @return ter created resource in this case just remove the pool
 		 */
@@ -932,6 +943,7 @@ public class XJDF20 extends BaseElementWalker
 			final KElement prod = pList.appendElement("Product");
 			prod.setAttributes(jdf);
 			prod.removeAttribute(AttributeName.TYPE);
+			prod.removeAttribute(AttributeName.ACTIVATION);
 			prod.removeAttribute(AttributeName.VERSION);
 			prod.removeAttribute(AttributeName.MAXVERSION);
 			prod.removeAttribute(AttributeName.ICSVERSIONS);
@@ -980,10 +992,10 @@ public class XJDF20 extends BaseElementWalker
 					}
 				}
 			}
-			
+
 			if (kids.size() > 0)
 			{
-				prod.setAttribute("ProductRefs", kids  , null);
+				prod.setAttribute("ProductRefs", kids, null);
 			}
 			else
 			{
@@ -1248,7 +1260,7 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return (toCheck instanceof JDFRunList);
+			return (toCheck instanceof JDFRunList) || (toCheck instanceof JDFCuttingParams) || (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
 		}
 
 		/**
@@ -1343,4 +1355,24 @@ public class XJDF20 extends BaseElementWalker
 			return toCheck instanceof JDFColor;
 		}
 	}
+
+	/**
+	 * @param res
+	 * @return omaMaps
+	 */
+	protected static VJDFAttributeMap getPartMapVector(final KElement res)
+	{
+		VJDFAttributeMap omaMaps = null;
+		final VElement parts = res.getChildElementVector(ElementName.PART, null, null, true, 0, false);
+		if (parts != null && parts.size() > 0)
+		{
+			omaMaps = new VJDFAttributeMap();
+			for (int i = 0; i < parts.size(); i++)
+			{
+				omaMaps.add(((JDFPart) parts.get(i)).getPartMap());
+			}
+		}
+		return omaMaps;
+	}
+
 }

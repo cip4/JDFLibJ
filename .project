@@ -3,6 +3,7 @@
 	<name>JDFLibJ</name>
 	<comment></comment>
 	<projects>
+		<project>xercesj</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

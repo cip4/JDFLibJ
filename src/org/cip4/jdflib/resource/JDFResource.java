@@ -493,7 +493,35 @@ public class JDFResource extends JDFElement
 
 		public static EnumResourceClass getEnum(final String enumName)
 		{
-			return (EnumResourceClass) getEnum(EnumResourceClass.class, enumName);
+			if ("Consumable".equals(enumName))
+			{
+				return EnumResourceClass.Consumable;
+			}
+			else if ("Parameter".equals(enumName))
+			{
+				return EnumResourceClass.Parameter;
+			}
+			else if ("Intent".equals(enumName))
+			{
+				return EnumResourceClass.Intent;
+			}
+			else if ("Implementation".equals(enumName))
+			{
+				return EnumResourceClass.Implementation;
+			}
+			else if ("Quantity".equals(enumName))
+			{
+				return EnumResourceClass.Quantity;
+			}
+			else if ("Handling".equals(enumName))
+			{
+				return EnumResourceClass.Handling;
+			}
+			else if ("PlaceHolder".equals(enumName))
+			{
+				return EnumResourceClass.PlaceHolder;
+			}
+			return null;
 		}
 
 		public static EnumResourceClass getEnum(final int enumValue)

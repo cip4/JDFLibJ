@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -155,8 +156,24 @@ public class JDFJMFTest extends JDFTestCaseBase
 		JDFJMF.setTheSenderID(null);
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 * 
+	 */
+	public void testToXML()
+	{
+		final JDFDoc d = new JDFDoc("JMF");
+		final JDFJMF jmf = d.getJMFRoot();
+		jmf.appendAcknowledge();
+		final JDFParser p = new JDFParser();
+		final String xml = jmf.toXML();
+		final JDFDoc newDoc = p.parseString(xml);
+		System.out.print(xml);
+		assertNotNull(newDoc);
+	}
+
+	/**
+	 * 
+	 */
 	public void testgetSubmissionParams()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -172,6 +189,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	// /
+	/**
+	 * 
+	 */
 	public void testCreateResponse()
 	{
 		final JDFJMF queries = JDFJMF.createJMF(EnumFamily.Query, EnumType.Status);
@@ -317,6 +337,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertFalse(jp.isValid(EnumValidationLevel.Incomplete));
 	}
 
+	/**
+	 * 
+	 */
 	public void testError()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -332,6 +355,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetMessageElement()
 	{
 		final JDFDoc d = new JDFDoc("JMF");
@@ -357,6 +383,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testJobPhase()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -375,16 +404,19 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertTrue(jp.isValid(EnumValidationLevel.Incomplete));
 	}
 
+	/**
+	 * 
+	 */
 	public void testMessage()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
 		jmf.setSenderID("Pippi Langstrumpf");
 
-		final Iterator it = JDFMessage.EnumFamily.iterator();
+		final Iterator<JDFMessage.EnumFamily> it = JDFMessage.EnumFamily.iterator();
 		while (it.hasNext())
 		{
-			final JDFMessage.EnumFamily f = (JDFMessage.EnumFamily) it.next();
+			final JDFMessage.EnumFamily f = it.next();
 			if (f == null)
 			{
 				continue;
@@ -414,6 +446,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertTrue("valid", jmf.isValid(EnumValidationLevel.Complete));
 	}
 
+	/**
+	 * 
+	 */
 	public void testPrivateMessage()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
@@ -425,6 +460,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertTrue("get device", s.getDevice(0) != null);
 	}
 
+	/**
+	 * 
+	 */
 	public void testReturnQueueEntry()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);

@@ -383,21 +383,19 @@ public class XMLDoc
 	 * 
 	 * @default write2File(String oFilePath, 0)
 	 */
-	public boolean write2File(final String oFilePath, final int indent, final boolean bPreserveSpace)
+	public boolean write2File(String oFilePath, final int indent, final boolean bPreserveSpace)
 	{
-		String oFilePathLocal = oFilePath;
-
-		if (oFilePathLocal == null)
+		if (oFilePath == null)
 		{
-			oFilePathLocal = m_doc.m_OriginalFileName;
+			oFilePath = m_doc.m_OriginalFileName;
 		}
 
-		if (oFilePathLocal == null)
+		if (oFilePath == null)
 		{
 			return false;
 		}
 
-		return write2File(new File(oFilePathLocal), indent, bPreserveSpace);
+		return write2File(new File(oFilePath), indent, bPreserveSpace);
 	}
 
 	/**

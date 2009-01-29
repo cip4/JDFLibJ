@@ -265,7 +265,14 @@ public class HotFolder implements Runnable
 									{
 										for (int k = 0; k < hfl.size(); k++)
 										{
-											hfl.get(k).hotFile(fileJ); // exists and stabilized - call callbacks
+											try
+											{
+												hfl.get(k).hotFile(fileJ); // exists and stabilized - call callbacks
+											}
+											catch (final Exception x)
+											{
+
+											}
 										}
 									}
 									else

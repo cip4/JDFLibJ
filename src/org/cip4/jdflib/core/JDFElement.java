@@ -4964,7 +4964,10 @@ public class JDFElement extends KElement
 		}
 		final JDFParser p = new JDFParser();
 		final JDFDoc d = p.parseStream(is);
-		d.setOriginalFileName(UrlUtil.urlToFileName(url));
+		if (d != null)
+		{
+			d.setOriginalFileName(UrlUtil.urlToFileName(url));
+		}
 		return d;
 	}
 

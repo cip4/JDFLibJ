@@ -139,15 +139,22 @@ public class QueueHotFolder
 			final EnumType cType = newCommand.getEnumType();
 			final JDFDoc jdfDoc = getJDFFromFile(storedFile);
 
+			final String newURL = StringUtil.newExtension(stringURL, "jdf");
+			if (!newURL.equalsIgnoreCase(stringURL) && jdfDoc != null)
+			{
+				storedFile.delete();
+				jdfDoc.write2File(UrlUtil.urlToFile(newURL), 2, false);
+			}
+
 			final JDFNode jdfRoot = jdfDoc == null ? null : jdfDoc.getJDFRoot();
 
 			if (EnumType.ReturnQueueEntry.equals(cType))
 			{
-				extractReturnParams(stringURL, newCommand, jdfRoot);
+				extractReturnParams(newURL, newCommand, jdfRoot);
 			}
 			else if (EnumType.SubmitQueueEntry.equals(cType))
 			{
-				extractSubmitParams(stringURL, newCommand, jdfRoot);
+				extractSubmitParams(newURL, newCommand, jdfRoot);
 			}
 			qhfl.submitted(jmfRoot);
 		}

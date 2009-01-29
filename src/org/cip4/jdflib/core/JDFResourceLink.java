@@ -367,7 +367,15 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 
 		public static EnumUsage getEnum(final String enumName)
 		{
-			return (EnumUsage) getEnum(EnumUsage.class, enumName);
+			if ("Input".equals(enumName))
+			{
+				return EnumUsage.Input;
+			}
+			else if ("Output".equals(enumName))
+			{
+				return EnumUsage.Output;
+			}
+			return null;
 		}
 
 		public static EnumUsage getEnum(final int enumValue)
@@ -1203,7 +1211,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		{
 			return resRoot.getLeaves(false);
 		}
-		
+
 		final EnumPartUsage partUsage = resRoot.getPartUsage();
 
 		for (int i = 0; i < vmParts.size(); i++)
@@ -1224,7 +1232,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				}
 			}
 		}
-		
+
 		return v.isEmpty() ? null : v;
 	}
 

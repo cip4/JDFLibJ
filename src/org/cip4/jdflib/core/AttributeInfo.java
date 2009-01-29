@@ -162,14 +162,7 @@ public class AttributeInfo
 	{
 		if (attrInfo_update != null)
 		{
-			if (!attribInfoTable.containsKey(attrInfo_update.getAttributeName()))
-			{
-				attribInfoTable.put(attrInfo_update.getAttributeName(), attrInfo_update.getAtrInfo());
-			}
-			else
-			{
-				// complain about duplicate attribute name
-			}
+			attribInfoTable.put(attrInfo_update.getAttributeName(), attrInfo_update.getAtrInfo());
 		}
 		return this;
 	}
@@ -185,14 +178,7 @@ public class AttributeInfo
 		{
 			for (int i = 0; i < attrInfo_update.length; i++)
 			{
-				if (!attribInfoTable.containsKey(attrInfo_update[i].getAttributeName()))
-				{
-					attribInfoTable.put(attrInfo_update[i].getAttributeName(), attrInfo_update[i].getAtrInfo());
-				}
-				else
-				{
-					// complain about duplicate attribute name
-				}
+				attribInfoTable.put(attrInfo_update[i].getAttributeName(), attrInfo_update[i].getAtrInfo());
 			}
 		}
 		return this;
