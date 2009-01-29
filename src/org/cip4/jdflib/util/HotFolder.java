@@ -271,7 +271,7 @@ public class HotFolder implements Runnable
 											}
 											catch (final Exception x)
 											{
-
+//
 											}
 										}
 									}

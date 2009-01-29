@@ -10,6 +10,6 @@
 	<classpathentry kind="lib" path="lib/junit.jar" sourcepath="O:/xerces/src"/>
 	<classpathentry kind="lib" path="lib/mailapi.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/xercesj"/>
+	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
