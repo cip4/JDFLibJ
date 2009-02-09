@@ -1,6 +1,128 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.4BLD542 (29.01.2009)
+
+add synchronized in getChildElementVector_JDFElement()
+
+Revision: 3826
+Author: prosi
+Date: 11:48:58, Donnerstag, 29. Januar 2009
+Message:
+undo KElement toXML cleanup
+speed up validation
+----
+Modified : /trunk/JDFLibJ/.classpath
+Modified : /trunk/JDFLibJ/.project
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/AttributeInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/SizeWalker.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/HotFolder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/QueueHotFolder.java
+
+Revision: 3825
+Author: prosi
+Date: 11:22:00, Donnerstag, 29. Januar 2009
+Message:
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+
+Revision: 3790
+Author: prosi
+Date: 18:50:46, Freitag, 23. Januar 2009
+Message:
+Bambi improvements
+typesafe collection cleanup
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/AttributeName.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFCMYKColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFNumList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFRGBColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFPart.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+
+Revision: 3789
+Author: prosi
+Date: 18:50:10, Freitag, 23. Januar 2009
+Message:
+Bambi improvements
+typesafe collection cleanup
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+
+Revision: 3771
+Author: prosi
+Date: 14:15:25, Donnerstag, 22. Januar 2009
+Message:
+enhanced identical element handling
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/xjdfwalker/XJDFToJDFConverter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFIdentical.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.4BLD542) && !lbtype(JDFLIBJ_2.1.4BLD541)}" -print
+.\cformat\ScanfMatchException.java@@\main\3
+.\core\AttributeInfo.java@@\main\37
+.\core\AttributeName.java@@\main\51
+.\core\DocumentJDFImpl.java@@\main\97
+.\core\JDFDoc.java@@\main\84
+.\core\JDFElement.java@@\main\258
+.\core\JDFResourceLink.java@@\main\152
+.\core\KElement.java@@\main\273
+.\core\VResource.java@@\main\18
+.\core\XMLDoc.java@@\main\99
+.\datatypes\JDFAttributeMap.java@@\main\42
+.\datatypes\JDFBaseDataTypes.java@@\main\12
+.\datatypes\JDFCMYKColor.java@@\main\10
+.\datatypes\JDFNameRangeList.java@@\main\16
+.\datatypes\JDFNumList.java@@\main\36
+.\datatypes\JDFRange.java@@\main\19
+.\datatypes\JDFRGBColor.java@@\main\9
+.\datatypes\VJDFAttributeMap.java@@\main\37
+.\elementwalker\BaseWalkerFactory.java@@\main\2
+.\elementwalker\SizeWalker.java@@\main\2
+.\extensions\XJDF20.java@@\main\3
+.\extensions\xjdfwalker\XJDFToJDFConverter.java@@\main\2
+.\goldenticket\IDPGoldenTicket.java@@\main\3
+.\ifaces\ICapabilityElement.java@@\main\3
+.\ifaces\IDeviceCapable.java@@\main\3
+.\ifaces\IJMFSubscribable.java@@\main\2
+.\ifaces\IMatches.java@@\main\2
+.\ifaces\IPlacedObject.java@@\main\3
+.\jmf\JDFResourceQuParams.java@@\main\22
+.\pool\JDFAmountPool.java@@\main\36
+.\pool\JDFResourceLinkPool.java@@\main\88
+.\resource\JDFPart.java@@\main\33
+.\resource\JDFResource.java@@\main\240
+.\resource\process\JDFColor.java@@\main\30
+.\resource\process\JDFIdentical.java@@\main\6
+.\util\ByteArrayIOStream.java@@\main\2
+.\util\EnumUtil.java@@\main\4
+.\util\HotFolder.java@@\main\8
+.\util\HotFolderListener.java@@\main\2
+.\util\JDFSpawn.java@@\main\35
+.\util\MimeUtil.java@@\main\33
+.\util\MyPair.java@@\main\2
+.\util\QueueHotFolder.java@@\main\10
+.\util\QueueHotFolderListener.java@@\main\3
+.\util\RollingBackupFile.java@@\main\2
+.\util\StringUtil.java@@\main\78
+.\validate\ICheckValidator.java@@\main\2
+.\validate\ICheckValidatorFactory.java@@\main\2
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.4BLD541 (21.01.2009)
 
 remove synchronized in getChildElementVector_JDFElement()
