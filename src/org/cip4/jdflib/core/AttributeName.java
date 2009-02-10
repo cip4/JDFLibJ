@@ -811,6 +811,7 @@ public final class AttributeName
 	public static final String INKCOVERAGE = "InkCoverage";
 	public static final String INKNAME = "InkName";
 	public static final String INKSTATE = "InkState";
+	public static final String INNERDIMENSIONS = "InnerDimensions";
 	public static final String INNERMOSTSHINGLING = "InnermostShingling";
 	public static final String INPUTBOX = "InputBox";
 	public static final String INPUTFIELD = "InputField";
@@ -1591,6 +1592,7 @@ public final class AttributeName
 	public static final String STAGGERCOLUMNS = "StaggerColumns";
 	public static final String STAGGERCONTINUOUS = "StaggerContinuous";
 	public static final String STAGGERROWS = "StaggerRows";
+	public static final String STANDARD = "Standard";
 	public static final String STANDARDAMOUNT = "StandardAmount";
 	public static final String STAPLESHAPE = "StapleShape";
 	public static final String START = "Start";

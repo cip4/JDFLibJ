@@ -1023,6 +1023,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.NUMBERINGPARAMS, "org.cip4.jdflib.resource.JDFNumberingParams");
 		sm_PackageNames.put(ElementName.NUMBERITEM, "org.cip4.jdflib.resource.JDFNumberItem");
 		sm_PackageNames.put(ElementName.NUMBERSTATE, "org.cip4.jdflib.resource.devicecapability.JDFNumberState");
+		sm_PackageNames.put(ElementName.OBJECTMODEL, "org.cip4.jdflib.resource.process.JDFObjectModel");
 		sm_PackageNames.put(ElementName.OBJECTRESOLUTION, "org.cip4.jdflib.resource.process.JDFObjectResolution");
 		sm_PackageNames.put(ElementName.OBSERVATIONTARGET, "org.cip4.jdflib.resource.JDFObservationTarget");
 		sm_PackageNames.put(ElementName.OCCUPATION, "org.cip4.jdflib.jmf.JDFOccupation");
@@ -1195,9 +1196,11 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.SHAPECUTTINGINTENT, "org.cip4.jdflib.resource.intent.JDFShapeCuttingIntent");
 		sm_PackageNames.put(ElementName.SHAPECUTTINGPARAMS, "org.cip4.jdflib.resource.JDFShapeCuttingParams");
 		sm_PackageNames.put(ElementName.SHAPEDEF, "org.cip4.jdflib.resource.process.JDFShapeDef");
+		sm_PackageNames.put(ElementName.SHAPEDEFPRODUCTIONPARAMS, "org.cip4.jdflib.resource.process.JDFShapeDefProductionParams");
 		sm_PackageNames.put(ElementName.SHAPEDEPTH, "org.cip4.jdflib.span.JDFNumberSpan");
 		sm_PackageNames.put(ElementName.SHAPEEVALUATION, "org.cip4.jdflib.resource.devicecapability.JDFShapeEvaluation");
 		sm_PackageNames.put(ElementName.SHAPESTATE, "org.cip4.jdflib.resource.devicecapability.JDFShapeState");
+		sm_PackageNames.put(ElementName.SHAPETEMPLATE, "org.cip4.jdflib.resource.process.JDFShapeTemplate");
 		sm_PackageNames.put(ElementName.SHAPETYPE, "org.cip4.jdflib.span.JDFSpanShapeType");
 		sm_PackageNames.put(ElementName.SHEET, "org.cip4.jdflib.resource.process.JDFLayout");
 		sm_PackageNames.put(ElementName.SHIFTPOINT, "org.cip4.jdflib.resource.process.JDFShiftPoint");

@@ -545,6 +545,7 @@ public final class ElementName
 	public static final String LAYOUTINTENT = "LayoutIntent";
 	public static final String LAYOUTPREPARATION = "LayoutPreparation";
 	public static final String LAYOUTPREPARATIONPARAMS = "LayoutPreparationParams";
+	public static final String LAYOUTSHIFT = "LayoutShift";
 	public static final String LEVEL = "Level";
 	public static final String LOC = "Loc";
 	public static final String LOCATION = "Location";
@@ -614,6 +615,7 @@ public final class ElementName
 	public static final String NUMBERITEM = "NumberItem";
 	public static final String NUMBERSTATE = "NumberState";
 
+	public static final String OBJECTMODEL = "ObjectModel";
 	public static final String OBJECTRESOLUTION = "ObjectResolution";
 	public static final String OBSERVATIONTARGET = "ObservationTarget";
 	public static final String OCCUPATION = "Occupation";
@@ -633,6 +635,7 @@ public final class ElementName
 	public static final String PACKINGINTENT = "PackingIntent";
 	public static final String PACKINGPARAMS = "PackingParams";
 	public static final String PAGEASSIGNEDLIST = "PageAssignedList";
+	public static final String PAGEASSIGNPARAMS = "PageAssignParams";
 	public static final String PAGECELL = "PageCell";
 	public static final String PAGECONDITION = "PageCondition";
 	public static final String PAGEDATA = "PageData";
@@ -825,12 +828,15 @@ public final class ElementName
 	public static final String SHAPECUTTINGINTENT = "ShapeCuttingIntent";
 	public static final String SHAPECUTTINGPARAMS = "ShapeCuttingParams";
 	public static final String SHAPEDEF = "ShapeDef";
+	public static final String SHAPEDEFPRODUCTIONPARAMS = "ShapeDefProductionParams";
 	public static final String SHAPEDEPTH = "ShapeDepth";
 	public static final String SHAPEELEMENT = "ShapeElement";
 	public static final String SHAPEEVALUATION = "ShapeEvaluation";
 	public static final String SHAPESTATE = "ShapeState";
+	public static final String SHAPETEMPLATE = "ShapeTemplate";
 	public static final String SHAPETYPE = "ShapeType";
 	public static final String SHEET = "Sheet";
+	public static final String SHIFTPOINT = "ShiftPoint";
 	public static final String SHRINKING = "Shrinking";
 	public static final String SHRINKINGPARAMS = "ShrinkingParams";
 	public static final String SHUTDOWNCMDPARAMS = "ShutDownCmdParams";
@@ -975,7 +981,4 @@ public final class ElementName
 	public static final String XYPAIRSTATE = "XYPairState";
 
 	public static final String YPOSITION = "YPosition";
-	public static final String SHIFTPOINT = "ShiftPoint";
-	public static final String LAYOUTSHIFT = "LayoutShift";
-	public static final String PAGEASSIGNPARAMS = "PageAssignParams";
 }

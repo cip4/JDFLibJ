@@ -690,6 +690,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
 		defaultlistModel.addElement("JDFAutoNumberingParam.java");
 		defaultlistModel.addElement("JDFAutoNumberingParams.java");
 		defaultlistModel.addElement("JDFAutoNumberItem.java");
+		defaultlistModel.addElement("JDFAutoObjectModel.java");
 		defaultlistModel.addElement("JDFAutoObjectResolution.java");
 		defaultlistModel.addElement("JDFAutoObservationTarget.java");
 		defaultlistModel.addElement("JDFAutoOccupation.java");
@@ -823,9 +824,11 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
 		defaultlistModel.addElement("JDFAutoShapeCuttingIntent.java");
 		defaultlistModel.addElement("JDFAutoShapeCuttingParams.java");
 		defaultlistModel.addElement("JDFAutoShapeDef.java");
+		defaultlistModel.addElement("JDFAutoShapeDefProductionParams.java");
 		defaultlistModel.addElement("JDFAutoShapeElement.java");
 		defaultlistModel.addElement("JDFAutoShapeEvaluation.java");
 		defaultlistModel.addElement("JDFAutoShapeEvaluation.java");
+		defaultlistModel.addElement("JDFAutoShapeTemplate.java");
 		defaultlistModel.addElement("JDFAutoShiftPoint.java");
 		defaultlistModel.addElement("JDFAutoShrinkingParams.java");
 		defaultlistModel.addElement("JDFAutoShutDownCmdParams.java");
