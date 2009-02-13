@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -141,7 +141,13 @@ public class MimeUtil extends UrlUtil
 		 * transfer encoding used when streaming body parts, May be null to specify java default behavior
 		 */
 		public static String defaultTransferEncoding = BINARY;
+		/**
+		 * 
+		 */
 		public String transferEncoding = defaultTransferEncoding;
+		/**
+		 * 
+		 */
 		public boolean modifyBoundarySemicolon = false;
 	}
 
@@ -157,7 +163,7 @@ public class MimeUtil extends UrlUtil
 		private byte[] smallBuf = new byte[5000];
 
 		/**
-		 * @param out
+		 * @param _out the output stream to fix
 		 */
 		public FixSemiColonStream(final OutputStream _out)
 		{
@@ -720,7 +726,7 @@ public class MimeUtil extends UrlUtil
 	 * @param extendReferenced if true, also package any further reeferenced files
 	 * @return a Message representing the resulting MIME package, null if an error occured
 	 */
-	static public Multipart buildMimePackage(final JDFDoc docJMF, final JDFDoc docJDF, final boolean extendReferenced)
+	static public Multipart buildMimePackage(final JDFDoc docJMF, final XMLDoc docJDF, final boolean extendReferenced)
 	{
 		// Create a MIME package
 		final Message message = new MimeMessage((Session) null);
@@ -794,7 +800,7 @@ public class MimeUtil extends UrlUtil
 	 * @return the number of files added to the multipart
 	 */
 	@SuppressWarnings("deprecation")
-	private static int extendMultipart(final Multipart multipart, final JDFDoc docJDF, final String cid)
+	private static int extendMultipart(final Multipart multipart, final XMLDoc docJDF, final String cid)
 	{
 		int n = 0;
 

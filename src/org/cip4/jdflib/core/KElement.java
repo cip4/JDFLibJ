@@ -6191,9 +6191,7 @@ public class KElement extends ElementNSImpl
 	 */
 	KElement cloneRoot(final XMLDoc d)
 	{
-		final KElement e = (KElement) cloneNode(true);
-		e.ownerDocument = d.getMemberDocument();
-		e.ownerNode = e.ownerDocument;
+		final KElement e = (KElement) d.importNode(this, true);
 		e.flags = (short) (e.flags | NodeImpl.OWNED); // otherwise some crap might not work...
 		return e;
 	}

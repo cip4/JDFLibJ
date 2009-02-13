@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -439,8 +439,9 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * isValid - true if all instances are Double or Integer types
 	 * 
 	 * @return boolean - true if all instances are Double or Integer types
+	 * @throws DataFormatException
 	 */
-	public abstract void isValid() throws DataFormatException;
+	public abstract boolean isValid() throws DataFormatException;
 
 	/**
 	 * isValidString - true if all instances are Double or Integer types
@@ -468,13 +469,50 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	}
 
 	/**
+	 * scale all values of this to points from millimeters
+	 * 
+	 */
+	public void scaleFromMM()
+	{
+		scale(72 / 25.4);
+	}
+
+	/**
+	 * scale all values of this to points from centimeters
+	 * 
+	 */
+	public void scaleFromCM()
+	{
+		scale(72 / 2.54);
+	}
+
+	/**
+	 * scale all values of this to points from millimeters
+	 * 
+	 */
+	public void scaleToMM()
+	{
+		scale(25.4 / 72);
+	}
+
+	/**
+	 * scale all values of this to points from centimeters
+	 * 
+	 */
+	public void scaleToCM()
+	{
+		scale(2.54 / 72);
+	}
+
+	/**
 	 * scale all values of this by factor
 	 * 
 	 * @param factor
 	 */
 	public void scale(final double factor)
 	{
-		for (int i = 0; i < m_numList.size(); i++)
+		final int size = m_numList.size();
+		for (int i = 0; i < size; i++)
 		{
 			final double number = doubleAt(i) * factor;
 			m_numList.setElementAt(new Double(number), i);
@@ -495,7 +533,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	/**
 	 * return true if this contains the Double or Integer object o
 	 * 
-	 * @param o
+	 * @param l
 	 * @return
 	 */
 	public boolean contains(final JDFNumList l)

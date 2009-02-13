@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,6 +78,9 @@
 package org.cip4.jdflib.core;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -87,7 +90,7 @@ import org.cip4.jdflib.util.FileUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class JDFParserTest extends JDFTestCaseBase
 {
@@ -100,7 +103,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	public void testSpeed()
 	{
-		long l1 = System.nanoTime();
+		final long l1 = System.nanoTime();
 		for (int i = 0; i < 1000; i++)
 		{
 			new JDFParser().parseString(s);
@@ -114,7 +117,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	public void testSpeed1()
 	{
-		long l1 = System.nanoTime();
+		final long l1 = System.nanoTime();
 		for (int i = 0; i < 10000; i++)
 		{
 			new JDFParser().parseString(s);
@@ -130,10 +133,10 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	public void testParseSpeed()
 	{
-		JDFParser parser = new JDFParser();
+		final JDFParser parser = new JDFParser();
 		System.gc();
-		long l1 = System.nanoTime();
-		JDFDoc d = parser.parseFile(sm_dirTestData + "bigWhite.jdf");
+		final long l1 = System.nanoTime();
+		final JDFDoc d = parser.parseFile(sm_dirTestData + "bigWhite.jdf");
 		assertNotNull(d);
 		System.out.println("big parse:   " + (System.nanoTime() - l1) / 1000000);
 	}
@@ -144,8 +147,32 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	public void testParseString()
 	{
-		JDFParser parser = new JDFParser();
+		final JDFParser parser = new JDFParser();
 		assertNotNull(parser.parseString(s));
+	}
+
+	/**
+	 * check simple parseStream
+	 * @throws IOException
+	 * 
+	 */
+	public void testParseFileStream() throws IOException
+	{
+		final JDFParser parser = new JDFParser();
+		final File f = new File(sm_dirTestData + "ApprovalSubJDF.jdf");
+		assertTrue(f.canRead());
+		final File f2 = new File(sm_dirTestDataTemp + "ApprovalSubJDF.jdf");
+		assertTrue(FileUtil.copyFile(f, f2));
+		final InputStream is = new FileInputStream(f2);
+		final JDFDoc d = parser.parseStream(is);
+		assertNotNull(d);
+		is.close();
+		final File f3 = new File("movedTo.jdf");
+		f3.delete();
+		assertTrue(FileUtil.moveFile(f2, f3));
+		assertFalse(f2.canRead());
+		f3.delete();
+
 	}
 
 	/**
@@ -154,7 +181,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	public void testBadNS()
 	{
-		String s2 = "<JMF/>";
+		final String s2 = "<JMF/>";
 		assertEquals(new JDFParser().parseString(s2).getRoot().getLocalName(), "JMF");
 	}
 
@@ -164,8 +191,8 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	public void testSpeed2()
 	{
-		long l1 = System.nanoTime();
-		JDFParser p = new JDFParser();
+		final long l1 = System.nanoTime();
+		final JDFParser p = new JDFParser();
 		for (int i = 0; i < 10000; i++)
 		{
 			p.parseString(s);
@@ -183,9 +210,11 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testSkipParse()
 	{
 		JDFParser.m_searchStream = true;
-		String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
+		final String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
 		for (int i = 0; i < 100000; i++)
+		{
 			assertNotNull(new JDFParser().parseString(s2));
+		}
 		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
 		assertTrue(getCurrentMem() - mem < 1000000);
 		JDFParser.m_searchStream = false;
@@ -193,26 +222,27 @@ public class JDFParserTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * parse a simple JDF against all official schemas
-	 * this test catches corrupt xml schemas
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
 	 * @throws Exception
 	 */
 	public void testSchema()
 	{
-		File foo = new File(sm_dirTestSchema).getParentFile();
+		final File foo = new File(sm_dirTestSchema).getParentFile();
 
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
-		File[] dirs = FileUtil.listFilesWithExpression(foo, ".*Version_.*");
+		final File[] dirs = FileUtil.listFilesWithExpression(foo, ".*Version_.*");
 		assertTrue(dirs.length > 3);
 		int nCheck = 0;
 		for (int i = 0; i < dirs.length; i++)
 		{
-			File dir = dirs[i];
+			final File dir = dirs[i];
 			if (!dir.isDirectory())
+			{
 				continue;
+			}
 			final File jdfxsd = new File(dir + File.separator + "JDF.xsd");
 			assertTrue(jdfxsd.canRead());
-			JDFParser p = new JDFParser();
+			final JDFParser p = new JDFParser();
 			p.setJDFSchemaLocation(jdfxsd);
 			assertNotNull("oops in" + jdfxsd, p.parseString(s));
 			nCheck++;
@@ -229,9 +259,9 @@ public class JDFParserTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
-		JDFResource rl = n.addResource("RunList", EnumUsage.Input);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFResource rl = n.addResource("RunList", EnumUsage.Input);
 		rl.setDescriptiveName("Runlist für 10 € &&&"); // sum special characters
 		s = d.write2String(2);
 		bSearch = JDFParser.m_searchStream;

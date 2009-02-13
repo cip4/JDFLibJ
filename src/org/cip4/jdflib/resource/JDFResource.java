@@ -3323,7 +3323,7 @@ public class JDFResource extends JDFElement
 	public void expand(final boolean bDeleteFromNode)
 	{
 		final VElement leaves = getLeaves(false);
-		if (leaves.size() == 1 && leaves.elementAt(0) == this)
+		if (leaves.size() == 1 && leaves.elementAt(0) == this && isResourceRoot())
 		{
 			return; // this is a non partitioned root node
 		}

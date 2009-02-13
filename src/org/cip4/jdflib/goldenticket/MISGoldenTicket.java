@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,6 +73,7 @@ package org.cip4.jdflib.goldenticket;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -94,6 +95,7 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -101,8 +103,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author prosirai
- * class that generates golden tickets based on ICS levels etc
+ * @author prosirai class that generates golden tickets based on ICS levels etc
  */
 public class MISGoldenTicket extends BaseGoldenTicket
 {
@@ -113,7 +114,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	@Override
 	public VString getICSVersions()
 	{
-		VString v = super.getICSVersions();
+		final VString v = super.getICSVersions();
 		final String icsTag = "MIS_L" + misICSLevel + "-" + theVersion.getName();
 		v.appendUnique(icsTag);
 		return v;
@@ -136,6 +137,15 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	 * seconds this was active
 	 */
 	public int duration = preStart / 2;
+	/**
+	 * seconds from now that this should be scheduled, if -1 do not schedule
+	 */
+	public int scheduleHours = -1;
+	/**
+	 * duration in hours from now that this should be scheduled, if -1 do not schedule
+	 */
+	public int scheduleDuration = -1;
+
 	protected boolean grayBox = true;
 
 	/**
@@ -144,7 +154,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	 * @param jdfVersion the version to generate a golden ticket for
 	 * @param jmfLevel level of jmf ICS to support
 	 */
-	public MISGoldenTicket(int icsLevel, EnumVersion jdfVersion, int jmfLevel)
+	public MISGoldenTicket(final int icsLevel, final EnumVersion jdfVersion, final int jmfLevel)
 	{
 		super(2, jdfVersion); // mis always requires base 2
 		misICSLevel = icsLevel;
@@ -152,7 +162,10 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		fillCatMaps();
 	}
 
-	public MISGoldenTicket(MISGoldenTicket parent)
+	/**
+	 * @param parent
+	 */
+	public MISGoldenTicket(final MISGoldenTicket parent)
 	{
 		super(parent); // mis always requires base 2
 		misICSLevel = parent.misICSLevel;
@@ -168,7 +181,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	 * 
 	 */
 	@Override
-	public void assign(JDFNode node)
+	public void assign(final JDFNode node)
 	{
 
 		super.assign(node);
@@ -188,43 +201,52 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	@Override
 	protected JDFNodeInfo initNodeInfo()
 	{
-
-		JDFNodeInfo ni = super.initNodeInfo();
+		final JDFNodeInfo ni = super.initNodeInfo();
 
 		if (theParentNode == null)
 		{
-			JDFEmployee emp = ni.appendEmployee();
+			final JDFEmployee emp = ni.appendEmployee();
 			emp.setPersonalID("personalID1");
 			emp.setRoles(new VString("CSR", null));
 			if (returnURL != null)
+			{
 				ni.setTargetRoute(returnURL);
+			}
 
 			if (bNodeInfoSubscription && (jmfICSLevel >= 1 && misICSLevel >= 2 || misURL != null))
 			{
-				JDFJMF jmf = ni.appendJMF();
-				jmf.setSenderID("MISGTSender");
-				JDFQuery q = jmf.appendQuery(EnumType.Status);
-				q.setID(q.getID() + System.currentTimeMillis() % 100000);
-				final JDFStatusQuParams statusQuParams = q.appendStatusQuParams();
-				statusQuParams.setJobID(theNode.getJobID(true));
-				statusQuParams.setJobPartID(theNode.getJobPartID(false));
-				statusQuParams.setJobDetails(EnumJobDetails.Brief);
-				final JDFSubscription subscription = q.appendSubscription();
-				subscription.setRepeatTime(15);
-				subscription.setURL(misURL == null ? "http://MIS.printer.com/JMFSignal" : misURL);
+				addJMFSubscriptions(ni);
 			}
+			schedule(null, scheduleHours, scheduleDuration);
 		}
 		return ni;
 	}
 
 	/**
-	 * simulate execution of this node
-	 * the internal node will be modified to reflect the excution
+	 * @param ni
+	 */
+	private void addJMFSubscriptions(final JDFNodeInfo ni)
+	{
+		final JDFJMF jmf = ni.appendJMF();
+		jmf.setSenderID("MISGTSender");
+		final JDFQuery q = jmf.appendQuery(EnumType.Status);
+		q.setID(q.getID() + System.currentTimeMillis() % 100000);
+		final JDFStatusQuParams statusQuParams = q.appendStatusQuParams();
+		statusQuParams.setJobID(theNode.getJobID(true));
+		statusQuParams.setJobPartID(theNode.getJobPartID(false));
+		statusQuParams.setJobDetails(EnumJobDetails.Brief);
+		final JDFSubscription subscription = q.appendSubscription();
+		subscription.setRepeatTime(15);
+		subscription.setURL(misURL == null ? "http://MIS.printer.com/JMFSignal" : misURL);
+	}
+
+	/**
+	 * simulate execution of this node the internal node will be modified to reflect the excution
 	 */
 	@Override
-	public void execute(VJDFAttributeMap vNodeMap, boolean bOutAvail, boolean bFirst)
+	public void execute(final VJDFAttributeMap vNodeMap, final boolean bOutAvail, final boolean bFirst)
 	{
-		JDFComment c = theExpandedNode.appendComment();
+		final JDFComment c = theExpandedNode.appendComment();
 		c.setName("OperatorText");
 		c.setText(StringUtil.getRandomString());
 
@@ -234,24 +256,31 @@ public class MISGoldenTicket extends BaseGoldenTicket
 
 	/**
 	 * initializes this node to a given ICS version
-	 * @param icsLevel the level to init to (1,2 or 3)
 	 */
 	@Override
 	public void init()
 	{
 		if (misICSLevel < 0)
+		{
 			return;
+		}
 		if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
+		{
 			theNode.setDescriptiveName("MIS Golden Ticket Example Job - version: " + JDFAudit.software());
+		}
 		if (!theNode.hasAncestorAttribute(AttributeName.JOBID, null))
+		{
 			theNode.setJobID("Job" + JDFElement.uniqueID(0));
+		}
 		final VString types = getTypes();
 		if (types != null)
 		{
 			theNode.setCategory(getCategory());
 			theNode.setCombined(types);
 			if (grayBox)
+			{
 				theNode.setType(org.cip4.jdflib.node.JDFNode.EnumType.ProcessGroup);
+			}
 		}
 		initNodeInfo();
 		initCustomerInfo();
@@ -271,36 +300,48 @@ public class MISGoldenTicket extends BaseGoldenTicket
 				return customerInfo;
 			}
 		}
-		JDFCustomerInfo ci = theNode.getCreateCustomerInfo();
+		final JDFCustomerInfo ci = theNode.getCreateCustomerInfo();
 		ci.setResStatus(EnumResStatus.Available, false);
 
 		ci.setCustomerID("customerID");
 		ci.setCustomerJobName("customer job name");
 		ci.setCustomerOrderID("customerOrder_1");
-		JDFContact contact = ci.appendContact();
+		final JDFContact contact = ci.appendContact();
 		contact.makeRootResource(null, null, true);
 		contact.setContactTypes(new VString("Customer Administrator", " "));
-		JDFPerson person = contact.appendPerson();
+		final JDFPerson person = contact.appendPerson();
 		person.setFamilyName("Töpfer");
 		person.setFirstName("Harald");
-		JDFCompany comp = contact.appendCompany();
+		final JDFComChannel phone = contact.appendComChannel();
+		phone.setPhoneNumber("+666 42 123456", ".", EnumChannelType.Phone);
+		final JDFComChannel fax = contact.appendComChannel();
+		fax.setPhoneNumber("+666 42 123455", ".", EnumChannelType.Fax);
+		final JDFComChannel mail = contact.appendComChannel();
+		mail.setEMailLocator("harald.topfer@thepits.net");
+		final JDFCompany comp = contact.appendCompany();
 		comp.setOrganizationName("The Pits");
 		return ci;
 	}
 
 	@Override
-	protected JDFDevice initDevice(JDFNode reuseNode)
+	protected JDFDevice initDevice(final JDFNode reuseNode)
 	{
 		JDFDevice dev = super.initDevice(reuseNode);
 		if (misICSLevel < 2)
+		{
 			return dev;
+		}
 		if (dev == null)
 		{
 			JDFResourceLink rl = null;
 			if (reuseNode != null)
+			{
 				rl = theNode.linkResource(reuseNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0), EnumUsage.Input, null);
+			}
 			if (rl == null && theParentNode != null)
+			{
 				rl = theNode.linkResource(theParentNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0), EnumUsage.Input, null);
+			}
 		}
 		if (devID != null)
 		{
@@ -317,19 +358,27 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	 * @param link
 	 */
 	@Override
-	public void addAmountLink(String link)
+	public void addAmountLink(final String link)
 	{
 		if (amountLinks == null)
+		{
 			amountLinks = new VString();
+		}
 		amountLinks.appendUnique(link);
 	}
 
+	/**
+	 * @return
+	 */
 	public String getCategory()
 	{
 		return category;
 	}
 
-	public void setCategory(String _category)
+	/**
+	 * @param _category
+	 */
+	public void setCategory(final String _category)
 	{
 		category = _category;
 	}
@@ -341,16 +390,18 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	public VString getTypes()
 	{
 		if (category == null)
+		{
 			return null;
+		}
 		return catMap.get(category);
 	}
 
 	/**
-	 * @param grayBox the grayBox to set
+	 * @param _grayBox the grayBox to set
 	 */
-	public void setGrayBox(boolean pgrayBox)
+	public void setGrayBox(final boolean _grayBox)
 	{
-		this.grayBox = pgrayBox;
+		this.grayBox = _grayBox;
 	}
 
 	/**

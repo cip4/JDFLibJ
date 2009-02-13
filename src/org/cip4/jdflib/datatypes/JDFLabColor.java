@@ -13,8 +13,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 /**
- * This class is a representation of a Lab color (JDFLabColor). It is a blank separated list of double values consisting
- * of L, a and b value.
+ * This class is a representation of a Lab color (JDFLabColor). It is a blank separated list of double values consisting of L, a and b value.
  */
 public class JDFLabColor extends JDFNumList
 {
@@ -35,7 +34,7 @@ public class JDFLabColor extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFLabColor(Vector v) throws DataFormatException
+	public JDFLabColor(final Vector v) throws DataFormatException
 	{
 		super(v);
 	}
@@ -47,7 +46,7 @@ public class JDFLabColor extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFLabColor(String s) throws DataFormatException
+	public JDFLabColor(final String s) throws DataFormatException
 	{
 		super(s);
 	}
@@ -59,7 +58,7 @@ public class JDFLabColor extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFLabColor(JDFLabColor lab) throws DataFormatException
+	public JDFLabColor(final JDFLabColor lab) throws DataFormatException
 	{
 		this(lab.toString());
 	}
@@ -71,7 +70,7 @@ public class JDFLabColor extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String does not have a valid format
 	 */
-	public JDFLabColor(JDFNumberList nl) throws DataFormatException
+	public JDFLabColor(final JDFNumberList nl) throws DataFormatException
 	{
 		this(nl.toString());
 	}
@@ -83,7 +82,7 @@ public class JDFLabColor extends JDFNumList
 	 * @param a the value a
 	 * @param b the value b
 	 */
-	public JDFLabColor(double l, double a, double b)
+	public JDFLabColor(final double l, final double a, final double b)
 	{
 		super(MAX_LAB_COLOR);
 		m_numList.set(0, new Double(l));
@@ -99,7 +98,7 @@ public class JDFLabColor extends JDFNumList
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
-	public void isValid() throws DataFormatException
+	public boolean isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_LAB_COLOR)
 		{
@@ -113,6 +112,7 @@ public class JDFLabColor extends JDFNumList
 				throw new DataFormatException("Data format exception!");
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class JDFLabColor extends JDFNumList
 	 * 
 	 * @param l the value L of the Lab color
 	 */
-	public void setL(double l)
+	public void setL(final double l)
 	{
 		m_numList.set(0, new Double(l));
 	}
@@ -150,7 +150,7 @@ public class JDFLabColor extends JDFNumList
 	 * 
 	 * @param a the value a of the Lab color
 	 */
-	public void setA(double a)
+	public void setA(final double a)
 	{
 		m_numList.set(1, new Double(a));
 	}
@@ -170,7 +170,7 @@ public class JDFLabColor extends JDFNumList
 	 * 
 	 * @param b the value b of the Lab color
 	 */
-	public void setB(double b)
+	public void setB(final double b)
 	{
 		m_numList.set(2, new Double(b));
 	}

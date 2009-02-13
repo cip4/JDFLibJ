@@ -88,8 +88,7 @@ import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * This class represents a transformation matrix consisting of 6 transformation values a, b, c, d, tx, ty all values are
- * double values. The matrix looks like:
+ * This class represents a transformation matrix consisting of 6 transformation values a, b, c, d, tx, ty all values are double values. The matrix looks like:
  * 
  * <pre>
  *  [ x']   [  a  b  tx  ] [ x ]   [ m00x + m01y + m02 ]
@@ -119,7 +118,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFMatrix(Vector v) throws DataFormatException
+	public JDFMatrix(final Vector v) throws DataFormatException
 	{
 		super(v);
 	}
@@ -133,7 +132,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFMatrix(double degrees, double x, double y)
+	public JDFMatrix(final double degrees, final double x, final double y)
 	{
 		super(MAX_MATRIX_DIMENSION);
 		setA(1.);
@@ -151,7 +150,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFMatrix(EnumOrientation orientation, double w, double h)
+	public JDFMatrix(final EnumOrientation orientation, final double w, final double h)
 	{
 		super(MAX_MATRIX_DIMENSION);
 		if (orientation == null || orientation.equals(EnumOrientation.Rotate0))
@@ -211,7 +210,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFMatrix(String s) throws DataFormatException
+	public JDFMatrix(final String s) throws DataFormatException
 	{
 		super(s);
 	}
@@ -221,7 +220,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param JDma the given matrix
 	 */
-	public JDFMatrix(JDFMatrix ma)
+	public JDFMatrix(final JDFMatrix ma)
 	{
 		super(MAX_MATRIX_DIMENSION);
 		setA(ma.getA());
@@ -239,11 +238,13 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFMatrix(JDFNumberList nl) throws DataFormatException
+	public JDFMatrix(final JDFNumberList nl) throws DataFormatException
 	{
 		super(MAX_MATRIX_DIMENSION);
 		if (nl.size() != MAX_MATRIX_DIMENSION)
+		{
 			throw new DataFormatException("JDFMatrix: can't construct JDFMatrix from this JDFNuberList value");
+		}
 		m_numList.set(0, nl.m_numList.get(0));
 		m_numList.set(1, nl.m_numList.get(1));
 		m_numList.set(2, nl.m_numList.get(2));
@@ -262,7 +263,7 @@ public class JDFMatrix extends JDFNumList
 	 * @param tx position 03 of the transformation matrix
 	 * @param ty position 13 of the transformation matrix
 	 */
-	public JDFMatrix(double a, double b, double c, double d, double tx, double ty)
+	public JDFMatrix(final double a, final double b, final double c, final double d, final double tx, final double ty)
 	{
 		super(MAX_MATRIX_DIMENSION);
 		setA(a);
@@ -281,7 +282,7 @@ public class JDFMatrix extends JDFNumList
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
-	public void isValid() throws DataFormatException
+	public boolean isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_MATRIX_DIMENSION)
 		{
@@ -295,6 +296,7 @@ public class JDFMatrix extends JDFNumList
 				throw new DataFormatException("Data format exception!");
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -312,7 +314,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param p_a the first coordinate
 	 */
-	public void setA(double p_a)
+	public void setA(final double p_a)
 	{
 		m_numList.set(0, new Double(p_a));
 	}
@@ -332,7 +334,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param p_b the first coordinate
 	 */
-	public void setB(double p_b)
+	public void setB(final double p_b)
 	{
 		m_numList.set(1, new Double(p_b));
 	}
@@ -352,7 +354,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param p_c the third coordinate
 	 */
-	public void setC(double p_c)
+	public void setC(final double p_c)
 	{
 		m_numList.set(2, new Double(p_c));
 	}
@@ -372,7 +374,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param p_d the fourth coordinate
 	 */
-	public void setD(double p_d)
+	public void setD(final double p_d)
 	{
 		m_numList.set(3, new Double(p_d));
 	}
@@ -392,7 +394,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param p_tx the tx coordinate
 	 */
-	public void setTx(double p_tx)
+	public void setTx(final double p_tx)
 	{
 		m_numList.set(4, new Double(p_tx));
 	}
@@ -412,7 +414,7 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param p_y the ty coordinate
 	 */
-	public void setTy(double p_ty)
+	public void setTy(final double p_ty)
 	{
 		m_numList.set(5, new Double(p_ty));
 	}
@@ -423,7 +425,7 @@ public class JDFMatrix extends JDFNumList
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -438,11 +440,10 @@ public class JDFMatrix extends JDFNumList
 			return false;
 		}
 
-		JDFMatrix m = (JDFMatrix) other;
+		final JDFMatrix m = (JDFMatrix) other;
 
-		return (Math.abs(this.getA() - m.getA()) <= EPSILON) && (Math.abs(this.getB() - m.getB()) <= EPSILON)
-				&& (Math.abs(this.getC() - m.getC()) <= EPSILON) && (Math.abs(this.getD() - m.getD()) <= EPSILON)
-				&& (Math.abs(this.getTx() - m.getTx()) <= EPSILON) && (Math.abs(this.getTy() - m.getTy()) <= EPSILON);
+		return (Math.abs(this.getA() - m.getA()) <= EPSILON) && (Math.abs(this.getB() - m.getB()) <= EPSILON) && (Math.abs(this.getC() - m.getC()) <= EPSILON)
+				&& (Math.abs(this.getD() - m.getD()) <= EPSILON) && (Math.abs(this.getTx() - m.getTx()) <= EPSILON) && (Math.abs(this.getTy() - m.getTy()) <= EPSILON);
 	}
 
 	/**
@@ -471,9 +472,9 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param AffineTransform matrix to be stored
 	 */
-	public void setAffineTransform(AffineTransform affineTrans)
+	public void setAffineTransform(final AffineTransform affineTrans)
 	{
-		double[] flatMatrix = new double[6];
+		final double[] flatMatrix = new double[6];
 		affineTrans.getMatrix(flatMatrix);
 		setA(flatMatrix[0]);
 		setB(flatMatrix[1]);
@@ -489,7 +490,7 @@ public class JDFMatrix extends JDFNumList
 	 * @param tX shift in x direction
 	 * @param tY shift in y direction
 	 */
-	public void shift(double tx, double ty)
+	public void shift(final double tx, final double ty)
 	{
 		setTx(getTx() + tx);
 		setTy(getTy() + ty);
@@ -500,9 +501,9 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param degrees the degrees to rotate by in counterclockwise direction
 	 */
-	public void rotate(double degrees)
+	public void rotate(final double degrees)
 	{
-		AffineTransform at = getAffineTransform();
+		final AffineTransform at = getAffineTransform();
 		at.rotate(degrees * Math.PI / 180.0);
 		setAffineTransform(at);
 	}
@@ -513,10 +514,10 @@ public class JDFMatrix extends JDFNumList
 	 * @param m the matrix to concatinate
 	 * @param tY shift in y direction
 	 */
-	public void concat(JDFMatrix m)
+	public void concat(final JDFMatrix m)
 	{
-		AffineTransform a = getAffineTransform();
-		AffineTransform ma = m.getAffineTransform();
+		final AffineTransform a = getAffineTransform();
+		final AffineTransform ma = m.getAffineTransform();
 		a.concatenate(ma);
 		setAffineTransform(a);
 	}
@@ -526,10 +527,12 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param point the point to shift by
 	 */
-	public void shift(JDFXYPair point)
+	public void shift(final JDFXYPair point)
 	{
 		if (point == null)
+		{
 			return;
+		}
 		shift(point.getX(), point.getY());
 
 	}

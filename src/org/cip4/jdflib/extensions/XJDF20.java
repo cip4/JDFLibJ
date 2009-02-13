@@ -79,7 +79,6 @@ import java.util.zip.ZipOutputStream;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
@@ -109,6 +108,7 @@ import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
@@ -152,13 +152,14 @@ public class XJDF20 extends BaseElementWalker
 	public boolean bHTMLColor = false;
 
 	/**
-	 * @param node
-	 * @param vMap
-	 * @return
+	 * @param node the node to transform
+	 * @param vMap the partmap to transform, null if all
+	 * @return the root of the XJDF document
 	 */
 	public KElement makeNewJDF(JDFNode node, @SuppressWarnings("unused") final VJDFAttributeMap vMap)
 	{
 		// vPartMap = vMap;
+		node.cloneNode(true);
 		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
 		node = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
 		if (node == null)
@@ -442,7 +443,7 @@ public class XJDF20 extends BaseElementWalker
 		resourceSet.removeAttribute(AttributeName.AMOUNTPRODUCED);
 		resourceSet.removeAttribute(AttributeName.MAXAMOUNT);
 		resourceSet.removeAttribute(AttributeName.ACTUALAMOUNT);
-		
+
 		if (rl instanceof JDFResourceLink)
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
@@ -481,6 +482,7 @@ public class XJDF20 extends BaseElementWalker
 		{
 			return null;
 		}
+		linkTarget.expand(false);
 		final String resID = linkTarget.getAttribute("ID");
 
 		KElement resourceSet = newRoot.getChildWithAttribute(className + "Set", "ID", null, resID, 0, true);
@@ -730,7 +732,8 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		protected boolean mustInline(final String refLocalName)
 		{
-			return ElementName.COMCHANNEL.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName) || ElementName.PERSON.equals(refLocalName);
+			return ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.COMCHANNEL.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName)
+					|| ElementName.PERSON.equals(refLocalName) || ElementName.COLORANTALIAS.equals(refLocalName);
 		}
 
 		/**
@@ -772,22 +775,23 @@ public class XJDF20 extends BaseElementWalker
 			{
 				return null;
 			}
-			final boolean bCustomerInfo = linkTarget instanceof JDFCustomerInfo;
+			// final boolean bCustomerInfo = linkTarget instanceof JDFCustomerInfo;
 			if (walkingProduct)
 			{
-				if (!bCustomerInfo && !EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+				// if (!bCustomerInfo && !EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+				if (!EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
 				{
 					return null;
 				}
 			}
 			else
 			{
-				if (bCustomerInfo || EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+				// if (bCustomerInfo || EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
+				if (EnumResourceClass.Intent.equals(linkTarget.getResourceClass()))
 				{
 					return null;
 				}
 			}
-			linkTarget.expand(false);
 			setResource(rl, linkTarget);
 			return null;
 		}
@@ -1115,6 +1119,90 @@ public class XJDF20 extends BaseElementWalker
 			return toCheck instanceof JDFAuditPool;
 		}
 
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen at this point only a dummy since we have a specific WalkResourceAudit child
+	 */
+	protected class WalkAudit extends WalkJDFElement
+	{
+
+		public WalkAudit()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFAudit;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 * at this point only a dummy since we have a specific WalkResourceAudit child
+	 * 
+	 * TODO how should resource consumption be tracked?
+	 */
+	protected class WalkResourceAudit extends WalkAudit
+	{
+
+		public WalkResourceAudit()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final KElement raNew = super.walk(jdf, xjdf);
+			final JDFResourceAudit ra = (JDFResourceAudit) jdf;
+			copyLinkValues(raNew, ra.getNewLink(), "NewRef");
+			copyLinkValues(raNew, ra.getOldLink(), "OldRef");
+
+			return null; // don't walk the links!
+		}
+
+		/**
+		 * @param raNew
+		 * @param rl
+		 * @param val
+		 */
+		private void copyLinkValues(final KElement raNew, final JDFResourceLink rl, final String val)
+		{
+			if (rl != null)
+			{
+				final VElement v = setResource(null, rl.getLinkRoot());
+				for (int i = 0; i < v.size(); i++)
+				{
+					raNew.appendAttribute(val, v.get(i).getAttribute(AttributeName.ID), null, " ", true);
+				}
+			}
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFResourceAudit;
+		}
 	}
 
 	/**

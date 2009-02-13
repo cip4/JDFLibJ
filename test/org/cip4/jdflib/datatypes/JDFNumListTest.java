@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,8 +86,8 @@ public class JDFNumListTest extends JDFTestCaseBase
 {
 	public final void testSetString() throws Exception
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 
 		JDFIntegerList il = null;
 		il = new JDFIntegerList("1 2 INF");
@@ -104,8 +104,8 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	public final void testGetIntArray() throws Exception
 	{
-		JDFIntegerList il = new JDFIntegerList("1 2 INF");
-		int[] ar = il.getIntArray();
+		final JDFIntegerList il = new JDFIntegerList("1 2 INF");
+		final int[] ar = il.getIntArray();
 		assertEquals(3, ar.length);
 		assertEquals(ar[2], Integer.MAX_VALUE);
 	}
@@ -113,12 +113,12 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	public final void testSetIntArray()
 	{
-		int[] iArray = new int[3];
+		final int[] iArray = new int[3];
 		iArray[0] = 1;
 		iArray[1] = 2;
 		iArray[2] = 4;
-		JDFIntegerList il = new JDFIntegerList(iArray);
-		int[] ar = il.getIntArray();
+		final JDFIntegerList il = new JDFIntegerList(iArray);
+		final int[] ar = il.getIntArray();
 		assertEquals(iArray.length, ar.length);
 		assertEquals(iArray[0], ar[0]);
 		assertEquals(iArray[1], ar[1]);
@@ -126,26 +126,56 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public final void testScale()
 	{
-		int[] iArray = new int[3];
+		final int[] iArray = new int[3];
 		iArray[0] = 1;
 		iArray[1] = 2;
 		iArray[2] = 4;
-		JDFIntegerList il = new JDFIntegerList(iArray);
+		final JDFIntegerList il = new JDFIntegerList(iArray);
 		il.scale(2);
-		int[] ar = il.getIntArray();
+		final int[] ar = il.getIntArray();
 		assertEquals(iArray.length, ar.length);
 		assertEquals(2 * iArray[0], ar[0]);
 		assertEquals(2 * iArray[1], ar[1]);
 		assertEquals(2 * iArray[2], ar[2]);
 	}
 
+	/**
+	 * 
+	 */
+	public final void testScaleFromCM()
+	{
+		final JDFShape s = new JDFShape(10, 20, 5);
+		s.scaleFromCM();
+		assertEquals(s.getX(), 10. * 72. / 2.54, 0);
+		assertEquals(s.getY(), 20. * 72. / 2.54, 0);
+		assertEquals(s.getZ(), 5. * 72. / 2.54, 0);
+	}
+
+	/**
+	 * 
+	 */
+	public final void testScaleFromMM()
+	{
+		final JDFShape s = new JDFShape(100, 200, 50);
+		s.scaleFromMM();
+		assertEquals(s.getX(), 10. * 72. / 2.54, 0);
+		assertEquals(s.getY(), 20. * 72. / 2.54, 0);
+		assertEquals(s.getZ(), 5. * 72. / 2.54, 0);
+	}
+
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception
+	 */
 	public final void testCopy() throws Exception
 	{
-		JDFCMYKColor cmy1 = new JDFCMYKColor("1 2 3 4");
-		JDFCMYKColor cmy2 = new JDFCMYKColor(cmy1);
+		final JDFCMYKColor cmy1 = new JDFCMYKColor("1 2 3 4");
+		final JDFCMYKColor cmy2 = new JDFCMYKColor(cmy1);
 		assertEquals(cmy1, cmy2);
 		cmy2.setK(0);
 		assertEquals(cmy2.getK(), 0., 0.);
@@ -155,7 +185,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	public final void testContainsDouble() throws Exception
 	{
-		JDFNumberList l = new JDFNumberList("1 2.0 3 4 3.0");
+		final JDFNumberList l = new JDFNumberList("1 2.0 3 4 3.0");
 		assertTrue(l.contains(2.0));
 		assertTrue(l.contains(4.00));
 		assertTrue(l.contains(3));
@@ -165,7 +195,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	public final void testContainsInt() throws Exception
 	{
-		JDFIntegerList l = new JDFIntegerList("1 2 3 4 3");
+		final JDFIntegerList l = new JDFIntegerList("1 2 3 4 3");
 		assertTrue(l.contains(2));
 		assertTrue(l.contains(4));
 		assertTrue(l.contains(3));
@@ -175,7 +205,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	public final void testContainsList() throws Exception
 	{
-		JDFIntegerList l = new JDFIntegerList("1 2 3 4 3");
+		final JDFIntegerList l = new JDFIntegerList("1 2 3 4 3");
 		assertTrue(l.contains(new JDFIntegerList("1")));
 		assertTrue(l.contains(new JDFIntegerList("2 5")));
 
@@ -186,11 +216,11 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	public final void testRemoveElementAt()
 	{
-		int[] iArray = new int[3];
+		final int[] iArray = new int[3];
 		iArray[0] = 1;
 		iArray[1] = 2;
 		iArray[2] = 4;
-		JDFIntegerList il = new JDFIntegerList(iArray);
+		final JDFIntegerList il = new JDFIntegerList(iArray);
 		assertEquals(il.getInt(-1), 4);
 		il.removeElementAt(2);
 		assertEquals(il.getInt(-1), 2);
@@ -202,7 +232,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	public void testGetDouble() throws Exception
 	{
-		JDFNumberList nl = new JDFNumberList("1.1 2.2 3.3");
+		final JDFNumberList nl = new JDFNumberList("1.1 2.2 3.3");
 		assertEquals(nl.doubleAt(0), 1.1, 0.0);
 		assertEquals(nl.doubleAt(1), 2.2, 0.0);
 		assertEquals(nl.doubleAt(2), 3.3, 0.0);
@@ -214,7 +244,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	public void testShape() throws Exception
 	{
-		JDFShape nl = new JDFShape("1.1 2.2 3.3");
+		final JDFShape nl = new JDFShape("1.1 2.2 3.3");
 		assertEquals(nl.doubleAt(0), 1.1, 0.0);
 		assertEquals(nl.doubleAt(1), 2.2, 0.0);
 		assertEquals(nl.doubleAt(2), 3.3, 0.0);
@@ -230,7 +260,7 @@ public class JDFNumListTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 	public void testShape2()
 	{
-		JDFShape nl = new JDFShape(1, 2);
+		final JDFShape nl = new JDFShape(1, 2);
 		assertEquals(nl.doubleAt(0), 1, 0.0);
 		assertEquals(nl.doubleAt(1), 2, 0.0);
 		assertEquals(nl.doubleAt(2), 0, 0.0);

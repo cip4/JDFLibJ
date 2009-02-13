@@ -86,8 +86,7 @@ import org.cip4.jdflib.jmf.JDFMessage;
 /**
  * @author Rainer
  * 
- *         To change the template for this generated type comment go to Window -
- *         Preferences - Java - Code Generation - Code and Comments
+ * To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class QueueHotFolderTest extends JDFTestCaseBase
 {
@@ -102,11 +101,9 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see
-		 * org.cip4.jdflib.util.QueueHotFolderListener#submitted(org.cip4.jdflib
-		 * .jmf.JDFJMF)
+		 * @see org.cip4.jdflib.util.QueueHotFolderListener#submitted(org.cip4.jdflib .jmf.JDFJMF)
 		 */
-		public void submitted(JDFJMF submissionJMF)
+		public void submitted(final JDFJMF submissionJMF)
 		{
 			vJMF.add(submissionJMF);
 		}
@@ -124,6 +121,9 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testSubmitSingleFile() throws Exception
 	{
 		final MyListener myListener = new MyListener();
@@ -142,6 +142,9 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.fileToUrl(stFile, false));
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void teststopStart() throws Exception
 	{
 		final MyListener myListener = new MyListener();

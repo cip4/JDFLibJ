@@ -583,20 +583,19 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#importNode(org.w3c.dom.Node, boolean)
 	 */
 	// TODO revisit setting parent nodes when importing
-	@Override
-	public synchronized Node importNode(final Node importedNode, final boolean deep)
-	{
-		if (importedNode == null)
-		{
-			return null;
-		}
-		synchronized (importedNode)
-		{
-			setParentNode(importedNode.getParentNode());
-			return super.importNode(importedNode, deep);
-		}
-	}
-
+	// @Override
+	// public synchronized Node importNode(final Node importedNode, final boolean deep)
+	// {
+	// if (importedNode == null)
+	// {
+	// return null;
+	// }
+	// synchronized (importedNode)
+	// {
+	// setParentNode(importedNode.getParentNode());
+	// return super.importNode(importedNode, deep);
+	// }
+	// }
 	/**
 	 * register all default classes in the factory mapping of the element names which occur during parsing to the corresponding classes
 	 * 

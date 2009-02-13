@@ -171,7 +171,7 @@ public class JDFRGBColor extends JDFNumList
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
-	public void isValid() throws DataFormatException
+	public boolean isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_RGB_COLOR)
 		{
@@ -185,6 +185,7 @@ public class JDFRGBColor extends JDFNumList
 				throw new DataFormatException("Data format exception!");
 			}
 		}
+		return true;
 	}
 
 	/**

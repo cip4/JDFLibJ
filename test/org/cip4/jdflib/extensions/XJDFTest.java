@@ -5,6 +5,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
+import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -22,13 +23,17 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
  */
 public class XJDFTest extends JDFTestCaseBase
 {
+	JDFNode n = null;
+	KElement e = null;
 
 	/**
-	 * @throws Exception
-	 */
-	public void testToXJDF()
+ * 
+ */
+	@Override
+	public void setUp() throws Exception
 	{
-		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		super.setUp();
+		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
 
 		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
@@ -37,10 +42,20 @@ public class XJDFTest extends JDFTestCaseBase
 		r3.setProductID("P1");
 		final JDFExposedMedia xm0 = (JDFExposedMedia) r3;
 		xm0.setPlateType(EnumPlateType.Dummy);
-		final KElement e = new XJDF20().makeNewJDF(n, null);
+		final JDFCustomerInfo ci = n.appendCustomerInfo();
+		ci.setCustomerJobName("foo");
+		e = new XJDF20().makeNewJDF(n, null);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testToXJDF() throws Exception
+	{
 
 		final JDFNode n2 = new JDFDoc("JDF").getJDFRoot();
 		n2.setType(EnumType.ConventionalPrinting);
+
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(n2.getOwnerDocument_JDFElement());
 		final JDFDoc d2 = xCon.convert(e);
 		assertNotNull(d2);
@@ -57,11 +72,20 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testFromXJDF()
+	public void testToXJDFCustomerInfo() throws Exception
+	{
+		assertNotNull(e.getXPathElement("ParameterSet/Parameter/CustomerInfo"));
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testFromXJDF() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
-//		final XJDFToJDFConverter xc = 
-			new XJDFToJDFConverter(d);
+		// final XJDFToJDFConverter xc =
+		new XJDFToJDFConverter(d);
 	}
 
 }

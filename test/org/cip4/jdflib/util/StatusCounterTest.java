@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -100,7 +100,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class StatusCounterTest extends JDFTestCaseBase
 {
@@ -113,7 +113,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	private JDFEmployee employee;
 
 	/**
-	 * @throws Exception 
+	 * @throws Exception
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
@@ -122,7 +122,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		d = creatXMDoc();
 		n = d.getJDFRoot();
 		xpMedia = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
-		JDFResourceLink rlxp = n.getLink(xpMedia, null);
+		final JDFResourceLink rlxp = n.getLink(xpMedia, null);
 		rlxp.setAmount(100, null);
 		sc = new StatusCounter(n, null, null);
 		deviceID = "Status-counter-TestDevice";
@@ -140,10 +140,10 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 */
 	public void testDeviceID()
 	{
-		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
+		final boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		assertTrue(bChanged);
-		JDFDoc docJMF = sc.getDocJMFPhaseTime();
-		JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+		final JDFDoc docJMF = sc.getDocJMFPhaseTime();
+		final JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
 		assertEquals(deviceInfo.getDeviceID(), deviceID);
 	}
@@ -153,19 +153,19 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 */
 	public void testWasteAmount()
 	{
-		VJDFAttributeMap singleMap = new VJDFAttributeMap();
+		final VJDFAttributeMap singleMap = new VJDFAttributeMap();
 		singleMap.add(xpMedia.getPartMapVector(false).elementAt(0));
 
-		MISCPGoldenTicket gt = new MISCPGoldenTicket(2, EnumVersion.Version_1_3, 2, 2, false, singleMap);
+		final MISCPGoldenTicket gt = new MISCPGoldenTicket(2, EnumVersion.Version_1_3, 2, 2, false, singleMap);
 		gt.good = 1000;
 		gt.waste = 100;
 		gt.assign(null);
 		n = gt.getNode();
-		JDFComponent c = (JDFComponent) n.getResource(ElementName.COMPONENT, null, 0);
-		JDFMedia m = (JDFMedia) n.getResource(ElementName.MEDIA, null, 0);
-		JDFResourceLink rl = n.getLink(c, null);
-		JDFResourceLink rlMedia = n.getLink(m, null);
-		VElement vRL = new VElement();
+		final JDFComponent c = (JDFComponent) n.getResource(ElementName.COMPONENT, null, 0);
+		final JDFMedia m = (JDFMedia) n.getResource(ElementName.MEDIA, null, 0);
+		final JDFResourceLink rl = n.getLink(c, null);
+		final JDFResourceLink rlMedia = n.getLink(m, null);
+		final VElement vRL = new VElement();
 		vRL.add(rl);
 		vRL.add(rlMedia);
 		sc = new StatusCounter(null, null, null);
@@ -189,7 +189,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		assertEquals(jp.getAmount(), 200, 0);
 		sc.addPhase(resID, 0, 100, true);
 		sc.setTrackWaste(resID, true);
-		JDFResourceLink rlXM = n.getLink(xpMedia, null);
+		final JDFResourceLink rlXM = n.getLink(xpMedia, null);
 		for (int loop = 1; loop < 4; loop++)
 		{
 			bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
@@ -213,6 +213,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		assertEquals(jp.getAmount(), 200, 0);
 		assertEquals(jp.getWaste(), 400, 0);
 		assertTrue(jp.hasAttribute(AttributeName.PHASEAMOUNT));
+		// get the second Signal (the new phase)
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 1);
 		jp = sig.getDeviceInfo(0).getJobPhase(0);
 		assertEquals(jp.getPhaseAmount(), 0.0, 0.0);
@@ -243,7 +244,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 		d2 = sc.getDocJMFNotification(false);
 		assertNull(d2);
 		JDFJMF jmf = d.getJMFRoot();
-		JDFNotification noti = jmf.getSignal(0).getNotification();
+		final JDFNotification noti = jmf.getSignal(0).getNotification();
 		assertEquals(noti.getJobID(), n.getJobID(true));
 		assertNotNull(noti.getEvent());
 		d.write2File(sm_dirTestDataTemp + "jmfNotification.jmf", 2, false);
@@ -301,7 +302,7 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 */
 	public void testIdle()
 	{
-		JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+		final JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
 		boolean bChanged = sc.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		assertTrue(bChanged);
 		JDFDoc docJMF = sc.getDocJMFPhaseTime();
@@ -364,25 +365,25 @@ public class StatusCounterTest extends JDFTestCaseBase
 	 */
 	public void testMultiModule()
 	{
-		StatusCounter scRIP = new StatusCounter(n, null, null);
+		final StatusCounter scRIP = new StatusCounter(n, null, null);
 		scRIP.addModule("ID_RIP", "RIP");
-		StatusCounter scSetter = new StatusCounter(n, null, null);
+		final StatusCounter scSetter = new StatusCounter(n, null, null);
 		scSetter.addModule("ID_Setter", "Platesetter");
 
-		MultiModuleStatusCounter msc = new MultiModuleStatusCounter();
+		final MultiModuleStatusCounter msc = new MultiModuleStatusCounter();
 		msc.addModule(scRIP);
 		msc.addModule(scSetter);
 
-		JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
+		final JDFExposedMedia m = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", null, null, 0);
 		resID = m.getID();
 		scRIP.setFirstRefID(resID);
 		scRIP.addPhase(resID, 200, 0, true);
 		boolean bChanged = scRIP.setPhase(EnumNodeStatus.InProgress, "i", EnumDeviceStatus.Running, "r");
 		assertTrue(bChanged);
-		JDFDoc docJMF = scRIP.getDocJMFPhaseTime();
-		JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
-		JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
-		JDFJobPhase jp = deviceInfo.getJobPhase(0);
+		final JDFDoc docJMF = scRIP.getDocJMFPhaseTime();
+		final JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+		final JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
+		final JDFJobPhase jp = deviceInfo.getJobPhase(0);
 		assertEquals(jp.getAmount(), 200, 0);
 		scRIP.addPhase(resID, 0, 100, true);
 		scRIP.setTrackWaste(m.getID(), true);

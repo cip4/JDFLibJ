@@ -353,14 +353,17 @@ public class JDFDoc extends XMLDoc
 		final InputStream inStream = UrlUtil.getURLInputStream(url, bp);
 		final File f = UrlUtil.urlToFile(url);
 		final JDFDoc d = p.parseStream(inStream);
-		if (f != null && f.canRead())
+		if (d != null)
 		{
-			d.setOriginalFileName(f.getAbsolutePath());
-		}
-		else
-		{
-			final String fn = UrlUtil.urlToFileName(url);
-			d.setOriginalFileName(fn);
+			if (f != null && f.canRead())
+			{
+				d.setOriginalFileName(f.getAbsolutePath());
+			}
+			else
+			{
+				final String fn = UrlUtil.urlToFileName(url);
+				d.setOriginalFileName(fn);
+			}
 		}
 		return d;
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,7 @@
  ==========================================================================
  @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
  ALL RIGHTS RESERVED
- @Author: sabjon@topmail.de   using a code generator
+ @Author sabjon@topmail.de   using a code generator
  Warning! very preliminary test version. Interface subject to change without prior notice!
  Revision history:    ...
  **/
@@ -89,6 +89,11 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
 
 //----------------------------------
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * prior to 10.02.2009
+ */
 public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 {
 	private static final long serialVersionUID = 1L;

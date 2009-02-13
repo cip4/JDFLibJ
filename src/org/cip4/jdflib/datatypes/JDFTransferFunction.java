@@ -16,8 +16,8 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.JDFConstants;
 
 /**
- * This class is a representation of a whitespace separated list of numbers representing a set of XY coordinates of a
- * transfer function. The total number of x y values must be even because of the pairs.
+ * This class is a representation of a whitespace separated list of numbers representing a set of XY coordinates of a transfer function. The total number of x y
+ * values must be even because of the pairs.
  */
 public class JDFTransferFunction extends JDFNumList
 {
@@ -40,7 +40,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFTransferFunction(String s) throws DataFormatException
+	public JDFTransferFunction(final String s) throws DataFormatException
 	{
 		super(s);
 	}
@@ -52,7 +52,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFTransferFunction(Vector v) throws DataFormatException
+	public JDFTransferFunction(final Vector v) throws DataFormatException
 	{
 		super(v);
 	}
@@ -64,7 +64,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFTransferFunction(JDFNumList nl) throws DataFormatException
+	public JDFTransferFunction(final JDFNumList nl) throws DataFormatException
 	{
 		super(nl.toString());
 	}
@@ -77,7 +77,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFTransferFunction(JDFTransferFunction tf) throws DataFormatException
+	public JDFTransferFunction(final JDFTransferFunction tf) throws DataFormatException
 	{
 		super(tf);
 	}
@@ -90,7 +90,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
-	public void isValid() throws DataFormatException
+	public boolean isValid() throws DataFormatException
 	{
 		if ((m_numList.size() % 2) != 0)
 		{
@@ -104,6 +104,7 @@ public class JDFTransferFunction extends JDFNumList
 				throw new DataFormatException("Data format exception!");
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -111,7 +112,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * 
 	 * @param xy the xy coordinate to add
 	 */
-	public void add(JDFXYPair xy)
+	public void add(final JDFXYPair xy)
 	{
 		m_numList.add(new Double(xy.getX()));
 		m_numList.add(new Double(xy.getY()));
@@ -123,7 +124,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * @param x the x coordinate to add
 	 * @param y the y coordinate to add
 	 */
-	public void add(Double x, Double y)
+	public void add(final Double x, final Double y)
 	{
 		m_numList.add(x);
 		m_numList.add(y);
@@ -135,7 +136,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * @param x the x coordinate to add
 	 * @param y the y coordinate to add
 	 */
-	public void add(double x, double y)
+	public void add(final double x, final double y)
 	{
 		m_numList.add(new Double(x));
 		m_numList.add(new Double(y));
@@ -148,9 +149,9 @@ public class JDFTransferFunction extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public void add(String s) throws DataFormatException
+	public void add(final String s) throws DataFormatException
 	{
-		StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
+		final StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
 
 		if ((sToken.countTokens() % 2) != 0)
 		{
@@ -159,13 +160,13 @@ public class JDFTransferFunction extends JDFNumList
 
 		while (sToken.hasMoreTokens())
 		{
-			String t = sToken.nextToken().trim();
+			final String t = sToken.nextToken().trim();
 
 			try
 			{
 				m_numList.addElement(new Double(t));
 			}
-			catch (NumberFormatException e)
+			catch (final NumberFormatException e)
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -177,7 +178,7 @@ public class JDFTransferFunction extends JDFNumList
 	 * 
 	 * @param tf the given transfer function to add
 	 */
-	public void add(JDFTransferFunction tf)
+	public void add(final JDFTransferFunction tf)
 	{
 		m_numList.addAll(tf.copyNumList());
 	}

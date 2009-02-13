@@ -1922,22 +1922,20 @@ public class StringUtil
 	 * @return the parsed double of s
 	 * @since 080404 handles "" gracefully
 	 */
-	public static boolean parseBoolean(final String s, final boolean def)
+	public static boolean parseBoolean(String s, final boolean def)
 	{
-		String sLocal = s;
-
-		if (KElement.isWildCard(sLocal))
+		if (KElement.isWildCard(s))
 		{
 			return def;
 		}
 
-		sLocal = sLocal.trim().toLowerCase();
-		if ("false".equals(sLocal))
+		s = s.trim().toLowerCase();
+		if ("false".equals(s))
 		{
 			return false;
 		}
 
-		if ("true".equals(sLocal))
+		if ("true".equals(s))
 		{
 			return true;
 		}

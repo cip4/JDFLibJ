@@ -15,8 +15,8 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
- * This class represents a rectangle JDFRectangle) consisting of a lower left x value (llx), a lower left y value (lly),
- * an upper right x value (urx) and an upper right y value (ury) all values are Double types.
+ * This class represents a rectangle JDFRectangle) consisting of a lower left x value (llx), a lower left y value (lly), an upper right x value (urx) and an
+ * upper right y value (ury) all values are Double types.
  */
 public class JDFRectangle extends JDFNumList
 {
@@ -37,7 +37,7 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFRectangle(Vector v) throws DataFormatException
+	public JDFRectangle(final Vector v) throws DataFormatException
 	{
 		super(v);
 	}
@@ -49,7 +49,7 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFRectangle(String s) throws DataFormatException
+	public JDFRectangle(final String s) throws DataFormatException
 	{
 		super(s);
 	}
@@ -59,7 +59,7 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @param rec the given rectangle
 	 */
-	public JDFRectangle(JDFRectangle rec)
+	public JDFRectangle(final JDFRectangle rec)
 	{
 		super(MAX_RECTANGLE_DIMENSION);
 		setLlx(rec.getLlx());
@@ -75,11 +75,13 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFRectangle(JDFNumberList nl) throws DataFormatException
+	public JDFRectangle(final JDFNumberList nl) throws DataFormatException
 	{
 		super(MAX_RECTANGLE_DIMENSION);
 		if (nl.size() != MAX_RECTANGLE_DIMENSION)
+		{
 			throw new DataFormatException("JDFRectangle: can't construct JDFRectangle from this JDFNuberList value");
+		}
 		m_numList.set(0, nl.m_numList.get(0));
 		m_numList.set(1, nl.m_numList.get(1));
 		m_numList.set(2, nl.m_numList.get(2));
@@ -94,7 +96,7 @@ public class JDFRectangle extends JDFNumList
 	 * @param urx lower left x coordinate
 	 * @param ury lower left y coordinate
 	 */
-	public JDFRectangle(double llx, double lly, double urx, double ury)
+	public JDFRectangle(final double llx, final double lly, final double urx, final double ury)
 	{
 		super(MAX_RECTANGLE_DIMENSION);
 		setLlx(llx);
@@ -111,7 +113,7 @@ public class JDFRectangle extends JDFNumList
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
-	public void isValid() throws DataFormatException
+	public boolean isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_RECTANGLE_DIMENSION)
 		{
@@ -125,6 +127,7 @@ public class JDFRectangle extends JDFNumList
 				throw new DataFormatException("Data format exception!");
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -153,7 +156,7 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @param x the lower left x coordinate
 	 */
-	public void setLlx(double x)
+	public void setLlx(final double x)
 	{
 		m_numList.set(0, new Double(x));
 	}
@@ -173,7 +176,7 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @param y the lower left y coordinate
 	 */
-	public void setLly(double y)
+	public void setLly(final double y)
 	{
 		m_numList.set(1, new Double(y));
 	}
@@ -193,7 +196,7 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @param x the upper right x coordinate
 	 */
-	public void setUrx(double x)
+	public void setUrx(final double x)
 	{
 		m_numList.set(2, new Double(x));
 	}
@@ -213,33 +216,29 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @param y the upper right y coordinate
 	 */
-	public void setUry(double y)
+	public void setUry(final double y)
 	{
 		m_numList.set(3, new Double(y));
 	}
 
 	/**
-	 * getWidth - returns the width of the rectangle, the difference between upper right x value and lower left x value
-	 * as an absolute value
+	 * getWidth - returns the width of the rectangle, the difference between upper right x value and lower left x value as an absolute value
 	 * 
 	 * @return double - the width of the rectangle
 	 */
 	public double getWidth()
 	{
-		return Math.abs(((Double) m_numList.elementAt(2)).doubleValue()
-				- ((Double) m_numList.elementAt(0)).doubleValue());
+		return Math.abs(((Double) m_numList.elementAt(2)).doubleValue() - ((Double) m_numList.elementAt(0)).doubleValue());
 	}
 
 	/**
-	 * getHeight - returns the height of the rectangle, the difference between upper right y value and lower left y
-	 * value as an absolute value
+	 * getHeight - returns the height of the rectangle, the difference between upper right y value and lower left y value as an absolute value
 	 * 
 	 * @return double - the height of the rectangle
 	 */
 	public double getHeight()
 	{
-		return Math.abs(((Double) m_numList.elementAt(3)).doubleValue()
-				- ((Double) m_numList.elementAt(1)).doubleValue());
+		return Math.abs(((Double) m_numList.elementAt(3)).doubleValue() - ((Double) m_numList.elementAt(1)).doubleValue());
 	}
 
 	/**
@@ -248,7 +247,7 @@ public class JDFRectangle extends JDFNumList
 	 * @param r the JDFRectangle object to compare to
 	 * @return boolean - true if <code>this</this> > r
 	 */
-	public boolean isGreater(JDFRectangle r)
+	public boolean isGreater(final JDFRectangle r)
 	{
 		return (!equals(r) && (getLlx() <= r.getLlx()) && (getLly() <= r.getLly()) && (getUrx() >= r.getUrx()) && (getUry() >= r.getUry()));
 	}
@@ -259,10 +258,9 @@ public class JDFRectangle extends JDFNumList
 	 * @param r the JDFRectangle object to compare to
 	 * @return boolean - true if <code>this</this> >= r
 	 */
-	public boolean isGreaterOrEqual(JDFRectangle r)
+	public boolean isGreaterOrEqual(final JDFRectangle r)
 	{
-		return (getLlx() <= r.getLlx()) && (getLly() <= r.getLly()) && (getUrx() >= r.getUrx())
-				&& (getUry() >= r.getUry());
+		return (getLlx() <= r.getLlx()) && (getLly() <= r.getLly()) && (getUrx() >= r.getUrx()) && (getUry() >= r.getUry());
 	}
 
 	/**
@@ -271,7 +269,7 @@ public class JDFRectangle extends JDFNumList
 	 * @param r the JDFRectangle object to compare to
 	 * @return boolean - true if <code>this</this> < r
 	 */
-	public boolean isLess(JDFRectangle r)
+	public boolean isLess(final JDFRectangle r)
 	{
 		return (!equals(r) && (getLlx() >= r.getLlx()) && (getLly() >= r.getLly()) && (getUrx() <= r.getUrx()) && (getUry() <= r.getUry()));
 	}
@@ -282,9 +280,8 @@ public class JDFRectangle extends JDFNumList
 	 * @param r the JDFRectangle object to compare to
 	 * @return boolean - true if <code>this</this> <= r
 	 */
-	public boolean isLessOrEqual(JDFRectangle r)
+	public boolean isLessOrEqual(final JDFRectangle r)
 	{
-		return (getLlx() >= r.getLlx()) && (getLly() >= r.getLly()) && (getUrx() <= r.getUrx())
-				&& (getUry() <= r.getUry());
+		return (getLlx() >= r.getLlx()) && (getLly() >= r.getLly()) && (getUrx() <= r.getUrx()) && (getUry() <= r.getUry());
 	}
 }

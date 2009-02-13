@@ -138,9 +138,12 @@ public class ThreadUtil
 		public final void run()
 		{
 			theObject = handle();
-			synchronized (mutex)
+			if (mutex != null)
 			{
-				mutex.notifyAll();
+				synchronized (mutex)
+				{
+					mutex.notifyAll();
+				}
 			}
 			mutex = null;
 		}

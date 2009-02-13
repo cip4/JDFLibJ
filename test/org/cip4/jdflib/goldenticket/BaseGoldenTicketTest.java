@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,13 +79,13 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class BaseGoldenTicketTest extends JDFTestCaseBase
 {
 	String agentName;
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	/*
 	 * (non-Javadoc)
@@ -101,7 +101,7 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
 		super.setUp();
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	/*
 	 * (non-Javadoc)
@@ -119,12 +119,10 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
 	/**
 	 * create 3 files based on a gt
 	 * 
-	 * @param goldenTicket
-	 * @param templateName
-	 * @param good
-	 * @param waste
+	 * @param goldenTicket the ticket to write
+	 * @param templateName the file name root of the 3 files
 	 */
-	protected static void write3GTFiles(BaseGoldenTicket goldenTicket, String templateName)
+	protected static void write3GTFiles(final BaseGoldenTicket goldenTicket, final String templateName)
 	{
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Manager_" + templateName + ".jdf", 2);
 		Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));

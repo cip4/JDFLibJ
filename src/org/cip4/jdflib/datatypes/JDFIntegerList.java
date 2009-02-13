@@ -90,8 +90,7 @@ import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * This class is a representation of an integer list (JDFIntegerList). It is a whitespace separated
- * list of integer values.
+ * This class is a representation of an integer list (JDFIntegerList). It is a whitespace separated list of integer values.
  */
 public class JDFIntegerList extends JDFNumList
 {
@@ -101,20 +100,22 @@ public class JDFIntegerList extends JDFNumList
 	 * @return true if valid
 	 */
 	@Override
-	public boolean isValidString(String st)
+	public boolean isValidString(final String st)
 	{
-		VString v = StringUtil.tokenize(st, null, false);
+		final VString v = StringUtil.tokenize(st, null, false);
 		if (v != null)
 		{
 			final int size = v.size();
 			for (int i = 0; i < size; i++)
 			{
-				String s = v.stringAt(i);
+				final String s = v.stringAt(i);
 				if (!StringUtil.isInteger(s))
+				{
 					return false;
+				}
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -123,51 +124,51 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public JDFIntegerList()
 	{
-		//default super constructor
+		// default super constructor
 	}
 
 	/**
 	 * constructs an integer list with all values set via a String
-	 *
+	 * 
 	 * @param s the given String
-	 *
+	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFIntegerList(String s) throws DataFormatException
+	public JDFIntegerList(final String s) throws DataFormatException
 	{
 		super(s);
 	}
 
 	/**
 	 * constructs an integer list with all values set via a Vector of Intger objects
-	 *
+	 * 
 	 * @param v the given vector
-	 *
+	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFIntegerList(Vector v) throws DataFormatException
+	public JDFIntegerList(final Vector v) throws DataFormatException
 	{
 		super(v);
 	}
 
 	/**
 	 * constructs an integer list with all values set via a JDFIntegerList
-	 *
+	 * 
 	 * @param il the given integer list
-	 *
+	 * 
 	 * @throws DataFormatException - if the JDFIntegerList has not a valid format
 	 */
-	public JDFIntegerList(JDFIntegerList il) throws DataFormatException
+	public JDFIntegerList(final JDFIntegerList il) throws DataFormatException
 	{
 		this(il.m_numList);
 	}
 
 	/**
 	 * constructs an integer list with all values set via an int[]
-	 *
+	 * 
 	 * @param iArray - the given integer array
 	 */
-	public JDFIntegerList(int[] iArray)
+	public JDFIntegerList(final int[] iArray)
 	{
 		super();
 		setIntArray(iArray);
@@ -175,23 +176,23 @@ public class JDFIntegerList extends JDFNumList
 
 	/**
 	 * constructs an integer list with all values set via an int
-	 *
-	 * @param i the given integer 
+	 * 
+	 * @param i the given integer
 	 */
-	public JDFIntegerList(int i)
+	public JDFIntegerList(final int i)
 	{
 		super();
 		setInt(i);
 	}
 
-	//**************************************** Methods *********************************************
+	// **************************************** Methods *********************************************
 	/**
 	 * isValid - true if all instances are Integer types
-	 *
+	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
-	public void isValid() throws DataFormatException
+	public boolean isValid() throws DataFormatException
 	{
 		for (int i = 0; i < m_numList.size(); i++)
 		{
@@ -200,6 +201,7 @@ public class JDFIntegerList extends JDFNumList
 				throw new DataFormatException("Data format exception!");
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -207,18 +209,18 @@ public class JDFIntegerList extends JDFNumList
 	 * @param d the value to search
 	 * @return true if this contais d
 	 */
-	public boolean contains(int d)
+	public boolean contains(final int d)
 	{
 		return contains(new Integer(d));
 	}
 
 	/**
 	 * equals - returns true if both JDFIntegerList are equal otherwise false
-	 *
+	 * 
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -247,10 +249,10 @@ public class JDFIntegerList extends JDFNumList
 
 	/**
 	 * addIntegerList - adds an integer list to this integer list
-	 *
+	 * 
 	 * @param il the given integer list
 	 */
-	public void addIntegerList(JDFIntegerList il)
+	public void addIntegerList(final JDFIntegerList il)
 	{
 		final Vector getnumList = m_numList;
 		final int size = il.size();
@@ -262,55 +264,55 @@ public class JDFIntegerList extends JDFNumList
 
 	/**
 	 * add - add an int to the vector
-	 *
+	 * 
 	 * @param x the int value
 	 */
-	public void add(int x)
+	public void add(final int x)
 	{
 		m_numList.add(new Integer(x));
 	}
 
 	/**
 	 * add - add an Integer object to the vector
-	 *
+	 * 
 	 * @param x the Integer object
 	 */
-	public void add(Integer x)
+	public void add(final Integer x)
 	{
 		m_numList.add(x);
 	}
 
 	/**
 	 * add - adds a complete integer list to the vector
-	 *
+	 * 
 	 * @param il the given integer list
 	 */
-	public void add(JDFIntegerList il)
+	public void add(final JDFIntegerList il)
 	{
 		m_numList.addAll(il.copyNumList());
 	}
 
 	/**
 	 * add - adds a integer list string to the existing integer list
-	 *
+	 * 
 	 * @param s the given string
-	 *
+	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public void add(String s) throws DataFormatException
+	public void add(final String s) throws DataFormatException
 	{
-		StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
+		final StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
 		final Vector numList = m_numList;
 
 		while (sToken.hasMoreTokens())
 		{
-			int i = StringUtil.parseInt(sToken.nextToken(), 0);
+			final int i = StringUtil.parseInt(sToken.nextToken(), 0);
 
 			try
 			{
 				numList.addElement(new Integer(i));
 			}
-			catch (NumberFormatException e)
+			catch (final NumberFormatException e)
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -320,50 +322,56 @@ public class JDFIntegerList extends JDFNumList
 	/**
 	 * getInt - returns the integer at 'pos' from the list.<br>
 	 * Note: if pos is negative, getInt returns the pos'th integer counting from the end.
-	 *
+	 * 
 	 * @param pos index of the integer to get
-	 *
+	 * 
 	 * @return int - the pos'th int
 	 */
-	public int getInt(int pos)
+	public int getInt(final int pos)
 	{
 		int posLocal = pos;
 
 		if (posLocal < 0)
+		{
 			posLocal = posLocal + size();
+		}
 
-		Integer i = (Integer) elementAt(posLocal);
+		final Integer i = (Integer) elementAt(posLocal);
 		if (i == null)
+		{
 			throw new JDFException("JDFIntegerList:getInt invalid index");
+		}
 
 		return i.intValue();
 	}
 
 	/*
-	 * must keep this because otherwise the object vector gets corrupted with Double objects
-	 * (non-Javadoc)
+	 * must keep this because otherwise the object vector gets corrupted with Double objects (non-Javadoc)
+	 * 
 	 * @see org.cip4.jdflib.datatypes.JDFNumList#scale(double)
 	 */
 	@Override
-	public void scale(double factor)
+	public void scale(final double factor)
 	{
-		int[] a = getIntArray();
+		final int[] a = getIntArray();
 		for (int i = 0; i < a.length; i++)
+		{
 			a[i] *= factor;
+		}
 		setIntArray(a);
 	}
 
 	/**
-	* getIntArray - returns this integer list as an int array
-	*
-	* @return int[] - the int array
-	*/
+	 * getIntArray - returns this integer list as an int array
+	 * 
+	 * @return int[] - the int array
+	 */
 	public int[] getIntArray()
 
 	{
 		final Vector numList = m_numList;
 		final int size = numList.size();
-		int[] intArray = new int[size];
+		final int[] intArray = new int[size];
 
 		for (int i = 0; i < size; i++)
 		{
@@ -376,26 +384,28 @@ public class JDFIntegerList extends JDFNumList
 	/**
 	 * setIntArray - sets this integer list to an int array<br>
 	 * the RangeList is emptied, then the values of iArray are added
-	 *
+	 * 
 	 * @param iArray the int array
 	 */
-	public void setIntArray(int[] iArray)
+	public void setIntArray(final int[] iArray)
 	{
-		Vector numList = m_numList;
+		final Vector numList = m_numList;
 		numList.clear();
 		for (int i = 0; i < iArray.length; i++)
+		{
 			numList.add(new Integer(iArray[i]));
+		}
 	}
 
 	/**
 	 * setIntArray - sets this integer list to an int<br>
-	 * the RangeList is empied, then the single value i is added 
-	 *
+	 * the RangeList is empied, then the single value i is added
+	 * 
 	 * @param i the value
 	 */
-	public void setInt(int i)
+	public void setInt(final int i)
 	{
-		Vector numList = m_numList;
+		final Vector numList = m_numList;
 		numList.clear();
 		numList.add(new Integer(i));
 	}

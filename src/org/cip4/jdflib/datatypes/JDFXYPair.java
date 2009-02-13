@@ -106,7 +106,7 @@ public class JDFXYPair extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFXYPair(Vector v) throws DataFormatException
+	public JDFXYPair(final Vector v) throws DataFormatException
 	{
 		super(v);
 	}
@@ -118,7 +118,7 @@ public class JDFXYPair extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFXYPair(String s) throws DataFormatException
+	public JDFXYPair(final String s) throws DataFormatException
 	{
 		super(s);
 	}
@@ -129,7 +129,7 @@ public class JDFXYPair extends JDFNumList
 	 * @param xy the given xy pair
 	 * 
 	 */
-	public JDFXYPair(JDFXYPair xy)
+	public JDFXYPair(final JDFXYPair xy)
 	{
 		super(MAX_XY_DIMENSION);
 		setX(xy.getX());
@@ -143,11 +143,13 @@ public class JDFXYPair extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFXYPair(JDFNumberList nl) throws DataFormatException
+	public JDFXYPair(final JDFNumberList nl) throws DataFormatException
 	{
 		super(MAX_XY_DIMENSION);
 		if (nl.size() != MAX_XY_DIMENSION)
+		{
 			throw new DataFormatException("JDFXYPair: can't construct JDFXYPair from this JDFNuberList value");
+		}
 		m_numList.set(0, nl.m_numList.get(0));
 		m_numList.set(1, nl.m_numList.get(1));
 	}
@@ -158,7 +160,7 @@ public class JDFXYPair extends JDFNumList
 	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 */
-	public JDFXYPair(double x, double y)
+	public JDFXYPair(final double x, final double y)
 	{
 		super(MAX_XY_DIMENSION);
 		m_numList.set(0, new Double(x));
@@ -173,7 +175,7 @@ public class JDFXYPair extends JDFNumList
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
-	public void isValid() throws DataFormatException
+	public boolean isValid() throws DataFormatException
 	{
 		if (m_numList.size() != MAX_XY_DIMENSION)
 		{
@@ -187,6 +189,7 @@ public class JDFXYPair extends JDFNumList
 				throw new DataFormatException("Data format exception!");
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -204,7 +207,7 @@ public class JDFXYPair extends JDFNumList
 	 * 
 	 * @param x the x coordinate
 	 */
-	public void setX(double x)
+	public void setX(final double x)
 	{
 		m_numList.set(0, new Double(x));
 	}
@@ -224,7 +227,7 @@ public class JDFXYPair extends JDFNumList
 	 * 
 	 * @param y the y coordinate
 	 */
-	public void setY(double y)
+	public void setY(final double y)
 	{
 		m_numList.set(1, new Double(y));
 	}
@@ -235,7 +238,7 @@ public class JDFXYPair extends JDFNumList
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -250,7 +253,7 @@ public class JDFXYPair extends JDFNumList
 			return false;
 		}
 
-		JDFXYPair xyPair = (JDFXYPair) other;
+		final JDFXYPair xyPair = (JDFXYPair) other;
 
 		return (Math.abs(this.getX() - xyPair.getX()) <= EPSILON) && (Math.abs(this.getY() - xyPair.getY()) <= EPSILON);
 	}
@@ -270,7 +273,7 @@ public class JDFXYPair extends JDFNumList
 	 * @param x the JDFXYPair object to compare to
 	 * @return boolean - true if this >= x
 	 */
-	public boolean isGreaterOrEqual(JDFXYPair x)
+	public boolean isGreaterOrEqual(final JDFXYPair x)
 	{
 		return (equals(x) || ((getX() >= x.getX()) && (getY() >= x.getY())));
 	}
@@ -281,7 +284,7 @@ public class JDFXYPair extends JDFNumList
 	 * @param x the JDFXYPair object to compare to
 	 * @return boolean - true if this <= x
 	 */
-	public boolean isLessOrEqual(JDFXYPair x)
+	public boolean isLessOrEqual(final JDFXYPair x)
 	{
 		return (equals(x) || ((getX() <= x.getX()) && (getY() <= x.getY())));
 	}
@@ -292,7 +295,7 @@ public class JDFXYPair extends JDFNumList
 	 * @param x the JDFXYPair object to compare to
 	 * @return boolean - true if this > x
 	 */
-	public boolean isGreater(JDFXYPair x)
+	public boolean isGreater(final JDFXYPair x)
 	{
 		return (!isLessOrEqual(x));
 	}
@@ -303,7 +306,7 @@ public class JDFXYPair extends JDFNumList
 	 * @param x the JDFXYPair object to compare to
 	 * @return boolean - true if this < x
 	 */
-	public boolean isLess(JDFXYPair x)
+	public boolean isLess(final JDFXYPair x)
 	{
 		return (!isGreaterOrEqual(x));
 	}

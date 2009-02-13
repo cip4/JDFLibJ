@@ -126,8 +126,24 @@ public class JDFDocTest extends JDFTestCaseBase
 		final KElement e1 = d.getRoot();
 		final KElement e2 = d2.getRoot();
 		assertNotSame(e1, e2);
+		assertEquals(e2.getOwnerDocument(), d2.getMemberDocument());
 		e1.appendElement("foo");
 		assertNull(e2.getElement("foo"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testCloneTwice()
+	{
+		final JDFDoc d1 = new JDFDoc("JDF");
+		final JDFNode node = d1.getJDFRoot();
+		node.appendAncestorPool();
+		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
+		assertNotNull(root);
+		final JDFNode root2 = ((JDFDoc) root.getOwnerDocument_JDFElement().clone()).getJDFRoot();
+		assertNotNull(root2);
+		assertNotSame(root, root2);
 	}
 
 	/**

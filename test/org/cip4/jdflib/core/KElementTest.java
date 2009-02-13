@@ -728,6 +728,20 @@ public class KElementTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testCloneRoot()
+	{
+		final XMLDoc doc = new XMLDoc("root", null);
+		final KElement k = doc.getRoot();
+		k.appendElement("foo");
+		final KElement root = doc.getRoot();
+		final KElement k2 = root.cloneRoot((XMLDoc) doc.clone());
+		assertTrue(root.isEqual(k));
+		assertNotSame(k2.getOwnerDocument(), doc.getMemberDocument());
+	}
+
+	/**
+	 * 
+	 */
 	public void testMoveAttribute()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");

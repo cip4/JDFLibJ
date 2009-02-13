@@ -29,7 +29,7 @@ public class JDFNumberList extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFNumberList(String s) throws DataFormatException
+	public JDFNumberList(final String s) throws DataFormatException
 	{
 		super(s);
 	}
@@ -41,7 +41,7 @@ public class JDFNumberList extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
-	public JDFNumberList(Vector v) throws DataFormatException
+	public JDFNumberList(final Vector v) throws DataFormatException
 	{
 		super(v);
 	}
@@ -54,7 +54,7 @@ public class JDFNumberList extends JDFNumList
 	 * @throws DataFormatException - if the Vector has not a valid format
 	 */
 	@Override
-	public void isValid() throws DataFormatException
+	public boolean isValid() throws DataFormatException
 	{
 		for (int i = 0; i < m_numList.size(); i++)
 		{
@@ -63,6 +63,7 @@ public class JDFNumberList extends JDFNumList
 				throw new DataFormatException("Data format exception!");
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class JDFNumberList extends JDFNumList
 	 * 
 	 * @param x the double value
 	 */
-	public void add(double x)
+	public void add(final double x)
 	{
 		m_numList.add(new Double(x));
 	}
@@ -80,7 +81,7 @@ public class JDFNumberList extends JDFNumList
 	 * 
 	 * @param x the Double object
 	 */
-	public void add(Double x)
+	public void add(final Double x)
 	{
 		m_numList.add(x);
 	}
@@ -90,7 +91,7 @@ public class JDFNumberList extends JDFNumList
 	 * 
 	 * @param nl the given JDFNumberList
 	 */
-	public void add(JDFNumberList nl)
+	public void add(final JDFNumberList nl)
 	{
 		m_numList.addAll(nl.copyNumList());
 	}
@@ -102,13 +103,13 @@ public class JDFNumberList extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public void add(String s)
+	public void add(final String s)
 	{
-		StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
+		final StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
 
 		while (sToken.hasMoreTokens())
 		{
-			String t = sToken.nextToken().trim();
+			final String t = sToken.nextToken().trim();
 			m_numList.addElement(new Double(t));
 		}
 	}
@@ -119,7 +120,7 @@ public class JDFNumberList extends JDFNumList
 	 * @param d the value to search
 	 * @return
 	 */
-	public boolean contains(double d)
+	public boolean contains(final double d)
 	{
 		return contains(new Double(d));
 	}

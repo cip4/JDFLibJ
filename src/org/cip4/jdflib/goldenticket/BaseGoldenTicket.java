@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -133,20 +133,46 @@ public class BaseGoldenTicket
 	protected JDFNode theExpandedNode = null;
 	protected JDFNode thePreviousNode = null;
 	protected JDFNode theParentNode = null;
+	/**
+	 * 
+	 */
 	public JDFNode theParentProduct = null;
 	protected EnumVersion theVersion = null;
 	protected int baseICSLevel;
 	protected StatusCounter theStatusCounter;
+	/**
+	 * 
+	 */
 	public static String misURL = null;
+	/**
+	 * 
+	 */
 	public static String deviceURL = null;
 	private final Vector<BaseGoldenTicket> vKids = new Vector<BaseGoldenTicket>();
+	/**
+	 * 
+	 */
 	public VJDFAttributeMap vParts = null;
+	/**
+	 * 
+	 */
 	public VString cols = new VString("Black,Cyan,Magenta,Yellow,Spot1,Spot2,Spot3,Spot4", ",");
+	/**
+	 * 
+	 */
 	public VString colsActual = new VString("Schwarz,Cyan,Magenta,Gelb,RIP 4711,RIP 4712,RIP 4713,RIP 4714", ",");
-	public int[] nCols =
-	{ 0, 0 };
+	/**
+	 * 
+	 */
+	public int[] nCols = { 0, 0 };
 	protected VString partIDKeys = null;
+	/**
+	 * 
+	 */
 	public EnumWorkStyle workStyle = EnumWorkStyle.Simplex;
+	/**
+	 * 
+	 */
 	public String devID = "DeviceID";
 	/**
 	 * good for plan and execute
@@ -156,15 +182,33 @@ public class BaseGoldenTicket
 	 * pwaste for plan and execute
 	 */
 	public int waste = 100;
+	/**
+	 * 
+	 */
 	public int partsAtOnce = 0; // 0 = all
+	/**
+	 * 
+	 */
 	public int partsForAvailable = 1; // 1=1 loop and all is available
+	/**
+	 * 
+	 */
 	public boolean bExpandGrayBox = true;
+	/**
+	 * 
+	 */
 	public boolean bPartitionedPlateMedia = false;
+	/**
+	 * 
+	 */
 	public JDFMedia paperMedia;
 	/**
 	 * if set, the returnURL will be initialized
 	 */
 	public String returnURL = null;
+	/**
+	 * 
+	 */
 	public boolean getNIFromParent = false;
 	/**
 	 * 
@@ -275,7 +319,7 @@ public class BaseGoldenTicket
 	/**
 	 * add a kid to be makeready and executed
 	 * 
-	 * @param node the node to assign, if null a new conforming node is generated from scratch
+	 * @param bt the golden ticket to assign, if null a new conforming node is generated from scratch
 	 */
 	public void addKid(final BaseGoldenTicket bt)
 	{
@@ -352,13 +396,18 @@ public class BaseGoldenTicket
 		}
 	}
 
-	public void setActivePart(final VJDFAttributeMap vp, @SuppressWarnings("unused") final boolean bFirst)
+	/**
+	 * @param vp
+	 * @param bFirst
+	 */
+	public void setActivePart(final VJDFAttributeMap vp, final boolean bFirst)
 	{
 		theStatusCounter.setActiveNode(theExpandedNode, vp, getNodeLinks());
 	}
 
 	/**
 	 * execute for all kids
+	 * @param parts
 	 * 
 	 */
 	public void executeAll(final VJDFAttributeMap parts)
@@ -402,6 +451,9 @@ public class BaseGoldenTicket
 
 	/**
 	 * simulate execution of this node the internal node will be modified to reflect the excution
+	 * @param vMap
+	 * @param bOutAvail
+	 * @param bFirst
 	 */
 	public void execute(final VJDFAttributeMap vMap, final boolean bOutAvail, final boolean bFirst)
 	{
@@ -474,26 +526,33 @@ public class BaseGoldenTicket
 
 	/**
 	 * schedule this node the nodeinfo will be modified
+	 * @param partsToSchedule
+	 * @param starthours
+	 * @param durationhours
 	 */
-	public void schedule(final VJDFAttributeMap nodesToCombine, final int starthours, final int durationhours)
+	public void schedule(VJDFAttributeMap partsToSchedule, final int starthours, final int durationhours)
 	{
-		VJDFAttributeMap nodesToCombineLocal = nodesToCombine;
-
-		theNode.setPartStatus(nodesToCombineLocal, EnumNodeStatus.Waiting, null);
+		theNode.setPartStatus(partsToSchedule, EnumNodeStatus.Waiting, null);
 		final JDFNodeInfo ni = theNode.getNodeInfo();
-		if (nodesToCombineLocal == null)
+		if (partsToSchedule == null)
 		{
-			nodesToCombineLocal = new VJDFAttributeMap();
-			nodesToCombineLocal.add(null);
+			partsToSchedule = new VJDFAttributeMap();
+			partsToSchedule.add(null);
 		}
-		for (int i = 0; i < nodesToCombineLocal.size(); i++)
+		final JDFDate d = new JDFDate();
+		for (int i = 0; i < partsToSchedule.size(); i++)
 		{
-			final JDFNodeInfo nip = (JDFNodeInfo) ni.getCreatePartition(nodesToCombineLocal.elementAt(i), null);
-			final JDFDate d = new JDFDate();
-			d.addOffset(0, 0, starthours, 0);
-			nip.setStart(d);
-			d.addOffset(0, 0, durationhours, 0);
-			nip.setEnd(d);
+			final JDFNodeInfo nip = (JDFNodeInfo) ni.getCreatePartition(partsToSchedule.elementAt(i), null);
+			if (starthours > 0)
+			{
+				d.addOffset(0, 0, starthours, 0);
+				nip.setStart(d);
+			}
+			if (durationhours > 0)
+			{
+				d.addOffset(0, 0, durationhours, 0);
+				nip.setEnd(d);
+			}
 		}
 	}
 
@@ -790,19 +849,31 @@ public class BaseGoldenTicket
 			final JDFColor c = cp.getCreateColorWithName(name, null);
 			if (i == 0)
 			{
-				c.setCMYK(new JDFCMYKColor(1, 0, 0, 0));
+				c.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
 			}
 			if (i == 1)
 			{
-				c.setCMYK(new JDFCMYKColor(0, 1, 0, 0));
+				c.setCMYK(new JDFCMYKColor(1, 0, 0, 0));
 			}
 			if (i == 2)
 			{
-				c.setCMYK(new JDFCMYKColor(0, 0, 1, 0));
+				c.setCMYK(new JDFCMYKColor(0, 1, 0, 0));
 			}
 			if (i == 3)
 			{
-				c.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
+				c.setCMYK(new JDFCMYKColor(0, 0, 1, 0));
+			}
+			if (i == 4)
+			{
+				c.setCMYK(new JDFCMYKColor(0.6, 0.2, 0.1, 0));
+			}
+			if (i == 5)
+			{
+				c.setCMYK(new JDFCMYKColor(0.3, 0.1, 1, 0));
+			}
+			if (i == 6)
+			{
+				c.setCMYK(new JDFCMYKColor(0.3, 0.7, 0.1, 0));
 			}
 		}
 		cc.setProcessColorModel("DeviceCMYK");
