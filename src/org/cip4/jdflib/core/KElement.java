@@ -691,18 +691,22 @@ public class KElement extends ElementNSImpl
 	 * @param nameSpaceURI the namespace the element is in
 	 * @throws JDFException if no settings of its attributes are possible
 	 */
-	public void setAttribute(final String key, final String value, final String nameSpaceURI)
+	public void setAttribute(final String key, final String value, String nameSpaceURI)
 	{
-		String nameSpaceURILocal = nameSpaceURI;
+		if (!getOwnerDocument_KElement().getMemberDocument().isStrictNSCheck())
+		{
+			super.setAttributeNS(nameSpaceURI, key, value);
+			return;
+		}
 
 		boolean bDirty = false;
 		if (value == null)
 		{
-			removeAttribute(key, nameSpaceURILocal);
+			removeAttribute(key, nameSpaceURI);
 			return;
 		}
 
-		if ((nameSpaceURILocal == null) || (nameSpaceURILocal.equals(JDFConstants.EMPTYSTRING)))
+		if ((nameSpaceURI == null) || (nameSpaceURI.equals(JDFConstants.EMPTYSTRING)))
 		{ // //////////// DOM Level 1 ///////////////////
 			// must explicitely set xmlns as DOM level 2 because the xerces
 			// serializer checks for DOM level 2
@@ -772,10 +776,10 @@ public class KElement extends ElementNSImpl
 							else
 							{
 								final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
-								if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURILocal))
+								if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 								{
 									throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
-											+ "; attempting to set URI: " + nameSpaceURILocal);
+											+ "; attempting to set URI: " + nameSpaceURI);
 								}
 								try
 								{
@@ -795,15 +799,15 @@ public class KElement extends ElementNSImpl
 		}
 		else
 		{ // //////////// DOM Level 2 ///////////////////
-			if (AttributeName.XMLNSURI.equals(nameSpaceURILocal))
+			if (AttributeName.XMLNSURI.equals(nameSpaceURI))
 			{
 				// never ever set "xmlns:foo="" !
 				if (value.equals(JDFConstants.EMPTYSTRING))
 				{
 					bDirty = true;
-					removeAttributeNS(nameSpaceURILocal, key);
+					removeAttributeNS(nameSpaceURI, key);
 				}
-				else if (!value.equals(getInheritedAttribute(xmlnsLocalName(key), nameSpaceURILocal, null)))
+				else if (!value.equals(getInheritedAttribute(xmlnsLocalName(key), nameSpaceURI, null)))
 				{
 					bDirty = true;
 					super.setAttributeNS(AttributeName.XMLNSURI, key, value);
@@ -812,7 +816,7 @@ public class KElement extends ElementNSImpl
 			else
 			// standard attribute (not xmlns)
 			{
-				final Node a = getAttributeNodeNS(nameSpaceURILocal, xmlnsLocalName(key));
+				final Node a = getAttributeNodeNS(nameSpaceURI, xmlnsLocalName(key));
 				if (a == null || !value.equals(a.getNodeValue()))
 				{
 					bDirty = true;
@@ -823,7 +827,7 @@ public class KElement extends ElementNSImpl
 						if (!key.equals(nodeName))
 						{ // overwrite default namespace with qualified
 							// namespace or vice versa
-							super.setAttributeNS(nameSpaceURILocal, key, value);
+							super.setAttributeNS(nameSpaceURI, key, value);
 						}
 						else
 						{ // same qualified name, simply overwrite the value
@@ -834,28 +838,27 @@ public class KElement extends ElementNSImpl
 					{
 						final String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 
-						if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURILocal))
+						if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURI))
 						{ // in case multiple namespace uris are defined for the
-							// same prefix,
-							// all we can do is to bail out loudly
+							// same prefix, all we can do is to bail out loudly
 							throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-									+ "; attempting to set URI: " + nameSpaceURILocal);
+									+ "; attempting to set URI: " + nameSpaceURI);
 						}
 
 						// remove any twin dom lvl 1 attributes - just in case
 						removeAttribute(key);
-						if (nameSpaceURILocal.equals(getNamespaceURI()))
+						if (nameSpaceURI.equals(getNamespaceURI()))
 						{
 							// clean up any attribute that may be in the same ns
 							// but with a different prefix
-							removeAttributeNS(nameSpaceURILocal, xmlnsLocalName(key));
+							removeAttributeNS(nameSpaceURI, xmlnsLocalName(key));
 							if (xmlnsPrefix(key) == null)
 							{
-								nameSpaceURILocal = null; // avoid spurios NS1 prefix
+								nameSpaceURI = null; // avoid spurios NS1 prefix
 							}
 						}
 
-						super.setAttributeNS(nameSpaceURILocal, key, value);
+						super.setAttributeNS(nameSpaceURI, key, value);
 					}
 				}
 			}
@@ -1390,6 +1393,26 @@ public class KElement extends ElementNSImpl
 	 * @param kElem the attribute source
 	 * @return int number of elements from kElem
 	 */
+	public void setAttributesRaw(final KElement kElem)
+	{
+		final NamedNodeMap nm = getAttributes();
+		if (nm != null)
+		{
+			final int siz = nm.getLength();
+			for (int i = 0; i < siz; i++)
+			{
+				final Node a = nm.item(i);
+				super.setAttributeNS(a.getNamespaceURI(), a.getNodeName(), a.getNodeValue());
+			}
+		}
+	}
+
+	/**
+	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is
+	 * returned. Otherwhise the size of the map (number of attributes from kElem) is returned.
+	 * @param kElem the attribute source
+	 * @return int number of elements from kElem
+	 */
 	protected int setAttributes(final KElement kElem, final VString ignoreList)
 	{
 		if (kElem == null)
@@ -1478,10 +1501,24 @@ public class KElement extends ElementNSImpl
 	 */
 	public synchronized KElement appendElement(final String elementName, final String nameSpaceURI)
 	{
-		final KElement newChild = createChildFromName(elementName, nameSpaceURI);
-		appendChild(newChild);
+		final KElement newChild = appendElementRaw(elementName, nameSpaceURI);
 		setDirty(false);
 		newChild.init();
+		return newChild;
+	}
+
+	/**
+	 * appends an element without any namespace validity checks or initialization Faster but not sa safe...
+	 * 
+	 * @param elementName element name
+	 * @param nameSpaceURI element namespace
+	 * @return the newly created element
+	 * @since 090216
+	 */
+	public synchronized KElement appendElementRaw(final String elementName, final String nameSpaceURI)
+	{
+		final KElement newChild = createChildFromName(elementName, nameSpaceURI);
+		appendChild(newChild);
 		return newChild;
 	}
 
@@ -1498,19 +1535,27 @@ public class KElement extends ElementNSImpl
 
 		if (nameSpaceURI == null || JDFConstants.EMPTYSTRING.equals(nameSpaceURI))
 		{ // /////////////// DOM Level 1 ////////////////
-			final String xmlnsPrefix = xmlnsPrefix(elementName);
-
-			final String namespaceURI2 = ownerDoc.isIgnoreNSDefault() && xmlnsPrefix == null ? nameSpaceURI : getNamespaceURIFromPrefix(xmlnsPrefix);
-			if (xmlnsPrefix != null && (namespaceURI2 == null || JDFConstants.EMPTYSTRING.equals(namespaceURI2)))
+			if (ownerDoc.isStrictNSCheck())
 			{
-				throw new JDFException("You tried to add an element \"" + elementName + "\" in an unspecified Namespace");
-			}
-			else if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2))
-			{ // /////////////// we found an URI ////////////////
-				newChild = ownerDoc.factoryCreate(this, namespaceURI2, elementName);
+				final String xmlnsPrefix = xmlnsPrefix(elementName);
+
+				String namespaceURI2 = ownerDoc.isIgnoreNSDefault() && xmlnsPrefix == null ? nameSpaceURI : getNamespaceURIFromPrefix(xmlnsPrefix);
+				namespaceURI2 = StringUtil.getNonEmpty(namespaceURI2);
+				if (xmlnsPrefix != null && namespaceURI2 == null)
+				{
+					throw new JDFException("You tried to add an element \"" + elementName + "\" in an unspecified Namespace");
+				}
+				else if (namespaceURI2 != null)
+				{ // /////////////// we found an URI ////////////////
+					newChild = ownerDoc.factoryCreate(this, namespaceURI2, elementName);
+				}
+				else
+				{ // /////////////// no URI, create DOM Level 1 ////////////////
+					newChild = ownerDoc.factoryCreate(this, elementName);
+				}
 			}
 			else
-			{ // /////////////// no URI, create DOM Level 1 ////////////////
+			{
 				newChild = ownerDoc.factoryCreate(this, elementName);
 			}
 		}
@@ -3730,7 +3775,6 @@ public class KElement extends ElementNSImpl
 
 	private static Node copyNode(final Node parent, final Node src, final Node beforeChild)
 	{
-
 		if (src == null)
 		{
 			return null;
@@ -3738,7 +3782,6 @@ public class KElement extends ElementNSImpl
 
 		synchronized (parent)
 		{
-
 			Node childNode = null;
 			if (src.getOwnerDocument() == parent.getOwnerDocument())
 			{

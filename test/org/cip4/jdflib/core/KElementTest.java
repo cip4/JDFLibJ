@@ -141,11 +141,11 @@ public class KElementTest extends JDFTestCaseBase
 	public void testDeleteNode()
 	{
 		final KElement k = new XMLDoc("root", null).getRoot();
-		for (int i = 0; i < 50000; i++)
+		for (int i = 0; i < 100000; i++)
 		{
 			k.appendElement("DOA").deleteNode();
 		}
-		assertEquals(getCurrentMem(), mem, 50000);
+		assertEquals(getCurrentMem(), mem, 200000);
 	}
 
 	/**
@@ -353,8 +353,8 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-		 * 
-		 */
+	 * 
+	 */
 	public void testReplaceElement()
 	{
 		final XMLDoc d = new XMLDoc("root", "www.root.com");
@@ -396,6 +396,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSortChildren()
 	{
 		final XMLDoc d = new JDFDoc("parent");
@@ -423,6 +426,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSortChildrenCompPerformance()
 	{
 		XMLDoc d = new JDFDoc("parent");
@@ -449,6 +455,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testSortChildrenComp()
 	{
 
@@ -1099,6 +1108,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetLocalName()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -2224,6 +2236,67 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
+	public void testAppendElementRaw()
+	{
+		final long t = System.currentTimeMillis();
+		// final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "bigwhite.jdf");
+		final JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "pdyv5.jdf");
+		final long t2 = System.currentTimeMillis();
+		final JDFDoc d2 = new JDFDoc("JDF");
+		copyElement(d2.getRoot(), d.getRoot());
+		DocumentJDFImpl.setStaticStrictNSCheck(false);
+		final long t3 = System.currentTimeMillis();
+		final JDFDoc d3 = new JDFDoc("JDF");
+		d3.getMemberDocument().setIgnoreNSDefault(true);
+		copyElementRaw(d3.getRoot(), d.getRoot());
+		assertTrue(d3.getRoot().getXPathElement("ResourcePool") instanceof JDFResourcePool);
+		final long t4 = System.currentTimeMillis();
+		final JDFDoc d4 = new JDFDoc("JDF");
+		copyElementRaw(d4.getRoot(), d3.getRoot());
+		assertTrue(d4.getRoot().getXPathElement("ResourcePool") instanceof JDFResourcePool);
+		final long t5 = System.currentTimeMillis();
+		final JDFParser p = new JDFParser();
+		final String s = d4.write2String(0);
+		final JDFDoc d5 = p.parseString(s);
+		assertNotNull(d5);
+		final long t6 = System.currentTimeMillis();
+		System.out.println("parse    " + (t2 - t));
+		System.out.println("complete " + (t3 - t2));
+		System.out.println("raw      " + (t4 - t3));
+		System.out.println("raw 2    " + (t5 - t4));
+		System.out.println("parse 2  " + (t6 - t5));
+	}
+
+	private void copyElement(final KElement dst, final KElement src)
+	{
+		KElement c = src.getFirstChildElement();
+		dst.setAttributes(src);
+		while (c != null)
+		{
+			final KElement newDst = dst.appendElement(c.getNodeName());
+			copyElement(newDst, c);
+			c = c.getNextSiblingElement();
+		}
+	}
+
+	private void copyElementRaw(final KElement dst, final KElement src)
+	{
+		KElement c = src.getFirstChildElement();
+		dst.setAttributesRaw(src);
+		while (c != null)
+		{
+			final KElement newDst = dst.appendElementRaw(c.getNodeName(), null);
+			copyElementRaw(newDst, c);
+			c = c.getNextSiblingElement();
+		}
+	}
+
+	/**
+	 * 
+	 */
 	public void testAppendElement()
 	{
 		final XMLDoc d = new XMLDoc("e", null);

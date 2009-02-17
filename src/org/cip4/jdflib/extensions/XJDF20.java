@@ -109,6 +109,7 @@ import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
@@ -133,6 +134,7 @@ public class XJDF20 extends BaseElementWalker
 	public XJDF20()
 	{
 		super(new BaseWalkerFactory());
+		JDFElement.uniqueID(1000); // don't start at zero to avoid collisions in short ID scenarios
 		init();
 	}
 
@@ -632,6 +634,7 @@ public class XJDF20 extends BaseElementWalker
 		private void cleanRefs(final JDFElement je, JDFResource r)
 		{
 			r = r.makeRootResource(null, je.getParentJDF(), false);
+			r.setResStatus(EnumResStatus.Available, true);
 			final JDFResourcePool prevPool = je.getParentJDF().getResourcePool();
 			if (prevPool != null)
 			{
@@ -872,7 +875,6 @@ public class XJDF20 extends BaseElementWalker
 			first = false;
 			final JDFNode node = (JDFNode) jdf;
 			setRootAttributes(node, xjdf);
-			xjdf.removeAttribute(AttributeName.ACTIVATION);
 			return xjdf;
 		}
 
@@ -905,6 +907,8 @@ public class XJDF20 extends BaseElementWalker
 			{
 				newRootP.removeAttribute("Type");
 			}
+			newRootP.removeAttribute(AttributeName.ACTIVATION);
+
 			if (newRootP.hasAttribute(AttributeName.SPAWNID))
 			{
 				final KElement spawnInfo = newRootP.appendElement(m_spawnInfo, "www.cip4.org/SpawnInfo");
