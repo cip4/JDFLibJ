@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -139,7 +139,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
 		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.fileToUrl(stFile, false));
+		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), StringUtil.newExtension(UrlUtil.fileToUrl(stFile, false), "jdf"));
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
 		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.fileToUrl(stFile, false));
+		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), StringUtil.newExtension(UrlUtil.fileToUrl(stFile, false), "jdf"));
 	}
 
 	/*
