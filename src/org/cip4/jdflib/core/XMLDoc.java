@@ -479,7 +479,6 @@ public class XMLDoc
 	 * @throws IOException
 	 * @since 080425 synchronized
 	 */
-	@SuppressWarnings("deprecation")
 	public void write2Stream(final OutputStream outStream, final int indent, final boolean bPreserveSpace) throws IOException
 	{
 		for (int i = 0; i < 3; i++)
@@ -1428,7 +1427,6 @@ public class XMLDoc
 	 * 
 	 * @return String
 	 */
-	@SuppressWarnings("deprecation")
 	public String toXML()
 	{
 		String strXML = JDFConstants.EMPTYSTRING;

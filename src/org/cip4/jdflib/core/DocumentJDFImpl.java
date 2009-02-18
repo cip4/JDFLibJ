@@ -138,9 +138,9 @@ public class DocumentJDFImpl extends DocumentImpl
 	/**
 	 * @param strictNSCheck the strictNSCheck to set
 	 */
-	public void setStrictNSCheck(final boolean strictNSCheck)
+	public void setStrictNSCheck(final boolean strictNSCheckP)
 	{
-		this.strictNSCheck = strictNSCheck;
+		this.strictNSCheck = strictNSCheckP;
 	}
 
 	private boolean bInJDFJMF = false;

@@ -1,6 +1,172 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.4BLD543 (17.02.2009)
+
+added functionality for fast building of dom trees without namespace validation
+JDFResource.expand now correctly works on single partition leaves
+add missing ShapeDefProductionParams et al.
+fixed missing JDFAutoShrinkingParams.java
+undo KElement toXML cleanup
+speed up validation
+
+
+Revision: 3858
+Author: prosi
+Date: 10:32:35, Dienstag, 17. Februar 2009
+Message:
+
+----
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/elementwalker/AttributeReplacerTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/elementwalker/XPathWalkerTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/QueueHotFolderTest.java
+
+Revision: 3855
+Author: prosi
+Date: 09:33:59, Dienstag, 17. Februar 2009
+Message:
+added functionality for fast building of dom trees without namespace validation
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/DocumentJDFImpl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/JDFTestCaseBase.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+
+Revision: 3852
+Author: prosi
+Date: 16:04:44, Freitag, 13. Februar 2009
+Message:
+cosmetics
+JDFResource.expand now correctly works on single partition leaves
+Golden ticket additional features
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/DocumentJDFImpl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFCMYKColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFIntegerList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFLabColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFMatrix.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFNumList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFNumberList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFRGBColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFRectangle.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFShape.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFTransferFunction.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFXYPair.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISPreGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueSubmissionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFComChannel.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFDieLayoutProductionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ThreadUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFParserTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/datatypes/JDFNumListTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/extensions/XJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/BaseGoldenTicketTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/QueueHotFolderTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StatusCounterTest.java
+
+Revision: 3839
+Author: mucha
+Date: 15:43:45, Dienstag, 10. Februar 2009
+Message:
+add missing ShapeDefProductionParams et al.
+----
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoObjectModel.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeDefProductionParams.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeTemplate.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFDieLayoutProductionParams.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFObjectModel.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFShapeDefProductionParams.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFShapeTemplate.java
+
+Revision: 3838
+Author: mucha
+Date: 15:42:21, Dienstag, 10. Februar 2009
+Message:
+add missing ShapeDefProductionParams et al.
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/gui/ComplexTypeList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/AttributeName.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/DocumentJDFImpl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/ElementName.java
+
+Revision: 3837
+Author: mucha
+Date: 17:12:10, Montag, 9. Februar 2009
+Message:
+fixed missing JDFAutoShrinkingParams.java
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/gui/ComplexTypeList.java
+
+Revision: 3831
+Author: mucha
+Date: 15:09:54, Montag, 9. Februar 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/Readme.txt
+
+Revision: 3827
+Author: mucha
+Date: 15:11:13, Donnerstag, 29. Januar 2009
+Message:
+cosmetics
+----
+Modified : /trunk/JDFLibJ/.classpath
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/HotFolder.java
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.4BLD543) && !lbtype(JDFLIBJ_2.1.4BLD542)}" -print
+.\auto@@\main\46
+.\auto\JDFAutoObjectModel.java@@\main\1
+.\auto\JDFAutoShapeDefProductionParams.java@@\main\1
+.\auto\JDFAutoShapeTemplate.java@@\main\1
+.\core\AttributeName.java@@\main\52
+.\core\DocumentJDFImpl.java@@\main\99
+.\core\ElementName.java@@\main\44
+.\core\JDFDoc.java@@\main\85
+.\core\KElement.java@@\main\274
+.\datatypes\JDFCMYKColor.java@@\main\11
+.\datatypes\JDFIntegerList.java@@\main\20
+.\datatypes\JDFLabColor.java@@\main\9
+.\datatypes\JDFMatrix.java@@\main\22
+.\datatypes\JDFNumberList.java@@\main\11
+.\datatypes\JDFNumList.java@@\main\37
+.\datatypes\JDFRectangle.java@@\main\24
+.\datatypes\JDFRGBColor.java@@\main\10
+.\datatypes\JDFShape.java@@\main\16
+.\datatypes\JDFTransferFunction.java@@\main\11
+.\datatypes\JDFXYPair.java@@\main\22
+.\extensions\XJDF20.java@@\main\4
+.\goldenticket\BaseGoldenTicket.java@@\main\18
+.\goldenticket\MISGoldenTicket.java@@\main\15
+.\goldenticket\MISPreGoldenTicket.java@@\main\8
+.\jmf\JDFQueueSubmissionParams.java@@\main\22
+.\resource\JDFResource.java@@\main\241
+.\resource\process@@\main\26
+.\resource\process\JDFComChannel.java@@\main\19
+.\resource\process\JDFDieLayoutProductionParams.java@@\main\2
+.\resource\process\JDFObjectModel.java@@\main\1
+.\resource\process\JDFShapeDefProductionParams.java@@\main\1
+.\resource\process\JDFShapeTemplate.java@@\main\1
+.\util\JDFMerge.java@@\main\32
+.\util\MimeUtil.java@@\main\34
+.\util\StringUtil.java@@\main\79
+.\util\ThreadUtil.java@@\main\3
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.4BLD542 (29.01.2009)
 
 add synchronized in getChildElementVector_JDFElement()

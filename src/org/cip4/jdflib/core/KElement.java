@@ -4388,7 +4388,6 @@ public class KElement extends ElementNSImpl
 	 * @return string representativ of this
 	 * @see Object#toString()
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public String toString()
 	{
@@ -4432,7 +4431,6 @@ public class KElement extends ElementNSImpl
 	 * @return String the dom element serialized as a string
 	 * @throws JDFExcepion if an error occurs while serializing
 	 */
-	@SuppressWarnings("deprecation")
 	public String toXML(final int indent)
 	{
 
@@ -4465,7 +4463,6 @@ public class KElement extends ElementNSImpl
 	 * @return String the dom element serialized as a string
 	 * @throws JDFExcepion if an error occurs while serializing
 	 */
-	@SuppressWarnings("deprecation")
 	public String toDisplayXML(final int indent)
 	{
 		try

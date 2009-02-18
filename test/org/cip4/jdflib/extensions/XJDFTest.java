@@ -48,9 +48,8 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
 	 */
-	public void testToXJDF() throws Exception
+	public void testToXJDF()
 	{
 
 		final JDFNode n2 = new JDFDoc("JDF").getJDFRoot();
@@ -70,18 +69,16 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
 	 */
-	public void testToXJDFCustomerInfo() throws Exception
+	public void testToXJDFCustomerInfo()
 	{
 		assertNotNull(e.getXPathElement("ParameterSet/Parameter/CustomerInfo"));
 
 	}
 
 	/**
-	 * @throws Exception
 	 */
-	public void testFromXJDF() throws Exception
+	public void testFromXJDF()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		// final XJDFToJDFConverter xc =
