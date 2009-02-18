@@ -25,6 +25,7 @@
 		<property name="jdflib.src.dir" value="./src" />
 		<property name="apps.src.dir" value="./apps" />
 		<property name="test.src.dir" value="./test" />
+		<property name="test.tmp.dir" value="${test.src.dir}/data/temp" />
 		<property name="dist.dir" value="./dist" />
 		<property name="doc.dir" value="${dist.dir}/doc" />
 		<property name="bin.dir" value="${dist.dir}/bin" />
@@ -44,6 +45,11 @@
 		<mkdir dir="${dist.dir}" />
 		<mkdir dir="${bin.dir}" />
 		<mkdir dir="${doc.dir}" />
+
+		<!-- delete tmp directory -->
+		<delete includeEmptyDirs="true">
+				<fileset dir="${test.tmp.dir}" includes="**/*" />
+		</delete>
 	</target>
 
 	<target name="buildnumber">
