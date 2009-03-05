@@ -127,6 +127,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.w3c.dom.Node;
@@ -149,7 +150,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final VJDFAttributeMap vspawnPartsMap = subjdfDocRoot.getAncestorPool().getPartMapVector();
 
 		final int size = vspawnPartsMap.size();
-		//		final JDFAttributeMap elementAt = 
+		// final JDFAttributeMap elementAt =
 		vspawnPartsMap.elementAt(size - 1);
 		vspawnPartsMap.removeElementAt(size - 1);
 
@@ -743,6 +744,51 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testSpawnIntermediateMissing()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		final JDFNode n2 = n.addJDFNode(EnumType.PreviewGeneration);
+		// final JDFMedia m = (JDFMedia)
+		final JDFPreview pv = (JDFPreview) n2.addResource(ElementName.PREVIEW, null, EnumUsage.Output, null, n, null, null);
+		JDFResource rp = pv.addPartition(EnumPartIDKey.SignatureName, "s1");
+		rp = rp.addPartition(EnumPartIDKey.SheetName, "s1");
+		rp = rp.addPartition(EnumPartIDKey.Side, "Front");
+		rp = rp.addPartition(EnumPartIDKey.Separation, "Black");
+		rp = rp.addPartition(EnumPartIDKey.PartVersion, "EN");
+		final JDFNodeInfo ni = n2.appendNodeInfo();
+		ni.setPartIDKeys(new VString("SignatureName SheetName Side Separation PartVersion", null));
+
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SignatureName, "s1");
+		map.put(EnumPartIDKey.SheetName, "s1");
+		map.put(EnumPartIDKey.Side, "Front");
+		map.put(EnumPartIDKey.PartVersion, "EN");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		vMap.add(map);
+
+		final JDFAttributeMap mapNI = new JDFAttributeMap(map);
+		mapNI.put(EnumPartIDKey.Separation, "Black");
+		ni.getCreatePartition(mapNI, null);
+
+		final JDFSpawn spawn = new JDFSpawn(n2);
+		spawn.bFixResources = false;
+		spawn.vRWResources_in = new VString("Output", null);
+		spawn.vSpawnParts = vMap;
+		spawn.bSpawnRWPartsMultiple = true;
+
+		final JDFNode nS1 = spawn.spawn();
+		assertNotNull(nS1);
+		final JDFPreview pvs = (JDFPreview) nS1.getResource(ElementName.PREVIEW, EnumUsage.Output, 0);
+		assertNotNull(pvs);
+		final JDFResourceLink rl = nS1.getLink(0, ElementName.PREVIEW, null, null);
+		assertNotNull(rl);
+		assertEquals("EN", rl.getTarget().getPartMap().get("PartVersion"));
+	}
 
 	/**
 	 * 
@@ -755,14 +801,14 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode n = d.getJDFRoot();
 			n.setType(EnumType.ProcessGroup);
 			final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
-//			final JDFMedia m = (JDFMedia) 
+			// final JDFMedia m = (JDFMedia)
 			n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
 
 			final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
 			final JDFComponent cs = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
-//			final JDFComponent csEn = (JDFComponent) 
+			// final JDFComponent csEn = (JDFComponent)
 			cs.addPartition(EnumPartIDKey.PartVersion, "EN");
-//			final JDFComponent csFr = (JDFComponent) 
+			// final JDFComponent csFr = (JDFComponent)
 			cs.addPartition(EnumPartIDKey.PartVersion, "FR");
 
 			final JDFAttributeMap map = new JDFAttributeMap();
@@ -805,14 +851,14 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode n = d.getJDFRoot();
 			n.setType(EnumType.ProcessGroup);
 			final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
-//			final JDFMedia m = (JDFMedia) 
+			// final JDFMedia m = (JDFMedia)
 			n2.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, n, null, null);
 
 			final JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
 			final JDFComponent cs = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
-//			final JDFComponent csEn = (JDFComponent) 
+			// final JDFComponent csEn = (JDFComponent)
 			cs.addPartition(EnumPartIDKey.PartVersion, "EN EN");
-//			final JDFComponent csFr = (JDFComponent) 
+			// final JDFComponent csFr = (JDFComponent)
 			cs.addPartition(EnumPartIDKey.PartVersion, "FR FR");
 
 			final JDFAttributeMap map = new JDFAttributeMap();

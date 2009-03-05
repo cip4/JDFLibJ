@@ -272,9 +272,12 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals("Input and Output string are not equal", strTestString, strResultString);
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetVStringEnum()
 	{
-		final Vector v = new Vector();
+		final Vector<Object> v = new Vector<Object>();
 		v.add(EnumUsage.Input);
 		v.add(EnumUsage.Output);
 		assertEquals(StringUtil.setvString(v, " ", null, null), "Input Output");
@@ -356,6 +359,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.stripPrefix("a:b", null, false), "a:b");
 	}
 
+	/**
+	 * 
+	 */
 	public void testStripNot()
 	{
 		assertEquals(StringUtil.stripNot("a1b321", "12"), "121");
@@ -416,14 +422,25 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.matches("a@b", JDFConstants.REGEXP_EMAIL));
 		assertTrue(StringUtil.matches("+(1).2/344", JDFConstants.REGEXP_PHONE));
 		assertFalse(StringUtil.matches("+(1).2 344", JDFConstants.REGEXP_PHONE));
+
+		assertFalse(StringUtil.matches("ab", "a*"));
+		assertTrue(StringUtil.matches("ab", "a(.*)"));
+		assertTrue(StringUtil.matches("a", "a(.*)"));
+		assertFalse(StringUtil.matches("a", "a(.(.*))"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testMime()
 	{
 		assertEquals(StringUtil.mime(null), JDFConstants.MIME_TEXTUNKNOWN);
 		assertEquals(StringUtil.mime("foo.PDF"), JDFConstants.MIME_PDF);
 	}
 
+	/**
+	 * 
+	 */
 	public void testNewExtension()
 	{
 		assertEquals(StringUtil.newExtension("a.b", "c"), "a.c");
@@ -436,6 +453,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.newExtension(".b", ".c"), ".c");
 	}
 
+	/**
+	 * 
+	 */
 	public void testReplaceString()
 	{
 		assertEquals(StringUtil.replaceString("abbcc", "a", "_"), "_bbcc");
@@ -448,6 +468,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.replaceString("000000", "00", "0"), "0");
 	}
 
+	/**
+	 * 
+	 */
 	public void testReplaceChar()
 	{
 		assertEquals(StringUtil.replaceChar("abbcc", 'a', null, 0), "bbcc");
@@ -565,6 +588,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.isNumber(s));
 	}
 
+	/**
+	 * 
+	 */
 	public void testFind_last_not_of()
 	{
 		assertEquals(StringUtil.find_last_not_of("abc", "bcd"), 0);

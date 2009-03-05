@@ -76,12 +76,14 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
 
+import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -107,13 +109,17 @@ import org.cip4.jdflib.resource.JDFCuttingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFContentObject;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
@@ -432,10 +438,13 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
-	 * @param newRoot
+	 * set the attributes of the set abses on the resource and resourcelink
+	 * 
+	 * @param resourceSet
 	 * @param rl
+	 * @param linkRoot
 	 */
-	private void setLinkAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
+	private void setSetAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
 	{
 		resourceSet.setAttribute("Name", linkRoot.getNodeName());
 		resourceSet.setAttributes(rl);
@@ -475,8 +484,9 @@ public class XJDF20 extends BaseElementWalker
 	 * @param newRoot
 	 * @param rl
 	 * @param linkTarget
+	 * @param xRoot
 	 */
-	protected VElement setResource(final JDFResourceLink rl, final JDFResource linkTarget)
+	protected VElement setResource(final JDFResourceLink rl, final JDFResource linkTarget, final KElement xRoot)
 	{
 		final VElement v = new VElement();
 		final String className = getClassName(linkTarget);
@@ -487,14 +497,14 @@ public class XJDF20 extends BaseElementWalker
 		linkTarget.expand(false);
 		final String resID = linkTarget.getAttribute("ID");
 
-		KElement resourceSet = newRoot.getChildWithAttribute(className + "Set", "ID", null, resID, 0, true);
+		KElement resourceSet = xRoot.getChildWithAttribute(className + "Set", "ID", null, resID, 0, true);
 		if (resourceSet == null)
 		{
-			resourceSet = newRoot.appendElement(className + "Set");
+			resourceSet = xRoot.appendElement(className + "Set");
 			resourceSet.setAttribute("ID", linkTarget.getID());
-
-			setLinkAttributes(resourceSet, rl, linkTarget);
 		}
+		// TODO what if he have resources used as in and out in the same node?
+		setSetAttributes(resourceSet, rl, linkTarget);
 		int nLeaves = resourceSet.numChildElements(className, null);
 		final VElement vRes = rl == null ? linkTarget.getLeaves(false) : rl.getTargetVector(0);
 		for (int j = 0; j < vRes.size(); j++)
@@ -529,7 +539,6 @@ public class XJDF20 extends BaseElementWalker
 		public WalkResource()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
@@ -698,7 +707,7 @@ public class XJDF20 extends BaseElementWalker
 		private void makeRefAttribute(final JDFRefElement re)
 		{
 			final String attName = getRefName(re);
-			final VElement v = setResource(null, re.getTarget());
+			final VElement v = setResource(null, re.getTarget(), newRoot);
 			if (v != null)
 			{
 				final KElement parentElement = re.getParentNode_KElement();
@@ -762,12 +771,11 @@ public class XJDF20 extends BaseElementWalker
 		public WalkResLink()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
 		 * @param e
-		 * @return thr created resource in this case just remove the pool
+		 * @return the created resource in this case just remove the pool
 		 */
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
@@ -786,6 +794,7 @@ public class XJDF20 extends BaseElementWalker
 				{
 					return null;
 				}
+				setResource(rl, linkTarget, xjdf);
 			}
 			else
 			{
@@ -794,8 +803,8 @@ public class XJDF20 extends BaseElementWalker
 				{
 					return null;
 				}
+				setResource(rl, linkTarget, newRoot);
 			}
-			setResource(rl, linkTarget);
 			return null;
 		}
 
@@ -822,12 +831,11 @@ public class XJDF20 extends BaseElementWalker
 		public WalkResLinkPool()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
 		 * @param e
-		 * @return ter created resource in this case just remove the pool
+		 * @return the created resource in this case just remove the pool
 		 */
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
@@ -858,7 +866,6 @@ public class XJDF20 extends BaseElementWalker
 		public WalkJDF()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
@@ -897,8 +904,16 @@ public class XJDF20 extends BaseElementWalker
 		{
 			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
 			newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
+
+			final JDFNodeInfo ni = node.getCreateNodeInfo();
+			// TODO move all stati to ni?
 			newRootP.setAttributes(node);
 
+			// status is set only in the NodeInfo
+			newRootP.removeAttribute(AttributeName.STATUS);
+			newRootP.removeAttribute(AttributeName.STATUSDETAILS);
+			newRootP.setAttribute("Version", "2.0");
+			newRootP.setAttribute("MaxVersion", "2.0");
 			if (!newRootP.hasAttribute(AttributeName.TYPES))
 			{
 				newRootP.renameAttribute("Type", "Types", null, null);
@@ -908,8 +923,30 @@ public class XJDF20 extends BaseElementWalker
 				newRootP.removeAttribute("Type");
 			}
 			newRootP.removeAttribute(AttributeName.ACTIVATION);
+			if (node.hasAttribute(AttributeName.NAMEDFEATURES))
+			{
+				final VString vnf = node.getNamedFeatures();
+				for (int i = 0; i < vnf.size(); i += 2)
+				{
+					final JDFGeneralID gi = (JDFGeneralID) newRootP.appendElement(ElementName.GENERALID);
+					gi.setIDUsage(vnf.get(i));
+					gi.setIDValue(vnf.get(i + 1));
+					gi.setDataType(EnumDataType.NMTOKEN);
+					gi.setDescriptiveName("Copy from NamedFeatures");
+				}
+				newRootP.removeAttribute(AttributeName.NAMEDFEATURES);
+			}
 
-			if (newRootP.hasAttribute(AttributeName.SPAWNID))
+			updateSpawnInfo(node, newRootP);
+		}
+
+		/**
+		 * @param node
+		 * @param newRootP
+		 */
+		private void updateSpawnInfo(final JDFNode node, final KElement newRootP)
+		{
+			if (m_spawnInfo != null && newRootP.hasAttribute(AttributeName.SPAWNID))
 			{
 				final KElement spawnInfo = newRootP.appendElement(m_spawnInfo, "www.cip4.org/SpawnInfo");
 				spawnInfo.moveAttribute(AttributeName.SPAWNID, newRootP, null, null, null);
@@ -1003,12 +1040,17 @@ public class XJDF20 extends BaseElementWalker
 
 			if (kids.size() > 0)
 			{
-				prod.setAttribute("ProductRefs", kids, null);
+				for (int i = 0; i < kids.size(); i++)
+				{
+					final KElement sub = prod.appendElement("SubProduct");
+					sub.setAttribute("ChildRef", kids.get(i), null);
+					// TODO add processusage from input / output resources
+				}
 			}
 			else
 			{
 				final KElement list = prod.getParentNode_KElement();
-				list.appendAttribute("RootProducts", node.getID(), null, null, true);
+				list.appendAttribute("Roots", node.getID(), null, null, true);
 			}
 		}
 
@@ -1051,7 +1093,7 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 * any matching class will be removed with extreme prejudice...
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
@@ -1185,11 +1227,11 @@ public class XJDF20 extends BaseElementWalker
 		 * @param rl
 		 * @param val
 		 */
-		private void copyLinkValues(final KElement raNew, final JDFResourceLink rl, final String val)
+		protected void copyLinkValues(final KElement raNew, final JDFResourceLink rl, final String val)
 		{
 			if (rl != null)
 			{
-				final VElement v = setResource(null, rl.getLinkRoot());
+				final VElement v = setResource(null, rl.getLinkRoot(), newRoot);
 				for (int i = 0; i < v.size(); i++)
 				{
 					raNew.appendAttribute(val, v.get(i).getAttribute(AttributeName.ID), null, " ", true);
@@ -1206,6 +1248,60 @@ public class XJDF20 extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFResourceAudit;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 * at this point only a dummy since we have a specific WalkResourceAudit child
+	 * 
+	 * TODO how should resource consumption be tracked?
+	 */
+	protected class WalkPhaseTimeAudit extends WalkAudit
+	{
+		public WalkPhaseTimeAudit()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFPhaseTime pt = (JDFPhaseTime) jdf;
+			final VElement vL = pt.getLinkVector();
+			if (vL != null)
+			{
+				for (int i = 0; i < vL.size(); i++)
+				{
+					final JDFResourceLink rl = (JDFResourceLink) vL.get(i);
+					final VElement vR = setResource(null, rl.getLinkRoot(), newRoot);
+					final KElement pA = xjdf.appendElement("PhaseAmount");
+					for (int j = 0; j < vR.size(); j++)
+					{
+						pA.appendAttribute("rRef", vR.get(i).getAttribute(AttributeName.ID), null, " ", true);
+						pA.copyElement(rl.getAmountPool(), null);
+						rl.deleteNode();
+					}
+				}
+			}
+			return super.walk(jdf, xjdf); // copy anything but the links (see deleteNoe above...)
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFPhaseTime;
 		}
 	}
 
@@ -1267,7 +1363,6 @@ public class XJDF20 extends BaseElementWalker
 		public WalkLayout()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
@@ -1290,6 +1385,53 @@ public class XJDF20 extends BaseElementWalker
 			final boolean b = ElementName.LAYERLIST.equals(refLocalName) || ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName)
 					|| ElementName.MARKOBJECT.equals(refLocalName) || ElementName.LAYERDETAILS.equals(refLocalName);
 			return b || super.mustInline(refLocalName);
+		}
+	}
+
+	/**
+	 * take a container/FileSpec(Ref) and convert it into a ContainerRef
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkContainer extends WalkJDFElement
+	{
+		/**
+		 * 
+		 */
+		public WalkContainer()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFContainer;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFContainer cont = (JDFContainer) jdf;
+			final JDFFileSpec fs = cont.getFileSpec();
+			if (fs != null)
+			{
+				fs.makeRootResource(null, null, true);
+				final VElement v = setResource(null, fs, newRoot);
+				if (v != null && v.size() == 1)
+				{
+					xjdf.setAttribute("ContainerRef", v.get(0).getAttribute("ID"));
+				}
+			}
+			return null;
 		}
 	}
 
@@ -1378,7 +1520,6 @@ public class XJDF20 extends BaseElementWalker
 		public WalkColorPool()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**

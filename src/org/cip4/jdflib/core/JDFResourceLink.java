@@ -107,12 +107,15 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * way before 20.02.2009
+ */
 public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 {
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel, boolean, int)
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
 	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
@@ -125,6 +128,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		return v;
 	}
 
+	/**
+	 * 
+	 */
 	public void generateCombinedProcessIndex()
 	{
 		final JDFNode n = getParentJDF();

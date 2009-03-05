@@ -5,10 +5,13 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
@@ -16,6 +19,8 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -44,13 +49,13 @@ public class XJDFTest extends JDFTestCaseBase
 		xm0.setPlateType(EnumPlateType.Dummy);
 		final JDFCustomerInfo ci = n.appendCustomerInfo();
 		ci.setCustomerJobName("foo");
-		e = new XJDF20().makeNewJDF(n, null);
 	}
 
 	/**
 	 */
 	public void testToXJDF()
 	{
+		e = new XJDF20().makeNewJDF(n, null);
 
 		final JDFNode n2 = new JDFDoc("JDF").getJDFRoot();
 		n2.setType(EnumType.ConventionalPrinting);
@@ -70,8 +75,57 @@ public class XJDFTest extends JDFTestCaseBase
 
 	/**
 	 */
-	public void testToXJDFCustomerInfo()
+	public void testToXJDFWithProduct() throws Exception
 	{
+		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
+		nP.setType(EnumType.Product);
+		nP.addResource("LayoutIntent", EnumUsage.Input);
+		n = (JDFNode) nP.copyElement(n, null);
+		final JDFResource c = n.addResource("Component", EnumUsage.Output);
+		nP.linkResource(c, EnumUsage.Output, null);
+
+		e = new XJDF20().makeNewJDF(nP, null);
+		assertNotNull(e.getXPathElement("ProductList/Product/IntentSet{@Name=\"LayoutIntent\"]"));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testNamedFeatures() throws Exception
+	{
+
+		n.setNamedFeatures(new VString("k1 v1 k2 v2", null));
+		e = new XJDF20().makeNewJDF(n, null);
+		assertEquals(e.numChildElements(ElementName.GENERALID, null), 2);
+		for (int i = 1; i < 3; i++)
+		{
+			final JDFGeneralID gi = (JDFGeneralID) e.getElement(ElementName.GENERALID, null, i - 1);
+			assertEquals(gi.getIDUsage(), "k" + i);
+			assertEquals(gi.getIDValue(), "v" + i);
+		}
+		assertNull(e.getAttribute(AttributeName.NAMEDFEATURES, null, null));
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testContainer() throws Exception
+	{
+
+		final JDFFileSpec fs1 = (JDFFileSpec) n.addResource("FileSpec", EnumUsage.Input);
+		final JDFFileSpec fsc = fs1.appendContainer().appendFileSpec();
+		e = new XJDF20().makeNewJDF(n, null);
+		assertNotNull(e.getXPathAttribute("ParameterSet[@Usage=\"Input\"]/Parameter/FileSpec/@ContainerRef", null));
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testToXJDFCustomerInfo() throws Exception
+	{
+		e = new XJDF20().makeNewJDF(n, null);
 		assertNotNull(e.getXPathElement("ParameterSet/Parameter/CustomerInfo"));
 
 	}

@@ -7660,12 +7660,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public void setNamedFeatures(final VString value)
 	{
-		final StringBuffer strbuff = new StringBuffer(100);
-		for (int i = 0; i < value.size(); i++)
-		{
-			strbuff.append(value.elementAt(i));
-		}
-		setAttribute(AttributeName.NAMEDFEATURES, strbuff.toString());
+		setAttribute(AttributeName.NAMEDFEATURES, value, null);
 	}
 
 	/**
@@ -7675,7 +7670,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public VString getNamedFeatures()
 	{
-		return new VString(getAttribute(AttributeName.NAMEDFEATURES, null, JDFConstants.EMPTYSTRING), null);
+		return new VString(getAttribute(AttributeName.NAMEDFEATURES, null, null), null);
 	}
 
 	/**
