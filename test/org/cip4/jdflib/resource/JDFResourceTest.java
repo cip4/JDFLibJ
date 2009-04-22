@@ -736,6 +736,32 @@ public class JDFResourceTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * tests updateAmounts()
+	 */
+	public void testUpdateAmountsVirtual()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode root = doc.getJDFRoot();
+		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
+
+		final JDFMedia media = (JDFMedia) root.addResource(ElementName.MEDIA, null, EnumUsage.Input, null, null, null, null);
+		media.setAmount(100);
+		final JDFComponent comp = (JDFComponent) root.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, null, null, null);
+		final JDFResourceLink rlComp = root.getLink(comp, null);
+		final JDFComponent c1 = (JDFComponent) comp.addPartition(EnumPartIDKey.SheetName, "S1");
+
+		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "S1");
+		m1.put("Side", "Front");
+		rlComp.setActualAmount(42, m1);
+		m1.put("Side", "Back");
+		rlComp.setActualAmount(40, m1);
+		comp.updateAmounts(0);
+		assertEquals(c1.getAmount(), 40., 0.1);
+		assertEquals(c1.getAmountProduced(), 40., 0.1);
+
+	}
+
 	// ///////////////////////////////////////////////////////////
 	public void testCreatePartitions()
 	{

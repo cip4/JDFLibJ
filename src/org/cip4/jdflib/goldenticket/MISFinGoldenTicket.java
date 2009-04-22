@@ -86,6 +86,9 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
+import org.cip4.jdflib.resource.process.postpress.JDFStitchingParams;
+import org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams;
 
 /**
  * @author Rainer Prosi class that generates golden tickets based on ICS levels etc
@@ -117,26 +120,27 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	 */
 	public static final String MISFIN_HARDCOVERFIN = "MISFIN.HardcoverFin";
 
-	protected int icsLevel;
+	/**
+	 * 
+	 */
+	public String foldCatalog = "F8-2";
 
 	/**
 	 * create a BaseGoldenTicket
+	 * @param _icsLevel
+	 * @param jdfVersion
+	 * @param _jmfLevel
+	 * @param _misLevel
+	 * @param vPartMap
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
-	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 * @param misLevel level of MIS ICS to support
-	 * @param isGrayBox if true, write a grayBox
 	 */
-	public MISFinGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel, 
-			@SuppressWarnings("unused") boolean isGrayBox, VJDFAttributeMap vPartMap)
+	public MISFinGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int _jmfLevel, final int _misLevel, final VJDFAttributeMap vPartMap)
 	{
 		super(_misLevel, jdfVersion, _jmfLevel);
-
-		catMap.put(MISFIN_SHEETFIN, new VString("Cutting Folding", null));
 		partIDKeys = new VString("SignatureName,SheetName", ",");
 		vParts = vPartMap;
 		icsLevel = _icsLevel;
+		grayBox = true;
 	}
 
 	/**
@@ -161,7 +165,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	 * 
 	 * @param parent the previous node, may be null
 	 */
-	public MISFinGoldenTicket(MISFinGoldenTicket parent)
+	public MISFinGoldenTicket(final MISFinGoldenTicket parent)
 	{
 		super(parent);
 	}
@@ -175,14 +179,64 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	public void init()
 	{
 		super.init();
+		initFolding();
+		initTrimming();
+		initStitching();
+		initInputComponent();
+		initOutputComponent();
+
 	}
 
+	/**
+	 * 
+	 */
+	private void initStitching()
+	{
+		if (theNode.getTypes().contains("Stitching"))
+		{
+			final JDFStitchingParams sp = (JDFStitchingParams) theNode.getCreateResource(ElementName.STITCHINGPARAMS, EnumUsage.Input, 0);
+			sp.setStapleShape(org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStapleShape.Butted);
+			sp.setStitchWidth(36);
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	private void initFolding()
+	{
+		if (theNode.getTypes().contains("Folding"))
+		{
+			final JDFFoldingParams fp = (JDFFoldingParams) theNode.getCreateResource(ElementName.FOLDINGPARAMS, EnumUsage.Input, 0);
+			fp.setFoldCatalog(foldCatalog);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void initTrimming()
+	{
+		if (theNode.getTypes().contains("Trimming"))
+		{
+			final JDFTrimmingParams tp = (JDFTrimmingParams) theNode.getCreateResource(ElementName.TRIMMINGPARAMS, EnumUsage.Input, 0);
+			tp.setHeight(72 * 12);
+			tp.setWidth(72 * 6);
+		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#setActivePart(org.cip4.jdflib.datatypes.VJDFAttributeMap, boolean)
+	 */
 	@Override
-	public void setActivePart(VJDFAttributeMap vp, boolean bFirst)
+	public void setActivePart(final VJDFAttributeMap vp, final boolean bFirst)
 	{
 		amountLinks = null;
 		if (bFirst)
-			addAmountLink("Componenet:Input");
+		{
+			addAmountLink("Component:Input");
+		}
 		addAmountLink("Component:Output");
 		super.setActivePart(vp, bFirst);
 	}
@@ -209,21 +263,23 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 			outComp.setProductType("Unknown");
 		}
 		else
-			theNode.linkResource(outComp, EnumUsage.Output, null);
-
-		JDFResourceLink rl = theNode.getLink(outComp, EnumUsage.Output);
-		if (vParts != null)
 		{
-			VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation", " "));
+			theNode.linkResource(outComp, EnumUsage.Output, null);
+		}
+
+		final JDFResourceLink rl = theNode.getLink(outComp, EnumUsage.Output);
+		if (vParts != null && MISFIN_SHEETFIN.equals(category))
+		{
+			final VJDFAttributeMap reducedMap = getReducedMap(new VString("Side Separation", " "));
 			if (reducedMap != null)
 			{
 				final int size = reducedMap.size();
 				for (int i = 0; i < size; i++)
 				{
 					final JDFAttributeMap part = reducedMap.elementAt(i);
-					JDFResource partComp = outComp.getCreatePartition(part, partIDKeys);
+					final JDFResource partComp = outComp.getCreatePartition(part, partIDKeys);
 					partComp.setDescriptiveName("Description for Component part# " + i);
-					JDFAttributeMap newMap = new JDFAttributeMap(part);
+					final JDFAttributeMap newMap = new JDFAttributeMap(part);
 					newMap.put(AttributeName.CONDITION, "Good");
 					rl.setAmount(good, newMap);
 				}
@@ -233,17 +289,43 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 		{
 			outComp.setDescriptiveName("MIS-Fin output Component");
 		}
-		
+
 		// outComp.getCreateLayout();
-		JDFMedia inMedia = (JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
-		outComp.setDimensions(inMedia.getDimension());
-		
+		final JDFMedia inMedia = (JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);
+		if (inMedia != null)
+		{
+			outComp.setDimensions(inMedia.getDimension());
+		}
+
 		return outComp;
 
 	}
 
+	/**
+	 * 
+	 */
+	protected JDFComponent initInputComponent()
+	{
+
+		JDFComponent comp = (JDFComponent) (theParentNode != null ? theParentNode.getResource(ElementName.COMPONENT, EnumUsage.Input, 0) : null);
+		if (comp == null)
+		{
+			comp = (JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Input, 0);
+			comp.setComponentType(EnumComponentType.PartialProduct, EnumComponentType.Sheet);
+			comp.setProductType("Unknown");
+		}
+		else
+		{
+			theNode.linkResource(comp, EnumUsage.Input, null);
+		}
+
+		final JDFResourceLink rl = theNode.getLink(comp, EnumUsage.Input);
+		return comp;
+
+	}
+
 	@Override
-	protected void runphases(int pgood, int pwaste, boolean bOutAvail, boolean bFirst)
+	protected void runphases(final int pgood, final int pwaste, final boolean bOutAvail, final boolean bFirst)
 	{
 		theStatusCounter.setPhase(EnumNodeStatus.InProgress, "Good", EnumDeviceStatus.Running, "Printing");
 		runSinglePhase(pgood, pwaste, bOutAvail, bFirst);
@@ -251,8 +333,11 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 		theStatusCounter.setPhase(EnumNodeStatus.Completed, "Done", EnumDeviceStatus.Idle, "Waiting");
 	}
 
+	/**
+	 * @see org.cip4.jdflib.goldenticket.MISGoldenTicket#assign(org.cip4.jdflib.node.JDFNode)
+	 */
 	@Override
-	public void assign(JDFNode node)
+	public void assign(final JDFNode node)
 	{
 		super.assign(node);
 		theNode.getCreateNodeInfo().setPartIDKeys(partIDKeys);

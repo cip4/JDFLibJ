@@ -4060,6 +4060,7 @@ public class JDFElement extends KElement
 		public static final EnumVersion Version_1_7 = new EnumVersion(JDFConstants.VERSION_1_7);
 		public static final EnumVersion Version_1_8 = new EnumVersion(JDFConstants.VERSION_1_8);
 		public static final EnumVersion Version_1_9 = new EnumVersion(JDFConstants.VERSION_1_9);
+		public static final EnumVersion Version_2_0 = new EnumVersion(JDFConstants.VERSION_2_0);
 
 	}
 

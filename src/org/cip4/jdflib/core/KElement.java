@@ -4349,14 +4349,16 @@ public class KElement extends ElementNSImpl
 		 */
 		public int compare(final KElement o1, final KElement o2)
 		{
-			final int i = o1.getNodeName().compareTo(o2.getNodeName());
+			String nodeName = o1.getNodeName();
+			String nodeName2 = o2.getNodeName();
+			final int i = nodeName.compareTo(nodeName2);
 			if (i != 0)
 			{
 				return i;
 			}
-			final String i1 = o1.toString();
-			final String i2 = o2.toString();
-			return i1.compareTo(i2);
+			nodeName += o1.getAttribute(AttributeName.ID);
+			nodeName2 += o2.getAttribute(AttributeName.ID);
+			return nodeName.compareTo(nodeName2);
 		}
 	}
 
@@ -4992,17 +4994,15 @@ public class KElement extends ElementNSImpl
 	 * @return VElement the vector of matching elements
 	 * @throws IllegalArgumentException if path is not supported
 	 */
-	private VElement getXPathElementVectorInternal(final String path, final int maxSize, final boolean bLocal)
+	private VElement getXPathElementVectorInternal(String path, final int maxSize, final boolean bLocal)
 	{
-		String pathLocal = path;
-
-		if (pathLocal == null)
+		if (path == null)
 		{
 			return null;
 		}
 
 		VElement vRet = new VElement();
-		if (JDFConstants.EMPTYSTRING.equals(pathLocal))
+		if (JDFConstants.EMPTYSTRING.equals(path))
 		{
 			if (bLocal)
 			{
@@ -5015,18 +5015,18 @@ public class KElement extends ElementNSImpl
 			return vRet;
 		}
 
-		if (pathLocal.startsWith(JDFConstants.SLASH))
+		if (path.startsWith(JDFConstants.SLASH))
 		{
-			if (pathLocal.startsWith("//"))
+			if (path.startsWith("//"))
 			{
-				return getDocRoot().getXPathElementVectorInternal(pathLocal.substring(2), maxSize, false);
+				return getDocRoot().getXPathElementVectorInternal(path.substring(2), maxSize, false);
 			}
 
 			final KElement r = getDocRoot();
 			final String rootNodeName = r.getNodeName();
-			final int nextPos = pathLocal.indexOf("/", 2);
-			final String rootPath = nextPos > 0 ? pathLocal.substring(1, nextPos) : pathLocal.substring(1);
-			final String nextPath = nextPos > 0 ? pathLocal.substring(nextPos + 1) : "";
+			final int nextPos = path.indexOf("/", 2);
+			final String rootPath = nextPos > 0 ? path.substring(1, nextPos) : path.substring(1);
+			final String nextPath = nextPos > 0 ? path.substring(nextPos + 1) : "";
 			if (rootPath.equals(rootNodeName) || isWildCard(rootPath))
 			{
 				return r.getXPathElementVectorInternal(nextPath, maxSize, true);
@@ -5035,14 +5035,14 @@ public class KElement extends ElementNSImpl
 			throw new IllegalArgumentException("Invalid root node name");
 
 		}
-		else if (pathLocal.startsWith(JDFConstants.DOT))
+		else if (path.startsWith(JDFConstants.DOT))
 		{
-			if (pathLocal.startsWith(JDFConstants.DOTSLASH))
+			if (path.startsWith(JDFConstants.DOTSLASH))
 			{
-				return getXPathElementVectorInternal(pathLocal.substring(JDFConstants.DOTSLASH.length()), maxSize, true);
+				return getXPathElementVectorInternal(path.substring(JDFConstants.DOTSLASH.length()), maxSize, true);
 			}
 
-			if (pathLocal.startsWith(JDFConstants.DOTDOTSLASH))
+			if (path.startsWith(JDFConstants.DOTDOTSLASH))
 			{
 				final KElement parent = getParentNode_KElement();
 				if (parent == null)
@@ -5050,14 +5050,14 @@ public class KElement extends ElementNSImpl
 					return null;
 				}
 
-				return parent.getXPathElementVectorInternal(pathLocal.substring(JDFConstants.DOTDOTSLASH.length()), maxSize, true);
+				return parent.getXPathElementVectorInternal(path.substring(JDFConstants.DOTDOTSLASH.length()), maxSize, true);
 			}
-			else if (pathLocal.equals(JDFConstants.DOT))
+			else if (path.equals(JDFConstants.DOT))
 			{
 				vRet.add(this);
 				return vRet;
 			}
-			else if (pathLocal.equals(".."))
+			else if (path.equals(".."))
 			{
 				final KElement parent = getParentNode_KElement();
 				if (parent == null)
@@ -5070,22 +5070,22 @@ public class KElement extends ElementNSImpl
 			}
 		}
 
-		pathLocal = StringUtil.replaceString(pathLocal, "[@", "|||");
-		final int posB0 = pathLocal.indexOf("[");
-		final int posBAt = pathLocal.indexOf("|||");
+		path = StringUtil.replaceString(path, "[@", "|||");
+		final int posB0 = path.indexOf("[");
+		final int posBAt = path.indexOf("|||");
 		int iSkip = 0;
-		String newPath = pathLocal;
+		String newPath = path;
 		int pos = newPath.indexOf(JDFConstants.SLASH);
 		JDFAttributeMap map = null;
 		boolean bExplicitSkip = false;
 
 		if (posB0 != -1 && (posB0 < pos || pos == -1)) // parse for [n]
 		{
-			final int posB1 = pathLocal.indexOf("]");
+			final int posB1 = path.indexOf("]");
 
 			// TODO fix escape attribute values
 
-			final String n = pathLocal.substring(posB0 + 1, posB1);
+			final String n = path.substring(posB0 + 1, posB1);
 			iSkip = StringUtil.parseInt(n, 0);
 			if (iSkip <= 0)
 			{
@@ -5094,15 +5094,15 @@ public class KElement extends ElementNSImpl
 
 			iSkip--;
 			bExplicitSkip = true;
-			newPath = pathLocal.substring(0, posB0) + pathLocal.substring(posB1 + 1);
+			newPath = path.substring(0, posB0) + path.substring(posB1 + 1);
 			pos = newPath.indexOf(JDFConstants.SLASH);
 		}
 		else if (posBAt != -1 && (posBAt < pos || pos == -1)) // parse for
 		// [@a="b"]
 		{
-			final int posB1 = pathLocal.indexOf("]");
-			map = getXPathAtMap(pathLocal, posBAt, posB1);
-			newPath = pathLocal.substring(0, posBAt) + pathLocal.substring(posB1 + 1);
+			final int posB1 = path.indexOf("]");
+			map = getXPathAtMap(path, posBAt, posB1);
+			newPath = path.substring(0, posBAt) + path.substring(posB1 + 1);
 			pos = newPath.indexOf(JDFConstants.SLASH);
 		}
 

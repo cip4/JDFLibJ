@@ -139,6 +139,7 @@ public class BaseGoldenTicket
 	public JDFNode theParentProduct = null;
 	protected EnumVersion theVersion = null;
 	protected int baseICSLevel;
+	protected int icsLevel = 0;
 	protected StatusCounter theStatusCounter;
 	/**
 	 * 
@@ -761,21 +762,30 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param string
-	 * @param i
-	 * @param b
+	 * @param file
+	 * @param indent
 	 */
 	public void write2File(final String file, final int indent)
 	{
+		if (theNode == null)
+		{
+			assign(null);
+		}
 		theNode.getOwnerDocument_KElement().write2File(file, indent, indent == 0);
 
 	}
 
+	/**
+	 * @return
+	 */
 	public StatusCounter getStatusCounter()
 	{
 		return theStatusCounter;
 	}
 
+	/**
+	 * @return
+	 */
 	public static String getDeviceURL()
 	{
 		return deviceURL;
@@ -1189,7 +1199,9 @@ public class BaseGoldenTicket
 		}
 		else
 		{
-			outComp.setDescriptiveName("MIS-CP output Component");
+			outComp.setDescriptiveName("MIS-CP or IDP output Component");
+			final JDFAttributeMap newMap = new JDFAttributeMap(AttributeName.CONDITION, "Good");
+			rl.setAmount(good, newMap);
 		}
 		// outComp.getCreateLayout();
 		final JDFMedia inMedia = (JDFMedia) theNode.getResource(ElementName.MEDIA, EnumUsage.Input, 0);

@@ -71,6 +71,8 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
@@ -92,6 +94,7 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
@@ -286,15 +289,28 @@ public class StatusCounterTest extends JDFTestCaseBase
 		assertTrue(sc.removeEmployee(employee));
 		assertEquals(sc.addEmployee(employee), 1);
 
+		final JDFAuditPool ap = n.getAuditPool();
 		JDFDoc docJMF = sc.getDocJMFPhaseTime();
 		JDFResponse sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, -1);
 		JDFDeviceInfo deviceInfo = sig.getDeviceInfo(0);
 		assertTrue(deviceInfo.getEmployee(0).isEqual(employee));
+		int nPT = ap.numChildElements("PhaseTime", null);
 		sc.removeEmployee(employee);
+		assertEquals("modifying employess adds phase", ap.numChildElements("PhaseTime", null), ++nPT);
 		docJMF = sc.getDocJMFPhaseTime();
+
 		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
 		deviceInfo = sig.getDeviceInfo(0);
 		assertNull(deviceInfo.getEmployee(0));
+		final Vector<JDFEmployee> ve = new Vector<JDFEmployee>();
+		ve.add(employee);
+		sc.replaceEmployees(ve);
+		assertEquals("modifying employess adds phase", ap.numChildElements("PhaseTime", null), ++nPT);
+		docJMF = sc.getDocJMFPhaseTime();
+		sig = (JDFResponse) docJMF.getJMFRoot().getMessageElement(EnumFamily.Response, EnumType.Status, 0);
+		deviceInfo = sig.getDeviceInfo(0);
+		assertNotNull(deviceInfo.getEmployee(0));
+
 	}
 
 	/**

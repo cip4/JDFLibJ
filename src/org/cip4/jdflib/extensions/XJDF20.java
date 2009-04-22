@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -106,22 +107,26 @@ import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFCreasingParams;
 import org.cip4.jdflib.resource.JDFCuttingParams;
+import org.cip4.jdflib.resource.JDFInterpretingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFMerged;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
-import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFContentObject;
+import org.cip4.jdflib.resource.process.JDFDependencies;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
@@ -262,6 +267,11 @@ public class XJDF20 extends BaseElementWalker
 		return rootName.toLowerCase();
 	}
 
+	/**
+	 * @param fileName the filename of the zip file to save to
+	 * @param rootNode the root jdf to save
+	 * @param replace if true, overwrite existing files
+	 */
 	public void saveZip(final String fileName, final JDFNode rootNode, final boolean replace)
 	{
 		final File file = new File(fileName);
@@ -316,7 +326,6 @@ public class XJDF20 extends BaseElementWalker
 		}
 		catch (final IOException x)
 		{
-			// TODO Auto-generated catch block
 			x.printStackTrace();
 		}
 	}
@@ -610,13 +619,12 @@ public class XJDF20 extends BaseElementWalker
 		{
 			final JDFElement je = (JDFElement) jdf;
 			makeRefElements(je);
-			convertRefElements(je);
-			je.inlineRefElements(null, null, false);
 			je.removeAttribute(AttributeName.SPAWNID);
 			return super.walk(jdf, xjdf);
 		}
 
 		/**
+		 * make all inline resources to refelements
 		 * @param je
 		 */
 		private void makeRefElements(final JDFElement je)
@@ -686,41 +694,6 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * @param je
-		 */
-		private void convertRefElements(final JDFElement je)
-		{
-			final VElement v = je.getRefElements();
-			for (int i = 0; i < v.size(); i++)
-			{
-				final JDFRefElement re = (JDFRefElement) v.get(i);
-				if (!mustInline(re))
-				{
-					makeRefAttribute(re);
-				}
-			}
-		}
-
-		/**
-		 * @param re
-		 */
-		private void makeRefAttribute(final JDFRefElement re)
-		{
-			final String attName = getRefName(re);
-			final VElement v = setResource(null, re.getTarget(), newRoot);
-			if (v != null)
-			{
-				final KElement parentElement = re.getParentNode_KElement();
-				for (int i = 0; i < v.size(); i++)
-				{
-					final KElement ref = v.get(i);
-					parentElement.appendAttribute(attName, ref.getAttribute("ID"), null, " ", true);
-				}
-			}
-			re.deleteNode();
-		}
-
-		/**
 		 * @param re
 		 * @return
 		 */
@@ -733,7 +706,7 @@ public class XJDF20 extends BaseElementWalker
 		 * @param re
 		 * @return
 		 */
-		private boolean mustInline(final JDFRefElement re)
+		protected boolean mustInline(final JDFRefElement re)
 		{
 			return mustInline(re.getRefLocalName());
 		}
@@ -744,8 +717,18 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		protected boolean mustInline(final String refLocalName)
 		{
-			return ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.COMCHANNEL.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName)
-					|| ElementName.PERSON.equals(refLocalName) || ElementName.COLORANTALIAS.equals(refLocalName);
+			return ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.BARCODECOMPPARAMS.equals(refLocalName) || ElementName.BARCODEREPROPARAMS.equals(refLocalName)
+					|| ElementName.COMCHANNEL.equals(refLocalName) || ElementName.INTERPRETEDPDLDATA.equals(refLocalName) || ElementName.BYTEMAP.equals(refLocalName)
+					|| ElementName.COMPANY.equals(refLocalName) || ElementName.COSTCENTER.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName) || ElementName.PERSON.equals(refLocalName)
+					|| ElementName.DEVICENSPACE.equals(refLocalName) || ElementName.COLORANTALIAS.equals(refLocalName) || ElementName.GLUELINE.equals(refLocalName)
+					|| ElementName.GLUEAPPLICATION.equals(refLocalName) || ElementName.CIELABMEASURINGFIELD.equals(refLocalName) || ElementName.REGISTERMARK.equals(refLocalName)
+					|| ElementName.FITPOLICY.equals(refLocalName) || ElementName.CUTBLOCK.equals(refLocalName) || ElementName.EMPLOYEE.equals(refLocalName)
+					|| ElementName.ELEMENTCOLORPARAMS.equals(refLocalName) || ElementName.CUT.equals(refLocalName) || ElementName.PDLRESOURCEALIAS.equals(refLocalName)
+					|| ElementName.HOLELIST.equals(refLocalName) || ElementName.HOLE.equals(refLocalName) || ElementName.MISDETAILS.equals(refLocalName) || ElementName.HOLELINE.equals(refLocalName)
+					|| ElementName.JOBFIELD.equals(refLocalName) || ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName)
+					|| ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName) || ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName)
+					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName)
+					|| ElementName.TRANSFERCURVE.equals(refLocalName);
 		}
 
 		/**
@@ -774,7 +757,8 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * @param e
+		 * @param jdf
+		 * @param xjdf
 		 * @return the created resource in this case just remove the pool
 		 */
 		@Override
@@ -817,6 +801,72 @@ public class XJDF20 extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFResourceLink;
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkRefElement extends WalkJDFElement
+	{
+		/**
+		 * 
+		 */
+		public WalkRefElement()
+		{
+			super();
+		}
+
+		/**
+		 * @param jdf
+		 * @param xjdf
+		 * @return the created resource in this case just remove the pool
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFRefElement refElem = (JDFRefElement) jdf;
+			if (mustInline(refElem))
+			{
+				final JDFElement e = refElem.inlineRef();
+				walkTree(e, xjdf);
+				return null;
+			}
+			else
+			{
+				makeRefAttribute(refElem, xjdf);
+				return null;
+			}
+
+		}
+
+		/**
+		 * @param re
+		 */
+		protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
+		{
+			final String attName = getRefName(re);
+			final VElement v = setResource(null, re.getTarget(), newRoot);
+			if (v != null)
+			{
+				for (int i = 0; i < v.size(); i++)
+				{
+					final KElement ref = v.get(i);
+					xjdf.appendAttribute(attName, ref.getAttribute("ID"), null, " ", true);
+				}
+			}
+			re.deleteNode();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFRefElement;
 		}
 	}
 
@@ -1275,6 +1325,7 @@ public class XJDF20 extends BaseElementWalker
 		{
 			final JDFPhaseTime pt = (JDFPhaseTime) jdf;
 			final VElement vL = pt.getLinkVector();
+			final VElement phaseAmount = new VElement();
 			if (vL != null)
 			{
 				for (int i = 0; i < vL.size(); i++)
@@ -1284,13 +1335,22 @@ public class XJDF20 extends BaseElementWalker
 					final KElement pA = xjdf.appendElement("PhaseAmount");
 					for (int j = 0; j < vR.size(); j++)
 					{
-						pA.appendAttribute("rRef", vR.get(i).getAttribute(AttributeName.ID), null, " ", true);
+						pA.appendAttribute("rRef", vR.get(j).getAttribute(AttributeName.ID), null, " ", true);
 						pA.copyElement(rl.getAmountPool(), null);
 						rl.deleteNode();
 					}
+					phaseAmount.add(pA);
 				}
 			}
-			return super.walk(jdf, xjdf); // copy anything but the links (see deleteNoe above...)
+			final KElement x2 = super.walk(jdf, xjdf); // copy anything but the links (see deleteNoe above...)
+			if (x2 != null)
+			{
+				for (int i = 0; i < phaseAmount.size(); i++)
+				{
+					x2.moveElement(phaseAmount.get(i), null);
+				}
+			}
+			return x2;
 		}
 
 		/**
@@ -1318,7 +1378,6 @@ public class XJDF20 extends BaseElementWalker
 		public WalkSpan()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
@@ -1347,6 +1406,88 @@ public class XJDF20 extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFSpanBase;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkSeparationList extends WalkJDFElement
+	{
+		/**
+		 * 
+		 */
+		public WalkSeparationList()
+		{
+			super();
+		}
+
+		/**
+		 * replace separationspec elements with their respective values
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFSeparationList je = (JDFSeparationList) jdf;
+			final String name = jdf.getLocalName();
+			final VString cols = je.getSeparations();
+			xjdf.setAttribute(name, cols, null);
+			return null; // done
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFSeparationList;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkSeparationSpec extends WalkJDFElement
+	{
+		/**
+		 * 
+		 */
+		public WalkSeparationSpec()
+		{
+			super();
+		}
+
+		/**
+		 * replace separationspec elements with their respective values
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFSeparationSpec ss = (JDFSeparationSpec) jdf;
+			xjdf.appendAttribute("SeparationSpec", ss.getName(), null, " ", false);
+			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFSeparationSpec;
 		}
 	}
 
@@ -1435,6 +1576,55 @@ public class XJDF20 extends BaseElementWalker
 		}
 	}
 
+	protected class WalkDependencies extends WalkJDFElement
+	{
+		/**
+		 * 
+		 */
+		public WalkDependencies()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFDependencies;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFDependencies dep = (JDFDependencies) jdf;
+			final VElement v = dep.getChildElementVector(ElementName.LAYOUTELEMENT, null);
+			if (v != null)
+			{
+				for (int i = 0; i < v.size(); i++)
+				{
+					final JDFLayoutElement leDep = (JDFLayoutElement) v.get(i);
+					leDep.makeRootResource(null, null, true);
+					final VElement v2 = setResource(null, leDep, newRoot);
+					if (v2 != null)
+					{
+						for (int j = 0; j < v2.size(); j++)
+						{
+							xjdf.appendAttribute("Dependencies", v2.get(j).getAttribute("ID"), null, " ", true);
+						}
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	/**
 	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -1512,12 +1702,12 @@ public class XJDF20 extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
-	protected class WalkColorPool extends WalkResource
+	protected class WalkColorPoolLink extends WalkResLink
 	{
 		/**
 		 * 
 		 */
-		public WalkColorPool()
+		public WalkColorPoolLink()
 		{
 			super();
 		}
@@ -1530,17 +1720,142 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck instanceof JDFColorPool;
+			return toCheck instanceof JDFResourceLink && "ColorPoolLink".equals(toCheck.getLocalName());
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
+		 * @param xjdf
+		 * @return true if must continue
 		 */
 		@Override
-		protected boolean mustInline(final String refLocalName)
+		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
-			final boolean b = ElementName.COLOR.equals(refLocalName);
-			return b || super.mustInline(refLocalName);
+			final JDFResourceLink rl = (JDFResourceLink) jdf;
+			final JDFResource r = rl.getLinkRoot();
+			if (r != null)
+			{
+				final VElement v = r.getChildElementVector(ElementName.COLOR, null);
+				for (int i = 0; i < v.size(); i++)
+				{
+					v.get(i).renameAttribute("Name", "Separation", null, null);
+				}
+				r.renameElement("Color", null);
+				rl.renameElement("ColorLink", null);
+				r.setAttribute(AttributeName.PARTIDKEYS, "Separation");
+			}
+			return super.walk(jdf, xjdf);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkColorPoolRef extends WalkRefElement
+	{
+		/**
+		 * 
+		 */
+		public WalkColorPoolRef()
+		{
+			super();
+		}
+
+		/**
+		 * @param re
+		 */
+		@Override
+		protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
+		{
+			final String attName = getRefName(re);
+			final VElement v = setResource(null, re.getTarget(), newRoot);
+			// we want a ref to the set rather than the standard ref to the list of elements
+			if (v != null && v.size() > 0)
+			{
+				final KElement ref = v.get(0).getParentNode_KElement();
+				xjdf.setAttribute(attName, ref.getAttribute("ID"));
+			}
+			re.deleteNode();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFRefElement && "ColorPoolRef".equals(toCheck.getLocalName());
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFRefElement rl = (JDFRefElement) jdf;
+			final JDFResource r = rl.getTargetRoot();
+			if (r != null)
+			{
+				final VElement v = r.getChildElementVector(ElementName.COLOR, null);
+				for (int i = 0; i < v.size(); i++)
+				{
+					v.get(i).renameAttribute("Name", "Separation", null, null);
+				}
+				r.renameElement("Color", null);
+				rl.renameElement("ColorRef", null);
+				r.setAttribute(AttributeName.PARTIDKEYS, "Separation");
+			}
+			return super.walk(jdf, xjdf);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkMediaLink extends WalkResLink
+	{
+		/**
+		 * 
+		 */
+		public WalkMediaLink()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFResourceLink && "MediaLink".equals(toCheck.getLocalName());
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			// TODO create component and ref the media
+			final JDFResourceLink rl = (JDFResourceLink) jdf;
+			final JDFResource r = rl.getLinkRoot();
+			if (r != null)
+			{
+				rl.renameElement("ColorLink", null);
+				r.setAttribute(AttributeName.PARTIDKEYS, "Separation");
+			}
+			return super.walk(jdf, xjdf);
 		}
 	}
 
@@ -1551,14 +1866,12 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	protected class WalkColor extends WalkResource
 	{
-
 		/**
 		 * 
 		 */
 		public WalkColor()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
@@ -1586,6 +1899,46 @@ public class XJDF20 extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFColor;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkMediaRefByType extends WalkResource
+	{
+		/**
+		 * 
+		 */
+		public WalkMediaRefByType()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			// TODO mediaref -> plateref etc.
+			return super.walk(jdf, xjdf);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFInterpretingParams) || (toCheck instanceof JDFLayout) || (toCheck instanceof JDFStrippingParams); // TODO|| (toCheck
+			// instanceof
+			// JDFRasterReadingParams);
 		}
 	}
 

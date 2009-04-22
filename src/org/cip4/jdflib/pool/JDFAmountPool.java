@@ -265,10 +265,54 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		}
 
 		/**
+		 * get the minimum value of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e.
+		 * mPart is a submap of the searche PartAmount elements
+		 * @param poolParent
+		 * @param attName the Attribute name , e.g Amount, ActualAmount
+		 * @param mPart
+		 * @return double - the element
+		 * @throws JDFException if the element can not be cast to double
+		 */
+		public static double getAmountPoolMinDouble(final IAmountPoolContainer poolParent, final String attName, final JDFAttributeMap mPart)
+		{
+			double d = 0.;
+
+			int n = 0;
+			boolean bFound = false;
+			final JDFAmountPool ap = poolParent.getAmountPool();
+			while (true)
+			{
+				final String w = getAmountPoolAttribute(poolParent, attName, null, mPart, n);
+				if (isWildCard(w))
+				{
+					if (ap == null || ap.getPartAmount(mPart, n) == null)
+					{
+						return bFound ? d : -1;
+					}
+
+					n++;
+					continue;
+				}
+
+				final double dd = StringUtil.parseDouble(w, -1.234567);
+				if (dd == -1.234567)
+				{
+					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName + " has an invalid value");
+				}
+
+				if (!bFound || dd < d)
+				{
+					d = dd;
+					bFound = true;
+				}
+				n++;
+			}
+		}
+
+		/**
 		 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a
 		 * submap of the searche PartAmount elements
-		 * 
-		 * 
+		 * @param poolParent
 		 * @param attName the Attribute name , e.g Amount, ActualAmount
 		 * @param mPart
 		 * @return double - the element
@@ -334,7 +378,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		// //////////////////////////////////////////////////////////////////////
 
 		/**
-		 * gets the sum of all matching tags, with the assumpzion that no condition defaults to good
+		 * gets the sum of all matching tags, with the assumption that no condition defaults to good
 		 * 
 		 * @param poolParent
 		 * @param attName
@@ -862,7 +906,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		{
 			return null;
 		}
-		
+
 		final VElement vPA = new VElement();
 		for (int i = 0; i < size; i++)
 		{
@@ -882,7 +926,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				}
 			}
 		}
-		
+
 		return vPA.size() == 0 ? null : vPA;
 	}
 	// /////////////////////////////////////////////////////////////////////

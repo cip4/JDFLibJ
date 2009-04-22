@@ -124,7 +124,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	protected int misICSLevel;
 	protected int jmfICSLevel;
 	protected Map<String, VString> catMap = new HashMap<String, VString>();
-	private String category = null;
+	protected String category = null;
 	/**
 	 * seconds ago that this started
 	 */
@@ -174,7 +174,6 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		duration = parent.duration;
 		category = parent.category;
 		fillCatMaps();
-
 	}
 
 	/**

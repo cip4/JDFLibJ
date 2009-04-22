@@ -159,6 +159,7 @@ public abstract class JDFConstants
 	public static final String VERSION_1_7 = "1.7";
 	public static final String VERSION_1_8 = "1.8";
 	public static final String VERSION_1_9 = "1.9";
+	public static final String VERSION_2_0 = "2.0";
 
 	// status stuff
 	public static final String UNKNOWN = "Unknown";

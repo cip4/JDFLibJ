@@ -75,39 +75,27 @@ import org.cip4.jdflib.node.JDFNode;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 {
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
+	IDPGoldenTicket idpGoldenTicket;
 
 	/**
 	 * 
 	 */
 	public void testIDPSimple()
 	{
-
-		IDPGoldenTicket idpGoldenTicket = new IDPGoldenTicket(1);
-
-		idpGoldenTicket.assign(null);
-		JDFNode node = idpGoldenTicket.getNode();
-		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
-		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
-		assertTrue(node.getICSVersions(false).contains("IDP_L1-1.3"));
-
-		idpGoldenTicket.good = 1000;
-		idpGoldenTicket.waste = 90;
 		write3GTFiles(idpGoldenTicket, "IDP_Simple");
-
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /
 	/*
 	 * (non-Javadoc)
@@ -117,8 +105,20 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	@Override
 	protected void setUp() throws Exception
 	{
+		BaseGoldenTicket.misURL = "http://192.168.14.143:8010/FJC/Fiery";
 		super.setUp();
 		JDFAudit.setStaticAgentName("JDF IDP golden ticket generator");
+		idpGoldenTicket = new IDPGoldenTicket(1);
+
+		idpGoldenTicket.assign(null);
+		final JDFNode node = idpGoldenTicket.getNode();
+		assertTrue(node.getICSVersions(false).contains("Base_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("JMF_L2-1.3"));
+		assertTrue(node.getICSVersions(false).contains("MIS_L1-1.3"));
+		assertTrue(node.getICSVersions(false).contains("IDP_L1-1.3"));
+
+		idpGoldenTicket.good = 10;
+		idpGoldenTicket.waste = 0;
 	}
 
 }

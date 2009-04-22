@@ -1098,7 +1098,19 @@ public class JDFMerge
 			throw new JDFException("JDFResource.mergeSpawnIDs  merging incompatible resources ID = " + mainRes.getID() + " IDMerge = " + resToMerge.getID());
 		}
 
-		final VElement allLeaves = mainRes.getLeaves(true);
+		final VElement allLeaves = new VElement();
+		final VElement spawnedLeaves = mainRes.getNodesWithSpawnID(spawnID);
+
+		// Only manipulate leaves and subleaves that were explicitly spawned
+		if (spawnedLeaves != null)
+		{
+			for (int i = 0; i < spawnedLeaves.size(); i++)
+			{
+				allLeaves.addAll(((JDFResource) spawnedLeaves.get(i)).getLeaves(true));
+			}
+			allLeaves.unify();
+		}
+
 		final VString partIDKeys = mainRes.getPartIDKeys();
 		for (int i = 0; i < allLeaves.size(); i++)
 		{

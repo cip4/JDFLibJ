@@ -1120,10 +1120,8 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default makeRootResource(null, null, true)
 	 */
-	public JDFResource makeRootResource(final String alias, final JDFElement parentPool, final boolean bLinkHere)
+	public JDFResource makeRootResource(String alias, final JDFElement parentPool, final boolean bLinkHere)
 	{
-		String aliasLocal = alias;
-
 		JDFResource retRes = this;
 
 		// if this is already in the resource pool do nothing
@@ -1136,12 +1134,12 @@ public class JDFResource extends JDFElement
 				// create a RefElement at the same (in front of) position as
 				// this
 				link = (JDFElement) getParentNode_KElement().insertBefore(getNodeName() + JDFConstants.REF, this, null);
-				if (isWildCard(aliasLocal))
+				if (isWildCard(alias))
 				{
-					aliasLocal = getIDPrefix() + uniqueID(0);
+					alias = getIDPrefix() + uniqueID(0);
 				}
 
-				link.appendHRef(this, null, aliasLocal);
+				link.appendHRef(this, null, alias);
 			}
 
 			// use the local pool if no other is specified

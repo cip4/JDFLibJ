@@ -15,6 +15,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
@@ -63,6 +64,15 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
+	 * @param xjdf
+	 * @return true if the element can be converted
+	 */
+	public boolean canConvert(final KElement xjdf)
+	{
+		return xjdf == null ? false : XJDF20.rootName.equals(xjdf.getLocalName());
+	}
+
+	/**
 	 * find and optionally create the appropriate node
 	 * @param xjdf
 	 * @return the node
@@ -108,7 +118,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		/**
 		 * @param factory
 		 */
-		@SuppressWarnings("synthetic-access")
 		public WalkXElement()
 		{
 			super(getFactory());
@@ -315,13 +324,13 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				return false;
 			}
-			
+
 			parent = parent.getParentNode_KElement();
 			if (parent == null)
 			{
 				return false;
 			}
-			
+
 			final boolean bL1 = parent.getLocalName().endsWith("Set");
 			return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals(parent.getAttribute("Name"));
 		}
@@ -352,6 +361,46 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return super.matches(toCheck) && (toCheck instanceof JDFAuditPool);
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkXJDFColorResource extends WalkXJDFResource
+	{
+		/**
+		 * @param e
+		 * @param trackElem
+		 * @return
+		 */
+		@Override
+		protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
+		{
+			final JDFResource r = (JDFResource) trackElem;
+			final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
+			final JDFResourceLink rll = theNode.getLink(r, null);
+			rll.removeChildren(ElementName.PART, null, null);
+			return rPart;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final KElement parent = toCheck.getParentNode_KElement();
+			if (parent == null)
+			{
+				return false;
+			}
+
+			final boolean bL1 = parent.getLocalName().endsWith("Set");
+			return bL1 && super.matches(toCheck) && ElementName.COLOR.equals(parent.getAttribute(AttributeName.NAME));
 		}
 
 	}
@@ -423,7 +472,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 * @param trackElem
 		 * @return
 		 */
-		private JDFResource createPartition(@SuppressWarnings("unused") final KElement e, final KElement trackElem, final JDFPart part)
+		protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
 		{
 			final JDFResource r = (JDFResource) trackElem;
 			final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
@@ -448,11 +497,9 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				return false;
 			}
-			
+
 			final boolean bL1 = parent.getLocalName().endsWith("Set");
 			return bL1 && super.matches(toCheck) && parent.hasAttribute(AttributeName.NAME);
 		}
-
 	}
-
 }

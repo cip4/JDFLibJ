@@ -1675,6 +1675,11 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	// //////////////////////////////////////////////////////////////////////////
 	// ////
 
+	/**
+	 * @param attName
+	 * @param vPart
+	 * @return
+	 */
 	public double getAmountPoolSumDouble(final String attName, final VJDFAttributeMap vPart)
 	{
 		return AmountPoolHelper.getAmountPoolSumDouble(this, attName, vPart);
@@ -1695,7 +1700,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 
 	/**
 	 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a
-	 * submap of the searche PartAmount elements
+	 * submap of the searched PartAmount elements
 	 * 
 	 * 
 	 * @param attName the Attribute name , e.g Amount, ActualAmount
@@ -1705,7 +1710,28 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 */
 	public double getAmountPoolDouble(final String attName, final JDFAttributeMap mPart)
 	{
-		return AmountPoolHelper.getAmountPoolDouble(this, attName, mPart);
+		final JDFResource r = getTarget();
+		double d = 0;
+		if (r == null || EnumPartUsage.Implicit.equals(r.getPartUsage()))
+		{
+			d = AmountPoolHelper.getAmountPoolDouble(this, attName, mPart);
+		}
+		else
+		{
+
+			final VElement v = r.getLeaves(false);
+			for (int i = 0; i < v.size(); i++)
+			{
+				final JDFResource rp = (JDFResource) v.get(i);
+				final JDFAttributeMap m = rp.getPartMap();
+				if (m == null || m.overlapMap(mPart))
+				{
+					d += AmountPoolHelper.getAmountPoolMinDouble(this, attName, m);
+				}
+			}
+
+		}
+		return d;
 	}
 
 	/**

@@ -82,8 +82,7 @@ import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
 import org.cip4.jdflib.resource.process.JDFRunList;
 
 /**
- * @author Rainer Prosi
- * class that generates golden tickets based on ICS levels etc
+ * @author Rainer Prosi class that generates golden tickets based on ICS levels etc
  */
 public class IDPGoldenTicket extends MISGoldenTicket
 {
@@ -93,10 +92,10 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	 * @param previous
 	 * @param _vparts
 	 */
-	public IDPGoldenTicket(IDPGoldenTicket previous, VJDFAttributeMap _vparts)
+	public IDPGoldenTicket(final IDPGoldenTicket previous, final VJDFAttributeMap _vparts)
 	{
 		super(previous.misICSLevel, previous.theVersion, previous.jmfICSLevel);
-
+		grayBox = false;
 		partIDKeys = new VString(previous.partIDKeys);
 		vParts = _vparts == null ? new VJDFAttributeMap(previous.vParts) : _vparts;
 		icsLevel = previous.icsLevel;
@@ -120,42 +119,39 @@ public class IDPGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
-	 * @param icsLevel the level to init to (1,2 or 3)
-	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 * @param misLevel level of MIS ICS to support
-	 * @param isGrayBox if true, write a grayBox
+	 * @param parent
 	 */
-	public IDPGoldenTicket(MISGoldenTicket parent)
+	public IDPGoldenTicket(final MISGoldenTicket parent)
 	{
 		super(parent);
+		grayBox = false;
+
 	}
 
 	/**
 	 * create a BaseGoldenTicket
-	 * @param icsLevel the level to init to (1,2 or 3)
-	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 * @param misLevel level of MIS ICS to support
-	 * @param isGrayBox if true, write a grayBox
+	 * @param _icsLevel the level to init to (1,2 or 3)
 	 */
-	public IDPGoldenTicket(int _icsLevel)
+	public IDPGoldenTicket(final int _icsLevel)
 	{
 		super(1, null, 2);
+		grayBox = false;
+
 		icsLevel = _icsLevel;
 	}
 
 	/**
 	 * initializes this node to a given ICS version
-	 * @param icsLevel the level to init to (1,2 or 3)
 	 */
 	@Override
 	public void init()
 	{
-		String icsTag = "IDP_L" + icsLevel + "-" + theVersion.getName();
+		final String icsTag = "IDP_L" + icsLevel + "-" + theVersion.getName();
 		theNode.appendAttribute(AttributeName.ICSVERSIONS, icsTag, null, " ", true);
 		if (!theNode.hasAttribute(AttributeName.DESCRIPTIVENAME))
+		{
 			theNode.setDescriptiveName("IDP Golden Ticket Example Job - version: " + JDFAudit.software());
+		}
 		super.init();
 		setActivePart(vParts, true);
 		initDocumentRunList();
@@ -192,11 +188,10 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * simulate execution of this node
-	 * the internal node will be modified to reflect the excution
+	 * simulate execution of this node the internal node will be modified to reflect the execution
 	 */
 	@Override
-	public void execute(VJDFAttributeMap parts, boolean outputAvailable, boolean bFirst)
+	public void execute(final VJDFAttributeMap parts, final boolean outputAvailable, final boolean bFirst)
 	{
 		VJDFAttributeMap partsLocal = parts;
 
@@ -205,13 +200,15 @@ public class IDPGoldenTicket extends MISGoldenTicket
 		super.execute(partsLocal, outputAvailable, bFirst);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#initDocumentRunList()
 	 */
 	@Override
 	protected JDFRunList initDocumentRunList()
 	{
-		JDFRunList rl = super.initDocumentRunList();
+		final JDFRunList rl = super.initDocumentRunList();
 		theNode.getLink(rl, EnumUsage.Input).setProcessUsage((EnumProcessUsage) null);
 
 		return rl;

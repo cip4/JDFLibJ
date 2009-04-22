@@ -11,10 +11,10 @@
 package org.cip4.jdflib.resource.process.prepress;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoTrappingOrder;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.w3c.dom.DOMException;
 
-public class JDFTrappingOrder extends JDFAutoTrappingOrder
+public class JDFTrappingOrder extends JDFSeparationList
 {
 	private static final long serialVersionUID = 1L;
 
@@ -25,8 +25,7 @@ public class JDFTrappingOrder extends JDFAutoTrappingOrder
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTrappingOrder(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFTrappingOrder(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +38,7 @@ public class JDFTrappingOrder extends JDFAutoTrappingOrder
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTrappingOrder(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFTrappingOrder(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +52,7 @@ public class JDFTrappingOrder extends JDFAutoTrappingOrder
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFTrappingOrder(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFTrappingOrder(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}

@@ -13,14 +13,20 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.resource.process.JDFLayoutElement;
+import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -85,7 +91,7 @@ public class XJDFTest extends JDFTestCaseBase
 		nP.linkResource(c, EnumUsage.Output, null);
 
 		e = new XJDF20().makeNewJDF(nP, null);
-		assertNotNull(e.getXPathElement("ProductList/Product/IntentSet{@Name=\"LayoutIntent\"]"));
+		assertNotNull(e.getXPathElement("ProductList/Product/IntentSet[@Name=\"LayoutIntent\"]"));
 	}
 
 	/**
@@ -110,6 +116,82 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
+	public void testColorPool() throws Exception
+	{
+
+		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		cp.appendColorWithName("Black", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
+		cp.appendColorWithName("Yellow", null).setCMYK(new JDFCMYKColor(0, 0, 1, 0));
+		e = new XJDF20().makeNewJDF(n, null);
+		assertNotNull(e.getXPathElement("ParameterSet[@Name=\"Color\"]/Parameter/Part[@Separation=\"Black\"]"));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testColorPoolRef() throws Exception
+	{
+		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, null);
+		cp.appendColorWithName("Black", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
+		cp.appendColorWithName("Yellow", null).setCMYK(new JDFCMYKColor(0, 0, 1, 0));
+		n.getResource("ExposedMedia", null, 0).refElement(cp);
+		e = new XJDF20().makeNewJDF(n, null);
+		assertNotNull(e.getXPathElement("ParameterSet[@Name=\"Color\"]/Parameter/Part[@Separation=\"Black\"]"));
+		assertEquals(e.getXPathElement("ParameterSet[@Name=\"Color\"]").numChildElements("Parameter", null), 2);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testRefElement() throws Exception
+	{
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		n.getResource("ExposedMedia", null, 0).refElement(m);
+		final JDFCustomerInfo ci = n.getCustomerInfo();
+		final JDFResource r = ci.appendCompany().makeRootResource(null, null, true);
+
+		e = new XJDF20().makeNewJDF(n, null);
+		assertNotNull(e.getXPathElement("ResourceSet[@Name=\"Media\"]"));
+		assertEquals(e.getXPathAttribute("ResourceSet[@Name=\"Media\"]/Resource/@ID", null), e.getXPathAttribute("ResourceSet[@Name=\"ExposedMedia\"]/Resource/ExposedMedia/@MediaRef", null));
+
+		assertNull(e.getXPathElement("ParameterSet[@Name=\"Company\"]"));
+		assertNotNull(e.getXPathElement("ParameterSet[@Name=\"CustomerInfo\"]/Parameter/CustomerInfo/Company"));
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testSeparationList() throws Exception
+	{
+		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		cp.appendColorWithName("Black", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
+		cp.appendColorWithName("Yellow", null).setCMYK(new JDFCMYKColor(0, 0, 1, 0));
+		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.appendColorantOrder().setSeparations(new VString("Cyan a b CC", null));
+		e = new XJDF20().makeNewJDF(n, null);
+		assertEquals("Cyan a b CC", e.getXPathAttribute("ParameterSet[@Name=\"ColorantControl\"]/Parameter/ColorantControl/@ColorantOrder", null));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testColorspaceSubstitute() throws Exception
+	{
+		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		cp.appendColorWithName("Black", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
+		cp.appendColorWithName("Yellow", null).setCMYK(new JDFCMYKColor(0, 0, 1, 0));
+		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		final JDFColorSpaceSubstitute css = cc.appendColorSpaceSubstitute();
+		css.appendSeparationSpec().setName("Spot1");
+		css.appendPDLResourceAlias();
+		e = new XJDF20().makeNewJDF(n, null);
+		assertEquals("Spot1", e.getXPathAttribute("ParameterSet[@Name=\"ColorantControl\"]/Parameter/ColorantControl/ColorSpaceSubstitute/@SeparationSpec", null));
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testContainer() throws Exception
 	{
 
@@ -117,6 +199,21 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFFileSpec fsc = fs1.appendContainer().appendFileSpec();
 		e = new XJDF20().makeNewJDF(n, null);
 		assertNotNull(e.getXPathAttribute("ParameterSet[@Usage=\"Input\"]/Parameter/FileSpec/@ContainerRef", null));
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testDependencies() throws Exception
+	{
+
+		final JDFLayoutElement le = (JDFLayoutElement) n.addResource(ElementName.LAYOUTELEMENT, EnumUsage.Input);
+		final JDFLayoutElement fsc = le.appendDependencies().appendLayoutElement();
+		fsc.setDescriptiveName("dep");
+		le.getDependencies().appendLayoutElement();
+		e = new XJDF20().makeNewJDF(n, null);
+		assertNotNull(e.getXPathAttribute("ParameterSet[@Usage=\"Input\"]/Parameter/LayoutElement/@Dependencies", null));
 
 	}
 

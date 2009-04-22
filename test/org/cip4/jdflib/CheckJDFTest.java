@@ -92,7 +92,9 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFPreview;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.validate.ICheckValidator;
 import org.cip4.jdflib.validate.ICheckValidatorFactory;
@@ -110,8 +112,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 		System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
 		// TODO There is a bug in MyArgs that prevents command line arguments
 		// containing hyphens from being parsed correctly
-		final String[] args =
-		{ jdfFile.getAbsolutePath(), "-q", "-c" };
+		final String[] args = { jdfFile.getAbsolutePath(), "-q", "-c" };
 
 		final CheckJDF checker = new CheckJDF();
 		checker.validate(args, null);
@@ -279,8 +280,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 		System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
 		// TODO There is a bug in MyArgs that prevents command line arguments
 		// containing hyphens from being parsed correctly
-		final String[] args =
-		{ jdfFile.getAbsolutePath(), "-q", "-c" };
+		final String[] args = { jdfFile.getAbsolutePath(), "-q", "-c" };
 
 		final CheckJDF checker = new CheckJDF();
 		checker.validate(args, ins);
@@ -335,8 +335,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 		System.out.println("Checking JDF: " + jdfFile.getAbsolutePath());
 		// TODO There is a bug in MyArgs that prevents command line arguments
 		// containing hyphens from being parsed correctly
-		final String[] args =
-		{ jdfFile.getAbsolutePath(), "-q", "-c" };
+		final String[] args = { jdfFile.getAbsolutePath(), "-q", "-c" };
 		CheckJDF.main(args);
 
 	}
@@ -350,8 +349,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 		// Run test once
 		final String report1 = sm_dirTestDataTemp + "checkjdf_report_1.xml";
-		final String[] args1 =
-		{ jdfFile.getAbsolutePath(), "-q", "-c", "-x", report1 };
+		final String[] args1 = { jdfFile.getAbsolutePath(), "-q", "-c", "-x", report1 };
 		CheckJDF.main(args1);
 		assertTrue(new File(report1).exists());
 		// TODO Run test twice and compare XML files
@@ -373,8 +371,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 		// reportFile.deleteOnExit();
 
 		// Run JDFValidator
-		final String[] args =
-		{ jmfFile.getAbsolutePath(), "-cq", "-x " + reportFile.getAbsolutePath() };
+		final String[] args = { jmfFile.getAbsolutePath(), "-cq", "-x " + reportFile.getAbsolutePath() };
 		final CheckJDF checker = new CheckJDF();
 		final XMLDoc d = checker.validate(args, null);
 		final KElement dRoot = d.getRoot();
@@ -387,7 +384,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	public void testValidateExtensionschema()
+	public void testValidateSchemaPreview()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFValidator checkJDF = new JDFValidator();
@@ -399,32 +396,20 @@ public class CheckJDFTest extends JDFTestCaseBase
 		final File jdfxsd = new File(sm_dirTestSchema + "JDF.xsd");
 		checkJDF.setJDFSchemaLocation(jdfxsd);
 		final JDFNode n = doc.getJDFRoot();
-		n.setType(EnumType.ConventionalPrinting);
-		final JDFMedia med = (JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+		n.setType(EnumType.PreviewGeneration);
+		final JDFPreview prev = (JDFPreview) n.addResource("Preview", null, EnumUsage.Output, null, null, null, null);
+		prev.addPartition(EnumPartIDKey.SheetName, "S1");
+		prev.addPartition(EnumPartIDKey.SheetName, "S2").setAttribute("URL", "File://url2");
+		prev.setURL("File://foo.bar");
 		checkJDF.setIgnorePrivate(false);
-		doc.write2File(sm_dirTestDataTemp + "extension.jdf", 0, true);
-		XMLDoc out = checkJDF.processSingleFile(sm_dirTestDataTemp + "extension.jdf");
+		final JDFRunList rl = (JDFRunList) n.addResource("RunList", null, EnumUsage.Input, null, null, null, null);
+		final JDFPreview pv2 = rl.appendPreview();
+
+		final JDFPreview pv3 = rl.appendPreview();
+		pv3.makeRootResource(null, null, true);
+		doc.write2File(sm_dirTestDataTemp + "previewSchema.jdf", 0, true);
+		final XMLDoc out = checkJDF.processSingleFile(sm_dirTestDataTemp + "previewSchema.jdf");
 		assertEquals(out.getRoot().getXPathAttribute("TestFile/SchemaValidationOutput/@ValidationResult", null), "Valid");
-
-		checkJDF.schemaLocation += " http://www.extension.com " + sm_dirTestData + "extension.xsd";
-		med.setAttribute("ext:ExtensionAtt", "a", "http://www.extension.com");
-		final KElement fooBar = med.appendElement("ext:FooBar", "http://www.extension.com");
-		fooBar.setAttribute("ID", "f1");
-		fooBar.setAttribute("Fnarf", "4");
-
-		doc.write2File(sm_dirTestDataTemp + "extension.jdf", 0, true);
-		out = checkJDF.processSingleFile(sm_dirTestDataTemp + "extension.jdf");
-		assertEquals(out.getRoot().getXPathAttribute("TestFile[2]/SchemaValidationOutput/@ValidationResult", null), "Error");
-
-		med.setAttribute("ext:ExtensionAtt", "3", "http://www.extension.com");
-		doc.write2File(sm_dirTestDataTemp + "extension.jdf", 0, true);
-		out = checkJDF.processSingleFile(sm_dirTestDataTemp + "extension.jdf");
-		assertEquals(out.getRoot().getXPathAttribute("TestFile[3]/SchemaValidationOutput/@ValidationResult", null), "Valid");
-
-		fooBar.setAttribute("Fnarf", "bad");
-		doc.write2File(sm_dirTestDataTemp + "extension.jdf", 0, true);
-		out = checkJDF.processSingleFile(sm_dirTestDataTemp + "extension.jdf");
-		assertEquals(out.getRoot().getXPathAttribute("TestFile[4]/SchemaValidationOutput/@ValidationResult", null), "Error");
 
 	}
 

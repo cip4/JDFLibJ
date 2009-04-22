@@ -1516,6 +1516,10 @@ public class XMLDoc
 	 */
 	public HttpURLConnection write2HTTPURL(final URL url, final String strContentType, final HTTPDetails det)
 	{
+		if (url == null)
+		{
+			return null;
+		}
 		for (int i = 0; i < 2; i++) //
 		{
 			try

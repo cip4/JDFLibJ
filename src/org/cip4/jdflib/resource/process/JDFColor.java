@@ -154,7 +154,7 @@ public class JDFColor extends JDFAutoColor
 	 */
 	public String getHTMLColor()
 	{
-		JDFRGBColor rgb = new JDFRGBColor();
+		JDFRGBColor rgb = new JDFRGBColor(1, 1, 1); // default is white
 		if (hasAttribute(AttributeName.SRGB))
 		{
 			rgb = getsRGB();
@@ -162,6 +162,17 @@ public class JDFColor extends JDFAutoColor
 		else if (hasAttribute(AttributeName.CMYK))
 		{
 			final JDFCMYKColor cmyk = getCMYK();
+			rgb = cmyk.getRGB();
+		}
+		else
+		{
+			final JDFCMYKColor cmyk = new JDFCMYKColor();
+			String name2 = getName();
+			if (StringUtil.getNonEmpty(name2) == null)
+			{
+				name2 = getSeparation();
+			}
+			cmyk.setNamedColor(name2);
 			rgb = cmyk.getRGB();
 		}
 		return rgb.getHTMLColor();

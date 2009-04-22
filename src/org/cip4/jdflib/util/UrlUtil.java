@@ -125,7 +125,7 @@ public class UrlUtil
 		 * size of http chunks to be written, if <=0 no chunks
 		 */
 		public int chunkSize = defaultChunkSize;
-		public static int defaultChunkSize = 10000;
+		public static int defaultChunkSize = -1; // don't chunk by default
 
 		/**
 		 * apply these details to the connection specified
@@ -733,7 +733,7 @@ public class UrlUtil
 	// ///////////////////////////////////////////////////////////////
 
 	/**
-	 * test whether a given url is a relative or absolute file path
+	 * test whether a given url is an http url (excluding https - @see isHttps)
 	 * 
 	 * @param url the url to test
 	 * @return
@@ -748,6 +748,27 @@ public class UrlUtil
 		return lowerURL.startsWith("http://");
 	}
 
+	/**
+	 * test whether a given url is an https url
+	 * 
+	 * @param url the url to test
+	 * @return
+	 */
+	public static boolean isHttps(final String url)
+	{
+		if (url == null)
+		{
+			return false;
+		}
+		final String lowerURL = url.toLowerCase();
+		return lowerURL.startsWith("https://");
+	}
+
+	/**
+	 * test whether a given url is a unc path
+	 * @param pathName
+	 * @return
+	 */
 	public static boolean isUNC(final String pathName)
 	{
 		if (pathName == null || pathName.length() == 0)

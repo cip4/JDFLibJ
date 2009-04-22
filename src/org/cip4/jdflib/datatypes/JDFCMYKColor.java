@@ -280,4 +280,32 @@ public class JDFCMYKColor extends JDFNumList
 		rgb.setB(colors * (1.0 - getY()));
 		return rgb;
 	}
+
+	/**
+	 * set the cmyk value of this to a matching value
+	 * @param name
+	 */
+	public void setNamedColor(final String name)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			m_numList.set(i, new Double(0.0));
+		}
+		if ("Black".equalsIgnoreCase(name))
+		{
+			setK(1.0);
+		}
+		if ("Cyan".equalsIgnoreCase(name))
+		{
+			setC(1.0);
+		}
+		if ("Magenta".equalsIgnoreCase(name))
+		{
+			setM(1.0);
+		}
+		if ("Yellow".equalsIgnoreCase(name))
+		{
+			setY(1.0);
+		}
+	}
 }
