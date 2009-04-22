@@ -732,7 +732,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 			rlComp.setActualAmount(20, m1);
 
 			comp.updateAmounts(0);
-			assertEquals("Anything but Condition=Good is ifnored", c1.getAmountProduced(), 42., 0.1);
+			assertEquals("Anything but Condition=Good is ignored", c1.getAmountProduced(), 42., 0.1);
 		}
 	}
 

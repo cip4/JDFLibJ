@@ -1726,8 +1726,13 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				final JDFAttributeMap m = rp.getPartMap();
 				if (m == null || m.overlapMap(mPart))
 				{
-					d += AmountPoolHelper.getAmountPoolMinDouble(this, attName, m);
+					final JDFAttributeMap m2 = m == null ? mPart : m.getOrMap(mPart);
+					d = Math.max(d, AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2));
 				}
+			}
+			if (d == 0)
+			{
+				d = AmountPoolHelper.getAmountPoolDouble(this, attName, mPart);
 			}
 
 		}

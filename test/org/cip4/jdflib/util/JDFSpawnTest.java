@@ -1055,6 +1055,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testSpawnPartAmount()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1087,10 +1090,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFResourceLink rlmerge = (JDFResourceLink) nSpawn.getChildByTagName("ComponentLink", null, 0, null, false, false);
 		assertTrue(rlmerge.hasAttribute("foo:bar"));
 		assertEquals(rlmerge.getActualAmount(mapgf), 22., 0.);
-		assertEquals("the actualamount was spawned ro", rlmerge.getActualAmount(mapGood), 44. + 22., 0.);
+		assertEquals("the actualamount was spawned ro", rlmerge.getActualAmount(mapGood), 22., 0.);
 		final JDFComponent comp = (JDFComponent) rlmerge.getTarget().getPartition(mapSheet, null);
-		assertEquals(comp.getAmount(), 66.0, 0.0);
-		assertEquals(comp.getAmountProduced(), 66.0, 0.0);
+		assertEquals(comp.getAmount(), 22.0, 0.0);
+		assertEquals(comp.getAmountProduced(), 22.0, 0.0);
 
 	}
 
@@ -1311,9 +1314,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 					xm = (JDFExposedMedia) xm.getPartition(map, null);
 					if (i < 2)
 					{
-						assertTrue("merged act amount ok", xmRL.getActualAmount(map) == 42);
-						assertTrue("merged res amount ok", xm.getAmount() == 42);
-						assertTrue("merged res amountproduced ok", xm.getAmountProduced() == 42);
+						assertEquals("merged act amount ok", xmRL.getActualAmount(map), 42, 0);
+						assertEquals("merged res amount ok", xm.getAmount(), 42, 0);
+						assertEquals("merged res amountproduced ok", xm.getAmountProduced(), 42, 0);
 					}
 
 					// test whether anything modified and tracked in a resource

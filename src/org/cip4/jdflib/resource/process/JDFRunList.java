@@ -113,8 +113,7 @@ public class JDFRunList extends JDFAutoRunList
 	static
 	{
 		// need to add the default partition key doccopies -
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.DOCCOPIES, 0x33333333,
-				AttributeInfo.EnumAttributeType.integer, null, "1");
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.DOCCOPIES, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
 	}
 
 	@Override
@@ -130,8 +129,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFRunList(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -144,8 +142,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFRunList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -159,8 +156,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFRunList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -181,14 +177,13 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String
-	 *            fileName
+	 * @param String fileName
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addRun(String fileName)
+	public JDFRunList addRun(final String fileName)
 	{
 		return addRun(fileName, 0, -1);
 	}
@@ -196,15 +191,14 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String
-	 *            fileName
+	 * @param String fileName
 	 * @param int first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addRun(String fileName, int first)
+	public JDFRunList addRun(final String fileName, final int first)
 	{
 		return addRun(fileName, first, -1);
 	}
@@ -212,24 +206,21 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String
-	 *            fileName
+	 * @param String fileName
 	 * @param int first
 	 * @param int last
 	 * 
 	 * @return JDFRunList
 	 */
-	public JDFRunList addRun(String fileName, int first, int last)
+	public JDFRunList addRun(final String fileName, final int first, final int last)
 	{
-		String runID = "Run" + uniqueID(0);
-		JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run,
-				runID); // JDFRun to RunList
+		final String runID = "Run" + uniqueID(0);
+		final JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run, runID); // JDFRun to RunList
 
-		JDFIntegerRangeList irl = new JDFIntegerRangeList();
+		final JDFIntegerRangeList irl = new JDFIntegerRangeList();
 		irl.append(first, last);
 		r.setPages(irl);
-		JDFLayoutElement loe = (JDFLayoutElement) r.appendElement(
-				ElementName.LAYOUTELEMENT, JDFConstants.EMPTYSTRING);
+		final JDFLayoutElement loe = (JDFLayoutElement) r.appendElement(ElementName.LAYOUTELEMENT, JDFConstants.EMPTYSTRING);
 		loe.setMimeURL(fileName);
 		fixNPage();
 		return r;
@@ -238,14 +229,13 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addPDF
 	 * 
-	 * @param String
-	 *            fileName
+	 * @param String fileName
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addPDF(String fileName)
+	public JDFRunList addPDF(final String fileName)
 	{
 		return addPDF(fileName, 0, -1);
 	}
@@ -253,15 +243,14 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addPDF
 	 * 
-	 * @param String
-	 *            fileName
+	 * @param String fileName
 	 * @param int first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addPDF(String fileName, int first)
+	public JDFRunList addPDF(final String fileName, final int first)
 	{
 		return addPDF(fileName, first, -1);
 	}
@@ -269,19 +258,16 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addPDF add a pdf file to this RunList
 	 * 
-	 * @param fileName
-	 *            the URL (!) of the file
-	 * @param first
-	 *            0 based first page in the file
-	 * @param last
-	 *            0 based last page in the file
+	 * @param fileName the URL (!) of the file
+	 * @param first 0 based first page in the file
+	 * @param last 0 based last page in the file
 	 * 
 	 * @return JDFRunList
 	 */
-	public JDFRunList addPDF(String fileName, int first, int last)
+	public JDFRunList addPDF(final String fileName, final int first, final int last)
 	{
-		JDFRunList r = addRun(fileName, first, last);
-		JDFFileSpec fs = r.getLayoutElement().getFileSpec();
+		final JDFRunList r = addRun(fileName, first, last);
+		final JDFFileSpec fs = r.getLayoutElement().getFileSpec();
 		fs.setMimeType(JDFConstants.MIME_PDF);
 		return r;
 	}
@@ -289,16 +275,14 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param Vector fileSpec
+	 * @param Vector sepNames
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(Vector fileNames, Vector sepNames)
+	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames)
 	{
 		return addSepRun(fileNames, sepNames, 0, 1, true);
 	}
@@ -306,17 +290,15 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param Vector fileSpec
+	 * @param Vector sepNames
 	 * @param int first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(Vector fileNames, Vector sepNames, int first)
+	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first)
 	{
 		return addSepRun(fileNames, sepNames, first, 1, true);
 	}
@@ -324,10 +306,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param Vector fileSpec
+	 * @param Vector sepNames
 	 * @param int first
 	 * @param int n
 	 * @deprecated
@@ -335,8 +315,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(Vector fileNames, Vector sepNames, int first,
-			int n)
+	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first, final int n)
 	{
 		return addSepRun(fileNames, sepNames, first, n, true);
 	}
@@ -344,10 +323,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param Vector fileSpec
+	 * @param Vector sepNames
 	 * @param int first
 	 * @param boolean pageMajor
 	 * @deprecated
@@ -355,8 +332,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(Vector fileNames, Vector sepNames, int first,
-			boolean pageMajor)
+	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first, final boolean pageMajor)
 	{
 		return addSepRun(fileNames, sepNames, first, 1, pageMajor);
 	}
@@ -364,18 +340,15 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param Vector fileSpec
+	 * @param Vector sepNames
 	 * @param boolean pageMajor
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(Vector fileNames, Vector sepNames,
-			boolean pageMajor)
+	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final boolean pageMajor)
 	{
 		return addSepRun(fileNames, sepNames, 0, 1, pageMajor);
 	}
@@ -383,49 +356,40 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * add a run separation
 	 * 
-	 * @param fileNames
-	 *            vector of file names for the URL attribute of the FileSpec in
-	 *            the LayoutElement
-	 * @param sepNames
-	 *            parallel vector of separation names.
-	 * @param first
-	 *            index of the first page in the file - Sets the RunList
-	 *            FirstPage attribute
-	 * @param n
-	 *            the number of logical pages in this run
-	 * @param pageMajor
-	 *            if true, separations are ordered as page Major, i.e CMYKCMYK<br>
-	 *            if false, ordering is CCMMYYKK
+	 * @param fileNames vector of file names for the URL attribute of the FileSpec in the LayoutElement
+	 * @param sepNames parallel vector of separation names.
+	 * @param first index of the first page in the file - Sets the RunList FirstPage attribute
+	 * @param n the number of logical pages in this run
+	 * @param pageMajor if true, separations are ordered as page Major, i.e CMYKCMYK<br>
+	 * if false, ordering is CCMMYYKK
 	 * 
 	 * @return JDFRunList
 	 */
-	public JDFRunList addSepRun(Vector fileNames, Vector sepNames, int first,
-			int n, boolean pageMajor)
+	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first, final int n, final boolean pageMajor)
 	{
-		JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run,
-				"Run" + uniqueID(0));
-		int siz = fileNames.size();
+		final JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run, "Run" + uniqueID(0));
+		final int siz = fileNames.size();
 		r.setNPage(n);
 		r.setIsPage(true);
 
 		for (int i = 0; i < sepNames.size(); i++)
 		{
-			JDFRunList rs = (JDFRunList) r.addPartition(
-					JDFResource.EnumPartIDKey.Separation, sepNames.elementAt(i)
-							.toString());
-			JDFLayoutElement lo = rs.appendLayoutElement();
+			final JDFRunList rs = (JDFRunList) r.addPartition(JDFResource.EnumPartIDKey.Separation, sepNames.elementAt(i).toString());
+			final JDFLayoutElement lo = rs.appendLayoutElement();
 			lo.setMimeURL(((String) fileNames.elementAt(Math.min(i, siz - 1))));
 			rs.setIsPage(false);
 			if (fileNames.size() == sepNames.size())
 			{
 				rs.setFirstPage(first);
-			} else
+			}
+			else
 			{
 				if (pageMajor)
 				{
 					rs.setSkipPage(sepNames.size() - 1);
 					rs.setFirstPage(i + first);
-				} else
+				}
+				else
 				{
 					rs.setFirstPage(i * n + first);
 				}
@@ -437,16 +401,14 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param VElement
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param VElement fileSpec
+	 * @param Vector sepNames
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(VElement fileSpec, Vector sepNames)
+	public JDFRunList addSepRun(final VElement fileSpec, final Vector sepNames)
 	{
 		return addSepRun(fileSpec, sepNames, 0, 1, true);
 	}
@@ -454,17 +416,15 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param VElement
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param VElement fileSpec
+	 * @param Vector sepNames
 	 * @param int first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(VElement fileSpec, Vector sepNames, int first)
+	public JDFRunList addSepRun(final VElement fileSpec, final Vector sepNames, final int first)
 	{
 		return addSepRun(fileSpec, sepNames, first, 1, true);
 	}
@@ -472,10 +432,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param VElement
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param VElement fileSpec
+	 * @param Vector sepNames
 	 * @param int first
 	 * @param int n
 	 * @deprecated
@@ -483,8 +441,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(VElement fileSpec, Vector sepNames, int first,
-			int n)
+	public JDFRunList addSepRun(final VElement fileSpec, final Vector sepNames, final int first, final int n)
 	{
 		return addSepRun(fileSpec, sepNames, first, n, true);
 	}
@@ -492,10 +449,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param VElement
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param VElement fileSpec
+	 * @param Vector sepNames
 	 * @param int first
 	 * @param boolean pageMajor
 	 * @deprecated
@@ -503,8 +458,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(VElement fileSpec, Vector sepNames, int first,
-			boolean pageMajor)
+	public JDFRunList addSepRun(final VElement fileSpec, final Vector sepNames, final int first, final boolean pageMajor)
 	{
 		return addSepRun(fileSpec, sepNames, first, 1, pageMajor);
 	}
@@ -512,18 +466,15 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param VElement
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param VElement fileSpec
+	 * @param Vector sepNames
 	 * @param boolean pageMajor
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(VElement fileSpec, Vector sepNames,
-			boolean pageMajor)
+	public JDFRunList addSepRun(final VElement fileSpec, final Vector sepNames, final boolean pageMajor)
 	{
 		return addSepRun(fileSpec, sepNames, 0, 1, pageMajor);
 	}
@@ -531,10 +482,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param VElement
-	 *            fileSpec
-	 * @param Vector
-	 *            sepNames
+	 * @param VElement fileSpec
+	 * @param Vector sepNames
 	 * @param int first
 	 * @param int n
 	 * @param boolean pageMajor
@@ -543,42 +492,36 @@ public class JDFRunList extends JDFAutoRunList
 	 * @deprecated 060503 use the version with VString VString
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(VElement fileSpec, Vector sepNames, int first,
-			int n, boolean pageMajor)
+	public JDFRunList addSepRun(final VElement fileSpec, final Vector sepNames, final int first, final int n, final boolean pageMajor)
 	{
-		JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run,
-				"Run" + uniqueID(0)); // Test TBD
-		int siz = fileSpec.size();
+		final JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run, "Run" + uniqueID(0)); // Test TBD
+		final int siz = fileSpec.size();
 		r.setNPage(n);
 
 		for (int i = 0; i < sepNames.size(); i++)
 		{
-			JDFRunList rs = (JDFRunList) r.addPartition(
-					JDFResource.EnumPartIDKey.Separation, sepNames.elementAt(i)
-							.toString());
+			final JDFRunList rs = (JDFRunList) r.addPartition(JDFResource.EnumPartIDKey.Separation, sepNames.elementAt(i).toString());
 			// HIER LIEGT DAS PROBLEM
 			// JDFRunList rs = new JDFRunList(r.AddPart("Seperation",
 			// sepNames.elementAt(i).toString()) );
 			// rs.setAttribute("Separation",(String)sepNames.elementAt(i));
-			JDFResource rfspec = (JDFResource) fileSpec.elementAt(Math.min(i,
-					siz - 1));
+			final JDFResource rfspec = (JDFResource) fileSpec.elementAt(Math.min(i, siz - 1));
 			rs.refElement(rfspec);
 
 			if (fileSpec.size() == sepNames.size())
 			{
 				rs.setAttribute("FirstPage", first, JDFConstants.EMPTYSTRING);
-			} else
+			}
+			else
 			{
 				if (pageMajor)
 				{
-					rs.setAttribute("SkipPage", sepNames.size() - 1,
-							JDFConstants.EMPTYSTRING);
-					rs.setAttribute("FirstPage", i + first,
-							JDFConstants.EMPTYSTRING);
-				} else
+					rs.setAttribute("SkipPage", sepNames.size() - 1, JDFConstants.EMPTYSTRING);
+					rs.setAttribute("FirstPage", i + first, JDFConstants.EMPTYSTRING);
+				}
+				else
 				{
-					rs.setAttribute("FirstPage", i * n + first,
-							JDFConstants.EMPTYSTRING);
+					rs.setAttribute("FirstPage", i * n + first, JDFConstants.EMPTYSTRING);
 				}
 			}
 		}
@@ -589,51 +532,43 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA,
-				false), 0, 1, true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), 0, 1, true);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param int first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames, int first)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final int first)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA,
-				false), first, 1, true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), first, 1, true);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param int first
 	 * @param int n
 	 * @deprecated
@@ -641,22 +576,18 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			int first, int n)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final int first, final int n)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA,
-				false), first, n, true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), first, n, true);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param int first
 	 * @param boolean pageMajor
 	 * @deprecated
@@ -664,197 +595,159 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			int first, boolean pageMajor)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final int first, final boolean pageMajor)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA,
-				false), first, 1, pageMajor);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), first, 1, pageMajor);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param boolean pageMajor
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			boolean pageMajor)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final boolean pageMajor)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA,
-				false), 0, 1, pageMajor);
+		return addSepRun(v, StringUtil.tokenize(sepNames, JDFConstants.COMMA, false), 0, 1, pageMajor);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
-	 * @param String
-	 *            sep
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			String sep)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final String sep)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), 0, 1,
-				true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), 0, 1, true);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param int first
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			int first, String sep)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final int first, final String sep)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), first,
-				1, true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), first, 1, true);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param int first
 	 * @param int n
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			int first, int n, String sep)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final int first, final int n, final String sep)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), first,
-				n, true);
+		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), first, n, true);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param int first
 	 * @param boolean pageMajor
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			int first, boolean pageMajor, String sep)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final int first, final boolean pageMajor, final String sep)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), first,
-				1, pageMajor);
+		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), first, 1, pageMajor);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param boolean pageMajor
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			boolean pageMajor, String sep)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final boolean pageMajor, final String sep)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), 0, 1,
-				pageMajor);
+		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), 0, 1, pageMajor);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param JDFResource
-	 *            fileSpec
-	 * @param String
-	 *            sepNames
+	 * @param JDFResource fileSpec
+	 * @param String sepNames
 	 * @param int first
 	 * @param int n
 	 * @param boolean pageMajor
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(JDFResource fileSpec, String sepNames,
-			int first, int n, boolean pageMajor, String sep)
+	public JDFRunList addSepRun(final JDFResource fileSpec, final String sepNames, final int first, final int n, final boolean pageMajor, final String sep)
 	{
-		VElement v = new VElement();
+		final VElement v = new VElement();
 		v.add(fileSpec);
-		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), first,
-				n, pageMajor);
+		return addSepRun(v, StringUtil.tokenize(sepNames, sep, false), first, n, pageMajor);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames)
 	{
 		return addSepRun(fileNames, sepNames, 0, 1, true, JDFConstants.COMMA);
 	}
@@ -862,29 +755,24 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param int first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames, int first)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first)
 	{
-		return addSepRun(fileNames, sepNames, first, 1, true,
-				JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, first, 1, true, JDFConstants.COMMA);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param int first
 	 * @param int n
 	 * @deprecated
@@ -892,20 +780,16 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames, int first,
-			int n)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first, final int n)
 	{
-		return addSepRun(fileNames, sepNames, first, n, true,
-				JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, first, n, true, JDFConstants.COMMA);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param int first
 	 * @param boolean pageMajor
 	 * @deprecated
@@ -913,48 +797,39 @@ public class JDFRunList extends JDFAutoRunList
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames, int first,
-			boolean pageMajor)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first, final boolean pageMajor)
 	{
-		return addSepRun(fileNames, sepNames, first, 1, pageMajor,
-				JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, first, 1, pageMajor, JDFConstants.COMMA);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param boolean pageMajor
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames,
-			boolean pageMajor)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final boolean pageMajor)
 	{
-		return addSepRun(fileNames, sepNames, 0, 1, pageMajor,
-				JDFConstants.COMMA);
+		return addSepRun(fileNames, sepNames, 0, 1, pageMajor, JDFConstants.COMMA);
 	}
 
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
-	 * @param String
-	 *            sep
+	 * @param String fileNames
+	 * @param String sepNames
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames, String sep)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final String sep)
 	{
 		return addSepRun(fileNames, sepNames, 0, 1, true, sep);
 	}
@@ -962,20 +837,16 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param int first
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames, int first,
-			String sep)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first, final String sep)
 	{
 		return addSepRun(fileNames, sepNames, first, 1, true, sep);
 	}
@@ -983,21 +854,17 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param int first
 	 * @param int n
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames, int first,
-			int n, String sep)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first, final int n, final String sep)
 	{
 		return addSepRun(fileNames, sepNames, first, n, true, sep);
 	}
@@ -1005,21 +872,17 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param int first
 	 * @param boolean pageMajor
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames, int first,
-			boolean pageMajor, String sep)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first, final boolean pageMajor, final String sep)
 	{
 		return addSepRun(fileNames, sepNames, first, 1, pageMajor, sep);
 	}
@@ -1027,20 +890,16 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param boolean pageMajor
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames,
-			boolean pageMajor, String sep)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final boolean pageMajor, final String sep)
 	{
 		return addSepRun(fileNames, sepNames, 0, 1, pageMajor, sep);
 	}
@@ -1048,44 +907,37 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param String
-	 *            fileNames
-	 * @param String
-	 *            sepNames
+	 * @param String fileNames
+	 * @param String sepNames
 	 * @param int first
 	 * @param int n
 	 * @param boolean pageMajor
-	 * @param String
-	 *            sep
+	 * @param String sep
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
 	@Deprecated
-	public JDFRunList addSepRun(String fileNames, String sepNames, int first,
-			int n, boolean pageMajor, String sep)
+	public JDFRunList addSepRun(final String fileNames, final String sepNames, final int first, final int n, final boolean pageMajor, final String sep)
 	{
-		return addSepRun(StringUtil.tokenize(fileNames, sep, false), StringUtil
-				.tokenize(sepNames, sep, false), first, n, pageMajor);
+		return addSepRun(StringUtil.tokenize(fileNames, sep, false), StringUtil.tokenize(sepNames, sep, false), first, n, pageMajor);
 	}
 
 	/**
 	 * set RunList/LayoutElement/FileSpec/@URL
 	 * 
-	 * @param url
-	 *            the url to set
+	 * @param url the url to set
 	 * @return true if ok
 	 */
-	public boolean setFileURL(String url)
+	public boolean setFileURL(final String url)
 	{
-		JDFFileSpec fspec = getCreateLayoutElement().getCreateFileSpec();
+		final JDFFileSpec fspec = getCreateLayoutElement().getCreateFileSpec();
 		fspec.setMimeURL(url);
 		return true;
 	}
 
 	/**
-	 * get RunList/LayoutElement/FileSpec/@URL also evaluate RunList/@directory
-	 * and concatinate Directory + URL in case URL is a relative URL
+	 * get RunList/LayoutElement/FileSpec/@URL also evaluate RunList/@directory and concatinate Directory + URL in case URL is a relative URL
 	 * 
 	 * @Directory is ignored if URL contains a scheme or is an absolute URL
 	 * 
@@ -1095,7 +947,9 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		final JDFFileSpec fspec = getFileSpec();
 		if (fspec == null)
+		{
 			return null;
+		}
 
 		return UrlUtil.getURLWithDirectory(getDirectory(), fspec.getURL());
 	}
@@ -1103,15 +957,16 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * (36) set attribute Pages
 	 * 
-	 * @param value
-	 *            : the value to set the attribute to
+	 * @param value : the value to set the attribute to
 	 */
 	@Override
-	public void setPages(JDFIntegerRangeList value)
+	public void setPages(final JDFIntegerRangeList value)
 	{
 		super.setPages(value);
 		if (value == null)
+		{
 			return;
+		}
 		if (value.getElementCount() > 0)
 		{
 			setNPage(value.getElementCount());
@@ -1125,9 +980,11 @@ public class JDFRunList extends JDFAutoRunList
 	 */
 	public String getFileMimeType()
 	{
-		JDFFileSpec fspec = getFileSpec();
+		final JDFFileSpec fspec = getFileSpec();
 		if (fspec == null)
+		{
 			return null;
+		}
 		return fspec.getMimeType();
 	}
 
@@ -1154,14 +1011,14 @@ public class JDFRunList extends JDFAutoRunList
 	 */
 	public HashMap getCommonURLFileSpecMap()
 	{
-		VElement vE = getLeaves(false);
-		HashMap fileMap = new HashMap();
+		final VElement vE = getLeaves(false);
+		final HashMap fileMap = new HashMap();
 
 		// loop over all leaves of the runlist
 		for (int i = 0; i < vE.size(); i++)
 		{
-			JDFRunList rl = (JDFRunList) vE.elementAt(i);
-			String url = rl.getFileURL();
+			final JDFRunList rl = (JDFRunList) vE.elementAt(i);
+			final String url = rl.getFileURL();
 			// do we have a preexisting leaf that shares the same filespec URL
 
 			// add a new key
@@ -1171,7 +1028,8 @@ public class JDFRunList extends JDFAutoRunList
 				vPart = new VJDFAttributeMap();
 				vPart.addElement(rl.getPartMap());
 				fileMap.put(url, vPart);
-			} else
+			}
+			else
 			{
 				// append this leaf to a preexisting key
 				vPart = (VJDFAttributeMap) fileMap.get(url);
@@ -1183,8 +1041,7 @@ public class JDFRunList extends JDFAutoRunList
 	}
 
 	/**
-	 * get a list of all partition keys that this resource may be implicitly
-	 * partitioned by e.g. RunIndex for RunList...
+	 * get a list of all partition keys that this resource may be implicitly partitioned by e.g. RunIndex for RunList...
 	 * 
 	 * @return vector of EnumPartIDKey
 	 */
@@ -1194,7 +1051,9 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		Vector<ValuedEnum> v = super.getImplicitPartitions();
 		if (v == null)
+		{
 			v = new Vector<ValuedEnum>();
+		}
 		v.add(EnumPartIDKey.RunIndex);
 		v.add(EnumPartIDKey.DocIndex);
 		v.add(EnumPartIDKey.DocRunIndex);
@@ -1211,8 +1070,7 @@ public class JDFRunList extends JDFAutoRunList
 
 	// //////////////////////////////////////////////////////
 	/**
-	 * class that abstracts a RunList Partition so that you can efficiently
-	 * access the File using RunIndex as a marker
+	 * class that abstracts a RunList Partition so that you can efficiently access the File using RunIndex as a marker
 	 */
 	public class JDFRunData
 	{
@@ -1224,10 +1082,9 @@ public class JDFRunList extends JDFAutoRunList
 		/**
 		 * copy constructor
 		 * 
-		 * @param other
-		 *            the JDFRunIndex object to clone
+		 * @param other the JDFRunIndex object to clone
 		 */
-		public JDFRunData(JDFRunData other)
+		public JDFRunData(final JDFRunData other)
 		{
 			runList = other.runList;
 			runIndex = other.runIndex;
@@ -1256,14 +1113,17 @@ public class JDFRunList extends JDFAutoRunList
 		{
 			int page = -1;
 
-			int delta = runIndex - firstIndex;
+			final int delta = runIndex - firstIndex;
 			if (runList.hasAttribute(AttributeName.PAGES))
 			{
-				int pages[] = runList.getPages().getIntegerList().getIntArray();
+				final int pages[] = runList.getPages().getIntegerList().getIntArray();
 				if (delta >= pages.length)
+				{
 					throw new JDFException("getPageInFile: Pages is kaputt");
+				}
 				page = pages[delta];
-			} else
+			}
+			else
 			{
 				page = runList.getFirstPage() + delta;
 			}
@@ -1295,8 +1155,7 @@ public class JDFRunList extends JDFAutoRunList
 		}
 
 		/**
-		 * @param firstIndex
-		 *            the firstIndex to set
+		 * @param firstIndex the firstIndex to set
 		 */
 		public int getFirstIndex()
 		{
@@ -1319,33 +1178,41 @@ public class JDFRunList extends JDFAutoRunList
 	 * 
 	 * @return the first RunIndex that this RunList partition specifies
 	 */
-	protected int getFirstIndex(JDFRunData last)
+	protected int getFirstIndex(final JDFRunData last)
 	{
 		if (hasAttribute(AttributeName.LOGICALPAGE))
+		{
 			return getLogicalPage();
+		}
 
 		if (!getIsPage())
 		{
-			KElement e = getParentNode_KElement();
+			final KElement e = getParentNode_KElement();
 			if (e instanceof JDFRunList)
 			{
 				return ((JDFRunList) e).getFirstIndex(last);
 			}
 		}
-		JDFRunList rl = (JDFRunList) getElement_KElement(ElementName.RUNLIST,
-				null, 0);
+		final JDFRunList rl = (JDFRunList) getElement_KElement(ElementName.RUNLIST, null, 0);
 		if (rl != null && rl.getIsPage())
+		{
 			return rl.getFirstIndex(last);
+		}
 
-		JDFRunList previousRL = (JDFRunList) getPreviousSiblingElement(
-				ElementName.RUNLIST, null);
+		final JDFRunList previousRL = (JDFRunList) getPreviousSiblingElement(ElementName.RUNLIST, null);
 		if (previousRL == null)
+		{
 			return 0;
+		}
 		int offset = 0;
 		if (last != null && previousRL == last.runList)
+		{
 			offset = last.lastIndex;
+		}
 		else
+		{
 			offset = previousRL.getLastIndex(last);
+		}
 		return offset + 1;
 	}
 
@@ -1356,7 +1223,7 @@ public class JDFRunList extends JDFAutoRunList
 	 */
 	public VElement getPageLeaves()
 	{
-		VElement v = getLeaves(false);
+		final VElement v = getLeaves(false);
 		for (int i = 0; i < v.size(); i++)
 		{
 			JDFRunList rl = (JDFRunList) v.elementAt(i);
@@ -1367,7 +1234,9 @@ public class JDFRunList extends JDFAutoRunList
 				rl = (JDFRunList) rl.getParentNode_KElement();
 			}
 			if (bRep)
+			{
 				v.set(i, rl);
+			}
 		}
 		v.unify();
 		return v;
@@ -1388,35 +1257,40 @@ public class JDFRunList extends JDFAutoRunList
 	 * 
 	 * @return the last RunIndex that this RunList partition specifies
 	 */
-	protected int getLastIndex(JDFRunData last)
+	protected int getLastIndex(final JDFRunData last)
 	{
 		if (!getIsPage())
 		{
-			KElement e = getParentNode_KElement();
+			final KElement e = getParentNode_KElement();
 			if (e instanceof JDFRunList)
 			{
 				return ((JDFRunList) e).getLastIndex(last);
 			}
 		}
-		JDFRunList rl = (JDFRunList) getElement_KElement(ElementName.RUNLIST,
-				null, -1);
+		final JDFRunList rl = (JDFRunList) getElement_KElement(ElementName.RUNLIST, null, -1);
 		if (rl != null && rl.getIsPage())
+		{
 			return rl.getLastIndex(last);
+		}
 
 		int offset = -1;
 		if (hasAttribute(AttributeName.LOGICALPAGE))
 		{
 			offset = getLogicalPage() - 1;
-		} else
+		}
+		else
 		{
-			JDFRunList previousRL = (JDFRunList) getPreviousSiblingElement(
-					ElementName.RUNLIST, null);
+			final JDFRunList previousRL = (JDFRunList) getPreviousSiblingElement(ElementName.RUNLIST, null);
 			if (previousRL != null)
 			{
 				if (last != null && last.runList == previousRL)
+				{
 					offset = last.lastIndex;
+				}
 				else
+				{
 					offset = previousRL.getLastIndex(last);
+				}
 			}
 		}
 		return offset + getNPage();
@@ -1433,51 +1307,53 @@ public class JDFRunList extends JDFAutoRunList
 		int n = 0;
 
 		if (!getIsPage())
+		{
 			return 0;
+		}
 
 		if (hasAttribute(AttributeName.NPAGE))
+		{
 			return super.getNPage();
+		}
 		if (hasAttribute(AttributeName.PAGES))
 		{
-			JDFIntegerRangeList pages = getPages();
+			final JDFIntegerRangeList pages = getPages();
 			return pages.getElementCount();
 		}
 
-		VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
+		final VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
 		if (v != null)
 		{
-			int siz = v.size();
+			final int siz = v.size();
 			for (int i = 0; i < siz; i++)
 			{
 				final int page = ((JDFRunList) v.elementAt(i)).getNPage();
 				if (page < 0)
+				{
 					return -1;
-				
+				}
+
 				n += page;
 			}
 		}
-		
+
 		return n; // TODO what is the default
 	}
 
 	/**
 	 * get the Partition that corresponds to a given runIndex
 	 * 
-	 * @param index
-	 *            the runIndex to search for
-	 * @return JDFRunList the partition that contains this index. use @see
-	 *         getPageInFile to find the correct page
+	 * @param index the runIndex to search for
+	 * @return JDFRunList the partition that contains this index. use @see getPageInFile to find the correct page
 	 * 
-	 *         warning blindly calling this from inside a loop may cause
-	 *         performance issues - use the getPageIterator if you need
-	 *         performance optimized access
+	 * warning blindly calling this from inside a loop may cause performance issues - use the getPageIterator if you need performance optimized access
 	 */
-	public JDFRunList getIndexPartition(int index)
+	public JDFRunList getIndexPartition(final int index)
 	{
-		VElement leaves = getPageLeaves();
+		final VElement leaves = getPageLeaves();
 		for (int i = 0; i < leaves.size(); i++)
 		{
-			JDFRunList rl = (JDFRunList) leaves.elementAt(i);
+			final JDFRunList rl = (JDFRunList) leaves.elementAt(i);
 			if (rl.getFirstIndex() <= index && rl.getLastIndex() >= index)
 			{
 				return rl;
@@ -1492,15 +1368,19 @@ public class JDFRunList extends JDFAutoRunList
 	 * 
 	 * @return the page number in the file; -1 if ot of range
 	 */
-	public int getPageInFile(int runIndex)
+	public int getPageInFile(final int runIndex)
 	{
-		JDFRunData ri = new JDFRunData();
+		final JDFRunData ri = new JDFRunData();
 		ri.firstIndex = getFirstIndex();
 		if (runIndex < ri.firstIndex)
+		{
 			return -1;
+		}
 		ri.lastIndex = getLastIndex();
 		if (runIndex > ri.lastIndex)
+		{
 			return -1;
+		}
 		ri.runIndex = runIndex;
 		ri.runList = this;
 		return ri.getPageInFile();
@@ -1522,21 +1402,21 @@ public class JDFRunList extends JDFAutoRunList
 		/**
 		 * @param list
 		 */
-		public PageIterator(JDFRunList list)
+		public PageIterator(final JDFRunList list)
 		{
 			lastIndex = 0;
 			rl = (JDFRunList) list.getResourceRoot();
 			index = list.getFirstIndex();
 			maxIndex = list.getLastIndex();
-			VElement leaves = rl.getPageLeaves();
+			final VElement leaves = rl.getPageLeaves();
 			vRunIndex = new JDFRunData[leaves.size()];
 			JDFRunData last = null;
 			for (int i = 0; i < leaves.size(); i++)
 			{
-				JDFRunList _rl = (JDFRunList) leaves.elementAt(i);
+				final JDFRunList _rl = (JDFRunList) leaves.elementAt(i);
 				final int firstIndex = _rl.getFirstIndex(last);
 				final int _lastIndex = firstIndex + _rl.getNPage() - 1;
-				JDFRunData ri = new JDFRunData();
+				final JDFRunData ri = new JDFRunData();
 				ri.runList = _rl;
 				ri.firstIndex = firstIndex;
 				ri.lastIndex = _lastIndex;
@@ -1557,17 +1437,16 @@ public class JDFRunList extends JDFAutoRunList
 
 		/**
 		 * 
-		 * @see java.util.Iterator#next() returns a JDFRunIndex object that
-		 *      refers to the RunList entry and the index within it
+		 * @see java.util.Iterator#next() returns a JDFRunIndex object that refers to the RunList entry and the index within it
 		 */
 		public Object next()
 		{
 			for (int i = lastIndex; i < vRunIndex.length; i++)
 			{
-				JDFRunData ri = vRunIndex[i];
+				final JDFRunData ri = vRunIndex[i];
 				if (ri.firstIndex <= index && ri.lastIndex >= index)
 				{
-					JDFRunData ri2 = new JDFRunData(ri);
+					final JDFRunData ri2 = new JDFRunData(ri);
 					ri2.runIndex = index;
 					index++;
 					lastIndex = i;
@@ -1578,8 +1457,7 @@ public class JDFRunList extends JDFAutoRunList
 		}
 
 		/**
-		 * (non-Javadoc) don't even dream of removing individual pages in this
-		 * iterator
+		 * (non-Javadoc) don't even dream of removing individual pages in this iterator
 		 */
 		public void remove()
 		{
@@ -1590,49 +1468,50 @@ public class JDFRunList extends JDFAutoRunList
 	// /// End of iterator class /////
 
 	@Override
-	public void collapse(boolean bCollapseToNode)
+	public void collapse(final boolean bCollapseToNode)
 	{
 		super.collapse(bCollapseToNode);
 		fixNPage();
 	}
 
 	@Override
-	public void expand(boolean bCollapseToNode)
+	public void expand(final boolean bCollapseToNode)
 	{
 		fixNPage();
 		super.expand(bCollapseToNode);
 	}
 
 	/**
-	 * write NPage into all leaves with IsPage=true and write the appropriate
-	 * value into the lower level nodes
+	 * write NPage into all leaves with IsPage=true and write the appropriate value into the lower level nodes
 	 * 
 	 * @return int the number of pages in this partition
 	 */
 	public void fixNPage()
 	{
 		int siz = 0;
-		
-		VElement v = getPageLeaves();
+
+		final VElement v = getPageLeaves();
 		if (v != null)
 		{
 			siz = v.size();
 			for (int i = 0; i < siz; i++)
 			{
-				JDFRunList rl = (JDFRunList) v.elementAt(i);
+				final JDFRunList rl = (JDFRunList) v.elementAt(i);
 				final int page = rl.getNPage();
 				if (page > 0)
+				{
 					rl.setNPage(page);
+				}
 			}
 		}
 
-		VElement v2 = getLeaves(true);
+		final VElement v2 = getLeaves(true);
 		if (v2 != null)
 		{
 			siz = v2.size();
 			for (int i = siz - 1; i >= 0; i--)
 			{
-				JDFRunList rl = (JDFRunList) v2.elementAt(i);
+				final JDFRunList rl = (JDFRunList) v2.elementAt(i);
 				if (v != null && v.contains(rl))
 				{
 					v2.remove(rl); // it's a leaf
@@ -1643,16 +1522,18 @@ public class JDFRunList extends JDFAutoRunList
 				}
 			}
 		}
-		
+
 		if (v2 != null)
 		{
 			siz = v2.size();
 			for (int i = siz - 1; i >= 0; i--)
 			{
-				JDFRunList rl = (JDFRunList) v2.elementAt(i);
+				final JDFRunList rl = (JDFRunList) v2.elementAt(i);
 				final int page = rl.getNPage();
 				if (page > 0)
+				{
 					rl.setNPage(page);
+				}
 			}
 		}
 	}
@@ -1668,12 +1549,15 @@ public class JDFRunList extends JDFAutoRunList
 		while (true)
 		{
 			if (rl.getIsPage())
+			{
 				return rl;
-			KElement parent = rl.getParentNode_KElement();
+			}
+			final KElement parent = rl.getParentNode_KElement();
 			if (parent instanceof JDFRunList)
 			{
 				rl = (JDFRunList) parent;
-			} else
+			}
+			else
 			{
 				return null;
 			}
@@ -1688,20 +1572,24 @@ public class JDFRunList extends JDFAutoRunList
 	public boolean isPageLeaf()
 	{
 		if (!getIsPage())
+		{
 			return false;
-		
-		VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
+		}
+
+		final VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
 		if (v != null)
 		{
-			int siz = v.size();
+			final int siz = v.size();
 			for (int i = 0; i < siz; i++)
 			{
-				JDFRunList rl = (JDFRunList) v.elementAt(i);
+				final JDFRunList rl = (JDFRunList) v.elementAt(i);
 				if (rl.getIsPage())
+				{
 					return false;
+				}
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -1710,5 +1598,20 @@ public class JDFRunList extends JDFAutoRunList
 	{
 		// TODO Auto-generated method stub
 		return super.clone();
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoRunList#getPages()
+	 */
+	@Override
+	public JDFIntegerRangeList getPages()
+	{
+		final JDFIntegerRangeList irl = super.getPages();
+		final int nPage = super.getNPage();
+		if (nPage > 0)
+		{
+			irl.setDef(nPage);
+		}
+		return irl;
 	}
 }

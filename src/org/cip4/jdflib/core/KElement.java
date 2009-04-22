@@ -4351,13 +4351,20 @@ public class KElement extends ElementNSImpl
 		{
 			String nodeName = o1.getNodeName();
 			String nodeName2 = o2.getNodeName();
-			final int i = nodeName.compareTo(nodeName2);
+			int i = nodeName.compareTo(nodeName2);
 			if (i != 0)
 			{
 				return i;
 			}
 			nodeName += o1.getAttribute(AttributeName.ID);
 			nodeName2 += o2.getAttribute(AttributeName.ID);
+			i = nodeName.compareTo(nodeName2);
+			if (i != 0)
+			{
+				return i;
+			}
+			nodeName += o1.getAttributeMap();
+			nodeName += o2.getAttributeMap();
 			return nodeName.compareTo(nodeName2);
 		}
 	}

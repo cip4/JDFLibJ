@@ -266,7 +266,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * get the minimum value of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e.
-		 * mPart is a submap of the searche PartAmount elements
+		 * mPart is a submap of the searched PartAmount elements
 		 * @param poolParent
 		 * @param attName the Attribute name , e.g Amount, ActualAmount
 		 * @param mPart
@@ -311,7 +311,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 		/**
 		 * get the sum of all matching AmountPool/PartAmount/@attName as a double PartAmounts match if all attributes match those in PartAmount, i.e. mPart is a
-		 * submap of the searche PartAmount elements
+		 * submap of the searched PartAmount elements
 		 * @param poolParent
 		 * @param attName the Attribute name , e.g Amount, ActualAmount
 		 * @param mPart

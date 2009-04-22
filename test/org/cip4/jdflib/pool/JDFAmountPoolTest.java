@@ -88,8 +88,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 /**
  * @author RP
  * 
- *         This implements the first fixture with unit tests for class
- *         JDFAmountPool.
+ * This implements the first fixture with unit tests for class JDFAmountPool.
  */
 public class JDFAmountPoolTest extends JDFTestCaseBase
 {
@@ -115,27 +114,27 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 */
 	public void testReducePartAmounts()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
-		JDFComponent comp = (JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
-		JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1");
-		JDFResourceLink rl = n.getLink(comp, null);
+		final JDFComponent comp = (JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1");
+		final JDFResourceLink rl = n.getLink(comp, null);
 		for (int i = 0; i < 5; i++)
 		{
 			map.put(EnumPartIDKey.SheetName, "Sheet" + i);
 			comp.getCreatePartition(map, new VString("SignatureName SheetName", " "));
 			rl.setAmount(500 + i, map);
-			JDFAttributeMap map2 = new JDFAttributeMap(map);
+			final JDFAttributeMap map2 = new JDFAttributeMap(map);
 			map2.put("Condition", "Good");
 			rl.setActualAmount(500 + i, map2);
 			map2.put("Condition", "Waste");
 			rl.setActualAmount(50 + i, map2);
 		}
-		VJDFAttributeMap v = new VJDFAttributeMap();
-		JDFAttributeMap testMap = new JDFAttributeMap(EnumPartIDKey.Condition, "Good");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		final JDFAttributeMap testMap = new JDFAttributeMap(EnumPartIDKey.Condition, "Good");
 		v.add(testMap);
-		JDFAmountPool aplocal = rl.getAmountPool();
+		final JDFAmountPool aplocal = rl.getAmountPool();
 		assertEquals("15 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 15);
 		aplocal.reducePartAmounts(v);
 		assertEquals("5 pa entries", aplocal.numChildElements(ElementName.PARTAMOUNT, null), 5);
@@ -151,18 +150,18 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 */
 	public void testVirtualAmounts()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
-		JDFComponent comp = (JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
-		JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1");
-		JDFResourceLink rl = n.getLink(comp, null);
+		final JDFComponent comp = (JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1");
+		final JDFResourceLink rl = n.getLink(comp, null);
 		for (int i = 0; i < 5; i++)
 		{
 			map.put(EnumPartIDKey.SheetName, "Sheet" + i);
 			comp.getCreatePartition(map, new VString("SignatureName SheetName", " "));
 			rl.setAmount(500 + i, map);
-			JDFAttributeMap map2 = new JDFAttributeMap(map);
+			final JDFAttributeMap map2 = new JDFAttributeMap(map);
 			map2.put("Condition", "Good");
 			rl.setActualAmount(500 + i, map2);
 			map2.put("Condition", "Waste");
@@ -184,10 +183,10 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 */
 	public void testGetMatchingPartAmountVector()
 	{
-		JDFDoc d = JDFTestCaseBase.creatXMDoc();
-		JDFNode n = d.getJDFRoot();
-		JDFResourceLink xmLink = n.getLink(0, ElementName.EXPOSEDMEDIA, null, null);
-		JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFResourceLink xmLink = n.getLink(0, ElementName.EXPOSEDMEDIA, null, null);
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SheetName", "S1");
 		mPart.put("Side", "Front");
 		mPart.put("Separation", "Black");
@@ -196,7 +195,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		mPart.put("Condition", "Waste");
 		xmLink.setAmount(1, mPart);
 
-		JDFAmountPool aplocal = xmLink.getAmountPool();
+		final JDFAmountPool aplocal = xmLink.getAmountPool();
 		assertNotNull(aplocal);
 		mPart.remove("Condition");
 
@@ -227,29 +226,30 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 */
 	public void testGetPartAmountMulti()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
-		JDFComponent comp = (JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
-		JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1");
-		JDFAttributeMap mapSig = new JDFAttributeMap(map);
-		JDFAttributeMap map2 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1");
-		JDFResourceLink rl = n.getLink(comp, null);
+		final JDFComponent comp = (JDFComponent) n.addResource("Component", null, EnumUsage.Output, null, null, null, null);
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1");
+		final JDFAttributeMap mapSig = new JDFAttributeMap(map);
+		map.put(EnumPartIDKey.SheetName, "Sheet");
+		final JDFAttributeMap map2 = new JDFAttributeMap(map);
+		final JDFResourceLink rl = n.getLink(comp, null);
 		map.put(EnumPartIDKey.SheetName, "Sheet");
 		comp.getCreatePartition(map, new VString("SignatureName SheetName", " "));
 		map.put(EnumPartIDKey.Side, "Front");
 		map2.put(EnumPartIDKey.Side, "Back");
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(map);
 		vMap.add(map2);
-		JDFAmountPool aplocal = rl.appendAmountPool();
-		JDFPartAmount pa = aplocal.appendPartAmount(vMap);
+		final JDFAmountPool aplocal = rl.appendAmountPool();
+		final JDFPartAmount pa = aplocal.appendPartAmount(vMap);
 		assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
 		rl.setActualAmount(42, map);
 		rl.setActualAmount(21, map2);
 		assertEquals(pa.numChildElements_JDFElement(ElementName.PART, null), 2);
 		assertEquals(rl.getActualAmount(map), 42., 0.);
-		assertEquals(rl.getActualAmount(mapSig), 42. + 21., 0.);
+		assertEquals(rl.getActualAmount(mapSig), 21., 0.);
 		assertEquals(pa, aplocal.getPartAmount(vMap));
 	}
 
@@ -260,19 +260,19 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 */
 	public void testGetCreatePartAmount()
 	{
-		JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
-		JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
+		final JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(map);
 		vMap.add(map2);
 
-		JDFPartAmount pa1 = ap.getCreatePartAmount(map);
+		final JDFPartAmount pa1 = ap.getCreatePartAmount(map);
 		assertEquals(pa1.getPartMap(), map);
-		JDFPartAmount pa3 = ap.getCreatePartAmount(vMap);
+		final JDFPartAmount pa3 = ap.getCreatePartAmount(vMap);
 		assertEquals(pa3.getPartMapVector(), vMap);
-		JDFPartAmount pa4 = ap.getCreatePartAmount(vMap);
+		final JDFPartAmount pa4 = ap.getCreatePartAmount(vMap);
 		assertEquals(pa3, pa4);
-		JDFPartAmount pa2 = ap.getCreatePartAmount(map2);
+		final JDFPartAmount pa2 = ap.getCreatePartAmount(map2);
 		assertEquals(pa2.getPartMap(), map2);
 	}
 
@@ -283,9 +283,9 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 */
 	public void testGetAmountMap()
 	{
-		JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
-		JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
+		final JDFAttributeMap map2 = new JDFAttributeMap("Separation", "Cyan");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(new JDFAttributeMap(map));
 		vMap.add(new JDFAttributeMap(map2));
 		for (int i = 0; i < 10; i++)
@@ -315,18 +315,18 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 */
 	public void testGetPartAmountNull() throws Exception
 	{
-		JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap("Separation", "Black");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(map);
 
-		JDFResourceLink rl = (JDFResourceLink) new JDFDoc("MediaLink").getRoot();
+		final JDFResourceLink rl = (JDFResourceLink) new JDFDoc("MediaLink").getRoot();
 		ap = rl.appendAmountPool();
 		assertNull(ap.getPartAmount(vMap));
 		assertNull(ap.getPartAmount(map));
 		assertNull(ap.getPartAmount(2));
 		assertNull(ap.getPartAmount(0));
 
-		JDFPartAmount pa = ap.appendPartAmount();
+		final JDFPartAmount pa = ap.appendPartAmount();
 		assertNull(ap.getPartAmount(vMap));
 		assertNull(ap.getPartAmount(map));
 		assertNull(ap.getPartAmount(2));
