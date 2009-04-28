@@ -1974,10 +1974,8 @@ public class JDFResource extends JDFElement
 	// //////////////////////////////////////////////////////////////////////////
 	// /////
 
-	protected VElement getDeepPartVector(final JDFAttributeMap m_in, EnumPartUsage partUsage, final int matchingDepth, final VString partIDKeys)
+	protected VElement getDeepPartVector(final JDFAttributeMap m_in, EnumPartUsage partUsage, int matchingDepth, final VString partIDKeys)
 	{
-		int matchingDepthLocal = matchingDepth;
-
 		final JDFAttributeMap m = new JDFAttributeMap(m_in);
 		final VElement vReturn = new VElement();
 		removeImplicitPartions(m);
@@ -1996,9 +1994,9 @@ public class JDFResource extends JDFElement
 		}
 
 		final int msiz = m.size();
-		if (matchingDepthLocal == -1) // first call - check validity of the map
+		if (matchingDepth == -1) // first call - check validity of the map
 		{
-			matchingDepthLocal = 0;
+			matchingDepth = 0;
 			final JDFAttributeMap thisMap = getPartMap(partIDKeys);
 
 			final Iterator<String> it = m.getKeyIterator();
@@ -2021,7 +2019,7 @@ public class JDFResource extends JDFElement
 
 					if (thisMapValue != null && JDFPart.matchesPart(strKey, thisMapValue, mMapValue))
 					{
-						matchingDepthLocal++;
+						matchingDepth++;
 					}
 				}
 			}
@@ -2056,7 +2054,7 @@ public class JDFResource extends JDFElement
 			}
 		}
 
-		if (msiz == matchingDepthLocal)
+		if (msiz == matchingDepth)
 		{
 			vReturn.add(this);
 			return vReturn;
@@ -2155,7 +2153,7 @@ public class JDFResource extends JDFElement
 
 			if (!badChild)
 			{
-				final VElement dpv = resourceElement.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepthLocal + 1 : matchingDepthLocal, partIDKeys);
+				final VElement dpv = resourceElement.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
 
 				if (dpv.size() > 0)
 				{
@@ -2382,7 +2380,7 @@ public class JDFResource extends JDFElement
 		JDFResource loopRes = retRes;
 		final Set vKeys = m.keySet();
 
-		// loop unti we hit this or root, whichever is closer
+		// loop until we hit this or root, whichever is closer
 		while (true)
 		{
 			final JDFAttributeMap returnMap = loopRes.getPartMap();

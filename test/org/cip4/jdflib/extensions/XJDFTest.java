@@ -228,12 +228,13 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Exception
 	 */
-	public void testFromXJDF()
+	public void testFromXJDF() throws Exception
 	{
-		final JDFDoc d = new JDFDoc("JDF");
-		// final XJDFToJDFConverter xc =
-		new XJDFToJDFConverter(d);
+		testColorPool();
+		final JDFDoc d2 = new XJDFToJDFConverter(null).convert(e);
+		assertNotNull(d2);
 	}
 
 }

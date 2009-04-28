@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -85,7 +85,7 @@ import org.apache.commons.io.IOUtils;
  * 
  * @author rainer
  * 
- *         very trivial temp file dump
+ * very trivial temp file dump
  * 
  */
 public class DumpDir
@@ -108,15 +108,16 @@ public class DumpDir
 	{
 		synchronized (listMap)
 		{
-			MyInteger i = listMap.get(baseDir);
+			final MyInteger i = listMap.get(baseDir);
 			return i.i++;
 		}
 	}
 
 	/**
 	 * create a dumpdir with dir as the root
+	 * @param dir
 	 */
-	public DumpDir(File dir)
+	public DumpDir(final File dir)
 	{
 		baseDir = dir;
 		baseDir.mkdirs();
@@ -128,17 +129,23 @@ public class DumpDir
 				index = new MyInteger(0);
 				listMap.put(baseDir, index);
 			}
-			String[] names = baseDir.list();
+			final String[] names = baseDir.list();
 			int max = 0;
 			int l;
 			for (int i = 0; i < names.length; i++)
 			{
 				if (names[i].length() > 9)
+				{
 					l = StringUtil.parseInt(names[i].substring(1, 9), 0);
+				}
 				else
+				{
 					l = 0;
+				}
 				if (l > max)
+				{
 					max = l;
+				}
 			}
 			index.i = max;
 		}
@@ -160,14 +167,16 @@ public class DumpDir
 	 * @param header TODO
 	 * 
 	 */
-	public File newFile(String header)
+	public File newFile(final String header)
 	{
 		final int inc = increment();
 		if (!quiet && (inc % 200 == 0))
+		{
 			System.out.println("jmf dump service " + baseDir + " - " + inc + " " + new JDFDate().getDateTime());
+		}
 
-		String s = StringUtil.sprintf("m%08i.tmp", "" + inc);
-		File f = FileUtil.getFileInDirectory(baseDir, new File(s));
+		final String s = StringUtil.sprintf("m%08i.tmp", "" + inc);
+		final File f = FileUtil.getFileInDirectory(baseDir, new File(s));
 		if (header != null)
 		{
 			newHeader(header, f, true);
@@ -185,18 +194,18 @@ public class DumpDir
 	 * 
 	 */
 
-	public File newFileFromStream(String header, InputStream is)
+	public File newFileFromStream(final String header, final InputStream is)
 	{
 		InputStream isLocal = is;
 
-		File dump = newFile(null);
+		final File dump = newFile(null);
 		if (!(isLocal instanceof BufferedInputStream))
 		{
 			isLocal = new BufferedInputStream(isLocal);
 			isLocal.mark(100000);
 		}
 
-		FileOutputStream fs = newHeader(header, dump, false);
+		final FileOutputStream fs = newHeader(header, dump, false);
 		if (fs != null)
 		{
 			try
@@ -206,7 +215,7 @@ public class DumpDir
 				fs.close();
 				isLocal.reset();
 			}
-			catch (IOException x)
+			catch (final IOException x)
 			{
 				// nop
 			}
@@ -220,11 +229,11 @@ public class DumpDir
 	 * @param fs
 	 * @throws IOException
 	 */
-	private FileOutputStream newHeader(String header, File f, boolean bClose)
+	private FileOutputStream newHeader(final String header, final File f, final boolean bClose)
 	{
 		try
 		{
-			FileOutputStream fs = new FileOutputStream(f);
+			final FileOutputStream fs = new FileOutputStream(f);
 			if (header != null)
 			{
 				fs.write(header.getBytes());
@@ -237,11 +246,11 @@ public class DumpDir
 			}
 			return fs;
 		}
-		catch (FileNotFoundException x)
+		catch (final FileNotFoundException x)
 		{
 			// nop
 		}
-		catch (IOException x)
+		catch (final IOException x)
 		{
 			// nop
 		}
@@ -258,7 +267,7 @@ public class DumpDir
 		{
 			synchronized (listMap.get(baseDir))
 			{
-				String[] names = baseDir.list();
+				final String[] names = baseDir.list();
 				if (names.length > maxKeep)
 				{
 					Arrays.sort(names);
@@ -267,7 +276,9 @@ public class DumpDir
 						File f = new File(names[i]);
 						f = FileUtil.getFileInDirectory(baseDir, f);
 						if (f != null)
+						{
 							f.delete();
+						}
 					}
 				}
 			}

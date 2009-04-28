@@ -108,6 +108,44 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
+	 * @param toCheck
+	 * @return
+	 */
+	boolean isXResourceElement(final KElement toCheck)
+	{
+		KElement parent = toCheck == null ? null : toCheck.getParentNode_KElement();
+		if (parent == null)
+		{
+			return false;
+		}
+
+		parent = parent.getParentNode_KElement();
+		if (parent == null)
+		{
+			return false;
+		}
+
+		final boolean bL1 = parent.getLocalName().endsWith("Set");
+		return bL1 && toCheck.getLocalName().equals(parent.getAttribute("Name"));
+	}
+
+	/**
+	 * @param toCheck
+	 * @return
+	 */
+	boolean isXResource(final KElement toCheck)
+	{
+		final KElement parent = toCheck.getParentNode_KElement();
+		if (parent == null)
+		{
+			return false;
+		}
+
+		final boolean bL1 = parent.getLocalName().endsWith("Set");
+		return bL1 && parent.hasAttribute(AttributeName.NAME);
+	}
+
+	/**
 	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
@@ -125,15 +163,15 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 		/**
 		 * @param e
-		 * @return true if must continue
+		 * @return element to continue with if must continue
 		 */
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			cleanRefs(e);
-			trackElem.copyElement(e, null);
-
-			return null;
+			final KElement e2 = trackElem.copyElement(e, null);
+			e2.removeChildren(null, null, null); // will be copied later
+			return e2;
 		}
 
 		/**
@@ -178,6 +216,12 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			theNode.setType(EnumType.ProcessGroup);
 			theNode.setAttributes(e);
+			if (e.hasChildElement("ProductList", null))
+			{
+				final JDFNode n = theNode.addJDFNode(EnumType.ProcessGroup);
+				theNode.setType(EnumType.Product);
+				theNode = n;
+			}
 			return theNode;
 		}
 
@@ -319,20 +363,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			// test on grandparent
-			KElement parent = toCheck.getParentNode_KElement();
-			if (parent == null)
-			{
-				return false;
-			}
-
-			parent = parent.getParentNode_KElement();
-			if (parent == null)
-			{
-				return false;
-			}
-
-			final boolean bL1 = parent.getLocalName().endsWith("Set");
-			return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals(parent.getAttribute("Name"));
+			return super.matches(toCheck) && isXResourceElement(toCheck);
 		}
 	}
 
@@ -368,6 +399,34 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
+	public class WalkIgnore extends WalkXElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && (toCheck instanceof JDFPart) && isXResource(toCheck.getParentNode_KElement());
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
 	public class WalkXJDFColorResource extends WalkXJDFResource
 	{
 		/**
@@ -382,6 +441,9 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
 			final JDFResourceLink rll = theNode.getLink(r, null);
 			rll.removeChildren(ElementName.PART, null, null);
+			rPart.renameElement(ElementName.COLOR, null);
+			rPart.renameAttribute(AttributeName.SEPARATION, AttributeName.NAME, null, null);
+			r.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, " ", -1);
 			return rPart;
 		}
 
@@ -401,6 +463,18 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 			final boolean bL1 = parent.getLocalName().endsWith("Set");
 			return bL1 && super.matches(toCheck) && ElementName.COLOR.equals(parent.getAttribute(AttributeName.NAME));
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			final KElement rPart = super.walk(e, trackElem);
+			rPart.removeAttribute(AttributeName.STATUS);
+			return rPart;
+
 		}
 
 	}
@@ -492,14 +566,39 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final KElement parent = toCheck.getParentNode_KElement();
-			if (parent == null)
-			{
-				return false;
-			}
-
-			final boolean bL1 = parent.getLocalName().endsWith("Set");
-			return bL1 && super.matches(toCheck) && parent.hasAttribute(AttributeName.NAME);
+			return super.matches(toCheck) && isXResource(toCheck);
 		}
 	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkXJDFColorSet extends WalkSet
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && ElementName.COLOR.equals(toCheck.getAttribute(AttributeName.NAME));
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			final KElement k2 = super.walk(e, trackElem);
+			final JDFResource r = (JDFResource) k2;
+			final JDFResourceLink rl = theNode.getLink(r, null);
+			r.renameElement(ElementName.COLORPOOL, null);
+			rl.renameElement("ColorPoolLink", null);
+			return k2;
+		}
+	}
+
 }

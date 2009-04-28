@@ -132,7 +132,7 @@ import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG conversion class to convert JDF 1.x to the experimental JDF 2.0
  * 
  * 15.01.2009
  */
@@ -169,7 +169,7 @@ public class XJDF20 extends BaseElementWalker
 	 * @param vMap the partmap to transform, null if all
 	 * @return the root of the XJDF document
 	 */
-	public KElement makeNewJDF(JDFNode node, @SuppressWarnings("unused") final VJDFAttributeMap vMap)
+	public KElement makeNewJDF(JDFNode node, final VJDFAttributeMap vMap)
 	{
 		// vPartMap = vMap;
 		node.cloneNode(true);
@@ -375,6 +375,7 @@ public class XJDF20 extends BaseElementWalker
 							final String key = (String) it.next();
 							// if(key.indexOf(AttributeName.AMOUNT)>0)
 							// {
+							// TODO rethink AmountGood, AmountWaste
 							newLeaf.setAttribute(key + condition, attMap.get(key));
 							// }
 						}
@@ -668,6 +669,7 @@ public class XJDF20 extends BaseElementWalker
 		private JDFResource removeDuplicateRefs(JDFResource r, final JDFResourcePool prevPool)
 		{
 			final JDFAttributeMap m = r.getAttributeMap();
+			m.remove("ID");
 			final VElement prevs = prevPool.getChildrenByTagName(r.getNodeName(), null, m, true, true, 0);
 			if (prevs != null)
 			{
@@ -678,16 +680,22 @@ public class XJDF20 extends BaseElementWalker
 					{
 						continue;
 					}
-					final String id = prev.getID();
+					final String pid = prev.getID();
+					final String rid = r.getID();
 					prev.removeAttribute("ID"); // for comparing
+					r.removeAttribute("ID");
 					if (r.isEqual(prev)) // found duplicate - remove and ref the original
 					{
 						r.deleteNode();
 						r = prev;
-						prev.setID(id);
+						prev.setID(pid); // better put it back...
 						break;
 					}
-					prev.setID(id); // better put it back...
+					else
+					{
+						r.setID(rid);
+						prev.setID(pid); // better put it back...
+					}
 				}
 			}
 			return r;

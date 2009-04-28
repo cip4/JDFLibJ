@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -279,7 +279,6 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	/**
 	 * Method testGetMatchingPartAmountVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetAmountMap()
 	{
@@ -306,6 +305,17 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 		assertEquals(am.getAmountDouble(map, "Amount"), -1.0, 0.);
 		map.put("SheetName", "Sheet12");
 		assertEquals("10 signatures * 12", am.getAmountDouble(map, "Amount"), 10 * 12.0, 0.);
+	}
+
+	/**
+	 * Method testGetMatchingPartAmountVector.
+	 * 
+	 */
+	public void testGetCorruptAmountMap()
+	{
+		ap.appendPartAmount();
+		final AmountMap am = ap.getAmountMap(null);
+		assertEquals(am.size(), 1);
 	}
 
 	/**

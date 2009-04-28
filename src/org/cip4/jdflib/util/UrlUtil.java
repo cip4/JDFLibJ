@@ -185,6 +185,10 @@ public class UrlUtil
 	public static final String TEXT_HTML = "text/html";
 	public static final String TEXT_PLAIN = "text/plain";
 	public static final String TEXT_UNKNOWN = JDFConstants.MIME_TEXTUNKNOWN;
+	/**
+	 * the preferred value!
+	 */
+	public static final String APPLICATION_XML = "application/xml";
 	public static final String TEXT_XML = JDFConstants.MIME_TEXTXML;
 	public static final String VND_JDF = JDFConstants.MIME_JDF;
 	public static final String VND_JMF = JDFConstants.MIME_JMF;

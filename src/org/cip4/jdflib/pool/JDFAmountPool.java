@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -123,10 +123,10 @@ public class JDFAmountPool extends JDFAutoAmountPool
 					final JDFPartAmount pa = (JDFPartAmount) vPartAmount.elementAt(i);
 					final VJDFAttributeMap vamParts = pa.getPartMapVector();
 
-					final int size2 = vamParts.size();
+					final int size2 = vamParts == null ? 1 : vamParts.size();
 					for (int p = 0; p < size2; p++)
 					{
-						final JDFAttributeMap amPart = vamParts.elementAt(p);
+						final JDFAttributeMap amPart = vamParts == null ? new JDFAttributeMap() : vamParts.elementAt(p);
 						amPart.reduceMap(vsPartIDKeys);
 						putOne(amPart, pa);
 					}
