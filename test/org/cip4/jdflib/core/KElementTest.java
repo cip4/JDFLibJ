@@ -437,10 +437,16 @@ public class KElementTest extends JDFTestCaseBase
 		b.setAttribute("at", "a2");
 		final KElement c = e.appendElement("c");
 		b.setAttribute("at", "a3");
-		e.sortChildren(new KElement.SingleAttributeComparator("at"));
+		// sort forward
+		e.sortChildren(new KElement.SingleAttributeComparator("at", false));
 		assertEquals(e.getFirstChildElement(), a);
 		assertEquals(a.getNextSiblingElement(), b);
 		assertEquals(b.getNextSiblingElement(), c);
+		// now invert
+		e.sortChildren(new KElement.SingleAttributeComparator("at", true));
+		assertEquals(e.getFirstChildElement(), c);
+		assertEquals(c.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), a);
 
 	}
 
