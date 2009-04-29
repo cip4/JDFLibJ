@@ -107,6 +107,11 @@ import org.cip4.jdflib.util.MyInteger;
  */
 public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INodeIdentifiable
 {
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * Apr 29, 2009
+	 */
 	public static class QueueEntryComparator implements Comparator
 	{
 		private static HashMap<String, MyInteger> fastStat = null;

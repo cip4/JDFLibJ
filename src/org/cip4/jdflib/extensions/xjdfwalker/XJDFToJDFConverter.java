@@ -397,6 +397,37 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
+	 * continue walking on these withot copying e
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkContinue extends WalkXElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			return trackElem;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final String name = toCheck.getLocalName();
+			return "ProductList".equals(name);
+		}
+
+	}
+
+	/**
+	 * simply stop walking on these
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
 	public class WalkIgnore extends WalkXElement

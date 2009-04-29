@@ -100,6 +100,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -4366,6 +4367,39 @@ public class KElement extends ElementNSImpl
 			nodeName += o1.getAttributeMap();
 			nodeName += o2.getAttributeMap();
 			return nodeName.compareTo(nodeName2);
+		}
+	}
+
+	/**
+	 * sorts according to the value of one attribute
+	 * @author prosirai
+	 */
+	public static class SingleAttributeComparator implements Comparator<KElement>
+	{
+		/**
+		 * @param attName the attribute to use for comparing
+		 * @param invert if true, sort backwards
+		 */
+		public SingleAttributeComparator(final String attName, final boolean invert)
+		{
+			super();
+			this.attName = attName;
+			this.invert = invert ? -1 : 1;
+		}
+
+		private final String attName;
+		private final int invert;
+
+		/**
+		 * @param o1
+		 * @param o2
+		 * @return
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		public int compare(final KElement o1, final KElement o2)
+		{
+
+			return invert * ContainerUtil.compare(o1.getAttribute(attName, null, null), o2.getAttribute(attName, null, null));
 		}
 	}
 
