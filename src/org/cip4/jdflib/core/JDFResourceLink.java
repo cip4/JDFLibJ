@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -1712,7 +1712,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	{
 		final JDFResource r = getTarget();
 		double d = 0;
-		if (r == null || EnumPartUsage.Implicit.equals(r.getPartUsage()))
+		if (r == null || EnumPartUsage.Implicit.equals(r.getPartUsage()) || (this instanceof JDFPartAmount))
 		{
 			d = AmountPoolHelper.getAmountPoolDouble(this, attName, mPart);
 		}

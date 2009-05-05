@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -215,5 +215,18 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		v.set(2, "foo");
 		assertEquals(v.get(2), "foo");
 		assertNull(v.get(0));
+	}
+
+	/**
+	 * 
+	 */
+	public void testCompare()
+	{
+		assertEquals(ContainerUtil.compare("1", "0"), 1);
+		assertEquals(ContainerUtil.compare("1", "1"), 0);
+		assertEquals(ContainerUtil.compare("1", "2"), -1);
+		assertEquals(ContainerUtil.compare("1", null), 1);
+		assertEquals(ContainerUtil.compare(null, "2"), -1);
+		assertEquals(ContainerUtil.compare(null, null), 0);
 	}
 }

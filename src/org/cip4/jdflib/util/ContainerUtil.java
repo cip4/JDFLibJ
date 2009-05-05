@@ -391,21 +391,22 @@ public class ContainerUtil
 	}
 
 	/**
-	 * static implementation of compare for any comparable object that gracefully handles null null is always the smallest
+	 * static implementation of compare for any comparable object that gracefully handles null<br/>
+	 * null is always the smallest
 	 * @param c0
 	 * @param c1
-	 * @return -1 if c0 &lt; c1, 0 if equal, 1 if c0 &gt; c1
+	 * @return -1 if c0 &lt; c1, 0 if equal, 1 if c0 &gt; c1;
 	 */
 	@SuppressWarnings("unchecked")
 	public static int compare(final Comparable c0, final Comparable c1)
 	{
 		if (c0 == null)
 		{
-			return c1 == null ? 0 : 1;
+			return c1 == null ? 0 : -1;
 		}
 		if (c1 == null)
 		{
-			return -1;
+			return 1;
 		}
 		return c0.compareTo(c1);
 	}

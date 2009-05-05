@@ -4371,13 +4371,15 @@ public class KElement extends ElementNSImpl
 	}
 
 	/**
-	 * sorts according to the value of one attribute
+	 * sorts according to the value of one attribute<br/>
+	 * if the attribute is numeric, compare numerically, else lexical comparison is done
 	 * @author prosirai
 	 */
 	public static class SingleAttributeComparator implements Comparator<KElement>
 	{
 		/**
-		 * @param attName the attribute to use for comparing
+		 * @param attName the attribute to use for comparing<br/>
+		 * if the attribute is numeric, compare numerically, else lexical comparison is done
 		 * @param invert if true, sort backwards
 		 */
 		public SingleAttributeComparator(final String attName, final boolean invert)
@@ -4399,7 +4401,29 @@ public class KElement extends ElementNSImpl
 		public int compare(final KElement o1, final KElement o2)
 		{
 
-			return invert * ContainerUtil.compare(o1.getAttribute(attName, null, null), o2.getAttribute(attName, null, null));
+			final String attribute1 = o1.getAttribute(attName, null, null);
+			final String attribute2 = o2.getAttribute(attName, null, null);
+			if (StringUtil.isNumber(attribute1))
+			{
+				if (StringUtil.isNumber(attribute2))
+				{
+					final double d1 = StringUtil.parseDouble(attribute1, 0);
+					final double d2 = StringUtil.parseDouble(attribute2, 0);
+					if (d1 < d2)
+					{
+						return -invert;
+					}
+					else if (d1 == d2)
+					{
+						return 0;
+					}
+					else
+					{
+						return invert;
+					}
+				}
+			}
+			return invert * ContainerUtil.compare(attribute1, attribute2);
 		}
 	}
 
