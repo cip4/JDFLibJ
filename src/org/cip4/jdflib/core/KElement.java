@@ -429,26 +429,43 @@ public class KElement extends ElementNSImpl
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumValidationLevel getEnum(final String enumName)
 		{
 			return (EnumValidationLevel) getEnum(EnumValidationLevel.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumValidationLevel getEnum(final int enumValue)
 		{
 			return (EnumValidationLevel) getEnum(EnumValidationLevel.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumValidationLevel.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumValidationLevel.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumValidationLevel.class);
@@ -4528,7 +4545,7 @@ public class KElement extends ElementNSImpl
 	 * serialize this to a string
 	 * @param indent
 	 * @return String the dom element serialized as a string
-	 * @throws JDFExcepion if an error occurs while serializing
+	 * @throws JDFException if an error occurs while serializing
 	 */
 	public String toDisplayXML(final int indent)
 	{
@@ -4979,12 +4996,11 @@ public class KElement extends ElementNSImpl
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
 	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
-	 * @param def default value if it doesn't exist
+	 * 
 	 * @return String the String value of the attribute or null if the xpath element does not exist
 	 * @throws JDFException if the defined path is a bad attribute path
-	 * @default getXPathAttribute(path, null);
 	 */
-	public Map getXPathAttributeMap(final String path)
+	public Map<String, String> getXPathAttributeMap(final String path)
 	{
 		final int pos = path.lastIndexOf(JDFConstants.AET);
 		if (pos == -1)
@@ -4997,7 +5013,7 @@ public class KElement extends ElementNSImpl
 		{
 			return null;
 		}
-		final LinkedHashMap map = new LinkedHashMap();
+		final LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		for (int i = 0; i < vEle.size(); i++)
 		{
 			final KElement e = vEle.item(i);

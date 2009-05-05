@@ -206,7 +206,6 @@ public class KElementTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	// /////////////////////////////////////////////////////////
 	public void testRenameElement()
 	{
 		final XMLDoc d = new XMLDoc("root", "www.root.com");
@@ -247,6 +246,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetFirstChildElement()
 	{
 		final XMLDoc d = new XMLDoc("e1", null);
@@ -261,6 +263,9 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetNextSibling()
 	{
 		final XMLDoc d = new XMLDoc("e1", null);
@@ -276,6 +281,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetElementById()
 	{
 		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
@@ -321,6 +329,9 @@ public class KElementTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testReplaceElementRoot()
 	{
 		final XMLDoc d = new XMLDoc("root", "www.root.com");
@@ -436,7 +447,7 @@ public class KElementTest extends JDFTestCaseBase
 		a.setAttribute("at", "a1");
 		b.setAttribute("at", "a2");
 		final KElement c = e.appendElement("c");
-		b.setAttribute("at", "a3");
+		c.setAttribute("at", "a3");
 		// sort forward
 		e.sortChildren(new KElement.SingleAttributeComparator("at", false));
 		assertEquals(e.getFirstChildElement(), a);
@@ -513,6 +524,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testRemoveFromAttribute()
 	{
 		final XMLDoc d = new JDFDoc("Foo");
@@ -529,6 +543,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testRemoveExtensions()
 	{
 		final KElement e = new XMLDoc("e", "a.com").getRoot();
@@ -546,6 +563,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testRemoveEmptyAttributes()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -574,6 +594,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertFalse("has foo2", e2.hasAttribute("foo2"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testRemoveAttribute()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -613,6 +636,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testMatchesPath()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
@@ -640,6 +666,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(c.matchesPath("/Test/ns:c[@att=\"41\"]", false));
 	}
 
+	/**
+	 * 
+	 */
 	public void testMergeElement()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
@@ -660,6 +689,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(t2.getAttribute("c"), "2");
 	}
 
+	/**
+	 * 
+	 */
 	public void testMergeElementElements()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
@@ -879,6 +911,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(d.toString().indexOf("xmlns:foo=\"www.foo.com\"") > 0);
 	}
 
+	/**
+	 * 
+	 */
 	public void testCopyAttribute()
 	{
 		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
@@ -920,6 +955,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testNameSpace()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -984,6 +1022,9 @@ public class KElementTest extends JDFTestCaseBase
 		doc.write2File(sm_dirTestDataTemp + "NameSpace.jdf", 0, true);
 	}
 
+	/**
+	 * 
+	 */
 	public void testNameSpaceInElements()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1061,6 +1102,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull(kElemGet6);
 	}
 
+	/**
+	 * 
+	 */
 	public void testNameSpace1()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1088,6 +1132,9 @@ public class KElementTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testNameSpaceInAttributes()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1120,6 +1167,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetPrefix()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -1192,6 +1242,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetMatchesPath()
 	{
 		final XMLDoc d = new XMLDoc("a", null);
@@ -1204,8 +1257,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertFalse(b.matchesPath("a/a/b/c/d", true));
 	}
 
-	// /////////////////////////////////////////////////////////////////
-
+	/**
+	 * 
+	 */
 	public void testGetDefaultAttributeMap()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -1217,6 +1271,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testEraseDefaultAttributeMap()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -1231,6 +1288,9 @@ public class KElementTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetAttributeMap()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -1240,6 +1300,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testEraseEmptyNodes()
 	{
 		final JDFParser p = new JDFParser();
@@ -1254,6 +1317,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(f.length() > 1.1 * f2.length());
 	}
 
+	/**
+	 * 
+	 */
 	// /////////////////////////////////////////////////////////////////
 	public void testRemoveXPathElement()
 	{
@@ -1277,13 +1343,16 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetXPathAttributeMap()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
 		final KElement root = jdfDoc.getRoot();
 		root.setXPathAttribute("b/c[3]/d/@foo", "bar3");
 		root.setXPathAttribute("b/c[5]/d/@foo", "bar5");
-		Map m = root.getXPathAttributeMap("//*/@foo");
+		Map<String, String> m = root.getXPathAttributeMap("//*/@foo");
 		assertEquals(m.size(), 2);
 		m = root.getXPathAttributeMap("//@foo");
 		assertEquals(m.size(), 2);
@@ -1295,6 +1364,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetXPathElementVector()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("a", null);
@@ -1585,7 +1657,6 @@ public class KElementTest extends JDFTestCaseBase
 	/**
 	 * Method testGetDeepParentNotName.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetDeepParentNotName()
 	{
@@ -1605,7 +1676,6 @@ public class KElementTest extends JDFTestCaseBase
 	/**
 	 * Method testGetElementByID.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetDeepElementByID()
 	{
@@ -1726,6 +1796,9 @@ public class KElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// //
 
+	/**
+	 * 
+	 */
 	public void testSetAttributes()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
@@ -1744,6 +1817,9 @@ public class KElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /////////
 
+	/**
+	 * 
+	 */
 	public void testSetAttributesResource()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -2347,6 +2423,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull(bar4.getNamespaceURI());
 	}
 
+	/**
+	 * 
+	 */
 	public void testAppendElement_NSAtt()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
@@ -2361,6 +2440,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(bar2.getNamespaceURI(), "www.pt.com");
 	}
 
+	/**
+	 * 
+	 */
 	public void testAppendElement_NSAttJDFDoc()
 	{
 		JDFDoc d = new JDFDoc("e");
@@ -2402,6 +2484,9 @@ public class KElementTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testAppendElement_SingleNS()
 	{
 		for (int i = 0; i < 2; i++)
@@ -2420,6 +2505,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testCreateElement_NoNS()
 	{
 		for (int i = 0; i < 2; i++)
@@ -2441,6 +2529,9 @@ public class KElementTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testParse_SingleNS()
 	{
 		final String wwwECom = "www.e.com";
@@ -2459,6 +2550,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(-1, d2.write2String(2).indexOf("jdf"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testAppendXMLComment()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
