@@ -736,7 +736,7 @@ public class XJDF20 extends BaseElementWalker
 					|| ElementName.JOBFIELD.equals(refLocalName) || ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName)
 					|| ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName) || ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName)
 					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName)
-					|| ElementName.TRANSFERCURVE.equals(refLocalName);
+					|| ElementName.TRANSFERCURVE.equals(refLocalName) || ElementName.COLORCONTROLSTRIP.equals(refLocalName);
 		}
 
 		/**

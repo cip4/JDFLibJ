@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,7 +86,7 @@ import java.util.Map;
 /**
  * Bidirectional HashMap utility class
  * 
- * @author prosirai
+ * @author Rainer Prosi
  * @param <a> any datatype for the key
  * @param <b> any datatype for the value
  * 
@@ -195,7 +195,17 @@ public class BiHashMap<a, b>
 	{
 		return mapVal;
 	}
+
 	// //////////////////////////////////////////////////////////////////////////
-	// //////
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		final String s = "[BiHashMap]: " + mapKey;
+		return s;
+	}
 
 }

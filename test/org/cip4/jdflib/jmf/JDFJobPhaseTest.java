@@ -87,7 +87,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 /**
  * @author Rainer Prosi
  * 
- *         Test of the Status JMF
+ * Test of the Status JMF
  */
 public class JDFJobPhaseTest extends JDFTestCaseBase
 {
@@ -100,7 +100,7 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	public void setUp()
 	{
 		JDFElement.setLongID(false);
-		JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
+		final JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
 		di = (JDFDeviceInfo) doc.getRoot();
 
 	}
@@ -112,9 +112,9 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	public void testJobPhaseFromPhaseTime()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
-		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
 		JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		assertFalse(pt.hasChildElement(ElementName.MISDETAILS, null));
 		final JDFMISDetails misDetails = pt.appendMISDetails();
@@ -130,10 +130,10 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	public void testApplyNode()
 	{
-		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setJobID("j1");
 		n.setJobPartID("p2");
-		JDFJobPhase jp = di.appendJobPhase();
+		final JDFJobPhase jp = di.appendJobPhase();
 		jp.applyNode(null);
 		assertNull(jp.getJobID());
 		jp.applyNode(n);
@@ -148,10 +148,10 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	public void testGetPhaseAmount()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
-		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
-		JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
+		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setAmount(42);
 		assertEquals(jp.getPhaseAmount(), 42.0, 0.0);
 
@@ -162,10 +162,10 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	public void testGetPhaseWaste()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
-		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
-		JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
+		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setWaste(42);
 		assertEquals(jp.getPhaseWaste(), 42.0, 0.0);
 
@@ -176,13 +176,13 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	public void testGetAmountDifference()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
-		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
-		JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
+		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setAmount(42);
 		assertEquals(jp.getAmountDifference(null), 42.0, 0.0);
-		JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
+		final JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
 		jp2.setAmount(62);
 		assertEquals(jp2.getAmountDifference(jp), 20.0, 0.0);
 
@@ -193,13 +193,13 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	public void testGetWasteDifference()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
-		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
-		JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
+		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setPhaseWaste(42);
 		assertEquals(jp.getWasteDifference(null), 42.0, 0.0);
-		JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
+		final JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
 		jp2.setPhaseWaste(62);
 		assertEquals(jp2.getWasteDifference(jp), 20.0, 0.0);
 
@@ -210,17 +210,17 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	 */
 	public void testMergeLastPhase()
 	{
-		JDFDoc d = new JDFDoc("JDF");
-		JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
-		JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
-		JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFAuditPool ap = d.getJDFRoot().getCreateAuditPool();
+		final JDFPhaseTime pt = ap.setPhase(EnumNodeStatus.InProgress, "dummy", null, null);
+		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setPhaseAmount(200);
 		jp.setAmount(200);
 		jp.setPhaseWaste(100);
-		JDFDate d1 = jp.getPhaseStartTime();
-		JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
-		jp2.setPhaseStartTime(new JDFDate());
+		final JDFDate d1 = jp.getPhaseStartTime();
+		final JDFJobPhase jp2 = (JDFJobPhase) di.copyElement(jp, null);
 		ThreadUtil.sleep(1000);
+		jp2.setPhaseStartTime(new JDFDate());
 		jp2.setPhaseAmount(300);
 		jp2.setPhaseWaste(30);
 		jp2.setAmount(500);

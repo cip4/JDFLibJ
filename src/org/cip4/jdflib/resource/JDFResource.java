@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -118,6 +118,11 @@ import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * May 7, 2009
+ */
 public class JDFResource extends JDFElement
 {
 	private static final long serialVersionUID = 1L;
@@ -3433,6 +3438,18 @@ public class JDFResource extends JDFElement
 	 */
 	public void collapse(final boolean bCollapseToNode)
 	{
+		collapse(bCollapseToNode, true);
+	}
+
+	/**
+	 * collapse all redundant attributes and elements
+	 * 
+	 * @param bCollapseToNode only collapse redundant attriutes and elements that pre-exist in the nodes
+	 * 
+	 * @default Collapse(false)
+	 */
+	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
+	{
 		final VElement leaves = getLeaves(false);
 		if (leaves.size() == 1 && leaves.elementAt(0) == this)
 		{
@@ -3452,7 +3469,10 @@ public class JDFResource extends JDFElement
 				final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
 				collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves);
 				// since 190602 also collapse elements
-				collapseElements(bCollapseToNode, leaf, parent, localLeaves);
+				if (bCollapseElements)
+				{
+					collapseElements(bCollapseToNode, leaf, parent, localLeaves);
+				}
 				if (parent.isResourceRoot() || parent == this)
 				{
 					break;
@@ -3521,9 +3541,14 @@ public class JDFResource extends JDFElement
 	{
 		final int localSize = localLeaves.size();
 		final VElement vElm = leaf.getChildElementVector_JDFElement(null, null, null, true, 0, false);
+		final String resName = parent.getNodeName();
 		for (int j = 0; j < vElm.size(); j++)
 		{
 			final String nodeName = (vElm.elementAt(j)).getNodeName();
+			if (resName.equals(nodeName))
+			{
+				continue; // don't collapse partitions
+			}
 			final VElement vParentElm = parent.getChildElementVector(nodeName, null, null, true, 0, false);
 			final VElement vLocalElm = leaf.getChildElementVector_JDFElement(nodeName, null, null, true, 0, false);
 			// vector of elements for the first leaf

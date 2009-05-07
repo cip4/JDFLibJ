@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,16 +80,41 @@ package org.cip4.jdflib.datatypes;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * prior to May 7, 2009
+ */
 public class JDFIntegerListTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testConstruct()
 	{
-		JDFIntegerList l = new JDFIntegerList(3);
+		final JDFIntegerList l = new JDFIntegerList(3);
 		assertEquals(l.size(), 1);
 		assertEquals(l.getInt(0), 3);
 	}
 
+	/**
+	 * 
+	 */
+	public void testSetInt()
+	{
+		final JDFIntegerList l = new JDFIntegerList(3);
+		assertEquals(l.size(), 1);
+		assertEquals(l.getInt(0), 3);
+		l.setInt(0, 2);
+		assertEquals(l.getInt(0), 2);
+		assertEquals(l.size(), 1);
+		l.setInt(1, 4);
+		assertEquals(l.getInt(1), 4);
+		l.setInt(-1, 3);
+		assertEquals(l.getInt(1), 3);
+	}
 }

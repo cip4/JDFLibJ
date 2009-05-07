@@ -9,11 +9,12 @@
 package org.cip4.jdflib;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.elementwalker.SizeWalker;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFResource;
 
 public class TestJDF
 {
@@ -24,17 +25,23 @@ public class TestJDF
 
 	public static void main(final String[] argv)
 	{
-		final SizeWalker sw;
-		try
+		final JDFDoc d = new JDFParser().parseFile("C:\\data\\JDF\\Collapse\\data_OhneCollapse.jdf");
+		d.write2File("C:\\data\\JDF\\Collapse\\data_VorCollapse.jdf", 0, true);
+		final JDFNode root = d.getJDFRoot();
+		final VElement vJDF = root.getvJDFNode(null, null, false);
+		for (int i = 0; i < vJDF.size(); i++)
 		{
-			sw = new SizeWalker(new File("size.txt"));
-			final JDFDoc jdfDoc = new JDFParser().parseFile("Bene.jdf");
-			sw.walkAll(jdfDoc.getRoot());
+			final JDFNode n = (JDFNode) vJDF.get(i);
+			final VElement v = n.getResourcePool().getPoolChildren(null, null, null);
+			for (int j = 0; j < v.size(); j++)
+			{
+				System.out.println(i + " " + j + " " + System.currentTimeMillis());
+				final JDFResource r = (JDFResource) v.get(j);
+				r.collapse(false, true);
+				System.out.println(i + " " + j + " " + r.getLocalName() + " " + r.getID() + " " + System.currentTimeMillis());
+			}
 		}
-		catch (final FileNotFoundException e)
-		{
-			//
-		}
+		d.write2File("C:\\data\\JDF\\Collapse\\data_NachCollapse.jdf", 0, true);
 
 	}
 }

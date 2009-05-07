@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -327,22 +327,52 @@ public class JDFIntegerList extends JDFNumList
 	 * 
 	 * @return int - the pos'th int
 	 */
-	public int getInt(final int pos)
+	public int getInt(int pos)
 	{
-		int posLocal = pos;
 
-		if (posLocal < 0)
+		if (pos < 0)
 		{
-			posLocal = posLocal + size();
+			pos = pos + size();
 		}
 
-		final Integer i = (Integer) elementAt(posLocal);
+		final Integer i = (Integer) elementAt(pos);
 		if (i == null)
 		{
 			throw new JDFException("JDFIntegerList:getInt invalid index");
 		}
 
 		return i.intValue();
+	}
+
+	/**
+	 * setInt - setsthe integer val at 'pos' from the list.<br>
+	 * Note: if pos is negative, setInt sets the pos'th integer counting from the end.
+	 * 
+	 * @param pos index of the integer to get
+	 * @param val the value to set
+	 * 
+	 */
+	public void setInt(int pos, final int val)
+	{
+
+		if (pos < 0)
+		{
+			pos = pos + size();
+		}
+
+		if (pos == size())
+		{
+			add(val);
+		}
+		else if (pos > size())
+		{
+			throw new JDFException("JDFIntegerList:setInt invalid index:" + pos);
+		}
+		else
+		{
+			m_numList.set(pos, new Integer(val));
+		}
+
 	}
 
 	/*
