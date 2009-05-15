@@ -214,7 +214,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 						{
 							final String key = keys.elementAt(k);
 							final String value = map.get(key);
-							if (value == null || JDFConstants.EMPTYSTRING.equals(value))
+							if (value == null)
 							{
 								resCmdPart.removeAttribute(key);
 								resTargetPart.removeAttribute(key);

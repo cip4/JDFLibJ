@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,46 +85,46 @@ import org.cip4.jdflib.auto.JDFAutoContentObject;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.ifaces.IPlacedObject;
 
-public class JDFContentObject extends JDFAutoContentObject implements
-		IPlacedObject
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * before May 14, 2009
+ */
+public class JDFContentObject extends JDFAutoContentObject implements IPlacedObject
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFContentObject
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFContentObject(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFContentObject(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContentObject
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
+	 * 
 	 */
-	public JDFContentObject(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFContentObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFContentObject
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
+	 * 
 	 */
-	public JDFContentObject(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFContentObject(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -142,12 +142,11 @@ public class JDFContentObject extends JDFAutoContentObject implements
 		return "JDFContentObject[  --> " + super.toString() + " ]";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cip4.jdflib.ifaces.IPlacedObject#setTrimCTM(double, double)
+	/**
+	 * @param x
+	 * @param y
 	 */
-	public void setTrimSize(double x, double y)
+	public void setTrimSize(final double x, final double y)
 	{
 		setTrimSize(new JDFXYPair(x, y));
 	}
@@ -155,45 +154,40 @@ public class JDFContentObject extends JDFAutoContentObject implements
 	/**
 	 * calculates a "real" ord value in an automated layout
 	 * 
-	 * @param ord
-	 *            the Value of Ord in the layout
-	 * @param nPages
-	 *            the total number of pages that are consumed by the Layout, if
-	 *            frontOffset!=0 the pages before frontOffset are NOT counted
-	 * @param loop
-	 *            which sheet loop are we on?
-	 * @param maxOrdFront
-	 *            number of pages consumed from the front of the list
-	 * @param maxOrdBack
-	 *            positive number of pages consumed from the back of the list
-	 * @param frontOffset
-	 *            page number of the first page to be placed on ord 0 in loop 0
+	 * @param ord the Value of Ord in the layout
+	 * @param nPages the total number of pages that are consumed by the Layout, if frontOffset!=0 the pages before frontOffset are NOT counted
+	 * @param loop which sheet loop are we on?
+	 * @param maxOrdFront number of pages consumed from the front of the list
+	 * @param maxOrdBack positive number of pages consumed from the back of the list
+	 * @param frontOffset page number of the first page to be placed on ord 0 in loop 0
 	 * @return the pge to assign in this Ord, -1 if no page fits
 	 */
-	public static int calcOrd(int ord, int nPages, int loop, int maxOrdFront,
-			int maxOrdBack, int frontOffset)
+	public static int calcOrd(final int ord, final int nPages, final int loop, final int maxOrdFront, final int maxOrdBack, final int frontOffset)
 	{
 		final int maxOrd = maxOrdFront + maxOrdBack;
 		if (maxOrd * loop >= nPages)
+		{
 			return -1; // we are in a loop that has no remaining pages
+		}
 		int page;
 		if (ord >= 0) // count from front
 		{
 			page = ord + loop * maxOrdFront;
-		} else
+		}
+		else
 		{
-			int end = nPages + maxOrd - 1 - ((nPages + maxOrd - 1) % maxOrd); // the
-																				// page
-																				// to
-																				// put
-																				// on
-																				// -
-																				// 1
+			final int end = nPages + maxOrd - 1 - ((nPages + maxOrd - 1) % maxOrd); // the
+			// page
+			// to
+			// put
+			// on
+			// -
+			// 1
 			page = end - loop * maxOrdBack + ord;
 		}
 		return page < nPages ? page + frontOffset : -1; // if a page evaluates
-														// to e.g. 10 and we
-														// only have 9 pages,
-														// ciao
+		// to e.g. 10 and we
+		// only have 9 pages,
+		// ciao
 	}
 }

@@ -74,6 +74,8 @@ package org.cip4.jdflib.elementwalker;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFRefElement;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
@@ -81,25 +83,83 @@ import org.cip4.jdflib.resource.JDFResource;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class UnlinkFinderTest extends JDFTestCaseBase
 {
 
 	JDFNode n;
-	JDFResource rl;
+	JDFResource r;
 	JDFResource xm;
 	JDFResource m;
+	JDFResourceLink rl;
+	JDFRefElement re;
 
 	/**
 	 * 
 	 */
-	public void testGetUlinked()
+	public void testGetUlinkedRes()
 	{
-		UnLinkFinder uf = new UnLinkFinder();
+		final UnLinkFinder uf = new UnLinkFinder();
+		final VElement v = uf.getUnlinkedResources(n);
+		assertEquals(v.size(), 1);
+		assertTrue(v.contains(r));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetUlinkedAll()
+	{
+		final UnLinkFinder uf = new UnLinkFinder();
+		final VElement v = uf.getAllUnlinked(n);
+		assertEquals(v.size(), 3);
+		assertTrue(v.contains(r));
+		assertTrue(v.contains(rl));
+		assertTrue(v.contains(re));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetUlinkedRef()
+	{
+		final UnLinkFinder uf = new UnLinkFinder();
+		final VElement v = uf.getUnlinkedRefs(n);
+		assertEquals(v.size(), 2);
+		assertTrue(v.contains(rl));
+		assertTrue(v.contains(re));
+	}
+
+	/**
+	 * 
+	 */
+	public void testEraseUlinkedRes()
+	{
+		final UnLinkFinder uf = new UnLinkFinder();
+		uf.eraseUnlinkedResources(n);
+		VElement v = uf.getUnlinkedResources(n);
+		assertNull(v);
+		v = uf.getUnlinkedRefs(n);
+		assertEquals(v.size(), 2);
+		v = uf.getAllUnlinked(n);
+		assertEquals(v.size(), 2);
+
+	}
+
+	/**
+	 * 
+	 */
+	public void testEraseUlinkedRefs()
+	{
+		final UnLinkFinder uf = new UnLinkFinder();
+		uf.eraseUnlinkedRefs(n);
 		VElement v = uf.getUnlinkedResources(n);
 		assertEquals(v.size(), 1);
-		assertTrue(v.contains(rl));
+		v = uf.getAllUnlinked(n);
+		assertEquals(v.size(), 1);
+		v = uf.getUnlinkedRefs(n);
+		assertNull(v);
 	}
 
 	/**
@@ -107,10 +167,13 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 	 */
 	public void testEraseUlinked()
 	{
-		UnLinkFinder uf = new UnLinkFinder();
-		uf.eraseUnlinkedResources(n);
+		final UnLinkFinder uf = new UnLinkFinder();
+		uf.eraseUnlinked(n);
 		VElement v = uf.getUnlinkedResources(n);
-
+		assertNull(v);
+		v = uf.getUnlinkedRefs(n);
+		assertNull(v);
+		v = uf.getAllUnlinked(n);
 		assertNull(v);
 	}
 
@@ -120,9 +183,13 @@ public class UnlinkFinderTest extends JDFTestCaseBase
 		// TODO Auto-generated method stub
 		super.setUp();
 		n = new JDFDoc("JDF").getJDFRoot();
-		rl = n.appendResourcePool().appendResource("RunList", null, null);
+		r = n.appendResourcePool().appendResource("RunList", null, null);
 		xm = n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Input);
 		m = (JDFResource) xm.appendElement("Media");
 		m.makeRootResource(null, null, true);
+		rl = (JDFResourceLink) n.getResourceLinkPool().appendElement("FooLink");
+		re = (JDFRefElement) xm.appendElement("BarRef");
+		re.setrRef("barf");
+		rl.setAttribute("rRef", "barf");
 	}
 }

@@ -392,7 +392,7 @@ public class JDFAuditPool extends JDFPool
 		final JDFPhaseTime myAudit = (JDFPhaseTime) addAudit(JDFAudit.EnumAuditType.PhaseTime, by);
 		myAudit.setStatus(phase);
 		myAudit.setStart(new JDFDate());
-		myAudit.setEnd(new JDFDate());
+		// no - initially the phase is open // myAudit.setEnd(new JDFDate());
 		myAudit.setPartMapVector(vmParts);
 		final JDFNode parentJDF = getParentJDF();
 		if (parentJDF != null)

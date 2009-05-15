@@ -83,6 +83,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.VectorMap;
 
 /**
  * @author prosirai finds unlinked resources - example usage of the walker classes
@@ -107,11 +108,41 @@ public class UnLinkFinder extends BaseElementWalker
 	 * @param n the node to walk
 	 * @return the vector of unlinked resources
 	 */
-	public VElement getUnlinkedResources(JDFNode n)
+	public VElement getUnlinkedResources(final JDFNode n)
+	{
+		ld.clear();
+		walkTree(n, null);
+		final Vector<KElement> toValueVector = ContainerUtil.toValueVector(ld.resMap, false);
+		return toValueVector == null ? null : new VElement(toValueVector);
+	}
+
+	/**
+	 * get a vector of all unlinked resources of n and its children
+	 * 
+	 * @param n the node to walk
+	 * @return the vector of unlinked resources
+	 */
+	public VElement getUnlinkedRefs(final JDFNode n)
+	{
+		ld.clear();
+		walkTree(n, null);
+		final Vector<KElement> toValueVector = ld.refMap.getAllValues();
+		return toValueVector == null ? null : new VElement(toValueVector);
+	}
+
+	/**
+	 * get a vector of all unlinked resources of n and its children
+	 * 
+	 * @param n the node to walk
+	 * @return the vector of unlinked resources
+	 */
+	public VElement getAllUnlinked(final JDFNode n)
 	{
 		ld.clear();
 		walkTree(n, null);
 		Vector<KElement> toValueVector = ContainerUtil.toValueVector(ld.resMap, false);
+		final Vector<KElement> toValueVectorRef = ld.refMap.getAllValues();
+		toValueVector = (Vector<KElement>) ContainerUtil.addAll(toValueVector, toValueVectorRef);
 		return toValueVector == null ? null : new VElement(toValueVector);
 	}
 
@@ -120,17 +151,63 @@ public class UnLinkFinder extends BaseElementWalker
 	 * 
 	 * @param n the node to clean
 	 */
-	public void eraseUnlinkedResources(JDFNode n)
+	public void eraseUnlinkedResources(final JDFNode n)
 	{
-		VElement v = getUnlinkedResources(n);
+		eraseUnlinked(n, false, true);
+	}
+
+	/**
+	 * erase all unlinked resources that are in n
+	 * 
+	 * @param n the node to clean
+	 */
+	public void eraseUnlinkedRefs(final JDFNode n)
+	{
+		eraseUnlinked(n, true, false);
+	}
+
+	/**
+	 * erase all unlinked resources that are in n
+	 * 
+	 * @param n the node to clean
+	 */
+	public void eraseUnlinked(final JDFNode n)
+	{
+		eraseUnlinked(n, true, true);
+	}
+
+	/**
+	 * erase all unlinked resources that are in n
+	 * 
+	 * @param n the node to clean
+	 */
+	private void eraseUnlinked(final JDFNode n, final boolean ref, final boolean res)
+	{
+		VElement v = null;
+		if (ref && res)
+		{
+			v = getAllUnlinked(n);
+		}
+		else if (ref)
+		{
+			v = getUnlinkedRefs(n);
+		}
+		else if (res)
+		{
+			v = getUnlinkedResources(n);
+		}
 		if (v != null)
 		{
-			int siz = v.size();
+			final int siz = v.size();
 			for (int i = 0; i < siz; i++)
+			{
 				v.get(i).deleteNode();
+			}
 
 			if (siz > 0)
-				eraseUnlinkedResources(n);
+			{
+				eraseUnlinked(n, ref, res);
+			}
 		}
 	}
 
@@ -152,25 +229,24 @@ public class UnLinkFinder extends BaseElementWalker
 		{
 			super();
 			resMap = new HashMap<String, KElement>();
-			refSet = new HashSet<String>();
+			refMap = new VectorMap<String, KElement>();
 			doneSet = new HashSet<String>();
 		}
 
 		HashMap<String, KElement> resMap;
-		HashSet<String> refSet;
+		VectorMap<String, KElement> refMap;
 		HashSet<String> doneSet;
 
 		protected void clear()
 		{
 			resMap.clear();
-			refSet.clear();
+			refMap.clear();
 			doneSet.clear();
 		}
 	}
 
 	/**
-	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super
-	 * classes
+	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
 	 * 
 	 * @author prosirai
 	 * 
@@ -190,19 +266,21 @@ public class UnLinkFinder extends BaseElementWalker
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
 		 * @param e
 		 * @param trackElem
-		 * @return the element to continue walking 
+		 * @return the element to continue walking
 		 */
 		@Override
-		public KElement walk(KElement e, KElement trackElem)
+		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			JDFResource r = (JDFResource) e;
-			String id = r.getID();
+			final JDFResource r = (JDFResource) e;
+			final String id = r.getID();
 			if (ld.doneSet.contains(id))
+			{
 				return e;
-			if (ld.refSet.contains(id))
+			}
+			if (ld.refMap.containsKey(id))
 			{
 				ld.doneSet.add(id);
-				ld.refSet.remove(id);
+				ld.refMap.remove(id);
 				return e;
 			}
 			ld.resMap.put(id, r);
@@ -215,11 +293,13 @@ public class UnLinkFinder extends BaseElementWalker
 		 * @return true if matches
 		 */
 		@Override
-		public boolean matches(KElement toCheck)
+		public boolean matches(final KElement toCheck)
 		{
-			boolean b = super.matches(toCheck);
+			final boolean b = super.matches(toCheck);
 			if (!b)
+			{
 				return false;
+			}
 			return (toCheck instanceof JDFResource) && ((JDFResource) toCheck).isResourceRoot();
 		}
 	}
@@ -247,13 +327,17 @@ public class UnLinkFinder extends BaseElementWalker
 		 * @return
 		 */
 		@Override
-		public KElement walk(KElement e, KElement trackElem)
+		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			String id = e.getAttribute(AttributeName.RREF, null, null);
+			final String id = e.getAttribute(AttributeName.RREF, null, null);
 			if (id == null)
+			{
 				return e;
+			}
 			if (ld.doneSet.contains(id))
+			{
 				return e;
+			}
 
 			if (ld.resMap.containsKey(id))
 			{
@@ -261,7 +345,7 @@ public class UnLinkFinder extends BaseElementWalker
 				ld.resMap.remove(id);
 				return e;
 			}
-			ld.refSet.add(id);
+			ld.refMap.putOne(id, e);
 			return e;
 		}
 
@@ -271,11 +355,13 @@ public class UnLinkFinder extends BaseElementWalker
 		 * @return true if matches
 		 */
 		@Override
-		public boolean matches(KElement toCheck)
+		public boolean matches(final KElement toCheck)
 		{
-			boolean b = super.matches(toCheck);
+			final boolean b = super.matches(toCheck);
 			if (!b)
+			{
 				return false;
+			}
 			return (toCheck instanceof JDFResourceLink) || (toCheck instanceof JDFRefElement);
 		}
 

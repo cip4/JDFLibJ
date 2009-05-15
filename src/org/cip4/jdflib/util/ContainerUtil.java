@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -178,6 +178,27 @@ public class ContainerUtil
 			v.add(l[i]);
 		}
 		return v;
+	}
+
+	/**
+	 * @param c1
+	 * @param c2
+	 * @param <a>
+	 * @return
+	 * 
+	 */
+	public static <a> Collection<a> addAll(final Collection<a> c1, final Collection<a> c2)
+	{
+		if (c1 == null)
+		{
+			return c2;
+		}
+		if (c2 == null)
+		{
+			return c1;
+		}
+		c1.addAll(c2);
+		return c1;
 	}
 
 	/**

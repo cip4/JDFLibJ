@@ -71,11 +71,12 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 
 /**
- * @author Rainer Prosi, Heidelberger Druckmaschinen
- * tests for the VectorMap class
+ * @author Rainer Prosi, Heidelberger Druckmaschinen tests for the VectorMap class
  */
 public class VectorMapTest extends JDFTestCaseBase
 {
@@ -95,6 +96,17 @@ public class VectorMapTest extends JDFTestCaseBase
 	public void testGetOne()
 	{
 		assertEquals(m.getOne("a", 0), "b");
+	}
+
+	/**
+	 * test for getOne
+	 */
+	public void testGetAllValues()
+	{
+		final Vector<String> allValues = m.getAllValues();
+		assertEquals(allValues.size(), 3);
+		assertTrue(allValues.contains("b"));
+		assertTrue(allValues.contains("c"));
 	}
 
 	/**
@@ -159,7 +171,6 @@ public class VectorMapTest extends JDFTestCaseBase
 	@Override
 	protected void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
 		m = new VectorMap<String, String>();
 		m.putOne("a", "b");

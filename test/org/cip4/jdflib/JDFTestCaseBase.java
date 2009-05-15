@@ -179,9 +179,9 @@ public abstract class JDFTestCaseBase extends TestCase
 		return doc;
 	}
 
-	private String agentName;
-	private String agentVersion;
-	private String author;
+	protected String agentName;
+	protected String agentVersion;
+	protected String author;
 	protected String senderID;
 	protected long mem;
 

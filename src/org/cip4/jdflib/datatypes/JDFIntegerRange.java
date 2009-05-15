@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,9 +86,8 @@ import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * This class represents an integer range (JDFIntegerRange). It is a pair of 2 integer values separated by a tilde "~",
- * for example "123 ~ 145" negative values are treated differently depending on the value of m_defaultXDef @see
- * getDefaultDef
+ * This class represents an integer range (JDFIntegerRange). It is a pair of 2 integer values separated by a tilde "~", for example "123 ~ 145" negative values
+ * are treated differently depending on the value of m_defaultXDef @see getDefaultDef
  */
 public class JDFIntegerRange extends JDFRange
 {
@@ -115,7 +114,7 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @param x the given min and max value
 	 */
-	public JDFIntegerRange(int x)
+	public JDFIntegerRange(final int x)
 	{
 		init(x, x, m_defaultXDef);
 	}
@@ -126,7 +125,7 @@ public class JDFIntegerRange extends JDFRange
 	 * @param xmin the given min value
 	 * @param xmax the given max value
 	 */
-	public JDFIntegerRange(int xmin, int xmax)
+	public JDFIntegerRange(final int xmin, final int xmax)
 	{
 		init(xmin, xmax, m_defaultXDef);
 	}
@@ -138,7 +137,7 @@ public class JDFIntegerRange extends JDFRange
 	 * @param xmax the given max value
 	 * @param xdef number of items
 	 */
-	public JDFIntegerRange(int xmin, int xmax, int xdef)
+	public JDFIntegerRange(final int xmin, final int xmax, final int xdef)
 	{
 		init(xmin, xmax, xdef);
 	}
@@ -148,7 +147,7 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @param ir the given JDFIntegerRange
 	 */
-	public JDFIntegerRange(JDFIntegerRange ir)
+	public JDFIntegerRange(final JDFIntegerRange ir)
 	{
 		init(ir.m_left, ir.m_right, ir.m_xDef);
 	}
@@ -156,7 +155,7 @@ public class JDFIntegerRange extends JDFRange
 	/**
 	 * Initialization
 	 */
-	protected void init(int xmin, int xmax, int xdef)
+	protected void init(final int xmin, final int xmax, final int xdef)
 	{
 		m_left = xmin;
 		m_right = xmax;
@@ -170,7 +169,7 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFIntegerRange(String s) throws DataFormatException
+	public JDFIntegerRange(final String s) throws DataFormatException
 	{
 		this(s, m_defaultXDef);
 	}
@@ -183,13 +182,13 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFIntegerRange(String s, int xdef) throws DataFormatException
+	public JDFIntegerRange(final String s, final int xdef) throws DataFormatException
 	{
 		if (s == null)
 		{
 			throw new DataFormatException("JDFIntegerRange illegal string: " + s);
 		}
-		String[] strArray = s.split("~");
+		final String[] strArray = s.split("~");
 		if ((strArray.length <= 0) || (strArray.length > 2))
 		{
 			throw new DataFormatException("JDFIntegerRange illegal string: " + s);
@@ -201,7 +200,9 @@ public class JDFIntegerRange extends JDFRange
 				// the min and the max values are equal
 				m_left = StringUtil.parseInt(strArray[0], xdef);
 				if (!StringUtil.isInteger(strArray[0]))
+				{
 					throw new DataFormatException("JDFIntegerRange illegal string: " + s);
+				}
 				m_right = m_left;
 			}
 			// two different values
@@ -211,13 +212,17 @@ public class JDFIntegerRange extends JDFRange
 				// the min and the max values are equal
 				m_left = StringUtil.parseInt(strArray[0], xdef);
 				if (m_left == xdef && !StringUtil.isInteger(strArray[0]))
+				{
 					throw new DataFormatException("JDFIntegerRange illegal string: " + s);
+				}
 				m_right = StringUtil.parseInt(strArray[1], xdef);
 				if (m_right == xdef && !StringUtil.isInteger(strArray[1]))
+				{
 					throw new DataFormatException("JDFIntegerRange illegal string: " + s);
+				}
 			}
 		}
-		catch (NumberFormatException e)
+		catch (final NumberFormatException e)
 		{
 			throw new DataFormatException("JDFIntegerRange illegal string: " + s);
 		}
@@ -249,13 +254,13 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @return boolean - false if the String has not a valid format
 	 */
-	public boolean isValid(String s)
+	public boolean isValid(final String s)
 	{
 		try
 		{
 			new JDFIntegerRange(s);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
@@ -268,7 +273,7 @@ public class JDFIntegerRange extends JDFRange
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -310,7 +315,7 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @param x the left int object
 	 */
-	public void setLeft(int x)
+	public void setLeft(final int x)
 	{
 		m_left = x;
 	}
@@ -326,11 +331,22 @@ public class JDFIntegerRange extends JDFRange
 	}
 
 	/**
+	 * scale - scales both values but NOT the default
+	 * 
+	 * @param f the scaling factor
+	 */
+	public void scale(final int f)
+	{
+		m_right *= f;
+		m_left *= f;
+	}
+
+	/**
 	 * setRight - sets the right int object
 	 * 
 	 * @param x the right int object
 	 */
-	public void setRight(int x)
+	public void setRight(final int x)
 	{
 		m_right = x;
 	}
@@ -352,7 +368,7 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @param x the new lower value of the range
 	 */
-	public void setLowerValue(int x)
+	public void setLowerValue(final int x)
 	{
 		final int left = this.getLeft();
 		final int right = this.getRight();
@@ -388,7 +404,7 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @param x the new upper value of the range
 	 */
-	public void setUpperValue(int x)
+	public void setUpperValue(final int x)
 	{
 		final int left = this.getLeft();
 		final int right = this.getRight();
@@ -414,42 +430,43 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @return boolean - true if x in range
 	 */
-	public boolean inRange(int x)
+	public boolean inRange(final int x)
 	{
 		return (x >= this.getLowerValue()) && (x <= this.getUpperValue());
 	}
 
 	/**
-	 * isPartOfRange - is range 'ir' within this range?
+	 * isPartOfRange - is range 'r' within this range?
 	 * 
-	 * @param ir the range to test
+	 * @param r the range to test
 	 * 
-	 * @return boolean - true if range 'ir' is within this range, else false
+	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
-	public boolean isPartOfRange(JDFRange r)
+	public boolean isPartOfRange(final JDFRange r)
 	{
-		JDFIntegerRange ir = (JDFIntegerRange) r;
+		final JDFIntegerRange ir = (JDFIntegerRange) r;
 		return (ir.getLowerValue() >= this.getLowerValue()) && (ir.getUpperValue() <= this.getUpperValue());
 	}
 
 	/**
-	 * getElementCount - returns the number of elements in this range, on the C++ side of the JDF library this method is
-	 * called NElements if any if any range cannot be resolved due to an unknown negative value without a known default,
-	 * -1 is returned
+	 * getElementCount - returns the number of elements in this range, on the C++ side of the JDF library this method is called NElements if any if any range
+	 * cannot be resolved due to an unknown negative value without a known default, -1 is returned
 	 * 
 	 * @return int - the number of elements in this range, -1 if any range cannot be resolved
 	 */
 	public int getElementCount()
 	{
 		if (m_defaultXDef == 0 && (getRight() < 0 || getLeft() < 0))
+		{
 			return -1;
+		}
 		return 1 + Math.abs(this.getLeft() - this.getRight());
 	}
 
 	/**
-	 * append - appends a value to this range, returns true if possible returns false if the element is not the next
-	 * element in the list, it only appends on the right side of the range. For example:
+	 * append - appends a value to this range, returns true if possible returns false if the element is not the next element in the list, it only appends on the
+	 * right side of the range. For example:
 	 * 
 	 * <pre>
 	 * &quot;3&tilde;5&quot;        append(6)   -&gt; &quot;3&tilde;6&quot;
@@ -463,7 +480,7 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @return boolean - true if successful
 	 */
-	public boolean append(int x)
+	public boolean append(final int x)
 	{
 		final int right = this.getRight();
 		final int left = this.getLeft();
@@ -502,8 +519,8 @@ public class JDFIntegerRange extends JDFRange
 
 	/**
 	 * Element - value of the ith element in the range.<br>
-	 * If the index is negativ the position is counted from the end of the range. For example the range is 3~7, the 2nd
-	 * element is 5 and the -2nd element is 6. On the C++ side of the JDF library this method is called Element.
+	 * If the index is negativ the position is counted from the end of the range. For example the range is 3~7, the 2nd element is 5 and the -2nd element is 6.
+	 * On the C++ side of the JDF library this method is called Element.
 	 * 
 	 * @param i the position, if it is a negativ value start counting from the right side +1
 	 * 
@@ -511,9 +528,9 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @throws NoSuchElementException - if the index is out of range
 	 */
-	public int getElement(int i) throws NoSuchElementException
+	public int getElement(final int i) throws NoSuchElementException
 	{
-		int n = this.getElementCount();
+		final int n = this.getElementCount();
 
 		if ((i >= n) || (i < -n))
 		{
@@ -545,7 +562,7 @@ public class JDFIntegerRange extends JDFRange
 	 * 
 	 * @param xdef the value that will represent negative values in this range
 	 */
-	public void setDef(int xdef)
+	public void setDef(final int xdef)
 	{
 		m_xDef = xdef;
 	}
@@ -555,10 +572,9 @@ public class JDFIntegerRange extends JDFRange
 	 * the value represents the index that is one past the end of the list<br>
 	 * if xdef==0 (the default), the neg numbers themselves are used
 	 * 
-	 * @param xdef - (int)1 above the value that -1 will represent in this range i.e. the value that -0, were it
-	 *            possible to specify, would represent
+	 * @param xdef - (int)1 above the value that -1 will represent in this range i.e. the value that -0, were it possible to specify, would represent
 	 */
-	public static void setDefaultDef(int xdef)
+	public static void setDefaultDef(final int xdef)
 	{
 		m_defaultXDef = xdef;
 	}
@@ -568,8 +584,7 @@ public class JDFIntegerRange extends JDFRange
 	 * the value represents the index that is one past the end of the list<br>
 	 * if xdef==0 (the default), the neg numbers themselves are used
 	 * 
-	 * @return int - (int)1 above the value that -1 will represent in this range i.e. the value that -0, were it
-	 *         possible to specify, would represent
+	 * @return int - (int)1 above the value that -1 will represent in this range i.e. the value that -0, were it possible to specify, would represent
 	 */
 	public static int getDefaultDef()
 	{
@@ -579,8 +594,7 @@ public class JDFIntegerRange extends JDFRange
 	/**
 	 * getDef - gets xDef, the default value which is used for negative numbers
 	 * 
-	 * @return int - one above the value that -1 will represent in this range i.e. the value that -0, were it possible
-	 *         to specify, would represent
+	 * @return int - one above the value that -1 will represent in this range i.e. the value that -0, were it possible to specify, would represent
 	 */
 	public int getDef()
 	{
@@ -596,7 +610,7 @@ public class JDFIntegerRange extends JDFRange
 	public JDFIntegerList getIntegerList()
 	{
 
-		JDFIntegerList irl = new JDFIntegerList();
+		final JDFIntegerList irl = new JDFIntegerList();
 		final int elementCount = this.getElementCount();
 		for (int i = 0; i < elementCount; i++)
 		{
@@ -619,7 +633,7 @@ public class JDFIntegerRange extends JDFRange
 	}
 
 	@Override
-	protected boolean inObjectRange(Object other)
+	protected boolean inObjectRange(final Object other)
 	{
 		return inRange(((Integer) other).intValue());
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,8 +86,8 @@ import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * This class represents a number range (JDFNumberRange). It is a whitespace separated list of 2 double values separated
- * by a tilde "~", for example "1.23 ~ 1.45"
+ * This class represents a number range (JDFNumberRange). It is a whitespace separated list of 2 double values separated by a tilde "~", for example
+ * "1.23 ~ 1.45"
  */
 public class JDFNumberRange extends JDFRange
 {
@@ -111,7 +111,7 @@ public class JDFNumberRange extends JDFRange
 	 * 
 	 * @param x the given double
 	 */
-	public JDFNumberRange(double x)
+	public JDFNumberRange(final double x)
 	{
 		init(x, x);
 	}
@@ -122,7 +122,7 @@ public class JDFNumberRange extends JDFRange
 	 * @param xmin the given min value
 	 * @param xmax the given max value
 	 */
-	public JDFNumberRange(double xmin, double xmax)
+	public JDFNumberRange(final double xmin, final double xmax)
 	{
 		init(xmin, xmax);
 	}
@@ -132,7 +132,7 @@ public class JDFNumberRange extends JDFRange
 	 * 
 	 * @param nr
 	 */
-	public JDFNumberRange(JDFNumberRange nr)
+	public JDFNumberRange(final JDFNumberRange nr)
 	{
 		init(nr.getLeft(), nr.getRight());
 
@@ -144,7 +144,7 @@ public class JDFNumberRange extends JDFRange
 	 * @param xmin left value
 	 * @param xmax right value
 	 */
-	protected void init(double xmin, double xmax)
+	protected void init(final double xmin, final double xmax)
 	{
 		m_left = xmin;
 		m_right = xmax;
@@ -157,9 +157,9 @@ public class JDFNumberRange extends JDFRange
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFNumberRange(String s) throws DataFormatException
+	public JDFNumberRange(final String s) throws DataFormatException
 	{
-		String[] strArray = s.split("~");
+		final String[] strArray = s.split("~");
 		if (strArray.length <= 0 || strArray.length > 2)
 		{
 			throw new DataFormatException("JDFNumberRange illegal string: " + s);
@@ -171,7 +171,9 @@ public class JDFNumberRange extends JDFRange
 			{
 				m_left = StringUtil.parseDouble(strArray[0], 0.0);
 				if (m_left == 0.0 && !StringUtil.isNumber(strArray[0]))
+				{
 					throw new DataFormatException("JDFIntegerRange illegal string: " + s);
+				}
 				m_right = m_left;
 			}
 			// two different values
@@ -179,13 +181,17 @@ public class JDFNumberRange extends JDFRange
 			{
 				m_left = StringUtil.parseDouble(strArray[0], 0.0);
 				if (m_left == 0.0 && !StringUtil.isNumber(strArray[0]))
+				{
 					throw new DataFormatException("JDFIntegerRange illegal string: " + s);
+				}
 				m_right = StringUtil.parseDouble(strArray[1], 0.0);
 				if (m_right == 0.0 && !StringUtil.isNumber(strArray[1]))
+				{
 					throw new DataFormatException("JDFIntegerRange illegal string: " + s);
+				}
 			}
 		}
-		catch (NumberFormatException e)
+		catch (final NumberFormatException e)
 		{
 			throw new DataFormatException("JDFNumberRange illegal string: " + s);
 		}
@@ -215,13 +221,13 @@ public class JDFNumberRange extends JDFRange
 	 * 
 	 * @return boolean - false if the String has not a valid format
 	 */
-	public boolean isValid(String s)
+	public boolean isValid(final String s)
 	{
 		try
 		{
 			new JDFNumberRange(s);
 		}
-		catch (DataFormatException e)
+		catch (final DataFormatException e)
 		{
 			return false;
 		}
@@ -229,14 +235,13 @@ public class JDFNumberRange extends JDFRange
 	}
 
 	/**
-	 * equals - returns true if both JDFNumberRange are equal otherwise false, the difference must be smaller than
-	 * EPSILON
+	 * equals - returns true if both JDFNumberRange are equal otherwise false, the difference must be smaller than EPSILON
 	 * 
 	 * @param other the object to compare with <code>this</code>
 	 * @return boolean - true if equal otherwise false
 	 */
 	@Override
-	public boolean equals(Object other)
+	public boolean equals(final Object other)
 	{
 		if (this == other)
 		{
@@ -251,10 +256,9 @@ public class JDFNumberRange extends JDFRange
 			return false;
 		}
 
-		JDFNumberRange jdfNumberRange = (JDFNumberRange) other;
+		final JDFNumberRange jdfNumberRange = (JDFNumberRange) other;
 
-		return (Math.abs(this.getLeft() - jdfNumberRange.getLeft()) <= EPSILON)
-				&& (Math.abs(this.getRight() - jdfNumberRange.getRight()) <= EPSILON);
+		return (Math.abs(this.getLeft() - jdfNumberRange.getLeft()) <= EPSILON) && (Math.abs(this.getRight() - jdfNumberRange.getRight()) <= EPSILON);
 	}
 
 	/**
@@ -313,7 +317,7 @@ public class JDFNumberRange extends JDFRange
 	 * 
 	 * @param x the left double object
 	 */
-	public void setLeft(double x)
+	public void setLeft(final double x)
 	{
 		m_left = x;
 	}
@@ -323,13 +327,25 @@ public class JDFNumberRange extends JDFRange
 	 * 
 	 * @param x the right double object
 	 */
-	public void setRight(double x)
+	public void setRight(final double x)
 	{
 		m_right = x;
 	}
 
 	/**
-	 * getLowerValue - returns the lower value of the bounds<br> for example 4.5~6.3 returns 4.5, 7.0~5.9 returns 5.9
+	 * scale - scales both values
+	 * 
+	 * @param f the scaling factor
+	 */
+	public void scale(final double f)
+	{
+		m_right *= f;
+		m_left *= f;
+	}
+
+	/**
+	 * getLowerValue - returns the lower value of the bounds<br>
+	 * for example 4.5~6.3 returns 4.5, 7.0~5.9 returns 5.9
 	 * 
 	 * @return double - the lower value of the range
 	 */
@@ -339,7 +355,8 @@ public class JDFNumberRange extends JDFRange
 	}
 
 	/**
-	 * getUpperValue - return the upper value of the bounds<br> for example 4.5~6.3 returns 6.3, 7.0~5.9 returns 7.0
+	 * getUpperValue - return the upper value of the bounds<br>
+	 * for example 4.5~6.3 returns 6.3, 7.0~5.9 returns 7.0
 	 * 
 	 * @return double - the upper value of the range
 	 */
@@ -355,7 +372,7 @@ public class JDFNumberRange extends JDFRange
 	 * 
 	 * @return boolean - true if x in range
 	 */
-	public boolean inRange(double x)
+	public boolean inRange(final double x)
 	{
 		return (x >= getLowerValue()) && (x <= getUpperValue());
 	}
@@ -368,9 +385,9 @@ public class JDFNumberRange extends JDFRange
 	 * @return boolean - true if range 'r' is within this range, else false
 	 */
 	@Override
-	public boolean isPartOfRange(JDFRange ra)
+	public boolean isPartOfRange(final JDFRange ra)
 	{
-		JDFNumberRange r = (JDFNumberRange) ra;
+		final JDFNumberRange r = (JDFNumberRange) ra;
 		return (r.getLowerValue() >= this.getLowerValue()) && (r.getUpperValue() <= this.getUpperValue());
 	}
 
@@ -387,7 +404,7 @@ public class JDFNumberRange extends JDFRange
 	}
 
 	@Override
-	protected boolean inObjectRange(Object other)
+	protected boolean inObjectRange(final Object other)
 	{
 		return inRange(((Double) other).doubleValue());
 	}

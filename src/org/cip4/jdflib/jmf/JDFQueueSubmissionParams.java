@@ -171,7 +171,7 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 		}
 		final JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
 
-		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY };
+		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME };
 
 		for (int i = 0; i < copyAtts.length; i++)
 		{

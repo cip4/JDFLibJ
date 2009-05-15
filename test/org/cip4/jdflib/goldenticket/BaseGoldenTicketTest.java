@@ -83,7 +83,6 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
  */
 public class BaseGoldenTicketTest extends JDFTestCaseBase
 {
-	String agentName;
 
 	// //////////////////////////////////////////////////////////////////////////
 	// /
@@ -122,7 +121,7 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
 	 * @param goldenTicket the ticket to write
 	 * @param templateName the file name root of the 3 files
 	 */
-	protected static void write3GTFiles(final BaseGoldenTicket goldenTicket, final String templateName)
+	public static void write3GTFiles(final BaseGoldenTicket goldenTicket, final String templateName)
 	{
 		goldenTicket.write2File(JDFTestCaseBase.sm_dirTestDataTemp + "GoldenTicket_Manager_" + templateName + ".jdf", 2);
 		Assert.assertTrue(goldenTicket.getNode().isValid(EnumValidationLevel.Complete));

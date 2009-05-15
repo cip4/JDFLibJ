@@ -79,18 +79,24 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoRepeatDesc;
+import org.cip4.jdflib.core.AttributeName;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * May 14, 2009
+ */
 public class JDFRepeatDesc extends JDFAutoRepeatDesc
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
 	public JDFRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -99,11 +105,11 @@ public class JDFRepeatDesc extends JDFAutoRepeatDesc
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
 	public JDFRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -112,16 +118,24 @@ public class JDFRepeatDesc extends JDFAutoRepeatDesc
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 * @throws DOMException
+	 * 
 	 */
 	public JDFRepeatDesc(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * @param value
+	 */
+	public void setLayoutStyle(final String value)
+	{
+		setAttribute(AttributeName.LAYOUTSTYLE, value, null);
 	}
 
 	// **************************************** Methods

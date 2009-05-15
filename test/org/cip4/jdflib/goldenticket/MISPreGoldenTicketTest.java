@@ -70,7 +70,6 @@
  */
 package org.cip4.jdflib.goldenticket;
 
-import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFElement;
@@ -81,7 +80,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
-public class MISPreGoldenTicketTest extends JDFTestCaseBase
+public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 {
 	String agentName;
 	VJDFAttributeMap vMap;

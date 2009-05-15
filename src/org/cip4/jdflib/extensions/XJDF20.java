@@ -145,7 +145,7 @@ public class XJDF20 extends BaseElementWalker
 	public XJDF20()
 	{
 		super(new BaseWalkerFactory());
-		JDFElement.uniqueID(1000); // don't start at zero to avoid collisions in short ID scenarios
+		JDFElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
 		init();
 	}
 
@@ -1290,7 +1290,8 @@ public class XJDF20 extends BaseElementWalker
 			if (rl != null)
 			{
 				final VElement v = setResource(null, rl.getLinkRoot(), newRoot);
-				for (int i = 0; i < v.size(); i++)
+				final int size = v == null ? 0 : v.size();
+				for (int i = 0; i < size; i++)
 				{
 					raNew.appendAttribute(val, v.get(i).getAttribute(AttributeName.ID), null, " ", true);
 				}

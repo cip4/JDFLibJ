@@ -135,6 +135,21 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testAddAll()
+	{
+		final VString v1 = new VString("a b c", null);
+		final VString v2 = new VString("e f g", null);
+		final VString v3 = new VString("a b c e f g", null);
+		assertEquals(ContainerUtil.addAll(null, null), null);
+		assertEquals(ContainerUtil.addAll(v1, null), v1);
+		assertEquals(ContainerUtil.addAll(null, v1), v1);
+		assertEquals(ContainerUtil.addAll(v1, v2), v3);
+		assertEquals(v1, v3);
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetMatch()
 	{
 		final Vector<SimpleMatch> v = new Vector<SimpleMatch>();
@@ -153,7 +168,7 @@ public class ContainerUtilTest extends JDFTestCaseBase
 	public void testToHashSetArray()
 	{
 		final String[] a = { "a", "b" };
-		final Set s = ContainerUtil.toHashSet(a);
+		final Set<String> s = ContainerUtil.toHashSet(a);
 		assertTrue(s.contains("a"));
 		assertTrue(s.contains("b"));
 		assertFalse(s.contains("c"));

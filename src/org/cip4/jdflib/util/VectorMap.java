@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,7 +79,9 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
@@ -112,21 +114,27 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 * @param i the index in the vecor matching key; if <0 count from the back of the vector
 	 * @return the matching vectorObject; null if the key does not exist or i is out of range
 	 */
-	public vectorObject getOne(Object key, int i)
+	public vectorObject getOne(final Object key, final int i)
 	{
 		int iLocal = i;
-		
-		Vector<vectorObject> c = get(key);
+
+		final Vector<vectorObject> c = get(key);
 		if (c == null)
+		{
 			return null;
-		
-		int n = c.size();
+		}
+
+		final int n = c.size();
 		if (iLocal < 0)
+		{
 			iLocal = n + iLocal;
-		
+		}
+
 		if (iLocal < 0 || iLocal >= n)
+		{
 			return null;
-		
+		}
+
 		return c.get(iLocal);
 	}
 
@@ -136,11 +144,13 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 * @param singleObject the object to search
 	 * @return -2: no such key; -1: no value in key; else the index in the vexctor of key
 	 */
-	public int getIndex(key key, vectorObject singleObject)
+	public int getIndex(final key key, final vectorObject singleObject)
 	{
-		Vector<vectorObject> keyVector = get(key);
+		final Vector<vectorObject> keyVector = get(key);
 		if (keyVector == null)
+		{
 			return -2;
+		}
 		return keyVector.indexOf(singleObject);
 	}
 
@@ -149,11 +159,13 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 * @param key the key of the vector
 	 * @return the size of the vector for key, 0 if no key exists
 	 */
-	public int size(key key)
+	public int size(final key key)
 	{
-		Vector<vectorObject> c = get(key);
+		final Vector<vectorObject> c = get(key);
 		if (c == null)
+		{
 			return 0;
+		}
 		return c.size();
 	}
 
@@ -162,7 +174,7 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 * @param key the key of the vector
 	 * @param val the vector element
 	 */
-	public void putOne(key key, vectorObject val)
+	public void putOne(final key key, final vectorObject val)
 	{
 		Vector<vectorObject> v = get(key);
 		if (v == null)
@@ -171,23 +183,42 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 			put(key, v);
 		}
 		if (!v.contains(val))
+		{
 			v.add(val);
+		}
+	}
+
+	/**
+	 *get all values as one big vector
+	 */
+	public Vector<vectorObject> getAllValues()
+	{
+		Vector<vectorObject> v = null;
+		final Collection<Vector<vectorObject>> c = values();
+		final Iterator<Vector<vectorObject>> it = c.iterator();
+		while (it.hasNext())
+		{
+			v = (Vector<vectorObject>) ContainerUtil.addAll(v, it.next());
+		}
+		return v;
 	}
 
 	/**
 	 * remove the value for key,also remove key if the vector is empty
-	 *
+	 * 
 	 * @param key the key of the vector
 	 * @param val the vector element
 	 */
-	public void removeOne(key key, vectorObject val)
+	public void removeOne(final key key, final vectorObject val)
 	{
-		Vector<vectorObject> v = get(key);
+		final Vector<vectorObject> v = get(key);
 		if (v != null)
 		{
 			v.remove(val);
 			if (v.size() == 0)
+			{
 				remove(key);
+			}
 		}
 	}
 
@@ -198,17 +229,21 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	 * @param newObj the new object to set
 	 * @param oldObj the old object to replace
 	 */
-	public void setOne(key key, vectorObject newObj, vectorObject oldObj)
+	public void setOne(final key key, final vectorObject newObj, final vectorObject oldObj)
 	{
 
-		Vector<vectorObject> v = get(key);
+		final Vector<vectorObject> v = get(key);
 		if (v != null)
 		{
-			int i = v.indexOf(oldObj);
+			final int i = v.indexOf(oldObj);
 			if (i < 0)
+			{
 				putOne(key, newObj);
+			}
 			else
+			{
 				v.set(i, newObj);
+			}
 		}
 		else
 		{

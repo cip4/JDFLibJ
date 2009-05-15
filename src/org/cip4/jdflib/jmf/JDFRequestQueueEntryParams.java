@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,12 +84,13 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoRequestQueueEntryParams;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 
 /**
  *
  */
-public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
+public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams implements INodeIdentifiable
 {
 	private static final long serialVersionUID = 1L;
 
@@ -99,7 +100,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFRequestQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -111,7 +112,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFRequestQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -124,7 +125,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFRequestQueueEntryParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFRequestQueueEntryParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -160,7 +161,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 	 * @param vParts vector of attribute maps for the parts
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vParts)
+	public void setPartMapVector(final VJDFAttributeMap vParts)
 	{
 		super.setPartMapVector(vParts);
 	}
@@ -171,7 +172,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
@@ -182,7 +183,7 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
@@ -190,11 +191,11 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 	/**
 	 * check whether the part defined by mPart is included
 	 * 
-	 * @param mPartattribute map to look for
+	 * @param mPart attribute map to look for
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}
@@ -203,9 +204,41 @@ public class JDFRequestQueueEntryParams extends JDFAutoRequestQueueEntryParams
 	 * get the NodeIdentifier that can be used to grab a qe from a queue
 	 * 
 	 * @return
+	 * @deprecated use getIdentifier
 	 */
+	@Deprecated
 	public NodeIdentifier getNodeIdentifier()
 	{
 		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
+	}
+
+	/**
+	 * gets the NodeIdetifier that matches this
+	 * 
+	 * @return {@link NodeIdentifier} the matching nodeidentifier
+	 */
+	public NodeIdentifier getIdentifier()
+	{
+		final NodeIdentifier ni = new NodeIdentifier();
+		ni.setTo(getJobID(), getJobPartID(), getPartMapVector());
+		return ni;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
+	 * @param ni
+	 */
+	public void setIdentifier(final NodeIdentifier ni)
+	{
+		NodeIdentifier niLocal = ni;
+
+		if (niLocal == null)
+		{
+			niLocal = new NodeIdentifier();
+		}
+
+		setJobID(niLocal.getJobID());
+		setJobPartID(niLocal.getJobPartID());
+		setPartMapVector(niLocal.getPartMapVector());
 	}
 }

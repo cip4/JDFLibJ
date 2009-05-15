@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,18 +79,24 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoConvertingConfig;
+import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * May 14, 2009
+ */
 public class JDFConvertingConfig extends JDFAutoConvertingConfig
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
 	public JDFConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -99,11 +105,11 @@ public class JDFConvertingConfig extends JDFAutoConvertingConfig
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
 	public JDFConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
@@ -112,11 +118,11 @@ public class JDFConvertingConfig extends JDFAutoConvertingConfig
 
 	/**
 	 * Constructor for JDFDieLayout
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
+	 * 
 	 * @throws DOMException
 	 */
 	public JDFConvertingConfig(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
@@ -125,5 +131,44 @@ public class JDFConvertingConfig extends JDFAutoConvertingConfig
 	}
 
 	// **************************************** Methods
+	/**
+	 * @param min
+	 * @param max
+	 */
+	public void setSheetWidth(final double min, final double max)
+	{
+		super.setSheetWidth(new JDFNumberRange(min, max));
+	}
+
+	/**
+	 * @param min
+	 * @param max
+	 */
+	public void setSheetWidthMM(final double min, final double max)
+	{
+		final JDFNumberRange value = new JDFNumberRange(min, max);
+		value.scale(72 / 25.4);
+		super.setSheetWidth(value);
+	}
+
+	/**
+	 * @param min
+	 * @param max
+	 */
+	public void setSheetHeight(final double min, final double max)
+	{
+		super.setSheetHeight(new JDFNumberRange(min, max));
+	}
+
+	/**
+	 * @param min
+	 * @param max
+	 */
+	public void setSheetHeightMM(final double min, final double max)
+	{
+		final JDFNumberRange value = new JDFNumberRange(min, max);
+		value.scale(72 / 25.4);
+		super.setSheetHeight(value);
+	}
 	// *********************************************
 }
