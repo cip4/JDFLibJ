@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,13 +80,20 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * far before May 17, 2009
+ */
 public class JDFMessageTest extends TestCase
 {
+	private JDFJMF jmf;
 
+	/**
+	 * 
+	 */
 	public void testIsValidMessageElement()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertTrue(sig.isValidMessageElement(ElementName.UPDATEJDFCMDPARAMS, 0));
 		assertFalse(sig.isValidMessageElement(ElementName.MODIFYNODECMDPARAMS, 0));
@@ -112,20 +119,22 @@ public class JDFMessageTest extends TestCase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testAppendValidElement()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
 	// /
+	/**
+	 * 
+	 */
 	public void testGetInvalidAttributes()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
 		assertFalse(sig.getInvalidAttributes(EnumValidationLevel.Complete, true, 999).contains(AttributeName.XSITYPE));
@@ -136,10 +145,11 @@ public class JDFMessageTest extends TestCase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testModifyNode()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.ModifyNode);
 		final JDFModifyNodeCmdParams mnp = sig.appendModifyNodeCmdParams();
 		assertNotNull(mnp);
@@ -161,10 +171,11 @@ public class JDFMessageTest extends TestCase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testUpdateJDF()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		final JDFUpdateJDFCmdParams ujn = command.appendUpdateJDFCmdParams();
 		assertNotNull(ujn);
@@ -185,13 +196,53 @@ public class JDFMessageTest extends TestCase
 
 	// //////////////////////////////////////////////////////////////////////////
 	// /
-	// //////////////////////////////////////////////////////////////////////////
-	// /
 
+	/**
+	 * test for the validity checks of KnownSubscriptions
+	 */
+	public void testKnownSubscriptions()
+	{
+		final JDFSignal sig = jmf.appendSignal(EnumType.KnownSubscriptions);
+		final JDFCommand cmd = jmf.appendCommand(EnumType.KnownSubscriptions);
+		assertNotNull(sig.appendSubscriptionFilter());
+		assertNotNull(sig.appendSubscriptionInfo());
+		assertNotNull(sig.appendSubscriptionInfo());
+		assertNotSame(sig.appendSubscriptionInfo(), sig.appendSubscriptionInfo());
+		try
+		{
+			sig.appendSubscriptionFilter();
+			fail("one is enough");
+		}
+		catch (final JDFException x)
+		{
+			// nop
+		}
+		try
+		{
+			cmd.appendSubscriptionFilter();
+			fail("not a command");
+		}
+		catch (final JDFException x)
+		{
+			// nop
+		}
+		try
+		{
+			cmd.appendSubscriptionInfo();
+			fail("not a command");
+		}
+		catch (final JDFException x)
+		{
+			// nop
+		}
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testSetType()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(command.getXSIType(), "CommandUpdateJDF");
 		command.setType("foo:bar");
@@ -199,12 +250,24 @@ public class JDFMessageTest extends TestCase
 		assertEquals(command.getType(), "foo:bar");
 	}
 
+	/**
+	 * @throws Exception
+	 */
+	@Override
+	public void setUp() throws Exception
+	{
+		super.setUp();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		jmf = doc.getJMFRoot();
+	}
+
 	// //////////////////////////////////////////////////////////////////////////
 	// /
+	/**
+	 * 
+	 */
 	public void testSenderID()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(jmf.getSenderID(), command.getSenderID());
 		command.setSenderID("foo:bar");
@@ -214,10 +277,11 @@ public class JDFMessageTest extends TestCase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testCreateResponse()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JMF);
-		final JDFJMF jmf = doc.getJMFRoot();
 		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
 		assertEquals(command.getXSIType(), "CommandUpdateJDF");
 		command.setType("foo:bar");
@@ -230,11 +294,17 @@ public class JDFMessageTest extends TestCase
 		assertEquals(response.getrefID(), command.getID());
 
 	}
+
 	// //////////////////////////////////////////////////////////////////////////
 	// /
-	// //////////////////////////////////////////////////////////////////////////
-	// /
-	// //////////////////////////////////////////////////////////////////////////
-	// /
+
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return jmf == null ? "JMFMessageTest - null" : "JMFMessageTest:\n" + jmf;
+	}
 
 }

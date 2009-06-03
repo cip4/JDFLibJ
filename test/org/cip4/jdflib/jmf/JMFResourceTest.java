@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ import org.cip4.jdflib.resource.process.JDFUsageCounter;
 /**
  * @author Rainer Prosi
  * 
- *         Test of the Resource JMF
+ * Test of the Resource JMF
  */
 public class JMFResourceTest extends JDFTestCaseBase
 {
@@ -111,14 +111,14 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 */
 	public void testResourceQuParams()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 
-		JDFQuery c = jmf.appendQuery();
+		final JDFQuery c = jmf.appendQuery();
 		jmf.setSenderID("MISSenderID");
 		c.setType(EnumType.Resource);
-		JDFResourceQuParams rqp = c.getCreateResourceQuParams(0);
-		Vector<EnumResourceClass> vClasses = new Vector<EnumResourceClass>();
+		final JDFResourceQuParams rqp = c.getCreateResourceQuParams(0);
+		final Vector<EnumResourceClass> vClasses = new Vector<EnumResourceClass>();
 		vClasses.add(EnumResourceClass.Consumable);
 		vClasses.add(EnumResourceClass.Handling);
 		rqp.setClasses(vClasses);
@@ -131,13 +131,13 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 */
 	public void testGetIdentifier()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 
-		JDFQuery c = jmf.appendQuery();
+		final JDFQuery c = jmf.appendQuery();
 		jmf.setSenderID("MISSenderID");
 		c.setType(EnumType.Resource);
-		JDFResourceQuParams rqp = c.getCreateResourceQuParams(0);
+		final JDFResourceQuParams rqp = c.getCreateResourceQuParams(0);
 		rqp.setJobID("J1");
 		rqp.setJobPartID("p2");
 		assertEquals(rqp.getIdentifier(), new NodeIdentifier("J1", "p2", null));
@@ -151,21 +151,21 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 */
 	public void testUsageCounter()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 
-		JDFSignal s = jmf.appendSignal();
+		final JDFSignal s = jmf.appendSignal();
 		jmf.setSenderID("DeviceSenderID");
 
 		s.setType(EnumType.Resource);
-		JDFResourceQuParams rqp = s.appendResourceQuParams();
+		final JDFResourceQuParams rqp = s.appendResourceQuParams();
 		rqp.setJobID("JobID");
 		rqp.setJobPartID("JobPartID");
-		rqp.setResourceName(new VString(ElementName.USAGECOUNTER,null));
+		rqp.setResourceName(new VString(ElementName.USAGECOUNTER, null));
 
-		JDFResourceInfo ri = s.appendResourceInfo();
+		final JDFResourceInfo ri = s.appendResourceInfo();
 		ri.setActualAmount(42);
-		JDFUsageCounter uc = (JDFUsageCounter) ri.appendElement(ElementName.USAGECOUNTER);
+		final JDFUsageCounter uc = (JDFUsageCounter) ri.appendElement(ElementName.USAGECOUNTER);
 		uc.setID("UsageCounterID");
 		uc.setScope(EnumScope.Job);
 		uc.setCounterID("DeviceCounterID");
@@ -182,19 +182,19 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 */
 	public void testMedia()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 
-		JDFSignal s = jmf.appendSignal();
+		final JDFSignal s = jmf.appendSignal();
 		jmf.setSenderID("DeviceSenderID");
 
 		s.setType(EnumType.Resource);
-		JDFResourceQuParams rqp = s.appendResourceQuParams();
+		final JDFResourceQuParams rqp = s.appendResourceQuParams();
 		rqp.setJobID("JobID");
 		rqp.setJobPartID("JobPartID");
-		rqp.setResourceName(new VString(ElementName.MEDIA,null));
+		rqp.setResourceName(new VString(ElementName.MEDIA, null));
 
-		JDFResourceInfo ri = s.appendResourceInfo();
+		final JDFResourceInfo ri = s.appendResourceInfo();
 		ri.getCreateAmountPool();
 		// TODO continue
 	}
@@ -204,18 +204,18 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 */
 	public void testMediaCatalog()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 		jmf.setSenderID("DeviceSenderID");
 
-		JDFQuery q = jmf.appendQuery(EnumType.Resource);
+		final JDFQuery q = jmf.appendQuery(EnumType.Resource);
 		q.setXMLComment("This is the query for a catalog");
 
-		JDFResourceQuParams rqp = q.appendResourceQuParams();
+		final JDFResourceQuParams rqp = q.appendResourceQuParams();
 		rqp.setExact(true);
 		rqp.setXMLComment("Scope=Allowed is a new attribute to describe that we want a complet list of all known resources");
-		rqp.setResourceName(new VString(ElementName.MEDIA,null));
-		//		rqp.setAttribute("Scope", "Allowed");
+		rqp.setResourceName(new VString(ElementName.MEDIA, null));
+		// rqp.setAttribute("Scope", "Allowed");
 
 		JDFResponse r = q.createResponse().getResponse(0);
 		r = (JDFResponse) jmf.moveElement(r, null);
@@ -223,9 +223,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 		for (int i = 1; i < 5; i++)
 		{
-			JDFResourceInfo ri = r.appendResourceInfo();
+			final JDFResourceInfo ri = r.appendResourceInfo();
 			ri.setResourceName("Media");
-			JDFMedia m = (JDFMedia) ri.appendResource("Media");
+			final JDFMedia m = (JDFMedia) ri.appendResource("Media");
 			m.setDescriptiveName("Description of Media #" + i);
 			m.setDimensionCM(new JDFXYPair(i * 10, 13 + i % 2 * 20));
 			m.setBrand("Brand #" + i);
@@ -247,24 +247,24 @@ public class JMFResourceTest extends JDFTestCaseBase
 	public void testMediaRef()
 	{
 
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 
-		JDFSignal s = jmf.appendSignal();
+		final JDFSignal s = jmf.appendSignal();
 		jmf.setSenderID("DeviceSenderID");
 
 		s.setType(EnumType.Resource);
-		JDFResourceQuParams rqp = s.appendResourceQuParams();
+		final JDFResourceQuParams rqp = s.appendResourceQuParams();
 		rqp.setJobID("JobID");
 		rqp.setJobPartID("JobPartID");
-		rqp.setResourceName(new VString(ElementName.EXPOSEDMEDIA,null));
+		rqp.setResourceName(new VString(ElementName.EXPOSEDMEDIA, null));
 
-		JDFResourceInfo ri = s.appendResourceInfo();
-		JDFExposedMedia xm = (JDFExposedMedia) ri.appendElement("ExposedMedia");
+		final JDFResourceInfo ri = s.appendResourceInfo();
+		final JDFExposedMedia xm = (JDFExposedMedia) ri.appendElement("ExposedMedia");
 
-		JDFResourceInfo ri2 = s.appendResourceInfo();
-		JDFMedia m = (JDFMedia) ri2.appendElement("Media");
-		JDFRefElement rm = xm.refElement(m);
+		final JDFResourceInfo ri2 = s.appendResourceInfo();
+		final JDFMedia m = (JDFMedia) ri2.appendElement("Media");
+		final JDFRefElement rm = xm.refElement(m);
 
 		assertEquals("works initially ", m, rm.getTarget());
 		assertEquals("also works with cache", m, rm.getTarget());
@@ -277,26 +277,26 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 */
 	public void testApplyResourceCmdNodeInfo()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 
-		JDFCommand c = jmf.appendCommand();
+		final JDFCommand c = jmf.appendCommand();
 		jmf.setSenderID("DeviceSenderID");
 
 		c.setType(EnumType.Resource);
-		JDFResourceCmdParams rqp = c.appendResourceCmdParams();
+		final JDFResourceCmdParams rqp = c.appendResourceCmdParams();
 		rqp.setJobID("JobID");
 		rqp.setJobPartID("JobPartID");
 		rqp.setResourceName(ElementName.NODEINFO);
 		rqp.setUsage(EnumUsage.Input);
-		JDFNodeInfo niRQP = (JDFNodeInfo) rqp.appendElement(ElementName.NODEINFO);
+		final JDFNodeInfo niRQP = (JDFNodeInfo) rqp.appendElement(ElementName.NODEINFO);
 
 		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
 		rqp.setPartMap(sheetMap);
-		JDFNodeInfo niRQPS1 = (JDFNodeInfo) niRQP.getCreatePartition(sheetMap, null);
+		final JDFNodeInfo niRQPS1 = (JDFNodeInfo) niRQP.getCreatePartition(sheetMap, null);
 		niRQPS1.setNodeStatus(EnumNodeStatus.Aborted);
-		JDFDoc docJDF = new JDFDoc(ElementName.JDF);
-		JDFNode jdf = docJDF.getJDFRoot();
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		final JDFNode jdf = docJDF.getJDFRoot();
 		jdf.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
 		jdf.setStatus(EnumNodeStatus.Waiting);
 		jdf.setJobID("JobID");
@@ -321,41 +321,41 @@ public class JMFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-	* apply a resource cmd
-	*/
+	 * apply a resource cmd
+	 */
 	public void testApplyResourceCmd()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
 
-		JDFCommand c = jmf.appendCommand();
+		final JDFCommand c = jmf.appendCommand();
 		jmf.setSenderID("DeviceSenderID");
 
 		c.setType(EnumType.Resource);
-		JDFResourceCmdParams rqp = c.appendResourceCmdParams();
+		final JDFResourceCmdParams rqp = c.appendResourceCmdParams();
 		rqp.setJobID("JobID");
 		rqp.setJobPartID("JobPartID");
 		rqp.setResourceName("Media");
-		JDFMedia mediaRQP = (JDFMedia) rqp.appendElement("Media");
+		final JDFMedia mediaRQP = (JDFMedia) rqp.appendElement("Media");
 		mediaRQP.setDimension(new JDFXYPair(20, 30));
 
-		JDFDoc docJDF = new JDFDoc(ElementName.JDF);
-		JDFNode jdf = docJDF.getJDFRoot();
+		final JDFDoc docJDF = new JDFDoc(ElementName.JDF);
+		final JDFNode jdf = docJDF.getJDFRoot();
 		jdf.setType(org.cip4.jdflib.node.JDFNode.EnumType.ConventionalPrinting);
-		JDFMedia mediaJDF = (JDFMedia) jdf.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+		final JDFMedia mediaJDF = (JDFMedia) jdf.addResource("Media", null, EnumUsage.Input, null, null, null, null);
 		mediaJDF.setDimension(new JDFXYPair(40, 60));
 		rqp.setJobID(jdf.getJobID(true));
 		rqp.setJobPartID(jdf.getJobPartID(true));
 
 		rqp.applyResourceCommand(jdf);
-		JDFMedia m2 = (JDFMedia) jdf.getMatchingResource("Media", EnumProcessUsage.AnyInput, null, 0);
+		final JDFMedia m2 = (JDFMedia) jdf.getMatchingResource("Media", EnumProcessUsage.AnyInput, null, 0);
 		assertEquals(m2.getDimension(), new JDFXYPair(20, 30));
 
 		final JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
 		rqp.setPartMap(sheetMap);
 		mediaRQP.setDimension(new JDFXYPair(200, 300));
 
-		JDFMedia m2Sheet = (JDFMedia) m2.addPartition(EnumPartIDKey.SheetName, "S1");
+		final JDFMedia m2Sheet = (JDFMedia) m2.addPartition(EnumPartIDKey.SheetName, "S1");
 		rqp.applyResourceCommand(jdf);
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
 		assertEquals("overwrote leaf root dimension", m2Sheet.getDimension(), new JDFXYPair(200, 300));
@@ -365,18 +365,18 @@ public class JMFResourceTest extends JDFTestCaseBase
 		mediaRQP.setDimension(new JDFXYPair(300, 400));
 
 		rqp.applyResourceCommand(jdf);
-		JDFMedia m2Sheet2 = (JDFMedia) m2.getPartition(sheetMap, null);
+		final JDFMedia m2Sheet2 = (JDFMedia) m2.getPartition(sheetMap, null);
 		assertNotNull(m2Sheet2);
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
 		assertEquals("overwrote leaf root dimension", m2Sheet2.getDimension(), new JDFXYPair(300, 400));
 
-		JDFMedia mPartRQP = (JDFMedia) mediaRQP.addPartition(EnumPartIDKey.SheetName, "S3");
+		final JDFMedia mPartRQP = (JDFMedia) mediaRQP.addPartition(EnumPartIDKey.SheetName, "S3");
 		sheetMap.put(EnumPartIDKey.SheetName, "S3");
 		rqp.setPartMap(sheetMap);
 		mPartRQP.setDimension(new JDFXYPair(400, 600));
 
 		rqp.applyResourceCommand(jdf);
-		JDFMedia m2Sheet3 = (JDFMedia) m2.getPartition(sheetMap, null);
+		final JDFMedia m2Sheet3 = (JDFMedia) m2.getPartition(sheetMap, null);
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
 		assertEquals("overwrote leaf root dimension", m2Sheet3.getDimension(), new JDFXYPair(400, 600));
 		assertFalse(m2Sheet3.hasAttribute_KElement("ID", null, false));
@@ -384,23 +384,22 @@ public class JMFResourceTest extends JDFTestCaseBase
 		mPartRQP.setAttribute(AttributeName.DIMENSION, "");
 		mediaRQP.removeAttribute(AttributeName.DIMENSION);
 		rqp.applyResourceCommand(jdf);
-		JDFMedia m2Sheet4 = (JDFMedia) m2.getPartition(sheetMap, null);
+		final JDFMedia m2Sheet4 = (JDFMedia) m2.getPartition(sheetMap, null);
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
-		assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
+		// assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
 	}
 
 	/**
 	 * Method testResourceCommand
 	 * 
-	 * @throws Exception
 	 */
 	public void testResourceCommand()
 	{
-		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCommandTest.jdf");
-		JDFNode root = jdfDoc.getJDFRoot();
+		final JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCommandTest.jdf");
+		final JDFNode root = jdfDoc.getJDFRoot();
 		JDFResourceCmdParams params;
 
-		JDFAttributeMap amAttr = new JDFAttributeMap();
+		final JDFAttributeMap amAttr = new JDFAttributeMap();
 
 		amAttr.put("Start", "2006-11-02T14:13:18+01:00");
 		amAttr.put("End", "2006-11-02T15:13:18+01:00");
@@ -408,7 +407,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		for (int i = 0; i < 2; i++)
 		{
 
-			JDFAttributeMap amParts = new JDFAttributeMap();
+			final JDFAttributeMap amParts = new JDFAttributeMap();
 			if (i == 0)
 			{
 				amParts.put("SignatureName", "Sig001");
@@ -426,12 +425,12 @@ public class JMFResourceTest extends JDFTestCaseBase
 				partID = "SFP1.C";
 			}
 			params = createResourceParams(partID, resID, amParts, amAttr);
-			JDFNode n = root.getJobPart(partID, null);
+			final JDFNode n = root.getJobPart(partID, null);
 			params.applyResourceCommand(n);
 			assertNotNull(n);
-			JDFNodeInfo ni = (JDFNodeInfo) n.getChildWithAttribute(ElementName.NODEINFO, "ID", null, resID, 0, false);
+			final JDFNodeInfo ni = (JDFNodeInfo) n.getChildWithAttribute(ElementName.NODEINFO, "ID", null, resID, 0, false);
 			assertNotNull(ni);
-			JDFNodeInfo nip = (JDFNodeInfo) ni.getPartition(amParts, null);
+			final JDFNodeInfo nip = (JDFNodeInfo) ni.getPartition(amParts, null);
 			assertNotNull(nip);
 			assertFalse(nip.hasAttribute_KElement("ID", null, false));
 			assertFalse(nip.hasAttribute_KElement("SheetName", null, false));
@@ -444,26 +443,28 @@ public class JMFResourceTest extends JDFTestCaseBase
 	 */
 	public void testResourceCommandPartIDKeys()
 	{
-		JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCmd.jdf");
-		JDFDoc jdfDocJMF = JDFDoc.parseFile(sm_dirTestData + "ResourceCmd.jmf");
-		JDFJMF jmf = jdfDocJMF.getJMFRoot();
+		final JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCmd.jdf");
+		final JDFDoc jdfDocJMF = JDFDoc.parseFile(sm_dirTestData + "ResourceCmd.jmf");
+		final JDFJMF jmf = jdfDocJMF.getJMFRoot();
 		for (int i = 0; true; i++)
 		{
-			JDFCommand cmd = (JDFCommand) jmf.getMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.Resource, i);
+			final JDFCommand cmd = (JDFCommand) jmf.getMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.Resource, i);
 			if (cmd == null)
+			{
 				break;
-			JDFResourceCmdParams params = cmd.getResourceCmdParams(0);
+			}
+			final JDFResourceCmdParams params = cmd.getResourceCmdParams(0);
 			params.applyResourceCommand(jdfDoc.getJDFRoot());
 		}
 	}
 
-	private JDFResourceCmdParams createResourceParams(String strJobPartID, String strResourceID, JDFAttributeMap amParts, JDFAttributeMap amAttr)
+	private JDFResourceCmdParams createResourceParams(final String strJobPartID, final String strResourceID, final JDFAttributeMap amParts, final JDFAttributeMap amAttr)
 	{
-		JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.Resource);
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Command, JDFMessage.EnumType.Resource);
 
-		JDFCommand cmd = jmf.getCommand(0);
+		final JDFCommand cmd = jmf.getCommand(0);
 
-		JDFResourceCmdParams params = cmd.appendResourceCmdParams();
+		final JDFResourceCmdParams params = cmd.appendResourceCmdParams();
 
 		final String strJobID = "RefJob-1";
 		final String strPartIDKeys = "SignatureName SheetName Side";
@@ -476,9 +477,9 @@ public class JMFResourceTest extends JDFTestCaseBase
 
 		params.setPartMap(amParts);
 
-		JDFResource nodeInfo = params.appendResource("NodeInfo");
+		final JDFResource nodeInfo = params.appendResource("NodeInfo");
 
-		JDFResource resLeaf = nodeInfo.getCreatePartition(amParts, new VString(strPartIDKeys, null));
+		final JDFResource resLeaf = nodeInfo.getCreatePartition(amParts, new VString(strPartIDKeys, null));
 
 		resLeaf.setAttributes(amAttr);
 

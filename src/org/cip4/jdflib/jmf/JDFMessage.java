@@ -166,19 +166,24 @@ public class JDFMessage extends JDFAutoMessage
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
 	}
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
-    }
-    
-    @Override
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33331111);
+	}
+
+	@Override
 	protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
 
-
+	/**
+	 * Enumerations for message families
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * May 17, 2009
+	 */
 	public static class EnumFamily extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -257,8 +262,17 @@ public class JDFMessage extends JDFAutoMessage
 			return iterator(EnumType.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumType AbortQueueEntry = new EnumType("AbortQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType CloseQueue = new EnumType("CloseQueue");
+		/**
+		 * 
+		 */
 		public static final EnumType FlushQueue = new EnumType("FlushQueue");
 		public static final EnumType FlushResources = new EnumType("FlushResources");
 		public static final EnumType Events = new EnumType("Events");
@@ -546,9 +560,8 @@ public class JDFMessage extends JDFAutoMessage
 	 * @return vector of valid EnumTypes; empty if all are invalid
 	 * @default getValidTypeVector(elementName, 0)
 	 */
-	private Vector getValidTypeVector(final String elementName, final int iSkip)
+	private Vector<EnumType> getValidTypeVector(final String elementName, final int iSkip)
 	{
-		// typedef std::vector<EnumType> vEnumType;
 		final Vector<EnumType> validList = new Vector<EnumType>();
 
 		// Commands
@@ -936,12 +949,21 @@ public class JDFMessage extends JDFAutoMessage
 			{
 				validList.addElement(EnumType.SubmissionMethods);
 			}
-
+		}
+		else if (elementName.equals(ElementName.SUBSCRIPTIONFILTER))
+		{
+			if (iSkip == 0)
+			{
+				validList.addElement(EnumType.KnownSubscriptions);
+			}
+		}
+		else if (elementName.equals(ElementName.SUBSCRIPTIONINFO))
+		{
+			validList.addElement(EnumType.KnownSubscriptions);
 		}
 		else if (elementName.equals(ElementName.TRACKRESULT))
 		{
 			validList.addElement(EnumType.Track);
-
 		}
 		else if (elementName.equals(ElementName.UPDATEJDFCMDPARAMS))
 		{
@@ -2451,16 +2473,26 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFFlushQueueInfo) getCreateValidElement(ElementName.FLUSHQUEUEINFO, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFFlushQueueInfo getFlushQueueInfo(final int iSkip)
 	{
 		return (JDFFlushQueueInfo) getValidElement(ElementName.FLUSHQUEUEINFO, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFFlushQueueParams appendFlushQueueParams()
 	{
 		return (JDFFlushQueueParams) appendValidElement(ElementName.FLUSHQUEUEPARAMS, null);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFFlushQueueInfo appendFlushQueueInfo()
 	{
 		return (JDFFlushQueueInfo) appendValidElement(ElementName.FLUSHQUEUEINFO, null);
@@ -2625,19 +2657,89 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFResubmissionParams) getValidElement(ElementName.RESUBMISSIONPARAMS, null, iSkip);
 	}
 
+	/**
+	 * 
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFReturnQueueEntryParams getCreateReturnQueueEntryParams(final int iSkip)
 	{
 		return (JDFReturnQueueEntryParams) getCreateValidElement(ElementName.RETURNQUEUEENTRYPARAMS, null, iSkip);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JDFReturnQueueEntryParams appendReturnQueueEntryParams()
 	{
 		return (JDFReturnQueueEntryParams) appendValidElement(ElementName.RETURNQUEUEENTRYPARAMS, null);
 	}
 
+	/**
+	 * 
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFReturnQueueEntryParams getReturnQueueEntryParams(final int iSkip)
 	{
 		return (JDFReturnQueueEntryParams) getValidElement(ElementName.RETURNQUEUEENTRYPARAMS, null, iSkip);
+	}
+
+	/**
+	 * 
+	 * @param iSkip
+	 * @return
+	 */
+	public JDFSubscriptionInfo getCreateSubscriptionInfo(final int iSkip)
+	{
+		return (JDFSubscriptionInfo) getCreateValidElement(ElementName.SUBSCRIPTIONINFO, null, iSkip);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JDFSubscriptionInfo appendSubscriptionInfo()
+	{
+		return (JDFSubscriptionInfo) appendValidElement(ElementName.SUBSCRIPTIONINFO, null);
+	}
+
+	/**
+	 * 
+	 * @param iSkip
+	 * @return
+	 */
+	public JDFSubscriptionInfo getSubscriptionInfo(final int iSkip)
+	{
+		return (JDFSubscriptionInfo) getValidElement(ElementName.SUBSCRIPTIONINFO, null, iSkip);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JDFSubscriptionFilter getSubscriptionFilter()
+	{
+		return (JDFSubscriptionFilter) getValidElement(ElementName.SUBSCRIPTIONFILTER, null, 0);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JDFSubscriptionFilter getCreateSubscriptionFilter()
+	{
+		return (JDFSubscriptionFilter) getCreateValidElement(ElementName.SUBSCRIPTIONFILTER, null, 0);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JDFSubscriptionFilter appendSubscriptionFilter()
+	{
+		return (JDFSubscriptionFilter) appendValidElement(ElementName.SUBSCRIPTIONFILTER, null);
 	}
 
 	public JDFShutDownCmdParams getCreateShutDownCmdParams(final int iSkip)

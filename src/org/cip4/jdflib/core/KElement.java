@@ -4585,7 +4585,8 @@ public class KElement extends ElementNSImpl
 	// ****
 
 	/**
-	 * Rename an attribute in this namespace
+	 * Rename an attribute in this namespace<br/>
+	 * if oldName does not exist, newName is NOT modified
 	 * <p>
 	 * default: renameAttribute(oldName, newName, null, null)
 	 * @param oldName attribute name to move from
@@ -4597,8 +4598,7 @@ public class KElement extends ElementNSImpl
 	{
 		if (hasAttribute(oldName, nameSpaceURI, false))
 		{
-			final String strAttValue = getAttribute_KElement(oldName, nameSpaceURI, JDFConstants.EMPTYSTRING);
-
+			final String strAttValue = getAttribute_KElement(oldName, nameSpaceURI, null);
 			setAttribute(newName, strAttValue, newNameSpaceURI);
 			removeAttribute(oldName, nameSpaceURI);
 		}

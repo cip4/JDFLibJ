@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -116,9 +116,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	{
 		private static HashMap<String, MyInteger> fastStat = null;
 
-		/*
-		 * (non-Javadoc)
-		 * 
+		/**
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
 		public int compare(final Object a1, final Object a2)

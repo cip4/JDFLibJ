@@ -1,9 +1,10 @@
-/*--------------------------------------------------------------------------------------------------
+/*
+ *
  * The CIP4 Software License, Version 1.0
  *
  *
  * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -11,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ *    notice, this list of conditions and the following disclaimer. 
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -19,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
+ *    if any, must include the following acknowledgment:  
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
+ *        The International Cooperation for the Integration of 
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
+ *    software without prior written permission. For written 
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -55,86 +56,135 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
+ * individuals on behalf of the The International Cooperation for the Integration 
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *
+ *  
+ * 
  */
 package org.cip4.jdflib.util;
 
-import java.util.Comparator;
+import java.lang.reflect.Array;
 
 /**
- * very simple and fast mutable integer class
- * 
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
+ * quick and dirty fast fifo built on a circular array May 26, 2009
+ * @param <x> the elements to dump into the fifo
  */
-public class MyInteger implements Comparator<MyInteger>
+public class FastFiFo<x>
 {
+	private final Object[] theArray;
+	private int first;
+	private int fill;
+
 	/**
-	 * @param _i the initial integer to set this to
+	 * @param n size of the fifo
+	 * 
 	 */
-	public MyInteger(final int _i)
+	public FastFiFo(final int n)
 	{
-		super();
-		this.i = _i;
+		if (n <= 0)
+		{
+			throw new IllegalArgumentException("fifo must have positive # elements");
+		}
+		theArray = new Object[n];
+		for (int i = 0; i < n; i++)
+		{
+			theArray[i] = null;
+		}
+		first = 0;
+		fill = 0;
 	}
 
 	/**
-	 * the int value of this
+	 * pushes an element into the back and returns the previous content of the cell
+	 * @param back
+	 * @return
 	 */
-	public int i;
+	synchronized public x push(final x back)
+	{
+		final int s = theArray.length;
+		x ret = null;
+		if (fill == s)
+		{
+			ret = pop();
+		}
+		theArray[(first + fill++) % s] = back;
+		return ret;
+	}
+
+	/**
+	 * pops the first to go
+	 * @return the first element, null if empty
+	 */
+	synchronized public x pop()
+	{
+		if (fill == 0)
+		{
+			return null;
+		}
+		final int s = theArray.length;
+		final x ret = (x) theArray[first];
+		first = ++first % s;
+		fill--;
+		return ret;
+	}
+
+	/**
+	 * peeks into the fifo from the beginning
+	 * @param i the index of the element to peek
+	 * @return
+	 */
+	public x peek(final int i)
+	{
+		final int s = theArray.length;
+		if (i >= fill)
+		{
+			return null;
+		}
+		return (x) theArray[(first + i) % s];
+	}
+
+	/**
+	 * peeks into the fifo from the beginning
+	 * @param i the index of the element to peek
+	 * @return a snapshot of the current fifo, null if empty
+	 */
+	synchronized public x[] peekArray()
+	{
+		if (fill == 0)
+		{
+			return null;
+		}
+		final x[] ret = (x[]) Array.newInstance(peek(0).getClass(), fill);
+		for (int i = 0; i < fill; i++)
+		{
+			ret[i] = peek(i);
+		}
+		return ret;
+
+	}
 
 	/**
 	 * @see java.lang.Object#toString()
-	 * @return the value of int as a string
 	 */
 	@Override
 	public String toString()
 	{
-		return String.valueOf(i);
+		return "FastFiFo : fill=" + fill + " first=" + first + "\n" + theArray.toString();
 	}
 
 	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @return the current number of elements
 	 */
-	@Override
-	public boolean equals(final Object obj)
+	public int getFill()
 	{
-		if (obj instanceof MyInteger)
-		{
-			return ((MyInteger) obj).i == i;
-		}
-		else
-		{
-			return super.equals(obj);
-		}
-	}
-
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode()
-	{
-		return i;
-	}
-
-	/**
-	 * @param o1 the first MyInteger
-	 * @param o2 the secondMyInteger
-	 * @return o1-o2
-	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-	 */
-	public int compare(final MyInteger o1, final MyInteger o2)
-	{
-		return o1.i - o2.i;
+		return fill;
 	}
 }

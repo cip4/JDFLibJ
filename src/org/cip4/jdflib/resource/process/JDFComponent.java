@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,45 +92,50 @@ import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * June 3, 2009
+ */
 public class JDFComponent extends JDFAutoComponent
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFComponent
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFComponent(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFComponent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFComponent
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFComponent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFComponent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFComponent
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFComponent(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFComponent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -151,33 +156,36 @@ public class JDFComponent extends JDFAutoComponent
 	/**
 	 * version fixing routine for JDF
 	 * 
-	 * uses heuristics to modify this element and its children to be compatible
-	 * with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to
-	 * lower versions
+	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
+	 * versions but potentially fail when attempting to move from higher to lower versions
 	 * 
-	 * @param version
-	 *            : version that the resulting element should correspond to
+	 * @param version : version that the resulting element should correspond to
 	 * @return true if successful
 	 */
 	@Override
-	public boolean fixVersion(EnumVersion version)
+	public boolean fixVersion(final EnumVersion version)
 	{
-		boolean bRet = true;
+		final boolean bRet = true;
 		if (version != null)
 		{
+			if (version.getValue() >= EnumVersion.Version_1_4.getValue())
+			{
+				removeAttribute(AttributeName.ISWASTE);
+			}
 			if (version.getValue() >= EnumVersion.Version_1_3.getValue())
 			{
 				if (hasAttribute(AttributeName.SOURCESHEET))
 				{
-					String sourceSheet = getSourceSheet();
+					final String sourceSheet = getSourceSheet();
 
-					JDFRefElement layoutRef = (JDFRefElement) getElement_KElement("LayoutRef", null, 0);
+					final JDFRefElement layoutRef = (JDFRefElement) getElement_KElement("LayoutRef", null, 0);
 					if (layoutRef != null)
 					{
 						JDFLayout lo = (JDFLayout) layoutRef.getLinkRoot(layoutRef.getrRef());
 						if (lo != null)
+						{
 							lo.fixVersion(version);
+						}
 
 						layoutRef.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, sourceSheet));
 						lo = (JDFLayout) layoutRef.getTarget();
@@ -188,12 +196,12 @@ public class JDFComponent extends JDFAutoComponent
 			}
 			else
 			{
-				JDFLayout layout = getLayout();
+				final JDFLayout layout = getLayout();
 				if (layout != null)
 				{
-					String sourcesheet = layout.getSheetName();
+					final String sourcesheet = layout.getSheetName();
 					setSourceSheet(sourcesheet);
-					JDFRefElement layoutRef = (JDFRefElement) getElement_KElement("LayoutRef", null, 0);
+					final JDFRefElement layoutRef = (JDFRefElement) getElement_KElement("LayoutRef", null, 0);
 					// JDF 1.2 layout should be unpartitioned
 					if (layoutRef != null)
 					{
@@ -207,49 +215,64 @@ public class JDFComponent extends JDFAutoComponent
 	}
 
 	/**
-	 * sets the Dimension to X Y 0 convenience method to copy media dimension to
-	 * component
+	 * sets the Dimension to X Y 0 convenience method to copy media dimension to component
 	 * 
 	 * @param dimension
 	 */
-	public void setDimensions(JDFXYPair dimension)
+	public void setDimensions(final JDFXYPair dimension)
 	{
 		if (dimension != null)
 		{
-			JDFShape s = new JDFShape(dimension.getX(), dimension.getY());
+			final JDFShape s = new JDFShape(dimension.getX(), dimension.getY());
 			super.setDimensions(s);
 		}
 	}
 
-	public void setComponentType(EnumComponentType partialFinal, EnumComponentType sheetWebProof)
+	/**
+	 * @param partialFinal
+	 * @param sheetWebProof
+	 */
+	public void setComponentType(final EnumComponentType partialFinal, final EnumComponentType sheetWebProof)
 	{
 		Vector<ValuedEnum> v = new Vector<ValuedEnum>();
 		if (partialFinal != null)
+		{
 			v.add(partialFinal);
+		}
 		if (sheetWebProof != null)
+		{
 			v.add(sheetWebProof);
+		}
 		if (v.size() == 0)
+		{
 			v = null;
+		}
 		setComponentType(v);
 	}
 
 	/**
 	 * get the media that is associated with this component, either directly or in the layout
-	 * @return the media, null if none there 
+	 * @return the media, null if none there
 	 */
 	@Override
 	public JDFMedia getMedia()
 	{
 		JDFMedia m = (JDFMedia) getElement(ElementName.MEDIA);
 		if (m != null)
+		{
 			return m;
+		}
 		JDFLayout lo = getLayout();
 		if (lo == null)
+		{
 			return null;
+		}
 		lo = (JDFLayout) lo.getPartition(getPartMap(), EnumPartUsage.Implicit);
 		m = lo.getMedia(EnumMediaType.Paper);
 		if (m == null)
+		{
 			m = lo.getMedia(0);
+		}
 		return m;
 	}
 }

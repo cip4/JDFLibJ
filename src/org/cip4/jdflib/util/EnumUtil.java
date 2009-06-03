@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,15 +68,6 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
- */
 package org.cip4.jdflib.util;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -96,10 +87,12 @@ public class EnumUtil
 	 * @param e2
 	 * @return the lower of the two values
 	 */
-	public static ValuedEnum min(ValuedEnum e1, ValuedEnum e2)
+	public static ValuedEnum min(final ValuedEnum e1, final ValuedEnum e2)
 	{
 		if (e1 == null || e2 == null)
+		{
 			return null;
+		}
 		return e1.getValue() < e2.getValue() ? e1 : e2;
 	}
 
@@ -110,12 +103,16 @@ public class EnumUtil
 	 * @param e2
 	 * @return the higher of the two values
 	 */
-	public static ValuedEnum max(ValuedEnum e1, ValuedEnum e2)
+	public static ValuedEnum max(final ValuedEnum e1, final ValuedEnum e2)
 	{
 		if (e1 == null)
+		{
 			return e2;
+		}
 		if (e2 == null)
+		{
 			return e1;
+		}
 		return e1.getValue() > e2.getValue() ? e1 : e2;
 	}
 
@@ -125,7 +122,7 @@ public class EnumUtil
 	 * @param en the enum to get the name
 	 * @return
 	 */
-	public static String getName(ValuedEnum en)
+	public static String getName(final ValuedEnum en)
 	{
 		return en == null ? "null" : en.getName();
 	}
@@ -137,10 +134,10 @@ public class EnumUtil
 	 * @param b the second enum
 	 * @return boolean a is < b
 	 */
-	public static boolean aLessThanB(ValuedEnum a, ValuedEnum b)
+	public static boolean aLessThanB(final ValuedEnum a, final ValuedEnum b)
 	{
-		int aa = a == null ? -1 : a.getValue();
-		int bb = b == null ? -1 : b.getValue();
+		final int aa = a == null ? -1 : a.getValue();
+		final int bb = b == null ? -1 : b.getValue();
 		return aa < bb;
 	}
 
@@ -151,10 +148,10 @@ public class EnumUtil
 	 * @param b the second enum
 	 * @return boolean a is < b
 	 */
-	public static boolean aLessEqualsThanB(ValuedEnum a, ValuedEnum b)
+	public static boolean aLessEqualsThanB(final ValuedEnum a, final ValuedEnum b)
 	{
-		int aa = a == null ? -1 : a.getValue();
-		int bb = b == null ? -1 : b.getValue();
+		final int aa = a == null ? -1 : a.getValue();
+		final int bb = b == null ? -1 : b.getValue();
 		return aa <= bb;
 	}
 

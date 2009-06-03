@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,20 +68,11 @@
  *  
  * 
  */
-/**
- ==========================================================================
- class JDFDevice
- ==========================================================================
- @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
- ALL RIGHTS RESERVED
- @Author: sabjon@topmail.de   using a code generator
- Warning! very preliminary test version. Interface subject to change without prior notice!
- Revision history:    ...
- **/
 package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevice;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
@@ -92,49 +83,56 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * way before Jun 3, 2009
+ */
 public class JDFDevice extends JDFAutoDevice
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFDevice
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFDevice(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFDevice(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDevice
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFDevice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDevice(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDevice
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFDevice(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFDevice(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoDevice#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -149,15 +147,17 @@ public class JDFDevice extends JDFAutoDevice
 	 * @return VElement - the list of matching JDF nodes, null if none found
 	 * 
 	 */
-	public VElement getMatchingTypeNodeVector(JDFNode testRoot)
+	public VElement getMatchingTypeNodeVector(final JDFNode testRoot)
 	{
-		VElement vDeviceCap = getChildElementVector(ElementName.DEVICECAP, null, null, false, -1, false);
+		final VElement vDeviceCap = getChildElementVector(ElementName.DEVICECAP, null, null, false, -1, false);
 		if (vDeviceCap == null || vDeviceCap.isEmpty())
+		{
 			return null;
-		VElement vRet = new VElement();
+		}
+		final VElement vRet = new VElement();
 		for (int i = 0; i < vDeviceCap.size(); i++)
 		{
-			VElement vMatch = ((JDFDeviceCap) vDeviceCap.elementAt(i)).getMatchingTypeNodeVector(testRoot);
+			final VElement vMatch = ((JDFDeviceCap) vDeviceCap.elementAt(i)).getMatchingTypeNodeVector(testRoot);
 			if (vMatch != null)
 			{
 				vRet.addAll(vMatch);
@@ -171,16 +171,19 @@ public class JDFDevice extends JDFAutoDevice
 	 * return all deviceCap elements that correspond to testRoot
 	 * 
 	 * @param testRoot the JDF or JMF to test
+	 * @param bLocal
 	 * 
 	 * @return VElement - the list of matching devicecap nodes, null if none found
 	 * 
 	 */
-	public VElement getMatchingDeviceCapVector(JDFNode testRoot, boolean bLocal)
+	public VElement getMatchingDeviceCapVector(final JDFNode testRoot, final boolean bLocal)
 	{
-		VElement vDeviceCap = getChildElementVector(ElementName.DEVICECAP, null, null, false, -1, false);
+		final VElement vDeviceCap = getChildElementVector(ElementName.DEVICECAP, null, null, false, -1, false);
 		if (vDeviceCap == null || vDeviceCap.isEmpty())
+		{
 			return null;
-		VElement vRet = new VElement();
+		}
+		final VElement vRet = new VElement();
 		for (int i = 0; i < vDeviceCap.size(); i++)
 		{
 			final JDFDeviceCap dc = (JDFDeviceCap) vDeviceCap.elementAt(i);
@@ -201,97 +204,129 @@ public class JDFDevice extends JDFAutoDevice
 	 * @return boolean - true if this DeviceCaps TypeExpression fits testRoot/@Type and testRoot/@Types
 	 * 
 	 */
-	public boolean matchesType(JDFNode testRoot, boolean bLocal)
+	public boolean matchesType(final JDFNode testRoot, final boolean bLocal)
 	{
-		VElement v = getMatchingTypeNodeVector(testRoot);
+		final VElement v = getMatchingTypeNodeVector(testRoot);
 		if (v == null)
+		{
 			return false;
+		}
 		if (bLocal)
+		{
 			return v.contains(testRoot);
+		}
 		return true;
 	}
 
 	/**
 	 * Gets of jdfRoot a vector of all executable nodes (jdf root or children nodes that this Device may execute)
 	 * 
-	 * @param jdfRoot the node we test
+	 * @param docRoot the node we test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *            Will be used in fitsValue method of the State class.
-	 * @param level validation level
+	 * Will be used in fitsValue method of the State class.
+	 * @param validationLevel validation level
 	 * @return VElement - vector of executable JDFNodes
 	 */
-	public VElement getExecutableJDF(JDFNode docRoot, EnumFitsValue testlists, EnumValidationLevel validationLevel)
+	public VElement getExecutableJDF(final JDFNode docRoot, final EnumFitsValue testlists, final EnumValidationLevel validationLevel)
 	{
-		VElement vDC = getChildElementVector(ElementName.DEVICECAP, null, null, true, -1, false);
+		final VElement vDC = getChildElementVector(ElementName.DEVICECAP, null, null, true, -1, false);
 		if (vDC == null || vDC.isEmpty())
+		{
 			return null;
+		}
 
-		VElement vn = new VElement();
+		final VElement vn = new VElement();
 		for (int i = 0; i < vDC.size(); i++)
 		{
-			JDFDeviceCap dc = (JDFDeviceCap) vDC.elementAt(i);
+			final JDFDeviceCap dc = (JDFDeviceCap) vDC.elementAt(i);
 			final VElement executableJDF = dc.getExecutableJDF(docRoot, testlists, validationLevel);
 			if (executableJDF != null)
+			{
 				vn.addAll(executableJDF);
+			}
 		}
 		vn.unify();
 		return vn.isEmpty() ? null : vn;
 	}
 
 	/**
-	 * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. Gives a list of error messages for 'jdfRoot'
-	 * and every child rejected Node.<br>
+	 * Composes a BugReport in XML form for the given JDFNode 'jdfRoot'. Gives a list of error messages for 'jdfRoot' and every child rejected Node.<br>
 	 * Returns <code>null</code> if there are no errors.
 	 * 
 	 * @param jdfRoot the node to test
 	 * @param testlists testlists that are specified for the State elements (FitsValue_Allowed or FitsValue_Present)<br>
-	 *            Will be used in fitsValue method of the State class.
+	 * Will be used in fitsValue method of the State class.
 	 * @param level validation level
 	 * @return XMLDoc - XMLDoc output of the error messages. If XMLDoc is null there are no errors.
 	 */
 	public final XMLDoc getBadJDFInfo(final JDFNode jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level)
 	{
-		VElement vDC = getChildElementVector(ElementName.DEVICECAP, null, null, true, -1, false);
+		final VElement vDC = getChildElementVector(ElementName.DEVICECAP, null, null, true, -1, false);
 		if (vDC == null || vDC.isEmpty())
+		{
 			return null;
+		}
 
-		VElement vn = new VElement();
+		final VElement vn = new VElement();
 		for (int i = 0; i < vDC.size(); i++)
 		{
-			JDFDeviceCap dc = (JDFDeviceCap) vDC.elementAt(i);
-			XMLDoc bugReport = dc.getBadJDFInfo(jdfRoot, testlists, level);
+			final JDFDeviceCap dc = (JDFDeviceCap) vDC.elementAt(i);
+			final XMLDoc bugReport = dc.getBadJDFInfo(jdfRoot, testlists, level);
 			if (bugReport == null)
+			{
 				return null;
+			}
 			vn.addAll(bugReport.getRoot().getChildElementVector(null, null, null, true, -1, false));
 		}
 
 		final int vnSize = vn.size();
 		if (vnSize == 0)
+		{
 			return null;
+		}
 
-		XMLDoc bugReport = new XMLDoc("BugReport", null);
-		KElement root = bugReport.getRoot();
+		final XMLDoc bugReport = new XMLDoc("BugReport", null);
+		final KElement root = bugReport.getRoot();
 		boolean bFit = false;
 		for (int i = 0; i < vnSize; i++)
 		{
-			KElement e = vn.elementAt(i);
+			final KElement e = vn.elementAt(i);
 			if (JDFConstants.TRUE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
+			{
 				bFit = true;
+			}
 		}
 		if (bFit)
 		{
 			for (int i = 0; i < vnSize; i++)
 			{
-				KElement e = vn.elementAt(i);
+				final KElement e = vn.elementAt(i);
 				if (JDFConstants.FALSE.equals(e.getAttribute(JDFDeviceCap.FITS_TYPE)))
+				{
 					vn.set(i, null);
+				}
 			}
 		}
 		for (int i = 0; i < vnSize; i++)
 		{
 			if (vn.elementAt(i) != null)
+			{
 				root.moveElement(vn.item(i), null);
+			}
 		}
 		return bugReport;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.resource.JDFResource#fixVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
+	 */
+	@Override
+	public boolean fixVersion(final EnumVersion version)
+	{
+		if (version != null && version.getValue() >= EnumVersion.Version_1_4.getValue())
+		{
+			renameAttribute(AttributeName.FRIENDLYNAME, AttributeName.DESCRIPTIVENAME, null, null);
+		}
+		return super.fixVersion(version);
 	}
 }

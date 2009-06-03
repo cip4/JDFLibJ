@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,6 +73,7 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -91,6 +92,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 {
 	private boolean bAutoAgent;
 
+	/**
+	 * 
+	 */
 	public void testInit()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -111,6 +115,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testFixVersion()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -124,8 +131,30 @@ public class JDFAuditTest extends JDFTestCaseBase
 		assertFalse(crea.hasAttribute("ID"));
 	}
 
+	/**
+	 * 
+	 */
+	public void testFixVersion14()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		n.setVersion(EnumVersion.Version_1_3);
+		n.setType("ConventionalPrinting", true);
+		final JDFAuditPool ap = n.getAuditPool();
+		assertNotNull(ap);
+		final JDFModified mod = ap.addModified("foo", null);
+		assertEquals(mod.getAuthor(), "foo");
+		n.fixVersion(EnumVersion.Version_1_4);
+		assertTrue(!mod.hasAttribute(AttributeName.AUTHOR));
+		assertEquals(mod.getEmployee(0).getDescriptiveName(), "foo");
+
+	}
+
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSetRef()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -141,6 +170,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testCreateUpdate()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -180,6 +212,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testCreated()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -200,6 +235,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testProcessRun()
 	{
 		final JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
@@ -212,6 +250,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSpawnID()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -230,6 +271,9 @@ public class JDFAuditTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSetStaticAgentVersion()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);

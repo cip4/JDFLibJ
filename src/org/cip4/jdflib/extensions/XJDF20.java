@@ -132,7 +132,9 @@ import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG conversion class to convert JDF 1.x to the experimental JDF 2.0
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
+ * conversion class to convert JDF 1.x to the experimental JDF 2.0<br/>
+ * very experimental and subject to change without notice
  * 
  * 15.01.2009
  */
@@ -153,6 +155,7 @@ public class XJDF20 extends BaseElementWalker
 	 * the root nodename
 	 */
 	public final static String rootName = "XJDF";
+
 	private final String m_spawnInfo = "SpawnInfo";
 	protected VString resAttribs;
 	protected KElement newRoot = null;
@@ -368,16 +371,20 @@ public class XJDF20 extends BaseElementWalker
 					else if (map.size() == 1 && map.containsKey(AttributeName.CONDITION))
 					{
 						final JDFAttributeMap attMap = pa.getAttributeMap();
-						final Iterator it = attMap.getKeyIterator();
+						final Iterator<String> it = attMap.getKeyIterator();
 						final String condition = map.get(AttributeName.CONDITION);
 						while (it.hasNext())
 						{
-							final String key = (String) it.next();
-							// if(key.indexOf(AttributeName.AMOUNT)>0)
-							// {
-							// TODO rethink AmountGood, AmountWaste
-							newLeaf.setAttribute(key + condition, attMap.get(key));
-							// }
+							final String key = it.next();
+							if (key.indexOf(AttributeName.AMOUNT) > 0)
+							{
+								// TODO rethink AmountGood, AmountWaste
+								newLeaf.setAttribute(key + condition, attMap.get(key));
+							}
+							else
+							{
+								newLeaf.setAttribute(key, attMap.get(key));
+							}
 						}
 					}
 					else

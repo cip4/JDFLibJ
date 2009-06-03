@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFSheet;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class JDFLayout extends JDFSurface
 {
@@ -108,7 +108,7 @@ public class JDFLayout extends JDFSurface
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFLayout(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFLayout(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +120,7 @@ public class JDFLayout extends JDFSurface
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,13 +133,16 @@ public class JDFLayout extends JDFSurface
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFLayout(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFLayout(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * @see org.cip4.jdflib.resource.process.JDFSurface#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -150,31 +153,36 @@ public class JDFLayout extends JDFSurface
 	/**
 	 * version fixing routine
 	 * 
-	 * uses heuristics to modify this element and its children to be compatible
-	 * with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to
-	 * lower versions
+	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
+	 * versions but potentially fail when attempting to move from higher to lower versions
 	 * 
-	 * @param version
-	 *            : version that the resulting element should correspond to
+	 * @param version : version that the resulting element should correspond to
 	 * @return true if successful
 	 */
 	@Override
-	public boolean fixVersion(EnumVersion version)
+	public boolean fixVersion(final EnumVersion version)
 	{
 		boolean bRet = true;
 		if (isResourceRoot() && version != null)
 		{
+			final int vers = version.getValue();
 			final boolean newLayout = isNewLayout(this);
-			if (version.getValue() >= EnumVersion.Version_1_3.getValue() && !newLayout)
+			if (vers >= EnumVersion.Version_1_3.getValue() && !newLayout)
 			{
 				bRet = toNewLayout();
 			}
-			else if (version.getValue() < EnumVersion.Version_1_3.getValue() && newLayout)
-
+			else if (vers < EnumVersion.Version_1_3.getValue() && newLayout)
 			{
 				bRet = fromNewLayout();
 			}
+			if (vers >= EnumVersion.Version_1_4.getValue())
+			{
+				if (hasAttribute(AttributeName.NAME))
+				{
+					renameAttribute(AttributeName.NAME, AttributeName.DESCRIPTIVENAME, null, null);
+				}
+			}
+
 		}
 		return super.fixVersion(version) && bRet;
 	}
@@ -188,7 +196,7 @@ public class JDFLayout extends JDFSurface
 	 */
 	public boolean toNewLayout()
 	{
-		VElement vSig = getChildElementVector(ElementName.SIGNATURE, null, null, false, 0, false);
+		final VElement vSig = getChildElementVector(ElementName.SIGNATURE, null, null, false, 0, false);
 		// loop over all signatures and rename them to Layout
 		for (int iSig = 0; iSig < vSig.size(); iSig++)
 		{
@@ -198,11 +206,10 @@ public class JDFLayout extends JDFSurface
 				rSig = ((JDFRefElement) rSig).inlineRef();
 			}
 			JDFLayout newLO = (JDFLayout) rSig.renameElement(ElementName.LAYOUT, null);
-			newLO.setPartIDKey(EnumPartIDKey.SignatureName, rSig.getAttribute(AttributeName.NAME, null, "Sig"
-					+ String.valueOf(iSig)));
+			newLO.setPartIDKey(EnumPartIDKey.SignatureName, rSig.getAttribute(AttributeName.NAME, null, "Sig" + String.valueOf(iSig)));
 			newLO.cleanLayoutLeaf();
 
-			VElement vSheet = newLO.getChildElementVector(ElementName.SHEET, null, null, false, 0, false);
+			final VElement vSheet = newLO.getChildElementVector(ElementName.SHEET, null, null, false, 0, false);
 			// loop over all sheets and rename them to Layout
 			for (int iSheet = 0; iSheet < vSheet.size(); iSheet++)
 			{
@@ -212,11 +219,10 @@ public class JDFLayout extends JDFSurface
 					rSheet = ((JDFRefElement) rSheet).inlineRef();
 				}
 				newLO = (JDFLayout) rSheet.renameElement(ElementName.LAYOUT, null);
-				newLO.setPartIDKey(EnumPartIDKey.SheetName, rSheet.getAttribute(AttributeName.NAME, null, "Sheet"
-						+ String.valueOf(iSheet)));
+				newLO.setPartIDKey(EnumPartIDKey.SheetName, rSheet.getAttribute(AttributeName.NAME, null, "Sheet" + String.valueOf(iSheet)));
 				newLO.cleanLayoutLeaf();
 
-				VElement vSurf = newLO.getChildElementVector(ElementName.SURFACE, null, null, false, 0, false);
+				final VElement vSurf = newLO.getChildElementVector(ElementName.SURFACE, null, null, false, 0, false);
 				// loop over all surfaces and rename them to Layout
 				for (int iSurf = 0; iSurf < vSurf.size(); iSurf++)
 				{
@@ -226,8 +232,7 @@ public class JDFLayout extends JDFSurface
 						rSurf = ((JDFRefElement) rSurf).inlineRef();
 					}
 					newLO = (JDFLayout) rSurf.renameElement(ElementName.LAYOUT, null);
-					newLO.setPartIDKey(EnumPartIDKey.Side, rSurf.getAttribute(AttributeName.SIDE, null, "Surf"
-							+ String.valueOf(iSurf)));
+					newLO.setPartIDKey(EnumPartIDKey.Side, rSurf.getAttribute(AttributeName.SIDE, null, "Surf" + String.valueOf(iSurf)));
 					newLO.cleanLayoutLeaf();
 				}
 			}
@@ -237,8 +242,7 @@ public class JDFLayout extends JDFSurface
 
 	// //////////////////////////////////////////////////////
 	/**
-	 * routine to clean up bookkeeping variables when moving from resource to
-	 * partition leaf
+	 * routine to clean up bookkeeping variables when moving from resource to partition leaf
 	 */
 	private void cleanLayoutLeaf()
 	{
@@ -257,7 +261,7 @@ public class JDFLayout extends JDFSurface
 	{
 		// TODO: fix content object placement
 		VElement vLO = getChildElementVector_JDFElement(ElementName.LAYOUT, null, new JDFAttributeMap("SignatureName", ""), false, 0, false);
-		VElement vSig = new VElement();
+		final VElement vSig = new VElement();
 		if (vLO.isEmpty())
 		{
 			final JDFSignature signature = (JDFSignature) appendElement(ElementName.SIGNATURE);
@@ -270,7 +274,7 @@ public class JDFLayout extends JDFSurface
 			JDFSignature sig = null;
 			for (int i = 0; i < vLO.size(); i++)
 			{
-				JDFElement lo = (JDFElement) vLO.elementAt(i);
+				final JDFElement lo = (JDFElement) vLO.elementAt(i);
 				sig = null;
 				if (lo.hasAttribute(AttributeName.SIGNATURENAME))
 				{
@@ -289,15 +293,17 @@ public class JDFLayout extends JDFSurface
 					}
 				}
 				if (sig != null)
+				{
 					moveElement(sig, null);
+				}
 			}
 		}
 		int nSheet = 0;
 		for (int iSig = 0; iSig < vSig.size(); iSig++)
 		{
-			JDFSignature sig = (JDFSignature) vSig.elementAt(iSig);
+			final JDFSignature sig = (JDFSignature) vSig.elementAt(iSig);
 			vLO = sig.getChildElementVector_JDFElement(ElementName.LAYOUT, null, new JDFAttributeMap("SheetName", ""), false, 0, false);
-			VElement vSheet = new VElement();
+			final VElement vSheet = new VElement();
 			if (vLO.isEmpty())
 			{
 				nSheet++;
@@ -312,7 +318,7 @@ public class JDFLayout extends JDFSurface
 				for (int i = 0; i < vLO.size(); i++)
 				{
 					sheet = null;
-					JDFElement lo = (JDFElement) vLO.elementAt(i);
+					final JDFElement lo = (JDFElement) vLO.elementAt(i);
 					if (lo.hasAttribute(AttributeName.SHEETNAME))
 					{
 						lo.renameAttribute(AttributeName.SHEETNAME, AttributeName.NAME, null, null);
@@ -331,18 +337,20 @@ public class JDFLayout extends JDFSurface
 							vSheet.add(sheet);
 						}
 						if (sheet != null)
+						{
 							sheet.moveElement(lo, null);
+						}
 					}
 				}
 			}
 
 			for (int iSheet = 0; iSheet < vSheet.size(); iSheet++)
 			{
-				JDFSheet sheet = (JDFSheet) vSheet.elementAt(iSheet);
+				final JDFSheet sheet = (JDFSheet) vSheet.elementAt(iSheet);
 				vLO = sheet.getChildElementVector_JDFElement(ElementName.LAYOUT, null, new JDFAttributeMap("Side", ""), false, 0, false);
 				if (vLO.isEmpty())
 				{
-					JDFSurface surf = (JDFSurface) sheet.appendElement(ElementName.SURFACE);
+					final JDFSurface surf = (JDFSurface) sheet.appendElement(ElementName.SURFACE);
 					surf.setSide(EnumSide.Front);
 					((JDFLayout) sheet).moveElementsTo((JDFLayout) surf);
 				}
@@ -350,9 +358,9 @@ public class JDFLayout extends JDFSurface
 				{
 					for (int i = 0; i < vLO.size(); i++)
 					{
-						JDFSurface surface = (JDFSurface) vLO.elementAt(i);
+						final JDFSurface surface = (JDFSurface) vLO.elementAt(i);
 						surface.renameElement(ElementName.SURFACE, null);
-						EnumSide sid = surface.getSide();
+						final EnumSide sid = surface.getSide();
 						surface.cleanResourceAttributes();
 						surface.setSide(sid);
 					}
@@ -367,73 +375,84 @@ public class JDFLayout extends JDFSurface
 
 	// ///////////////////////////////////////////////////////////
 
-	private void moveElementsTo(JDFLayout target)
+	private void moveElementsTo(final JDFLayout target)
 	{
 		VElement vPO = getPlacedObjectVector();
 		if (vPO != null)
 		{
 			for (int i = 0; i < vPO.size(); i++)
+			{
 				target.moveElement(vPO.elementAt(i), null);
+			}
 		}
 		vPO = getChildElementVector_JDFElement(ElementName.LAYOUT, null, null, false, 0, false);
 		if (vPO != null)
 		{
 			for (int i = 0; i < vPO.size(); i++)
+			{
 				target.moveElement(vPO.elementAt(i), null);
+			}
 		}
 
 	}
 
 	/**
-	 * heuristics to check which version an element of a Layout is in: 1.3 or
-	 * 1.2
+	 * heuristics to check which version an element of a Layout is in: 1.3 or 1.2
 	 * 
-	 * Note that this routine is static since it must be used on all sheets,
-	 * surfaces etc.
+	 * Note that this routine is static since it must be used on all sheets, surfaces etc.
 	 * 
-	 * @param sheet
-	 *            the Sheet, Surface, Signature or Layout to check
+	 * @param sheet the Sheet, Surface, Signature or Layout to check
 	 * @return true if this is a new, i.e. partitioned Layout
 	 * 
 	 */
-	public static boolean isNewLayout(JDFResource sheet)
+	public static boolean isNewLayout(final JDFResource sheet)
 	{
 		// not one of Layout, Signature, Sheet or Surface
 		if (!(sheet instanceof JDFLayout))
+		{
 			return false;
+		}
 
 		// either Signature, Sheet or Surface --> old
 		if (!sheet.getLocalName().equals(ElementName.LAYOUT))
+		{
 			return false;
+		}
 
 		// it's a layout the only allowed (old) element is a signature , if it
 		// exists --> old
 		if (sheet.getElement_KElement(ElementName.SIGNATURE, null, 0) != null)
+		{
 			return false;
+		}
 		// it is a layout and it has no subelements and it is partitioned -->
 		// new
 		final JDFResource resourceRoot = sheet.getResourceRoot();
 		if (resourceRoot.hasAttribute(AttributeName.PARTIDKEYS))
+		{
 			return true;
+		}
 		// it is a non partitioned layout and it has palacedobjects --> new
-		if (resourceRoot.hasChildElement(ElementName.CONTENTOBJECT, null)
-				|| resourceRoot.hasChildElement(ElementName.MARKOBJECT, null))
+		if (resourceRoot.hasChildElement(ElementName.CONTENTOBJECT, null) || resourceRoot.hasChildElement(ElementName.MARKOBJECT, null))
+		{
 			return true;
+		}
 
 		// now I'm ready to punt - no partition and no subelements --> assume
 		// that version tags are correct
-		EnumVersion v = sheet.getVersion(true);
+		final EnumVersion v = sheet.getVersion(true);
 
 		// no version, we are 1.3 --> assume 1.3
 		if (v == null)
+		{
 			return true;
+		}
 
 		return v.getValue() >= EnumVersion.Version_1_3.getValue();
 	}
 
 	/**
-	 * appends a signature in both old and new Layouts if old: a <Signature>
-	 * element if new: a SignatureName partition leaf
+	 * appends a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
 	 */
 	@Override
 	public JDFSignature appendSignature() throws JDFException
@@ -442,9 +461,8 @@ public class JDFLayout extends JDFSurface
 	}
 
 	/**
-	 * counts the number of signatures in both old and new Layouts if old: the
-	 * number of <Signature> elements if new: the number of SignatureName
-	 * partition leaves
+	 * counts the number of signatures in both old and new Layouts if old: the number of <Signature> elements if new: the number of SignatureName partition
+	 * leaves
 	 * 
 	 * @return the number of signatures
 	 */
@@ -454,14 +472,12 @@ public class JDFLayout extends JDFSurface
 	}
 
 	/**
-	 * gets or appends a signature in both old and new Layouts if old: a
-	 * <Signature> element if new: a SignatureName partition leaf
+	 * gets or appends a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
 	 * 
-	 * @param iSkip
-	 *            the number of signatures to skip
+	 * @param iSkip the number of signatures to skip
 	 */
 	@Override
-	public JDFSignature getCreateSignature(int iSkip)
+	public JDFSignature getCreateSignature(final int iSkip)
 	{
 		JDFSignature s = getSignature(iSkip);
 		if (s == null)
@@ -472,39 +488,35 @@ public class JDFLayout extends JDFSurface
 	}
 
 	/**
-	 * gets a signature in both old and new Layouts if old: a <Signature>
-	 * element if new: a SignatureName partition leaf
+	 * gets a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
 	 * 
-	 * @param iSkip
-	 *            the number of signatures to skip
+	 * @param iSkip the number of signatures to skip
 	 */
 	@Override
-	public JDFSignature getSignature(int iSkip)
+	public JDFSignature getSignature(final int iSkip)
 	{
 		return getLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, iSkip);
 	}
 
 	/**
-	 * gets a signature in both old and new Layouts if old: a <Signature>
-	 * element if new: a SignatureName partition leaf
+	 * gets a signature in both old and new Layouts if old: a <Signature> element if new: a SignatureName partition leaf
 	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
 	 * 
 	 * @return the signature
 	 */
-	public JDFSignature getSignature(String signatureName)
+	public JDFSignature getSignature(final String signatureName)
 	{
 		return getLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, signatureName);
 	}
 
 	/**
-	 * gets a signature in both old and new Layouts if old: a <Signature>creates it if it does not exist
-	 * element if new: a SignatureName partition leaf
+	 * gets a signature in both old and new Layouts if old: a <Signature>creates it if it does not exist element if new: a SignatureName partition leaf
 	 * @param signatureName the SignatureName partition key value(new) or Signature/@Name(old)
 	 * 
 	 * @return the signature
-	 * @throws JDFException 
+	 * @throws JDFException
 	 */
-	public JDFSignature getCreateSignature(String signatureName) throws JDFException
+	public JDFSignature getCreateSignature(final String signatureName) throws JDFException
 	{
 		return getCreateLayoutElement(this, ElementName.SIGNATURE, AttributeName.SIGNATURENAME, signatureName);
 	}

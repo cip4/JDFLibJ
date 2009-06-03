@@ -112,7 +112,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testReducePartAmounts()
+	public void testReducePartAmounts() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
@@ -146,7 +146,6 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	/**
 	 * Method testVirtualAmounts.
 	 * 
-	 * @throws Exception
 	 */
 	public void testVirtualAmounts()
 	{
@@ -179,7 +178,6 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	/**
 	 * Method testGetMatchingPartAmountVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetMatchingPartAmountVector()
 	{
@@ -222,7 +220,6 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	/**
 	 * Method testGetMatchingPartAmountVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetPartAmountMulti()
 	{
@@ -256,7 +253,6 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	/**
 	 * Method testGetMatchingPartAmountVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetCreatePartAmount()
 	{

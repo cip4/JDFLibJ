@@ -210,6 +210,7 @@ import org.cip4.jdflib.util.BiHashMapTest;
 import org.cip4.jdflib.util.ByteArrayIOStreamTest;
 import org.cip4.jdflib.util.ContainerUtilTest;
 import org.cip4.jdflib.util.EnumUtilTest;
+import org.cip4.jdflib.util.FastFiFoTest;
 import org.cip4.jdflib.util.FileUtilTest;
 import org.cip4.jdflib.util.HashUtilTest;
 import org.cip4.jdflib.util.HotFolderTest;
@@ -410,6 +411,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(ByteArrayIOStreamTest.class);
 		suite.addTestSuite(ContainerUtilTest.class);
 		suite.addTestSuite(EnumUtilTest.class);
+		suite.addTestSuite(FastFiFoTest.class);
 		suite.addTestSuite(FileUtilTest.class);
 		suite.addTestSuite(HashUtilTest.class);
 		suite.addTestSuite(HotFolderTest.class);

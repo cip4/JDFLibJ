@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -169,17 +170,21 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	}
 
 	/**
-	 * Constructor for JDFAudit
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFAudit(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * before June 3, 2009
+	 */
 	public static class EnumAuditType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -190,6 +195,10 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumAuditType getEnum(final String enumName)
 		{
 			return (EnumAuditType) getEnum(EnumAuditType.class, enumName);
@@ -480,7 +489,14 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 		}
 		if (m_strAuthor != null)
 		{
-			setAuthor(m_strAuthor);
+			if (EnumUtil.aLessThanB(getVersion(true), EnumVersion.Version_1_4))
+			{
+				setAuthor(m_strAuthor);
+			}
+			else
+			{
+				appendEmployee().setDescriptiveName(m_strAuthor);
+			}
 		}
 
 		if (auditVersion == null || auditVersion.getValue() >= EnumVersion.Version_1_3.getValue())
@@ -561,10 +577,23 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 					}
 				}
 			}
+			if (value >= EnumVersion.Version_1_4.getValue())
+			{
+				final String finalAuthor = StringUtil.getNonEmpty(getAuthor());
+				if (finalAuthor != null && !hasChildElement(ElementName.EMPLOYEE, null))
+				{
+					appendEmployee().setDescriptiveName(finalAuthor);
+				}
+				removeAttribute(AttributeName.AUTHOR);
+			}
+
 		}
 		return super.fixVersion(version);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#getIDPrefix()
+	 */
 	@Override
 	public String getIDPrefix()
 	{
@@ -761,8 +790,8 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	}
 
 	/**
-	 * sets the default static AgentName that is used to preset @AgentName when generating a new Audit
-	 * @param agentName The m_strAgentName to set.
+	 * sets the default static Author that is used to preset @Author when generating a new Audit
+	 * @param author The m_strAuthor to set.
 	 */
 	public static synchronized void setStaticAuthor(final String author)
 	{
