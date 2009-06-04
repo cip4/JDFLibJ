@@ -23,7 +23,7 @@
  *       "This product includes software developed by the
  *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
+ *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of
@@ -33,7 +33,7 @@
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
+ *    nor may "CIP4" appear in their name, without prior written
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -45,7 +45,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -57,7 +57,7 @@
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
+ * originally based on software
  * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
@@ -65,66 +65,89 @@
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
  *
+ *
  */
-package org.cip4.jdflib.elementwalker;
 
-import org.cip4.jdflib.core.KElement;
+package org.cip4.jdflib.resource;
+
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFLayoutPreparationParams.StrippingConverter;
 
 /**
- * 
- * elementwalker class that allows you to traverse a dom tree starting at a given root
- * 
- * @author prosirai
+ * all kinds of fun tests around JDF 1.2 vs JDF 1.3 Layouts also some tests for automated layout
  * 
  */
-public class ElementWalker
+public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 {
-	protected IWalkerFactory theFactory;
+
+	JDFNode n = null;
+	JDFLayoutPreparationParams lpp = null;
 
 	/**
-	 * @param _theFactory used to find the individual instances for the children
+	 * 
 	 */
-	public ElementWalker(final IWalkerFactory _theFactory)
+	public void testConvertStripMarks()
 	{
-		super();
-		this.theFactory = _theFactory;
+		lpp.setFrontMarkList(new VString("RegisterMark FoldMark", null));
+		lpp.setBackMarkList(new VString("RegisterMark ColorBar", null));
+		final StrippingConverter sc = lpp.convertToStripping();
+		final JDFStrippingParams strippingParams = sc.getStrippingParams();
+		assertEquals(strippingParams, n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
+		final VElement v = strippingParams.getChildElementVector(ElementName.STRIPMARK, null);
+		assertEquals("2 front + 2 back", v.size(), 4);
 	}
 
 	/**
-	 * walk the tree starting at e.
 	 * 
-	 * @param e the root element to walk
-	 * @param trackElem a parallel element to e that may additionally be modified during the walk
-	 * @return n the number of traversed elements
 	 */
-	public int walkTree(final KElement e, final KElement trackElem)
+	public void testConvertStripSimple()
 	{
-		if (e == null)
-		{
-			return 0;
-		}
-		int n = 0;
+		lpp.convertToStripping();
+		assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
+		assertNotNull(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
+		assertEquals(EnumType.Stripping, n.getEnumType());
+	}
 
-		final IWalker w = theFactory.getWalker(e);
-		KElement b = null;
-		if (w != null)
-		{
-			n++;
-			b = w.walk(e, trackElem);
-		}
-		if (b != null) // follow kids if still alive or no walker found
-		{
-			// do not follow refelements
-			final VElement v = e.getChildElementVector_KElement(null, null, null, true, -1);
-			final int size = v.size();
-			for (int i = 0; i < size; i++)
-			{
-				final KElement e2 = v.elementAt(i);
-				n += walkTree(e2, b);
-			}
-		}
-		return n;
+	/**
+	 * 
+	 */
+	public void testConvertStripSimpleCombined()
+	{
+		n.setCombined(new VString("LayoutPreparation Imposition", null));
+		lpp.convertToStripping();
+		final VString types = n.getTypes();
+		assertTrue(types.contains(EnumType.Stripping.getName()));
+		assertTrue(types.contains(EnumType.Imposition.getName()));
+		assertFalse(types.contains(EnumType.LayoutPreparation.getName()));
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.LayoutPreparation);
+		lpp = (JDFLayoutPreparationParams) n.addResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input);
+
+	}
+
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return n.toString();
 	}
 
 }

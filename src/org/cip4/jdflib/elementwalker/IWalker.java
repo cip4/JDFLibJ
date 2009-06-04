@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,11 +83,11 @@ public interface IWalker
 	/**
 	 * called for every IWalker that the factory returns
 	 * @param e the element to walk
-	 * @param trackElem TODO
+	 * @param trackElem a parallel element to e that may additionally be modified during the walk
 	 * 
-	 * @return !=null if this element remains after walking, <br/> null if it was deleted and therefor the walker should
-	 *         skip this and all its descendants
-	 *         the element may either be this or a converted element to continue with
+	 * @return !=null if this element remains after walking, <br/>
+	 * null if it was deleted and therefore the walker should skip this and all its descendants<br/>
+	 * the element may either be trackElem or a converted element to continue with as trackElem
 	 */
 	public KElement walk(KElement e, KElement trackElem);
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,7 +71,6 @@
  * class JDFEmployee
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
  * Warning! very preliminary test version. 
  * Interface subject to change without prior notice! 
  */
@@ -80,57 +79,63 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoEmployee;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.jmf.JDFEmployeeDef;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * before June 4, 2009
+ */
 public class JDFEmployee extends JDFAutoEmployee implements IMatches
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFEmployee
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFEmployee(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFEmployee(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFEmployee
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFEmployee(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFEmployee(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFEmployee
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
+	 * 
 	 * @throws DOMException
 	 */
-	public JDFEmployee(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFEmployee(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoEmployee#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -138,34 +143,61 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 	}
 
 	/**
-	 * returns true if the input object is equivalent to this or null</br> valid
-	 * object types are:<br/> Employee<br/> EmployeeDef<br/> String - must match @PersonalID
-	 * <br/> (non-Javadoc)
+	 * returns true if the input object is equivalent to this or null</br> valid object types are:<br/>
+	 * Employee<br/>
+	 * EmployeeDef<br/>
+	 * String - must match @PersonalID <br/>
 	 * 
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 */
-	public boolean matches(Object subset)
+	public boolean matches(final Object subset)
 	{
 		if (subset == null)
+		{
 			return true; // ( matches contract requires true for null to allow
-							// wildcards
+			// wildcards
+		}
 
 		if (subset instanceof JDFEmployee)
 		{
 			// TODO more criteria - person etc.
-			JDFEmployee employee = (JDFEmployee) subset;
-			return ContainerUtil.equals(getPersonalID(), employee
-					.getPersonalID());
-		} else if (subset instanceof JDFEmployeeDef)
+			final JDFEmployee employee = (JDFEmployee) subset;
+			boolean b = false;
+			if (hasAttribute(AttributeName.PERSONALID))
+			{
+				b = ContainerUtil.equals(getPersonalID(), employee.getPersonalID());
+			}
+			else if (hasAttribute(AttributeName.PRODUCTID))
+			{
+				b = ContainerUtil.equals(getProductID(), employee.getProductID());
+			}
+			return b;
+		}
+		else if (subset instanceof JDFEmployeeDef)
 		{
-			JDFEmployeeDef ed = (JDFEmployeeDef) subset;
+			final JDFEmployeeDef ed = (JDFEmployeeDef) subset;
 			return ContainerUtil.equals(getPersonalID(), ed.getPersonalID());
-		} else if (subset instanceof String)
+		}
+		else if (subset instanceof String)
 		{
 			return ContainerUtil.equals(getPersonalID(), subset);
 		}
 
 		return false;
+	}
+
+	/**
+	 * copy personalID to productID
+	 * @see org.cip4.jdflib.resource.JDFResource#fixVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
+	 */
+	@Override
+	public boolean fixVersion(final EnumVersion version)
+	{
+		if (!hasAttribute(AttributeName.PRODUCTID))
+		{
+			setProductID(StringUtil.getNonEmpty(getPersonalID()));
+		}
+		return super.fixVersion(version);
 	}
 }
 // ==========================================================================

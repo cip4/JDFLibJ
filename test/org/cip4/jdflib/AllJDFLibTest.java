@@ -175,6 +175,7 @@ import org.cip4.jdflib.resource.JDFAutoResourceTest;
 import org.cip4.jdflib.resource.JDFDeviceListTest;
 import org.cip4.jdflib.resource.JDFFilespecTest;
 import org.cip4.jdflib.resource.JDFLayerListTest;
+import org.cip4.jdflib.resource.JDFLayoutPreparationParamsTest;
 import org.cip4.jdflib.resource.JDFLayoutTest;
 import org.cip4.jdflib.resource.JDFMediaColorTest;
 import org.cip4.jdflib.resource.JDFNotificationTest;
@@ -374,6 +375,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFAssemblySectionTest.class);
 		suite.addTestSuite(JDFLayerListTest.class);
 		suite.addTestSuite(JDFLayoutTest.class);
+		suite.addTestSuite(JDFLayoutPreparationParamsTest.class);
 		suite.addTestSuite(JDFMediaColorTest.class);
 		suite.addTestSuite(JDFNotificationTest.class);
 		suite.addTestSuite(JDFPageListTest.class);

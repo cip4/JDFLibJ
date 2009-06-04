@@ -3,6 +3,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
 import org.cip4.jdflib.core.AttributeName;
@@ -80,6 +82,19 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Exception
+	 * 
+	 */
+	public void xjdfSchemaTest() throws Exception
+	{
+		final XJDFSchemaWalker sw = new XJDFSchemaWalker();
+		final File in = new File(sm_dirTestSchema + "JDFResource.xsd");
+		final File out = new File(sm_dirTestDataTemp + "schema/xjdf/JDFResource.xsd");
+		sw.newFile(in, out);
+	}
+
+	/**
+	 * @throws Exception
 	 */
 	public void testToXJDFWithProduct() throws Exception
 	{
