@@ -1,9 +1,10 @@
 /*
+ *
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -11,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ *    notice, this list of conditions and the following disclaimer. 
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -19,17 +20,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
+ *    if any, must include the following acknowledgment:  
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
+ *        The International Cooperation for the Integration of 
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
+ *    software without prior written permission. For written 
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -55,89 +56,89 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
+ * individuals on behalf of the The International Cooperation for the Integration 
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *
- *
- */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFApprovalSuccess.java
- *
- * Last changes
- *
- */
-package org.cip4.jdflib.resource.process;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoApprovalSuccess;
-import org.w3c.dom.DOMException;
-
-/**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ *  
  * 
- * before June 7, 2009
  */
-public class JDFApprovalSuccess extends JDFAutoApprovalSuccess
+/**
+ * JDFDocTest.java
+ * 
+ * @author Kai Mattern
+ *
+ * Copyright (C) 2002 Heidelberger Druckmaschinen AG. All Rights Reserved.
+ */
+package org.cip4.jdflib.core;
+
+import java.io.File;
+
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ * 
+ */
+public class JDFSchemaTest extends JDFTestCaseBase
 {
-	private static final long serialVersionUID = 1L;
+	JDFParser p = null;
 
 	/**
-	 * Constructor for JDFApprovalSuccess
-	 * @param myOwnerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * @throws Exception
+	 */
+	public void testSchema() throws Exception
+	{
+		final JDFDoc d = p.parseFile(new File(sm_dirTestData + "job.jdf"));
+		assertNotNull(d);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * @throws Exception
+	 */
+	public void testDieMaking() throws Exception
+	{
+		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.DieMaking);
+		n.addResource(ElementName.TOOL, EnumUsage.Output);
+		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
 	 * 
-	 */
-	public JDFApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
-	{
-		super(myOwnerDocument, qualifiedName);
-	}
-
-	/**
-	 * Constructor for JDFApprovalSuccess
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 * @throws DOMException
-	 */
-	public JDFApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName);
-	}
-
-	/**
-	 * Constructor for JDFApprovalSuccess
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 * @param myLocalName
-	 * @throws DOMException
-	 */
-	public JDFApprovalSuccess(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
 	@Override
-	public String toString()
+	protected void setUp() throws Exception
 	{
-		return "JDFApprovalSuccess[  --> " + super.toString() + " ]";
+		super.setUp();
+		JDFElement.setLongID(false);
+		final File foo = new File(sm_dirTestSchema).getParentFile();
+		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
+		p = new JDFParser();
+		final File jdfxsd = new File(sm_dirTestSchema + File.separator + "JDF.xsd");
+		assertTrue(jdfxsd.canRead());
+		p.setJDFSchemaLocation(jdfxsd);
 	}
+
+	@Override
+	protected void tearDown() throws Exception
+	{
+		super.tearDown();
+	}
+
 }

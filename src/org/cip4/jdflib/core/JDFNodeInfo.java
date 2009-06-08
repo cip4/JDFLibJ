@@ -183,7 +183,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFNodeInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFNodeInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -195,7 +195,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFNodeInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFNodeInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -208,7 +208,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFNodeInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFNodeInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -222,17 +222,17 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 
 		private static int m_startValue = 0;
 
-		private EnumBusinessObject(String status)
+		private EnumBusinessObject(final String status)
 		{
 			super(status, m_startValue++);
 		}
 
-		public static EnumBusinessObject getEnum(String status)
+		public static EnumBusinessObject getEnum(final String status)
 		{
 			return (EnumBusinessObject) getEnum(EnumBusinessObject.class, status);
 		}
 
-		public static EnumBusinessObject getEnum(int value)
+		public static EnumBusinessObject getEnum(final int value)
 		{
 			return (EnumBusinessObject) getEnum(EnumBusinessObject.class, value);
 		}
@@ -306,9 +306,11 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	@Override
 	public boolean init()
 	{
-		Node n = getParentNode();
+		final Node n = getParentNode();
 		if (bDefaultWorkStepID && !hasAttribute(AttributeName.WORKSTEPID))
+		{
 			setWorkStepID("W" + uniqueID(0));
+		}
 		if (n != null && ElementName.RESOURCEPOOL.equals(n.getLocalName()))
 		{
 			super.init();
@@ -324,7 +326,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * @param workStep
 	 */
 	@Override
-	public void setWorkStepID(String workStep)
+	public void setWorkStepID(final String workStep)
 	{
 		setAttribute(AttributeName.WORKSTEPID, workStep, null);
 	}
@@ -348,7 +350,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * @param newID
 	 * @return
 	 */
-	public boolean updateBusiness(EnumBusinessObject businessObject, String newID)
+	public boolean updateBusiness(final EnumBusinessObject businessObject, final String newID)
 	{
 		final KElement bo = getElement(ElementName.BUSINESSINFO, JDFConstants.EMPTYSTRING, 0);
 
@@ -379,10 +381,9 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * 
 	 * @param mResAtt map of Resource attributes to search for
 	 * @param bFollowRefs true if internal references shall be followed
-	 * @return vResource: vector with all elements matching the conditions default: GetLinkedResources(new
-	 *         JDFAttributeMap(), false)
+	 * @return vResource: vector with all elements matching the conditions default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */
-	public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)
+	public VElement getLinkedResources(final JDFAttributeMap mResAtt, final boolean bFollowRefs)
 	{
 		final VElement vChild = getChildElementVector(null, null, null, true, 0, false);
 		final VElement vElem = new VElement();
@@ -411,25 +412,6 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	// ////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Mother of all version fixing routines
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will
-	 * be able to move from low to high versions but potentially fail when attempting to move from higher to lower
-	 * versions
-	 * 
-	 * @param version : version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(EnumVersion version)
-	{
-		if (hasAttribute(AttributeName.RREFS))
-			removeAttribute(AttributeName.RREFS);
-		return super.fixVersion(version);
-	}
-
-	// ////////////////////////////////////////////////////////////////////
-	/**
 	 * remove any resource specific attribute when making this to an element
 	 * 
 	 */
@@ -454,34 +436,35 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	 * 
 	 * @param defaultWorkStepID the bDefaultWorkStepID to set
 	 */
-	public static void setDefaultWorkStepID(boolean defaultWorkStepID)
+	public static void setDefaultWorkStepID(final boolean defaultWorkStepID)
 	{
 		bDefaultWorkStepID = defaultWorkStepID;
 	}
 
 	/**
-	 * gets the subscription query for a given messagetype or creates one if not yet there note that newly created query
-	 * do not contain a subscription
+	 * gets the subscription query for a given messagetype or creates one if not yet there note that newly created query do not contain a subscription
 	 * 
 	 * @param queryType
 	 * @return the appropriate query
 	 */
-	public JDFQuery getCreateJMFQuery(EnumType queryType)
+	public JDFQuery getCreateJMFQuery(final EnumType queryType)
 	{
 		JDFQuery q = null;
-		VElement v = getChildElementVector(ElementName.JMF, null);
+		final VElement v = getChildElementVector(ElementName.JMF, null);
 		if (v != null)
 		{
-			int siz = v.size();
+			final int siz = v.size();
 			for (int i = 0; i < siz; i++)
 			{
-				JDFJMF jmf = (JDFJMF) v.elementAt(i);
+				final JDFJMF jmf = (JDFJMF) v.elementAt(i);
 				q = (JDFQuery) jmf.getMessageElement(EnumFamily.Query, queryType, 0);
 				if (q != null)
+				{
 					break;
+				}
 			}
 		}
-		
+
 		if (q == null)
 		{
 			q = appendJMF().appendQuery(queryType);

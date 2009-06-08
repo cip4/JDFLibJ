@@ -450,26 +450,67 @@ public class StringUtil
 	 * @param n number of characters to cut (negative) or retain (positive)
 	 * @return the modified string
 	 */
-	public static String leftStr(final String strWork, final int n)
+	public static String leftStr(final String strWork, int n)
 	{
-		int nLocal = n;
-
 		if (strWork == null)
 		{
 			return null;
 		}
 
-		if (nLocal < 0)
+		if (n < 0)
 		{
-			nLocal = strWork.length() + nLocal;
+			n = strWork.length() + n;
 		}
 
-		if (nLocal <= 0)
+		if (n <= 0)
 		{
 			return null;
 		}
 
-		return strWork.substring(0, nLocal <= strWork.length() ? nLocal : strWork.length());
+		return strWork.substring(0, n <= strWork.length() ? n : strWork.length());
+	}
+
+	/**
+	 * similar to substring but also null safe and allowing negative numbers to count backwards
+	 * 
+	 * @param strWork the string to work on
+	 * @param first the position of the starting character 0=first
+	 * @param last the position of the end character 0=last
+	 * @return the modified string
+	 */
+	public static String substring(final String strWork, int first, int last)
+	{
+		if (strWork == null)
+		{
+			return null;
+		}
+
+		if (first < 0)
+		{
+			first = strWork.length() + first;
+		}
+		if (first < 0)
+		{
+			first = 0;
+		}
+		if (first > strWork.length())
+		{
+			return null;
+		}
+		if (last <= 0)
+		{
+			last = strWork.length() + last;
+		}
+		if (last < first)
+		{
+			return null;
+		}
+		if (last >= strWork.length())
+		{
+			last = strWork.length();
+		}
+
+		return strWork.substring(first, last);
 	}
 
 	/**
@@ -480,31 +521,29 @@ public class StringUtil
 	 * @param n number of characters to cut (negative) or retain (positive)
 	 * @return the modified string
 	 */
-	public static String rightStr(final String strWork, final int n)
+	public static String rightStr(final String strWork, int n)
 	{
-		int nLocal = n;
-
 		if (strWork == null)
 		{
 			return null;
 		}
 
-		if (nLocal < 0)
+		if (n < 0)
 		{
-			nLocal = strWork.length() + nLocal;
+			n = strWork.length() + n;
 		}
 
-		if (nLocal <= 0)
+		if (n <= 0)
 		{
 			return null;
 		}
 
-		if (nLocal > strWork.length())
+		if (n > strWork.length())
 		{
 			return strWork;
 		}
 
-		return strWork.substring(strWork.length() - nLocal);
+		return strWork.substring(strWork.length() - n);
 	}
 
 	/**

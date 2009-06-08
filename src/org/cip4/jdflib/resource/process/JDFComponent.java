@@ -84,10 +84,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoComponent;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFRefElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFShape;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.w3c.dom.DOMException;
@@ -95,7 +92,7 @@ import org.w3c.dom.DOMException;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * June 3, 2009
+ * before June 3, 2009
  */
 public class JDFComponent extends JDFAutoComponent
 {
@@ -151,67 +148,6 @@ public class JDFComponent extends JDFAutoComponent
 	public String toString()
 	{
 		return "JDFComponent[  --> " + super.toString() + " ]";
-	}
-
-	/**
-	 * version fixing routine for JDF
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to lower versions
-	 * 
-	 * @param version : version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		final boolean bRet = true;
-		if (version != null)
-		{
-			if (version.getValue() >= EnumVersion.Version_1_4.getValue())
-			{
-				removeAttribute(AttributeName.ISWASTE);
-			}
-			if (version.getValue() >= EnumVersion.Version_1_3.getValue())
-			{
-				if (hasAttribute(AttributeName.SOURCESHEET))
-				{
-					final String sourceSheet = getSourceSheet();
-
-					final JDFRefElement layoutRef = (JDFRefElement) getElement_KElement("LayoutRef", null, 0);
-					if (layoutRef != null)
-					{
-						JDFLayout lo = (JDFLayout) layoutRef.getLinkRoot(layoutRef.getrRef());
-						if (lo != null)
-						{
-							lo.fixVersion(version);
-						}
-
-						layoutRef.setPartMap(new JDFAttributeMap(AttributeName.SHEETNAME, sourceSheet));
-						lo = (JDFLayout) layoutRef.getTarget();
-						layoutRef.setPartMap(lo.getPartMap());
-					}
-					removeAttribute(AttributeName.SOURCESHEET);
-				}
-			}
-			else
-			{
-				final JDFLayout layout = getLayout();
-				if (layout != null)
-				{
-					final String sourcesheet = layout.getSheetName();
-					setSourceSheet(sourcesheet);
-					final JDFRefElement layoutRef = (JDFRefElement) getElement_KElement("LayoutRef", null, 0);
-					// JDF 1.2 layout should be unpartitioned
-					if (layoutRef != null)
-					{
-						// JDF 1.2 layout should be unpartitioned
-						layoutRef.removeChild(ElementName.PART, null, 0);
-					}
-				}
-			}
-		}
-		return super.fixVersion(version) && bRet;
 	}
 
 	/**

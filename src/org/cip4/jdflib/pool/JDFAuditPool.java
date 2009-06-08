@@ -879,27 +879,6 @@ public class JDFAuditPool extends JDFPool
 	// ////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Mother of all version fixing routines
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to lower versions
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		if (hasAttribute(AttributeName.RREFS))
-		{
-			removeAttribute(AttributeName.RREFS);
-		}
-		return super.fixVersion(version);
-	}
-
-	// ////////////////////////////////////////////////////////////////////
-
-	/**
 	 * creates a ProcessRun when this is submitted should be called by the receiving device when it initially receives and enqueues the JDF
 	 * 
 	 * @param qe the queuentry element to copy information from, if null parameters will be genrated on the fly

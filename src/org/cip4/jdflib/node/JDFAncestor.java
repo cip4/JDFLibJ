@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,7 +106,7 @@ public class JDFAncestor extends JDFAutoAncestor
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFAncestor(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFAncestor(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -118,7 +118,7 @@ public class JDFAncestor extends JDFAutoAncestor
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFAncestor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFAncestor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -131,13 +131,16 @@ public class JDFAncestor extends JDFAutoAncestor
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFAncestor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFAncestor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#setVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
+	 */
 	@Override
-	public void setVersion(EnumVersion enumVar)
+	public void setVersion(final EnumVersion enumVar)
 	{
 		setAttribute(AttributeName.VERSION, enumVar.getName(), null);
 	}
@@ -149,44 +152,22 @@ public class JDFAncestor extends JDFAutoAncestor
 	 * @return
 	 */
 	@Override
-	@SuppressWarnings(value={"deprecation"})
 	public EnumVersion getVersion()
 	{
 		return EnumVersion.getEnum(getAttribute(AttributeName.VERSION, null, null));
 	}
 
 	/**
-	 * version fixing routine for JDF
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will
-	 * be able to move from low to high versions but potentially fail when attempting to move from higher to lower
-	 * versions
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
+	 * @param value
 	 */
-	@Override
-	public boolean fixVersion(EnumVersion version)
-	{
-		boolean bRet = true;
-		if (version != null)
-		{
-			setVersion(version);
-			setMaxVersion(version);
-			if (version.getValue() < EnumVersion.Version_1_3.getValue())
-			{
-				inlineRefElements(null, null, true);
-			}
-		}
-
-		return super.fixVersion(version) && bRet;
-	}
-
-	public void setCategory(String value)
+	public void setCategory(final String value)
 	{
 		setAttribute(AttributeName.CATEGORY, value);
 	}
 
+	/**
+	 * @return
+	 */
 	public String getCategory()
 	{
 		return getAttribute(AttributeName.CATEGORY);
@@ -197,10 +178,9 @@ public class JDFAncestor extends JDFAutoAncestor
 	 * 
 	 * @param mResAtt map of Resource attributes to search for
 	 * @param bFollowRefs true if internal references shall be followed
-	 * @return vector with all elements matching the conditions default: GetLinkedResources(new JDFAttributeMap(),
-	 *         false)
+	 * @return vector with all elements matching the conditions default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */
-	public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)
+	public VElement getLinkedResources(final JDFAttributeMap mResAtt, final boolean bFollowRefs)
 	{
 		final VElement vChild = getChildElementVector(null, null, null, true, 99999, false);
 		final VElement vElem = new VElement();

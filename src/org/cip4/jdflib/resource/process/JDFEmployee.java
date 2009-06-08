@@ -83,7 +83,6 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.jmf.JDFEmployeeDef;
 import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -184,20 +183,6 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 		}
 
 		return false;
-	}
-
-	/**
-	 * copy personalID to productID
-	 * @see org.cip4.jdflib.resource.JDFResource#fixVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		if (!hasAttribute(AttributeName.PRODUCTID))
-		{
-			setProductID(StringUtil.getNonEmpty(getPersonalID()));
-		}
-		return super.fixVersion(version);
 	}
 }
 // ==========================================================================

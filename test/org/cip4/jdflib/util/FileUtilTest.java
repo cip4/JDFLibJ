@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -143,6 +143,7 @@ public class FileUtilTest extends JDFTestCaseBase
 			assertEquals(b[i], b3[i]);
 		}
 		f.delete();
+		ThreadUtil.sleep(100); // may need some time for delete to catch on
 		assertNull(FileUtil.fileToByteArray(f));
 	}
 

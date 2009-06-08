@@ -75,11 +75,13 @@ import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFCreated;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFApprovalDetails;
@@ -108,6 +110,9 @@ public class FixVersionTest extends TestCase
 
 	// /////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testApprovalSuccess()
 	{
 		n.setType("Approval", true);
@@ -132,17 +137,40 @@ public class FixVersionTest extends TestCase
 
 	// //////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testRRefs()
 	{
 		final JDFResourcePool rp = n.appendResourcePool();
 		rp.setAttribute(AttributeName.RREFS, "a b", null);
 		n.fixVersion(null);
 		assertFalse(rp.hasAttribute(AttributeName.RREFS));
+	}
 
+	/**
+	 * 
+	 */
+	public void testICSVersions()
+	{
+		final JDFDevice r = (JDFDevice) n.addResource("Device", EnumUsage.Input);
+		final VString ics0 = new VString("Base_L2-1.2 MIS_L3-1.2 PerCP_L2_1.2", null);
+		final VString ics1 = new VString("Base_L2-1.4 MIS_L3-1.4 PerCP_L2_1.4", null);
+		r.setICSVersions(ics0);
+		final FixVersion f0 = new FixVersion(EnumVersion.Version_1_4);
+		f0.walkTree(n, null);
+		assertEquals(r.getICSVersions(), ics0);
+		final FixVersion f1 = new FixVersion(EnumVersion.Version_1_4);
+		f1.setFixICSVersions(true);
+		f1.walkTree(n, null);
+		assertEquals(r.getICSVersions(), ics1);
 	}
 
 	// //////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAudit()
 	{
 		final JDFAuditPool ap = n.getAuditPool();
@@ -178,6 +206,9 @@ public class FixVersionTest extends TestCase
 	// //////////////////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testResourceStatus()
 	{
 		final JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
@@ -190,6 +221,10 @@ public class FixVersionTest extends TestCase
 	}
 
 	// //////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testTool()
 	{
 		final JDFTool t = (JDFTool) n.addResource("Tool", null, EnumUsage.Input, null, null, null, null);

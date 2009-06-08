@@ -424,49 +424,6 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * version fixing routine for JDF
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version<br>
-	 * in general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		final boolean bRet = true;
-		if (version != null)
-		{
-			if (version.getValue() >= EnumVersion.Version_1_3.getValue())
-			{
-				if (hasAttribute(AttributeName.DRAFTOK))
-				{
-					if (!hasAttribute(AttributeName.MINSTATUS))
-					{
-						setMinStatus(EnumResStatus.Draft);
-					}
-					removeAttribute(AttributeName.DRAFTOK);
-				}
-			}
-			else
-			{
-				if (hasAttribute(AttributeName.MINSTATUS))
-				{
-					if (!hasAttribute(AttributeName.DRAFTOK))
-					{
-						setDraftOK(true);
-					}
-					removeAttribute(AttributeName.MINSTATUS);
-				}
-				removeAttribute(AttributeName.MINLATESTATUS);
-			}
-		}
-		return super.fixVersion(version) && bRet;
-
-	}
-
-	/**
 	 * setTarget - sets the link to the target defined by partLeaf. Automatically generates a part subelement, if partleaf is not the root resource
 	 * 
 	 * @param resourceTarget the resource that this ResourceLink shoud refer to

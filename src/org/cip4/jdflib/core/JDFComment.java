@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,7 @@ public class JDFComment extends JDFAutoComment
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFComment(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFComment(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +119,7 @@ public class JDFComment extends JDFAutoComment
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFComment(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,7 +132,7 @@ public class JDFComment extends JDFAutoComment
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFComment(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFComment(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -158,7 +158,7 @@ public class JDFComment extends JDFAutoComment
 	@Override
 	public boolean init()
 	{
-		EnumVersion v = getVersion(true);
+		final EnumVersion v = getVersion(true);
 		if (v.getValue() >= EnumVersion.Version_1_3.getValue() && getLocalName().equals(ElementName.COMMENT))
 		{
 			appendAnchor(null);
@@ -169,45 +169,14 @@ public class JDFComment extends JDFAutoComment
 	}
 
 	/**
-	 * version fixing routine for JDF
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version<br>
-	 * in general, it will be able to move from low to high versions but potentially fail when attempting to move from
-	 * higher to lower versions
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(EnumVersion version)
-	{
-		if (version != null)
-		{
-			if (version.getValue() >= EnumVersion.Version_1_3.getValue() && getLocalName().equals(ElementName.COMMENT))
-			{
-				appendAnchor(null);
-			}
-			else
-			{
-				removeAttribute(AttributeName.ID);
-				removeAttribute(AttributeName.AGENTNAME);
-				removeAttribute(AttributeName.AGENTVERSION);
-				removeAttribute(AttributeName.AUTHOR);
-				removeAttribute(AttributeName.TIMESTAMP);
-			}
-		}
-		return super.fixVersion(version);
-	}
-
-	/**
-	 * Erases all empty text nodes in 'this' and its subelements If there any empty text nodes removes them. Does
-	 * nothing in text nodes so that whitespace in comments, addresses etc. is always preserved
+	 * Erases all empty text nodes in 'this' and its subelements If there any empty text nodes removes them. Does nothing in text nodes so that whitespace in
+	 * comments, addresses etc. is always preserved
 	 * 
 	 * @param bTrimWhite trims whitespace of text, default = true
 	 * @return int the number of removed nodes
 	 */
 	@Override
-	public int eraseEmptyNodes(boolean bTrimWhite)
+	public int eraseEmptyNodes(final boolean bTrimWhite)
 	{
 		return bTrimWhite ? 0 : 0; // NOP to fool compiler. also retain
 		// whitespace in comments

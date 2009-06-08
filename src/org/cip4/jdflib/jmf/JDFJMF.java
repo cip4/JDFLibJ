@@ -114,7 +114,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFJMF(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFJMF(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -126,7 +126,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFJMF(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFJMF(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI == null ? getSchemaURL() : myNamespaceURI, qualifiedName);
 	}
@@ -139,7 +139,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFJMF(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFJMF(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI == null ? getSchemaURL() : myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -170,10 +170,14 @@ public class JDFJMF extends JDFAutoJMF
 		setVersion(getDefaultJDFVersion());
 		final EnumVersion version = getVersion(true);
 		if (!EnumVersion.Version_1_3.isGreater(version))
+		{
 			setMaxVersion(version);
+		}
 		setXSIType("JMFRootMessage");
 		if (theSenderID != null)
+		{
 			setSenderID(theSenderID);
+		}
 		return true;
 	}
 
@@ -182,38 +186,19 @@ public class JDFJMF extends JDFAutoJMF
 	 * 
 	 * @return EnumVersion - attribute value
 	 * 
-	 *         default - getMaxVersion(false)
+	 * default - getMaxVersion(false)
 	 */
 	@Override
 	public EnumVersion getMaxVersion()
 	{
-		String version = getAttribute(AttributeName.MAXVERSION, null, null);
+		final String version = getAttribute(AttributeName.MAXVERSION, null, null);
 
 		if (version == null)
+		{
 			return getVersion(false);
+		}
 
 		return EnumVersion.getEnum(version);
-	}
-
-	/**
-	 * version fixing routine for JMF
-	 *<p>
-	 * Uses heuristics to modify this element and its children to be compatible with a given version.<br>
-	 * In general, it will be able to move from low to high versions, but potentially fail when attempting to move from
-	 * higher to lower versions
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(EnumVersion version)
-	{
-		if (version != null)
-		{
-			setVersion(version);
-			setMaxVersion(version);
-		}
-		return super.fixVersion(version);
 	}
 
 	/**
@@ -222,28 +207,31 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param enumVer the EnumVersion to set
 	 */
 	@Override
-	public void setMaxVersion(EnumVersion enumVer)
+	public void setMaxVersion(final EnumVersion enumVer)
 	{
 		setAttribute(AttributeName.MAXVERSION, enumVer.getName(), null);
 	}
 
-	// Appendix D (JDF 1.3) - Supported Error Codes in JMF and Notification
-	// elements
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * Appendix D (JDF 1.3) - Supported Error Codes in JMF and Notification elements Jun 7, 2009
+	 */
 	public static class EnumJMFReturnCode extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
 
-		private EnumJMFReturnCode(int code, String message)
+		private EnumJMFReturnCode(final int code, final String message)
 		{
 			super(message, code);
 		}
 
-		public static EnumJMFReturnCode getEnum(String message)
+		public static EnumJMFReturnCode getEnum(final String message)
 		{
 			return (EnumJMFReturnCode) getEnum(EnumJMFReturnCode.class, message);
 		}
 
-		public static EnumJMFReturnCode getEnum(int code)
+		public static EnumJMFReturnCode getEnum(final int code)
 		{
 			return (EnumJMFReturnCode) getEnum(EnumJMFReturnCode.class, code);
 		}
@@ -305,9 +293,11 @@ public class JDFJMF extends JDFAutoJMF
 
 		public static final EnumJMFReturnCode RESULT_SELECTION_EMPTY = new EnumJMFReturnCode(108, "Selection or applied filter results in an empty list");
 
-		public static final EnumJMFReturnCode RESULT_SELECTION_INCOMPLETE = new EnumJMFReturnCode(109, "Selection or applied filter results in an incomplete list. A buffer cannot provide the complete list queried for");
+		public static final EnumJMFReturnCode RESULT_SELECTION_INCOMPLETE = new EnumJMFReturnCode(109,
+				"Selection or applied filter results in an incomplete list. A buffer cannot provide the complete list queried for");
 
-		public static final EnumJMFReturnCode REQUEST_FAILED_COMPLETION_TIME = new EnumJMFReturnCode(110, "Queue request of a job submission failed because the requested completion time of the job can-not be fulfilled");
+		public static final EnumJMFReturnCode REQUEST_FAILED_COMPLETION_TIME = new EnumJMFReturnCode(110,
+				"Queue request of a job submission failed because the requested completion time of the job can-not be fulfilled");
 
 		public static final EnumJMFReturnCode SUBSCRIPTION_REQUEST_DENIED = new EnumJMFReturnCode(111, "Subscription request denied");
 
@@ -343,7 +333,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement(null)
 	 */
 	@Deprecated
-	public JDFMessage getMessage(int i)
+	public JDFMessage getMessage(final int i)
 	{
 		return getMessageElement(null, null, i);
 	}
@@ -371,10 +361,12 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement or getCreateMessageElement
 	 */
 	@Deprecated
-	public JDFCommand getCommand(int i, boolean bCreate)
+	public JDFCommand getCommand(final int i, final boolean bCreate)
 	{
 		if (bCreate)
+		{
 			return (JDFCommand) getCreateMessageElement(JDFMessage.EnumFamily.Command, null, i);
+		}
 		return (JDFCommand) getMessageElement(JDFMessage.EnumFamily.Command, null, i);
 	}
 
@@ -402,10 +394,12 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement or getCreateMessageElement
 	 */
 	@Deprecated
-	public JDFQuery getQuery(int i, boolean bCreate)
+	public JDFQuery getQuery(final int i, final boolean bCreate)
 	{
 		if (bCreate)
+		{
 			return (JDFQuery) getCreateMessageElement(JDFMessage.EnumFamily.Query, null, i);
+		}
 
 		return (JDFQuery) getMessageElement(JDFMessage.EnumFamily.Query, null, i);
 	}
@@ -432,10 +426,12 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement or getCreateMessageElement
 	 */
 	@Deprecated
-	public JDFResponse getResponse(int i, boolean bCreate)
+	public JDFResponse getResponse(final int i, final boolean bCreate)
 	{
 		if (bCreate)
+		{
 			return (JDFResponse) getCreateMessageElement(JDFMessage.EnumFamily.Response, null, i);
+		}
 		return (JDFResponse) getMessageElement(JDFMessage.EnumFamily.Response, null, i);
 	}
 
@@ -462,10 +458,12 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement
 	 */
 	@Deprecated
-	public JDFSignal getSignal(int i, boolean bCreate)
+	public JDFSignal getSignal(final int i, final boolean bCreate)
 	{
 		if (bCreate)
+		{
 			return (JDFSignal) getCreateMessageElement(JDFMessage.EnumFamily.Signal, null, i);
+		}
 		return (JDFSignal) getMessageElement(JDFMessage.EnumFamily.Signal, null, i);
 	}
 
@@ -476,7 +474,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param i get the ith element
 	 * @return the newly created message
 	 */
-	public JDFMessage getCreateMessageElement(JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
+	public JDFMessage getCreateMessageElement(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ, final int i)
 	{
 		if (family == null)
 		{
@@ -486,7 +484,9 @@ public class JDFJMF extends JDFAutoJMF
 		JDFMessage m = getMessageElement(family, typ, i);
 
 		if (m == null)
+		{
 			m = appendMessageElement(family, typ);
+		}
 
 		return m;
 	}
@@ -500,7 +500,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getCreateMessageElement(family, null, i);
 	 */
 	@Deprecated
-	public JDFMessage getCreateMessageElement(JDFMessage.EnumFamily family, int i)
+	public JDFMessage getCreateMessageElement(final JDFMessage.EnumFamily family, final int i)
 	{
 		return getCreateMessageElement(family, null, i);
 	}
@@ -513,7 +513,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use appendMessageElement (family, null);
 	 */
 	@Deprecated
-	public JDFMessage appendMessageElement(JDFMessage.EnumFamily family)
+	public JDFMessage appendMessageElement(final JDFMessage.EnumFamily family)
 	{
 		return appendMessageElement(family, null);
 	}
@@ -525,10 +525,12 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param typ the messages @Type value, null if unknown
 	 * @return the newly created message
 	 */
-	public static JDFJMF createJMF(JDFMessage.EnumFamily family, JDFMessage.EnumType typ)
+	public static JDFJMF createJMF(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
 	{
 		if (family == null)
+		{
 			throw new JDFException("createJMF: creating undefined message family");
+		}
 
 		final JDFJMF jmf = new JDFDoc(ElementName.JMF).getJMFRoot();
 		jmf.appendMessageElement(family, typ);
@@ -542,15 +544,19 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param typ the messages @Type value, null if unknown
 	 * @return the newly created message
 	 */
-	public JDFMessage appendMessageElement(JDFMessage.EnumFamily family, JDFMessage.EnumType typ)
+	public JDFMessage appendMessageElement(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
 	{
 		if (family == null)
+		{
 			throw new JDFException("appendMessageElement: creating undefined message family");
+		}
 
-		String sFamily = family.getName();
-		JDFMessage m = (JDFMessage) appendElement(sFamily, null);
+		final String sFamily = family.getName();
+		final JDFMessage m = (JDFMessage) appendElement(sFamily, null);
 		if (typ != null)
+		{
 			m.setType(typ);
+		}
 
 		return m;
 	}
@@ -564,7 +570,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated since 060619, use getMessageElement (JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
 	 */
 	@Deprecated
-	public JDFMessage getMessageElement(JDFMessage.EnumFamily family, int i)
+	public JDFMessage getMessageElement(final JDFMessage.EnumFamily family, final int i)
 	{
 		return getMessageElement(family, null, i);
 	}
@@ -577,17 +583,17 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param i the i'th message element to get, if i<0, get from back
 	 * @return the matching message, null if none are found
 	 */
-	public JDFMessage getMessageElement(JDFMessage.EnumFamily family, JDFMessage.EnumType typ, int i)
+	public JDFMessage getMessageElement(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ, final int i)
 	{
 		int iLocal = i;
 
 		if (iLocal < 0) // search from back
 		{
 			JDFMessage message = null;
-			VElement v = getMessageVector(family, typ);
+			final VElement v = getMessageVector(family, typ);
 			if (v != null)
 			{
-				int siz = v.size();
+				final int siz = v.size();
 				iLocal = siz + iLocal;
 				message = (JDFMessage) (iLocal >= 0 ? v.get(iLocal) : null);
 			}
@@ -608,7 +614,9 @@ public class JDFJMF extends JDFAutoJMF
 				if (typString == null || typString.equals(((JDFMessage) e).getType()))
 				{
 					if (n++ >= iLocal)
+					{
 						return (JDFMessage) e;
+					}
 				}
 			}
 
@@ -638,7 +646,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageVector (family, null)
 	 */
 	@Deprecated
-	public VElement getMessageVector(JDFMessage.EnumFamily family)
+	public VElement getMessageVector(final JDFMessage.EnumFamily family)
 	{
 		return getMessageVector(family, null);
 	}
@@ -652,15 +660,19 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return VElement all message elements, null if no match found
 	 * 
 	 */
-	public static VElement getMessageVector(JDFDoc doc, JDFMessage.EnumFamily family, JDFMessage.EnumType typ)
+	public static VElement getMessageVector(final JDFDoc doc, final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
 	{
 		if (doc == null)
+		{
 			return null;
-		JDFJMF jmf = doc.getJMFRoot();
+		}
+		final JDFJMF jmf = doc.getJMFRoot();
 		if (jmf == null)
+		{
 			return null;
+		}
 
-		VElement vM = jmf.getMessageVector(family, typ);
+		final VElement vM = jmf.getMessageVector(family, typ);
 		return vM.size() == 0 ? null : vM;
 	}
 
@@ -672,10 +684,10 @@ public class JDFJMF extends JDFAutoJMF
 	 * @return VElement all message elements
 	 * 
 	 */
-	public VElement getMessageVector(JDFMessage.EnumFamily family, JDFMessage.EnumType typ)
+	public VElement getMessageVector(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ)
 	{
 		VElement vM;
-		String sFamily = (family != null) ? family.getName() : null;
+		final String sFamily = (family != null) ? family.getName() : null;
 
 		final JDFAttributeMap typMap = typ == null ? null : new JDFAttributeMap(AttributeName.TYPE, typ.getName());
 		vM = getChildrenByTagName(sFamily, null, typMap, true, true, 0);
@@ -717,10 +729,12 @@ public class JDFJMF extends JDFAutoJMF
 	 * @deprecated use getMessageElement or appendMessageElement
 	 */
 	@Deprecated
-	public JDFAcknowledge getAcknowledge(int i, boolean bCreate)
+	public JDFAcknowledge getAcknowledge(final int i, final boolean bCreate)
 	{
 		if (bCreate)
+		{
 			return (JDFAcknowledge) getCreateMessageElement(JDFMessage.EnumFamily.Acknowledge, null, i);
+		}
 		return (JDFAcknowledge) getMessageElement(JDFMessage.EnumFamily.Acknowledge, null, i);
 	}
 
@@ -730,7 +744,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param typ the type attribute of the appended message
 	 * @return JDFQuery the newly created message element
 	 */
-	public JDFCommand appendCommand(JDFMessage.EnumType typ)
+	public JDFCommand appendCommand(final JDFMessage.EnumType typ)
 	{
 		return (JDFCommand) appendMessageElement(JDFMessage.EnumFamily.Command, typ);
 	}
@@ -741,7 +755,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param typ the type attribute of the appended message
 	 * @return JDFQuery the newly created message element
 	 */
-	public JDFRegistration appendRegistration(JDFMessage.EnumType typ)
+	public JDFRegistration appendRegistration(final JDFMessage.EnumType typ)
 	{
 		return (JDFRegistration) appendMessageElement(JDFMessage.EnumFamily.Registration, typ);
 	}
@@ -752,7 +766,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param typ the type attribute of the appended message
 	 * @return JDFQuery: the newly created message element
 	 */
-	public JDFQuery appendQuery(JDFMessage.EnumType typ)
+	public JDFQuery appendQuery(final JDFMessage.EnumType typ)
 	{
 		return (JDFQuery) appendMessageElement(JDFMessage.EnumFamily.Query, typ);
 
@@ -764,7 +778,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param typ the type attribute of the appended message
 	 * @return JDFSignal: the newly created message element
 	 */
-	public JDFSignal appendSignal(JDFMessage.EnumType typ)
+	public JDFSignal appendSignal(final JDFMessage.EnumType typ)
 	{
 		return (JDFSignal) appendMessageElement(JDFMessage.EnumFamily.Signal, typ);
 
@@ -776,7 +790,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param typ the type attribute of the appended message
 	 * @return JDFResponse the newly created message element
 	 */
-	public JDFResponse appendResponse(JDFMessage.EnumType typ)
+	public JDFResponse appendResponse(final JDFMessage.EnumType typ)
 	{
 		return (JDFResponse) appendMessageElement(JDFMessage.EnumFamily.Response, typ);
 
@@ -788,7 +802,7 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param typ the type attribute of the appended message
 	 * @return JDFAcknowledge the newly created message element
 	 */
-	public JDFAcknowledge appendAcknowledge(JDFMessage.EnumType typ)
+	public JDFAcknowledge appendAcknowledge(final JDFMessage.EnumType typ)
 	{
 		return (JDFAcknowledge) appendMessageElement(JDFMessage.EnumFamily.Acknowledge, typ);
 
@@ -807,31 +821,32 @@ public class JDFJMF extends JDFAutoJMF
 	 * 
 	 * @param theSenderID the theSenderID to set
 	 */
-	public static void setTheSenderID(String _theSenderID)
+	public static void setTheSenderID(final String _theSenderID)
 	{
 		JDFJMF.theSenderID = _theSenderID;
 	}
 
 	/**
-	 * create a new response for all messages of this if the message is any message except response correctly fills
-	 * refId, type etc.
+	 * create a new response for all messages of this if the message is any message except response correctly fills refId, type etc.
 	 * 
 	 * @return the newly created JMF with multiple responses
 	 */
 	public JDFJMF createResponse()
 	{
-		VElement v = getMessageVector(null, null);
-		JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
+		final VElement v = getMessageVector(null, null);
+		final JDFJMF jmf = new JDFDoc("JMF").getJMFRoot();
 		for (int i = 0; i < v.size(); i++)
 		{
-			JDFMessage m = (JDFMessage) v.elementAt(i);
+			final JDFMessage m = (JDFMessage) v.elementAt(i);
 			final EnumFamily family = m.getFamily();
 			if (family != null && EnumFamily.Response != family && EnumFamily.Acknowledge != family)
 			{
-				if (!m.hasAttribute(AttributeName.ID)) // in case someone sends
+				if (!m.hasAttribute(AttributeName.ID))
+				{
 					// crappy requests...
 					m.appendAnchor(null);
-				JDFResponse r = jmf.appendResponse();
+				}
+				final JDFResponse r = jmf.appendResponse();
 				r.setQuery(m);
 			}
 		}
@@ -839,20 +854,21 @@ public class JDFJMF extends JDFAutoJMF
 	}
 
 	/**
-	 * collect ICSVersions from all message children
-	 * also removes duplicate entries from this and remove ""
+	 * collect ICSVersions from all message children also removes duplicate entries from this and remove ""
 	 * 
 	 * @return VString of all ICS versions
 	 */
 	public VString collectICSVersions()
 	{
-		VElement v = getMessageVector(null, null);
-		VString vICS = getICSVersions();
+		final VElement v = getMessageVector(null, null);
+		final VString vICS = getICSVersions();
 		for (int i = 0; i < v.size(); i++)
 		{
-			JDFMessage m = (JDFMessage) v.elementAt(i);
+			final JDFMessage m = (JDFMessage) v.elementAt(i);
 			if (m.hasAttribute(AttributeName.ICSVERSIONS))
+			{
 				vICS.addAll(m.getICSVersions());
+			}
 		}
 		vICS.unify();
 		setICSVersions(vICS.size() == 0 ? null : vICS);
@@ -861,20 +877,20 @@ public class JDFJMF extends JDFAutoJMF
 
 	/**
 	 * convert all responses that match the query q to signals
-	 * @param q  the query to convert
+	 * @param q the query to convert
 	 * 
 	 */
-	public void convertResponses(JDFQuery q)
+	public void convertResponses(final JDFQuery q)
 	{
-		EnumType t = q == null ? null : q.getEnumType();
-		VElement v = getMessageVector(EnumFamily.Response, t);
-		String qID = q == null ? null : q.getID();
+		final EnumType t = q == null ? null : q.getEnumType();
+		final VElement v = getMessageVector(EnumFamily.Response, t);
+		final String qID = q == null ? null : q.getID();
 		for (int i = 0; i < v.size(); i++)
 		{
-			JDFResponse r = (JDFResponse) v.elementAt(i);
+			final JDFResponse r = (JDFResponse) v.elementAt(i);
 			if (qID == null || qID.equals(r.getrefID()))
 			{
-				JDFSignal s = appendSignal();
+				final JDFSignal s = appendSignal();
 				moveElement(s, r); // retain ordering
 				s.convertResponse(r, q);
 				r.deleteNode();
@@ -892,19 +908,19 @@ public class JDFJMF extends JDFAutoJMF
 		JDFCommand cSubmit = (JDFCommand) getMessageElement(EnumFamily.Command, EnumType.SubmitQueueEntry, 0);
 		if (cSubmit != null)
 		{
-			JDFQueueSubmissionParams qsp = cSubmit.getQueueSubmissionParams(0);
+			final JDFQueueSubmissionParams qsp = cSubmit.getQueueSubmissionParams(0);
 			return qsp == null ? null : isWildCard(qsp.getURL()) ? null : qsp.getURL();
 		}
 		cSubmit = (JDFCommand) getMessageElement(EnumFamily.Command, EnumType.ResubmitQueueEntry, 0);
 		if (cSubmit != null)
 		{
-			JDFResubmissionParams rsp = cSubmit.getResubmissionParams(0);
+			final JDFResubmissionParams rsp = cSubmit.getResubmissionParams(0);
 			return rsp == null ? null : isWildCard(rsp.getURL()) ? null : rsp.getURL();
 		}
 		cSubmit = (JDFCommand) getMessageElement(EnumFamily.Command, EnumType.ReturnQueueEntry, 0);
 		if (cSubmit != null)
 		{
-			JDFReturnQueueEntryParams rsp = cSubmit.getReturnQueueEntryParams(0);
+			final JDFReturnQueueEntryParams rsp = cSubmit.getReturnQueueEntryParams(0);
 			return rsp == null ? null : isWildCard(rsp.getURL()) ? null : rsp.getURL();
 		}
 		return null;

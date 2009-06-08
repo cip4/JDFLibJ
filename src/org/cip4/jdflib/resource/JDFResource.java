@@ -1822,59 +1822,6 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * version fixing routine
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to lower versions
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		final boolean bRet = true;
-		if (!isResourceRootRoot())
-		{
-			// removeAttribute(AttributeName.STATUS);
-			if (!isResourceElement())
-			{
-				removeAttribute(AttributeName.CLASS);
-			}
-		}
-		else
-		{
-			if (hasAttribute(AttributeName.RREFS))
-			{
-				removeAttribute(AttributeName.RREFS);
-			}
-
-			init();
-		}
-		if (version != null)
-		{
-			if (!isResourceRootRoot())
-			{
-				if (version.getValue() >= EnumVersion.Version_1_2.getValue())
-				{
-					removeAttribute(AttributeName.ID);
-				}
-			}
-			else
-			{
-				if (version.getValue() <= EnumVersion.Version_1_2.getValue())
-				{
-					if (getPartUsage() == EnumPartUsage.Sparse)
-					{
-						setPartUsage(EnumPartUsage.Implicit);
-					}
-				}
-			}
-		}
-		return super.fixVersion(version) && bRet;
-	}
-
-	/**
 	 * Tests, if this leaf has a consistent PartIDKey as specified by key
 	 * 
 	 * @param key the PartIDKey attribute name

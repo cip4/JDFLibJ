@@ -516,6 +516,21 @@ public class StringUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testSubstring()
+	{
+		final String s = "a".substring(0, 0);
+		assertEquals(StringUtil.substring("abbcc", 0, 2), "ab");
+		assertEquals(StringUtil.substring("abbcc", 0, -2), "abb");
+		assertEquals(StringUtil.substring("abbcc", -2, -2), "");
+		assertEquals(StringUtil.substring("abbcc", -3, 0), "bcc");
+		assertNull(StringUtil.substring("abbcc", 0, -6));
+		assertNull(StringUtil.substring(null, 0, -5));
+		assertNull(StringUtil.substring("abc", 0, -55));
+	}
+
+	/**
+	 * 
+	 */
 	public void testParseLong()
 	{
 		assertEquals(StringUtil.parseLong("", 0L), 0L);

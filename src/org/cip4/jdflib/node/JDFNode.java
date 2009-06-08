@@ -3652,43 +3652,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		return s == null ? getType() : s;
 	}
 
-	/**
-	 * version fixing routine for JDF
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to lower versions
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		boolean bRet = true;
-		if (version != null)
-		{
-			setVersion(version);
-			setMaxVersion(version);
-			bRet = fixNiCi(version);
-		}
-		if (!hasAttribute(AttributeName.JOBPARTID))
-		{
-			setJobPartID(generateDotID(AttributeName.JOBPARTID, null));
-		}
-
-		if (isJDFRoot() && !hasAncestorAttribute(AttributeName.JOBID, null))
-		{
-			setJobID(generateDotID(AttributeName.JOBID, null));
-		}
-		final EnumType enumType = getEnumType();
-		if (enumType != null)
-		{
-			setType(enumType); // fixes xsi:type stuff
-		}
-
-		return super.fixVersion(version) && bRet;
-	}
-
 	// /////////////////////////////////////////////////////////////
 
 	/**
@@ -3697,7 +3660,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param version target version
 	 * @return
 	 */
-	private boolean fixNiCi(final EnumVersion version)
+	public boolean fixNiCi(final EnumVersion version)
 	{
 		boolean bRet = true;
 

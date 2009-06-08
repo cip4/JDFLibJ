@@ -490,26 +490,6 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 * fixVersion()<br>
-	 * adds xsi:Type if it doesn't exist
-	 * 
-	 * @param version
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		if (version != null)
-		{
-			version.getClass(); // dummy to fool compiler
-		}
-		if (hasAttribute(AttributeName.TYPE) && !hasAttribute(AttributeName.XSITYPE, AttributeName.XSIURI, false))
-		{
-			setAttribute(AttributeName.XSITYPE, getLocalName() + getType(), AttributeName.XSIURI);
-		}
-		return true;
-	}
-
-	/**
 	 * checks whether the type of messageElement is valid for this message
 	 * 
 	 * @param elementName the name of the element to be tested

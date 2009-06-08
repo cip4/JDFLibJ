@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,9 +80,13 @@ package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoTool;
-import org.cip4.jdflib.core.AttributeName;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * before June 7, 2009
+ */
 public class JDFTool extends JDFAutoTool
 {
 	private static final long serialVersionUID = 1L;
@@ -94,7 +98,7 @@ public class JDFTool extends JDFAutoTool
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTool(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFTool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -107,7 +111,7 @@ public class JDFTool extends JDFAutoTool
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFTool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -121,7 +125,7 @@ public class JDFTool extends JDFAutoTool
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFTool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFTool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -139,26 +143,6 @@ public class JDFTool extends JDFAutoTool
 
 	// //////////////////////////////////////////////////////////////////////
 
-	@Override
-	public boolean fixVersion(EnumVersion version)
-	{
-		if (version != null && version.getValue() >= EnumVersion.Version_1_3.getValue())
-		{
-			if (hasAttribute(AttributeName.TOOLID) && !hasAttribute(AttributeName.PRODUCTID))
-			{
-				setProductID(getToolID());
-			}
-			removeAttribute(AttributeName.TOOLID, null);
-		}
-		else if (version != null && version.getValue() < EnumVersion.Version_1_3.getValue())
-		{
-			if (hasAttribute(AttributeName.PRODUCTID) && !hasAttribute(AttributeName.TOOLID))
-			{
-				setToolID(getProductID());
-			}
-		}
-		return super.fixVersion(version);
-	}
 	// //////////////////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////////////////

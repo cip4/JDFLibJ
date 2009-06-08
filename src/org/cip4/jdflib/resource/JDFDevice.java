@@ -72,7 +72,6 @@ package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDevice;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
@@ -317,16 +316,4 @@ public class JDFDevice extends JDFAutoDevice
 		return bugReport;
 	}
 
-	/**
-	 * @see org.cip4.jdflib.resource.JDFResource#fixVersion(org.cip4.jdflib.core.JDFElement.EnumVersion)
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		if (version != null && version.getValue() >= EnumVersion.Version_1_4.getValue())
-		{
-			renameAttribute(AttributeName.FRIENDLYNAME, AttributeName.DESCRIPTIVENAME, null, null);
-		}
-		return super.fixVersion(version);
-	}
 }

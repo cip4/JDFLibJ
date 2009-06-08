@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -873,6 +873,9 @@ public class JDFElementTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// ///////
 
+	/**
+	 * 
+	 */
 	public void testIsInvalid()
 	{
 		final File testData = new File(sm_dirTestData + "BadSampleFiles");
@@ -995,13 +998,40 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testVersions()
 	{
 		assertEquals(JDFVersions.getTheOffset(EnumVersion.Version_1_0), 0);
 		assertEquals(JDFVersions.getTheOffset(EnumVersion.Version_1_2), 8);
 	}
 
+	/**
+	 * 
+	 */
+	public void testMinorVersions()
+	{
+		assertEquals(EnumVersion.Version_1_0.getMinorVersion(), 0);
+		assertEquals(EnumVersion.Version_1_6.getMinorVersion(), 6);
+		assertEquals(EnumVersion.Version_2_0.getMinorVersion(), 0);
+	}
+
+	/**
+	 * 
+	 */
+	public void testMajorVersions()
+	{
+		assertEquals(EnumVersion.Version_1_0.getMajorVersion(), 1);
+		assertEquals(EnumVersion.Version_1_9.getMajorVersion(), 1);
+		assertEquals(EnumVersion.Version_2_0.getMajorVersion(), 2);
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testSetEnumerationsAttribute()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1017,6 +1047,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testStatusEquals()
 	{
 		// test if the auto classes implement the correct status

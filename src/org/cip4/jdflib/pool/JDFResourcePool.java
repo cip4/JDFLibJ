@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -108,6 +108,11 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * long before June 7, 2009
+ */
 public class JDFResourcePool extends JDFPool
 {
 	private static final long serialVersionUID = 1L;
@@ -610,27 +615,6 @@ public class JDFResourcePool extends JDFPool
 		}
 
 		return vDoneRefsLocal;
-	}
-
-	// ////////////////////////////////////////////////////////////////////
-
-	/**
-	 * Mother of all version fixing routines<br>
-	 * 
-	 * Uses heuristics to modify this element and its children to be compatible with a given version.<br>
-	 * In general, it will be able to move from low to high versions, but potentially fail when attempting to move from higher to lower versions.
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		if (hasAttribute(AttributeName.RREFS))
-		{
-			removeAttribute(AttributeName.RREFS);
-		}
-		return super.fixVersion(version);
 	}
 
 	// ////////////////////////////////////////////////////////////////////

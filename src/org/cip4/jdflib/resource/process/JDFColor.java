@@ -101,9 +101,9 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * Constructor for JDFColor
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
 	public JDFColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
@@ -113,11 +113,10 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * Constructor for JDFColor
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 */
 	public JDFColor(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
@@ -151,6 +150,7 @@ public class JDFColor extends JDFAutoColor
 
 	/**
 	 * get the html color representation of this color in the format 0xrrggbb;
+	 * @return
 	 */
 	public String getHTMLColor()
 	{
@@ -210,6 +210,10 @@ public class JDFColor extends JDFAutoColor
 
 	// //////////////////////////////////////////////////////////////
 
+	/**
+	 * get the FileSpec referring to ColorProfile
+	 * @return
+	 */
 	public JDFFileSpec getColorProfile()
 	{
 		final VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
@@ -234,6 +238,10 @@ public class JDFColor extends JDFAutoColor
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * get or create a ColorProfile FileSpec
+	 * @return
+	 */
 	public JDFFileSpec getCreateColorProfile()
 	{
 		JDFFileSpec res = getColorProfile();
@@ -246,6 +254,10 @@ public class JDFColor extends JDFAutoColor
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * append a ColorProfoe FileSpec
+	 * @return
+	 */
 	public JDFFileSpec appendColorProfile()
 	{
 		final JDFFileSpec res = appendFileSpec();
@@ -257,6 +269,10 @@ public class JDFColor extends JDFAutoColor
 	// /////////////////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * get or create a TargetProfile FileSpec
+	 * @return
+	 */
 	public JDFFileSpec getTargetProfile()
 	{
 		final VElement v = getChildElementVector(ElementName.FILESPEC, null, null, true, 0, false);
@@ -278,6 +294,10 @@ public class JDFColor extends JDFAutoColor
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * get or create a TargetProfile FileSpec
+	 * @return
+	 */
 	public JDFFileSpec getCreateTargetProfile()
 	{
 		JDFFileSpec res = getTargetProfile();
@@ -290,6 +310,10 @@ public class JDFColor extends JDFAutoColor
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * append a TargetProfile FileSpec
+	 * @return
+	 */
 	JDFFileSpec appendTargetProfile()
 	{
 		final JDFFileSpec res = appendFileSpec();
@@ -297,19 +321,4 @@ public class JDFColor extends JDFAutoColor
 
 		return res;
 	}
-
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		if (hasAttribute(AttributeName.USEPDLALTERNATECS))
-		{
-			if (!hasAttribute(AttributeName.MAPPINGSELECTION))
-			{
-				setMappingSelection(getUsePDLAlternateCS() ? EnumMappingSelection.UsePDLValues : EnumMappingSelection.UseProcessColorValues);
-			}
-			removeAttribute(AttributeName.USEPDLALTERNATECS);
-		}
-		return super.fixVersion(version);
-	}
-
 }

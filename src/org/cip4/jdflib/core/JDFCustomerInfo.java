@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -167,7 +167,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFCustomerInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFCustomerInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -179,7 +179,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFCustomerInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFCustomerInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -192,15 +192,18 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFCustomerInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFCustomerInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoCustomerInfo#init()
+	 */
 	@Override
 	public boolean init()
 	{
-		Node n = getParentNode();
+		final Node n = getParentNode();
 		if ((n != null) && (n instanceof JDFResourcePool))
 		{
 			super.init();
@@ -210,6 +213,9 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 		return true;
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoCustomerInfo#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -224,9 +230,9 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	 * 
 	 * @return VResource - vector with all elements matching the conditions
 	 * 
-	 *         default: GetLinkedResources(new JDFAttributeMap(), false)
+	 * default: GetLinkedResources(new JDFAttributeMap(), false)
 	 */
-	public VElement getLinkedResources(JDFAttributeMap mResAtt, boolean bFollowRefs)
+	public VElement getLinkedResources(final JDFAttributeMap mResAtt, final boolean bFollowRefs)
 	{
 		final VElement v = getChildElementVector(null, null, null, true, 0, false);
 		final VElement vL = new VElement();
@@ -260,7 +266,7 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	 * @param iSkip number of occurrences to skip - if 0 take the first
 	 * @return a matching JDFContact, null if none are found
 	 */
-	public JDFContact getContactWithContactType(String contactType, int iSkip)
+	public JDFContact getContactWithContactType(final String contactType, final int iSkip)
 	{
 		return (JDFContact) getChildWithMatchingAttribute(ElementName.CONTACT, AttributeName.CONTACTTYPES, null, contactType, iSkip, true, EnumAttributeType.NMTOKENS);
 	}
@@ -273,10 +279,10 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	 * @param contactType the contatcttype to look for
 	 * @return VElement the vector of matching JDFContacts, null if none are found
 	 */
-	public VElement getContactVectorWithContactType(String contactType)
+	public VElement getContactVectorWithContactType(final String contactType)
 	{
-		VElement v = getChildElementVector(ElementName.CONTACT, null, null, true, 0, true);
-		VElement v2 = new VElement();
+		final VElement v = getChildElementVector(ElementName.CONTACT, null, null, true, 0, true);
+		final VElement v2 = new VElement();
 		final int siz = v.size();
 		for (int i = 0; i < siz; i++)
 		{
@@ -292,24 +298,6 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 
 	// ////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Mother of all version fixing routines
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will
-	 * be able to move from low to high versions but potentially fail when attempting to move from higher to lower
-	 * versions
-	 * 
-	 * @param version version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(EnumVersion version)
-	{
-		if (hasAttribute(AttributeName.RREFS))
-			removeAttribute(AttributeName.RREFS);
-		return super.fixVersion(version);
-	}
-
 	// ////////////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////////////
@@ -319,10 +307,11 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	 * add a contact with a given contacttype
 	 * 
 	 * @param typ
+	 * @return
 	 */
-	public JDFContact appendContact(EnumContactType typ)
+	public JDFContact appendContact(final EnumContactType typ)
 	{
-		JDFContact c = appendContact();
+		final JDFContact c = appendContact();
 		c.setContactTypes(typ);
 		return c;
 

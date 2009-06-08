@@ -135,6 +135,18 @@ public class KElement extends ElementNSImpl
 		atrInfoTable[0] = new AtrInfoTable(JDFConstants.XMLNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, null);
 	}
 
+	/**
+	 * public version of getTheAttributeInfo
+	 * @return
+	 */
+	public AttributeInfo getAttributeInfo()
+	{
+		return getTheAttributeInfo();
+	}
+
+	/**
+	 * @return
+	 */
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		final AttributeInfo ai = new AttributeInfo(atrInfoTable);
@@ -6239,6 +6251,9 @@ public class KElement extends ElementNSImpl
 		setAttribute(arg1, arg2, nsURI);
 	}
 
+	/**
+	 * @see org.apache.xerces.dom.ElementImpl#normalize()
+	 */
 	@Override
 	public void normalize()
 	{
@@ -6246,6 +6261,9 @@ public class KElement extends ElementNSImpl
 		super.normalize();
 	}
 
+	/**
+	 * @see org.apache.xerces.dom.NodeImpl#setNodeValue(java.lang.String)
+	 */
 	@Override
 	public void setNodeValue(final String arg0) throws DOMException
 	{
@@ -6253,6 +6271,9 @@ public class KElement extends ElementNSImpl
 		super.setNodeValue(arg0);
 	}
 
+	/**
+	 * @see org.apache.xerces.dom.ElementNSImpl#setPrefix(java.lang.String)
+	 */
 	@Override
 	public void setPrefix(final String arg0) throws DOMException
 	{
@@ -6260,6 +6281,19 @@ public class KElement extends ElementNSImpl
 		setDirty(false);
 	}
 
+	/**
+	 * @param arg0 the ns uri to set
+	 * @throws DOMException
+	 */
+	public void setNamespaceURI(final String arg0) throws DOMException
+	{
+		namespaceURI = arg0;
+		setDirty(false);
+	}
+
+	/**
+	 * @see org.apache.xerces.dom.NodeImpl#appendChild(org.w3c.dom.Node)
+	 */
 	@Override
 	public Node appendChild(final Node arg0) throws DOMException
 	{

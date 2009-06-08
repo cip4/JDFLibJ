@@ -101,11 +101,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
 import javax.mail.BodyPart;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
@@ -125,6 +123,7 @@ import org.cip4.jdflib.datatypes.JDFShapeRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPairRange;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFAncestor;
@@ -1163,92 +1162,11 @@ public class JDFElement extends KElement
 	 * @param version version the resulting element should correspond to
 	 * @return true if successful
 	 */
-	public boolean fixVersion(final EnumVersion version)
+	public final boolean fixVersion(final EnumVersion version)
 	{
-		// fix any spurious ns typos
-		if (!JDFConstants.JDFNAMESPACE.equals(getNamespaceURI()))
-		{
-			this.namespaceURI = JDFConstants.JDFNAMESPACE;
-			setDirty(true);
-		}
-		boolean bRet = true;
-		final VElement v = getChildElementVector_KElement(null, null, null, true, -1); // do not follow refelements
-		final int size = v.size();
-		for (int i = 0; i < size; i++)
-		{
-			final KElement e = v.elementAt(i);
-			if (e instanceof JDFElement) // skip stuff in unknown namespaces
-			{
-				final JDFElement j = (JDFElement) e;
-				bRet = j.fixVersion(version) && bRet;
-			}
-		}
-
-		// replace all "~" with " ~ "
-		final JDFAttributeMap m = getAttributeMap();
-		final Iterator<String> it = m.getKeyIterator();
-		final AttributeInfo ai = getTheAttributeInfo();
-		while (it.hasNext())
-		{
-			final String key = it.next();
-			String value = m.get(key);
-			final EnumAttributeType attType = ai.getAttributeType(key);
-
-			if (EnumAttributeType.isRange(attType))
-			{
-				try
-				{
-					final JDFNameRangeList nrl = new JDFNameRangeList(value);
-					setAttribute(key, nrl, null);
-				}
-				catch (final JDFException e)
-				{
-					// do nothing
-				}
-				catch (final DataFormatException e)
-				{
-					// do nothing
-				}
-			}
-			else if (EnumAttributeType.duration.equals(attType))
-			{
-				try
-				{
-					setAttribute(key, new JDFDuration(value).getDurationISO());
-				}
-				catch (final DataFormatException ex)
-				{
-					bRet = false;
-				}
-			}
-			if (bFixVersionIDFix && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
-			{
-				final EnumAttributeType atType = ai.getAttributeType(key);
-				if (atType != null)
-				{
-					if (atType.equals(EnumAttributeType.ID) || atType.equals(EnumAttributeType.IDREF))
-					{
-						value = "_" + value;
-						setAttribute(key, value);
-					}
-					else if (atType.equals(EnumAttributeType.IDREFS))
-					{
-						final VString vvalues = new VString(value, " ");
-						for (int i = 0; i < vvalues.size(); i++)
-						{
-							String s = vvalues.stringAt(i);
-							if (s.length() > 0 && StringUtils.isNumeric(s.substring(0, 1)))
-							{
-								s = "_" + s;
-								vvalues.setElementAt(s, i);
-							}
-						}
-						setAttribute(key, vvalues, null);
-					}
-				}
-			}
-		}
-		return bRet;
+		final FixVersion fixVersion = new FixVersion(version);
+		fixVersion.walkTree(this, null);
+		return fixVersion.isOK();
 	}
 
 	/**
@@ -3089,7 +3007,6 @@ public class JDFElement extends KElement
 
 	private static int m_lStoreID = 0;
 	private static boolean bIDDate = true;
-	private static boolean bFixVersionIDFix = false;
 
 	/**
 	 * UniqueID - create a unique id based on date and time + a counter - 6 digits are taken from id Normally this should only be used internally, @see
@@ -4062,6 +3979,24 @@ public class JDFElement extends KElement
 		public static final EnumVersion Version_1_9 = new EnumVersion(JDFConstants.VERSION_1_9);
 		public static final EnumVersion Version_2_0 = new EnumVersion(JDFConstants.VERSION_2_0);
 
+		/**
+		 * gets the integer value of the minor version, e.g 2 for 1.3 etc
+		 * @return
+		 */
+		public int getMinorVersion()
+		{
+			return (getValue() - 1) % 10;
+		}
+
+		/**
+		 * gets the integer value of the major version, e.g 2 for 1.3 etc
+		 * @return
+		 */
+		public int getMajorVersion()
+		{
+			return 1 + (getValue() - 1) / 10;
+		}
+
 	}
 
 	/**
@@ -4801,23 +4736,6 @@ public class JDFElement extends KElement
 			return e == null || path.startsWith("//"); // must be root
 		}
 		return true; // any location
-	}
-
-	/**
-	 * @return the bFixVersionIDFix if true then invalid, i.e. numeric ID, IDREF and IDREFS are prefixed with an '_' when calling fixVersion
-	 */
-	public static boolean isFixVersionIDFix()
-	{
-		return bFixVersionIDFix;
-	}
-
-	/**
-	 * @param fixVersionIDFix the bFixVersionIDFix to set if true then invalid, i.e. numeric ID, IDREF and IDREFS are prefixed with an '_' when calling
-	 * fixVersion
-	 */
-	public static void setFixVersionIDFix(final boolean fixVersionIDFix)
-	{
-		bFixVersionIDFix = fixVersionIDFix;
 	}
 
 	static public String getValueForNewAttribute(final KElement e, final String attName)

@@ -150,44 +150,6 @@ public class JDFLayout extends JDFSurface
 	}
 
 	// /////////////////////////////////////////////////////////////////
-	/**
-	 * version fixing routine
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to lower versions
-	 * 
-	 * @param version : version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(final EnumVersion version)
-	{
-		boolean bRet = true;
-		if (isResourceRoot() && version != null)
-		{
-			final int vers = version.getValue();
-			final boolean newLayout = isNewLayout(this);
-			if (vers >= EnumVersion.Version_1_3.getValue() && !newLayout)
-			{
-				bRet = toNewLayout();
-			}
-			else if (vers < EnumVersion.Version_1_3.getValue() && newLayout)
-			{
-				bRet = fromNewLayout();
-			}
-			if (vers >= EnumVersion.Version_1_4.getValue())
-			{
-				if (hasAttribute(AttributeName.NAME))
-				{
-					renameAttribute(AttributeName.NAME, AttributeName.DESCRIPTIVENAME, null, null);
-				}
-			}
-
-		}
-		return super.fixVersion(version) && bRet;
-	}
-
-	// /////////////////////////////////////////////////////////////////
 
 	/**
 	 * generate a JDF 1.3 compatible Layout from this (1.2)

@@ -207,7 +207,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testSkipParse()
+	public void testSkipParse() throws Exception
 	{
 		JDFParser.m_searchStream = true;
 		final String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
@@ -225,7 +225,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
 	 * @throws Exception
 	 */
-	public void testSchema()
+	public void testSchema() throws Exception
 	{
 		final File foo = new File(sm_dirTestSchema).getParentFile();
 
@@ -250,8 +250,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		assertTrue(nCheck >= 3);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */

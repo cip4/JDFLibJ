@@ -17,8 +17,7 @@ public class JDFTestType extends JDFElement
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable("fnarf", 0x33333333,
-				AttributeInfo.EnumAttributeType.integer, null, null);
+		atrInfoTable[0] = new AtrInfoTable("fnarf", 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
 	}
 
 	/**
@@ -27,7 +26,7 @@ public class JDFTestType extends JDFElement
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFTestType(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFTestType(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +38,7 @@ public class JDFTestType extends JDFElement
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFTestType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFTestType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -59,8 +57,7 @@ public class JDFTestType extends JDFElement
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFTestType(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFTestType(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -76,30 +73,5 @@ public class JDFTestType extends JDFElement
 	public String toString()
 	{
 		return "JDFTestType[  --> " + super.toString() + " ]";
-	}
-
-	/**
-	 * version fixing routine for JDF
-	 * 
-	 * uses heuristics to modify this element and its children to be compatible
-	 * with a given version in general, it will be able to move from low to high
-	 * versions but potentially fail when attempting to move from higher to
-	 * lower versions
-	 * 
-	 * @param version
-	 *            : version that the resulting element should correspond to
-	 * @return true if successful
-	 */
-	@Override
-	public boolean fixVersion(EnumVersion version)
-	{
-		if (version.getValue() >= EnumVersion.Version_1_3.getValue())
-		{
-			appendAnchor(null);
-		} else
-		{
-			removeAttribute(AttributeName.ID);
-		}
-		return super.fixVersion(version);
 	}
 }
