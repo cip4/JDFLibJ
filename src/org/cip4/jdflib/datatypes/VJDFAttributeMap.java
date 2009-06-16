@@ -103,12 +103,15 @@ public class VJDFAttributeMap
 	 * 
 	 * @param toAdd Vector of elements to clone
 	 */
-	public VJDFAttributeMap(final Vector toAdd)
+	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
 	{
 		m_vec.clear();
-		for (int i = 0; i < toAdd.size(); i++)
+		if (toAdd != null)
 		{
-			m_vec.add(new JDFAttributeMap((JDFAttributeMap) toAdd.elementAt(i)));
+			for (int i = 0; i < toAdd.size(); i++)
+			{
+				m_vec.add(toAdd.get(i));
+			}
 		}
 	}
 
@@ -185,7 +188,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @return Vector - the vector with JDFAttributeMap elements
 	 */
-	public Vector getVector()
+	public Vector<JDFAttributeMap> getVector()
 	{
 		return m_vec;
 	}
@@ -195,7 +198,7 @@ public class VJDFAttributeMap
 	 * @param bUnique if true, ensure unique vector, else the vector coressponds to the voctor of maps
 	 * @return the Vector of all values
 	 */
-	public VString getPartValues(final String strKey, @SuppressWarnings("unused") final boolean bUnique)
+	public VString getPartValues(final String strKey, final boolean bUnique)
 	{
 		final VString vsPartValues = new VString();
 
@@ -209,10 +212,10 @@ public class VJDFAttributeMap
 			{
 				vsPartValues.add(strValue);
 			}
-			
+
 			vsPartValues.unify();
 		}
-		
+
 		return vsPartValues;
 	}
 
@@ -793,7 +796,7 @@ public class VJDFAttributeMap
 			return false;
 		}
 
-		final VJDFAttributeMap vOther = new VJDFAttributeMap((JDFAttributeMap[]) ((VJDFAttributeMap) other).getVector().toArray(new JDFAttributeMap[0]));
+		final VJDFAttributeMap vOther = new VJDFAttributeMap(((VJDFAttributeMap) other).getVector().toArray(new JDFAttributeMap[0]));
 		for (int i = 0; i < size; i++)
 		{
 			final JDFAttributeMap map = elementAt(i);

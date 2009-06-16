@@ -1814,6 +1814,28 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(a2.getAttribute("b", "www.b.com", null), "2");
 	}
 
+	/**
+	 * 
+	 */
+	public void testSetAttributesMap()
+	{
+		final XMLDoc jdfDoc = new XMLDoc("Foo", null);
+		final KElement a = jdfDoc.getRoot();
+		a.setAttribute("a1", "b1");
+		a.setAttribute("a2", "b2");
+
+		final JDFAttributeMap map = new JDFAttributeMap("a3", "b3");
+		map.put("a2", (String) null);
+
+		a.setAttributes(map);
+
+		final JDFAttributeMap map2 = new JDFAttributeMap("a3", "b3");
+		map2.put("a1", "b1");
+
+		assertEquals(map2, a.getAttributeMap());
+
+	}
+
 	// //////////////////////////////////////////////////////////////////////////
 	// /////////
 

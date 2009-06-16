@@ -4241,7 +4241,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn spawn = new JDFSpawn(this);
-		return spawn.spawn(parentURL, spawnURL, vRWResources_in, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
+		return spawn.spawn(parentURL, spawnURL, (VString) vRWResources_in, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
 	}
 
 	// ///////////////////////////////////////////////////////////////////////

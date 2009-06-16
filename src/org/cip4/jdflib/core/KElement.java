@@ -1030,7 +1030,7 @@ public class KElement extends ElementNSImpl
 	}
 
 	/**
-	 * Remove a attribute from the current element
+	 * Remove an attribute from the current element
 	 * @param attrib attribute name to remove
 	 * @param nameSpaceURI the nameSpace of the attribut
 	 * @default removeAttribute(attrib, null)

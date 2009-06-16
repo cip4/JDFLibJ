@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,6 +78,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFCoilBindingParams;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
@@ -85,78 +86,79 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * Jun 11, 2009
+ */
 public class JDFPipeParamsTest extends TestCase
 {
+	private JDFPipeParams pp;
 
+	/**
+	 * 
+	 */
 	public void testAppendResourceLink()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.PIPEPARAMS);
-		JDFPipeParams pp = (JDFPipeParams) doc.getRoot();
 		JDFResourceLink rl = pp.appendResourceLink("Dummy", true);
 		assertEquals(rl.getUsage(), EnumUsage.Input);
 		try
 		{
 			rl = pp.appendResourceLink("Dummy2", true);
 			fail("max 1 rl");
-		} catch (Exception e)
+		}
+		catch (final Exception e)
 		{
 			// nop
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /////////////////
 
+	/**
+	 * 
+	 */
 	public void testAppendResource()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.PIPEPARAMS);
-		JDFPipeParams pp = (JDFPipeParams) doc.getRoot();
-		JDFCoilBindingParams cbp = (JDFCoilBindingParams) pp
-				.appendResource(ElementName.COILBINDINGPARAMS);
+		final JDFCoilBindingParams cbp = (JDFCoilBindingParams) pp.appendResource(ElementName.COILBINDINGPARAMS);
 		assertEquals(cbp.getResourceClass(), EnumResourceClass.Parameter);
-		JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) pp
-				.appendResource(ElementName.HEADBANDAPPLICATIONPARAMS);
+		final JDFHeadBandApplicationParams hap = (JDFHeadBandApplicationParams) pp.appendResource(ElementName.HEADBANDAPPLICATIONPARAMS);
 		assertEquals(hap.getResourceClass(), EnumResourceClass.Parameter);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetResourceLink()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFCommand c = jmf.appendCommand(EnumType.PipePull);
-		JDFPipeParams pp = c.appendPipeParams();
-		JDFExposedMedia xm = (JDFExposedMedia) pp
-				.appendResource(ElementName.EXPOSEDMEDIA);
+		final JDFExposedMedia xm = (JDFExposedMedia) pp.appendResource(ElementName.EXPOSEDMEDIA);
 		assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
-		JDFMedia m = (JDFMedia) pp.appendResource(ElementName.MEDIA);
+		final JDFMedia m = (JDFMedia) pp.appendResource(ElementName.MEDIA);
 		assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
-		JDFRefElement rm = xm.refElement(m);
+		final JDFRefElement rm = xm.refElement(m);
 		assertEquals(rm.getTarget(), m);
-		JDFResourceLink rl = pp.appendResourceLink(ElementName.EXPOSEDMEDIA,
-				true);
+		final JDFResourceLink rl = pp.appendResourceLink(ElementName.EXPOSEDMEDIA, true);
 		rl.setrRef(xm.getID());
 		assertEquals(rl.getTarget(), xm);
 		assertEquals(rl, pp.getResourceLink());
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /////////////////
+	// //////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetResource()
 	{
-		JDFDoc doc = new JDFDoc(ElementName.JMF);
-		JDFJMF jmf = doc.getJMFRoot();
-		JDFCommand c = jmf.appendCommand(EnumType.PipePull);
-		JDFPipeParams pp = c.appendPipeParams();
-		JDFExposedMedia xm = (JDFExposedMedia) pp
-				.appendResource(ElementName.EXPOSEDMEDIA);
+		final JDFExposedMedia xm = (JDFExposedMedia) pp.appendResource(ElementName.EXPOSEDMEDIA);
 		assertEquals(xm.getResourceClass(), EnumResourceClass.Handling);
-		JDFMedia m = (JDFMedia) pp.appendResource(ElementName.MEDIA);
+		final JDFMedia m = (JDFMedia) pp.appendResource(ElementName.MEDIA);
 		assertEquals(m.getResourceClass(), EnumResourceClass.Consumable);
-		JDFRefElement rm = xm.refElement(m);
+		final JDFRefElement rm = xm.refElement(m);
 		assertEquals(rm.getTarget(), m);
 		assertEquals(pp.getResource(ElementName.EXPOSEDMEDIA), xm);
 		assertEquals(pp.getResource(null), xm);
@@ -165,16 +167,32 @@ public class JDFPipeParamsTest extends TestCase
 		{
 			assertNull(pp.getResource("MediaLink"));
 			fail();
-		} catch (JDFException e)
+		}
+		catch (final JDFException e)
 		{
 			// nop
 		}
 
-		JDFResourceLink rl = pp.appendResourceLink(ElementName.EXPOSEDMEDIA,
-				true);
+		final JDFResourceLink rl = pp.appendResourceLink(ElementName.EXPOSEDMEDIA, true);
 		rl.setrRef(xm.getID());
 		assertEquals(xm, pp.getResource(null));
 		assertEquals(rl.getTarget(), pp.getResource(null));
+
+		rl.setPartMap(new JDFAttributeMap("Run", "r1"));
+		assertEquals(xm, pp.getResource(null));
+	}
+
+	/**
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{ // TODO Auto-generated method stub
+		super.setUp();
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFCommand c = jmf.appendCommand(EnumType.PipePull);
+		pp = c.appendPipeParams();
 	}
 
 }

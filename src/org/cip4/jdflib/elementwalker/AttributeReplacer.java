@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,11 +71,18 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.util.Iterator;
+
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author prosirai replaces all instances of an attribute in all matching elements
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * June 9, 2008
+ * 
+ * replaces all instances of an attribute in all matching elements
  */
 public class AttributeReplacer extends BaseElementWalker
 {
@@ -83,20 +90,29 @@ public class AttributeReplacer extends BaseElementWalker
 	/**
 	 * fills this into the factory
 	 */
-	String attName;
-	String newAttValue;
+	protected JDFAttributeMap theMap;
 	String elemRegExp;
 
 	/**
-	 * @param attributeName
-	 * @param newValue
-	 * @param elementExpression
+	 * @param attributeName the attribute to replace
+	 * @param newValue the new value, if null the attribute is removed
+	 * @param elementExpression the elements to match, if null all match
 	 */
-	public AttributeReplacer(String attributeName, String newValue, String elementExpression)
+	public AttributeReplacer(final String attributeName, final String newValue, final String elementExpression)
 	{
 		super(new BaseWalkerFactory());
-		attName = attributeName;
-		newAttValue = newValue;
+		theMap = new JDFAttributeMap(attributeName, newValue);
+		elemRegExp = elementExpression;
+	}
+
+	/**
+	 * @param setMap the map of attributes to set
+	 * @param elementExpression the elements to match, if null all match
+	 */
+	public AttributeReplacer(final JDFAttributeMap setMap, final String elementExpression)
+	{
+		super(new BaseWalkerFactory());
+		theMap = setMap;
 		elemRegExp = elementExpression;
 	}
 
@@ -105,7 +121,7 @@ public class AttributeReplacer extends BaseElementWalker
 	 * 
 	 * @param root the element to clean
 	 */
-	public void replace(KElement root)
+	public void replace(final KElement root)
 	{
 		walkTree(root, null);
 	}
@@ -122,12 +138,8 @@ public class AttributeReplacer extends BaseElementWalker
 	 * @author prosirai
 	 * 
 	 */
-	public class WalkAttributeReplacer extends BaseWalker
+	public class WalkAttributeReplacer extends WalkDefault
 	{
-		public WalkAttributeReplacer()
-		{
-			super(getFactory());
-		}
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
@@ -136,15 +148,54 @@ public class AttributeReplacer extends BaseElementWalker
 		 * @return
 		 */
 		@Override
-		public KElement walk(KElement e, KElement trackElem)
+		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			if (StringUtil.matches(e.getLocalName(), elemRegExp))
+			final Iterator<String> it = theMap.getKeyIterator();
+			while (it.hasNext())
 			{
-				if (e.hasAttribute(attName))
-					e.setAttribute(attName, newAttValue);
+				final String key = it.next();
+				if (e.hasAttribute(key))
+				{
+					final String value = theMap.get(key);
+					e.setAttribute(key, value, null);
+				}
 			}
 			return e;
 		}
 
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public boolean matches(final KElement e)
+		{
+			return StringUtil.matches(e.getLocalName(), elemRegExp);
+		}
+
+	}
+
+	/**
+	 * the link and ref walker
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	public class WalkDefault extends BaseWalker
+	{
+		/**
+		 * 
+		 */
+		public WalkDefault()
+		{
+			super(getFactory());
+		}
+	}
+
+	/**
+	 * @param map the attribute map to set
+	 */
+	public void setMap(final JDFAttributeMap map)
+	{
+		theMap = map;
 	}
 }

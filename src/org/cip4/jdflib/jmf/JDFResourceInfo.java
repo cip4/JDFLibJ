@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -210,6 +210,29 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 				return (JDFResource) e;
 			}
 		}
+	}
+
+	/**
+	 * get all resources
+	 * 
+	 * @return VElement: the vector of resources
+	 */
+	public VElement getResourceVector()
+	{
+		final VElement v0 = getChildElementVector(null, null);
+		if (v0 == null)
+		{
+			return null;
+		}
+		for (int i = v0.size(); i >= 0; i--)
+		{
+			final KElement e = v0.get(i);
+			if (!(e instanceof JDFResource))
+			{
+				v0.remove(i);
+			}
+		}
+		return v0.size() == 0 ? null : v0;
 	}
 
 	/**
@@ -422,14 +445,15 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * if a Resource is available, return it's ProductID
+	 * if a Resource is available, return it's ProductID<br/>
+	 * if no productID is available, return null
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getProductID()
 	 */
 	@Override
 	public String getProductID()
 	{
-		String _name = super.getResourceName();
+		String _name = super.getProductID();
 		if (isWildCard(_name))
 		{
 			final JDFResource r = getResource(null);
@@ -439,7 +463,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 			}
 			_name = r.getProductID();
 		}
-		return _name;
+		return StringUtil.getNonEmpty(_name);
 	}
 
 	/**
@@ -579,6 +603,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root attribute.
+	 * @param iSkip
 	 * @return value of attribute found, null if not available
 	 * @since 071103
 	 */
@@ -632,6 +657,11 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	// //////////////////////////////////////////////////////////////////////////
 	// ////
 
+	/**
+	 * @param attName
+	 * @param vPart
+	 * @return
+	 */
 	public double getAmountPoolSumDouble(final String attName, final VJDFAttributeMap vPart)
 	{
 		return AmountPoolHelper.getAmountPoolSumDouble(this, attName, vPart);

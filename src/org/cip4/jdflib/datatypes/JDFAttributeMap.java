@@ -98,6 +98,7 @@ import org.cip4.jdflib.util.HashUtil;
  */
 public class JDFAttributeMap implements Map
 {
+	private final String nullVal = "_n_u__l_l_";
 	// **************************************** Attributes
 	// ******************************************
 	private Hashtable<String, String> m_hashTable = new Hashtable<String, String>();
@@ -224,7 +225,8 @@ public class JDFAttributeMap implements Map
 	 */
 	public String get(final String key)
 	{
-		return m_hashTable.get(key);
+		final String s = m_hashTable.get(key);
+		return nullVal.equals(s) ? null : s;
 	}
 
 	/**
@@ -242,21 +244,14 @@ public class JDFAttributeMap implements Map
 	 */
 	public boolean put(final String key, final String value)
 	{
-		String valueLocal = value;
-
 		// check input parameter (valid or invalid)
 		if (key == null || key.equals(JDFConstants.EMPTYSTRING))
 		{
 			return false;
 		}
-
-		if (valueLocal == null)
-		{
-			valueLocal = "";
-		}
 		// put key value to hashmap. The map returns null if the key was new
 		// or an object (the old value) if the value was replaced
-		m_hashTable.put(key, valueLocal);
+		m_hashTable.put(key, value == null ? nullVal : value);
 
 		return true;
 	}
@@ -686,39 +681,37 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
-	public Object get(final Object key)
+	public Object get(Object key)
 	{
-		Object keyLocal = key;
-
-		if (keyLocal instanceof ValuedEnum)
+		if (key instanceof ValuedEnum)
 		{
-			keyLocal = ((ValuedEnum) keyLocal).getName();
+			key = ((ValuedEnum) key).getName();
 		}
 
-		return m_hashTable.get(keyLocal);
+		final String s = m_hashTable.get(key);
+		return nullVal.equals(s) ? null : s;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see java.util.Map#put(K, V)
+	 * @param key
+	 * @param value
+	 * @return
+	 * @see java.util.Map#put(key, value)
 	 */
-	public Object put(final Object key, final Object value)
+	public Object put(Object key, Object value)
 	{
-		Object keyLocal = key;
-		Object valueLocal = value;
-
-		if (keyLocal instanceof ValuedEnum)
+		if (key instanceof ValuedEnum)
 		{
-			keyLocal = ((ValuedEnum) keyLocal).getName();
+			key = ((ValuedEnum) key).getName();
 		}
 
-		if (valueLocal instanceof ValuedEnum)
+		if (value instanceof ValuedEnum)
 		{
-			valueLocal = ((ValuedEnum) valueLocal).getName();
+			value = ((ValuedEnum) value).getName();
 		}
 
-		return m_hashTable.put((String) keyLocal, (String) valueLocal);
+		return m_hashTable.put((String) key, (String) value);
 	}
 
 	/**

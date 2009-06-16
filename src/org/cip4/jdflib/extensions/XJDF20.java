@@ -97,6 +97,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -159,8 +161,10 @@ public class XJDF20 extends BaseElementWalker
 	private final String m_spawnInfo = "SpawnInfo";
 	protected VString resAttribs;
 	protected KElement newRoot = null;
+	protected JDFNode oldRoot = null;
 	protected boolean walkingProduct = false;
 	protected boolean first = true;
+	public boolean bUpdateVersion = true;
 	// private VJDFAttributeMap vPartMap = null;
 	/**
 	 * if true add an htmlcolor attribute to color elements for xsl display purposes
@@ -168,23 +172,37 @@ public class XJDF20 extends BaseElementWalker
 	public boolean bHTMLColor = false;
 
 	/**
+	 * @param jmf the jmf to transform
+	 * @return the root of the XJDF document
+	 */
+	public KElement makeNewJMF(final JDFJMF jmf)
+	{
+		final KElement root = ((JDFDoc) jmf.getOwnerDocument_JDFElement().clone()).getJMFRoot();
+		final JDFDoc newDoc = new JDFDoc("JMF");
+		newRoot = newDoc.getRoot();
+		first = true;
+		walkTree(root, newRoot);
+		newRoot.eraseEmptyNodes(true);
+		return newRoot;
+	}
+
+	/**
 	 * @param node the node to transform
 	 * @param vMap the partmap to transform, null if all
 	 * @return the root of the XJDF document
 	 */
-	public KElement makeNewJDF(JDFNode node, final VJDFAttributeMap vMap)
+	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
-		// vPartMap = vMap;
-		node.cloneNode(true);
 		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
-		node = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
-		if (node == null)
+		oldRoot = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
+		if (oldRoot == null)
 		{
-			node = root;
+			oldRoot = root;
 		}
 		final JDFNode rootIn = node.getJDFRoot();
 		final JDFDoc newDoc = new JDFDoc(rootName);
 
+		walkingProduct = false;
 		newRoot = newDoc.getRoot();
 		first = true;
 		walkTree(node, newRoot);
@@ -199,7 +217,6 @@ public class XJDF20 extends BaseElementWalker
 		walkingProduct = false;
 
 		newRoot.eraseEmptyNodes(true);
-
 		return newRoot;
 	}
 
@@ -333,13 +350,13 @@ public class XJDF20 extends BaseElementWalker
 		}
 	}
 
-	void setAmountPool(final JDFResourceLink rl, final KElement newLeaf, final JDFAttributeMap partMap)
+	void setAmountPool(final JDFElement rl, final KElement newLeaf, final JDFAttributeMap partMap)
 	{
 		if (rl == null)
 		{
 			return;
 		}
-		JDFAmountPool ap = rl.getAmountPool();
+		JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
 		if (ap == null)
 		{
 			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT) || rl.hasAttribute(AttributeName.MAXAMOUNT))
@@ -403,7 +420,7 @@ public class XJDF20 extends BaseElementWalker
 	/**
 	 * 
 	 */
-	private KElement setBaseResource(final JDFResourceLink rl, final JDFResource r, final KElement xjdfSet)
+	private KElement setBaseResource(final JDFElement rl, final JDFResource r, final KElement xjdfSet)
 	{
 		KElement newLeaf = null;
 		final JDFAttributeMap map = r.getPartMap();
@@ -432,7 +449,7 @@ public class XJDF20 extends BaseElementWalker
 	 * @param leaf
 	 * @param newLeaf
 	 */
-	private void setLeafAttributes(final JDFResource leaf, final JDFResourceLink rl, final KElement newLeaf)
+	private void setLeafAttributes(final JDFResource leaf, final JDFElement rl, final KElement newLeaf)
 	{
 		final JDFAttributeMap partMap = leaf.getPartMap();
 		// JDFAttributeMap attMap=leaf.getAttributeMap();
@@ -503,7 +520,7 @@ public class XJDF20 extends BaseElementWalker
 	 * @param linkTarget
 	 * @param xRoot
 	 */
-	protected VElement setResource(final JDFResourceLink rl, final JDFResource linkTarget, final KElement xRoot)
+	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
 		final VElement v = new VElement();
 		final String className = getClassName(linkTarget);
@@ -523,7 +540,7 @@ public class XJDF20 extends BaseElementWalker
 		// TODO what if he have resources used as in and out in the same node?
 		setSetAttributes(resourceSet, rl, linkTarget);
 		int nLeaves = resourceSet.numChildElements(className, null);
-		final VElement vRes = rl == null ? linkTarget.getLeaves(false) : rl.getTargetVector(0);
+		final VElement vRes = (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getTargetVector(0) : linkTarget.getLeaves(false);
 		for (int j = 0; j < vRes.size(); j++)
 		{
 			final JDFResource r = (JDFResource) vRes.elementAt(j);
@@ -658,14 +675,26 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		private void cleanRefs(final JDFElement je, JDFResource r)
 		{
-			r = r.makeRootResource(null, je.getParentJDF(), false);
-			r.setResStatus(EnumResStatus.Available, true);
-			final JDFResourcePool prevPool = je.getParentJDF().getResourcePool();
-			if (prevPool != null)
+			final JDFNode parentJDF = je.getParentJDF();
+			if (parentJDF != null)
 			{
-				r = removeDuplicateRefs(r, prevPool);
+				r = r.makeRootResource(null, parentJDF, false);
+				r.setResStatus(EnumResStatus.Available, true);
+				final JDFResourcePool prevPool = parentJDF.getResourcePool();
+				if (prevPool != null)
+				{
+					r = removeDuplicateRefs(r, prevPool);
+				}
+				je.refElement(r);
 			}
-			je.refElement(r);
+			else if (je.getJMFRoot() != null)
+			{
+				final JDFResource resourceRoot = r.getResourceRoot();
+				final JDFElement parent = (JDFElement) (resourceRoot == null ? null : resourceRoot.getParentNode_KElement());
+				r = r.makeRootResource(null, parent, false);
+				r.setResStatus(EnumResStatus.Available, true);
+				je.refElement(r);
+			}
 		}
 
 		/**
@@ -735,15 +764,16 @@ public class XJDF20 extends BaseElementWalker
 			return ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.BARCODECOMPPARAMS.equals(refLocalName) || ElementName.BARCODEREPROPARAMS.equals(refLocalName)
 					|| ElementName.COMCHANNEL.equals(refLocalName) || ElementName.INTERPRETEDPDLDATA.equals(refLocalName) || ElementName.BYTEMAP.equals(refLocalName)
 					|| ElementName.COMPANY.equals(refLocalName) || ElementName.COSTCENTER.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName) || ElementName.PERSON.equals(refLocalName)
-					|| ElementName.DEVICENSPACE.equals(refLocalName) || ElementName.COLORANTALIAS.equals(refLocalName) || ElementName.GLUELINE.equals(refLocalName)
-					|| ElementName.GLUEAPPLICATION.equals(refLocalName) || ElementName.CIELABMEASURINGFIELD.equals(refLocalName) || ElementName.REGISTERMARK.equals(refLocalName)
-					|| ElementName.FITPOLICY.equals(refLocalName) || ElementName.CUTBLOCK.equals(refLocalName) || ElementName.EMPLOYEE.equals(refLocalName)
-					|| ElementName.ELEMENTCOLORPARAMS.equals(refLocalName) || ElementName.CUT.equals(refLocalName) || ElementName.PDLRESOURCEALIAS.equals(refLocalName)
-					|| ElementName.HOLELIST.equals(refLocalName) || ElementName.HOLE.equals(refLocalName) || ElementName.MISDETAILS.equals(refLocalName) || ElementName.HOLELINE.equals(refLocalName)
-					|| ElementName.JOBFIELD.equals(refLocalName) || ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName)
-					|| ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName) || ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName)
-					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName)
-					|| ElementName.TRANSFERCURVE.equals(refLocalName) || ElementName.COLORCONTROLSTRIP.equals(refLocalName);
+					|| ElementName.DEVICE.equals(refLocalName) || ElementName.DEVICENSPACE.equals(refLocalName) || ElementName.COLORANTALIAS.equals(refLocalName)
+					|| ElementName.GLUELINE.equals(refLocalName) || ElementName.GLUEAPPLICATION.equals(refLocalName) || ElementName.CIELABMEASURINGFIELD.equals(refLocalName)
+					|| ElementName.REGISTERMARK.equals(refLocalName) || ElementName.FITPOLICY.equals(refLocalName) || ElementName.CUTBLOCK.equals(refLocalName)
+					|| ElementName.EMPLOYEE.equals(refLocalName) || ElementName.ELEMENTCOLORPARAMS.equals(refLocalName) || ElementName.CUT.equals(refLocalName)
+					|| ElementName.PDLRESOURCEALIAS.equals(refLocalName) || ElementName.HOLELIST.equals(refLocalName) || ElementName.HOLE.equals(refLocalName)
+					|| ElementName.MISDETAILS.equals(refLocalName) || ElementName.HOLELINE.equals(refLocalName) || ElementName.JOBFIELD.equals(refLocalName)
+					|| ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName) || ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName)
+					|| ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName)
+					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName) || ElementName.TRANSFERCURVE.equals(refLocalName)
+					|| ElementName.COLORCONTROLSTRIP.equals(refLocalName);
 		}
 
 		/**
@@ -763,13 +793,6 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public class WalkResLink extends WalkJDFElement
 	{
-		/**
-		 * 
-		 */
-		public WalkResLink()
-		{
-			super();
-		}
 
 		/**
 		 * @param jdf
@@ -861,7 +884,9 @@ public class XJDF20 extends BaseElementWalker
 		protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 		{
 			final String attName = getRefName(re);
-			final VElement v = setResource(null, re.getTarget(), newRoot);
+			final JDFResource target = re.getTarget();
+			final JDFResourceLink rl = getLinkForRef(re, target);
+			final VElement v = setResource(rl, target, getRefRoot(xjdf));
 			if (v != null)
 			{
 				for (int i = 0; i < v.size(); i++)
@@ -871,6 +896,36 @@ public class XJDF20 extends BaseElementWalker
 				}
 			}
 			re.deleteNode();
+		}
+
+		/**
+		 * @param re
+		 * @param target
+		 * @return
+		 */
+		private JDFResourceLink getLinkForRef(final JDFRefElement re, final JDFResource target)
+		{
+			JDFResourceLink rl = null;
+			if (oldRoot != null)
+			{
+				final JDFResourceLinkPool resourceLinkPool = oldRoot.getResourceLinkPool();
+				rl = resourceLinkPool != null ? resourceLinkPool.getLink(target, null, null) : null;
+			}
+			return rl;
+		}
+
+		/**
+		 * @param xjdf
+		 * @return
+		 */
+		private KElement getRefRoot(final KElement xjdf)
+		{
+			KElement ret = null;
+			if (xjdf != null)
+			{
+				ret = xjdf.getDeepParent(ElementName.RESOURCEINFO, 0);
+			}
+			return ret == null ? newRoot : ret;
 		}
 
 		/**
@@ -926,16 +981,8 @@ public class XJDF20 extends BaseElementWalker
 	public class WalkJDF extends WalkJDFElement
 	{
 		/**
-		 * 
-		 */
-		public WalkJDF()
-		{
-			super();
-		}
-
-		/**
-		 * @param e
-		 * @return thr created resource
+		 * @param jdf
+		 * @return the created resource
 		 */
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
@@ -971,14 +1018,25 @@ public class XJDF20 extends BaseElementWalker
 			newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 
 			final JDFNodeInfo ni = node.getCreateNodeInfo();
-			// TODO move all stati to ni?
+			final VElement niLeaves = ni.getLeaves(false);
+			for (int i = 0; i < niLeaves.size(); i++)
+			{
+				final JDFNodeInfo niLeaf = (JDFNodeInfo) niLeaves.get(i);
+				final JDFAttributeMap map = niLeaf.getPartMap();
+				niLeaf.setNodeStatus(node.getPartStatus(map));
+				niLeaf.setNodeStatusDetails(StringUtil.getNonEmpty(node.getPartStatusDetails(map)));
+			}
+
 			newRootP.setAttributes(node);
 
 			// status is set only in the NodeInfo
 			newRootP.removeAttribute(AttributeName.STATUS);
 			newRootP.removeAttribute(AttributeName.STATUSDETAILS);
-			newRootP.setAttribute("Version", "2.0");
-			newRootP.setAttribute("MaxVersion", "2.0");
+			if (bUpdateVersion)
+			{
+				newRootP.setAttribute("Version", "2.0");
+				newRootP.setAttribute("MaxVersion", "2.0");
+			}
 			if (!newRootP.hasAttribute(AttributeName.TYPES))
 			{
 				newRootP.renameAttribute("Type", "Types", null, null);
@@ -1955,6 +2013,107 @@ public class XJDF20 extends BaseElementWalker
 			return (toCheck instanceof JDFInterpretingParams) || (toCheck instanceof JDFLayout) || (toCheck instanceof JDFStrippingParams); // TODO|| (toCheck
 			// instanceof
 			// JDFRasterReadingParams);
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
+	 * walker for the various resource sets
+	 */
+	public class WalkJMF extends WalkJDFElement
+	{
+		/**
+		 * @param jdf
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			if (!first)
+			{
+				return null;
+			}
+			first = false;
+			final JDFJMF jmf = (JDFJMF) jdf;
+			setRootAttributes(jmf, xjdf);
+			return xjdf;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFJMF);
+		}
+
+		/**
+		 * @param jmf
+		 * @param newRootP
+		 */
+		private void setRootAttributes(final JDFJMF jmf, final KElement newRootP)
+		{
+			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+			if (bUpdateVersion)
+			{
+				newRootP.setAttribute("Version", "2.0");
+				newRootP.setAttribute("MaxVersion", "2.0");
+			}
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkResourceInfo extends WalkJDFElement
+	{
+
+		/**
+		 * @param jdf
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFResourceInfo ri = (JDFResourceInfo) jdf;
+			final KElement eNew = xjdf.copyElement(jdf, null);
+			eNew.removeChildren(null, null, null);
+			final VElement vr = ((JDFResourceInfo) jdf).getChildElementVector(null, null);
+			int nRes = 0;
+			for (int i = 0; i < vr.size(); i++)
+			{
+				if (vr.get(i) instanceof JDFResource)
+				{
+					final JDFResource r = (JDFResource) vr.get(i);
+					if (nRes == 0)
+					{
+						setResource(ri, r, eNew);
+					}
+					else
+					{
+						setResource(null, r, eNew);
+
+					}
+					r.deleteNode();
+					nRes++;
+				}
+			}
+
+			return eNew;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFResourceInfo;
 		}
 	}
 

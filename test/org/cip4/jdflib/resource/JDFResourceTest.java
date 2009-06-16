@@ -104,6 +104,9 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -311,6 +314,25 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertEquals(JDFResource.getResourceRoot(l), l);
 		assertNull(JDFResource.getResourceRoot(n));
 		assertNull(JDFResource.getResourceRoot(n.getAuditPool()));
+	}
+
+	/**
+	 * test the resource root stuff
+	 */
+	public void testGetResourceRootJMF()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, org.cip4.jdflib.jmf.JDFMessage.EnumType.Resource);
+		final JDFResourceInfo ri = jmf.getCreateSignal(0).appendResourceInfo();
+		final JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource("ExposedMedia");
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SignatureName", "Sig1");
+		partMap.put("SheetName", "S1");
+		partMap.put("Side", "Front");
+		partMap.put("Separation", "Black");
+		final JDFExposedMedia xmPart = (JDFExposedMedia) xm.getCreatePartition(partMap, new VString("SignatureName SheetName Side Separation", null));
+		final JDFMedia m = xmPart.appendMedia();
+		assertEquals(JDFResource.getResourceRoot(m), xm);
+		assertEquals(JDFResource.getResourceRoot(xmPart), xm);
 	}
 
 	/**
@@ -1590,6 +1612,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testRemoveImplicitPartions()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -1600,6 +1625,25 @@ public class JDFResourceTest extends JDFTestCaseBase
 		// tests for partition list
 		assertEquals(rul.getPartition(new JDFAttributeMap(EnumPartIDKey.RunIndex.getName(), "2~5"), null), rul);
 		assertNull(rul.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "GR"), null));
+	}
+
+	/**
+	 * 
+	 */
+	public void testRemoveInheritedAttributes()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Interpreting);
+		final JDFRunList rul = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		final JDFResource part = rul.addPartition(EnumPartIDKey.Run, "r1");
+		part.setProductID("P2");
+		rul.setProductID("P1");
+		assertNotNull(part.getAttribute("ProductID", null, null));
+		assertNotNull(rul.getAttribute("ProductID", null, null));
+		part.removeInheritedAttributes("ProductID", null);
+		assertNull(part.getAttribute("ProductID", null, null));
+		assertNull(rul.getAttribute("ProductID", null, null));
 
 	}
 

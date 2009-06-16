@@ -152,7 +152,7 @@ public class JDFMerge
 	 * <p>
 	 * default: mergeJDF(subJDFNode, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
 	 * 
-	 * @param subJDFNode the previously spawned jdf node
+	 * @param _toMerge the previously spawned jdf node
 	 * @param urlMerge the url of the ???
 	 * @param cleanPolicy policy how to clean up the spawn and merge audits after merging
 	 * @param amountPolicy policy how to clean up the Resource amounts after merging
@@ -165,7 +165,6 @@ public class JDFMerge
 	 * 
 	 * default: mergeJDF(subJDFNode, null, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.None)
 	 */
-
 	public JDFNode mergeJDF(final JDFNode _toMerge, final String urlMerge, final EnumCleanUpMerge cleanPolicy, final JDFResource.EnumAmountMerge amountPolicy)
 	{
 		subJDFNode = _toMerge;
@@ -369,7 +368,7 @@ public class JDFMerge
 		final VElement v = poverWriteNode.getChildElementVector(ElementName.COMMENT, null, null, false, 0, false);
 		final VElement vToMerge = toMerge.getChildElementVector(ElementName.COMMENT, null, null, false, 0, false);
 		final int siz = vToMerge.size(); // size prior to appending
-		vToMerge.appendUnique(v);
+		vToMerge.appendUniqueElement(v);
 		for (int i = siz; i < vToMerge.size(); i++)
 		{
 			toMerge.moveElement(vToMerge.elementAt(i), null);
@@ -497,11 +496,13 @@ public class JDFMerge
 
 	/**
 	 * Merges partitioned resources into this resource uses PartIDKey to identify the correct resources
+	 * @param targetRes
 	 * 
 	 * @param resToMerge the resource leaf to merge into this
 	 * @param spawnID the spawnID of the spawning that will now be merged
 	 * @param amountPolicy how to clean up the Resource amounts after merging
 	 * @param bLocalResource must be true for the local resources in a spawned node and its subnodes, which default to RW
+	 * @return
 	 * 
 	 * @throws JDFException if here is an attempt to merge incompatible resources
 	 * @throws JDFException if here is an attempt to merge incompatible partitions
@@ -1373,8 +1374,12 @@ public class JDFMerge
 	 * @param bRecurse if true also recurse into all child JDF nodes; default=false
 	 */
 
-	private void cleanUpMerge(final JDFNode overWriteTmpNode, final EnumCleanUpMerge cleanPolicy, final boolean bRecurse)
+	private void cleanUpMerge(final JDFNode overWriteTmpNode, EnumCleanUpMerge cleanPolicy, final boolean bRecurse)
 	{
+		if (cleanPolicy == null)
+		{
+			cleanPolicy = EnumCleanUpMerge.None;
+		}
 		if (bAddMergeToProcessRun)
 		{
 			final VElement vProcessRun = subJDFNode.getChildrenByTagName(ElementName.PROCESSRUN, null, new JDFAttributeMap(AttributeName.SPAWNID, spawnID), false, true, -1);

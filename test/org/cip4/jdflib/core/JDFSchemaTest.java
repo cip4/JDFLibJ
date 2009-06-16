@@ -83,6 +83,8 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.process.JDFPreview;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -112,6 +114,23 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		final JDFNode n = d0.getJDFRoot();
 		n.setType(EnumType.DieMaking);
 		n.addResource(ElementName.TOOL, EnumUsage.Output);
+		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * @throws Exception
+	 */
+	public void testPreviewResource() throws Exception
+	{
+		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.PreviewGeneration);
+		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Output);
+		pv.setPartUsage(EnumPartUsage.Explicit);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		assertNotNull(d);

@@ -2597,7 +2597,7 @@ public class JDFElement extends KElement
 				if (!isWildCard(local))
 				{
 					local = StringUtil.replaceCharSet(local, " \t\n\f", null, 0);
-					local = "." + local.hashCode() + ".";
+					local = "." + Math.abs(local.hashCode()) + ".";
 				}
 			}
 

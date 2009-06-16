@@ -105,6 +105,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFPool;
@@ -1148,14 +1149,18 @@ public class JDFResource extends JDFElement
 			}
 
 			// use the local pool if no other is specified
-			JDFResourcePool rp = null;
+			JDFElement rp = null;
 			if (parentPool instanceof JDFResourcePool)
 			{
-				rp = (JDFResourcePool) parentPool;
+				rp = parentPool;
 			}
 			else if (parentPool instanceof JDFNode)
 			{
 				rp = ((JDFNode) parentPool).getCreateResourcePool();
+			}
+			else if (parentPool instanceof JDFResourceInfo)
+			{
+				rp = parentPool;
 			}
 
 			if (rp == null)
@@ -1165,11 +1170,16 @@ public class JDFResource extends JDFElement
 
 			if (rp == null)
 			{
-				rp = getJDFRoot().getCreateResourcePool();
+				final JDFNode root = getJDFRoot();
+				rp = root == null ? null : root.getCreateResourcePool();
+				if (rp == null)
+				{
+					return this; // failure
+				}
 			}
 
 			final JDFResource oldRoot = getResourceRoot();
-			final JDFResource newRes = rp.appendResource(this);
+			final JDFResource newRes = (JDFResource) rp.moveElement(this, null);
 
 			if (oldRoot.hasAttribute(AttributeName.STATUS))
 			{
@@ -2970,7 +2980,26 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Removes attributes
+	 * Removes all local and inherited attributes down to the resource root
+	 * 
+	 * @param attrib the attribute key to remove
+	 * @param nameSpaceURI the attribute nameSpaceURI to remove
+	 * 
+	 * @default removeAttribute(attrib, null)
+	 */
+	public void removeInheritedAttributes(final String attrib, final String nameSpaceURI)
+	{
+		final String nodeName = getNodeName();
+		KElement ke = this;
+		while (ke.getNodeName().equals(nodeName))
+		{
+			ke.removeAttribute(attrib, nameSpaceURI);
+			ke = ke.getParentNode_KElement();
+		}
+	}
+
+	/**
+	 * Removes local attributes
 	 * 
 	 * @param attrib the attribute key to remove
 	 * @param nameSpaceURI the attribute nameSpaceURI to remove

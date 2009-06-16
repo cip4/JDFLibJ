@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -113,9 +113,17 @@ import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * Jun 11, 2009
+ */
 public class MimeUtilTest extends JDFTestCaseBase
 {
 
+	/**
+	 * 
+	 */
 	public void testGetMimeTypeFromExt()
 	{
 		assertEquals(UrlUtil.TEXT_UNKNOWN, MimeUtil.getMimeTypeFromExt("www.foobar.com"));
@@ -288,6 +296,10 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertNotNull(n);
 	}
 
+	/**
+	 * test for mjd creation
+	 * @throws Exception
+	 */
 	public void testBuildMimePackageDoc() throws Exception
 	{
 		for (int i = 0; i < 2; i++)
@@ -316,6 +328,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testUpdateXMLMultipart() throws Exception
 	{
 		final Message message = new MimeMessage((Session) null);
@@ -434,6 +449,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testBuildMimePackage() throws Exception
 	{
 		final JDFDoc d1 = new JDFDoc("JMF");

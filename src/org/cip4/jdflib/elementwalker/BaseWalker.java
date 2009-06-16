@@ -1,15 +1,8 @@
-/**
- * 
- */
-package org.cip4.jdflib.elementwalker;
-
-import org.cip4.jdflib.core.KElement;
-
 /*
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,9 +66,13 @@ import org.cip4.jdflib.core.KElement;
  * <http://www.cip4.org/>.
  *
  */
+package org.cip4.jdflib.elementwalker;
+
+import org.cip4.jdflib.core.KElement;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class BaseWalker implements IWalker, Comparable<BaseWalker>
 {
@@ -84,11 +81,11 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	protected int depth;
 
 	/**
-	 * the mother routine for walking.... 
+	 * the mother routine for walking....
 	 * 
 	 * @see org.cip4.jdflib.elementwalker.IWalker#walk(KElement, KElement)
 	 */
-	public KElement walk(KElement e, KElement trackElem)
+	public KElement walk(final KElement e, final KElement trackElem)
 	{
 		return e;
 	}
@@ -97,7 +94,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * 
 	 * @param factory
 	 */
-	public BaseWalker(BaseWalkerFactory factory)
+	public BaseWalker(final BaseWalkerFactory factory)
 	{
 		depth = 0;
 		addToFactory(factory);
@@ -109,7 +106,7 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * @param e the element to check
 	 * @return true if matches - must be true for base
 	 */
-	public boolean matches(@SuppressWarnings("unused") KElement e)
+	public boolean matches(final KElement e)
 	{
 		return true;
 	}
@@ -118,9 +115,9 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 * adds an element to a factory automagically
 	 * @param factory
 	 */
-	private void addToFactory(BaseWalkerFactory factory)
+	private void addToFactory(final BaseWalkerFactory factory)
 	{
-		Class<BaseWalker> cBase = BaseWalker.class;
+		final Class<BaseWalker> cBase = BaseWalker.class;
 		Class<?> c = this.getClass().getSuperclass();
 		// calculate the number of intermediate classes
 		while (cBase.isAssignableFrom(c))
@@ -141,12 +138,12 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * note the reverse order - high depth means up in list so that abstract classes get checked later (non-Javadoc)
-	 * @param arg0  the other Basewalker
+	 * @param arg0 the other Basewalker
 	 * @return int
 	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	public int compareTo(BaseWalker arg0)
+	public int compareTo(final BaseWalker arg0)
 	{
 		return (arg0 == null ? 0 : arg0.depth) - depth;
 	}

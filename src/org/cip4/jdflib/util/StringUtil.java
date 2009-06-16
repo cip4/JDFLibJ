@@ -721,7 +721,7 @@ public class StringUtil
 	 * default: replaceChar(strWork, c, s, 0)
 	 * 
 	 * @param strWork String to work on
-	 * @param c characters to replace
+	 * @param charSet characters to replace
 	 * @param replaceString String to insert for c
 	 * @param offset
 	 * @return the String with replaced characters
@@ -859,6 +859,11 @@ public class StringUtil
 		return UrlUtil.extension(pathName);
 	}
 
+	/**
+	 * inverse of extension
+	 * @param strWork the string to work on
+	 * @return the prefix
+	 */
 	public static String prefix(final String strWork)
 	{
 		final String ext = UrlUtil.extension(strWork);

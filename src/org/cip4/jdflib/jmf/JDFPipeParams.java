@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,6 @@
  ==========================================================================
  @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001
  ALL RIGHTS RESERVED
- @Author: sabjon@topmail.de   using a code generator
  Warning! very preliminary test version. Interface subject to change without prior notice!
  Revision history:    ...
  **/
@@ -96,7 +95,11 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
 
-//----------------------------------
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * before June 11, 2009
+ */
 public class JDFPipeParams extends JDFAutoPipeParams
 {
 	private static final long serialVersionUID = 1L;
@@ -107,7 +110,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPipeParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPipeParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -119,7 +122,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPipeParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPipeParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -132,11 +135,14 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPipeParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPipeParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoPipeParams#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -146,19 +152,20 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	/**
 	 * Gets all ResourceLink children with the attribute name, mAttrib, nameSpaceURI from the pool
 	 * 
-	 * @param name name of the Child
+	 * @param nam name of the Child
 	 * @param mAttrib a attribute to search for
+	 * @param nameSpaceURI
 	 * @return VElement: a vector with all resource links in the pool matching the conditions
 	 * @deprecated use getResourceLink()
 	 */
 	@Deprecated
-	final public VElement getResourceLinks(String nam, JDFAttributeMap mAttrib, String nameSpaceURI)
+	final public VElement getResourceLinks(final String nam, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
-		VElement v = getChildElementVector(nam, nameSpaceURI, mAttrib, true, 0, false);
+		final VElement v = getChildElementVector(nam, nameSpaceURI, mAttrib, true, 0, false);
 
 		for (int i = v.size() - 1; i >= 0; i--)
 		{
-			JDFElement e = (JDFElement) v.elementAt(i);
+			final JDFElement e = (JDFElement) v.elementAt(i);
 			if (!(e instanceof JDFResourceLink))
 			{
 				v.remove(i);
@@ -174,11 +181,11 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 */
 	final public JDFResourceLink getResourceLink()
 	{
-		VElement v = getChildElementVector(null, null, null, true, 0, false);
+		final VElement v = getChildElementVector(null, null, null, true, 0, false);
 
 		for (int i = 0; i < v.size(); i++)
 		{
-			KElement e = v.item(i);
+			final KElement e = v.item(i);
 			if (e instanceof JDFResourceLink)
 			{
 				return (JDFResourceLink) e;
@@ -198,12 +205,13 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 */
 
 	@Override
-	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		boolean bIgnorePrivateLocal = bIgnorePrivate;
-		
-		if (bIgnorePrivateLocal) // dummy to soothe compiler warning
+		if (bIgnorePrivateLocal)
+		{
 			bIgnorePrivateLocal = false;
+		}
 
 		return getUnknownPoolElements(JDFElement.EnumPoolType.PipeParams, nMax);
 	}
@@ -214,10 +222,10 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * @param resName name of the resource to get/create
 	 * @return JDFResource: the element
 	 */
-	public JDFResource getCreateResource(String resName)
+	public JDFResource getCreateResource(final String resName)
 	{
-		JDFResource r = null;
-		KElement e = getCreateElement(resName, null, 0);
+		final JDFResource r = null;
+		final KElement e = getCreateElement(resName, null, 0);
 		if (e instanceof JDFResource)
 		{
 			/**/
@@ -235,18 +243,24 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * @param resName name of the resource to get; if null get the resource that is linked by the reslink
 	 * @return JDFResource: the element
 	 */
-	public JDFResource getResource(String resName)
+	public JDFResource getResource(final String resName)
 	{
 		if (resName == null)
 		{
-			JDFResourceLink rl = getResourceLink();
+			final JDFResourceLink rl = getResourceLink();
 			if (rl != null)
-				return rl.getTarget();
-			VElement v = getChildElementVector(null, null, null, true, 0, false);
+			{
+				final JDFResource target = rl.getTarget();
+				if (target != null)
+				{
+					return target;
+				}
+			}
+			final VElement v = getChildElementVector(null, null, null, true, 0, false);
 
 			for (int i = 0; i < v.size(); i++)
 			{
-				KElement e = v.item(i);
+				final KElement e = v.item(i);
 				if (e instanceof JDFResource)
 				{
 					return (JDFResource) e;
@@ -255,7 +269,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 			return null;
 		}
 		JDFResource r = null;
-		KElement e = getElement(resName, null, 0);
+		final KElement e = getElement(resName, null, 0);
 		if (e instanceof JDFResource)
 		{
 			r = (JDFResource) e;
@@ -271,14 +285,14 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * append Resource
 	 * 
 	 * @param resName name of the resource to append
+	 * @return
 	 */
-	public JDFResource appendResource(String resName)
+	public JDFResource appendResource(final String resName)
 	{
-		KElement e = appendElement(resName, null);
+		final KElement e = appendElement(resName, null);
 		if (!(e instanceof JDFResource))
 		{
-			throw new JDFException("JDFpipeParams.appendResource tried to return a JDFElement instead of a JDFResource: "
-					+ resName);
+			throw new JDFException("JDFpipeParams.appendResource tried to return a JDFElement instead of a JDFResource: " + resName);
 		}
 		return (JDFResource) e;
 	}
@@ -290,18 +304,22 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * @param bInput if true, the link is an input link
 	 * @return JDFResourceLink: the appended element
 	 */
-	public JDFResourceLink appendResourceLink(String linkName, boolean bInput)
+	public JDFResourceLink appendResourceLink(final String linkName, final boolean bInput)
 	{
 		String linkNameLocal = linkName;
-		
+
 		if (!linkNameLocal.endsWith("Link"))
+		{
 			linkNameLocal += "Link";
+		}
 
 		JDFResourceLink rl = null;
 		if (getResourceLink() != null)
+		{
 			throw new JDFException("JDFpipeParams.appendResourceLink tried to append an additional link");
+		}
 
-		KElement e = appendElement(linkNameLocal, null);
+		final KElement e = appendElement(linkNameLocal, null);
 		if (e instanceof JDFResourceLink)
 		{
 			rl = (JDFResourceLink) e;
@@ -309,10 +327,9 @@ public class JDFPipeParams extends JDFAutoPipeParams
 		}
 		else
 		{
-			throw new JDFException("JDFpipeParams.appendResourceLink tried to return a JDFElement instead of a JDFResourceLink: "
-					+ linkNameLocal);
+			throw new JDFException("JDFpipeParams.appendResourceLink tried to return a JDFElement instead of a JDFResourceLink: " + linkNameLocal);
 		}
-		
+
 		return rl;
 	}
 
@@ -321,18 +338,22 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * 
 	 * @param parentNode the node to search in TODO implement resource handling
 	 */
-	public void applyPipeToNode(JDFNode parentNode)
+	public void applyPipeToNode(final JDFNode parentNode)
 	{
 		if (parentNode == null)
+		{
 			return;
-		VElement vNodes = parentNode.getvJDFNode(null, null, false);
+		}
+		final VElement vNodes = parentNode.getvJDFNode(null, null, false);
 
 		final int size = vNodes.size();
 		for (int i = 0; i < size; i++)
 		{
 			final JDFNode node = (JDFNode) vNodes.elementAt(i);
 			if (!matchesNode(node))
+			{
 				continue;
+			}
 			final JDFElement.EnumNodeStatus status = getStatus(); // TODO: set
 			// Status
 			node.setStatus(status);
@@ -340,14 +361,15 @@ public class JDFPipeParams extends JDFAutoPipeParams
 			// final boolean isIncremental = (getUpdateMethod () ==
 			// EnumUpdateMethod.Incremental);
 			double dAmount = -1.0;
-			JDFResourceLink rl = getResourceLink();
+			final JDFResourceLink rl = getResourceLink();
 
 			if (rl != null)
 			{
-				JDFResourceLink rlNode = node.getLink(0, rl.getNodeName(), new JDFAttributeMap(AttributeName.RREF, rl.getrRef()), null);
+				final JDFResourceLink rlNode = node.getLink(0, rl.getNodeName(), new JDFAttributeMap(AttributeName.RREF, rl.getrRef()), null);
 				if (rlNode == null)
-					throw new JDFException("Applying pipeparams to inconsistent node: missing resourcelink: "
-							+ rl.getNodeName());
+				{
+					throw new JDFException("Applying pipeparams to inconsistent node: missing resourcelink: " + rl.getNodeName());
+				}
 
 				VJDFAttributeMap vMap = rl.getPartMapVector();
 				if (vMap == null)
@@ -357,7 +379,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 				}
 				for (int j = 0; j < vMap.size(); j++)
 				{
-					JDFAttributeMap map = vMap.elementAt(j);
+					final JDFAttributeMap map = vMap.elementAt(j);
 					dAmount = rl.getActualAmount(map);
 					rlNode.setActualAmount(dAmount, map);
 				}
@@ -369,14 +391,20 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 * @param node
 	 * @return
 	 */
-	private boolean matchesNode(JDFNode node)
+	private boolean matchesNode(final JDFNode node)
 	{
 		if (node == null)
+		{
 			return false;
+		}
 		if (hasAttribute(AttributeName.JOBID) && !getJobID().equals(node.getJobID(true)))
+		{
 			return false;
+		}
 		if (hasAttribute(AttributeName.JOBPARTID) && !getJobPartID().equals(node.getJobPartID(false)))
+		{
 			return false;
+		}
 		return true;
 	}
 

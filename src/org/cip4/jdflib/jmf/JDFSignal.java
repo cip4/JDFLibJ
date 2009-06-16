@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -99,7 +99,7 @@ public class JDFSignal extends JDFAutoSignal
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFSignal(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFSignal(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -111,7 +111,7 @@ public class JDFSignal extends JDFAutoSignal
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFSignal(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -124,7 +124,7 @@ public class JDFSignal extends JDFAutoSignal
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFSignal(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFSignal(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -150,7 +150,7 @@ public class JDFSignal extends JDFAutoSignal
 	 * @deprecated use the two parameter varianz
 	 */
 	@Deprecated
-	public boolean convertResponse(JDFResponse response) 
+	public boolean convertResponse(final JDFResponse response)
 	{
 		return convertResponse(response, null);
 	}
@@ -161,25 +161,29 @@ public class JDFSignal extends JDFAutoSignal
 	 * @param response the response to convert
 	 * @return true if successful
 	 */
-	public boolean convertResponse(JDFResponse response, JDFQuery q)
+	public boolean convertResponse(final JDFResponse response, final JDFQuery q)
 	{
 		if (response == null)
+		{
 			return false;
+		}
 		setAttributes(response);
-		VElement elements = response.getChildElementVector(null, null, null, true, 0, true);
+		final VElement elements = response.getChildElementVector(null, null, null, true, 0, true);
 		for (int i = 0; i < elements.size(); i++)
 		{
-			JDFElement element = (JDFElement) elements.elementAt(i);
+			final JDFElement element = (JDFElement) elements.elementAt(i);
 			copyElement(element, null);
 		}
 		if (q != null)
 		{
-			VElement v = q.getChildElementVector(null, null, null, true, 0, true);
+			final VElement v = q.getChildElementVector(null, null, null, true, 0, true);
 			for (int i = 0; i < v.size(); i++)
 			{
 				final KElement item = v.item(i);
 				if (item instanceof JDFSubscription)
+				{
 					continue;
+				}
 				copyElement(item, null);
 			}
 		}

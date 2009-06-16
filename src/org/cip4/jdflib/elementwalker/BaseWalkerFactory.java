@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,19 +86,19 @@ public class BaseWalkerFactory implements IWalkerFactory
 {
 
 	protected int maxDepth = 0;
-	protected Vector<BaseWalker> v = new Vector<BaseWalker>();
+	protected Vector<BaseWalker> vBaseWalker = new Vector<BaseWalker>();
 
 	/**
 	 * 
 	 * get the appropriate walker for a given element
 	 * @see org.cip4.jdflib.elementwalker.IWalkerFactory#getWalker(org.cip4.jdflib .core.KElement)
 	 */
-	public IWalker getWalker(KElement toCheck)
+	public IWalker getWalker(final KElement toCheck)
 	{
-		int vs = v.size();
+		final int vs = vBaseWalker.size();
 		for (int j = 0; j < vs; j++)
 		{
-			BaseWalker w = v.get(j);
+			final BaseWalker w = vBaseWalker.get(j);
 			if (w.matches(toCheck))
 			{
 				return w;
@@ -109,16 +109,16 @@ public class BaseWalkerFactory implements IWalkerFactory
 	}
 
 	/**
-	 * add a walker to this and make sure that abstract walkers are sorted at the end of the list so that superclass
-	 * walkers are always found first called by BaseWorker so no need for external calls
+	 * add a walker to this and make sure that abstract walkers are sorted at the end of the list so that superclass walkers are always found first called by
+	 * BaseWorker so no need for external calls
 	 * 
 	 * @param w the walker to add
 	 */
-	void addWalker(BaseWalker w)
+	void addWalker(final BaseWalker w)
 	{
-		int d = w.getDepth();
+		final int d = w.getDepth();
 		maxDepth = d > maxDepth ? d : maxDepth;
-		v.add(w);
-		Collections.sort(v);
+		vBaseWalker.add(w);
+		Collections.sort(vBaseWalker);
 	}
 }

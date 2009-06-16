@@ -129,6 +129,7 @@ import org.cip4.jdflib.devicecapability.JDFNumberStateTest;
 import org.cip4.jdflib.devicecapability.JDFStateBaseTest;
 import org.cip4.jdflib.devicecapability.JDFStringStateTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
+import org.cip4.jdflib.elementwalker.AttributeReplacerTest;
 import org.cip4.jdflib.elementwalker.BaseWalkerTest;
 import org.cip4.jdflib.elementwalker.UnlinkFinderTest;
 import org.cip4.jdflib.examples.AmountTest;
@@ -315,8 +316,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFTestTest.class);
 
 		// elementWalker
+		suite.addTestSuite(AttributeReplacerTest.class);
 		suite.addTestSuite(BaseWalkerTest.class);
 		suite.addTestSuite(UnlinkFinderTest.class);
+		// suite.addTestSuite(XPathWalkerTest.class);
 
 		// examples
 		suite.addTestSuite(AmountTest.class);

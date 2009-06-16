@@ -146,12 +146,17 @@ public class BiHashMap<a, b>
 	}
 
 	/**
-	 * put the value for key
+	 * put the value for key<br/>
+	 * both key and value must be non-null
 	 * @param key the key
 	 * @param val the value
 	 */
 	public void put(final a key, final b val)
 	{
+		if (key == null || val == null)
+		{
+			return;
+		}
 		final b o = mapKey.get(key);
 		if (o != null)
 		{
@@ -162,7 +167,6 @@ public class BiHashMap<a, b>
 		{
 			mapKey.remove(o2);
 		}
-
 		mapVal.put(val, key);
 		mapKey.put(key, val);
 	}

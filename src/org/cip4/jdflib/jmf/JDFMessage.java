@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -106,6 +106,7 @@ import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.resource.JDFQueueEntryDefList;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -3014,12 +3015,9 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			return getAttribute(AttributeName.SENDERID);
 		}
-		final KElement parentJMF = getParentNode_KElement();
-		if (parentJMF instanceof JDFJMF)
-		{
-			return ((JDFJMF) parentJMF).getSenderID();
-		}
-		return null;
+		final JDFJMF parentJMF = getJMFRoot();
+		return parentJMF == null ? null : parentJMF.getSenderID();
+
 	}
 
 	@Override
@@ -3043,6 +3041,21 @@ public class JDFMessage extends JDFAutoMessage
 		}
 
 		return super.getLastVersion(eaName, bElement);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoMessage#getTime()
+	 */
+	@Override
+	public JDFDate getTime()
+	{
+		final JDFDate time = super.getTime();
+		if (time == null)
+		{
+			final JDFJMF jmf = getJMFRoot();
+			return jmf == null ? null : jmf.getTimeStamp();
+		}
+		return time;
 	}
 
 }

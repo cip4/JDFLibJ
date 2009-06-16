@@ -79,6 +79,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.JDFDate;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -272,6 +273,18 @@ public class JDFMessageTest extends TestCase
 		assertEquals(jmf.getSenderID(), command.getSenderID());
 		command.setSenderID("foo:bar");
 		assertEquals(command.getSenderID(), "foo:bar");
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetTime()
+	{
+		final JDFCommand command = (JDFCommand) jmf.appendMessageElement(EnumFamily.Command, EnumType.UpdateJDF);
+		assertEquals(jmf.getTimeStamp(), command.getTime());
+		final JDFDate newDate = new JDFDate(10000000);
+		command.setTime(newDate);
+		assertEquals(command.getTime(), newDate);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

@@ -103,8 +103,10 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFTool;
+import org.cip4.jdflib.resource.JDFLayoutPreparationParams.StrippingConverter;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
@@ -116,6 +118,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.span.JDFSpanBase.EnumPriority;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -130,10 +133,11 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class FixVersion extends BaseElementWalker
 {
-	protected boolean bFixVersionIDFix;
+	protected boolean bFixIDs;
 	protected final EnumVersion version;
-	protected boolean bOK = true;
+	protected boolean bOK;
 	protected boolean fixICSVersions;
+	protected boolean bLayoutPrepToStripping;
 
 	/**
 	 * @return the fixICSVersions
@@ -156,7 +160,7 @@ public class FixVersion extends BaseElementWalker
 	 */
 	public boolean isFixVersionIDFix()
 	{
-		return bFixVersionIDFix;
+		return bFixIDs;
 	}
 
 	/**
@@ -174,7 +178,7 @@ public class FixVersion extends BaseElementWalker
 	 */
 	public void setFixVersionIDFix(final boolean fixVersionIDFix)
 	{
-		bFixVersionIDFix = fixVersionIDFix;
+		bFixIDs = fixVersionIDFix;
 	}
 
 	/**
@@ -185,8 +189,22 @@ public class FixVersion extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		new BaseWalker(getFactory()); // need a default walker
-		bFixVersionIDFix = true;
+		bFixIDs = true;
 		version = _version;
+		bOK = true;
+		fixICSVersions = false;
+		bLayoutPrepToStripping = false;
+	}
+
+	/**
+	 * @param fixVersion
+	 */
+	public FixVersion(final FixVersion fixVersion)
+	{
+		this(fixVersion.version);
+		bFixIDs = fixVersion.bFixIDs;
+		fixICSVersions = fixVersion.fixICSVersions;
+		bLayoutPrepToStripping = fixVersion.bLayoutPrepToStripping;
 	}
 
 	@Override
@@ -246,7 +264,7 @@ public class FixVersion extends BaseElementWalker
 				{
 					fixDuration(el, key, value);
 				}
-				if (bFixVersionIDFix && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
+				if (bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
 				{
 					fixIDs(el, ai, key, value);
 				}
@@ -1002,6 +1020,10 @@ public class FixVersion extends BaseElementWalker
 			{
 				d.setDescriptiveName(StringUtil.getNonEmpty(d.getFriendlyName()));
 			}
+			if (EnumUtil.aLessThanB(EnumVersion.Version_1_3, version))
+			{
+				d.removeAttribute(AttributeName.FRIENDLYNAME);
+			}
 			return super.walk(e1, trackElem);
 		}
 	}
@@ -1515,6 +1537,59 @@ public class FixVersion extends BaseElementWalker
 			}
 			return super.walk(e1, trackElem);
 		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * June 7, 2009
+	 */
+	public class WalkLayoutPrep extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final boolean b = super.matches(toCheck);
+			if (!b)
+			{
+				return false;
+			}
+			return (toCheck instanceof JDFLayoutPreparationParams);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
+		 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+		 * high versions but potentially fail when attempting to move from higher to lower versions
+		 */
+		@Override
+		public KElement walk(final KElement e1, final KElement trackElem)
+		{
+			final JDFLayoutPreparationParams lpp = (JDFLayoutPreparationParams) e1;
+			if (lpp.isResourceRoot() && bLayoutPrepToStripping)
+			{
+				final StrippingConverter sc = lpp.convertToStripping();
+				// the new elements are NOT in the original and must therefore be called individually
+				new FixVersion(FixVersion.this).walkTree(sc.getAssembly(), null);
+				new FixVersion(FixVersion.this).walkTree(sc.getStrippingParams(), null);
+				new FixVersion(FixVersion.this).walkTree(sc.getBinderySignature(), null);
+				return null; // stop here, we zapped lpp
+			}
+			return super.walk(e1, trackElem);
+		}
+	}
+
+	/**
+	 * @param layoutPrepToStripping the bLayoutPrepToStripping to set
+	 */
+	public void setLayoutPrepToStripping(final boolean layoutPrepToStripping)
+	{
+		bLayoutPrepToStripping = layoutPrepToStripping;
 	}
 
 }

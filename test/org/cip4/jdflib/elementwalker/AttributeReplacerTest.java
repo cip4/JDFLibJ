@@ -74,6 +74,7 @@ package org.cip4.jdflib.elementwalker;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
  * @author prosirai
@@ -87,14 +88,48 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	 */
 	public void testReplace()
 	{
-		AttributeReplacer rep = new AttributeReplacer("ID", "foo", null);
-		KElement e = new XMLDoc("r", null).getRoot();
+		final AttributeReplacer rep = new AttributeReplacer("ID", "foo", null);
+		final KElement e = new XMLDoc("r", null).getRoot();
 		e.setAttribute("ID", "a1");
 		e.setXPathAttribute("a/b/@ID", "aa");
 		rep.replace(e);
 		assertEquals("foo", e.getAttribute("ID"));
 		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
 		assertNull(e.getXPathAttribute("a/@ID", null));
+	}
+
+	/**
+	 * 
+	 */
+	public void testRegeExp()
+	{
+		final AttributeReplacer rep = new AttributeReplacer("ID", "foo", "b");
+		final KElement e = new XMLDoc("r", null).getRoot();
+		e.setAttribute("ID", "a1");
+		e.setXPathAttribute("a/b/@ID", "aa");
+		rep.replace(e);
+		assertEquals("a1", e.getAttribute("ID"));
+		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
+		assertNull(e.getXPathAttribute("a/@ID", null));
+	}
+
+	/**
+	 * 
+	 */
+	public void testReplaceMap()
+	{
+		final JDFAttributeMap m = new JDFAttributeMap("ID", "foo");
+		m.put("c", null);
+		final AttributeReplacer rep = new AttributeReplacer(m, null);
+		final KElement e = new XMLDoc("r", null).getRoot();
+		e.setAttribute("ID", "a1");
+		e.setXPathAttribute("a/b/@ID", "aa");
+		e.setXPathAttribute("a/b/@c", "aa");
+		rep.replace(e);
+		assertEquals("foo", e.getAttribute("ID"));
+		assertEquals("foo", e.getXPathAttribute("a/b/@ID", null));
+		assertNull(e.getXPathAttribute("a/@ID", null));
+		assertNull(e.getXPathAttribute("a/b/@c", null));
 	}
 
 }

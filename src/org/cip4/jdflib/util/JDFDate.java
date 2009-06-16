@@ -95,7 +95,7 @@ import org.cip4.jdflib.core.JDFConstants;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
 public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDate>
 {
@@ -104,8 +104,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	private int m_TimeZoneOffsetInMillis = 0; // in miliseconds from GMT-time
 
 	/**
-	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time at which it was
-	 * allocated, measured to the nearest millisecond. Also sets the current time zone to the system default time zone
+	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time at which it was allocated, measured to the nearest millisecond.
+	 * Also sets the current time zone to the system default time zone
 	 */
 	public JDFDate()
 	{
@@ -113,21 +113,21 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time point, expressed in
-	 * milliseconds after January 1, 1970, 0:00:00 GMT. Also sets the current time zone to the system default time zone
+	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time point, expressed in milliseconds after January 1, 1970, 0:00:00
+	 * GMT. Also sets the current time zone to the system default time zone
 	 * 
-	 * @param iTime current time in milliseconds after January 1, 1970, 0:00:00 GMT. Use JDFDuration instead. This class
-	 *            will be modified to handle only JDFDate objects
+	 * @param iTime current time in milliseconds after January 1, 1970, 0:00:00 GMT. Use JDFDuration instead. This class will be modified to handle only JDFDate
+	 * objects
 	 */
 	public JDFDate(final long iTime)
 	{
 		lTimeInMillis = iTime;
-		TimeZone t = TimeZone.getDefault();
+		final TimeZone t = TimeZone.getDefault();
 		m_TimeZoneOffsetInMillis = t.getOffset(lTimeInMillis);
 	}
 
 	/**
-	 * @param other the  date to clone
+	 * @param other the date to clone
 	 */
 	public JDFDate(final JDFDate other)
 	{
@@ -140,8 +140,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * Allocates a <code>JDFDate</code> object and initializes it so that the JDFDate represents a date set by
-	 * <code>strDateTime</code> Format of <code>strDateTime</code>
+	 * Allocates a <code>JDFDate</code> object and initializes it so that the JDFDate represents a date set by <code>strDateTime</code> Format of
+	 * <code>strDateTime</code>
 	 * <p>
 	 * Valid DataTime Strings are:
 	 * <li>"yyyy-mm-ddThh:mm:ss.sss+hh:00"</li>
@@ -150,19 +150,40 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * <li>"yyyy-mm-ddThh:mm:ssZ"</li>
 	 * <p>
 	 * Attention!<br>
-	 * you can enter milliseconds, but <code>getDateTimeISO()</code> still returns the time rounded to full seconds.
-	 * Only <code>long getTimeInMillis()</code> returns the exact time
+	 * you can enter milliseconds, but <code>getDateTimeISO()</code> still returns the time rounded to full seconds. Only <code>long getTimeInMillis()</code>
+	 * returns the exact time
 	 * 
 	 * @param strDateTime formatted date and time
 	 * @throws DataFormatException if strDateTime is not a valid DateTime
 	 * 
-	 *             Attention! you can enter milliseconds, but getDateTimeISO() still returns the time rounded to full
-	 *             seconds only long getTimeInMillis() returns the exact time
+	 * Attention! you can enter milliseconds, but getDateTimeISO() still returns the time rounded to full seconds only long getTimeInMillis() returns the exact
+	 * time
 	 */
 	public JDFDate(final String strDateTime) throws DataFormatException
 	{
 		this();
 		init(strDateTime);
+	}
+
+	/**
+	 * factory style constructor that catches all exceptions and returns null if date is invalid
+	 * @param date the formatted date string
+	 * @return the JDFDate , null if date is not a valid string
+	 */
+	public static JDFDate createDate(final String date)
+	{
+		if (date == null)
+		{
+			return null;
+		}
+		try
+		{
+			return new JDFDate(date);
+		}
+		catch (final DataFormatException e)
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -174,8 +195,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	@Override
 	public String toString()
 	{
-		return "JDFDate[ " + getDateTimeISO() + " m_TimeZoneOffsetInMillis=(" + getTimeZoneOffsetInMillis() + ")  --> "
-				+ " ]";
+		return "JDFDate[ " + getDateTimeISO() + " m_TimeZoneOffsetInMillis=(" + getTimeZoneOffsetInMillis() + ")  --> " + " ]";
 	}
 
 	/**
@@ -186,8 +206,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * <p>
 	 * The values for month, time etc must be valid time values (e.g. 27 hours or 87 sec are invalid)
 	 * <p>
-	 * Use JDFDuration instead. This class will be modified to handle only JDFDate objects Deprecated are strings of the
-	 * following type (express duration):
+	 * Use JDFDuration instead. This class will be modified to handle only JDFDate objects Deprecated are strings of the following type (express duration):
 	 * <li>"P1Y2M3DT10H30M"</li>
 	 * <li>"PM8T12M"</li>
 	 * <li>"PT30M"</li>
@@ -195,10 +214,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @param strDateTime formatted date and time
 	 * @throws DataFormatException thrown if the string is not a reasonable iso date or date time
 	 */
-	private void init(String strDateTime) throws DataFormatException
+	private void init(final String strDateTime) throws DataFormatException
 	{
 		String strDateTimeLocal = strDateTime;
-		
+
 		if (strDateTimeLocal == null || strDateTimeLocal.equals(JDFConstants.EMPTYSTRING))
 		{
 			lTimeInMillis = System.currentTimeMillis();
@@ -209,7 +228,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 
 			if (strDateTimeLocal.indexOf("T") == -1)
+			{
 				strDateTimeLocal += "T00:00:00" + getTimeZoneISO();
+			}
 
 			// check for zulu style time zone
 			final int length = strDateTimeLocal.length();
@@ -252,7 +273,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				{
 					bias = "+00";
 				}
-				
+
 				bias += ":00";
 
 				strDateTimeLocal = strBuffer + bias; // add the alphabetical timezone
@@ -295,13 +316,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			}
 
 			// interpret the string - low level enhances performance quite a bit...
-			byte[] b = strDateTimeLocal.getBytes();
-			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':'
-					|| strDateTimeLocal.length() - decimalLength != 25) // 6 digit tz
+			final byte[] b = strDateTimeLocal.getBytes();
+			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTimeLocal.length() - decimalLength != 25) // 6 digit tz
 			{
 				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
 			}
-			
+
 			final int iYear = getIntFromPos(b, 0, 4);
 			final int iMonth = getIntFromPos(b, 5, 7) - 1; // months are zero based in Java
 			final int iDay = getIntFromPos(b, 8, 10);
@@ -346,11 +366,11 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * parse a substring for integers - this is a bit faster then the original substring.intvalue...
 	 * @param strDateTime
-	 * @param pos1 
-	 * @param pos2 
+	 * @param pos1
+	 * @param pos2
 	 * @return the parsed integer value
 	 */
-	private int getIntFromPos(byte[] strDateTime, int pos1, int pos2)
+	private int getIntFromPos(final byte[] strDateTime, final int pos1, final int pos2)
 	{
 		int ret = 0;
 		int f = 1;
@@ -369,7 +389,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @return String - the date as specified by the pattern
 	 * @throws IllegalArgumentException
 	 */
-	public String getFormattedDateTime(String format)
+	public String getFormattedDateTime(final String format)
 	{
 
 		return getDateFormat(format).format(getCalendar());
@@ -386,14 +406,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * setOffset: set the offset to this time. Note: The time stored in this is not resetted if you want an offset based
-	 * on current time use 'public MyDate(int iOffset)'
+	 * setOffset: set the offset to this time. Note: The time stored in this is not resetted if you want an offset based on current time use 'public MyDate(int
+	 * iOffset)'
 	 * 
 	 * @param iOffset offset time in seconds
 	 * @deprecated use addOffset
 	 */
 	@Deprecated
-	public void setOffset(int iOffset)
+	public void setOffset(final int iOffset)
 	{
 		addOffset(iOffset, 0, 0, 0);
 	}
@@ -406,7 +426,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @param hours hours to add to this
 	 * @param days days to add to this
 	 */
-	public void addOffset(int seconds, int minutes, int hours, int days)
+	public void addOffset(final int seconds, final int minutes, final int hours, final int days)
 	{
 		lTimeInMillis += 1000 * (seconds + 60 * minutes + 3600 * hours + 3600 * 24 * days);
 	}
@@ -478,8 +498,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * Tests if this date is after the specified date.
 	 * 
 	 * @param x the date you wish to know if it is later than this
-	 * @return true if and only if the instant represented by this Date object is strictly later than the instant
-	 *         represented by x; false otherwise.
+	 * @return true if and only if the instant represented by this Date object is strictly later than the instant represented by x; false otherwise.
 	 */
 	public boolean isLater(final JDFDate x)
 	{
@@ -490,8 +509,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * Tests if this date is before the specified date.
 	 * 
 	 * @param x the date you wish to know if it is eariler than this
-	 * @return true if and only if the instant of time represented by this Date object is strictly earlier than the
-	 *         instant represented by x; false otherwise.
+	 * @return true if and only if the instant of time represented by this Date object is strictly earlier than the instant represented by x; false otherwise.
 	 */
 	public boolean isEarlier(final JDFDate x)
 	{
@@ -537,7 +555,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public boolean before(final JDFDate other)
 	{
 		if (other == null)
+		{
 			return true;
+		}
 		return lTimeInMillis < other.lTimeInMillis;
 	}
 
@@ -550,15 +570,29 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public boolean after(final JDFDate other)
 	{
 		if (other == null)
+		{
 			return true;
+		}
 		return lTimeInMillis > other.lTimeInMillis;
 	}
 
+	/**
+	 * why the %&$/ is this called getTime, when it returns a date???
+	 * @return
+	 * @deprecated
+	 */
+	@Deprecated
 	public Date getTime()
 	{
 		return new Date(lTimeInMillis);
 	}
 
+	/**
+	 * why the %&$/ is this called setTime, when it uses a date???
+	 * @param date
+	 * @deprecated
+	 */
+	@Deprecated
 	public void setTime(final Date date)
 	{
 		lTimeInMillis = date.getTime();
@@ -566,21 +600,27 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 	/**
 	 * Compares two JDFDates for equality.<br>
-	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a
-	 * <code>JDFDate</code> object that represents the same point in time, to the millisecond, as this object.
+	 * The result is <code>true</code> if and only if the argument is not <code>null</code> and is a <code>JDFDate</code> object that represents the same point
+	 * in time, to the millisecond, as this object.
 	 * <p>
-	 * Thus, two <code>JDFDate</code> objects are equal if and only if the <code>getTimeInMillis</code> method returns
-	 * the same <code>long</code> value for both.
+	 * Thus, two <code>JDFDate</code> objects are equal if and only if the <code>getTimeInMillis</code> method returns the same <code>long</code> value for
+	 * both.
 	 */
 	@Override
 	public boolean equals(final Object other)
 	{
 		if (this == other)
+		{
 			return true;
+		}
 		if (other == null)
+		{
 			return false;
+		}
 		if (other.getClass() != getClass())
+		{
 			return false;
+		}
 
 		return (this.getTimeInMillis() / 1000 == ((JDFDate) other).getTimeInMillis() / 1000);
 	}
@@ -597,27 +637,28 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a
-	 * value less than 0 if the argument is a Date after this Date; and a value greater than 0 if the argument is a Date
-	 * before this Date.
+	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a value less than 0 if the argument is a
+	 * Date after this Date; and a value greater than 0 if the argument is a Date before this Date.
 	 */
 	public int compareTo(final Object arg0)
 	{
 		if (arg0 instanceof String)
 		{
-			String s = (String) arg0;
+			final String s = (String) arg0;
 			try
 			{
 				return compareTo(new JDFDate(s));
 			}
-			catch (DataFormatException x)
+			catch (final DataFormatException x)
 			{
 				return 1;
 			}
 
 		}
 		if (!(arg0 instanceof JDFDate))
+		{
 			return 1;
+		}
 		return (int) (getTimeInMillis() / 100) - (int) (((JDFDate) arg0).getTimeInMillis() / 100);
 	}
 
@@ -648,11 +689,12 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		return new JDFDate(this);
 	}
 
-	/* (non-Javadoc)
-	}
+	/*
+	 * (non-Javadoc) }
+	 * 
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
-	public int compare(JDFDate d0, JDFDate d1)
+	public int compare(final JDFDate d0, final JDFDate d1)
 	{
 		return ContainerUtil.compare(d0, d1);
 	}
@@ -660,16 +702,16 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * Makes a copy of the<code>JDFDate</code> object
 	 * 
-	 * @param JDFDate d - the date object to make a copy of deprecated - Only usage of JDFDate as a duration object was
-	 *            deprecated. Use JDFDuration instead. This class will be modified to handle only JDFDate objects
+	 * @param JDFDate d - the date object to make a copy of deprecated - Only usage of JDFDate as a duration object was deprecated. Use JDFDuration instead.
+	 * This class will be modified to handle only JDFDate objects
 	 */
 	// public JDFDate(JDFDate d)
 	// {
 	// lTimeInMillis = d.getTimeInMillis();
 	// }
 	/**
-	 * @deprecated Use class JDFDuration instead setDuration sets a duration for this in seconds. This duration is used
-	 *             in multiple classes of the jdf. Heating time for example.
+	 * @deprecated Use class JDFDuration instead setDuration sets a duration for this in seconds. This duration is used in multiple classes of the jdf. Heating
+	 * time for example.
 	 * 
 	 * @param i the duration in seconds. Values below '0' are set to '0'
 	 */
@@ -678,8 +720,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	// m_lDuration = (i >= 0 ? i : 0);
 	// }
 	/**
-	 * * @deprecated Use class JDFDuration instead Format and return the duration set by 'setDuration(int i)' or
-	 * 'setDurationString(String a_aDuration)' as an ISO conform String. For Exmaple: 'P1Y2M3DT10H30M'
+	 * * @deprecated Use class JDFDuration instead Format and return the duration set by 'setDuration(int i)' or 'setDurationString(String a_aDuration)' as an
+	 * ISO conform String. For Exmaple: 'P1Y2M3DT10H30M'
 	 * 
 	 * @return String the duration formated as an ISO 8601 conform String if duration is '0' return value is 'PT00M'
 	 */
@@ -738,8 +780,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	// private int m_lDuration = 0; // duration in seconds
 	/**
-	 * @deprecated Use class JDFDuration instead Set a duration. Durations are not bound to time or date and can be set
-	 *             independently
+	 * @deprecated Use class JDFDuration instead Set a duration. Durations are not bound to time or date and can be set independently
 	 * 
 	 * @param a_aDuration a String of the form 'P1Y2M3DT10H30M'
 	 */
@@ -832,8 +873,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * @deprecated Use class JDFDuration instead
 	 * 
-	 *             isLonger - tests if the duration of this JDFDate is longer then the duration of the specified
-	 *             JDFDate.
+	 * isLonger - tests if the duration of this JDFDate is longer then the duration of the specified JDFDate.
 	 * 
 	 * @param x - the JDFDate object that duration you whant to compare with duration of 'this' JDFDate object
 	 * @return boolean - true if the duration of this JDFDate is longer then the duration of the JDFDate 'x'.
@@ -845,7 +885,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * @deprecated Use class JDFDuration instead
 	 * 
-	 *             isShorter - tests if the duration of this JDFDate is less then the duration of the specified JDFDate.
+	 * isShorter - tests if the duration of this JDFDate is less then the duration of the specified JDFDate.
 	 * 
 	 * @param x - the JDFDate object that duration you whant to compare with duration of 'this' JDFDate object
 	 * @return boolean - true if the duration of this JDFDate is shorter then the duration of the JDFDate 'x'.

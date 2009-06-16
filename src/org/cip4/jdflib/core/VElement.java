@@ -303,11 +303,27 @@ public class VElement extends Vector<KElement>
 	}
 
 	/**
-	 * AppendUnique - append a vector but ignore multiple entries
+	 * AppendUnique - append a vector but ignore multiple entries - equivalence is calculated with .equals
 	 * 
 	 * @param v the vector of elements to append
 	 */
 	public void appendUnique(final VElement v)
+	{
+		if (v == null)
+		{
+			return;
+		}
+
+		addAll(v);
+		unify();
+	}
+
+	/**
+	 * AppendUnique - append a vector but ignore multiple entries - equivalence is calculated with isEqual,
+	 * 
+	 * @param v the vector of elements to append
+	 */
+	public void appendUniqueElement(final VElement v)
 	{
 		if (v == null)
 		{

@@ -1,76 +1,75 @@
 /*--------------------------------------------------------------------------------------------------
-* The CIP4 Software License, Version 1.0
-*
-*
-* Copyright (c) 2001-2008 The International Cooperation for the Integration of
-* Processes in  Prepress, Press and Postpress (CIP4).  All rights
-* reserved.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions
-* are met:
-	*
-	* 1. Redistributions of source code must retain the above copyright
-	*    notice, this list of conditions and the following disclaimer.
-	*
-	* 2. Redistributions in binary form must reproduce the above copyright
-	*    notice, this list of conditions and the following disclaimer in
-	*    the documentation and/or other materials provided with the
-	*    distribution.
-	*
-	* 3. The end-user documentation included with the redistribution,
-	*    if any, must include the following acknowledgment:
-		*       "This product includes software developed by the
-		*        The International Cooperation for the Integration of
-		*        Processes in  Prepress, Press and Postpress (www.cip4.org)"
-*    Alternately, this acknowledgment may appear in the software itself,
-*    if and wherever such third-party acknowledgments normally appear.
-*
-* 4. The names "CIP4" and "The International Cooperation for the Integration of
-*    Processes in  Prepress, Press and Postpress" must
-*    not be used to endorse or promote products derived from this
-*    software without prior written permission. For written
-*    permission, please contact info@cip4.org.
-*
-* 5. Products derived from this software may not be called "CIP4",
-*    nor may "CIP4" appear in their name, without prior written
-*    permission of the CIP4 organization
-*
-* Usage of this software in commercial products is subject to restrictions. For
-* details please consult info@cip4.org.
-*
-* THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
-* THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
-* ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-* SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-* LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
-* USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-* OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-* SUCH DAMAGE.
-* ====================================================================
-*
-* This software consists of voluntary contributions made by many
-* individuals on behalf of the The International Cooperation for the Integration
-* of Processes in Prepress, Press and Postpress and was
-* originally based on software
-* copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
-* copyright (c) 1999-2001, Agfa-Gevaert N.V.
-*
-* For more information on The International Cooperation for the
-* Integration of Processes in  Prepress, Press and Postpress , please see
-* <http://www.cip4.org/>.
-*
-*/
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *
+ */
 
 package org.cip4.jdflib.core;
 
 import java.io.File;
-import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
@@ -101,14 +100,16 @@ public class XMLDocTest extends JDFTestCaseBase
 		protected void waitComplete()
 		{
 			if (mutex == null)
+			{
 				return;
+			}
 			synchronized (mutex)
 			{
 				try
 				{
 					mutex.wait();
 				}
-				catch (InterruptedException x)
+				catch (final InterruptedException x)
 				{
 					// nop
 				}
@@ -131,7 +132,7 @@ public class XMLDocTest extends JDFTestCaseBase
 				runMyThread();
 				System.out.println("Completing " + iLoop);
 			}
-			catch (Exception e)
+			catch (final Exception e)
 			{
 				hook = e;
 			}
@@ -157,8 +158,8 @@ public class XMLDocTest extends JDFTestCaseBase
 		@Override
 		public void runMyThread()
 		{
-			KElement root = d.getRoot();
-			NodeList nl = root.getElementsByTagName("elem" + iLoop % 3);
+			final KElement root = d.getRoot();
+			final NodeList nl = root.getElementsByTagName("elem" + iLoop % 3);
 			for (int i = 0; i < nl.getLength(); i++)
 			{
 				// Node n=
@@ -177,13 +178,15 @@ public class XMLDocTest extends JDFTestCaseBase
 		@Override
 		public void runMyThread()
 		{
-			KElement root = d.getRoot();
-			NodeList nl = root.getChildNodes();
+			final KElement root = d.getRoot();
+			final NodeList nl = root.getChildNodes();
 			for (int i = 0; i < nl.getLength(); i++)
 			{
-				Node n = nl.item(i);
+				final Node n = nl.item(i);
 				if (i % 73 == 0)
+				{
 					root.removeChild(n);
+				}
 			}
 			System.out.println("Completing " + iLoop);
 		}
@@ -192,7 +195,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	/**
 	 * thread class that writes a lot of documents
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
-	 *
+	 * 
 	 */
 	protected class MyManyWriteThread extends MyThread
 	{
@@ -207,22 +210,24 @@ public class XMLDocTest extends JDFTestCaseBase
 		@Override
 		public void runMyThread()
 		{
-			KElement root = d.getRoot();
-			String baseDir = sm_dirTestDataTemp + File.separator + "threadDir";
+			final KElement root = d.getRoot();
+			final String baseDir = sm_dirTestDataTemp + File.separator + "threadDir";
 			new File(baseDir).mkdirs();
-			String base = baseDir + File.separator + "ThreadWrite_" + iLoop + "_";
+			final String base = baseDir + File.separator + "ThreadWrite_" + iLoop + "_";
 			for (int j = 0; j < outerLoop; j++)
 			{
 				if (j % 100 == 0)
+				{
 					System.out.print("\n" + iLoop + " " + j + " " + new JDFDate().getTimeISO() + " - ");
+				}
 				root.appendElement("bar");
 				System.out.print(".");
 				for (int i = 0; i < 100; i++)
 				{
-					String fn = base + i + ".jdf";
-					File file = new File(fn);
+					final String fn = base + i + ".jdf";
+					final File file = new File(fn);
 					file.delete();
-					//assertTrue(file.createNewFile());
+					// assertTrue(file.createNewFile());
 					if (!d.write2File(file, 0, true))
 					{
 						System.out.println("snafu " + iLoop);
@@ -233,10 +238,13 @@ public class XMLDocTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testIsDirty()
 	{
-		XMLDoc doc = new XMLDoc("test", null);
-		KElement e = doc.getRoot();
+		final XMLDoc doc = new XMLDoc("test", null);
+		final KElement e = doc.getRoot();
 		assertFalse(e.isDirty());
 		assertFalse(doc.isDirty(null));
 		doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.Doc);
@@ -264,7 +272,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	public void testSetSchemaLocation() throws Exception
 	{
-		XMLDoc doc = new XMLDoc("test", null);
+		final XMLDoc doc = new XMLDoc("test", null);
 		doc.write2File(sm_dirTestDataTemp + "schematest.xml", 0, false); // create
 		// a
 		// readable
@@ -280,12 +288,12 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testDirtyIDs()
 	{
 		// -i bookintent.jdf -o spawned.jdf -p 4
-		String xmlFile = "bookintent.jdf";
-		String outFile = "spawned.jdf";
-		String strPartID = "4";
+		final String xmlFile = "bookintent.jdf";
+		final String outFile = "spawned.jdf";
+		final String strPartID = "4";
 
-		JDFParser p = new JDFParser();
-		JDFDoc jdfDocIn = p.parseFile(sm_dirTestData + xmlFile);
+		final JDFParser p = new JDFParser();
+		final JDFDoc jdfDocIn = p.parseFile(sm_dirTestData + xmlFile);
 
 		assertTrue(jdfDocIn != null);
 		if (jdfDocIn == null)
@@ -293,10 +301,10 @@ public class XMLDocTest extends JDFTestCaseBase
 			return; // soothe findbugs ;)
 		}
 
-		XMLDocUserData xmlUserData = jdfDocIn.getCreateXMLDocUserData();
+		final XMLDocUserData xmlUserData = jdfDocIn.getCreateXMLDocUserData();
 		xmlUserData.setDirtyPolicy(XMLDocUserData.EnumDirtyPolicy.ID);
 
-		JDFNode rootIn = (JDFNode) jdfDocIn.getRoot();
+		final JDFNode rootIn = (JDFNode) jdfDocIn.getRoot();
 
 		JDFNode nodeToSpawn;
 		if (strPartID.equals(""))
@@ -314,34 +322,34 @@ public class XMLDocTest extends JDFTestCaseBase
 		}
 		else
 		{
-			Vector vRWResources = new Vector();
+			final VString vRWResources = new VString();
 			vRWResources.addElement("Component");
 			vRWResources.addElement("RunList");
 
-			VJDFAttributeMap vSpawnParts = new VJDFAttributeMap();
+			final VJDFAttributeMap vSpawnParts = new VJDFAttributeMap();
 			final JDFSpawn spawn = new JDFSpawn(nodeToSpawn);
 
-			JDFNode node = spawn.spawn(xmlFile, outFile, vRWResources, vSpawnParts, false, false, false, false);
+			final JDFNode node = spawn.spawn(xmlFile, outFile, vRWResources, vSpawnParts, false, false, false, false);
 
 			// neu gespawntes File rausschreiben
-			JDFNode rootOut = node;
-			XMLDoc docOut = rootOut.getOwnerDocument_KElement();
+			final JDFNode rootOut = node;
+			final XMLDoc docOut = rootOut.getOwnerDocument_KElement();
 			docOut.write2File(sm_dirTestDataTemp + outFile, 0, true);
 
 			// verändertes Ausgangsfile rausschreiben
-			String strOutXMLFile = "_" + xmlFile;
+			final String strOutXMLFile = "_" + xmlFile;
 			rootIn.eraseEmptyNodes(true);
 			jdfDocIn.write2File(sm_dirTestDataTemp + strOutXMLFile, 0, true);
 			assertTrue("SpawnJDF ok", true);
 
 			// test, if all changed nodes are in our list
 
-			VString vstrDirtyIDs = jdfDocIn.getDirtyIDs();
+			final VString vstrDirtyIDs = jdfDocIn.getDirtyIDs();
 			assertEquals(vstrDirtyIDs.size(), 5);
 			assertTrue(vstrDirtyIDs.contains("n0014")); // audit pool was added
 			assertTrue(vstrDirtyIDs.contains("n0016")); // status changed:
 			// waiting --> spawned
-			assertTrue(vstrDirtyIDs.contains("r0017")); //SpawnStatus="SpawnedRW"
+			assertTrue(vstrDirtyIDs.contains("r0017")); // SpawnStatus="SpawnedRW"
 			// added
 			assertTrue(vstrDirtyIDs.contains("r0018")); // SizeIntent added
 		}
@@ -349,8 +357,8 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	public void testCreateElement() throws Exception
 	{
-		XMLDoc d = new XMLDoc("TEST", null);
-		KElement e = (KElement) d.createElement("foo:bar");
+		final XMLDoc d = new XMLDoc("TEST", null);
+		final KElement e = (KElement) d.createElement("foo:bar");
 		// e.appendElement("bar:foo");
 		e.setAttribute("foo:at", "1");
 		e.appendElement("bar2");
@@ -361,51 +369,51 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	public void testCreateElementNoNS()
 	{
-		XMLDoc d = new XMLDoc("TEST", null);
+		final XMLDoc d = new XMLDoc("TEST", null);
 		d.getMemberDocument().setIgnoreNSDefault(true);
-		KElement e = (KElement) d.createElement("bar");
+		final KElement e = (KElement) d.createElement("bar");
 		assertNull(e.getNamespaceURI());
 
 	}
 
 	public void testCreateElementThreads()
 	{
-		XMLDoc d1 = new XMLDoc("JDF", null);
+		final XMLDoc d1 = new XMLDoc("JDF", null);
 		assertEquals("XMLDoc only creates KElement", d1.getRoot().getClass(), KElement.class);
-		JDFDoc jd = new JDFDoc("JDF");
+		final JDFDoc jd = new JDFDoc("JDF");
 		assertEquals("JDFDoc creates typesafe elements", jd.getRoot().getClass(), JDFNode.class);
-		XMLDoc d2 = new XMLDoc("JDF", null);
+		final XMLDoc d2 = new XMLDoc("JDF", null);
 		assertEquals("XMLDoc only creates KElement - Hasmap must not be applied", d2.getRoot().getClass(), KElement.class);
 	}
 
 	public void testParseNoNS()
 	{
-		XMLDoc d = new XMLDoc("TEST", null);
+		final XMLDoc d = new XMLDoc("TEST", null);
 		final String fn = sm_dirTestDataTemp + "testParseNoNS.xml";
 		d.write2File(fn, 2, true);
-		JDFParser p = new JDFParser();
-		JDFDoc d2 = p.parseFile(fn);
-		KElement root = d2.getRoot();
+		final JDFParser p = new JDFParser();
+		final JDFDoc d2 = p.parseFile(fn);
+		final KElement root = d2.getRoot();
 		// assertNull(root.getNamespaceURI());
 		assertFalse(d2.toString().indexOf("xmlns=\"\"") >= 0);
 		assertFalse(d.toString().indexOf("xmlns=\"\"") >= 0);
 		assertFalse(root.toString().indexOf("xmlns=\"\"") >= 0);
-		KElement foo = root.appendElement("foofoo");
+		final KElement foo = root.appendElement("foofoo");
 		assertNull(foo.getNamespaceURI());
 
 	}
 
 	public void testCreateAttribute()
 	{
-		XMLDoc d = new XMLDoc("TEST", null);
-		Attr a = d.createAttribute("dom1");
+		final XMLDoc d = new XMLDoc("TEST", null);
+		final Attr a = d.createAttribute("dom1");
 		assertNotNull("a", a);
 		boolean bcatch = false;
 		try
 		{
 			d.createAttribute("xmlns:foo");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			bcatch = true;
 		}
@@ -415,7 +423,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			d.createAttribute("foo:dom1");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			bcatch = true;
 		}
@@ -427,8 +435,8 @@ public class XMLDocTest extends JDFTestCaseBase
 	{
 		XMLDoc.registerCustomClass("JDFTestType", "org.cip4.jdflib.core.JDFTestType");
 		XMLDoc.registerCustomClass("fnarf:JDFTestType", "org.cip4.jdflib.core.JDFTestType");
-		JDFDoc d = new JDFDoc("JDF");
-		JDFNode n = d.getJDFRoot();
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
 
 		JDFTestType tt = (JDFTestType) n.appendElement("JDFTestType", null);
 		tt.setAttribute("fnarf", 3, null);
@@ -496,13 +504,15 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testCloneMem()
 	{
 		System.gc();
-		XMLDoc doc = new XMLDoc("foobar", null);
-		long l = doc.getDocMemoryUsed();
+		final XMLDoc doc = new XMLDoc("foobar", null);
+		final long l = doc.getDocMemoryUsed();
 		System.out.println(l);
 		for (int i = 0; i < 1000000; i++)
+		{
 			doc.clone();
+		}
 		System.gc();
-		long l2 = doc.getDocMemoryUsed();
+		final long l2 = doc.getDocMemoryUsed();
 		System.out.println(l2);
 		assertTrue(l2 - l < 100000);
 	}
@@ -513,15 +523,15 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testClone()
 	{
-		XMLDoc doc = new XMLDoc("foobar", null);
-		XMLDoc doc2 = (XMLDoc) doc.clone();
+		final XMLDoc doc = new XMLDoc("foobar", null);
+		final XMLDoc doc2 = (XMLDoc) doc.clone();
 		assertNotNull(doc.getDocumentElement());
 		assertNotNull(doc2.getDocumentElement());
 		assertNotSame(doc.getDocumentElement(), doc2.getDocumentElement());
-		KElement e = doc.getRoot();
+		final KElement e = doc.getRoot();
 		e.setAttribute("foo", "bar");
 		assertTrue(e.hasAttribute("foo"));
-		KElement e2 = doc2.getRoot();
+		final KElement e2 = doc2.getRoot();
 		assertFalse(e2.hasAttribute("foo"));
 		assertEquals(doc.getDoctype(), doc2.getDoctype());
 		assertEquals(e2.getOwnerDocument_KElement(), doc2);
@@ -530,9 +540,9 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	public void testWriteToFile()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
+		final XMLDoc d = new XMLDoc("doc", null);
 		String out = sm_dirTestDataTemp + File.separator + "dir" + File.separator + "dir2";
-		File dir = new File(out);
+		final File dir = new File(out);
 		if (dir.isDirectory())
 		{
 			dir.delete();
@@ -545,7 +555,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		out += File.separator + "d.xml";
 
 		assertTrue(d.write2File(out, 2, true));
-		File f = new File(out);
+		final File f = new File(out);
 		assertTrue(f.canRead());
 	}
 
@@ -554,8 +564,8 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testWriteToStringIndent()
 	{
-		XMLDoc d = new XMLDoc("a", null);
-		KElement e = d.getRoot();
+		final XMLDoc d = new XMLDoc("a", null);
+		final KElement e = d.getRoot();
 		e.appendElement("b");
 		String s = d.write2String(2);
 		assertTrue(s.indexOf("\n ") > 0);
@@ -568,11 +578,11 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testWriteToStringEscape()
 	{
-		XMLDoc d = new XMLDoc("Example", null);
-		KElement e = d.getRoot();
+		final XMLDoc d = new XMLDoc("Example", null);
+		final KElement e = d.getRoot();
 		e.setAttribute("URL", "file://myHost/a/c%20äöü%25.pdf");
 		String s = d.write2String(2);
-		byte[] b = StringUtil.setUTF8String(s);
+		final byte[] b = StringUtil.setUTF8String(s);
 		s = new String(b);
 		assertTrue(s.indexOf("ä") < 0);
 	}
@@ -582,21 +592,21 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testWriteToStreamIndent() throws Exception
 	{
-		XMLDoc d = new XMLDoc("a", null);
-		KElement e = d.getRoot();
-		KElement b = e.appendElement("b");
+		final XMLDoc d = new XMLDoc("a", null);
+		final KElement e = d.getRoot();
+		final KElement b = e.appendElement("b");
 		ByteArrayIOStream bos = new ByteArrayIOStream();
 		d.write2Stream(bos, 2, false);
 		String s = bos.toString();
 		assertTrue(s.indexOf("\n ") > 0);
-		String text = "aa\nbb\n";
+		final String text = "aa\nbb\n";
 		b.setText(text);
 		bos = new ByteArrayIOStream();
 		d.write2Stream(bos, 2, false);
 		s = bos.toString();
 		assertTrue(s.indexOf(text) > 0);
-		JDFParser p = new JDFParser();
-		//		JDFDoc dd = 
+		final JDFParser p = new JDFParser();
+		// JDFDoc dd =
 		p.parseStream(bos.getInputStream());
 		bos = new ByteArrayIOStream();
 		d.write2Stream(bos, 2, false);
@@ -606,19 +616,19 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	public void testWriteToFileThreadRead()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
+		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = sm_dirTestDataTemp + File.separator + "Thread.jdf";
 
-		KElement root = d.getRoot();
+		final KElement root = d.getRoot();
 		for (int i = 0; i < 1000; i++)
 		{
 			root.appendElement("elem2").appendElement("elem3").setAttribute("foo", "bar" + i);
 		}
 
-		MyReadThread[] mrs = new MyReadThread[100];
+		final MyReadThread[] mrs = new MyReadThread[100];
 		for (int i = 0; i < 100; i++)
 		{
-			MyReadThread mr = new MyReadThread();
+			final MyReadThread mr = new MyReadThread();
 			mr.d = d;
 			mr.iLoop = i;
 			mrs[i] = mr;
@@ -629,11 +639,15 @@ public class XMLDocTest extends JDFTestCaseBase
 		assertTrue(d.write2File(out, 2, true));
 		System.out.println("Writing done");
 
-		File f = new File(out);
+		final File f = new File(out);
 		assertTrue(f.canRead());
 		for (int i = 0; i < 100; i++)
+		{
 			if (mrs[i].hook != null)
+			{
 				fail("exception: " + mrs[i].hook);
+			}
+		}
 
 	}
 
@@ -642,18 +656,18 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testWriteToFileThreadWrite()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
+		final XMLDoc d = new XMLDoc("doc", null);
 		final String out = sm_dirTestDataTemp + File.separator + "Thread.jdf";
 
-		KElement root = d.getRoot();
+		final KElement root = d.getRoot();
 		for (int i = 0; i < 1000; i++)
 		{
 			root.appendElement("elem0").appendElement("elem1").appendElement("elem2").setAttribute("foo", "bar" + i);
 		}
-		MyWriteThread[] mrs = new MyWriteThread[10];
+		final MyWriteThread[] mrs = new MyWriteThread[10];
 		for (int i = 0; i < 10; i++)
 		{
-			MyWriteThread mr = new MyWriteThread();
+			final MyWriteThread mr = new MyWriteThread();
 			mr.d = d;
 			mr.iLoop = i;
 			mrs[i] = mr;
@@ -664,29 +678,30 @@ public class XMLDocTest extends JDFTestCaseBase
 		assertTrue(d.write2File(out, 2, true));
 		System.out.println("Writing done");
 		for (int i = 0; i < 10; i++)
+		{
 			if (mrs[i].hook != null)
 			{
 				// fail("exception: "+h.e);
 				System.out.println("******** Xerces known defect: not threadsafe: " + mrs[i].hook);
 			}
+		}
 
-		File f = new File(out);
+		final File f = new File(out);
 		assertTrue(f.canRead());
 	}
 
 	/**
-	 *  test many many writes in parallel threads
-	 *  note that the documents themselves are independent
+	 * test many many writes in parallel threads note that the documents themselves are independent
 	 */
 	public void testWriteToFileThreadWriteMany()
 	{
-		MyManyWriteThread[] threads = new MyManyWriteThread[10];
+		final MyManyWriteThread[] threads = new MyManyWriteThread[10];
 		for (int i = 0; i < 10; i++)
 		{
-			MyManyWriteThread mr = new MyManyWriteThread();
+			final MyManyWriteThread mr = new MyManyWriteThread();
 			mr.d = new XMLDoc("doc", null);
 			mr.iLoop = i;
-			mr.outerLoop = 1;//10000000; // make high number for over night tests
+			mr.outerLoop = 1;// 10000000; // make high number for over night tests
 			threads[i] = mr;
 			new Thread(mr).start();
 		}
@@ -708,9 +723,9 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testWriteToFileFile()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
+		final XMLDoc d = new XMLDoc("doc", null);
 		String out = sm_dirTestDataTemp + File.separator + "dir" + File.separator + "dir2";
-		File dir = new File(out);
+		final File dir = new File(out);
 		if (dir.isDirectory())
 		{
 			dir.delete();
@@ -722,7 +737,7 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		out += File.separator + "d%25.xml";
 
-		File f = new File(out);
+		final File f = new File(out);
 		f.delete();
 		assertTrue(d.write2File(out, 2, true));
 		assertTrue(f.canRead());
@@ -733,9 +748,9 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testWriteToFileURL()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
+		final XMLDoc d = new XMLDoc("doc", null);
 		String out = sm_dirTestDataTemp + File.separator + "dir" + File.separator + "dir2";
-		File dir = new File(out);
+		final File dir = new File(out);
 		if (dir.isDirectory())
 		{
 			dir.delete();
@@ -744,10 +759,10 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			dir.mkdirs();
 		}
-		String out2 = out + File.separator + "d .xml";
+		final String out2 = out + File.separator + "d .xml";
 		out += File.separator + "d%20.xml";
 
-		File f = new File(out2);
+		final File f = new File(out2);
 		f.delete();
 		assertNotNull(d.write2URL("File:" + out, null));
 		assertTrue(f.canRead());
@@ -756,15 +771,14 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * tests all kinds of special characters in file names - including %, € and
-	 * umlauts
+	 * tests all kinds of special characters in file names - including %, € and umlauts
 	 * 
 	 */
 	public void testUmlaut()
 	{
-		XMLDoc d = new XMLDoc("doc", null);
-		String out = sm_dirTestDataTemp + "dir" + File.separator + "dir%20 Grün€";
-		File dir = new File(out);
+		final XMLDoc d = new XMLDoc("doc", null);
+		final String out = sm_dirTestDataTemp + "dir" + File.separator + "dir%20 Grün€";
+		final File dir = new File(out);
 		if (dir.isDirectory())
 		{
 			dir.delete();
@@ -773,15 +787,15 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			dir.mkdirs();
 		}
-		String out2 = out + File.separator + "7€ .xml";
+		final String out2 = out + File.separator + "7€ .xml";
 
-		File f = new File(out2);
+		final File f = new File(out2);
 		f.delete();
 		assertTrue(d.write2File(out2, 0, true));
 		assertTrue(f.canRead());
 
-		JDFParser p = new JDFParser();
-		JDFDoc d2 = p.parseFile(out2);
+		final JDFParser p = new JDFParser();
+		final JDFDoc d2 = p.parseFile(out2);
 		assertNotNull(d2);
 		assertEquals(d2.getRoot().getLocalName(), "doc");
 
@@ -803,9 +817,9 @@ public class XMLDocTest extends JDFTestCaseBase
 		s = d.write2String(0);
 		assertTrue("mem", memlocal + 10000 > s.length());
 		d = new XMLDoc("foo", null);
-		KElement e = d.getRoot();
-		KElement e2 = e.appendElement("e2");
-		KElement e3 = e2.appendElement("e3");
+		final KElement e = d.getRoot();
+		final KElement e2 = e.appendElement("e2");
+		final KElement e3 = e2.appendElement("e3");
 		for (int i = 33; i < 999; i++)
 		{
 			e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
@@ -826,28 +840,32 @@ public class XMLDocTest extends JDFTestCaseBase
 	{
 		for (int ii = 0; ii < 4; ii++)
 		{
-			XMLDoc d = ii % 2 == 0 ? new XMLDoc("foo", null) : new JDFDoc("JDF");
-			KElement e = d.getRoot();
-			long l = System.nanoTime();
+			final XMLDoc d = ii % 2 == 0 ? new XMLDoc("foo", null) : new JDFDoc("JDF");
+			final KElement e = d.getRoot();
+			final long l = System.nanoTime();
 			for (int j = 0; j < 2000; j++)
 			{
-				KElement e2 = e.appendElement("AuditPool");
-				KElement e3 = e2.appendElement("Created");
+				final KElement e2 = e.appendElement("AuditPool");
+				final KElement e3 = e2.appendElement("Created");
 				for (int i = 33; i < 199; i++)
 				{
 					if (i < 2)
+					{
 						e3.setAttribute("k" + String.valueOf(i), "value" + String.valueOf(i));
+					}
 					else
+					{
 						e3.setAttributeRaw("k" + String.valueOf(i), "value" + String.valueOf(i));
+					}
 				}
 			}
-			long l2 = System.nanoTime();
+			final long l2 = System.nanoTime();
 
 			System.out.println("xmldoc create: " + ii + " " + (l2 - l) / 1000000);
 			final String fil = sm_dirTestDataTemp + "big" + ii + "writ.jdf";
 			d.write2File(fil, 2, false);
-			File f = new File(fil);
-			long l3 = System.nanoTime();
+			final File f = new File(fil);
+			final long l3 = System.nanoTime();
 			System.out.println("xmldoc write: " + ii + " " + (l3 - l2) / 1000000 + " " + f.length());
 			System.out.println("xmldoc total: " + ii + " " + (l3 - l) / 1000000 + "\n");
 		}
@@ -859,10 +877,10 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testEscapeStrings()
 	{
-		XMLDoc d = new XMLDoc("foo", "www.foo.com");
-		KElement e = d.getRoot();
+		final XMLDoc d = new XMLDoc("foo", "www.foo.com");
+		final KElement e = d.getRoot();
 		e.setAttribute("bar", "><&'\"");
-		String s = d.write2String(0);
+		final String s = d.write2String(0);
 		assertTrue(s.indexOf("&lt;") > 0);
 		assertTrue(s.indexOf("&amp;") > 0);
 		assertTrue(s.indexOf("&quot;") > 0);

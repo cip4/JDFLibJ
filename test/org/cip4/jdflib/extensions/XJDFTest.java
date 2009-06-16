@@ -15,10 +15,15 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFColorPool;
@@ -79,6 +84,28 @@ public class XJDFTest extends JDFTestCaseBase
 		xm = (JDFExposedMedia) rl.getTarget();
 		assertEquals(xm.getProductID(), "P1");
 		assertEquals(xm.getPlateType(), EnumPlateType.Dummy);
+	}
+
+	/**
+	 */
+	public void testJMFToXJDF()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, org.cip4.jdflib.jmf.JDFMessage.EnumType.Resource);
+		final JDFResourceInfo ri = jmf.getCreateSignal(0).appendResourceInfo();
+		ri.setResourceName("ExposedMedia");
+		final JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource("ExposedMedia");
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SignatureName", "Sig1");
+		partMap.put("SheetName", "S1");
+		partMap.put("Side", "Front");
+		partMap.put("Separation", "Black");
+		ri.appendAmountPool().appendPartAmount(partMap).setActualAmount(1, null);
+		final JDFExposedMedia xmPart = (JDFExposedMedia) xm.getCreatePartition(partMap, new VString("SignatureName SheetName Side Separation", null));
+		xmPart.appendMedia();
+		e = new XJDF20().makeNewJMF(jmf);
+		final JDFPart pNew = (JDFPart) e.getXPathElement("Signal/ResourceInfo/ResourceSet/Resource/Part");
+		assertEquals(pNew.getPartMap(), partMap);
+
 	}
 
 	/**
@@ -250,6 +277,28 @@ public class XJDFTest extends JDFTestCaseBase
 		testColorPool();
 		final JDFDoc d2 = new XJDFToJDFConverter(null).convert(e);
 		assertNotNull(d2);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testRefFirst() throws Exception
+	{
+		final JDFNode n0 = n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		n = n0.addJDFNode(EnumType.ImageSetting);
+
+		final JDFResource r = n.addResource("ExposedMedia", null, EnumUsage.Output, null, n0, null, null);
+		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		final JDFResource r3 = r2.addPartition(EnumPartIDKey.SheetName, "s1");
+		r3.setProductID("P1");
+		final JDFExposedMedia xm0 = (JDFExposedMedia) r3;
+		xm0.setPlateType(EnumPlateType.Dummy);
+		final JDFResource m = n.addResource("Media", EnumUsage.Input);
+		r.refElement(m);
+		final KElement out = new XJDF20().makeNewJDF(n, null);
+		assertEquals("Input", out.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@Usage", null), "Input");
+
 	}
 
 }
