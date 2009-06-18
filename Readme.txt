@@ -1,6 +1,480 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.4BLD550 (18.06.2009)
+
+Revision: 3966
+Author: mucha
+Date: 15:13:59, Donnerstag, 18. Juni 2009
+Message:
+cosmetics to reduce warnings
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/FixVersion.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDFSchemaWalker.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/xjdfwalker/XJDFToJDFConverter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/JMFGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISFinGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFLayoutPreparationParams.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/CheckJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFParserTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFSchemaTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/extensions/XJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JMFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/pool/JDFAmountPoolTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFPageListTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FastFiFoTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFDateTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+
+Revision: 3965
+Author: prosi
+Date: 14:14:05, Donnerstag, 18. Juni 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+
+Revision: 3964
+Author: mucha
+Date: 14:11:48, Donnerstag, 18. Juni 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/version.properties
+
+Revision: 3962
+Author: mucha
+Date: 14:05:07, Donnerstag, 18. Juni 2009
+Message:
+cosmetics
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/GeneratorUtil.java
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/JavaCoreStringUtil.java
+
+Revision: 3961
+Author: prosi
+Date: 13:41:16, Donnerstag, 18. Juni 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFAudit.java
+
+Revision: 3960
+Author: prosi
+Date: 13:34:39, Donnerstag, 18. Juni 2009
+Message:
+speed up of unify
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/VElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/VString.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/VJDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ContainerUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/datatypes/VJDFAttributeMapTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FileUtilTest.java
+
+Revision: 3954
+Author: prosi
+Date: 19:15:01, Dienstag, 16. Juni 2009
+Message:
+Cleanup + bambi enhancements
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/VElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/VJDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/AttributeReplacer.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/BaseWalker.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/BaseWalkerFactory.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/FixVersion.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFPipeParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFSignal.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/BiHashMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFDate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/validate/JDFValidator.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/AllJDFLibTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFSchemaTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/elementwalker/AttributeReplacerTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/extensions/XJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFMessageTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFPipeParamsTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFDateTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+
+Revision: 3949
+Author: prosi
+Date: 13:32:17, Montag, 8. Juni 2009
+Message:
+added scschemawalker prototype
+----
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDFSchemaWalker.java
+
+Revision: 3948
+Author: prosi
+Date: 13:30:32, Montag, 8. Juni 2009
+Message:
+added FixVersion class
+----
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/FixVersion.java
+
+Revision: 3946
+Author: prosi
+Date: 11:48:31, Montag, 8. Juni 2009
+Message:
+refactor fixversion to its own class
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFComment.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFCustomerInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFNodeInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFParser.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJMF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFAncestor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAuditPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourcePool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFDevice.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFTool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFAbstractState.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFApprovalSuccess.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFComponent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFEmployee.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFLayout.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/span/JDFSpanBase.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/AllJDFLibTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/FixVersionTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFParserTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFSchemaTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFTestType.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FileUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+
+Revision: 3944
+Author: prosi
+Date: 20:04:50, Donnerstag, 4. Juni 2009
+Message:
+added LayoutPrep to Stripping converter
+some more JDF 1.4 conversion enhancements
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/BaseElementWalker.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/ElementWalker.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/IWalker.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFLayoutPreparationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFEmployee.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/AllJDFLibTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/extensions/XJDFTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFLayoutPreparationParamsTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/process/JDFEmployeeTest.java
+
+Revision: 3941
+Author: prosi
+Date: 17:29:38, Mittwoch, 3. Juni 2009
+Message:
+added fast fifo utility
+cleanup for bambi
+fixes for JDF 1.4
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAssembly.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAssemblySection.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSubscriptionInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFDeviceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueEntry.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAuditPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFDevice.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFComponent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFLayout.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/EnumUtil.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/FastFiFo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MyArgs.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MyInteger.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/AllJDFLibTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFAuditTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFDeviceInfoTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFMessageTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JMFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/pool/JDFAmountPoolTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FastFiFoTest.java
+
+Revision: 3934
+Author: prosi
+Date: 17:23:14, Freitag, 15. Mai 2009
+Message:
+Bambi updates; improvements to the unlinkwalker
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFIntegerRange.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFNumberRange.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/UnLinkFinder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueSubmissionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFRequestQueueEntryParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAuditPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFContentObject.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFConvertingConfig.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFRepeatDesc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ContainerUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/VectorMap.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/JDFTestCaseBase.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/datatypes/JDFIntegerRangeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/elementwalker/UnlinkFinderTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/BaseGoldenTicketTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/GoldenTicketTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/MISPreGoldenTicketTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/ContainerUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/VectorMapTest.java
+
+Revision: 3928
+Author: prosi
+Date: 19:29:45, Donnerstag, 7. Mai 2009
+Message:
+Bambi updates ; fix for collapse
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/TestJDF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFIntegerList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJobPhase.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/BiHashMap.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/datatypes/JDFIntegerListTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFJobPhaseTest.java
+
+Revision: 3919
+Author: prosi
+Date: 10:29:49, Dienstag, 5. Mai 2009
+Message:
+src cleanup
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+
+Revision: 3916
+Author: prosi
+Date: 10:06:42, Dienstag, 5. Mai 2009
+Message:
+fix KElement comparator to set null as smallest
+output some info in DumpJDFServlet get()
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ContainerUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/ContainerUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+
+Revision: 3914
+Author: prosi
+Date: 13:31:17, Mittwoch, 29. April 2009
+Message:
+sort queues by attributes
+----
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+
+Revision: 3912
+Author: prosi
+Date: 12:50:30, Mittwoch, 29. April 2009
+Message:
+new queuesorter by attribute
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/xjdfwalker/XJDFToJDFConverter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueEntry.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+
+Revision: 3910
+Author: prosi
+Date: 18:10:44, Dienstag, 28. April 2009
+Message:
+fix npe in AmountMap constructor + cosmetics
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/xjdfwalker/XJDFToJDFConverter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/DumpDir.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/extensions/XJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/pool/JDFAmountPoolTest.java
+
+Revision: 3909
+Author: prosi
+Date: 15:27:33, Mittwoch, 22. April 2009
+Message:
+clean up unit tests
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFRunList.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/pool/JDFAmountPoolTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/process/JDFRunListTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+
+Revision: 3908
+Author: prosi
+Date: 11:20:51, Mittwoch, 22. April 2009
+Message:
+JDFLib updates from Montreal
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFConstants.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFCMYKColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/xjdfwalker/XJDFToJDFConverter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/IDPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISFinGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/prepress/JDFTrappingOrder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/CheckJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/MISFinTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/extensions/XJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/goldenticket/IDPGoldenTicketTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StatusCounterTest.java
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.4BLD550) && !lbtype(JDFLIBJ_2.1.4BLD544)}" -print
+.\auto\JDFAutoAssembly.java@@\main\34
+.\auto\JDFAutoAssemblySection.java@@\main\34
+.\auto\JDFAutoSubscriptionInfo.java@@\main\2
+.\core\JDFAudit.java@@\main\97
+.\core\JDFComment.java@@\main\32
+.\core\JDFConstants.java@@\main\75
+.\core\JDFCustomerInfo.java@@\main\44
+.\core\JDFElement.java@@\main\259
+.\core\JDFNodeInfo.java@@\main\62
+.\core\JDFParser.java@@\main\52
+.\core\JDFResourceLink.java@@\main\153
+.\core\KElement.java@@\main\276
+.\core\VElement.java@@\main\37
+.\core\VString.java@@\main\45
+.\core\XMLDoc.java@@\main\101
+.\datatypes\JDFAttributeMap.java@@\main\43
+.\datatypes\JDFCMYKColor.java@@\main\12
+.\datatypes\JDFIntegerList.java@@\main\21
+.\datatypes\JDFIntegerRange.java@@\main\35
+.\datatypes\JDFNumberRange.java@@\main\27
+.\datatypes\VJDFAttributeMap.java@@\main\38
+.\elementwalker@@\main\4
+.\elementwalker\AttributeReplacer.java@@\main\2
+.\elementwalker\BaseElementWalker.java@@\main\3
+.\elementwalker\BaseWalker.java@@\main\5
+.\elementwalker\BaseWalkerFactory.java@@\main\3
+.\elementwalker\ElementWalker.java@@\main\3
+.\elementwalker\FixVersion.java@@\main\1
+.\elementwalker\IWalker.java@@\main\4
+.\elementwalker\UnLinkFinder.java@@\main\5
+.\extensions@@\main\2
+.\extensions\XJDF20.java@@\main\5
+.\extensions\XJDFSchemaWalker.java@@\main\1
+.\extensions\xjdfwalker\XJDFToJDFConverter.java@@\main\3
+.\goldenticket\BaseGoldenTicket.java@@\main\19
+.\goldenticket\IDPGoldenTicket.java@@\main\4
+.\goldenticket\JMFGoldenTicket.java@@\main\5
+.\goldenticket\MISFinGoldenTicket.java@@\main\5
+.\goldenticket\MISGoldenTicket.java@@\main\16
+.\jmf\JDFDeviceInfo.java@@\main\33
+.\jmf\JDFJMF.java@@\main\75
+.\jmf\JDFJobPhase.java@@\main\29
+.\jmf\JDFMessage.java@@\main\82
+.\jmf\JDFPipeParams.java@@\main\25
+.\jmf\JDFQueueEntry.java@@\main\35
+.\jmf\JDFQueueSubmissionParams.java@@\main\23
+.\jmf\JDFRequestQueueEntryParams.java@@\main\16
+.\jmf\JDFResourceCmdParams.java@@\main\33
+.\jmf\JDFResourceInfo.java@@\main\35
+.\jmf\JDFSignal.java@@\main\26
+.\node\JDFAncestor.java@@\main\36
+.\node\JDFNode.java@@\main\284
+.\pool\JDFAmountPool.java@@\main\37
+.\pool\JDFAuditPool.java@@\main\112
+.\pool\JDFResourcePool.java@@\main\74
+.\resource\devicecapability\JDFAbstractState.java@@\main\59
+.\resource\JDFDevice.java@@\main\13
+.\resource\JDFLayoutPreparationParams.java@@\main\10
+.\resource\JDFResource.java@@\main\242
+.\resource\JDFTool.java@@\main\15
+.\resource\process\JDFApprovalSuccess.java@@\main\23
+.\resource\process\JDFColor.java@@\main\31
+.\resource\process\JDFComponent.java@@\main\24
+.\resource\process\JDFContentObject.java@@\main\26
+.\resource\process\JDFConvertingConfig.java@@\main\2
+.\resource\process\JDFEmployee.java@@\main\21
+.\resource\process\JDFLayout.java@@\main\25
+.\resource\process\JDFRepeatDesc.java@@\main\2
+.\resource\process\JDFRunList.java@@\main\59
+.\resource\process\prepress\JDFTrappingOrder.java@@\main\20
+.\span\JDFSpanBase.java@@\main\39
+.\util@@\main\29
+.\util\BiHashMap.java@@\main\3
+.\util\ContainerUtil.java@@\main\12
+.\util\DumpDir.java@@\main\9
+.\util\EnumUtil.java@@\main\5
+.\util\FastFiFo.java@@\main\1
+.\util\JDFDate.java@@\main\55
+.\util\JDFMerge.java@@\main\34
+.\util\JDFSpawn.java@@\main\36
+.\util\MyArgs.java@@\main\32
+.\util\MyInteger.java@@\main\3
+.\util\StatusCounter.java@@\main\24
+.\util\StringUtil.java@@\main\80
+.\util\UrlUtil.java@@\main\26
+.\util\VectorMap.java@@\main\7
+.\validate\JDFValidator.java@@\main\7
+
+___________________________________________________________
+
+
+Label JDFLIBJ_2.1.4BLD544 (24.03.2009)
+
+fix for mergeSpawnIDs(...)
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.4BLD544) && !lbtype(JDFLIBJ_2.1.4BLD543)}" -print
+.\util\JDFMerge.java@@\main\33
+__________________________________________________________
+
+
 Label JDFLIBJ_2.1.4BLD543 (17.02.2009)
 
 added functionality for fast building of dom trees without namespace validation
