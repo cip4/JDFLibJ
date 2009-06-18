@@ -64,13 +64,13 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.HashUtil;
 
 /**
@@ -636,22 +636,21 @@ public class VJDFAttributeMap
 	 */
 	public void unify()
 	{
-		final HashSet set = new HashSet();
-		int size = size();
-		for (int i = 0; i < size; i++)
-		{
-			final JDFAttributeMap e = this.elementAt(i);
-			if (set.contains(e))
-			{
-				this.removeElementAt(i);
-				i--;
-				size--;
-			}
-			else
-			{
-				set.add(e);
-			}
-		}
+		ContainerUtil.unify(m_vec);
+		// final int size = m_vec.size();
+		// final LinkedHashSet<JDFAttributeMap> lhsIn = new LinkedHashSet<JDFAttributeMap>(size);
+		//
+		// for (int i = 0; i < size; i++)
+		// {
+		// final JDFAttributeMap amMap = m_vec.elementAt(i);
+		// if (!lhsIn.contains(amMap))
+		// {
+		// lhsIn.add(amMap);
+		// }
+		// }
+		//
+		// m_vec.clear();
+		// m_vec.addAll(lhsIn);
 	}
 
 	/**

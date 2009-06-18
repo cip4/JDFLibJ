@@ -79,12 +79,12 @@
 package org.cip4.jdflib.core;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -611,7 +611,7 @@ public class VElement extends Vector<KElement>
 	/**
 	 * Resource
 	 * 
-	 * @param int i
+	 * @param i
 	 * 
 	 * @return JDFResource
 	 * @deprecated used only to facilitate migration from vResource to vElement
@@ -627,22 +627,7 @@ public class VElement extends Vector<KElement>
 	 */
 	public void unify()
 	{
-		final HashSet set = new HashSet();
-		int size = size();
-		for (int i = 0; i < size; i++)
-		{
-			final KElement e = this.item(i);
-			if (set.contains(e))
-			{
-				this.removeElementAt(i);
-				i--;
-				size--;
-			}
-			else
-			{
-				set.add(e);
-			}
-		}
+		ContainerUtil.unify(this);
 	}
 
 	/**

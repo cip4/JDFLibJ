@@ -84,6 +84,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -93,8 +94,12 @@ import java.util.Map.Entry;
 import org.cip4.jdflib.ifaces.IMatches;
 
 /**
- * class with utilities for containers, e.g. Vectors, sets etc. also simple object utils
- * @author prosirai
+ * class with utilities for containers, e.g. Vectors, sets etc. <br/>
+ * also simple object utilities
+ * 
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * before June 18, 2009
  */
 public class ContainerUtil
 {
@@ -448,5 +453,34 @@ public class ContainerUtil
 				coll.add((a) null);
 			}
 		}
+	}
+
+	/**
+	 * unify a collection while retaining the initial order (i f the input collection is ordered)
+	 * @param <a> the data type of the collection
+	 * @param c the collection to unify
+	 * @return the unified collection - always the input collection
+	 */
+	public static <a> Collection<a> unify(final Collection<a> c)
+	{
+		if (c == null)
+		{
+			return null;
+		}
+		final Iterator<a> it = c.iterator();
+		final LinkedHashSet<a> lhsIn = new LinkedHashSet<a>(c.size());
+
+		while (it.hasNext())
+		{
+			final a el = it.next();
+			if (!lhsIn.contains(el))
+			{
+				lhsIn.add(el);
+			}
+		}
+
+		c.clear();
+		c.addAll(lhsIn);
+		return c;
 	}
 }

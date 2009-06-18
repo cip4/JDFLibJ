@@ -245,6 +245,32 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	/**
 	 * test Unify
 	 */
+	public void testUnifyBig()
+	{
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		final long t0 = System.currentTimeMillis();
+		for (int i = 0; i < 1000; i++)
+		{
+			for (int j = 0; j < 100; j++)
+			{
+				final JDFAttributeMap map = new JDFAttributeMap();
+				for (int k = 0; k < 10; k++)
+				{
+					map.put("A" + k, "k" + j + " " + k);
+				}
+				v.add(map);
+			}
+		}
+		final long t1 = System.currentTimeMillis();
+		System.out.println(t1 - t0);
+		v.unify();
+		final long t2 = System.currentTimeMillis();
+		System.out.println(t2 - t1);
+	}
+
+	/**
+	 * test Unify
+	 */
 	public void testUnify()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");

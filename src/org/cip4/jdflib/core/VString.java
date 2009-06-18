@@ -89,6 +89,7 @@ import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -277,9 +278,9 @@ public class VString extends Vector<String>
 	/**
 	 * index - get the index of s in the vector
 	 * 
-	 * @param String s
+	 * @param s
 	 * 
-	 * @return int
+	 * @return int the index of a string
 	 */
 	public int index(final String s)
 	{
@@ -399,7 +400,7 @@ public class VString extends Vector<String>
 	/**
 	 * removeStrings - remove all occurrences of a string
 	 * 
-	 * @param String s
+	 * @param s
 	 * @deprecated use removeStrings(s, Integer.MAX_VALUE);
 	 */
 	@Deprecated
@@ -477,22 +478,7 @@ public class VString extends Vector<String>
 	 */
 	public void unify()
 	{
-		final HashSet<String> set = new HashSet<String>();
-		int size = size();
-		for (int i = 0; i < size; i++)
-		{
-			final String s = this.stringAt(i);
-			if (set.contains(s))
-			{
-				this.removeElementAt(i);
-				i--;
-				size--;
-			}
-			else
-			{
-				set.add(s);
-			}
-		}
+		ContainerUtil.unify(this);
 	}
 
 	/**
@@ -512,7 +498,8 @@ public class VString extends Vector<String>
 	}
 
 	/**
-	 * gets a set with all entries of the VString
+	 * gets a set with all entries of the VString<br/>
+	 * note that the set retains ordering (LinkedHashSet)
 	 * @return the set corresponding to this
 	 */
 	public Set<String> getSet()
@@ -577,6 +564,7 @@ public class VString extends Vector<String>
 	 * if enumType is a ValuedEnum, the name is appended
 	 * 
 	 * @param enumType the object to append
+	 * @return true if successfully added
 	 */
 	public boolean add(final EnumType enumType)
 	{

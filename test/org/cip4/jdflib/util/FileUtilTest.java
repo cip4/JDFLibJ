@@ -143,8 +143,8 @@ public class FileUtilTest extends JDFTestCaseBase
 			assertEquals(b[i], b3[i]);
 		}
 		f.delete();
-		ThreadUtil.sleep(100); // may need some time for delete to catch on
-		assertNull(FileUtil.fileToByteArray(f));
+		final File f2 = new File(sm_dirTestDataTemp + "dummy_snafu.dat");
+		assertNull(FileUtil.fileToByteArray(f2));
 	}
 
 	/**
