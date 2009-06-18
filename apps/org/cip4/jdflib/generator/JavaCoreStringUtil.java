@@ -1,8 +1,13 @@
 /**
  *
- * Copyright (c) 2002 Heidelberger Druckmaschinen AG, All Rights Reserved.
- * Author: Kai Mattern Dietrich Mucha Titel: JavaCoreStringUtil.java Version:
- * 2.0 Description: The xml Schema is partitioned into many "complex type's"
+ * Copyright (c) 2002-2009 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ * Author: Kai Mattern Dietrich Mucha 
+ * Titel: JavaCoreStringUtil.java 
+ * 
+ * Write the auto files
+ * 
+ * Version: 2.0 
+ * Description: The xml Schema is partitioned into many "complex type's"
  * these types have children named "attributes" and "elements" this file is for
  * describing all values a "element" can have. Counter 34
  *
@@ -186,7 +191,7 @@ public class JavaCoreStringUtil
 
 		strbufResult.append("package ").append(strPackage).append(";").append(strLineEnd).append(strLineEnd);
 
-		strbufResult.append("import java.util.Collection;                          ").append(strLineEnd);
+		strbufResult.append("import java.util.Collection;                        ").append(strLineEnd);
 		strbufResult.append("import java.util.Iterator;                          ").append(strLineEnd);
 		strbufResult.append("import java.util.List;                              ").append(strLineEnd);
 		strbufResult.append("import java.util.Map;                               ").append(strLineEnd);

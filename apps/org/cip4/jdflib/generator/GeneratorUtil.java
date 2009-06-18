@@ -1,6 +1,6 @@
 /**
  *
- *  Copyright (c)   2002-2007 Heidelberger Druckmaschinen AG, All Rights Reserved.
+ *  Copyright (c)   2002-2009 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *  Author:         Kai Mattern
  *  Titel:          GeneratorUtil.java
  *  Version:        0.1
@@ -291,7 +291,7 @@ public class GeneratorUtil
 
     /**
      *  Every complexType inside the Schema has many many elements and attributes.
-     *  To reflect the Schema as closly as possible and the need of it,
+     *  To reflect the Schema as closely as possible and the need of it,
      *  all VALID attributes will be listed inside the SchemaComplexType (as a vector of attributes).
      *  What are Valid attributes?
      *  A ComplexType can be a Resource for example.
