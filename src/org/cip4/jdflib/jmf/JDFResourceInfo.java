@@ -224,7 +224,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 		{
 			return null;
 		}
-		for (int i = v0.size(); i >= 0; i--)
+		for (int i = v0.size() - 1; i >= 0; i--)
 		{
 			final KElement e = v0.get(i);
 			if (!(e instanceof JDFResource))
