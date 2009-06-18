@@ -112,7 +112,7 @@ public class XJDFTest extends JDFTestCaseBase
 	 * @throws Exception
 	 * 
 	 */
-	public void xjdfSchemaTest() throws Exception
+	public void xjdfSchemaTest()
 	{
 		final XJDFSchemaWalker sw = new XJDFSchemaWalker();
 		final File in = new File(sm_dirTestSchema + "JDFResource.xsd");
@@ -123,7 +123,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testToXJDFWithProduct() throws Exception
+	public void testToXJDFWithProduct()
 	{
 		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
 		nP.setType(EnumType.Product);
@@ -139,7 +139,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testNamedFeatures() throws Exception
+	public void testNamedFeatures()
 	{
 
 		n.setNamedFeatures(new VString("k1 v1 k2 v2", null));
@@ -158,7 +158,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testColorPool() throws Exception
+	public void testColorPool()
 	{
 
 		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
@@ -171,7 +171,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testColorPoolRef() throws Exception
+	public void testColorPoolRef()
 	{
 		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, null);
 		cp.appendColorWithName("Black", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
@@ -190,7 +190,8 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, null);
 		n.getResource("ExposedMedia", null, 0).refElement(m);
 		final JDFCustomerInfo ci = n.getCustomerInfo();
-		final JDFResource r = ci.appendCompany().makeRootResource(null, null, true);
+//		final JDFResource r = 
+			ci.appendCompany().makeRootResource(null, null, true);
 
 		e = new XJDF20().makeNewJDF(n, null);
 		assertNotNull(e.getXPathElement("ResourceSet[@Name=\"Media\"]"));
@@ -238,7 +239,8 @@ public class XJDFTest extends JDFTestCaseBase
 	{
 
 		final JDFFileSpec fs1 = (JDFFileSpec) n.addResource("FileSpec", EnumUsage.Input);
-		final JDFFileSpec fsc = fs1.appendContainer().appendFileSpec();
+//		final JDFFileSpec fsc = 
+			fs1.appendContainer().appendFileSpec();
 		e = new XJDF20().makeNewJDF(n, null);
 		assertNotNull(e.getXPathAttribute("ParameterSet[@Usage=\"Input\"]/Parameter/FileSpec/@ContainerRef", null));
 
@@ -262,7 +264,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testToXJDFCustomerInfo() throws Exception
+	public void testToXJDFCustomerInfo()
 	{
 		e = new XJDF20().makeNewJDF(n, null);
 		assertNotNull(e.getXPathElement("ParameterSet/Parameter/CustomerInfo"));
@@ -272,7 +274,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testFromXJDF() throws Exception
+	public void testFromXJDF()
 	{
 		testColorPool();
 		final JDFDoc d2 = new XJDFToJDFConverter(null).convert(e);
@@ -282,7 +284,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testRefFirst() throws Exception
+	public void testRefFirst()
 	{
 		final JDFNode n0 = n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ProcessGroup);

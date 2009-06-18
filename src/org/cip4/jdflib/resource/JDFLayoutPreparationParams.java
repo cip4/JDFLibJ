@@ -251,11 +251,10 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 		 */
 		private void setStripMarks(final VString marks, final EnumMarkSide side)
 		{
-			final int n = marks == null ? 0 : marks.size();
-			for (int i = 0; i < n; i++)
+			for (String markName : marks)
 			{
 				final JDFStripMark sm = strippingParams.appendStripMark();
-				sm.setMarkName(marks.get(i));
+				sm.setMarkName(markName);
 				sm.setMarkSide(side);
 			}
 		}

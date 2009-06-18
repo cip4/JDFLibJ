@@ -135,9 +135,9 @@ public class JDFPageListTest extends JDFTestCaseBase
 			cd.setAttribute("ID", "CD_" + i);
 			KElement chap = cd.appendElement("ContentMetaData");
 			chap.setAttribute("Title", "Chapter " + i);
-			JDFEmployee author = (JDFEmployee) chap.appendElement(ElementName.EMPLOYEE);
-			author.appendPerson().setFamilyName("authorName" + i);
-			author.setRoles(new VString("Author", null));
+			JDFEmployee localAuthor = (JDFEmployee) chap.appendElement(ElementName.EMPLOYEE);
+			localAuthor.appendPerson().setFamilyName("authorName" + i);
+			localAuthor.setRoles(new VString("Author", null));
 
 			JDFPageData pd = pl.appendPageData();
 			JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();

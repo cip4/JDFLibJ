@@ -87,10 +87,10 @@ public class JMFGoldenTicket extends BaseGoldenTicket
 	 * @param icsLevel the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
 	 */
-	public JMFGoldenTicket(int icsLevel, EnumVersion jdfVersion)
+	public JMFGoldenTicket(int pIcsLevel, EnumVersion jdfVersion)
 	{
 		super(2, jdfVersion);
-		jmfICSLevel = icsLevel;
+		jmfICSLevel = pIcsLevel;
 	}
 
 	/**

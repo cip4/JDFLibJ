@@ -98,7 +98,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
 	 * @throws Exception
 	 */
-	public void testSchema() throws Exception
+	public void testSchema()
 	{
 		final JDFDoc d = p.parseFile(new File(sm_dirTestData + "job.jdf"));
 		assertNotNull(d);
@@ -108,7 +108,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
 	 * @throws Exception
 	 */
-	public void testDieMaking() throws Exception
+	public void testDieMaking()
 	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();
@@ -124,7 +124,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
 	 * @throws Exception
 	 */
-	public void testPreviewResource() throws Exception
+	public void testPreviewResource()
 	{
 		final JDFDoc d0 = new JDFDoc("JDF");
 		final JDFNode n = d0.getJDFRoot();

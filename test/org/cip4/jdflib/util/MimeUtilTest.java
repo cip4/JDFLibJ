@@ -89,7 +89,6 @@ import java.util.Vector;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
@@ -168,7 +167,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 	 * @throws IOException
 	 * 
 	 */
-	public void testBuildMimePackageDocJMFURL() throws IOException, MessagingException
+	public void testBuildMimePackageDocJMFURL()
 	{
 		/*
 		 * final JDFDoc docJMF = new JDFDoc("JMF"); docJMF.setOriginalFileName("JMF.jmf"); final JDFJMF jmf = docJMF.getJMFRoot(); final JDFCommand com =

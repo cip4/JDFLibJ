@@ -625,13 +625,15 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.Folding);
-		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, EnumUsage.Output);
+//		final JDFFoldingParams fp = (JDFFoldingParams) 
+		n.addResource(ElementName.FOLDINGPARAMS, EnumUsage.Output);
 		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
 
 		JDFSpawn spawn = new JDFSpawn(n);
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(m);
-		JDFNode nsp = spawn.spawn("thisUrl", "newURL", new VString("Output", null), vMap, true, true, true, true);
+//		JDFNode nsp = 
+			spawn.spawn("thisUrl", "newURL", new VString("Output", null), vMap, true, true, true, true);
 
 		spawn = new JDFSpawn(n);
 		try
@@ -647,7 +649,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		spawn.vRWResources_in = new VString("Output", null);
 		spawn.vSpawnParts = vMap;
 		spawn.cleanSpawnedResources();
-		nsp = spawn.spawn("thisUrl", "newURL", new VString("Output", null), vMap, true, true, true, true);
+//		nsp = 
+			spawn.spawn("thisUrl", "newURL", new VString("Output", null), vMap, true, true, true, true);
 	}
 
 	/**
@@ -2506,7 +2509,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFAttributeMap partMap2 = new JDFAttributeMap(partMap);
 		partMap2.put("Separation", "Black");
 		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
-		final JDFTransferCurvePool tcPart = (JDFTransferCurvePool) tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
+//		final JDFTransferCurvePool tcPart = (JDFTransferCurvePool) 
+		tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
 
 		final JDFSpawn sp = new JDFSpawn(n);
 		final VJDFAttributeMap spawnParts = new VJDFAttributeMap();

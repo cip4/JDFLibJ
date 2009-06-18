@@ -319,7 +319,8 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 			theNode.linkResource(comp, EnumUsage.Input, null);
 		}
 
-		final JDFResourceLink rl = theNode.getLink(comp, EnumUsage.Input);
+//		final JDFResourceLink rl = 
+			theNode.getLink(comp, EnumUsage.Input);
 		return comp;
 
 	}

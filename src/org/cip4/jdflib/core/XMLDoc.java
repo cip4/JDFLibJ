@@ -128,6 +128,7 @@ import org.w3c.dom.traversal.TreeWalker;
  * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/DocumentImpl.html" Xerces-Documentation< /a>
  */
 
+@SuppressWarnings("deprecation")
 public class XMLDoc
 {
 

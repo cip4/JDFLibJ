@@ -403,7 +403,8 @@ public class CheckJDFTest extends JDFTestCaseBase
 		prev.setURL("File://foo.bar");
 		checkJDF.setIgnorePrivate(false);
 		final JDFRunList rl = (JDFRunList) n.addResource("RunList", null, EnumUsage.Input, null, null, null, null);
-		final JDFPreview pv2 = rl.appendPreview();
+//		final JDFPreview pv2 = 
+			rl.appendPreview();
 
 		final JDFPreview pv3 = rl.appendPreview();
 		pv3.makeRootResource(null, null, true);

@@ -42,7 +42,8 @@ public class FastFiFoTest extends JDFTestCaseBase
 		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
 		for (int i = 0; i < 100; i++)
 		{
-			final MyInteger r = ff.push(new MyInteger(i));
+//			final MyInteger r = 
+				ff.push(new MyInteger(i));
 			for (int j = 0; j < 10; j++)
 			{
 				final MyInteger r2 = ff.peek(j);
@@ -66,7 +67,8 @@ public class FastFiFoTest extends JDFTestCaseBase
 		final FastFiFo<MyInteger> ff = new FastFiFo<MyInteger>(10);
 		for (int i = 0; i < 100; i++)
 		{
-			final MyInteger r = ff.push(new MyInteger(i));
+//			final MyInteger r = 
+				ff.push(new MyInteger(i));
 			final MyInteger[] a = ff.peekArray();
 			assertEquals("loop " + i, a[0], new MyInteger(Math.max(0, i - 9)));
 			if (i > 5)

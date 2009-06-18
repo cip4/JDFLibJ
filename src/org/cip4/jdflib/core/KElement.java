@@ -125,6 +125,7 @@ import org.w3c.dom.Text;
  * @author CIP4
  * @see JDFElement for the first element class that is aware of JDF
  */
+@SuppressWarnings("deprecation")
 public class KElement extends ElementNSImpl
 {
 	private static final long serialVersionUID = 1L;
@@ -4411,11 +4412,11 @@ public class KElement extends ElementNSImpl
 		 * if the attribute is numeric, compare numerically, else lexical comparison is done
 		 * @param invert if true, sort backwards
 		 */
-		public SingleAttributeComparator(final String attName, final boolean invert)
+		public SingleAttributeComparator(final String pAttName, final boolean pInvert)
 		{
 			super();
-			this.attName = attName;
-			this.invert = invert ? -1 : 1;
+			this.attName = pAttName;
+			this.invert = pInvert ? -1 : 1;
 		}
 
 		private final String attName;

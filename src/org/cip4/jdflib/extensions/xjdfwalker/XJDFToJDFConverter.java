@@ -113,20 +113,27 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 */
 	boolean isXResourceElement(final KElement toCheck)
 	{
-		KElement parent = toCheck == null ? null : toCheck.getParentNode_KElement();
-		if (parent == null)
+		boolean bReturn = false;
+		
+		if (toCheck != null)
 		{
-			return false;
-		}
+			KElement parent = toCheck.getParentNode_KElement();
+			if (parent == null)
+			{
+				return bReturn;
+			}
 
-		parent = parent.getParentNode_KElement();
-		if (parent == null)
-		{
-			return false;
-		}
+			parent = parent.getParentNode_KElement();
+			if (parent == null)
+			{
+				return bReturn;
+			}
 
-		final boolean bL1 = parent.getLocalName().endsWith("Set");
-		return bL1 && toCheck.getLocalName().equals(parent.getAttribute("Name"));
+			final boolean bL1 = parent.getLocalName().endsWith("Set");
+			bReturn = bL1 && toCheck.getLocalName().equals(parent.getAttribute("Name"));
+		}
+		
+		return bReturn;
 	}
 
 	/**

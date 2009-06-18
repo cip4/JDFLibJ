@@ -198,7 +198,7 @@ public class JDFDateTest extends TestCase
 	 * Method testdateMillis.
 	 * @throws Exception
 	 */
-	public void testdateMillis() throws Exception
+	public void testdateMillis()
 	{
 		JDFDate date = new JDFDate(1);
 		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970);

@@ -112,7 +112,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	 * 
 	 * @throws Exception
 	 */
-	public void testReducePartAmounts() throws Exception
+	public void testReducePartAmounts()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();

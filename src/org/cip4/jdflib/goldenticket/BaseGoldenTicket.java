@@ -222,9 +222,9 @@ public class BaseGoldenTicket
 	 * @param icsLevel the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
 	 */
-	public BaseGoldenTicket(final int icsLevel, final EnumVersion jdfVersion)
+	public BaseGoldenTicket(final int pIcsLevel, final EnumVersion jdfVersion)
 	{
-		baseICSLevel = icsLevel;
+		baseICSLevel = pIcsLevel;
 		theVersion = jdfVersion == null ? EnumVersion.Version_1_3 : jdfVersion;
 		theStatusCounter = new StatusCounter(null, null, null);
 		JDFElement.setLongID(false);

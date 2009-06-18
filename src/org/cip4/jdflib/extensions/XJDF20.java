@@ -1355,10 +1355,9 @@ public class XJDF20 extends BaseElementWalker
 			if (rl != null)
 			{
 				final VElement v = setResource(null, rl.getLinkRoot(), newRoot);
-				final int size = v == null ? 0 : v.size();
-				for (int i = 0; i < size; i++)
+				for (KElement kElem : v)
 				{
-					raNew.appendAttribute(val, v.get(i).getAttribute(AttributeName.ID), null, " ", true);
+					raNew.appendAttribute(val, kElem.getAttribute(AttributeName.ID), null, " ", true);
 				}
 			}
 		}

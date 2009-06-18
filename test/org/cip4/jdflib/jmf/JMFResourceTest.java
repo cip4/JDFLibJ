@@ -384,7 +384,8 @@ public class JMFResourceTest extends JDFTestCaseBase
 		mPartRQP.setAttribute(AttributeName.DIMENSION, "");
 		mediaRQP.removeAttribute(AttributeName.DIMENSION);
 		rqp.applyResourceCommand(jdf);
-		final JDFMedia m2Sheet4 = (JDFMedia) m2.getPartition(sheetMap, null);
+//		final JDFMedia m2Sheet4 = (JDFMedia) 
+		m2.getPartition(sheetMap, null);
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
 		// assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
 	}

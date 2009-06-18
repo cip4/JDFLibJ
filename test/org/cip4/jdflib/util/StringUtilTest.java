@@ -518,7 +518,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testSubstring()
 	{
-		final String s = "a".substring(0, 0);
+//		final String s = "a".substring(0, 0);
 		assertEquals(StringUtil.substring("abbcc", 0, 2), "ab");
 		assertEquals(StringUtil.substring("abbcc", 0, -2), "abb");
 		assertEquals(StringUtil.substring("abbcc", -2, -2), "");

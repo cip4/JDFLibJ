@@ -69,7 +69,6 @@
 package org.cip4.jdflib.extensions;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
@@ -106,7 +105,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	 * @param out
 	 * @throws IOException
 	 */
-	public void newFile(final File in, final File out) throws IOException
+	public void newFile(final File in, final File out)
 	{
 		if (!in.canRead())
 		{

@@ -150,9 +150,9 @@ public class FixVersion extends BaseElementWalker
 	/**
 	 * @param fixICSVersions the fixICSVersions to set
 	 */
-	public void setFixICSVersions(final boolean fixICSVersions)
+	public void setFixICSVersions(final boolean pFixICSVersions)
 	{
-		this.fixICSVersions = fixICSVersions;
+		this.fixICSVersions = pFixICSVersions;
 	}
 
 	/**
