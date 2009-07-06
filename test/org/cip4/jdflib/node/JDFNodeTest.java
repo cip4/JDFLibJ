@@ -203,6 +203,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSortChildren()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -492,7 +495,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final VString combiNodes = new VString("a b c", null);
 		mainNode.setTypes(combiNodes);
 		final JDFNode p2 = mainNode.addProcessGroup(new VString("d e f", null));
-		assertEquals(mainNode.getTypes(), combiNodes);
+		assertNull("must remove types in parent processgroup", mainNode.getTypes());
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -2015,6 +2018,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetMatchingResource()
 	{
 		final JDFParser pars = new JDFParser();
@@ -2043,6 +2049,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetJobPart()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2057,6 +2066,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(p1.getJobPart("p0.1.1", null), p11);
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetChildJDFNode()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2078,6 +2090,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(p1.getChildJDFNode("I11", false), p11);
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetCombinedProcessIndex()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2091,6 +2106,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(root.getCombinedProcessIndex(EnumType.Stitching, 1), 3);
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetLink()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2109,6 +2127,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetResourceLinks()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2124,6 +2145,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testUpdatePartStatus()
 	{
 		for (int loop = 0; loop < 2; loop++)
@@ -2175,6 +2199,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testToGrayBox()
 	{
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
@@ -2204,6 +2231,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testStatusPartMapVector()
 	{
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();

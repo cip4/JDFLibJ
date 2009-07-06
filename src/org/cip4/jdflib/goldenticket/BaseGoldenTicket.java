@@ -219,7 +219,7 @@ public class BaseGoldenTicket
 	/**
 	 * create a BaseGoldenTicket
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 * @param pIcsLevel the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
 	 */
 	public BaseGoldenTicket(final int pIcsLevel, final EnumVersion jdfVersion)
@@ -558,10 +558,10 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param good
-	 * @param waste
+	 * @param pgood
+	 * @param pwaste
 	 */
-	final protected void runSinglePhase(final int pgood, final int pwaste, @SuppressWarnings("unused") final boolean bOutAvail, final boolean bFirst)
+	final protected void runSinglePhase(final int pgood, final int pwaste, final boolean bOutAvail, final boolean bFirst)
 	{
 		final VElement vResLinks = theExpandedNode.getResourceLinks(null);
 		if (vResLinks != null)
@@ -611,7 +611,6 @@ public class BaseGoldenTicket
 	/**
 	 * initializes this node to a given ICS version
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
 	 */
 	public void init()
 	{
@@ -624,7 +623,7 @@ public class BaseGoldenTicket
 	/**
 	 * 
 	 */
-	protected JDFDevice initDevice(@SuppressWarnings("unused") final JDFNode previousNode)
+	protected JDFDevice initDevice(final JDFNode previousNode)
 	{
 		JDFDevice dev = (JDFDevice) theNode.getResource(ElementName.DEVICE, EnumUsage.Input, 0);
 		if (dev == null && devID != null)
@@ -650,6 +649,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
+	 * @param node
 	 * 
 	 */
 	public void initAuditPool(final JDFNode node)
@@ -745,8 +745,7 @@ public class BaseGoldenTicket
 		return theNode;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
@@ -791,16 +790,25 @@ public class BaseGoldenTicket
 		return deviceURL;
 	}
 
+	/**
+	 * @param pdeviceURL
+	 */
 	public static void setDeviceURL(final String pdeviceURL)
 	{
 		BaseGoldenTicket.deviceURL = pdeviceURL;
 	}
 
+	/**
+	 * @return
+	 */
 	public static String getMisURL()
 	{
 		return misURL;
 	}
 
+	/**
+	 * @param _misURL
+	 */
 	public static void setMisURL(final String _misURL)
 	{
 		BaseGoldenTicket.misURL = _misURL;
@@ -1130,6 +1138,9 @@ public class BaseGoldenTicket
 		return m;
 	}
 
+	/**
+	 * @return the number of colors
+	 */
 	public int getNCols()
 	{
 		return nCols[0] == 0 ? cols.size() : Math.max(nCols[0], nCols[1]);

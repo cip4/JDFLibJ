@@ -7164,22 +7164,22 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * add a JDFNode remove @Types to avoid inconsistent JDF
 	 * 
 	 * @param typ type of JDFNode to add
-	 * @return JDFNodethe added JDFNode
+	 * @return JDFNode the added JDFNode
 	 */
 	public JDFNode addJDFNode(final String typ)
 	{
-		final EnumType t = EnumType.getEnum(getType());
+		final EnumType myType = EnumType.getEnum(getType());
 
-		if (t == null || !t.equals(EnumType.Product) && !t.equals(EnumType.ProcessGroup))
+		if (myType == null || !myType.equals(EnumType.Product) && !myType.equals(EnumType.ProcessGroup))
 		{
-			throw new JDFException("JDFNode.addJDFNode adding ProcessGroup to invalid node type: Type = " + getType());
+			throw new JDFException("JDFNode.addJDFNode adding JDF Node to invalid node type: Type = " + getType());
 		}
 		final JDFNode p = (JDFNode) appendElement(ElementName.JDF, null);
 		if (typ != null && !typ.equals(JDFConstants.EMPTYSTRING))
 		{
 			p.setType(typ, false);
 		}
-		if (EnumType.Product.equals(t))
+		if (EnumType.Product.equals(myType) || EnumType.ProcessGroup.equals(myType))
 		{
 			removeAttribute(AttributeName.TYPES); // otherwise we have an illegal combination
 		}

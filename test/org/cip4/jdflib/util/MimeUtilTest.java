@@ -320,8 +320,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		d.write2File(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf"), 2, false);
 		fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
-		fis.close();
 		assertNotNull(MimeUtil.getJDFDoc(fis, 0));
+		fis.close();
 		fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
 		assertNull(MimeUtil.getJDFDoc(fis, 1));
 		fis.close();
