@@ -191,7 +191,15 @@ public class StringUtil
 			"Look, I took the liberty of examining that parrot, and I discovered the only reason that it had been sitting on its perch in the first place was that it had been nailed there.",
 			"Look matey (picks up the parrot) this parrot wouldn't voom if you put four thousand volts through it! It's bleedin' demised!",
 			"It's not pining, it's passed on. This parrot is no more! It has ceased to be. It's expired and gone to meet its maker.This is a late parrot. It's a stiff. Bereft of life, it rests in peace. If you hadn't nailed it to the perch it would be pushing up the daisies. It's rung down the curtain and joined the choir invisible. This is an ex-parrot.",
-			"Pining for the fjords, what kind of talk is that? Look, why did it fall flat on its back the moment I got it home?" };
+			"Pining for the fjords, what kind of talk is that? Look, why did it fall flat on its back the moment I got it home?",
+			"Whatever it was, I'm sure it was better than my plan to get out of this by pretending to be mad. I mean, who would have noticed another madman round here?",
+			"C: Big, blue wobbly thing that mermaids live in.",
+			"Baldrick, you wouldn't recognize a subtle plan if it painted itself purple and danced naked on a harpsicord singing 'subtle plans are here again'.",
+			"To you it's a potato, to me it's a potato. But to Sir Walter Bloody Raleigh it's country estates, fine carriages, and as many girls as his tongue can cope with. He's making a fortune out of the things; people are smoking them, building houses out of them... They'll be eating them next.",
+			"E: Look, there's no need to panic. Someone in the crew will know how to steer this thing.\nR: The crew, milord?\nE: Yes, the crew.\nR: What crew?\nE: I was under the impression that it was common maritime practice for a ship to have a crew.\nR: Opinion is divided on the subject.\n",
+			"If we do happen to step on a mine, Sir, what do we do ?\nNormal procedure, Lieutenant, is to jump 200 feet in the air and scatter oneself over a wide area.",
+			"Gentlemen, you can't fight in here, this is the War Room!",
+			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it." };
 
 	/**
 	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy
@@ -1351,6 +1359,7 @@ public class StringUtil
 	/**
 	 * get the raw bytes specified in strUnicode, bypassing all transcoders<br>
 	 * any character values above 255 is truncated (c=c&0xff)
+	 * @param strUnicode the unicode string
 	 * 
 	 * @return char array of the raw bytes assigned to this
 	 */

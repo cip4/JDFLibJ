@@ -82,6 +82,7 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSignal;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -147,7 +148,7 @@ public class JDFSignal extends JDFAutoSignal
 	 * 
 	 * @param response the response to convert
 	 * @return true if successful
-	 * @deprecated use the two parameter varianz
+	 * @deprecated use the two parameter variant
 	 */
 	@Deprecated
 	public boolean convertResponse(final JDFResponse response)
@@ -158,7 +159,8 @@ public class JDFSignal extends JDFAutoSignal
 	/**
 	 * converts a response to a signal that can be sent individually
 	 * 
-	 * @param response the response to convert
+	 * @param response the response to convert - should not be null
+	 * @param q the query that should be merged into the signal - may be null
 	 * @return true if successful
 	 */
 	public boolean convertResponse(final JDFResponse response, final JDFQuery q)
@@ -186,8 +188,13 @@ public class JDFSignal extends JDFAutoSignal
 				}
 				copyElement(item, null);
 			}
+			setQuery(q);
 		}
-		setType(response.getType()); // also fix xsi:type
+		else
+		{
+			setType(response.getEnumType());
+			copyAttribute(AttributeName.REFID, response);
+		}
 		return true;
 	}
 }

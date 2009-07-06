@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -138,13 +138,7 @@ public class ThreadUtil
 		public final void run()
 		{
 			theObject = handle();
-			if (mutex != null)
-			{
-				synchronized (mutex)
-				{
-					mutex.notifyAll();
-				}
-			}
+			ThreadUtil.notifyAll(mutex);
 			mutex = null;
 		}
 
@@ -206,6 +200,36 @@ public class ThreadUtil
 		catch (final InterruptedException x)
 		{
 			// nop
+		}
+	}
+
+	/**
+	 * simple notify that catches any and all exceptions
+	 * @param mutex the mutex to notify
+	 */
+	public static void notifyAll(final Object mutex)
+	{
+		if (mutex != null)
+		{
+			synchronized (mutex)
+			{
+				mutex.notifyAll();
+			}
+		}
+	}
+
+	/**
+	 * simple notify that catches any and all exceptions
+	 * @param mutex the mutex to notify
+	 */
+	public static void notify(final Object mutex)
+	{
+		if (mutex != null)
+		{
+			synchronized (mutex)
+			{
+				mutex.notify();
+			}
 		}
 	}
 }

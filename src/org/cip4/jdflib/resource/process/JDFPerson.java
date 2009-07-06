@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,7 +73,6 @@
  * class JDFPerson
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
  * Warning! very preliminary test version. 
  * Interface subject to change without prior notice! 
  */
@@ -86,6 +85,11 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * before July 6, 2009
+ */
 public class JDFPerson extends JDFAutoPerson
 {
 	private static final long serialVersionUID = 1L;
@@ -93,45 +97,45 @@ public class JDFPerson extends JDFAutoPerson
 	/**
 	 * Constructor for JDFPerson
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPerson(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPerson
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPerson
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFPerson(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFPerson(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoPerson#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -139,57 +143,60 @@ public class JDFPerson extends JDFAutoPerson
 	}
 
 	/**
-	 * sets the familyname to value and also appends FamilyName to value in case
-	 * descriptivename is either FirstName or empty/null
+	 * sets the familyname to value and also appends FamilyName to value in case descriptivename is either FirstName or empty/null
 	 * 
-	 * @param familyName
-	 *            the family name to set
+	 * @param familyName the family name to set
 	 */
 	@Override
-	public void setFamilyName(String familyName)
+	public void setFamilyName(final String familyName)
 	{
-		String oldName = getAttribute(AttributeName.FAMILYNAME, null, null);
+		final String oldName = getAttribute(AttributeName.FAMILYNAME, null, null);
 		super.setFamilyName(familyName);
 		if (familyName == null)
+		{
 			return;
+		}
 		String descName = getDescriptiveName();
 		if (descName == null || descName.equals(""))
 		{
 			setDescriptiveName(familyName);
-		} else if (descName.equals(getFirstName()))
+		}
+		else if (descName.equals(getFirstName()))
 		{
 			setDescriptiveName(getFirstName() + " " + familyName);
-		} else if (oldName != null && descName.endsWith(oldName))
+		}
+		else if (oldName != null && descName.endsWith(oldName))
 		{
 			descName = StringUtil.replaceString(descName, oldName, familyName);
 			setDescriptiveName(descName);
 		}
-
 	}
 
 	/**
-	 * sets the firstame to value and also prepends firstName to value in case
-	 * descriptivename is either FirstName or empty/null
+	 * sets the firstame to value and also prepends firstName to value in case descriptivename is either FirstName or empty/null
 	 * 
-	 * @param firstName
-	 *            the family name to set
+	 * @param firstName the given name to set
 	 */
 	@Override
-	public void setFirstName(String firstName)
+	public void setFirstName(final String firstName)
 	{
-		String oldName = getAttribute(AttributeName.FIRSTNAME, null, null);
+		final String oldName = getAttribute(AttributeName.FIRSTNAME, null, null);
 
 		super.setFirstName(firstName);
 		if (firstName == null)
+		{
 			return;
+		}
 		String descName = getDescriptiveName();
 		if (descName == null || descName.equals(""))
 		{
 			setDescriptiveName(firstName);
-		} else if (descName.equals(getFamilyName()))
+		}
+		else if (descName.equals(getFamilyName()))
 		{
 			setDescriptiveName(firstName + " " + getFamilyName());
-		} else if (oldName != null && descName.startsWith(oldName))
+		}
+		else if (oldName != null && descName.startsWith(oldName))
 		{
 			descName = StringUtil.replaceString(descName, oldName, firstName);
 			setDescriptiveName(descName);
@@ -206,6 +213,33 @@ public class JDFPerson extends JDFAutoPerson
 	{
 		// TODO Auto-generated method stub
 		return super.clone();
+	}
+
+	/**
+	 * get first + last name if descname does not exist
+	 * @see org.cip4.jdflib.core.JDFElement#getDescriptiveName()
+	 */
+	@Override
+	public String getDescriptiveName()
+	{
+		String s = StringUtil.getNonEmpty(super.getDescriptiveName());
+		if (s == null)
+		{
+			s = StringUtil.getNonEmpty(getFirstName());
+			if (s != null)
+			{
+				final String s2 = StringUtil.getNonEmpty(getFamilyName());
+				if (s2 != null)
+				{
+					s += " " + s2;
+				}
+			}
+			else
+			{
+				s = getFamilyName();
+			}
+		}
+		return s;
 	}
 } // class JDFPerson
 // ==========================================================================

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -214,11 +214,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 * @param strDateTime formatted date and time
 	 * @throws DataFormatException thrown if the string is not a reasonable iso date or date time
 	 */
-	private void init(final String strDateTime) throws DataFormatException
+	private void init(String strDateTime) throws DataFormatException
 	{
-		String strDateTimeLocal = strDateTime;
-
-		if (strDateTimeLocal == null || strDateTimeLocal.equals(JDFConstants.EMPTYSTRING))
+		if (strDateTime == null || strDateTime.equals(JDFConstants.EMPTYSTRING))
 		{
 			lTimeInMillis = System.currentTimeMillis();
 			return;
@@ -226,15 +224,14 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		try
 		{
-
-			if (strDateTimeLocal.indexOf("T") == -1)
+			if (strDateTime.indexOf("T") == -1)
 			{
-				strDateTimeLocal += "T00:00:00" + getTimeZoneISO();
+				strDateTime += "T00:00:00" + getTimeZoneISO();
 			}
 
 			// check for zulu style time zone
-			final int length = strDateTimeLocal.length();
-			String lastChar = strDateTimeLocal.substring(length - 1);
+			final int length = strDateTime.length();
+			String lastChar = strDateTime.substring(length - 1);
 
 			// not necessarily valid but let's not be too picky
 			if ((lastChar.compareTo("a") >= 0) && (lastChar.compareTo("z") <= 0))
@@ -247,7 +244,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			// The last character is a ZULU style timezone
 			if (bZulu)
 			{
-				final String strBuffer = strDateTimeLocal.substring(0, length - 1);
+				final String strBuffer = strDateTime.substring(0, length - 1);
 				String bias = null;
 				if (iCmp >= 0 && iCmp <= 8) // A-I
 				{
@@ -255,7 +252,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				}
 				else if (iCmp == 9) // J
 				{
-					throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
+					throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
 				}
 				else if (iCmp >= 10 && iCmp <= 12) // K-M
 				{
@@ -276,11 +273,11 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 				bias += ":00";
 
-				strDateTimeLocal = strBuffer + bias; // add the alphabetical timezone
+				strDateTime = strBuffer + bias; // add the alphabetical timezone
 			}
 
 			int decimalLength = 0;
-			final int indexOfDecimal = strDateTimeLocal.indexOf('.');
+			final int indexOfDecimal = strDateTime.indexOf('.');
 			if (indexOfDecimal != -1)
 			{
 				if (indexOfDecimal != 19)
@@ -290,7 +287,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				else
 				{
 					decimalLength++;
-					while ("0123456789".indexOf(strDateTimeLocal.charAt(indexOfDecimal + decimalLength)) != -1)
+					while ("0123456789".indexOf(strDateTime.charAt(indexOfDecimal + decimalLength)) != -1)
 					{
 						decimalLength++;
 					}
@@ -300,7 +297,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			// if the time looks like 2004-07-14T18:21:47
 			// check if there is an +xx:00 or -xx:00 at the end specifying the
 			// timezone
-			if ((strDateTimeLocal.indexOf('+', 19) == -1) && (strDateTimeLocal.indexOf('-', 19) == -1))
+			if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
 			{
 				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
 			}
@@ -308,18 +305,18 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			{
 				// handle sign explicitly, because "+02" is no valid Integer,
 				// while "-02" and "02" are valid Integer
-				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTimeLocal.substring(20 + decimalLength, 22 + decimalLength)).intValue());
-				if (strDateTimeLocal.charAt(19 + decimalLength) == '-')
+				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTime.substring(20 + decimalLength, 22 + decimalLength)).intValue());
+				if (strDateTime.charAt(19 + decimalLength) == '-')
 				{
 					setTimeZoneOffsetInMillis(-getTimeZoneOffsetInMillis());
 				}
 			}
 
 			// interpret the string - low level enhances performance quite a bit...
-			final byte[] b = strDateTimeLocal.getBytes();
-			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTimeLocal.length() - decimalLength != 25) // 6 digit tz
+			final byte[] b = strDateTime.getBytes();
+			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
 			{
-				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
+				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
 			}
 
 			final int iYear = getIntFromPos(b, 0, 4);
@@ -355,11 +352,11 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		{
 			// now that we no longer check the string for validation we have no
 			// catch this
-			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
+			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
 		}
 		catch (final NumberFormatException ne)
 		{
-			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTimeLocal);
+			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
 		}
 	}
 
@@ -634,8 +631,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		return HashUtil.hashCode(super.hashCode(), getTimeZoneOffsetInMillis());
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object) the value 0 if the argument is a Date equal to this Date; a value less than 0 if the argument is a
 	 * Date after this Date; and a value greater than 0 if the argument is a Date before this Date.
@@ -678,229 +674,25 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		return m_TimeZoneOffsetInMillis;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	protected Object clone()
+	public JDFDate clone()
 	{
 		return new JDFDate(this);
 	}
 
-	/*
-	 * (non-Javadoc) }
+	/**
 	 * 
+	 * @param d0
+	 * @param d1
+	 * @return
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	public int compare(final JDFDate d0, final JDFDate d1)
 	{
 		return ContainerUtil.compare(d0, d1);
 	}
-
-	/**
-	 * Makes a copy of the<code>JDFDate</code> object
-	 * 
-	 * @param JDFDate d - the date object to make a copy of deprecated - Only usage of JDFDate as a duration object was deprecated. Use JDFDuration instead.
-	 * This class will be modified to handle only JDFDate objects
-	 */
-	// public JDFDate(JDFDate d)
-	// {
-	// lTimeInMillis = d.getTimeInMillis();
-	// }
-	/**
-	 * @deprecated Use class JDFDuration instead setDuration sets a duration for this in seconds. This duration is used in multiple classes of the jdf. Heating
-	 * time for example.
-	 * 
-	 * @param i the duration in seconds. Values below '0' are set to '0'
-	 */
-	// public void setDuration(int i)
-	// {
-	// m_lDuration = (i >= 0 ? i : 0);
-	// }
-	/**
-	 * * @deprecated Use class JDFDuration instead Format and return the duration set by 'setDuration(int i)' or 'setDurationString(String a_aDuration)' as an
-	 * ISO conform String. For Exmaple: 'P1Y2M3DT10H30M'
-	 * 
-	 * @return String the duration formated as an ISO 8601 conform String if duration is '0' return value is 'PT00M'
-	 */
-	// public String getDurationISO()
-	// {
-	// if (m_lDuration == 0)
-	// return "PT00M";
-	// int i;
-	// int temp = m_lDuration;
-	// StringBuffer iso = new StringBuffer(20);
-	// iso.append("P"); //P is the indicator that 'iso' is a duration
-	// i = m_lDuration/(60*60*24*365);
-	// if(i!=0)
-	// {
-	// iso.append(i).append("Y"); // string with years
-	// temp = m_lDuration - (i*60*60*24*365);
-	// }
-	// i = temp;
-	// i = i/(60*60*24*30);
-	// if(i!=0)
-	// {
-	// iso.append(i).append("M"); // string with months
-	// temp = temp -(i*60*60*24*30);
-	// }
-	// i = temp%(60*60*24*30);
-	// i = i/(60*60*24);
-	// if(i!=0)
-	// {
-	// iso.append(i).append("D"); // string with days
-	// }
-	// iso.append("T");
-	// i=m_lDuration%(60*60*24);
-	// i=i/(60*60);
-	// if(i!=0)
-	// {
-	// iso.append(i).append("H"); // string with hours
-	// }
-	// i = m_lDuration%(60*60);
-	// i = i/(60);
-	// if(i!=0)
-	// {
-	// iso.append(i).append("M"); // string with minutes
-	// }
-	// i = m_lDuration%(60);
-	// if(i!=0)
-	// {
-	// iso.append(i).append("S"); // string with seconds
-	// }
-	// int lastIndex=iso.length()-1;
-	// if (iso.charAt(lastIndex)=='T')
-	// iso.deleteCharAt(lastIndex);
-	// return iso.toString();
-	// }
-	/**
-	 * deprecated Use class JDFDuration instead
-	 */
-	// private int m_lDuration = 0; // duration in seconds
-	/**
-	 * @deprecated Use class JDFDuration instead Set a duration. Durations are not bound to time or date and can be set independently
-	 * 
-	 * @param a_aDuration a String of the form 'P1Y2M3DT10H30M'
-	 */
-	// public void setDurationISO(String a_aDuration) throws DataFormatException
-	// {
-	// String strPeriod = JDFConstants.EMPTYSTRING;
-	// String strDate = JDFConstants.EMPTYSTRING;
-	// String strTime = JDFConstants.EMPTYSTRING;
-	// int iYears = 0;
-	// int iMonths = 0;
-	// int iDays = 0;
-	// int iHours = 0;
-	// int iMinutes = 0;
-	// int iSeconds = 0;
-	// int iduration = 0;
-	// int iTimeLastPos = 0;
-	// int iDateLastPos = 0;
-	// if (a_aDuration.indexOf(JDFConstants.BLANK)!=-1) {
-	// throw new DataFormatException("JDFDate illegal string: "+ a_aDuration);
-	// }
-	// int iPPos = a_aDuration.indexOf("P");
-	// strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
-	// // devide periodInstant into date and time part, which are separated by
-	// 'T'
-	// int iTPos = strPeriod.indexOf("T");
-	// if (iTPos >= 0)
-	// {
-	// if (iTPos == 0)
-	// { // e.g. if durationInstant looks like "PT10H30M" - without date part
-	// strTime = strPeriod.substring(1, strPeriod.length());
-	// }
-	// else
-	// { // e.g. if durationInstant looks like "P1Y2M3DT10H30M"
-	// strDate = strPeriod.substring(0, iTPos);
-	// strTime = strPeriod.substring(++iTPos, strPeriod.length());
-	// }
-	// }
-	// else
-	// { // e.g. if durationInstant looks like "P1Y2M3D" - without time part
-	// strDate = strPeriod;
-	// }
-	// if (strDate.length() > 0)
-	// {
-	// int iYPos = strDate.indexOf("Y");
-	// if (iYPos > 0)
-	// {
-	// iYears = Integer.parseInt(strDate.substring (0, iYPos));
-	// iduration += iYears * 365*24*60*60;
-	// iDateLastPos = ++iYPos;
-	// }
-	// int iMPos = strDate.indexOf("M");
-	// if (iMPos > 0)
-	// {
-	// iMonths = Integer.parseInt(strDate.substring (iDateLastPos, iMPos));
-	// iduration += iMonths * 30*24*60*60;
-	// iDateLastPos = ++iMPos;
-	// }
-	// int iDPos = strDate.indexOf("D");
-	// if (iDPos > 0)
-	// {
-	// iDays = Integer.parseInt(strDate.substring (iDateLastPos, iDPos));
-	// iduration += iDays * 24*60*60;
-	// }
-	// }
-	// if (strTime.length() > 0)
-	// {
-	// int iHPos = strTime.indexOf("H");
-	// if (iHPos > 0)
-	// {
-	// iHours = Integer.parseInt(strTime.substring (0, iHPos));
-	// iduration += iHours * 60*60;
-	// iTimeLastPos = ++iHPos;
-	// }
-	// int iMPos = strTime.indexOf("M");
-	// if (iMPos > 0)
-	// {
-	// iMinutes = Integer.parseInt(strTime.substring (iTimeLastPos, iMPos));
-	// iduration += iMinutes * 60;
-	// iTimeLastPos = ++iMPos;
-	// }
-	// int iSPos = strTime.indexOf("S");
-	// if (iSPos > 0)
-	// {
-	// iSeconds = Integer.parseInt(strTime.substring (iTimeLastPos, iSPos));
-	// iduration += iSeconds;
-	// }
-	// }
-	// m_lDuration = iduration;
-	// }
-	/**
-	 * @deprecated Use class JDFDuration instead
-	 * 
-	 * isLonger - tests if the duration of this JDFDate is longer then the duration of the specified JDFDate.
-	 * 
-	 * @param x - the JDFDate object that duration you whant to compare with duration of 'this' JDFDate object
-	 * @return boolean - true if the duration of this JDFDate is longer then the duration of the JDFDate 'x'.
-	 */
-	// public boolean isLonger(JDFDate x)
-	// {
-	// return this.m_lDuration > x.m_lDuration;
-	// }
-	/**
-	 * @deprecated Use class JDFDuration instead
-	 * 
-	 * isShorter - tests if the duration of this JDFDate is less then the duration of the specified JDFDate.
-	 * 
-	 * @param x - the JDFDate object that duration you whant to compare with duration of 'this' JDFDate object
-	 * @return boolean - true if the duration of this JDFDate is shorter then the duration of the JDFDate 'x'.
-	 */
-	// public boolean isShorter(JDFDate x)
-	// {
-	// return this.m_lDuration < x.m_lDuration;
-	// }
-	/**
-	 * @deprecated Use class JDFDuration instead the duration in seconds
-	 * 
-	 * @return int the duration in seconds; '0' default
-	 */
-	// public int getDuration()
-	// {
-	// return m_lDuration;
-	// }
 }

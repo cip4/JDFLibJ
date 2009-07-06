@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,17 +71,28 @@
 package org.cip4.jdflib.jmf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
+import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumQueueEntryDetails;
+import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * < July 4, 2009
+ */
 public class JDFQueueFilterTest extends JDFTestCaseBase
 {
 	JDFQueue theQueue;
 	JDFJMF theJMF;
 	JDFQueueFilter filter;
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
 	@Override
 	public void setUp()
 	{
@@ -89,16 +100,61 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		theQueue = (JDFQueue) d.getRoot();
 		d = new JDFDoc(ElementName.JMF);
 		theJMF = d.getJMFRoot();
-		filter = theJMF.appendCommand(EnumType.AbortQueueEntry)
-				.appendQueueFilter();
+		filter = theJMF.appendCommand(EnumType.AbortQueueEntry).appendQueueFilter();
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /////////////////
 
+	/**
+	 * @throws Exception
+	 */
+	public void testMatchDiff() throws Exception
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setQueueEntryID("q" + i);
+		}
+		final JDFQueue copy = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
+		filter.setMaxEntries(10);
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+		JDFQueue copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
+		JDFQueue matchedQueue = filter.match(copyMatch, copy);
+		assertNull("identical queue should cancel", matchedQueue);
+		theQueue.setQueueStatus(EnumQueueStatus.Held);
+		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
+		matchedQueue = filter.match(copyMatch, copy);
+		assertEquals(EnumQueueStatus.Held, matchedQueue.getQueueStatus());
+		assertNull(matchedQueue.getQueueEntry(0));
+		final JDFQueueEntry addedQE = theQueue.appendQueueEntry();
+		addedQE.setQueueEntryID("qe_test");
+		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
+		matchedQueue = filter.match(copyMatch, copy);
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "qe_test");
+		assertNull(matchedQueue.getQueueEntry(1));
+		addedQE.deleteNode();
+		theQueue.getQueueEntry("q1").setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
+		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
+		matchedQueue = filter.match(copyMatch, copy);
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Aborted);
+		assertNull(matchedQueue.getQueueEntry(1));
+
+		theQueue.getQueueEntry("q1").deleteNode();
+		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
+		matchedQueue = filter.match(copyMatch, copy);
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
+		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Removed);
+		assertNull(matchedQueue.getQueueEntry(1));
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testMatches() throws Exception
 	{
-		JDFQueueEntry qe = theQueue.appendQueueEntry();
+		final JDFQueueEntry qe = theQueue.appendQueueEntry();
 		assertTrue("both empty ", filter.matches(qe));
 		qe.setDeviceID("d1");
 		qe.setQueueEntryID("qe1");
@@ -116,25 +172,31 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertFalse("details=none never matches ", filter.matches(qe));
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// /////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testMatch() throws Exception
 	{
 		for (int i = 0; i < 100; i++)
 		{
-			JDFQueueEntry qe = theQueue.appendQueueEntry();
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
 			qe.setQueueEntryID("q" + i);
 		}
 
 		filter.setMaxEntries(10);
-		filter.match(theQueue);
+		filter.match(theQueue, null);
 		assertEquals(10, theQueue.numEntries(null));
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
-		filter.match(theQueue);
+		filter.match(theQueue, null);
 		assertEquals(0, theQueue.numEntries(null));
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testGetQueueEntrySet() throws Exception
 	{
 		filter.appendQueueEntryDef("qe1");
@@ -145,6 +207,9 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertFalse(filter.getQueueEntryDefSet().contains("qe3"));
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testGetDeviceSet() throws Exception
 	{
 		filter.appendDevice("qe1");

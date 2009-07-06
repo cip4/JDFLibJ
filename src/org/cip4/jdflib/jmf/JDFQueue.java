@@ -749,8 +749,24 @@ public class JDFQueue extends JDFAutoQueue
 	 * @param resp the JDFResponse to copy this to
 	 * @param filter the QueueFilter that sets the queue size
 	 * @return the copied queue
+	 * @deprecated use 3 parameter method
 	 */
+	@Deprecated
 	synchronized public JDFQueue copyToResponse(final JDFResponse resp, final JDFQueueFilter filter)
+	{
+
+		return copyToResponse(resp, filter, null);
+	}
+
+	/**
+	 * copies this to the JDF Response resp, applying the filters defined in filter
+	 * 
+	 * @param resp the JDFResponse to copy this to
+	 * @param filter the QueueFilter that sets the queue size
+	 * @param priorQueue the prior que to apply thr filter to incase updategranularity is incremental
+	 * @return the copied queue
+	 */
+	synchronized public JDFQueue copyToResponse(final JDFResponse resp, final JDFQueueFilter filter, final JDFQueue priorQueue)
 	{
 		if (resp == null)
 		{
@@ -760,7 +776,7 @@ public class JDFQueue extends JDFAutoQueue
 		final JDFQueue newQueue = (JDFQueue) resp.copyElement(this, null);
 		if (filter != null)
 		{
-			filter.match(newQueue);
+			filter.match(newQueue, priorQueue);
 		}
 		return newQueue;
 

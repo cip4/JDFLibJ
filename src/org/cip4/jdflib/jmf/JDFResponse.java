@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,9 +91,9 @@ import org.cip4.jdflib.resource.JDFNotification;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
- *
+ * 
  */
-public class JDFResponse extends JDFAutoResponse // JDFMessage
+public class JDFResponse extends JDFAutoResponse
 {
 	private static final long serialVersionUID = 1L;
 
@@ -103,7 +103,7 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFResponse(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFResponse(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -115,7 +115,7 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFResponse(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFResponse(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -128,7 +128,7 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFResponse(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFResponse(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -141,7 +141,7 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
 
-		private EnumError(String status)
+		private EnumError(final String status)
 		{
 			super(status, m_startValue++);
 		}
@@ -150,7 +150,7 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 		 * @param status
 		 * @return
 		 */
-		public static EnumError getEnum(String status)
+		public static EnumError getEnum(final String status)
 		{
 			return (EnumError) getEnum(EnumError.class, status);
 		}
@@ -159,7 +159,7 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 		 * @param value
 		 * @return
 		 */
-		public static EnumError getEnum(int value)
+		public static EnumError getEnum(final int value)
 		{
 			return (EnumError) getEnum(EnumError.class, value);
 		}
@@ -201,45 +201,63 @@ public class JDFResponse extends JDFAutoResponse // JDFMessage
 	}
 
 	/**
-	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error
-	 * doesn't create a notification if ErroerText=null
+	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if
+	 * ErroerText=null
 	 * 
 	 * @param errorText new error text
 	 * @return JDFNotification the newly created Notification element
-	 * @deprecated use 	public JDFNotification setErrorText(String errorText, EnumClass errorClass)
+	 * @deprecated use public JDFNotification setErrorText(String errorText, EnumClass errorClass)
 	 */
 	@Deprecated
-	public JDFNotification setErrorText(String errorText)
+	public JDFNotification setErrorText(final String errorText)
 	{
 		return setErrorText(errorText, null);
 	}
 
 	/**
-	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error
-	 * doesn't create a notification if ErroerText=null
+	 * Set ErrorText, (Notification/Comment/#text) also sets Notification/@Type=Error and Notification/@Class=Error doesn't create a notification if
+	 * ErroerText=null
 	 * 
 	 * @param errorText new error text
 	 * @param errorClass the error class
 	 * @return JDFNotification the newly created Notification element
 	 */
-	public JDFNotification setErrorText(String errorText, EnumClass errorClass)
+	public JDFNotification setErrorText(final String errorText, EnumClass errorClass)
 	{
 		final JDFNotification n = getCreateNotification();
 		n.setType("Error");
 		if (errorClass == null)
+		{
 			errorClass = JDFNotification.EnumClass.Error;
+		}
 
 		n.setClass(errorClass);
 		if (errorText != null)
 		{
 			JDFComment c = n.getComment(0);
 			if (c != null)
-				c.appendText("\n");
+			{
+				c.appendText("\n - ");
+			}
 			else
+			{
 				c = n.appendComment();
+			}
 			c.appendText(errorText);
 		}
 		return n;
+	}
 
+	/**
+	 * create an acknowledge JMF and set this to a pure acknowledge response
+	 * @return an Acknowledge element that corresponds to this
+	 */
+	public JDFAcknowledge splitAcknowledge()
+	{
+		final JDFAcknowledge ack = JDFJMF.createJMF(EnumFamily.Acknowledge, getEnumType()).getAcknowledge(0);
+		ack.convertResponse(this, null);
+		removeChildren(null, null, null);
+		setAcknowledged(true);
+		return ack;
 	}
 }

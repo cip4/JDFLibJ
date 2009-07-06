@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,9 @@ public class JDFPersonTest extends JDFTestCaseBase
 {
 	JDFPerson person;
 
+	/**
+	 * 
+	 */
 	public void testFamilyName()
 	{
 		person.setFamilyName("Müller");
@@ -93,6 +96,9 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals(person.getDescriptiveName(), "Müller");
 	}
 
+	/**
+	 * 
+	 */
 	public void testFirstName()
 	{
 		person.setFirstName("Joe");
@@ -106,6 +112,9 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals(person.getDescriptiveName(), "Joe");
 	}
 
+	/**
+	 * 
+	 */
 	public void testFirstLastName()
 	{
 		testFirstName();
@@ -129,6 +138,9 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals(person.getDescriptiveName(), "Mary Schmidt");
 	}
 
+	/**
+	 * 
+	 */
 	public void testLastFirstName()
 	{
 		testFamilyName();
@@ -137,27 +149,36 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals(person.getDescriptiveName(), "Joe Müller");
 	}
 
+	/**
+	 * 
+	 */
 	public void testKeepDescName()
 	{
 		person.setDescriptiveName("foo");
 		person.setFirstName("Joe");
 		assertEquals(person.getFirstName(), "Joe");
-		assertEquals("no overwrite of non-matching name", person
-				.getDescriptiveName(), "foo");
-
+		assertEquals("no overwrite of non-matching name", person.getDescriptiveName(), "foo");
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */
+	public void testGetDescName()
+	{
+		person.setFirstName("Joe");
+		assertEquals(person.getDescriptiveName(), "Joe");
+		person.setFamilyName("Cool");
+		assertEquals("create correct descname", person.getDescriptiveName(), "Joe Cool");
+		person.setFirstName(null);
+		assertEquals("create correct descname", person.getDescriptiveName(), "Cool");
+	}
+
 	@Override
 	protected void setUp() throws Exception
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
-		JDFDoc d = new JDFDoc("Person");
+		final JDFDoc d = new JDFDoc("Person");
 		person = (JDFPerson) d.getRoot();
 	}
 }

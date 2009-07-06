@@ -4087,23 +4087,23 @@ public class JDFElement extends KElement
 		int n = 0;
 		final int siz = v.size();
 		final VString knownElements = knownElements();
-		final VString badVersions = getTheElementInfo().prereleaseElements();
-		badVersions.appendUnique(getTheElementInfo().deprecatedElements());
+		// final VString badVersions = getTheElementInfo().prereleaseElements();
+		// badVersions.appendUnique(getTheElementInfo().deprecatedElements());
 
 		for (int i = 0; i < siz; i++)
 		{
 			final KElement e = v.elementAt(i);
 
 			// check for known prerelease or deprecated elements
-			if (badVersions.contains(e.getLocalName()))
-			{
-				vElem.add(e.getLocalName());
-				if (++n > nMax)
-				{
-					return vElem;
-				}
-				continue;
-			}
+			// if (badVersions.contains(e.getLocalName()))
+			// {
+			// vElem.add(e.getLocalName());
+			// if (++n > nMax)
+			// {
+			// return vElem;
+			// }
+			// continue;
+			// }
 
 			if (e instanceof JDFComment)
 			{

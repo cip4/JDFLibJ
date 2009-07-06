@@ -244,7 +244,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	public void testConvertResponse()
+	public void testConvertResponseToSignal()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -267,6 +267,55 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertEquals("type", r.getType(), s.getType());
 		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));
 		assertTrue(s.getXSIType().startsWith("Signal"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testConvertResponseToAcknowledge()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc2 = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf2 = doc2.getJMFRoot();
+		JDFAcknowledge ack = jmf.appendAcknowledge();
+		final JDFResponse r = jmf2.appendResponse();
+		final JDFQuery q = jmf.appendQuery();
+		q.setType("KnownMessages");
+		r.setQuery(q);
+		final JDFMessageService ms = r.appendMessageService();
+		ms.setType("KnownMessages");
+		ack.convertResponse(r, q);
+		assertEquals("refID", q.getID(), r.getrefID());
+		assertEquals("type", r.getType(), ack.getType());
+		assertTrue("ms equal", ms.isEqual(ack.getMessageService(0)));
+		ack = jmf.appendAcknowledge();
+		ack.convertResponse(r, null);
+		assertEquals("type", r.getType(), ack.getType());
+		assertTrue("ms equal", ms.isEqual(ack.getMessageService(0)));
+		assertTrue(ack.getXSIType().startsWith("Acknowledge"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testSplitAcknowledge()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf = doc.getJMFRoot();
+		final JDFDoc doc2 = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmf2 = doc2.getJMFRoot();
+		final JDFResponse r = jmf2.appendResponse();
+		final JDFQuery q = jmf.appendQuery();
+		q.setType("KnownMessages");
+		r.setQuery(q);
+		final JDFMessageService ms = r.appendMessageService();
+		ms.setType("KnownMessages");
+		final JDFAcknowledge ack = r.splitAcknowledge();
+		assertEquals("refID", q.getID(), r.getrefID());
+		assertEquals("type", r.getType(), ack.getType());
+		assertTrue("ms equal", ms.isEqual(ack.getMessageService(0)));
+		assertNull(r.getMessageService(0));
 	}
 
 	/**
@@ -379,6 +428,38 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertEquals(s, jmf.getMessageElement(null, null, -2));
 		assertEquals(c, jmf.getMessageElement(null, null, -3));
 		assertNull(jmf.getMessageElement(null, null, -4));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetResponseByRefID()
+	{
+		final JDFDoc d = new JDFDoc("JMF");
+		final JDFJMF jmf = d.getJMFRoot();
+		jmf.appendMessageElement(EnumFamily.Command, EnumType.Events);
+		jmf.appendComment();
+
+		final JDFResponse r = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.Events);
+		r.setrefID("i42");
+		assertEquals(r, jmf.getResponse("i42"));
+	}
+
+	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testGetAcknowledgeByRefID()
+	{
+		final JDFDoc d = new JDFDoc("JMF");
+		final JDFJMF jmf = d.getJMFRoot();
+		jmf.appendMessageElement(EnumFamily.Command, EnumType.Events);
+		jmf.appendComment();
+
+		final JDFAcknowledge a = (JDFAcknowledge) jmf.appendMessageElement(EnumFamily.Acknowledge, EnumType.Events);
+		a.setrefID("i42");
+		assertEquals(a, jmf.getAcknowledge("i42"));
+		assertEquals(a, jmf.getAcknowledge(null));
 	}
 
 	// ///////////////////////////////////////////////////////////////////

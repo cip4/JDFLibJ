@@ -81,6 +81,8 @@
 package org.cip4.jdflib.jmf;
 
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
@@ -91,8 +93,10 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 
 /**
@@ -100,6 +104,162 @@ import org.cip4.jdflib.util.EnumUtil;
  */
 public class JDFQueueFilter extends JDFAutoQueueFilter
 {
+	private class QueueMatcher
+	{
+		/**
+		 * @param theQueue
+		 * @param lastQueue
+		 */
+		public QueueMatcher(final JDFQueue theQueue, final JDFQueue lastQueue)
+		{
+			super();
+			this.theQueue = theQueue;
+			this.lastQueue = lastQueue;
+			if (lastQueue != null && EnumUpdateGranularity.ChangesOnly.equals(getUpdateGranularity()))
+			{
+				lastMap = lastQueue.getQueueEntryIDMap();
+				if (!lastQueue.hasAttribute(AttributeName.QUEUESIZE)) // we calc queuesize - so also calc queuesize for the original prior queue
+				{
+					lastQueue.setQueueSize(lastQueue.getQueueSize());
+				}
+			}
+			else
+			{
+				lastMap = null;
+			}
+		}
+
+		private final JDFQueue lastQueue; // the prior queue to compare to for matching
+		private JDFQueue theQueue; // the prior queue to compare to for matching
+		Map<String, JDFQueueEntry> lastMap;
+
+		/**
+		 * modifies queue to match this filter by removing all non-matching entries
+		 * 
+		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+		 * 
+		 * @param theQueue the queue to modify
+		 */
+		protected JDFQueue match()
+		{
+			final int maxEntries = hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
+
+			VElement v = theQueue.getQueueEntryVector();
+			if (v != null)
+			{
+				final int size = v.size();
+				theQueue.setQueueSize(size);
+
+				for (int i = 0; i < size; i++)
+				{
+					final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
+					match(qe);
+				}
+			}
+
+			addRemoved();
+			// zapp n>maxEntries
+			final int numEntries = theQueue.numEntries(null);
+			if (numEntries > maxEntries)
+			{
+				v = theQueue.getQueueEntryVector();
+				for (int i = maxEntries; i < numEntries; i++)
+				{
+					v.get(i).deleteNode();
+				}
+			}
+			if (numEntries == 0 && lastMap != null) // empty queue in diff mode
+			{
+				final JDFAttributeMap mapQueue = theQueue.getAttributeMap();
+				final JDFAttributeMap mapLast = lastQueue.getAttributeMap();
+				if (ContainerUtil.equals(mapLast, mapQueue))
+				{
+					theQueue.deleteNode();
+					theQueue = null;
+				}
+			}
+			return theQueue;
+		}
+
+		/**
+		 * 
+		 */
+		private void addRemoved()
+		{
+			if (lastMap != null && lastMap.size() > 0)
+			{
+				final JDFQueueEntry qeFirst = theQueue.getQueueEntry(0);
+				final Iterator<String> qeIt = lastMap.keySet().iterator();
+				while (qeIt.hasNext())
+				{
+					final String qeID = qeIt.next();
+					final JDFQueueEntry qe = (JDFQueueEntry) theQueue.copyElement(lastMap.get(qeID), qeFirst);
+					qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
+					qe.removeAttribute(AttributeName.STATUSDETAILS);
+				}
+			}
+		}
+
+		/**
+		 * modifies queueEntry to match this filter by removing all non-matching attributes and elements
+		 * 
+		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+		 * 
+		 * @param qe
+		 */
+		protected void match(final JDFQueueEntry qe)
+		{
+			if (qe == null)
+			{
+				return;
+			}
+
+			if (!matches(qe))
+			{
+				qe.deleteNode();
+			}
+			if (noDifference(qe))
+			{
+				qe.deleteNode();
+			}
+
+			EnumQueueEntryDetails qed = getQueueEntryDetails();
+			if (qed == null)
+			{
+				qed = EnumQueueEntryDetails.Brief;
+			}
+			if (EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.Brief, qed))
+			{
+				qe.removeChildren(ElementName.JOBPHASE, null, null);
+			}
+			if (EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.JobPhase, qed))
+			{
+				qe.removeChildren(ElementName.JDF, null, null);
+			}
+		}
+
+		/**
+		 * @param qe
+		 * @return
+		 */
+		private boolean noDifference(final JDFQueueEntry qe)
+		{
+			if (lastMap == null)
+			{
+				return false;
+			}
+			final String qeID = qe.getQueueEntryID();
+			final JDFQueueEntry lastQueueEntry = lastMap.get(qeID);
+			if (lastQueueEntry == null)
+			{
+				return false;
+			}
+			lastMap.remove(qeID);
+			final boolean equal = qe.isEqual(lastQueueEntry);
+			return equal;
+		}
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -108,7 +268,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFQueueFilter(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFQueueFilter(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -120,7 +280,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFQueueFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFQueueFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -133,7 +293,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFQueueFilter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFQueueFilter(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -168,37 +328,82 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * @param vPart
 	 */
 	@Override
-	public void setPartMapVector(VJDFAttributeMap vPart)
+	public void setPartMapVector(final VJDFAttributeMap vPart)
 	{
 		super.setPartMapVector(vPart);
 	}
 
 	/**
-	 * return true if the queuentry matches this filter
+	 * modifies queue to match this filter by removing all non-matching entries
 	 * 
+	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+	 * 
+	 * @param theQueue the queue to modify
+	 * @return
+	 * @deprecated use the 2 parameter version
+	 */
+	@Deprecated
+	public JDFQueue match(final JDFQueue theQueue)
+	{
+		return match(theQueue, null);
+	}
+
+	/**
+	 * modifies queue to match this filter by removing all non-matching entries
+	 * 
+	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
+	 * 
+	 * @param theQueue the queue to modify
+	 * @param lastQueue the last queue to diff against, note that this must be the complete queue prior to the last call of match
 	 * @return
 	 */
-	public boolean matches(JDFQueueEntry qe)
+	public JDFQueue match(final JDFQueue theQueue, final JDFQueue lastQueue)
+	{
+		if (theQueue == null)
+		{
+			return null;
+		}
+		return new QueueMatcher(theQueue, lastQueue).match();
+	}
+
+	/**
+	 * return true if the queuentry matches this filter
+	 * @param qe the queueentry to check
+	 * @return
+	 */
+	public boolean matches(final JDFQueueEntry qe)
 	{
 		if (qe == null)
+		{
 			return false;
+		}
 
 		if (EnumQueueEntryDetails.None.equals(getQueueEntryDetails()))
+		{
 			return false;
+		}
 
 		Set qeDefs = getQueueEntryDefSet();
 		if (qeDefs != null && !qeDefs.contains(qe.getQueueEntryID()))
+		{
 			return false;
+		}
 
 		qeDefs = getDeviceIDSet();
 		if (qeDefs != null && !qeDefs.contains(qe.getDeviceID()))
+		{
 			return false;
+		}
 
 		if (hasAttribute(AttributeName.GANGNAMES) && !getGangNames().contains(qe.getGangName()))
+		{
 			return false;
+		}
 
 		if (hasAttribute(AttributeName.STATUSLIST) && !getStatusList().contains(qe.getQueueEntryStatus()))
+		{
 			return false;
+		}
 
 		return true;
 	}
@@ -222,20 +427,22 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	public Set<String> getQueueEntryDefSet()
 	{
 		HashSet<String> set = null;
-		
-		VElement v = getChildElementVector(ElementName.QUEUEENTRYDEF, null);
+
+		final VElement v = getChildElementVector(ElementName.QUEUEENTRYDEF, null);
 		if (v != null)
 		{
 			final int siz = v.size();
 			set = siz == 0 ? null : new HashSet<String>();
 			for (int i = 0; i < siz; i++)
 			{
-				String qeid = ((JDFQueueEntryDef) v.elementAt(i)).getQueueEntryID();
+				final String qeid = ((JDFQueueEntryDef) v.elementAt(i)).getQueueEntryID();
 				if (!isWildCard(qeid))
+				{
 					set.add(qeid);
+				}
 			}
 		}
-		
+
 		return set != null && set.size() > 0 ? set : null;
 	}
 
@@ -248,78 +455,23 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	{
 		int siz = 0;
 		HashSet set = null;
-		
-		VElement v = getChildElementVector(ElementName.DEVICE, null);
+
+		final VElement v = getChildElementVector(ElementName.DEVICE, null);
 		if (v != null)
 		{
 			siz = v.size();
 			set = siz == 0 ? null : new HashSet();
 			for (int i = 0; i < siz; i++)
 			{
-				String qeid = ((JDFDevice) v.elementAt(i)).getDeviceID();
+				final String qeid = ((JDFDevice) v.elementAt(i)).getDeviceID();
 				if (!isWildCard(qeid))
+				{
 					set.add(qeid);
+				}
 			}
 		}
-		
+
 		return set != null && set.size() > 0 ? set : null;
-	}
-
-	/**
-	 * modifies queue to match this filter by removing all non-matching entries
-	 * 
-	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-	 * 
-	 * @param theQueue the queue to modify
-	 */
-	public void match(JDFQueue theQueue)
-	{
-		int maxEntries = hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
-
-		VElement v = theQueue.getQueueEntryVector();
-		if (v != null)
-		{
-			final int size = v.size();
-			theQueue.setQueueSize(size);
-
-			for (int i = 0; i < size; i++)
-			{
-				JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-				match(qe);
-			}
-		}
-
-		for (int i = theQueue.numEntries(null) - 1; i >= maxEntries; i--)
-			theQueue.removeChild(ElementName.QUEUEENTRY, null, maxEntries); 
-			// always zapp first - it is faster to find
-	}
-
-	/**
-	 * modifies queueEntry to match this filter by removing all non-matching attributes and elements
-	 * 
-	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-	 * 
-	 * @param qe
-	 */
-	public void match(JDFQueueEntry qe)
-	{
-		if (qe == null)
-			return;
-
-		if (!matches(qe))
-			qe.deleteNode();
-		EnumQueueEntryDetails qed = getQueueEntryDetails();
-		if (qed == null)
-			qed = EnumQueueEntryDetails.Brief;
-		if (EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.Brief, qed))
-		{
-			qe.removeChildren(ElementName.JOBPHASE, null, null);
-		}
-		if (EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.JobPhase, qed))
-		{
-			qe.removeChildren(ElementName.JDF, null, null);
-		}
-
 	}
 
 	/**
@@ -328,7 +480,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * @param deviceID the deviceID to set
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendDevice()
 	 */
-	public JDFDevice appendDevice(String deviceID) throws JDFException
+	public JDFDevice appendDevice(final String deviceID) throws JDFException
 	{
 		final JDFDevice device = super.appendDevice();
 		device.setDeviceID(deviceID);
@@ -339,7 +491,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * @param queueEntryID the queueEntryID to set
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendQueueEntryDef()
 	 */
-	public JDFQueueEntryDef appendQueueEntryDef(String queueEntryID) throws JDFException
+	public JDFQueueEntryDef appendQueueEntryDef(final String queueEntryID) throws JDFException
 	{
 		final JDFQueueEntryDef queueEntryDef = super.appendQueueEntryDef();
 		queueEntryDef.setQueueEntryID(queueEntryID);

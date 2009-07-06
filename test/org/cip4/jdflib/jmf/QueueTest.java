@@ -487,17 +487,20 @@ public class QueueTest extends TestCase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testCopyToResponse()
 	{
 		final JDFResponse r = JDFJMF.createJMF(JDFMessage.EnumFamily.Response, EnumType.AbortQueueEntry).getResponse(0);
 		final JDFQueueFilter qf = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
 		qf.setMaxEntries(3);
-		JDFQueue q2 = q.copyToResponse(r, qf);
+		JDFQueue q2 = q.copyToResponse(r, qf, null);
 		assertEquals(q2, r.getQueue(0));
 		assertEquals(q2.numEntries(null), 3);
 		assertNotSame(q, q2);
 		assertTrue(q.numEntries(null) > 3);
-		q2 = q.copyToResponse(r, qf);
+		q2 = q.copyToResponse(r, qf, null);
 		assertEquals(q2, r.getQueue(0));
 		assertNull(r.getElement("Queue", null, 1));
 		assertEquals(q2.numEntries(null), 3);
@@ -505,8 +508,7 @@ public class QueueTest extends TestCase
 		assertTrue(q.numEntries(null) > 3);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */

@@ -4408,9 +4408,10 @@ public class KElement extends ElementNSImpl
 	public static class SingleAttributeComparator implements Comparator<KElement>
 	{
 		/**
-		 * @param attName the attribute to use for comparing<br/>
 		 * if the attribute is numeric, compare numerically, else lexical comparison is done
-		 * @param invert if true, sort backwards
+		 * 
+		 * @param pAttName the attribute to use for comparing<br/>
+		 * @param pInvert if true, sort backwards
 		 */
 		public SingleAttributeComparator(final String pAttName, final boolean pInvert)
 		{
@@ -4467,6 +4468,7 @@ public class KElement extends ElementNSImpl
 
 	/**
 	 * sorts all child elements by alphabet
+	 * @param comparator the comparator object to sort by
 	 */
 	public synchronized void sortChildren(final Comparator<KElement> comparator)
 	{
@@ -5700,13 +5702,11 @@ public class KElement extends ElementNSImpl
 	 * @param srcNameSpaceURI of the attribute in the source, defaults to the value of nameSpaceURI
 	 * @default copyAttribute(attrib,src,null,null,null);
 	 */
-	public void copyAttribute(final String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI)
+	public void copyAttribute(String attrib, final KElement src, final String srcAttrib, final String nameSpaceURI, final String srcNameSpaceURI)
 	{
-		String attribLocal = attrib;
-
-		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFConstants.EMPTYSTRING) ? attribLocal : srcAttrib;
+		final String strSrcAttrib = (srcAttrib == null) || srcAttrib.equals(JDFConstants.EMPTYSTRING) ? attrib : srcAttrib;
 		final String strNameSpace = (srcNameSpaceURI == null) || srcNameSpaceURI.equals(JDFConstants.EMPTYSTRING) ? nameSpaceURI : srcNameSpaceURI;
-		if (strNameSpace != null && KElement.xmlnsPrefix(attribLocal) == null)
+		if (strNameSpace != null && KElement.xmlnsPrefix(attrib) == null)
 		{
 			final Attr an = src.getDOMAttr(strSrcAttrib, srcNameSpaceURI, false);
 			if (an != null)
@@ -5714,12 +5714,12 @@ public class KElement extends ElementNSImpl
 				final String pre = an.getPrefix();
 				if (!isWildCard(pre))
 				{
-					attribLocal = pre + ":" + attribLocal;
+					attrib = pre + ":" + attrib;
 				}
 			}
 		}
 
-		setAttribute(attribLocal, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
+		setAttribute(attrib, src.getAttribute_KElement(strSrcAttrib, srcNameSpaceURI, null), strNameSpace);
 	}
 
 	/**

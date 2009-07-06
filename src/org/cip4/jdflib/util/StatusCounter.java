@@ -813,9 +813,7 @@ public class StatusCounter
 	 * @param nodeStatusDetails the new statusDetails of the node
 	 * @param deviceStatus the new status of the device
 	 * @param deviceStatusDetails the new statusDetails of the device
-	 * @param vPartMap the vector of parts to that should be set
-	 * @param vResLink the resourcelinks that are used to fill the various amount attributes in jobphase and phasetime
-	 * 
+	 * @return true if the status changed
 	 */
 	public synchronized boolean setPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails)
 	{
@@ -1001,17 +999,20 @@ public class StatusCounter
 
 		fillDeviceInfo(deviceStatus, deviceStatusDetails, deviceInfo, la);
 
-		m_Node.setPartStatus(m_vPartMap, nodeStatus, nodeStatusDetails);
-		getVResLink(2);// update the nodes links
+		if (m_Node != null && nodeStatus != null) // may be null if idle
+		{
+			m_Node.setPartStatus(m_vPartMap, nodeStatus, nodeStatusDetails);
+			getVResLink(2);// update the nodes links
 
-		if (bEnd)
-		{
-			pt2.deleteNode(); // zapp the last phasetime
-		}
-		else
-		{
-			pt2.setLinks(getVResLink(1));
-			pt2.eraseEmptyAttributes(true);
+			if (bEnd)
+			{
+				pt2.deleteNode(); // zapp the last phasetime
+			}
+			else
+			{
+				pt2.setLinks(getVResLink(1));
+				pt2.eraseEmptyAttributes(true);
+			}
 		}
 	}
 

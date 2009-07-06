@@ -499,6 +499,50 @@ public class MimeUtil extends UrlUtil
 	}
 
 	/**
+	 * get the JDF Doc from a stream, also handle non mime streams gracefully
+	 * @param stream the stream to search in
+	 * @param index the index of the body part to search
+	 * @return JDFDoc the parsed xml JDFDoc, null if stream does not contain xml
+	 */
+	public static JDFDoc getJDFDoc(final InputStream stream, final int index)
+	{
+		final BufferedInputStream bis = ((stream instanceof BufferedInputStream) ? (BufferedInputStream) stream : new BufferedInputStream(stream));
+		bis.mark(1000000);
+		final Multipart mp = getMultiPart(bis);
+		if (mp != null)
+		{
+			try
+			{
+				final BodyPart bp = mp.getBodyPart(index);
+				return getJDFDoc(bp);
+			}
+			catch (final MessagingException e)
+			{
+				// nop
+			}
+		}
+		// not a mime - try direct xml
+		if (index == 0)
+		{
+
+			try
+			{
+				bis.reset();
+			}
+			catch (final IOException e)
+			{
+				return null;
+			}
+			final JDFParser p = new JDFParser();
+			return p.parseStream(bis);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * get the JDF Doc from a given body part
 	 * @param bp the BodyPart to search in
 	 * @return JDFDoc the parsed xml JDFDoc, null if bp does not contain xml

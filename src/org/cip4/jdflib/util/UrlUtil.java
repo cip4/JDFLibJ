@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -99,7 +99,9 @@ import javax.mail.Multipart;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 
 /**
  * collection of helper routines to convert urls
@@ -178,6 +180,17 @@ public class UrlUtil
 		public InputStream inStream;
 		public String contentType;
 		public int contentLength;
+
+		/**
+		 * returns an xmldoc corresponding to this part
+		 * @return the doc, null if not xml
+		 */
+		public XMLDoc getXMLDoc()
+		{
+			final JDFParser p = new JDFParser();
+			final XMLDoc d = p.parseStream(inStream);
+			return d;
+		}
 	}
 
 	// public static final String m_URIEscape = "%?:@&=+$,[]";

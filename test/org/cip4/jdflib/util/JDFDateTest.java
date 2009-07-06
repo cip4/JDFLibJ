@@ -182,21 +182,22 @@ public class JDFDateTest extends TestCase
 	}
 
 	/**
-	 * Method testdateTimeISO.
+	 * Method testdateTimeZone.
 	 * @throws Exception
 	 */
 	public void testdateTimeZone() throws Exception
 	{
-		final JDFDate date = new JDFDate();
-		final String strDate = date.getDateTimeISO();
-		final JDFDate date2 = new JDFDate(strDate);
-		assertEquals(date, date2);
-
+		JDFDate date = new JDFDate("1999-12-26T11:43:10-03:00");
+		assertEquals("-03:00", date.getTimeZoneISO());
+		date = new JDFDate("1999-12-26T11:43:10-05:00");
+		assertEquals("-05:00", date.getTimeZoneISO());
+		date = new JDFDate("1999-06-26T11:43:10-05:00");
+		assertEquals("-05:00", date.getTimeZoneISO());
+		assertEquals(1000 * 60 * 60 * -5, date.getTimeZoneOffsetInMillis());
 	}
 
 	/**
 	 * Method testdateMillis.
-	 * @throws Exception
 	 */
 	public void testdateMillis()
 	{
@@ -431,17 +432,19 @@ public class JDFDateTest extends TestCase
 	 */
 	public void testGetFormattedDateTime() throws Exception
 	{
-		final String dateString = "2008-12-19T07:00:11.300+00:00";
+		final String dateString = "2008-12-19T20:00:11.300+00:00";
 		final JDFDate date = new JDFDate(dateString);
 		assertEquals("2008", date.getFormattedDateTime("yyyy"));
 		assertEquals("12", date.getFormattedDateTime("MM"));
+		assertEquals("Dec", date.getFormattedDateTime("MMM"));
+		assertEquals("Dec 19 2008 - 20:00", date.getFormattedDateTime("MMM dd yyyy - HH:mm"));
 		assertEquals("300", date.getFormattedDateTime("SSS")); // test for
 		// milliseconds
 		assertEquals("300", date.getFormattedDateTime("S")); // test for
 		// milliseconds
 		assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
 		assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"));
-		assertEquals("12 19-07:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));
+		assertEquals("12 19-20:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));
 
 	}
 

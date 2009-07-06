@@ -481,6 +481,20 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(p2.getXSIType(), "Product");
 	}
 
+	/**
+	 * 
+	 */
+	public void testAddProcessGroup()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode mainNode = doc.getJDFRoot();
+		mainNode.setType(EnumType.ProcessGroup);
+		final VString combiNodes = new VString("a b c", null);
+		mainNode.setTypes(combiNodes);
+		final JDFNode p2 = mainNode.addProcessGroup(new VString("d e f", null));
+		assertEquals(mainNode.getTypes(), combiNodes);
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**

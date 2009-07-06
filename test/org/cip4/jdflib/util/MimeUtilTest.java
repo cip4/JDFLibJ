@@ -74,6 +74,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -115,7 +116,7 @@ import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * Jun 11, 2009
+ * June 11, 2009
  */
 public class MimeUtilTest extends JDFTestCaseBase
 {
@@ -158,13 +159,11 @@ public class MimeUtilTest extends JDFTestCaseBase
 			rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url?.pdf", false), 0, -1);
 		}
 		final Multipart m = MimeUtil.buildMimePackage(docJMF, doc, true);
-		MimeUtil.writeToFile(m, sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm", null);
-
+		final File out = MimeUtil.writeToFile(m, sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm", null);
+		assertTrue(out.canRead());
 	}
 
 	/**
-	 * @throws MessagingException
-	 * @throws IOException
 	 * 
 	 */
 	public void testBuildMimePackageDocJMFURL()
@@ -230,6 +229,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testGetPartByCID() throws Exception
 	{
 		testBuildMimePackageDocJMF();
@@ -239,6 +241,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertEquals(bp.getFileName(), "JDF.jdf");
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testGetContentID() throws Exception
 	{
 		testBuildMimePackageDocJMF();
@@ -278,6 +283,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertEquals(bp3.getContent(), "boo");
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testGetJDFDoc() throws Exception
 	{
 		testBuildMimePackageDocJMF();
@@ -293,6 +301,32 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertNotNull(d);
 		final JDFNode n = d.getJDFRoot();
 		assertNotNull(n);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testGetJDFDocFromStream() throws Exception
+	{
+		testBuildMimePackageDocJMF();
+		BufferedInputStream fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm")));
+		fis.mark(9999999);
+		assertNotNull(MimeUtil.getJDFDoc(fis, 0));
+		fis.reset();
+		assertNotNull(MimeUtil.getJDFDoc(fis, 1));
+		fis.reset();
+		assertNull(MimeUtil.getJDFDoc(fis, 2));
+		fis.close();
+		final JDFDoc d = new JDFDoc("JDF");
+		d.write2File(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf"), 2, false);
+		fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
+		fis.close();
+		assertNotNull(MimeUtil.getJDFDoc(fis, 0));
+		fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
+		assertNull(MimeUtil.getJDFDoc(fis, 1));
+		fis.close();
+		ThreadUtil.sleep(1000); // wait for the
+
 	}
 
 	/**

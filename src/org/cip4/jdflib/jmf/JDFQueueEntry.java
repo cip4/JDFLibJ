@@ -99,6 +99,7 @@ import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.MyInteger;
+import org.cip4.jdflib.util.StringUtil;
 
 //----------------------------------
 /**
@@ -604,6 +605,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 		setJobID(jdf.getJobID(true));
 		setJobPartID(jdf.getJobPartID(false));
 		setPartMapVector(jdf.getPartMapVector());
+		if(!hasAttribute(AttributeName.DESCRIPTIVENAME))
+			setDescriptiveName(StringUtil.getNonEmpty(jdf.getDescriptiveName()));
+			
 
 		if (!hasAttribute(AttributeName.PRIORITY))
 		{

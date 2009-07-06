@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -819,7 +819,7 @@ public class JDFJMF extends JDFAutoJMF
 	/**
 	 * set the default senderID that is used to generate jmf messages
 	 * 
-	 * @param theSenderID the theSenderID to set
+	 * @param _theSenderID the theSenderID to set
 	 */
 	public static void setTheSenderID(final String _theSenderID)
 	{
@@ -884,11 +884,11 @@ public class JDFJMF extends JDFAutoJMF
 	{
 		final EnumType t = q == null ? null : q.getEnumType();
 		final VElement v = getMessageVector(EnumFamily.Response, t);
-		final String qID = q == null ? null : q.getID();
+		final String queryID = q == null ? null : q.getID();
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFResponse r = (JDFResponse) v.elementAt(i);
-			if (qID == null || qID.equals(r.getrefID()))
+			if (queryID == null || queryID.equals(r.getrefID()))
 			{
 				final JDFSignal s = appendSignal();
 				moveElement(s, r); // retain ordering
@@ -925,6 +925,28 @@ public class JDFJMF extends JDFAutoJMF
 		}
 		return null;
 
+	}
+
+	/**
+	 * get element Acknowledge
+	 * @param refID refID of the response
+	 * @return JDFResponse the element
+	 * 
+	 */
+	public JDFAcknowledge getAcknowledge(final String refID)
+	{
+		return (JDFAcknowledge) getChildWithAttribute(ElementName.ACKNOWLEDGE, AttributeName.REFID, null, refID, 0, true);
+	}
+
+	/**
+	 * (27) get element Response
+	 * @param refID refID of the response
+	 * @return JDFResponse the element
+	 * 
+	 */
+	public JDFResponse getResponse(final String refID)
+	{
+		return (JDFResponse) getChildWithAttribute(ElementName.RESPONSE, AttributeName.REFID, null, refID, 0, true);
 	}
 
 }

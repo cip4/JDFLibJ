@@ -4,7 +4,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,9 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoAcknowledge;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VElement;
 
 /**
  * Typesafe resource wrapper class JDFAcknowledge.<br>
@@ -91,7 +94,7 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFAcknowledge(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFAcknowledge(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -103,7 +106,7 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFAcknowledge(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFAcknowledge(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -116,7 +119,7 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFAcknowledge(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFAcknowledge(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -132,5 +135,37 @@ public class JDFAcknowledge extends JDFAutoAcknowledge
 	public String toString()
 	{
 		return "JDFAcknowledge[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * converts a response to a signal that can be sent individually
+	 * 
+	 * @param response the response to convert - should not be null
+	 * @param q the query that should be merged into the signal - may be null
+	 * @return true if successful
+	 */
+	public boolean convertResponse(final JDFResponse response, final JDFQuery q)
+	{
+		if (response == null)
+		{
+			return false;
+		}
+		setAttributes(response);
+		final VElement elements = response.getChildElementVector(null, null, null, true, 0, true);
+		for (int i = 0; i < elements.size(); i++)
+		{
+			final JDFElement element = (JDFElement) elements.elementAt(i);
+			copyElement(element, null);
+		}
+		if (q != null)
+		{
+			setQuery(q);
+		}
+		else
+		{
+			setType(response.getEnumType());
+			copyAttribute(AttributeName.REFID, response);
+		}
+		return true;
 	}
 }
