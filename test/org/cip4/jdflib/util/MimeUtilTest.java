@@ -508,6 +508,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testWriteToDir() throws Exception
 	{
 		testBuildMimePackageDocJMF();
@@ -524,6 +527,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testWriteToFile() throws Exception
 	{
 		testBuildMimePackageDocJMF();
@@ -542,6 +548,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testWriteToFileMimeDetails() throws Exception
 	{
 		testBuildMimePackageDocJMF();
@@ -565,6 +574,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	// //////////////////
+	/**
+	 * @throws Exception
+	 */
 	public void testWriteToURLFile() throws Exception
 	{
 		testBuildMimePackageDocJMF();
@@ -579,6 +591,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testPerformance() throws Exception
 	{
 		testWritePerformance();
@@ -604,6 +619,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testPerformanceGet() throws Exception
 	{
 
@@ -619,6 +637,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testURLPerformance()
 	{
 		// testWritePerformance();
@@ -651,6 +672,11 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////
 
+	/**
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 * @throws MalformedURLException
+	 */
 	public void testWritePerformance() throws IOException, FileNotFoundException, MalformedURLException
 	{
 		final long start = System.currentTimeMillis();
