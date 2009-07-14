@@ -122,7 +122,7 @@ public class JDFDocTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = new JDFDoc("JDF");
 
-		final JDFDoc d2 = (JDFDoc) d.clone();
+		final JDFDoc d2 = d.clone();
 		final KElement e1 = d.getRoot();
 		final KElement e2 = d2.getRoot();
 		assertNotSame(e1, e2);
@@ -139,9 +139,9 @@ public class JDFDocTest extends JDFTestCaseBase
 		final JDFDoc d1 = new JDFDoc("JDF");
 		final JDFNode node = d1.getJDFRoot();
 		node.appendAncestorPool();
-		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
+		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
 		assertNotNull(root);
-		final JDFNode root2 = ((JDFDoc) root.getOwnerDocument_JDFElement().clone()).getJDFRoot();
+		final JDFNode root2 = root.getOwnerDocument_JDFElement().clone().getJDFRoot();
 		assertNotNull(root2);
 		assertNotSame(root, root2);
 	}
@@ -155,7 +155,7 @@ public class JDFDocTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		final JDFResource r = root.addResource("Media", EnumUsage.Input);
 		assertNotNull(r);
-		final JDFDoc d2 = (JDFDoc) d.clone();
+		final JDFDoc d2 = d.clone();
 		final KElement e1 = d.getRoot();
 		final KElement e2 = d2.getRoot();
 		assertNotSame(e1, e2);

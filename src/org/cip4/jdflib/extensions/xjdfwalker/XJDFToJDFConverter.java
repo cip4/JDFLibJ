@@ -41,7 +41,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	public XJDFToJDFConverter(final JDFDoc template)
 	{
 		super(new BaseWalkerFactory());
-		jdfDoc = template == null ? null : (JDFDoc) template.clone();
+		jdfDoc = template == null ? null : template.clone();
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	boolean isXResourceElement(final KElement toCheck)
 	{
 		boolean bReturn = false;
-		
+
 		if (toCheck != null)
 		{
 			KElement parent = toCheck.getParentNode_KElement();
@@ -132,7 +132,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final boolean bL1 = parent.getLocalName().endsWith("Set");
 			bReturn = bL1 && toCheck.getLocalName().equals(parent.getAttribute("Name"));
 		}
-		
+
 		return bReturn;
 	}
 

@@ -776,7 +776,7 @@ public class JDFQueue extends JDFAutoQueue
 		final JDFQueue newQueue = (JDFQueue) resp.copyElement(this, null);
 		if (filter != null)
 		{
-			filter.match(newQueue, priorQueue);
+			filter.apply(newQueue, priorQueue);
 		}
 		return newQueue;
 

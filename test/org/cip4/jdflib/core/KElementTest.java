@@ -356,7 +356,7 @@ public class KElementTest extends JDFTestCaseBase
 		final long l = d.getDocMemoryUsed();
 		for (int i = 0; i < 100000; i++)
 		{
-			ec1.replaceElement(((XMLDoc) d.clone()).getRoot().getFirstChildElement());
+			ec1.replaceElement(d.clone().getRoot().getFirstChildElement());
 		}
 		System.gc();
 		final long l2 = d.getDocMemoryUsed();
@@ -801,7 +801,7 @@ public class KElementTest extends JDFTestCaseBase
 		final KElement k = doc.getRoot();
 		k.appendElement("foo");
 		final KElement root = doc.getRoot();
-		final KElement k2 = root.cloneRoot((XMLDoc) doc.clone());
+		final KElement k2 = root.cloneRoot(doc.clone());
 		assertTrue(root.isEqual(k));
 		assertNotSame(k2.getOwnerDocument(), doc.getMemberDocument());
 	}
@@ -863,7 +863,7 @@ public class KElementTest extends JDFTestCaseBase
 		final XMLDoc d2 = new XMLDoc("d2", null);
 		for (int i = 0; i < 10000; i++)
 		{
-			final KElement e3 = e.copyElement(((XMLDoc) d2.clone()).getRoot(), null);
+			final KElement e3 = e.copyElement(d2.clone().getRoot(), null);
 			assertNull(e3.getNamespaceURI());
 		}
 		System.out.println("mem new:   " + getCurrentMem() + " " + mem);

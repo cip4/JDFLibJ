@@ -1182,7 +1182,7 @@ public class StatusCounter
 		{
 			setIdlePhase(EnumDeviceStatus.Idle, null);
 		}
-		return (JDFDoc) docJMFPhaseTime.clone();
+		return docJMFPhaseTime.clone();
 	}
 
 	/**
@@ -1194,7 +1194,7 @@ public class StatusCounter
 		{
 			return null;
 		}
-		return (JDFDoc) docJMFResource.clone();
+		return docJMFResource.clone();
 	}
 
 	/**
@@ -1212,7 +1212,7 @@ public class StatusCounter
 			}
 			else
 			{
-				ret = (JDFDoc) docJMFNotification.clone();
+				ret = docJMFNotification.clone();
 			}
 		}
 		return ret;

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,11 +82,18 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoIDInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.ifaces.INodeIdentifiable;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
  */
-public class JDFIDInfo extends JDFAutoIDInfo
+public class JDFIDInfo extends JDFAutoIDInfo implements INodeIdentifiable
 {
 	private static final long serialVersionUID = 1L;
 
@@ -96,7 +103,7 @@ public class JDFIDInfo extends JDFAutoIDInfo
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFIDInfo(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFIDInfo(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -108,7 +115,7 @@ public class JDFIDInfo extends JDFAutoIDInfo
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFIDInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFIDInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -121,7 +128,7 @@ public class JDFIDInfo extends JDFAutoIDInfo
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFIDInfo(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFIDInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -139,4 +146,59 @@ public class JDFIDInfo extends JDFAutoIDInfo
 		return "JDFIDInfo[  --> " + super.toString() + " ]";
 	}
 
+	/**
+	 * creates a matching IDInfo for a node. Note: Does NOT copy the jdf element
+	 * 
+	 * @param n the jdf node to copy data from
+	 * @param message message to place the new idinfo: if null a root idinfo is created
+	 * @return the idinfo
+	 */
+	public static JDFIDInfo createFromJDF(final JDFNode n, final JDFMessage message)
+	{
+		final JDFIDInfo newInfo = message == null ? (JDFIDInfo) new JDFDoc(ElementName.IDINFO).getRoot() : message.appendIDInfo();
+		if (n != null)
+		{
+			final String[] directCopy = { AttributeName.TYPE, AttributeName.TYPES, AttributeName.DESCRIPTIVENAME, AttributeName.JOBPARTID, AttributeName.CATEGORY };
+			for (int i = 0; i < directCopy.length; i++)
+			{
+				newInfo.copyAttribute(directCopy[i], n);
+			}
+			newInfo.setJobID(StringUtil.getNonEmpty(n.getJobID(true)));
+			final JDFNode parent = n.getParentJDF();
+			if (parent != null)
+			{
+				newInfo.setParentJobID(StringUtil.getNonEmpty(parent.getJobID(true)));
+				newInfo.setParentJobPartID(StringUtil.getNonEmpty(parent.getJobPartID(false)));
+			}
+		}
+		return newInfo;
+	}
+
+	/**
+	 * returns the parentjobid which defaults to jobID
+	 * @see org.cip4.jdflib.auto.JDFAutoIDInfo#getParentJobID()
+	 */
+	@Override
+	public String getParentJobID()
+	{
+		final String s = StringUtil.getNonEmpty(super.getParentJobID());
+		return s == null ? getJobID() : s;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
+	 */
+	public NodeIdentifier getIdentifier()
+	{
+		return new NodeIdentifier(getJobID(), getJobPartID(), null);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
+	 */
+	public void setIdentifier(final NodeIdentifier ni)
+	{
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+	}
 }

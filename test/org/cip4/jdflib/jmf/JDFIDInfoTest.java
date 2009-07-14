@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2007 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,94 +68,59 @@
  *
  */
 
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFNewJDFQuParams.java
- *
- * Last changes
- *
- * 2002-07-02 JG - init() Also call super::init()
- *
- */
 package org.cip4.jdflib.jmf;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoNewJDFQuParams;
-import org.cip4.jdflib.ifaces.INodeIdentifiable;
-import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
- *
+ * @author Rainer Prosi
+ * 
+ * Test of the Status JMF
  */
-public class JDFNewJDFQuParams extends JDFAutoNewJDFQuParams implements INodeIdentifiable
+public class JDFIDInfoTest extends JDFTestCaseBase
 {
-	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructor for JDFNewJDFQuParams
 	 * 
-	 * @param myOwnerDocument
-	 * @param qualifiedName
 	 */
-	public JDFNewJDFQuParams(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
+	public void testCreateNull()
 	{
-		super(myOwnerDocument, qualifiedName);
+		assertNotNull(JDFIDInfo.createFromJDF(null, null));
 	}
 
 	/**
-	 * Constructor for JDFNewJDFQuParams
 	 * 
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
 	 */
-	public JDFNewJDFQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
+	public void testCreateNode()
 	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName);
-	}
+		final JDFNode jdf = new JDFDoc("JDF").getJDFRoot();
+		jdf.setCategory("foo");
+		jdf.setType(EnumType.Product);
+		jdf.setJobID("j1");
+		jdf.setJobPartID("root");
+		final VString tasks = new VString("a b c", null);
+		final JDFNode jdf2 = jdf.addCombined(tasks);
+		jdf.setJobPartID("j2");
+		JDFIDInfo idInfo = JDFIDInfo.createFromJDF(jdf, null);
+		assertNotNull(idInfo);
+		assertEquals(idInfo.getCategory(), jdf.getCategory());
+		assertEquals(idInfo.getJobID(), jdf.getJobID(true));
+		assertEquals(idInfo.getJobPartID(), jdf.getJobPartID(false));
+		assertEquals(idInfo.getType(), "Product");
 
-	/**
-	 * Constructor for JDFNewJDFQuParams
-	 * 
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 * @param myLocalName
-	 */
-	public JDFNewJDFQuParams(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFNewJDFQuParams[  --> " + super.toString() + " ]";
-	}
-
-	/**
-	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
-	 */
-	public NodeIdentifier getIdentifier()
-	{
-		return new NodeIdentifier(getJobID(), getJobPartID(), null);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
-	 */
-	public void setIdentifier(final NodeIdentifier ni)
-	{
-		setJobID(ni.getJobID());
-		setJobPartID(ni.getJobPartID());
+		idInfo = JDFIDInfo.createFromJDF(jdf2, null);
+		assertNotNull(idInfo);
+		assertNull(StringUtil.getNonEmpty(idInfo.getCategory()));
+		assertEquals(idInfo.getJobID(), jdf2.getJobID(true));
+		assertEquals(idInfo.getJobPartID(), jdf2.getJobPartID(false));
+		assertEquals(idInfo.getParentJobID(), jdf.getJobID(true));
+		assertEquals(idInfo.getParentJobPartID(), jdf.getJobPartID(false));
+		assertEquals(idInfo.getType(), "Combined");
+		assertEquals(idInfo.getTypes(), tasks);
 	}
 }

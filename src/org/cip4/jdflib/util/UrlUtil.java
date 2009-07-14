@@ -111,8 +111,17 @@ import org.cip4.jdflib.core.XMLDoc;
  */
 public class UrlUtil
 {
+	/**
+	 * 
+	 */
 	public static final String POST = "POST";
+	/**
+	 * 
+	 */
 	public static final String GET = "GET";
+	/**
+	 * 
+	 */
 	public static final String CONTENT_TRANSFER_ENCODING = "Content-Transfer-Encoding";
 
 	/**
@@ -634,12 +643,26 @@ public class UrlUtil
 	}
 
 	/**
+	 * null safe url to string converter
+	 * @param url
+	 * @return
+	 */
+	public static String urlToString(final URL url)
+	{
+		if (url == null)
+		{
+			return null;
+		}
+		return url.toExternalForm();
+	}
+
+	/**
 	 * Create a URL for any url string using heuristics and escaping
 	 * 
 	 * @param urlString the file url to retrieve a file for
 	 * @return
 	 */
-	public static URL StringToURL(final String urlString)
+	public static URL stringToURL(final String urlString)
 	{
 		String urlStringLocal = urlString;
 
@@ -779,6 +802,19 @@ public class UrlUtil
 		}
 		final String lowerURL = url.toLowerCase();
 		return lowerURL.startsWith("https://");
+	}
+
+	/**
+	 * normalize a url string by grinding it through url
+	 * 
+	 * @param urlString
+	 * @return the normalized string, null if not a valid url
+	 */
+	public static String normalize(final String urlString)
+	{
+		final URL url = stringToURL(urlString);
+		return urlToString(url);
+
 	}
 
 	/**

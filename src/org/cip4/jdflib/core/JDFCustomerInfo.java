@@ -272,16 +272,19 @@ public class JDFCustomerInfo extends JDFAutoCustomerInfo
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// ///////
 	/**
-	 * get a list of contacts with at least one contacttype set
+	 * get a list of contacts with at least one matching contactType set
 	 * 
-	 * @param contactType the contatcttype to look for
+	 * @param contactType the contactType to look for - if null return all contacts
 	 * @return VElement the vector of matching JDFContacts, null if none are found
 	 */
 	public VElement getContactVectorWithContactType(final String contactType)
 	{
 		final VElement v = getChildElementVector(ElementName.CONTACT, null, null, true, 0, true);
+		if (isWildCard(contactType))
+		{
+			return v.size() == 0 ? null : v;
+		}
 		final VElement v2 = new VElement();
 		final int siz = v.size();
 		for (int i = 0; i < siz; i++)

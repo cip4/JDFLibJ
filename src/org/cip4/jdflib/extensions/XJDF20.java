@@ -177,7 +177,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public KElement makeNewJMF(final JDFJMF jmf)
 	{
-		final KElement root = ((JDFDoc) jmf.getOwnerDocument_JDFElement().clone()).getJMFRoot();
+		final KElement root = jmf.getOwnerDocument_JDFElement().clone().getJMFRoot();
 		final JDFDoc newDoc = new JDFDoc("JMF");
 		newRoot = newDoc.getRoot();
 		first = true;
@@ -193,7 +193,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
-		final JDFNode root = ((JDFDoc) node.getOwnerDocument_JDFElement().clone()).getJDFRoot();
+		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
 		oldRoot = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
 		if (oldRoot == null)
 		{
@@ -1352,10 +1352,11 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		protected void copyLinkValues(final KElement raNew, final JDFResourceLink rl, final String val)
 		{
-			if (rl != null)
+			final JDFResource rlRoot = rl == null ? null : rl.getLinkRoot();
+			if (rlRoot != null)
 			{
-				final VElement v = setResource(null, rl.getLinkRoot(), newRoot);
-				for (KElement kElem : v)
+				final VElement v = setResource(null, rlRoot, newRoot);
+				for (final KElement kElem : v)
 				{
 					raNew.appendAttribute(val, kElem.getAttribute(AttributeName.ID), null, " ", true);
 				}

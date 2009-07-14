@@ -140,7 +140,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		 * 
 		 * @param theQueue the queue to modify
 		 */
-		protected JDFQueue match()
+		protected JDFQueue apply()
 		{
 			final int maxEntries = hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
 
@@ -153,7 +153,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 				for (int i = 0; i < size; i++)
 				{
 					final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-					match(qe);
+					apply(qe);
 				}
 			}
 
@@ -207,7 +207,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		 * 
 		 * @param qe
 		 */
-		protected void match(final JDFQueueEntry qe)
+		protected void apply(final JDFQueueEntry qe)
 		{
 			if (qe == null)
 			{
@@ -345,7 +345,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	@Deprecated
 	public JDFQueue match(final JDFQueue theQueue)
 	{
-		return match(theQueue, null);
+		return apply(theQueue, null);
 	}
 
 	/**
@@ -357,13 +357,13 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * @param lastQueue the last queue to diff against, note that this must be the complete queue prior to the last call of match
 	 * @return
 	 */
-	public JDFQueue match(final JDFQueue theQueue, final JDFQueue lastQueue)
+	public JDFQueue apply(final JDFQueue theQueue, final JDFQueue lastQueue)
 	{
 		if (theQueue == null)
 		{
 			return null;
 		}
-		return new QueueMatcher(theQueue, lastQueue).match();
+		return new QueueMatcher(theQueue, lastQueue).apply();
 	}
 
 	/**

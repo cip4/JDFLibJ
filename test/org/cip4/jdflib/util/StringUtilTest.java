@@ -79,6 +79,7 @@ package org.cip4.jdflib.util;
 import java.io.File;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
@@ -518,7 +519,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testSubstring()
 	{
-//		final String s = "a".substring(0, 0);
+		// final String s = "a".substring(0, 0);
 		assertEquals(StringUtil.substring("abbcc", 0, 2), "ab");
 		assertEquals(StringUtil.substring("abbcc", 0, -2), "abb");
 		assertEquals(StringUtil.substring("abbcc", -2, -2), "");
@@ -598,6 +599,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		s = "";
 		assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
 		assertFalse(StringUtil.isNumber(s));
+		s = "1,2";
+		assertEquals("gracefully handle ',' as a separator char", StringUtil.parseDouble(s, 0.), 1.2, 0.);
+		assertTrue("gracefully handle ',' as a separator char", StringUtil.isNumber(s));
 		s = null;
 		assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
 		assertFalse(StringUtil.isNumber(s));
@@ -787,6 +791,9 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testEndsWithIgnoreCase()
 	{
 		final String s = "a.ZIP";
@@ -796,6 +803,9 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testisEqual()
 	{
 		final double d = 1.3141516171819;
@@ -845,6 +855,9 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testIsID()
 	{
 		assertTrue(StringUtil.isID("abc"));
@@ -853,6 +866,9 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testisWindowsLocalPath()
 	{
 		assertTrue(UrlUtil.isWindowsLocalPath("c:\\foo"));
@@ -865,6 +881,9 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testPathToName()
 	{
 		assertEquals(StringUtil.pathToName("\\\\foo\\bar"), "bar");
@@ -875,19 +894,25 @@ public class StringUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetNamesVector()
 	{
-		VString v = StringUtil.getNamesVector(EnumType.AbortQueueEntry.getClass());
+		VString v = EnumUtil.getNamesVector(EnumType.AbortQueueEntry.getClass());
 		assertTrue(v.contains("Resource"));
-		v = StringUtil.getNamesVector(EnumOrientation.Flip0.getClass());
+		v = EnumUtil.getNamesVector(EnumOrientation.Flip0.getClass());
 		assertTrue(v.contains("Rotate90"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetEnumsVector()
 	{
-		final Vector v = StringUtil.getEnumsVector(EnumOrientation.Flip180.getClass());
+		final Vector<ValuedEnum> v = EnumUtil.getEnumsVector(EnumOrientation.Flip180.getClass());
 		assertTrue(v.contains(EnumOrientation.Rotate180));
 	}
 

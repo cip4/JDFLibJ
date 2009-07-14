@@ -76,6 +76,7 @@
 
 package org.cip4.jdflib.core;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -1669,14 +1670,20 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	{
 		final JDFResource r = getTarget();
 		double d = 0;
-		if (r == null || EnumPartUsage.Implicit.equals(r.getPartUsage()) || (this instanceof JDFPartAmount))
+		final JDFAmountPool amountPool = getAmountPool();
+		if (amountPool == null && hasAttribute(attName))
+		{
+			return getRealAttribute(attName, null, 0);
+		}
+		else if (r == null || EnumPartUsage.Implicit.equals(r.getPartUsage()) || (this instanceof JDFPartAmount))
 		{
 			d = AmountPoolHelper.getAmountPoolDouble(this, attName, mPart);
 		}
-		else
+		else if (amountPool != null)
 		{
 
 			final VElement v = r.getLeaves(false);
+			final HashSet<JDFPartAmount> hsDone = new HashSet<JDFPartAmount>();
 			for (int i = 0; i < v.size(); i++)
 			{
 				final JDFResource rp = (JDFResource) v.get(i);
@@ -1684,7 +1691,17 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 				if (m == null || m.overlapMap(mPart))
 				{
 					final JDFAttributeMap m2 = m == null ? mPart : m.getOrMap(mPart);
-					d = Math.max(d, AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2));
+					final JDFPartAmount pa = amountPool.getPartAmount(mPart);
+					// don't count ParAmount elements with multiple parts more than once
+					if (!hsDone.contains(pa))
+					{
+						final double delta = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2);
+						if (delta > 0)
+						{
+							d += delta;
+						}
+						hsDone.add(pa);
+					}
 				}
 			}
 			if (d == 0)

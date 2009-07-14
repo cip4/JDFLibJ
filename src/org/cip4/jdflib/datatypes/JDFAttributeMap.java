@@ -92,6 +92,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * This is the Java class to the mAttribute class on the C++ side.
@@ -230,12 +231,12 @@ public class JDFAttributeMap implements Map
 	}
 
 	/**
-	 * put - maps the specified key to the specified value in this hashtable. Neither the key nor the value can be ""
+	 * put - maps the specified key to the specified value in this hashtable. the key MUST NOT be ""
 	 * 
 	 * Note: This method is the equivalent to AddPair in C++
 	 * 
 	 * @param key unique key of the pair to add. Must not be "" or null.
-	 * @param value value of the pair to add. Must not be "" or null.
+	 * @param value value of the pair to add. MAY be "" or null.
 	 * 
 	 * @return boolean - false if one Inputparamter is invalid (empty String and null are not alowed)<br>
 	 * true if the new Key was inserted
@@ -254,6 +255,43 @@ public class JDFAttributeMap implements Map
 		m_hashTable.put(key, value == null ? nullVal : value);
 
 		return true;
+	}
+
+	/**
+	 * put - maps the specified key to the specified value in this hashtable. Neither the key nor the value can be ""
+	 * 
+	 * Note: This method is the equivalent to AddPair in C++
+	 * 
+	 * @param key unique key of the pair to add. Must not be "" or null.
+	 * @param value value of the pair to add. Must not be "" or null.
+	 * 
+	 * @return boolean - false if one Inputparamter is invalid (empty String and null are not alowed)<br>
+	 * true if the new Key was inserted
+	 * <p>
+	 * NOTE: It is NOT possible to enter to identical keys. If you enter a key to a Attribute Map which already exists, the value will be replaced.
+	 */
+	public boolean putNotNull(final Object key, final Object value)
+	{
+		String k1 = null;
+		if (key instanceof ValuedEnum)
+		{
+			k1 = ((ValuedEnum) key).getName();
+		}
+		else if (key instanceof String)
+		{
+			k1 = (String) key;
+		}
+
+		String v1 = null;
+		if (value instanceof ValuedEnum)
+		{
+			v1 = ((ValuedEnum) value).getName();
+		}
+		else if (value instanceof String)
+		{
+			v1 = (String) value;
+		}
+		return StringUtil.getNonEmpty(v1) == null ? false : put(k1, v1);
 	}
 
 	/**

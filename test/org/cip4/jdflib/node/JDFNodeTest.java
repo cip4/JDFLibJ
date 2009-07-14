@@ -185,7 +185,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFResourceLinkPool linkPool = nodeProc.getResourceLinkPool();
 		final JDFResourceLink link = linkPool.getPoolChild(0, "ExposedMediaLink", null, null);
 		final VJDFAttributeMap vam = nodeProc.getExecutablePartitions(link, JDFResource.EnumResStatus.Draft, true);
-		assertTrue(vam.size() == 5);
+		assertEquals(vam.size(), 5);
 
 		// VJDFAttributeMap:
 		// [0]JDFAttributeMap: { (Side = Front) (SheetName = 002_Text-1)
@@ -239,6 +239,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetType()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -264,6 +267,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNull(n.getAttribute("Types", null, null));
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetEnum()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -284,6 +290,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNull(n.getXSIType());
 	}
 
+	/**
+	 * 
+	 */
 	public void testLinkResourceNS()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -295,6 +304,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertFalse(rll.hasAttribute(AttributeName.COMBINEDPROCESSINDEX));
 	}
 
+	/**
+	 * 
+	 */
 	public void testEnsureLink()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -393,6 +405,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
+	 * @throws Exception
 	 * 
 	 */
 	public void testLinkResourceCombined() throws Exception
@@ -456,6 +469,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAddTypes()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -494,7 +510,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		mainNode.setType(EnumType.ProcessGroup);
 		final VString combiNodes = new VString("a b c", null);
 		mainNode.setTypes(combiNodes);
-		final JDFNode p2 = mainNode.addProcessGroup(new VString("d e f", null));
+		mainNode.addProcessGroup(new VString("d e f", null));
 		assertNull("must remove types in parent processgroup", mainNode.getTypes());
 	}
 
@@ -587,6 +603,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertFalse(n.hasAttribute("bar"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testEraseEmptyNodes()
 	{
 		// note: when using JDFParser.parse(string), empty nodes are removed by
@@ -600,6 +619,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNotNull(n.getResourceLinkPool());
 	}
 
+	/**
+	 * 
+	 */
 	public void testFixVersion()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -614,6 +636,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /////
 
+	/**
+	 * 
+	 */
 	public void testEraseUnlinkedResources()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -657,6 +682,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testRemoveResource()
 	{
 		final JDFDoc gd = new JDFDoc("JDF");
@@ -768,8 +796,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 *
-	 *
+	 * @throws Exception
+	 * 
+	 * 
 	 */
 	public void testSetPhase() throws Exception
 	{
@@ -954,7 +983,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 	/**
 	 * Method testGetExecutablePartitionsPreflightImport
 	 * 
-	 * @throws Exception
 	 */
 
 	public void testGetExecutablePartitionsPreflightImport()
@@ -991,7 +1019,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 	/**
 	 * Method testGetExecutablePartitionsNormalizer
 	 * 
-	 * @throws Exception
 	 */
 
 	public void testGetExecutablePartitionsNormalizer()
@@ -1014,9 +1041,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * Method testGetExecutablePartitionsNormalizer
+	 * Method testIsExecutableZones
 	 * 
-	 * @throws Exception
 	 */
 
 	public void testIsExecutableZones()
@@ -1063,18 +1089,21 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testNullPointerException()
 	{
-		final List LcleanUpMerge = JDFNode.EnumCleanUpMerge.getEnumList();
-		final List LamountMerge = JDFResource.EnumAmountMerge.getEnumList();
+		final List<EnumCleanUpMerge> LcleanUpMerge = JDFNode.EnumCleanUpMerge.getEnumList();
+		final List<EnumAmountMerge> LamountMerge = JDFResource.EnumAmountMerge.getEnumList();
 
 		for (int i = 0; i < LcleanUpMerge.size(); i++)
 		{
-			final EnumCleanUpMerge cleanUp = (EnumCleanUpMerge) LcleanUpMerge.get(i);
+			final EnumCleanUpMerge cleanUp = LcleanUpMerge.get(i);
 
 			for (int j = 0; j < LcleanUpMerge.size(); j++)
 			{
-				final EnumAmountMerge amountMerge = (EnumAmountMerge) LamountMerge.get(j);
+				final EnumAmountMerge amountMerge = LamountMerge.get(j);
 
 				final String xmlFile1 = "km4444.jdf";
 				final String xmlFile2 = "Link33458670_000214km4444Qua0.NSp33486069_000371_37_out.jdf";
@@ -1102,6 +1131,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testNodeIdentifier()
 	{
 		final NodeIdentifier ni = new NodeIdentifier();
@@ -1121,6 +1153,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(ni, ni2);
 	}
 
+	/**
+	 * 
+	 */
 	public void testNodeIdentifierParts()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -1144,6 +1179,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testNodeIdentifierMatches()
 	{
 		final NodeIdentifier ni = new NodeIdentifier();
@@ -1171,6 +1209,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testInit()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1680,6 +1721,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAppendMatchingResourceDefinition()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1719,6 +1763,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetResourceProcessUsage()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1737,6 +1784,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNull(r);
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetCreateResource()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1810,6 +1860,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testCheckSpawnedResources()
 	{
 		final String strJDFName = "000023_Test_PR3.0.jdf";
@@ -2058,12 +2111,37 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNode root = doc.getJDFRoot();
 		root.setType(EnumType.Product);
 		root.setJobPartID("p0");
+		root.setJobID("j1");
 		final JDFNode p1 = root.addJDFNode(EnumType.Product);
 		assertEquals(root.getJobPart("p0", null), root);
+		assertEquals(root.getJobPart("p0", "j1"), root);
+		assertNull(p1.getJobPart("p0", "j2"));
 		assertEquals(root.getJobPart("p0.1", null), p1);
+		assertEquals(root.getJobPart("p0.1", "j1"), p1);
 		final JDFNode p11 = p1.addJDFNode(EnumType.Product);
 		assertEquals(root.getJobPart("p0.1.1", null), p11);
+		assertEquals(root.getJobPart("p0.1.1", "j1"), p11);
 		assertEquals(p1.getJobPart("p0.1.1", null), p11);
+		assertEquals(p1.getJobPart("p0.1.1", "j1"), p11);
+		assertNull(p1.getJobPart("p0.1.1", "j2"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetJobPartIdentifier()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode root = doc.getJDFRoot();
+		root.setType(EnumType.Product);
+		root.setJobPartID("p0");
+		final JDFNode p1 = root.addJDFNode(EnumType.Product);
+		assertEquals(root.getJobPart(new NodeIdentifier(root.getJobID(true), "p0", null)), root);
+		assertEquals(root.getJobPart(new NodeIdentifier(root.getJobID(true), "p0.1", null)), p1);
+		assertEquals(root.getJobPart(new NodeIdentifier(null, "p0", null)), root);
+		assertEquals(root.getJobPart(new NodeIdentifier(null, "p0.1", null)), p1);
+		assertEquals(root.getJobPart(new NodeIdentifier("", "p0", null)), root);
+		assertEquals(root.getJobPart(new NodeIdentifier("", "p0.1", null)), p1);
 	}
 
 	/**

@@ -149,7 +149,9 @@ import org.cip4.jdflib.goldenticket.GoldenTicketTest;
 import org.cip4.jdflib.goldenticket.IDPGoldenTicketTest;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicketTest;
 import org.cip4.jdflib.goldenticket.MISPreGoldenTicketTest;
+import org.cip4.jdflib.jmf.JDFDeviceFilterTest;
 import org.cip4.jdflib.jmf.JDFDeviceInfoTest;
+import org.cip4.jdflib.jmf.JDFIDInfoTest;
 import org.cip4.jdflib.jmf.JDFJMFTest;
 import org.cip4.jdflib.jmf.JDFJobPhaseTest;
 import org.cip4.jdflib.jmf.JDFMessageServiceTest;
@@ -343,7 +345,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(IDPGoldenTicketTest.class);
 
 		// JMF
+		suite.addTestSuite(JDFDeviceFilterTest.class);
 		suite.addTestSuite(JDFDeviceInfoTest.class);
+		suite.addTestSuite(JDFIDInfoTest.class);
 		suite.addTestSuite(JDFJMFTest.class);
 		suite.addTestSuite(JDFJobPhaseTest.class);
 		suite.addTestSuite(JDFMessageTest.class);

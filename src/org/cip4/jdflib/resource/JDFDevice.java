@@ -80,12 +80,13 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * way before Jun 3, 2009
+ * way before June 3, 2009
  */
 public class JDFDevice extends JDFAutoDevice
 {
@@ -314,6 +315,18 @@ public class JDFDevice extends JDFAutoDevice
 			}
 		}
 		return bugReport;
+	}
+
+	/**
+	 * get the descriptivename - default to friendlyname if descriptivename is not set
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#getDescriptiveName()
+	 */
+	@Override
+	public String getDescriptiveName()
+	{
+		final String ret = StringUtil.getNonEmpty(super.getDescriptiveName());
+		return ret != null ? ret : getFriendlyName();
 	}
 
 }

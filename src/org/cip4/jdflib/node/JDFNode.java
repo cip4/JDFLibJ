@@ -414,7 +414,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			return getEnumMap(EnumCleanUpMerge.class);
 		}
 
-		public static List getEnumList()
+		public static List<EnumCleanUpMerge> getEnumList()
 		{
 			return getEnumList(EnumCleanUpMerge.class);
 		}
@@ -4032,6 +4032,23 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	/**
 	 * getJobPart - get a child node with a given jobpartid
 	 * 
+	 * @param nodeID the NodeIdentifier of the job part
+	 * 
+	 * @return JDFNode
+	 * 
+	 */
+	public JDFNode getJobPart(final NodeIdentifier nodeID)
+	{
+		if (nodeID == null)
+		{
+			return this;
+		}
+		return getJobPart(nodeID.getJobPartID(), nodeID.getJobID());
+	}
+
+	/**
+	 * getJobPart - get a child node with a given jobpartid
+	 * 
 	 * @param jobPartID the ID of the part job
 	 * @param jobID the ID of the job
 	 * 
@@ -4042,11 +4059,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	public JDFNode getJobPart(final String jobPartID, final String jobID)
 	{
 		final JDFAttributeMap jobPartIDMap = new JDFAttributeMap(AttributeName.JOBPARTID, jobPartID);
-		if (jobID != null && !jobID.equals(JDFConstants.EMPTYSTRING))
+		JDFNode n = (JDFNode) getTreeElement(ElementName.JDF, null, jobPartIDMap, false, true);
+		if (n != null && !isWildCard(jobID))
 		{
-			jobPartIDMap.put(AttributeName.JOBID, jobID);
+			if (!jobID.equals(n.getJobID(true)))
+			{
+				jobPartIDMap.put(AttributeName.JOBID, jobID);
+				n = (JDFNode) getTreeElement(ElementName.JDF, null, jobPartIDMap, false, true);
+			}
 		}
-		return (JDFNode) getTreeElement(getNodeName(), null, jobPartIDMap, false, true);
+		return n;
 	}
 
 	/**

@@ -70,7 +70,6 @@
  */
 package org.cip4.jdflib.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -89,7 +88,6 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
@@ -242,6 +240,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testSubsetPartitionedSpawn()
 	{
 		for (int i = 0; i < 2; i++)
@@ -627,15 +628,15 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.Folding);
-//		final JDFFoldingParams fp = (JDFFoldingParams) 
+		// final JDFFoldingParams fp = (JDFFoldingParams)
 		n.addResource(ElementName.FOLDINGPARAMS, EnumUsage.Output);
 		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
 
 		JDFSpawn spawn = new JDFSpawn(n);
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
 		vMap.add(m);
-//		JDFNode nsp = 
-			spawn.spawn("thisUrl", "newURL", new VString("Output", null), vMap, true, true, true, true);
+		// JDFNode nsp =
+		spawn.spawn("thisUrl", "newURL", new VString("Output", null), vMap, true, true, true, true);
 
 		spawn = new JDFSpawn(n);
 		try
@@ -651,8 +652,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		spawn.vRWResources_in = new VString("Output", null);
 		spawn.vSpawnParts = vMap;
 		spawn.cleanSpawnedResources();
-//		nsp = 
-			spawn.spawn("thisUrl", "newURL", new VString("Output", null), vMap, true, true, true, true);
+		// nsp =
+		spawn.spawn("thisUrl", "newURL", new VString("Output", null), vMap, true, true, true, true);
 	}
 
 	/**
@@ -1316,7 +1317,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 					xmRLspawn.setActualAmount(42, i != 0 ? map : null);
 					assertEquals(xmRLspawn.getAttribute("foo:bar", "www.foobar.com", null), "a");
 					assertEquals("amount ok", xmRLspawn.getAmount(map), 40., 0);
-					assertEquals("act amount ok", xmRLspawn.getActualAmount(map), 42., 0.);
+					assertEquals("act amount ok - ", xmRLspawn.getActualAmount(map), 42., 0.);
 
 					// xmRLspawn.setAttribute("foo:bar","bb","www.foobar.com");
 					if (i == 2)
@@ -2511,7 +2512,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFAttributeMap partMap2 = new JDFAttributeMap(partMap);
 		partMap2.put("Separation", "Black");
 		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
-//		final JDFTransferCurvePool tcPart = (JDFTransferCurvePool) 
+		// final JDFTransferCurvePool tcPart = (JDFTransferCurvePool)
 		tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
 
 		final JDFSpawn sp = new JDFSpawn(n);

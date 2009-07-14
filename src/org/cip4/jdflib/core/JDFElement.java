@@ -252,6 +252,7 @@ public class JDFElement extends KElement
 	/**
 	 * Boolean Enumeration from JDF Spec Orientation of a physical resource.
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumBoolean extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -305,7 +306,13 @@ public class JDFElement extends KElement
 		}
 
 		// enums for validation of booleans
+		/**
+		 * 
+		 */
 		public static final EnumBoolean True = new EnumBoolean(JDFConstants.BOOLEAN_TRUE);
+		/**
+		 * 
+		 */
 		public static final EnumBoolean False = new EnumBoolean(JDFConstants.BOOLEAN_FALSE);
 	}
 
@@ -313,6 +320,7 @@ public class JDFElement extends KElement
 	 * Orientation Enumeration <br>
 	 * Orientation of a physical resource.
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -366,13 +374,37 @@ public class JDFElement extends KElement
 		}
 
 		// enums accordng to JDF spec A.3.3.3, Table 3-3 Orientation
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Flip0 = new EnumOrientation(JDFConstants.ORIENTATION_FLIP0);
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Flip90 = new EnumOrientation(JDFConstants.ORIENTATION_FLIP90);
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Flip180 = new EnumOrientation(JDFConstants.ORIENTATION_FLIP180);
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Flip270 = new EnumOrientation(JDFConstants.ORIENTATION_FLIP270);
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Rotate0 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE0);
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Rotate90 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE90);
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Rotate180 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE180);
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Rotate270 = new EnumOrientation(JDFConstants.ORIENTATION_ROTATE270);
 	}
 
@@ -387,6 +419,7 @@ public class JDFElement extends KElement
 	 * ne X!=Y <br>
 	 * see JDF Spec (Appendix A.3.4) for latest changes
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumXYRelation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -440,11 +473,30 @@ public class JDFElement extends KElement
 		}
 
 		// enums accordng to JDF spec 3.1.2, Table 3-3 Status
+
+		/**
+		 * 
+		 */
 		public static final EnumXYRelation gt = new EnumXYRelation(JDFConstants.XYRELATION_GT);
+		/**
+		 * 
+		 */
 		public static final EnumXYRelation ge = new EnumXYRelation(JDFConstants.XYRELATION_GE);
+		/**
+		 * 
+		 */
 		public static final EnumXYRelation eq = new EnumXYRelation(JDFConstants.XYRELATION_EQ);
+		/**
+		 * 
+		 */
 		public static final EnumXYRelation le = new EnumXYRelation(JDFConstants.XYRELATION_LE);
+		/**
+		 * 
+		 */
 		public static final EnumXYRelation lt = new EnumXYRelation(JDFConstants.XYRELATION_LT);
+		/**
+		 * 
+		 */
 		public static final EnumXYRelation ne = new EnumXYRelation(JDFConstants.XYRELATION_NE);
 
 		/**
@@ -514,6 +566,7 @@ public class JDFElement extends KElement
 	 * {@link org.cip4.jdflib.resource.process.JDFColorPool}. When Separation is applied to a ColorantControlLink, it defines an implicit partition that selects
 	 * a subset of separations for the process that is described by the ColorantControl.
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumSeparation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -582,6 +635,7 @@ public class JDFElement extends KElement
 	/**
 	 * Enumeration of various pool types
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumPoolType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -668,6 +722,7 @@ public class JDFElement extends KElement
 	 * Derivation of the Status of a parent node from the Status of child nodes is non-trivial and implementation-dependent
 	 * </ul>
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumNodeStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -813,6 +868,7 @@ public class JDFElement extends KElement
 	 * default value defaults to "BestEffort". In JDF 1.1 SettingsPolicy was specified in "Contents of a JDF node" and
 	 * "Contents of the abstract Resource element". It has been removed from JDF node and Resource and been promoted to all JDF elements.
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumSettingsPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -899,6 +955,7 @@ public class JDFElement extends KElement
 	 * <li>Yellow
 	 * </ul>
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumNamedColor extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -1948,6 +2005,10 @@ public class JDFElement extends KElement
 			map = null;
 		}
 		final String id = target.getID();
+		if (isWildCard(id))
+		{
+			return null;
+		}
 
 		final VElement v = getChildrenByTagName(target.getLocalName() + JDFConstants.REF, target.getNamespaceURI(), new JDFAttributeMap(AttributeName.RREF, id), false, true, 0);
 		if (v != null)
@@ -1979,6 +2040,11 @@ public class JDFElement extends KElement
 	 */
 	public JDFRefElement getCreateRefElement(final JDFResource target)
 	{
+		if (target == null)
+		{
+			return null;
+		}
+		target.makeRootResource(null, null, true);
 		final JDFRefElement re = getRefElement(target);
 		return re == null ? refElement(target) : re;
 	}
@@ -3860,6 +3926,7 @@ public class JDFElement extends KElement
 	 * 
 	 * NOTE: If not specified the version defaults to Version 1.3
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumVersion extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -4354,7 +4421,7 @@ public class JDFElement extends KElement
 	 */
 	public JDFGeneralID appendGeneralID(final String idUsage, final String idValue)
 	{
-		final JDFGeneralID gid = (JDFGeneralID) appendElement(ElementName.GENERALID);
+		final JDFGeneralID gid = appendGeneralID();
 		gid.setIDValue(idValue);
 		gid.setIDUsage(idUsage);
 		return gid;

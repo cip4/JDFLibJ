@@ -70,7 +70,12 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.Iterator;
+import java.util.Vector;
+
+import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.VString;
 
 /**
  * class with utilities for enums also simple object utils
@@ -80,6 +85,43 @@ import org.apache.commons.lang.enums.ValuedEnum;
  */
 public class EnumUtil
 {
+	/**
+	 * get a vector of names in an iteration
+	 * 
+	 * @param e any member of the enum to iterate over
+	 * @return VString - the vector of enum names
+	 */
+	@SuppressWarnings("unchecked")
+	public static VString getNamesVector(final Class<? extends ValuedEnum> e)
+	{
+		final VString namesVector = new VString();
+		final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
+		while (it.hasNext())
+		{
+			namesVector.addElement(it.next().getName());
+		}
+
+		return namesVector;
+	}
+
+	/**
+	 * get a vector of elements in an iteration
+	 * 
+	 * @param e any member of the enum to iterate over
+	 * @return Vector - the vector of enum instances
+	 */
+	@SuppressWarnings("unchecked")
+	public static Vector<ValuedEnum> getEnumsVector(final Class<? extends ValuedEnum> e)
+	{
+		final Vector<ValuedEnum> v = new Vector<ValuedEnum>();
+		final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
+		while (it.hasNext())
+		{
+			v.addElement(it.next());
+		}
+		return v;
+	}
+
 	/**
 	 * get the lower of two enum values, null is lowest
 	 * 

@@ -164,7 +164,8 @@ public class DumpDir
 	/**
 	 * create a new File in this dump
 	 * 
-	 * @param header TODO
+	 * @param header the header to print prior to the xml
+	 * @return
 	 * 
 	 */
 	public File newFile(final String header)
@@ -189,8 +190,9 @@ public class DumpDir
 	/**
 	 * create a new File in this dump and fill it from is
 	 * 
-	 * @param header TODO
+	 * @param header the header to print prior to the stream
 	 * @param is the input stream to fill
+	 * @return the new file
 	 * 
 	 */
 

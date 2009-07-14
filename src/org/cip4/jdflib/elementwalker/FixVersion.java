@@ -148,7 +148,7 @@ public class FixVersion extends BaseElementWalker
 	}
 
 	/**
-	 * @param fixICSVersions the fixICSVersions to set
+	 * @param pFixICSVersions the fixICSVersions to set
 	 */
 	public void setFixICSVersions(final boolean pFixICSVersions)
 	{

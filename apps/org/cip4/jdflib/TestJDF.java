@@ -12,10 +12,17 @@ import java.io.File;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFExposedMedia;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * < July 9, 2009
+ */
 public class TestJDF
 {
 	private static final String SEPARATOR = File.separator; // "/"; //
@@ -23,25 +30,23 @@ public class TestJDF
 	static protected final String sm_dirTestData = "O:\\jdflibj\\test" + SEPARATOR + "data" + SEPARATOR;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + SEPARATOR;
 
+	/**
+	 * @param argv
+	 */
 	public static void main(final String[] argv)
 	{
-		final JDFDoc d = new JDFParser().parseFile("C:\\data\\JDF\\Collapse\\data_OhneCollapse.jdf");
+		final JDFDoc d = new JDFParser().parseFile("C:\\data\\JDF\\outout.jdf");
 		d.write2File("C:\\data\\JDF\\Collapse\\data_VorCollapse.jdf", 0, true);
 		final JDFNode root = d.getJDFRoot();
-		final VElement vJDF = root.getvJDFNode(null, null, false);
-		for (int i = 0; i < vJDF.size(); i++)
+		final JDFResourceLink rl = root.getLink(0, "ExposedMedia", null, null);
+		final JDFExposedMedia xm = (JDFExposedMedia) rl.getLinkRoot();
+		final VElement v = xm.getLeaves(true);
+		for (int i = 0; i < v.size(); i++)
 		{
-			final JDFNode n = (JDFNode) vJDF.get(i);
-			final VElement v = n.getResourcePool().getPoolChildren(null, null, null);
-			for (int j = 0; j < v.size(); j++)
-			{
-				System.out.println(i + " " + j + " " + System.currentTimeMillis());
-				final JDFResource r = (JDFResource) v.get(j);
-				r.collapse(false, true);
-				System.out.println(i + " " + j + " " + r.getLocalName() + " " + r.getID() + " " + System.currentTimeMillis());
-			}
+			final JDFResource leaf = (JDFResource) v.get(i);
+			leaf.updateAmounts(-1);
 		}
-		d.write2File("C:\\data\\JDF\\Collapse\\data_NachCollapse.jdf", 0, true);
+		d.write2File("C:\\data\\JDF\\outout2.jdf", 0, true);
 
 	}
 }

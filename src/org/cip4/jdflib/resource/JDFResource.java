@@ -1532,13 +1532,68 @@ public class JDFResource extends JDFElement
 	 * @return JDFResource: the first matching resource leaf or node
 	 * @default getPartition(m, null)
 	 */
-	public JDFResource getPartition(final JDFAttributeMap m, final JDFResource.EnumPartUsage partUsage)
+	public JDFResource getPartition(JDFAttributeMap m, final JDFResource.EnumPartUsage partUsage)
 	{
 		if (m == null || m.isEmpty())
 		{
 			return this;
 		}
+		m = removeImplicitPartions(m);
+		if (m == null || m.isEmpty())
+		{
+			return this;
+		}
+		final JDFResource ret = getFastPartition(m, partUsage);
+		if (ret != null)
+		{
+			return ret;
+		}
 		return getDeepPart(m, partUsage);
+	}
+
+	/**
+	 * @param m
+	 * @param partUsage
+	 * @return
+	 */
+	private JDFResource getFastPartition(final JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
+	{
+		if (partUsage == null)
+		{
+			partUsage = getPartUsage();
+		}
+		final VString partIDKeys = getPartIDKeys();
+		if (m.size() > partIDKeys.size() && EnumPartUsage.Explicit.equals(partUsage))
+		{
+			return null;
+		}
+		JDFResource ret = this;
+		final String nodeName = ret.getNodeName();
+
+		final String ns = ret.getNamespaceURI();
+		final int size = Math.min(partIDKeys.size(), m.size());
+		for (int i = 0; i < size; i++)
+		{
+			final String attName = partIDKeys.get(i);
+			final String attVal = m.get(attName);
+			if (attVal == null)
+			{
+				ret = null;
+				break;
+			}
+			ret = (JDFResource) ret.getChildWithAttribute(nodeName, attName, ns, attVal, 0, true);
+			if (ret == null)
+			{
+				break;
+			}
+		}
+		final JDFIdentical id = ret == null ? null : ret.getIdentical();
+		if (id != null)
+		{
+			ret = id.getTarget();
+		}
+
+		return ret;
 	}
 
 	/**
@@ -1916,21 +1971,23 @@ public class JDFResource extends JDFElement
 
 	// //////////////////////////////////////////////////////////////////////////
 	// /////
-	private void removeImplicitPartions(final JDFAttributeMap m)
+	private JDFAttributeMap removeImplicitPartions(JDFAttributeMap m)
 	{
 		if (m == null)
 		{
-			return;
+			return m;
 		}
 		final Vector<ValuedEnum> v = getImplicitPartitions();
 		if (v == null)
 		{
-			return;
+			return m;
 		}
+		m = new JDFAttributeMap(m);
 		for (int i = 0; i < v.size(); i++)
 		{
 			m.remove(((EnumPartIDKey) v.elementAt(i)).getName());
 		}
+		return m;
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -1938,9 +1995,9 @@ public class JDFResource extends JDFElement
 
 	protected VElement getDeepPartVector(final JDFAttributeMap m_in, EnumPartUsage partUsage, int matchingDepth, final VString partIDKeys)
 	{
-		final JDFAttributeMap m = new JDFAttributeMap(m_in);
+		JDFAttributeMap m = new JDFAttributeMap(m_in);
 		final VElement vReturn = new VElement();
-		removeImplicitPartions(m);
+		m = removeImplicitPartions(m);
 		if (partUsage == null)
 		{
 			partUsage = getPartUsage();
@@ -1996,7 +2053,7 @@ public class JDFResource extends JDFElement
 		// if we find an <Identical> element, we must clean up the map and merge
 		// in the values of
 		// identical can only be in a leaf
-		final KElement identical = getElement_KElement(ElementName.IDENTICAL, null, 0);
+		final JDFIdentical identical = getIdentical();
 		if (identical != null)
 		{
 			final JDFPart part = (JDFPart) identical.getElement(ElementName.PART);
@@ -4224,8 +4281,8 @@ public class JDFResource extends JDFElement
 	 */
 	public void updateAmounts(final double previousAmount)
 	{
-		double amount = getAmount();
-		double amountProduced = 0;
+		double amount = StringUtil.parseDouble(getAttribute_KElement(AttributeName.AMOUNT), 0);
+		double amountProduced = StringUtil.parseDouble(getAttribute_KElement(AttributeName.AMOUNTPRODUCED), 0);
 		double amountRequired = 0;
 		double deltaAmount = previousAmount;
 

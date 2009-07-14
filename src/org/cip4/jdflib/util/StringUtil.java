@@ -81,14 +81,12 @@ package org.cip4.jdflib.util;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.PatternSyntaxException;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.cformat.PrintfFormat;
 import org.cip4.jdflib.core.AttributeInfo;
@@ -199,7 +197,8 @@ public class StringUtil
 			"E: Look, there's no need to panic. Someone in the crew will know how to steer this thing.\nR: The crew, milord?\nE: Yes, the crew.\nR: What crew?\nE: I was under the impression that it was common maritime practice for a ship to have a crew.\nR: Opinion is divided on the subject.\n",
 			"If we do happen to step on a mine, Sir, what do we do ?\nNormal procedure, Lieutenant, is to jump 200 feet in the air and scatter oneself over a wide area.",
 			"Gentlemen, you can't fight in here, this is the War Room!",
-			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it." };
+			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it.",
+			"Right, Baldrick, let's try again, shall we? This is called adding. If I have two beans, and then I add two more beans, what do I have?\nSome beans.\nYes...and no. Let's try again, shall we? I have two beans, then I add two more beans. What does that make?\nA very small casserole.\nBaldrick, the ape creatures of the Indus have mastered this. Now try again. One, two, three, four. So how many are there?\nThree\nWhat?\nAnd that one.\nThree and that one. So if I add that one to the three what will I have?\nOh! Some beans.\nYes. To you Baldrick, the Renaissance was just something that happened to other people wasn't it?" };
 
 	/**
 	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy
@@ -383,7 +382,7 @@ public class StringUtil
 	 * 
 	 * @return String - the vector as String
 	 */
-	public static String setvString(final Vector v)
+	public static String setvString(final Vector<?> v)
 	{
 		return setvString(v, m_sep, null, null);
 	}
@@ -400,7 +399,7 @@ public class StringUtil
 	 * 
 	 * default: setvString(v, JDFConstants.BLANK, null, null)
 	 */
-	public static String setvString(final Vector v, final String sep, final String front, final String back)
+	public static String setvString(final Vector<?> v, final String sep, final String front, final String back)
 	{
 		if (v == null)
 		{
@@ -949,6 +948,7 @@ public class StringUtil
 	 * get the mime type for a given extension
 	 * 
 	 * @param strWork String to work in
+	 * @return the mime type
 	 */
 	public static String mime(final String strWork)
 	{
@@ -1139,7 +1139,7 @@ public class StringUtil
 	/**
 	 * checks whether a string is a number
 	 * 
-	 * @param strWork the string to check
+	 * @param str the string to check
 	 * @return boolean true if strWork is a number
 	 */
 	public static boolean isNumber(final String str)
@@ -1261,6 +1261,7 @@ public class StringUtil
 	 * returns the position of the token, if it is in the String.<br>
 	 * The separator is excluded from the tokens. Multiple consecutive separators are treated as one (similar to whitespace handling).
 	 * 
+	 * @param strWork the string to work on
 	 * @param name the token to search
 	 * @param separator separator
 	 * @param iSkip number of tokens to skip before accepting (if 0 -> take the first etc., -1 -> first as well)
@@ -1316,10 +1317,11 @@ public class StringUtil
 	}
 
 	/**
-	 * set this to the raw bytes specified in buffer, bypassing all transcoders
+	 * set a string to the raw bytes specified in buffer, bypassing all transcoders
 	 * 
 	 * @param buffer the buffer to assign to <code>this</code>
 	 * @param len
+	 * @return the raw string
 	 */
 	public static String setRawBytes(final byte[] buffer, final int len)
 	{
@@ -1385,6 +1387,7 @@ public class StringUtil
 	 * @param buffer the String which you want to encode to HexBinary
 	 * @param len the length of the buffer. <br>
 	 * If<0, default is -1. In this case the lenght of the char array will be used.
+	 * @return the hexbinary representation
 	 */
 
 	public static String setHexBinaryBytes(final byte[] buffer, final int len)
@@ -1918,6 +1921,7 @@ public class StringUtil
 
 	/**
 	 * converts a VString to a single string represents all members of the VString concatenated together
+	 * @param vs
 	 * 
 	 * @deprecated use vs.getString(" ",null,null)
 	 * @return String - the unicode string representation of the utf8 bytes assigned to this, null if an error occurrred
@@ -1961,9 +1965,16 @@ public class StringUtil
 		}
 		catch (final NumberFormatException nfe)
 		{
-			d = def;
+			try
+			{
+				s = replaceChar(s, ',', ".", 0);
+				d = Double.parseDouble(s);
+			}
+			catch (final NumberFormatException nfe2)
+			{
+				d = def;
+			}
 		}
-
 		return d;
 	}
 
@@ -2135,6 +2146,8 @@ public class StringUtil
 	}
 
 	/**
+	 * @param pathName
+	 * @return
 	 * @deprecated use UrlUtil.isWindowsLocalPath(pathName);
 	 */
 	@Deprecated
@@ -2146,6 +2159,8 @@ public class StringUtil
 
 	// ///////////////////////////////////////////////////////////////
 	/**
+	 * @param pathName
+	 * @return
 	 * @deprecated use URLUtil.isUNC(pathName)
 	 */
 	@Deprecated
@@ -2519,17 +2534,12 @@ public class StringUtil
 	 * 
 	 * @param e any member of the enum to iterate over
 	 * @return VString - the vector of enum names
+	 * @deprecated use @see EnumUtil.getNamesVector
 	 */
-	public static VString getNamesVector(final Class e)
+	@Deprecated
+	public static VString getNamesVector(final Class<? extends ValuedEnum> e)
 	{
-		final VString namesVector = new VString();
-		final Iterator it = EnumUtils.iterator(e);
-		while (it.hasNext())
-		{
-			namesVector.addElement(((ValuedEnum) it.next()).getName());
-		}
-
-		return namesVector;
+		return EnumUtil.getNamesVector(e);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -2540,16 +2550,12 @@ public class StringUtil
 	 * 
 	 * @param e any member of the enum to iterate over
 	 * @return Vector - the vector of enum instances
+	 * @deprecated use @se EnumUtil.getEnumsVector
 	 */
-	public static Vector getEnumsVector(final Class e)
+	@Deprecated
+	public static Vector<ValuedEnum> getEnumsVector(final Class<? extends ValuedEnum> e)
 	{
-		final Vector v = new Vector<ValuedEnum>();
-		final Iterator<ValuedEnum> it = EnumUtils.iterator(e);
-		while (it.hasNext())
-		{
-			v.addElement(it.next());
-		}
-		return v;
+		return EnumUtil.getEnumsVector(e);
 	}
 
 	/**

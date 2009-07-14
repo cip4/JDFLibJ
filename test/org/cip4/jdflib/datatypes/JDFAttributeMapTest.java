@@ -120,6 +120,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m2.get("a2"), "v3");
 	}
 
+	/**
+	 * 
+	 */
 	public void testCloneNull()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap(null);
@@ -132,6 +135,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m2.get("a2"), "v3");
 	}
 
+	/**
+	 * 
+	 */
 	public void testEquals()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -149,6 +155,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testPut()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
@@ -159,10 +168,26 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.get("Side"), "Front");
 		m1.put("Usage", EnumUsage.Input);
 		assertEquals(m1.get("Usage"), "Input");
+		m1.put("null", null);
+		assertEquals(m1.get("null"), null);
+	}
+
+	/**
+	 * 
+	 */
+	public void testPutNotNull()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap();
+		assertFalse(m1.putNotNull("null", null));
+		m1.putNotNull(EnumPartIDKey.Side, "Front");
+		assertEquals(m1.get("Side"), "Front");
 	}
 
 	// ////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGet()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SignatureName, "v1");
@@ -173,6 +198,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSubMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -241,6 +269,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testOverlapMap()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -285,6 +316,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testReduceMapSet()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
@@ -298,6 +332,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testRemoveKeys()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");

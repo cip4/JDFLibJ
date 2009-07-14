@@ -101,6 +101,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -2934,27 +2935,11 @@ public class KElement extends ElementNSImpl
 			return false;
 		}
 
-		if (!includesAttributes(kElem.getAttributeMap(), true))
+		if (!ContainerUtil.equals(kElem.getAttributeMap(), getAttributeMap()))
 		{
 			return false;
 		}
-
-		if (!kElem.includesAttributes(getAttributeMap(), true))
-		{
-			return false;
-		}
-
-		final String txt = getText();
-		final String txt2 = kElem.getText();
-		if (txt == null && txt2 != null)
-		{
-			return false;
-		}
-		if (txt2 == null && txt != null)
-		{
-			return false;
-		}
-		if (txt != null && !txt.equals(txt2))
+		if (!ContainerUtil.equals(kElem.getText(), getText()))
 		{
 			return false;
 		}
@@ -6569,7 +6554,7 @@ public class KElement extends ElementNSImpl
 		final ValuedEnum enu = getEnumforAttribute(key);
 		if (enu != null)
 		{
-			return StringUtil.getNamesVector(enu.getClass());
+			return EnumUtil.getNamesVector(enu.getClass());
 		}
 		return null;
 	}

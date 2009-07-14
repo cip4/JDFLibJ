@@ -1094,17 +1094,18 @@ public class JDFResourceTest extends JDFTestCaseBase
 			//
 		}
 		doc.write2File(sm_dirTestDataTemp + "identical.jdf", 2, false);
+		// the following now works, even though it would be marked as invalid
 		// manually screw up the resource
-		c3y.appendIdentical().setPartMap(c1.getPartMap());
-		try
-		{
-			c.getPartition(c3y.getPartMap(), null);
-			fail("myself set parent");
-		}
-		catch (final JDFException x)
-		{
-			//
-		}
+		// c3y.appendIdentical().setPartMap(c1.getPartMap());
+		// try
+		// {
+		// c.getPartition(c3y.getPartMap(), null);
+		// fail("myself set parent");
+		// }
+		// catch (final JDFException x)
+		// {
+		// //
+		// }
 
 	}
 

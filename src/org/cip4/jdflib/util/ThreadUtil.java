@@ -89,7 +89,7 @@ public class ThreadUtil
 	}
 
 	/**
-	 * abstract class to run unteruptable stuff in an interruptable thread
+	 * abstract class to run uninteruptable stuff in an interruptable thread
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
 	 * 11.12.2008
@@ -177,10 +177,10 @@ public class ThreadUtil
 	/**
 	 * simple wait wrapper that synchronizes catches its exception
 	 * 
-	 * @param mutex the object that will wait
+	 * @param mutex the object that will wait, if null we assume we need not wait
 	 * @param millis milliseconds to wait, 0 or lower: indefinite wait
 	 */
-	public static void wait(Object mutex, int millis)
+	public static void wait(final Object mutex, int millis)
 	{
 		if (millis < 0)
 		{
@@ -188,7 +188,7 @@ public class ThreadUtil
 		}
 		if (mutex == null)
 		{
-			mutex = new MyMutex();
+			return;
 		}
 		try
 		{

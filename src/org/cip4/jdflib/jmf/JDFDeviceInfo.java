@@ -286,6 +286,21 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 	}
 
 	/**
+	 * gets the DescriptiveName from @DescriptiveName if it exists, otherwise searches Device/@DescriptiveName
+	 * @return the appropriate deviceID for this deviceInfo
+	 */
+	@Override
+	public String getDescriptiveName()
+	{
+		if (hasAttribute(AttributeName.DESCRIPTIVENAME))
+		{
+			return super.getDescriptiveName();
+		}
+		final JDFDevice d = getDevice();
+		return d == null ? "" : d.getDescriptiveName();
+	}
+
+	/**
 	 * returns true if this is the same phase, i.e. the
 	 * @param lastInfo the deviceInfo to compare with
 	 * @param bExact if true, use startTime as hook, else compare stati

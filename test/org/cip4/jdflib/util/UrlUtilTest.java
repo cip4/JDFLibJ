@@ -182,22 +182,22 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		// test for an existing directory (a trailing slash is appended by
 		// StringToURL)
-		assertTrue(UrlUtil.StringToURL("c:\\temp\\").getPath().startsWith(new URL("File:/c:/temp").getPath()));
-		assertTrue(UrlUtil.StringToURL("File:/c:/temp/").getPath().startsWith(new URL("File:/c:/temp").getPath()));
-		assertTrue(UrlUtil.StringToURL("c:\\temp").getPath().startsWith(new URL("File:/c:/temp").getPath()));
-		assertTrue(UrlUtil.StringToURL("File:/c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
-		assertTrue(UrlUtil.StringToURL("File:///c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
+		assertTrue(UrlUtil.stringToURL("c:\\temp\\").getPath().startsWith(new URL("File:/c:/temp").getPath()));
+		assertTrue(UrlUtil.stringToURL("File:/c:/temp/").getPath().startsWith(new URL("File:/c:/temp").getPath()));
+		assertTrue(UrlUtil.stringToURL("c:\\temp").getPath().startsWith(new URL("File:/c:/temp").getPath()));
+		assertTrue(UrlUtil.stringToURL("File:/c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
+		assertTrue(UrlUtil.stringToURL("File:///c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
 
 		// test for a file or a non existing object (trailing slash is
 		// removed by StringToURL)
-		assertEquals(UrlUtil.StringToURL("File:/c:/blöd .pdf"), new URL(UrlUtil.fileToUrl(new File("c:/blöd .pdf"), true)));
-		assertEquals(UrlUtil.StringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
-		assertEquals(UrlUtil.StringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
-		assertEquals(UrlUtil.StringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
+		assertEquals(UrlUtil.stringToURL("File:/c:/blöd .pdf"), new URL(UrlUtil.fileToUrl(new File("c:/blöd .pdf"), true)));
+		assertEquals(UrlUtil.stringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
+		assertEquals(UrlUtil.stringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
+		assertEquals(UrlUtil.stringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
 
-		assertEquals(UrlUtil.StringToURL("http://foo"), new URL("http://foo"));
-		assertNull("empty File: should be null", UrlUtil.StringToURL("File:"));
-		assertEquals(UrlUtil.StringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
+		assertEquals(UrlUtil.stringToURL("http://foo"), new URL("http://foo"));
+		assertNull("empty File: should be null", UrlUtil.stringToURL("File:"));
+		assertEquals(UrlUtil.stringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

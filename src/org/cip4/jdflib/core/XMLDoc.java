@@ -1307,7 +1307,7 @@ public class XMLDoc
 	 * @throws CloneNotSupportedException
 	 */
 	@Override
-	public Object clone()
+	public XMLDoc clone()
 	{
 		final XMLDoc clon = new XMLDoc();
 		if (m_doc != null)

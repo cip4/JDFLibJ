@@ -692,7 +692,7 @@ public class BaseGoldenTicket
 
 		if (theParentNode == null && !theNode.hasAttribute(AttributeName.COMMENTURL))
 		{
-			theNode.setCommentURL(UrlUtil.StringToURL("http://www.example.com").toExternalForm());
+			theNode.setCommentURL(UrlUtil.stringToURL("http://www.example.com").toExternalForm());
 		}
 	}
 

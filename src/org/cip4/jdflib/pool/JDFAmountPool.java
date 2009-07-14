@@ -227,6 +227,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
 		 * 
+		 * @param poolParent the parent pool to work on
 		 * @param attrib the attribute name
 		 * @param nameSpaceURI the XML-namespace
 		 * @param vPart defines which part of this ResourceLink the Amount belongs to. If null get the ResourceLink root attribute.
@@ -354,6 +355,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * get the exactly matching AmountPool/PartAmount/@AttName as a double
 		 * 
+		 * @param poolParent the parent pool to work on
 		 * @param attName
 		 * @param vPart
 		 * @return double -
@@ -398,7 +400,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 			final JDFResource linkRoot = poolParent.getLinkRoot();
 			if (linkRoot != null && vm != null)
 			{
-				final Set set = linkRoot.getPartIDKeys().getSet();
+				final Set<String> set = linkRoot.getPartIDKeys().getSet();
 				set.add(AttributeName.CONDITION); // retain good / waste
 				vm.reduceMap(set);
 			}
@@ -475,6 +477,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * get double attribute Amount, defaults to the value of Amount for the linked partition
 		 * 
+		 * @param poolParent the parent pool to work on
 		 * @param mPart partition map to retrieve Amount for
 		 * @return the amount, -1 if none is specified
 		 * 
@@ -506,6 +509,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * get double attribute MinAmount, defaults to getAmount if MinAmount is not set
 		 * 
+		 * @param poolParent the parent pool to work on
 		 * @param mPart partition map to retrieve MinAmount for
 		 * @return the MinAmount value
 		 * @default getAmount(null)
@@ -523,6 +527,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		/**
 		 * get double attribute MaxAmount, defaults to getAmount if MinAmount is not set
 		 * 
+		 * @param poolParent the parent pool to work on
 		 * @param mPart partition map to retrieve MinAmount for
 		 * @return the MinAmount value
 		 * @default getAmount(null)
@@ -541,6 +546,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount(s) if they are
 		 * not yet there
 		 * 
+		 * @param poolParent the parent pool to work on
 		 * @param attrib the attribute name
 		 * @param value value to set in string form.
 		 * @param nameSpaceURI the XML-namespace
@@ -568,6 +574,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		 * sets the attribute occurence in the appropriate PartAmount when called for a resourceLink and creates the AmountPool and/or PartAmount if it is not
 		 * yet there
 		 * 
+		 * @param poolParent the parent pool to work on
 		 * @param attrib the attribute name
 		 * @param value value to set in string form.
 		 * @param nameSpaceURI the XML-namespace
@@ -769,7 +776,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	/**
 	 * Get a vector of PartAmount that fits to the filter defined by mPart
 	 * 
-	 * @param mPart filter vector for the part to set the status
+	 * @param vmPart filter vector for the part to set the status
 	 * @param bCreate
 	 * @return the PartAmount that fits
 	 * @deprecated use getMatchingPartAmountVector default: GetPartAmountVector(VJDFAttributeMap vmPart, false)
@@ -836,6 +843,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	 * Append JDFPartAmount element
 	 * 
 	 * @param mPart JDFAttributeMap to append
+	 * @return
 	 */
 	public JDFPartAmount appendPartAmount(final JDFAttributeMap mPart)
 	{
@@ -847,7 +855,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	/**
 	 * Append JDFPartAmount elements
 	 * 
-	 * @param vPArt vector of partAmounts to append
+	 * @param vPart vector of partAmounts to append
+	 * @return
 	 */
 	public JDFPartAmount appendPartAmount(final VJDFAttributeMap vPart)
 	{

@@ -120,30 +120,30 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setMaxEntries(10);
 		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
 		JDFQueue copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
-		JDFQueue matchedQueue = filter.match(copyMatch, copy);
+		JDFQueue matchedQueue = filter.apply(copyMatch, copy);
 		assertNull("identical queue should cancel", matchedQueue);
 		theQueue.setQueueStatus(EnumQueueStatus.Held);
 		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
-		matchedQueue = filter.match(copyMatch, copy);
+		matchedQueue = filter.apply(copyMatch, copy);
 		assertEquals(EnumQueueStatus.Held, matchedQueue.getQueueStatus());
 		assertNull(matchedQueue.getQueueEntry(0));
 		final JDFQueueEntry addedQE = theQueue.appendQueueEntry();
 		addedQE.setQueueEntryID("qe_test");
 		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
-		matchedQueue = filter.match(copyMatch, copy);
+		matchedQueue = filter.apply(copyMatch, copy);
 		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "qe_test");
 		assertNull(matchedQueue.getQueueEntry(1));
 		addedQE.deleteNode();
 		theQueue.getQueueEntry("q1").setQueueEntryStatus(EnumQueueEntryStatus.Aborted);
 		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
-		matchedQueue = filter.match(copyMatch, copy);
+		matchedQueue = filter.apply(copyMatch, copy);
 		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
 		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Aborted);
 		assertNull(matchedQueue.getQueueEntry(1));
 
 		theQueue.getQueueEntry("q1").deleteNode();
 		copyMatch = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
-		matchedQueue = filter.match(copyMatch, copy);
+		matchedQueue = filter.apply(copyMatch, copy);
 		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
 		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Removed);
 		assertNull(matchedQueue.getQueueEntry(1));
@@ -187,10 +187,10 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		}
 
 		filter.setMaxEntries(10);
-		filter.match(theQueue, null);
+		filter.apply(theQueue, null);
 		assertEquals(10, theQueue.numEntries(null));
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
-		filter.match(theQueue, null);
+		filter.apply(theQueue, null);
 		assertEquals(0, theQueue.numEntries(null));
 	}
 
@@ -219,4 +219,28 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertTrue(filter.getDeviceIDSet().contains("qe2"));
 		assertFalse(filter.getDeviceIDSet().contains("qe3"));
 	}
+
+	/**
+	 * 
+	 */
+	public void testPerformanceDelta()
+	{
+		theQueue.setAutomated(false);
+		for (int i = 0; i < 20000; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryID("q" + i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+		}
+		final JDFQueue q2 = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+		q2.getQueueEntry(333).setPriority(100);
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+
+		final long l1 = System.currentTimeMillis();
+		filter.apply(theQueue, q2);
+		final long l2 = System.currentTimeMillis();
+		assertEquals("Sort time <4 seconds", 2000, (l2 - l1), 2000);
+	}
+
 }

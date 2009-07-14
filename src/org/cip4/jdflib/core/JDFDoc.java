@@ -180,12 +180,12 @@ public class JDFDoc extends XMLDoc
 	/**
 	 * clone
 	 * 
-	 * @return Object the cloned JDFDoc
+	 * @return JDFDoc the cloned JDFDoc
 	 */
 	@Override
-	public Object clone()
+	public JDFDoc clone()
 	{
-		return new JDFDoc(((XMLDoc) super.clone()).getMemberDocument());
+		return new JDFDoc(super.clone().getMemberDocument());
 	}
 
 	/**

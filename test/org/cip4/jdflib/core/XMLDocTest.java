@@ -524,7 +524,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testClone()
 	{
 		final XMLDoc doc = new XMLDoc("foobar", null);
-		final XMLDoc doc2 = (XMLDoc) doc.clone();
+		final XMLDoc doc2 = doc.clone();
 		assertNotNull(doc.getDocumentElement());
 		assertNotNull(doc2.getDocumentElement());
 		assertNotSame(doc.getDocumentElement(), doc2.getDocumentElement());
