@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -122,12 +122,11 @@ import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
 import org.w3c.dom.traversal.TreeWalker;
 
-//TODO: why does XMLDoc know DocumentJDFImpl ??? 
-
 /**
- * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/DocumentImpl.html" Xerces-Documentation< /a>
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * < July 15, 2009
  */
-
 @SuppressWarnings("deprecation")
 public class XMLDoc
 {
@@ -145,6 +144,9 @@ public class XMLDoc
 		getCreateXMLDocUserData();
 	}
 
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(final Object o)
 	{
@@ -166,6 +168,9 @@ public class XMLDoc
 		return m_doc.equals(d.m_doc);
 	}
 
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -1033,7 +1038,7 @@ public class XMLDoc
 	 * 
 	 * @return boolean - true, if the feature is sopported
 	 * @see <a href="http://xerces.apache.org/xerces-j/apiDocs/org/apache/xerces/dom/NodeImpl.html#isSupported(java.lang.String,%20java.lang.String)"
-	 * >Xerxes-Documentation< /a>
+	 * <a>Xerxes-Documentation</a>
 	 */
 	public boolean isSupported(final String feature, final String version)
 	{
@@ -1304,7 +1309,6 @@ public class XMLDoc
 	 * clone the document, completely severing all connections to the original document
 	 * 
 	 * @return Object
-	 * @throws CloneNotSupportedException
 	 */
 	@Override
 	public XMLDoc clone()
@@ -1361,7 +1365,6 @@ public class XMLDoc
 	/**
 	 * delete the XMLDocUserData structure
 	 * 
-	 * @return void
 	 */
 	protected void deleteUserData()
 	{
@@ -1400,7 +1403,7 @@ public class XMLDoc
 	/**
 	 * is the node with ID dirty?
 	 * 
-	 * @param String id the id to be checked
+	 * @param strID id the id to be checked
 	 * @return boolean - true if the node with ID=id is dirty
 	 */
 	public boolean isDirty(final String strID)
@@ -1496,6 +1499,10 @@ public class XMLDoc
 				final InputStream inStream = urlCon.getInputStream();
 
 				parser.parseStream(inStream);
+				if (inStream != null) // http keep-alive needs an explicit close
+				{
+					inStream.close();
+				}
 				docResponse = parser.getDocument() == null ? null : new XMLDoc(parser.getDocument());
 			}
 
@@ -1510,16 +1517,20 @@ public class XMLDoc
 	}
 
 	/**
-	 * @param url
-	 * @param strContentType
+	 * @param url the url to write to
+	 * @param strContentType the content type; if null use text/xml
 	 * @param det the details to set
 	 * @return the HttpURLConnection, null if failure
 	 */
-	public HttpURLConnection write2HTTPURL(final URL url, final String strContentType, final HTTPDetails det)
+	public HttpURLConnection write2HTTPURL(final URL url, String strContentType, final HTTPDetails det)
 	{
 		if (url == null)
 		{
 			return null;
+		}
+		if (strContentType == null)
+		{
+			strContentType = UrlUtil.TEXT_XML;
 		}
 		for (int i = 0; i < 2; i++) //
 		{
@@ -1527,7 +1538,7 @@ public class XMLDoc
 			{
 				final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
 				urlCon.setDoOutput(true);
-				urlCon.setRequestProperty("Connection", "close");
+				urlCon.setRequestProperty("Connection", "keep-alive");
 				urlCon.setRequestProperty("Content-Type", strContentType);
 				if (det != null)
 				{

@@ -292,6 +292,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		rp.appendElement("foo:elem", "www.foo.com");
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetResourceRootNI13()
 	{
 		final JDFNode rootNode = new JDFDoc("JDF").getJDFRoot();

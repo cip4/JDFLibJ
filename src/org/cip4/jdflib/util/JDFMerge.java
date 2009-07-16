@@ -645,28 +645,20 @@ public class JDFMerge
 		return root;
 	}
 
-	private void mergeLocalResource(final JDFResource.EnumAmountMerge amountPolicy, final JDFResourcePool poolToMerge, final JDFResource res1)
+	private void mergeLocalResource(final JDFResource.EnumAmountMerge amountPolicy, final JDFResourcePool poolToMerge, JDFResource res1)
 	{
-		JDFResource res1Local = res1;
-
-		final String resID = res1Local.getID();
+		final String resID = res1.getID();
 		final JDFResource res2 = poolToMerge.getResourceByID(resID);
 
 		if (res2 != null)
 		{
-			mergeSpawnIDs(res2, res1Local, false);
-			res1Local = mergePartition(res1Local, res2, spawnID, amountPolicy, true); // esp
-			// .
-			// deletes
-			// res2
-			// from
-			// subJDFNode
-			// node
+			mergeSpawnIDs(res2, res1, false);
+			res1 = mergePartition(res1, res2, spawnID, amountPolicy, true); // esp. deletes res2 from subJDFNode node
 		}
 		// copy resource from orig to spawned node
-		poolToMerge.copyElement(res1Local, null);
-		res1Local = poolToMerge.getResourceByID(resID);
-		final VElement resLeafsSpawned = res1Local.getNodesWithSpawnID(spawnID);
+		poolToMerge.copyElement(res1, null);
+		res1 = poolToMerge.getResourceByID(resID);
+		final VElement resLeafsSpawned = res1.getNodesWithSpawnID(spawnID);
 		for (int leaf = 0; leaf < resLeafsSpawned.size(); leaf++)
 		{
 			final JDFResource leafRes = (JDFResource) resLeafsSpawned.elementAt(leaf);
@@ -779,30 +771,34 @@ public class JDFMerge
 		}
 
 		newSpawnMap = new HashMap<String, JDFSpawned>();
-		// VElement v=m_ParentNode.getChildrenByTagName(ElementName.SPAWNED,
-		// null, null, false, true, 0, false);
-		final VElement v = m_ParentNode.getvJDFNode(null, null, false);
-		for (int i = 0; i < v.size(); i++)
+		// collect in main AND sub jdf in case someone spawned in the sub jdf...
+		final JDFNode[] array = new JDFNode[2];
+		array[0] = subJDFNode;
+		array[1] = m_ParentNode;
+		for (final JDFNode nParent : array)
 		{
-			final JDFNode n = (JDFNode) v.get(i);
-			final JDFAuditPool ap = n.getAuditPool();
-			final VElement v2 = ap == null ? null : ap.getAudits(EnumAuditType.Spawned, null, null);
-			if (v2 != null)
+			final VElement v = nParent.getvJDFNode(null, null, false);
+			for (int i = 0; i < v.size(); i++)
 			{
-				// JDFSpawned s=(JDFSpawned) v.get(i);
-				final int siz = v2.size();
-				for (int j = 0; j < siz; j++)
+				final JDFNode n = (JDFNode) v.get(i);
+				final JDFAuditPool ap = n.getAuditPool();
+				final VElement v2 = ap == null ? null : ap.getAudits(EnumAuditType.Spawned, null, null);
+				if (v2 != null)
 				{
-					final JDFSpawned s = (JDFSpawned) v2.get(j);
-					final String nsID = s.getNewSpawnID();
-					if (!KElement.isWildCard(nsID))
+					// JDFSpawned s=(JDFSpawned) v.get(i);
+					final int siz = v2.size();
+					for (int j = 0; j < siz; j++)
 					{
-						newSpawnMap.put(nsID, s);
+						final JDFSpawned s = (JDFSpawned) v2.get(j);
+						final String nsID = s.getNewSpawnID();
+						if (!KElement.isWildCard(nsID))
+						{
+							newSpawnMap.put(nsID, s);
+						}
 					}
 				}
 			}
 		}
-
 	}
 
 	// ///////////////////////////////////////////////////////////////////

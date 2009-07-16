@@ -70,6 +70,9 @@
 package org.cip4.jdflib.core;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
@@ -79,6 +82,7 @@ import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -741,6 +745,64 @@ public class XMLDocTest extends JDFTestCaseBase
 		f.delete();
 		assertTrue(d.write2File(out, 2, true));
 		assertTrue(f.canRead());
+	}
+
+	/**
+	 * @throws IOException
+	 * 
+	 */
+	public void testWriteToHTTPURL() throws IOException
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final URL url = UrlUtil.stringToURL("http://10.51.100.22:8080/httpdump/testXMLDoc?nodump=true");
+		HttpURLConnection uc = d.write2HTTPURL(url, null, null);
+		if (uc != null)
+		{
+			final long t = System.nanoTime();
+			long t1 = System.nanoTime();
+			for (int i = 0; i < 10000; i++)
+			{
+				uc = d.write2HTTPURL(url, null, null);
+				assertNotNull(uc);
+				uc.getInputStream().read();
+				uc.getInputStream().close();
+				final long t2 = System.nanoTime();
+				if (i % 100 == 0)
+				{
+					System.out.println(i + " " + (t2 - t1) + " " + ((t2 - t) / (i + 1)) + " " + (t2 - t) / 1000000);
+				}
+				t1 = t2;
+
+			}
+
+		}
+	}
+
+	/**
+	 * @throws IOException
+	 * 
+	 */
+	public void testWriteToURL() throws IOException
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final String url = UrlUtil.normalize("http://10.51.100.22:8080/httpdump/testXMLDoc?nodump=true");
+		XMLDoc resp = d.write2URL(url, null);
+		if (resp != null)
+		{
+			final long t = System.nanoTime();
+			long t1 = System.nanoTime();
+			for (int i = 0; i < 10000; i++)
+			{
+				resp = d.write2URL(url, null);
+				assertNotNull(resp);
+				final long t2 = System.nanoTime();
+				if (i % 100 == 0)
+				{
+					System.out.println(i + " " + (t2 - t1) + " " + ((t2 - t) / (i + 1)) + " " + (t2 - t) / 1000000);
+				}
+				t1 = t2;
+			}
+		}
 	}
 
 	/**
