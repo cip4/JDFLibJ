@@ -820,7 +820,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			final JDFAuditPool ap = root.getAuditPool();
 			JDFPhaseTime pt = ap.getLastPhase(null, null);
 			assertEquals(pt.getStatus(), EnumNodeStatus.Waiting);
-			assertEquals(root.getPartStatus(null), EnumNodeStatus.Waiting);
+			assertEquals(root.getPartStatus(null, 0), EnumNodeStatus.Waiting);
 			final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
 			final VJDFAttributeMap vMap = new VJDFAttributeMap();
 			vMap.add(map);
@@ -832,7 +832,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			docJMF = su.getDocJMFPhaseTime();
 			pt = ap.getLastPhase(vMap, null);
 			assertEquals(pt.getStatus(), EnumNodeStatus.Setup);
-			assertEquals(root.getPartStatus(map), EnumNodeStatus.Setup);
+			assertEquals(root.getPartStatus(map, 0), EnumNodeStatus.Setup);
 			assertEquals(pt.getPartMapVector(), vMap);
 			jmf = docJMF.getJMFRoot();
 			assertNotNull(jmf);
@@ -844,7 +844,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			docJMF = su.getDocJMFPhaseTime();
 			pt = (JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null, null);
 			assertEquals(pt.getStatus(), EnumNodeStatus.InProgress);
-			assertEquals(root.getPartStatus(map), EnumNodeStatus.InProgress);
+			assertEquals(root.getPartStatus(map, 0), EnumNodeStatus.InProgress);
 			assertEquals(pt.getPartMapVector(), vMap);
 			jmf = docJMF.getJMFRoot();
 			assertNotNull(jmf);
@@ -856,7 +856,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			docJMF = su.getDocJMFPhaseTime();
 			pt = (JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null, null);
 			assertEquals(pt.getStatus(), EnumNodeStatus.InProgress);
-			assertEquals(root.getPartStatus(map), EnumNodeStatus.InProgress);
+			assertEquals(root.getPartStatus(map, 0), EnumNodeStatus.InProgress);
 			assertEquals(pt.getPartMapVector(), vMap);
 			jmf = docJMF.getJMFRoot();
 			assertNotNull(jmf);
@@ -868,7 +868,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			docJMF = su.getDocJMFPhaseTime();
 			pt = (JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null, null);
 			assertEquals(pt.getStatus(), EnumNodeStatus.InProgress);
-			assertEquals(root.getPartStatus(map), EnumNodeStatus.InProgress);
+			assertEquals(root.getPartStatus(map, 0), EnumNodeStatus.InProgress);
 			assertEquals(pt.getPartMapVector(), vMap);
 			jmf = docJMF.getJMFRoot();
 			assertNotNull(jmf);
@@ -881,7 +881,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			docJMF = su.getDocJMFPhaseTime();
 			pt = (JDFPhaseTime) ap.getAudit(-1, EnumAuditType.PhaseTime, null, null);
 			assertEquals(pt.getStatus(), EnumNodeStatus.InProgress);
-			assertEquals(root.getPartStatus(map), EnumNodeStatus.Completed);
+			assertEquals(root.getPartStatus(map, 0), EnumNodeStatus.Completed);
 			assertEquals(pt.getPartMapVector(), vMap);
 			jmf = docJMF.getJMFRoot();
 			assertNotNull(jmf);
@@ -1261,6 +1261,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testIsValidCombined()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1269,6 +1272,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertFalse("need typed for combined", node.isValid(EnumValidationLevel.Complete));
 	}
 
+	/**
+	 * 
+	 */
 	public void testIsGroupNode()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1285,6 +1291,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertFalse(node.isGroupNode());
 	}
 
+	/**
+	 * 
+	 */
 	public void testIsTypesNode()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1304,6 +1313,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testIsExecutable()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1486,16 +1498,16 @@ public class JDFNodeTest extends JDFTestCaseBase
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		n.setPartStatus(((JDFAttributeMap) null), EnumNodeStatus.Completed, null);
-		assertEquals(n.getPartStatus(null), EnumNodeStatus.Completed);
+		assertEquals(n.getPartStatus(null, 0), EnumNodeStatus.Completed);
 		final JDFNodeInfo nodeInfo = n.appendNodeInfo();
 		nodeInfo.setPartUsage(EnumPartUsage.Implicit);
 		nodeInfo.setNodeStatus(EnumNodeStatus.Cleanup);
 		n.setStatus(EnumNodeStatus.Part);
-		assertEquals(n.getPartStatus(null), EnumNodeStatus.Cleanup);
-		assertEquals(n.getPartStatus(new JDFAttributeMap("Run", "r1")), EnumNodeStatus.Cleanup);
+		assertEquals(n.getPartStatus(null, 0), EnumNodeStatus.Cleanup);
+		assertEquals(n.getPartStatus(new JDFAttributeMap("Run", "r1"), 0), EnumNodeStatus.Cleanup);
 		n.setStatus(EnumNodeStatus.Setup);
-		assertEquals(n.getPartStatus(null), EnumNodeStatus.Setup);
-		assertEquals(n.getPartStatus(new JDFAttributeMap("Run", "r1")), EnumNodeStatus.Setup);
+		assertEquals(n.getPartStatus(null, 0), EnumNodeStatus.Setup);
+		assertEquals(n.getPartStatus(new JDFAttributeMap("Run", "r1"), 0), EnumNodeStatus.Setup);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -1517,7 +1529,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNodeInfo createPartition = (JDFNodeInfo) createNodeInfo.getCreatePartition(partMap, vPartKeys);
 		createPartition.setNodeStatus(EnumNodeStatus.Completed);
 		partMap.put("Run", "2");
-		final EnumNodeStatus partStatus = createJDF.getPartStatus(partMap);
+		final EnumNodeStatus partStatus = createJDF.getPartStatus(partMap, 0);
 		assertEquals("The implicit leaf defaults to root", partStatus, EnumNodeStatus.Waiting);
 	}
 
@@ -1541,7 +1553,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		rl.setPartMapVector(vParts);
 		for (int i = 0; i < 1000; i++)
 		{
-			assertEquals(node.getPartStatus(vParts.elementAt(i)), EnumNodeStatus.Completed);
+			assertEquals(node.getPartStatus(vParts.elementAt(i), 0), EnumNodeStatus.Completed);
 		}
 		assertTrue("too slow may laptop takes roughly 2.5 seconds", System.currentTimeMillis() - t < 25000);
 	}
@@ -1596,33 +1608,76 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNodeInfo ni = node.getNodeInfo();
 		assertTrue("nodeinfo is resource", ni.getResourceClass() == EnumResourceClass.Parameter);
 		node.setPartStatus(((JDFAttributeMap) null), EnumNodeStatus.Waiting, null);
-		assertTrue("ni root waiting", node.getPartStatus(null) == EnumNodeStatus.Waiting);
+		assertTrue("ni root waiting", node.getPartStatus(null, 0) == EnumNodeStatus.Waiting);
 		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
 		node.setPartStatus(m, EnumNodeStatus.Completed, null);
-		assertTrue("ni sig1 completed", node.getPartStatus(m) == EnumNodeStatus.Completed);
-		assertNull("ni root mixed", node.getPartStatus(null));
+		assertTrue("ni sig1 completed", node.getPartStatus(m, 0) == EnumNodeStatus.Completed);
+		assertNull("ni root mixed", node.getPartStatus(null, 0));
 		final JDFAttributeMap m3 = new JDFAttributeMap("SignatureName", "Sig2");
-		assertTrue("ni sig2 waiting", node.getPartStatus(m3) == EnumNodeStatus.Waiting);
+		assertTrue("ni sig2 waiting", node.getPartStatus(m3, 0) == EnumNodeStatus.Waiting);
 
 		m.put("SheetName", "S1");
 		m.put("Side", "Front");
-		assertEquals(node.getPartStatus(m), EnumNodeStatus.Completed);
+		assertEquals(node.getPartStatus(m, 0), EnumNodeStatus.Completed);
 		node.setPartStatus(m, EnumNodeStatus.Waiting, null);
-		assertTrue("ni sig1 waiting", node.getPartStatus(m) == EnumNodeStatus.Waiting);
+		assertTrue("ni sig1 waiting", node.getPartStatus(m, 0) == EnumNodeStatus.Waiting);
 
 		final JDFAttributeMap m2 = new JDFAttributeMap("SignatureName", "Sig1");
-		assertNull("ni sig1 mixed", node.getPartStatus(m2));
+		assertNull("ni sig1 mixed", node.getPartStatus(m2, 0));
 
 		final JDFAttributeMap m4 = new JDFAttributeMap("SignatureName", "Sig3");
 		m4.put("SheetName", "S1");
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 		v.add(m4);
 		node.prepareNodeInfo(v);
-		assertTrue("ni sig3 waiting", node.getPartStatus(m4) == EnumNodeStatus.Waiting);
+		assertTrue("ni sig3 waiting", node.getPartStatus(m4, 0) == EnumNodeStatus.Waiting);
 		assertNotNull("explicit m4", ni.getPartition(m4, EnumPartUsage.Explicit));
 
 		final JDFAttributeMap m5 = new JDFAttributeMap("Side", "Back");
-		assertNull("ni side back  mixed", node.getPartStatus(m5));
+		assertNull("ni side back  mixed", node.getPartStatus(m5, 0));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetPartStatusMinMax()
+	{
+		for (int i = -1; i < 2; i += 2)
+		{
+			final EnumNodeStatus minmax = i < 0 ? EnumNodeStatus.Waiting : EnumNodeStatus.Completed;
+			final JDFDoc doc = JDFTestCaseBase.creatXMDoc();
+			final JDFNode node = doc.getJDFRoot();
+			final JDFNodeInfo ni = node.getNodeInfo();
+			assertEquals("nodeinfo is resource", ni.getResourceClass(), EnumResourceClass.Parameter);
+			node.setPartStatus(((JDFAttributeMap) null), EnumNodeStatus.Waiting, null);
+			assertEquals("ni root waiting", node.getPartStatus(null, i), EnumNodeStatus.Waiting);
+			final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
+			node.setPartStatus(m, EnumNodeStatus.Completed, null);
+			assertTrue("ni sig1 completed", node.getPartStatus(m, i) == EnumNodeStatus.Completed);
+			assertEquals("ni root mixed", minmax, node.getPartStatus(null, i));
+			final JDFAttributeMap m3 = new JDFAttributeMap("SignatureName", "Sig2");
+			assertEquals("ni sig2 waiting", node.getPartStatus(m3, i), EnumNodeStatus.Waiting);
+
+			m.put("SheetName", "S1");
+			m.put("Side", "Front");
+			assertEquals(node.getPartStatus(m, i), EnumNodeStatus.Completed);
+			node.setPartStatus(m, EnumNodeStatus.Waiting, null);
+			assertEquals("ni sig1 waiting", node.getPartStatus(m, i), EnumNodeStatus.Waiting);
+
+			final JDFAttributeMap m2 = new JDFAttributeMap("SignatureName", "Sig1");
+			assertEquals("ni sig1 mixed", minmax, node.getPartStatus(m2, i));
+
+			final JDFAttributeMap m4 = new JDFAttributeMap("SignatureName", "Sig3");
+			m4.put("SheetName", "S1");
+			final VJDFAttributeMap v = new VJDFAttributeMap();
+			v.add(m4);
+			node.prepareNodeInfo(v);
+			assertEquals("ni sig3 waiting", node.getPartStatus(m4, i), EnumNodeStatus.Waiting);
+			assertNotNull("explicit m4", ni.getPartition(m4, EnumPartUsage.Explicit));
+
+			final JDFAttributeMap m5 = new JDFAttributeMap("Side", "Back");
+			assertEquals("ni side back  mixed", minmax, node.getPartStatus(m5, i));
+		}
 	}
 
 	// ////////////////////////////////////////////////////////
@@ -1916,7 +1971,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNull(n.getNodeInfo(0));
 		assertNull(n.getNodeInfo(3));
 
-		assertEquals(n.getPartStatus(map), EnumNodeStatus.FailedTestRun);
+		assertEquals(n.getPartStatus(map, 0), EnumNodeStatus.FailedTestRun);
 		n.removeAttribute(AttributeName.TYPES);
 		assertNotNull("invalid types attribute, but still retrieve ni with no cpi", n.getNodeInfo());
 		assertNotSame("invalid types attribute, but...", n.getNodeInfo(), n2);
@@ -2261,15 +2316,15 @@ public class JDFNodeTest extends JDFTestCaseBase
 				vMap.add(map3);
 			}
 			root.updatePartStatus(vMap, true, true);
-			assertEquals(root.getPartStatus(map1), EnumNodeStatus.Completed);
-			assertNull(root.getPartStatus(null));
+			assertEquals(root.getPartStatus(map1, 0), EnumNodeStatus.Completed);
+			assertNull(root.getPartStatus(null, 0));
 			if (loop == 0)
 			{
-				assertEquals(root.getPartStatus(map21), EnumNodeStatus.InProgress);
+				assertEquals(root.getPartStatus(map21, 0), EnumNodeStatus.InProgress);
 			}
 			else
 			{
-				assertNotSame("only updated run=1", root.getPartStatus(map21), EnumNodeStatus.InProgress);
+				assertNotSame("only updated run=1", root.getPartStatus(map21, 0), EnumNodeStatus.InProgress);
 			}
 
 		}
@@ -2282,29 +2337,45 @@ public class JDFNodeTest extends JDFTestCaseBase
 	 */
 	public void testToGrayBox()
 	{
-		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+		final boolean[] tf = { true, false };
+		for (final boolean b : tf)
+		{
+			JDFNode root = new JDFDoc("JDF").getJDFRoot();
 
-		root.setType(EnumType.Combined);
-		final VString vs = new VString("Cutting Folding Cutting", " ");
-		root.setTypes(vs);
-		root.toGrayBox(false);
-		assertEquals(root.getTypes(), vs);
-		assertEquals(root.getType(), "ProcessGroup");
+			root.setType(EnumType.Combined);
+			final VString vs = new VString("Cutting Folding Cutting", " ");
+			root.setTypes(vs);
+			root.toGrayBox(b);
+			JDFNode child = (JDFNode) root.getElement(ElementName.JDF, null, 0);
+			assertEquals(b, child != null);
+			if (!b)
+			{
+				assertEquals(root.getTypes(), vs);
+			}
+			else
+			{
+				assertEquals(child.getTypes(), vs);
+			}
 
-		root.removeAttribute(AttributeName.TYPES);
-		root.setType(EnumType.ConventionalPrinting);
-		root.toGrayBox(false);
-		assertEquals(root.getTypes(), new VString("ConventionalPrinting", null));
-		assertEquals(root.getType(), "ProcessGroup");
+			assertEquals(root.getType(), "ProcessGroup");
 
-		root.removeAttribute(AttributeName.TYPES);
-		root.setType(EnumType.ConventionalPrinting);
-		root.toGrayBox(true);
-		assertNull(root.getTypes());
-		assertEquals(root.getType(), "ProcessGroup");
-		final JDFNode child = (JDFNode) root.getElement(ElementName.JDF, null, 0);
-		assertNotNull(child);
-		assertEquals(child.getEnumType(), EnumType.ConventionalPrinting);
+			root = new JDFDoc("JDF").getJDFRoot();
+
+			root.setType(EnumType.ConventionalPrinting);
+			root.toGrayBox(b);
+			child = (JDFNode) root.getElement(ElementName.JDF, null, 0);
+			if (!b)
+			{
+				assertEquals(root.getTypes(), new VString("ConventionalPrinting", null));
+				assertEquals(root.getType(), "ProcessGroup");
+			}
+			else
+			{
+				assertEquals(child.getType(), "ConventionalPrinting");
+
+			}
+
+		}
 	}
 
 	// ////////////////////////////////////////////////////////////

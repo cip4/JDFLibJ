@@ -1023,7 +1023,7 @@ public class XJDF20 extends BaseElementWalker
 			{
 				final JDFNodeInfo niLeaf = (JDFNodeInfo) niLeaves.get(i);
 				final JDFAttributeMap map = niLeaf.getPartMap();
-				niLeaf.setNodeStatus(node.getPartStatus(map));
+				niLeaf.setNodeStatus(node.getPartStatus(map, 0));
 				niLeaf.setNodeStatusDetails(StringUtil.getNonEmpty(node.getPartStatusDetails(map)));
 			}
 

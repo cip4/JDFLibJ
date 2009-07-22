@@ -85,7 +85,6 @@ import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 
 import javax.mail.BodyPart;
@@ -101,6 +100,8 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFCommand;
@@ -260,6 +261,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertEquals(MimeUtil.getContentID(bp), "TheJDF");
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetMultiPart()
 	{
 		testBuildMimePackageDocJMF();
@@ -267,6 +271,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "testMimePackageDoc_out.mjm", null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testGetCreatePartByCID() throws Exception
 	{
 		final Message message = new MimeMessage((Session) null);
@@ -402,6 +409,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testReplaceContents() throws Exception
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -468,9 +478,9 @@ public class MimeUtilTest extends JDFTestCaseBase
 		assertNotNull(jdfDoc2);
 		final JDFNode jdf = jdfDoc2.getJDFRoot();
 		assertNotNull(jdf);
-		final List fileSpecs = jdf.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
+		final VElement fileSpecs = jdf.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
 		assertEquals(3, fileSpecs.size());
-		for (final Iterator i = fileSpecs.iterator(); i.hasNext();)
+		for (final Iterator<KElement> i = fileSpecs.iterator(); i.hasNext();)
 		{
 			final JDFFileSpec fileSpec = (JDFFileSpec) i.next();
 			final String cid = fileSpec.getURL();
@@ -491,7 +501,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		d1.setOriginalFileName("JMF.jmf");
 		final JDFDoc d2 = new JDFDoc("JDF");
 		d2.setOriginalFileName("JDF.jdf");
-		final Vector vXMLDocs = new Vector();
+		final Vector<JDFDoc> vXMLDocs = new Vector<JDFDoc>();
 		vXMLDocs.add(d1);
 		vXMLDocs.add(d2);
 

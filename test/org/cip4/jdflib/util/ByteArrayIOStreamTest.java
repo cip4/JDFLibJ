@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,13 +80,21 @@ import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * Jul 16, 2009
+ */
 public class ByteArrayIOStreamTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testSize()
 	{
-		ByteArrayIOStream ios = new ByteArrayIOStream(new byte[20000]);
+		final ByteArrayIOStream ios = new ByteArrayIOStream(new byte[20000]);
 		for (int i = 0; i < 12345; i++)
 		{
 			ios.write(i);
@@ -94,12 +102,32 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		}
 	}
 
+	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testConstructStream()
+	{
+		final ByteArrayIOStream ios = new ByteArrayIOStream(new byte[20000]);
+		for (int i = 0; i < 12345; i++)
+		{
+			ios.write(i);
+		}
+		final ByteArrayIOStream ios2 = new ByteArrayIOStream(ios.getInputStream());
+		assertEquals(ios.toString(), ios2.toString());
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testInRead() throws Exception
 	{
-		ByteArrayIOStream ios = new ByteArrayIOStream();
+		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		for (int i = 0; i < 200000; i++)
+		{
 			ios.write(i);
-		InputStream is = ios.getInputStream();
+		}
+		final InputStream is = ios.getInputStream();
 		int n = 0;
 		int i;
 		while ((i = is.read()) >= 0)
@@ -111,18 +139,23 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testInReadMulti() throws Exception
 	{
-		ByteArrayIOStream ios = new ByteArrayIOStream();
+		final ByteArrayIOStream ios = new ByteArrayIOStream();
 		for (int i = 0; i < 50000; i++)
+		{
 			ios.write(i);
-		InputStream is = ios.getInputStream();
-		InputStream is2 = ios.getInputStream();
+		}
+		final InputStream is = ios.getInputStream();
+		final InputStream is2 = ios.getInputStream();
 		int n = 0;
 		int i;
 		while ((i = is.read()) >= 0)
 		{
-			int jj = is2.read();
+			final int jj = is2.read();
 			assertEquals("" + n, i, n % 256);
 			assertEquals(jj, i);
 			n++;

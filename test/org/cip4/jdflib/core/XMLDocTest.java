@@ -785,7 +785,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testWriteToURL() throws IOException
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
-		final String url = UrlUtil.normalize("http://10.51.100.22:8080/httpdump/testXMLDoc?nodump=true");
+		final String url = UrlUtil.normalize("http://10.51.100.22:8088/httpdump/testXMLDoc?nodump=true");
 		XMLDoc resp = d.write2URL(url, null);
 		if (resp != null)
 		{

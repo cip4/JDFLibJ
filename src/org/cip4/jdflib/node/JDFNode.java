@@ -182,6 +182,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFMISDetails;
 import org.cip4.jdflib.resource.process.JDFNotificationFilter;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.JDFMerge;
@@ -1467,6 +1468,116 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	}
 
+	/**
+	 * synchronization of stati based on child jdf node status
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * July 17, 2009
+	 */
+	public class StatusSynch
+	{
+		/**
+		 * update the parent node
+		 */
+		public void update()
+		{
+			update(JDFNode.this);
+		}
+
+		private void update(final JDFNode n)
+		{
+			final VElement vNodes = n.getvJDFNode(null, null, true);
+			if (vNodes != null && !vNodes.isEmpty())
+			{
+				final VJDFAttributeMap vMap = getPartVector(n);
+				// recurse down first so we have updated kids
+				for (int i = 0; i < vNodes.size(); i++)
+				{
+					final JDFNode kid = (JDFNode) vNodes.get(i);
+					update(kid);
+
+				}
+				// now compare by part
+				for (int ii = 0; ii < vMap.size(); ii++)
+				{
+					boolean ciao = vNodes.size() == 0;
+					final JDFAttributeMap partMap = vMap.get(ii);
+					EnumNodeStatus minStatus = EnumNodeStatus.Aborted;
+					EnumNodeStatus maxStatus = EnumNodeStatus.Waiting;
+					for (int i = 0; i < vNodes.size(); i++)
+					{
+						final JDFNode kid = (JDFNode) vNodes.get(i);
+						minStatus = (EnumNodeStatus) EnumUtil.min(minStatus, kid.getPartStatus(partMap, -1));
+						if (minStatus == null)
+						{
+							ciao = true;
+							break;
+						}
+						maxStatus = (EnumNodeStatus) EnumUtil.max(maxStatus, kid.getPartStatus(partMap, 1));
+					}
+					if (!ciao)
+					{
+						final EnumNodeStatus synchStatus = getSynchStatus(minStatus, maxStatus);
+						if (synchStatus != null)
+						{
+							if (EnumUtil.aLessThanB(n.getPartStatus(partMap, 0), synchStatus))
+							{
+								n.setPartStatus(partMap, synchStatus, null);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/**
+		 * @param kid
+		 * @param partMap
+		 * @return
+		 */
+		private EnumNodeStatus getSynchStatus(final EnumNodeStatus minStatus, final EnumNodeStatus maxStatus)
+		{
+			EnumNodeStatus synchStatus = null;
+			if (minStatus.equals(maxStatus))
+			{
+				synchStatus = minStatus;
+			}
+			else
+			{
+				if (EnumUtil.aLessEqualsThanB(minStatus, EnumNodeStatus.Ready))
+				{
+					if (EnumUtil.aLessEqualsThanB(EnumNodeStatus.InProgress, maxStatus))
+					{
+						synchStatus = EnumNodeStatus.InProgress;
+					}
+					else
+					{
+						synchStatus = maxStatus;
+					}
+				}
+				else
+				{
+					synchStatus = minStatus;
+				}
+			}
+			return synchStatus;
+		}
+
+		/**
+		 * @param n
+		 */
+		private VJDFAttributeMap getPartVector(final JDFNode n)
+		{
+			VJDFAttributeMap vParts = n.getNodeInfoPartMapVector();
+			if (vParts == null)
+			{
+				vParts = new VJDFAttributeMap();
+				vParts.add(null);
+			}
+			return vParts;
+		}
+	}
+
 	// **************************************** Constructors
 	// ****************************************
 	// NEWWWW
@@ -2451,16 +2562,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	{
 		if (vMap == null || vMap.size() == 0)
 		{
-			return getPartStatus(null);
+			return getPartStatus(null, 0);
 		}
-		final EnumNodeStatus status = getPartStatus(vMap.elementAt(0));
+		final EnumNodeStatus status = getPartStatus(vMap.elementAt(0), 0);
 		if (status == null)
 		{
 			return null;
 		}
 		for (int i = 1; i < vMap.size(); i++)
 		{
-			final EnumNodeStatus status2 = getPartStatus(vMap.elementAt(i));
+			final EnumNodeStatus status2 = getPartStatus(vMap.elementAt(i), 0);
 			if (!status.equals(status2))
 			{
 				return null;
@@ -2502,8 +2613,22 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param mattr Attribute map of partition
 	 * @return JDFElement.EnumNodeStatus: Status of the partition, null if no Status exists
+	 * @deprecated us 2 parameter method
 	 */
+	@Deprecated
 	public JDFElement.EnumNodeStatus getPartStatus(final JDFAttributeMap mattr)
+	{
+		return getPartStatus(mattr, 0);
+	}
+
+	/**
+	 * get the node's partition status
+	 * 
+	 * @param mattr Attribute map of partition
+	 * @param method : -1, 0 or 1; -1 min status; 0 equals, 1 max status
+	 * @return JDFElement.EnumNodeStatus: Status of the partition, null if no Status exists
+	 */
+	public JDFElement.EnumNodeStatus getPartStatus(final JDFAttributeMap mattr, final int method)
 	{
 		EnumNodeStatus stat = getStatus();
 		if ((stat != EnumNodeStatus.Pool) && (stat != EnumNodeStatus.Part))
@@ -2522,7 +2647,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				return null;
 			}
-			stat = ni.getNodeStatus();
+			stat = null;
 
 			final VElement vLeaves = ni.getLeaves(false);
 			final int size = vLeaves.size();
@@ -2536,9 +2661,33 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					continue;
 				}
 
-				if (niCmp.getNodeStatus() != stat)
+				final EnumNodeStatus nodeStatus = niCmp.getNodeStatus();
+				if (!ContainerUtil.equals(nodeStatus, stat))
 				{
-					return null; // inconsistent
+					if (stat == null)
+					{
+						stat = nodeStatus;
+					}
+					else if (nodeStatus == null || method == 0)
+					{
+						return null;
+					}
+					else if (method < 0)
+					{
+						stat = (EnumNodeStatus) EnumUtil.min(stat, nodeStatus);
+					}
+					else if (method > 0)
+					{
+						stat = (EnumNodeStatus) EnumUtil.max(stat, nodeStatus);
+					}
+				}
+			}
+			if (stat == null)
+			{
+				ni = (JDFNodeInfo) ni.getPartition(mattr, null);
+				if (ni != null)
+				{
+					stat = ni.getNodeStatus();
 				}
 			}
 		}
@@ -3300,7 +3449,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			return false;
 		}
 		final VElement v = resourceLinkPool.getPoolChildren(null, null, null);
-		final EnumNodeStatus status = getPartStatus(partMap);
+		final EnumNodeStatus status = getPartStatus(partMap, 0);
 		if ((status != EnumNodeStatus.Waiting) && (status != EnumNodeStatus.Ready))
 		{
 			return false;
@@ -3903,13 +4052,36 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
+	 * synchronize the status accord
+	 */
+	public StatusSynch getStatusSynch()
+	{
+		return new StatusSynch();
+	}
+
+	/**
 	 * update the node status or nodeinfo/@NodeStatus for all partitions specified in vMap
 	 * 
 	 * @param vMap the map of partitions to apply the update algorithm to
 	 * @param updateKids if true, also recursively update all kids, if false move to root without updating kids
 	 * @param updateParents if true, recurse down to the root, updatimg the satus based on modifications in this
+	 * @deprecated use 4 parameter version
 	 */
+	@Deprecated
 	public void updatePartStatus(final VJDFAttributeMap vMap, final boolean updateKids, final boolean updateParents)
+	{
+		updatePartStatus(vMap, updateKids, updateParents, 0);
+	}
+
+	/**
+	 * update the node status or nodeinfo/@NodeStatus for all partitions specified in vMap
+	 * 
+	 * @param vMap the map of partitions to apply the update algorithm to
+	 * @param updateKids if true, also recursively update all kids, if false move to root without updating kids
+	 * @param updateParents if true, recurse down to the root, updatimg the satus based on modifications in this
+	 * @param method : -1, 0 or 1; -1 min status; 0 equals, 1 max status
+	 */
+	public void updatePartStatus(final VJDFAttributeMap vMap, final boolean updateKids, final boolean updateParents, final int method)
 	{
 		final VElement vNodes = getvJDFNode(null, null, true);
 		if (vNodes != null && !vNodes.isEmpty())
@@ -3923,7 +4095,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				final JDFNode node = (JDFNode) vNodes.item(i);
 				if (updateKids)
 				{
-					node.updatePartStatus(vMap, updateKids, false);
+					node.updatePartStatus(vMap, updateKids, false, method);
 				}
 				statusMaps.addall(node.getStatusPartMapVector());
 			}
@@ -3950,12 +4122,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			for (int i = 0; i < statusMaps.size(); i++)
 			{
 				final JDFAttributeMap map = statusMaps.elementAt(i);
-				EnumNodeStatus minStatus = EnumNodeStatus.Completed;
+				EnumNodeStatus minStatus = EnumNodeStatus.Aborted;
+				EnumNodeStatus maxStatus = EnumNodeStatus.Waiting;
 				for (int j = 0; j < kidsize; j++)
 				{
 					final JDFNode node = (JDFNode) vNodes.item(j);
 
-					final EnumNodeStatus status = node.getPartStatus(map);
+					final EnumNodeStatus status = node.getPartStatus(map, method);
 					if (status == null)
 					{
 						minStatus = null;
@@ -3965,10 +4138,21 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					{
 						minStatus = status;
 					}
+					else if (maxStatus.getValue() < status.getValue())
+					{
+						maxStatus = status;
+					}
 				}
 				if (minStatus != null)
 				{
-					setPartStatus(map, minStatus, null);
+					if (method <= 0)
+					{
+						setPartStatus(map, minStatus, null);
+					}
+					else
+					{
+						setPartStatus(map, maxStatus, null);
+					}
 				}
 			}
 		}
@@ -8481,7 +8665,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		boolean isProcStatOK = false;
 
-		final JDFElement.EnumNodeStatus stat = getPartStatus(amPartMap);
+		final JDFElement.EnumNodeStatus stat = getPartStatus(amPartMap, 0);
 
 		if (bCheckNodeStatus)
 		{
@@ -9091,9 +9275,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			return;
 		}
-		if (!EnumType.Combined.equals(t))
+		VString types = null;
+		if (!bExpand && !EnumType.Combined.equals(t))
 		{
 			renameAttribute(AttributeName.TYPE, AttributeName.TYPES, null, null);
+		}
+		else
+		{
+			types = getTypes();
 		}
 
 		setType(EnumType.ProcessGroup);
@@ -9101,10 +9290,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			final JDFNode child = addJDFNode(typeString);
 			final String jobPart = getJobPartID(false);
-			child.setJobID(jobPart);
+			child.setJobPartID(jobPart);
 			setJobPartID("pg." + jobPart);
 			child.copyElement(getResourceLinkPool(), null);
-			removeAttribute(AttributeName.TYPES);
+			if (types != null)
+			{
+				child.setTypes(types);
+			}
 			final JDFAuditPool ap = child.getCreateAuditPool();
 			ap.ensureCreated();
 			JDFCreated c = (JDFCreated) ap.getAudit(0, EnumAuditType.Created, null, null);

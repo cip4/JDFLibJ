@@ -94,6 +94,8 @@ import org.apache.commons.lang.time.FastDateFormat;
 import org.cip4.jdflib.core.JDFConstants;
 
 /**
+ * class to manipulate date and time according to ISO 8601<br/>
+ * the date and time are in local time with the respective time zone specified
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
  */
@@ -429,9 +431,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * format the date and time as an ISO 8601 conform String
+	 * format the date and time as an ISO 8601 conform String<br/>
+	 * the date and time are in local time with the respective time zone specified
 	 * 
-	 * @return date and time as String of form yyyy-mm-ddThh:mm:ss+hh:00
+	 * @return date and time as String of form yyyy-mm-ddThh:mm:ss+zz:00
 	 */
 	public String getDateTimeISO()
 	{
@@ -459,8 +462,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * the date formated as defined in ISO 8601
-	 * 
+	 * the date formated as defined in ISO 8601<br/>
+	 * the date is in local time with the respective time zone specified
 	 * @return String: the date of this of form yyyy-mm-dd
 	 */
 	public String getDateISO()
@@ -470,7 +473,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * format the time into a ISO conform String
+	 * format the time into a ISO conform String<br/>
+	 * the time is in local time
 	 * 
 	 * @return String: the time of this ISO 8601 in format hh:mm:ss
 	 */

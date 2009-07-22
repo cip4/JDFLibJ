@@ -153,7 +153,6 @@ public class FastFiFo<x>
 
 	/**
 	 * peeks into the fifo from the beginning
-	 * @param i the index of the element to peek
 	 * @return a snapshot of the current fifo, null if empty
 	 */
 	synchronized public x[] peekArray()

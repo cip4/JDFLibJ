@@ -432,19 +432,19 @@ public class JDFDateTest extends TestCase
 	 */
 	public void testGetFormattedDateTime() throws Exception
 	{
-		final String dateString = "2008-12-19T20:00:11.300+00:00";
+		final String dateString = "2008-11-19T20:00:11.300+00:00";
 		final JDFDate date = new JDFDate(dateString);
 		assertEquals("2008", date.getFormattedDateTime("yyyy"));
-		assertEquals("12", date.getFormattedDateTime("MM"));
-		assertEquals("Dec", date.getFormattedDateTime("MMM"));
-		assertEquals("Dec 19 2008 - 20:00", date.getFormattedDateTime("MMM dd yyyy - HH:mm"));
+		assertEquals("11", date.getFormattedDateTime("MM"));
+		assertEquals("Nov", date.getFormattedDateTime("MMM"));
+		assertEquals("Nov 19 2008 - 20:00", date.getFormattedDateTime("MMM dd yyyy - HH:mm"));
 		assertEquals("300", date.getFormattedDateTime("SSS")); // test for
 		// milliseconds
 		assertEquals("300", date.getFormattedDateTime("S")); // test for
 		// milliseconds
 		assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
 		assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"));
-		assertEquals("12 19-20:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));
+		assertEquals("11 19-20:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));
 
 	}
 

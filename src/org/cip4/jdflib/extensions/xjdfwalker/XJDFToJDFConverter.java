@@ -221,8 +221,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			theNode.setType(EnumType.ProcessGroup);
 			theNode.setAttributes(e);
+			theNode.setType(EnumType.ProcessGroup);
 			if (e.hasChildElement("ProductList", null))
 			{
 				final JDFNode n = theNode.addJDFNode(EnumType.ProcessGroup);
@@ -311,6 +311,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final JDFResourceLink rl = theNode.getLink(r, inOut);
 			r.setAttributes(e);
 			r.removeAttribute(AttributeName.NAME);
+			r.removeAttribute(AttributeName.USAGE);
 			if (rl != null)
 			{
 				final String id = e.getAttribute(AttributeName.ID, null, null);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,7 @@
  * created 2001-09-06T10:02:57GMT+02:00 
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de   using a code generator 
+ * Author: sabjon@topmail.de   using a code generator 
  * Warning! very preliminary test version. 
  * Interface subject to change without prior notice! 
  * Revision history:   ...
@@ -86,14 +86,22 @@ import java.util.zip.DataFormatException;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoProcessRun;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * < July 20, 2009
+ */
 public class JDFProcessRun extends JDFAutoProcessRun
 {
 	private static final long serialVersionUID = 1L;
@@ -416,11 +424,64 @@ public class JDFProcessRun extends JDFAutoProcessRun
 		}
 	}
 
+	/**
+	 * also sets an end time for this
+	 * @see org.cip4.jdflib.core.JDFAudit#init()
+	 */
 	@Override
 	public boolean init()
 	{
 		setEnd(null);
 		return super.init();
+	}
+
+	/**
+	 * returns true if audit belongs to this processrun
+	 * 
+	 * @param audit
+	 * @return
+	 */
+	public boolean matches(final JDFAudit audit)
+	{
+		if (audit == null)
+		{
+			return false;
+		}
+		// must be in same pool
+		if (!ContainerUtil.equals(audit.getParentNode(), getParentNode()))
+		{
+			return false;
+		}
+		KElement prev = getPreviousSiblingElement();
+		while (prev != null)
+		{
+			if (prev instanceof JDFProcessRun)
+			{
+				prev = null; // we found the previous pr - jump out
+				break;
+			}
+			if (prev == audit)
+			{
+				break; // it is in the chain - we are ok
+			}
+
+			prev = prev.getPreviousSiblingElement();
+		}
+		if (prev != audit)
+		{
+			return false;
+		}
+		if (!ContainerUtil.equals(getQueueEntryID(), audit.getQueueEntryID()))
+		{
+			return false;
+		}
+		final VJDFAttributeMap vMap = getPartMapVector();
+		if (vMap != null && !vMap.overlapsMap(audit.getPartMapVector()))
+		{
+			return false;
+		}
+		return true;
+
 	}
 
 }

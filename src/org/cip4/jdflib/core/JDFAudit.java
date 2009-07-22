@@ -185,6 +185,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	 * 
 	 * before June 3, 2009
 	 */
+	@SuppressWarnings("unchecked")
 	public static class EnumAuditType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -204,37 +205,83 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 			return (EnumAuditType) getEnum(EnumAuditType.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumAuditType getEnum(final int enumValue)
 		{
 			return (EnumAuditType) getEnum(EnumAuditType.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumAuditType.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumAuditType.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumAuditType.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumAuditType Created = new EnumAuditType("Created");
+		/**
+		 * 
+		 */
 		public static final EnumAuditType Modified = new EnumAuditType("Modified");
+		/**
+		 * 
+		 */
 		public static final EnumAuditType Deleted = new EnumAuditType("Deleted");
+		/**
+		 * 
+		 */
 		public static final EnumAuditType Spawned = new EnumAuditType("Spawned");
+		/**
+		 * 
+		 */
 		public static final EnumAuditType Merged = new EnumAuditType("Merged");
+		/**
+		 * 
+		 */
 		public static final EnumAuditType Notification = new EnumAuditType("Notification");
+		/**
+		 * 
+		 */
 		public static final EnumAuditType PhaseTime = new EnumAuditType("PhaseTime");
+		/**
+		 * 
+		 */
 		public static final EnumAuditType ResourceAudit = new EnumAuditType("ResourceAudit");
+		/**
+		 * 
+		 */
 		public static final EnumAuditType ProcessRun = new EnumAuditType("ProcessRun");
 	}
 
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * July 20, 2009
+	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumSeverity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -245,35 +292,67 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumSeverity getEnum(final String enumName)
 		{
 			return (EnumSeverity) getEnum(EnumSeverity.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumSeverity getEnum(final int enumValue)
 		{
 			return (EnumSeverity) getEnum(EnumSeverity.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumSeverity.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumSeverity.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumSeverity.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumSeverity Event = new EnumSeverity("Event");
+		/**
+		 * 
+		 */
 		public static final EnumSeverity Information = new EnumSeverity("Information");
+		/**
+		 * 
+		 */
 		public static final EnumSeverity Warning = new EnumSeverity("Warning");
+		/**
+		 * 
+		 */
 		public static final EnumSeverity Error = new EnumSeverity("Error");
+		/**
+		 * 
+		 */
 		public static final EnumSeverity Fatal = new EnumSeverity("Fatal");
 	}
 
@@ -306,7 +385,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * SetSeverity
-	 * @param EnumSeverity s
+	 * @param s
 	 */
 	public void setSeverity(final EnumSeverity s)
 	{
@@ -324,7 +403,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * SetStatus
-	 * @param JDFElement .EnumNodeStatus s
+	 * @param s
 	 */
 	@Override
 	public void setStatus(final JDFElement.EnumNodeStatus s)
@@ -338,7 +417,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * SetEndStatus
-	 * @param JDFElement .EnumNodeStatus s
+	 * @param s
 	 */
 	public void setEndStatus(final JDFElement.EnumNodeStatus s)
 	{
@@ -382,7 +461,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * SetPart
-	 * @param JDFAttributeMap m
+	 * @param m
 	 * @deprecated 2005-10-20 - use setPartMap() in the various subclasses instead
 	 */
 	@Deprecated
@@ -403,6 +482,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Set attribute SpawnID
+	 * @param value
 	 */
 	public void setSpawnID(final String value)
 	{
@@ -411,6 +491,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Set attribute refID
+	 * @param value
 	 */
 	public void setrefID(final String value)
 	{
@@ -432,7 +513,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * SetAuthor
-	 * @param String author
+	 * @param author
 	 */
 	public void setAuthor(final String author)
 	{
@@ -441,7 +522,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * SetID
-	 * @param String ID
+	 * @param id
 	 */
 	public void setID(final String id)
 	{
@@ -450,7 +531,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * SetBy
-	 * @param String by
+	 * @param by
 	 * @deprecated 2005-09-01 use setAuthor()
 	 */
 	@Deprecated
@@ -559,6 +640,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Get string attribute SpawnID
+	 * @return
 	 */
 	public String getSpawnID()
 	{
@@ -567,6 +649,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Get string attribute refID
+	 * @return
 	 */
 	public String getrefID()
 	{
@@ -575,6 +658,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Get string attribute Author
+	 * @return
 	 */
 	public String getAuthor()
 	{
@@ -592,6 +676,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Set attribute AgentName
+	 * @param value
 	 */
 	public void setAgentName(final String value)
 	{
@@ -599,7 +684,26 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	}
 
 	/**
+	 * Get string attribute QueueEntryID
+	 * @return
+	 */
+	public String getQueueEntryID()
+	{
+		return getAttribute(AttributeName.QUEUEENTRYID);
+	}
+
+	/**
+	 * Set attribute QueueEntryID
+	 * @param value
+	 */
+	public void setQueueEntryID(final String value)
+	{
+		setAttribute(AttributeName.QUEUEENTRYID, value);
+	}
+
+	/**
 	 * Get string attribute AgentName
+	 * @return
 	 */
 	public String getAgentName()
 	{
@@ -608,6 +712,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Set attribute AgentVersion
+	 * @param value
 	 */
 	public void setAgentVersion(final String value)
 	{
@@ -616,6 +721,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Get string attribute AgentVersion
+	 * @return
 	 */
 	public String getAgentVersion()
 	{
@@ -624,6 +730,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * Set attribute TimeStamp
+	 * @param value
 	 */
 	public void setTimeStamp(final JDFDate value)
 	{
@@ -772,6 +879,8 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	/**
 	 * (30) append element Employee
+	 * @return
+	 * @throws JDFException
 	 */
 	public JDFEmployee appendEmployee() throws JDFException
 	{

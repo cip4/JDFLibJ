@@ -444,6 +444,7 @@ public class JDFResource extends JDFElement
 	 * The original Resource Amount is ignored</li>
 	 * <li><b>AmountMerge_UpdateLink - </b>calculates the Resource Amount based on the difference of previous and current resource link amounts</li>
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumAmountMerge extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -454,11 +455,19 @@ public class JDFResource extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumAmountMerge getEnum(final String enumName)
 		{
 			return (EnumAmountMerge) getEnum(EnumAmountMerge.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumAmountMerge getEnum(final int enumValue)
 		{
 			return (EnumAmountMerge) getEnum(EnumAmountMerge.class, enumValue);
@@ -479,14 +488,24 @@ public class JDFResource extends JDFElement
 			return iterator(EnumAmountMerge.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumAmountMerge None = new EnumAmountMerge("None");
+		/**
+		 * 
+		 */
 		public static final EnumAmountMerge LinkOnly = new EnumAmountMerge("LinkOnly");
+		/**
+		 * 
+		 */
 		public static final EnumAmountMerge UpdateLink = new EnumAmountMerge("UpdateLink");
 	}
 
 	/**
 	 * Enumeration for attribute Class
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumResourceClass extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -550,18 +569,40 @@ public class JDFResource extends JDFElement
 			return iterator(EnumResourceClass.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumResourceClass Parameter = new EnumResourceClass("Parameter");
+		/**
+		 * 
+		 */
 		public static final EnumResourceClass Handling = new EnumResourceClass("Handling");
+		/**
+		 * 
+		 */
 		public static final EnumResourceClass Consumable = new EnumResourceClass("Consumable");
+		/**
+		 * 
+		 */
 		public static final EnumResourceClass Quantity = new EnumResourceClass("Quantity");
+		/**
+		 * 
+		 */
 		public static final EnumResourceClass Implementation = new EnumResourceClass("Implementation");
+		/**
+		 * 
+		 */
 		public static final EnumResourceClass PlaceHolder = new EnumResourceClass("PlaceHolder");
+		/**
+		 * 
+		 */
 		public static final EnumResourceClass Intent = new EnumResourceClass("Intent");
 	}
 
 	/**
 	 * Enumeration for attribute Status
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumResStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -598,12 +639,33 @@ public class JDFResource extends JDFElement
 		}
 
 		// EnumResStatus : enums accordng to JDF spec 3.7, Table 3-11 Status
+		/**
+		 * 
+		 */
 		public static final EnumResStatus Incomplete = new EnumResStatus(JDFConstants.INCOMPLETE);
+		/**
+		 * 
+		 */
 		public static final EnumResStatus Rejected = new EnumResStatus(JDFConstants.REJECTED);
+		/**
+		 * 
+		 */
 		public static final EnumResStatus Unavailable = new EnumResStatus(JDFConstants.UNAVAILABLE);
+		/**
+		 * 
+		 */
 		public static final EnumResStatus InUse = new EnumResStatus(JDFConstants.INUSE);
+		/**
+		 * 
+		 */
 		public static final EnumResStatus Draft = new EnumResStatus(JDFConstants.DRAFT);
+		/**
+		 * 
+		 */
 		public static final EnumResStatus Complete = new EnumResStatus(JDFConstants.COMPLETE);
+		/**
+		 * 
+		 */
 		public static final EnumResStatus Available = new EnumResStatus(JDFConstants.AVAILABLE);
 
 	}
@@ -611,6 +673,7 @@ public class JDFResource extends JDFElement
 	/**
 	 * Enumeration for attribute Status
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumLotControl extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -647,13 +710,20 @@ public class JDFResource extends JDFElement
 		}
 
 		// EnumLotControl : enums accordng to JDF spec 3.7, Table 3-11 Status
+		/**
+		 * 
+		 */
 		public static final EnumLotControl Controlled = new EnumLotControl(JDFConstants.LOTCONTROL_CONTROLLED);
+		/**
+		 * 
+		 */
 		public static final EnumLotControl NotControlled = new EnumLotControl(JDFConstants.LOTCONTROL_NOTCONTROLLED);
 	}
 
 	/**
 	 * Enumeration for attribute PartUsage
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumPartUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -699,6 +769,7 @@ public class JDFResource extends JDFElement
 	/**
 	 * Enumeration for partition keys
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumPartIDKey extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -740,85 +811,290 @@ public class JDFResource extends JDFElement
 			return getEnumList(EnumPartIDKey.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumPartIDKey.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey BinderySignatureName = new EnumPartIDKey(JDFConstants.PARTIDKEY_BINDERYSIGNATURENAME);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey BlockName = new EnumPartIDKey(JDFConstants.PARTIDKEY_BLOCKNAME);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey BundleItemIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_BUNDLEITEMINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey CellIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_CELLINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Condition = new EnumPartIDKey(JDFConstants.PARTIDKEY_CONDITION);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DocCopies = new EnumPartIDKey(JDFConstants.PARTIDKEY_DOCCOPIES);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DocIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_DOCINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DocRunIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_DOCRUNINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DocSheetIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_DOCSHEETINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey FountainNumber = new EnumPartIDKey(JDFConstants.PARTIDKEY_FOUNTAINNUMBER);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey ItemNames = new EnumPartIDKey(JDFConstants.PARTIDKEY_ITEMNAMES);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey LayerIDs = new EnumPartIDKey(JDFConstants.PARTIDKEY_LAYERIDS);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Location = new EnumPartIDKey(JDFConstants.PARTIDKEY_LOCATION);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Option = new EnumPartIDKey(JDFConstants.PARTIDKEY_OPTION);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey PageNumber = new EnumPartIDKey(JDFConstants.PARTIDKEY_PAGENUMBER);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey PartVersion = new EnumPartIDKey(JDFConstants.PARTIDKEY_PARTVERSION);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey PreflightRule = new EnumPartIDKey(JDFConstants.PARTIDKEY_PREFLIGHTRULE);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey PreviewType = new EnumPartIDKey(JDFConstants.PARTIDKEY_PREVIEWTYPE);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey RibbonName = new EnumPartIDKey(JDFConstants.PARTIDKEY_RIBBONNAME);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Run = new EnumPartIDKey(JDFConstants.PARTIDKEY_RUN);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey RunIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_RUNINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey RunTags = new EnumPartIDKey(JDFConstants.PARTIDKEY_RUNTAGS);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey RunPage = new EnumPartIDKey(JDFConstants.PARTIDKEY_RUNPAGE);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Separation = new EnumPartIDKey(JDFConstants.PARTIDKEY_SEPARATION);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SectionIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SECTIONINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SetDocIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SETDOCINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SetSheetIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SETSHEETINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SetIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SETINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SetRunIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SETRUNINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SheetIndex = new EnumPartIDKey(JDFConstants.PARTIDKEY_SHEETINDEX);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SheetName = new EnumPartIDKey(JDFConstants.PARTIDKEY_SHEETNAME);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Side = new EnumPartIDKey(JDFConstants.PARTIDKEY_SIDE);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SignatureName = new EnumPartIDKey(JDFConstants.PARTIDKEY_SIGNATURENAME);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey TileID = new EnumPartIDKey(JDFConstants.PARTIDKEY_TILEID);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey WebName = new EnumPartIDKey(JDFConstants.PARTIDKEY_WEBNAME);
 		// new in JDF 1.3
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit0 = new EnumPartIDKey(AttributeName.DELIVERYUNIT0);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit1 = new EnumPartIDKey(AttributeName.DELIVERYUNIT1);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit2 = new EnumPartIDKey(AttributeName.DELIVERYUNIT2);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit3 = new EnumPartIDKey(AttributeName.DELIVERYUNIT3);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit4 = new EnumPartIDKey(AttributeName.DELIVERYUNIT4);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit5 = new EnumPartIDKey(AttributeName.DELIVERYUNIT5);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit6 = new EnumPartIDKey(AttributeName.DELIVERYUNIT6);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit7 = new EnumPartIDKey(AttributeName.DELIVERYUNIT7);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit8 = new EnumPartIDKey(AttributeName.DELIVERYUNIT8);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DeliveryUnit9 = new EnumPartIDKey(AttributeName.DELIVERYUNIT9);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Edition = new EnumPartIDKey(AttributeName.EDITION);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey EditionVersion = new EnumPartIDKey(AttributeName.EDITIONVERSION);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey PageTags = new EnumPartIDKey(AttributeName.PAGETAGS);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey PlateLayout = new EnumPartIDKey(AttributeName.PLATELAYOUT);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey RunSet = new EnumPartIDKey(AttributeName.RUNSET);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey DocTags = new EnumPartIDKey(AttributeName.DOCTAGS);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SetTags = new EnumPartIDKey(AttributeName.SETTAGS);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey SubRun = new EnumPartIDKey(AttributeName.SUBRUN);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey WebProduct = new EnumPartIDKey(AttributeName.WEBPRODUCT);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey StationName = new EnumPartIDKey(AttributeName.STATIONNAME); // jdf1
 		// 1.3 errata addition
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey WebSetup = new EnumPartIDKey(AttributeName.WEBSETUP);
+		/**
+		 * 
+		 */
 		// JDF 1.4
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata0 = new EnumPartIDKey(AttributeName.METADATA0);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata1 = new EnumPartIDKey(AttributeName.METADATA1);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata2 = new EnumPartIDKey(AttributeName.METADATA2);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata3 = new EnumPartIDKey(AttributeName.METADATA3);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata4 = new EnumPartIDKey(AttributeName.METADATA4);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata5 = new EnumPartIDKey(AttributeName.METADATA5);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata6 = new EnumPartIDKey(AttributeName.METADATA6);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata7 = new EnumPartIDKey(AttributeName.METADATA7);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata8 = new EnumPartIDKey(AttributeName.METADATA8);
+		/**
+		 * 
+		 */
 		public static final EnumPartIDKey Metadata9 = new EnumPartIDKey(AttributeName.METADATA9);
 	}
 
 	/**
 	 * Enumeration for attribute SpawnStatus
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumSpawnStatus extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -867,8 +1143,17 @@ public class JDFResource extends JDFElement
 
 		// EnumSpawnStatus : enums accordng to JDF spec 3.7, Table 3-11
 		// SpawnStatus
+		/**
+		 * 
+		 */
 		public static final EnumSpawnStatus NotSpawned = new EnumSpawnStatus(JDFConstants.NOTSPAWNED);
+		/**
+		 * 
+		 */
 		public static final EnumSpawnStatus SpawnedRO = new EnumSpawnStatus(JDFConstants.SPAWNEDRO);
+		/**
+		 * 
+		 */
 		public static final EnumSpawnStatus SpawnedRW = new EnumSpawnStatus(JDFConstants.SPAWNEDRW);
 	}
 
@@ -3500,7 +3785,7 @@ public class JDFResource extends JDFElement
 			while (true)
 			{
 				final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
-				collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves);
+				collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
 				// since 190602 also collapse elements
 				if (bCollapseElements)
 				{
@@ -3521,7 +3806,7 @@ public class JDFResource extends JDFElement
 	// //////////////////////////////////////////////////////////////////////////
 	// ///////////////////////////////
 
-	private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves)
+	protected void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
 	{
 		final int localSize = localLeaves.size();
 		for (int j = 0; j < atts.size(); j++)
@@ -3550,9 +3835,12 @@ public class JDFResource extends JDFElement
 					{
 						parent.setAttribute(att, attVal, null);
 						// remove from all leaves...
-						for (int l = 0; l < localSize; l++)
+						if (removeEqual)
 						{
-							((JDFElement) localLeaves.elementAt(l)).removeAttribute(att);
+							for (int l = 0; l < localSize; l++)
+							{
+								localLeaves.elementAt(l).removeAttribute(att);
+							}
 						}
 
 					}
@@ -4271,6 +4559,50 @@ public class JDFResource extends JDFElement
 
 		final String locName = parentNode.getLocalName();
 		return isValidRootParentNodeName(locName);
+	}
+
+	/**
+	 * update vattribute value to the value of the attribute in the leaves
+	 * @param attName
+	 * @param nsURI
+	 * @param bDirect
+	 * @return the updated value, null in case they were not identical
+	 */
+	public String updateAttributeFromLeaves(final String attName, final String nsURI, final boolean bDirect)
+	{
+		final VElement v = getLeaves(false);
+		if (v == null || v.size() == 0 || (v.size() == 1 && this == v.get(0)))
+		{
+			if (!hasAttribute_KElement(attName, nsURI, false))
+			{
+				final String val = getAttribute(attName, nsURI, null);
+				setAttribute(attName, val, nsURI);
+				return val;
+			}
+			return null;
+		}
+		if (!bDirect)
+		{
+			for (int i = 0; i < v.size(); i++)
+			{
+				((JDFResource) v.get(i)).updateAttributeFromLeaves(attName, nsURI, bDirect);
+			}
+		}
+		String val = v.get(0).getAttribute(attName, nsURI, null);
+		for (int i = 1; i < v.size() && val != null; i++)
+		{
+			final String vali = v.get(i).getAttribute(attName, nsURI, null);
+			if (!val.equals(vali))
+			{
+				val = null;
+			}
+		}
+		if (val != null)
+		{
+			setAttribute(attName, val, nsURI);
+		}
+
+		return val;
 	}
 
 	/**

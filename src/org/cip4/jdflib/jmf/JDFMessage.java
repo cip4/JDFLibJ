@@ -185,6 +185,7 @@ public class JDFMessage extends JDFAutoMessage
 	 * 
 	 * May 17, 2009
 	 */
+	@SuppressWarnings("unchecked")
 	public static class EnumFamily extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -195,39 +196,80 @@ public class JDFMessage extends JDFAutoMessage
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumFamily getEnum(final String enumName)
 		{
 			return (EnumFamily) getEnum(EnumFamily.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumFamily getEnum(final int enumValue)
 		{
 			return (EnumFamily) getEnum(EnumFamily.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumFamily.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumFamily.class);
 		}
 
-		public static Iterator iterator()
+		/**
+		 * @return
+		 */
+		public static Iterator<EnumFamily> iterator()
 		{
 			return iterator(EnumFamily.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumFamily Query = new EnumFamily(ElementName.QUERY);
+		/**
+		 * 
+		 */
 		public static final EnumFamily Signal = new EnumFamily(ElementName.SIGNAL);
+		/**
+		 * 
+		 */
 		public static final EnumFamily Command = new EnumFamily(ElementName.COMMAND);
+		/**
+		 * 
+		 */
 		public static final EnumFamily Response = new EnumFamily(ElementName.RESPONSE);
+		/**
+		 * 
+		 */
 		public static final EnumFamily Acknowledge = new EnumFamily(ElementName.ACKNOWLEDGE);
+		/**
+		 * 
+		 */
 		public static final EnumFamily Registration = new EnumFamily(ElementName.REGISTRATION);
 	}
 
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * < July 21, 2009
+	 */
+	@SuppressWarnings("unchecked")
 	public static class EnumType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -238,26 +280,43 @@ public class JDFMessage extends JDFAutoMessage
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumType getEnum(final String enumName)
 		{
 			return (EnumType) getEnum(EnumType.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumType getEnum(final int enumValue)
 		{
 			return (EnumType) getEnum(EnumType.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumType.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumType.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumType.class);
@@ -275,49 +334,181 @@ public class JDFMessage extends JDFAutoMessage
 		 * 
 		 */
 		public static final EnumType FlushQueue = new EnumType("FlushQueue");
+		/**
+		 * 
+		 */
 		public static final EnumType FlushResources = new EnumType("FlushResources");
+		/**
+		 * 
+		 */
 		public static final EnumType Events = new EnumType("Events");
+		/**
+		 * 
+		 */
 		public static final EnumType ForceGang = new EnumType("ForceGang");
+		/**
+		 * 
+		 */
 		public static final EnumType GangStatus = new EnumType("GangStatus");
+		/**
+		 * 
+		 */
 		public static final EnumType HoldQueue = new EnumType("HoldQueue");
+		/**
+		 * 
+		 */
 		public static final EnumType HoldQueueEntry = new EnumType("HoldQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType KnownControllers = new EnumType("KnownControllers");
+		/**
+		 * 
+		 */
 		public static final EnumType KnownDevices = new EnumType("KnownDevices");
+		/**
+		 * 
+		 */
 		public static final EnumType KnownJDFServices = new EnumType("KnownJDFServices");
+		/**
+		 * 
+		 */
 		public static final EnumType KnownMessages = new EnumType("KnownMessages");
+		/**
+		 * 
+		 */
 		public static final EnumType KnownSubscriptions = new EnumType("KnownSubscriptions");
+		/**
+		 * 
+		 */
 		public static final EnumType ModifyNode = new EnumType("ModifyNode");
+		/**
+		 * 
+		 */
 		public static final EnumType NewJDF = new EnumType("NewJDF");
+		/**
+		 * 
+		 */
 		public static final EnumType NodeInfo = new EnumType("NodeInfo");
+		/**
+		 * 
+		 */
 		public static final EnumType Notification = new EnumType("Notification");
+		/**
+		 * 
+		 */
 		public static final EnumType Occupation = new EnumType("Occupation");
+		/**
+		 * 
+		 */
 		public static final EnumType OpenQueue = new EnumType("OpenQueue");
+		/**
+		 * 
+		 */
 		public static final EnumType PipeClose = new EnumType("PipeClose");
+		/**
+		 * 
+		 */
 		public static final EnumType PipePull = new EnumType("PipePull");
+		/**
+		 * 
+		 */
 		public static final EnumType PipePush = new EnumType("PipePush");
+		/**
+		 * 
+		 */
 		public static final EnumType PipePause = new EnumType("PipePause");
+		/**
+		 * 
+		 */
 		public static final EnumType QueueEntryStatus = new EnumType("QueueEntryStatus");
+		/**
+		 * 
+		 */
 		public static final EnumType QueueStatus = new EnumType("QueueStatus");
+		/**
+		 * 
+		 */
 		public static final EnumType RequestForAuthentication = new EnumType("RequestForAuthentication");
+		/**
+		 * 
+		 */
 		public static final EnumType RequestQueueEntry = new EnumType("RequestQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType RemoveQueueEntry = new EnumType("RemoveQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType RepeatMessages = new EnumType("RepeatMessages");
+		/**
+		 * 
+		 */
 		public static final EnumType Resource = new EnumType("Resource");
+		/**
+		 * 
+		 */
 		public static final EnumType ResourcePull = new EnumType("ResourcePull");
+		/**
+		 * 
+		 */
 		public static final EnumType ResumeQueue = new EnumType("ResumeQueue");
+		/**
+		 * 
+		 */
 		public static final EnumType ResumeQueueEntry = new EnumType("ResumeQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType ResubmitQueueEntry = new EnumType("ResubmitQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType ReturnQueueEntry = new EnumType("ReturnQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType SetQueueEntryPosition = new EnumType("SetQueueEntryPosition");
+		/**
+		 * 
+		 */
 		public static final EnumType SetQueueEntryPriority = new EnumType("SetQueueEntryPriority");
+		/**
+		 * 
+		 */
 		public static final EnumType ShutDown = new EnumType("ShutDown");
+		/**
+		 * 
+		 */
 		public static final EnumType Status = new EnumType("Status");
+		/**
+		 * 
+		 */
 		public static final EnumType StopPersistentChannel = new EnumType("StopPersistentChannel");
+		/**
+		 * 
+		 */
 		public static final EnumType SubmissionMethods = new EnumType("SubmissionMethods");
+		/**
+		 * 
+		 */
 		public static final EnumType SubmitQueueEntry = new EnumType("SubmitQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType SuspendQueueEntry = new EnumType("SuspendQueueEntry");
+		/**
+		 * 
+		 */
 		public static final EnumType Track = new EnumType("Track");
+		/**
+		 * 
+		 */
 		public static final EnumType UpdateJDF = new EnumType("UpdateJDF");
+		/**
+		 * 
+		 */
 		public static final EnumType WakeUp = new EnumType("WakeUp");
 	}
 
@@ -407,7 +598,7 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 * SetQuery - sets the initiating query, command or registration to q
+	 * SetQuery - sets the initiating query, command, Acknowledge, Signal or registration to q
 	 * 
 	 * @param q the query, command or registration to create a response for
 	 */
@@ -426,8 +617,8 @@ public class JDFMessage extends JDFAutoMessage
 	/**
 	 * Enumeration string for enum value
 	 * 
-	 * @param EnumType value the enumeration to translate
-	 * @return KString the string representation of the enumeration
+	 * @param value the enumeration to translate
+	 * @return String the string representation of the enumeration
 	 */
 	public static String typeString(final EnumType value)
 	{
@@ -494,6 +685,7 @@ public class JDFMessage extends JDFAutoMessage
 	 * checks whether the type of messageElement is valid for this message
 	 * 
 	 * @param elementName the name of the element to be tested
+	 * @param iSkip
 	 * @return boolean: true if valid; always true if not in JDFNameSpace
 	 */
 	public boolean isValidMessageElement(final String elementName, final int iSkip)
@@ -1546,6 +1738,7 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * append element <code>MessageService</code>
+	 * @return
 	 */
 	public JDFMessageService appendMessageService()
 	{
@@ -2569,11 +2762,19 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFNodeInfoResp) appendValidElement(ElementName.NODEINFORESP, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNodeInfoResp getNodeInfoResp(final int iSkip)
 	{
 		return (JDFNodeInfoResp) getValidElement(ElementName.NODEINFORESP, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFQueueFilter getCreateQueueFilter(final int iSkip)
 	{
 		return (JDFQueueFilter) getCreateValidElement(ElementName.QUEUEFILTER, null, iSkip);
@@ -2581,6 +2782,9 @@ public class JDFMessage extends JDFAutoMessage
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * @return
+	 */
 	public JDFQueueFilter appendQueueFilter()
 	{
 		return (JDFQueueFilter) appendValidElement(ElementName.QUEUEFILTER, null);
@@ -2588,6 +2792,10 @@ public class JDFMessage extends JDFAutoMessage
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFQueueFilter getQueueFilter(final int iSkip)
 	{
 		return (JDFQueueFilter) getValidElement(ElementName.QUEUEFILTER, null, iSkip);

@@ -681,6 +681,22 @@ public class VJDFAttributeMap
 	}
 
 	/**
+	 * Method overlapMap. only entries that contain at least one matching map entry are retained
+	 * 
+	 * @param map the map to check against
+	 */
+	public void overlapMap(final VJDFAttributeMap map)
+	{
+		for (int i = this.size() - 1; i >= 0; i--)
+		{
+			if (!get(i).overlapMap(map))
+			{
+				removeElementAt(i);
+			}
+		}
+	}
+
+	/**
 	 * Method overlapMap.
 	 * 
 	 * @param map the map to check against

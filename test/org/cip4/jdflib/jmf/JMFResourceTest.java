@@ -302,12 +302,12 @@ public class JMFResourceTest extends JDFTestCaseBase
 		jdf.setJobID("JobID");
 		jdf.setJobPartID("JobPartID");
 
-		assertEquals(jdf.getPartStatus(null), EnumNodeStatus.Waiting);
+		assertEquals(jdf.getPartStatus(null, 0), EnumNodeStatus.Waiting);
 		assertEquals(jdf.getStatus(), EnumNodeStatus.Waiting);
 		rqp.applyResourceCommand(jdf);
 		assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
 		assertEquals(jdf.getNodeInfo().getNodeStatus(), EnumNodeStatus.Waiting);
-		assertEquals(jdf.getPartStatus(sheetMap), EnumNodeStatus.Aborted);
+		assertEquals(jdf.getPartStatus(sheetMap, 0), EnumNodeStatus.Aborted);
 
 		sheetMap = new JDFAttributeMap("SheetName", "S2");
 		rqp.setPartMap(sheetMap);
@@ -317,7 +317,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		rqp.applyResourceCommand(jdf);
 		assertEquals(jdf.getStatus(), EnumNodeStatus.Part);
 		assertEquals(jdf.getNodeInfo().getNodeStatus(), EnumNodeStatus.Waiting);
-		assertEquals(jdf.getPartStatus(sheetMap), EnumNodeStatus.Completed);
+		assertEquals(jdf.getPartStatus(sheetMap, 0), EnumNodeStatus.Completed);
 	}
 
 	/**

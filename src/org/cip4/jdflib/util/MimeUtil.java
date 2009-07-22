@@ -85,7 +85,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Vector;
@@ -237,7 +236,7 @@ public class MimeUtil extends UrlUtil
 
 		/**
 		 * create a data source from a byte array
-		 * @param ioStream the ByteArrayIOStream to use
+		 * @param _ioStream the ByteArrayIOStream to use
 		 * @param _contentType the content type of the contents
 		 */
 		public ByteArrayDataSource(final ByteArrayIOStream _ioStream, final String _contentType)
@@ -246,8 +245,8 @@ public class MimeUtil extends UrlUtil
 			ioStream = _ioStream;
 		}
 
-		/*
-		 * (non-Javadoc)
+		/**
+		 * * (non-Javadoc)
 		 * 
 		 * @see javax.activation.DataSource#getContentType()
 		 */
@@ -256,9 +255,7 @@ public class MimeUtil extends UrlUtil
 			return contenType;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
+		/**
 		 * @see javax.activation.DataSource#getInputStream()
 		 */
 		public InputStream getInputStream()
@@ -266,9 +263,7 @@ public class MimeUtil extends UrlUtil
 			return ioStream.getInputStream();
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
+		/**
 		 * @see javax.activation.DataSource#getName()
 		 */
 		public String getName()
@@ -277,9 +272,7 @@ public class MimeUtil extends UrlUtil
 			return null;
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
+		/**
 		 * @see javax.activation.DataSource#getOutputStream()
 		 */
 		public OutputStream getOutputStream()
@@ -299,9 +292,10 @@ public class MimeUtil extends UrlUtil
 
 	// private static Logger log = Logger.getLogger(MimeUtil.class);
 	/**
+	 * @param bp
+	 * @param cid
 	 * 
 	 */
-
 	public static void setContentID(final BodyPart bp, final String cid)
 	{
 		if (cid == null)
@@ -675,8 +669,8 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * checkst whether the mime type corresponds to one of "application/vnd.cip4-jdf+xml"; "application/vnd.cip4-jmf+xml"; "text/xml";
-	 * @param mimeType the string to test
-	 * @return true if matches
+	 * @param fileName the string to test
+	 * @return the mime type
 	 */
 	public static String getMimeTypeFromExt(final String fileName)
 	{
@@ -754,6 +748,9 @@ public class MimeUtil extends UrlUtil
 	// return message.isMimeType("multipart/*");
 	// }
 	/**
+	 * @param docJMF
+	 * @param docJDF
+	 * @return
 	 * @deprecated use 3 parameter version
 	 */
 	@Deprecated
@@ -873,14 +870,7 @@ public class MimeUtil extends UrlUtil
 						{
 							final File jdfFile = new File(docJDF.getOriginalFileName());
 							f = new File(jdfFile.getParent(), f.getPath());
-							try
-							{
-								urlStrings[i] = f.toURL().toExternalForm();
-							}
-							catch (final MalformedURLException e1)
-							{
-								// nop
-							}
+							urlStrings[i] = UrlUtil.fileToUrl(f, false);
 						}
 					}
 					if (f == null || !f.canRead())
@@ -1004,7 +994,7 @@ public class MimeUtil extends UrlUtil
 	 * @param vXMLDocs the Vector of XMLDoc representing the JMF and JDFs to be stored as the first part of the package t
 	 * @return a Message representing the resulting MIME package, null if an error occured
 	 */
-	static public Multipart buildMimePackage(final Vector vXMLDocs)
+	static public Multipart buildMimePackage(final Vector<? extends XMLDoc> vXMLDocs)
 	{
 		if (vXMLDocs == null || vXMLDocs.size() == 0)
 		{
@@ -1019,7 +1009,7 @@ public class MimeUtil extends UrlUtil
 		final int imax = vXMLDocs.size();
 		for (int i = 0; i < imax; i++)
 		{
-			final XMLDoc d1 = (XMLDoc) vXMLDocs.elementAt(i);
+			final XMLDoc d1 = vXMLDocs.elementAt(i);
 			updateXMLMultipart(multipart, d1, null);
 		}
 		// Put parts in message
@@ -1035,6 +1025,12 @@ public class MimeUtil extends UrlUtil
 		return multipart;
 	}
 
+	/**
+	 * @param multipart
+	 * @param xmlDoc
+	 * @param cid
+	 * @return
+	 */
 	public static BodyPart updateXMLMultipart(final Multipart multipart, final XMLDoc xmlDoc, final String cid)
 	{
 		String cidLocal = cid;
@@ -1080,6 +1076,7 @@ public class MimeUtil extends UrlUtil
 	 * @param messageBodyPart the BodyPart to fill
 	 * @param xmlDoc the xmlDoc to fill in
 	 * @throws MessagingException
+	 * @throws IOException
 	 */
 	public static void setContent(final BodyPart messageBodyPart, final XMLDoc xmlDoc) throws MessagingException, IOException
 	{
@@ -1148,11 +1145,11 @@ public class MimeUtil extends UrlUtil
 	 * write a Multipart to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
 	 * @param mp the mime MultiPart to write
 	 * @param strUrl the URL to write to
+	 * @param mimeDetails
 	 * @return {@link HttpURLConnection} the opened http connection, null in case of error or file
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
-
 	public static HttpURLConnection writeToURL(final Multipart mp, final String strUrl, MIMEDetails mimeDetails) throws IOException, MessagingException
 	{
 		HttpURLConnection httpURLconnection = null;
@@ -1199,8 +1196,10 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * submit a multipart file to a queue
-	 * @param mp
-	 * @param strUrl
+	 * @param docJMF the jmf document containing the submitqueueentry or resubmitqueueentry
+	 * @param docJDF the jdf to submit
+	 * @param strUrl the url to submit to
+	 * @param urlDet url details
 	 * @return
 	 * @throws IOException
 	 * @throws MessagingException
@@ -1217,9 +1216,9 @@ public class MimeUtil extends UrlUtil
 		}
 
 		final int rc = uc.getResponseCode();
+		final InputStream inputStream = uc.getInputStream();
 		if (rc == 200)
 		{
-			final InputStream inputStream = uc.getInputStream();
 			final BufferedInputStream bis = new BufferedInputStream(inputStream);
 			bis.mark(100000);
 			final Multipart mpRet = getMultiPart(bis);
@@ -1258,7 +1257,7 @@ public class MimeUtil extends UrlUtil
 			r.setReturnCode(3); // TODO correct rcs
 			doc = respJMF.getOwnerDocument_JDFElement();
 		}
-
+		inputStream.close(); // always close the stream
 		return doc;
 	}
 
@@ -1276,10 +1275,10 @@ public class MimeUtil extends UrlUtil
 
 	/**
 	 * write a Multipart to an output file
-	 * @param mp the mime MultiPart to write
-	 * @param outStream the existing output stream
-	 * @throws IOException
-	 * @throws MessagingException
+	 * @param m the mime MultiPart to write
+	 * @param fileName the file name
+	 * @param md
+	 * @return
 	 */
 	public static File writeToFile(final Multipart m, final String fileName, final MIMEDetails md)
 	{

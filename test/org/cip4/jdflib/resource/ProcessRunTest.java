@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,17 +82,23 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.JDFDate;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * July 20, 2009
+ */
 public class ProcessRunTest extends JDFTestCaseBase
 {
+	private JDFAuditPool ap;
+
+	/**
+	 * @throws Exception
+	 */
 	public void testGetDuration() throws Exception
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
-		JDFAuditPool ap = n.getCreateAuditPool();
-		JDFProcessRun pt = ap.addProcessRun(EnumNodeStatus.Completed, null,
-				null);
+		final JDFProcessRun pt = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		pt.setStart(new JDFDate());
-		JDFDate end = new JDFDate();
+		final JDFDate end = new JDFDate();
 		end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000);
 		pt.setEnd(end);
 		assertEquals("", pt.getDuration().getDuration(), 100., 1.);
@@ -101,18 +107,16 @@ public class ProcessRunTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testAddPhaseTime()
 	{
-		JDFDoc doc = new JDFDoc("JDF");
-		JDFNode n = doc.getJDFRoot();
-		JDFAuditPool ap = n.getCreateAuditPool();
-		JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, null,
-				null);
+		final JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
 		JDFPhaseTime pt0 = null;
 		for (int i = 0; i < 10; i++)
 		{
-			JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.InProgress, null,
-					null);
+			final JDFPhaseTime pt = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
 			if (i == 0)
 			{
 				pt0 = pt;
@@ -121,9 +125,8 @@ public class ProcessRunTest extends JDFTestCaseBase
 			final JDFDate start = new JDFDate();
 			start.setTimeInMillis(start.getTimeInMillis() + i * 1000 * 1000);
 			pt.setStart(start);
-			JDFDate end = new JDFDate();
-			end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000 + i * 1000
-					* 1000);
+			final JDFDate end = new JDFDate();
+			end.setTimeInMillis(end.getTimeInMillis() + 100 * 1000 + i * 1000 * 1000);
 			pt.setEnd(end);
 			assertEquals("", pt.getDuration().getDuration(), 100, 1.);
 
@@ -137,4 +140,37 @@ public class ProcessRunTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		ap = n.getCreateAuditPool();
+	}
+
+	/**
+	 * 
+	 */
+	public void testMatches()
+	{
+		final JDFProcessRun pr0 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
+		final JDFPhaseTime pt1 = ap.addPhaseTime(EnumNodeStatus.InProgress, null, null);
+		final JDFProcessRun pr1 = ap.addProcessRun(EnumNodeStatus.Completed, null, null);
+		assertTrue(pr1.matches(pt1));
+		assertFalse(pr0.matches(pt1));
+		assertFalse(pr1.matches(pr0));
+	}
+
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ap=" + ap;
+	}
 }

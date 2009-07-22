@@ -1495,6 +1495,10 @@ public class XMLDoc
 			else
 			{
 				final URLConnection urlCon = write2HTTPURL(url, strContentType, null);
+				if (urlCon == null)
+				{
+					return null;
+				}
 				final JDFParser parser = new JDFParser();
 				final InputStream inStream = urlCon.getInputStream();
 

@@ -1034,7 +1034,7 @@ public class JDFSpawn
 		{
 			spawnAudit.setPartMapVector(vSpawnParts);
 
-			final EnumNodeStatus partStatus = node.getPartStatus(vSpawnParts.elementAt(0));
+			final EnumNodeStatus partStatus = node.getPartStatus(vSpawnParts.elementAt(0), 0);
 			if (partStatus != null)
 			{
 				spawnAudit.setStatus(partStatus);
@@ -1751,7 +1751,7 @@ public class JDFSpawn
 					{
 						for (i = 0; i < parts.size(); i++)
 						{
-							if ((parent.getPartStatus(parts.elementAt(i)).equals(JDFElement.EnumNodeStatus.Spawned)) || fHasAuditStatus)
+							if ((parent.getPartStatus(parts.elementAt(i), 0).equals(JDFElement.EnumNodeStatus.Spawned)) || fHasAuditStatus)
 							{
 								parent.setPartStatus(parts.elementAt(i), status, null);
 							}

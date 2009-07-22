@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,7 @@ package org.cip4.jdflib.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -105,9 +106,47 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	 * 
 	 * @param i the size of the stream
 	 */
-	public ByteArrayIOStream(int i)
+	public ByteArrayIOStream(final int i)
 	{
 		super(i);
+	}
+
+	/**
+	 * creates an input output stream class from any stream
+	 * 
+	 * @param is the inputstream to buffer
+	 */
+	public ByteArrayIOStream(final InputStream is)
+	{
+		super(1000);
+
+		if (is == null)
+		{
+			return;
+		}
+		try
+		{
+			int available = is.available();
+			if (available > 1000)
+			{
+				buf = new byte[available + 1000];
+			}
+			final int pos = 0;
+			while (available > 0)
+			{
+				final int n = is.read(buf, pos, available);
+				if (n > 0)
+				{
+					count += n;
+				}
+				available = is.available();
+			}
+		}
+		catch (final IOException e)
+		{
+			// nop - we filled to the end
+		}
+
 	}
 
 	/**
@@ -115,23 +154,33 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	 * 
 	 * @param b the buffer to use (is NOT copied)
 	 */
-	public ByteArrayIOStream(byte[] b)
+	public ByteArrayIOStream(final byte[] b)
 	{
 		super();
 		buf = b;
 	}
 
 	/**
-	 * gets an inputstream based on the current byte contents
+	 * gets an inputstream based on the current byte contents - note this operates on the internal data
 	 * 
 	 * @return
 	 */
-	public InputStream getInputStream()
+	public ByteArrayInputStream getInputStream()
 	{
-		ByteArrayInputStream is = new ByteArrayInputStream(buf, 0, size());
+		final ByteArrayInputStream is = new ByteArrayInputStream(buf, 0, size());
 		return is;
 	}
+
 	// //////////////////////////////////////////////////////////////////////////
 	// //////
+
+	/**
+	 * @see java.io.ByteArrayOutputStream#toString()
+	 */
+	@Override
+	public synchronized String toString()
+	{
+		return "ByteArrayIOStream: " + new String(buf, 0, count);
+	}
 
 }

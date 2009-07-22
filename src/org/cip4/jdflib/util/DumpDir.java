@@ -144,7 +144,7 @@ public class DumpDir
 				}
 				if (l > max)
 				{
-					max = l;
+					max = l + 1;
 				}
 			}
 			index.i = max;

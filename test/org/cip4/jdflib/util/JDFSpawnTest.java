@@ -1406,7 +1406,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFSpawn spawn = new JDFSpawn(n2); // fudge to test output
 			// counting
 			n2.setStatus(EnumNodeStatus.Waiting);
-			assertEquals(EnumNodeStatus.Waiting, n2.getPartStatus(null));
+			assertEquals(EnumNodeStatus.Waiting, n2.getPartStatus(null, 0));
 			n2.getCreateAuditPool().addNotification(null, null, null).appendComment().setText("notification 2 main");
 
 			final String pid = n2.getJobPartID(false);
@@ -1422,7 +1422,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			spawnedNode.setStatus(EnumNodeStatus.Part);
 			spawnedNode.getNodeInfo().setNodeStatus(EnumNodeStatus.Aborted);
 			assertEquals(EnumNodeStatus.Part, spawnedNode.getStatus());
-			assertEquals(EnumNodeStatus.Aborted, spawnedNode.getPartStatus(null));
+			assertEquals(EnumNodeStatus.Aborted, spawnedNode.getPartStatus(null, 0));
 			final JDFAuditPool auditPool = spawnedNode.getCreateAuditPool();
 			auditPool.addProcessRun(EnumNodeStatus.Aborted, null, null);
 			final JDFNotification notif = (JDFNotification) auditPool.addAudit(EnumAuditType.Notification, null);
@@ -1434,7 +1434,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode mergedNode = merge.mergeJDF(spawnedNode, "merged", cu[i], EnumAmountMerge.UpdateLink);
 
 			assertEquals(EnumNodeStatus.Part, mergedNode.getStatus());
-			assertEquals(EnumNodeStatus.Aborted, mergedNode.getPartStatus(null));
+			assertEquals(EnumNodeStatus.Aborted, mergedNode.getPartStatus(null, 0));
 
 			final JDFNode jobPart = d.getJDFRoot().getJobPart(pid, null);
 			assertEquals(jobPart, mergedNode);
@@ -1970,10 +1970,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				assertNotNull("ni", niSpawn);
 
 				spawnedNode.setPartStatus(partmapvector, EnumNodeStatus.Aborted, null);
-				assertEquals(spawnedNode.getPartStatus(j == 1 ? partmapvector.elementAt(0) : null), EnumNodeStatus.Aborted);
+				assertEquals(spawnedNode.getPartStatus((j == 1 ? partmapvector.elementAt(0) : null), 0), EnumNodeStatus.Aborted);
 
 				final JDFNode mergedNode = new JDFMerge(n2).mergeJDF(spawnedNode, "merged", JDFNode.EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
-				assertEquals(mergedNode.getPartStatus(j == 1 ? partmapvector.elementAt(0) : null), EnumNodeStatus.Aborted);
+				assertEquals(mergedNode.getPartStatus((j == 1 ? partmapvector.elementAt(0) : null), 0), EnumNodeStatus.Aborted);
 			}
 		}
 	}
@@ -2112,10 +2112,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			merge.bUpdateStati = true;
 			node = merge.mergeJDF(spawnedNode, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
 			assertEquals(node.getID(), nodes[i].getID());
-			assertEquals(root.getPartStatus(map1), i == 2 ? EnumNodeStatus.Completed : EnumNodeStatus.Waiting);
-			assertEquals(root.getPartStatus(map2), EnumNodeStatus.Waiting);
-			assertEquals(node.getPartStatus(map1), EnumNodeStatus.Completed);
-			assertEquals(node.getPartStatus(map2), EnumNodeStatus.Waiting);
+			assertEquals(root.getPartStatus(map1, 0), i == 2 ? EnumNodeStatus.Completed : EnumNodeStatus.Waiting);
+			assertEquals(root.getPartStatus(map2, 0), EnumNodeStatus.Waiting);
+			assertEquals(node.getPartStatus(map1, 0), EnumNodeStatus.Completed);
+			assertEquals(node.getPartStatus(map2, 0), EnumNodeStatus.Waiting);
 		}
 
 	}
