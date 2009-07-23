@@ -216,6 +216,7 @@ public final class AttributeName
 	public static final String BANDORDERING = "BandOrdering";
 	public static final String BANDWIDTH = "BandWidth";
 	public static final String BARCODEVERSION = "BarcodeVersion";
+	public static final String BASEORDRESET = "BaseOrdReset";
 	public static final String BATCHID = "BatchID";
 	public static final String BEARERBARS = "BearerBars";
 	public static final String BEFORE = "Before";
