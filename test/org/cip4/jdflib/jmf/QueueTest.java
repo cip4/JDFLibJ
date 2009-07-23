@@ -319,7 +319,8 @@ public class QueueTest extends TestCase
 			new Thread(queueTestThread).start();
 		}
 		// now also zapp some...
-		for (int j = 0; j < 100; j++)
+		int k = 0;
+		for (int j = 0; k < 100; j++)
 		{
 			final JDFQueueEntry qex = q.getNextExecutableQueueEntry();
 			if (qex != null)
@@ -327,13 +328,17 @@ public class QueueTest extends TestCase
 				qex.setQueueEntryStatus(EnumQueueEntryStatus.Running);
 				ThreadUtil.sleep(10);
 				qex.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
+				k++;
+			}
+			else
+			{
+				ThreadUtil.sleep(1);
 			}
 		}
 		while (iThread > 0)
 		{
 			ThreadUtil.sleep(100); // wait for threads to be over
 		}
-		ThreadUtil.sleep(1000); // wait for threads to be over
 		assertEquals(q.getQueueSize(), 1000);
 		VElement v = q.getQueueEntryVector();
 		JDFQueueEntry qeLast = null;
