@@ -121,7 +121,6 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	public VString inks = null;
 	public VString inkProductIDs = null;
 
-	protected int icsLevel;
 	/**
 	 * if true, previews are linked
 	 */

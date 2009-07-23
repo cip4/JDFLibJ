@@ -86,8 +86,6 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  */
 public class IDPGoldenTicket extends MISGoldenTicket
 {
-	protected int icsLevel;
-
 	/**
 	 * @param previous
 	 * @param _vparts

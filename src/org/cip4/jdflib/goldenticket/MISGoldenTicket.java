@@ -150,14 +150,14 @@ public class MISGoldenTicket extends BaseGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 * @param _icsLevel the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
 	 * @param jmfLevel level of jmf ICS to support
 	 */
-	public MISGoldenTicket(final int icsLevel, final EnumVersion jdfVersion, final int jmfLevel)
+	public MISGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int jmfLevel)
 	{
 		super(2, jdfVersion); // mis always requires base 2
-		misICSLevel = icsLevel;
+		misICSLevel = _icsLevel;
 		jmfICSLevel = jmfLevel;
 		fillCatMaps();
 	}

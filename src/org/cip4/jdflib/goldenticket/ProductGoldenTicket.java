@@ -112,8 +112,6 @@ import org.cip4.jdflib.util.JDFDate;
  */
 public class ProductGoldenTicket extends MISGoldenTicket
 {
-	private final int icsLevel;
-
 	// private JDFMediaIntent mediaIntent;
 
 	public ProductGoldenTicket(int _icsLevel, EnumVersion jdfVersion, int _jmfLevel, int _misLevel)

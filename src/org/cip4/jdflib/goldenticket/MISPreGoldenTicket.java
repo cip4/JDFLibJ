@@ -123,7 +123,6 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	public static final String MISPRE_PLATEMAKING = "MISPRE.PlateMaking";
 	public static final String MISPRE_PLATESETTING = "MISPRE.PlateSetting";
 
-	protected int icsLevel;
 	public boolean bStripping = false;
 	public boolean bSingleSided = false;
 
