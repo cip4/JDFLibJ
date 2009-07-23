@@ -70,30 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.intent.JDFIntentResource;
-import org.cip4.jdflib.resource.process.JDFMediaLayers;
-import org.cip4.jdflib.span.JDFIntegerSpan;
-import org.cip4.jdflib.span.JDFNameSpan;
-import org.cip4.jdflib.span.JDFNumberSpan;
-import org.cip4.jdflib.span.JDFOptionSpan;
-import org.cip4.jdflib.span.JDFSpanCoatings;
-import org.cip4.jdflib.span.JDFSpanFluteDirection;
-import org.cip4.jdflib.span.JDFSpanGrainDirection;
-import org.cip4.jdflib.span.JDFSpanMediaType;
-import org.cip4.jdflib.span.JDFSpanMediaUnit;
-import org.cip4.jdflib.span.JDFSpanNamedColor;
-import org.cip4.jdflib.span.JDFSpanOpacity;
-import org.cip4.jdflib.span.JDFStringSpan;
-import org.cip4.jdflib.span.JDFXYPairSpan;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoMediaIntent extends JDFIntentResource
 {

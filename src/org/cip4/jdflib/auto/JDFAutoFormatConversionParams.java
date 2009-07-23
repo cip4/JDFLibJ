@@ -70,16 +70,10 @@
 
 package org.cip4.jdflib.auto;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.process.JDFColorPool;
-import org.cip4.jdflib.resource.process.JDFFileSpec;
-import org.cip4.jdflib.resource.process.JDFImageCompressionParams;
-import org.cip4.jdflib.resource.process.JDFTIFFFormatParams;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoFormatConversionParams extends JDFResource
 {

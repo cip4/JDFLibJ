@@ -70,23 +70,12 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.JDFPart;
-import org.cip4.jdflib.resource.process.JDFContact;
-import org.cip4.jdflib.resource.process.JDFEmployee;
+import java.util.Collection;                        
+import java.util.Vector;                            
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoContentMetaData extends JDFElement
 {
@@ -311,29 +300,29 @@ public abstract class JDFAutoContentMetaData extends JDFElement
     /** (26) getCreateEmployee
      * 
      * @param iSkip number of elements to skip
-     * @return JDFContact the element
+     * @return JDFEmployee the element
      */
-    public JDFContact getCreateEmployee(int iSkip)
+    public JDFEmployee getCreateEmployee(int iSkip)
     {
-        return (JDFContact)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
+        return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
 
     /**
      * (27) const get element Employee
      * @param iSkip number of elements to skip
-     * @return JDFContact the element
+     * @return JDFEmployee the element
      * default is getEmployee(0)     */
-    public JDFContact getEmployee(int iSkip)
+    public JDFEmployee getEmployee(int iSkip)
     {
-        return (JDFContact) getElement(ElementName.EMPLOYEE, null, iSkip);
+        return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
 
     /**
      * Get all Employee from the current element
      * 
-     * @return Collection<JDFContact>, null if none are available
+     * @return Collection<JDFEmployee>, null if none are available
      */
-    public Collection<JDFContact> getAllEmployee()
+    public Collection<JDFEmployee> getAllEmployee()
     {
         final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
         if (vc == null || vc.size() == 0)
@@ -341,10 +330,10 @@ public abstract class JDFAutoContentMetaData extends JDFElement
             return null;
         }
 
-        final Vector<JDFContact> v = new Vector<JDFContact>();
+        final Vector<JDFEmployee> v = new Vector<JDFEmployee>();
         for (int i = 0; i < vc.size(); i++)
         {
-            v.add((JDFContact) vc.get(i));
+            v.add((JDFEmployee) vc.get(i));
         }
 
         return v;
@@ -353,9 +342,9 @@ public abstract class JDFAutoContentMetaData extends JDFElement
     /**
      * (30) append element Employee
      */
-    public JDFContact appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee() throws JDFException
     {
-        return (JDFContact) appendElement(ElementName.EMPLOYEE, null);
+        return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }
 
     /**

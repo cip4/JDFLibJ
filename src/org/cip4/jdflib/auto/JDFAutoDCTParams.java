@@ -70,21 +70,16 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-import java.util.zip.DataFormatException;
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.datatypes.JDFIntegerList;
-import org.cip4.jdflib.datatypes.JDFNumberList;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.datatypes.*;
 
 public abstract class JDFAutoDCTParams extends JDFElement
 {
@@ -217,6 +212,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
             public static final EnumSourceCSs Lab = new EnumSourceCSs("Lab");
             public static final EnumSourceCSs Separtation = new EnumSourceCSs("Separtation");
             public static final EnumSourceCSs YUV = new EnumSourceCSs("YUV");
+            public static final EnumSourceCSs All = new EnumSourceCSs("All");
         }      
 
 

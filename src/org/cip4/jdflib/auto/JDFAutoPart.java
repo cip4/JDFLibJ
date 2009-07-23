@@ -70,22 +70,15 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.DataFormatException;
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-import org.cip4.jdflib.datatypes.JDFNameRangeList;
-import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.datatypes.*;
 
 public abstract class JDFAutoPart extends JDFElement
 {
@@ -123,16 +116,16 @@ public abstract class JDFAutoPart extends JDFElement
         atrInfoTable[25] = new AtrInfoTable(AttributeName.ITEMNAMES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[26] = new AtrInfoTable(AttributeName.LAYERIDS, 0x33333331, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
         atrInfoTable[27] = new AtrInfoTable(AttributeName.LOCATION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[28] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[29] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[30] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[31] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[32] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[33] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[34] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[35] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[36] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[37] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[28] = new AtrInfoTable(AttributeName.METADATA0, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[29] = new AtrInfoTable(AttributeName.METADATA1, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[30] = new AtrInfoTable(AttributeName.METADATA2, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[31] = new AtrInfoTable(AttributeName.METADATA3, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[32] = new AtrInfoTable(AttributeName.METADATA4, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[33] = new AtrInfoTable(AttributeName.METADATA5, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[34] = new AtrInfoTable(AttributeName.METADATA6, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[35] = new AtrInfoTable(AttributeName.METADATA7, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[36] = new AtrInfoTable(AttributeName.METADATA8, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[37] = new AtrInfoTable(AttributeName.METADATA9, 0x33331111, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
         atrInfoTable[38] = new AtrInfoTable(AttributeName.OPTION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
         atrInfoTable[39] = new AtrInfoTable(AttributeName.PAGENUMBER, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
         atrInfoTable[40] = new AtrInfoTable(AttributeName.PAGETAGS, 0x33333111, AttributeInfo.EnumAttributeType.Any, null, null);

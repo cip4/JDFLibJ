@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
- *
+  *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -70,289 +70,294 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.process.JDFPageAssignedList;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoAssemblySection extends JDFElement
 {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
-	static
-	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444311, AttributeInfo.EnumAttributeType.string, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDER, 0x44443311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
-	}
-
-	@Override
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
+    static
+    {
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ASSEMBLYID, 0x44444311, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSEMBLYIDS, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.JOBID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.ORDER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOrder.getEnum(0), "Gathering");
+    }
+    
+    @Override
 	protected AttributeInfo getTheAttributeInfo()
-	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-	}
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
 
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-	static
-	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x33333111);
-	}
 
-	@Override
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.PAGEASSIGNEDLIST, 0x33333111);
+    }
+    
+    @Override
 	protected ElementInfo getTheElementInfo()
-	{
-		return super.getTheElementInfo().updateReplace(elemInfoTable);
-	}
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
+    }
 
-	/**
-	 * Constructor for JDFAutoAssemblySection
-	 * @param myOwnerDocument
-	 * @param qualifiedName
-	 */
-	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
-	{
-		super(myOwnerDocument, qualifiedName);
-	}
 
-	/**
-	 * Constructor for JDFAutoAssemblySection
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 */
-	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName);
-	}
 
-	/**
-	 * Constructor for JDFAutoAssemblySection
-	 * @param myOwnerDocument
-	 * @param myNamespaceURI
-	 * @param qualifiedName
-	 * @param myLocalName
-	 */
-	protected JDFAutoAssemblySection(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
+    /**
+     * Constructor for JDFAutoAssemblySection
+     * @param myOwnerDocument
+     * @param qualifiedName
+     */
+    protected JDFAutoAssemblySection(
+        CoreDocumentImpl myOwnerDocument,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, qualifiedName);
+    }
 
-	@Override
+    /**
+     * Constructor for JDFAutoAssemblySection
+     * @param myOwnerDocument
+     * @param myNamespaceURI
+     * @param qualifiedName
+     */
+    protected JDFAutoAssemblySection(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName);
+    }
+
+    /**
+     * Constructor for JDFAutoAssemblySection
+     * @param myOwnerDocument
+     * @param myNamespaceURI
+     * @param qualifiedName
+     * @param myLocalName
+     */
+    protected JDFAutoAssemblySection(
+        CoreDocumentImpl myOwnerDocument,
+        String myNamespaceURI,
+        String qualifiedName,
+        String myLocalName)
+    {
+        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+    }
+
+
+    @Override
 	public String toString()
-	{
-		return " JDFAutoAssemblySection[  --> " + super.toString() + " ]";
-	}
+    {
+        return " JDFAutoAssemblySection[  --> " + super.toString() + " ]";
+    }
 
-	/**
-	 * Enumeration strings for Order
-	 */
 
-	public static class EnumOrder extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
+        /**
+        * Enumeration strings for Order
+        */
 
-		private EnumOrder(final String name)
-		{
-			super(name, m_startValue++);
-		}
+        public static class EnumOrder extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
 
-		public static EnumOrder getEnum(final String enumName)
-		{
-			return (EnumOrder) getEnum(EnumOrder.class, enumName);
-		}
+            private EnumOrder(String name)
+            {
+                super(name, m_startValue++);
+            }
 
-		public static EnumOrder getEnum(final int enumValue)
-		{
-			return (EnumOrder) getEnum(EnumOrder.class, enumValue);
-		}
+            public static EnumOrder getEnum(String enumName)
+            {
+                return (EnumOrder) getEnum(EnumOrder.class, enumName);
+            }
 
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumOrder.class);
-		}
+            public static EnumOrder getEnum(int enumValue)
+            {
+                return (EnumOrder) getEnum(EnumOrder.class, enumValue);
+            }
 
-		public static List getEnumList()
-		{
-			return getEnumList(EnumOrder.class);
-		}
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumOrder.class);
+            }
 
-		public static Iterator iterator()
-		{
-			return iterator(EnumOrder.class);
-		}
+            public static List getEnumList()
+            {
+                return getEnumList(EnumOrder.class);
+            }
 
-		public static final EnumOrder Collecting = new EnumOrder("Collecting");
-		public static final EnumOrder Gathering = new EnumOrder("Gathering");
-	}
+            public static Iterator iterator()
+            {
+                return iterator(EnumOrder.class);
+            }
 
-	/*
-	 * Attribute getter / setter
-	 */
+            public static final EnumOrder Collecting = new EnumOrder("Collecting");
+            public static final EnumOrder Gathering = new EnumOrder("Gathering");
+        }      
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyID
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute AssemblyID
-	 * @param value: the value to set the attribute to
-	 */
-	public void setAssemblyID(final String value)
-	{
-		setAttribute(AttributeName.ASSEMBLYID, value, null);
-	}
 
-	/**
-	 * (23) get String attribute AssemblyID
-	 * @return the value of the attribute
-	 */
-	public String getAssemblyID()
-	{
-		return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
-	}
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute AssemblyIDs
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute AssemblyIDs
-	 * @param value: the value to set the attribute to
-	 */
-	public void setAssemblyIDs(final VString value)
-	{
-		setAttribute(AttributeName.ASSEMBLYIDS, value, null);
-	}
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute AssemblyID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute AssemblyID
+          * @param value: the value to set the attribute to
+          */
+        public void setAssemblyID(String value)
+        {
+            setAttribute(AttributeName.ASSEMBLYID, value, null);
+        }
 
-	/**
-	 * (21) get VString attribute AssemblyIDs
-	 * @return VString the value of the attribute
-	 */
-	public VString getAssemblyIDs()
-	{
-		final VString vStrAttrib = new VString();
-		final String s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFConstants.EMPTYSTRING);
-		vStrAttrib.setAllStrings(s, " ");
-		return vStrAttrib;
-	}
+        /**
+          * (23) get String attribute AssemblyID
+          * @return the value of the attribute
+          */
+        public String getAssemblyID()
+        {
+            return getAttribute(AttributeName.ASSEMBLYID, null, JDFConstants.EMPTYSTRING);
+        }
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute JobID
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute JobID
-	 * @param value: the value to set the attribute to
-	 */
-	public void setJobID(final String value)
-	{
-		setAttribute(AttributeName.JOBID, value, null);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute AssemblyIDs
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute AssemblyIDs
+          * @param value: the value to set the attribute to
+          */
+        public void setAssemblyIDs(VString value)
+        {
+            setAttribute(AttributeName.ASSEMBLYIDS, value, null);
+        }
 
-	/**
-	 * (23) get String attribute JobID
-	 * @return the value of the attribute
-	 */
-	public String getJobID()
-	{
-		return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
-	}
+        /**
+          * (21) get VString attribute AssemblyIDs
+          * @return VString the value of the attribute
+          */
+        public VString getAssemblyIDs()
+        {
+            VString vStrAttrib = new VString();
+            String  s = getAttribute(AttributeName.ASSEMBLYIDS, null, JDFConstants.EMPTYSTRING);
+            vStrAttrib.setAllStrings(s, " ");
+            return vStrAttrib;
+        }
 
-	/*
-	 * --------------------------------------------------------------------- Methods for Attribute Order
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (5) set attribute Order
-	 * @param enumVar: the enumVar to set the attribute to
-	 */
-	public void setOrder(final EnumOrder enumVar)
-	{
-		setAttribute(AttributeName.ORDER, enumVar == null ? null : enumVar.getName(), null);
-	}
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute JobID
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute JobID
+          * @param value: the value to set the attribute to
+          */
+        public void setJobID(String value)
+        {
+            setAttribute(AttributeName.JOBID, value, null);
+        }
 
-	/**
-	 * (9) get attribute Order
-	 * @return the value of the attribute
-	 */
-	public EnumOrder getOrder()
-	{
-		return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
-	}
+        /**
+          * (23) get String attribute JobID
+          * @return the value of the attribute
+          */
+        public String getJobID()
+        {
+            return getAttribute(AttributeName.JOBID, null, JDFConstants.EMPTYSTRING);
+        }
 
-	/*
-	 * Element getter / setter
-	 */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Order
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute Order
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setOrder(EnumOrder enumVar)
+        {
+            setAttribute(AttributeName.ORDER, enumVar==null ? null : enumVar.getName(), null);
+        }
 
-	/**
-	 * (26) getCreatePageAssignedList
-	 * 
-	 * @param iSkip number of elements to skip
-	 * @return JDFPageAssignedList the element
-	 */
-	public JDFPageAssignedList getCreatePageAssignedList(final int iSkip)
-	{
-		return (JDFPageAssignedList) getCreateElement_KElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
-	}
+        /**
+          * (9) get attribute Order
+          * @return the value of the attribute
+          */
+        public EnumOrder getOrder()
+        {
+            return EnumOrder.getEnum(getAttribute(AttributeName.ORDER, null, "Gathering"));
+        }
 
-	/**
-	 * (27) const get element PageAssignedList
-	 * @param iSkip number of elements to skip
-	 * @return JDFPageAssignedList the element default is getPageAssignedList(0)
-	 */
-	public JDFPageAssignedList getPageAssignedList(final int iSkip)
-	{
-		return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
-	}
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
 
-	/**
-	 * Get all PageAssignedList from the current element
-	 * 
-	 * @return Collection<JDFPageAssignedList>, null if none are available
-	 */
-	public Collection<JDFPageAssignedList> getAllPageAssignedList()
-	{
-		final VElement vc = getChildElementVector(ElementName.PAGEASSIGNEDLIST, null);
-		if (vc == null || vc.size() == 0)
-		{
-			return null;
-		}
+    /** (26) getCreatePageAssignedList
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFPageAssignedList the element
+     */
+    public JDFPageAssignedList getCreatePageAssignedList(int iSkip)
+    {
+        return (JDFPageAssignedList)getCreateElement_KElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
+    }
 
-		final Vector<JDFPageAssignedList> v = new Vector<JDFPageAssignedList>();
-		for (int i = 0; i < vc.size(); i++)
-		{
-			v.add((JDFPageAssignedList) vc.get(i));
-		}
+    /**
+     * (27) const get element PageAssignedList
+     * @param iSkip number of elements to skip
+     * @return JDFPageAssignedList the element
+     * default is getPageAssignedList(0)     */
+    public JDFPageAssignedList getPageAssignedList(int iSkip)
+    {
+        return (JDFPageAssignedList) getElement(ElementName.PAGEASSIGNEDLIST, null, iSkip);
+    }
 
-		return v;
-	}
+    /**
+     * Get all PageAssignedList from the current element
+     * 
+     * @return Collection<JDFPageAssignedList>, null if none are available
+     */
+    public Collection<JDFPageAssignedList> getAllPageAssignedList()
+    {
+        final VElement vc = getChildElementVector(ElementName.PAGEASSIGNEDLIST, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
 
-	/**
-	 * (30) append element PageAssignedList
-	 */
-	public JDFPageAssignedList appendPageAssignedList() throws JDFException
-	{
-		return (JDFPageAssignedList) appendElement(ElementName.PAGEASSIGNEDLIST, null);
-	}
+        final Vector<JDFPageAssignedList> v = new Vector<JDFPageAssignedList>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFPageAssignedList) vc.get(i));
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element PageAssignedList
+     */
+    public JDFPageAssignedList appendPageAssignedList() throws JDFException
+    {
+        return (JDFPageAssignedList) appendElement(ElementName.PAGEASSIGNEDLIST, null);
+    }
 
 }// end namespace JDF

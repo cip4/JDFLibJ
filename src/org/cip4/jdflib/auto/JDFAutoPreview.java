@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFMatrix;
+import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 
@@ -98,16 +99,27 @@ public abstract class JDFAutoPreview extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[18];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewFileType.getEnum(0), "PNG");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewFileType.getEnum(0), "PNG");
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.CTM, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
     }
     
     @Override
@@ -179,22 +191,6 @@ public abstract class JDFAutoPreview extends JDFResource
 	public String toString()
     {
         return " JDFAutoPreview[  --> " + super.toString() + " ]";
-    }
-
-
-    @Override
-	public boolean  init()
-    {
-        boolean bRet = super.init();
-        setResourceClass(JDFResource.EnumResourceClass.Parameter);
-        return bRet;
-    }
-
-
-    @Override
-	public EnumResourceClass getValidClass()
-    {
-        return JDFResource.EnumResourceClass.Parameter;
     }
 
 
@@ -412,6 +408,30 @@ public abstract class JDFAutoPreview extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute PartUsage
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute PartUsage
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        @Override
+		public void setPartUsage(EnumPartUsage enumVar)
+        {
+            setAttribute(AttributeName.PARTUSAGE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute PartUsage
+          * @return the value of the attribute
+          */
+        @Override
+		public EnumPartUsage getPartUsage()
+        {
+            return EnumPartUsage.getEnum(getAttribute(AttributeName.PARTUSAGE, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute Compensation
         --------------------------------------------------------------------- */
         /**
@@ -508,6 +528,346 @@ public abstract class JDFAutoPreview extends JDFResource
         public String getMimeTypeDetails()
         {
             return getAttribute(AttributeName.MIMETYPEDETAILS, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata0
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata0
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata0(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA0, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata0
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata0()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA0, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata1
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata1
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata1(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA1, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata1
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata1()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA1, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata2
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata2
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata2(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA2, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata2
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata2()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA2, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata3
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata3
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata3(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA3, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata3
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata3()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA3, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata4
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata4
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata4(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA4, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata4
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata4()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA4, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata5
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata5
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata5(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA5, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata5
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata5()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA5, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata6
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata6
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata6(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA6, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata6
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata6()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA6, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata7
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata7
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata7(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA7, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata7
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata7()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA7, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata8
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata8
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata8(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA8, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata8
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata8()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA8, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Metadata9
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute Metadata9
+          * @param value: the value to set the attribute to
+          */
+        public void setMetadata9(JDFNameRangeList value)
+        {
+            setAttribute(AttributeName.METADATA9, value, null);
+        }
+
+        /**
+          * (20) get JDFNameRangeList attribute Metadata9
+          * @return JDFNameRangeList the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFNameRangeList
+          */
+        public JDFNameRangeList getMetadata9()
+        {
+            String strAttrName = "";
+            JDFNameRangeList nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.METADATA9, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFNameRangeList(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
 /* ***********************************************************************

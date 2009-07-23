@@ -70,61 +70,45 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-import java.util.zip.DataFormatException;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.resource.JDFLayerList;
-import org.cip4.jdflib.resource.JDFMarkObject;
-import org.cip4.jdflib.resource.JDFPageCondition;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFSignature;
-import org.cip4.jdflib.resource.process.JDFContentObject;
-import org.cip4.jdflib.resource.process.JDFInsertSheet;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.JDFMediaSource;
-import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.process.*;
 
 public abstract class JDFAutoLayout extends JDFResource
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[16];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[17];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTOMATED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
         atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCKORIGINS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXDOCORD, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, "1");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSETORD, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, "1");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.MAXDOCORD, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.MAXSETORD, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.ORDRESET, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumOrdReset.getEnum(0), "Continue");
         atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETCOUNTRESET, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetCountReset.getEnum(0), "Continue");
         atrInfoTable[6] = new AtrInfoTable(AttributeName.NAME, 0x44443331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.MAXCOLLECT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.MAXORD, 0x44443333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.MINCOLLECT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.ORDSCONSUMED, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.BASEORDRESET, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumBaseOrdReset.getEnum(0), null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.MAXCOLLECT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.MAXORD, 0x44443333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.MINCOLLECT, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.ORDSCONSUMED, 0x33331111, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
     @Override
@@ -315,6 +299,51 @@ public abstract class JDFAutoLayout extends JDFResource
 
 
         /**
+        * Enumeration strings for BaseOrdReset
+        */
+
+        public static class EnumBaseOrdReset extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumBaseOrdReset(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumBaseOrdReset getEnum(String enumName)
+            {
+                return (EnumBaseOrdReset) getEnum(EnumBaseOrdReset.class, enumName);
+            }
+
+            public static EnumBaseOrdReset getEnum(int enumValue)
+            {
+                return (EnumBaseOrdReset) getEnum(EnumBaseOrdReset.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumBaseOrdReset.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumBaseOrdReset.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumBaseOrdReset.class);
+            }
+
+            public static final EnumBaseOrdReset PagePool = new EnumBaseOrdReset("PagePool");
+            public static final EnumBaseOrdReset PagePoolList = new EnumBaseOrdReset("PagePoolList");
+        }      
+
+
+
+        /**
         * Enumeration strings for SourceWorkStyle
         */
 
@@ -430,7 +459,7 @@ public abstract class JDFAutoLayout extends JDFResource
           */
         public int getMaxDocOrd()
         {
-            return getIntAttribute(AttributeName.MAXDOCORD, null, 1);
+            return getIntAttribute(AttributeName.MAXDOCORD, null, 0);
         }
 
         
@@ -452,7 +481,7 @@ public abstract class JDFAutoLayout extends JDFResource
           */
         public int getMaxSetOrd()
         {
-            return getIntAttribute(AttributeName.MAXSETORD, null, 1);
+            return getIntAttribute(AttributeName.MAXSETORD, null, 0);
         }
 
         
@@ -519,6 +548,28 @@ public abstract class JDFAutoLayout extends JDFResource
         public String getName()
         {
             return getAttribute(AttributeName.NAME, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute BaseOrdReset
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute BaseOrdReset
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setBaseOrdReset(EnumBaseOrdReset enumVar)
+        {
+            setAttribute(AttributeName.BASEORDRESET, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute BaseOrdReset
+          * @return the value of the attribute
+          */
+        public EnumBaseOrdReset getBaseOrdReset()
+        {
+            return EnumBaseOrdReset.getEnum(getAttribute(AttributeName.BASEORDRESET, null, null));
         }
 
         

@@ -70,41 +70,20 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-import java.util.zip.DataFormatException;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFDeviceMark;
-import org.cip4.jdflib.resource.JDFJobField;
-import org.cip4.jdflib.resource.JDFMarkActivation;
-import org.cip4.jdflib.resource.JDFRefAnchor;
-import org.cip4.jdflib.resource.JDFScavengerArea;
-import org.cip4.jdflib.resource.process.JDFCIELABMeasuringField;
-import org.cip4.jdflib.resource.process.JDFColorControlStrip;
-import org.cip4.jdflib.resource.process.JDFDensityMeasuringField;
-import org.cip4.jdflib.resource.process.JDFDynamicField;
-import org.cip4.jdflib.resource.process.JDFIdentificationField;
-import org.cip4.jdflib.resource.process.JDFLayoutElement;
-import org.cip4.jdflib.resource.process.JDFRegisterMark;
-import org.cip4.jdflib.resource.process.postpress.JDFCutMark;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
 
 public abstract class JDFAutoMarkObject extends JDFElement
 {
@@ -114,26 +93,26 @@ public abstract class JDFAutoMarkObject extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[20];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTREF, 0x33331111, AttributeInfo.EnumAttributeType.IDREF, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333111, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.CLIPBOXTEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.SOURCECLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.COMPENSATIONCTMFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.LAYERID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.TRIMCTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.CLIPBOXFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.ANCHOR, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.ORDID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.CLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[17] = new AtrInfoTable(AttributeName.LAYOUTELEMENTPAGENUM, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, "0");
-        atrInfoTable[18] = new AtrInfoTable(AttributeName.TRIMCLIPPATH, 0x33331111, AttributeInfo.EnumAttributeType.PDFPath, null, null);
-        atrInfoTable[19] = new AtrInfoTable(AttributeName.COMPENSATIONCTMTEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.LAYOUTELEMENTPAGENUM, 0x44443331, AttributeInfo.EnumAttributeType.integer, null, "0");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.SOURCECLIPPATH, 0x33333333, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.CONTENTREF, 0x33331111, AttributeInfo.EnumAttributeType.IDREF, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.LAYERID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.CTM, 0x22222222, AttributeInfo.EnumAttributeType.matrix, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.CLIPBOXFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.ORD, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.TRIMSIZE, 0x33333311, AttributeInfo.EnumAttributeType.XYPair, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.HALFTONEPHASEORIGIN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.LOGICALSTACKORD, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.TRIMCTM, 0x33333331, AttributeInfo.EnumAttributeType.matrix, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.ORDID, 0x33333331, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.CLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.COMPENSATIONCTMTEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.ANCHOR, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.CLIPPATH, 0x33333111, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.TRIMCLIPPATH, 0x33331111, AttributeInfo.EnumAttributeType.PDFPath, null, null);
+        atrInfoTable[18] = new AtrInfoTable(AttributeName.CLIPBOXTEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[19] = new AtrInfoTable(AttributeName.COMPENSATIONCTMFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
     @Override
@@ -322,72 +301,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
  */
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute ContentRef
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ContentRef
-          * @param value: the value to set the attribute to
-          */
-        public void setContentRef(String value)
-        {
-            setAttribute(AttributeName.CONTENTREF, value, null);
-        }
-
-        /**
-          * (23) get String attribute ContentRef
-          * @return the value of the attribute
-          */
-        public String getContentRef()
-        {
-            return getAttribute(AttributeName.CONTENTREF, null, JDFConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClipPath
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClipPath
-          * @param value: the value to set the attribute to
-          */
-        public void setClipPath(String value)
-        {
-            setAttribute(AttributeName.CLIPPATH, value, null);
-        }
-
-        /**
-          * (23) get String attribute ClipPath
-          * @return the value of the attribute
-          */
-        public String getClipPath()
-        {
-            return getAttribute(AttributeName.CLIPPATH, null, JDFConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ClipBoxTemplate
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ClipBoxTemplate
-          * @param value: the value to set the attribute to
-          */
-        public void setClipBoxTemplate(String value)
-        {
-            setAttribute(AttributeName.CLIPBOXTEMPLATE, value, null);
-        }
-
-        /**
-          * (23) get String attribute ClipBoxTemplate
-          * @return the value of the attribute
-          */
-        public String getClipBoxTemplate()
-        {
-            return getAttribute(AttributeName.CLIPBOXTEMPLATE, null, JDFConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
         Methods for Attribute Type
         --------------------------------------------------------------------- */
         /**
@@ -406,6 +319,28 @@ public abstract class JDFAutoMarkObject extends JDFElement
         public EnumType getType()
         {
             return EnumType.getEnum(getAttribute(AttributeName.TYPE, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute LayoutElementPageNum
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute LayoutElementPageNum
+          * @param value: the value to set the attribute to
+          */
+        public void setLayoutElementPageNum(int value)
+        {
+            setAttribute(AttributeName.LAYOUTELEMENTPAGENUM, value, null);
+        }
+
+        /**
+          * (15) get int attribute LayoutElementPageNum
+          * @return int the value of the attribute
+          */
+        public int getLayoutElementPageNum()
+        {
+            return getIntAttribute(AttributeName.LAYOUTELEMENTPAGENUM, null, 0);
         }
 
         
@@ -432,58 +367,24 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute CompensationCTMFormat
+        Methods for Attribute ContentRef
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute CompensationCTMFormat
+          * (36) set attribute ContentRef
           * @param value: the value to set the attribute to
           */
-        public void setCompensationCTMFormat(String value)
+        public void setContentRef(String value)
         {
-            setAttribute(AttributeName.COMPENSATIONCTMFORMAT, value, null);
+            setAttribute(AttributeName.CONTENTREF, value, null);
         }
 
         /**
-          * (23) get String attribute CompensationCTMFormat
+          * (23) get String attribute ContentRef
           * @return the value of the attribute
           */
-        public String getCompensationCTMFormat()
+        public String getContentRef()
         {
-            return getAttribute(AttributeName.COMPENSATIONCTMFORMAT, null, JDFConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute HalfTonePhaseOrigin
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute HalfTonePhaseOrigin
-          * @param value: the value to set the attribute to
-          */
-        public void setHalfTonePhaseOrigin(JDFXYPair value)
-        {
-            setAttribute(AttributeName.HALFTONEPHASEORIGIN, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute HalfTonePhaseOrigin
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getHalfTonePhaseOrigin()
-        {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.HALFTONEPHASEORIGIN, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
-            return nPlaceHolder;
+            return getAttribute(AttributeName.CONTENTREF, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -510,64 +411,30 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute TrimCTM
+        Methods for Attribute CTM
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute TrimCTM
+          * (36) set attribute CTM
           * @param value: the value to set the attribute to
           */
-        public void setTrimCTM(JDFMatrix value)
+        public void setCTM(JDFMatrix value)
         {
-            setAttribute(AttributeName.TRIMCTM, value, null);
+            setAttribute(AttributeName.CTM, value, null);
         }
 
         /**
-          * (20) get JDFMatrix attribute TrimCTM
+          * (20) get JDFMatrix attribute CTM
           * @return JDFMatrix the value of the attribute, null if a the
           *         attribute value is not a valid to create a JDFMatrix
           */
-        public JDFMatrix getTrimCTM()
+        public JDFMatrix getCTM()
         {
             String strAttrName = "";
             JDFMatrix nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TRIMCTM, null, JDFConstants.EMPTYSTRING);
+            strAttrName = getAttribute(AttributeName.CTM, null, JDFConstants.EMPTYSTRING);
             try
             {
                 nPlaceHolder = new JDFMatrix(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
-            return nPlaceHolder;
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TrimSize
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TrimSize
-          * @param value: the value to set the attribute to
-          */
-        public void setTrimSize(JDFXYPair value)
-        {
-            setAttribute(AttributeName.TRIMSIZE, value, null);
-        }
-
-        /**
-          * (20) get JDFXYPair attribute TrimSize
-          * @return JDFXYPair the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFXYPair
-          */
-        public JDFXYPair getTrimSize()
-        {
-            String strAttrName = "";
-            JDFXYPair nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.TRIMSIZE, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFXYPair(strAttrName);
             }
             catch(DataFormatException e)
             {
@@ -622,24 +489,70 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute Anchor
+        Methods for Attribute TrimSize
         --------------------------------------------------------------------- */
         /**
-          * (5) set attribute Anchor
-          * @param enumVar: the enumVar to set the attribute to
+          * (36) set attribute TrimSize
+          * @param value: the value to set the attribute to
           */
-        public void setAnchor(EnumAnchor enumVar)
+        public void setTrimSize(JDFXYPair value)
         {
-            setAttribute(AttributeName.ANCHOR, enumVar==null ? null : enumVar.getName(), null);
+            setAttribute(AttributeName.TRIMSIZE, value, null);
         }
 
         /**
-          * (9) get attribute Anchor
-          * @return the value of the attribute
+          * (20) get JDFXYPair attribute TrimSize
+          * @return JDFXYPair the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFXYPair
           */
-        public EnumAnchor getAnchor()
+        public JDFXYPair getTrimSize()
         {
-            return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+            String strAttrName = "";
+            JDFXYPair nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.TRIMSIZE, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFXYPair(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute HalfTonePhaseOrigin
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute HalfTonePhaseOrigin
+          * @param value: the value to set the attribute to
+          */
+        public void setHalfTonePhaseOrigin(JDFXYPair value)
+        {
+            setAttribute(AttributeName.HALFTONEPHASEORIGIN, value, null);
+        }
+
+        /**
+          * (20) get JDFXYPair attribute HalfTonePhaseOrigin
+          * @return JDFXYPair the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFXYPair
+          */
+        public JDFXYPair getHalfTonePhaseOrigin()
+        {
+            String strAttrName = "";
+            JDFXYPair nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.HALFTONEPHASEORIGIN, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFXYPair(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
         }
 
         
@@ -666,6 +579,40 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute TrimCTM
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute TrimCTM
+          * @param value: the value to set the attribute to
+          */
+        public void setTrimCTM(JDFMatrix value)
+        {
+            setAttribute(AttributeName.TRIMCTM, value, null);
+        }
+
+        /**
+          * (20) get JDFMatrix attribute TrimCTM
+          * @return JDFMatrix the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFMatrix
+          */
+        public JDFMatrix getTrimCTM()
+        {
+            String strAttrName = "";
+            JDFMatrix nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.TRIMCTM, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFMatrix(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute OrdID
         --------------------------------------------------------------------- */
         /**
@@ -684,40 +631,6 @@ public abstract class JDFAutoMarkObject extends JDFElement
         public int getOrdID()
         {
             return getIntAttribute(AttributeName.ORDID, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute CTM
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute CTM
-          * @param value: the value to set the attribute to
-          */
-        public void setCTM(JDFMatrix value)
-        {
-            setAttribute(AttributeName.CTM, value, null);
-        }
-
-        /**
-          * (20) get JDFMatrix attribute CTM
-          * @return JDFMatrix the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFMatrix
-          */
-        public JDFMatrix getCTM()
-        {
-            String strAttrName = "";
-            JDFMatrix nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.CTM, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFMatrix(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
-            return nPlaceHolder;
         }
 
         
@@ -756,24 +669,68 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute LayoutElementPageNum
+        Methods for Attribute CompensationCTMTemplate
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute LayoutElementPageNum
+          * (36) set attribute CompensationCTMTemplate
           * @param value: the value to set the attribute to
           */
-        public void setLayoutElementPageNum(int value)
+        public void setCompensationCTMTemplate(String value)
         {
-            setAttribute(AttributeName.LAYOUTELEMENTPAGENUM, value, null);
+            setAttribute(AttributeName.COMPENSATIONCTMTEMPLATE, value, null);
         }
 
         /**
-          * (15) get int attribute LayoutElementPageNum
-          * @return int the value of the attribute
+          * (23) get String attribute CompensationCTMTemplate
+          * @return the value of the attribute
           */
-        public int getLayoutElementPageNum()
+        public String getCompensationCTMTemplate()
         {
-            return getIntAttribute(AttributeName.LAYOUTELEMENTPAGENUM, null, 0);
+            return getAttribute(AttributeName.COMPENSATIONCTMTEMPLATE, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute Anchor
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute Anchor
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setAnchor(EnumAnchor enumVar)
+        {
+            setAttribute(AttributeName.ANCHOR, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute Anchor
+          * @return the value of the attribute
+          */
+        public EnumAnchor getAnchor()
+        {
+            return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ClipPath
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ClipPath
+          * @param value: the value to set the attribute to
+          */
+        public void setClipPath(String value)
+        {
+            setAttribute(AttributeName.CLIPPATH, value, null);
+        }
+
+        /**
+          * (23) get String attribute ClipPath
+          * @return the value of the attribute
+          */
+        public String getClipPath()
+        {
+            return getAttribute(AttributeName.CLIPPATH, null, JDFConstants.EMPTYSTRING);
         }
 
         
@@ -800,24 +757,46 @@ public abstract class JDFAutoMarkObject extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute CompensationCTMTemplate
+        Methods for Attribute ClipBoxTemplate
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute CompensationCTMTemplate
+          * (36) set attribute ClipBoxTemplate
           * @param value: the value to set the attribute to
           */
-        public void setCompensationCTMTemplate(String value)
+        public void setClipBoxTemplate(String value)
         {
-            setAttribute(AttributeName.COMPENSATIONCTMTEMPLATE, value, null);
+            setAttribute(AttributeName.CLIPBOXTEMPLATE, value, null);
         }
 
         /**
-          * (23) get String attribute CompensationCTMTemplate
+          * (23) get String attribute ClipBoxTemplate
           * @return the value of the attribute
           */
-        public String getCompensationCTMTemplate()
+        public String getClipBoxTemplate()
         {
-            return getAttribute(AttributeName.COMPENSATIONCTMTEMPLATE, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.CLIPBOXTEMPLATE, null, JDFConstants.EMPTYSTRING);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute CompensationCTMFormat
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute CompensationCTMFormat
+          * @param value: the value to set the attribute to
+          */
+        public void setCompensationCTMFormat(String value)
+        {
+            setAttribute(AttributeName.COMPENSATIONCTMFORMAT, value, null);
+        }
+
+        /**
+          * (23) get String attribute CompensationCTMFormat
+          * @return the value of the attribute
+          */
+        public String getCompensationCTMFormat()
+        {
+            return getAttribute(AttributeName.COMPENSATIONCTMFORMAT, null, JDFConstants.EMPTYSTRING);
         }
 
 /* ***********************************************************************

@@ -661,6 +661,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
 		defaultlistModel.addElement("JDFAutoMerged.java");
 		defaultlistModel.addElement("JDFAutoMessage.java");
 		defaultlistModel.addElement("JDFAutoMessageService.java");
+		defaultlistModel.addElement("JDFAutoMetadataMap.java");
 		defaultlistModel.addElement("JDFAutoMilestone.java");
 		defaultlistModel.addElement("JDFAutoMiscConsumable.java");
 		defaultlistModel.addElement("JDFAutoMISDetails.java");

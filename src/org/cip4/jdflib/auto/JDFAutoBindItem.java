@@ -70,38 +70,14 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;
+import java.util.zip.DataFormatException;           
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.resource.JDFEdgeGluing;
-import org.cip4.jdflib.resource.JDFHardCoverBinding;
-import org.cip4.jdflib.resource.JDFSoftCoverBinding;
-import org.cip4.jdflib.resource.JDFStripBinding;
-import org.cip4.jdflib.resource.JDFTabs;
-import org.cip4.jdflib.resource.JDFTape;
-import org.cip4.jdflib.resource.process.postpress.JDFChannelBinding;
-import org.cip4.jdflib.resource.process.postpress.JDFCoilBinding;
-import org.cip4.jdflib.resource.process.postpress.JDFPlasticCombBinding;
-import org.cip4.jdflib.resource.process.postpress.JDFRingBinding;
-import org.cip4.jdflib.resource.process.postpress.JDFSaddleStitching;
-import org.cip4.jdflib.resource.process.postpress.JDFSideSewing;
-import org.cip4.jdflib.resource.process.postpress.JDFSideStitching;
-import org.cip4.jdflib.resource.process.postpress.JDFThreadSealing;
-import org.cip4.jdflib.resource.process.postpress.JDFThreadSewing;
-import org.cip4.jdflib.resource.process.postpress.JDFWireCombBinding;
-import org.cip4.jdflib.span.JDFSpanBindingType;
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.process.postpress.*;
 
 public abstract class JDFAutoBindItem extends JDFElement
 {
