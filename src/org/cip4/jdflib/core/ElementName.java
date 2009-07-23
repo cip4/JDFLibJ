@@ -386,6 +386,7 @@ public final class ElementName
 	public static final String ERRORDATA = "ErrorData";
 	public static final String EVENT = "Event";
 	public static final String EXPOSEDMEDIA = "ExposedMedia";
+	public static final String EXPR = "Expr";
 	public static final String EXTENDEDADDRESS = "ExtendedAddress";
 	public static final String EXTERNALIMPOSITIONTEMPLATE = "ExternalImpositionTemplate";
 	public static final String EXTRAVALUES = "ExtraValues";
