@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,6 +79,13 @@
  */
 package org.cip4.jdflib.core;
 
+/**
+ * 
+ * list of xml element names for JDF
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * July 23, 2009
+ */
 public final class ElementName
 {
 	private ElementName()
@@ -580,6 +587,7 @@ public final class ElementName
 	public static final String MERGED = "Merged";
 	public static final String MESSAGE = "Message";
 	public static final String MESSAGESERVICE = "MessageService";
+	public static final String METADATAMAP = "MetadataMap";
 	public static final String METHOD = "Method";
 	public static final String MILESTONE = "Milestone";
 	public static final String MISCCONSUMABLE = "MiscConsumable";

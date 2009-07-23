@@ -1094,6 +1094,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.MERGED, "org.cip4.jdflib.resource.JDFMerged");
 		sm_PackageNames.put(ElementName.MESSAGE, "org.cip4.jdflib.jmf.JDFMessage");
 		sm_PackageNames.put(ElementName.MESSAGESERVICE, "org.cip4.jdflib.jmf.JDFMessageService");
+		sm_PackageNames.put(ElementName.METADATAMAP, "org.cip4.jdflib.resource.process.JDFMetadataMap");
 		// "Method" is context sensitive, see handleOtherElements() and
 		// putConstructorToHashMap()
 		sm_PackageNames.put(ElementName.MILESTONE, "org.cip4.jdflib.resource.JDFMilestone");
