@@ -344,9 +344,17 @@ public class QueueTest extends TestCase
 			assertTrue(qe.compareTo(qeLast) >= 0);
 			qeLast = qe;
 		}
-		ThreadUtil.sleep(1000); // wait for threads to be over
 
 		v = q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, "Completed"), null);
+		for (int i = 0; i < 10; i++)
+		{
+			if (v.size() != 100)
+			{
+				ThreadUtil.sleep(1000);
+				System.out.println("Threads done: " + v.size());
+				v = q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, "Completed"), null);
+			}
+		}
 
 		assertEquals(v.size(), 100);
 		v = q.getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, "Running"), null);
