@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,14 +75,22 @@ import java.io.ByteArrayInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * July 23, 2009
+ */
 public class SkipInputStreamTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @throws Exception
+	 */
 	public void testRead() throws Exception
 	{
-		SkipInputStream pis = new SkipInputStream("abc",
-				new ByteArrayInputStream("123ab456abc123".getBytes()), false);
+		final SkipInputStream pis = new SkipInputStream("abc", new ByteArrayInputStream("123ab456abc123".getBytes()), false);
 		assertEquals(pis.read(), 'a');
 		assertEquals(pis.read(), 'b');
 		assertEquals(pis.read(), 'c');
@@ -92,11 +100,41 @@ public class SkipInputStreamTest extends JDFTestCaseBase
 		assertEquals(pis.read(), -1);
 	}
 
+	/**
+	 * @throws Exception
+	 */
+	public void testNull() throws Exception
+	{
+		final SkipInputStream pis = new SkipInputStream(null, new ByteArrayInputStream("123abc123".getBytes()), false);
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), 'a');
+		assertEquals(pis.read(), 'b');
+		assertEquals(pis.read(), 'c');
+		assertEquals(pis.read(), '1');
+		assertEquals(pis.read(), '2');
+		assertEquals(pis.read(), '3');
+		assertEquals(pis.read(), -1);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testReadshort() throws Exception
+	{
+		final SkipInputStream pis = new SkipInputStream("abc", new ByteArrayInputStream("123ab456abc123".getBytes()), false, 2);
+		assertEquals(pis.read(), -1);
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @throws Exception
+	 */
 	public void testIgnoreCase() throws Exception
 	{
-		SkipInputStream pis = new SkipInputStream("ABC",
-				new ByteArrayInputStream("123ab456abc123".getBytes()), true);
+		final SkipInputStream pis = new SkipInputStream("ABC", new ByteArrayInputStream("123ab456abc123".getBytes()), true);
 		assertEquals(pis.read(), 'a');
 		assertEquals(pis.read(), 'b');
 		assertEquals(pis.read(), 'c');

@@ -117,7 +117,7 @@ public class JDFParser extends DOMParser
 		 */
 		public XMLReaderStream(final boolean searchXML, final InputStream stream)
 		{
-			super(searchXML ? "<?xml" : null, stream, searchXML);
+			super(searchXML ? "<?xml" : null, stream, searchXML, 10000);
 		}
 
 		/**

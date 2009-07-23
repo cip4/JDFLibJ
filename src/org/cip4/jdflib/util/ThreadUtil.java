@@ -182,13 +182,13 @@ public class ThreadUtil
 	 */
 	public static void wait(final Object mutex, int millis)
 	{
-		if (millis < 0)
-		{
-			millis = 0;
-		}
 		if (mutex == null)
 		{
 			return;
+		}
+		if (millis < 0)
+		{
+			millis = 0;
 		}
 		try
 		{

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -94,57 +94,80 @@ public class SkipInputStream extends BufferedInputStream
 
 	private final int searchSize;
 	private boolean ignoreCase = false;
+	private boolean found = false;
 
 	/**
 	 * @param searchTag
 	 * @param stream2
 	 * @param ignorecase
 	 */
-	public SkipInputStream(String searchTag, InputStream stream2, boolean ignorecase)
+	public SkipInputStream(final String searchTag, final InputStream stream2, final boolean ignorecase)
+	{
+		this(searchTag, stream2, ignorecase, -1);
+	}
+
+	/**
+	 * @param searchTag
+	 * @param stream2
+	 * @param ignorecase
+	 * @param maxPreRead
+	 */
+	public SkipInputStream(final String searchTag, final InputStream stream2, final boolean ignorecase, final int maxPreRead)
 	{
 		super(stream2);
 		ignoreCase = ignorecase;
 
 		searchSize = searchTag == null ? 0 : searchTag.length();
 		if (searchSize == 0)
+		{
+			found = true;
 			return;
+		}
 
 		mark(searchSize + 10);
 		try
 		{
-			readToTag(searchTag);
+			readToTag(searchTag, maxPreRead);
 		}
-		catch (IOException x)
+		catch (final IOException x)
 		{
 			// nop
 		}
 	}
 
 	/**
-	 * @param searchTag 
+	 * @param searchTag
 	 * @throws IOException
 	 * 
 	 */
-	private void readToTag(String searchTag) throws IOException
+	private void readToTag(final String searchTag, final int maxPreRead) throws IOException
 	{
 		if (searchTag == null)
+		{
 			return;
-		byte[] bytes = searchTag.getBytes();
-		byte[] lowerBytes = searchTag.toLowerCase().getBytes();
+		}
+		final byte[] bytes = searchTag.getBytes();
+		final byte[] lowerBytes = searchTag.toLowerCase().getBytes();
 		int tagPos = 0;
-		while (true)
+		int nSkipped = 0;
+		while (nSkipped++ != maxPreRead)
 		{
 			if (tagPos == 0)
+			{
 				mark(searchSize + 10);
-			int c = read();
+			}
+			final int c = super.read();
 			if (c == -1)
+			{
 				break;
+			}
 			if (c == bytes[tagPos] || ignoreCase && Character.toLowerCase(c) == lowerBytes[tagPos])
 			{
 				tagPos++;
 				if (tagPos >= searchSize) // heureka
 				{
 					reset();
+					found = true;
 					return;
 				}
 			}
@@ -153,6 +176,17 @@ public class SkipInputStream extends BufferedInputStream
 				tagPos = 0;
 			}
 		}
+	}
+
+	/**
+	 * same as read, returns -1 if not found
+	 * 
+	 * @see java.io.BufferedInputStream#read()
+	 */
+	@Override
+	public synchronized int read() throws IOException
+	{
+		return found ? super.read() : -1;
 	}
 
 }
