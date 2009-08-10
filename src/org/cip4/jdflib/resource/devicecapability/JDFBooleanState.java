@@ -101,18 +101,10 @@ public class JDFBooleanState extends JDFAbstractState
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.enumerations,
-				EnumBoolean.getEnum(0), null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.boolean_, null,
-				null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE,
-				0x33333331, AttributeInfo.EnumAttributeType.boolean_, null,
-				null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST,
-				0x33333331, AttributeInfo.EnumAttributeType.enumerations,
-				EnumBoolean.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ALLOWEDVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumBoolean.getEnum(0), null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CURRENTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.DEFAULTVALUE, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PRESENTVALUELIST, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumBoolean.getEnum(0), null);
 	}
 
 	@Override
@@ -139,8 +131,7 @@ public class JDFBooleanState extends JDFAbstractState
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFBooleanState(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFBooleanState(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -152,8 +143,7 @@ public class JDFBooleanState extends JDFAbstractState
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFBooleanState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFBooleanState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -166,8 +156,7 @@ public class JDFBooleanState extends JDFAbstractState
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFBooleanState(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFBooleanState(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -189,10 +178,9 @@ public class JDFBooleanState extends JDFAbstractState
 	/**
 	 * set attribute <code>CurrentValue</code>
 	 * 
-	 * @param value
-	 *            value to set the attribute to
+	 * @param value value to set the attribute to
 	 */
-	public void setCurrentValue(boolean value)
+	public void setCurrentValue(final boolean value)
 	{
 		setAttribute(AttributeName.CURRENTVALUE, value, null);
 	}
@@ -204,17 +192,15 @@ public class JDFBooleanState extends JDFAbstractState
 	 */
 	public boolean getCurrentValue()
 	{
-		return getBoolAttribute(AttributeName.CURRENTVALUE,
-				JDFConstants.EMPTYSTRING, false);
+		return getBoolAttribute(AttributeName.CURRENTVALUE, JDFConstants.EMPTYSTRING, false);
 	}
 
 	/**
 	 * set attribute <code>DefaultValue</code>
 	 * 
-	 * @param value
-	 *            the value to set the attribute to
+	 * @param value the value to set the attribute to
 	 */
-	public void setDefaultValue(boolean value)
+	public void setDefaultValue(final boolean value)
 	{
 		setAttribute(AttributeName.DEFAULTVALUE, value, null);
 	}
@@ -226,8 +212,7 @@ public class JDFBooleanState extends JDFAbstractState
 	 */
 	public boolean getDefaultValue()
 	{
-		return getBoolAttribute(AttributeName.DEFAULTVALUE,
-				JDFConstants.EMPTYSTRING, false);
+		return getBoolAttribute(AttributeName.DEFAULTVALUE, JDFConstants.EMPTYSTRING, false);
 	}
 
 	/**
@@ -237,20 +222,20 @@ public class JDFBooleanState extends JDFAbstractState
 	 */
 	public Vector getAllowedValueList()
 	{
-		final Vector<ValuedEnum> enumerationsAttribute = getEnumerationsAttribute(
-				AttributeName.ALLOWEDVALUELIST, null, EnumBoolean.True, false);
+		final Vector<ValuedEnum> enumerationsAttribute = (Vector<ValuedEnum>) getEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, null, EnumBoolean.True, false);
 		if (!enumerationsAttribute.isEmpty())
+		{
 			return enumerationsAttribute;
+		}
 		return null;
 	}
 
 	/**
 	 * set attribute <code>AllowedValueList</code>
 	 * 
-	 * @param value
-	 *            value to set the attribute to
+	 * @param value value to set the attribute to
 	 */
-	public void setAllowedValueList(Vector value)
+	public void setAllowedValueList(final Vector value)
 	{
 		setEnumerationsAttribute(AttributeName.ALLOWEDVALUELIST, value, null);
 	}
@@ -264,8 +249,7 @@ public class JDFBooleanState extends JDFAbstractState
 	{
 		if (hasAttribute(AttributeName.PRESENTVALUELIST))
 		{
-			return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST,
-					null, EnumBoolean.True, false);
+			return getEnumerationsAttribute(AttributeName.PRESENTVALUELIST, null, EnumBoolean.True, false);
 		}
 		return getAllowedValueList();
 	}
@@ -275,7 +259,7 @@ public class JDFBooleanState extends JDFAbstractState
 	 * 
 	 * @param value
 	 */
-	public void setPresentValueList(Vector value)
+	public void setPresentValueList(final Vector value)
 	{
 		setEnumerationsAttribute(AttributeName.PRESENTVALUELIST, value, null);
 	}
@@ -285,31 +269,27 @@ public class JDFBooleanState extends JDFAbstractState
 	 */
 
 	/**
-	 * fitsValue - tests, if the defined value matches the Allowed test lists or
-	 * Present test lists, specified for this State
+	 * fitsValue - tests, if the defined value matches the Allowed test lists or Present test lists, specified for this State
 	 * 
-	 * @param value
-	 *            value to test
-	 * @param testlists
-	 *            test lists, that the value has to match. In this State there
-	 *            is only one test list - ValueList.<br>
-	 *            Choose one of two values: FitsValue_Allowed or
-	 *            FitsValue_Present. Defaults to Allowed.
+	 * @param value value to test
+	 * @param testlists test lists, that the value has to match. In this State there is only one test list - ValueList.<br>
+	 * Choose one of two values: FitsValue_Allowed or FitsValue_Present. Defaults to Allowed.
 	 * 
-	 * @return boolean - true, if <code>value</code> matches testlists or if
-	 *         AllowedValueList is not specified
+	 * @return boolean - true, if <code>value</code> matches testlists or if AllowedValueList is not specified
 	 */
 	@Override
-	public final boolean fitsValue(String valueStr, EnumFitsValue testlists)
+	public final boolean fitsValue(final String valueStr, final EnumFitsValue testlists)
 	{
 		if (fitsListType(valueStr))
 		{
-			VString value = new VString(valueStr, null);
+			final VString value = new VString(valueStr, null);
 
 			for (int i = 0; i < value.size(); i++)
 			{
 				if (!fitsValueList(value.elementAt(i), testlists))
+				{
 					return false;
+				}
 			}
 			return true; // if we are here a whole 'valueStr' fits
 		}
@@ -317,32 +297,33 @@ public class JDFBooleanState extends JDFAbstractState
 	}
 
 	/**
-	 * fitsValueList - tests, if the defined 'value' matches the
-	 * AllowedValueList or the PresentValueList, specified for this State
+	 * fitsValueList - tests, if the defined 'value' matches the AllowedValueList or the PresentValueList, specified for this State
 	 * 
-	 * @param value
-	 *            token to test
-	 * @param valuelist
-	 *            Switches between AllowedValueList and PresentValueList.
-	 * @return boolean - true, if <code>value</code> matches valuelist, or if
-	 *         AllowedValueList is not specified
+	 * @param value token to test
+	 * @param valuelist Switches between AllowedValueList and PresentValueList.
+	 * @return boolean - true, if <code>value</code> matches valuelist, or if AllowedValueList is not specified
 	 */
-	private final boolean fitsValueList(String value, EnumFitsValue valuelist)
+	private final boolean fitsValueList(final String value, final EnumFitsValue valuelist)
 	{
 		Vector<EnumBoolean> v;
-		EnumBoolean eb = EnumBoolean.getEnum(value);
+		final EnumBoolean eb = EnumBoolean.getEnum(value);
 		if (eb == null)
+		{
 			return false;
+		}
 		if (valuelist.equals(EnumFitsValue.Allowed))
 		{
 			v = getAllowedValueList();
-		} else
+		}
+		else
 		{
 			v = getPresentValueList();
 		}
 
 		if (v == null)
+		{
 			return true;
+		}
 
 		return v.contains(eb);
 	}
@@ -350,24 +331,28 @@ public class JDFBooleanState extends JDFAbstractState
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java
-	 * .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
+	 * @see org.cip4.jdflib.resource.devicecapability.JDFAbstractState#addValue(java .lang.String, org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue)
 	 */
 	@Override
-	public void addValue(String value, EnumFitsValue testlists)
+	public void addValue(final String value, final EnumFitsValue testlists)
 	{
 		if (fitsValue(value, testlists))
+		{
 			return;
-		EnumBoolean b = EnumBoolean.getEnum(value);
+		}
+		final EnumBoolean b = EnumBoolean.getEnum(value);
 		if (b == null)
+		{
 			return;
+		}
 
 		if (testlists == null || EnumFitsValue.Allowed.equals(testlists))
 		{
 			Vector<EnumBoolean> list = getAllowedValueList();
 			if (list == null)
+			{
 				list = new Vector<EnumBoolean>();
+			}
 			list.add(b);
 			setAllowedValueList(list);
 		}
@@ -375,7 +360,9 @@ public class JDFBooleanState extends JDFAbstractState
 		{
 			Vector<EnumBoolean> list = getPresentValueList();
 			if (list == null || !hasAttribute(AttributeName.PRESENTVALUELIST))
+			{
 				list = new Vector<EnumBoolean>();
+			}
 			list.add(b);
 			setPresentValueList(list);
 		}

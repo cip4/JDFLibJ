@@ -79,8 +79,6 @@
 
 package org.cip4.jdflib.jmf;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams;
 import org.cip4.jdflib.core.AttributeName;
@@ -482,7 +480,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * @return Vector - vector of unknown element nodenames
 	 */
 	@Override
-	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
 	}

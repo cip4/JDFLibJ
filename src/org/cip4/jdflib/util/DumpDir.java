@@ -196,15 +196,13 @@ public class DumpDir
 	 * 
 	 */
 
-	public File newFileFromStream(final String header, final InputStream is)
+	public File newFileFromStream(final String header, InputStream is)
 	{
-		InputStream isLocal = is;
-
 		final File dump = newFile(null);
-		if (!(isLocal instanceof BufferedInputStream))
+		if (!(is instanceof BufferedInputStream))
 		{
-			isLocal = new BufferedInputStream(isLocal);
-			isLocal.mark(100000);
+			is = new BufferedInputStream(is);
+			is.mark(100000);
 		}
 
 		final FileOutputStream fs = newHeader(header, dump, false);
@@ -212,10 +210,10 @@ public class DumpDir
 		{
 			try
 			{
-				IOUtils.copy(isLocal, fs);
+				IOUtils.copy(is, fs);
 				fs.flush();
 				fs.close();
-				isLocal.reset();
+				is.reset();
 			}
 			catch (final IOException x)
 			{
@@ -287,6 +285,9 @@ public class DumpDir
 		}
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{

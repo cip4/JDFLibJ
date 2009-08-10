@@ -88,8 +88,6 @@
  */
 package org.cip4.jdflib.resource;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceAudit;
 import org.cip4.jdflib.core.AttributeName;
@@ -348,7 +346,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 	 * !!! Do not change the signature of this method
 	 */
 	@Override
-	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(EnumPoolType.ResourceLinkPool, nMax);
 	}

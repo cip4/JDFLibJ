@@ -102,6 +102,7 @@ import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 public class AutomatedLayoutTest extends JDFTestCaseBase
 {
@@ -1034,7 +1035,7 @@ public class AutomatedLayoutTest extends JDFTestCaseBase
 	{
 		JDFRunList run = rl.addRun("file://host/data/test.ppml", 0, -1);
 		assertEquals(run.getLayoutElement().getFileSpec().getMimeType(),
-				JDFFileSpec.getMimeTypeFromURL(".ppml"));
+				UrlUtil.getMimeTypeFromURL(".ppml"));
 		run.setDocs(new JDFIntegerRangeList("0~99"));
 		rl.setResStatus(EnumResStatus.Available, true);
 	}

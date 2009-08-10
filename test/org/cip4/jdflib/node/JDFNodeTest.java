@@ -2315,7 +2315,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 				vMap.add(map1);
 				vMap.add(map3);
 			}
-			root.updatePartStatus(vMap, true, true);
+			root.updatePartStatus(vMap, true, true, 0);
 			assertEquals(root.getPartStatus(map1, 0), EnumNodeStatus.Completed);
 			assertNull(root.getPartStatus(null, 0));
 			if (loop == 0)

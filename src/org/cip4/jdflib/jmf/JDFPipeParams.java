@@ -79,8 +79,6 @@
 
 package org.cip4.jdflib.jmf;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPipeParams;
 import org.cip4.jdflib.core.AttributeName;
@@ -89,6 +87,7 @@ import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -205,7 +204,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 	 */
 
 	@Override
-	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		boolean bIgnorePrivateLocal = bIgnorePrivate;
 		if (bIgnorePrivateLocal)

@@ -12,11 +12,7 @@ import java.io.File;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.process.JDFExposedMedia;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -35,18 +31,10 @@ public class TestJDF
 	 */
 	public static void main(final String[] argv)
 	{
-		final JDFDoc d = new JDFParser().parseFile("C:\\data\\JDF\\outout.jdf");
-		d.write2File("C:\\data\\JDF\\Collapse\\data_VorCollapse.jdf", 0, true);
-		final JDFNode root = d.getJDFRoot();
-		final JDFResourceLink rl = root.getLink(0, "ExposedMedia", null, null);
-		final JDFExposedMedia xm = (JDFExposedMedia) rl.getLinkRoot();
-		final VElement v = xm.getLeaves(true);
-		for (int i = 0; i < v.size(); i++)
-		{
-			final JDFResource leaf = (JDFResource) v.get(i);
-			leaf.updateAmounts(-1);
-		}
-		d.write2File("C:\\data\\JDF\\outout2.jdf", 0, true);
+		final JDFDoc d = new JDFParser().parseFile("C:\\httpdump\\CertTest\\MisUrl\\returnJMF\\m00000024.dir\\qe_090714_144713800_855250.jdf");
+		final JDFNode n = d.getJDFRoot();
+		n.getStatusSynch().update();
+		d.write2File("C:\\httpdump\\CertTest\\MisUrl\\returnJMF\\m00000024.dir\\qe_090714_144713800_855250.out.jdf", 2, false);
 
 	}
 }

@@ -495,6 +495,42 @@ public class FileUtil
 	}
 
 	/**
+	 * copy a buffer to the end of a file, creating it if necessary
+	 * 
+	 * @param buf the source buffer
+	 * @param toFile the destination File
+	 * @return true if success
+	 */
+	public static boolean copyBytes(final byte[] buf, final File toFile)
+	{
+		if (buf == null || toFile == null)
+		{
+			return false;
+		}
+		if (!toFile.canWrite())
+		{
+			createNewFile(toFile);
+		}
+		try
+		{
+			final FileOutputStream fileOutputStream = new FileOutputStream(toFile, true);
+			fileOutputStream.write(buf);
+			fileOutputStream.flush();
+			fileOutputStream.close();
+			return true;
+		}
+		catch (final FileNotFoundException e)
+		{
+			//
+		}
+		catch (final IOException e)
+		{
+			//
+		}
+		return false;
+	}
+
+	/**
 	 * copy a file
 	 * @param fromFile the source File
 	 * @param toFile the destination File
@@ -502,27 +538,18 @@ public class FileUtil
 	 */
 	public static boolean copyFile(final File fromFile, final File toFile)
 	{
-		if (toFile.exists())
-		{
-			toFile.delete();
-		}
-		try
-		{
-			if (!toFile.createNewFile())
-			{
-				return false;
-			}
-			final FileOutputStream fos = new FileOutputStream(toFile);
-			final FileInputStream fis = new FileInputStream(fromFile);
-			IOUtils.copy(fis, fos);
-			fis.close();
-			fos.close();
-		}
-		catch (final IOException x)
+		if (fromFile == null || toFile == null)
 		{
 			return false;
 		}
-		return true;
+		try
+		{
+			return streamToFile(new FileInputStream(fromFile), toFile) != null;
+		}
+		catch (final FileNotFoundException e)
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -542,6 +569,30 @@ public class FileUtil
 			return null;
 		}
 		return new File(dir.getPath() + File.separator + localFile.getPath());
+	}
+
+	/**
+	 * create a new directory and return null if the directory could not be created
+	 * 
+	 * @param newDir the path or URL of the new directory
+	 * @return
+	 */
+	public static File getCreateDirectory(final String newDir)
+	{
+		final File f = UrlUtil.urlToFile(newDir);
+		if (f == null)
+		{
+			return null;
+		}
+		if (!f.exists())
+		{
+			f.mkdirs();
+		}
+		if (!f.isDirectory())
+		{
+			return null;
+		}
+		return f;
 	}
 
 	/**
@@ -634,5 +685,20 @@ public class FileUtil
 		{
 			return false;
 		}
+	}
+
+	/**
+	 * checks the equivalence of files - todo os specific behavior (just in case)
+	 * @param file1
+	 * @param file2
+	 * @return
+	 */
+	public static boolean equals(final File file1, final File file2)
+	{
+		if (file1 == null)
+		{
+			return file2 == null;
+		}
+		return file1.equals(file2);
 	}
 }

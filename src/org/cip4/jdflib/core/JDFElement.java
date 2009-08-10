@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.mail.BodyPart;
+import javax.mail.Multipart;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -139,6 +139,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.mime.MimeReader;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -620,15 +621,25 @@ public class JDFElement extends KElement
 		}
 
 		// enums accordng to JDF spec Table 3-28: Contents of the Part element
+		/** * */
 		public static final EnumSeparation Cyan = new EnumSeparation(JDFConstants.SEPARATION_CYAN);
+		/** * */
 		public static final EnumSeparation Magenta = new EnumSeparation(JDFConstants.SEPARATION_MAGENTA);
+		/** * */
 		public static final EnumSeparation Yellow = new EnumSeparation(JDFConstants.SEPARATION_YELLOW);
+		/** * */
 		public static final EnumSeparation Black = new EnumSeparation(JDFConstants.SEPARATION_BLACK);
+		/** * */
 		public static final EnumSeparation Red = new EnumSeparation(JDFConstants.SEPARATION_RED);
+		/** * */
 		public static final EnumSeparation Green = new EnumSeparation(JDFConstants.SEPARATION_GREEN);
+		/** * */
 		public static final EnumSeparation Blue = new EnumSeparation(JDFConstants.SEPARATION_BLUE);
+		/** * */
 		public static final EnumSeparation Orange = new EnumSeparation(JDFConstants.SEPARATION_ORANGE);
+		/** * */
 		public static final EnumSeparation Spot = new EnumSeparation(JDFConstants.SEPARATION_SPOT);
+		/** * */
 		public static final EnumSeparation Varnish = new EnumSeparation(JDFConstants.SEPARATION_VARNISH);
 	}
 
@@ -688,12 +699,19 @@ public class JDFElement extends KElement
 			return iterator(EnumPoolType.class);
 		}
 
+		/** * */
 		public static final EnumPoolType RefElement = new EnumPoolType(ElementName.REFELEMENT);
+		/** * */
 		public static final EnumPoolType ResourcePool = new EnumPoolType(ElementName.RESOURCEPOOL);
+		/** * */
 		public static final EnumPoolType PipeParams = new EnumPoolType(ElementName.PIPEPARAMS);
+		/** * */
 		public static final EnumPoolType ResourceLinkPool = new EnumPoolType(ElementName.RESOURCELINKPOOL);
+		/** * */
 		public static final EnumPoolType AncestorPool = new EnumPoolType(ElementName.ANCESTORPOOL);
+		/** * */
 		public static final EnumPoolType AuditPool = new EnumPoolType(ElementName.AUDITPOOL);
+		/** * */
 		public static final EnumPoolType ProductionIntent = new EnumPoolType(ElementName.PRODUCTIONINTENT);
 	}
 
@@ -836,19 +854,33 @@ public class JDFElement extends KElement
 		}
 
 		// enums accordng to JDF spec Table 3-4 Contents of a node
+		/** * */
 		public static final EnumNodeStatus Waiting = new EnumNodeStatus(JDFConstants.WAITING);
+		/** * */
 		public static final EnumNodeStatus TestRunInProgress = new EnumNodeStatus(JDFConstants.TESTRUNINPROGRESS);
+		/** * */
 		public static final EnumNodeStatus Ready = new EnumNodeStatus(JDFConstants.READY);
+		/** * */
 		public static final EnumNodeStatus FailedTestRun = new EnumNodeStatus(JDFConstants.FAILEDTESTRUN);
+		/** * */
 		public static final EnumNodeStatus Setup = new EnumNodeStatus(JDFConstants.SETUP);
+		/** * */
 		public static final EnumNodeStatus InProgress = new EnumNodeStatus(JDFConstants.INPROGRESS);
+		/** * */
 		public static final EnumNodeStatus Cleanup = new EnumNodeStatus(JDFConstants.CLEANUP);
+		/** * */
 		public static final EnumNodeStatus Spawned = new EnumNodeStatus(JDFConstants.SPAWNED);
+		/** * */
 		public static final EnumNodeStatus Suspended = new EnumNodeStatus(JDFConstants.SUSPENDED);
+		/** * */
 		public static final EnumNodeStatus Stopped = new EnumNodeStatus(JDFConstants.STOPPED);
+		/** * */
 		public static final EnumNodeStatus Completed = new EnumNodeStatus(JDFConstants.COMPLETED);
+		/** * */
 		public static final EnumNodeStatus Aborted = new EnumNodeStatus(JDFConstants.ABORTED);
+		/** * */
 		public static final EnumNodeStatus Part = new EnumNodeStatus(JDFConstants.PART);
+		/** * */
 		public static final EnumNodeStatus Pool = new EnumNodeStatus(JDFConstants.POOL);
 	}
 
@@ -921,8 +953,11 @@ public class JDFElement extends KElement
 			return iterator(EnumSettingsPolicy.class);
 		}
 
+		/** * */
 		public static final EnumSettingsPolicy BestEffort = new EnumSettingsPolicy(JDFConstants.SETTINGSPOLICY_BESTEFFORT);
+		/** * */
 		public static final EnumSettingsPolicy MustHonor = new EnumSettingsPolicy(JDFConstants.SETTINGSPOLICY_MUSTHONOR);
+		/** * */
 		public static final EnumSettingsPolicy OperatorIntervention = new EnumSettingsPolicy(JDFConstants.SETTINGSPOLICY_OPERATORINTERVENTION);
 	}
 
@@ -1008,112 +1043,219 @@ public class JDFElement extends KElement
 			return iterator(EnumNamedColor.class);
 		}
 
+		/** * */
 		public static final EnumNamedColor White = new EnumNamedColor(JDFConstants.NAMEDCOLOR_WHITE);
+		/** * */
 		public static final EnumNamedColor Black = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BLACK);
+		/** * */
 		public static final EnumNamedColor Gray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GRAY);
+		/** * */
 		public static final EnumNamedColor Red = new EnumNamedColor(JDFConstants.NAMEDCOLOR_RED);
+		/** * */
 		public static final EnumNamedColor Yellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_YELLOW);
+		/** * */
 		public static final EnumNamedColor Green = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GREEN);
+		/** * */
 		public static final EnumNamedColor Blue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BLUE);
+		/** * */
 		public static final EnumNamedColor Turquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_TURQUOISE);
+		/** * */
 		public static final EnumNamedColor Violet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_VIOLET);
+		/** * */
 		public static final EnumNamedColor Orange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_ORANGE);
+		/** * */
 		public static final EnumNamedColor Brown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BROWN);
+		/** * */
 		public static final EnumNamedColor Gold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GOLD);
+		/** * */
 		public static final EnumNamedColor Silver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_SILVER);
+		/** * */
 		public static final EnumNamedColor Pink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_PINK);
+		/** * */
 		public static final EnumNamedColor Buff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_BUFF);
+		/** * */
 		public static final EnumNamedColor Ivory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_IVORY);
+		/** * */
 		public static final EnumNamedColor Goldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_GOLDENROD);
+		/** * */
 		public static final EnumNamedColor DarkWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKWHITE);
+		/** * */
 		public static final EnumNamedColor DarkBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKBLACK);
+		/** * */
 		public static final EnumNamedColor DarkGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKGRAY);
+		/** * */
 		public static final EnumNamedColor DarkRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKRED);
+		/** * */
 		public static final EnumNamedColor DarkYellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKYELLOW);
+		/** * */
 		public static final EnumNamedColor DarkGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKGREEN);
+		/** * */
 		public static final EnumNamedColor DarkBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKBLUE);
+		/** * */
 		public static final EnumNamedColor DarkTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKTURQUOISE);
+		/** * */
 		public static final EnumNamedColor DarkViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKVIOLET);
+		/** * */
 		public static final EnumNamedColor DarkOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKORANGE);
+		/** * */
 		public static final EnumNamedColor DarkBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKBROWN);
+		/** * */
 		public static final EnumNamedColor DarkGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKGOLD);
+		/** * */
 		public static final EnumNamedColor DarkSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKSILVER);
+		/** * */
 		public static final EnumNamedColor DarkPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKPINK);
+		/** * */
 		public static final EnumNamedColor DarkBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKBUFF);
+		/** * */
 		public static final EnumNamedColor DarkIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKIVORY);
+		/** * */
 		public static final EnumNamedColor DarkGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKGOLDENROD);
+		/** * */
 		public static final EnumNamedColor DarkMustard = new EnumNamedColor(JDFConstants.NAMEDCOLOR_DARKMUSTARD);
+		/** * */
 		public static final EnumNamedColor LightWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTWHITE);
+		/** * */
 		public static final EnumNamedColor LightBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTBLACK);
+		/** * */
 		public static final EnumNamedColor LightGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTGRAY);
+		/** * */
 		public static final EnumNamedColor LightRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTRED);
+		/** * */
 		public static final EnumNamedColor LightYellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTYELLOW);
+		/** * */
 		public static final EnumNamedColor LightGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTGREEN);
+		/** * */
 		public static final EnumNamedColor LightBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTBLUE);
+		/** * */
 		public static final EnumNamedColor LightTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTTURQUOISE);
+		/** * */
 		public static final EnumNamedColor LightViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTVIOLET);
+		/** * */
 		public static final EnumNamedColor LightOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTORANGE);
+		/** * */
 		public static final EnumNamedColor LightBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTBROWN);
+		/** * */
 		public static final EnumNamedColor LightGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTGOLD);
+		/** * */
 		public static final EnumNamedColor LightSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTSILVER);
+		/** * */
 		public static final EnumNamedColor LightPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTPINK);
+		/** * */
 		public static final EnumNamedColor LightBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTBUFF);
+		/** * */
 		public static final EnumNamedColor LightIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTIVORY);
+		/** * */
 		public static final EnumNamedColor LightGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTGOLDENROD);
+		/** * */
 		public static final EnumNamedColor LightMustard = new EnumNamedColor(JDFConstants.NAMEDCOLOR_LIGHTMUSTARD);
+		/** * */
 		public static final EnumNamedColor ClearWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARWHITE);
+		/** * */
 		public static final EnumNamedColor ClearBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARBLACK);
+		/** * */
 		public static final EnumNamedColor ClearGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARGRAY);
+		/** * */
 		public static final EnumNamedColor ClearRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARRED);
+		/** * */
 		public static final EnumNamedColor ClearGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARGREEN);
+		/** * */
 		public static final EnumNamedColor ClearBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARBLUE);
+		/** * */
 		public static final EnumNamedColor ClearTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARTURQUOISE);
+		/** * */
 		public static final EnumNamedColor ClearViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARVIOLET);
+		/** * */
 		public static final EnumNamedColor ClearOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARORANGE);
+		/** * */
 		public static final EnumNamedColor ClearBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARBROWN);
+		/** * */
 		public static final EnumNamedColor ClearGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARGOLD);
+		/** * */
 		public static final EnumNamedColor ClearSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARSILVER);
+		/** * */
 		public static final EnumNamedColor ClearPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARPINK);
+		/** * */
 		public static final EnumNamedColor ClearBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARBUFF);
+		/** * */
 		public static final EnumNamedColor ClearIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARIVORY);
+		/** * */
 		public static final EnumNamedColor ClearGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARGOLDENROD);
+		/** * */
 		public static final EnumNamedColor ClearMustard = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARMUSTARD);
+		/** * */
 		public static final EnumNamedColor ClearDarkWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKWHITE);
+		/** * */
 		public static final EnumNamedColor ClearDarkBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKBLACK);
+		/** * */
 		public static final EnumNamedColor ClearDarkGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKGRAY);
+		/** * */
 		public static final EnumNamedColor ClearDarkRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKRED);
+		/** * */
 		public static final EnumNamedColor ClearDarkYellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKYELLOW);
+		/** * */
 		public static final EnumNamedColor ClearDarkGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKGREEN);
+		/** * */
 		public static final EnumNamedColor ClearDarkBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKBLUE);
+		/** * */
 		public static final EnumNamedColor ClearDarkTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKTURQUOISE);
+		/** * */
 		public static final EnumNamedColor ClearDarkViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKVIOLET);
+		/** * */
 		public static final EnumNamedColor ClearDarkOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKORANGE);
+		/** * */
 		public static final EnumNamedColor ClearDarkBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKBROWN);
+		/** * */
 		public static final EnumNamedColor ClearDarkGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKGOLD);
+		/** * */
 		public static final EnumNamedColor ClearDarkSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKSILVER);
+		/** * */
 		public static final EnumNamedColor ClearDarkPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKPINK);
+		/** * */
 		public static final EnumNamedColor ClearDarkBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKBUFF);
+		/** * */
 		public static final EnumNamedColor ClearDarkIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKIVORY);
+		/** * */
 		public static final EnumNamedColor ClearDarkGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARDARKGOLDENROD);
+		/** * */
 		public static final EnumNamedColor ClearLightWhite = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTWHITE);
+		/** * */
 		public static final EnumNamedColor ClearLightBlack = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTBLACK);
+		/** * */
 		public static final EnumNamedColor ClearLightGray = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTGRAY);
+		/** * */
 		public static final EnumNamedColor ClearLightRed = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTRED);
+		/** * */
 		public static final EnumNamedColor ClearLightYellow = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTYELLOW);
+		/** * */
 		public static final EnumNamedColor ClearLightGreen = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTGREEN);
+		/** * */
 		public static final EnumNamedColor ClearLightBlue = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTBLUE);
+		/** * */
 		public static final EnumNamedColor ClearLightTurquoise = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTTURQUOISE);
+		/** * */
 		public static final EnumNamedColor ClearLightViolet = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTVIOLET);
+		/** * */
 		public static final EnumNamedColor ClearLightOrange = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTORANGE);
+		/** * */
 		public static final EnumNamedColor ClearLightBrown = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTBROWN);
+		/** * */
 		public static final EnumNamedColor ClearLightGold = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTGOLD);
+		/** * */
 		public static final EnumNamedColor ClearLightSilver = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTSILVER);
+		/** * */
 		public static final EnumNamedColor ClearLightPink = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTPINK);
+		/** * */
 		public static final EnumNamedColor ClearLightBuff = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTBUFF);
+		/** * */
 		public static final EnumNamedColor ClearLightIvory = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTIVORY);
+		/** * */
 		public static final EnumNamedColor ClearLightGoldenrod = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTGOLDENROD);
+		/** * */
 		public static final EnumNamedColor ClearLightMustard = new EnumNamedColor(JDFConstants.NAMEDCOLOR_CLEARLIGHTMUSTARD);
+		/** * */
 		public static final EnumNamedColor MultiColor = new EnumNamedColor(JDFConstants.NAMEDCOLOR_MULTICOLOR);
+		/** * */
 		public static final EnumNamedColor NoColor = new EnumNamedColor(JDFConstants.NAMEDCOLOR_NOCOLOR);
 	}
 
@@ -1170,7 +1312,7 @@ public class JDFElement extends KElement
 	{
 		// there is no explicit extension type --> these are always assumed
 		// valid
-		final Class class1 = this.getClass();
+		final Class<? extends JDFElement> class1 = this.getClass();
 		if (class1 == JDFElement.class || class1 == JDFResource.class)
 		{
 			return true;
@@ -1711,7 +1853,7 @@ public class JDFElement extends KElement
 	 * 
 	 * @default GetChildIds(AttributeName.ID, null, null)
 	 */
-	public Vector getChildIds(final String attrib, final String element, final String nameSpaceURI)
+	public VString getChildIds(final String attrib, final String element, final String nameSpaceURI)
 	{
 		final VString setID = new VString();
 
@@ -1799,6 +1941,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * IsRefElement - is this thing a RefElement?
+	 * @param kElem
 	 * 
 	 * @return true, if this is a refElement
 	 * @deprecated use instanceof JDFRefElement
@@ -1823,6 +1966,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * tests whether this Element is a Resource.
+	 * @param e
 	 * 
 	 * @return boolean - true, if it is a Resource.
 	 * @deprecated use instanceof JDFResource instead
@@ -2037,6 +2181,7 @@ public class JDFElement extends KElement
 	 * gets an inter resource link to a target resource., creates it if it does not exist
 	 * 
 	 * @param target - Target resource to link to
+	 * @return
 	 */
 	public JDFRefElement getCreateRefElement(final JDFResource target)
 	{
@@ -2053,6 +2198,7 @@ public class JDFElement extends KElement
 	 * Creates an inter resource link to a target resource.
 	 * 
 	 * @param target - Target resource to link to
+	 * @return
 	 */
 	public JDFRefElement refElement(final JDFResource target)
 	{
@@ -2151,6 +2297,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * UpDates rRefs attribute of this Element, corresponding to the child reference Elements of this Element.
+	 * @return
 	 * 
 	 * @deprecated use KElement.fillHashSet(ElementName.RREF,null,hashSet)
 	 */
@@ -2403,9 +2550,7 @@ public class JDFElement extends KElement
 		return v;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see org.cip4.jdflib.core.KElement#getElementNameVector()
 	 */
 	@Override
@@ -2427,11 +2572,8 @@ public class JDFElement extends KElement
 		return v;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cip4.jdflib.core.KElement#GetElement(String, String, int)
-	 * 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#getElement(java.lang.String, java.lang.String, int)
 	 * @default getElement(nodeName, null, 0)
 	 */
 	@Override
@@ -2526,6 +2668,11 @@ public class JDFElement extends KElement
 		return getChildElementVector(nodeName, nameSpaceURI, null, true, 0, false).size();
 	}
 
+	/**
+	 * @param nodeName
+	 * @param nameSpaceURI
+	 * @return
+	 */
 	public int numChildElements_JDFElement(final String nodeName, final String nameSpaceURI)
 	{
 		return getChildElementVector_JDFElement(nodeName, nameSpaceURI, null, true, 0, false).size();
@@ -2632,6 +2779,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * create and append a unique id, keep the existing one if it already exists
+	 * @param strName
 	 * 
 	 * @return String - the value of the ID attribute after setting
 	 * 
@@ -3130,6 +3278,7 @@ public class JDFElement extends KElement
 	 * @deprecated use EnumXYZ.getEnum(getAttribute(key, namespaceURI, def)
 	 * @default getEnumAttribute(key, v, null, -1, false)
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public int getEnumAttribute(final String key, final Vector v, final String nameSpaceURI, final int def, final boolean bInherit)
 	{
@@ -3167,6 +3316,7 @@ public class JDFElement extends KElement
 	 * @deprecated use getEnumerationsAttribute(key, nameSpaceURI, EnumXYZ.getEnum(0), bInherit)
 	 * @default getEnumerationsAttribute(key, allowedValues, null, -1, false)
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public Vector getEnumerationsAttribute(final String key, final Vector v, final String nameSpaceURI, final int def, final boolean bInherit)
 	{
@@ -3229,7 +3379,7 @@ public class JDFElement extends KElement
 	 * @param bInherit if true, also recurse into parent elements when searching the attribute
 	 * @return Vector of ValuedEnum, null if no enum was set
 	 */
-	public Vector getEnumerationsAttribute(final String key, final String nameSpaceURI, final ValuedEnum enu, final boolean bInherit)
+	public Vector<? extends ValuedEnum> getEnumerationsAttribute(final String key, final String nameSpaceURI, final ValuedEnum enu, final boolean bInherit)
 	{
 		String strAtt = null;
 		final Vector<ValuedEnum> vEnum = new Vector<ValuedEnum>();
@@ -3251,7 +3401,7 @@ public class JDFElement extends KElement
 
 		try
 		{
-			final Class methodArgs[] = { String.class };
+			final Class<?> methodArgs[] = { String.class };
 			final Method m = enu.getClass().getMethod("getEnum", methodArgs);
 			for (int i = 0; i < vAtts.size(); i++)
 			{
@@ -3297,21 +3447,16 @@ public class JDFElement extends KElement
 	 * @param String nameSpaceURI attribute namespace uri
 	 * @throws JDFException wrong data type in vector
 	 */
-	protected void setEnumerationsAttribute(final String key, final Vector value, final String nameSpaceURI)
+	protected void setEnumerationsAttribute(final String key, final Vector<? extends ValuedEnum> value, final String nameSpaceURI)
 	{
 		String s = null;
 		if (value != null)
 		{
 			int n = 0;
-			final Iterator valueIterator = value.iterator();
+			final Iterator<? extends ValuedEnum> valueIterator = value.iterator();
 			while (valueIterator.hasNext())
 			{
-				final Object o = valueIterator.next();
-				if (!(o instanceof ValuedEnum))
-				{
-					throw new JDFException("setEnumerationsAttribute: wrong data type in vector");
-				}
-
+				final ValuedEnum o = valueIterator.next();
 				if (n++ > 0)
 				{
 					s += JDFConstants.BLANK;
@@ -3321,10 +3466,9 @@ public class JDFElement extends KElement
 					s = "";
 				}
 
-				s += ((ValuedEnum) o).getName();
+				s += o.getName();
 			}
 		}
-
 		setAttribute(key, s, nameSpaceURI);
 	}
 
@@ -3368,6 +3512,7 @@ public class JDFElement extends KElement
 	 * @deprecated use getTheAttributeInfo instead
 	 * @default ValidEnumAttribute(key, v, bRequired, null)
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public boolean validEnumAttribute(final String key, final Vector v, final boolean bRequired, final String nameSpaceURI)
 	{
@@ -3388,6 +3533,7 @@ public class JDFElement extends KElement
 	 * @return true, if the attribute is valid
 	 * @deprecated use getTheAttributeInfo instead
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public boolean validEnumerationsAttribute(final String key, final Vector vs, final boolean bRequired, final String nameSpaceURI)
 	{
@@ -3417,6 +3563,7 @@ public class JDFElement extends KElement
 	 * @deprecated use EnumXYZ.getEnum(int)
 	 * @return String - the string for the enum
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public String getEnumString(final int value, final String allowedValues)
 	{
@@ -3448,7 +3595,10 @@ public class JDFElement extends KElement
 	 * @param allowedValues comma separated string of allowed values
 	 * 
 	 * @return int - the enum that corresponds to the nodename
+	 * @deprecated
 	 */
+	@SuppressWarnings("unchecked")
+	@Deprecated
 	public int getEnumNodeName(final Vector allowedValues)
 	{
 		// 050629 RP made localname. TBD actually check whether the namespace is
@@ -3587,7 +3737,7 @@ public class JDFElement extends KElement
 	 * 
 	 * @param level the level to check
 	 * @return true if required
-	 * @deprecated use {@link EnumValidationLevel}.isRequired()
+	 * @deprecated use EnumValidationLevel.isRequired()
 	 */
 	@Deprecated
 	public static boolean requiredLevel(final EnumValidationLevel level)
@@ -3730,6 +3880,7 @@ public class JDFElement extends KElement
 	 * Remove value from attribute rRefs if it is in the list
 	 * 
 	 * @param value the rRef token to remove from the NMTOKENS list
+	 * @return
 	 * @deprecated rRefs was deprecated in JDF 1.2
 	 */
 	@Deprecated
@@ -3738,19 +3889,9 @@ public class JDFElement extends KElement
 		return removeFromAttribute(AttributeName.RREFS, value, null, JDFConstants.BLANK, -1);
 	}
 
-	// dm /**
-	// * Set attribute rRefs, i.e. combine the blank separed attribute list
-	// * @deprecated rRefs was deprecated in JDF 1.2
-	// */
-	// @Deprecated
-	// public void setrRefs(VString vStr)
-	// {
-	// setAttribute(
-	// AttributeName.RREFS,
-	// StringUtil.setvString(vStr,JDFConstants.BLANK,null,null),null);
-	// }
 	/**
 	 * Get string attribute rRefs, i.e. split the blank separed attribute list
+	 * @return
 	 * 
 	 * @deprecated rRefs was deprecated in JDF 1.2
 	 */
@@ -4017,6 +4158,7 @@ public class JDFElement extends KElement
 
 		/**
 		 * returns true if this is greater than other
+		 * @param other
 		 * 
 		 * @return boolean true if this>other
 		 */
@@ -4032,18 +4174,30 @@ public class JDFElement extends KElement
 		/**
 		 * @ deprecated EnumVersion.Unknown - don't use EnumVersion.Unknown, it can't be deprecated because of bit operations in eg. AtrInfo.getFirstVersion()
 		 */
+		/** * */
 		public static final EnumVersion Unknown = new EnumVersion(JDFConstants.UNKNOWN);
 
+		/** * */
 		public static final EnumVersion Version_1_0 = new EnumVersion(JDFConstants.VERSION_1_0);
+		/** * */
 		public static final EnumVersion Version_1_1 = new EnumVersion(JDFConstants.VERSION_1_1);
+		/** * */
 		public static final EnumVersion Version_1_2 = new EnumVersion(JDFConstants.VERSION_1_2);
+		/** * */
 		public static final EnumVersion Version_1_3 = new EnumVersion(JDFConstants.VERSION_1_3);
+		/** * */
 		public static final EnumVersion Version_1_4 = new EnumVersion(JDFConstants.VERSION_1_4);
+		/** * */
 		public static final EnumVersion Version_1_5 = new EnumVersion(JDFConstants.VERSION_1_5);
+		/** * */
 		public static final EnumVersion Version_1_6 = new EnumVersion(JDFConstants.VERSION_1_6);
+		/** * */
 		public static final EnumVersion Version_1_7 = new EnumVersion(JDFConstants.VERSION_1_7);
+		/** * */
 		public static final EnumVersion Version_1_8 = new EnumVersion(JDFConstants.VERSION_1_8);
+		/** * */
 		public static final EnumVersion Version_1_9 = new EnumVersion(JDFConstants.VERSION_1_9);
+		/** * */
 		public static final EnumVersion Version_2_0 = new EnumVersion(JDFConstants.VERSION_2_0);
 
 		/**
@@ -4239,6 +4393,7 @@ public class JDFElement extends KElement
 	 * Typesafe enumerated attribute SettingsPolicy
 	 * 
 	 * @param bInherit recurse through ancestors when searching
+	 * @return
 	 */
 	public EnumSettingsPolicy getSettingsPolicy(final boolean bInherit)
 	{
@@ -4487,6 +4642,7 @@ public class JDFElement extends KElement
 
 	/**
 	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
+	 * @param idUsage
 	 * 
 	 * @return double the attribute value
 	 */
@@ -4679,13 +4835,12 @@ public class JDFElement extends KElement
 	 * 
 	 * @default getAllRefs(null, false)
 	 */
-	public HashSet getAllRefs(final HashSet vDoneRefs, final boolean bRecurse)
+	public HashSet<JDFElement> getAllRefs(HashSet<JDFElement> vDoneRefs, final boolean bRecurse)
 	{
-		HashSet vDoneRefsLocal = vDoneRefs;
 
-		if (vDoneRefsLocal.contains(this))
+		if (vDoneRefs.contains(this))
 		{
-			return vDoneRefsLocal;
+			return vDoneRefs;
 		}
 
 		final VElement v = getChildElementVector_KElement(null, null, null, true, 0); // grabemall
@@ -4697,25 +4852,25 @@ public class JDFElement extends KElement
 			if (e instanceof JDFRefElement)
 			{
 				final JDFRefElement ref = (JDFRefElement) e;
-				if (!vDoneRefsLocal.contains(ref))
+				if (!vDoneRefs.contains(ref))
 				{
-					vDoneRefsLocal.add(ref);
+					vDoneRefs.add(ref);
 					if (bRecurse)
 					{
 						final JDFResource r = ref.getTarget();
 						if (r != null)
 						{
-							vDoneRefsLocal = r.getAllRefs(vDoneRefsLocal, bRecurse);
+							vDoneRefs = r.getAllRefs(vDoneRefs, bRecurse);
 						}
 					}
 				}
 			}
 			else if (e instanceof JDFElement)
 			{ // recurse tree
-				vDoneRefsLocal = ((JDFElement) e).getAllRefs(vDoneRefsLocal, bRecurse);
+				vDoneRefs = ((JDFElement) e).getAllRefs(vDoneRefs, bRecurse);
 			}
 		}
-		return vDoneRefsLocal;
+		return vDoneRefs;
 	}
 
 	/**
@@ -4805,6 +4960,12 @@ public class JDFElement extends KElement
 		return true; // any location
 	}
 
+	/**
+	 * gets a reasonable value for an attribute
+	 * @param e
+	 * @param attName
+	 * @return
+	 */
 	static public String getValueForNewAttribute(final KElement e, final String attName)
 	{
 
@@ -4942,8 +5103,8 @@ public class JDFElement extends KElement
 		{
 			return null;
 		}
-		final BodyPart bodyPart = getOwnerDocument_KElement().getBodyPart();
-		final InputStream is = UrlUtil.getURLInputStream(url, bodyPart);
+		final Multipart multiPart = getOwnerDocument_KElement().getMultiPart();
+		final InputStream is = new MimeReader(multiPart).getURLInputStream(url);
 		if (is == null)
 		{
 			return null;

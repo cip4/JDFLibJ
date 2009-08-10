@@ -90,6 +90,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
+import org.cip4.jdflib.util.UrlUtil;
 
 ////////////////////////////////////////////////////////////////
 
@@ -123,7 +124,9 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	public void testGetURLCidStream() throws Exception
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF();
-		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
+		final String fileName = sm_dirTestDataTemp + "testMimePackageDoc.mjm";
+		assertTrue(new File(fileName).canRead());
+		final Multipart mp = MimeUtil.getMultiPart(fileName);
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
@@ -140,6 +143,25 @@ public class JDFFilespecTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
+	public void testMoveToDir()
+	{
+		new MimeUtilTest().testBuildMimePackageDocJMF();
+		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");
+		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
+		final JDFDoc d = MimeUtil.getJDFDoc(bp);
+		final JDFNode n = d.getJDFRoot();
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
+		assertNotNull(cscp);
+		final JDFFileSpec fs = cscp.getFinalTargetDevice();
+		final File newDir = new File(sm_dirTestDataTemp + "newDir");
+		fs.moveToDir(newDir);
+		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
+
+	}
+
 	// //////////////////////////////////////////////////////////////
 
 	/**
@@ -147,10 +169,10 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 */
 	public void testGetMimeTypeFromURL()
 	{
-		assertNull(JDFFileSpec.getMimeTypeFromURL(null));
-		assertNull(JDFFileSpec.getMimeTypeFromURL("burp"));
-		assertEquals("application/pdf", JDFFileSpec.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
-		assertEquals("image/tiff", JDFFileSpec.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
+		assertNull(UrlUtil.getMimeTypeFromURL(null));
+		assertNull(UrlUtil.getMimeTypeFromURL("burp"));
+		assertEquals("application/pdf", UrlUtil.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
+		assertEquals("image/tiff", UrlUtil.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
 	}
 
 	// //////////////////////////////////////////////////////////////

@@ -1910,7 +1910,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @return Vector of EnumPartIDKey - list of all PipePartIDKeys
 	 */
-	public Vector getPipePartIDKeysEnum()
+	public Vector<EnumPartIDKey> getPipePartIDKeysEnum()
 	{
 		Vector<EnumPartIDKey> v = null;
 
@@ -1918,7 +1918,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		final VString vPartIDKeys = res.getPartIDKeys();
 		if (hasAttribute(AttributeName.PIPEPARTIDKEYS))
 		{
-			v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
+			v = (Vector<EnumPartIDKey>) getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
 		}
 		else
 		{

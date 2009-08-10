@@ -84,7 +84,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoRunList;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -323,14 +322,15 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector fileSpec
-	 * @param Vector sepNames
-	 * @param int first
-	 * @param boolean pageMajor
+	 * @param fileNames
+	 * @param sepNames
+	 * @param first
+	 * @param pageMajor
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first, final boolean pageMajor)
 	{
@@ -339,14 +339,15 @@ public class JDFRunList extends JDFAutoRunList
 
 	/**
 	 * addSepRun
+	 * @param fileNames
+	 * @param sepNames
+	 * @param pageMajor
 	 * 
-	 * @param Vector fileSpec
-	 * @param Vector sepNames
-	 * @param boolean pageMajor
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final boolean pageMajor)
 	{
@@ -1049,10 +1050,10 @@ public class JDFRunList extends JDFAutoRunList
 	@Override
 	public Vector getImplicitPartitions()
 	{
-		Vector<ValuedEnum> v = super.getImplicitPartitions();
+		Vector<EnumPartIDKey> v = super.getImplicitPartitions();
 		if (v == null)
 		{
-			v = new Vector<ValuedEnum>();
+			v = new Vector<EnumPartIDKey>();
 		}
 		v.add(EnumPartIDKey.RunIndex);
 		v.add(EnumPartIDKey.DocIndex);

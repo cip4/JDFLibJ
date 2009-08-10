@@ -139,7 +139,13 @@ public class JDFValidator
 {
 	VString foundNameSpaces = new VString();
 	VString vID = new VString();
+	/**
+	 * 
+	 */
 	public VString vBadID = new VString();
+	/**
+	 * 
+	 */
 	public VString vMultiID = null;
 	VString vBadJobPartID = new VString();
 	VString vJobPartID = new VString();
@@ -183,7 +189,7 @@ public class JDFValidator
 	public boolean bMultiID = false;
 	private boolean inOutputLoop = false;
 
-	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2008 CIP4" + "\nJDF 1.3 compatible version\n" + "\nCode based on schema JDF_1.3.xsd Release Candidate 001\n"
+	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2009 CIP4" + "\nJDF 1.3 compatible version\n" + "\nCode based on schema JDF_1.3.xsd Release Candidate 001\n"
 			+ "Build version " + JDFAudit.software();
 
 	public JDFValidator()

@@ -76,6 +76,9 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -94,7 +97,7 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 */
 	public void testSize()
 	{
-		final ByteArrayIOStream ios = new ByteArrayIOStream(new byte[20000]);
+		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
 		for (int i = 0; i < 12345; i++)
 		{
 			ios.write(i);
@@ -108,13 +111,47 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 */
 	public void testConstructStream()
 	{
-		final ByteArrayIOStream ios = new ByteArrayIOStream(new byte[20000]);
+		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
 		for (int i = 0; i < 12345; i++)
 		{
 			ios.write(i);
 		}
 		final ByteArrayIOStream ios2 = new ByteArrayIOStream(ios.getInputStream());
 		assertEquals(ios.toString(), ios2.toString());
+	}
+
+	/**
+	 * @throws IOException
+	 * 
+	 */
+	public void testConstructFile() throws IOException
+	{
+		final File f = new File(sm_dirTestDataTemp + "bios.fil");
+		f.delete();
+		f.createNewFile();
+		final FileOutputStream fos = new FileOutputStream(f);
+		for (int i = 0; i < 20000; i++)
+		{
+			fos.write(i % 256);
+		}
+		fos.close();
+		final ByteArrayIOStream ios = new ByteArrayIOStream(f);
+		final InputStream is = ios.getInputStream();
+		for (int i = 0; i < 20000; i++)
+		{
+			assertEquals(is.read(), i % 256);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testConstructBuf()
+	{
+		final byte[] b = "abc".getBytes();
+		final ByteArrayIOStream ios = new ByteArrayIOStream(b);
+
+		assertEquals(ios.getInputStream().available(), 3);
 	}
 
 	/**

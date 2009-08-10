@@ -91,6 +91,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -102,6 +103,8 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.util.mime.BodyPartHelper;
+import org.cip4.jdflib.util.mime.MimeHelper;
 
 /**
  * collection of helper routines to convert urls
@@ -111,6 +114,7 @@ import org.cip4.jdflib.core.XMLDoc;
  */
 public class UrlUtil
 {
+	private static HashMap<String, String> mimeMap = null;
 	/**
 	 * 
 	 */
@@ -136,6 +140,9 @@ public class UrlUtil
 		 * size of http chunks to be written, if <=0 no chunks
 		 */
 		public int chunkSize = defaultChunkSize;
+		/**
+		 * the default chnk size; -1= don't chunk
+		 */
 		public static int defaultChunkSize = -1; // don't chunk by default
 
 		/**
@@ -186,8 +193,17 @@ public class UrlUtil
 			contentType = part.getContentType();
 		}
 
+		/**
+		 * the input stream of this UrlPart
+		 */
 		public InputStream inStream;
+		/**
+		 * the content type of this UrlPart
+		 */
 		public String contentType;
+		/**
+		 * the content length of this UrlPart
+		 */
 		public int contentLength;
 
 		/**
@@ -202,24 +218,53 @@ public class UrlUtil
 		}
 	}
 
-	// public static final String m_URIEscape = "%?:@&=+$,[]";
+	/**
+	 * strings that must be escaped in urls
+	 */
 	public static final String m_URIEscape = "%?@&=+$,[]";
+	/**
+	 * 
+	 */
 	public static final String TEXT_HTML = "text/html";
+	/**
+	 * 
+	 */
 	public static final String TEXT_PLAIN = "text/plain";
+	/**
+	 * 
+	 */
 	public static final String TEXT_UNKNOWN = JDFConstants.MIME_TEXTUNKNOWN;
 	/**
 	 * the preferred value!
 	 */
 	public static final String APPLICATION_XML = "application/xml";
+	/**
+	 * 
+	 */
 	public static final String TEXT_XML = JDFConstants.MIME_TEXTXML;
+	/**
+	 * 
+	 */
 	public static final String VND_JDF = JDFConstants.MIME_JDF;
+	/**
+	 * 
+	 */
 	public static final String VND_JMF = JDFConstants.MIME_JMF;
+	/**
+	 * 
+	 */
 	public static final String CONTENT_ID = "Content-ID";
 	/**
-	 * commonly used strings
+	 * more commonly used strings
 	 */
 	public static final String CONTENT_TYPE = "Content-Type";
+	/**
+	 * 
+	 */
 	public static final String BASE64 = "base64";
+	/**
+	 * 
+	 */
 	public static final String BINARY = "binary";
 
 	/**
@@ -250,7 +295,7 @@ public class UrlUtil
 	 * this includes escaping of %20 etc.
 	 * 
 	 * @param f the file to get the relative path for
-	 * @param fCWD the file that describes cwd, if <code>null</code> cwd is calculated
+	 * @param fCWD the file that describes cwd, if <code>null</code> cwd is calculated from user.dir
 	 * @return
 	 */
 	public static String getRelativePath(final File f, final File fCWD)
@@ -314,6 +359,26 @@ public class UrlUtil
 	}
 
 	/**
+	 * get the file name for a url. extract it from a mime package, if appropriate
+	 * @param url
+	 * @param mp
+	 * @return
+	 */
+	public static String getFileName(final String url, final Multipart mp)
+	{
+		if (!isNotCID(url))
+		{
+			final BodyPart bp = MimeUtil.getPartByCID(mp, url);
+			final String ret = MimeUtil.getFileName(bp);
+			if (ret != null)
+			{
+				return ret;
+			}
+		}
+		return urlToFileName(url);
+	}
+
+	/**
 	 * get a readable inputstream from the CID url
 	 * 
 	 * @param url the url to get a stream for
@@ -328,23 +393,8 @@ public class UrlUtil
 		{
 			return null;
 		}
-		final BodyPart bp = MimeUtil.getPartByCID(multipart, url);
-		if (bp == null)
-		{
-			return null;
-		}
-
-		try
-		{
-			return bp.getInputStream();
-		}
-		catch (final IOException e)
-		{/* */
-		}
-		catch (final MessagingException e)
-		{ /* */
-		}
-		return null; // snafu exit
+		final BodyPart bp = new MimeHelper(multipart).getPartByCID(url);
+		return new BodyPartHelper(bp).getInputStream();
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -385,6 +435,7 @@ public class UrlUtil
 
 	/**
 	 * get an array of urlparts, regardless of whether this was mime or not if the stream is mime/multipart get also extract that
+	 * @param connection
 	 * 
 	 * @return the array of body parts input stream
 	 */
@@ -502,23 +553,13 @@ public class UrlUtil
 	 * create a new directory and return null if the directory could not be created
 	 * 
 	 * @param newDir the path or URL of the new directory
+	 * @return
+	 * @deprecated use FileUtil.getCreateDirectory(newDir);
 	 */
+	@Deprecated
 	public static File getCreateDirectory(final String newDir)
 	{
-		final File f = UrlUtil.urlToFile(newDir);
-		if (f == null)
-		{
-			return null;
-		}
-		if (!f.exists())
-		{
-			f.mkdirs();
-		}
-		if (!f.isDirectory())
-		{
-			return null;
-		}
-		return f;
+		return FileUtil.getCreateDirectory(newDir);
 	}
 
 	/**
@@ -577,10 +618,10 @@ public class UrlUtil
 		{
 			urlString = urlString.substring(posSlash + 1);
 		}
-		posSlash = urlString.lastIndexOf("?");
-		if (posSlash > 0)
+		final int posQ = urlString.lastIndexOf("?");
+		if (posQ > 0)
 		{
-			urlString = urlString.substring(0, posSlash);
+			urlString = urlString.substring(0, posQ);
 		}
 		return urlString.length() == 0 ? null : urlString;
 
@@ -739,7 +780,37 @@ public class UrlUtil
 	}
 
 	/**
-	 * test whether a given url is a cid
+	 * generates the correct MIMEType for a given URL and sets it
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static String getMimeTypeFromURL(final String url)
+	{
+		if (mimeMap == null)
+		{
+			mimeMap = new HashMap<String, String>();
+			mimeMap.put("pdf", JDFConstants.MIME_PDF);
+			mimeMap.put("ps", JDFConstants.MIME_PS);
+
+			mimeMap.put("ppf", JDFConstants.MIME_CIP3);
+			mimeMap.put("ppml", JDFConstants.MIME_PPML);
+			mimeMap.put("jdf", JDFConstants.MIME_JDF);
+			mimeMap.put("jmf", JDFConstants.MIME_JMF);
+
+			mimeMap.put("xml", JDFConstants.MIME_TEXTXML);
+
+			mimeMap.put("jpg", JDFConstants.MIME_JPG);
+			mimeMap.put("jpeg", JDFConstants.MIME_JPG);
+			mimeMap.put("tif", JDFConstants.MIME_TIFF);
+			mimeMap.put("tiff", JDFConstants.MIME_TIFF);
+		}
+		final String extension = UrlUtil.extension(url);
+		return extension == null ? null : mimeMap.get(extension.toLowerCase());
+	}
+
+	/**
+	 * test whether a given url is a cid (cid:)
 	 * 
 	 * @param url the url to test
 	 * @return
@@ -760,6 +831,37 @@ public class UrlUtil
 		return lowerURL.startsWith("cid:");
 	}
 
+	/**
+	 * test whether a given url is NOT a cid this may be a local identifier
+	 * 
+	 * @param url the url to test
+	 * @return
+	 */
+	public static boolean isNotCID(final String url)
+	{
+		if (StringUtil.getNonEmpty(url) == null)
+		{
+			return true;
+		}
+		if (isCID(url))
+		{
+			return false;
+		}
+		if (isHttp(url) || isHttps(url))
+		{
+			return true;
+		}
+		if (url.toLowerCase().startsWith("file:"))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @param pathName
+	 * @return
+	 */
 	public static boolean isWindowsLocalPath(final String pathName)
 	{
 		if (pathName == null || pathName.length() <= 1 || isUNC(pathName))
@@ -1053,9 +1155,10 @@ public class UrlUtil
 	 * write a Stream to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
 	 * 
 	 * @param strUrl the URL to write to
-	 * @param sream the input stream to read from
+	 * @param stream the input stream to read from
 	 * @param method GET or POST
 	 * @param contentType the contenttype to set MUST BE SET!
+	 * @param details
 	 * @return {@link UrlPart} the opened http connection, null in case of error
 	 * 
 	 */

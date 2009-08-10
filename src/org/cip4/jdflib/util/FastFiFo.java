@@ -74,8 +74,9 @@ import java.lang.reflect.Array;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG <br/>
+ * 
  * quick and dirty fast fifo built on a circular array May 26, 2009
- * @param <x> the elements to dump into the fifo
+ * @param <x> the element class to dump into the fifo
  */
 public class FastFiFo<x>
 {
@@ -123,15 +124,15 @@ public class FastFiFo<x>
 	 * pops the first to go
 	 * @return the first element, null if empty
 	 */
+	@SuppressWarnings("unchecked")
 	synchronized public x pop()
 	{
 		if (fill == 0)
 		{
 			return null;
 		}
-		final int s = theArray.length;
 		final x ret = (x) theArray[first];
-		first = ++first % s;
+		first = ++first % theArray.length;
 		fill--;
 		return ret;
 	}
@@ -141,20 +142,21 @@ public class FastFiFo<x>
 	 * @param i the index of the element to peek
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public x peek(final int i)
 	{
-		final int s = theArray.length;
 		if (i >= fill)
 		{
 			return null;
 		}
-		return (x) theArray[(first + i) % s];
+		return (x) theArray[(first + i) % theArray.length];
 	}
 
 	/**
 	 * peeks into the fifo from the beginning
 	 * @return a snapshot of the current fifo, null if empty
 	 */
+	@SuppressWarnings("unchecked")
 	synchronized public x[] peekArray()
 	{
 		if (fill == 0)

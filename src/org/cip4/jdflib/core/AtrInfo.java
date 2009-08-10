@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,6 +79,11 @@ package org.cip4.jdflib.core;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * Aug 10, 2009
+ */
 public class AtrInfo
 {
 	private final long atrValidityStatus;
@@ -86,7 +91,13 @@ public class AtrInfo
 	private ValuedEnum enumEnum = null;
 	private String atrDefault = null;
 
-	public AtrInfo(long s, AttributeInfo.EnumAttributeType t, ValuedEnum e, String _atrDefault)
+	/**
+	 * @param s
+	 * @param t
+	 * @param e
+	 * @param _atrDefault
+	 */
+	public AtrInfo(final long s, final AttributeInfo.EnumAttributeType t, final ValuedEnum e, final String _atrDefault)
 	{
 		atrValidityStatus = s;
 		atrType = t;
@@ -94,7 +105,12 @@ public class AtrInfo
 		atrDefault = _atrDefault;
 	}
 
-	public AtrInfo(long s, AttributeInfo.EnumAttributeType t, ValuedEnum e)
+	/**
+	 * @param s
+	 * @param t
+	 * @param e
+	 */
+	public AtrInfo(final long s, final AttributeInfo.EnumAttributeType t, final ValuedEnum e)
 	{
 		atrValidityStatus = s;
 		atrType = t;
@@ -118,25 +134,38 @@ public class AtrInfo
 		return atrValidityStatus;
 	}
 
+	/**
+	 * @return
+	 */
 	public ValuedEnum getEnumEnum()
 	{
 		return enumEnum;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getAtrDefault()
 	{
 		return atrDefault;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
 		String s = "Type: " + atrType.toString();
 		s += "; Validity: " + Long.toHexString(atrValidityStatus);
 		if (enumEnum != null)
+		{
 			s += "; Enum: " + enumEnum.toString();
+		}
 		if (atrDefault != null)
+		{
 			s += "; default: " + atrDefault;
+		}
 
 		return s;
 	}
@@ -153,7 +182,9 @@ public class AtrInfo
 			long masked = atrValidityStatus & (0xFl << (4 * i));
 			masked = masked >> (4 * i);
 			if (masked == 2 || masked == 3)
+			{
 				return EnumVersion.getEnum(i + 1);
+			}
 		}
 		return null;
 	}
@@ -170,7 +201,9 @@ public class AtrInfo
 			long masked = atrValidityStatus & 0xFl << (4 * i);
 			masked = masked >> (4 * i);
 			if (masked == 2 || masked == 3)
+			{
 				return EnumVersion.getEnum(i + 1);
+			}
 		}
 		return null;
 	}

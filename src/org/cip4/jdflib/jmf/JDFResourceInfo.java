@@ -81,8 +81,6 @@
 
 package org.cip4.jdflib.jmf;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResourceInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -239,6 +237,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * append resource
 	 * 
 	 * @param resName name of the resource to append
+	 * @return
 	 */
 	public JDFResource appendResource(final String resName)
 	{
@@ -261,7 +260,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	 * @return Vector - vector of unknown element nodenames
 	 */
 	@Override
-	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
 	}

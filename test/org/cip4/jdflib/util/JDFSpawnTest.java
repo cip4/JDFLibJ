@@ -140,7 +140,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 {
 
 	/**
-	 * Test method for {@link com.heidelberg.printready.model.processing.JC_aInteraction#spawnSubSubJDFs(java.lang.String, java.util.List)}.
+	 * Test method for multiple spawn
 	 */
 	public void testSpawnSubSubJDFs()
 	{
@@ -303,6 +303,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSpawnPartMulti()
 	{
 		final JDFDoc dRoot = new JDFDoc("JDF");
@@ -2176,7 +2179,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		vsRWResourceIDs.add("r85326439_027691");
 
 		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPD0.I", null);
-		final Collection vSpawned = nodeProc.checkSpawnedResources(vsRWResourceIDs, vamParts);
+		final Collection<JDFResource> vSpawned = nodeProc.checkSpawnedResources(vsRWResourceIDs, vamParts);
 		assertNull(vSpawned);
 		final JDFSpawn spawn = new JDFSpawn(nodeProc);
 		spawn.vRWResources_in = vsRWResourceIDs;
@@ -2352,8 +2355,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		assertNotNull(rl.getPartition(map, null));
 	}
 
+	/**
+	 * 
+	 */
 	// ////////////////////////////////////////////////////////
-
 	public void testSpawnSheetNeedsSide()
 	{
 		final JDFDoc readJDF = JDFDoc.parseFile(sm_dirTestData + "pdyv5.jdf");
@@ -2579,7 +2584,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 */
 	public void testCleanupMerge()
 	{
-		final List l = EnumCleanUpMerge.getEnumList();
+		final List<EnumCleanUpMerge> l = EnumCleanUpMerge.getEnumList();
 		for (int i = 0; i < l.size(); i++)
 		{
 			final JDFDoc doc = new JDFDoc("JDF");
@@ -2592,7 +2597,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFSpawned auditSpawn = (JDFSpawned) node.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null);
 			assertNotNull(auditSpawn);
 			assertTrue(auditSpawn.getrRefsROCopied().contains(r.getID()));
-			final EnumCleanUpMerge cm = (EnumCleanUpMerge) l.get(i);
+			final EnumCleanUpMerge cm = l.get(i);
 			new JDFMerge(node).mergeJDF(spn, null, cm, JDFResource.EnumAmountMerge.None);
 			final JDFSpawned auditSpawn2 = (JDFSpawned) node.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null);
 			final JDFMerged mergeSpawn2 = (JDFMerged) node.getAuditPool().getAudit(0, EnumAuditType.Merged, null, null);

@@ -113,6 +113,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
+import org.cip4.jdflib.util.mime.MimeWriter;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -366,6 +367,23 @@ public class MimeUtilTest extends JDFTestCaseBase
 			final Multipart mp = MimeUtil.getMultiPart(mimeFile);
 			assertEquals("JDF, 2* rl, 1 icc", mp.getCount(), 4);
 		}
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testUpdateMultipart() throws Exception
+	{
+		final MimeWriter mw = new MimeWriter();
+		final ByteArrayIOStream bos = new ByteArrayIOStream("abcdefg".getBytes());
+		mw.updateMultipart(bos.getInputStream(), "cid", UrlUtil.TEXT_PLAIN);
+		final String fileName = sm_dirTestDataTemp + "testUpdateMultipart.mim";
+		mw.writeToFile(fileName);
+		final BodyPart[] bps = MimeUtil.extractMultipartMime(new FileInputStream(new File(fileName)));
+		final InputStream is = bps[0].getInputStream();
+		final byte[] b = new byte[10];
+		final int n = is.read(b);
+		assertEquals(n, 7);
 	}
 
 	/**

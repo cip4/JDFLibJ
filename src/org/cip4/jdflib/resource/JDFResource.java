@@ -473,16 +473,25 @@ public class JDFResource extends JDFElement
 			return (EnumAmountMerge) getEnum(EnumAmountMerge.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumAmountMerge.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumAmountMerge.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumAmountMerge.class);
@@ -516,6 +525,10 @@ public class JDFResource extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumResourceClass getEnum(final String enumName)
 		{
 			if ("Consumable".equals(enumName))
@@ -549,21 +562,34 @@ public class JDFResource extends JDFElement
 			return null;
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumResourceClass getEnum(final int enumValue)
 		{
 			return (EnumResourceClass) getEnum(EnumResourceClass.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumResourceClass.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumResourceClass.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumResourceClass.class);
@@ -613,26 +639,43 @@ public class JDFResource extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumResStatus getEnum(final String enumName)
 		{
 			return (EnumResStatus) getEnum(EnumResStatus.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumResStatus getEnum(final int enumValue)
 		{
 			return (EnumResStatus) getEnum(EnumResStatus.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumResStatus.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumResStatus.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumResStatus.class);
@@ -2186,7 +2229,7 @@ public class JDFResource extends JDFElement
 		{
 			return false;
 		}
-		final Vector<ValuedEnum> vImplicitKeys = getImplicitPartitions();
+		final Vector<EnumPartIDKey> vImplicitKeys = getImplicitPartitions();
 		if (vImplicitKeys != null)
 		{
 			if (vImplicitKeys.contains(key))
@@ -2262,7 +2305,7 @@ public class JDFResource extends JDFElement
 		{
 			return m;
 		}
-		final Vector<ValuedEnum> v = getImplicitPartitions();
+		final Vector<EnumPartIDKey> v = getImplicitPartitions();
 		if (v == null)
 		{
 			return m;
@@ -2270,7 +2313,7 @@ public class JDFResource extends JDFElement
 		m = new JDFAttributeMap(m);
 		for (int i = 0; i < v.size(); i++)
 		{
-			m.remove(((EnumPartIDKey) v.elementAt(i)).getName());
+			m.remove((v.elementAt(i)).getName());
 		}
 		return m;
 	}
@@ -2776,7 +2819,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return Vector - a list of values of the specifird partition key
 	 */
-	public Vector getPartValues(final EnumPartIDKey partType)
+	public VString getPartValues(final EnumPartIDKey partType)
 	{
 		final VElement v = getLeaves(false);
 		final VString vs = new VString();
@@ -4423,7 +4466,7 @@ public class JDFResource extends JDFElement
 
 		final String postFix = id.substring(0, 8);
 		String preFix = id;
-		final VString siblingIDs = (VString) getResourcePool().getResIds();
+		final VString siblingIDs = getResourcePool().getResIds();
 
 		if (postFix.substring(0, "_old_".length()).equals("_old_"))
 		{
@@ -4851,7 +4894,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return Vector of EnumPartIDKey
 	 */
-	public Vector getImplicitPartitions()
+	public Vector<EnumPartIDKey> getImplicitPartitions()
 	{
 		return null;
 	}
@@ -6117,7 +6160,7 @@ public class JDFResource extends JDFElement
 		final String s = partType.getName();
 		final JDFResource r = getResourceRoot();
 
-		final Vector<ValuedEnum> implicitPartitions = getImplicitPartitions();
+		final Vector<EnumPartIDKey> implicitPartitions = getImplicitPartitions();
 		if (implicitPartitions != null && implicitPartitions.contains(partType))
 		{
 			throw new JDFException("AddPartIDKey: attempting to add implicit partition: " + s);
@@ -6299,15 +6342,13 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return Vector - list of all PipePartIDKey enums
 	 */
-	public Vector getPipePartIDKeysEnum()
+	public Vector<EnumPartIDKey> getPipePartIDKeysEnum()
 	{
-		Vector<ValuedEnum> v = null;
-
 		final VString vPartIDKeys = getPartIDKeys();
-		v = getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
+		final Vector<EnumPartIDKey> v = (Vector<EnumPartIDKey>) getEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, null, EnumPartIDKey.getEnum(0), false);
 		for (int i = 0; i < v.size(); i++)
 		{
-			if (!vPartIDKeys.contains(((EnumPartIDKey) v.elementAt(i)).getName()))
+			if (!vPartIDKeys.contains((v.elementAt(i)).getName()))
 			{
 				throw new JDFException("JDFResource.getPipePartIDKeys: key " + v.elementAt(i) + " is not subset of PartIDKey");
 			}
@@ -6325,10 +6366,10 @@ public class JDFResource extends JDFElement
 	public VString getPipePartIDKeys()
 	{
 		final VString vPipePartIDKeys = new VString();
-		final Vector<ValuedEnum> v = getPipePartIDKeysEnum();
+		final Vector<EnumPartIDKey> v = getPipePartIDKeysEnum();
 		for (int i = 0; i < v.size(); i++)
 		{
-			vPipePartIDKeys.add(((EnumPartIDKey) v.elementAt(i)).getName());
+			vPipePartIDKeys.add((v.elementAt(i)).getName());
 		}
 
 		return vPipePartIDKeys;

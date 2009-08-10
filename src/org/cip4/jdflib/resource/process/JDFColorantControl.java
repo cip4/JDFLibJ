@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,7 +80,6 @@ package org.cip4.jdflib.resource.process;
 
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorantControl;
 import org.cip4.jdflib.core.ElementName;
@@ -89,6 +88,11 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * Aug 10, 2009
+ */
 public class JDFColorantControl extends JDFAutoColorantControl
 {
 	private static final long serialVersionUID = 1L;
@@ -96,38 +100,38 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	/**
 	 * Constructor for JDFColorantControl
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorantControl(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
+	public JDFColorantControl(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorantControl
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
+	 * 
 	 * @throws DOMException
 	 */
-	public JDFColorantControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorantControl
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFColorantControl(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
+	public JDFColorantControl(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -146,26 +150,32 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 * get a list of all partition keys that this resource may be implicitly
-	 * partitioned by e.g. RunIndex for RunList...
+	 * get a list of all partition keys that this resource may be implicitly partitioned by e.g. RunIndex for RunList...
 	 * 
 	 * @return vector of EnumPartIDKey
 	 */
 
 	@Override
-	public Vector getImplicitPartitions()
+	public Vector<EnumPartIDKey> getImplicitPartitions()
 	{
-		Vector<ValuedEnum> v = super.getImplicitPartitions();
+		Vector<EnumPartIDKey> v = super.getImplicitPartitions();
 		if (v == null)
-			v = new Vector<ValuedEnum>();
+		{
+			v = new Vector<EnumPartIDKey>();
+		}
 		v.add(EnumPartIDKey.Separation);
 		return v;
 	}
 
+	/**
+	 * @return
+	 */
 	public VString getDeviceColorantOrderSeparations()
 	{
 		if (hasChildElement(ElementName.DEVICECOLORANTORDER, null))
+		{
 			return super.getDeviceColorantOrder().getSeparations();
+		}
 		return getColorantOrderSeparations();
 	}
 
@@ -176,22 +186,25 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	public VString getColorantOrderSeparations()
 	{
 		if (hasChildElement(ElementName.COLORANTORDER, null))
+		{
 			return super.getColorantOrder().getSeparations();
+		}
 		return getSeparations();
 	}
 
 	/**
-	 * get the list of separations that this colorantcontrol describes adds the
-	 * separations that are implied by ProcessColorModel
+	 * get the list of separations that this colorantcontrol describes adds the separations that are implied by ProcessColorModel
 	 * 
 	 * @return VString the complete list of process and spot colors
 	 */
 	public VString getAllSeparations()
 	{
-		VElement e = getLeaves(false);
+		final VElement e = getLeaves(false);
 		if (e == null)
+		{
 			return null;
-		VString allCols = new VString();
+		}
+		final VString allCols = new VString();
 		for (int i = 0; i < e.size(); i++)
 		{
 			allCols.addAll(((JDFColorantControl) e.get(i)).getSeparations());
@@ -201,15 +214,14 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 * get the list of separations that this colorantcontrol describes adds the
-	 * separations that are implied by ProcessColorModel
+	 * get the list of separations that this colorantcontrol describes adds the separations that are implied by ProcessColorModel
 	 * 
 	 * @return VString the complete list of process and spot colors
 	 */
 	public VString getSeparations()
 	{
 		VString vName = new VString();
-		String model = getProcessColorModel();
+		final String model = getProcessColorModel();
 		if ("DeviceCMY".equals(model))
 		{
 			vName.add("Cyan");
@@ -238,7 +250,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 			vName = getDeviceNSpace(0).getSeparations();
 		}
 
-		JDFSeparationList colpar = getColorantParams();
+		final JDFSeparationList colpar = getColorantParams();
 		if (colpar != null)
 		{
 			vName.appendUnique(colpar.getSeparations());
@@ -253,7 +265,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	@Override
 	public JDFColorPool getCreateColorPool()
 	{
-		JDFColorPool cp = getColorPool();
+		final JDFColorPool cp = getColorPool();
 		return cp == null ? super.getCreateColorPool() : cp;
 	}
 }

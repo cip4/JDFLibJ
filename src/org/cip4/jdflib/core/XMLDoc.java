@@ -90,6 +90,7 @@ import java.net.URLConnection;
 import java.util.Enumeration;
 
 import javax.mail.BodyPart;
+import javax.mail.Multipart;
 
 import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
@@ -1540,17 +1541,24 @@ public class XMLDoc
 		{
 			try
 			{
-				final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
-				urlCon.setDoOutput(true);
-				urlCon.setRequestProperty("Connection", "keep-alive");
-				urlCon.setRequestProperty("Content-Type", strContentType);
-				if (det != null)
+				final URLConnection uc = url.openConnection();
+				if (uc instanceof HttpURLConnection)
 				{
-					det.applyTo(urlCon);
-
+					final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+					urlCon.setDoOutput(true);
+					urlCon.setRequestProperty("Connection", "keep-alive");
+					urlCon.setRequestProperty("Content-Type", strContentType);
+					if (det != null)
+					{
+						det.applyTo(urlCon);
+					}
+					write2Stream(urlCon.getOutputStream(), 0, true);
+					return urlCon;
 				}
-				write2Stream(urlCon.getOutputStream(), 0, true);
-				return urlCon;
+				else
+				{
+					return null;
+				}
 			}
 			catch (final IOException e)
 			{
@@ -1589,6 +1597,21 @@ public class XMLDoc
 	public BodyPart getBodyPart()
 	{
 		return m_doc.m_Bodypart;
+	}
+
+	/**
+	 * get the Javax.Mail.Multipart
+	 * 
+	 * @return the Multipart
+	 */
+	public Multipart getMultiPart()
+	{
+		final BodyPart bp = getBodyPart();
+		if (bp == null)
+		{
+			return null;
+		}
+		return bp.getParent();
 	}
 
 	/**

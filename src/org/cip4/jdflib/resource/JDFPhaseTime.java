@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,8 +76,6 @@
  */
 
 package org.cip4.jdflib.resource;
-
-import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPhaseTime;
@@ -219,7 +217,7 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	 * !!! Do not change the signature of this method
 	 */
 	@Override
-	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourceLinkPool, nMax);
 	}
@@ -281,7 +279,6 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	/**
 	 * return the ResourceLink in <code>this</code>, null if none exists
 	 * 
-	 * @param iSkip the n'th resourceLink to retrieve
 	 * @return JDFResourceLink - this phaseTimes ResourceLink
 	 */
 	public VElement getLinkVector()
@@ -321,7 +318,8 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	}
 
 	/**
-	 * @param m_moduleid the list of module ids to add, if null: nop
+	 * @param moduleIDs the list of module ids to add, if null: nop
+	 * @param moduleTypes
 	 * @return the list of ModulePhase element
 	 * @throws IllegalArgumentException if the vectors have different lengths
 	 */

@@ -220,7 +220,7 @@ public class JDFMerge
 		// the parents of the merged node
 		if (bUpdateStati)
 		{
-			overWriteNode.updatePartStatus(parts, true, true);
+			overWriteNode.updatePartStatus(parts, true, true, 0);
 		}
 		return overWriteNode;
 	}

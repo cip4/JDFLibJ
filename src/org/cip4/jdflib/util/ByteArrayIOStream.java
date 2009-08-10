@@ -81,8 +81,12 @@ package org.cip4.jdflib.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.apache.commons.io.IOUtils;
 
 /**
  * Shared input / outputStream class write once, read many...
@@ -126,27 +130,34 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		}
 		try
 		{
-			int available = is.available();
+			final int available = is.available();
 			if (available > 1000)
 			{
 				buf = new byte[available + 1000];
 			}
-			final int pos = 0;
-			while (available > 0)
-			{
-				final int n = is.read(buf, pos, available);
-				if (n > 0)
-				{
-					count += n;
-				}
-				available = is.available();
-			}
+			IOUtils.copy(is, this);
 		}
 		catch (final IOException e)
 		{
 			// nop - we filled to the end
 		}
+	}
 
+	/**
+	 * create a ByteArrayIOStream from a file
+	 * @param f the file
+	 * @throws IOException
+	 */
+	public ByteArrayIOStream(final File f) throws IOException
+	{
+		super(10);
+		if (f.length() > 10)
+		{
+			this.buf = new byte[(int) f.length() + 100];
+		}
+		final FileInputStream fis = new FileInputStream(f);
+		IOUtils.copy(fis, this);
+		fis.close();
 	}
 
 	/**
@@ -158,6 +169,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	{
 		super();
 		buf = b;
+		count = b.length;
 	}
 
 	/**

@@ -79,7 +79,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -105,6 +104,7 @@ import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumSpawnStatus;
 import org.cip4.jdflib.resource.process.JDFIdentical;
@@ -151,7 +151,13 @@ public class JDFSpawn
 	 * if true, ensure sufficient partitioning of rw resources, else do not add missing partitions
 	 */
 	public boolean bFixResources = true;
+	/**
+	 * 
+	 */
 	public String parentURL = null;
+	/**
+	 * 
+	 */
 	public String spawnURL = null;
 	/**
 	 * list of all resources to copy rw
@@ -163,6 +169,7 @@ public class JDFSpawn
 	public VJDFAttributeMap vSpawnParts = null;
 
 	private Set<JDFAttributeMap> setSpawnParts = null;
+	private boolean bInformative = false;
 	/**
 	 * exception id for multiple merge attempt
 	 */
@@ -185,19 +192,10 @@ public class JDFSpawn
 	 * spawn a node; url is the file name of the new node, vRWResourceUsage is the vector of Resources Usages (or Names if no usage exists for the process) that
 	 * are spawned RW, all others are spawned read only; vParts is the vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
 	 * 
-	 * @param parentURL
-	 * @param spawnURL : URL of the spawned JDF file
-	 * @param vRWResources : vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
 	 * the format is one of:<br>
 	 * ResName:Input<br>
 	 * ResName:Output<br>
 	 * ResName:ProcessUsage<br>
-	 * @param VJDFAttributeMap vSpawnParts: vector of mAttributes that describe the parts to spawn, only valid PartIDKeys are allowed
-	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
-	 * @param bCopyNodeInfo copy the NodeInfo elements into the Ancestors
-	 * @param bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
-	 * @param bCopyComments copy the Comment elements into the Ancestors
-	 * 
 	 * @return The spawned node
 	 * @since 050831 added bCopyComments @ tbd enhance nested spawning of partitioned nodes
 	 * 
@@ -331,7 +329,7 @@ public class JDFSpawn
 	private void checkMultipleRWRes()
 	{
 		// only check if not explicitly requested not to check
-		final Collection vCheck = checkSpawnedResources();
+		final Collection<JDFResource> vCheck = checkSpawnedResources();
 		if (vCheck != null)
 		{
 			String strIDs = "JDFNode.spawn: multiply spawned rw resources: ";
@@ -373,14 +371,6 @@ public class JDFSpawn
 	/**
 	 * return the resources that would be spawned RW multiple times
 	 * 
-	 * @param VString vRWResourceUsage: vector of resource names and Usage / ProcessUsage that are spawned as rw <br>
-	 * the format is one of:<br>
-	 * ResName<br>
-	 * ResName:Input<br>
-	 * ResName:Output<br>
-	 * ResName:ProcessUsage<br>
-	 * ID<br>
-	 * @param VJDFAttributeMap vParts: vector of JDFAttributeMaps that describe the parts to spawn
 	 * 
 	 * @return Collection: set of resources or resource partitions that would be spawned rw multiple times null if all is well
 	 */
@@ -390,7 +380,7 @@ public class JDFSpawn
 		final HashSet<JDFResource> vMultiRes = new LinkedHashSet<JDFResource>();
 		// grab the root node and all it's children
 
-		final HashSet vRootLinks = node.getAllRefs(null, true);
+		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, true);
 		final Iterator<JDFElement> iter = vRootLinks.iterator();
 		while (iter.hasNext())
 		{
@@ -551,10 +541,7 @@ public class JDFSpawn
 	 * 
 	 * @param spawnAudit :
 	 * @param root :
-	 * @param vRWresources :XXX
-	 * @param vParts :
-	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
-	 * @return int: number of resources added to the spawned node
+	 * @return int number of resources added to the spawned node
 	 */
 	private int addSpawnedResources(final JDFNode rootOut, final JDFSpawned spawnAudit)
 	{
@@ -572,7 +559,7 @@ public class JDFSpawn
 
 		// grab the root node and all it's children
 
-		final HashSet vRootLinks = node.getAllRefs(null, false);
+		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, false);
 
 		// create a HashSet with all IDs of the newly created Node
 		final HashSet<String> allIDsCopied = rootOut.fillHashSet(AttributeName.ID, null);
@@ -620,8 +607,8 @@ public class JDFSpawn
 				final boolean isThereAlready = allIDsCopied.contains(refID);
 				final JDFResource.EnumSpawnStatus copyStatus = bResRW ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
 
-				final HashSet vvRO = new LinkedHashSet();
-				final HashSet vvRW = new LinkedHashSet();
+				final HashSet<String> vvRO = new LinkedHashSet<String>();
+				final HashSet<String> vvRW = new LinkedHashSet<String>();
 				if (rRoot == null)
 				{
 					rRoot = (JDFResource) node.getTarget(refID, AttributeName.ID);
@@ -1066,12 +1053,12 @@ public class JDFSpawn
 		if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit))
 		{
 			final VString vPartKeys = r.getPartIDKeys();
-			final Vector<ValuedEnum> vImplicitPartitions = r.getImplicitPartitions();
+			final Vector<EnumPartIDKey> vImplicitPartitions = r.getImplicitPartitions();
 			if (vImplicitPartitions != null)
 			{
 				for (int ii = 0; ii < vImplicitPartitions.size(); ii++)
 				{
-					final JDFResource.EnumPartIDKey e = (JDFResource.EnumPartIDKey) vImplicitPartitions.elementAt(ii);
+					final JDFResource.EnumPartIDKey e = vImplicitPartitions.elementAt(ii);
 					vPartKeys.add(e.getName());
 				}
 			}
@@ -1303,20 +1290,17 @@ public class JDFSpawn
 	 * @param resInPool internal recursion checker
 	 * @param vRWResources write resources
 	 * 
-	 * @return VString vector of resource names that have been copied
 	 */
-	private void copySpawnedResource(final JDFResourcePool p, final JDFResource r, final JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources,
-			final HashSet vRWIDs, final HashSet vROIDs, final HashSet allIDsCopied)
+	private void copySpawnedResource(final JDFResourcePool p, final JDFResource r, JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources,
+			final HashSet<String> vRWIDs, final HashSet<String> vROIDs, final HashSet<String> allIDsCopied)
 	{
-		JDFResource.EnumSpawnStatus copyStatusLocal = copyStatus;
-
 		if (r == null)
 		{
 			return;
 		}
 
 		// r is not yet here copy r
-		final boolean bRW = copyStatusLocal == JDFResource.EnumSpawnStatus.SpawnedRW;
+		final boolean bRW = copyStatus == JDFResource.EnumSpawnStatus.SpawnedRW;
 		final String rID = r.getID();
 		if (!allIDsCopied.contains(rID))
 		{
@@ -1328,8 +1312,11 @@ public class JDFSpawn
 				reducePartitions(rNew);
 			}
 
-			spawnPart(r, spawnID, copyStatusLocal, true);
-			spawnPart(rNew, spawnID, copyStatusLocal, false);
+			if (!bInformative) // in case of informative, we kill main anyhow - no use modifying it
+			{
+				spawnPart(r, spawnID, copyStatus, true);
+			}
+			spawnPart(rNew, spawnID, copyStatus, false);
 
 			if (bRW)
 			{
@@ -1364,10 +1351,10 @@ public class JDFSpawn
 					// list
 					if (bRW)
 					{
-						copyStatusLocal = resFitsRWRes(next, vRWResources) ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
+						copyStatus = resFitsRWRes(next, vRWResources) ? JDFResource.EnumSpawnStatus.SpawnedRW : JDFResource.EnumSpawnStatus.SpawnedRO;
 					}
 					// recurse into refelements
-					copySpawnedResource(p, next, copyStatusLocal, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
+					copySpawnedResource(p, next, copyStatus, spawnID, vRWResources, vRWIDs, vROIDs, allIDsCopied);
 				}
 			}
 		}
@@ -1461,7 +1448,7 @@ public class JDFSpawn
 			throw new JDFException("fixSpawnPartitions - adding incompatible resources");
 		}
 
-		// move away all preexisting partititons and dump them int the new nodes
+		// move away all pre-existing partitions and dump them into the new nodes
 		final VElement ve = r.getChildElementVector_KElement(r.getNodeName(), r.getNamespaceURI(), null, true, 9999999);
 		final KElement[] tmp = new KElement[ve.size()];
 		for (int i = 0; i < ve.size(); i++)
@@ -1501,6 +1488,7 @@ public class JDFSpawn
 	 */
 	public JDFNode spawnInformative()
 	{
+		bInformative = true;
 		final JDFDoc docNew = new JDFDoc(ElementName.JDF);
 		JDFNode rootOut = (JDFNode) docNew.getRoot();
 		final JDFNode thisRoot = node.getJDFRoot();
@@ -1546,7 +1534,7 @@ public class JDFSpawn
 	 * @since 050831 added bCopyComments @ tbd enhance nested spawning of partitioned nodes default: spawn(parentURL, null, null, null, false, false, false,
 	 * false)
 	 */
-	public JDFNode spawn(final String _parentURL, final String _spawnURL, final Vector _vRWResources_in, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly,
+	public JDFNode spawn(final String _parentURL, final String _spawnURL, final VString _vRWResources_in, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly,
 			final boolean _bCopyNodeInfo, final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
 	{
 		bCopyComments = _bCopyComments;
@@ -1557,6 +1545,7 @@ public class JDFSpawn
 		vRWResources_in = new VString(_vRWResources_in);
 		spawnURL = _spawnURL;
 		parentURL = _parentURL;
+		bInformative = false;
 		return spawn();
 
 	}
@@ -1569,13 +1558,14 @@ public class JDFSpawn
 	 * 
 	 * vRWResourceUsage is the vector of Resources Usages, Resource Names or Resource IDs that are spawned RW, all others are spawned read only; vParts is the
 	 * vector of part maps that are to be spawned, defaults to no part, i.e. the whole thing
+	 * @param _parentURL
 	 * 
-	 * @param spawnURL : URL of the spawned JDF file
-	 * @param vParts : vector of mAttributes that describe the parts to spawn
-	 * @param bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
-	 * @param bCopyNodeInfo copy the NodeInfo elements into the Ancestors
-	 * @param bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
-	 * @param bCopyComments copy the Comment elements into the Ancestors
+	 * @param _spawnURL : URL of the spawned JDF file
+	 * @param _vSpawnParts : vector of mAttributes that describe the parts to spawn
+	 * @param _bSpawnROPartsOnly if true, only the parts of RO resources that are specified in vParts are spawned, else the complete resource is spawned
+	 * @param _bCopyNodeInfo copy the NodeInfo elements into the Ancestors
+	 * @param _bCopyCustomerInfo copy the CustomerInfo elements into the Ancestors
+	 * @param _bCopyComments copy the Comment elements into the Ancestors
 	 * @return JDFDoc: The spawned node's owner document.
 	 * 
 	 * @default spawnInformative(parentURL, null, null, false, false, false, false);

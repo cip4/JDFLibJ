@@ -294,7 +294,7 @@ public class JDFResourcePool extends JDFPool
 	 * 
 	 * @return Vector - all IDs of the pool childs
 	 */
-	public Vector getResIds()
+	public VString getResIds()
 	{
 		final VString setID = new VString();
 
@@ -318,7 +318,7 @@ public class JDFResourcePool extends JDFPool
 	 * <p>
 	 * default: GetResource(name, 0, JDFConstants.EMPTYSTRING)
 	 * 
-	 * @param name name of the resource to look for
+	 * @param strName name of the resource to look for
 	 * @param i the index of the child, or -1 to create a new one
 	 * @param nameSpaceURI the namespace to search in
 	 * 
@@ -337,9 +337,9 @@ public class JDFResourcePool extends JDFPool
 	}
 
 	/**
-	 * append a resource
+	 * append an existing resource by moving it here
 	 * 
-	 * @param name name of the resource to append
+	 * @param res name of the resource to append
 	 * 
 	 * @return JDFResource: the appended resource
 	 */
@@ -388,6 +388,7 @@ public class JDFResourcePool extends JDFPool
 	 * 
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public VString copyResource(final JDFResource r, final JDFResource.EnumSpawnStatus copyStatus, final VJDFAttributeMap vParts, final String spawnID)
 	{
@@ -481,7 +482,7 @@ public class JDFResourcePool extends JDFPool
 	/**
 	 * Method GetPoolChildren Gets all children with the attribute name,mAttrib, nameSpaceURI out of the pool
 	 * 
-	 * @param name - name of the child
+	 * @param strName - name of the child
 	 * @param mAttrib - a attribute to search for
 	 * @param nameSpaceURI
 	 * @return VElement - a vector with all elements in the pool matching the conditions
@@ -523,7 +524,7 @@ public class JDFResourcePool extends JDFPool
 	 * default: GetPoolChild(i, null, null, null)
 	 * 
 	 * @param i the index of the child or -1 to make a new one.
-	 * @param name the name of the element
+	 * @param strName the name of the element
 	 * @param mAttrib the attribute of the element
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFResource: the pool child matching the conditions above
@@ -575,7 +576,7 @@ public class JDFResourcePool extends JDFPool
 	 * @return Vector of unknown element nodenames
 	 */
 	@Override
-	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourcePool, nMax);
 
@@ -602,19 +603,18 @@ public class JDFResourcePool extends JDFPool
 	 * @return HashSet: the vector of referenced resource IDs
 	 */
 	@Override
-	public HashSet getAllRefs(final HashSet vDoneRefs, final boolean bRecurse)
+	public HashSet<JDFElement> getAllRefs(HashSet<JDFElement> vDoneRefs, final boolean bRecurse)
 	{
-		HashSet vDoneRefsLocal = vDoneRefs;
 
 		final VElement vResources = getPoolChildren(null, null, null);
 		final int size = vResources.size();
 		for (int i = 0; i < size; i++)
 		{
 			final JDFResource r = (JDFResource) vResources.elementAt(i);
-			vDoneRefsLocal = r.getResourceRoot().getAllRefs(vDoneRefsLocal, bRecurse);
+			vDoneRefs = r.getResourceRoot().getAllRefs(vDoneRefs, bRecurse);
 		}
 
-		return vDoneRefsLocal;
+		return vDoneRefs;
 	}
 
 	// ////////////////////////////////////////////////////////////////////

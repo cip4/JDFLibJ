@@ -12,8 +12,7 @@ package org.cip4.jdflib.util;
  * hashCode()
  * </pre>
  * 
- * values in data objects. For example, to calculate the hashCode of a data object, use the methods of this class as
- * follows:
+ * values in data objects. For example, to calculate the hashCode of a data object, use the methods of this class as follows:
  * 
  * <pre>
  * int myIntField;
@@ -30,11 +29,13 @@ package org.cip4.jdflib.util;
  * </pre>
  * 
  * <br>
- * Hint: Start your hashCode calculation depending on the object your data object extends. If you extend Object
- * initialize your hash value to 0. Otherwise initialize hash to super.hashCode(). See the example code.
+ * Hint: Start your hashCode calculation depending on the object your data object extends. If you extend Object initialize your hash value to 0. Otherwise
+ * initialize hash to super.hashCode(). See the example code.
  * 
  * @author Manfred Steinbach
+ * @deprecated - check use
  */
+@Deprecated
 public class HashUtil extends Object
 {
 	public static final int PRIME = 1000003;
@@ -44,49 +45,49 @@ public class HashUtil extends Object
 		super();
 	}
 
-	public static final int hashCode(int source, boolean x)
+	public static final int hashCode(final int source, final boolean x)
 	{
 		return PRIME * source + (x ? 1 : 0);
 	}
 
-	public static final int hashCode(int source, int x)
+	public static final int hashCode(final int source, final int x)
 	{
 		return PRIME * source + x;
 	}
 
-	public static final int hashCode(int source, long x)
+	public static final int hashCode(final int source, final long x)
 	{
 		return PRIME * source + (int) (PRIME * (x >>> 32) + (x & 0xFFFFFFFF));
 	}
 
-	public static final int hashCode(int source, float x)
+	public static final int hashCode(final int source, final float x)
 	{
 		return hashCode(source, ((new Float(x).equals(new Float(0.0))) ? 0 : Float.floatToIntBits(x)));
 	}
 
-	public static final int hashCode(int source, double x)
+	public static final int hashCode(final int source, final double x)
 	{
 		return hashCode(source, ((new Double(x).equals(new Double(0.0))) ? 0L : Double.doubleToLongBits(x)));
 	}
 
-	public static final int hashCode(int source, Object x)
+	public static final int hashCode(final int source, final Object x)
 	{
 		return (null == x) ? 0 : PRIME * source + x.hashCode();
 	}
 
-	public static final int hashCode(int source, Object[] x)
+	public static final int hashCode(final int source, final Object[] x)
 	{
 		int sourceLocal = source;
-		
+
 		if (null != x)
 		{
-			int len = x.length;
+			final int len = x.length;
 			for (int i = 0; i < len; i++)
 			{
 				sourceLocal = hashCode(sourceLocal, x[i]);
 			}
 		}
-		
+
 		return sourceLocal;
 	}
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,8 +77,6 @@
  */
 package org.cip4.jdflib.resource.process;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFRefElement;
@@ -97,8 +95,7 @@ public class JDFSourceResource extends JDFElement
 	 * @param ownerDocument
 	 * @param qualifiedName
 	 */
-	public JDFSourceResource(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -110,8 +107,7 @@ public class JDFSourceResource extends JDFElement
 	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFSourceResource(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -124,8 +120,7 @@ public class JDFSourceResource extends JDFElement
 	 * @param qualifiedName
 	 * @param localName
 	 */
-	public JDFSourceResource(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFSourceResource(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,9 +144,13 @@ public class JDFSourceResource extends JDFElement
 		while (true)
 		{
 			if (e instanceof JDFRefElement)
+			{
 				return (JDFRefElement) e;
+			}
 			if (e == null)
+			{
 				return null;
+			}
 			e = e.getNextSiblingElement();
 		}
 	}
@@ -179,7 +178,7 @@ public class JDFSourceResource extends JDFElement
 	 * @return
 	 */
 	@Override
-	@SuppressWarnings(value={"deprecation"})
+	@SuppressWarnings(value = { "deprecation" })
 	public JDFResource getTarget()
 	{
 		final JDFRefElement refElement = getRefElement();
@@ -194,12 +193,11 @@ public class JDFSourceResource extends JDFElement
 	/**
 	 * return a vector of unknown element nodenames
 	 * 
-	 * @param boolean bIgnorePrivate - used by JDFElement during the validation
-	 *        !!! Do not change the signature of this method
+	 * @param boolean bIgnorePrivate - used by JDFElement during the validation !!! Do not change the signature of this method
 	 * @param int nMax - maximum size of the returned vector
 	 * @return Vector - vector of unknown element nodenames
 	 * 
-	 *         default: GetInvalidElements(true, 999999)
+	 * default: GetInvalidElements(true, 999999)
 	 */
 	/**
 	 * return a vector of unknown element nodenames
@@ -207,42 +205,52 @@ public class JDFSourceResource extends JDFElement
 	 * @default getUnknownElements(bIgnorePrivate, 99999999)
 	 */
 	@Override
-	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.RefElement, nMax);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+	 */
 	@Override
-	public VString getInvalidElements(EnumValidationLevel level,
-			boolean bIgnorePrivate, int nMax)
+	public VString getInvalidElements(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		boolean bIgnorePrivateLocal = bIgnorePrivate;
-		
-		if (bIgnorePrivateLocal)
-			bIgnorePrivateLocal = false; // dummy to fool compiler
-		
-		VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
-		if (v.size() >= nMax)
-			return v;
 
-		VElement v2 = getChildElementVector_KElement(null, null, null, true, 0);
+		if (bIgnorePrivateLocal)
+		{
+			bIgnorePrivateLocal = false; // dummy to fool compiler
+		}
+
+		final VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
+		if (v.size() >= nMax)
+		{
+			return v;
+		}
+
+		final VElement v2 = getChildElementVector_KElement(null, null, null, true, 0);
 		int n = 0;
 		final int size = v2.size();
 		for (int i = 0; i < size; i++)
 		{
 			if (v2.elementAt(i) instanceof JDFRefElement)
+			{
 				n++;
+			}
 		}
-		
+
 		if (n > 1)
 		{
 			for (int i = 0; i < size; i++)
 			{
 				if (v2.elementAt(i) instanceof JDFRefElement)
+				{
 					v.appendUnique(v2.elementAt(i).getLocalName());
+				}
 			}
 		}
-		
+
 		return v;
 	}
 
@@ -279,14 +287,12 @@ public class JDFSourceResource extends JDFElement
 	/**
 	 * delete this sourceResource and it's target
 	 * 
-	 * @param bool
-	 *            bCheckRefCount if true, check that no other element refers to
-	 *            the target before deleting<br>
-	 *            if bCheckRefCount=false, the target is force deleted
+	 * @param bool bCheckRefCount if true, check that no other element refers to the target before deleting<br>
+	 * if bCheckRefCount=false, the target is force deleted
 	 * @return JDFElement the deleted targeelement
 	 * @since 290620
 	 */
-	public JDFElement deleteRef(boolean bCheckRefCount)
+	public JDFElement deleteRef(final boolean bCheckRefCount)
 	{
 		final JDFRefElement refElement = getRefElement();
 		if (refElement != null)
@@ -296,28 +302,31 @@ public class JDFSourceResource extends JDFElement
 		return null;
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////////////////////////
 	// //
 	/**
 	 * get list of missing elements
 	 * 
-	 * @param nMax
-	 *            maximum size of the returned vector
+	 * @param nMax maximum size of the returned vector
 	 */
 	@Override
-	public VString getMissingElements(int nMax)
+	public VString getMissingElements(final int nMax)
 	{
 		VString vs = getTheElementInfo().requiredElements();
 		vs = getMissingElementVector(vs, nMax);
-		VElement v2 = getChildElementVector_KElement(null, null, null, true, 0);
+		final VElement v2 = getChildElementVector_KElement(null, null, null, true, 0);
 		int n = 0;
 		for (int i = 0; i < v2.size(); i++)
 		{
 			if (v2.elementAt(i) instanceof JDFRefElement)
+			{
 				n++;
+			}
 		}
 		if (n == 0)
+		{
 			vs.add("RefElement");
+		}
 
 		return vs;
 	}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,7 +72,7 @@
  * class JDFFileSpec
  * ==========================================================================
  * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author: sabjon@topmail.de    using a code generator 
+ * Author: sabjon@topmail.de    using a code generator 
  * Warning! very preliminary test version. 
  * Interface subject to change without prior notice! 
  */
@@ -81,61 +81,66 @@ package org.cip4.jdflib.resource.process;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.HashMap;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoFileSpec;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.mime.MimeReader;
 import org.w3c.dom.DOMException;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * July 24, 2009
+ */
 public class JDFFileSpec extends JDFAutoFileSpec
 {
 	private static final long serialVersionUID = 1L;
-	private static HashMap<String, String> mimeMap = null;
 
 	/**
 	 * Constructor for JDFFileSpec
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
+	 * 
 	 * @throws DOMException
 	 */
-	public JDFFileSpec(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFileSpec
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFFileSpec(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFFileSpec
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
 	 * @param qualifiedName
-	 * @param localName
+	 * @param myLocalName
 	 * @throws DOMException
+	 * 
 	 */
-	public JDFFileSpec(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFFileSpec(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoFileSpec#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -145,12 +150,10 @@ public class JDFFileSpec extends JDFAutoFileSpec
 	/**
 	 * sets the URL attribute to an absolute file IRL (internationalized)
 	 * 
-	 * @param f
-	 *            the file to set the URL to
-	 * @param boolean bEscape128 if true, escape chars>128 (URL) else don't
-	 *        escape (IRL)
+	 * @param f the file to set the URL to
+	 * @param bEscape128 if true, escape chars>128 (URL) else don't escape (IRL)
 	 */
-	public void setAbsoluteFileURL(File f, boolean bEscape128)
+	public void setAbsoluteFileURL(final File f, final boolean bEscape128)
 	{
 		final String s = UrlUtil.fileToUrl(f, bEscape128);
 		setMimeURL(s);
@@ -159,15 +162,11 @@ public class JDFFileSpec extends JDFAutoFileSpec
 	/**
 	 * sets the URL attribute to an absolute file IRL (internationalized)
 	 * 
-	 * @param f
-	 *            the file to set the URL to
-	 * @param baseDir
-	 *            the File representing the relative location. if null use
-	 *            current working dir
-	 * @param boolean bEscape128 if true, escape chars>128 (URL) else don't
-	 *        escape (IRL)
+	 * @param f the file to set the URL to
+	 * @param baseDir the File representing the relative location. if null use current working dir
+	 * @param bEscape128 if true, escape chars>128 (URL) else don't escape (IRL)
 	 */
-	public void setRelativeURL(File f, File baseDir, boolean bEscape128)
+	public void setRelativeURL(final File f, final File baseDir, final boolean bEscape128)
 	{
 		final String s = UrlUtil.getRelativeURL(f, baseDir, bEscape128);
 		setMimeURL(s);
@@ -178,56 +177,95 @@ public class JDFFileSpec extends JDFAutoFileSpec
 	/**
 	 * get the input stream that reads from URL
 	 * 
-	 * @return InputStream the input stream that the url points to, null if the
-	 *         url is inaccessible
+	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
 	 */
 	public InputStream getURLInputStream()
 	{
-		String url = getURL();
-		if (url.equals(JDFConstants.EMPTYSTRING))
+		final String url = StringUtil.getNonEmpty(getURL());
+		if (url == null)
+		{
 			return null;
-		return UrlUtil.getURLInputStream(getURL(), getOwnerDocument_KElement()
-				.getBodyPart());
+		}
+		return new MimeReader(getOwnerDocument_KElement().getMultiPart()).getURLInputStream(url);
 	}
 
 	/**
 	 * sets URL and MimeType by matching the extensions
 	 * 
-	 * @param url
-	 *            the url to set URL
+	 * @param url the url to set URL
 	 */
-	public void setMimeURL(String url)
+	public void setMimeURL(final String url)
 	{
 		setURL(url);
-		setMimeType(getMimeTypeFromURL(url));
+		setMimeType(UrlUtil.getMimeTypeFromURL(url));
+	}
+
+	/**
+	 * physically store the file at the location specified in dir and also modify this to reflect the new location
+	 * @param dir
+	 * @return the file that corresponds to the moved url reference, null if an error occurred
+	 */
+	public File moveToDir(final File dir)
+	{
+		if (dir == null)
+		{
+			return null;
+		}
+		if (!dir.isDirectory())
+		{
+			return null;
+		}
+		// check for nop
+		final File oldFile = UrlUtil.urlToFile(getURL());
+		if (oldFile != null)
+		{
+			final File oldDir = oldFile.getParentFile();
+			if (FileUtil.equals(oldDir, dir))
+			{
+				return oldFile;
+			}
+		}
+
+		final String fileName = getFileName();
+		final File localFile = fileName == null ? null : new File(fileName);
+		File out = FileUtil.getFileInDirectory(dir, localFile);
+		if (out.exists())
+		{
+			out.delete();
+		}
+		out = FileUtil.streamToFile(getURLInputStream(), out);
+		if (out != null)
+		{
+			setURL(UrlUtil.fileToUrl(out, false));
+		}
+		return out;
+	}
+
+	/**
+	 * returns the filename of the referenced object, even if it is a cid or http url
+	 * 
+	 * @return the file name of the referenced object
+	 */
+	public String getFileName()
+	{
+		final String url = getURL();
+		if (StringUtil.getNonEmpty(url) == null)
+		{
+			return null;
+		}
+		return new MimeReader(getOwnerDocument_KElement().getMultiPart()).getFileName(url);
 	}
 
 	/**
 	 * generates the correct MIMEType for a given URL and sets it
 	 * 
 	 * @param url
+	 * @return
+	 * @deprecated use @see UrlUtil.getMimeTypeFromURL(url)
 	 */
-	public static String getMimeTypeFromURL(String url)
+	@Deprecated
+	public static String getMimeTypeFromURL(final String url)
 	{
-		if (mimeMap == null)
-		{
-			mimeMap = new HashMap<String, String>();
-			mimeMap.put("pdf", JDFConstants.MIME_PDF);
-			mimeMap.put("ps", JDFConstants.MIME_PS);
-
-			mimeMap.put("ppf", JDFConstants.MIME_CIP3);
-			mimeMap.put("ppml", JDFConstants.MIME_PPML);
-			mimeMap.put("jdf", JDFConstants.MIME_JDF);
-			mimeMap.put("jmf", JDFConstants.MIME_JMF);
-
-			mimeMap.put("xml", JDFConstants.MIME_TEXTXML);
-
-			mimeMap.put("jpg", JDFConstants.MIME_JPG);
-			mimeMap.put("jpeg", JDFConstants.MIME_JPG);
-			mimeMap.put("tif", JDFConstants.MIME_TIFF);
-			mimeMap.put("tiff", JDFConstants.MIME_TIFF);
-		}
-		String extension = UrlUtil.extension(url);
-		return extension == null ? null : mimeMap.get(extension.toLowerCase());
+		return UrlUtil.getMimeTypeFromURL(url);
 	}
 }

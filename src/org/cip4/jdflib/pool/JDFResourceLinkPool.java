@@ -254,7 +254,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @param bInOut what kind of links you want to have (true for input)
 	 * @param bLink if true, return the resource links. if false return the resources
-	 * @param resType type of the resource to get ( * for all)
+	 * @param resName type of the resource to get ( * for all)
 	 * @param resProcUsage process usage of the resource to get (* for all)
 	 * @deprecated use getInOutLinks with EnumUsage signature
 	 * @return VElement - Vector with the found resource links
@@ -394,13 +394,13 @@ public class JDFResourceLinkPool extends JDFPool
 		{
 			return null;
 		}
-	
+
 		final String id = r.getID();
 		if (id == null)
 		{
 			return null;
 		}
-	
+
 		// get any possible links
 		final VElement v = getInOutLinks(usage, true, null, processUsage);
 		if (v != null)
@@ -410,14 +410,14 @@ public class JDFResourceLinkPool extends JDFPool
 			for (int i = 0; i < vSize; i++)
 			{
 				final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
-	
+
 				if (resLink != null && resLink.getrRef().equals(id) && resLink.getNodeName().equals(r.getLinkString()))
 				{
 					return resLink;
 				}
 			}
 		}
-	
+
 		// nothing found
 		return null;
 	}
@@ -495,21 +495,21 @@ public class JDFResourceLinkPool extends JDFPool
 
 		if (bComplete)
 		{
-			final Vector vKeys = getPartIDKeys();
+			final VString vKeys = getPartIDKeys();
 
 			final int keySize = vKeys.size();
-			final Vector vvValues = new Vector();
+			final Vector<VString> vvValues = new Vector<VString>();
 			final int pI[] = new int[keySize];
 			final int pISize[] = new int[keySize];
 
 			for (int i = 0; i < keySize; i++)
 			{
-				if (EnumPartIDKey.getEnum((String) vKeys.elementAt(i)) != null)
+				if (EnumPartIDKey.getEnum(vKeys.elementAt(i)) != null)
 				{
 					vvValues.addElement(getPartValues(JDFResource.EnumPartIDKey.getEnum(i)));
 
 					pI[i] = 0;
-					pISize[i] = ((Vector) vvValues.elementAt(i)).size();
+					pISize[i] = vvValues.elementAt(i).size();
 				}
 			}
 
@@ -520,7 +520,7 @@ public class JDFResourceLinkPool extends JDFPool
 
 				for (int i = 0; i < keySize; i++)
 				{
-					m.put((String) vKeys.elementAt(i), (String) ((Vector) vvValues.elementAt(i)).elementAt(pI[i]));
+					m.put(vKeys.elementAt(i), vvValues.elementAt(i).elementAt(pI[i]));
 				}
 
 				vMap.addElement(m);
@@ -608,7 +608,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return Vector
 	 */
-	public Vector getPartIDKeys()
+	public VString getPartIDKeys()
 	{
 		final VString vs = new VString();
 		final VElement links = getPoolChildren(null, null, null);
@@ -639,16 +639,16 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return Vector - vector with all values of the attribute partType
 	 */
-	public Vector getPartValues(final JDFResource.EnumPartIDKey partType)
+	public VString getPartValues(final JDFResource.EnumPartIDKey partType)
 	{
-		final Vector vs = new Vector();
+		final VString vs = new VString();
 		final VElement links = getPoolChildren(null, null, null);
 		if (links != null)
 		{
 			for (int i = 0; i < links.size(); i++)
 			{
 				final JDFResourceLink link = (JDFResourceLink) links.elementAt(i);
-				final Vector keys = link.getLinkRoot().getPartValues(partType);
+				final VString keys = link.getLinkRoot().getPartValues(partType);
 
 				for (int j = 0; j < keys.size(); j++)
 				{
@@ -666,7 +666,7 @@ public class JDFResourceLinkPool extends JDFPool
 	/**
 	 * Gets all children with the attribute <code>name, mAttrib, nameSpaceURI</code> out of the pool
 	 * 
-	 * @param name name of the Child
+	 * @param strName name of the Child
 	 * @param mAttrib a attribute to search for
 	 * @param nameSpaceURI the namespace uri
 	 * 
@@ -741,7 +741,7 @@ public class JDFResourceLinkPool extends JDFPool
 	 * !!! Do not change the signature of this method
 	 */
 	@Override
-	public Vector getUnknownElements(final boolean bIgnorePrivate, final int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ResourceLinkPool, nMax);
 	}
@@ -754,10 +754,8 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @return vElement: the vector of referenced resource ids
 	 */
 	@Override
-	public HashSet getAllRefs(final HashSet vDoneRefs, final boolean bRecurse)
+	public HashSet<JDFElement> getAllRefs(HashSet<JDFElement> vDoneRefs, final boolean bRecurse)
 	{
-		HashSet vDoneRefsLocal = vDoneRefs;
-
 		final VElement vResourceLinks = getPoolChildren(null, null, null);
 		if (vResourceLinks != null)
 		{
@@ -765,22 +763,21 @@ public class JDFResourceLinkPool extends JDFPool
 			for (int i = 0; i < size; i++)
 			{
 				final JDFResourceLink rl = (JDFResourceLink) vResourceLinks.elementAt(i);
-				if (!vDoneRefsLocal.contains(rl))
+				if (!vDoneRefs.contains(rl))
 				{
-					vDoneRefsLocal.add(rl);
+					vDoneRefs.add(rl);
 					if (bRecurse)
 					{
 						final JDFResource r = rl.getLinkRoot();
-						if (r != null && !vDoneRefsLocal.contains(r))
+						if (r != null && !vDoneRefs.contains(r))
 						{
-							vDoneRefsLocal = r.getAllRefs(vDoneRefsLocal, bRecurse);
+							vDoneRefs = r.getAllRefs(vDoneRefs, bRecurse);
 						}
 					}
 				}
 			}
 		}
-
-		return vDoneRefsLocal;
+		return vDoneRefs;
 	}
 
 }

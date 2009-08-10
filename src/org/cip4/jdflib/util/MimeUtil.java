@@ -75,49 +75,27 @@
  */
 package org.cip4.jdflib.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.ConnectException;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Vector;
 
-import javax.activation.DataHandler;
 import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
-import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.util.SharedFileInputStream;
 
-import org.apache.commons.io.IOUtils;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
-import org.cip4.jdflib.jmf.JDFResponse;
-import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.mime.BodyPartHelper;
+import org.cip4.jdflib.util.mime.MimeHelper;
+import org.cip4.jdflib.util.mime.MimeReader;
+import org.cip4.jdflib.util.mime.MimeWriter;
 
 /**
  * MIME utilities for reading and writing MIME/MULTIPART/RELATED streams
@@ -151,87 +129,12 @@ public class MimeUtil extends UrlUtil
 	}
 
 	/**
-	 * used for some after the fact cleanup - beware as it may hurt performance
-	 * @author prosirai
-	 */
-	private static class FixSemiColonStream extends BufferedOutputStream
-	{
-		private boolean done = false;
-		private int pos = 0;
-
-		private byte[] smallBuf = new byte[5000];
-
-		/**
-		 * @param _out the output stream to fix
-		 */
-		public FixSemiColonStream(final OutputStream _out)
-		{
-			super(_out);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.io.BufferedOutputStream#write(int)
-		 */
-		@Override
-		public synchronized void write(final int b) throws IOException
-		{
-			if (!done) // insert a ' ' where necessary...
-			{
-				if (pos == smallBuf.length)
-				{
-					smallBuf = null;
-					done = true;
-				}
-				else
-				{
-					smallBuf[pos++] = (byte) b;
-					final int first = Math.max(0, pos - 50);
-					if (b == ';')
-					{
-						final String s = new String(smallBuf, first, pos - 1);
-						if (s.toLowerCase().indexOf("content-type:") > 0)
-						{
-							smallBuf = null;
-							done = true;
-							super.write('\n');
-						}
-					}
-				}
-			}
-			super.write(b);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.io.BufferedOutputStream#write(byte[], int, int)
-		 */
-		@Override
-		public synchronized void write(final byte[] b, final int off, final int len) throws IOException
-		{
-			if (done)
-			{
-				super.write(b, off, len);
-			}
-			else
-			{
-				for (int i = off; i < len; i++)
-				{
-					write(b[i]);
-				}
-			}
-		}
-	}
-
-	/**
 	 * data source for binary files
 	 * @author prosirai
 	 */
-	public class ByteArrayDataSource implements DataSource
+	public static class ByteArrayDataSource implements DataSource
 	{
-		String contenType;
+		String contentType;
 		ByteArrayIOStream ioStream;
 
 		/**
@@ -241,7 +144,7 @@ public class MimeUtil extends UrlUtil
 		 */
 		public ByteArrayDataSource(final ByteArrayIOStream _ioStream, final String _contentType)
 		{
-			contenType = _contentType;
+			contentType = _contentType;
 			ioStream = _ioStream;
 		}
 
@@ -252,7 +155,7 @@ public class MimeUtil extends UrlUtil
 		 */
 		public String getContentType()
 		{
-			return contenType;
+			return contentType;
 		}
 
 		/**
@@ -298,19 +201,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static void setContentID(final BodyPart bp, final String cid)
 	{
-		if (cid == null)
-		{
-			return;
-		}
-
-		try
-		{
-			bp.setHeader(CONTENT_ID, "<" + urlToCid(cid).substring(4) + ">");
-		}
-		catch (final MessagingException x)
-		{
-			// nop
-		}
+		new BodyPartHelper(bp).setContentID(cid);
 	}
 
 	/**
@@ -320,43 +211,17 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static void setFileName(final BodyPart bp, final String path)
 	{
-		if (path == null)
-		{
-			return;
-		}
-		try
-		{
-			bp.setFileName(new File(path).getName());
-		}
-		catch (final MessagingException x)
-		{
-			// nop
-		}
+		new BodyPartHelper(bp).setFileName(path);
 	}
 
 	/**
 	 * get the filename header of a bodypart a string if no file name is set, a unique filename is generated from cid and content type
 	 * @param bp the bodypart
-	 * @return the file name
+	 * @return the file name, null if bp is null
 	 */
 	public static String getFileName(final BodyPart bp)
 	{
-		String s = null;
-		try
-		{
-			s = bp.getFileName();
-			if (s != null)
-			{
-				return s;
-			}
-		}
-		catch (final MessagingException x)
-		{
-			// nop
-		}
-		// TODO handle extensions here
-		s = getContentID(bp);
-		return s;
+		return new BodyPartHelper(bp).getFileName();
 	}
 
 	/**
@@ -366,22 +231,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static String getContentID(final BodyPart bp)
 	{
-		String[] cids = null;
-		try
-		{
-			cids = bp.getHeader(CONTENT_ID);
-		}
-		catch (final MessagingException e)
-		{
-			return null;
-		}
-		final String s = StringUtil.setvString(cids, null, null, null);
-		if (s == null)
-		{
-			return s;
-		}
-
-		return urlToCid(s).substring(4);
+		return new BodyPartHelper(bp).getContentID();
 	}
 
 	/**
@@ -391,10 +241,8 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static BodyPart[] extractMultipartMime(final InputStream mimeStream)
 	{
-		BodyPart[] bodyParts = null;
-		final Multipart mp = getMultiPart(mimeStream);
-		bodyParts = getBodyParts(mp);
-		return bodyParts;
+		final MimeReader mr = new MimeReader(mimeStream);
+		return mr.getBodyParts();
 	}
 
 	/**
@@ -404,34 +252,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static BodyPart[] getBodyParts(final Multipart mp)
 	{
-		final Vector<BodyPart> v = new Vector<BodyPart>();
-		try
-		{
-			for (int i = 0; true; i++)
-			{
-				final BodyPart bp = mp.getBodyPart(i);
-				v.add(bp);
-			}
-
-		}
-		catch (final MessagingException m)
-		{
-			return null;
-		}
-		// this may seem messy, but getCount() can be very costly since it
-		// requires a complete mime parse.
-		// simply getting the next reduces the time by a factor 2, since only
-		// one linear parse is required
-		catch (final ArrayIndexOutOfBoundsException m)
-		{
-			if (v.size() == 0)
-			{
-				return null;
-			}
-			BodyPart[] ret = new BodyPart[v.size()];
-			ret = v.toArray(ret);
-			return ret;
-		}
+		return new MimeHelper(mp).getBodyParts();
 	}
 
 	/**
@@ -442,27 +263,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static BodyPart getPartByCID(final Multipart mp, final String cid)
 	{
-		try
-		{
-			for (int i = 0; true; i++)
-			{
-				final BodyPart bp = mp.getBodyPart(i);
-				if (matchesCID(bp, cid))
-				{
-					return bp;
-				}
-			}
-		}
-		catch (final MessagingException e)
-		{
-			// log.error("MessagingException: ", e);
-			return null;
-		}
-		catch (final ArrayIndexOutOfBoundsException e)
-		{
-			// log.error("MessagingException: ", e);
-			return null;
-		}
+		return new MimeHelper(mp).getPartByCID(cid);
 	}
 
 	/**
@@ -473,23 +274,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static BodyPart getCreatePartByCID(final Multipart mp, final String cid)
 	{
-		BodyPart bp = getPartByCID(mp, cid);
-		if (bp != null)
-		{
-			return bp;
-		}
-
-		bp = new MimeBodyPart();
-		try
-		{
-			setContentID(bp, cid);
-			mp.addBodyPart(bp);
-		}
-		catch (final MessagingException x)
-		{
-			bp = null;
-		}
-		return bp;
+		return new MimeWriter(mp).getCreatePartByCID(cid);
 	}
 
 	/**
@@ -500,40 +285,8 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static JDFDoc getJDFDoc(final InputStream stream, final int index)
 	{
-		final BufferedInputStream bis = ((stream instanceof BufferedInputStream) ? (BufferedInputStream) stream : new BufferedInputStream(stream));
-		bis.mark(1000000);
-		final Multipart mp = getMultiPart(bis);
-		if (mp != null)
-		{
-			try
-			{
-				final BodyPart bp = mp.getBodyPart(index);
-				return getJDFDoc(bp);
-			}
-			catch (final MessagingException e)
-			{
-				// nop
-			}
-		}
-		// not a mime - try direct xml
-		if (index == 0)
-		{
-
-			try
-			{
-				bis.reset();
-			}
-			catch (final IOException e)
-			{
-				return null;
-			}
-			final JDFParser p = new JDFParser();
-			return p.parseStream(bis);
-		}
-		else
-		{
-			return null;
-		}
+		final MimeReader mr = new MimeReader();
+		return mr.getJDFDoc(stream, index);
 	}
 
 	/**
@@ -543,35 +296,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static JDFDoc getJDFDoc(final BodyPart bp)
 	{
-		if (bp == null)
-		{
-			return null;
-		}
-
-		try
-		{
-			final String mimeType = bp.getContentType();
-			if (!isJDFMimeType(mimeType))
-			{
-				return null;
-			}
-			final InputStream is = bp.getInputStream();
-			final JDFParser p = new JDFParser();
-			final JDFDoc doc = p.parseStream(is);
-			if (doc != null)
-			{
-				doc.setBodyPart(bp);
-			}
-			return doc;
-		}
-		catch (final IOException e)
-		{
-			return null; // snafu
-		}
-		catch (final MessagingException e)
-		{
-			return null; // snafu
-		}
+		return new BodyPartHelper(bp).getJDFDoc();
 	}
 
 	/**
@@ -580,28 +305,26 @@ public class MimeUtil extends UrlUtil
 	 * @param cid the cid string any '<' '>' or 'cid:' prefixes are removed if null, anything matches
 	 * @return true if this bp matches the cid
 	 */
-	public static boolean matchesCID(final BodyPart bp, final String cid)
+	public static boolean matchesCID(final BodyPart bp, String cid)
 	{
-		String cidLocal = cid;
-
-		if (cidLocal == null)
+		if (cid == null)
 		{
 			return true; // wildcard
 		}
 
-		if (cidLocal.startsWith("<"))
+		if (cid.startsWith("<"))
 		{
-			cidLocal = cidLocal.substring(1);
+			cid = cid.substring(1);
 		}
 
-		if (cidLocal.toLowerCase().startsWith("cid:"))
+		if (cid.toLowerCase().startsWith("cid:"))
 		{
-			cidLocal = cidLocal.substring(4);
+			cid = cid.substring(4);
 		}
 
-		if (cidLocal.endsWith(">"))
+		if (cid.endsWith(">"))
 		{
-			cidLocal = cidLocal.substring(0, cidLocal.length() - 1);
+			cid = cid.substring(0, cid.length() - 1);
 		}
 
 		final String s = getContentID(bp);
@@ -610,7 +333,7 @@ public class MimeUtil extends UrlUtil
 			return false;
 		}
 
-		return cidLocal.equalsIgnoreCase(s);
+		return cid.equalsIgnoreCase(s);
 	}
 
 	/**
@@ -620,23 +343,8 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static Multipart getMultiPart(final String fileName)
 	{
-		final File f = urlToFile(fileName);
-		try
-		{
-			// MUST be SharedFileInputStream, as the body part retrieving
-			// methods rely on the stream remaining open!
-			final InputStream fis = new SharedFileInputStream(f);
-			final Multipart mp = MimeUtil.getMultiPart(fis);
-			return mp;
-		}
-		catch (final FileNotFoundException e)
-		{
-			return null;
-		}
-		catch (final IOException e)
-		{
-			return null;
-		}
+		final MimeReader r = new MimeReader(fileName);
+		return r.getMultiPart();
 	}
 
 	/**
@@ -646,25 +354,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static Multipart getMultiPart(final InputStream mimeStream)
 	{
-		if (mimeStream == null)
-		{
-			return null;
-		}
-
-		try
-		{
-			// ManagedMemoryDataSource
-			// TODO rethink memory management for large files
-			// SharedInputStream sis=new Shared
-			final Message mimeMessage = new MimeMessage(null, mimeStream);
-
-			final Multipart mp = new MimeMultipart(mimeMessage.getDataHandler().getDataSource());
-			return mp;
-		}
-		catch (final MessagingException e)
-		{
-			return null;
-		}
+		return new MimeReader(mimeStream).getMultiPart();
 	}
 
 	/**
@@ -764,205 +454,22 @@ public class MimeUtil extends UrlUtil
 	 * @param docJMF the JDFDoc representation of the JMF that references the jdf to package, if null only the jdf is packaged note that the URL of docJDF must
 	 * already be specified as a CID
 	 * @param docJDF the JDFDoc representation of the JDF to package
-	 * @param extendReferenced if true, also package any further reeferenced files
-	 * @return a Message representing the resulting MIME package, null if an error occured
+	 * @param extendReferenced if true, also package any further referenced files
+	 * @return a Message representing the resulting MIME package, null if an error occurred
 	 */
 	static public Multipart buildMimePackage(final JDFDoc docJMF, final XMLDoc docJDF, final boolean extendReferenced)
 	{
 		// Create a MIME package
-		final Message message = new MimeMessage((Session) null);
-		final Multipart multipart = new MimeMultipart("related"); // JDF:
-		// multipart/related
-
-		String cid = null;
-		if (docJDF != null)
-		{
-			String originalFileName = docJDF.getOriginalFileName();
-			if (KElement.isWildCard(originalFileName))
-			{
-				originalFileName = "TheJDF.jdf";
-			}
-
-			cid = urlToCid(originalFileName);
-		}
-
-		if (docJMF != null && cid != null)
-		{
-			String originalFileName = docJMF.getOriginalFileName();
-			if (KElement.isWildCard(originalFileName))
-			{
-				final JDFJMF jmf = docJMF.getJMFRoot();
-
-				final JDFMessage m = jmf == null ? null : jmf.getMessageElement(null, null, 0);
-				originalFileName = m == null ? "TheJMF.jmf" : m.getType() + ".jmf";
-				docJMF.setOriginalFileName(originalFileName);
-			}
-
-			final KElement e = docJMF.getRoot();
-			final VElement v = e.getChildrenByTagName(null, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
-			if (v != null)
-			{
-				final int siz = v.size();
-				for (int i = 0; i < siz; i++)
-				{
-					v.item(i).setAttribute(AttributeName.URL, cid);
-				}
-			}
-			updateXMLMultipart(multipart, docJMF, null);
-		}
-
-		if (extendReferenced)
-		{
-			extendMultipart(multipart, docJDF, cid);
-		}
-		else
-		{
-			updateXMLMultipart(multipart, docJDF, cid);
-		}
-
-		// Put parts in message
-		try
-		{
-			message.setContent(multipart);
-		}
-		catch (final MessagingException x)
-		{
-			return null;
-		}
-
-		return multipart;
+		final MimeWriter mimeWriter = new MimeWriter();
+		mimeWriter.buildMimePackage(docJMF, docJDF, extendReferenced);
+		return mimeWriter.getMultiPart();
 	}
 
 	/**
-	 * Adds a JDF document to a multipart. Any files referenced by the JDF document using FileSpec/@URL are also included in the multipart.
-	 * @param multipart the multipart to add the JDF document to
-	 * @param docJDF the JDF document
-	 * @param cid the CID the JDF document should have in the multipart
-	 * @return the number of files added to the multipart
+	 * @param urlString
+	 * @return
 	 */
-	private static int extendMultipart(final Multipart multipart, final XMLDoc docJDF, final String cid)
-	{
-		int n = 0;
-
-		if (docJDF == null)
-		{
-			return 0;
-		}
-
-		// Get all FileSpec elements
-		final KElement e = docJDF.getRoot();
-		final VElement fileSpecs = e.getChildrenByTagName(ElementName.FILESPEC, null, new JDFAttributeMap(AttributeName.URL, "*"), false, false, 0);
-		if (fileSpecs != null)
-		{
-			final int vSize = fileSpecs.size();
-
-			final String[] urlStrings = listURLs(fileSpecs);
-			for (int i = 0; i < urlStrings.length; i++)
-			{
-				if (urlStrings[i] != null)
-				{
-					// Convert URL to CID and update FileSpec
-					File f = UrlUtil.urlToFile(urlStrings[i]);
-					if (f != null && !f.isAbsolute())
-					{
-						// Resolve relative URLs
-						if (docJDF.getOriginalFileName() != null)
-						{
-							final File jdfFile = new File(docJDF.getOriginalFileName());
-							f = new File(jdfFile.getParent(), f.getPath());
-							urlStrings[i] = UrlUtil.fileToUrl(f, false);
-						}
-					}
-					if (f == null || !f.canRead())
-					{
-						// Ignore unreadable files
-						urlStrings[i] = null;
-					}
-					else
-					{
-						// Update FileSpec's URL
-						fileSpecs.item(i).setAttribute(AttributeName.URL, urlToCid(urlStrings[i]), null);
-					}
-					// Set duplicate URLs to null so that the file is only added
-					// once to multipart
-					for (int j = 0; j < i; j++)
-					{
-						if (urlStrings[i] != null && urlStrings[i].equals(urlStrings[j]))
-						{
-							urlStrings[i] = null;
-						}
-					}
-				}
-			}
-
-			updateXMLMultipart(multipart, docJDF, cid);
-
-			// add a new body part for each url
-			for (int i = 0; i < vSize; i++)
-			{
-				final String urlString = urlStrings[i];
-				if (urlString != null)
-				{
-					try
-					{
-						DataSource dataSrc = null;
-						final File f = UrlUtil.urlToFile(urlString);
-						if (f != null && f.canRead())
-						{
-							dataSrc = new FileDataSource(f);
-						}
-
-						if (dataSrc == null)
-						{
-							continue; // no data source
-						}
-
-						final BodyPart messageBodyPart = new MimeBodyPart();
-						messageBodyPart.setDataHandler(new DataHandler(dataSrc));
-
-						setFileName(messageBodyPart, f == null ? null : f.getAbsolutePath());
-						// messageBodyPart.setHeader("Content-Type",
-						// JMFServlet.JDF_CONTENT_TYPE); // JDF:
-						// application/vnd.cip4-jdf+xml
-						setContentID(messageBodyPart, urlString);
-						multipart.addBodyPart(messageBodyPart);
-						n++;
-					}
-					catch (final MessagingException e1)
-					{
-						// nop
-					}
-				}
-			}
-		}
-
-		return n;
-	}
-
-	/**
-	 * Returns the values of the <i>URL</i> attribute of each element in the input list.
-	 * @param fileSpecs a list of elements with <i>URL</i> attributes
-	 * @return an array containing the value of the <i>URL</i> attribute of each element in the input list. The order of values in the returned array
-	 * corresponds to the order of the elements in the input list.
-	 */
-	private static String[] listURLs(final VElement fileSpecs)
-	{
-		String[] urlStrings = new String[0];
-
-		if (fileSpecs != null)
-		{
-			final int vSize = fileSpecs.size();
-			urlStrings = new String[vSize];
-			for (int i = 0; i < vSize; i++)
-			{
-				urlStrings[i] = fileSpecs.item(i).getAttribute(AttributeName.URL, null, null);
-			}
-		}
-
-		return urlStrings;
-	}
-
-	private static String urlToCid(final String urlString)
+	public static String urlToCid(final String urlString)
 	{
 		String urlStringLocal = urlString;
 
@@ -996,33 +503,9 @@ public class MimeUtil extends UrlUtil
 	 */
 	static public Multipart buildMimePackage(final Vector<? extends XMLDoc> vXMLDocs)
 	{
-		if (vXMLDocs == null || vXMLDocs.size() == 0)
-		{
-			return null;
-		}
-
-		// Create a MIME package
-		final Message message = new MimeMessage((Session) null);
-		final Multipart multipart = new MimeMultipart("related"); // JDF:
-		// multipart/related
-		// Add other body parts
-		final int imax = vXMLDocs.size();
-		for (int i = 0; i < imax; i++)
-		{
-			final XMLDoc d1 = vXMLDocs.elementAt(i);
-			updateXMLMultipart(multipart, d1, null);
-		}
-		// Put parts in message
-		try
-		{
-			message.setContent(multipart);
-		}
-		catch (final MessagingException x)
-		{
-			return null;
-		}
-
-		return multipart;
+		final MimeWriter mimeWriter = new MimeWriter();
+		mimeWriter.buildMimePackage(vXMLDocs);
+		return mimeWriter.getMultiPart();
 	}
 
 	/**
@@ -1033,42 +516,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static BodyPart updateXMLMultipart(final Multipart multipart, final XMLDoc xmlDoc, final String cid)
 	{
-		String cidLocal = cid;
-
-		if (xmlDoc == null)
-		{
-			return null;
-		}
-
-		final String originalFileName = xmlDoc.getOriginalFileName();
-		if (cidLocal == null)
-		{
-			cidLocal = originalFileName;
-		}
-
-		if (cidLocal == null)
-		{
-			final KElement root = xmlDoc.getRoot();
-			cidLocal = "CID_" + ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? ((JDFNode) root).getID() : JDFElement.uniqueID(0));
-		}
-
-		final BodyPart messageBodyPart = getCreatePartByCID(multipart, cidLocal);
-		try
-		{
-			setFileName(messageBodyPart, originalFileName);
-			setContent(messageBodyPart, xmlDoc);
-			setContentID(messageBodyPart, cidLocal);
-		}
-		catch (final MessagingException x)
-		{
-			// skip this one
-		}
-		catch (final IOException x)
-		{
-			// skip this one
-		}
-
-		return messageBodyPart;
+		return new MimeWriter(multipart).updateXMLMultipart(xmlDoc, cid);
 	}
 
 	/**
@@ -1080,49 +528,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static void setContent(final BodyPart messageBodyPart, final XMLDoc xmlDoc) throws MessagingException, IOException
 	{
-		if (messageBodyPart == null || xmlDoc == null)
-		{
-			throw new MessagingException("null parameters in setContent");
-		}
-
-		// TODO better performing solution for multibyte this quick hack makes
-		// quite a few copies...
-		final ByteArrayIOStream ios = new ByteArrayIOStream();
-		xmlDoc.write2Stream(ios, 0, true);
-		final ByteArrayDataSource ds = new MimeUtil().new ByteArrayDataSource(ios, "text/xml");
-
-		messageBodyPart.setDataHandler(new DataHandler(ds));
-		xmlDoc.setBodyPart(messageBodyPart);
-		final KElement root = xmlDoc.getRoot();
-		if (root instanceof JDFJMF)
-		{
-			messageBodyPart.setHeader(CONTENT_TYPE, JDFConstants.MIME_JMF); // JDF
-			// :
-			// application
-			// /
-			// vnd
-			// .
-			// cip4
-			// -
-			// jmf
-			// +
-			// xml
-		}
-		else if (root instanceof JDFNode)
-		{
-			messageBodyPart.setHeader(CONTENT_TYPE, JDFConstants.MIME_JDF); // JDF
-			// :
-			// application
-			// /
-			// vnd
-			// .
-			// cip4
-			// -
-			// jmf
-			// +
-			// xml
-		}
-
+		new BodyPartHelper(messageBodyPart).setContent(xmlDoc);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -1150,48 +556,11 @@ public class MimeUtil extends UrlUtil
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
-	public static HttpURLConnection writeToURL(final Multipart mp, final String strUrl, MIMEDetails mimeDetails) throws IOException, MessagingException
+	public static HttpURLConnection writeToURL(final Multipart mp, final String strUrl, final MIMEDetails mimeDetails) throws IOException, MessagingException
 	{
-		HttpURLConnection httpURLconnection = null;
-
-		if (mimeDetails == null)
-		{
-			mimeDetails = new MIMEDetails();
-		}
-
-		final URL url = new URL(strUrl);
-		if ("File".equalsIgnoreCase(url.getProtocol()))
-		{
-			writeToFile(mp, UrlUtil.urlToFile(strUrl).getAbsolutePath(), mimeDetails);
-		}
-		else
-		// assume http
-		{
-			httpURLconnection = (HttpURLConnection) url.openConnection();
-			httpURLconnection.setRequestMethod(POST);
-			httpURLconnection.setRequestProperty("Connection", "close");
-			String contentType = mp.getContentType();
-			contentType = StringUtil.token(contentType, 0, "\r");
-			contentType = StringUtil.token(contentType, 0, "\n");
-			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
-			httpURLconnection.setDoOutput(true);
-			if (mimeDetails.httpDetails != null)
-			{
-				mimeDetails.httpDetails.applyTo(httpURLconnection);
-			}
-
-			try
-			{
-				final OutputStream out = httpURLconnection.getOutputStream();
-				writeToStream(mp, out, mimeDetails);
-			}
-			catch (final ConnectException x)
-			{
-				httpURLconnection = null;
-			}
-		}
-
-		return httpURLconnection;
+		final MimeWriter mimeWriter = new MimeWriter(mp);
+		mimeWriter.setMIMEDetails(mimeDetails);
+		return mimeWriter.writeToURL(strUrl);
 	}
 
 	/**
@@ -1206,59 +575,8 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static JDFDoc writeToQueue(final JDFDoc docJMF, final JDFDoc docJDF, final String strUrl, final MIMEDetails urlDet) throws IOException, MessagingException
 	{
-		JDFDoc doc = null;
-
-		final Multipart mp = buildMimePackage(docJMF, docJDF, true);
-		final HttpURLConnection uc = writeToURL(mp, strUrl, urlDet);
-		if (uc == null)
-		{
-			return doc; // file
-		}
-
-		final int rc = uc.getResponseCode();
-		final InputStream inputStream = uc.getInputStream();
-		if (rc == 200)
-		{
-			final BufferedInputStream bis = new BufferedInputStream(inputStream);
-			bis.mark(100000);
-			final Multipart mpRet = getMultiPart(bis);
-			if (mpRet != null)
-			{
-				try
-				{
-					final BodyPart bp = mpRet.getBodyPart(0);
-					doc = getJDFDoc(bp);
-					return doc;
-				}
-				catch (final MessagingException e)
-				{
-					// nop - try simple doc
-				}
-			}
-
-			bis.reset();
-			doc = new JDFParser().parseStream(bis);
-			if (doc == null)
-			{
-				final JDFCommand c = docJMF.getJMFRoot().getCommand(0);
-				final JDFJMF respJMF = c.createResponse();
-				final JDFResponse r = respJMF.getResponse(0);
-				r.setErrorText("Invalid attached JDF", null);
-				r.setReturnCode(3); // TODO correct rcs
-				doc = respJMF.getOwnerDocument_JDFElement();
-			}
-		}
-		else
-		{
-			final JDFCommand c = docJMF.getJMFRoot().getCommand(0);
-			final JDFJMF respJMF = c.createResponse();
-			final JDFResponse r = respJMF.getResponse(0);
-			r.setErrorText(("Invalid http response - RC=" + rc), null);
-			r.setReturnCode(3); // TODO correct rcs
-			doc = respJMF.getOwnerDocument_JDFElement();
-		}
-		inputStream.close(); // always close the stream
-		return doc;
+		final MimeWriter mw = new MimeWriter();
+		return mw.writeToQueue(docJMF, docJDF, strUrl);
 	}
 
 	/**
@@ -1282,25 +600,9 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static File writeToFile(final Multipart m, final String fileName, final MIMEDetails md)
 	{
-		final File file = new File(fileName);
-		try
-		{
-			final FileOutputStream fos = new FileOutputStream(file);
-			writeToStream(m, fos, md);
-			return file;
-		}
-		catch (final FileNotFoundException e)
-		{
-			return null;
-		}
-		catch (final IOException e)
-		{
-			return null;
-		}
-		catch (final MessagingException e)
-		{
-			return null;
-		}
+		final MimeWriter mw = new MimeWriter(m);
+		mw.setMIMEDetails(md);
+		return mw.writeToFile(fileName);
 	}
 
 	/**
@@ -1324,43 +626,11 @@ public class MimeUtil extends UrlUtil
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
-	public static void writeToStream(final Multipart m, OutputStream outStream, final MIMEDetails md) throws IOException, MessagingException
+	public static void writeToStream(final Multipart m, final OutputStream outStream, final MIMEDetails md) throws IOException, MessagingException
 	{
-
-		if (m == null)
-		{
-			throw new MessagingException("Multipüart must be non null");
-		}
-		final MimeMessage mm = new MimeMessage((Session) null);
-		mm.setContent(m);
-		// buffers are good - the encoders decoders otherwise hit stream
-		// read/write once per byte...
-		if (!(outStream instanceof BufferedOutputStream))
-		{
-			outStream = new BufferedOutputStream(outStream);
-		}
-
-		if (md != null && md.modifyBoundarySemicolon)
-		{
-			outStream = new FixSemiColonStream(outStream);
-		}
-
-		if (md != null && md.transferEncoding != null)
-		{
-			final BodyPart bp[] = getBodyParts(m);
-			if (bp != null)
-			{
-				final int siz = bp.length;
-				for (int i = 0; i < siz; i++)
-				{
-					bp[i].setHeader(UrlUtil.CONTENT_TRANSFER_ENCODING, md.transferEncoding);
-				}
-			}
-		}
-
-		mm.writeTo(outStream);
-		outStream.flush();
-		outStream.close();
+		final MimeWriter mimeWriter = new MimeWriter(m);
+		mimeWriter.setMIMEDetails(md);
+		mimeWriter.writeToStream(outStream);
 	}
 
 	/**
@@ -1373,29 +643,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static void writeToDir(final Multipart mp, final File directory) throws MessagingException, IOException
 	{
-		boolean exists = directory.exists();
-		if (!exists)
-		{
-			exists = directory.mkdir();
-		}
-
-		if (!exists)
-		{
-			throw new FileNotFoundException();
-		}
-
-		if (!directory.canWrite())
-		{
-			throw new IOException();
-		}
-
-		final int parts = mp.getCount();
-		for (int i = 0; i < parts; i++)
-		{
-			final BodyPart bp = mp.getBodyPart(i);
-			writeBodyPartToFile(bp, directory);
-			// TODO update urls to the new file values
-		}
+		new MimeWriter(mp).writeToDir(directory);
 	}
 
 	/**
@@ -1406,24 +654,7 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static void writeBodyPartToFile(final BodyPart bp, final File directory) throws IOException, MessagingException
 	{
-		boolean exists = directory.exists();
-		if (!exists)
-		{
-			exists = directory.mkdir();
-		}
-
-		if (!exists)
-		{
-			throw new FileNotFoundException();
-		}
-
-		final String fileName = getFileName(bp);
-		final File outFile = new File(directory.getPath() + File.separator + fileName);
-		final BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(outFile));
-		final InputStream ins = bp.getInputStream();
-		IOUtils.copy(ins, fos);
-		fos.flush();
-		fos.close();
+		new BodyPartHelper(bp).writeToDir(directory);
 	}
 
 	/**

@@ -632,7 +632,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	@Override
 	public int hashCode()
 	{
-		return HashUtil.hashCode(super.hashCode(), getTimeZoneOffsetInMillis());
+		return (int) (getTimeInMillis() / 1000l);
 	}
 
 	/**

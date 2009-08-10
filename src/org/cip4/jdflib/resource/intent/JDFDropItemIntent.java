@@ -11,13 +11,12 @@
 
 package org.cip4.jdflib.resource.intent;
 
-import java.util.Vector;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDropItemIntent;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
 public class JDFDropItemIntent extends JDFAutoDropItemIntent
@@ -31,8 +30,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDropItemIntent(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -45,8 +43,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFDropItemIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -60,9 +57,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFDropItemIntent(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFDropItemIntent(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -79,7 +74,7 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	 * @default getUnknownElements(bIgnorePrivate, 99999999)
 	 */
 	@Override
-	public Vector getUnknownElements(boolean bIgnorePrivate, int nMax)
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ProductionIntent, nMax);
 	}
@@ -95,9 +90,8 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 	}
 
 	/**
-	 * Get of 'this' the value of attribute AdditionalAmount. If not specified,
-	 * get the default value of attribute AdditionalAmount, that is specified in
-	 * it's parent element (node DeliveryIntent)
+	 * Get of 'this' the value of attribute AdditionalAmount. If not specified, get the default value of attribute AdditionalAmount, that is specified in it's
+	 * parent element (node DeliveryIntent)
 	 * 
 	 * @return WString: attribute value
 	 */
@@ -108,21 +102,20 @@ public class JDFDropItemIntent extends JDFAutoDropItemIntent
 		{
 			try
 			{
-				Integer i = new Integer(super.getAdditionalAmount());
+				final Integer i = new Integer(super.getAdditionalAmount());
 				return i.intValue();
-			} catch (NumberFormatException nfe)
+			}
+			catch (final NumberFormatException nfe)
 			{
-				throw new JDFException(
-						"DropItemIntent.getAdditionalAmount: Ammount is nit a int value");
+				throw new JDFException("DropItemIntent.getAdditionalAmount: Ammount is nit a int value");
 			}
 		}
 		return getParentDeliveryIntent().getAdditionalAmount();
 	}
 
 	/**
-	 * Get of 'this' the value of element ServiceLevel. If not specified, get
-	 * the default value of element ServiceLevel, that is specified in it's
-	 * parent element (node DeliveryIntent)
+	 * Get of 'this' the value of element ServiceLevel. If not specified, get the default value of element ServiceLevel, that is specified in it's parent
+	 * element (node DeliveryIntent)
 	 * 
 	 * @return JDFStringSpan: element value
 	 */

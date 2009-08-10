@@ -77,6 +77,8 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -84,6 +86,8 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.util.mime.BodyPartHelper;
+import org.cip4.jdflib.util.mime.MimeWriter;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -126,6 +130,18 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isCID("<cid:"));
 		assertFalse(UrlUtil.isCID(null));
 		assertFalse(UrlUtil.isCID("<"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testIsNotCid()
+	{
+		assertFalse(UrlUtil.isNotCID("cid:foo"));
+		assertFalse(UrlUtil.isNotCID("bar.foo"));
+		assertTrue(UrlUtil.isNotCID("file:foo"));
+		assertTrue(UrlUtil.isNotCID("http://foo"));
+		assertTrue(UrlUtil.isNotCID("https://foo"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -215,6 +231,30 @@ public class UrlUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
+	 * @throws IOException
+	 * 
+	 */
+	public void testGetFileName() throws IOException
+	{
+		final File newCID = new File(sm_dirTestDataTemp + "GetFileNameTest.txt");
+		newCID.createNewFile();
+		newCID.delete();
+		FileUtil.copyBytes("abcde".getBytes(), newCID);
+		final MimeWriter mimeWriter = new MimeWriter();
+		final BodyPartHelper bph = mimeWriter.updateMultipart(new FileInputStream(newCID), "newCID.CID", UrlUtil.TEXT_PLAIN);
+		bph.setFileName("GetFileNameTest.txt");
+
+		assertEquals("GetFileNameTest.txt", UrlUtil.getFileName("newCID.CID", mimeWriter.getMultiPart()));
+		final File f = new File("C:\\IO.SYS");
+		String s = UrlUtil.fileToUrl(f, false);
+		assertEquals(s, "file:///C:/IO.SYS");
+		s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), true);
+		assertEquals(s, "file://fooBar/4%e2%82%ac.txt");
+		s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), false);
+		assertEquals(s, "file://fooBar/4€.txt");
+	}
+
+	/**
 	 * 
 	 */
 	public void testFileToURL()
@@ -263,7 +303,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception
+	 * 
 	 */
 	public void testURLToFileName()
 	{

@@ -115,6 +115,36 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testCopyBytes()
+	{
+		final byte[] b = new byte[66666];
+		for (int i = 0; i < 66666; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final File f = new File(sm_dirTestDataTemp + "bufOut.dat");
+		f.delete();
+		FileUtil.copyBytes(b, f);
+		assertEquals(f.length(), 66666);
+		final byte b2[] = FileUtil.fileToByteArray(f);
+		assertEquals(b.length, b2.length);
+		for (int i = 0; i < 66666; i++)
+		{
+			assertEquals(b[i], b2[i]);
+		}
+		FileUtil.copyBytes(b, f);
+		assertEquals(f.length(), 2 * 66666);
+		final byte b3[] = FileUtil.fileToByteArray(f);
+		for (int i = 0; i < 66666; i++)
+		{
+			assertEquals(b[i % 66666], b3[i]);
+		}
+
+	}
+
+	/**
 	 * @throws Exception x
 	 */
 	public void testFileToByteArray() throws Exception
@@ -238,6 +268,18 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(FileUtil.createNewFile(f));
 		assertFalse(FileUtil.createNewFile(null));
 		f.delete();
+	}
+
+	/**
+	 * 
+	 */
+	public void testEquals()
+	{
+		assertTrue(FileUtil.equals(null, null));
+		assertFalse(FileUtil.equals(null, new File("a")));
+		assertFalse(FileUtil.equals(new File("a"), null));
+		assertTrue(FileUtil.equals(new File("a"), new File("a")));
+		assertTrue(FileUtil.equals(new File("a"), new File("A")));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
