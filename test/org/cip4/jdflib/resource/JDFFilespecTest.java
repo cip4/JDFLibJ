@@ -90,6 +90,8 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
+import org.cip4.jdflib.util.PlatformUtil;
+import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 ////////////////////////////////////////////////////////////////
@@ -106,14 +108,19 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 */
 	public void testSetAbsoluteURL()
 	{
-		final JDFDoc doc = new JDFDoc("JDF");
-		final JDFNode n = doc.getJDFRoot();
-		final JDFFileSpec fs = (JDFFileSpec) n.addResource("FileSpec", null, EnumUsage.Input, null, null, null, null);
-		final JDFFileSpec fs2 = (JDFFileSpec) n.addResource("FileSpec", null, EnumUsage.Input, null, null, null, null);
-		fs.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), false);
-		fs2.setAbsoluteFileURL(new File("C:\\ist blöd\\fnord is €"), true);
-		assertEquals(fs.getURL(), "file:///C:/ist%20blöd/fnord%20is%20€");
-		assertEquals(fs2.getURL(), "file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
+		if (PlatformUtil.isWindows()) {
+			final JDFDoc doc = new JDFDoc("JDF");
+			final JDFNode n = doc.getJDFRoot();
+			final JDFFileSpec fs = (JDFFileSpec) n.addResource("FileSpec",
+					null, EnumUsage.Input, null, null, null, null);
+			final JDFFileSpec fs2 = (JDFFileSpec) n.addResource("FileSpec",
+					null, EnumUsage.Input, null, null, null, null);
+			fs.setAbsoluteFileURL(new File("C:\\ist blï¿½d\\fnord is ï¿½"), false);
+			fs2.setAbsoluteFileURL(new File("C:\\ist blï¿½d\\fnord is ï¿½"), true);
+			assertEquals(fs.getURL(), "file:///C:/ist%20blï¿½d/fnord%20is%20ï¿½");
+			assertEquals(fs2.getURL(),
+					"file:///C:/ist%20bl%c3%b6d/fnord%20is%20%e2%82%ac");
+		}
 	}
 
 	// //////////////////////////////////////////////////////////////
@@ -158,6 +165,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
 		fs.moveToDir(newDir);
+		ThreadUtil.sleep(3000);
 		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
 
 	}

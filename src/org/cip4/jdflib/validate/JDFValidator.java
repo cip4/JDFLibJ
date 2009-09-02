@@ -1960,6 +1960,7 @@ public class JDFValidator
 	public XMLDoc processZipFile(final File argFile)
 	{
 		boolean bTryKeep = bTryFormats;
+		
 		try
 		{
 			final ZipFile zip = new ZipFile(argFile);

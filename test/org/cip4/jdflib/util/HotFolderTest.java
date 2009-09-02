@@ -166,18 +166,25 @@ public class HotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
-		ThreadUtil.sleep(5000);
+		
+		for (int i = 0; i < 30 && file.exists(); i++) {
+			ThreadUtil.sleep(1000);
+		}
 		assertFalse(file.exists());
 		hf.stop();
 		hf.stop();
 		file.createNewFile();
 		assertTrue(file.exists());
-		ThreadUtil.sleep(5000);
+		for (int i = 0; i < 15 && !file.exists(); i++) {
+			ThreadUtil.sleep(1000);
+		}
 		assertTrue(file.exists());
 		hf.restart();
 		hf.restart();
 		hf.restart();
-		ThreadUtil.sleep(5000);
+		for (int i = 0; i < 15 && file.exists(); i++) {
+			ThreadUtil.sleep(1000);
+		}
 		assertFalse(file.exists());
 	}
 
@@ -197,9 +204,11 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file1.exists());
 		file2.createNewFile();
 		assertTrue(file2.exists());
+		
 		ThreadUtil.sleep(6000);
 		assertFalse(file.exists());
 		assertTrue(file1.exists());
+		
 		hf.addListener(new MyListener(true), ".xml");
 		ThreadUtil.sleep(9000);
 		assertFalse(file1.exists());
@@ -220,7 +229,11 @@ public class HotFolderTest extends JDFTestCaseBase
 		file2.mkdir();
 		file1.createNewFile();
 		assertTrue(file.exists());
-		ThreadUtil.sleep(6000);
+		
+		for (int i = 0; i < 15 && file.exists(); i++) {
+			ThreadUtil.sleep(1000);
+		}
+		
 		assertFalse(file.exists());
 		assertTrue("in subdir", file1.exists());
 		assertTrue(file2.exists());
@@ -235,7 +248,11 @@ public class HotFolderTest extends JDFTestCaseBase
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
-		ThreadUtil.sleep(5000);
+		
+		for (int i = 0; i < 15 && file.exists(); i++) {
+			ThreadUtil.sleep(1000);
+		}
+		
 		assertFalse(file.exists());
 	}
 
@@ -261,7 +278,10 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file.exists());
 		fos.close();
 
-		ThreadUtil.sleep(5000);
+		for (int i = 0; i < 30 && file.exists(); i++) {
+			ThreadUtil.sleep(1000);
+		}
+
 		assertFalse(file.exists());
 
 	}

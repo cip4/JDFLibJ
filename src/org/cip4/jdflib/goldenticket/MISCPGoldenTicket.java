@@ -180,7 +180,8 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 			setCategory(MISCPS_PRINTING);
 		//		theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
 		theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);
-		previewShare = UrlUtil.fileToUrl(new File("\\\\Share\\Dir\\Preview_"), false);
+		previewShare = UrlUtil.fileToUrl(UrlUtil
+				.urlToFile("file:/host/root/preview"), false);
 	}
 
 	/**

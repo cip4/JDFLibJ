@@ -337,7 +337,7 @@ public class QueueTest extends TestCase
 		}
 		while (iThread > 0)
 		{
-			ThreadUtil.sleep(100); // wait for threads to be over
+			ThreadUtil.sleep(250); // wait for threads to be over
 		}
 		assertEquals(q.getQueueSize(), 1000);
 		VElement v = q.getQueueEntryVector();

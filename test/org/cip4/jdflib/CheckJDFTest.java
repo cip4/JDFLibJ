@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StatusCounter;
 import org.cip4.jdflib.validate.ICheckValidator;
 import org.cip4.jdflib.validate.ICheckValidatorFactory;
@@ -308,7 +309,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	public void testValidateZip()
 	{
-		final File zip = new File(sm_dirTestData + "checkjdf.zip");
+		final File zip = new File(sm_dirTestData + "checkJDF.zip");
 		final JDFValidator checker = new JDFValidator();
 		final XMLDoc d = checker.processZipFile(zip);
 		final KElement root = d.getRoot();
@@ -391,7 +392,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 		checkJDF.setPrint(false);
 		checkJDF.bQuiet = true;
 		checkJDF.level = EnumValidationLevel.Incomplete;
-		final File foo = new File(sm_dirTestSchema);
+		final File foo = FileUtil.getCreateDirectory(sm_dirTestSchema);
+		
+		// final File foo = new File(sm_dirTestSchema);
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
 		final File jdfxsd = new File(sm_dirTestSchema + "JDF.xsd");
 		checkJDF.setJDFSchemaLocation(jdfxsd);

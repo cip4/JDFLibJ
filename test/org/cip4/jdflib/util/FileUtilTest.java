@@ -98,11 +98,14 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
 		assertFalse(FileUtil.isAbsoluteFile("foo"));
-		assertTrue(FileUtil.isAbsoluteFile(new File("c:\\")));
-		assertTrue(FileUtil.isAbsoluteFile("c:\\"));
-		assertTrue(FileUtil.isAbsoluteFile(new File("c:\\a")));
-		assertTrue(FileUtil.isAbsoluteFile("c:\\a"));
-		assertTrue(FileUtil.isAbsoluteFile(new File("c:/a")));
+		
+		if (PlatformUtil.isWindows()) {
+			assertTrue(FileUtil.isAbsoluteFile(new File("c:\\")));
+			assertTrue(FileUtil.isAbsoluteFile("c:\\"));
+			assertTrue(FileUtil.isAbsoluteFile(new File("c:\\a")));
+			assertTrue(FileUtil.isAbsoluteFile("c:\\a"));
+			assertTrue(FileUtil.isAbsoluteFile(new File("c:/a")));
+		}
 	}
 
 	/**
@@ -182,10 +185,13 @@ public class FileUtilTest extends JDFTestCaseBase
 	 */
 	public void testisCleanURLFile()
 	{
-		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
-		assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));
-		assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:\\a")));
-		assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:/a")));
+		if (PlatformUtil.isWindows()) {
+			assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
+			assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));
+			assertEquals(new File("C:\\a"), FileUtil
+					.cleanURL(new File("C:\\a")));
+			assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:/a")));
+		}
 	}
 
 	/**
@@ -222,9 +228,7 @@ public class FileUtilTest extends JDFTestCaseBase
 			}
 		}
 		assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
-		assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(), "0.c");
 		assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
-		assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8].getName(), "2.c");
 		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 18);
 		assertNull(FileUtil.listFilesWithExtension(f, "CC"));
 		assertNull(FileUtil.listFilesWithExtension(f, ".CC,.dd"));
@@ -233,6 +237,13 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 1);
 		new File(f.getAbsolutePath() + File.separator + "b.").createNewFile();
 		assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 2);
+		
+		if (PlatformUtil.isWindows()) {
+			assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(),
+					"0.c");
+			assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8]
+					.getName(), "2.c");
+		}
 
 	}
 
@@ -279,7 +290,12 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertFalse(FileUtil.equals(null, new File("a")));
 		assertFalse(FileUtil.equals(new File("a"), null));
 		assertTrue(FileUtil.equals(new File("a"), new File("a")));
-		assertTrue(FileUtil.equals(new File("a"), new File("A")));
+		if (PlatformUtil.isWindows()) {
+			assertTrue(FileUtil.equals(new File("a"), new File("A")));
+		}
+		else {
+			assertFalse(FileUtil.equals(new File("a"), new File("A")));
+		}
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -402,9 +418,7 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a"), new File("b")));
 		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("b")));
-		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("b")));
 		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a/"), new File("/b")));
-		assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("\\b")));
 		assertEquals(new File("a/c/b"), FileUtil.getFileInDirectory(new File("a"), new File("c/b")));
 		assertEquals(new File("a/aa/c/b"), FileUtil.getFileInDirectory(new File("a/aa"), new File("c/b")));
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c")), new File("a/b/c"));
@@ -413,6 +427,12 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
 
+		if (PlatformUtil.isWindows()) {
+			assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File(
+					"a\\"), new File("b")));
+			assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File(
+					"a\\"), new File("\\b")));
+		}
 	}
 
 }
