@@ -180,24 +180,22 @@ public abstract class JDFPool extends JDFElement
 	 * 
 	 * default: GetPoolChildGeneric (i, JDFConstants.EMPTYSTRING, null, JDFConstants.EMPTYSTRING)
 	 */
-	protected JDFElement getPoolChildGeneric(final int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
+	protected JDFElement getPoolChildGeneric(int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
-		int iLocal = i;
-
 		final VElement v = getPoolChildrenGeneric(strName, mAttrib, nameSpaceURI);
-		if (iLocal < 0)
+		if (i < 0)
 		{
-			iLocal = v.size() + iLocal;
-			if (iLocal < 0)
+			i = v.size() + i;
+			if (i < 0)
 			{
 				return null;
 			}
 		}
-		if (v.size() <= iLocal)
+		if (v.size() <= i)
 		{
 			return null;
 		}
-		return (JDFElement) v.elementAt(iLocal);
+		return (JDFElement) v.elementAt(i);
 	}
 
 	/**

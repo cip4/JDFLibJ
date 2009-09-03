@@ -73,8 +73,7 @@ package org.cip4.jdflib.core;
 import java.util.List;
 import java.util.Vector;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 
@@ -83,7 +82,7 @@ import org.cip4.jdflib.node.JDFNode;
  * 
  * 05.12.2008
  */
-public class VElementTest extends TestCase
+public class VElementTest extends JDFTestCaseBase
 {
 	/**
 	 * 
@@ -307,7 +306,7 @@ public class VElementTest extends TestCase
 		assertEquals(v.index(e1), 0);
 		assertEquals(v.index(e4), -1);
 		v.add(e3);
-		assertEquals(v.index(e4), 2);
+		assertEquals("test for equivalent ID aqttribute", v.index(e4), 2);
 	}
 
 }

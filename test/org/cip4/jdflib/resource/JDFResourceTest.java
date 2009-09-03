@@ -104,6 +104,7 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.LinkRefFinder;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -135,6 +136,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.VectorMap;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -435,6 +437,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertTrue(layoutElem.isResourceElement());
 	}
 
+	/**
+	 * 
+	 */
 	public void testgetPartMap()
 	{
 		final String strFileName = sm_dirTestData + "partitioned_private_resources.jdf";
@@ -471,6 +476,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testgetPartValues()
 	{
 		final String strFileName = sm_dirTestData + "partitioned_private_resources.jdf";
@@ -487,14 +495,17 @@ public class JDFResourceTest extends JDFTestCaseBase
 		// m.put("Separation" , "Black");
 
 		myPreview = myPreview.getDeepPart(m, EnumPartUsage.Explicit);
-		final Vector vPartValues = myPreview.getPartValues(JDFResource.EnumPartIDKey.Separation);
+		final VString vPartValues = myPreview.getPartValues(JDFResource.EnumPartIDKey.Separation);
 
-		assertTrue(((String) vPartValues.elementAt(0)).equals("Cyan"));
-		assertTrue(((String) vPartValues.elementAt(1)).equals("Magenta"));
-		assertTrue(((String) vPartValues.elementAt(2)).equals("Yellow"));
-		assertTrue(((String) vPartValues.elementAt(3)).equals("Black"));
+		assertTrue((vPartValues.elementAt(0)).equals("Cyan"));
+		assertTrue((vPartValues.elementAt(1)).equals("Magenta"));
+		assertTrue((vPartValues.elementAt(2)).equals("Yellow"));
+		assertTrue((vPartValues.elementAt(3)).equals("Black"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testgetPartMapVector()
 	{
 		final String strFileName = sm_dirTestData + "partitioned_private_resources.jdf";
@@ -564,6 +575,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetChildElementVector()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -613,6 +627,10 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /////
 
+	/**
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
 	public void testGetColorPool()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -805,6 +823,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	// ///////////////////////////////////////////////////////////
 	public void testCreatePartitions()
 	{
@@ -850,6 +871,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	// ///////////////////////////////////////////////////////////
 	public void testGetCreatePartition()
 	{
@@ -935,7 +959,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		resWebName.getCreatePartition(partMap, null);
 
-		// Nächster Test
+		// Nï¿½chster Test
 		partMap.clear();
 		partMap.put("PreviewType", "Viewable");
 		partMap.put("SheetName", "Cover");
@@ -952,7 +976,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		resWebName.getCreatePartition(partMap, struct);
 
-		// Nächster Test
+		// Nï¿½chster Test
 		partMap.clear();
 		partMap.put("PreviewType", "Viewable");
 		partMap.put("SheetName", "Cover");
@@ -993,7 +1017,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		resCellIndex.getCreatePartition(partMap, null);
 
-		// nächster Test
+		// nï¿½chster Test
 		final JDFResource r = (JDFResource) resPool.getChildByTagName("Preview", null, 0, null, true, true);
 		final JDFAttributeMap map = new JDFAttributeMap();
 		map.put("PreviewType", "Viewable");
@@ -1014,6 +1038,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testHasAttribute()
 	{
 		// TODO - behavior of hasattribute!!!
@@ -1288,6 +1315,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testDeleteUnlinked()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1310,6 +1340,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testGetLinks()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1331,6 +1364,60 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 	// ///
 
+	/**
+	 * 
+	 */
+	public void testGetLinksAndRefsPerformance()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.Product);
+		final long t0 = System.currentTimeMillis();
+		final VElement vM = new VElement();
+		for (int i = 0; i < 1000; i++)
+		{
+			final JDFNode n2 = n.addJDFNode(EnumType.ImageSetting);
+			final JDFNode n3 = n.addJDFNode(EnumType.ConventionalPrinting);
+			final JDFMedia m = (JDFMedia) n2.addResource("Media", null, EnumUsage.Input, null, n, null, null);
+			final JDFExposedMedia xm = (JDFExposedMedia) n2.addResource("ExposedMedia", null, EnumUsage.Output, null, n, null, null);
+			xm.refElement(m);
+			n3.linkResource(xm, EnumUsage.Input, null);
+			n.getAuditPool().addModified(null, n2);
+			n.getAuditPool().addModified(null, n3);
+			vM.add(m);
+		}
+		final long t1 = System.currentTimeMillis();
+		System.out.println(t1 - t0);
+		// final JDFMedia mNew = (JDFMedia) n.addResource("Media", null);
+		// final JDFExposedMedia xmNew = (JDFExposedMedia) n.addResource("ExposedMedia", null);
+		for (int i = 0; i < 1000; i++)
+		{
+			// final JDFMedia p = (JDFMedia) mNew.addPartition(EnumPartIDKey.SheetName, "S" + i);
+			final JDFMedia m2 = (JDFMedia) vM.get(i);
+			final VElement vRef = m2.getLinksAndRefs(true, true);
+			assertEquals("A link and a ref", vRef.size(), 2);
+
+		}
+		final long t2 = System.currentTimeMillis();
+		System.out.println(t2 - t1);
+
+		final LinkRefFinder lrf = new LinkRefFinder(true, true);
+		final VectorMap<String, KElement> vm = lrf.getMap(n);
+		final long t3 = System.currentTimeMillis();
+		System.out.println(t3 - t2);
+		for (int i = 0; i < 1000; i++)
+		{
+			// final JDFMedia p = (JDFMedia) mNew.addPartition(EnumPartIDKey.SheetName, "S" + i);
+			final JDFMedia m2 = (JDFMedia) vM.get(i);
+			final VElement vRef = new VElement(vm.get(m2.getID()));
+			assertNotNull(vRef);
+			assertEquals("A link and a ref", vRef.size(), 2);
+
+		}
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetLinksAndRefs()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1371,6 +1458,10 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testGetLocalPartitionKey()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1387,6 +1478,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testBuildXPath()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1397,6 +1491,10 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testBinderySignatureName()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -1407,6 +1505,10 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testInvalidPartIDKeysLeaves()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1417,6 +1519,10 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testExplicitPartUsage()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -1438,6 +1544,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testInvalidPartUsage()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1453,7 +1562,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-
+	/**
+ * 
+ */
 	public void testGetLeaves()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1473,7 +1584,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-
+	/**
+ * 
+ */
 	public void testGetMinStatusFromLeaves()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1502,6 +1615,10 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////
+	/**
+	 * @return
+	 * 
+	 */
 	public static JDFDoc creatRLDoc()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -1525,6 +1642,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		return doc;
 	}
 
+	/**
+ * 
+ */
 	public void testSubElement()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1543,6 +1663,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
+	/**
+ * 
+ */
 	public void testSetAttributes()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -1560,6 +1683,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertEquals("leaf partIDKey copied", r2p.getSide(), EnumSide.Front);
 	}
 
+	/**
+ * 
+ */
 	public void testSetLocked()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1599,7 +1725,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////////////////
-
+	/**
+ * 
+ */
 	public void testImplicitPartitions()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1907,6 +2035,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGeneralID()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1941,6 +2072,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testGeneralIDEmptyNamespace()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1955,6 +2089,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testInstantiations()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -1974,6 +2111,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testGetElement()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -2086,6 +2226,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testGetCreatePartition2()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2108,6 +2251,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testGetCreatePartition3()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2134,6 +2280,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testAddpartitionEnum()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2146,6 +2295,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testAddpartition()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -2210,6 +2362,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testMultiplePartIDKeys()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -2230,6 +2385,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////////////
 	// /
 
+	/**
+	 * 
+	 */
 	public void testConsistentPartIDKeys()
 	{
 		final JDFDoc doc = creatXMDoc();

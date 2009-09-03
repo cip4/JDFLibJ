@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -131,6 +131,7 @@ import org.cip4.jdflib.devicecapability.JDFStringStateTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.elementwalker.AttributeReplacerTest;
 import org.cip4.jdflib.elementwalker.BaseWalkerTest;
+import org.cip4.jdflib.elementwalker.LinkRefFinderTest;
 import org.cip4.jdflib.elementwalker.UnlinkFinderTest;
 import org.cip4.jdflib.examples.AmountTest;
 import org.cip4.jdflib.examples.AutomatedLayoutTest;
@@ -322,6 +323,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		// elementWalker
 		suite.addTestSuite(AttributeReplacerTest.class);
 		suite.addTestSuite(BaseWalkerTest.class);
+		suite.addTestSuite(LinkRefFinderTest.class);
 		suite.addTestSuite(UnlinkFinderTest.class);
 		// suite.addTestSuite(XPathWalkerTest.class);
 
