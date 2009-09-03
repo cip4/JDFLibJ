@@ -1222,6 +1222,7 @@ public class XMLDoc
 	 * 
 	 * @return Enumeration of registered identifiers
 	 */
+	@SuppressWarnings("unchecked")
 	public Enumeration getIdentifiers()
 	{
 		return (m_doc == null) ? null : m_doc.getIdentifiers();

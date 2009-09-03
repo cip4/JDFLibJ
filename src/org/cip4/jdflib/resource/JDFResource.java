@@ -727,26 +727,43 @@ public class JDFResource extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumLotControl getEnum(final String enumName)
 		{
 			return (EnumLotControl) getEnum(EnumLotControl.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumLotControl getEnum(final int enumValue)
 		{
 			return (EnumLotControl) getEnum(EnumLotControl.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumLotControl.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumLotControl.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumLotControl.class);
@@ -777,26 +794,43 @@ public class JDFResource extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumPartUsage getEnum(final String enumName)
 		{
 			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumPartUsage getEnum(final int enumValue)
 		{
 			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumPartUsage.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumPartUsage.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumPartUsage.class);
@@ -804,8 +838,17 @@ public class JDFResource extends JDFElement
 
 		// public static final EnumPartUsage Unknown = new
 		// EnumPartUsage(JDFConstants.PARTUSAGE_UNKNOWN);
+		/**
+		 * 
+		 */
 		public static final EnumPartUsage Explicit = new EnumPartUsage(JDFConstants.PARTUSAGE_EXPLICIT);
+		/**
+		 * 
+		 */
 		public static final EnumPartUsage Sparse = new EnumPartUsage(JDFConstants.PARTUSAGE_SPARSE);
+		/**
+		 * 
+		 */
 		public static final EnumPartUsage Implicit = new EnumPartUsage(JDFConstants.PARTUSAGE_IMPLICIT);
 	}
 
@@ -834,21 +877,35 @@ public class JDFResource extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumPartIDKey getEnum(final String enumName)
 		{
 			return (EnumPartIDKey) getEnum(EnumPartIDKey.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumPartIDKey getEnum(final int enumValue)
 		{
 			return (EnumPartIDKey) getEnum(EnumPartIDKey.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumPartIDKey.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumPartIDKey.class);
@@ -1159,26 +1216,43 @@ public class JDFResource extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumSpawnStatus getEnum(final String enumName)
 		{
 			return (EnumSpawnStatus) getEnum(EnumSpawnStatus.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumSpawnStatus getEnum(final int enumValue)
 		{
 			return (EnumSpawnStatus) getEnum(EnumSpawnStatus.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumSpawnStatus.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumSpawnStatus.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumSpawnStatus.class);
@@ -1656,6 +1730,8 @@ public class JDFResource extends JDFElement
 
 	/**
 	 * Gets all resourcelinks and refelements that link to this
+	 * @param bLink if true, include resource links
+	 * @param bRef if true include resource refs
 	 * 
 	 * @return VElement - vector of all found elements, null if none found
 	 */
@@ -1951,7 +2027,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * Ideally called only for unpartitioned resources, but will work on consistently partitioned resources
 	 * 
-	 * @param the resource from which to clone the partitioning
+	 * @param r the resource from which to clone the partitioning
 	 * @param partIDKeys the partIDKeys to clone, if null use the existing list from r
 	 * @throws JDFException if this is already inconsistently partitioned
 	 */
@@ -2408,7 +2484,6 @@ public class JDFResource extends JDFElement
 		}
 
 		final String nodeName = getNodeName();
-		// TODO cast not safe!
 		JDFResource resourceElement = (JDFResource) getElement_KElement(nodeName, null, 0);
 
 		if (resourceElement == null) // got a leaf or found no matching children
@@ -2554,7 +2629,6 @@ public class JDFResource extends JDFElement
 
 			if (bSame)
 			{
-				// TODO cast not safe
 				resourceElement = (JDFResource) getElement_KElement(nodeName, null, 0);
 
 				for (int n = 0; n < appSize; n++)
@@ -2725,7 +2799,7 @@ public class JDFResource extends JDFElement
 
 		int retSize = -1;
 		JDFResource loopRes = retRes;
-		final Set vKeys = m.keySet();
+		final Set<String> vKeys = m.keySet();
 
 		// loop until we hit this or root, whichever is closer
 		while (true)
@@ -3092,7 +3166,7 @@ public class JDFResource extends JDFElement
 	 * Adds a new part to this node, also handles PartIDKeys in the root etc. convenience method to allow for partIDKey enums rather than strings
 	 * 
 	 * @param partType part type of a new part
-	 * @param value its value
+	 * @param enumPart its value
 	 * 
 	 * @return JDFResource - the newly created part
 	 */
@@ -3427,15 +3501,14 @@ public class JDFResource extends JDFElement
 	 * @param vValidParts vector of partmaps that define the individual valid parts.<br>
 	 * The individual PartMaps are ored to define the final resource.
 	 */
-	public void reducePartitions(final VJDFAttributeMap vValidParts_)
+	public void reducePartitions(VJDFAttributeMap vValidParts)
 	{
-		VJDFAttributeMap vValidParts = vValidParts_;
 
-		if (vValidParts_ != null && vValidParts_.size() > 0)
+		if (vValidParts != null && vValidParts.size() > 0)
 		{
 			final VString partIDKeys = getPartIDKeys();
 			vValidParts = new VJDFAttributeMap(); // need local copy
-			final VElement v = getPartitionVector(vValidParts_, EnumPartUsage.Implicit);
+			final VElement v = getPartitionVector(vValidParts, EnumPartUsage.Implicit);
 			if (v != null)
 			{
 				final int vSize = v.size();
@@ -3491,6 +3564,7 @@ public class JDFResource extends JDFElement
 	 * @param vParts
 	 * @deprecated [BLD009] not in C++ anymore, not used internally here
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public void reduceParts(final Vector vParts)
 	{
@@ -3806,6 +3880,7 @@ public class JDFResource extends JDFElement
 	 * collapse all redundant attributes and elements
 	 * 
 	 * @param bCollapseToNode only collapse redundant attriutes and elements that pre-exist in the nodes
+	 * @param bCollapseElements if true, collapse elements, else only collapse attributes
 	 * 
 	 * @default Collapse(false)
 	 */
@@ -4255,6 +4330,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param key the PartIDKey attribute name
 	 * @param value the string value of the partition key
+	 * @param bIncomplete
 	 * 
 	 * @return VElement - the vector matching resource leaves or nodes
 	 * @deprecated use getPartitionVector(JDFAttributeMap m, EnumPartUsage partUsage)
@@ -6342,6 +6418,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @return Vector - list of all PipePartIDKey enums
 	 */
+	@SuppressWarnings("unchecked")
 	public Vector<EnumPartIDKey> getPipePartIDKeysEnum()
 	{
 		final VString vPartIDKeys = getPartIDKeys();
@@ -7740,7 +7817,7 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * @param autoAgent the autoAgent to set
+	 * @param _autoAgent the autoAgent to set
 	 */
 	public static void setAutoAgent(final boolean _autoAgent)
 	{

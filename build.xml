@@ -75,7 +75,7 @@
 
 	<target name="compile" depends="-init" description="Compiles the JDFLibJ source code.">
 		<echo>Compiling...</echo>
-		<javac encoding="Cp1252" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5" failonerror="false">
+		<javac encoding="UTF-8" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5" failonerror="false">
 			<src path="${jdflib.src.dir}" />
 			<src path="${apps.src.dir}" />
 			<classpath refid="project.class.path" />
@@ -215,5 +215,22 @@
 			</fileset>
 		</delete>
 		<echo>Tests reports can be found in: ${test.reports.dir}</echo>
+		</target>
+		<target name="recode" depends="-init">
+			<!--
+			<mkdir dir="${jdflib.src.dir}/recode" />
+			<mkdir dir="${jdflib.src.dir}/recode2" />
+			<native2ascii encoding="Cp1252" reverse="false" src="${jdflib.src.dir}" 
+				includes="**/*.java" dest="${jdflib.src.dir}/recode"/>
+			<native2ascii encoding="UTF-8" reverse="true" src="${jdflib.src.dir}/recode" 
+				includes="**/*.java" dest="${jdflib.src.dir}/recode2"/>
+			-->
+			<mkdir dir="${test.src.dir}/recode" />
+			<mkdir dir="${test.src.dir}/recode2" />
+			<native2ascii encoding="Cp1252" reverse="false" src="${test.src.dir}" 
+				includes="**/*.java" dest="${test.src.dir}/recode"/>
+			<native2ascii encoding="UTF-8" reverse="true" src="${test.src.dir}/recode" 
+				includes="**/*.java" dest="${test.src.dir}/recode2"/>
 	</target>
+
 </project>

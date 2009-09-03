@@ -95,6 +95,7 @@ import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.EnumUtil;
 import org.w3c.dom.Node;
 
 /**
@@ -216,6 +217,7 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	/**
 	 * inner class EnumBusinessObject - printtalk based business objects
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumBusinessObject extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -227,26 +229,43 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 			super(status, m_startValue++);
 		}
 
+		/**
+		 * @param status
+		 * @return
+		 */
 		public static EnumBusinessObject getEnum(final String status)
 		{
 			return (EnumBusinessObject) getEnum(EnumBusinessObject.class, status);
 		}
 
+		/**
+		 * @param value
+		 * @return
+		 */
 		public static EnumBusinessObject getEnum(final int value)
 		{
 			return (EnumBusinessObject) getEnum(EnumBusinessObject.class, value);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumBusinessObject.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumBusinessObject.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumBusinessObject.class);
@@ -274,18 +293,31 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 		/**
 		 * constants EnumBusinessObject
 		 */
+		/** * */
 		public static final EnumBusinessObject BusinessObject_Unknown = new EnumBusinessObject("BusinessObject_Unknown");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_RFQ = new EnumBusinessObject("BusinessObject_RFQ");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_Quote = new EnumBusinessObject("BusinessObject_Quote");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_RFRequote = new EnumBusinessObject("BusinessObject_RFRequote");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_Requote = new EnumBusinessObject("BusinessObject_Requote");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_PO = new EnumBusinessObject("BusinessObject_PO");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_Confirmation = new EnumBusinessObject("BusinessObject_Confirmation");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_CO_RFQ = new EnumBusinessObject("BusinessObject_CO_RFQ");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_CO_Quote = new EnumBusinessObject("BusinessObject_CO_Quote");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_CO_PO = new EnumBusinessObject("BusinessObject_CO_PO");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_CO_Confirmation = new EnumBusinessObject("BusinessObject_CO_Confirmation");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_Invoice = new EnumBusinessObject("BusinessObject_Invoice");
+		/** * */
 		public static final EnumBusinessObject BusinessObject_None = new EnumBusinessObject("BusinessObject_None");
 
 	}
@@ -303,6 +335,9 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 		return "JDFNodeInfo[ --> " + super.toString() + " ]";
 	}
 
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoNodeInfo#init()
+	 */
 	@Override
 	public boolean init()
 	{
@@ -354,22 +389,22 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 	{
 		final KElement bo = getElement(ElementName.BUSINESSINFO, JDFConstants.EMPTYSTRING, 0);
 
-		final Vector vBos = EnumBusinessObject.getNamesVector();
-		final KElement boe = bo.getChildFromList(new VString(vBos), 0, null, true);
+		final VString vBos = EnumUtil.getNamesVector(EnumBusinessObject.class);
+		final KElement boe = bo.getChildFromList(vBos, 0, null, true);
 		final String bos = boe.getNodeName();
 
 		final int oldType = vBos.indexOf(bos);
 
-		System.out.println("JDFNodeInfo:: " + businessObject.getValue() + " Boe:: " + boe);
-		boe.renameElement((String) vBos.elementAt(businessObject.getValue()), JDFConstants.EMPTYSTRING);
+		// System.out.println("JDFNodeInfo:: " + businessObject.getValue() + " Boe:: " + boe);
+		boe.renameElement(vBos.elementAt(businessObject.getValue()), null);
 
 		if (businessObject.getValue() > oldType)
 		{
-			boe.setAttribute(JDFConstants.BUSINESSREFID, boe.getAttribute(JDFConstants.BUSINESSID, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING), JDFConstants.EMPTYSTRING);
+			boe.setAttribute(JDFConstants.BUSINESSREFID, boe.getAttribute(JDFConstants.BUSINESSID));
 
 			if (newID.length() != 0)
 			{
-				boe.setAttribute(JDFConstants.BUSINESSID, newID, JDFConstants.EMPTYSTRING);
+				boe.setAttribute(JDFConstants.BUSINESSID, newID);
 			}
 		}
 

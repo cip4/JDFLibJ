@@ -232,7 +232,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testSetHexBinaryBytes()
 	{
-		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789������";
+		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		final byte[] buffer = strTestString.getBytes();
 		final String strTemp = StringUtil.setHexBinaryBytes(buffer, -1);
 		final byte[] tempBuffer = StringUtil.getHexBinaryBytes(strTemp.getBytes());
@@ -245,8 +245,8 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testGetUTF8Bytes()
 	{
-		// String strTestString = "�";
-		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789������";
+		// String strTestString = "ï¿½";
+		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789aöü€";
 		final byte[] utf8Buf = StringUtil.setUTF8String(strTestString);
 		final String newString = StringUtil.getUTF8String(utf8Buf);
 		final byte[] charBuf = strTestString.getBytes();
@@ -254,12 +254,11 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(newString, newString2);
 		final byte[] green = new byte[] { 'g', 'r', (byte) 0xfc, 'n' };
 		final String greenString = StringUtil.getUTF8String(green);
-		
+
 		// TODO Not UTF8 compatible
-		if (PlatformUtil.isWindows()) {
-			assertEquals(
-					"incorrectly encoded gr�n is also heuristically fixed",
-					greenString, "gr�n");
+		if (PlatformUtil.isWindows())
+		{
+			assertEquals("incorrectly encoded grün is also heuristically fixed", greenString, "grün");
 		}
 	}
 
@@ -268,8 +267,8 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testSetUTF8Bytes()
 	{
-		// String strTestString = "�";
-		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789������";
+		// String strTestString = "ï¿½";
+		final String strTestString = "ABCDEFGHIJKLMNOPQESTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		final byte[] utf8Buf = StringUtil.setUTF8String(strTestString);
 		final String newString = StringUtil.getUTF8String(utf8Buf);
 		final byte[] utf8Buf2 = StringUtil.setUTF8String(newString);
@@ -319,18 +318,15 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testEscape()
 	{
-		// TODO Not UTF8 compatible
-		if(PlatformUtil.isWindows()) {
-			final String iri = "file://myHost/a/c%20���%25&?.txt߀";
-			assertEquals("escape round trip", iri, StringUtil.unEscape(StringUtil.escape(iri, ":&?%", "%", 16, 2, 0x21, 127), "%", 16, 2));
-			assertEquals("escape ", "%25_%e4", StringUtil.escape("%_�", ":&?%", "%", 16, 2, 0x21, 127));
-			assertEquals("escape ", "%e2%82%ac", StringUtil.escape(new String(StringUtil.setUTF8String("�")), ":&?%", "%", 16, 2, 0x21, 127));
-			assertEquals("�", StringUtil.escape("�", null, "%", 16, 2, 0x21, -1));
-			assertEquals("�", StringUtil.escape("�", null, "%", 16, 2, 0x21, -1));
-			assertEquals("a_a", StringUtil.escape("a�a", null, "_", -1, 0, 0x21, 127));
-			assertEquals("a__a", StringUtil.escape("a�_a", null, "_", -1, 0, 0x21, 127));
-			assertEquals("a_�a", StringUtil.escape("a�a", null, "_", 0, 0, 0x21, 127));
-		}
+		final String iri = "file://myHost/a/c%20aöü%25&?.txtß€";
+		assertEquals("escape round trip", iri, StringUtil.unEscape(StringUtil.escape(iri, ":&?%", "%", 16, 2, 0x21, 127), "%", 16, 2));
+		assertEquals("escape ", "%25_%c3%bc", StringUtil.escape("%_ü", ":&?%", "%", 16, 2, 0x21, 127));
+		assertEquals("escape ", "%e2%82%ac", StringUtil.escape(new String(StringUtil.setUTF8String("€")), ":&?%", "%", 16, 2, 0x21, 127));
+		assertEquals("€", StringUtil.escape("€", null, "%", 16, 2, 0x21, -1));
+		assertEquals("ä", StringUtil.escape("ä", null, "%", 16, 2, 0x21, -1));
+		assertEquals("ä is 2 bytes --> __", "a__a", StringUtil.escape("aäa", null, "_", -1, 0, 0x21, 127));
+		assertEquals("a____a", StringUtil.escape("a€_a", null, "_", -1, 0, 0x21, 127));
+		// assertEquals("a_€a", StringUtil.escape("a€a", null, "_", 0, 0, 0x21, 127));
 	}
 
 	/**
@@ -338,8 +334,8 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testExtension()
 	{
-		final String iri = "file://my.Host/a.n/c%20���%25&?.txt�";
-		assertEquals(UrlUtil.extension(iri), "txt�");
+		final String iri = "file://my.Host/a.n/c%20ï¿½ï¿½ï¿½%25&?.txtï¿½";
+		assertEquals(UrlUtil.extension(iri), "txtï¿½");
 		assertNull(UrlUtil.extension("abc"));
 	}
 
@@ -399,22 +395,19 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matches("abc", ".*"));
 		assertTrue(StringUtil.matches("abc", ".+"));
 		assertTrue(StringUtil.matches("abc", ""));
-		assertTrue(StringUtil.matches("�bc", "..."));
-		assertFalse(StringUtil.matches("�bc", "...."));
-		assertTrue(StringUtil.matches("�bc", null));
-		assertTrue(StringUtil.matches("�", "�?"));
-		assertTrue(StringUtil.matches("��", "�{0,2}"));
-		assertFalse(StringUtil.matches("���", "�{0,2}"));
-		assertTrue(StringUtil.matches("", "�?"));
+		assertTrue(StringUtil.matches("äbc", "..."));
+		assertFalse(StringUtil.matches("abc", "...."));
+		assertTrue(StringUtil.matches("€bc", null));
+		assertTrue(StringUtil.matches("€", "€?"));
+		assertTrue(StringUtil.matches("€€", "€{0,2}"));
+		assertFalse(StringUtil.matches("€€€", "€{0,2}"));
+		assertTrue(StringUtil.matches("", "€?"));
 		assertTrue(StringUtil.matches("12de", JDFConstants.REGEXP_HEXBINARY));
 		assertFalse(StringUtil.matches("12d", JDFConstants.REGEXP_HEXBINARY));
 		assertFalse(StringUtil.matches("12dk", JDFConstants.REGEXP_HEXBINARY));
-		
-		// TODO Not UTF8 compatible
-		if (PlatformUtil.isWindows()) {
-			assertFalse(StringUtil.matches("�", "�?"));
-		}
-		
+
+		assertTrue(StringUtil.matches("€", "€?"));
+
 		assertFalse(StringUtil.matches("abc", ".."));
 		assertFalse(StringUtil.matches(null, null));
 		assertFalse(StringUtil.matches("abc", "?"));
@@ -629,7 +622,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.find_last_not_of("abc", "bcd"), 0);
 		assertEquals(StringUtil.find_last_not_of("abc", "abc"), -1);
 		assertEquals(StringUtil.find_last_not_of("abc", "ac"), 1);
-		assertEquals(StringUtil.find_last_not_of("gr�n", "���"), 3);
+		assertEquals(StringUtil.find_last_not_of("grün", "ï¿½ï¿½ï¿½"), 3);
 		assertEquals(StringUtil.find_last_not_of("abc", "_"), 2);
 	}
 
@@ -683,14 +676,12 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testuncToUrl()
 	{
-		if (PlatformUtil.isWindows()) {
-			final String unc = "\\\\myHost\\a\\.\\b\\..\\c ���%.txt";
-			final String iri = "file://myHost/a/c%20���%25.txt";
-			final String uri = "file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
+		final String unc = "\\\\myHost\\a\\.\\b\\..\\c äöü%.txt";
+		final String iri = "file://myHost/a/c%20äöü%25.txt";
+		final String uri = "file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
 
-			assertEquals("uri ok", StringUtil.uncToUrl(unc, true), uri);
-			assertEquals("iri ok", StringUtil.uncToUrl(unc, false), iri);
-		}
+		assertEquals("uri ok", StringUtil.uncToUrl(unc, true), uri);
+		assertEquals("iri ok", StringUtil.uncToUrl(unc, false), iri);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

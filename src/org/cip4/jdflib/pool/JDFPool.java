@@ -83,14 +83,15 @@
 package org.cip4.jdflib.pool;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
 /**
- * This class represents a JDF-Pool which provides functionality for "network" containers and is the base class for
- * JDFResourcePool and GarStepNetwork
+ * This class represents a JDF-Pool which provides functionality for "network" containers and is the base class for JDFResourcePool and GarStepNetwork
  */
 public abstract class JDFPool extends JDFElement
 {
@@ -102,7 +103,7 @@ public abstract class JDFPool extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPool(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPool(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -114,7 +115,7 @@ public abstract class JDFPool extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -127,7 +128,7 @@ public abstract class JDFPool extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPool(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -155,7 +156,7 @@ public abstract class JDFPool extends JDFElement
 	 * @param nameSpaceURI nameSpaceURI to search in
 	 * @return VElement: a vector with all elements in the pool matching the conditions
 	 */
-	protected VElement getPoolChildrenGeneric(String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	protected VElement getPoolChildrenGeneric(final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		final VElement v = getChildElementVector(strName, nameSpaceURI, mAttrib, true, 0, false);
 		for (int i = v.size() - 1; i >= 0; i--)
@@ -177,12 +178,12 @@ public abstract class JDFPool extends JDFElement
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFElement: the pool child matching the above conditions
 	 * 
-	 *         default: GetPoolChildGeneric (i, JDFConstants.EMPTYSTRING, null, JDFConstants.EMPTYSTRING)
+	 * default: GetPoolChildGeneric (i, JDFConstants.EMPTYSTRING, null, JDFConstants.EMPTYSTRING)
 	 */
-	protected JDFElement getPoolChildGeneric(int i, String strName, JDFAttributeMap mAttrib, String nameSpaceURI)
+	protected JDFElement getPoolChildGeneric(final int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		int iLocal = i;
-		
+
 		final VElement v = getPoolChildrenGeneric(strName, mAttrib, nameSpaceURI);
 		if (iLocal < 0)
 		{
@@ -204,7 +205,7 @@ public abstract class JDFPool extends JDFElement
 	 * 
 	 * @param p the Child to add to the element
 	 */
-	protected void appendUniqueGeneric(JDFElement p)
+	protected void appendUniqueGeneric(final JDFElement p)
 	{
 		if (!((getPoolChildrenGeneric(null, null, null).index(p) >= 0)))
 		{
@@ -213,20 +214,42 @@ public abstract class JDFPool extends JDFElement
 	}
 
 	/**
-	 * Append all children of p for which no identical child exists
+	 * Append all children of p for which no identical child exists <br/>
+	 * if elements have an ID attribute, this is sufficient for equivalence
 	 * 
 	 * @param p the Child to add to the element
 	 */
-	protected void appendUniqueGeneric(JDFPool p)
+	protected void appendUniqueGeneric(final JDFPool p)
 	{
 		final VElement vp = p.getPoolChildrenGeneric(null, null, null);
 
 		final VElement v = getPoolChildrenGeneric(null, null, null);
-		for (int i = 0; i < vp.size(); i++)
+		final int pSize = vp.size();
+		for (int i = 0; i < pSize; i++)
 		{
-			if (!v.containsElement(vp.elementAt(i)))
+
+			final KElement elem = vp.elementAt(i);
+			final String id = elem.getAttribute(AttributeName.ID, null, null);
+			if (id != null)
 			{
-				copyElement(vp.elementAt(i), null);
+				final KElement elemHere = getChildWithAttribute(elem.getLocalName(), AttributeName.ID, null, id, 0, true);
+				if (elemHere != null)
+				{
+					if (!elemHere.isEqual(elem)) // overwrite the old element if not equal
+					{
+						elemHere.replaceElement(elem);
+					}
+				}
+				else
+				// copy if it does not exist
+				{
+					copyElement(elem, null);
+				}
+
+			}
+			else if (!v.containsElement(elem))
+			{
+				copyElement(elem, null);
 			}
 		}
 	}

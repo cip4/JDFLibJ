@@ -98,7 +98,8 @@ public class ThreadUtil
 	public static abstract class WaitTimeout<a> implements Runnable
 	{
 		/**
-		 * this is the handle routine that may take longer it should return the expected object when completed
+		 * this is the handle routine that may take longer <br/>
+		 * it should return the expected object when completed
 		 * 
 		 * @return the object that this whole class is about
 		 */

@@ -259,7 +259,7 @@ public class StringUtil
 		{
 			return null;
 		}
-		templateLocal = StringUtil.replaceString(templateLocal, "\\,", "__comma__€ß-eher selten"); // quick
+		templateLocal = StringUtil.replaceString(templateLocal, "\\,", "__comma__ï¿½ï¿½-eher selten"); // quick
 		// hack
 		// ;
 		// -
@@ -280,7 +280,7 @@ public class StringUtil
 			}
 			else
 			{
-				vObj[i] = StringUtil.replaceString(s, "__comma__€ß-eher selten", ","); // quick
+				vObj[i] = StringUtil.replaceString(s, "__comma__ï¿½ï¿½-eher selten", ","); // quick
 				// hack
 				// ;
 				// -
@@ -310,7 +310,7 @@ public class StringUtil
 			return null;
 		}
 
-		formatLocal = StringUtil.replaceString(formatLocal, "%%", "__percent__€ß-eher selten"); // quick
+		formatLocal = StringUtil.replaceString(formatLocal, "%%", "__percent__ï¿½ï¿½-eher selten"); // quick
 		// hack
 		// ;
 		// -
@@ -349,7 +349,7 @@ public class StringUtil
 			}
 		}
 
-		return replaceString(s, "__percent__€ß-eher selten", "%"); // undo quick
+		return replaceString(s, "__percent__ï¿½ï¿½-eher selten", "%"); // undo quick
 		// hack ;-)
 	}
 
@@ -1548,13 +1548,12 @@ public class StringUtil
 				String s = new String(utf8, "UTF-8");
 				if (s.indexOf(0xfffd) >= 0)
 				{
-					s = new String(utf8);
+					s = new String(utf8, "Cp1252");
 				}
 				return s;
 			}
 			catch (final UnsupportedEncodingException e)
 			{
-				e.printStackTrace();
 				return null;
 			}
 		}
@@ -1733,7 +1732,7 @@ public class StringUtil
 	 * default: escape(String toEscape, null, 0, 0, 0, 256); //Note that an escaped character can't be unescaped without the knowledge of the escapelength
 	 * 
 	 * @param strToEscape the String to escape
-	 * @param strCharSet the set of characters that should be escaped eg "ÜÖÄüöä"
+	 * @param strCharSet the set of characters that should be escaped eg "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
 	 * @param strEscapeChar the character sequence that marks an escape sequence. If <code>null</code>, "\\" is used
 	 * 
 	 * @param iRadix the numerical representation base of the escaped chars, e.g. 8 for octal, 16 for hex<br>
@@ -1749,19 +1748,17 @@ public class StringUtil
 	 * 
 	 * @return the string where all illegal sequences have been replaced by their escaped representation
 	 */
-	public static String escape(final String strToEscape, final String strCharSet, final String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, final int iEscapeAbove)
+	public static String escape(final String strToEscape, final String strCharSet, String strEscapeChar, final int iRadix, final int iEscapeLen, final int iEscapeBelow, int iEscapeAbove)
 	{
-		int iEscapeAboveLocal = iEscapeAbove;
-		String strEscapeCharLocal = strEscapeChar;
 
-		if (strEscapeCharLocal == null)
+		if (strEscapeChar == null)
 		{
-			strEscapeCharLocal = "\\";
+			strEscapeChar = "\\";
 		}
 
-		if (iEscapeAboveLocal < 0)
+		if (iEscapeAbove < 0)
 		{
-			iEscapeAboveLocal = 0x7fffffff;
+			iEscapeAbove = 0x7fffffff;
 		}
 
 		// String escapedString = JDFConstants.EMPTYSTRING;
@@ -1770,7 +1767,7 @@ public class StringUtil
 		int cToEscape;
 		final byte[] escaped = new byte[a_toEscape.length * 4];
 		int posE = 0;
-		final byte[] escapeCharbytes = strEscapeCharLocal.getBytes();
+		final byte[] escapeCharbytes = strEscapeChar.getBytes();
 
 		for (int i = 0; i < l; i++)
 		{
@@ -1780,7 +1777,7 @@ public class StringUtil
 				cToEscape = 256 + cToEscape;
 			}
 
-			if ((cToEscape > iEscapeAboveLocal) || (cToEscape < iEscapeBelow) || (strCharSet != null && strCharSet.indexOf(cToEscape) != -1))
+			if ((cToEscape > iEscapeAbove) || (cToEscape < iEscapeBelow) || (strCharSet != null && strCharSet.indexOf(cToEscape) != -1))
 			{ // the character must be escaped
 				for (int ee = 0; ee < escapeCharbytes.length; ee++)
 				{
@@ -1864,19 +1861,19 @@ public class StringUtil
 	/**
 	 * unescape a String which was escaped with the Java StringUtil.escape method
 	 * 
-	 * @param strToUnescape the String to unescape. For example <code>zz\d6\zzz\c4\\dc\z\d6\\24\\3f\zzäz</code>
+	 * @param strToUnescape the String to unescape. For example <code>zz\d6\zzz\c4\\dc\z\d6\\24\\3f\zzï¿½z</code>
 	 * @param strEscapeChar the char which indicates a escape sequenze "\\" in this case (thats also the default)
 	 * @param iRadix the radix of the escape sequenze. 16 in this example.
 	 * @param escapeLen the number of digits per escaped char, not including strEscapeChar
 	 * 
-	 * @return the unescaped String. <code>zzÖzzzÄÜzÖ$?zzäz</code> in this example
+	 * @return the unescaped String. <code>zzï¿½zzzï¿½ï¿½zï¿½$?zzï¿½z</code> in this example
 	 */
 	public static String unEscape(final String strToUnescape, final String strEscapeChar, final int iRadix, final int escapeLen)
 	{
 		final byte[] byteUnEscape = strToUnescape.getBytes();
 		final byte[] byteEscape = new byte[byteUnEscape.length];
 		final byte escapeChar = strEscapeChar.getBytes()[0]; // dont even dream of
-		// using € as an escape
+		// using ï¿½ as an escape
 		// char
 		int n = 0;
 		final byte[] escapeSeq = new byte[escapeLen];

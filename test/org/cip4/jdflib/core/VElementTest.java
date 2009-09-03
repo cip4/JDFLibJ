@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -107,6 +107,7 @@ public class VElementTest extends TestCase
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public void testCastVector()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -281,6 +282,32 @@ public class VElementTest extends TestCase
 		assertTrue(v.isEqual(v2));
 		v2.set(1, e4);
 		assertFalse(v.isEqual(v2));
+	}
+
+	/**
+	 * 
+	 */
+	public void testIndex()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement e = d.getRoot();
+		final KElement e1 = e.appendElement("e1");
+		e1.setAttribute("a", "b");
+		final KElement e2 = e.appendElement("e1");
+		e2.setAttribute("a", "c");
+		final KElement e3 = e.appendElement("e1");
+		e3.setAttribute("ID", "id3");
+		e3.setAttribute("a", "a1");
+		final KElement e4 = e.appendElement("e1");
+		e4.setAttribute("ID", "id3");
+		e4.setAttribute("a", "a2");
+		final VElement v = new VElement();
+		v.add(e1);
+		v.add(e2);
+		assertEquals(v.index(e1), 0);
+		assertEquals(v.index(e4), -1);
+		v.add(e3);
+		assertEquals(v.index(e4), 2);
 	}
 
 }

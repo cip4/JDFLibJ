@@ -4703,13 +4703,11 @@ public class KElement extends ElementNSImpl
 	 * @param v
 	 * @return VElement the found child elements
 	 */
-	public VElement getChildrenFromList(final VString nodeNames, final JDFAttributeMap map, final boolean bDirect, final VElement v)
+	public VElement getChildrenFromList(final VString nodeNames, final JDFAttributeMap map, final boolean bDirect, VElement v)
 	{
-		VElement vLocal = v;
-
-		if (vLocal == null)
+		if (v == null)
 		{
-			vLocal = new VElement();
+			v = new VElement();
 		}
 		KElement kElem = getFirstChildElement();
 
@@ -4719,16 +4717,16 @@ public class KElement extends ElementNSImpl
 			{
 				if (map == null || kElem.includesAttributes(map, true))
 				{
-					vLocal.addElement(kElem);
+					v.addElement(kElem);
 				}
 			}
 			if (!bDirect)
 			{
-				kElem.getChildrenFromList(nodeNames, map, bDirect, vLocal);
+				kElem.getChildrenFromList(nodeNames, map, bDirect, v);
 			}
 			kElem = kElem.getNextSiblingElement();
 		}
-		return vLocal;
+		return v;
 	}
 
 	// ************************** end of methods needed in JDFSurface

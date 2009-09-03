@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,7 +74,7 @@
  * COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2002
  *      ALL RIGHTS RESERVED
  *
- * @author: Thomas Kurberg
+ * @author Thomas Kurberg
  *
  * Last changes
  * created 2002-02-04
@@ -95,6 +95,11 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 
+/**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+ * 
+ * before August 21, 2009
+ */
 public class JDFRefElement extends JDFElement
 {
 	private static final long serialVersionUID = 1L;
@@ -130,7 +135,7 @@ public class JDFRefElement extends JDFElement
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFRefElement(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFRefElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -142,7 +147,7 @@ public class JDFRefElement extends JDFElement
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFRefElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFRefElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -155,13 +160,14 @@ public class JDFRefElement extends JDFElement
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFRefElement(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFRefElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
 	 * test Part element existence
+	 * @return
 	 * 
 	 * @deprecated 060310 use inline hasChildElement(ElementName.PART, null);
 	 */
@@ -176,7 +182,7 @@ public class JDFRefElement extends JDFElement
 	 * 
 	 * @param value the value to set the attribute to
 	 */
-	public void setrRef(String value)
+	public void setrRef(final String value)
 	{
 		setAttribute(JDFConstants.RREF, value, JDFConstants.EMPTYSTRING);
 	}
@@ -189,7 +195,7 @@ public class JDFRefElement extends JDFElement
 	 * @return true if ok
 	 */
 	@Override
-	public boolean fitsName(String nodeName, String nameSpaceURI)
+	public boolean fitsName(final String nodeName, final String nameSpaceURI)
 	{
 		if (nodeName == null || nodeName.endsWith(JDFConstants.REF))
 		{
@@ -227,7 +233,7 @@ public class JDFRefElement extends JDFElement
 	 *@deprecated in JDF 1.2
 	 */
 	@Deprecated
-	public void setrSubRef(String value)
+	public void setrSubRef(final String value)
 	{
 		setAttribute(JDFConstants.RSUBREF, value, JDFConstants.EMPTYSTRING);
 	}
@@ -242,8 +248,11 @@ public class JDFRefElement extends JDFElement
 		return getAttribute(JDFConstants.RSUBREF, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.KElement.EnumValidationLevel)
+	 */
 	@Override
-	public boolean isValid(EnumValidationLevel level)
+	public boolean isValid(final EnumValidationLevel level)
 	{
 		final boolean b = super.isValid(level);
 		if (!b)
@@ -251,7 +260,7 @@ public class JDFRefElement extends JDFElement
 			return false;
 		}
 
-		JDFResource r = getTarget();
+		final JDFResource r = getTarget();
 
 		if (r == null)
 		{
@@ -281,14 +290,16 @@ public class JDFRefElement extends JDFElement
 
 	// /////////////////////////////////////////////////////////////
 
+	/**
+	 * @return
+	 */
 	public boolean validResourcePosition()
 	{
 		return validResourcePosition(getTarget());
 	}
 
 	/**
-	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or
-	 * explicit partitions<br>
+	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
 	 * may return null
 	 * 
 	 * @return JDFResource - the reference target partition
@@ -310,8 +321,7 @@ public class JDFRefElement extends JDFElement
 	}
 
 	/**
-	 * get the referenced target resource 
-	 * The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
+	 * get the referenced target resource The resource's PartUsage is evaluated to correctly retrieve implicit or explicit partitions<br>
 	 * may return null
 	 * 
 	 * overrides the deprecated method JDFElement.getTarget()
@@ -319,16 +329,19 @@ public class JDFRefElement extends JDFElement
 	 * @return JDFResource - the reference target partition
 	 */
 	@Override
-	@SuppressWarnings(value={"deprecation"})
 	public JDFResource getTarget()
 	{
-		JDFResource targetRoot = getTargetRoot();
+		final JDFResource targetRoot = getTargetRoot();
 		if (targetRoot == null)
+		{
 			return null;
+		}
 
 		final JDFAttributeMap partMap = getPartMap();
 		if (partMap == null)
+		{
 			return targetRoot;
+		}
 		return targetRoot.getPartition(partMap, null);
 	}
 
@@ -433,11 +446,11 @@ public class JDFRefElement extends JDFElement
 	 * delete this refElement and it's target
 	 * 
 	 * @param bCheckRefCount if true, check that no other element refers to the target before deleting<br>
-	 *            if bCheckRefCount=false, the target is force deleted
+	 * if bCheckRefCount=false, the target is force deleted
 	 * @return JDFElement the deleted targeelement
 	 * @since 290502
 	 */
-	public JDFElement deleteRef(boolean bCheckRefCount)
+	public JDFElement deleteRef(final boolean bCheckRefCount)
 	{
 		final JDFResource e = getTarget();
 		if (e != null)
@@ -514,7 +527,7 @@ public class JDFRefElement extends JDFElement
 	 * @param mPart attribute map for the part to set
 	 */
 	@Override
-	public void setPartMap(JDFAttributeMap mPart)
+	public void setPartMap(final JDFAttributeMap mPart)
 	{
 		super.setPartMap(mPart);
 	}
@@ -524,7 +537,7 @@ public class JDFRefElement extends JDFElement
 	 * @param mPart attribute map for the part to remove
 	 */
 	@Override
-	public void removePartMap(JDFAttributeMap mPart)
+	public void removePartMap(final JDFAttributeMap mPart)
 	{
 		super.removePartMap(mPart);
 	}
@@ -536,7 +549,7 @@ public class JDFRefElement extends JDFElement
 	 * @return boolean - returns true if the part exists
 	 */
 	@Override
-	public boolean hasPartMap(JDFAttributeMap mPart)
+	public boolean hasPartMap(final JDFAttributeMap mPart)
 	{
 		return super.hasPartMap(mPart);
 	}

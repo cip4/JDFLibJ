@@ -1817,11 +1817,15 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 			final JDFNode n2 = n.addCombined(v);
 			// JDFNotification n0 =
-			n2.getCreateAuditPool().addNotification(EnumClass.Event, null, null);
+			final JDFAuditPool auditPoolMain = n2.getCreateAuditPool();
+			auditPoolMain.addNotification(EnumClass.Event, null, null);
+			auditPoolMain.addProcessRun(EnumNodeStatus.Completed, null, null);
+
 			final JDFSpawn spawn = new JDFSpawn(n2);
 			final JDFNode spawnedNode = spawn.spawn("thisFile", "spawnFile", null, null, true, true, true, true);
 			final String spawnID = spawnedNode.getSpawnID(false);
 			final JDFAuditPool ap = spawnedNode.getCreateAuditPool();
+			ap.getAudit(0, EnumAuditType.ProcessRun, null, null).setDescriptiveName("changed");
 			final JDFNotification not1 = ap.addNotification(EnumClass.Event, null, null);
 			not1.appendComment();
 			final JDFNotification not2 = ap.addNotification(EnumClass.Event, null, null);
@@ -1837,7 +1841,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			assertTrue("ids are correctly copied", vNotifs.get(1).getAttribute("ID").endsWith(id1.substring(2)));
 			assertTrue("ids are correctly copied", vNotifs.get(2).getAttribute("ID").endsWith(id2.substring(2)));
 			assertTrue("ids contain spawnid", vNotifs.get(1).getAttribute("ID").contains(spawnID.substring(spawnID.length() - 6)));
-
+			assertEquals("pr was not duplicated ", ap2.numChildElements(ElementName.PROCESSRUN, null), 1);
+			final JDFAudit prMerge = ap2.getAudit(0, EnumAuditType.ProcessRun, null, null);
+			assertEquals("pr was not duplicated ", prMerge.getDescriptiveName(), "changed");
 		}
 	}
 

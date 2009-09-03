@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -110,6 +110,7 @@ public class VElement extends Vector<KElement>
 	 * 
 	 * @param m
 	 */
+	@SuppressWarnings("unchecked")
 	public VElement(final Vector m)
 	{
 		super();
@@ -153,7 +154,7 @@ public class VElement extends Vector<KElement>
 	}
 
 	/**
-	 * index - get the index of s in the vector
+	 * index - get the index of s in the vector using isEquals or ID rather than equals
 	 * 
 	 * @param s KElement to search for
 	 * 
@@ -161,9 +162,21 @@ public class VElement extends Vector<KElement>
 	 */
 	public int index(final KElement s)
 	{
+		if (s == null)
+		{
+			return -1;
+		}
+		final String id = s.getAttribute_KElement(AttributeName.ID, null, null);
 		for (int i = 0; i < size(); i++)
 		{
-			if ((elementAt(i)).isEqual(s))
+			if (id != null)
+			{
+				if (id.equals(elementAt(i).getAttribute_KElement(AttributeName.ID, null, null)))
+				{
+					return i;
+				}
+			}
+			else if ((elementAt(i)).isEqual(s))
 			{
 				return i;
 			}
@@ -188,7 +201,7 @@ public class VElement extends Vector<KElement>
 	/**
 	 * appendUniqueNotNull - append a string but ignore multiple entries
 	 * 
-	 * @param KElement v
+	 * @param v
 	 * @deprecated simply use appendUnique
 	 */
 	@Deprecated
@@ -203,7 +216,7 @@ public class VElement extends Vector<KElement>
 	/**
 	 * AppendUniqueNotNull - append a vector but ignore multiple entries
 	 * 
-	 * @param VElement v
+	 * @param v
 	 * @deprecated simply use appendUnique
 	 */
 	@Deprecated
@@ -221,7 +234,7 @@ public class VElement extends Vector<KElement>
 	/**
 	 * AppendUnique - append a string but ignore multiple entries
 	 * 
-	 * @param v the element to append
+	 * @param elem the element to append
 	 */
 	public void appendUnique(final KElement elem)
 	{
@@ -238,7 +251,7 @@ public class VElement extends Vector<KElement>
 	/**
 	 * addAll ignoring null collections
 	 * 
-	 * @param v the vector of elements to append
+	 * @param elem the vector of elements to append
 	 */
 	public void addAll(final VElement elem)
 	{
@@ -253,7 +266,7 @@ public class VElement extends Vector<KElement>
 	/**
 	 * does this contain an equivalent element similar to contains but uses isEqual() instead of equals()
 	 * 
-	 * @param v the element to look for
+	 * @param elem the element to look for
 	 * @return true, if v is contained in this
 	 */
 	public boolean containsElement(final KElement elem)
@@ -335,25 +348,26 @@ public class VElement extends Vector<KElement>
 	}
 
 	/**
-	 * set the attribute key to the values defined in vValue
+	 * set the values of attribute key to the values defined in vValue
 	 * 
 	 * @param key key the attribute name
 	 * @param vValue vValue the vector of values
 	 * @param nameSpaceURI nameSpace of the attribute to set
 	 * 
 	 * @default setAttributes(key, vValue, null)
+	 * @throws IllegalArgumentException if size mismatch of vValue anf this
 	 */
-	public void setAttributes(final String key, final Vector vValue, final String nameSpaceURI)
+	public void setAttributes(final String key, final Vector<String> vValue, final String nameSpaceURI)
 	{
 		if (size() != vValue.size())
 		{
-			System.out.println("VElement.SetAttributes: size mismatch");
+			throw new IllegalArgumentException("VElement.SetAttributes: size mismatch " + size() + " != " + vValue.size());
 		}
 
 		for (int i = 0; i < size(); i++)
 		{
 			final KElement k = elementAt(i);
-			k.setAttribute(key, (String) vValue.elementAt(i), nameSpaceURI);
+			k.setAttribute(key, vValue.elementAt(i), nameSpaceURI);
 		}
 	}
 

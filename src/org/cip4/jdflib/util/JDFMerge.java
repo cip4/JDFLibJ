@@ -115,7 +115,6 @@ import org.cip4.jdflib.resource.JDFResource.EnumSpawnStatus;
  */
 public class JDFMerge
 {
-
 	private JDFSpawned spawnAudit = null;
 	private final JDFNode m_ParentNode;
 	private JDFNode subJDFNode;

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,8 +87,8 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**
- * This class represents a JDF-ResourceLink/AmountPool/PartAmount element it inherits may methods fro ResourceLink,
- * since PartAmount specifies ResourceLink properties of a partition
+ * This class represents a JDF-ResourceLink/AmountPool/PartAmount element it inherits may methods fro ResourceLink, since PartAmount specifies ResourceLink
+ * properties of a partition
  */
 public class JDFPartAmount extends JDFResourceLink
 {
@@ -121,7 +121,7 @@ public class JDFPartAmount extends JDFResourceLink
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
-		AttributeInfo ai = super.getTheAttributeInfo().updateReplace((AtrInfoTable) null);
+		final AttributeInfo ai = super.getTheAttributeInfo().updateReplace((AtrInfoTable) null);
 		ai.updateRemove(atrInfoTable_ToRemove);
 		return ai;
 	}
@@ -129,7 +129,7 @@ public class JDFPartAmount extends JDFResourceLink
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
-		ElementInfo eiRL = super.getTheElementInfo();
+		final ElementInfo eiRL = super.getTheElementInfo();
 		eiRL.updateRemove(elemInfoTable_ToRemove);
 		eiRL.updateReplace(elemInfoTable_ToReplace);
 		return eiRL;
@@ -142,7 +142,7 @@ public class JDFPartAmount extends JDFResourceLink
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFPartAmount(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public JDFPartAmount(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -154,7 +154,7 @@ public class JDFPartAmount extends JDFResourceLink
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFPartAmount(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	public JDFPartAmount(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -167,7 +167,7 @@ public class JDFPartAmount extends JDFResourceLink
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFPartAmount(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFPartAmount(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -185,29 +185,27 @@ public class JDFPartAmount extends JDFResourceLink
 		return "JDFPartAmount[ -->" + super.toString() + "]";
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel,
-	 * boolean, int)
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
 	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		final VString v = super.getInvalidAttributes(level, bIgnorePrivate, nMax);
-		JDFResourceLink rl = (JDFResourceLink) getDeepParentChild(ElementName.RESOURCELINKPOOL);
+		final JDFResourceLink rl = (JDFResourceLink) getDeepParentChild(ElementName.RESOURCELINKPOOL);
 		if (rl != null)
 		{
-			JDFAttributeMap rlMap = rl.getAttributeMap();
+			final JDFAttributeMap rlMap = rl.getAttributeMap();
 			if (rlMap != null)
 			{
-				JDFAttributeMap map = getAttributeMap();
+				final JDFAttributeMap map = getAttributeMap();
 				if (map != null)
 				{
-					Iterator<String> it = map.getKeyIterator();
+					final Iterator<String> it = map.getKeyIterator();
 					while (it.hasNext())
 					{
-						String s = it.next();
+						final String s = it.next();
 						if (rlMap.containsKey(s))
 						{
 							v.add(s);
@@ -216,7 +214,7 @@ public class JDFPartAmount extends JDFResourceLink
 				}
 			}
 		}
-		
+
 		return v;
 	}
 
@@ -250,7 +248,9 @@ public class JDFPartAmount extends JDFResourceLink
 	{
 		KElement rl = getParentNode_KElement();
 		if (rl != null)
+		{
 			rl = rl.getParentNode_KElement();
+		}
 		return (rl instanceof JDFResourceLink) ? ((JDFResourceLink) rl).getLinkRoot() : null;
 
 	}

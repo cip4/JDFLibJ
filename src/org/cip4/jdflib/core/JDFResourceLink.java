@@ -146,7 +146,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * @param v
+	 * @return
 	 */
 	public boolean validCombinedProcessIndex()
 	{
