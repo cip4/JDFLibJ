@@ -97,6 +97,7 @@ import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -1545,6 +1546,8 @@ public class XMLDoc
 				if (uc instanceof HttpURLConnection)
 				{
 					final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+					urlCon.setConnectTimeout(PlatformUtil
+							.getConnectionTimeout());
 					urlCon.setDoOutput(true);
 					urlCon.setRequestProperty("Connection", "keep-alive");
 					urlCon.setRequestProperty("Content-Type", strContentType);

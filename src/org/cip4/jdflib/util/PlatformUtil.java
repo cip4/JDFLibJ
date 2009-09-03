@@ -77,11 +77,23 @@ import java.io.File;
  * 01.09.2009
  */
 public class PlatformUtil {
+	
+	static int DEFAULT_CONNECTION_TIMEOUT = 2000;
+	
 	/**
 	 * Returns true when system platform is Microsoft Windows.
 	 * @return true if platform is windows.
 	 */
 	public static boolean isWindows() {
 		return File.separator.equals("\\");
+	}
+	
+	/**
+	 * Returns connection timeout in milliseconds as integer.
+	 * 
+	 * @return connectionTimeout in milliseconds
+	 */
+	public static int getConnectionTimeout() {
+		return DEFAULT_CONNECTION_TIMEOUT;
 	}
 }

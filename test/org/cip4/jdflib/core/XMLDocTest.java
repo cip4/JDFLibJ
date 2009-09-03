@@ -753,7 +753,6 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	/**
 	 * @throws IOException
-	 *             TODO Include test case
 	 */
 	 public void testWriteToHTTPURL() throws IOException {
 		final XMLDoc d = new XMLDoc("doc", null);
@@ -781,7 +780,6 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 	/**
 	 * @throws IOException
-	 *             TODO Include test case
 	 */
 	 public void testWriteToURL() throws IOException {
 		final XMLDoc d = new XMLDoc("doc", null);

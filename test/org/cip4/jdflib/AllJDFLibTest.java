@@ -222,6 +222,8 @@ import org.cip4.jdflib.util.HotFolderTest;
 import org.cip4.jdflib.util.JDFDateTest;
 import org.cip4.jdflib.util.JDFSpawnTest;
 import org.cip4.jdflib.util.MimeUtilTest;
+import org.cip4.jdflib.util.MyArgsTest;
+import org.cip4.jdflib.util.PlatformUtilTest;
 import org.cip4.jdflib.util.PrefixInputStreamTest;
 import org.cip4.jdflib.util.QueueHotFolderTest;
 import org.cip4.jdflib.util.RollingBackupTest;
@@ -429,6 +431,8 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFDateTest.class);
 		suite.addTestSuite(JDFSpawnTest.class);
 		suite.addTestSuite(MimeUtilTest.class);
+		suite.addTestSuite(MyArgsTest.class);
+		suite.addTestSuite(PlatformUtilTest.class);
 		suite.addTestSuite(PrefixInputStreamTest.class);
 		suite.addTestSuite(QueueHotFolderTest.class);
 		suite.addTestSuite(RollingBackupTest.class);
