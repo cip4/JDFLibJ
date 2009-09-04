@@ -1,6 +1,1578 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.4BLD570 (04.09.2009)
+
+There was no label 560 (only 56 on cip4 subversion) !!!
+
+Revision: 4063
+Author: prosi
+Date: 18:26:49, Donnerstag, 3. September 2009
+Message:
+new class LinkRefFinder.java
+javadoc cleanup
+----
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/LinkRefFinder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/AllJDFLibTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/VElementTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/elementwalker/LinkRefFinderTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFResourceTest.java
+
+Revision: 4060
+Author: prosi
+Date: 16:01:34, Donnerstag, 3. September 2009
+Message:
+update of tests to UTF-8
+javadoc cleanup
+----
+Modified : /trunk/JDFLibJ/build.xml
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFConstants.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFCustomerMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFNodeInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFPartAmount.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFRefElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/VElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ThreadUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/VElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFFilespecTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/QueueHotFolderTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/UrlUtilTest.java
+
+Revision: 4059
+Author: StefanMeissner
+Date: 11:22:07, Donnerstag, 3. September 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MyArgs.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/PlatformUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/AllJDFLibTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/QueueTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/HotFolderTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MyArgsTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/PlatformUtilTest.java
+
+Revision: 4058
+Author: StefanMeissner
+Date: 17:13:02, Mittwoch, 2. September 2009
+Message:
+made unit tests unix compatible using an ubuntu 9.04 desktop system;
+extended PlatformUtil
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/PlatformUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/validate/JDFValidator.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/CheckJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/QueueTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFFilespecTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FileUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/HotFolderTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/util/PlatformUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/UrlUtilTest.java
+
+Revision: 4055
+Author: prosi
+Date: 21:00:25, Montag, 10. August 2009
+Message:
+refactor mime support
+----
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/mime
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/mime/BodyPartHelper.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/mime/MimeHelper.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/mime/MimeReader.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/mime/MimeWriter.java
+
+Revision: 4051
+Author: prosi
+Date: 20:40:41, Montag, 10. August 2009
+Message:
+clean up warnings
+add better buffered stream detection in StreamUtil
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/TestJDF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/AtrInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/AtrInfoTable.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFPipeParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourceLinkPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFResourcePool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFCuttingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFPhaseTime.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResourceAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFBooleanState.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/devicecapability/JDFDeviceCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/intent/JDFDropItemIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/intent/JDFProductionIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFColorantControl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFCutBlock.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFFileSpec.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFRunList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFSourceResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFTransferCurve.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ByteArrayIOStream.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/DumpDir.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/FastFiFo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/FileUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/HashUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/HotFolder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFDate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFDuration.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StreamUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/validate/JDFValidator.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/examples/AutomatedLayoutTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFFilespecTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/ByteArrayIOStreamTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/FileUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/UrlUtilTest.java
+
+Revision: 4032
+Author: mucha
+Date: 17:16:26, Donnerstag, 23. Juli 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/version.properties
+
+Revision: 4030
+Author: prosi
+Date: 17:06:43, Donnerstag, 23. Juli 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreview.java
+
+Revision: 4029
+Author: prosi
+Date: 16:52:31, Donnerstag, 23. Juli 2009
+Message:
+removed partusage
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreview.java
+
+Revision: 4028
+Author: mucha
+Date: 16:24:19, Donnerstag, 23. Juli 2009
+Message:
+
+----
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMetadataMap.java
+
+Revision: 4027
+Author: mucha
+Date: 16:18:06, Donnerstag, 23. Juli 2009
+Message:
+cosmetic for icsLevel
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/IDPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISCPGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISPreGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/ProductGoldenTicket.java
+
+Revision: 4026
+Author: mucha
+Date: 16:16:31, Donnerstag, 23. Juli 2009
+Message:
+add BASEORDRESET
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/AttributeName.java
+
+Revision: 4025
+Author: mucha
+Date: 16:14:04, Donnerstag, 23. Juli 2009
+Message:
+new auto files which correspond to current schema
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/ElementName.java
+
+Revision: 4024
+Author: mucha
+Date: 16:12:46, Donnerstag, 23. Juli 2009
+Message:
+new auto files which correspond to current schema
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/generator/gui/ComplexTypeList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAcknowledge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAction.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoActionPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAdded.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAddress.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAdhesiveBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAdhesiveBindingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAdvancedParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAncestor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAncestorPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoApprovalDetails.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoApprovalParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoApprovalPerson.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoApprovalSuccess.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoArgumentValue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoArtDelivery.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoArtDeliveryIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAssembly.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAssemblySection.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAssetListCreationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAuthenticationCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAuthenticationQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAuthenticationResp.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoAutomatedOverPrintParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBand.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBarcode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBarcodeCompParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBarcodeDetails.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBarcodeProductionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBarcodeReproParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBasicPreflightTest.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBendingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBindItem.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBindList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBinderySignature.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBindingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBindingQualityParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBlockPreparationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBookCase.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBooleanEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBoxApplication.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBoxArgument.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBoxFoldAction.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBoxFoldingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBoxPackingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBoxToBoxDifference.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBufferParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBundle.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBundleItem.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBundlingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoBusinessInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoByteMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCCITTFaxParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCIELABMeasuringField.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCaseMakingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCasingInParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoChangedAttribute.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoChangedPath.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoChannelBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoChannelBindingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCoilBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCoilBindingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCollatingItem.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCollectingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorControlStrip.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorCorrectionOp.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorCorrectionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorMeasurementConditions.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorSpaceConversionOp.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorSpaceConversionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorSpaceSubstitute.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorantAlias.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorantControl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorantZoneDetails.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoColorsUsed.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoComChannel.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCommand.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoComment.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCompany.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoComponent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoContact.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoContactCopyParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoContainer.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoContentData.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoContentList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoContentMetaData.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoContentObject.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoControllerFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoConventionalPrintingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoConvertingConfig.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCostCenter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCounterReset.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCoverApplicationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCrease.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCreasingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCreateLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCreateResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCreated.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCreditCard.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCustomerInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCustomerMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCut.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCutBlock.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCutMark.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCuttingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCylinderLayout.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCylinderLayoutPreparationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoCylinderPosition.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDBMergeParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDBRules.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDBSchema.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDBSelection.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDCTParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDateTimeEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeleted.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeliveryIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeliveryParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDensityMeasuringField.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDependencies.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDevCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDevCapPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDevCaps.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDevelopingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDevice.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeviceCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeviceFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeviceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeviceList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeviceMark.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeviceNColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDeviceNSpace.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDieLayout.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDieLayoutProductionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDigitalDeliveryParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDigitalMedia.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDigitalPrintingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDisjointing.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDisplayGroup.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDisplayGroupPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDisposition.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDividingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDrop.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDropIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDropItem.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDropItemIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDurationEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDynamicField.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoDynamicInput.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEdgeGluing.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoElementColorParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEmboss.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEmbossingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEmbossingItem.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEmbossingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEmployee.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEmployeeDef.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEndSheet.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEndSheetGluingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEnumerationEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoError.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoErrorData.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoEvent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoExposedMedia.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoExternalImpositionTemplate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoExtraValues.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFCNKey.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFeatureAttribute.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFeaturePool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFeeder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFeederQualityParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFeedingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFileAlias.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFileSpec.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFitPolicy.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFlateParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFlushQueueInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFlushQueueParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFlushResourceParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFlushedResources.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFold.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFoldOperation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFolderProduction.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFoldingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFoldingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFontParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFontPolicy.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoFormatConversionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGangCmdFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGangInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGangQuFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGatheringParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGeneralID.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGlue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGlueApplication.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGlueLine.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoGluingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoHardCoverBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoHeadBandApplicationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoHole.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoHoleLine.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoHoleList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoHoleMakingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoHoleMakingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPCover.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPFinishing.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPFolding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPHoleMaking.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPImageShift.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPJobSheet.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPLayout.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPStitching.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPTrimming.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIDPrintingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIcon.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIconList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIdentical.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIdentificationField.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoImageCompression.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoImageCompressionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoImageReplacementParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoImageSetterParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoImageShift.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInk.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInkZoneCalculationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInkZoneProfile.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInsert.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInsertList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInsertSheet.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInsertingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInsertingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIntegerEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInterpretedPDLData.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoInterpretingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoIsPresentEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoJBIG2Params.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoJDFController.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoJDFService.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoJMF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoJPEG2000Params.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoJacketingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoJobField.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoJobPhase.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoKnownMsgQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLZWParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLabelingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLaminatingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLaminatingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayerDetails.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayerList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayout.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayoutElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayoutElementPart.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayoutElementProductionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayoutIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayoutPreparationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLayoutShift.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLocation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLongFold.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLongGlue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLongPerforate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLongSlit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLongitudinalRibbonOperationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoLot.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMISDetails.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMacroPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoManualLaborParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMarkActivation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMarkObject.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMatrixEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMedia.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMediaIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMediaLayers.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMediaSource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMerged.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMessageService.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMilestone.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMiscConsumable.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoModified.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoModifyNodeCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoModule.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoModuleCap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoModulePhase.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoModulePool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoModuleStatus.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMoveResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoMsgFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNameEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNewComment.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNewJDFCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNewJDFQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNodeInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNodeInfoCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNodeInfoQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNodeInfoResp.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNotification.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNotificationDef.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNotificationFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNumberEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNumberItem.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNumberingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNumberingParam.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoNumberingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoOCGControl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoObjectModel.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoObjectResolution.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoObservationTarget.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoOccupation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoOrderingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPDFInterpretingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPDFPathEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPDFToPSConversionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPDFXParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPDLCreationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPDLResourceAlias.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPRError.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPRGroup.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPRGroupOccurrence.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPRItem.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPROccurrence.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPRRule.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPRRuleAttr.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPSToPDFConversionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPackingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPackingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPageAssignParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPageAssignedList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPageCell.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPageCondition.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPageData.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPageElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPageList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPallet.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPalletizingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPart.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPartStatus.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPayment.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPerforate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPerforatingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPerformance.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPerson.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPhaseTime.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPipeParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPixelColorant.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPlaceHolderResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPlasticCombBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPlasticCombBindingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPlateCopyParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPosition.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPositionObj.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightAction.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightAnalysis.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightArgument.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightConstraint.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightDetail.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightInstance.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightInstanceDetail.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightInventory.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightProfile.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightReport.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreflightReportRulePool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreview.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPreviewGenerationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPricing.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPrintCondition.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPrintConditionColor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPrintRollingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoProcessRun.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoProductionIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoProductionPath.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoProductionSubPath.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoProofItem.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoProofingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoProofingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoPublishingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQualityControlParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQualityControlResult.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQualityMeasurement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQuery.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQueue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQueueEntry.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQueueEntryDef.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQueueEntryDefList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQueueEntryPosParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQueueEntryPriParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQueueFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoQueueSubmissionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRectangleEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRefAnchor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRegisterMark.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRegisterRibbon.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRegistration.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRemoveLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRemoved.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRenderingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRepeatDesc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRequestQueueEntryParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResourceAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResourceCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResourceDefinitionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResourceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResourceParam.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResourcePullParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResourceQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResponse.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoResubmissionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoReturnQueueEntryParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRingBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRingBindingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRollStand.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRuleLength.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoRunList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSaddleStitching.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSaddleStitchingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoScanParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoScavengerArea.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoScore.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoScreenSelector.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoScreeningIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoScreeningParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSeparationControlParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSeparationList.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSeparationSpec.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeCut.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeCuttingIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeCuttingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeDef.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeDefProductionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShapeTemplate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShiftPoint.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShrinkingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoShutDownCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSideSewing.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSideSewingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSideStitching.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSignal.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSignatureCell.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSizeIntent.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSoftCoverBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSpawned.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSpinePreparationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSpineTapingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStackingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStatusPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStatusQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStitchingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStopPersChParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStrap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStrappingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStringEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStringListValue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStripBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStripBindingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStripCellParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStripMark.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoStrippingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSubmissionMethods.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSubscription.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSubscriptionFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSubscriptionInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoSystemTimeSet.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTIFFEmbeddedFile.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTIFFFormatParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTIFFtag.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTabDimensions.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTabs.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTape.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTest.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTestPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTestRef.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoThinPDFParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoThreadSealing.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoThreadSealingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoThreadSewing.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoThreadSewingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTile.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTrackFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTrackResult.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTransferCurve.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTransferCurvePool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTransferCurveSet.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTransferFunctionControl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTrapRegion.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTrappingDetails.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTrappingOrder.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTrappingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTrigger.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoTrimmingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoUpdateJDFCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoUsageCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoValue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoValueLoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoVerificationParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoWakeUpCmdParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoWebInlineFinishingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoWireCombBinding.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoWireCombBindingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoWrappingParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoXYPairEvaluation.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoand.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutocall.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutochoice.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutomacro.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutonot.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoor.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutootherwise.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoset.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutowhen.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/auto/JDFAutoxor.java
+
+Revision: 4023
+Author: prosi
+Date: 15:50:02, Donnerstag, 23. Juli 2009
+Message:
+added metadatamap
+----
+Added : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFMetadataMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFRunList.java
+
+Revision: 4022
+Author: prosi
+Date: 15:49:27, Donnerstag, 23. Juli 2009
+Message:
+added metadatamap
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/DocumentJDFImpl.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/ElementName.java
+
+Revision: 4020
+Author: prosi
+Date: 14:42:07, Donnerstag, 23. Juli 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/QueueTest.java
+
+Revision: 4015
+Author: prosi
+Date: 12:35:39, Donnerstag, 23. Juli 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/QueueTest.java
+
+Revision: 4014
+Author: prosi
+Date: 11:42:01, Donnerstag, 23. Juli 2009
+Message:
+minor cleanup + version tag
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFParser.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/SkipInputStream.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ThreadUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/SkipInputStreamTest.java
+
+Revision: 4009
+Author: prosi
+Date: 19:04:35, Mittwoch, 22. Juli 2009
+Message:
+schema fixes + updates from bambi
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/AttributeName.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFAudit.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/VJDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/xjdfwalker/XJDFToJDFConverter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJMF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFMessage.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFProcessRun.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ByteArrayIOStream.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/DumpDir.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/FastFiFo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFDate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFSpawn.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JMFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/ProcessRunTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/ByteArrayIOStreamTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFDateTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+
+Revision: 4003
+Author: prosi
+Date: 10:58:56, Donnerstag, 16. Juli 2009
+Message:
+keepalive http enhancements + merge bug in nested spawn
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFResourceTest.java
+
+Revision: 3999
+Author: prosi
+Date: 11:08:36, Dienstag, 14. Juli 2009
+Message:
+Bambi Messaging enhancements
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+
+Revision: 3998
+Author: prosi
+Date: 11:02:24, Dienstag, 14. Juli 2009
+Message:
+
+----
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFDeviceFilterTest.java
+
+Revision: 3997
+Author: prosi
+Date: 10:26:10, Dienstag, 14. Juli 2009
+Message:
+Bambi Messaging enhancements
+----
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/TestJDF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFCustomerInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFResourceLink.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/XMLDoc.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/datatypes/JDFAttributeMap.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/elementwalker/FixVersion.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/xjdfwalker/XJDFToJDFConverter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFDeviceFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFDeviceInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFIDInfo.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFNewJDFQuParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResubmissionParams.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/pool/JDFAmountPool.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFDevice.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFIdentical.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/DumpDir.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/EnumUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ThreadUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/AllJDFLibTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFCustomerInfoTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/JDFDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/KElementTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/core/XMLDocTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/datatypes/JDFAttributeMapTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFDeviceInfoTest.java
+Added : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFIDInfoTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFQueueFilterTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFResourceTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/StringUtilTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/UrlUtilTest.java
+
+Revision: 3985
+Author: prosi
+Date: 15:13:05, Montag, 6. Juli 2009
+Message:
+all unit tests ok now
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/BaseGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/devicecapability/JDFDeviceCapTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+
+Revision: 3982
+Author: prosi
+Date: 14:02:44, Montag, 6. Juli 2009
+Message:
+Bambi and editor related enhancements
+Quefiler/UpdateGranularity implemented
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/JDFElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/core/KElement.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFAcknowledge.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFJMF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueEntry.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueueFilter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResponse.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFSignal.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFProcessRun.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/process/JDFPerson.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFDate.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/MimeUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StatusCounter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/StringUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/ThreadUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/UrlUtil.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFJMFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/JDFQueueFilterTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/jmf/QueueTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/process/JDFPersonTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFDateTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/JDFSpawnTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/util/MimeUtilTest.java
+
+Revision: 3975
+Author: prosi
+Date: 18:33:46, Donnerstag, 18. Juni 2009
+Message:
+fix array out of bounds
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFResourceInfo.java
+
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.4BLD570) && !lbtype(JDFLIBJ_2.1.4BLD551)}" -print
+.\auto@@\main\47
+.\auto\JDFAutoAcknowledge.java@@\main\56
+.\auto\JDFAutoAction.java@@\main\31
+.\auto\JDFAutoActionPool.java@@\main\25
+.\auto\JDFAutoAdded.java@@\main\36
+.\auto\JDFAutoAddress.java@@\main\65
+.\auto\JDFAutoAdhesiveBinding.java@@\main\57
+.\auto\JDFAutoAdhesiveBindingParams.java@@\main\58
+.\auto\JDFAutoAdvancedParams.java@@\main\64
+.\auto\JDFAutoAmountPool.java@@\main\46
+.\auto\JDFAutoAncestor.java@@\main\70
+.\auto\JDFAutoAncestorPool.java@@\main\46
+.\auto\JDFAutoand.java@@\main\16
+.\auto\JDFAutoApprovalDetails.java@@\main\23
+.\auto\JDFAutoApprovalParams.java@@\main\51
+.\auto\JDFAutoApprovalPerson.java@@\main\70
+.\auto\JDFAutoApprovalSuccess.java@@\main\63
+.\auto\JDFAutoArgumentValue.java@@\main\27
+.\auto\JDFAutoArtDelivery.java@@\main\79
+.\auto\JDFAutoArtDeliveryIntent.java@@\main\75
+.\auto\JDFAutoAssembly.java@@\main\35
+.\auto\JDFAutoAssemblySection.java@@\main\35
+.\auto\JDFAutoAssetListCreationParams.java@@\main\32
+.\auto\JDFAutoAuthenticationCmdParams.java@@\main\2
+.\auto\JDFAutoAuthenticationQuParams.java@@\main\2
+.\auto\JDFAutoAuthenticationResp.java@@\main\2
+.\auto\JDFAutoAutomatedOverPrintParams.java@@\main\64
+.\auto\JDFAutoBand.java@@\main\47
+.\auto\JDFAutoBarcode.java@@\main\42
+.\auto\JDFAutoBarcodeCompParams.java@@\main\17
+.\auto\JDFAutoBarcodeDetails.java@@\main\12
+.\auto\JDFAutoBarcodeProductionParams.java@@\main\4
+.\auto\JDFAutoBarcodeReproParams.java@@\main\21
+.\auto\JDFAutoBasicPreflightTest.java@@\main\34
+.\auto\JDFAutoBendingParams.java@@\main\14
+.\auto\JDFAutoBinderySignature.java@@\main\36
+.\auto\JDFAutoBindingIntent.java@@\main\70
+.\auto\JDFAutoBindingQualityParams.java@@\main\21
+.\auto\JDFAutoBindItem.java@@\main\51
+.\auto\JDFAutoBindList.java@@\main\45
+.\auto\JDFAutoBlockPreparationParams.java@@\main\60
+.\auto\JDFAutoBookCase.java@@\main\56
+.\auto\JDFAutoBooleanEvaluation.java@@\main\27
+.\auto\JDFAutoBoxApplication.java@@\main\17
+.\auto\JDFAutoBoxArgument.java@@\main\27
+.\auto\JDFAutoBoxFoldAction.java@@\main\21
+.\auto\JDFAutoBoxFoldingParams.java@@\main\23
+.\auto\JDFAutoBoxPackingParams.java@@\main\48
+.\auto\JDFAutoBoxToBoxDifference.java@@\main\26
+.\auto\JDFAutoBufferParams.java@@\main\49
+.\auto\JDFAutoBundle.java@@\main\60
+.\auto\JDFAutoBundleItem.java@@\main\58
+.\auto\JDFAutoBundlingParams.java@@\main\23
+.\auto\JDFAutoBusinessInfo.java@@\main\43
+.\auto\JDFAutoByteMap.java@@\main\76
+.\auto\JDFAutocall.java@@\main\21
+.\auto\JDFAutoCaseMakingParams.java@@\main\50
+.\auto\JDFAutoCasingInParams.java@@\main\53
+.\auto\JDFAutoCCITTFaxParams.java@@\main\22
+.\auto\JDFAutoChangedAttribute.java@@\main\45
+.\auto\JDFAutoChangedPath.java@@\main\27
+.\auto\JDFAutoChannelBinding.java@@\main\53
+.\auto\JDFAutoChannelBindingParams.java@@\main\54
+.\auto\JDFAutochoice.java@@\main\24
+.\auto\JDFAutoCIELABMeasuringField.java@@\main\73
+.\auto\JDFAutoCoilBinding.java@@\main\53
+.\auto\JDFAutoCoilBindingParams.java@@\main\60
+.\auto\JDFAutoCollatingItem.java@@\main\31
+.\auto\JDFAutoCollectingParams.java@@\main\37
+.\auto\JDFAutoColor.java@@\main\79
+.\auto\JDFAutoColorantAlias.java@@\main\65
+.\auto\JDFAutoColorantControl.java@@\main\74
+.\auto\JDFAutoColorantZoneDetails.java@@\main\58
+.\auto\JDFAutoColorControlStrip.java@@\main\70
+.\auto\JDFAutoColorCorrectionOp.java@@\main\52
+.\auto\JDFAutoColorCorrectionParams.java@@\main\69
+.\auto\JDFAutoColorIntent.java@@\main\55
+.\auto\JDFAutoColorMeasurementConditions.java@@\main\56
+.\auto\JDFAutoColorPool.java@@\main\67
+.\auto\JDFAutoColorSpaceConversionOp.java@@\main\64
+.\auto\JDFAutoColorSpaceConversionParams.java@@\main\74
+.\auto\JDFAutoColorSpaceSubstitute.java@@\main\61
+.\auto\JDFAutoColorsUsed.java@@\main\23
+.\auto\JDFAutoComChannel.java@@\main\67
+.\auto\JDFAutoCommand.java@@\main\27
+.\auto\JDFAutoComment.java@@\main\65
+.\auto\JDFAutoCompany.java@@\main\66
+.\auto\JDFAutoComponent.java@@\main\83
+.\auto\JDFAutoContact.java@@\main\68
+.\auto\JDFAutoContactCopyParams.java@@\main\58
+.\auto\JDFAutoContainer.java@@\main\21
+.\auto\JDFAutoContentData.java@@\main\17
+.\auto\JDFAutoContentList.java@@\main\16
+.\auto\JDFAutoContentMetaData.java@@\main\2
+.\auto\JDFAutoContentObject.java@@\main\72
+.\auto\JDFAutoControllerFilter.java@@\main\2
+.\auto\JDFAutoConventionalPrintingParams.java@@\main\79
+.\auto\JDFAutoConvertingConfig.java@@\main\2
+.\auto\JDFAutoCostCenter.java@@\main\58
+.\auto\JDFAutoCounterReset.java@@\main\41
+.\auto\JDFAutoCoverApplicationParams.java@@\main\53
+.\auto\JDFAutoCrease.java@@\main\64
+.\auto\JDFAutoCreasingParams.java@@\main\48
+.\auto\JDFAutoCreated.java@@\main\44
+.\auto\JDFAutoCreateLink.java@@\main\15
+.\auto\JDFAutoCreateResource.java@@\main\16
+.\auto\JDFAutoCreditCard.java@@\main\41
+.\auto\JDFAutoCustomerInfo.java@@\main\57
+.\auto\JDFAutoCustomerMessage.java@@\main\27
+.\auto\JDFAutoCut.java@@\main\66
+.\auto\JDFAutoCutBlock.java@@\main\61
+.\auto\JDFAutoCutMark.java@@\main\72
+.\auto\JDFAutoCuttingParams.java@@\main\49
+.\auto\JDFAutoCylinderLayout.java@@\main\18
+.\auto\JDFAutoCylinderLayoutPreparationParams.java@@\main\14
+.\auto\JDFAutoCylinderPosition.java@@\main\15
+.\auto\JDFAutoDateTimeEvaluation.java@@\main\28
+.\auto\JDFAutoDBMergeParams.java@@\main\52
+.\auto\JDFAutoDBRules.java@@\main\37
+.\auto\JDFAutoDBSchema.java@@\main\52
+.\auto\JDFAutoDBSelection.java@@\main\49
+.\auto\JDFAutoDCTParams.java@@\main\30
+.\auto\JDFAutoDeleted.java@@\main\23
+.\auto\JDFAutoDeliveryIntent.java@@\main\81
+.\auto\JDFAutoDeliveryParams.java@@\main\68
+.\auto\JDFAutoDensityMeasuringField.java@@\main\70
+.\auto\JDFAutoDependencies.java@@\main\24
+.\auto\JDFAutoDevCap.java@@\main\53
+.\auto\JDFAutoDevCapPool.java@@\main\15
+.\auto\JDFAutoDevCaps.java@@\main\58
+.\auto\JDFAutoDevelopingParams.java@@\main\52
+.\auto\JDFAutoDevice.java@@\main\73
+.\auto\JDFAutoDeviceCap.java@@\main\55
+.\auto\JDFAutoDeviceFilter.java@@\main\56
+.\auto\JDFAutoDeviceInfo.java@@\main\68
+.\auto\JDFAutoDeviceList.java@@\main\47
+.\auto\JDFAutoDeviceMark.java@@\main\52
+.\auto\JDFAutoDeviceNColor.java@@\main\45
+.\auto\JDFAutoDeviceNSpace.java@@\main\67
+.\auto\JDFAutoDieLayout.java@@\main\17
+.\auto\JDFAutoDieLayoutProductionParams.java@@\main\2
+.\auto\JDFAutoDigitalDeliveryParams.java@@\main\34
+.\auto\JDFAutoDigitalMedia.java@@\main\29
+.\auto\JDFAutoDigitalPrintingParams.java@@\main\79
+.\auto\JDFAutoDisjointing.java@@\main\76
+.\auto\JDFAutoDisplayGroup.java@@\main\24
+.\auto\JDFAutoDisplayGroupPool.java@@\main\24
+.\auto\JDFAutoDisposition.java@@\main\36
+.\auto\JDFAutoDividingParams.java@@\main\58
+.\auto\JDFAutoDrop.java@@\main\78
+.\auto\JDFAutoDropIntent.java@@\main\72
+.\auto\JDFAutoDropItem.java@@\main\66
+.\auto\JDFAutoDropItemIntent.java@@\main\59
+.\auto\JDFAutoDurationEvaluation.java@@\main\28
+.\auto\JDFAutoDynamicField.java@@\main\61
+.\auto\JDFAutoDynamicInput.java@@\main\54
+.\auto\JDFAutoEdgeGluing.java@@\main\43
+.\auto\JDFAutoElementColorParams.java@@\main\37
+.\auto\JDFAutoEmboss.java@@\main\55
+.\auto\JDFAutoEmbossingIntent.java@@\main\46
+.\auto\JDFAutoEmbossingItem.java@@\main\44
+.\auto\JDFAutoEmbossingParams.java@@\main\49
+.\auto\JDFAutoEmployee.java@@\main\65
+.\auto\JDFAutoEmployeeDef.java@@\main\40
+.\auto\JDFAutoEndSheet.java@@\main\64
+.\auto\JDFAutoEndSheetGluingParams.java@@\main\62
+.\auto\JDFAutoEnumerationEvaluation.java@@\main\27
+.\auto\JDFAutoError.java@@\main\48
+.\auto\JDFAutoErrorData.java@@\main\4
+.\auto\JDFAutoEvent.java@@\main\21
+.\auto\JDFAutoExposedMedia.java@@\main\77
+.\auto\JDFAutoExternalImpositionTemplate.java@@\main\15
+.\auto\JDFAutoExtraValues.java@@\main\12
+.\auto\JDFAutoFCNKey.java@@\main\39
+.\auto\JDFAutoFeatureAttribute.java@@\main\28
+.\auto\JDFAutoFeaturePool.java@@\main\18
+.\auto\JDFAutoFeeder.java@@\main\32
+.\auto\JDFAutoFeederQualityParams.java@@\main\27
+.\auto\JDFAutoFeedingParams.java@@\main\26
+.\auto\JDFAutoFileAlias.java@@\main\65
+.\auto\JDFAutoFileSpec.java@@\main\84
+.\auto\JDFAutoFitPolicy.java@@\main\53
+.\auto\JDFAutoFlateParams.java@@\main\22
+.\auto\JDFAutoFlushedResources.java@@\main\16
+.\auto\JDFAutoFlushQueueInfo.java@@\main\11
+.\auto\JDFAutoFlushQueueParams.java@@\main\21
+.\auto\JDFAutoFlushResourceParams.java@@\main\30
+.\auto\JDFAutoFold.java@@\main\71
+.\auto\JDFAutoFolderProduction.java@@\main\14
+.\auto\JDFAutoFoldingIntent.java@@\main\66
+.\auto\JDFAutoFoldingParams.java@@\main\74
+.\auto\JDFAutoFoldOperation.java@@\main\9
+.\auto\JDFAutoFontParams.java@@\main\68
+.\auto\JDFAutoFontPolicy.java@@\main\60
+.\auto\JDFAutoFormatConversionParams.java@@\main\50
+.\auto\JDFAutoGangCmdFilter.java@@\main\11
+.\auto\JDFAutoGangInfo.java@@\main\11
+.\auto\JDFAutoGangQuFilter.java@@\main\11
+.\auto\JDFAutoGatheringParams.java@@\main\47
+.\auto\JDFAutoGeneralID.java@@\main\16
+.\auto\JDFAutoGlue.java@@\main\73
+.\auto\JDFAutoGlueApplication.java@@\main\70
+.\auto\JDFAutoGlueLine.java@@\main\69
+.\auto\JDFAutoGluingParams.java@@\main\51
+.\auto\JDFAutoHardCoverBinding.java@@\main\48
+.\auto\JDFAutoHeadBandApplicationParams.java@@\main\60
+.\auto\JDFAutoHole.java@@\main\66
+.\auto\JDFAutoHoleLine.java@@\main\50
+.\auto\JDFAutoHoleList.java@@\main\62
+.\auto\JDFAutoHoleMakingIntent.java@@\main\69
+.\auto\JDFAutoHoleMakingParams.java@@\main\77
+.\auto\JDFAutoIcon.java@@\main\50
+.\auto\JDFAutoIconList.java@@\main\43
+.\auto\JDFAutoIdentical.java@@\main\10
+.\auto\JDFAutoIdentificationField.java@@\main\70
+.\auto\JDFAutoIDInfo.java@@\main\26
+.\auto\JDFAutoIDPCover.java@@\main\61
+.\auto\JDFAutoIDPFinishing.java@@\main\54
+.\auto\JDFAutoIDPFolding.java@@\main\58
+.\auto\JDFAutoIDPHoleMaking.java@@\main\58
+.\auto\JDFAutoIDPImageShift.java@@\main\46
+.\auto\JDFAutoIDPJobSheet.java@@\main\59
+.\auto\JDFAutoIDPLayout.java@@\main\60
+.\auto\JDFAutoIDPrintingParams.java@@\main\77
+.\auto\JDFAutoIDPStitching.java@@\main\70
+.\auto\JDFAutoIDPTrimming.java@@\main\61
+.\auto\JDFAutoImageCompression.java@@\main\64
+.\auto\JDFAutoImageCompressionParams.java@@\main\60
+.\auto\JDFAutoImageReplacementParams.java@@\main\76
+.\auto\JDFAutoImageSetterParams.java@@\main\63
+.\auto\JDFAutoImageShift.java@@\main\64
+.\auto\JDFAutoInk.java@@\main\66
+.\auto\JDFAutoInkZoneCalculationParams.java@@\main\65
+.\auto\JDFAutoInkZoneProfile.java@@\main\62
+.\auto\JDFAutoInsert.java@@\main\68
+.\auto\JDFAutoInsertingIntent.java@@\main\55
+.\auto\JDFAutoInsertingParams.java@@\main\61
+.\auto\JDFAutoInsertList.java@@\main\57
+.\auto\JDFAutoInsertSheet.java@@\main\76
+.\auto\JDFAutoIntegerEvaluation.java@@\main\28
+.\auto\JDFAutoInterpretedPDLData.java@@\main\36
+.\auto\JDFAutoInterpretingParams.java@@\main\62
+.\auto\JDFAutoIsPresentEvaluation.java@@\main\24
+.\auto\JDFAutoJacketingParams.java@@\main\43
+.\auto\JDFAutoJBIG2Params.java@@\main\12
+.\auto\JDFAutoJDFController.java@@\main\38
+.\auto\JDFAutoJDFService.java@@\main\48
+.\auto\JDFAutoJMF.java@@\main\67
+.\auto\JDFAutoJobField.java@@\main\50
+.\auto\JDFAutoJobPhase.java@@\main\70
+.\auto\JDFAutoJPEG2000Params.java@@\main\17
+.\auto\JDFAutoKnownMsgQuParams.java@@\main\44
+.\auto\JDFAutoLabelingParams.java@@\main\51
+.\auto\JDFAutoLaminatingIntent.java@@\main\59
+.\auto\JDFAutoLaminatingParams.java@@\main\56
+.\auto\JDFAutoLayerDetails.java@@\main\41
+.\auto\JDFAutoLayerList.java@@\main\47
+.\auto\JDFAutoLayout.java@@\main\68
+.\auto\JDFAutoLayoutElement.java@@\main\79
+.\auto\JDFAutoLayoutElementPart.java@@\main\17
+.\auto\JDFAutoLayoutElementProductionParams.java@@\main\16
+.\auto\JDFAutoLayoutIntent.java@@\main\69
+.\auto\JDFAutoLayoutPreparationParams.java@@\main\67
+.\auto\JDFAutoLayoutShift.java@@\main\2
+.\auto\JDFAutoLoc.java@@\main\22
+.\auto\JDFAutoLocation.java@@\main\65
+.\auto\JDFAutoLongFold.java@@\main\57
+.\auto\JDFAutoLongGlue.java@@\main\65
+.\auto\JDFAutoLongitudinalRibbonOperationParams.java@@\main\62
+.\auto\JDFAutoLongPerforate.java@@\main\57
+.\auto\JDFAutoLongSlit.java@@\main\57
+.\auto\JDFAutoLot.java@@\main\15
+.\auto\JDFAutoLZWParams.java@@\main\22
+.\auto\JDFAutomacro.java@@\main\25
+.\auto\JDFAutoMacroPool.java@@\main\24
+.\auto\JDFAutoManualLaborParams.java@@\main\43
+.\auto\JDFAutoMarkActivation.java@@\main\2
+.\auto\JDFAutoMarkObject.java@@\main\79
+.\auto\JDFAutoMatrixEvaluation.java@@\main\28
+.\auto\JDFAutoMediaIntent.java@@\main\67
+.\auto\JDFAutoMediaLayers.java@@\main\15
+.\auto\JDFAutoMediaSource.java@@\main\74
+.\auto\JDFAutoMerged.java@@\main\54
+.\auto\JDFAutoMessage.java@@\main\54
+.\auto\JDFAutoMessageService.java@@\main\61
+.\auto\JDFAutoMilestone.java@@\main\3
+.\auto\JDFAutoMiscConsumable.java@@\main\17
+.\auto\JDFAutoMISDetails.java@@\main\29
+.\auto\JDFAutoModified.java@@\main\41
+.\auto\JDFAutoModifyNodeCmdParams.java@@\main\22
+.\auto\JDFAutoModule.java@@\main\18
+.\auto\JDFAutoModuleCap.java@@\main\17
+.\auto\JDFAutoModulePhase.java@@\main\83
+.\auto\JDFAutoModulePool.java@@\main\15
+.\auto\JDFAutoModuleStatus.java@@\main\60
+.\auto\JDFAutoMoveResource.java@@\main\11
+.\auto\JDFAutoMsgFilter.java@@\main\60
+.\auto\JDFAutoNameEvaluation.java@@\main\27
+.\auto\JDFAutoNewComment.java@@\main\18
+.\auto\JDFAutoNewJDFCmdParams.java@@\main\25
+.\auto\JDFAutoNewJDFQuParams.java@@\main\23
+.\auto\JDFAutoNodeInfo.java@@\main\81
+.\auto\JDFAutoNodeInfoCmdParams.java@@\main\35
+.\auto\JDFAutoNodeInfoQuParams.java@@\main\25
+.\auto\JDFAutoNodeInfoResp.java@@\main\30
+.\auto\JDFAutonot.java@@\main\16
+.\auto\JDFAutoNotification.java@@\main\63
+.\auto\JDFAutoNotificationDef.java@@\main\45
+.\auto\JDFAutoNotificationFilter.java@@\main\51
+.\auto\JDFAutoNumberEvaluation.java@@\main\29
+.\auto\JDFAutoNumberingIntent.java@@\main\46
+.\auto\JDFAutoNumberingParam.java@@\main\46
+.\auto\JDFAutoNumberingParams.java@@\main\60
+.\auto\JDFAutoNumberItem.java@@\main\51
+.\auto\JDFAutoObjectResolution.java@@\main\64
+.\auto\JDFAutoObservationTarget.java@@\main\46
+.\auto\JDFAutoOccupation.java@@\main\53
+.\auto\JDFAutoOCGControl.java@@\main\12
+.\auto\JDFAutoor.java@@\main\16
+.\auto\JDFAutoOrderingParams.java@@\main\53
+.\auto\JDFAutootherwise.java@@\main\24
+.\auto\JDFAutoPackingIntent.java@@\main\57
+.\auto\JDFAutoPackingParams.java@@\main\56
+.\auto\JDFAutoPageAssignedList.java@@\main\12
+.\auto\JDFAutoPageAssignParams.java@@\main\2
+.\auto\JDFAutoPageCell.java@@\main\57
+.\auto\JDFAutoPageCondition.java@@\main\2
+.\auto\JDFAutoPageData.java@@\main\33
+.\auto\JDFAutoPageElement.java@@\main\13
+.\auto\JDFAutoPageList.java@@\main\33
+.\auto\JDFAutoPallet.java@@\main\49
+.\auto\JDFAutoPalletizingParams.java@@\main\47
+.\auto\JDFAutoPart.java@@\main\56
+.\auto\JDFAutoPartStatus.java@@\main\49
+.\auto\JDFAutoPayment.java@@\main\43
+.\auto\JDFAutoPDFInterpretingParams.java@@\main\59
+.\auto\JDFAutoPDFPathEvaluation.java@@\main\29
+.\auto\JDFAutoPDFToPSConversionParams.java@@\main\70
+.\auto\JDFAutoPDFXParams.java@@\main\28
+.\auto\JDFAutoPDLCreationParams.java@@\main\16
+.\auto\JDFAutoPDLResourceAlias.java@@\main\62
+.\auto\JDFAutoPerforate.java@@\main\65
+.\auto\JDFAutoPerforatingParams.java@@\main\47
+.\auto\JDFAutoPerformance.java@@\main\39
+.\auto\JDFAutoPerson.java@@\main\54
+.\auto\JDFAutoPhaseTime.java@@\main\64
+.\auto\JDFAutoPipeParams.java@@\main\55
+.\auto\JDFAutoPixelColorant.java@@\main\43
+.\auto\JDFAutoPlaceHolderResource.java@@\main\24
+.\auto\JDFAutoPlasticCombBinding.java@@\main\53
+.\auto\JDFAutoPlasticCombBindingParams.java@@\main\61
+.\auto\JDFAutoPlateCopyParams.java@@\main\54
+.\auto\JDFAutoPosition.java@@\main\31
+.\auto\JDFAutoPositionObj.java@@\main\2
+.\auto\JDFAutoPreflightAction.java@@\main\26
+.\auto\JDFAutoPreflightAnalysis.java@@\main\46
+.\auto\JDFAutoPreflightArgument.java@@\main\23
+.\auto\JDFAutoPreflightConstraint.java@@\main\66
+.\auto\JDFAutoPreflightDetail.java@@\main\67
+.\auto\JDFAutoPreflightInstance.java@@\main\67
+.\auto\JDFAutoPreflightInstanceDetail.java@@\main\63
+.\auto\JDFAutoPreflightInventory.java@@\main\46
+.\auto\JDFAutoPreflightParams.java@@\main\28
+.\auto\JDFAutoPreflightProfile.java@@\main\47
+.\auto\JDFAutoPreflightReport.java@@\main\36
+.\auto\JDFAutoPreflightReportRulePool.java@@\main\29
+.\auto\JDFAutoPRError.java@@\main\29
+.\auto\JDFAutoPreview.java@@\main\71
+.\auto\JDFAutoPreviewGenerationParams.java@@\main\63
+.\auto\JDFAutoPRGroup.java@@\main\29
+.\auto\JDFAutoPRGroupOccurrence.java@@\main\14
+.\auto\JDFAutoPricing.java@@\main\68
+.\auto\JDFAutoPrintCondition.java@@\main\31
+.\auto\JDFAutoPrintConditionColor.java@@\main\33
+.\auto\JDFAutoPrintRollingParams.java@@\main\22
+.\auto\JDFAutoPRItem.java@@\main\29
+.\auto\JDFAutoPROccurrence.java@@\main\15
+.\auto\JDFAutoProcessRun.java@@\main\60
+.\auto\JDFAutoProductionIntent.java@@\main\59
+.\auto\JDFAutoProductionPath.java@@\main\19
+.\auto\JDFAutoProductionSubPath.java@@\main\13
+.\auto\JDFAutoProofingIntent.java@@\main\56
+.\auto\JDFAutoProofingParams.java@@\main\73
+.\auto\JDFAutoProofItem.java@@\main\55
+.\auto\JDFAutoPRRule.java@@\main\27
+.\auto\JDFAutoPRRuleAttr.java@@\main\21
+.\auto\JDFAutoPSToPDFConversionParams.java@@\main\74
+.\auto\JDFAutoPublishingIntent.java@@\main\14
+.\auto\JDFAutoQualityControlParams.java@@\main\30
+.\auto\JDFAutoQualityControlResult.java@@\main\29
+.\auto\JDFAutoQualityMeasurement.java@@\main\32
+.\auto\JDFAutoQuery.java@@\main\49
+.\auto\JDFAutoQueue.java@@\main\62
+.\auto\JDFAutoQueueEntry.java@@\main\66
+.\auto\JDFAutoQueueEntryDef.java@@\main\38
+.\auto\JDFAutoQueueEntryDefList.java@@\main\38
+.\auto\JDFAutoQueueEntryPosParams.java@@\main\45
+.\auto\JDFAutoQueueEntryPriParams.java@@\main\44
+.\auto\JDFAutoQueueFilter.java@@\main\39
+.\auto\JDFAutoQueueSubmissionParams.java@@\main\54
+.\auto\JDFAutoRectangleEvaluation.java@@\main\34
+.\auto\JDFAutoRefAnchor.java@@\main\2
+.\auto\JDFAutoRegisterMark.java@@\main\74
+.\auto\JDFAutoRegisterRibbon.java@@\main\53
+.\auto\JDFAutoRegistration.java@@\main\15
+.\auto\JDFAutoRemoved.java@@\main\35
+.\auto\JDFAutoRemoveLink.java@@\main\15
+.\auto\JDFAutoRenderingParams.java@@\main\75
+.\auto\JDFAutoRepeatDesc.java@@\main\2
+.\auto\JDFAutoRequestQueueEntryParams.java@@\main\34
+.\auto\JDFAutoResourceAudit.java@@\main\54
+.\auto\JDFAutoResourceCmdParams.java@@\main\58
+.\auto\JDFAutoResourceDefinitionParams.java@@\main\61
+.\auto\JDFAutoResourceInfo.java@@\main\66
+.\auto\JDFAutoResourceParam.java@@\main\48
+.\auto\JDFAutoResourcePullParams.java@@\main\38
+.\auto\JDFAutoResourceQuParams.java@@\main\61
+.\auto\JDFAutoResponse.java@@\main\52
+.\auto\JDFAutoResubmissionParams.java@@\main\39
+.\auto\JDFAutoReturnQueueEntryParams.java@@\main\22
+.\auto\JDFAutoRingBinding.java@@\main\52
+.\auto\JDFAutoRingBindingParams.java@@\main\59
+.\auto\JDFAutoRollStand.java@@\main\28
+.\auto\JDFAutoRuleLength.java@@\main\2
+.\auto\JDFAutoRunList.java@@\main\82
+.\auto\JDFAutoSaddleStitching.java@@\main\42
+.\auto\JDFAutoSaddleStitchingParams.java@@\main\56
+.\auto\JDFAutoScanParams.java@@\main\75
+.\auto\JDFAutoScavengerArea.java@@\main\54
+.\auto\JDFAutoScore.java@@\main\57
+.\auto\JDFAutoScreeningIntent.java@@\main\21
+.\auto\JDFAutoScreeningParams.java@@\main\67
+.\auto\JDFAutoScreenSelector.java@@\main\69
+.\auto\JDFAutoSeparationControlParams.java@@\main\48
+.\auto\JDFAutoSeparationList.java@@\main\26
+.\auto\JDFAutoSeparationSpec.java@@\main\46
+.\auto\JDFAutoset.java@@\main\25
+.\auto\JDFAutoShapeCut.java@@\main\64
+.\auto\JDFAutoShapeCuttingIntent.java@@\main\56
+.\auto\JDFAutoShapeCuttingParams.java@@\main\54
+.\auto\JDFAutoShapeDef.java@@\main\2
+.\auto\JDFAutoShapeElement.java@@\main\47
+.\auto\JDFAutoShapeEvaluation.java@@\main\29
+.\auto\JDFAutoShiftPoint.java@@\main\2
+.\auto\JDFAutoShrinkingParams.java@@\main\57
+.\auto\JDFAutoShutDownCmdParams.java@@\main\30
+.\auto\JDFAutoSideSewing.java@@\main\30
+.\auto\JDFAutoSideSewingParams.java@@\main\57
+.\auto\JDFAutoSideStitching.java@@\main\36
+.\auto\JDFAutoSignal.java@@\main\52
+.\auto\JDFAutoSignatureCell.java@@\main\30
+.\auto\JDFAutoSizeIntent.java@@\main\67
+.\auto\JDFAutoSoftCoverBinding.java@@\main\44
+.\auto\JDFAutoSpawned.java@@\main\57
+.\auto\JDFAutoSpinePreparationParams.java@@\main\47
+.\auto\JDFAutoSpineTapingParams.java@@\main\59
+.\auto\JDFAutoStackingParams.java@@\main\53
+.\auto\JDFAutoStation.java@@\main\15
+.\auto\JDFAutoStatusPool.java@@\main\51
+.\auto\JDFAutoStatusQuParams.java@@\main\54
+.\auto\JDFAutoStitchingParams.java@@\main\69
+.\auto\JDFAutoStopPersChParams.java@@\main\45
+.\auto\JDFAutoStrap.java@@\main\55
+.\auto\JDFAutoStrappingParams.java@@\main\52
+.\auto\JDFAutoStringEvaluation.java@@\main\29
+.\auto\JDFAutoStringListValue.java@@\main\27
+.\auto\JDFAutoStripBinding.java@@\main\37
+.\auto\JDFAutoStripBindingParams.java@@\main\54
+.\auto\JDFAutoStripCellParams.java@@\main\29
+.\auto\JDFAutoStripMark.java@@\main\22
+.\auto\JDFAutoStrippingParams.java@@\main\37
+.\auto\JDFAutoSubmissionMethods.java@@\main\47
+.\auto\JDFAutoSubscription.java@@\main\49
+.\auto\JDFAutoSubscriptionFilter.java@@\main\2
+.\auto\JDFAutoSubscriptionInfo.java@@\main\3
+.\auto\JDFAutoSystemTimeSet.java@@\main\47
+.\auto\JDFAutoTabDimensions.java@@\main\2
+.\auto\JDFAutoTabs.java@@\main\61
+.\auto\JDFAutoTape.java@@\main\47
+.\auto\JDFAutoTest.java@@\main\20
+.\auto\JDFAutoTestPool.java@@\main\27
+.\auto\JDFAutoTestRef.java@@\main\21
+.\auto\JDFAutoThinPDFParams.java@@\main\57
+.\auto\JDFAutoThreadSealing.java@@\main\30
+.\auto\JDFAutoThreadSealingParams.java@@\main\55
+.\auto\JDFAutoThreadSewing.java@@\main\43
+.\auto\JDFAutoThreadSewingParams.java@@\main\63
+.\auto\JDFAutoTIFFEmbeddedFile.java@@\main\25
+.\auto\JDFAutoTIFFFormatParams.java@@\main\37
+.\auto\JDFAutoTIFFtag.java@@\main\25
+.\auto\JDFAutoTile.java@@\main\64
+.\auto\JDFAutoTool.java@@\main\52
+.\auto\JDFAutoTrackFilter.java@@\main\50
+.\auto\JDFAutoTrackResult.java@@\main\47
+.\auto\JDFAutoTransferCurve.java@@\main\64
+.\auto\JDFAutoTransferCurvePool.java@@\main\62
+.\auto\JDFAutoTransferCurveSet.java@@\main\67
+.\auto\JDFAutoTransferFunctionControl.java@@\main\68
+.\auto\JDFAutoTrappingDetails.java@@\main\69
+.\auto\JDFAutoTrappingOrder.java@@\main\57
+.\auto\JDFAutoTrappingParams.java@@\main\77
+.\auto\JDFAutoTrapRegion.java@@\main\53
+.\auto\JDFAutoTrigger.java@@\main\46
+.\auto\JDFAutoTrimmingParams.java@@\main\69
+.\auto\JDFAutoUpdateJDFCmdParams.java@@\main\15
+.\auto\JDFAutoUsageCounter.java@@\main\20
+.\auto\JDFAutoValue.java@@\main\34
+.\auto\JDFAutoValueLoc.java@@\main\26
+.\auto\JDFAutoVerificationParams.java@@\main\49
+.\auto\JDFAutoWakeUpCmdParams.java@@\main\16
+.\auto\JDFAutoWebInlineFinishingParams.java@@\main\16
+.\auto\JDFAutowhen.java@@\main\24
+.\auto\JDFAutoWireCombBinding.java@@\main\53
+.\auto\JDFAutoWireCombBindingParams.java@@\main\59
+.\auto\JDFAutoWrappingParams.java@@\main\49
+.\auto\JDFAutoxor.java@@\main\16
+.\auto\JDFAutoXYPairEvaluation.java@@\main\33
+.\core\AtrInfo.java@@\main\9
+.\core\AtrInfoTable.java@@\main\13
+.\core\AttributeName.java@@\main\53
+.\core\DocumentJDFImpl.java@@\main\101
+.\core\ElementName.java@@\main\45
+.\core\JDFAudit.java@@\main\98
+.\core\JDFConstants.java@@\main\76
+.\core\JDFCustomerInfo.java@@\main\45
+.\core\JDFCustomerMessage.java@@\main\10
+.\core\JDFDoc.java@@\main\86
+.\core\JDFElement.java@@\main\260
+.\core\JDFNodeInfo.java@@\main\63
+.\core\JDFParser.java@@\main\53
+.\core\JDFPartAmount.java@@\main\32
+.\core\JDFRefElement.java@@\main\67
+.\core\JDFResourceLink.java@@\main\154
+.\core\KElement.java@@\main\277
+.\core\VElement.java@@\main\38
+.\core\XMLDoc.java@@\main\102
+.\datatypes\JDFAttributeMap.java@@\main\44
+.\datatypes\VJDFAttributeMap.java@@\main\39
+.\elementwalker@@\main\5
+.\elementwalker\FixVersion.java@@\main\2
+.\extensions\XJDF20.java@@\main\6
+.\extensions\xjdfwalker\XJDFToJDFConverter.java@@\main\4
+.\goldenticket@@\main\5
+.\goldenticket\BaseGoldenTicket.java@@\main\20
+.\goldenticket\IDPGoldenTicket.java@@\main\5
+.\goldenticket\MISCPGoldenTicket.java@@\main\16
+.\goldenticket\MISGoldenTicket.java@@\main\17
+.\goldenticket\MISPreGoldenTicket.java@@\main\9
+.\goldenticket\ProductGoldenTicket.java@@\main\8
+.\jmf\JDFAcknowledge.java@@\main\24
+.\jmf\JDFDeviceFilter.java@@\main\13
+.\jmf\JDFDeviceInfo.java@@\main\34
+.\jmf\JDFIDInfo.java@@\main\12
+.\jmf\JDFJMF.java@@\main\76
+.\jmf\JDFMessage.java@@\main\83
+.\jmf\JDFNewJDFQuParams.java@@\main\12
+.\jmf\JDFPipeParams.java@@\main\26
+.\jmf\JDFQueue.java@@\main\39
+.\jmf\JDFQueueEntry.java@@\main\36
+.\jmf\JDFQueueFilter.java@@\main\15
+.\jmf\JDFResourceCmdParams.java@@\main\34
+.\jmf\JDFResourceInfo.java@@\main\37
+.\jmf\JDFResponse.java@@\main\34
+.\jmf\JDFResubmissionParams.java@@\main\13
+.\jmf\JDFSignal.java@@\main\27
+.\node\JDFNode.java@@\main\285
+.\pool\JDFAmountPool.java@@\main\38
+.\pool\JDFPool.java@@\main\40
+.\pool\JDFResourceLinkPool.java@@\main\89
+.\pool\JDFResourcePool.java@@\main\75
+.\resource\devicecapability\JDFBooleanState.java@@\main\30
+.\resource\devicecapability\JDFDeviceCap.java@@\main\59
+.\resource\intent\JDFDropItemIntent.java@@\main\22
+.\resource\intent\JDFProductionIntent.java@@\main\23
+.\resource\JDFCuttingParams.java@@\main\17
+.\resource\JDFDevice.java@@\main\14
+.\resource\JDFPhaseTime.java@@\main\36
+.\resource\JDFProcessRun.java@@\main\38
+.\resource\JDFResource.java@@\main\243
+.\resource\JDFResourceAudit.java@@\main\38
+.\resource\process@@\main\27
+.\resource\process\JDFColorantControl.java@@\main\27
+.\resource\process\JDFCutBlock.java@@\main\17
+.\resource\process\JDFFileSpec.java@@\main\35
+.\resource\process\JDFIdentical.java@@\main\7
+.\resource\process\JDFPerson.java@@\main\22
+.\resource\process\JDFRunList.java@@\main\60
+.\resource\process\JDFSourceResource.java@@\main\12
+.\resource\process\JDFTransferCurve.java@@\main\26
+.\util@@\main\31
+.\util\ByteArrayIOStream.java@@\main\3
+.\util\DumpDir.java@@\main\10
+.\util\EnumUtil.java@@\main\6
+.\util\FastFiFo.java@@\main\2
+.\util\FileUtil.java@@\main\16
+.\util\HashUtil.java@@\main\6
+.\util\HotFolder.java@@\main\9
+.\util\JDFDate.java@@\main\56
+.\util\JDFDuration.java@@\main\12
+.\util\JDFMerge.java@@\main\35
+.\util\JDFSpawn.java@@\main\37
+.\util\MimeUtil.java@@\main\36
+.\util\MyArgs.java@@\main\33
+.\util\SkipInputStream.java@@\main\3
+.\util\StatusCounter.java@@\main\25
+.\util\StringUtil.java@@\main\81
+.\util\ThreadUtil.java@@\main\4
+.\util\UrlUtil.java@@\main\27
+.\validate\JDFValidator.java@@\main\8
+
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.4BLD551 (18.06.2009)
 
 #BF Array out of bounds in JDFResourceInfo.getResourceVector()
