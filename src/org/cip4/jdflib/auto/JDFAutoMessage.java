@@ -70,17 +70,16 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.zip.DataFormatException;           
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.util.*;           
-    /*
-    *****************************************************************************
-    class JDFAutoMessage : public JDFElement
-
-    *****************************************************************************
-    */
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoMessage extends JDFElement
 {
