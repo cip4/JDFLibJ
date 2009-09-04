@@ -1,6 +1,17 @@
 ___________________________________________________________
 
 
+Label JDFLIBJ_2.1.4BLD551 (18.06.2009)
+
+#BF Array out of bounds in JDFResourceInfo.getResourceVector()
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.4BLD551) && !lbtype(JDFLIBJ_2.1.4BLD550)}" -print
+.\jmf\JDFResourceInfo.java@@\main\36
+
+___________________________________________________________
+
+
 Label JDFLIBJ_2.1.4BLD550 (18.06.2009)
 
 Revision: 3966
