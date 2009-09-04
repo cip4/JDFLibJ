@@ -70,12 +70,16 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
 
 public abstract class JDFAutoKnownMsgQuParams extends JDFElement
 {
