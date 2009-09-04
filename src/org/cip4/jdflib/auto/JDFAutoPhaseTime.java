@@ -70,21 +70,27 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                        
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Vector;
+import java.util.zip.DataFormatException;
 
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.util.*;           
-    /*
-    *****************************************************************************
-    class JDFAutoPhaseTime : public JDFAudit
-
-    *****************************************************************************
-    */
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.JDFModulePhase;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.process.JDFEmployee;
+import org.cip4.jdflib.resource.process.JDFMISDetails;
+import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoPhaseTime extends JDFAudit
 {
