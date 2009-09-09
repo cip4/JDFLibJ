@@ -2970,7 +2970,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 						map = niCmp.getPartMap();
 					}
 					else
-					// 
+					// we are closer to the root than our query, break downwards loop
 					{
 						niCmp = null;
 					}
