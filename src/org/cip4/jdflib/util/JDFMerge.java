@@ -425,8 +425,7 @@ public class JDFMerge
 				}
 			}
 
-			// retain all other elements of the original (non spawned) JDF Node
-			// if the spawn is partitioned¬
+			// retain all other elements of the original (non spawned) JDF Node if the spawn is partitioned
 			final VElement localChildren = overwriteLocalNode.getChildElementVector(null, null, null, true, 0, false);
 
 			final int siz = localChildren.size();

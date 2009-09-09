@@ -159,7 +159,15 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
 		fs.moveToDir(newDir);
-		ThreadUtil.sleep(3000);
+		for (int i = 0; i < 10; i++)
+		{
+			ThreadUtil.sleep(1000);
+			if (fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)))
+			{
+				break;
+			}
+			System.out.print("Waiting " + i);
+		}
 		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
 
 	}

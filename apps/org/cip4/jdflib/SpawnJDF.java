@@ -241,7 +241,7 @@ public class SpawnJDF
 				final XMLDoc docOut = rootOut.getOwnerDocument_KElement();
 				docOut.write2File(outFile, 0, false);
 
-				// ver‰ndertes Ausgangsfile rausschreiben
+				// ver√§ndertes Ausgangsfile rausschreiben
 				final String strOutXMLFile = "_" + xmlFile;
 				rootIn.eraseEmptyNodes(true);
 				docIn.write2File(strOutXMLFile, 2, false);

@@ -78,7 +78,7 @@ import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.VString;
 
 /**
- * class with utilities for enums also simple object utils
+ * class with utilities for enums
  * 
  * @author prosirai
  * 

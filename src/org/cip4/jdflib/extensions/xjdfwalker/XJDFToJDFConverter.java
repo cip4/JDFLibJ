@@ -6,6 +6,7 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -33,6 +34,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 {
 	JDFDoc jdfDoc;
 	JDFNode theNode;
+	boolean walkedProduct;
 
 	/**
 	 * @param template the jdfdoc to fill this into
@@ -42,6 +44,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		jdfDoc = template == null ? null : template.clone();
+		theNode = null;
+		walkedProduct = false;
 	}
 
 	/**
@@ -80,24 +84,27 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	private JDFNode findNode(final KElement xjdf, final boolean create)
 	{
 		final JDFNode root = jdfDoc.getJDFRoot();
-		JDFNode n = root.getJobPart(xjdf.getAttribute(AttributeName.JOBPARTID), null);
+		final String jpID = xjdf.getAttribute(AttributeName.JOBPARTID, null, null);
+		JDFNode n = root.getJobPart(jpID, null);
 		if (n == null)
 		{
 			if (!root.hasAttribute(AttributeName.TYPE))
 			{
 				return root;
 			}
-			final VElement nodes = root.getvJDFNode(null, null, false);
-			final VString xTypes = StringUtil.tokenize(xjdf.getAttribute(AttributeName.TYPES), null, false);
-			for (int i = 0; i < nodes.size(); i++)
+			if (jpID == null)
 			{
-				final JDFNode n2 = (JDFNode) nodes.get(i);
-				final VString vtypes = n2.getAllTypes();
-				if (vtypes.containsAll(xTypes))
+				final VElement nodes = root.getvJDFNode(null, null, false);
+				final VString xTypes = StringUtil.tokenize(xjdf.getAttribute(AttributeName.TYPES), null, false);
+				for (int i = 0; i < nodes.size(); i++)
 				{
-					return n2;
+					final JDFNode n2 = (JDFNode) nodes.get(i);
+					final VString vtypes = n2.getAllTypes();
+					if (vtypes.containsAll(xTypes))
+					{
+						return n2;
+					}
 				}
-
 			}
 		}
 		if (n == null && create)
@@ -223,12 +230,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			theNode.setAttributes(e);
 			theNode.setType(EnumType.ProcessGroup);
-			if (e.hasChildElement("ProductList", null))
-			{
-				final JDFNode n = theNode.addJDFNode(EnumType.ProcessGroup);
-				theNode.setType(EnumType.Product);
-				theNode = n;
-			}
 			return theNode;
 		}
 
@@ -289,6 +290,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
+			final JDFNode parent = (JDFNode) trackElem;
 			EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
 			if (inOut == null) // heuristics for linking
 			{
@@ -298,7 +300,23 @@ public class XJDFToJDFConverter extends BaseElementWalker
 					inOut = EnumUsage.Input;
 				}
 			}
-			final JDFResource r = theNode.addResource(e.getAttribute("Name"), inOut);
+			String id = e.getAttribute(AttributeName.ID, null, null);
+			if (id == null)
+			{
+				// we need an id to copy. technically no id is invalid, but... whatever
+				id = "r" + JDFElement.uniqueID(0);
+				e.setAttribute(AttributeName.ID, id);
+			}
+			final JDFResource r;
+			final KElement idElem = parent.getCreateResourcePool().getChildWithAttribute(null, "ID", null, id, 0, true);
+			if (idElem instanceof JDFResource)
+			{
+				r = (JDFResource) idElem;
+			}
+			else
+			{
+				r = parent.addResource(e.getAttribute("Name"), inOut);
+			}
 			if (r == null)
 			{
 				return null;
@@ -306,7 +324,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			if (inOut == null)
 			{
 				inOut = EnumResourceClass.Consumable.equals(r.getResourceClass()) ? EnumUsage.Input : EnumUsage.Output;
-				theNode.linkResource(r, inOut, null);
+				parent.linkResource(r, inOut, null);
 			}
 			final JDFResourceLink rl = theNode.getLink(r, inOut);
 			r.setAttributes(e);
@@ -314,7 +332,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			r.removeAttribute(AttributeName.USAGE);
 			if (rl != null)
 			{
-				final String id = e.getAttribute(AttributeName.ID, null, null);
 				if (id != null)
 				{
 					rl.setrRef(id);
@@ -338,7 +355,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			final KElement parent = toCheck.getParentNode_KElement();
-			final boolean bL1 = parent != null && parent.getLocalName().equals("XJDF");
+			final boolean bL1 = parent != null && (parent.getLocalName().equals("XJDF") || parent.getLocalName().equals("Product"));
 			return bL1 && super.matches(toCheck) && toCheck.getLocalName().endsWith("Set") && toCheck.hasAttribute(AttributeName.NAME);
 		}
 
@@ -400,6 +417,78 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return super.matches(toCheck) && (toCheck instanceof JDFAuditPool);
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkProduct extends WalkXElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			JDFNode parent;
+			if ("Product".equals(theNode.getType()))
+			{
+				parent = theNode.addProduct();
+			}
+			else
+			{
+				jdfDoc = new JDFDoc("JDF");
+				parent = jdfDoc.getJDFRoot();
+				parent.setType(EnumType.Product);
+				parent.copyElement(theNode, null);
+				theNode = parent;
+			}
+
+			parent.setAttributes(e);
+			return parent;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && (toCheck.getLocalName().equals("Product"));
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkProductList extends WalkXElement
+	{
+		/**
+		 * @param e
+		 * @return the root, else null if we are in a second pass
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			e.deleteNode();
+			return walkedProduct ? null : trackElem;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && (toCheck.getLocalName().equals("ProductList"));
 		}
 
 	}

@@ -104,6 +104,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.LinkRefFinder;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -1731,7 +1732,7 @@ public class JDFResource extends JDFElement
 	/**
 	 * Gets all resourcelinks and refelements that link to this<br/>
 	 * note that this method may be tim consuming in a large loop <br/>
-	 * - in case of massive cleanup, use {@link LinkRefFinder} and access the complete map of references from within the loop @see {@link LinkRefFinderTest}
+	 * - in case of massive cleanup, use {@link LinkRefFinder} and access the complete map of references from within the loop @see {@link LinkRefFinder}
 	 * 
 	 * 
 	 * @param bLink if true, include resource links

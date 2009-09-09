@@ -1926,8 +1926,7 @@ public class XJDF20 extends BaseElementWalker
 			final JDFResource r = rl.getLinkRoot();
 			if (r != null)
 			{
-				rl.renameElement("ColorLink", null);
-				r.setAttribute(AttributeName.PARTIDKEYS, "Separation");
+				//
 			}
 			return super.walk(jdf, xjdf);
 		}

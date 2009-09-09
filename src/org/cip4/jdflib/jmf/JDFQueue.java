@@ -140,7 +140,6 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * callback class definition for specifying whether a QE may execute
-	 * @return true if this is executable
 	 * @author prosirai
 	 * 
 	 */
@@ -148,7 +147,7 @@ public class JDFQueue extends JDFAutoQueue
 	{
 		/**
 		 * @param qe the queueentry to check
-		 * @returntrue if this qe can be executed
+		 * @return true if this qe can be executed
 		 */
 		public abstract boolean canExecute(JDFQueueEntry qe);
 	}
@@ -282,6 +281,8 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Get a vector of queueentry elements with a given set of attributes and part maps
+	 * @param attMap
+	 * @param parts
 	 * 
 	 * @return VElement: the vector of queue entries
 	 */
@@ -330,6 +331,7 @@ public class JDFQueue extends JDFAutoQueue
 
 	/**
 	 * Get a vector of queueentry elements that matches a given nodeidentifier
+	 * @param nid
 	 * 
 	 * @return VElement: the vector of queue entries
 	 */
@@ -587,8 +589,6 @@ public class JDFQueue extends JDFAutoQueue
 	 * Get the next QueueEntry to be processed the first entry with highest priority gets selected if deviceID is specified, the entries with an explicit non
 	 * matching deviceID are ignored the status of the QueueEntry MUST be waiting
 	 * 
-	 * @param deviceID the deviceID of the executing device - if null any deviceID will match
-	 * @param proxyFlag if not null, the existance of this attribute in the queueentry excludes the qe from the search used e.g. in case a queue is used as a
 	 * proxy and represents previously submitted jobs as waiting
 	 * 
 	 * @return the executable queueEntry, null if none is available
@@ -694,7 +694,6 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * remove all entries with Status=Removed and any entries over maxCompleted that are either aborted or completed @see {@link JDFQueueEntry} .isCompleted()
 	 * 
-	 * @return a vector of all removed elements
 	 */
 
 	public synchronized void cleanup()
@@ -945,8 +944,7 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * set the maximum number of completed entries to keep also call cleanup if we are automated
 	 * 
-	 * @param maxCompletedEntries the maxCompletedEntries to set
-	 * @return {@link VElement} the list of removed entries due to cleanup
+	 * @param _maxCompletedEntries the maxCompletedEntries to set
 	 */
 	public void setMaxCompletedEntries(final int _maxCompletedEntries)
 	{
@@ -967,7 +965,7 @@ public class JDFQueue extends JDFAutoQueue
 	}
 
 	/**
-	 * @param maxRunningEntries the maxRunningEntries to set
+	 * @param _maxRunningEntries the maxRunningEntries to set
 	 */
 	public void setMaxRunningEntries(final int _maxRunningEntries)
 	{
@@ -1007,7 +1005,7 @@ public class JDFQueue extends JDFAutoQueue
 	}
 
 	/**
-	 * @param queueSorter the queueSorter to set sets the Comparator to sort this queuewith
+	 * @param _queueSorter the queueSorter to set sets the Comparator to sort this queuewith
 	 */
 	public void setQueueSorter(final Comparator<KElement> _queueSorter)
 	{

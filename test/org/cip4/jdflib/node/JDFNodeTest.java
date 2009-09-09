@@ -1512,6 +1512,35 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	// ///////////
+	/**
+	 * 
+	 */
+	public void testGetPartStatusSingleLeaf()
+	{
+		final JDFNode createJDF = new JDFDoc("JDF").getJDFRoot();
+		createJDF.getCreateResourcePool();
+		final JDFNodeInfo createNodeInfo = createJDF.getCreateNodeInfo();
+		createNodeInfo.setNodeStatus(EnumNodeStatus.Waiting);
+		createJDF.setStatus(EnumNodeStatus.Part);
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("Run", "1");
+		final VString vPartKeys = null;
+		final JDFNodeInfo createPartition = (JDFNodeInfo) createNodeInfo.getCreatePartition(partMap, vPartKeys);
+		final JDFAttributeMap partMap2 = new JDFAttributeMap(partMap);
+		partMap2.put("RunSet", "1");
+		final JDFNodeInfo createPartition2 = (JDFNodeInfo) createPartition.getCreatePartition(partMap2, vPartKeys);
+		createNodeInfo.setNodeStatus(EnumNodeStatus.Completed);
+		createPartition.setNodeStatus(EnumNodeStatus.Waiting);
+		createPartition2.setNodeStatus(EnumNodeStatus.Waiting);
+		EnumNodeStatus partStatus = createJDF.getPartStatus(null, 0);
+		assertNull("If parent is different from single leaf: null ", partStatus);
+		partStatus = createJDF.getPartStatus(null, -1);
+		assertEquals("If parent is different from single leaf: null ", EnumNodeStatus.Waiting, partStatus);
+		partStatus = createJDF.getPartStatus(null, 1);
+		assertEquals("If parent is different from single leaf: null ", EnumNodeStatus.Completed, partStatus);
+		partStatus = createJDF.getPartStatus(partMap, 0);
+		assertEquals("If parent is different from single leaf: null ", EnumNodeStatus.Waiting, partStatus);
+	}
 
 	/**
 	 * 

@@ -2915,6 +2915,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		else if (stat == EnumNodeStatus.Part)
 		{
 			JDFNodeInfo ni = getNodeInfo();
+			// this is required to compare lower partitions
+			final int numParts = mattr == null ? 0 : mattr.size();
 			if (ni == null)
 			{
 				return null;
@@ -2931,31 +2933,46 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 			for (int i = 0; i < size; i++)
 			{
-				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
-				final JDFAttributeMap map = niCmp.getPartMap();
+				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
+				JDFAttributeMap map = niCmp.getPartMap();
 				if (map != null && !map.overlapMap(mattr))
 				{
 					continue;
 				}
-
-				final EnumNodeStatus nodeStatus = niCmp.getNodeStatus();
-				if (!ContainerUtil.equals(nodeStatus, stat))
+				while (niCmp != null) // also loop down in case kids are incorrectly set
 				{
-					if (stat == null)
+					final int mapParts = map == null ? 0 : map.size();
+					final EnumNodeStatus nodeStatus = niCmp.getNodeStatus();
+					if (!ContainerUtil.equals(nodeStatus, stat))
 					{
-						stat = nodeStatus;
+						if (stat == null)
+						{
+							stat = nodeStatus;
+						}
+						else if (nodeStatus == null || method == 0)
+						{
+							return null;
+						}
+						else if (method < 0)
+						{
+							stat = (EnumNodeStatus) EnumUtil.min(stat, nodeStatus);
+						}
+						else if (method > 0)
+						{
+							stat = (EnumNodeStatus) EnumUtil.max(stat, nodeStatus);
+						}
 					}
-					else if (nodeStatus == null || method == 0)
+					final KElement parent = niCmp.getParentNode_KElement();
+					// the map still has more partitions than the queried partmap - must loop down
+					if (parent instanceof JDFNodeInfo && mapParts > numParts)
 					{
-						return null;
+						niCmp = (JDFNodeInfo) parent;
+						map = niCmp.getPartMap();
 					}
-					else if (method < 0)
+					else
+					// 
 					{
-						stat = (EnumNodeStatus) EnumUtil.min(stat, nodeStatus);
-					}
-					else if (method > 0)
-					{
-						stat = (EnumNodeStatus) EnumUtil.max(stat, nodeStatus);
+						niCmp = null;
 					}
 				}
 			}
@@ -8333,7 +8350,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 *@deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 * @return JDFDuration
 	 */
 	@Deprecated
@@ -8343,7 +8360,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 *@deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 *@deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 * @return JDFMISDetails.EnumCostType
 	 */
 	@Deprecated
@@ -8364,7 +8381,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 * @return #
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFNodeInfo.EnumDueLevel getNodeInfoDueLevel()
@@ -8379,7 +8396,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFDate getNodeInfoEnd()
@@ -8394,7 +8411,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFDate getNodeInfoFirstEnd()
@@ -8409,7 +8426,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFDate getNodeInfoFirstStart()
@@ -8424,7 +8441,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFXYPair getNodeInfoIPPVersion()
@@ -8439,7 +8456,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public int getNodeInfoJobPriority()
@@ -8454,7 +8471,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFDate getNodeInfoLastEnd()
@@ -8469,7 +8486,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFDate getNodeInfoLastStart()
@@ -8484,7 +8501,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public String getNodeInfoNaturalLang()
@@ -8499,7 +8516,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public String getNodeInfoRoute()
@@ -8514,7 +8531,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFDuration getNodeInfoSetupDuration()
@@ -8529,7 +8546,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFDate getNodeInfoStart()
@@ -8544,7 +8561,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public String getNodeInfoTargetRoute()
@@ -8559,7 +8576,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFDuration getNodeInfoTotalDuration()
@@ -8574,7 +8591,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFMISDetails.EnumWorkType getNodeInfoWorkType()
@@ -8594,7 +8611,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public String getNodeInfoWorkTypeDetails()
@@ -8614,7 +8631,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFBusinessInfo getNodeInfoBusinessInfo()
@@ -8629,7 +8646,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFEmployee getNodeInfoEmployee()
@@ -8645,7 +8662,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	/**
 	 *@param iSkip
 	 * @return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFJMF getNodeInfoJMF(final int iSkip)
@@ -8661,7 +8678,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	/**
 	 *@param iSkip
 	 * @return
-	 * @deprecated 06ß221 use getInheritedNodeInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedNodeInfo(String attName)
 	 */
 	@Deprecated
 	public JDFNotificationFilter getNodeInfoNotificationFilter(final int iSkip)
@@ -8690,7 +8707,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	/**
 	 * get first CustomerInfo element from child list or child list of any ancestor
 	 * 
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String xPath)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String xPath)
 	 * @return CustomerInfo The matching CustomerInfo element
 	 */
 	@Deprecated
@@ -8701,7 +8718,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
 	public String getCustomerInfoBillingCode()
@@ -8716,7 +8733,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
 	public String getCustomerInfoCustomerID()
@@ -8731,7 +8748,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
 	public String getCustomerInfoCustomerJobName()
@@ -8746,7 +8763,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
 	public String getCustomerInfoCustomerOrderID()
@@ -8761,7 +8778,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
 	public String getCustomerInfoCustomerProjectID()
@@ -8776,7 +8793,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 *@return
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
 	public JDFCompany getCustomerInfoCompany()
@@ -8792,7 +8809,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	/**
 	 *@param iSkip
 	 * @return
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
 	public JDFContact getCustomerInfoContact(final int iSkip)
@@ -8808,7 +8825,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	/**
 	 *@param iSkip
 	 * @return
-	 * @deprecated 06ß221 use getInheritedCustomerInfo(String attName)
+	 * @deprecated 06ï¿½221 use getInheritedCustomerInfo(String attName)
 	 */
 	@Deprecated
 	public JDFCustomerMessage getCustomerInfoCustomerMessage(final int iSkip)

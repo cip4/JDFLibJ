@@ -309,7 +309,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		contact.makeRootResource(null, null, true);
 		contact.setContactTypes(new VString("Customer Administrator", " "));
 		final JDFPerson person = contact.appendPerson();
-		person.setFamilyName("Töpfer");
+		person.setFamilyName("TÃ¶pfer");
 		person.setFirstName("Harald");
 		final JDFComChannel phone = contact.appendComChannel();
 		phone.setPhoneNumber("+666 42 123456", ".", EnumChannelType.Phone);
