@@ -102,6 +102,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.node.JDFNode.CombinedProcessLinkHelper;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
@@ -2440,6 +2441,27 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
+	public void testGetGreateLinksForType()
+	{
+		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
+
+		root.setType(EnumType.Combined);
+		root.setTypes(new VString("Cutting Folding Cutting", " "));
+
+		final CombinedProcessLinkHelper h = root.new CombinedProcessLinkHelper();
+		final JDFResourceLink rl = h.getCreateLinkForType(EnumType.Folding, EnumUsage.Input, "Component");
+		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList(1));
+		final JDFResourceLink rl2 = h.getCreateLinkForType(EnumType.Folding, EnumUsage.Output, "Component");
+		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList(1));
+		assertNotSame(rl, rl2);
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetLinksForType()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -2451,6 +2473,14 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFResource r1 = root.addResource("CuttingParams", null, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl1 = root.getLink(r1, null);
 		rl1.setCombinedProcessIndex(new JDFIntegerList(0));
+
+		final JDFResource c1 = root.addResource("Component", EnumUsage.Output);
+		final JDFResourceLink rlc1o = root.getLink(c1, null);
+		rlc1o.setCombinedProcessIndex(new JDFIntegerList(0));
+		rlc1o.setPipeProtocol("Internal");
+		final JDFResourceLink rlc1i = root.linkResource(c1, EnumUsage.Input, null);
+		rlc1i.setPipeProtocol("Internal");
+		rlc1i.setCombinedProcessIndex(new JDFIntegerList(1));
 
 		final JDFResource r2 = root.addResource("FoldingParams", null, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl2 = root.getLink(r2, null);
@@ -2464,8 +2494,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFResourceLink rl4 = root.getLink(r4, null);
 
 		VElement ve = root.getLinksForType(EnumType.Cutting, 0);
-		assertEquals(ve.size(), 1);
+		assertEquals(ve.size(), 2);
 		assertTrue(ve.contains(rl1));
+		assertTrue(ve.contains(rlc1o));
 		assertFalse(ve.contains(rl4));
 
 		ve = root.getLinksForType(EnumType.Cutting, 1);
@@ -2474,47 +2505,64 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertTrue(ve.contains(rl4));
 
 		ve = root.getLinksForType(EnumType.Cutting, -1);
-		assertEquals(ve.size(), 3);
+		assertEquals(ve.size(), 4);
 		assertTrue(ve.contains(rl1));
 		assertTrue(ve.contains(rl3));
 		assertTrue(ve.contains(rl4));
+		assertTrue(ve.contains(rlc1o));
 
 		ve = root.getLinksForType(EnumType.Folding, 0);
-		assertEquals(ve.size(), 1);
+		assertEquals(ve.size(), 2);
 		assertTrue(ve.contains(rl2));
 		assertFalse(ve.contains(rl4));
+		assertTrue(ve.contains(rlc1i));
 
 		ve = root.getLinksForCombinedProcessIndex(0);
-		assertEquals(ve.size(), 1);
+		assertEquals(ve.size(), 2);
 		assertTrue(ve.contains(rl1));
 		assertFalse(ve.contains(rl4));
 
 		ve = root.getLinksForCombinedProcessIndex(1);
-		assertEquals(ve.size(), 1);
+		assertEquals(ve.size(), 2);
+		assertTrue(ve.contains(rlc1i));
 		assertTrue(ve.contains(rl2));
 		assertFalse(ve.contains(rl4));
 
 		// now check whether this works with no cpi
 		rl4.removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
 		ve = root.getLinksForType(EnumType.Folding, 0);
-		assertEquals(ve.size(), 2);
+		assertEquals(ve.size(), 3);
 		assertTrue(ve.contains(rl2));
 		assertTrue(ve.contains(rl4));
+		assertTrue(ve.contains(rlc1i));
 
 		ve = root.getLinksForCombinedProcessIndex(0);
-		assertEquals(ve.size(), 2);
+		assertEquals(ve.size(), 3);
 		assertTrue(ve.contains(rl1));
 		assertTrue(ve.contains(rl4));
+		assertTrue(ve.contains(rlc1o));
 
 		ve = root.getLinksForCombinedProcessIndex(1);
-		assertEquals(ve.size(), 2);
+		assertEquals(ve.size(), 3);
 		assertTrue(ve.contains(rl2));
 		assertTrue(ve.contains(rl4));
+		assertTrue(ve.contains(rlc1i));
 
+		final CombinedProcessLinkHelper h = root.new CombinedProcessLinkHelper();
+		h.setUsage(EnumUsage.Input);
+		h.setLinkName("Component");
+
+		ve = h.getLinksForType(EnumType.Cutting);
+		assertNull(ve);
+		ve = h.getLinksForType(EnumType.Folding);
+		assertEquals(ve.size(), 1);
 	}
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetMatchingResourceStar()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -2635,6 +2683,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetUnknownLinks()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");

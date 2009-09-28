@@ -82,7 +82,6 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -302,7 +301,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	@Override
 	public int hashCode()
 	{
-		return HashUtil.hashCode(0, this.m_numList);
+		return this.m_numList.toString().hashCode();
 	}
 
 	/**
@@ -321,21 +320,18 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * @param i the index
 	 * @return Object - the range object at the given position, null if i is out of range
 	 */
-	public Object elementAt(final int i)
+	public Object elementAt(int i)
 	{
-		int iLocal = i;
-
-		final Vector numList = m_numList;
-		if (iLocal < 0)
+		if (i < 0)
 		{
-			iLocal = numList.size() + iLocal;
+			i = m_numList.size() + i;
 		}
 
-		if (iLocal < 0 || iLocal >= numList.size())
+		if (i < 0 || i >= m_numList.size())
 		{
 			return null;
 		}
-		return numList.elementAt(iLocal);
+		return m_numList.elementAt(i);
 	}
 
 	/**

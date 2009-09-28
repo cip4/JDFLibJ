@@ -189,9 +189,8 @@ public class MISGoldenTicket extends BaseGoldenTicket
 			final JMFGoldenTicket goldenTicket = new JMFGoldenTicket(jmfICSLevel, theVersion);
 			goldenTicket.devID = null;
 			goldenTicket.assign(theNode);
-
 		}
-		super.init();
+		super.init(); // needed for icsversions
 	}
 
 	/**

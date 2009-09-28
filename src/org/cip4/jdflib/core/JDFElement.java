@@ -2475,41 +2475,36 @@ public class JDFElement extends KElement
 	 * @param bResolveTarget - additional control how refelements are followed
 	 * @return
 	 */
-	public VElement getChildElementVector_JDFElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize,
-			final boolean bResolveTarget)
+	public VElement getChildElementVector_JDFElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, final boolean bAnd, int maxSize, final boolean bResolveTarget)
 	{
-		String nodeNameLocal = nodeName;
-		String nameSpaceURILocal = nameSpaceURI;
-		JDFAttributeMap mAttribLocal = mAttrib;
-		int maxSizeLocal = maxSize;
 
 		final VElement v = new VElement();
-		if (isWildCard(nodeNameLocal))
+		if (isWildCard(nodeName))
 		{
-			nodeNameLocal = null;
+			nodeName = null;
 		}
-		if (isWildCard(nameSpaceURILocal))
+		if (isWildCard(nameSpaceURI))
 		{
-			nameSpaceURILocal = null;
+			nameSpaceURI = null;
 		}
-		if (mAttribLocal != null && mAttribLocal.isEmpty())
+		if (mAttrib != null && mAttrib.isEmpty())
 		{
-			mAttribLocal = null;
+			mAttrib = null;
 		}
-		if (maxSizeLocal == 0)
+		if (maxSize == 0)
 		{
-			maxSizeLocal = -1;
+			maxSize = -1;
 		}
 
-		final boolean bAlwaysFit = nodeNameLocal == null && nameSpaceURILocal == null;
-		final boolean bMapEmpty = mAttribLocal == null;
+		final boolean bAlwaysFit = nodeName == null && nameSpaceURI == null;
+		final boolean bMapEmpty = mAttrib == null;
 
 		int iSize = 0;
 		KElement kElem = getFirstChildElement();
 
 		while (kElem != null)
 		{
-			if (bAlwaysFit || kElem.fitsName(nodeNameLocal, nameSpaceURILocal))
+			if (bAlwaysFit || kElem.fitsName(nodeName, nameSpaceURI))
 			{
 				if (bResolveTarget && (kElem instanceof JDFRefElement))
 				{
@@ -2523,7 +2518,7 @@ public class JDFElement extends KElement
 						if (target != null)
 						{ // we want the jdfElem version of IncludesAttributes,
 							// so we must upcast
-							if (bMapEmpty || target.includesAttributes(mAttribLocal, bAnd))
+							if (bMapEmpty || target.includesAttributes(mAttrib, bAnd))
 							{
 								v.addElement(target);
 								iSize++;
@@ -2535,12 +2530,12 @@ public class JDFElement extends KElement
 						// simply skip invalid refelements
 					}
 				}
-				else if (bMapEmpty || kElem.includesAttributes(mAttribLocal, bAnd))
+				else if (bMapEmpty || kElem.includesAttributes(mAttrib, bAnd))
 				{
 					v.addElement(kElem);
 					iSize++;
 				}
-				if (iSize == maxSizeLocal)
+				if (iSize == maxSize)
 				{
 					break;
 				}

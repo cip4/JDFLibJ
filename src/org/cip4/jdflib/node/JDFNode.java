@@ -1686,6 +1686,282 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
+	 * 
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * Sep 25, 2009
+	 */
+	public class CombinedProcessLinkHelper
+	{
+		private int nType;
+		private EnumUsage usage;
+		private String linkName;
+
+		/**
+		 * 
+		 */
+		public CombinedProcessLinkHelper()
+		{
+			nType = 0;
+			usage = null;
+			linkName = null;
+		}
+
+		/**
+		 * get the links that are selected by a given CombinedProcessIndex<br>
+		 * all links with no CombinedProcessIndex are included in the list
+		 * 
+		 * @param type the process type for which to get the links
+		 * @param _usage
+		 * @param _linkName
+		 * @return
+		 * 
+		 * @default getLinksForType(type, -1)
+		 */
+		public JDFResourceLink getCreateLinkForType(final EnumType type, final EnumUsage _usage, final String _linkName)
+		{
+			final int cpiType = getCombinedProcessIndex(type, nType);
+			final int nPI = getTypes().size();
+			if (cpiType < 0)
+			{
+				return null; // no matching type
+			}
+			setLinkName(_linkName);
+			setUsage(_usage);
+			final VElement ve = getLinksForType(type);
+			if (ve != null)
+			{
+				return (JDFResourceLink) ve.get(0);
+			}
+
+			JDFResourceLink rlLast = null;
+			if (EnumUsage.Input.equals(usage) && cpiType > 0)
+			{
+				final CombinedProcessLinkHelper hTmp = new CombinedProcessLinkHelper();
+				hTmp.setUsage(EnumUsage.Output);
+				hTmp.setLinkName(linkName);
+				rlLast = hTmp.getLinkForCombinedProcessIndex(cpiType - 1, 0);
+			}
+			else if (EnumUsage.Output.equals(usage) && cpiType < nPI - 1)
+			{
+				final CombinedProcessLinkHelper hTmp = new CombinedProcessLinkHelper();
+				hTmp.setUsage(EnumUsage.Input);
+				hTmp.setLinkName(linkName);
+				rlLast = hTmp.getLinkForCombinedProcessIndex(cpiType + 1, 0);
+			}
+			final JDFResource r = (rlLast != null) ? rlLast.getLinkRoot() : addResource(_linkName, usage);
+			final JDFIntegerList il = new JDFIntegerList();
+			final JDFResourceLink rl = getLink(r, usage);
+			int nPos = 0;
+			while (true)
+			{
+				final int cpi = getCombinedProcessIndex(type, nPos);
+				if (cpi < 0)
+				{
+					break;
+				}
+				if (nType < 0 || nType == nPos)
+				{
+					il.add(cpi);
+				}
+				nPos = cpi + 1;
+			}
+			rl.setCombinedProcessIndex(il);
+			return rl;
+
+		}
+
+		/**
+		 * get the link that is selected by a given CombinedProcessIndex<br>
+		 * links with no CombinedProcessIndex are included in the list
+		 * 
+		 * @param combinedProcessIndex the nTh occurence of the CombinedProcessIndex field, -1 if all valid positions are ok
+		 * @param skip
+		 * @return
+		 * 
+		 * @default getLinksForCombinedProcessIndex(-1)
+		 */
+		public JDFResourceLink getLinkForCombinedProcessIndex(final int combinedProcessIndex, final int skip)
+		{
+			final VElement v = getLinksForCombinedProcessIndex(combinedProcessIndex);
+			return (JDFResourceLink) ((v != null && v.size() > skip) ? v.get(skip) : null);
+		}
+
+		/**
+		 * get the links that are selected by a given CombinedProcessIndex<br>
+		 * all links with no CombinedProcessIndex are included in the list
+		 * 
+		 * @param combinedProcessIndex the nTh occurence of the CombinedProcessIndex field, -1 if all valid positions are ok
+		 * @return
+		 * 
+		 * @default getLinksForCombinedProcessIndex(-1)
+		 */
+		public VElement getLinksForCombinedProcessIndex(final int combinedProcessIndex)
+		{
+			final EnumType typ = getEnumType();
+			if (!EnumType.Combined.equals(typ) && !EnumType.ProcessGroup.equals(typ))
+			{
+				return null;
+			}
+
+			final JDFAttributeMap attMap = new JDFAttributeMap();
+			if (usage != null)
+			{
+				attMap.put(AttributeName.USAGE, usage);
+			}
+
+			final VElement vLinks = getResourceLinks(linkName, attMap, null);
+			if (vLinks == null)
+			{
+				return null;
+			}
+
+			final String indexString = StringUtil.formatInteger(combinedProcessIndex);
+			// loop over all links
+			for (int i = vLinks.size() - 1; i >= 0; i--)
+			{
+				final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
+				if (rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) && !rl.includesMatchingAttribute(AttributeName.COMBINEDPROCESSINDEX, indexString, AttributeInfo.EnumAttributeType.IntegerList))
+				{
+					vLinks.remove(i);
+				}
+			}
+			return vLinks;
+		}
+
+		/**
+		 * get the links that are selected by a given CombinedProcessIndex<br>
+		 * all links with no CombinedProcessIndex are included in the list
+		 * 
+		 * @param type the process type for which to get the links
+		 * @return
+		 * 
+		 * @default getLinksForType(type, -1)
+		 */
+		public VElement getLinksForType(final EnumType type)
+		{
+			final EnumType typ = getEnumType();
+			if (typ == null)
+			{
+				return null;
+			}
+			// not combined, simpy get links from entire node
+			// no links here at all
+			final JDFAttributeMap attMap = new JDFAttributeMap();
+			if (usage != null)
+			{
+				attMap.put(AttributeName.USAGE, usage);
+			}
+
+			if (typ.equals(type))
+			{
+				return getResourceLinks(linkName, attMap, null);
+			}
+
+			// nasty - mismatching type attribute
+			if (!typ.equals(EnumType.Combined) && !typ.equals(EnumType.ProcessGroup))
+			{
+				return null;
+			}
+
+			// no types - this is a corrupt node
+			final Vector<EnumType> vTypes = getEnumTypes();
+			if (vTypes == null)
+			{
+				return null;
+			}
+			final int typSize = vTypes.size();
+
+			final VElement vLinks = getResourceLinks(linkName, attMap, null);
+			if (vLinks == null)
+			{
+				return null;
+			}
+
+			// loop over all links and remove non-matching entries
+			for (int i = vLinks.size() - 1; i >= 0; i--)
+			{
+				final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
+				final JDFIntegerList cpi = rl.getCombinedProcessIndex();
+				if (cpi != null) // there is a cpi, check if it matches
+				{
+					final int size = cpi.size();
+					boolean bFound = false;
+					// loop over indeces of CombinedProcessIndex
+					for (int j = 0; j < size; j++)
+					{
+						final int index = cpi.getInt(j);
+						if (index < typSize) // the index points to a vaild position
+						// in the list
+						{
+							final EnumType cpiType = vTypes.elementAt(index);
+							if (cpiType.equals(type))
+							{
+								if (nType < 0) // flag not to check which ocurrence
+								{
+									bFound = true;
+								}
+								else
+								{
+									int nFound = -1;
+									for (int k = 0; k <= index; k++) // count
+									// occurences of this process type in front of and including this
+									{
+										final EnumType cpiTypeCount = vTypes.elementAt(k);
+										if (cpiTypeCount.equals(type))
+										{
+											nFound++;
+										}
+									}
+									bFound = nFound == nType;
+									if (bFound)
+									{
+										break;
+									}
+								}
+							}
+						}
+					}
+					// found non matching cpi - remove link
+					if (!bFound)
+					{
+						vLinks.remove(i);
+					}
+				}
+			}
+			return vLinks.size() == 0 ? null : vLinks;
+		}
+
+		/**
+		 * @param nPos the nTh occurence of the Type field, -1 if all valid positions are ok
+		 */
+		public void setNPos(final int nPos)
+		{
+			nType = nPos;
+		}
+
+		/**
+		 * @param usage the usage of the requested link
+		 */
+		public void setUsage(final EnumUsage usage)
+		{
+			this.usage = usage;
+		}
+
+		/**
+		 * @param linkName the name of the requested link
+		 */
+		public void setLinkName(String linkName)
+		{
+			if (!linkName.endsWith(JDFConstants.LINK))
+			{
+				linkName += JDFConstants.LINK;
+			}
+			this.linkName = linkName;
+		}
+	}
+
+	/**
 	 * synchronization of stati based on child jdf node status
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
@@ -1883,10 +2159,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * @return boolean
 		 */
 		protected static boolean cleanCombinedProcessIndex(final EnumUsage usage, final VString types, final JDFIntegerList cpi, final String resName, final int lastGot,
-				final String[] typeLinkNamesLast, final boolean bAddCPI, final VString typeInfo)
+				final String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
 		{
-			boolean bAddCPILocal = bAddCPI;
-
 			final int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast, resName);
 			// the i* i?pu ... list of this
 			// the o* i?pu ... list of the previous type
@@ -1925,22 +2199,22 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				{ // remove the last output if we found a pass through
 					if (EnumUsage.Input.equals(usage))
 					{
-						bAddCPILocal = false;
+						bAddCPI = false;
 					}
 					else
 					{
 						cpi.removeElementAt(-1);
-						bAddCPILocal = true;
+						bAddCPI = true;
 					}
 				}
 				else
 				{
 					// not continuous - reset
-					bAddCPILocal = true;
+					bAddCPI = true;
 				}
 			}
 
-			return bAddCPILocal;
+			return bAddCPI;
 		}
 	}
 
@@ -3379,18 +3653,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default addResource(name, null, usage, null, null, null,null)
 	 */
-	public JDFResource addResource(final String strName, final JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFNode resRoot,
+	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, JDFNode resRoot,
 			final String nameSpaceURI, final JDFResource toReplace)
 	{
-		JDFResource.EnumResourceClass resClassLocal = resClass;
-		JDFNode resRootLocal = resRoot;
-
-		if (resRootLocal == null)
+		if (resRoot == null)
 		{
-			resRootLocal = this;
+			resRoot = this;
 		}
 
-		final JDFResourcePool p = resRootLocal.getCreateResourcePool();
+		final JDFResourcePool p = resRoot.getCreateResourcePool();
 		final JDFResource r = p.appendResource(strName, null, nameSpaceURI);
 
 		if (usage != null)
@@ -3402,16 +3673,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final EnumResourceClass resClass2 = r.getResourceClass();
 		if (resClass2 != null)
 		{
-			resClassLocal = resClass2;
+			resClass = resClass2;
 		}
-		if (resClassLocal != null)
+		if (resClass != null)
 		{
-			r.setResourceClass(resClassLocal);
+			r.setResourceClass(resClass);
 		}
 
 		// parameters and consumables are assumed to be available by default
-		if (EnumUsage.Input.equals(usage) && resClassLocal != null
-				&& ((resClassLocal.equals(JDFResource.EnumResourceClass.Parameter)) || (resClassLocal.equals(JDFResource.EnumResourceClass.Consumable))))
+		if (EnumUsage.Input.equals(usage) && resClass != null && ((resClass.equals(JDFResource.EnumResourceClass.Parameter)) || (resClass.equals(JDFResource.EnumResourceClass.Consumable))))
 		{
 			r.setResStatus(EnumResStatus.Available, false);
 		}
@@ -7254,29 +7524,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public VElement getLinksForCombinedProcessIndex(final int combinedProcessIndex)
 	{
-		final EnumType typ = getEnumType();
-		if (!EnumType.Combined.equals(typ) && !EnumType.ProcessGroup.equals(typ))
-		{
-			return null;
-		}
-
-		final VElement vLinks = getResourceLinks(null, null, null);
-		if (vLinks == null)
-		{
-			return null;
-		}
-
-		final String indexString = StringUtil.formatInteger(combinedProcessIndex);
-		// loop over all links
-		for (int i = vLinks.size() - 1; i >= 0; i--)
-		{
-			final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-			if (rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) && !rl.includesMatchingAttribute(AttributeName.COMBINEDPROCESSINDEX, indexString, AttributeInfo.EnumAttributeType.IntegerList))
-			{
-				vLinks.remove(i);
-			}
-		}
-		return vLinks;
+		final CombinedProcessLinkHelper h = new CombinedProcessLinkHelper();
+		return h.getLinksForCombinedProcessIndex(combinedProcessIndex);
 	}
 
 	/**
@@ -7291,98 +7540,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public VElement getLinksForType(final EnumType type, final int nType)
 	{
-		final EnumType typ = getEnumType();
-		if (typ == null)
-		{
-			return null;
-		}
-		// not combined, simpy get links from entire node
-		if (typ.equals(type))
-		{
-			return getResourceLinks(null, null, null);
-		}
 
-		// nasty - mismatching type attribute
-		if (!typ.equals(EnumType.Combined) && !typ.equals(EnumType.ProcessGroup))
-		{
-			return null;
-		}
-
-		// no types - this is a corrupt node
-		final Vector<EnumType> vTypes = getEnumTypes();
-		if (vTypes == null)
-		{
-			return null;
-		}
-		final int typSize = vTypes.size();
-
-		// no links here at all
-		final VElement vLinks = getResourceLinks(null, null, null);
-		if (vLinks == null)
-		{
-			return null;
-		}
-
-		// loop over all links and remove non-matching entries
-		for (int i = vLinks.size() - 1; i >= 0; i--)
-		{
-			final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-			final JDFIntegerList cpi = rl.getCombinedProcessIndex();
-			if (cpi != null) // there is a cpi, check if it matches
-			{
-				final int size = cpi.size();
-				boolean bFound = false;
-				// loop over indeces of CombinedProcessIndex
-				for (int j = 0; j < size; j++)
-				{
-					final int index = cpi.getInt(j);
-					if (index < typSize) // the index points to a vaild position
-					// in the list
-					{
-						final EnumType cpiType = vTypes.elementAt(index);
-						if (cpiType.equals(type))
-						{
-							if (nType < 0) // flag not to check which ocurrence
-							{
-								bFound = true;
-							}
-							else
-							{
-								int nFound = -1;
-								for (int k = 0; k <= index; k++) // count
-								// occurences
-								// of this
-								// process
-								// type in
-								// front of
-								// and
-								// including
-								// this
-								{
-									final EnumType cpiTypeCount = vTypes.elementAt(k);
-									if (cpiTypeCount.equals(type))
-									{
-										nFound++;
-									}
-								}
-								bFound = nFound == nType;
-								if (bFound)
-								{
-									break;
-								}
-							}
-						}
-					}
-				}
-				// found non matching cpi - remove link
-				if (!bFound)
-				{
-					vLinks.remove(i);
-				}
-			}
-		}
-
-		return vLinks;
+		final CombinedProcessLinkHelper combinedProcessLinkHelper = new CombinedProcessLinkHelper();
+		combinedProcessLinkHelper.setNPos(nType);
+		return combinedProcessLinkHelper.getLinksForType(type);
 	}
 
 	/**
@@ -7401,9 +7562,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param type the process type
 	 * @param beforePos the position before which to add the in the list, 0 is first, ... -1 is before the last, very large is append
 	 */
-	public void insertTypeInTypes(final EnumType type, final int beforePos)
+	public void insertTypeInTypes(final EnumType type, int beforePos)
 	{
-		int beforePosLocal = beforePos;
 
 		VString types = getTypes();
 		if (types == null)
@@ -7412,17 +7572,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		final int typeSize = types.size();
-		if (beforePosLocal < 0)
+		if (beforePos < 0)
 		{
-			beforePosLocal = typeSize + beforePosLocal;
+			beforePos = typeSize + beforePos;
 		}
 
-		if (beforePosLocal < 0)
+		if (beforePos < 0)
 		{
-			beforePosLocal = 0;
+			beforePos = 0;
 		}
 
-		if (beforePosLocal <= typeSize) // insert somehwere within the list
+		if (beforePos <= typeSize) // insert somehwere within the list
 		{
 			final VElement vResLinks = getResourceLinks(null, new JDFAttributeMap(AttributeName.COMBINEDPROCESSINDEX, ""), null);
 			if (vResLinks != null)
@@ -7433,7 +7593,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					final int[] cpi = rl.getCombinedProcessIndex().getIntArray();
 					for (int j = 0; j < cpi.length; j++)
 					{
-						if (cpi[j] >= beforePosLocal)
+						if (cpi[j] >= beforePos)
 						{
 							cpi[j]++;
 						}
@@ -7443,7 +7603,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				}
 			}
 
-			types.insertElementAt(type.getName(), beforePosLocal);
+			types.insertElementAt(type.getName(), beforePos);
 		}
 		else
 		// append at end
@@ -9375,27 +9535,25 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * getLinks - get the links matching mLinkAtt out of the resource link pool
 	 * 
 	 * @param linkName the name of the link including or excluding the "Link", If it is omitted, it will be added
-	 * @param mLinkAtt the attributes to search for
+	 * @param mLinkAtt the resourcelink attributes to search for
 	 * @param linkNS the namespace of the link
 	 * 
 	 * @return VElement - all elements matching the condition mLinkAtt,
 	 * @default getLinks(null,null,null)
 	 */
-	public VElement getResourceLinks(final String linkName, final JDFAttributeMap mLinkAtt, final String linkNS)
+	public VElement getResourceLinks(String linkName, final JDFAttributeMap mLinkAtt, final String linkNS)
 	{
-		String linkNameLocal = linkName;
-
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp == null)
 		{
 			return null;
 		}
-		if (linkNameLocal != null && !linkNameLocal.endsWith(JDFConstants.LINK))
+		if (linkName != null && !linkName.endsWith(JDFConstants.LINK))
 		{
-			linkNameLocal += JDFConstants.LINK;
+			linkName += JDFConstants.LINK;
 		}
 
-		return rlp.getPoolChildren(linkNameLocal, mLinkAtt, linkNS);
+		return rlp.getPoolChildren(linkName, mLinkAtt, linkNS);
 	}
 
 	/**

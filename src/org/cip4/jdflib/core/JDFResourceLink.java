@@ -1939,16 +1939,23 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param value attribute value to set
 	 */
-	public void setCombinedProcessIndex(final JDFIntegerList value)
+	public void setCombinedProcessIndex(JDFIntegerList value)
 	{
-		JDFIntegerList valueLocal = value;
-
-		if (valueLocal != null && valueLocal.size() == 0)
+		if (value != null && value.size() == 0)
 		{
-			valueLocal = null;
+			value = null;
 		}
+		setAttribute(AttributeName.COMBINEDPROCESSINDEX, value, null);
+	}
 
-		setAttribute(AttributeName.COMBINEDPROCESSINDEX, valueLocal, null);
+	/**
+	 * sets attribute CombinedProcessIndex
+	 * 
+	 * @param value attribute value to set
+	 */
+	public void setCombinedProcessIndex(final int value)
+	{
+		setAttribute(AttributeName.COMBINEDPROCESSINDEX, new JDFIntegerList(value), null);
 	}
 
 	/**

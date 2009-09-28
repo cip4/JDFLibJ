@@ -155,13 +155,17 @@ public class BaseGoldenTicket
 	 */
 	public VJDFAttributeMap vParts = null;
 	/**
-	 * 
+	 * the list of separation names
 	 */
 	public VString cols = new VString("Black,Cyan,Magenta,Yellow,Spot1,Spot2,Spot3,Spot4", ",");
 	/**
 	 * 
 	 */
 	public VString colsActual = new VString("Schwarz,Cyan,Magenta,Gelb,RIP 4711,RIP 4712,RIP 4713,RIP 4714", ",");
+	/**
+	 * list of partition keys NOT to partition by
+	 */
+	public String plateReduction = "Side Separation PartVersion";
 	/**
 	 * 
 	 */
@@ -1122,12 +1126,22 @@ public class BaseGoldenTicket
 		m.setPartUsage(EnumPartUsage.Implicit);
 		if (bPartitionedPlateMedia && vParts != null)
 		{
-			final VJDFAttributeMap vSheets = getReducedMap(new VString("Side Separation PartVersion", null));
+			final VJDFAttributeMap vSheets = getReducedMap(new VString(plateReduction, null));
 			for (int i = 0; i < vSheets.size(); i++)
 			{
 				final JDFAttributeMap part = new JDFAttributeMap(vSheets.elementAt(i));
 				// JDFResource mm=
 				m.getCreatePartition(part, partIDKeys);
+				if (plateReduction == null || plateReduction.indexOf("Separation") < 0)
+				{
+					final int ncols = "Front".equals(part.get("Side")) ? nCols[0] : nCols[1];
+
+					for (int ii = 0; ii < ncols; ii++)
+					{
+						part.put("Separation", cols.get(ii));
+						m.getCreatePartition(part, partIDKeys);
+					}
+				}
 			}
 
 		}

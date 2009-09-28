@@ -86,7 +86,6 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -96,7 +95,7 @@ public class JDFIntegerList extends JDFNumList
 {
 	/**
 	 * @see org.cip4.jdflib.datatypes.JDFNumList#isValidString(java.lang.String)
-	 * @param s
+	 * @param st
 	 * @return true if valid
 	 */
 	@Override
@@ -244,7 +243,7 @@ public class JDFIntegerList extends JDFNumList
 	@Override
 	public int hashCode()
 	{
-		return HashUtil.hashCode(super.hashCode(), this.toString());
+		return this.toString().hashCode();
 	}
 
 	/**
@@ -254,11 +253,10 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public void addIntegerList(final JDFIntegerList il)
 	{
-		final Vector getnumList = m_numList;
 		final int size = il.size();
 		for (int i = 0; i < size; i++)
 		{
-			getnumList.addElement(il.elementAt(i));
+			m_numList.addElement(il.elementAt(i));
 		}
 	}
 
@@ -375,7 +373,7 @@ public class JDFIntegerList extends JDFNumList
 
 	}
 
-	/*
+	/**
 	 * must keep this because otherwise the object vector gets corrupted with Double objects (non-Javadoc)
 	 * 
 	 * @see org.cip4.jdflib.datatypes.JDFNumList#scale(double)
@@ -397,15 +395,13 @@ public class JDFIntegerList extends JDFNumList
 	 * @return int[] - the int array
 	 */
 	public int[] getIntArray()
-
 	{
-		final Vector numList = m_numList;
-		final int size = numList.size();
+		final int size = m_numList.size();
 		final int[] intArray = new int[size];
 
 		for (int i = 0; i < size; i++)
 		{
-			intArray[i] = ((Integer) numList.elementAt(i)).intValue();
+			intArray[i] = ((Integer) m_numList.elementAt(i)).intValue();
 		}
 
 		return intArray;
@@ -419,25 +415,23 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public void setIntArray(final int[] iArray)
 	{
-		final Vector numList = m_numList;
-		numList.clear();
+		m_numList.clear();
 		for (int i = 0; i < iArray.length; i++)
 		{
-			numList.add(new Integer(iArray[i]));
+			m_numList.add(new Integer(iArray[i]));
 		}
 	}
 
 	/**
 	 * setIntArray - sets this integer list to an int<br>
-	 * the RangeList is empied, then the single value i is added
+	 * the RangeList is emptied, then the single value i is added
 	 * 
 	 * @param i the value
 	 */
 	public void setInt(final int i)
 	{
-		final Vector numList = m_numList;
-		numList.clear();
-		numList.add(new Integer(i));
+		m_numList.clear();
+		m_numList.add(new Integer(i));
 	}
 
 }

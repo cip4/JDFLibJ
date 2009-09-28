@@ -576,7 +576,8 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * @param e
+		 * @param jdf
+		 * @param xjdf
 		 * @return the created resource
 		 */
 		@Override
@@ -584,12 +585,21 @@ public class XJDF20 extends BaseElementWalker
 		{
 			final JDFResource r = (JDFResource) jdf;
 			final KElement newResLeaf = super.walk(jdf, xjdf);
-			newResLeaf.removeAttributes(r.getPartIDKeys());
-			newResLeaf.removeAttribute(AttributeName.ID);
-			newResLeaf.removeAttribute(AttributeName.CLASS);
-			newResLeaf.removeAttribute(AttributeName.PARTUSAGE);
-			newResLeaf.removeAttribute(AttributeName.LOCKED);
 
+			newResLeaf.removeAttribute(AttributeName.ID);
+			moveAttribsToBase(xjdf, newResLeaf);
+			removeDeprecatedResourceAttribs(r, newResLeaf);
+			removeDeprecatedResourceAttribs(r, xjdf);
+
+			return newResLeaf;
+		}
+
+		/**
+		 * @param xjdf
+		 * @param newResLeaf
+		 */
+		private void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
+		{
 			final String localName = xjdf.getLocalName();
 			final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
 			for (int i = 0; i < resAttribs.size(); i++)
@@ -604,10 +614,20 @@ public class XJDF20 extends BaseElementWalker
 					{
 						newResLeaf.removeAttribute(resAttribs.stringAt(i));
 					}
-
 				}
 			}
-			return newResLeaf;
+		}
+
+		/**
+		 * @param r
+		 * @param newResLeaf
+		 */
+		private void removeDeprecatedResourceAttribs(final JDFResource r, final KElement newResLeaf)
+		{
+			newResLeaf.removeAttributes(r.getPartIDKeys());
+			newResLeaf.removeAttribute(AttributeName.CLASS);
+			newResLeaf.removeAttribute(AttributeName.PARTUSAGE);
+			newResLeaf.removeAttribute(AttributeName.LOCKED);
 		}
 
 		/**
