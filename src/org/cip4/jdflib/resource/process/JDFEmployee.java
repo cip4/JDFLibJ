@@ -161,16 +161,7 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 		{
 			// TODO more criteria - person etc.
 			final JDFEmployee employee = (JDFEmployee) subset;
-			boolean b = false;
-			if (hasAttribute(AttributeName.PERSONALID))
-			{
-				b = ContainerUtil.equals(getPersonalID(), employee.getPersonalID());
-			}
-			else if (hasAttribute(AttributeName.PRODUCTID))
-			{
-				b = ContainerUtil.equals(getProductID(), employee.getProductID());
-			}
-			return b;
+			return ContainerUtil.equals(getPersonalID(), employee.getPersonalID());
 		}
 		else if (subset instanceof JDFEmployeeDef)
 		{
@@ -183,6 +174,34 @@ public class JDFEmployee extends JDFAutoEmployee implements IMatches
 		}
 
 		return false;
+	}
+
+	/**
+	 * get the PersonalID, defaulting to productID
+	 * @see org.cip4.jdflib.auto.JDFAutoEmployee#getPersonalID()
+	 */
+	@Override
+	public String getPersonalID()
+	{
+		if (hasAttribute(AttributeName.PERSONALID))
+		{
+			return super.getPersonalID();
+		}
+		return super.getProductID();
+	}
+
+	/**
+	 * get the productID, defaulting to PersonalID
+	 * @see org.cip4.jdflib.auto.JDFAutoEmployee#getProductID()
+	 */
+	@Override
+	public String getProductID()
+	{
+		if (hasAttribute(AttributeName.PRODUCTID))
+		{
+			return super.getProductID();
+		}
+		return super.getPersonalID();
 	}
 }
 // ==========================================================================

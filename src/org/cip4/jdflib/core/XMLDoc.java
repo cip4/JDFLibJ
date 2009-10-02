@@ -1547,8 +1547,7 @@ public class XMLDoc
 				if (uc instanceof HttpURLConnection)
 				{
 					final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
-					urlCon.setConnectTimeout(PlatformUtil
-							.getConnectionTimeout());
+					urlCon.setConnectTimeout(PlatformUtil.getConnectionTimeout());
 					urlCon.setDoOutput(true);
 					urlCon.setRequestProperty("Connection", "keep-alive");
 					urlCon.setRequestProperty("Content-Type", strContentType);
@@ -1729,6 +1728,54 @@ public class XMLDoc
 	public void setValidationResult(final XMLDoc validationResult)
 	{
 		m_doc.m_validationResult = validationResult;
+	}
+
+	/**
+	 * parse a JDF file
+	 * 
+	 * @param fileName
+	 * @return the parsed JDFDoc
+	 */
+	public static XMLDoc parseFile(final String fileName)
+	{
+		final JDFParser p = new JDFParser();
+		p.bKElementOnly = true;
+		XMLDoc d = p.parseFile(fileName);
+		if (d != null)
+		{
+			d = new XMLDoc(d.getMemberDocument());
+		}
+		return d;
+	}
+
+	/**
+	 * parse a given url
+	 * 
+	 * @param url the url to search
+	 * @param bp the bodypart that the CID url is located in
+	 * @return the parsed JDFDoc
+	 */
+	public static XMLDoc parseURL(final String url, final BodyPart bp)
+	{
+		final JDFParser p = new JDFParser();
+		p.bKElementOnly = true;
+		final InputStream inStream = UrlUtil.getURLInputStream(url, bp);
+		final File f = UrlUtil.urlToFile(url);
+		XMLDoc d = p.parseStream(inStream);
+		if (d != null)
+		{
+			d = new XMLDoc(d.getMemberDocument());
+			if (f != null && f.canRead())
+			{
+				d.setOriginalFileName(f.getAbsolutePath());
+			}
+			else
+			{
+				final String fn = UrlUtil.urlToFileName(url);
+				d.setOriginalFileName(fn);
+			}
+		}
+		return d;
 	}
 
 }

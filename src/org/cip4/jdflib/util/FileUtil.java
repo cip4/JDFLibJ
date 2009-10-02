@@ -531,14 +531,14 @@ public class FileUtil
 	}
 
 	/**
-	 * copy a file
+	 * copy a file, unless fromFile and toFile are equal
 	 * @param fromFile the source File
 	 * @param toFile the destination File
 	 * @return true if success
 	 */
 	public static boolean copyFile(final File fromFile, final File toFile)
 	{
-		if (fromFile == null || toFile == null)
+		if (fromFile == null || toFile == null || fromFile.equals(toFile))
 		{
 			return false;
 		}
@@ -550,6 +550,23 @@ public class FileUtil
 		{
 			return false;
 		}
+	}
+
+	/**
+	 * copies a File to directory if toFile exists, it is brutally overwritten unless fromFile equals toFile
+	 * @param fromFile the File to move
+	 * @param toDir the Directory to move to
+	 * @return File the moved File if success, else null, i.e. toFile exists with the contents of fromFile
+	 */
+	public static File copyFileToDir(final File fromFile, final File toDir)
+	{
+		if (fromFile == null || toDir == null)
+		{
+			return null;
+		}
+		final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
+		final boolean b = copyFile(fromFile, newFile);
+		return b ? newFile : null;
 	}
 
 	/**

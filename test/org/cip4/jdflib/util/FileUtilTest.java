@@ -98,8 +98,9 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		assertFalse(FileUtil.isAbsoluteFile(new File("foo")));
 		assertFalse(FileUtil.isAbsoluteFile("foo"));
-		
-		if (PlatformUtil.isWindows()) {
+
+		if (PlatformUtil.isWindows())
+		{
 			assertTrue(FileUtil.isAbsoluteFile(new File("c:\\")));
 			assertTrue(FileUtil.isAbsoluteFile("c:\\"));
 			assertTrue(FileUtil.isAbsoluteFile(new File("c:\\a")));
@@ -185,11 +186,11 @@ public class FileUtilTest extends JDFTestCaseBase
 	 */
 	public void testisCleanURLFile()
 	{
-		if (PlatformUtil.isWindows()) {
+		if (PlatformUtil.isWindows())
+		{
 			assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:/")));
 			assertEquals(new File("C:"), FileUtil.cleanURL(new File("C:\\")));
-			assertEquals(new File("C:\\a"), FileUtil
-					.cleanURL(new File("C:\\a")));
+			assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:\\a")));
 			assertEquals(new File("C:\\a"), FileUtil.cleanURL(new File("C:/a")));
 		}
 	}
@@ -237,12 +238,11 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 1);
 		new File(f.getAbsolutePath() + File.separator + "b.").createNewFile();
 		assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 2);
-		
-		if (PlatformUtil.isWindows()) {
-			assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(),
-					"0.c");
-			assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8]
-					.getName(), "2.c");
+
+		if (PlatformUtil.isWindows())
+		{
+			assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(), "0.c");
+			assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8].getName(), "2.c");
 		}
 
 	}
@@ -290,10 +290,12 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertFalse(FileUtil.equals(null, new File("a")));
 		assertFalse(FileUtil.equals(new File("a"), null));
 		assertTrue(FileUtil.equals(new File("a"), new File("a")));
-		if (PlatformUtil.isWindows()) {
+		if (PlatformUtil.isWindows())
+		{
 			assertTrue(FileUtil.equals(new File("a"), new File("A")));
 		}
-		else {
+		else
+		{
 			assertFalse(FileUtil.equals(new File("a"), new File("A")));
 		}
 	}
@@ -339,6 +341,38 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
+	public void testCopyFileToDir() throws Exception
+	{
+		final byte[] b = new byte[55555];
+		for (int i = 0; i < 55555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		final File f = new File(sm_dirTestDataTemp + "streamCopy.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
+		FileUtil.streamToFile(is, f.getPath());
+		final String newdir = sm_dirTestDataTemp + File.separator + "newDirCopy";
+		final File fd = new File(newdir);
+		FileUtil.deleteAll(fd);
+		assertFalse(fd.exists());
+		fd.mkdirs();
+		final File nf = FileUtil.copyFileToDir(f, fd);
+		assertNotNull(nf);
+		assertEquals(nf.getParentFile(), fd);
+		assertEquals(nf.getName(), f.getName());
+		assertTrue(f.exists());
+		assertTrue(nf.exists());
+		assertNull(FileUtil.copyFileToDir(nf, fd));
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testMoveFileToDir() throws Exception
 	{
 		final byte[] b = new byte[55555];
@@ -363,6 +397,8 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertNotNull(nf);
 		assertEquals(nf.getParentFile(), fd);
 		assertEquals(nf.getName(), f.getName());
+		assertFalse(f.exists());
+		assertTrue(nf.exists());
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -427,11 +463,10 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
 
-		if (PlatformUtil.isWindows()) {
-			assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File(
-					"a\\"), new File("b")));
-			assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File(
-					"a\\"), new File("\\b")));
+		if (PlatformUtil.isWindows())
+		{
+			assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("b")));
+			assertEquals(new File("a/b"), FileUtil.getFileInDirectory(new File("a\\"), new File("\\b")));
 		}
 	}
 

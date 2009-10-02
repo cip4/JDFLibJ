@@ -159,6 +159,7 @@ public class StatusCounter
 
 	private double totalCounter = -1;
 	private VString icsVersions = null;
+	private boolean addPhaseTimeAmounts;
 
 	/**
 	 * @return the total counter value
@@ -200,11 +201,14 @@ public class StatusCounter
 	 */
 	public int addEmployee(final JDFEmployee employee)
 	{
-		final JDFEmployee eOld = (JDFEmployee) ContainerUtil.getMatch(vEmployees, employee, 0);
-		if (eOld == null)
+		if (employee != null)
 		{
-			vEmployees.add(employee);
-			resetPhase();
+			final JDFEmployee eOld = (JDFEmployee) ContainerUtil.getMatch(vEmployees, employee, 0);
+			if (eOld == null)
+			{
+				vEmployees.add(employee);
+				resetPhase();
+			}
 		}
 		return vEmployees.size();
 	}
@@ -226,6 +230,14 @@ public class StatusCounter
 			return b;
 		}
 		return false;
+	}
+
+	/**
+	 * @return the vector of currently registered employees
+	 */
+	public Vector<JDFEmployee> getEmpoyees()
+	{
+		return vEmployees;
 	}
 
 	/**
@@ -271,7 +283,16 @@ public class StatusCounter
 	 */
 	public StatusCounter(final JDFNode node, final VJDFAttributeMap vPartMap, final VElement vResLinks)
 	{
+		addPhaseTimeAmounts = true;
 		setActiveNode(node, vPartMap, vResLinks);
+	}
+
+	/**
+	 * @param bAddAmount if true, amounts are added to phasetimes
+	 */
+	public void setPhaseTimeAmounts(final boolean bAddAmount)
+	{
+		addPhaseTimeAmounts = bAddAmount;
 	}
 
 	/**
@@ -596,6 +617,7 @@ public class StatusCounter
 	 * get the total the amount of the resource with id refID
 	 * 
 	 * @param refID , type or usage of the resource,
+	 * @return
 	 */
 	public double getTotalAmount(final String refID)
 	{
@@ -605,8 +627,8 @@ public class StatusCounter
 
 	/**
 	 * get all total amounts of all tracked resources
+	 * @return
 	 * 
-	 * @param i
 	 */
 	public double[] getTotalAmounts()
 	{
@@ -624,8 +646,8 @@ public class StatusCounter
 
 	/**
 	 * get all total amounts of all tracked resources
+	 * @return
 	 * 
-	 * @param i
 	 */
 	public JDFResourceLink[] getAmountLinks()
 	{
@@ -644,7 +666,7 @@ public class StatusCounter
 	/**
 	 * get all phaseamounts of all tracked resources
 	 * 
-	 * @param i
+	 * @return
 	 */
 	public double[] getPhaseAmounts()
 	{
@@ -683,6 +705,7 @@ public class StatusCounter
 	 * get the total the amount of the resource with id refID
 	 * 
 	 * @param refID , type or usage of the resource,
+	 * @return
 	 */
 	public double getTotalWaste(final String refID)
 	{
@@ -694,6 +717,7 @@ public class StatusCounter
 	 * get all total amounts of all tracked resources
 	 * 
 	 * @param i
+	 * @return
 	 */
 	public double[] getTotalWastes()
 	{
@@ -834,8 +858,7 @@ public class StatusCounter
 		final JDFPhaseTime lastPhase = auditPool.getLastPhase(m_vPartMap, m_moduleID == null ? null : m_moduleID.stringAt(0));
 		JDFPhaseTime nextPhase = lastPhase;
 		final boolean bEnd = EnumNodeStatus.Completed.equals(nodeStatus) || EnumNodeStatus.Aborted.equals(nodeStatus);
-		boolean bChanged = bEnd || lastPhase == null; // no previous audit or
-		// over and out
+		boolean bChanged = bEnd || lastPhase == null; // no previous audit or over and out
 
 		nextPhase = auditPool.setPhase(nodeStatus, nodeStatusDetails, m_vPartMap, new VElement(vEmployees));
 		if (bEnd && !bCompleted)
@@ -859,9 +882,7 @@ public class StatusCounter
 		// a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
 		{
 			bChanged = true;
-			closeJobPhase(jmfStatus, mainLinkAmount, lastPhase, nextPhase); // attention
-			// -
-			// resets la to 0 - all calls after this have the new amounts
+			closeJobPhase(jmfStatus, mainLinkAmount, lastPhase, nextPhase); // attention - resets la to 0 - all calls after this have the new amounts
 			startDate = new JDFDate();
 		}
 
@@ -1010,13 +1031,16 @@ public class StatusCounter
 			}
 			else
 			{
-				pt2.setLinks(getVResLink(1));
+				if (addPhaseTimeAmounts)
+				{
+					pt2.setLinks(getVResLink(1));
+				}
 				pt2.eraseEmptyAttributes(true);
 			}
 		}
 	}
 
-	private JDFResponse closeJobPhase(final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt1, @SuppressWarnings("unused") final JDFPhaseTime pt2)
+	private JDFResponse closeJobPhase(final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt1, final JDFPhaseTime pt2)
 	{
 		final JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
@@ -1026,8 +1050,10 @@ public class StatusCounter
 		jp.setJobPartID(m_Node.getJobPartID(false));
 		jp.setQueueEntryID(queueEntryID);
 		setJobPhaseAmounts(la, jp);
-		pt1.setLinks(getVResLink(1));
-
+		if (addPhaseTimeAmounts)
+		{
+			pt1.setLinks(getVResLink(1));
+		}
 		// cleanup!
 		if (vLinkAmount != null)
 		{
@@ -1096,7 +1122,7 @@ public class StatusCounter
 	 */
 	private void setJobPhaseAmounts(final LinkAmount la, final JDFJobPhase jp)
 	{
-		if (jp == null)
+		if (jp == null || !addPhaseTimeAmounts)
 		{
 			return;
 		}
@@ -1155,7 +1181,11 @@ public class StatusCounter
 			final LinkAmount la = vLinkAmount[i];
 			if (n == 1)
 			{
-				vRet.add(la.getPhaseTimeLink());
+				final JDFResourceLink phaseTimeLink = la.getPhaseTimeLink();
+				if (phaseTimeLink != null)
+				{
+					vRet.add(phaseTimeLink);
+				}
 			}
 			if (n == 2)
 			{
@@ -1542,8 +1572,7 @@ public class StatusCounter
 		protected JDFResourceLink getPhaseTimeLink()
 		{
 			cleanAmounts();
-			setPhaseAmounts();
-			return rl;
+			return setPhaseAmounts();
 		}
 
 		/**
@@ -1572,25 +1601,30 @@ public class StatusCounter
 			{
 				vMap.add(new JDFAttributeMap());
 			}
+			boolean bEmpty = true;
 			if (isTrackWaste())
 			{
 				vMap.put(EnumPartIDKey.Condition, "Good");
 				if (lastBag.totalAmount != 0 || startAmount > 0)
 				{
 					rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseAmount), null, vMap);
+					bEmpty = false;
 				}
 				if (startAmount != 0)
 				{
 					rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startAmount), null, vMap);
+					bEmpty = false;
 				}
 				vMap.put(EnumPartIDKey.Condition, "Waste");
 				if (lastBag.totalWaste != 0 || startWaste > 0)
 				{
 					rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseWaste), null, vMap);
+					bEmpty = false;
 				}
 				if (startWaste != 0)
 				{
 					rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startWaste), null, vMap);
+					bEmpty = false;
 				}
 			}
 			else
@@ -1598,13 +1632,15 @@ public class StatusCounter
 				if (lastBag.totalAmount + lastBag.totalWaste != 0 || startAmount + startWaste > 0)
 				{
 					rl.setAmountPoolAttribute(AttributeName.ACTUALAMOUNT, formatAmount(lastBag.phaseAmount + lastBag.phaseWaste), null, vMap);
+					bEmpty = false;
 				}
 				if (startAmount + startWaste != 0)
 				{
 					rl.setAmountPoolAttribute(AttributeName.AMOUNT, formatAmount(startAmount + startWaste), null, vMap);
+					bEmpty = false;
 				}
 			}
-			return rl;
+			return bEmpty ? null : rl;
 		}
 
 		private JDFResourceLink setTotalAmounts()
@@ -1853,9 +1889,11 @@ public class StatusCounter
 	}
 
 	/**
-	 *
+	 * @param endStatus
+	 * @return
+	 * 
 	 */
-	public JDFProcessRun setProcessResult(@SuppressWarnings("unused") final EnumNodeStatus endStatus)
+	public JDFProcessRun setProcessResult(final EnumNodeStatus endStatus)
 	{
 		setPhase(EnumNodeStatus.Completed, null, EnumDeviceStatus.Idle, null);
 		final JDFAuditPool ap = m_Node.getCreateAuditPool();
@@ -1864,7 +1902,7 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param queueEntryID
+	 * @param _queueEntryID
 	 */
 	public void setQueueEntryID(final String _queueEntryID)
 	{
@@ -1872,7 +1910,7 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param queueEntryID
+	 * @return queueEntryID
 	 */
 	public String getQueueEntryID()
 	{
@@ -1987,6 +2025,7 @@ public class StatusCounter
 			if (vEmployees.size() > 0)
 			{
 				clearEmployees();
+				resetPhase();
 			}
 		}
 		else if (!new VElement(employees).isEqual(new VElement(vEmployees)))

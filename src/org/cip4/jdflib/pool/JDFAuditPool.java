@@ -759,20 +759,17 @@ public class JDFAuditPool extends JDFPool
 	 * 
 	 * default: SetPhase(status, null,null,null)
 	 */
-	public JDFPhaseTime setPhase(final EnumNodeStatus status, final String statusDetails, final VJDFAttributeMap vmParts, final VElement employees)
+	public JDFPhaseTime setPhase(final EnumNodeStatus status, String statusDetails, final VJDFAttributeMap vmParts, final VElement employees)
 	{
-		String statusDetailsLocal = statusDetails;
-
 		JDFPhaseTime pt = getLastPhase(vmParts, null);
-		statusDetailsLocal = StringUtil.getNonEmpty(statusDetailsLocal);
+		statusDetails = StringUtil.getNonEmpty(statusDetails);
 		boolean bChanged = false;
 		final VElement ptEmployees = pt == null ? new VElement() : pt.getChildElementVector(ElementName.EMPLOYEE, null);
 		if (pt == null)
 		{
 			bChanged = true;
 		}
-		else if (!ContainerUtil.equals(pt.getStatus(), status) || !ContainerUtil.equals(statusDetailsLocal, pt.getAttribute(AttributeName.STATUSDETAILS, null, null))
-				|| !ptEmployees.isEqual(employees))
+		else if (!ContainerUtil.equals(pt.getStatus(), status) || !ContainerUtil.equals(statusDetails, pt.getAttribute(AttributeName.STATUSDETAILS, null, null)) || !ptEmployees.isEqual(employees))
 		{
 			pt.setEnd(new JDFDate());
 			bChanged = true;
@@ -780,7 +777,7 @@ public class JDFAuditPool extends JDFPool
 		if (bChanged)
 		{
 			pt = addPhaseTime(status, null, vmParts);
-			pt.setStatusDetails(statusDetailsLocal);
+			pt.setStatusDetails(statusDetails);
 			pt.copyElements(employees, null);
 		}
 		return pt;
@@ -867,10 +864,11 @@ public class JDFAuditPool extends JDFPool
 	/**
 	 * @param cleanPolicy .
 	 * @param spawnID .
+	 * @throws NoSuchMethodException
 	 * @deprecated use JDFMerge.cleanUpMerge
 	 */
 	@Deprecated
-	public void cleanUpMerge(@SuppressWarnings("unused") final JDFNode.EnumCleanUpMerge cleanPolicy, @SuppressWarnings("unused") final String spawnID) throws NoSuchMethodException
+	public void cleanUpMerge(final JDFNode.EnumCleanUpMerge cleanPolicy, final String spawnID) throws NoSuchMethodException
 	{
 		throw new NoSuchMethodException("use JDFMerge.cleanUpMergeAudits");
 		// JDFMerge.cleanUpMergeAudits(this, cleanPolicy, spawnID);

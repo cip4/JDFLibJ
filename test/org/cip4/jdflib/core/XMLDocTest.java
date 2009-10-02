@@ -78,6 +78,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFSpawn;
@@ -95,7 +96,6 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	protected abstract class MyThread implements Runnable
 	{
-
 		public XMLDoc d;
 		public int iLoop;
 		public Exception hook = null;
@@ -406,6 +406,24 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test whether xmldoc.parsegives a clean empty kelent only doc
+	 */
+	public void testParseFile()
+	{
+		final XMLDoc d = new XMLDoc("JDF", null);
+		final KElement root = d.getRoot();
+		root.appendElement("AuditPool");
+		final String fn = sm_dirTestDataTemp + "xmldocPasreTest.xml";
+		d.write2File(fn, 0, true);
+
+		final XMLDoc d2 = XMLDoc.parseFile(fn);
+		assertFalse(d2 instanceof JDFDoc);
+		final KElement r2 = d2.getRoot();
+		assertFalse(r2 instanceof JDFNode);
+		assertFalse(r2.getElement("AuditPool") instanceof JDFAuditPool);
+	}
+
+	/**
 	 * 
 	 */
 	public void testParseNoNS()
@@ -422,7 +440,6 @@ public class XMLDocTest extends JDFTestCaseBase
 		assertFalse(root.toString().indexOf("xmlns=\"\"") >= 0);
 		final KElement foo = root.appendElement("foofoo");
 		assertNull(foo.getNamespaceURI());
-
 	}
 
 	/**

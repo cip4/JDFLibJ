@@ -164,6 +164,9 @@ public class XJDF20 extends BaseElementWalker
 	protected JDFNode oldRoot = null;
 	protected boolean walkingProduct = false;
 	protected boolean first = true;
+	/**
+	 * set to update version stamps
+	 */
 	public boolean bUpdateVersion = true;
 	// private VJDFAttributeMap vPartMap = null;
 	/**
@@ -598,7 +601,7 @@ public class XJDF20 extends BaseElementWalker
 		 * @param xjdf
 		 * @param newResLeaf
 		 */
-		private void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
+		protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
 		{
 			final String localName = xjdf.getLocalName();
 			final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
@@ -656,7 +659,8 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * @param e
+		 * @param jdf
+		 * @param xjdf
 		 * @return the created resource
 		 */
 		@Override
@@ -974,7 +978,8 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * @param e
+		 * @param jdf
+		 * @param xjdf
 		 * @return the created resource in this case just remove the pool
 		 */
 		@Override
@@ -1116,7 +1121,8 @@ public class XJDF20 extends BaseElementWalker
 	public class WalkProduct extends WalkJDFElement
 	{
 		/**
-		 * @param e
+		 * @param jdf
+		 * @param xjdf
 		 * @return the created resource
 		 */
 		@Override
@@ -1436,7 +1442,7 @@ public class XJDF20 extends BaseElementWalker
 					phaseAmount.add(pA);
 				}
 			}
-			final KElement x2 = super.walk(jdf, xjdf); // copy anything but the links (see deleteNoe above...)
+			final KElement x2 = super.walk(jdf, xjdf); // copy anything but the links (see deleteNode above...)
 			if (x2 != null)
 			{
 				for (int i = 0; i < phaseAmount.size(); i++)
