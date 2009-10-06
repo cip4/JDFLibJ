@@ -100,6 +100,9 @@ import org.cip4.jdflib.resource.process.JDFRunList;
  */
 public class JDFResourceLinkTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
 	public void testAmount()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -122,6 +125,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertTrue("rl amount!=44", rl.getMaxAmount(null) == 44);
 	}
 
+	/**
+	 * 
+	 */
 	public void testAmountCondition()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -167,6 +173,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertEquals("sum g/w in rl", rl.getMaxAmount(map), 48., 0.1);
 	}
 
+	/**
+	 * 
+	 */
 	public void testAppendAmountPool()
 	{
 		final JDFDoc d = new JDFDoc("MediaLink");
@@ -184,6 +193,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testDraftOK() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -225,6 +237,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertEquals("unavailable", rl.getMinStatus(), JDFResource.EnumResStatus.Unavailable);
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetMinAmountPoolAttribute()
 	{
 		final JDFDoc d = new JDFDoc("TestLink");
@@ -241,6 +256,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertEquals(rl.getMinAmountPoolAttribute("ActualAmount", null, new JDFAttributeMap("SignatureName", "3"), 42), 24., 0.);
 	}
 
+	/**
+	 * 
+	 */
 	public void testExpandAmountPool()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -262,6 +280,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testGenerateCPI() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -278,6 +299,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1 2"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetAmountPoolDouble()
 	{
 		final JDFDoc d = new JDFDoc("TestLink");
@@ -324,6 +348,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetAmountPoolVector()
 	{
 		final JDFDoc d = new JDFDoc("TestLink");
@@ -386,7 +413,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	/**
 	 * tests whether the convoluted inheritence of partAmount and ResourceLink function correctly
 	 * 
-	 * @throws Exception
 	 */
 	public void testPartAmountVirtual()
 	{
@@ -420,6 +446,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetAmountPoolAttribute()
 	{
 		final JDFDoc d = new JDFDoc("ResourceLinkPool");
@@ -462,7 +491,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	/**
 	 * Method testGetTarget
 	 * 
-	 * @throws Exception any exception
 	 */
 	public void testGetLeafVector()
 	{
@@ -498,9 +526,7 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * Method testGetTarget
-	 * 
-	 * @throws Exception
+	 * Method testGetTarget * @throws Exception
 	 */
 	public void testGetTargetVector()
 	{
@@ -518,7 +544,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	/**
 	 * Method testGetTarget
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetTargetVectorSparse()
 	{
@@ -555,7 +580,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	/**
 	 * Method testGetTarget
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetTargetVectorNullPart()
 	{
@@ -665,6 +689,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertEquals(rl.getTargetVector(0).size(), 1);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testGetCombinedProcessTypes() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -689,7 +716,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	/**
 	 * Method testGetLinkRootJMF
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetLinkRoot()
 	{
@@ -738,6 +764,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testLinkRootDeadLoop()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
@@ -748,6 +777,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		assertNotNull(link.getLinkRoot()); // Endlos-Schleife !!!!
 	}
 
+	/**
+	 * 
+	 */
 	public void testMatchesString()
 	{
 		final JDFDoc jdfDoc = new JDFDoc("JDF");
@@ -770,7 +802,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	/**
 	 * Method testIncludesMatchingAttribute.
 	 * 
-	 * @throws Exception
 	 */
 	public void testSetPartMap()
 	{
@@ -791,6 +822,9 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.setPartMapVector(v);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testSetTarget() throws Exception
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -823,7 +857,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	/**
 	 * Method testIncludesMatchingAttribute.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetUsage()
 	{
@@ -837,7 +870,6 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	/**
 	 * Method testHasResourcePartMap.
 	 * 
-	 * @throws Exception
 	 */
 	public void testHasResourcePartMap()
 	{
@@ -901,9 +933,17 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testInvertUsage()
+	{
+		assertEquals(EnumUsage.Output, EnumUsage.Output.invert().invert());
+		assertEquals(EnumUsage.Input, EnumUsage.Output.invert());
+	}
+
+	/**
 	 * Method testIsExecutable().
 	 * 
-	 * @throws Exception
 	 */
 	public void testIsExecutable()
 	{

@@ -1696,6 +1696,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		private int nType;
 		private EnumUsage usage;
 		private String linkName;
+		private boolean linkBoth;
 
 		/**
 		 * 
@@ -1708,17 +1709,27 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		/**
+		 * @param _linkName
+		 * @param _usage
+		 * 
+		 */
+		public CombinedProcessLinkHelper(final String _linkName, final EnumUsage _usage)
+		{
+			nType = 0;
+			usage = _usage;
+			setLinkName(_linkName);
+		}
+
+		/**
 		 * get the links that are selected by a given CombinedProcessIndex<br>
 		 * all links with no CombinedProcessIndex are included in the list
 		 * 
 		 * @param type the process type for which to get the links
-		 * @param _usage
-		 * @param _linkName
 		 * @return
 		 * 
 		 * @default getLinksForType(type, -1)
 		 */
-		public JDFResourceLink getCreateLinkForType(final EnumType type, final EnumUsage _usage, final String _linkName)
+		public JDFResourceLink getCreateLinkForType(final EnumType type)
 		{
 			final int cpiType = getCombinedProcessIndex(type, nType);
 			final int nPI = getTypes().size();
@@ -1726,8 +1737,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				return null; // no matching type
 			}
-			setLinkName(_linkName);
-			setUsage(_usage);
 			final VElement ve = getLinksForType(type);
 			if (ve != null)
 			{
@@ -1749,9 +1758,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				hTmp.setLinkName(linkName);
 				rlLast = hTmp.getLinkForCombinedProcessIndex(cpiType + 1, 0);
 			}
-			final JDFResource r = (rlLast != null) ? rlLast.getLinkRoot() : addResource(_linkName, usage);
+			final JDFResource r = (rlLast != null) ? rlLast.getLinkRoot() : addResource(getResName(), usage);
 			final JDFIntegerList il = new JDFIntegerList();
-			final JDFResourceLink rl = getLink(r, usage);
+			final JDFResourceLink rl = ensureLink(r, usage, null);
 			int nPos = 0;
 			while (true)
 			{
@@ -1767,6 +1776,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				nPos = cpi + 1;
 			}
 			rl.setCombinedProcessIndex(il);
+
+			if (rlLast == null && linkBoth && nType >= 0)
+			{
+				final EnumUsage otherUsage = usage.invert();
+				rlLast = ensureLink(r, otherUsage, null);
+				nPos--; // undo +1
+				nPos += (EnumUsage.Output.equals(otherUsage)) ? -1 : 1;
+				if (nPos >= 0 && nPos < getTypes().size())
+				{
+					rlLast.setCombinedProcessIndex(nPos);
+				}
+			}
+
 			return rl;
 
 		}
@@ -1949,6 +1971,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		/**
+		 * @param b if true always ensure that the link exists both in and out
+		 */
+		public void setBoth(final boolean b)
+		{
+			this.linkBoth = b;
+		}
+
+		/**
 		 * @param linkName the name of the requested link
 		 */
 		public void setLinkName(String linkName)
@@ -1959,6 +1989,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			}
 			this.linkName = linkName;
 		}
+
+		/**
+		 * @return the name of the requested resource
+		 */
+		public String getResName()
+		{
+			return StringUtil.leftStr(linkName, -4);
+		}
+
 	}
 
 	/**
@@ -3791,6 +3830,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			m.put(AttributeName.USAGE, usage);
 		}
+		m.put(AttributeName.RREF, jdfResource.getID());
 		if (processUsage != null)
 		{
 			m.put(AttributeName.PROCESSUSAGE, processUsage);
@@ -9567,21 +9607,19 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @return JDFResourceLink - the ResourceLink matching the condition mLinkAtt
 	 * @default getLinks(null,null,null)
 	 */
-	public JDFResourceLink getLink(final int index, final String linkName, final JDFAttributeMap mLinkAtt, final String linkNS)
+	public JDFResourceLink getLink(final int index, String linkName, final JDFAttributeMap mLinkAtt, final String linkNS)
 	{
-		String linkNameLocal = linkName;
-
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp == null)
 		{
 			return null;
 		}
-		if (linkNameLocal != null && !linkNameLocal.endsWith(JDFConstants.LINK))
+		if (linkName != null && !linkName.endsWith(JDFConstants.LINK))
 		{
-			linkNameLocal += JDFConstants.LINK;
+			linkName += JDFConstants.LINK;
 		}
 
-		return rlp.getPoolChild(index, linkNameLocal, mLinkAtt, linkNS);
+		return rlp.getPoolChild(index, linkName, mLinkAtt, linkNS);
 	}
 
 	/**

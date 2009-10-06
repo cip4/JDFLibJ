@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -211,17 +211,15 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return VElement - vector with all Resources matching the conditions
 	 */
-	public VElement getLinkedResources(final String resName, final JDFAttributeMap mLinkAtt, final JDFAttributeMap mResAtt, final boolean bFollowRefs)
+	public VElement getLinkedResources(String resName, final JDFAttributeMap mLinkAtt, final JDFAttributeMap mResAtt, final boolean bFollowRefs)
 	{
-		String resNameLocal = resName;
-
 		final VElement vL = new VElement();
 		final VElement v = getPoolChildren(null, mLinkAtt, null);
 		if (v != null)
 		{
-			if (resNameLocal != null && resNameLocal.endsWith(JDFConstants.LINK))
+			if (resName != null && resName.endsWith(JDFConstants.LINK))
 			{
-				resNameLocal = resNameLocal.substring(0, resNameLocal.length() - 4); // remove link
+				resName = resName.substring(0, resName.length() - 4); // remove link
 			}
 
 			final int size = v.size();
@@ -230,7 +228,7 @@ public class JDFResourceLinkPool extends JDFPool
 				final JDFResourceLink l = (JDFResourceLink) v.elementAt(i);
 
 				final JDFResource linkRoot = l.getLinkRoot();
-				if ((linkRoot != null) && ((resNameLocal == null) || resNameLocal.equals(JDFConstants.EMPTYSTRING) || linkRoot.getLocalName().equals(resNameLocal)))
+				if ((linkRoot != null) && ((resName == null) || resName.equals(JDFConstants.EMPTYSTRING) || linkRoot.getLocalName().equals(resName)))
 				{
 					if (linkRoot.includesAttributes(mResAtt, true))
 					{
@@ -365,13 +363,11 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @deprecated
 	 */
 	@Deprecated
-	public JDFResourceLink appendResource(final JDFResource r, final boolean input, final boolean bForce)
+	public JDFResourceLink appendResource(final JDFResource r, final boolean input, boolean bForce)
 	{
-		boolean bForceLocal = bForce;
-
-		if (bForceLocal)
+		if (bForce)
 		{
-			bForceLocal = true; // fool compiler
+			bForce = true; // fool compiler
 		}
 
 		return linkResource(r, input ? EnumUsage.Input : EnumUsage.Output, null);
@@ -435,35 +431,33 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @throws JDFException - if <code>r</code> is not in the same document as <code>this</code>
 	 */
-	public JDFResourceLink linkResource(final JDFResource r, final JDFResourceLink.EnumUsage usage, final EnumProcessUsage processUsage)
+	public JDFResourceLink linkResource(JDFResource r, final JDFResourceLink.EnumUsage usage, final EnumProcessUsage processUsage)
 	{
-		JDFResource rLocal = r;
-
-		if (rLocal == null || usage == null)
+		if (r == null || usage == null)
 		{
 			return null;
 		}
 
-		String s = rLocal.getID();
+		String s = r.getID();
 		if (isWildCard(s))
 		{
-			s = rLocal.getResourceRoot().appendAnchor(null);
+			s = r.getResourceRoot().appendAnchor(null);
 		}
 
-		final JDFResourceLink rl = (JDFResourceLink) appendElement(rLocal.getLinkString(), rLocal.getNamespaceURI());
-		rl.setTarget(rLocal);
+		final JDFResourceLink rl = (JDFResourceLink) appendElement(r.getLinkString(), r.getNamespaceURI());
+		rl.setTarget(r);
 		rl.setUsage(usage);
 		rl.setProcessUsage(processUsage);
 
 		// move the resource to the closest common ancestor if it is not already
 		// an ancestor of this
-		JDFNode parent = rLocal.getParentJDF();
+		JDFNode parent = r.getParentJDF();
 
 		// move the resource to the closest common ancestor if it is not already
 		// an ancestor of this
 		while (parent != null && !parent.isAncestor(this))
 		{
-			parent = rLocal.getParentJDF();
+			parent = r.getParentJDF();
 			if (parent == null)
 			{
 				break;
@@ -476,9 +470,8 @@ public class JDFResourceLinkPool extends JDFPool
 				throw new JDFException("JDFResourceLink appendResource resource is not in the same document");
 			}
 
-			rLocal = (JDFResource) parent.getCreateResourcePool().moveElement(rLocal, null);
+			r = (JDFResource) parent.getCreateResourcePool().moveElement(r, null);
 		}
-
 		return rl;
 	}
 
@@ -701,31 +694,27 @@ public class JDFResourceLinkPool extends JDFPool
 	 * 
 	 * @return JDFElement: the pool child matching the above conditions
 	 */
-	public JDFResourceLink getPoolChild(final int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
+	public JDFResourceLink getPoolChild(int i, final String strName, final JDFAttributeMap mAttrib, final String nameSpaceURI)
 	{
 		JDFResourceLink resLink = null;
-
-		int iLocal = i;
-
 		final VElement v = getPoolChildren(strName, mAttrib, nameSpaceURI);
 		if (v != null)
 		{
 			final int size = v.size();
-			if (iLocal < 0)
+			if (i < 0)
 			{
-				iLocal = size + iLocal;
-				if (iLocal < 0)
+				i = size + i;
+				if (i < 0)
 				{
 					return null;
 				}
 			}
 
-			if (size > iLocal)
+			if (size > i)
 			{
-				resLink = (JDFResourceLink) v.elementAt(iLocal);
+				resLink = (JDFResourceLink) v.elementAt(i);
 			}
 		}
-
 		return resLink;
 	}
 
@@ -779,5 +768,4 @@ public class JDFResourceLinkPool extends JDFPool
 		}
 		return vDoneRefs;
 	}
-
 }

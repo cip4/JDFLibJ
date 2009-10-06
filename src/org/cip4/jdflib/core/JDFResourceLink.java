@@ -405,9 +405,22 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			return iterator(EnumUsage.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumUsage Input = new EnumUsage("Input");
-
+		/**
+ * 
+ */
 		public static final EnumUsage Output = new EnumUsage("Output");
+
+		/**
+		 * @return the opposite usage for this
+		 */
+		public EnumUsage invert()
+		{
+			return Output.equals(this) ? Input : Output;
+		}
 
 	}
 

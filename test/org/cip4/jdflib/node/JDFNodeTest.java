@@ -313,9 +313,13 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		final JDFResource rl = n.addResource("RunList", null);
-		final JDFResourceLink rl2 = n.ensureLink(rl, EnumUsage.Input, null);
-		assertNotNull(rl2);
-		assertEquals(rl2, n.ensureLink(rl, EnumUsage.Input, null));
+		final JDFResource r2 = n.addResource("RunList", null);
+		final JDFResourceLink rl1 = n.ensureLink(rl, EnumUsage.Input, null);
+		final JDFResourceLink rl2 = n.ensureLink(r2, EnumUsage.Input, null);
+		assertNotNull(rl1);
+		assertEquals(rl1, n.ensureLink(rl, EnumUsage.Input, null));
+		assertEquals(rl2, n.ensureLink(r2, EnumUsage.Input, null));
+		assertNotSame(rl1, rl2);
 
 	}
 
@@ -1093,6 +1097,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public void testNullPointerException()
 	{
 		final List<EnumCleanUpMerge> LcleanUpMerge = JDFNode.EnumCleanUpMerge.getEnumList();
@@ -1393,6 +1398,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetInheritedNodeInfo()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1442,6 +1450,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testCreateNodeInfo()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -1470,6 +1481,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetvJDFNode()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1737,6 +1751,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testProductValidation()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1754,6 +1771,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGrayBox()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1767,6 +1787,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertTrue("interpretingParams", v.contains("InterpretingParamsLink:AnyInput"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testAppendMatchingResourceProduct()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1788,6 +1811,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAppendMatchingResourcePrivate()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1821,6 +1847,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetResource()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1892,6 +1921,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAppendMatchingResource()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -1974,7 +2006,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 		final JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("IPD0.I", JDFConstants.EMPTYSTRING);
 
-		final Collection vSpawned = nodeProc.checkSpawnedResources(vsRWResourceIDs, vamParts);
+		final Collection<JDFResource> vSpawned = nodeProc.checkSpawnedResources(vsRWResourceIDs, vamParts);
 		assertNull(vSpawned);
 	}
 
@@ -2008,6 +2040,10 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testGetParentJDF()
 	{
 		{
@@ -2028,6 +2064,10 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testGetEnumTypes()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -2138,6 +2178,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetMatchingNodes()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -2164,7 +2207,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFParser pars = new JDFParser();
 		final JDFDoc doc = pars.parseFile(sm_dirTestData + File.separator + "testMatchRes.jdf");
 		final JDFNode root = doc.getJDFRoot();
-		final Vector v = root.getvJDFNode("ProcessGroup", null, false);
+		final VElement v = root.getvJDFNode("ProcessGroup", null, false);
 		JDFNode ppnode = null;
 		for (int i = 0; i < v.size(); i++)
 		{
@@ -2382,7 +2425,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			{
 				assertEquals(root.getTypes(), vs);
 			}
-			else
+			else if (child != null)
 			{
 				assertEquals(child.getTypes(), vs);
 			}
@@ -2449,14 +2492,27 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNode root = new JDFDoc("JDF").getJDFRoot();
 
 		root.setType(EnumType.Combined);
-		root.setTypes(new VString("Cutting Folding Cutting", " "));
+		root.setTypes(new VString("Cutting Folding Cutting Stitching Trimming", " "));
 
-		final CombinedProcessLinkHelper h = root.new CombinedProcessLinkHelper();
-		final JDFResourceLink rl = h.getCreateLinkForType(EnumType.Folding, EnumUsage.Input, "Component");
+		final CombinedProcessLinkHelper h = root.new CombinedProcessLinkHelper("Component", EnumUsage.Input);
+
+		final JDFResourceLink rl = h.getCreateLinkForType(EnumType.Folding);
 		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList(1));
-		final JDFResourceLink rl2 = h.getCreateLinkForType(EnumType.Folding, EnumUsage.Output, "Component");
+		h.setUsage(EnumUsage.Output);
+		final JDFResourceLink rl2 = h.getCreateLinkForType(EnumType.Folding);
 		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList(1));
 		assertNotSame(rl, rl2);
+		final JDFResourceLink rlf = h.getCreateLinkForType(EnumType.Cutting);
+		assertEquals(rlf.getCombinedProcessIndex(), new JDFIntegerList(0));
+		assertEquals(rl.getTarget(), rlf.getTarget());
+		h.setBoth(true);
+		h.setUsage(EnumUsage.Input);
+		final JDFResourceLink rlt = h.getCreateLinkForType(EnumType.Trimming);
+		assertEquals(rlt.getCombinedProcessIndex(), new JDFIntegerList(4));
+		h.setUsage(EnumUsage.Output);
+
+		final JDFResourceLink rls = (JDFResourceLink) h.getLinksForType(EnumType.Stitching).get(0);
+		assertEquals(rls.getTarget(), rlt.getTarget());
 	}
 
 	/**
