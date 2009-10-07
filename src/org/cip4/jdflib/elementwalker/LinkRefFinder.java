@@ -102,10 +102,10 @@ public class LinkRefFinder extends BaseElementWalker
 	}
 
 	/**
-	 * get a vector of all unlinked resources of n and its children
+	 * get a vector of all links and references of n and its children
 	 * 
 	 * @param n the node to walk
-	 * @return the vector of unlinked resources
+	 * @return the vector of unlinked resourcerefs and resourceLinks
 	 */
 	public VectorMap<String, KElement> getMap(final JDFNode n)
 	{
