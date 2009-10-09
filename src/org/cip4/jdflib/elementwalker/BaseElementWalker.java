@@ -121,6 +121,9 @@ public class BaseElementWalker extends ElementWalker
 		}
 	}
 
+	/**
+	 * @return the factory for this worker
+	 */
 	protected BaseWalkerFactory getFactory()
 	{
 		return (BaseWalkerFactory) theFactory;

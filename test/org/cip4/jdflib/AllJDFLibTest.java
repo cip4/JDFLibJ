@@ -133,6 +133,7 @@ import org.cip4.jdflib.elementwalker.AttributeReplacerTest;
 import org.cip4.jdflib.elementwalker.BaseWalkerTest;
 import org.cip4.jdflib.elementwalker.LinkRefFinderTest;
 import org.cip4.jdflib.elementwalker.UnlinkFinderTest;
+import org.cip4.jdflib.elementwalker.XPathWalkerTest;
 import org.cip4.jdflib.examples.AmountTest;
 import org.cip4.jdflib.examples.AutomatedLayoutTest;
 import org.cip4.jdflib.examples.ContentCreationTest;
@@ -146,6 +147,8 @@ import org.cip4.jdflib.examples.SheetOptimizeTest;
 import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
+import org.cip4.jdflib.extensions.XJDFTest;
+import org.cip4.jdflib.extensions.xjdfwalker.IDFinderTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
 import org.cip4.jdflib.goldenticket.IDPGoldenTicketTest;
 import org.cip4.jdflib.goldenticket.MISCPGoldenTicketTest;
@@ -325,7 +328,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(BaseWalkerTest.class);
 		suite.addTestSuite(LinkRefFinderTest.class);
 		suite.addTestSuite(UnlinkFinderTest.class);
-		// suite.addTestSuite(XPathWalkerTest.class);
+		suite.addTestSuite(XPathWalkerTest.class);
 
 		// examples
 		suite.addTestSuite(AmountTest.class);
@@ -341,6 +344,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(StrippingTest.class);
 		suite.addTestSuite(VarnishTest.class);
 		suite.addTestSuite(WebTest.class);
+
+		//extension
+		suite.addTestSuite(XJDFTest.class);
+		suite.addTestSuite(IDFinderTest.class);
 
 		// Golden tickets
 		suite.addTestSuite(GoldenTicketTest.class);

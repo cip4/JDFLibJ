@@ -3,6 +3,8 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import java.util.Map;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -13,14 +15,17 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -33,8 +38,9 @@ import org.cip4.jdflib.util.StringUtil;
 public class XJDFToJDFConverter extends BaseElementWalker
 {
 	JDFDoc jdfDoc;
-	JDFNode theNode;
-	boolean walkedProduct;
+	//	JDFNode theNode;
+	Map<String, IDPart> idMap;
+	boolean firstConvert;
 
 	/**
 	 * @param template the jdfdoc to fill this into
@@ -43,9 +49,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	public XJDFToJDFConverter(final JDFDoc template)
 	{
 		super(new BaseWalkerFactory());
+		firstConvert = true;
 		jdfDoc = template == null ? null : template.clone();
-		theNode = null;
-		walkedProduct = false;
+		//		theNode = null;
+		idMap = null;
 	}
 
 	/**
@@ -58,12 +65,14 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			jdfDoc = new JDFDoc("JDF");
 		}
-		theNode = findNode(xjdf, true);
+		JDFNode theNode = findNode(xjdf, true);
 		if (theNode == null)
 		{
 			return null;
 		}
-		walkTree(xjdf, null);
+		idMap = new IDFinder().getMap(xjdf);
+		walkTree(xjdf, theNode);
+		firstConvert = false;
 		return jdfDoc;
 	}
 
@@ -79,6 +88,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	/**
 	 * find and optionally create the appropriate node
 	 * @param xjdf
+	 * @param create if true, creat the new node
 	 * @return the node
 	 */
 	private JDFNode findNode(final KElement xjdf, final boolean create)
@@ -168,7 +178,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	{
 
 		/**
-		 * @param factory
+		 *  
 		 */
 		public WalkXElement()
 		{
@@ -194,25 +204,37 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		protected void cleanRefs(final KElement e)
 		{
 			final JDFAttributeMap map = e.getAttributeMap();
-			if (map != null)
+			if (map == null)
+				return;
+			final VString keys = map.getKeys();
+			if (keys != null)
 			{
-				final VString keys = map.getKeys();
-				if (keys != null)
+				final int keySize = keys.size();
+				for (int i = 0; i < keySize; i++)
 				{
-					final int keySize = keys.size();
-					for (int i = 0; i < keySize; i++)
+					final String val = keys.get(i);
+					if (val.endsWith("Ref") && !val.equals("rRef"))
 					{
-						final String val = keys.get(i);
-						if (val.endsWith("Ref") && !val.equals("rRef"))
+						String value = map.get(val);
+						IDPart p = idMap.get(value);
+						if (p != null)
 						{
-							e.appendElement(val).setAttribute("rRef", map.get(val));
+							KElement ref = e.appendElement(val);
+							ref.setAttribute("rRef", p.getID());
+							VJDFAttributeMap vpartmap = p.getPartMap();
+							if (vpartmap != null)
+							{
+								for (int j = 0; j < vpartmap.size(); j++)
+								{
+									ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
+								}
+							}
 							e.removeAttribute(val);
 						}
 					}
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -228,6 +250,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
+			JDFNode theNode = (JDFNode) trackElem;
 			theNode.setAttributes(e);
 			theNode.setType(EnumType.ProcessGroup);
 			return theNode;
@@ -291,6 +314,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			final JDFNode parent = (JDFNode) trackElem;
+			final JDFNode root = parent.getJDFRoot();
 			EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
 			if (inOut == null) // heuristics for linking
 			{
@@ -307,13 +331,25 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				id = "r" + JDFElement.uniqueID(0);
 				e.setAttribute(AttributeName.ID, id);
 			}
-			final JDFResource r;
+			JDFResource r = null;
 			final KElement idElem = parent.getCreateResourcePool().getChildWithAttribute(null, "ID", null, id, 0, true);
 			if (idElem instanceof JDFResource)
 			{
 				r = (JDFResource) idElem;
 			}
 			else
+			{
+				r = (JDFResource) root.getChildWithAttribute(null, "ID", null, id, 0, false);
+				if (r != null)
+				{
+					JDFResourcePool rp = root.getCreateResourcePool();
+					if (!rp.equals(r.getParentNode_KElement()))
+					{
+						rp.moveElement(r, null);
+					}
+				}
+			}
+			if (r == null)
 			{
 				r = parent.addResource(e.getAttribute("Name"), inOut);
 			}
@@ -326,22 +362,25 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				inOut = EnumResourceClass.Consumable.equals(r.getResourceClass()) ? EnumUsage.Input : EnumUsage.Output;
 				parent.linkResource(r, inOut, null);
 			}
-			final JDFResourceLink rl = theNode.getLink(r, inOut);
-			r.setAttributes(e);
-			r.removeAttribute(AttributeName.NAME);
-			r.removeAttribute(AttributeName.USAGE);
-			if (rl != null)
+			if (inOut != null)
 			{
-				if (id != null)
-				{
-					rl.setrRef(id);
-				}
+				final JDFResourceLink rl = parent.ensureLink(r, inOut, null);
+				r.setAttributes(e);
+				r.removeAttribute(AttributeName.NAME);
 				r.removeAttribute(AttributeName.USAGE);
-				rl.moveAttribute(AttributeName.PROCESSUSAGE, r);
-				rl.moveAttribute(AttributeName.AMOUNT, r);
-				rl.moveAttribute(AttributeName.ACTUALAMOUNT, r);
-				rl.moveAttribute(AttributeName.MAXAMOUNT, r);
-				rl.moveAttribute(AttributeName.MINAMOUNT, r);
+				if (rl != null)
+				{
+					if (id != null)
+					{
+						rl.setrRef(id);
+					}
+					r.removeAttribute(AttributeName.USAGE);
+					rl.moveAttribute(AttributeName.PROCESSUSAGE, r);
+					rl.moveAttribute(AttributeName.AMOUNT, r);
+					rl.moveAttribute(AttributeName.ACTUALAMOUNT, r);
+					rl.moveAttribute(AttributeName.MAXAMOUNT, r);
+					rl.moveAttribute(AttributeName.MINAMOUNT, r);
+				}
 			}
 			return r;
 		}
@@ -355,8 +394,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			final KElement parent = toCheck.getParentNode_KElement();
-			final boolean bL1 = parent != null && (parent.getLocalName().equals("XJDF") || parent.getLocalName().equals("Product"));
-			return bL1 && super.matches(toCheck) && toCheck.getLocalName().endsWith("Set") && toCheck.hasAttribute(AttributeName.NAME);
+			final boolean bL1 = parent != null
+					&& (parent.getLocalName().equals("XJDF") || parent.getLocalName().equals("Product"));
+			return bL1 && super.matches(toCheck) && toCheck.getLocalName().endsWith("Set")
+					&& toCheck.hasAttribute(AttributeName.NAME);
 		}
 
 	}
@@ -433,22 +474,22 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			JDFNode parent;
+			JDFNode theNode = (JDFNode) trackElem;
 			if ("Product".equals(theNode.getType()))
 			{
-				parent = theNode.addProduct();
+				theNode = theNode.addProduct();
 			}
 			else
 			{
 				jdfDoc = new JDFDoc("JDF");
-				parent = jdfDoc.getJDFRoot();
+				JDFNode parent = jdfDoc.getJDFRoot();
 				parent.setType(EnumType.Product);
 				parent.copyElement(theNode, null);
 				theNode = parent;
 			}
 
-			parent.setAttributes(e);
-			return parent;
+			theNode.setAttributes(e);
+			return theNode;
 		}
 
 		/**
@@ -477,7 +518,9 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			e.deleteNode();
-			return walkedProduct ? null : trackElem;
+			// only convert products in the first pass
+			//TODO rethink product conversion switch
+			return firstConvert ? jdfDoc.getJDFRoot() : null;
 		}
 
 		/**
@@ -517,8 +560,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final String name = toCheck.getLocalName();
-			return "ProductList".equals(name);
+			//			final String name = toCheck.getLocalName();
+			return false;
 		}
 
 	}
@@ -547,7 +590,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return super.matches(toCheck) && (toCheck instanceof JDFPart) && isXResource(toCheck.getParentNode_KElement());
+			return super.matches(toCheck) && (toCheck instanceof JDFPart)
+					&& isXResource(toCheck.getParentNode_KElement());
 		}
 
 	}
@@ -565,10 +609,16 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
 		{
+			JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
 			final JDFResource r = (JDFResource) trackElem;
+			String sep = part.getSeparation();
+			KElement col = r.getChildWithAttribute("Color", "Name", null, sep, 0, true);
+			if (col != null)
+				return null; // been here already
 			final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
 			final JDFResourceLink rll = theNode.getLink(r, null);
-			rll.removeChildren(ElementName.PART, null, null);
+			if (rll != null)
+				rll.removeChildren(ElementName.PART, null, null);
 			rPart.renameElement(ElementName.COLOR, null);
 			rPart.renameAttribute(AttributeName.SEPARATION, AttributeName.NAME, null, null);
 			r.removeFromAttribute(AttributeName.PARTIDKEYS, AttributeName.SEPARATION, null, " ", -1);
@@ -600,7 +650,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			final KElement rPart = super.walk(e, trackElem);
-			rPart.removeAttribute(AttributeName.STATUS);
+			if (rPart != null)
+				rPart.removeAttribute(AttributeName.STATUS);
 			return rPart;
 
 		}
@@ -621,6 +672,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
+			JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
 			JDFResource p;
 			final JDFPart part = (JDFPart) e.getElement(ElementName.PART);
 			final JDFAmountPool ap = (JDFAmountPool) e.getElement(ElementName.AMOUNTPOOL);
@@ -634,6 +686,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				p = (JDFResource) trackElem;
 			}
+			if (p == null)
+				return null;
 			final JDFAttributeMap map = e.getAttributeMap();
 			map.remove(AttributeName.ID);
 			rl = theNode.getLink(p, null);
@@ -672,10 +726,12 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		/**
 		 * @param e
 		 * @param trackElem
+		 * @param part 
 		 * @return
 		 */
 		protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
 		{
+			JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
 			final JDFResource r = (JDFResource) trackElem;
 			final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
 			final JDFResourceLink rll = theNode.getLink(r, null);
@@ -720,6 +776,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
+			JDFNode theNode = (JDFNode) trackElem;
 			final KElement k2 = super.walk(e, trackElem);
 			final JDFResource r = (JDFResource) k2;
 			final JDFResourceLink rl = theNode.getLink(r, null);

@@ -46,8 +46,8 @@ public class XJDFTest extends JDFTestCaseBase
 	KElement e = null;
 
 	/**
- * 
- */
+	* 
+	*/
 	@Override
 	public void setUp() throws Exception
 	{
@@ -73,6 +73,7 @@ public class XJDFTest extends JDFTestCaseBase
 
 		final JDFNode n2 = new JDFDoc("JDF").getJDFRoot();
 		n2.setType(EnumType.ConventionalPrinting);
+		e.setAttribute("JobPartID", null);
 
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(n2.getOwnerDocument_JDFElement());
 		final JDFDoc d2 = xCon.convert(e);
@@ -110,7 +111,6 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
 	 * 
 	 */
 	public void xjdfSchemaTest()
@@ -122,12 +122,13 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	*
 	 */
 	public void testToXJDFWithProduct()
 	{
 		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
 		nP.setType(EnumType.Product);
+		nP.setDescriptiveName("desc");
 		nP.addResource("LayoutIntent", EnumUsage.Input);
 		n = (JDFNode) nP.copyElement(n, null);
 		final JDFResource c = n.addResource("Component", EnumUsage.Output);
@@ -135,6 +136,7 @@ public class XJDFTest extends JDFTestCaseBase
 
 		e = new XJDF20().makeNewJDF(n, null);
 		assertNotNull(e.getXPathElement("ProductList/Product/IntentSet[@Name=\"LayoutIntent\"]"));
+		assertEquals(e.getXPathAttribute("ProductList/Product/@DescriptiveName", null), "desc");
 	}
 
 	/**
@@ -147,6 +149,7 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFDoc d = xCon.convert(e);
 		final JDFNode root = d.getJDFRoot();
 		assertEquals(root.getType(), "Product");
+		assertEquals(root.getDescriptiveName(), "desc");
 	}
 
 	/**
@@ -186,7 +189,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	*
 	 */
 	public void testColorPool()
 	{
@@ -199,7 +202,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 *  
 	 */
 	public void testColorPoolRef()
 	{
@@ -292,7 +295,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 *  
 	 */
 	public void testToXJDFCustomerInfo()
 	{
@@ -302,7 +305,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 *  
 	 */
 	public void testFromXJDF()
 	{
@@ -312,11 +315,14 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 *  
 	 */
 	public void testFromXJDF2()
 	{
 		testColorPool();
+		KElement eNext = e.getOwnerDocument_KElement().clone().getRoot();
+		eNext.setAttribute("JobPartID", "eNext");
+		e.setXPathAttribute("ProductList/Product/@JobID", "jid");
 		final XJDFToJDFConverter converter = new XJDFToJDFConverter(null);
 		final KElement e2 = e.getOwnerDocument_KElement().clone().getRoot();
 		final VElement v = e2.getChildrenByTagName(null, null, new JDFAttributeMap("SheetName", "s1"), false, false, -1);
@@ -327,10 +333,13 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFDoc d2a = converter.convert(e);
 		final JDFDoc d2 = converter.convert(e2);
 		assertNotNull(d2);
+		assertEquals(d2a.getRoot(), d2.getRoot());
+		final JDFDoc d3 = converter.convert(eNext);
+		d3.write2File(sm_dirTestDataTemp + "xjdf2.jdf", 2, false);
 	}
 
 	/**
-	 * @throws Exception
+	 *  
 	 */
 	public void testRefFirst()
 	{
