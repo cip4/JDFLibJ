@@ -668,58 +668,53 @@ public class StringUtil
 	 * @param delim the delimiter
 	 * @return the single token (<code>null</code> if no token found)
 	 */
-	public static String token(final String strWork, final int index, final String delim)
+	public static String token(final String strWork, int index, String delim)
 	{
-		int indexLocal = index;
-
-		String delimLocal = delim;
-
 		if (strWork == null)
 		{
 			return null; // null bleibt null
 		}
 
-		if (delimLocal == null)
+		if (delim == null)
 		{
-			delimLocal = JDFConstants.BLANK;
+			delim = JDFConstants.BLANK;
 		}
 
-		final int pos = delimLocal.length() == 1 ? strWork.indexOf(delimLocal) : 0;
+		final int pos = delim.length() == 1 ? strWork.indexOf(delim) : 0;
 		if (pos < 0) // speed up incase we only have one entry
 		{
-			return (indexLocal == -1 || indexLocal == 0) ? strWork : null;
+			return (index == -1 || index == 0) ? strWork : null;
 		}
 
-		if (indexLocal < 0)
+		if (index < 0)
 		{
-			final VString v = StringUtil.tokenize(strWork, delimLocal, false);
-			indexLocal = v.size() + indexLocal;
-			if (indexLocal < 0)
+			final VString v = StringUtil.tokenize(strWork, delim, false);
+			index = v.size() + index;
+			if (index < 0)
 			{
 				return null;
 			}
 
-			if (indexLocal < v.size())
+			if (index < v.size())
 			{
-				return v.stringAt(indexLocal);
+				return v.stringAt(index);
 			}
 
 			return null;
 		}
 
 		// index >0 don't need to calculate # of tokens
-		final StringTokenizer st = new StringTokenizer(strWork, delimLocal, false);
+		final StringTokenizer st = new StringTokenizer(strWork, delim, false);
 		int n = 0;
 		String s = null;
 		while (st.hasMoreTokens())
 		{
 			s = st.nextToken();
-			if (n++ == indexLocal)
+			if (n++ == index)
 			{
 				return s;
 			}
 		}
-
 		return null;
 	}
 
@@ -830,7 +825,8 @@ public class StringUtil
 			}
 			strWork = strWork.substring(indexOf + len);
 			indexOf = strWork.indexOf(toReplace);
-		} while (indexOf >= 0);
+		}
+		while (indexOf >= 0);
 
 		b.append(strWork);
 
@@ -1777,7 +1773,8 @@ public class StringUtil
 				cToEscape = 256 + cToEscape;
 			}
 
-			if ((cToEscape > iEscapeAbove) || (cToEscape < iEscapeBelow) || (strCharSet != null && strCharSet.indexOf(cToEscape) != -1))
+			if ((cToEscape > iEscapeAbove) || (cToEscape < iEscapeBelow)
+					|| (strCharSet != null && strCharSet.indexOf(cToEscape) != -1))
 			{ // the character must be escaped
 				for (int ee = 0; ee < escapeCharbytes.length; ee++)
 				{
@@ -2183,7 +2180,9 @@ public class StringUtil
 			return bigAtt.equals(smallAtt);
 		}
 
-		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS)) || (dataType.equals(AttributeInfo.EnumAttributeType.enumerations)) || (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
+		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS))
+				|| (dataType.equals(AttributeInfo.EnumAttributeType.enumerations))
+				|| (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
 		{
 			// check for matching individual NMTOKEN
 			final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);

@@ -203,18 +203,6 @@ public class JDFPerson extends JDFAutoPerson
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
-	@Override
-	protected Object clone() throws CloneNotSupportedException
-	{
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-
 	/**
 	 * get first + last name if descname does not exist
 	 * @see org.cip4.jdflib.core.JDFElement#getDescriptiveName()

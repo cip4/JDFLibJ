@@ -124,7 +124,7 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * Constructor for JDFRunList
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -136,8 +136,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * Constructor for JDFRunList
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI 
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -148,11 +148,11 @@ public class JDFRunList extends JDFAutoRunList
 
 	/**
 	 * Constructor for JDFRunList
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
 	 * @throws DOMException
 	 */
 	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
@@ -176,7 +176,7 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String fileName
+	 * @param fileName
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -190,8 +190,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String fileName
-	 * @param int first
+	 * @param fileName
+	 * @param first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -205,9 +205,9 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String fileName
-	 * @param int first
-	 * @param int last
+	 * @param fileName
+	 * @param first
+	 * @param last
 	 * 
 	 * @return JDFRunList
 	 */
@@ -228,7 +228,7 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addPDF
 	 * 
-	 * @param String fileName
+	 * @param fileName
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -242,8 +242,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addPDF
 	 * 
-	 * @param String fileName
-	 * @param int first
+	 * @param fileName
+	 * @param first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -274,12 +274,13 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector fileSpec
-	 * @param Vector sepNames
+	 * @param fileNames
+	 * @param sepNames
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames)
 	{
@@ -289,13 +290,14 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector fileSpec
-	 * @param Vector sepNames
-	 * @param int first
+	 * @param fileNames
+	 * @param sepNames
+	 * @param first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first)
 	{
@@ -305,14 +307,15 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector fileSpec
-	 * @param Vector sepNames
-	 * @param int first
-	 * @param int n
+	 * @param fileNames
+	 * @param sepNames
+	 * @param first
+	 * @param n
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first, final int n)
 	{
@@ -366,7 +369,7 @@ public class JDFRunList extends JDFAutoRunList
 	 * 
 	 * @return JDFRunList
 	 */
-	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first, final int n, final boolean pageMajor)
+	public JDFRunList addSepRun(final Vector<String> fileNames, final Vector<String> sepNames, final int first, final int n, final boolean pageMajor)
 	{
 		final JDFRunList r = (JDFRunList) addPartition(JDFResource.EnumPartIDKey.Run, "Run" + uniqueID(0));
 		final int siz = fileNames.size();
@@ -377,7 +380,7 @@ public class JDFRunList extends JDFAutoRunList
 		{
 			final JDFRunList rs = (JDFRunList) r.addPartition(JDFResource.EnumPartIDKey.Separation, sepNames.elementAt(i).toString());
 			final JDFLayoutElement lo = rs.appendLayoutElement();
-			lo.setMimeURL(((String) fileNames.elementAt(Math.min(i, siz - 1))));
+			lo.setMimeURL((fileNames.elementAt(Math.min(i, siz - 1))));
 			rs.setIsPage(false);
 			if (fileNames.size() == sepNames.size())
 			{
@@ -402,8 +405,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param VElement fileSpec
-	 * @param Vector sepNames
+	 * @param fileSpec
+	 * @param sepNames
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -1592,13 +1595,6 @@ public class JDFRunList extends JDFAutoRunList
 		}
 
 		return true;
-	}
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException
-	{
-		// TODO Auto-generated method stub
-		return super.clone();
 	}
 
 	/**

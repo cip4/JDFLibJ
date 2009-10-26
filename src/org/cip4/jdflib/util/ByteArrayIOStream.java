@@ -173,7 +173,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	}
 
 	/**
-	 * gets an inputstream based on the current byte contents - note this operates on the internal data
+	 * gets an input stream based on the current byte contents - note this operates on the internal data
 	 * 
 	 * @return
 	 */

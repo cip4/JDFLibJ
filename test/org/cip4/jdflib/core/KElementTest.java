@@ -286,7 +286,8 @@ public class KElementTest extends JDFTestCaseBase
 	 */
 	public void testGetElementById()
 	{
-		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
+		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">"
+				+ "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -772,14 +773,10 @@ public class KElementTest extends JDFTestCaseBase
 			k.copyElement(d2.getElement("kid"), null);
 		}
 		k.removeChildren("kid", null, null);
-		
-		
-		
+
 		long currentMem = getCurrentMem();
 
-		System.out
-				.println("testCopyElementMem:"
-				+ Long.toString(currentMem - mem));
+		System.out.println("testCopyElementMem:" + Long.toString(currentMem - mem));
 		assertEquals(currentMem, mem, 2500000); // allow 2500 per element
 	}
 
@@ -798,6 +795,22 @@ public class KElementTest extends JDFTestCaseBase
 			doc.cloneNode(true);
 		}
 		assertEquals(getCurrentMem(), mem, 500000);
+	}
+
+	/**
+	 * @throws CloneNotSupportedException 
+	 * 
+	 */
+	public void testClone() throws CloneNotSupportedException
+	{
+		final XMLDoc doc = new XMLDoc("root", null);
+		KElement e = doc.getRoot();
+		KElement d = e.getCreateXPathElement("a/b/c/d[3]");
+		KElement c_clone = d.getParentNode_KElement().clone();
+		assertNotNull(c_clone);
+		assertTrue(c_clone.isEqual(c_clone.clone()));
+		assertNotSame(c_clone, c_clone.clone());
+		assertNotSame(c_clone.getOwnerDocument(), c_clone.clone().getOwnerDocument());
 	}
 
 	/**
@@ -874,9 +887,9 @@ public class KElementTest extends JDFTestCaseBase
 			final KElement e3 = e.copyElement(d2.clone().getRoot(), null);
 			assertNull(e3.getNamespaceURI());
 		}
-		
+
 		System.out.println("mem new:   " + getCurrentMem() + " " + mem);
-		
+
 		long l = getCurrentMem() - mem;
 		assertTrue(l < 1500000);
 
@@ -1027,7 +1040,8 @@ public class KElementTest extends JDFTestCaseBase
 
 		final DocumentJDFImpl doc0 = (DocumentJDFImpl) root.getOwnerDocument();
 
-		final Element newChild = doc0.createElementNS(docNS, myPrefix + JDFConstants.COLON + ElementName.RESOURCELINKPOOL);
+		final Element newChild = doc0.createElementNS(docNS, myPrefix + JDFConstants.COLON
+				+ ElementName.RESOURCELINKPOOL);
 		root.appendChild(newChild);
 
 		doc.write2File(sm_dirTestDataTemp + "NameSpace.jdf", 0, true);
@@ -1085,9 +1099,11 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(kElement3.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(kElement3.getPrefix().equals(cip4Prefix1));
 
-		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>"
-				+ "<jdf:kElement3/>" + "</JDF>";
+		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" "
+				+ "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
+				+ "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" "
+				+ "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>"
+				+ "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
 
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseString(jdfDocString);
@@ -1367,9 +1383,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(m.size(), 2);
 		m = root.getXPathAttributeMap("//@foo");
 		assertEquals(m.size(), 2);
-		final Iterator it = m.keySet().iterator();
-		assertEquals(root.getXPathAttribute((String) it.next(), null), "bar3");
-		assertEquals(root.getXPathAttribute((String) it.next(), null), "bar5");
+		final Iterator<String> it = m.keySet().iterator();
+		assertEquals(root.getXPathAttribute(it.next(), null), "bar3");
+		assertEquals(root.getXPathAttribute(it.next(), null), "bar5");
 
 	}
 
@@ -1411,6 +1427,9 @@ public class KElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetXPathElement()
 	{
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
@@ -1766,6 +1785,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue("", e.hasAttribute("a:bar"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testInfinity()
 	{
 		final XMLDoc jdfDoc = new XMLDoc("Test", "www.test.com");
@@ -1785,6 +1807,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("minf", e.getRealAttribute("minf", null, 0), -Double.MAX_VALUE, 0.0);
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetAttribute_LongAttValue()
 	{
 		JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);

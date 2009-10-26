@@ -158,7 +158,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
-		fs.moveToDir(newDir);
+		File f = fs.moveToDir(newDir);
+		assertNotNull("error moving file to dir", f);
 		for (int i = 0; i < 10; i++)
 		{
 			ThreadUtil.sleep(1000);
@@ -166,7 +167,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 			{
 				break;
 			}
-			System.out.print("Waiting " + i);
+			System.out.println("Waiting " + i);
 		}
 		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
 

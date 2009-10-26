@@ -91,6 +91,7 @@ import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -110,7 +111,6 @@ import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.MimeUtil.ByteArrayDataSource;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 
 /**
@@ -264,12 +264,16 @@ public class MimeWriter extends MimeHelper
 			return null;
 		}
 		final ByteArrayIOStream ios = new ByteArrayIOStream(is);
-		final ByteArrayDataSource ds = new ByteArrayDataSource(ios, contentType);
 		try
 		{
+			final ByteArrayDataSource ds = new ByteArrayDataSource(ios.getInputStream(), contentType);
 			bp.setDataHandler(new DataHandler(ds));
 		}
 		catch (final MessagingException e)
+		{
+			// nop
+		}
+		catch (IOException x)
 		{
 			// nop
 		}
@@ -297,7 +301,8 @@ public class MimeWriter extends MimeHelper
 		if (cid == null)
 		{
 			final KElement root = xmlDoc.getRoot();
-			cid = "CID_" + ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? ((JDFNode) root).getID() : JDFElement.uniqueID(0));
+			cid = "CID_"
+					+ ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? ((JDFNode) root).getID() : JDFElement.uniqueID(0));
 		}
 
 		final BodyPart messageBodyPart = getCreatePartByCID(cid);

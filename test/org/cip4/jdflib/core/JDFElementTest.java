@@ -149,6 +149,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(foo2.getNamespaceURI(), "www.pt.com");
 	}
 
+	/**
+	 * 
+	 */
 	public void testCopyElement()
 	{
 		final JDFDoc d = new JDFDoc("d1");
@@ -231,6 +234,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testNameSpaceElement()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -244,6 +250,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(rl.getPart(0).toString().indexOf("xmlns=\"\""), -1);
 	}
 
+	/**
+	 * 
+	 */
 	public void testRemoveExtensions()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -256,6 +265,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(n.toString().indexOf("a:"), -1);
 	}
 
+	/**
+	 * 
+	 */
 	public void testRemoveChild()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -282,6 +294,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertNotNull(rp.getElement("Media"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetHRefs()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -305,6 +320,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testFixVersion()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -435,6 +453,7 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertTrue("b", e.includesMatchingAttribute("abc", "a", EnumAttributeType.NMTOKENS));
 		assertTrue("b", e.includesMatchingAttribute("abc", "b", EnumAttributeType.NMTOKENS));
 		assertTrue("b", e.includesMatchingAttribute("abc", "c", EnumAttributeType.NMTOKENS));
+		assertTrue("b", e.includesMatchingAttribute("abc", "a c", EnumAttributeType.NMTOKENS));
 		assertFalse("b", e.includesMatchingAttribute("abc", "d", EnumAttributeType.NMTOKENS));
 		e.setAttribute("intlist", "-1 3 5");
 		assertTrue(e.includesMatchingAttribute("intlist", "-1", EnumAttributeType.IntegerList));
