@@ -84,6 +84,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFCollectingParams;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.postpress.JDFFoldingParams;
@@ -96,13 +98,13 @@ import org.cip4.jdflib.resource.process.postpress.JDFTrimmingParams;
 public class MISFinGoldenTicket extends MISGoldenTicket
 {
 	/**
-     * 
-     */
-	public static final String MISFIN_SHEETFIN = "MISFIN.SheetFin";
+	 * 
+	 */
+	public static final String MISFIN_SHEETFIN = "MISFin.SheetFin";
 	/**
 	 * MIS FIN GB Type
 	 */
-	public static final String MISFIN_BOXMAKING = "MISFIN.BoxMaking";
+	public static final String MISFIN_BOXMAKING = "MISFin.BoxMaking";
 	/**
 	 * MIS FIN GB Type
 	 */
@@ -110,15 +112,15 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	/**
 	 * MIS FIN GB Type
 	 */
-	public static final String MISFIN_STITCHFIN = "MISFIN.StitchFin";
+	public static final String MISFIN_STITCHFIN = "MISFin.StitchFin";
 	/**
 	 * MIS FIN GB Type
 	 */
-	public static final String MISFIN_SOFTCOVERFIN = "MISFIN.SoftcoverFin";
+	public static final String MISFIN_SOFTCOVERFIN = "MISFin.SoftcoverFin";
 	/**
 	 * MIS FIN GB Type
 	 */
-	public static final String MISFIN_HARDCOVERFIN = "MISFIN.HardcoverFin";
+	public static final String MISFIN_HARDCOVERFIN = "MISFin.HardcoverFin";
 
 	/**
 	 * 
@@ -144,8 +146,8 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	@Override
 	protected void fillCatMaps()
 	{
@@ -157,7 +159,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 		catMap.put(MISFIN_INSERTFIN, new VString("Inserting Trimming", null));
 		catMap.put(MISFIN_SHEETFIN, new VString("Folding", null));
 		catMap.put(MISFIN_SOFTCOVERFIN, new VString("Gathering CoverApplication Trimming", null));
-		catMap.put(MISFIN_STITCHFIN, new VString("Stitching Trimming", null));
+		catMap.put(MISFIN_STITCHFIN, new VString("Stitching Collecting Trimming", null));
 	}
 
 	/**
@@ -173,7 +175,6 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	/**
 	 * initializes this node to a given ICS version
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
 	 */
 	@Override
 	public void init()
@@ -181,10 +182,24 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 		super.init();
 		initFolding();
 		initTrimming();
+		initCollecting();
 		initStitching();
 		initInputComponent();
 		initOutputComponent();
 
+	}
+
+	/**
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#getICSVersions()
+	 * @return the ics versions
+	 */
+	@Override
+	public VString getICSVersions()
+	{
+		final VString v = super.getICSVersions();
+		final String icsTag = "MISFin_L" + icsLevel + "-" + theVersion.getName();
+		v.appendUnique(icsTag);
+		return v;
 	}
 
 	/**
@@ -197,6 +212,18 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 			final JDFStitchingParams sp = (JDFStitchingParams) theNode.getCreateResource(ElementName.STITCHINGPARAMS, EnumUsage.Input, 0);
 			sp.setStapleShape(org.cip4.jdflib.auto.JDFAutoStitchingParams.EnumStapleShape.Butted);
 			sp.setStitchWidth(36);
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	private void initCollecting()
+	{
+		if (theNode.getTypes().contains("Collecting"))
+		{
+			final JDFCollectingParams sp = (JDFCollectingParams) theNode.getCreateResource(ElementName.COLLECTINGPARAMS, EnumUsage.Input, 0);
 		}
 
 	}
@@ -302,6 +329,7 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
 	protected JDFComponent initInputComponent()
@@ -319,8 +347,9 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 			theNode.linkResource(comp, EnumUsage.Input, null);
 		}
 
-//		final JDFResourceLink rl = 
-			theNode.getLink(comp, EnumUsage.Input);
+		//		final JDFResourceLink rl = 
+		theNode.getLink(comp, EnumUsage.Input);
+		comp.setResStatus(EnumResStatus.Available, true);
 		return comp;
 
 	}

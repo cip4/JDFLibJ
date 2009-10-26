@@ -91,8 +91,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 * @param create if true, creat the new node
 	 * @return the node
 	 */
-	private JDFNode findNode(final KElement xjdf, final boolean create)
+	private JDFNode findNode(KElement xjdf, final boolean create)
 	{
+		if (xjdf != null)
+			xjdf = xjdf.clone();
 		final JDFNode root = jdfDoc.getJDFRoot();
 		final String jpID = xjdf.getAttribute(AttributeName.JOBPARTID, null, null);
 		JDFNode n = root.getJobPart(jpID, null);

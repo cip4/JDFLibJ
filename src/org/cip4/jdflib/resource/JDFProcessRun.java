@@ -275,8 +275,10 @@ public class JDFProcessRun extends JDFAutoProcessRun
 		}
 
 		final EnumNodeStatus status = pt.getStatus();
-		if (status == null || status.equals(EnumNodeStatus.Ready) || status.equals(EnumNodeStatus.Completed) || status.equals(EnumNodeStatus.FailedTestRun) || status.equals(EnumNodeStatus.Spawned)
-				|| status.equals(EnumNodeStatus.Stopped) || status.equals(EnumNodeStatus.Suspended) || status.equals(EnumNodeStatus.Waiting))
+		if (status == null || status.equals(EnumNodeStatus.Ready) || status.equals(EnumNodeStatus.Completed)
+				|| status.equals(EnumNodeStatus.FailedTestRun) || status.equals(EnumNodeStatus.Spawned)
+				|| status.equals(EnumNodeStatus.Stopped) || status.equals(EnumNodeStatus.Suspended)
+				|| status.equals(EnumNodeStatus.Waiting))
 		{
 			return;
 		}
@@ -341,88 +343,6 @@ public class JDFProcessRun extends JDFAutoProcessRun
 	}
 
 	// ///////////////////////////////////////////////////////////////////
-
-	/**
-	 * (11) set attribute SubmissionTime
-	 * 
-	 * @param value : the value to set the attribute to or null if null, set to the current time
-	 */
-	@Override
-	public void setSubmissionTime(final JDFDate value)
-	{
-		JDFDate valueLocal = value;
-
-		if (valueLocal == null)
-		{
-			valueLocal = new JDFDate();
-		}
-
-		setAttribute(AttributeName.SUBMISSIONTIME, valueLocal.getDateTimeISO(), null);
-	}
-
-	/**
-	 * (12) get JDFDate attribute SubmissionTime
-	 * 
-	 * @return JDFDate the value of the attribute
-	 */
-	@Override
-	public JDFDate getSubmissionTime()
-	{
-		final String str = getAttribute(AttributeName.SUBMISSIONTIME, null, null);
-		if (str == null)
-		{
-			return null;
-		}
-		try
-		{
-			return new JDFDate(str);
-		}
-		catch (final DataFormatException dfe)
-		{
-			throw new JDFException("not a valid date string. Malformed JDF");
-		}
-	}
-
-	/**
-	 * (11) set attribute ReturnTime
-	 * 
-	 * @param value : the value to set the attribute to or null if null, set to the current time
-	 */
-	@Override
-	public void setReturnTime(final JDFDate value)
-	{
-		JDFDate valueLocal = value;
-
-		if (valueLocal == null)
-		{
-			valueLocal = new JDFDate();
-		}
-
-		setAttribute(AttributeName.RETURNTIME, valueLocal.getDateTimeISO(), null);
-	}
-
-	/**
-	 * (12) get JDFDate attribute ReturnTime
-	 * 
-	 * @return JDFDate the value of the attribute
-	 */
-	@Override
-	public JDFDate getReturnTime()
-	{
-		final String str = getAttribute(AttributeName.RETURNTIME, null, null);
-		if (str == null)
-		{
-			return null;
-		}
-		try
-		{
-			return new JDFDate(str);
-		}
-		catch (final DataFormatException dfe)
-		{
-			throw new JDFException("not a valid date string. Malformed JDF");
-		}
-	}
 
 	/**
 	 * also sets an end time for this

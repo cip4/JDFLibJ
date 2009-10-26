@@ -296,7 +296,8 @@ public class FixVersion extends BaseElementWalker
 			for (int i = 0; i < v.size(); i++)
 			{
 				String icsToken = v.get(i);
-				if (".".equals(StringUtil.substring(icsToken, -2, -1)) && StringUtil.isInteger(StringUtil.rightStr(icsToken, 1)))
+				if (".".equals(StringUtil.substring(icsToken, -2, -1))
+						&& StringUtil.isInteger(StringUtil.rightStr(icsToken, 1)))
 				{
 					icsToken = StringUtil.leftStr(icsToken, -1) + minor;
 					v.set(i, icsToken);
@@ -490,7 +491,8 @@ public class FixVersion extends BaseElementWalker
 			final JDFComment c = (JDFComment) e1;
 			if (version != null)
 			{
-				if (version.getValue() >= EnumVersion.Version_1_3.getValue() && c.getLocalName().equals(ElementName.COMMENT))
+				if (version.getValue() >= EnumVersion.Version_1_3.getValue()
+						&& c.getLocalName().equals(ElementName.COMMENT))
 				{
 					c.appendAnchor(null);
 				}
@@ -723,7 +725,8 @@ public class FixVersion extends BaseElementWalker
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			final JDFMessage jmf = (JDFMessage) e1;
-			if (jmf.hasAttribute(AttributeName.TYPE) && !jmf.hasAttribute(AttributeName.XSITYPE, AttributeName.XSIURI, false))
+			if (jmf.hasAttribute(AttributeName.TYPE)
+					&& !jmf.hasAttribute(AttributeName.XSITYPE, AttributeName.XSIURI, false))
 			{
 				jmf.setAttribute(AttributeName.XSITYPE, jmf.getLocalName() + jmf.getType(), AttributeName.XSIURI);
 			}
@@ -1369,7 +1372,7 @@ public class FixVersion extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
-			final JDFEmployee e = (JDFEmployee) e1;
+			final JDFPerson e = (JDFPerson) e1;
 			if (!e.hasAttribute(AttributeName.DESCRIPTIVENAME))
 			{
 				e.setDescriptiveName(StringUtil.getNonEmpty(e.getDescriptiveName()));

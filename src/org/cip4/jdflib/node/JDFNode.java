@@ -369,8 +369,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			JDFConstants.INPUT_ZEROTOINFINITY // USAGECOUNTER
 	};
 
-	private static String[] m_strGenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
-			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
+	private static String[] m_strGenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO,
+			ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE, ElementName.NODEINFO,
+			ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	private static final long serialVersionUID = 1L;
 
@@ -1222,466 +1223,466 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				+ "HoleMakingIntent,InsertingIntent,LaminatingIntent,LayoutIntent,MediaIntent,NumberingIntent,"
 				+ "PackingIntent,ProductionIntent,ProofingIntent,ScreeningIntent,ShapeCuttingIntent,SizeIntent"
 		// links
-				, ",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?");
+		, ",o+ i* i*Cover i?Jacket i?Parent i*EndSheet,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?,i?");
 
 		mapPut(EnumType.ProcessGroup.getName(), ",*",
 		// links
-				",i* o*");
+		",i* o*");
 
 		mapPut(EnumType.Combined.getName(), ",",
 		// links
-				",");
+		",");
 
 		// ----- general -----
 		mapPut(EnumType.Approval.getName(), ",*,ApprovalSuccess,ApprovalParams",
 		// links
-				",o*Rejected o*Accepted i*,o_,i_");
+		",o*Rejected o*Accepted i*,o_,i_");
 
 		mapPut(EnumType.Buffer.getName(), ",*,BufferParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Combine.getName(), ",*",
 		// links
-				",o_ i+");
+		",o_ i+");
 
 		mapPut(EnumType.Delivery.getName(), ",*,DeliveryParams",
 		// links
-				",o+ i?,i_");
+		",o+ i?,i_");
 
 		mapPut(EnumType.ManualLabor.getName(), ",*,ManualLaborParams",
 		// links
-				",o* i*,i_");
+		",o* i*,i_");
 
 		mapPut(EnumType.Ordering.getName(), ",*,OrderingParams",
 		// links
-				",o+,i_");
+		",o+,i_");
 
 		mapPut(EnumType.Packing.getName(), ",*,PackingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.QualityControl.getName(), ",*,QualityControlResult,QualityControlParams",
 		// links
-				",o_ i_,o_,i_");
+		",o_ i_,o_,i_");
 
 		mapPut(EnumType.ResourceDefinition.getName(), ",*,ResourceDefinitionParams",
 		// links
-				",o+ i*,i?");
+		",o+ i*,i?");
 
 		mapPut(EnumType.Split.getName(), ",*",
 		// links
-				",o+ i_");
+		",o+ i_");
 
 		mapPut(EnumType.Verification.getName(), ",*,DBSelection,ApprovalSuccess,VerificationParams,IdentificationField,DBSchema",
 		// links
-				",o? i?,o? i?,o?,i_,i*,i?");
+		",o? i?,o? i?,o?,i_,i*,i?");
 
 		// ----- prepress -----
 		mapPut(EnumType.AssetListCreation.getName(), ",AssetListCreationParams,RunList",
 		// links
-				",i_,i_ o_");
+		",i_,i_ o_");
 
 		mapPut(EnumType.Bending.getName(), ",BendingParams,ExposedMedia,Media",
 		// links
-				",i_,i? o_,i?");
+		",i_,i? o_,i?");
 
 		mapPut(EnumType.ColorCorrection.getName(), ",ColorantControl,ColorCorrectionParams,RunList",
 		// links
-				",i?,i_,o_ i_");
+		",i?,i_,o_ i_");
 
 		mapPut(EnumType.ColorSpaceConversion.getName(), ",ColorantControl,ColorSpaceConversionParams,RunList",
 		// links
-				",i?,i_,o_ i_");
+		",i?,i_,o_ i_");
 
 		mapPut(EnumType.ContactCopying.getName(), ",ContactCopyParams,DevelopingParams,ExposedMedia,Media,PlateCopyParams",
 		// links
-				",i_,i?,o_ i+,i_,i?");
+		",i_,i?,o_ i+,i_,i?");
 
 		mapPut(EnumType.ContoneCalibration.getName(), ",RunList,ScreeningParams,TransferFunctionControl",
 		// links
-				",o_ i_,i?,i?");
+		",o_ i_,i?,i?");
 
 		mapPut(EnumType.CylinderLayoutPreparation.getName(), ",CylinderLayoutPreparationParams,Layout,RunList,CylinderLayout",
 		// links
-				",i?,i_,i_,o_");
+		",i?,i_,i_,o_");
 
 		mapPut(EnumType.DBDocTemplateLayout.getName(), ",DBRules,DBSchema,LayoutElement",
 		// links
-				",i_,i_,o* i*");
+		",i_,i_,o* i*");
 
 		mapPut(EnumType.DBTemplateMerging.getName(), ",DBMergeParams,DBSelection,LayoutElement,RunList",
 		// links
-				",i_,i_,i*,o_");
+		",i_,i_,i*,o_");
 
 		mapPut(EnumType.DieDesign.getName(), ",DieLayout",
 		// links
-				",i_ o+");
+		",i_ o+");
 
 		mapPut(EnumType.DieLayoutProduction.getName(), ",DieLayout,DieLayoutProductionParams",
 		// links
-				",i+ o+,i_");
+		",i+ o+,i_");
 
 		mapPut(EnumType.DigitalDelivery.getName(), ",DigitalDeliveryParams,RunList",
 		// links
-				",i_,o+ i*");
+		",i_,o+ i*");
 
 		mapPut(EnumType.FilmToPlateCopying.getName(), ",DevelopingParams,ExposedMedia,Media,PlateCopyParams",
 		// links
-				",i?,o_ i_,i_,i_");
+		",i?,o_ i_,i_,i_");
 
 		mapPut(EnumType.FormatConversion.getName(), ",FormatConversionParams,RunList",
 		// links
-				",i_,o_ i_");
+		",i_,o_ i_");
 
 		mapPut(EnumType.ImageReplacement.getName(), ",ImageCompressionParams,ImageReplacementParams,RunList",
 		// links
-				",i?,i_,o_ i_");
+		",i?,i_,o_ i_");
 
 		mapPut(EnumType.ImageSetting.getName(), ",ColorantControl,DevelopingParams,ImageSetterParams,Media,RunList,TransferCurvePool,ExposedMedia",
 		// links
-				",i?,i?,i?,i?,i_,i?,o_ i?");
+		",i?,i?,i?,i?,i_,i?,o_ i?");
 
 		mapPut(EnumType.Imposition.getName(), ",Layout,RunList",
 		// links
-				",i_,o_ i?Marks i_Document");
+		",i_,o_ i?Marks i_Document");
 
 		mapPut(EnumType.InkZoneCalculation.getName(), ",InkZoneCalculationParams,InkZoneProfile,Layout,TransferCurvePool,Sheet,Preview",
 		// links
-				",i?,o_,i?,i?,i?,i_");
+		",i?,o_,i?,i?,i?,i_");
 
 		mapPut(EnumType.Interpreting.getName(), ",ColorantControl,FontPolicy,InterpretedPDLData,InterpretingParams,PDLResourceAlias,RunList",
 		// links
-				",i?,i?,o?,i_,i*,o? i_");
+		",i?,i?,o?,i_,i*,o? i_");
 
 		mapPut(EnumType.LayoutElementProduction.getName(), ",LayoutElement,RunList,LayoutElementProductionParams",
 		// links
-				",o? i*,i* o?,i?");
+		",o? i*,i* o?,i?");
 
 		mapPut(EnumType.LayoutPreparation.getName(), ",LayoutPreparationParams,RunList,Layout,TransferCurvePool",
 		// links
-				",i_,o?Marks i?Marks i?Document,o_,o?");
+		",i_,o?Marks i?Marks i?Document,o_,o?");
 
 		mapPut(EnumType.PageAssigning.getName(), ",PageAssignParams,RunList",
 		// links
-				",i_,o_ i+");
+		",i_,o_ i+");
 
 		mapPut(EnumType.PDFToPSConversion.getName(), ",PDFToPSConversionParams,RunList",
 		// links
-				",i_,o_ i_");
+		",i_,o_ i_");
 
 		mapPut(EnumType.PDLCreation.getName(), ",ImageCompressionParams,PDLCreationParams,RunList",
 		// links
-				",i?,i?,o_ i_");
+		",i?,i?,o_ i_");
 
 		mapPut(EnumType.Preflight.getName(), ",PreflightParams,PreflightReportRulePool,RunList,PreflightReport",
 		// links
-				",i_,i_,i_,o_");
+		",i_,i_,i_,o_");
 
 		mapPut(EnumType.PreviewGeneration.getName(), ",ColorantControl,ExposedMedia,PreviewGenerationParams,RunList,TransferCurvePool,Preview",
 		// links
-				",i?,i?,i_,i?,i?,o_ i?");
+		",i?,i?,i_,i?,i?,o_ i?");
 
 		mapPut(EnumType.Proofing.getName(), ",ColorantControl,ColorSpaceConversionParams,ExposedMedia,Layout,Media,ProofingParams,RunList",
 		// links
-				",i?,i?,o_,i?,i_,i_,i?Marks i_Document");
+		",i?,i?,o_,i?,i_,i_,i?Marks i_Document");
 
 		mapPut(EnumType.PSToPDFConversion.getName(), ",FontParams,ImageCompressionParams,PSToPDFConversionParams,RunList",
 		// links
-				",i?,i?,i?,o_ i_");
+		",i?,i?,i?,o_ i_");
 
 		mapPut(EnumType.RasterReading.getName(), ",RasterReadingParams,RunList",
 		// links
-				",i?,o_ i_");
+		",i?,o_ i_");
 
 		mapPut(EnumType.Rendering.getName(), ",InterpretedPDLData,Media,RenderingParams,RunList",
 		// links
-				",i?,i?,i?,o_ i?");
+		",i?,i?,i?,o_ i?");
 
 		mapPut(EnumType.Scanning.getName(), ",ExposedMedia,ScanParams,RunList",
 		// links
-				",i_,i_,o_");
+		",i_,i_,o_");
 
 		mapPut(EnumType.Screening.getName(), ",RunList,ScreeningParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Separation.getName(), ",ColorantControl,RunList,SeparationControlParams",
 		// links
-				",i?,o_ i_,i_");
+		",i?,o_ i_,i_");
 
 		mapPut(EnumType.SoftProofing.getName(), ",ColorantControl,ColorSpaceConversionParams,Layout,ProofingParams,RunList",
 		// links
-				",i?,i?,i?,i_,i?Marks i_Document");
+		",i?,i?,i?,i_,i?Marks i_Document");
 
 		mapPut(EnumType.Stripping.getName(), ",RunList,Layout,Assembly,TransferCurvePool,StrippingParams,ColorantControl",
 		// links
-				",o?Marks o?Document i?Document,o_,i+,i?,i_,i?");
+		",o?Marks o?Document i?Document,o_,i+,i?,i_,i?");
 
 		mapPut(EnumType.Tiling.getName(), ",RunList,Tile",
 		// links
-				",o_ i?Marks i_Surface,i_");
+		",o_ i?Marks i_Surface,i_");
 
 		mapPut(EnumType.Trapping.getName(), ",ColorantControl,RunList,TrappingDetails,FontPolicy",
 		// links
-				",i?,o_ i_,i_,i?");
+		",i?,o_ i_,i_,i?");
 
 		// ----- press -----
 		mapPut(EnumType.ConventionalPrinting.getName(), ",ColorantControl,Component,ConventionalPrintingParams,ExposedMedia,Ink,InkZoneProfile,Layout,Media"
 				+ ",PrintCondition,Sheet,TransferCurvePool",
 		// link info
-				",i?,o?Waste o_ i?Proof i?Input i?,i_,i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,i?,i?,i? i?MountingTape");
+		",i?,o?Waste o_ i?Proof i?Input i?,i_,i?Plate i?Cylinder i?Proof,i?,i?,i?,i?,i?,i?,i? i?MountingTape");
 
 		mapPut(EnumType.DigitalPrinting.getName(), ",ColorantControl,Component,DigitalPrintingParams,ExposedMedia,Ink,PrintCondition,Media,RunList,Layout,Sheet,TransferCurvePool",
 		// links
-				",i?,o?Waste o_ i?Proof i*Input i*,i_,i?,i?,i?,i*,i_,i?,i?,i?");
+		",i?,o?Waste o_ i?Proof i*Input i*,i_,i?,i?,i?,i*,i_,i?,i?,i?");
 
 		mapPut(EnumType.IDPrinting.getName(), ",ColorantControl,Component,ExposedMedia,FontPolicy,Ink,InterpretingParams,IDPrintingParams,Media,RenderingParams,RunList,ScreeningParams"
 				+ ",TransferFunctionControl",
 		// links
-				",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?,i?,i*,i?,i?,i?,i_,i?,i?");
+		",i?,o?Waste o_Good i?Proof i?Input i?Cover,i?,i?,i?,i*,i?,i?,i?,i_,i?,i?");
 
 		mapPut(EnumType.Varnishing.getName(), ",Component,ExposedMedia,Ink,Media,VarnishingParams",
 		// links
-				",i? o_,o*,i?,i?,i?");
+		",i? o_,o*,i?,i?,i?");
 
 		// ----- postpress -----
 		mapPut(EnumType.AdhesiveBinding.getName(), ",AdhesiveBindingParams,Component",
 		// links
-				",i_,o_ i?Cover i_BookBlock");
+		",i_,o_ i?Cover i_BookBlock");
 
 		mapPut(EnumType.BlockPreparation.getName(), ",Component,BlockPreparationParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.BoxFolding.getName(), ",Component,BoxFoldingParams",
 		// links
-				",o_ i*Application i_,i_");
+		",o_ i*Application i_,i_");
 
 		mapPut(EnumType.BoxPacking.getName(), ",Component,BoxPackingParams",
 		// links
-				",o_ i?Box i_,i_");
+		",o_ i?Box i_,i_");
 
 		mapPut(EnumType.Bundling.getName(), ",Component,BundlingParams,Media",
 		// links
-				",o_ i_,i_,i?");
+		",o_ i_,i_,i?");
 
 		mapPut(EnumType.CaseMaking.getName(), ",Component,CaseMakingParams,Media",
 		// links
-				",o_ i?CoverMaterial,i_,i?SpineBoard i_CoverBoard i?CoverMaterial");
+		",o_ i?CoverMaterial,i_,i?SpineBoard i_CoverBoard i?CoverMaterial");
 
 		mapPut(EnumType.CasingIn.getName(), ",Component,CasingInParams",
 		// links
-				",o_ i_Case i_,i_");
+		",o_ i_Case i_,i_");
 
 		mapPut(EnumType.ChannelBinding.getName(), ",ChannelBindingParams,Component",
 		// links
-				",i_,o_ i?Cover i_BookBlock");
+		",i_,o_ i?Cover i_BookBlock");
 
 		mapPut(EnumType.CoilBinding.getName(), ",CoilBindingParams,Component",
 		// links
-				",i_,o_ i_");
+		",i_,o_ i_");
 
 		mapPut(EnumType.Collecting.getName(), ",CollectingParams,Component,DBRules,DBSelection,IdentificationField,Assembly",
 		// links
-				",i?,o_ i+,i*,i?,i?,i?");
+		",i?,o_ i+,i*,i?,i?,i?");
 
 		mapPut(EnumType.CoverApplication.getName(), ",Component,CoverApplicationParams",
 		// links
-				",o_ i_Cover i_,i_");
+		",o_ i_Cover i_,i_");
 
 		mapPut(EnumType.Creasing.getName(), ",CreasingParams,Component",
 		// links
-				",i_,o_ i_");
+		",i_,o_ i_");
 
 		mapPut(EnumType.Cutting.getName(), ",Component,CutBlock,CutMark,CuttingParams,Media",
 		// links
-				",o* i?,i*,i*,i_,o* i?");
+		",o* i?,i*,i*,i_,o* i?");
 
 		mapPut(EnumType.Dividing.getName(), ",Component,DividingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Embossing.getName(), ",Component,EmbossingParams,Media,Tool",
 		// links
-				",o_ i_,i_,i?,i?");
+		",o_ i_,i_,i?,i?");
 
 		mapPut(EnumType.EndSheetGluing.getName(), ",Component,EndSheetGluingParams",
 		// links
-				",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_");
+		",o_ i_FrontEndSheet i_BookBlock i_BackEndSheet,i_");
 
 		mapPut(EnumType.Feeding.getName(), ",Component,FeedingParams,Media",
 		// links
-				",o* i*,i_,o* i*");
+		",o* i*,i_,o* i*");
 
 		mapPut(EnumType.Folding.getName(), ",Component,FoldingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Gathering.getName(), ",Assembly,Component,DBRules,DBSelection,GatheringParams,IdentificationField",
 		// links
-				",i?,o_ i+,i*,i?,i_,i?");
+		",i?,o_ i+,i*,i?,i_,i?");
 
 		mapPut(EnumType.Gluing.getName(), ",Component,GluingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.HeadBandApplication.getName(), ",Component,HeadBandApplicationParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.HoleMaking.getName(), ",Component,HoleMakingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Inserting.getName(), ",Component,DBRules,DBSelection,IdentificationField,InsertingParams",
 		// links
-				",o_ i_Child i?Mother i?,i?,i?,i?,i_");
+		",o_ i_Child i?Mother i?,i?,i?,i?,i_");
 
 		mapPut(EnumType.Jacketing.getName(), ",Component,JacketingParams",
 		// links
-				",o_ i_Jacket i_Book,i_");
+		",o_ i_Jacket i_Book,i_");
 
 		mapPut(EnumType.Labeling.getName(), ",Component,LabelingParams",
 		// links
-				",o_ i?Label i_,i_");
+		",o_ i?Label i_,i_");
 
 		mapPut(EnumType.Laminating.getName(), ",Component,LaminatingParams,Media",
 		// links
-				",o_ i_,i_,i?");
+		",o_ i_,i_,i?");
 
 		mapPut(EnumType.LongitudinalRibbonOperations.getName(), ",Component,LongitudinalRibbonOperationParams",
 		// links
-				",o+ i_,i_");
+		",o+ i_,i_");
 
 		mapPut(EnumType.Numbering.getName(), ",Component,NumberingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Palletizing.getName(), ",Component,PalletizingParams,Pallet",
 		// links
-				",o_ i_,i_,i_");
+		",o_ i_,i_,i_");
 
 		mapPut(EnumType.Perforating.getName(), ",PerforatingParams,Component",
 		// links
-				",i_,o_ i_");
+		",i_,o_ i_");
 
 		mapPut(EnumType.PlasticCombBinding.getName(), ",Component,PlasticCombBindingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.PrintRolling.getName(), ",Component,PrintRollingParams,RollStand",
 		// links
-				",o_ i_,i?,i?");
+		",o_ i_,i?,i?");
 
 		mapPut(EnumType.RingBinding.getName(), ",Component,RingBindingParams",
 		// links
-				",o_ i?RingBinder i_BookBlock,i_");
+		",o_ i?RingBinder i_BookBlock,i_");
 
 		mapPut(EnumType.SaddleStitching.getName(), ",Component,SaddleStitchingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.ShapeCutting.getName(), ",Component,ShapeCuttingParams,Tool",
 		// links
-				",o+ i_,i?,i*");
+		",o+ i_,i?,i*");
 		mapPut(EnumType.ShapeDefProduction.getName(), ",LayoutElement,ShapeDefProductionParams,ShapeDef",
 		// links
-				",i?,i_,o+");
+		",i?,i_,o+");
 
 		mapPut(EnumType.Shrinking.getName(), ",Component,ShrinkingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.SideSewing.getName(), ",Component,SideSewingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.SpinePreparation.getName(), ",Component,SpinePreparationParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.SpineTaping.getName(), ",Component,SpineTapingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Stacking.getName(), ",Component,StackingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.StaticBlocking.getName(), ",Component,StaticBlockingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Stitching.getName(), ",Component,StitchingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Strapping.getName(), ",Component,StrappingParams,Strap",
 		// links
-				",o_ i_,i_,i?");
+		",o_ i_,i_,i?");
 
 		mapPut(EnumType.StripBinding.getName(), ",Component,StripBindingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.ThreadSealing.getName(), ",Component,ThreadSealingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.ThreadSewing.getName(), ",Component,ThreadSewingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Trimming.getName(), ",Component,TrimmingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.WebInlineFinishing.getName(), ",Assembly,Component,ProductionPath,StrippingParams,WebInlineFinishingParams",
 		// links
-				",i?,o_ i_,i?,i?,i?");
+		",i?,o_ i_,i?,i?,i?");
 
 		mapPut(EnumType.WireCombBinding.getName(), ",Component,WireCombBindingParams",
 		// links
-				",o_ i_,i_");
+		",o_ i_,i_");
 
 		mapPut(EnumType.Wrapping.getName(), ",Component,WrappingParams,Media",
 		// links
-				",o_ i_,i_,i?");
+		",o_ i_,i_,i?");
 
 		mapPut(EnumType.PrepressPreparation.getName(), ",RunList,*",
 		// links
-				",i_Document o_Document,i* o*");
+		",i_Document o_Document,i* o*");
 
 		mapPut(EnumType.ImpositionPreparation.getName(), ",Layout,RunList,*",
 		// links
-				",o_,i?Document o?Document o_Marks,,i* o*");
+		",o_,i?Document o?Document o_Marks,,i* o*");
 		mapPut(EnumType.RIPing.getName(), ",InterpretingParams,RenderingParams,RunList,*",
 		// links
-				",i?,i?,o_ i_Document i?Marks,i* o*");
+		",i?,i?,o_ i_Document i?Marks,i* o*");
 
 		mapPut(EnumType.PlateSetting.getName(), ",*,ExposedMedia,Preview",
 		// links
-				",i* o*,o_,o*");
+		",i* o*,o_,o*");
 		mapPut(EnumType.PlateMaking.getName(), ",*,RunList,ExposedMedia,Preview,Media",
 		// links
-				",i* o*,i_Document i?Marks,o_,o*,i_");
+		",i* o*,i_Document i?Marks,o_,o*,i_");
 		mapPut(EnumType.ProofAndPlateMaking.getName(), ",*,RunList,ExposedMedia,Preview,Media",
 		// links
-				",i* o*,i_Document i?Marks,o+,o*,i_");
+		",i* o*,i_Document i?Marks,o+,o*,i_");
 		mapPut(EnumType.ImpositionProofing.getName(), ",*,RunList,ExposedMedia,Media",
 		// links
-				",i* o*,i_Document i?Marks,o+,i_");
+		",i* o*,i_Document i?Marks,o+,i_");
 		mapPut(EnumType.PageProofing.getName(), ",*,RunList,ExposedMedia,Media",
 		// links
-				",i* o*,i_Document i?Marks,o+,i_");
+		",i* o*,i_Document i?Marks,o+,i_");
 
 		mapPut(EnumType.PageSoftProofing.getName(), ",*,RunList",
 		// links
-				",i* o*,i_Document i?Marks");
+		",i* o*,i_Document i?Marks");
 		mapPut(EnumType.ProofImaging.getName(), ",InterpretingParams,RenderingParams,RunList,*",
 		// links
-				",i?,i?,i? i?Document i?Marks,i* o*");
+		",i?,i?,i? i?Document i?Marks,i* o*");
 
 	}
 
@@ -1843,7 +1844,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			for (int i = vLinks.size() - 1; i >= 0; i--)
 			{
 				final JDFResourceLink rl = (JDFResourceLink) vLinks.elementAt(i);
-				if (rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX) && !rl.includesMatchingAttribute(AttributeName.COMBINEDPROCESSINDEX, indexString, AttributeInfo.EnumAttributeType.IntegerList))
+				if (rl.hasAttribute(AttributeName.COMBINEDPROCESSINDEX)
+						&& !rl.includesMatchingAttribute(AttributeName.COMBINEDPROCESSINDEX, indexString, AttributeInfo.EnumAttributeType.IntegerList))
 				{
 					vLinks.remove(i);
 				}
@@ -2063,8 +2065,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		/**
-		 * @param kid
-		 * @param partMap
+		 * @param minStatus 
+		 * @param maxStatus 
 		 * @return
 		 */
 		private EnumNodeStatus getSynchStatus(final EnumNodeStatus minStatus, final EnumNodeStatus maxStatus)
@@ -2097,6 +2099,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		/**
 		 * @param n
+		 * @return 
 		 */
 		private VJDFAttributeMap getPartVector(final JDFNode n)
 		{
@@ -2127,8 +2130,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * @param resourceLink
 		 * @param types
 		 */
-		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFResourceLink resourceLink,
-				final VString types)
+		public static void generateCombinedProcessIndex(final JDFResource jdfResource, final EnumUsage usage, final EnumProcessUsage processUsage, final JDFResourceLink resourceLink, final VString types)
 		{
 			final JDFIntegerList cpi = new JDFIntegerList();
 			final String resName = jdfResource.getLocalName();
@@ -2197,8 +2199,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 * @param typeInfo
 		 * @return boolean
 		 */
-		protected static boolean cleanCombinedProcessIndex(final EnumUsage usage, final VString types, final JDFIntegerList cpi, final String resName, final int lastGot,
-				final String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
+		protected static boolean cleanCombinedProcessIndex(final EnumUsage usage, final VString types, final JDFIntegerList cpi, final String resName, final int lastGot, final String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
 		{
 			final int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast, resName);
 			// the i* i?pu ... list of this
@@ -2389,9 +2390,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final NodeIdentifier niInput = ((INodeIdentifiable) o).getIdentifier();
 			boolean b = isWildCard(niInput._jobID) || ContainerUtil.equals(niInput._jobID, _jobID);
 			b = b
-					&& ((isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID)) || (_jobPartID != null && niInput._jobPartID != null && _jobPartID
-							.startsWith(niInput._jobPartID + ".")));
-			return b && ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
+					&& ((isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID)) || (_jobPartID != null
+							&& niInput._jobPartID != null && _jobPartID.startsWith(niInput._jobPartID + ".")));
+			return b
+					&& ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
 		}
 
 		/**
@@ -2400,7 +2402,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		@Override
 		public int hashCode()
 		{
-			return (_jobID == null ? 0 : _jobID.hashCode()) + (_jobPartID == null ? 0 : _jobPartID.hashCode()) + (_partMapVector == null ? 0 : _partMapVector.hashCode());
+			return (_jobID == null ? 0 : _jobID.hashCode()) + (_jobPartID == null ? 0 : _jobPartID.hashCode())
+					+ (_partMapVector == null ? 0 : _partMapVector.hashCode());
 		}
 
 		/**
@@ -2574,6 +2577,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		public static final EnumProcessUsage RingBinder = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_RINGBINDER);
 		/** * */
 		public static final EnumProcessUsage Ancestor = new EnumProcessUsage(JDFConstants.PROCESSUSAGE_ANCESTOR);
+		/** 
+		 * added for MISPre ICS 
+		 */
+		public static final EnumProcessUsage Paper = new EnumProcessUsage("Paper");
 	}
 
 	/**
@@ -2796,6 +2803,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * Expand abstract types that are only valid in gray boxes to the respective explicit types
 	 * 
 	 * @param types
+	 * @return 
 	 */
 	private VString expandGrayBoxTypes(final VString types)
 	{
@@ -2946,6 +2954,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * definition of resource link names in the JDF namespace
+	 * @param typeNum 
 	 * 
 	 * @return String list of resource names that may be linked
 	 */
@@ -3047,7 +3056,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final EnumNodeStatus stat = getStatus();
 		statusDetailsLocal = StringUtil.getNonEmpty(statusDetailsLocal);
 		// 100602 handle nasty combination
-		if (mattr != null && (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
+		if (mattr != null
+				&& (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
 		{
 			// throw an exception??? this is a snafu to set an individual part
 			// status to pool
@@ -3502,7 +3512,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				if (a != null)
 				{
 					final int value = a.getValue();
-					if ((value <= EnumActivation.TestRun.getValue()) || (res.getValue() < EnumActivation.Active.getValue()))
+					if ((value <= EnumActivation.TestRun.getValue())
+							|| (res.getValue() < EnumActivation.Active.getValue()))
 					{
 						res = (value < res.getValue()) ? a : res; // smaller
 						// enums are
@@ -3692,8 +3703,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @default addResource(name, null, usage, null, null, null,null)
 	 */
-	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, JDFNode resRoot,
-			final String nameSpaceURI, final JDFResource toReplace)
+	public JDFResource addResource(final String strName, JDFResource.EnumResourceClass resClass, final EnumUsage usage, final EnumProcessUsage processUsage, JDFNode resRoot, final String nameSpaceURI, final JDFResource toReplace)
 	{
 		if (resRoot == null)
 		{
@@ -3720,7 +3730,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		// parameters and consumables are assumed to be available by default
-		if (EnumUsage.Input.equals(usage) && resClass != null && ((resClass.equals(JDFResource.EnumResourceClass.Parameter)) || (resClass.equals(JDFResource.EnumResourceClass.Consumable))))
+		if (EnumUsage.Input.equals(usage)
+				&& resClass != null
+				&& ((resClass.equals(JDFResource.EnumResourceClass.Parameter)) || (resClass.equals(JDFResource.EnumResourceClass.Consumable))))
 		{
 			r.setResStatus(EnumResStatus.Available, false);
 		}
@@ -3799,7 +3811,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final JDFResourceLink resourceLink = resourceLinkPool.linkResource(jdfResource, usage, processUsage);
 		final VString types = getTypes();
 		// generate
-		if (types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass()) && !(jdfResource instanceof JDFNodeInfo))
+		if (types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass())
+				&& !(jdfResource instanceof JDFNodeInfo))
 		{
 			CombinedProcessIndexHelper.generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
 		}
@@ -5032,8 +5045,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @default spawn(parentURL, null, null, null, false, false, false, false)
 	 */
 	@Deprecated
-	public JDFNode spawn(final String parentURL, final String spawnURL, final VString vRWResources_in, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly,
-			final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
+	public JDFNode spawn(final String parentURL, final String spawnURL, final VString vRWResources_in, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn spawn = new JDFSpawn(this);
 		return spawn.spawn(parentURL, spawnURL, vRWResources_in, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -5061,8 +5073,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @deprecated use JDFSpawn.spawnInformative()
 	 */
 	@Deprecated
-	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo,
-			final boolean bCopyCustomerInfo, final boolean bCopyComments)
+	public JDFNode spawnInformative(final String parentURL, final String spawnURL, final VJDFAttributeMap vSpawnParts, final boolean bSpawnROPartsOnly, final boolean bCopyNodeInfo, final boolean bCopyCustomerInfo, final boolean bCopyComments)
 	{
 		final JDFSpawn _spawn = new JDFSpawn(this);
 		return _spawn.spawnInformative(parentURL, spawnURL, vSpawnParts, bSpawnROPartsOnly, bCopyNodeInfo, bCopyCustomerInfo, bCopyComments);
@@ -5103,7 +5114,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final KElement m = v.elementAt(i);
 			final String strName = m.getNodeName();
 			KElement mHere = null;
-			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO)) || (strName.equals(ElementName.RESOURCEPOOL)) || (strName.equals(ElementName.RESOURCELINKPOOL))
+			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO))
+					|| (strName.equals(ElementName.RESOURCEPOOL)) || (strName.equals(ElementName.RESOURCELINKPOOL))
 					|| (strName.equals(ElementName.ANCESTORPOOL)) || (strName.equals(ElementName.AUDITPOOL)))
 			{
 				mHere = getElement_JDFElement(m.getNodeName(), null, 0);
@@ -5180,7 +5192,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
 
-				if (resLink != null && resLink.getrRef().equals(r.getID()) && resLink.getNodeName().equals(r.getLinkString()))
+				if (resLink != null && resLink.getrRef().equals(r.getID())
+						&& resLink.getNodeName().equals(r.getLinkString()))
 				{
 					return resLink;
 				}
@@ -5498,7 +5511,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	public boolean isGroupNode()
 	{
 		final EnumType type2 = getEnumType();
-		return EnumType.ProcessGroup.equals(type2) && !hasAttribute(AttributeName.TYPES) || EnumType.Product.equals(type2);
+		return EnumType.ProcessGroup.equals(type2) && !hasAttribute(AttributeName.TYPES)
+				|| EnumType.Product.equals(type2);
 	}
 
 	/**
@@ -6032,7 +6046,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (namIndex < 0)
 			{
 				final EnumType enumType = getEnumType();
-				if (enumType == null || enumType.equals(EnumType.ProcessGroup) || (enumType.equals(EnumType.Combined) && getEnumTypes() == null))
+				if (enumType == null || enumType.equals(EnumType.ProcessGroup)
+						|| (enumType.equals(EnumType.Combined) && getEnumTypes() == null))
 				{
 					return true;
 				}
@@ -6046,7 +6061,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 			for (int i = 0; i < dns; i++)
 			{
-				if ((doneNameList.elementAt(i)).intValue() == namIndex && (doneIndexList.elementAt(i)).intValue() == iIndex)
+				if ((doneNameList.elementAt(i)).intValue() == namIndex
+						&& (doneIndexList.elementAt(i)).intValue() == iIndex)
 				{
 					nOccur++; // this one is gone, try next
 					bTryNext = true;
@@ -6757,7 +6773,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					{
 						final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
 						final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
-						if (combinedProcessIndex == null || (types != null && combinedProcessIndex.size() == types.size()))
+						if (combinedProcessIndex == null
+								|| (types != null && combinedProcessIndex.size() == types.size()))
 						{
 							// in case of multiple parts - grab root - else
 							// potential performance hit
@@ -6817,6 +6834,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 	/**
 	 * gets the existing NodeInfo or creates a new one if none exists this method will check if a NodeInfo/CustomerInfo exists,
+	 * @param s 
 	 * 
 	 * @return the found or created NodeInfo/CustomerInfo
 	 */
@@ -6864,7 +6882,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	{
 		if (combinedProcessIndex < 0 || combinedProcessIndex >= getTypes().size())
 		{
-			throw new JDFException("appendNodeInfo: appending ni for non existing ccombinedProcessIndex:" + combinedProcessIndex + " types=" + getTypes());
+			throw new JDFException("appendNodeInfo: appending ni for non existing ccombinedProcessIndex:"
+					+ combinedProcessIndex + " types=" + getTypes());
 		}
 		if (getNodeInfo(combinedProcessIndex) != null)
 		{
@@ -6893,8 +6912,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			return null;
 		}
-		final JDFResourceLink rl = (JDFResourceLink) rlp.getChildWithMatchingAttribute("NodeInfoLink", AttributeName.COMBINEDPROCESSINDEX, null, String.valueOf(combinedProcessIndex), 0, true,
-				AttributeInfo.EnumAttributeType.IntegerList);
+		final JDFResourceLink rl = (JDFResourceLink) rlp.getChildWithMatchingAttribute("NodeInfoLink", AttributeName.COMBINEDPROCESSINDEX, null, String.valueOf(combinedProcessIndex), 0, true, AttributeInfo.EnumAttributeType.IntegerList);
 		if (rl == null)
 		{
 			return null;
@@ -7833,7 +7851,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			final JDFNode e = (JDFNode) v.elementAt(i);
 			String s = e.getJobPartID(false);
-			if (s.equals(JDFConstants.EMPTYSTRING) || s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
+			if (s.equals(JDFConstants.EMPTYSTRING)
+					|| s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
 			{
 				continue;
 			}
@@ -9165,8 +9184,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		return vp;
 	}
 
-	private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps,
-			final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
+	private ExecPartFlags addExecutablePartitions(final JDFResourceLink link, final JDFResource res, final VString vsPartIDKeys, final VJDFAttributeMap vamPartMaps, final JDFResource.EnumResStatus minStatus, final boolean bCheckNodeStatus)
 	{
 		final JDFAttributeMap amPartMap = res.getPartMap();
 
@@ -9211,7 +9229,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		if (bCheckNodeStatus)
 		{
-			if (((stat == null) && (isLeaf)) || (stat == JDFNode.EnumNodeStatus.Waiting) || (stat == JDFNode.EnumNodeStatus.Ready))
+			if (((stat == null) && (isLeaf)) || (stat == JDFNode.EnumNodeStatus.Waiting)
+					|| (stat == JDFNode.EnumNodeStatus.Ready))
 			{
 				isProcStatOK = true;
 			}
@@ -9302,7 +9321,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 							final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus();
 
-							if ((statPart == JDFNode.EnumNodeStatus.Waiting) || (statPart == JDFNode.EnumNodeStatus.Ready))
+							if ((statPart == JDFNode.EnumNodeStatus.Waiting)
+									|| (statPart == JDFNode.EnumNodeStatus.Ready))
 							{
 								vamPartMaps.appendUnique(niPart.getPartMap());
 							}

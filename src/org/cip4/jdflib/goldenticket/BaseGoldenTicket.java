@@ -170,6 +170,11 @@ public class BaseGoldenTicket
 	 * 
 	 */
 	public int[] nCols = { 0, 0 };
+
+	/**
+	 * 
+	 */
+	public String paperProductID;
 	protected VString partIDKeys = null;
 	/**
 	 * 
@@ -228,6 +233,7 @@ public class BaseGoldenTicket
 	 */
 	public BaseGoldenTicket(final int pIcsLevel, final EnumVersion jdfVersion)
 	{
+		paperProductID = "paperID";
 		baseICSLevel = pIcsLevel;
 		theVersion = jdfVersion == null ? EnumVersion.Version_1_3 : jdfVersion;
 		theStatusCounter = new StatusCounter(null, null, null);
@@ -259,6 +265,8 @@ public class BaseGoldenTicket
 		vParts = new VJDFAttributeMap(parent.vParts);
 		partIDKeys = new VString(parent.partIDKeys);
 		workStyle = parent.workStyle;
+		paperProductID = "paperID";
+
 		JDFElement.setLongID(false);
 		parent.addKid(this);
 	}
@@ -296,7 +304,15 @@ public class BaseGoldenTicket
 	{
 		vKids.clear();
 		vKids.add(this);
-		theNode = node == null ? new JDFDoc("JDF").getJDFRoot() : node;
+		if (node == null)
+		{
+			theNode = theParentNode == null ? new JDFDoc("JDF").getJDFRoot() : theParentNode.addJDFNode((String) null);
+		}
+		else
+		{
+			theNode = node;
+		}
+
 		theExpandedNode = theNode;
 		if (theNode.getParentJDF() != null)
 		{
@@ -353,7 +369,8 @@ public class BaseGoldenTicket
 	public void makeReady()
 	{
 
-		if (bExpandGrayBox && EnumType.ProcessGroup.equals(theNode.getEnumType()) && theNode.hasAttribute(AttributeName.TYPES))
+		if (bExpandGrayBox && EnumType.ProcessGroup.equals(theNode.getEnumType())
+				&& theNode.hasAttribute(AttributeName.TYPES))
 		{
 			theExpandedNode = theNode.addCombined(theNode.getTypes());
 			final VElement resLinks = theNode.getResourceLinks(null);
@@ -449,7 +466,8 @@ public class BaseGoldenTicket
 			setActivePart(vvMap.get(i), i % partsForAvailable == 0);
 			for (int j = 0; j < vKids.size(); j++)
 			{
-				vKids.get(j).execute(vvMap.get(i), i % partsForAvailable == (partsForAvailable - 1), i % partsForAvailable == 0);
+				vKids.get(j).execute(vvMap.get(i), i % partsForAvailable == (partsForAvailable - 1), i
+						% partsForAvailable == 0);
 			}
 		}
 	}
@@ -610,6 +628,16 @@ public class BaseGoldenTicket
 		{
 			theVersion = JDFElement.getDefaultJDFVersion();
 		}
+	}
+
+	/**
+	 * 
+	 * @param bProduct
+	 */
+	public void setParent(boolean bProduct)
+	{
+		theParentNode = new JDFDoc("JDF").getJDFRoot();
+		theParentNode.setType(bProduct ? EnumType.Product : EnumType.ProcessGroup);
 	}
 
 	/**
@@ -819,6 +847,26 @@ public class BaseGoldenTicket
 	}
 
 	/**
+	 * add a signature sheet combination
+	 * @param sheetName
+	 */
+	public void addSheet(String sheetName)
+	{
+		if (vParts == null)
+			vParts = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap(AttributeName.SIGNATURENAME, "Sig1");
+		map.put(AttributeName.SHEETNAME, sheetName);
+		map.put("Side", "Front");
+		vParts.appendUnique(map);
+		if (nCols.length > 1)
+		{
+			map = new JDFAttributeMap(map);
+			map.put("Side", "Back");
+			vParts.appendUnique(map);
+		}
+	}
+
+	/**
 	 * add the type of amount link for resource audits etc
 	 * 
 	 * @param link
@@ -973,6 +1021,7 @@ public class BaseGoldenTicket
 		paperMedia.setDimensionCM(new JDFXYPair(102, 70));
 		paperMedia.setWeight(90);
 		paperMedia.setThickness(90 / 0.8);
+		paperMedia.setProductID(paperProductID);
 		return paperMedia;
 	}
 
@@ -1198,6 +1247,10 @@ public class BaseGoldenTicket
 			outComp = (JDFComponent) theNode.getCreateResource(ElementName.COMPONENT, EnumUsage.Output, 0);
 			outComp.setComponentType(EnumComponentType.FinalProduct, EnumComponentType.Sheet);
 			outComp.setProductType("Unknown");
+			if (theParentNode != null)
+			{
+				theParentNode.linkResource(outComp, EnumUsage.Output, null);
+			}
 		}
 		else
 		{
