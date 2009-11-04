@@ -101,6 +101,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	public class AmountMap extends VectorMap<JDFAttributeMap, JDFPartAmount>
 	{
 
+		private final VString m_vsUsedPartIDKeys = new VString();
+
 		/**
 		 * 
 		 */
@@ -128,6 +130,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 					{
 						final JDFAttributeMap amPart = vamParts == null ? new JDFAttributeMap() : vamParts.elementAt(p);
 						amPart.reduceMap(vsPartIDKeys);
+						m_vsUsedPartIDKeys.appendUnique(amPart.getKeys());
 						putOne(amPart, pa);
 					}
 				}
@@ -145,7 +148,9 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		public double getAmountDouble(final JDFAttributeMap amParts, final String strAttributeName)
 		{
 			double dValue = -1.0;
-			final Vector<JDFPartAmount> lpa = get(amParts);
+			final JDFAttributeMap amUsedParts = new JDFAttributeMap(amParts);
+			amUsedParts.reduceMap(m_vsUsedPartIDKeys);
+			final Vector<JDFPartAmount> lpa = get(amUsedParts);
 
 			if (lpa != null)
 			{
@@ -298,7 +303,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				final double dd = StringUtil.parseDouble(w, -1.234567);
 				if (dd == -1.234567)
 				{
-					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName + " has an invalid value");
+					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName
+							+ " has an invalid value");
 				}
 
 				if (!bFound || dd < d)
@@ -343,7 +349,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				final double dd = StringUtil.parseDouble(w, -1.234567);
 				if (dd == -1.234567)
 				{
-					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName + " has an invalid value");
+					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName
+							+ " has an invalid value");
 				}
 
 				d += dd;
@@ -372,7 +379,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 			d = StringUtil.parseDouble(w, -1.234567);
 			if (d == -1.234567)
 			{
-				throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName + " has an invalid value");
+				throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName
+						+ " has an invalid value");
 			}
 			return d;
 		}
@@ -415,7 +423,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 			final JDFAmountPool ap = poolParent.getAmountPool();
 			final VElement vParts = ap == null ? new VElement() : ap.getChildElementVector(ElementName.PARTAMOUNT, null);
 
-			final boolean isWaste = vPart != null && vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
+			final boolean isWaste = vPart != null
+					&& vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
 			if (!isWaste && (vPart == null || !vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"))))
 			{
 				vPart = new VJDFAttributeMap(vPart);

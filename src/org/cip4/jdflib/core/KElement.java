@@ -1137,43 +1137,40 @@ public class KElement extends ElementNSImpl
 	 * @param bUnique if true, the attribute will only be appended if it is not yet within the current attribute value
 	 * appendAttribute("key","next",JDFConstants.EMPTYSTRING,JDFConstants .COMMA) applied to <xml key="first"/> results in <xml key="first,next"/>
 	 * @default appendAttribute(key, value, null, null, false)
+	 * @return the updated value; null if none exists
 	 */
-	public void appendAttribute(final String key, final String value, final String nameSpaceURI, final String sep, final boolean bUnique)
+	public String appendAttribute(final String key, final String value, final String nameSpaceURI, String sep, final boolean bUnique)
 	{
-		String sepLocal = sep;
 
 		if (value == null)
 		{
-			return;
+			return getAttribute(key, nameSpaceURI, null);
 		}
 
 		final String oldVal = getAttribute_KElement(key, nameSpaceURI, null);
 		if (oldVal == null)
 		{
 			setAttribute(key, value, nameSpaceURI);
+			return value;
 		}
 		else
 		// something is there
 		{
-			if (sepLocal == null)
+			if (sep == null)
 			{
-				sepLocal = JDFConstants.BLANK;
+				sep = JDFConstants.BLANK;
 			}
 
-			if (!bUnique || !StringUtil.hasToken(oldVal, value, sepLocal, 0)) // it
-			// is
-			// either
-			// not
-			// unique
-			// or
-			// not
-			// there
-			// yet
-			// --
-			// >
-			// append
+			if (!bUnique || !StringUtil.hasToken(oldVal, value, sep, 0))
+			// it  is either not unique/ or not there yet --> append
 			{
-				setAttribute(key, oldVal + sepLocal + value, nameSpaceURI);
+				String newValue = oldVal + sep + value;
+				setAttribute(key, newValue, nameSpaceURI);
+				return newValue;
+			}
+			else
+			{
+				return oldVal;
 			}
 		}
 	}

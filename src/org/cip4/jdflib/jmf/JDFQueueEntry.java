@@ -115,6 +115,24 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 */
 	public static class QueueEntryComparator implements Comparator
 	{
+		/**
+		 * 
+		 */
+		public QueueEntryComparator()
+		{
+			super();
+			if (fastStat == null)
+			{
+				fastStat = new HashMap<String, MyInteger>();
+				final Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
+				while (it.hasNext())
+				{
+					final EnumQueueEntryStatus eqs = it.next();
+					fastStat.put(eqs.getName(), new MyInteger(eqs.getValue()));
+				}
+			}
+		}
+
 		private static HashMap<String, MyInteger> fastStat = null;
 
 		/**
@@ -136,16 +154,6 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 			if (i != 0)
 			{
 				return i;
-			}
-			if (fastStat == null)
-			{
-				fastStat = new HashMap<String, MyInteger>();
-				final Iterator<EnumQueueEntryStatus> it = EnumQueueEntryStatus.iterator();
-				while (it.hasNext())
-				{
-					final EnumQueueEntryStatus eqs = it.next();
-					fastStat.put(eqs.getName(), new MyInteger(eqs.getValue()));
-				}
 			}
 			if ((o1 instanceof JDFQueueEntry) && (o2 instanceof JDFQueueEntry))
 			{
@@ -563,7 +571,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	{
 		final EnumQueueEntryStatus status = getQueueEntryStatus();
 		return // (status==null) ||
-		EnumQueueEntryStatus.Completed.equals(status) || EnumQueueEntryStatus.Removed.equals(status) || EnumQueueEntryStatus.Aborted.equals(status);
+		EnumQueueEntryStatus.Completed.equals(status) || EnumQueueEntryStatus.Removed.equals(status)
+				|| EnumQueueEntryStatus.Aborted.equals(status);
 	}
 
 	/**
@@ -605,9 +614,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 		setJobID(jdf.getJobID(true));
 		setJobPartID(jdf.getJobPartID(false));
 		setPartMapVector(jdf.getPartMapVector());
-		if(!hasAttribute(AttributeName.DESCRIPTIVENAME))
+		if (!hasAttribute(AttributeName.DESCRIPTIVENAME))
 			setDescriptiveName(StringUtil.getNonEmpty(jdf.getDescriptiveName()));
-			
 
 		if (!hasAttribute(AttributeName.PRIORITY))
 		{
@@ -621,9 +629,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 		this.eraseEmptyAttributes(true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(final Object arg0)

@@ -585,16 +585,25 @@ public class JDFQueue extends JDFAutoQueue
 	}
 
 	// /////////////////////////////////////////////////////////////////////
+	public synchronized JDFQueueEntry getNextExecutableQueueEntry()
+	{
+		return getNextExecutableQueueEntry(null);
+	}
+
 	/**
 	 * Get the next QueueEntry to be processed the first entry with highest priority gets selected if deviceID is specified, the entries with an explicit non
 	 * matching deviceID are ignored the status of the QueueEntry MUST be waiting
 	 * 
 	 * proxy and represents previously submitted jobs as waiting
+	 * @param cb 
 	 * 
 	 * @return the executable queueEntry, null if none is available
 	 */
-	public synchronized JDFQueueEntry getNextExecutableQueueEntry()
+	public synchronized JDFQueueEntry getNextExecutableQueueEntry(ExecuteCallback cb)
 	{
+		if (cb == null)
+			cb = executeCallback;
+
 		JDFQueueEntry theEntry = null;
 
 		if (!canExecute())
@@ -610,7 +619,7 @@ public class JDFQueue extends JDFAutoQueue
 			{
 				final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
 
-				if (executeCallback != null && !executeCallback.canExecute(qe))
+				if (cb != null && !cb.canExecute(qe))
 				{
 					continue;
 				}

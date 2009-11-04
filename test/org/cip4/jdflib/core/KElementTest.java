@@ -2629,6 +2629,9 @@ public class KElementTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testAppendAttribute()
 	{
 		final XMLDoc d = new XMLDoc("e", null);
@@ -2651,6 +2654,11 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("ns a", e.getAttribute("key", "www.ns.com", ""), "na nb nc");
 		assertEquals("ns a", e.getAttribute("ns:key"), "na nb nc");
 
+		assertEquals("new", e.appendAttribute("fnarf", "new", null, null, true));
+		assertEquals("new", e.appendAttribute("fnarf", "new", null, null, true));
+		assertEquals("new moo", e.appendAttribute("fnarf", "moo", null, null, true));
+		assertEquals("new moo", e.appendAttribute("fnarf", "moo", null, null, true));
+		assertEquals("new moo moo", e.appendAttribute("fnarf", "moo", null, null, false));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
