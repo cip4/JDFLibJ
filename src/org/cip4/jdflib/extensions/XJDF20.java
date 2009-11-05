@@ -154,7 +154,7 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
-	 * the root nodename
+	 * the root node name
 	 */
 	public final static String rootName = "XJDF";
 
@@ -164,6 +164,10 @@ public class XJDF20 extends BaseElementWalker
 	protected JDFNode oldRoot = null;
 	protected boolean walkingProduct = false;
 	protected boolean first = true;
+	/**
+	 * if true merge stripping and layout
+	 */
+	public boolean mergeLayout = true;
 	/**
 	 * set to update version stamps
 	 */
@@ -218,6 +222,10 @@ public class XJDF20 extends BaseElementWalker
 			productList.deleteNode();
 		}
 		walkingProduct = false;
+
+		PostXJDFWalker pw = new PostXJDFWalker(newRoot);
+		pw.mergeLayout = mergeLayout;
+		pw.walkTreeKidsFirst(newRoot);
 
 		newRoot.eraseEmptyNodes(true);
 		return newRoot;
@@ -362,7 +370,8 @@ public class XJDF20 extends BaseElementWalker
 		JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
 		if (ap == null)
 		{
-			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT) || rl.hasAttribute(AttributeName.MAXAMOUNT))
+			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT)
+					|| rl.hasAttribute(AttributeName.MAXAMOUNT))
 			{
 				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
 				final JDFPartAmount pa = ap.appendPartAmount();
@@ -471,6 +480,10 @@ public class XJDF20 extends BaseElementWalker
 		if (partMap != null && partMap.size() > 0 && newLeaf.getElement("Part") == null)
 		{
 			newLeaf.appendElement("Part").setAttributes(partMap);
+		}
+		else
+		{
+			newLeaf.appendElement("Part"); // always append an empty part for null
 		}
 	}
 
@@ -604,7 +617,8 @@ public class XJDF20 extends BaseElementWalker
 		protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
 		{
 			final String localName = xjdf.getLocalName();
-			final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
+			final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName)
+					|| "Resource".equals(localName);
 			for (int i = 0; i < resAttribs.size(); i++)
 			{
 				if (newResLeaf.hasAttribute(resAttribs.stringAt(i)))
@@ -785,18 +799,29 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		protected boolean mustInline(final String refLocalName)
 		{
-			return ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.BARCODECOMPPARAMS.equals(refLocalName) || ElementName.BARCODEREPROPARAMS.equals(refLocalName)
-					|| ElementName.COMCHANNEL.equals(refLocalName) || ElementName.INTERPRETEDPDLDATA.equals(refLocalName) || ElementName.BYTEMAP.equals(refLocalName)
-					|| ElementName.COMPANY.equals(refLocalName) || ElementName.COSTCENTER.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName) || ElementName.PERSON.equals(refLocalName)
-					|| ElementName.DEVICE.equals(refLocalName) || ElementName.DEVICENSPACE.equals(refLocalName) || ElementName.COLORANTALIAS.equals(refLocalName)
-					|| ElementName.GLUELINE.equals(refLocalName) || ElementName.GLUEAPPLICATION.equals(refLocalName) || ElementName.CIELABMEASURINGFIELD.equals(refLocalName)
-					|| ElementName.REGISTERMARK.equals(refLocalName) || ElementName.FITPOLICY.equals(refLocalName) || ElementName.CUTBLOCK.equals(refLocalName)
-					|| ElementName.EMPLOYEE.equals(refLocalName) || ElementName.ELEMENTCOLORPARAMS.equals(refLocalName) || ElementName.CUT.equals(refLocalName)
-					|| ElementName.PDLRESOURCEALIAS.equals(refLocalName) || ElementName.HOLELIST.equals(refLocalName) || ElementName.HOLE.equals(refLocalName)
-					|| ElementName.MISDETAILS.equals(refLocalName) || ElementName.HOLELINE.equals(refLocalName) || ElementName.JOBFIELD.equals(refLocalName)
-					|| ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName) || ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName)
-					|| ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName)
-					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName) || ElementName.TRANSFERCURVE.equals(refLocalName)
+			return ElementName.OBJECTRESOLUTION.equals(refLocalName)
+					|| ElementName.BARCODECOMPPARAMS.equals(refLocalName)
+					|| ElementName.BARCODEREPROPARAMS.equals(refLocalName)
+					|| ElementName.COMCHANNEL.equals(refLocalName)
+					|| ElementName.INTERPRETEDPDLDATA.equals(refLocalName) || ElementName.BYTEMAP.equals(refLocalName)
+					|| ElementName.COMPANY.equals(refLocalName) || ElementName.COSTCENTER.equals(refLocalName)
+					|| ElementName.ADDRESS.equals(refLocalName) || ElementName.PERSON.equals(refLocalName)
+					|| ElementName.DEVICE.equals(refLocalName) || ElementName.DEVICENSPACE.equals(refLocalName)
+					|| ElementName.COLORANTALIAS.equals(refLocalName) || ElementName.GLUELINE.equals(refLocalName)
+					|| ElementName.GLUEAPPLICATION.equals(refLocalName)
+					|| ElementName.CIELABMEASURINGFIELD.equals(refLocalName)
+					|| ElementName.REGISTERMARK.equals(refLocalName) || ElementName.FITPOLICY.equals(refLocalName)
+					|| ElementName.CUTBLOCK.equals(refLocalName) || ElementName.EMPLOYEE.equals(refLocalName)
+					|| ElementName.ELEMENTCOLORPARAMS.equals(refLocalName) || ElementName.CUT.equals(refLocalName)
+					|| ElementName.PDLRESOURCEALIAS.equals(refLocalName) || ElementName.HOLELIST.equals(refLocalName)
+					|| ElementName.HOLE.equals(refLocalName) || ElementName.MISDETAILS.equals(refLocalName)
+					|| ElementName.HOLELINE.equals(refLocalName) || ElementName.JOBFIELD.equals(refLocalName)
+					|| ElementName.OBJECTRESOLUTION.equals(refLocalName)
+					|| ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName)
+					|| ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName)
+					|| ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName)
+					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName)
+					|| ElementName.TRAPREGION.equals(refLocalName) || ElementName.TRANSFERCURVE.equals(refLocalName)
 					|| ElementName.COLORCONTROLSTRIP.equals(refLocalName);
 		}
 
@@ -1039,7 +1064,8 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		private void setRootAttributes(final JDFNode node, final KElement newRootP)
 		{
-			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: "
+					+ JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
 			newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 
 			final JDFNodeInfo ni = node.getCreateNodeInfo();
@@ -1272,7 +1298,8 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool || toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged;
+			return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool
+					|| toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged;
 		}
 	}
 
@@ -1596,7 +1623,7 @@ public class XJDF20 extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
-	protected class WalkLayout extends WalkResource
+	protected class WalkLayout extends WalkMediaRefByType
 	{
 		/**
 		 * 
@@ -1623,7 +1650,8 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		protected boolean mustInline(final String refLocalName)
 		{
-			final boolean b = ElementName.LAYERLIST.equals(refLocalName) || ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName)
+			final boolean b = ElementName.LAYERLIST.equals(refLocalName)
+					|| ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName)
 					|| ElementName.MARKOBJECT.equals(refLocalName) || ElementName.LAYERDETAILS.equals(refLocalName);
 			return b || super.mustInline(refLocalName);
 		}
@@ -1784,7 +1812,8 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return (toCheck instanceof JDFRunList) || (toCheck instanceof JDFCuttingParams) || (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
+			return (toCheck instanceof JDFRunList) || (toCheck instanceof JDFCuttingParams)
+					|| (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
 		}
 
 		/**
@@ -2035,7 +2064,8 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return (toCheck instanceof JDFInterpretingParams) || (toCheck instanceof JDFLayout) || (toCheck instanceof JDFStrippingParams); // TODO|| (toCheck
+			return (toCheck instanceof JDFInterpretingParams) || (toCheck instanceof JDFLayout)
+					|| (toCheck instanceof JDFStrippingParams); // TODO|| (toCheck
 			// instanceof
 			// JDFRasterReadingParams);
 		}
@@ -2081,7 +2111,8 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		private void setRootAttributes(final JDFJMF jmf, final KElement newRootP)
 		{
-			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: "
+					+ JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
 			if (bUpdateVersion)
 			{
 				newRootP.setAttribute("Version", "2.0");

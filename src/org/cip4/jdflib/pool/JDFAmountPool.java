@@ -437,7 +437,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				final VJDFAttributeMap partMapVector = pa.getPartMapVector();
 				if (isWaste)
 				{
-					final boolean hasCondition = partMapVector.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"));
+					final boolean hasCondition = partMapVector != null
+							&& partMapVector.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"));
 					if (!hasCondition)
 					{
 						continue;
@@ -445,7 +446,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 
 				}
 
-				if (!partMapVector.overlapsMap(vm))
+				if (partMapVector != null && !partMapVector.overlapsMap(vm))
 				{
 					continue;
 				}
@@ -924,6 +925,8 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		{
 			return null;
 		}
+		if (mPart == null)
+			return vPartAmount;
 
 		final VElement vPA = new VElement();
 		for (int i = 0; i < size; i++)

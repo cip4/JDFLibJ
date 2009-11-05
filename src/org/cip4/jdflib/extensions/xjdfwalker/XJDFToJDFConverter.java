@@ -9,6 +9,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -41,6 +42,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	//	JDFNode theNode;
 	Map<String, IDPart> idMap;
 	boolean firstConvert;
+	/**
+	 * if true, create the product, else ignore it
+	 */
+	public boolean createProduct = true;
 
 	/**
 	 * @param template the jdfdoc to fill this into
@@ -522,7 +527,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			e.deleteNode();
 			// only convert products in the first pass
 			//TODO rethink product conversion switch
-			return firstConvert ? jdfDoc.getJDFRoot() : null;
+			return createProduct && firstConvert ? jdfDoc.getJDFRoot() : null;
 		}
 
 		/**
@@ -701,6 +706,18 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				if (ap != null)
 				{
 					final JDFAmountPool rlAP = rl.getCreateAmountPool();
+					VElement vPA = ap.getMatchingPartAmountVector(null);
+					if (vPA != null)
+					{
+						for (int i = 0; i < vPA.size(); i++)
+						{
+							JDFPartAmount paI = (JDFPartAmount) vPA.get(i);
+							paI.getCreatePart(0);
+							VJDFAttributeMap vm = paI.getPartMapVector();
+							vm = vm.getOrMaps(partmap);
+							paI.setPartMapVector(vm);
+						}
+					}
 					rlAP.mergeElement(ap, false);
 					ap.deleteNode();
 				}

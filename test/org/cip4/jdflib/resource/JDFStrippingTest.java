@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,6 +74,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
@@ -99,6 +100,10 @@ public class JDFStrippingTest extends JDFTestCaseBase
 	private JDFStrippingParams sp = null;
 	private JDFBinderySignature bs = null;
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @throws Exception
+	*/
 	@Override
 	public void setUp() throws Exception
 	{
@@ -107,12 +112,10 @@ public class JDFStrippingTest extends JDFTestCaseBase
 		doc = new JDFDoc("JDF");
 		n = doc.getJDFRoot();
 		n.setType(EnumType.Stripping);
-		rl = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST,
-				EnumProcessUsage.AnyInput, null);
-		sp = (JDFStrippingParams) n.appendMatchingResource(
-				ElementName.STRIPPINGPARAMS, EnumProcessUsage.AnyInput, null);
-		bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE,
-				null, null, null, null, null, null);
+		rl = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		sp = (JDFStrippingParams) n.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumProcessUsage.AnyInput, null);
+		bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null, null, null, null, null, null);
+		n.addResource("Layout", EnumUsage.Output);
 		sp.refBinderySignature(bs);
 	}
 
@@ -131,11 +134,8 @@ public class JDFStrippingTest extends JDFTestCaseBase
 			if (i == 1)
 				continue; // rejected by wg
 			setUp();
-			n
-					.setXMLComment("Stripping Foldout example corresponding to spec example n.6.5 - verion: "
-							+ ((i == 0) ? "multi-Cell"
-									: ((i == 1) ? "new attribute FoldOutTrimSize"
-											: "new attribute FaceCells (Accepted for 1.4)")));
+			n.setXMLComment("Stripping Foldout example corresponding to spec example n.6.5 - verion: "
+					+ ((i == 0) ? "multi-Cell" : ((i == 1) ? "new attribute FoldOutTrimSize" : "new attribute FaceCells (Accepted for 1.4)")));
 			rl.setNPage(6);
 			sp.setResStatus(EnumResStatus.Available, true);
 			bs.setResStatus(EnumResStatus.Available, true);
@@ -153,7 +153,8 @@ public class JDFStrippingTest extends JDFTestCaseBase
 				{
 					sc.setFrontFacePages(new JDFIntegerList("4"));
 					sc.setBackFacePages(new JDFIntegerList("3"));
-				} else
+				}
+				else
 				{
 					xmlComment += "\nThe new attribute FaceCells refers to the cell(s) that describe the foldout; in this case the cell to the left.";
 					xmlComment += "\nThe front and back pages of the foldout are listed in the respective cell(s)";
@@ -168,39 +169,32 @@ public class JDFStrippingTest extends JDFTestCaseBase
 			sc.setFrontPages(new JDFIntegerList("0"));
 			sc.setBackPages(new JDFIntegerList("1"));
 
-			JDFStrippingParams sp1 = (JDFStrippingParams) sp.addPartition(
-					EnumPartIDKey.CellIndex, "0");
+			JDFStrippingParams sp1 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, "0");
 			JDFStripCellParams scp = sp1.appendStripCellParams();
 			scp.setTrimSize(new JDFXYPair(200 + (i % 2) * 300, 400));
 			if (i != 1)
-				scp
-						.setXMLComment("stripcell for the folded out foldout(front page=4)");
+				scp.setXMLComment("stripcell for the folded out foldout(front page=4)");
 			else
-				scp
-						.setXMLComment("stripcell for the entire foldout(front page=4, foldout page =5)\nthe TrimSize applies to the entire foldout spread (page 4 and 5)\n note the new FoldoutTrimSize attribute");
+				scp.setXMLComment("stripcell for the entire foldout(front page=4, foldout page =5)\nthe TrimSize applies to the entire foldout spread (page 4 and 5)\n note the new FoldoutTrimSize attribute");
 
 			if (i != 1)
 			{
-				sp1 = (JDFStrippingParams) sp.addPartition(
-						EnumPartIDKey.CellIndex, "1");
+				sp1 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, "1");
 				scp = sp1.appendStripCellParams();
 				scp.setTrimSize(new JDFXYPair(300, 400));
-				scp
-						.setXMLComment("stripcell for the inner page of the foldout foldout(front page=5)");
-			} else
+				scp.setXMLComment("stripcell for the inner page of the foldout foldout(front page=5)");
+			}
+			else
 			{
 				scp.setAttribute("FoldoutTrimSize", "200 400");
 			}
 
-			sp1 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex,
-					i != 1 ? "2" : "1");
+			sp1 = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.CellIndex, i != 1 ? "2" : "1");
 			scp = sp1.appendStripCellParams();
 			scp.setTrimSize(new JDFXYPair(320, 400));
-			scp
-					.setXMLComment("stripcell for the inner page of the foldout foldout(front page=0)");
+			scp.setXMLComment("stripcell for the inner page of the foldout foldout(front page=0)");
 
-			doc.write2File(sm_dirTestDataTemp + "foldoutStrip" + i + ".jdf", 2,
-					false);
+			doc.write2File(sm_dirTestDataTemp + "foldoutStrip" + i + ".jdf", 2, false);
 		}
 
 	}

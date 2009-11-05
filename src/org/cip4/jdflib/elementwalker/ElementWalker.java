@@ -127,4 +127,35 @@ public class ElementWalker
 		return n;
 	}
 
+	/**
+	 * walk the tree starting at e.
+	 * 
+	 * @param e the root element to walk
+	 * @return n the number of traversed elements
+	 */
+	public int walkTreeKidsFirst(final KElement e)
+	{
+		if (e == null)
+		{
+			return 0;
+		}
+		int n = 0;
+		// do not follow refelements
+		final VElement v = e.getChildElementVector_KElement(null, null, null, true, -1);
+		final int size = v.size();
+		for (int i = 0; i < size; i++)
+		{
+			final KElement e2 = v.elementAt(i);
+			n += walkTreeKidsFirst(e2);
+		}
+
+		final IWalker w = theFactory.getWalker(e);
+		if (w != null)
+		{
+			n++;
+			w.walk(e, null);
+		}
+		return n;
+	}
+
 }

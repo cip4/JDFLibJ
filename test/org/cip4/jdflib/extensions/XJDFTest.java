@@ -23,17 +23,22 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
+import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
 
 /**
@@ -86,6 +91,27 @@ public class XJDFTest extends JDFTestCaseBase
 		xm = (JDFExposedMedia) rl.getTarget();
 		assertEquals(xm.getProductID(), "P1");
 		assertEquals(xm.getPlateType(), EnumPlateType.Dummy);
+	}
+
+	/**
+	 */
+	public void testMergeStripping()
+	{
+
+		n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.Stripping);
+		JDFRunList rl = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		JDFStrippingParams sp = (JDFStrippingParams) n.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumProcessUsage.AnyInput, null);
+		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null, null, null, null, null, null);
+		JDFLayout lo = (JDFLayout) n.addResource("Layout", EnumUsage.Output);
+		sp.refBinderySignature(bs);
+
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.mergeLayout = true;
+
+		e = xjdf20.makeNewJDF(n, null);
+		assertNotNull(e);
+
 	}
 
 	/**
