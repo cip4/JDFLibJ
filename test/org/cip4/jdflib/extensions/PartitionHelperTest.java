@@ -68,85 +68,27 @@
  */
 package org.cip4.jdflib.extensions;
 
-import org.cip4.jdflib.core.ElementName;
+import junit.framework.TestCase;
+
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.resource.JDFPart;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class PartitionHelper
+public class PartitionHelperTest extends TestCase
 {
 	/**
-	 * @param partition
+	 * 
 	 */
-	public PartitionHelper(KElement partition)
+	public void testGetResource()
 	{
-		super();
-		this.thePartition = partition;
-	}
+		JDFDoc d = new JDFDoc("XJDF");
+		KElement root = d.getRoot();
 
-	protected KElement thePartition;
-
-	/**
-	 * @return
-	 */
-	public VJDFAttributeMap getPartMapVector()
-	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		VElement vParts = thePartition.getChildElementVector(ElementName.PART, null);
-		if (vParts != null)
-		{
-			for (int i = 0; i < vParts.size(); i++)
-				vMap.add(vParts.get(i).getAttributeMap());
-		}
-		return vMap;
-	}
-
-	/**
-	 * @param map
-	 * @return
-	 */
-	public boolean matches(JDFAttributeMap map)
-	{
-		if (map == null)
-			map = new JDFAttributeMap();
-		return map.subMap(getPartMapVector());
-	}
-
-	/**
-	 * @param vmap
-	 * @return
-	 */
-	public boolean matches(VJDFAttributeMap vmap)
-	{
-		if (vmap == null)
-			vmap = new VJDFAttributeMap();
-		return vmap.subMap(getPartMapVector());
-	}
-
-	/**
-	 * @return
-	 */
-	public KElement getResource()
-	{
-		KElement set = thePartition.getParentNode_KElement();
-		String name = set != null ? set.getAttribute("Name", null, null) : null;
-		if (name != null)
-			return thePartition.getElement(name);
-		else
-		{
-			KElement e = thePartition.getFirstChildElement();
-			while (e != null)
-			{
-				if (!(e instanceof JDFPart))
-					return e;
-				e = e.getNextSiblingElement();
-			}
-		}
-		return null;
+		root.getCreateXPathElement("ResourceSet/Resource/Part");
+		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
+		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		assertEquals(ph.getResource(), m);
 	}
 }

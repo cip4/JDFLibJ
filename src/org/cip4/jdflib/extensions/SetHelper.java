@@ -116,6 +116,39 @@ public class SetHelper
 		return v;
 	}
 
+	public void cleanUp()
+	{
+		if (!theSet.hasAttribute("Name"))
+		{
+			theSet.setAttribute("Name", getName());
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	public String getName()
+	{
+		String name = theSet.getAttribute("Name", null, null);
+		if (name == null)
+		{
+			VElement v = getPartitions();
+			if (v != null)
+			{
+				for (int i = 0; i < v.size(); i++)
+				{
+					PartitionHelper ph = new PartitionHelper(v.get(i));
+					KElement res = ph.getResource();
+					if (res != null)
+					{
+						return res.getNodeName();
+					}
+				}
+			}
+		}
+		return name;
+	}
+
 	/**
 	 * @return 
 	 * 

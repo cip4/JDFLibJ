@@ -132,6 +132,7 @@ import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.elementwalker.AttributeReplacerTest;
 import org.cip4.jdflib.elementwalker.BaseWalkerTest;
 import org.cip4.jdflib.elementwalker.LinkRefFinderTest;
+import org.cip4.jdflib.elementwalker.RemovePrivateTest;
 import org.cip4.jdflib.elementwalker.UnlinkFinderTest;
 import org.cip4.jdflib.elementwalker.XPathWalkerTest;
 import org.cip4.jdflib.examples.AmountTest;
@@ -147,6 +148,8 @@ import org.cip4.jdflib.examples.SheetOptimizeTest;
 import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
+import org.cip4.jdflib.extensions.PartitionHelperTest;
+import org.cip4.jdflib.extensions.SetHelperTest;
 import org.cip4.jdflib.extensions.XJDFTest;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinderTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
@@ -189,6 +192,7 @@ import org.cip4.jdflib.resource.JDFMediaColorTest;
 import org.cip4.jdflib.resource.JDFNotificationTest;
 import org.cip4.jdflib.resource.JDFPageListTest;
 import org.cip4.jdflib.resource.JDFPartTest;
+import org.cip4.jdflib.resource.JDFPhaseTimeTest;
 import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.JDFStrippingTest;
 import org.cip4.jdflib.resource.PhaseTimeTest;
@@ -327,6 +331,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(AttributeReplacerTest.class);
 		suite.addTestSuite(BaseWalkerTest.class);
 		suite.addTestSuite(LinkRefFinderTest.class);
+		suite.addTestSuite(RemovePrivateTest.class);
 		suite.addTestSuite(UnlinkFinderTest.class);
 		suite.addTestSuite(XPathWalkerTest.class);
 
@@ -346,8 +351,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(WebTest.class);
 
 		//extension
-		suite.addTestSuite(XJDFTest.class);
 		suite.addTestSuite(IDFinderTest.class);
+		suite.addTestSuite(PartitionHelperTest.class);
+		suite.addTestSuite(SetHelperTest.class);
+		suite.addTestSuite(XJDFTest.class);
 
 		// Golden tickets
 		suite.addTestSuite(GoldenTicketTest.class);
@@ -400,6 +407,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFNotificationTest.class);
 		suite.addTestSuite(JDFPageListTest.class);
 		suite.addTestSuite(JDFPartTest.class);
+		suite.addTestSuite(JDFPhaseTimeTest.class);
 		suite.addTestSuite(JDFResourceTest.class);
 		suite.addTestSuite(JDFStrippingTest.class);
 

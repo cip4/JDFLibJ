@@ -324,6 +324,42 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testEnsureLinkRecursive()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFNode n2 = n.addJDFNode("ProcessGroup");
+		JDFResource r1 = n2.addResource("ExposedMedia", EnumUsage.Input);
+		JDFResource r2 = n2.addResource("Media", null);
+		r1.addPartition(EnumPartIDKey.SheetName, "s1").refElement(r2);
+		n.ensureLink(r1, EnumUsage.Input, null);
+		assertTrue(n.getResourcePool().getPoolChildren(null, null, null).contains(r2));
+
+	}
+
+	/**
+	 * gracefully handle circular references
+	 */
+	public void testEnsureLinkLoop()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.Product);
+		JDFNode n2 = n.addJDFNode("ProcessGroup");
+		JDFResource r1 = n2.addResource("ExposedMedia", EnumUsage.Input);
+		JDFResource r2 = n2.addResource("Media", null);
+		r1.refElement(r2);
+		r2.refElement(r1);
+		r2.refElement(r2);
+		n.ensureLink(r1, EnumUsage.Input, null);
+		assertTrue(n.getResourcePool().getPoolChildren(null, null, null).contains(r2));
+
+	}
+
+	/**
 	 * test whether combinedprocessIndex is automagically and correctly assigned
 	 * 
 	 */

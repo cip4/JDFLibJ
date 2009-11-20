@@ -252,39 +252,41 @@ public class JDFDoc extends XMLDoc
 		VElement vLinkedResources = new VElement();
 
 		// loop over all jdf nodes
-		int i;
-		for (i = 0; i < vProcs.size(); i++)
+		for (int i = 0; i < vProcs.size(); i++)
 		{
 			int j;
 			final JDFNode n = (JDFNode) vProcs.elementAt(i);
 			vLinkedResources.appendUnique(n.getLinkedResources(null, true));
 
 			final JDFResourcePool rp = n.getResourcePool();
-			final VElement resources = rp.getPoolChildren(null, null, null);
-			vResources.appendUnique(resources);
-
-			for (j = 0; j < resources.size(); j++)
+			if (rp != null)
 			{
-				vResources.appendUnique(((JDFResource) resources.elementAt(j)).getvHRefRes(true, true));
+				final VElement resources = rp.getPoolChildren(null, null, null);
+				vResources.appendUnique(resources);
+
+				for (j = 0; j < resources.size(); j++)
+				{
+					vResources.appendUnique(((JDFResource) resources.elementAt(j)).getvHRefRes(true, true));
+				}
 			}
 		}
 
 		final VElement vr = new VElement();
-		for (i = 0; i < vResources.size(); i++)
+		for (int i = 0; i < vResources.size(); i++)
 		{
 			vr.appendUnique(((JDFResource) vResources.elementAt(i)).getResourceRoot());
 		}
 
 		vResources = vr;
 		vr.clear();
-		for (i = 0; i < vLinkedResources.size(); i++)
+		for (int i = 0; i < vLinkedResources.size(); i++)
 		{
 			vr.appendUnique(((JDFResource) vLinkedResources.elementAt(i)).getResourceRoot());
 		}
 		vLinkedResources = vr;
 
 		int nDeleted = 0;
-		for (i = 0; i < vResources.size(); i++)
+		for (int i = 0; i < vResources.size(); i++)
 		{
 			final JDFResource r = (JDFResource) vResources.elementAt(i);
 			if (!(vLinkedResources.index(r) >= 0))

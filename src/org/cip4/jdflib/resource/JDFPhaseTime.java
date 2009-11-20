@@ -297,6 +297,27 @@ public class JDFPhaseTime extends JDFAutoPhaseTime implements ISignalAudit
 	}
 
 	/**
+	 * gets the DeviceID from the child device, null if none was set
+	 * @return the deviceID
+	 */
+	public String getDeviceID()
+	{
+		JDFDevice d = getDevice(0);
+		if (d == null)
+			return null;
+		return StringUtil.getNonEmpty(d.getDeviceID());
+	}
+
+	/**
+	 * set Device/@DeviceID
+	 * @param deviceID
+	 */
+	public void setDeviceID(String deviceID)
+	{
+		getCreateDevice(0).setDeviceID(deviceID);
+	}
+
+	/**
 	 * get the implied duration from Start and End
 	 * 
 	 * @return JDFDuration the duration

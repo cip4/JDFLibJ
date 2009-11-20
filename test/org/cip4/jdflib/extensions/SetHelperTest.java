@@ -68,85 +68,47 @@
  */
 package org.cip4.jdflib.extensions;
 
-import org.cip4.jdflib.core.ElementName;
+import junit.framework.TestCase;
+
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.resource.JDFPart;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class PartitionHelper
+public class SetHelperTest extends TestCase
 {
-	/**
-	 * @param partition
-	 */
-	public PartitionHelper(KElement partition)
-	{
-		super();
-		this.thePartition = partition;
-	}
-
-	protected KElement thePartition;
+	KElement root = null;
 
 	/**
-	 * @return
+	 * 
 	 */
-	public VJDFAttributeMap getPartMapVector()
+	public void testGetName()
 	{
-		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		VElement vParts = thePartition.getChildElementVector(ElementName.PART, null);
-		if (vParts != null)
-		{
-			for (int i = 0; i < vParts.size(); i++)
-				vMap.add(vParts.get(i).getAttributeMap());
-		}
-		return vMap;
+		SetHelper sh = new SetHelper(root.getElement("ResourceSet"));
+		assertEquals(sh.getName(), "Media");
 	}
 
 	/**
-	 * @param map
-	 * @return
+	 * 
 	 */
-	public boolean matches(JDFAttributeMap map)
+	public void testCleanup()
 	{
-		if (map == null)
-			map = new JDFAttributeMap();
-		return map.subMap(getPartMapVector());
-	}
-
-	/**
-	 * @param vmap
-	 * @return
-	 */
-	public boolean matches(VJDFAttributeMap vmap)
-	{
-		if (vmap == null)
-			vmap = new VJDFAttributeMap();
-		return vmap.subMap(getPartMapVector());
+		KElement element = root.getElement("ResourceSet");
+		SetHelper sh = new SetHelper(element);
+		sh.cleanUp();
+		assertEquals(element.getAttribute("Name"), "Media");
 	}
 
 	/**
 	 * @return
 	 */
-	public KElement getResource()
+	@Override
+	protected void setUp()
 	{
-		KElement set = thePartition.getParentNode_KElement();
-		String name = set != null ? set.getAttribute("Name", null, null) : null;
-		if (name != null)
-			return thePartition.getElement(name);
-		else
-		{
-			KElement e = thePartition.getFirstChildElement();
-			while (e != null)
-			{
-				if (!(e instanceof JDFPart))
-					return e;
-				e = e.getNextSiblingElement();
-			}
-		}
-		return null;
+		JDFDoc d = new JDFDoc("XJDF");
+		root = d.getRoot();
+		root.getCreateXPathElement("ResourceSet/Resource/Part");
+		root.getCreateXPathElement("ResourceSet/Resource/Media");
 	}
 }

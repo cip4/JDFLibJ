@@ -369,9 +369,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			JDFConstants.INPUT_ZEROTOINFINITY // USAGECOUNTER
 	};
 
-	private static String[] m_strGenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO,
-			ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE, ElementName.NODEINFO,
-			ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
+	private static String[] m_strGenericLinkNames = { ElementName.APPROVALSUCCESS, ElementName.CUSTOMERINFO, ElementName.DEVICE, ElementName.EMPLOYEE, ElementName.MISCCONSUMABLE,
+			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	private static final long serialVersionUID = 1L;
 
@@ -2390,10 +2389,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final NodeIdentifier niInput = ((INodeIdentifiable) o).getIdentifier();
 			boolean b = isWildCard(niInput._jobID) || ContainerUtil.equals(niInput._jobID, _jobID);
 			b = b
-					&& ((isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID)) || (_jobPartID != null
-							&& niInput._jobPartID != null && _jobPartID.startsWith(niInput._jobPartID + ".")));
-			return b
-					&& ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
+					&& ((isWildCard(niInput._jobPartID) || ContainerUtil.equals(niInput._jobPartID, _jobPartID)) || (_jobPartID != null && niInput._jobPartID != null && _jobPartID.startsWith(niInput._jobPartID
+							+ ".")));
+			return b && ((_partMapVector == null) || (_partMapVector != null && _partMapVector.overlapsMap(niInput._partMapVector)));
 		}
 
 		/**
@@ -2402,8 +2400,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		@Override
 		public int hashCode()
 		{
-			return (_jobID == null ? 0 : _jobID.hashCode()) + (_jobPartID == null ? 0 : _jobPartID.hashCode())
-					+ (_partMapVector == null ? 0 : _partMapVector.hashCode());
+			return (_jobID == null ? 0 : _jobID.hashCode()) + (_jobPartID == null ? 0 : _jobPartID.hashCode()) + (_partMapVector == null ? 0 : _partMapVector.hashCode());
 		}
 
 		/**
@@ -3056,8 +3053,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final EnumNodeStatus stat = getStatus();
 		statusDetailsLocal = StringUtil.getNonEmpty(statusDetailsLocal);
 		// 100602 handle nasty combination
-		if (mattr != null
-				&& (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
+		if (mattr != null && (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
 		{
 			// throw an exception??? this is a snafu to set an individual part
 			// status to pool
@@ -3512,8 +3508,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				if (a != null)
 				{
 					final int value = a.getValue();
-					if ((value <= EnumActivation.TestRun.getValue())
-							|| (res.getValue() < EnumActivation.Active.getValue()))
+					if ((value <= EnumActivation.TestRun.getValue()) || (res.getValue() < EnumActivation.Active.getValue()))
 					{
 						res = (value < res.getValue()) ? a : res; // smaller
 						// enums are
@@ -3587,10 +3582,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param i the nuber of matches to skip, if negative, count backwards
 	 * @return the matching resource, null if none matches
 	 */
-	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, final int i)
+	public JDFResource getResource(final String strName, final EnumUsage usage, final EnumProcessUsage processUsage, int i)
 	{
-		int iLocal = i;
-
 		VElement velem = null;
 		final JDFResourceLinkPool rlp = getResourceLinkPool();
 		if (rlp != null)
@@ -3616,17 +3609,17 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		final int siz = velem == null ? 0 : velem.size();
-		if (iLocal < 0)
+		if (i < 0)
 		{
-			iLocal += siz;
+			i += siz;
 		}
 
-		if (siz == 0 || iLocal < 0 || iLocal >= siz || velem == null)
+		if (siz == 0 || i < 0 || i >= siz || velem == null)
 		{
 			return null;
 		}
 
-		return (JDFResource) velem.elementAt(iLocal);
+		return (JDFResource) velem.elementAt(i);
 	}
 
 	/**
@@ -3730,8 +3723,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 
 		// parameters and consumables are assumed to be available by default
-		if (EnumUsage.Input.equals(usage)
-				&& resClass != null
+		if (EnumUsage.Input.equals(usage) && resClass != null
 				&& ((resClass.equals(JDFResource.EnumResourceClass.Parameter)) || (resClass.equals(JDFResource.EnumResourceClass.Consumable))))
 		{
 			r.setResStatus(EnumResStatus.Available, false);
@@ -3811,8 +3803,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final JDFResourceLink resourceLink = resourceLinkPool.linkResource(jdfResource, usage, processUsage);
 		final VString types = getTypes();
 		// generate
-		if (types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass())
-				&& !(jdfResource instanceof JDFNodeInfo))
+		if (types != null && !EnumResourceClass.Implementation.equals(jdfResource.getResourceClass()) && !(jdfResource instanceof JDFNodeInfo))
 		{
 			CombinedProcessIndexHelper.generateCombinedProcessIndex(jdfResource, usage, processUsage, resourceLink, types);
 		}
@@ -5114,9 +5105,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final KElement m = v.elementAt(i);
 			final String strName = m.getNodeName();
 			KElement mHere = null;
-			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO))
-					|| (strName.equals(ElementName.RESOURCEPOOL)) || (strName.equals(ElementName.RESOURCELINKPOOL))
-					|| (strName.equals(ElementName.ANCESTORPOOL)) || (strName.equals(ElementName.AUDITPOOL)))
+			if ((strName.equals(ElementName.NODEINFO)) || (strName.equals(ElementName.CUSTOMERINFO)) || (strName.equals(ElementName.RESOURCEPOOL))
+					|| (strName.equals(ElementName.RESOURCELINKPOOL)) || (strName.equals(ElementName.ANCESTORPOOL)) || (strName.equals(ElementName.AUDITPOOL)))
 			{
 				mHere = getElement_JDFElement(m.getNodeName(), null, 0);
 			}
@@ -5192,8 +5182,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				final JDFResourceLink resLink = (JDFResourceLink) v.elementAt(i);
 
-				if (resLink != null && resLink.getrRef().equals(r.getID())
-						&& resLink.getNodeName().equals(r.getLinkString()))
+				if (resLink != null && resLink.getrRef().equals(r.getID()) && resLink.getNodeName().equals(r.getLinkString()))
 				{
 					return resLink;
 				}
@@ -5511,8 +5500,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	public boolean isGroupNode()
 	{
 		final EnumType type2 = getEnumType();
-		return EnumType.ProcessGroup.equals(type2) && !hasAttribute(AttributeName.TYPES)
-				|| EnumType.Product.equals(type2);
+		return EnumType.ProcessGroup.equals(type2) && !hasAttribute(AttributeName.TYPES) || EnumType.Product.equals(type2);
 	}
 
 	/**
@@ -6046,8 +6034,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (namIndex < 0)
 			{
 				final EnumType enumType = getEnumType();
-				if (enumType == null || enumType.equals(EnumType.ProcessGroup)
-						|| (enumType.equals(EnumType.Combined) && getEnumTypes() == null))
+				if (enumType == null || enumType.equals(EnumType.ProcessGroup) || (enumType.equals(EnumType.Combined) && getEnumTypes() == null))
 				{
 					return true;
 				}
@@ -6061,8 +6048,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 			for (int i = 0; i < dns; i++)
 			{
-				if ((doneNameList.elementAt(i)).intValue() == namIndex
-						&& (doneIndexList.elementAt(i)).intValue() == iIndex)
+				if ((doneNameList.elementAt(i)).intValue() == namIndex && (doneIndexList.elementAt(i)).intValue() == iIndex)
 				{
 					nOccur++; // this one is gone, try next
 					bTryNext = true;
@@ -6773,8 +6759,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					{
 						final JDFResourceLink rl = (JDFResourceLink) v.elementAt(i);
 						final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
-						if (combinedProcessIndex == null
-								|| (types != null && combinedProcessIndex.size() == types.size()))
+						if (combinedProcessIndex == null || (types != null && combinedProcessIndex.size() == types.size()))
 						{
 							// in case of multiple parts - grab root - else
 							// potential performance hit
@@ -6882,8 +6867,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	{
 		if (combinedProcessIndex < 0 || combinedProcessIndex >= getTypes().size())
 		{
-			throw new JDFException("appendNodeInfo: appending ni for non existing ccombinedProcessIndex:"
-					+ combinedProcessIndex + " types=" + getTypes());
+			throw new JDFException("appendNodeInfo: appending ni for non existing ccombinedProcessIndex:" + combinedProcessIndex + " types=" + getTypes());
 		}
 		if (getNodeInfo(combinedProcessIndex) != null)
 		{
@@ -7851,8 +7835,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			final JDFNode e = (JDFNode) v.elementAt(i);
 			String s = e.getJobPartID(false);
-			if (s.equals(JDFConstants.EMPTYSTRING)
-					|| s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
+			if (s.equals(JDFConstants.EMPTYSTRING) || s.substring(0, prefixSize).equals(idPrefix.substring(0, prefixSize)))
 			{
 				continue;
 			}
@@ -9229,8 +9212,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 		if (bCheckNodeStatus)
 		{
-			if (((stat == null) && (isLeaf)) || (stat == JDFNode.EnumNodeStatus.Waiting)
-					|| (stat == JDFNode.EnumNodeStatus.Ready))
+			if (((stat == null) && (isLeaf)) || (stat == JDFNode.EnumNodeStatus.Waiting) || (stat == JDFNode.EnumNodeStatus.Ready))
 			{
 				isProcStatOK = true;
 			}
@@ -9321,8 +9303,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 							final JDFElement.EnumNodeStatus statPart = niPart.getNodeStatus();
 
-							if ((statPart == JDFNode.EnumNodeStatus.Waiting)
-									|| (statPart == JDFNode.EnumNodeStatus.Ready))
+							if ((statPart == JDFNode.EnumNodeStatus.Waiting) || (statPart == JDFNode.EnumNodeStatus.Ready))
 							{
 								vamPartMaps.appendUnique(niPart.getPartMap());
 							}

@@ -303,8 +303,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				final double dd = StringUtil.parseDouble(w, -1.234567);
 				if (dd == -1.234567)
 				{
-					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName
-							+ " has an invalid value");
+					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName + " has an invalid value");
 				}
 
 				if (!bFound || dd < d)
@@ -349,8 +348,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				final double dd = StringUtil.parseDouble(w, -1.234567);
 				if (dd == -1.234567)
 				{
-					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName
-							+ " has an invalid value");
+					throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName + " has an invalid value");
 				}
 
 				d += dd;
@@ -379,8 +377,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 			d = StringUtil.parseDouble(w, -1.234567);
 			if (d == -1.234567)
 			{
-				throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName
-						+ " has an invalid value");
+				throw new JDFException("JDFResourceLink.getAmountPoolDouble: Attribute " + attName + " has an invalid value");
 			}
 			return d;
 		}
@@ -423,8 +420,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 			final JDFAmountPool ap = poolParent.getAmountPool();
 			final VElement vParts = ap == null ? new VElement() : ap.getChildElementVector(ElementName.PARTAMOUNT, null);
 
-			final boolean isWaste = vPart != null
-					&& vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
+			final boolean isWaste = vPart != null && vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "Waste"));
 			if (!isWaste && (vPart == null || !vPart.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"))))
 			{
 				vPart = new VJDFAttributeMap(vPart);
@@ -437,8 +433,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 				final VJDFAttributeMap partMapVector = pa.getPartMapVector();
 				if (isWaste)
 				{
-					final boolean hasCondition = partMapVector != null
-							&& partMapVector.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"));
+					final boolean hasCondition = partMapVector != null && partMapVector.subMap(new JDFAttributeMap(AttributeName.CONDITION, "*"));
 					if (!hasCondition)
 					{
 						continue;

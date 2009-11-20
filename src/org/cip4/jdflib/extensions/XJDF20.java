@@ -373,11 +373,14 @@ public class XJDF20 extends BaseElementWalker
 			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT)
 					|| rl.hasAttribute(AttributeName.MAXAMOUNT))
 			{
-				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
-				final JDFPartAmount pa = ap.appendPartAmount();
-				pa.copyAttribute(AttributeName.AMOUNT, rl);
-				pa.copyAttribute(AttributeName.ACTUALAMOUNT, rl);
-				pa.copyAttribute(AttributeName.MAXAMOUNT, rl);
+				//				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
+				//				final JDFPartAmount pa = ap.appendPartAmount();
+				//				pa.copyAttribute(AttributeName.AMOUNT, rl);
+				//				pa.copyAttribute(AttributeName.ACTUALAMOUNT, rl);
+				//				pa.copyAttribute(AttributeName.MAXAMOUNT, rl);
+				newLeaf.setAttribute(AttributeName.AMOUNT + "Good", rl.getAttribute(AttributeName.AMOUNT, null, null));
+				newLeaf.setAttribute(AttributeName.ACTUALAMOUNT + "Good", rl.getAttribute(AttributeName.ACTUALAMOUNT, null, null));
+				newLeaf.setAttribute(AttributeName.MAXAMOUNT + "Good", rl.getAttribute(AttributeName.MAXAMOUNT, null, null));
 			}
 		}
 		else
@@ -395,7 +398,9 @@ public class XJDF20 extends BaseElementWalker
 					}
 					if (map.isEmpty()) // no further subdevision - simply blast into leaf
 					{
-						newLeaf.setAttributes(pa);
+						newLeaf.setAttribute(AttributeName.AMOUNT + "Good", pa.getAttribute(AttributeName.AMOUNT, null, null));
+						newLeaf.setAttribute(AttributeName.ACTUALAMOUNT + "Good", pa.getAttribute(AttributeName.ACTUALAMOUNT, null, null));
+						newLeaf.setAttribute(AttributeName.MAXAMOUNT + "Good", pa.getAttribute(AttributeName.MAXAMOUNT, null, null));
 					}
 					else if (map.size() == 1 && map.containsKey(AttributeName.CONDITION))
 					{
@@ -419,11 +424,11 @@ public class XJDF20 extends BaseElementWalker
 					else
 					// retain ap
 					{
+						// TODO special handling for virtual parts
 						final KElement amountPool = newLeaf.getCreateElement("AmountPool");
 						pa = (JDFPartAmount) amountPool.copyElement(pa, null);
 						pa.setPartMap(map);
 					}
-					// TODO special handling for condition
 				}
 			}
 		}
@@ -483,7 +488,7 @@ public class XJDF20 extends BaseElementWalker
 		}
 		else
 		{
-			newLeaf.appendElement("Part"); // always append an empty part for null
+			newLeaf.getCreateElement("Part"); // always append an empty part for null
 		}
 	}
 
@@ -531,10 +536,10 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
-	 * @param newRoot
 	 * @param rl
 	 * @param linkTarget
 	 * @param xRoot
+	 * @return the vector of partitions
 	 */
 	protected VElement setResource(final JDFElement rl, final JDFResource linkTarget, final KElement xRoot)
 	{
@@ -2151,7 +2156,6 @@ public class XJDF20 extends BaseElementWalker
 					else
 					{
 						setResource(null, r, eNew);
-
 					}
 					r.deleteNode();
 					nRes++;

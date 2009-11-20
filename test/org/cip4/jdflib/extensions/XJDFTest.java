@@ -7,6 +7,7 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
@@ -63,6 +64,12 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
 		final JDFResource r3 = r2.addPartition(EnumPartIDKey.SheetName, "s1");
+		final JDFResource m = n.addResource("Media", null);
+		final JDFResource m2 = m.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		final JDFMedia m3 = (JDFMedia) m2.addPartition(EnumPartIDKey.SheetName, "s1");
+		m3.setMediaType(EnumMediaType.Plate);
+		r3.refElement(m3);
+
 		r3.setProductID("P1");
 		final JDFExposedMedia xm0 = (JDFExposedMedia) r3;
 		xm0.setPlateType(EnumPlateType.Dummy);
@@ -97,7 +104,6 @@ public class XJDFTest extends JDFTestCaseBase
 	 */
 	public void testMergeStripping()
 	{
-
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.Stripping);
 		JDFRunList rl = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
@@ -110,7 +116,8 @@ public class XJDFTest extends JDFTestCaseBase
 		xjdf20.mergeLayout = true;
 
 		e = xjdf20.makeNewJDF(n, null);
-		assertNotNull(e);
+		assertEquals(e.getXPathElementVector("//StrippingParams", -1).size(), 0);
+		assertEquals(e.getXPathElementVector("//Layout", -1).size(), 1);
 
 	}
 
@@ -176,6 +183,24 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		assertEquals(root.getType(), "Product");
 		assertEquals(root.getDescriptiveName(), "desc");
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFMedia()
+	{
+		testColorPool();
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(e);
+		d.write2File(sm_dirTestDataTemp + "Media.xjdf.jdf", 2, false);
+		final JDFNode root = d.getJDFRoot();
+		JDFResourceLink rl = root.getLink(0, "ExposedMedia", null, null);
+		JDFExposedMedia xm = (JDFExposedMedia) rl.getTarget();
+		JDFMedia m = xm.getMedia();
+		assertNotNull(m);
+		assertNotSame(m, m.getResourceRoot());
+		assertNotNull(((JDFMedia) m.getResourceRoot()).getMediaType());
 	}
 
 	/**

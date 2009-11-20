@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.VectorMap;
@@ -180,6 +181,8 @@ public class UnLinkFinder extends BaseElementWalker
 	 * erase all unlinked resources that are in n
 	 * 
 	 * @param n the node to clean
+	 * @param ref 
+	 * @param res 
 	 */
 	private void eraseUnlinked(final JDFNode n, final boolean ref, final boolean res)
 	{
@@ -300,7 +303,7 @@ public class UnLinkFinder extends BaseElementWalker
 			{
 				return false;
 			}
-			return (toCheck instanceof JDFResource) && ((JDFResource) toCheck).isResourceRoot();
+			return (toCheck instanceof JDFResource) && (toCheck.getParentNode() instanceof JDFResourcePool);
 		}
 	}
 

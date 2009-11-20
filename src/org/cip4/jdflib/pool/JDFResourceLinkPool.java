@@ -451,26 +451,33 @@ public class JDFResourceLinkPool extends JDFPool
 
 		// move the resource to the closest common ancestor if it is not already
 		// an ancestor of this
-		JDFNode parent = r.getParentJDF();
-
-		// move the resource to the closest common ancestor if it is not already
-		// an ancestor of this
-		while (parent != null && !parent.isAncestor(this))
+		VElement refs = r.getvHRefRes(true, true);
+		if (refs == null)
+			refs = new VElement();
+		refs.add(r);
+		for (int i = 0; i < refs.size(); i++)
 		{
-			parent = r.getParentJDF();
-			if (parent == null)
+			// move the resource to the closest common ancestor if it is not already
+			// an ancestor of this
+			JDFResource r2 = ((JDFResource) refs.get(i)).getResourceRoot();
+			JDFNode parent = r2.getParentJDF();
+			while (parent != null && !parent.isAncestor(this))
 			{
-				break;
-			}
+				parent = r2.getParentJDF();
+				if (parent == null)
+				{
+					break;
+				}
 
-			parent = parent.getParentJDF();
-			if (parent == null)
-			{
-				rl.deleteNode(); // cleanup
-				throw new JDFException("JDFResourceLink appendResource resource is not in the same document");
-			}
+				parent = parent.getParentJDF();
+				if (parent == null)
+				{
+					rl.deleteNode(); // cleanup
+					throw new JDFException("JDFResourceLink appendResource resource is not in the same document");
+				}
 
-			r = (JDFResource) parent.getCreateResourcePool().moveElement(r, null);
+				r2 = (JDFResource) parent.getCreateResourcePool().moveElement(r2, null);
+			}
 		}
 		return rl;
 	}
