@@ -85,6 +85,16 @@ import org.cip4.jdflib.core.VString;
  */
 public class XPathWalker extends BaseElementWalker
 {
+	/**
+	 *  the attribute names to set as [@att] rather than [n] if method=3
+	 */
+	public VString attNames = new VString("Name,ChannelType,ContactTypes,IDUsage", ",");
+
+	/**
+	 * the method to create xpaths
+	 */
+	public int method = 1;
+
 	protected class XPathBuilder
 	{
 		public XPathBuilder(KElement _e, int countSiblings, VString attName)
@@ -103,8 +113,6 @@ public class XPathWalker extends BaseElementWalker
 		 * Gets the XPath full tree representation of 'this'
 		 * 
 		 * @param relativeTo relative path to which to create an xpath
-		 * @param methCountSiblings , if 1 count siblings, i.e. add '[n]' if 0, only specify the path of parents if 2 or 3,
-		 *            add [@ID="id"]
 		 * 
 		 * @return String the XPath representation of 'this' e.g. <code>/root/parent/element</code><br>
 		 *         <code>null</code> if parent of this is null (e.g. called on rootnode)
@@ -173,32 +181,6 @@ public class XPathWalker extends BaseElementWalker
 	}
 
 	/**
-	 * @see org.cip4.jdflib.elementwalker.ElementWalker#walkTree(org.cip4.jdflib.core.KElement, KElement)
-	 * @param e
-	 * @return the number of elements traversed
-	 */
-	@Override
-	public int walkTree(KElement e, KElement trackElem)
-	{
-		XPathBuilder xb = new XPathBuilder(e, 3, new VString("Name,ChannelType,ContactTypes,IDUsage", ","));
-		String s = xb.buildXPath(null);
-		writer.println(s);
-		if (bAttribute)
-		{
-			VString vkeys = e.getAttributeVector();
-			Collections.sort(vkeys);
-			for (int i = 0; i < vkeys.size(); i++)
-			{
-				writer.print(s + "/@" + vkeys.get(i));
-				if (bAttributeValue)
-					writer.print(" = " + e.getAttribute(vkeys.get(i)));
-				writer.println();
-			}
-		}
-		return super.walkTree(e, trackElem);
-	}
-
-	/**
 	 * @param e
 	 * @return the number of xpaths
 	 */
@@ -211,15 +193,23 @@ public class XPathWalker extends BaseElementWalker
 	}
 
 	private File outTxt = null;
-	private final PrintWriter writer;
+	protected final PrintWriter writer;
 	boolean bAttribute = false;
 	boolean bAttributeValue = false;
 
+	/**
+	 * if true, include attributes
+	 * @param attribute
+	 */
 	public void setBAttribute(boolean attribute)
 	{
 		bAttribute = attribute;
 	}
 
+	/**
+	 * if true, include attribute values
+	 * @param attribute
+	 */
 	public void setBAttributeValue(boolean attribute)
 	{
 		bAttributeValue = attribute;
@@ -237,7 +227,7 @@ public class XPathWalker extends BaseElementWalker
 	}
 
 	/**
-	 * @param xpathOutput
+	 * @param w
 	 */
 	public XPathWalker(PrintWriter w)
 	{
@@ -252,4 +242,58 @@ public class XPathWalker extends BaseElementWalker
 		return (BaseWalkerFactory) theFactory;
 	}
 
+	/**
+	 * the link and ref walker
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	public class WalkAll extends BaseWalker
+	{
+		/**
+		 * fills this into the factory
+		 */
+		public WalkAll()
+		{
+			super(getFactory());
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e
+		 * @param trackElem
+		 * @return
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			XPathBuilder xb = new XPathBuilder(e, method, attNames);
+			String s = xb.buildXPath(null);
+			writer.println(s);
+			if (bAttribute)
+			{
+				VString vkeys = e.getAttributeVector();
+				Collections.sort(vkeys);
+				for (int i = 0; i < vkeys.size(); i++)
+				{
+					writer.print(s + "/@" + vkeys.get(i));
+					if (bAttributeValue)
+						writer.print(" = " + e.getAttribute(vkeys.get(i)));
+					writer.println();
+				}
+			}
+			return e;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return true;
+		}
+	}
 }

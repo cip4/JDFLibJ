@@ -13,6 +13,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -24,9 +25,11 @@ import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -44,6 +47,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 * if true, create the product, else ignore it
 	 */
 	public boolean createProduct = true;
+	public EnumVersion version = EnumVersion.Version_1_3;
 
 	/**
 	 * @param template the jdfdoc to fill this into
@@ -89,9 +93,34 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			mergeProductLinks(theNode, root);
 		}
-
+		cleanResources(theNode);
 		firstConvert = false;
 		return jdfDoc;
+	}
+
+	/**
+	 * @param theNode
+	 */
+	private void cleanResources(final JDFNode theNode)
+	{
+		final JDFResourceLinkPool rlp = theNode.getResourceLinkPool();
+		final VElement vRes = rlp == null ? null : rlp.getPoolChildren(null, null, null);
+		if (vRes != null)
+		{
+			for (int i = 0; i < vRes.size(); i++)
+			{
+				final JDFResourceLink rl = (JDFResourceLink) vRes.get(i);
+				final JDFResource r = rl.getLinkRoot();
+				if (r != null)
+				{
+					final EnumResStatus s = r.getStatusFromLeaves(false);
+					if (s != null)
+					{
+						r.setResStatus(s, false);
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -203,6 +232,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		parent.setType(EnumType.Product);
 		theNode = (JDFNode) parent.copyElement(theNode, null);
 		parent.moveAttribute(AttributeName.JOBID, theNode);
+		parent.moveAttribute(AttributeName.VERSION, theNode);
+		parent.setJobPartID("rootPart");
 		mergeProductLinks(theNode, parent);
 		return parent;
 	}
@@ -260,6 +291,15 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
+			final VElement v = trackElem.getChildElementVector(null, null);
+			for (int i = 0; i < v.size(); i++)
+			{
+				final KElement kk = v.get(i);
+				if (e.isEqual(kk))
+				{
+					return null;
+				}
+			}
 			cleanRefs(e, trackElem);
 			final KElement e2 = trackElem.copyElement(e, null);
 			e2.removeChildren(null, null, null); // will be copied later
@@ -329,8 +369,27 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			final JDFNode theNode = (JDFNode) trackElem;
 			theNode.setAttributes(e);
+			theNode.setVersion(version);
+			removeInheritedJobID(theNode);
 			theNode.setType(EnumType.ProcessGroup);
 			return theNode;
+		}
+
+		/**
+		 * @param theNode
+		 */
+		private void removeInheritedJobID(final JDFNode theNode)
+		{
+			final JDFNode parent = theNode.getParentJDF();
+			if (parent != null)
+			{
+				final String jobID = StringUtil.getNonEmpty(parent.getJobID(true));
+				final String myJobID = StringUtil.getNonEmpty(theNode.getJobID(false));
+				if (myJobID != null && myJobID.equals(jobID))
+				{
+					theNode.removeAttribute(AttributeName.JOBID);
+				}
+			}
 		}
 
 		/**
@@ -756,13 +815,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final JDFAttributeMap map = e.getAttributeMap();
 			map.remove(AttributeName.ID);
 			rl = theNode.getLink(newPartition, null);
-			if (rl != null)
-			{
-				moveToLink(partmap, map, AttributeName.AMOUNT);
-				moveToLink(partmap, map, AttributeName.ACTUALAMOUNT);
-				moveToLink(partmap, map, AttributeName.MAXAMOUNT);
+			moveToLink(partmap, map, AttributeName.AMOUNT);
+			moveToLink(partmap, map, AttributeName.ACTUALAMOUNT);
+			moveToLink(partmap, map, AttributeName.MAXAMOUNT);
 
-			}
 			newPartition.setAttributes(map);
 
 			return newPartition;
@@ -783,7 +839,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				pm.put("Condition", gw);
 				if (map.get(a + gw) != null)
 				{
-					rl.setAmountPoolAttribute(a, map.get(a + gw), null, pm);
+					if (rl != null)
+					{
+						rl.setAmountPoolAttribute(a, map.get(a + gw), null, pm);
+					}
 					map.remove(a + gw);
 				}
 			}
@@ -799,9 +858,11 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			final JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
 			final JDFResource r = (JDFResource) trackElem;
-			final JDFResource rPart = r.getCreatePartition(part.getPartMap(), part.guessPartIDKeys());
+			final JDFAttributeMap partMap = part.getPartMap();
+			final JDFResource rPart = r.getCreatePartition(partMap, part.guessPartIDKeys());
 			final JDFResourceLink rll = theNode.getLink(r, null);
-			if (rll != null)
+			final VJDFAttributeMap partMapVector = rll != null ? rll.getPartMapVector() : null;
+			if (rll != null && (partMapVector == null || !partMapVector.contains(partMap)))
 			{
 				rll.moveElement(part, null);
 			}
@@ -886,5 +947,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			return rPart;
 
 		}
+
 	}
+
 }

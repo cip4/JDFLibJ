@@ -127,10 +127,10 @@ public class RemovePrivate extends BaseElementWalker
 		{
 
 			final JDFElement j = (JDFElement) e1;
-			VString unknown = j.getUnknownAttributes(false, -1);
+			final VString unknown = j.getUnknownAttributes(false, -1);
 			if (unknown != null)
 			{
-				int uSiz = unknown.size();
+				final int uSiz = unknown.size();
 				for (int i = 0; i < uSiz; i++)
 				{
 					j.removeAttribute(unknown.stringAt(i));
@@ -147,12 +147,7 @@ public class RemovePrivate extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
-			if (!b)
-			{
-				return false;
-			}
-			return (toCheck instanceof JDFElement);
+			return true;
 		}
 	}
 
@@ -162,16 +157,8 @@ public class RemovePrivate extends BaseElementWalker
 	 * @author prosirai
 	 * 
 	 */
-	public class WalkPrivate extends BaseWalker
+	public class WalkPrivate extends WalkElement
 	{
-
-		/**
-		 * fills this into the factory
-		 */
-		public WalkPrivate()
-		{
-			super(getFactory());
-		}
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
@@ -182,12 +169,11 @@ public class RemovePrivate extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			if (!(e instanceof JDFElement) || !JDFConstants.JDFNAMESPACE.equals(e.getNamespaceURI()))
+			if (!JDFConstants.JDFNAMESPACE.equals(e.getNamespaceURI()))
 			{
 				e.deleteNode();
 				return null;
 			}
-
 			return e;
 		}
 

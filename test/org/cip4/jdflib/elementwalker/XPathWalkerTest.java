@@ -71,40 +71,73 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
- * @author prosirai
- * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class XPathWalkerTest extends JDFTestCaseBase
 {
+
+	private final String testFile = "matsch.jdf";
 
 	/**
 	 * @throws Exception
 	 */
 	public void testFile() throws Exception
 	{
-		VString vs = new VString();
-		vs.add("CAD_DieLayoutProduction.xjdf");
-		vs.add("CAD_ShapeDefProduction.xjdf");
-		vs.add("CAD_DieDesign.xjdf");
-		vs.add("CompletedShapeDef.xjdf");
-		for (int i = 0; i < vs.size(); i++)
+		String s = sm_dirTestData + File.separator + testFile;
+		JDFDoc d = new JDFParser().parseFile(s);
+		XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + File.separator + StringUtil.newExtension(testFile, "txt")));
+		w.setBAttribute(true);
+		w.setBAttributeValue(true);
+		w.walkAll(d.getRoot());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testRead() throws Exception
+	{
+		long n0 = System.currentTimeMillis();
+		testFile();
+		long n1 = System.currentTimeMillis();
+		System.out.println("create time: " + (n1 - n0));
+
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		File f = new File(sm_dirTestDataTemp + StringUtil.newExtension(testFile, "txt"));
+		BufferedReader r = new BufferedReader(new FileReader(f));
+		String s = r.readLine();
+		while (s != null)
 		{
-			String s = sm_dirTestDataTemp + File.separator + vs.get(i);
-			JDFDoc d = new JDFParser().parseFile(s);
-			XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + File.separator
-					+ StringUtil.newExtension(vs.get(i), "txt")));
-			w.setBAttribute(true);
-			w.setBAttributeValue(true);
-			// TODO w.walkAll(d.getRoot());
+			int neq = s.indexOf("=");
+			VString v = StringUtil.tokenize(s, "= ", false);
+			if (neq > 0 && v.size() == 1)
+				v.add("");
+			if (v.size() == 1)
+			{
+				n.getCreateXPathElement(v.get(0));
+			}
+			else
+			{
+				n.setXPathValue(v.get(0), v.get(1));
+			}
+			s = r.readLine();
 		}
+		long n2 = System.currentTimeMillis();
+		System.out.println("build time: " + (n2 - n1));
+		d.write2File(sm_dirTestDataTemp + StringUtil.newExtension(testFile, "new.jdf"), 0, true);
+		long n3 = System.currentTimeMillis();
+		System.out.println("write time: " + (n3 - n2));
 	}
 }

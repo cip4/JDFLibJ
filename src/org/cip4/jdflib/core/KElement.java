@@ -493,8 +493,7 @@ public class KElement extends ElementNSImpl
 		 */
 		public static boolean isRecursive(final EnumValidationLevel vl)
 		{
-			return EnumValidationLevel.RecursiveIncomplete.equals(vl)
-					|| EnumValidationLevel.RecursiveComplete.equals(vl);
+			return EnumValidationLevel.RecursiveIncomplete.equals(vl) || EnumValidationLevel.RecursiveComplete.equals(vl);
 		}
 
 		/**
@@ -514,8 +513,7 @@ public class KElement extends ElementNSImpl
 		 */
 		public static boolean isRequired(final EnumValidationLevel level)
 		{
-			return EnumValidationLevel.Complete.equals(level) || EnumValidationLevel.RecursiveComplete.equals(level)
-					|| EnumValidationLevel.NoWarnComplete.equals(level);
+			return EnumValidationLevel.Complete.equals(level) || EnumValidationLevel.RecursiveComplete.equals(level) || EnumValidationLevel.NoWarnComplete.equals(level);
 		}
 
 		/**
@@ -813,10 +811,7 @@ public class KElement extends ElementNSImpl
 								final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 								if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
 								{
-									throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: "
-											+ xmlnsPrefix(key)
-											+ "; existing URI: "
-											+ nsURI2
+									throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
 											+ "; attempting to set URI: " + nameSpaceURI);
 								}
 								try
@@ -876,12 +871,10 @@ public class KElement extends ElementNSImpl
 					{
 						final String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 
-						if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2)
-								&& !namespaceURI2.equals(nameSpaceURI))
+						if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURI))
 						{ // in case multiple namespace uris are defined for the
 							// same prefix, all we can do is to bail out loudly
-							throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: "
-									+ xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+							throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
 									+ "; attempting to set URI: " + nameSpaceURI);
 						}
 
@@ -1182,8 +1175,7 @@ public class KElement extends ElementNSImpl
 	 */
 	public static boolean isWildCard(final String nodeName)
 	{
-		return (nodeName == null) || (nodeName.length() < 2)
-				&& (nodeName.equals(JDFConstants.EMPTYSTRING) || nodeName.equals(JDFConstants.STAR));
+		return (nodeName == null) || (nodeName.length() < 2) && (nodeName.equals(JDFConstants.EMPTYSTRING) || nodeName.equals(JDFConstants.STAR));
 	}
 
 	/**
@@ -1593,8 +1585,7 @@ public class KElement extends ElementNSImpl
 				namespaceURI2 = StringUtil.getNonEmpty(namespaceURI2);
 				if (xmlnsPrefix != null && namespaceURI2 == null)
 				{
-					throw new JDFException("You tried to add an element \"" + elementName
-							+ "\" in an unspecified Namespace");
+					throw new JDFException("You tried to add an element \"" + elementName + "\" in an unspecified Namespace");
 				}
 				else if (namespaceURI2 != null)
 				{ // /////////////// we found an URI ////////////////
@@ -1800,7 +1791,7 @@ public class KElement extends ElementNSImpl
 		Node firstChildElement = getFirstChild();
 		while (firstChildElement != null)
 		{
-			if (firstChildElement.getNodeType() == Node.ELEMENT_NODE)
+			if (firstChildElement instanceof KElement)
 			{
 				return (KElement) firstChildElement;
 			}
@@ -1818,7 +1809,7 @@ public class KElement extends ElementNSImpl
 		Node nextSiblingElement = getNextSibling();
 		while (nextSiblingElement != null)
 		{
-			if (nextSiblingElement.getNodeType() == Node.ELEMENT_NODE)
+			if (nextSiblingElement instanceof KElement)
 			{
 				return (KElement) nextSiblingElement;
 			}
@@ -1836,7 +1827,7 @@ public class KElement extends ElementNSImpl
 		Node previousSiblingElement = getPreviousSibling();
 		while (previousSiblingElement != null)
 		{
-			if (previousSiblingElement.getNodeType() == Node.ELEMENT_NODE)
+			if (previousSiblingElement instanceof KElement)
 			{
 				return (KElement) previousSiblingElement;
 			}
@@ -2002,8 +1993,7 @@ public class KElement extends ElementNSImpl
 		final boolean bAlwaysFit = isWildCard(elementName) && isWildCard(nameSpaceURI);
 		while (e != null)
 		{
-			if ((bAlwaysFit || e.fitsName(elementName, nameSpaceURI))
-					&& (bHasNoMap || e.includesAttributes(mAttrib, bAnd)))
+			if ((bAlwaysFit || e.fitsName(elementName, nameSpaceURI)) && (bHasNoMap || e.includesAttributes(mAttrib, bAnd)))
 			{
 				// this guy is the one
 				v.add(e);
@@ -2056,8 +2046,7 @@ public class KElement extends ElementNSImpl
 		final boolean bAlwaysFit = isWildCard(elementName) && isWildCard(nameSpaceURI);
 		while (e != null)
 		{
-			if ((bAlwaysFit || e.fitsName_KElement(elementName, nameSpaceURI))
-					&& (bHasNoMap || e.includesAttributes(mAttrib, bAnd)))
+			if ((bAlwaysFit || e.fitsName_KElement(elementName, nameSpaceURI)) && (bHasNoMap || e.includesAttributes(mAttrib, bAnd)))
 			{
 				// this guy is the one
 				v.add(e);
@@ -2534,8 +2523,7 @@ public class KElement extends ElementNSImpl
 		for (int i = 0; i < vReqKeys.size() && vMissing.size() < nMax; i++)
 		{
 			final String req = vReqKeys.stringAt(i);
-			if (!vAtts.contains(prefix + req) && !vAtts.contains(req)
-					&& (!req.equals(JDFConstants.XMLNS) || super.getNamespaceURI() == null))
+			if (!vAtts.contains(prefix + req) && !vAtts.contains(req) && (!req.equals(JDFConstants.XMLNS) || super.getNamespaceURI() == null))
 			{
 				vMissing.addElement(prefix + req);
 			}
@@ -3909,8 +3897,7 @@ public class KElement extends ElementNSImpl
 	 */
 	private KElement replaceElement_isDocRoot(final KElement src)
 	{
-		if (!ContainerUtil.equals(getNodeName(), src.getNodeName())
-				|| !ContainerUtil.equals(getNamespaceURI(), src.getNamespaceURI()))
+		if (!ContainerUtil.equals(getNodeName(), src.getNodeName()) || !ContainerUtil.equals(getNamespaceURI(), src.getNamespaceURI()))
 		{
 			renameElement(src.getNodeName(), src.getNamespaceURI());
 		}
@@ -4237,8 +4224,7 @@ public class KElement extends ElementNSImpl
 			if (userData != null)
 			{
 				kRet = userData.getTarget(attVal);
-				if (kRet != null
-						&& ((bDirect && kRet.getParentNode_KElement() != this) || kRet.getOwnerDocument() != getOwnerDocument()))
+				if (kRet != null && ((bDirect && kRet.getParentNode_KElement() != this) || kRet.getOwnerDocument() != getOwnerDocument()))
 				{
 					kRet = null; // it is somewhere else, not a child of this!
 				}
@@ -4282,8 +4268,7 @@ public class KElement extends ElementNSImpl
 
 					if (e != null)
 					{
-						if ((bAlwaysFit || e.fitsName(nodeName, nameSpaceURI))
-								&& (e.includesAttribute(attName, attVal)))
+						if ((bAlwaysFit || e.fitsName(nodeName, nameSpaceURI)) && (e.includesAttribute(attName, attVal)))
 						{
 							kRet = e;
 						}
@@ -4371,8 +4356,7 @@ public class KElement extends ElementNSImpl
 	{
 		boolean fSuccess = false;
 
-		final String strNameSpace = (strPrefix == null || strPrefix.length() <= 0) ? JDFConstants.XMLNS : JDFConstants.XMLNS
-				+ JDFConstants.COLON + strPrefix;
+		final String strNameSpace = (strPrefix == null || strPrefix.length() <= 0) ? JDFConstants.XMLNS : JDFConstants.XMLNS + JDFConstants.COLON + strPrefix;
 
 		final String strOldNameSpaceURI = getInheritedAttribute(strNameSpace, null, JDFConstants.EMPTYSTRING);
 		final String myNameSpaceURI = getNamespaceURI();
@@ -4531,8 +4515,7 @@ public class KElement extends ElementNSImpl
 		}
 		catch (final IOException e)
 		{
-			strJdf = "### ERROR while serializing " + getClass().getName() + "(" + e.toString() + ": " + e.getMessage()
-					+ ")";
+			strJdf = "### ERROR while serializing " + getClass().getName() + "(" + e.toString() + ": " + e.getMessage() + ")";
 		}
 
 		return strJdf;
@@ -4767,8 +4750,7 @@ public class KElement extends ElementNSImpl
 	{
 		if (numChildElements_KElement(elementName, nameSpaceURI) >= maxAllowed)
 		{
-			throw new JDFException("KElement:appendElementN:" + " too many elements (>" + maxAllowed + ") of type"
-					+ nameSpaceURI + JDFConstants.COLON + elementName);
+			throw new JDFException("KElement:appendElementN:" + " too many elements (>" + maxAllowed + ") of type" + nameSpaceURI + JDFConstants.COLON + elementName);
 		}
 
 		return appendElement(elementName, nameSpaceURI);
@@ -5277,7 +5259,7 @@ public class KElement extends ElementNSImpl
 		// last element
 		if (bExplicitSkip)
 		{
-			final KElement e = getChildByTagName(newPath, null, iSkip, map, true, true);
+			final KElement e = getElement_KElement(newPath, null, iSkip);
 			if (e == null)
 			{
 				return null;
@@ -5435,25 +5417,25 @@ public class KElement extends ElementNSImpl
 		}
 		if (pos != -1)
 		{
-			final int n = numChildElements(newPath.substring(0, pos), null);
+			final int n = numChildElements_KElement(newPath.substring(0, pos), null);
 			for (int i = n; i < iSkip; i++)
 			{
 				appendElement(newPath.substring(0, pos), null);
 			}
-			e = getCreateElement(newPath.substring(0, pos), null, iSkip);
+			e = getCreateElement_KElement(newPath.substring(0, pos), null, iSkip);
 			if (attName != null && !e.hasAttribute(attName))
 			{
 				e.setAttribute(attName, attVal);
 			}
 			return e.getCreateXPathElement(newPath.substring(pos + 1));
 		}
-		final int n = numChildElements(newPath, null);
+		final int n = numChildElements_KElement(newPath, null);
 		for (int i = n; i < iSkip; i++)
 		{
 			appendElement(newPath, null);
 		}
-		final KElement newElem = getCreateElement(newPath, null, iSkip);
-		if (attName != null && !newElem.hasAttribute(attName))
+		final KElement newElem = getCreateElement_KElement(newPath, null, iSkip);
+		if (attName != null && !newElem.hasAttribute_KElement(attName, null, false))
 		{
 			newElem.setAttribute(attName, attVal);
 		}
@@ -5883,8 +5865,7 @@ public class KElement extends ElementNSImpl
 			{
 				parent = parent.getParentNode();
 			}
-			while (parent != null && newParentName != null && !newParentName.equals(JDFConstants.EMPTYSTRING)
-					&& !parent.getNodeName().equals(newParentName));
+			while (parent != null && newParentName != null && !newParentName.equals(JDFConstants.EMPTYSTRING) && !parent.getNodeName().equals(newParentName));
 
 			if (parent != null)
 			{
@@ -6559,8 +6540,7 @@ public class KElement extends ElementNSImpl
 					return false;
 				}
 				value = value.substring(1, value.length() - 1);
-				return value.equals("*") && hasAttribute_KElement(nam, null, false)
-						|| value.equals(getAttribute_KElement(nam));
+				return value.equals("*") && hasAttribute_KElement(nam, null, false) || value.equals(getAttribute_KElement(nam));
 			}
 		}
 		return false;

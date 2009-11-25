@@ -286,8 +286,8 @@ public class KElementTest extends JDFTestCaseBase
 	 */
 	public void testGetElementById()
 	{
-		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">"
-				+ "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>" + "</ELEM2>" + "</JDF>";
+		final String xmlString = "<JDF ID=\"Link20704459_000351\">" + "<ELEM2 ID=\"Link20704459_000352\">" + "<ELEM3 ID=\"Link20704459_000353\">" + "<Comment/>" + "</ELEM3>"
+				+ "</ELEM2>" + "</JDF>";
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -1040,8 +1040,7 @@ public class KElementTest extends JDFTestCaseBase
 
 		final DocumentJDFImpl doc0 = (DocumentJDFImpl) root.getOwnerDocument();
 
-		final Element newChild = doc0.createElementNS(docNS, myPrefix + JDFConstants.COLON
-				+ ElementName.RESOURCELINKPOOL);
+		final Element newChild = doc0.createElementNS(docNS, myPrefix + JDFConstants.COLON + ElementName.RESOURCELINKPOOL);
 		root.appendChild(newChild);
 
 		doc.write2File(sm_dirTestDataTemp + "NameSpace.jdf", 0, true);
@@ -1099,11 +1098,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(kElement3.getNamespaceURI().equals(cip4NameSpaceURI));
 		assertTrue(kElement3.getPrefix().equals(cip4Prefix1));
 
-		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" "
-				+ "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" "
-				+ "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">" + "<kElement0/>" + "<JDF:kElement1/>"
-				+ "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
+		final String jdfDocString = "<JDF ID=\"n051221_021145422_000005\" Version=\"1.3\" " + "xmlns=\"http://www.CIP4.org/JDFSchema_1_1\" "
+				+ "xmlns:JDF=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:JDFS=\"http://www.CIP4.org/JDFSchema_1_1\" " + "xmlns:jdf=\"http://www.CIP4.org/JDFSchema_1_1\">"
+				+ "<kElement0/>" + "<JDF:kElement1/>" + "<JDFS:kElement2/>" + "<jdf:kElement3/>" + "</JDF>";
 
 		final JDFParser p = new JDFParser();
 		final JDFDoc jdfDoc = p.parseString(jdfDocString);
@@ -1649,6 +1646,10 @@ public class KElementTest extends JDFTestCaseBase
 			}
 		}
 		root.setXPathAttribute("Foo3/@bar2", "bb");
+
+		root.setXPathAttribute("ParameterSet[@Name=\"foooo\"]/Parameter/foooo/@bar", "fnarf");
+		KElement fooo = root.getChildByTagName("foooo", null, 0, null, false, false);
+		assertEquals("fnarf", fooo.getAttribute("bar"));
 	}
 
 	/**
