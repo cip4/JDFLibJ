@@ -908,7 +908,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final JDFResource r = (JDFResource) k2;
 			final JDFResourceLink rl = theNode.getLink(r, null);
 			r.renameElement(ElementName.COLORPOOL, null);
-			rl.renameElement("ColorPoolLink", null);
+			if (rl != null)
+			{
+				rl.renameElement("ColorPoolLink", null);
+			}
 			return k2;
 		}
 	}
