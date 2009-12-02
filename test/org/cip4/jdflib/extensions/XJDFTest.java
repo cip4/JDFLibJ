@@ -102,6 +102,31 @@ public class XJDFTest extends JDFTestCaseBase
 
 	/**
 	 */
+	public void testXJDFRunList()
+	{
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.bMergeRunList = true;
+		n = new JDFDoc("JDF").getJDFRoot();
+		JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
+		JDFRunList rlr1 = rl.addPDF("test.pdf", 0, 2);
+		rlr1.getLayoutElement().setElementType(JDFLayoutElement.EnumElementType.Page);
+
+		rl.addPDF("test2.pdf", 3, 6);
+		e = xjdf20.makeNewJDF(n, null);
+		KElement rlSet = e.getXPathElement("ParameterSet[@Name=\"RunList\"]");
+		assertNotNull(rlSet);
+		KElement rl2 = rlSet.getXPathElement("Parameter/RunList");
+		assertNotNull(rl2);
+		assertNull(rl2.getElement("LayoutElement"));
+
+		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
+		JDFDoc d = xc.convert(e);
+		n = d.getJDFRoot();
+
+	}
+
+	/**
+	 */
 	public void testMergeStripping()
 	{
 		n = new JDFDoc("JDF").getJDFRoot();
@@ -113,7 +138,7 @@ public class XJDFTest extends JDFTestCaseBase
 		sp.refBinderySignature(bs);
 
 		XJDF20 xjdf20 = new XJDF20();
-		xjdf20.mergeLayout = true;
+		xjdf20.bMergeLayout = true;
 
 		e = xjdf20.makeNewJDF(n, null);
 		assertEquals(e.getXPathElementVector("//StrippingParams", -1).size(), 0);
@@ -340,9 +365,15 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFLayoutElement fsc = le.appendDependencies().appendLayoutElement();
 		fsc.setDescriptiveName("dep");
 		le.getDependencies().appendLayoutElement();
-		e = new XJDF20().makeNewJDF(n, null);
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.bMergeRunList = false;
+		e = xjdf20.makeNewJDF(n, null);
 		assertNotNull(e.getXPathAttribute("ParameterSet[@Usage=\"Input\"]/Parameter/LayoutElement/@Dependencies", null));
 
+		xjdf20 = new XJDF20();
+		xjdf20.bMergeRunList = true;
+		e = xjdf20.makeNewJDF(n, null);
+		assertNotNull(e.getXPathAttribute("ParameterSet[@Usage=\"Input\"]/Parameter/RunList/@Dependencies", null));
 	}
 
 	/**

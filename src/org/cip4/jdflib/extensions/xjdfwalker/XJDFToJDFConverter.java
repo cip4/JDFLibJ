@@ -3,6 +3,7 @@
  */
 package org.cip4.jdflib.extensions.xjdfwalker;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -31,6 +32,7 @@ import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -948,9 +950,66 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				}
 			}
 			return rPart;
+		}
+	}
 
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+	 */
+	public class WalkRunList extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFRunList;
 		}
 
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			splitLayoutElem(e);
+			return super.walk(e, trackElem);
+		}
+
+		/**
+		 * @param e
+		 */
+		private void splitLayoutElem(final KElement e)
+		{
+			if (!e.hasChildElement(ElementName.LAYOUTELEMENT, null))
+			{
+				KElement loe = e.appendElement(ElementName.LAYOUTELEMENT);
+				VString vAtt = loe.knownAttributes();
+				JDFAttributeMap map = e.getAttributeMap();
+				Iterator<String> it = map.getKeyIterator();
+				while (it.hasNext())
+				{
+					String s = it.next();
+					if (vAtt.contains(s))
+					{
+						loe.setAttribute(s, map.get(s));
+						e.removeAttribute(s);
+					}
+				}
+				VString vElm = loe.knownElements();
+				VElement vMyElm = e.getChildElementVector(null, null);
+				for (int i = 0; i < vMyElm.size(); i++)
+				{
+					if (vElm.contains(vMyElm.get(i).getLocalName()))
+					{
+						loe.moveElement(vMyElm.get(i), null);
+					}
+				}
+			}
+		}
 	}
 
 }

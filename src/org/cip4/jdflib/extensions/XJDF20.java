@@ -167,7 +167,11 @@ public class XJDF20 extends BaseElementWalker
 	/**
 	 * if true merge stripping and layout
 	 */
-	public boolean mergeLayout = true;
+	public boolean bMergeLayout = true;
+	/**
+	 * if true clean up runlist/LayoutElement
+	 */
+	public boolean bMergeRunList = true;
 	/**
 	 * set to update version stamps
 	 */
@@ -224,7 +228,7 @@ public class XJDF20 extends BaseElementWalker
 		walkingProduct = false;
 
 		PostXJDFWalker pw = new PostXJDFWalker(newRoot);
-		pw.mergeLayout = mergeLayout;
+		pw.mergeLayout = bMergeLayout;
 		pw.walkTreeKidsFirst(newRoot);
 
 		newRoot.eraseEmptyNodes(true);
@@ -370,8 +374,7 @@ public class XJDF20 extends BaseElementWalker
 		JDFAmountPool ap = (JDFAmountPool) rl.getElement(ElementName.AMOUNTPOOL);
 		if (ap == null)
 		{
-			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT)
-					|| rl.hasAttribute(AttributeName.MAXAMOUNT))
+			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT) || rl.hasAttribute(AttributeName.MAXAMOUNT))
 			{
 				//				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
 				//				final JDFPartAmount pa = ap.appendPartAmount();
@@ -622,8 +625,7 @@ public class XJDF20 extends BaseElementWalker
 		protected void moveAttribsToBase(final KElement xjdf, final KElement newResLeaf)
 		{
 			final String localName = xjdf.getLocalName();
-			final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName)
-					|| "Resource".equals(localName);
+			final boolean bRoot = "Intent".equals(localName) || "Parameter".equals(localName) || "Resource".equals(localName);
 			for (int i = 0; i < resAttribs.size(); i++)
 			{
 				if (newResLeaf.hasAttribute(resAttribs.stringAt(i)))
@@ -687,7 +689,6 @@ public class XJDF20 extends BaseElementWalker
 		{
 			final JDFElement je = (JDFElement) jdf;
 			makeRefElements(je);
-			je.removeAttribute(AttributeName.SPAWNID);
 			return super.walk(jdf, xjdf);
 		}
 
@@ -804,30 +805,19 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		protected boolean mustInline(final String refLocalName)
 		{
-			return ElementName.OBJECTRESOLUTION.equals(refLocalName)
-					|| ElementName.BARCODECOMPPARAMS.equals(refLocalName)
-					|| ElementName.BARCODEREPROPARAMS.equals(refLocalName)
-					|| ElementName.COMCHANNEL.equals(refLocalName)
-					|| ElementName.INTERPRETEDPDLDATA.equals(refLocalName) || ElementName.BYTEMAP.equals(refLocalName)
-					|| ElementName.COMPANY.equals(refLocalName) || ElementName.COSTCENTER.equals(refLocalName)
-					|| ElementName.ADDRESS.equals(refLocalName) || ElementName.PERSON.equals(refLocalName)
-					|| ElementName.DEVICE.equals(refLocalName) || ElementName.DEVICENSPACE.equals(refLocalName)
-					|| ElementName.COLORANTALIAS.equals(refLocalName) || ElementName.GLUELINE.equals(refLocalName)
-					|| ElementName.GLUEAPPLICATION.equals(refLocalName)
-					|| ElementName.CIELABMEASURINGFIELD.equals(refLocalName)
-					|| ElementName.REGISTERMARK.equals(refLocalName) || ElementName.FITPOLICY.equals(refLocalName)
-					|| ElementName.CUTBLOCK.equals(refLocalName) || ElementName.EMPLOYEE.equals(refLocalName)
-					|| ElementName.ELEMENTCOLORPARAMS.equals(refLocalName) || ElementName.CUT.equals(refLocalName)
-					|| ElementName.PDLRESOURCEALIAS.equals(refLocalName) || ElementName.HOLELIST.equals(refLocalName)
-					|| ElementName.HOLE.equals(refLocalName) || ElementName.MISDETAILS.equals(refLocalName)
-					|| ElementName.HOLELINE.equals(refLocalName) || ElementName.JOBFIELD.equals(refLocalName)
-					|| ElementName.OBJECTRESOLUTION.equals(refLocalName)
-					|| ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName)
-					|| ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName)
-					|| ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName)
-					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName)
-					|| ElementName.TRAPREGION.equals(refLocalName) || ElementName.TRANSFERCURVE.equals(refLocalName)
-					|| ElementName.COLORCONTROLSTRIP.equals(refLocalName);
+			return ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.BARCODECOMPPARAMS.equals(refLocalName) || ElementName.BARCODEREPROPARAMS.equals(refLocalName)
+					|| ElementName.COMCHANNEL.equals(refLocalName) || ElementName.INTERPRETEDPDLDATA.equals(refLocalName) || ElementName.BYTEMAP.equals(refLocalName)
+					|| ElementName.COMPANY.equals(refLocalName) || ElementName.COSTCENTER.equals(refLocalName) || ElementName.ADDRESS.equals(refLocalName)
+					|| ElementName.PERSON.equals(refLocalName) || ElementName.DEVICE.equals(refLocalName) || ElementName.DEVICENSPACE.equals(refLocalName)
+					|| ElementName.COLORANTALIAS.equals(refLocalName) || ElementName.GLUELINE.equals(refLocalName) || ElementName.GLUEAPPLICATION.equals(refLocalName)
+					|| ElementName.CIELABMEASURINGFIELD.equals(refLocalName) || ElementName.REGISTERMARK.equals(refLocalName) || ElementName.FITPOLICY.equals(refLocalName)
+					|| ElementName.CUTBLOCK.equals(refLocalName) || ElementName.EMPLOYEE.equals(refLocalName) || ElementName.ELEMENTCOLORPARAMS.equals(refLocalName)
+					|| ElementName.CUT.equals(refLocalName) || ElementName.PDLRESOURCEALIAS.equals(refLocalName) || ElementName.HOLELIST.equals(refLocalName)
+					|| ElementName.HOLE.equals(refLocalName) || ElementName.MISDETAILS.equals(refLocalName) || ElementName.HOLELINE.equals(refLocalName)
+					|| ElementName.JOBFIELD.equals(refLocalName) || ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName)
+					|| ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName) || ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName)
+					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName)
+					|| ElementName.TRANSFERCURVE.equals(refLocalName) || ElementName.COLORCONTROLSTRIP.equals(refLocalName);
 		}
 
 		/**
@@ -839,6 +829,17 @@ public class XJDF20 extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFElement;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkElement#removeUnused(org.cip4.jdflib.core.KElement)
+		 * @param newRootP
+		*/
+		@Override
+		protected void removeUnused(KElement newRootP)
+		{
+			newRootP.removeAttribute(AttributeName.SPAWNID);
+			super.removeUnused(newRootP);
 		}
 	}
 
@@ -1069,8 +1070,7 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		private void setRootAttributes(final JDFNode node, final KElement newRootP)
 		{
-			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: "
-					+ JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
 			newRootP.setAttribute(AttributeName.JOBID, node.getJobID(true));
 
 			final JDFNodeInfo ni = node.getCreateNodeInfo();
@@ -1086,22 +1086,16 @@ public class XJDF20 extends BaseElementWalker
 			newRootP.setAttributes(node);
 
 			// status is set only in the NodeInfo
-			newRootP.removeAttribute(AttributeName.STATUS);
-			newRootP.removeAttribute(AttributeName.STATUSDETAILS);
+			removeUnused(newRootP);
+
 			if (bUpdateVersion)
 			{
 				newRootP.setAttribute("Version", "2.0");
 				newRootP.setAttribute("MaxVersion", "2.0");
 			}
-			if (!newRootP.hasAttribute(AttributeName.TYPES))
-			{
-				newRootP.renameAttribute("Type", "Types", null, null);
-			}
-			else
-			{
-				newRootP.removeAttribute("Type");
-			}
-			newRootP.removeAttribute(AttributeName.ACTIVATION);
+
+			updateTypes(newRootP);
+
 			if (node.hasAttribute(AttributeName.NAMEDFEATURES))
 			{
 				final VString vnf = node.getNamedFeatures();
@@ -1117,6 +1111,33 @@ public class XJDF20 extends BaseElementWalker
 			}
 
 			updateSpawnInfo(node, newRootP);
+		}
+
+		/**
+		 * @param newRootP
+		 */
+		@Override
+		protected void removeUnused(final KElement newRootP)
+		{
+			newRootP.removeAttribute(AttributeName.STATUS);
+			newRootP.removeAttribute(AttributeName.STATUSDETAILS);
+			newRootP.removeAttribute(AttributeName.ACTIVATION);
+			super.removeUnused(newRootP);
+		}
+
+		/**
+		 * @param newRootP
+		 */
+		private void updateTypes(final KElement newRootP)
+		{
+			if (!newRootP.hasAttribute(AttributeName.TYPES))
+			{
+				newRootP.renameAttribute("Type", "Types", null, null);
+			}
+			else
+			{
+				newRootP.removeAttribute("Type");
+			}
 		}
 
 		/**
@@ -1253,10 +1274,13 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	protected class WalkElement extends BaseWalker
 	{
+		boolean bMerge;
+
 		@SuppressWarnings("synthetic-access")
 		public WalkElement()
 		{
 			super(getFactory());
+			bMerge = false;
 		}
 
 		/**
@@ -1266,10 +1290,18 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
-			final KElement eNew = xjdf.copyElement(jdf, null);
-			eNew.removeChildren(null, null, null);
+			final KElement eNew = bMerge ? xjdf : xjdf.appendElement(jdf.getNodeName(), jdf.getNamespaceURI());
+
+			eNew.setAttributes(jdf);
+			removeUnused(eNew);
 			return eNew;
 		}
+
+		protected void removeUnused(final KElement newRootP)
+		{
+			newRootP.removeAttribute(AttributeName.XSITYPE);
+		}
+
 	}
 
 	/**
@@ -1303,8 +1335,7 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool
-					|| toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged;
+			return toCheck instanceof JDFAncestorPool || toCheck instanceof JDFResourcePool || toCheck instanceof JDFSpawned || toCheck instanceof JDFMerged;
 		}
 	}
 
@@ -1655,8 +1686,7 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		protected boolean mustInline(final String refLocalName)
 		{
-			final boolean b = ElementName.LAYERLIST.equals(refLocalName)
-					|| ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName)
+			final boolean b = ElementName.LAYERLIST.equals(refLocalName) || ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName)
 					|| ElementName.MARKOBJECT.equals(refLocalName) || ElementName.LAYERDETAILS.equals(refLocalName);
 			return b || super.mustInline(refLocalName);
 		}
@@ -1817,8 +1847,7 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return (toCheck instanceof JDFRunList) || (toCheck instanceof JDFCuttingParams)
-					|| (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
+			return (toCheck instanceof JDFCuttingParams) || (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
 		}
 
 		/**
@@ -2042,6 +2071,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	protected class WalkMediaRefByType extends WalkResource
 	{
+
 		/**
 		 * 
 		 */
@@ -2069,10 +2099,97 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return (toCheck instanceof JDFInterpretingParams) || (toCheck instanceof JDFLayout)
-					|| (toCheck instanceof JDFStrippingParams); // TODO|| (toCheck
+			return (toCheck instanceof JDFInterpretingParams) || (toCheck instanceof JDFLayout) || (toCheck instanceof JDFStrippingParams); // TODO|| (toCheck
 			// instanceof
 			// JDFRasterReadingParams);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkRunList extends WalkInlineAllRes
+	{
+		/**
+		 * 
+		 */
+		public WalkRunList()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			return super.walk(jdf, xjdf);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFRunList);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkLayoutElement extends WalkInlineAllRes
+	{
+		/**
+		 * 
+		 */
+		public WalkLayoutElement()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFLayoutElement);
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			KElement parent = jdf.getParentNode_KElement();
+			boolean bInRunList = parent instanceof JDFRunList;
+			if (bInRunList)
+				bMerge = bMergeRunList;
+			else
+				bMerge = false;
+			KElement ret = super.walk(jdf, xjdf);
+			if (!bInRunList && bMergeRunList)
+			{
+				KElement retPar = ret.getDeepParent("ParameterSet", 0);
+				if (retPar != null)
+					retPar.setAttribute("Name", "RunList");
+				ret.renameElement("RunList", null);
+			}
+			return ret;
 		}
 	}
 
@@ -2116,8 +2233,7 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		private void setRootAttributes(final JDFJMF jmf, final KElement newRootP)
 		{
-			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: "
-					+ JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
+			newRootP.appendXMLComment("Very preliminary experimental prototype trial version: using: " + JDFAudit.getStaticAgentName() + " " + JDFAudit.getStaticAgentVersion(), null);
 			if (bUpdateVersion)
 			{
 				newRootP.setAttribute("Version", "2.0");
