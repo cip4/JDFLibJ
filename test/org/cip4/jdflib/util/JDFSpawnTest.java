@@ -159,9 +159,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 		final String fileURL = "C:\\testJDF.jdf";
 
-		final long currentTimeMillis = System.currentTimeMillis();
+		long endSpawnTime = System.currentTimeMillis();
+		final long currentTimeMillis = endSpawnTime;
 		final JDFNode nested_spawn_node = new JDFSpawn(subjdfDocRoot).spawn(fileURL, fileURL, vRWResources, vspawnPartsMap, false, true, true, true);
-		System.out.println("Spawning took " + (System.currentTimeMillis() - currentTimeMillis));
+		System.out.println("Spawning took " + (endSpawnTime - currentTimeMillis));
 		assertNotNull(nested_spawn_node);
 		final JDFMerge merge = new JDFMerge(subjdfDocRoot);
 
@@ -169,7 +170,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		merge.bUpdateStati = true;
 		final JDFNode nodeM = merge.mergeJDF(nested_spawn_node, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
 		assertNotNull(nodeM);
-		System.out.println("Spawning and Merging took " + (System.currentTimeMillis() - currentTimeMillis));
+		System.out.println("Merging took " + (endSpawnTime - endSpawnTime));
 	}
 
 	/**
@@ -1444,8 +1445,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFAuditPool auditPoolMerged = jobPart.getAuditPool();
 			if (i == 0)
 			{
-				assertEquals(((JDFProcessRun) auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null)
-						.getTimeStampDate());
+				assertEquals(((JDFProcessRun) auditPoolMerged.getAudit(0, EnumAuditType.ProcessRun, null, null)).getSubmissionTime(), n.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null).getTimeStampDate());
 			}
 			assertNotNull(auditPoolMerged.getAudit(3, EnumAuditType.Notification, null, null));
 			assertNull(auditPoolMerged.getAudit(4, EnumAuditType.Notification, null, null));
@@ -1657,7 +1657,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				final JDFSpawn spawn = new JDFSpawn(spawnNode);
 				final JDFNode jdfSpawned = spawn.spawn(sm_dirTestData + fileNameIn + ".jdf", null, null, null, false, true, true, true);
 
-				// verändertes Ausgangsfile rausschreiben
+				// verï¿½ndertes Ausgangsfile rausschreiben
 				rootIn.eraseEmptyNodes(true);
 				final String strXMLFileModified = fileNameIn + "_spawnedSource.xml";
 				jdfDocIn.write2File(sm_dirTestDataTemp + strXMLFileModified, 2, true);
@@ -2046,35 +2046,97 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFDoc jdfDoc = parser.parseFile(strJDFPath);
 		final JDFNode nodeRoot = jdfDoc.getJDFRoot();
 		final VElement vNodes = nodeRoot.getTree("JDF", null, null, false, false);
-		for (int i = 1; i < vNodes.size(); i++)
+		JDFSpawn spawn = null;
+		for (int j = 0; j < 2; j++)
 		{
-			JDFNode nodeProc = (JDFNode) vNodes.elementAt(i);
-			final String jobPartID = nodeProc.getJobPartID(false);
-			System.out.println("i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID);
-			final VString vsRWResourceIDs = new VString();
-			vsRWResourceIDs.add("Link84847227_000309");
-			vsRWResourceIDs.add("r85326439_027691");
-			vsRWResourceIDs.add("Output");
-			nodeProc = nodeRoot.getJobPart(jobPartID, null); // in case it was
-			// overwritten
-			// by a previos
-			// s-m
-			final JDFSpawn spawn = new JDFSpawn(nodeProc);
-			// JDFNode nodeProc = nodeRoot;
-			final JDFNode nodeSubJDF = spawn.spawn(strJDFPath, null, vsRWResourceIDs, null, true, true, true, true);
-			assertNotNull(nodeSubJDF);
+			long t0 = System.currentTimeMillis();
+			long t00 = t0;
+			for (int i = 1; i < vNodes.size(); i++)
+			{
+				JDFNode nodeProc = (JDFNode) vNodes.elementAt(i);
+				final String jobPartID = nodeProc.getJobPartID(false);
+				final VString vsRWResourceIDs = new VString();
+				vsRWResourceIDs.add("Link84847227_000309");
+				vsRWResourceIDs.add("r85326439_027691");
+				vsRWResourceIDs.add("Output");
+				nodeProc = nodeRoot.getJobPart(jobPartID, null); // in case it was
+				// overwritten by a previous s-m
+				if (i == 1 || j == 1)
+					spawn = new JDFSpawn(nodeProc);
+				else if (spawn != null)
+					spawn.setNode(nodeProc);
+				else
+					fail("whazzup?");
 
-			nodeSubJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "manySub" + i + ".jdf", 2, true);
-			jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany" + i + ".jdf", 2, true);
+				final JDFNode nodeSubJDF = spawn.spawn(strJDFPath, null, vsRWResourceIDs, null, true, true, true, true);
+				assertNotNull(nodeSubJDF);
 
-			assertEquals(nodeProc.getID(), nodeSubJDF.getID());
-			final JDFDoc d2 = parser.parseFile(sm_dirTestDataTemp + "manySub" + i + ".jdf");
-			assertNotNull("The subjdf could be parsed!", d2);
-			final String spawnID = nodeSubJDF.getSpawnID(false);
-			final JDFMerge m = new JDFMerge(nodeRoot);
-			assertTrue(nodeRoot.toString().indexOf(spawnID) > 0);
-			m.mergeJDF(nodeSubJDF, "dummy", EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
-			assertTrue(nodeRoot.toString().indexOf(spawnID) < 0);
+				nodeSubJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "manySub" + i + ".jdf", 2, true);
+				jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany" + i + ".jdf", 2, true);
+
+				assertEquals(nodeProc.getID(), nodeSubJDF.getID());
+				final JDFDoc d2 = parser.parseFile(sm_dirTestDataTemp + "manySub" + i + ".jdf");
+				assertNotNull("The subjdf could be parsed!", d2);
+				final String spawnID = nodeSubJDF.getSpawnID(false);
+				long t1 = System.currentTimeMillis();
+				final JDFMerge m = new JDFMerge(nodeRoot);
+				assertTrue(nodeRoot.toString().indexOf(spawnID) > 0);
+				m.mergeJDF(nodeSubJDF, "dummy", EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
+				assertTrue(nodeRoot.toString().indexOf(spawnID) < 0);
+				long t2 = System.currentTimeMillis();
+				System.out.println("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Merge: " + (t2 - t1)
+						+ " total " + (t2 - t00));
+				t0 = t2;
+			}
+			jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	public void testManySpawnInformative()
+	{
+		final String strJDFName = "000023_Test_PR3.0.jdf";
+		// final String strJDFName = "biginline.jdf";
+		final String strJDFPath = sm_dirTestData + strJDFName;
+		final JDFParser parser = new JDFParser();
+		final JDFDoc jdfDoc = parser.parseFile(strJDFPath);
+		final JDFNode nodeRoot = jdfDoc.getJDFRoot();
+		final VElement vNodes = nodeRoot.getTree("JDF", null, null, false, false);
+		for (int j = 0; j < 2; j++)
+		{
+			long t0 = System.currentTimeMillis();
+			long t00 = System.currentTimeMillis();
+			JDFSpawn spawn = null;
+			for (int i = 1; i < vNodes.size(); i++)
+			{
+				JDFNode nodeProc = (JDFNode) vNodes.elementAt(i);
+				final String jobPartID = nodeProc.getJobPartID(false);
+				final VString vsRWResourceIDs = new VString();
+				vsRWResourceIDs.add("Link84847227_000309");
+				vsRWResourceIDs.add("r85326439_027691");
+				vsRWResourceIDs.add("Output");
+				nodeProc = nodeRoot.getJobPart(jobPartID, null); // in case it was
+				// overwritten by a previous s-m
+				if (i == 1 || j == 1)
+					spawn = new JDFSpawn(nodeProc);
+				else if (spawn != null)
+					spawn.setNode(nodeProc);
+				else
+					fail("whazzup?");
+				final JDFNode nodeSubJDF = spawn.spawnInformative(strJDFPath, null, null, true, true, true, true);
+				assertNotNull(nodeSubJDF);
+
+				nodeSubJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "manySubInf" + i + "." + j + ".jdf", 2, true);
+				assertEquals(nodeProc.getID(), nodeSubJDF.getID());
+				final JDFDoc d2 = parser.parseFile(sm_dirTestDataTemp + "manySubInf" + i + "." + j + ".jdf");
+				assertNotNull("The subjdf could be parsed!", d2);
+				long t1 = System.currentTimeMillis();
+				System.out.println("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time: " + (t1 - t0) + " total " + (t1 - t00));
+				t0 = t1;
+			}
 		}
 		jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
 
@@ -2280,7 +2342,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				final XMLDoc docOut = rootOut.getOwnerDocument_KElement();
 				docOut.write2File(sm_dirTestDataTemp + strSpawnedFile, 0, true);
 
-				// verändertes Ausgangsfile rausschreiben
+				// verï¿½ndertes Ausgangsfile rausschreiben
 				rootIn.eraseEmptyNodes(true);
 				final String strXMLFileModified = "_" + strXMLFile;
 				jdfDocIn.write2File(sm_dirTestDataTemp + strXMLFileModified, 0, true);
@@ -2554,8 +2616,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		m_jdfDoc = p.parseFile(sm_dirTestDataTemp + m_xmlFile1);
 
-		assertNotNull(sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n" + "-o: output JDF;\n"
-				+ "-d: delete completed tasks from the output JDF\n", m_jdfDoc);
+		assertNotNull(sm_dirTestDataTemp + m_xmlFile1 + ": Parse Error\n" + "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n"
+				+ "-o: output JDF;\n" + "-d: delete completed tasks from the output JDF\n", m_jdfDoc);
 
 		final JDFParser p2 = new JDFParser();
 		m_jdfDoc2 = p2.parseFile(sm_dirTestDataTemp + m_xmlFile2);

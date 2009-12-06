@@ -653,12 +653,10 @@ public class KElement extends ElementNSImpl
 	 * @param bInherit search in parent elements as well
 	 * @return Node the DOMAttr node of the matching attribute
 	 */
-	public Attr getDOMAttr(final String attrib, final String nameSpaceURI, final boolean bInherit)
+	public Attr getDOMAttr(final String attrib, String nameSpaceURI, final boolean bInherit)
 	{
-		String nameSpaceURILocal = nameSpaceURI;
-
 		Attr a = null;
-		if ((nameSpaceURILocal == null) || nameSpaceURILocal.equals(JDFConstants.EMPTYSTRING))
+		if ((nameSpaceURI == null) || nameSpaceURI.equals(JDFConstants.EMPTYSTRING))
 		{
 			a = getAttributeNode(attrib);
 			if (a != null)
@@ -666,7 +664,7 @@ public class KElement extends ElementNSImpl
 				return a;
 			}
 
-			nameSpaceURILocal = null;
+			nameSpaceURI = null;
 
 			final String attribPrefix = xmlnsPrefix(attrib);
 			final String elementPrefix = getPrefix();
@@ -681,18 +679,18 @@ public class KElement extends ElementNSImpl
 
 			if ((a == null) && !attrib.startsWith(JDFConstants.XMLNS))
 			{
-				nameSpaceURILocal = getNamespaceURIFromPrefix(attribPrefix);
+				nameSpaceURI = getNamespaceURIFromPrefix(attribPrefix);
 			}
 		}
 
 		// either we have an explicit ns or we haven't found anything in dom
 		// level 1 - assume the namespace of this
-		if ((a == null) && (nameSpaceURILocal != null))
+		if ((a == null) && (nameSpaceURI != null))
 		{
 			// the xmlNSLocalName here is just in case - actually you shouldn't
 			// be calling both ns and prefix
-			a = getAttributeNodeNS(nameSpaceURILocal, KElement.xmlnsLocalName(attrib));
-			if ((a == null) && nameSpaceURILocal.equals(getNamespaceURI()))
+			a = getAttributeNodeNS(nameSpaceURI, KElement.xmlnsLocalName(attrib));
+			if ((a == null) && nameSpaceURI.equals(getNamespaceURI()))
 			{
 				a = getAttributeNodeNS(null, KElement.xmlnsLocalName(attrib));
 			}
@@ -704,7 +702,7 @@ public class KElement extends ElementNSImpl
 			final KElement parent = getParentNode_KElement();
 			if (parent != null)
 			{
-				return parent.getDOMAttr(attrib, nameSpaceURILocal, bInherit);
+				return parent.getDOMAttr(attrib, nameSpaceURI, bInherit);
 			}
 		}
 
@@ -872,8 +870,7 @@ public class KElement extends ElementNSImpl
 						final String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
 
 						if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURI))
-						{ // in case multiple namespace uris are defined for the
-							// same prefix, all we can do is to bail out loudly
+						{ // in case multiple namespace uris are defined for the same prefix, all we can do is to bail out loudly
 							throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
 									+ "; attempting to set URI: " + nameSpaceURI);
 						}
@@ -1223,6 +1220,7 @@ public class KElement extends ElementNSImpl
 	 */
 	public String getNamespaceURIFromPrefix(final String prefix)
 	{
+
 		String strNamespaceURI = null;
 		if (prefix == null || prefix.equals(JDFConstants.EMPTYSTRING))
 		{
@@ -1253,17 +1251,20 @@ public class KElement extends ElementNSImpl
 			{
 				return AttributeName.XMLNSURI;
 			}
+			DocumentJDFImpl documentJDFImpl = (DocumentJDFImpl) getOwnerDocument();
+			strNamespaceURI = documentJDFImpl.getNamespaceURIFromPrefix(prefix);
+			if (strNamespaceURI != null)
+				return strNamespaceURI;
 
 			final String elementPrefix = getPrefix();
 			if (prefix.equals(elementPrefix))
 			{
-				// we are checking an element or attribute with the same prefix
-				// as this.
-				// therefore we assume that the same NamespaceURI also applies,
-				// if it is set
+				// we are checking an element or attribute with the same prefix as this.
+				// therefore we assume that the same NamespaceURI also applies, if it is set
 				strNamespaceURI = getNamespaceURI();
 				if (strNamespaceURI != null)
 				{
+					documentJDFImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
 					return strNamespaceURI;
 				}
 			}
@@ -1273,6 +1274,7 @@ public class KElement extends ElementNSImpl
 			// found a decent URI
 			if (strNamespaceURI != null)
 			{
+				documentJDFImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
 				return strNamespaceURI;
 			}
 
@@ -1289,6 +1291,7 @@ public class KElement extends ElementNSImpl
 						strNamespaceURI = ati.getNamespaceURI();
 						if (strNamespaceURI != null)
 						{
+							documentJDFImpl.setNamespaceURIFromPrefix(prefix, strNamespaceURI);
 							return strNamespaceURI;
 						}
 					}
@@ -1733,42 +1736,37 @@ public class KElement extends ElementNSImpl
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */
-	public synchronized VElement getChildElementVector_KElement(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
+	public synchronized VElement getChildElementVector_KElement(String nodeName, String nameSpaceURI, JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize)
 	{
-		String nodeNameLocal = nodeName;
-		String nameSpaceURILocal = nameSpaceURI;
-		JDFAttributeMap mAttribLocal = mAttrib;
-
 		final VElement v = new VElement();
-		if (isWildCard(nodeNameLocal))
+		if (isWildCard(nodeName))
 		{
-			nodeNameLocal = null;
+			nodeName = null;
 		}
 
-		if (isWildCard(nameSpaceURILocal))
+		if (isWildCard(nameSpaceURI))
 		{
-			nameSpaceURILocal = null;
+			nameSpaceURI = null;
 		}
 
-		if (mAttribLocal != null && mAttribLocal.isEmpty())
+		if (mAttrib != null && mAttrib.isEmpty())
 		{
-			mAttribLocal = null;
+			mAttrib = null;
 		}
 
-		final boolean bAlwaysFit = nodeNameLocal == null && nameSpaceURILocal == null;
-		final boolean bMapEmpty = mAttribLocal == null;
+		final boolean bAlwaysFit = nodeName == null && nameSpaceURI == null;
+		final boolean bMapEmpty = mAttrib == null;
 
 		int iSize = 0;
 		KElement kElem = getFirstChildElement();
 
 		while (kElem != null)
 		{
-			if (bAlwaysFit || kElem.fitsName_KElement(nodeNameLocal, nameSpaceURILocal))
+			if (bAlwaysFit || kElem.fitsName_KElement(nodeName, nameSpaceURI))
 			{
-				if (bMapEmpty || kElem.includesAttributes(mAttribLocal, bAnd))
+				if (bMapEmpty || kElem.includesAttributes(mAttrib, bAnd))
 				{
 					v.addElement(kElem);
-
 					if (++iSize == maxSize)
 					{
 						break;

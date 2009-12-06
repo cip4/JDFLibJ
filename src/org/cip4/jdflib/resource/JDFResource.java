@@ -6139,12 +6139,10 @@ public class JDFResource extends JDFElement
 				return; // don't reset to current value - NOP
 			}
 			removeAttribute(AttributeName.LOCKED); // remove any value so that
-			// we only get a true from
-			// an inherited value
+			// we only get a true from an inherited value
 		}
 		if (value || getLocked())
-		{ // don't reset the default many times, but add false if true is
-			// inherited
+		{ // don't reset the default many times, but add false if true is inherited
 			setAttribute(AttributeName.LOCKED, value, null);
 		}
 	}

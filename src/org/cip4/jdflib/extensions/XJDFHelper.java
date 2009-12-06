@@ -37,6 +37,41 @@ public class XJDFHelper
 
 	}
 
+	/**
+	 * @param name 
+	 * @param iSkip 
+	 * @return the vector of parametersets and resourcesets
+	 */
+	public KElement getSet(String name, int iSkip)
+	{
+		KElement e = theXJDF.getFirstChildElement();
+		int n = 0;
+		while (e != null)
+		{
+			if (e.getLocalName().endsWith("Set") && (name == null || name.equals(e.getAttribute("Name", null, null))))
+			{
+				if (n++ == iSkip)
+				{
+					return e;
+				}
+			}
+			e = e.getNextSiblingElement();
+		}
+		return null;
+	}
+
+	/**
+	 * @param family 
+	 * @param name 
+	 * @return a new set element
+	 */
+	public KElement appendSet(String family, String name)
+	{
+		KElement newSet = theXJDF.appendElement(family + "Set");
+		newSet.setAttribute("Name", name);
+		return newSet;
+	}
+
 	protected KElement theXJDF;
 
 }

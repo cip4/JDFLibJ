@@ -2428,8 +2428,7 @@ public class JDFElement extends KElement
 	 * 
 	 * @default getChildrenByTagName(s,null,null, false, true, 0)
 	 */
-	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize,
-			final boolean bFollowRefs)
+	public VElement getChildrenByTagName(final String elementName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bDirect, final boolean bAnd, final int maxSize, final boolean bFollowRefs)
 	{
 		final VElement v = super.getChildrenByTagName_KElement(bFollowRefs ? null : elementName, nameSpaceURI, mAttrib, bDirect, bAnd, bFollowRefs ? -1 : maxSize);
 
@@ -3767,13 +3766,12 @@ public class JDFElement extends KElement
 	 * 
 	 * @default GetHRefs(null, false);
 	 */
-	public VString getHRefs(final VString vDoneRefs, final boolean bRecurse, final boolean bExpand)
+	public VString getHRefs(VString vDoneRefs, final boolean bRecurse, final boolean bExpand)
 	{
-		VString vDoneRefsLocal = vDoneRefs;
 
-		if (vDoneRefsLocal == null)
+		if (vDoneRefs == null)
 		{
-			vDoneRefsLocal = new VString();
+			vDoneRefs = new VString();
 		}
 
 		HashSet<String> h = new HashSet<String>();
@@ -3794,31 +3792,31 @@ public class JDFElement extends KElement
 		{
 			h = fillHashSet(AttributeName.RREF, null);
 		}
-		final int iFirstPos = vDoneRefsLocal.size(); // get the previous size
+		final int iFirstPos = vDoneRefs.size(); // get the previous size
 		final VString v2 = new VString();
 		if (h != null)
 		{
 			v2.addAll(h);
 		}
 
-		vDoneRefsLocal.appendUnique(v2); // get the new size
+		vDoneRefs.appendUnique(v2); // get the new size
 		if (bRecurse)
 		{
-			final int iLastPos = vDoneRefsLocal.size();
+			final int iLastPos = vDoneRefs.size();
 
 			// recurse only the new rrefs
 			for (int i = iFirstPos; i < iLastPos; i++)
 			{
-				final String s = vDoneRefsLocal.elementAt(i);
+				final String s = vDoneRefs.elementAt(i);
 				final KElement e = getTarget(s, AttributeName.ID);
 				if (e instanceof JDFElement)
 				{
-					vDoneRefsLocal = ((JDFElement) e).getHRefs(vDoneRefsLocal, true, bExpand);
+					vDoneRefs = ((JDFElement) e).getHRefs(vDoneRefs, true, bExpand);
 				}
 			}
 		}
 
-		return vDoneRefsLocal;
+		return vDoneRefs;
 	}
 
 	/**
@@ -4326,12 +4324,14 @@ public class JDFElement extends KElement
 				continue;
 			}
 
-			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFResource)
+			if (((EnumPoolType.ResourcePool.equals(poolType)) || (EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
+					&& e instanceof JDFResource)
 			{
 				continue;
 			}
 
-			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType))) && e instanceof JDFRefElement)
+			if (((EnumPoolType.ProductionIntent.equals(poolType)) || (EnumPoolType.RefElement.equals(poolType)) || (EnumPoolType.PipeParams.equals(poolType)))
+					&& e instanceof JDFRefElement)
 			{
 				continue;
 			}
@@ -4752,8 +4752,7 @@ public class JDFElement extends KElement
 	 * 
 	 * @default getChildWithMatchingAttribute(nodeName, attName, null, null, 0, true, EnumAttributeType.Any);
 	 */
-	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect,
-			final AttributeInfo.EnumAttributeType dataType)
+	public JDFElement getChildWithMatchingAttribute(final String nodeName, final String attName, final String nameSpaceURI, final String attVal, final int index, final boolean bDirect, final AttributeInfo.EnumAttributeType dataType)
 	{
 		final VElement v = getChildrenByTagName(nodeName, nameSpaceURI, null, bDirect, true, 0);
 		final int siz = v.size();

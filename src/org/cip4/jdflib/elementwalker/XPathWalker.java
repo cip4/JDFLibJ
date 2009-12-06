@@ -272,13 +272,13 @@ public class XPathWalker extends BaseElementWalker
 			writer.println(s);
 			if (bAttribute)
 			{
-				VString vkeys = e.getAttributeVector();
+				VString vkeys = e.getAttributeVector_KElement();
 				Collections.sort(vkeys);
 				for (int i = 0; i < vkeys.size(); i++)
 				{
 					writer.print(s + "/@" + vkeys.get(i));
 					if (bAttributeValue)
-						writer.print(" = " + e.getAttribute(vkeys.get(i)));
+						writer.print(" = " + e.getAttribute_KElement(vkeys.get(i)));
 					writer.println();
 				}
 			}

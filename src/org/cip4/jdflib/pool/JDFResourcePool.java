@@ -590,6 +590,7 @@ public class JDFResourcePool extends JDFPool
 	 */
 	public JDFResource getResourceByID(final String id)
 	{
+		//		System.out.println(id);
 		final KElement e = getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
 		return (e instanceof JDFResource) ? (JDFResource) e : null;
 

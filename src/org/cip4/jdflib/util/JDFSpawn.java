@@ -73,9 +73,11 @@
 package org.cip4.jdflib.util;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
@@ -95,6 +97,7 @@ import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.elementwalker.ResourceIDFinder;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
@@ -116,7 +119,9 @@ public class JDFSpawn
 {
 
 	private JDFNode node;
-
+	private JDFNode informativeRoot;
+	private final Map<JDFResource, VString> mapRefs;
+	private final Map<String, JDFResource> mapResources;
 	/**
 	 * if true, reduce read only partitions, else retain entire resource
 	 */
@@ -186,6 +191,23 @@ public class JDFSpawn
 	public JDFSpawn(final JDFNode nodeToSpawn)
 	{
 		node = nodeToSpawn;
+		informativeRoot = null;
+		mapRefs = new HashMap<JDFResource, VString>();
+		mapResources = new ResourceIDFinder().getMap(node.getJDFRoot());
+	}
+
+	/**
+	 * set the node to spawn
+	 * @param newNode the node to set
+	 * @throws JDFException if node is NOT in the same document as the initial node
+	 */
+	public void setNode(JDFNode newNode)
+	{
+		if (!newNode.getOwnerDocument().equals(node.getOwnerDocument()))
+		{
+			throw new JDFException("Setting illegal node in spawn");
+		}
+		node = newNode;
 	}
 
 	/**
@@ -452,13 +474,9 @@ public class JDFSpawn
 	}
 
 	/**
+	 * @param rootOut 
+	 * @param parent 
 	 * 
-	 * @param parent
-	 * @param url
-	 * @param vSpawnParts
-	 * @param bCopyNodeInfo
-	 * @param bCopyCustomerInfo
-	 * @param bCopyComments
 	 */
 	private void setSpawnParent(final JDFNode rootOut, final JDFNode parent)
 	{
@@ -540,7 +558,7 @@ public class JDFSpawn
 	 * add any resources that live in ancestor nodes to this node
 	 * 
 	 * @param spawnAudit :
-	 * @param root :
+	 * @param rootOut :
 	 * @return int number of resources added to the spawned node
 	 */
 	private int addSpawnedResources(final JDFNode rootOut, final JDFSpawned spawnAudit)
@@ -592,7 +610,7 @@ public class JDFSpawn
 				}
 				else if (liRoot instanceof JDFRefElement)
 				{
-					rRoot = (JDFResource) node.getTarget(refID, AttributeName.ID);
+					rRoot = getNodeResource(refID);
 					bResRW = resFitsRWRes(rRoot, vRWResources);
 				}
 
@@ -611,7 +629,7 @@ public class JDFSpawn
 				final HashSet<String> vvRW = new LinkedHashSet<String>();
 				if (rRoot == null)
 				{
-					rRoot = (JDFResource) node.getTarget(refID, AttributeName.ID);
+					rRoot = getNodeResource(refID);
 				}
 
 				// check for null and throw an exception in picky mode
@@ -758,6 +776,22 @@ public class JDFSpawn
 		}
 
 		return nSpawned;
+	}
+
+	/**
+	 * cache resources by id for performance
+	 * @param refID
+	 * @return
+	 */
+	private JDFResource getNodeResource(final String refID)
+	{
+		JDFResource rRoot = mapResources.get(refID);
+		if (rRoot == null)
+		{
+			rRoot = (JDFResource) node.getJDFRoot().getTarget(refID, AttributeName.ID);
+			mapResources.put(refID, rRoot);
+		}
+		return rRoot;
 	}
 
 	/**
@@ -1108,8 +1142,7 @@ public class JDFSpawn
 	 * @param identical
 	 * @return the reduced partitions
 	 */
-	private VElement reducePartitions(final JDFResource r, final String nodeName, final String nsURI, final VString partIDKeys, final int partIDPos, final JDFAttributeMap parentMap,
-			final VElement identical)
+	private VElement reducePartitions(final JDFResource r, final String nodeName, final String nsURI, final VString partIDKeys, final int partIDPos, final JDFAttributeMap parentMap, final VElement identical)
 	{
 		final VElement bad = new VElement();
 		final VElement children = r.getChildElementVector_KElement(nodeName, nsURI, null, true, -1);
@@ -1291,8 +1324,7 @@ public class JDFSpawn
 	 * @param vRWResources write resources
 	 * 
 	 */
-	private void copySpawnedResource(final JDFResourcePool p, final JDFResource r, JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources,
-			final HashSet<String> vRWIDs, final HashSet<String> vROIDs, final HashSet<String> allIDsCopied)
+	private void copySpawnedResource(final JDFResourcePool p, final JDFResource r, JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources, final HashSet<String> vRWIDs, final HashSet<String> vROIDs, final HashSet<String> allIDsCopied)
 	{
 		if (r == null)
 		{
@@ -1330,7 +1362,16 @@ public class JDFSpawn
 			allIDsCopied.add(rID);
 		}
 
-		final VString vs = r.getHRefs(new VString(), false, false);
+		VString vs = mapRefs.get(r);
+		if (vs == null)
+		{
+			vs = r.getHRefs(new VString(), false, false);
+			mapRefs.put(r, vs);
+		}
+		else
+		{
+			//			System.out.println("reuse" + r);
+		}
 		// add recursively copied resource references
 		final int size = vs.size();
 		for (int i = 0; i < size; i++)
@@ -1342,7 +1383,7 @@ public class JDFSpawn
 			{
 				// 071101 RP added r is by definition in the original document
 				// which also contains the rrefs elements
-				final JDFResource next = ((JDFNode) r.getDocRoot()).getTargetResource(id);
+				final JDFResource next = getNodeResource(id);
 
 				// and now all those interlinked resources
 				if (next != null)
@@ -1489,27 +1530,35 @@ public class JDFSpawn
 	public JDFNode spawnInformative()
 	{
 		bInformative = true;
-		final JDFDoc docNew = new JDFDoc(ElementName.JDF);
-		JDFNode rootOut = (JDFNode) docNew.getRoot();
-		final JDFNode thisRoot = node.getJDFRoot();
-		// merge this node into it
-		rootOut.mergeNode(thisRoot, false);
-		final JDFNode copyOfThis = rootOut.getChildJDFNode(node.getID(), false);
+		// only create a copy once
+		if (informativeRoot == null)
+		{
+			final JDFDoc docNew = new JDFDoc(ElementName.JDF);
+			informativeRoot = (JDFNode) docNew.getRoot();
+			final JDFNode thisRoot = node.getJDFRoot();
+			// merge this node into it
+			informativeRoot.mergeNode(thisRoot, false);
+			//		final JDFDoc docNew = node.getOwnerDocument_JDFElement().clone();
+			//		JDFNode rootOut = (JDFNode) docNew.getRoot();
+		}
+		final JDFNode copyOfThis = informativeRoot.getChildJDFNode(node.getID(), false);
 		final JDFNode tmp = node;
 		node = copyOfThis;
-		JDFNode nodeNew = null;
 		final VString vRWTmp = vRWResources_in;
 		final boolean spawnMultKeep = bSpawnRWPartsMultiple;
-		bSpawnRWPartsMultiple = true; // never check multiple resources when
-		// spawning informative - who cares
-		nodeNew = spawn();
-		bSpawnRWPartsMultiple = spawnMultKeep;
-		rootOut = nodeNew.getRoot();
-		rootOut.setActivation(EnumActivation.Informative);
-		node = tmp;
-
-		vRWResources_in = vRWTmp;
-
+		JDFNode nodeNew = null;
+		try
+		{
+			bSpawnRWPartsMultiple = true; // never check multiple resources when spawning informative - who cares
+			nodeNew = spawn();
+			nodeNew.setActivation(EnumActivation.Informative);
+		}
+		finally
+		{
+			node = tmp;
+			bSpawnRWPartsMultiple = spawnMultKeep;
+			vRWResources_in = vRWTmp;
+		}
 		return nodeNew;
 	}
 
@@ -1534,8 +1583,7 @@ public class JDFSpawn
 	 * @since 050831 added bCopyComments @ tbd enhance nested spawning of partitioned nodes default: spawn(parentURL, null, null, null, false, false, false,
 	 * false)
 	 */
-	public JDFNode spawn(final String _parentURL, final String _spawnURL, final VString _vRWResources_in, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly,
-			final boolean _bCopyNodeInfo, final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
+	public JDFNode spawn(final String _parentURL, final String _spawnURL, final VString _vRWResources_in, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly, final boolean _bCopyNodeInfo, final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
 	{
 		bCopyComments = _bCopyComments;
 		bCopyCustomerInfo = _bCopyCustomerInfo;
@@ -1571,8 +1619,7 @@ public class JDFSpawn
 	 * @default spawnInformative(parentURL, null, null, false, false, false, false);
 	 * 
 	 */
-	public JDFNode spawnInformative(final String _parentURL, final String _spawnURL, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly, final boolean _bCopyNodeInfo,
-			final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
+	public JDFNode spawnInformative(final String _parentURL, final String _spawnURL, final VJDFAttributeMap _vSpawnParts, final boolean _bSpawnROPartsOnly, final boolean _bCopyNodeInfo, final boolean _bCopyCustomerInfo, final boolean _bCopyComments)
 	{
 		bCopyComments = _bCopyComments;
 		bCopyCustomerInfo = _bCopyCustomerInfo;

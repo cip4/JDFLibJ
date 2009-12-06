@@ -171,6 +171,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * the mime bodypart that this document was parsed from
 	 */
 	public BodyPart m_Bodypart = null;
+	private final HashMap<String, String> nsMap;
 
 	private static final String jdfNSURI = JDFElement.getSchemaURL();
 
@@ -273,6 +274,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		super();
 		final Runtime rt = Runtime.getRuntime();
 		initialMem = rt.totalMemory() - rt.freeMemory();
+		nsMap = new HashMap<String, String>();
 	}
 
 	/**
@@ -343,7 +345,8 @@ public class DocumentJDFImpl extends DocumentImpl
 					classOfConstructor = getFactoryClass(namespaceURI, qualifiedName, localPart);
 					if (classOfConstructor != null)
 					{
-						final Class[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, };
+						final Class[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class,
+								java.lang.String.class, };
 
 						constructi = classOfConstructor.getDeclaredConstructor(constructorParameters);
 						putConstructorToHashMap(sm_hashCtorElementNS, qualifiedName, constructi);
@@ -401,8 +404,9 @@ public class DocumentJDFImpl extends DocumentImpl
 	 */
 	private boolean isSpecialClass(final String qualifiedName, final String className)
 	{
-		final boolean bSpecialClass = !className.endsWith("JDFResource") && !className.endsWith("JDFElement") && !className.endsWith("KElement") && !qualifiedName.equals("HoleType")
-				&& !qualifiedName.equals("Method") && !qualifiedName.equals("Shape") && !qualifiedName.equals("Position") && !qualifiedName.equals("Surface");
+		final boolean bSpecialClass = !className.endsWith("JDFResource") && !className.endsWith("JDFElement") && !className.endsWith("KElement")
+				&& !qualifiedName.equals("HoleType") && !qualifiedName.equals("Method") && !qualifiedName.equals("Shape") && !qualifiedName.equals("Position")
+				&& !qualifiedName.equals("Surface");
 		return bSpecialClass;
 	}
 
@@ -636,8 +640,7 @@ public class DocumentJDFImpl extends DocumentImpl
 			}
 			else
 			{
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) ? (String) sm_PackageNames.get("EleDefault") : (String) sm_PackageNames
-						.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) ? (String) sm_PackageNames.get("EleDefault") : (String) sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 
@@ -1488,6 +1491,28 @@ public class DocumentJDFImpl extends DocumentImpl
 	public void setIgnoreNSDefault(final boolean _setIgnoreNSDefault)
 	{
 		this.ignoreNSDefault = _setIgnoreNSDefault;
+	}
+
+	/**
+	 * @param prefix
+	 * @return
+	 */
+	public String getNamespaceURIFromPrefix(String prefix)
+	{
+		if (prefix == null)
+			prefix = JDFConstants.COLON;
+		return nsMap.get(prefix);
+	}
+
+	/**
+	 * @param prefix
+	 * @param strNamespaceURI
+	 */
+	public void setNamespaceURIFromPrefix(String prefix, String strNamespaceURI)
+	{
+		if (prefix == null)
+			prefix = JDFConstants.COLON;
+		nsMap.put(prefix, strNamespaceURI);
 	}
 
 }

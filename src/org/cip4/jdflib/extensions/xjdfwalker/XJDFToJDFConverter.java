@@ -980,6 +980,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		}
 
 		/**
+		 * split a RunList into a RunList and a RunList/LayoutElement
 		 * @param e
 		 */
 		private void splitLayoutElem(final KElement e)

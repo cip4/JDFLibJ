@@ -133,6 +133,7 @@ import org.cip4.jdflib.elementwalker.AttributeReplacerTest;
 import org.cip4.jdflib.elementwalker.BaseWalkerTest;
 import org.cip4.jdflib.elementwalker.LinkRefFinderTest;
 import org.cip4.jdflib.elementwalker.RemovePrivateTest;
+import org.cip4.jdflib.elementwalker.ResourceIDFinderTest;
 import org.cip4.jdflib.elementwalker.UnlinkFinderTest;
 import org.cip4.jdflib.elementwalker.XPathWalkerTest;
 import org.cip4.jdflib.examples.AmountTest;
@@ -150,6 +151,7 @@ import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.extensions.PartitionHelperTest;
 import org.cip4.jdflib.extensions.SetHelperTest;
+import org.cip4.jdflib.extensions.XJDFHelperTest;
 import org.cip4.jdflib.extensions.XJDFTest;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinderTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
@@ -332,6 +334,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(BaseWalkerTest.class);
 		suite.addTestSuite(LinkRefFinderTest.class);
 		suite.addTestSuite(RemovePrivateTest.class);
+		suite.addTestSuite(ResourceIDFinderTest.class);
 		suite.addTestSuite(UnlinkFinderTest.class);
 		suite.addTestSuite(XPathWalkerTest.class);
 
@@ -354,6 +357,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(IDFinderTest.class);
 		suite.addTestSuite(PartitionHelperTest.class);
 		suite.addTestSuite(SetHelperTest.class);
+		suite.addTestSuite(XJDFHelperTest.class);
 		suite.addTestSuite(XJDFTest.class);
 
 		// Golden tickets

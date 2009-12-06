@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -203,7 +203,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     */
+	 */
 	@Override
 	protected JDFNodeInfo initNodeInfo()
 	{
@@ -214,7 +214,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     */
+	 */
 	protected JDFCustomerInfo initCustomerInfo(final String firstame, final String lastame, final String companyName, final String jobName)
 	{
 		final JDFCustomerInfo ci = theNode.getCreateCustomerInfo();
@@ -248,8 +248,8 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	protected JDFColorIntent initColorIntent(final JDFNode node, final int front, final int back, @SuppressWarnings("unused") final String coatings)
 	{
 		final JDFColorIntent ci = (JDFColorIntent) node.addResource(ElementName.COLORINTENT, EnumUsage.Input);
@@ -283,8 +283,8 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	protected JDFLayoutIntent initLayoutIntent(final JDFNode node, final double xCM, final double yCM, final int pages, final int sides)
 	{
 		final JDFLayoutIntent loi = (JDFLayoutIntent) node.addResource(ElementName.LAYOUTINTENT, EnumUsage.Input);
@@ -297,8 +297,8 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	protected JDFFoldingIntent initFoldingIntent(final JDFNode node, final String foldCatalog)
 	{
 		final JDFFoldingIntent fi = (JDFFoldingIntent) node.addResource(ElementName.FOLDINGINTENT, EnumUsage.Input);

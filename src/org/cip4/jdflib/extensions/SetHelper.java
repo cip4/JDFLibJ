@@ -116,6 +116,9 @@ public class SetHelper
 		return v;
 	}
 
+	/**
+	 * 
+	 */
 	public void cleanUp()
 	{
 		if (!theSet.hasAttribute("Name"))

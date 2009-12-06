@@ -87,7 +87,9 @@ import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.VectorMap;
 
 /**
- * @author prosirai finds unlinked resources - example usage of the walker classes
+ * @author Dr. Rainer Prosi
+ * 
+ *  finds unlinked resources - example usage of the walker classes
  */
 public class UnLinkFinder extends BaseElementWalker
 {
