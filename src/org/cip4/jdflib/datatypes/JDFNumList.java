@@ -132,7 +132,10 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * @param v a vector with number list objects
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
+	 * @deprecated use typesafe constructors
 	 */
+	@SuppressWarnings("unchecked")
+	@Deprecated
 	public JDFNumList(final Vector v) throws DataFormatException
 	{
 		this.m_numList = v;
@@ -359,9 +362,10 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * 
 	 * @return Vector - the clone of the numList vector
 	 */
-	public Vector copyNumList()
+	@SuppressWarnings("unchecked")
+	public Vector<Object> copyNumList()
 	{
-		return (Vector) m_numList.clone();
+		return (Vector<Object>) m_numList.clone();
 	}
 
 	/**
@@ -370,11 +374,12 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * @return Object - the clone
 	 * @throws CloneNotSupportedException
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public Object clone() throws CloneNotSupportedException
 	{
 		final JDFNumList num = (JDFNumList) super.clone();
-		num.m_numList = ((Vector) (m_numList.clone()));
+		num.m_numList = ((Vector<Object>) m_numList.clone());
 		return num;
 	}
 
@@ -466,46 +471,51 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 
 	/**
 	 * scale all values of this to points from millimeters
+	 * @return 
 	 * 
 	 */
-	public void scaleFromMM()
+	public JDFNumList scaleFromMM()
 	{
-		scale(72 / 25.4);
+		return scale(72 / 25.4);
 	}
 
 	/**
 	 * scale all values of this to points from centimeters
+	 * @return 
 	 * 
 	 */
-	public void scaleFromCM()
+	public JDFNumList scaleFromCM()
 	{
-		scale(72 / 2.54);
+		return scale(72 / 2.54);
 	}
 
 	/**
 	 * scale all values of this to points from millimeters
+	 * @return 
 	 * 
 	 */
-	public void scaleToMM()
+	public JDFNumList scaleToMM()
 	{
-		scale(25.4 / 72);
+		return scale(25.4 / 72);
 	}
 
 	/**
 	 * scale all values of this to points from centimeters
+	 * @return 
 	 * 
 	 */
-	public void scaleToCM()
+	public JDFNumList scaleToCM()
 	{
-		scale(2.54 / 72);
+		return scale(2.54 / 72);
 	}
 
 	/**
 	 * scale all values of this by factor
 	 * 
 	 * @param factor
+	 * @return 
 	 */
-	public void scale(final double factor)
+	public JDFNumList scale(final double factor)
 	{
 		final int size = m_numList.size();
 		for (int i = 0; i < size; i++)
@@ -513,6 +523,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 			final double number = doubleAt(i) * factor;
 			m_numList.setElementAt(new Double(number), i);
 		}
+		return this;
 	}
 
 	/**

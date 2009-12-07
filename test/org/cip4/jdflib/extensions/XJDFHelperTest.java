@@ -88,7 +88,7 @@ public class XJDFHelperTest extends TestCase
 	 */
 	public void testGetSet()
 	{
-		KElement rlSet = theHelper.appendSet("Parameter", "RunList");
+		KElement rlSet = theHelper.appendSet("Parameter", "RunList").getSet();
 		assertEquals(rlSet, theHelper.getSet("RunList", 0));
 
 	}

@@ -487,6 +487,9 @@ public class XJDF20 extends BaseElementWalker
 		}
 		if (partMap != null && partMap.size() > 0 && newLeaf.getElement("Part") == null)
 		{
+			String sep = partMap.get(AttributeName.SEPARATION);
+			if (sep != null)
+				partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
 			newLeaf.appendElement("Part").setAttributes(partMap);
 		}
 		else
@@ -1638,7 +1641,9 @@ public class XJDF20 extends BaseElementWalker
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
 			final JDFSeparationSpec ss = (JDFSeparationSpec) jdf;
-			xjdf.appendAttribute("SeparationSpec", ss.getName(), null, " ", false);
+			String name = ss.getName();
+			name = StringUtil.replaceChar(name, ' ', "_", 0);
+			xjdf.appendAttribute("SeparationSpec", name, null, " ", false);
 			return null;
 		}
 
@@ -2044,11 +2049,12 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
-			final KElement k = super.walk(jdf, xjdf);
+			final JDFColor k = (JDFColor) super.walk(jdf, xjdf);
 			if (bHTMLColor)
 			{
 				k.setAttribute("HTMLColor", ((JDFColor) jdf).getHTMLColor());
 			}
+			k.setActualColorName(jdf.getAttribute("Separation", null, null));
 			return k;
 		}
 

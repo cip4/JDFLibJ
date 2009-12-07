@@ -131,6 +131,14 @@ public class PartitionHelper
 	/**
 	 * @return
 	 */
+	public KElement getPartition()
+	{
+		return thePartition;
+	}
+
+	/**
+	 * @return
+	 */
 	public KElement getResource()
 	{
 		KElement set = thePartition.getParentNode_KElement();

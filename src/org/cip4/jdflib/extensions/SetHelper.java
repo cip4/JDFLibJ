@@ -68,8 +68,10 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.util.StringUtil;
@@ -94,7 +96,7 @@ public class SetHelper
 	 * @param map
 	 * @return 
 	 */
-	public KElement getPartition(JDFAttributeMap map)
+	public PartitionHelper getPartition(JDFAttributeMap map)
 	{
 		VElement v = getPartitions();
 		for (int i = 0; i < v.size(); i++)
@@ -102,9 +104,35 @@ public class SetHelper
 			KElement part = v.get(i);
 			PartitionHelper ph = new PartitionHelper(part);
 			if (ph.matches(map))
-				return part;
+				return ph;
 		}
 		return null;
+	}
+
+	/**
+	 * @param map
+	 * @return 
+	 */
+	public PartitionHelper getCreatePartition(JDFAttributeMap map)
+	{
+		PartitionHelper e = getPartition(map);
+		if (e == null)
+			e = appendPartition(map);
+		return e;
+	}
+
+	/**
+	 * @param map
+	 * @return
+	 */
+	public PartitionHelper appendPartition(JDFAttributeMap map)
+	{
+		KElement newPart = theSet.appendElement(getPartitionName());
+		newPart.appendElement("Part").setAttributes(map);
+		String resName = getName();
+		if (resName != null)
+			newPart.appendElement(resName);
+		return new PartitionHelper(newPart);
 	}
 
 	/**
@@ -166,7 +194,7 @@ public class SetHelper
 	 * @param vmap
 	 * @return
 	 */
-	public KElement getPartition(VJDFAttributeMap vmap)
+	public PartitionHelper getPartition(VJDFAttributeMap vmap)
 	{
 		VElement v = getPartitions();
 		for (int i = 0; i < v.size(); i++)
@@ -174,8 +202,24 @@ public class SetHelper
 			KElement part = v.get(i);
 			PartitionHelper ph = new PartitionHelper(part);
 			if (ph.matches(vmap))
-				return part;
+				return ph;
 		}
 		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	public KElement getSet()
+	{
+		return theSet;
+	}
+
+	/**
+	 * @param value
+	 */
+	public void setUsage(EnumUsage value)
+	{
+		theSet.setAttribute(AttributeName.USAGE, value == null ? null : value.getName());
 	}
 }

@@ -69,7 +69,20 @@
 
 package org.cip4.jdflib.extensions;
 
-import junit.framework.TestCase;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
+import org.cip4.jdflib.node.JDFNode;
 
 /**
  * 
@@ -77,7 +90,80 @@ import junit.framework.TestCase;
  *
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XJDFCreatorTest extends TestCase
+public class XJDFCreatorTest extends JDFTestCaseBase
 {
 
+	KElement theXJDF = null;
+	XJDFHelper theHelper = null;
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testFromCPGoldenTicket()
+	{
+		MISCPGoldenTicket gt = new MISCPGoldenTicket(2, EnumVersion.Version_1_4, 2, 2, true, null);
+		gt.assign(null);
+		JDFNode n = gt.getNode();
+		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "cpGoldenTicket.jdf", 2, false);
+		XJDF20 jdfToXJD = new XJDF20();
+		jdfToXJD.bMergeLayout = true;
+		KElement xjdf = jdfToXJD.makeNewJDF(n, null);
+		XMLDoc d = xjdf.getOwnerDocument_KElement();
+		d.write2File(sm_dirTestDataTemp + "cpGoldenTicket.xjdf", 2, false);
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testFromCPFromScratch()
+	{
+		theHelper = new XJDFHelper(null);
+		theXJDF = theHelper.getRoot();
+		theXJDF.setAttribute("Types", "InkZoneCalculation ConventionalPrinting");
+		SetHelper nih = theHelper.appendParameter("NodeInfo");
+		nih.setUsage(EnumUsage.Input);
+		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
+		PartitionHelper niS1 = nih.getCreatePartition(sheetMap);
+		niS1.getResource().setAttribute("Amount", "5000");
+
+		SetHelper cpSetHelper = theHelper.appendResource(ElementName.CONVENTIONALPRINTINGPARAMS);
+		cpSetHelper.setUsage(EnumUsage.Input);
+		cpSetHelper.getCreatePartition(sheetMap).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+		SetHelper mediaSetHelper = theHelper.appendResource(ElementName.MEDIA);
+		mediaSetHelper.setUsage(EnumUsage.Input);
+		PartitionHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap);
+		KElement mediaPart = mediaHelper.getPartition();
+		mediaPart.setAttribute("Brand", "TestBrand");
+		mediaPart.setAttribute("ProductID", "ID");
+		KElement media = mediaHelper.getResource();
+		media.setAttribute("Dimension", new JDFXYPair(72, 49).scaleFromCM().toString(), null);
+		media.setAttribute(AttributeName.MEDIATYPE, EnumMediaType.Paper.getName());
+
+		theXJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "cpFromScratch.jdf", 2, false);
+	}
+
+	/**
+	 * @see junit.framework.TestCase#setUp()
+	 * @throws Exception
+	*/
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		theXJDF = new JDFDoc("XJDF").getRoot();
+		theHelper = new XJDFHelper(theXJDF);
+
+	}
+
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return "XJDFCreatorTest: " + theHelper;
+	}
 }

@@ -5,6 +5,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.XMLDoc;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -17,7 +18,7 @@ public class XJDFHelper
 	public XJDFHelper(KElement xjdf)
 	{
 		super();
-		this.theXJDF = xjdf;
+		this.theXJDF = xjdf == null ? new XMLDoc(XJDF20.rootName, null).getRoot() : xjdf;
 	}
 
 	/**
@@ -35,6 +36,15 @@ public class XJDFHelper
 		}
 		return v.size() == 0 ? null : v;
 
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public KElement getRoot()
+	{
+		return theXJDF;
 	}
 
 	/**
@@ -65,13 +75,40 @@ public class XJDFHelper
 	 * @param name 
 	 * @return a new set element
 	 */
-	public KElement appendSet(String family, String name)
+	public SetHelper appendSet(String family, String name)
 	{
 		KElement newSet = theXJDF.appendElement(family + "Set");
 		newSet.setAttribute("Name", name);
-		return newSet;
+		return new SetHelper(newSet);
+	}
+
+	/**
+	 * @param name 
+	 * @return a new set element
+	 */
+	public SetHelper appendParameter(String name)
+	{
+		return appendSet("Parameter", name);
+	}
+
+	/**
+	 * @param name 
+	 * @return a new set element
+	 */
+	public SetHelper appendResource(String name)
+	{
+		return appendSet("Resource", name);
 	}
 
 	protected KElement theXJDF;
 
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return "XJDFHelper: " + theXJDF;
+	}
 }

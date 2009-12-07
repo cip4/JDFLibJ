@@ -144,7 +144,10 @@ public class JDFIntegerList extends JDFNumList
 	 * @param v the given vector
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
+	 * @deprecated use typesafe constructors
 	 */
+	@SuppressWarnings("unchecked")
+	@Deprecated
 	public JDFIntegerList(final Vector v) throws DataFormatException
 	{
 		super(v);
@@ -300,7 +303,7 @@ public class JDFIntegerList extends JDFNumList
 	public void add(final String s) throws DataFormatException
 	{
 		final StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
-		final Vector numList = m_numList;
+		final Vector<Object> numList = m_numList;
 
 		while (sToken.hasMoreTokens())
 		{
@@ -379,7 +382,7 @@ public class JDFIntegerList extends JDFNumList
 	 * @see org.cip4.jdflib.datatypes.JDFNumList#scale(double)
 	 */
 	@Override
-	public void scale(final double factor)
+	public JDFIntegerList scale(final double factor)
 	{
 		final int[] a = getIntArray();
 		for (int i = 0; i < a.length; i++)
@@ -387,6 +390,7 @@ public class JDFIntegerList extends JDFNumList
 			a[i] *= factor;
 		}
 		setIntArray(a);
+		return this;
 	}
 
 	/**

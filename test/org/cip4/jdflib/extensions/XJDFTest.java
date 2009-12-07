@@ -344,6 +344,17 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
+	public void testColorNameBlank() throws Exception
+	{
+		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		cp.appendColorWithName("Black By Night", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
+		e = new XJDF20().makeNewJDF(n, null);
+		assertEquals("Black_By_Night", e.getXPathAttribute("ParameterSet[@Name=\"Color\"]/Parameter/Part/@Separation", null));
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testContainer() throws Exception
 	{
 
