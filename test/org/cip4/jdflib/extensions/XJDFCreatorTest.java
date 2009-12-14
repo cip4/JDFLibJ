@@ -75,6 +75,7 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -125,21 +126,30 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 		SetHelper nih = theHelper.appendParameter("NodeInfo");
 		nih.setUsage(EnumUsage.Input);
 		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
-		PartitionHelper niS1 = nih.getCreatePartition(sheetMap);
-		niS1.getResource().setAttribute("Amount", "5000");
+		PartitionHelper niS1 = nih.getCreatePartition(sheetMap, true);
+		KElement ni = niS1.getResource();
+		ni.setAttribute("Amount", "5000");
 
 		SetHelper cpSetHelper = theHelper.appendResource(ElementName.CONVENTIONALPRINTINGPARAMS);
 		cpSetHelper.setUsage(EnumUsage.Input);
-		cpSetHelper.getCreatePartition(sheetMap).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+		cpSetHelper.getCreatePartition(sheetMap, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
+
 		SetHelper mediaSetHelper = theHelper.appendResource(ElementName.MEDIA);
 		mediaSetHelper.setUsage(EnumUsage.Input);
-		PartitionHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap);
+		PartitionHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap, true);
 		KElement mediaPart = mediaHelper.getPartition();
 		mediaPart.setAttribute("Brand", "TestBrand");
 		mediaPart.setAttribute("ProductID", "ID");
 		KElement media = mediaHelper.getResource();
 		media.setAttribute("Dimension", new JDFXYPair(72, 49).scaleFromCM().toString(), null);
 		media.setAttribute(AttributeName.MEDIATYPE, EnumMediaType.Paper.getName());
+
+		SetHelper compSetHelper = theHelper.appendResource(ElementName.COMPONENT);
+		compSetHelper.setUsage(EnumUsage.Output);
+		PartitionHelper compHelper = compSetHelper.getCreatePartition(sheetMap, true);
+		KElement compPart = compHelper.getPartition();
+		compPart.setAttribute("ProductID", "ComponentID");
+		compHelper.getResource().setAttribute("MediaRef", mediaPart.getAttribute("ID"));
 
 		theXJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "cpFromScratch.jdf", 2, false);
 	}
@@ -154,7 +164,7 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 		super.setUp();
 		theXJDF = new JDFDoc("XJDF").getRoot();
 		theHelper = new XJDFHelper(theXJDF);
-
+		JDFElement.setLongID(false);
 	}
 
 	/**

@@ -1265,11 +1265,11 @@ public class JDFMessage extends JDFAutoMessage
 	 * 
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] commandTypeObjString = { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS, ElementName.MODIFYNODECMDPARAMS,
-			ElementName.NEWJDFCMDPARAMS, ElementName.NODEINFOCMDPARAMS, ElementName.PIPEPARAMS, ElementName.QUEUEENTRYDEF, ElementName.QUEUEENTRYPRIPARAMS, ElementName.QUEUEENTRYPOSPARAMS,
-			ElementName.QUEUEFILTER, ElementName.QUEUESUBMISSIONPARAMS, ElementName.REQUESTQUEUEENTRYPARAMS, ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS,
-			ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS, ElementName.SHUTDOWNCMDPARAMS, ElementName.STOPPERSCHPARAMS, ElementName.UPDATEJDFCMDPARAMS,
-			ElementName.WAKEUPCMDPARAMS };
+	private static String[] commandTypeObjString = { ElementName.AUTHENTICATIONCMDPARAMS, ElementName.FLUSHQUEUEPARAMS, ElementName.FLUSHRESOURCEPARAMS,
+			ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFCMDPARAMS, ElementName.NODEINFOCMDPARAMS, ElementName.PIPEPARAMS, ElementName.QUEUEENTRYDEF,
+			ElementName.QUEUEENTRYPRIPARAMS, ElementName.QUEUEENTRYPOSPARAMS, ElementName.QUEUEFILTER, ElementName.QUEUESUBMISSIONPARAMS, ElementName.REQUESTQUEUEENTRYPARAMS,
+			ElementName.RESOURCECMDPARAMS, ElementName.RESOURCEPULLPARAMS, ElementName.RESUBMISSIONPARAMS, ElementName.RETURNQUEUEENTRYPARAMS, ElementName.SHUTDOWNCMDPARAMS,
+			ElementName.STOPPERSCHPARAMS, ElementName.UPDATEJDFCMDPARAMS, ElementName.WAKEUPCMDPARAMS };
 
 	/**
 	 * Enumeration strings for list of CommandTypeObj
@@ -1283,9 +1283,10 @@ public class JDFMessage extends JDFAutoMessage
 	 * 
 	 * @returnString comma separated list of enumerated string values
 	 */
-	private static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.KNOWNMSGQUPARAMS, ElementName.MSGFILTER,
-			ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS, ElementName.NODEINFOQUPARAMS, ElementName.NOTIFICATIONFILTER, ElementName.QUEUEENTRYDEFLIST, ElementName.QUEUEFILTER,
-			ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS, ElementName.SUBSCRIPTIONFILTER, ElementName.TRACKFILTER, ElementName.UPDATEJDFCMDPARAMS };
+	private static String[] queryTypeObjString = { ElementName.AUTHENTICATIONQUPARAMS, ElementName.DEVICEFILTER, ElementName.EMPLOYEEDEF, ElementName.KNOWNMSGQUPARAMS,
+			ElementName.MSGFILTER, ElementName.MODIFYNODECMDPARAMS, ElementName.NEWJDFQUPARAMS, ElementName.NODEINFOQUPARAMS, ElementName.NOTIFICATIONFILTER,
+			ElementName.QUEUEENTRYDEFLIST, ElementName.QUEUEFILTER, ElementName.RESOURCEQUPARAMS, ElementName.STATUSQUPARAMS, ElementName.SUBSCRIPTIONFILTER,
+			ElementName.TRACKFILTER, ElementName.UPDATEJDFCMDPARAMS };
 
 	/**
 	 * Enumeration strings for list of ResponseTypeObj
@@ -1293,9 +1294,9 @@ public class JDFMessage extends JDFAutoMessage
 	 * @returnString comma separated list of enumerated string values
 	 */
 	private static String[] responseTypeObjString = { ElementName.DEVICELIST, ElementName.DEVICEINFO, ElementName.FLUSHQUEUEINFO, ElementName.FLUSHEDRESOURCES, ElementName.IDINFO,
-			ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE, ElementName.NODEINFORESP, ElementName.NOTIFICATIONDEF, ElementName.OCCUPATION,
-			ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO, ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS, ElementName.TRACKRESULT, ElementName.COMMAND,
-			ElementName.QUERY, ElementName.ACKNOWLEDGE, ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION };
+			ElementName.JDFCONTROLLER, ElementName.JDFSERVICE, ElementName.JOBPHASE, ElementName.MESSAGESERVICE, ElementName.NODEINFORESP, ElementName.NOTIFICATIONDEF,
+			ElementName.OCCUPATION, ElementName.QUEUE, ElementName.QUEUEENTRY, ElementName.RESOURCEINFO, ElementName.SUBSCRIPTIONINFO, ElementName.SUBMISSIONMETHODS,
+			ElementName.TRACKRESULT, ElementName.COMMAND, ElementName.QUERY, ElementName.ACKNOWLEDGE, ElementName.RESPONSE, ElementName.SIGNAL, ElementName.REGISTRATION };
 
 	private static String[] signalTypeObjString = null;
 	private static String[] elemArray = null;
@@ -3129,6 +3130,8 @@ public class JDFMessage extends JDFAutoMessage
 		final EnumType t = getEnumType();
 		// loop over all valid potential elements for this family
 		final String[] vObjs = familyTypeObj();
+		if (vObjs == null)
+			return s;
 		// for each object, check whether it is compatible with the type of this
 		for (int i = 0; i < vObjs.length; i++)
 		{

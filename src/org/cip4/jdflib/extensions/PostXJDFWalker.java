@@ -3,10 +3,13 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.util.zip.DataFormatException;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -86,6 +89,7 @@ class PostXJDFWalker extends BaseElementWalker
 			{
 				return xjdf; // nuff done
 			}
+			//TODO multiple lower level stripparams partitions
 			KElement newLayout = newRoot.getXPathElement("ParameterSet[@Name=\"Layout\"]");
 			if (newLayout != null)
 			{
@@ -95,7 +99,7 @@ class PostXJDFWalker extends BaseElementWalker
 				if (layoutPartition != null)
 				{
 					layoutPartition = layoutPartition.getCreateElement("Layout");
-					layoutPartition.mergeElement(xjdf, false); // ret is the actual strippingparams
+					layoutPartition.mergeElement(xjdf, false);
 				}
 			}
 			return null; // stop after merging
@@ -200,12 +204,51 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
+		 * @param xjdf 
 		 * 
 		 */
 		private void reorderSets(KElement xjdf)
 		{
 			VElement v = new XJDFHelper(xjdf).getSets();
-			//TODO rmove combinedprocIndex and reorder according to cpi
+			if (v == null)
+				return; // nothing to do
+
+			int n = v.size();
+			int j = 0;
+			while (n > 0)
+			{
+				for (int i = 0; i < v.size(); i++)
+				{
+					KElement e = v.get(i);
+					if (e != null)
+					{
+						JDFIntegerList lcpi = null;
+						String cpi = e.getAttribute(AttributeName.COMBINEDPROCESSINDEX, null, null);
+						try
+						{
+							lcpi = cpi == null ? null : new JDFIntegerList(cpi);
+						}
+						catch (final DataFormatException dfe)
+						{
+							//nop
+						}
+
+						// have a matching cpi entry - place set here and remove from further tests
+						if (lcpi == null || lcpi.contains(j))
+						{
+							v.set(i, null);
+							e.removeAttribute(AttributeName.COMBINEDPROCESSINDEX);
+							n--;
+						}
+						else
+						{
+							xjdf.moveElement(e, null);
+						}
+					}
+				}
+				j++;
+			}
+			//TODO treat outputs backwards...
 		}
 
 	}

@@ -144,6 +144,15 @@ public class FileUtil
 		{
 			final File[] f = listFilesWithExpression(dir, expression);
 			v = ContainerUtil.toVector(f);
+			File[] dirs = listDirectories(dir);
+			if (dirs != null)
+			{
+				for (int i = 0; i < dirs.length; i++)
+				{
+					Vector<File> v2 = listFilesInTree(dirs[i], expression);
+					v = (Vector<File>) ContainerUtil.addAll(v, v2);
+				}
+			}
 		}
 		else
 		{

@@ -111,7 +111,9 @@ public class ElementWalker
 		if (w != null)
 		{
 			n++;
+			w.prepareWalk(e, trackElem);
 			b = w.walk(e, trackElem);
+			w.finalizeWalk(e, trackElem);
 		}
 		if (b != null) // follow kids if still alive or no walker found
 		{

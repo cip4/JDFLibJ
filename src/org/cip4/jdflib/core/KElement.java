@@ -1548,7 +1548,9 @@ public class KElement extends ElementNSImpl
 	{
 		final KElement newChild = appendElementRaw(elementName, nameSpaceURI);
 		setDirty(false);
-		newChild.init();
+		Document od = getOwnerDocument();
+		if (od instanceof DocumentJDFImpl && ((DocumentJDFImpl) od).bInitOnCreate)
+			newChild.init();
 		return newChild;
 	}
 
@@ -4689,7 +4691,9 @@ public class KElement extends ElementNSImpl
 		if (newChild != null)
 		{
 			insertBefore(newChild, beforeChild);
-			newChild.init();
+			Document od = getOwnerDocument();
+			if (od instanceof DocumentJDFImpl && ((DocumentJDFImpl) od).bInitOnCreate)
+				newChild.init();
 		}
 		return newChild;
 	}
@@ -5096,6 +5100,8 @@ public class KElement extends ElementNSImpl
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@,// are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
 	 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 * @param maxSize 
+	 * @param bLocal 
 	 * @return VElement the vector of matching elements
 	 * @throws IllegalArgumentException if path is not supported
 	 */
@@ -6620,7 +6626,6 @@ public class KElement extends ElementNSImpl
 
 	/**
 	 * @see java.lang.Object#clone()
-	 * @throws CloneNotSupportedException
 	 * @return
 	*/
 	@Override
@@ -6629,20 +6634,7 @@ public class KElement extends ElementNSImpl
 		KElement e = new XMLDoc(getNodeName(), getNamespaceURI()).getRoot();
 		e = e.replaceElement(this);
 		return e;
-		//		XMLDoc d = getOwnerDocument_KElement().clone();
-		//		// TODO clone sub elements
-		//		if (isEqual(d.getRoot()))
-		//			return d.getRoot();
-		//		VElement v = d.getRoot().getChildrenByTagName_KElement(getNodeName(), getNamespaceURI(), getAttributeMap(), false, true, 0);
-		//		if (v == null)
-		//			throw new CloneNotSupportedException();
-		//		for (int i = 0; i < v.size(); i++)
-		//		{
-		//			KElement e = v.get(i);
-		//			if (isEqual(e))
-		//				return e;
-		//		}
-		//		throw new CloneNotSupportedException();
+
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

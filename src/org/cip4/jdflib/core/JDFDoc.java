@@ -383,7 +383,7 @@ public class JDFDoc extends XMLDoc
 	public KElement setRoot(final String strDocType, final String namespaceURI)
 	{
 		final KElement root = super.setRoot(strDocType, namespaceURI);
-		if (root != null)
+		if (root != null && m_doc.bInitOnCreate)
 		{
 			if (root instanceof JDFNode)
 			{

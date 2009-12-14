@@ -2931,9 +2931,10 @@ public class JDFElement extends KElement
 	/**
 	 * get invalid attributes
 	 * 
-	 * @param level {@link KElement#EnumValidationLevel validation level}
+	 * @param level validation level
 	 * @param bIgnorePrivate if true, do not worry about attributes in other namespaces
 	 * @param nMax maximum size of the returned vector
+	 * @param ai 
 	 * @return VString - a vector of invalid attribute names
 	 * 
 	 * @default getInvalidAttributes_JDFElement(level, true, 9999999)
@@ -3438,7 +3439,7 @@ public class JDFElement extends KElement
 	 * 
 	 * @param key the attribute name
 	 * @param value the enumeration vector
-	 * @param String nameSpaceURI attribute namespace uri
+	 * @param nameSpaceURI attribute namespace uri
 	 * @throws JDFException wrong data type in vector
 	 */
 	protected void setEnumerationsAttribute(final String key, final Vector<? extends ValuedEnum> value, final String nameSpaceURI)

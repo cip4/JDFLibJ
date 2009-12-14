@@ -45,6 +45,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	// JDFNode theNode;
 	Map<String, IDPart> idMap;
 	boolean firstConvert;
+	protected JDFNode currentJDFNode = null;
 	/**
 	 * if true, create the product, else ignore it
 	 */
@@ -369,27 +370,27 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			final JDFNode theNode = (JDFNode) trackElem;
-			theNode.setAttributes(e);
-			theNode.setVersion(version);
-			removeInheritedJobID(theNode);
-			theNode.setType(EnumType.ProcessGroup);
-			return theNode;
+			currentJDFNode = (JDFNode) trackElem;
+			currentJDFNode.setAttributes(e);
+			currentJDFNode.setVersion(version);
+			removeInheritedJobID();
+			currentJDFNode.setType(EnumType.ProcessGroup);
+			return currentJDFNode;
 		}
 
 		/**
-		 * @param theNode
+		 *  
 		 */
-		private void removeInheritedJobID(final JDFNode theNode)
+		private void removeInheritedJobID()
 		{
-			final JDFNode parent = theNode.getParentJDF();
+			final JDFNode parent = currentJDFNode.getParentJDF();
 			if (parent != null)
 			{
 				final String jobID = StringUtil.getNonEmpty(parent.getJobID(true));
-				final String myJobID = StringUtil.getNonEmpty(theNode.getJobID(false));
+				final String myJobID = StringUtil.getNonEmpty(currentJDFNode.getJobID(false));
 				if (myJobID != null && myJobID.equals(jobID))
 				{
-					theNode.removeAttribute(AttributeName.JOBID);
+					currentJDFNode.removeAttribute(AttributeName.JOBID);
 				}
 			}
 		}
@@ -451,7 +452,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			final JDFNode parent = (JDFNode) trackElem;
+			final JDFNode parent = currentJDFNode;
 			final JDFNode root = parent.getJDFRoot();
 			final EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
 			String id = e.getAttribute(AttributeName.ID, null, null);
@@ -796,7 +797,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			final JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
+			final JDFNode theNode = currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : currentJDFNode;
 			JDFResource newPartition;
 			final JDFPart part = (JDFPart) e.getElement(ElementName.PART);
 			JDFAttributeMap partmap = null;
@@ -858,7 +859,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 */
 		protected JDFResource createPartition(final KElement e, final KElement trackElem, final JDFPart part)
 		{
-			final JDFNode theNode = ((JDFElement) trackElem).getParentJDF();
+			final JDFNode theNode = currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : currentJDFNode;
 			final JDFResource r = (JDFResource) trackElem;
 			final JDFAttributeMap partMap = part.getPartMap();
 			final JDFResource rPart = r.getCreatePartition(partMap, part.guessPartIDKeys());

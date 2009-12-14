@@ -173,6 +173,10 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public boolean bMergeRunList = true;
 	/**
+	 * set to retain spawn information
+	 */
+	public boolean bRetainSpawnInfo = false;
+	/**
 	 * set to update version stamps
 	 */
 	public boolean bUpdateVersion = true;
@@ -189,9 +193,7 @@ public class XJDF20 extends BaseElementWalker
 	public KElement makeNewJMF(final JDFJMF jmf)
 	{
 		final KElement root = jmf.getOwnerDocument_JDFElement().clone().getJMFRoot();
-		final JDFDoc newDoc = new JDFDoc("JMF");
-		newRoot = newDoc.getRoot();
-		first = true;
+		prepareNewDoc();
 		walkTree(root, newRoot);
 		newRoot.eraseEmptyNodes(true);
 		return newRoot;
@@ -211,11 +213,8 @@ public class XJDF20 extends BaseElementWalker
 			oldRoot = root;
 		}
 		final JDFNode rootIn = node.getJDFRoot();
-		final JDFDoc newDoc = new JDFDoc(rootName);
-
 		walkingProduct = false;
-		newRoot = newDoc.getRoot();
-		first = true;
+		prepareNewDoc();
 		walkTree(node, newRoot);
 
 		walkingProduct = true;
@@ -233,6 +232,17 @@ public class XJDF20 extends BaseElementWalker
 
 		newRoot.eraseEmptyNodes(true);
 		return newRoot;
+	}
+
+	/**
+	 * 
+	 */
+	private void prepareNewDoc()
+	{
+		final JDFDoc newDoc = new JDFDoc(rootName);
+		newDoc.setInitOnCreate(false);
+		newRoot = newDoc.getRoot();
+		first = true;
 	}
 
 	/**
@@ -272,25 +282,6 @@ public class XJDF20 extends BaseElementWalker
 			return null;
 		}
 		return className;
-	}
-
-	protected int myIndex(final KElement e)
-	{
-		final KElement parent = e.getParentNode_KElement();
-		int n = 0;
-		final String nodeName = e.getNodeName();
-		final String namespaceURI = e.getNamespaceURI();
-		KElement sib = parent.getFirstChildElement(nodeName, namespaceURI);
-		while (sib != e)
-		{
-			sib = sib.getNextSiblingElement(nodeName, namespaceURI);
-			if (sib == null)
-			{
-				return -1;
-			}
-			n++;
-		}
-		return n;
 	}
 
 	/**
@@ -376,11 +367,6 @@ public class XJDF20 extends BaseElementWalker
 		{
 			if (rl.hasAttribute(AttributeName.AMOUNT) || rl.hasAttribute(AttributeName.ACTUALAMOUNT) || rl.hasAttribute(AttributeName.MAXAMOUNT))
 			{
-				//				ap = (JDFAmountPool) newLeaf.appendElement(ElementName.AMOUNTPOOL);
-				//				final JDFPartAmount pa = ap.appendPartAmount();
-				//				pa.copyAttribute(AttributeName.AMOUNT, rl);
-				//				pa.copyAttribute(AttributeName.ACTUALAMOUNT, rl);
-				//				pa.copyAttribute(AttributeName.MAXAMOUNT, rl);
 				newLeaf.setAttribute(AttributeName.AMOUNT + "Good", rl.getAttribute(AttributeName.AMOUNT, null, null));
 				newLeaf.setAttribute(AttributeName.ACTUALAMOUNT + "Good", rl.getAttribute(AttributeName.ACTUALAMOUNT, null, null));
 				newLeaf.setAttribute(AttributeName.MAXAMOUNT + "Good", rl.getAttribute(AttributeName.MAXAMOUNT, null, null));
@@ -438,35 +424,24 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
+	 * @param rl 
+	 * @param r 
+	 * @param xjdfSet 
+	 * @return 
 	 * 
 	 */
 	private KElement setBaseResource(final JDFElement rl, final JDFResource r, final KElement xjdfSet)
 	{
-		KElement newLeaf = null;
 		final JDFAttributeMap map = r.getPartMap();
-		if (map == null || map.isEmpty())
-		{
-			newLeaf = xjdfSet.getElement(StringUtil.leftStr(xjdfSet.getNodeName(), -3));
-		}
-		else
-		{
-			final KElement oldPart = xjdfSet.getChildByTagName("Part", null, 0, map, false, true);
-			if (oldPart != null)
-			{
-				newLeaf = oldPart.getParentNode_KElement();
-			}
-		}
-		if (newLeaf == null)
-		{
-			newLeaf = xjdfSet.appendElement(StringUtil.leftStr(xjdfSet.getNodeName(), -3));
-			newLeaf.setAttribute("ID", r.getAttribute("ID") + "." + StringUtil.formatInteger(myIndex(newLeaf)));
-		}
+		SetHelper sh = new SetHelper(xjdfSet);
+		KElement newLeaf = sh.getCreatePartition(map, false).getPartition();
 		setLeafAttributes(r, rl, newLeaf);
 		return newLeaf;
 	}
 
 	/**
 	 * @param leaf
+	 * @param rl 
 	 * @param newLeaf
 	 */
 	private void setLeafAttributes(final JDFResource leaf, final JDFElement rl, final KElement newLeaf)
@@ -476,8 +451,8 @@ public class XJDF20 extends BaseElementWalker
 		// attMap.remove("ID");
 		setAmountPool(rl, newLeaf, partMap);
 
-		// retain spawn informatiom
-		if (leaf.hasAttribute(AttributeName.SPAWNIDS))
+		// retain spawn information
+		if (bRetainSpawnInfo && leaf.hasAttribute(AttributeName.SPAWNIDS))
 		{
 			final KElement spawnInfo = newLeaf.getDocRoot().getCreateElement(m_spawnInfo, null, 0);
 			final KElement spawnID = spawnInfo.appendElement("SpawnID");
@@ -485,21 +460,10 @@ public class XJDF20 extends BaseElementWalker
 			spawnID.moveAttribute(AttributeName.SPAWNSTATUS, newLeaf, null, null, null);
 			spawnID.copyAttribute(AttributeName.RESOURCEID, newLeaf, AttributeName.ID, null, null);
 		}
-		if (partMap != null && partMap.size() > 0 && newLeaf.getElement("Part") == null)
-		{
-			String sep = partMap.get(AttributeName.SEPARATION);
-			if (sep != null)
-				partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
-			newLeaf.appendElement("Part").setAttributes(partMap);
-		}
-		else
-		{
-			newLeaf.getCreateElement("Part"); // always append an empty part for null
-		}
 	}
 
 	/**
-	 * set the attributes of the set abses on the resource and resourcelink
+	 * set the attributes of the set based on the resource and resourcelink
 	 * 
 	 * @param resourceSet
 	 * @param rl
@@ -509,6 +473,7 @@ public class XJDF20 extends BaseElementWalker
 	{
 		resourceSet.setAttribute("Name", linkRoot.getNodeName());
 		resourceSet.setAttributes(rl);
+		//TODO orientation + coordinate system stuff
 		resourceSet.removeAttribute(AttributeName.RREF);
 		resourceSet.removeAttribute(AttributeName.RSUBREF);
 		resourceSet.removeAttribute(AttributeName.AMOUNT);
@@ -938,6 +903,7 @@ public class XJDF20 extends BaseElementWalker
 
 		/**
 		 * @param re
+		 * @param xjdf 
 		 */
 		protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 		{
@@ -1224,6 +1190,7 @@ public class XJDF20 extends BaseElementWalker
 
 		/**
 		 * @param node
+		 * @param prod 
 		 */
 		private void calcChildren(final JDFNode node, final KElement prod)
 		{
@@ -1246,7 +1213,7 @@ public class XJDF20 extends BaseElementWalker
 			{
 				for (int i = 0; i < kids.size(); i++)
 				{
-					final KElement sub = prod.appendElement("SubProduct");
+					final KElement sub = prod.appendElement("ChildProduct");
 					sub.setAttribute("ChildRef", kids.get(i), null);
 					// TODO add processusage from input / output resources
 				}
@@ -1601,6 +1568,14 @@ public class XJDF20 extends BaseElementWalker
 			final JDFSeparationList je = (JDFSeparationList) jdf;
 			final String name = jdf.getLocalName();
 			final VString cols = je.getSeparations();
+			if (cols != null)
+			{
+				for (int i = 0; i < cols.size(); i++)
+				{
+					String col = cols.get(i);
+					cols.set(i, StringUtil.replaceChar(col, ' ', "_", 0));
+				}
+			}
 			xjdf.setAttribute(name, cols, null);
 			return null; // done
 		}

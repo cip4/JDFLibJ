@@ -108,6 +108,10 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * if true, the factory is bypassed and only KElements are created rather than the typesafe element classes
 	 */
 	public boolean bKElementOnly = false;
+	/**
+	 * skip initialization when creating a new element
+	 */
+	public boolean bInitOnCreate = true;
 	private boolean ignoreNSDefault = false;
 	private boolean strictNSCheck = bStaticStrictNSCheck;
 
@@ -138,9 +142,9 @@ public class DocumentJDFImpl extends DocumentImpl
 	/**
 	 * @param strictNSCheck the strictNSCheck to set
 	 */
-	public void setStrictNSCheck(final boolean strictNSCheckP)
+	public void setStrictNSCheck(final boolean strictNSCheck)
 	{
-		this.strictNSCheck = strictNSCheckP;
+		this.strictNSCheck = strictNSCheck;
 	}
 
 	private boolean bInJDFJMF = false;
@@ -149,10 +153,10 @@ public class DocumentJDFImpl extends DocumentImpl
 	private static HashMap<String, String> sm_PackageNames = new HashMap<String, String>();
 
 	/** Caches Classes */
-	private static HashMap<String, Class> sm_ClassAlreadyInstantiated = new HashMap<String, Class>();
+	private static HashMap<String, Class<?>> sm_ClassAlreadyInstantiated = new HashMap<String, Class<?>>();
 
 	/** Caches JDF element constructors (namespace variant) */
-	private static HashMap<String, Constructor> sm_hashCtorElementNS = new HashMap<String, Constructor>();
+	private static HashMap<String, Constructor<?>> sm_hashCtorElementNS = new HashMap<String, Constructor<?>>();
 
 	private Node m_ParentNode = null;
 
@@ -229,7 +233,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * register new custom class in the factory
 	 * 
 	 * @param strElement local name
-	 * @param elemClass package path
+	 * @param packagepath package path
 	 */
 	public static void registerCustomClass(final String strElement, final String packagepath)
 	{
@@ -282,12 +286,6 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * 
 	 * @param qualifiedName The name of the element type to instantiate. For XML, this is case-sensitive.
 	 * 
-	 * @throws <code>DOMException(INVALID_NAME_ERR)</code> if the tag name is not acceptable.
-	 */
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.apache.xerces.dom.CoreDocumentImpl#createElement(java.lang.String)
 	 */
 	@Override
 	public Element createElement(final String qualifiedName)
@@ -298,11 +296,12 @@ public class DocumentJDFImpl extends DocumentImpl
 		return createElementNS(namespaceURI, qualifiedName, localPart);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#createElementNS(java.lang.String, java.lang.String)
-	 */
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @return
+	*/
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName)
 	{
@@ -310,16 +309,18 @@ public class DocumentJDFImpl extends DocumentImpl
 		return createElementNS(namespaceURI, qualifiedName, localPart);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.apache.xerces.dom.CoreDocumentImpl#createElementNS(String, String, String)
-	 */
+	/**
+	 * @see org.apache.xerces.dom.CoreDocumentImpl#createElementNS(java.lang.String, java.lang.String, java.lang.String)
+	 * @param namespaceURI
+	 * @param qualifiedName
+	 * @param localPart
+	 * @return
+	*/
 	@Override
 	public Element createElementNS(final String namespaceURI, final String qualifiedName, final String localPart)
 	{
-		Constructor constructi;
-		Class classOfConstructor = null;
+		Constructor<?> constructi;
+		Class<?> classOfConstructor = null;
 		// we are not yet in a JDF or JMF
 		if (bKElementOnly)
 		{
@@ -345,7 +346,7 @@ public class DocumentJDFImpl extends DocumentImpl
 					classOfConstructor = getFactoryClass(namespaceURI, qualifiedName, localPart);
 					if (classOfConstructor != null)
 					{
-						final Class[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class,
+						final Class<?>[] constructorParameters = { org.apache.xerces.dom.CoreDocumentImpl.class, java.lang.String.class, java.lang.String.class,
 								java.lang.String.class, };
 
 						constructi = classOfConstructor.getDeclaredConstructor(constructorParameters);
@@ -380,10 +381,11 @@ public class DocumentJDFImpl extends DocumentImpl
 	}
 
 	/**
+	 * @param hashCtorElement 
 	 * @param qualifiedName
 	 * @param constructi
 	 */
-	private void putConstructorToHashMap(final HashMap hashCtorElement, final String qualifiedName, final Constructor constructi)
+	private void putConstructorToHashMap(final HashMap<String, Constructor<?>> hashCtorElement, final String qualifiedName, final Constructor<?> constructi)
 	{
 		// only put the constructor into the map if its not a Resource or an
 		// element
@@ -417,7 +419,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param constructorArguments
 	 * @return KElement (always != <code>null</code>)
 	 */
-	private KElement createKElement(final Constructor constructi, final Object[] constructorArguments)
+	private KElement createKElement(final Constructor<?> constructi, final Object[] constructorArguments)
 	{
 		KElement newElement = null;
 		String message = null;
@@ -461,15 +463,13 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * Searches for the matching factory class in sm_PackageNames If a match could not be found then JDFResource.class is returned if the element is in a
 	 * resource pool else if the element is in the default name space JDFElement.class is returned else KElement.class is returned
 	 * 
-	 * @param strNameSpaceURI the namespace of the class. only http://www.CIP4.org/JDFSchema_1_1 is the valid namespace for JDF Elements all other namespaces
 	 * will return JDFElement.class or JDFResource.class only.
 	 * @param qualifiedName the qualified name of the class
-	 * @param localPart the local part of the qualified name
 	 * @return
 	 */
-	public Class getFactoryClass(final String qualifiedName)
+	public Class<?> getFactoryClass(final String qualifiedName)
 	{
-		Class packageNameClass = null;
+		Class<?> packageNameClass = null;
 
 		try
 		{
@@ -482,9 +482,9 @@ public class DocumentJDFImpl extends DocumentImpl
 		return packageNameClass;
 	}
 
-	private Class getFactoryClass(final String strNameSpaceURI, final String qualifiedName, final String localPart) throws ClassNotFoundException
+	private Class<?> getFactoryClass(final String strNameSpaceURI, final String qualifiedName, final String localPart) throws ClassNotFoundException
 	{
-		Class packageNameClass = sm_ClassAlreadyInstantiated.get(qualifiedName);
+		Class<?> packageNameClass = sm_ClassAlreadyInstantiated.get(qualifiedName);
 
 		if (packageNameClass == null)
 		{ // class not found in the buffer! Instantiate it and add it to the

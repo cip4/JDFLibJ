@@ -74,6 +74,7 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -81,6 +82,25 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class SetHelper
 {
+	private int myIndex(final KElement e)
+	{
+		final KElement parent = e.getParentNode_KElement();
+		int n = 0;
+		final String nodeName = e.getNodeName();
+		final String namespaceURI = e.getNamespaceURI();
+		KElement sib = parent.getFirstChildElement(nodeName, namespaceURI);
+		while (sib != e)
+		{
+			sib = sib.getNextSiblingElement(nodeName, namespaceURI);
+			if (sib == null)
+			{
+				return -1;
+			}
+			n++;
+		}
+		return n;
+	}
+
 	/**
 	 * @param set the set to help on
 	 */
@@ -111,27 +131,41 @@ public class SetHelper
 
 	/**
 	 * @param map
+	 * @param addRes 
 	 * @return 
 	 */
-	public PartitionHelper getCreatePartition(JDFAttributeMap map)
+	public PartitionHelper getCreatePartition(JDFAttributeMap map, boolean addRes)
 	{
 		PartitionHelper e = getPartition(map);
 		if (e == null)
-			e = appendPartition(map);
+			e = appendPartition(map, addRes);
 		return e;
 	}
 
 	/**
-	 * @param map
+	 * @param partMap
+	 * @param addRes 
 	 * @return
 	 */
-	public PartitionHelper appendPartition(JDFAttributeMap map)
+	public PartitionHelper appendPartition(JDFAttributeMap partMap, boolean addRes)
 	{
 		KElement newPart = theSet.appendElement(getPartitionName());
-		newPart.appendElement("Part").setAttributes(map);
+		newPart.setAttribute("ID", theSet.getAttribute(AttributeName.ID) + "." + StringUtil.formatInteger(myIndex(newPart)));
+		JDFPart part = (JDFPart) newPart.appendElement("Part");
+		if (partMap != null && partMap.size() > 0)
+		{
+			String sep = partMap.get(AttributeName.SEPARATION);
+			if (sep != null)
+				partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
+			part.setPartMap(partMap);
+		}
+
 		String resName = getName();
-		if (resName != null)
-			newPart.appendElement(resName);
+		if (resName != null && addRes)
+		{
+			KElement newRes = newPart.appendElement(resName);
+			newRes.removeAttribute(AttributeName.CLASS);
+		}
 		return new PartitionHelper(newPart);
 	}
 

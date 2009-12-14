@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions;
 
 import java.io.File;
+import java.util.HashMap;
 
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
@@ -82,7 +83,11 @@ import org.cip4.jdflib.util.FileUtil;
  * 
  * most extremely very prototypical skeleton schema converter<br/>
  * TODO: we may want to simply generate from autoclasses rather than from the existing schema...<br/>
- * or forget the walker pattern and simply loop
+ * or forget the walker pattern and simply loop^
+ * 
+ * Schema policies: Retain substitutiongroups (elements of resource/parameter)
+ * make local elements local - there is only one remaining element definition
+ * make attribute definitions local but retain global attribute type definitions - think about unique enumerations -probably local
  * 
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -90,6 +95,7 @@ import org.cip4.jdflib.util.FileUtil;
  */
 public class XJDFSchemaWalker extends BaseElementWalker
 {
+	protected HashMap<String, KElement> newSchemaMap;
 
 	/**
 	 * 
@@ -103,7 +109,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	/**
 	 * @param in
 	 * @param out
-	 * @throws IOException
+	 * @throws IllegalArgumentException if no output is declared
 	 */
 	public void newFile(final File in, final File out)
 	{
@@ -113,7 +119,6 @@ public class XJDFSchemaWalker extends BaseElementWalker
 		}
 		if (!out.canWrite())
 		{
-
 			FileUtil.createNewFile(out);
 			if (!out.canWrite())
 			{
@@ -135,8 +140,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 	 */
 	private void init()
 	{
-		// nop as of now
-
+		newSchemaMap = new HashMap<String, KElement>();
 	}
 
 	/**
@@ -205,7 +209,7 @@ public class XJDFSchemaWalker extends BaseElementWalker
 			if ("complexType".equals(elmName))
 			{
 				final String name = toCheck.getAttribute("name");
-				boolean b = name.endsWith("_re");
+				boolean b = name.endsWith("_rp");
 				b = b || name.endsWith("_r");
 				return b;
 			}
@@ -216,8 +220,46 @@ public class XJDFSchemaWalker extends BaseElementWalker
 				b = b || name.endsWith("Update");
 				return b;
 			}
+			if ("xs:annotation".equals(elmName))
+			{
+				return true;
+			}
 			return false;
 		}
 	}
 
+	/**
+	 * any matching class will be removed with extreme prejudice...
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkComplexType extends WalkElement
+	{
+
+		public WalkComplexType()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return "xs:complexType".equals(toCheck.getLocalName());
+		}
+	}
 }

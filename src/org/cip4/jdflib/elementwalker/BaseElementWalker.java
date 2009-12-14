@@ -76,7 +76,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
  * 
  * elementwalker class that allows you to traverse a dom tree starting at a given root also handles the construction of the walker classes by name, just make
- * sure that your walker subclasses match the naming convention <name>$Walk, e.g. if your class is called FixVersion, the subclasse must be call
+ * sure that your walker subclasses match the naming convention <name>$Walk, e.g. if your class is called FixVersion, the subclasses must be called FooWalk, BarWalk etc.
  * 
  * @author prosirai
  * 

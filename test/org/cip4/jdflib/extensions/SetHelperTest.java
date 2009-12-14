@@ -101,7 +101,7 @@ public class SetHelperTest extends TestCase
 	}
 
 	/**
-	 * @return
+	 * 
 	 */
 	@Override
 	protected void setUp()

@@ -89,5 +89,19 @@ public interface IWalker
 	 * null if it was deleted and therefore the walker should skip this and all its descendants<br/>
 	 * the element may either be trackElem or a converted element to continue with as trackElem
 	 */
-	public KElement walk(KElement e, KElement trackElem);
+	abstract KElement walk(KElement e, KElement trackElem);
+
+	/**
+	 * hook for guaranteed prewalk initialization
+	 * @param e the element to walk
+	 * @param trackElem a parallel element to e that may additionally be modified during the walk
+	 */
+	abstract void prepareWalk(KElement e, KElement trackElem);
+
+	/**
+	 * hook for guaranteed postwalk finalization
+	 * @param e the element to walk
+	 * @param trackElem a parallel element to e that may additionally be modified during the walk
+	 */
+	abstract void finalizeWalk(KElement e, KElement trackElem);
 }

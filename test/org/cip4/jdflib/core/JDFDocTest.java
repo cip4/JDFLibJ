@@ -260,6 +260,18 @@ public class JDFDocTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testSetInitOnCreate()
+	{
+		JDFDoc doc = new JDFDoc();
+		doc.setInitOnCreate(false);
+		doc.setRoot("JDF", null);
+		JDFNode n = doc.getJDFRoot();
+		assertNull(n.getAuditPool());
+	}
+
+	/**
+	 * 
+	 */
 	public void testPerformance()
 	{
 		{
@@ -367,9 +379,9 @@ public class JDFDocTest extends JDFTestCaseBase
 	}
 
 	/**
-     * 
-     *
-     */
+	 * 
+	 *
+	 */
 	public void testEmptyString()
 	{
 		final JDFDoc inMessageDoc = new JDFDoc(ElementName.JMF);

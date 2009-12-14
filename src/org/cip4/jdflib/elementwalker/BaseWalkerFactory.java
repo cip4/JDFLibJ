@@ -99,6 +99,7 @@ public class BaseWalkerFactory implements IWalkerFactory
 		for (int j = 0; j < vs; j++)
 		{
 			final BaseWalker w = vBaseWalker.get(j);
+			w.prepareWalk(toCheck, null);
 			if (w.matches(toCheck))
 			{
 				return w;

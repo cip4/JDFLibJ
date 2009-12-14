@@ -201,7 +201,6 @@ public abstract class JDFTestCaseBase extends TestCase
 		agentVersion = JDFAudit.getStaticAgentVersion();
 		author = JDFAudit.getStaticAuthor();
 		mem = getCurrentMem();
-
 	}
 
 	/**

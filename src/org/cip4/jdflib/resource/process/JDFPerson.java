@@ -82,6 +82,7 @@ package org.cip4.jdflib.resource.process;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPerson;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
@@ -201,6 +202,18 @@ public class JDFPerson extends JDFAutoPerson
 			descName = StringUtil.replaceString(descName, oldName, firstName);
 			setDescriptiveName(descName);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#clone()
+	 */
+	@Override
+	public KElement clone()
+	{
+		// TODO Auto-generated method stub
+		return super.clone();
 	}
 
 	/**

@@ -91,6 +91,22 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	}
 
 	/**
+	 * hook for guaranteed prewalk initialization
+	 */
+	public void prepareWalk(final KElement e, final KElement trackElem)
+	{
+		// nop
+	}
+
+	/**
+	 * hook for guaranteed postwalk finalization
+	 */
+	public void finalizeWalk(final KElement e, final KElement trackElem)
+	{
+		// nop
+	}
+
+	/**
 	 * 
 	 * @param factory
 	 */

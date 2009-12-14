@@ -12,6 +12,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -57,6 +58,7 @@ public class XJDFTest extends JDFTestCaseBase
 	@Override
 	public void setUp() throws Exception
 	{
+		JDFElement.setLongID(false);
 		super.setUp();
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
@@ -136,6 +138,7 @@ public class XJDFTest extends JDFTestCaseBase
 		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null, null, null, null, null, null);
 		JDFLayout lo = (JDFLayout) n.addResource("Layout", EnumUsage.Output);
 		sp.refBinderySignature(bs);
+		sp.appendPosition();
 
 		XJDF20 xjdf20 = new XJDF20();
 		xjdf20.bMergeLayout = true;
@@ -143,6 +146,7 @@ public class XJDFTest extends JDFTestCaseBase
 		e = xjdf20.makeNewJDF(n, null);
 		assertEquals(e.getXPathElementVector("//StrippingParams", -1).size(), 0);
 		assertEquals(e.getXPathElementVector("//Layout", -1).size(), 1);
+		e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "mergeStripping.xjdf", 2, false);
 
 	}
 
@@ -344,12 +348,34 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
+	public void testCombinedProcesIndex() throws Exception
+	{
+		n = new JDFDoc("JDF").getJDFRoot();
+		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
+		n.getLink(cp, null).setCombinedProcessIndex(3);
+		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		n.getLink(cc, null).setCombinedProcessIndex(2);
+		final JDFMedia m = (JDFMedia) n.addResource(ElementName.MEDIA, EnumUsage.Input);
+		n.getLink(m, null).setCombinedProcessIndex(1);
+		e = new XJDF20().makeNewJDF(n, null);
+		assertEquals(e.getXPathElement("ParameterSet[@Name=\"Color\"]"), e.getXPathElement("ParameterSet[@Name=\"ColorantControl\"]").getNextSiblingElement());
+		assertEquals(e.getXPathElement("ResourceSet[@Name=\"Media\"]"), e.getXPathElement("ParameterSet[@Name=\"ColorantControl\"]").getPreviousSiblingElement());
+		assertNull(e.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@CombinedProcessIndex", null));
+		assertNull(e.getXPathAttribute("ParameterSet[@Name=\"NodeInfo\"]/@CombinedProcessIndex", null));
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testColorNameBlank() throws Exception
 	{
 		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
 		cp.appendColorWithName("Black By Night", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
+		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.getCreateColorantParams().setSeparations(new VString("Black By Night,Cyan", ","));
 		e = new XJDF20().makeNewJDF(n, null);
 		assertEquals("Black_By_Night", e.getXPathAttribute("ParameterSet[@Name=\"Color\"]/Parameter/Part/@Separation", null));
+		assertEquals("Black_By_Night Cyan", e.getXPathAttribute("ParameterSet[@Name=\"ColorantControl\"]/Parameter/ColorantControl/@ColorantParams", null));
 	}
 
 	/**
@@ -410,7 +436,7 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 *  
 	 */
-	public void testFromXJDF2()
+	public void testFromXJDF2Sheets()
 	{
 		testColorPool();
 		KElement eNext = e.getOwnerDocument_KElement().clone().getRoot();

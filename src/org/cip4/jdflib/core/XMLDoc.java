@@ -133,7 +133,7 @@ import org.w3c.dom.traversal.TreeWalker;
 public class XMLDoc
 {
 
-	private DocumentJDFImpl m_doc;
+	protected DocumentJDFImpl m_doc;
 
 	// **************************************** Constructors
 	// ****************************************
@@ -634,7 +634,8 @@ public class XMLDoc
 
 		if (elem instanceof KElement)
 		{
-			((KElement) elem).init();
+			if (m_doc.bInitOnCreate)
+				((KElement) elem).init();
 		}
 
 		return elem;
@@ -1720,6 +1721,28 @@ public class XMLDoc
 				root.setAttribute("xs:" + AttributeName.SCHEMALOCATION, schemaLocation, AttributeName.XSI);
 			}
 		}
+	}
+
+	/**
+	 * if true (the default) initialize element when they are created, 
+	 * else don't call init() when an element is initially created
+	 * 
+	 * @param bInitOnCreate
+	 */
+	public void setInitOnCreate(boolean bInitOnCreate)
+	{
+		m_doc.bInitOnCreate = bInitOnCreate;
+	}
+
+	/**
+	 * if true (the default) initialize element when they are created, 
+	 * else don't call init() when an element is initially created
+	 * 
+	 * @return bInitOnCreate
+	 */
+	public boolean getInitOnCreate()
+	{
+		return m_doc.bInitOnCreate;
 	}
 
 	/**

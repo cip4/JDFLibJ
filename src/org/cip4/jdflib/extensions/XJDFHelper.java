@@ -3,9 +3,11 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.XMLDoc;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -18,7 +20,15 @@ public class XJDFHelper
 	public XJDFHelper(KElement xjdf)
 	{
 		super();
-		this.theXJDF = xjdf == null ? new XMLDoc(XJDF20.rootName, null).getRoot() : xjdf;
+		if (xjdf == null)
+		{
+			this.theXJDF = new JDFDoc(XJDF20.rootName).getRoot();
+		}
+		else
+		{
+			theXJDF = xjdf;
+		}
+		theXJDF.getOwnerDocument_KElement().setInitOnCreate(false);
 	}
 
 	/**
@@ -79,6 +89,9 @@ public class XJDFHelper
 	{
 		KElement newSet = theXJDF.appendElement(family + "Set");
 		newSet.setAttribute("Name", name);
+		if (name == null)
+			name = "Set";
+		newSet.setAttribute(AttributeName.ID, name + JDFElement.uniqueID(0));
 		return new SetHelper(newSet);
 	}
 
