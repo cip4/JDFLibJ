@@ -786,6 +786,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
 		defaultlistModel.addElement("JDFAutoQueueSubmissionParams.java");
 		defaultlistModel.addElement("JDFAutoRectangleEvaluation.java");
 		defaultlistModel.addElement("JDFAutoRefAnchor.java");
+		defaultlistModel.addElement("JDFAutoReferenceXObjParams.java");
 		defaultlistModel.addElement("JDFAutoRegisterMark.java");
 		defaultlistModel.addElement("JDFAutoRegisterRibbon.java");
 		defaultlistModel.addElement("JDFAutoRegistration.java");
