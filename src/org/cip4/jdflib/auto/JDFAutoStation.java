@@ -100,8 +100,7 @@ public abstract class JDFAutoStation extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.STATIONNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -113,8 +112,7 @@ public abstract class JDFAutoStation extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPEDEF, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,8 +162,7 @@ public abstract class JDFAutoStation extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoStation[  --> " + super.toString() + " ]";
     }

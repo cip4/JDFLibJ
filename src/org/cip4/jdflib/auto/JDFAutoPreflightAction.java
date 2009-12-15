@@ -94,8 +94,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.SETREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -145,8 +144,7 @@ public abstract class JDFAutoPreflightAction extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPreflightAction[  --> " + super.toString() + " ]";
     }

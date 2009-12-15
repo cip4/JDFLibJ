@@ -98,8 +98,7 @@ public abstract class JDFAutoGlue extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -112,8 +111,7 @@ public abstract class JDFAutoGlue extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.GLUELINE, 0x66666111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -163,8 +161,7 @@ public abstract class JDFAutoGlue extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoGlue[  --> " + super.toString() + " ]";
     }

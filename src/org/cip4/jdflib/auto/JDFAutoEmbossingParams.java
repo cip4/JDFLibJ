@@ -74,6 +74,9 @@ import java.util.Collection;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
@@ -87,14 +90,25 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+    static
+    {
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+    }
+    
+    protected AttributeInfo getTheAttributeInfo()
+    {
+        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.EMBOSS, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,15 +158,13 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoEmbossingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -160,12 +172,37 @@ public abstract class JDFAutoEmbossingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
 
+
+/* ************************************************************************
+ * Attribute getter / setter
+ * ************************************************************************
+ */
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ModuleIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ModuleIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setModuleIndex(int value)
+        {
+            setAttribute(AttributeName.MODULEINDEX, value, null);
+        }
+
+        /**
+          * (15) get int attribute ModuleIndex
+          * @return int the value of the attribute
+          */
+        public int getModuleIndex()
+        {
+            return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
+        }
 
 /* ***********************************************************************
  * Element getter / setter

@@ -98,8 +98,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.TEMPLATE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -111,8 +110,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -162,8 +160,7 @@ public abstract class JDFAutoDynamicField extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDynamicField[  --> " + super.toString() + " ]";
     }

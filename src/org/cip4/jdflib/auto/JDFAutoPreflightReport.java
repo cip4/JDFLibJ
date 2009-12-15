@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFPRItem;
 import org.cip4.jdflib.resource.process.JDFPreflightParams;
 import org.cip4.jdflib.resource.process.JDFPreflightReportRulePool;
@@ -100,29 +101,28 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x22222211, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ERRORCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.ERRORSTATE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumErrorState.getEnum(0), null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.WARNINGCOUNT, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[5];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.PREFLIGHTPARAMS, 0x55555511);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTREPORTRULEPOOL, 0x55555511);
-        elemInfoTable[2] = new ElemInfoTable(ElementName.RUNLIST, 0x55555511);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.PRITEM, 0x33333311);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66661111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTPARAMS, 0x55555511);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.PREFLIGHTREPORTRULEPOOL, 0x66666611);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.RUNLIST, 0x55555511);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.PRITEM, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -172,15 +172,13 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPreflightReport[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -188,8 +186,7 @@ public abstract class JDFAutoPreflightReport extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -268,28 +265,6 @@ public abstract class JDFAutoPreflightReport extends JDFResource
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute WarningCount
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute WarningCount
-          * @param value: the value to set the attribute to
-          */
-        public void setWarningCount(int value)
-        {
-            setAttribute(AttributeName.WARNINGCOUNT, value, null);
-        }
-
-        /**
-          * (15) get int attribute WarningCount
-          * @return int the value of the attribute
-          */
-        public int getWarningCount()
-        {
-            return getIntAttribute(AttributeName.WARNINGCOUNT, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
         Methods for Attribute ErrorState
         --------------------------------------------------------------------- */
         /**
@@ -310,10 +285,67 @@ public abstract class JDFAutoPreflightReport extends JDFResource
             return EnumErrorState.getEnum(getAttribute(AttributeName.ERRORSTATE, null, null));
         }
 
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute WarningCount
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute WarningCount
+          * @param value: the value to set the attribute to
+          */
+        public void setWarningCount(int value)
+        {
+            setAttribute(AttributeName.WARNINGCOUNT, value, null);
+        }
+
+        /**
+          * (15) get int attribute WarningCount
+          * @return int the value of the attribute
+          */
+        public int getWarningCount()
+        {
+            return getIntAttribute(AttributeName.WARNINGCOUNT, null, 0);
+        }
+
 /* ***********************************************************************
  * Element getter / setter
  * ***********************************************************************
  */
+
+    /**
+     * (24) const get element FileSpec
+     * @return JDFFileSpec the element
+     */
+    public JDFFileSpec getFileSpec()
+    {
+        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+    }
+
+    /** (25) getCreateFileSpec
+     * 
+     * @return JDFFileSpec the element
+     */
+    public JDFFileSpec getCreateFileSpec()
+    {
+        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+    }
+
+    /**
+     * (29) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
+    {
+        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refFileSpec(JDFFileSpec refTarget)
+    {
+        refElement(refTarget);
+    }
 
     /**
      * (24) const get element PreflightParams

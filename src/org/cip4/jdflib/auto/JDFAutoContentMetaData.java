@@ -101,8 +101,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.TITLE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +115,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x66661111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,8 +165,7 @@ public abstract class JDFAutoContentMetaData extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoContentMetaData[  --> " + super.toString() + " ]";
     }

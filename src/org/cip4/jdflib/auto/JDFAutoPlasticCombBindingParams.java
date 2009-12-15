@@ -103,8 +103,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.TYPE, 0x44444433, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +115,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,15 +165,13 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPlasticCombBindingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -183,8 +179,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -278,8 +273,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
           * (36) set attribute Brand
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setBrand(String value)
+        public void setBrand(String value)
         {
             setAttribute(AttributeName.BRAND, value, null);
         }
@@ -288,8 +282,7 @@ public abstract class JDFAutoPlasticCombBindingParams extends JDFResource
           * (23) get String attribute Brand
           * @return the value of the attribute
           */
-        @Override
-		public String getBrand()
+        public String getBrand()
         {
             return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
         }

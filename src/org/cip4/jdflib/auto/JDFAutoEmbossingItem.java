@@ -104,8 +104,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
         elemInfoTable[9] = new ElemInfoTable(ElementName.POSITION, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -155,8 +154,7 @@ public abstract class JDFAutoEmbossingItem extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoEmbossingItem[  --> " + super.toString() + " ]";
     }

@@ -82,21 +82,22 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 public abstract class JDFAutoPreflightParams extends JDFResource
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x22222211);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.TESTPOOL, 0x55555111);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x33333311);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.FILESPEC, 0x66661111);
+        elemInfoTable[2] = new ElemInfoTable(ElementName.TESTPOOL, 0x66666111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -146,15 +147,13 @@ public abstract class JDFAutoPreflightParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPreflightParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -162,8 +161,7 @@ public abstract class JDFAutoPreflightParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -222,6 +220,41 @@ public abstract class JDFAutoPreflightParams extends JDFResource
     public JDFActionPool appendActionPool() throws JDFException
     {
         return (JDFActionPool) appendElement(ElementName.ACTIONPOOL, null);
+    }
+
+    /**
+     * (24) const get element FileSpec
+     * @return JDFFileSpec the element
+     */
+    public JDFFileSpec getFileSpec()
+    {
+        return (JDFFileSpec) getElement(ElementName.FILESPEC, null, 0);
+    }
+
+    /** (25) getCreateFileSpec
+     * 
+     * @return JDFFileSpec the element
+     */
+    public JDFFileSpec getCreateFileSpec()
+    {
+        return (JDFFileSpec) getCreateElement_KElement(ElementName.FILESPEC, null, 0);
+    }
+
+    /**
+     * (29) append element FileSpec
+     */
+    public JDFFileSpec appendFileSpec() throws JDFException
+    {
+        return (JDFFileSpec) appendElementN(ElementName.FILESPEC, 1, null);
+    }
+
+    /**
+      * (31) create inter-resource link to refTarget
+      * @param refTarget the element that is referenced
+      */
+    public void refFileSpec(JDFFileSpec refTarget)
+    {
+        refElement(refTarget);
     }
 
     /**

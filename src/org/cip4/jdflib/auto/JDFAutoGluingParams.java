@@ -97,8 +97,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.GLUINGPRODUCTIONID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -110,8 +109,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.GLUE, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -161,15 +159,13 @@ public abstract class JDFAutoGluingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoGluingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -177,8 +173,7 @@ public abstract class JDFAutoGluingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

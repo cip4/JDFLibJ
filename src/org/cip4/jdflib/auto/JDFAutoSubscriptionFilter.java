@@ -105,8 +105,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
         atrInfoTable[7] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,8 +117,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,8 +167,7 @@ public abstract class JDFAutoSubscriptionFilter extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSubscriptionFilter[  --> " + super.toString() + " ]";
     }

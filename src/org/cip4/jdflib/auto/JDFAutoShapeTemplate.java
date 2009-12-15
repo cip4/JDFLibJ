@@ -101,8 +101,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.STANDARD, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,8 +113,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,8 +163,7 @@ public abstract class JDFAutoShapeTemplate extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoShapeTemplate[  --> " + super.toString() + " ]";
     }

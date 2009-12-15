@@ -93,8 +93,7 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEENTRYDEF, 0x44444431);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoQueueEntryDefList extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoQueueEntryDefList[  --> " + super.toString() + " ]";
     }

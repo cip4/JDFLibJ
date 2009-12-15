@@ -96,8 +96,7 @@ public abstract class JDFAutoMarkActivation extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.INDEX, 0x22222222, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,8 +146,7 @@ public abstract class JDFAutoMarkActivation extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoMarkActivation[  --> " + super.toString() + " ]";
     }

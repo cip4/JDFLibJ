@@ -115,8 +115,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         atrInfoTable[9] = new AtrInfoTable(AttributeName.UPDATEGRANULARITY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateGranularity.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -130,8 +129,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -181,8 +179,7 @@ public abstract class JDFAutoQueueFilter extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoQueueFilter[  --> " + super.toString() + " ]";
     }

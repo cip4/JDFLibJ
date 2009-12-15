@@ -98,8 +98,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CONTENTDATAREFS, 0x33331111, AttributeInfo.EnumAttributeType.IDREFS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +114,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
         elemInfoTable[4] = new ElemInfoTable(ElementName.CONTENTLIST, 0x66661111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,8 +164,7 @@ public abstract class JDFAutoPublishingIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPublishingIntent[  --> " + super.toString() + " ]";
     }

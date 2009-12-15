@@ -95,8 +95,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.USERDISPLAY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumUserDisplay.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,8 +145,7 @@ public abstract class JDFAutoFeatureAttribute extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFeatureAttribute[  --> " + super.toString() + " ]";
     }

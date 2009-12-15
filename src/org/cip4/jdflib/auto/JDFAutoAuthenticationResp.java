@@ -96,8 +96,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.URL, 0x33331111, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -109,8 +108,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.CERTIFICATE, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -160,8 +158,7 @@ public abstract class JDFAutoAuthenticationResp extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAuthenticationResp[  --> " + super.toString() + " ]";
     }

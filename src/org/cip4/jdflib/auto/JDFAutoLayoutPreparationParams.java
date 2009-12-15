@@ -136,8 +136,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         atrInfoTable[22] = new AtrInfoTable(AttributeName.VERTICALCREEP, 0x33333331, AttributeInfo.EnumAttributeType.IntegerList, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -156,8 +155,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
         elemInfoTable[7] = new ElemInfoTable(ElementName.PAGECELL, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -207,15 +205,13 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLayoutPreparationParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -223,8 +219,7 @@ public abstract class JDFAutoLayoutPreparationParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

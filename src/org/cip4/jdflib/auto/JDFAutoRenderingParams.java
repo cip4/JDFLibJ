@@ -106,8 +106,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.INTERLEAVED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,8 +120,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x77777761);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -172,15 +170,13 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRenderingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -188,8 +184,7 @@ public abstract class JDFAutoRenderingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

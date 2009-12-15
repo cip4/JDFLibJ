@@ -93,8 +93,7 @@ public abstract class JDFAutoset extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x22222211, AttributeInfo.EnumAttributeType.IDREF, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -106,8 +105,7 @@ public abstract class JDFAutoset extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.FEATUREATTRIBUTE, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -157,8 +155,7 @@ public abstract class JDFAutoset extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoset[  --> " + super.toString() + " ]";
     }

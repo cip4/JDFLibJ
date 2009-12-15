@@ -95,8 +95,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.STEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -146,8 +145,7 @@ public abstract class JDFAutoNumberingParam extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNumberingParam[  --> " + super.toString() + " ]";
     }

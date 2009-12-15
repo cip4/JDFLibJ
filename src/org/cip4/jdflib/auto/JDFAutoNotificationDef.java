@@ -96,8 +96,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.TYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,8 +146,7 @@ public abstract class JDFAutoNotificationDef extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNotificationDef[  --> " + super.toString() + " ]";
     }

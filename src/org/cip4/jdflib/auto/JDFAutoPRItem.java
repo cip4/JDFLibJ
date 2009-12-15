@@ -102,8 +102,7 @@ public abstract class JDFAutoPRItem extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.PAGESET, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +115,7 @@ public abstract class JDFAutoPRItem extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.PRGROUP, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,8 +165,7 @@ public abstract class JDFAutoPRItem extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPRItem[  --> " + super.toString() + " ]";
     }

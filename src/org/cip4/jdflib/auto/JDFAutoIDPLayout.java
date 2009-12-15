@@ -110,8 +110,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.SIDES, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSides.getEnum(0), "OneSided");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -123,8 +122,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.IMAGESHIFT, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -174,8 +172,7 @@ public abstract class JDFAutoIDPLayout extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoIDPLayout[  --> " + super.toString() + " ]";
     }

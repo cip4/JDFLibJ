@@ -118,8 +118,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         atrInfoTable[12] = new AtrInfoTable(AttributeName.WEBCELLALIGNMENT, 0x33331111, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -133,8 +132,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.SIGNATURECELL, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -184,15 +182,13 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBinderySignature[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -200,8 +196,7 @@ public abstract class JDFAutoBinderySignature extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

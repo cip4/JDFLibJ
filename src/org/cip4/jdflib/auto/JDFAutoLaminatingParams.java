@@ -90,20 +90,20 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.LAMINATINGBOX, 0x22222221, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ADHESIVETYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.GAPLIST, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.HARDENERTYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.ADHESIVETYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.GAPLIST, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.HARDENERTYPE, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.LAMINATINGBOX, 0x33333331, AttributeInfo.EnumAttributeType.rectangle, null, null);
         atrInfoTable[4] = new AtrInfoTable(AttributeName.LAMINATINGMETHOD, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumLaminatingMethod.getEnum(0), null);
         atrInfoTable[5] = new AtrInfoTable(AttributeName.NIPWIDTH, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.TEMPERATURE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -153,15 +153,13 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLaminatingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -169,8 +167,7 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -227,40 +224,6 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
  * Attribute getter / setter
  * ************************************************************************
  */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute LaminatingBox
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute LaminatingBox
-          * @param value: the value to set the attribute to
-          */
-        public void setLaminatingBox(JDFRectangle value)
-        {
-            setAttribute(AttributeName.LAMINATINGBOX, value, null);
-        }
-
-        /**
-          * (20) get JDFRectangle attribute LaminatingBox
-          * @return JDFRectangle the value of the attribute, null if a the
-          *         attribute value is not a valid to create a JDFRectangle
-          */
-        public JDFRectangle getLaminatingBox()
-        {
-            String strAttrName = "";
-            JDFRectangle nPlaceHolder = null;
-            strAttrName = getAttribute(AttributeName.LAMINATINGBOX, null, JDFConstants.EMPTYSTRING);
-            try
-            {
-                nPlaceHolder = new JDFRectangle(strAttrName);
-            }
-            catch(DataFormatException e)
-            {
-                return null;
-            }
-            return nPlaceHolder;
-        }
-
         
         /* ---------------------------------------------------------------------
         Methods for Attribute AdhesiveType
@@ -341,6 +304,40 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
 
         
         /* ---------------------------------------------------------------------
+        Methods for Attribute LaminatingBox
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute LaminatingBox
+          * @param value: the value to set the attribute to
+          */
+        public void setLaminatingBox(JDFRectangle value)
+        {
+            setAttribute(AttributeName.LAMINATINGBOX, value, null);
+        }
+
+        /**
+          * (20) get JDFRectangle attribute LaminatingBox
+          * @return JDFRectangle the value of the attribute, null if a the
+          *         attribute value is not a valid to create a JDFRectangle
+          */
+        public JDFRectangle getLaminatingBox()
+        {
+            String strAttrName = "";
+            JDFRectangle nPlaceHolder = null;
+            strAttrName = getAttribute(AttributeName.LAMINATINGBOX, null, JDFConstants.EMPTYSTRING);
+            try
+            {
+                nPlaceHolder = new JDFRectangle(strAttrName);
+            }
+            catch(DataFormatException e)
+            {
+                return null;
+            }
+            return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
         Methods for Attribute LaminatingMethod
         --------------------------------------------------------------------- */
         /**
@@ -381,6 +378,28 @@ public abstract class JDFAutoLaminatingParams extends JDFResource
         public double getNipWidth()
         {
             return getRealAttribute(AttributeName.NIPWIDTH, null, 0.0);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ModuleIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ModuleIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setModuleIndex(int value)
+        {
+            setAttribute(AttributeName.MODULEINDEX, value, null);
+        }
+
+        /**
+          * (15) get int attribute ModuleIndex
+          * @return int the value of the attribute
+          */
+        public int getModuleIndex()
+        {
+            return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
         }
 
         

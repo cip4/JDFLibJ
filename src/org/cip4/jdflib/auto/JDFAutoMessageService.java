@@ -116,8 +116,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         atrInfoTable[10] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -133,8 +132,7 @@ public abstract class JDFAutoMessageService extends JDFElement
         elemInfoTable[4] = new ElemInfoTable(ElementName.TESTPOOL, 0x66666111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -184,8 +182,7 @@ public abstract class JDFAutoMessageService extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoMessageService[  --> " + super.toString() + " ]";
     }

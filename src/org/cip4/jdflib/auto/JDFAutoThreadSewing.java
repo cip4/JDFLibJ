@@ -89,8 +89,7 @@ public abstract class JDFAutoThreadSewing extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.SEALING, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -140,8 +139,7 @@ public abstract class JDFAutoThreadSewing extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoThreadSewing[  --> " + super.toString() + " ]";
     }

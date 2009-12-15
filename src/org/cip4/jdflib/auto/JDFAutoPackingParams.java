@@ -109,8 +109,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
         atrInfoTable[13] = new AtrInfoTable(AttributeName.WRAPPEDQUANTITY, 0x44444443, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -160,15 +159,13 @@ public abstract class JDFAutoPackingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPackingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -176,8 +173,7 @@ public abstract class JDFAutoPackingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

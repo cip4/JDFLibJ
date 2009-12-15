@@ -97,8 +97,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.STRIPCOLORDETAILS, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -110,8 +109,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -161,15 +159,13 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoStripBindingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -177,8 +173,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -196,8 +191,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
           * (36) set attribute Brand
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setBrand(String value)
+        public void setBrand(String value)
         {
             setAttribute(AttributeName.BRAND, value, null);
         }
@@ -206,8 +200,7 @@ public abstract class JDFAutoStripBindingParams extends JDFResource
           * (23) get String attribute Brand
           * @return the value of the attribute
           */
-        @Override
-		public String getBrand()
+        public String getBrand()
         {
             return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
         }

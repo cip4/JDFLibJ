@@ -89,8 +89,7 @@ public abstract class JDFAutoExtraValues extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.VALUE, 0x22222111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -140,8 +139,7 @@ public abstract class JDFAutoExtraValues extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoExtraValues[  --> " + super.toString() + " ]";
     }

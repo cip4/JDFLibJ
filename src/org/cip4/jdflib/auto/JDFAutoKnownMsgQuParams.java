@@ -98,8 +98,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.PERSISTENT, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -149,8 +148,7 @@ public abstract class JDFAutoKnownMsgQuParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoKnownMsgQuParams[  --> " + super.toString() + " ]";
     }

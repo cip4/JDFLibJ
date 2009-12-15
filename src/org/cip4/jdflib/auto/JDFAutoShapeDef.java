@@ -110,8 +110,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         atrInfoTable[7] = new AtrInfoTable(AttributeName.RESOURCEWEIGHT, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -125,8 +124,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.SHAPE, 0x66661111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -176,15 +174,13 @@ public abstract class JDFAutoShapeDef extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoShapeDef[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -192,8 +188,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -526,8 +521,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
           * (36) set attribute ResourceWeight
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setResourceWeight(double value)
+        public void setResourceWeight(double value)
         {
             setAttribute(AttributeName.RESOURCEWEIGHT, value, null);
         }
@@ -536,8 +530,7 @@ public abstract class JDFAutoShapeDef extends JDFResource
           * (17) get double attribute ResourceWeight
           * @return double the value of the attribute
           */
-        @Override
-		public double getResourceWeight()
+        public double getResourceWeight()
         {
             return getRealAttribute(AttributeName.RESOURCEWEIGHT, null, 0.0);
         }

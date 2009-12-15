@@ -119,8 +119,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         atrInfoTable[14] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -134,8 +133,7 @@ public abstract class JDFAutoStripMark extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.REFANCHOR, 0x33333111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -185,8 +183,7 @@ public abstract class JDFAutoStripMark extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoStripMark[  --> " + super.toString() + " ]";
     }
@@ -594,8 +591,7 @@ public abstract class JDFAutoStripMark extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        @Override
-		public String getID()
+        public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

@@ -92,7 +92,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[18];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[19];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BLOCKSIZE, 0x22222222, AttributeInfo.EnumAttributeType.XYPair, null, null);
@@ -103,20 +103,20 @@ public abstract class JDFAutoCutBlock extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.CUTWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.double_, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.BLOCKELEMENTSIZE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.BLOCKELEMENTTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumBlockElementType.getEnum(0), null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[17] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[17] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[18] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -166,15 +166,13 @@ public abstract class JDFAutoCutBlock extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCutBlock[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -182,8 +180,7 @@ public abstract class JDFAutoCutBlock extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -510,6 +507,28 @@ public abstract class JDFAutoCutBlock extends JDFResource
         public EnumBlockElementType getBlockElementType()
         {
             return EnumBlockElementType.getEnum(getAttribute(AttributeName.BLOCKELEMENTTYPE, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute BinderySignaturePaginationIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute BinderySignaturePaginationIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setBinderySignaturePaginationIndex(String value)
+        {
+            setAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, value, null);
+        }
+
+        /**
+          * (23) get String attribute BinderySignaturePaginationIndex
+          * @return the value of the attribute
+          */
+        public String getBinderySignaturePaginationIndex()
+        {
+            return getAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, null, JDFConstants.EMPTYSTRING);
         }
 
         

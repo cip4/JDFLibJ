@@ -103,8 +103,7 @@ public abstract class JDFAutoNewComment extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x22222222, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +115,7 @@ public abstract class JDFAutoNewComment extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,8 +165,7 @@ public abstract class JDFAutoNewComment extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNewComment[  --> " + super.toString() + " ]";
     }

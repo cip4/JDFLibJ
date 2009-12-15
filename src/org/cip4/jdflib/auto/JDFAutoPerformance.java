@@ -102,8 +102,7 @@ public abstract class JDFAutoPerformance extends JDFElement
         atrInfoTable[11] = new AtrInfoTable(AttributeName.UNIT, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -153,8 +152,7 @@ public abstract class JDFAutoPerformance extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPerformance[  --> " + super.toString() + " ]";
     }

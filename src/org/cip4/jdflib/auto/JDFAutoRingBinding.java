@@ -101,8 +101,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
         elemInfoTable[8] = new ElemInfoTable(ElementName.VIEWBINDER, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -152,8 +151,7 @@ public abstract class JDFAutoRingBinding extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRingBinding[  --> " + super.toString() + " ]";
     }

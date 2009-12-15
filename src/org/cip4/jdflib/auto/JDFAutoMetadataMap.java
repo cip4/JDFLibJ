@@ -70,9 +70,11 @@
 
 package org.cip4.jdflib.auto;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -84,6 +86,8 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
 
 public abstract class JDFAutoMetadataMap extends JDFElement
 {
@@ -100,8 +104,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.VALUETEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -113,8 +116,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.EXPR, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,8 +166,7 @@ public abstract class JDFAutoMetadataMap extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoMetadataMap[  --> " + super.toString() + " ]";
     }
@@ -393,5 +394,60 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         {
             return getAttribute(AttributeName.VALUETEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /** (26) getCreateExpr
+     * 
+     * @param iSkip number of elements to skip
+     * @return JDFExpr the element
+     */
+    public JDFExpr getCreateExpr(int iSkip)
+    {
+        return (JDFExpr)getCreateElement_KElement(ElementName.EXPR, null, iSkip);
+    }
+
+    /**
+     * (27) const get element Expr
+     * @param iSkip number of elements to skip
+     * @return JDFExpr the element
+     * default is getExpr(0)     */
+    public JDFExpr getExpr(int iSkip)
+    {
+        return (JDFExpr) getElement(ElementName.EXPR, null, iSkip);
+    }
+
+    /**
+     * Get all Expr from the current element
+     * 
+     * @return Collection<JDFExpr>, null if none are available
+     */
+    public Collection<JDFExpr> getAllExpr()
+    {
+        final VElement vc = getChildElementVector(ElementName.EXPR, null);
+        if (vc == null || vc.size() == 0)
+        {
+            return null;
+        }
+
+        final Vector<JDFExpr> v = new Vector<JDFExpr>();
+        for (int i = 0; i < vc.size(); i++)
+        {
+            v.add((JDFExpr) vc.get(i));
+        }
+
+        return v;
+    }
+
+    /**
+     * (30) append element Expr
+     */
+    public JDFExpr appendExpr() throws JDFException
+    {
+        return (JDFExpr) appendElement(ElementName.EXPR, null);
+    }
 
 }// end namespace JDF

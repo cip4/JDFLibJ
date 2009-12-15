@@ -98,8 +98,7 @@ public abstract class JDFAutoJobField extends JDFResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.USERTEXT, 0x33333331, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -111,8 +110,7 @@ public abstract class JDFAutoJobField extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEMARK, 0x77776666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -162,15 +160,13 @@ public abstract class JDFAutoJobField extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoJobField[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -178,8 +174,7 @@ public abstract class JDFAutoJobField extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

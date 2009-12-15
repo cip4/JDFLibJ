@@ -113,8 +113,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         atrInfoTable[9] = new AtrInfoTable(AttributeName.SUBMISSIONTIME, 0x33333333, AttributeInfo.EnumAttributeType.dateTime, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -127,8 +126,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -178,8 +176,7 @@ public abstract class JDFAutoQueueEntry extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoQueueEntry[  --> " + super.toString() + " ]";
     }

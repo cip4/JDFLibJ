@@ -89,8 +89,7 @@ public abstract class JDFAutoResubmissionParams extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -140,8 +139,7 @@ public abstract class JDFAutoResubmissionParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoResubmissionParams[  --> " + super.toString() + " ]";
     }

@@ -101,8 +101,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.UPDATEDSTATUS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, JDFResource.EnumResStatus.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,8 +113,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,8 +163,7 @@ public abstract class JDFAutoPipeParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPipeParams[  --> " + super.toString() + " ]";
     }

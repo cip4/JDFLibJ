@@ -122,8 +122,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
         elemInfoTable[20] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -173,8 +172,7 @@ public abstract class JDFAutoHardCoverBinding extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoHardCoverBinding[  --> " + super.toString() + " ]";
     }

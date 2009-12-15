@@ -102,8 +102,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.ISDEVICE, 0x22222222, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +114,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,8 +164,7 @@ public abstract class JDFAutoTrackResult extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTrackResult[  --> " + super.toString() + " ]";
     }

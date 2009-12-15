@@ -93,8 +93,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x22221111, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoShiftPoint extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoShiftPoint[  --> " + super.toString() + " ]";
     }

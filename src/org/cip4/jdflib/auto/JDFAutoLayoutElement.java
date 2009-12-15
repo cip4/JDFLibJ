@@ -107,7 +107,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[15];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[16];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNOREPDLCOPIES, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
@@ -120,15 +120,15 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         atrInfoTable[7] = new AtrInfoTable(AttributeName.ISPRINTABLE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[8] = new AtrInfoTable(AttributeName.ISTRAPPED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[9] = new AtrInfoTable(AttributeName.PAGELISTINDEX, 0x33333311, AttributeInfo.EnumAttributeType.IntegerRangeList, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.SOURCEMEDIABOX, 0x33331111, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[13] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
-        atrInfoTable[14] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.SETLEVEL, 0x33331111, AttributeInfo.EnumAttributeType.XPath, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.SOURCEBLEEDBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[12] = new AtrInfoTable(AttributeName.SOURCECLIPBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[13] = new AtrInfoTable(AttributeName.SOURCEMEDIABOX, 0x33331111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[14] = new AtrInfoTable(AttributeName.SOURCETRIMBOX, 0x33333333, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.TEMPLATE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -148,8 +148,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
         elemInfoTable[8] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -199,15 +198,13 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLayoutElement[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -215,8 +212,7 @@ public abstract class JDFAutoLayoutElement extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -517,6 +513,28 @@ public abstract class JDFAutoLayoutElement extends JDFResource
                 return null;
             }
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute SetLevel
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute SetLevel
+          * @param value: the value to set the attribute to
+          */
+        public void setSetLevel(String value)
+        {
+            setAttribute(AttributeName.SETLEVEL, value, null);
+        }
+
+        /**
+          * (23) get String attribute SetLevel
+          * @return the value of the attribute
+          */
+        public String getSetLevel()
+        {
+            return getAttribute(AttributeName.SETLEVEL, null, JDFConstants.EMPTYSTRING);
         }
 
         

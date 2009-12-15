@@ -119,8 +119,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         atrInfoTable[17] = new AtrInfoTable(AttributeName.TRANSFERCURVE, 0x33333333, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -133,8 +132,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.FITPOLICY, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -184,15 +182,13 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoImageSetterParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -200,8 +196,7 @@ public abstract class JDFAutoImageSetterParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

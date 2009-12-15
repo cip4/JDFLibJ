@@ -95,8 +95,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.ARGUMENTVALUE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -146,8 +145,7 @@ public abstract class JDFAutoPRGroupOccurrence extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPRGroupOccurrence[  --> " + super.toString() + " ]";
     }

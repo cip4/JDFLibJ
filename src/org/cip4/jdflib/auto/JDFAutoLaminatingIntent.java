@@ -97,8 +97,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
         elemInfoTable[4] = new ElemInfoTable(ElementName.THICKNESS, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -148,8 +147,7 @@ public abstract class JDFAutoLaminatingIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLaminatingIntent[  --> " + super.toString() + " ]";
     }

@@ -101,20 +101,19 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[10];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.IGNOREEMBEDDEDICC, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.PRESERVEBLACK, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.RENDERINGINTENT, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumRenderingIntent.getEnum(0), "ColorSpaceDependent");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.RGBGRAY2BLACK, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.RGBGRAY2BLACKTHRESHOLD, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, "1");
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.PRESERVEBLACK, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.RENDERINGINTENT, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumRenderingIntent.getEnum(0), "ColorSpaceDependent");
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.RGBGRAY2BLACK, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.RGBGRAY2BLACKTHRESHOLD, 0x33333311, AttributeInfo.EnumAttributeType.double_, null, "1");
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.SOURCEOBJECTS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumSourceObjects.getEnum(0), "All");
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.IGNOREEMBEDDEDICC, 0x44443333, AttributeInfo.EnumAttributeType.boolean_, null, null);
         atrInfoTable[6] = new AtrInfoTable(AttributeName.OBJECTTAGS, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
         atrInfoTable[7] = new AtrInfoTable(AttributeName.OPERATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumOperation.getEnum(0), null);
         atrInfoTable[8] = new AtrInfoTable(AttributeName.SOURCECS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSourceCS.getEnum(0), null);
         atrInfoTable[9] = new AtrInfoTable(AttributeName.SOURCERENDERINGINTENT, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumSourceRenderingIntent.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -128,8 +127,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -179,8 +177,7 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoColorSpaceConversionOp[  --> " + super.toString() + " ]";
     }
@@ -446,28 +443,6 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
  */
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute IgnoreEmbeddedICC
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute IgnoreEmbeddedICC
-          * @param value: the value to set the attribute to
-          */
-        public void setIgnoreEmbeddedICC(boolean value)
-        {
-            setAttribute(AttributeName.IGNOREEMBEDDEDICC, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute IgnoreEmbeddedICC
-          * @return boolean the value of the attribute
-          */
-        public boolean getIgnoreEmbeddedICC()
-        {
-            return getBoolAttribute(AttributeName.IGNOREEMBEDDEDICC, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
         Methods for Attribute PreserveBlack
         --------------------------------------------------------------------- */
         /**
@@ -574,6 +549,28 @@ public abstract class JDFAutoColorSpaceConversionOp extends JDFElement
         public Vector getSourceObjects()
         {
             return getEnumerationsAttribute(AttributeName.SOURCEOBJECTS, null, EnumSourceObjects.All, false);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute IgnoreEmbeddedICC
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute IgnoreEmbeddedICC
+          * @param value: the value to set the attribute to
+          */
+        public void setIgnoreEmbeddedICC(boolean value)
+        {
+            setAttribute(AttributeName.IGNOREEMBEDDEDICC, value, null);
+        }
+
+        /**
+          * (18) get boolean attribute IgnoreEmbeddedICC
+          * @return boolean the value of the attribute
+          */
+        public boolean getIgnoreEmbeddedICC()
+        {
+            return getBoolAttribute(AttributeName.IGNOREEMBEDDEDICC, null, false);
         }
 
         

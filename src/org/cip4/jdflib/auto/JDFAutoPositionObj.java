@@ -109,8 +109,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
         atrInfoTable[7] = new AtrInfoTable(AttributeName.SIZEPOLICY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumSizePolicy.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -122,8 +121,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.REFANCHOR, 0x66661111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -173,8 +171,7 @@ public abstract class JDFAutoPositionObj extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPositionObj[  --> " + super.toString() + " ]";
     }

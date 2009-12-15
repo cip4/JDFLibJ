@@ -107,8 +107,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
         atrInfoTable[10] = new AtrInfoTable(AttributeName.SPOTFUNCTION, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -158,8 +157,7 @@ public abstract class JDFAutoScreenSelector extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoScreenSelector[  --> " + super.toString() + " ]";
     }

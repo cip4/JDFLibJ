@@ -95,8 +95,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.TRANSFERFUNCTIONCONTROL, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -146,15 +145,13 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSeparationControlParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -162,8 +159,7 @@ public abstract class JDFAutoSeparationControlParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

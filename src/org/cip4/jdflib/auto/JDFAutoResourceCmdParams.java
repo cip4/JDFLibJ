@@ -116,8 +116,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
         atrInfoTable[12] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -131,8 +130,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -182,8 +180,7 @@ public abstract class JDFAutoResourceCmdParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoResourceCmdParams[  --> " + super.toString() + " ]";
     }

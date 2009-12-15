@@ -100,7 +100,7 @@ public abstract class JDFAutoSubscription extends JDFElement
     private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[8];
     static
     {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), "FireAndForget");
+        atrInfoTable[0] = new AtrInfoTable(AttributeName.CHANNELMODE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumChannelMode.getEnum(0), null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.FORMAT, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.MINDELAYTIME, 0x33333111, AttributeInfo.EnumAttributeType.duration, null, null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.REPEATSTEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
@@ -110,8 +110,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         atrInfoTable[7] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -123,8 +122,7 @@ public abstract class JDFAutoSubscription extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.OBSERVATIONTARGET, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -174,8 +172,7 @@ public abstract class JDFAutoSubscription extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSubscription[  --> " + super.toString() + " ]";
     }
@@ -294,7 +291,7 @@ public abstract class JDFAutoSubscription extends JDFElement
           */
         public EnumChannelMode getChannelMode()
         {
-            return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, "FireAndForget"));
+            return EnumChannelMode.getEnum(getAttribute(AttributeName.CHANNELMODE, null, null));
         }
 
         

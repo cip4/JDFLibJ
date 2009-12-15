@@ -95,15 +95,15 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[3];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.DELIVERYMODE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumDeliveryMode.getEnum(0), null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETLAY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETLAY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetLay.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +116,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPE, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,15 +166,13 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoShapeCuttingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -183,8 +180,7 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -306,6 +302,28 @@ public abstract class JDFAutoShapeCuttingParams extends JDFResource
         public EnumDeliveryMode getDeliveryMode()
         {
             return EnumDeliveryMode.getEnum(getAttribute(AttributeName.DELIVERYMODE, null, null));
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute ModuleIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute ModuleIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setModuleIndex(int value)
+        {
+            setAttribute(AttributeName.MODULEINDEX, value, null);
+        }
+
+        /**
+          * (15) get int attribute ModuleIndex
+          * @return int the value of the attribute
+          */
+        public int getModuleIndex()
+        {
+            return getIntAttribute(AttributeName.MODULEINDEX, null, 0);
         }
 
         

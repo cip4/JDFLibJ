@@ -103,8 +103,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.COLORTRANSFORM, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumColorTransform.getEnum(0), "Automatic");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -154,8 +153,7 @@ public abstract class JDFAutoDCTParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDCTParams[  --> " + super.toString() + " ]";
     }

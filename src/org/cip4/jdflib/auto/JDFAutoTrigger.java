@@ -100,8 +100,7 @@ public abstract class JDFAutoTrigger extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.REPEATTIME, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +115,7 @@ public abstract class JDFAutoTrigger extends JDFResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.REMOVED, 0x77777766);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,15 +165,13 @@ public abstract class JDFAutoTrigger extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTrigger[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -183,8 +179,7 @@ public abstract class JDFAutoTrigger extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

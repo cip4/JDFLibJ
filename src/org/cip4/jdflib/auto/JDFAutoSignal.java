@@ -105,8 +105,7 @@ public abstract class JDFAutoSignal extends JDFMessage
         atrInfoTable[2] = new AtrInfoTable(AttributeName.REFID, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -120,8 +119,7 @@ public abstract class JDFAutoSignal extends JDFMessage
         elemInfoTable[2] = new ElemInfoTable(ElementName.TRIGGER, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,8 +169,7 @@ public abstract class JDFAutoSignal extends JDFMessage
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSignal[  --> " + super.toString() + " ]";
     }
@@ -279,8 +276,7 @@ public abstract class JDFAutoSignal extends JDFMessage
           * (36) set attribute refID
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setrefID(String value)
+        public void setrefID(String value)
         {
             setAttribute(AttributeName.REFID, value, null);
         }
@@ -289,8 +285,7 @@ public abstract class JDFAutoSignal extends JDFMessage
           * (23) get String attribute refID
           * @return the value of the attribute
           */
-        @Override
-		public String getrefID()
+        public String getrefID()
         {
             return getAttribute(AttributeName.REFID, null, JDFConstants.EMPTYSTRING);
         }

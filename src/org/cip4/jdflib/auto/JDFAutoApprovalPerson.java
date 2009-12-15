@@ -100,8 +100,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.APPROVALROLEDETAILS, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -113,8 +112,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.CONTACT, 0x55555555);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,8 +162,7 @@ public abstract class JDFAutoApprovalPerson extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoApprovalPerson[  --> " + super.toString() + " ]";
     }

@@ -88,8 +88,7 @@ public abstract class JDFAutoSeparationSpec extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.NAME, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,8 +138,7 @@ public abstract class JDFAutoSeparationSpec extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSeparationSpec[  --> " + super.toString() + " ]";
     }

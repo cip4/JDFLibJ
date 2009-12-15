@@ -101,12 +101,11 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.SHEETFORMAT, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, "Standard");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOCCURENCE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSheetOccurence.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.SHEETOCCURRENCE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSheetOccurrence.getEnum(0), null);
         atrInfoTable[2] = new AtrInfoTable(AttributeName.SHEETTYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumSheetType.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,8 +120,7 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -172,59 +170,58 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoIDPJobSheet[  --> " + super.toString() + " ]";
     }
 
 
         /**
-        * Enumeration strings for SheetOccurence
+        * Enumeration strings for SheetOccurrence
         */
 
-        public static class EnumSheetOccurence extends ValuedEnum
+        public static class EnumSheetOccurrence extends ValuedEnum
         {
             private static final long serialVersionUID = 1L;
             private static int m_startValue = 0;
 
-            private EnumSheetOccurence(String name)
+            private EnumSheetOccurrence(String name)
             {
                 super(name, m_startValue++);
             }
 
-            public static EnumSheetOccurence getEnum(String enumName)
+            public static EnumSheetOccurrence getEnum(String enumName)
             {
-                return (EnumSheetOccurence) getEnum(EnumSheetOccurence.class, enumName);
+                return (EnumSheetOccurrence) getEnum(EnumSheetOccurrence.class, enumName);
             }
 
-            public static EnumSheetOccurence getEnum(int enumValue)
+            public static EnumSheetOccurrence getEnum(int enumValue)
             {
-                return (EnumSheetOccurence) getEnum(EnumSheetOccurence.class, enumValue);
+                return (EnumSheetOccurrence) getEnum(EnumSheetOccurrence.class, enumValue);
             }
 
             public static Map getEnumMap()
             {
-                return getEnumMap(EnumSheetOccurence.class);
+                return getEnumMap(EnumSheetOccurrence.class);
             }
 
             public static List getEnumList()
             {
-                return getEnumList(EnumSheetOccurence.class);
+                return getEnumList(EnumSheetOccurrence.class);
             }
 
             public static Iterator iterator()
             {
-                return iterator(EnumSheetOccurence.class);
+                return iterator(EnumSheetOccurrence.class);
             }
 
-            public static final EnumSheetOccurence Always = new EnumSheetOccurence("Always");
-            public static final EnumSheetOccurence End = new EnumSheetOccurence("End");
-            public static final EnumSheetOccurence OnError = new EnumSheetOccurence("OnError");
-            public static final EnumSheetOccurence Slip = new EnumSheetOccurence("Slip");
-            public static final EnumSheetOccurence Start = new EnumSheetOccurence("Start");
-            public static final EnumSheetOccurence Both = new EnumSheetOccurence("Both");
-            public static final EnumSheetOccurence None = new EnumSheetOccurence("None");
+            public static final EnumSheetOccurrence Always = new EnumSheetOccurrence("Always");
+            public static final EnumSheetOccurrence End = new EnumSheetOccurrence("End");
+            public static final EnumSheetOccurrence OnError = new EnumSheetOccurrence("OnError");
+            public static final EnumSheetOccurrence Slip = new EnumSheetOccurrence("Slip");
+            public static final EnumSheetOccurrence Start = new EnumSheetOccurrence("Start");
+            public static final EnumSheetOccurrence Both = new EnumSheetOccurrence("Both");
+            public static final EnumSheetOccurrence None = new EnumSheetOccurrence("None");
         }      
 
 
@@ -304,24 +301,24 @@ public abstract class JDFAutoIDPJobSheet extends JDFElement
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute SheetOccurence
+        Methods for Attribute SheetOccurrence
         --------------------------------------------------------------------- */
         /**
-          * (5) set attribute SheetOccurence
+          * (5) set attribute SheetOccurrence
           * @param enumVar: the enumVar to set the attribute to
           */
-        public void setSheetOccurence(EnumSheetOccurence enumVar)
+        public void setSheetOccurrence(EnumSheetOccurrence enumVar)
         {
-            setAttribute(AttributeName.SHEETOCCURENCE, enumVar==null ? null : enumVar.getName(), null);
+            setAttribute(AttributeName.SHEETOCCURRENCE, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
-          * (9) get attribute SheetOccurence
+          * (9) get attribute SheetOccurrence
           * @return the value of the attribute
           */
-        public EnumSheetOccurence getSheetOccurence()
+        public EnumSheetOccurrence getSheetOccurrence()
         {
-            return EnumSheetOccurence.getEnum(getAttribute(AttributeName.SHEETOCCURENCE, null, null));
+            return EnumSheetOccurrence.getEnum(getAttribute(AttributeName.SHEETOCCURRENCE, null, null));
         }
 
         

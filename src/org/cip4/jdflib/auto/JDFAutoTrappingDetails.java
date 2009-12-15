@@ -102,8 +102,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         atrInfoTable[3] = new AtrInfoTable(AttributeName.TRAPPINGTYPE, 0x44444433, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,8 +117,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.TRAPREGION, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,15 +167,13 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTrappingDetails[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -185,8 +181,7 @@ public abstract class JDFAutoTrappingDetails extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

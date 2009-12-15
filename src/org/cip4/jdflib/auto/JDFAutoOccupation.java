@@ -102,8 +102,7 @@ public abstract class JDFAutoOccupation extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x33333311, AttributeInfo.EnumAttributeType.shortString, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -117,8 +116,7 @@ public abstract class JDFAutoOccupation extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -168,8 +166,7 @@ public abstract class JDFAutoOccupation extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoOccupation[  --> " + super.toString() + " ]";
     }

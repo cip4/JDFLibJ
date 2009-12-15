@@ -101,8 +101,7 @@ public abstract class JDFAutoPosition extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.RELATIVEBOX, 0x33333311, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -152,8 +151,7 @@ public abstract class JDFAutoPosition extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPosition[  --> " + super.toString() + " ]";
     }

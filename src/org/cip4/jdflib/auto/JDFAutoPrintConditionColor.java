@@ -119,8 +119,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         atrInfoTable[11] = new AtrInfoTable(AttributeName.SRGB, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -135,8 +134,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.TRANSFERCURVE, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -186,8 +184,7 @@ public abstract class JDFAutoPrintConditionColor extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPrintConditionColor[  --> " + super.toString() + " ]";
     }

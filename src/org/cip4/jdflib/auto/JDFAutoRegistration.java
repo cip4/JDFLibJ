@@ -95,8 +95,7 @@ public abstract class JDFAutoRegistration extends JDFMessage
         elemInfoTable[1] = new ElemInfoTable(ElementName.SUBSCRIPTION, 0x55555555);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -146,8 +145,7 @@ public abstract class JDFAutoRegistration extends JDFMessage
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRegistration[  --> " + super.toString() + " ]";
     }

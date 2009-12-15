@@ -87,8 +87,7 @@ public abstract class JDFAutoFCNKey extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.KEY, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,8 +137,7 @@ public abstract class JDFAutoFCNKey extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFCNKey[  --> " + super.toString() + " ]";
     }

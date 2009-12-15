@@ -113,21 +113,20 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
         atrInfoTable[12] = new AtrInfoTable(AttributeName.TRANSPARENCYRENDERINGQUALITY, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.OCGCONTROL, 0x33333111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.REFERENCEXOBJPARAMS, 0x66661111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -177,8 +176,7 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPDFInterpretingParams[  --> " + super.toString() + " ]";
     }
@@ -619,6 +617,32 @@ public abstract class JDFAutoPDFInterpretingParams extends JDFElement
     public JDFOCGControl appendOCGControl() throws JDFException
     {
         return (JDFOCGControl) appendElement(ElementName.OCGCONTROL, null);
+    }
+
+    /**
+     * (24) const get element ReferenceXObjParams
+     * @return JDFReferenceXObjParams the element
+     */
+    public JDFReferenceXObjParams getReferenceXObjParams()
+    {
+        return (JDFReferenceXObjParams) getElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
+    }
+
+    /** (25) getCreateReferenceXObjParams
+     * 
+     * @return JDFReferenceXObjParams the element
+     */
+    public JDFReferenceXObjParams getCreateReferenceXObjParams()
+    {
+        return (JDFReferenceXObjParams) getCreateElement_KElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
+    }
+
+    /**
+     * (29) append element ReferenceXObjParams
+     */
+    public JDFReferenceXObjParams appendReferenceXObjParams() throws JDFException
+    {
+        return (JDFReferenceXObjParams) appendElementN(ElementName.REFERENCEXOBJPARAMS, 1, null);
     }
 
 }// end namespace JDF

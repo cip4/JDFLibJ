@@ -103,8 +103,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.POSITION, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumPosition.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,8 +117,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.CONTACT, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,15 +167,13 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDieLayoutProductionParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -185,8 +181,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -442,8 +437,7 @@ public abstract class JDFAutoDieLayoutProductionParams extends JDFResource
     /**
      * (30) append element Contact
      */
-    @Override
-	public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

@@ -90,8 +90,7 @@ public abstract class JDFAutoPayment extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.CREDITCARD, 0x77777661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -141,8 +140,7 @@ public abstract class JDFAutoPayment extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPayment[  --> " + super.toString() + " ]";
     }

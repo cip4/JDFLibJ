@@ -127,8 +127,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
         atrInfoTable[24] = new AtrInfoTable(AttributeName.USERFILENAME, 0x33333311, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,8 +141,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.FILEALIAS, 0x33333311);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -193,15 +191,13 @@ public abstract class JDFAutoFileSpec extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFileSpec[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -209,8 +205,7 @@ public abstract class JDFAutoFileSpec extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

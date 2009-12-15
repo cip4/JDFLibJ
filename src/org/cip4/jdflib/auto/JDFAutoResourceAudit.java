@@ -104,8 +104,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         atrInfoTable[2] = new AtrInfoTable(AttributeName.REASON, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumReason.getEnum(0), "ProcessResult");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,8 +118,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
         elemInfoTable[2] = new ElemInfoTable(ElementName.PART, 0x33333111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -170,8 +168,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoResourceAudit[  --> " + super.toString() + " ]";
     }
@@ -303,8 +300,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
      * @param iSkip number of elements to skip
      * @return JDFEmployee the element
      */
-    @Override
-	public JDFEmployee getCreateEmployee(int iSkip)
+    public JDFEmployee getCreateEmployee(int iSkip)
     {
         return (JDFEmployee)getCreateElement_KElement(ElementName.EMPLOYEE, null, iSkip);
     }
@@ -314,8 +310,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
      * @param iSkip number of elements to skip
      * @return JDFEmployee the element
      * default is getEmployee(0)     */
-    @Override
-	public JDFEmployee getEmployee(int iSkip)
+    public JDFEmployee getEmployee(int iSkip)
     {
         return (JDFEmployee) getElement(ElementName.EMPLOYEE, null, iSkip);
     }
@@ -325,8 +320,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
      * 
      * @return Collection<JDFEmployee>, null if none are available
      */
-    @Override
-	public Collection<JDFEmployee> getAllEmployee()
+    public Collection<JDFEmployee> getAllEmployee()
     {
         final VElement vc = getChildElementVector(ElementName.EMPLOYEE, null);
         if (vc == null || vc.size() == 0)
@@ -346,8 +340,7 @@ public abstract class JDFAutoResourceAudit extends JDFAudit
     /**
      * (30) append element Employee
      */
-    @Override
-	public JDFEmployee appendEmployee() throws JDFException
+    public JDFEmployee appendEmployee() throws JDFException
     {
         return (JDFEmployee) appendElement(ElementName.EMPLOYEE, null);
     }

@@ -102,8 +102,7 @@ public abstract class JDFAutoFileAlias extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.URL, 0x44444433, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +114,7 @@ public abstract class JDFAutoFileAlias extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,8 +164,7 @@ public abstract class JDFAutoFileAlias extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFileAlias[  --> " + super.toString() + " ]";
     }

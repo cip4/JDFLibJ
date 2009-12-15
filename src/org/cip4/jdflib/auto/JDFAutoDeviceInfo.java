@@ -118,8 +118,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         atrInfoTable[11] = new AtrInfoTable(AttributeName.TOTALPRODUCTIONCOUNTER, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -134,8 +133,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.MODULESTATUS, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -185,8 +183,7 @@ public abstract class JDFAutoDeviceInfo extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDeviceInfo[  --> " + super.toString() + " ]";
     }

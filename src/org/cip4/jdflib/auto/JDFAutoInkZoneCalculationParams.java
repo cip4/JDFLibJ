@@ -102,8 +102,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.ZONEHEIGHT, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +114,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,15 +164,13 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoInkZoneCalculationParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -182,8 +178,7 @@ public abstract class JDFAutoInkZoneCalculationParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

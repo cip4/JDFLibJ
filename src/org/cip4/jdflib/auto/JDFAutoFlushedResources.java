@@ -122,8 +122,7 @@ public abstract class JDFAutoFlushedResources extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFlushedResources[  --> " + super.toString() + " ]";
     }

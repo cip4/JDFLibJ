@@ -103,8 +103,7 @@ public abstract class JDFAutoIcon extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.ICONUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumerations, EnumIconUsage.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +115,7 @@ public abstract class JDFAutoIcon extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x55555551);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,8 +165,7 @@ public abstract class JDFAutoIcon extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoIcon[  --> " + super.toString() + " ]";
     }

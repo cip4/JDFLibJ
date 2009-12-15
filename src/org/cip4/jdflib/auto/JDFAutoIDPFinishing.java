@@ -102,8 +102,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.FINISHINGS, 0x33333333, AttributeInfo.EnumAttributeType.IntegerList, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,8 +117,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.IDPTRIMMING, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,8 +167,7 @@ public abstract class JDFAutoIDPFinishing extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoIDPFinishing[  --> " + super.toString() + " ]";
     }

@@ -100,8 +100,7 @@ public abstract class JDFAutoCut extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.WORKINGDIRECTION, 0x22222221, AttributeInfo.EnumAttributeType.enumeration, EnumWorkingDirection.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -151,8 +150,7 @@ public abstract class JDFAutoCut extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCut[  --> " + super.toString() + " ]";
     }

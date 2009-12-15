@@ -120,8 +120,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         atrInfoTable[10] = new AtrInfoTable(AttributeName.WORKSTYLE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumWorkStyle.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,8 +138,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
         elemInfoTable[6] = new ElemInfoTable(ElementName.STRIPMARK, 0x33333111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -190,15 +188,13 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoStrippingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -206,8 +202,7 @@ public abstract class JDFAutoStrippingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

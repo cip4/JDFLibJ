@@ -107,8 +107,7 @@ public abstract class JDFAutoCommand extends JDFMessage
         atrInfoTable[5] = new AtrInfoTable(AttributeName.TRANSACTIONID, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -120,8 +119,7 @@ public abstract class JDFAutoCommand extends JDFMessage
         elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,8 +169,7 @@ public abstract class JDFAutoCommand extends JDFMessage
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoCommand[  --> " + super.toString() + " ]";
     }

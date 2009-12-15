@@ -136,8 +136,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
         atrInfoTable[19] = new AtrInfoTable(AttributeName.COMPENSATIONCTMFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -161,8 +160,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
         elemInfoTable[12] = new ElemInfoTable(ElementName.SCAVENGERAREA, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -212,8 +210,7 @@ public abstract class JDFAutoMarkObject extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoMarkObject[  --> " + super.toString() + " ]";
     }

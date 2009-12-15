@@ -107,8 +107,7 @@ public abstract class JDFAutoFeeder extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.OPENING, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumOpening.getEnum(0), "None");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -122,8 +121,7 @@ public abstract class JDFAutoFeeder extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.MEDIA, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -173,8 +171,7 @@ public abstract class JDFAutoFeeder extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFeeder[  --> " + super.toString() + " ]";
     }

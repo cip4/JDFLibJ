@@ -106,8 +106,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
         atrInfoTable[8] = new AtrInfoTable(AttributeName.THICKNESS, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,8 +118,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.HOLEMAKINGPARAMS, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -170,15 +168,13 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoWireCombBindingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -186,8 +182,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -340,8 +335,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
           * (36) set attribute Brand
           * @param value: the value to set the attribute to
           */
-        @Override
-		public void setBrand(String value)
+        public void setBrand(String value)
         {
             setAttribute(AttributeName.BRAND, value, null);
         }
@@ -350,8 +344,7 @@ public abstract class JDFAutoWireCombBindingParams extends JDFResource
           * (23) get String attribute Brand
           * @return the value of the attribute
           */
-        @Override
-		public String getBrand()
+        public String getBrand()
         {
             return getAttribute(AttributeName.BRAND, null, JDFConstants.EMPTYSTRING);
         }

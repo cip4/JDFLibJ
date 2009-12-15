@@ -88,8 +88,7 @@ public abstract class JDFAutoTest extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,8 +138,7 @@ public abstract class JDFAutoTest extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoTest[  --> " + super.toString() + " ]";
     }
@@ -167,8 +165,7 @@ public abstract class JDFAutoTest extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        @Override
-		public String getID()
+        public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

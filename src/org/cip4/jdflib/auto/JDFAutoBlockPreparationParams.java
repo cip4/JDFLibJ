@@ -102,8 +102,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.TIGHTBACKING, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumTightBacking.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,8 +114,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.REGISTERRIBBON, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,15 +164,13 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBlockPreparationParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -182,8 +178,7 @@ public abstract class JDFAutoBlockPreparationParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

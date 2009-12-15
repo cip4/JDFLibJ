@@ -101,8 +101,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
         atrInfoTable[7] = new AtrInfoTable(AttributeName.USEBLEEDS, 0x33331111, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -152,8 +151,7 @@ public abstract class JDFAutoRepeatDesc extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRepeatDesc[  --> " + super.toString() + " ]";
     }

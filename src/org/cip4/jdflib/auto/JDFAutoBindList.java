@@ -93,8 +93,7 @@ public abstract class JDFAutoBindList extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.BINDITEM, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoBindList extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBindList[  --> " + super.toString() + " ]";
     }

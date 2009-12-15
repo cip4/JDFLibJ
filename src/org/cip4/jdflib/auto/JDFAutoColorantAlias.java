@@ -99,8 +99,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.RAWNAMES, 0x33331111, AttributeInfo.EnumAttributeType.Any, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -112,8 +111,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x22222222);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -163,15 +161,13 @@ public abstract class JDFAutoColorantAlias extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoColorantAlias[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -179,8 +175,7 @@ public abstract class JDFAutoColorantAlias extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

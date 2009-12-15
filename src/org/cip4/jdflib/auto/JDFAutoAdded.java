@@ -122,8 +122,7 @@ public abstract class JDFAutoAdded extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAdded[  --> " + super.toString() + " ]";
     }

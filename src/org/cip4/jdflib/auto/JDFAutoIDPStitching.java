@@ -101,8 +101,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.STITCHINGREFERENCEEDGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumStitchingReferenceEdge.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,8 +113,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.STITCHINGPARAMS, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,8 +163,7 @@ public abstract class JDFAutoIDPStitching extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoIDPStitching[  --> " + super.toString() + " ]";
     }

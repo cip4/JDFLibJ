@@ -111,8 +111,7 @@ public abstract class JDFAutoContentData extends JDFElement
         atrInfoTable[9] = new AtrInfoTable(AttributeName.PRODUCTID, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -128,8 +127,7 @@ public abstract class JDFAutoContentData extends JDFElement
         elemInfoTable[4] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x33333111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -179,8 +177,7 @@ public abstract class JDFAutoContentData extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoContentData[  --> " + super.toString() + " ]";
     }
@@ -320,8 +317,7 @@ public abstract class JDFAutoContentData extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        @Override
-		public String getID()
+        public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

@@ -100,8 +100,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.URLSCHEMES, 0x33333311, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -151,8 +150,7 @@ public abstract class JDFAutoSubmissionMethods extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoSubmissionMethods[  --> " + super.toString() + " ]";
     }

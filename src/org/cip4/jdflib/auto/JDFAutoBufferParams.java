@@ -91,8 +91,7 @@ public abstract class JDFAutoBufferParams extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.MINIMUMWAIT, 0x33333331, AttributeInfo.EnumAttributeType.duration, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,15 +141,13 @@ public abstract class JDFAutoBufferParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBufferParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -158,8 +155,7 @@ public abstract class JDFAutoBufferParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

@@ -93,8 +93,7 @@ public abstract class JDFAutoAmountPool extends JDFPool
         elemInfoTable[0] = new ElemInfoTable(ElementName.PARTAMOUNT, 0x33333331);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoAmountPool extends JDFPool
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoAmountPool[  --> " + super.toString() + " ]";
     }

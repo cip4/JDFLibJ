@@ -100,8 +100,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x33333333, AttributeInfo.EnumAttributeType.IntegerRange, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,8 +113,7 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.VALUE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,15 +163,13 @@ public abstract class JDFAutoPDFPathEvaluation extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPDFPathEvaluation[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);

@@ -95,8 +95,7 @@ public abstract class JDFAutochoice extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.OTHERWISE, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -146,8 +145,7 @@ public abstract class JDFAutochoice extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutochoice[  --> " + super.toString() + " ]";
     }

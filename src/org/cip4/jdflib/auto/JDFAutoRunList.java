@@ -106,7 +106,7 @@ public abstract class JDFAutoRunList extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[35];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[36];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ISPAGE, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, "true");
@@ -134,20 +134,20 @@ public abstract class JDFAutoRunList extends JDFResource
         atrInfoTable[22] = new AtrInfoTable(AttributeName.SHEETSIDES, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumSheetSides.getEnum(0), null);
         atrInfoTable[23] = new AtrInfoTable(AttributeName.SKIPPAGE, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, null);
         atrInfoTable[24] = new AtrInfoTable(AttributeName.SORTED, 0x33333333, AttributeInfo.EnumAttributeType.boolean_, null, null);
-        atrInfoTable[25] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[26] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[27] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[28] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[29] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[30] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[31] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[32] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[33] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[34] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[25] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+        atrInfoTable[26] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[27] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[28] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[29] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[30] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[31] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[32] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[33] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[34] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[35] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -166,8 +166,7 @@ public abstract class JDFAutoRunList extends JDFResource
         elemInfoTable[7] = new ElemInfoTable(ElementName.PAGELIST, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -217,15 +216,13 @@ public abstract class JDFAutoRunList extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoRunList[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -233,8 +230,7 @@ public abstract class JDFAutoRunList extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -974,6 +970,28 @@ public abstract class JDFAutoRunList extends JDFResource
         public boolean getSorted()
         {
             return getBoolAttribute(AttributeName.SORTED, null, false);
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute BinderySignaturePaginationIndex
+        --------------------------------------------------------------------- */
+        /**
+          * (36) set attribute BinderySignaturePaginationIndex
+          * @param value: the value to set the attribute to
+          */
+        public void setBinderySignaturePaginationIndex(String value)
+        {
+            setAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, value, null);
+        }
+
+        /**
+          * (23) get String attribute BinderySignaturePaginationIndex
+          * @return the value of the attribute
+          */
+        public String getBinderySignaturePaginationIndex()
+        {
+            return getAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, null, JDFConstants.EMPTYSTRING);
         }
 
         

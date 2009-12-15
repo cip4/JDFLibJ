@@ -95,8 +95,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.BOXTOBOXDIFFERENCE, 0x33333333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -146,8 +145,7 @@ public abstract class JDFAutoPreflightArgument extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPreflightArgument[  --> " + super.toString() + " ]";
     }

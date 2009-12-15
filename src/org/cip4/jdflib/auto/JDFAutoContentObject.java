@@ -117,8 +117,7 @@ public abstract class JDFAutoContentObject extends JDFElement
         atrInfoTable[20] = new AtrInfoTable(AttributeName.COMPENSATIONCTMFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -168,8 +167,7 @@ public abstract class JDFAutoContentObject extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoContentObject[  --> " + super.toString() + " ]";
     }

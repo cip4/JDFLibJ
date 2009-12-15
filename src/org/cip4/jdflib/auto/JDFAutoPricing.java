@@ -102,8 +102,7 @@ public abstract class JDFAutoPricing extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.PRICE, 0x44444333, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,8 +115,7 @@ public abstract class JDFAutoPricing extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.PRICING, 0x44444333);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,8 +165,7 @@ public abstract class JDFAutoPricing extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPricing[  --> " + super.toString() + " ]";
     }

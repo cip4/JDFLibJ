@@ -110,8 +110,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         atrInfoTable[5] = new AtrInfoTable(AttributeName.TRANSFER, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumTransfer.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -125,8 +124,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.DROP, 0x22222222);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -176,15 +174,13 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDeliveryParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -192,8 +188,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -499,8 +494,7 @@ public abstract class JDFAutoDeliveryParams extends JDFResource
     /**
      * (30) append element Contact
      */
-    @Override
-	public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

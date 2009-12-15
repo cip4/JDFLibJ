@@ -123,8 +123,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.BINDINGORDER, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumBindingOrder.getEnum(0), "Gathering");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -163,8 +162,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
         elemInfoTable[27] = new ElemInfoTable(ElementName.WIRECOMBBINDING, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -214,8 +212,7 @@ public abstract class JDFAutoBindingIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoBindingIntent[  --> " + super.toString() + " ]";
     }

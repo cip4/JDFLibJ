@@ -97,8 +97,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.FLUSHPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumFlushPolicy.getEnum(0), "QueueEntry");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -110,8 +109,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.QUEUEFILTER, 0x66666611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -161,8 +159,7 @@ public abstract class JDFAutoFlushResourceParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoFlushResourceParams[  --> " + super.toString() + " ]";
     }

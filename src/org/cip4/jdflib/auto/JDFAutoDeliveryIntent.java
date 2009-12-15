@@ -116,8 +116,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         atrInfoTable[4] = new AtrInfoTable(AttributeName.PICKUP, 0x44444443, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -144,8 +143,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
         elemInfoTable[15] = new ElemInfoTable(ElementName.PRICING, 0x77777666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -195,8 +193,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoDeliveryIntent[  --> " + super.toString() + " ]";
     }
@@ -758,8 +755,7 @@ public abstract class JDFAutoDeliveryIntent extends JDFIntentResource
     /**
      * (30) append element Contact
      */
-    @Override
-	public JDFContact appendContact() throws JDFException
+    public JDFContact appendContact() throws JDFException
     {
         return (JDFContact) appendElement(ElementName.CONTACT, null);
     }

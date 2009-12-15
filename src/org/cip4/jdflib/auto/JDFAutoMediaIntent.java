@@ -108,8 +108,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.USERMEDIATYPE, 0x33333333, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -148,8 +147,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
         elemInfoTable[27] = new ElemInfoTable(ElementName.MEDIALAYERS, 0x66661111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -199,8 +197,7 @@ public abstract class JDFAutoMediaIntent extends JDFIntentResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoMediaIntent[  --> " + super.toString() + " ]";
     }

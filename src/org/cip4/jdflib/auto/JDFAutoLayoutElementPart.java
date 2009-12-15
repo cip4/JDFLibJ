@@ -95,8 +95,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x33331111, AttributeInfo.EnumAttributeType.ID, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -110,8 +109,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.POSITIONOBJ, 0x66661111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -161,8 +159,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLayoutElementPart[  --> " + super.toString() + " ]";
     }
@@ -189,8 +186,7 @@ public abstract class JDFAutoLayoutElementPart extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        @Override
-		public String getID()
+        public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

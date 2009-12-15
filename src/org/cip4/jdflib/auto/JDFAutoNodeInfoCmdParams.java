@@ -105,8 +105,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.UPDATEMETHOD, 0x44444311, AttributeInfo.EnumAttributeType.enumeration, EnumUpdateMethod.getEnum(0), "Complete");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -119,8 +118,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.NODEINFO, 0x77777611);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -170,8 +168,7 @@ public abstract class JDFAutoNodeInfoCmdParams extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNodeInfoCmdParams[  --> " + super.toString() + " ]";
     }

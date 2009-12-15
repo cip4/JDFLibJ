@@ -104,8 +104,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.SHEETWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -117,8 +116,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x22221111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -168,8 +166,7 @@ public abstract class JDFAutoConvertingConfig extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoConvertingConfig[  --> " + super.toString() + " ]";
     }

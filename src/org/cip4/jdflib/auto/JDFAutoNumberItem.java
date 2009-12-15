@@ -100,8 +100,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.STEP, 0x33333333, AttributeInfo.EnumAttributeType.integer, null, "1");
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,8 +117,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
         elemInfoTable[5] = new ElemInfoTable(ElementName.SEPARATIONSPEC, 0x66666666);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -169,8 +167,7 @@ public abstract class JDFAutoNumberItem extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoNumberItem[  --> " + super.toString() + " ]";
     }

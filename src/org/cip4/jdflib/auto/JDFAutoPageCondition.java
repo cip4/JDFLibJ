@@ -100,8 +100,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.RESTRICTEDCONTENTOBJECTS, 0x22221111, AttributeInfo.EnumAttributeType.IntegerList, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,8 +113,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.PART, 0x33331111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,8 +163,7 @@ public abstract class JDFAutoPageCondition extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoPageCondition[  --> " + super.toString() + " ]";
     }
