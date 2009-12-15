@@ -1,3 +1,93 @@
+﻿___________________________________________________________
+
+
+Label JDFLIBJ_2.1.4BLD580 (07.10.2009)
+
+Signa resourclink linking for postpress 
++ cleanup of javadoc
++ minor schema fixes
++ additional test classes for Gallus label print
++ added parse to XMLDoc (not only JDFDoc)
+
+.\src\org\cip4\jdflib\auto\JDFAutoAssembly.java@@\main\36
+.\src\org\cip4\jdflib\auto\JDFAutoAssemblySection.java@@\main\36
+.\src\org\cip4\jdflib\auto\JDFAutoConventionalPrintingParams.java@@\main\80
+.\src\org\cip4\jdflib\core\JDFElement.java@@\main\261
+.\src\org\cip4\jdflib\core\JDFResourceLink.java@@\main\155
+.\src\org\cip4\jdflib\core\XMLDoc.java@@\main\103
+.\src\org\cip4\jdflib\datatypes\JDFIntegerList.java@@\main\22
+.\src\org\cip4\jdflib\datatypes\JDFNumList.java@@\main\38
+.\src\org\cip4\jdflib\elementwalker\FixVersion.java@@\main\3
+.\src\org\cip4\jdflib\elementwalker\LinkRefFinder.java@@\main\2
+.\src\org\cip4\jdflib\extensions\XJDF20.java@@\main\8
+.\src\org\cip4\jdflib\goldenticket\BaseGoldenTicket.java@@\main\21
+.\src\org\cip4\jdflib\goldenticket\MISCPGoldenTicket.java@@\main\17
+.\src\org\cip4\jdflib\goldenticket\MISGoldenTicket.java@@\main\19
+.\src\org\cip4\jdflib\node\JDFNode.java@@\main\287
+.\src\org\cip4\jdflib\pool\JDFAuditPool.java@@\main\113
+.\src\org\cip4\jdflib\pool\JDFResourceLinkPool.java@@\main\90
+.\src\org\cip4\jdflib\resource\process\JDFEmployee.java@@\main\22
+.\src\org\cip4\jdflib\util\FileUtil.java@@\main\17
+.\src\org\cip4\jdflib\util\StatusCounter.java@@\main\26
+.\test\org\cip4\jdflib\core\JDFResourceLinkTest.java@@\main\39
+.\test\org\cip4\jdflib\core\XMLDocTest.java@@\main\61
+.\test\org\cip4\jdflib\node\JDFNodeTest.java@@\main\133
+.\test\org\cip4\jdflib\util\FileUtilTest.java@@\main\14
+
+___________________________________________________________
+
+
+Label JDFLIBJ_2.1.4BLD572 (07.10.2009) (dummy - aus versehen gelabelt)
+___________________________________________________________
+
+Label JDFLIBJ_2.1.4BLD571 (10.09.2009)
+
+
+Kommentar: JDFNode.getPartStatus – evaluate lower leaves
+
+
+Revision: 4100
+Author: prosi
+Date: 18:47:58, Mittwoch, 9. September 2009
+Message:
+
+----
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+
+Revision: 4097
+Author: prosi
+Date: 17:43:50, Mittwoch, 9. September 2009
+Message:
+JDFNode.getPartStatus() now evaluates intermediate nodes all the way down to the input partmap
+utf-8 test changes
+javadoc comments
+----
+Modified : /trunk/JDFLibJ/.classpath
+Modified : /trunk/JDFLibJ/apps/org/cip4/jdflib/SpawnJDF.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/XJDF20.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/extensions/xjdfwalker/XJDFToJDFConverter.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/MISGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/goldenticket/ProductGoldenTicket.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/jmf/JDFQueue.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/node/JDFNode.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/resource/JDFResource.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/EnumUtil.java
+Modified : /trunk/JDFLibJ/src/org/cip4/jdflib/util/JDFMerge.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/extensions/XJDFTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/node/JDFNodeTest.java
+Modified : /trunk/JDFLibJ/test/org/cip4/jdflib/resource/JDFFilespecTest.java
+
+
+>ct find . -version "{lbtype(JDFLIBJ_2.1.4BLD571) && !lbtype(JDFLIBJ_2.1.4BLD570)}" -print
+.\extensions\XJDF20.java@@\main\7
+.\extensions\xjdfwalker\XJDFToJDFConverter.java@@\main\5
+.\goldenticket\MISGoldenTicket.java@@\main\18
+.\goldenticket\PackagingGoldenTicket.java@@\main\2
+.\goldenticket\ProductGoldenTicket.java@@\main\9
+.\jmf\JDFQueue.java@@\main\40
+.\node\JDFNode.java@@\main\286
+.\util\EnumUtil.java@@\main\7
+.\util\JDFMerge.java@@\main\36
 ___________________________________________________________
 
 
