@@ -89,560 +89,534 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.resource.process.JDFOCGControl;
+import org.cip4.jdflib.resource.process.JDFReferenceXObjParams;
 
 public abstract class JDFAutoPDFInterpretingParams extends JDFElement
 {
 
-    private static final long serialVersionUID = 1L;
-
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
-    static
-    {
-        atrInfoTable[0] = new AtrInfoTable(AttributeName.EMITPDFBG, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.EMITPDFHALFTONES, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.EMITPDFTRANSFERS, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.EMITPDFUCR, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.HONORPDFOVERPRINT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.ICCCOLORASDEVICECOLOR, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.OCGDEFAULT, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOCGDefault.getEnum(0), "FromPDF");
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.OCGINTENT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.OCGPROCESS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOCGProcess.getEnum(0), null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.OCGZOOM, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, "1.0");
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.PRINTPDFANNOTATIONS, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.PRINTTRAPANNOTATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.TRANSPARENCYRENDERINGQUALITY, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
-    }
-    
-    protected AttributeInfo getTheAttributeInfo()
-    {
-        return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-
-
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.OCGCONTROL, 0x33333111);
-        elemInfoTable[1] = new ElemInfoTable(ElementName.REFERENCEXOBJPARAMS, 0x66661111);
-    }
-    
-    protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
-    }
-
-
-
-    /**
-     * Constructor for JDFAutoPDFInterpretingParams
-     * @param myOwnerDocument
-     * @param qualifiedName
-     */
-    protected JDFAutoPDFInterpretingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoPDFInterpretingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     */
-    protected JDFAutoPDFInterpretingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName);
-    }
-
-    /**
-     * Constructor for JDFAutoPDFInterpretingParams
-     * @param myOwnerDocument
-     * @param myNamespaceURI
-     * @param qualifiedName
-     * @param myLocalName
-     */
-    protected JDFAutoPDFInterpretingParams(
-        CoreDocumentImpl myOwnerDocument,
-        String myNamespaceURI,
-        String qualifiedName,
-        String myLocalName)
-    {
-        super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-    }
-
-
-    public String toString()
-    {
-        return " JDFAutoPDFInterpretingParams[  --> " + super.toString() + " ]";
-    }
-
-
-        /**
-        * Enumeration strings for OCGDefault
-        */
-
-        public static class EnumOCGDefault extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumOCGDefault(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-            public static EnumOCGDefault getEnum(String enumName)
-            {
-                return (EnumOCGDefault) getEnum(EnumOCGDefault.class, enumName);
-            }
-
-            public static EnumOCGDefault getEnum(int enumValue)
-            {
-                return (EnumOCGDefault) getEnum(EnumOCGDefault.class, enumValue);
-            }
-
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumOCGDefault.class);
-            }
-
-            public static List getEnumList()
-            {
-                return getEnumList(EnumOCGDefault.class);
-            }
-
-            public static Iterator iterator()
-            {
-                return iterator(EnumOCGDefault.class);
-            }
-
-            public static final EnumOCGDefault Exclude = new EnumOCGDefault("Exclude");
-            public static final EnumOCGDefault FromPDF = new EnumOCGDefault("FromPDF");
-            public static final EnumOCGDefault Include = new EnumOCGDefault("Include");
-        }      
-
-
-
-        /**
-        * Enumeration strings for OCGProcess
-        */
-
-        public static class EnumOCGProcess extends ValuedEnum
-        {
-            private static final long serialVersionUID = 1L;
-            private static int m_startValue = 0;
-
-            private EnumOCGProcess(String name)
-            {
-                super(name, m_startValue++);
-            }
-
-            public static EnumOCGProcess getEnum(String enumName)
-            {
-                return (EnumOCGProcess) getEnum(EnumOCGProcess.class, enumName);
-            }
-
-            public static EnumOCGProcess getEnum(int enumValue)
-            {
-                return (EnumOCGProcess) getEnum(EnumOCGProcess.class, enumValue);
-            }
-
-            public static Map getEnumMap()
-            {
-                return getEnumMap(EnumOCGProcess.class);
-            }
-
-            public static List getEnumList()
-            {
-                return getEnumList(EnumOCGProcess.class);
-            }
-
-            public static Iterator iterator()
-            {
-                return iterator(EnumOCGProcess.class);
-            }
-
-            public static final EnumOCGProcess Export = new EnumOCGProcess("Export");
-            public static final EnumOCGProcess Print = new EnumOCGProcess("Print");
-            public static final EnumOCGProcess View = new EnumOCGProcess("View");
-        }      
-
-
-
-/* ************************************************************************
- * Attribute getter / setter
- * ************************************************************************
- */
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EmitPDFBG
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EmitPDFBG
-          * @param value: the value to set the attribute to
-          */
-        public void setEmitPDFBG(boolean value)
-        {
-            setAttribute(AttributeName.EMITPDFBG, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute EmitPDFBG
-          * @return boolean the value of the attribute
-          */
-        public boolean getEmitPDFBG()
-        {
-            return getBoolAttribute(AttributeName.EMITPDFBG, null, true);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EmitPDFHalftones
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EmitPDFHalftones
-          * @param value: the value to set the attribute to
-          */
-        public void setEmitPDFHalftones(boolean value)
-        {
-            setAttribute(AttributeName.EMITPDFHALFTONES, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute EmitPDFHalftones
-          * @return boolean the value of the attribute
-          */
-        public boolean getEmitPDFHalftones()
-        {
-            return getBoolAttribute(AttributeName.EMITPDFHALFTONES, null, true);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EmitPDFTransfers
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EmitPDFTransfers
-          * @param value: the value to set the attribute to
-          */
-        public void setEmitPDFTransfers(boolean value)
-        {
-            setAttribute(AttributeName.EMITPDFTRANSFERS, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute EmitPDFTransfers
-          * @return boolean the value of the attribute
-          */
-        public boolean getEmitPDFTransfers()
-        {
-            return getBoolAttribute(AttributeName.EMITPDFTRANSFERS, null, true);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute EmitPDFUCR
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute EmitPDFUCR
-          * @param value: the value to set the attribute to
-          */
-        public void setEmitPDFUCR(boolean value)
-        {
-            setAttribute(AttributeName.EMITPDFUCR, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute EmitPDFUCR
-          * @return boolean the value of the attribute
-          */
-        public boolean getEmitPDFUCR()
-        {
-            return getBoolAttribute(AttributeName.EMITPDFUCR, null, true);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute HonorPDFOverprint
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute HonorPDFOverprint
-          * @param value: the value to set the attribute to
-          */
-        public void setHonorPDFOverprint(boolean value)
-        {
-            setAttribute(AttributeName.HONORPDFOVERPRINT, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute HonorPDFOverprint
-          * @return boolean the value of the attribute
-          */
-        public boolean getHonorPDFOverprint()
-        {
-            return getBoolAttribute(AttributeName.HONORPDFOVERPRINT, null, true);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute ICCColorAsDeviceColor
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute ICCColorAsDeviceColor
-          * @param value: the value to set the attribute to
-          */
-        public void setICCColorAsDeviceColor(boolean value)
-        {
-            setAttribute(AttributeName.ICCCOLORASDEVICECOLOR, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute ICCColorAsDeviceColor
-          * @return boolean the value of the attribute
-          */
-        public boolean getICCColorAsDeviceColor()
-        {
-            return getBoolAttribute(AttributeName.ICCCOLORASDEVICECOLOR, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OCGDefault
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute OCGDefault
-          * @param enumVar: the enumVar to set the attribute to
-          */
-        public void setOCGDefault(EnumOCGDefault enumVar)
-        {
-            setAttribute(AttributeName.OCGDEFAULT, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute OCGDefault
-          * @return the value of the attribute
-          */
-        public EnumOCGDefault getOCGDefault()
-        {
-            return EnumOCGDefault.getEnum(getAttribute(AttributeName.OCGDEFAULT, null, "FromPDF"));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OCGIntent
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OCGIntent
-          * @param value: the value to set the attribute to
-          */
-        public void setOCGIntent(String value)
-        {
-            setAttribute(AttributeName.OCGINTENT, value, null);
-        }
-
-        /**
-          * (23) get String attribute OCGIntent
-          * @return the value of the attribute
-          */
-        public String getOCGIntent()
-        {
-            return getAttribute(AttributeName.OCGINTENT, null, JDFConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OCGProcess
-        --------------------------------------------------------------------- */
-        /**
-          * (5) set attribute OCGProcess
-          * @param enumVar: the enumVar to set the attribute to
-          */
-        public void setOCGProcess(EnumOCGProcess enumVar)
-        {
-            setAttribute(AttributeName.OCGPROCESS, enumVar==null ? null : enumVar.getName(), null);
-        }
-
-        /**
-          * (9) get attribute OCGProcess
-          * @return the value of the attribute
-          */
-        public EnumOCGProcess getOCGProcess()
-        {
-            return EnumOCGProcess.getEnum(getAttribute(AttributeName.OCGPROCESS, null, null));
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute OCGZoom
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute OCGZoom
-          * @param value: the value to set the attribute to
-          */
-        public void setOCGZoom(double value)
-        {
-            setAttribute(AttributeName.OCGZOOM, value, null);
-        }
-
-        /**
-          * (17) get double attribute OCGZoom
-          * @return double the value of the attribute
-          */
-        public double getOCGZoom()
-        {
-            return getRealAttribute(AttributeName.OCGZOOM, null, 0.0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PrintPDFAnnotations
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PrintPDFAnnotations
-          * @param value: the value to set the attribute to
-          */
-        public void setPrintPDFAnnotations(boolean value)
-        {
-            setAttribute(AttributeName.PRINTPDFANNOTATIONS, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute PrintPDFAnnotations
-          * @return boolean the value of the attribute
-          */
-        public boolean getPrintPDFAnnotations()
-        {
-            return getBoolAttribute(AttributeName.PRINTPDFANNOTATIONS, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute PrintTrapAnnotations
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute PrintTrapAnnotations
-          * @param value: the value to set the attribute to
-          */
-        public void setPrintTrapAnnotations(boolean value)
-        {
-            setAttribute(AttributeName.PRINTTRAPANNOTATIONS, value, null);
-        }
-
-        /**
-          * (18) get boolean attribute PrintTrapAnnotations
-          * @return boolean the value of the attribute
-          */
-        public boolean getPrintTrapAnnotations()
-        {
-            return getBoolAttribute(AttributeName.PRINTTRAPANNOTATIONS, null, false);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute TransparencyRenderingQuality
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute TransparencyRenderingQuality
-          * @param value: the value to set the attribute to
-          */
-        public void setTransparencyRenderingQuality(double value)
-        {
-            setAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, value, null);
-        }
-
-        /**
-          * (17) get double attribute TransparencyRenderingQuality
-          * @return double the value of the attribute
-          */
-        public double getTransparencyRenderingQuality()
-        {
-            return getRealAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, null, 0.0);
-        }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateOCGControl
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFOCGControl the element
-     */
-    public JDFOCGControl getCreateOCGControl(int iSkip)
-    {
-        return (JDFOCGControl)getCreateElement_KElement(ElementName.OCGCONTROL, null, iSkip);
-    }
-
-    /**
-     * (27) const get element OCGControl
-     * @param iSkip number of elements to skip
-     * @return JDFOCGControl the element
-     * default is getOCGControl(0)     */
-    public JDFOCGControl getOCGControl(int iSkip)
-    {
-        return (JDFOCGControl) getElement(ElementName.OCGCONTROL, null, iSkip);
-    }
-
-    /**
-     * Get all OCGControl from the current element
-     * 
-     * @return Collection<JDFOCGControl>, null if none are available
-     */
-    public Collection<JDFOCGControl> getAllOCGControl()
-    {
-        final VElement vc = getChildElementVector(ElementName.OCGCONTROL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFOCGControl> v = new Vector<JDFOCGControl>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFOCGControl) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element OCGControl
-     */
-    public JDFOCGControl appendOCGControl() throws JDFException
-    {
-        return (JDFOCGControl) appendElement(ElementName.OCGCONTROL, null);
-    }
-
-    /**
-     * (24) const get element ReferenceXObjParams
-     * @return JDFReferenceXObjParams the element
-     */
-    public JDFReferenceXObjParams getReferenceXObjParams()
-    {
-        return (JDFReferenceXObjParams) getElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
-    }
-
-    /** (25) getCreateReferenceXObjParams
-     * 
-     * @return JDFReferenceXObjParams the element
-     */
-    public JDFReferenceXObjParams getCreateReferenceXObjParams()
-    {
-        return (JDFReferenceXObjParams) getCreateElement_KElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
-    }
-
-    /**
-     * (29) append element ReferenceXObjParams
-     */
-    public JDFReferenceXObjParams appendReferenceXObjParams() throws JDFException
-    {
-        return (JDFReferenceXObjParams) appendElementN(ElementName.REFERENCEXOBJPARAMS, 1, null);
-    }
+	private static final long serialVersionUID = 1L;
+
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.EMITPDFBG, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.EMITPDFHALFTONES, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.EMITPDFTRANSFERS, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.EMITPDFUCR, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.HONORPDFOVERPRINT, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "true");
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.ICCCOLORASDEVICECOLOR, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.OCGDEFAULT, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOCGDefault.getEnum(0), "FromPDF");
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.OCGINTENT, 0x33333111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.OCGPROCESS, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumOCGProcess.getEnum(0), null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.OCGZOOM, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, "1.0");
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.PRINTPDFANNOTATIONS, 0x33333331, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.PRINTTRAPANNOTATIONS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, "false");
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.TRANSPARENCYRENDERINGQUALITY, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
+
+	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+	static
+	{
+		elemInfoTable[0] = new ElemInfoTable(ElementName.OCGCONTROL, 0x33333111);
+		elemInfoTable[1] = new ElemInfoTable(ElementName.REFERENCEXOBJPARAMS, 0x66661111);
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		return super.getTheElementInfo().updateReplace(elemInfoTable);
+	}
+
+	/**
+	 * Constructor for JDFAutoPDFInterpretingParams
+	 * @param myOwnerDocument
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPDFInterpretingParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	{
+		super(myOwnerDocument, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoPDFInterpretingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 */
+	protected JDFAutoPDFInterpretingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
+	}
+
+	/**
+	 * Constructor for JDFAutoPDFInterpretingParams
+	 * @param myOwnerDocument
+	 * @param myNamespaceURI
+	 * @param qualifiedName
+	 * @param myLocalName
+	 */
+	protected JDFAutoPDFInterpretingParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	{
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	@Override
+	public String toString()
+	{
+		return " JDFAutoPDFInterpretingParams[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	* Enumeration strings for OCGDefault
+	*/
+
+	public static class EnumOCGDefault extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumOCGDefault(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		public static EnumOCGDefault getEnum(String enumName)
+		{
+			return (EnumOCGDefault) getEnum(EnumOCGDefault.class, enumName);
+		}
+
+		public static EnumOCGDefault getEnum(int enumValue)
+		{
+			return (EnumOCGDefault) getEnum(EnumOCGDefault.class, enumValue);
+		}
+
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumOCGDefault.class);
+		}
+
+		public static List getEnumList()
+		{
+			return getEnumList(EnumOCGDefault.class);
+		}
+
+		public static Iterator iterator()
+		{
+			return iterator(EnumOCGDefault.class);
+		}
+
+		public static final EnumOCGDefault Exclude = new EnumOCGDefault("Exclude");
+		public static final EnumOCGDefault FromPDF = new EnumOCGDefault("FromPDF");
+		public static final EnumOCGDefault Include = new EnumOCGDefault("Include");
+	}
+
+	/**
+	* Enumeration strings for OCGProcess
+	*/
+
+	public static class EnumOCGProcess extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumOCGProcess(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		public static EnumOCGProcess getEnum(String enumName)
+		{
+			return (EnumOCGProcess) getEnum(EnumOCGProcess.class, enumName);
+		}
+
+		public static EnumOCGProcess getEnum(int enumValue)
+		{
+			return (EnumOCGProcess) getEnum(EnumOCGProcess.class, enumValue);
+		}
+
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumOCGProcess.class);
+		}
+
+		public static List getEnumList()
+		{
+			return getEnumList(EnumOCGProcess.class);
+		}
+
+		public static Iterator iterator()
+		{
+			return iterator(EnumOCGProcess.class);
+		}
+
+		public static final EnumOCGProcess Export = new EnumOCGProcess("Export");
+		public static final EnumOCGProcess Print = new EnumOCGProcess("Print");
+		public static final EnumOCGProcess View = new EnumOCGProcess("View");
+	}
+
+	/* ************************************************************************
+	 * Attribute getter / setter
+	 * ************************************************************************
+	 */
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitPDFBG
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EmitPDFBG
+	  * @param value: the value to set the attribute to
+	  */
+	public void setEmitPDFBG(boolean value)
+	{
+		setAttribute(AttributeName.EMITPDFBG, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute EmitPDFBG
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEmitPDFBG()
+	{
+		return getBoolAttribute(AttributeName.EMITPDFBG, null, true);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitPDFHalftones
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EmitPDFHalftones
+	  * @param value: the value to set the attribute to
+	  */
+	public void setEmitPDFHalftones(boolean value)
+	{
+		setAttribute(AttributeName.EMITPDFHALFTONES, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute EmitPDFHalftones
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEmitPDFHalftones()
+	{
+		return getBoolAttribute(AttributeName.EMITPDFHALFTONES, null, true);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitPDFTransfers
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EmitPDFTransfers
+	  * @param value: the value to set the attribute to
+	  */
+	public void setEmitPDFTransfers(boolean value)
+	{
+		setAttribute(AttributeName.EMITPDFTRANSFERS, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute EmitPDFTransfers
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEmitPDFTransfers()
+	{
+		return getBoolAttribute(AttributeName.EMITPDFTRANSFERS, null, true);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute EmitPDFUCR
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute EmitPDFUCR
+	  * @param value: the value to set the attribute to
+	  */
+	public void setEmitPDFUCR(boolean value)
+	{
+		setAttribute(AttributeName.EMITPDFUCR, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute EmitPDFUCR
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getEmitPDFUCR()
+	{
+		return getBoolAttribute(AttributeName.EMITPDFUCR, null, true);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute HonorPDFOverprint
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute HonorPDFOverprint
+	  * @param value: the value to set the attribute to
+	  */
+	public void setHonorPDFOverprint(boolean value)
+	{
+		setAttribute(AttributeName.HONORPDFOVERPRINT, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute HonorPDFOverprint
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getHonorPDFOverprint()
+	{
+		return getBoolAttribute(AttributeName.HONORPDFOVERPRINT, null, true);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute ICCColorAsDeviceColor
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute ICCColorAsDeviceColor
+	  * @param value: the value to set the attribute to
+	  */
+	public void setICCColorAsDeviceColor(boolean value)
+	{
+		setAttribute(AttributeName.ICCCOLORASDEVICECOLOR, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute ICCColorAsDeviceColor
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getICCColorAsDeviceColor()
+	{
+		return getBoolAttribute(AttributeName.ICCCOLORASDEVICECOLOR, null, false);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGDefault
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute OCGDefault
+	  * @param enumVar: the enumVar to set the attribute to
+	  */
+	public void setOCGDefault(EnumOCGDefault enumVar)
+	{
+		setAttribute(AttributeName.OCGDEFAULT, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute OCGDefault
+	  * @return the value of the attribute
+	  */
+	public EnumOCGDefault getOCGDefault()
+	{
+		return EnumOCGDefault.getEnum(getAttribute(AttributeName.OCGDEFAULT, null, "FromPDF"));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGIntent
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OCGIntent
+	  * @param value: the value to set the attribute to
+	  */
+	public void setOCGIntent(String value)
+	{
+		setAttribute(AttributeName.OCGINTENT, value, null);
+	}
+
+	/**
+	  * (23) get String attribute OCGIntent
+	  * @return the value of the attribute
+	  */
+	public String getOCGIntent()
+	{
+		return getAttribute(AttributeName.OCGINTENT, null, JDFConstants.EMPTYSTRING);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGProcess
+	--------------------------------------------------------------------- */
+	/**
+	  * (5) set attribute OCGProcess
+	  * @param enumVar: the enumVar to set the attribute to
+	  */
+	public void setOCGProcess(EnumOCGProcess enumVar)
+	{
+		setAttribute(AttributeName.OCGPROCESS, enumVar == null ? null : enumVar.getName(), null);
+	}
+
+	/**
+	  * (9) get attribute OCGProcess
+	  * @return the value of the attribute
+	  */
+	public EnumOCGProcess getOCGProcess()
+	{
+		return EnumOCGProcess.getEnum(getAttribute(AttributeName.OCGPROCESS, null, null));
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute OCGZoom
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute OCGZoom
+	  * @param value: the value to set the attribute to
+	  */
+	public void setOCGZoom(double value)
+	{
+		setAttribute(AttributeName.OCGZOOM, value, null);
+	}
+
+	/**
+	  * (17) get double attribute OCGZoom
+	  * @return double the value of the attribute
+	  */
+	public double getOCGZoom()
+	{
+		return getRealAttribute(AttributeName.OCGZOOM, null, 0.0);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintPDFAnnotations
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PrintPDFAnnotations
+	  * @param value: the value to set the attribute to
+	  */
+	public void setPrintPDFAnnotations(boolean value)
+	{
+		setAttribute(AttributeName.PRINTPDFANNOTATIONS, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute PrintPDFAnnotations
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPrintPDFAnnotations()
+	{
+		return getBoolAttribute(AttributeName.PRINTPDFANNOTATIONS, null, false);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute PrintTrapAnnotations
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute PrintTrapAnnotations
+	  * @param value: the value to set the attribute to
+	  */
+	public void setPrintTrapAnnotations(boolean value)
+	{
+		setAttribute(AttributeName.PRINTTRAPANNOTATIONS, value, null);
+	}
+
+	/**
+	  * (18) get boolean attribute PrintTrapAnnotations
+	  * @return boolean the value of the attribute
+	  */
+	public boolean getPrintTrapAnnotations()
+	{
+		return getBoolAttribute(AttributeName.PRINTTRAPANNOTATIONS, null, false);
+	}
+
+	/* ---------------------------------------------------------------------
+	Methods for Attribute TransparencyRenderingQuality
+	--------------------------------------------------------------------- */
+	/**
+	  * (36) set attribute TransparencyRenderingQuality
+	  * @param value: the value to set the attribute to
+	  */
+	public void setTransparencyRenderingQuality(double value)
+	{
+		setAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, value, null);
+	}
+
+	/**
+	  * (17) get double attribute TransparencyRenderingQuality
+	  * @return double the value of the attribute
+	  */
+	public double getTransparencyRenderingQuality()
+	{
+		return getRealAttribute(AttributeName.TRANSPARENCYRENDERINGQUALITY, null, 0.0);
+	}
+
+	/* ***********************************************************************
+	 * Element getter / setter
+	 * ***********************************************************************
+	 */
+
+	/** (26) getCreateOCGControl
+	 * 
+	 * @param iSkip number of elements to skip
+	 * @return JDFOCGControl the element
+	 */
+	public JDFOCGControl getCreateOCGControl(int iSkip)
+	{
+		return (JDFOCGControl) getCreateElement_KElement(ElementName.OCGCONTROL, null, iSkip);
+	}
+
+	/**
+	 * (27) const get element OCGControl
+	 * @param iSkip number of elements to skip
+	 * @return JDFOCGControl the element
+	 * default is getOCGControl(0)     */
+	public JDFOCGControl getOCGControl(int iSkip)
+	{
+		return (JDFOCGControl) getElement(ElementName.OCGCONTROL, null, iSkip);
+	}
+
+	/**
+	 * Get all OCGControl from the current element
+	 * 
+	 * @return Collection<JDFOCGControl>, null if none are available
+	 */
+	public Collection<JDFOCGControl> getAllOCGControl()
+	{
+		final VElement vc = getChildElementVector(ElementName.OCGCONTROL, null);
+		if (vc == null || vc.size() == 0)
+		{
+			return null;
+		}
+
+		final Vector<JDFOCGControl> v = new Vector<JDFOCGControl>();
+		for (int i = 0; i < vc.size(); i++)
+		{
+			v.add((JDFOCGControl) vc.get(i));
+		}
+
+		return v;
+	}
+
+	/**
+	 * (30) append element OCGControl
+	 */
+	public JDFOCGControl appendOCGControl() throws JDFException
+	{
+		return (JDFOCGControl) appendElement(ElementName.OCGCONTROL, null);
+	}
+
+	/**
+	 * (24) const get element ReferenceXObjParams
+	 * @return JDFReferenceXObjParams the element
+	 */
+	public JDFReferenceXObjParams getReferenceXObjParams()
+	{
+		return (JDFReferenceXObjParams) getElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
+	}
+
+	/** (25) getCreateReferenceXObjParams
+	 * 
+	 * @return JDFReferenceXObjParams the element
+	 */
+	public JDFReferenceXObjParams getCreateReferenceXObjParams()
+	{
+		return (JDFReferenceXObjParams) getCreateElement_KElement(ElementName.REFERENCEXOBJPARAMS, null, 0);
+	}
+
+	/**
+	 * (29) append element ReferenceXObjParams
+	 */
+	public JDFReferenceXObjParams appendReferenceXObjParams() throws JDFException
+	{
+		return (JDFReferenceXObjParams) appendElementN(ElementName.REFERENCEXOBJPARAMS, 1, null);
+	}
 
 }// end namespace JDF

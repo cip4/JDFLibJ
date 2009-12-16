@@ -1248,6 +1248,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.RECYCLED, "org.cip4.jdflib.span.JDFOptionSpan");
 		sm_PackageNames.put(ElementName.REFANCHOR, "org.cip4.jdflib.resource.JDFRefAnchor");
 		sm_PackageNames.put(ElementName.REFELEMENT, "org.cip4.jdflib.core.JDFRefElement");
+		sm_PackageNames.put(ElementName.REFERENCEXOBJPARAMS, "org.cip4.jdflib.resource.process.JDFReferenceXObjParams");
 		sm_PackageNames.put(ElementName.REGISTERMARK, "org.cip4.jdflib.resource.process.JDFRegisterMark");
 		sm_PackageNames.put(ElementName.REGISTERRIBBON, "org.cip4.jdflib.resource.JDFRegisterRibbon");
 		sm_PackageNames.put(ElementName.REGISTRATION, "org.cip4.jdflib.jmf.JDFRegistration");

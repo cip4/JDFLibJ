@@ -3350,43 +3350,52 @@ public class KElement extends ElementNSImpl
 	 * Removes the contents of value from the existing attribute key. Deletes the attribute Key, if it has no value.<br>
 	 * <code>removeFromAttribute("key","next","",",", -1)</code> applied to <code><xml key="first,next"/></code> results in <code><xml key="first"/></code>
 	 * @param key attribute key
-	 * @param value string to remove
+	 * @param token string to remove
 	 * @param nameSpaceURI namespace of attribute key
 	 * @param sep separator between the values
 	 * @param nMax maximum number of value instances to remove (-1 = all)
 	 * @return int number of removed instances
 	 */
-	public int removeFromAttribute(final String key, final String value, final String nameSpaceURI, final String sep, final int nMax)
+	public int removeFromAttribute(final String key, final String token, final String nameSpaceURI, final String sep, int nMax)
 	{
-		int nMaxLocal = nMax;
-
-		final String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
-		if (strAttrValue == null || strAttrValue.indexOf(value) < 0)
-		{
+		String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
+		int n = 0;
+		int lenToken = token.length();
+		if (lenToken == 0)
 			return 0;
-		}
-		final VString v = StringUtil.tokenize(strAttrValue, sep, false);
-		final int siz = v.size();
-
-		for (int i = siz - 1; i >= 0; i--)
+		int iPos = StringUtil.indexOfToken(strAttrValue, token, " ", 0);
+		while (iPos >= 0)
 		{
-			if (v.elementAt(i).equals(value))
+			int lenString = strAttrValue.length();
+			if (iPos == 0 && lenToken == lenString)
 			{
-				v.removeElementAt(i);
-				if (--nMaxLocal == 0)
-				{
-					break;
-				}
+				removeAttribute_KElement(key, nameSpaceURI);
+				return ++n;
 			}
+			int l = lenToken;
+			while (iPos > 0 && sep.indexOf(strAttrValue.charAt(iPos - 1)) >= 0)
+			{
+				iPos--;
+				l++;
+			}
+			while (iPos + l < lenString && sep.indexOf(strAttrValue.charAt(iPos + l)) >= 0)
+				l++;
+			if (iPos > 0 && iPos + l == lenString)
+				strAttrValue = strAttrValue.substring(0, iPos);
+			else if (iPos > 0 && iPos + l < lenString)
+				strAttrValue = strAttrValue.substring(0, iPos + 1) + strAttrValue.substring(iPos + l);
+			else if (iPos == 0 && iPos + l == lenString)
+				strAttrValue = null;
+			else if (iPos == 0 && iPos + l < lenString)
+				strAttrValue = strAttrValue.substring(iPos + l);
+			else
+				throw new JDFException("should never get here");
+			if (n++ == nMax)
+				break;
+			iPos = StringUtil.indexOfToken(strAttrValue, token, " ", 0);
 		}
-
-		if (v.size() == 0)
-		{
-			removeAttribute_KElement(key, nameSpaceURI);
-			return 0;
-		}
-		setAttribute(key, StringUtil.setvString(v, sep, null, null), nameSpaceURI);
-		return v.size();
+		setAttribute(key, strAttrValue, nameSpaceURI);
+		return n;
 	}
 
 	/**
@@ -3808,6 +3817,33 @@ public class KElement extends ElementNSImpl
 		return (KElement) copyNode(this, src, beforeChild);
 	}
 
+	/** 
+	 * copies a node into this
+	 * cleans this first
+	 * @param src
+	 * @throws JDFException if nodenames don't match
+	 */
+	public void copyInto(KElement src)
+	{
+		if (src == null)
+			return;
+		if (!getNodeName().equals(src.getNodeName()))
+			throw new JDFException("non matching node names");
+		removeChildren(null, null, null);
+		removeAllText();
+		removeAttributes(null);
+		setAttributes(src);
+		setText(src.getText());
+		setXMLComment(src.getXMLComment(0));
+		KElement e = src.getFirstChildElement();
+		while (e != null)
+		{
+			copyElement(e, null);
+			e = e.getNextSiblingElement();
+		}
+
+	}
+
 	private static Node copyNode(final Node parent, final Node src, final Node beforeChild)
 	{
 		if (src == null)
@@ -4063,15 +4099,15 @@ public class KElement extends ElementNSImpl
 	 * <code>this</code>, the previous comment is removed The double minus sign '--' is escaped with an underscore '_' in order to ensure valid xml
 	 * @param commentText the comment text to set
 	 */
-	public void setXMLComment(final String commentText)
+	public void setXMLComment(String commentText)
 	{
-		String commentTextLocal = commentText;
-
+		if (commentText == null)
+			return;
 		final KElement e = getParentNode_KElement();
 		if (e == null)
 		{
-			commentTextLocal = StringUtil.replaceString(commentTextLocal, "--", "__");
-			final Comment newChild = getOwnerDocument().createComment(commentTextLocal);
+			commentText = StringUtil.replaceString(commentText, "--", "__");
+			final Comment newChild = getOwnerDocument().createComment(commentText);
 			getOwnerDocument().insertBefore(newChild, this);
 			final Node last = newChild.getPreviousSibling();
 			if (last != null && last.getNodeType() == Node.COMMENT_NODE)
@@ -4082,7 +4118,7 @@ public class KElement extends ElementNSImpl
 		else
 		{
 			final Node last = getPreviousSibling();
-			e.appendXMLComment(commentTextLocal, this);
+			e.appendXMLComment(commentText, this);
 			if (last != null && last.getNodeType() == Node.COMMENT_NODE)
 			{
 				e.removeChild(last);
@@ -4120,6 +4156,8 @@ public class KElement extends ElementNSImpl
 	 */
 	public void appendText(final String textName)
 	{
+		if (textName == null)
+			return;
 		final Text newChild = getOwnerDocument().createTextNode(textName);
 		appendChild(newChild);
 	}
@@ -6572,7 +6610,7 @@ public class KElement extends ElementNSImpl
 	 */
 	private void fillHashSet(final String attName, final String attNS, final HashSet<String> preFill, final boolean bFirst)
 	{
-		final String attVal = getAttribute(attName, attNS, null);
+		final String attVal = getAttribute_KElement(attName, attNS, null);
 		if (attVal != null)
 		{
 			if (preFill.contains(attVal))

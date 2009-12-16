@@ -718,9 +718,39 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.hasToken(null, "0", " ", 0));
 		assertFalse(StringUtil.hasToken("ab", "a", " ", 0));
 		assertFalse(StringUtil.hasToken("ab", "b", " ", 0));
+		assertFalse(StringUtil.hasToken("abab", "ab", " ", 0));
+		assertFalse(StringUtil.hasToken("ababa", "ab", " ", 0));
+		assertTrue(StringUtil.hasToken("abc ab", "ab", " ", 0));
+		assertTrue(StringUtil.hasToken("abc ab ", "ab", " ", 0));
+		assertTrue(StringUtil.hasToken("abc ab abd", "ab", " ", 0));
 		assertTrue("string matches are always true for 0", StringUtil.hasToken("a", "a", " ", 0));
 		assertTrue("string matches are always true for -1", StringUtil.hasToken("a", "a", ", ", -1));
 
+	}
+
+	/**
+	 * 
+	 */
+	public void testHasTokenPerformance()
+	{
+		final String s = "1 2 33 3 \n15\n4";
+		final String s2 = "ab123456 ab1234567 ab 1234568";
+		long t0 = System.currentTimeMillis();
+		assertTrue(StringUtil.hasToken(s, "33", " ", 0));
+		assertFalse(StringUtil.hasToken(s, "34", " ", 0));
+		assertFalse(StringUtil.hasToken(s2, "ab12345679", " ", 0));
+		assertTrue(StringUtil.hasToken(s2, "ab1234567", " ", 0));
+		assertTrue(StringUtil.hasToken(s2, "ab", " ", 0));
+		for (int i = 0; i < 1000000; i++)
+		{
+			StringUtil.hasToken(s, "33", " ", 0);
+			StringUtil.hasToken(s, "34", " ", 0);
+			StringUtil.hasToken(s2, "ab12345679", " ", 0);
+			StringUtil.hasToken(s2, "ab1234567", " ", 0);
+			StringUtil.hasToken(s2, "ab", " ", 0);
+		}
+		long t2 = System.currentTimeMillis();
+		System.out.println(t2 - t0);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

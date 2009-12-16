@@ -233,6 +233,7 @@ public final class AttributeName
 	public static final String BINDERMATERIAL = "BinderMaterial";
 	public static final String BINDERNAME = "BinderName";
 	public static final String BINDERYSIGNATURENAME = "BinderySignatureName";
+	public static final String BINDERYSIGNATUREPAGINATIONINDEX = "BinderySignaturePaginationIndex";
 	public static final String BINDERYSIGNATURETYPE = "BinderySignatureType";
 	public static final String BINDING = "Binding";
 	public static final String BINDINGEDGE = "BindingEdge";
@@ -1030,6 +1031,7 @@ public final class AttributeName
 	public static final String MIRRORMARGINS = "MirrorMargins";
 	public static final String MISSINGPRINTERFONT = "MissingPrinterFont";
 	public static final String MISSINGSCREENFONT = "MissingScreenFont";
+	public static final String MODE = "Mode";
 	public static final String MODELDESCRIPTION = "ModelDescription";
 	public static final String MODELNAME = "ModelName";
 	public static final String MODELNUMBER = "ModelNumber";
@@ -1490,6 +1492,7 @@ public final class AttributeName
 	public static final String SETCOPIES = "SetCopies";
 	public static final String SETDOCINDEX = "SetDocIndex";
 	public static final String SETINDEX = "SetIndex";
+	public static final String SETLEVEL = "SetLevel";
 	public static final String SETNAMES = "SetNames";
 	public static final String SETORD = "SetOrd";
 	public static final String SETPAGESIZE = "SetPageSize";
@@ -1518,7 +1521,12 @@ public final class AttributeName
 	public static final String SHEETNAME = "SheetName";
 	public static final String SHEETNAMEFORMAT = "SheetNameFormat";
 	public static final String SHEETNAMETEMPLATE = "SheetNameTemplate";
-	public static final String SHEETOCCURENCE = "SheetOccurence";
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
+	public static final String SHEETOCCURENCE = "SheetOccurrence";
+	public static final String SHEETOCCURRENCE = "SheetOccurrence";
 	public static final String SHEETOFFSET = "SheetOffset";
 	public static final String SHEETPART = "SheetPart";
 	public static final String SHEETSIDES = "SheetSides";

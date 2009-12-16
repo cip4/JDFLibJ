@@ -2955,7 +2955,6 @@ public class JDFResource extends JDFElement
 			}
 			resultAttrib = ke.getAttribute_KElement(attrib, nameSpaceURI, null);
 		}
-
 		return resultAttrib;
 	}
 
@@ -4390,10 +4389,10 @@ public class JDFResource extends JDFElement
 			}
 			if (m.size() > 0)
 			{
-				vReturn.appendUnique(m);
+				vReturn.add(m);
 			}
 		}
-
+		vReturn.unify();
 		return vReturn;
 	}
 

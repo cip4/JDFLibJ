@@ -540,6 +540,21 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull(e.getAttribute("a", null, null));
 		e.removeFromAttribute("a", "c", null, " ", 333);
 		assertNull(e.getAttribute("a", null, null));
+		e.setAttribute("a", "abc ab abc");
+		e.removeFromAttribute("a", "ab", null, " ", 333);
+		assertEquals(e.getAttribute("a"), "abc abc");
+		e.setAttribute("a", "abc1 abc2 abc");
+		e.removeFromAttribute("a", "ab", null, " ", 333);
+		assertEquals(e.getAttribute("a"), "abc1 abc2 abc");
+		e.removeFromAttribute("a", "abc", null, " ", 333);
+		assertEquals(e.getAttribute("a"), "abc1 abc2");
+		e.removeFromAttribute("a", "", null, " ", 333);
+		assertEquals(e.getAttribute("a"), "abc1 abc2");
+		e.setAttribute("a", " abc1 abc2 abc ");
+		e.removeFromAttribute("a", "abc1", null, " ", 333);
+		assertEquals(e.getAttribute("a"), "abc2 abc ");
+		e.removeFromAttribute("a", "abc", null, " ", 333);
+		assertEquals(e.getAttribute("a"), "abc2");
 	}
 
 	// //////////////////////////////////////////////////////////////
@@ -688,6 +703,27 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(t2.getAttribute("a"), "2");
 		assertEquals(t2.getAttribute("b"), "1");
 		assertEquals(t2.getAttribute("c"), "2");
+	}
+
+	/**
+	 * 
+	 */
+	public void testCopyInto()
+	{
+		final XMLDoc doc = new XMLDoc("Test", "www.test.com");
+		final KElement root = doc.getRoot();
+		final KElement t = root.appendElement("foo");
+		t.setAttribute("a", "1");
+		t.setAttribute("b", "1");
+
+		final XMLDoc doc2 = new XMLDoc("Test", "www.test.com");
+		final KElement root2 = doc2.getRoot();
+
+		root2.copyInto(root);
+		KElement t2 = root2.getElement("foo");
+		assertEquals(t2.getAttribute("a"), "1");
+		assertEquals(t2.getAttribute("b"), "1");
+		assertTrue(root2.isEqual(root));
 	}
 
 	/**

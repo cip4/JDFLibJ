@@ -772,6 +772,7 @@ public final class ElementName
 	public static final String RECYCLEDPERCENTAGE = "RecycledPercentage";
 	public static final String REFANCHOR = "RefAnchor";
 	public static final String REFELEMENT = "RefElement";
+	public static final String REFERENCEXOBJPARAMS = "ReferenceXObjParams";
 	public static final String REGISTERMARK = "RegisterMark";
 	public static final String REGISTERRIBBON = "RegisterRibbon";
 	public static final String REGISTRATION = "Registration";

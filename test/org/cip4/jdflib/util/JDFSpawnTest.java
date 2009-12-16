@@ -2142,7 +2142,60 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	}
 
-	// /////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testManySpawnPartInformative()
+	{
+		final String strJDFName = "bigWhite.jdf";
+		// final String strJDFName = "biginline.jdf";
+		final String strJDFPath = sm_dirTestData + strJDFName;
+		final JDFParser parser = new JDFParser();
+		final JDFDoc jdfDoc = parser.parseFile(strJDFPath);
+		final JDFNode nodeRoot = jdfDoc.getJDFRoot();
+		JDFNode nodeProc = nodeRoot.getJobPart("Qua0.A", null);
+		final String jobPartID = nodeProc.getJobPartID(false);
+		JDFRunList rlOut = (JDFRunList) nodeProc.getResource("RunList", EnumUsage.Output, 0);
+		VJDFAttributeMap vmap = rlOut.getPartMapVector(false);
+		for (int j = 0; j < 2; j++)
+		{
+			long t0 = System.currentTimeMillis();
+			long t00 = System.currentTimeMillis();
+			JDFSpawn spawn = null;
+			for (int i = 0; i < 100; i++)
+			{
+				JDFAttributeMap map = vmap.get(i);
+				VJDFAttributeMap vMap1 = new VJDFAttributeMap();
+				vMap1.add(map);
+				final VString vsRWResourceIDs = new VString();
+				vsRWResourceIDs.add("Output");
+				if (i == 0 || j > 2)
+					spawn = new JDFSpawn(nodeProc);
+				else if (spawn != null)
+					spawn.setNode(nodeProc);
+				else
+					fail("whazzup?");
+				final JDFNode nodeSubJDF;
+				if (j == 0)
+					nodeSubJDF = spawn.spawnInformative(strJDFPath, null, vMap1, true, true, true, true);
+				else
+					nodeSubJDF = spawn.spawn(strJDFPath, null, vsRWResourceIDs, vMap1, true, true, true, true);
+
+				assertNotNull(nodeSubJDF);
+				long t1 = System.currentTimeMillis();
+
+				nodeSubJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "manySubInf" + i + "." + j + ".jdf", 2, true);
+				assertEquals(nodeProc.getID(), nodeSubJDF.getID());
+				final JDFDoc d2 = parser.parseFile(sm_dirTestDataTemp + "manySubInf" + i + "." + j + ".jdf");
+				assertNotNull("The subjdf could be parsed!", d2);
+				long t2 = System.currentTimeMillis();
+				System.out.println("j= " + j + " i= " + i + " of " + (vmap.size() - 1) + " : " + map + " time: " + (t2 - t0) + "/" + (t1 - t0) + " total " + (t2 - t00));
+				t0 = t1;
+			}
+		}
+		jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);
+
+	} // /////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 

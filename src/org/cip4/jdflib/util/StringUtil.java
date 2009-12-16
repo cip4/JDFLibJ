@@ -409,8 +409,7 @@ public class StringUtil
 
 		final int siz = v.size();
 		final StringBuffer buf = new StringBuffer(siz * 16); // guestimat 16 chars
-		// per
-		// token max
+		// per token max
 
 		if (front != null)
 		{
@@ -600,6 +599,8 @@ public class StringUtil
 	 */
 	public static boolean hasToken(final String strWork, final String token, final String delim, final int iSkip)
 	{
+		if (iSkip <= 0)
+			return indexOfToken(strWork, token, delim, 0) >= 0;
 		if (strWork != null)
 		{
 			int posToken1 = strWork.indexOf(token);
@@ -1302,15 +1303,57 @@ public class StringUtil
 	 * default: hasToken(strWork, token, delim)
 	 * 
 	 * @param strWork the string to work on
-	 * @param typ the token to search for
+	 * @param token the token to search for
 	 * @param delim the delimiter of the tokens
 	 * @return boolean -
-	 * @deprecated 060420 use hasToken(strWork, token, delim, 0)
+	 * @deprecated 060420 
+	 * 
 	 */
 	@Deprecated
-	public static boolean hasToken(final String strWork, final String typ, final String delim)
+	public static boolean hasToken(final String strWork, final String token, final String delim)
 	{
-		return hasToken(strWork, typ, delim, 0);
+		return hasToken(strWork, token, delim, 0);
+	}
+
+	/**
+	 * index of a token in a string
+	 * 
+	 * @param strWork the string to work on
+	 * @param token the token to search for
+	 * @param delim the delimiter of the tokens
+	 * @start start position to search in the string
+	 * @return
+	 */
+	public static int indexOfToken(final String strWork, final String token, final String delim, int start)
+	{
+		if (strWork != null)
+		{
+			int tl = token.length();
+			int sl = strWork.length();
+			int p0 = start;
+			while ((tl + p0) <= sl)
+			{
+				int posToken1 = strWork.indexOf(token, p0);
+				if (posToken1 < 0)
+				{
+					return posToken1;
+				}
+				else if (posToken1 == 0 && (tl == sl || delim.indexOf(strWork.charAt(tl)) >= 0))
+				{
+					return posToken1;
+				}
+				else if (posToken1 > 0 && delim.indexOf(strWork.charAt(posToken1 - 1)) >= 0 && ((sl == posToken1 + tl) || delim.indexOf(strWork.charAt(posToken1 + tl)) >= 0))
+				{
+					return posToken1;
+				}
+				else if (posToken1 >= 0)
+				{
+					p0 = posToken1 + 1;
+				}
+			}
+
+		}
+		return -1;
 	}
 
 	/**
@@ -1773,8 +1816,7 @@ public class StringUtil
 				cToEscape = 256 + cToEscape;
 			}
 
-			if ((cToEscape > iEscapeAbove) || (cToEscape < iEscapeBelow)
-					|| (strCharSet != null && strCharSet.indexOf(cToEscape) != -1))
+			if ((cToEscape > iEscapeAbove) || (cToEscape < iEscapeBelow) || (strCharSet != null && strCharSet.indexOf(cToEscape) != -1))
 			{ // the character must be escaped
 				for (int ee = 0; ee < escapeCharbytes.length; ee++)
 				{
@@ -2180,18 +2222,24 @@ public class StringUtil
 			return bigAtt.equals(smallAtt);
 		}
 
-		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS))
-				|| (dataType.equals(AttributeInfo.EnumAttributeType.enumerations))
+		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS)) || (dataType.equals(AttributeInfo.EnumAttributeType.enumerations))
 				|| (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
 		{
 			// check for matching individual NMTOKEN
-			final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);
-			for (int i = 0; i < vSmall.size(); i++)
+			if (smallAtt.indexOf(" ") > 0)
 			{
-				if (!StringUtil.hasToken(bigAtt, vSmall.stringAt(i), JDFConstants.BLANK, 0))
+				final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);
+				for (int i = 0; i < vSmall.size(); i++)
 				{
-					return false;
+					if (!StringUtil.hasToken(bigAtt, vSmall.stringAt(i), JDFConstants.BLANK, 0))
+					{
+						return false;
+					}
 				}
+			}
+			else if (!StringUtil.hasToken(bigAtt, smallAtt, JDFConstants.BLANK))
+			{
+				return false;
 			}
 
 			return true;

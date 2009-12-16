@@ -721,7 +721,7 @@ public class JDFMerge
 					// ancestor
 					{
 						leafRes.removeFromAttribute(AttributeName.SPAWNIDS, resSpawnID, null, null, -1);
-						final VString spawnIDsNew = leafRes.getSpawnIDs(false);
+						final String spawnIDsNew = leafRes.getAttribute_KElement(AttributeName.SPAWNIDS, null, null);
 						if (spawnIDsNew == null || spawnIDsNew.isEmpty())
 						{
 							removeSpawnAttributes(leafRes);
@@ -759,8 +759,8 @@ public class JDFMerge
 	}
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private void prepareNewSpawnMap()
 	{
 		if (newSpawnMap != null)
@@ -1194,7 +1194,8 @@ public class JDFMerge
 				}
 				catch (final Exception e)
 				{
-					throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + (oldRes == null ? ">>> oldRes is null !!! <<<" : oldRes.getID()) + " SpawnID=" + spawnID);
+					throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + (oldRes == null ? ">>> oldRes is null !!! <<<" : oldRes.getID()) + " SpawnID="
+							+ spawnID);
 				}
 
 				final String oldID = oldRes.getID();

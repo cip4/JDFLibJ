@@ -248,9 +248,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
-     * 
-     *
-     */
+	 * 
+	 *
+	 */
 	public void testMakeRootResource()
 	{
 		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
@@ -1091,6 +1091,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertNotNull(c3.getIdenticalMap());
 		assertEquals(c3.getIdenticalMap(), c1.getPartMap());
 
+		VElement v = c.getLeaves(false);
+		assertEquals("physical leaves are counted", v.size(), 5);
+		VJDFAttributeMap vCMap = c.getPartMapVector(false);
 		c3.removeChild(ElementName.IDENTICAL, null, 0);
 		assertNull(c3.getIdenticalMap());
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
@@ -1563,8 +1566,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
- * 
- */
+	* 
+	*/
 	public void testGetLeaves()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1585,8 +1588,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 	/**
- * 
- */
+	* 
+	*/
 	public void testGetMinStatusFromLeaves()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1643,8 +1646,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
- * 
- */
+	* 
+	*/
 	public void testSubElement()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1664,8 +1667,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
- * 
- */
+	* 
+	*/
 	public void testSetAttributes()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -1684,8 +1687,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	/**
- * 
- */
+	* 
+	*/
 	public void testSetLocked()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -1726,8 +1729,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 	/**
- * 
- */
+	* 
+	*/
 	public void testImplicitPartitions()
 	{
 		final JDFDoc doc = creatXMDoc();

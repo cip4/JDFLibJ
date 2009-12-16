@@ -157,8 +157,8 @@ public class JDFValidator
 	VString vColorPoolSeparations = new VString();
 	protected XMLDoc pOut = new XMLDoc("CheckOutput", null);
 	// list of gray boxes that are ignored when checking types for extensions
-	static String[] aGBList = { "ImpositionRIPing", "PlateMaking", "ProofAndPlateMaking", "ImpositionProofing", "PageProofing", "RIPing", "PrePressPreparation", "ImpositionPreparation",
-			"ProofImaging" };
+	static String[] aGBList = { "ImpositionRIPing", "PlateMaking", "ProofAndPlateMaking", "ImpositionProofing", "PageProofing", "RIPing", "PrePressPreparation",
+			"ImpositionPreparation", "ProofImaging" };
 
 	JDFDoc theDoc = null;
 	protected String translation = null;
@@ -189,8 +189,8 @@ public class JDFValidator
 	public boolean bMultiID = false;
 	private boolean inOutputLoop = false;
 
-	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2009 CIP4" + "\nJDF 1.3 compatible version\n" + "\nCode based on schema JDF_1.3.xsd Release Candidate 001\n"
-			+ "Build version " + JDFAudit.software();
+	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2009 CIP4" + "\nJDF 1.3 compatible version\n"
+			+ "\nCode based on schema JDF_1.3.xsd Release Candidate 001\n" + "Build version " + JDFAudit.software();
 
 	public JDFValidator()
 	{
@@ -335,7 +335,8 @@ public class JDFValidator
 					testElement.setAttribute("NSURI", nsURI);
 					testElement.setAttribute("IsPrivate", true, null);
 					testElement.setAttribute("Status", "Skipping");
-					setErrorType(testElement, "PrivateElement", "Element in Private NameSpace - probable Namespace Typo in: " + elmName + " Correct ns URI=" + JDFConstants.JDFNAMESPACE);
+					setErrorType(testElement, "PrivateElement", "Element in Private NameSpace - probable Namespace Typo in: " + elmName + " Correct ns URI="
+							+ JDFConstants.JDFNAMESPACE);
 				}
 			}
 			if (bPrintNameSpace)
@@ -437,8 +438,8 @@ public class JDFValidator
 				{
 					final EnumVersion v = jdfElement.getParentNode_KElement().getFirstVersion(elmName, true);
 					testElement.setAttribute("FirstVersion", v.getName());
-					setErrorType(testElement, "PreReleaseElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " First Valid version: " + v.getName(),
-							indent + 2);
+					setErrorType(testElement, "PreReleaseElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " First Valid version: "
+							+ v.getName(), indent + 2);
 				}
 			}
 
@@ -450,7 +451,8 @@ public class JDFValidator
 				{
 					final EnumVersion v = jdfElement.getParentNode_KElement().getLastVersion(elmName, true);
 					testElement.setAttribute("LastVersion", v.getName());
-					setErrorType(testElement, "DeprecatedElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " Last Valid version: " + v.getName(), indent + 2);
+					setErrorType(testElement, "DeprecatedElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " Last Valid version: "
+							+ v.getName(), indent + 2);
 				}
 			}
 
@@ -633,8 +635,10 @@ public class JDFValidator
 
 			printAttributeList(indent, testElement, jdfElement, printMissElms, unknownAttributes, "Unknown", "Unknown Attribute");
 			printAttributeList(indent, testElement, jdfElement, printMissElms, invalidAttributes, "Invalid", "Invalid attribute Value");
-			printAttributeList(indent, testElement, jdfElement, printMissElms, deprecatedAttributes, "Deprecated", "Deprecated Attribute in JDF Version " + jdfElement.getVersion(true).getName());
-			printAttributeList(indent, testElement, jdfElement, printMissElms, prereleaseAttributes, "PreRelease", "Attribute not yet defined in JDF Version " + jdfElement.getVersion(true).getName());
+			printAttributeList(indent, testElement, jdfElement, printMissElms, deprecatedAttributes, "Deprecated", "Deprecated Attribute in JDF Version "
+					+ jdfElement.getVersion(true).getName());
+			printAttributeList(indent, testElement, jdfElement, printMissElms, prereleaseAttributes, "PreRelease", "Attribute not yet defined in JDF Version "
+					+ jdfElement.getVersion(true).getName());
 			printAttributeList(indent, testElement, jdfElement, printMissElms, missingAttributes, "Missing", "Missing Attribute");
 			printAttributeList(indent, testElement, jdfElement, printMissElms, swapAtt, "Swap", "Element written as Attribute");
 
@@ -788,8 +792,7 @@ public class JDFValidator
 		}
 	}
 
-	private void printAttributeList(final int indent, final KElement testElement, final JDFElement part, final boolean printMissElms, final VString attributeVector, final String whatType,
-			final String message)
+	private void printAttributeList(final int indent, final KElement testElement, final JDFElement part, final boolean printMissElms, final VString attributeVector, final String whatType, final String message)
 	{
 		String messageLocal = message;
 
@@ -1435,8 +1438,8 @@ public class JDFValidator
 		{
 			final String rRef = rl.getrRef();
 			final String resLinkName = rl.getNodeName();
-			final String procUsage = (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING)) ? "(ProcessUsage:" + rl.getProcessUsage() + ")"
-					: JDFConstants.EMPTYSTRING;
+			final String procUsage = (rl.hasAttribute(AttributeName.PROCESSUSAGE) && !rl.getProcessUsage().equals(JDFConstants.EMPTYSTRING)) ? "(ProcessUsage:"
+					+ rl.getProcessUsage() + ")" : JDFConstants.EMPTYSTRING;
 
 			final String errMessage = indent(indent) + "!!! InValid Element: " + rl.buildXPath(null, 1) + " !!! ";
 
@@ -1458,7 +1461,8 @@ public class JDFValidator
 			{
 				isValid = false;
 				sysOut.println(errMessage);
-				sysOut.println(indent(indent) + "Invalid " + rl.getAttribute("Usage") + " ResLink: " + resLinkName + procUsage + "\nrRef points to the multiply defined ID=\"" + rRef + "\"");
+				sysOut.println(indent(indent) + "Invalid " + rl.getAttribute("Usage") + " ResLink: " + resLinkName + procUsage + "\nrRef points to the multiply defined ID=\""
+						+ rRef + "\"");
 				if (testElement != null)
 				{
 					setErrorType(testElement, "ResLinkMultipleID", "ResourceLink rRef points to the multiply defined ID:" + rRef);
@@ -1780,7 +1784,8 @@ public class JDFValidator
 
 						removeValidEntriesIfQuiet(el, false);
 
-						if (!el.getBoolAttribute("HasPrivateContents", null, false) && eName != "ForeignNSFound" && (el.getChildByTagName(null, null, 0, mPrivate, false, false) == null))
+						if (!el.getBoolAttribute("HasPrivateContents", null, false) && eName != "ForeignNSFound"
+								&& (el.getChildByTagName(null, null, 0, mPrivate, false, false) == null))
 						{
 							el.deleteNode(); // if node is valid and bQuiet is
 							// true - remove it
@@ -1960,7 +1965,7 @@ public class JDFValidator
 	public XMLDoc processZipFile(final File argFile)
 	{
 		boolean bTryKeep = bTryFormats;
-		
+
 		try
 		{
 			final ZipFile zip = new ZipFile(argFile);

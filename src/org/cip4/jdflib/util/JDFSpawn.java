@@ -97,7 +97,6 @@ import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
-import org.cip4.jdflib.elementwalker.ResourceIDFinder;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
@@ -120,7 +119,9 @@ public class JDFSpawn
 
 	private JDFNode node;
 	private JDFNode informativeRoot;
+	private final Map<JDFNode, HashSet<String>> mapAllRefs;
 	private final Map<JDFResource, VString> mapRefs;
+	private final Set<String> noIdentical;
 	private final Map<String, JDFResource> mapResources;
 	/**
 	 * if true, reduce read only partitions, else retain entire resource
@@ -193,7 +194,9 @@ public class JDFSpawn
 		node = nodeToSpawn;
 		informativeRoot = null;
 		mapRefs = new HashMap<JDFResource, VString>();
-		mapResources = new ResourceIDFinder().getMap(node.getJDFRoot());
+		mapAllRefs = new HashMap<JDFNode, HashSet<String>>();
+		mapResources = new HashMap<String, JDFResource>();
+		noIdentical = new HashSet<String>();
 	}
 
 	/**
@@ -241,8 +244,7 @@ public class JDFSpawn
 		prepareNodeInfos();
 
 		// merge this node into it
-		rootOut.mergeNode(node, false); // "copy" this node into the new created
-		// document
+		rootOut.copyInto(node); // "copy" this node into the new created document
 		final String spawnID = "Sp" + JDFElement.uniqueID(-666); // create a spawn
 		// id for this transaction
 		rootOut.setSpawnID(spawnID);
@@ -263,10 +265,9 @@ public class JDFSpawn
 		{
 			spawnParentNode = node;
 			// don't copy the whole history along
-			rootOut.getAuditPool().flush();
+			rootOut.getCreateAuditPool().flush();
 
-			// The AncestorPool of the original JDF contains the appropriate
-			// Part elements
+			// The AncestorPool of the original JDF contains the appropriate Part elements
 			final JDFAncestorPool ancpool = docOut.getJDFRoot().getAncestorPool();
 			VJDFAttributeMap preSpawnedParts = new VJDFAttributeMap();
 
@@ -580,7 +581,7 @@ public class JDFSpawn
 		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, false);
 
 		// create a HashSet with all IDs of the newly created Node
-		final HashSet<String> allIDsCopied = rootOut.fillHashSet(AttributeName.ID, null);
+		final HashSet<String> allIDsCopied = getAllIdsCopied(rootOut);
 
 		final String spawnID = spawnAudit.getNewSpawnID();
 
@@ -779,6 +780,22 @@ public class JDFSpawn
 	}
 
 	/**
+	 * @param rootOut
+	 * @return
+	 */
+	private HashSet<String> getAllIdsCopied(final JDFNode rootOut)
+	{
+		// the node will be reused, whereas rootout is a new copy every time
+		HashSet<String> allIDsCopied = mapAllRefs.get(node);
+		if (allIDsCopied == null)
+		{
+			allIDsCopied = rootOut.fillHashSet("ID", null);
+			mapAllRefs.put(node, allIDsCopied);
+		}
+		return (HashSet<String>) allIDsCopied.clone();
+	}
+
+	/**
 	 * cache resources by id for performance
 	 * @param refID
 	 * @return
@@ -809,9 +826,13 @@ public class JDFSpawn
 			return;
 		}
 		final JDFResource root = ((JDFResource) vRes.get(0)).getResourceRoot();
+		String id = root.getID();
+		if (noIdentical.contains(id))
+			return;
 		final VElement identicals = root.getChildrenByTagName(ElementName.IDENTICAL, null, null, false, true, -1, false);
 		if (identicals == null || identicals.size() == 0)
 		{
+			noIdentical.add(id);
 			return;
 		}
 
@@ -1537,13 +1558,17 @@ public class JDFSpawn
 			informativeRoot = (JDFNode) docNew.getRoot();
 			final JDFNode thisRoot = node.getJDFRoot();
 			// merge this node into it
-			informativeRoot.mergeNode(thisRoot, false);
+			informativeRoot.copyInto(thisRoot);
 			//		final JDFDoc docNew = node.getOwnerDocument_JDFElement().clone();
 			//		JDFNode rootOut = (JDFNode) docNew.getRoot();
 		}
 		final JDFNode copyOfThis = informativeRoot.getChildJDFNode(node.getID(), false);
 		final JDFNode tmp = node;
 		node = copyOfThis;
+		if (tmp != node)
+		{
+			mapResources.clear();
+		}
 		final VString vRWTmp = vRWResources_in;
 		final boolean spawnMultKeep = bSpawnRWPartsMultiple;
 		JDFNode nodeNew = null;
