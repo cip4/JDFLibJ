@@ -106,7 +106,8 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         atrInfoTable[6] = new AtrInfoTable(AttributeName.RATIO, 0x33333111, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,7 +119,8 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODECOMPPARAMS, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -168,13 +170,15 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBarcodeReproParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -182,7 +186,8 @@ public abstract class JDFAutoBarcodeReproParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

@@ -108,7 +108,8 @@ public abstract class JDFAutoModule extends JDFElement
         atrInfoTable[11] = new AtrInfoTable(AttributeName.SUBMODULEINDEX, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -120,7 +121,8 @@ public abstract class JDFAutoModule extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.MODULE, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -170,7 +172,8 @@ public abstract class JDFAutoModule extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoModule[  --> " + super.toString() + " ]";
     }

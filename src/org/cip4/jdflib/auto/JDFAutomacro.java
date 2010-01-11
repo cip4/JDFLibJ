@@ -99,7 +99,8 @@ public abstract class JDFAutomacro extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -113,7 +114,8 @@ public abstract class JDFAutomacro extends JDFElement
         elemInfoTable[2] = new ElemInfoTable(ElementName.CALL, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -163,7 +165,8 @@ public abstract class JDFAutomacro extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutomacro[  --> " + super.toString() + " ]";
     }
@@ -190,7 +193,8 @@ public abstract class JDFAutomacro extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        public String getID()
+        @Override
+		public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

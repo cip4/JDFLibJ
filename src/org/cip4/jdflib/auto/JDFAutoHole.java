@@ -97,7 +97,8 @@ public abstract class JDFAutoHole extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.SHAPE, 0x22222222, AttributeInfo.EnumAttributeType.enumeration, EnumShape.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,13 +148,15 @@ public abstract class JDFAutoHole extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoHole[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -161,7 +164,8 @@ public abstract class JDFAutoHole extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

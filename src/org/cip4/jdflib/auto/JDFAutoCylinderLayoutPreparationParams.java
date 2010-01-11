@@ -89,7 +89,8 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.PRODUCTIONPATH, 0x55555111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -139,13 +140,15 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoCylinderLayoutPreparationParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -153,7 +156,8 @@ public abstract class JDFAutoCylinderLayoutPreparationParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

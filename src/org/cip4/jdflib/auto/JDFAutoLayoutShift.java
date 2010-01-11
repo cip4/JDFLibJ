@@ -93,7 +93,8 @@ public abstract class JDFAutoLayoutShift extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.SHIFTPOINT, 0x22221111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,13 +144,15 @@ public abstract class JDFAutoLayoutShift extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLayoutShift[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -157,7 +160,8 @@ public abstract class JDFAutoLayoutShift extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

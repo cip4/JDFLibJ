@@ -122,7 +122,8 @@ public abstract class JDFAutoThreadSealing extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoThreadSealing[  --> " + super.toString() + " ]";
     }

@@ -104,7 +104,8 @@ public abstract class JDFAutoAction extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.TESTREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -117,7 +118,8 @@ public abstract class JDFAutoAction extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.PREFLIGHTACTION, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,7 +169,8 @@ public abstract class JDFAutoAction extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoAction[  --> " + super.toString() + " ]";
     }
@@ -262,7 +265,8 @@ public abstract class JDFAutoAction extends JDFElement
           * (23) get String attribute ID
           * @return the value of the attribute
           */
-        public String getID()
+        @Override
+		public String getID()
         {
             return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
         }

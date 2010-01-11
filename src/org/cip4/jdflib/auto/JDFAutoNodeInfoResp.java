@@ -100,7 +100,8 @@ public abstract class JDFAutoNodeInfoResp extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.QUEUEENTRYID, 0x44444311, AttributeInfo.EnumAttributeType.shortString, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -113,7 +114,8 @@ public abstract class JDFAutoNodeInfoResp extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.NODEINFO, 0x77777611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -163,7 +165,8 @@ public abstract class JDFAutoNodeInfoResp extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoNodeInfoResp[  --> " + super.toString() + " ]";
     }

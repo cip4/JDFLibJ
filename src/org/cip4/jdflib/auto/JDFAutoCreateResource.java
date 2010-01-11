@@ -98,7 +98,8 @@ public abstract class JDFAutoCreateResource extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.PARENTJOBPARTID, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -110,7 +111,8 @@ public abstract class JDFAutoCreateResource extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.RESOURCE, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -160,7 +162,8 @@ public abstract class JDFAutoCreateResource extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoCreateResource[  --> " + super.toString() + " ]";
     }

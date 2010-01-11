@@ -104,7 +104,8 @@ public abstract class JDFAutoValue extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.VALUE, 0x22222222, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,7 +117,8 @@ public abstract class JDFAutoValue extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.LOC, 0x33333311);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,7 +168,8 @@ public abstract class JDFAutoValue extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoValue[  --> " + super.toString() + " ]";
     }

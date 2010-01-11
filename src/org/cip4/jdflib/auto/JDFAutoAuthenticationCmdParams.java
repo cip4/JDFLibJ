@@ -104,7 +104,8 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -117,7 +118,8 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.CERTIFICATE, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -167,7 +169,8 @@ public abstract class JDFAutoAuthenticationCmdParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoAuthenticationCmdParams[  --> " + super.toString() + " ]";
     }

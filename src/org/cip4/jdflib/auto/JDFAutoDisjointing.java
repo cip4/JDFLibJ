@@ -108,7 +108,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.OVERFOLD, 0x44444443, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,7 +122,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTSHEET, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,7 +173,8 @@ public abstract class JDFAutoDisjointing extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDisjointing[  --> " + super.toString() + " ]";
     }

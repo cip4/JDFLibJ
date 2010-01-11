@@ -93,7 +93,8 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.DISPLAYGROUP, 0x33333311);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,7 +144,8 @@ public abstract class JDFAutoDisplayGroupPool extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDisplayGroupPool[  --> " + super.toString() + " ]";
     }

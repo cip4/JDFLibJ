@@ -93,7 +93,8 @@ public abstract class JDFAutoDeviceList extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICEINFO, 0x33333331);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,7 +144,8 @@ public abstract class JDFAutoDeviceList extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDeviceList[  --> " + super.toString() + " ]";
     }

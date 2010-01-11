@@ -102,7 +102,8 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.LOCALIZATION, 0x33333311, AttributeInfo.EnumAttributeType.languages, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,7 +115,8 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.DEVICE, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,7 +166,8 @@ public abstract class JDFAutoDeviceFilter extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDeviceFilter[  --> " + super.toString() + " ]";
     }

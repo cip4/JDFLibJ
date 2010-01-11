@@ -95,7 +95,8 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.SHAPETEMPLATE, 0x66661111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -145,13 +146,15 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoShapeDefProductionParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -159,7 +162,8 @@ public abstract class JDFAutoShapeDefProductionParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

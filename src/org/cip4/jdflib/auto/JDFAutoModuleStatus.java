@@ -106,7 +106,8 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.STATUSDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.shortString, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,7 +119,8 @@ public abstract class JDFAutoModuleStatus extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.EMPLOYEE, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -168,7 +170,8 @@ public abstract class JDFAutoModuleStatus extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoModuleStatus[  --> " + super.toString() + " ]";
     }

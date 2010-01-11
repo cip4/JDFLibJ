@@ -93,7 +93,8 @@ public abstract class JDFAutoModulePool extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.MODULECAP, 0x22222111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,7 +144,8 @@ public abstract class JDFAutoModulePool extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoModulePool[  --> " + super.toString() + " ]";
     }

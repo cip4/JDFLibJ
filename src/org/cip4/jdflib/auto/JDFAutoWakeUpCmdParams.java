@@ -122,7 +122,8 @@ public abstract class JDFAutoWakeUpCmdParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoWakeUpCmdParams[  --> " + super.toString() + " ]";
     }

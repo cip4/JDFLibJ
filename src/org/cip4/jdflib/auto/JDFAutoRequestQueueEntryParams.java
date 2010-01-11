@@ -105,7 +105,8 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.SUBMITPOLICY, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSubmitPolicy.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -118,7 +119,8 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.QUEUE, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -168,7 +170,8 @@ public abstract class JDFAutoRequestQueueEntryParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoRequestQueueEntryParams[  --> " + super.toString() + " ]";
     }

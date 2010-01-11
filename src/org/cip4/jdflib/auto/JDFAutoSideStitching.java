@@ -89,7 +89,8 @@ public abstract class JDFAutoSideStitching extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.STITCHNUMBER, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoSideStitching extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoSideStitching[  --> " + super.toString() + " ]";
     }

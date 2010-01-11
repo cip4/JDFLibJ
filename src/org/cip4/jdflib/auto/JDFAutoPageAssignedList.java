@@ -94,7 +94,8 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.PAGEPLACEMENTNAME, 0x33333111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -144,7 +145,8 @@ public abstract class JDFAutoPageAssignedList extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPageAssignedList[  --> " + super.toString() + " ]";
     }

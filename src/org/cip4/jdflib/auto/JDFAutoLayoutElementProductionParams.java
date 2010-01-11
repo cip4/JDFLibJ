@@ -99,7 +99,8 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.TESTPOOL, 0x33331111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -149,13 +150,15 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoLayoutElementProductionParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -163,7 +166,8 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

@@ -124,7 +124,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
         atrInfoTable[17] = new AtrInfoTable(AttributeName.WASTE, 0x33333331, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
         elemInfoTable[3] = new ElemInfoTable(ElementName.PART, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -189,7 +191,8 @@ public abstract class JDFAutoJobPhase extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoJobPhase[  --> " + super.toString() + " ]";
     }

@@ -91,7 +91,8 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.ENDOFBLOCK, 0x33333311, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,7 +142,8 @@ public abstract class JDFAutoCCITTFaxParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoCCITTFaxParams[  --> " + super.toString() + " ]";
     }

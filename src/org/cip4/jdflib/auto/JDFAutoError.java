@@ -103,7 +103,8 @@ public abstract class JDFAutoError extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.RETURNCODE, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -115,7 +116,8 @@ public abstract class JDFAutoError extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.ERRORDATA, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -165,7 +167,8 @@ public abstract class JDFAutoError extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoError[  --> " + super.toString() + " ]";
     }

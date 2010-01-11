@@ -88,7 +88,8 @@ public abstract class JDFAutoRuleLength extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.LENGTHJDF, 0x22221111, AttributeInfo.EnumAttributeType.double_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,7 +139,8 @@ public abstract class JDFAutoRuleLength extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoRuleLength[  --> " + super.toString() + " ]";
     }

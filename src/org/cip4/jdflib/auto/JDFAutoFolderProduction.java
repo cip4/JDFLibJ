@@ -93,7 +93,8 @@ public abstract class JDFAutoFolderProduction extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.PRODUCTIONTYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumProductionType.getEnum(0), "NonCollect");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -143,7 +144,8 @@ public abstract class JDFAutoFolderProduction extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoFolderProduction[  --> " + super.toString() + " ]";
     }

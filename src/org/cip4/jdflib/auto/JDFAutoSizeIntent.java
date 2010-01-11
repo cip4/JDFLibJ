@@ -98,7 +98,8 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
         atrInfoTable[0] = new AtrInfoTable(AttributeName.TYPE, 0x44444443, AttributeInfo.EnumAttributeType.enumeration, EnumType.getEnum(0), "Folded");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -111,7 +112,8 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
         elemInfoTable[1] = new ElemInfoTable(ElementName.PAGES, 0x77777776);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -161,7 +163,8 @@ public abstract class JDFAutoSizeIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoSizeIntent[  --> " + super.toString() + " ]";
     }

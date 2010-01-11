@@ -111,7 +111,8 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         atrInfoTable[8] = new AtrInfoTable(AttributeName.VERTICALFITPOLICY, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumVerticalFitPolicy.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -123,7 +124,8 @@ public abstract class JDFAutoDeviceMark extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEREPROPARAMS, 0x33331111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -173,13 +175,15 @@ public abstract class JDFAutoDeviceMark extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDeviceMark[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -187,7 +191,8 @@ public abstract class JDFAutoDeviceMark extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

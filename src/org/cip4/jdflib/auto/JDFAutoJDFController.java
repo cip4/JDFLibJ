@@ -95,7 +95,8 @@ public abstract class JDFAutoJDFController extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.URLTYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumURLType.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -145,7 +146,8 @@ public abstract class JDFAutoJDFController extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoJDFController[  --> " + super.toString() + " ]";
     }

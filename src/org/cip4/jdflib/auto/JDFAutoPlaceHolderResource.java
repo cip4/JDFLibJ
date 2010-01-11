@@ -122,13 +122,15 @@ public abstract class JDFAutoPlaceHolderResource extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPlaceHolderResource[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.PlaceHolder);
@@ -136,7 +138,8 @@ public abstract class JDFAutoPlaceHolderResource extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.PlaceHolder;
     }

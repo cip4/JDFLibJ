@@ -102,7 +102,8 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
         atrInfoTable[1] = new AtrInfoTable(AttributeName.ASSETTYPES, 0x33333311, AttributeInfo.EnumAttributeType.Any, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -114,7 +115,8 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.FILESPEC, 0x33333311);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -164,13 +166,15 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoAssetListCreationParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -178,7 +182,8 @@ public abstract class JDFAutoAssetListCreationParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

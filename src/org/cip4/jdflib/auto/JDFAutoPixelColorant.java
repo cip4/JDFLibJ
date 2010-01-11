@@ -89,7 +89,8 @@ public abstract class JDFAutoPixelColorant extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.PIXELDEPTH, 0x22222222, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -139,7 +140,8 @@ public abstract class JDFAutoPixelColorant extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPixelColorant[  --> " + super.toString() + " ]";
     }

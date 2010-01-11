@@ -88,7 +88,8 @@ public abstract class JDFAutoFlateParams extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.PREDICTOR, 0x33333311, AttributeInfo.EnumAttributeType.integer, null, "1");
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -138,7 +139,8 @@ public abstract class JDFAutoFlateParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoFlateParams[  --> " + super.toString() + " ]";
     }

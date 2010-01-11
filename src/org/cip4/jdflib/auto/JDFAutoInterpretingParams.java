@@ -114,7 +114,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         atrInfoTable[8] = new AtrInfoTable(AttributeName.SCALINGORIGIN, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -129,7 +130,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.PDFINTERPRETINGPARAMS, 0x66666661);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -179,13 +181,15 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoInterpretingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -193,7 +197,8 @@ public abstract class JDFAutoInterpretingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

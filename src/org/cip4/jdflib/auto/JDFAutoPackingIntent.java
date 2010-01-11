@@ -108,7 +108,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
         elemInfoTable[15] = new ElemInfoTable(ElementName.WRAPPINGMATERIAL, 0x66666666);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -158,7 +159,8 @@ public abstract class JDFAutoPackingIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoPackingIntent[  --> " + super.toString() + " ]";
     }

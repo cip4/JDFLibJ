@@ -93,7 +93,8 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
         elemInfoTable[0] = new ElemInfoTable(ElementName.SHAPECUT, 0x33333333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -143,7 +144,8 @@ public abstract class JDFAutoShapeCuttingIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoShapeCuttingIntent[  --> " + super.toString() + " ]";
     }

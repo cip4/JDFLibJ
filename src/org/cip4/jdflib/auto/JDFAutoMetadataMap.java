@@ -70,12 +70,9 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
-
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -86,8 +83,6 @@ import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
 
 public abstract class JDFAutoMetadataMap extends JDFElement
 {
@@ -104,7 +99,8 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         atrInfoTable[4] = new AtrInfoTable(AttributeName.VALUETEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,7 +112,8 @@ public abstract class JDFAutoMetadataMap extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.EXPR, 0x33331111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,7 +163,8 @@ public abstract class JDFAutoMetadataMap extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoMetadataMap[  --> " + super.toString() + " ]";
     }

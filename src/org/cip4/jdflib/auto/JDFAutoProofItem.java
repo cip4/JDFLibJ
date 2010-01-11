@@ -110,7 +110,8 @@ public abstract class JDFAutoProofItem extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.PROOFTARGET, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -130,7 +131,8 @@ public abstract class JDFAutoProofItem extends JDFElement
         elemInfoTable[8] = new ElemInfoTable(ElementName.APPROVALPARAMS, 0x66666611);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -180,7 +182,8 @@ public abstract class JDFAutoProofItem extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoProofItem[  --> " + super.toString() + " ]";
     }

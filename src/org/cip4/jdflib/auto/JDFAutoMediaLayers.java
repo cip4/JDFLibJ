@@ -95,7 +95,8 @@ public abstract class JDFAutoMediaLayers extends JDFElement
         elemInfoTable[1] = new ElemInfoTable(ElementName.MEDIA, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -145,7 +146,8 @@ public abstract class JDFAutoMediaLayers extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoMediaLayers[  --> " + super.toString() + " ]";
     }

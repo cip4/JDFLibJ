@@ -99,7 +99,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
         elemInfoTable[3] = new ElemInfoTable(ElementName.NUMBERITEM, 0x22222222);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -149,7 +150,8 @@ public abstract class JDFAutoNumberingIntent extends JDFIntentResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoNumberingIntent[  --> " + super.toString() + " ]";
     }

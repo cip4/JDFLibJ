@@ -101,7 +101,8 @@ public abstract class JDFAutoDisposition extends JDFElement
         atrInfoTable[5] = new AtrInfoTable(AttributeName.UNTIL, 0x33333311, AttributeInfo.EnumAttributeType.dateTime, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -151,7 +152,8 @@ public abstract class JDFAutoDisposition extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoDisposition[  --> " + super.toString() + " ]";
     }

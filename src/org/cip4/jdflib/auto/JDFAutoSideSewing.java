@@ -122,7 +122,8 @@ public abstract class JDFAutoSideSewing extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoSideSewing[  --> " + super.toString() + " ]";
     }

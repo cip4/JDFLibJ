@@ -91,7 +91,8 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
         atrInfoTable[3] = new AtrInfoTable(AttributeName.YCELLS, 0x33333111, AttributeInfo.EnumAttributeType.integer, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -141,7 +142,8 @@ public abstract class JDFAutoBarcodeDetails extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBarcodeDetails[  --> " + super.toString() + " ]";
     }

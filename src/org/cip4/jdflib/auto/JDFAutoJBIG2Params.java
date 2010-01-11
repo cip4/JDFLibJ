@@ -87,7 +87,8 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.JBIG2LOSSLESS, 0x33333111, AttributeInfo.EnumAttributeType.boolean_, null, null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -137,7 +138,8 @@ public abstract class JDFAutoJBIG2Params extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoJBIG2Params[  --> " + super.toString() + " ]";
     }

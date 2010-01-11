@@ -107,7 +107,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         atrInfoTable[2] = new AtrInfoTable(AttributeName.BOXFOLDINGTYPE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumBoxFoldingType.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -121,7 +122,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
         elemInfoTable[2] = new ElemInfoTable(ElementName.BOXAPPLICATION, 0x44443333);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -171,13 +173,15 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBoxFoldingParams[  --> " + super.toString() + " ]";
     }
 
 
-    public boolean  init()
+    @Override
+	public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -185,7 +189,8 @@ public abstract class JDFAutoBoxFoldingParams extends JDFResource
     }
 
 
-    public EnumResourceClass getValidClass()
+    @Override
+	public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }

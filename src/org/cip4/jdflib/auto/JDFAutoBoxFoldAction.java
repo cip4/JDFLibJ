@@ -104,7 +104,8 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
         atrInfoTable[1] = new AtrInfoTable(AttributeName.ACTION, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumAction.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -116,7 +117,8 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
         elemInfoTable[0] = new ElemInfoTable(ElementName.GLUELINE, 0x33333111);
     }
     
-    protected ElementInfo getTheElementInfo()
+    @Override
+	protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -166,7 +168,8 @@ public abstract class JDFAutoBoxFoldAction extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoBoxFoldAction[  --> " + super.toString() + " ]";
     }

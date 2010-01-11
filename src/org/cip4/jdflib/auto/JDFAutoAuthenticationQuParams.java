@@ -92,7 +92,8 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
         atrInfoTable[0] = new AtrInfoTable(AttributeName.AUTHENTICATIONTYPE, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAuthenticationType.getEnum(0), null);
     }
     
-    protected AttributeInfo getTheAttributeInfo()
+    @Override
+	protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -142,7 +143,8 @@ public abstract class JDFAutoAuthenticationQuParams extends JDFElement
     }
 
 
-    public String toString()
+    @Override
+	public String toString()
     {
         return " JDFAutoAuthenticationQuParams[  --> " + super.toString() + " ]";
     }
