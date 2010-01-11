@@ -1806,6 +1806,7 @@ public final class AttributeName
 	public static final String VALUERANGE = "ValueRange";
 	public static final String VALUETEMPLATE = "ValueTemplate";
 	public static final String VALUEUSAGE = "ValueUsage";
+	public static final String VARNISHMETHOD = "VarnishMethod";
 	public static final String VERSION = "Version";
 	public static final String VERTICALCREEP = "VerticalCreep";
 	public static final String VERTICALFITPOLICY = "VerticalFitPolicy";

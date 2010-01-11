@@ -899,6 +899,7 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
 		defaultlistModel.addElement("JDFAutoUsageCounter.java");
 		defaultlistModel.addElement("JDFAutoValue.java");
 		defaultlistModel.addElement("JDFAutoValueLoc.java");
+		defaultlistModel.addElement("JDFAutoVarnishingParams.java");
 		defaultlistModel.addElement("JDFAutoVerificationParams.java");
 		defaultlistModel.addElement("JDFAutoWakeUpCmdParams.java");
 		defaultlistModel.addElement("JDFAutoWebInlineFinishingParams.java");

@@ -966,6 +966,7 @@ public final class ElementName
 
 	public static final String VALUE = "Value";
 	public static final String VALUELOC = "ValueLoc";
+	public static final String VARNISHINGPARAMS = "VarnishingParams";
 	public static final String VELOBINDING = "VeloBinding";
 	public static final String VERIFICATION = "Verification";
 	public static final String VERIFICATIONPARAMS = "VerificationParams";

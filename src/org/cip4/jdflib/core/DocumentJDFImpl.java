@@ -1413,6 +1413,7 @@ public class DocumentJDFImpl extends DocumentImpl
 
 		sm_PackageNames.put(ElementName.VALUE, "org.cip4.jdflib.resource.JDFValue");
 		sm_PackageNames.put(ElementName.VALUELOC, "org.cip4.jdflib.resource.devicecapability.JDFValueLoc");
+		sm_PackageNames.put(ElementName.VARNISHINGPARAMS, "org.cip4.jdflib.resource.JDFVarnishingParams");
 		sm_PackageNames.put(ElementName.VELOBINDING, "org.cip4.jdflib.resource.process.postpress.JDFVeloBinding");
 		sm_PackageNames.put(ElementName.VERIFICATIONPARAMS, "org.cip4.jdflib.resource.JDFVerificationParams");
 		sm_PackageNames.put(ElementName.VIEWBINDER, "org.cip4.jdflib.span.JDFNameSpan");

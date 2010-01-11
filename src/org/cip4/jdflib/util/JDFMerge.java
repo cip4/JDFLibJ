@@ -722,7 +722,7 @@ public class JDFMerge
 					{
 						leafRes.removeFromAttribute(AttributeName.SPAWNIDS, resSpawnID, null, null, -1);
 						final String spawnIDsNew = leafRes.getAttribute_KElement(AttributeName.SPAWNIDS, null, null);
-						if (spawnIDsNew == null || spawnIDsNew.isEmpty())
+						if (spawnIDsNew == null || "".equals(spawnIDsNew))
 						{
 							removeSpawnAttributes(leafRes);
 							return;

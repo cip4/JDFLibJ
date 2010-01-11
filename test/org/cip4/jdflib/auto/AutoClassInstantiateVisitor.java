@@ -145,11 +145,8 @@ public class AutoClassInstantiateVisitor implements DirectoryVisitor
 			totalResult = false;
 			throw new DOMException(
 					DOMException.NOT_FOUND_ERR,
-					"Error!!! Class "
-							+ elementName
-							+ " ("
-							+ fileName
-							+ ") could not be instantiated!"
+					"AutoClassIntantiateVisitor: Class JDF" + elementName
+							+ " (for " + fileName + ") could not be instantiated!"
 							+ " --> missing entry in DocumentJDFImpl.sm_PackageNames ???");
 		}
 	}

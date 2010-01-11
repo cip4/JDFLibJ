@@ -217,6 +217,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 				catch (DOMException e)
 				{
 					System.out.println(e.getLocalizedMessage());
+					throw e;
 				}
 			}
 		}
