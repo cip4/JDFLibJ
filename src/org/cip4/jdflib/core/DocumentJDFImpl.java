@@ -771,6 +771,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.BINDINGCOLOR, "org.cip4.jdflib.span.JDFSpanNamedColor");
 		sm_PackageNames.put(ElementName.BINDINGINTENT, "org.cip4.jdflib.resource.intent.JDFBindingIntent");
 		sm_PackageNames.put(ElementName.BINDINGLENGTH, "org.cip4.jdflib.span.JDFSpanBindingLength");
+		sm_PackageNames.put(ElementName.BINDINGQUALITYMEASUREMENT, "org.cip4.jdflib.resource.process.JDFBindingQualityMeasurement");
 		sm_PackageNames.put(ElementName.BINDINGQUALITYPARAMS, "org.cip4.jdflib.resource.process.JDFBindingQualityParams");
 		sm_PackageNames.put(ElementName.BINDINGSIDE, "org.cip4.jdflib.span.JDFSpanBindingSide");
 		sm_PackageNames.put(ElementName.BINDINGTYPE, "org.cip4.jdflib.span.JDFSpanBindingType");
@@ -946,6 +947,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		sm_PackageNames.put(ElementName.ERRORDATA, "org.cip4.jdflib.resource.JDFErrorData");
 		sm_PackageNames.put(ElementName.EVENT, "org.cip4.jdflib.resource.JDFEvent");
 		sm_PackageNames.put(ElementName.EXPOSEDMEDIA, "org.cip4.jdflib.resource.process.JDFExposedMedia");
+		sm_PackageNames.put(ElementName.EXPR, "org.cip4.jdflib.resource.process.JDFExpr");
 		sm_PackageNames.put(ElementName.EXTENDEDADDRESS, "org.cip4.jdflib.core.JDFComment");
 		sm_PackageNames.put(ElementName.EXTERNALIMPOSITIONTEMPLATE, "org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate");
 		sm_PackageNames.put(ElementName.EXTRAVALUES, "org.cip4.jdflib.resource.process.JDFExtraValues");

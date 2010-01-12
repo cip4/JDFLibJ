@@ -924,6 +924,7 @@ public final class ElementName
 	public static final String TECHNOLOGY = "Technology";
 	public static final String TEETHPERDIMENSION = "TeethPerDimension";
 	public static final String TEMPERATURE = "Temperature";
+	public static final String TERM = "Term";
 	public static final String TEST = "Test";
 	public static final String TESTPOOL = "TestPool";
 	public static final String TESTREF = "TestRef";

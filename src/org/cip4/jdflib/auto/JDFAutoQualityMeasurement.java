@@ -82,7 +82,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.resource.process.JDFBindingQualityParams;
+import org.cip4.jdflib.resource.process.JDFBindingQualityMeasurement;
 import org.cip4.jdflib.util.JDFDate;
 
 public abstract class JDFAutoQualityMeasurement extends JDFElement
@@ -301,28 +301,28 @@ public abstract class JDFAutoQualityMeasurement extends JDFElement
 
     /**
      * (24) const get element BindingQualityMeasurement
-     * @return JDFBindingQualityParams the element
+     * @return JDFBindingQualityMeasurement the element
      */
-    public JDFBindingQualityParams getBindingQualityMeasurement()
+    public JDFBindingQualityMeasurement getBindingQualityMeasurement()
     {
-        return (JDFBindingQualityParams) getElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
+        return (JDFBindingQualityMeasurement) getElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
     }
 
     /** (25) getCreateBindingQualityMeasurement
      * 
-     * @return JDFBindingQualityParams the element
+     * @return JDFBindingQualityMeasurement the element
      */
-    public JDFBindingQualityParams getCreateBindingQualityMeasurement()
+    public JDFBindingQualityMeasurement getCreateBindingQualityMeasurement()
     {
-        return (JDFBindingQualityParams) getCreateElement_KElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
+        return (JDFBindingQualityMeasurement) getCreateElement_KElement(ElementName.BINDINGQUALITYMEASUREMENT, null, 0);
     }
 
     /**
      * (29) append element BindingQualityMeasurement
      */
-    public JDFBindingQualityParams appendBindingQualityMeasurement() throws JDFException
+    public JDFBindingQualityMeasurement appendBindingQualityMeasurement() throws JDFException
     {
-        return (JDFBindingQualityParams) appendElementN(ElementName.BINDINGQUALITYMEASUREMENT, 1, null);
+        return (JDFBindingQualityMeasurement) appendElementN(ElementName.BINDINGQUALITYMEASUREMENT, 1, null);
     }
 
 }// end namespace JDF

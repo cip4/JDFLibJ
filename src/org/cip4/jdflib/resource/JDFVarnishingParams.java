@@ -8,10 +8,10 @@
 package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoVerificationParams;
+import org.cip4.jdflib.auto.JDFAutoVarnishingParams;
 import org.w3c.dom.DOMException;
 
-public class JDFVarnishingParams extends JDFAutoVerificationParams
+public class JDFVarnishingParams extends JDFAutoVarnishingParams
 {
 	private static final long serialVersionUID = 1L;
 
