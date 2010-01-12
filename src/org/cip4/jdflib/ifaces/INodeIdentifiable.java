@@ -70,7 +70,7 @@
  */
 package org.cip4.jdflib.ifaces;
 
-import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
+import org.cip4.jdflib.node.NodeIdentifier;
 
 /**
  * @author Rainer Prosi

@@ -189,15 +189,22 @@ public class JDFValidator
 	public boolean bMultiID = false;
 	private boolean inOutputLoop = false;
 
-	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2009 CIP4" + "\nJDF 1.3 compatible version\n"
-			+ "\nCode based on schema JDF_1.3.xsd Release Candidate 001\n" + "Build version " + JDFAudit.software();
+	final protected static String version = "JDFValidator: JDF validator; -- (c) 2001-2009 CIP4" + "\nJDF 1.4 compatible version\n" + "\nCode based on schema JDF_1.4a.xsd\n"
+			+ "Build version " + JDFAudit.software();
 
+	/**
+	 * 
+	 */
 	public JDFValidator()
 	{
 		super();
 		pOut.getRoot().setAttribute("Version", version);
 	}
 
+	/**
+	 * @param checkOut
+	 * @return
+	 */
 	public static String toMessageString(final KElement checkOut)
 	{
 		if (checkOut == null)
@@ -424,7 +431,7 @@ public class JDFValidator
 			printURL(kElement, indent, testElement);
 		}
 
-		bIsValid = jdfElement.isValid(level) && bIsValid;
+		bIsValid = isValidElement(bIsValid, jdfElement);
 		final boolean bValidID = id == null || id.equals(JDFConstants.EMPTYSTRING) ? true : !vBadID.contains(id);
 		boolean bUnknownElem = false;
 
@@ -575,7 +582,7 @@ public class JDFValidator
 			}
 
 			// get a list of missing and invalid attribute and element names
-			final VString invalidAttributes = new VString(jdfElement.getInvalidAttributes(level, true, 9999999));
+			final VString invalidAttributes = getInvalidAttributes(jdfElement);
 			final VString invalidElements = jdfElement.getInvalidElements(level, true, 9999999);
 			VString missingAttributes = new VString();
 			VString missingElements = new VString();
@@ -711,6 +718,46 @@ public class JDFValidator
 	}
 
 	/**
+	 * @param jdfElement
+	 * @return
+	 */
+	private VString getInvalidAttributes(final JDFElement jdfElement)
+	{
+		final VString invalidAttributes = new VString(jdfElement.getInvalidAttributes(level, true, 9999999));
+		if (jdfElement instanceof JDFResource)
+		{
+			JDFResource r = (JDFResource) jdfElement;
+			while (!r.isResourceRoot() && !r.isResourceElement())
+			{
+				r = (JDFResource) r.getParentNode_KElement();
+				invalidAttributes.appendUnique(r.getInvalidAttributes(level, true, 9999));
+			}
+		}
+		return invalidAttributes;
+	}
+
+	/**
+	 * @param bIsValid
+	 * @param jdfElement
+	 * @return
+	 */
+	private boolean isValidElement(boolean bIsValid, final JDFElement jdfElement)
+	{
+		bIsValid = jdfElement.isValid(level) && bIsValid;
+		if (bIsValid && (jdfElement instanceof JDFResource))
+		{
+			JDFResource r = (JDFResource) jdfElement;
+			if (!r.isResourceRoot() && !r.isResourceElement())
+			{
+				r = (JDFResource) r.getParentNode();
+				return (isValidElement(bIsValid, r));
+			}
+
+		}
+		return bIsValid;
+	}
+
+	/**
 	 * @param element
 	 * @return
 	 */
@@ -792,39 +839,26 @@ public class JDFValidator
 		}
 	}
 
-	private void printAttributeList(final int indent, final KElement testElement, final JDFElement part, final boolean printMissElms, final VString attributeVector, final String whatType, final String message)
+	private void printAttributeList(final int indent, final KElement testElement, final JDFElement part, final boolean printMissElms, final VString attributeVector, final String whatType, String message)
 	{
-		String messageLocal = message;
-
 		if (attributeVector == null)
 		{
 			return;
 		}
 
 		attributeVector.unify();
-		final String originalMessage = messageLocal;
+		final String originalMessage = message;
 		int j;
 		for (j = 0; j < attributeVector.size(); j++)
 		{
-			messageLocal = originalMessage;
+			message = originalMessage;
 			final String invalidAt = attributeVector.elementAt(j);
 			if (!((KElement) part).hasAttribute_KElement(invalidAt, "", false)) // exactly
-			// this
-			// node
-			// (
-			// e
-			// .
-			// g
-			// .
-			// ResourceElement
-			// or
-			// Leaf
-			// )
+			// this node ( e.g. ResourceElement or Leaf )
 			{
 				if (EnumPartIDKey.getEnum(invalidAt) != null)
 				{
-					// missing PartIDKeys are written into invalidAttributes
-					// vector
+					// missing PartIDKeys are written into invalidAttributes vector
 					if (part.getAttribute(invalidAt, null, null) == null)
 					{
 						if (printMissElms)
@@ -844,12 +878,7 @@ public class JDFValidator
 					}
 				}
 				else if (!part.hasAttribute(invalidAt, null, false)) // if the
-				// resourceRoot
-				// doesn
-				// `t
-				// have
-				// it as
-				// well
+				// resourceRoot doesn`t have it as well
 				{
 					if (printMissElms)
 					{
@@ -870,7 +899,7 @@ public class JDFValidator
 					if (v != null)
 					{
 						e.setAttribute("FirstVersion", v.getName());
-						messageLocal += " First valid Version: " + v.getName();
+						message += " First valid Version: " + v.getName();
 					}
 				}
 				else if (whatType.equals("Deprecated"))
@@ -879,11 +908,11 @@ public class JDFValidator
 					if (v != null)
 					{
 						e.setAttribute("LastVersion", v.getName());
-						messageLocal += " Last valid Version: " + v.getName();
+						message += " Last valid Version: " + v.getName();
 					}
 				}
 
-				setErrorType(e, whatType + "Attribute", invalidAt + " " + messageLocal);
+				setErrorType(e, whatType + "Attribute", invalidAt + " " + message);
 				e.setAttribute("NodeName", invalidAt);
 				e.setAttribute("XPath", part.buildXPath(null, 1) + "/@" + invalidAt);
 				e.setAttribute("Value", part.getAttribute(invalidAt));

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,11 +69,13 @@
 package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -118,6 +120,18 @@ public class PartitionHelper
 	}
 
 	/**
+	 * @param map
+	 * @return
+	 */
+	public boolean containsMap(JDFAttributeMap map)
+	{
+		if (map == null)
+			map = new JDFAttributeMap();
+		VJDFAttributeMap vm = getPartMapVector();
+		return vm.contains(map);
+	}
+
+	/**
 	 * @param vmap
 	 * @return
 	 */
@@ -150,11 +164,34 @@ public class PartitionHelper
 			KElement e = thePartition.getFirstChildElement();
 			while (e != null)
 			{
-				if (!(e instanceof JDFPart))
+				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFComment))
 					return e;
 				e = e.getNextSiblingElement();
 			}
 		}
 		return null;
 	}
+
+	/**
+	 * @return
+	 */
+	public KElement getCreateResource()
+	{
+		KElement set = thePartition.getParentNode_KElement();
+		String name = set != null ? set.getAttribute("Name", null, null) : null;
+		if (name != null)
+			return thePartition.getCreateElement(name);
+		return null;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return "PartitionHelper: " + thePartition;
+	}
+
 }

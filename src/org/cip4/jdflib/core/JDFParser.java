@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -390,8 +390,7 @@ public class JDFParser extends DOMParser
 	 * @deprecated set the parser members instead
 	 */
 	@Deprecated
-	public JDFDoc parseInputSource(final InputSource inSource, final String schemaLocation, final String documentClassName, final ErrorHandler errorHandler, final boolean bEraseEmpty,
-			final boolean bDoNamespaces)
+	public JDFDoc parseInputSource(final InputSource inSource, final String schemaLocation, final String documentClassName, final ErrorHandler errorHandler, final boolean bEraseEmpty, final boolean bDoNamespaces)
 	{
 		JDFDoc doc = null;
 		if (errorHandler instanceof XMLErrorHandler)
@@ -437,7 +436,7 @@ public class JDFParser extends DOMParser
 			}
 			else
 			{
-				if (!m_SchemaLocation.startsWith(JDFElement.getSchemaURL()))
+				if (!m_SchemaLocation.startsWith(JDFElement.getSchemaURL()) && m_SchemaLocation.indexOf(" ") < 0)
 				{
 					m_SchemaLocation = JDFElement.getSchemaURL() + " " + m_SchemaLocation;
 				}

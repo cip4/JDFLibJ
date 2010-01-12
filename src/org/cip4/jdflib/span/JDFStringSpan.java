@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,16 +90,19 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFStringSpan extends JDFSpanBase
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFStringSpan
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
 	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
@@ -108,11 +111,11 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFStringSpan
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
 	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
@@ -121,12 +124,12 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFStringSpan
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
-	 * @throws DOMException
 	 */
 	public JDFStringSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
@@ -175,7 +178,7 @@ public class JDFStringSpan extends JDFSpanBase
 	/**
 	 * Set attribute Actual
 	 * 
-	 * @param String value - the value to set
+	 * @param value - the value to set
 	 */
 	public void setActual(String value)
 	{
@@ -195,7 +198,7 @@ public class JDFStringSpan extends JDFSpanBase
 	/**
 	 * Set attribute Preferred
 	 * 
-	 * @param String value - the value to set
+	 * @param value - the value to set
 	 */
 	public void setPreferred(String value)
 	{
@@ -214,6 +217,7 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * GetRange
+	 * @param elementName 
 	 * 
 	 * @return Vector of strings in Range
 	 */
@@ -242,7 +246,7 @@ public class JDFStringSpan extends JDFSpanBase
 	/**
 	 * SetRange
 	 * 
-	 * @param VString s - the vector of strings to set Range to
+	 * @param s - the vector of strings to set Range to
 	 */
 	public void setRange(VString s)
 	{
@@ -252,7 +256,7 @@ public class JDFStringSpan extends JDFSpanBase
 	/**
 	 * addRange
 	 * 
-	 * @param String s - string to append as a new text element
+	 * @param s - string to append as a new text element
 	 */
 	public void addRange(String s)
 	{
@@ -271,8 +275,8 @@ public class JDFStringSpan extends JDFSpanBase
 
 	/**
 	 * SetRange
-	 * 
-	 * @param VString s - the vector of strings to set Range to
+	 * @param elementName 
+	 * @param s - the vector of strings to set Range to
 	 */
 	private void setRangeOfferRange(String elementName, VString s)
 	{
@@ -287,7 +291,7 @@ public class JDFStringSpan extends JDFSpanBase
 	/**
 	 * SetRange
 	 * 
-	 * @param VString s - the vector of strings to set Range to
+	 * @param s - the vector of strings to set Range to
 	 */
 	public void setOfferRange(VString s)
 	{
@@ -297,13 +301,17 @@ public class JDFStringSpan extends JDFSpanBase
 	/**
 	 * addRange
 	 * 
-	 * @param String s - string to append as a new text element
+	 * @param s - string to append as a new text element
 	 */
 	public void addOfferRange(String s)
 	{
 		appendTextElement(ElementName.OFFERRANGE, s);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#init()
+	 * @return
+	*/
 	@Override
 	public boolean init()
 	{

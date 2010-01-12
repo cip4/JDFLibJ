@@ -71,7 +71,6 @@ package org.cip4.jdflib.extensions;
 
 import junit.framework.TestCase;
 
-import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 
 /**
@@ -79,7 +78,6 @@ import org.cip4.jdflib.core.KElement;
  */
 public class XJDFHelperTest extends TestCase
 {
-	KElement theXJDF = null;
 	XJDFHelper theHelper = null;
 
 	/**
@@ -89,7 +87,18 @@ public class XJDFHelperTest extends TestCase
 	public void testGetSet()
 	{
 		KElement rlSet = theHelper.appendSet("Parameter", "RunList").getSet();
-		assertEquals(rlSet, theHelper.getSet("RunList", 0));
+		assertEquals(rlSet, theHelper.getSet("RunList", 0).getSet());
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testCreate()
+	{
+		theHelper = new XJDFHelper("jID", "jpID", null);
+		KElement root = theHelper.getRoot();
+		assertNotNull(theHelper.getSet("NodeInfo", 0));
 
 	}
 
@@ -101,8 +110,8 @@ public class XJDFHelperTest extends TestCase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		theXJDF = new JDFDoc("XJDF").getRoot();
-		theHelper = new XJDFHelper(theXJDF);
+		KElement.setLongID(false);
+		theHelper = new XJDFHelper(null);
 
 	}
 }

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,11 +79,15 @@ package org.cip4.jdflib.span;
 
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.span.JDFSpanBindingLength.EnumSpanBindingLength;
 
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFEnumerationSpanTest extends JDFTestCaseBase
 {
 
@@ -91,6 +95,7 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
 	 * make sure that corrupt files always return a null document
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public void testRange()
 	{
 		JDFDoc doc = new JDFDoc("BindingLength");
@@ -100,11 +105,11 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
 		bl.setActual(EnumSpanBindingLength.Long);
 		EnumSpanBindingLength ebl = (EnumSpanBindingLength) bl.getActual();
 		assertEquals(ebl, EnumSpanBindingLength.Long);
-		Vector v = new Vector();
+		Vector<ValuedEnum> v = new Vector<ValuedEnum>();
 		v.add(EnumSpanBindingLength.Long);
 		v.add(EnumSpanBindingLength.Short);
 		bl.setRange(v);
-		Vector v2 = bl.getRange();
+		Vector<ValuedEnum> v2 = bl.getRange();
 		assertEquals("Range", v, v2);
 	}
 }

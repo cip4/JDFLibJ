@@ -107,7 +107,7 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.jmf.JDFSignal;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
+import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFPhaseTime;

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,6 +67,8 @@
  *
  */
 package org.cip4.jdflib.extensions;
+
+import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
@@ -138,8 +140,53 @@ public class SetHelper
 	{
 		PartitionHelper e = getPartition(map);
 		if (e == null)
+		{
 			e = appendPartition(map, addRes);
+		}
+		else if (!e.containsMap(map))
+		{
+			e = insertPartitionBefore(e, map, addRes);
+		}
 		return e;
+	}
+
+	/**
+	 * @param e
+	 * @param map
+	 * @param addRes
+	 * @return
+	 */
+	public PartitionHelper insertPartitionBefore(PartitionHelper e, JDFAttributeMap map, boolean addRes)
+	{
+		PartitionHelper e2 = appendPartition(map, addRes);
+		if (e != null)
+		{
+			KElement e3 = e.getPartition();
+			e3.getParentNode_KElement().moveElement(e2.getPartition(), e3);
+		}
+		return e2;
+	}
+
+	/**
+	 * @param vmap
+	 * @param addRes 
+	 * @return 
+	 */
+	public Vector<PartitionHelper> getCreatePartitions(VJDFAttributeMap vmap, boolean addRes)
+	{
+		if (vmap == null)
+		{
+			vmap = new VJDFAttributeMap();
+			vmap.add(null);
+		}
+		Vector<PartitionHelper> vp = new Vector<PartitionHelper>();
+		for (int i = 0; i < vmap.size(); i++)
+		{
+			JDFAttributeMap m = vmap.get(i);
+			vp.add(getCreatePartition(m, addRes));
+		}
+
+		return vp;
 	}
 
 	/**
@@ -256,4 +303,15 @@ public class SetHelper
 	{
 		theSet.setAttribute(AttributeName.USAGE, value == null ? null : value.getName());
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return "SetHelper: " + theSet;
+	}
+
 }

@@ -1,8 +1,8 @@
-/*--------------------------------------------------------------------------------------------------
+/*
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -23,7 +23,7 @@
  *       "This product includes software developed by the
  *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
+ *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of
@@ -33,7 +33,7 @@
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
+ *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -45,7 +45,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -57,7 +57,7 @@
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software
+ * originally based on software restartProcesses()
  * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
@@ -66,44 +66,86 @@
  * <http://www.cip4.org/>.
  *
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.extensions;
+
+import org.cip4.jdflib.core.JDFComment;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
- * trivial typesafe pair class
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 11.12.2008
- * @param <aData> datatype of a
- * @param <bData> datatype of b
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class MyPair<aData, bData>
+public class IntentHelper
 {
 	/**
-	 * @param ap aData value
-	 * @param bp bData value
+	 * 
 	 */
-	public MyPair(final aData ap, final bData bp)
+	protected KElement theIntent;
+
+	/**
+	 * 
+	 */
+	public static boolean bSpanAsAttribute = true;
+
+	/**
+	 * @param intent
+	 */
+	public IntentHelper(KElement intent)
 	{
-		super();
-		this.a = ap;
-		this.b = bp;
+		theIntent = intent;
+		theIntent.appendAnchor(null);
 	}
 
 	/**
-	 * the aData value
-	 */
-	public aData a;
-	/**
-	 * the bData value
-	 */
-	public bData b;
-
-	/**
 	 * @see java.lang.Object#toString()
-	 */
+	 * @return
+	*/
 	@Override
 	public String toString()
 	{
-		return "Pair" + a + "," + b;
+		return "IntentHelper: " + theIntent;
+	}
+
+	/**
+	 * @return
+	 */
+	public KElement getResource()
+	{
+		String name = theIntent.getAttribute("Name", null, null);
+		if (name != null)
+		{
+			return theIntent.getCreateElement(name);
+		}
+		else
+		{
+			KElement e = theIntent.getFirstChildElement();
+			while (e != null)
+			{
+				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFComment))
+					return e;
+				e = e.getNextSiblingElement();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @param att
+	 * @param val
+	 * @param dataType - if null always set as simple attribute
+	 */
+	public void setSpan(String att, String val, String dataType)
+	{
+		if (bSpanAsAttribute || dataType == null)
+		{
+			getResource().setAttribute(att, val);
+		}
+		else
+		{
+			KElement span = getResource().getCreateElement(dataType);
+			span.setAttribute("Name", att);
+			span.setAttribute("Actual", val);
+		}
 	}
 }

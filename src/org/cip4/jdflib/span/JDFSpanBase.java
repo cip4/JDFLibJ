@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,8 @@ import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * defines the data type independent parts of a ranged Span resource
@@ -134,17 +136,21 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * Constructor for JDFSpanBase
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
 	 */
 	public JDFSpanBase(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	@SuppressWarnings("unchecked")
 	public static class EnumPriority extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -155,36 +161,66 @@ public abstract class JDFSpanBase extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumPriority getEnum(final String enumName)
 		{
 			return (EnumPriority) getEnum(EnumPriority.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumPriority getEnum(final int enumValue)
 		{
 			return (EnumPriority) getEnum(EnumPriority.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumPriority.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumPriority.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumPriority.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumPriority None = new EnumPriority(JDFConstants.PRIORITY_NONE);
+		/**
+		 * 
+		 */
 		public static final EnumPriority Suggested = new EnumPriority(JDFConstants.PRIORITY_SUGGESTED);
+		/**
+		 * 
+		 */
 		public static final EnumPriority Required = new EnumPriority(JDFConstants.PRIORITY_REQUIRED);
 	}
 
+	/**
+	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	@SuppressWarnings("unchecked")
 	public static class EnumDataType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -195,40 +231,87 @@ public abstract class JDFSpanBase extends JDFElement
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumDataType getEnum(final String enumName)
 		{
 			return (EnumDataType) getEnum(EnumDataType.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumDataType getEnum(final int enumValue)
 		{
 			return (EnumDataType) getEnum(EnumDataType.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumDataType.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumDataType.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumDataType.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumDataType DurationSpan = new EnumDataType(JDFConstants.DATATYPE_DURATION);
+		/**
+		 * 
+		 */
 		public static final EnumDataType IntegerSpan = new EnumDataType(JDFConstants.DATATYPE_INTEGER);
+		/**
+		 * 
+		 */
 		public static final EnumDataType NumberSpan = new EnumDataType(JDFConstants.DATATYPE_NUMBER);
+		/**
+		 * 
+		 */
 		public static final EnumDataType OptionSpan = new EnumDataType(JDFConstants.DATATYPE_OPTION);
+		/**
+		 * 
+		 */
 		public static final EnumDataType NameSpan = new EnumDataType(JDFConstants.DATATYPE_NAME);
+		/**
+		 * 
+		 */
 		public static final EnumDataType EnumerationSpan = new EnumDataType(JDFConstants.DATATYPE_ENUMERATION);
+		/**
+		 * 
+		 */
 		public static final EnumDataType ShapeSpan = new EnumDataType(JDFConstants.DATATYPE_SHAPE);
+		/**
+		 * 
+		 */
 		public static final EnumDataType StringSpan = new EnumDataType(JDFConstants.DATATYPE_STRING);
+		/**
+		 * 
+		 */
 		public static final EnumDataType TimeSpan = new EnumDataType(JDFConstants.DATATYPE_TIME);
+		/**
+		 * 
+		 */
 		public static final EnumDataType XYPairSpan = new EnumDataType(JDFConstants.DATATYPE_XYPAIR);
 	}
 
@@ -260,8 +343,8 @@ public abstract class JDFSpanBase extends JDFElement
 
 	/**
 	 * Sets the value of attribute DataType
+	 * @param value 
 	 * 
-	 * @return EnumDataType - the attribute value to set
 	 */
 	public void setDataType(final EnumDataType value)
 	{
@@ -291,7 +374,7 @@ public abstract class JDFSpanBase extends JDFElement
 	/**
 	 * SetPriority
 	 * 
-	 * @param EnumPriority p
+	 * @param p
 	 */
 	public void setPriority(final EnumPriority p)
 	{
@@ -321,8 +404,31 @@ public abstract class JDFSpanBase extends JDFElement
 
 		if (preferredExists)
 		{
-			setAttribute(AttributeName.ACTUAL, getAttribute(AttributeName.PREFERRED, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING), JDFConstants.EMPTYSTRING);
+			setAttribute(AttributeName.ACTUAL, guessActual(), null);
 		}
 		return preferredExists;
+	}
+
+	/**
+	 * guess the value of Actual from actualrange, preferred etc,
+	 * @return
+	 */
+	public String guessActual()
+	{
+		if (hasAttribute(AttributeName.ACTUAL))
+			return getAttribute(AttributeName.ACTUAL);
+		if (hasAttribute(AttributeName.PREFERRED))
+			return getAttribute(AttributeName.PREFERRED);
+		if (hasAttribute(AttributeName.RANGE))
+		{
+			String range = getAttribute(AttributeName.RANGE);
+			VString v = StringUtil.tokenize(range, "~ ", false);
+			int n = v.size() / 2;
+			if (n > 0)
+			{
+				return v.get(n);
+			}
+		}
+		return null;
 	}
 }

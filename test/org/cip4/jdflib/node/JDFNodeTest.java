@@ -107,7 +107,6 @@ import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
-import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;

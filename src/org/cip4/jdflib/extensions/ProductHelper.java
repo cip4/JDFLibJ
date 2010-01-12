@@ -1,8 +1,8 @@
-/*--------------------------------------------------------------------------------------------------
+/*
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -23,7 +23,7 @@
  *       "This product includes software developed by the
  *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment may appear in the software itself,
+ *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
  * 4. The names "CIP4" and "The International Cooperation for the Integration of
@@ -33,7 +33,7 @@
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior written
+ *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -45,7 +45,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -57,7 +57,7 @@
  * This software consists of voluntary contributions made by many
  * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software
+ * originally based on software restartProcesses()
  * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
  * copyright (c) 1999-2001, Agfa-Gevaert N.V.
  *
@@ -66,44 +66,108 @@
  * <http://www.cip4.org/>.
  *
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.extensions;
+
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.KElement;
 
 /**
- * trivial typesafe pair class
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 11.12.2008
- * @param <aData> datatype of a
- * @param <bData> datatype of b
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class MyPair<aData, bData>
+public class ProductHelper
 {
 	/**
-	 * @param ap aData value
-	 * @param bp bData value
+	 * 
 	 */
-	public MyPair(final aData ap, final bData bp)
+	public static boolean partitionProducts = false;
+	protected KElement theProduct;
+
+	/**
+	 * @param product
+	 */
+	public ProductHelper(KElement product)
 	{
-		super();
-		this.a = ap;
-		this.b = bp;
+		theProduct = product;
+		theProduct.appendAnchor(null);
 	}
 
 	/**
-	 * the aData value
+	 * 
 	 */
-	public aData a;
+	public void setRoot()
+	{
+		KElement list = theProduct.getParentNode_KElement();
+		list.appendAttribute("RootProducts", theProduct.getID(), null, " ", true);
+	}
+
 	/**
-	 * the bData value
+	 * @param name
+	 * @return
 	 */
-	public bData b;
+	public IntentHelper getCreateIntent(String name)
+	{
+		IntentHelper ih = getIntent(name);
+		if (ih == null)
+		{
+			KElement intent = theProduct.appendElement("Intent");
+			ih = new IntentHelper(intent);
+			intent.appendElement(name);
+			intent.setAttribute("Name", name);
+		}
+		return ih;
+	}
+
+	/**
+	 * @param name
+	 * @return
+	 */
+	public IntentHelper getIntent(String name)
+	{
+		KElement intent = theProduct.getChildWithAttribute("Intent", "Name", null, name, 0, true);
+		return intent == null ? null : new IntentHelper(intent);
+	}
 
 	/**
 	 * @see java.lang.Object#toString()
-	 */
+	 * @return
+	*/
 	@Override
 	public String toString()
 	{
-		return "Pair" + a + "," + b;
+		return "ProductHelper: " + theProduct;
 	}
+
+	/**
+	 * @param amount the amount to set
+	 */
+	public void setAmount(int amount)
+	{
+		theProduct.setAttribute(AttributeName.AMOUNT, amount, null);
+	}
+
+	/**
+	 * @param phCover
+	 * @param amount 
+	 */
+	public void setChild(ProductHelper phCover, int amount)
+	{
+		KElement e = theProduct.getChildWithAttribute("ChildProduct", "Childref", null, phCover.theProduct.getID(), 0, true);
+		if (e == null)
+		{
+			e = theProduct.appendElement("ChildProduct");
+			e.copyAttribute("ChildRef", phCover.theProduct, "ID", null, null);
+		}
+		if (amount > 0)
+			e.setAttribute("Amount", amount, null);
+	}
+
+	/**
+	 * @return 
+	 * 
+	 */
+	public KElement getProduct()
+	{
+		return theProduct;
+	}
+
 }

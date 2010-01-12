@@ -4,20 +4,32 @@
 package org.cip4.jdflib.extensions;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
+import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
+import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
+import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
+import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
@@ -25,15 +37,41 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
+import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm;
+import org.cip4.jdflib.resource.devicecapability.JDFAbstractState.EnumUserDisplay;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
+import org.cip4.jdflib.resource.process.JDFColorPool;
+import org.cip4.jdflib.resource.process.JDFSeparationSpec;
+import org.cip4.jdflib.span.JDFSpanBase;
+import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * class to generate a jdf 2.0 schema from the jdf 1.x java library
+ * 
+ * concepts:
+ * keep things - mainly data type declarations - local whenever possible
+ * remove all deprecated elements
+ * 
+ * TODO devcaps
+ * TODO add all generic elements where appropriate
+ *  
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class XJDFSchemaCreator extends BaseElementWalker
 {
+	/**
+	 * if true, spans are made to a simple attribute rather than retained as span
+	 */
+	public boolean bSpanAsAttribute = true;
+	protected final HashMap<String, ValuedEnum> enumMap;
+
 	/**
 	 * any matching class will be removed with extreme prejudice...
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -50,8 +88,15 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		@Override
 		public boolean matches(KElement e)
 		{
-			boolean b = super.matches(e);
-			b = b && e.getLocalName().startsWith("IDP");
+			String localName = e.getLocalName();
+			boolean b = ignoreNames.contains(localName);
+			b = b || myNodes.contains(localName);
+			b = b || localName.startsWith("IDP");
+
+			b = b || (e2 instanceof JDFSeparationList);
+			b = b || (e2 instanceof JDFSeparationSpec);
+			b = b || (e2 instanceof JDFColorPool);
+			b = b || (bSpanAsAttribute && (e2 instanceof JDFSpanBase));
 			return b;
 		}
 
@@ -81,7 +126,159 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 */
 	protected class WalkElement extends BaseWalker
 	{
+
+		protected class VAttributeDescriptor extends Vector<AttributeDescriptor>
+		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public void remove(String s)
+			{
+				for (int i = 0; i < size(); i++)
+				{
+					AttributeDescriptor ad = get(i);
+					if (ad.equals(s))
+					{
+						remove(i);
+						break;
+					}
+				}
+			}
+		}
+
+		protected class AttributeDescriptor
+		{
+			/**
+			 * @param name
+			 * @param typ
+			 * @param required
+			 * @param valuedEnum
+			 */
+			public AttributeDescriptor(String name, EnumAttributeType typ, boolean required, ValuedEnum valuedEnum)
+			{
+				super();
+				this.name = name;
+				this.typ = typ;
+				this.required = required;
+				this.valuedEnum = valuedEnum;
+			}
+
+			/**
+			 * @param attName
+			 */
+			public AttributeDescriptor(String attName)
+			{
+				this.name = attName;
+				this.typ = null;
+				this.required = false;
+				this.valuedEnum = null;
+			}
+
+			String name;
+			EnumAttributeType typ;
+			boolean required;
+			ValuedEnum valuedEnum;
+
+			/**
+			 * @return the name
+			 */
+			public String getName()
+			{
+				return name;
+			}
+
+			/**
+			 * @param name the name to set
+			 */
+			public void setName(String name)
+			{
+				this.name = name;
+			}
+
+			/**
+			 * @return the typ
+			 */
+			public EnumAttributeType getTyp()
+			{
+				return typ;
+			}
+
+			/**
+			 * @param typ the typ to set
+			 */
+			public void setTyp(EnumAttributeType typ)
+			{
+				this.typ = typ;
+			}
+
+			/**
+			 * @return the required
+			 */
+			public boolean isRequired()
+			{
+				return required;
+			}
+
+			/**
+			 * @param required the required to set
+			 */
+			public void setRequired(boolean required)
+			{
+				this.required = required;
+			}
+
+			/**
+			 * @return the valuedEnum
+			 */
+			public ValuedEnum getValuedEnum()
+			{
+				return valuedEnum;
+			}
+
+			/**
+			 * @param valuedEnum the valuedEnum to set
+			 */
+			public void setValuedEnum(ValuedEnum valuedEnum)
+			{
+				this.valuedEnum = valuedEnum;
+			}
+
+			/**
+			 * @see java.lang.Object#toString()
+			 * @return
+			*/
+			@Override
+			public String toString()
+			{
+				return "AttributeDescriptor: " + name + " " + typ + " " + required;
+			}
+
+			/**
+			 * @see java.lang.Object#equals(java.lang.Object)
+			 * @param obj
+			 * @return
+			*/
+			@Override
+			public boolean equals(Object obj)
+			{
+				return name.equals(obj);
+			}
+
+			/**
+			 * @see java.lang.Object#hashCode()
+			 * @return
+			*/
+			@Override
+			public int hashCode()
+			{
+				return name.hashCode();
+			}
+		}
+
 		protected KElement complexType;
+		protected KElement complexElement;
 		protected Set<String> baseAttribs;
 		protected Set<String> baseElms;
 		protected Set<String> refElms;
@@ -94,6 +291,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		{
 			super(getFactory());
 			complexType = null;
+			complexElement = null;
 			baseAttribs = null;
 			baseElms = null;
 			refElms = null;
@@ -139,9 +337,12 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			}
 			if (complexType == null)
 				complexType = setComplexType(out, name);
+			if (baseElms == null)
+				createbaseElms();
+			if (baseAttribs == null)
+				createbaseAttribs();
 
-			AttributeInfo ai = e2.getAttributeInfo();
-			VString knownAtts = getKnownAtts();
+			Vector<AttributeDescriptor> knownAtts = getKnownAtts();
 			VString knownElms = getKnownElms();
 			if (knownAtts.size() + knownElms.size() == 0)
 			{
@@ -149,83 +350,140 @@ public class XJDFSchemaCreator extends BaseElementWalker
 				System.out.println("deleting empty content: " + name);
 				return null;
 			}
-			for (int i = 0; i < knownAtts.size(); i++)
-			{
-				String attName = knownAtts.get(i);
-				setXSAttribute(complexType, attName, ai.getAttributeType(attName), false);
-			}
-			VString knownRefs = e2.knownElements();
-			for (int i = 0; i < knownRefs.size(); i++)
-			{
-				String elmName = knownRefs.get(i);
-				if (refsElms.contains(elmName))
-					setXSAttribute(complexType, elmName + "Refs", EnumAttributeType.IDREFS, false);
-				else if (refElms.contains(elmName))
-					setXSAttribute(complexType, elmName + "Ref", EnumAttributeType.IDREF, false);
-
-			}
-
 			for (int i = 0; i < knownElms.size(); i++)
 			{
 				setXSElement(complexType, knownElms.get(i));
 			}
+			for (int i = 0; i < knownAtts.size(); i++)
+			{
+				AttributeDescriptor ad = knownAtts.get(i);
+				setXSAttribute(ad);
+			}
+
 			return null;
 		}
 
 		/**
-		 * @return
+		 * @param ad
+		 * @return 
 		 */
-		protected VString getKnownAtts()
+		protected KElement setXSAttribute(AttributeDescriptor ad)
 		{
-			AttributeInfo ai = e2.getAttributeInfo();
-			VString knownAtts = ai.knownAttribs();
-			if (baseAttribs == null)
-				createbaseAttribs();
-			for (int i = knownAtts.size() - 1; i >= 0; i--)
+			ValuedEnum valuedEnum = ad.getValuedEnum();
+			String typ = getTypeName(ad.getTyp());
+			String name = ad.getName();
+			String enumName = getEnumName(valuedEnum);
+			if (valuedEnum != null && enumMap.containsKey(enumName))
 			{
-				String attName = knownAtts.get(i);
-				if (baseAttribs.contains(attName))
-				{
-					knownAtts.remove(i);
-				}
-				else if (ai.getLastVersion(attName).getValue() < EnumVersion.Version_1_4.getValue())
-				{
-					knownAtts.remove(i);
-				}
+				typ = enumName;
+				valuedEnum = null;
 			}
-			return knownAtts;
+			return setXSAttribute(complexType, name, typ, ad.isRequired(), valuedEnum);
 		}
 
 		/**
 		 * @return
 		 */
-		protected VString getKnownElms()
+		private VAttributeDescriptor getKnownAttsBase()
+		{
+			AttributeInfo ai = e2.getAttributeInfo();
+			VString knownAtts = ai.knownAttribs();
+			VAttributeDescriptor vDesc = new VAttributeDescriptor();
+
+			for (int i = knownAtts.size() - 1; i >= 0; i--)
+			{
+				String attName = knownAtts.get(i);
+
+				if (baseAttribs.contains(attName) || ignoreNames.contains(attName))
+				{
+					continue;
+				}
+				else if (ai.getLastVersion(attName).getValue() <= EnumVersion.Version_1_4.getValue())
+				{
+					continue;
+				}
+
+				AttributeDescriptor desc = new AttributeDescriptor(getNewName(attName));
+				ValuedEnum ve = ai.getAttributeEnum(attName);
+				EnumAttributeType typ = ai.getAttributeType(attName);
+				desc.setValuedEnum(ve);
+				desc.setTyp(typ);
+				vDesc.add(desc);
+			}
+			VString knownRefs = e2.knownElements();
+			for (int i = 0; i < knownRefs.size(); i++)
+			{
+				AttributeDescriptor desc = null;
+				String elmName = getNewName(knownRefs.get(i));
+
+				if (baseAttribs.contains(elmName) || ignoreNames.contains(elmName))
+				{
+					continue;
+				}
+
+				if (refsElms.contains(elmName))
+				{
+					desc = new AttributeDescriptor(elmName + "Refs");
+					desc.setTyp(EnumAttributeType.IDREFS);
+				}
+				else if (isRefElem(elmName))
+				{
+					desc = new AttributeDescriptor(elmName + "Ref");
+					desc.setTyp(EnumAttributeType.IDREF);
+				}
+				if (desc != null)
+					vDesc.add(desc);
+
+			}
+			return vDesc;
+		}
+
+		/**
+		 * @param elmName
+		 * @return
+		 */
+		private boolean isRefElem(String elmName)
+		{
+			return refElms.contains(elmName) || elmName.endsWith("Params");
+		}
+
+		/**
+		 * locally map attnames and elmnames
+		 * @param string
+		 * @return
+		 */
+		protected String getNewName(String string)
+		{
+			if (ElementName.COLORPOOL.equals(string))
+				return "Color";
+			return string;
+		}
+
+		/**
+		 * @return
+		 */
+		private VString getKnownElmsBase()
 		{
 			VString knownElms = e2.knownElements();
-			if (baseElms == null)
-				createbaseElms();
+			VString ret = new VString();
 			for (int i = knownElms.size() - 1; i >= 0; i--)
 			{
 				String elmName = knownElms.get(i);
-				if (baseElms.contains(elmName) || refElms.contains(elmName) || refsElms.contains(elmName))
+				if (baseElms.contains(elmName) || isRefElem(elmName) || refsElms.contains(elmName))
 				{
-					knownElms.remove(i);
+					continue;
 				}
 				else if (e2.getLastVersion(elmName, true).getValue() < EnumVersion.Version_1_4.getValue())
 				{
-					knownElms.remove(i);
+					continue;
 				}
 				else if (ignoreNames.contains(elmName))
 				{
-					knownElms.remove(i);
+					continue;
 				}
+				ret.add(getNewName(elmName));
 			}
-			if (knownElms.contains("ColorPool"))
-			{
-				knownElms.remove("ColorPool");
-				knownElms.add("Color");
-			}
-			return knownElms;
+			return ret;
 		}
 
 		/**
@@ -257,10 +515,14 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			refElms.add(ElementName.IDENTIFICATIONFIELD);
 			refElms.add(ElementName.QUALITYCONTROLRESULT);
 			refElms.add(ElementName.TOOL);
+			refElms.add(ElementName.LAYOUT);
+			refElms.add(ElementName.COLOR);
+			refElms.add(ElementName.COLORPOOL);
+			refElms.add(ElementName.DEVICE);
+			refElms.add(ElementName.EXTERNALIMPOSITIONTEMPLATE);
 
 			refsElms = new HashSet<String>();
 			refsElms.add(ElementName.SOURCERESOURCE);
-			refsElms.add(ElementName.COLOR);
 
 		}
 
@@ -274,7 +536,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		public boolean matches(KElement e)
 		{
 			String nodeName = e.getLocalName();
-			return myNodes == null || myNodes.contains(nodeName);
+			return myNodes == null || myNodes.contains(nodeName) && !ignoreNames.contains(nodeName);
 		}
 
 		/**
@@ -306,7 +568,240 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		{
 			super.prepareWalk(e, trackElem);
 			complexType = null;
-			e2 = null;
+			e2 = jdfRoot.appendElement(e.getLocalName());
+		}
+
+		/**
+		 * 
+		 * @param root
+		 * @param attName
+		 * @param typ
+		 * @param required
+		 */
+		protected void setXSAttribute(KElement root, String attName, EnumAttributeType typ, boolean required)
+		{
+			KElement att = root.appendElement("xs:attribute");
+			att.setAttribute("use", required ? "required" : "optional");
+			att.setAttribute("name", attName);
+			String typName = typ.getName();
+			att.setAttribute("type", typName);
+		}
+
+		/**
+		 * 
+		 * @param root
+		 * @param attName
+		 * @param typName 
+		 * @param required
+		 * @param ve a valued enum to generate values
+		 * @return 
+		 */
+		protected KElement setXSAttribute(KElement root, String attName, String typName, boolean required, ValuedEnum ve)
+		{
+			KElement att = root.appendElement("xs:attribute");
+			att.setAttribute("use", required ? "required" : "optional");
+			att.setAttribute("name", attName);
+			if (typName == null || typName.startsWith("enumeration"))
+			{
+				typName += "_" + attName;
+				if (enumMap.get(typName) == null)
+				{
+					if (typName.startsWith("enumerations"))
+						typName = getTypeName(EnumAttributeType.NMTOKENS);
+					else
+						typName = getTypeName(EnumAttributeType.NMTOKEN);
+				}
+			}
+			if (ve != null)
+				appendSimpleType(att, null, "xs:string", getEnumVector(ve));
+			else
+				att.setAttribute("type", typName);
+
+			return att;
+		}
+
+		/**
+		 * @param complexType 
+		 * @param bID 
+		 * 
+		 */
+		protected void setGeneric(KElement complexType, boolean bID)
+		{
+			setXSElement(complexType, ElementName.GENERALID);
+			if (bID)
+				setXSAttribute(complexType, "ID", EnumAttributeType.ID, true);
+			setXSAttribute(complexType, AttributeName.DESCRIPTIVENAME, EnumAttributeType.string, false);
+		}
+
+		/**
+		 * @param out
+		 * @param name
+		 * @return 
+		 */
+		protected KElement setComplexType(final KElement out, String name)
+		{
+			String typeForName = getTypeForName(name);
+			if (typeForName != null)
+			{
+				complexElement = out.appendElement("xs:element");
+				complexElement.setAttribute("name", name);
+			}
+			else
+				complexElement = null;
+			boolean bLocal = name.equals(typeForName);
+			KElement compType;
+			if (bLocal)
+			{
+				compType = complexElement.appendElement("xs:complexType");
+			}
+			else
+			{
+				compType = out.appendElement("xs:complexType");
+				if (typeForName != null)
+				{
+					compType.setAttribute("name", typeForName);
+				}
+				else
+				{
+					compType.setAttribute("name", name);
+				}
+
+			}
+			KElement root = (complexElement != null) ? complexElement : compType;
+			root.setXMLComment(" ** Complex type definition for " + name + " ** ");
+
+			return compType;
+		}
+
+		/**
+		 * 
+		 * @param root
+		 * @param elmName
+		 */
+		protected void setXSElement(KElement root, String elmName)
+		{
+			KElement seq = root.getElement("xs:sequence");
+			if (seq == null)
+			{
+				KElement att = root.getElement("xs:attribute");
+				seq = root.insertBefore("xs:sequence", att, null);
+			}
+			seq.setAttribute("minOccurs", "0");
+			seq.setAttribute("maxOccurs", "unbounded");
+			KElement choice = seq.getCreateElement("xs:choice");
+			KElement elem = choice.appendElement("xs:element");
+			elem.setAttribute("minOccurs", "0");
+			boolean bRef = elmName.equals(getTypeForName(elmName));
+			if (bRef)
+				elem.setAttribute("ref", getTypeForName(elmName));
+			else
+			{
+				elem.setAttribute("name", elmName);
+				elem.setAttribute("type", getTypeForName(elmName));
+			}
+		}
+
+		/**
+		 * @param elmName
+		 * @return
+		 */
+		protected String getTypeForName(String elmName)
+		{
+			if (ElementName.FOLDERSUPERSTRUCTUREWEBPATH.equals(elmName))
+				return "ProductionSubPath";
+			if (ElementName.POSTPRESSCOMPONENTPATH.equals(elmName))
+				return "ProductionSubPath";
+			if (ElementName.PRINTINGUNITWEBPATH.equals(elmName))
+				return "ProductionSubPath";
+			if (ElementName.EXTENDEDADDRESS.equals(elmName))
+				return "TextElement";
+			if (ElementName.ORGANIZATIONALUNIT.equals(elmName))
+				return "TextElement";
+			if (ElementName.PRODUCTIONSUBPATH.equals(elmName))
+				return null;
+
+			return elmName;
+		}
+
+		/**
+		 * @param s 
+		 * @return
+		 */
+		protected AttributeDescriptor getSpanAttDesc(String s)
+		{
+			KElement e = e2.appendElement(s);
+			AttributeDescriptor desc = null;
+			if (e instanceof JDFSpanBase && bSpanAsAttribute)
+			{
+				desc = new AttributeDescriptor(s);
+				AttributeInfo ai = e.getAttributeInfo();
+				desc.setTyp(ai.getAttributeType("Actual"));
+				desc.setValuedEnum(ai.getAttributeEnum("Actual"));
+			}
+			else if (e instanceof JDFSeparationList)
+			{
+				desc = new AttributeDescriptor(s);
+				desc.setTyp(EnumAttributeType.NMTOKENS);
+			}
+			else if (e instanceof JDFSeparationSpec)
+			{
+				desc = new AttributeDescriptor("SeparationNames");
+				desc.setTyp(EnumAttributeType.NMTOKENS);
+			}
+			return desc;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
+		 * @return
+		*/
+		protected VAttributeDescriptor getKnownAtts()
+		{
+			VAttributeDescriptor va = getKnownAttsBase();
+			Vector<String> vElem = getKnownElmsBase();
+			for (int i = vElem.size() - 1; i >= 0; i--)
+			{
+				String s = vElem.get(i);
+				AttributeDescriptor spanAttDesc = getSpanAttDesc(s);
+				if (spanAttDesc != null)
+				{
+					va.add(spanAttDesc);
+				}
+			}
+			return va;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownElms()
+		 * @return
+		*/
+		protected VString getKnownElms()
+		{
+			VString vElem = getKnownElmsBase();
+			for (int i = vElem.size() - 1; i >= 0; i--)
+			{
+				String s = vElem.get(i);
+				if (getSpanAttDesc(s) != null)
+				{
+					vElem.remove(i);
+				}
+			}
+			return vElem;
+		}
+
+		/**
+		 * @param out
+		 * @param name
+		 */
+		protected void createSubstitutionBase(final KElement out, String name)
+		{
+			KElement e = out.appendElement("xs:element");
+			e.setAttribute("name", name + "Type");
+			e.setAttribute("type", name + "Type");
+			e.setAttribute("abstract", true, null);
+			e.setXMLComment("** abstract type for substitution only ** ");
+			e = out.appendElement("xs:complexType");
+			e.setAttribute("name", name + "Type");
 		}
 	}
 
@@ -330,6 +825,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
+			xjdf.setAttribute("targetNamespace", "http://www.CIP4.org/JDFSchema_1_1");
+			xjdf.setAttribute("xmlns", "http://www.CIP4.org/JDFSchema_1_1");
+			appendSimpleTypes(xjdf);
 			return xjdf;
 		}
 
@@ -343,17 +841,124 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		{
 			return toCheck.getLocalName().equals("classes");
 		}
+
+		/**
+		 * @param schemaRoot
+		 */
+		protected void appendSimpleTypes(KElement schemaRoot)
+		{
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.boolean_), "xs:boolean", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.string), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.shortString), getTypeName(EnumAttributeType.string), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.NMTOKEN), "xs:NMTOKEN", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.NMTOKENS), "xs:NMTOKENS", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.ID), "xs:ID", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.IDREF), "xs:IDREF", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.IDREFS), "xs:IDREFS", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.JDFJMFVersion), "xs:string", new VString("2.0", null));
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.language), "xs:string", null);
+			appendSimpleTypeList(schemaRoot, getTypeName(EnumAttributeType.languages), getTypeName(EnumAttributeType.language));
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.hexBinary), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.dateTime), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.DateTimeRangeList), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.PDFPath), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.duration), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.DurationRangeList), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.rectangle), "xs:double", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.RectangleRangeList), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.integer), "xs:integer", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.IntegerRangeList), "xs:integer", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.IntegerRange), "xs:integer", null);
+			appendSimpleTypeList(schemaRoot, getTypeName(EnumAttributeType.IntegerList), getTypeName(EnumAttributeType.integer));
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.double_), "xs:double", null);
+			appendSimpleTypeList(schemaRoot, getTypeName(EnumAttributeType.NumberList), getTypeName(EnumAttributeType.double_));
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.NumberRangeList), "xs:double", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.shape), getTypeName(EnumAttributeType.NumberList), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.ShapeRangeList), "xs:double", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.URI), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.URL), getTypeName(EnumAttributeType.URI), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.XPath), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.RegExp), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.XYPair), getTypeName(EnumAttributeType.NumberList), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.XYPairRangeList), "xs:double", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.XYRelation), "xs:NMTOKEN", new VString("gt ge ne eq lt le", null));
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.matrix), getTypeName(EnumAttributeType.NumberList), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.Any), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.LabColor), getTypeName(EnumAttributeType.NumberList), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.RGBColor), getTypeName(EnumAttributeType.NumberList), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.CMYKColor), getTypeName(EnumAttributeType.NumberList), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.TransferFunction), getTypeName(EnumAttributeType.NumberList), null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.NameRangeList), "xs:string", null);
+			appendSimpleType(schemaRoot, getTypeName(EnumAttributeType.unbounded), "xs:string", null);
+		}
+
+		/**
+		 * @param schemaRoot
+		 * @param typeName
+		 * @param baseType
+		 * @param v
+		 */
+		private void appendSimpleTypeList(KElement schemaRoot, String typeName, String baseType)
+		{
+			KElement typ = schemaRoot.appendElement("xs:simpleType");
+			typ.setAttribute("name", typeName);
+			KElement list = typ.appendElement("xs:list");
+			list.setAttribute("itemType", baseType);
+		}
 	}
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
-	protected class WalkResource extends WalkElement
+	protected class WalkDeviceCap extends WalkElement
+	{
+		public WalkDeviceCap()
+		{
+			super();
+			myNodes = new VString("DeviceCap", null).getSet();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#createbaseAttribs()
+		*/
+		@Override
+		protected void createbaseAttribs()
+		{
+			super.createbaseAttribs();
+			baseAttribs.add("GenericAttributes");
+			baseAttribs.add("ExecutionPolicy");
+			baseAttribs.add("CombinedMethod");
+			baseAttribs.add("Types");
+			baseAttribs.add("TypeExpression");
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param in
+		 * @param out
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement in, KElement out)
+		{
+			KElement walk = super.walk(in, out);
+			createSubstitutionBase(out, "Term");
+
+			return walk;
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkResourceElement extends WalkElement
 	{
 		EnumResourceClass c = null;
 
-		public WalkResource()
+		public WalkResourceElement()
 		{
 			super();
 		}
@@ -366,12 +971,24 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
 			KElement ret = super.walk(jdf, xjdf);
+			KElement cc = complexElement.appendElement("xs:complexType").appendElement("xs:complexContent");
 			if (EnumResourceClass.Parameter.equals(c))
-				complexType.setAttribute("substitutionGroup", "ParameterType");
+			{
+				complexElement.setAttribute("substitutionGroup", "ParameterType");
+				complexType.setAttribute("base", "ParameterType");
+			}
 			else if (EnumResourceClass.Intent.equals(c))
-				complexType.setAttribute("substitutionGroup", "IntentType");
+			{
+				complexElement.setAttribute("substitutionGroup", "IntentType");
+				complexType.setAttribute("base", "IntentType");
+			}
 			else
-				complexType.setAttribute("substitutionGroup", "ResourceType");
+			{
+				complexElement.setAttribute("substitutionGroup", "ResourceType");
+				complexType.setAttribute("base", "ResourceType");
+			}
+			KElement ext = cc.moveElement(complexType, null);
+			ext.renameElement("xs:extension", null);
 			return ret;
 		}
 
@@ -384,14 +1001,17 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			String nodeName = toCheck.getNodeName();
-			if (e2 == null)
-				e2 = jdfRoot.appendElement(nodeName);
+			if (e2 != null)
+				e2.deleteNode();
+			e2 = jdfRoot.getCreateResourcePool().appendElement(nodeName);
 			boolean b = e2 instanceof JDFResource;
 			if (b)
 			{
 				JDFResource resource = (JDFResource) e2;
 				resource.init();
 				c = resource.getResourceClass();
+				if (c == null)
+					b = false;
 			}
 			return b;
 		}
@@ -412,6 +1032,9 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			baseAttribs.addAll(physRes.knownAttributes());
 			baseAttribs.addAll(intRes.knownAttributes());
 			baseAttribs.addAll(part.knownAttributes());
+
+			baseAttribs.add("QualityControlResult");
+			baseAttribs.add("SourceResource");
 
 		}
 	}
@@ -436,13 +1059,13 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement in, final KElement out)
 		{
-
 			String setName = in.getLocalName();
 			complexType = setComplexType(out, setName);
 
-			setXSAttribute(complexType, "Name", EnumAttributeType.NMTOKEN, true);
-			setGeneric(complexType, true);
 			setXSElement(complexType, StringUtil.leftStr(setName, -3));
+			setGeneric(complexType, true);
+			setXSAttribute(complexType, "Name", EnumAttributeType.NMTOKEN, true);
+			setXSAttribute(complexType, "Usage", null, false, EnumUsage.getEnum(0));
 			return null;
 		}
 	}
@@ -501,20 +1124,22 @@ public class XJDFSchemaCreator extends BaseElementWalker
 
 			setGeneric(complexType, true);
 			setXSElement(complexType, "ChildProduct");
-			setXSElement(complexType, "IntentType");
+			setXSElement(complexType, "Intent");
+			setXSAttribute(complexType, "Amount", getTypeName(EnumAttributeType.integer), false, null);
+			setXSAttribute(complexType, "ProductID", getTypeName(EnumAttributeType.shortString), false, null);
 			return null;
 		}
 	}
 
 	/**
-	 * the base of all schema creation walkers
+	 * the class for XJDF Resource Parameter etc elements
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
-	protected class WalkRes extends WalkElement
+	protected class WalkResource extends WalkElement
 	{
 
-		public WalkRes()
+		public WalkResource()
 		{
 			super();
 			myNodes = new VString("Resource Parameter Intent", null).getSet();
@@ -527,13 +1152,39 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement in, final KElement out)
 		{
-
+			e2.deleteNode();
 			String name = in.getLocalName();
+			EnumResourceClass clazz = EnumResourceClass.getEnum(name);
+			if (clazz == null)
+				clazz = EnumResourceClass.Quantity;
+			e2 = jdfRoot.addResource(name, clazz, null, null, null, null, null);
 			complexType = setComplexType(out, name);
-			setGeneric(complexType, true);
+			//		setGeneric(complexType, true);
+			// substitution group!
+			super.walk(in, out);
 			setXSElement(complexType, name + "Type");
 			setXSElement(complexType, "Part");
+
+			// now create abstract substitution group type
+			createSubstitutionBase(out, name);
+
 			return null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
+		 * @return
+		*/
+		@Override
+		protected VAttributeDescriptor getKnownAtts()
+		{
+			VAttributeDescriptor knownAtts = super.getKnownAtts();
+			knownAtts.remove("Locked");
+			knownAtts.remove("Class");
+			knownAtts.remove("PartIDKeys");
+			knownAtts.remove("PartUsage");
+			knownAtts.remove("PipePartIDKeys");
+			return knownAtts;
 		}
 	}
 
@@ -578,9 +1229,409 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			setXSElement(complexType, "ProductList");
 			setXSElement(complexType, "ParameterSet");
 			setXSElement(complexType, "ResourceSet");
+			setXSAttribute(complexType, "Types", EnumAttributeType.NMTOKENS, true);
 			super.walk(in, out);
 			return null;
 		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkEnumerationType extends WalkElement
+	{
+		public WalkEnumerationType()
+		{
+			super();
+			myNodes = null;
+		}
+
+		/**
+		 * @param in
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement in, final KElement out)
+		{
+			String setName = in.getLocalName();
+			complexType = setSimpleType(out, setName);
+
+			return null;
+		}
+
+		/**
+		 * @param out
+		 * @param name
+		 * @return 
+		 */
+		protected KElement setSimpleType(final KElement out, String name)
+		{
+			ValuedEnum ve = enumMap.get(name);
+			KElement typ = appendSimpleType(out, name, "xs:string", getEnumVector(ve));
+			return typ;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#prepareWalk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e
+		 * @param trackElem
+		*/
+		@Override
+		public void prepareWalk(KElement e, KElement trackElem)
+		{
+			super.prepareWalk(e, trackElem);
+			if (myNodes == null)
+			{
+				myNodes = new VString(ContainerUtil.getKeyVector(enumMap)).getSet();
+			}
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkChildProduct extends WalkElement
+	{
+		public WalkChildProduct()
+		{
+			super();
+			myNodes = new VString("ChildProduct", null).getSet();
+		}
+
+		/**
+		 * @param in
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement in, final KElement out)
+		{
+			String setName = in.getLocalName();
+			complexType = setComplexType(out, setName);
+
+			setXSAttribute(complexType, "ChildRef", getTypeName(EnumAttributeType.IDREF), true, null);
+			setXSAttribute(complexType, "Amount", getTypeName(EnumAttributeType.integer), false, null);
+
+			return null;
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkTextElement extends WalkElement
+	{
+		public WalkTextElement()
+		{
+			super();
+			myNodes = new VString("TextElement", null).getSet();
+		}
+
+		/**
+		 * @param in
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement in, final KElement out)
+		{
+			String name = in.getLocalName();
+			//			complexElement = out.appendElement("xs:element");
+			//			complexElement.setAttribute("name", name);
+			//			appendSimpleType(complexElement, null, getTypeName(EnumAttributeType.string), null);
+			appendSimpleType(out, name, getTypeName(EnumAttributeType.string), null);
+
+			return null;
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkState extends WalkElement
+	{
+		public WalkState()
+		{
+			super();
+			myNodes = null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#createbaseAttribs()
+		*/
+		@Override
+		protected void createbaseAttribs()
+		{
+			super.createbaseAttribs();
+			baseAttribs.add("Name");
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#matches(org.cip4.jdflib.core.KElement)
+		 * @param e
+		 * @return
+		*/
+		@Override
+		public boolean matches(KElement e)
+		{
+			String nodeName = e.getNodeName();
+			if (e2 == null)
+				e2 = jdfRoot.appendElement(nodeName);
+			return e2 instanceof JDFAbstractState;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
+		 * @return
+		*/
+		@Override
+		protected VAttributeDescriptor getKnownAtts()
+		{
+			VAttributeDescriptor knownAtts = super.getKnownAtts();
+			knownAtts.add(new AttributeDescriptor("XPath", EnumAttributeType.XPath, true, null));
+			knownAtts.add(new AttributeDescriptor("XPathRoot", EnumAttributeType.XPath, false, null));
+			return knownAtts;
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkEvaluation extends WalkTerm
+	{
+		public WalkEvaluation()
+		{
+			super();
+			myNodes = null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#createbaseAttribs()
+		*/
+		@Override
+		protected void createbaseAttribs()
+		{
+			super.createbaseAttribs();
+			baseAttribs.add("rRef");
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#matches(org.cip4.jdflib.core.KElement)
+		 * @param e
+		 * @return
+		*/
+		@Override
+		public boolean matches(KElement e)
+		{
+			String nodeName = e.getNodeName();
+			if (e2 == null)
+				e2 = jdfRoot.appendElement(nodeName);
+			return e2 instanceof JDFEvaluation;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
+		 * @return
+		*/
+		@Override
+		protected VAttributeDescriptor getKnownAtts()
+		{
+			VAttributeDescriptor knownAtts = super.getKnownAtts();
+			knownAtts.add(new AttributeDescriptor("XPath", EnumAttributeType.XPath, true, null));
+			knownAtts.add(new AttributeDescriptor("XPathRoot", EnumAttributeType.XPath, false, null));
+			return knownAtts;
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkTerm extends WalkElement
+	{
+		public WalkTerm()
+		{
+			super();
+			myNodes = null;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#matches(org.cip4.jdflib.core.KElement)
+		 * @param e
+		 * @return
+		*/
+		@Override
+		public boolean matches(KElement e)
+		{
+			if (!super.matches(e))
+				return false;
+			String nodeName = e.getNodeName();
+			if (e2 == null)
+				e2 = jdfRoot.appendElement(nodeName);
+			return e2 instanceof JDFTerm;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param in
+		 * @param out
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement in, KElement out)
+		{
+			KElement e = super.walk(in, out);
+			KElement cc = complexElement.appendElement("xs:complexType").appendElement("xs:complexContent");
+			complexElement.setAttribute("substitutionGroup", "TermType");
+			complexType.setAttribute("base", "TermType");
+			KElement ext = cc.moveElement(complexType, null);
+			ext.renameElement("xs:extension", null);
+			return e;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownElms()
+		 * @return
+		*/
+		@Override
+		protected VString getKnownElms()
+		{
+			VString v = super.getKnownElms();
+			boolean bAdd = false;
+			for (int i = v.size() - 1; i >= 0; i--)
+			{
+				KElement ee = e2.appendElement(v.get(i));
+				if (ee instanceof JDFTerm)
+				{
+					v.remove(i);
+					bAdd = true;
+				}
+			}
+			if (bAdd)
+				v.add("TermType");
+			return v;
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkTest extends WalkTerm
+	{
+		public WalkTest()
+		{
+			super();
+			myNodes = new VString("Test", null).getSet();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param in
+		 * @param out
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement in, KElement out)
+		{
+			KElement e = super.walk(in, out);
+			if (complexType != null)
+			{
+				complexType.setAttribute("substitutionGroup", null); // undo last
+			}
+			return e;
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkProductionIntent extends WalkResourceElement
+	{
+		public WalkProductionIntent()
+		{
+			super();
+			myNodes = new VString("ProductionIntent", null).getSet();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownElms()
+		 * @return
+		*/
+		@Override
+		protected VString getKnownElms()
+		{
+			VString knownElms = super.getKnownElms();
+			knownElms.remove("Resource");
+			return knownElms;
+		}
+
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkJobPhase extends WalkElement
+	{
+		public WalkJobPhase()
+		{
+			super();
+			myNodes = new VString("JobPhase", null).getSet();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownElms()
+		 * @return
+		*/
+		@Override
+		protected VString getKnownElms()
+		{
+			VString knownElms = super.getKnownElms();
+			knownElms.remove("JDF");
+			return knownElms;
+		}
+
+	}
+
+	/**
+	 * the class for XJDF Resource Parameter etc elements
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkResourcePhysical extends WalkResource
+	{
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDFSchemaCreator.WalkElement#getKnownAtts()
+		 * @return
+		*/
+		@Override
+		protected VAttributeDescriptor getKnownAtts()
+		{
+			VAttributeDescriptor knownAtts = super.getKnownAtts();
+			knownAtts.remove("AmountProduced");
+			knownAtts.remove("AmountRequired");
+			knownAtts.remove("Amount");
+			knownAtts.add(new AttributeDescriptor("AmountGood", EnumAttributeType.double_, false, null));
+			knownAtts.add(new AttributeDescriptor("AmountWaste", EnumAttributeType.double_, false, null));
+			return knownAtts;
+		}
+
+		public WalkResourcePhysical()
+		{
+			super();
+			myNodes = new VString("Resource", null).getSet();
+		}
+
 	}
 
 	File baseDir;
@@ -601,6 +1652,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		d1.setInitOnCreate(false);
 		jdfRoot = d1.getJDFRoot();
 		createIgnoreNames();
+		enumMap = new HashMap<String, ValuedEnum>();
 	}
 
 	/**
@@ -610,9 +1662,20 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	{
 		if (ignoreNames == null)
 		{
-			ignoreNames = new VString("RefElement AttributeMap Element ResourceLink ResourceLinkPool ResourcePool AncestorPool Ancestor Spawned Merged"
-					+ "Identical Doc DocumentBuilder Exception PartStatus PartAmount AmountPool PlaceHolder Node", null).getSet();
+			ignoreNames = new VString("Audit RefElement AttributeMap Element ResourceLink ResourceLinkPool ResourcePool AncestorPool Ancestor Spawned Merged" + " "
+					+ "BusinessInfo Identical Doc DocumentBuilder Exception PartStatus PartAmount AmountPool PlaceHolder Node BindItem" + " " + "DevCap DevCaps" + " "
+					+ "CreateLink CreateResource NewComment UpdateJDFCmdParams MoveResource Sheet Surface", null).getSet();
+
+			ignoreNames.add("TargetRoute");
+			ignoreNames.add("Route");
+			ignoreNames.add("IPPVersion");
+			// TODO rethink preflight
+			ignoreNames.add(ElementName.PRGROUP);
+			ignoreNames.add(ElementName.PRGROUPOCCURRENCE);
+			ignoreNames.add(ElementName.PROCCURRENCE);
+
 		}
+
 	}
 
 	/**
@@ -624,8 +1687,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		XMLDoc schema = new XMLDoc("xs:schema", "http://www.w3.org/2001/XMLSchema");
 		KElement schemaRoot = schema.getRoot();
 		walkTree(treeRoot, schemaRoot);
-		appendRootElement(schemaRoot, "XJDF");
-		appendRootElement(schemaRoot, "JMF");
 		schema.write2File(output, 2, false);
 	}
 
@@ -648,6 +1709,8 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		Vector<File> files = FileUtil.listFilesInTree(baseDir, "*.java");
 		XMLDoc tree = new XMLDoc("classes", null);
 		KElement treeRoot = tree.getRoot();
+		addSimpleTypes(treeRoot);
+		addNewTypes(treeRoot);
 		treeRoot.appendElement("XJDF");
 		for (int i = 0; i < files.size(); i++)
 		{
@@ -665,76 +1728,137 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			{
 				name = StringUtil.leftStr(name, -5);
 				name = StringUtil.rightStr(name, -3);
-				treeRoot.appendElement(name);
+				treeRoot.getCreateElement(name);
 			}
 		}
-		treeRoot.appendElement("Resource");
-		treeRoot.appendElement("ResourceSet");
-		treeRoot.appendElement("Parameter");
-		treeRoot.appendElement("ParameterSet");
-		treeRoot.appendElement("Intent");
-		treeRoot.appendElement("IntentSet");
-		treeRoot.appendElement("ChildProduct");
-		treeRoot.appendElement("Product");
-		treeRoot.appendElement("ProductList");
 		return treeRoot;
 	}
 
 	/**
-	 * 
-	 * @param root
-	 * @param attName
-	 * @param typ
-	 * @param required
+	 * @param treeRoot
 	 */
-	protected void setXSAttribute(KElement root, String attName, EnumAttributeType typ, boolean required)
+	private void addSimpleTypes(KElement treeRoot)
 	{
-		KElement att = root.appendElement("xs:attribute");
-		att.setAttribute("use", required ? "required" : "optional");
-		att.setAttribute("name", attName);
-		att.setAttribute("type", typ.getName());
+		putPair(EnumAnchor.getEnum(0), treeRoot);
+		putPair(EnumNamedColor.getEnum(0), treeRoot);
+		putPair(EnumNodeStatus.getEnum(0), treeRoot);
+		putPair(EnumResStatus.getEnum(0), treeRoot);
+		putPair(EnumOrientation.getEnum(0), treeRoot);
+		putPair(EnumWorkStyle.getEnum(0), treeRoot);
+		putPair(EnumFrontCoatings.getEnum(0), treeRoot);
+		//TODO combine stati
+		putPair(EnumDeviceStatus.getEnum(0), treeRoot);
+		putPair(EnumListType.getEnum(0), treeRoot);
+		putPair(EnumAvailability.getEnum(0), treeRoot);
+		putPair(EnumUserDisplay.getEnum(0), treeRoot);
 	}
 
 	/**
-	 * 
-	 * @param root
-	 * @param elmName
+	 * @param treeRoot
 	 */
-	protected void setXSElement(KElement root, String elmName)
+	private void addNewTypes(KElement treeRoot)
 	{
-		KElement seq = root.getCreateElement("xs:sequence");
-		seq.setAttribute("minoccurs", "0");
-		seq.setAttribute("maxoccurs", "unbounded");
-		KElement choice = seq.getCreateElement("xs:choice");
-		KElement elem = choice.appendElement("xs:element");
-		elem.setAttribute("minoccurs", "0");
-		elem.setAttribute("ref", elmName);
+		treeRoot.getCreateElement("Resource");
+		treeRoot.getCreateElement("ResourceSet");
+		treeRoot.getCreateElement("Parameter");
+		treeRoot.getCreateElement("ParameterSet");
+		treeRoot.getCreateElement("Intent");
+		treeRoot.getCreateElement("IntentSet");
+		treeRoot.getCreateElement("ChildProduct");
+		treeRoot.getCreateElement("Product");
+		treeRoot.getCreateElement("ProductList");
+		treeRoot.getCreateElement("TextElement");
+
 	}
 
 	/**
-	 * @param out
-	 * @param name
+	 * @param en 
+	 * @param treeRoot 
+	 * 
+	 */
+	private void putPair(ValuedEnum en, KElement treeRoot)
+	{
+		String name = getEnumName(en);
+		enumMap.put(name, en);
+		treeRoot.appendElement(name);
+	}
+
+	/**
+	 * @param valuedEnum
+	 * @return
+	 */
+	protected String getEnumName(ValuedEnum valuedEnum)
+	{
+		if (valuedEnum == null)
+			return null;
+		String s = EnumUtil.getEnumName(valuedEnum).substring(4);
+		if (AttributeName.SOURCEWORKSTYLE.equals(s))
+			s = AttributeName.WORKSTYLE;
+		if (AttributeName.BACKCOATINGS.equals(s) || AttributeName.FRONTCOATINGS.equals(s))
+			s = "Coatings";
+		return "Enum" + s;
+	}
+
+	/**
+	 * @param typ 
+	 * @return
+	 */
+	protected String getTypeName(EnumAttributeType typ)
+	{
+		return typ.getName();
+	}
+
+	/**
+	 * @param baseElem
+	 * @param typName
+	 * @param baseType 
+	 * @param ve
 	 * @return 
 	 */
-	protected KElement setComplexType(final KElement out, String name)
+	protected KElement appendSimpleType(KElement baseElem, String typName, String baseType, VString v)
 	{
-		KElement complexType = out.appendElement("xs:complextype");
-		complexType.setAttribute("name", name);
-		complexType.setXMLComment(" ** Complex type definition for " + name + " ** ");
-		return complexType;
+		KElement typ = baseElem.appendElement("xs:simpleType");
+		typ.setAttribute("name", typName);
+		typ = typ.appendElement("xs:restriction");
+		typ.setAttribute("base", baseType);
+		if (v != null)
+		{
+			for (int i = 0; i < v.size(); i++)
+			{
+				KElement enu = typ.appendElement("xs:enumeration");
+				enu.setAttribute("value", v.get(i));
+			}
+		}
+		return typ;
 	}
 
 	/**
-	 * @param complexType 
-	 * @param bID 
-	 * 
+	 * @param ve
+	 * @return
 	 */
-	protected void setGeneric(KElement complexType, boolean bID)
+	protected VString getEnumVector(ValuedEnum ve)
 	{
-		if (bID)
-			setXSAttribute(complexType, "ID", EnumAttributeType.ID, true);
-		setXSAttribute(complexType, AttributeName.DESCRIPTIVENAME, EnumAttributeType.string, false);
-		setXSElement(complexType, ElementName.GENERALID);
+		Class<? extends ValuedEnum> class1 = ve.getClass();
+		VString v = EnumUtil.getNamesVector(class1);
+		String className = class1.getName();
+		int pos = className.indexOf("$Enum");
+		if (pos > 0)
+			className = className.substring(pos + 5);
+		if (AttributeName.STATUS.equals(className) || AttributeName.NODESTATUS.equals(className) || AttributeName.ENDSTATUS.equals(className))
+		{
+			v.remove(EnumNodeStatus.FailedTestRun.getName());
+			v.remove(EnumNodeStatus.Ready.getName());
+			v.remove(EnumNodeStatus.TestRunInProgress.getName());
+			v.remove(EnumNodeStatus.Spawned.getName());
+			v.remove(EnumNodeStatus.Part.getName());
+			v.remove(EnumNodeStatus.Pool.getName());
+		}
+		else if (AttributeName.VERSION.equals(className))
+		{
+			return new VString("2.0", null);
+		}
+
+		return v;
 	}
 
 }

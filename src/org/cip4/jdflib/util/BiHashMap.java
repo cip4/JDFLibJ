@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,30 +68,24 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
- */
+
 package org.cip4.jdflib.util;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 /**
- * Bidirectional HashMap utility class
+ * Bidirectional HashMap utility class 
  * 
  * @author Rainer Prosi
  * @param <a> any datatype for the key
  * @param <b> any datatype for the value
  * 
  */
-public class BiHashMap<a, b>
+public class BiHashMap<a, b> implements Map<a, b>
 {
 
 	private final HashMap<a, b> mapKey;
@@ -137,12 +131,14 @@ public class BiHashMap<a, b>
 	/**
 	 * remove key and its associated value
 	 * @param key the key
+	 * @return 
 	 */
-	public void remove(final a key)
+	public b remove(final Object key)
 	{
 		final b val = mapKey.get(key);
 		mapVal.remove(val);
 		mapKey.remove(key);
+		return val;
 	}
 
 	/**
@@ -151,11 +147,11 @@ public class BiHashMap<a, b>
 	 * @param key the key
 	 * @param val the value
 	 */
-	public void put(final a key, final b val)
+	public b put(final a key, final b val)
 	{
 		if (key == null || val == null)
 		{
-			return;
+			return null;
 		}
 		final b o = mapKey.get(key);
 		if (o != null)
@@ -169,6 +165,7 @@ public class BiHashMap<a, b>
 		}
 		mapVal.put(val, key);
 		mapKey.put(key, val);
+		return val;
 	}
 
 	/**
@@ -210,6 +207,97 @@ public class BiHashMap<a, b>
 	{
 		final String s = "[BiHashMap]: " + mapKey;
 		return s;
+	}
+
+	/**
+	 * @see java.util.Map#containsKey(java.lang.Object)
+	 * @param arg0
+	 * @return
+	*/
+	public boolean containsKey(Object arg0)
+	{
+		return mapKey.containsKey(arg0);
+	}
+
+	/**
+	 * @see java.util.Map#containsValue(java.lang.Object)
+	 * @param arg0
+	 * @return
+	*/
+	public boolean containsValue(Object arg0)
+	{
+		return mapKey.containsValue(arg0);
+	}
+
+	/**
+	 * @see java.util.Map#entrySet()
+	 * @return
+	*/
+	public Set<java.util.Map.Entry<a, b>> entrySet()
+	{
+		return mapKey.entrySet();
+	}
+
+	/**
+	 * @see java.util.Map#get(java.lang.Object)
+	 * @param arg0
+	 * @return
+	*/
+	public b get(Object arg0)
+	{
+		return mapKey.get(arg0);
+	}
+
+	/**
+	 * @see java.util.Map#isEmpty()
+	 * @return
+	*/
+	public boolean isEmpty()
+	{
+		return mapKey.isEmpty();
+	}
+
+	/**
+	 * @see java.util.Map#keySet()
+	 * @return
+	*/
+	public Set<a> keySet()
+	{
+		return mapKey.keySet();
+	}
+
+	/**
+	 * @see java.util.Map#putAll(java.util.Map)
+	 * @param arg0
+	*/
+	public void putAll(Map<? extends a, ? extends b> arg0)
+	{
+		if (arg0 == null)
+			return;
+		Iterator<? extends a> it = arg0.keySet().iterator();
+		while (it.hasNext())
+		{
+			a key = it.next();
+			put(key, arg0.get(key));
+		}
+	}
+
+	/**
+	 * @see java.util.Map#size()
+	 * @return
+	*/
+	public int size()
+	{
+		return mapKey.size();
+	}
+
+	/**
+	 * @see java.util.Map#values()
+	 * @return
+	*/
+	public Collection<b> values()
+	{
+		return mapKey.values();
 	}
 
 }

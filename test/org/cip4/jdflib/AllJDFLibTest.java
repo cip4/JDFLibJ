@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -151,6 +151,7 @@ import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.extensions.PartitionHelperTest;
 import org.cip4.jdflib.extensions.SetHelperTest;
+import org.cip4.jdflib.extensions.XJDFGeneratorTest;
 import org.cip4.jdflib.extensions.XJDFHelperTest;
 import org.cip4.jdflib.extensions.XJDFTest;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinderTest;
@@ -199,6 +200,8 @@ import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.JDFStrippingTest;
 import org.cip4.jdflib.resource.PhaseTimeTest;
 import org.cip4.jdflib.resource.ProcessRunTest;
+import org.cip4.jdflib.resource.intent.JDFColorIntentTest;
+import org.cip4.jdflib.resource.intent.JDFDeliveryIntentTest;
 import org.cip4.jdflib.resource.process.JDFAddressTest;
 import org.cip4.jdflib.resource.process.JDFColorConversionParamsTest;
 import org.cip4.jdflib.resource.process.JDFColorTest;
@@ -221,6 +224,7 @@ import org.cip4.jdflib.resource.process.JDFTileTest;
 import org.cip4.jdflib.resource.process.JDFUsageCounterTest;
 import org.cip4.jdflib.resource.process.postpress.JDFStitchingParamsTest;
 import org.cip4.jdflib.span.JDFEnumerationSpanTest;
+import org.cip4.jdflib.span.JDFSpanBaseTest;
 import org.cip4.jdflib.util.BiHashMapTest;
 import org.cip4.jdflib.util.ByteArrayIOStreamTest;
 import org.cip4.jdflib.util.ContainerUtilTest;
@@ -358,6 +362,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(PartitionHelperTest.class);
 		suite.addTestSuite(SetHelperTest.class);
 		suite.addTestSuite(XJDFHelperTest.class);
+		suite.addTestSuite(XJDFGeneratorTest.class);
 		suite.addTestSuite(XJDFTest.class);
 
 		// Golden tickets
@@ -415,6 +420,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFResourceTest.class);
 		suite.addTestSuite(JDFStrippingTest.class);
 
+		// resource.intent
+		suite.addTestSuite(JDFColorIntentTest.class);
+		suite.addTestSuite(JDFDeliveryIntentTest.class);
+
 		// resource.process
 		suite.addTestSuite(JDFAddressTest.class);
 		suite.addTestSuite(JDFColorTest.class);
@@ -439,6 +448,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// resource.process.postpress
 		suite.addTestSuite(JDFStitchingParamsTest.class);
+
+		// span
+		suite.addTestSuite(JDFEnumerationSpanTest.class);
+		suite.addTestSuite(JDFSpanBaseTest.class);
 
 		// util
 		suite.addTestSuite(BiHashMapTest.class);

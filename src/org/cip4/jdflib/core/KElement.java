@@ -77,8 +77,10 @@ package org.cip4.jdflib.core;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -126,7 +128,6 @@ import org.w3c.dom.Text;
  * @author CIP4
  * @see JDFElement for the first element class that is aware of JDF
  */
-@SuppressWarnings("deprecation")
 public class KElement extends ElementNSImpl
 {
 	private static final long serialVersionUID = 1L;
@@ -136,6 +137,10 @@ public class KElement extends ElementNSImpl
 	{
 		atrInfoTable[0] = new AtrInfoTable(JDFConstants.XMLNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, null);
 	}
+
+	private static int m_lStoreID = 0;
+	private static boolean bIDDate = true;
+	private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyMMdd_kkmmssSS");
 
 	/**
 	 * public version of getTheAttributeInfo
@@ -3359,6 +3364,8 @@ public class KElement extends ElementNSImpl
 	public int removeFromAttribute(final String key, final String token, final String nameSpaceURI, final String sep, int nMax)
 	{
 		String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
+		if (strAttrValue == null)
+			return 0;
 		int n = 0;
 		int lenToken = token.length();
 		if (lenToken == 0)
@@ -4531,6 +4538,7 @@ public class KElement extends ElementNSImpl
 	 * @return string representativ of this
 	 * @see Object#toString()
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public String toString()
 	{
@@ -6675,7 +6683,88 @@ public class KElement extends ElementNSImpl
 
 	}
 
+	/**
+	 * create and append a unique id, keep the existing one if it already exists
+	 * @param strName
+	 * 
+	 * @return String - the value of the ID attribute after setting
+	 * 
+	 * @default appendAnchor(null)
+	 */
+	public String appendAnchor(String strName)
+	{
+		if (hasAttribute(AttributeName.ID))
+		{
+			return this.getAttribute(AttributeName.ID, null, null);
+		}
+		else if ((strName == null) || strName.equals(JDFConstants.EMPTYSTRING))
+		{
+			strName = "id_" + uniqueID(0);
+		}
+		setAttribute(AttributeName.ID, strName, null);
+		return strName;
+	}
+
+	/**
+	 * gets attribute ID
+	 * 
+	 * @return the attribute value
+	 */
+	public String getID()
+	{
+		return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+	}
+
+	/**
+	 * gets attribute ID
+	 * @param id 
+	 * 
+	 */
+	public void setID(String id)
+	{
+		setAttribute(AttributeName.ID, id, null);
+	}
+
+	/**
+	 * set the ID generation algorithm to include a date
+	 * 
+	 * @param bLong if true (default), the date and time is used to generate long IDs
+	 */
+	static public void setLongID(final boolean bLong)
+	{
+		bIDDate = bLong;
+	}
+
 	// //////////////////////////////////////////////////////////////////////////
-	// /
+	/**
+	 * UniqueID - create a unique id based on date and time + a counter - 6 digits are taken from id Normally this should only be used internally, @see
+	 * JDFElement.appendAnchor() for details.
+	 * 
+	 * @param id the starting id of the ID - should normally be 0 in order to increment
+	 * 
+	 * @return the ID string value
+	 * 
+	 * @default uniqueID(0)
+	 */
+	public synchronized static String uniqueID(int id)
+	{
+		if (id != 0)
+		{
+			if (id < 0)
+			{
+				id = m_lStoreID - id; // just in case someone accidentally uses too large random numbers
+			}
+			m_lStoreID = id % 1000000;
+		}
+		final String s = "00000" + Integer.toString(m_lStoreID);
+		m_lStoreID = ++m_lStoreID % 1000000;
+		// time + 6 digits (ID)
+		if (bIDDate)
+		{
+			final String date = dateFormatter.format(new Date());
+			return "_" + date + "_" + s.substring(s.length() - 6);
+		}
+		return "_" + s.substring(s.length() - 6);
+	}
 
 }

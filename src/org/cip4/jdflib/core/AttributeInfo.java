@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -170,7 +170,8 @@ public class AttributeInfo
 	/**
 	 * Updater
 	 * 
-	 * @param AtrInfoTable [] attrInfo_update: table with element-specific attribute info
+	 * @param attrInfo_update table with element-specific attribute info
+	 * @return 
 	 */
 	public AttributeInfo updateAdd(AtrInfoTable[] attrInfo_update)
 	{
@@ -543,14 +544,11 @@ public class AttributeInfo
 		 */
 		public static boolean isRange(EnumAttributeType test)
 		{
-			return EnumAttributeType.DateTimeRange.equals(test) || EnumAttributeType.DateTimeRangeList.equals(test)
-					|| EnumAttributeType.DurationRange.equals(test) || EnumAttributeType.DurationRangeList.equals(test)
-					|| EnumAttributeType.IntegerRange.equals(test) || EnumAttributeType.IntegerRangeList.equals(test)
-					|| EnumAttributeType.NameRange.equals(test) || EnumAttributeType.NameRangeList.equals(test)
-					|| EnumAttributeType.NumberRange.equals(test) || EnumAttributeType.NumberRangeList.equals(test)
-					|| EnumAttributeType.RectangleRange.equals(test)
-					|| EnumAttributeType.RectangleRangeList.equals(test) || EnumAttributeType.ShapeRange.equals(test)
-					|| EnumAttributeType.ShapeRangeList.equals(test) || EnumAttributeType.XYPairRange.equals(test)
+			return EnumAttributeType.DateTimeRange.equals(test) || EnumAttributeType.DateTimeRangeList.equals(test) || EnumAttributeType.DurationRange.equals(test)
+					|| EnumAttributeType.DurationRangeList.equals(test) || EnumAttributeType.IntegerRange.equals(test) || EnumAttributeType.IntegerRangeList.equals(test)
+					|| EnumAttributeType.NameRange.equals(test) || EnumAttributeType.NameRangeList.equals(test) || EnumAttributeType.NumberRange.equals(test)
+					|| EnumAttributeType.NumberRangeList.equals(test) || EnumAttributeType.RectangleRange.equals(test) || EnumAttributeType.RectangleRangeList.equals(test)
+					|| EnumAttributeType.ShapeRange.equals(test) || EnumAttributeType.ShapeRangeList.equals(test) || EnumAttributeType.XYPairRange.equals(test)
 					|| EnumAttributeType.XYPairRangeList.equals(test);
 		}
 
@@ -751,11 +749,9 @@ public class AttributeInfo
 		// by schema validating
 		// parser
 		{
-			return (attribute == null) || attribute.equals(getAttributeDefault(key))
-					|| EnumValidationLevel.isNoWarn(level);
+			return (attribute == null) || attribute.equals(getAttributeDefault(key)) || EnumValidationLevel.isNoWarn(level);
 		}
-		else if ((val == EnumAttributeValidity.Optional)
-				|| ((level != EnumValidationLevel.Complete) && (level != EnumValidationLevel.RecursiveComplete)))
+		else if ((val == EnumAttributeValidity.Optional) || ((level != EnumValidationLevel.Complete) && (level != EnumValidationLevel.RecursiveComplete)))
 		{
 			return (attribute == null) || validStringForType(attribute, typ, enu);
 		}
@@ -836,8 +832,7 @@ public class AttributeInfo
 				return true;
 			}
 
-			else if ((iType == AttributeInfo.EnumAttributeType.enumeration)
-					|| (iType == AttributeInfo.EnumAttributeType.JDFJMFVersion))
+			else if ((iType == AttributeInfo.EnumAttributeType.enumeration) || (iType == AttributeInfo.EnumAttributeType.JDFJMFVersion))
 			{
 				if (enu != null)
 				{

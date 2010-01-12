@@ -94,8 +94,6 @@ package org.cip4.jdflib.core;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -168,7 +166,6 @@ public class JDFElement extends KElement
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MUSTHONOREXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 	}
-	private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyMMdd_kkmmssSS");
 
 	/**
 	 * @see org.cip4.jdflib.core.KElement#getTheAttributeInfo()
@@ -2779,6 +2776,7 @@ public class JDFElement extends KElement
 	 * 
 	 * @default appendAnchor(null)
 	 */
+	@Override
 	public String appendAnchor(String strName)
 	{
 		if (hasAttribute(AttributeName.ID))
@@ -3212,50 +3210,6 @@ public class JDFElement extends KElement
 		}
 		// panic exit!
 		return idPrefix + uniqueID(0);
-	}
-
-	private static int m_lStoreID = 0;
-	private static boolean bIDDate = true;
-
-	/**
-	 * UniqueID - create a unique id based on date and time + a counter - 6 digits are taken from id Normally this should only be used internally, @see
-	 * JDFElement.appendAnchor() for details.
-	 * 
-	 * @param id the starting id of the ID - should normally be 0 in order to increment
-	 * 
-	 * @return the ID string value
-	 * 
-	 * @default uniqueID(0)
-	 */
-	public synchronized static String uniqueID(int id)
-	{
-		if (id != 0)
-		{
-			if (id < 0)
-			{
-				id = m_lStoreID - id; // just in case someone accidentally uses too large random numbers
-			}
-			m_lStoreID = id % 1000000;
-		}
-		final String s = "00000" + Integer.toString(m_lStoreID);
-		m_lStoreID = ++m_lStoreID % 1000000;
-		// time + 6 digits (ID)
-		if (bIDDate)
-		{
-			final String date = dateFormatter.format(new Date());
-			return "_" + date + "_" + s.substring(s.length() - 6);
-		}
-		return "_" + s.substring(s.length() - 6);
-	}
-
-	/**
-	 * set the ID generation algorithm to include a date
-	 * 
-	 * @param bLong if true (default), the date and time is used to generate long IDs
-	 */
-	static public void setLongID(final boolean bLong)
-	{
-		bIDDate = bLong;
 	}
 
 	/**
@@ -4866,17 +4820,6 @@ public class JDFElement extends KElement
 			}
 		}
 		return vDoneRefs;
-	}
-
-	/**
-	 * gets attribute ID
-	 * 
-	 * @return the attribute value
-	 * @tbd use getID of the subclasses that may have id
-	 */
-	public String getID()
-	{
-		return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
 	}
 
 	/**

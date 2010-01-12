@@ -190,13 +190,13 @@ public class JDFResource extends JDFElement
 	static
 	{
 		atrInfoTable_ID_Class_Optional[0] = new AtrInfoTable(AttributeName.ID, 0x44444433, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Optional[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable_ID_Class_Optional[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
 	}
 	private static AtrInfoTable[] atrInfoTable_ID_Class_Root = new AtrInfoTable[3];
 	static
 	{
 		atrInfoTable_ID_Class_Root[0] = new AtrInfoTable(AttributeName.ID, 0x33333333, AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable_ID_Class_Root[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable_ID_Class_Root[1] = new AtrInfoTable(AttributeName.CLASS, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumResourceClass.getEnum(0), null);
 		atrInfoTable_ID_Class_Root[2] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), null);
 	}
 
@@ -7577,6 +7577,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param value value to set the attribute to
 	 */
+	@Override
 	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value, null);

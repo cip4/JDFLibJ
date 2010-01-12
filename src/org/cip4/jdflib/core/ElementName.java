@@ -864,7 +864,6 @@ public final class ElementName
 	public static final String SPAWNED = "Spawned";
 	public static final String SPINEBRUSHING = "SpineBrushing";
 	public static final String SPINEFIBERROUGHING = "SpineFiberRoughing";
-	public static final String SPINEFIBREROUGHING = "SpineFibreRoughing";
 	public static final String SPINEGLUE = "SpineGlue";
 	public static final String SPINELEVELLING = "SpineLevelling";
 	public static final String SPINEMILLING = "SpineMilling";

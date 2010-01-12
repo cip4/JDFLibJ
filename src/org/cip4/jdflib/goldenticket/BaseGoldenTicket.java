@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -119,7 +119,7 @@ import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 
 /**
- * @author prosirai class that generates golden tickets based on ICS levels etc basegolden ticket should generally be the last in the cascade domain - mis - jmf
+ * @author rainer prosi class that generates golden tickets based on ICS levels etc basegolden ticket should generally be the last in the cascade domain - mis - jmf
  * - base
  * 
  * To generate a new golden ticket, follow these steps 1.) construct the appropriate domain subclass, e.g. MISCPGoldenTicket for mis to conventional print 2.)
@@ -265,14 +265,15 @@ public class BaseGoldenTicket
 		vParts = new VJDFAttributeMap(parent.vParts);
 		partIDKeys = new VString(parent.partIDKeys);
 		workStyle = parent.workStyle;
-		paperProductID = "paperID";
+		paperProductID = parent.paperProductID;
 
 		JDFElement.setLongID(false);
 		parent.addKid(this);
 	}
 
 	/**
-	 * @param icsLevel
+	 * @return 
+	 * 
 	 */
 	protected JDFNodeInfo initNodeInfo()
 	{
@@ -369,8 +370,7 @@ public class BaseGoldenTicket
 	public void makeReady()
 	{
 
-		if (bExpandGrayBox && EnumType.ProcessGroup.equals(theNode.getEnumType())
-				&& theNode.hasAttribute(AttributeName.TYPES))
+		if (bExpandGrayBox && EnumType.ProcessGroup.equals(theNode.getEnumType()) && theNode.hasAttribute(AttributeName.TYPES))
 		{
 			theExpandedNode = theNode.addCombined(theNode.getTypes());
 			final VElement resLinks = theNode.getResourceLinks(null);
@@ -466,8 +466,7 @@ public class BaseGoldenTicket
 			setActivePart(vvMap.get(i), i % partsForAvailable == 0);
 			for (int j = 0; j < vKids.size(); j++)
 			{
-				vKids.get(j).execute(vvMap.get(i), i % partsForAvailable == (partsForAvailable - 1), i
-						% partsForAvailable == 0);
+				vKids.get(j).execute(vvMap.get(i), i % partsForAvailable == (partsForAvailable - 1), i % partsForAvailable == 0);
 			}
 		}
 	}

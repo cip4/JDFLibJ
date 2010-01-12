@@ -120,6 +120,7 @@ import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
+import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDependencies;
@@ -149,7 +150,7 @@ public class XJDF20 extends BaseElementWalker
 	public XJDF20()
 	{
 		super(new BaseWalkerFactory());
-		JDFElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
+		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
 		init();
 	}
 
@@ -180,7 +181,11 @@ public class XJDF20 extends BaseElementWalker
 	 * set to update version stamps
 	 */
 	public boolean bUpdateVersion = true;
-	// private VJDFAttributeMap vPartMap = null;
+	/**
+	 * if true, spans are made to a simple attribute rather than retained as span
+	 */
+	public boolean bSpanAsAttribute = false;
+
 	/**
 	 * if true add an htmlcolor attribute to color elements for xsl display purposes
 	 */
@@ -620,6 +625,8 @@ public class XJDF20 extends BaseElementWalker
 			newResLeaf.removeAttribute(AttributeName.CLASS);
 			newResLeaf.removeAttribute(AttributeName.PARTUSAGE);
 			newResLeaf.removeAttribute(AttributeName.LOCKED);
+			newResLeaf.removeAttribute(AttributeName.NOOP);
+			newResLeaf.removeAttribute(AttributeName.SPAWNSTATUS);
 		}
 
 		/**
@@ -1221,7 +1228,7 @@ public class XJDF20 extends BaseElementWalker
 			else
 			{
 				final KElement list = prod.getParentNode_KElement();
-				list.appendAttribute("Roots", node.getID(), null, null, true);
+				list.appendAttribute("RootProducts", node.getID(), null, null, true);
 			}
 		}
 
@@ -1514,19 +1521,55 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+		 * depending on the value of bSpanAsAttribute either <br/>
+		 * 		invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+		 *      create an Attribute with the name of the span
 		 * @param xjdf
 		 * @return true if must continue
 		 */
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
-			final JDFSpanBase je = (JDFSpanBase) jdf;
-			je.inlineRefElements(null, null, false);
-			final KElement eNew = xjdf.appendElement(je.getDataType().getName());
-			eNew.setAttributes(jdf);
+			final KElement ret;
+			final JDFSpanBase span = (JDFSpanBase) jdf;
+
+			if (bSpanAsAttribute)
+			{
+				ret = spanToAttribute(span, xjdf);
+			}
+			else
+			{
+				ret = invertSpan(span, xjdf);
+			}
+			return ret;
+		}
+
+		/**
+		 * @param span
+		 * @param xjdf
+		 * @return
+		 */
+		private KElement spanToAttribute(JDFSpanBase span, KElement xjdf)
+		{
+			String name = span.getLocalName();
+			String val = span.guessActual();
+			if (val != null)
+				xjdf.setAttribute(name, val);
+			return null;
+		}
+
+		/**
+		 * @param span
+		 * @param xjdf
+		 * @return
+		 */
+		private KElement invertSpan(final JDFSpanBase span, final KElement xjdf)
+		{
+			span.inlineRefElements(null, null, false);
+			final KElement eNew = xjdf.appendElement(span.getDataType().getName());
+			eNew.setAttributes(span);
 			eNew.removeAttribute(AttributeName.DATATYPE);
-			eNew.setAttribute(AttributeName.NAME, je.getLocalName());
+			eNew.setAttribute(AttributeName.NAME, span.getLocalName());
 			return eNew;
 		}
 
@@ -1827,7 +1870,8 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return (toCheck instanceof JDFCuttingParams) || (toCheck instanceof JDFCreasingParams) || (toCheck instanceof JDFFoldingParams);
+			return (toCheck instanceof JDFColorControlStrip) || (toCheck instanceof JDFCuttingParams) || (toCheck instanceof JDFCreasingParams)
+					|| (toCheck instanceof JDFFoldingParams);
 		}
 
 		/**

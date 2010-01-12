@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -167,6 +167,17 @@ public class EnumUtil
 	public static String getName(final ValuedEnum en)
 	{
 		return en == null ? "null" : en.getName();
+	}
+
+	/**
+	 * null save convenience name getter
+	 * 
+	 * @param en the enum to get the name
+	 * @return
+	 */
+	public static String getEnumName(final ValuedEnum en)
+	{
+		return en == null ? null : StringUtil.token(en.getClass().getName(), -1, "$");
 	}
 
 	/**

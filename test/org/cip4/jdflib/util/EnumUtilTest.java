@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,7 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 
 /**
@@ -82,36 +83,48 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
  */
 public class EnumUtilTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
 	public void testMin()
 	{
-		assertEquals(EnumUtil.min(EnumResStatus.Incomplete,
-				EnumResStatus.Available), EnumResStatus.Incomplete);
+		assertEquals(EnumUtil.min(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Incomplete);
 	}
 
+	/**
+	 * 
+	 */
 	public void testMax()
 	{
-		assertEquals(EnumUtil.max(EnumResStatus.Incomplete,
-				EnumResStatus.Available), EnumResStatus.Available);
+		assertEquals(EnumUtil.max(EnumResStatus.Incomplete, EnumResStatus.Available), EnumResStatus.Available);
 	}
 
+	/**
+	 * 
+	 */
 	public void testLessEq()
 	{
-		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete,
-				EnumResStatus.Incomplete));
-		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete,
-				EnumResStatus.Available));
-		assertFalse(EnumUtil.aLessEqualsThanB(EnumResStatus.Available,
-				EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessEqualsThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
+		assertFalse(EnumUtil.aLessEqualsThanB(EnumResStatus.Available, EnumResStatus.Incomplete));
 	}
 
+	/**
+	 * 
+	 */
 	public void testLess()
 	{
-		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Incomplete,
-				EnumResStatus.Incomplete));
-		assertTrue(EnumUtil.aLessThanB(EnumResStatus.Incomplete,
-				EnumResStatus.Available));
-		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Available,
-				EnumResStatus.Incomplete));
+		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Incomplete));
+		assertTrue(EnumUtil.aLessThanB(EnumResStatus.Incomplete, EnumResStatus.Available));
+		assertFalse(EnumUtil.aLessThanB(EnumResStatus.Available, EnumResStatus.Incomplete));
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetEnumName()
+	{
+		assertEquals(EnumUtil.getEnumName(EnumAnchor.BottomRight), "EnumAnchor");
 	}
 
 }

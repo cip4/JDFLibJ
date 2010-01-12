@@ -95,7 +95,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
+import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.MyInteger;

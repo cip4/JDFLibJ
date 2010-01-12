@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,9 @@ import org.cip4.jdflib.util.FileUtil;
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * June 3, 2009
+ * @deprecated - schema is created with @see XJDFSchemaCreator
  */
+@Deprecated
 public class XJDFSchemaWalker extends BaseElementWalker
 {
 	protected HashMap<String, KElement> newSchemaMap;

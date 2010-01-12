@@ -84,7 +84,7 @@ package org.cip4.jdflib.jmf;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoNewJDFQuParams;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
-import org.cip4.jdflib.node.JDFNode.NodeIdentifier;
+import org.cip4.jdflib.node.NodeIdentifier;
 
 /**
  *
