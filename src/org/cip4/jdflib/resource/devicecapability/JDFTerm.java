@@ -88,8 +88,8 @@ public abstract class JDFTerm extends JDFElement
 {
 
 	/**
-     * 
-     */
+	 * 
+	 */
 	private static final long serialVersionUID = 6785589345368148259L;
 
 	/**
@@ -99,8 +99,7 @@ public abstract class JDFTerm extends JDFElement
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTerm(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFTerm(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -113,8 +112,7 @@ public abstract class JDFTerm extends JDFElement
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -128,8 +126,7 @@ public abstract class JDFTerm extends JDFElement
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFTerm(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -144,10 +141,11 @@ public abstract class JDFTerm extends JDFElement
 	 *            the report to generate; set to <code>null</code> if no report
 	 *            is requested
 	 * @return boolean - true, if boolean expression (child Term element)
-	 *         evaluates to “true”
+	 *         evaluates to true
 	 */
 	public abstract boolean fitsJDF(KElement jdf, KElement reportRoot); // const
-																		// JDFNode
+
+	// JDFNode
 
 	/**
 	 * checks the xpath whether this term applies
@@ -161,7 +159,7 @@ public abstract class JDFTerm extends JDFElement
 	/**
 	 * Tests whether this Term is compatible with the attribute map
 	 * <code>m</code> (and, or, xor, not, Evaluation, TestRef).<br>
-	 * To determine the state of Term tests Evaluations that “not” consists of,
+	 * To determine the state of Term tests Evaluations that ï¿½notï¿½ consists of,
 	 * this method checks if attribute map <code>m</code> has a key. specified
 	 * by Evaluation/BasicPreflightTest/@Name If <code>m</code> has such key, it
 	 * checks whether the value of <code>m#</code> fits the testlists specified
@@ -169,7 +167,7 @@ public abstract class JDFTerm extends JDFElement
 	 * 
 	 * @param m
 	 *            key-value pair attribute map
-	 * @return boolean - true, if boolean “not” expression evaluates to “true”
+	 * @return boolean - true, if boolean ï¿½notï¿½ expression evaluates to ï¿½trueï¿½
 	 */
 	public abstract boolean fitsMap(JDFAttributeMap m);
 
@@ -221,34 +219,20 @@ public abstract class JDFTerm extends JDFElement
 		public static final EnumTerm or = new EnumTerm(ElementName.OR);
 		public static final EnumTerm not = new EnumTerm(ElementName.NOT);
 		public static final EnumTerm xor = new EnumTerm(ElementName.XOR);
-		public static final EnumTerm BooleanEvaluation = new EnumTerm(
-				ElementName.BOOLEANEVALUATION);
-		public static final EnumTerm DateTimeEvaluation = new EnumTerm(
-				ElementName.DATETIMEEVALUATION);
-		public static final EnumTerm DurationEvaluation = new EnumTerm(
-				ElementName.DURATIONEVALUATION);
-		public static final EnumTerm EnumerationEvaluation = new EnumTerm(
-				ElementName.ENUMERATIONEVALUATION);
-		public static final EnumTerm IntegerEvaluation = new EnumTerm(
-				ElementName.INTEGEREVALUATION);
-		public static final EnumTerm IsPresentEvaluation = new EnumTerm(
-				ElementName.ISPRESENTEVALUATION);
-		public static final EnumTerm MatrixEvaluation = new EnumTerm(
-				ElementName.MATRIXEVALUATION);
-		public static final EnumTerm NameEvaluation = new EnumTerm(
-				ElementName.NAMEEVALUATION);
-		public static final EnumTerm NumberEvaluation = new EnumTerm(
-				ElementName.NUMBEREVALUATION);
-		public static final EnumTerm PDDFPathEvaluation = new EnumTerm(
-				ElementName.PDFPATHEVALUATION);
-		public static final EnumTerm RectangleEvaluation = new EnumTerm(
-				ElementName.RECTANGLEEVALUATION);
-		public static final EnumTerm ShapeEvaluation = new EnumTerm(
-				ElementName.SHAPEEVALUATION);
-		public static final EnumTerm StringEvaluation = new EnumTerm(
-				ElementName.STRINGEVALUATION);
-		public static final EnumTerm XYPairEvaluation = new EnumTerm(
-				ElementName.XYPAIREVALUATION);
+		public static final EnumTerm BooleanEvaluation = new EnumTerm(ElementName.BOOLEANEVALUATION);
+		public static final EnumTerm DateTimeEvaluation = new EnumTerm(ElementName.DATETIMEEVALUATION);
+		public static final EnumTerm DurationEvaluation = new EnumTerm(ElementName.DURATIONEVALUATION);
+		public static final EnumTerm EnumerationEvaluation = new EnumTerm(ElementName.ENUMERATIONEVALUATION);
+		public static final EnumTerm IntegerEvaluation = new EnumTerm(ElementName.INTEGEREVALUATION);
+		public static final EnumTerm IsPresentEvaluation = new EnumTerm(ElementName.ISPRESENTEVALUATION);
+		public static final EnumTerm MatrixEvaluation = new EnumTerm(ElementName.MATRIXEVALUATION);
+		public static final EnumTerm NameEvaluation = new EnumTerm(ElementName.NAMEEVALUATION);
+		public static final EnumTerm NumberEvaluation = new EnumTerm(ElementName.NUMBEREVALUATION);
+		public static final EnumTerm PDDFPathEvaluation = new EnumTerm(ElementName.PDFPATHEVALUATION);
+		public static final EnumTerm RectangleEvaluation = new EnumTerm(ElementName.RECTANGLEEVALUATION);
+		public static final EnumTerm ShapeEvaluation = new EnumTerm(ElementName.SHAPEEVALUATION);
+		public static final EnumTerm StringEvaluation = new EnumTerm(ElementName.STRINGEVALUATION);
+		public static final EnumTerm XYPairEvaluation = new EnumTerm(ElementName.XYPAIREVALUATION);
 		public static final EnumTerm TestRef = new EnumTerm(ElementName.TESTREF);
 	}
 
@@ -259,12 +243,10 @@ public abstract class JDFTerm extends JDFElement
 	 */
 	IDeviceCapable getDeviceCapable()
 	{
-		IDeviceCapable deviceCap = (IDeviceCapable) getDeepParent(
-				ElementName.DEVICECAP, 0);
+		IDeviceCapable deviceCap = (IDeviceCapable) getDeepParent(ElementName.DEVICECAP, 0);
 		if (deviceCap != null)
 			return deviceCap;
-		deviceCap = (IDeviceCapable) getDeepParent(ElementName.MESSAGESERVICE,
-				0);
+		deviceCap = (IDeviceCapable) getDeepParent(ElementName.MESSAGESERVICE, 0);
 		return deviceCap;
 	}
 

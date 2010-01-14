@@ -699,6 +699,9 @@ public class MimeUtil extends UrlUtil
 	 */
 	public static boolean isMimeMultiPart(String contentType)
 	{
-		return MULTIPART_RELATED.equalsIgnoreCase(contentType);
+		contentType = StringUtil.token(contentType, 0, ";");
+		if (contentType != null)
+			contentType = contentType.trim();
+		return MULTIPART_RELATED.equalsIgnoreCase(StringUtil.token(contentType, 0, ";"));
 	}
 }

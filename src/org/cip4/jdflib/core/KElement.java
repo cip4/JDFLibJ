@@ -128,7 +128,7 @@ import org.w3c.dom.Text;
  * @author CIP4
  * @see JDFElement for the first element class that is aware of JDF
  */
-public class KElement extends ElementNSImpl
+public class KElement extends ElementNSImpl implements Element
 {
 	private static final long serialVersionUID = 1L;
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
