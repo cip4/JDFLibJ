@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -128,8 +128,8 @@ import org.cip4.jdflib.util.VectorMap;
 public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 {
 	/**
-     * 
-     */
+	 * 
+	 */
 	public static final String FITS_TYPE = "FitsType";
 	private static final long serialVersionUID = 1L;
 	private boolean ignoreExtensions = false;
@@ -645,7 +645,8 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 					v.add(testRoot);
 				}
 			}
-			else if (combMethod.equals(EnumCombinedMethod.GrayBox) || combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("ProcessGroup") && !testRoot.isGroupNode())
+			else if (combMethod.equals(EnumCombinedMethod.GrayBox) || combMethod.equals(EnumCombinedMethod.CombinedProcessGroup) && typeNode.equals("ProcessGroup")
+					&& !testRoot.isGroupNode())
 			{
 				if (fitsTypes(testRoot.getAllTypes(), true))
 				{
@@ -822,8 +823,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 	 * @return boolean - true if invalid devcaps were found
 	 * @throws JDFException if DeviceCap is invalid: has a wrong attribute Context value
 	 */
-	private static boolean invalidDevCaps(final KElement parent, final KElement jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentReport,
-			final boolean ignoreExtensions)
+	private static boolean invalidDevCaps(final KElement parent, final KElement jdfRoot, final EnumFitsValue testlists, final EnumValidationLevel level, final KElement parentReport, final boolean ignoreExtensions)
 	{
 		final KElement mrp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "MissingResources" : "MissingElements");
 		final KElement irp = parentReport.appendElement((jdfRoot instanceof JDFNode) ? "InvalidResources" : "InvalidElements");
@@ -998,7 +998,7 @@ public class JDFDeviceCap extends JDFAutoDeviceCap implements IDeviceCapable
 
 					final KElement ar = root.appendElement("ActionReport");
 					if (test.fitsJDF(e, ar)) // If the Test referenced by
-					// TestRef evaluates to “true”
+					// TestRef evaluates to true
 					// the combination
 					{ // of processes and attribute values described is not
 						// allowed

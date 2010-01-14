@@ -94,6 +94,8 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 public class ElementInfo
 {
 
+	public static HashMap<String, ElementInfo> fixedMap = new HashMap<String, ElementInfo>();
+
 	HashMap elementInfoTable = new HashMap();
 	private EnumVersion version = null;
 

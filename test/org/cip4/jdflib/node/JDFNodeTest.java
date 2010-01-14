@@ -1908,6 +1908,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(r, rAdd);
 		final JDFResource out = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		assertEquals("null is valid wildcard", out, n.getResource(null, EnumUsage.Output, null, 0));
+		final JDFResource ns = n.addResource("foo:bar", EnumResourceClass.Parameter, EnumUsage.Output, null, null, "www.foo.com", null);
+		assertEquals("qualified names", ns, n.getResource("foo:bar", EnumUsage.Output, null, 0));
+		assertEquals("unqualified names", ns, n.getResource("bar", EnumUsage.Output, null, 0));
 	}
 
 	// ////////////////////////////////////////////////////////////////////////

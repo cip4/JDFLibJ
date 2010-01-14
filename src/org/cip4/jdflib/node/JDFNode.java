@@ -227,7 +227,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	static
 	{
 		atrInfoTable_root[0] = new AtrInfoTable(AttributeName.VERSION, 0x22222222, AttributeInfo.EnumAttributeType.JDFJMFVersion, EnumVersion.getEnum(0), null);
-		atrInfoTable_root[1] = new AtrInfoTable(AttributeName.XMLNS, 0x22222221, AttributeInfo.EnumAttributeType.URI, null, null);
+		atrInfoTable_root[1] = new AtrInfoTable(AttributeName.XMLNS, 0x33333331, AttributeInfo.EnumAttributeType.URI, null, null);
 	}
 
 	private static AtrInfoTable[] atrInfoTable_Combined = new AtrInfoTable[1];
@@ -8082,6 +8082,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * 
 	 * @param value the value to set the attribute to
 	 */
+	@Override
 	public void setID(final String value)
 	{
 		setAttribute(AttributeName.ID, value);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1416,18 +1416,16 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @throws JDFException if GetResourceRoot ran into the JDF node while searching
 	 */
-	public static JDFResource getResourceRoot(final KElement elem)
+	public static JDFResource getResourceRoot(KElement elem)
 	{
-		KElement elemLocal = elem;
-
-		if (elemLocal == null)
+		if (elem == null)
 		{
 			return null;
 		}
 
-		elemLocal = elemLocal.getDeepParent(elemLocal.getLocalName(), Integer.MAX_VALUE);
+		elem = elem.getDeepParent(elem.getLocalName(), Integer.MAX_VALUE);
 
-		final KElement parentNode = elemLocal.getParentNode_KElement();
+		final KElement parentNode = elem.getParentNode_KElement();
 		if (parentNode != null)
 		{
 			final String parentName = parentNode.getLocalName();
@@ -1442,31 +1440,30 @@ public class JDFResource extends JDFElement
 					}
 				}
 
-				return (JDFResource) ((elemLocal instanceof JDFResource) ? elemLocal : null);
+				return (JDFResource) ((elem instanceof JDFResource) ? elem : null);
 			}
 
 			if ((parentNode instanceof JDFNode) || (parentNode instanceof JDFJMF))
 			{
-				if ((elemLocal instanceof JDFNodeInfo) || (elemLocal instanceof JDFCustomerInfo))
+				if ((elem instanceof JDFNodeInfo) || (elem instanceof JDFCustomerInfo))
 				{
-					return (JDFResource) elemLocal;
+					return (JDFResource) elem;
 				}
 
 				return null; // not a resource
 			}
 
-			if ((elemLocal instanceof JDFResource) && !(parentNode instanceof JDFResource))
+			if ((elem instanceof JDFResource) && !(parentNode instanceof JDFResource))
 			{
-				return (JDFResource) elemLocal;
+				return (JDFResource) elem;
 			}
 
 			return getResourceRoot(parentNode);
 		}
 
-		if (elemLocal instanceof JDFResource)// parentNode == null, this is a
-		// standalone resource
+		if (elem instanceof JDFResource)// parentNode == null, this is a standalone resource
 		{
-			return (JDFResource) elemLocal;
+			return (JDFResource) elem;
 		}
 
 		return null;

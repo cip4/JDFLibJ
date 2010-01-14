@@ -12,6 +12,8 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSeparationSpec;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.ElementInfo;
 import org.w3c.dom.DOMException;
 
 public class JDFSeparationSpec extends JDFAutoSeparationSpec
@@ -25,8 +27,7 @@ public class JDFSeparationSpec extends JDFAutoSeparationSpec
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSeparationSpec(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFSeparationSpec(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -39,8 +40,7 @@ public class JDFSeparationSpec extends JDFAutoSeparationSpec
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFSeparationSpec(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFSeparationSpec(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -54,9 +54,7 @@ public class JDFSeparationSpec extends JDFAutoSeparationSpec
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFSeparationSpec(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFSeparationSpec(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -66,5 +64,28 @@ public class JDFSeparationSpec extends JDFAutoSeparationSpec
 	{
 		return "JDFSeparationSpec[  --> " + super.toString() + " ]";
 	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		AttributeInfo ai = AttributeInfo.fixedMap.get("JDFSeparationSpec");
+		if (ai != null)
+			return ai;
+		ai = super.getTheAttributeInfo();
+		AttributeInfo.fixedMap.put("JDFSeparationSpec", ai);
+		return ai;
+	}
+
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		ElementInfo ai = ElementInfo.fixedMap.get("JDFSeparationSpec");
+		if (ai != null)
+			return ai;
+		ai = super.getTheElementInfo();
+		ElementInfo.fixedMap.put("JDFSeparationSpec", ai);
+		return ai;
+	}
+
 } // class JDFIDPLayout
 // ==========================================================================

@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -121,17 +121,26 @@ public class JDFPartAmount extends JDFResourceLink
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
-		final AttributeInfo ai = super.getTheAttributeInfo().updateReplace((AtrInfoTable) null);
+		AttributeInfo ai = AttributeInfo.fixedMap.get("PartAmount");
+		if (ai != null)
+			return ai;
+
+		ai = super.getTheAttributeInfo().updateReplace((AtrInfoTable) null);
 		ai.updateRemove(atrInfoTable_ToRemove);
+		AttributeInfo.fixedMap.put("PartAmount", ai);
 		return ai;
 	}
 
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
-		final ElementInfo eiRL = super.getTheElementInfo();
+		ElementInfo eiRL = ElementInfo.fixedMap.get("PartAmount");
+		if (eiRL != null)
+			return eiRL;
+		eiRL = super.getTheElementInfo();
 		eiRL.updateRemove(elemInfoTable_ToRemove);
 		eiRL.updateReplace(elemInfoTable_ToReplace);
+		ElementInfo.fixedMap.put("PartAmount", eiRL);
 		return eiRL;
 
 	}

@@ -83,6 +83,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -323,6 +324,36 @@ public class JDFPart extends JDFAutoPart
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoPart#getTheAttributeInfo()
+	 * @return
+	*/
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		AttributeInfo ai = AttributeInfo.fixedMap.get("JDFPart");
+		if (ai != null)
+			return ai;
+		ai = super.getTheAttributeInfo();
+		AttributeInfo.fixedMap.put("JDFPart", ai);
+		return ai;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#getTheElementInfo()
+	 * @return
+	*/
+	@Override
+	protected ElementInfo getTheElementInfo()
+	{
+		ElementInfo ai = ElementInfo.fixedMap.get("JDFPart");
+		if (ai != null)
+			return ai;
+		ai = super.getTheElementInfo();
+		ElementInfo.fixedMap.put("JDFPart", ai);
+		return ai;
 	}
 
 } // class JDFPart

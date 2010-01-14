@@ -338,7 +338,7 @@ public class VString extends Vector<String>
 	 */
 	public void appendUnique(final VString v)
 	{
-		if (v == null)
+		if (v == null || v.size() == 0)
 		{
 			return;
 		}

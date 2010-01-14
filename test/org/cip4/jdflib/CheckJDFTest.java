@@ -187,12 +187,12 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 		final CheckJDF checker = new CheckJDF();
 
-		final List args = new ArrayList();
+		final List<String> args = new ArrayList<String>();
 		args.add(checkSavePath);
 		args.add("-x" + checkSaveLocator);
 		args.add("-L" + schemaLocator);
 		args.add("-qcv");
-		final String[] commandLineArgs = (String[]) args.toArray(new String[args.size()]);
+		final String[] commandLineArgs = args.toArray(new String[args.size()]);
 
 		String logStr = "";
 		for (int i = 0; i < commandLineArgs.length; i++)
@@ -393,7 +393,7 @@ public class CheckJDFTest extends JDFTestCaseBase
 		checkJDF.bQuiet = true;
 		checkJDF.level = EnumValidationLevel.Incomplete;
 		final File foo = FileUtil.getCreateDirectory(sm_dirTestSchema);
-		
+
 		// final File foo = new File(sm_dirTestSchema);
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
 		final File jdfxsd = new File(sm_dirTestSchema + "JDF.xsd");
@@ -406,8 +406,8 @@ public class CheckJDFTest extends JDFTestCaseBase
 		prev.setURL("File://foo.bar");
 		checkJDF.setIgnorePrivate(false);
 		final JDFRunList rl = (JDFRunList) n.addResource("RunList", null, EnumUsage.Input, null, null, null, null);
-//		final JDFPreview pv2 = 
-			rl.appendPreview();
+		//		final JDFPreview pv2 = 
+		rl.appendPreview();
 
 		final JDFPreview pv3 = rl.appendPreview();
 		pv3.makeRootResource(null, null, true);

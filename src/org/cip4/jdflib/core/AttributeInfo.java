@@ -112,15 +112,15 @@ import org.cip4.jdflib.util.UrlUtil;
 public class AttributeInfo
 {
 
-	HashMap attribInfoTable = new HashMap();
+	public static HashMap<String, AttributeInfo> fixedMap = new HashMap<String, AttributeInfo>();
+
+	HashMap<String, AtrInfo> attribInfoTable = new HashMap<String, AtrInfo>();
 	private EnumVersion version = null;
 
 	/**
 	 * Constructor
 	 * 
-	 * @param AttributeInfo attrInfo_super: corresponding attrib info of super; if null: start from scratch, otherwise
-	 *            initialize from other AttributeInfo
-	 * @param AtrInfoTable [] attrInfo_own: table with element-specific attribute info
+		 * @param attrInfo_own : table with element-specific attribute info
 	 */
 	protected AttributeInfo(AtrInfoTable[] attrInfo_own)
 	{
@@ -132,9 +132,9 @@ public class AttributeInfo
 	/**
 	 * Constructor
 	 * 
-	 * @param AttributeInfo attrInfo_super: corresponding attrib info of super; if null: start from scratch, otherwise
+	 * @param attrInfo_super corresponding attrib info of super; if null: start from scratch, otherwise
 	 *            initialize from other AttributeInfo
-	 * @param AtrInfoTable [] attrInfo_own: table with element-specific attribute info
+	 * @param attrInfo_own table with element-specific attribute info
 	 * @deprecated
 	 */
 	@Deprecated
@@ -143,7 +143,7 @@ public class AttributeInfo
 		// use AttributeInfo of super as a starting point
 		if (attrInfo_super != null)
 		{
-			attribInfoTable = new HashMap(attrInfo_super.attribInfoTable);
+			attribInfoTable = new HashMap<String, AtrInfo>(attrInfo_super.attribInfoTable);
 			version = attrInfo_super.version;
 		}
 
@@ -156,7 +156,8 @@ public class AttributeInfo
 	/**
 	 * Updater
 	 * 
-	 * @param AtrInfoTable [] attrInfo_update: table with element-specific attribute info
+	 * @param attrInfo_update table with element-specific attribute info
+	 * @return 
 	 */
 	public AttributeInfo updateAdd(AtrInfoTable attrInfo_update)
 	{
@@ -188,7 +189,8 @@ public class AttributeInfo
 	/**
 	 * Updater
 	 * 
-	 * @param AtrInfoTable [] attrInfo_update: table with element-specific attribute info
+	 * @param attrInfo_update table with element-specific attribute info
+	 * @return 
 	 */
 	public AttributeInfo updateRemove(AtrInfoTable attrInfo_update)
 	{
@@ -205,7 +207,8 @@ public class AttributeInfo
 	/**
 	 * Updater
 	 * 
-	 * @param AtrInfoTable [] attrInfo_update: table with element-specific attribute info to remove from attribInfoTable
+	 * @param attrInfo_update table with element-specific attribute info to remove from attribInfoTable
+	 * @return 
 	 */
 	public AttributeInfo updateRemove(AtrInfoTable[] attrInfo_update)
 	{
@@ -222,6 +225,10 @@ public class AttributeInfo
 		return this;
 	}
 
+	/**
+	 * @param attrInfo_update
+	 * @return
+	 */
 	public AttributeInfo updateReplace(AtrInfoTable attrInfo_update)
 	{
 		if (attrInfo_update != null)
@@ -231,6 +238,10 @@ public class AttributeInfo
 		return this;
 	}
 
+	/**
+	 * @param attrInfo_update
+	 * @return
+	 */
 	public AttributeInfo updateReplace(AtrInfoTable[] attrInfo_update)
 	{
 		if (attrInfo_update != null)
@@ -247,7 +258,7 @@ public class AttributeInfo
 	/**
 	 * Returns a list of attributes matching the requested validity for the specified JDF version.
 	 * 
-	 * @param EnumAttributeValidity attrValidity: requested validity
+	 * @param attrValidity requested validity
 	 * @return VString: list of strings containing the names of the matching attributes
 	 */
 	public VString conformingAttribs(EnumAttributeValidity attrValidity)
@@ -261,7 +272,7 @@ public class AttributeInfo
 		while (iter.hasNext())
 		{
 			String theKey = iter.next();
-			AtrInfo ai = (AtrInfo) attribInfoTable.get(theKey);
+			AtrInfo ai = attribInfoTable.get(theKey);
 			if (bOK)
 			{
 				matchingAttribs.add(theKey);
@@ -304,7 +315,7 @@ public class AttributeInfo
 		while (iter.hasNext())
 		{
 			String theKey = iter.next();
-			AtrInfo ai = (AtrInfo) attribInfoTable.get(theKey);
+			AtrInfo ai = attribInfoTable.get(theKey);
 			long l2 = JDFVersions.getTheMask(version);
 			long v2 = JDFVersions.getTheOffset(version);
 			final EnumAttributeValidity versionVal = EnumAttributeValidity.getEnum((int) ((ai.getAtrValidityStatus() & l2) >> v2));
@@ -323,18 +334,18 @@ public class AttributeInfo
 	/**
 	 * Returns true if there is at least one attribute matching the requested validity for the specified JDF version.
 	 * 
-	 * @param EnumAttributeValidity attrValidity: requested validity
+	 * @param  attrValidity requested validity
 	 * @return boolean: true if at least one attribute matches the requested validity
 	 */
 	public boolean hasConformingAttrib(EnumAttributeValidity attrValidity)
 	{
-		Iterator<AtrInfo> iter = attribInfoTable.keySet().iterator();
+		Iterator<AtrInfo> iter = attribInfoTable.values().iterator();
 
 		long l2 = JDFVersions.getTheMask(version);
 		long v2 = JDFVersions.getTheOffset(version);
 		while (iter.hasNext())
 		{
-			AtrInfo ai = (AtrInfo) attribInfoTable.get(iter.next());
+			AtrInfo ai = attribInfoTable.get(iter.next());
 			if ((ai.getAtrValidityStatus() & l2) == ((long) attrValidity.getValue() << v2))
 			{
 				return true;
@@ -412,14 +423,15 @@ public class AttributeInfo
 	 * Returns the type of the given attribute for the latest JDF version. Attribute types of previous versions have to
 	 * be provided by attribute-specific functions (if necessary).
 	 * 
-	 * @param String attributeName: name of the attribute
+	 * @param attributeName name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
 	public EnumAttributeType getAttributeType(String attributeName)
 	{
-		if (attribInfoTable.containsKey(attributeName))
+		AtrInfo atrInfo = attribInfoTable.get(attributeName);
+		if (atrInfo != null)
 		{
-			return ((AtrInfo) attribInfoTable.get(attributeName)).getAtrType();
+			return atrInfo.getAtrType();
 		}
 		return null;
 	}
@@ -428,14 +440,15 @@ public class AttributeInfo
 	 * Returns the validity of the given attribute for the latest JDF version. Attribute types of previous versions have
 	 * to be provided by attribute-specific functions (if necessary).
 	 * 
-	 * @param String attributeName: name of the attribute
+	 * @param  attributeName name of the attribute
 	 * @return EnumAttributeType: the attribute's type
 	 */
 	public EnumAttributeValidity getAttributeValidity(String attributeName)
 	{
-		if (attribInfoTable.containsKey(attributeName))
+		AtrInfo atrInfo = attribInfoTable.get(attributeName);
+		if (atrInfo != null)
 		{
-			long l = ((AtrInfo) attribInfoTable.get(attributeName)).getAtrValidityStatus();
+			long l = atrInfo.getAtrValidityStatus();
 			long l2 = JDFVersions.getTheMask(version);
 			long v2 = JDFVersions.getTheOffset(version);
 			l = (l & l2) >> v2;
@@ -453,9 +466,10 @@ public class AttributeInfo
 	 */
 	public ValuedEnum getAttributeEnum(String attributeName)
 	{
-		if (attribInfoTable.containsKey(attributeName))
+		AtrInfo atrInfo = attribInfoTable.get(attributeName);
+		if (atrInfo != null)
 		{
-			return ((AtrInfo) attribInfoTable.get(attributeName)).getEnumEnum();
+			return atrInfo.getEnumEnum();
 		}
 		return null;
 	}
@@ -468,9 +482,10 @@ public class AttributeInfo
 	 */
 	public String getAttributeDefault(String attributeName)
 	{
-		if (attribInfoTable.containsKey(attributeName))
+		AtrInfo atrInfo = attribInfoTable.get(attributeName);
+		if (atrInfo != null)
 		{
-			return ((AtrInfo) attribInfoTable.get(attributeName)).getAtrDefault();
+			return atrInfo.getAtrDefault();
 		}
 		return null;
 	}
@@ -710,7 +725,7 @@ public class AttributeInfo
 	@Deprecated
 	public EnumAttributeType getAtrType(String attributeName)
 	{
-		AtrInfo ai = (AtrInfo) attribInfoTable.get(attributeName);
+		AtrInfo ai = attribInfoTable.get(attributeName);
 		if (ai == null)
 		{
 			return null;
@@ -766,6 +781,13 @@ public class AttributeInfo
 	// //////////////////////////////////////////////////////////////////////////
 	// /////////////
 
+	/**
+	 * @param val 
+	 * @param iType 
+	 * @param enu 
+	 * @return 
+	 * 
+	 */
 	public static boolean validStringForType(String val, EnumAttributeType iType, ValuedEnum enu)
 	{
 		if (val == null)
@@ -1041,7 +1063,7 @@ public class AttributeInfo
 	{
 		if (attribInfoTable.containsKey(attributeName))
 		{
-			return ((AtrInfo) attribInfoTable.get(attributeName)).getFirstVersion();
+			return (attribInfoTable.get(attributeName)).getFirstVersion();
 		}
 		return null;
 	}
@@ -1056,7 +1078,7 @@ public class AttributeInfo
 	{
 		if (attribInfoTable.containsKey(attributeName))
 		{
-			return ((AtrInfo) attribInfoTable.get(attributeName)).getLastVersion();
+			return (attribInfoTable.get(attributeName)).getLastVersion();
 		}
 		return null;
 	}

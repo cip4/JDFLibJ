@@ -394,13 +394,18 @@ public class JDFValidator
 			return; // TODO more
 		}
 		final JDFElement jdfElement = (JDFElement) kElement;
+		bIsValid = isValidElement(bIsValid, jdfElement);
 
 		final VString privateAttributes = new VString(jdfElement.getUnknownAttributes(false, 9999999));
-		final VString unknownAttributes = new VString(jdfElement.getUnknownAttributes(true, 9999999));
+		VString unknownAttributes = new VString();
+		if (!bIsValid)
+			unknownAttributes = jdfElement.getUnknownAttributes(true, 9999999);
 		privateAttributes.removeStrings(unknownAttributes, Integer.MAX_VALUE);
 
 		final VString privateElements = new VString(jdfElement.getUnknownElements(false, 9999999));
-		final VString unknownElements = new VString(jdfElement.getUnknownElements(true, 9999999));
+		VString unknownElements = new VString();
+		if (!bIsValid)
+			unknownElements = jdfElement.getUnknownElements(true, 9999999);
 		privateElements.removeStrings(unknownElements, Integer.MAX_VALUE);
 
 		if (bPrintNameSpace)
@@ -431,7 +436,6 @@ public class JDFValidator
 			printURL(kElement, indent, testElement);
 		}
 
-		bIsValid = isValidElement(bIsValid, jdfElement);
 		final boolean bValidID = id == null || id.equals(JDFConstants.EMPTYSTRING) ? true : !vBadID.contains(id);
 		boolean bUnknownElem = false;
 

@@ -224,14 +224,40 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
-		final AttributeInfo ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
-		if (isPhysical() || getLocalName().equals(ElementName.PARTAMOUNT))
+		AttributeInfo ai = null;
+		if (getLocalName().equals(ElementName.PARTAMOUNT))
 		{
-			ai.updateAdd(atrInfoTable_Physical);
+			ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
+			ai = ai.updateAdd(atrInfoTable_Physical);
+		}
+		else if (isPhysical())
+		{
+			ai = AttributeInfo.fixedMap.get("LinkPhysical");
+			if (ai != null)
+				return ai;
+
+			ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
+			ai = ai.updateAdd(atrInfoTable_Physical);
+			AttributeInfo.fixedMap.put("LinkPhysical", ai);
 		}
 		else if (isImplementation() || getLocalName().equals(ElementName.PARTAMOUNT))
 		{
+			ai = AttributeInfo.fixedMap.get("LinkImplement");
+			if (ai != null)
+				return ai;
+
+			ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
 			ai.updateAdd(atrInfoTable_Implement);
+			AttributeInfo.fixedMap.put("LinkImplement", ai);
+		}
+		else
+		{
+			ai = AttributeInfo.fixedMap.get("LinkAbstract");
+			if (ai != null)
+				return ai;
+
+			ai = super.getTheAttributeInfo().updateReplace(atrInfoTable_Abstract);
+			AttributeInfo.fixedMap.put("LinkAbstract", ai);
 		}
 		return ai;
 	}
@@ -254,12 +280,32 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	@Override
 	protected ElementInfo getTheElementInfo()
 	{
-		final ElementInfo ei = super.getTheElementInfo().updateReplace(elemInfoTable);
-		if (this.isPhysical())
+		ElementInfo ai = null;
+		if (getLocalName().equals(ElementName.PARTAMOUNT))
 		{
-			ei.updateAdd(physInfoTable);
+			ai = super.getTheElementInfo().updateReplace(elemInfoTable);
+			ai = ai.updateAdd(physInfoTable);
 		}
-		return ei;
+		else if (isPhysical())
+		{
+			ai = ElementInfo.fixedMap.get("LinkPhysical");
+			if (ai != null)
+				return ai;
+
+			ai = super.getTheElementInfo().updateReplace(elemInfoTable);
+			ai = ai.updateAdd(physInfoTable);
+			ElementInfo.fixedMap.put("LinkPhysical", ai);
+		}
+		else
+		{
+			ai = ElementInfo.fixedMap.get("LinkAbstract");
+			if (ai != null)
+				return ai;
+
+			ai = super.getTheElementInfo().updateReplace(elemInfoTable);
+			ElementInfo.fixedMap.put("LinkAbstract", ai);
+		}
+		return ai;
 	}
 
 	// //////////////////////////////////////////////////////////////
@@ -410,8 +456,8 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		 */
 		public static final EnumUsage Input = new EnumUsage("Input");
 		/**
- * 
- */
+		* 
+		*/
 		public static final EnumUsage Output = new EnumUsage("Output");
 
 		/**

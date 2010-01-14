@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,7 @@ import java.util.HashSet;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.JDFConstants;
@@ -144,6 +145,21 @@ public class JDFResourceLinkPool extends JDFPool
 	public JDFResourceLinkPool(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * 
+	 * @return
+	*/
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		AttributeInfo ai = AttributeInfo.fixedMap.get("JDFResourceLinkPool");
+		if (ai != null)
+			return ai;
+		ai = super.getTheAttributeInfo();
+		AttributeInfo.fixedMap.put("JDFResourceLinkPool", ai);
+		return ai;
 	}
 
 	@Override
@@ -221,14 +237,15 @@ public class JDFResourceLinkPool extends JDFPool
 			{
 				resName = resName.substring(0, resName.length() - 4); // remove link
 			}
-
+			boolean bColon = xmlnsPrefix(resName) != null;
 			final int size = v.size();
 			for (int i = 0; i < size; i++)
 			{
 				final JDFResourceLink l = (JDFResourceLink) v.elementAt(i);
 
 				final JDFResource linkRoot = l.getLinkRoot();
-				if ((linkRoot != null) && ((resName == null) || resName.equals(JDFConstants.EMPTYSTRING) || linkRoot.getLocalName().equals(resName)))
+				if ((linkRoot != null)
+						&& ((resName == null) || resName.equals(JDFConstants.EMPTYSTRING) || (bColon ? linkRoot.getNodeName().equals(resName) : linkRoot.getLocalName().equals(resName))))
 				{
 					if (linkRoot.includesAttributes(mResAtt, true))
 					{

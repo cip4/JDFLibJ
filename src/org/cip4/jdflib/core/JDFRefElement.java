@@ -114,7 +114,12 @@ public class JDFRefElement extends JDFElement
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+		AttributeInfo ai = AttributeInfo.fixedMap.get("JDFRefElement");
+		if (ai != null)
+			return ai;
+		ai = super.getTheAttributeInfo().updateReplace(atrInfoTable);
+		AttributeInfo.fixedMap.put("JDFRefElement", ai);
+		return ai;
 	}
 
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];

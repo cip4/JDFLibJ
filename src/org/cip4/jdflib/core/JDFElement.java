@@ -98,6 +98,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.mail.Multipart;
@@ -129,7 +130,6 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -2941,31 +2941,62 @@ public class JDFElement extends KElement
 	{
 		final VString vAttsReturn = new VString();
 		int numAtts = 0;
-		final VString vAtts = getAttributeVector_KElement();
-		for (int i = 0; i < vAtts.size(); i++)
-		{
-			final String key = vAtts.elementAt(i);
-			if (!ai.validAttribute(key, getAttribute(key, null, null), level))
-			{
-				vAttsReturn.add(key);
-				if (++numAtts >= nMax)
-				{
-					return vAttsReturn;
-				}
-			}
-		}
+		final NamedNodeMap nm = getAttributes();
+		Set<String> vReq;
 
 		if (EnumValidationLevel.isRequired(level) && !isIncomplete())
 		{
-			vAttsReturn.addAll(getMissingAttributes(nMax));
+			vReq = getTheAttributeInfo().requiredAttribs().getSet();
 		}
-
-		if (vAttsReturn.size() >= nMax)
+		else
 		{
-			return vAttsReturn;
+			vReq = null;
 		}
 
-		vAttsReturn.addAll(getUnknownAttributes(bIgnorePrivate, nMax));
+		if (nm != null)
+		{
+			final int siz = nm.getLength();
+			for (int i = 0; i < siz; i++)
+			{
+				final Node a = nm.item(i);
+				final String key = a.getLocalName();
+				final String ns = a.getNamespaceURI();
+				if ((JDFConstants.XSI.equals(ns)) || JDFConstants.XMLNS.equals(ns))
+				{
+					continue;
+				}
+				if (bIgnorePrivate && !isWildCard(ns) && !JDFConstants.JDFNAMESPACE.equals(ns))
+					continue;
+
+				if (ai.getAttributeType(key) == null || !ai.validAttribute(key, a.getNodeValue(), level))
+				{
+					vAttsReturn.add(key);
+					if (++numAtts >= nMax)
+					{
+						return vAttsReturn;
+					}
+				}
+				if (vReq != null)
+				{
+					boolean rem = vReq.remove(key);
+					if (rem && vReq.isEmpty())
+						vReq = null;
+				}
+			}
+		}
+		if (vReq != null)
+		{
+			VString v = new VString();
+			Iterator<String> it = vReq.iterator();
+			while (it.hasNext())
+			{
+				String next = it.next();
+				if (getAttribute(next, null, null) == null)
+					v.add(next);
+			}
+			if (v.size() > 0)
+				vAttsReturn.appendUnique(v);
+		}
 		return vAttsReturn;
 	}
 
@@ -2977,7 +3008,7 @@ public class JDFElement extends KElement
 	private boolean isIncomplete()
 	{
 		final JDFResource r = JDFResource.getResourceRoot(this);
-		return r == null ? false : EnumResStatus.Incomplete.equals(r.getResStatus(false));
+		return r == null ? false : "Incomplete".equals(r.getAttribute(AttributeName.STATUS, null, null));
 	}
 
 	/**
@@ -3965,6 +3996,8 @@ public class JDFElement extends KElement
 	public void setVersion(final EnumVersion enumVer)
 	{
 		setAttribute(AttributeName.VERSION, enumVer.getName(), null);
+		AttributeInfo.fixedMap.clear();
+		ElementInfo.fixedMap.clear();
 	}
 
 	/**

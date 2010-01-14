@@ -157,8 +157,20 @@ public class KElement extends ElementNSImpl
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		final AttributeInfo ai = new AttributeInfo(atrInfoTable);
-		ai.setVersion(EnumVersion.getEnum(this.getInheritedAttribute(AttributeName.VERSION, null, null)));
+		ai.setVersion(getAIVersion());
 		return ai;
+	}
+
+	/**
+	 * @param element
+	 * @return
+	 */
+	private EnumVersion getAIVersion()
+	{
+		Document d = getOwnerDocument();
+		Element e = d.getDocumentElement();
+		String s = e.getAttribute(AttributeName.VERSION);
+		return EnumVersion.getEnum(s);
 	}
 
 	/**
@@ -223,7 +235,7 @@ public class KElement extends ElementNSImpl
 	protected ElementInfo getTheElementInfo()
 	{
 		final ElementInfo ei = new ElementInfo(null, null);
-		ei.setVersion(EnumVersion.getEnum(this.getInheritedAttribute(AttributeName.VERSION, null, null)));
+		ei.setVersion(getAIVersion());
 		return ei;
 	}
 
@@ -2671,6 +2683,8 @@ public class KElement extends ElementNSImpl
 	public VString knownElements()
 	{
 		final VString s = requiredElements();
+		if (s.size() == 0)
+			return optionalElements();
 		s.appendUnique(optionalElements());
 		return s;
 	}
@@ -3016,13 +3030,11 @@ public class KElement extends ElementNSImpl
 	 * @param nMax maximum amount of unknown attributes to return
 	 * @return vector with maximum nMax unknown Attributes
 	 */
-	public VString getUnknownAttributeVector(final VString vKnownKeys, final VString vInNameSpace, final int nMax)
+	public VString getUnknownAttributeVector(final VString vKnownKeys, final VString vInNameSpace, int nMax)
 	{
-		int nMaxLocal = nMax;
-
-		if (nMaxLocal < 0)
+		if (nMax < 0)
 		{
-			nMaxLocal = Integer.MAX_VALUE;
+			nMax = Integer.MAX_VALUE;
 		}
 
 		final VString vAtts = getAttributeVector_KElement();
@@ -3043,7 +3055,7 @@ public class KElement extends ElementNSImpl
 			}
 		}
 
-		for (int i = 0; i < vAtts.size() && vUnknown.size() < nMaxLocal; i++)
+		for (int i = 0; i < vAtts.size() && vUnknown.size() < nMax; i++)
 		{
 			final String strAtts = vAtts.elementAt(i);
 			final String ns = KElement.xmlnsPrefix(strAtts);

@@ -425,7 +425,8 @@ public class MimeUtil extends UrlUtil
 			mimeTypeLocal = mimeTypeLocal.substring(0, posSemicolon);
 		}
 
-		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeTypeLocal) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeTypeLocal) || JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeTypeLocal);
+		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeTypeLocal) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeTypeLocal)
+				|| JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeTypeLocal);
 	}
 
 	// public static MimeMessage parseMime(InputStream mimeStream) {
@@ -690,5 +691,14 @@ public class MimeUtil extends UrlUtil
 			return new JDFDoc[] { jmf };
 		}
 		return docs;
+	}
+
+	/**
+	 * @param contentType 
+	 * @return
+	 */
+	public static boolean isMimeMultiPart(String contentType)
+	{
+		return MULTIPART_RELATED.equalsIgnoreCase(contentType);
 	}
 }
