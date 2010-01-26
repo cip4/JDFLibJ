@@ -74,7 +74,7 @@ import junit.framework.Assert;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 
 /**
@@ -95,7 +95,7 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName("JDF Base golden ticket generator");
 		super.setUp();
 	}
@@ -111,7 +111,7 @@ public class BaseGoldenTicketTest extends JDFTestCaseBase
 	protected void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
-		JDFElement.setLongID(true);
+		KElement.setLongID(true);
 		super.tearDown();
 	}
 

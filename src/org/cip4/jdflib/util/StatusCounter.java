@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -435,8 +435,8 @@ public class StatusCounter
 	/**
 	 * get the matching LinkAmount out of this
 	 * 
-	 * @param refID the refID, name or usage of the resource of the bag - this MUST match the refID of a ResourceLink
-	 * @return the LinkAmount with matching refID, null if none found or bags is null
+	 * @param n the index of the resource of the bag - this MUST match the refID of a ResourceLink
+	 * @return the LinkAmount with matching n, null if none found or bags is null
 	 */
 	protected LinkAmount getLinkAmount(final int n)
 	{
@@ -694,6 +694,7 @@ public class StatusCounter
 	 * get the total the amount of the resource with id refID
 	 * 
 	 * @param refID , type or usage of the resource,
+	 * @return 
 	 */
 	public double getPhaseAmount(final String refID)
 	{
@@ -716,7 +717,6 @@ public class StatusCounter
 	/**
 	 * get all total amounts of all tracked resources
 	 * 
-	 * @param i
 	 * @return
 	 */
 	public double[] getTotalWastes()
@@ -736,7 +736,7 @@ public class StatusCounter
 	/**
 	 * get all phase waste amounts of all tracked resources
 	 * 
-	 * @param i
+	 * @return 
 	 */
 	public double[] getPhaseWastes()
 	{
@@ -756,6 +756,7 @@ public class StatusCounter
 	 * get the total the amount of the resource with id refID
 	 * 
 	 * @param refID , type or usage of the resource,
+	 * @return 
 	 */
 	public double getPhaseWaste(final String refID)
 	{
@@ -784,6 +785,7 @@ public class StatusCounter
 	 * @param eventID Event/@EventID to set
 	 * @param eventValue Event/@EventValue to set
 	 * @param comment the comment text, if null no comment is set
+	 * @return 
 	 */
 	public synchronized JDFNotification setEvent(final String eventID, final String eventValue, final String comment)
 	{
@@ -882,7 +884,7 @@ public class StatusCounter
 		// a new phasetime audit, thus we need to add a closing JMF for the original jobPhase
 		{
 			bChanged = true;
-			closeJobPhase(jmfStatus, mainLinkAmount, lastPhase, nextPhase); // attention - resets la to 0 - all calls after this have the new amounts
+			closeJobPhase(jmfStatus, mainLinkAmount, lastPhase); // attention - resets la to 0 - all calls after this have the new amounts
 			startDate = new JDFDate();
 		}
 
@@ -979,6 +981,7 @@ public class StatusCounter
 	 * @param deviceStatus
 	 * @param deviceStatusDetails
 	 * @param newDevInfo
+	 * @param la 
 	 */
 	private void fillDeviceInfo(final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFDeviceInfo newDevInfo, final LinkAmount la)
 	{
@@ -1006,8 +1009,7 @@ public class StatusCounter
 
 	}
 
-	private void updateCurrentJobPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFJMF jmf,
-			final LinkAmount la, final JDFPhaseTime pt2, final boolean bEnd)
+	private void updateCurrentJobPhase(final EnumNodeStatus nodeStatus, final String nodeStatusDetails, final EnumDeviceStatus deviceStatus, final String deviceStatusDetails, final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt2, final boolean bEnd)
 	{
 		final JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo deviceInfo = respStatus.getCreateDeviceInfo(0);
@@ -1040,7 +1042,7 @@ public class StatusCounter
 		}
 	}
 
-	private JDFResponse closeJobPhase(final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt1, final JDFPhaseTime pt2)
+	private JDFResponse closeJobPhase(final JDFJMF jmf, final LinkAmount la, final JDFPhaseTime pt1)
 	{
 		final JDFResponse respStatus = (JDFResponse) jmf.appendMessageElement(JDFMessage.EnumFamily.Response, JDFMessage.EnumType.Status);
 		final JDFDeviceInfo deviceInfo = respStatus.appendDeviceInfo();
@@ -1078,7 +1080,6 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param amounts
 	 * @param jmfRes
 	 */
 	private void generateResourceResponse(final JDFJMF jmfRes)
@@ -1165,7 +1166,6 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param resLink
 	 * @param n : 1=phaseTime, 2=node, 3=resourceinfo
 	 * @return VElement a vector of resourcelinks
 	 */
@@ -1228,6 +1228,7 @@ public class StatusCounter
 	}
 
 	/**
+	 * @param bClean 
 	 * @return the docJMFNotification
 	 */
 	public synchronized JDFDoc getDocJMFNotification(final boolean bClean)
@@ -1278,7 +1279,6 @@ public class StatusCounter
 
 			/**
 			 * 
-			 * @param _refID refID of the resource that is being counted
 			 */
 			protected AmountBag()
 			{
@@ -1687,6 +1687,7 @@ public class StatusCounter
 
 		/**
 		 * change the value to integer, if required
+		 * @param amount 
 		 * @return the formatted amount, either as integer or double
 		 */
 		protected double getAmount(final double amount)
@@ -1695,6 +1696,7 @@ public class StatusCounter
 		}
 
 		/**
+		 * @param amount 
 		 * @return the formatted amount, either as integer or double
 		 */
 		protected String formatAmount(final double amount)
@@ -1757,7 +1759,7 @@ public class StatusCounter
 			return rl.matchesString(key);
 		}
 
-		protected boolean linkFitsKey(final Set keys)
+		protected boolean linkFitsKey(final Set<String> keys)
 		{
 			if (keys == null)
 			{
@@ -1786,7 +1788,7 @@ public class StatusCounter
 
 	}
 
-	/*
+	/**
 	 * @return the m_deviceID
 	 */
 	public String getDeviceID()
@@ -1794,7 +1796,7 @@ public class StatusCounter
 		return m_deviceID;
 	}
 
-	/*
+	/**
 	 * @return the m_moduleID
 	 */
 	public VString getModuleeID()
@@ -1803,15 +1805,16 @@ public class StatusCounter
 	}
 
 	/**
-	 * @param m_deviceid the m_deviceID to set
+	 * @param deviceid the m_deviceID to set
 	 */
 	public void setDeviceID(final String deviceid)
 	{
 		m_deviceID = deviceid;
 	}
 
-	/**
-	 * @param m_deviceid the m_deviceID to set
+	/**	 
+	 * @param moduleID 
+	 * @param moduleType 
 	 */
 	public void addModule(final String moduleID, final String moduleType)
 	{
@@ -1848,7 +1851,7 @@ public class StatusCounter
 	/**
 	 * set copying the resource into resourceInfo on or off for the resourcelink rl
 	 * 
-	 * @param rl the resourcelink to the resource to copy
+	 * @param _refID the refid of the resourcelink to the resource to copy
 	 * @param b tracking on or off
 	 */
 	public void setCopyResInResInfo(final String _refID, final boolean b)
@@ -1867,6 +1870,7 @@ public class StatusCounter
 	/**
 	 * 
 	 * @param resID the resource ID to set/track reason for the audit
+	 * @param reason 
 	 * @return JDFResourceAudit the generated audit
 	 */
 	public synchronized JDFResourceAudit setResourceAudit(final String resID, final EnumReason reason)
@@ -1932,21 +1936,36 @@ public class StatusCounter
 		workType = _workType;
 	}
 
+	/**
+	 * @return
+	 */
 	public EnumDeviceStatus getStatus()
 	{
 		return status;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getStatusDetails()
 	{
 		return statusDetails;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JDFDate getStartDate()
 	{
 		return startDate;
 	}
 
+	/**
+	 * 
+	 * @param _operationMode
+	 */
 	public void setOperationMode(final EnumDeviceOperationMode _operationMode)
 	{
 		operationMode = _operationMode;
@@ -2001,9 +2020,11 @@ public class StatusCounter
 	/**
 	 * @param icsVersions the icsVersions to set
 	 */
-	public void setIcsVersions(final VString pICSVersions)
+	public void setIcsVersions(VString icsVersions)
 	{
-		this.icsVersions = pICSVersions;
+		if (icsVersions != null && icsVersions.size() == 0)
+			icsVersions = null;
+		this.icsVersions = icsVersions;
 	}
 
 	/**

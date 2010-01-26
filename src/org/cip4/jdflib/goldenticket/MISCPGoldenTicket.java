@@ -182,7 +182,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param parent
+	 * 
 	 */
 	private void setup()
 	{
@@ -192,8 +192,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		}
 		//		theStatusCounter.addIgnorePart(EnumPartIDKey.Side);
 		theStatusCounter.addIgnorePart(EnumPartIDKey.Separation);
-		previewShare = UrlUtil.fileToUrl(UrlUtil
-				.urlToFile("file:/host/root/preview"), false);
+		previewShare = UrlUtil.fileToUrl(UrlUtil.urlToFile("file:/host/root/preview"), false);
 	}
 
 	/**
@@ -212,7 +211,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	/**
 	 * initializes this node to a given ICS version
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 *  
 	 */
 	@Override
 	public void init()
@@ -304,6 +303,11 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		}
 	}
 
+	/**
+	 * @see org.cip4.jdflib.goldenticket.BaseGoldenTicket#setActivePart(org.cip4.jdflib.datatypes.VJDFAttributeMap, boolean)
+	 * @param vp
+	 * @param bFirst
+	 */
 	@Override
 	public void setActivePart(final VJDFAttributeMap vp, final boolean bFirst)
 	{
@@ -314,7 +318,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *  
 	 */
 	@Override
 	protected JDFMedia initPaperMedia()
@@ -360,8 +364,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		{
 			final JDFInk inkp = (JDFInk) ink.addPartition(EnumPartIDKey.Separation, cols.stringAt(j));
 			inkp.setInkName(inks.elementAt(j));
-			if ((cols.get(j).toLowerCase().indexOf("varnish") >= 0)
-					|| (inks.get(j).toLowerCase().indexOf("varnish") >= 0))
+			if ((cols.get(j).toLowerCase().indexOf("varnish") >= 0) || (inks.get(j).toLowerCase().indexOf("varnish") >= 0))
 			{
 				inkp.setFamily("Varnish");
 			}
@@ -373,7 +376,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *  
 	 */
 	protected void initPreview()
 	{
@@ -440,7 +443,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *  
 	 */
 	protected void initConventionalPrintingParams()
 	{
@@ -486,7 +489,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *  
 	 */
 	protected void makeReadyColorantControl()
 	{
@@ -541,8 +544,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		}
 		else
 		{
-			file = new File(previewLeaf.getSheetName() + "_" + previewLeaf.getSide().getName().substring(0, 1) + "_"
-					+ previewLeaf.getSeparation() + ".png");
+			file = new File(previewLeaf.getSheetName() + "_" + previewLeaf.getSide().getName().substring(0, 1) + "_" + previewLeaf.getSeparation() + ".png");
 
 		}
 		file = FileUtil.getFileInDirectory(share, file);
@@ -552,7 +554,7 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *  
 	 * @return
 	 */
 	@Override
@@ -589,6 +591,10 @@ public class MISCPGoldenTicket extends MISGoldenTicket
 		theStatusCounter.setPhase(EnumNodeStatus.Completed, "Done", EnumDeviceStatus.Idle, "Waiting");
 	}
 
+	/**
+	 * @see org.cip4.jdflib.goldenticket.MISGoldenTicket#assign(org.cip4.jdflib.node.JDFNode)
+	 * @param node
+	 */
 	@Override
 	public void assign(final JDFNode node)
 	{

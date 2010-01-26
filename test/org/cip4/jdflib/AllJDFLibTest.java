@@ -75,6 +75,7 @@ import org.cip4.jdflib.auto.AutoTest;
 import org.cip4.jdflib.auto.JDFClassInstantiationTest;
 import org.cip4.jdflib.cformat.PrintfFormatTest;
 import org.cip4.jdflib.core.AttrInfoTest;
+import org.cip4.jdflib.core.DocumentJDFImplTest;
 import org.cip4.jdflib.core.ElemInfoTest;
 import org.cip4.jdflib.core.FactoryTest;
 import org.cip4.jdflib.core.FixVersionTest;
@@ -84,6 +85,7 @@ import org.cip4.jdflib.core.JDFDocTest;
 import org.cip4.jdflib.core.JDFElementTest;
 import org.cip4.jdflib.core.JDFExceptionTest;
 import org.cip4.jdflib.core.JDFNodeInfoTest;
+import org.cip4.jdflib.core.JDFParserTest;
 import org.cip4.jdflib.core.JDFPartAmountTest;
 import org.cip4.jdflib.core.JDFRefElementTest;
 import org.cip4.jdflib.core.JDFResourceLinkTest;
@@ -153,6 +155,7 @@ import org.cip4.jdflib.extensions.PartitionHelperTest;
 import org.cip4.jdflib.extensions.SetHelperTest;
 import org.cip4.jdflib.extensions.XJDFGeneratorTest;
 import org.cip4.jdflib.extensions.XJDFHelperTest;
+import org.cip4.jdflib.extensions.XJDFLayoutStripTest;
 import org.cip4.jdflib.extensions.XJDFTest;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinderTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
@@ -271,6 +274,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// core
 		suite.addTestSuite(AttrInfoTest.class);
+		suite.addTestSuite(DocumentJDFImplTest.class);
 		suite.addTestSuite(ElemInfoTest.class);
 		suite.addTestSuite(FactoryTest.class);
 		suite.addTestSuite(FixVersionTest.class);
@@ -280,6 +284,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFElementTest.class);
 		suite.addTestSuite(JDFExceptionTest.class);
 		suite.addTestSuite(JDFNodeInfoTest.class);
+		suite.addTestSuite(JDFParserTest.class);
 		suite.addTestSuite(JDFPartAmountTest.class);
 		suite.addTestSuite(JDFResourceLinkTest.class);
 		suite.addTestSuite(JDFSchemaTest.class);
@@ -362,6 +367,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(PartitionHelperTest.class);
 		suite.addTestSuite(SetHelperTest.class);
 		suite.addTestSuite(XJDFHelperTest.class);
+		suite.addTestSuite(XJDFLayoutStripTest.class);
 		suite.addTestSuite(XJDFGeneratorTest.class);
 		suite.addTestSuite(XJDFTest.class);
 

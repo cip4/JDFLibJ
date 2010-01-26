@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -386,10 +386,8 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testCreateElementNoNS()
 	{
 		final XMLDoc d = new XMLDoc("TEST", null);
-		d.getMemberDocument().setIgnoreNSDefault(true);
 		final KElement e = (KElement) d.createElement("bar");
 		assertNull(e.getNamespaceURI());
-
 	}
 
 	/**
@@ -413,7 +411,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		final XMLDoc d = new XMLDoc("JDF", null);
 		final KElement root = d.getRoot();
 		root.appendElement("AuditPool");
-		final String fn = sm_dirTestDataTemp + "xmldocPasreTest.xml";
+		final String fn = sm_dirTestDataTemp + "xmldocParseTest.xml";
 		d.write2File(fn, 0, true);
 
 		final XMLDoc d2 = XMLDoc.parseFile(fn);
@@ -434,12 +432,15 @@ public class XMLDocTest extends JDFTestCaseBase
 		final JDFParser p = new JDFParser();
 		final JDFDoc d2 = p.parseFile(fn);
 		final KElement root = d2.getRoot();
-		// assertNull(root.getNamespaceURI());
+		assertNull(root.getNamespaceURI());
 		assertFalse(d2.toString().indexOf("xmlns=\"\"") >= 0);
 		assertFalse(d.toString().indexOf("xmlns=\"\"") >= 0);
 		assertFalse(root.toString().indexOf("xmlns=\"\"") >= 0);
 		final KElement foo = root.appendElement("foofoo");
 		assertNull(foo.getNamespaceURI());
+		assertFalse(d.toString().indexOf("xmlns=\"\"") >= 0);
+		assertFalse(root.toString().indexOf("xmlns=\"\"") >= 0);
+
 	}
 
 	/**

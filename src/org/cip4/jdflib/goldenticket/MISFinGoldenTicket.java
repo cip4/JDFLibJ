@@ -217,15 +217,17 @@ public class MISFinGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
-	private void initCollecting()
+	private JDFCollectingParams initCollecting()
 	{
+		JDFCollectingParams cp = null;
 		if (theNode.getTypes().contains("Collecting"))
 		{
-			final JDFCollectingParams sp = (JDFCollectingParams) theNode.getCreateResource(ElementName.COLLECTINGPARAMS, EnumUsage.Input, 0);
+			cp = (JDFCollectingParams) theNode.getCreateResource(ElementName.COLLECTINGPARAMS, EnumUsage.Input, 0);
 		}
-
+		return cp;
 	}
 
 	/**

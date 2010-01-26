@@ -286,8 +286,8 @@ public class ComplexTypeList extends JPanel implements ListSelectionListener, Mo
 				{
 					if (!strLineOfFile.startsWith("JDFAuto") || !strLineOfFile.endsWith(".java"))
 					{
-						JOptionPane.showMessageDialog(this, strLineOfFile + lineSep + "is a malformed filename." + lineSep + "Filenames must start with \"JDFAuto\" and end with \".java\"" + lineSep
-								+ lineSep + " Cant read file", "Malformed Filename in User-filelist", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(this, strLineOfFile + lineSep + "is a malformed filename." + lineSep
+								+ "Filenames must start with \"JDFAuto\" and end with \".java\"" + lineSep + lineSep + " Cant read file", "Malformed Filename in User-filelist", JOptionPane.ERROR_MESSAGE);
 
 						// TODO resolve this foobar
 						loadedListModel.removeAllElements();

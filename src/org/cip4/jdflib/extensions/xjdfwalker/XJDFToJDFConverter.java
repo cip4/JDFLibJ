@@ -11,6 +11,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
@@ -31,6 +32,7 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
@@ -50,7 +52,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 * if true, create the product, else ignore it
 	 */
 	public boolean createProduct = true;
-	public EnumVersion version = EnumVersion.Version_1_3;
+	/**
+	 * 
+	 */
+	private EnumVersion version = EnumVersion.Version_1_3;
 
 	/**
 	 * @param template the jdfdoc to fill this into
@@ -272,6 +277,22 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(EnumVersion version)
+	{
+		this.version = version;
+	}
+
+	/**
+	 * @return the version
+	 */
+	public EnumVersion getVersion()
+	{
+		return version;
+	}
+
+	/**
 	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
@@ -282,6 +303,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		/**
 		 *  
 		 */
+		@SuppressWarnings("synthetic-access")
 		public WalkXElement()
 		{
 			super(getFactory());
@@ -311,6 +333,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 		/**
 		 * @param e
+		 * @param trackElem 
 		 */
 		protected void cleanRefs(final KElement e, final KElement trackElem)
 		{
@@ -372,7 +395,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			currentJDFNode = (JDFNode) trackElem;
 			currentJDFNode.setAttributes(e);
-			currentJDFNode.setVersion(version);
+			currentJDFNode.setVersion(getVersion());
 			removeInheritedJobID();
 			currentJDFNode.setType(EnumType.ProcessGroup);
 			return currentJDFNode;
@@ -459,7 +482,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			if (id == null)
 			{
 				// we need an id to copy. technically no id is invalid, but... whatever
-				id = "r" + JDFElement.uniqueID(0);
+				id = "r" + KElement.uniqueID(0);
 				e.setAttribute(AttributeName.ID, id);
 			}
 			JDFResource r = null;
@@ -951,6 +974,51 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				}
 			}
 			return rPart;
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+	 */
+	public class WalkColorantControl extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFColorantControl;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			final KElement rPart = super.walk(e, trackElem);
+			createSeparationList(rPart, ElementName.COLORANTPARAMS);
+			createSeparationList(rPart, ElementName.COLORANTORDER);
+			createSeparationList(rPart, ElementName.DEVICECOLORANTORDER);
+			return rPart;
+		}
+
+		/**
+		 * @param rPart
+		 * @param elem
+		 */
+		private void createSeparationList(final KElement rPart, String elem)
+		{
+			JDFColorantControl cc = (JDFColorantControl) rPart;
+			String c = rPart.getAttribute(elem, null, null);
+			if (c != null)
+			{
+				((JDFSeparationList) cc.getCreateElement(elem)).setSeparations(new VString(c, null));
+				rPart.removeAttribute(elem);
+			}
 		}
 	}
 

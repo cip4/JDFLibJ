@@ -135,12 +135,16 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFMedia m3 = (JDFMedia) m2.addPartition(EnumPartIDKey.SheetName, "s1");
 		m3.setMediaType(EnumMediaType.Plate);
 		r3.refElement(m3);
+		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		cc.getCreateColorantParams().setSeparations(new VString("Spot1 Spot2", null));
+		cc.getCreateColorantOrder().setSeparations(new VString("Cyan Magenta Yellow Black Spot1 Spot2", null));
 
 		r3.setProductID("P1");
 		final JDFExposedMedia xm0 = (JDFExposedMedia) r3;
 		xm0.setPlateType(EnumPlateType.Dummy);
 		final JDFCustomerInfo ci = n.appendCustomerInfo();
 		ci.setCustomerJobName("foo");
+		e = new XJDF20().makeNewJDF(n, null);
 	}
 
 	/**
@@ -284,7 +288,6 @@ public class XJDFTest extends JDFTestCaseBase
 	 */
 	public void testFromXJDFMedia()
 	{
-		testColorPool();
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		final JDFDoc d = xCon.convert(e);
 		d.write2File(sm_dirTestDataTemp + "Media.xjdf.jdf", 2, false);
@@ -295,6 +298,22 @@ public class XJDFTest extends JDFTestCaseBase
 		assertNotNull(m);
 		assertNotSame(m, m.getResourceRoot());
 		assertNotNull(((JDFMedia) m.getResourceRoot()).getMediaType());
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFCC()
+	{
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		final JDFDoc d = xCon.convert(e);
+		d.write2File(sm_dirTestDataTemp + "CC.xjdf.jdf", 2, false);
+		final JDFNode root = d.getJDFRoot();
+		JDFResourceLink rl = root.getLink(0, "ColorantControl", null, null);
+		JDFColorantControl cc = (JDFColorantControl) rl.getTarget();
+		assertNull(cc.getAttribute(ElementName.COLORANTORDER, null, null));
+
 	}
 
 	/**
@@ -388,8 +407,8 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
 		cp.appendColorWithName("Black", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
 		cp.appendColorWithName("Yellow", null).setCMYK(new JDFCMYKColor(0, 0, 1, 0));
-		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
-		cc.appendColorantOrder().setSeparations(new VString("Cyan a b CC", null));
+		final JDFColorantControl cc = (JDFColorantControl) n.getCreateResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0);
+		cc.getCreateColorantOrder().setSeparations(new VString("Cyan a b CC", null));
 		e = new XJDF20().makeNewJDF(n, null);
 		assertEquals("Cyan a b CC", e.getXPathAttribute("ParameterSet[@Name=\"ColorantControl\"]/Parameter/ColorantControl/@ColorantOrder", null));
 	}
@@ -436,7 +455,7 @@ public class XJDFTest extends JDFTestCaseBase
 	{
 		final JDFColorPool cp = (JDFColorPool) n.addResource(ElementName.COLORPOOL, EnumUsage.Input);
 		cp.appendColorWithName("Black By Night", null).setCMYK(new JDFCMYKColor(0, 0, 0, 1));
-		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		final JDFColorantControl cc = (JDFColorantControl) n.getCreateResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0);
 		cc.getCreateColorantParams().setSeparations(new VString("Black By Night,Cyan", ","));
 		e = new XJDF20().makeNewJDF(n, null);
 		assertEquals("Black_By_Night", e.getXPathAttribute("ParameterSet[@Name=\"Color\"]/Parameter/Part/@Separation", null));
@@ -542,6 +561,16 @@ public class XJDFTest extends JDFTestCaseBase
 		final KElement out = new XJDF20().makeNewJDF(n, null);
 		assertEquals("Input", out.getXPathAttribute("ResourceSet[@Name=\"Media\"]/@Usage", null), "Input");
 
+	}
+
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return super.toString() + e;
 	}
 
 }

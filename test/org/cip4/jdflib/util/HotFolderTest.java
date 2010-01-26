@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,14 +86,17 @@ import org.cip4.jdflib.JDFTestCaseBase;
  * 
  *         To change the template for this generated type comment go to Window - Preferences - Java - Code Generation - Code and Comments
  */
-public class HotFolderTest extends JDFTestCaseBase {
+public class HotFolderTest extends JDFTestCaseBase
+{
 	private File theHF;
 	HotFolder hf;
 
-	protected class MyListener implements HotFolderListener {
+	protected class MyListener implements HotFolderListener
+	{
 		protected boolean bZapp;
 
-		protected MyListener(boolean _bZapp) {
+		protected MyListener(boolean _bZapp)
+		{
 			bZapp = _bZapp;
 		}
 
@@ -102,7 +105,8 @@ public class HotFolderTest extends JDFTestCaseBase {
 		 * 
 		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
 		 */
-		public void hotFile(File hotFile) {
+		public void hotFile(File hotFile)
+		{
 			boolean zapp = false;
 			if (bZapp)
 				zapp = hotFile.delete();
@@ -113,16 +117,19 @@ public class HotFolderTest extends JDFTestCaseBase {
 	}
 
 	@Override
-	protected void setUp() throws Exception {
+	protected void setUp() throws Exception
+	{
 		super.setUp();
 		theHF = new File(sm_dirTestDataTemp + File.separator + "HFTest");
 		theHF.mkdirs();
+		HotFolder.setDefaultStabilizeTime(500);
 	}
 
 	/**
 	 * @throws Exception
 	 */
-	public void testStartNull() throws Exception {
+	public void testStartNull() throws Exception
+	{
 		hf = new HotFolder(theHF, null, new MyListener(false));
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
@@ -134,13 +141,16 @@ public class HotFolderTest extends JDFTestCaseBase {
 	/**
 	 * @throws Exception
 	 */
-	public void testRestartMany() throws Exception {
+	public void testRestartMany() throws Exception
+	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++)
+		{
 			assertEquals(Thread.activeCount(), 3);
 			hf.restart();
 		}
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3; i++)
+		{
 			Thread.sleep(1);
 			hf.stop();
 			assertEquals(Thread.activeCount(), 2);
@@ -150,13 +160,15 @@ public class HotFolderTest extends JDFTestCaseBase {
 	/**
 	 * @throws Exception
 	 */
-	public void testStopStart() throws Exception {
+	public void testStopStart() throws Exception
+	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 
-		for (int i = 0; i < 45 && file.exists(); i++) {
+		for (int i = 0; i < 45 && file.exists(); i++)
+		{
 			ThreadUtil.sleep(1000);
 		}
 		assertFalse(file.exists());
@@ -164,14 +176,16 @@ public class HotFolderTest extends JDFTestCaseBase {
 		hf.stop();
 		file.createNewFile();
 		assertTrue(file.exists());
-		for (int i = 0; i < 15 && !file.exists(); i++) {
+		for (int i = 0; i < 15 && !file.exists(); i++)
+		{
 			ThreadUtil.sleep(1000);
 		}
 		assertTrue(file.exists());
 		hf.restart();
 		hf.restart();
 		hf.restart();
-		for (int i = 0; i < 15 && file.exists(); i++) {
+		for (int i = 0; i < 15 && file.exists(); i++)
+		{
 			ThreadUtil.sleep(1000);
 		}
 		assertFalse(file.exists());
@@ -180,25 +194,31 @@ public class HotFolderTest extends JDFTestCaseBase {
 	/**
 	 * @throws Exception
 	 */
-	public void testExtension() throws Exception {
-		hf = new HotFolder(theHF, ".txt", new MyListener(true));
+	public void testExtension() throws Exception
+	{
+		hf = new HotFolder(theHF, ".txt,txt2", new MyListener(true));
+		hf.setStabilizeTime(333);
 		ThreadUtil.sleep(1000); // time to start up
 		final File file = new File(theHF + File.separator + "f1.txt");
 		final File file1 = new File(theHF + File.separator + "f1.xml");
 		final File file2 = new File(theHF + File.separator + "f1.foo");
+		final File file3 = new File(theHF + File.separator + "f1.txt2");
 		file.createNewFile();
 		assertTrue(file.exists());
 		file1.createNewFile();
 		assertTrue(file1.exists());
 		file2.createNewFile();
 		assertTrue(file2.exists());
+		file3.createNewFile();
+		assertTrue(file3.exists());
 
-		ThreadUtil.sleep(6000);
+		ThreadUtil.sleep(2000);
 		assertFalse(file.exists());
+		assertFalse(file3.exists());
 		assertTrue(file1.exists());
 
 		hf.addListener(new MyListener(true), ".xml");
-		ThreadUtil.sleep(9000);
+		ThreadUtil.sleep(3000);
 		assertFalse(file1.exists());
 		assertTrue(file2.exists());
 	}
@@ -206,7 +226,8 @@ public class HotFolderTest extends JDFTestCaseBase {
 	/**
 	 * @throws Exception
 	 */
-	public void testDir() throws Exception {
+	public void testDir() throws Exception
+	{
 		hf = new HotFolder(theHF, ".txt", new MyListener(true));
 		hf.addListener(new MyListener(true), "xml");
 		final File file = new File(theHF + File.separator + "f1.txt");
@@ -217,7 +238,8 @@ public class HotFolderTest extends JDFTestCaseBase {
 		file1.createNewFile();
 		assertTrue(file.exists());
 
-		for (int i = 0; i < 15 && file.exists(); i++) {
+		for (int i = 0; i < 15 && file.exists(); i++)
+		{
 			ThreadUtil.sleep(1000);
 		}
 
@@ -229,13 +251,15 @@ public class HotFolderTest extends JDFTestCaseBase {
 	/**
 	 * @throws Exception
 	 */
-	public void testStartNullDelete() throws Exception {
+	public void testStartNullDelete() throws Exception
+	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 
-		for (int i = 0; i < 15 && file.exists(); i++) {
+		for (int i = 0; i < 15 && file.exists(); i++)
+		{
 			ThreadUtil.sleep(1000);
 		}
 
@@ -245,7 +269,8 @@ public class HotFolderTest extends JDFTestCaseBase {
 	/**
 	 * @throws Exception
 	 */
-	public void testBig() throws Exception {
+	public void testBig() throws Exception
+	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		final File file = new File(theHF + File.separator + "f1.txt");
 		file.createNewFile();
@@ -263,7 +288,8 @@ public class HotFolderTest extends JDFTestCaseBase {
 		assertTrue(file.exists());
 		fos.close();
 
-		for (int i = 0; i < 60 && file.exists(); i++) {
+		for (int i = 0; i < 60 && file.exists(); i++)
+		{
 			ThreadUtil.sleep(1000);
 		}
 
@@ -277,7 +303,8 @@ public class HotFolderTest extends JDFTestCaseBase {
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
-	protected void tearDown() throws Exception {
+	protected void tearDown() throws Exception
+	{
 		hf.stop();
 		super.tearDown();
 	}

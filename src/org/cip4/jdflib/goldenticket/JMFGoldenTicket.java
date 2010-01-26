@@ -84,7 +84,7 @@ public class JMFGoldenTicket extends BaseGoldenTicket
 	/**
 	 * create a BaseGoldenTicket
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 * @param pIcsLevel the level to init to (1,2 or 3)
 	 * @param jdfVersion the version to generate a golden ticket for
 	 */
 	public JMFGoldenTicket(int pIcsLevel, EnumVersion jdfVersion)
@@ -96,7 +96,7 @@ public class JMFGoldenTicket extends BaseGoldenTicket
 	/**
 	 * initializes this node to a given ICS version
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 * 
 	 */
 	@Override
 	public void init()

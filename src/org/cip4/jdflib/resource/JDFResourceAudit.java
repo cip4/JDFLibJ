@@ -161,6 +161,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 	 * 
 	 * @param r the resource that is valid after modification<br>
 	 * if r is not specified, return the link that already exists
+	 * @param bInput 
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 * @deprecated use addNewOldLink(true,...)
 	 */
@@ -175,6 +176,7 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 	 * 
 	 * @param r the resource that is valid after modification<br>
 	 * if r is not specified, return the link that already exists
+	 * @param bInput 
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 * @deprecated use addNewOldLink(false,...)
 	 * 
@@ -256,8 +258,8 @@ public class JDFResourceAudit extends JDFAutoResourceAudit implements ISignalAud
 	 * add a link to one of the resources
 	 * 
 	 * @param bNew new or original?
-	 * @param r the resource that was valid before modification<br>
-	 * if r is not specified, return the link that already exists
+	 * 
+	 * 
 	 * @return the ResourceLink object in the ResourceAudit that points to r
 	 */
 	public JDFResourceLink getNewOldLink(final boolean bNew)

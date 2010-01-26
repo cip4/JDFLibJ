@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -218,6 +218,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * 
 	 * June 7, 2009
 	 */
+	@SuppressWarnings("unchecked")
 	public static class EnumUserDisplay extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -228,33 +229,59 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumUserDisplay getEnum(final String enumName)
 		{
 			return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumUserDisplay getEnum(final int enumValue)
 		{
 			return (EnumUserDisplay) getEnum(EnumUserDisplay.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumUserDisplay.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumUserDisplay.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumUserDisplay.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumUserDisplay Display = new EnumUserDisplay("Display");
+		/**
+		 * 
+		 */
 		public static final EnumUserDisplay Hide = new EnumUserDisplay("Hide");
+		/**
+		 * 
+		 */
 		public static final EnumUserDisplay Dependent = new EnumUserDisplay("Dependent");
 
 	}
@@ -264,15 +291,15 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * add a value to the list of values defined by testlists
 	 * 
 	 * @param value value to test
-	 * @param valuelist switches between Allowed test lists and Present test lists. Has two values: Allowed and Present.
+	 * @param testlists switches between Allowed test lists and Present test lists. Has two values: Allowed and Present.
 	 */
 	public abstract void addValue(String value, EnumFitsValue testlists);
 
 	/**
-	 * Tests wheterh the defined value matches the Allowed test lists or the Present test lists specified for this state
+	 * Tests whether the defined value matches the Allowed test lists or the Present test lists specified for this state
 	 * 
 	 * @param value value to test
-	 * @param valuelist switches between Allowed test lists and Present test lists. Has two values: Allowed and Present.
+	 * @param testlists switches between Allowed test lists and Present test lists. Has two values: Allowed and Present.
 	 * @return boolean - true, if the value matches the test lists or if Allowed testlists are not specified
 	 */
 	public abstract boolean fitsValue(String value, EnumFitsValue testlists);
@@ -324,6 +351,10 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		return namePath;
 	}
 
+	/**
+	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getNamePathVector()
+	 * @return
+	*/
 	public final VString getNamePathVector()
 	{
 		return getNamePathVector(true);
@@ -467,15 +498,6 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	public boolean getHasDefault()
 	{
 		return getBoolAttribute(AttributeName.HASDEFAULT, null, true);
-	}
-
-	/**
-	 * get the id
-	 */
-	@Override
-	public String getID()
-	{
-		return getAttribute(AttributeName.ID);
 	}
 
 	/**
@@ -739,16 +761,6 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	}
 
 	/**
-	 * set attribute ID
-	 * 
-	 * @param sid the value to set the attribute to
-	 */
-	public void setID(final String sid)
-	{
-		setAttribute(AttributeName.ID, sid, null);
-	}
-
-	/**
 	 * set attribute AllowedLength
 	 * 
 	 * @param value the value to set the attribute to
@@ -853,6 +865,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	 * set the default values specified in this in element
 	 * 
 	 * @param element the element to set the defaults on
+	 * @param bAll 
 	 * @return true if successful
 	 */
 	public boolean setDefaultsFromCaps(final KElement element, final boolean bAll)
@@ -1118,8 +1131,7 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 	/**
 	 * Appends element ValueLoc
 	 * 
-	 * @param iSkip number of Value elements to skip
-	 * @return JDFLoc: newly created Loc element
+	 * @return JDFLoc: newly created ValueLoc element
 	 */
 	final public JDFValueLoc appendValueLoc()
 	{
@@ -1184,21 +1196,19 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		return JDFModulePool.getModuleAvailability(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cip4.jdflib.ifaces.IModuleCapability#getModulePool()
-	 */
+	/**
+	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getModulePool()
+	 * @return
+	*/
 	public JDFModulePool getModulePool()
 	{
 		return (JDFModulePool) getParentPool(ElementName.MODULEPOOL);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cip4.jdflib.ifaces.IModuleCapability#getModulePool()
-	 */
+	/**
+	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getCreateModulePool()
+	 * @return
+	*/
 	public JDFModulePool getCreateModulePool()
 	{
 		return (JDFModulePool) getCreateParentPool(ElementName.MODULEPOOL);
@@ -1206,8 +1216,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
+	 * @param poolName 
 	 * 
-	 * @return JDFDevCapPool the pool
+	 * @return KElement the pool
 	 */
 	private KElement getParentPool(final String poolName)
 	{
@@ -1217,8 +1228,9 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 
 	/**
 	 * get the DEvCapPool that contains devcap elements referenced by this
+	 * @param poolName 
 	 * 
-	 * @return JDFDevCapPool the pool
+	 * @return KElement the pool
 	 */
 	private KElement getCreateParentPool(final String poolName)
 	{
@@ -1226,6 +1238,10 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		return parent.getCreateElement(poolName);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private KElement getPoolParent()
 	{
 		KElement parent = getDeepParent(ElementName.DEVICECAP, 0);
@@ -1250,23 +1266,20 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		return StringUtil.tokenize(getAttribute(AttributeName.MODULEREFS, null, null), " ", false);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cip4.jdflib.ifaces.IModuleCapability#appendModuleRef(java.lang.String )
-	 */
+	/**
+	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#appendModuleRef(java.lang.String)
+	 * @param id
+	 * @return
+	*/
 	public JDFModuleCap appendModuleRef(final String id)
 	{
 		return JDFModulePool.appendModuleRef(this, id);
 	}
 
-	// ///////////////////////////////////////////
-
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see org.cip4.jdflib.core.KElement#init()
-	 */
+	 * @return
+	*/
 	@Override
 	public boolean init()
 	{
@@ -1285,11 +1298,10 @@ public abstract class JDFAbstractState extends JDFElement implements JDFBaseData
 		return "d";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see org.cip4.jdflib.ifaces.ICapabilityElement#getEvaluationType()
-	 */
+	 * @return
+	*/
 	public abstract EnumTerm getEvaluationType();
 
 }

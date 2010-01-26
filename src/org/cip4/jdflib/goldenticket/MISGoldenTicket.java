@@ -80,9 +80,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFCustomerInfo;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
@@ -194,7 +194,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *   
 	 */
 	@Override
 	protected JDFNodeInfo initNodeInfo()
@@ -268,7 +268,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 		}
 		if (!theNode.hasAncestorAttribute(AttributeName.JOBID, null))
 		{
-			theNode.setJobID("Job" + JDFElement.uniqueID(0));
+			theNode.setJobID("Job" + KElement.uniqueID(0));
 		}
 		final VString types = getTypes();
 		if (types != null)
@@ -285,7 +285,8 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 * @return 
+	 * 
 	 */
 	protected JDFCustomerInfo initCustomerInfo()
 	{

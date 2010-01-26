@@ -498,7 +498,7 @@ public class JDFResourcePool extends JDFPool
 	 * Method getPoolChildren_JDFResourcePool<br>
 	 * Gets all children with the attributes <code>name, mAttrib, nameSpaceURI</code> from the pool
 	 * 
-	 * @param name name of the child
+	 * @param strName name of the child
 	 * @param mAttrib attribute to search for
 	 * @param nameSpaceURI namespace to search in
 	 * @return VElement - a vector with all elements in the pool matching the conditions
@@ -539,7 +539,7 @@ public class JDFResourcePool extends JDFPool
 	 * get a child resource from the pool matching the parameters
 	 * 
 	 * @param i the index of the child or -1 to make a new one.
-	 * @param name the name of the element
+	 * @param strName the name of the element
 	 * @param mAttrib the attribute of the element
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFResource: the pool child matching the above conditions

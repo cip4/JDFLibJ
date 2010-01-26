@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -85,6 +85,9 @@ package org.cip4.jdflib.util;
 public interface Duration
 {
 
+	/**
+	 * 
+	 */
 	static final long serialVersionUID = 1L;
 
 	// private static final String REGEX_DURATION_RESTRICTED is a
@@ -119,8 +122,10 @@ public interface Duration
 	// E.g. expressions "P60D" that is equal 60 days or "PT68H" that is equal
 	// 68hours are allowed
 
-	static final String REGEX_DURATION = "[P](((\\d)*)[Y])?((\\d)*[M])?((\\d)*[D])?"
-			+ "([T]((\\d)*[H])?((\\d)*[M])?((\\d)*[S])?)?";
+	/**
+	 * 
+	 */
+	static final String REGEX_DURATION = "[P](((\\d)*)[Y])?((\\d)*[M])?((\\d)*[D])?" + "([T]((\\d)*[H])?((\\d)*[M])?((\\d)*[S])?)?";
 
 	/**
 	 * Format and return the duration set by 'setDuration(int i)' or 'setDurationString(String a_aDuration)' as an ISO

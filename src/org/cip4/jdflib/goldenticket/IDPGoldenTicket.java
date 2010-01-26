@@ -159,6 +159,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
 	private JDFInterpretingParams initInterpretingParams()
@@ -168,6 +169,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
 	private JDFDigitalPrintingParams initDigitalPrintingParams()

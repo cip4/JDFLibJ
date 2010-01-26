@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -241,6 +241,17 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "JDF.jdf");
 		assertNotNull(bp);
 		assertEquals(bp.getFileName(), "JDF.jdf");
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testIsMimeMultiPart() throws Exception
+	{
+		assertTrue(MimeUtil.isMimeMultiPart(MimeUtil.MULTIPART_RELATED));
+		assertTrue(MimeUtil.isMimeMultiPart(MimeUtil.MULTIPART_RELATED + "; foo"));
+		assertTrue(MimeUtil.isMimeMultiPart(" " + MimeUtil.MULTIPART_RELATED + "; foo"));
+		assertTrue(MimeUtil.isMimeMultiPart(" " + MimeUtil.MULTIPART_RELATED.toUpperCase() + "; foo"));
 	}
 
 	/**

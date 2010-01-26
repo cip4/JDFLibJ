@@ -1,15 +1,10 @@
 /**
  *
- * Copyright (c) 2005 Heidelberger Druckmaschinen AG, All Rights Reserved.
  *
- * ElemInfo.java
- *
- * -------------------------------------------------------------------------------------------------
- *
- * The CIP4 Software License, Version 0.1
+ * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,6 +74,9 @@ package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class ElemInfo
 {
 
@@ -86,6 +84,7 @@ public class ElemInfo
 
 	/**
 	 * Constructor
+	 * @param s 
 	 */
 	public ElemInfo(long s)
 	{
@@ -100,6 +99,10 @@ public class ElemInfo
 		return elemValidityStatus;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
 	@Override
 	public String toString()
 	{

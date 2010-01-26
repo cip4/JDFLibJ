@@ -123,7 +123,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		reset();
 	}
 
@@ -140,6 +140,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testIsNewLayout()
 	{
 		assertEquals("version ok", n.getVersion(false), defaultVersion);
@@ -154,6 +157,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAutoRegister()
 	{
 
@@ -198,6 +204,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception
+	 */
 	public void testDynamicMarks() throws Exception
 	{
 		JDFElement.setLongID(false);
@@ -475,6 +484,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testFixFromFlatNewLayout()
 	{
 		n.setVersion(EnumVersion.Version_1_3);
@@ -492,6 +504,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testFixFromSheetNewLayout()
 	{
 		n.setVersion(EnumVersion.Version_1_3);
@@ -510,6 +525,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testFixFromSurfaceNewLayout()
 	{
 		n.setVersion(EnumVersion.Version_1_3);
@@ -596,6 +614,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetLayoutLeavesNew()
 	{
 		testBuildNewLayout();
@@ -613,6 +634,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetSignatureVector_Old()
 	{
 		testBuildOldLayout();
@@ -638,6 +662,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetSignatureName_Old()
 	{
 		testBuildOldLayout();
@@ -717,6 +744,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetSignatureVector_New()
 	{
 		testBuildNewLayout();
@@ -740,6 +770,9 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testFixVersionProblem()
 	{
 		final JDFParser p = new JDFParser();
@@ -753,13 +786,14 @@ public class JDFLayoutTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////
 
-	/*
+	/**
 	 * GeneratedObject
 	 * 
-	 * CTM or Position Position: See ImageShift PositionX and PositionY, Shift (Margins) – See ShiftFront RelativeShift?
+	 * CTM or Position Position: See ImageShift PositionX and PositionY, Shift (Margins) ï¿½ See ShiftFront RelativeShift?
 	 * 
-	 * Anchor Point (same as position ll, ul, cc, spine…) (if CTM is given) Orientation (rotation, matrix or ll, ul, …) Contents Format/Template JobField
-	 * (Replace, DynamicField?) SeparationList Mark References (FoldMark, CIE, …)
+	 * Anchor Point (same as position ll, ul, cc, spineï¿½) (if CTM is given) Orientation (rotation, matrix or ll, ul, ï¿½) Contents Format/Template JobField
+	 * (Replace, DynamicField?) SeparationList Mark References (FoldMark, CIE, ï¿½)
+	 * @throws Exception 
 	 */
 	public void testGeneratedObject() throws Exception
 	{
@@ -768,19 +802,13 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		final JDFRunList rlo = (JDFRunList) n.addResource("RunList", null, EnumUsage.Output, null, null, null, null);
 		rlo.setFileURL("output.pdf");
 
-		lo
-				.appendXMLComment(
-						"This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb",
-						null);
+		lo.appendXMLComment("This is a simple horizontal slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes error and endtime in the lower left corner of the scb", null);
 		JDFMarkObject mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("1 0 0 1 0 0"));
 		JDFJobField jf = mark.appendJobField();
 		jf.setShowList(new VString("Error EndTime", " "));
 
-		lo
-				.appendXMLComment(
-						"This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)",
-						null);
+		lo.appendXMLComment("This is a simple vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes the operator name along the right side of the sheet text from top to bottom\nthe slug line (top right of the slug cs) is anchored in the bottom right of the sheet.\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("0 1 -1 0 555 444"));
 		jf = mark.appendJobField();
@@ -790,10 +818,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		dm.setFont("Arial");
 		dm.setFontSize(10);
 
-		lo
-				.appendXMLComment(
-						"This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)",
-						null);
+		lo.appendXMLComment("This is a formatted vertical slug line\nAnchor specifies which of the 9 coordinates is the 0 point for the coordinate system specified in the CTM\nThis slugline describes a formatted line along the left side of the sheet text from top to bottom\nthe slug line (top left) is anchored in the bottom left of the sheet.\nThe text is defined in @Format with the sequence in ShowList defining the 5 placeholders marked by %s or %i\nAn example instance would be: \"This Cyan plate of Sheet1 was proudly produced by Joe Cool! Resolution: 600 x 600\"\nNote that the coordinates in the ctm are guess work. the real coordinates are left as an exercise for the reader;-)", null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("0 1 -1 0 0 0"));
 		jf = mark.appendJobField();
@@ -804,8 +829,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 		dm.setFont("Arial");
 		dm.setFontSize(10);
 
-		lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested",
-				null);
+		lo.appendXMLComment("This is a positioned registermark\nthe center of the mark is translated by 666 999\n the JobField is empty and serves aa a Marker that no external Content is requested", null);
 		mark = lo.appendMarkObject();
 		mark.setCTM(new JDFMatrix("1 0 0 1 666 999"));
 		jf = mark.appendJobField();

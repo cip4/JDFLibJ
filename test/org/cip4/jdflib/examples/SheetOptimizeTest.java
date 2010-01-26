@@ -8,7 +8,7 @@ package org.cip4.jdflib.examples;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.node.JDFNode;
@@ -34,7 +34,7 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 	 */
 	public void testDescribeSheetOptimize() throws Exception
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		n.setXMLComment("");

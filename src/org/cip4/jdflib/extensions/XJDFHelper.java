@@ -72,7 +72,6 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -194,7 +193,7 @@ public class XJDFHelper
 		newSet.setAttribute("Name", name);
 		if (name == null)
 			name = "Set";
-		newSet.setAttribute(AttributeName.ID, name + JDFElement.uniqueID(0));
+		newSet.setAttribute(AttributeName.ID, name + KElement.uniqueID(0));
 		return new SetHelper(newSet);
 	}
 
@@ -238,7 +237,6 @@ public class XJDFHelper
 	}
 
 	/**
-	 * @param name 
 	 * @return a new set element
 	 */
 	public ProductHelper appendProduct()

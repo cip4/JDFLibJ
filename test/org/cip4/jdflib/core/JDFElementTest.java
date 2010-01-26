@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -242,12 +242,16 @@ public class JDFElementTest extends JDFTestCaseBase
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = doc.getJDFRoot();
 		root.setType("foo:bar", false);
-		root.addNameSpace("foo", "www.foo.com");
+		String fooNS = "www.foo.com";
+		root.addNameSpace("foo", fooNS);
 		final JDFResource r = root.addResource("foo:res", EnumResourceClass.Parameter, EnumUsage.Input, null, null, null, null);
 		final JDFResourceLink rl = root.getLink(r, null);
 		rl.setPartMap(new JDFAttributeMap("Side", "Front"));
 		assertEquals(rl.toString().indexOf("xmlns=\"\""), -1);
 		assertEquals(rl.getPart(0).toString().indexOf("xmlns=\"\""), -1);
+		assertEquals(r.getNamespaceURI(), fooNS);
+		assertEquals(rl.getNamespaceURI(), fooNS);
+		assertEquals(rl.getElement("Part").getNamespaceURI(), root.getNamespaceURI());
 	}
 
 	/**
@@ -340,6 +344,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testDefaultVersion()
 	{
 
@@ -364,6 +371,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testEvaluateXY()
 	{
 		EnumXYRelation xyR = EnumXYRelation.eq;
@@ -397,7 +407,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * Method testGenerateDotID.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGenerateDotID()
 	{
@@ -438,7 +447,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * Method testIncludesMatchingAttribute.
 	 * 
-	 * @throws Exception
 	 */
 	public void testIncludesMatchingAttribute()
 	{
@@ -466,7 +474,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * Method testChildElementVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetRefElement()
 	{
@@ -488,7 +495,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * Method testChildElementVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetCreateElement()
 	{
@@ -502,7 +508,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * Method testChildElementVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetCreateRefElement()
 	{
@@ -537,7 +542,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * Method testChildElementVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetChildElementVector()
 	{
@@ -578,7 +582,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * Method testChildElementVector.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetParentJDFStatic()
 	{
@@ -596,6 +599,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////7
 
+	/**
+	 * 
+	 */
 	public void testGetSettingsPolicy()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -607,12 +613,17 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(ap.getSettingsPolicy(true), EnumSettingsPolicy.MustHonor);
 	}
 
-	// /////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetValueForNewAttribute()
 	{
 		assertTrue(JDFElement.getValueForNewAttribute(null, "ID").startsWith("I"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testGetParentJDFNode()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -632,7 +643,6 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * Method testGetElementByID.
 	 * 
-	 * @throws Exception
 	 */
 	public void testGetElementByID()
 	{
@@ -672,12 +682,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertTrue("kelem4!=null", kelem4 == null);
 	}
 
-	// public void testGetDueLevel ()
-	// {
-	// JDFNodeInfo info = new JDFNodeInfo(m_kElement);
-	// info.GetDueLevel();
-	// }
-
+	/**
+	 * 
+	 */
 	public void testIsCommentStatic()
 	{
 
@@ -688,6 +695,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertTrue("Bug: This is no comment!", m_kElement instanceof JDFComment);
 	}
 
+	/**
+	 * 
+	 */
 	public void testIsResourceStatic()
 	{
 		_setUp();
@@ -699,6 +709,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertFalse("Bug: " + m_kElement.getNodeName() + " is a Resource!", m_kElement instanceof JDFResource);
 	}
 
+	/**
+	 * 
+	 */
 	public void testIsResourceLinkStatic()
 	{
 		_setUp();
@@ -708,6 +721,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertTrue("Bug: This is no ResourceLink!", m_kElement instanceof JDFResourceLink);
 	}
 
+	/**
+	 * 
+	 */
 	public void testInheritedVersionInfo()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -720,6 +736,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(ni.getVersion(true), EnumVersion.Version_1_3);
 	}
 
+	/**
+	 * 
+	 */
 	public void testMatchesPathKElement()
 	{
 		final JDFDoc doc = new JDFDoc("Test"); // make sure we call jdf methods
@@ -739,6 +758,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertTrue(a.matchesPath("/Test/a[@att=\"*\"]", false));
 	}
 
+	/**
+	 * 
+	 */
 	public void testMatchesPath()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -774,6 +796,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testRefElement()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -837,6 +862,9 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertNull(c.getElement("ContactRef"));
 	}
 
+	/**
+	 * 
+	 */
 	public void testIsValid()
 	{
 		final File testData = new File(sm_dirTestData + "SampleFiles");
@@ -948,13 +976,13 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testIncrementUniqueID()
 	{
-		JDFElement.setLongID(false);
-		JDFElement.uniqueID(1);
-		assertTrue(JDFElement.uniqueID(0).endsWith("" + 2));
-		JDFElement.uniqueID(10000);
-		assertTrue(JDFElement.uniqueID(0).endsWith("" + 10001));
-		JDFElement.uniqueID(-5000);
-		assertTrue("neg=increment", JDFElement.uniqueID(0).endsWith("" + 15003));
+		KElement.setLongID(false);
+		KElement.uniqueID(1);
+		assertTrue(KElement.uniqueID(0).endsWith("" + 2));
+		KElement.uniqueID(10000);
+		assertTrue(KElement.uniqueID(0).endsWith("" + 10001));
+		KElement.uniqueID(-5000);
+		assertTrue("neg=increment", KElement.uniqueID(0).endsWith("" + 15003));
 	}
 
 	/**
@@ -963,10 +991,10 @@ public class JDFElementTest extends JDFTestCaseBase
 	public void testUniqueID()
 	{
 		final HashSet<String> m = new HashSet<String>();
-		JDFElement.uniqueID(99998);
+		KElement.uniqueID(99998);
 		for (int i = 0; i < 200000; i++)
 		{
-			final String s = JDFElement.uniqueID(0);
+			final String s = KElement.uniqueID(0);
 			if (m.contains(s))
 			{
 				fail("oops");
@@ -995,6 +1023,9 @@ public class JDFElementTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testAppendAnchor()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");

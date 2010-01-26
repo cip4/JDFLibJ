@@ -164,8 +164,8 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 		if (argV.length > 1 && argV[1].equals("-?"))
 		{
 			// Watch for special case help request
-			String usage = "JDFExample; example usages of the JDF Library\n" + "Arguments: -a: actions to perform \n"
-					+ "           -i input JDF file\n" + "           -o output JDF File\n";
+			String usage = "JDFExample; example usages of the JDF Library\n" + "Arguments: -a: actions to perform \n" + "           -i input JDF file\n"
+					+ "           -o output JDF File\n";
 
 			System.out.println(args.usage(usage));
 			return;
@@ -664,8 +664,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			// print out the details
 			for (int i = 0; i < vInvalidAttributes.size(); i++)
 			{
-				System.out.println("key: " + vInvalidAttributes.elementAt(i) + " value: "
-						+ rl.getAttribute((String) vInvalidAttributes.elementAt(i), "", ""));
+				System.out.println("key: " + vInvalidAttributes.elementAt(i) + " value: " + rl.getAttribute((String) vInvalidAttributes.elementAt(i), "", ""));
 			}
 
 			System.out.println("end DoValid");
@@ -1115,11 +1114,10 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	/**
 	 * create a simple stripping node for 2 user jobs in a gang job
 	 * 
-	 * @return
 	 */
 	public void testDigitalDelivery()
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode pgNode = d.getJDFRoot();
@@ -1137,11 +1135,10 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	/**
 	 * create a simple stripping node for 2 user jobs in a gang job
 	 * 
-	 * @return
 	 */
 	public void testGangDigitalDelivery()
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 
 		JDFNode delNode1 = creatDeliveryNode(null);
 		delNode1.setJobID("Del1ID");
@@ -1261,7 +1258,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 	 */
 	public int testMISGang() throws Exception
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		// set up the root process node, which is an imposition node
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode misNode = d.getJDFRoot();

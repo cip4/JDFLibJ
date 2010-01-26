@@ -13,7 +13,7 @@ import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.auto.JDFAutoBoxArgument.EnumBox;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -62,14 +62,13 @@ public class PreflightTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 	}
 
 	public void testPreflightReport() throws Exception
 	{
 		testPreflightProfile();
-		JDFPreflightReport prp = (JDFPreflightReport) n.appendMatchingResource(
-				ElementName.PREFLIGHTREPORT, EnumProcessUsage.AnyOutput, null);
+		JDFPreflightReport prp = (JDFPreflightReport) n.appendMatchingResource(ElementName.PREFLIGHTREPORT, EnumProcessUsage.AnyOutput, null);
 		prp.refElement(preparms);
 		prp.refElement(inRun);
 		prp.refElement(prrp);
@@ -100,9 +99,7 @@ public class PreflightTest extends JDFTestCaseBase
 		assertEquals(pi4.getPageSet(), new JDFIntegerRangeList("3"));
 
 		assertEquals(prp.numChildElements(ElementName.PRITEM, null), 2);
-		n.getOwnerDocument_KElement().write2File(
-				sm_dirTestDataTemp + File.separator + "PreflightReport.jdf", 2,
-				false);
+		n.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + File.separator + "PreflightReport.jdf", 2, false);
 	}
 
 	/**
@@ -117,15 +114,11 @@ public class PreflightTest extends JDFTestCaseBase
 		n = d.getJDFRoot();
 		n.setType(EnumType.Preflight);
 
-		inRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST,
-				EnumProcessUsage.AnyInput, null);
+		inRun = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
 		inRun.setFileURL("input.pdf");
 
-		preparms = (JDFPreflightParams) n.appendMatchingResource(
-				ElementName.PREFLIGHTPARAMS, EnumProcessUsage.AnyInput, null);
-		prrp = (JDFPreflightReportRulePool) n.appendMatchingResource(
-				ElementName.PREFLIGHTREPORTRULEPOOL, EnumProcessUsage.AnyInput,
-				null);
+		preparms = (JDFPreflightParams) n.appendMatchingResource(ElementName.PREFLIGHTPARAMS, EnumProcessUsage.AnyInput, null);
+		prrp = (JDFPreflightReportRulePool) n.appendMatchingResource(ElementName.PREFLIGHTREPORTRULEPOOL, EnumProcessUsage.AnyInput, null);
 
 		// new
 		aPool = (JDFActionPool) preparms.appendElement(ElementName.ACTIONPOOL);
@@ -140,24 +133,19 @@ public class PreflightTest extends JDFTestCaseBase
 		appendResolutionActionBitMap();
 		appendLineWeightAction();
 
-		d.write2File(sm_dirTestDataTemp + File.separator
-				+ "PreflightProfile.jdf", 2, false);
+		d.write2File(sm_dirTestDataTemp + File.separator + "PreflightProfile.jdf", 2, false);
 
 	}
 
 	protected void appendResolutionActionBitMap()
 	{
 		{
-			JDFAction a = aPool.appendActionSetTest(EnumTerm.XYPairEvaluation,
-					EnumTerm.IntegerEvaluation, true);
+			JDFAction a = aPool.appendActionSetTest(EnumTerm.XYPairEvaluation, EnumTerm.IntegerEvaluation, true);
 			a.setSeverity(EnumSeverity.Warning);
-			JDFXYPairEvaluation resolution = (JDFXYPairEvaluation) a
-					.getTestTerm();
+			JDFXYPairEvaluation resolution = (JDFXYPairEvaluation) a.getTestTerm();
 			resolution.appendBasicPreflightTest("EffectiveResolution");
-			resolution.setValueList(new JDFXYPairRangeList(new JDFXYPairRange(
-					new JDFXYPair(0, 0), new JDFXYPair(1200, 1200))));
-			JDFEvaluation setEval = (JDFEvaluation) a
-					.getPreflightActionSetTerm();
+			resolution.setValueList(new JDFXYPairRangeList(new JDFXYPairRange(new JDFXYPair(0, 0), new JDFXYPair(1200, 1200))));
+			JDFEvaluation setEval = (JDFEvaluation) a.getPreflightActionSetTerm();
 			setEval.appendBasicPreflightTest("BitsPerSample");
 
 			a.setDescriptiveName("Warn when effective resolution<1200 dpi");
@@ -170,14 +158,11 @@ public class PreflightTest extends JDFTestCaseBase
 	protected void appendResolutionAction()
 	{
 		{
-			JDFAction a = aPool.appendActionTest(EnumTerm.XYPairEvaluation,
-					true);
+			JDFAction a = aPool.appendActionTest(EnumTerm.XYPairEvaluation, true);
 			a.setSeverity(EnumSeverity.Warning);
-			JDFXYPairEvaluation resolution = (JDFXYPairEvaluation) a
-					.getTestTerm();
+			JDFXYPairEvaluation resolution = (JDFXYPairEvaluation) a.getTestTerm();
 			resolution.appendBasicPreflightTest("EffectiveResolution");
-			resolution.setValueList(new JDFXYPairRangeList(new JDFXYPairRange(
-					new JDFXYPair(0, 0), new JDFXYPair(300, 300))));
+			resolution.setValueList(new JDFXYPairRangeList(new JDFXYPairRange(new JDFXYPair(0, 0), new JDFXYPair(300, 300))));
 
 			a.setDescriptiveName("Warn when effective resolution<300 dpi");
 		}
@@ -188,11 +173,9 @@ public class PreflightTest extends JDFTestCaseBase
 	protected void appendTransparency()
 	{
 		{
-			JDFAction a = aPool.appendActionTest(EnumTerm.BooleanEvaluation,
-					true);
+			JDFAction a = aPool.appendActionTest(EnumTerm.BooleanEvaluation, true);
 			a.setSeverity(EnumSeverity.Error);
-			JDFBooleanEvaluation transparency = (JDFBooleanEvaluation) a
-					.getTestTerm();
+			JDFBooleanEvaluation transparency = (JDFBooleanEvaluation) a.getTestTerm();
 			transparency.appendBasicPreflightTest("TransparencyFlag");
 			transparency.setValueList(false);
 
@@ -204,16 +187,12 @@ public class PreflightTest extends JDFTestCaseBase
 	protected void appendTrimBoxAction()
 	{
 		{
-			JDFAction a = aPool.appendActionSetTest(
-					EnumTerm.RectangleEvaluation,
-					EnumTerm.EnumerationEvaluation, false);
+			JDFAction a = aPool.appendActionSetTest(EnumTerm.RectangleEvaluation, EnumTerm.EnumerationEvaluation, false);
 			a.setSeverity(EnumSeverity.Error);
-			JDFRectangleEvaluation trimBox = (JDFRectangleEvaluation) ((JDFnot) a
-					.getTestTerm()).getTerm(null, 0);
+			JDFRectangleEvaluation trimBox = (JDFRectangleEvaluation) ((JDFnot) a.getTestTerm()).getTerm(null, 0);
 			trimBox.appendBasicPreflightTest("PageBoxSize");
 			trimBox.setValueList(new JDFRectangle(0, 0, 8.5 * 72, 11 * 72));
-			JDFEnumerationEvaluation setEval = (JDFEnumerationEvaluation) a
-					.getPreflightActionSetTerm();
+			JDFEnumerationEvaluation setEval = (JDFEnumerationEvaluation) a.getPreflightActionSetTerm();
 			setEval.appendBasicPreflightTest("PageBoxName");
 			setEval.setValueList(new VString(EnumBox.TrimBox.getName(), " "));
 
@@ -227,8 +206,7 @@ public class PreflightTest extends JDFTestCaseBase
 		JDFAction a = aPool.appendActionTest(EnumTerm.NumberEvaluation, true);
 		a.setSeverity(EnumSeverity.Error);
 		JDFNumberEvaluation hairLine = (JDFNumberEvaluation) a.getTestTerm();
-		hairLine.setValueList(new JDFNumberRangeList(new JDFNumberRange(0.0,
-				0.216)));
+		hairLine.setValueList(new JDFNumberRangeList(new JDFNumberRange(0.0, 0.216)));
 		hairLine.appendBasicPreflightTest("StrokeThickness");
 
 		a.setDescriptiveName("set minimum stroke width to 0.216");
@@ -237,18 +215,15 @@ public class PreflightTest extends JDFTestCaseBase
 	// ///////////////////////////////////////////////////////////////////////
 	protected void appendBWSeparationAction()
 	{
-		JDFAction a = aPool.appendActionSetTest(EnumTerm.StringEvaluation,
-				EnumTerm.IntegerEvaluation, false);
+		JDFAction a = aPool.appendActionSetTest(EnumTerm.StringEvaluation, EnumTerm.IntegerEvaluation, false);
 		a.setSeverity(EnumSeverity.Error);
 
-		JDFStringEvaluation numSeparations = (JDFStringEvaluation) ((JDFnot) a
-				.getTestTerm()).getTerm(null, 0);
+		JDFStringEvaluation numSeparations = (JDFStringEvaluation) ((JDFnot) a.getTestTerm()).getTerm(null, 0);
 		numSeparations.appendBasicPreflightTest("SeparationList");
 		a.setDescriptiveName("separation to black only on page 1 and 2");
 		numSeparations.appendValueValue("Black");
 
-		JDFIntegerEvaluation setEval = (JDFIntegerEvaluation) a
-				.getPreflightActionSetTerm();
+		JDFIntegerEvaluation setEval = (JDFIntegerEvaluation) a.getPreflightActionSetTerm();
 		setEval.appendBasicPreflightTest("PageNumber");
 		setEval.appendValueList(1);
 		setEval.appendValueList(2);
@@ -259,11 +234,9 @@ public class PreflightTest extends JDFTestCaseBase
 	protected void appendNumPagesAction()
 	{
 		{
-			JDFAction a = aPool.appendActionTest(EnumTerm.IntegerEvaluation,
-					false);
+			JDFAction a = aPool.appendActionTest(EnumTerm.IntegerEvaluation, false);
 			a.setSeverity(EnumSeverity.Error);
-			JDFIntegerEvaluation numPages = (JDFIntegerEvaluation) ((JDFnot) a
-					.getTestTerm()).getTerm(null, 0);
+			JDFIntegerEvaluation numPages = (JDFIntegerEvaluation) ((JDFnot) a.getTestTerm()).getTerm(null, 0);
 			numPages.appendBasicPreflightTest("NumberOfPages");
 			numPages.appendValueList(4);
 			a.setDescriptiveName("set number of pages to 4");
@@ -274,22 +247,17 @@ public class PreflightTest extends JDFTestCaseBase
 	protected void appendSeparationAction()
 	{
 		{
-			JDFAction a = aPool.appendActionSetTest(EnumTerm.StringEvaluation,
-					EnumTerm.IntegerEvaluation, false);
+			JDFAction a = aPool.appendActionSetTest(EnumTerm.StringEvaluation, EnumTerm.IntegerEvaluation, false);
 			a.setSeverity(EnumSeverity.Error);
 
-			JDFStringEvaluation numSeparations = (JDFStringEvaluation) ((JDFnot) a
-					.getTestTerm()).getTerm(null, 0);
-			JDFBasicPreflightTest testSeps = numSeparations
-					.appendBasicPreflightTest("SeparationList");
-			a
-					.setDescriptiveName("set number of separations to 6 on page 0 and 3");
+			JDFStringEvaluation numSeparations = (JDFStringEvaluation) ((JDFnot) a.getTestTerm()).getTerm(null, 0);
+			JDFBasicPreflightTest testSeps = numSeparations.appendBasicPreflightTest("SeparationList");
+			a.setDescriptiveName("set number of separations to 6 on page 0 and 3");
 			testSeps.setMinOccurs(6);
 			testSeps.setMaxOccurs(6);
 			testSeps.setListType(EnumListType.UniqueList);
 
-			JDFIntegerEvaluation setEval = (JDFIntegerEvaluation) a
-					.getPreflightActionSetTerm();
+			JDFIntegerEvaluation setEval = (JDFIntegerEvaluation) a.getPreflightActionSetTerm();
 			setEval.appendBasicPreflightTest("PageNumber");
 			setEval.appendValueList(0);
 			setEval.appendValueList(3);

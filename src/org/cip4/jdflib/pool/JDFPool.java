@@ -151,7 +151,7 @@ public abstract class JDFPool extends JDFElement
 	 * <p>
 	 * default: GetPoolChildrenGeneric (JDFConstants.EMPTYSTRING, new JDFAttributeMap(), JDFConstants.EMPTYSTRING)
 	 * 
-	 * @param name name of the Child
+	 * @param strName name of the Child
 	 * @param mAttrib the attribute to search for
 	 * @param nameSpaceURI nameSpaceURI to search in
 	 * @return VElement: a vector with all elements in the pool matching the conditions
@@ -173,7 +173,7 @@ public abstract class JDFPool extends JDFElement
 	 * get a child from the pool matching the parameters
 	 * 
 	 * @param i the index of the child, or -1 to make a new one.
-	 * @param name the name of the element
+	 * @param strName the name of the element
 	 * @param mAttrib the attribute of the element
 	 * @param nameSpaceURI the namespace to search in
 	 * @return JDFElement: the pool child matching the above conditions

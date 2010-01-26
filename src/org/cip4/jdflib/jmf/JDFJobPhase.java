@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFModulePhase;
@@ -333,7 +334,7 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 			return null;
 		}
 		parent = parent.getParentNode_KElement();
-		if (!(parent instanceof JDFMessage))
+		if (!(parent instanceof JDFSignal) || !EnumType.Status.equals(((JDFMessage) parent).getEnumType()))
 		{
 			return null;
 		}
@@ -354,7 +355,7 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	}
 
 	/**
-	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.JDFNode.NodeIdentifier)
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
 	 * @param ni
 	 */
 	public void setIdentifier(final NodeIdentifier ni)

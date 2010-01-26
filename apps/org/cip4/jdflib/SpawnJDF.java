@@ -111,6 +111,10 @@ import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.MyArgs;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class SpawnJDF
 {
 	private static boolean fileExists(final String name)
@@ -141,8 +145,8 @@ public class SpawnJDF
 		final MyArgs args = new MyArgs(argv, "adenvT", "iopkwt", null);
 		System.out.println("MyArgs-args:" + args);
 
-		final String usage = "SpawnJDF: JDF spawn processor;\n" + "-i input JDF;\n" + "-o output JDF;\n" + "-p jobpartId;\n" + "-T <Timing>;\n" + "-k keys comma separated list of part keys\n"
-				+ "-w spawn global resources rw(default=ro)\n" + "-d delete node from original file" + "-n export as new jdf";
+		final String usage = "SpawnJDF: JDF spawn processor;\n" + "-i input JDF;\n" + "-o output JDF;\n" + "-p jobpartId;\n" + "-T <Timing>;\n"
+				+ "-k keys comma separated list of part keys\n" + "-w spawn global resources rw(default=ro)\n" + "-d delete node from original file" + "-n export as new jdf";
 
 		final boolean doEscapes = args.boolParameter('e', false);
 		final boolean bTime = args.boolParameter('T', false);

@@ -95,7 +95,6 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
 	 * make sure that corrupt files always return a null document
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	public void testRange()
 	{
 		JDFDoc doc = new JDFDoc("BindingLength");
@@ -109,7 +108,7 @@ public class JDFEnumerationSpanTest extends JDFTestCaseBase
 		v.add(EnumSpanBindingLength.Long);
 		v.add(EnumSpanBindingLength.Short);
 		bl.setRange(v);
-		Vector<ValuedEnum> v2 = bl.getRange();
+		Vector<? extends ValuedEnum> v2 = bl.getRange();
 		assertEquals("Range", v, v2);
 	}
 }

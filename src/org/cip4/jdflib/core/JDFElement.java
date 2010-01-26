@@ -152,6 +152,16 @@ import org.w3c.dom.NodeList;
 
 public class JDFElement extends KElement
 {
+	/**
+	 * set the ID generation algorithm to include a date
+	 * 
+	 * @param bLong if true (default), the date and time is used to generate long IDs
+	 */
+	static public void setLongID(final boolean bLong)
+	{
+		KElement.setLongID(bLong);
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	private static EnumVersion defaultVersion = EnumVersion.Version_1_4;
@@ -219,7 +229,7 @@ public class JDFElement extends KElement
 	 */
 	public JDFElement(final CoreDocumentImpl myOwnerDocument, final String qualifiedName)
 	{
-		super(myOwnerDocument, getSchemaURL(), qualifiedName);
+		super(myOwnerDocument, null, qualifiedName);
 	}
 
 	/**
@@ -231,7 +241,7 @@ public class JDFElement extends KElement
 	 */
 	public JDFElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName)
 	{
-		super(myOwnerDocument, myNamespaceURI == null ? getSchemaURL() : myNamespaceURI, qualifiedName);
+		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
@@ -244,7 +254,7 @@ public class JDFElement extends KElement
 	 */
 	public JDFElement(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
-		super(myOwnerDocument, myNamespaceURI == null ? getSchemaURL() : myNamespaceURI, qualifiedName, myLocalName);
+		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
 	/**
@@ -4949,12 +4959,12 @@ public class JDFElement extends KElement
 
 		if (attName.equals("ID"))
 		{
-			return "ID" + JDFElement.uniqueID(0);
+			return "ID" + KElement.uniqueID(0);
 		}
 
 		if (attName.equals("JobID"))
 		{
-			return "J" + JDFElement.uniqueID(0);
+			return "J" + KElement.uniqueID(0);
 		}
 
 		if (attName.equals("JobPartID") && (e instanceof JDFElement))

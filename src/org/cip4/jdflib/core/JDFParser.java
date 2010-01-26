@@ -87,6 +87,8 @@ import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XMLLocator;
 import org.apache.xerces.xni.XNIException;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.SkipInputStream;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Document;
@@ -419,7 +421,7 @@ public class JDFParser extends DOMParser
 	/**
 	 * @param schemaLocation
 	 * @param documentClassName
-	 * @param ErrorHandler default: initParser(null, DocumentJDFImpl.class.getName(), null);
+	 * @param errorHandler default: initParser(null, DocumentJDFImpl.class.getName(), null);
 	 */
 	private void initParser(final String schemaLocation, final String documentClassName, final XMLErrorHandler errorHandler)
 	{
@@ -480,7 +482,6 @@ public class JDFParser extends DOMParser
 	}
 
 	/**
-	 * @param parser
 	 * @param inSource
 	 * @param bEraseEmpty
 	 * @return
@@ -492,6 +493,7 @@ public class JDFParser extends DOMParser
 		{
 			super.parse(inSource);
 			doc.setMemberDoc((DocumentJDFImpl) getDocument());
+			doc.setInitOnCreate(true);
 			if (bEraseEmpty)
 			{
 				doc.getRoot().eraseEmptyNodes(true); // cleanup the XML
@@ -519,15 +521,17 @@ public class JDFParser extends DOMParser
 			final KElement root = doc.getRoot();
 			final DocumentJDFImpl memberDocument = doc.getMemberDocument();
 			final String namespaceURI = root.getNamespaceURI();
-			if (namespaceURI == null || !namespaceURI.toLowerCase().contains(JDFConstants.CIP4ORG))
+			boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF);
+			if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI))
+			{
+				root.setAttribute(JDFConstants.XMLNS, JDFConstants.JDFNAMESPACE);
+			}
+			if (!bJDFRoot && (namespaceURI == null || !namespaceURI.toLowerCase().contains(JDFConstants.CIP4ORG)))
 			{
 				memberDocument.bKElementOnly = true;
-				memberDocument.setIgnoreNSDefault(true);
 			}
-			else
-			{
-				memberDocument.setIgnoreNSDefault(ignoreNSDefault);
-			}
+			memberDocument.setIgnoreNSDefault(ignoreNSDefault);
+
 		}
 		return doc;
 	}
@@ -578,6 +582,7 @@ public class JDFParser extends DOMParser
 
 			memberDocument.bKElementOnly = bKElementOnly;
 			memberDocument.setIgnoreNSDefault(ignoreNSDefault);
+			memberDocument.bInitOnCreate = false;
 		}
 	}
 

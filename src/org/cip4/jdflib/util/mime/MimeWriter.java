@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -96,7 +96,6 @@ import javax.mail.util.ByteArrayDataSource;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -208,6 +207,19 @@ public class MimeWriter extends MimeHelper
 	}
 
 	/**
+	 * gets an input s
+	 * @return
+	 * @throws IOException
+	 * @throws MessagingException
+	 */
+	public InputStream getInputStream() throws IOException, MessagingException
+	{
+		ByteArrayIOStream bis = new ByteArrayIOStream();
+		writeToStream(bis);
+		return bis.getInputStream();
+	}
+
+	/**
 	 * 
 	 */
 	public MimeWriter()
@@ -301,8 +313,7 @@ public class MimeWriter extends MimeHelper
 		if (cid == null)
 		{
 			final KElement root = xmlDoc.getRoot();
-			cid = "CID_"
-					+ ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? ((JDFNode) root).getID() : JDFElement.uniqueID(0));
+			cid = "CID_" + ((root instanceof JDFNode && root.hasAttribute(AttributeName.ID)) ? ((JDFNode) root).getID() : KElement.uniqueID(0));
 		}
 
 		final BodyPart messageBodyPart = getCreatePartByCID(cid);

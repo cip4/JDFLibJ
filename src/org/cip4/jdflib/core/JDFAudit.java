@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -521,15 +521,6 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	}
 
 	/**
-	 * SetID
-	 * @param id
-	 */
-	public void setID(final String id)
-	{
-		setAttribute(AttributeName.ID, id, null);
-	}
-
-	/**
 	 * SetBy
 	 * @param by
 	 * @deprecated 2005-09-01 use setAuthor()
@@ -663,15 +654,6 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 	public String getAuthor()
 	{
 		return getAttribute(AttributeName.AUTHOR);
-	}
-
-	/**
-	 * Get string attribute ID
-	 */
-	@Override
-	public String getID()
-	{
-		return getAttribute(AttributeName.ID);
 	}
 
 	/**

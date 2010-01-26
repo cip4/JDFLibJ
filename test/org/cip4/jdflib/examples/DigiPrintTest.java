@@ -83,7 +83,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -300,7 +299,8 @@ public class DigiPrintTest extends JDFTestCaseBase
 			final String testType = v.stringAt(i);
 			final JDFAuditPool ap = n.getCreateAuditPool();
 			ap.appendXMLComment("JDF 1.3 incompatible auditing of module phases the REQUIRED time attributes are not set in the ModulePhase elements\n"
-					+ "- note that phases may now arbitrarily overlap\n" + "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper", null);
+					+ "- note that phases may now arbitrarily overlap\n"
+					+ "The modulePhase elements now only specify which modules are involved, times are all defined by the phasetime proper", null);
 			ap.appendXMLComment("The following phaseTime is executed by one module - the RIP,which executes two process steps (Interpreting and Rendering)", null);
 			final JDFPhaseTime ptRIP = ap.addPhaseTime(EnumNodeStatus.Setup, null, null);
 			final JDFDate date = new JDFDate();
@@ -452,7 +452,8 @@ public class DigiPrintTest extends JDFTestCaseBase
 	 */
 	public void testDirectProof()
 	{
-		n.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n" + "The direct proof is acceptable and included in the good output");
+		n.setXMLComment("Example workflow with initioal warmup phase, one direct proof and 100 copies of 10 sheets each.\n"
+				+ "The direct proof is acceptable and included in the good output");
 		digiParams.setDirectProofAmount(1);
 		digiParams.setXMLComment("1 initial proof is requested");
 		rlComp.setAmount(100, null);
@@ -751,7 +752,7 @@ public class DigiPrintTest extends JDFTestCaseBase
 	@Override
 	protected void setUp()
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName(null);
 		JDFAudit.setStaticAgentVersion(null);
 		JDFAudit.setStaticAuthor(null);

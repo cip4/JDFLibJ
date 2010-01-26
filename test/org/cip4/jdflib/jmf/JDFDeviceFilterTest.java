@@ -75,7 +75,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceFilter.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -94,7 +94,7 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 	@Override
 	public void setUp()
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		final JDFDoc doc = new JDFDoc(ElementName.DEVICELIST);
 		dl = (JDFDeviceList) doc.getRoot();
 		for (int i = 0; i < 10; i++)

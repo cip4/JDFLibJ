@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,12 +80,18 @@ package org.cip4.jdflib.core;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class XMLErrorHandler implements ErrorHandler
 {
 
-	private XMLDoc xmlOutput = null;
-	private KElement root;
+	private final XMLDoc xmlOutput;
+	private final KElement root;
 
+	/**
+	 * 
+	 */
 	public XMLErrorHandler()
 	{
 		super();
@@ -93,6 +99,10 @@ public class XMLErrorHandler implements ErrorHandler
 		root = xmlOutput.getRoot();
 	}
 
+	/**
+	 * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
+	 * @param exception
+	*/
 	public void warning(final SAXParseException exception)
 	{
 		String warn = exception.getMessage();
@@ -100,6 +110,10 @@ public class XMLErrorHandler implements ErrorHandler
 		kEl.setAttribute("Message", warn);
 	}
 
+	/**
+	 * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
+	 * @param exception
+	*/
 	public void error(final SAXParseException exception)
 	{
 		// print out all parser errors except undefined variables for non-JDF
@@ -126,6 +140,9 @@ public class XMLErrorHandler implements ErrorHandler
 		throw new JDFException("Fatal error in the Parser:" + er);
 	}
 
+	/**
+	 * @return
+	 */
 	public XMLDoc getXMLOutput()
 	{
 		return xmlOutput;

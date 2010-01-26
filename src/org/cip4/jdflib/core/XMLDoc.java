@@ -143,6 +143,7 @@ public class XMLDoc
 	public XMLDoc()
 	{
 		m_doc = new DocumentJDFImpl();
+		m_doc.bKElementOnly = true;
 		getCreateXMLDocUserData();
 	}
 
@@ -242,9 +243,8 @@ public class XMLDoc
 		if (namespaceURI == null)
 		{
 			m_doc.bKElementOnly = true;
-			m_doc.setIgnoreNSDefault(true);
 		}
-
+		m_doc.bInitOnCreate = true;
 		setRoot(strDocType, namespaceURI);
 		getCreateXMLDocUserData();
 	}
@@ -858,7 +858,7 @@ public class XMLDoc
 	}
 
 	/**
-	 * setthe node value
+	 * set the node value
 	 * 
 	 * @param nodeValue value to set the node to
 	 */
@@ -867,6 +867,19 @@ public class XMLDoc
 		if (m_doc != null)
 		{
 			m_doc.setNodeValue(nodeValue);
+		}
+	}
+
+	/**
+	 * set the namespace map from another document
+	 * 
+	 * @param other value to set the node to
+	 */
+	public void setNSMap(final XMLDoc other)
+	{
+		if (m_doc != null)
+		{
+			m_doc.setNSMap(other.m_doc);
 		}
 	}
 

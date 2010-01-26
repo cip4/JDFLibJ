@@ -84,6 +84,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
@@ -237,7 +238,7 @@ public class BaseGoldenTicket
 		baseICSLevel = pIcsLevel;
 		theVersion = jdfVersion == null ? EnumVersion.Version_1_3 : jdfVersion;
 		theStatusCounter = new StatusCounter(null, null, null);
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 	}
 
 	/**
@@ -267,7 +268,7 @@ public class BaseGoldenTicket
 		workStyle = parent.workStyle;
 		paperProductID = parent.paperProductID;
 
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		parent.addKid(this);
 	}
 
@@ -581,6 +582,8 @@ public class BaseGoldenTicket
 	/**
 	 * @param pgood
 	 * @param pwaste
+	 * @param bOutAvail 
+	 * @param bFirst 
 	 */
 	final protected void runSinglePhase(final int pgood, final int pwaste, final boolean bOutAvail, final boolean bFirst)
 	{
@@ -652,6 +655,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
+	 * @param previousNode 
+	 * @return 
 	 * 
 	 */
 	protected JDFDevice initDevice(final JDFNode previousNode)
@@ -694,8 +699,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param theNode
-	 * @param product
+	 * @param node
+	 * @param t
 	 * @return
 	 */
 	protected JDFNode addJDFNode(final JDFNode node, final EnumType t)
@@ -880,7 +885,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *  
 	 */
 	protected void initColorantControl()
 	{
@@ -968,7 +973,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 * @return 
+	 * 
 	 */
 	protected JDFMedia initPaperMedia()
 	{
@@ -1074,7 +1080,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 * 
+	 * @param usage
 	 */
 	protected void initPlateXM(final EnumUsage usage)
 	{
@@ -1209,6 +1216,7 @@ public class BaseGoldenTicket
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
 	protected JDFRunList initDocumentRunList()
@@ -1228,7 +1236,8 @@ public class BaseGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 * 
+	 * @return
 	 */
 	protected JDFComponent initOutputComponent()
 	{

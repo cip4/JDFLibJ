@@ -83,6 +83,7 @@ package org.cip4.jdflib.core;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Vector;
 
 import javax.mail.BodyPart;
 
@@ -90,6 +91,7 @@ import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ParentNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -111,7 +113,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	/**
 	 * skip initialization when creating a new element
 	 */
-	public boolean bInitOnCreate = true;
+	public boolean bInitOnCreate;
 	private boolean ignoreNSDefault = false;
 	private boolean strictNSCheck = bStaticStrictNSCheck;
 
@@ -215,10 +217,38 @@ public class DocumentJDFImpl extends DocumentImpl
 		clon.docElement = ((KElement) docElement).cloneRoot(new XMLDoc(clon));
 		clon.ownerDocument = clon;
 		clon.firstChild = clon.docElement;
+		clon.bInitOnCreate = bInitOnCreate;
+		clon.bKElementOnly = bKElementOnly;
+		clon.nsMap.clear();
+		clon.setNSMap(this);
 
 		userData.clear(); // otherwise, clon is indefinitely retained in userdata of the original document and we have a memory leak problem....
 		clon.userData.clear();
 		return clon;
+	}
+
+	/**
+	 * @param documentJDFImpl
+	 */
+	void setNSMap(DocumentJDFImpl documentJDFImpl)
+	{
+		if (documentJDFImpl == null)
+			return;
+
+		nsMap.putAll(documentJDFImpl.nsMap);
+		Element e = getDocumentElement();
+		if (e != null)
+		{
+			Vector<String> keys = ContainerUtil.getKeyVector(nsMap);
+			if (keys != null)
+			{
+				for (int i = 0; i < keys.size(); i++)
+				{
+					String prefix = keys.get(i);
+					setRootNSAttribute(prefix, nsMap.get(prefix));
+				}
+			}
+		}
 	}
 
 	// public static String getPackage(String nodeName)
@@ -279,6 +309,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		final Runtime rt = Runtime.getRuntime();
 		initialMem = rt.totalMemory() - rt.freeMemory();
 		nsMap = new HashMap<String, String>();
+		bInitOnCreate = true;
 	}
 
 	/**
@@ -336,10 +367,8 @@ public class DocumentJDFImpl extends DocumentImpl
 		{
 			constructi = sm_hashCtorElementNS.get(qualifiedName);
 
-			// it has to be 1 coreDocImpl plus 3 String Parameters
 			// otherwhise don't use hashtableentry
-			if (constructi == null || constructi.getParameterTypes().length != 4) // AS
-			// 17.09.02
+			if (constructi == null)// AS 17.09.02
 			{
 				try
 				{
@@ -350,7 +379,7 @@ public class DocumentJDFImpl extends DocumentImpl
 								java.lang.String.class, };
 
 						constructi = classOfConstructor.getDeclaredConstructor(constructorParameters);
-						putConstructorToHashMap(sm_hashCtorElementNS, qualifiedName, constructi);
+						putConstructorToHashMap(qualifiedName, constructi);
 					}
 				}
 				catch (final ClassNotFoundException e)
@@ -381,21 +410,19 @@ public class DocumentJDFImpl extends DocumentImpl
 	}
 
 	/**
-	 * @param hashCtorElement 
 	 * @param qualifiedName
 	 * @param constructi
 	 */
-	private void putConstructorToHashMap(final HashMap<String, Constructor<?>> hashCtorElement, final String qualifiedName, final Constructor<?> constructi)
+	private void putConstructorToHashMap(final String qualifiedName, final Constructor<?> constructi)
 	{
-		// only put the constructor into the map if its not a Resource or an
-		// element
-		// there are a couple of nodes which can be both resource and element
-		// depending on the occurrence
+		// only put the constructor into the map if its not a Resource or an element
+		// there are a couple of nodes which can be both resource and element depending on the occurrence
 		final String className = constructi.getDeclaringClass().getName();
 		final boolean bSpecialClass = isSpecialClass(qualifiedName, className);
-		if (bSpecialClass)
+		// it has to be 1 coreDocImpl plus 3 String Parameters
+		if (bSpecialClass && constructi.getParameterTypes().length == 4)
 		{
-			hashCtorElement.put(qualifiedName, constructi);
+			sm_hashCtorElementNS.put(qualifiedName, constructi);
 		}
 	}
 
@@ -640,7 +667,7 @@ public class DocumentJDFImpl extends DocumentImpl
 			}
 			else
 			{
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) ? (String) sm_PackageNames.get("EleDefault") : (String) sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) ? sm_PackageNames.get("EleDefault") : sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 
@@ -1526,7 +1553,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	}
 
 	/**
-	 * @return the setIgnoreNSDefault; if true no namespaces are heuristically gathered
+	 * @return the setIgnoreNSDefault; if true no namespaces are collected 
 	 */
 	public boolean isIgnoreNSDefault()
 	{
@@ -1549,6 +1576,8 @@ public class DocumentJDFImpl extends DocumentImpl
 	 */
 	public String getNamespaceURIFromPrefix(String prefix)
 	{
+		if (ignoreNSDefault)
+			return null;
 		if (prefix == null)
 			prefix = JDFConstants.COLON;
 		return nsMap.get(prefix);
@@ -1562,7 +1591,26 @@ public class DocumentJDFImpl extends DocumentImpl
 	{
 		if (prefix == null)
 			prefix = JDFConstants.COLON;
-		nsMap.put(prefix, strNamespaceURI);
+		String old = nsMap.get(prefix);
+		if (old == null || !old.equals(strNamespaceURI))
+		{
+			setRootNSAttribute(prefix, strNamespaceURI);
+			nsMap.put(prefix, strNamespaceURI);
+		}
+	}
+
+	/**
+	 * @param prefix
+	 * @param strNamespaceURI
+	 */
+	private void setRootNSAttribute(String prefix, String strNamespaceURI)
+	{
+		String qualifiedName = "xmlns";
+		if (!JDFConstants.COLON.equals(prefix))
+			qualifiedName += JDFConstants.COLON + prefix;
+		KElement element = (KElement) getDocumentElement();
+		if (element != null)
+			element.setAttribute(qualifiedName, strNamespaceURI, AttributeName.XMLNSURI);
 	}
 
 }

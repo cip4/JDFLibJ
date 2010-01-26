@@ -1,13 +1,10 @@
 /**
  *
- * AtrInfoTable.java
- *
- * -------------------------------------------------------------------------------------------------
  *
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -94,24 +91,27 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 public class ElementInfo
 {
 
+	/**
+	 * 
+	 */
 	public static HashMap<String, ElementInfo> fixedMap = new HashMap<String, ElementInfo>();
 
-	HashMap elementInfoTable = new HashMap();
+	HashMap<String, ElemInfo> elementInfoTable = new HashMap<String, ElemInfo>();
 	private EnumVersion version = null;
 
 	/**
 	 * Constructor
 	 * 
-	 * @param ElementInfo elemInfo_super: corresponding element info of super; if null: start from scratch, otherwise
+	 * @param elemInfo_super elemInfo_super: corresponding element info of super; if null: start from scratch, otherwise
 	 *            initialize from other ElementInfo
-	 * @param ElemInfoTable [] elemInfo_own: table with element-specific element info
+	 * @param elemInfo_own [] elemInfo_own: table with element-specific element info
 	 */
 	public ElementInfo(ElementInfo elemInfo_super, ElemInfoTable[] elemInfo_own)
 	{
 		// use ElementInfo of super as a starting point
 		if (elemInfo_super != null)
 		{
-			elementInfoTable = new HashMap(elemInfo_super.elementInfoTable);
+			elementInfoTable = new HashMap<String, ElemInfo>(elemInfo_super.elementInfoTable);
 			version = elemInfo_super.version;
 		}
 
@@ -125,7 +125,8 @@ public class ElementInfo
 	/**
 	 * Updater
 	 * 
-	 * @param ElemInfoTable [] elemInfo_update: table with element-specific attribute info
+	 * @param elemInfo_update [] elemInfo_update: table with element-specific attribute info
+	 * @return 
 	 */
 	public ElementInfo updateAdd(ElemInfoTable elemInfo_update)
 	{
@@ -146,7 +147,8 @@ public class ElementInfo
 	/**
 	 * Updater
 	 * 
-	 * @param ElemInfoTable [] elemInfo_update: table with element-specific attribute info
+	 * @param elemInfo_update [] elemInfo_update: table with element-specific attribute info
+	 * @return 
 	 */
 	public ElementInfo updateAdd(ElemInfoTable[] elemInfo_update)
 	{
@@ -173,7 +175,8 @@ public class ElementInfo
 	/**
 	 * Updater
 	 * 
-	 * @param AtrInfoTable [] attrInfo_update: table with element-specific attribute info
+	 * @param elemInfo_update : table with element-specific attribute info
+	 * @return 
 	 */
 	public ElementInfo updateRemove(ElemInfoTable elemInfo_update)
 	{
@@ -190,7 +193,8 @@ public class ElementInfo
 	/**
 	 * Updater
 	 * 
-	 * @param AtrInfoTable [] attrInfo_update: table with element-specific attribute info to remove from attribInfoTable
+	 * @param elemInfo_update  table with element-specific attribute info to remove from attribInfoTable
+	 * @return 
 	 */
 	public ElementInfo updateRemove(ElemInfoTable[] elemInfo_update)
 	{
@@ -207,6 +211,10 @@ public class ElementInfo
 		return this;
 	}
 
+	/**
+	 * @param elemInfo_update
+	 * @return
+	 */
 	public ElementInfo updateReplace(ElemInfoTable elemInfo_update)
 	{
 		if (elemInfo_update != null)
@@ -216,6 +224,10 @@ public class ElementInfo
 		return this;
 	}
 
+	/**
+	 * @param elemInfo_update
+	 * @return
+	 */
 	public ElementInfo updateReplace(ElemInfoTable[] elemInfo_update)
 	{
 		if (elemInfo_update != null)
@@ -231,7 +243,10 @@ public class ElementInfo
 	/**
 	 * Returns a list of element names matching the requested validity for the specified JDF version.
 	 * 
-	 * @param EnumElementValidity elemValidity: requested validity
+	 * @param elemValidity1 elemValidity: requested validity
+	 * @param elemValidity2 
+	 * @param elemValidity3 
+	 * @param elemValidity4 
 	 * @return VString: list of strings containing the names of the matching elements
 	 */
 	private VString conformingElements(EnumElementValidity elemValidity1, EnumElementValidity elemValidity2, EnumElementValidity elemValidity3, EnumElementValidity elemValidity4)
@@ -244,7 +259,7 @@ public class ElementInfo
 		while (iter.hasNext())
 		{
 			final String theKey = iter.next();
-			final ElemInfo ei = (ElemInfo) elementInfoTable.get(theKey);
+			final ElemInfo ei = elementInfoTable.get(theKey);
 			long eiValStatus = ei.getElemValidityStatus() & l2;
 			if (eiValStatus == ((long) elemValidity1.getValue() << v2))
 			{
@@ -270,7 +285,10 @@ public class ElementInfo
 	/**
 	 * Returns true if there is at least one sub-element matching the requested validity for the specified JDF version.
 	 * 
-	 * @param EnumElementValidity elemValidity: requested validity
+	 * @param elemValidity1 elemValidity: requested validity
+	 * @param elemValidity2 
+	 * @param elemValidity3 
+	 * @param elemValidity4 
 	 * @return boolean: true if at least one sub-element matches the requested validity
 	 */
 	public boolean hasConformingElements(EnumElementValidity elemValidity1, EnumElementValidity elemValidity2, EnumElementValidity elemValidity3, EnumElementValidity elemValidity4)
@@ -338,6 +356,7 @@ public class ElementInfo
 	/**
 	 * Enumeration of element validity values
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumElementValidity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -393,22 +412,38 @@ public class ElementInfo
 			return iterator(EnumElementValidity.class);
 		}
 
+		/** */
 		public static final EnumElementValidity Unknown = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_UNKNOWN);
+		/** */
 		public static final EnumElementValidity None = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_NONE);
+		/** */
 		public static final EnumElementValidity Required = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_REQUIRED);
+		/** */
 		public static final EnumElementValidity Optional = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_OPTIONAL);
+		/** */
 		public static final EnumElementValidity Deprecated = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_DEPRECATED);
+		/** */
 		public static final EnumElementValidity SingleRequired = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_SINGLEREQUIRED);
+		/** */
 		public static final EnumElementValidity SingleOptional = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_SINGLEOPTIONAL);
+		/** */
 		public static final EnumElementValidity SingleDeprecated = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_SINGLEDEPRECATED);
+		/** */
 		public static final EnumElementValidity Dummy = new EnumElementValidity(JDFConstants.ELEMENTVALIDITY_DUMMY);
 	}
 
+	/**
+	 * @param v
+	 */
 	public void setVersion(EnumVersion v)
 	{
 		version = v;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
 	@Override
 	public String toString()
 	{
@@ -427,7 +462,7 @@ public class ElementInfo
 	{
 		if (elementInfoTable.containsKey(elementName))
 		{
-			return ((ElemInfo) elementInfoTable.get(elementName)).getFirstVersion();
+			return (elementInfoTable.get(elementName)).getFirstVersion();
 		}
 		return null;
 	}
@@ -442,7 +477,7 @@ public class ElementInfo
 	{
 		if (elementInfoTable.containsKey(elementName))
 		{
-			return ((ElemInfo) elementInfoTable.get(elementName)).getLastVersion();
+			return (elementInfoTable.get(elementName)).getLastVersion();
 		}
 		return null;
 	}

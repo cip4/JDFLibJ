@@ -6,7 +6,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -21,6 +20,9 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFColorantControlTest extends JDFTestCaseBase
 {
 	private JDFNode elem;
@@ -40,7 +42,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		ca.setReplacementColorantName("Green");
 		assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
 		assertFalse(ca.isValid(EnumValidationLevel.Complete));
-		final VString vAlias = new VString("Grün grün", null);
+		final VString vAlias = new VString("Grï¿½n grï¿½n", null);
 		ca.setSeparations(vAlias);
 		assertTrue(ca.isValid(EnumValidationLevel.Complete));
 		byte[] b = vAlias.stringAt(0).getBytes();
@@ -67,7 +69,8 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 
 		colControl.setXMLComment("ColorantControl after prepress has correctly set ActualColorName based on pdl content");
 		JDFColor co = colPool.appendColorWithName("Black", null);
-		co.setXMLComment("Color that maps the predefined separation Black\n" + "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color");
+		co.setXMLComment("Color that maps the predefined separation Black\n"
+				+ "ActualColorName is the new attribute that replaces ExposedMedia/@DescriptiveName as the \"Main\" PDL color");
 		co.setCMYK(new JDFCMYKColor(0, 0, 0, 1));
 		assertTrue(co.isValid(EnumValidationLevel.Incomplete));
 		co.setAttribute("ActualColorName", "Schwarz");
@@ -96,7 +99,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		ca.setReplacementColorantName("Black");
 		assertTrue(ca.isValid(EnumValidationLevel.Incomplete));
 		assertFalse(ca.isValid(EnumValidationLevel.Complete));
-		final VString vAlias = new VString("noir schwärz", null);
+		final VString vAlias = new VString("noir schwï¿½rz", null);
 		ca.setSeparations(vAlias);
 		assertTrue(ca.isValid(EnumValidationLevel.Complete));
 		byte[] b = vAlias.stringAt(0).getBytes();
@@ -239,7 +242,7 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		d = new JDFDoc(ElementName.JDF);
 		elem = d.getJDFRoot();
 		final JDFResourcePool rpool = elem.appendResourcePool();

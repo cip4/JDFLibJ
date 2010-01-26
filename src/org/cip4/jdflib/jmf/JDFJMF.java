@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -372,14 +372,12 @@ public class JDFJMF extends JDFAutoJMF
 		/**
 		 * 
 		 */
-		public static final EnumJMFReturnCode RESULT_SELECTION_INCOMPLETE = new EnumJMFReturnCode(109,
-				"Selection or applied filter results in an incomplete list. A buffer cannot provide the complete list queried for");
+		public static final EnumJMFReturnCode RESULT_SELECTION_INCOMPLETE = new EnumJMFReturnCode(109, "Selection or applied filter results in an incomplete list. A buffer cannot provide the complete list queried for");
 
 		/**
 		 * 
 		 */
-		public static final EnumJMFReturnCode REQUEST_FAILED_COMPLETION_TIME = new EnumJMFReturnCode(110,
-				"Queue request of a job submission failed because the requested completion time of the job can-not be fulfilled");
+		public static final EnumJMFReturnCode REQUEST_FAILED_COMPLETION_TIME = new EnumJMFReturnCode(110, "Queue request of a job submission failed because the requested completion time of the job can-not be fulfilled");
 
 		/**
 		 * 

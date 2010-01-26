@@ -13,6 +13,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
@@ -111,7 +112,7 @@ public class CADTest extends JDFTestCaseBase
 			genID.setDescriptiveName("Name and Value of a parameter");
 		}
 		JDFFileSpec filespec = (JDFFileSpec) shapeTemplate.appendElement(ElementName.FILESPEC);
-		filespec.setURL(UrlUtil.fileToUrl(new File("\\\\host\\share\\dir1\\dir2\\File with €.cff2"), false));
+		filespec.setURL(UrlUtil.fileToUrl(new File("\\\\host\\share\\dir1\\dir2\\File with ï¿½.cff2"), false));
 		filespec.setDescriptiveName("This is the optional location of the input cff2 (or evd), Note the escaping of Blanks. - chars > 127 may but need not be encoded as utf-8");
 
 		for (int i = 0; i < nOptions; i++)
@@ -228,7 +229,7 @@ public class CADTest extends JDFTestCaseBase
 			shapeDef = shapeDefRoot.addPartition(EnumPartIDKey.Option, "Option" + option);
 		}
 		JDFFileSpec filespecOut = (JDFFileSpec) shapeDef.appendElement(ElementName.FILESPEC);
-		filespecOut.setURL(UrlUtil.fileToUrl(new File("\\\\host\\share\\dir1\\dir2\\OutFile with €.cff2"), false));
+		filespecOut.setURL(UrlUtil.fileToUrl(new File("\\\\host\\share\\dir1\\dir2\\OutFile with ï¿½.cff2"), false));
 		filespecOut.setDescriptiveName("This is the requested location of the output cff2 (or evd)");
 		shapeDef.setDescriptiveName("Additional parameters may be filled by CAD - note also that this shapeDef will be the input of the DieLayoutProduction process");
 		shapeDef.setAttribute("Area", "0.3");
@@ -256,7 +257,7 @@ public class CADTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		d = new JDFDoc("JDF");
 		prepareCustomerInfo(d);
 		prepareNodeInfo(d);

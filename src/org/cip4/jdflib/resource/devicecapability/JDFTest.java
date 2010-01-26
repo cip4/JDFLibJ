@@ -81,7 +81,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -93,10 +92,8 @@ public class JDFTest extends JDFNodeTerm
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[2];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222,
-				AttributeInfo.EnumAttributeType.ID, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTEXT, 0x33333333,
-				AttributeInfo.EnumAttributeType.XPath, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ID, 0x22222222, AttributeInfo.EnumAttributeType.ID, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.CONTEXT, 0x33333333, AttributeInfo.EnumAttributeType.XPath, null, null);
 	}
 
 	@Override
@@ -123,8 +120,7 @@ public class JDFTest extends JDFNodeTerm
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFTest(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFTest(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -137,12 +133,15 @@ public class JDFTest extends JDFNodeTerm
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFTest(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFTest(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#toString()
+	 * @return
+	*/
 	@Override
 	public String toString()
 	{
@@ -152,30 +151,13 @@ public class JDFTest extends JDFNodeTerm
 	// //////////////////////////////////////////////////////////////////////
 
 	/**
-	 * set attribute <code>ID</code>
-	 * 
-	 * @param value
-	 *            value to set the attribute to
-	 */
-	public void setID(String value)
-	{
-		setAttribute(AttributeName.ID, value, null);
-	}
-
-	@Override
-	public String getID()
-	{
-		return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
-	}
-
-	/**
 	 * Evaluates the boolean expression (child Term element) if it fits the
 	 * attribute map 'm'
 	 * 
 	 * @param m
 	 *            key-value pair attribute map
 	 * @return boolean - true, if the boolean expression (child Term element)
-	 *         evaluates to “true”
+	 *         evaluates to ï¿½trueï¿½
 	 */
 	@Override
 	public boolean fitsMap(JDFAttributeMap m)
@@ -195,13 +177,13 @@ public class JDFTest extends JDFNodeTerm
 	 *            the report to generate. Set to <code>null</code> if no report
 	 *            is requested.
 	 * @return boolean - true, if boolean expression (child Term element)
-	 *         evaluates to “true”
+	 *         evaluates to ï¿½trueï¿½
 	 */
 	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
-		
+
 		if (reportRootLocal != null)
 			reportRootLocal = reportRootLocal.appendElement("TestReport");
 		JDFTerm t = getTerm();
@@ -232,6 +214,10 @@ public class JDFTest extends JDFNodeTerm
 		return getTerm(null, 0);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#init()
+	 * @return
+	*/
 	@Override
 	public boolean init()
 	{
@@ -250,28 +236,32 @@ public class JDFTest extends JDFNodeTerm
 		return "T";
 	}
 
-	// //////////////////////////////////////////////////
-
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+	 * @param level
+	 * @param bIgnorePrivate
+	 * @param nMax
+	 * @return
+	*/
 	@Override
-	public VString getInvalidElements(EnumValidationLevel level,
-			boolean bIgnorePrivate, int nMax)
+	public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
 	{
-		boolean bIgnorePrivateLocal = bIgnorePrivate;
-		
-		if (bIgnorePrivateLocal)
-			bIgnorePrivateLocal = false; // dummy to fool compiler
-		
-		VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
+		VString v = super.getInvalidElements(level, bIgnorePrivate, nMax);
 		if (v.size() >= nMax)
 			return v;
 
 		v.appendUnique(getInvalidTerms(1));
-		
+
 		return v;
 	}
 
 	// ///////////////////////////////////////////////////////
 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#getMissingElements(int)
+	 * @param nMax
+	 * @return
+	*/
 	@Override
 	public VString getMissingElements(int nMax)
 	{

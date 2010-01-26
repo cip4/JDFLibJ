@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -93,6 +94,7 @@ import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.JDFDate;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * base class for JDFLib test case classes
@@ -195,7 +197,7 @@ public abstract class JDFTestCaseBase extends TestCase
 		JDFElement.setDefaultJDFVersion(defaultVersion);
 		senderID = "TestSender";
 		JDFJMF.setTheSenderID(senderID);
-		JDFElement.uniqueID(1);
+		KElement.uniqueID(1);
 		JDFIntegerRange.setDefaultDef(0);
 		agentName = JDFAudit.getStaticAgentName();
 		agentVersion = JDFAudit.getStaticAgentVersion();
@@ -223,7 +225,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	protected void tearDown() throws Exception
 	{
 		super.tearDown();
-		JDFElement.setLongID(true);
+		KElement.setLongID(true);
 		JDFElement.setDefaultJDFVersion(EnumVersion.Version_1_3);
 		JDFAudit.setStaticAgentName(agentName);
 		JDFAudit.setStaticAgentVersion(agentVersion);
@@ -266,6 +268,16 @@ public abstract class JDFTestCaseBase extends TestCase
 		ni.setLastEnd(date);
 		ni.setDescriptiveName("must be done 5 days after start");
 		return ni;
+	}
+
+	/**
+	 * @see junit.framework.TestCase#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return "[" + StringUtil.token(this.getClass().getName(), -1, ".") + " Version:  " + defaultVersion + " " + new File(sm_dirTestData).getAbsolutePath() + " ]\n";
 	}
 
 }

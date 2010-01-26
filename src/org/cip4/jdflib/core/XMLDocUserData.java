@@ -20,6 +20,9 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.w3c.dom.Attr;
 
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class XMLDocUserData
 {
 	/**
@@ -37,7 +40,7 @@ public class XMLDocUserData
 	/**
 	 * map of ID KElement pairs
 	 */
-	private final HashMap m_mapTarget;
+	private final HashMap<String, KElement> m_mapTarget;
 
 	private EnumDirtyPolicy dirtyPolicy;
 
@@ -46,7 +49,7 @@ public class XMLDocUserData
 	 */
 	public XMLDocUserData()
 	{
-		m_mapTarget = new HashMap(); // default is on
+		m_mapTarget = new HashMap<String, KElement>(); // default is on
 		m_vDirtyID = new VString();
 
 		clearDirtyIDs();
@@ -88,6 +91,7 @@ public class XMLDocUserData
 	/**
 	 * Enumeration of various policies
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumDirtyPolicy extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -150,10 +154,21 @@ public class XMLDocUserData
 			return iterator(EnumDirtyPolicy.class);
 		}
 
-		// none is default instead of unknown
+		/**
+		 *  none is default instead of unknown
+		 */
 		public static final EnumDirtyPolicy None = new EnumDirtyPolicy("None");
+		/**
+		 * 
+		 */
 		public static final EnumDirtyPolicy ID = new EnumDirtyPolicy("ID");
+		/**
+		 * 
+		 */
 		public static final EnumDirtyPolicy Doc = new EnumDirtyPolicy("Doc");
+		/**
+		 * 
+		 */
 		public static final EnumDirtyPolicy XPath = new EnumDirtyPolicy("XPath");
 	}
 
@@ -192,7 +207,7 @@ public class XMLDocUserData
 	 * Because DOM_Node is not designed to be subclassed, userdata provides an alternative means for extending the
 	 * information kept with nodes by an application program.
 	 * 
-	 * @param p the pointer to be kept with the node.
+	 * @param objUserData the user data to be kept with the node.
 	 */
 	public void setUserData(Object objUserData)
 	{
@@ -373,13 +388,13 @@ public class XMLDocUserData
 	public void setTarget(KElement targetElement, String id)
 	{
 		String idLocal = id;
-		
+
 		if (!useIDCache || m_mapTarget == null)
 			return;
 
 		if (idLocal == null)
 			idLocal = targetElement.getAttribute(AttributeName.ID, null, null);
-		
+
 		if (idLocal != null)
 		{
 			m_mapTarget.put(idLocal, targetElement); // put the correct in
@@ -389,7 +404,7 @@ public class XMLDocUserData
 	/**
 	 * remove the KElement from the target list
 	 * 
-	 * @param target the element to remove
+	 * @param targetElement the element to remove
 	 */
 	public void removeTarget(KElement targetElement)
 	{
@@ -399,7 +414,7 @@ public class XMLDocUserData
 		final String id = targetElement.getAttribute("ID", null, null);
 		if (id != null)
 		{
-			final KElement kelem = (KElement) m_mapTarget.get(id);
+			final KElement kelem = m_mapTarget.get(id);
 			if (kelem != null)
 			{ // element with key of id was found, so delete it
 				m_mapTarget.remove(id);
@@ -430,7 +445,7 @@ public class XMLDocUserData
 		if (useIDCache && m_mapTarget != null && strID != null)
 		{
 
-			final KElement elem = (KElement) m_mapTarget.get(strID);
+			final KElement elem = m_mapTarget.get(strID);
 			if (elem != null)
 			{
 				Attr a = elem.getAttributeNode(AttributeName.ID);

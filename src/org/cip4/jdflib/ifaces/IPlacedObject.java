@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -212,7 +212,7 @@ public interface IPlacedObject
 	 * convenience method to set TrimSize
 	 * 
 	 * @param x : the value to set the x Dimension to
-	 * @param x : the value to set the y Dimension to
+	 * @param y : the value to set the y Dimension to
 	 */
 	public abstract void setTrimSize(double x, double y);
 

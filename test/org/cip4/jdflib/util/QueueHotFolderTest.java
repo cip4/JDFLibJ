@@ -79,6 +79,7 @@ package org.cip4.jdflib.util;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
@@ -93,6 +94,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	private File theHF;
 	private File theStorage;
 	QueueHotFolder hf;
+	JDFDoc doc = null;
 
 	protected class MyListener implements QueueHotFolderListener
 	{
@@ -118,6 +120,8 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		theHF.mkdirs();
 		FileUtil.deleteAll(theStorage);
 		theStorage.mkdirs();
+		HotFolder.setDefaultStabilizeTime(333);
+		doc = new JDFDoc("JDF");
 
 	}
 
@@ -128,8 +132,8 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	{
 		final MyListener myListener = new MyListener();
 		final File file = new File(theHF + File.separator + "f1.txt");
-		final File stFile = new File(theStorage + File.separator + "f1.txt");
-		file.createNewFile();
+		final File stFile = new File(theStorage + File.separator + "f1.jdf");
+		doc.write2File(file, 2, false);
 		assertTrue(file.exists());
 		assertFalse(stFile.exists());
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
@@ -157,18 +161,18 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 	{
 		final MyListener myListener = new MyListener();
 		final File file = new File(theHF + File.separator + "f1.txt");
-		final File stFile = new File(theStorage + File.separator + "f1.txt");
-		file.createNewFile();
+		final File stFile = new File(theStorage + File.separator + "f1.jdf");
+		doc.write2File(file, 2, false);
 		assertTrue(file.exists());
 		assertFalse(stFile.exists());
 		hf = new QueueHotFolder(theHF, theStorage, null, myListener, null);
 		hf.stop();
-		ThreadUtil.sleep(5000);
+		ThreadUtil.sleep(3000);
 		assertTrue(file.exists());
 		assertFalse("File is still there after stop", stFile.exists());
 		assertEquals(myListener.vJMF.size(), 0);
 		hf.restart();
-		ThreadUtil.sleep(5000);
+		ThreadUtil.sleep(2000);
 		assertFalse("File is gone after stop", file.exists());
 		assertTrue(stFile.exists());
 		assertEquals(myListener.vJMF.size(), 1);

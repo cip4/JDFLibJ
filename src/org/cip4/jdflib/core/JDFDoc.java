@@ -107,6 +107,8 @@ public class JDFDoc extends XMLDoc
 	public JDFDoc()
 	{
 		super();
+		m_doc.bInitOnCreate = true;
+		m_doc.bKElementOnly = false;
 	}
 
 	/**
@@ -137,6 +139,8 @@ public class JDFDoc extends XMLDoc
 	public JDFDoc(final String strDocType)
 	{
 		super(strDocType, JDFElement.getSchemaURL());
+		m_doc.bInitOnCreate = true;
+		m_doc.bKElementOnly = false;
 	}
 
 	// **************************************** Methods
@@ -211,7 +215,7 @@ public class JDFDoc extends XMLDoc
 	{
 		final JDFDoc new_doc = new JDFDoc();
 		final JDFNode root = (JDFNode) new_doc.createElement(ElementName.JDF);
-		root.setAttribute(AttributeName.ID, JDFElement.uniqueID(50), JDFConstants.EMPTYSTRING);
+		root.setAttribute(AttributeName.ID, KElement.uniqueID(50), JDFConstants.EMPTYSTRING);
 		root.init();
 
 		new_doc.appendChild(root);

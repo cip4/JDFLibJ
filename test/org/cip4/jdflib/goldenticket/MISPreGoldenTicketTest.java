@@ -72,7 +72,7 @@ package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -194,7 +194,8 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 					pgt.addKid(goldenTicket4);
 				}
 
-				BaseGoldenTicketTest.write3GTFiles(pgt, "MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "") + (bExpand ? "Expand" : ""));
+				BaseGoldenTicketTest.write3GTFiles(pgt, "MISPre_ComplexPlate" + (i >= 2 ? "Making" : "Setting") + (goldenTicket2.bStripping ? "Strip" : "")
+						+ (bExpand ? "Expand" : ""));
 			}
 		}
 	}
@@ -210,7 +211,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	protected void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName("JDF MISPre golden ticket generator");
 		super.setUp();
 		vMap = new VJDFAttributeMap();
@@ -239,7 +240,7 @@ public class MISPreGoldenTicketTest extends BaseGoldenTicketTest
 	protected void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
-		JDFElement.setLongID(true);
+		KElement.setLongID(true);
 		super.tearDown();
 	}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -108,22 +108,22 @@ public class JDFColorPoolTest extends TestCase
 		n.setType("Interpreting", false);
 		cp = (JDFColorPool) n.addResource("ColorPool", null, EnumUsage.Input, null, null, null, null);
 		cp.appendColorWithName("Cyan", "true");
-		cp.appendColorWithName("Grün", "Grün");
+		cp.appendColorWithName("GrÃ¼n", "GrÃ¼n");
 		((JDFColor) cp.appendElement("jdf:Color", JDFElement.getSchemaURL())).setName("foo");
 	}
 
 	/**
 	 * Method testIncludesAttribute.
 	 * 
-	 * @throws Exception
+	 *  
 	 */
 	public void testGetColorWithName()
 	{
-		assertNotNull("grün", cp.getColorWithName("Grün"));
+		assertNotNull("grÃ¼n", cp.getColorWithName("GrÃ¼n"));
 		boolean caught = false;
 		try
 		{
-			cp.appendColorWithName("Grün", "Grün");
+			cp.appendColorWithName("GrÃ¼n", "GrÃ¼n");
 		}
 		catch (JDFException e)
 		{
@@ -135,11 +135,11 @@ public class JDFColorPoolTest extends TestCase
 	/**
 	 * Method testIncludesAttribute.
 	 * 
-	 * @throws Exception
+	 * 
 	 */
 	public void testGetCreateColorWithName()
 	{
-		assertNotNull("grün", cp.getCreateColorWithName("Grün", null));
+		assertNotNull("grÃ¼n", cp.getCreateColorWithName("GrÃ¼n", null));
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class JDFColorPoolTest extends TestCase
 		assertEquals("num", cp.numChildElements("Color", null), 3);
 		cp.removeColor("bar");
 		assertEquals("num", cp.numChildElements("Color", null), 3);
-		cp.removeColor("Grün");
+		cp.removeColor("GrÃ¼n");
 		assertEquals("num", cp.numChildElements("Color", null), 2);
 		cp.removeColor("foo");
 		assertEquals("num", cp.numChildElements("Color", null), 1);
@@ -165,7 +165,7 @@ public class JDFColorPoolTest extends TestCase
 		assertNull(cp.getDuplicateColors());
 		JDFColor c = cp.appendColorWithName("grun", "grun");
 		assertNull(cp.getDuplicateColors());
-		c.set8BitNames("Grün".getBytes());
+		c.set8BitNames("GrÃ¼n".getBytes());
 		c.setName("grun");
 		assertTrue(cp.getDuplicateColors().contains("grun"));
 	}

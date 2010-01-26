@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -101,7 +101,7 @@ public interface IAmountPoolContainer
 	/**
 	 * @param attName
 	 * @param namespace
-	 * @param i
+	 * @param def
 	 * @return
 	 */
 	public double getRealAttribute(String attName, String namespace, double def);

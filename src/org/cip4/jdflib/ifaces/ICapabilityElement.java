@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -115,9 +115,9 @@ public interface ICapabilityElement
 	/**
 	 * append moduleRef to moduleRefs, if it does not exist, set the availability to module and ensure that the
 	 * appropriate modulecap exists
+	 * @param id 
 	 * 
 	 * @return {@link JDFModuleCap} the Modulecap that id refers tp
-	 * @return EnumAvailability: the enumeration value of the attribute
 	 */
 	public JDFModuleCap appendModuleRef(String id);
 
@@ -133,6 +133,9 @@ public interface ICapabilityElement
 	 */
 	public abstract EnumTerm getEvaluationType();
 
+	/**
+	 * @return
+	 */
 	public VString getNamePathVector();
 
 }

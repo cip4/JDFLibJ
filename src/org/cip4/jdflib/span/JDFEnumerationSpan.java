@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -87,6 +87,10 @@ import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 
+/**
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public abstract class JDFEnumerationSpan extends JDFSpanBase
 {
 	private static final long serialVersionUID = 1L;
@@ -94,7 +98,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	/**
 	 * Constructor for JDFEnumerationSpan
 	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
 	public JDFEnumerationSpan(CoreDocumentImpl myOwnerDocument, String qualifiedName)
@@ -104,10 +108,10 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFEnumerationSpan
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
 	 */
 	public JDFEnumerationSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
@@ -116,11 +120,11 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 
 	/**
 	 * Constructor for JDFEnumerationSpan
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
 	 */
 	public JDFEnumerationSpan(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
@@ -161,11 +165,15 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 */
 	public abstract ValuedEnum getEnumType();
 
+	/**
+	 * @param value
+	 * @return
+	 */
 	public ValuedEnum getEnum(String value)
 	{
 		try
 		{
-			Class methodArgs[] = { String.class };
+			Class<?> methodArgs[] = { String.class };
 			Method m = getEnumType().getClass().getMethod("getEnum", methodArgs);
 			Object args[] = { value };
 			ValuedEnum ve = (ValuedEnum) m.invoke(null, args);
@@ -197,7 +205,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	/**
 	 * Set attribute Actual
 	 * 
-	 * @param int value - the value to set
+	 * @param value - the value to set
 	 */
 	public void setActual(ValuedEnum value)
 	{
@@ -217,7 +225,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	/**
 	 * Set attribute Preferred
 	 * 
-	 * @param int value - the enumeration equivalent of value to set
+	 * @param value - the enumeration equivalent of value to set
 	 */
 	public void setPreferred(ValuedEnum value)
 	{
@@ -239,7 +247,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 * 
 	 * @return Vector - the enumerations equivalent of attribute Range value
 	 */
-	public Vector getRange()
+	public Vector<? extends ValuedEnum> getRange()
 	{
 		return getEnumerationsAttribute(AttributeName.RANGE, null, getEnumType(), false);
 	}
@@ -247,9 +255,9 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	/**
 	 * Set attribute Range as Enumerations
 	 * 
-	 * @param Vector value - the enumerations equivalent of value to set
+	 * @param value - the enumerations equivalent of value to set
 	 */
-	public void setRange(Vector value)
+	public void setRange(Vector<? extends ValuedEnum> value)
 	{
 		setEnumerationsAttribute(AttributeName.RANGE, value, null);
 	}
@@ -260,7 +268,7 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	 * @return Vector - the enumerations equivalent of attribute Range value
 	 */
 
-	public Vector getOfferRange()
+	public Vector<? extends ValuedEnum> getOfferRange()
 	{
 		return getEnumerationsAttribute(AttributeName.OFFERRANGE, null, getEnumType(), false);
 	}
@@ -268,13 +276,17 @@ public abstract class JDFEnumerationSpan extends JDFSpanBase
 	/**
 	 * Set attribute Range as Enumerations
 	 * 
-	 * @param Vector value - the enumerations equivalent of value to set
+	 * @param value - the enumerations equivalent of value to set
 	 */
-	public void setOfferRange(Vector value)
+	public void setOfferRange(Vector<? extends ValuedEnum> value)
 	{
 		setEnumerationsAttribute(AttributeName.OFFERRANGE, value, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#init()
+	 * @return
+	 */
 	@Override
 	public boolean init()
 	{

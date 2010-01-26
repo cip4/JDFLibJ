@@ -99,23 +99,20 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	{
 		// TODO Auto-generated method stub
 		super.setUp();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		JDFNode n = new JDFDoc("JDF").getJDFRoot();
 		JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		rl = n.getLink(r, null);
-		final JDFAttributeMap s1Map = new JDFAttributeMap(
-				EnumPartIDKey.SheetName, "S1");
+		final JDFAttributeMap s1Map = new JDFAttributeMap(EnumPartIDKey.SheetName, "S1");
 		rl.setAmount(10, s1Map);
 		pa = rl.getAmountPool().getPartAmount(s1Map);
 	}
 
 	public void testGetInvalidAttributes()
 	{
-		assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete,
-				true, 0).size(), 0);
+		assertEquals(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).size(), 0);
 		rl.setAttribute("Amount", 20, null);
-		assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete,
-				true, 0).contains("Amount"));
+		assertTrue(pa.getInvalidAttributes(EnumValidationLevel.Incomplete, true, 0).contains("Amount"));
 
 	}
 
@@ -130,8 +127,7 @@ public class JDFPartAmountTest extends JDFTestCaseBase
 	public void testPartAmount()
 	{
 		pa.appendElement("AmountPool");
-		assertTrue(pa.getUnknownElements(false, 999).contains(
-				ElementName.AMOUNTPOOL));
+		assertTrue(pa.getUnknownElements(false, 999).contains(ElementName.AMOUNTPOOL));
 	}
 	// ///////////////////////////////////////////////////////////////////
 

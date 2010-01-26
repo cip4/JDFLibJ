@@ -143,7 +143,7 @@ public class PartitionHelper
 	}
 
 	/**
-	 * @return
+	 * @return the generic Partition or Resource element
 	 */
 	public KElement getPartition()
 	{
@@ -151,7 +151,7 @@ public class PartitionHelper
 	}
 
 	/**
-	 * @return
+	 * @return the actual detailed resource
 	 */
 	public KElement getResource()
 	{

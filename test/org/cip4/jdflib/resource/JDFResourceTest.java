@@ -2257,6 +2257,25 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testGetCreatePartitionCreate()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode n = doc.getJDFRoot();
+		final JDFResource media = n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+
+		VString v = new VString("SignatureName SheetName Side", null);
+		JDFAttributeMap m = new JDFAttributeMap(EnumPartIDKey.SignatureName, "sig1");
+		m.put(EnumPartIDKey.SheetName, "sh1");
+		m.put(EnumPartIDKey.Side, "Front");
+
+		JDFResource part = media.getCreatePartition(m, v);
+		assertNotNull(part);
+		assertEquals(m, part.getPartMap());
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetCreatePartition3()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);

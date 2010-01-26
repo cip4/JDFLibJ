@@ -73,7 +73,7 @@ package org.cip4.jdflib.jmf;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -96,7 +96,7 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 	@Override
 	public void setUp()
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		final JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
 		di = (JDFDeviceInfo) doc.getRoot();
 

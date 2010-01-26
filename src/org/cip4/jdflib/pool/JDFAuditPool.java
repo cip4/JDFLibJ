@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -769,7 +769,8 @@ public class JDFAuditPool extends JDFPool
 		{
 			bChanged = true;
 		}
-		else if (!ContainerUtil.equals(pt.getStatus(), status) || !ContainerUtil.equals(statusDetails, pt.getAttribute(AttributeName.STATUSDETAILS, null, null)) || !ptEmployees.isEqual(employees))
+		else if (!ContainerUtil.equals(pt.getStatus(), status) || !ContainerUtil.equals(statusDetails, pt.getAttribute(AttributeName.STATUSDETAILS, null, null))
+				|| !ptEmployees.isEqual(employees))
 		{
 			pt.setEnd(new JDFDate());
 			bChanged = true;
@@ -901,7 +902,7 @@ public class JDFAuditPool extends JDFPool
 		}
 		if (!pr.hasAttribute(AttributeName.QUEUEENTRYID))
 		{
-			pr.setAttribute("QueueEntryID", "qe_" + JDFElement.uniqueID(0));
+			pr.setAttribute("QueueEntryID", "qe_" + KElement.uniqueID(0));
 		}
 		return pr;
 

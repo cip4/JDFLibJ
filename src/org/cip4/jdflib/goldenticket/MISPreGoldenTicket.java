@@ -116,24 +116,28 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class MISPreGoldenTicket extends MISGoldenTicket
 {
+	/** */
 	public static final String MISPRE_CONTENTCREATION = "MISPRE.ContentCreation";
+	/** */
 	public static final String MISPRE_IMPOSITIONPREPARATION = "MISPRE.ImpositionPreparation";
+	/** */
 	public static final String MISPRE_PREPRESSPREPARATION = "MISPRE.PrePressPreparation";
+	/** */
 	public static final String MISPRE_IMPOSITIONRIPING = "MISPRE.ImpositionRIPing";
+	/** */
 	public static final String MISPRE_PLATEMAKING = "MISPRE.PlateMaking";
+	/** */
 	public static final String MISPRE_PLATESETTING = "MISPRE.PlateSetting";
-
+	/** */
 	public boolean bStripping = false;
+	/** */
 	public boolean bSingleSided = false;
 
 	/**
 	 * create a BaseGoldenTicket
+	 * @param previous 
+	 * @param _vparts 
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
-	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 * @param misLevel level of MIS ICS to support
-	 * @param isGrayBox if true, write a grayBox
 	 */
 	public MISPreGoldenTicket(final MISPreGoldenTicket previous, final VJDFAttributeMap _vparts)
 	{
@@ -151,12 +155,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * create a BaseGoldenTicket
+	 * @param parent 
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
-	 * @param jdfVersion the version to generate a golden ticket for
-	 * @param jmfLevel level of jmf ICS to support
-	 * @param misLevel level of MIS ICS to support
-	 * @param isGrayBox if true, write a grayBox
 	 */
 	public MISPreGoldenTicket(final MISPreGoldenTicket parent)
 	{
@@ -209,7 +209,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	/**
 	 * initializes this node to a given ICS version
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 *  
 	 */
 	@Override
 	public void init()
@@ -350,6 +350,8 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @param catalog 
+	 * @return 
 	 * 
 	 */
 	private JDFBinderySignature initBinderySignature(final String catalog)
@@ -484,6 +486,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @return 
 	 * 
 	 */
 	private JDFRunList initConduitRunListOut()
@@ -556,6 +559,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @param usage 
 	 * 
 	 */
 	private void executeMarksRunList(final EnumUsage usage)
@@ -578,6 +582,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 
 	/**
 	 * emulate execution of a runlist by making it available
+	 * @param usage 
 	 */
 	private void executeRunList(final EnumUsage usage)
 	{
@@ -630,7 +635,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *  
 	 */
 	protected void initPreviewSep()
 	{
@@ -662,7 +667,7 @@ public class MISPreGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 *  
 	 */
 	protected void initPreviewComp()
 	{

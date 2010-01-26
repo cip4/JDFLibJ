@@ -333,6 +333,7 @@ public class JDFRefElement extends JDFElement
 	 * 
 	 * @return JDFResource - the reference target partition
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public JDFResource getTarget()
 	{

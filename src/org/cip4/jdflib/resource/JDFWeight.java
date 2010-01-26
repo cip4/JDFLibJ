@@ -14,6 +14,12 @@ package org.cip4.jdflib.resource;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.w3c.dom.DOMException;
 
+/**
+ * @deprecated - what is this for???
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
+@Deprecated
 public class JDFWeight extends JDFResource
 {
 	private static final long serialVersionUID = 1L;

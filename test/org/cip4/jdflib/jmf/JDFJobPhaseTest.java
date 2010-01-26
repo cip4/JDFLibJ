@@ -75,8 +75,10 @@ import org.cip4.jdflib.auto.JDFAutoMISDetails.EnumWorkType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPhaseTime;
@@ -92,6 +94,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 public class JDFJobPhaseTest extends JDFTestCaseBase
 {
 	private JDFDeviceInfo di;
+	private JDFJMF jmf;
 
 	/**
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
@@ -99,9 +102,9 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 	@Override
 	public void setUp()
 	{
-		JDFElement.setLongID(false);
-		final JDFDoc doc = new JDFDoc(ElementName.DEVICEINFO);
-		di = (JDFDeviceInfo) doc.getRoot();
+		KElement.setLongID(false);
+		jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
+		di = jmf.getSignal(0).appendDeviceInfo();
 
 	}
 
@@ -168,6 +171,44 @@ public class JDFJobPhaseTest extends JDFTestCaseBase
 		final JDFJobPhase jp = di.createJobPhaseFromPhaseTime(pt);
 		jp.setWaste(42);
 		assertEquals(jp.getPhaseWaste(), 42.0, 0.0);
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetStatusQuParams()
+	{
+		JDFStatusQuParams sqp = jmf.getSignal(0).appendStatusQuParams();
+		JDFJobPhase jp = di.appendJobPhase();
+		assertEquals(sqp, jp.getStatusQuParams());
+
+		jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.PipePush);
+		jp = jmf.getResponse(0).appendJobPhase();
+		assertNull(jp.getStatusQuParams());
+
+		jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.ShutDown);
+		jp = jmf.getResponse(0).appendDeviceInfo().appendJobPhase();
+		assertNull(jp.getStatusQuParams());
+
+		jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.Status);
+		jp = jmf.getResponse(0).appendDeviceInfo().appendJobPhase();
+		assertNull(jp.getStatusQuParams());
+
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetQueueEntryID()
+	{
+		JDFStatusQuParams sqp = jmf.getSignal(0).appendStatusQuParams();
+		sqp.setQueueEntryID("qeID1");
+		JDFJobPhase jp = di.appendJobPhase();
+		assertEquals("qeID1", jp.getQueueEntryID());
+
+		jmf = JDFJMF.createJMF(EnumFamily.Response, EnumType.Status);
+		jp = jmf.getResponse(0).appendDeviceInfo().appendJobPhase();
+		assertNull(jp.getStatusQuParams());
 
 	}
 

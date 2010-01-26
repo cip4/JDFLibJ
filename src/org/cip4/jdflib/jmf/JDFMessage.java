@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -117,6 +117,26 @@ import org.cip4.jdflib.util.StringUtil;
 public class JDFMessage extends JDFAutoMessage
 {
 	private static final long serialVersionUID = 1L;
+	private static boolean strictValidation = true;
+
+	/**
+	 * if true, all typesafe calls are strictly validated
+	 * @return the strictValidation
+	 */
+	public static boolean isStrictValidation()
+	{
+		return strictValidation;
+	}
+
+	/**
+	 * set false to switch off jmf validation when adding elements
+	 * set true (default) to enable run time checking when constructing JMF messages
+	 * @param strictValidation the strictValidation to set
+	 */
+	public static void setStrictValidation(boolean strictValidation)
+	{
+		JDFMessage.strictValidation = strictValidation;
+	}
 
 	/**
 	 * Constructor for JDFMessage
@@ -730,6 +750,7 @@ public class JDFMessage extends JDFAutoMessage
 	 * returns a vector of valid messageElement types for this element
 	 * 
 	 * @param elementName the name of the element to be tested
+	 * @param iSkip 
 	 * @return vector of valid EnumTypes; empty if all are invalid
 	 * @default getValidTypeVector(elementName, 0)
 	 */
@@ -1303,7 +1324,7 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * append an element<br>
-	 * throws an JDFException, if <code>elementName</code> is not legal
+	 * throws a JDFException, if <code>elementName</code> is not legal and strictValidation is switched on
 	 * 
 	 * @param elementName name of the element to append
 	 * @param nameSpaceURI namespace URI of the element to append
@@ -1311,10 +1332,14 @@ public class JDFMessage extends JDFAutoMessage
 	 */
 	public KElement appendValidElement(final String elementName, final String nameSpaceURI)
 	{
-		final int iSkip = numChildElements(elementName, nameSpaceURI);
-		if (!isValidMessageElement(elementName, iSkip))
+		// 100125 - RP we now have a switch to avoid validating appended elements
+		if (strictValidation)
 		{
-			throw new JDFException("AppendValidElement: illegal element :" + elementName);
+			final int iSkip = numChildElements(elementName, nameSpaceURI);
+			if (!isValidMessageElement(elementName, iSkip))
+			{
+				throw new JDFException("AppendValidElement: illegal element :" + elementName);
+			}
 		}
 		return appendElement(elementName, nameSpaceURI);
 	}
@@ -1332,7 +1357,7 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * get a (valid) element<br>
-	 * throws <code>JDFException</code> if the element is not valid
+	 * throws <code>JDFException</code> if the element is not valid and strictValidation is switched on
 	 * 
 	 * @param nodeName name of the element to get
 	 * @param nameSpaceURI namespace URI of the element to get
@@ -1341,7 +1366,7 @@ public class JDFMessage extends JDFAutoMessage
 	 */
 	public KElement getValidElement(final String nodeName, final String nameSpaceURI, final int iSkip)
 	{
-		if (!isValidMessageElement(nodeName, iSkip))
+		if (strictValidation && !isValidMessageElement(nodeName, iSkip))
 		{
 			throw new JDFException("getValidElement: illegal element :" + nodeName);
 		}
@@ -1352,7 +1377,7 @@ public class JDFMessage extends JDFAutoMessage
 	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * get a (valid) element, create if it doesn't exist<br>
-	 * throws <code>JDFException</code> if the element is not valid
+	 * throws <code>JDFException</code> if the element is not valid and strictValidation is switched on
 	 * 
 	 * @param nodeName name of the element to get
 	 * @param nameSpaceURI namespace URI of the element to get
@@ -1361,7 +1386,7 @@ public class JDFMessage extends JDFAutoMessage
 	 */
 	public KElement getCreateValidElement(final String nodeName, final String nameSpaceURI, final int iSkip)
 	{
-		if (!isValidMessageElement(nodeName, iSkip))
+		if (strictValidation && !isValidMessageElement(nodeName, iSkip))
 		{
 			throw new JDFException("getCreateValidElement: illegal element :" + nodeName);
 		}
@@ -2200,7 +2225,7 @@ public class JDFMessage extends JDFAutoMessage
 	/**
 	 * get iSkip'th element <code>QueueSubmissionParams</code>
 	 * 
-	 * @param int iSkip number of elements to skip
+	 * @param iSkip number of elements to skip
 	 * @return JDFQueueSubmissionParams: the element
 	 */
 	public JDFQueueSubmissionParams getCreateQueueSubmissionParams(final int iSkip)
@@ -2404,9 +2429,9 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 * get iSkip'th element StatusQuParams
+	 * get  StatusQuParams
 	 * 
-	 * @param iSkip number of elements to skip
+	 *  
 	 * @return JDFStatusQuParams: the element
 	 */
 	public JDFStatusQuParams getStatusQuParams()
@@ -2421,7 +2446,7 @@ public class JDFMessage extends JDFAutoMessage
 	/**
 	 * get iSkip'th element StopPersChParams
 	 * 
-	 * @param int iSkip number of elements to skip
+	 * @param iSkip number of elements to skip
 	 * @return JDFStopPersChParams: the element
 	 */
 	public JDFStopPersChParams getCreateStopPersChParams(final int iSkip)
@@ -2596,6 +2621,7 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 * append element <code>IDInfo</code> JDFIDInfo: the element
+	 * @return 
 	 */
 	public JDFIDInfo appendIDInfo()
 	{
@@ -2606,6 +2632,7 @@ public class JDFMessage extends JDFAutoMessage
 	 * get iSkip'th element <code>IDInfo</code>
 	 * 
 	 * @param iSkip number of elements to skip JDFIDInfo: the element
+	 * @return 
 	 */
 	public JDFIDInfo getIDInfo(final int iSkip)
 	{
@@ -2633,16 +2660,28 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFFlushedResources) appendValidElement(ElementName.FLUSHEDRESOURCES, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFFlushedResources getFlushedResources(final int iSkip)
 	{
 		return (JDFFlushedResources) getValidElement(ElementName.FLUSHEDRESOURCES, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFFlushQueueParams getCreateFlushQueueParams(final int iSkip)
 	{
 		return (JDFFlushQueueParams) getCreateValidElement(ElementName.FLUSHQUEUEPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFFlushQueueInfo getCreateFlushQueueInfo(final int iSkip)
 	{
 		return (JDFFlushQueueInfo) getCreateValidElement(ElementName.FLUSHQUEUEINFO, null, iSkip);
@@ -2673,91 +2712,157 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFFlushQueueInfo) appendValidElement(ElementName.FLUSHQUEUEINFO, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFFlushQueueParams getFlushQueueParams(final int iSkip)
 	{
 		return (JDFFlushQueueParams) getValidElement(ElementName.FLUSHQUEUEPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFFlushResourceParams getCreateFlushResourceParams(final int iSkip)
 	{
 		return (JDFFlushResourceParams) getCreateValidElement(ElementName.FLUSHRESOURCEPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFFlushResourceParams appendFlushResourceParams()
 	{
 		return (JDFFlushResourceParams) appendValidElement(ElementName.FLUSHRESOURCEPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFFlushResourceParams getFlushResourceParams(final int iSkip)
 	{
 		return (JDFFlushResourceParams) getValidElement(ElementName.FLUSHRESOURCEPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNewJDFCmdParams getCreateNewJDFCmdParams(final int iSkip)
 	{
 		return (JDFNewJDFCmdParams) getCreateValidElement(ElementName.NEWJDFCMDPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFNewJDFCmdParams appendNewJDFCmdParams()
 	{
 		return (JDFNewJDFCmdParams) appendValidElement(ElementName.NEWJDFCMDPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNewJDFCmdParams getNewJDFCmdParams(final int iSkip)
 	{
 		return (JDFNewJDFCmdParams) getValidElement(ElementName.NEWJDFCMDPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNewJDFQuParams getCreateNewJDFQuParams(final int iSkip)
 	{
 		return (JDFNewJDFQuParams) getCreateValidElement(ElementName.NEWJDFQUPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFNewJDFQuParams appendNewJDFQuParams()
 	{
 		return (JDFNewJDFQuParams) appendValidElement(ElementName.NEWJDFQUPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNewJDFQuParams getNewJDFQuParams(final int iSkip)
 	{
 		return (JDFNewJDFQuParams) getValidElement(ElementName.NEWJDFQUPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNodeInfoCmdParams getCreateNodeInfoCmdParams(final int iSkip)
 	{
 		return (JDFNodeInfoCmdParams) getCreateValidElement(ElementName.NODEINFOCMDPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFNodeInfoCmdParams appendNodeInfoCmdParams()
 	{
 		return (JDFNodeInfoCmdParams) appendValidElement(ElementName.NODEINFOCMDPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNodeInfoCmdParams getNodeInfoCmdParams(final int iSkip)
 	{
 		return (JDFNodeInfoCmdParams) getValidElement(ElementName.NODEINFOCMDPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNodeInfoQuParams getCreateNodeInfoQuParams(final int iSkip)
 	{
 		return (JDFNodeInfoQuParams) getCreateValidElement(ElementName.NODEINFOQUPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFNodeInfoQuParams appendNodeInfoQuParams()
 	{
 		return (JDFNodeInfoQuParams) appendValidElement(ElementName.NODEINFOQUPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNodeInfoQuParams getNodeInfoQuParams(final int iSkip)
 	{
 		return (JDFNodeInfoQuParams) getValidElement(ElementName.NODEINFOQUPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFNodeInfoResp getCreateNodeInfoResp(final int iSkip)
 	{
 		return (JDFNodeInfoResp) getCreateValidElement(ElementName.NODEINFORESP, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFNodeInfoResp appendNodeInfoResp()
 	{
 		return (JDFNodeInfoResp) appendValidElement(ElementName.NODEINFORESP, null);
@@ -2802,16 +2907,27 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFQueueFilter) getValidElement(ElementName.QUEUEFILTER, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFRequestQueueEntryParams getCreateRequestQueueEntryParams(final int iSkip)
 	{
 		return (JDFRequestQueueEntryParams) getCreateValidElement(ElementName.REQUESTQUEUEENTRYPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFRequestQueueEntryParams appendRequestQueueEntryParams()
 	{
 		return (JDFRequestQueueEntryParams) appendValidElement(ElementName.REQUESTQUEUEENTRYPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFRequestQueueEntryParams getRequestQueueEntryParams(final int iSkip)
 	{
 		return (JDFRequestQueueEntryParams) getValidElement(ElementName.REQUESTQUEUEENTRYPARAMS, null, iSkip);
@@ -2822,26 +2938,44 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFResourcePullParams) getCreateValidElement(ElementName.RESOURCEPULLPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFResourcePullParams appendResourcePullParams()
 	{
 		return (JDFResourcePullParams) appendValidElement(ElementName.RESOURCEPULLPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFResourcePullParams getResourcePullParams(final int iSkip)
 	{
 		return (JDFResourcePullParams) getValidElement(ElementName.RESOURCEPULLPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFResubmissionParams getCreateResubmissionParams(final int iSkip)
 	{
 		return (JDFResubmissionParams) getCreateValidElement(ElementName.RESUBMISSIONPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFResubmissionParams appendResubmissionParams()
 	{
 		return (JDFResubmissionParams) appendValidElement(ElementName.RESUBMISSIONPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFResubmissionParams getResubmissionParams(final int iSkip)
 	{
 		return (JDFResubmissionParams) getValidElement(ElementName.RESUBMISSIONPARAMS, null, iSkip);
@@ -2932,16 +3066,27 @@ public class JDFMessage extends JDFAutoMessage
 		return (JDFSubscriptionFilter) appendValidElement(ElementName.SUBSCRIPTIONFILTER, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFShutDownCmdParams getCreateShutDownCmdParams(final int iSkip)
 	{
 		return (JDFShutDownCmdParams) getCreateValidElement(ElementName.SHUTDOWNCMDPARAMS, null, iSkip);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFShutDownCmdParams appendShutDownCmdParams()
 	{
 		return (JDFShutDownCmdParams) appendValidElement(ElementName.SHUTDOWNCMDPARAMS, null);
 	}
 
+	/**
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFShutDownCmdParams getShutDownCmdParams(final int iSkip)
 	{
 		return (JDFShutDownCmdParams) getValidElement(ElementName.SHUTDOWNCMDPARAMS, null, iSkip);
@@ -2950,16 +3095,25 @@ public class JDFMessage extends JDFAutoMessage
 	// //////////////////////////////////////////////////////////////////////////
 	// //
 
+	/**
+	 * @return
+	 */
 	public JDFWakeUpCmdParams getCreateWakeUpCmdParams()
 	{
 		return (JDFWakeUpCmdParams) getCreateValidElement(ElementName.WAKEUPCMDPARAMS, null, 0);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFWakeUpCmdParams appendWakeUpCmdParams()
 	{
 		return (JDFWakeUpCmdParams) appendValidElement(ElementName.WAKEUPCMDPARAMS, null);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFWakeUpCmdParams getWakeUpCmdParams()
 	{
 		return (JDFWakeUpCmdParams) getValidElement(ElementName.WAKEUPCMDPARAMS, null, 0);
@@ -2968,16 +3122,25 @@ public class JDFMessage extends JDFAutoMessage
 	// //////////////////////////////////////////////////////////////////////////
 	// //
 
+	/**
+	 * @return
+	 */
 	public JDFModifyNodeCmdParams getCreateModifyNodeCmdParams()
 	{
 		return (JDFModifyNodeCmdParams) getCreateValidElement(ElementName.MODIFYNODECMDPARAMS, null, 0);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFModifyNodeCmdParams appendModifyNodeCmdParams()
 	{
 		return (JDFModifyNodeCmdParams) appendValidElement(ElementName.MODIFYNODECMDPARAMS, null);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFModifyNodeCmdParams getModifyNodeCmdParams()
 	{
 		return (JDFModifyNodeCmdParams) getValidElement(ElementName.MODIFYNODECMDPARAMS, null, 0);
@@ -2986,16 +3149,25 @@ public class JDFMessage extends JDFAutoMessage
 	// //////////////////////////////////////////////////////////////////////////
 	// //
 
+	/**
+	 * @return
+	 */
 	public JDFUpdateJDFCmdParams getCreateUpdateJDFCmdParams()
 	{
 		return (JDFUpdateJDFCmdParams) getCreateValidElement(ElementName.UPDATEJDFCMDPARAMS, null, 0);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFUpdateJDFCmdParams appendUpdateJDFCmdParams()
 	{
 		return (JDFUpdateJDFCmdParams) appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFUpdateJDFCmdParams getUpdateJDFCmdParams()
 	{
 		return (JDFUpdateJDFCmdParams) getValidElement(ElementName.UPDATEJDFCMDPARAMS, null, 0);
@@ -3014,26 +3186,15 @@ public class JDFMessage extends JDFAutoMessage
 	/**
 	 * Method setrefID.
 	 * 
-	 * @param refIF
+	 * @param refID
 	 */
 	public void setrefID(final String refID)
 	{
 		setAttribute(AttributeName.REFID, refID);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.cip4.jdflib.auto.JDFAutoMessage#getID()
-	 */
-	@Override
-	public String getID()
-	{
-		return this.getAttribute(AttributeName.ID, null, null);
-	}
-
-	/*
-	 * (non-Javadoc)
+	/**
+	 *  
 	 * 
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core .KElement.EnumValidationLevel, boolean, int)
 	 */
@@ -3053,7 +3214,7 @@ public class JDFMessage extends JDFAutoMessage
 		{
 			return vElem;
 		}
-		final Set s = new HashSet();
+		final Set<String> s = new HashSet<String>();
 		for (int i = 0; i < ae.length; i++)
 		{
 			s.add(ae[i].getLocalName());
@@ -3151,9 +3312,8 @@ public class JDFMessage extends JDFAutoMessage
 		return s;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 *  
 	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
@@ -3231,6 +3391,11 @@ public class JDFMessage extends JDFAutoMessage
 
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#getDeprecatedElements(int)
+	 * @param nMax
+	 * @return
+	 */
 	@Override
 	public VString getDeprecatedElements(final int nMax)
 	{
@@ -3243,6 +3408,12 @@ public class JDFMessage extends JDFAutoMessage
 		return v;
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.KElement#getLastVersion(java.lang.String, boolean)
+	 * @param eaName
+	 * @param bElement
+	 * @return
+	 */
 	@Override
 	public EnumVersion getLastVersion(final String eaName, final boolean bElement)
 	{

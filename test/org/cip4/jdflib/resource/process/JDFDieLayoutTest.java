@@ -3,7 +3,7 @@ package org.cip4.jdflib.resource.process;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
@@ -22,8 +22,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	public final void testStationMapStrip() throws Exception
 	{
 		n.setType(EnumType.Stripping);
-		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(
-				ElementName.BINDERYSIGNATURE, null);
+		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null);
 		JDFDieLayout dl = bs.appendDieLayout();
 		JDFStation station = dl.appendStation();
 		station.setStationName("Lid");
@@ -31,12 +30,9 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 		station = dl.appendStation();
 		station.setStationName("Box");
 		station.setStationAmount(3);
-		JDFResource sm = n.addResource("StationMap",
-				EnumResourceClass.Parameter, null, null, null, null, null);
-		sm
-				.setXMLComment("The partition structure should reflect the product structure ");
-		JDFResource sm1 = sm.addPartition(EnumPartIDKey.PartVersion,
-				"Strawberry");
+		JDFResource sm = n.addResource("StationMap", EnumResourceClass.Parameter, null, null, null, null, null);
+		sm.setXMLComment("The partition structure should reflect the product structure ");
+		JDFResource sm1 = sm.addPartition(EnumPartIDKey.PartVersion, "Strawberry");
 		sm1.setAttribute("StationName", "Lid");
 		sm1.setAttribute("MapAmount", "3");
 		sm1.setAttribute("StationIndex", "0 1 2");
@@ -45,14 +41,12 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 		sm1 = sm.addPartition(EnumPartIDKey.PartVersion, "Blueberry");
 		sm1.setAttribute("StationName", "Lid");
 		sm1.setAttribute("MapAmount", "2");
-		sm1
-				.setXMLComment("2*Blueberry can be placed on any remaining lid station");
+		sm1.setXMLComment("2*Blueberry can be placed on any remaining lid station");
 
 		sm1 = sm.addPartition(EnumPartIDKey.PartVersion, "Cherry");
 		sm1.setAttribute("StationName", "Lid");
 		sm1.setAttribute("MapAmount", "4");
-		sm1
-				.setXMLComment("4*Cherry can be placed on any remaining lid station");
+		sm1.setXMLComment("4*Cherry can be placed on any remaining lid station");
 
 		dl.refElement(sm);
 
@@ -67,7 +61,7 @@ public class JDFDieLayoutTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		d = new JDFDoc(ElementName.JDF);
 		n = d.getJDFRoot();
 

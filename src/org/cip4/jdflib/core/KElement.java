@@ -162,7 +162,6 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * @param element
 	 * @return
 	 */
 	private EnumVersion getAIVersion()
@@ -741,12 +740,12 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void setAttribute(final String key, final String value, String nameSpaceURI)
 	{
-		if (!getOwnerDocument_KElement().getMemberDocument().isStrictNSCheck())
+		Document d = getOwnerDocument();
+		if ((d instanceof DocumentJDFImpl) && !((DocumentJDFImpl) d).isStrictNSCheck())
 		{
 			super.setAttributeNS(nameSpaceURI, key, value);
 			return;
 		}
-
 		boolean bDirty = false;
 		if (value == null)
 		{
@@ -756,165 +755,204 @@ public class KElement extends ElementNSImpl implements Element
 
 		if ((nameSpaceURI == null) || (nameSpaceURI.equals(JDFConstants.EMPTYSTRING)))
 		{ // //////////// DOM Level 1 ///////////////////
-			// must explicitely set xmlns as DOM level 2 because the xerces
-			// serializer checks for DOM level 2
-			// xmlns attributes and avoids duplicate serialization of the
-			// attribute and namespace nodes
-			if (key.startsWith(JDFConstants.XMLNS) && (key.length() == 5 || key.charAt(5) == ':'))
-			{ // set an attribute which is a namespace
-				if (value.equals(JDFConstants.EMPTYSTRING))
-				{
-					final Node a = getAttributeNode(key);
-					// never ever set "xmlns:foo="" !
-					if (a != null)
-					{
-						bDirty = true;
-						removeAttribute(key);
-					}
-				}
-				else if (!value.equals(getInheritedAttribute(key, null, null)))
-				{
-					bDirty = true;
-					super.setAttributeNS(AttributeName.XMLNSURI, key, value);
-					((DocumentJDFImpl) getOwnerDocument()).setIgnoreNSDefault(false);
-				}
-			}
-			else
-			{ // set a normal attribute
-				final String attributePrefix = xmlnsPrefix(key);
-				if (attributePrefix == null)
-				{ // no attribute prefix, put the attribute in the default
-					// namespace
-					bDirty = true;
-					super.setAttributeNS(null, key, value);
-				}
-				else
-				{ // try to find a namespace
-					final String namespaceURI2 = getNamespaceURIFromPrefix(attributePrefix);
-					if (namespaceURI2 != null)
-					{
-						// now we have a namespace --> recurse
-						setAttribute(key, value, namespaceURI2);
-					}
-					else
-					{
-						// attribute with prefix, no namespace found
-						final Node a = getDOMAttr(key, null, false);
-						if (a == null || !value.equals(a.getNodeValue()))
-						{
-							bDirty = true;
-							if (a != null)
-							{
-								final String nodeName = a.getNodeName();
-
-								// don't search the attribute node if it is
-								// already there
-								if (key.equals(nodeName))
-								{ // overwrite default namespace with qualified
-									// namespace or vice versa
-									removeAttribute(nodeName);
-									super.setAttribute(key, value);
-								}
-								else
-								{ // same qualified name, simply overwrite the
-									// value
-									a.setNodeValue(value);
-								}
-							}
-							else
-							{
-								final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
-								if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
-								{
-									throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
-											+ "; attempting to set URI: " + nameSpaceURI);
-								}
-								try
-								{
-									super.setAttributeNS(nsURI2, key, value);
-								}
-								catch (final DOMException de)
-								{
-									// we punt here because it wil hopefully
-									// only be an ordering problem
-									super.setAttribute(key, value);
-								}
-							}
-						}
-					}
-				}
-			}
+			bDirty = setDomAttribute2FromDom1(key, value);
 		}
 		else
 		{ // //////////// DOM Level 2 ///////////////////
-			if (AttributeName.XMLNSURI.equals(nameSpaceURI))
-			{
-				// never ever set "xmlns:foo="" !
-				if (value.equals(JDFConstants.EMPTYSTRING))
-				{
-					bDirty = true;
-					removeAttributeNS(nameSpaceURI, key);
-				}
-				else if (!value.equals(getInheritedAttribute(xmlnsLocalName(key), nameSpaceURI, null)))
-				{
-					bDirty = true;
-					super.setAttributeNS(AttributeName.XMLNSURI, key, value);
-				}
-			}
-			else
-			// standard attribute (not xmlns)
-			{
-				final Node a = getAttributeNodeNS(nameSpaceURI, xmlnsLocalName(key));
-				if (a == null || !value.equals(a.getNodeValue()))
-				{
-					bDirty = true;
-					if (a != null)
-					{ // don't search the attribute node if it is already there
-						final String nodeName = a.getNodeName();
-
-						if (!key.equals(nodeName))
-						{ // overwrite default namespace with qualified
-							// namespace or vice versa
-							super.setAttributeNS(nameSpaceURI, key, value);
-						}
-						else
-						{ // same qualified name, simply overwrite the value
-							a.setNodeValue(value);
-						}
-					}
-					else
-					{
-						final String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
-
-						if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURI))
-						{ // in case multiple namespace uris are defined for the same prefix, all we can do is to bail out loudly
-							throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-									+ "; attempting to set URI: " + nameSpaceURI);
-						}
-
-						// remove any twin dom lvl 1 attributes - just in case
-						removeAttribute(key);
-						if (nameSpaceURI.equals(getNamespaceURI()))
-						{
-							// clean up any attribute that may be in the same ns
-							// but with a different prefix
-							removeAttributeNS(nameSpaceURI, xmlnsLocalName(key));
-							if (xmlnsPrefix(key) == null)
-							{
-								nameSpaceURI = null; // avoid spurios NS1 prefix
-							}
-						}
-
-						super.setAttributeNS(nameSpaceURI, key, value);
-					}
-				}
-			}
+			bDirty = setDomAttribute2FromDom2(key, value, nameSpaceURI);
 		}
 
 		if (bDirty)
 		{
 			setDirty(true);
 		}
+	}
+
+	/**
+	 * @param key
+	 * @param value
+	 * @param nameSpaceURI
+	 * @return
+	 */
+	private boolean setDomAttribute2FromDom2(final String key, final String value, String nameSpaceURI)
+	{
+		boolean bDirty = false;
+		if (AttributeName.XMLNSURI.equals(nameSpaceURI))
+		{
+			// never ever set "xmlns:foo="" !
+			if (value.equals(JDFConstants.EMPTYSTRING))
+			{
+				bDirty = true;
+				removeAttributeNS(nameSpaceURI, key);
+			}
+			else if (!value.equals(getInheritedAttribute(xmlnsLocalName(key), nameSpaceURI, null)))
+			{
+				bDirty = true;
+				removeAttribute(key);
+				super.setAttributeNS(AttributeName.XMLNSURI, key, value);
+			}
+		}
+		else
+		// standard attribute (not xmlns)
+		{
+			final Node a = getAttributeNodeNS(nameSpaceURI, xmlnsLocalName(key));
+			if (a == null || !value.equals(a.getNodeValue()))
+			{
+				bDirty = true;
+				if (a != null)
+				{ // don't search the attribute node if it is already there
+					final String nodeName = a.getNodeName();
+
+					if (!key.equals(nodeName))
+					{ // overwrite default namespace with qualified
+						// namespace or vice versa
+						super.setAttributeNS(nameSpaceURI, key, value);
+					}
+					else
+					{ // same qualified name, simply overwrite the value
+						a.setNodeValue(value);
+					}
+				}
+				else
+				{
+					final String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
+
+					if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURI))
+					{ // in case multiple namespace uris are defined for the same prefix, all we can do is to bail out loudly
+						throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+								+ "; attempting to set URI: " + nameSpaceURI);
+					}
+
+					// remove any twin dom lvl 1 attributes - just in case
+					removeAttribute(key);
+					if (nameSpaceURI.equals(getNamespaceURI()))
+					{
+						// clean up any attribute that may be in the same ns
+						// but with a different prefix
+						removeAttributeNS(nameSpaceURI, xmlnsLocalName(key));
+						if (xmlnsPrefix(key) == null)
+						{
+							nameSpaceURI = null; // avoid spurios NS1 prefix
+						}
+					}
+
+					super.setAttributeNS(nameSpaceURI, key, value);
+				}
+			}
+		}
+		return bDirty;
+	}
+
+	/**
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	private boolean setDomAttribute2FromDom1(final String key, final String value)
+	{
+		String nameSpaceURI = null;
+		boolean bDirty = false;
+		// must explicitly set xmlns as DOM level 2 because the xerces serializer checks for DOM level 2
+		// xmlns attributes and avoids duplicate serialization of the attribute and namespace nodes
+		if (key.startsWith(JDFConstants.XMLNS) && (key.length() == 5 || key.charAt(5) == ':'))
+		{ // set an attribute which is a namespace
+			if (value.equals(JDFConstants.EMPTYSTRING))
+			{
+				final Node a = getAttributeNode(key);
+				// never ever set "xmlns:foo="" !
+				if (a != null)
+				{
+					bDirty = true;
+					removeAttribute(key);
+				}
+			}
+			else if (!value.equals(getInheritedAttribute(key, null, null)))
+			{
+				bDirty = true;
+				String myPrefix = xmlnsLocalName(key);
+				if ("xmlns".equals(key))
+				{
+					myPrefix = null;
+				}
+				else
+				{
+					super.setAttributeNS(AttributeName.XMLNSURI, key, value);
+				}
+				DocumentJDFImpl doc = (DocumentJDFImpl) getOwnerDocument();
+				doc.setNamespaceURIFromPrefix(myPrefix, value);
+			}
+			String prefixElem = getPrefix();
+			String prefixValue = StringUtil.token(key, 1, ":");
+			if (ContainerUtil.equals(prefixElem, prefixValue) && !value.equals(super.getNamespaceURI()))
+			{
+				setNamespaceURI(value);
+			}
+		}
+		else
+		{ // set a normal attribute
+			final String attributePrefix = xmlnsPrefix(key);
+			if (attributePrefix == null)
+			{ // no attribute prefix, put the attribute in the default namespace
+				bDirty = true;
+				super.setAttributeNS(null, key, value);
+			}
+			else
+			{ // try to find a namespace
+				final String namespaceURI2 = getNamespaceURIFromPrefix(attributePrefix);
+				if (namespaceURI2 != null)
+				{
+					// now we have a namespace --> recurse
+					setAttribute(key, value, namespaceURI2);
+				}
+				else
+				{
+					// attribute with prefix, no namespace found
+					final Node a = getDOMAttr(key, null, false);
+					if (a == null || !value.equals(a.getNodeValue()))
+					{
+						bDirty = true;
+						if (a != null)
+						{
+							final String nodeName = a.getNodeName();
+
+							// don't search the attribute node if it is
+							// already there
+							if (key.equals(nodeName))
+							{ // overwrite default namespace with qualified
+								// namespace or vice versa
+								removeAttribute(nodeName);
+								super.setAttribute(key, value);
+							}
+							else
+							{ // same qualified name, simply overwrite the
+								// value
+								a.setNodeValue(value);
+							}
+						}
+						else
+						{
+							final String nsURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
+							if ((nsURI2 != null) && !nsURI2.equals(nameSpaceURI))
+							{
+								throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + nsURI2
+										+ "; attempting to set URI: " + nameSpaceURI);
+							}
+							try
+							{
+								super.setAttributeNS(nsURI2, key, value);
+							}
+							catch (final DOMException de)
+							{
+								// we punt here because it will hopefully
+								// only be an ordering problem
+								super.setAttribute(key, value);
+							}
+						}
+					}
+				}
+			}
+		}
+		return bDirty;
 	}
 
 	/**
@@ -1287,6 +1325,8 @@ public class KElement extends ElementNSImpl implements Element
 			}
 
 			strNamespaceURI = getAttribute(prefix, AttributeName.XMLNSURI, null);
+			if (strNamespaceURI == null)
+				strNamespaceURI = StringUtil.getNonEmpty(super.getAttribute("xmlns:" + prefix));
 
 			// found a decent URI
 			if (strNamespaceURI != null)
@@ -1350,8 +1390,7 @@ public class KElement extends ElementNSImpl implements Element
 			if (prefix == null && s == null || prefix != null && prefix.equals(s))
 			{
 				final String nsuri = parent.getNamespaceURI();
-				if (nsuri != null) // we found a valid nsuri so we might as well
-				// set it for this
+				if (nsuri != null) // we found a valid nsuri so we might as well set it for this
 				{
 					namespaceURI = nsuri;
 					return nsuri;
@@ -1370,15 +1409,13 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			nsuri = getInheritedAttribute(JDFConstants.XMLNS, null, null);
 		}
-		if (nsuri != null) // we found a valid nsuri so we might as well set it
-		// for this
+		if (nsuri != null) // we found a valid nsuri so we might as well set it for this
 		{
 			namespaceURI = nsuri;
 		}
 		else if (s == null)
 		{
-			// ran into root and no default ns found - ciao from now on
-			((DocumentJDFImpl) getOwnerDocument()).setIgnoreNSDefault(true);
+			// nop
 
 		}
 		return nsuri;
@@ -1456,7 +1493,9 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void setAttributesRaw(final KElement kElem)
 	{
-		final NamedNodeMap nm = getAttributes();
+		if (kElem == null)
+			return;
+		final NamedNodeMap nm = kElem.getAttributes();
 		if (nm != null)
 		{
 			final int siz = nm.getLength();
@@ -1603,7 +1642,8 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				final String xmlnsPrefix = xmlnsPrefix(elementName);
 
-				String namespaceURI2 = ownerDoc.isIgnoreNSDefault() && xmlnsPrefix == null ? nameSpaceURI : getNamespaceURIFromPrefix(xmlnsPrefix);
+				boolean ignoreNSDefault = ownerDoc.isIgnoreNSDefault();
+				String namespaceURI2 = ignoreNSDefault && xmlnsPrefix == null ? nameSpaceURI : getNamespaceURIFromPrefix(xmlnsPrefix);
 				namespaceURI2 = StringUtil.getNonEmpty(namespaceURI2);
 				if (xmlnsPrefix != null && namespaceURI2 == null)
 				{
@@ -3404,7 +3444,10 @@ public class KElement extends ElementNSImpl implements Element
 			else if (iPos > 0 && iPos + l < lenString)
 				strAttrValue = strAttrValue.substring(0, iPos + 1) + strAttrValue.substring(iPos + l);
 			else if (iPos == 0 && iPos + l == lenString)
+			{
 				strAttrValue = null;
+				break;
+			}
 			else if (iPos == 0 && iPos + l < lenString)
 				strAttrValue = strAttrValue.substring(iPos + l);
 			else
@@ -3833,7 +3876,28 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public KElement copyElement(final KElement src, final KElement beforeChild)
 	{
-		return (KElement) copyNode(this, src, beforeChild);
+		if (src == null)
+		{
+			return null;
+		}
+		synchronized (this)
+		{
+			Node childNode = null;
+			if (src.getOwnerDocument() == this.getOwnerDocument())
+			{
+				childNode = src.cloneNode(true);
+			}
+			else
+			{
+				childNode = this.getOwnerDocument().importNode(src, true);
+			}
+
+			if (beforeChild != null && beforeChild.getParentNode() != this)
+			{
+				throw new JDFException("KElement.copyElement: beforeChild " + beforeChild + " is not child of this: " + toString());
+			}
+			return (KElement) this.insertBefore(childNode, beforeChild);
+		}
 	}
 
 	/** 
@@ -3859,34 +3923,6 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			copyElement(e, null);
 			e = e.getNextSiblingElement();
-		}
-
-	}
-
-	private static Node copyNode(final Node parent, final Node src, final Node beforeChild)
-	{
-		if (src == null)
-		{
-			return null;
-		}
-
-		synchronized (parent)
-		{
-			Node childNode = null;
-			if (src.getOwnerDocument() == parent.getOwnerDocument())
-			{
-				childNode = src.cloneNode(true);
-			}
-			else
-			{
-				childNode = parent.getOwnerDocument().importNode(src, true);
-			}
-
-			if (beforeChild != null && beforeChild.getParentNode() != parent)
-			{
-				throw new JDFException("KElement.copyElement" + " beforeChild is not child of this");
-			}
-			return parent.insertBefore(childNode, beforeChild);
 		}
 	}
 
@@ -4595,6 +4631,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return String the dom element serialized as a string
 	 * @throws JDFException if an error occurs while serializing
 	 */
+	@SuppressWarnings("deprecation")
 	public String toXML(final int indent)
 	{
 
@@ -4627,6 +4664,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return String the dom element serialized as a string
 	 * @throws JDFException if an error occurs while serializing
 	 */
+	@SuppressWarnings("deprecation")
 	public String toDisplayXML(final int indent)
 	{
 		try

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -93,6 +93,10 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 	private JDFNode n = null;
 	private JDFAssembly as = null;
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @throws Exception
+	 */
 	@Override
 	public void setUp() throws Exception
 	{
@@ -100,10 +104,12 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 		doc = new JDFDoc("JDF");
 		n = doc.getJDFRoot();
 		n.setType("Stripping", true);
-		as = (JDFAssembly) n.appendMatchingResource(ElementName.ASSEMBLY,
-				EnumProcessUsage.AnyInput, null);
+		as = (JDFAssembly) n.appendMatchingResource(ElementName.ASSEMBLY, EnumProcessUsage.AnyInput, null);
 	}
 
+	/**
+	 * 
+	 */
 	public void testSubAssemblySection()
 	{
 		JDFAssemblySection ass = as.appendAssemblySection();
@@ -113,6 +119,9 @@ public class JDFAssemblySectionTest extends JDFTestCaseBase
 		doc.write2File(sm_dirTestDataTemp + "AssemblySection.jdf", 2, false);
 	}
 
+	/**
+	 * 
+	 */
 	public void testAssemblySectionCollection()
 	{
 		JDFAssemblySection ass = as.appendAssemblySection();

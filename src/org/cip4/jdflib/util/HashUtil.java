@@ -33,11 +33,12 @@ package org.cip4.jdflib.util;
  * initialize hash to super.hashCode(). See the example code.
  * 
  * @author Manfred Steinbach
- * @deprecated - check use
  */
-@Deprecated
 public class HashUtil extends Object
 {
+	/**
+	 * 
+	 */
 	public static final int PRIME = 1000003;
 
 	private HashUtil()
@@ -45,36 +46,71 @@ public class HashUtil extends Object
 		super();
 	}
 
+	/**
+	 * @param source
+	 * @param x
+	 * @return
+	 */
 	public static final int hashCode(final int source, final boolean x)
 	{
 		return PRIME * source + (x ? 1 : 0);
 	}
 
+	/**
+	 * @param source
+	 * @param x
+	 * @return
+	 */
 	public static final int hashCode(final int source, final int x)
 	{
 		return PRIME * source + x;
 	}
 
+	/**
+	 * @param source
+	 * @param x
+	 * @return
+	 */
 	public static final int hashCode(final int source, final long x)
 	{
 		return PRIME * source + (int) (PRIME * (x >>> 32) + (x & 0xFFFFFFFF));
 	}
 
+	/**
+	 * @param source
+	 * @param x
+	 * @return
+	 */
 	public static final int hashCode(final int source, final float x)
 	{
 		return hashCode(source, ((new Float(x).equals(new Float(0.0))) ? 0 : Float.floatToIntBits(x)));
 	}
 
+	/**
+	 * @param source
+	 * @param x
+	 * @return
+	 */
 	public static final int hashCode(final int source, final double x)
 	{
 		return hashCode(source, ((new Double(x).equals(new Double(0.0))) ? 0L : Double.doubleToLongBits(x)));
 	}
 
+	/**
+	 * @param source
+	 * @param x
+	 * @return
+	 */
 	public static final int hashCode(final int source, final Object x)
 	{
 		return (null == x) ? 0 : PRIME * source + x.hashCode();
 	}
 
+	/**
+	 * @param source
+	 * @param x
+	 * @return
+	 */
 	public static final int hashCode(final int source, final Object[] x)
 	{
 		int sourceLocal = source;

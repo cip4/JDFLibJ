@@ -192,7 +192,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	@Override
 	public synchronized String toString()
 	{
-		return "ByteArrayIOStream: " + new String(buf, 0, count);
+		return "ByteArrayIOStream:\n" + new String(buf, 0, count);
 	}
 
 }

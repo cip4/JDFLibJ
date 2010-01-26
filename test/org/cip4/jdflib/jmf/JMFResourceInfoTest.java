@@ -17,6 +17,9 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 {
 	private JDFResourceInfo ri;
 
+	/**
+	 * 
+	 */
 	public void testGetResource()
 	{
 		assertNull(ri.getResource(ElementName.MEDIA));
@@ -28,6 +31,9 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testGetResourceNull()
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
@@ -37,6 +43,9 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetResourceName()
 	{
 		// JDFMedia m=(JDFMedia)
@@ -46,6 +55,9 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetResourceID()
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
@@ -54,6 +66,9 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetProductID()
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);
@@ -63,6 +78,9 @@ public class JMFResourceInfoTest extends JDFTestCaseBase
 	}
 
 	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testGetResStatus()
 	{
 		JDFMedia m = (JDFMedia) ri.appendResource(ElementName.MEDIA);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,7 +83,7 @@ import java.io.File;
  */
 public class RollingBackupFile extends File
 {
-	int nBackup;
+	private final int nBackup;
 
 	/**
 	 * @param pathname the base filename
@@ -115,16 +115,35 @@ public class RollingBackupFile extends File
 	}
 
 	/**
-	 * the big simple rolling method
+	 * remove all files, including main file
 	 */
-	private void init()
+	public void clearAll()
 	{
 		final String pathname = getPath();
-		final String sBase = pathname + ".";
+		final String extension = FileUtil.getExtension(this);
+		for (int i = nBackup; i >= 0; i--)
+		{
+			final String sBak = getPathFor(pathname, extension, i);
+			final File lastFile = new File(sBak);
+			if (lastFile.exists())
+			{
+				lastFile.delete();
+			}
+			delete();
+		}
+	}
+
+	/**
+	 * the big simple rolling method
+	 */
+	private synchronized void init()
+	{
+		final String pathname = getPath();
+		final String extension = FileUtil.getExtension(this);
 		for (int i = nBackup; i > 0; i--)
 		{
-			final String sBak = sBase + i;
-			final String sNewBak = (i == 1) ? pathname : sBase + (i - 1);
+			final String sBak = getPathFor(pathname, extension, i);
+			final String sNewBak = (i == 1) ? pathname : getPathFor(pathname, extension, i - 1);
 			final File lastFile = new File(sBak);
 			if (lastFile.exists())
 			{
@@ -132,6 +151,19 @@ public class RollingBackupFile extends File
 			}
 			new File(sNewBak).renameTo(lastFile);
 		}
+	}
+
+	/**
+	 * @param pathname
+	 * @param extension
+	 * @param i
+	 * @return
+	 */
+	private String getPathFor(final String pathname, final String extension, int i)
+	{
+		final String newExtension = i + ((extension == null) ? "" : "." + extension);
+		final String sBak = StringUtil.newExtension(pathname, newExtension);
+		return sBak;
 	}
 
 	/**

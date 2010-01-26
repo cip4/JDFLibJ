@@ -71,9 +71,11 @@
 package org.cip4.jdflib.core;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.EnumUtils;
@@ -112,6 +114,9 @@ import org.cip4.jdflib.util.UrlUtil;
 public class AttributeInfo
 {
 
+	/**
+	 * 
+	 */
 	public static HashMap<String, AttributeInfo> fixedMap = new HashMap<String, AttributeInfo>();
 
 	HashMap<String, AtrInfo> attribInfoTable = new HashMap<String, AtrInfo>();
@@ -498,10 +503,12 @@ public class AttributeInfo
 	/**
 	 * Enumeration of valid attribute types
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumAttributeType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
 		private static int m_startValue = 0;
+		private static Set<EnumAttributeType> setRange = null;
 
 		/**
 		 * @param name
@@ -555,87 +562,138 @@ public class AttributeInfo
 		}
 
 		/**
+		 * @param test 
 		 * @return true if test is a range data type
 		 */
 		public static boolean isRange(EnumAttributeType test)
 		{
-			return EnumAttributeType.DateTimeRange.equals(test) || EnumAttributeType.DateTimeRangeList.equals(test) || EnumAttributeType.DurationRange.equals(test)
-					|| EnumAttributeType.DurationRangeList.equals(test) || EnumAttributeType.IntegerRange.equals(test) || EnumAttributeType.IntegerRangeList.equals(test)
-					|| EnumAttributeType.NameRange.equals(test) || EnumAttributeType.NameRangeList.equals(test) || EnumAttributeType.NumberRange.equals(test)
-					|| EnumAttributeType.NumberRangeList.equals(test) || EnumAttributeType.RectangleRange.equals(test) || EnumAttributeType.RectangleRangeList.equals(test)
-					|| EnumAttributeType.ShapeRange.equals(test) || EnumAttributeType.ShapeRangeList.equals(test) || EnumAttributeType.XYPairRange.equals(test)
-					|| EnumAttributeType.XYPairRangeList.equals(test);
+			if (setRange == null)
+			{
+				setRange = new HashSet<EnumAttributeType>();
+				setRange.add(EnumAttributeType.DateTimeRange);
+				setRange.add(EnumAttributeType.DateTimeRangeList);
+				setRange.add(EnumAttributeType.DurationRange);
+				setRange.add(EnumAttributeType.DurationRangeList);
+				setRange.add(EnumAttributeType.IntegerRange);
+				setRange.add(EnumAttributeType.IntegerRangeList);
+				setRange.add(EnumAttributeType.NameRange);
+				setRange.add(EnumAttributeType.NameRangeList);
+				setRange.add(EnumAttributeType.NumberRange);
+				setRange.add(EnumAttributeType.NumberRangeList);
+				setRange.add(EnumAttributeType.RectangleRange);
+				setRange.add(EnumAttributeType.RectangleRangeList);
+				setRange.add(EnumAttributeType.ShapeRange);
+				setRange.add(EnumAttributeType.ShapeRangeList);
+				setRange.add(EnumAttributeType.XYPairRange);
+				setRange.add(EnumAttributeType.XYPairRangeList);
+			}
+
+			return test == null ? false : setRange.contains(test);
 		}
 
+		/** */
 		public static final EnumAttributeType Any = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ANY);
+		/** */
 		public static final EnumAttributeType boolean_ = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_BOOLEAN);
+		/** */
 		public static final EnumAttributeType CMYKColor = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_CMYKCOLOR);
+		/** */
 		public static final EnumAttributeType dateTime = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DATETIME);
+		/** */
 		public static final EnumAttributeType DateTimeRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DATETIMERANGE);
+		/** */
 		public static final EnumAttributeType DateTimeRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DATETIMERANGELIST);
+		/** */
 		public static final EnumAttributeType double_ = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DOUBLE);
+		/** */
 		public static final EnumAttributeType duration = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DURATION);
+		/** */
 		public static final EnumAttributeType DurationRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DURATIONRANGE);
+		/** */
 		public static final EnumAttributeType DurationRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_DURATIONRANGELIST);
+		/** */
 		public static final EnumAttributeType enumeration = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ENUMERATION); // also
-		// used
-		// for
-		// Orientation,
-		// defined in JDF
-		// Spec
+		/** */
 		public static final EnumAttributeType enumerations = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ENUMERATIONS); // also
-		// used
-		// for
-		// Orienttions,
-		// defined in JDF
-		// Spec
+		/** */
 		public static final EnumAttributeType hexBinary = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_HEXBINARY);
+		/** */
 		public static final EnumAttributeType ID = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_ID);
+		/** */
 		public static final EnumAttributeType IDREF = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_IDREF);
+		/** */
 		public static final EnumAttributeType IDREFS = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_IDREFS);
+		/** */
 		public static final EnumAttributeType integer = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_INTEGER);
+		/** */
 		public static final EnumAttributeType IntegerList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_INTEGERLIST);
+		/** */
 		public static final EnumAttributeType IntegerRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_INTEGERRANGE);
+		/** */
 		public static final EnumAttributeType IntegerRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_INTEGERRANGELIST);
+		/** */
 		public static final EnumAttributeType JDFJMFVersion = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_JDFJMFVERSION);
+		/** */
 		public static final EnumAttributeType LabColor = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_LABCOLOR);
+		/** */
 		public static final EnumAttributeType language = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_LANGUAGE);
+		/** */
 		public static final EnumAttributeType languages = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_LANGUAGES);
+		/** */
 		public static final EnumAttributeType matrix = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_MATRIX);
+		/** */
 		public static final EnumAttributeType NameRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NAMERANGE);
+		/** */
 		public static final EnumAttributeType NameRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NAMERANGELIST);
+		/** */
 		public static final EnumAttributeType NMTOKEN = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NMTOKEN);
+		/** */
 		public static final EnumAttributeType NMTOKENS = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NMTOKENS);
+		/** */
 		public static final EnumAttributeType NumberList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NUMBERLIST); // equivalent
-		// to
-		// DoubleList, defined
-		// in JDF Spec
+		/** */
 		public static final EnumAttributeType NumberRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NUMBERRANGE);
+		/** */
 		public static final EnumAttributeType NumberRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_NUMBERRANGELIST);
+		/** */
 		public static final EnumAttributeType PDFPath = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_PDFPATH);
+		/** */
 		public static final EnumAttributeType rectangle = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_RECTANGLE);
+		/** */
 		public static final EnumAttributeType RectangleRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_RECTANGLERANGE);
+		/** */
 		public static final EnumAttributeType RectangleRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_RECTANGLERANGELIST);
+		/** */
 		public static final EnumAttributeType RegExp = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_REGEXP);
+		/** */
 		public static final EnumAttributeType RGBColor = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_RGBCOLOR);
+		/** */
 		public static final EnumAttributeType shape = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_SHAPE);
+		/** */
 		public static final EnumAttributeType ShapeRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_SHAPERANGE);
+		/** */
 		public static final EnumAttributeType ShapeRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_SHAPERANGELIST);
+		/** */
 		public static final EnumAttributeType shortString = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_SHORTSTRING);
+		/** */
 		public static final EnumAttributeType string = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_STRING);
+		/** */
 		public static final EnumAttributeType TransferFunction = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_TRANSFERFUNCTION);
+		/** */
 		public static final EnumAttributeType unbounded = new EnumAttributeType(JDFConstants.UNBOUNDED); // needed
-		// for
-		// schema
-		// int
-		// or
-		// unbounded
+		/** */
 		public static final EnumAttributeType URI = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_URI);
+		/** */
 		public static final EnumAttributeType URL = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_URL);
+		/** */
 		public static final EnumAttributeType XYPair = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XYPAIR);
+		/** */
 		public static final EnumAttributeType XYPairRange = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XYPAIRRANGE);
+		/** */
 		public static final EnumAttributeType XYPairRangeList = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XYPAIRRANGELIST);
+		/** */
 		public static final EnumAttributeType XPath = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XPATH);
+		/** */
 		public static final EnumAttributeType XYRelation = new EnumAttributeType(JDFConstants.ATTRIBUTETYPE_XYRELATION);
 	}
 
@@ -647,6 +705,7 @@ public class AttributeInfo
 	/**
 	 * Enumeration of attribute validity values
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumAttributeValidity extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -702,14 +761,23 @@ public class AttributeInfo
 			return iterator(EnumAttributeValidity.class);
 		}
 
+		/** */
 		public static final EnumAttributeValidity Unknown = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_UNKNOWN);
+		/** */
 		public static final EnumAttributeValidity None = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_NONE);
+		/** */
 		public static final EnumAttributeValidity Required = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_REQUIRED);
+		/** */
 		public static final EnumAttributeValidity Optional = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_OPTIONAL);
+		/** */
 		public static final EnumAttributeValidity Deprecated = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_DEPRECATED);
+		/** */
 		public static final EnumAttributeValidity Any = new EnumAttributeValidity(JDFConstants.ATTRIBUTEVALIDITY_ANY);
 	}
 
+	/**
+	 * @param v
+	 */
 	public void setVersion(EnumVersion v)
 	{
 		version = v;
@@ -733,11 +801,16 @@ public class AttributeInfo
 		return ai.getAtrType();
 	}
 
+	/**
+	 * @param key
+	 * @param attribute
+	 * @param level
+	 * @return
+	 */
 	public boolean validAttribute(String key, String attribute, KElement.EnumValidationLevel level)
 	{
 		EnumAttributeType typ = getAttributeType(key);
-		if (typ == null) // unknown attributes are by definition valid, the
-			// check is done in the unknown method
+		if (typ == null) // unknown attributes are by definition valid, the check is done in the unknown method
 			return true;
 
 		// get the correct enumeration lists
@@ -1038,13 +1111,14 @@ public class AttributeInfo
 		// TODO better regexp
 		int l = val.length();
 		int posDash = val.indexOf("-");
-		return l >= 2 && l <= 3 || l > 4 && (posDash >= 2 && posDash < 4); // 2=en
-		// ,
-		// de
-		// ,
-		// ...
+		return l >= 2 && l <= 3 || l > 4 && (posDash >= 2 && posDash < 4);
+		// 2=en , de , ...
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
 	@Override
 	public String toString()
 	{

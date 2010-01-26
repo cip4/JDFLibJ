@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -107,6 +107,9 @@ import org.cip4.jdflib.validate.JDFValidator;
 public class CheckJDFTest extends JDFTestCaseBase
 {
 
+	/**
+	 * 
+	 */
 	public void testValidate()
 	{
 		final File jdfFile = new File(sm_dirTestData + "job.jdf");
@@ -156,6 +159,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testPrivateValidate()
 	{
 		final StatusCounter sc = new StatusCounter(null, null, null);
@@ -209,6 +215,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testProcessSingleFile()
 	{
 		processSingleFile("test/data/matsch.jdf", false, EnumValidationLevel.Complete);
@@ -259,6 +268,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void testProcessAllFiles()
 	{
 		final JDFValidator checkJDF = new JDFValidator();
@@ -274,6 +286,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testValidateStream() throws Exception
 	{
 		final File jdfFile = new File(sm_dirTestData + "job.jdf");
@@ -287,6 +302,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 		checker.validate(args, ins);
 	}
 
+	/**
+	 * 
+	 */
 	public void testBadResLink()
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -307,6 +325,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testValidateZip()
 	{
 		final File zip = new File(sm_dirTestData + "checkJDF.zip");
@@ -319,6 +340,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 		assertEquals("checkJDF.zip has 17 files", root.numChildElements("TestFile", null), 17);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	public void testValidateMime() throws Exception
 	{
 
@@ -330,6 +354,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 		assertEquals("checkJDF.mjm has 2 files", root.numChildElements("TestFile", null), 2);
 	}
 
+	/**
+	 * 
+	 */
 	public void testMainQuietComplete()
 	{
 		final File jdfFile = new File(sm_dirTestData + "job.jdf");
@@ -341,6 +368,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public void testMainQuietCompleteXMLReport()
 	{
 		final File jdfFile = new File(sm_dirTestData + "job.jdf");
@@ -357,6 +387,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws IOException
+	 */
 	public void testValidateJMF() throws IOException
 	{
 		// Write temp JMF
@@ -385,6 +418,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testValidateSchemaPreview()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -558,6 +594,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testSamples()
 	{
 		final File testData = new File(sm_dirTestData + "SampleFiles");
@@ -592,6 +631,9 @@ public class CheckJDFTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testBadSamples()
 	{
 		final File testData = new File(sm_dirTestData + "BadSampleFiles");

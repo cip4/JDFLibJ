@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,89 +80,55 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColorantAlias;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFColorantAlias extends JDFAutoColorantAlias
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFColorantAlias
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorantAlias
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFColorantAlias
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
-	 * @throws DOMException
 	 */
-	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFColorantAlias(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
-	}
-
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
-	static
-	{
-		atrInfoTable[0] = new AtrInfoTable(
-				AttributeName.REPLACEMENTCOLORANTNAME, 0x22222222,
-				AttributeInfo.EnumAttributeType.string, null, null);
-	}
-
-	@Override
-	protected AttributeInfo getTheAttributeInfo()
-	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-	}
-
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-	static
-	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.SEPARATIONSPEC,
-				0x22222222);
-	}
-
-	@Override
-	protected ElementInfo getTheElementInfo()
-	{
-		return super.getTheElementInfo().updateReplace(elemInfoTable);
 	}
 
 	// **************************************** Methods
@@ -176,35 +142,6 @@ public class JDFColorantAlias extends JDFAutoColorantAlias
 	public String toString()
 	{
 		return "JDFColorantAlias[  --> " + super.toString() + " ]";
-	}
-
-	/*
-	 * ---------------------------------------------------------------------
-	 * Methods for Attribute ReplacementColorantName
-	 * ---------------------------------------------------------------------
-	 */
-	/**
-	 * (36) set attribute ReplacementColorantName
-	 * 
-	 * @param value
-	 *            : the value to set the attribute to
-	 */
-	@Override
-	public void setReplacementColorantName(String value)
-	{
-		setAttribute(AttributeName.REPLACEMENTCOLORANTNAME, value, null);
-	}
-
-	/**
-	 * (23) get String attribute ReplacementColorantName
-	 * 
-	 * @return the value of the attribute
-	 */
-	@Override
-	public String getReplacementColorantName()
-	{
-		return getAttribute(AttributeName.REPLACEMENTCOLORANTNAME, null,
-				JDFConstants.EMPTYSTRING);
 	}
 
 	/**
@@ -241,8 +178,7 @@ public class JDFColorantAlias extends JDFAutoColorantAlias
 	public VString getSeparations()
 	{
 		VString vName = new VString();
-		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null,
-				null, false, 0, false);
+		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
 		int nSep = v.size();
 		for (int i = 0; i < nSep; i++)
 		{

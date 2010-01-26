@@ -80,7 +80,6 @@ import org.cip4.jdflib.auto.JDFAutoDeviceCap.EnumCombinedMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
@@ -122,7 +121,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 
 		JDFDoc doc = new JDFDoc("Device");
 		device = (JDFDevice) doc.getRoot();
@@ -188,8 +187,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////
 	public void testIsPresentPartition()
 	{
-		JDFAction act = devicecap.appendActionPool().appendActionTest(
-				EnumTerm.IsPresentEvaluation, true);
+		JDFAction act = devicecap.appendActionPool().appendActionTest(EnumTerm.IsPresentEvaluation, true);
 		JDFTest tst = act.getTest();
 		tst.setContext("//Component");
 		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) tst.getTerm();
@@ -199,8 +197,7 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode node = doc.getJDFRoot();
 		node.setType("fnarf", false);
-		JDFComponent comp = (JDFComponent) node.addResource("Component", null,
-				EnumUsage.Input, null, null, null, null);
+		JDFComponent comp = (JDFComponent) node.addResource("Component", null, EnumUsage.Input, null, null, null, null);
 		comp.setProductType("Cover");
 
 		XMLDoc rep = new XMLDoc("root", null);
@@ -216,26 +213,22 @@ public class JDFEvaluationTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////////
 	public void testAction()
 	{
-		JDFAction act = devicecap.appendActionPool().appendActionTest(
-				EnumTerm.or, false);
+		JDFAction act = devicecap.appendActionPool().appendActionTest(EnumTerm.or, false);
 		JDFTest tst = act.getTest();
 		tst.setContext("/JDF/ResourcePool/Component");
 		JDFor or = (JDFor) ((JDFnot) tst.getTerm()).getTerm(EnumTerm.or, 0);
-		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) or
-				.appendTerm(EnumTerm.IsPresentEvaluation);
+		JDFIsPresentEvaluation ipe = (JDFIsPresentEvaluation) or.appendTerm(EnumTerm.IsPresentEvaluation);
 		ipe.setRefTarget(ptState);
 		assertEquals(ipe.getrRef(), ptState.getID());
 
-		JDFEnumerationEvaluation enev = (JDFEnumerationEvaluation) or
-				.appendTerm(EnumTerm.EnumerationEvaluation);
+		JDFEnumerationEvaluation enev = (JDFEnumerationEvaluation) or.appendTerm(EnumTerm.EnumerationEvaluation);
 		enev.setRefTarget(compState);
 		enev.setRegExp("(.+ )*FinalProduct( .+)*");
 
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode node = doc.getJDFRoot();
 		node.setType("fnarf", false);
-		JDFComponent comp = (JDFComponent) node.addResource("Component", null,
-				EnumUsage.Input, null, null, null, null);
+		JDFComponent comp = (JDFComponent) node.addResource("Component", null, EnumUsage.Input, null, null, null, null);
 
 		XMLDoc rep = new XMLDoc("root", null);
 		KElement eRep = rep.getRoot();

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,7 +77,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceCondition;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
@@ -93,10 +93,14 @@ public class JMFStatusTest extends JDFTestCaseBase
 	private JDFSignal signal;
 	private JDFStatusQuParams sqp;
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
 	@Override
 	public void setUp()
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		doc = new JDFDoc(ElementName.JMF);
 		jmf = doc.getJMFRoot();
 		signal = jmf.appendSignal();
@@ -110,6 +114,9 @@ public class JMFStatusTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testStatusDetails()
 	{
 
@@ -118,13 +125,14 @@ public class JMFStatusTest extends JDFTestCaseBase
 		di.setDeviceStatus(EnumDeviceStatus.Stopped);
 		di.setStatusDetails("OutputAreaFull PaperJam Repair");
 
-		doc.write2File(sm_dirTestDataTemp + File.separator
-				+ "JMFStatusSignal.jmf", 2, false);
+		doc.write2File(sm_dirTestDataTemp + File.separator + "JMFStatusSignal.jmf", 2, false);
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
 
+	/**
+	 * 
+	 */
 	// ///////////////////////////////////////////////////////////////////
-
 	public void testInheritedPhase()
 	{
 

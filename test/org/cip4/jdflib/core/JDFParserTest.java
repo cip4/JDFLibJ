@@ -85,6 +85,7 @@ import java.io.InputStream;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
 
@@ -135,10 +136,10 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		final JDFParser parser = new JDFParser();
 		System.gc();
-		final long l1 = System.nanoTime();
+		final long l1 = System.currentTimeMillis();
 		final JDFDoc d = parser.parseFile(sm_dirTestData + "bigWhite.jdf");
 		assertNotNull(d);
-		System.out.println("big parse:   " + (System.nanoTime() - l1) / 1000000);
+		System.out.println("big parse:   " + (System.currentTimeMillis() - l1) / 1000.000);
 	}
 
 	/**
@@ -149,6 +150,37 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		final JDFParser parser = new JDFParser();
 		assertNotNull(parser.parseString(s));
+	}
+
+	/**
+	 * check simple parsestring
+	 * 
+	 */
+	public void testParseStringJDF()
+	{
+		final JDFParser parser = new JDFParser();
+		JDFDoc d = parser.parseString("<JDF/>");
+		JDFNode n = d.getJDFRoot();
+		assertEquals(n.getNamespaceURI(), JDFConstants.JDFNAMESPACE);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNull(ap);
+		ap = n.appendAuditPool();
+		assertNotNull(ap);
+	}
+
+	/**
+	 * 
+	 */
+	public void testParseStringJDFWrongNS()
+	{
+		final JDFParser parser = new JDFParser();
+		JDFDoc d = parser.parseString("<JDF xmlns=\"www.cip4.org\"/>");
+		JDFNode n = d.getJDFRoot();
+		assertEquals(n.getNamespaceURI(), JDFConstants.JDFNAMESPACE);
+		JDFAuditPool ap = n.getAuditPool();
+		assertNull(ap);
+		ap = n.appendAuditPool();
+		assertNotNull(ap);
 	}
 
 	/**
@@ -211,7 +243,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	{
 		JDFParser.m_searchStream = true;
 		final String s2 = "        ------ end of header ----!\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n <JMF ID=\"abc\"/>";
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
 			assertNotNull(new JDFParser().parseString(s2));
 		}
@@ -228,9 +260,8 @@ public class JDFParserTest extends JDFTestCaseBase
 	public void testSchema()
 	{
 		final File foo = new File(sm_dirTestSchema).getParentFile();
-
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
-		final File[] dirs = FileUtil.listFilesWithExpression(foo, ".*Version_.*");
+		final File[] dirs = FileUtil.listFilesWithExpression(foo, "*Version_*");
 		assertTrue(dirs.length > 3);
 		int nCheck = 0;
 		for (int i = 0; i < dirs.length; i++)
@@ -261,7 +292,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		final JDFResource rl = n.addResource("RunList", EnumUsage.Input);
-		rl.setDescriptiveName("Runlist für 10 € &&&"); // sum special characters
+		rl.setDescriptiveName("Runlist fï¿½r 10 ï¿½ &&&"); // sum special characters
 		s = d.write2String(2);
 		bSearch = JDFParser.m_searchStream;
 	}

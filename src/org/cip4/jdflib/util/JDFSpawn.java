@@ -122,7 +122,7 @@ public class JDFSpawn
 	private final Map<JDFNode, HashSet<String>> mapAllRefs;
 	private final Map<JDFResource, VString> mapRefs;
 	private final Set<String> noIdentical;
-	private final Map<String, JDFResource> mapResources;
+	private final Map<String, KElement> mapResources;
 	/**
 	 * if true, reduce read only partitions, else retain entire resource
 	 */
@@ -195,7 +195,7 @@ public class JDFSpawn
 		informativeRoot = null;
 		mapRefs = new HashMap<JDFResource, VString>();
 		mapAllRefs = new HashMap<JDFNode, HashSet<String>>();
-		mapResources = new HashMap<String, JDFResource>();
+		mapResources = new HashMap<String, KElement>();
 		noIdentical = new HashSet<String>();
 	}
 
@@ -243,9 +243,12 @@ public class JDFSpawn
 		// prepare the nodeinfos in main prior to spawning
 		prepareNodeInfos();
 
+		docOut.setInitOnCreate(false);
 		// merge this node into it
 		rootOut.copyInto(node); // "copy" this node into the new created document
-		final String spawnID = "Sp" + JDFElement.uniqueID(-666); // create a spawn
+		docOut.setNSMap(node.getOwnerDocument_KElement());
+		docOut.setInitOnCreate(true);
+		final String spawnID = "Sp" + KElement.uniqueID(-666); // create a spawn
 		// id for this transaction
 		rootOut.setSpawnID(spawnID);
 		rootOut.setVersion(node.getVersion(true));
@@ -265,7 +268,12 @@ public class JDFSpawn
 		{
 			spawnParentNode = node;
 			// don't copy the whole history along
-			rootOut.getCreateAuditPool().flush();
+			JDFAuditPool ap = rootOut.getAuditPool();
+			if (ap != null)
+			{
+				rootOut.removeChild(ap);
+				ap = rootOut.appendAuditPool();
+			}
 
 			// The AncestorPool of the original JDF contains the appropriate Part elements
 			final JDFAncestorPool ancpool = docOut.getJDFRoot().getAncestorPool();
@@ -792,7 +800,9 @@ public class JDFSpawn
 			allIDsCopied = rootOut.fillHashSet("ID", null);
 			mapAllRefs.put(node, allIDsCopied);
 		}
-		return (HashSet<String>) allIDsCopied.clone();
+		HashSet<String> hs = new HashSet<String>();
+		hs.addAll(allIDsCopied);
+		return hs;
 	}
 
 	/**
@@ -802,17 +812,19 @@ public class JDFSpawn
 	 */
 	private JDFResource getNodeResource(final String refID)
 	{
-		JDFResource rRoot = mapResources.get(refID);
+		KElement rRoot = mapResources.get(refID);
 		if (rRoot == null)
 		{
-			rRoot = (JDFResource) node.getJDFRoot().getTarget(refID, AttributeName.ID);
+			rRoot = node.getJDFRoot().getTarget(refID, AttributeName.ID);
 			mapResources.put(refID, rRoot);
 		}
-		return rRoot;
+		if (!(rRoot instanceof JDFResource))
+			rRoot = null;
+		return (JDFResource) rRoot;
 	}
 
 	/**
-	 * @param res
+	 * @param vRes
 	 */
 	private void addIdentical(final VElement vRes)
 	{
@@ -1064,7 +1076,6 @@ public class JDFSpawn
 	}
 
 	/**
-	 * @param vLocalSpawnParts
 	 * @param spawnAudit
 	 */
 	private void finalizeStatusAndAudits(final JDFSpawned spawnAudit)
@@ -1125,8 +1136,8 @@ public class JDFSpawn
 	/**
 	 * calculate whether a link should be RW or RO
 	 * 
-	 * @param JDFResourceLink li the link to check
-	 * @param VString vRWResources the list of resource ids, process usages, usages, names. If any match, the referenced resource is considered rw
+	 * @param li the link to check
+	 * @param vRWResources the list of resource ids, process usages, usages, names. If any match, the referenced resource is considered rw
 	 * @return boolean true if rw
 	 */
 	private boolean linkFitsRWRes(final JDFResourceLink li, final VString vRWResources)
@@ -1188,13 +1199,7 @@ public class JDFSpawn
 							{
 								if (bSpawnIdentical)
 								{
-									final JDFResource resourceRoot = r.getResourceRoot();
-									JDFResource partition = resourceRoot.getPartition(testMap, null);
-									while (partition != resourceRoot)
-									{
-										identical.add(partition);
-										partition = (JDFResource) partition.getParentNode_KElement();
-									}
+									addIdentical(r, identical, testMap);
 								}
 								else
 								{
@@ -1205,16 +1210,68 @@ public class JDFSpawn
 							{
 								bad.appendUnique(reducePartitions(child, nodeName, nsURI, partIDKeys, partIDPos + 1, testMap, identical));
 							}
+							else
+							{
+								VElement v = child.getChildrenByTagName_KElement(ElementName.IDENTICAL, null, null, false, true, -1);
+								if (v != null)
+								{
+
+									VElement v2 = new VElement();
+									for (int iii = 0; iii < v.size(); iii++)
+									{
+										KElement parentNode_KElement = v.get(iii).getParentNode_KElement();
+										if (parentNode_KElement != child)
+											v2.add(parentNode_KElement);
+									}
+									v2.unify();
+									for (int iii = 0; iii < v2.size(); iii++)
+									{
+										JDFResource identParent = (JDFResource) v2.get(iii);
+										if (bSpawnIdentical)
+										{
+											addIdentical(identParent, identical, identParent.getIdenticalMap());
+										}
+										else
+										{
+											identParent.deleteNode();
+										}
+									}
+								}
+							}
 						}
 						else
 						{
-							bad.add(child);
+							if (bSpawnIdentical)
+							{
+								//only needed so that we can remove non-identical referenced leaves in case we keep the parent
+								bad.addAll(child.getLeaves(true));
+							}
+							else
+							{
+								bad.add(child);
+							}
 						}
 					}
 				}
 			}
 		}
 		return bad;
+	}
+
+	/**
+	 * @param r
+	 * @param identical
+	 * @param testMap
+	 */
+	private void addIdentical(final JDFResource r, final VElement identical, final JDFAttributeMap testMap)
+	{
+		final JDFResource resourceRoot = r.getResourceRoot();
+		JDFResource partition = resourceRoot.getPartition(testMap, null);
+		while (partition != resourceRoot)
+		{
+			identical.add(partition);
+			partition = (JDFResource) partition.getParentNode_KElement();
+		}
 	}
 
 	/**
@@ -1296,7 +1353,8 @@ public class JDFSpawn
 		final String nsURI = r.getNamespaceURI();
 		final VElement identical = new VElement();
 		final VElement vBad = reducePartitions(r, nodeName, nsURI, partIDKeys, 0, new JDFAttributeMap(), identical);
-		vBad.removeAll(identical);
+		if (identical.size() > 0)
+			vBad.removeAll(identical);
 		for (int i = 0; i < vBad.size(); i++)
 		{
 			vBad.get(i).deleteNode();
@@ -1307,8 +1365,8 @@ public class JDFSpawn
 	/**
 	 * calculate whether a link should be RW or RO
 	 * 
-	 * @param JDFResourceLink li the link to check
-	 * @param VString vRWResources the list of resource ids, process usages, usages, names. If any match, the referenced resource is considered rw
+	 * @param r the resource to check
+	 * @param vRWResources the list of resource ids, process usages, usages, names. If any match, the referenced resource is considered rw
 	 * @return boolean true if rw
 	 */
 	private boolean resFitsRWRes(final JDFResource r, final VString vRWResources)
@@ -1339,10 +1397,11 @@ public class JDFSpawn
 	 * @param p the pool to copy r into
 	 * @param r the resource to copy
 	 * @param copyStatus rw or ro
-	 * @param vParts part map vector of the partitions to copy
 	 * @param spawnID the spawnID of the spawning that initiated the copy
-	 * @param resInPool internal recursion checker
 	 * @param vRWResources write resources
+	 * @param vRWIDs 
+	 * @param vROIDs 
+	 * @param allIDsCopied 
 	 * 
 	 */
 	private void copySpawnedResource(final JDFResourcePool p, final JDFResource r, JDFResource.EnumSpawnStatus copyStatus, final String spawnID, final VString vRWResources, final HashSet<String> vRWIDs, final HashSet<String> vROIDs, final HashSet<String> allIDsCopied)
@@ -1428,7 +1487,7 @@ public class JDFSpawn
 	 * @param r
 	 * @param spawnID
 	 * @param copyStatus
-	 * @param vParts
+	 * @param bStayinMain
 	 */
 	private void spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
 	{
@@ -1558,9 +1617,9 @@ public class JDFSpawn
 			informativeRoot = (JDFNode) docNew.getRoot();
 			final JDFNode thisRoot = node.getJDFRoot();
 			// merge this node into it
+			docNew.setInitOnCreate(false);
 			informativeRoot.copyInto(thisRoot);
-			//		final JDFDoc docNew = node.getOwnerDocument_JDFElement().clone();
-			//		JDFNode rootOut = (JDFNode) docNew.getRoot();
+			docNew.setInitOnCreate(true);
 		}
 		final JDFNode copyOfThis = informativeRoot.getChildJDFNode(node.getID(), false);
 		final JDFNode tmp = node;
@@ -1678,8 +1737,9 @@ public class JDFSpawn
 	}
 
 	/**
-	 * @param spawnID
-	 * @param mapSpawn
+	 * @param myNode 
+	 * @param spawnID 
+	 * @return 
 	 */
 	private JDFNode findUnSpawnNode(final JDFNode myNode, final String spawnID)
 	{
@@ -1723,8 +1783,9 @@ public class JDFSpawn
 	/**
 	 * unSpawnNode - undo a spawn of a node hier muss noch nachportiert werden - es gibt jetzt in JDFRoot eine Methode gleichen Namens, bei der man komfortabler
 	 * das undo aufrufen kann. die Methode hier in JDFNode wird dann umbenannt (protected) und aus JDFRoot heraus aufgerufen.
+	 * @param parent 
+	 * @param strSpawnID 
 	 * 
-	 * @param String - strSpawnID id of the node, which was spawned before
 	 * 
 	 * @return the fixed unspawned node
 	 */

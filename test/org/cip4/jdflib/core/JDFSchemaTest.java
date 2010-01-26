@@ -145,7 +145,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		final File foo = new File(sm_dirTestSchema).getParentFile();
 		assertTrue("please mount the svn schema parallel to jdflibJ", foo.isDirectory());
 		p = new JDFParser();

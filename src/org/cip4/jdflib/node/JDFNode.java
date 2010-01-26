@@ -8078,26 +8078,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * set attribute ID
-	 * 
-	 * @param value the value to set the attribute to
-	 */
-	@Override
-	public void setID(final String value)
-	{
-		setAttribute(AttributeName.ID, value);
-	}
-
-	/**
-	 * @see org.cip4.jdflib.core.JDFElement#getID()
-	 */
-	@Override
-	public String getID()
-	{
-		return this.getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
-	}
-
-	/**
 	 * set MaxVersion to enumVer
 	 * 
 	 * @param enumVer the EnumVersion to set

@@ -799,7 +799,13 @@ public class JDFResource extends JDFElement
 		 */
 		public static EnumPartUsage getEnum(final String enumName)
 		{
-			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumName);
+			if ("Implicit".equals(enumName))
+				return EnumPartUsage.Implicit;
+			else if ("Explicit".equals(enumName))
+				return EnumPartUsage.Explicit;
+			else if ("Sparse".equals(enumName))
+				return EnumPartUsage.Sparse;
+			return null;
 		}
 
 		/**
@@ -2076,14 +2082,8 @@ public class JDFResource extends JDFElement
 			return getResourceRoot();
 		}
 
-		final JDFAttributeMap localPartMap = new JDFAttributeMap(partMap); // create
-		// a
-		// copy
-		// because
-		// it
-		// might
-		// get
-		// modified
+		final JDFAttributeMap localPartMap = new JDFAttributeMap(partMap);
+		// create a copy because it might get modified
 		final boolean appendEnd = true;
 		VString vPartIDKeys = reorderPartKeys(vPartKeys);
 
@@ -2164,7 +2164,7 @@ public class JDFResource extends JDFElement
 				}
 				else
 				{
-					throw new JDFException("GetCreatePartition: Resource ID=" + getID() + " attempting to fill non-matching partIDKeys");
+					throw new JDFException("GetCreatePartition: Resource ID=" + getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: " + localPartMap);
 				}
 			}
 			else
@@ -2183,7 +2183,7 @@ public class JDFResource extends JDFElement
 		}
 		else if (partSize > 0)// either non - continuous or more than one left
 		{
-			throw new JDFException("AddPartitionMap: incompatible partmap");
+			throw new JDFException("AddPartitionMap: incompatible partmap. Remaining map: " + localPartMap);
 		}
 		return leaf;
 	}
@@ -2217,7 +2217,7 @@ public class JDFResource extends JDFElement
 				if (!vPartIDKeys.contains(partKey)) // allow reordering of the
 				// existing partidkeys
 				{
-					throw new JDFException("getCreatePartiton: adding incompatible partitions");
+					throw new JDFException("reorderPartKeys: reordering incompatible partitions. Key: " + partKey + " " + vPartIDKeys);
 				}
 				vTmpPartIDKeys.add(partKey);
 				vPartIDKeys.remove(partKey);
@@ -7567,28 +7567,6 @@ public class JDFResource extends JDFElement
 		}
 
 		return v;
-	}
-
-	/**
-	 * Sets attribute ID
-	 * 
-	 * @param value value to set the attribute to
-	 */
-	@Override
-	public void setID(final String value)
-	{
-		setAttribute(AttributeName.ID, value, null);
-	}
-
-	/**
-	 * Gets string attribute ID
-	 * 
-	 * @return String - the attribute value
-	 */
-	@Override
-	public String getID()
-	{
-		return this.getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
 	}
 
 	/**

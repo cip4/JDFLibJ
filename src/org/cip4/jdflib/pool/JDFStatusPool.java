@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -233,10 +233,11 @@ public class JDFStatusPool extends JDFAutoStatusPool
 	/**
 	 * getPartStatusVector - get a vector of PartStatus that fits to the filter defined by mPart
 	 * 
-	 * @param mPart the filter vector for the part to set the status.If null, return all.
+	 * @param vmPart the filter vector for the part to set the status.If null, return all.
 	 * 
 	 * @return VElement - the vector of PartStatus that fit
 	 */
+	@SuppressWarnings("unchecked")
 	public VElement getPartStatusVector(Vector vmPart)
 	{
 		if (vmPart == null)
@@ -259,7 +260,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
 	/**
 	 * get matching part status vector
 	 * 
-	 * @param JDFAttributeMap mPart
+	 * @param  mPart
 	 * @return VElement - vector of JDFPartStatus
 	 */
 	public VElement getMatchingPartStatusVector(JDFAttributeMap mPart)
@@ -283,10 +284,11 @@ public class JDFStatusPool extends JDFAutoStatusPool
 	/**
 	 * getCreatePartStatusVector - get a vector of PartStatus that fits to the filter defined by mPart
 	 * 
-	 * @param mPart the filter vector for the part to set the status
+	 * @param vmPart the filter vector for the part to set the status
 	 * 
 	 * @return VElement - vector of JDFPartStatus
 	 */
+	@SuppressWarnings("unchecked")
 	public VElement getCreatePartStatusVector(Vector vmPart)
 	{
 		final VElement vPartStatus = new VElement();

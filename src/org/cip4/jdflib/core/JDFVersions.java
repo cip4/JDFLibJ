@@ -109,16 +109,16 @@ public class JDFVersions
 	 * @return String: JDF version string
 	 */
 	@Deprecated
-	public static int getDefaultVersion() 
+	public static int getDefaultVersion()
 	{
 		return JDFElement.getDefaultJDFVersion().getValue() - 1;
 	}
 
 	/**
 	 * Sets the default JDF version.
+	 * @param v 
 	 * 
 	 * @deprecated use JDFElement.setDefaultJDFVersion(v);
-	 * @return String: JDF version string
 	 */
 	@Deprecated
 	public static void setDefaultVersion(EnumVersion v)
@@ -140,7 +140,6 @@ public class JDFVersions
 	 * sets the JDF version that all checks are forced to.
 	 * 
 	 * @param b
-	 * @return String: JDF version string
 	 */
 	public static void setForceVersion(boolean b)
 	{

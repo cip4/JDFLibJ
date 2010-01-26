@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,20 +70,8 @@
 package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.auto.JDFAutoConventionalPrintingParams.EnumWorkStyle;
-import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.datatypes.JDFXYPair;
-import org.cip4.jdflib.goldenticket.MISCPGoldenTicket;
-import org.cip4.jdflib.node.JDFNode;
 
 /**
  * 
@@ -98,63 +86,6 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 	XJDFHelper theHelper = null;
 
 	/**
-	 * 
-	 * 
-	 */
-	public void testFromCPGoldenTicket()
-	{
-		MISCPGoldenTicket gt = new MISCPGoldenTicket(2, EnumVersion.Version_1_4, 2, 2, true, null);
-		gt.assign(null);
-		JDFNode n = gt.getNode();
-		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "cpGoldenTicket.jdf", 2, false);
-		XJDF20 jdfToXJD = new XJDF20();
-		jdfToXJD.bMergeLayout = true;
-		KElement xjdf = jdfToXJD.makeNewJDF(n, null);
-		XMLDoc d = xjdf.getOwnerDocument_KElement();
-		d.write2File(sm_dirTestDataTemp + "cpGoldenTicket.xjdf", 2, false);
-	}
-
-	/**
-	 * 
-	 * 
-	 */
-	public void testFromCPFromScratch()
-	{
-		theHelper = new XJDFHelper(null);
-		theXJDF = theHelper.getRoot();
-		theXJDF.setAttribute("Types", "InkZoneCalculation ConventionalPrinting");
-		SetHelper nih = theHelper.appendParameter("NodeInfo");
-		nih.setUsage(EnumUsage.Input);
-		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
-		PartitionHelper niS1 = nih.getCreatePartition(sheetMap, true);
-		KElement ni = niS1.getResource();
-		ni.setAttribute("Amount", "5000");
-
-		SetHelper cpSetHelper = theHelper.appendResource(ElementName.CONVENTIONALPRINTINGPARAMS);
-		cpSetHelper.setUsage(EnumUsage.Input);
-		cpSetHelper.getCreatePartition(sheetMap, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
-
-		SetHelper mediaSetHelper = theHelper.appendResource(ElementName.MEDIA);
-		mediaSetHelper.setUsage(EnumUsage.Input);
-		PartitionHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap, true);
-		KElement mediaPart = mediaHelper.getPartition();
-		mediaPart.setAttribute("Brand", "TestBrand");
-		mediaPart.setAttribute("ProductID", "ID");
-		KElement media = mediaHelper.getResource();
-		media.setAttribute("Dimension", new JDFXYPair(72, 49).scaleFromCM().toString(), null);
-		media.setAttribute(AttributeName.MEDIATYPE, EnumMediaType.Paper.getName());
-
-		SetHelper compSetHelper = theHelper.appendResource(ElementName.COMPONENT);
-		compSetHelper.setUsage(EnumUsage.Output);
-		PartitionHelper compHelper = compSetHelper.getCreatePartition(sheetMap, true);
-		KElement compPart = compHelper.getPartition();
-		compPart.setAttribute("ProductID", "ComponentID");
-		compHelper.getResource().setAttribute("MediaRef", mediaPart.getAttribute("ID"));
-
-		theXJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "cpFromScratch.jdf", 2, false);
-	}
-
-	/**
 	 * @see junit.framework.TestCase#setUp()
 	 * @throws Exception
 	*/
@@ -164,7 +95,7 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 		super.setUp();
 		theXJDF = new JDFDoc("XJDF").getRoot();
 		theHelper = new XJDFHelper(theXJDF);
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 	}
 
 	/**

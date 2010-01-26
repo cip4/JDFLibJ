@@ -114,6 +114,12 @@ public class ProductGoldenTicket extends MISGoldenTicket
 {
 	// private JDFMediaIntent mediaIntent;
 
+	/**
+	 * @param _icsLevel
+	 * @param jdfVersion
+	 * @param _jmfLevel
+	 * @param _misLevel
+	 */
 	public ProductGoldenTicket(final int _icsLevel, final EnumVersion jdfVersion, final int _jmfLevel, final int _misLevel)
 	{
 		super(_misLevel, jdfVersion, _jmfLevel);
@@ -125,7 +131,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	/**
 	 * initializes this node to a given ICS version
 	 * 
-	 * @param icsLevel the level to init to (1,2 or 3)
+	 *  
 	 */
 	@Override
 	public void init()
@@ -148,7 +154,11 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
-	 * @param icsLevel
+	 * @param node 
+	 * @param li 
+	 * @param productType 
+	 * @return 
+	 *  
 	 */
 	protected JDFComponent initOutputComponent(final JDFNode node, final JDFLayoutIntent li, final String productType)
 	{
@@ -180,6 +190,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	 * initialize deliveryintent and also output component
 	 * 
 	 * @param amount
+	 * @return 
 	 */
 	protected JDFDeliveryIntent initDeliveryIntent(final int amount)
 	{
@@ -214,6 +225,11 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @param firstame 
+	 * @param lastame 
+	 * @param companyName 
+	 * @param jobName 
+	 * @return 
 	 */
 	protected JDFCustomerInfo initCustomerInfo(final String firstame, final String lastame, final String companyName, final String jobName)
 	{
@@ -233,7 +249,11 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @param node 
+	 * @param gsm 
+	 * @param coating 
 	 * @param brand TODO
+	 * @return 
 	 * 
 	 */
 	protected JDFMediaIntent initMediaIntent(final JDFNode node, final double gsm, final EnumSpanCoatings coating, final String brand)
@@ -248,9 +268,14 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @param node 
+	 * @param front 
+	 * @param back 
+	 * @param coatings 
+	 * @return 
 	 * 
 	 */
-	protected JDFColorIntent initColorIntent(final JDFNode node, final int front, final int back, @SuppressWarnings("unused") final String coatings)
+	protected JDFColorIntent initColorIntent(final JDFNode node, final int front, final int back, final String coatings)
 	{
 		final JDFColorIntent ci = (JDFColorIntent) node.addResource(ElementName.COLORINTENT, EnumUsage.Input);
 		final VElement vci = new VElement();
@@ -283,6 +308,12 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @param node 
+	 * @param xCM 
+	 * @param yCM 
+	 * @param pages 
+	 * @param sides 
+	 * @return 
 	 * 
 	 */
 	protected JDFLayoutIntent initLayoutIntent(final JDFNode node, final double xCM, final double yCM, final int pages, final int sides)
@@ -297,6 +328,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	}
 
 	/**
+	 * @param node 
+	 * @param foldCatalog 
+	 * @return 
 	 * 
 	 */
 	protected JDFFoldingIntent initFoldingIntent(final JDFNode node, final String foldCatalog)
@@ -308,6 +342,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		return fi;
 	}
 
+	/**
+	 * 
+	 */
 	public void createPostCards()
 	{
 		initCustomerInfo(null, null, "Volkswagen AG", "Freeway postcards");
@@ -319,6 +356,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		initDeliveryIntent(5000);
 	}
 
+	/**
+	 * 
+	 */
 	public void createMultiLabels()
 	{
 		theNode.setDescriptiveName("Multi Label Product");
@@ -356,6 +396,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		gtLabel2.getNode().removeResource("DeliveryIntent", 0);
 	}
 
+	/**
+	 * 
+	 */
 	public void createHarley()
 	{
 		initCustomerInfo(null, null, "ABC Promotions Company", "Speed-Point Harley Poster");
@@ -370,6 +413,7 @@ public class ProductGoldenTicket extends MISGoldenTicket
 	/**
 	 * @param cover
 	 * @param body
+	 * @param numStitches 
 	 * @return
 	 */
 	protected JDFBindingIntent initBindingIntent(final JDFComponent cover, final JDFComponent body, final int numStitches)
@@ -388,6 +432,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 
 	}
 
+	/**
+	 * 
+	 */
 	public void createAddressBook()
 	{
 		initCustomerInfo(null, null, "Art Point", "Address Pocketbook");
@@ -415,6 +462,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		initDeliveryIntent(5000);
 	}
 
+	/**
+	 * 
+	 */
 	public void createHDCity()
 	{
 		initCustomerInfo(null, null, "Heidelberger Druckmaschinen AG", "Heidelberg A4 brochure");
@@ -442,6 +492,9 @@ public class ProductGoldenTicket extends MISGoldenTicket
 		initDeliveryIntent(5000);
 	}
 
+	/**
+	 * 
+	 */
 	public void createWatches()
 	{
 		initCustomerInfo(null, null, "ABC Promotions Company", "Sinn watches double flap");

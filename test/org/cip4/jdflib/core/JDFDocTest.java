@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -94,6 +94,17 @@ import org.w3c.dom.NodeList;
  */
 public class JDFDocTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
+	public void testCreateElementNoNS()
+	{
+		final XMLDoc d = new JDFDoc("FOO:TEST");
+		KElement root = d.getRoot();
+		root.setAttribute("xmlns:FOO", "www.foo.com");
+		final KElement e = (KElement) d.createElement("FOO:bar");
+		assertNull(e.getNamespaceURI());
+	}
 
 	/**
 	 * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
@@ -255,6 +266,25 @@ public class JDFDocTest extends JDFTestCaseBase
 		s2 = doc2.write2String(2);
 		assertTrue(s2.indexOf(JDFConstants.JDFNAMESPACE) > 0);
 
+	}
+
+	/**
+	 * tests the correct handling of the namespaceuri when a namespace attribute is set
+	 */
+	public void testCreateElementNS()
+	{
+		JDFDoc doc = new JDFDoc("foo:bar");
+		String s = doc.write2String(2);
+		assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
+		KElement root = doc.getRoot();
+		root.setAttribute("xmlns:foo", "www.foo.com");
+		assertEquals(root.getNamespaceURI(), "www.foo.com");
+		doc = new JDFDoc("bar");
+		s = doc.write2String(2);
+		assertTrue(s.indexOf(JDFConstants.JDFNAMESPACE) > 0);
+		root = doc.getRoot();
+		root.setAttribute("xmlns", "www.foo.com");
+		assertEquals(root.getNamespaceURI(), "www.foo.com");
 	}
 
 	/**

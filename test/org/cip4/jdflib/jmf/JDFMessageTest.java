@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -127,6 +127,58 @@ public class JDFMessageTest extends TestCase
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
 		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
+	}
+
+	/**
+	 * 
+	 */
+	public void testAppendValidElementStrictLax()
+	{
+		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
+		assertNotNull(sig.appendValidElement(ElementName.UPDATEJDFCMDPARAMS, null));
+
+		try
+		{
+			sig.appendStatusQuParams();
+			fail("strict checking must fail");
+		}
+		catch (Exception x)
+		{
+			// nop
+		}
+		try
+		{
+			sig.appendUpdateJDFCmdParams();
+			fail("strict checking must fail on 2nd element");
+		}
+		catch (Exception x)
+		{
+			// nop
+		}
+		// set to lax
+		JDFMessage.setStrictValidation(false);
+		assertNotNull("appending anything goes", sig.appendStatusQuParams());
+		assertNotNull("appending anything goes", sig.appendUpdateJDFCmdParams());
+		// now set back to strict
+		JDFMessage.setStrictValidation(true);
+		try
+		{
+			sig.appendStatusQuParams();
+			fail("strict checking must fail");
+		}
+		catch (Exception x)
+		{
+			// nop
+		}
+		try
+		{
+			sig.appendUpdateJDFCmdParams();
+			fail("strict checking must fail on 2nd element");
+		}
+		catch (Exception x)
+		{
+			// nop
+		}
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
@@ -285,6 +337,35 @@ public class JDFMessageTest extends TestCase
 		final JDFDate newDate = new JDFDate(10000000);
 		command.setTime(newDate);
 		assertEquals(command.getTime(), newDate);
+	}
+
+	/**
+	 * validation slows down append and get by ~ a factor of 2
+	 */
+	public void testValidatePerformance()
+	{
+		long t0 = System.currentTimeMillis();
+		for (int l = 0; l < 2; l++)
+		{
+			boolean strict = l == 0;
+			JDFMessage.setStrictValidation(strict);
+			for (int i = 0; i < 10000; i++)
+			{
+				jmf = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Status);
+				JDFSignal s = jmf.getSignal(0);
+				for (int ii = 0; ii < 10; ii++)
+				{
+					s.appendDeviceInfo();
+					assertNotNull(s.getDeviceInfo(ii));
+				}
+				s.appendStatusQuParams();
+			}
+			long t1 = System.currentTimeMillis();
+			System.out.println((strict ? "strict t val: " : "loose t val: ") + ((t1 - t0) * 0.001));
+			t0 = t1;
+		}
+		JDFMessage.setStrictValidation(true);
+
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

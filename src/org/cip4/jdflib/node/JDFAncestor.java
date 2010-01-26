@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -148,9 +148,9 @@ public class JDFAncestor extends JDFAutoAncestor
 	/**
 	 * overrides the deprecated method JDFElement.getVersion()
 	 * 
-	 * @see org.cip4.jdflib.core.JDFElement#getVersion()
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public EnumVersion getVersion()
 	{

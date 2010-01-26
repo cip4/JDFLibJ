@@ -1,16 +1,8 @@
-package org.cip4.jdflib.pool;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.resource.process.prepress.JDFPreflightDetail;
-import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstance;
-
 /*
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2002 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -93,7 +85,17 @@ import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstance;
  * based on JDF Schema version JDFCore_1_0_0.xsd
  *
  */
+package org.cip4.jdflib.pool;
 
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.resource.process.prepress.JDFPreflightDetail;
+import org.cip4.jdflib.resource.process.prepress.JDFPreflightInstance;
+
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFPreflightResultsPool extends JDFPool
 {
 	private static final long serialVersionUID = 1L;
@@ -217,6 +219,7 @@ public class JDFPreflightResultsPool extends JDFPool
 	 * get first element PreflightDetail
 	 * <p>
 	 * default: GetPreflightDetail(0)
+	 * @param iSkip 
 	 * 
 	 * @return JDFPreflightInstance: the element
 	 */

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -627,6 +627,7 @@ public class XJDF20 extends BaseElementWalker
 			newResLeaf.removeAttribute(AttributeName.LOCKED);
 			newResLeaf.removeAttribute(AttributeName.NOOP);
 			newResLeaf.removeAttribute(AttributeName.SPAWNSTATUS);
+			newResLeaf.removeAttribute(AttributeName.SPAWNIDS);
 		}
 
 		/**
@@ -1071,7 +1072,16 @@ public class XJDF20 extends BaseElementWalker
 			}
 
 			updateTypes(newRootP);
+			namedFeaturesToGeneralID(node, newRootP);
+			updateSpawnInfo(node, newRootP);
+		}
 
+		/**
+		 * @param node
+		 * @param newRootP
+		 */
+		private void namedFeaturesToGeneralID(final JDFNode node, final KElement newRootP)
+		{
 			if (node.hasAttribute(AttributeName.NAMEDFEATURES))
 			{
 				final VString vnf = node.getNamedFeatures();
@@ -1085,8 +1095,6 @@ public class XJDF20 extends BaseElementWalker
 				}
 				newRootP.removeAttribute(AttributeName.NAMEDFEATURES);
 			}
-
-			updateSpawnInfo(node, newRootP);
 		}
 
 		/**
@@ -1098,6 +1106,7 @@ public class XJDF20 extends BaseElementWalker
 			newRootP.removeAttribute(AttributeName.STATUS);
 			newRootP.removeAttribute(AttributeName.STATUSDETAILS);
 			newRootP.removeAttribute(AttributeName.ACTIVATION);
+			newRootP.removeAttribute(AttributeName.TEMPLATE);
 			super.removeUnused(newRootP);
 		}
 

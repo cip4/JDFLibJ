@@ -71,7 +71,7 @@
 package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
@@ -214,7 +214,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	protected void setUp() throws Exception
 	{
 		agentName = JDFAudit.getStaticAgentName();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		JDFAudit.setStaticAgentName("JDF golden ticket generator");
 		super.setUp();
 	}
@@ -230,7 +230,7 @@ public class GoldenTicketTest extends BaseGoldenTicketTest
 	protected void tearDown() throws Exception
 	{
 		JDFAudit.setStaticAgentName(agentName);
-		JDFElement.setLongID(true);
+		KElement.setLongID(true);
 		super.tearDown();
 	}
 

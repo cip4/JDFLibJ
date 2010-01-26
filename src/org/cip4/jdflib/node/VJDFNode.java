@@ -22,6 +22,7 @@ import java.util.Vector;
  * 
  */
 @Deprecated
+@SuppressWarnings("unchecked")
 public class VJDFNode
 {
 	// **************************************** Attributes

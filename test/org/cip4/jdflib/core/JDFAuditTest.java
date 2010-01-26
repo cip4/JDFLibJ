@@ -334,7 +334,7 @@ public class JDFAuditTest extends JDFTestCaseBase
 		// TODO Auto-generated method stub
 		super.setUp();
 		bAutoAgent = JDFResource.getAutoAgent();
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 
 	}
 

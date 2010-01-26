@@ -1,14 +1,8 @@
-package org.cip4.jdflib.pool;
-
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.resource.process.prepress.JDFPreflightConstraint;
-
 /*
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2002 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -91,7 +85,15 @@ import org.cip4.jdflib.resource.process.prepress.JDFPreflightConstraint;
  * based on JDF Schema version JDFCore_1_0_0.xsd
  *
  */
+package org.cip4.jdflib.pool;
 
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.resource.process.prepress.JDFPreflightConstraint;
+
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFPreflightConstraintsPool extends JDFPool
 {
 	private static final long serialVersionUID = 1L;
@@ -166,7 +168,7 @@ public class JDFPreflightConstraintsPool extends JDFPool
 	/**
 	 * const get element PreflightConstraint
 	 * 
-	 * @param int iSkip number of elements to skip
+	 * @param iSkip number of elements to skip
 	 * @return JDFPreflightConstraint: the element
 	 */
 	public JDFPreflightConstraint getPreflightConstraint(int iSkip)

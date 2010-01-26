@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -309,13 +309,13 @@ public class JDFMerge
 	/**
 	 * merge the audit pools
 	 * 
-	 * @param overWriteNode
-	 * @param subJDFNode the source node of the audit pool to merge into this
+	 * @param _overWriteNode
+	 * @param toMerge the source node of the audit pool to merge into this
 	 */
-	private void mergeAuditPool(final JDFNode poverWriteNode, final JDFNode toMerge)
+	private void mergeAuditPool(final JDFNode _overWriteNode, final JDFNode toMerge)
 	{
 		// merge audit pool
-		final JDFAuditPool overWriteAuditPool = poverWriteNode.getAuditPool();
+		final JDFAuditPool overWriteAuditPool = _overWriteNode.getAuditPool();
 		final JDFAuditPool toMergeAuditPool = toMerge.getAuditPool();
 
 		// the node that is overwritten has an audit pool that must be merged
@@ -722,7 +722,7 @@ public class JDFMerge
 					{
 						leafRes.removeFromAttribute(AttributeName.SPAWNIDS, resSpawnID, null, null, -1);
 						final String spawnIDsNew = leafRes.getAttribute_KElement(AttributeName.SPAWNIDS, null, null);
-						if (spawnIDsNew == null || "".equals(spawnIDsNew))
+						if (StringUtil.getNonEmpty(spawnIDsNew) == null)
 						{
 							removeSpawnAttributes(leafRes);
 							return;
@@ -900,8 +900,8 @@ public class JDFMerge
 
 	/**
 	 * merge the resource link pools
-	 * 
-	 * @param oMerge the source node of the status pool to merge into this
+	 * @param mainNode 
+	 * @param toMerge the source node of the status pool to merge into this
 	 * @param parts the partitions to merge
 	 */
 	private void mergeResourceLinkPool(final JDFNode mainNode, final JDFNode toMerge, final VJDFAttributeMap parts)
@@ -947,10 +947,15 @@ public class JDFMerge
 						}
 						else
 						{
-							// blast the spawned link into the overWritePool
-							// completely
+							// blast the spawned link into the overWritePool completely
 							overWriteLink.replaceElement(toMergeLink);
 						}
+					}
+					else
+					// 100119 RP the link was created within the spawned process - must copy it
+					{
+						toMergeLink.setPartMapVector(null);
+						overWriteRLP.copyElement(toMergeLink, null);
 					}
 				}
 			}
@@ -959,8 +964,7 @@ public class JDFMerge
 			toMerge.copyElement(overWriteRLP, null);
 		}
 		else
-		// copy the rlp from sub to main so that amount recalc in mergerw finds
-		// all required links in main
+		// copy the rlp from sub to main so that amount recalc in mergerw finds all required links in main
 		{
 			overWriteRLP.deleteNode();
 			mainNode.copyElement(toMergeRLP, null);
@@ -968,10 +972,8 @@ public class JDFMerge
 	}
 
 	/**
-	 * @param parts
 	 * @param mainLink
 	 * @param subLink
-	 * @param jdfAmountPool
 	 */
 	private void fixPartAmountAttributes(final JDFResourceLink mainLink, final JDFResourceLink subLink)
 	{
@@ -1081,7 +1083,7 @@ public class JDFMerge
 	 * also updates SpawnStatus, if necessary <br>
 	 * this routine is needed to correctly handle nested spawning and merging
 	 * 
-	 * @param mainres the resource in the main jdf to merge to
+	 * @param mainRes the resource in the main jdf to merge to
 	 * @param resToMerge the resource with potentially new spawnIDs
 	 * @param bReadOnly if true, don't add anything since it was RO
 	 * 
@@ -1153,11 +1155,6 @@ public class JDFMerge
 	/**
 	 * merge the RW resources of the main JDF
 	 * 
-	 * @param subJDFNode the source node of the status pool to merge into this
-	 * @param subJDFNode the source node of the status pool to merge into this
-	 * @param previousMergeIDs SpawnIDs of previously merged
-	 * @param vsRW Resource IDs of non-local spawned resources
-	 * @param spawnID the original spawnID
 	 * @param amountPolicy policy how to clean up the Resource amounts after merging
 	 */
 	private void mergeRWResources(final JDFResource.EnumAmountMerge amountPolicy)
@@ -1219,7 +1216,8 @@ public class JDFMerge
 	/**
 	 * merge the status pools
 	 * 
-	 * @param subJDFNode the source node of the status pool to merge into this
+	 * @param poverWriteNode the source node of the status pool to merge into this
+	 * @param toMerge 
 	 * @param parts the partitions to merge
 	 */
 	private void mergeStatusPool(final JDFNode poverWriteNode, final JDFNode toMerge, final VJDFAttributeMap parts)
@@ -1296,10 +1294,6 @@ public class JDFMerge
 	/**
 	 * merge the RO resources of the main JDF
 	 * 
-	 * @param subJDFNode the source node of the status pool to merge into this
-	 * @param previousMergeIDs SpawnIDs of previously merged
-	 * @param vsRO Resource IDs of non-local spawned resources
-	 * @param spawnID the original spawnID
 	 */
 	private void cleanROResources()
 	{
@@ -1362,9 +1356,9 @@ public class JDFMerge
 	 * clean up the spawn and merge audits in this Node
 	 * <p>
 	 * default: CleanUpMerge(EnumCleanUpMerge cleanPolicy, JDFConstants.EMPTYSTRING, false)
+	 * @param overWriteTmpNode 
 	 * 
 	 * @param cleanPolicy policy how to clean up the spawn and merge audits after merging
-	 * @param spawnID the SpawnID of the spawn and MergeID of the merge to clean up.<br>
 	 * If not specified all spawns will be cleaned up.
 	 * @param bRecurse if true also recurse into all child JDF nodes; default=false
 	 */
@@ -1418,8 +1412,8 @@ public class JDFMerge
 	}
 
 	/**
+	 * @param pool 
 	 * @param cleanPolicy
-	 * @param spawnID
 	 */
 	private void cleanUpMergeAudits(final JDFAuditPool pool, final JDFNode.EnumCleanUpMerge cleanPolicy)
 	{

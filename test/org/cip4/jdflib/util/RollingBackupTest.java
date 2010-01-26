@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -120,6 +120,24 @@ public class RollingBackupTest extends JDFTestCaseBase
 			assertTrue(rbf2.createNewFile());
 			assertEquals(dir.listFiles().length, Math.min(5 + i + 1, 5 + 5));
 		}
+	}
+
+	/**
+	 * @throws Exception x
+	 */
+	public void testClearAll() throws Exception
+	{
+		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
+		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
+
+		for (int i = 0; i < 10; i++)
+		{
+			rbf.getNewFile();
+			assertTrue(rbf.createNewFile());
+			assertEquals("File " + i, dir.listFiles().length, Math.min(i + 1, 5));
+		}
+		rbf.clearAll();
+		assertEquals(dir.listFiles().length, 0);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

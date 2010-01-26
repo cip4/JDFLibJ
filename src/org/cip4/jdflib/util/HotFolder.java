@@ -80,9 +80,10 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 
 /**
@@ -107,6 +108,7 @@ public class HotFolder implements Runnable
 	private static int nThread = 0;
 
 	private final File dir;
+	private String allExtensions;
 
 	/**
 	 * @return the hot folder directory
@@ -116,8 +118,15 @@ public class HotFolder implements Runnable
 		return dir;
 	}
 
+	/**
+	 * cache the extension list
+	 * @return
+	 */
 	private String getAllExtensions()
 	{
+		if (allExtensions != null)
+			return allExtensions;
+
 		if (hfl == null)
 		{
 			return null;
@@ -125,15 +134,15 @@ public class HotFolder implements Runnable
 		final VString allextensions = new VString();
 		for (int i = 0; i < hfl.size(); i++)
 		{
-			final String ext = hfl.get(i).extension;
+			final Set<String> ext = hfl.get(i).extension;
 			if (ext != null)
 			{
-				allextensions.add(ext);
+				allextensions.addAll(ext);
 			}
-
 		}
 		allextensions.unify();
-		return allextensions.size() == 0 ? null : StringUtil.setvString(allextensions, ",", null, null);
+		allExtensions = allextensions.size() == 0 ? null : StringUtil.setvString(allextensions, ",", null, null);
+		return allExtensions;
 	}
 
 	private long lastModified = -1;
@@ -145,15 +154,12 @@ public class HotFolder implements Runnable
 	 * constructor for a simple hotfolder watcher that is automagically started in its own thread
 	 * 
 	 * @param _dir the Directory to watch
+	 * @deprecated - use the 3 parameter version
 	 */
+	@Deprecated
 	public HotFolder(final File _dir)
 	{
-		dir = _dir;
-		dir.mkdirs();
-		lastFileTime = new Vector<FileTime>();
-		hfl = new Vector<ExtensionListener>();
-		runThread = null;
-		restart();
+		this(_dir, null, null);
 	}
 
 	/**
@@ -166,6 +172,7 @@ public class HotFolder implements Runnable
 		{
 			hfl.add(new ExtensionListener(_hfl, ext));
 		}
+		allExtensions = null;
 		lastModified = 0;
 	}
 
@@ -182,8 +189,10 @@ public class HotFolder implements Runnable
 		dir.mkdirs();
 		lastFileTime = new Vector<FileTime>();
 		hfl = new Vector<ExtensionListener>();
-		addListener(_hfl, ext);
 		runThread = null;
+		allExtensions = null;
+		if (_hfl != null)
+			addListener(_hfl, ext);
 		restart();
 	}
 
@@ -340,8 +349,8 @@ public class HotFolder implements Runnable
 	 */
 	protected class ExtensionListener
 	{
-		protected HotFolderListener fl;
-		protected String extension;
+		final protected HotFolderListener fl;
+		final protected Set<String> extension;
 
 		protected ExtensionListener(final HotFolderListener _hfl, String ext)
 		{
@@ -349,13 +358,22 @@ public class HotFolder implements Runnable
 			ext = StringUtil.getNonEmpty(ext);
 			if (ext != null)
 			{
-				if (ext.startsWith("."))
+				extension = new HashSet<String>();
+				VString vs = StringUtil.tokenize(ext, ",", false);
+				for (String s : vs)
 				{
-					ext = ext.substring(1);
+					if (s.startsWith("."))
+					{
+						s = s.substring(1);
+					}
+					s = s.toLowerCase();
+					extension.add(s);
 				}
-				ext = ext.toLowerCase();
 			}
-			extension = ext;
+			else
+			{
+				extension = null;
+			}
 		}
 
 		/**
@@ -367,18 +385,21 @@ public class HotFolder implements Runnable
 			{
 				return;
 			}
-			if (!KElement.isWildCard(extension))
+			if (extension != null)
 			{
-				final String fileExt = FileUtil.getExtension(file);
-				if (!extension.equalsIgnoreCase(fileExt))
+				String fileExt = FileUtil.getExtension(file);
+				if (fileExt != null)
 				{
-					return;
+					fileExt = fileExt.toLowerCase();
+					if (!extension.contains(fileExt))
+					{
+						// wrong extension
+						return;
+					}
 				}
 			}
 			fl.hotFile(file);
-
 		}
-
 	}
 
 	/**
@@ -388,6 +409,38 @@ public class HotFolder implements Runnable
 	public String toString()
 	{
 		return "HotFolder: " + dir + " " + lastModified;
+	}
+
+	/**
+	 * @return the defaultStabilizeTime
+	 */
+	public static int getDefaultStabilizeTime()
+	{
+		return defaultStabilizeTime;
+	}
+
+	/**
+	 * @param defaultStabilizeTime the defaultStabilizeTime to set
+	 */
+	public static void setDefaultStabilizeTime(int defaultStabilizeTime)
+	{
+		HotFolder.defaultStabilizeTime = defaultStabilizeTime;
+	}
+
+	/**
+	 * @return the stabilizeTime
+	 */
+	public int getStabilizeTime()
+	{
+		return stabilizeTime;
+	}
+
+	/**
+	 * @param stabilizeTime the stabilizeTime to set
+	 */
+	public void setStabilizeTime(int stabilizeTime)
+	{
+		this.stabilizeTime = stabilizeTime;
 	}
 
 }

@@ -11,7 +11,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -45,7 +44,7 @@ public class WebTest extends JDFTestCaseBase
 	public void testWebGrowthCompensation()
 	{
 
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
 		final JDFResourcePool rp = n.getCreateResourcePool();
@@ -98,7 +97,7 @@ public class WebTest extends JDFTestCaseBase
 	public void testDirectImage()
 	{
 
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		doc = new JDFDoc("JDF");
 		node = doc.getJDFRoot();
 		node.setType(EnumType.Combined);

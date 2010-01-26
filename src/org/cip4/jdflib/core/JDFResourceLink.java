@@ -349,6 +349,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	/**
 	 * Enumeration for Orientation
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumOrientation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -360,53 +361,98 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumOrientation getEnum(final String enumName)
 		{
 			return (EnumOrientation) getEnum(EnumOrientation.class, enumName);
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumOrientation getEnum(final int enumValue)
 		{
 			return (EnumOrientation) getEnum(EnumOrientation.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumOrientation.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumOrientation.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumOrientation.class);
 		}
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Flip0 = new EnumOrientation("Flip0");
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Flip90 = new EnumOrientation("Flip90");
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Flip180 = new EnumOrientation("Flip180");
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Flip270 = new EnumOrientation("Flip270");
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Rotate0 = new EnumOrientation("Rotate0");
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Rotate90 = new EnumOrientation("Rotate90");
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Rotate180 = new EnumOrientation("Rotate180");
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Rotate270 = new EnumOrientation("Rotate270");
 
+		/**
+		 * 
+		 */
 		public static final EnumOrientation Matrix = new EnumOrientation("Matrix");
 	}
 
 	/**
 	 * Enumeration for attribute Usage
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumUsage extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -418,6 +464,10 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumUsage getEnum(final String enumName)
 		{
 			if ("Input".equals(enumName))
@@ -431,21 +481,34 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			return null;
 		}
 
+		/**
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumUsage getEnum(final int enumValue)
 		{
 			return (EnumUsage) getEnum(EnumUsage.class, enumValue);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumUsage.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumUsage.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumUsage.class);
@@ -922,7 +985,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		// get the value of PartUsage
 		final JDFResource.EnumPartUsage partUsage = resRoot.getPartUsage();
 
-		if (partUsage.equals(JDFResource.EnumPartUsage.Implicit))
+		if (JDFResource.EnumPartUsage.Implicit.equals(partUsage))
 		{
 			vmParts.reduceMap(resRoot.getPartIDKeys().getSet());
 		}
@@ -1425,17 +1488,26 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 
 	/**
 	 * append element Part
+	 * @return 
 	 */
 	public JDFPart appendPart()
 	{
 		return (JDFPart) appendElement(ElementName.PART, null);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getAmountPool()
+	 * @return
+	*/
 	public JDFAmountPool getAmountPool()
 	{
 		return (JDFAmountPool) getElement(ElementName.AMOUNTPOOL, null, 0);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.ifaces.IAmountPoolContainer#getCreateAmountPool()
+	 * @return
+	*/
 	public JDFAmountPool getCreateAmountPool()
 	{
 		if (this instanceof JDFPartAmount)
@@ -1445,6 +1517,9 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		return (JDFAmountPool) getCreateElement_KElement(ElementName.AMOUNTPOOL, null, 0);
 	}
 
+	/**
+	 * @return
+	 */
 	public JDFAmountPool appendAmountPool()
 	{
 		// ideally the method would be hidden in PartAmount
@@ -1619,6 +1694,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @param attrib the attribute name
 	 * @param nameSpaceURI the XML-namespace
 	 * @param mPart defines which part of this ResourceLink the Amount belongs to. If empty get the ResourceLink root attribute.
+	 * @param iSkip 
 	 * @return value of attribute found, null if not available
 	 * @since 071103
 	 */
@@ -1783,6 +1859,10 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		setAmountPoolAttribute("ActualAmount", StringUtil.formatDouble(value), null, mPart);
 	}
 
+	/**
+	 * @param mPart
+	 * @return
+	 */
 	public double getActualAmount(final JDFAttributeMap mPart)
 	{
 		final double amountPoolDouble = getAmountPoolDouble(AttributeName.ACTUALAMOUNT, mPart);
@@ -1923,6 +2003,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @param keys vector of values to set
 	 * @deprecated use setPipePartIDKeys(Vector enum)
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public void setPipePartIDKeys(final VString keys)
 	{
@@ -1939,7 +2020,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @param keys vector of values to set
 	 */
-	public void setPipePartIDKeys(final Vector keys)
+	public void setPipePartIDKeys(final Vector<? extends ValuedEnum> keys)
 	{
 		setEnumerationsAttribute(AttributeName.PIPEPARTIDKEYS, keys, null);
 
@@ -1951,6 +2032,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * @return VString - list of all PipePartIDKeys
 	 * @deprecated
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public VString getPipePartIDKeys()
 	{
@@ -1969,6 +2051,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 * 
 	 * @return Vector of EnumPartIDKey - list of all PipePartIDKeys
 	 */
+	@SuppressWarnings("unchecked")
 	public Vector<EnumPartIDKey> getPipePartIDKeysEnum()
 	{
 		Vector<EnumPartIDKey> v = null;

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,11 @@ import java.util.Iterator;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.VString;
 
-public class MyArgs {
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
+public class MyArgs
+{
 
 	// //////////////////////////////////////////////////////////////////////////
 	// ////
@@ -93,8 +97,8 @@ public class MyArgs {
 	private String m_switchParameterString;
 	private String m_argumentParameterString;
 	private String m_requiredParameterString;
-	private final HashSet m_flags = new HashSet();
-	private final HashMap m_Parameters = new HashMap();
+	private final HashSet<String> m_flags = new HashSet<String>();
+	private final HashMap<String, String> m_Parameters = new HashMap<String, String>();
 	private VString m_argV;
 
 	// cmd-line has or has not args and not only options( starting with "-" )
@@ -106,21 +110,34 @@ public class MyArgs {
 	// ////
 
 	/**
+	 * @param argv 
+	 * @param switchParameterString 
+	 * @param argumentParameterString 
 	 * @deprecated
 	 */
 	@Deprecated
-	public MyArgs(final String argv[], final String switchParameterString, final String argumentParameterString) {
+	public MyArgs(final String argv[], final String switchParameterString, final String argumentParameterString)
+	{
 		initMyArgs(argv, switchParameterString, argumentParameterString, null);
 	}
 
-	public MyArgs(final String argv[], final String switchParameterString, final String argumentParameterString, final String requiredParameterString) {
+	/**
+	 * @param argv
+	 * @param switchParameterString
+	 * @param argumentParameterString
+	 * @param requiredParameterString
+	 */
+	public MyArgs(final String argv[], final String switchParameterString, final String argumentParameterString, final String requiredParameterString)
+	{
 		initMyArgs(argv, switchParameterString, argumentParameterString, requiredParameterString);
 	}
 
-	private void initMyArgs(final String[] argv, final String strSwitchParameter, final String strArgumentParameter, final String strRequiredParameter) {
+	private void initMyArgs(final String[] argv, final String strSwitchParameter, final String strArgumentParameter, final String strRequiredParameter)
+	{
 		String[] argvLocal = argv;
 
-		if (argvLocal == null) {
+		if (argvLocal == null)
+		{
 			argvLocal = new String[0];
 		}
 
@@ -132,40 +149,57 @@ public class MyArgs {
 		m_onlyArgs = new VString();
 
 		// cut of the "-" from the options, but don't remove it from file names
-		for (int i = 0; i < argvLocal.length; i++) {
+		for (int i = 0; i < argvLocal.length; i++)
+		{
 			final String tempString = argvLocal[i];
-			if (tempString.startsWith("-")) {
+			if (tempString.startsWith("-"))
+			{
 				String whazzLeft = tempString.substring(1);
-				while (whazzLeft.length() > 0) {
+				while (whazzLeft.length() > 0)
+				{
 					final String flag = whazzLeft.substring(0, 1);
-					if (m_switchParameterString != null && m_switchParameterString.indexOf(flag) >= 0) {
+					if (m_switchParameterString != null && m_switchParameterString.indexOf(flag) >= 0)
+					{
 						m_flags.add(flag);
 						whazzLeft = whazzLeft.substring(1);
-					} else if (m_argumentParameterString != null && m_argumentParameterString.indexOf(flag) >= 0) {
+					}
+					else if (m_argumentParameterString != null && m_argumentParameterString.indexOf(flag) >= 0)
+					{
 						String wl2 = whazzLeft.substring(1);
-						if (wl2.length() == 0 && argvLocal.length > i + 1) {
+						if (wl2.length() == 0 && argvLocal.length > i + 1)
+						{
 							wl2 = argvLocal[i + 1];
 							i++;
 						}
 						m_Parameters.put(flag, wl2);
 						whazzLeft = "";
-					} else {
+					}
+					else
+					{
 						// oops... don't know it; skip it
 						whazzLeft = whazzLeft.substring(1);
-						if (!flag.equals("-")) {
+						if (!flag.equals("-"))
+						{
 							System.out.println("unknown flag:" + flag);
 						}
 					}
 				}
-			} else {
+			}
+			else
+			{
 				m_onlyArgs.add(tempString);
 			}
 
 		}
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		String s = "\n\tMyArgs: \n";
 		s += "\t\t switchParameterString=" + m_switchParameterString + "\n";
 		s += "\t\t argumentParameterString=" + m_argumentParameterString + "\n";
@@ -175,15 +209,17 @@ public class MyArgs {
 		s += "\t\t Nargs   =" + nargs() + "\n";
 		s += "\t\t Flags:  =";
 		Iterator<String> it = m_flags.iterator();
-		while (it.hasNext()) {
+		while (it.hasNext())
+		{
 			s += it.next() + ", ";
 		}
 		s += "\n";
 		it = m_Parameters.keySet().iterator();
 		s += "\t\t Parameters: \n";
-		while (it.hasNext()) {
+		while (it.hasNext())
+		{
 			final String key = it.next();
-			s += "\t\t\t " + key + " = " + (String) m_Parameters.get(key) + "\n";
+			s += "\t\t\t " + key + " = " + m_Parameters.get(key) + "\n";
 		}
 		s += "\t\t onlyArgs=" + m_onlyArgs + "\n";
 
@@ -198,40 +234,68 @@ public class MyArgs {
 
 	// --------------------------------------------------------------------------
 	// ----
-	public String parameter(final String c) {
+	/**
+	 * @param c
+	 * @return
+	 */
+	public String parameter(final String c)
+	{
 		return parameter(c.charAt(0));
 	}
 
 	// .........................................................
 
-	public String parameter(final char c) {
-		String s = new String();
-		s += c;
-		return (String) m_Parameters.get(s);
+	/**
+	 * @param c
+	 * @return
+	 */
+	public String parameter(final char c)
+	{
+		return m_Parameters.get("" + c);
 	}
 
 	// .........................................................
 
 	// ......................................................................
-	public String parameterString(final String s) {
+	/**
+	 * @param s
+	 * @return
+	 */
+	public String parameterString(final String s)
+	{
 		return parameterString(s.charAt(0));
 	}
 
-	public String parameterString(final char c) {
+	/**
+	 * @param c
+	 * @return
+	 */
+	public String parameterString(final char c)
+	{
 		return parameter(c);
 	}
 
 	// --------------------------------------------------------------------------
 	// ----
 
-	public int nargs() {
+	/**
+	 * @return
+	 */
+	public int nargs()
+	{
 		return m_onlyArgs.size();
 	}
 
 	// ......................................................................
-	public String argument(final int m) {
+	/**
+	 * @param m
+	 * @return
+	 */
+	public String argument(final int m)
+	{
 
-		if (m >= nargs()) {
+		if (m >= nargs())
+		{
 			return null;
 		}
 		return m_onlyArgs.stringAt(m);
@@ -242,7 +306,8 @@ public class MyArgs {
 	 * @param m
 	 * @return default: ArgumentString(0)
 	 */
-	public String argumentString(final int m) {
+	public String argumentString(final int m)
+	{
 		return argument(m);
 	}
 
@@ -256,22 +321,27 @@ public class MyArgs {
 	 * @param radix
 	 * @return default: IntParameter(c + JDFConstants.EMPTYSTRING, 0, 10)
 	 */
-	public int intParameter(final char c, final int defaultValue, final int radix) {
+	public int intParameter(final char c, final int defaultValue, final int radix)
+	{
 		return intParameter(c + JDFConstants.EMPTYSTRING, defaultValue, radix);
 	}
 
 	/**
-	 * @param c
+	 * @param s
 	 * @param defaultValue
 	 * @param radix
 	 * @return default: IntParameter(s + JDFConstants.EMPTYSTRING, 0, 10)
 	 */
-	public int intParameter(final String s, final int defaultValue, final int radix) {
+	public int intParameter(final String s, final int defaultValue, final int radix)
+	{
 
 		final String paramString = parameter(s);
-		try {
+		try
+		{
 			return Integer.parseInt(paramString, radix);
-		} catch (final NumberFormatException e) {
+		}
+		catch (final NumberFormatException e)
+		{
 			System.out.println("WARNING: Int-Parameter[" + s + "] has no Int-Argument" + " or does not exist (= [" + paramString + "] ) ==> use default value: " + defaultValue);
 			return defaultValue;
 		}
@@ -285,22 +355,28 @@ public class MyArgs {
 	 * @param defaultValue
 	 * @return default: FloatParameter(JDFConstants.EMPTYSTRING + c, 0)
 	 */
-	public double floatParameter(final char c, final double defaultValue) {
+	public double floatParameter(final char c, final double defaultValue)
+	{
 		return floatParameter(JDFConstants.EMPTYSTRING + c, defaultValue);
 	}
 
 	/**
-	 * @param c
+	 * @param s
 	 * @param defaultValue
 	 * @return default: FloatParameter(JDFConstants.EMPTYSTRING + s, 0)
 	 */
-	public double floatParameter(final String s, final double defaultValue) {
+	public double floatParameter(final String s, final double defaultValue)
+	{
 
 		final String paramString = parameter(s);
-		try {
+		try
+		{
 			return Double.parseDouble(paramString);
-		} catch (final NumberFormatException e) {
-			System.out.println("WARNING: Float-Parameter[" + s + "] has no Double-Argument" + " or does not exist (= [" + paramString + "] ) ==> use default value: " + defaultValue);
+		}
+		catch (final NumberFormatException e)
+		{
+			System.out.println("WARNING: Float-Parameter[" + s + "] has no Double-Argument" + " or does not exist (= [" + paramString + "] ) ==> use default value: "
+					+ defaultValue);
 			return defaultValue;
 		}
 	}
@@ -313,7 +389,8 @@ public class MyArgs {
 	 * @param defaultValue
 	 * @return default: BoolParameter(c + JDFConstants.EMPTYSTRING, false)
 	 */
-	public boolean boolParameter(final char c, final boolean defaultValue) {
+	public boolean boolParameter(final char c, final boolean defaultValue)
+	{
 		return boolParameter(c + JDFConstants.EMPTYSTRING, defaultValue);
 	}
 
@@ -322,7 +399,8 @@ public class MyArgs {
 	 * @param defaultValue
 	 * @return default: BoolParameter(s + JDFConstants.EMPTYSTRING, false)
 	 */
-	public boolean boolParameter(final String s, final boolean defaultValue) {
+	public boolean boolParameter(final String s, final boolean defaultValue)
+	{
 		return m_flags.contains(s) ? true : defaultValue;
 	}
 
@@ -330,25 +408,31 @@ public class MyArgs {
 	 * @param paramString
 	 * @return default: Usage(JDFConstants.EMPTYSTRING)
 	 */
-	public String usage(final String paramString) {
+	public String usage(final String paramString)
+	{
 		m_usageTable = "\n.\n.\n.usage: ";
-		if (m_argV.size() > 0) {
+		if (m_argV.size() > 0)
+		{
 			m_usageTable += m_argV.stringAt(0);
 		}
 
-		if (m_switchParameterString != null) {
+		if (m_switchParameterString != null)
+		{
 			m_usageTable += "\n\t switches:   -" + m_switchParameterString;
 		}
-		if (m_argumentParameterString != null) {
+		if (m_argumentParameterString != null)
+		{
 			m_usageTable += "\n\t Parameters: -" + m_argumentParameterString;
 		}
-		if (m_requiredParameterString != null) {
+		if (m_requiredParameterString != null)
+		{
 			m_usageTable += "\n\t Required:   -" + m_requiredParameterString;
 		}
 
 		m_usageTable += "\n\t Argument(s)\n";
 
-		if (paramString.length() != 0) {
+		if (paramString.length() != 0)
+		{
 			m_usageTable += "\n" + paramString + "\n";
 		}
 
@@ -364,7 +448,8 @@ public class MyArgs {
 	 *            the char to test for
 	 * @return
 	 */
-	public boolean hasParameter(final char c) {
+	public boolean hasParameter(final char c)
+	{
 		return (m_switchParameterString != null && m_switchParameterString.indexOf(c) > -1 && m_flags.contains("" + c)) || (parameter(c) != null);
 	}
 

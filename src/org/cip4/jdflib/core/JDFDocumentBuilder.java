@@ -26,157 +26,159 @@ import org.xml.sax.SAXNotSupportedException;
 
 public class JDFDocumentBuilder extends DocumentBuilder
 {
-    private JDFParser m_parser;
+	private JDFParser m_parser;
 
-    /**
-     * Constructor JDFDocumentBuilder
-     *
-     *
-     */
+	/**
+	 * Constructor JDFDocumentBuilder
+	 *
+	 *
+	 */
 
-    /**
-     * constructor
-     */
-    public JDFDocumentBuilder ()
-    {
-        init (new JDFParser ());
-    }
+	/**
+	 * constructor
+	 */
+	public JDFDocumentBuilder()
+	{
+		init(new JDFParser());
+	}
 
-    /**
-     * Method init
-     *
-     * @param parser
-     */
+	/**
+	 * Method init
+	 *
+	 * @param parser
+	 */
 
-    private void init (JDFParser parser)
-    {
-        m_parser = parser;
-        m_parser.m_DocumentClass="org.cip4.jdflib.core.DocumentJDFImpl";
-    }
+	private void init(JDFParser parser)
+	{
+		m_parser = parser;
+		m_parser.m_DocumentClass = "org.cip4.jdflib.core.DocumentJDFImpl";
+	}
 
-    /**
-     * Method getParser
-     *
-     * @return
-     */
-    public JDFParser getParser ()
-    {
-        return (m_parser);
-    }
+	/**
+	 * Method getParser
+	 *
+	 * @return
+	 */
+	public JDFParser getParser()
+	{
+		return (m_parser);
+	}
 
-    /**
-     * Method isNamespaceAware
-     *
-     * @see javax.xml.parsers.DocumentBuilder#isNamespaceAware()
-     *
-     * @return
-     */
-    @Override
-	public boolean isNamespaceAware ()
-    {
-        return (true);
-    }
+	/**
+	 * Method isNamespaceAware
+	 *
+	 * @see javax.xml.parsers.DocumentBuilder#isNamespaceAware()
+	 *
+	 * @return
+	 */
+	@Override
+	public boolean isNamespaceAware()
+	{
+		return (true);
+	}
 
-    /**
-     * Method isValidating
-     *
-     * @see javax.xml.parsers.DocumentBuilder#isValidating()
-     *
-     * @return
-     */
-    @Override
-	public boolean isValidating ()
-    {
-        boolean isValidating = false;
+	/**
+	 * Method isValidating
+	 *
+	 * @see javax.xml.parsers.DocumentBuilder#isValidating()
+	 *
+	 * @return
+	 */
+	@Override
+	public boolean isValidating()
+	{
+		boolean isValidating = false;
 
-        try
-        {
-            isValidating = m_parser.getFeature ("http://xml.org/sax/features/validation");
-        }
+		try
+		{
+			isValidating = m_parser.getFeature("http://xml.org/sax/features/validation");
+		}
 
-        catch (SAXNotRecognizedException e)
-        {
-            e.printStackTrace();
-        }
+		catch (SAXNotRecognizedException e)
+		{
+			e.printStackTrace();
+		}
 
-        catch (SAXNotSupportedException e)
-        {
-            e.printStackTrace();
-        }
+		catch (SAXNotSupportedException e)
+		{
+			e.printStackTrace();
+		}
 
-        return (isValidating);
-    }
+		return (isValidating);
+	}
 
-    /**
-     * Method getDOMImplementation
-     *
-     * @see javax.xml.parsers.DocumentBuilder#getDOMImplementation()
-     *
-     * @return
-     */
-    @Override
-	public DOMImplementation getDOMImplementation ()
-    {
-        throw new JDFException ("JDFDocumentBuilder.getDOMImplementation is not implemented");
-    }
+	/**
+	 * Method getDOMImplementation
+	 *
+	 * @see javax.xml.parsers.DocumentBuilder#getDOMImplementation()
+	 *
+	 * @return
+	 */
+	@Override
+	public DOMImplementation getDOMImplementation()
+	{
+		throw new JDFException("JDFDocumentBuilder.getDOMImplementation is not implemented");
+	}
 
-    /**
-     * Method newDocument
-     *
-     * @see javax.xml.parsers.DocumentBuilder#newDocument()
-     *
-     * @return
-     */
-    @Override
+	/**
+	 * Method newDocument
+	 *
+	 * @see javax.xml.parsers.DocumentBuilder#newDocument()
+	 *
+	 * @return
+	 */
+	@Override
 	public Document newDocument()
-    {
-        return (new DocumentJDFImpl ());
-    }
+	{
+		DocumentJDFImpl documentJDFImpl = new DocumentJDFImpl();
+		documentJDFImpl.bInitOnCreate = true;
+		return documentJDFImpl;
+	}
 
-    /**
-     * Method setEntityResolver
-     *
-     * @see javax.xml.parsers.DocumentBuilder#setEntityResolver(org.xml.sax.EntityResolver)
-     *
-     * @param er
-     */
-    @Override
-	public void setEntityResolver (EntityResolver er)
-    {
-        m_parser.setEntityResolver (er);
-    }
+	/**
+	 * Method setEntityResolver
+	 *
+	 * @see javax.xml.parsers.DocumentBuilder#setEntityResolver(org.xml.sax.EntityResolver)
+	 *
+	 * @param er
+	 */
+	@Override
+	public void setEntityResolver(EntityResolver er)
+	{
+		m_parser.setEntityResolver(er);
+	}
 
-    /**
-     * Method setErrorHandler
-     *
-     * @see javax.xml.parsers.DocumentBuilder#setErrorHandler(org.xml.sax.ErrorHandler)
-     *
-     * @param eh
-     */
-    @Override
-	public void setErrorHandler (ErrorHandler eh)
-    {
-        m_parser.setErrorHandler (eh);
-    }
+	/**
+	 * Method setErrorHandler
+	 *
+	 * @see javax.xml.parsers.DocumentBuilder#setErrorHandler(org.xml.sax.ErrorHandler)
+	 *
+	 * @param eh
+	 */
+	@Override
+	public void setErrorHandler(ErrorHandler eh)
+	{
+		m_parser.setErrorHandler(eh);
+	}
 
-    /**
-     * Method parse
-     *
-     * @see javax.xml.parsers.DocumentBuilder#parse(org.xml.sax.InputSource)
-     *
-     * @param is
-     *
-     * @return
-     */
-    @Override
-	public Document parse (InputSource is)
-    {
-        m_parser.parse (is);
+	/**
+	 * Method parse
+	 *
+	 * @see javax.xml.parsers.DocumentBuilder#parse(org.xml.sax.InputSource)
+	 *
+	 * @param is
+	 *
+	 * @return
+	 */
+	@Override
+	public Document parse(InputSource is)
+	{
+		m_parser.parse(is);
 
-        Document doc = m_parser.getDocument ();
+		Document doc = m_parser.getDocument();
 
-        m_parser.reset ();
+		m_parser.reset();
 
-        return (doc);
-    }
+		return (doc);
+	}
 }

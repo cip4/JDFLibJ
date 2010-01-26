@@ -76,7 +76,6 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -524,7 +523,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 	@Override
 	protected void setUp() throws Exception
 	{
-		JDFElement.setLongID(false);
+		KElement.setLongID(false);
 		super.setUp();
 		doc = new JDFDoc("JDF");
 		root = doc.getJDFRoot();

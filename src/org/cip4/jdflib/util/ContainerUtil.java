@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -207,7 +207,7 @@ public class ContainerUtil
 	}
 
 	/**
-	 * return a matching element from a collection of Imatches
+	 * return a matching element from a collection of IMatches
 	 * @param <a> the data type
 	 * @param c the collection to search
 	 * @param obj the search key for matches
