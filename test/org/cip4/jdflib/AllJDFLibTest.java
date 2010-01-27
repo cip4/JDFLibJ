@@ -155,6 +155,7 @@ import org.cip4.jdflib.extensions.PartitionHelperTest;
 import org.cip4.jdflib.extensions.SetHelperTest;
 import org.cip4.jdflib.extensions.XJDFGeneratorTest;
 import org.cip4.jdflib.extensions.XJDFHelperTest;
+import org.cip4.jdflib.extensions.XJDFLayoutStripTest;
 import org.cip4.jdflib.extensions.XJDFTest;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinderTest;
 import org.cip4.jdflib.goldenticket.GoldenTicketTest;
