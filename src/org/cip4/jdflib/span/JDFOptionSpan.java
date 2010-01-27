@@ -214,6 +214,17 @@ public class JDFOptionSpan extends JDFSpanBase
 		return getAttribute(AttributeName.RANGE, null, JDFConstants.EMPTYSTRING);
 	}
 
+	/**
+	 * Gets the value of attribute DataType
+	 * 
+	 * @return EnumDataType - the attribute DataType value
+	 */
+	@Override
+	public EnumDataType getDataType()
+	{
+		return EnumDataType.OptionSpan;
+	}
+
 	@Override
 	public boolean init()
 	{

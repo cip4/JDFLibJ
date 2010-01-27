@@ -170,6 +170,17 @@ public class JDFShapeSpan extends JDFSpanBase
 		}
 	}
 
+	/**
+	 * Gets the value of attribute DataType
+	 * 
+	 * @return EnumDataType - the attribute DataType value
+	 */
+	@Override
+	public EnumDataType getDataType()
+	{
+		return EnumDataType.ShapeSpan;
+	}
+
 	public void setPreferred(JDFShape value)
 	{
 		setAttribute(AttributeName.PREFERRED, value.toString(), null);

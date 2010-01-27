@@ -127,6 +127,18 @@ public class JDFDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
+	 */
+	public void testManyNew()
+	{
+		for (int i = 0; i < 10000; i++)
+		{
+			JDFDoc doc = new JDFDoc("JDF");
+			assertNotNull(doc);
+		}
+	}
+
+	/**
 	 * just a minor test. It only checks that cloned docs are actually different
 	 */
 	public void testClone()

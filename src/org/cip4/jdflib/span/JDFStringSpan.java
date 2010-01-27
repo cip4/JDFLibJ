@@ -110,6 +110,17 @@ public class JDFStringSpan extends JDFSpanBase
 	}
 
 	/**
+	 * Gets the value of attribute DataType
+	 * 
+	 * @return EnumDataType - the attribute DataType value
+	 */
+	@Override
+	public EnumDataType getDataType()
+	{
+		return EnumDataType.StringSpan;
+	}
+
+	/**
 	 * Constructor for JDFStringSpan
 	 * @param myOwnerDocument 
 	 * @param myNamespaceURI 

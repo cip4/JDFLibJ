@@ -131,7 +131,7 @@ public class MultiModuleStatusCounter
 		StatusCounter root = counters.elementAt(0);
 		JDFDoc d = new JDFDoc("JMF");
 		final JDFJMF jmf = d.getJMFRoot();
-		jmf.mergeElement(root.getDocJMFPhaseTime().getJMFRoot(), false);
+		jmf.copyInto(root.getDocJMFPhaseTime().getJMFRoot(), false);
 		JDFDeviceInfo di = jmf.getResponse(0).getDeviceInfo(0);
 		for (int i = 1; i < counters.size(); i++)
 		{

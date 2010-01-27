@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -111,9 +111,7 @@ public class ElementWalker
 		if (w != null)
 		{
 			n++;
-			w.prepareWalk(e, trackElem);
-			b = w.walk(e, trackElem);
-			w.finalizeWalk(e, trackElem);
+			b = doWalk(e, trackElem, w);
 		}
 		if (b != null) // follow kids if still alive or no walker found
 		{
@@ -127,6 +125,42 @@ public class ElementWalker
 			}
 		}
 		return n;
+	}
+
+	/**
+	 * @param e
+	 * @param trackElem
+	 * @param w
+	 * @return
+	 */
+	private KElement doWalk(final KElement e, final KElement trackElem, final IWalker w)
+	{
+		KElement b = null;
+		try
+		{
+			w.prepareWalk(e, trackElem);
+		}
+		finally
+		{
+			// nop
+		}
+		try
+		{
+			b = w.walk(e, trackElem);
+		}
+		finally
+		{
+			// nop
+		}
+		try
+		{
+			w.finalizeWalk(e, trackElem);
+		}
+		finally
+		{
+			// nop
+		}
+		return b;
 	}
 
 	/**
@@ -155,7 +189,7 @@ public class ElementWalker
 		if (w != null)
 		{
 			n++;
-			w.walk(e, null);
+			doWalk(e, null, w);
 		}
 		return n;
 	}

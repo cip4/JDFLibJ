@@ -91,12 +91,14 @@ import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -212,6 +214,10 @@ public class XJDF20 extends BaseElementWalker
 	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
 		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
+		FixVersion vers = new FixVersion(EnumVersion.Version_1_4);
+		vers.setLayoutPrepToStripping(true);
+		vers.walkTree(root, null);
+
 		oldRoot = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
 		if (oldRoot == null)
 		{
@@ -1575,7 +1581,10 @@ public class XJDF20 extends BaseElementWalker
 		private KElement invertSpan(final JDFSpanBase span, final KElement xjdf)
 		{
 			span.inlineRefElements(null, null, false);
-			final KElement eNew = xjdf.appendElement(span.getDataType().getName());
+			org.cip4.jdflib.span.JDFSpanBase.EnumDataType dataType = span.getDataType();
+			if (dataType == null)
+				return null; // broken!
+			final KElement eNew = xjdf.appendElement(dataType.getName());
 			eNew.setAttributes(span);
 			eNew.removeAttribute(AttributeName.DATATYPE);
 			eNew.setAttribute(AttributeName.NAME, span.getLocalName());

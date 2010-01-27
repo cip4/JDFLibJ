@@ -3904,26 +3904,44 @@ public class KElement extends ElementNSImpl implements Element
 	 * copies a node into this
 	 * cleans this first
 	 * @param src
+	 * @param bRemove if true, remove existing information, else retain and overwrite
 	 * @throws JDFException if nodenames don't match
 	 */
-	public void copyInto(KElement src)
+	public KElement copyInto(KElement src, boolean bRemove)
 	{
 		if (src == null)
-			return;
+			return this;
 		if (!getNodeName().equals(src.getNodeName()))
 			throw new JDFException("non matching node names");
-		removeChildren(null, null, null);
-		removeAllText();
-		removeAttributes(null);
-		setAttributes(src);
-		setText(src.getText());
-		setXMLComment(src.getXMLComment(0));
-		KElement e = src.getFirstChildElement();
-		while (e != null)
+
+		XMLDoc ownerDocument_KElement = getOwnerDocument_KElement();
+		boolean b = ownerDocument_KElement.getInitOnCreate();
+		try
 		{
-			copyElement(e, null);
-			e = e.getNextSiblingElement();
+			ownerDocument_KElement.setInitOnCreate(false);
+
+			if (bRemove)
+			{
+				removeChildren(null, null, null);
+				removeAllText();
+				removeAttributes(null);
+				setAttributes(src);
+				setText(src.getText());
+			}
+			setXMLComment(src.getXMLComment(0));
+			KElement e = src.getFirstChildElement();
+			while (e != null)
+			{
+				copyElement(e, null);
+				e = e.getNextSiblingElement();
+			}
 		}
+		finally
+		{
+			// rewind
+			ownerDocument_KElement.setInitOnCreate(b);
+		}
+		return this;
 	}
 
 	/**

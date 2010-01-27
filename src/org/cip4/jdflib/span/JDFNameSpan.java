@@ -90,6 +90,17 @@ public class JDFNameSpan extends JDFSpanBase
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Gets the value of attribute DataType
+	 * 
+	 * @return EnumDataType - the attribute DataType value
+	 */
+	@Override
+	public EnumDataType getDataType()
+	{
+		return EnumDataType.NameSpan;
+	}
+
+	/**
 	 * Constructor for JDFNameSpan
 	 * 
 	 * @param ownerDocument

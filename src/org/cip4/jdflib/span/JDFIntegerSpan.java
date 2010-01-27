@@ -220,6 +220,17 @@ public class JDFIntegerSpan extends JDFSpanBase
 		}
 	}
 
+	/**
+	 * Gets the value of attribute DataType
+	 * 
+	 * @return EnumDataType - the attribute DataType value
+	 */
+	@Override
+	public EnumDataType getDataType()
+	{
+		return EnumDataType.IntegerSpan;
+	}
+
 	@Override
 	public boolean init()
 	{

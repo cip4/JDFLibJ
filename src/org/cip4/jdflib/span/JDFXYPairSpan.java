@@ -196,6 +196,17 @@ public class JDFXYPairSpan extends JDFSpanBase
 		}
 	}
 
+	/**
+	 * Gets the value of attribute DataType
+	 * 
+	 * @return EnumDataType - the attribute DataType value
+	 */
+	@Override
+	public EnumDataType getDataType()
+	{
+		return EnumDataType.XYPairSpan;
+	}
+
 	public void setRange(JDFXYPairRangeList value)
 	{
 		setAttribute(AttributeName.RANGE, value.toString());

@@ -243,11 +243,9 @@ public class JDFSpawn
 		// prepare the nodeinfos in main prior to spawning
 		prepareNodeInfos();
 
-		docOut.setInitOnCreate(false);
 		// merge this node into it
-		rootOut.copyInto(node); // "copy" this node into the new created document
+		rootOut.copyInto(node, true); // "copy" this node into the new created document
 		docOut.setNSMap(node.getOwnerDocument_KElement());
-		docOut.setInitOnCreate(true);
 		final String spawnID = "Sp" + KElement.uniqueID(-666); // create a spawn
 		// id for this transaction
 		rootOut.setSpawnID(spawnID);
@@ -1618,7 +1616,7 @@ public class JDFSpawn
 			final JDFNode thisRoot = node.getJDFRoot();
 			// merge this node into it
 			docNew.setInitOnCreate(false);
-			informativeRoot.copyInto(thisRoot);
+			informativeRoot.copyInto(thisRoot, true);
 			docNew.setInitOnCreate(true);
 		}
 		final JDFNode copyOfThis = informativeRoot.getChildJDFNode(node.getID(), false);

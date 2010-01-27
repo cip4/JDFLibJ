@@ -719,7 +719,7 @@ public class KElementTest extends JDFTestCaseBase
 		final XMLDoc doc2 = new XMLDoc("Test", "www.test.com");
 		final KElement root2 = doc2.getRoot();
 
-		root2.copyInto(root);
+		root2.copyInto(root, true);
 		KElement t2 = root2.getElement("foo");
 		assertEquals(t2.getAttribute("a"), "1");
 		assertEquals(t2.getAttribute("b"), "1");
