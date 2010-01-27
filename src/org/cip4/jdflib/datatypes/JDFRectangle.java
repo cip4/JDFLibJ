@@ -13,6 +13,7 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.ScaleUtil;
 
 /**
  * This class represents a rectangle JDFRectangle) consisting of a lower left x value (llx), a lower left y value (lly), an upper right x value (urx) and an
@@ -162,6 +163,16 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
+	 * setLlXMm - sets the lower left x coordinate in millimeter
+	 * 
+	 * @param mmX the lower left x coordinate in millimeter
+	 * @author Stefan Meissner
+	 */
+	public void setLlxMm(final double mmX) {
+		setLlx(ScaleUtil.mm2Dtp(mmX));
+	}
+
+	/**
 	 * getLly - returns the lower left y coordinate
 	 * 
 	 * @return double - the lower left y coordinate
@@ -179,6 +190,16 @@ public class JDFRectangle extends JDFNumList
 	public void setLly(final double y)
 	{
 		m_numList.set(1, new Double(y));
+	}
+
+	/**
+	 * setLlyMm - sets the lower left y coordinate in millimeter
+	 * 
+	 * @param mmY the lower left y coordinate in millimeter
+	 * @author Stefan Meissner
+	 */
+	public void setLlyMm(final double mmY) {
+		setLly(ScaleUtil.mm2Dtp(mmY));
 	}
 
 	/**
@@ -202,6 +223,16 @@ public class JDFRectangle extends JDFNumList
 	}
 
 	/**
+	 * setUrxMm - sets the upper right x coordinate in millimeter
+	 * 
+	 * @param mmX the upper right x coordinate in millimeter
+	 * @author Stefan Meissner
+	 */
+	public void setUrxMm(final double mmX) {
+		setUrx(ScaleUtil.mm2Dtp(mmX));
+	}
+
+	/**
 	 * getUry - returns the upper right y coordinate
 	 * 
 	 * @return double - the upper right y coordinate
@@ -219,6 +250,16 @@ public class JDFRectangle extends JDFNumList
 	public void setUry(final double y)
 	{
 		m_numList.set(3, new Double(y));
+	}
+
+	/**
+	 * setUryMm - sets the upper right y coordinate in millimeter
+	 * 
+	 * @param mmY the upper right y coordinate in millimeter
+	 * @author Stefan Meissner
+	 */
+	public void setUryMm(final double mmY) {
+		setUry(ScaleUtil.mm2Dtp(mmY));
 	}
 
 	/**

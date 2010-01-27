@@ -37,4 +37,54 @@ public class JDFRectangleTest extends TestCase
 		assertFalse(r1.isLess(r2));
 
 	}
+
+	public final void testRectangleMm() throws Exception
+	{
+		JDFRectangle r1 = new JDFRectangle();
+		r1.setLlxMm(0);
+		r1.setLlyMm(0);
+		r1.setUrxMm(1);
+		r1.setUryMm(1);
+		
+		JDFRectangle r2 = new JDFRectangle();
+		r2.setLlxMm(0);
+		r2.setLlyMm(0);
+		r2.setUrxMm(1);
+		r2.setUryMm(1);
+		
+		assertTrue(r1.equals(r2));
+		assertTrue(r1.isGreaterOrEqual(r2));
+		assertTrue(r1.isLessOrEqual(r2));
+		assertFalse(r1.isGreater(r2));
+		assertFalse(r1.isLess(r2));
+		
+		r2 = new JDFRectangle();
+		r2.setLlxMm(0);
+		r2.setLlyMm(0);
+		r2.setUrxMm(1);
+		r2.setUryMm(2);
+		assertTrue(r1.isLessOrEqual(r2));
+		assertTrue(r1.isLess(r2));
+		
+		
+		r2 = new JDFRectangle();
+		r2.setLlxMm(0);
+		r2.setLlyMm(0);
+		r2.setUrxMm(1.000000001);
+		r2.setUryMm(1);
+		assertTrue(r1.isLessOrEqual(r2));
+		assertTrue(r1.equals(r2));
+
+		r2 = new JDFRectangle();
+		r2.setLlxMm(2);
+		r2.setLlyMm(2);
+		r2.setUrxMm(3);
+		r2.setUryMm(3);
+		assertFalse(r1.equals(r2));
+		assertFalse(r1.isGreaterOrEqual(r2));
+		assertFalse(r1.isLessOrEqual(r2));
+		assertFalse(r1.isGreater(r2));
+		assertFalse(r1.isLess(r2));
+
+	}
 }

@@ -171,6 +171,14 @@
 	<!--  Builds and packages sources and binary distributions                 -->
 	<!--  ===================================================================  -->
 	<target name="all" depends="pack-bin,pack-src" />
+	
+	<target name="deploy-eval" depends="pack-bin">
+		<delete dir="${basedir}/../evalApp/src/main/lib/">
+			<include name="**/JDFLibJ*"/>
+		</delete>
+
+		<copy file="${dist.dir}/${base.filename}.jar" todir="${basedir}/../evalApp/src/main/lib" />
+	</target>
 
 	<target name="test" description="Runs JUnit tests." depends="compile">
 		<property name="test.bin.dir" value="${bin.dir}/test" />
