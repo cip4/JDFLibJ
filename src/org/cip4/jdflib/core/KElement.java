@@ -3905,6 +3905,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * cleans this first
 	 * @param src
 	 * @param bRemove if true, remove existing information, else retain and overwrite
+	 * @return this
 	 * @throws JDFException if nodenames don't match
 	 */
 	public KElement copyInto(KElement src, boolean bRemove)
@@ -3925,9 +3926,9 @@ public class KElement extends ElementNSImpl implements Element
 				removeChildren(null, null, null);
 				removeAllText();
 				removeAttributes(null);
-				setAttributes(src);
-				setText(src.getText());
 			}
+			setAttributes(src);
+			setText(src.getText());
 			setXMLComment(src.getXMLComment(0));
 			KElement e = src.getFirstChildElement();
 			while (e != null)
