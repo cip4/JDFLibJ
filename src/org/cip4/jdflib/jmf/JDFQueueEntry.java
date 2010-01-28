@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -571,8 +571,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	{
 		final EnumQueueEntryStatus status = getQueueEntryStatus();
 		return // (status==null) ||
-		EnumQueueEntryStatus.Completed.equals(status) || EnumQueueEntryStatus.Removed.equals(status)
-				|| EnumQueueEntryStatus.Aborted.equals(status);
+		EnumQueueEntryStatus.Completed.equals(status) || EnumQueueEntryStatus.Removed.equals(status) || EnumQueueEntryStatus.Aborted.equals(status);
 	}
 
 	/**

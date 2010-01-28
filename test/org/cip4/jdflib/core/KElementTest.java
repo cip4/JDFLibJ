@@ -715,6 +715,7 @@ public class KElementTest extends JDFTestCaseBase
 		final KElement t = root.appendElement("foo");
 		t.setAttribute("a", "1");
 		t.setAttribute("b", "1");
+		t.setAttribute("c:d", "1", "a.com");
 
 		final XMLDoc doc2 = new XMLDoc("Test", "www.test.com");
 		final KElement root2 = doc2.getRoot();
@@ -723,7 +724,17 @@ public class KElementTest extends JDFTestCaseBase
 		KElement t2 = root2.getElement("foo");
 		assertEquals(t2.getAttribute("a"), "1");
 		assertEquals(t2.getAttribute("b"), "1");
+		assertEquals(t2.getAttribute("c:d"), "1");
 		assertTrue(root2.isEqual(root));
+		final XMLDoc doc3 = new XMLDoc("Test", "www.test.com");
+		final KElement root3 = doc3.getRoot();
+
+		root3.copyInto(root, true);
+		KElement t3 = root2.getElement("foo");
+		assertEquals(t3.getAttribute("a"), "1");
+		assertEquals(t3.getAttribute("b"), "1");
+		assertEquals(t3.getAttribute("c:d"), "1");
+		assertTrue(root3.isEqual(root));
 	}
 
 	/**

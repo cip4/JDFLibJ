@@ -67,37 +67,47 @@
  *
  *
  */
-
 package org.cip4.jdflib.util;
+
+import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
 /**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * 08.12.2008
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class BiHashMapTest extends JDFTestCaseBase
+public class BackupDirectoryTest extends JDFTestCaseBase
 {
+	BackupDirectory dir;
 
-	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 */
-	public void testPut()
+	public void testGet()
 	{
-		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
-		hm.put("a", "b");
-		assertEquals(hm.getValue("a"), "b");
-		assertEquals(hm.getKey("b"), "a");
-		hm.put("a", "c");
-		assertEquals(hm.getValue("a"), "c");
-		assertEquals(hm.getKey("c"), "a");
-		assertNull(hm.getKey("b"));
-		hm.clear();
-		assertEquals(hm.getKeyMap().size(), 0);
-		assertEquals(hm.getValMap().size(), 0);
+		for (int i = 0; i < 30; i++)
+		{
+			File newFile = dir.getNewFile("File" + i);
+			assertNotNull(newFile);
+			ThreadUtil.sleep(20);
+			if (i > 20)
+			{
+				assertFalse("old die first", ContainerUtil.toHashSet(dir.listFiles()).contains(new File("File" + (20 - i))));
+			}
+		}
+		assertEquals(dir.listFiles().length, 20);
 	}
-	// /////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 * @throws Exception
+	*/
+	@Override
+	protected void setUp() throws Exception
+	{ // TODO Auto-generated method stub
+		super.setUp();
+		File d = new File(sm_dirTestDataTemp + "backupDir");
+		FileUtil.deleteAll(d);
+		dir = new BackupDirectory(d, 20);
+	}
 }

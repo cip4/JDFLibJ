@@ -2732,6 +2732,43 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testMergeRemovedResource()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SheetName", "S1");
+		partMap.put("Side", "Front");
+		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
+		tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
+
+		JDFResource r = n.addResource("RunList", EnumUsage.Output);
+		r.getCreatePartition(partMap, new VString("SheetName Side", null));
+
+		final JDFSpawn sp = new JDFSpawn(n);
+		final VJDFAttributeMap spawnParts = new VJDFAttributeMap();
+		spawnParts.add(partMap); // want more granular
+		final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.RUNLIST, null), spawnParts, false, false, false, false);
+
+		assertNotNull(spNode.getResource("RunList", null, 0));
+		JDFResourceLink rl1 = spNode.getLink(0, "RunList", null, null);
+		rl1.getLinkRoot().deleteNode();
+		rl1.deleteNode();
+		assertNull(spNode.getResource("RunList", null, 0));
+
+		final JDFMerge m = new JDFMerge(n);
+		final JDFNode merged = m.mergeJDF(spNode, null, null, null);
+		assertTrue(merged.toString().indexOf("SpawnIDS") < 0);
+
+		JDFResourceLink rl = merged.getLink(0, "RunList", null, null);
+		assertNotNull(rl);
+		assertNotNull(rl.getTarget());
+		assertTrue(rl.getTarget().toXML().indexOf("Spawn") < 0);
+	}
+
+	/**
 		 * 
 		 */
 	public void testMergeJDF()

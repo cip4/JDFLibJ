@@ -512,6 +512,9 @@ public class JDFMerge
 	 */
 	static public JDFResource mergePartition(final JDFResource targetRes, final JDFResource resToMerge, final String spawnID, final EnumAmountMerge amountPolicy, final boolean bLocalResource)
 	{
+		if (resToMerge == null)
+			return null;
+
 		if (!targetRes.getID().equals(resToMerge.getID()))
 		{
 			throw new JDFException("JDFResource.mergePartition  merging incompatible resources ID=" + targetRes.getID() + " IDMerge=" + resToMerge.getID());
@@ -1090,6 +1093,9 @@ public class JDFMerge
 	 */
 	private void mergeSpawnIDs(final JDFResource mainRes, final JDFResource resToMerge, final boolean bReadOnly)
 	{
+		if (mainRes == null || resToMerge == null)
+			return;
+
 		if (!mainRes.getID().equals(resToMerge.getID()))
 		{
 			throw new JDFException("JDFResource.mergeSpawnIDs  merging incompatible resources ID = " + mainRes.getID() + " IDMerge = " + resToMerge.getID());
@@ -1112,7 +1118,7 @@ public class JDFMerge
 		for (int i = 0; i < allLeaves.size(); i++)
 		{
 			final JDFResource thisResNode = (JDFResource) allLeaves.elementAt(i);
-			final JDFResource mergeResNode = resToMerge.getPartition(thisResNode.getPartMap(partIDKeys), EnumPartUsage.Explicit);
+			final JDFResource mergeResNode = resToMerge == null ? null : resToMerge.getPartition(thisResNode.getPartMap(partIDKeys), EnumPartUsage.Explicit);
 
 			if (mergeResNode != null)
 			{
@@ -1184,24 +1190,21 @@ public class JDFMerge
 				// do both, since some leaves may be RO
 				mergeSpawnIDs(newRes, oldRes, false);
 
-				try
+				if (newRes != null)
 				{
-					// merge the resource from the spawned node into the lower level resourcepool
-					oldRes = mergePartition(oldRes, newRes, spawnID, amountPolicy, false);
-				}
-				catch (final Exception e)
-				{
-					throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + (oldRes == null ? ">>> oldRes is null !!! <<<" : oldRes.getID()) + " SpawnID="
-							+ spawnID);
+					try
+					{
+						// merge the resource from the spawned node into the lower level resourcepool
+						oldRes = mergePartition(oldRes, newRes, spawnID, amountPolicy, false);
+					}
+					catch (final Exception e)
+					{
+						throw new JDFException("JDFNode:mergeJDF, error in mergePartition: ID=" + (oldRes == null ? ">>> oldRes is null !!! <<<" : oldRes.getID()) + " SpawnID="
+								+ spawnID);
+					}
 				}
 
-				final String oldID = oldRes.getID();
-				final JDFResource myRes = (JDFResource) overWriteNode.getTarget(oldID, AttributeName.ID);
-				if (myRes == null)
-				{
-					throw new JDFException("JDFNode.mergeJDF: Merged Resource not found! Cant remove SpawnIDs");
-				}
-				final VElement oldResLeafsSpawned = myRes.getNodesWithSpawnID(spawnID);
+				final VElement oldResLeafsSpawned = oldRes.getNodesWithSpawnID(spawnID);
 				for (int leaf = 0; leaf < oldResLeafsSpawned.size(); leaf++)
 				{
 					final JDFResource leafRes = (JDFResource) oldResLeafsSpawned.elementAt(leaf);

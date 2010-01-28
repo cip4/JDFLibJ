@@ -66,38 +66,151 @@
  * <http://www.cip4.org/>.
  *
  *
+ * 
  */
-
 package org.cip4.jdflib.util;
 
-import org.cip4.jdflib.JDFTestCaseBase;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
+ * class to manage a directory by removing the oldest files whenever a new file is created
+ * 
+ * The oldest file dies when the maximum number is reached
+ * 
  * 08.12.2008
  */
-public class BiHashMapTest extends JDFTestCaseBase
+public class BackupDirectory extends File
 {
+	private class FileTime implements Comparable<FileTime>
+	{
+		protected File f;
+		private final long t;
 
-	// /////////////////////////////////////////////////////////////////////////
+		/**
+		 * @param file
+		 */
+		protected FileTime(File file)
+		{
+			f = file;
+			t = f.lastModified();
+		}
+
+		/**
+		 * sort by old last
+		 * @see java.lang.Comparable#compareTo(java.lang.Object)
+		 * @param o
+		 * @return
+		*/
+		public int compareTo(FileTime o)
+		{
+			long l = t - o.t;
+			if (l > 0)
+				l = -1;
+			else if (l < 0)
+				l = 1;
+			return (int) l;
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 * @return
+		*/
+		@Override
+		public String toString()
+		{
+			return t + " : " + f.getAbsolutePath();
+		}
+
+	}
+
+	private final int nBackup;
+
+	/**
+	 * @param pathname the Directory
+	 * @param nBackupp the number of backups to retain
+	 * @throws IllegalArgumentException if file exists and is not a directory
+	 */
+	public BackupDirectory(final String pathname, final int nBackupp)
+	{
+		this(new File(pathname), nBackupp);
+	}
+
+	/**
+	 * @param file the base file
+	 * @param nBackupp the number of backups to retain
+	 * @throws IllegalArgumentException if file exists and is not a directory
+	 */
+	public BackupDirectory(final File file, final int nBackupp) throws IllegalArgumentException
+	{
+		super(file.getPath());
+		this.nBackup = nBackupp;
+		if (!isDirectory())
+			mkdirs();
+		if (!isDirectory())
+			throw new IllegalArgumentException(file.getAbsolutePath() + " is not a directory");
+	}
+
+	/**
+	 * creates a new file in this and assures than no more than nBackup files remain
+	 * @param localFile the local file to place in this directory
+	 * @return the file to write, null if an io excepton occured when creating it
+	 */
+	public File getNewFile(File localFile)
+	{
+		File file = FileUtil.getFileInDirectory(this, localFile);
+		if (file.exists())
+			file.delete();
+		else
+			clean();
+		try
+		{
+			file.createNewFile();
+		}
+		catch (IOException x)
+		{
+			return null;
+		}
+		return file;
+	}
+
 	/**
 	 * 
 	 */
-	public void testPut()
+	private void clean()
 	{
-		final BiHashMap<String, String> hm = new BiHashMap<String, String>();
-		hm.put("a", "b");
-		assertEquals(hm.getValue("a"), "b");
-		assertEquals(hm.getKey("b"), "a");
-		hm.put("a", "c");
-		assertEquals(hm.getValue("a"), "c");
-		assertEquals(hm.getKey("c"), "a");
-		assertNull(hm.getKey("b"));
-		hm.clear();
-		assertEquals(hm.getKeyMap().size(), 0);
-		assertEquals(hm.getValMap().size(), 0);
+		File[] all = listFiles();
+		if (all != null && all.length >= nBackup)
+		{
+			FileTime[] time = new FileTime[all.length];
+			for (int i = 0; i < all.length; i++)
+			{
+				time[i] = new FileTime(all[i]);
+			}
+			Arrays.sort(time);
+			for (int i = nBackup - 1; i < all.length; i++)
+			{
+				time[i].f.delete();
+			}
+		}
+
 	}
-	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1521423479898L;
+
+	/**
+	 * @param fileName
+	 * @return
+	 */
+	public File getNewFile(String fileName)
+	{
+		return fileName == null ? null : getNewFile(new File(fileName));
+	}
 
 }
