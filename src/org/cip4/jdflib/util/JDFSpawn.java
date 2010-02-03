@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -1719,19 +1720,19 @@ public class JDFSpawn
 	/**
 	 * Method unSpawn. undo a spawn, removing any and all bookkeeping of that spawning
 	 * 
-	 * @param spawnID spawnID of the spawn to undo
+	 * @param spawnID spawnID of the spawn to undo, if null find the first spawned node
 	 * @return the fixed unspawned node
 	 */
-	public JDFNode unSpawn(final String spawnID)
+	public JDFNode unSpawn(String spawnID)
 	{
-		if (spawnID == null || spawnID.equals(JDFConstants.EMPTYSTRING))
-		{
-			return null;
-		}
-
 		final JDFNode nodeParent = findUnSpawnNode(node, spawnID);
+		if (nodeParent != null && spawnID == null)
+		{
+			JDFSpawned spawnAudit = (JDFSpawned) nodeParent.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null);
+			if (spawnAudit != null)
+				spawnID = spawnAudit.getNewSpawnID();
+		}
 		return unSpawnNode(nodeParent, spawnID);
-
 	}
 
 	/**
@@ -1837,27 +1838,29 @@ public class JDFSpawn
 				}
 
 				localNode = (JDFNode) parent.getTarget(spawnAudit.getjRef(), AttributeName.ID);
-				final VElement vn = localNode.getvJDFNode(null, null, false);
+				final VElement vn = localNode == null ? null : localNode.getvJDFNode(null, null, false);
 				// in C++ Vector is VJDFNode, which is typesafe
 
 				// loop over all child nodes of the spawned node to be unspawned
-				for (int nod = 0; nod < vn.size(); nod++)
+				if (vn != null)
 				{
-					final JDFNode deepNode = (JDFNode) vn.elementAt(nod);
-					final JDFResourcePool resPool = deepNode.getResourcePool();
-
-					if (resPool != null)
+					for (int nod = 0; nod < vn.size(); nod++)
 					{
-						final VElement vRes = resPool.getPoolChildren(null, null, null);
+						final JDFNode deepNode = (JDFNode) vn.elementAt(nod);
+						final JDFResourcePool resPool = deepNode.getResourcePool();
 
-						for (i = 0; i < vRes.size(); i++)
+						if (resPool != null)
 						{
-							final JDFResource res1 = (JDFResource) vRes.elementAt(i);
-							res1.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRW);
+							final VElement vRes = resPool.getPoolChildren(null, null, null);
+
+							for (i = 0; i < vRes.size(); i++)
+							{
+								final JDFResource res1 = (JDFResource) vRes.elementAt(i);
+								res1.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRW);
+							}
 						}
 					}
 				}
-
 				EnumNodeStatus status = JDFElement.EnumNodeStatus.Waiting;
 				final boolean fHasAuditStatus = spawnAudit.hasAttribute(AttributeName.STATUS);
 				if (fHasAuditStatus)
@@ -1885,8 +1888,7 @@ public class JDFSpawn
 				}
 				else
 				{
-					// we either must overwrite because it is now definitely not
-					// spawned
+					// we either must overwrite because it is now definitely not spawned
 					// or had an explicit correct status in the spawned audit
 					if (JDFElement.EnumNodeStatus.Spawned.equals(localNode.getStatus()) || spawnAudit.hasAttribute(AttributeName.STATUS))
 					{

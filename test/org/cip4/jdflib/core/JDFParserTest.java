@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -169,6 +169,19 @@ public class JDFParserTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * check simple parsestring for invalid xml
+	 * 
+	 */
+	public void testParseStringJDFBad()
+	{
+		final JDFParser parser = new JDFParser();
+		JDFDoc d = parser.parseString("<JDF");
+		assertNull("not wellformed ", d);
+		d = parser.parseString("<Foo:JDF/>");
+		assertNull("bad ns ", d);
+	}
+
+	/**
 	 * 
 	 */
 	public void testParseStringJDFWrongNS()
@@ -237,7 +250,6 @@ public class JDFParserTest extends JDFTestCaseBase
 	/**
 	 * parse a string with guck up front
 	 * 
-	 * @throws Exception
 	 */
 	public void testSkipParse()
 	{
@@ -255,7 +267,6 @@ public class JDFParserTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 * @throws Exception
 	 */
 	public void testSchema()
 	{

@@ -1847,6 +1847,43 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test customerinfo and nodeinfo related stuff including high level access to information in the AncestorPool
+	 * 
+	 */
+	public void testUnSpawnNull()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		assertEquals("null cid", n.getInheritedCustomerInfo("@CustomerOrderID"), null);
+		n.setType("ProcessGroup", false);
+		final VString v = new VString();
+		v.add("Interpreting");
+		v.add("Rendering");
+
+		for (int i = 0; i < 2; i++) // 0 = now part, 1==part
+		{
+			final JDFNode n2 = n.addCombined(v);
+			final JDFSpawn spawn = new JDFSpawn(n2);
+			final VJDFAttributeMap vMap = new VJDFAttributeMap();
+			vMap.add(new JDFAttributeMap("Side", "Front"));
+
+			final JDFNode spawnedNode = spawn.spawn("thisFile", "spawnFile", null, i == 0 ? null : vMap, true, true, true, true);
+			final String spawnID = spawnedNode.getSpawnID(false);
+			assertNotSame(spawnID, "");
+			final JDFSpawn spawn2 = new JDFSpawn(n2);
+			JDFNode parent = spawn2.unSpawn(null);
+			assertNotNull("did something", parent);
+			final String toString = n.toString();
+			assertTrue(toString.indexOf(spawnID) < 0);
+			assertTrue(toString.indexOf("Spawn") < 0);
+			assertTrue(toString.indexOf("Merge") < 0);
+			parent = spawn2.unSpawn(null);
+			assertNull("nothing left", parent);
+		}
+
+	}
+
+	/**
 	 * test auditpool spawn merge stuff to information in the AncestorPool
 	 * 
 	 */
