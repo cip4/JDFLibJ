@@ -108,7 +108,7 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////
 	// /////////////////////////////////////////////////////
 	/**
-	 * Method testVirtualAmounts.
+	 * Method testReducePartAmounts.
 	 * 
 	 * 
 	 */
@@ -170,6 +170,41 @@ public class JDFAmountPoolTest extends JDFTestCaseBase
 			assertEquals(rl.getActualAmount(map2), 500 + i, 0.01);
 			map2.put("Condition", "Waste");
 			assertEquals(rl.getActualAmount(map2), 50 + i, 0.01);
+		}
+	}
+
+	/**
+	 * Method testVirtualAmounts.
+	 * 
+	 */
+	public void testVirtualAmountsSplit()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		final JDFComponent comp = (JDFComponent) n.addResource("Component", EnumUsage.Output);
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig1");
+		final JDFResourceLink rl = n.getLink(comp, null);
+		for (int i = 0; i < 5; i++)
+		{
+			map.put(EnumPartIDKey.SheetName, "Sheet" + i);
+			comp.getCreatePartition(map, new VString("SignatureName SheetName", " "));
+			rl.setAmount(500 + i, map);
+			final JDFAttributeMap map2 = new JDFAttributeMap(map);
+			for (int j = 0; j < 2; j++)
+			{
+				map2.put("Side", j == 0 ? "Front" : "Back");
+				map2.put("Condition", "Good");
+				rl.setActualAmount(500 + i, map2);
+				map2.put("Condition", "Waste");
+				rl.setActualAmount(50 + i, map2);
+
+				map2.put("Condition", "Good");
+				assertEquals(rl.getActualAmount(map2), 500 + i, 0.01);
+				map2.put("Condition", "Waste");
+				assertEquals(rl.getActualAmount(map2), 50 + i, 0.01);
+			}
+			assertEquals(rl.getAmount(map), 500.0 + i, 0.01);
 		}
 	}
 

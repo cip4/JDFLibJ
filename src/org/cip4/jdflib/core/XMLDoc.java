@@ -191,16 +191,25 @@ public class XMLDoc
 		{
 			throw new JDFException("XMLDoc(Document) null input Document");
 		}
-		else if (document instanceof DocumentJDFImpl)
+		else if (document instanceof XMLDoc)
+		{
+			m_doc = ((XMLDoc) document).getMemberDocument();
+			getCreateXMLDocUserData();
+			if (m_doc == null)
+			{
+				final String s = document.getClass().toString();
+				throw new JDFException("Quite Snafu: null m_doc for class=" + s);
+			}
+		}
+		try
 		{
 			m_doc = (DocumentJDFImpl) document;
 			getCreateXMLDocUserData();
 		}
-		else
+		catch (final Exception e)
 		{
-			final String s = document.getClass().toString();
-			throw new JDFException("XMLDoc(Document) not implemented; class=" + s);
-			// m_doc = new DocumentJDFImpl(document); // does not set all fields
+			final String s = e.toString();
+			throw new JDFException("Snafu: XMLDoc(Document) not implemented; class=" + s);
 		}
 	}
 

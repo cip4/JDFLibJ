@@ -98,6 +98,20 @@ public class JDFParserTest extends JDFTestCaseBase
 	String s;
 	boolean bSearch;
 
+	public static class MyDocImpl extends DocumentJDFImpl
+	{
+
+		/**
+		 * 
+		 */
+		public MyDocImpl()
+		{
+			super();
+			//for debugging
+		}
+		// dummy
+	}
+
 	/**
 	 * check speed of the parser
 	 * 
@@ -218,6 +232,19 @@ public class JDFParserTest extends JDFTestCaseBase
 		assertFalse(f2.canRead());
 		f3.delete();
 
+	}
+
+	/**
+	 * check speed of the parser
+	 * 
+	 */
+	public void testMyDocClass()
+	{
+		JDFParser p = new JDFParser();
+		p.m_DocumentClass = MyDocImpl.class.getName();
+		JDFDoc doc = p.parseString("<JMF/>");
+		assertEquals(doc.getRoot().getLocalName(), "JMF");
+		new JDFDoc(doc.getMemberDocument());
 	}
 
 	/**
