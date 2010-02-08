@@ -344,7 +344,10 @@ public class JDFNodeInfo extends JDFAutoNodeInfo
 		final Node n = getParentNode();
 		if (bDefaultWorkStepID && !hasAttribute(AttributeName.WORKSTEPID))
 		{
-			setWorkStepID("W" + uniqueID(0));
+			if (isResourceRoot())
+				setWorkStepID("W" + uniqueID(0));
+			else
+				setWorkStepID(generateDotID(AttributeName.WORKSTEPID, null));
 		}
 		if (n != null && ElementName.RESOURCEPOOL.equals(n.getLocalName()))
 		{

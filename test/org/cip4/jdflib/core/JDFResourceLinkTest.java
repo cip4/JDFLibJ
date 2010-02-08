@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -285,12 +285,23 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 */
 	public void testGenerateCPI() throws Exception
 	{
-		final JDFDoc d = new JDFDoc(ElementName.JDF);
-		final JDFNode n = d.getJDFRoot();
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
 		n.setVersion(JDFElement.EnumVersion.Version_1_3);
-		final JDFResource r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
-		final JDFResourceLink rl = n.getLink(r, null);
-		assertNull(rl.getCombinedProcessIndex());
+		JDFResource r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		JDFResourceLink rl = n.getLink(r, null);
+		assertNull(" No CPI if no type", rl.getCombinedProcessIndex());
+		rl.generateCombinedProcessIndex();
+		assertNull(" No CPI if no type", rl.getCombinedProcessIndex());
+
+		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setVersion(JDFElement.EnumVersion.Version_1_3);
+		n.setType(EnumType.ProcessGroup);
+		r = n.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, EnumUsage.Input);
+		rl = n.getLink(r, null);
+		assertNull(" No CPI for gray box", rl.getCombinedProcessIndex());
+		rl.generateCombinedProcessIndex();
+		assertNull(" No CPI for gray box", rl.getCombinedProcessIndex());
+
 		n.setCombined(new VString("ImageSetting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
 		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));

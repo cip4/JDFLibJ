@@ -98,8 +98,16 @@ public class JDFParserTest extends JDFTestCaseBase
 	String s;
 	boolean bSearch;
 
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
 	public static class MyDocImpl extends DocumentJDFImpl
 	{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1819514227719688245L;
 
 		/**
 		 * 
@@ -109,7 +117,6 @@ public class JDFParserTest extends JDFTestCaseBase
 			super();
 			//for debugging
 		}
-		// dummy
 	}
 
 	/**
@@ -193,6 +200,8 @@ public class JDFParserTest extends JDFTestCaseBase
 		assertNull("not wellformed ", d);
 		d = parser.parseString("<Foo:JDF/>");
 		assertNull("bad ns ", d);
+		d = parser.parseString("<JDF><a b=\"a");
+		assertNull("bad attribute ", d);
 	}
 
 	/**

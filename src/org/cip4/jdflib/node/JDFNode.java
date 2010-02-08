@@ -2854,12 +2854,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * @param statusDetails
 	 * @return boolean: success or not
 	 */
-	public boolean setPartStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, final String statusDetails)
+	public boolean setPartStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, String statusDetails)
 	{
-		String statusDetailsLocal = statusDetails;
-
 		final EnumNodeStatus stat = getStatus();
-		statusDetailsLocal = StringUtil.getNonEmpty(statusDetailsLocal);
+		statusDetails = StringUtil.getNonEmpty(statusDetails);
 		// 100602 handle nasty combination
 		if (mattr != null && (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
 		{
@@ -2871,9 +2869,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		if (mattr == null || mattr.isEmpty())
 		{
 			setStatus(status);
-			if (statusDetailsLocal != null)
+			if (statusDetails != null)
 			{
-				setStatusDetails(statusDetailsLocal);
+				setStatusDetails(statusDetails);
 			}
 			removeChild(ElementName.STATUSPOOL, null, 0);
 			if (getVersion(true).getValue() >= JDFElement.EnumVersion.Version_1_3.getValue())
@@ -2883,10 +2881,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				{
 					ni.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
 					ni.setNodeStatus(status);
-					if (statusDetailsLocal != null)
+					if (statusDetails != null)
 					{
 						ni.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
-						ni.setNodeStatusDetails(statusDetailsLocal);
+						ni.setNodeStatusDetails(statusDetails);
 					}
 				}
 			}
@@ -2904,7 +2902,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				setStatus(JDFElement.EnumNodeStatus.Pool);
 			}
 
-			statusPool.setStatus(mattr, status, statusDetailsLocal);
+			statusPool.setStatus(mattr, status, statusDetails);
 
 			// this can happen if status = the previous status
 			// just remove the pool and reset the status to the original status
@@ -2912,9 +2910,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (statusPool.numChildElements(ElementName.PARTSTATUS, null) == 0)
 			{
 				setStatus(status);
-				if (statusDetailsLocal != null)
+				if (statusDetails != null)
 				{
-					setStatusDetails(statusDetailsLocal);
+					setStatusDetails(statusDetails);
 				}
 				statusPool.deleteNode();
 			}
@@ -2926,17 +2924,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (getStatus() != JDFElement.EnumNodeStatus.Part)
 			{ // set a decent default status for implicit
 				ni.setNodeStatus(getStatus());
-				if (statusDetailsLocal != null)
+				if (statusDetails != null)
 				{
-					ni.setNodeStatusDetails(statusDetailsLocal);
+					ni.setNodeStatusDetails(statusDetails);
 				}
 			}
 
 			final JDFResource niRoot = ni.getResourceRoot();
 			niRoot.setPartUsage(JDFResource.EnumPartUsage.Implicit);
 			final VElement ve = ni.getPartitionVector(mattr, EnumPartUsage.Explicit);
-			if (ve.isEmpty()) // no preexisting matching partition - attempt to
-			// create it
+			if (ve.isEmpty()) // no preexisting matching partition - attempt to create it
 			{
 				ve.add(niRoot.getCreatePartition(mattr, null));
 			}
@@ -2946,10 +2943,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				ni = (JDFNodeInfo) ve.elementAt(i);
 				ni.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
 				ni.setNodeStatus(status);
-				if (statusDetailsLocal != null)
+				if (statusDetails != null)
 				{
 					ni.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
-					ni.setNodeStatusDetails(statusDetailsLocal);
+					ni.setNodeStatusDetails(statusDetails);
 				}
 			}
 			setStatus(JDFElement.EnumNodeStatus.Part);

@@ -1471,8 +1471,11 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			final JDFNode spawnedNode = spawn.spawn("thisUrl", "newURL", new VString("Component", null), null, false, true, true, true);
 			spawnedNode.getCreateAuditPool().addNotification(null, null, null).appendComment().setText("notification 3 sub");
 			assertTrue("no spawnStatus", spawnedNode.toString().indexOf(AttributeName.SPAWNSTATUS) < 0);
+			final JDFResourceLink nLink = spawnedNode.getMatchingLink(ElementName.NODEINFO, null, 0);
+			assertNull(nLink.getPart(0));
 			final JDFResourceLink cLink = spawnedNode.getMatchingLink(ElementName.COMPONENT, null, 0);
 			assertNotNull(cLink);
+			assertNull(cLink.getPart(0));
 			cLink.setActualAmount(42, null);
 
 			spawnedNode.setStatus(EnumNodeStatus.Part);

@@ -1980,17 +1980,23 @@ public class JDFResource extends JDFElement
 		JDFResource ret = this;
 		final String nodeName = ret.getNodeName();
 
-		final String ns = ret.getNamespaceURI();
 		final int size = Math.min(partIDKeys.size(), m.size());
+		// internal consistency check - if the map can't fit don't even start searching 
 		for (int i = 0; i < size; i++)
 		{
 			final String attName = partIDKeys.get(i);
 			final String attVal = m.get(attName);
 			if (attVal == null)
 			{
-				ret = null;
-				break;
+				return null;
 			}
+		}
+
+		final String ns = ret.getNamespaceURI();
+		for (int i = 0; i < size; i++)
+		{
+			final String attName = partIDKeys.get(i);
+			final String attVal = m.get(attName);
 			ret = (JDFResource) ret.getChildWithAttribute(nodeName, attName, ns, attVal, 0, true);
 			if (ret == null)
 			{
@@ -3228,7 +3234,7 @@ public class JDFResource extends JDFElement
 			addPartIDKey(partType);
 		}
 
-		JDFResource p = getPartition(new JDFAttributeMap(partType, value), EnumPartUsage.Explicit);
+		JDFResource p = getFastPartition(new JDFAttributeMap(partType, value), EnumPartUsage.Explicit);
 		if (p != null)
 		{
 			throw new JDFException("addPartion: adding duplicate partition " + partType + "=" + value);
@@ -4279,6 +4285,7 @@ public class JDFResource extends JDFElement
 			{
 				v.addAll(getPartitionVector(m.elementAt(i), partUsage));
 			}
+			v.unify();
 		}
 		return v;
 
@@ -4934,7 +4941,7 @@ public class JDFResource extends JDFElement
 			// remove partitions
 			for (int i = v.size() - 1; i >= 0; i--)
 			{
-				if (nodeName.equals((v.item(i)).getNodeName()))
+				if (nodeName.equals((v.elementAt(i)).getNodeName()))
 				{
 					v.remove(i);
 				}

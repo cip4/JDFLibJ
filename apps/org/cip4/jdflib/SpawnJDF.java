@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,7 +79,6 @@ package org.cip4.jdflib;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -134,6 +133,10 @@ public class SpawnJDF
 		return exists;
 	}
 
+	/**
+	 * 
+	 * @param argv
+	 */
 	public static void main(final String argv[])
 	{
 		// -i bookintent.jdf -o spawned.jdf -p 4
@@ -220,13 +223,14 @@ public class SpawnJDF
 			{
 				final VJDFAttributeMap vSpawnParts = new VJDFAttributeMap();
 				final JDFAttributeMap part1 = new JDFAttributeMap();
-				final Vector partKeys = StringUtil.tokenize(args.parameter('k'), ",", false);
+				final VString partKeys = StringUtil.tokenize(args.parameter('k'), ",", false);
 				for (int iKey = 1; iKey < partKeys.size(); iKey += 2)
 				{
-					part1.put((String) partKeys.elementAt(iKey - 1), (String) partKeys.elementAt(iKey));
+					part1.put(partKeys.elementAt(iKey - 1), partKeys.elementAt(iKey));
 				}
 
-				vSpawnParts.add(part1);
+				if (part1.size() > 0)
+					vSpawnParts.add(part1);
 				final JDFSpawn spawn = new JDFSpawn(pCut);
 
 				final JDFNode node = spawn.spawn(xmlFile, outFile, vRWResources, vSpawnParts, false, true, true, true);
@@ -262,6 +266,7 @@ public class SpawnJDF
 
 	/**
 	 * @param node
+	 * @param rootIn 
 	 * @return
 	 */
 	private static KElement makeNewJDF(final JDFNode node, final JDFNode rootIn)
@@ -343,6 +348,7 @@ public class SpawnJDF
 	/**
 	 * @param node
 	 * @param rootIn
+	 * @return 
 	 */
 	private static String setProduct(final JDFNode node, final JDFNode rootIn)
 	{
@@ -374,7 +380,7 @@ public class SpawnJDF
 	private static void setProductResources(final KElement product, final JDFNode rootIn)
 	{
 		final VElement prodLinks = rootIn.getResourceLinks(null);
-		final HashMap componentMap = new HashMap();
+		final HashMap<String, String> componentMap = new HashMap<String, String>();
 		for (int i = prodLinks.size() - 1; i >= 0; i--)
 		{
 			final JDFResourceLink rl = (JDFResourceLink) prodLinks.elementAt(i);
@@ -397,7 +403,7 @@ public class SpawnJDF
 			final JDFComponent c = dropItemIntent.getComponent();
 			if (c != null)
 			{
-				final String id = (String) componentMap.get(c.getAttribute("tmp_id", null, ""));
+				final String id = componentMap.get(c.getAttribute("tmp_id", null, ""));
 				if (id != null)
 				{
 					dropItemIntent.setAttribute("ProductRef", id);
@@ -408,9 +414,10 @@ public class SpawnJDF
 	}
 
 	/**
-	 * @param product
-	 * @param rootIn
-	 * @return
+	 * @param newRoot 
+	 * @param rootIn 
+	 * @param resLinks 
+	 * 
 	 */
 	private static void setResources(final KElement newRoot, final JDFNode rootIn, final VElement resLinks)
 	{
@@ -466,6 +473,7 @@ public class SpawnJDF
 
 	/**
 	 * @param leaf
+	 * @param rl 
 	 * @param newLeaf
 	 */
 	private static void setLeafAttributes(final JDFResource leaf, final JDFResourceLink rl, final KElement newLeaf)
@@ -504,6 +512,7 @@ public class SpawnJDF
 
 	/**
 	 * @param r
+	 * @return 
 	 */
 	private static String getClassName(final JDFResource r)
 	{
@@ -529,8 +538,9 @@ public class SpawnJDF
 	}
 
 	/**
-	 * @param newRoot
+	 * @param resourceSet 
 	 * @param rl
+	 * @param linkRoot 
 	 */
 	private static void setLinkAttributes(final KElement resourceSet, final KElement rl, final JDFResource linkRoot)
 	{
@@ -543,7 +553,7 @@ public class SpawnJDF
 		{
 			final JDFResourceLink resLink = (JDFResourceLink) rl;
 			final VElement vCreators = linkRoot.getCreator(EnumUsage.Input.equals(resLink.getUsage()));
-			final Iterator vCreatorsIterator = vCreators.iterator();
+			final Iterator<KElement> vCreatorsIterator = vCreators.iterator();
 			while (vCreatorsIterator.hasNext())
 			{
 				final JDFNode depNode = (JDFNode) vCreatorsIterator.next();

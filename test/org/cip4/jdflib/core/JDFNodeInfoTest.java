@@ -81,10 +81,13 @@ import org.cip4.jdflib.util.JDFDuration;
 /**
  * @author MuchaD
  * 
- *         This implements the first fixture with unit tests for class JDFAudit.
+ *         This implements the first fixture with unit tests for class JDFNodeInfo.
  */
 public class JDFNodeInfoTest extends JDFTestCaseBase
 {
+	/**
+	 * @throws Exception
+	 */
 	public void testDuration() throws Exception
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -98,29 +101,35 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 		{
 			ni.setCleanupDuration(new JDFDuration("PS1L20M30S"));
 			fail("bad duration");
-		} catch (Exception x)
+		}
+		catch (Exception x)
 		{
 			// nop
 		}
 	}
 
 	// ///////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testPartUsage()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
 		JDFNode n = d.getJDFRoot();
 		n.setType("ConventionalPrinting", true);
 		JDFNodeInfo ni = n.getCreateNodeInfo();
-		final JDFAttributeMap map = new JDFAttributeMap(
-				EnumPartIDKey.Separation, "Cyan");
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Separation, "Cyan");
 		n.setPartStatus(map, EnumNodeStatus.Ready, null);
 		JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
 		assertNotNull(niPart);
-		assertNull(niPart.getAttribute_KElement(AttributeName.PARTUSAGE, null,
-				null));
+		assertNull(niPart.getAttribute_KElement(AttributeName.PARTUSAGE, null, null));
 	}
 
 	// ///////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testWorkstepID()
 	{
 		JDFDoc d = new JDFDoc(ElementName.JDF);
@@ -129,19 +138,58 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 		JDFNodeInfo.setDefaultWorkStepID(true);
 		JDFNodeInfo ni = n.getCreateNodeInfo();
 		assertTrue(ni.hasAttribute("WorkStepID"));
-		final JDFAttributeMap map = new JDFAttributeMap(
-				EnumPartIDKey.Separation, "Cyan");
+		final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.Separation, "Cyan");
 		n.setPartStatus(map, EnumNodeStatus.Ready, null);
 		JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
 		assertNotNull(niPart);
 		assertTrue(niPart.hasAttribute("WorkStepID"));
 		d.write2File(sm_dirTestDataTemp + "workstepidtest.jdf", 2, false);
-//		VString v = 
-			ni.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1);
+		//		VString v = 
+		ni.getInvalidAttributes(EnumValidationLevel.Incomplete, true, -1);
 		assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
 
 	}
 
+	/**
+	 * 
+	 */
+	public void testWorkstepIDDotPerformance()
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			JDFDoc d = new JDFDoc(ElementName.JDF);
+			JDFNode n = d.getJDFRoot();
+			n.setType("ConventionalPrinting", true);
+
+			JDFNodeInfo.setDefaultWorkStepID(j == 1);
+			JDFNodeInfo ni = n.getCreateNodeInfo();
+			if (j == 1)
+				assertTrue(ni.hasAttribute("WorkStepID"));
+			else
+				assertFalse(ni.hasAttribute("WorkStepID"));
+			long l = System.currentTimeMillis();
+			for (int i = 0; i < 1000; i++)
+			{
+				final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SheetName, "Sheet" + i);
+				n.setPartStatus(map, EnumNodeStatus.Ready, null);
+				JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
+				assertNotNull(niPart);
+				if (j == 1)
+				{
+					assertTrue(niPart.hasAttribute("WorkStepID"));
+					assertTrue(niPart.getWorkStepID().startsWith(ni.getWorkStepID()));
+				}
+				else
+					assertFalse(niPart.hasAttribute("WorkStepID"));
+			}
+			System.out.println(j + " t: " + (System.currentTimeMillis() - l));
+			//			assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
+		}
+	}
+
+	/**
+	 * 
+	 */
 	// ///////////////////////////////////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////////
 	public void testCPI()

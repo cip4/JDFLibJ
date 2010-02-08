@@ -1502,9 +1502,12 @@ public class JDFSpawn
 			}
 			else
 			{
-				vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+				// always implicit - in the worst case some partitions may be multiply spawned
+				//				vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
+
+				//100208 spawn only as requested - NOT explicit, don't automatically create anything
+				vSubParts = r.getPartitionVector(vSpawnParts, null);
 			}
-			// always implicit - in the worst case some partitions may be multiply spawned
 			for (int k = 0; k < vSubParts.size(); k++)
 			{
 				final JDFResource pLeaf = (JDFResource) vSubParts.item(k);
@@ -1886,7 +1889,7 @@ public class JDFSpawn
 						parent.setStatus(status);
 					}
 				}
-				else
+				else if (localNode != null)
 				{
 					// we either must overwrite because it is now definitely not spawned
 					// or had an explicit correct status in the spawned audit
@@ -1904,6 +1907,17 @@ public class JDFSpawn
 		}
 
 		return localNode;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		String jpID = node == null ? " - " : node.getJobPartID(false);
+		return "[JDFSpawn JobPartID=" + jpID + "\nParts: " + vSpawnParts + "\nRW: " + vRWResources_in;
 	}
 
 }

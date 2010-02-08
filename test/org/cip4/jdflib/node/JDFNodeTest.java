@@ -1680,6 +1680,27 @@ public class JDFNodeTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testGetPartStatusGlobal()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode node = doc.getJDFRoot();
+		node.setStatus(EnumNodeStatus.Spawned);
+		for (int i = -1; i < 2; i++)
+		{
+			assertEquals(node.getPartStatus(null, i), EnumNodeStatus.Spawned);
+			assertEquals(node.getPartStatus(new JDFAttributeMap(), i), EnumNodeStatus.Spawned);
+		}
+		node.setPartStatus(new JDFAttributeMap(), EnumNodeStatus.InProgress, null);
+		for (int i = -1; i < 2; i++)
+		{
+			assertEquals(node.getPartStatus(null, i), EnumNodeStatus.InProgress);
+			assertEquals(node.getPartStatus(new JDFAttributeMap(), i), EnumNodeStatus.InProgress);
+		}
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetPartStatus()
 	{
 		final JDFDoc doc = JDFTestCaseBase.creatXMDoc();

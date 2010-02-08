@@ -3231,7 +3231,7 @@ public class JDFElement extends KElement
 		final int siz = vn.size();
 		parentID += JDFConstants.DOT;
 
-		for (int i = siz; i < 10000; i++)
+		for (int i = siz; i < 2 * siz + 2; i++)
 		{
 			final String nn = parentID + i;
 			boolean bFound = false;

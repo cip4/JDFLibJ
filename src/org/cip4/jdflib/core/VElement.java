@@ -274,7 +274,7 @@ public class VElement extends Vector<KElement>
 		final int size = size();
 		for (int i = 0; i < size; i++)
 		{
-			if (elem.isEqual(item(i)))
+			if (elem.isEqual(elementAt(i)))
 			{
 				return true;
 			}
