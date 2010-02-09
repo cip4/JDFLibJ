@@ -456,16 +456,16 @@ public class ContainerUtil
 	}
 
 	/**
-	 * unify a collection while retaining the initial order (i f the input collection is ordered)
+	 * unify a collection while retaining the initial order (if the input collection is ordered)
 	 * @param <a> the data type of the collection
 	 * @param c the collection to unify
 	 * @return the unified collection - always the input collection
 	 */
 	public static <a> Collection<a> unify(final Collection<a> c)
 	{
-		if (c == null)
+		if (c == null || c.size() < 2)
 		{
-			return null;
+			return c;
 		}
 		final Iterator<a> it = c.iterator();
 		final LinkedHashSet<a> lhsIn = new LinkedHashSet<a>(c.size());
@@ -479,8 +479,11 @@ public class ContainerUtil
 			}
 		}
 
-		c.clear();
-		c.addAll(lhsIn);
+		if (lhsIn.size() < c.size())
+		{
+			c.clear();
+			c.addAll(lhsIn);
+		}
 		return c;
 	}
 }

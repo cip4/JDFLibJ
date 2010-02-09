@@ -1096,12 +1096,12 @@ public class JDFSpawn
 		else
 		// No partitioning - set Audit + Status globally
 		{
-			final EnumNodeStatus status = node.getStatus();
+			final EnumNodeStatus status = node.getPartStatus(null, 0);
 			if (status != null)
 			{
 				spawnAudit.setStatus(status);
 			}
-			node.setStatus(JDFElement.EnumNodeStatus.Spawned);
+			node.setPartStatus((JDFAttributeMap) null, EnumNodeStatus.Spawned, null);
 		}
 	}
 
@@ -1352,8 +1352,12 @@ public class JDFSpawn
 		final String nsURI = r.getNamespaceURI();
 		final VElement identical = new VElement();
 		final VElement vBad = reducePartitions(r, nodeName, nsURI, partIDKeys, 0, new JDFAttributeMap(), identical);
+		vBad.unify();
 		if (identical.size() > 0)
+		{
+			identical.unify();
 			vBad.removeAll(identical);
+		}
 		for (int i = 0; i < vBad.size(); i++)
 		{
 			vBad.get(i).deleteNode();

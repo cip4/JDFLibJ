@@ -699,24 +699,37 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 */
 	public void testSpawnNoPart()
 	{
+		// 0: resources are local, 1 resources ore global
 		for (int i = 0; i < 2; i++)
 		{
-			final JDFDoc doc = new JDFDoc("JDF");
-			JDFNode n = doc.getJDFRoot();
-			n.setType(EnumType.ProcessGroup);
-			if (i == i)
+			// 0: no nodeinfo, 1 with nodeinfo
+			for (int j = 0; j < 2; j++)
 			{
-				n = n.addJDFNode(EnumType.ProcessGroup);
+				final JDFDoc doc = new JDFDoc("JDF");
+				JDFNode n = doc.getJDFRoot();
+				n.setType(EnumType.ProcessGroup);
+				if (i == i)
+				{
+					n = n.addJDFNode(EnumType.ProcessGroup);
+				}
+				final JDFNode n2 = n.addJDFNode(EnumType.ImageSetting);
+				final JDFResource xm = n2.addResource("ExposedMedia", EnumUsage.Input);
+				final JDFResource m = n.addResource("Media", null);
+				xm.refElement(m);
+				JDFNode nodeToSpawn = i == 1 ? n : n2;
+				if (j == 1)
+				{
+					JDFNodeInfo ni = (JDFNodeInfo) nodeToSpawn.addResource("NodeInfo", EnumUsage.Input);
+					ni.setNodeStatus(EnumNodeStatus.Waiting);
+					nodeToSpawn.setStatus(EnumNodeStatus.Part);
+				}
+				final JDFSpawn spawn = new JDFSpawn(nodeToSpawn);
+				final JDFNode si = spawn.spawn();
+				assertNotNull(si.getResourcePool().getElement("Media"));
+				assertEquals(nodeToSpawn.getPartStatus(null, 0), EnumNodeStatus.Spawned);
+				assertEquals(((JDFSpawned) nodeToSpawn.getParentJDF().getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null)).getStatus(), EnumNodeStatus.Waiting);
 			}
-			final JDFNode n2 = n.addJDFNode(EnumType.ImageSetting);
-			final JDFResource xm = n2.addResource("ExposedMedia", EnumUsage.Input);
-			final JDFResource m = n.addResource("Media", null);
-			xm.refElement(m);
-			final JDFSpawn spawn = new JDFSpawn(i == 1 ? n : n2);
-			final JDFNode si = spawn.spawn();
-			assertNotNull(si.getResourcePool().getElement("Media"));
 		}
-
 	}
 
 	/**
@@ -2158,7 +2171,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				else if (spawn != null)
 					spawn.setNode(nodeProc);
 				else
+				{
 					fail("whazzup?");
+					return;
+				}
 
 				final JDFNode nodeSubJDF = spawn.spawn(strJDFPath, null, vsRWResourceIDs, null, true, true, true, true);
 				assertNotNull(nodeSubJDF);
@@ -2217,7 +2233,10 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				else if (spawn != null)
 					spawn.setNode(nodeProc);
 				else
+				{
 					fail("whazzup?");
+					return;
+				}
 				final JDFNode nodeSubJDF = spawn.spawnInformative(strJDFPath, null, null, true, true, true, true);
 				assertNotNull(nodeSubJDF);
 
@@ -2246,7 +2265,6 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFDoc jdfDoc = parser.parseFile(strJDFPath);
 		final JDFNode nodeRoot = jdfDoc.getJDFRoot();
 		JDFNode nodeProc = nodeRoot.getJobPart("Qua0.A", null);
-		final String jobPartID = nodeProc.getJobPartID(false);
 		JDFRunList rlOut = (JDFRunList) nodeProc.getResource("RunList", EnumUsage.Output, 0);
 		VJDFAttributeMap vmap = rlOut.getPartMapVector(false);
 		for (int j = 0; j < 2; j++)
@@ -2263,10 +2281,11 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				vsRWResourceIDs.add("Output");
 				if (i == 0 || j > 2)
 					spawn = new JDFSpawn(nodeProc);
-				//				else if (spawn != null)
-				//					spawn.setNode(nodeProc);
-				//				else
-				//					fail("whazzup?");
+				if (spawn == null)
+				{
+					fail("whazzup?");
+					return;
+				}
 				final JDFNode nodeSubJDF;
 				if (j == 0)
 					nodeSubJDF = spawn.spawnInformative(strJDFPath, null, vMap1, true, true, true, true);
