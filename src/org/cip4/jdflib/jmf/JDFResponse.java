@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -136,6 +136,7 @@ public class JDFResponse extends JDFAutoResponse
 	/**
 	 * inner class EnumClass
 	 */
+	@SuppressWarnings("unchecked")
 	public static final class EnumError extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -164,16 +165,25 @@ public class JDFResponse extends JDFAutoResponse
 			return (EnumError) getEnum(EnumError.class, value);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumError.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumError.class);
 		}
 
+		/**
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumError.class);
@@ -183,6 +193,9 @@ public class JDFResponse extends JDFAutoResponse
 		 * constants EnumError
 		 */
 		public static final EnumError ErrorUnknown = new EnumError("ErrorUnknown");
+		/**
+		 * 
+		 */
 		public static final EnumError ErrorUnknownQuery = new EnumError("ErrorUnknownQuery");
 
 	}

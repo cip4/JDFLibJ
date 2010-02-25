@@ -264,7 +264,7 @@ public class DumpDir
 	 */
 	private void cleanup(final int inc)
 	{
-		if (inc % 100 == 0)
+		if ((inc % 100) == 0)
 		{
 			synchronized (listMap.get(baseDir))
 			{

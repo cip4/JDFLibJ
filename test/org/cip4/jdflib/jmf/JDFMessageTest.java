@@ -132,6 +132,50 @@ public class JDFMessageTest extends TestCase
 	/**
 	 * 
 	 */
+	public void testGetDeviceInfo()
+	{
+		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.Status);
+		assertNull(sig.getDeviceInfo("DevID"));
+		JDFDeviceInfo d1 = sig.getCreateDeviceInfo("DevID");
+		JDFDeviceInfo d2 = sig.getCreateDeviceInfo("DevID2");
+		assertNotNull(d1);
+		assertNotNull(d2);
+		assertNotSame(d1, d2);
+		assertEquals(d2, sig.getDeviceInfo("DevID2"));
+
+		final JDFResponse res = (JDFResponse) jmf.appendMessageElement(EnumFamily.Response, EnumType.Status);
+		assertNull(res.getDeviceInfo("DevID"));
+		JDFDeviceInfo d21 = res.getCreateDeviceInfo("DevID");
+		JDFDeviceInfo d22 = res.getCreateDeviceInfo("DevID2");
+		assertNotNull(d21);
+		assertNotNull(d22);
+		assertNotSame(d21, d22);
+
+		final JDFAcknowledge ack = (JDFAcknowledge) jmf.appendMessageElement(EnumFamily.Acknowledge, EnumType.Status);
+		assertNull(ack.getDeviceInfo("DevID"));
+		JDFDeviceInfo d31 = ack.getCreateDeviceInfo("DevID");
+		JDFDeviceInfo d32 = ack.getCreateDeviceInfo("DevID2");
+		assertNotNull(d31);
+		assertNotNull(d32);
+		assertNotSame(d31, d32);
+
+		final JDFAcknowledge ack2 = (JDFAcknowledge) jmf.appendMessageElement(EnumFamily.Acknowledge, EnumType.Resource);
+
+		try
+		{
+			assertNull(ack2.getDeviceInfo("DevID"));
+			fail("nogo here");
+		}
+		catch (JDFException x)
+		{
+			// nop
+		}
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testAppendValidElementStrictLax()
 	{
 		final JDFSignal sig = (JDFSignal) jmf.appendMessageElement(EnumFamily.Signal, EnumType.UpdateJDF);
@@ -251,7 +295,7 @@ public class JDFMessageTest extends TestCase
 	// /
 
 	/**
-	 * test for the validity checks of KnownSubscriptions
+	 * test for the validity checks of KnownSubscriptions (JDF 1.4)
 	 */
 	public void testKnownSubscriptions()
 	{

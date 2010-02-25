@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-20109 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -193,6 +193,12 @@ public class JDFDeviceInfoTest extends JDFTestCaseBase
 		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendEmployee().setPersonalID("p1");
 		assertTrue(di1.isSamePhase(di2, false));
+
+		di1.appendJobPhase();
+		assertFalse(di1.isSamePhase(di2, false));
+		di2.appendJobPhase();
+		assertTrue(di1.isSamePhase(di2, false));
+
 		di1.appendEmployee().setPersonalID("p2");
 		assertFalse(di1.isSamePhase(di2, false));
 		di2.appendEmployee().setPersonalID("p3");

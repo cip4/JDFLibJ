@@ -12,7 +12,13 @@ import java.io.File;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.JDFSpawn;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -31,10 +37,22 @@ public class TestJDF
 	 */
 	public static void main(final String[] argv)
 	{
-		final JDFDoc d = new JDFParser().parseFile("C:\\httpdump\\CertTest\\MisUrl\\returnJMF\\m00000024.dir\\qe_090714_144713800_855250.jdf");
-		final JDFNode n = d.getJDFRoot();
-		n.getStatusSynch().update();
-		d.write2File("C:\\httpdump\\CertTest\\MisUrl\\returnJMF\\m00000024.dir\\qe_090714_144713800_855250.out.jdf", 2, false);
+		final JDFDoc d = new JDFParser().parseFile("C:\\data\\jdf\\JanHoppe\\prepartRed.jdf");
+		final JDFNode n = d.getJDFRoot().getJobPart("ImO1.I", null);
+		JDFResourceLink rl = n.getLink(0, "Preview", null, null);
+		VElement v = rl.getTargetVector(0);
 
+		JDFSpawn spawn = new JDFSpawn(n);
+		spawn.vRWResources_in = new VString("Preview", null);
+		spawn.vSpawnParts = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap();
+		spawn.vSpawnParts.add(map);
+		map.put("SignatureName", "Sig001");
+		map.put("PartVersion", "NL FR EN");
+		map.put("SheetName", "Omslag_FB 001");
+		map.put("Side", "Front");
+		JDFNode n2 = spawn.spawn();
+		n2.getOwnerDocument_JDFElement().write2File("C:\\data\\jdf\\JanHoppe\\prepartRed_spawn.jdf", 2, false);
+		d.write2File("C:\\data\\jdf\\JanHoppe\\prepartRed_main.jdf", 2, false);
 	}
 }

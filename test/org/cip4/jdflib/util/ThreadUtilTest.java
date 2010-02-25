@@ -106,7 +106,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 
 	// /////////////////////////////////////////////////////////////////////////
 	/**
-	 * @throws Exception x
+	 *  
 	 */
 	public void testWaitTimeout()
 	{

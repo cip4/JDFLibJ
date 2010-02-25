@@ -4005,7 +4005,7 @@ public class JDFElement extends KElement
 	 */
 	public void setVersion(final EnumVersion enumVer)
 	{
-		setAttribute(AttributeName.VERSION, enumVer.getName(), null);
+		setAttribute(AttributeName.VERSION, enumVer == null ? null : enumVer.getName(), null);
 		AttributeInfo.fixedMap.clear();
 		ElementInfo.fixedMap.clear();
 	}
@@ -4379,7 +4379,7 @@ public class JDFElement extends KElement
 	 */
 	public void setSettingsPolicy(final EnumSettingsPolicy value)
 	{
-		setAttribute(AttributeName.SETTINGSPOLICY, value.getName(), null);
+		setAttribute(AttributeName.SETTINGSPOLICY, value == null ? null : value.getName(), null);
 	}
 
 	/**
@@ -4799,13 +4799,13 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 *Sets attribute Status
+	 * Sets attribute Status
 	 * 
 	 * @param s the status to set the attribute to
 	 */
 	public void setStatus(final EnumNodeStatus s)
 	{
-		setAttribute(AttributeName.STATUS, s.getName(), null);
+		setAttribute(AttributeName.STATUS, s == null ? null : s.getName(), null);
 	}
 
 	/**

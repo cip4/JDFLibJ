@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -400,7 +400,9 @@ public class UrlUtil
 	// /////////////////////////////////////////////////////////////////
 
 	/**
-	 * get the filename extension of pathName
+	 * get the filename extension of pathName excluding the '.'
+	 * if no '.' is found, returns null
+	 * if trailing . is found, returns ""
 	 * 
 	 * @param pathName the pathName to get the extension for
 	 * @return String - the filename extension
@@ -868,7 +870,8 @@ public class UrlUtil
 		{
 			return false;
 		}
-		return StringUtils.isAlpha(pathName.substring(0, 1)) && pathName.substring(1, 2).equals(":") || StringUtils.countMatches(pathName, "\\") > StringUtils.countMatches(pathName, "/");
+		return StringUtils.isAlpha(pathName.substring(0, 1)) && pathName.substring(1, 2).equals(":")
+				|| StringUtils.countMatches(pathName, "\\") > StringUtils.countMatches(pathName, "/");
 
 	}
 

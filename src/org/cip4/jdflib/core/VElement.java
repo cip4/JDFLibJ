@@ -264,6 +264,25 @@ public class VElement extends Vector<KElement>
 	}
 
 	/**
+	 * create a all elements of an Array
+	 * @param <a>
+	 * @param l
+	 */
+	public <a extends KElement> void addAll(final a[] l)
+	{
+		if (l == null)
+		{
+			return;
+		}
+		ensureCapacity(size() + l.length);
+		for (int i = 0; i < l.length; i++)
+		{
+			if (l[i] != null)
+				add(l[i]);
+		}
+	}
+
+	/**
 	 * does this contain an equivalent element similar to contains but uses isEqual() instead of equals()
 	 * 
 	 * @param elem the element to look for
@@ -649,6 +668,7 @@ public class VElement extends Vector<KElement>
 	 */
 	public void unifyElement()
 	{
+		unify(); // first do the fast unify since equals implies isEqual
 		int size = size();
 		for (int i = 0; i < size; i++)
 		{

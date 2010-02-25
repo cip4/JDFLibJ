@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
@@ -91,8 +92,10 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
@@ -113,8 +116,9 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
  */
 public class XJDFTest extends JDFTestCaseBase
 {
-	JDFNode n = null;
-	KElement e = null;
+	private JDFNode n = null;
+	private KElement e = null;
+	private JDFAttributeMap sheetMap = null;
 
 	/**
 	* 
@@ -127,6 +131,10 @@ public class XJDFTest extends JDFTestCaseBase
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ConventionalPrinting);
 
+		sheetMap = new JDFAttributeMap();
+		sheetMap.put(EnumPartIDKey.SignatureName, "sig1");
+		sheetMap.put(EnumPartIDKey.SheetName, "s1");
+
 		final JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
 		final JDFResource r2 = r.addPartition(EnumPartIDKey.SignatureName, "sig1");
 		final JDFResource r3 = r2.addPartition(EnumPartIDKey.SheetName, "s1");
@@ -138,6 +146,8 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFColorantControl cc = (JDFColorantControl) n.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
 		cc.getCreateColorantParams().setSeparations(new VString("Spot1 Spot2", null));
 		cc.getCreateColorantOrder().setSeparations(new VString("Cyan Magenta Yellow Black Spot1 Spot2", null));
+		final JDFMedia mPaper = (JDFMedia) n.addResource("Media", EnumUsage.Input);
+		mPaper.setMediaType(EnumMediaType.Paper);
 
 		r3.setProductID("P1");
 		final JDFExposedMedia xm0 = (JDFExposedMedia) r3;
@@ -411,6 +421,29 @@ public class XJDFTest extends JDFTestCaseBase
 		cc.getCreateColorantOrder().setSeparations(new VString("Cyan a b CC", null));
 		e = new XJDF20().makeNewJDF(n, null);
 		assertEquals("Cyan a b CC", e.getXPathAttribute("ParameterSet[@Name=\"ColorantControl\"]/Parameter/ColorantControl/@ColorantOrder", null));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testResourceAudit() throws Exception
+	{
+		JDFMedia m = (JDFMedia) n.getResource("Media", EnumUsage.Input, 0);
+		assertNotNull(m);
+		JDFResourceAudit ra = n.getCreateAuditPool().addResourceAudit("foo");
+		JDFResourceLink rl = ra.addNewOldLink(true, m, EnumUsage.Input);
+		JDFAttributeMap map = new JDFAttributeMap(sheetMap);
+		map.put(AttributeName.CONDITION, "Good");
+		rl.setActualAmount(4200., map);
+		map.put(AttributeName.CONDITION, "Waste");
+		rl.setActualAmount(300., map);
+		ra.setPartMap(sheetMap);
+		e = new XJDF20().makeNewJDF(n, null);
+		JDFAuditPool ap = (JDFAuditPool) e.getElement(ElementName.AUDITPOOL);
+		assertNotNull(ap);
+		JDFResourceAudit raNew = (JDFResourceAudit) ap.getAudit(0, EnumAuditType.ResourceAudit, null, null);
+		assertEquals(raNew.getElement("ResourceAmount").getAttribute("ActualAmountGood"), "4200");
+		assertEquals(raNew.getElement("ResourceAmount").getAttribute("ActualAmountWaste"), "300");
 	}
 
 	/**

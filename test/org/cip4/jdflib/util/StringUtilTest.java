@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -459,6 +459,23 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.newExtension("a.b", "c.d"), "a.c.d");
 		assertEquals(StringUtil.newExtension("a.b.bb", "c.d"), "a.b.c.d");
 		assertEquals(StringUtil.newExtension(".b", ".c"), ".c");
+		assertEquals(StringUtil.newExtension("a", ".c"), "a.c");
+	}
+
+	/**
+	 * 
+	 */
+	public void testNumOccurrences()
+	{
+		assertEquals(StringUtil.numSubstrings("a", "aa"), 0);
+		assertEquals(StringUtil.numSubstrings("aa", "aa"), 1);
+		assertEquals(StringUtil.numSubstrings("aaa", "aa"), 2);
+		assertEquals(StringUtil.numSubstrings("aa a", "aa"), 1);
+		assertEquals(StringUtil.numSubstrings("ab/>", "/>"), 1);
+		assertEquals(StringUtil.numSubstrings("aa a", ""), 0);
+		assertEquals(StringUtil.numSubstrings("aa a", null), 0);
+		assertEquals(StringUtil.numSubstrings(null, "a"), 0);
+		assertEquals(StringUtil.numSubstrings(null, null), 0);
 	}
 
 	/**

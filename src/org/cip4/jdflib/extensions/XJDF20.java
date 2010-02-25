@@ -160,6 +160,10 @@ public class XJDF20 extends BaseElementWalker
 	 * the root node name
 	 */
 	public final static String rootName = "XJDF";
+	/**
+	 * the root JMF name
+	 */
+	public final static String rootJMF = "JMF";
 
 	private final String m_spawnInfo = "SpawnInfo";
 	protected VString resAttribs;
@@ -200,7 +204,7 @@ public class XJDF20 extends BaseElementWalker
 	public KElement makeNewJMF(final JDFJMF jmf)
 	{
 		final KElement root = jmf.getOwnerDocument_JDFElement().clone().getJMFRoot();
-		prepareNewDoc();
+		prepareNewDoc(true);
 		walkTree(root, newRoot);
 		newRoot.eraseEmptyNodes(true);
 		return newRoot;
@@ -225,7 +229,7 @@ public class XJDF20 extends BaseElementWalker
 		}
 		final JDFNode rootIn = node.getJDFRoot();
 		walkingProduct = false;
-		prepareNewDoc();
+		prepareNewDoc(false);
 		walkTree(node, newRoot);
 
 		walkingProduct = true;
@@ -246,11 +250,12 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
+	 * @param bJMF if true, create a jmf
 	 * 
 	 */
-	private void prepareNewDoc()
+	private void prepareNewDoc(boolean bJMF)
 	{
-		final JDFDoc newDoc = new JDFDoc(rootName);
+		final JDFDoc newDoc = new JDFDoc(bJMF ? rootJMF : rootName);
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
 		first = true;
@@ -1405,6 +1410,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	protected class WalkResourceAudit extends WalkAudit
 	{
+		VJDFAttributeMap partMap = null;
 
 		public WalkResourceAudit()
 		{
@@ -1420,6 +1426,7 @@ public class XJDF20 extends BaseElementWalker
 		{
 			final KElement raNew = super.walk(jdf, xjdf);
 			final JDFResourceAudit ra = (JDFResourceAudit) jdf;
+			partMap = ra.getPartMapVector();
 			copyLinkValues(raNew, ra.getNewLink(), "NewRef");
 			copyLinkValues(raNew, ra.getOldLink(), "OldRef");
 
@@ -1434,12 +1441,27 @@ public class XJDF20 extends BaseElementWalker
 		protected void copyLinkValues(final KElement raNew, final JDFResourceLink rl, final String val)
 		{
 			final JDFResource rlRoot = rl == null ? null : rl.getLinkRoot();
-			if (rlRoot != null)
+			if (rlRoot != null && rl != null)
 			{
 				final VElement v = setResource(null, rlRoot, newRoot);
 				for (final KElement kElem : v)
 				{
-					raNew.appendAttribute(val, kElem.getAttribute(AttributeName.ID), null, " ", true);
+					KElement resAmount = raNew.appendElement("ResourceAmount");
+					resAmount.setAttribute("Type", val);
+					resAmount.setAttribute("rRef", kElem.getAttribute(AttributeName.ID));
+					if (partMap == null || partMap.size() == 0)
+					{
+						setAmountPool(rl, resAmount, null);
+					}
+					else
+					{
+						for (int i = 0; i < partMap.size(); i++)
+						{
+							JDFAttributeMap partMap2 = partMap.get(i);
+							setAmountPool(rl, resAmount, partMap2);
+							resAmount.appendElement("Part").setAttributes(partMap2);
+						}
+					}
 				}
 			}
 		}

@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -254,6 +255,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFResponse r = jmf2.appendResponse();
 		final JDFQuery q = jmf.appendQuery();
 		q.setType("KnownMessages");
+		KElement kmp = q.appendKnownMsgQuParams();
 		r.setQuery(q);
 		assertEquals("refID", q.getID(), r.getrefID());
 
@@ -262,6 +264,9 @@ public class JDFJMFTest extends JDFTestCaseBase
 		s.convertResponse(r, q);
 		assertEquals("type", r.getType(), s.getType());
 		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));
+		assertTrue(s.getXSIType().startsWith("Signal"));
+		assertEquals(s.getKnownMsgQuParams(0).getNextSiblingElement(), s.getMessageService(0));
+
 		s = jmf.appendSignal();
 		s.convertResponse(r, null);
 		assertEquals("type", r.getType(), s.getType());

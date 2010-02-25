@@ -358,18 +358,16 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
 	 * @param ni
 	 */
-	public void setIdentifier(final NodeIdentifier ni)
+	public void setIdentifier(NodeIdentifier ni)
 	{
-		NodeIdentifier niLocal = ni;
-
-		if (niLocal == null)
+		if (ni == null)
 		{
-			niLocal = new NodeIdentifier();
+			ni = new NodeIdentifier();
 		}
 
-		setJobID(niLocal.getJobID());
-		setJobPartID(niLocal.getJobPartID());
-		setPartMapVector(niLocal.getPartMapVector());
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+		setPartMapVector(ni.getPartMapVector());
 	}
 
 	private String getInheritedStatusQuParamsAttribute(final String key, final String nameSpaceURI)

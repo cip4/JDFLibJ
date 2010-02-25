@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1683,8 +1683,8 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * append all children in a vector of elements in the order of the vector
-	 * @param v the vector of elements to append
-	 * @param beforeChild the child before which to append the vector
+	 * @param v the vector of elements to append, if null nothing happens
+	 * @param beforeChild the child before which to append the elements of the vector
 	 */
 	public void copyElements(final VElement v, final KElement beforeChild)
 	{
@@ -1692,10 +1692,9 @@ public class KElement extends ElementNSImpl implements Element
 		{
 			return;
 		}
-		final int size = v.size();
-		for (int i = 0; i < size; i++)
+		for (KElement e : v)
 		{
-			copyElement(v.get(i), beforeChild);
+			copyElement(e, beforeChild);
 		}
 	}
 
@@ -3023,8 +3022,8 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		for (int i = 0; i < l1.size(); i++)
 		{
-			final KElement kNode1 = l1.item(i);
-			final KElement kNode2 = l2.item(i);
+			final KElement kNode1 = l1.elementAt(i);
+			final KElement kNode2 = l2.elementAt(i);
 
 			if (!kNode1.isEqual(kNode2))
 			{
@@ -3901,19 +3900,17 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/** 
-	 * copies a node into this
+	 * copies a node into this, ignoring node names
 	 * cleans this first
 	 * @param src
 	 * @param bRemove if true, remove existing information, else retain and overwrite
 	 * @return this
-	 * @throws JDFException if nodenames don't match
+	 * 
 	 */
 	public KElement copyInto(KElement src, boolean bRemove)
 	{
 		if (src == null)
 			return this;
-		if (!getNodeName().equals(src.getNodeName()))
-			throw new JDFException("non matching node names");
 
 		XMLDoc ownerDocument_KElement = getOwnerDocument_KElement();
 		boolean b = ownerDocument_KElement.getInitOnCreate();
@@ -6747,7 +6744,7 @@ public class KElement extends ElementNSImpl implements Element
 	public KElement clone() //throws CloneNotSupportedException
 	{
 		KElement e = new XMLDoc(getNodeName(), getNamespaceURI()).getRoot();
-		e = e.replaceElement(this);
+		e.copyInto(this, false);
 		return e;
 
 	}

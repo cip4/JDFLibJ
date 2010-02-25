@@ -1506,11 +1506,52 @@ public class JDFMessage extends JDFAutoMessage
 	 * get iSkip'th element <code>DeviceInfo</code>
 	 * 
 	 * @param iSkip number of elements to skip
-	 * @return JDFDeviceInfo: the elment
+	 * @return JDFDeviceInfo: the element
 	 */
 	public JDFDeviceInfo getDeviceInfo(final int iSkip)
 	{
 		return (JDFDeviceInfo) getValidElement(ElementName.DEVICEINFO, null, iSkip);
+	}
+
+	/**
+	 * get a matching deviceInfo for a given DeviceID
+	 * 
+	 * @param deviceID the deviceID of the device to get
+	 * @return 
+	 */
+	public JDFDeviceInfo getDeviceInfo(String deviceID)
+	{
+		if (strictValidation && !isValidMessageElement(ElementName.DEVICEINFO, 0))
+		{
+			throw new JDFException("getValidElement: illegal element :" + ElementName.DEVICEINFO);
+		}
+		JDFDeviceInfo d = (JDFDeviceInfo) getChildWithAttribute(ElementName.DEVICEINFO, AttributeName.DEVICEID, null, deviceID, 0, true);
+		if (d == null)
+		{
+			JDFDevice dev = (JDFDevice) getChildWithAttribute(ElementName.DEVICE, AttributeName.DEVICEID, null, deviceID, 0, false);
+			if (dev != null)
+			{
+				d = (JDFDeviceInfo) dev.getParentNode_KElement();
+			}
+		}
+		return d;
+	}
+
+	/**
+	 * get a matching deviceInfo for a given DeviceID, create it if it does not exist
+	 * 
+	 * @param deviceID the deviceID of the device to get
+	 * @return 
+	 */
+	public JDFDeviceInfo getCreateDeviceInfo(String deviceID)
+	{
+		JDFDeviceInfo d = getDeviceInfo(deviceID);
+		if (d == null)
+		{
+			d = appendDeviceInfo();
+			d.setDeviceID(deviceID);
+		}
+		return d;
 	}
 
 	// ////////////////////////////////////////////////////////////////////

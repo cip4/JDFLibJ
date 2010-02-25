@@ -599,14 +599,16 @@ public class JDFQueue extends JDFAutoQueue
 	 * matching deviceID are ignored the status of the QueueEntry MUST be waiting
 	 * 
 	 * proxy and represents previously submitted jobs as waiting
-	 * @param cb 
+	 * @param cb
 	 * 
 	 * @return the executable queueEntry, null if none is available
 	 */
 	public synchronized JDFQueueEntry getNextExecutableQueueEntry(ExecuteCallback cb)
 	{
 		if (cb == null)
+		{
 			cb = executeCallback;
+		}
 
 		JDFQueueEntry theEntry = null;
 
@@ -737,7 +739,7 @@ public class JDFQueue extends JDFAutoQueue
 
 					qe.deleteNode();
 				}
-				else if (qe.isCompleted())
+				else if (maxCompletedEntries >= 0 && qe.isCompleted())
 				{
 					if (nBad++ >= maxCompletedEntries)
 					{
@@ -821,7 +823,7 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	private boolean maxRunning()
 	{
-		return numEntries(EnumQueueEntryStatus.Running) >= maxRunningEntries;
+		return maxRunningEntries > 0 && numEntries(EnumQueueEntryStatus.Running) >= maxRunningEntries;
 	}
 
 	/**
@@ -829,7 +831,7 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	private boolean maxWaiting()
 	{
-		return numEntries(EnumQueueEntryStatus.Waiting) >= maxWaitingEntries;
+		return maxWaitingEntries > 0 && numEntries(EnumQueueEntryStatus.Waiting) >= maxWaitingEntries;
 	}
 
 	/**

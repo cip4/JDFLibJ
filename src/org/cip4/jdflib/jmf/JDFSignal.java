@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -169,6 +169,17 @@ public class JDFSignal extends JDFAutoSignal
 		{
 			return false;
 		}
+		// 100223 Swapped query and response so that query is in front of response
+		setResponseDetails(response);
+		setQueryDetails(response, q);
+		return true;
+	}
+
+	/**
+	 * @param response
+	 */
+	private void setResponseDetails(final JDFResponse response)
+	{
 		setAttributes(response);
 		final VElement elements = response.getChildElementVector(null, null, null, true, 0, true);
 		for (int i = 0; i < elements.size(); i++)
@@ -176,9 +187,18 @@ public class JDFSignal extends JDFAutoSignal
 			final JDFElement element = (JDFElement) elements.elementAt(i);
 			copyElement(element, null);
 		}
+	}
+
+	/**
+	 * @param response
+	 * @param q
+	 */
+	private void setQueryDetails(final JDFResponse response, final JDFQuery q)
+	{
 		if (q != null)
 		{
 			final VElement v = q.getChildElementVector(null, null, null, true, 0, true);
+			KElement k0 = getFirstChildElement();
 			for (int i = 0; i < v.size(); i++)
 			{
 				final KElement item = v.item(i);
@@ -186,7 +206,7 @@ public class JDFSignal extends JDFAutoSignal
 				{
 					continue;
 				}
-				copyElement(item, null);
+				copyElement(item, k0);
 			}
 			setQuery(q);
 		}
@@ -195,6 +215,5 @@ public class JDFSignal extends JDFAutoSignal
 			setType(response.getEnumType());
 			copyAttribute(AttributeName.REFID, response);
 		}
-		return true;
 	}
 }

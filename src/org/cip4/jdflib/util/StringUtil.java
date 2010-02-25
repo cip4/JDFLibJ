@@ -206,6 +206,8 @@ public class StringUtil
 			"And the Lord spake, saying, 'First shalt thou take out the Holy Pin. Then, shalt thou count to three, no more, no less. Three shalt be the number thou shalt count, and the number of the counting shall be three. Four shalt thou not count, nor either count thou two, excepting that thou then proceed to three. Five is right out. Once the number three, being the third number, be reached, then lobbest thou thy Holy Hand Grenade of Antioch towards thy foe, who, being naughty in my sight, shall snuff it.",
 			"The slightest thought hadn't even begun to speculate about the merest possibility of crossing my mind.",
 			"Right, Baldrick, let's try again, shall we? This is called adding. If I have two beans, and then I add two more beans, what do I have?\nSome beans.\nYes...and no. Let's try again, shall we? I have two beans, then I add two more beans. What does that make?\nA very small casserole.\nBaldrick, the ape creatures of the Indus have mastered this. Now try again. One, two, three, four. So how many are there?\nThree\nWhat?\nAnd that one.\nThree and that one. So if I add that one to the three what will I have?\nOh! Some beans.\nYes. To you Baldrick, the Renaissance was just something that happened to other people wasn't it?",
+			"It's got a cop motor, a 440 cubic inch plant, it's got cop tires, cop suspensions, cop shocks. It's a model made before catalytic converters so it'll run good on regular gas. What do you say, is it the new Bluesmobile or what?",
+			"It's 106 miles to Chicago, we got a full tank of gas, half a pack of cigarettes, it's dark, and we're wearing sunglasses. ",
 			"Ich bin der Geist, der stets verneint! Und das mit Recht; denn alles, was entsteht,  Ist wert, daß es zugrunde geht;  Drum besser wär's, daß nichts entstünde.  So ist denn alles, was ihr Sünde,  Zerstörung, kurz das Böse nennt,  Mein eigentliches Element." };
 
 	/**
@@ -573,7 +575,6 @@ public class StringUtil
 	 */
 	public static VString tokenize(final String strWork, String delim, final boolean delim2token)
 	{
-
 		delim = delim == null ? JDFConstants.BLANK : delim;
 		final VString v = new VString();
 		if (strWork != null)
@@ -1358,9 +1359,33 @@ public class StringUtil
 					p0 = posToken1 + 1;
 				}
 			}
-
 		}
 		return -1;
+	}
+
+	/**
+	 * counts the number of occurrences of subString in String
+	 * the total number of occurrences is counted, e.g "aaa" contains "aa" twice
+	 * @param strWork
+	 * @param subString
+	 * @return the number of occurrences
+	 */
+	static public int numSubstrings(final String strWork, final String subString)
+	{
+		if (strWork == null || subString == null || subString.length() == 0)
+			return 0;
+		int n = 0;
+		int pos = 0;
+		while (pos >= 0)
+		{
+			pos = strWork.indexOf(subString, pos);
+			if (pos >= 0)
+			{
+				n++;
+				pos++;
+			}
+		}
+		return n;
 	}
 
 	/**

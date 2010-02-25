@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,10 +80,11 @@ package org.cip4.jdflib.jmf;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoSubscriptionInfo;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
 //----------------------------------
 /**
- * specifies the message families to include in the response list of a KnownMessage query
+ * specifies the message families to include in the response list of a KnownSubscriptions query
  */
 public class JDFSubscriptionInfo extends JDFAutoSubscriptionInfo
 {
@@ -123,5 +124,22 @@ public class JDFSubscriptionInfo extends JDFAutoSubscriptionInfo
 	public JDFSubscriptionInfo(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+	}
+
+	/**
+	 * @return the JDFMessage.EnumType from MessageType
+	 */
+	public EnumType getEnumType()
+	{
+		String s = getMessageType();
+		return EnumType.getEnum(s);
+	}
+
+	/**
+	 * @param typ the JDFMessage.EnumType from MessageType
+	 */
+	public void setMessageType(EnumType typ)
+	{
+		setMessageType(typ == null ? null : typ.getName());
 	}
 }

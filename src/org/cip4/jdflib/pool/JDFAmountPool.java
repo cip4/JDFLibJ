@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -713,7 +713,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 	}
 
 	/**
-	 * Get a PartAmount that fits to the filter defined by mPart
+	 * Get a PartAmount that fits to the filter defined by vPart
 	 * 
 	 * @param vPart filter for the part to set the status
 	 * @return the PartAmount that fits

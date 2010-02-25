@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,6 +75,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 
 /**
@@ -101,6 +102,29 @@ public class VElementTest extends JDFTestCaseBase
 		v.addAll(v);
 		assertEquals(v.size(), 4);
 
+	}
+
+	/**
+	 * 
+	 */
+	public void testAddAllArray()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement e = d.getRoot();
+		final VElement v = new VElement();
+		v.addAll((VElement) null);
+		assertEquals(v.size(), 0);
+		v.add(e);
+		assertEquals(v.size(), 1);
+		KElement[] k = new KElement[4];
+		k[0] = e;
+		k[1] = e.appendElement("b");
+		k[2] = e.appendElement("c");
+
+		v.addAll((JDFJMF[]) null);
+		assertEquals(v.size(), 1);
+		v.addAll(k);
+		assertEquals("null 4the element is ignored...", v.size(), 4);
 	}
 
 	/**
@@ -233,6 +257,58 @@ public class VElementTest extends JDFTestCaseBase
 		assertEquals(v.size(), 2);
 		v.unifyElement();
 		assertEquals(v.size(), 1);
+	}
+
+	/**
+	 * 
+	 */
+	public void testUnifyElement()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement e = d.getRoot();
+		final VElement v = new VElement();
+		for (int i = 0; i < 100; i++)
+		{
+			KElement e1 = e.appendElement("e1");
+			e1.setAttribute("a", "b");
+			v.add(e1);
+			KElement e2 = e.appendElement("e1");
+			e1.setAttribute("a", "c");
+			v.add(e2);
+			KElement e3 = e.appendElement("e3");
+			e1.setAttribute("a", "c");
+			v.add(e3);
+		}
+		v.unify();
+		assertEquals(v.size(), 300);
+		v.unifyElement();
+		assertEquals(v.size(), 3);
+	}
+
+	/**
+	 * 
+	 */
+	public void testUnifyElementPerformance()
+	{
+		JDFDoc dBDoc = creatXMDoc();
+
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement e = d.getRoot();
+		final VElement v = new VElement();
+		long t00 = System.currentTimeMillis();
+		for (int i = 0; i < 1000; i++)
+		{
+			KElement newRoot = dBDoc.clone().getRoot();
+			e.copyElement(newRoot, null);
+			v.add(newRoot);
+		}
+		System.out.println("t00: " + (System.currentTimeMillis() - t00));
+		v.unify();
+		assertEquals(v.size(), 1000);
+		long t0 = System.currentTimeMillis();
+		v.unifyElement();
+		assertEquals(v.size(), 1);
+		System.out.println("t: " + (System.currentTimeMillis() - t0));
 	}
 
 	// ///////////////////////////////////////////

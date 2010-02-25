@@ -332,7 +332,7 @@ public class ContainerUtil
 	}
 
 	/**
-	 * create a Vector of entry values from a map
+	 * create a Vector copy of entry values from a map
 	 * @param <a> data type of the map key
 	 * @param <b> data type of the map value
 	 * @param m the map to dump to an array
@@ -347,20 +347,13 @@ public class ContainerUtil
 
 		synchronized (m)
 		{
-			final Set<Entry<a, b>> entrySet = m.entrySet();
-			if (entrySet.size() == 0)
+			Vector<b> v = new Vector<b>();
+			final Collection<b> values = m.values();
+			if (values.size() == 0)
 			{
 				return null;
 			}
-			final Vector<b> v = new Vector<b>();
-			v.ensureCapacity(entrySet.size());
-			final Iterator<Entry<a, b>> it = entrySet.iterator();
-
-			while (it.hasNext())
-			{
-				v.add(it.next().getValue());
-			}
-
+			v.addAll(values);
 			return v;
 		}
 	}

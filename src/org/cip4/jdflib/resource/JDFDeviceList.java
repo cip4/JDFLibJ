@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,16 +86,19 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.w3c.dom.DOMException;
 
+/**
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFDeviceList extends JDFAutoDeviceList
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFDeviceList
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
 	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
@@ -104,10 +107,10 @@ public class JDFDeviceList extends JDFAutoDeviceList
 
 	/**
 	 * Constructor for JDFDeviceList
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
 	 * @throws DOMException
 	 */
 	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
@@ -119,12 +122,12 @@ public class JDFDeviceList extends JDFAutoDeviceList
 
 	/**
 	 * Constructor for JDFDeviceList
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
-	 * @throws DOMException
 	 */
 	public JDFDeviceList(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
@@ -143,9 +146,10 @@ public class JDFDeviceList extends JDFAutoDeviceList
 	}
 
 	/**
-	 * get a matching device for a given DeviceID
+	 * get a matching deviceInfo for a given DeviceID
 	 * 
 	 * @param deviceID the deviceID of the device to get
+	 * @return 
 	 */
 	public JDFDeviceInfo getDeviceInfo(String deviceID)
 	{
@@ -162,9 +166,10 @@ public class JDFDeviceList extends JDFAutoDeviceList
 	}
 
 	/**
-	 * get a matching device for a given DeviceID, create it if it does not exist
+	 * get a matching deviceInfo for a given DeviceID, create it if it does not exist
 	 * 
 	 * @param deviceID the deviceID of the device to get
+	 * @return 
 	 */
 	public JDFDeviceInfo getCreateDeviceInfo(String deviceID)
 	{

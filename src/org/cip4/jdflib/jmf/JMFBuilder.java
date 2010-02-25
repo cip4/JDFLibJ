@@ -308,6 +308,21 @@ public class JMFBuilder
 	}
 
 	/**
+	 * build a JMF KnownSubscriptions query
+	 * @param url the url of the subscription - typically the sender of the message
+	 * @param slaveQEID the queuentryID at the slave
+	 * @return the message
+	 */
+	public JDFJMF buildKnownSubscriptionsQuery(String url, String slaveQEID)
+	{
+		JDFQuery q = createQuery(JDFMessage.EnumType.KnownSubscriptions);
+		JDFSubscriptionFilter sf = q.appendSubscriptionFilter();
+		sf.setURL(url);
+		sf.setQueueEntryID(slaveQEID);
+		return q.getJMFRoot();
+	}
+
+	/**
 	 * build a JMF Knownmessages query
 	 * @return the message
 	 */
