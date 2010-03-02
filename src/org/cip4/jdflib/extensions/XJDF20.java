@@ -1290,6 +1290,7 @@ public class XJDF20 extends BaseElementWalker
 			final KElement eNew = bMerge ? xjdf : xjdf.appendElement(jdf.getNodeName(), jdf.getNamespaceURI());
 
 			eNew.setAttributes(jdf);
+			eNew.setText(jdf.getText());
 			removeUnused(eNew);
 			return eNew;
 		}

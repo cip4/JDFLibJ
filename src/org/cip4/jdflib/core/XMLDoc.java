@@ -1354,9 +1354,7 @@ public class XMLDoc
 	 */
 	protected XMLDocUserData getXMLDocUserData()
 	{
-		final XMLDocUserData userData = (XMLDocUserData) m_doc.getUserData();
-
-		return userData;
+		return m_doc.getMyUserData();
 	}
 
 	/**
@@ -1366,26 +1364,17 @@ public class XMLDoc
 	 */
 	protected boolean hasXMLDocUserData()
 	{
-		final XMLDocUserData userData = (XMLDocUserData) m_doc.getUserData();
-
-		return userData != null;
+		return m_doc.getMyUserData() != null;
 	}
 
 	/**
-	 * get/create the associated XMLDocUserData
+	 * get/create the associated XMLDocUserData - it is always there!
 	 * 
 	 * @return the XMLDocUserData of this
 	 */
 	public XMLDocUserData getCreateXMLDocUserData()
 	{
-		XMLDocUserData userData = (XMLDocUserData) m_doc.getUserData();
-		if (userData == null)
-		{
-			userData = new XMLDocUserData();
-			m_doc.setUserData(userData);
-		}
-
-		return userData;
+		return m_doc.getMyUserData();
 	}
 
 	/**

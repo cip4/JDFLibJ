@@ -2011,7 +2011,7 @@ public class StringUtil
 	 */
 	public static double parseDouble(String s, final double def)
 	{
-		if (KElement.isWildCard(s))
+		if (s == null)
 		{
 			return def;
 		}
@@ -2057,7 +2057,7 @@ public class StringUtil
 	 */
 	public static boolean parseBoolean(String s, final boolean def)
 	{
-		if (KElement.isWildCard(s))
+		if (s == null)
 		{
 			return def;
 		}
@@ -2087,7 +2087,7 @@ public class StringUtil
 	public static int parseInt(String s, final int def)
 	{
 
-		if (KElement.isWildCard(s))
+		if (s == null)
 		{
 			return def;
 		}
@@ -2142,7 +2142,7 @@ public class StringUtil
 	 */
 	public static long parseLong(String s, final long def)
 	{
-		if (KElement.isWildCard(s))
+		if (s == null)
 		{
 			return def;
 		}

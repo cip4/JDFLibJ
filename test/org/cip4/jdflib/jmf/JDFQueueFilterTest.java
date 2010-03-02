@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -69,6 +69,8 @@
  * 
  */
 package org.cip4.jdflib.jmf;
+
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
@@ -147,6 +149,22 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryID(), "q1");
 		assertEquals(matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Removed);
 		assertNull(matchedQueue.getQueueEntry(1));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testGetStatusList() throws Exception
+	{
+		Vector<EnumQueueEntryStatus> vs = new Vector<EnumQueueEntryStatus>();
+		vs.add(EnumQueueEntryStatus.Completed);
+		vs.add(EnumQueueEntryStatus.Aborted);
+		filter.setStatusList(vs);
+
+		Vector<EnumQueueEntryStatus> statusList = filter.getStatusList();
+		assertTrue(statusList.contains(EnumQueueEntryStatus.Completed));
+		assertTrue(statusList.contains(EnumQueueEntryStatus.Aborted));
+		assertFalse(statusList.contains(EnumQueueEntryStatus.Running));
 	}
 
 	/**
@@ -243,4 +261,37 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertEquals("Sort time <4 seconds", 2000, (l2 - l1), 2000);
 	}
 
+	/**
+	 * 
+	 */
+	public void testCopyTo()
+	{
+		theQueue.setAutomated(false);
+		for (int i = 0; i < 12000; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryID("q" + i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+		}
+		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+		JDFQueueEntry queueEntryLast = qLast.getQueueEntry(333);
+		JDFQueueEntry queueEntryNew = theQueue.getQueueEntry(333);
+		queueEntryLast.setPriority(100);
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+
+		final long l1 = System.currentTimeMillis();
+		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+		final long l2 = System.currentTimeMillis();
+		assertEquals("copy time <1 second", 1000, (l2 - l1), 1000);
+		assertEquals(qCopy.numEntries(null), 1);
+		assertTrue(qCopy.getQueueEntry(0).isEqual(queueEntryNew));
+
+		filter.setMaxEntries(0);
+		JDFQueue copy = filter.copy(theQueue, null, null);
+		assertNull(copy.getQueueEntry(0));
+		filter.setMaxEntries(100);
+		copy = filter.copy(theQueue, null, null);
+		assertEquals(copy.numChildElements(ElementName.QUEUEENTRY, null), 100);
+	}
 }

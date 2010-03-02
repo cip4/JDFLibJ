@@ -231,6 +231,7 @@ import org.cip4.jdflib.span.JDFEnumerationSpanTest;
 import org.cip4.jdflib.span.JDFSpanBaseTest;
 import org.cip4.jdflib.util.BiHashMapTest;
 import org.cip4.jdflib.util.ByteArrayIOStreamTest;
+import org.cip4.jdflib.util.CPUTimerTest;
 import org.cip4.jdflib.util.ContainerUtilTest;
 import org.cip4.jdflib.util.EnumUtilTest;
 import org.cip4.jdflib.util.FastFiFoTest;
@@ -466,6 +467,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(BiHashMapTest.class);
 		suite.addTestSuite(ByteArrayIOStreamTest.class);
 		suite.addTestSuite(ContainerUtilTest.class);
+		suite.addTestSuite(CPUTimerTest.class);
 		suite.addTestSuite(EnumUtilTest.class);
 		suite.addTestSuite(FastFiFoTest.class);
 		suite.addTestSuite(FileUtilTest.class);

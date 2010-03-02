@@ -86,6 +86,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 
 //----------------------------------
@@ -140,17 +141,34 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 	}
 
 	/**
+	 * @deprecated use 3 parameter version
+	 * @param theQueue
+	 * @param responseIn
+	 * @return
+	 */
+	@Deprecated
+	public JDFResponse addEntry(final JDFQueue theQueue, final JDFJMF responseIn)
+	{
+		return addEntry(theQueue, responseIn, null);
+	}
+
+	/**
 	 * add a queueentry to a queue based on the parameters of this you can get the new queueentry by getQueueEntry(0) on the response
 	 * 
 	 * @param theQueue the queue to submit to, note that the queue IS modified by this call
 	 * @param responseIn the jmf that serves as a container for the new response
+	 * @param filter  the filter to apply
 	 * 
 	 * @return the response jmf to the submission message
 	 */
-	public JDFResponse addEntry(final JDFQueue theQueue, final JDFJMF responseIn)
+	public JDFResponse addEntry(final JDFQueue theQueue, final JDFJMF responseIn, JDFQueueFilter filter)
 	{
 		final JDFCommand command = (JDFCommand) getParentNode_KElement();
 		final JDFJMF jmf = command.createResponse();
+		if (filter == null)
+		{
+			filter = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
+		}
 		JDFResponse resp = jmf.getResponse(0);
 		if (responseIn != null)
 		{
@@ -166,13 +184,16 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 		if (!theQueue.canAccept())
 		{
 			resp.setReturnCode(112); //  
-			resp.copyElement(theQueue, null);
+			theQueue.copyToResponse(resp, filter, null);
 			return resp;
 		}
+		boolean bAuto = theQueue.isAutomated();
+		if (bAuto)
+			theQueue.setAutomated(false);
+
 		final JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
 
-		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME };
-
+		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY };
 		for (int i = 0; i < copyAtts.length; i++)
 		{
 			if (hasAttribute(copyAtts[i]))
@@ -181,16 +202,18 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
 			}
 		}
 
-		// TODO more attributes e.g prev. next...
-		if (hasAttribute(AttributeName.PRIORITY))
+		if (bAuto)
 		{
-			qe.setPriority(getPriority()); // calls the automated function,
-			// therefore not in the list above
+			theQueue.sortChild(qe);
+			theQueue.setAutomated(true);
 		}
 
-		resp.copyElement(theQueue, null);
+		JDFDoc ownerDocumentResp = resp.getOwnerDocument_JDFElement();
+		boolean b = ownerDocumentResp.getInitOnCreate();
+		ownerDocumentResp.setInitOnCreate(false);
+		theQueue.copyToResponse(resp, filter, null);
 		resp.copyElement(qe, null);
-
+		ownerDocumentResp.setInitOnCreate(b);
 		return resp;
 	}
 

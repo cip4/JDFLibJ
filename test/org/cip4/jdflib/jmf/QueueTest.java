@@ -106,11 +106,15 @@ public class QueueTest extends TestCase
 			final int t = 1000 * iThread++;
 			for (int i = 0; i < 100; i++)
 			{
-				final JDFQueueEntry qe = q.appendQueueEntry();
-				qe.setQueueEntryID("q" + t + "_" + i);
-				qe.setPriority((i * 7) % 100);
-				qe.setQueueEntryStatus((t % 2000 == 0) ? EnumQueueEntryStatus.Waiting : EnumQueueEntryStatus.Held);
+				synchronized (q)
+				{
+					final JDFQueueEntry qe = q.appendQueueEntry();
+					qe.setQueueEntryID("q" + t + "_" + i);
+					qe.setPriority((i * 7) % 100);
+					qe.setQueueEntryStatus((t % 2000 == 0) ? EnumQueueEntryStatus.Waiting : EnumQueueEntryStatus.Held);
+				}
 			}
+			ThreadUtil.sleep(44);
 			iThread--;
 		}
 	}
@@ -249,6 +253,7 @@ public class QueueTest extends TestCase
 	{
 		q.setAutomated(true);
 		q.setMaxWaitingEntries(1);
+		q.setMaxRunningEntries(1);
 		assertEquals(q.getQueueStatus(), EnumQueueStatus.Full);
 		q.flushQueue(null);
 		assertEquals(q.getQueueStatus(), EnumQueueStatus.Waiting);
@@ -318,7 +323,7 @@ public class QueueTest extends TestCase
 	/**
 	 * 
 	 */
-	public void testPerformance()
+	public void testSortPerformance()
 	{
 		q.setAutomated(false);
 		for (int i = 0; i < 10000; i++)
@@ -336,9 +341,30 @@ public class QueueTest extends TestCase
 	/**
 	 * 
 	 */
+	public void testSortCompleted()
+	{
+		q.removeChildren(null, null, null);
+		q.setAutomated(true);
+		q.setMaxCompletedEntries(10);
+		for (int i = 0; i < 5; i++)
+		{
+			final JDFQueueEntry qe = q.appendQueueEntry();
+			qe.setQueueEntryID("q" + i);
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.Completed);
+			JDFDate d = new JDFDate(System.currentTimeMillis() + i * 1000000);
+			qe.setEndTime(d);
+		}
+		assertTrue(q.getQueueEntry(2).getEndTime().isEarlier(q.getQueueEntry(1).getEndTime()));
+	}
+
+	/**
+	 * 
+	 */
 	public void testThreads()
 	{
 		q.setAutomated(true);
+		q.sortChildren();
 		q.removeChildren(ElementName.QUEUEENTRY, null, null);
 		q.setMaxCompletedEntries(999999999);
 		for (int i = 0; i < 10; i++)
@@ -373,8 +399,9 @@ public class QueueTest extends TestCase
 		for (int i = 0; i < v.size(); i++)
 		{
 			final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-			System.out.println(qe.getPriority() + " " + qe.getQueueEntryID() + " " + qe.getQueueEntryStatus());
-			assertTrue(qe.compareTo(qeLast) >= 0);
+			System.out.println(i + " " + qe.getPriority() + " " + qe.getQueueEntryID() + " " + qe.getQueueEntryStatus());
+			boolean b = qe.compareTo(qeLast) >= 0;
+			assertTrue(b);
 			qeLast = qe;
 		}
 
@@ -477,6 +504,7 @@ public class QueueTest extends TestCase
 	public void testExecuteCallBack()
 	{
 		q.setQueueStatus(EnumQueueStatus.Waiting);
+		q.sortChildren();
 		q.setExecuteCallback(new TestCanExecute("d1", null));
 		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		q.getQueueEntry("qe4").setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
@@ -500,6 +528,7 @@ public class QueueTest extends TestCase
 	{
 		assertNull(q.getNextExecutableQueueEntry());
 		q.setMaxRunningEntries(2);
+		q.sortChildren();
 		assertEquals(q.getNextExecutableQueueEntry(), q.getQueueEntry("qe2"));
 		q.setQueueStatus(EnumQueueStatus.Held);
 		assertNull(q.getNextExecutableQueueEntry());
@@ -571,6 +600,7 @@ public class QueueTest extends TestCase
 		super.setUp();
 		final JDFDoc doc = new JDFDoc(ElementName.QUEUE);
 		q = (JDFQueue) doc.getRoot();
+		q.setMaxRunningEntries(1);
 		JDFQueueEntry qe = q.appendQueueEntry();
 		qe.setQueueEntryID("qe1");
 		qe.setJobID("j1");

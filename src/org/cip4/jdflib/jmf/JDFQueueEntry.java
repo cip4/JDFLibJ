@@ -116,7 +116,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	public static class QueueEntryComparator implements Comparator
 	{
 		/**
-		 * 
+		 * getEnum is too slow for heavily repetitive calls
 		 */
 		public QueueEntryComparator()
 		{
@@ -161,9 +161,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 				final JDFQueueEntry q2 = (JDFQueueEntry) o2;
 				final MyInteger m1 = fastStat.get(q1.getAttribute(AttributeName.STATUS, null, null));
 				final MyInteger m2 = fastStat.get(q2.getAttribute(AttributeName.STATUS, null, null));
-				// EnumQueueEntryStatus status2 = q2.getQueueEntryStatus();
+
 				int s1 = (m1 == null) ? 0 : m1.i;
-				// int s2 = (status2 == null) ? 0 : status2.getValue();
+
 				int s2 = (m2 == null) ? 0 : m2.i;
 				if (s1 != s2)
 				{
@@ -171,11 +171,11 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 				}
 				if (q1.isCompleted())
 				{
-					final JDFDate d1 = q1.getEndTime();
-					final JDFDate d2 = q1.getEndTime();
+					final String d1 = q1.getAttribute(AttributeName.ENDTIME, null, null);
+					final String d2 = q2.getAttribute(AttributeName.ENDTIME, null, null);
 					if (d1 != null && d2 != null)
 					{
-						return d1.compareTo(d2);
+						return d2.compareTo(d1);
 					}
 				}
 				else
@@ -188,16 +188,16 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 					}
 				}
 
-				JDFDate d1 = q1.getStartTime();
-				JDFDate d2 = q2.getStartTime();
+				String d1 = q1.getAttribute(AttributeName.STARTTIME, null, null);
+				String d2 = q2.getAttribute(AttributeName.STARTTIME, null, null);
 				int d = ContainerUtil.compare(d1, d2);
 				if (d != 0)
 				{
 					return d;
 				}
 
-				d1 = q1.getSubmissionTime();
-				d2 = q2.getSubmissionTime();
+				d1 = q1.getAttribute(AttributeName.SUBMISSIONTIME, null, null);
+				d2 = q2.getAttribute(AttributeName.SUBMISSIONTIME, null, null);
 				d = ContainerUtil.compare(d1, d2);
 				if (d != 0)
 				{
@@ -320,9 +320,11 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	/**
 	 * return true if this qe matches the input QueueFilter
 	 * 
-	 * @param ni
+	 * @param filter
 	 * @return
+	 * @deprecated use QueueFilter.matches
 	 */
+	@Deprecated
 	public boolean matchesQueueFilter(final JDFQueueFilter filter)
 	{
 		if (filter == null)
@@ -344,11 +346,10 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 		return super.hasPartMap(mPart);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setPriority(int)
-	 */
+	 * @param value
+	*/
 	@Override
 	public void setPriority(final int value)
 	{
@@ -359,7 +360,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 			synchronized (queue)
 			{
 				super.setPriority(value);
-				queue.sortChildren();
+				queue.sortChild(this);
 			}
 		}
 		else if (value != oldVal) // non automated
@@ -375,7 +376,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 * @deprecated call JDFQueue.sortChildren()
 	 */
 	@Deprecated
-	public void sortQueue(@SuppressWarnings("unused") final int oldVal)
+	public void sortQueue(final int oldVal)
 	{
 		final JDFQueue queue = (JDFQueue) getParentNode_KElement();
 		queue.sortChildren();
@@ -429,7 +430,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 					removeAttribute(AttributeName.ENDTIME);
 
 				}
-				queue.sortChildren();
+				if (!EnumQueueEntryStatus.Removed.equals(value))
+					queue.sortChild(this);
 				queue.setStatusFromEntries();
 			}
 		}
@@ -452,9 +454,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	}
 
 	/**
-	 * gets the NodeIdetifier that matches this
+	 * gets the NodeIdentifier that matches this
 	 * 
-	 * @return
+	 *  
 	 */
 	public void setIdentifier(final NodeIdentifier ni)
 	{
@@ -569,9 +571,9 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 */
 	public boolean isCompleted()
 	{
-		final EnumQueueEntryStatus status = getQueueEntryStatus();
+		String status = getAttribute(AttributeName.STATUS, null, null);
 		return // (status==null) ||
-		EnumQueueEntryStatus.Completed.equals(status) || EnumQueueEntryStatus.Removed.equals(status) || EnumQueueEntryStatus.Aborted.equals(status);
+		"Completed".equals(status) || "Removed".equals(status) || "Aborted".equals(status);
 	}
 
 	/**
@@ -588,6 +590,8 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	/**
 	 * return a value based on QueueEntryStatus and Priority to sort the queue the status is the major order whereas the priority is used to order within
 	 * regions of identical status
+	 * @param status 
+	 * @param priority 
 	 * 
 	 * @return int a priority for sorting - low value = back of queue, high value = front of queue
 	 */
@@ -634,6 +638,61 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	public int compareTo(final Object arg0)
 	{
 		return new QueueEntryComparator().compare(this, arg0);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setEndTime(org.cip4.jdflib.util.JDFDate)
+	 * @param value
+	*/
+	@Override
+	public void setEndTime(JDFDate value)
+	{
+		setSortDate(AttributeName.ENDTIME, value == null ? null : value.getDateTimeISO());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setStartTime(org.cip4.jdflib.util.JDFDate)
+	 * @param value
+	*/
+	@Override
+	public void setStartTime(JDFDate value)
+	{
+		setSortDate(AttributeName.STARTTIME, value == null ? null : value.getDateTimeISO());
+	}
+
+	/**
+	 * @param attName
+	 * @param value
+	 */
+	private void setSortDate(String attName, String value)
+	{
+		if (value == null)
+			value = new JDFDate().getDateTimeISO();
+		final String oldVal = getAttribute(attName, null, null);
+		if (isAutomated() && !ContainerUtil.equals(oldVal, value))
+		{
+			final JDFQueue queue = (JDFQueue) getParentNode_KElement();
+			synchronized (queue)
+			{
+				super.setAttribute(attName, value);
+				queue.sortChild(this);
+			}
+		}
+		else if (!ContainerUtil.equals(oldVal, value)) // non automated
+		{
+			super.setAttribute(attName, value);
+		}
+
+	}
+
+	/**
+	 * @see org.cip4.jdflib.auto.JDFAutoQueueEntry#setSubmissionTime(org.cip4.jdflib.util.JDFDate)
+	 * @param value
+	*/
+	@Override
+	public void setSubmissionTime(JDFDate value)
+	{
+		setSortDate(AttributeName.SUBMISSIONTIME, value == null ? null : value.getDateTimeISO());
 	}
 
 }

@@ -116,6 +116,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	public boolean bInitOnCreate;
 	private boolean ignoreNSDefault = false;
 	private boolean strictNSCheck = bStaticStrictNSCheck;
+	private XMLDocUserData myXMLUserDat;
 
 	/**
 	 * @return the bStaticStrictNSCheck
@@ -164,7 +165,8 @@ public class DocumentJDFImpl extends DocumentImpl
 
 	// used mainly for memory debugging purposes
 	private long initialMem;
-
+	boolean bGlobalDirtyFlag = false;
+	boolean bGlobalDirtyPolicy = true;
 	/**
 	 * the original file name if an element was parsed, else null
 	 */
@@ -219,11 +221,14 @@ public class DocumentJDFImpl extends DocumentImpl
 		clon.firstChild = clon.docElement;
 		clon.bInitOnCreate = bInitOnCreate;
 		clon.bKElementOnly = bKElementOnly;
+		clon.myXMLUserDat = new XMLDocUserData(this);
 		clon.nsMap.clear();
 		clon.setNSMap(this);
 
-		userData.clear(); // otherwise, clon is indefinitely retained in userdata of the original document and we have a memory leak problem....
-		clon.userData.clear();
+		if (userData != null)
+			userData.clear(); // otherwise, clon is indefinitely retained in userdata of the original document and we have a memory leak problem....
+		if (clon.userData != null)
+			clon.userData.clear();
 		return clon;
 	}
 
@@ -310,6 +315,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		initialMem = rt.totalMemory() - rt.freeMemory();
 		nsMap = new HashMap<String, String>();
 		bInitOnCreate = true;
+		myXMLUserDat = new XMLDocUserData(this);
 	}
 
 	/**
@@ -1611,6 +1617,14 @@ public class DocumentJDFImpl extends DocumentImpl
 		KElement element = (KElement) getDocumentElement();
 		if (element != null)
 			element.setAttribute(qualifiedName, strNamespaceURI, AttributeName.XMLNSURI);
+	}
+
+	/**
+	 * @return
+	*/
+	public XMLDocUserData getMyUserData()
+	{
+		return myXMLUserDat;
 	}
 
 }

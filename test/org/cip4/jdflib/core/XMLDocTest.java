@@ -802,7 +802,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testWriteToHTTPURL() throws IOException
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
-		final URL url = UrlUtil.stringToURL("http://10.51.100.22:8080/httpdump/testXMLDoc?nodump=true");
+		final URL url = UrlUtil.stringToURL("http://localhost:8080/httpdump/testXMLDoc?nodump=true");
 		HttpURLConnection uc = d.write2HTTPURL(url, null, null);
 		if (uc != null)
 		{

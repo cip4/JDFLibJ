@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -104,6 +104,90 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	private static final long serialVersionUID = 1L;
 	private long lTimeInMillis = 0;
 	private int m_TimeZoneOffsetInMillis = 0; // in miliseconds from GMT-time
+	private static FastCalendar fastCalendar = new FastCalendar();
+
+	private static class FastCalendar
+	{
+		private final GregorianCalendar gregcal;
+		private final TimeZone tz;
+
+		/**
+		 * class to reuse one gregorian calendar and synchronize it
+		 */
+		protected FastCalendar()
+		{
+			super();
+			gregcal = new GregorianCalendar();
+			tz = TimeZone.getDefault();
+		}
+
+		/**
+		 * @param timeInMillis 
+		 * @return 
+		 * 
+		 */
+		protected synchronized int getTimeZoneOffset(long timeInMillis)
+		{
+			return tz.getOffset(timeInMillis);
+		}
+
+		/**
+		 * @param b
+		 * @param decimalLength 
+		 * @param tzInMillis 
+		 * @return
+		 */
+		protected synchronized long getTimeInMillis(final byte[] b, int decimalLength, int tzInMillis)
+		{
+			final int iYear = getIntFromPos(b, 0, 4);
+			final int iMonth = getIntFromPos(b, 5, 7) - 1; // months are zero based in Java
+			final int iDay = getIntFromPos(b, 8, 10);
+			final int iHour = getIntFromPos(b, 11, 13);
+			final int iMinute = getIntFromPos(b, 14, 16);
+			final int iSecond = getIntFromPos(b, 17, 19);
+			// set seconds, minutes, hours, days, years to GregorianCalendar
+			gregcal.setTimeZone(new SimpleTimeZone(tzInMillis, JDFConstants.EMPTYSTRING));
+			gregcal.clear(); // so milliseconds are set to zero
+			gregcal.set(iYear, iMonth, iDay, iHour, iMinute, iSecond);
+			long lTimeInMillis = gregcal.getTimeInMillis();
+			if (decimalLength > 1)
+			{ // now handle fractions of seconds
+				if (decimalLength == 2)
+				{
+					lTimeInMillis += getIntFromPos(b, 20, 21) * 100;
+				}
+				else if (decimalLength == 3)
+				{
+					lTimeInMillis += getIntFromPos(b, 20, 22) * 10;
+				}
+				else
+				{
+					lTimeInMillis += getIntFromPos(b, 20, 23);
+				}
+			}
+			return lTimeInMillis;
+		}
+
+		/**
+		 * parse a substring for integers - this is a bit faster then the original substring.intvalue...
+		 * @param strDateTime
+		 * @param pos1
+		 * @param pos2
+		 * @return the parsed integer value
+		 */
+		private int getIntFromPos(final byte[] strDateTime, final int pos1, final int pos2)
+		{
+			int ret = 0;
+			int f = 1;
+			for (int i = pos2 - 1; i >= pos1; i--)
+			{
+				ret += f * (strDateTime[i] - '0');
+				f *= 10;
+			}
+			return ret;
+		}
+
+	}
 
 	/**
 	 * Allocates a <code>JDFDate</code> object and initializes it so that it represents the time at which it was allocated, measured to the nearest millisecond.
@@ -124,8 +208,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public JDFDate(final long iTime)
 	{
 		lTimeInMillis = iTime;
-		final TimeZone t = TimeZone.getDefault();
-		m_TimeZoneOffsetInMillis = t.getOffset(lTimeInMillis);
+		m_TimeZoneOffsetInMillis = fastCalendar.getTimeZoneOffset(lTimeInMillis);
 	}
 
 	/**
@@ -163,7 +246,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public JDFDate(final String strDateTime) throws DataFormatException
 	{
-		this();
+		lTimeInMillis = 0;
+		m_TimeZoneOffsetInMillis = 0;
 		init(strDateTime);
 	}
 
@@ -226,129 +310,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		try
 		{
-			if (strDateTime.indexOf("T") == -1)
-			{
-				strDateTime += "T00:00:00" + getTimeZoneISO();
-			}
-
-			// check for zulu style time zone
-			final int length = strDateTime.length();
-			String lastChar = strDateTime.substring(length - 1);
-
-			// not necessarily valid but let's not be too picky
-			if ((lastChar.compareTo("a") >= 0) && (lastChar.compareTo("z") <= 0))
-			{
-				lastChar = lastChar.toUpperCase();
-			}
-
-			final int iCmp = lastChar.compareTo("A");
-			final boolean bZulu = (iCmp >= 0) && (iCmp <= 25);
-			// The last character is a ZULU style timezone
-			if (bZulu)
-			{
-				final String strBuffer = strDateTime.substring(0, length - 1);
-				String bias = null;
-				if (iCmp >= 0 && iCmp <= 8) // A-I
-				{
-					bias = "+0" + String.valueOf(iCmp + 1);
-				}
-				else if (iCmp == 9) // J
-				{
-					throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
-				}
-				else if (iCmp >= 10 && iCmp <= 12) // K-M
-				{
-					bias = "+" + String.valueOf(iCmp);
-				}
-				else if (iCmp >= 13 && iCmp <= 21) // N-V
-				{
-					bias = "-0" + String.valueOf(iCmp - 12);
-				}
-				else if (iCmp >= 22 && iCmp <= 24) // W-Y
-				{
-					bias = "-1" + String.valueOf(iCmp - 22);
-				}
-				else if (iCmp == 25) // Z
-				{
-					bias = "+00";
-				}
-
-				bias += ":00";
-
-				strDateTime = strBuffer + bias; // add the alphabetical timezone
-			}
-
-			int decimalLength = 0;
-			final int indexOfDecimal = strDateTime.indexOf('.');
-			if (indexOfDecimal != -1)
-			{
-				if (indexOfDecimal != 19)
-				{
-					// ignore for now
-				}
-				else
-				{
-					decimalLength++;
-					while ("0123456789".indexOf(strDateTime.charAt(indexOfDecimal + decimalLength)) != -1)
-					{
-						decimalLength++;
-					}
-				}
-			}
-
-			// if the time looks like 2004-07-14T18:21:47
-			// check if there is an +xx:00 or -xx:00 at the end specifying the
-			// timezone
-			if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
-			{
-				setTimeZoneOffsetInMillis(TimeZone.getDefault().getOffset(lTimeInMillis));
-			}
-			else
-			{
-				// handle sign explicitly, because "+02" is no valid Integer,
-				// while "-02" and "02" are valid Integer
-				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTime.substring(20 + decimalLength, 22 + decimalLength)).intValue());
-				if (strDateTime.charAt(19 + decimalLength) == '-')
-				{
-					setTimeZoneOffsetInMillis(-getTimeZoneOffsetInMillis());
-				}
-			}
-
-			// interpret the string - low level enhances performance quite a bit...
-			final byte[] b = strDateTime.getBytes();
-			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
-			{
-				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
-			}
-
-			final int iYear = getIntFromPos(b, 0, 4);
-			final int iMonth = getIntFromPos(b, 5, 7) - 1; // months are zero based in Java
-			final int iDay = getIntFromPos(b, 8, 10);
-			final int iHour = getIntFromPos(b, 11, 13);
-			final int iMinute = getIntFromPos(b, 14, 16);
-			final int iSecond = getIntFromPos(b, 17, 19);
-			// set seconds, minutes, hours, days, years to GregorianCalendar
-			final GregorianCalendar gregcal = new GregorianCalendar();
-			gregcal.setTimeZone(new SimpleTimeZone(getTimeZoneOffsetInMillis(), JDFConstants.EMPTYSTRING));
-			gregcal.clear(); // so milliseconds are set to zero
-			gregcal.set(iYear, iMonth, iDay, iHour, iMinute, iSecond);
-			lTimeInMillis = gregcal.getTimeInMillis();
-			if (decimalLength > 1)
-			{ // now handle fractions of seconds
-				if (decimalLength == 2)
-				{
-					lTimeInMillis += getIntFromPos(b, 20, 21) * 100;
-				}
-				else if (decimalLength == 3)
-				{
-					lTimeInMillis += getIntFromPos(b, 20, 22) * 10;
-				}
-				else
-				{
-					lTimeInMillis += getIntFromPos(b, 20, 23);
-				}
-				// gregcal.setTimeInMillis(lTimeInMillis);
-			}
+			strDateTime = handleString(strDateTime);
 		}
 		catch (final IndexOutOfBoundsException ie)
 		{
@@ -363,22 +325,118 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * parse a substring for integers - this is a bit faster then the original substring.intvalue...
 	 * @param strDateTime
-	 * @param pos1
-	 * @param pos2
-	 * @return the parsed integer value
+	 * @return
+	 * @throws DataFormatException
 	 */
-	private int getIntFromPos(final byte[] strDateTime, final int pos1, final int pos2)
+	private String handleString(String strDateTime) throws DataFormatException
 	{
-		int ret = 0;
-		int f = 1;
-		for (int i = pos2 - 1; i >= pos1; i--)
+		if (strDateTime.indexOf("T") == -1)
 		{
-			ret += f * (strDateTime[i] - '0');
-			f *= 10;
+			setTimeZoneOffsetInMillis(fastCalendar.getTimeZoneOffset(lTimeInMillis));
+			strDateTime += "T00:00:00" + getTimeZoneISO();
 		}
-		return ret;
+
+		// check for zulu style time zone
+		strDateTime = handleZulu(strDateTime);
+
+		int decimalLength = 0;
+		final int indexOfDecimal = strDateTime.indexOf('.');
+		if (indexOfDecimal != -1)
+		{
+			if (indexOfDecimal != 19)
+			{
+				// ignore for now
+			}
+			else
+			{
+				decimalLength++;
+				while ("0123456789".indexOf(strDateTime.charAt(indexOfDecimal + decimalLength)) != -1)
+				{
+					decimalLength++;
+				}
+			}
+		}
+
+		// if the time looks like 2004-07-14T18:21:47
+		// check if there is an +xx:00 or -xx:00 at the end specifying the
+		// timezone
+		if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
+		{
+			setTimeZoneOffsetInMillis(fastCalendar.getTimeZoneOffset(lTimeInMillis));
+		}
+		else
+		{
+			// handle sign explicitly, because "+02" is no valid Integer,
+			// while "-02" and "02" are valid Integer
+			setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTime.substring(20 + decimalLength, 22 + decimalLength)).intValue());
+			if (strDateTime.charAt(19 + decimalLength) == '-')
+			{
+				setTimeZoneOffsetInMillis(-getTimeZoneOffsetInMillis());
+			}
+		}
+
+		// interpret the string - low level enhances performance quite a bit...
+		final byte[] b = strDateTime.getBytes();
+		if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
+		{
+			throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+		}
+
+		lTimeInMillis = fastCalendar.getTimeInMillis(b, decimalLength, getTimeZoneOffsetInMillis());
+		return strDateTime;
+	}
+
+	/**
+	 * @param strDateTime
+	 * @return
+	 * @throws DataFormatException
+	 */
+	private String handleZulu(String strDateTime) throws DataFormatException
+	{
+		final int length = strDateTime.length();
+		char lastChar = strDateTime.charAt(length - 1);
+
+		if (lastChar >= 'a' && lastChar <= 'z')
+			lastChar += 'A' - 'a';
+
+		final int iCmp = lastChar - 'A';
+		final boolean bZulu = (iCmp >= 0) && (iCmp <= 25);
+		// The last character is a ZULU style timezone
+		if (bZulu)
+		{
+			final String strBuffer = strDateTime.substring(0, length - 1);
+			String bias = null;
+			if (iCmp >= 0 && iCmp <= 8) // A-I
+			{
+				bias = "+0" + String.valueOf(iCmp + 1);
+			}
+			else if (iCmp == 9) // J
+			{
+				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+			}
+			else if (iCmp >= 10 && iCmp <= 12) // K-M
+			{
+				bias = "+" + String.valueOf(iCmp);
+			}
+			else if (iCmp >= 13 && iCmp <= 21) // N-V
+			{
+				bias = "-0" + String.valueOf(iCmp - 12);
+			}
+			else if (iCmp >= 22 && iCmp <= 24) // W-Y
+			{
+				bias = "-1" + String.valueOf(iCmp - 22);
+			}
+			else if (iCmp == 25) // Z
+			{
+				bias = "+00";
+			}
+
+			bias += ":00";
+
+			strDateTime = strBuffer + bias; // add the alphabetical timezone
+		}
+		return strDateTime;
 	}
 
 	/**
@@ -542,7 +600,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public GregorianCalendar getCalendar()
 	{
-		final GregorianCalendar gregorianCalendar = new GregorianCalendar(new SimpleTimeZone(m_TimeZoneOffsetInMillis, JDFConstants.EMPTYSTRING));
+		final GregorianCalendar gregorianCalendar = new GregorianCalendar(new SimpleTimeZone(getTimeZoneOffsetInMillis(), JDFConstants.EMPTYSTRING));
 		gregorianCalendar.setTimeInMillis(getTimeInMillis());
 		return gregorianCalendar;
 	}

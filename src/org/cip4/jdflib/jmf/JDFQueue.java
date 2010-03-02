@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFQueueEntry.QueueEntryComparator;
+import org.cip4.jdflib.jmf.JDFQueueFilter.QueueEntryMatcher;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
@@ -106,11 +107,11 @@ public class JDFQueue extends JDFAutoQueue
 	/**
 	 * number of concurrent running entries
 	 */
-	private int maxRunningEntries = 1;
+	private int maxRunningEntries = -1;
 	/**
 	 * number of concurrent waiting entries
 	 */
-	private int maxWaitingEntries = 1000000;
+	private int maxWaitingEntries = -1;
 	/**
 	 * max number of completed entries to retain
 	 */
@@ -401,10 +402,11 @@ public class JDFQueue extends JDFAutoQueue
 		if (ve != null)
 		{
 			siz = ve.size();
+			QueueEntryMatcher qeMatch = qf == null ? null : qf.new QueueEntryMatcher();
 			for (int i = siz - 1; i >= 0; i--)
 			{
 				final JDFQueueEntry qe = (JDFQueueEntry) ve.get(i);
-				if (qe.matchesQueueFilter(qf))
+				if (qeMatch == null || qeMatch.matches(qe))
 				{
 					if (cleanupCallback != null)
 					{
@@ -617,28 +619,16 @@ public class JDFQueue extends JDFAutoQueue
 			return theEntry;
 		}
 
-		final VElement v = getQueueEntryVector(new JDFAttributeMap(AttributeName.STATUS, EnumQueueEntryStatus.Waiting), null);
-		if (v != null)
+		JDFQueueEntry qe = (JDFQueueEntry) getFirstChildElement(ElementName.QUEUEENTRY, null);
+		while (qe != null)
 		{
-			final int siz = v.size();
-			for (int i = 0; i < siz; i++)
+
+			if (("Waiting".equals(qe.getAttribute(AttributeName.STATUS))) && (cb == null || cb.canExecute(qe)))
 			{
-				final JDFQueueEntry qe = (JDFQueueEntry) v.elementAt(i);
-
-				if (cb != null && !cb.canExecute(qe))
-				{
-					continue;
-				}
-
-				if (theEntry == null)
-				{
-					theEntry = qe;
-				}
-				else if (qe.compareTo(theEntry) < 0)
-				{
-					theEntry = qe;
-				}
+				theEntry = qe;
+				break;
 			}
+			qe = (JDFQueueEntry) qe.getNextSiblingElement(ElementName.QUEUEENTRY, null);
 		}
 
 		return theEntry;
@@ -674,7 +664,7 @@ public class JDFQueue extends JDFAutoQueue
 		}
 		// if(EnumQueueStatus.Blocked.equals(status))
 		// blocked or null(illegal)
-		return numEntries(EnumQueueEntryStatus.Running) < maxRunningEntries;
+		return !maxRunning();
 	}
 
 	/**
@@ -787,10 +777,14 @@ public class JDFQueue extends JDFAutoQueue
 			return null;
 		}
 		resp.removeChildren(ElementName.QUEUE, null, null);
-		final JDFQueue newQueue = (JDFQueue) resp.copyElement(this, null);
+		final JDFQueue newQueue;
 		if (filter != null)
 		{
-			filter.apply(newQueue, priorQueue);
+			newQueue = filter.copy(this, priorQueue, resp);
+		}
+		else
+		{
+			newQueue = (JDFQueue) resp.copyElement(this, null);
 		}
 		return newQueue;
 
@@ -1027,4 +1021,11 @@ public class JDFQueue extends JDFAutoQueue
 		this.queueSorter = _queueSorter;
 	}
 
+	/**
+	 * @param qe
+	 */
+	public void sortChild(JDFQueueEntry qe)
+	{
+		sortChild(qe, queueSorter);
+	}
 }

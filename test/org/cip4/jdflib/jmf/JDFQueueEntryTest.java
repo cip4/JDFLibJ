@@ -132,6 +132,8 @@ public class JDFQueueEntryTest extends TestCase
 		JDFQueueEntry qe = q.getQueueEntry("qe2");
 		assertEquals(q.getQueueEntryPos("qe2"), 1);
 		q.setAutomated(true);
+		q.sortChildren();
+
 		final int l = q.numEntries(null);
 		qe.setPriority(99);
 		assertEquals(q.numEntries(null), l);
@@ -168,6 +170,8 @@ public class JDFQueueEntryTest extends TestCase
 		JDFQueueEntry qe = q.getQueueEntry("qe2");
 		assertEquals(q.getQueueEntryPos("qe2"), 1);
 		q.setAutomated(true);
+		q.sortChildren();
+		q.setMaxRunningEntries(1);
 		assertEquals(q.getQueueStatus(), EnumQueueStatus.Running);
 		q.setMaxRunningEntries(3);
 		q.setMaxCompletedEntries(9999);
@@ -226,6 +230,7 @@ public class JDFQueueEntryTest extends TestCase
 	/**
 	 * 
 	 */
+	@Deprecated
 	public void testMatchesFilter()
 	{
 		q.setAutomated(true);

@@ -307,10 +307,14 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public void setDirty(final boolean bAttribute)
 	{
-		final XMLDocUserData usrDat = getXMLDocUserData();
-		if (usrDat != null)
+		((DocumentJDFImpl) ownerDocument).bGlobalDirtyFlag = true;
+		if (!((DocumentJDFImpl) ownerDocument).bGlobalDirtyPolicy)
 		{
-			usrDat.setDirty(this, bAttribute);
+			final XMLDocUserData usrDat = getXMLDocUserData();
+			if (usrDat != null)
+			{
+				usrDat.setDirty(this, bAttribute);
+			}
 		}
 	}
 
@@ -3004,14 +3008,28 @@ public class KElement extends ElementNSImpl implements Element
 			return false;
 		}
 
-		if (!ContainerUtil.equals(kElem.getAttributeMap(), getAttributeMap()))
+		NamedNodeMap atts = getAttributes();
+		NamedNodeMap katts = kElem.getAttributes();
+		int length = atts.getLength();
+		if (length != katts.getLength())
 		{
 			return false;
 		}
-		if (!ContainerUtil.equals(kElem.getText(), getText()))
+		for (int i = 0; i < length; i++)
 		{
-			return false;
+			Node node = atts.item(i);
+			String key = node.getNodeName();
+			Node kNode = katts.getNamedItem(key);
+			if (kNode == null)
+				return false;
+			if (!key.equals(kNode.getNodeName()))
+				return false;
+			if (!node.getNodeValue().equals(kNode.getNodeValue()))
+				return false;
 		}
+
+		if (!ContainerUtil.equals(getText(), kElem.getText()))
+			return false;
 
 		final VElement l1 = getChildElementVector(null, null, null, true, 0, false);
 		final VElement l2 = kElem.getChildElementVector(null, null, null, true, 0, false);
@@ -4582,6 +4600,15 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * sorts/inserts e by alphabet
+	 * @param e 
+	 */
+	public void sortChild(KElement e)
+	{
+		sortChild(e, new SimpleNodeComparator());
+	}
+
+	/**
 	 * sorts all child elements by alphabet
 	 * @param comparator the comparator object to sort by
 	 */
@@ -4595,6 +4622,59 @@ public class KElement extends ElementNSImpl implements Element
 			final KElement e = v.get(i);
 			moveElement(e, null);
 		}
+	}
+
+	/**
+	 * insert e into this, assuming that this is already sorted
+	 * 
+	 * @param e the existing element to sort
+	 * @param comparator the comparator object to sort by
+	 */
+	public synchronized void sortChild(KElement e, Comparator<KElement> comparator)
+	{
+		if (e == null)
+			return;
+		if (e.getParentNode_KElement() == this)
+		{
+			KElement prev = e.getPreviousSiblingElement();
+			boolean bSorted = prev == null || comparator.compare(prev, e) <= 0;
+			if (bSorted)
+			{
+				KElement next = e.getNextSiblingElement();
+				bSorted = next == null || comparator.compare(next, e) >= 0;
+			}
+			if (!bSorted)
+				e.deleteNode();
+			else
+				return; // heureka - nothing to do!
+
+		}
+		final VElement v = getChildElementVector_KElement(null, null, null, true, -1);
+		KElement before = null;
+		if (v != null && v.size() > 0)
+		{
+			int posBefore = v.size();
+			int posAfter = 0;
+			int lastPos = -1;
+			while (posBefore != posAfter)
+			{
+				int pos = (posBefore + posAfter) / 2;
+
+				before = v.get(pos);
+				int d = comparator.compare(before, e);
+				if (d >= 0)
+				{
+					posBefore = (lastPos != pos) ? pos : pos - 1;
+				}
+				else
+				{
+					posAfter = (lastPos != pos) ? pos : pos + 1;
+				}
+				lastPos = pos;
+			}
+			before = v.get(posBefore);
+		}
+		insertBefore(e, before);
 	}
 
 	/**
@@ -6496,7 +6576,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	protected XMLDocUserData getXMLDocUserData()
 	{
-		return (ownerDocument == null) ? null : (XMLDocUserData) ownerDocument.getUserData();
+		return (ownerDocument == null) ? null : ((DocumentJDFImpl) ownerDocument).getMyUserData();
 	}
 
 	/**
@@ -6524,7 +6604,7 @@ public class KElement extends ElementNSImpl implements Element
 			else
 			// only need to remove this element
 			{
-				final String id = getAttribute(AttributeName.ID, null, null);
+				final String id = super.getAttribute(AttributeName.ID);
 				if (id != null)
 				{
 					ud.removeTarget(id);
@@ -6778,7 +6858,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getID()
 	{
-		return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+		return getAttribute(AttributeName.ID);
 	}
 
 	/**

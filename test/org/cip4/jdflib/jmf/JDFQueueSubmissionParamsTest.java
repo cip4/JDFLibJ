@@ -86,6 +86,7 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -119,7 +120,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 */
 	public void testAddNull()
 	{
-		JDFResponse resp = qsp.addEntry(null, null);
+		JDFResponse resp = qsp.addEntry(null, null, null);
 		assertEquals(2, resp.getReturnCode());
 	}
 
@@ -131,7 +132,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 	 */
 	public void testAddEntry()
 	{
-		JDFResponse resp = qsp.addEntry(theQueue, null);
+		JDFResponse resp = qsp.addEntry(theQueue, null, null);
 		assertEquals(0, resp.getReturnCode());
 		theQueue = resp.getQueue(0);
 		assertEquals(theQueue.getQueueEntry(0).getQueueEntryStatus(), resp.getQueueEntry(0).getQueueEntryStatus());
@@ -141,12 +142,43 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 		assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Waiting), 1);
 		qsp.setHold(true);
 		JDFJMF jmfNew = new JDFDoc("JMF").getJMFRoot();
-		resp = qsp.addEntry(theQueue, jmfNew);
+		resp = qsp.addEntry(theQueue, jmfNew, null);
 		assertEquals(resp, jmfNew.getResponse(0));
 		assertEquals(theQueue.numEntries(null), 2);
 		assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Waiting), 1);
 		assertEquals(theQueue.numEntries(EnumQueueEntryStatus.Held), 1);
 		assertNotSame(theQueue.getQueueEntry(0).getQueueEntryID(), theQueue.getQueueEntry(1).getQueueEntryID());
+	}
+
+	/**
+	 * 
+	 */
+	public void testAddEntryMany()
+	{
+		for (int i = 0; i < 20000; i++)
+		{
+			theQueue.appendQueueEntry().setQueueEntryStatus(EnumQueueEntryStatus.Waiting);
+		}
+		JDFQueueFilter f = (JDFQueueFilter) new JDFDoc(ElementName.QUEUEFILTER).getRoot();
+		f.setMaxEntries(0);
+		for (int b = 0; b < 2; b++)
+		{
+			theQueue.setAutomated(b == 1);
+			CPUTimer t = new CPUTimer(false);
+			for (int i = 0; i < 300; i++)
+			{
+				t.start();
+				JDFResponse resp = qsp.addEntry(theQueue, null, f);
+				assertEquals(0, resp.getReturnCode());
+				JDFQueueEntry queueResp = resp.getQueueEntry(0);
+				assertNotNull(queueResp);
+				t.stop();
+				if (i % 100 == 0)
+				{
+					System.out.println(b + " " + i + " " + t.getRealTime() + " " + t.getAverageRealTime() + " " + t.getCPUTime() + " " + t.getAverageCPUTime());
+				}
+			}
+		}
 	}
 
 	////////////////////////////////////////////////////////////////////////////

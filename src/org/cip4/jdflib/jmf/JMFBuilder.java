@@ -332,6 +332,30 @@ public class JMFBuilder
 	}
 
 	/**
+	 * build a ResubmitQueueEntry message
+	 * @param returnUrl the url of the jdf to send back to
+	 * @return the jmf
+	 */
+	public JDFJMF buildSubmitQueueEntry(final String returnUrl)
+	{
+		final JDFCommand c = createCommand(EnumType.SubmitQueueEntry);
+		createDefaultFilter(c);
+
+		final JDFQueueSubmissionParams sp = c.appendQueueSubmissionParams();
+		sp.setReturnJMF(returnUrl);
+		return c.getJMFRoot();
+	}
+
+	/**
+	 * @param c
+	 */
+	private void createDefaultFilter(final JDFCommand c)
+	{
+		JDFQueueFilter f = c.appendQueueFilter();
+		f.setMaxEntries(0);
+	}
+
+	/**
 	 * build a JMF Knowndevices query
 	 * @param details
 	 * @return the message
@@ -486,6 +510,7 @@ public class JMFBuilder
 	public JDFJMF buildResubmitQueueEntry(final String qeID, final String url)
 	{
 		final JDFCommand c = createCommand(EnumType.ResubmitQueueEntry);
+		createDefaultFilter(c);
 		final JDFResubmissionParams rp = c.appendResubmissionParams();
 		rp.setQueueEntryID(qeID);
 		rp.setURL(url);

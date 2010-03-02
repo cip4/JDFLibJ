@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,8 +91,11 @@ import org.cip4.jdflib.auto.JDFAutoQueueFilter;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -113,8 +116,10 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		public QueueMatcher(final JDFQueue theQueue, final JDFQueue lastQueue)
 		{
 			super();
+			qed = getQueueEntryDetails();
 			this.theQueue = theQueue;
 			this.lastQueue = lastQueue;
+			qeMatch = new QueueEntryMatcher();
 			if (lastQueue != null && EnumUpdateGranularity.ChangesOnly.equals(getUpdateGranularity()))
 			{
 				lastMap = lastQueue.getQueueEntryIDMap();
@@ -131,15 +136,19 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 
 		private final JDFQueue lastQueue; // the prior queue to compare to for matching
 		private JDFQueue theQueue; // the prior queue to compare to for matching
-		Map<String, JDFQueueEntry> lastMap;
+		private Map<String, JDFQueueEntry> lastMap;
+		private EnumQueueEntryDetails qed;
+		private final QueueEntryMatcher qeMatch;
 
 		/**
 		 * modifies queue to match this filter by removing all non-matching entries
 		 * 
 		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
-		 * 
-		 * @param theQueue the queue to modify
+		 * @return 
+		 * @deprecated use copyTo
+		 *  
 		 */
+		@Deprecated
 		protected JDFQueue apply()
 		{
 			final int maxEntries = hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
@@ -206,7 +215,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
 		 * 
 		 * @param qe
+		 * @deprecated use copyTo
 		 */
+		@Deprecated
 		protected void apply(final JDFQueueEntry qe)
 		{
 			if (qe == null)
@@ -222,8 +233,36 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 			{
 				qe.deleteNode();
 			}
+			cleanQE(qe);
+		}
 
-			EnumQueueEntryDetails qed = getQueueEntryDetails();
+		/**
+		 * copies queueEntry if it matches this filter and removes all non-matching attributes and elements
+		 * @param newQueue the new parent queue
+		 * 
+		 * @param qe the queue entry to copy
+		 * @return the copied element, null if this was not copied
+		 */
+		private JDFQueueEntry copyTo(JDFQueue newQueue, JDFQueueEntry qe)
+		{
+			if (qe == null)
+				return null;
+
+			if (qeMatch.matches(qe) && !noDifference(qe))
+			{
+				qe = (JDFQueueEntry) newQueue.copyElement(qe, null);
+			}
+
+			cleanQE(qe);
+			return qe;
+		}
+
+		/**
+		 * remove any redundant details
+		 * @param qe
+		 */
+		private void cleanQE(JDFQueueEntry qe)
+		{
 			if (qed == null)
 			{
 				qed = EnumQueueEntryDetails.Brief;
@@ -239,8 +278,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		}
 
 		/**
-		 * @param qe
-		 * @return
+		 * @param qe the queue entry to apply the change only filter to
+		 * 
+		 * @return true if this element has been removed because it is identical to a previous element (no change)
 		 */
 		private boolean noDifference(final JDFQueueEntry qe)
 		{
@@ -258,6 +298,41 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 			final boolean equal = qe.isEqual(lastQueueEntry);
 			return equal;
 		}
+
+		/**
+		 * copy a queue to a parent element while applying the filter
+		 * 
+		 * @param parent the parent element to create the queue in; may be null
+		 * @return
+		 */
+		protected JDFQueue copyTo(KElement parent)
+		{
+			final int maxEntries = hasAttribute(AttributeName.MAXENTRIES) ? getMaxEntries() : 999999;
+			JDFQueue newQueue = (JDFQueue) (parent == null ? new JDFDoc(ElementName.QUEUE).getRoot() : parent.appendElement(ElementName.QUEUE));
+			newQueue.setAttributes(theQueue);
+			JDFQueueEntry qe = (JDFQueueEntry) theQueue.getFirstChildElement(ElementName.QUEUEENTRY, null);
+			int n = 0;
+			while (n < maxEntries && qe != null)
+			{
+				JDFQueueEntry qeNew = copyTo(newQueue, qe);
+				if (qeNew != null)
+					n++;
+				qe = qe.getNextQueueEntry();
+			}
+			addRemoved();
+			final int numEntries = newQueue.numEntries(null);
+			if (numEntries == 0 && lastMap != null) // empty queue in diff mode
+			{
+				final JDFAttributeMap mapQueue = newQueue.getAttributeMap();
+				final JDFAttributeMap mapLast = lastQueue.getAttributeMap();
+				if (ContainerUtil.equals(mapLast, mapQueue))
+				{
+					newQueue = null;
+				}
+			}
+			return newQueue;
+		}
+
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -349,6 +424,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	}
 
 	/**
+	 * @deprected - use copyTo 
 	 * modifies queue to match this filter by removing all non-matching entries
 	 * 
 	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
@@ -367,45 +443,101 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	}
 
 	/**
+	 * (9) get attribute QueueEntryDetails
+	 * @return the value of the attribute
+	 */
+	@Override
+	public EnumQueueEntryDetails getQueueEntryDetails()
+	{
+		String det = getAttribute(AttributeName.QUEUEENTRYDETAILS, null, "Brief");
+		if ("None".equals(det))
+			return EnumQueueEntryDetails.None;
+		if ("Brief".equals(det))
+			return EnumQueueEntryDetails.Brief;
+		if ("JobPhase".equals(det))
+			return EnumQueueEntryDetails.JobPhase;
+		if ("JDF".equals(det))
+			return EnumQueueEntryDetails.JDF;
+		return null;
+	}
+
+	class QueueEntryMatcher
+	{
+		Set<String> qeDefs;
+		Set<String> devIDs;
+		VString gangNames;
+		VString statusList;
+
+		QueueEntryMatcher()
+		{
+			qeDefs = getQueueEntryDefSet();
+			devIDs = getDeviceIDSet();
+			gangNames = getGangNames();
+			if (gangNames.size() == 0)
+				gangNames = null;
+
+			Vector<EnumQueueEntryStatus> vs = getStatusList();
+			if (vs == null)
+				statusList = null;
+			else
+			{
+				statusList = new VString();
+				for (EnumQueueEntryStatus e : vs)
+				{
+					statusList.add(e.getName());
+				}
+			}
+		}
+
+		/**
+		 * return true if the queuentry matches this filter
+		 * @param qe the queueentry to check
+		 * @return
+		 */
+		protected boolean matches(final JDFQueueEntry qe)
+		{
+			if (qe == null)
+			{
+				return false;
+			}
+
+			if (EnumQueueEntryDetails.None.equals(getQueueEntryDetails()))
+			{
+				return false;
+			}
+
+			if (qeDefs != null && !qeDefs.contains(qe.getQueueEntryID()))
+			{
+				return false;
+			}
+
+			if (devIDs != null && !devIDs.contains(qe.getDeviceID()))
+			{
+				return false;
+			}
+
+			if (gangNames != null && !gangNames.contains(qe.getGangName()))
+			{
+				return false;
+			}
+
+			if (statusList != null && !statusList.contains(qe.getAttribute(AttributeName.STATUS)))
+			{
+				return false;
+			}
+
+			return true;
+		}
+	}
+
+	/**
 	 * return true if the queuentry matches this filter
 	 * @param qe the queueentry to check
 	 * @return
 	 */
 	public boolean matches(final JDFQueueEntry qe)
 	{
-		if (qe == null)
-		{
-			return false;
-		}
-
-		if (EnumQueueEntryDetails.None.equals(getQueueEntryDetails()))
-		{
-			return false;
-		}
-
-		Set qeDefs = getQueueEntryDefSet();
-		if (qeDefs != null && !qeDefs.contains(qe.getQueueEntryID()))
-		{
-			return false;
-		}
-
-		qeDefs = getDeviceIDSet();
-		if (qeDefs != null && !qeDefs.contains(qe.getDeviceID()))
-		{
-			return false;
-		}
-
-		if (hasAttribute(AttributeName.GANGNAMES) && !getGangNames().contains(qe.getGangName()))
-		{
-			return false;
-		}
-
-		if (hasAttribute(AttributeName.STATUSLIST) && !getStatusList().contains(qe.getQueueEntryStatus()))
-		{
-			return false;
-		}
-
-		return true;
+		return new QueueEntryMatcher().matches(qe);
 	}
 
 	/**
@@ -413,10 +545,11 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * 
 	 * @return Vector of the enumerations this version uses queueEntryStatus rather than an own enumeration
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Vector getStatusList()
+	public Vector<EnumQueueEntryStatus> getStatusList()
 	{
-		return getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.getEnum(0), false);
+		return (Vector<EnumQueueEntryStatus>) getEnumerationsAttribute(AttributeName.STATUSLIST, null, EnumQueueEntryStatus.getEnum(0), false);
 	}
 
 	/**
@@ -451,16 +584,16 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * 
 	 * @return the set of DeviceIDs, null if no Device is specified
 	 */
-	public Set getDeviceIDSet()
+	public Set<String> getDeviceIDSet()
 	{
 		int siz = 0;
-		HashSet set = null;
+		HashSet<String> set = null;
 
 		final VElement v = getChildElementVector(ElementName.DEVICE, null);
 		if (v != null)
 		{
 			siz = v.size();
-			set = siz == 0 ? null : new HashSet();
+			set = siz == 0 ? null : new HashSet<String>();
 			for (int i = 0; i < siz; i++)
 			{
 				final String qeid = ((JDFDevice) v.elementAt(i)).getDeviceID();
@@ -478,6 +611,8 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 	 * append a Device element with @DeviceID
 	 * 
 	 * @param deviceID the deviceID to set
+	 * @return 
+	 * @throws JDFException 
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendDevice()
 	 */
 	public JDFDevice appendDevice(final String deviceID) throws JDFException
@@ -489,6 +624,8 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 
 	/**
 	 * @param queueEntryID the queueEntryID to set
+	 * @return 
+	 * @throws JDFException 
 	 * @see org.cip4.jdflib.auto.JDFAutoQueueFilter#appendQueueEntryDef()
 	 */
 	public JDFQueueEntryDef appendQueueEntryDef(final String queueEntryID) throws JDFException
@@ -496,6 +633,19 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		final JDFQueueEntryDef queueEntryDef = super.appendQueueEntryDef();
 		queueEntryDef.setQueueEntryID(queueEntryID);
 		return queueEntryDef;
+	}
+
+	/**
+	 * copy theQueue to newParent while applying the filter
+	 * @param theQueue
+	 * @param lastQueue
+	 * @param resp 
+	 * @return 
+	 */
+	public JDFQueue copy(JDFQueue theQueue, JDFQueue lastQueue, KElement resp)
+	{
+		QueueMatcher queueMatcher = new QueueMatcher(theQueue, lastQueue);
+		return queueMatcher.copyTo(resp);
 	}
 
 }

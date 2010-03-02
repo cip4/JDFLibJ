@@ -107,6 +107,36 @@ public class KElementTest extends JDFTestCaseBase
 {
 
 	/**
+	 * 
+	 */
+	public void testIsEqual()
+	{
+		final KElement e1 = new JDFDoc("a").getRoot();
+		final KElement e2 = e1.clone();
+
+		assertTrue(e1.isEqual(e2));
+		e1.setAttribute("a1", "v1");
+		e1.setAttribute("a2", "v2");
+		e2.setAttribute("a2", "v2");
+		assertFalse(e1.isEqual(e2));
+		e2.setAttribute("a1", "v1");
+		assertTrue(e1.isEqual(e2));
+	}
+
+	/**
+	 * 
+	 */
+	public void testIsEqualBig()
+	{
+		JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "matsch.jdf");
+		KElement root = d.getRoot();
+		KElement e = root.clone();
+		assertTrue(root.isEqual(e));
+		e.setXPathAttribute("JDF/JDF/ResourcePool/@Foo", "bar");
+		assertFalse(root.isEqual(e));
+	}
+
+	/**
 	 * really weird, eh?
 	 */
 	public void testBadElementNames()
@@ -433,6 +463,42 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(a2.getNextSiblingElement(), a3);
 		assertEquals(a3.getNextSiblingElement(), b);
 		assertEquals(b.getNextSiblingElement(), c);
+
+	}
+
+	/**
+	 * 
+	 */
+	public void testSortChild()
+	{
+		final XMLDoc d = new JDFDoc("parent");
+		final KElement e = d.getRoot();
+		final KElement b = e.appendElement("b");
+		final KElement a = e.appendElement("a2");
+		a.setAttribute("ID", "a1");
+		final KElement c = e.appendElement("c");
+		e.sortChild(b);
+		assertEquals(e.getFirstChildElement(), a);
+		assertEquals(a.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), c);
+		final KElement a3 = e.appendElement("a2");
+		a3.setAttribute("ID", "z1");
+		final KElement a2 = e.appendElement("a2");
+		a2.setAttribute("ID", "a2");
+		final KElement a4 = e.appendElement("zz");
+		a2.setAttribute("ID", "a2");
+		e.sortChild(a2);
+		e.sortChild(a3);
+		e.sortChild(a4);
+		assertEquals(e.getFirstChildElement(), a);
+		assertEquals(a.getNextSiblingElement(), a2);
+		assertEquals(a2.getNextSiblingElement(), a3);
+		assertEquals(a3.getNextSiblingElement(), b);
+		assertEquals(b.getNextSiblingElement(), c);
+		assertEquals(c.getNextSiblingElement(), a4);
+		final KElement a0 = e.appendElement("a0");
+		e.sortChild(a0);
+		assertEquals(e.getFirstChildElement(), a0);
 
 	}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -311,16 +311,16 @@ public class JDFDateTest extends TestCase
 	 */
 	public void testSort()
 	{
-		final JDFDate[] a = new JDFDate[10];
+		final JDFDate[] a = new JDFDate[1000];
 		final JDFDate date1 = new JDFDate();
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			final JDFDate date2 = new JDFDate(date1);
 			date2.addOffset(10 * (i % 3) + i, 0, 0, 0);
 			a[i] = date2;
 		}
 		Arrays.sort(a);
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < 999; i++)
 		{
 			assertTrue(a[i].compareTo(a[i + 1]) < 0);
 		}
@@ -484,8 +484,13 @@ public class JDFDateTest extends TestCase
 	public void testTimeZone()
 	{
 		final TimeZone t = TimeZone.getDefault();
-		final JDFDate d = new JDFDate();
+		JDFDate d = new JDFDate();
 		assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
+		for (int i = 0; i < 400; i++)
+		{
+			d = new JDFDate(System.currentTimeMillis() + i * 24 * 60 * 60 * 1000);
+			assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
+		}
 
 	}
 }

@@ -123,6 +123,12 @@ public class UrlUtil
 	 * 
 	 */
 	public static final String GET = "GET";
+
+	/**
+	 * 
+	 */
+	public static final String KEEPALIVE = "keep-alive";
+
 	/**
 	 * 
 	 */
@@ -1174,30 +1180,29 @@ public class UrlUtil
 			final URL url = new URL(strUrl);
 			final HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
 			httpURLconnection.setRequestMethod(method);
-			httpURLconnection.setRequestProperty("Connection", "close");
+			httpURLconnection.setRequestProperty("Connection", KEEPALIVE);
 			contentTypeLocal = StringUtil.token(contentTypeLocal, 0, "\r\n");
 			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentTypeLocal);
-			httpURLconnection.setDoOutput(true);
+			boolean doOutput = stream != null;
+			httpURLconnection.setDoOutput(doOutput);
 			if (details != null)
 			{
 				details.applyTo(httpURLconnection);
 			}
 
-			final OutputStream out = httpURLconnection.getOutputStream();
-
-			if (stream != null)
+			if (doOutput)
 			{
+				final OutputStream out = httpURLconnection.getOutputStream();
 				IOUtils.copy(stream, out);
+				out.flush();
+				out.close();
 			}
-
-			out.flush();
-			out.close();
 
 			return new UrlPart(httpURLconnection);
 		}
 		catch (final Exception x)
 		{
-			// System.out.print(x);
+			System.out.print(x);
 		}
 
 		return null;
