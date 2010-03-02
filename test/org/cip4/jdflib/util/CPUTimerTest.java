@@ -92,7 +92,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testCPUTime()
 	{
 		t.start();
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 100000000; i++)
 		{
 			Math.sin(i);
 		}
@@ -119,18 +119,18 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 */
 	public void testStartStop()
 	{
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			t.start();
-			for (int ii = 0; ii < 33000; ii++)
+			for (int ii = 0; ii < 100000; ii++)
 			{
 				Math.sin(ii);
 			}
 			t.stop();
 		}
 		assertTrue(t.getCPUTime() > 0);
-		assertEquals(t.getCPUTime() / 100, t.getAverageCPUTime());
-		assertEquals(t.getRealTime() / 100, t.getAverageRealTime());
+		assertEquals(t.getCPUTime() / 1000, t.getAverageCPUTime());
+		assertEquals(t.getRealTime() / 1000, t.getAverageRealTime());
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	public void testAverage()
 	{
 		t.start();
-		for (int ii = 0; ii < 330000; ii++)
+		for (int ii = 0; ii < 10000000; ii++)
 		{
 			Math.sin(ii);
 		}
