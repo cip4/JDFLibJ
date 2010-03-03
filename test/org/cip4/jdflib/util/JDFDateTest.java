@@ -489,7 +489,7 @@ public class JDFDateTest extends TestCase
 		for (int i = 0; i < 400; i++)
 		{
 			d = new JDFDate(System.currentTimeMillis() + i * 24 * 60 * 60 * 1000);
-			assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
+			assertEquals(t.getOffset(System.currentTimeMillis() + i * 24 * 60 * 60 * 1000), d.getTimeZoneOffsetInMillis());
 		}
 
 	}
