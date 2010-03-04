@@ -2001,6 +2001,213 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
+	 * 
+	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	private class PartStatusHelper
+	{
+
+		private HashMap<JDFAttributeMap, JDFResource> partResMap;
+
+		/**
+		 */
+		protected PartStatusHelper()
+		{
+			super();
+			partResMap = null;
+		}
+
+		/**
+		 * set the node's partition status if nodeinfo is partitioned, all leaves NodeStati below part are removed
+		 * 
+		 * @param mattr Attribute map of partition
+		 * @param status Status to set
+		 * @param statusDetails
+		 * @return boolean: success or not
+		 */
+		public boolean setPartStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, String statusDetails)
+		{
+			statusDetails = StringUtil.getNonEmpty(statusDetails);
+			// 100602 handle nasty combination
+			if (mattr != null && (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
+			{
+				// throw an exception??? this is a snafu to set an individual part status to pool
+				return false;
+			}
+
+			if (mattr == null || mattr.isEmpty())
+			{
+				return setRootStatus(status, statusDetails);
+			}
+
+			if (getVersion(true).getValue() < JDFElement.EnumVersion.Version_1_3.getValue())
+			{
+				setPoolStatus(mattr, status, statusDetails);
+			}
+			else
+			{
+				setPartitionedStatus(mattr, status, statusDetails);
+			}
+			return true;
+		}
+
+		/**
+		 * @param mattr
+		 * @param status
+		 * @param statusDetails
+		 */
+		private void setPartitionedStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, String statusDetails)
+		{
+			// version >=1.3
+			{
+				JDFNodeInfo ni = getCreateNodeInfo();
+				if (getStatus() != JDFElement.EnumNodeStatus.Part)
+				{ // set a decent default status for implicit
+					ni.setNodeStatus(getStatus());
+					if (statusDetails != null)
+					{
+						ni.setNodeStatusDetails(statusDetails);
+					}
+				}
+
+				JDFNodeInfo niLeaf = getPartitionForMap(mattr, ni);
+
+				if (niLeaf != null)
+				{
+					niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
+					niLeaf.setNodeStatus(status);
+					if (statusDetails != null)
+					{
+						niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
+						niLeaf.setNodeStatusDetails(statusDetails);
+					}
+				}
+				setStatus(JDFElement.EnumNodeStatus.Part);
+			}
+		}
+
+		/**
+		 * @param mattr
+		 * @param ni
+		 * @return
+		 */
+		private JDFNodeInfo getPartitionForMap(final JDFAttributeMap mattr, JDFNodeInfo ni)
+		{
+			final JDFResource niRoot = ni.getResourceRoot();
+			niRoot.setPartUsage(JDFResource.EnumPartUsage.Implicit);
+			JDFNodeInfo niLeaf;
+			if (partResMap != null)
+				niLeaf = (JDFNodeInfo) partResMap.get(mattr);
+			else
+				niLeaf = (JDFNodeInfo) ni.getPartition(mattr, EnumPartUsage.Explicit);
+			if (niLeaf == null) // no preexisting matching partition - attempt to create it
+			{
+				niLeaf = (JDFNodeInfo) ni.getCreatePartition(mattr, null);
+			}
+			return niLeaf;
+		}
+
+		/**
+		 * @param mattr
+		 * @param status
+		 * @param statusDetails
+		 */
+		private void setPoolStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, String statusDetails)
+		{
+			{
+				// we are setting an individual attribute
+				final JDFStatusPool statusPool = getCreateStatusPool();
+				final EnumNodeStatus stat = getStatus();
+
+				if (!stat.equals(JDFElement.EnumNodeStatus.Pool))
+				{
+					statusPool.setStatus(stat);
+					setStatus(JDFElement.EnumNodeStatus.Pool);
+				}
+
+				statusPool.setStatus(mattr, status, statusDetails);
+
+				// this can happen if status = the previous status
+				// just remove the pool and reset the status to the original status
+
+				if (statusPool.numChildElements(ElementName.PARTSTATUS, null) == 0)
+				{
+					setStatus(status);
+					if (statusDetails != null)
+					{
+						setStatusDetails(statusDetails);
+					}
+					statusPool.deleteNode();
+				}
+			}
+		}
+
+		/**
+		 * @param status
+		 * @param statusDetails
+		 * @return
+		 */
+		private boolean setRootStatus(final JDFElement.EnumNodeStatus status, String statusDetails)
+		{
+			setStatus(status);
+			if (statusDetails != null)
+			{
+				setStatusDetails(statusDetails);
+			}
+			removeChild(ElementName.STATUSPOOL, null, 0);
+			if (getVersion(true).getValue() >= JDFElement.EnumVersion.Version_1_3.getValue())
+			{
+				final JDFNodeInfo ni = getNodeInfo();
+				if (ni != null)
+				{
+					ni.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
+					ni.setNodeStatus(status);
+					if (statusDetails != null)
+					{
+						ni.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
+						ni.setNodeStatusDetails(statusDetails);
+					}
+				}
+			}
+			return true;
+		}
+
+		/**
+		 * sets the node's partition status and StatusDetails
+		 * 
+		 * @param vmattr vector Attribute maps of partition
+		 * @param status Status to set
+		 * @param statusDetails
+		 * @return boolean: success or not
+		 */
+		public boolean setPartStatus(final VJDFAttributeMap vmattr, final EnumNodeStatus status, final String statusDetails)
+		{
+			boolean bRet = true;
+			int siz = 0;
+
+			if (vmattr != null)
+			{
+				siz = vmattr.size();
+				if (siz > 2)
+					partResMap = getCreateNodeInfo().getPartitionMap();
+
+				for (int i = 0; i < siz; i++)
+				{
+					bRet = setPartStatus(vmattr.elementAt(i), status, statusDetails) && bRet;
+				}
+			}
+
+			if (vmattr == null || siz == 0)
+			{
+				bRet = setPartStatus((JDFAttributeMap) null, status, statusDetails);
+			}
+
+			return bRet;
+		}
+
+	}
+
+	/**
 	 * synchronization of stati based on child jdf node status
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
@@ -2812,24 +3019,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public boolean setPartStatus(final VJDFAttributeMap vmattr, final EnumNodeStatus status, final String statusDetails)
 	{
-		boolean bRet = true;
-		int siz = 0;
-
-		if (vmattr != null)
-		{
-			siz = vmattr.size();
-			for (int i = 0; i < siz; i++)
-			{
-				bRet = setPartStatus(vmattr.elementAt(i), status, statusDetails) && bRet;
-			}
-		}
-
-		if (vmattr == null || siz == 0)
-		{
-			bRet = setPartStatus((JDFAttributeMap) null, status, statusDetails);
-		}
-
-		return bRet;
+		return new PartStatusHelper().setPartStatus(vmattr, status, statusDetails);
 	}
 
 	/**
@@ -2856,102 +3046,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public boolean setPartStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, String statusDetails)
 	{
-		final EnumNodeStatus stat = getStatus();
-		statusDetails = StringUtil.getNonEmpty(statusDetails);
-		// 100602 handle nasty combination
-		if (mattr != null && (!mattr.isEmpty() && (status.equals(JDFElement.EnumNodeStatus.Pool) || status.equals(JDFElement.EnumNodeStatus.Part))))
-		{
-			// throw an exception??? this is a snafu to set an individual part
-			// status to pool
-			return false;
-		}
-
-		if (mattr == null || mattr.isEmpty())
-		{
-			setStatus(status);
-			if (statusDetails != null)
-			{
-				setStatusDetails(statusDetails);
-			}
-			removeChild(ElementName.STATUSPOOL, null, 0);
-			if (getVersion(true).getValue() >= JDFElement.EnumVersion.Version_1_3.getValue())
-			{
-				final JDFNodeInfo ni = getNodeInfo();
-				if (ni != null)
-				{
-					ni.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
-					ni.setNodeStatus(status);
-					if (statusDetails != null)
-					{
-						ni.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
-						ni.setNodeStatusDetails(statusDetails);
-					}
-				}
-			}
-			return true;
-		}
-
-		if (getVersion(true).getValue() < JDFElement.EnumVersion.Version_1_3.getValue())
-		{
-			// we are setting an individual attribute
-			final JDFStatusPool statusPool = getCreateStatusPool();
-
-			if (!stat.equals(JDFElement.EnumNodeStatus.Pool))
-			{
-				statusPool.setStatus(stat);
-				setStatus(JDFElement.EnumNodeStatus.Pool);
-			}
-
-			statusPool.setStatus(mattr, status, statusDetails);
-
-			// this can happen if status = the previous status
-			// just remove the pool and reset the status to the original status
-
-			if (statusPool.numChildElements(ElementName.PARTSTATUS, null) == 0)
-			{
-				setStatus(status);
-				if (statusDetails != null)
-				{
-					setStatusDetails(statusDetails);
-				}
-				statusPool.deleteNode();
-			}
-		}
-		else
-		// version >=1.3
-		{
-			JDFNodeInfo ni = getCreateNodeInfo();
-			if (getStatus() != JDFElement.EnumNodeStatus.Part)
-			{ // set a decent default status for implicit
-				ni.setNodeStatus(getStatus());
-				if (statusDetails != null)
-				{
-					ni.setNodeStatusDetails(statusDetails);
-				}
-			}
-
-			final JDFResource niRoot = ni.getResourceRoot();
-			niRoot.setPartUsage(JDFResource.EnumPartUsage.Implicit);
-			final VElement ve = ni.getPartitionVector(mattr, EnumPartUsage.Explicit);
-			if (ve.isEmpty()) // no preexisting matching partition - attempt to create it
-			{
-				ve.add(niRoot.getCreatePartition(mattr, null));
-			}
-
-			for (int i = 0; i < ve.size(); i++)
-			{
-				ni = (JDFNodeInfo) ve.elementAt(i);
-				ni.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
-				ni.setNodeStatus(status);
-				if (statusDetails != null)
-				{
-					ni.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
-					ni.setNodeStatusDetails(statusDetails);
-				}
-			}
-			setStatus(JDFElement.EnumNodeStatus.Part);
-		}
-		return true;
+		return new PartStatusHelper().setPartStatus(mattr, status, statusDetails);
 	}
 
 	/**
@@ -3221,7 +3316,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				for (int i = 0; i < vParts.size(); i++)
 				{
 					final JDFPartStatus ps = (JDFPartStatus) vParts.item(i);
-					vMap.appendUnique(ps.getPartMap());
+					vMap.add(ps.getPartMap());
 				}
 				vMap.unify();
 				return vMap;
@@ -9091,9 +9186,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 
 							if ((statPart == JDFNode.EnumNodeStatus.Waiting) || (statPart == JDFNode.EnumNodeStatus.Ready))
 							{
-								vamPartMaps.appendUnique(niPart.getPartMap());
+								vamPartMaps.add(niPart.getPartMap());
 							}
 						}
+						vamPartMaps.unify();
 					}
 				}
 			}
@@ -9305,25 +9401,32 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					this.setStatus(EnumNodeStatus.Part);
 				}
 
+				Map<JDFAttributeMap, JDFResource> mapLeaves = ni.getPartitionMap();
+
 				for (int i = 0; i < vSpawnParts.size(); i++)
 				{
 					// in case we spawn a subset, try to get the superset list
-					// first
-					final VElement vLeaves = ni.getPartitionVector(vSpawnParts.elementAt(i), EnumPartUsage.Explicit);
-					// no preexisting leaves - create them
-					if (vLeaves.isEmpty())
+					// first no preexisting leaves - create them
+					JDFAttributeMap partMap = vSpawnParts.elementAt(i);
+					JDFResource niLeaf = mapLeaves.get(partMap);
+					if (niLeaf == null)
 					{
-						final JDFNodeInfo niLeaf = (JDFNodeInfo) ni.getCreatePartition(vSpawnParts.elementAt(i), partVector);
-						niLeaf.setAttribute(AttributeName.NODESTATUS, "Waiting");
-						vni.add(niLeaf);
+						VElement v = ni.getPartitionVector(partMap, EnumPartUsage.Explicit);
+						if (v != null && v.size() > 0)
+						{
+							vni.addAll(v);
+						}
+						else
+						{
+							niLeaf = ni.getCreatePartition(partMap, partVector);
+							niLeaf.setAttribute(AttributeName.NODESTATUS, "Waiting");
+							vni.add(niLeaf);
+						}
 					}
 					else
 					// we have existing leaves, use them
 					{
-						for (int j = 0; j < vLeaves.size(); j++)
-						{
-							vni.add(vLeaves.elementAt(j));
-						}
+						vni.add(niLeaf);
 					}
 				}
 			}

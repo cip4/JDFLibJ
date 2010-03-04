@@ -175,7 +175,7 @@ public class JDFQueueSubmissionParamsTest extends JDFTestCaseBase
 				t.stop();
 				if (i % 100 == 0)
 				{
-					System.out.println(b + " " + i + " " + t.getRealTime() + " " + t.getAverageRealTime() + " " + t.getCPUTime() + " " + t.getAverageCPUTime());
+					System.out.println(b + " " + i + " " + t.getTotalRealTime() + " " + t.getAverageRealTime() + " " + t.getTotalCPUTime() + " " + t.getAverageCPUTime());
 				}
 			}
 		}

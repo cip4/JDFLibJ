@@ -287,15 +287,17 @@ public class JDFSpawn
 			{
 				// allParts is the vector of all parts that the spawned
 				// AncestorPool will contain
-				final VJDFAttributeMap allParts = new VJDFAttributeMap();
-
-				for (int psp = 0; psp < preSpawnedParts.size(); psp++)
-				{
-					final VJDFAttributeMap tmpParts = new VJDFAttributeMap(vSpawnParts);
-					tmpParts.overlapMap(preSpawnedParts.elementAt(psp));
-					allParts.appendUnique(tmpParts);
-				}
-				vSpawnParts = allParts;
+				//				final VJDFAttributeMap allParts = new VJDFAttributeMap();
+				//
+				//				for (int psp = 0; psp < preSpawnedParts.size(); psp++)
+				//				{
+				//					final VJDFAttributeMap tmpParts = new VJDFAttributeMap(vSpawnParts);
+				//					tmpParts.overlapMap(preSpawnedParts.elementAt(psp));
+				//					allParts.addall(tmpParts);
+				//				}
+				//				vSpawnParts = allParts;
+				//				vSpawnParts.unify();
+				vSpawnParts.overlapMap(preSpawnedParts);
 			}
 			// we arrived at a null vector of parts - that ain't no good
 			if (vSpawnParts.isEmpty())
@@ -341,15 +343,12 @@ public class JDFSpawn
 		}
 		final VElement vn = node.getvJDFNode(null, null, false);
 		final int size = vn.size();
-		// fill all resources and all links of all children into vResPool and
-		// links
+		// fill all resources and all links of all children into vResPool and links
 		for (int i = 0; i < size; i++)
 		{
 			final JDFNode vnNode_i = (JDFNode) vn.elementAt(i);
-			vnNode_i.prepareNodeInfo(vSpawnParts); // make sure we have a
-			// nodeinfo in all spawned
-			// nodes of main in case we
-			// have to merge stati
+			// make sure we have a nodeinfo in all spawned nodes of main in case we have to merge stati
+			vnNode_i.prepareNodeInfo(vSpawnParts);
 		}
 	}
 
@@ -711,6 +710,12 @@ public class JDFSpawn
 
 				// loop over all partitions
 				boolean bRealyRW = vSpawnParts == null || vSpawnParts.size() == 0;
+				if (!bRealyRW && siz > 0 && (bResRW || bSpawnROPartsOnly))
+				{
+					final JDFResource r = (JDFResource) vRes.elementAt(0);
+					// reduce partitions of all RW resources and of RO resources if requested
+					reducePartitions(r.getResourceRoot());
+				}
 				for (int resParts = 0; resParts < siz; resParts++)
 				{
 					final JDFResource r = (JDFResource) vRes.elementAt(resParts);
@@ -718,11 +723,8 @@ public class JDFSpawn
 
 					spawnPart(rRoot1, spawnID, copyStatus, true);
 					spawnPart(r, spawnID, copyStatus, false);
-					if (vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
+					if (resParts == 0 && vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
 					{
-						// reduce partitions of all RW resources and of RO
-						// resources if requested
-						reducePartitions(r.getResourceRoot());
 						if (EnumSpawnStatus.SpawnedRW.equals(rRoot1.getSpawnStatus()))
 						{
 							bRealyRW = true;
@@ -978,45 +980,42 @@ public class JDFSpawn
 	private void updateSpawnIDsInMain(final String spawnID, final JDFResourceLink link, final VJDFAttributeMap vPartMap)
 	{
 		final JDFResource rMain = link.getLinkRoot();
-		for (int k = 0; k < vPartMap.size(); k++)
+		final VElement vMainPart = rMain.getPartitionVector(vPartMap, null);
+		for (int kk = 0; kk < vMainPart.size(); kk++)
 		{
-			final VElement vMainPart = rMain.getPartitionVector(vPartMap.elementAt(k), null);
-			for (int kk = 0; kk < vMainPart.size(); kk++)
+			final JDFResource rMainPart = (JDFResource) vMainPart.elementAt(kk);
+			if (rMainPart == null)
 			{
-				final JDFResource rMainPart = (JDFResource) vMainPart.elementAt(kk);
-				if (rMainPart == null)
-				{
-					continue;
-				}
+				continue;
+			}
 
-				final VElement leaves = rMainPart.getLeaves(true);
-				boolean bSpawnID = false;
+			final VElement leaves = rMainPart.getLeaves(true);
+			boolean bSpawnID = false;
 
-				// if any child node or leaf has this spawnID we need not do
-				// anything
-				for (int kkk = 0; kkk < leaves.size(); kkk++)
+			// if any child node or leaf has this spawnID we need not do
+			// anything
+			for (int kkk = 0; kkk < leaves.size(); kkk++)
+			{
+				final JDFResource rMainLeaf = (JDFResource) leaves.elementAt(kkk);
+				bSpawnID = rMainLeaf.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, EnumAttributeType.NMTOKENS);
+				if (bSpawnID)
 				{
-					final JDFResource rMainLeaf = (JDFResource) leaves.elementAt(kkk);
-					bSpawnID = rMainLeaf.includesMatchingAttribute(AttributeName.SPAWNIDS, spawnID, EnumAttributeType.NMTOKENS);
-					if (bSpawnID)
-					{
-						break;
-					}
+					break;
 				}
-				if (!bSpawnIdentical && !bSpawnID)
+			}
+			if (!bSpawnIdentical && !bSpawnID)
+			{
+				if (!vPartMap.subMap(rMainPart.getPartMap()))
 				{
-					if (!vPartMap.subMap(rMainPart.getPartMap()))
-					{
-						bSpawnID = true; // bluff existing spawnID so that it does not get set below
-					}
+					bSpawnID = true; // bluff existing spawnID so that it does not get set below
 				}
+			}
 
-				if (!bSpawnID)
-				{
-					rMainPart.appendSpawnIDs(spawnID);
-					rMainPart.setLocked(true);
-					rMainPart.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
-				}
+			if (!bSpawnID)
+			{
+				rMainPart.appendSpawnIDs(spawnID);
+				rMainPart.setLocked(true);
+				rMainPart.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
 			}
 		}
 	}
@@ -1039,17 +1038,26 @@ public class JDFSpawn
 		{
 			for (int l = 0; l < vLinkMap.size(); l++)
 			{
-				for (int k = 0; k < vPartMap.size(); k++)
+				JDFAttributeMap linkMap = vLinkMap.elementAt(l);
+				if (setSpawnParts.contains(linkMap))
 				{
-					JDFAttributeMap m = new JDFAttributeMap(vPartMap.elementAt(k));
-					m = m.orMap(vLinkMap.elementAt(l));
-
-					if (!m.isEmpty())
+					vNewMap.add(linkMap);
+				}
+				else
+				{
+					for (int k = 0; k < vPartMap.size(); k++)
 					{
-						vNewMap.appendUnique(m);
+						JDFAttributeMap m = new JDFAttributeMap(vPartMap.elementAt(k));
+						m = m.orMap(linkMap);
+
+						if (!m.isEmpty())
+						{
+							vNewMap.add(m);
+						}
 					}
 				}
 			}
+			vNewMap.unify();
 		}
 		return vNewMap;
 	}
@@ -1212,7 +1220,7 @@ public class JDFSpawn
 							else
 							{
 								VElement v = child.getChildrenByTagName_KElement(ElementName.IDENTICAL, null, null, false, true, -1);
-								if (v != null)
+								if (v != null && v.size() > 0)
 								{
 
 									VElement v2 = new VElement();
@@ -1328,6 +1336,7 @@ public class JDFSpawn
 
 		// in case we spawn lower than, only remove partitions that are parallel to our spawning
 		int nMax = 999;
+
 		final VElement vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
 		for (int j = 0; j < vSubParts.size(); j++)
 		{

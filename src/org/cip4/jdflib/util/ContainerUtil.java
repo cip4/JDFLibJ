@@ -115,6 +115,7 @@ public class ContainerUtil
 		{
 			return null;
 		}
+
 		final Set<a> s = new HashSet<a>();
 		while (enumeration.hasMoreElements())
 		{
@@ -136,8 +137,10 @@ public class ContainerUtil
 		{
 			return null;
 		}
-		final Set<a> s = new HashSet<a>();
-		for (int i = 0; i < list.size(); i++)
+		int size = list.size();
+		final HashSet<a> s = new HashSet<a>(size + 10);
+
+		for (int i = 0; i < size; i++)
 		{
 			s.add(list.get(i));
 		}
@@ -156,7 +159,7 @@ public class ContainerUtil
 		{
 			return null;
 		}
-		final Set<a> s = new HashSet<a>();
+		final Set<a> s = new HashSet<a>(l.length + 10);
 		for (int i = 0; i < l.length; i++)
 		{
 			s.add(l[i]);

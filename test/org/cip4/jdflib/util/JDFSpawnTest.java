@@ -1213,7 +1213,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	 */
 	public void testSpawnIdentical()
 	{
-		for (int i = 0; i < 2; i++)
+		for (int i = 1; i < 2; i++)
 		{
 
 			for (int ii = 0; ii < 2; ii++) // spawnidentical = true / false
@@ -2525,6 +2525,83 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
+	public void testSpawnRootNestedPerformance()
+	{
+		JDFNode root = JDFDoc.parseFile(sm_dirTestData + "spawnRoot.jdf").getJDFRoot();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put("Run", "Run_100303_102859963_000349");
+		JDFNode n2s = root;
+		CPUTimer ct = new CPUTimer(true);
+		for (int i = 1; i < 10; i++)
+		{
+			JDFSpawn sp = new JDFSpawn(n2s);
+			VJDFAttributeMap v = new VJDFAttributeMap();
+			JDFAttributeMap map2 = new JDFAttributeMap(map);
+			for (int j = i; j < 400; j++)
+			{
+				map2.put("RunPage", "" + j);
+				v.add(new JDFAttributeMap(map2));
+			}
+			ct.start();
+			root = n2s;
+			n2s = sp.spawn(null, null, new VString("RunList:Output", null), v, false, true, true, true);
+			System.out.println(i + " " + ct.toXML());
+			ct.stop();
+			if (i == 7)
+			{
+				root.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "rootMainNest.jdf", 2, false);
+				n2s.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "rootSubNest.jdf", 2, false);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testSpawnRootListPerformance()
+	{
+		JDFNode root = JDFDoc.parseFile(sm_dirTestData + "spawnRoot.jdf").getJDFRoot();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put("Run", "Run_100303_102859963_000349");
+		JDFNode n2s = root;
+		CPUTimer ct = new CPUTimer(false);
+		JDFSpawn sp = new JDFSpawn(n2s);
+		for (int i = 1; i < 400; i++)
+		{
+			VJDFAttributeMap v = new VJDFAttributeMap();
+			JDFAttributeMap map2 = new JDFAttributeMap(map);
+			map2.put("RunPage", "" + i);
+			v.add(map2);
+			ct.start();
+			sp.spawn(null, null, new VString("RunList:Output", null), v, false, true, true, true);
+			System.out.println(i + " " + ct.toString());
+			ct.stop();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testMergeRootList()
+	{
+		JDFNode sub = JDFDoc.parseFile(sm_dirTestDataTemp + "rootSubNest.jdf").getJDFRoot();
+		JDFNode main = JDFDoc.parseFile(sm_dirTestDataTemp + "rootMainNest.jdf").getJDFRoot();
+		CPUTimer ct = new CPUTimer(false);
+		for (int i = 0; i < 10; i++)
+		{
+			JDFNode clone = (JDFNode) main.clone();
+			JDFNode cloneSub = (JDFNode) sub.clone();
+			ct.start();
+			JDFMerge m = new JDFMerge(clone);
+			m.mergeJDF(cloneSub, null, EnumCleanUpMerge.None, EnumAmountMerge.UpdateLink);
+			System.out.println(i + " " + ct.toString());
+			ct.stop();
+		}
+	}
 
 	/**
 	 * 

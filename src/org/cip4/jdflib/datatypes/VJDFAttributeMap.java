@@ -260,7 +260,7 @@ public class VJDFAttributeMap
 	/**
 	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
 	 * 
-	 * @param subMap the given map
+	 * @param map the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
 	public VJDFAttributeMap getAndMaps(final JDFAttributeMap map)
@@ -584,10 +584,10 @@ public class VJDFAttributeMap
 
 			if (!map.isEmpty())
 			{
-				v.appendUnique(map);
+				v.add(map);
 			}
 		}
-
+		v.unify();
 		m_vec = v.getVector();
 	}
 
@@ -608,9 +608,10 @@ public class VJDFAttributeMap
 
 			if (bNullMap || !map.isEmpty())
 			{
-				v.appendUnique(map);
+				v.add(map);
 			}
 		}
+		v.unify();
 		m_vec = v.getVector();
 	}
 
@@ -687,9 +688,13 @@ public class VJDFAttributeMap
 	 */
 	public void overlapMap(final VJDFAttributeMap map)
 	{
+		if (map == null)
+			return;
+		Set<JDFAttributeMap> set = ContainerUtil.toHashSet(map.getVector());
 		for (int i = this.size() - 1; i >= 0; i--)
 		{
-			if (!get(i).overlapMap(map))
+			JDFAttributeMap attributeMap = get(i);
+			if (!set.contains(attributeMap) && !attributeMap.overlapMap(map))
 			{
 				removeElementAt(i);
 			}

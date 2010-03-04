@@ -1231,7 +1231,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public static boolean isWildCard(final String nodeName)
 	{
-		return (nodeName == null) || (nodeName.length() < 2) && (nodeName.equals(JDFConstants.EMPTYSTRING) || nodeName.equals(JDFConstants.STAR));
+		return (nodeName == null) || JDFConstants.EMPTYSTRING.equals(nodeName) || JDFConstants.STAR.equals(nodeName);
 	}
 
 	/**

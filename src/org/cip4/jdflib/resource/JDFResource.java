@@ -116,9 +116,11 @@ import org.cip4.jdflib.resource.process.JDFIdentical;
 import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFQualityControlResult;
 import org.cip4.jdflib.resource.process.JDFSourceResource;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.StringUtil;
+import org.w3c.dom.Attr;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -1279,6 +1281,1116 @@ public class JDFResource extends JDFElement
 		public static final EnumSpawnStatus SpawnedRW = new EnumSpawnStatus(JDFConstants.SPAWNEDRW);
 	}
 
+	/**
+	 * 
+	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	private class PartitionGetter
+	{
+
+		/**
+		 * 
+		 */
+		public PartitionGetter()
+		{
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		/**
+		 * Gets the vector of parts (resource leaves or nodes) that match mAttribute
+		 * 
+		 * @param vm the map of key-value partitions (where key - PartIDKey, value - its value)
+		 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+		 * 
+		 * @return VElement - the vector of matching resource leaves or nodes
+		 * 
+		 * @default getPartitionVector(m, null)
+		 */
+		protected VElement getPartitionVector(final VJDFAttributeMap vm, EnumPartUsage partUsage)
+		{
+			if (partUsage == null)
+			{
+				partUsage = getPartUsage();
+			}
+
+			final VElement v = getLeaves(true);
+			if (vm == null)
+			{
+				return v;
+			}
+			final HashMap<JDFAttributeMap, JDFResource> leafMap = new HashMap<JDFAttributeMap, JDFResource>();
+			final VString pk = getPartIDKeys();
+			for (int i = v.size() - 1; i >= 0; i--)
+			{
+				final JDFResource r = (JDFResource) v.get(i);
+				leafMap.put(r.getPartMap(pk), r);
+			}
+			v.clear();
+			boolean bAll = true;
+			boolean bNoDeep = true;
+			for (int i = 0; bNoDeep && bAll && i < vm.size(); i++)
+			{
+				final JDFAttributeMap map = vm.elementAt(i);
+				final JDFResource element = leafMap.get(map);
+				if (bNoDeep)
+				{
+					VString keys = map.getKeys();
+					if (keys.contains(AttributeName.PARTVERSION))
+					{
+						bNoDeep = false; // need special handling for multiple versions
+					}
+					else
+					{
+						int min = 999;
+						int max = -1;
+						for (int ii = 0; ii < pk.size(); ii++)
+						{
+							boolean b = keys.contains(pk.get(ii));
+							if (b)
+								max = ii;
+							else
+								min = ii;
+						}
+						bNoDeep = min > max;
+					}
+				}
+				if (element != null)
+				{
+					v.add(element);
+					final JDFIdentical identical = element.getIdentical();
+					if (identical != null)
+						v.add(identical.getTarget());
+				}
+				else
+				{
+					bAll = false;
+				}
+			}
+
+			if (!bAll)
+			{
+				v.clear();
+				if (EnumPartUsage.Sparse.equals(partUsage) || !bNoDeep)
+				{
+					for (int i = 0; i < vm.size(); i++)
+					{
+						v.addAll(getPartitionVector(vm.elementAt(i), partUsage));
+					}
+				}
+				else
+				{
+					boolean bImplicit = EnumPartUsage.Implicit.equals(partUsage);
+					Set<JDFAttributeMap> allMaps = ContainerUtil.toHashSet(vm.getVector());
+					VElement leaves = getLeaves(false);
+					for (int i = 0; i < leaves.size(); i++)
+					{
+						JDFResource leaf = (JDFResource) leaves.elementAt(i);
+						while (true)
+						{
+							JDFAttributeMap map = leaf.getPartMap();
+							if (allMaps.contains(map) || (bImplicit && vm.subMap(map)))
+							{
+								v.add(leaf);
+								final JDFIdentical identical = leaf.getIdentical();
+								if (identical != null)
+									v.add(identical.getTarget());
+								break;
+							}
+							else if (leaf == JDFResource.this)
+								break;
+							leaf = (JDFResource) leaf.getParentNode_KElement();
+						}
+					}
+				}
+				v.unify();
+			}
+			return v;
+		}
+
+		/**
+		 * Gets the vector of parts (resource leaves or nodes) that match mAttribute
+		 * 
+		 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
+		 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+		 * 
+		 * @return VElement - the vector of matching resource leaves or nodes
+		 * 
+		 * @default getPartitionVector(m, null)
+		 */
+		public VElement getPartitionVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
+		{
+			return getDeepPartVector(m, partUsage, -1, getPartIDKeys());
+		}
+
+		// //////////////////////////////////////////////////////////////////////////
+		// /////
+
+		protected VElement getDeepPartVector(final JDFAttributeMap m_in, EnumPartUsage partUsage, int matchingDepth, final VString partIDKeys)
+		{
+			JDFAttributeMap m = new JDFAttributeMap(m_in);
+			final VElement vReturn = new VElement();
+			m = removeImplicitPartions(m);
+			if (partUsage == null)
+			{
+				partUsage = getPartUsage();
+			}
+			if (!EnumPartUsage.Explicit.equals(partUsage))
+			{
+				m.reduceMap(partIDKeys); // also ok for sparse!
+			}
+			if (m.isEmpty())
+			{
+				vReturn.add(JDFResource.this);
+				return vReturn;
+			}
+
+			final int msiz = m.size();
+			if (matchingDepth == -1) // first call - check validity of the map
+			{
+				matchingDepth = 0;
+				final JDFAttributeMap thisMap = getPartMap(partIDKeys);
+
+				final Iterator<String> it = m.getKeyIterator();
+				while (it.hasNext())// for(int i = 0; i < msiz; i++)
+				{
+					final String strKey = it.next();
+					// final EnumPartIDKey partIDKey = EnumPartIDKey.getEnum(strKey);
+					//
+					// // check map and throw exception if bad
+					// if (partIDKey == null)
+					// {
+					// throw new JDFException("GetPartIDKeyEnum: illegal key:" + strKey);
+					// }
+
+					// check whether we are already in a leaf when initially calling
+					final String mMapValue = m.get(strKey);
+					if (thisMap != null)
+					{
+						final String thisMapValue = thisMap.get(strKey);
+
+						if (thisMapValue != null && JDFPart.matchesPart(strKey, thisMapValue, mMapValue))
+						{
+							matchingDepth++;
+						}
+					}
+				}
+
+				// check if we are incompatible from the start...
+				if (!JDFPart.overlapPartMap(thisMap, m))
+				{
+					return vReturn;
+				}
+			}
+
+			// if we find an <Identical> element, we must clean up the map and merge
+			// in the values of
+			// identical can only be in a leaf
+			final JDFIdentical identical = getIdentical();
+			if (identical != null)
+			{
+				final JDFPart part = (JDFPart) identical.getElement(ElementName.PART);
+				if (part != null)
+				{
+					final JDFAttributeMap identityMap = part.getPartMap();
+					if (identityMap == null || identityMap.overlapMap(getPartMap(partIDKeys)))
+					{
+						throw new JDFException("Corrupt Identical Structure!");
+					}
+					m.putAll(identityMap);
+
+					// the identity map is always complete from the root, we therefore
+					// can start searching
+					// in the root
+					return getResourceRoot().getDeepPartVector(m, partUsage, -1, partIDKeys);
+				}
+			}
+
+			if (msiz == matchingDepth)
+			{
+				vReturn.add(JDFResource.this);
+				return vReturn;
+			}
+
+			final String nodeName = getNodeName();
+			JDFResource resourceElement = (JDFResource) getElement_KElement(nodeName, null, 0);
+
+			if (resourceElement == null) // got a leaf or found no matching children
+			{
+				// 150802 RP removed different treatment for leaves and no matching elements
+				if (partUsage.getValue() >= EnumPartUsage.Sparse.getValue()) // allow incomplete parts
+				{
+					vReturn.add(JDFResource.this);
+				}
+
+				return vReturn;
+			}
+
+			final VElement toAppend = new VElement(); // we stick all recursively found
+			// candidates into this vector
+			boolean hasBadChildren = false; // loop over all valid elements and
+			// search downward
+			boolean hasMatchingAttribute = false;
+			boolean bSearchSame = true; // boolean that controls whether to search
+			// the lower children.
+			boolean bCompleteMatch = false;
+			String matchingKey = null;
+			String matchingValue = null;
+			int nChildren = 0;
+			int matchingKeyPos = -1;
+
+			while (true)
+			{
+				boolean badChild = false;
+				boolean bSnafu = false;
+
+				if (matchingKeyPos >= 0) // all other elements except the first
+				// may have a predefined matching key
+				{
+					final String sTmp = resourceElement.getAttribute_KElement(matchingKey, null, null);
+					if (sTmp != null) // found a matching key;
+					{
+						if (sTmp.equals(matchingValue))
+						{
+							hasMatchingAttribute = true;
+						}
+						else
+						{
+							badChild = true;
+							hasBadChildren = true;
+						}
+					}
+					else
+					{
+						bSnafu = true; // should never get here, but in case of a
+						// corrupt leaf structure,
+						// it could happen and will be handled gracefully
+					}
+				}
+
+				if ((nChildren++ == 0) || bSnafu) // must only search the first
+				// element, since only one key
+				{ // is allowed and all keys must be in the same sequence;
+					// unless, of course, someone wrote crap JDF (bSnafu=true)
+					final Iterator<String> it = m.getKeyIterator();
+					int im = 0;
+					while (it.hasNext())// for(int im = 0; im < msiz; im++)
+					{
+						final String strKey = it.next();
+						final String strValue = m.get(strKey);
+
+						final String sTmp = resourceElement.getAttribute_KElement(strKey, null, null);
+
+						if (sTmp != null)// found a matching key;
+						{
+							if (JDFPart.matchesPart(strKey, sTmp, strValue))
+							{
+								hasMatchingAttribute = true;
+							}
+							else
+							{
+								badChild = true;
+								hasBadChildren = true;
+							}
+
+							matchingKeyPos = im;
+							matchingKey = strKey;
+							matchingValue = strValue;
+							break;
+						}
+						im++;
+					}
+				}
+
+				if (!badChild)
+				{
+					final VElement dpv = resourceElement.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
+
+					if (dpv.size() > 0)
+					{
+						toAppend.addAll(dpv);
+						bSearchSame = false; // not necessary since we have
+						// something deeper
+
+						if (hasMatchingAttribute && toAppend.size() == 1) // this is
+						// a
+						// potential
+						// complete
+						// match
+						// - we may just stop
+						{
+							final JDFResource root = getResourceRoot();
+							JDFElement closest = (JDFElement) toAppend.elementAt(0);
+							// move to root
+							int leafDepth = 0;
+
+							while (!closest.equals(root))
+							{
+								leafDepth++;
+								closest = (JDFElement) closest.getParentNode();
+							}
+
+							bCompleteMatch = (leafDepth == msiz);
+						}
+					}
+				}
+				if (bCompleteMatch)
+				{
+					break; // nothing at all left to do; jump out of loop
+				}
+
+				final KElement k = resourceElement.getNextSiblingElement(nodeName, null);
+
+				if (!(k instanceof JDFResource))
+				{
+					break;
+				}
+
+				resourceElement = (JDFResource) k;
+			}
+
+			// nothing complete was found, and we are at the end of the chain
+			if (bSearchSame)
+			{
+				// check whether all sub elements of this are accepted completely
+				final int appSize = toAppend.size();
+				boolean bSame = (!hasMatchingAttribute) && (nChildren == appSize);
+
+				if (bSame)
+				{
+					resourceElement = (JDFResource) getElement_KElement(nodeName, null, 0);
+
+					for (int n = 0; n < appSize; n++)
+					{
+						if (!resourceElement.equals(toAppend.elementAt(n)))
+						{
+							bSame = false;
+							break;
+						}
+
+						final KElement k = resourceElement.getNextSiblingElement(nodeName, null);
+						if (!(k instanceof JDFResource))
+						{
+							break;
+						}
+						resourceElement = (JDFResource) k;
+					}
+				}
+
+				if (!bSame) // something in the children warrants a closer look and
+				// we are at the end
+				{
+					// none match and this is the last with bad kids and we want
+					// incomplete stuff
+					if (toAppend.isEmpty() && hasBadChildren && (partUsage.equals(EnumPartUsage.Implicit)) && !hasMatchingAttribute)
+					{
+						final JDFResource root = getResourceRoot();
+						JDFResource closest = JDFResource.this;
+						boolean bClosest = false;
+
+						// move to root
+						while (!closest.equals(root))
+						{
+							// used for an explicit (non inherited) attribute check.
+							final JDFElement closestElement = closest;
+
+							// check whether any parameters of map were found
+							final Iterator<String> it = m.getKeyIterator();
+							while (it.hasNext())// for(int i = 0; i < msiz; i++)
+							{
+								final String strKey = it.next();
+								if (closestElement.hasAttribute_KElement(strKey, null, false))
+								{
+									bClosest = true;
+									break;
+								}
+							}
+
+							// found one that has at least one attribute from m -->
+							// stop searching
+							if (bClosest)
+							{
+								break;
+							}
+
+							// this one is no closer than it's parent --> take the
+							// parent and retry
+							closest = (JDFResource) closest.getParentNode();
+						}
+						vReturn.add(closest);
+					}
+					else
+					// this is the standard recursive case with no special handling
+					{
+						vReturn.addAll(toAppend);
+					}
+				}
+				else
+				{
+					// if all subelements were accepted, I am the correct root
+					// note that this may recurse up closer to the root
+					vReturn.add(JDFResource.this);
+				}
+			}
+			else
+			// this is the standard recursive case with no special handling
+			{
+				vReturn.addAll(toAppend);
+			}
+
+			return vReturn;
+		}
+
+		// //////////////////////////////////////////////////////////////////////////
+		// /////
+		private JDFAttributeMap removeImplicitPartions(JDFAttributeMap m)
+		{
+			if (m == null)
+			{
+				return m;
+			}
+			final Vector<EnumPartIDKey> v = getImplicitPartitions();
+			if (v == null)
+			{
+				return m;
+			}
+			m = new JDFAttributeMap(m);
+			for (int i = 0; i < v.size(); i++)
+			{
+				m.remove((v.elementAt(i)).getName());
+			}
+			return m;
+		}
+
+		/**
+		 * Gets the first part that matches mAttribute
+		 * 
+		 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
+		 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+		 * 
+		 * @return JDFResource: the first matching resource leaf or node
+		 * @default getPartition(m, null)
+		 */
+		public JDFResource getPartition(JDFAttributeMap m, final JDFResource.EnumPartUsage partUsage)
+		{
+			if (m == null || m.isEmpty())
+			{
+				return JDFResource.this;
+			}
+			m = removeImplicitPartions(m);
+			if (m == null || m.isEmpty())
+			{
+				return JDFResource.this;
+			}
+			final JDFResource ret = getFastPartition(m, partUsage);
+			if (ret != null)
+			{
+				return ret;
+			}
+			return getDeepPart(m, partUsage);
+		}
+
+		/**
+		 * Gets a matching part from somewhere down there,<br>
+		 * returns the closest ancestor of all matching elements within the target vector
+		 * 
+		 * @param m map of attributes that should fit
+		 * @param partUsage lso accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+		 * @return the first found matching resource node or leaf
+		 */
+		protected JDFResource getDeepPart(final JDFAttributeMap m, final EnumPartUsage partUsage)
+		{
+			JDFResource retRes = null;
+			final VString partIDKeys = getPartIDKeys();
+			final VElement vRes = getDeepPartVector(m, partUsage, -1, partIDKeys);
+
+			if (vRes != null)
+			{
+				final int siz = vRes.size();
+
+				if (siz == 0)
+				{
+					// nothing fits at all
+					return retRes;
+				}
+				else if (siz == 1)
+				{ // only one, take it
+					retRes = (JDFResource) vRes.elementAt(0);
+				}
+				else
+				{ // multiple, get the closest ancestor
+					JDFResource e = (JDFResource) vRes.elementAt(0);
+					if (e.isResourceRoot())
+					{
+						return e;
+					}
+
+					e = (JDFResource) e.getParentNode();
+					do // if more than one, loop at leas once
+					{
+						int i = 0;
+						for (i = siz - 1; i > 0; i--) // e is always an ancestor of
+						// vElm[i];
+						// go backwards since the chance of mismatch is
+						// greater at the end of the list
+						{
+							if (!e.isAncestor(vRes.elementAt(i))) // found a
+							// misMatch
+							{
+								e = (JDFResource) e.getParentNode();
+								break;
+							}
+						}
+						if (i == 0) // went through the entire loop with no mismatch
+						// --> heureka and ciao
+						{
+							retRes = e;
+							break; // while e!=this
+						}
+					}
+					while (e != JDFResource.this);
+
+					if (e.isResourceRoot())
+					{
+						return e; // the root is always ok
+					}
+				}
+			}
+
+			if (retRes == null)
+			{
+				return null;
+			}
+
+			int retSize = -1;
+			JDFResource loopRes = retRes;
+			final Set<String> vKeys = m.keySet();
+
+			// loop until we hit this or root, whichever is closer
+			while (true)
+			{
+				final JDFAttributeMap returnMap = loopRes.getPartMap();
+				// only check the keys, not the values since <Identical> elements
+				// may screw up the values...
+				returnMap.reduceMap(vKeys);
+				// we lost a key - break one prior to this
+				if (returnMap.size() < retSize)
+				{
+					return retRes; // the child of the tested element
+				}
+				else if (retSize == -1)
+				{ // first loop initialization
+					retSize = returnMap.size();
+				}
+				// we hit the starting point - nothing left to do
+				if ((loopRes == JDFResource.this) || loopRes.isResourceRoot())
+				{
+					return loopRes;
+				}
+				// no check failed - go one closer to the root
+				retRes = loopRes;
+				loopRes = (JDFResource) loopRes.getParentNode();
+				if (loopRes == null)
+				{
+					throw (new JDFException("JDFResource::GetDeepPart ran into null element while searching tree"));
+				}
+			}
+			// return retRes;
+		}
+
+		/**
+		 * reorder the partIDKeys used for generating the new partition based on existing partIDKeys
+		 * 
+		 * @param vPartKeys
+		 * @return VString the reordered VString of partIDKeys
+		 */
+		private VString reorderPartKeys(final VString vPartKeys)
+		{
+			if (vPartKeys == null || vPartKeys.isEmpty())
+			{
+				return getPartIDKeys();
+			}
+			VString vPartIDKeys = new VString(vPartKeys);
+			final VString vExistingPartKeys = getPartIDKeys();
+			final VString vTmpPartIDKeys = new VString();
+			if (vExistingPartKeys != null && !vExistingPartKeys.isEmpty())
+			{
+				boolean allIn = true;
+				for (int i = 0; allIn && i < vPartIDKeys.size(); i++)
+				{
+					if (!vExistingPartKeys.contains(vPartIDKeys.get(i)))
+						allIn = false;
+				}
+				if (allIn)
+					return vExistingPartKeys;
+
+				int n = vExistingPartKeys.size();
+				if (vPartIDKeys.size() < n)
+				{
+					n = vPartIDKeys.size();
+				}
+
+				for (int i = 0; i < n; i++)
+				{
+					final String partKey = vExistingPartKeys.elementAt(i);
+					if (!vPartIDKeys.contains(partKey)) // allow reordering of the
+					// existing partidkeys
+					{
+						throw new JDFException("reorderPartKeys: reordering incompatible partitions. Key: " + partKey + " " + vPartIDKeys);
+					}
+					vTmpPartIDKeys.add(partKey);
+					vPartIDKeys.remove(partKey);
+				}
+				for (int i = 0; i < vPartIDKeys.size(); i++)
+				{
+					vTmpPartIDKeys.add(vPartIDKeys.elementAt(i));
+				}
+				vPartIDKeys = vTmpPartIDKeys;
+			}
+			return vPartIDKeys;
+		}
+
+		/**
+		 * Recursively adds the partition leaves defined in partMap
+		 * 
+		 * @param partMap the map of part keys
+		 * @param vPartKeys the vector of partIDKeys strings of the resource. If empty (the default), the Resource PartIDKeys attribute is used
+		 * 
+		 * @return JDFResource the last created partition leaf
+		 * 
+		 * @throws JDFException if there are in the partMap not matching partitions
+		 * @throws JDFException if there is an attempt to fill non-matching partIDKeys
+		 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than one key
+		 * 
+		 * @default getCreatePartition(partMap, null)
+		 */
+		public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
+		{
+			if (partMap == null)
+			{
+				return getResourceRoot();
+			}
+
+			final JDFAttributeMap localPartMap = new JDFAttributeMap(partMap);
+			// create a copy because it might get modified
+			final boolean appendEnd = true;
+			VString vPartIDKeys = reorderPartKeys(vPartKeys);
+
+			// check whether we are already ok
+			int iMore = 0;
+			final Iterator<String> it = localPartMap.getKeyIterator();
+			while (it.hasNext())
+			{
+				final String key = it.next();
+				if (!vPartIDKeys.contains(key))
+				{
+					iMore++;
+				}
+			}
+			// only heuristically add stuff if needed...
+			if (iMore > 1)
+			{
+				vPartIDKeys = expandKeysFromNode(localPartMap, vPartIDKeys);
+			}
+
+			final JDFAttributeMap thisMap = getPartMap();
+			if (!JDFPart.overlapPartMap(thisMap, localPartMap))
+			{
+				throw new JDFException("JDFResource.GetCreatePartition: non-matching partitions: leaf map:" + thisMap + " create map:" + localPartMap + " PartIDKeys:"
+						+ getPartIDKeys());
+			}
+
+			if (thisMap != null)
+			{
+				final VString thisKeys = thisMap.getKeys();
+				final int siz = (thisKeys.size() < vPartIDKeys.size()) ? thisKeys.size() : vPartIDKeys.size();
+
+				// remove the keys of this
+				for (int i = 0; i < siz; i++)
+				{
+					final String key = vPartIDKeys.elementAt(0);
+					localPartMap.remove(key);
+
+					vPartIDKeys.remove(0);
+				}
+			}
+
+			boolean allParts = true;
+			boolean creating = false;
+			JDFResource leaf = JDFResource.this;
+			// create all partitions
+			for (int k = 0; k < vPartIDKeys.size(); k++)
+			{
+				final String key = vPartIDKeys.elementAt(k);
+				final EnumPartIDKey enumKey = EnumPartIDKey.getEnum(key);
+				final String value = localPartMap.get(key);
+
+				if (localPartMap.containsKey(key))
+				{
+					if (allParts)
+					{
+						if (!creating)
+						{
+							final JDFResource nextLeaf = leaf.getPartition(new JDFAttributeMap(key, value), EnumPartUsage.Explicit);
+							if (nextLeaf == null)
+							{
+								creating = true;
+							}
+							else
+							{
+								leaf = nextLeaf;
+							}
+						}
+						if (creating)
+						{
+							leaf = leaf.addPartition(enumKey, value);
+						}
+						localPartMap.remove(key);
+						if (localPartMap.size() == 0)
+						{
+							break; // nothing left to do
+						}
+					}
+					else
+					{
+						throw new JDFException("GetCreatePartition: Resource ID=" + getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: "
+								+ localPartMap);
+					}
+				}
+				else
+				{
+					allParts = false;
+				}
+			}
+
+			// add last partition key
+			final int partSize = localPartMap.size();
+			if (appendEnd && allParts && partSize == 1)// one left and continuous,
+			// can add
+			{
+				final String key = localPartMap.getKeys().elementAt(0);
+				leaf = leaf.addPartition(EnumPartIDKey.getEnum(key), localPartMap.get(key));
+			}
+			else if (partSize > 0)// either non - continuous or more than one left
+			{
+				throw new JDFException("AddPartitionMap: incompatible partmap. Remaining map: " + localPartMap);
+			}
+			return leaf;
+		}
+
+		/**
+		 * @param m
+		 * @param partUsage
+		 * @return
+		 */
+		private JDFResource getFastPartition(final JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
+		{
+			if (partUsage == null)
+			{
+				partUsage = getPartUsage();
+			}
+			final VString partIDKeys = getPartIDKeys();
+			if (m.size() > partIDKeys.size() && EnumPartUsage.Explicit.equals(partUsage))
+			{
+				return null;
+			}
+			JDFResource ret = JDFResource.this;
+			final String nodeName = ret.getNodeName();
+
+			final int size = Math.min(partIDKeys.size(), m.size());
+			// internal consistency check - if the map can't fit don't even start searching 
+			for (int i = 0; i < size; i++)
+			{
+				final String attName = partIDKeys.get(i);
+				final String attVal = m.get(attName);
+				if (attVal == null)
+				{
+					return null;
+				}
+			}
+
+			final String ns = ret.getNamespaceURI();
+			boolean bPrefix = KElement.xmlnsPrefix(nodeName) != null;
+			for (int i = 0; i < size; i++)
+			{
+				final String attName = partIDKeys.get(i);
+				final String attVal = m.get(attName);
+				//			ret = (JDFResource) ret.getChildWithAttribute(nodeName, attName, ns, attVal, 0, true);
+				KElement e = ret.getFirstChildElement();
+				ret = null;
+
+				while (e != null)
+				{
+					if (nodeName.equals(e.getNodeName()))
+					{
+						Attr attr = bPrefix ? e.getDOMAttr(attName, ns, false) : e.getAttributeNode(attName);
+						String partVal = attr == null ? null : attr.getValue();
+						if (attVal.equals(partVal))
+						{
+							ret = (JDFResource) e;
+							break;
+						}
+					}
+					e = e.getNextSiblingElement();
+				}
+				if (ret == null)
+				{
+					break;
+				}
+			}
+			final JDFIdentical id = ret == null ? null : ret.getIdentical();
+			if (id != null)
+			{
+				ret = id.getTarget();
+			}
+
+			return ret;
+		}
+
+		/**
+		 * Adds a new part to this node, also handles PartIDKeys in the root etc.
+		 * 
+		 * @param partType part type of a new part
+		 * @param value its value
+		 * 
+		 * @return JDFResource - the newly created part
+		 */
+		public JDFResource addPartition(final EnumPartIDKey partType, final String value)
+		{
+			if (isResourceElement())
+			{
+				throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null, 1));
+			}
+			if (partType == null)
+			{
+				throw new JDFException("Attempting to add null partition to resource: " + buildXPath(null, 1));
+			}
+
+			final VString vs = getPartIDKeys();
+			final int posOfType = vs == null ? -1 : vs.indexOf(partType.getName());
+			if (posOfType < 0)
+			{
+				if (!isLeaf())
+				{
+					throw new JDFException("addPartion: adding inconsistent partition - parent must be a leaf");
+				}
+			}
+			else if (posOfType == 0)
+			{
+				if (!isResourceRootRoot())
+				{
+					throw new JDFException("addPartion: adding inconsistent partition - must be root");
+				}
+			}
+			else
+			{
+				if (vs != null)
+				{
+					final String parentPart = vs.stringAt(posOfType - 1);
+					if (!hasAttribute_KElement(parentPart, null, false))
+					{
+						throw new JDFException("addPartion: adding inconsistent partition - parent must have partIDKey: " + parentPart);
+					}
+				}
+			}
+
+			if (!hasAttribute(partType.getName(), null, false))
+			{
+				addPartIDKey(partType);
+			}
+
+			JDFResource p = getFastPartition(new JDFAttributeMap(partType, value), EnumPartUsage.Explicit);
+			if (p != null)
+			{
+				throw new JDFException("addPartion: adding duplicate partition " + partType + "=" + value);
+			}
+
+			p = (JDFResource) appendElement(getNodeName(), getNamespaceURI());
+			if (p != null)
+			{
+				p.setPartIDKey(partType, value);
+			}
+
+			return p;
+		}
+
+		/**
+		 * gets an element as defined by XPath to value <br>
+		 * 
+		 * 
+		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
+		 * 
+		 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
+		 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+		 * 
+		 * @return KElement the specified element
+		 * @throws IllegalArgumentException if path is not supported
+		 */
+		// @Override
+		// public KElement getXPathElement(String path)
+		// {
+		// VElement v= getXPathElementVector(path, 1);
+		// if(v==null || v.size()<1) {
+		// final String nodeName=getNodeName();
+		// KElement ke=this;
+		// while (v == null || v.size()==0)
+		// {
+		// ke = ke.getParentNode_KElement();
+		// if (ke == null || !ke.getNodeName().equals(nodeName))
+		// {
+		// return null;
+		// }
+		// v = ke.getXPathElementVector(path, 1);
+		// }
+		// }
+		// return v.item(0);
+		// }
+		//	/**
+		//	 * Recursively adds the partition leaves defined in vPartMap
+		//	 * 
+		//	 * @param vPartMap the vector of maps of part keys
+		//	 * @param vPartIDKeys the vector of partIDKeys strings of the resource. If empty (the default) the Resource PartIDKeys attribute is used
+		//	 * @return VElement - vector of newly created partitions
+		//	 * 
+		//	 * @throws JDFException if there are in the partMap not matching partitions
+		//	 * @throws JDFException if there is an attempt to fill non-matching partIDKeys
+		//	 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than one key
+		//	 * 
+		//	 * @default createPartitions(vPartMap, VString.emptyVector)
+		//	 */
+		//	public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
+		//	{
+		//		final VString tmp = new VString();
+		//		final VElement vExist = getPartitionVector(vPartMap, null);
+		//
+		//		Set<JDFAttributeMap> setExist = new HashSet<JDFAttributeMap>();
+		//		for (int i = 0; i < vExist.size(); i++)
+		//		{
+		//			JDFResource resource = (JDFResource) vExist.get(i);
+		//			JDFAttributeMap partMap = resource.getPartMap();
+		//			partMap.reduceMap(vPartIDKeys);
+		//			setExist.add(partMap);
+		//		}
+		//
+		//		for (int i = 0; i < vPartMap.size(); i++)
+		//		{
+		//			final JDFAttributeMap map = vPartMap.elementAt(i);
+		//			if (!setExist.contains(map))
+		//			{
+		//				tmp.clear();
+		//				for (int j = 0; j < vPartIDKeys.size(); j++)
+		//				{
+		//					if (map.containsKey(vPartIDKeys.elementAt(j)))
+		//					{
+		//						tmp.add(vPartIDKeys.elementAt(j));
+		//					}
+		//				}
+		//				vExist.add(getCreatePartition(map, tmp));
+		//				setExist.add(map);
+		//			}
+		//			else
+		//			{
+		//				// nop
+		//			}
+		//		}
+		//
+		//		return vExist;
+		//	}
+		/**
+		 * Recursively adds the partition leaves defined in vPartMap
+		 * 
+		 * @param vPartMap the vector of maps of part keys
+		 * @param vPartIDKeys the vector of partIDKeys strings of the resource. If empty (the default) the Resource PartIDKeys attribute is used
+		 * @return VElement - vector of newly created partitions
+		 * 
+		 * @throws JDFException if there are in the partMap not matching partitions
+		 * @throws JDFException if there is an attempt to fill non-matching partIDKeys
+		 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than one key
+		 * 
+		 * @default createPartitions(vPartMap, VString.emptyVector)
+		 */
+		public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
+		{
+			VElement vExist = new VElement();
+			final VString tmp = new VString();
+			for (int i = 0; i < vPartMap.size(); i++)
+			{
+				final JDFAttributeMap map = vPartMap.elementAt(i);
+				final JDFResource res = getFastPartition(map, null);
+				if (res == null)
+				{
+					VElement v = getPartitionVector(map, null);
+					if (v.isEmpty())
+					{
+						tmp.clear();
+						for (int j = 0; j < vPartIDKeys.size(); j++)
+						{
+							if (map.containsKey(vPartIDKeys.elementAt(j)))
+							{
+								tmp.add(vPartIDKeys.elementAt(j));
+							}
+						}
+						vExist.add(getCreatePartition(map, tmp));
+					}
+					else
+					{
+						vExist.addAll(v);
+					}
+				}
+				else
+				{
+					vExist.add(res);
+				}
+			}
+
+			return vExist;
+		}
+
+		/**
+		 * heuristic guess of the best possible partidkey sequence
+		 * 
+		 * @param partMap the partmap that we want to create
+		 * @param vPartIDKeys the known base partidkeys
+		 * @return the best guess vector of partidkeys
+		 */
+		private VString expandKeysFromNode(final JDFAttributeMap partMap, final VString vPartIDKeys)
+		{
+			final JDFNode n = JDFResource.this.getParentJDF();
+			if (n == null)
+			{
+				return vPartIDKeys;
+			}
+
+			final VString nodeKeys = n.getPartIDKeys(partMap);
+			final int nodeKeySize = nodeKeys.size();
+
+			final int partKeySize = vPartIDKeys != null ? vPartIDKeys.size() : 0;
+			if (nodeKeySize <= partKeySize)
+			{
+				return vPartIDKeys;
+			}
+
+			if (vPartIDKeys != null)
+			{
+				final Iterator<String> nodeKeysIterator = nodeKeys.iterator();
+				final Iterator<String> vPartIDKeysIterator = vPartIDKeys.iterator();
+				while (vPartIDKeysIterator.hasNext())
+				{
+					if (!vPartIDKeysIterator.next().equals(nodeKeysIterator.next()))
+					{
+						return vPartIDKeys; // nodekeys and partkeys are
+						// incompatible, return the input
+					}
+				}
+			}
+
+			// all beginning elements are equal but we have more - use these as a
+			// best guess
+			return nodeKeys;
+		}
+
+	}
+
 	// **************************************** Methods
 	// *********************************************
 	/**
@@ -1290,6 +2402,18 @@ public class JDFResource extends JDFElement
 	public String toString()
 	{
 		return "JDFResource[ --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * @param m
+	 * @param partUsage
+	 * @param matchingDepth
+	 * @param partIDKeys
+	 * @return
+	 */
+	protected VElement getDeepPartVector(JDFAttributeMap m, EnumPartUsage partUsage, int matchingDepth, VString partIDKeys)
+	{
+		return new PartitionGetter().getDeepPartVector(m, partUsage, matchingDepth, partIDKeys);
 	}
 
 	/**
@@ -1944,72 +3068,28 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getPartition(JDFAttributeMap m, final JDFResource.EnumPartUsage partUsage)
 	{
-		if (m == null || m.isEmpty())
-		{
-			return this;
-		}
-		m = removeImplicitPartions(m);
-		if (m == null || m.isEmpty())
-		{
-			return this;
-		}
-		final JDFResource ret = getFastPartition(m, partUsage);
-		if (ret != null)
-		{
-			return ret;
-		}
-		return getDeepPart(m, partUsage);
+		return new PartitionGetter().getPartition(m, partUsage);
 	}
 
 	/**
-	 * @param m
-	 * @param partUsage
 	 * @return
 	 */
-	private JDFResource getFastPartition(final JDFAttributeMap m, JDFResource.EnumPartUsage partUsage)
+	public HashMap<JDFAttributeMap, JDFResource> getPartitionMap()
 	{
-		if (partUsage == null)
+		VElement v = getLeaves(true);
+		HashMap<JDFAttributeMap, JDFResource> map = new HashMap<JDFAttributeMap, JDFResource>();
+		for (int i = 0; i < v.size(); i++)
 		{
-			partUsage = getPartUsage();
-		}
-		final VString partIDKeys = getPartIDKeys();
-		if (m.size() > partIDKeys.size() && EnumPartUsage.Explicit.equals(partUsage))
-		{
-			return null;
-		}
-		JDFResource ret = this;
-		final String nodeName = ret.getNodeName();
-
-		final int size = Math.min(partIDKeys.size(), m.size());
-		// internal consistency check - if the map can't fit don't even start searching 
-		for (int i = 0; i < size; i++)
-		{
-			final String attName = partIDKeys.get(i);
-			final String attVal = m.get(attName);
-			if (attVal == null)
+			JDFResource r = (JDFResource) v.get(i);
+			final JDFIdentical id = r.getIdentical();
+			if (id != null)
 			{
-				return null;
+				r = id.getTarget();
 			}
-		}
 
-		final String ns = ret.getNamespaceURI();
-		for (int i = 0; i < size; i++)
-		{
-			final String attName = partIDKeys.get(i);
-			final String attVal = m.get(attName);
-			ret = (JDFResource) ret.getChildWithAttribute(nodeName, attName, ns, attVal, 0, true);
-			if (ret == null)
-			{
-				break;
-			}
+			map.put(r.getPartMap(), r);
 		}
-		final JDFIdentical id = ret == null ? null : ret.getIdentical();
-		if (id != null)
-		{
-			ret = id.getTarget();
-		}
-
-		return ret;
+		return map;
 	}
 
 	/**
@@ -2083,201 +3163,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getCreatePartition(final JDFAttributeMap partMap, final VString vPartKeys)
 	{
-		if (partMap == null)
-		{
-			return getResourceRoot();
-		}
-
-		final JDFAttributeMap localPartMap = new JDFAttributeMap(partMap);
-		// create a copy because it might get modified
-		final boolean appendEnd = true;
-		VString vPartIDKeys = reorderPartKeys(vPartKeys);
-
-		// check whether we are already ok
-		int iMore = 0;
-		final Iterator<String> it = localPartMap.getKeyIterator();
-		while (it.hasNext())
-		{
-			final String key = it.next();
-			if (!vPartIDKeys.contains(key))
-			{
-				iMore++;
-			}
-		}
-		// only heuristically add stuff if needed...
-		if (iMore > 1)
-		{
-			vPartIDKeys = expandKeysFromNode(localPartMap, vPartIDKeys);
-		}
-
-		final JDFAttributeMap thisMap = getPartMap();
-		if (!JDFPart.overlapPartMap(thisMap, localPartMap))
-		{
-			throw new JDFException("JDFResource.GetCreatePartition: non-matching partitions: leaf map:" + thisMap + " create map:" + localPartMap + " PartIDKeys:"
-					+ getPartIDKeys());
-		}
-
-		if (thisMap != null)
-		{
-			final VString thisKeys = thisMap.getKeys();
-			final int siz = (thisKeys.size() < vPartIDKeys.size()) ? thisKeys.size() : vPartIDKeys.size();
-
-			// remove the keys of this
-			for (int i = 0; i < siz; i++)
-			{
-				final String key = vPartIDKeys.elementAt(0);
-				localPartMap.remove(key);
-
-				vPartIDKeys.remove(0);
-			}
-		}
-
-		boolean allParts = true;
-		boolean creating = false;
-		JDFResource leaf = this;
-		// create all partitions
-		for (int k = 0; k < vPartIDKeys.size(); k++)
-		{
-			final String key = vPartIDKeys.elementAt(k);
-			final EnumPartIDKey enumKey = EnumPartIDKey.getEnum(key);
-			final String value = localPartMap.get(key);
-
-			if (localPartMap.containsKey(key))
-			{
-				if (allParts)
-				{
-					if (!creating)
-					{
-						final JDFResource nextLeaf = leaf.getPartition(new JDFAttributeMap(key, value), EnumPartUsage.Explicit);
-						if (nextLeaf == null)
-						{
-							creating = true;
-						}
-						else
-						{
-							leaf = nextLeaf;
-						}
-					}
-					if (creating)
-					{
-						leaf = leaf.addPartition(enumKey, value);
-					}
-					localPartMap.remove(key);
-					if (localPartMap.size() == 0)
-					{
-						break; // nothing left to do
-					}
-				}
-				else
-				{
-					throw new JDFException("GetCreatePartition: Resource ID=" + getID() + " attempting to fill non-matching partIDKeys: " + key + " valid keys: " + localPartMap);
-				}
-			}
-			else
-			{
-				allParts = false;
-			}
-		}
-
-		// add last partition key
-		final int partSize = localPartMap.size();
-		if (appendEnd && allParts && partSize == 1)// one left and continuous,
-		// can add
-		{
-			final String key = localPartMap.getKeys().elementAt(0);
-			leaf = leaf.addPartition(EnumPartIDKey.getEnum(key), localPartMap.get(key));
-		}
-		else if (partSize > 0)// either non - continuous or more than one left
-		{
-			throw new JDFException("AddPartitionMap: incompatible partmap. Remaining map: " + localPartMap);
-		}
-		return leaf;
-	}
-
-	/**
-	 * reorder the partIDKeys used for generating the new partition based on existing partIDKeys
-	 * 
-	 * @param vPartKeys
-	 * @return VString the reordered VString of partIDKeys
-	 */
-	private VString reorderPartKeys(final VString vPartKeys)
-	{
-		if (vPartKeys == null || vPartKeys.isEmpty())
-		{
-			return getPartIDKeys();
-		}
-		VString vPartIDKeys = new VString(vPartKeys);
-		final VString vExistingPartKeys = getPartIDKeys();
-		final VString vTmpPartIDKeys = new VString();
-		if (vExistingPartKeys != null && !vExistingPartKeys.isEmpty())
-		{
-			int n = vExistingPartKeys.size();
-			if (vPartIDKeys.size() < n)
-			{
-				n = vPartIDKeys.size();
-			}
-
-			for (int i = 0; i < n; i++)
-			{
-				final String partKey = vExistingPartKeys.elementAt(i);
-				if (!vPartIDKeys.contains(partKey)) // allow reordering of the
-				// existing partidkeys
-				{
-					throw new JDFException("reorderPartKeys: reordering incompatible partitions. Key: " + partKey + " " + vPartIDKeys);
-				}
-				vTmpPartIDKeys.add(partKey);
-				vPartIDKeys.remove(partKey);
-			}
-			for (int i = 0; i < vPartIDKeys.size(); i++)
-			{
-				vTmpPartIDKeys.add(vPartIDKeys.elementAt(i));
-			}
-			vPartIDKeys = vTmpPartIDKeys;
-		}
-		return vPartIDKeys;
-	}
-
-	/**
-	 * heuristic guess of the best possible partidkey sequence
-	 * 
-	 * @param partMap the partmap that we want to create
-	 * @param vPartIDKeys the known base partidkeys
-	 * @return the best guess vector of partidkeys
-	 */
-	private VString expandKeysFromNode(final JDFAttributeMap partMap, final VString vPartIDKeys)
-	{
-		final JDFNode n = this.getParentJDF();
-		if (n == null)
-		{
-			return vPartIDKeys;
-		}
-
-		final VString nodeKeys = n.getPartIDKeys(partMap);
-		final int nodeKeySize = nodeKeys.size();
-
-		final int partKeySize = vPartIDKeys != null ? vPartIDKeys.size() : 0;
-		if (nodeKeySize <= partKeySize)
-		{
-			return vPartIDKeys;
-		}
-
-		if (vPartIDKeys != null)
-		{
-			final Iterator<String> nodeKeysIterator = nodeKeys.iterator();
-			final Iterator<String> vPartIDKeysIterator = vPartIDKeys.iterator();
-			while (vPartIDKeysIterator.hasNext())
-			{
-				if (!vPartIDKeysIterator.next().equals(nodeKeysIterator.next()))
-				{
-					return vPartIDKeys; // nodekeys and partkeys are
-					// incompatible, return the input
-				}
-			}
-		}
-
-		// all beginning elements are equal but we have more - use these as a
-		// best guess
-		return nodeKeys;
+		return new PartitionGetter().getCreatePartition(partMap, vPartKeys);
 	}
 
 	/**
@@ -2380,345 +3266,6 @@ public class JDFResource extends JDFElement
 		return consistentPartIDKeys(key, root, root.getPartIDKeys());
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /////
-	private JDFAttributeMap removeImplicitPartions(JDFAttributeMap m)
-	{
-		if (m == null)
-		{
-			return m;
-		}
-		final Vector<EnumPartIDKey> v = getImplicitPartitions();
-		if (v == null)
-		{
-			return m;
-		}
-		m = new JDFAttributeMap(m);
-		for (int i = 0; i < v.size(); i++)
-		{
-			m.remove((v.elementAt(i)).getName());
-		}
-		return m;
-	}
-
-	// //////////////////////////////////////////////////////////////////////////
-	// /////
-
-	protected VElement getDeepPartVector(final JDFAttributeMap m_in, EnumPartUsage partUsage, int matchingDepth, final VString partIDKeys)
-	{
-		JDFAttributeMap m = new JDFAttributeMap(m_in);
-		final VElement vReturn = new VElement();
-		m = removeImplicitPartions(m);
-		if (partUsage == null)
-		{
-			partUsage = getPartUsage();
-		}
-		if (!EnumPartUsage.Explicit.equals(partUsage))
-		{
-			m.reduceMap(partIDKeys); // also ok for sparse!
-		}
-		if (m.isEmpty())
-		{
-			vReturn.add(this);
-			return vReturn;
-		}
-
-		final int msiz = m.size();
-		if (matchingDepth == -1) // first call - check validity of the map
-		{
-			matchingDepth = 0;
-			final JDFAttributeMap thisMap = getPartMap(partIDKeys);
-
-			final Iterator<String> it = m.getKeyIterator();
-			while (it.hasNext())// for(int i = 0; i < msiz; i++)
-			{
-				final String strKey = it.next();
-				// final EnumPartIDKey partIDKey = EnumPartIDKey.getEnum(strKey);
-				//
-				// // check map and throw exception if bad
-				// if (partIDKey == null)
-				// {
-				// throw new JDFException("GetPartIDKeyEnum: illegal key:" + strKey);
-				// }
-
-				// check whether we are already in a leaf when initially calling
-				final String mMapValue = m.get(strKey);
-				if (thisMap != null)
-				{
-					final String thisMapValue = thisMap.get(strKey);
-
-					if (thisMapValue != null && JDFPart.matchesPart(strKey, thisMapValue, mMapValue))
-					{
-						matchingDepth++;
-					}
-				}
-			}
-
-			// check if we are incompatible from the start...
-			if (!JDFPart.overlapPartMap(thisMap, m))
-			{
-				return vReturn;
-			}
-		}
-
-		// if we find an <Identical> element, we must clean up the map and merge
-		// in the values of
-		// identical can only be in a leaf
-		final JDFIdentical identical = getIdentical();
-		if (identical != null)
-		{
-			final JDFPart part = (JDFPart) identical.getElement(ElementName.PART);
-			if (part != null)
-			{
-				final JDFAttributeMap identityMap = part.getPartMap();
-				if (identityMap == null || identityMap.overlapMap(getPartMap(partIDKeys)))
-				{
-					throw new JDFException("Corrupt Identical Structure!");
-				}
-				m.putAll(identityMap);
-
-				// the identity map is always complete from the root, we therefore
-				// can start searching
-				// in the root
-				return getResourceRoot().getDeepPartVector(m, partUsage, -1, partIDKeys);
-			}
-		}
-
-		if (msiz == matchingDepth)
-		{
-			vReturn.add(this);
-			return vReturn;
-		}
-
-		final String nodeName = getNodeName();
-		JDFResource resourceElement = (JDFResource) getElement_KElement(nodeName, null, 0);
-
-		if (resourceElement == null) // got a leaf or found no matching children
-		{
-			// 150802 RP removed different treatment for leaves and no matching elements
-			if (partUsage.getValue() >= EnumPartUsage.Sparse.getValue()) // allow incomplete parts
-			{
-				vReturn.add(this);
-			}
-
-			return vReturn;
-		}
-
-		final VElement toAppend = new VElement(); // we stick all recursively found
-		// candidates into this vector
-		boolean hasBadChildren = false; // loop over all valid elements and
-		// search downward
-		boolean hasMatchingAttribute = false;
-		boolean bSearchSame = true; // boolean that controls whether to search
-		// the lower children.
-		boolean bCompleteMatch = false;
-		String matchingKey = null;
-		String matchingValue = null;
-		int nChildren = 0;
-		int matchingKeyPos = -1;
-
-		while (true)
-		{
-			boolean badChild = false;
-			boolean bSnafu = false;
-
-			if (matchingKeyPos >= 0) // all other elements except the first
-			// may have a predefined matching key
-			{
-				final String sTmp = resourceElement.getAttribute_KElement(matchingKey, null, null);
-				if (sTmp != null) // found a matching key;
-				{
-					if (sTmp.equals(matchingValue))
-					{
-						hasMatchingAttribute = true;
-					}
-					else
-					{
-						badChild = true;
-						hasBadChildren = true;
-					}
-				}
-				else
-				{
-					bSnafu = true; // should never get here, but in case of a
-					// corrupt leaf structure,
-					// it could happen and will be handled gracefully
-				}
-			}
-
-			if ((nChildren++ == 0) || bSnafu) // must only search the first
-			// element, since only one key
-			{ // is allowed and all keys must be in the same sequence;
-				// unless, of course, someone wrote crap JDF (bSnafu=true)
-				final Iterator<String> it = m.getKeyIterator();
-				int im = 0;
-				while (it.hasNext())// for(int im = 0; im < msiz; im++)
-				{
-					final String strKey = it.next();
-					final String strValue = m.get(strKey);
-
-					final String sTmp = resourceElement.getAttribute_KElement(strKey, null, null);
-
-					if (sTmp != null)// found a matching key;
-					{
-						if (JDFPart.matchesPart(strKey, sTmp, strValue))
-						{
-							hasMatchingAttribute = true;
-						}
-						else
-						{
-							badChild = true;
-							hasBadChildren = true;
-						}
-
-						matchingKeyPos = im;
-						matchingKey = strKey;
-						matchingValue = strValue;
-						break;
-					}
-					im++;
-				}
-			}
-
-			if (!badChild)
-			{
-				final VElement dpv = resourceElement.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
-
-				if (dpv.size() > 0)
-				{
-					toAppend.addAll(dpv);
-					bSearchSame = false; // not necessary since we have
-					// something deeper
-
-					if (hasMatchingAttribute && toAppend.size() == 1) // this is
-					// a
-					// potential
-					// complete
-					// match
-					// - we may just stop
-					{
-						final JDFResource root = getResourceRoot();
-						JDFElement closest = (JDFElement) toAppend.elementAt(0);
-						// move to root
-						int leafDepth = 0;
-
-						while (!closest.equals(root))
-						{
-							leafDepth++;
-							closest = (JDFElement) closest.getParentNode();
-						}
-
-						bCompleteMatch = (leafDepth == msiz);
-					}
-				}
-			}
-			if (bCompleteMatch)
-			{
-				break; // nothing at all left to do; jump out of loop
-			}
-
-			final KElement k = resourceElement.getNextSiblingElement(nodeName, null);
-
-			if (!(k instanceof JDFResource))
-			{
-				break;
-			}
-
-			resourceElement = (JDFResource) k;
-		}
-
-		// nothing complete was found, and we are at the end of the chain
-		if (bSearchSame)
-		{
-			// check whether all sub elements of this are accepted completely
-			final int appSize = toAppend.size();
-			boolean bSame = (!hasMatchingAttribute) && (nChildren == appSize);
-
-			if (bSame)
-			{
-				resourceElement = (JDFResource) getElement_KElement(nodeName, null, 0);
-
-				for (int n = 0; n < appSize; n++)
-				{
-					if (!resourceElement.equals(toAppend.elementAt(n)))
-					{
-						bSame = false;
-						break;
-					}
-
-					final KElement k = resourceElement.getNextSiblingElement(nodeName, null);
-					if (!(k instanceof JDFResource))
-					{
-						break;
-					}
-					resourceElement = (JDFResource) k;
-				}
-			}
-
-			if (!bSame) // something in the children warrants a closer look and
-			// we are at the end
-			{
-				// none match and this is the last with bad kids and we want
-				// incomplete stuff
-				if (toAppend.isEmpty() && hasBadChildren && (partUsage.equals(EnumPartUsage.Implicit)) && !hasMatchingAttribute)
-				{
-					final JDFResource root = getResourceRoot();
-					JDFResource closest = this;
-					boolean bClosest = false;
-
-					// move to root
-					while (!closest.equals(root))
-					{
-						// used for an explicit (non inherited) attribute check.
-						final JDFElement closestElement = closest;
-
-						// check whether any parameters of map were found
-						final Iterator<String> it = m.getKeyIterator();
-						while (it.hasNext())// for(int i = 0; i < msiz; i++)
-						{
-							final String strKey = it.next();
-							if (closestElement.hasAttribute_KElement(strKey, null, false))
-							{
-								bClosest = true;
-								break;
-							}
-						}
-
-						// found one that has at least one attribute from m -->
-						// stop searching
-						if (bClosest)
-						{
-							break;
-						}
-
-						// this one is no closer than it's parent --> take the
-						// parent and retry
-						closest = (JDFResource) closest.getParentNode();
-					}
-					vReturn.add(closest);
-				}
-				else
-				// this is the standard recursive case with no special handling
-				{
-					vReturn.addAll(toAppend);
-				}
-			}
-			else
-			{
-				// if all subelements were accepted, I am the correct root
-				// note that this may recurse up closer to the root
-				vReturn.add(this);
-			}
-		}
-		else
-		// this is the standard recursive case with no special handling
-		{
-			vReturn.addAll(toAppend);
-		}
-
-		return vReturn;
-	}
-
 	/**
 	 * Gets a matching part from somewhere down there returns the closest ancestor of all matching elements within the target vector
 	 * 
@@ -2743,102 +3290,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getDeepPart(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
-		JDFResource retRes = null;
-		final VString partIDKeys = getPartIDKeys();
-		final VElement vRes = getDeepPartVector(m, partUsage, -1, partIDKeys);
-
-		if (vRes != null)
-		{
-			final int siz = vRes.size();
-
-			if (siz == 0)
-			{
-				// nothing fits at all
-				return retRes;
-			}
-			else if (siz == 1)
-			{ // only one, take it
-				retRes = (JDFResource) vRes.elementAt(0);
-			}
-			else
-			{ // multiple, get the closest ancestor
-				JDFResource e = (JDFResource) vRes.elementAt(0);
-				if (e.isResourceRoot())
-				{
-					return e;
-				}
-
-				e = (JDFResource) e.getParentNode();
-				do // if more than one, loop at leas once
-				{
-					int i = 0;
-					for (i = siz - 1; i > 0; i--) // e is always an ancestor of
-					// vElm[i];
-					// go backwards since the chance of mismatch is
-					// greater at the end of the list
-					{
-						if (!e.isAncestor(vRes.elementAt(i))) // found a
-						// misMatch
-						{
-							e = (JDFResource) e.getParentNode();
-							break;
-						}
-					}
-					if (i == 0) // went through the entire loop with no mismatch
-					// --> heureka and ciao
-					{
-						retRes = e;
-						break; // while e!=this
-					}
-				}
-				while (e != this);
-
-				if (e.isResourceRoot())
-				{
-					return e; // the root is always ok
-				}
-			}
-		}
-
-		if (retRes == null)
-		{
-			return null;
-		}
-
-		int retSize = -1;
-		JDFResource loopRes = retRes;
-		final Set<String> vKeys = m.keySet();
-
-		// loop until we hit this or root, whichever is closer
-		while (true)
-		{
-			final JDFAttributeMap returnMap = loopRes.getPartMap();
-			// only check the keys, not the values since <Identical> elements
-			// may screw up the values...
-			returnMap.reduceMap(vKeys);
-			// we lost a key - break one prior to this
-			if (returnMap.size() < retSize)
-			{
-				return retRes; // the child of the tested element
-			}
-			else if (retSize == -1)
-			{ // first loop initialization
-				retSize = returnMap.size();
-			}
-			// we hit the starting point - nothing left to do
-			if ((loopRes == this) || loopRes.isResourceRoot())
-			{
-				return loopRes;
-			}
-			// no check failed - go one closer to the root
-			retRes = loopRes;
-			loopRes = (JDFResource) loopRes.getParentNode();
-			if (loopRes == null)
-			{
-				throw (new JDFException("JDFResource::GetDeepPart ran into null element while searching tree"));
-			}
-		}
-		// return retRes;
+		return new PartitionGetter().getDeepPart(m, partUsage);
 	}
 
 	/**
@@ -3192,61 +3644,7 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource addPartition(final EnumPartIDKey partType, final String value)
 	{
-		if (isResourceElement())
-		{
-			throw new JDFException("Attempting to add partition to resource element: " + buildXPath(null, 1));
-		}
-		if (partType == null)
-		{
-			throw new JDFException("Attempting to add null partition to resource: " + buildXPath(null, 1));
-		}
-
-		final VString vs = getPartIDKeys();
-		final int posOfType = vs == null ? -1 : vs.indexOf(partType.getName());
-		if (posOfType < 0)
-		{
-			if (!isLeaf())
-			{
-				throw new JDFException("addPartion: adding inconsistent partition - parent must be a leaf");
-			}
-		}
-		else if (posOfType == 0)
-		{
-			if (!isResourceRootRoot())
-			{
-				throw new JDFException("addPartion: adding inconsistent partition - must be root");
-			}
-		}
-		else
-		{
-			if (vs != null)
-			{
-				final String parentPart = vs.stringAt(posOfType - 1);
-				if (!hasAttribute_KElement(parentPart, null, false))
-				{
-					throw new JDFException("addPartion: adding inconsistent partition - parent must have partIDKey: " + parentPart);
-				}
-			}
-		}
-
-		if (!hasAttribute(partType.getName(), null, false))
-		{
-			addPartIDKey(partType);
-		}
-
-		JDFResource p = getFastPartition(new JDFAttributeMap(partType, value), EnumPartUsage.Explicit);
-		if (p != null)
-		{
-			throw new JDFException("addPartion: adding duplicate partition " + partType + "=" + value);
-		}
-
-		p = (JDFResource) appendElement(getNodeName(), getNamespaceURI());
-		if (p != null)
-		{
-			p.setPartIDKey(partType, value);
-		}
-
-		return p;
+		return new PartitionGetter().addPartition(partType, value);
 	}
 
 	/**
@@ -3637,7 +4035,7 @@ public class JDFResource extends JDFElement
 	 * Gets a map of all partition key-value pairs for this leaf / node. This includes a recursion to the part root.
 	 * 
 	 * @param ids
-	 * @return JDFAttributeMap - the part attribute map for 'this' leaf / node
+	 * @return JDFAttributeMap - the part attribute map for 'this' leaf / node - reused for performance enhancement
 	 */
 	public JDFAttributeMap getPartMap(final VString ids)
 	{
@@ -4236,59 +4634,16 @@ public class JDFResource extends JDFElement
 	/**
 	 * Gets the vector of parts (resource leaves or nodes) that match mAttribute
 	 * 
-	 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
+	 * @param vm the map of key-value partitions (where key - PartIDKey, value - its value)
 	 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
 	 * 
 	 * @return VElement - the vector of matching resource leaves or nodes
 	 * 
 	 * @default getPartitionVector(m, null)
 	 */
-	public VElement getPartitionVector(final VJDFAttributeMap m, EnumPartUsage partUsage)
+	public VElement getPartitionVector(final VJDFAttributeMap vm, EnumPartUsage partUsage)
 	{
-		if (partUsage == null)
-		{
-			partUsage = getPartUsage();
-		}
-
-		final VElement v = getLeaves(true);
-		if (m == null)
-		{
-			return v;
-		}
-		final HashMap<JDFAttributeMap, KElement> leafMap = new HashMap<JDFAttributeMap, KElement>();
-		final VString pk = getPartIDKeys();
-		for (int i = v.size() - 1; i >= 0; i--)
-		{
-			final JDFResource r = (JDFResource) v.get(i);
-			leafMap.put(r.getPartMap(pk), r);
-		}
-		v.clear();
-		boolean bAll = true;
-		for (int i = 0; bAll && i < m.size(); i++)
-		{
-			final JDFAttributeMap map = m.elementAt(i);
-			final KElement element = leafMap.get(map);
-			if (element != null)
-			{
-				v.add(element);
-			}
-			else
-			{
-				bAll = false;
-			}
-		}
-
-		if (!bAll)
-		{
-			v.clear();
-			for (int i = 0; i < m.size(); i++)
-			{
-				v.addAll(getPartitionVector(m.elementAt(i), partUsage));
-			}
-			v.unify();
-		}
-		return v;
-
+		return new PartitionGetter().getPartitionVector(vm, partUsage);
 	}
 
 	/**
@@ -4331,7 +4686,7 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement getPartitionVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
-		return getDeepPartVector(m, partUsage, -1, getPartIDKeys());
+		return new PartitionGetter().getPartitionVector(m, partUsage);
 	}
 
 	/**
@@ -7534,6 +7889,57 @@ public class JDFResource extends JDFElement
 	// }
 	// return v.item(0);
 	// }
+	//	/**
+	//	 * Recursively adds the partition leaves defined in vPartMap
+	//	 * 
+	//	 * @param vPartMap the vector of maps of part keys
+	//	 * @param vPartIDKeys the vector of partIDKeys strings of the resource. If empty (the default) the Resource PartIDKeys attribute is used
+	//	 * @return VElement - vector of newly created partitions
+	//	 * 
+	//	 * @throws JDFException if there are in the partMap not matching partitions
+	//	 * @throws JDFException if there is an attempt to fill non-matching partIDKeys
+	//	 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than one key
+	//	 * 
+	//	 * @default createPartitions(vPartMap, VString.emptyVector)
+	//	 */
+	//	public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
+	//	{
+	//		final VString tmp = new VString();
+	//		final VElement vExist = getPartitionVector(vPartMap, null);
+	//
+	//		Set<JDFAttributeMap> setExist = new HashSet<JDFAttributeMap>();
+	//		for (int i = 0; i < vExist.size(); i++)
+	//		{
+	//			JDFResource resource = (JDFResource) vExist.get(i);
+	//			JDFAttributeMap partMap = resource.getPartMap();
+	//			partMap.reduceMap(vPartIDKeys);
+	//			setExist.add(partMap);
+	//		}
+	//
+	//		for (int i = 0; i < vPartMap.size(); i++)
+	//		{
+	//			final JDFAttributeMap map = vPartMap.elementAt(i);
+	//			if (!setExist.contains(map))
+	//			{
+	//				tmp.clear();
+	//				for (int j = 0; j < vPartIDKeys.size(); j++)
+	//				{
+	//					if (map.containsKey(vPartIDKeys.elementAt(j)))
+	//					{
+	//						tmp.add(vPartIDKeys.elementAt(j));
+	//					}
+	//				}
+	//				vExist.add(getCreatePartition(map, tmp));
+	//				setExist.add(map);
+	//			}
+	//			else
+	//			{
+	//				// nop
+	//			}
+	//		}
+	//
+	//		return vExist;
+	//	}
 	/**
 	 * Recursively adds the partition leaves defined in vPartMap
 	 * 
@@ -7549,31 +7955,7 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
 	{
-		final VElement v = new VElement();
-		final VString tmp = new VString();
-		for (int i = 0; i < vPartMap.size(); i++)
-		{
-			final JDFAttributeMap map = vPartMap.elementAt(i);
-			final VElement vExist = getPartitionVector(map, null);
-			if (vExist.isEmpty())
-			{
-				tmp.clear();
-				for (int j = 0; j < vPartIDKeys.size(); j++)
-				{
-					if (map.containsKey(vPartIDKeys.elementAt(j)))
-					{
-						tmp.add(vPartIDKeys.elementAt(j));
-					}
-				}
-				v.add(getCreatePartition(map, tmp));
-			}
-			else
-			{
-				v.addAll(vExist);
-			}
-		}
-
-		return v;
+		return new PartitionGetter().createPartitions(vPartMap, vPartIDKeys);
 	}
 
 	/**

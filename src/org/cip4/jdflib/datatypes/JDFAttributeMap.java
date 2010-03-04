@@ -432,14 +432,18 @@ public class JDFAttributeMap implements Map
 	 * orMap - put all key/value pairs which are not in this map to this map. Clear this, if both maps have the same keys with different values.
 	 * 
 	 * @param subMap the map to compare with <code>this</this>
+	 * @return 
 	 */
 	public JDFAttributeMap orMap(final JDFAttributeMap subMap)
 	{
-		final Enumeration subMapEnum = subMap.keys();
+		if (subMap == null)
+			return this;
+
+		final Enumeration<String> subMapEnum = subMap.keys();
 
 		while (subMapEnum.hasMoreElements())
 		{
-			final String subMapKey = (String) subMapEnum.nextElement();
+			final String subMapKey = subMapEnum.nextElement();
 			final String subMapVal = subMap.get(subMapKey);
 			final String hashTableVal = this.get(subMapKey);
 

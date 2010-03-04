@@ -534,6 +534,7 @@ public class JDFMerge
 		}
 
 		boolean bTargetGone = false;
+		HashMap<JDFAttributeMap, JDFResource> cacheMap = allChildren.size() > 2 ? targetRes.getPartitionMap() : null;
 		for (int i = 0; i < allChildren.size(); i++)
 		{
 			final JDFResource src = (JDFResource) allChildren.elementAt(i);
@@ -542,7 +543,7 @@ public class JDFMerge
 				continue; // no need to merge identical elements
 			}
 			final JDFAttributeMap srcMap = src.getPartMap(mergeIDKeys);
-			JDFResource trg = targetRes.getPartition(srcMap, EnumPartUsage.Implicit);
+			JDFResource trg = cacheMap == null ? targetRes.getPartition(srcMap, EnumPartUsage.Implicit) : cacheMap.get(srcMap);
 
 			if (trg == null)
 			{
@@ -1115,10 +1116,12 @@ public class JDFMerge
 		}
 
 		final VString partIDKeys = mainRes.getPartIDKeys();
+		HashMap<JDFAttributeMap, JDFResource> cacheMap = allLeaves.size() > 2 ? resToMerge.getPartitionMap() : null;
 		for (int i = 0; i < allLeaves.size(); i++)
 		{
 			final JDFResource thisResNode = (JDFResource) allLeaves.elementAt(i);
-			final JDFResource mergeResNode = resToMerge == null ? null : resToMerge.getPartition(thisResNode.getPartMap(partIDKeys), EnumPartUsage.Explicit);
+			JDFAttributeMap partMap = thisResNode.getPartMap(partIDKeys);
+			final JDFResource mergeResNode = cacheMap != null ? cacheMap.get(partMap) : resToMerge.getPartition(partMap, EnumPartUsage.Explicit);
 
 			if (mergeResNode != null)
 			{

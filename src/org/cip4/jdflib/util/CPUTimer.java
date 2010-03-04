@@ -93,6 +93,23 @@ public class CPUTimer
 	private final ThreadMXBean bean;
 	private final boolean threadCpuTimeEnabled;
 	private int nStartStop;
+	private String name = null;
+
+	/**
+	 * @return the name
+	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 
 	/**
 	 * @param bStart if true, start measuring now
@@ -119,14 +136,24 @@ public class CPUTimer
 	 * 
 	 *
 	 */
-	public long getCPUTime()
+	public long getTotalCPUTime()
+	{
+		if (!threadCpuTimeEnabled)
+			return -1;
+		return totalCpuT0 + getCurrentCPUTime();
+	}
+
+	/**
+	 * @return
+	 */
+	public long getCurrentCPUTime()
 	{
 		if (!threadCpuTimeEnabled)
 			return -1;
 		else if (cpuT0 > 0)
-			return totalCpuT0 + bean.getCurrentThreadCpuTime() - cpuT0;
+			return bean.getCurrentThreadCpuTime() - cpuT0;
 		else
-			return totalCpuT0;
+			return 0;
 	}
 
 	/**
@@ -146,12 +173,20 @@ public class CPUTimer
 	 * 
 	 *
 	 */
-	public long getRealTime()
+	public long getTotalRealTime()
+	{
+		return totalT0 + getCurrentRealTime();
+	}
+
+	/**
+	 * @return
+	 */
+	public long getCurrentRealTime()
 	{
 		if (currentT0 > 0)
-			return totalT0 + System.currentTimeMillis() - currentT0;
+			return System.currentTimeMillis() - currentT0;
 		else
-			return totalT0;
+			return 0;
 	}
 
 	/**
@@ -179,8 +214,8 @@ public class CPUTimer
 		if (currentT0 <= 0)
 			return;
 		if (threadCpuTimeEnabled)
-			totalCpuT0 = getCPUTime();
-		totalT0 = getRealTime();
+			totalCpuT0 = getTotalCPUTime();
+		totalT0 = getTotalRealTime();
 		cpuT0 = -1;
 		currentT0 = -1;
 	}
@@ -198,7 +233,7 @@ public class CPUTimer
 	 */
 	public long getAverageRealTime()
 	{
-		return getRealTime() / nStartStop;
+		return getTotalRealTime() / nStartStop;
 	}
 
 	/**
@@ -206,7 +241,7 @@ public class CPUTimer
 	 */
 	public long getAverageCPUTime()
 	{
-		return getCPUTime() / nStartStop;
+		return getTotalCPUTime() / nStartStop;
 	}
 
 	/**
@@ -216,7 +251,11 @@ public class CPUTimer
 	@Override
 	public String toString()
 	{
-		return "CPUTimer: totalCPU=" + totalCpuT0 + " totalT=" + totalT0 + " starts=" + nStartStop + " active=" + (currentT0 > 0);
+		String label = "CPUTimer: ";
+		if (name != null)
+			label += getName();
+		return label + " totalCPU=" + getTotalCPUTime() + " currentCPU=" + getCurrentCPUTime() + " totalT=" + getTotalRealTime() + " currentT=" + getCurrentRealTime() + " starts="
+				+ nStartStop + " active=" + (currentT0 > 0);
 	}
 
 	/**
@@ -226,11 +265,14 @@ public class CPUTimer
 	public KElement toXML()
 	{
 		KElement root = new XMLDoc("CPUTimer", null).getRoot();
-		root.setAttribute("RealTime", getRealTime(), null);
+		root.setAttribute("TotalRealTime", getTotalRealTime(), null);
+		root.setAttribute("CurrentRealTime", getCurrentRealTime(), null);
 		root.setAttribute("AverageRealTime", getAverageRealTime(), null);
-		root.setAttribute("CPUTime", getCPUTime(), null);
-		root.setAttribute("CreationTime", getCreationTime(), null);
+		root.setAttribute("AverageRealTime", getAverageRealTime(), null);
+		root.setAttribute("TotalCPUTime", getTotalCPUTime(), null);
+		root.setAttribute("CurrentCPUTime", getCurrentCPUTime(), null);
 		root.setAttribute("AverageCPUTime", getAverageCPUTime(), null);
+		root.setAttribute("CreationTime", new JDFDate(getCreationTime()).getFormattedDateTime("hh:mm ss.sss"), null);
 		root.setAttribute("StartStop", getNumStarts(), null);
 		return root;
 	}

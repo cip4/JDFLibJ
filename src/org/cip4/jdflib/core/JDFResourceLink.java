@@ -969,7 +969,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	 */
 	private VElement getMapTargetVector(final VJDFAttributeMap vmParts, final int nMax)
 	{
-		final VElement v = new VElement();
+		VElement v = new VElement();
 		// get the resource root
 		final JDFResource resRoot = getLinkRoot();
 		if (resRoot == null)
@@ -995,20 +995,7 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 			return v;
 		}
 
-		final int partSize = vmParts.size();
-		for (int i = 0; i < partSize; i++)
-		{
-			final VElement vr = resRoot.getPartitionVector(vmParts.elementAt(i), partUsage);
-			if (vr != null && !vr.isEmpty())
-			{
-				v.addAll(vr);
-				// we have enough!
-				if (v.size() == nMax)
-				{
-					break;
-				}
-			}
-		}
+		v = resRoot.getPartitionVector(vmParts, partUsage);
 		return v;
 	}
 
