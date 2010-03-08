@@ -104,9 +104,11 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDocUserData;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
+import org.w3c.dom.Attr;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -590,8 +592,34 @@ public class JDFResourcePool extends JDFPool
 	 */
 	public JDFResource getResourceByID(final String id)
 	{
-		//		System.out.println(id);
-		final KElement e = getChildWithAttribute(null, AttributeName.ID, null, id, 0, true);
+		XMLDocUserData userData = getXMLDocUserData();
+		if (userData != null)
+		{
+			KElement kRet = userData.getTarget(id);
+			if (kRet != null && kRet.getParentNode_KElement() != this)
+			{
+				kRet = null; // it is somewhere else, not a child of this!
+			}
+			if (kRet != null)
+			{
+				return (JDFResource) kRet;
+			}
+		}
+		KElement e = getFirstChildElement();
+		while (e != null)
+		{
+			Attr attr = e.getAttributeNode(AttributeName.ID);
+			if (attr != null)
+			{
+				if (userData != null)
+					userData.setTarget(e, id);
+				if (id.equals(attr.getValue()))
+				{
+					break;
+				}
+			}
+			e = e.getNextSiblingElement();
+		}
 		return (e instanceof JDFResource) ? (JDFResource) e : null;
 
 	}

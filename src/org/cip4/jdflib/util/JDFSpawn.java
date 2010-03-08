@@ -124,6 +124,7 @@ public class JDFSpawn
 	private final Map<JDFResource, VString> mapRefs;
 	private final Set<String> noIdentical;
 	private final Map<String, KElement> mapResources;
+	private boolean idCacheFilled;
 	/**
 	 * if true, reduce read only partitions, else retain entire resource
 	 */
@@ -198,6 +199,7 @@ public class JDFSpawn
 		mapAllRefs = new HashMap<JDFNode, HashSet<String>>();
 		mapResources = new HashMap<String, KElement>();
 		noIdentical = new HashSet<String>();
+		idCacheFilled = false;
 	}
 
 	/**
@@ -211,7 +213,11 @@ public class JDFSpawn
 		{
 			throw new JDFException("Setting illegal node in spawn");
 		}
+		if (node != newNode)
+			idCacheFilled = false;
+
 		node = newNode;
+
 	}
 
 	/**
@@ -408,6 +414,11 @@ public class JDFSpawn
 		final VString vRWResources = new VString(vRWResources_in);
 		final HashSet<JDFResource> vMultiRes = new LinkedHashSet<JDFResource>();
 		// grab the root node and all it's children
+		if (!idCacheFilled)
+		{
+			node.getOwnerDocument_KElement().getCreateXMLDocUserData().fillIDCache();
+			idCacheFilled = true;
+		}
 
 		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, true);
 		final Iterator<JDFElement> iter = vRootLinks.iterator();
@@ -583,7 +594,11 @@ public class JDFSpawn
 		}
 
 		// grab the root node and all it's children
-
+		if (!idCacheFilled)
+		{
+			node.getOwnerDocument_KElement().getCreateXMLDocUserData().fillIDCache();
+			idCacheFilled = true;
+		}
 		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, false);
 
 		// create a HashSet with all IDs of the newly created Node

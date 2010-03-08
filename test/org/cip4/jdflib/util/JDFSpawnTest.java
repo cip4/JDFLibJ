@@ -2152,6 +2152,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFNode nodeRoot = jdfDoc.getJDFRoot();
 		final VElement vNodes = nodeRoot.getTree("JDF", null, null, false, false);
 		JDFSpawn spawn = null;
+		long tMerge = 0;
 		for (int j = 0; j < 2; j++)
 		{
 			long t0 = System.currentTimeMillis();
@@ -2178,6 +2179,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 				final JDFNode nodeSubJDF = spawn.spawn(strJDFPath, null, vsRWResourceIDs, null, true, true, true, true);
 				assertNotNull(nodeSubJDF);
+				long t1 = System.currentTimeMillis();
 
 				nodeSubJDF.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "manySub" + i + ".jdf", 2, true);
 				jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany" + i + ".jdf", 2, true);
@@ -2186,14 +2188,15 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				final JDFDoc d2 = parser.parseFile(sm_dirTestDataTemp + "manySub" + i + ".jdf");
 				assertNotNull("The subjdf could be parsed!", d2);
 				final String spawnID = nodeSubJDF.getSpawnID(false);
-				long t1 = System.currentTimeMillis();
+				long t11 = System.currentTimeMillis();
 				final JDFMerge m = new JDFMerge(nodeRoot);
 				assertTrue(nodeRoot.toString().indexOf(spawnID) > 0);
 				m.mergeJDF(nodeSubJDF, "dummy", EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
 				assertTrue(nodeRoot.toString().indexOf(spawnID) < 0);
 				long t2 = System.currentTimeMillis();
-				System.out.println("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Merge: " + (t2 - t1)
-						+ " total " + (t2 - t00));
+				tMerge += (t2 - t11);
+				System.out.println("j= " + j + " i= " + i + " of " + (vNodes.size() - 1) + " : " + jobPartID + " time Spawn: " + (t1 - t0) + " time Write: " + (t11 - t1)
+						+ " time Merge: " + (t2 - t11) + " / " + tMerge + " total " + (t2 - t00));
 				t0 = t2;
 			}
 			jdfDoc.write2File(sm_dirTestDataTemp + "bigMainMany.jdf", 2, true);

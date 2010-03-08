@@ -204,7 +204,7 @@ public class JDFRefElement extends JDFElement
 	{
 		if (nodeName == null || nodeName.endsWith(JDFConstants.REF))
 		{
-			if (super.fitsName_KElement(nodeName, nameSpaceURI))
+			if (fitsName_KElement(nodeName, nameSpaceURI))
 			{
 				return true;
 			}
@@ -212,7 +212,7 @@ public class JDFRefElement extends JDFElement
 		else
 		{
 			// if this is a valid ResourceRef, it also fits
-			if (super.fitsName_KElement(nodeName + JDFConstants.REF, nameSpaceURI))
+			if (fitsName_KElement(nodeName + JDFConstants.REF, nameSpaceURI))
 			{
 				return true;
 			}

@@ -542,6 +542,37 @@ public class XMLDocUserData
 	}
 
 	/**
+	 * clear the map of all targets
+	 */
+	public void fillIDCache()
+	{
+		clearTargets();
+		if (!useIDCache)
+			return;
+		KElement root = (KElement) m_Parent.getDocumentElement();
+		if (root != null)
+			fillIDCache(root);
+
+	}
+
+	/**
+	 * @param root
+	 */
+	private void fillIDCache(KElement root)
+	{
+		Attr attr = root.getAttributeNode(AttributeName.ID);
+		if (attr != null)
+			m_mapTarget.put(attr.getValue(), root);
+		KElement e = root.getFirstChildElement();
+		while (e != null)
+		{
+			fillIDCache(e);
+			e = e.getNextSiblingElement();
+		}
+
+	}
+
+	/**
 	 * @return
 	 */
 	public Object getDirtyPolicy()

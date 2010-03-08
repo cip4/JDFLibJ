@@ -2827,24 +2827,22 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param attrib name of the ID tag, defaults to "ID"
 	 * @return KElement the target of link - the element node.
 	 */
-	public KElement getTarget_KElement(final String id, final String attrib)
+	public KElement getTarget_KElement(final String id, String attrib)
 	{
-		String attribLocal = attrib;
-
 		if (id == null || id.equals(JDFConstants.EMPTYSTRING))
 		{
 			return null;
 		}
 		boolean bID = false;
 		KElement kRet = null;
-		if (attribLocal == null)
+		if (attrib == null)
 		{
-			attribLocal = AttributeName.ID;
+			attrib = AttributeName.ID;
 		}
 
 		// try to find the target ID in the cached list
 		XMLDocUserData userData = getXMLDocUserData();
-		if (attribLocal.equals(AttributeName.ID) && userData != null)
+		if (attrib.equals(AttributeName.ID) && userData != null)
 		{
 			kRet = userData.getTarget(id);
 			bID = true;
@@ -2866,7 +2864,7 @@ public class KElement extends ElementNSImpl implements Element
 
 			while (root != null && !bFound)
 			{
-				final KElement deepElement = root.getDeepElementByID(attribLocal, id, excludeElement, userData);
+				final KElement deepElement = root.getDeepElementByID(attrib, id, excludeElement, userData);
 
 				// search tree one level higher
 				if (deepElement == null)
@@ -2904,7 +2902,8 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	protected KElement getDeepElementByID(final String attName, final String id, final KElement childToExclude, final XMLDocUserData ud)
 	{
-		final String attVal = getAttribute_KElement(attName, null, null);
+		Attr attr = getAttributeNode(attName);
+		String attVal = attr != null ? attr.getValue() : null;
 		if (attVal != null)
 		{
 			if (ud != null)
@@ -6764,7 +6763,8 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	private void fillHashSet(final String attName, final String attNS, final HashSet<String> preFill, final boolean bFirst)
 	{
-		final String attVal = getAttribute_KElement(attName, attNS, null);
+		final Attr attr = attNS == null ? super.getAttributeNodeNS(attNS, attName) : super.getAttributeNode(attName);
+		String attVal = attr == null ? null : attr.getValue();
 		if (attVal != null)
 		{
 			if (preFill.contains(attVal))
@@ -6839,9 +6839,10 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String appendAnchor(String strName)
 	{
-		if (hasAttribute(AttributeName.ID))
+		String id = this.getAttribute(AttributeName.ID, null, null);
+		if (id != null)
 		{
-			return this.getAttribute(AttributeName.ID, null, null);
+			return id;
 		}
 		else if ((strName == null) || strName.equals(JDFConstants.EMPTYSTRING))
 		{
@@ -6858,7 +6859,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getID()
 	{
-		return getAttribute(AttributeName.ID);
+		return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
 	}
 
 	/**

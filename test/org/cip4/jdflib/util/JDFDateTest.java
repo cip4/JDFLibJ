@@ -479,18 +479,25 @@ public class JDFDateTest extends TestCase
 	}
 
 	/**
+	 * @throws DataFormatException 
 	 * 
 	 */
-	public void testTimeZone()
+	public void testTimeZone() throws DataFormatException
 	{
 		final TimeZone t = TimeZone.getDefault();
 		JDFDate d = new JDFDate();
 		assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
+		boolean bSummer = false;
+		JDFDate dNow = new JDFDate();
 		for (int i = 0; i < 400; i++)
 		{
 			d = new JDFDate(System.currentTimeMillis() + i * 24 * 60 * 60 * 1000);
 			assertEquals(t.getOffset(System.currentTimeMillis() + i * 24 * 60 * 60 * 1000), d.getTimeZoneOffsetInMillis());
+			if (!dNow.getTimeZoneISO().equals(d.getTimeZoneISO()))
+				bSummer = true;
+			JDFDate d4 = new JDFDate(d.getDateTimeISO());
+			assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
 		}
-
+		assertTrue(bSummer);
 	}
 }

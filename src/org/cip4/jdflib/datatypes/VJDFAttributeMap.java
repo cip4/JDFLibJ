@@ -296,7 +296,7 @@ public class VJDFAttributeMap
 	/**
 	 * andMap - builds a new vector of maps with identical pairs of both maps does not modify this
 	 * 
-	 * @param subMap the given map
+	 * @param map the given map
 	 * @return the anded map, null if mismatches occurred
 	 */
 	public VJDFAttributeMap getOrMaps(final JDFAttributeMap map)
@@ -503,6 +503,7 @@ public class VJDFAttributeMap
 	 * @return boolean - true if and only if the specified AttributeMap has the some number of keys and values and the same keys and values as a entry in this
 	 * vector
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public boolean hasEntryWithEqualKeyValuePairs(final JDFAttributeMap attmap)
 	{
@@ -572,6 +573,7 @@ public class VJDFAttributeMap
 	 * @param vKeys
 	 * @deprecated use redceMap
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public void reduceKey(final Vector vKeys)
 	{
@@ -705,6 +707,7 @@ public class VJDFAttributeMap
 	 * Method overlapMap.
 	 * 
 	 * @param map the map to check against
+	 * @return 
 	 */
 	public boolean overlapsMap(final JDFAttributeMap map)
 	{
@@ -845,6 +848,7 @@ public class VJDFAttributeMap
 	 * returns the index of a given JDFAttributeMap, -1 if not present
 	 * 
 	 * @param map the given JDFAttributeMap
+	 * @return 
 	 */
 	public int indexOf(final JDFAttributeMap map)
 	{

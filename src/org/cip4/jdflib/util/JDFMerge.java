@@ -1097,7 +1097,7 @@ public class JDFMerge
 		if (mainRes == null || resToMerge == null)
 			return;
 
-		if (!mainRes.getID().equals(resToMerge.getID()))
+		if (!ContainerUtil.equals(mainRes.getID(), resToMerge.getID()))
 		{
 			throw new JDFException("JDFResource.mergeSpawnIDs  merging incompatible resources ID = " + mainRes.getID() + " IDMerge = " + resToMerge.getID());
 		}

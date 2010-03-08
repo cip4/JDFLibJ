@@ -807,17 +807,17 @@ public class XMLDocTest extends JDFTestCaseBase
 		if (uc != null)
 		{
 			final long t = System.nanoTime();
-			long t1 = System.nanoTime();
-			for (int i = 0; i < 10000; i++)
+			long t1 = t;
+			for (int i = 0; i < 1000; i++)
 			{
 				uc = d.write2HTTPURL(url, null, null);
-				assertNotNull(uc);
+				assertNotNull("loop " + i, uc);
 				uc.getInputStream().read();
 				uc.getInputStream().close();
 				final long t2 = System.nanoTime();
 				if (i % 100 == 0)
 				{
-					System.out.println(i + " " + (t2 - t1) + " " + ((t2 - t) / (i + 1)) + " " + (t2 - t) / 1000000);
+					System.out.println(i + " last " + (t2 - t1) + " average " + ((t2 - t) / (i + 1)) + " total " + (t2 - t) / 1000000);
 				}
 				t1 = t2;
 
