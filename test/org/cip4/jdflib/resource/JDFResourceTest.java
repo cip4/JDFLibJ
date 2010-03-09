@@ -1197,6 +1197,20 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// ////////////////////////////////////////////////////////////
 
 	/**
+	 *  
+	 */
+	public void testGetParentPartition()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource r = n.addResource(ElementName.EXPOSEDMEDIA, null);
+		JDFExposedMedia r2 = (JDFExposedMedia) r.addPartition(EnumPartIDKey.BinderySignatureName, "bs1");
+		JDFMedia m = r2.appendMedia();
+		assertEquals(r2.getParentPartition(), r);
+		assertNull(m.getParentPartition());
+		assertNull(r.getParentPartition());
+	}
+
+	/**
 	 * test whether getpartition works for when inconsistently called
 	 */
 	public void testGetPartition()

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -132,7 +132,24 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	/**
 	 * true if subscriptions should be in nodeinfo
 	 */
-	public boolean bNodeInfoSubscription = true;
+	private boolean bNodeInfoSubscription = false;
+
+	/**
+	 * @return the bNodeInfoSubscription
+	 */
+	public boolean isNodeInfoSubscription()
+	{
+		return bNodeInfoSubscription;
+	}
+
+	/**
+	 * @param nodeInfoSubscription the bNodeInfoSubscription to set
+	 */
+	public void setNodeInfoSubscription(final boolean nodeInfoSubscription)
+	{
+		bNodeInfoSubscription = nodeInfoSubscription;
+	}
+
 	/**
 	 * seconds this was active
 	 */
@@ -285,7 +302,7 @@ public class MISGoldenTicket extends BaseGoldenTicket
 	}
 
 	/**
-	 * @return 
+	 * @return
 	 * 
 	 */
 	protected JDFCustomerInfo initCustomerInfo()

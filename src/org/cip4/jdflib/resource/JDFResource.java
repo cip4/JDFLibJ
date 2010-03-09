@@ -6619,6 +6619,25 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
+	 * get the intermediate or root partition of this, null if we are the root
+	 * @return
+	 */
+	public JDFResource getParentPartition()
+	{
+		KElement e = getParentNode_KElement();
+		if (!(e instanceof JDFResource))
+			return null;
+
+		if (!e.getNodeName().equals(getNodeName()))
+		{
+			return null;
+		}
+
+		return (JDFResource) e;
+
+	}
+
+	/**
 	 * Gets a list of all valid part keys for this resource
 	 * 
 	 * @return VString - list of all PartIDKeys

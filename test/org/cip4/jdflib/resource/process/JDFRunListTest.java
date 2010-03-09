@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.process.JDFRunList.JDFRunData;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionOp;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.CPUTimer;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -112,6 +113,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 	private JDFNode root;
 	private JDFRunList rl;
 
+	/**
+	 * 
+	 */
 	public final void testCollapseNPage()
 	{
 		final JDFRunList rl1 = rl.addPDF("file:///file1.pdf", 0, 2);
@@ -138,6 +142,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
 	public final void testAddRun()
 	{
 		final JDFRunList rl2 = rl.addRun("f1.pdf", 0, -1);
@@ -145,6 +152,27 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertFalse(rl.hasAttribute_KElement(AttributeName.NPAGE, null, false));
 	}
 
+	/**
+	 * 
+	 */
+	public final void testAddRunPerformance()
+	{
+		final CPUTimer ct = new CPUTimer(false);
+
+		for (int i = 1; i < 1000; i++)
+		{
+			ct.start();
+			final JDFRunList rl2 = rl.addRun("f1.pdf", 0, 3);
+			assertTrue(rl2.hasAttribute_KElement(AttributeName.NPAGE, null, false));
+			assertEquals(rl.getNPage(), 4 * i);
+			if (i % 50 == 0)
+				System.out.println(i + " " + ct.toString());
+		}
+	}
+
+	/**
+	 * 
+	 */
 	public final void testGetFileURL()
 	{
 		rl.setFileURL("./foo/bar.pdf");
@@ -152,6 +180,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl.getFileURL(), "File://c/fnarf/foo/bar.pdf");
 	}
 
+	/**
+	 * 
+	 */
 	public final void testSetPages()
 	{
 		final JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList(new JDFIntegerRange(0, -1, 8));
@@ -160,6 +191,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl.getNPage(), 8);
 	}
 
+	/**
+	 * 
+	 */
 	public final void testGetMimeType()
 	{
 		final JDFResourcePool resPool = root.getCreateResourcePool();
@@ -219,8 +253,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl.getNPage(), 6);
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * @throws Exception 
 	 */
 	public final void testGetIndexPartition() throws Exception
 	{
@@ -236,8 +271,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertNull(rl.getIndexPartition(7));
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * @throws Exception 
 	 */
 	public final void testGetPageInFile() throws Exception
 	{
@@ -260,7 +296,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rlp2.getPageInFile(6), 6);
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
 	 */
 	public final void testGetPageLeaves()
@@ -291,8 +327,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * @throws Exception 
 	 */
 	public final void testGetIndex() throws Exception
 	{
@@ -321,8 +358,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rlp3.getLastIndex(), 23);
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * @throws Exception 
 	 */
 	public final void testPageIterator() throws Exception
 	{
@@ -331,11 +369,11 @@ public class JDFRunListTest extends JDFTestCaseBase
 		rlp.setNPage(3);
 		final JDFRunList rlp2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
 		rlp2.setPages(new JDFIntegerRangeList("0 2 4 6"));
-		final Iterator it = rl.getPageIterator();
+		final Iterator<JDFRunData> it = rl.getPageIterator();
 		int n = 0;
 		while (it.hasNext())
 		{
-			final JDFRunData ri = (JDFRunData) it.next();
+			final JDFRunData ri = it.next();
 			assertEquals(n, ri.runIndex);
 			assertEquals(n < 3 ? rlp : rlp2, ri.runList);
 			n++;
@@ -357,12 +395,12 @@ public class JDFRunListTest extends JDFTestCaseBase
 			rlp.setPages(new JDFIntegerRangeList("1 3 5 7"));
 			rlp.setFileURL("File://Test" + i + ".pdf");
 		}
-		final Iterator it = rl.getPageIterator();
+		final Iterator<JDFRunData> it = rl.getPageIterator();
 		int n = 0;
 
 		while (it.hasNext())
 		{
-			final JDFRunData ri = (JDFRunData) it.next();
+			final JDFRunData ri = it.next();
 			assertEquals(n, ri.runIndex);
 			assertEquals(((ri.getPageInFile() - 1) / 2) % 4, n % 4);
 			n++;
@@ -502,6 +540,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 		doc.write2File(sm_dirTestDataTemp + "metadataMap.jdf", 2, false);
 	}
 
+	/**
+	 * 
+	 */
 	public void testSeparatedTiff()
 	{
 		final VString v1 = new VString("Cyan Magenta Yello Black", " ");

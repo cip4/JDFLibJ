@@ -254,8 +254,8 @@ public class CPUTimer
 		String label = "CPUTimer: ";
 		if (name != null)
 			label += getName();
-		return label + " totalCPU=" + getTotalCPUTime() + " currentCPU=" + getCurrentCPUTime() + " totalT=" + getTotalRealTime() + " currentT=" + getCurrentRealTime() + " starts="
-				+ nStartStop + " active=" + (currentT0 > 0);
+		return label + " totalCPU=" + getTotalCPUTime() / 1000000000. + " currentCPU=" + getCurrentCPUTime() / 1000000000. + " totalT=" + getTotalRealTime() / 1000. + " currentT="
+				+ getCurrentRealTime() / 1000. + " starts=" + nStartStop + " active=" + (currentT0 > 0);
 	}
 
 	/**
@@ -265,13 +265,12 @@ public class CPUTimer
 	public KElement toXML()
 	{
 		KElement root = new XMLDoc("CPUTimer", null).getRoot();
-		root.setAttribute("TotalRealTime", getTotalRealTime(), null);
-		root.setAttribute("CurrentRealTime", getCurrentRealTime(), null);
-		root.setAttribute("AverageRealTime", getAverageRealTime(), null);
-		root.setAttribute("AverageRealTime", getAverageRealTime(), null);
-		root.setAttribute("TotalCPUTime", getTotalCPUTime(), null);
-		root.setAttribute("CurrentCPUTime", getCurrentCPUTime(), null);
-		root.setAttribute("AverageCPUTime", getAverageCPUTime(), null);
+		root.setAttribute("TotalRealTime", getTotalRealTime() / 1000., null);
+		root.setAttribute("CurrentRealTime", getCurrentRealTime() / 1000., null);
+		root.setAttribute("AverageRealTime", getAverageRealTime() / 1000., null);
+		root.setAttribute("TotalCPUTime", getTotalCPUTime() / 1000000000., null);
+		root.setAttribute("CurrentCPUTime", getCurrentCPUTime() / 1000000000., null);
+		root.setAttribute("AverageCPUTime", getAverageCPUTime() / 1000000000., null);
 		root.setAttribute("CreationTime", new JDFDate(getCreationTime()).getFormattedDateTime("hh:mm ss.sss"), null);
 		root.setAttribute("StartStop", getNumStarts(), null);
 		return root;

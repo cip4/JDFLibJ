@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -123,10 +123,10 @@ public class JDFRunList extends JDFAutoRunList
 
 	/**
 	 * Constructor for JDFRunList
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
 	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String qualifiedName) throws DOMException
 	{
@@ -135,9 +135,9 @@ public class JDFRunList extends JDFAutoRunList
 
 	/**
 	 * Constructor for JDFRunList
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -148,11 +148,11 @@ public class JDFRunList extends JDFAutoRunList
 
 	/**
 	 * Constructor for JDFRunList
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
 	 * @throws DOMException
 	 */
 	public JDFRunList(final CoreDocumentImpl myOwnerDocument, final String myNamespaceURI, final String qualifiedName, final String myLocalName) throws DOMException
@@ -176,7 +176,7 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String fileName
+	 * @param  fileName
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -190,8 +190,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String fileName
-	 * @param int first
+	 * @param fileName
+	 * @param first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -205,9 +205,9 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addRun
 	 * 
-	 * @param String fileName
-	 * @param int first
-	 * @param int last
+	 * @param fileName
+	 * @param first
+	 * @param last
 	 * 
 	 * @return JDFRunList
 	 */
@@ -219,16 +219,34 @@ public class JDFRunList extends JDFAutoRunList
 		final JDFIntegerRangeList irl = new JDFIntegerRangeList();
 		irl.append(first, last);
 		r.setPages(irl);
-		final JDFLayoutElement loe = (JDFLayoutElement) r.appendElement(ElementName.LAYOUTELEMENT, JDFConstants.EMPTYSTRING);
+		final JDFLayoutElement loe = (JDFLayoutElement) r.appendElement(ElementName.LAYOUTELEMENT, null);
 		loe.setMimeURL(fileName);
-		fixNPage();
+		r.updateNPage(first, last);
 		return r;
+	}
+
+	/**
+	 * add the number of pages between first and last to NPage
+	 * @param first
+	 * @param last
+	 */
+	public void updateNPage(int first, int last)
+	{
+		if (first < 0 || last < 0)
+			return;
+		int npage = super.getNPage();
+		int n = Math.abs(last - first);
+		npage += n + 1;
+		setNPage(npage);
+		JDFRunList parent = (JDFRunList) getParentPartition();
+		if (parent != null)
+			parent.updateNPage(first, last);
 	}
 
 	/**
 	 * addPDF
 	 * 
-	 * @param String fileName
+	 * @param fileName
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -242,8 +260,8 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addPDF
 	 * 
-	 * @param String fileName
-	 * @param int first
+	 * @param fileName
+	 * @param first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -274,12 +292,13 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector fileSpec
-	 * @param Vector sepNames
+	 * @param fileNames
+	 * @param sepNames
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames)
 	{
@@ -289,13 +308,14 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param Vector fileSpec
-	 * @param Vector sepNames
-	 * @param int first
+	 * @param fileNames
+	 * @param sepNames
+	 * @param first
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first)
 	{
@@ -304,15 +324,16 @@ public class JDFRunList extends JDFAutoRunList
 
 	/**
 	 * addSepRun
+	 * @param fileNames 
+	 * @param sepNames 
+	 * @param first 
+	 * @param n 
 	 * 
-	 * @param Vector fileSpec
-	 * @param Vector sepNames
-	 * @param int first
-	 * @param int n
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
 	 */
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public JDFRunList addSepRun(final Vector fileNames, final Vector sepNames, final int first, final int n)
 	{
@@ -467,9 +488,9 @@ public class JDFRunList extends JDFAutoRunList
 	/**
 	 * addSepRun
 	 * 
-	 * @param VElement fileSpec
-	 * @param Vector sepNames
-	 * @param boolean pageMajor
+	 * @param fileSpec
+	 * @param sepNames
+	 * @param pageMajor
 	 * @deprecated
 	 * 
 	 * @return JDFRunList
@@ -1064,7 +1085,7 @@ public class JDFRunList extends JDFAutoRunList
 		return v;
 	}
 
-	public Iterator getPageIterator()
+	public Iterator<JDFRunData> getPageIterator()
 	{
 		return new PageIterator(this);
 	}
@@ -1319,7 +1340,8 @@ public class JDFRunList extends JDFAutoRunList
 		if (hasAttribute(AttributeName.PAGES))
 		{
 			final JDFIntegerRangeList pages = getPages();
-			return pages.getElementCount();
+			int nPage = pages.getElementCount();
+			return nPage;
 		}
 
 		final VElement v = getChildElementVector_KElement(getLocalName(), getNamespaceURI(), null, true, 0);
@@ -1426,7 +1448,7 @@ public class JDFRunList extends JDFAutoRunList
 			}
 		}
 
-		/*
+		/**
 		 * (non-Javadoc)
 		 * 
 		 * @see java.util.Iterator#hasNext()
@@ -1440,7 +1462,7 @@ public class JDFRunList extends JDFAutoRunList
 		 * 
 		 * @see java.util.Iterator#next() returns a JDFRunIndex object that refers to the RunList entry and the index within it
 		 */
-		public Object next()
+		public JDFRunData next()
 		{
 			for (int i = lastIndex; i < vRunIndex.length; i++)
 			{
@@ -1458,9 +1480,10 @@ public class JDFRunList extends JDFAutoRunList
 		}
 
 		/**
-		 * (non-Javadoc) don't even dream of removing individual pages in this iterator
+		 * not implemented
+		 * @throws JDFException (always...)
 		 */
-		public void remove()
+		public void remove() throws JDFException
 		{
 			throw new JDFException("remove not implented");
 		}

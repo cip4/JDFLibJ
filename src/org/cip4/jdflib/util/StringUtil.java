@@ -207,6 +207,7 @@ public class StringUtil
 			"The slightest thought hadn't even begun to speculate about the merest possibility of crossing my mind.",
 			"Right, Baldrick, let's try again, shall we? This is called adding. If I have two beans, and then I add two more beans, what do I have?\nSome beans.\nYes...and no. Let's try again, shall we? I have two beans, then I add two more beans. What does that make?\nA very small casserole.\nBaldrick, the ape creatures of the Indus have mastered this. Now try again. One, two, three, four. So how many are there?\nThree\nWhat?\nAnd that one.\nThree and that one. So if I add that one to the three what will I have?\nOh! Some beans.\nYes. To you Baldrick, the Renaissance was just something that happened to other people wasn't it?",
 			"It's got a cop motor, a 440 cubic inch plant, it's got cop tires, cop suspensions, cop shocks. It's a model made before catalytic converters so it'll run good on regular gas. What do you say, is it the new Bluesmobile or what?",
+			"Yes. The plans were on display in the bottom of a locked filing cabinet, stuck in a disused lavatory with a sign on the door saying 'Beware of the Leopard'",
 			"It's 106 miles to Chicago, we got a full tank of gas, half a pack of cigarettes, it's dark, and we're wearing sunglasses. ",
 			"Ich bin der Geist, der stets verneint! Und das mit Recht; denn alles, was entsteht,  Ist wert, daß es zugrunde geht;  Drum besser wär's, daß nichts entstünde.  So ist denn alles, was ihr Sünde,  Zerstörung, kurz das Böse nennt,  Mein eigentliches Element." };
 
