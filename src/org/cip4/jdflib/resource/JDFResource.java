@@ -6624,16 +6624,17 @@ public class JDFResource extends JDFElement
 	 */
 	public JDFResource getParentPartition()
 	{
-		KElement e = getParentNode_KElement();
-		if (!(e instanceof JDFResource))
-			return null;
-
-		if (!e.getNodeName().equals(getNodeName()))
+		KElement parent = getParentNode_KElement();
+		if (!(parent instanceof JDFResource))
 		{
-			return null;
+			parent = null;
+		}
+		else if (!parent.getNodeName().equals(getNodeName()))
+		{
+			parent = null;
 		}
 
-		return (JDFResource) e;
+		return (JDFResource) parent;
 
 	}
 

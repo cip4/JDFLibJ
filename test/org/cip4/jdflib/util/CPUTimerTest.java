@@ -138,6 +138,11 @@ public class CPUTimerTest extends JDFTestCaseBase
 	 */
 	public void testAverage()
 	{
+		assertEquals(0, t.getAverageRealTime());
+		assertEquals(0, t.getAverageCPUTime());
+		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime());
+		assertEquals(t.getTotalRealTime(), t.getAverageRealTime());
+
 		t.start();
 		for (int ii = 0; ii < 10000000; ii++)
 		{

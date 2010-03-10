@@ -233,7 +233,7 @@ public class CPUTimer
 	 */
 	public long getAverageRealTime()
 	{
-		return getTotalRealTime() / nStartStop;
+		return nStartStop == 0 ? 0 : getTotalRealTime() / nStartStop;
 	}
 
 	/**
@@ -241,7 +241,7 @@ public class CPUTimer
 	 */
 	public long getAverageCPUTime()
 	{
-		return getTotalCPUTime() / nStartStop;
+		return nStartStop == 0 ? 0 : getTotalCPUTime() / nStartStop;
 	}
 
 	/**

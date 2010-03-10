@@ -707,14 +707,13 @@ public class KElement extends ElementNSImpl implements Element
 		// level 1 - assume the namespace of this
 		if ((a == null) && (nameSpaceURI != null))
 		{
-			// the xmlNSLocalName here is just in case - actually you shouldn't
-			// be calling both ns and prefix
-			a = getAttributeNodeNS(nameSpaceURI, KElement.xmlnsLocalName(attrib));
+			// the xmlNSLocalName here is just in case - actually you shouldn't be calling both ns and prefix
+			String xmlnsLocalName = KElement.xmlnsLocalName(attrib);
+			a = getAttributeNodeNS(nameSpaceURI, xmlnsLocalName);
 			if ((a == null) && nameSpaceURI.equals(getNamespaceURI()))
 			{
-				a = getAttributeNodeNS(null, KElement.xmlnsLocalName(attrib));
+				a = getAttributeNodeNS(null, xmlnsLocalName);
 			}
-
 		}
 
 		if (a == null && bInherit)

@@ -623,9 +623,18 @@ public class JDFQueue extends JDFAutoQueue
 		while (qe != null)
 		{
 
-			if (("Waiting".equals(qe.getAttribute(AttributeName.STATUS))) && (cb == null || cb.canExecute(qe)))
+			String qeStatus = qe.getAttribute(AttributeName.STATUS);
+			if ("Waiting".equals(qeStatus))
 			{
-				theEntry = qe;
+				if (cb == null || cb.canExecute(qe))
+				{
+					theEntry = qe;
+					break;
+				}
+			}
+			else if (!"Running".equals(qeStatus))
+			{
+				// the queue is sorted and we have passed the waiting and running
 				break;
 			}
 			qe = (JDFQueueEntry) qe.getNextSiblingElement(ElementName.QUEUEENTRY, null);
