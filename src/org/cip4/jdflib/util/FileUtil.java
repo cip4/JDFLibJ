@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,6 +71,8 @@
 
 package org.cip4.jdflib.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -78,6 +80,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
@@ -399,7 +402,7 @@ public class FileUtil
 	{
 		try
 		{
-			final FileOutputStream fos = new FileOutputStream(fil);
+			final OutputStream fos = new BufferedOutputStream(new FileOutputStream(fil));
 			IOUtils.copy(fis, fos);
 			fos.flush();
 			fos.close();
@@ -413,7 +416,6 @@ public class FileUtil
 		{
 			return null;
 		}
-
 		return fil;
 	}
 
@@ -428,10 +430,9 @@ public class FileUtil
 		{
 			return null;
 		}
-		FileInputStream fis;
 		try
 		{
-			fis = new FileInputStream(file);
+			InputStream fis = getBufferedInputStream(file);
 			final int len = (int) file.length();
 			if (len <= 0)
 			{
@@ -457,7 +458,6 @@ public class FileUtil
 		}
 		catch (final Exception e)
 		{
-
 			return null;
 		}
 	}
@@ -726,5 +726,25 @@ public class FileUtil
 			return file2 == null;
 		}
 		return file1.equals(file2);
+	}
+
+	/**
+	 * create a buffered input stream for a file
+	 * @param file
+	 * @return the buffered input stream, null if snafu
+	 */
+	public static InputStream getBufferedInputStream(File file)
+	{
+		FileInputStream fis;
+		try
+		{
+			fis = new FileInputStream(file);
+		}
+		catch (FileNotFoundException x)
+		{
+			return null;
+		}
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		return bis;
 	}
 }

@@ -71,6 +71,11 @@
 package org.cip4.jdflib.util;
 
 import java.lang.management.ThreadMXBean;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
@@ -85,7 +90,159 @@ import sun.management.ManagementFactory;
 public class CPUTimer
 {
 
-	private final long createT0;
+	/**
+	 * 
+	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public static class CPUTimerFactory
+	{
+		/**
+		 * 
+		 */
+		public CPUTimerFactory()
+		{
+			super();
+			globalMap = new HashMap<ThreadIdentifier, CPUTimer>();
+		}
+
+		/**
+		 * 
+		  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+		 */
+		protected class ThreadIdentifier
+		{
+			protected Thread theThread;
+			protected String id;
+
+			/**
+			 * @param id a unique Identifier, may be null
+			 * 
+			 */
+			public ThreadIdentifier(String id)
+			{
+				this.id = id;
+				theThread = Thread.currentThread();
+			}
+
+			/**
+			 * @see java.lang.Object#equals(java.lang.Object)
+			 * @param obj
+			 * @return
+			*/
+			@Override
+			public boolean equals(Object obj)
+			{
+				if (!(obj instanceof ThreadIdentifier))
+					return false;
+				ThreadIdentifier ti = (ThreadIdentifier) obj;
+				return ContainerUtil.equals(id, ti.id) && ContainerUtil.equals(theThread, ti.theThread);
+			}
+
+			/**
+			 * @see java.lang.Object#hashCode()
+			 * @return
+			*/
+			@Override
+			public int hashCode()
+			{
+				return HashUtil.hashCode(HashUtil.hashCode(0, id), theThread);
+			}
+
+			/**
+			 * @see java.lang.Object#toString()
+			 * @return
+			*/
+			@Override
+			public String toString()
+			{
+				return "ThreadIdentified Thread=" + theThread.getName() + "_" + theThread.getId() + " ID: " + id;
+			}
+		}
+
+		private final Map<ThreadIdentifier, CPUTimer> globalMap;
+		protected static CPUTimerFactory theFactory = null;
+
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
+		public CPUTimer getCurrentTimer(String id)
+		{
+			return globalMap.get(new ThreadIdentifier(id));
+		}
+
+		/**
+		 * get the summary of all matching timers
+		 * @param id if null get all
+		 * @return
+		 */
+		public CPUTimer getGlobalTimer(String id)
+		{
+			CPUTimer timer = new CPUTimer(false);
+			timer.setName(id);
+			Vector<CPUTimer> v = getTimers(id);
+			for (CPUTimer ti : v)
+				timer.add(ti);
+			return timer;
+		}
+
+		/**
+		 * get all timers for all threads for a given id
+		 *
+		 * @param id if null get all
+		 * @return
+		 */
+		public Vector<CPUTimer> getTimers(String id)
+		{
+			Vector<CPUTimer> v = new Vector<CPUTimer>();
+			synchronized (globalMap)
+			{
+				Set<ThreadIdentifier> s = globalMap.keySet();
+				Iterator<ThreadIdentifier> it = s.iterator();
+				while (it.hasNext())
+				{
+					ThreadIdentifier ti = it.next();
+					if (id == null || id.equals(ti.id))
+					{
+						v.add(globalMap.get(ti));
+					}
+				}
+			}
+			return v;
+		}
+
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
+		public CPUTimer getCreateCurrentTimer(String id)
+		{
+			CPUTimer ct = globalMap.get(new ThreadIdentifier(id));
+			if (ct == null)
+			{
+				ct = new CPUTimer(false);
+				ct.setName(id);
+				globalMap.put(new ThreadIdentifier(id), ct);
+			}
+			return ct;
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 * @return
+		*/
+		@Override
+		public String toString()
+		{
+			return "CPUTimerFactory;\n" + globalMap;
+		}
+	}
+
+	/**    -----------    end of private classes    -----------    **/
+
+	private long createT0;
 	private long currentT0;
 	private long cpuT0;
 	private long totalT0;
@@ -101,6 +258,18 @@ public class CPUTimer
 	public String getName()
 	{
 		return name;
+	}
+
+	/**
+	 * add a timer to this
+	 * @param timer
+	 */
+	public void add(CPUTimer timer)
+	{
+		totalT0 += timer.getTotalRealTime();
+		totalCpuT0 += timer.getTotalCPUTime();
+		nStartStop += timer.getNumStarts();
+		createT0 = Math.min(createT0, timer.getCreationTime());
 	}
 
 	/**
@@ -274,5 +443,15 @@ public class CPUTimer
 		root.setAttribute("CreationTime", new JDFDate(getCreationTime()).getFormattedDateTime("hh:mm ss.sss"), null);
 		root.setAttribute("StartStop", getNumStarts(), null);
 		return root;
+	}
+
+	/**
+	 * @return the one and only CPUTimerFactory
+	 */
+	public static CPUTimerFactory getFactory()
+	{
+		if (CPUTimerFactory.theFactory == null)
+			CPUTimerFactory.theFactory = new CPUTimerFactory();
+		return CPUTimerFactory.theFactory;
 	}
 }

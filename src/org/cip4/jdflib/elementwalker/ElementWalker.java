@@ -94,8 +94,8 @@ public class ElementWalker
 	/**
 	 * walk the tree starting at e.
 	 * 
-	 * @param e the root element to walk
-	 * @param trackElem a parallel element to e that may additionally be modified during the walk
+	 * @param e the root element to walk, must not be null
+	 * @param trackElem a parallel element to e that may additionally be modified during the walk, may be null
 	 * @return n the number of traversed elements
 	 */
 	public int walkTree(final KElement e, final KElement trackElem)
@@ -176,7 +176,7 @@ public class ElementWalker
 			return 0;
 		}
 		int n = 0;
-		// do not follow refelements
+		// do not follow refelements - also MUST use VElement rather than iterator to retain walking ability, even if elements are deleted
 		final VElement v = e.getChildElementVector_KElement(null, null, null, true, -1);
 		final int size = v.size();
 		for (int i = 0; i < size; i++)

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -83,13 +83,14 @@ package org.cip4.jdflib.jmf;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoResubmissionParams;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.ifaces.IURLSetter;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * July 10, 2009
  */
-public class JDFResubmissionParams extends JDFAutoResubmissionParams
+public class JDFResubmissionParams extends JDFAutoResubmissionParams implements IURLSetter
 {
 	private static final long serialVersionUID = 1L;
 

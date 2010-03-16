@@ -101,10 +101,13 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
+import org.cip4.jdflib.util.mime.MimeReader;
 
 /**
  * collection of helper routines to convert urls
@@ -1207,4 +1210,59 @@ public class UrlUtil
 
 		return null;
 	}
+
+	/**
+	 * physically store the file at the location specified in dir and also modify this to reflect the new location
+	 * @param parent the parent element, trypically a filespec or preview
+	 * @param dir the directory to move to. dir is created if it does not exist. 
+	 * If dir exists and dir is not a directory, the call fails and null is returned
+	 * @return the file that corresponds to the moved url reference, null if an error occurred
+	 */
+	public static File moveToDir(IURLSetter parent, final File dir)
+	{
+		if (dir == null)
+		{
+			return null;
+		}
+		if (dir.exists())
+		{
+			if (!dir.isDirectory())
+			{
+				return null;
+			}
+		}
+		else
+		{
+			dir.mkdirs();
+		}
+		String url = parent.getURL();
+		// check for nop
+		final File oldFile = urlToFile(url);
+		if (oldFile != null)
+		{
+			final File oldDir = oldFile.getParentFile();
+			if (FileUtil.equals(oldDir, dir))
+			{
+				return oldFile;
+			}
+		}
+
+		XMLDoc d = (parent instanceof KElement) ? ((KElement) parent).getOwnerDocument_KElement() : null;
+		Multipart mp = d == null ? null : d.getMultiPart();
+		final String fileName = getFileName(url, mp);
+		final File localFile = fileName == null ? null : new File(fileName);
+		File out = FileUtil.getFileInDirectory(dir, localFile);
+		if (out.exists())
+		{
+			out.delete();
+		}
+		InputStream inputStream = new MimeReader(mp).getURLInputStream(url);
+		out = FileUtil.streamToFile(inputStream, out);
+		if (out != null)
+		{
+			parent.setURL(UrlUtil.fileToUrl(out, false));
+		}
+		return out;
+	}
+
 }

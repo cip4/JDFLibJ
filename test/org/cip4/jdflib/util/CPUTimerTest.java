@@ -75,6 +75,7 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.CPUTimer.CPUTimerFactory;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -85,6 +86,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 {
 
 	CPUTimer t;
+	CPUTimerFactory fac;
 
 	/**
 	 * 
@@ -136,6 +138,56 @@ public class CPUTimerTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testGetCurrentTimer()
+	{
+		CPUTimer ct0 = fac.getCurrentTimer(null);
+		assertNull(ct0);
+		ct0 = fac.getCreateCurrentTimer(null);
+		assertNotNull(ct0);
+		CPUTimer ct1 = fac.getCreateCurrentTimer("1");
+		assertNotNull(ct1);
+		assertNotSame(ct0, ct1);
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetFactory()
+	{
+		assertNotNull(CPUTimer.getFactory());
+		assertEquals(fac, CPUTimer.getFactory());
+	}
+
+	/**
+	 * 
+	 */
+	public void testAdd()
+	{
+		long l = 0;
+		long lCPU = 0;
+		for (int ii = 0; ii < 5; ii++)
+		{
+			CPUTimer t1 = new CPUTimer(true);
+			for (int i = 0; i < 3000; i++)
+			{
+				t.toXML();
+			}
+			t1.stop();
+			t.add(t1);
+			l += t1.getTotalRealTime();
+			lCPU += t1.getTotalCPUTime();
+		}
+		System.out.print(t.toXML());
+		assertTrue(t.getTotalCPUTime() > 0);
+		assertEquals(t.getNumStarts(), 5);
+		assertEquals(t.getTotalCPUTime(), lCPU);
+		assertEquals(t.getTotalRealTime(), l);
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testAverage()
 	{
 		assertEquals(0, t.getAverageRealTime());
@@ -162,6 +214,7 @@ public class CPUTimerTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		t = new CPUTimer(false);
+		fac = CPUTimer.getFactory();
 	}
 
 	/**

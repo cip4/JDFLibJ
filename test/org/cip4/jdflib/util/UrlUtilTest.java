@@ -466,6 +466,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		url = "//boo/./gg/../a.b";
 		assertEquals("absolute url with new host and cleandots", "File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
 		assertEquals("absolute url with new host and cleandots", "File://boo/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+
+		assertEquals("http url", "http://dir/a.b", UrlUtil.getURLWithDirectory("http://dir", "a.b"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

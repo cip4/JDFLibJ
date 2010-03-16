@@ -115,6 +115,25 @@ public class RollingBackupFile extends File
 	}
 
 	/**
+	 * @param i the index of the file to read
+	 * @return the file to read, with backup
+	 */
+	public File getOldFile(int i)
+	{
+		if (i == 0)
+			return this;
+		if (i < 0 || i >= nBackup)
+			return null;
+		final String pathname = getPath();
+		final String extension = FileUtil.getExtension(this);
+		File f = new File(getPathFor(pathname, extension, i));
+		if (!f.canRead())
+			f = null;
+
+		return f;
+	}
+
+	/**
 	 * remove all files, including main file
 	 */
 	public void clearAll()

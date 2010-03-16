@@ -101,6 +101,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.mail.BodyPart;
 import javax.mail.Multipart;
 
 import org.apache.commons.lang.enums.ValuedEnum;
@@ -5085,7 +5086,8 @@ public class JDFElement extends KElement
 			return null;
 		}
 		final Multipart multiPart = getOwnerDocument_KElement().getMultiPart();
-		final InputStream is = new MimeReader(multiPart).getURLInputStream(url);
+		MimeReader mimeReader = new MimeReader(multiPart);
+		final InputStream is = mimeReader.getURLInputStream(url);
 		if (is == null)
 		{
 			return null;
@@ -5095,6 +5097,8 @@ public class JDFElement extends KElement
 		if (d != null)
 		{
 			d.setOriginalFileName(UrlUtil.urlToFileName(url));
+			BodyPart bp = mimeReader.getPartByCID(url);
+			d.setBodyPart(bp);
 		}
 		return d;
 	}

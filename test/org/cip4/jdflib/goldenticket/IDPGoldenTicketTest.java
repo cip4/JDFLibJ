@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,8 +70,13 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -90,6 +95,20 @@ public class IDPGoldenTicketTest extends BaseGoldenTicketTest
 	public void testIDPSimple()
 	{
 		write3GTFiles(idpGoldenTicket, "IDP_Simple");
+	}
+
+	/**
+	 * 
+	 */
+	public void testIDPRunList()
+	{
+		JDFNode n = idpGoldenTicket.getNode();
+		JDFRunList rl = (JDFRunList) n.getResource(ElementName.RUNLIST, EnumUsage.Input, null, 0);
+		assertNotNull(rl);
+		JDFRunList leaf = (JDFRunList) rl.getLeaves(false).elementAt(0);
+		JDFFileSpec fs = leaf.getLayoutElement().getFileSpec();
+		assertEquals(fs.getURL(), UrlUtil.normalize(idpGoldenTicket.m_pdfFile));
+
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

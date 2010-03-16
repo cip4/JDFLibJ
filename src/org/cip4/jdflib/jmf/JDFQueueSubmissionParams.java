@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,6 +88,7 @@ import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.ifaces.IURLSetter;
 
 //----------------------------------
 /**
@@ -95,7 +96,7 @@ import org.cip4.jdflib.core.JDFDoc;
  * 
  * prior to 10.02.2009
  */
-public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams
+public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams implements IURLSetter
 {
 	private static final long serialVersionUID = 1L;
 

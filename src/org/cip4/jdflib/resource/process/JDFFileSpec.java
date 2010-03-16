@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,7 +84,7 @@ import java.io.InputStream;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoFileSpec;
-import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.mime.MimeReader;
@@ -95,7 +95,7 @@ import org.w3c.dom.DOMException;
  * 
  * July 24, 2009
  */
-public class JDFFileSpec extends JDFAutoFileSpec
+public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 {
 	private static final long serialVersionUID = 1L;
 
@@ -204,41 +204,12 @@ public class JDFFileSpec extends JDFAutoFileSpec
 	 * physically store the file at the location specified in dir and also modify this to reflect the new location
 	 * @param dir
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
+	 * @deprecated use URLUTil.moveToDir(this)
 	 */
+	@Deprecated
 	public File moveToDir(final File dir)
 	{
-		if (dir == null)
-		{
-			return null;
-		}
-		if (!dir.isDirectory())
-		{
-			return null;
-		}
-		// check for nop
-		final File oldFile = UrlUtil.urlToFile(getURL());
-		if (oldFile != null)
-		{
-			final File oldDir = oldFile.getParentFile();
-			if (FileUtil.equals(oldDir, dir))
-			{
-				return oldFile;
-			}
-		}
-
-		final String fileName = getFileName();
-		final File localFile = fileName == null ? null : new File(fileName);
-		File out = FileUtil.getFileInDirectory(dir, localFile);
-		if (out.exists())
-		{
-			out.delete();
-		}
-		out = FileUtil.streamToFile(getURLInputStream(), out);
-		if (out != null)
-		{
-			setURL(UrlUtil.fileToUrl(out, false));
-		}
-		return out;
+		return UrlUtil.moveToDir(this, dir);
 	}
 
 	/**

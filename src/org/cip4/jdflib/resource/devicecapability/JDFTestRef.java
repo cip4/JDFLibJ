@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,6 +87,10 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFTestRef extends JDFTerm
 {
 	private static final long serialVersionUID = 1L;
@@ -94,8 +98,7 @@ public class JDFTestRef extends JDFTerm
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x22222222,
-				AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x22222222, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
 	@Override
@@ -111,8 +114,7 @@ public class JDFTestRef extends JDFTerm
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -125,8 +127,7 @@ public class JDFTestRef extends JDFTerm
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -140,23 +141,32 @@ public class JDFTestRef extends JDFTerm
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFTestRef(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.core.JDFElement#toString()
+	 * @return
+	*/
 	@Override
 	public String toString()
 	{
 		return " JDFTestRef[  --> " + super.toString() + " ]";
 	}
 
+	/**
+	 * @param value
+	 */
 	public void setrRef(String value)
 	{
 		setAttribute(AttributeName.RREF, value, null);
 	}
 
+	/**
+	 * @return
+	 */
 	public String getrRef()
 	{
 		return getAttribute(AttributeName.RREF, null, JDFConstants.EMPTYSTRING);
@@ -169,29 +179,38 @@ public class JDFTestRef extends JDFTerm
 	 */
 	public JDFTest getTest()
 	{
-		final JDFTestPool testPool = (JDFTestPool) getDeepParent(
-				ElementName.TESTPOOL, 0);
-		return (JDFTest) testPool.getChildWithAttribute(ElementName.TEST,
-				AttributeName.ID, null, getrRef(), 0, true);
+		final JDFTestPool testPool = (JDFTestPool) getDeepParent(ElementName.TESTPOOL, 0);
+		return (JDFTest) testPool.getChildWithAttribute(ElementName.TEST, AttributeName.ID, null, getrRef(), 0, true);
 	}
 
 	// ///////////////////////////////////////////////////////////
 
+	/**
+	 * @see org.cip4.jdflib.resource.devicecapability.JDFTerm#fitsJDF(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+	 * @param jdf
+	 * @param reportRoot
+	 * @return
+	*/
 	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
-		
+
 		if (reportRootLocal != null)
 			reportRootLocal = reportRootLocal.appendElement("TestRef");
-		
+
 		final JDFTest testElm = getTest();
-		
+
 		return testElm.fitsJDF(jdf, reportRootLocal);
 	}
 
 	// ///////////////////////////////////////////////////////////
 
+	/**
+	 * @see org.cip4.jdflib.resource.devicecapability.JDFTerm#fitsContext(org.cip4.jdflib.core.KElement)
+	 * @param jdf
+	 * @return
+	*/
 	@Override
 	public boolean fitsContext(KElement jdf)
 	{
@@ -203,7 +222,7 @@ public class JDFTestRef extends JDFTerm
 	/**
 	 * Tests whether this Term is compatible with the attribute map
 	 * <code>m</code> (and, or, xor, not, Evaluation, TestRef).<br>
-	 * To determine the state of Term tests Evaluations that “not” consists of,
+	 * To determine the state of Term tests Evaluations that "not" consists of,
 	 * this method checks if attribute map <code>m</code> has a key. specified
 	 * by Evaluation/BasicPreflightTest/@Name If <code>m</code> has such key, it
 	 * checks whether the value of <code>m#</code> fits the testlists specified
@@ -211,7 +230,7 @@ public class JDFTestRef extends JDFTerm
 	 * 
 	 * @param m
 	 *            key-value pair attribute map
-	 * @return boolean - true, if boolean “not” expression evaluates to “true”
+	 * @return boolean - true, if boolean ï¿½notï¿½ expression evaluates to ï¿½trueï¿½
 	 */
 	@Override
 	public boolean fitsMap(JDFAttributeMap m)

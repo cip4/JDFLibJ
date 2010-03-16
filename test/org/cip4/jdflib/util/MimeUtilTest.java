@@ -240,6 +240,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "JDF.jdf");
 		assertNotNull(bp);
+		assertNull(MimeUtil.getPartByCID(mp, "gipps.nicht"));
 		assertEquals(bp.getFileName(), "JDF.jdf");
 	}
 

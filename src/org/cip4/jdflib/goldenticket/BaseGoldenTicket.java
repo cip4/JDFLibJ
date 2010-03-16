@@ -224,7 +224,7 @@ public class BaseGoldenTicket
 	/**
 	 * 
 	 */
-	public String m_pdfFile = "file:///here/file.pdf";
+	public String m_pdfFile = "file://server/dir/file.pdf";
 
 	/**
 	 * create a BaseGoldenTicket

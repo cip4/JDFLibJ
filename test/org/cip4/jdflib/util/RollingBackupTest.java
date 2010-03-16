@@ -125,6 +125,32 @@ public class RollingBackupTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception x
 	 */
+	public void testGetOldFile() throws Exception
+	{
+		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));
+		final RollingBackupFile rbf = new RollingBackupFile(backRoot, 4);
+
+		for (int i = 0; i < 10; i++)
+		{
+			rbf.getNewFile();
+			assertTrue(rbf.createNewFile());
+			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
+		}
+		assertEquals(rbf.getOldFile(0), rbf);
+		for (int i = 1; i < 4; i++)
+		{
+			assertNotNull(rbf.getOldFile(i));
+			assertNotSame(rbf.getOldFile(i), rbf);
+		}
+		for (int i = 5; i < 14; i++)
+		{
+			assertNull(rbf.getOldFile(i));
+		}
+	}
+
+	/**
+	 * @throws Exception x
+	 */
 	public void testClearAll() throws Exception
 	{
 		final File backRoot = FileUtil.getFileInDirectory(dir, new File("Roll.txt"));

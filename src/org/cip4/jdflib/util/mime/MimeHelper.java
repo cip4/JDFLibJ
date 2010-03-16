@@ -195,7 +195,11 @@ public class MimeHelper
 			for (int i = 0; true; i++)
 			{
 				final BodyPartHelper bph = getBodyPartHelper(i);
-				if (bph != null && bph.matchesCID(cid))
+				if (bph == null)
+				{
+					return null;
+				}
+				if (bph.matchesCID(cid))
 				{
 					return bph;
 				}
