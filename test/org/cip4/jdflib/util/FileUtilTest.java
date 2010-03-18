@@ -442,7 +442,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(f.delete());
 		assertTrue(f2.delete());
 		assertFalse(f.delete());
-
+		assertNull("null safe", FileUtil.streamToFile(null, sm_dirTestDataTemp + "stream2.dat"));
 	}
 
 	// ////////////////////////////////////////////////////////////////

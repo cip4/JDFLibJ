@@ -246,6 +246,7 @@ public class XJDF20 extends BaseElementWalker
 		pw.walkTreeKidsFirst(newRoot);
 
 		newRoot.eraseEmptyNodes(true);
+		newRoot.getOwnerDocument_KElement().setBodyPart(node.getOwnerDocument_KElement().getBodyPart());
 		return newRoot;
 	}
 

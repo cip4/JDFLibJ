@@ -4108,6 +4108,10 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_1_0;
 			}
+			else if ("2.0".equals(enumName))
+			{
+				return EnumVersion.Version_2_0;
+			}
 			return EnumVersion.Version_1_3; // the default
 		}
 

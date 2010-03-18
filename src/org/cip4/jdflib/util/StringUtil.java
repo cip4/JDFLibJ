@@ -921,21 +921,19 @@ public class StringUtil
 	 * @param newExt the new extension (works with or without the initial "."
 	 * @return the strWork with a replaced extension
 	 */
-	public static String newExtension(final String strWork, final String newExt)
+	public static String newExtension(final String strWork, String newExt)
 	{
-		String newExtLocal = newExt;
-
-		if (newExtLocal == null)
+		if (newExt == null)
 		{
 			return StringUtil.prefix(strWork);
 		}
 
-		if (!newExtLocal.startsWith("."))
+		if (!newExt.startsWith("."))
 		{
-			newExtLocal = "." + newExtLocal;
+			newExt = "." + newExt;
 		}
 
-		return StringUtil.prefix(strWork) + newExtLocal;
+		return StringUtil.prefix(strWork) + newExt;
 	}
 
 	/**

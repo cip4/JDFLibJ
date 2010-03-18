@@ -1257,10 +1257,17 @@ public class UrlUtil
 			out.delete();
 		}
 		InputStream inputStream = new MimeReader(mp).getURLInputStream(url);
-		out = FileUtil.streamToFile(inputStream, out);
-		if (out != null)
+		if (inputStream != null)
 		{
-			parent.setURL(UrlUtil.fileToUrl(out, false));
+			out = FileUtil.streamToFile(inputStream, out);
+			if (out != null)
+			{
+				parent.setURL(UrlUtil.fileToUrl(out, false));
+			}
+		}
+		else
+		{
+			out = null;
 		}
 		return out;
 	}

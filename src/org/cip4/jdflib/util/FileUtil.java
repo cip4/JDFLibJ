@@ -394,12 +394,15 @@ public class FileUtil
 	}
 
 	/**
-	 * @param fis the inputstream to read
+	 * @param fis the InputStream to read - if null nothing happens
 	 * @param fil the file to stream to
 	 * @return the file created by the stream, null if snafu
 	 */
 	public static File streamToFile(final InputStream fis, final File fil)
 	{
+		if (fis == null)
+			return null;
+
 		try
 		{
 			final OutputStream fos = new BufferedOutputStream(new FileOutputStream(fil));

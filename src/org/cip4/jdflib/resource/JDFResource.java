@@ -1294,7 +1294,6 @@ public class JDFResource extends JDFElement
 		public PartitionGetter()
 		{
 			super();
-			// TODO Auto-generated constructor stub
 		}
 
 		/**
@@ -1319,16 +1318,10 @@ public class JDFResource extends JDFElement
 			{
 				return v;
 			}
-			final HashMap<JDFAttributeMap, JDFResource> leafMap = new HashMap<JDFAttributeMap, JDFResource>();
 			final VString pk = getPartIDKeys();
-			for (int i = v.size() - 1; i >= 0; i--)
-			{
-				final JDFResource r = (JDFResource) v.get(i);
-				leafMap.put(r.getPartMap(pk), r);
-			}
-			v.clear();
+			final HashMap<JDFAttributeMap, JDFResource> leafMap = fillLeafMap(v, pk);
 			boolean bAll = true;
-			boolean bNoDeep = true;
+			boolean bNoDeep = true; // we have mixed data or partversion
 			for (int i = 0; bNoDeep && bAll && i < vm.size(); i++)
 			{
 				final JDFAttributeMap map = vm.elementAt(i);
@@ -1342,17 +1335,7 @@ public class JDFResource extends JDFElement
 					}
 					else
 					{
-						int min = 999;
-						int max = -1;
-						for (int ii = 0; ii < pk.size(); ii++)
-						{
-							boolean b = keys.contains(pk.get(ii));
-							if (b)
-								max = ii;
-							else
-								min = ii;
-						}
-						bNoDeep = min > max;
+						bNoDeep = findPartitionGaps(pk, keys);
 					}
 				}
 				if (element != null)
@@ -1368,44 +1351,104 @@ public class JDFResource extends JDFElement
 				}
 			}
 
-			if (!bAll)
+			if (!bAll || !bNoDeep)
 			{
-				v.clear();
-				if (EnumPartUsage.Sparse.equals(partUsage) || !bNoDeep)
-				{
-					for (int i = 0; i < vm.size(); i++)
-					{
-						v.addAll(getPartitionVector(vm.elementAt(i), partUsage));
-					}
-				}
-				else
-				{
-					boolean bImplicit = EnumPartUsage.Implicit.equals(partUsage);
-					Set<JDFAttributeMap> allMaps = ContainerUtil.toHashSet(vm.getVector());
-					VElement leaves = getLeaves(false);
-					for (int i = 0; i < leaves.size(); i++)
-					{
-						JDFResource leaf = (JDFResource) leaves.elementAt(i);
-						while (true)
-						{
-							JDFAttributeMap map = leaf.getPartMap();
-							if (allMaps.contains(map) || (bImplicit && vm.subMap(map)))
-							{
-								v.add(leaf);
-								final JDFIdentical identical = leaf.getIdentical();
-								if (identical != null)
-									v.add(identical.getTarget());
-								break;
-							}
-							else if (leaf == JDFResource.this)
-								break;
-							leaf = (JDFResource) leaf.getParentNode_KElement();
-						}
-					}
-				}
-				v.unify();
+				specialSearch(vm, partUsage, v, bNoDeep);
 			}
 			return v;
+		}
+
+		/**
+		 * @param v
+		 * @param pk
+		 * @return
+		 */
+		private HashMap<JDFAttributeMap, JDFResource> fillLeafMap(final VElement v, final VString pk)
+		{
+			final HashMap<JDFAttributeMap, JDFResource> leafMap = new HashMap<JDFAttributeMap, JDFResource>();
+			for (int i = v.size() - 1; i >= 0; i--)
+			{
+				final JDFResource r = (JDFResource) v.get(i);
+				leafMap.put(r.getPartMap(pk), r);
+			}
+			v.clear();
+			return leafMap;
+		}
+
+		/**
+		 * @param pk
+		 * @param keys
+		 * @return
+		 */
+		private boolean findPartitionGaps(final VString pk, VString keys)
+		{
+			boolean bNoDeep;
+			int min = 999;
+			int max = -1;
+			for (int ii = 0; ii < pk.size(); ii++)
+			{
+				boolean b = keys.contains(pk.get(ii));
+				if (b)
+					max = ii;
+				else
+					min = ii;
+			}
+			bNoDeep = min > max;
+			return bNoDeep;
+		}
+
+		/**
+		 * @param vm
+		 * @param partUsage
+		 * @param v
+		 * @param bNoDeep
+		 */
+		private void specialSearch(final VJDFAttributeMap vm, EnumPartUsage partUsage, final VElement v, boolean bNoDeep)
+		{
+			v.clear();
+			if (EnumPartUsage.Sparse.equals(partUsage) || !bNoDeep)
+			{
+				detailedSearch(vm, partUsage, v);
+			}
+			else
+			{
+				boolean bImplicit = EnumPartUsage.Implicit.equals(partUsage);
+				Set<JDFAttributeMap> allMaps = ContainerUtil.toHashSet(vm.getVector());
+				VElement leaves = getLeaves(false);
+				for (int i = 0; i < leaves.size(); i++)
+				{
+					JDFResource leaf = (JDFResource) leaves.elementAt(i);
+					while (true)
+					{
+						JDFAttributeMap map = leaf.getPartMap();
+						if (allMaps.contains(map) || (bImplicit && vm.subMap(map)))
+						{
+							v.add(leaf);
+							final JDFIdentical identical = leaf.getIdentical();
+							if (identical != null)
+								v.add(identical.getTarget());
+							break;
+						}
+						else if (leaf == JDFResource.this)
+							break;
+						leaf = (JDFResource) leaf.getParentNode_KElement();
+					}
+				}
+			}
+			v.unify();
+		}
+
+		/**
+		 * @param vm
+		 * @param partUsage
+		 * @param v
+		 */
+		private void detailedSearch(final VJDFAttributeMap vm, EnumPartUsage partUsage, final VElement v)
+		{
+			for (int i = 0; i < vm.size(); i++)
+			{
+				v.addAll(getPartitionVector(vm.elementAt(i), partUsage));
+			}
 		}
 
 		/**

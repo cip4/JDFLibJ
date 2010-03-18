@@ -6,6 +6,7 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -32,7 +33,10 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.StringUtil;
@@ -76,9 +80,14 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 */
 	public JDFDoc convert(final KElement xjdf)
 	{
+		if (xjdf == null)
+		{
+			return null;
+		}
 		if (jdfDoc == null)
 		{
 			jdfDoc = new JDFDoc("JDF");
+			jdfDoc.setBodyPart(xjdf.getOwnerDocument_KElement().getBodyPart());
 		}
 		if (!firstConvert)
 		{
@@ -242,7 +251,11 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		parent.moveAttribute(AttributeName.JOBID, theNode);
 		parent.moveAttribute(AttributeName.VERSION, theNode);
 		parent.setJobPartID("rootPart");
+		final JDFComponent c = (JDFComponent) parent.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		c.setDescriptiveName("dummy output");
+		c.setComponentType(EnumComponentType.FinalProduct, null);
 		mergeProductLinks(theNode, parent);
+		firstConvert = true;
 		return parent;
 	}
 
@@ -254,6 +267,16 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	{
 		mergeProductLink(theNode, parent, ElementName.CUSTOMERINFO, EnumUsage.Input);
 		mergeProductLink(theNode, parent, ElementName.NODEINFO, EnumUsage.Input);
+		final JDFResource r = parent.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+		if (r != null && "dummy outout".equals(r.getDescriptiveName()))
+		{
+			final JDFResource rNode = theNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+			if (rNode != null)
+			{
+				parent.getLink(r, EnumUsage.Output).deleteNode();
+				r.deleteNode();
+			}
+		}
 		mergeProductLink(theNode, parent, ElementName.COMPONENT, EnumUsage.Output);
 	}
 
@@ -266,6 +289,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	private void mergeProductLink(final JDFNode theNode, final JDFNode parent, final String resName, final EnumUsage enumUsage)
 	{
 		final JDFResource r = parent.getResource(resName, enumUsage, 0);
+
 		if (r == null)
 		{
 			final JDFResourceLink link = theNode.getLink(0, resName, new JDFAttributeMap("Usage", enumUsage), null);
@@ -279,7 +303,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	/**
 	 * @param version the version to set
 	 */
-	public void setVersion(EnumVersion version)
+	public void setVersion(final EnumVersion version)
 	{
 		this.version = version;
 	}
@@ -333,7 +357,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 		/**
 		 * @param e
-		 * @param trackElem 
+		 * @param trackElem
 		 */
 		protected void cleanRefs(final KElement e, final KElement trackElem)
 		{
@@ -475,9 +499,13 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			final JDFNode parent = currentJDFNode;
+			final JDFNode parent = (JDFNode) trackElem;
 			final JDFNode root = parent.getJDFRoot();
-			final EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
+			EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
+			if (inOut == null && "IntentSet".equals(e.getLocalName()))
+			{
+				inOut = EnumUsage.Input;
+			}
 			String id = e.getAttribute(AttributeName.ID, null, null);
 			if (id == null)
 			{
@@ -512,15 +540,17 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				return null;
 			}
 			r.setAttributes(e);
+			if (r.getResourceClass() == null)
+			{
+				final String name = StringUtil.leftStr(e.getLocalName(), -3);
+				r.setResourceClass("Parameter".equals(name) ? EnumResourceClass.Parameter : EnumResourceClass.Handling);
+			}
 			if (inOut != null)
 			{
 				final JDFResourceLink rl = parent.ensureLink(r, inOut, null);
 				if (rl != null)
 				{
-					if (id != null)
-					{
-						rl.setrRef(id);
-					}
+					rl.setrRef(id);
 					r.removeAttribute(AttributeName.USAGE);
 					rl.moveAttribute(AttributeName.PROCESSUSAGE, r);
 					rl.moveAttribute(AttributeName.AMOUNT, r);
@@ -581,6 +611,48 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
+	 * 
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * Mar 17, 2010
+	 */
+	public class WalkIntent extends WalkResource
+	{
+		/**
+		 * @param e
+		 * @return thr created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			final JDFAttributeMap map = e.getAttributeMap();
+			final JDFIntentResource ir = (JDFIntentResource) trackElem;
+			final VString keys = map.getKeys();
+			final VString knownElements = ir.knownElements();
+			for (final String name : keys)
+			{
+				if (knownElements.contains(name))
+				{
+					ir.appendElement(name).setAttribute("Actual", map.get(name));
+					e.removeAttribute(name);
+				}
+			}
+			return super.walk(e, ir);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && (toCheck instanceof JDFIntentResource);
+		}
+	}
+
+	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
 	public class WalkReplace extends WalkXElement
@@ -624,7 +696,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			JDFNode theNode = (JDFNode) trackElem;
 			if ("Product".equals(theNode.getType()))
 			{
-				theNode = theNode.addProduct();
+				if (theNode.getPreviousSiblingElement("Product", null) != null)
+				{
+					theNode = theNode.addProduct();
+				}
 			}
 			else
 			{
@@ -1010,10 +1085,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 * @param rPart
 		 * @param elem
 		 */
-		private void createSeparationList(final KElement rPart, String elem)
+		private void createSeparationList(final KElement rPart, final String elem)
 		{
-			JDFColorantControl cc = (JDFColorantControl) rPart;
-			String c = rPart.getAttribute(elem, null, null);
+			final JDFColorantControl cc = (JDFColorantControl) rPart;
+			final String c = rPart.getAttribute(elem, null, null);
 			if (c != null)
 			{
 				((JDFSeparationList) cc.getCreateElement(elem)).setSeparations(new VString(c, null));
@@ -1056,21 +1131,21 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			if (!e.hasChildElement(ElementName.LAYOUTELEMENT, null))
 			{
-				KElement loe = e.appendElement(ElementName.LAYOUTELEMENT);
-				VString vAtt = loe.knownAttributes();
-				JDFAttributeMap map = e.getAttributeMap();
-				Iterator<String> it = map.getKeyIterator();
+				final KElement loe = e.appendElement(ElementName.LAYOUTELEMENT);
+				final VString vAtt = loe.knownAttributes();
+				final JDFAttributeMap map = e.getAttributeMap();
+				final Iterator<String> it = map.getKeyIterator();
 				while (it.hasNext())
 				{
-					String s = it.next();
+					final String s = it.next();
 					if (vAtt.contains(s))
 					{
 						loe.setAttribute(s, map.get(s));
 						e.removeAttribute(s);
 					}
 				}
-				VString vElm = loe.knownElements();
-				VElement vMyElm = e.getChildElementVector(null, null);
+				final VString vElm = loe.knownElements();
+				final VElement vMyElm = e.getChildElementVector(null, null);
 				for (int i = 0; i < vMyElm.size(); i++)
 				{
 					if (vElm.contains(vMyElm.get(i).getLocalName()))
@@ -1081,5 +1156,4 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			}
 		}
 	}
-
 }

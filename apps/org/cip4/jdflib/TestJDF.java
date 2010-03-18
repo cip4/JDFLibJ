@@ -13,7 +13,6 @@ import java.io.File;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -37,22 +36,25 @@ public class TestJDF
 	 */
 	public static void main(final String[] argv)
 	{
-		final JDFDoc d = new JDFParser().parseFile("C:\\data\\jdf\\JanHoppe\\prepartRed.jdf");
-		final JDFNode n = d.getJDFRoot().getJobPart("ImO1.I", null);
-		JDFResourceLink rl = n.getLink(0, "Preview", null, null);
-		VElement v = rl.getTargetVector(0);
+		final JDFDoc d = new JDFParser().parseFile("C:\\data\\jdf\\RainerSchielke\\main2.jdf");
+		final JDFNode n = d.getJDFRoot().getJobPart("IPD1.I", null);
+		JDFResourceLink rl = n.getLink(0, "NodeInfo", null, null);
 
 		JDFSpawn spawn = new JDFSpawn(n);
 		spawn.vRWResources_in = new VString("Preview", null);
 		spawn.vSpawnParts = new VJDFAttributeMap();
 		JDFAttributeMap map = new JDFAttributeMap();
-		spawn.vSpawnParts.add(map);
 		map.put("SignatureName", "Sig001");
-		map.put("PartVersion", "NL FR EN");
-		map.put("SheetName", "Omslag_FB 001");
+		map.put("PartVersion", "All");
+		map.put("SheetName", "FB 001");
 		map.put("Side", "Front");
+		spawn.vSpawnParts.add(map);
+		map = new JDFAttributeMap(map);
+		map.put("Side", "Back");
+		spawn.vSpawnParts.add(map);
+
 		JDFNode n2 = spawn.spawn();
-		n2.getOwnerDocument_JDFElement().write2File("C:\\data\\jdf\\JanHoppe\\prepartRed_spawn.jdf", 2, false);
-		d.write2File("C:\\data\\jdf\\JanHoppe\\prepartRed_main.jdf", 2, false);
+		n2.getOwnerDocument_JDFElement().write2File("C:\\data\\jdf\\RainerSchielke\\respawn.jdf", 2, false);
+		d.write2File("C:\\data\\jdf\\RainerSchielke\\remain.jdf", 2, false);
 	}
 }

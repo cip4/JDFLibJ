@@ -81,11 +81,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.mail.BodyPart;
+import javax.mail.Multipart;
+
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeWriter;
 
@@ -500,4 +507,35 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.cleanDots("/."), "/.");
 	}
 
+	/**
+	 * 
+	 */
+	public void testMoveToDir()
+	{
+		new MimeUtilTest().testBuildMimePackageDocJMF();
+		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");
+		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
+		final JDFDoc d = MimeUtil.getJDFDoc(bp);
+		final JDFNode n = d.getJDFRoot();
+		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.getMatchingResource(ElementName.COLORSPACECONVERSIONPARAMS, null, null, 0);
+		assertNotNull(cscp);
+		final JDFFileSpec fs = cscp.getFinalTargetDevice();
+		final File newDir = new File(sm_dirTestDataTemp + "newDir");
+		final File f = UrlUtil.moveToDir(fs, newDir);
+		assertNotNull("error moving file to dir", f);
+		for (int i = 0; i < 10; i++)
+		{
+			ThreadUtil.sleep(1000);
+			if (fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)))
+			{
+				break;
+			}
+			System.out.println("Waiting " + i);
+		}
+		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
+		fs.setURL("bad:/blöd");
+		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir));
+		fs.setURL("http://notthere.com/isnt/there?aaa");
+		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir));
+	}
 }

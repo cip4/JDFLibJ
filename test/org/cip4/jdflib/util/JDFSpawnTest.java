@@ -951,38 +951,61 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testSpawnPartParallel()
+	{
+		JDFNode n2 = createSpawnMain(0);
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put(EnumPartIDKey.SignatureName, "sig1");
+		map.put(EnumPartIDKey.SheetName, "sh1");
+		map.put(EnumPartIDKey.Side, EnumSide.Front);
+		map.put(EnumPartIDKey.PartVersion, "a b");
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		vMap.add(map);
+		map = new JDFAttributeMap(map);
+		map.put(EnumPartIDKey.Side, EnumSide.Back);
+		vMap.add(map);
+
+		final JDFSpawn spawn = new JDFSpawn(n2);
+		spawn.bFixResources = false;
+		spawn.vRWResources_in = new VString("Output", null);
+		spawn.vSpawnParts = vMap;
+		spawn.bSpawnRWPartsMultiple = true;
+		JDFNodeInfo niMain = n2.getNodeInfo();
+		VElement vnipMain = niMain.getPartitionVector(vMap, null);
+		for (int i = 0; i < vnipMain.size(); i++)
+		{
+			((JDFResource) vnipMain.get(i)).addPartition(EnumPartIDKey.PartVersion, "a b");
+		}
+
+		final JDFNode nS1 = spawn.spawn();
+		assertNotNull(nS1);
+		JDFNode parentJDF = n2.getParentJDF();
+		JDFNodeInfo ni = nS1.getNodeInfo();
+		VElement vnip = ni.getPartitionVector(vMap, null);
+		vnip = ni.getPartitionVector(vMap, null);
+		assertEquals(vnip.size(), 2);
+		vnipMain = niMain.getPartitionVector(vMap, null);
+		assertEquals(vnipMain.size(), 2);
+		for (int i = 0; i < vnip.size(); i++)
+		{
+			JDFNodeInfo nip = (JDFNodeInfo) vnip.get(i);
+			assertEquals(nip.getSpawnIDs(false).size(), 1);
+			nip = (JDFNodeInfo) vnipMain.get(i);
+			assertEquals(nip.getSpawnIDs(false).size(), 1);
+		}
+		JDFMerge m = new JDFMerge(parentJDF);
+		JDFNode n = m.mergeJDF(nS1, null, EnumCleanUpMerge.RemoveAll, null);
+		assertEquals(n.toXML().indexOf("SpawnID"), -1);
+	}
+
+	/**
+	 * 
+	 */
 	public void testSpawnPartNoSide()
 	{
 		for (int l = 0; l < 2; l++)
 		{
-			final JDFDoc d = new JDFDoc("JDF");
-			final JDFNode n = d.getJDFRoot();
-			n.setType(EnumType.ProcessGroup);
-			final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
-			JDFLayout lo = (JDFLayout) n2.addResource("Layout", null, EnumUsage.Input, null, n, null, null);
-			JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n2.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null, n, null, null);
-			JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
-			JDFNodeInfo ni = (JDFNodeInfo) n2.addResource(ElementName.NODEINFO, null, EnumUsage.Input, null, null, null, null);
-
-			lo = (JDFLayout) lo.addPartition(EnumPartIDKey.SignatureName, "sig1");
-			cpp = (JDFConventionalPrintingParams) cpp.addPartition(EnumPartIDKey.SignatureName, "sig1");
-			comp = (JDFComponent) comp.addPartition(EnumPartIDKey.SignatureName, "sig1");
-			ni = (JDFNodeInfo) ni.addPartition(EnumPartIDKey.SignatureName, "sig1");
-			for (int i = 0; i < 2; i++)
-			{
-				final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "sh" + i);
-				cpp.addPartition(EnumPartIDKey.SheetName, "sh" + i);
-				comp.addPartition(EnumPartIDKey.SheetName, "sh" + i);
-				lo2.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-				lo2.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-				final JDFNodeInfo ni2 = l == 0 ? (JDFNodeInfo) ni.addPartition(EnumPartIDKey.SheetName, "sh" + i) : ni;
-				if (l == 0 || i == 0)
-				{
-					ni2.addPartition(EnumPartIDKey.Side, EnumSide.Front);
-					ni2.addPartition(EnumPartIDKey.Side, EnumSide.Back);
-				}
-
-			}
+			JDFNode n2 = createSpawnMain(l);
 			final JDFAttributeMap map = new JDFAttributeMap();
 			map.put(EnumPartIDKey.SignatureName, "sig1");
 			if (l == 0)
@@ -1008,12 +1031,49 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 			nS2.setXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo", "bar");
 
+			JDFNode n = n2.getParentJDF();
 			final JDFMerge merge = new JDFMerge(n);
 			merge.mergeJDF(nS1, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
 			assertEquals(n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo", null), "fnarf");
 			merge.mergeJDF(nS2, null, EnumCleanUpMerge.None, EnumAmountMerge.None);
 			assertEquals(n.getXPathAttribute("./ResourcePool/Component/Component/Component[@SheetName=\"sh1\"]/@foo", null), "bar");
 		}
+	}
+
+	/**
+	 * @param l
+	 */
+	private JDFNode createSpawnMain(int l)
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		final JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFLayout lo = (JDFLayout) n2.addResource("Layout", null, EnumUsage.Input, null, n, null, null);
+		JDFConventionalPrintingParams cpp = (JDFConventionalPrintingParams) n2.addResource(ElementName.CONVENTIONALPRINTINGPARAMS, null, EnumUsage.Input, null, n, null, null);
+		JDFComponent comp = (JDFComponent) n2.addResource(ElementName.COMPONENT, null, EnumUsage.Output, null, n, null, null);
+		JDFNodeInfo ni = (JDFNodeInfo) n2.addResource(ElementName.NODEINFO, null, EnumUsage.Input, null, null, null, null);
+
+		lo = (JDFLayout) lo.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		cpp = (JDFConventionalPrintingParams) cpp.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		comp = (JDFComponent) comp.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		ni = (JDFNodeInfo) ni.addPartition(EnumPartIDKey.SignatureName, "sig1");
+		for (int i = 0; i < 2; i++)
+		{
+			final JDFLayout lo2 = (JDFLayout) lo.addPartition(EnumPartIDKey.SheetName, "sh" + i);
+			cpp.addPartition(EnumPartIDKey.SheetName, "sh" + i);
+			comp.addPartition(EnumPartIDKey.SheetName, "sh" + i);
+			lo2.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+			lo2.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+			final JDFNodeInfo ni2 = l == 0 ? (JDFNodeInfo) ni.addPartition(EnumPartIDKey.SheetName, "sh" + i) : ni;
+			if (l == 0 || i == 0)
+			{
+				ni2.addPartition(EnumPartIDKey.Side, EnumSide.Front);
+				ni2.addPartition(EnumPartIDKey.Side, EnumSide.Back);
+			}
+
+		}
+		return n2;
 	}
 
 	/**
