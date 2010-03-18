@@ -147,6 +147,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 			ThreadUtil.sleep(1000);
 		}
 		assertFalse(file.exists());
+		ThreadUtil.sleep(1000);
 		assertTrue(stFile.exists());
 		assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);

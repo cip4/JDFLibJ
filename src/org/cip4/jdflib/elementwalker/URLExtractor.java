@@ -170,7 +170,11 @@ public class URLExtractor extends BaseElementWalker
 
 			File newFile = UrlUtil.moveToDir(u, dir);
 			if (baseURL != null && newFile != null)
-				u.setURL(UrlUtil.getURLWithDirectory(baseURL, newFile.getName()));
+			{
+				String s = newFile.getName();
+				s = StringUtil.escape(s, UrlUtil.m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
+				u.setURL(UrlUtil.getURLWithDirectory(baseURL, s));
+			}
 			nSaved++;
 			return e; //  continue
 		}
