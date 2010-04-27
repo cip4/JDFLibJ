@@ -82,6 +82,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.mail.BodyPart;
+import javax.mail.MessagingException;
 import javax.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -225,15 +226,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertTrue(UrlUtil.stringToURL("File:/c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
 			assertTrue(UrlUtil.stringToURL("File:///c:/temp").getPath().startsWith(new URL("File:///c:/temp").getPath()));
 
-			// test for a file or a non existing object (trailing slash is
-			// removed by StringToURL)
-			assertEquals(UrlUtil.stringToURL("File:/c:/blï¿½d .pdf"), new URL(UrlUtil.fileToUrl(new File("c:/blï¿½d .pdf"), true)));
+			// test for a file or a non existing object (trailing slash is removed by StringToURL)
+			assertEquals(UrlUtil.stringToURL("File:/c:/blöd €.pdf"), new URL(UrlUtil.fileToUrl(new File("c:/blöd €.pdf"), true)));
 			assertEquals(UrlUtil.stringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
 			assertEquals(UrlUtil.stringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
 			assertEquals(UrlUtil.stringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
 		}
 
 		assertEquals(UrlUtil.stringToURL("http://foo"), new URL("http://foo"));
+		assertEquals(UrlUtil.stringToURL("http://foo/%20.txt"), new URL("http://foo/%20.txt"));
+		assertEquals(UrlUtil.stringToURL("file://foo/ .txt"), new URL("file://foo/%20.txt"));
+		assertEquals(UrlUtil.stringToURL("file://foo/%.txt"), new URL("file://foo/%25.txt"));
 		assertNull("empty File: should be null", UrlUtil.stringToURL("File:"));
 		assertEquals(UrlUtil.stringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
 	}
@@ -291,11 +294,12 @@ public class UrlUtilTest extends JDFTestCaseBase
 			final File f = new File("C:\\IO.SYS");
 			String s = UrlUtil.fileToUrl(f, false);
 			assertEquals(s, "file:///C:/IO.SYS");
-			s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), true);
-			assertEquals(s, "file://fooBar/4%e2%82%ac.txt");
 			s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), false);
 			assertEquals(s, "file://fooBar/4€.txt");
 		}
+		String s = UrlUtil.fileToUrl(new File("//fooBar/4€.txt"), true);
+		assertEquals(s, "file://fooBar/4%e2%82%ac.txt");
+		assertEquals(UrlUtil.fileToUrl(new File("//a/4%.txt"), false), "file://a/4%25.txt");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -508,9 +512,11 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws IOException 
+	 * @throws MessagingException 
 	 * 
 	 */
-	public void testMoveToDir()
+	public void testMoveToDir() throws MessagingException, IOException
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");
@@ -535,7 +541,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
 		fs.setURL("bad:/blöd");
 		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir));
-		fs.setURL("http://notthere.com/isnt/there?aaa");
+		fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
 		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir));
 	}
 }

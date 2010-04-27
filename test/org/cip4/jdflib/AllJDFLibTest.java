@@ -254,6 +254,7 @@ import org.cip4.jdflib.util.StatusCounterTest;
 import org.cip4.jdflib.util.StringUtilTest;
 import org.cip4.jdflib.util.UrlUtilTest;
 import org.cip4.jdflib.util.VectorMapTest;
+import org.cip4.jdflib.util.mime.MimeWriterTest;
 
 /**
  * @author MuchaD
@@ -490,6 +491,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(StringUtilTest.class);
 		suite.addTestSuite(UrlUtilTest.class);
 		suite.addTestSuite(VectorMapTest.class);
+
+		// util.mime
+		suite.addTestSuite(MimeWriterTest.class);
 
 		suite.addTestSuite(JDFEnumerationSpanTest.class);
 

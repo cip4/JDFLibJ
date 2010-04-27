@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,8 +80,10 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFCoilBindingParams;
 import org.cip4.jdflib.resource.JDFHeadBandApplicationParams;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
@@ -187,7 +189,7 @@ public class JDFPipeParamsTest extends TestCase
 	 */
 	@Override
 	protected void setUp() throws Exception
-	{ // TODO Auto-generated method stub
+	{
 		super.setUp();
 		final JDFDoc doc = new JDFDoc(ElementName.JMF);
 		final JDFJMF jmf = doc.getJMFRoot();
@@ -195,4 +197,22 @@ public class JDFPipeParamsTest extends TestCase
 		pp = c.appendPipeParams();
 	}
 
+	/**
+	 * 
+	 */
+	public void testApplyPipeToNode()
+	{
+		JDFResourceLink rl = pp.appendResourceLink("Component", true);
+		rl.setActualAmount(33, null);
+		rl.setrRef("rl_c");
+
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource r = n.addResource("Component", null);
+		r.setID("rl_c");
+		JDFResourceLink rl2 = n.ensureLink(r, EnumUsage.Input, null);
+
+		pp.applyPipeToNode(n);
+
+		assertEquals(rl2.getActualAmount(null), 33, 0);
+	}
 }

@@ -178,7 +178,7 @@ public class JDFDateTest extends TestCase
 		String strDate = date.getDateTimeISO();
 		date = new JDFDate("2006-11-26");
 		strDate = date.getDateTimeISO();
-		assertEquals("Bug " + strDate, strDate, "2006-11-26T00:00:00" + new JDFDate().getTimeZoneISO());
+		assertTrue(strDate.startsWith("2006-11-26T"));
 	}
 
 	/**
@@ -345,15 +345,33 @@ public class JDFDateTest extends TestCase
 	/**
 	 * 
 	 */
-	public void testCompare()
+	public void testBefore()
 	{
 		final JDFDate date1 = new JDFDate();
 		final JDFDate date2 = new JDFDate();
-		assertEquals(new JDFDate().compare(date1, date2), 0);
-		date2.addOffset(0, 0, 0, 1); // it is now later
-		assertTrue(new JDFDate().compare(date1, date2) < 0);
-		assertTrue(new JDFDate().compare(date2, date1) > 0);
-		assertTrue(new JDFDate().compare(date2, date2) == 0);
+		assertFalse(date1.before(date2));
+		assertFalse(date1.before(date2.getTimeInMillis()));
+		assertFalse(date2.before(date1));
+		assertFalse(date2.before(date1.getTimeInMillis()));
+		date1.addOffset(22, 22, 22, 22);
+		assertTrue(date2.before(date1));
+		assertTrue(date2.before(date1.getTimeInMillis()));
+	}
+
+	/**
+	 * 
+	 */
+	public void testAfter()
+	{
+		final JDFDate date1 = new JDFDate();
+		final JDFDate date2 = new JDFDate();
+		assertFalse(date1.after(date2));
+		assertFalse(date1.after(date2.getTimeInMillis()));
+		assertFalse(date2.after(date1));
+		assertFalse(date2.after(date1.getTimeInMillis()));
+		date1.addOffset(22, 22, 22, 22);
+		assertTrue(date1.after(date2));
+		assertTrue(date1.after(date2.getTimeInMillis()));
 	}
 
 	/**
@@ -489,10 +507,10 @@ public class JDFDateTest extends TestCase
 		assertEquals(t.getOffset(System.currentTimeMillis()), d.getTimeZoneOffsetInMillis());
 		boolean bSummer = false;
 		JDFDate dNow = new JDFDate();
-		for (int i = 0; i < 400; i++)
+		for (long i = 0; i < 4; i++)
 		{
-			d = new JDFDate(System.currentTimeMillis() + i * 24 * 60 * 60 * 1000);
-			assertEquals(t.getOffset(System.currentTimeMillis() + i * 24 * 60 * 60 * 1000), d.getTimeZoneOffsetInMillis());
+			d = new JDFDate(System.currentTimeMillis() + i * 100 * 24 * 60 * 60 * 1000);
+			assertEquals(t.getOffset(System.currentTimeMillis() + i * 100 * 24 * 60 * 60 * 1000), d.getTimeZoneOffsetInMillis());
 			if (!dNow.getTimeZoneISO().equals(d.getTimeZoneISO()))
 				bSummer = true;
 			JDFDate d4 = new JDFDate(d.getDateTimeISO());

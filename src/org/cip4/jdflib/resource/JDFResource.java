@@ -131,6 +131,7 @@ public class JDFResource extends JDFElement
 {
 	private static final long serialVersionUID = 1L;
 	private static boolean autoAgent = false;
+	private static boolean bUnpartitiondImplicit = false;
 
 	private static HashSet<String> validParentNodeNameSet = null;
 	private static HashSet<String> validRootParentNodeNameSet = null;
@@ -1316,6 +1317,7 @@ public class JDFResource extends JDFElement
 			final VElement v = getLeaves(true);
 			if (vm == null)
 			{
+				removeIdenticalRefs(v);
 				return v;
 			}
 			final VString pk = getPartIDKeys();
@@ -1340,10 +1342,7 @@ public class JDFResource extends JDFElement
 				}
 				if (element != null)
 				{
-					v.add(element);
-					final JDFIdentical identical = element.getIdentical();
-					if (identical != null)
-						v.add(identical.getTarget());
+					addSingleResource(v, element);
 				}
 				else
 				{
@@ -1355,7 +1354,36 @@ public class JDFResource extends JDFElement
 			{
 				specialSearch(vm, partUsage, v, bNoDeep);
 			}
+			v.unify();
 			return v;
+		}
+
+		/**
+		 * @param v
+		 */
+		private void removeIdenticalRefs(final VElement v)
+		{
+			for (int i = v.size() - 1; i >= 0; i--)
+			{
+				JDFResource r = (JDFResource) v.get(i);
+				if (r.getIdentical() != null)
+				{
+					v.remove(i);
+				}
+			}
+		}
+
+		/**
+		 * @param v
+		 * @param element
+		 */
+		private void addSingleResource(final VElement v, final JDFResource element)
+		{
+			final JDFIdentical identical = element.getIdentical();
+			if (identical != null)
+				v.add(identical.getTarget());
+			else
+				v.add(element);
 		}
 
 		/**
@@ -1423,10 +1451,7 @@ public class JDFResource extends JDFElement
 						JDFAttributeMap map = leaf.getPartMap();
 						if (allMaps.contains(map) || (bImplicit && vm.subMap(map)))
 						{
-							v.add(leaf);
-							final JDFIdentical identical = leaf.getIdentical();
-							if (identical != null)
-								v.add(identical.getTarget());
+							addSingleResource(v, leaf);
 							break;
 						}
 						else if (leaf == JDFResource.this)
@@ -1435,7 +1460,6 @@ public class JDFResource extends JDFElement
 					}
 				}
 			}
-			v.unify();
 		}
 
 		/**
@@ -6708,13 +6732,42 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
-	 * Gets typesafe enumerated value of attribute PartUsage; defaults to PartUsage_Explicit
+	 * if set to true, the default @PartUsage of unpartitioned resources is Implicit.
+	 * Note: this is NOT according to the specification since the Specification defaults PartUsage to Explicit for all Resources.
+	 * 
+	 * @param bUnpartitiondImplicit the bUnpartitiondImplicit to set
+	 */
+	public static void setUnpartitiondImplicit(boolean bUnpartitiondImplicit)
+	{
+		JDFResource.bUnpartitiondImplicit = bUnpartitiondImplicit;
+	}
+
+	/**
+	 * Gets typesafe enumerated value of attribute PartUsage; defaults to PartUsage_Explicit unless  setUnpartitiondImplicit(true) 
+	 * has been called and the resource is not partitioned, in which case PartUsage_Implicit is called.
+	 * 
+	 * Achtung - mieser Balkon!
 	 * 
 	 * @return EnumPartUsage - attribute enumeration value
 	 */
 	public EnumPartUsage getPartUsage()
 	{
-		return EnumPartUsage.getEnum(getAttribute(AttributeName.PARTUSAGE, null, EnumPartUsage.Explicit.getName()));
+		String partUsage = getAttribute(AttributeName.PARTUSAGE, null, null);
+		if (partUsage == null)
+		{
+			if (!bUnpartitiondImplicit || getResourceRoot().hasAttribute(AttributeName.PARTIDKEYS))
+			{
+				return EnumPartUsage.Explicit;
+			}
+			else
+			{
+				return EnumPartUsage.Implicit;
+			}
+		}
+		else
+		{
+			return EnumPartUsage.getEnum(partUsage);
+		}
 	}
 
 	/**

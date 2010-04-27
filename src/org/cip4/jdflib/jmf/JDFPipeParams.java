@@ -353,12 +353,7 @@ public class JDFPipeParams extends JDFAutoPipeParams
 			{
 				continue;
 			}
-			final JDFElement.EnumNodeStatus status = getStatus(); // TODO: set
-			// Status
-			node.setStatus(status);
 
-			// final boolean isIncremental = (getUpdateMethod () ==
-			// EnumUpdateMethod.Incremental);
 			double dAmount = -1.0;
 			final JDFResourceLink rl = getResourceLink();
 

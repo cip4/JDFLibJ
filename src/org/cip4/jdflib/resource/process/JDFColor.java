@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,9 +74,12 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoColor;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFRGBColor;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -314,11 +317,47 @@ public class JDFColor extends JDFAutoColor
 	 * append a TargetProfile FileSpec
 	 * @return
 	 */
-	JDFFileSpec appendTargetProfile()
+	public JDFFileSpec appendTargetProfile()
 	{
 		final JDFFileSpec res = appendFileSpec();
 		res.setResourceUsage("TargetProfile");
 
 		return res;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.resource.JDFResource#getInvalidAttributes(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+	 * @param level
+	 * @param ignorePrivate
+	 * @param max
+	 * @return
+	*/
+	@Override
+	public VString getInvalidAttributes(EnumValidationLevel level, boolean ignorePrivate, int max)
+	{
+		VString v = super.getInvalidAttributes(level, ignorePrivate, max);
+		if ((v.size() > max && max > 0) || v.contains(AttributeName.NAME))
+			return v;
+		KElement parent = getParentNode_KElement();
+		if (parent instanceof JDFColorPool)
+		{
+			JDFColor last = (JDFColor) getPreviousSiblingElement(ElementName.COLOR, null);
+			String colName = getName();
+			String colRawName = getAttribute(AttributeName.RAWNAME, null, null);
+			while (last != null)
+			{
+				if (ContainerUtil.equals(colName, last.getName()))
+				{
+					v.add("Name");
+				}
+				if (colRawName != null && ContainerUtil.equals(colRawName, last.getRawName()))
+				{
+					v.add("RawName");
+				}
+				last = (JDFColor) last.getPreviousSiblingElement(ElementName.COLOR, null);
+			}
+		}
+		v.unify();
+		return v;
 	}
 }

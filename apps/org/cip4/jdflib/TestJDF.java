@@ -12,7 +12,6 @@ import java.io.File;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -36,25 +35,26 @@ public class TestJDF
 	 */
 	public static void main(final String[] argv)
 	{
-		final JDFDoc d = new JDFParser().parseFile("C:\\data\\jdf\\RainerSchielke\\main2.jdf");
-		final JDFNode n = d.getJDFRoot().getJobPart("IPD1.I", null);
-		JDFResourceLink rl = n.getLink(0, "NodeInfo", null, null);
+		final JDFDoc d = new JDFParser().parseFile("C:\\temp\\IdenticalPlate.jdf");
+		final JDFNode n = d.getJDFRoot().getJobPart("ImO2.I", null);
 
 		JDFSpawn spawn = new JDFSpawn(n);
-		spawn.vRWResources_in = new VString("Preview", null);
-		spawn.vSpawnParts = new VJDFAttributeMap();
+		spawn.vRWResources_in = new VString("Preview NodeInfo ExposedMedia", null);
+		//		spawn.vSpawnParts = null;
 		JDFAttributeMap map = new JDFAttributeMap();
-		map.put("SignatureName", "Sig001");
-		map.put("PartVersion", "All");
-		map.put("SheetName", "FB 001");
+		map.put("SignatureName", "Sig003");
+		map.put("PartVersion", "Engl Franz");
+		map.put("SheetName", "FB 003");
 		map.put("Side", "Front");
+		map.put("Separation", "Black");
+		spawn.vSpawnParts = new VJDFAttributeMap();
 		spawn.vSpawnParts.add(map);
 		map = new JDFAttributeMap(map);
-		map.put("Side", "Back");
+		map.put("Separation", "Yellow");
 		spawn.vSpawnParts.add(map);
-
+		spawn.bSpawnIdentical = false;
+		spawn.bFixResources = false;
 		JDFNode n2 = spawn.spawn();
-		n2.getOwnerDocument_JDFElement().write2File("C:\\data\\jdf\\RainerSchielke\\respawn.jdf", 2, false);
-		d.write2File("C:\\data\\jdf\\RainerSchielke\\remain.jdf", 2, false);
+		n2.getOwnerDocument_JDFElement().write2File("C:\\temp\\spawn.jdf", 2, false);
 	}
 }

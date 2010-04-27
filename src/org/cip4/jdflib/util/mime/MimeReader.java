@@ -197,7 +197,7 @@ public class MimeReader extends MimeHelper
 	public JDFDoc getJDFDoc(final InputStream stream, final int index)
 	{
 		final InputStream bis = StreamUtil.getBufferedInputStream(stream);
-		bis.mark(1000000);
+		bis.mark(markSize);
 		final Multipart mp = getMultiPart(bis);
 		if (mp != null)
 		{

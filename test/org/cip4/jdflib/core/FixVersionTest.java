@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -86,17 +86,22 @@ import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
+import org.cip4.jdflib.resource.process.JDFAssembly;
+import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class FixVersionTest extends TestCase
 {
 	private JDFDoc mDoc;
 	private JDFNode n;
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 *  
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
@@ -237,6 +242,57 @@ public class FixVersionTest extends TestCase
 		assertEquals(t.getToolID(), "");
 		assertEquals(t.getProductID(), "toolID");
 	}
+
+	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testAssembly()
+	{
+		final JDFAssembly a = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		a.setResStatus(EnumResStatus.Available, true);
+		VString ai = new VString("a1", null);
+		a.setAssemblyIDs(ai);
+		JDFAssemblySection as = a.appendAssemblySection();
+		VString asi = new VString("a1.1", null);
+		as.setAssemblyIDs(asi);
+		assertTrue(a.fixVersion(EnumVersion.Version_1_1));
+		assertEquals(a.getAssemblyID(), "a1");
+		assertNull(a.getAttribute("AssemblyIDs", null, null));
+		assertEquals(as.getAssemblyID(), "a1.1");
+		assertNull(as.getAttribute("AssemblyIDs", null, null));
+		assertTrue(a.fixVersion(EnumVersion.Version_1_4));
+		assertEquals(a.getAssemblyIDs(), ai);
+		assertEquals(a.getAssemblyID(), "");
+		assertEquals(as.getAssemblyIDs(), asi);
+		assertEquals(as.getAssemblyID(), "");
+	}
+
+	/**
+	 * tests updating multiple versions at once
+	 */
+	public void testMultiskip()
+	{
+		n.setVersion(EnumVersion.Version_1_4);
+		final JDFAssembly a = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		a.setResStatus(EnumResStatus.Available, true);
+		VString ai = new VString("a1", null);
+		a.setAssemblyIDs(ai);
+		JDFAssemblySection as = a.appendAssemblySection();
+		VString asi = new VString("a1.1", null);
+		as.setAssemblyIDs(asi);
+		assertTrue(a.fixVersion(EnumVersion.Version_1_1));
+		assertEquals(a.getAssemblyID(), "a1");
+		assertNull(a.getAttribute("AssemblyIDs", null, null));
+		assertEquals(as.getAssemblyID(), "a1.1");
+		assertNull(as.getAttribute("AssemblyIDs", null, null));
+		assertTrue(a.fixVersion(EnumVersion.Version_1_4));
+		assertEquals(a.getAssemblyIDs(), ai);
+		assertEquals(a.getAssemblyID(), "");
+		assertEquals(as.getAssemblyIDs(), asi);
+		assertEquals(as.getAssemblyID(), "");
+	}
+
 	// //////////////////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////////////////////

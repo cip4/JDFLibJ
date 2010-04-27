@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -91,6 +91,7 @@ public class MimeHelper
 {
 	protected Multipart theMultipart;
 	private static boolean bNeedAParser = true;
+	protected int markSize;
 
 	/**
 	 * 
@@ -98,6 +99,7 @@ public class MimeHelper
 	public MimeHelper()
 	{
 		super();
+
 		// there is a bug in xerces that screws up the reference count for shared files when the static stuff in domparser is initialized.
 		// make sure that this happens prior to any mime related tasks and all is well
 		if (bNeedAParser)
@@ -106,6 +108,7 @@ public class MimeHelper
 			new JDFParser();
 		}
 		theMultipart = null;
+		markSize = 1000000;
 	}
 
 	/**
@@ -267,5 +270,23 @@ public class MimeHelper
 			ret = v.toArray(ret);
 			return ret;
 		}
+	}
+
+	/**
+	 * @return the markSize, i.e. the maximum stream mark for resetting
+	 */
+	public int getMarkSize()
+	{
+		return markSize;
+	}
+
+	/**
+	 * the maximum stream mark for resetting
+	 * 
+	 * @param markSize the markSize to set
+	 */
+	public void setMarkSize(int markSize)
+	{
+		this.markSize = markSize;
 	}
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,12 +88,12 @@ import org.cip4.jdflib.resource.JDFResource;
 public class UnlinkFinderTest extends JDFTestCaseBase
 {
 
-	JDFNode n;
-	JDFResource r;
-	JDFResource xm;
-	JDFResource m;
-	JDFResourceLink rl;
-	JDFRefElement re;
+	private JDFNode n;
+	private JDFResource r;
+	private JDFResource xm;
+	private JDFResource m;
+	private JDFResourceLink rl;
+	private JDFRefElement re;
 
 	/**
 	 * 

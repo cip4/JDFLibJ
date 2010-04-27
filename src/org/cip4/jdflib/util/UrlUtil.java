@@ -634,7 +634,10 @@ public class UrlUtil
 		{
 			urlString = urlString.substring(0, posQ);
 		}
-		return urlString.length() == 0 ? null : urlString;
+		if (urlString.length() == 0)
+			return null;
+		File urlToFile = urlToFile(urlString);
+		return urlToFile == null ? null : urlToFile.getName();
 
 	}
 
@@ -714,31 +717,30 @@ public class UrlUtil
 	 * @param urlString the file url to retrieve a file for
 	 * @return
 	 */
-	public static URL stringToURL(final String urlString)
+	public static URL stringToURL(String urlString)
 	{
-		String urlStringLocal = urlString;
 
 		URL url = null;
 
-		if (urlStringLocal == null)
+		if (urlString == null)
 		{
 			return url;
 		}
 
-		if (isEscaped(urlStringLocal))
+		if (isEscaped(urlString))
 		{
-			urlStringLocal = StringUtil.unEscape(urlStringLocal, "%", 16, 2);
+			urlString = StringUtil.unEscape(urlString, "%", 16, 2);
 		}
 
 		try
 		{
-			if (isCID(urlStringLocal) || isHttp(urlStringLocal))
+			if (isCID(urlString) || isHttp(urlString))
 			{
-				url = new URL(urlStringLocal);
+				url = new URL(urlString);
 			}
 			else
 			{
-				url = new URL(fileToUrl(urlToFile(urlStringLocal), true));
+				url = new URL(fileToUrl(urlToFile(urlString), true));
 			}
 		}
 		catch (final MalformedURLException x)
@@ -1174,18 +1176,16 @@ public class UrlUtil
 	 * @return {@link UrlPart} the opened http connection, null in case of error
 	 * 
 	 */
-	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, final String contentType, final HTTPDetails details)
+	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, String contentType, final HTTPDetails details)
 	{
-		String contentTypeLocal = contentType;
-
 		try
 		{
 			final URL url = new URL(strUrl);
 			final HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
 			httpURLconnection.setRequestMethod(method);
 			httpURLconnection.setRequestProperty("Connection", KEEPALIVE);
-			contentTypeLocal = StringUtil.token(contentTypeLocal, 0, "\r\n");
-			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentTypeLocal);
+			contentType = StringUtil.token(contentType, 0, "\r\n");
+			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
 			boolean doOutput = stream != null;
 			httpURLconnection.setDoOutput(doOutput);
 			if (details != null)

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -83,8 +83,15 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.node.JDFNode;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFMatrixTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
 	public void testCreate()
 	{
 		JDFMatrix m = new JDFMatrix(90, 20, 20);
@@ -93,6 +100,10 @@ public class JDFMatrixTest extends JDFTestCaseBase
 		assertEquals(m, m2);
 	}
 
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	public void testSetString() throws Exception
 	{
 		JDFDoc d = new JDFDoc("JDF");
@@ -105,6 +116,9 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testOrientation()
 	{
 
@@ -113,6 +127,9 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testRotate()
 	{
 
@@ -133,6 +150,10 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public void testShift() throws Exception
 	{
 
@@ -145,6 +166,10 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public void testShiftXY() throws Exception
 	{
 
@@ -155,6 +180,9 @@ public class JDFMatrixTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public void testConcat()
 	{
 
@@ -174,6 +202,10 @@ public class JDFMatrixTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public void testClone() throws Exception
 	{
 		JDFMatrix m = (JDFMatrix) JDFMatrix.unitMatrix.clone();

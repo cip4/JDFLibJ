@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,9 +81,18 @@ package org.cip4.jdflib.datatypes;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.util.CPUTimer;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFNumListTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	public final void testSetString() throws Exception
 	{
 		final JDFDoc d = new JDFDoc("JDF");
@@ -102,6 +111,10 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public final void testGetIntArray() throws Exception
 	{
 		final JDFIntegerList il = new JDFIntegerList("1 2 INF");
@@ -111,6 +124,9 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public final void testSetIntArray()
 	{
 		final int[] iArray = new int[3];
@@ -183,6 +199,10 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	public final void testContainsDouble() throws Exception
 	{
 		final JDFNumberList l = new JDFNumberList("1 2.0 3 4 3.0");
@@ -193,6 +213,10 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public final void testContainsInt() throws Exception
 	{
 		final JDFIntegerList l = new JDFIntegerList("1 2 3 4 3");
@@ -203,6 +227,10 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public final void testContainsList() throws Exception
 	{
 		final JDFIntegerList l = new JDFIntegerList("1 2 3 4 3");
@@ -213,7 +241,9 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
 	public final void testRemoveElementAt()
 	{
 		final int[] iArray = new int[3];
@@ -230,6 +260,10 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public void testGetDouble() throws Exception
 	{
 		final JDFNumberList nl = new JDFNumberList("1.1 2.2 3.3");
@@ -241,7 +275,25 @@ public class JDFNumListTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * @throws Exception 
+	 * 
+	 */
+	public void testPerformance() throws Exception
+	{
+		CPUTimer ct = new CPUTimer(true);
+		for (int i = 0; i < 100000; i++)
+		{
+			new JDFNumberList("1.104534098756 2.2098256107389 3.3098563 4.4234190123874 5.5555555 6.098634198634109875 7.129875 8.9123846");
+		}
+		System.out.println(ct);
+	}
+
 	// ////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public void testShape() throws Exception
 	{
 		final JDFShape nl = new JDFShape("1.1 2.2 3.3");
@@ -258,6 +310,10 @@ public class JDFNumListTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testShape2()
 	{
 		final JDFShape nl = new JDFShape(1, 2);

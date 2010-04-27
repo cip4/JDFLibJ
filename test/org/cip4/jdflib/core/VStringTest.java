@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -128,6 +128,53 @@ public class VStringTest extends TestCase
 		assertEquals("c", v.elementAt(3));
 		assertEquals("c", v.elementAt(-2));
 		assertEquals("b", v.elementAt(-3));
+	}
+
+	/**
+	 * 
+	 */
+	public void testRemoveStrings()
+	{
+		final VString v = new VString();
+		v.add("a");
+		v.add("b");
+		v.add("c");
+		v.add("c");
+		VString v2 = new VString(v);
+		v2.removeStrings((String) null, 2);
+		assertEquals(v2, v);
+		v2 = new VString(v);
+		v2.removeStrings("c", 1);
+		assertEquals(v2.size(), 3);
+		assertTrue(v2.contains("c"));
+		v2 = new VString(v);
+		v2.removeStrings("c", 0);
+		assertFalse(v2.contains("c"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testRemoveStringsV()
+	{
+		final VString v = new VString();
+		v.add("a");
+		v.add("b");
+		v.add("c");
+		v.add("c");
+		VString v2 = new VString(v);
+		v2.removeStrings((VString) null, 2);
+		assertEquals(v2, v);
+		v2 = new VString(v);
+		v2.removeStrings(new VString("a c", null), 1);
+		assertEquals(v2.size(), 3);
+		assertTrue(v2.contains("c"));
+		v2 = new VString(v);
+		v2.removeStrings(new VString("a c", null), 0);
+		assertFalse(v2.contains("c"));
+		v2 = new VString(v);
+		v2.removeStrings(new VString("a b c", null), 0);
+		assertEquals(v2.size(), 0);
 	}
 
 	/**

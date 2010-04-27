@@ -89,6 +89,7 @@ import java.util.Vector;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
@@ -113,6 +114,7 @@ import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
+import org.cip4.jdflib.util.mime.MimeReader;
 import org.cip4.jdflib.util.mime.MimeWriter;
 
 /**
@@ -137,32 +139,68 @@ public class MimeUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws IOException 
+	 * @throws MessagingException 
 	 * 
 	 */
-	public void testBuildMimePackageDocJMF()
+	public void testBuildMimePackageDocJMF() throws MessagingException, IOException
 	{
-		final JDFDoc docJMF = new JDFDoc("JMF");
-		docJMF.setOriginalFileName("JMF.jmf");
-		final JDFJMF jmf = docJMF.getJMFRoot();
-		final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
-		com.appendQueueSubmissionParams().setURL("TheJDF");
+		for (int ii = 0; ii < 3; ii++)
+		{
+			final JDFDoc docJMF = new JDFDoc("JMF");
+			docJMF.setOriginalFileName("JMF.jmf");
+			final JDFJMF jmf = docJMF.getJMFRoot();
+			final JDFCommand com = (JDFCommand) jmf.appendMessageElement(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+			com.appendQueueSubmissionParams().setURL("TheJDF");
 
-		final JDFDoc doc = new JDFDoc("JDF");
-		doc.setOriginalFileName("JDF.jdf");
+			final JDFDoc doc = new JDFDoc("JDF");
+			doc.setOriginalFileName("JDF.jdf");
+			final JDFNode n = fillCS(doc);
+
+			final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
+			rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "page.pdf", false), 0, -1);
+			for (int i = 0; i < 100; i++)
+			{
+				rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url?.pdf", false), 0, -1);
+			}
+			final Multipart m = MimeUtil.buildMimePackage(docJMF, doc, true);
+			MIMEDetails md = new MIMEDetails();
+			if (ii == 0)
+			{
+				md = null;
+			}
+			else if (ii == 1)
+			{
+				md.transferEncoding = UrlUtil.BASE64;
+			}
+			else if (ii == 2)
+			{
+				md.transferEncoding = UrlUtil.BINARY;
+			}
+			final File out = MimeUtil.writeToFile(m, sm_dirTestDataTemp + File.separator + "testMimePackageDoc" + ii + ".mjm", md);
+			assertTrue(out.canRead());
+			MimeReader mr = new MimeReader(FileUtil.getBufferedInputStream(out));
+			Multipart mp = mr.getMultiPart();
+			assertEquals(mr.getBodyParts().length, 5);
+			MimeWriter mw = new MimeWriter(mp);
+			mw.writeToDir(new File(StringUtil.newExtension(out.getPath(), null)));
+		}
+	}
+
+	/**
+	 * @param doc
+	 * @return
+	 */
+	private JDFNode fillCS(final JDFDoc doc)
+	{
 		final JDFNode n = doc.getJDFRoot();
 		n.setType(EnumType.ColorSpaceConversion);
 		final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
 		final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
 		fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true));
-		final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
-		rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url1.pdf", false), 0, -1);
-		for (int i = 0; i < 100; i++)
-		{
-			rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url?.pdf", false), 0, -1);
-		}
-		final Multipart m = MimeUtil.buildMimePackage(docJMF, doc, true);
-		final File out = MimeUtil.writeToFile(m, sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm", null);
-		assertTrue(out.canRead());
+		final JDFFileSpec fs1 = cscp.appendColorSpaceConversionOp().appendSourceProfile();
+		fs1.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "4% von test äöüß€.icc", true));
+		return n;
 	}
 
 	/**
@@ -275,16 +313,6 @@ public class MimeUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * 
-	 */
-	public void testGetMultiPart()
-	{
-		testBuildMimePackageDocJMF();
-		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
-		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "testMimePackageDoc_out.mjm", null);
-	}
-
-	/**
 	 * @throws Exception
 	 */
 	public void testGetCreatePartByCID() throws Exception
@@ -329,24 +357,26 @@ public class MimeUtilTest extends JDFTestCaseBase
 	public void testGetJDFDocFromStream() throws Exception
 	{
 		testBuildMimePackageDocJMF();
-		BufferedInputStream fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm")));
-		fis.mark(9999999);
-		assertNotNull(MimeUtil.getJDFDoc(fis, 0));
-		fis.reset();
-		assertNotNull(MimeUtil.getJDFDoc(fis, 1));
-		fis.reset();
-		assertNull(MimeUtil.getJDFDoc(fis, 2));
-		fis.close();
-		final JDFDoc d = new JDFDoc("JDF");
-		d.write2File(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf"), 2, false);
-		fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
-		assertNotNull(MimeUtil.getJDFDoc(fis, 0));
-		fis.close();
-		fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
-		assertNull(MimeUtil.getJDFDoc(fis, 1));
-		fis.close();
-		ThreadUtil.sleep(1000); // wait for the
-
+		for (int i = 0; i < 3; i++)
+		{
+			InputStream fis = FileUtil.getBufferedInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc" + i + ".mjm"));
+			final MimeReader mr = new MimeReader();
+			mr.setMarkSize(9999999);
+			assertNotNull(mr.getJDFDoc(fis, 0));
+			fis.reset();
+			assertNotNull(mr.getJDFDoc(fis, 1));
+			fis.reset();
+			assertNull(mr.getJDFDoc(fis, 2));
+			fis.close();
+			final JDFDoc d = new JDFDoc("JDF");
+			d.write2File(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf"), 2, false);
+			fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
+			assertNotNull(MimeUtil.getJDFDoc(fis, 0));
+			fis.close();
+			fis = new BufferedInputStream(new FileInputStream(new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.jdf")));
+			assertNull(MimeUtil.getJDFDoc(fis, 1));
+			fis.close();
+		}
 	}
 
 	/**
@@ -362,11 +392,8 @@ public class MimeUtilTest extends JDFTestCaseBase
 			{
 				doc.setOriginalFileName("JDF.jdf");
 			}
-			final JDFNode n = doc.getJDFRoot();
-			n.setType(EnumType.ColorSpaceConversion);
-			final JDFColorSpaceConversionParams cscp = (JDFColorSpaceConversionParams) n.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
-			final JDFFileSpec fs0 = cscp.appendFinalTargetDevice();
-			fs0.setURL(StringUtil.uncToUrl(sm_dirTestData + File.separator + "test.icc", true));
+			final JDFNode n = fillCS(doc);
+
 			final JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, null, EnumUsage.Input, null, null, null, null);
 			rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url1.pdf", false), 0, -1);
 			rl.addPDF(StringUtil.uncToUrl(sm_dirTestData + File.separator + "url1.pdf", false), 0, -1);
@@ -377,7 +404,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 			MimeUtil.writeToFile(m, mimeFile, null);
 
 			final Multipart mp = MimeUtil.getMultiPart(mimeFile);
-			assertEquals("JDF, 2* rl, 1 icc", mp.getCount(), 4);
+			assertEquals("JDF, 2* rl, 2 icc", mp.getCount(), 5);
 		}
 	}
 
@@ -597,13 +624,13 @@ public class MimeUtilTest extends JDFTestCaseBase
 
 		final MIMEDetails md = new MIMEDetails();
 		md.modifyBoundarySemicolon = true;
-		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
-		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "testMimePackageDoc2.mjm", md);
-		final File f2 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc2.mjm");
-		final File f1 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc.mjm");
+		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc1.mjm");
+		MimeUtil.writeToFile(mp, sm_dirTestDataTemp + File.separator + "testMimePackageDoc4.mjm", md);
+		final File f2 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc4.mjm");
+		final File f1 = new File(sm_dirTestDataTemp + File.separator + "testMimePackageDoc1.mjm");
 		assertTrue(f2.exists());
 		assertEquals(f1.length(), f2.length(), 100);
-		final Multipart mp2 = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc2.mjm");
+		final Multipart mp2 = MimeUtil.getMultiPart(sm_dirTestDataTemp + File.separator + "testMimePackageDoc4.mjm");
 		assertNotNull(mp2);
 		assertEquals(mp.getCount(), mp2.getCount());
 		final StringWriter sw = new StringWriter();

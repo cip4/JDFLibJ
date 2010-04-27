@@ -104,7 +104,9 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
+import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.JDFLayoutPreparationParams.StrippingConverter;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
@@ -112,10 +114,13 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
+import org.cip4.jdflib.resource.process.JDFAssembly;
+import org.cip4.jdflib.resource.process.JDFAssemblySection;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFLayout;
+import org.cip4.jdflib.resource.process.JDFPageData;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.span.JDFSpanBase.EnumPriority;
@@ -541,10 +546,9 @@ public class FixVersion extends BaseElementWalker
 			final JDFAudit audit = (JDFAudit) e1;
 			if (version != null)
 			{
-				final int value = version.getValue();
-				fixID(audit, value);
+				fixID(audit);
 				final String author = audit.getAuthor();
-				if (value <= EnumVersion.Version_1_1.getValue())
+				if (lessThanVersion(EnumVersion.Version_1_2))
 				{
 					mergeAuthor(audit, author);
 				}
@@ -552,24 +556,23 @@ public class FixVersion extends BaseElementWalker
 				{
 					splitAuthor(audit, author);
 				}
-				authorToEmployee(audit, value);
+				authorToEmployee(audit);
 			}
 			return super.walk(e1, trackElem);
 		}
 
 		/**
 		 * @param audit
-		 * @param value
 		 */
-		private void fixID(final JDFAudit audit, final int value)
+		private void fixID(final JDFAudit audit)
 		{
-			if (value >= EnumVersion.Version_1_3.getValue())
+			if (lessThanVersion(EnumVersion.Version_1_3))
 			{
-				audit.appendAnchor(null);
+				audit.removeAttribute(AttributeName.ID);
 			}
 			else
 			{
-				audit.removeAttribute(AttributeName.ID);
+				audit.appendAnchor(null);
 			}
 		}
 
@@ -634,11 +637,10 @@ public class FixVersion extends BaseElementWalker
 
 		/**
 		 * @param audit
-		 * @param value
 		 */
-		private void authorToEmployee(final JDFAudit audit, final int value)
+		private void authorToEmployee(final JDFAudit audit)
 		{
-			if (value >= EnumVersion.Version_1_4.getValue())
+			if (!lessThanVersion(EnumVersion.Version_1_4))
 			{
 				final String finalAuthor = StringUtil.getNonEmpty(audit.getAuthor());
 				if (finalAuthor != null && !audit.hasChildElement(ElementName.EMPLOYEE, null))
@@ -1383,6 +1385,193 @@ public class FixVersion extends BaseElementWalker
 	 * 
 	 * June 7, 2009
 	 */
+	public class WalkAssembly extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final boolean b = super.matches(toCheck);
+			if (!b)
+			{
+				return false;
+			}
+			return (toCheck instanceof JDFAssembly);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
+		 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+		 * high versions but potentially fail when attempting to move from higher to lower versions
+		 */
+		@Override
+		public KElement walk(final KElement e1, final KElement trackElem)
+		{
+			final JDFAssembly e = (JDFAssembly) e1;
+			updateAssemblyIDS(e);
+
+			return super.walk(e1, trackElem);
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * June 7, 2009
+	 */
+	public class WalkAssemblySection extends WalkElement
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final boolean b = super.matches(toCheck);
+			if (!b)
+			{
+				return false;
+			}
+			return (toCheck instanceof JDFAssemblySection);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
+		 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+		 * high versions but potentially fail when attempting to move from higher to lower versions
+		 */
+		@Override
+		public KElement walk(final KElement e1, final KElement trackElem)
+		{
+			final JDFAssemblySection e = (JDFAssemblySection) e1;
+			updateAssemblyIDS(e);
+
+			return super.walk(e1, trackElem);
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * June 7, 2009
+	 */
+	public class WalkPageList extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final boolean b = super.matches(toCheck);
+			if (!b)
+			{
+				return false;
+			}
+			return (toCheck instanceof JDFPageList);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
+		 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+		 * high versions but potentially fail when attempting to move from higher to lower versions
+		 */
+		@Override
+		public KElement walk(final KElement e1, final KElement trackElem)
+		{
+			final JDFPageList e = (JDFPageList) e1;
+			updateAssemblyIDS(e);
+			return super.walk(e1, trackElem);
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * June 7, 2009
+	 */
+	public class WalkStrippingParams extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final boolean b = super.matches(toCheck);
+			if (!b)
+			{
+				return false;
+			}
+			return (toCheck instanceof JDFStrippingParams);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
+		 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+		 * high versions but potentially fail when attempting to move from higher to lower versions
+		 */
+		@Override
+		public KElement walk(final KElement e1, final KElement trackElem)
+		{
+			final JDFStrippingParams e = (JDFStrippingParams) e1;
+			updateAssemblyIDS(e);
+			return super.walk(e1, trackElem);
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * June 7, 2009
+	 */
+	public class WalkPageData extends WalkElement
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final boolean b = super.matches(toCheck);
+			if (!b)
+			{
+				return false;
+			}
+			return (toCheck instanceof JDFPageData);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.FixVersion.WalkElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement) version fixing routine
+		 * for JDF uses heuristics to modify this element and its children to be compatible with a given version in general, it will be able to move from low to
+		 * high versions but potentially fail when attempting to move from higher to lower versions
+		 */
+		@Override
+		public KElement walk(final KElement e1, final KElement trackElem)
+		{
+			final JDFPageData e = (JDFPageData) e1;
+			updateAssemblyIDS(e);
+			return super.walk(e1, trackElem);
+		}
+	}
+
+	/**
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * June 7, 2009
+	 */
 	public class WalkLayout extends WalkResource
 	{
 		/**
@@ -1633,4 +1822,42 @@ public class FixVersion extends BaseElementWalker
 		bLayoutPrepToStripping = layoutPrepToStripping;
 	}
 
+	/**
+	 * @param e the assembly or assemblysection to update
+	 */
+	protected void updateAssemblyIDS(final JDFElement e)
+	{
+		if (version != null)
+		{
+			if (lessThanVersion(EnumVersion.Version_1_3))
+			{
+				e.renameAttribute(AttributeName.ASSEMBLYIDS, AttributeName.ASSEMBLYID, null, null);
+			}
+			else
+			{
+				// note that AssemblyID is a String and this therefore is valid
+				e.renameAttribute(AttributeName.ASSEMBLYID, AttributeName.ASSEMBLYIDS, null, null);
+			}
+		}
+	}
+
+	/**
+	 * returns true if v is less than the target version 
+	 * @param v 
+	 * @return
+	 */
+	protected boolean lessThanVersion(EnumVersion v)
+	{
+		return EnumUtil.aLessThanB(version, v);
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return "[FixVersion : version=" + (version == null ? "null" : version.getName()) + " LO->Strip" + bLayoutPrepToStripping;
+	}
 }

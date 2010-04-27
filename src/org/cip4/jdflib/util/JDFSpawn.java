@@ -881,6 +881,8 @@ public class JDFSpawn
 	}
 
 	/**
+	 * fix linked resources so that all partitions in vSpawnParts actually exist
+	 * 
 	 * @param rootOut
 	 * @param bResRW
 	 * @param liRootLink
@@ -1262,6 +1264,7 @@ public class JDFSpawn
 							}
 						}
 						else
+						// no overlap with testmap
 						{
 							if (bSpawnIdentical)
 							{
@@ -1275,6 +1278,12 @@ public class JDFSpawn
 						}
 					}
 				}
+			}
+
+			// add parent of kids if all kids were zapped
+			if (bad.size() >= children.size() && !bSpawnIdentical && !r.isResourceRoot() && bad.containsAll(children))
+			{
+				bad.add(r);
 			}
 		}
 		return bad;

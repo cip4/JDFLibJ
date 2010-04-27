@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -88,9 +88,12 @@ import org.cip4.jdflib.JDFTestCaseBase;
  */
 public class SScanfTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
 	public void testSScanfInt()
 	{
-		Vector o = SScanf.sscanf("4", "%i");
+		Vector<Object> o = SScanf.sscanf("4", "%i");
 		Integer i2 = (Integer) o.elementAt(0);
 		assertEquals(i2.intValue(), 4);
 		o = SScanf.sscanf("abc4", "abc%i");
@@ -107,16 +110,22 @@ public class SScanfTest extends JDFTestCaseBase
 		assertEquals(i2.intValue(), 055);
 	}
 
+	/**
+	 * 
+	 */
 	public void testSScanfDouble()
 	{
-		Vector o = SScanf.sscanf("4", "%f");
+		Vector<Object> o = SScanf.sscanf("4", "%f");
 		Double d2 = (Double) o.elementAt(0);
 		assertEquals(d2.intValue(), 4);
 	}
 
+	/**
+	 * 
+	 */
 	public void testSScanfString()
 	{
-		Vector o = SScanf.sscanf("4", "%s");
+		Vector<Object> o = SScanf.sscanf("4", "%s");
 		String s2 = (String) o.elementAt(0);
 		assertEquals(s2, "4");
 		o = SScanf.sscanf("abc4", "abc%s");
@@ -133,9 +142,12 @@ public class SScanfTest extends JDFTestCaseBase
 		assertEquals(s2, "7%");
 	}
 
+	/**
+	 * 
+	 */
 	public void testSScanfMulti()
 	{
-		Vector o = SScanf.sscanf("abc 4", "%s %i");
+		Vector<Object> o = SScanf.sscanf("abc 4", "%s %i");
 		String s2 = (String) o.elementAt(0);
 		Integer i2 = (Integer) o.elementAt(1);
 		assertEquals(s2, "abc");

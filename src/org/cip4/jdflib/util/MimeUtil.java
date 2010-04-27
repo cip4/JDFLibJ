@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -111,19 +111,20 @@ public class MimeUtil extends UrlUtil
 	public static class MIMEDetails
 	{
 		/**
-		 * http details
-		 */
-		public HTTPDetails httpDetails = new HTTPDetails();
-		/**
 		 * transfer encoding used when streaming body parts, May be null to specify java default behavior
 		 */
 		public static String defaultTransferEncoding = BINARY;
+		/**
+		 * http details
+		 */
+		public HTTPDetails httpDetails = new HTTPDetails();
 		/**
 		 * 
 		 */
 		public String transferEncoding = defaultTransferEncoding;
 		/**
-		 * 
+		 * if true, the stream will be parsed for a semicolon after the mime multipart 
+		 * and said semicolon will be replaced with a cr/lf
 		 */
 		public boolean modifyBoundarySemicolon = false;
 	}
@@ -470,31 +471,29 @@ public class MimeUtil extends UrlUtil
 	 * @param urlString
 	 * @return
 	 */
-	public static String urlToCid(final String urlString)
+	public static String urlToCid(String urlString)
 	{
-		String urlStringLocal = urlString;
-
-		if (urlStringLocal == null)
+		if (urlString == null)
 		{
 			return null;
 		}
 
-		if (urlStringLocal.startsWith("<"))
+		if (urlString.startsWith("<"))
 		{
-			urlStringLocal = urlStringLocal.substring(1);
+			urlString = urlString.substring(1);
 		}
 
-		if (urlStringLocal.toLowerCase().startsWith("cid:"))
+		if (urlString.toLowerCase().startsWith("cid:"))
 		{
-			urlStringLocal = urlStringLocal.substring(4);
+			urlString = urlString.substring(4);
 		}
 
-		if (urlStringLocal.endsWith(">"))
+		if (urlString.endsWith(">"))
 		{
-			urlStringLocal = urlStringLocal.substring(0, urlStringLocal.length() - 1);
+			urlString = urlString.substring(0, urlString.length() - 1);
 		}
 
-		return "cid:" + new File(urlStringLocal).getName(); // 
+		return "cid:" + new File(urlString).getName(); // 
 	}
 
 	/**

@@ -553,6 +553,45 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testGetTargetVectorIdentical()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
+		JDFResourceLink rl = n.getLink(r, EnumUsage.Input);
+		JDFResource s1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFResource s2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		VString seps = new VString("CYAN MAGENTA YELLOW BLACK", null);
+		VJDFAttributeMap vm = new VJDFAttributeMap();
+		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		JDFAttributeMap m2 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s2");
+		for (String sep : seps)
+		{
+			JDFResource s11 = s1.addPartition(EnumPartIDKey.Separation, sep);
+			JDFResource s21 = s2.addPartition(EnumPartIDKey.Separation, sep);
+
+			JDFAttributeMap m = new JDFAttributeMap(m1);
+			m.put(EnumPartIDKey.Separation, sep);
+			vm.add(m);
+			m = new JDFAttributeMap(m2);
+			m.put(EnumPartIDKey.Separation, sep);
+			vm.add(m);
+			s21.setIdentical(s11);
+
+		}
+
+		VElement v = r.getPartitionVector((VJDFAttributeMap) null, null);
+		assertEquals("explicit identicals are excluded", v.size(), 8 + 2 + 1 - 4);
+		v = r.getPartitionVector(vm, null);
+		assertEquals(v.size(), 4);
+
+		rl.setPartMapVector(vm);
+		v = rl.getTargetVector(0);
+		assertEquals(v.size(), 4);
+	}
+
+	/**
 	 * Method testGetTarget
 	 * 
 	 */

@@ -188,6 +188,25 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertTrue("qentryID ", filter.matches(qe));
 		filter.setQueueEntryDetails(EnumQueueEntryDetails.None);
 		assertFalse("details=none never matches ", filter.matches(qe));
+
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.Brief); // undo none for additional tests
+
+		qe.setJobID("jID");
+		assertTrue("jobID ", filter.matches(qe));
+		filter.setJobID("jID");
+		assertTrue("jobID ", filter.matches(qe));
+		filter.setJobID("jID2");
+		assertFalse("jobID ", filter.matches(qe));
+		filter.setJobID("jID");
+
+		qe.setJobPartID("part");
+		assertTrue("jobPartID ", filter.matches(qe));
+		filter.setJobPartID("part");
+		assertTrue("jobID ", filter.matches(qe));
+		filter.setJobPartID("part2");
+		assertFalse("jobID ", filter.matches(qe));
+		filter.setJobPartID("part");
+
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

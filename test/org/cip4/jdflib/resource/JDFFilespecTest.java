@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,9 +76,11 @@
 package org.cip4.jdflib.resource;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.mail.BodyPart;
+import javax.mail.MessagingException;
 import javax.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -145,9 +147,11 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws IOException 
+	 * @throws MessagingException 
 	 * 
 	 */
-	public void testMoveToDir()
+	public void testMoveToDir() throws MessagingException, IOException
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");

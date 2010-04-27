@@ -6935,15 +6935,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public void eraseUnlinkedResources()
 	{
-		// VElement v=getUnlinkedResources(false);
-		// while(v!=null)
-		// {
-		// for(int i=0;i<v.size();i++)
-		// {
-		// ((JDFResource)v.elementAt(i)).deleteNode();
-		// }
-		// v=getUnlinkedResources(false); // repeat until no unlinked are found
-		// }
 		final UnLinkFinder uf = new UnLinkFinder();
 		uf.eraseUnlinkedResources(this);
 	}

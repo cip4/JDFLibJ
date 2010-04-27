@@ -156,20 +156,24 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 		if (v != null)
 		{
 			final int size = v.size();
+			boolean bInteger = this instanceof JDFIntegerList;
+			int minValue = Integer.MIN_VALUE + 42; // a bit off but rare...
 			for (int i = 0; i < size; i++)
 			{
 				final String s = v.stringAt(i);
-				if (!StringUtil.isNumber(s))
+				if (bInteger)
 				{
-					throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-				}
-				if (this instanceof JDFIntegerList)
-				{
-					m_numList.addElement(new Integer(StringUtil.parseInt(s, 0)));
+					int theInt = StringUtil.parseInt(s, minValue);
+					if (theInt == minValue)
+						throw new DataFormatException("JDFNumList: bad numeric value: " + s);
+					m_numList.addElement(new Integer(theInt));
 				}
 				else
 				{
-					m_numList.addElement(new Double(StringUtil.parseDouble(s, 0)));
+					double theDouble = StringUtil.parseDouble(s, Double.NaN);
+					if (Double.isNaN(theDouble))
+						throw new DataFormatException("JDFNumList: bad numeric value: " + s);
+					m_numList.addElement(new Double(theDouble));
 				}
 			}
 		}

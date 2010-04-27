@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -475,6 +475,24 @@ public class JDFResourceTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////
+
+	/**
+	 * tests the various implicit and explicit defaults of getPartUsage
+	 */
+	public void testgetPartUsage()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFRunList r = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
+		assertEquals(r.getPartUsage(), EnumPartUsage.Explicit);
+		JDFResource.setUnpartitiondImplicit(true);
+		assertEquals(r.getPartUsage(), EnumPartUsage.Implicit);
+		JDFRunList r2 = r.addRun("foo.pdf", 0, 99);
+		assertEquals(r.getPartUsage(), EnumPartUsage.Explicit);
+		assertEquals(r2.getPartUsage(), EnumPartUsage.Explicit);
+		r.setPartUsage(EnumPartUsage.Sparse);
+		assertEquals(r.getPartUsage(), EnumPartUsage.Sparse);
+		assertEquals(r2.getPartUsage(), EnumPartUsage.Sparse);
+	}
 
 	/**
 	 * 
@@ -1094,6 +1112,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		VElement v = c.getLeaves(false);
 		assertEquals("physical leaves are counted", v.size(), 5);
 		VJDFAttributeMap vCMap = c.getPartMapVector(false);
+		assertEquals("physical leaves are counted", vCMap.size(), 5);
 		c3.removeChild(ElementName.IDENTICAL, null, 0);
 		assertNull(c3.getIdenticalMap());
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
@@ -1263,9 +1282,43 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testGetPartitionVectorIdentical()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource r = n.addResource("ExposedMedia", EnumUsage.Input);
+		JDFResource s1 = r.addPartition(EnumPartIDKey.SheetName, "s1");
+		JDFResource s2 = r.addPartition(EnumPartIDKey.SheetName, "s2");
+		VString seps = new VString("CYAN MAGENTA YELLOW BLACK", null);
+		VJDFAttributeMap vm = new VJDFAttributeMap();
+		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		JDFAttributeMap m2 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s2");
+		for (String sep : seps)
+		{
+			JDFResource s11 = s1.addPartition(EnumPartIDKey.Separation, sep);
+			JDFResource s21 = s2.addPartition(EnumPartIDKey.Separation, sep);
+
+			JDFAttributeMap m = new JDFAttributeMap(m1);
+			m.put(EnumPartIDKey.Separation, sep);
+			vm.add(m);
+			m = new JDFAttributeMap(m2);
+			m.put(EnumPartIDKey.Separation, sep);
+			vm.add(m);
+			s21.setIdentical(s11);
+
+		}
+
+		VElement v = r.getPartitionVector((VJDFAttributeMap) null, null);
+		assertEquals("explicit identicals are excluded", v.size(), 8 + 2 + 1 - 4);
+		v = r.getPartitionVector(vm, null);
+		assertEquals(v.size(), 4);
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetPartitionVector()
 	{
-
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
@@ -2480,22 +2533,21 @@ public class JDFResourceTest extends JDFTestCaseBase
 		doc.write2File(sm_dirTestDataTemp + "pv14.jdf", 2, false);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 *  
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
 	 */
 	@Override
 	protected void tearDown() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.tearDown();
 		JDFResource.setAutoAgent(b);
-
+		JDFResource.setUnpartitiondImplicit(false);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * 
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */

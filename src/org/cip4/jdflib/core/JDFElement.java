@@ -2951,6 +2951,8 @@ public class JDFElement extends KElement
 	private VString getInvalidAttributes_JDFElement(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax, final AttributeInfo ai)
 	{
 		final VString vAttsReturn = new VString();
+		if (!isInJDFNameSpaceStatic(this))
+			return vAttsReturn;
 		int numAtts = 0;
 		final NamedNodeMap nm = getAttributes();
 		Set<String> vReq;
@@ -3048,6 +3050,9 @@ public class JDFElement extends KElement
 	public VString getInvalidElements_JDFElement(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
 	{
 		final VString vBad = new VString();
+		if (bIgnorePrivate && !isInJDFNameSpaceStatic(this))
+			return vBad;
+
 		int i = 0;
 		int num = 0;
 		final VElement v = getChildElementVector(null, null, null, true, 0, false);

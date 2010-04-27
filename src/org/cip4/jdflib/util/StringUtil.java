@@ -1159,12 +1159,8 @@ public class StringUtil
 			return false;
 		}
 
-		// if I get the default in both cases it is really snafu
-		if ((parseDouble(str, -1234567.987) == -1234567.987) && (parseDouble(str, 9876.473) == 9876.473))
-		{
-			return false;
-		}
-		return true;
+		// NaN is not a number...
+		return !Double.isNaN(parseDouble(str, Double.NaN));
 	}
 
 	/**
@@ -1932,7 +1928,7 @@ public class StringUtil
 	 * unescape a String which was escaped with the Java StringUtil.escape method
 	 * 
 	 * @param strToUnescape the String to unescape. For example <code>zz\d6\zzz\c4\\dc\z\d6\\24\\3f\zz�z</code>
-	 * @param strEscapeChar the char which indicates a escape sequenze "\\" in this case (thats also the default)
+	 * @param strEscapeChar the char which indicates a escape sequence "\\" in this case (thats also the default)
 	 * @param iRadix the radix of the escape sequenze. 16 in this example.
 	 * @param escapeLen the number of digits per escaped char, not including strEscapeChar
 	 * 
@@ -1942,9 +1938,7 @@ public class StringUtil
 	{
 		final byte[] byteUnEscape = strToUnescape.getBytes();
 		final byte[] byteEscape = new byte[byteUnEscape.length];
-		final byte escapeChar = strEscapeChar.getBytes()[0]; // dont even dream of
-		// using � as an escape
-		// char
+		final byte escapeChar = strEscapeChar.getBytes()[0]; // dont even dream of using � as an escape  char
 		int n = 0;
 		final byte[] escapeSeq = new byte[escapeLen];
 
@@ -1958,17 +1952,25 @@ public class StringUtil
 			{
 				for (int j = 0; j < escapeLen; j++)
 				{
-					escapeSeq[j] = byteUnEscape[++i];
+					escapeSeq[j] = byteUnEscape[i + j + 1];
 				}
 
 				final String strIsEscaped = new String(escapeSeq); // get the escaped
 				// str 'd6'
-				final Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and
-				// get
-				// the
-				// int
-				// value
-				byteEscape[n++] = (byte) integer.intValue();
+				try
+				{
+					final Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and get the int value
+					byteEscape[n++] = (byte) integer.intValue();
+				}
+				catch (NumberFormatException ex)
+				{
+					byteEscape[n++] = escapeChar;
+					for (int j = 0; j < escapeLen; j++)
+					{
+						byteEscape[n++] = byteUnEscape[i + j + 1];
+					}
+				}
+				i += escapeLen;
 			}
 		}
 		byte[] stringByte = null;
@@ -2014,15 +2016,22 @@ public class StringUtil
 		{
 			return def;
 		}
-
+		try
+		{
+			return Double.parseDouble(s);
+		}
+		catch (final NumberFormatException nfe)
+		{
+			// nop
+		}
 		double d = def;
 		s = s.trim();
-		if (s.equals(JDFConstants.POSINF))
+		if (s.equalsIgnoreCase(JDFConstants.POSINF))
 		{
 			return Double.MAX_VALUE;
 		}
 
-		if (s.equals(JDFConstants.NEGINF))
+		if (s.equalsIgnoreCase(JDFConstants.NEGINF))
 		{
 			return -Double.MAX_VALUE;
 		}
@@ -2090,7 +2099,14 @@ public class StringUtil
 		{
 			return def;
 		}
-
+		try
+		{
+			return Integer.parseInt(s);
+		}
+		catch (final NumberFormatException nfe)
+		{
+			// nop
+		}
 		int i = def;
 		s = s.trim();
 		if (s.equalsIgnoreCase(JDFConstants.POSINF))
@@ -2145,7 +2161,14 @@ public class StringUtil
 		{
 			return def;
 		}
-
+		try
+		{
+			return Long.parseLong(s);
+		}
+		catch (final NumberFormatException nfe)
+		{
+			//nop
+		}
 		long i = def;
 		s = s.trim();
 		if (s.equalsIgnoreCase(JDFConstants.POSINF))

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -168,6 +168,9 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
+	 * get the list of separations that this colorantcontrol describes - 
+	 * adds the separations that are implied by ProcessColorModel
+	 * uses devicecolorantorder if it is specified, else calls getColorantOrderSeparations()
 	 * @return
 	 */
 	public VString getDeviceColorantOrderSeparations()
@@ -180,7 +183,9 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 * 
+	 * get the list of separations that this colorantcontrol describes - 
+	 * adds the separations that are implied by ProcessColorModel
+	 * uses colorantorder if it is specified, else calls getSeparations()
 	 * @return
 	 */
 	public VString getColorantOrderSeparations()
@@ -214,7 +219,9 @@ public class JDFColorantControl extends JDFAutoColorantControl
 	}
 
 	/**
-	 * get the list of separations that this colorantcontrol describes adds the separations that are implied by ProcessColorModel
+	 * get the list of separations that this colorantcontrol describes - 
+	 * adds the separations that are implied by ProcessColorModel
+	 * ignores colorantorder and devicecolorantorder
 	 * 
 	 * @return VString the complete list of process and spot colors
 	 */
@@ -253,7 +260,7 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		final JDFSeparationList colpar = getColorantParams();
 		if (colpar != null)
 		{
-			vName.appendUnique(colpar.getSeparations());
+			vName.addAll(colpar.getSeparations());
 		}
 		vName.unify();
 		return vName;

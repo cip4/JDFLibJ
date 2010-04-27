@@ -670,6 +670,7 @@ public class BaseGoldenTicket
 			{
 				dev = (JDFDevice) theNode.getCreateResource(ElementName.DEVICE, EnumUsage.Input, 0);
 				dev.setDeviceID(devID);
+				dev.setResStatus(EnumResStatus.Available, true);
 				rl = theNode.getLink(dev, EnumUsage.Input);
 			}
 			else
@@ -1229,6 +1230,7 @@ public class BaseGoldenTicket
 			rll = theNode.getLink(rl, null);
 		}
 		rll.setProcessUsage(EnumProcessUsage.Document);
+		m_pdfFile = UrlUtil.normalize(m_pdfFile);
 		rl.addPDF(m_pdfFile, 0, -1);
 		rl.setNPage(4);
 		rl.setDescriptiveName("Description of this RunList");

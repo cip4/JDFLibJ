@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,6 +76,7 @@ package org.cip4.jdflib.util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -109,24 +110,24 @@ public class StreamUtil
 	}
 
 	/**
-	 * return a reasonably well performing stream for is
-	 * @param is
+	 * return a reasonably well performing stream for os
+	 * @param os
 	 * @return the buffered stream
 	 */
-	public static OutputStream getBufferedOutputStream(final OutputStream is)
+	public static OutputStream getBufferedOutputStream(final OutputStream os)
 	{
-		if (is == null)
+		if (os == null)
 		{
 			return null;
 		}
-		if (is instanceof ByteArrayIOStream)
+		if (os instanceof ByteArrayOutputStream)
 		{
-			return is;
+			return os;
 		}
-		if (is instanceof BufferedOutputStream)
+		if (os instanceof BufferedOutputStream)
 		{
-			return is;
+			return os;
 		}
-		return new BufferedOutputStream(is);
+		return new BufferedOutputStream(os);
 	}
 }

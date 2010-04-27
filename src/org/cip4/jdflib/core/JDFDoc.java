@@ -246,7 +246,9 @@ public class JDFDoc extends XMLDoc
 	 * @return the number of collected resources
 	 * 
 	 * @default CollectGarbageResources(new vString())
+	 * @deprecated use JDFNode.eraseUnlinkedResources
 	 */
+	@Deprecated
 	public int collectGarbageResources(final VString nodeNames)
 	{
 		final boolean bCollectAll = nodeNames == null || nodeNames.isEmpty();

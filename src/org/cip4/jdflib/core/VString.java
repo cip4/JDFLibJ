@@ -373,21 +373,21 @@ public class VString extends Vector<String>
 	 * @param v the vector of strings to remove from <code>this</code>
 	 * @param nMax the max number of strings to remove
 	 */
-	public void removeStrings(final VString v, final int nMax)
+	public void removeStrings(final VString v, int nMax)
 	{
-		int nMaxLocal = nMax;
-
-		if (v == null)
+		if (v == null || v.size() == 0)
 		{
 			return;
 		}
 
-		for (int i = this.size() - 1; i >= 0 && nMaxLocal > 0; i--)
+		for (int i = this.size() - 1; i >= 0; i--)
 		{
 			if (v.contains(this.elementAt(i)))
 			{
 				this.removeElementAt(i);
-				nMaxLocal--;
+				nMax--;
+				if (nMax == 0)
+					break;
 			}
 		}
 	}
@@ -408,18 +408,20 @@ public class VString extends Vector<String>
 	 * removeStrings - remove nMax occurrences of a string
 	 * 
 	 * @param s the string to remove
-	 * @param nMax remove s max. nMax times
+	 * @param nMax remove s max. nMax times , 0 or negative = infinite
 	 */
-	public void removeStrings(final String s, final int nMax)
+	public void removeStrings(final String s, int nMax)
 	{
-		int nMaxLocal = nMax;
-
-		for (int i = this.size() - 1; i >= 0 && nMaxLocal > 0; i--)
+		if (s == null)
+			return;
+		for (int i = this.size() - 1; i >= 0; i--)
 		{
-			if (this.contains(s))
+			if (s.equals(get(i)))
 			{
-				this.removeElementAt(this.index(s));
-				nMaxLocal--;
+				this.removeElementAt(i);
+				nMax--;
+				if (nMax == 0)
+					break;
 			}
 		}
 	}

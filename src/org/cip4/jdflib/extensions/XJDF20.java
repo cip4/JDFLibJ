@@ -284,11 +284,19 @@ public class XJDF20 extends BaseElementWalker
 		{
 			return null;
 		}
-		final EnumResourceClass resourceClass = r.getResourceClass();
+		EnumResourceClass resourceClass = r.getResourceClass();
 		if (resourceClass == null)
 		{
-			return null;
+			KElement r2 = new JDFDoc(r.getLocalName()).getRoot();
+			if (r2 instanceof JDFResource)
+			{
+				r2.init();
+				resourceClass = ((JDFResource) r2).getResourceClass();
+			}
 		}
+		if (resourceClass == null)
+			return null;
+
 		String className = "Resource";
 		if (resourceClass.equals(EnumResourceClass.Parameter) || resourceClass.equals(EnumResourceClass.Intent))
 		{
@@ -1446,22 +1454,25 @@ public class XJDF20 extends BaseElementWalker
 			if (rlRoot != null && rl != null)
 			{
 				final VElement v = setResource(null, rlRoot, newRoot);
-				for (final KElement kElem : v)
+				if (v != null)
 				{
-					KElement resAmount = raNew.appendElement("ResourceAmount");
-					resAmount.setAttribute("Type", val);
-					resAmount.setAttribute("rRef", kElem.getAttribute(AttributeName.ID));
-					if (partMap == null || partMap.size() == 0)
+					for (final KElement kElem : v)
 					{
-						setAmountPool(rl, resAmount, null);
-					}
-					else
-					{
-						for (int i = 0; i < partMap.size(); i++)
+						KElement resAmount = raNew.appendElement("ResourceAmount");
+						resAmount.setAttribute("Type", val);
+						resAmount.setAttribute("rRef", kElem.getAttribute(AttributeName.ID));
+						if (partMap == null || partMap.size() == 0)
 						{
-							JDFAttributeMap partMap2 = partMap.get(i);
-							setAmountPool(rl, resAmount, partMap2);
-							resAmount.appendElement("Part").setAttributes(partMap2);
+							setAmountPool(rl, resAmount, null);
+						}
+						else
+						{
+							for (int i = 0; i < partMap.size(); i++)
+							{
+								JDFAttributeMap partMap2 = partMap.get(i);
+								setAmountPool(rl, resAmount, partMap2);
+								resAmount.appendElement("Part").setAttributes(partMap2);
+							}
 						}
 					}
 				}

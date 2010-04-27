@@ -125,12 +125,11 @@ public class MimeWriter extends MimeHelper
 	 * used for some after the fact cleanup - beware as it may hurt performance
 	 * @author prosirai
 	 */
-	private static class FixSemiColonStream extends BufferedOutputStream
+	static class FixSemiColonStream extends BufferedOutputStream
 	{
-		private boolean done = false;
 		private int pos = 0;
 
-		private byte[] smallBuf = new byte[5000];
+		private byte[] smallBuf = new byte[4000];
 
 		/**
 		 * @param _out the output stream to fix
@@ -140,20 +139,18 @@ public class MimeWriter extends MimeHelper
 			super(_out);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
+		/**  
+		 * replaces replace 'content-type:foo;' with 'content-type:foo\n' if necessary
 		 * @see java.io.BufferedOutputStream#write(int)
 		 */
 		@Override
 		public synchronized void write(final int b) throws IOException
 		{
-			if (!done) // insert a ' ' where necessary...
+			if (smallBuf != null) // replace ';' with '\n' if necessary
 			{
 				if (pos == smallBuf.length)
 				{
 					smallBuf = null;
-					done = true;
 				}
 				else
 				{
@@ -164,25 +161,25 @@ public class MimeWriter extends MimeHelper
 						final String s = new String(smallBuf, first, pos - 1);
 						if (s.toLowerCase().indexOf("content-type:") > 0)
 						{
-							smallBuf = null;
-							done = true;
 							super.write('\n');
+							super.write(b);
+							smallBuf = null;
+							return;
 						}
 					}
 				}
+
 			}
 			super.write(b);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
+		/** 
 		 * @see java.io.BufferedOutputStream#write(byte[], int, int)
 		 */
 		@Override
 		public synchronized void write(final byte[] b, final int off, final int len) throws IOException
 		{
-			if (done)
+			if (smallBuf == null)
 			{
 				super.write(b, off, len);
 			}

@@ -101,6 +101,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  *
@@ -467,6 +468,8 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		Set<String> devIDs;
 		VString gangNames;
 		VString statusList;
+		String jobID;
+		String jobPartID;
 
 		QueueEntryMatcher()
 		{
@@ -474,11 +477,17 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 			devIDs = getDeviceIDSet();
 			gangNames = getGangNames();
 			if (gangNames.size() == 0)
+			{
 				gangNames = null;
+			}
+			jobID = StringUtil.getNonEmpty(getJobID());
+			jobPartID = StringUtil.getNonEmpty(getJobPartID());
 
 			Vector<EnumQueueEntryStatus> vs = getStatusList();
 			if (vs == null)
+			{
 				statusList = null;
+			}
 			else
 			{
 				statusList = new VString();
@@ -526,6 +535,15 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 				return false;
 			}
 
+			if (jobID != null && !StringUtil.matches(jobID, qe.getJobID()))
+			{
+				return false;
+			}
+
+			if (jobPartID != null && !StringUtil.matches(jobPartID, qe.getJobPartID()))
+			{
+				return false;
+			}
 			return true;
 		}
 	}

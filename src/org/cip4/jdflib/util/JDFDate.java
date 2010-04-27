@@ -621,10 +621,21 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
+	 * true, if this is before other
+	 * 
+	 * @param other the time in milliseconds since 1970 (e.g. from System.currentTimeMillis())
+	 * @return true if this is before other
+	 */
+	public boolean before(final long other)
+	{
+		return lTimeInMillis < other;
+	}
+
+	/**
 	 * true, if this is after other, also true if other==null
 	 * 
 	 * @param other
-	 * @return
+	 * @return true if this date is after other
 	 */
 	public boolean after(final JDFDate other)
 	{
@@ -633,6 +644,17 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			return true;
 		}
 		return lTimeInMillis > other.lTimeInMillis;
+	}
+
+	/**
+	 * true, if this is after other
+	 * 
+	 * @param other the time in milliseconds since 1970 (e.g. from System.currentTimeMillis())
+	 * @return true if this date is after other
+	 */
+	public boolean after(final long other)
+	{
+		return lTimeInMillis > other;
 	}
 
 	/**

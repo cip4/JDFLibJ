@@ -488,7 +488,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		tt.setAttribute("fnarf", 3, null);
 		assertTrue("extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
 
-		tt = (JDFTestType) n.appendElement("fnarf:JDFTestType", "WWW.fnarf.com");
+		tt = (JDFTestType) n.appendElement("JDFTestType");
 		tt.setAttribute("fnarf", 3, null);
 		assertTrue("ns extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
 		tt.setAttribute("fnarf", "a", null); // illegal - must be integer
@@ -498,17 +498,15 @@ public class XMLDocTest extends JDFTestCaseBase
 		tt.setAttribute("gnu", "a", null); // illegal - non existent
 		assertFalse("ns extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
 
-		// boolean bClassCast = false;
-		// try
-		// {
-		// tt = (JDFTestType) n.appendElement("blub:JDFTestType",
-		// "WWW.fnarf2.com");
-		// }
-		// catch (ClassCastException exc)
-		// {
-		// bClassCast = true;
-		// }
-		// assertTrue("ns extension works", bClassCast);
+		try
+		{
+			tt = (JDFTestType) n.appendElement("blub:JDFTestType", "WWW.fnarf2.com");
+			fail("ns extension noworks");
+		}
+		catch (ClassCastException exc)
+		{
+			// nop
+		}
 		assertTrue("ns extension works", !(n.appendElement("blub:JDFTestType", "WWW.fnarf2.com") instanceof JDFTestType));
 	}
 

@@ -164,8 +164,10 @@ public class CPUTimer
 
 		/**
 		 * 
-		 * @param id
-		 * @return
+		 * get the CPUTimer for a given ID for this thread
+		 * the timer is in paused mode
+		 * @param id the id for the timer
+		 * @return the timer
 		 */
 		public CPUTimer getCurrentTimer(String id)
 		{
@@ -173,9 +175,10 @@ public class CPUTimer
 		}
 
 		/**
-		 * get the summary of all matching timers
+		 * get the summary of all matching timers over all threads
+		 * 
 		 * @param id if null get all
-		 * @return
+		 * @return  a disposable summary timer
 		 */
 		public CPUTimer getGlobalTimer(String id)
 		{
@@ -213,20 +216,24 @@ public class CPUTimer
 		}
 
 		/**
-		 * 
-		 * @param id
-		 * @return
+		 * get the CPUTimer for a given ID for this thread, create it if it does not yet exist
+		 * the timer is in paused mode
+		 * @param id the id for the timer
+		 * @return the timer
 		 */
 		public CPUTimer getCreateCurrentTimer(String id)
 		{
-			CPUTimer ct = globalMap.get(new ThreadIdentifier(id));
-			if (ct == null)
+			synchronized (globalMap)
 			{
-				ct = new CPUTimer(false);
-				ct.setName(id);
-				globalMap.put(new ThreadIdentifier(id), ct);
+				CPUTimer ct = globalMap.get(new ThreadIdentifier(id));
+				if (ct == null)
+				{
+					ct = new CPUTimer(false);
+					ct.setName(id);
+					globalMap.put(new ThreadIdentifier(id), ct);
+				}
+				return ct;
 			}
-			return ct;
 		}
 
 		/**
@@ -387,6 +394,20 @@ public class CPUTimer
 		totalT0 = getTotalRealTime();
 		cpuT0 = -1;
 		currentT0 = -1;
+	}
+
+	/**
+	 * stop/pause measuring times - decrement the number of start/stop so that we don'r recount the next start
+	 * 
+	 *
+	 */
+	public void pause()
+	{
+		if (currentT0 <= 0)
+			return;
+
+		stop();
+		nStartStop--;
 	}
 
 	/**

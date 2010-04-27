@@ -74,6 +74,7 @@ package org.cip4.jdflib.resource.process;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -94,9 +95,28 @@ public class JDFColorTest extends JDFTestCaseBase
 	public void testSetRawName()
 	{
 		final JDFColor c = cp.appendColor();
-		final byte[] b = "grün".getBytes();
+		final byte[] b = "grÃ¼n".getBytes();
 		c.set8BitNames(b);
-		assertEquals(c.get8BitName(), "grün");
+		assertEquals(c.get8BitName(), "grÃ¼n");
+	}
+
+	/**
+	 * 
+	 */
+	public void testDuplicateName()
+	{
+		final JDFColor c = cp.appendColorWithName("a", "a");
+		final JDFColor c1 = cp.appendColorWithName("a2", null);
+		final JDFColor c2 = cp.appendColor();
+		c2.setName("a");
+		assertTrue(c2.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
+		assertFalse(c1.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
+		assertFalse(c.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("Name"));
+		final JDFColor c3 = cp.appendColor();
+		c3.setName("aa");
+		c3.set8BitNames("a".getBytes());
+		assertTrue(c3.getInvalidAttributes(EnumValidationLevel.Incomplete, false, 0).contains("RawName"));
+
 	}
 
 	/**
