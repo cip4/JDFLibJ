@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -138,6 +138,7 @@ import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.VectorMap;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -4601,32 +4602,29 @@ public class JDFElement extends KElement
 	 * 
 	 * @param idUsage usage to set the attribute to
 	 * @param idValue value to set the attribute to
+	 * @return the newly set GeneralID
 	 */
-	public void setGeneralID(final String idUsage, final String idValue)
+	public JDFGeneralID setGeneralID(final String idUsage, final String idValue)
 	{
-		JDFGeneralID gid = null;
-
+		final JDFGeneralID gid;
 		final VElement v = getChildElementVector_JDFElement(ElementName.GENERALID, null, new JDFAttributeMap(AttributeName.IDUSAGE, idUsage), true, 0, true);
-		if (v.size() == 0)
-		{
-			gid = (JDFGeneralID) appendElement(ElementName.GENERALID);
-		}
-		else if (v.size() >= 1)
+		if (v.size() >= 1)
 		{
 			gid = (JDFGeneralID) v.elementAt(0);
 
+			// remove any duplicates
 			for (int i = 1; i < v.size(); i++)
 			{
-				// remove any duplicates
-				(v.elementAt(i)).deleteNode();
+				v.elementAt(i).deleteNode();
 			}
-		}
-
-		if (gid != null)
-		{
 			gid.setIDValue(idValue);
 			gid.setIDUsage(idUsage);
 		}
+		else
+		{
+			gid = appendGeneralID(idUsage, idValue);
+		}
+		return gid;
 	}
 
 	/**
@@ -4647,7 +4645,7 @@ public class JDFElement extends KElement
 	 * Gets IDValue of the GeneralID with IDUsage=idUsage null, if none exists
 	 * @param idUsage
 	 * 
-	 * @return double the attribute value
+	 * @return String the attribute value
 	 */
 	public String getGeneralID(final String idUsage)
 	{
@@ -4658,6 +4656,52 @@ public class JDFElement extends KElement
 		}
 		final JDFGeneralID gid = (JDFGeneralID) v.elementAt(0);
 		return gid.getIDValue();
+	}
+
+	/**
+	 * Gets a map of all GeneralID key-value Pair lists
+	 * if multiple generalIDs with the same IDUsage are specified, each GeneralID is added to the VectorMap
+	 * 
+	 * 
+	 * @return VectorMap<String, JDFGeneralID> the map of lists of attribute values
+	 */
+	public VectorMap<String, JDFGeneralID> getGeneralIDVectorMap()
+	{
+		final VElement v = getChildElementVector(ElementName.GENERALID, null);
+		if (v.size() == 0)
+		{
+			return null;
+		}
+		VectorMap<String, JDFGeneralID> vm = new VectorMap<String, JDFGeneralID>();
+		for (KElement e : v)
+		{
+			JDFGeneralID gid = (JDFGeneralID) e;
+			vm.putOne(gid.getIDUsage(), gid);
+		}
+		return vm;
+	}
+
+	/**
+	 * Gets a map of all GeneralID key-value Pairs
+	 * if multiple generalIDs with the same IDUsage are specified, the last one is added to the map
+	 * 
+	 * 
+	 * @return JDFAttributeMap the map of attribute values
+	 */
+	public JDFAttributeMap getGeneralIDMap()
+	{
+		final VElement v = getChildElementVector(ElementName.GENERALID, null);
+		if (v.size() == 0)
+		{
+			return null;
+		}
+		JDFAttributeMap m = new JDFAttributeMap();
+		for (KElement e : v)
+		{
+			JDFGeneralID gid = (JDFGeneralID) e;
+			m.put(gid.getIDUsage(), gid.getIDValue());
+		}
+		return m;
 	}
 
 	// ////////////////////////////////////////////////////////////////////

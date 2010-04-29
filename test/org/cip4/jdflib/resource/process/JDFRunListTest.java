@@ -124,7 +124,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl1.getNPage(), 3);
 		assertEquals(rl2.getNPage(), 3);
 
-		rl.collapse(false);
+		rl.collapse(false, true);
 		assertEquals(rl.getNPage(), 6);
 		assertEquals(rl1.getNPage(), 3);
 		assertEquals(rl2.getNPage(), 3);
@@ -134,7 +134,7 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl.getNPage(), 9);
 		assertEquals(rl1.getNPage(), 3);
 		assertEquals(rl2.getNPage(), 3);
-		rl.collapse(false);
+		rl.collapse(false, true);
 		assertEquals(rl.getNPage(), 9);
 		assertEquals(rl1.getNPage(), 3);
 		assertEquals(rl2.getNPage(), 3);

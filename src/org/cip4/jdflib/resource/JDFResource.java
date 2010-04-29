@@ -4224,7 +4224,7 @@ public class JDFResource extends JDFElement
 	/**
 	 * Expand so that each leaf is complete (except for ID)
 	 * 
-	 * @param bDeleteFromNode removes all intermediate elements and attributes
+	 * @param bDeleteFromNode if true, removes all intermediate elements and attributes
 	 * 
 	 * @default expand(false)
 	 */
@@ -4342,7 +4342,9 @@ public class JDFResource extends JDFElement
 	 * @param bCollapseToNode only collapse redundant attriutes and elements that pre-exist in the nodes
 	 * 
 	 * @default Collapse(false)
+	 * @deprecated - use 2 parameter version
 	 */
+	@Deprecated
 	public void collapse(final boolean bCollapseToNode)
 	{
 		collapse(bCollapseToNode, true);
@@ -4394,9 +4396,8 @@ public class JDFResource extends JDFElement
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// ///////////////////////////////
 
-	protected void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
+	private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
 	{
 		final int localSize = localLeaves.size();
 		for (int j = 0; j < atts.size(); j++)
@@ -4467,37 +4468,32 @@ public class JDFResource extends JDFElement
 			final VElement localNamedElements0 = (localLeaves.elementAt(0)).getChildElementVector(nodeName, null, null, true, 0, false);
 
 			final int elm0Size = localNamedElements0.size();
-			// true if all elements of all local leaves are equal and in the
-			// correct sequence
+			// true if all elements of all local leaves are equal and in the correct sequence
 			// if elm0size==0 we have nothing to do - leave loop
 			boolean bElmEqual = elm0Size > 0;
+
+			if ((bCollapseToNode || vParentElm.size() > 0) && vParentElm.size() != elm0Size)
+				bElmEqual = false;
+
 			// only collapse if pre-existing elements exist in the nodes
-			if (bCollapseToNode && bElmEqual)
+			if (bElmEqual && elm0Size == vParentElm.size())
 			{
-				if (elm0Size == vParentElm.size())
+				// loop over all elements of leaf 0 and compare with the parent leaf
+				for (int kk = 0; kk < elm0Size; kk++)
 				{
-					// loop over all elements of leaf 0 and compare with the
-					// parent leaf
-					for (int kk = 0; kk < elm0Size; kk++)
+					final KElement kelem1 = localNamedElements0.elementAt(kk);
+					final KElement kelem2 = vParentElm.elementAt(kk);
+					if (!kelem1.isEqual(kelem2))
 					{
-						final KElement kelem1 = localNamedElements0.elementAt(kk);
-						final KElement kelem2 = vParentElm.elementAt(kk);
-						if (!kelem1.isEqual(kelem2))
-						{
-							bElmEqual = false;
-							break;
-						}
+						bElmEqual = false;
+						break;
 					}
 				}
-				else
-				{
-					bElmEqual = false;
-				}
 			}
+
 			if (bElmEqual)
 			{
-				// loop over all local leaves except 0 (which is the one we
-				// compare to)
+				// loop over all local leaves except 0 (which is the one we compare to)
 				for (int k = 1; k < localSize; k++)
 				{
 					// vector of elements for leaf k.
@@ -4508,10 +4504,8 @@ public class JDFResource extends JDFElement
 						bElmEqual = false;
 						break;
 					}
-					// the number of elements is identical, now compare each one
-					// individually
-					// note that the sequence is important and
-					// thus we don't have to check ordering permutations
+					// the number of elements is identical, now compare each one individually
+					// note that the sequence is important and thus we don't have to check ordering permutations
 					for (int kk = 0; kk < elm0Size; kk++)
 					{
 						if (!(localNamedElements0.elementAt(kk)).isEqual(localNamedElements.elementAt(kk)))
@@ -4543,8 +4537,7 @@ public class JDFResource extends JDFElement
 				{
 					(localLeaves.elementAt(kk)).removeChildren(nodeName, null, null);
 				}
-				// not all children are equal, but maybe this one individual; if
-				// so -> ciao
+				// not all children are equal, but maybe this one individual; if so -> ciao
 			}
 			else if (vParentElm.size() == vLocalElm.size())
 			{

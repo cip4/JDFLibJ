@@ -1515,25 +1515,29 @@ public class JDFRunList extends JDFAutoRunList
 	// /// End of iterator class /////
 
 	/**
-	 * @see org.cip4.jdflib.resource.JDFResource#collapse(boolean)
-	 * @param bCollapseToNode
-	*/
+	 * collapse all redundant attributes and elements
+	 * 
+	 * @param bCollapseToNode only collapse redundant attriutes and elements that pre-exist in the nodes
+	 * @param bCollapseElements if true, collapse elements, else only collapse attributes
+	 * 
+	 * @default Collapse(false)
+	 */
 	@Override
-	public void collapse(final boolean bCollapseToNode)
+	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 	{
-		super.collapse(bCollapseToNode);
+		super.collapse(bCollapseToNode, bCollapseElements);
 		fixNPage();
 	}
 
 	/**
 	 * @see org.cip4.jdflib.resource.JDFResource#expand(boolean)
-	 * @param bCollapseToNode
+	 * @param bDeleteFromNode if true, removes all intermediate elements and attributes
 	*/
 	@Override
-	public void expand(final boolean bCollapseToNode)
+	public void expand(final boolean bDeleteFromNode)
 	{
 		fixNPage();
-		super.expand(bCollapseToNode);
+		super.expand(bDeleteFromNode);
 	}
 
 	/**

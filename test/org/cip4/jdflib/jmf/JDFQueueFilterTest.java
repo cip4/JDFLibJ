@@ -80,6 +80,7 @@ import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.node.NodeIdentifier;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -165,6 +166,41 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertTrue(statusList.contains(EnumQueueEntryStatus.Completed));
 		assertTrue(statusList.contains(EnumQueueEntryStatus.Aborted));
 		assertFalse(statusList.contains(EnumQueueEntryStatus.Running));
+	}
+
+	/**
+	 *  
+	 */
+	public void testGetIdentifier()
+	{
+		NodeIdentifier ni = new NodeIdentifier("j1", "p1", null);
+		filter.setIdentifier(ni);
+		assertEquals(filter.getIdentifier(), ni);
+	}
+
+	/**
+	 * 
+	 * @throws Exception
+	 */
+	public void testMatchesGeneralID() throws Exception
+	{
+		final JDFQueueEntry qe1 = theQueue.appendQueueEntry();
+		qe1.setGeneralID("ProductThing", "a1");
+		final JDFQueueEntry qe2 = theQueue.appendQueueEntry();
+		qe2.setGeneralID("ProductThing", "a2");
+		filter.setGeneralID("ProductThing", "a1");
+		assertTrue(filter.matches(qe1));
+		assertFalse(filter.matches(qe2));
+		filter.appendGeneralID("ProductThing", "a2");
+		assertTrue(filter.matches(qe1));
+		assertTrue(filter.matches(qe2));
+		filter.setGeneralID("ProductThing", "a0");
+		assertFalse(filter.matches(qe1));
+		assertFalse(filter.matches(qe2));
+		filter.setGeneralID("ProductThing", "a(.)?");
+		assertTrue(filter.matches(qe1));
+		assertTrue(filter.matches(qe2));
+
 	}
 
 	/**

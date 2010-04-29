@@ -98,15 +98,19 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.INodeIdentifiable;
+import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFDevice;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.VectorMap;
 
 /**
  *
  */
-public class JDFQueueFilter extends JDFAutoQueueFilter
+public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifiable
 {
 	private class QueueMatcher
 	{
@@ -462,7 +466,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		return null;
 	}
 
-	class QueueEntryMatcher
+	protected class QueueEntryMatcher
 	{
 		Set<String> qeDefs;
 		Set<String> devIDs;
@@ -470,8 +474,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		VString statusList;
 		String jobID;
 		String jobPartID;
+		VectorMap<String, JDFGeneralID> generalIDS;
 
-		QueueEntryMatcher()
+		protected QueueEntryMatcher()
 		{
 			qeDefs = getQueueEntryDefSet();
 			devIDs = getDeviceIDSet();
@@ -495,6 +500,16 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 				{
 					statusList.add(e.getName());
 				}
+			}
+
+			VElement v = getChildElementVector(ElementName.GENERALID, null);
+			if (v.size() == 0)
+			{
+				generalIDS = null;
+			}
+			else
+			{
+				generalIDS = getGeneralIDVectorMap();
 			}
 		}
 
@@ -543,6 +558,60 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 			if (jobPartID != null && !StringUtil.matches(jobPartID, qe.getJobPartID()))
 			{
 				return false;
+			}
+			// TODO define relationship of n-m overlap in filter and qe
+			if (generalIDS != null)
+			{
+				boolean b = matchesGeneralIDs(qe);
+				if (!b)
+					return false;
+			}
+			return true;
+		}
+
+		/**
+		 * @param qe
+		 * @return true if all generalID elements match
+		 */
+		private boolean matchesGeneralIDs(final JDFQueueEntry qe)
+		{
+			VectorMap<String, JDFGeneralID> qeGeneralIDS = qe.getGeneralIDVectorMap();
+
+			// assume all entries in filter must exist 
+			if (qeGeneralIDS.size() < generalIDS.size())
+			{
+				return false;
+			}
+
+			Set<String> keys = generalIDS.keySet();
+			// loop over all keys of filter and require at least one matching qe entry per key
+			for (String key : keys)
+			{
+				Vector<JDFGeneralID> qeGIDs = qeGeneralIDS.get(key);
+				if (qeGIDs == null) // we have no matching entry to filter in qe
+					return false;
+
+				Vector<JDFGeneralID> filterGIDs = generalIDS.get(key);
+				boolean gotIt = false;
+
+				// loop over all filters with this key
+				for (JDFGeneralID filterValue : filterGIDs)
+				{
+					// loop over all generalids with key in qe
+					for (JDFGeneralID qeValue : qeGIDs)
+					{
+						if (qeValue.matches(filterValue))
+						{
+							// at least one entry matches - check next key filter
+							gotIt = true;
+							break;
+						}
+					}
+					if (gotIt) // one match is enough
+						break;
+				}
+				if (!gotIt) // one mismatch for any key is enough for a mismatch
+					return false;
 			}
 			return true;
 		}
@@ -666,4 +735,28 @@ public class JDFQueueFilter extends JDFAutoQueueFilter
 		return queueMatcher.copyTo(resp);
 	}
 
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#getIdentifier()
+	 * @return
+	*/
+	public NodeIdentifier getIdentifier()
+	{
+		return new NodeIdentifier(getJobID(), getJobPartID(), getPartMapVector());
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.INodeIdentifiable#setIdentifier(org.cip4.jdflib.node.NodeIdentifier)
+	 * @param ni
+	*/
+	public void setIdentifier(NodeIdentifier ni)
+	{
+		if (ni == null)
+		{
+			ni = new NodeIdentifier();
+		}
+
+		setJobID(ni.getJobID());
+		setJobPartID(ni.getJobPartID());
+		setPartMapVector(ni.getPartMapVector());
+	}
 }

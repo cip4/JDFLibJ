@@ -181,6 +181,7 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testSprintfString()
 	{
+		assertEquals(StringUtil.sprintf("part_%04i.txt", "" + 6), "part_0006.txt");
 		assertEquals(StringUtil.sprintf("abc%03idef", "5"), "abc005def");
 		assertEquals(StringUtil.sprintf("abc%03idef", "5.0"), "abc005def");
 		assertEquals(StringUtil.sprintf("abc%03i%02idef", "5.0,5"), "abc00505def");
@@ -435,6 +436,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matches("ab", "a(.*)"));
 		assertTrue(StringUtil.matches("a", "a(.*)"));
 		assertFalse(StringUtil.matches("a", "a(.(.*))"));
+
+		assertTrue(StringUtil.matches("a b", "a b"));
+		assertTrue(StringUtil.matches("abc123ä", "abc123ä"));
 	}
 
 	/**

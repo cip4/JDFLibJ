@@ -301,6 +301,16 @@ public class JDFElementTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testGetGeneralID()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setGeneralID("Foo", "Bar1");
+		assertEquals(n.getGeneralID("Foo"), "Bar1");
+	}
+
+	/**
+	* 
+	*/
 	public void testGetHRefs()
 	{
 		final JDFDoc d = new JDFDoc("JDF");

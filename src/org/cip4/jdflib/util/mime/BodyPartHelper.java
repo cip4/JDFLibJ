@@ -13,6 +13,7 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.internet.MimeBodyPart;
 
 import org.cip4.jdflib.core.JDFConstants;
@@ -138,6 +139,12 @@ public class BodyPartHelper
 			// nop
 		}
 		s = getContentID();
+		if (s == null)
+		{
+			int index = getIndex();
+			s = StringUtil.sprintf("part_%04i.txt", "" + index);
+		}
+
 		return s;
 	}
 
@@ -330,6 +337,24 @@ public class BodyPartHelper
 		final String fileName = getFileName();
 		final File outFile = new File(directory.getPath() + File.separator + fileName);
 		FileUtil.streamToFile(getInputStream(), outFile);
+	}
+
+	/**
+	 * @return
+	 */
+	public int getIndex()
+	{
+		Multipart mp = theBodyPart.getParent();
+		if (mp == null)
+			return 0;
+		MimeHelper mh = new MimeHelper(mp);
+		BodyPart[] bps = mh.getBodyParts();
+		for (int i = 0; i < bps.length; i++)
+		{
+			if (bps[i] == theBodyPart)
+				return i;
+		}
+		return 0;
 	}
 
 	/**

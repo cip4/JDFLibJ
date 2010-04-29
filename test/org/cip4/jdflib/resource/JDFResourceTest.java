@@ -1869,9 +1869,46 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////////////////
 	/**
-	 * test expand and collapse methods
+	 * test expand and collapse method for subelements
 	 */
 	public void testCollapseElement()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFRunList rl = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
+		final JDFLayoutElement le = rl.appendLayoutElement();
+		final JDFSeparationSpec ss1 = le.appendSeparationSpec();
+		ss1.setName("n1");
+		final JDFRunList rl1 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r1");
+		rl1.copyElement(le, null);
+		final JDFRunList rl2 = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "r2");
+		rl2.copyElement(le, null);
+		ss1.setName("n2");
+		rl.collapse(false, false);
+		assertNotSame("no collapse elements", rl.getLayoutElement(), rl1.getLayoutElement());
+		rl.collapse(false, true);
+		assertNotSame("root element is different", rl.getLayoutElement(), rl1.getLayoutElement());
+		ss1.setName("n1");
+		rl.collapse(false, false);
+		assertNotSame("no collapse elements", rl.getLayoutElement(), rl1.getLayoutElement());
+		rl.collapse(false, true);
+		assertEquals("root element is same", rl.getLayoutElement(), rl1.getLayoutElement());
+		rl.expand(false);
+		assertNotSame("expanded elements", rl.getLayoutElement(), rl1.getLayoutElement());
+		rl.collapse(true, true);
+		assertEquals("root element is same", rl.getLayoutElement(), rl1.getLayoutElement());
+		rl.expand(true);
+		assertNull("expanded elements", rl.getLayoutElement());
+		assertNotSame("expanded elements", rl.getLayoutElement(), rl1.getLayoutElement());
+		rl.collapse(true, true);
+		assertNull("no root element for collapse", rl.getLayoutElement());
+		assertNotSame("no root element for collapse", rl.getLayoutElement(), rl1.getLayoutElement());
+	}
+
+	// //////////////////////////////////////////////////////////////////
+	/**
+	 * test expand and collapse methods
+	 */
+	public void testCollapseSubElement()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
 		final JDFNode n = doc.getJDFRoot();
@@ -1883,16 +1920,17 @@ public class JDFResourceTest extends JDFTestCaseBase
 		ss2.setName("n2");
 		rl.addPartition(EnumPartIDKey.Run, "r1");
 		rl.addPartition(EnumPartIDKey.Run, "r2");
-		rl.collapse(true);
+		rl.collapse(true, true);
 		assertEquals(le.getSeparationSpec(0), ss1);
 		assertEquals(le.getSeparationSpec(1), ss2);
-		rl.collapse(false);
+
+		rl.collapse(false, true);
 		assertEquals(le.getSeparationSpec(0), ss1);
 		assertEquals(le.getSeparationSpec(1), ss2);
-		le.collapse(true);
+		le.collapse(true, true);
 		assertEquals(le.getSeparationSpec(0), ss1);
 		assertEquals(le.getSeparationSpec(1), ss2);
-		le.collapse(false);
+		le.collapse(false, true);
 		assertEquals(le.getSeparationSpec(0), ss1);
 		assertEquals(le.getSeparationSpec(1), ss2);
 	}
@@ -1963,8 +2001,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFNode n = doc.getJDFRoot();
 
 		final JDFDigitalPrintingParams dpp = (JDFDigitalPrintingParams) n.addResource(ElementName.DIGITALPRINTINGPARAMS, null, EnumUsage.Input, null, null, null, null);
-		dpp.collapse(true);
-		dpp.collapse(false);
+		dpp.collapse(true, true);
+		dpp.collapse(false, true);
 
 		final JDFRunList rl = (JDFRunList) n.getMatchingResource("RunList", JDFNode.EnumProcessUsage.AnyInput, null, 0);
 		final JDFAttributeMap map = new JDFAttributeMap();
@@ -1980,24 +2018,24 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertTrue(rlRun.getIsPage());
 
 		assertFalse(rlSep.getIsPage());
-		rlRun.collapse(true);
+		rlRun.collapse(true, true);
 		assertTrue(rlRun.getIsPage());
 		assertFalse(rlSep.getIsPage());
 		assertTrue(rlSet.getIsPage());
 		assertTrue(rl.getIsPage());
-		rlRun.collapse(false);
+		rlRun.collapse(false, true);
 		assertTrue(rlRun.getIsPage());
 		assertFalse(rlSep.getIsPage());
 		assertTrue(rlSet.getIsPage());
 		assertTrue(rl.getIsPage());
 		rlRun.setRunTag("foo");
 		rlRun.expand(true);
-		rlRun.collapse(false);
+		rlRun.collapse(false, true);
 		assertTrue(rlRun.hasAttribute(AttributeName.RUNTAG));
 		assertFalse(rlSep.hasAttribute(AttributeName.RUNTAG));
 		assertFalse(rlSet.hasAttribute(AttributeName.RUNTAG));
 		rlRun.expand(true);
-		rlRun.collapse(true);
+		rlRun.collapse(true, true);
 		assertFalse(rlRun.hasAttribute(AttributeName.RUNTAG));
 		assertTrue(rlSep.hasAttribute(AttributeName.RUNTAG));
 		assertFalse(rlSet.hasAttribute(AttributeName.RUNTAG));
@@ -2033,9 +2071,9 @@ public class JDFResourceTest extends JDFTestCaseBase
 		xm.setBrand("rootBrand");
 		xm.setGeneralID("testID", "rootValue");
 		xm.expand(false);
-		xm.collapse(true);
+		xm.collapse(true, true);
 		xm.expand(true);
-		xm.collapse(false);
+		xm.collapse(false, true);
 
 		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SheetName", "S1");
@@ -2057,7 +2095,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertFalse("has part Key", xmPart.hasAttribute_KElement(AttributeName.SHEETNAME, null, false));
 		assertFalse("has part Key", xmPart2.hasAttribute_KElement(AttributeName.SHEETNAME, null, false));
 
-		xm.collapse(false);
+		xm.collapse(false, true);
 		assertEquals("expanded sub after collapse", xmPart.getBrand(), "PartBrand");
 		assertEquals("expanded sub after collapse", xmPart.getGeneralID("testID"), "partValue");
 		assertEquals("expanded sub2 after collapse", xmPart2.getBrand(), "rootBrand");
@@ -2079,7 +2117,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertFalse("has part Key", xmPart.hasAttribute_KElement(AttributeName.SHEETNAME, null, false));
 		assertFalse("has part Key", xmPart2.hasAttribute_KElement(AttributeName.SHEETNAME, null, false));
 
-		xmPart3.collapse(false);
+		xmPart3.collapse(false, true);
 		assertFalse("hasBrand", xmPart2.hasAttribute_KElement("Brand", null, false));
 		assertTrue("hasBrand", xmPart3.hasAttribute_KElement("Brand", null, false));
 		assertFalse("hasID", xmPart2.getElement_KElement("GeneralID", null, 0) != null);
@@ -2090,7 +2128,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertFalse("hasBrand", xmPart2.hasAttribute_KElement("Brand", null, false));
 		assertTrue("hasID", xmPart4.getElement_KElement("GeneralID", null, 0) != null);
 		assertFalse("hasID", xmPart2.getElement_KElement("GeneralID", null, 0) != null);
-		xmPart3.collapse(false);
+		xmPart3.collapse(false, true);
 		assertFalse("hasBrand", xmPart4.hasAttribute_KElement("Brand", null, false));
 		assertTrue("hasBrand", xmPart3.hasAttribute_KElement("Brand", null, false));
 		assertFalse("hasID", xmPart4.getElement_KElement("GeneralID", null, 0) != null);

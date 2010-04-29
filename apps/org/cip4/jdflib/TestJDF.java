@@ -13,9 +13,11 @@ import java.io.File;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.JDFSpawn;
 
 /**
@@ -34,6 +36,28 @@ public class TestJDF
 	 * @param argv
 	 */
 	public static void main(final String[] argv)
+	{
+		testCollapse();
+	}
+
+	/**
+	 * 
+	 */
+	private static void testCollapse()
+	{
+		final JDFDoc d = new JDFParser().parseFile("C:/data/jdf/signa/collapse/data.jdf");
+		final JDFNode n = d.getJDFRoot();
+		JDFRunList r = (JDFRunList) n.getResource("RunList", EnumUsage.Input, 1);
+		r.getLayoutElement().deleteNode();
+		r.collapse(false, true);
+
+		d.write2File("C:/data/jdf/signa/collapse/data2.jdf", 2, false);
+	}
+
+	/**
+	 * 
+	 */
+	private static void testSpawn()
 	{
 		final JDFDoc d = new JDFParser().parseFile("C:\\temp\\IdenticalPlate.jdf");
 		final JDFNode n = d.getJDFRoot().getJobPart("ImO2.I", null);

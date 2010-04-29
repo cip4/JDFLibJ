@@ -261,21 +261,16 @@ public class StringUtil
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format
 	 */
-	public static String sprintf(final String format, final String template)
+	public static String sprintf(final String format, String template)
 	{
-		String templateLocal = template;
-
-		if (templateLocal == null || format == null)
+		if (template == null || format == null)
 		{
 			return null;
 		}
-		templateLocal = StringUtil.replaceString(templateLocal, "\\,", "__comma__��-eher selten"); // quick
-		// hack
-		// ;
-		// -
-		// )
+		template = StringUtil.replaceString(template, "\\,", "__comma__äö-eher selten"); // quick
+		// hack ;-)
 
-		final VString vTemplate = tokenize(templateLocal, ",", false);
+		final VString vTemplate = tokenize(template, ",", false);
 		final Object[] vObj = new Object[vTemplate.size()];
 		for (int i = 0; i < vObj.length; i++)
 		{
@@ -290,11 +285,8 @@ public class StringUtil
 			}
 			else
 			{
-				vObj[i] = StringUtil.replaceString(s, "__comma__��-eher selten", ","); // quick
-				// hack
-				// ;
-				// -
-				// )
+				vObj[i] = StringUtil.replaceString(s, "__comma__äö-eher selten", ","); // quick
+				// hack ;-)
 			}
 		}
 		return sprintf(format, vObj);
@@ -320,11 +312,8 @@ public class StringUtil
 			return null;
 		}
 
-		formatLocal = StringUtil.replaceString(formatLocal, "%%", "__percent__��-eher selten"); // quick
-		// hack
-		// ;
-		// -
-		// )
+		formatLocal = StringUtil.replaceString(formatLocal, "%%", "__percent__äö-eher selten"); // quick
+		// hack ;-)
 		final boolean bStart = formatLocal.startsWith("%");
 		final VString tokens = tokenize(formatLocal, "%", false);
 		final int nStart = (bStart ? 0 : 1);
@@ -359,7 +348,7 @@ public class StringUtil
 			}
 		}
 
-		return replaceString(s, "__percent__��-eher selten", "%"); // undo quick
+		return replaceString(s, "__percent__äö-eher selten", "%"); // undo quick
 		// hack ;-)
 	}
 
