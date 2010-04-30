@@ -250,10 +250,12 @@ public class CPUTimer
 	/**    -----------    end of private classes    -----------    **/
 
 	private long createT0;
-	private long currentT0;
+	private long realT0;
 	private long cpuT0;
-	private long totalT0;
-	private long totalCpuT0;
+	private long currentCPU;
+	private long currentReal;
+	private long totalReal;
+	private long toatalCPU;
 	private final ThreadMXBean bean;
 	private final boolean threadCpuTimeEnabled;
 	private int nStartStop;
@@ -273,10 +275,20 @@ public class CPUTimer
 	 */
 	public void add(CPUTimer timer)
 	{
-		totalT0 += timer.getTotalRealTime();
-		totalCpuT0 += timer.getTotalCPUTime();
+		totalReal += timer.totalReal;
+		toatalCPU += timer.toatalCPU;
 		nStartStop += timer.getNumStarts();
 		createT0 = Math.min(createT0, timer.getCreationTime());
+		long currentRealTime = timer.getCurrentRealTime();
+		if (currentRealTime > 0)
+		{
+			currentReal += currentRealTime;
+		}
+		long currentCPUTime = timer.getCurrentCPUTime();
+		if (currentCPUTime > 0)
+		{
+			currentCPU += currentCPUTime;
+		}
 	}
 
 	/**
@@ -296,10 +308,12 @@ public class CPUTimer
 		super();
 		bean = ManagementFactory.getThreadMXBean();
 		threadCpuTimeEnabled = bean.isThreadCpuTimeEnabled();
-		currentT0 = -1;
+		realT0 = -1;
+		currentCPU = 0;
+		currentReal = 0;
 		cpuT0 = -1;
-		totalCpuT0 = 0;
-		totalT0 = 0;
+		toatalCPU = 0;
+		totalReal = 0;
 		nStartStop = 0;
 		createT0 = System.currentTimeMillis();
 		if (bStart)
@@ -316,7 +330,7 @@ public class CPUTimer
 	{
 		if (!threadCpuTimeEnabled)
 			return -1;
-		return totalCpuT0 + getCurrentCPUTime();
+		return toatalCPU + getCurrentCPUTime();
 	}
 
 	/**
@@ -327,9 +341,9 @@ public class CPUTimer
 		if (!threadCpuTimeEnabled)
 			return -1;
 		else if (cpuT0 > 0)
-			return bean.getCurrentThreadCpuTime() - cpuT0;
+			return currentCPU + bean.getCurrentThreadCpuTime() - cpuT0;
 		else
-			return 0;
+			return currentCPU;
 	}
 
 	/**
@@ -347,22 +361,21 @@ public class CPUTimer
 	 * method to get the amount of real time since construction in milliseconds
 	 * @return amount of real in milliseconds
 	 * 
-	 *
 	 */
 	public long getTotalRealTime()
 	{
-		return totalT0 + getCurrentRealTime();
+		return totalReal + getCurrentRealTime();
 	}
 
 	/**
-	 * @return
+	 * @return the current realtime im milliseconds
 	 */
 	public long getCurrentRealTime()
 	{
-		if (currentT0 > 0)
-			return System.currentTimeMillis() - currentT0;
+		if (realT0 > 0)
+			return currentReal + System.currentTimeMillis() - realT0;
 		else
-			return 0;
+			return currentReal;
 	}
 
 	/**
@@ -372,11 +385,11 @@ public class CPUTimer
 	 */
 	public void start()
 	{
-		if (currentT0 > 0)
+		if (realT0 > 0)
 			return;
 		if (threadCpuTimeEnabled)
 			cpuT0 = bean.getCurrentThreadCpuTime();
-		currentT0 = System.currentTimeMillis();
+		realT0 = System.currentTimeMillis();
 		nStartStop++;
 	}
 
@@ -387,13 +400,13 @@ public class CPUTimer
 	 */
 	public void stop()
 	{
-		if (currentT0 <= 0)
+		if (realT0 <= 0)
 			return;
 		if (threadCpuTimeEnabled)
-			totalCpuT0 = getTotalCPUTime();
-		totalT0 = getTotalRealTime();
+			toatalCPU = getTotalCPUTime();
+		totalReal = getTotalRealTime();
 		cpuT0 = -1;
-		currentT0 = -1;
+		realT0 = -1;
 	}
 
 	/**
@@ -403,7 +416,7 @@ public class CPUTimer
 	 */
 	public void pause()
 	{
-		if (currentT0 <= 0)
+		if (realT0 <= 0)
 			return;
 
 		stop();
@@ -445,7 +458,7 @@ public class CPUTimer
 		if (name != null)
 			label += getName();
 		return label + " totalCPU=" + getTotalCPUTime() / 1000000000. + " currentCPU=" + getCurrentCPUTime() / 1000000000. + " totalT=" + getTotalRealTime() / 1000. + " currentT="
-				+ getCurrentRealTime() / 1000. + " starts=" + nStartStop + " active=" + (currentT0 > 0);
+				+ getCurrentRealTime() / 1000. + " starts=" + nStartStop + " active=" + (realT0 > 0);
 	}
 
 	/**
@@ -455,13 +468,14 @@ public class CPUTimer
 	public KElement toXML()
 	{
 		KElement root = new XMLDoc("CPUTimer", null).getRoot();
+		root.setAttribute("Name", getName(), null);
 		root.setAttribute("TotalRealTime", getTotalRealTime() / 1000., null);
 		root.setAttribute("CurrentRealTime", getCurrentRealTime() / 1000., null);
 		root.setAttribute("AverageRealTime", getAverageRealTime() / 1000., null);
 		root.setAttribute("TotalCPUTime", getTotalCPUTime() / 1000000000., null);
 		root.setAttribute("CurrentCPUTime", getCurrentCPUTime() / 1000000000., null);
 		root.setAttribute("AverageCPUTime", getAverageCPUTime() / 1000000000., null);
-		root.setAttribute("CreationTime", new JDFDate(getCreationTime()).getFormattedDateTime("hh:mm ss.sss"), null);
+		root.setAttribute("CreationTime", new JDFDate(getCreationTime()).getFormattedDateTime("dd MMM, HH:mm:ss.sss"), null);
 		root.setAttribute("StartStop", getNumStarts(), null);
 		return root;
 	}

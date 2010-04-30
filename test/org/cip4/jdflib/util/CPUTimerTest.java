@@ -172,10 +172,11 @@ public class CPUTimerTest extends JDFTestCaseBase
 			{
 				t.toXML();
 			}
-			t1.stop();
 			t.add(t1);
 			l += t1.getTotalRealTime();
 			lCPU += t1.getTotalCPUTime();
+			t1.stop();
+
 		}
 		System.out.print(t.toXML());
 		assertTrue(t.getTotalCPUTime() > 0);

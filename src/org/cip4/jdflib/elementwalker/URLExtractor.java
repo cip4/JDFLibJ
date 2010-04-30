@@ -72,11 +72,14 @@
 package org.cip4.jdflib.elementwalker;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen 
@@ -118,10 +121,11 @@ public class URLExtractor extends BaseElementWalker
 
 	protected File dir;
 	protected String baseURL;
+	protected Set<URLProtocol> protocols;
 
 	/**
 	 * @param dumpDir the local directory
-	 * @param baseURL the base url, for instance in a http server environment
+	 * @param baseURL the base url, for instance in an http server environment
 	 */
 	public URLExtractor(final File dumpDir, final String baseURL)
 	{
@@ -129,6 +133,18 @@ public class URLExtractor extends BaseElementWalker
 		dir = dumpDir;
 		this.baseURL = baseURL;
 		nSaved = 0;
+		protocols = null;
+	}
+
+	/**
+	 * add a protocol to the list of protocols that are supported
+	 * @param protocol
+	 */
+	public void addProtocol(URLProtocol protocol)
+	{
+		if (protocols == null)
+			protocols = new HashSet<URLProtocol>();
+		protocols.add(protocol);
 	}
 
 	@Override
@@ -167,7 +183,12 @@ public class URLExtractor extends BaseElementWalker
 			String url = StringUtil.getNonEmpty(u.getURL());
 			if (url == null)
 				return e;
-
+			if (protocols != null)
+			{
+				URLProtocol protocol = UrlUtil.getProtocol(url);
+				if (!protocols.contains(protocol))
+					return e;
+			}
 			File newFile = UrlUtil.moveToDir(u, dir);
 			if (baseURL != null && newFile != null)
 			{

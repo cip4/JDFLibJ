@@ -339,7 +339,7 @@ public class JDFQueue extends JDFAutoQueue
 	public synchronized VElement getQueueEntryVector(final NodeIdentifier nid)
 	{
 		final VElement v = getQueueEntryVector();
-		if (nid == null || v == null)
+		if (nid == null || v == null || nid.equals(new NodeIdentifier()))
 		{
 			return v;
 		}

@@ -277,6 +277,21 @@ public class UrlUtil
 	public static final String BINARY = "binary";
 
 	/**
+	 * rough classification of protocol type
+	 * 
+	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public static enum URLProtocol
+	{
+		/** mime */
+		cid,
+		/** http or https */
+		http,
+		/*** file */
+		file
+	}
+
+	/**
 	 * returns the relative URL of a file relative to the current working directory
 	 * 
 	 * @param f the file to get the relative url for
@@ -659,7 +674,7 @@ public class UrlUtil
 			return null;
 		}
 
-		if (urlString.toLowerCase().startsWith("file:"))
+		if (isFile(urlString))
 		{
 			urlString = urlString.substring(5); // remove "file:"
 		}
@@ -864,11 +879,23 @@ public class UrlUtil
 		{
 			return true;
 		}
-		if (url.toLowerCase().startsWith("file:"))
+		if (isFile(url))
 		{
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * is this a valid file url
+	 * @param url
+	 * @return
+	 */
+	public static boolean isFile(final String url)
+	{
+		if (url == null)
+			return false;
+		return url.toLowerCase().startsWith("file:");
 	}
 
 	/**
@@ -967,6 +994,22 @@ public class UrlUtil
 		}
 		final String lower = packageName.toLowerCase();
 		return isMIMEExtenstension(lower);
+	}
+
+	/**
+	 * returns the general protocol type of a url
+	 * @param url
+	 * @return
+	 */
+	public static URLProtocol getProtocol(String url)
+	{
+		if (isCID(url))
+			return URLProtocol.cid;
+		if (isHttp(url) || isHttps(url))
+			return URLProtocol.http;
+		if (isFile(url))
+			return URLProtocol.file;
+		return null;
 	}
 
 	/**

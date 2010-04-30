@@ -94,6 +94,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeWriter;
 
@@ -116,6 +117,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.getLocalURL("foo/", "foo/bar"), "bar");
 		assertEquals(UrlUtil.getLocalURL(null, "foo/bar"), "foo/bar");
 		assertEquals(UrlUtil.getLocalURL("", "foo/bar"), "foo/bar");
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetURLProtocol()
+	{
+		assertEquals(null, UrlUtil.getProtocol(null));
+		assertEquals(URLProtocol.http, UrlUtil.getProtocol("http://foo.bar.com"));
+		assertEquals(URLProtocol.cid, UrlUtil.getProtocol("cid:blah"));
+		assertEquals(URLProtocol.file, UrlUtil.getProtocol("file:blah"));
 	}
 
 	/**
