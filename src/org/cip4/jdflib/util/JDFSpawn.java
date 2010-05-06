@@ -996,7 +996,9 @@ public class JDFSpawn
 	 */
 	private void updateSpawnIDsInMain(final String spawnID, final JDFResourceLink link, final VJDFAttributeMap vPartMap)
 	{
-		final JDFResource rMain = link.getLinkRoot();
+		JDFResource rMain = link.getLinkRoot();
+		if (rMain == null)
+			rMain = link.getLinkRoot();
 		final VElement vMainPart = rMain.getPartitionVector(vPartMap, null);
 		for (int kk = 0; kk < vMainPart.size(); kk++)
 		{

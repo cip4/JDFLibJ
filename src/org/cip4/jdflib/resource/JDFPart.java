@@ -75,7 +75,6 @@
 
 package org.cip4.jdflib.resource;
 
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -242,7 +241,6 @@ public class JDFPart extends JDFAutoPart
 		if (irlSet == null)
 		{
 			irlSet = new HashSet<String>();
-
 			irlSet.add(EnumPartIDKey.DocCopies.getName());
 			irlSet.add(EnumPartIDKey.DocIndex.getName());
 			irlSet.add(EnumPartIDKey.DocRunIndex.getName());
@@ -260,7 +258,6 @@ public class JDFPart extends JDFAutoPart
 		{
 			b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
 		}
-
 		else if (irlSet.contains(key))
 		{
 			b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.IntegerRangeList);
@@ -285,11 +282,10 @@ public class JDFPart extends JDFAutoPart
 			{
 				b = false;
 			}
-
 		}
 		else
 		{
-			b = resourceValue.equals(linkValue);
+			b = false;
 		}
 		return b;
 	}
@@ -308,10 +304,10 @@ public class JDFPart extends JDFAutoPart
 			return true; // null always overlaps with anything
 		}
 
-		final Enumeration<String> subMapEnum = linkMap.keys();
-		while (subMapEnum.hasMoreElements())
+		final Iterator<String> subMapEnum = linkMap.keySet().iterator();
+		while (subMapEnum.hasNext())
 		{
-			final String key = subMapEnum.nextElement();
+			final String key = subMapEnum.next();
 			final String resVal = resourceMap.get(key);
 
 			if (resVal != null)

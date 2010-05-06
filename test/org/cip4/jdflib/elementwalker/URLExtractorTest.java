@@ -127,6 +127,8 @@ public class URLExtractorTest extends JDFTestCaseBase
 		JDFDoc d = mr.getBodyPartHelper(0).getJDFDoc();
 		assertNotNull(d);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtract");
+		FileUtil.deleteAll(dumpDir);
+
 		URLExtractor ex = new URLExtractor(dumpDir, "http://foo");
 
 		// only file protocols are modified

@@ -80,6 +80,7 @@
 package org.cip4.jdflib.core;
 
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -172,6 +173,17 @@ public class VString extends Vector<String>
 		{
 			add(a[i]);
 		}
+	}
+
+	/**
+	 * creates a VString from an Enumeration of Strings
+	 * @param a the Enumeration
+	 */
+	public VString(Enumeration<String> a)
+	{
+		super();
+		while (a.hasMoreElements())
+			add(a.nextElement());
 	}
 
 	// **************************************** Methods *********************************************
@@ -286,7 +298,7 @@ public class VString extends Vector<String>
 		final int siz = size();
 		for (int i = 0; i < siz; i++)
 		{
-			if (s.equals(stringAt(i)))
+			if (s.equals(super.elementAt(i)))
 			{
 				return i;
 			}

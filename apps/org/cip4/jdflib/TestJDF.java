@@ -17,15 +17,21 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.CPUTimer;
+import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * < July 9, 2009
  */
-public class TestJDF
+public class TestJDF extends JDFTestCaseBase
 {
 	private static final String SEPARATOR = File.separator; // "/"; //
 	static protected final String sm_dirTestSchema = ".." + SEPARATOR + "schema" + SEPARATOR + "Version_1_3" + SEPARATOR;
@@ -37,7 +43,8 @@ public class TestJDF
 	 */
 	public static void main(final String[] argv)
 	{
-		testCollapse();
+		//		testCollapse();
+		testSpawn();
 	}
 
 	/**
@@ -57,28 +64,72 @@ public class TestJDF
 	/**
 	 * 
 	 */
-	private static void testSpawn()
+	public static void testSpawn()
 	{
-		final JDFDoc d = new JDFParser().parseFile("C:\\temp\\IdenticalPlate.jdf");
-		final JDFNode n = d.getJDFRoot().getJobPart("ImO2.I", null);
+		JDFResource.setUnpartitiondImplicit(true);
+		for (int ii = 0; ii < 2; ii++)
+		{
+			CPUTimer ct = new CPUTimer(true);
+			final JDFDoc d = new JDFParser().parseFile("C:/data/JDF/2010_03556/main.jdf");
+			JDFNode n = d.getJDFRoot().getJobPart("IPD3.I", null);
+			ct.stop();
+			System.out.println(ct);
+			JDFSpawn spawn = new JDFSpawn(n);
+			ct = new CPUTimer(false);
+			ct.setName("spawn");
+			CPUTimer ct1 = new CPUTimer(false);
+			ct1.setName("write");
+			CPUTimer ct2 = new CPUTimer(false);
+			ct2.setName("merge");
+			spawn.vRWResources_in = new VString("Output NodeInfo", null);
+			spawn.vSpawnParts = new VJDFAttributeMap();
+			JDFMerge m = new JDFMerge(d.getJDFRoot());
+			for (int i = 1; i < 250; i++)
+			{
+				ct.start();
+				String s = StringUtil.sprintf("%03i", "" + i);
+				//		spawn.vSpawnParts = null;
+				JDFAttributeMap map = new JDFAttributeMap();
+				map.put("SignatureName", "Sig" + s);
+				map.put("SheetName", "FB " + s);
+				map.put("Side", "Front");
+				if (ii == 0)
+					spawn.vSpawnParts = new VJDFAttributeMap();
+				spawn.vSpawnParts.add(map);
+				map = new JDFAttributeMap(map);
+				map.put("Side", "Back");
+				spawn.vSpawnParts.add(map);
+				spawn.bSpawnIdentical = false;
+				spawn.bFixResources = false;
+				if (ii == 0)
+				{
+					JDFNode n2 = spawn.spawn();
+					System.out.println(ct);
+					ct.stop();
+					ct1.start();
+					n2.getOwnerDocument_JDFElement().write2File("C:\\temp\\spawn" + s + ".jdf", 2, false);
+					System.out.println(ct1);
+					ct1.stop();
 
-		JDFSpawn spawn = new JDFSpawn(n);
-		spawn.vRWResources_in = new VString("Preview NodeInfo ExposedMedia", null);
-		//		spawn.vSpawnParts = null;
-		JDFAttributeMap map = new JDFAttributeMap();
-		map.put("SignatureName", "Sig003");
-		map.put("PartVersion", "Engl Franz");
-		map.put("SheetName", "FB 003");
-		map.put("Side", "Front");
-		map.put("Separation", "Black");
-		spawn.vSpawnParts = new VJDFAttributeMap();
-		spawn.vSpawnParts.add(map);
-		map = new JDFAttributeMap(map);
-		map.put("Separation", "Yellow");
-		spawn.vSpawnParts.add(map);
-		spawn.bSpawnIdentical = false;
-		spawn.bFixResources = false;
-		JDFNode n2 = spawn.spawn();
-		n2.getOwnerDocument_JDFElement().write2File("C:\\temp\\spawn.jdf", 2, false);
+					ct2.start();
+					n = m.mergeJDF(n2, null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
+					spawn.setNode(n);
+					System.out.println(ct2);
+					ct2.stop();
+				}
+
+			}
+			if (ii == 1)
+			{
+				JDFNode n2 = spawn.spawn();
+				System.out.println(ct);
+				ct.stop();
+				ct1.start();
+				n2.getOwnerDocument_JDFElement().write2File("C:\\temp\\spawnall.jdf", 2, false);
+				System.out.println(ct1);
+				ct1.stop();
+			}
+			d.write2File("C:\\temp\\main.jdf", 2, false);
+		}
 	}
 }

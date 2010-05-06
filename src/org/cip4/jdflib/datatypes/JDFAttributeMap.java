@@ -81,6 +81,7 @@ package org.cip4.jdflib.datatypes;
 
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -91,18 +92,17 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * This is the Java class to the mAttribute class on the C++ side.
  */
-public class JDFAttributeMap implements Map
+public class JDFAttributeMap extends HashMap<String, String>
 {
-	private final String nullVal = "_n_u__l_l_";
-	// **************************************** Attributes
-	// ******************************************
-	private Hashtable<String, String> m_hashTable = new Hashtable<String, String>();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// **************************************** Constructors
 	// ****************************************
@@ -111,7 +111,7 @@ public class JDFAttributeMap implements Map
 	 */
 	public JDFAttributeMap()
 	{
-		// default super constructor
+		super();
 	}
 
 	/**
@@ -122,6 +122,7 @@ public class JDFAttributeMap implements Map
 	 */
 	public JDFAttributeMap(final String key, final String value)
 	{
+		super();
 		put(key, value);
 	}
 
@@ -133,6 +134,7 @@ public class JDFAttributeMap implements Map
 	 */
 	public JDFAttributeMap(final String key, final ValuedEnum value)
 	{
+		super();
 		put(key, value.getName());
 	}
 
@@ -141,12 +143,12 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @param inputMap map to clone
 	 */
-	public JDFAttributeMap(final JDFAttributeMap inputMap)
+	public JDFAttributeMap(final Map<String, String> inputMap)
 	{
-		m_hashTable = new Hashtable<String, String>();
+		super();
 		if (inputMap != null && inputMap.size() > 0)
 		{
-			m_hashTable.putAll(inputMap.m_hashTable);
+			putAll(inputMap);
 		}
 	}
 
@@ -169,24 +171,37 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @return String
 	 */
-	public String showKeys(final String sep)
+	public String showKeys(String sep)
 	{
-		String sepLocal = sep;
-
-		if (sepLocal == null)
+		if (sep == null)
 		{
-			sepLocal = "";
+			sep = "";
 		}
 		final StringBuffer sb = new StringBuffer();
 		final VString vsKeys = this.getKeys();
+		vsKeys.sort();
 		final int size = vsKeys.size();
 		for (int k = 0; k < size; k++)
 		{
 			final String strKey = vsKeys.stringAt(k);
 			final String strValue = this.get(strKey);
-			sb.append(k == 0 ? "" : sepLocal).append("(").append(strKey).append(" = ").append(strValue).append(")");
+			sb.append(k == 0 ? "" : sep).append("(").append(strKey).append(" = ").append(strValue).append(")");
 		}
 		return (sb.toString());
+	}
+
+	/**
+	 * keys - returns an enumeration of all keys in this {@link JDFAttributeMap}
+	 * 
+	 * @return Enumeration - the enumeration of all keys
+	 * @deprecated use keyset().iterator()
+	 */
+	@Deprecated
+	public Enumeration<String> keys()
+	{
+		Hashtable<String, String> ht = new Hashtable<String, String>();
+		ht.putAll(this);
+		return ht.keys();
 	}
 
 	/**
@@ -198,37 +213,6 @@ public class JDFAttributeMap implements Map
 	public String toString()
 	{
 		return "JDFAttributeMap: {" + showKeys(JDFConstants.BLANK) + " ";
-	}
-
-	/**
-	 * clear - clears the hashtable
-	 */
-	public void clear()
-	{
-		m_hashTable.clear();
-	}
-
-	/**
-	 * size - returns the number of keys in this hashtable
-	 * 
-	 * @return int - the number of keys in this hashtable
-	 */
-	public int size()
-	{
-		return m_hashTable.size();
-	}
-
-	/**
-	 * get - returns the value to which the specified key is mapped in this hashtable.
-	 * 
-	 * @param key the key of the value to get
-	 * 
-	 * @return String - the String to which the key is mapped in this hashtable; null if the key is not mapped to any value in this hashtable.
-	 */
-	public String get(final String key)
-	{
-		final String s = m_hashTable.get(key);
-		return nullVal.equals(s) ? null : s;
 	}
 
 	/**
@@ -244,18 +228,17 @@ public class JDFAttributeMap implements Map
 	 * <p>
 	 * NOTE: It is NOT possible to enter to identical keys. If you enter a key to a Attribute Map which already exists, the value will be replaced.
 	 */
-	public boolean put(final String key, final String value)
+	@Override
+	public String put(final String key, final String value)
 	{
 		// check input parameter (valid or invalid)
 		if (key == null || key.equals(JDFConstants.EMPTYSTRING))
 		{
-			return false;
+			return null;
 		}
 		// put key value to hashmap. The map returns null if the key was new
 		// or an object (the old value) if the value was replaced
-		m_hashTable.put(key, value == null ? nullVal : value);
-
-		return true;
+		return super.put(key, value);
 	}
 
 	/**
@@ -271,7 +254,7 @@ public class JDFAttributeMap implements Map
 	 * <p>
 	 * NOTE: It is NOT possible to enter to identical keys. If you enter a key to a Attribute Map which already exists, the value will be replaced.
 	 */
-	public boolean putNotNull(final Object key, final Object value)
+	public String putNotNull(final Object key, final Object value)
 	{
 		String k1 = null;
 		if (key instanceof ValuedEnum)
@@ -292,19 +275,7 @@ public class JDFAttributeMap implements Map
 		{
 			v1 = (String) value;
 		}
-		return StringUtil.getNonEmpty(v1) == null ? false : put(k1, v1);
-	}
-
-	/**
-	 * entrySet - Returns a Set view of the entries contained in this Hashtable. Each element in this collection is a Map.Entry. The Set is backed by the
-	 * Hashtable, so changes to the Hashtable are reflected in the Set, and vice-versa. The Set supports element removal (which removes the corresponding entry
-	 * from the Hashtable), but not element addition.
-	 * 
-	 * @return Set - the set view of the entries contained in this hashtable
-	 */
-	public Set entrySet()
-	{
-		return m_hashTable.entrySet();
+		return StringUtil.getNonEmpty(v1) == null ? null : put(k1, v1);
 	}
 
 	/**
@@ -318,23 +289,27 @@ public class JDFAttributeMap implements Map
 	 */
 	public boolean subMap(final JDFAttributeMap subMap)
 	{
-		if (subMap == null) // the null map is a subset of everything
+		if (subMap == null || subMap.size() == 0) // the null map is a subset of everything
 		{
 			return true;
 		}
+		else if (subMap.size() > size())
+		{
+			return false;
+		}
 
-		final Set mapSet = this.keySet();
-		final Set subMapSet = subMap.keySet();
+		final Set<String> mapSet = this.keySet();
+		final Set<String> subMapSet = subMap.keySet();
 
 		if (!mapSet.containsAll(subMapSet))
 		{
 			return false;
 		}
 
-		final Iterator it = subMapSet.iterator();
+		final Iterator<String> it = subMapSet.iterator();
 		while (it.hasNext())
 		{
-			final String key = (String) it.next();
+			final String key = it.next();
 			final String subVal = subMap.get(key);
 			if (!KElement.isWildCard(subVal))
 			{
@@ -344,7 +319,6 @@ public class JDFAttributeMap implements Map
 					return false;
 				}
 			}
-
 		}
 		return true;
 	}
@@ -408,11 +382,10 @@ public class JDFAttributeMap implements Map
 			return true;
 		}
 
-		final Enumeration<String> subMapEnum = subMap.keys();
-
-		while (subMapEnum.hasMoreElements())
+		final Iterator<String> it = subMap.keySet().iterator();
+		while (it.hasNext())
 		{
-			final String subMapKey = subMapEnum.nextElement();
+			final String subMapKey = it.next();
 			final String subMapVal = subMap.get(subMapKey);
 			if (KElement.isWildCard(subMapVal))
 			{
@@ -439,11 +412,10 @@ public class JDFAttributeMap implements Map
 		if (subMap == null)
 			return this;
 
-		final Enumeration<String> subMapEnum = subMap.keys();
-
-		while (subMapEnum.hasMoreElements())
+		final Iterator<String> it = subMap.keySet().iterator();
+		while (it.hasNext())
 		{
-			final String subMapKey = subMapEnum.nextElement();
+			final String subMapKey = it.next();
 			final String subMapVal = subMap.get(subMapKey);
 			final String hashTableVal = this.get(subMapKey);
 
@@ -471,26 +443,22 @@ public class JDFAttributeMap implements Map
 	 */
 	public void andMap(final JDFAttributeMap subMap)
 	{
-		final Hashtable ht = new Hashtable();
+		Iterator<String> it = getKeys().iterator();
 
-		final Enumeration subMapEnum = subMap.keys();
-
-		while (subMapEnum.hasMoreElements())
+		while (it.hasNext())
 		{
-			final String subMapKey = (String) subMapEnum.nextElement();
-			final String subMapVal = subMap.get(subMapKey);
-			final String hashTableVal = this.get(subMapKey);
-
-			if (hashTableVal != null)
+			final String key = it.next();
+			String subMapVal = subMap.get(key); // if this is null, we have a mismatch
+			final String thisVal = subMapVal == null ? null : get(key);
+			if (subMapVal != null && !subMapVal.equals(thisVal))
 			{
-				if (hashTableVal.equals(subMapVal))
-				{
-					ht.put(subMapKey, subMapVal);
-				}
+				subMapVal = null;
+			}
+			if (subMapVal == null)
+			{
+				remove(key);
 			}
 		}
-
-		m_hashTable = ht;
 	}
 
 	/**
@@ -507,10 +475,10 @@ public class JDFAttributeMap implements Map
 		}
 
 		final JDFAttributeMap newMap = new JDFAttributeMap(subMap);
-		final Enumeration<String> keys = keys();
-		while (keys.hasMoreElements())
+		final Iterator<String> it = keySet().iterator();
+		while (it.hasNext())
 		{
-			final String key = keys.nextElement();
+			final String key = it.next();
 			final String val = get(key);
 			final String subVal = subMap.get(key);
 			if (subVal == null || val.equals(subVal))
@@ -539,10 +507,10 @@ public class JDFAttributeMap implements Map
 			return null;
 		}
 		final JDFAttributeMap newMap = new JDFAttributeMap();
-		final Enumeration<String> keys = keys();
-		while (keys.hasMoreElements())
+		final Iterator<String> it = keySet().iterator();
+		while (it.hasNext())
 		{
-			final String key = keys.nextElement();
+			final String key = it.next();
 			final String val = get(key);
 			final String subVal = subMap.get(key);
 			if (val.equals(subVal))
@@ -563,90 +531,22 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @param keySet the collection of given keys
 	 */
-	public void reduceMap(final Collection keySet)
+	public void reduceMap(final Collection<String> keySet)
 	{
 		if (keySet == null)
 		{
 			clear();
 			return;
 		}
-		final Iterator it = keySet.iterator();
-		final Hashtable ht = new Hashtable();
+		final Iterator<String> it = getKeys().iterator();
 		while (it.hasNext())
 		{
-			final Object key = it.next();
-			if (m_hashTable.containsKey(key))
+			final String key = it.next();
+			if (!keySet.contains(key))
 			{
-				ht.put(key, m_hashTable.get(key));
+				remove(key);
 			}
 		}
-		m_hashTable = ht;
-	}
-
-	/**
-	 * equals - Compares two maps, returns true if content equal, otherwise false.<br>
-	 * If input is not of type JDFAttributeMap, the result of the superclasses' equals method is returned.
-	 * 
-	 * @param obj JDFAttributeMap to compare with <code>this</code>
-	 * 
-	 * @return boolean - true if the maps are equal, otherwise false
-	 */
-	@Override
-	public boolean equals(final Object other)
-	{
-		if (this == other)
-		{
-			return true;
-		}
-		if (other == null || !(other instanceof JDFAttributeMap))
-		{
-			return false;
-		}
-		return this.m_hashTable.equals(((JDFAttributeMap) other).m_hashTable);
-	}
-
-	/**
-	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 * 
-	 * @return int
-	 */
-	@Override
-	public int hashCode()
-	{
-		return HashUtil.hashCode(0, this.m_hashTable);
-	}
-
-	/**
-	 * containsKey - looks for the given key in the hashtable, returns true if the hashtable contains the key otherwise false
-	 * 
-	 * @param key the key to look for
-	 * 
-	 * @return boolean - true if the hashtable contains the given key otherwise false
-	 */
-	public boolean containsKey(final String key)
-	{
-		return m_hashTable.containsKey(key);
-	}
-
-	/**
-	 * isEmpty - returns true if the hashtable is empty
-	 * 
-	 * @return boolean - true if the hashtable is empty
-	 */
-	public boolean isEmpty()
-	{
-		return m_hashTable.isEmpty();
-	}
-
-	/**
-	 * getKeyIterator - returns an iterator over the elements in this set. The elements are returned in no particular order (unless this set is an instance of
-	 * some class that provides a guarantee).
-	 * 
-	 * @return Iterator - an iterator over the elements in this set
-	 */
-	public Iterator<String> getKeyIterator()
-	{
-		return m_hashTable.keySet().iterator();
 	}
 
 	/**
@@ -655,84 +555,32 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @return Object - the value to which the key had been mapped in this hashtable, or null if the key did not have a mapping
 	 */
-	public Object remove(final Object key)
+	@Override
+	public String remove(Object key)
 	{
-		Object keyLocal = key;
 
-		if (keyLocal instanceof ValuedEnum)
+		if (key instanceof ValuedEnum)
 		{
-			keyLocal = ((ValuedEnum) keyLocal).getName();
+			key = ((ValuedEnum) key).getName();
 		}
 
-		return m_hashTable.remove(keyLocal);
+		return super.remove(key);
 	}
 
 	/**
-	 * keys - returns an enumeration of all keys in this hashtable
-	 * 
-	 * @return Enumeration - the enumeration of all keys
-	 */
-	public Enumeration<String> keys()
-	{
-		return m_hashTable.keys();
-	}
-
-	/**
-	 * keySet - returns a set of all keys in this hashtable
-	 * 
-	 * @return Set - the set of all keys
-	 */
-	public Set<String> keySet()
-	{
-		return m_hashTable.keySet();
-	}
-
-	/**
-	 * @see java.util.Map#containsKey(java.lang.Object)
-	 */
-	public boolean containsKey(final Object key)
-	{
-		return m_hashTable.containsKey(key);
-	}
-
-	/**
-	 * @see java.util.Map#containsValue(java.lang.Object)
-	 */
-	public boolean containsValue(final Object value)
-	{
-		return m_hashTable.containsValue(value);
-	}
-
-	/**
-	 * @see java.util.Map#values()
-	 */
-	public Collection<String> values()
-	{
-		return m_hashTable.values();
-	}
-
-	/**
-	 * @see java.util.Map#putAll(java.util.Map)
-	 */
-	public void putAll(final Map t)
-	{
-		m_hashTable.putAll(t);
-	}
-
-	/*
-	 * (non-Javadoc)
+	 *  
 	 * 
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
-	public Object get(Object key)
+	@Override
+	public String get(Object key)
 	{
 		if (key instanceof ValuedEnum)
 		{
 			key = ((ValuedEnum) key).getName();
 		}
 
-		final String s = m_hashTable.get(key);
-		return nullVal.equals(s) ? null : s;
+		return super.get(key);
 	}
 
 	/**
@@ -740,9 +588,8 @@ public class JDFAttributeMap implements Map
 	 * @param key
 	 * @param value
 	 * @return
-	 * @see java.util.Map#put(key, value)
 	 */
-	public Object put(Object key, Object value)
+	public String put(Object key, Object value)
 	{
 		if (key instanceof ValuedEnum)
 		{
@@ -754,7 +601,18 @@ public class JDFAttributeMap implements Map
 			value = ((ValuedEnum) value).getName();
 		}
 
-		return m_hashTable.put((String) key, (String) value);
+		return super.put((String) key, (String) value);
+	}
+
+	/**
+	 * getKeyIterator - returns an iterator over the elements in this set. The elements are returned in no particular order (unless this set is an instance of
+	 * some class that provides a guarantee).
+	 * 
+	 * @return Iterator - an iterator over the elements in this set
+	 */
+	public Iterator<String> getKeyIterator()
+	{
+		return keySet().iterator();
 	}
 
 	/**
@@ -780,21 +638,29 @@ public class JDFAttributeMap implements Map
 	 * 
 	 * @param set the set of keys ot remove
 	 */
-	public void removeKeys(final Collection set)
+	public void removeKeys(final Collection<String> set)
 	{
 		if (set == null)
 		{
 			return;
 		}
-		final Iterator it = set.iterator();
+		final Iterator<String> it = set.iterator();
 		while (it.hasNext())
 		{
-			final Object key = it.next();
+			final String key = it.next();
 			remove(key);
 		}
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// //
+	/**
+	 * @see java.lang.Object#clone()
+	 * @return
+	*/
+	@Override
+	public JDFAttributeMap clone()
+	{
+		return new JDFAttributeMap(this);
+	}
 
+	// //////////////////////////////////////////////////////////////////////////
 }

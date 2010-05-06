@@ -1078,8 +1078,7 @@ public class UrlUtil
 	}
 
 	/**
-	 * concatenate directory and url to a single path IF and only IF url is a relative url<br>
-	 * relative urls MUST NOT have a scheme (e.g. file:)
+	 * get the local url without directory
 	 * 
 	 * @param directory the url of the directory
 	 * @param url the absolute url
@@ -1087,7 +1086,7 @@ public class UrlUtil
 	 */
 	public static String getLocalURL(final String directory, final String url)
 	{
-		if (directory == null || url == null)
+		if (directory == null || url == null || directory.isEmpty())
 		{
 			return url;
 		}
@@ -1100,11 +1099,19 @@ public class UrlUtil
 		{
 			return null;
 		}
-		if (!url.startsWith(directory))
-		{
+		VString vDirectory = StringUtil.tokenize(directory, "/", false);
+		VString vURL = StringUtil.tokenize(url, "/", false);
+		if (vDirectory.size() >= vURL.size())
 			return null;
+		for (String s : vDirectory)
+		{
+			if (vURL.get(0).equals(s))
+				vURL.remove(0);
+			else
+				return null;
+
 		}
-		return url.substring(len);
+		return StringUtil.setvString(vURL, "/", null, null);
 	}
 
 	/**
@@ -1115,36 +1122,34 @@ public class UrlUtil
 	 * @param url the relative url of the file
 	 * @return String - the concatenated URL of the directory + file
 	 */
-	public static String getURLWithDirectory(final String directory, final String url)
+	public static String getURLWithDirectory(String directory, String url)
 	{
-		String directoryLocal = directory;
-		String urlLocal = url;
 
-		if (directoryLocal == null || JDFConstants.EMPTYSTRING.equals(directoryLocal))
+		if (directory == null || JDFConstants.EMPTYSTRING.equals(directory))
 		{
-			return urlLocal;
+			return url;
 		}
 
-		if (urlLocal == null)
+		if (url == null)
 		{
-			return directoryLocal;
+			return directory;
 		}
 
-		if (urlLocal.indexOf(":") > 0 && ((urlLocal.indexOf("/") < 0) || urlLocal.indexOf("/") > urlLocal.indexOf(":")))
+		if (url.indexOf(":") > 0 && ((url.indexOf("/") < 0) || url.indexOf("/") > url.indexOf(":")))
 		{
 			// scheme
-			return urlLocal;
+			return url;
 		}
 
-		if (urlLocal.startsWith("/"))
+		if (url.startsWith("/"))
 		{
 			try
 			{
-				final URI dirURI = new URI(directoryLocal);
-				directoryLocal = dirURI.getScheme() + ":";
-				if (!urlLocal.startsWith("//"))
+				final URI dirURI = new URI(directory);
+				directory = dirURI.getScheme() + ":";
+				if (!url.startsWith("//"))
 				{
-					urlLocal = "/" + urlLocal;
+					url = "/" + url;
 				}
 			}
 			catch (final URISyntaxException x)
@@ -1153,12 +1158,12 @@ public class UrlUtil
 			}
 		}
 
-		if (!directoryLocal.endsWith("/") && !urlLocal.startsWith("/"))
+		if (!directory.endsWith("/") && !url.startsWith("/"))
 		{
-			directoryLocal += "/";
+			directory += "/";
 		}
 
-		return cleanDots(directoryLocal + urlLocal);
+		return cleanDots(directory + url);
 	}
 
 	/**

@@ -112,7 +112,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
 		m1.put("a2", "v2");
-		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		assertEquals(m1, m2);
+		m2 = m1.clone();
 		assertEquals(m1, m2);
 		m2.put("a2", "v3");
 		assertNotSame(m1, m2);
@@ -178,7 +180,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 	public void testPutNotNull()
 	{
 		final JDFAttributeMap m1 = new JDFAttributeMap();
-		assertFalse(m1.putNotNull("null", null));
+		assertNull(m1.putNotNull("null", null));
 		m1.putNotNull(EnumPartIDKey.Side, "Front");
 		assertEquals(m1.get("Side"), "Front");
 	}

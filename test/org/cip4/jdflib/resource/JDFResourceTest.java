@@ -1835,6 +1835,34 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testReducePartitions()
+	{
+		final JDFDoc doc = creatXMDoc();
+		final JDFNode n = doc.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		mPart.put("SheetName", "S1");
+		mPart.put("Side", "Front");
+		final JDFAttributeMap mPart2 = new JDFAttributeMap("SignatureName", "Sig2");
+		mPart2.put("SheetName", "S1");
+		mPart2.put("Side", "Front");
+		VJDFAttributeMap vm = new VJDFAttributeMap();
+		vm.add(mPart);
+		vm.add(mPart2);
+		assertNotNull(xm.getPartition(mPart, null));
+		assertNotNull(xm.getPartition(mPart2, null));
+		xm.reducePartitions(vm);
+		assertNotNull(xm.getPartition(mPart, null));
+		assertNotNull(xm.getPartition(mPart2, null));
+		vm.removeElementAt(1);
+		xm.reducePartitions(vm);
+		assertNotNull(xm.getPartition(mPart, null));
+		assertNull(xm.getPartition(mPart2, null));
+	}
+
+	/**
+	 * 
+	 */
 	public void testRemoveImplicitPartions()
 	{
 		final JDFDoc doc = new JDFDoc("JDF");
@@ -2592,7 +2620,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 	@Override
 	protected void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
 		b = JDFResource.getAutoAgent();
 

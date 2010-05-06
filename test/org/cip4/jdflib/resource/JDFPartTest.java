@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -110,7 +110,7 @@ public class JDFPartTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @return
+	 *  
 	 */
 	@Override
 	protected void setUp()
@@ -126,10 +126,10 @@ public class JDFPartTest extends JDFTestCaseBase
 	public void testPartIDConsistency()
 	{
 		final VString knownAtts = part.knownAttributes();
-		final Iterator it = EnumPartIDKey.iterator();
+		final Iterator<EnumPartIDKey> it = EnumPartIDKey.iterator();
 		while (it.hasNext())
 		{
-			final String name = ((EnumPartIDKey) it.next()).getName();
+			final String name = (it.next()).getName();
 			assertTrue("name missing in Part: " + name, knownAtts.contains(name));
 		}
 	}
@@ -147,6 +147,15 @@ public class JDFPartTest extends JDFTestCaseBase
 		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng"));
 		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng"));
 
+	}
+
+	/**
+	 * 
+	 */
+	public void testMatchesPart()
+	{
+		assertTrue(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng"));
+		assertFalse(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng2"));
 	}
 	// //////////////////////////////////////////////////////////////
 }

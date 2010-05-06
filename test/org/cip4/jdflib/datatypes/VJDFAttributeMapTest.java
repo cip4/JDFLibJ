@@ -100,7 +100,9 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		final VJDFAttributeMap v = new VJDFAttributeMap((VJDFAttributeMap) null);
 		v.add(m1);
 		v.add(m2);
-		final VJDFAttributeMap v2 = new VJDFAttributeMap(v);
+		VJDFAttributeMap v2 = new VJDFAttributeMap(v);
+		assertEquals(v, v2);
+		v2 = v.clone();
 		assertEquals(v, v2);
 		m1.put("a3", "a4");
 		assertNotSame("modification did not migrate!", v, v2);
@@ -343,6 +345,42 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * tests maxSize method
+	 */
+	public void testMaxSize()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final VJDFAttributeMap v2 = new VJDFAttributeMap();
+		assertEquals(v2.maxSize(), 0);
+		v2.add(m1);
+		assertEquals(v2.maxSize(), 1);
+		m1 = m1.clone();
+		m1.put("b", "c");
+		v2.add(m1);
+		assertEquals(v2.maxSize(), 2);
+		m1.put("bc", "c");
+		assertEquals(v2.maxSize(), 3);
+	}
+
+	/**
+	 * 
+	 */
+	public void testMinSize()
+	{
+		JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final VJDFAttributeMap v2 = new VJDFAttributeMap();
+		assertEquals(v2.minSize(), 0);
+		v2.add(m1);
+		m1.put("b", "c");
+		assertEquals(v2.minSize(), 2);
+		m1 = m1.clone();
+		v2.add(m1);
+		assertEquals(v2.minSize(), 2);
+		m1.put("bc", "c");
+		assertEquals(v2.minSize(), 2);
+	}
+
+	/**
 	 * tests put method
 	 */
 	public void testPut()
@@ -381,6 +419,29 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		final VString vs = new VString("a1", " ");
 		v.reduceMap(vs.getSet());
 		assertEquals(v, v2);
+	}
+
+	/**
+	 * test reduceMap()
+	 */
+	public void testRemoveMaps()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		final VJDFAttributeMap v2 = new VJDFAttributeMap();
+		v2.add(m1);
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		m2.put("a3", "v3");
+		v2.add(m2);
+		v2.removeMaps(new JDFAttributeMap("a3", "v43"));
+		assertEquals(v2.size(), 2);
+		v2.removeMaps(new JDFAttributeMap("a3", "v3"));
+		assertEquals(v2.size(), 1);
+		assertEquals(v2.get(0), m1);
+		v2.add(m2);
+		v2.removeMaps(new JDFAttributeMap("a1", "v1"));
+		assertEquals(v2.size(), 0);
 	}
 
 	// /////////////////////////////////////////////////////////////

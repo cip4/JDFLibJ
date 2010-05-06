@@ -369,6 +369,54 @@ public class VJDFAttributeMap
 	}
 
 	/**
+	 * Return the maximum size size of a JDFAttributeMap in this
+	 * 
+	 * @return int - the size
+	 */
+	public int maxSize()
+	{
+		int maxSize = 0;
+		if (m_vec != null)
+		{
+			for (JDFAttributeMap map : m_vec)
+			{
+				if (map != null && map.size() > maxSize)
+				{
+					maxSize = map.size();
+				}
+			}
+		}
+		return maxSize;
+	}
+
+	/**
+	 * Return the maximum size size of a JDFAttributeMap in this
+	 * 
+	 * @return int - the size
+	 */
+	public int minSize()
+	{
+		int minSize = 9999999;
+		if (m_vec != null && m_vec.size() > 0)
+		{
+			for (JDFAttributeMap map : m_vec)
+			{
+				if (map != null && map.size() < minSize)
+				{
+					minSize = map.size();
+					if (minSize == 0)
+						break;
+				}
+			}
+		}
+		else
+		{
+			minSize = 0;
+		}
+		return minSize;
+	}
+
+	/**
 	 * Return true if the JDFAttributeMap vector is empty
 	 * 
 	 * @return boolean - true if empty otherwise false
@@ -598,7 +646,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param keySet
 	 */
-	public void reduceMap(final Set keySet)
+	public void reduceMap(final Collection<String> keySet)
 	{
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 
@@ -925,4 +973,35 @@ public class VJDFAttributeMap
 			}
 		}
 	}
+
+	/**
+	 * @see java.lang.Object#clone()
+	 * @return
+	*/
+	@Override
+	public VJDFAttributeMap clone()
+	{
+		return new VJDFAttributeMap(this);
+	}
+
+	/**
+	 * remove all matching maps from this i.e. if map is subMap of this
+	 * @param map
+	 */
+	public void removeMaps(JDFAttributeMap map)
+	{
+		if (map == null || map.size() == 0)
+		{
+			clear();
+		}
+		for (int i = size() - 1; i >= 0; i--)
+		{
+			JDFAttributeMap map0 = get(i);
+			if (map0 != null && map0.subMap(map))
+			{
+				removeElementAt(i);
+			}
+		}
+	}
+
 }
