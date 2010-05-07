@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -85,6 +85,10 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFxor extends JDFNodeTerm
 {
 	private static final long serialVersionUID = 1L;
@@ -107,8 +111,7 @@ public class JDFxor extends JDFNodeTerm
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFxor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFxor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -121,32 +124,40 @@ public class JDFxor extends JDFNodeTerm
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFxor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFxor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#toString()
+	 * @return
+	 */
 	@Override
 	public String toString()
 	{
 		return " JDFxor[  --> " + super.toString() + " ]";
 	}
 
+	/**
+	 * 
+	 * @param iSkip
+	 * @return
+	 */
 	public JDFBooleanEvaluation getBooleanEvaluation(int iSkip)
 	{
-		JDFBooleanEvaluation e = (JDFBooleanEvaluation) getElement(
-				ElementName.BOOLEANEVALUATION, JDFConstants.EMPTYSTRING, iSkip);
+		JDFBooleanEvaluation e = (JDFBooleanEvaluation) getElement(ElementName.BOOLEANEVALUATION, JDFConstants.EMPTYSTRING, iSkip);
 		return e;
 	}
 
 	/**
 	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
-	 * TestRef) to determine if, as a set, they evaluate to “true” when combined
-	 * in a boolean “xor” function. ! For more than two arguments, exactly one
-	 * Term must evaluate to “true” for the “xor” to evaluate to “true”.<br>
+	 * TestRef) to determine if, as a set, they evaluate to "true" when combined
+	 * in a boolean "xor" function. ! For more than two arguments, exactly one
+	 * Term must evaluate to "true" for the "xor" to evaluate to "true".<br>
 	 * 
-	 * Looks for Evaluations that “xor” consists of, and tests the status of
+	 * Looks for Evaluations that "xor" consists of, and tests the status of
 	 * every Evaluation, until the result of a whole boolean expression is
 	 * determinated. Tests whether attribute map 'm' has a key specified by
 	 * Evaluation/BasicPreflightTest/@Name. If 'm' has such key, checks if its
@@ -155,7 +166,7 @@ public class JDFxor extends JDFNodeTerm
 	 * 
 	 * @param m
 	 *            key-value pair attribute map
-	 * @return boolean - true, if boolean “xor” expression evaluates to “true”
+	 * @return boolean - true, if boolean "xor" expression evaluates to "true"
 	 */
 	@Override
 	public boolean fitsMap(JDFAttributeMap m)
@@ -177,25 +188,25 @@ public class JDFxor extends JDFNodeTerm
 
 	/**
 	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
-	 * TestRef) to determine if, as a set, they evaluate to “true” when combined
-	 * in a boolean “xor” function.
+	 * TestRef) to determine if, as a set, they evaluate to "true" when combined
+	 * in a boolean "xor" function.
 	 * 
 	 * @param jdf
 	 *            JDFNode to test to know if the Device can accept it
 	 * @param reportRoot
 	 *            the report to generate; set to <code>null</code> if no report
 	 *            is requested
-	 * @return boolean - true, if boolean “xor” expression evaluates to “true”
+	 * @return boolean - true, if boolean "xor" expression evaluates to "true"
 	 */
 	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
-		
+
 		VElement v = getTermVector(null);
 		if (reportRootLocal != null)
 			reportRootLocal = reportRootLocal.appendElement("xor");
-		
+
 		int siz = v.size();
 
 		int count = 0;
@@ -204,7 +215,7 @@ public class JDFxor extends JDFNodeTerm
 			JDFTerm t = (JDFTerm) v.elementAt(i);
 			if (t.fitsJDF(jdf, reportRootLocal))
 				count++;
-			
+
 			if (count > 1 && reportRootLocal == null)
 				break;
 		}
@@ -212,12 +223,15 @@ public class JDFxor extends JDFNodeTerm
 		boolean b = (count == 1);
 		if (reportRootLocal != null)
 			reportRootLocal.setAttribute("Value", b, null);
-		
+
 		return b;
 	}
 
 	// ///////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	@Override
 	public VString getMissingElements(int nMax)
 	{
