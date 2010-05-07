@@ -1279,8 +1279,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		// it has to be 1 coreDocImpl plus 3 String Parameters
 		if (bSpecialClass && constructi.getParameterTypes().length == 4)
 		{
-			DocumentData theData = getData();
-			theData.sm_hashCtorElementNS.put(qualifiedName, constructi);
+			data.sm_hashCtorElementNS.put(qualifiedName, constructi);
 		}
 	}
 
@@ -1453,7 +1452,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		final String strClassPath;
 		final String strParentNodeClass = (m_ParentNode == null) ? null : m_ParentNode.getClass().getName();
 		strName = KElement.xmlnsLocalName(strName);
-		if (isSpecialClass(strName, null))
+		if (!isSpecialClass(strName, null))
 		{
 			if (ElementName.HOLETYPE.equals(strName))
 			{

@@ -78,6 +78,9 @@
 package org.cip4.jdflib.core;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFShapeElement;
 import org.cip4.jdflib.resource.process.JDFSurface;
 import org.cip4.jdflib.span.JDFNameSpan;
@@ -126,4 +129,18 @@ public class DocumentJDFImplTest extends JDFTestCaseBase
 		kelem9.setAttribute("Type", "org.cip4.jdflib.span.JDFSpanSurface");
 
 	}
+
+	/**
+	 * 
+	 */
+	public void testPrivateResources()
+	{ // HoleType, Method, Shape and Surface are context sensitive elements
+		// The type casts below should all succeed
+		JDFDoc doc = new JDFDoc(ElementName.JDF);
+		JDFNode n = doc.getJDFRoot();
+		JDFResourcePool rp = n.getCreateResourcePool();
+		KElement e = rp.appendElement("test:res", "www.test.org");
+		assertTrue(e instanceof JDFResource);
+	}
+
 }
