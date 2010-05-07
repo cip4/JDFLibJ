@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -84,6 +84,10 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFor extends JDFNodeTerm
 {
 	private static final long serialVersionUID = 1L;
@@ -106,8 +110,7 @@ public class JDFor extends JDFNodeTerm
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -120,12 +123,16 @@ public class JDFor extends JDFNodeTerm
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFor(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#toString()
+	 * @return
+	 */
 	@Override
 	public String toString()
 	{
@@ -134,10 +141,10 @@ public class JDFor extends JDFNodeTerm
 
 	/**
 	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
-	 * TestRef) to determine if, as a set, they evaluate to “true” when combined
-	 * in a boolean “or” function.
+	 * TestRef) to determine if, as a set, they evaluate to "true" when combined
+	 * in a boolean "or" function.
 	 * 
-	 * Looks for Evaluations, that “or” consists of, and tests the status of
+	 * Looks for Evaluations, that "or" consists of, and tests the status of
 	 * every Evaluation, until the result of a whole boolean expression is
 	 * determinated. Then tests if attribute map 'm' has a key specified by
 	 * Evaluation/BasicPreflightTest/@Name. If 'm' has such key, it checks
@@ -146,7 +153,7 @@ public class JDFor extends JDFNodeTerm
 	 * 
 	 * @param m
 	 *            key-value pair attribute map
-	 * @return boolean - true, if boolean “or” expression evaluates to “true”
+	 * @return boolean - true, if boolean "or" expression evaluates to "true"
 	 */
 	@Override
 	public boolean fitsMap(JDFAttributeMap m)
@@ -167,18 +174,18 @@ public class JDFor extends JDFNodeTerm
 
 	/**
 	 * Evaluates two or more Term elements (and, or, xor, not, Evaluation,
-	 * TestRef) to determine if, as a set, they evaluate to “true” when combined
-	 * in a boolean “or” function.
+	 * TestRef) to determine if, as a set, they evaluate to "true" when combined
+	 * in a boolean "or" function.
 	 * 
 	 * @param jdf
-	 *            JDFNode we test iot know if the Device can accept it
-	 * @return boolean - true, if boolean “or” expression evaluates to “true”
+	 *            JDFNode we test if know if the Device can accept it
+	 * @return boolean - true, if boolean "or" expression evaluates to "true"
 	 */
 	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
-		
+
 		VElement v = getTermVector(null);
 		int siz = v.size();
 		if (reportRootLocal != null)
@@ -191,18 +198,21 @@ public class JDFor extends JDFNodeTerm
 			boolean b2 = t.fitsJDF(jdf, reportRootLocal);
 			if (b2 && reportRootLocal == null)
 				return true; // don't need complete report and it is true; ciao
-			
+
 			b = b || b2;
 		}
 
 		if (reportRootLocal != null)
 			reportRootLocal.setAttribute("Value", b, null);
-		
+
 		return b;
 	}
 
 	// ///////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	@Override
 	public VString getMissingElements(int nMax)
 	{

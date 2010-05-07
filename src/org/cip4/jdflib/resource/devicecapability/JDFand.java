@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -100,8 +100,7 @@ public class JDFand extends JDFNodeTerm
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFand(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFand(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -114,8 +113,7 @@ public class JDFand extends JDFNodeTerm
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -129,12 +127,16 @@ public class JDFand extends JDFNodeTerm
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFand(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#toString()
+	 * @return
+	 */
 	@Override
 	public String toString()
 	{
@@ -144,10 +146,10 @@ public class JDFand extends JDFNodeTerm
 	/**
 	 * Evaluates two or more Term elements (
 	 * <code>and, or, xor, not, Evaluation, TestRef</code>) to determine if, as
-	 * a set, they evaluate to “true” when combined in a boolean “and” function. <br>
+	 * a set, they evaluate to "true" when combined in a boolean "and" function. <br>
 	 * Looks for evaluations which contain <code>and</code>. Tests the status of
 	 * every evaluation found, until the result of a whole boolean expression
-	 * will is determinated. <br>
+	 * will is determined. <br>
 	 * Tests if attribute map <code>m</code> has a key, specified by
 	 * Evaluation/BasicPreflightTest/@Name and if <code>m</code> has such key,
 	 * checks if its value fits testlists, specified for matching Evaluation
@@ -155,7 +157,7 @@ public class JDFand extends JDFNodeTerm
 	 * 
 	 * @param m
 	 *            key-value pair attribute map
-	 * @return boolean - true, if boolean “and” expression evaluates to “true”
+	 * @return boolean - true, if boolean "and" expression evaluates to "true"
 	 */
 	@Override
 	public boolean fitsMap(JDFAttributeMap m)
@@ -174,22 +176,22 @@ public class JDFand extends JDFNodeTerm
 	/**
 	 * Evaluates two or more term elements (
 	 * <code>and, or, xor, not, Evaluation, TestRef</code>) to determine if, as
-	 * a set, they evaluate to “true” when combined in a boolean “and” function.
+	 * a set, they evaluate to "true" when combined in a boolean "and" function.
 	 * 
 	 * @param jdf
 	 *            the JDFNode to be checked iot find out if the device can
 	 *            accept it
-	 * @return boolean - true, if boolean “and” expression evaluates to “true”
+	 * @return boolean - true, if boolean "and" expression evaluates to "true"
 	 */
 	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot) // const JDFNode
 	{
 		KElement reportRootLocal = reportRoot;
-		
+
 		VElement v = getTermVector(null);
 		if (reportRootLocal != null)
 			reportRootLocal = reportRootLocal.appendElement("and");
-		
+
 		int siz = v.size();
 		boolean b = true;
 		for (int i = 0; i < siz; i++)
@@ -201,18 +203,21 @@ public class JDFand extends JDFNodeTerm
 				if (reportRootLocal == null)
 					return false;
 			}
-			
+
 			b = b && b2;
 		}
-		
+
 		if (reportRootLocal != null)
 			reportRootLocal.setAttribute("Value", b, null);
-		
+
 		return b;
 	}
 
 	// ///////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	@Override
 	public VString getMissingElements(int nMax)
 	{

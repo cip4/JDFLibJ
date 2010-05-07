@@ -77,6 +77,14 @@
 		<echo>Compiling...</echo>
 		<javac encoding="UTF-8" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5" failonerror="false">
 			<src path="${jdflib.src.dir}" />
+			<classpath refid="project.class.path" />
+			<include name="**/*.java" />
+		</javac>
+	</target>
+	
+	<target name="compileApps" depends="compile" description="Compiles the JDFLibJ source code.">
+		<echo>Compiling...</echo>
+		<javac encoding="UTF-8" destdir="${bin.dir}" debug="${build.debug}" optimize="${build.optimize}" target="1.5" source="1.5" failonerror="false">
 			<src path="${apps.src.dir}" />
 			<classpath refid="project.class.path" />
 			<include name="**/*.java" />
