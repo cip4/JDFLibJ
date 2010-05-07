@@ -1979,9 +1979,12 @@ public class XJDF20 extends BaseElementWalker
 				{
 					v.get(i).renameAttribute("Name", "Separation", null, null);
 				}
-				r.renameElement("Color", null);
+				//				r.renameElement("Color", null);
+				KElement cNew = r.getParentNode_KElement().appendElement(ElementName.COLOR);
+				cNew.copyInto(r, true);
+				r.deleteNode();
+				cNew.setAttribute(AttributeName.PARTIDKEYS, "Separation");
 				rl.renameElement("ColorLink", null);
-				r.setAttribute(AttributeName.PARTIDKEYS, "Separation");
 			}
 			return super.walk(jdf, xjdf);
 		}
@@ -2046,9 +2049,11 @@ public class XJDF20 extends BaseElementWalker
 				{
 					v.get(i).renameAttribute("Name", "Separation", null, null);
 				}
-				r.renameElement("Color", null);
+				KElement cNew = r.getParentNode_KElement().appendElement(ElementName.COLOR);
+				cNew.copyInto(r, true);
+				r.deleteNode();
+				cNew.setAttribute(AttributeName.PARTIDKEYS, "Separation");
 				rl.renameElement("ColorRef", null);
-				r.setAttribute(AttributeName.PARTIDKEYS, "Separation");
 			}
 			return super.walk(jdf, xjdf);
 		}

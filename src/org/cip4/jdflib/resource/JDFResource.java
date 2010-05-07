@@ -1392,7 +1392,7 @@ public class JDFResource extends JDFElement
 			hasIdentical = false;
 			for (KElement r : v)
 			{
-				KElement id = r.getElement_KElement(ElementName.IDENTICAL, null, 0);
+				KElement id = ((JDFResource) r).isLeaf() ? r.getElementByClass(JDFIdentical.class, 0) : null;
 				if (id != null)
 				{
 					hasIdentical = true;
@@ -3269,7 +3269,7 @@ public class JDFResource extends JDFElement
 	{
 		VElement v = getLeaves(true);
 		HashMap<JDFAttributeMap, JDFResource> map = new HashMap<JDFAttributeMap, JDFResource>();
-		boolean bIdentical = getChildByTagName(ElementName.IDENTICAL, null, 0, null, false, true) != null;
+		boolean bIdentical = getChildrenByClass(JDFIdentical.class, true, 1) != null;
 		VString partIDKeys = getPartIDKeys();
 		for (int i = 0; i < v.size(); i++)
 		{
@@ -3496,19 +3496,20 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @default getLeaves(false)
 	 */
+
 	public VElement getLeaves(final boolean bAll)
 	{
 		// want possibly intermediate nodes, check the kids
-		VElement vAllChildren = getChildElementVector_KElement(getNodeName(), null, null, true, 0);
+		Vector<? extends KElement> vAllChildren = getDirectPartitionVector();
+		final VElement vLeaves = new VElement();
 
-		if (vAllChildren.isEmpty())
+		if (vAllChildren == null || vAllChildren.isEmpty())
 		{
 			// got a leaf
-			vAllChildren.addElement(this);
+			vLeaves.add(this);
 		}
 		else
 		{
-			final VElement vLeaves = new VElement();
 			// recurse parts tree and sum up the results
 			if (bAll)
 			{
@@ -3522,11 +3523,21 @@ public class JDFResource extends JDFElement
 				final VElement v = pi.getLeaves(bAll);
 				vLeaves.addAll(v);
 			}
-
-			vAllChildren = vLeaves;
 		}
 
-		return vAllChildren;
+		return vLeaves;
+	}
+
+	/**
+	 * @return
+	 */
+	public Vector<? extends KElement> getDirectPartitionVector()
+	{
+		Class<? extends JDFResource> clazz = getClass();
+		if (clazz.equals(JDFResource.class))
+			return getChildElementVector_KElement(getNodeName(), null, null, true, 0);
+		else
+			return getChildrenByClass(clazz, false, 0);
 	}
 
 	/**
@@ -3536,7 +3547,11 @@ public class JDFResource extends JDFElement
 	 */
 	public boolean isLeaf()
 	{
-		return getElement_JDFElement(getNodeName(), null, 0) == null;
+		Class<? extends JDFResource> class1 = getClass();
+		if (class1.equals(JDFResource.class))
+			return getElement_KElement(getNodeName(), null, 0) == null;
+		else
+			return getElementByClass(class1, 0) == null;
 	}
 
 	/**
@@ -3544,7 +3559,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param partType the PartIDKey attribute name
 	 * 
-	 * @return Vector - a list of values of the specifird partition key
+	 * @return Vector - a list of values of the specified partition key
 	 */
 	public VString getPartValues(final EnumPartIDKey partType)
 	{

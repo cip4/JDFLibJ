@@ -202,11 +202,7 @@ public class JDFMerge
 		if (spawnID != null)
 		{
 			final JDFNode overWriteParent = mergeAudit.getParentJDF(); // since all
-			// links get
-			// screwed
-			// up, let's
-			// relink
-			// here
+			// links get screwed up, let's relink here
 			cleanUpMerge(overWriteParent, cleanPolicy, false);
 		}
 

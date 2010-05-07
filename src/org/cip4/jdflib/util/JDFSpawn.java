@@ -1238,7 +1238,7 @@ public class JDFSpawn
 							}
 							else
 							{
-								VElement v = child.getChildrenByTagName_KElement(ElementName.IDENTICAL, null, null, false, true, -1);
+								Vector<JDFIdentical> v = child.getChildrenByClass(JDFIdentical.class, true, 0);
 								if (v != null && v.size() > 0)
 								{
 

@@ -89,6 +89,7 @@ import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -310,6 +311,17 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
+	public void testGetElementByClass()
+	{
+		final JDFDoc d = creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		JDFAuditPool ap = n.getElementByClass(JDFAuditPool.class, 0);
+		assertNotNull(ap);
+	}
 
 	/**
 	 * 

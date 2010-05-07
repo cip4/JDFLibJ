@@ -1842,6 +1842,46 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * Get all children from the actual element matching the given conditions<br>
+	 * does NOT get refElement targets although the attributes are checked in the target elements in case of refElements
+	 * @param clazz 
+	 * @param <a> 
+	 * @param bRecurse if true recurse through all children, grandchildren etc.
+	 * @param nMax maximum number to search - if 0 or negative, search all
+	 * @return Vector<a> vector with all found elements
+	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
+	 * @default getChildElementVector(null, null, null, true, 0)
+	 */
+	@SuppressWarnings("unchecked")
+	public <a extends KElement> Vector<a> getChildrenByClass(Class<a> clazz, boolean bRecurse, int nMax)
+	{
+		final Vector<a> v = new Vector<a>();
+		Node n = getFirstChild();
+		boolean bFound = false;
+		while (n != null)
+		{
+			if (clazz.isInstance(n))
+			{
+				v.add((a) n);
+				bFound = true;
+			}
+			if (bRecurse && (n instanceof KElement))
+			{
+				Vector<a> childrenByClass = ((KElement) n).getChildrenByClass(clazz, bRecurse, nMax);
+				if (childrenByClass != null)
+				{
+					v.addAll(childrenByClass);
+					bFound = true;
+				}
+			}
+			if (bFound && nMax > 0 && nMax >= v.size())
+				break;
+			n = n.getNextSibling();
+		}
+		return v;
+	}
+
+	/**
 	 * get the first child element
 	 * @return KElement the first child element of type ELEMENT_NODE if existing otherwise null
 	 */
@@ -2309,18 +2349,16 @@ public class KElement extends ElementNSImpl implements Element
 	 * @return KElement the child node
 	 * @default getElement_KElement(nodeName, null, 0)
 	 */
-	public KElement getElement_KElement(final String nodeName, final String nameSpaceURI, final int iSkip)
+	public KElement getElement_KElement(final String nodeName, final String nameSpaceURI, int iSkip)
 	{
-		int iSkipLocal = iSkip;
-
 		KElement kElem = getFirstChildElement();
 		int i = 0;
-		if (iSkipLocal < 0)
+		if (iSkip < 0)
 		{
-			iSkipLocal = numChildElements_KElement(nodeName, nameSpaceURI) + iSkipLocal;
+			iSkip = numChildElements_KElement(nodeName, nameSpaceURI) + iSkip;
 		}
 
-		if (iSkipLocal < 0)
+		if (iSkip < 0)
 		{
 			return null;
 		}
@@ -2330,12 +2368,33 @@ public class KElement extends ElementNSImpl implements Element
 			if (kElem.fitsName_KElement(nodeName, nameSpaceURI))
 			{
 				// this guy is the one
-				if (i++ == iSkipLocal)
+				if (i++ == iSkip)
 				{
 					return kElem;
 				}
 			}
 			kElem = kElem.getNextSiblingElement();
+		}
+		return null;
+	}
+
+	/**
+	 * getElement - Get the actual element by java class
+	 * @param <a> the data type to return
+	 * @param clazz java class of the requested element
+	 * @param iSkip number of element to get, if negative count backwards (-1 is the last)
+	 * @return KElement the child node
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public <a extends KElement> a getElementByClass(Class<a> clazz, int iSkip)
+	{
+		Node n = getFirstChild();
+		while (n != null)
+		{
+			if (clazz.isInstance(n))
+				return (a) n;
+			n = n.getNextSibling();
 		}
 		return null;
 	}
