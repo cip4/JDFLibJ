@@ -182,17 +182,17 @@ public class JDFQueueSubmissionParams extends JDFAutoQueueSubmissionParams imple
 			return resp;
 		}
 
-		if (!theQueue.canAccept())
-		{
-			resp.setReturnCode(112); //  
-			theQueue.copyToResponse(resp, filter, null);
-			return resp;
-		}
 		boolean bAuto = theQueue.isAutomated();
 		if (bAuto)
 			theQueue.setAutomated(false);
 
 		final JDFQueueEntry qe = theQueue.createQueueEntry(getHold());
+		if (qe == null) // can't accept
+		{
+			resp.setReturnCode(112); //  
+			theQueue.copyToResponse(resp, filter, null);
+			return resp;
+		}
 
 		final String copyAtts[] = new String[] { AttributeName.GANGNAME, AttributeName.GANGPOLICY, AttributeName.DESCRIPTIVENAME, AttributeName.PRIORITY };
 		for (int i = 0; i < copyAtts.length; i++)

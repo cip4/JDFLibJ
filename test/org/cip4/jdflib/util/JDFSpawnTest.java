@@ -1042,6 +1042,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 
 	/**
 	 * @param l
+	 * @return 
 	 */
 	private JDFNode createSpawnMain(int l)
 	{

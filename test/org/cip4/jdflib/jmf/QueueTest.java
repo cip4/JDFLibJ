@@ -440,6 +440,18 @@ public class QueueTest extends TestCase
 	/**
 	 * 
 	 */
+	public void testHasFewerEntries()
+	{
+		assertEquals(true, q.hasFewerEntries(null, 4));
+		assertEquals(true, q.hasFewerEntries(null, 5));
+		assertEquals(false, q.hasFewerEntries(null, 6));
+		assertEquals(true, q.hasFewerEntries(EnumQueueEntryStatus.Waiting, 2));
+		assertEquals(false, q.hasFewerEntries(EnumQueueEntryStatus.Waiting, 3));
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetQueueEntryVector()
 	{
 		assertEquals(5, q.getQueueEntryVector().size());

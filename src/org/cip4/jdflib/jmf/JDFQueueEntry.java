@@ -106,14 +106,14 @@ import org.cip4.jdflib.util.StringUtil;
  * @author prosirai
  * 
  */
-public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INodeIdentifiable
+public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElement>, INodeIdentifiable
 {
 	/**
 	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
 	 * 
 	 * Apr 29, 2009
 	 */
-	public static class QueueEntryComparator implements Comparator
+	public static class QueueEntryComparator implements Comparator<KElement>
 	{
 		/**
 		 * getEnum is too slow for heavily repetitive calls
@@ -137,19 +137,20 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 
 		/**
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-		 */
-		public int compare(final Object a1, final Object a2)
+		 * @param o1
+		 * @param o2
+		 * @return
+		*/
+		public int compare(final KElement o1, final KElement o2)
 		{
-			if (!(a1 instanceof KElement))
+			if (o1 == null)
 			{
 				return -1;
 			}
-			if (!(a2 instanceof KElement))
+			if (o2 == null)
 			{
 				return 1;
 			}
-			final KElement o1 = (KElement) a1;
-			final KElement o2 = (KElement) a2;
 			final int i = o1.getNodeName().compareTo(o2.getNodeName());
 			if (i != 0)
 			{
@@ -476,7 +477,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	 */
 	public JDFQueueEntry getNextQueueEntry()
 	{
-		return (JDFQueueEntry) getNextSiblingElement(ElementName.QUEUEENTRY, null);
+		return getNextSiblingElement(JDFQueueEntry.class);
 	}
 
 	/**
@@ -633,9 +634,11 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable, INod
 	}
 
 	/**
+	 * @param arg0 
+	 * @return 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	public int compareTo(final Object arg0)
+	public int compareTo(final KElement arg0)
 	{
 		return new QueueEntryComparator().compare(this, arg0);
 	}

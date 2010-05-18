@@ -1833,13 +1833,14 @@ public class JDFResourceTest extends JDFTestCaseBase
 	// //////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 * test reduction of partitions
 	 */
 	public void testReducePartitions()
 	{
 		final JDFDoc doc = creatXMDoc();
 		final JDFNode n = doc.getJDFRoot();
 		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+
 		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
 		mPart.put("SheetName", "S1");
 		mPart.put("Side", "Front");
@@ -1849,15 +1850,16 @@ public class JDFResourceTest extends JDFTestCaseBase
 		VJDFAttributeMap vm = new VJDFAttributeMap();
 		vm.add(mPart);
 		vm.add(mPart2);
+
 		assertNotNull(xm.getPartition(mPart, null));
 		assertNotNull(xm.getPartition(mPart2, null));
 		xm.reducePartitions(vm);
 		assertNotNull(xm.getPartition(mPart, null));
-		assertNotNull(xm.getPartition(mPart2, null));
+		assertNotNull("Sig2 is still contained in vmap", xm.getPartition(mPart2, null));
 		vm.removeElementAt(1);
 		xm.reducePartitions(vm);
 		assertNotNull(xm.getPartition(mPart, null));
-		assertNull(xm.getPartition(mPart2, null));
+		assertNull("Sig2 was removed from vmap", xm.getPartition(mPart2, null));
 	}
 
 	/**

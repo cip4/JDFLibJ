@@ -44,7 +44,7 @@ public class TestJDF extends JDFTestCaseBase
 	public static void main(final String[] argv)
 	{
 		//		testCollapse();
-		testSpawn();
+		testSpawn2();
 	}
 
 	/**
@@ -64,14 +64,45 @@ public class TestJDF extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public static void testSpawn2()
+	{
+		JDFResource.setUnpartitiondImplicit(true);
+		CPUTimer ct = new CPUTimer(true);
+		final JDFDoc d = new JDFParser().parseFile("C:/data/JDF/Arne/export.jdf");
+		JDFNode n = d.getJDFRoot().getJobPart("1001.0", null);
+		ct.stop();
+		System.out.println(ct);
+		JDFSpawn spawn = new JDFSpawn(n);
+		ct = new CPUTimer(false);
+		ct.setName("spawn");
+		CPUTimer ct1 = new CPUTimer(false);
+		ct1.setName("write");
+		CPUTimer ct2 = new CPUTimer(false);
+		ct2.setName("merge");
+		spawn.vRWResources_in = new VString("Output NodeInfo", null);
+		spawn.vSpawnParts = new VJDFAttributeMap();
+		ct.start();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put("SignatureName", "Sig001");
+		map.put("SheetName", "Sheets");
+		spawn.vSpawnParts.add(map);
+		spawn.bSpawnIdentical = false;
+		spawn.bFixResources = false;
+		spawn.spawn();
+
+	}
+
+	/**
+	 * 
+	 */
 	public static void testSpawn()
 	{
 		JDFResource.setUnpartitiondImplicit(true);
 		for (int ii = 0; ii < 2; ii++)
 		{
 			CPUTimer ct = new CPUTimer(true);
-			final JDFDoc d = new JDFParser().parseFile("C:/data/JDF/2010_03556/main.jdf");
-			JDFNode n = d.getJDFRoot().getJobPart("IPD3.I", null);
+			final JDFDoc d = new JDFParser().parseFile("C:/data/JDF/Arne/export.jdf");
+			JDFNode n = d.getJDFRoot().getJobPart("1001.0", null);
 			ct.stop();
 			System.out.println(ct);
 			JDFSpawn spawn = new JDFSpawn(n);

@@ -1937,6 +1937,47 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * Gets the previous sibling named nodename from the namespace nameSpaceURI of 'this'.
+	 * @param <a> 
+	 * @param clazz the class of the sibling
+	 * @return KElement the next sibling element of 'this', null if none is found
+	 */
+	@SuppressWarnings("unchecked")
+	public <a extends KElement> a getNextSiblingElement(Class<a> clazz)
+	{
+		Node e = getNextSibling();
+		while (e != null)
+		{
+			if (clazz.isInstance(e))
+			{
+				return (a) e;
+			}
+			e = e.getNextSibling();
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the previous sibling named nodename from the namespace nameSpaceURI of 'this'.
+	 * @param <a> 
+	 * @param clazz the class of the sibling
+	 * @return KElement the next sibling element of 'this', null if none is found
+	 */
+	public <a extends KElement> a getFirstChildElement(Class<a> clazz)
+	{
+		Node e = getFirstChild();
+		while (e != null)
+		{
+			if (clazz.isInstance(e))
+			{
+				return (a) e;
+			}
+			e = e.getNextSibling();
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the previous sibling named nodename from the namespace nameSpaceURI of 'this'.
 	 * @param nodeName the name of the sibling
 	 * @param nameSpaceURI the namespace of the sibling
 	 * @return KElement the next sibling element of 'this', null if none is found

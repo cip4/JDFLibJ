@@ -78,6 +78,7 @@ package org.cip4.jdflib.jmf;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueue;
@@ -122,7 +123,7 @@ public class JDFQueue extends JDFAutoQueue
 	// queue processor
 	private CleanupCallback cleanupCallback = null;
 	private ExecuteCallback executeCallback = null;
-	private Comparator<KElement> queueSorter = new QueueEntryComparator();
+	private Comparator<KElement> queueSorter = null;
 
 	/**
 	 * callback class definition for cleaning up in cleanup called once for every qe that is removed
@@ -277,7 +278,14 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	public VElement getQueueEntryVector()
 	{
-		return getChildElementVector(ElementName.QUEUEENTRY, null, null, true, -1, true);
+		Vector<JDFQueueEntry> v1 = getChildrenByClass(JDFQueueEntry.class, false, -1);
+		VElement v = new VElement();
+		if (v1 != null)
+		{
+			v.ensureCapacity(v1.size());
+			v.addAll(v1);
+		}
+		return v;
 	}
 
 	/**
@@ -312,7 +320,7 @@ public class JDFQueue extends JDFAutoQueue
 	{
 		HashMap<String, JDFQueueEntry> map = null;
 
-		final VElement v = getQueueEntryVector();
+		Vector<JDFQueueEntry> v = getChildrenByClass(JDFQueueEntry.class, false, -1);
 		if (v != null)
 		{
 			final int siz = v.size();
@@ -321,7 +329,7 @@ public class JDFQueue extends JDFAutoQueue
 				map = new HashMap<String, JDFQueueEntry>(siz);
 				for (int i = 0; i < siz; i++)
 				{
-					final JDFQueueEntry qe = (JDFQueueEntry) v.get(i);
+					final JDFQueueEntry qe = v.get(i);
 					map.put(qe.getQueueEntryID(), qe);
 				}
 			}
@@ -504,7 +512,14 @@ public class JDFQueue extends JDFAutoQueue
 		{
 			return null;
 		}
-		return (JDFQueueEntry) getChildByTagName(ElementName.QUEUEENTRY, null, 0, new JDFAttributeMap(AttributeName.QUEUEENTRYID, strQEntryID), true, true);
+		JDFQueueEntry qe = getFirstChildElement(JDFQueueEntry.class);
+		while (qe != null)
+		{
+			if (strQEntryID.equals(qe.getQueueEntryID()))
+				return qe;
+			qe = qe.getNextSiblingElement(JDFQueueEntry.class);
+		}
+		return null;
 	}
 
 	/**
@@ -572,7 +587,7 @@ public class JDFQueue extends JDFAutoQueue
 		{
 			return -1;
 		}
-		final VElement v = getChildElementVector(ElementName.QUEUEENTRY, null, null, true, 0, false);
+		final VElement v = getQueueEntryVector();
 		final int size = v.size();
 		for (int i = 0; i < size; i++)
 		{
@@ -619,7 +634,7 @@ public class JDFQueue extends JDFAutoQueue
 			return theEntry;
 		}
 
-		JDFQueueEntry qe = (JDFQueueEntry) getFirstChildElement(ElementName.QUEUEENTRY, null);
+		JDFQueueEntry qe = getFirstChildElement(JDFQueueEntry.class);
 		while (qe != null)
 		{
 
@@ -637,7 +652,7 @@ public class JDFQueue extends JDFAutoQueue
 				// the queue is sorted and we have passed the waiting and running
 				break;
 			}
-			qe = (JDFQueueEntry) qe.getNextSiblingElement(ElementName.QUEUEENTRY, null);
+			qe = qe.getNextSiblingElement(JDFQueueEntry.class);
 		}
 
 		return theEntry;
@@ -808,7 +823,7 @@ public class JDFQueue extends JDFAutoQueue
 	public int numEntries(final EnumQueueEntryStatus qeStatus)
 	{
 		int n = 0;
-		JDFQueueEntry qe = (JDFQueueEntry) getFirstChildElement(ElementName.QUEUEENTRY, null);
+		JDFQueueEntry qe = getFirstChildElement(JDFQueueEntry.class);
 		final String stat = qeStatus == null ? null : qeStatus.getName();
 		while (qe != null)
 		{
@@ -816,7 +831,7 @@ public class JDFQueue extends JDFAutoQueue
 			{
 				n++;
 			}
-			qe = (JDFQueueEntry) qe.getNextSiblingElement(ElementName.QUEUEENTRY, null);
+			qe = qe.getNextSiblingElement(JDFQueueEntry.class);
 		}
 		return n;
 	}
@@ -826,7 +841,7 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	private boolean maxRunning()
 	{
-		return maxRunningEntries > 0 && numEntries(EnumQueueEntryStatus.Running) >= maxRunningEntries;
+		return maxRunningEntries > 0 && hasFewerEntries(EnumQueueEntryStatus.Running, maxRunningEntries);
 	}
 
 	/**
@@ -834,7 +849,31 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	private boolean maxWaiting()
 	{
-		return maxWaitingEntries > 0 && numEntries(EnumQueueEntryStatus.Waiting) >= maxWaitingEntries;
+		return maxWaitingEntries > 0 && hasFewerEntries(EnumQueueEntryStatus.Waiting, maxWaitingEntries);
+	}
+
+	/**
+	 * return true if the queue has less than entries elements
+	 * @param qeStatus the status of the JDFQueueEntry to count
+	 * @param entries the number of entries after which we stop counting
+	 * @return true if the queue has < entries entries with a given QE Status
+	 */
+	public boolean hasFewerEntries(EnumQueueEntryStatus qeStatus, int entries)
+	{
+		int n = 0;
+		JDFQueueEntry qe = getFirstChildElement(JDFQueueEntry.class);
+		final String stat = qeStatus == null ? null : qeStatus.getName();
+		while (qe != null)
+		{
+			if (stat == null || stat.equals(qe.getAttribute(AttributeName.STATUS)))
+			{
+				n++;
+				if (n >= entries)
+					return true;
+			}
+			qe = qe.getNextSiblingElement(JDFQueueEntry.class);
+		}
+		return false;
 	}
 
 	/**
@@ -948,6 +987,9 @@ public class JDFQueue extends JDFAutoQueue
 	@Override
 	public void sortChildren()
 	{
+		if (queueSorter == null)
+			queueSorter = new QueueEntryComparator();
+
 		sortChildren(queueSorter);
 	}
 
@@ -1035,6 +1077,8 @@ public class JDFQueue extends JDFAutoQueue
 	 */
 	public void sortChild(JDFQueueEntry qe)
 	{
+		if (queueSorter == null)
+			queueSorter = new QueueEntryComparator();
 		sortChild(qe, queueSorter);
 	}
 }
