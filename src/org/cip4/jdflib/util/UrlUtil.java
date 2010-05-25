@@ -180,6 +180,15 @@ public class UrlUtil
 	public static class UrlPart
 	{
 		/**
+		 * 
+		 * @return
+		 */
+		public int getResponseCode()
+		{
+			return rc;
+		}
+
+		/**
 		 * @param connection
 		 * @throws IOException
 		 */
@@ -188,6 +197,10 @@ public class UrlUtil
 			inStream = connection.getInputStream();
 			contentLength = connection.getContentLength();
 			contentType = connection.getContentType();
+			if (connection instanceof HttpURLConnection)
+				rc = ((HttpURLConnection) connection).getResponseCode();
+			else
+				rc = 200;
 		}
 
 		/**
@@ -200,8 +213,23 @@ public class UrlUtil
 			inStream = part.getInputStream();
 			contentLength = part.getSize();
 			contentType = part.getContentType();
+			rc = 200;
 		}
 
+		/**
+		 * 
+		 * @param f
+		 * @throws IOException
+		 */
+		public UrlPart(final File f) throws IOException
+		{
+			inStream = FileUtil.getBufferedInputStream(f);
+			contentLength = f.length();
+			contentType = null;
+			rc = 200;
+		}
+
+		private int rc;
 		/**
 		 * the input stream of this UrlPart
 		 */
@@ -213,7 +241,7 @@ public class UrlUtil
 		/**
 		 * the content length of this UrlPart
 		 */
-		public int contentLength;
+		public long contentLength;
 
 		/**
 		 * returns an xmldoc corresponding to this part
@@ -1226,36 +1254,51 @@ public class UrlUtil
 	 */
 	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, String contentType, final HTTPDetails details)
 	{
-		try
+		if (isFile(strUrl))
 		{
-			final URL url = new URL(strUrl);
-			final HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
-			httpURLconnection.setRequestMethod(method);
-			httpURLconnection.setRequestProperty("Connection", KEEPALIVE);
-			contentType = StringUtil.token(contentType, 0, "\r\n");
-			httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
-			boolean doOutput = stream != null;
-			httpURLconnection.setDoOutput(doOutput);
-			if (details != null)
+			File f = urlToFile(strUrl);
+			f = FileUtil.streamToFile(stream, f);
+			try
 			{
-				details.applyTo(httpURLconnection);
+				return new UrlPart(f);
 			}
-
-			if (doOutput)
+			catch (IOException x)
 			{
-				final OutputStream out = httpURLconnection.getOutputStream();
-				IOUtils.copy(stream, out);
-				out.flush();
-				out.close();
+				return null;
 			}
-
-			return new UrlPart(httpURLconnection);
 		}
-		catch (final Exception x)
+		else
 		{
-			System.out.print(x);
-		}
+			try
+			{
+				final URL url = new URL(strUrl);
+				final HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
+				httpURLconnection.setRequestMethod(method);
+				httpURLconnection.setRequestProperty("Connection", KEEPALIVE);
+				contentType = StringUtil.token(contentType, 0, "\r\n");
+				httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
+				boolean doOutput = stream != null;
+				httpURLconnection.setDoOutput(doOutput);
+				if (details != null)
+				{
+					details.applyTo(httpURLconnection);
+				}
 
+				if (doOutput)
+				{
+					final OutputStream out = httpURLconnection.getOutputStream();
+					IOUtils.copy(stream, out);
+					out.flush();
+					out.close();
+				}
+
+				return new UrlPart(httpURLconnection);
+			}
+			catch (final Exception x)
+			{
+				System.out.print(x);
+			}
+		}
 		return null;
 	}
 

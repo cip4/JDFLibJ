@@ -158,6 +158,7 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
 	 */
 	public void testToXJDF()
 	{
@@ -178,6 +179,31 @@ public class XJDFTest extends JDFTestCaseBase
 		xm = (JDFExposedMedia) rl.getTarget();
 		assertEquals(xm.getProductID(), "P1");
 		assertEquals(xm.getPlateType(), EnumPlateType.Dummy);
+	}
+
+	/**
+	 * 
+	 */
+	public void testToXJDFMulti()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+
+		JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		e.setAttribute("JobPartID", null);
+		/*
+				final XJDFToJDFConverter xCon = new XJDFToJDFConverter(n2.getOwnerDocument_JDFElement());
+				final JDFDoc d2 = xCon.convert(e);
+				assertNotNull(d2);
+				final JDFNode nConv = d2.getJDFRoot();
+				assertNotNull(nConv);
+				JDFExposedMedia xm = (JDFExposedMedia) nConv.getResource("ExposedMedia", EnumUsage.Input, 0);
+				final JDFResourceLink rl = nConv.getLink(xm, null);
+				assertNotNull(rl);
+				xm = (JDFExposedMedia) rl.getTarget();
+				assertEquals(xm.getProductID(), "P1");
+				assertEquals(xm.getPlateType(), EnumPlateType.Dummy);
+				*/
 	}
 
 	/**

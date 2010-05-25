@@ -795,6 +795,19 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testWriteToFileBadFile()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		String out = "bad:\\nogood\\junk.jdf";
+		final File f = new File(out);
+		f.delete();
+		assertFalse(d.write2File(out, 2, true));
+		assertFalse(f.exists());
+	}
+
+	/**
 	 * @throws IOException TODO Include test case
 	 */
 	public void testWriteToHTTPURL() throws IOException

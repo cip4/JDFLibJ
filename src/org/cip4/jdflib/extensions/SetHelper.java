@@ -198,12 +198,10 @@ public class SetHelper
 	{
 		KElement newPart = theSet.appendElement(getPartitionName());
 		newPart.setAttribute("ID", theSet.getAttribute(AttributeName.ID) + "." + StringUtil.formatInteger(myIndex(newPart)));
-		JDFPart part = (JDFPart) newPart.appendElement("Part");
 		if (partMap != null && partMap.size() > 0)
 		{
-			String sep = partMap.get(AttributeName.SEPARATION);
-			if (sep != null)
-				partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
+			JDFPart part = (JDFPart) newPart.appendElement("Part");
+			updatePartitions(partMap);
 			part.setPartMap(partMap);
 		}
 
@@ -214,6 +212,17 @@ public class SetHelper
 			newRes.removeAttribute(AttributeName.CLASS);
 		}
 		return new PartitionHelper(newPart);
+	}
+
+	/**
+	 * modify all partitions here
+	 * @param partMap
+	 */
+	private void updatePartitions(JDFAttributeMap partMap)
+	{
+		String sep = partMap.get(AttributeName.SEPARATION);
+		if (sep != null)
+			partMap.put(AttributeName.SEPARATION, StringUtil.replaceChar(sep, ' ', "_", 0));
 	}
 
 	/**

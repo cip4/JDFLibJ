@@ -1117,27 +1117,22 @@ public class JDFSpawn
 		// add partition information to the audits and StatusPool or NodeInfo
 		// 050906 RP move to the back so that it occurs after any global
 		// resources have been copied
+		spawnAudit.setPartMapVector(vSpawnParts);
+		final EnumNodeStatus partStatus;
 		if (vSpawnParts != null && !vSpawnParts.isEmpty())
 		{
-			spawnAudit.setPartMapVector(vSpawnParts);
-
-			final EnumNodeStatus partStatus = node.getPartStatus(vSpawnParts.elementAt(0), 0);
-			if (partStatus != null)
-			{
-				spawnAudit.setStatus(partStatus);
-			}
-			node.setPartStatus(vSpawnParts, EnumNodeStatus.Spawned, null);
+			partStatus = node.getPartStatus(vSpawnParts.elementAt(0), 0);
 		}
 		else
 		// No partitioning - set Audit + Status globally
 		{
-			final EnumNodeStatus status = node.getPartStatus(null, 0);
-			if (status != null)
-			{
-				spawnAudit.setStatus(status);
-			}
-			node.setPartStatus((JDFAttributeMap) null, EnumNodeStatus.Spawned, null);
+			partStatus = node.getPartStatus(null, 0);
 		}
+		if (partStatus != null)
+		{
+			spawnAudit.setStatus(partStatus);
+		}
+		node.setPartStatus(vSpawnParts, EnumNodeStatus.Spawned, null);
 	}
 
 	/**

@@ -71,7 +71,9 @@ package org.cip4.jdflib.extensions;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipOutputStream;
@@ -170,7 +172,7 @@ public class XJDF20 extends BaseElementWalker
 	protected KElement newRoot = null;
 	protected JDFNode oldRoot = null;
 	protected boolean walkingProduct = false;
-	protected boolean first = true;
+	protected Set<String> first = new HashSet<String>();
 	/**
 	 * if true merge stripping and layout
 	 */
@@ -183,6 +185,10 @@ public class XJDF20 extends BaseElementWalker
 	 * set to retain spawn information
 	 */
 	public boolean bRetainSpawnInfo = false;
+	/**
+	 * set to update version stamps
+	 */
+	public boolean bSingleNode = true;
 	/**
 	 * set to update version stamps
 	 */
@@ -227,13 +233,15 @@ public class XJDF20 extends BaseElementWalker
 		{
 			oldRoot = root;
 		}
-		final JDFNode rootIn = node.getJDFRoot();
 		walkingProduct = false;
 		prepareNewDoc(false);
-		walkTree(node, newRoot);
+
+		loopNodes(oldRoot);
 
 		walkingProduct = true;
 		final KElement productList = newRoot.appendElement("ProductList");
+
+		final JDFNode rootIn = node.getJDFRoot();
 		walkTree(rootIn, productList);
 		if (productList.getElement("Product") == null)
 		{
@@ -251,6 +259,28 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
+	 * @param node
+	 */
+	private void loopNodes(final JDFNode node)
+	{
+		final VElement vNodes;
+		if (bSingleNode)
+		{
+			vNodes = new VElement();
+			vNodes.add(node);
+		}
+		else
+		{
+			vNodes = node.getvJDFNode(null, null, false);
+		}
+
+		for (int i = 0; i < vNodes.size(); i++)
+		{
+			walkTree(vNodes.get(i), newRoot);
+		}
+	}
+
+	/**
 	 * @param bJMF if true, create a jmf
 	 * 
 	 */
@@ -259,7 +289,7 @@ public class XJDF20 extends BaseElementWalker
 		final JDFDoc newDoc = new JDFDoc(bJMF ? rootJMF : rootName);
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
-		first = true;
+		first = new HashSet<String>();
 	}
 
 	/**
@@ -877,8 +907,88 @@ public class XJDF20 extends BaseElementWalker
 					return null;
 				}
 				setResource(rl, linkTarget, newRoot);
+				if (!bSingleNode)
+					setProcess(rl);
 			}
 			return null;
+		}
+
+		/**
+		 * @param rl
+		 */
+		private void setProcess(JDFResourceLink rl)
+		{
+			if (rl == null)
+				return;
+
+			KElement process = getProcess(rl);
+			setLink(process, rl);
+
+		}
+
+		/**
+		 * @param process
+		 * @param rl
+		 */
+		private void setLink(KElement process, JDFResourceLink rl)
+		{
+			if (rl == null)
+				return;
+			EnumUsage usage = rl.getUsage();
+			if (usage == null)
+				return;
+			String attName = usage.getName();
+			if (attName != null)
+			{
+				process.appendAttribute(attName, rl.getrRef(), null, " ", true);
+			}
+		}
+
+		/**
+		 * @param jobPartID
+		 * @return 
+		 */
+		private KElement getProcess(JDFResourceLink rl)
+		{
+			JDFNode parent = rl.getParentJDF();
+			String jobPartID = getJobPartID(parent);
+			if (jobPartID == null)
+				return null;
+
+			KElement processList = newRoot.getCreateElement("ProcessList", null, 0);
+			KElement process = processList.getChildWithAttribute("Process", AttributeName.JOBPARTID, null, jobPartID, 0, true);
+			if (process == null)
+			{
+				process = processList.appendElement("Process");
+				process.setAttribute(AttributeName.JOBPARTID, jobPartID);
+				JDFNode grandparent = parent.getParentJDF();
+
+				if (parent.hasAttribute(AttributeName.TYPES))
+				{
+					process.copyAttribute("Types", parent);
+				}
+				else
+				{
+					process.copyAttribute("Types", parent, "Type", null, null);
+				}
+
+				if (grandparent != null)
+					process.setAttribute("Parent", getJobPartID(grandparent));
+
+			}
+			return process;
+		}
+
+		/**
+		 * @param parent
+		 * @return
+		 */
+		private String getJobPartID(JDFNode parent)
+		{
+			String jobPartID = StringUtil.getNonEmpty(parent.getJobPartID(false));
+			if (jobPartID == null)
+				jobPartID = StringUtil.getNonEmpty(parent.getID());
+			return jobPartID;
 		}
 
 		/**
@@ -1040,11 +1150,11 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
-			if (!first)
+			if (first.contains(jdf.getID()))
 			{
 				return null;
 			}
-			first = false;
+			first.add(jdf.getID());
 			final JDFNode node = (JDFNode) jdf;
 			setRootAttributes(node, xjdf);
 			return xjdf;
@@ -1079,10 +1189,9 @@ public class XJDF20 extends BaseElementWalker
 				niLeaf.setNodeStatus(node.getPartStatus(map, 0));
 				niLeaf.setNodeStatusDetails(StringUtil.getNonEmpty(node.getPartStatusDetails(map)));
 			}
-
+			String types = newRootP.getAttribute(AttributeName.TYPES);
 			newRootP.setAttributes(node);
 
-			// status is set only in the NodeInfo
 			removeUnused(newRootP);
 
 			if (bUpdateVersion)
@@ -1091,7 +1200,7 @@ public class XJDF20 extends BaseElementWalker
 				newRootP.setAttribute("MaxVersion", "2.0");
 			}
 
-			updateTypes(newRootP);
+			updateTypes(newRootP, types);
 			namedFeaturesToGeneralID(node, newRootP);
 			updateSpawnInfo(node, newRootP);
 		}
@@ -1123,6 +1232,7 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		protected void removeUnused(final KElement newRootP)
 		{
+			// status is set only in the NodeInfo
 			newRootP.removeAttribute(AttributeName.STATUS);
 			newRootP.removeAttribute(AttributeName.STATUSDETAILS);
 			newRootP.removeAttribute(AttributeName.ACTIVATION);
@@ -1132,8 +1242,9 @@ public class XJDF20 extends BaseElementWalker
 
 		/**
 		 * @param newRootP
+		 * @param types 
 		 */
-		private void updateTypes(final KElement newRootP)
+		private void updateTypes(final KElement newRootP, String types)
 		{
 			if (!newRootP.hasAttribute(AttributeName.TYPES))
 			{
@@ -1143,6 +1254,12 @@ public class XJDF20 extends BaseElementWalker
 			{
 				newRootP.removeAttribute("Type");
 			}
+			VString t1 = StringUtil.tokenize(types, null, false);
+			VString t2 = StringUtil.tokenize(newRootP.getAttribute(AttributeName.TYPES), null, false);
+			t1.appendUnique(t2);
+			t1.removeStrings("ProcessGroup", 0);
+			t1.removeStrings("Combined", 0);
+			newRootP.setAttribute(AttributeName.TYPES, t1, null);
 		}
 
 		/**
@@ -1370,6 +1487,10 @@ public class XJDF20 extends BaseElementWalker
 			{
 				return null;
 			}
+			else if (newRoot.getElement(ElementName.AUDITPOOL) != null)
+			{
+				return newRoot.getElement(ElementName.AUDITPOOL);
+			}
 			return super.walk(jdf, xjdf);
 		}
 
@@ -1407,6 +1528,24 @@ public class XJDF20 extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return toCheck instanceof JDFAudit;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param jdf
+		 * @param xjdf
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement jdf, KElement xjdf)
+		{
+			KElement e = super.walk(jdf, xjdf);
+			if (!bSingleNode && e != null)
+			{
+				JDFNode n = ((JDFAudit) jdf).getParentJDF();
+				e.copyAttribute(AttributeName.JOBPARTID, n);
+			}
+			return e;
 		}
 	}
 
@@ -2289,11 +2428,11 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
-			if (!first)
+			if (first.contains(jdf.getID()))
 			{
 				return null;
 			}
-			first = false;
+			first.add(jdf.getID());
 			final JDFJMF jmf = (JDFJMF) jdf;
 			setRootAttributes(jmf, xjdf);
 			return xjdf;

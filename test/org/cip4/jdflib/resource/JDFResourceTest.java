@@ -76,6 +76,7 @@
  */
 package org.cip4.jdflib.resource;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
@@ -358,20 +359,12 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		resource = (JDFResource) root.appendElement(ElementName.COLOR);
 
-		// isResourceStatic((JDFElement) parentNode)
-		// Rekursion : !(parentName != null &&
-		// !parentName.equals(JDFConstants.EMPTYSTRING)
-		// resRoot = resource.getResourceRoot();
-		// assertNull(resRoot);
-
 		// set up a test document
 		jdfDoc = new JDFDoc(ElementName.RESOURCEPOOL);
 		root = (JDFElement) jdfDoc.getRoot();
 
 		resource = (JDFResource) root.appendElement(ElementName.COLOR);
 
-		// StringUtil.hasToken(validParentNodeNames(), parentName,
-		// JDFConstants.COMMA)
 		resRoot = resource.getResourceRoot();
 		assertTrue(resRoot == resource);
 
@@ -383,10 +376,8 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFResource elem = (JDFResource) root.appendElement(ElementName.NODEINFO);
 
 		resRoot = resource.getResourceRoot();
-		assertNull(resRoot);
+		assertEquals("getResourceRoot now also returns the root of incorrectly placed resources", resource, resRoot);
 
-		// localName.equals(ElementName.NODEINFO) ||
-		// localName.equals(ElementName.CUSTOMERINFO)
 		resRoot = elem.getResourceRoot();
 		assertTrue(resRoot == elem);
 
@@ -1250,6 +1241,44 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertEquals(r, rSheet);
 		r = fp.getPartition(m2, EnumPartUsage.Explicit);
 		assertNull(r);
+	}
+
+	/**
+	 * test getPartitionMap()
+	 */
+	public void testGetPartitionMap()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Folding);
+		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
+		m.put("SheetName", "Sheet1");
+		m.put("BlockName", "Block1");
+		JDFResource r1 = fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName", " "));
+		m.put("BlockName", "Block2");
+		JDFResource r2 = fp.getCreatePartition(m, new VString("SignatureName SheetName BlockName", " "));
+
+		HashMap<JDFAttributeMap, JDFResource> partitionMap = fp.getPartitionMap();
+		assertEquals(partitionMap.size(), 2 + 1 + 1 + 1);
+		assertTrue(partitionMap.containsValue(r1));
+		assertTrue(partitionMap.containsValue(r2));
+		assertTrue(partitionMap.containsValue(fp));
+
+		r2.setIdentical(r1);
+		partitionMap = fp.getPartitionMap();
+		assertEquals(partitionMap.size(), 1 + 1 + 1 + 1);
+		assertTrue(partitionMap.containsValue(r1));
+		assertFalse(partitionMap.containsValue(r2));
+		assertTrue(partitionMap.containsValue(fp));
+
+		m.put("BlockName", "Block3");
+		r2.getIdentical().setPartMap(m);
+		partitionMap = fp.getPartitionMap();
+		assertEquals("dummy identical is skipped", partitionMap.size(), 1 + 1 + 1 + 1);
+		assertTrue(partitionMap.containsValue(r1));
+		assertFalse(partitionMap.containsValue(r2));
+		assertTrue(partitionMap.containsValue(fp));
 	}
 
 	// ////////////////////////////////////////////////////////////

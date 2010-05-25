@@ -2766,12 +2766,8 @@ public class JDFResource extends JDFElement
 
 			if ((parentNode instanceof JDFNode) || (parentNode instanceof JDFJMF))
 			{
-				if ((elem instanceof JDFNodeInfo) || (elem instanceof JDFCustomerInfo))
-				{
-					return (JDFResource) elem;
-				}
-
-				return null; // not a resource
+				//100525 return resource root, even if it is incorrectly placed 				
+				return (elem instanceof JDFResource) ? (JDFResource) elem : null;
 			}
 
 			if ((elem instanceof JDFResource) && !(parentNode instanceof JDFResource))
@@ -3270,7 +3266,7 @@ public class JDFResource extends JDFElement
 		VElement v = getLeaves(true);
 		HashMap<JDFAttributeMap, JDFResource> map = new HashMap<JDFAttributeMap, JDFResource>();
 		boolean bIdentical = getChildrenByClass(JDFIdentical.class, true, 1) != null;
-		VString partIDKeys = getPartIDKeys();
+		final VString partIDKeys = getPartIDKeys();
 		for (int i = 0; i < v.size(); i++)
 		{
 			JDFResource r = (JDFResource) v.get(i);
@@ -3278,9 +3274,10 @@ public class JDFResource extends JDFElement
 			if (id != null)
 			{
 				r = id.getTarget();
+				// this may be null if identical points to Nirvana
 			}
-
-			map.put(r.getPartMap(partIDKeys), r);
+			if (r != null)
+				map.put(r.getPartMap(partIDKeys), r);
 		}
 		return map;
 	}

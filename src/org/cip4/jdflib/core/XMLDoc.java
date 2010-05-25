@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -441,7 +441,8 @@ public class XMLDoc
 
 			// ensure having an empty file in case it did not exist
 			file.delete();
-			if (FileUtil.createNewFile(file))
+			fSuccess = FileUtil.createNewFile(file);
+			if (fSuccess)
 			{
 				outStream = new FileOutputStream(file);
 				write2Stream(outStream, indent, bPreserveSpace);
