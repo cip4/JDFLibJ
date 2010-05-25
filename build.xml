@@ -120,6 +120,7 @@
 		<copy tofile="../JDFEditor/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../elk/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../alces/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+		<copy tofile="../DropFolder/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 	</target>
 
 	<!--  ==================================================================================  -->
