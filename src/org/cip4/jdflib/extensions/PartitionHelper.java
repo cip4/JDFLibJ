@@ -104,6 +104,8 @@ public class PartitionHelper
 		{
 			for (int i = 0; i < vParts.size(); i++)
 				vMap.add(vParts.get(i).getAttributeMap());
+			if (vParts.size() == 0)
+				vMap.add(new JDFAttributeMap());
 		}
 		return vMap;
 	}

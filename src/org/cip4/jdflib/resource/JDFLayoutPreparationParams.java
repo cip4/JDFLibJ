@@ -157,11 +157,12 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 
 	/**
 	 * convert this to stripping - also remove this and replace LayoutPrep in the node type list
+	 * @param n the node to convert
 	 * @return the converter which can be queried for the modified resources
 	 */
-	public StrippingConverter convertToStripping()
+	public StrippingConverter convertToStripping(JDFNode n)
 	{
-		final StrippingConverter c = new StrippingConverter();
+		final StrippingConverter c = new StrippingConverter(n);
 		c.convert();
 		return c;
 	}
@@ -178,6 +179,15 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 		private JDFAssembly assembly = null;
 		private JDFBinderySignature binderySignature = null;
 		private JDFStrippingParams strippingParams = null;
+		private final JDFNode parent;
+
+		/**
+		 * @param n
+		 */
+		public StrippingConverter(JDFNode n)
+		{
+			parent = n == null ? getParentJDF() : n;
+		}
 
 		/**
 		 * @return the binderySignature
@@ -192,10 +202,10 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 		 */
 		public void convert()
 		{
-			final JDFNode parent = convertParentNode();
-			convertStrippingParams(parent);
-			convertBinderySignature(parent);
-			convertAssembly(parent);
+			convertParentNode();
+			convertStrippingParams();
+			convertBinderySignature();
+			convertAssembly();
 
 			removeObsolete();
 		}
@@ -219,9 +229,8 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 
 		/**
 		 * convert all the attributes that go to strippingparams and related elements
-		 * @param parent
 		 */
-		private void convertStrippingParams(final JDFNode parent)
+		private void convertStrippingParams()
 		{
 			strippingParams = (JDFStrippingParams) parent.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
 			final JDFMedia media = getMedia();
@@ -261,9 +270,8 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 
 		/**
 		 * convert all the attributes that go to binderysignature and related elements
-		 * @param parent
 		 */
-		private void convertBinderySignature(final JDFNode parent)
+		private void convertBinderySignature()
 		{
 			binderySignature = strippingParams.appendBinderySignature();
 			binderySignature.makeRootResource(null, null, true);
@@ -275,9 +283,8 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 
 		/**
 		 * convert all the attributes that go to binderysignature and related elements
-		 * @param parent
 		 */
-		private void convertAssembly(final JDFNode parent)
+		private void convertAssembly()
 		{
 			assembly = (JDFAssembly) parent.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
 			assembly.copyAttribute(AttributeName.BINDINGSIDE, JDFLayoutPreparationParams.this, AttributeName.BINDINGEDGE, null, null);
@@ -306,7 +313,6 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 		 */
 		private JDFNode convertParentNode()
 		{
-			final JDFNode parent = getParentJDF();
 			final VString types = parent.getTypes();
 			if (types == null && EnumType.LayoutPreparation.equals(parent.getEnumType()))
 			{

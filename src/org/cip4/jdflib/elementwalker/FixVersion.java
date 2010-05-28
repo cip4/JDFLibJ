@@ -90,10 +90,12 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumSettingsPolicy;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -1803,11 +1805,38 @@ public class FixVersion extends BaseElementWalker
 			final JDFLayoutPreparationParams lpp = (JDFLayoutPreparationParams) e1;
 			if (lpp.isResourceRoot() && bLayoutPrepToStripping)
 			{
-				final StrippingConverter sc = lpp.convertToStripping();
+				VElement rls = lpp.getLinksAndRefs(true, false);
+				if (rls == null)
+				{
+					return null;
+				}
+				rls.unify();
+				VElement vn = new VElement();
+				for (int i = 0; i < rls.size(); i++)
+				{
+					JDFResourceLink rl = (JDFResourceLink) rls.get(i);
+					vn.add(rl.getParentJDF());
+				}
+				vn.unify();
+				if (vn.size() < 0)
+					return null;
+
+				final StrippingConverter sc = lpp.convertToStripping((JDFNode) vn.get(0));
 				// the new elements are NOT in the original and must therefore be called individually
 				new FixVersion(FixVersion.this).walkTree(sc.getAssembly(), null);
 				new FixVersion(FixVersion.this).walkTree(sc.getStrippingParams(), null);
 				new FixVersion(FixVersion.this).walkTree(sc.getBinderySignature(), null);
+				for (int i = 1; i < vn.size(); i++)
+				{
+					JDFNode n = (JDFNode) vn.get(i);
+					n.linkResource(sc.getAssembly(), EnumUsage.Input, null);
+					n.linkResource(sc.getStrippingParams(), EnumUsage.Input, null);
+				}
+
+				for (int i = 0; i < rls.size(); i++)
+				{
+					rls.get(i).deleteNode();
+				}
 				return null; // stop here, we zapped lpp
 			}
 			return super.walk(e1, trackElem);

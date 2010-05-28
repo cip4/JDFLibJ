@@ -331,7 +331,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 */
 	public boolean subMap(final VJDFAttributeMap vMap)
 	{
-		if (vMap == null)
+		if (vMap == null || vMap.size() == 0)
 		{
 			return true;
 		}

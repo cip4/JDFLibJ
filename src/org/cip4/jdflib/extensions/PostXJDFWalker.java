@@ -74,6 +74,8 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
@@ -156,18 +158,16 @@ class PostXJDFWalker extends BaseElementWalker
 				return xjdf; // nuff done
 			}
 			//TODO multiple lower level stripparams partitions
-			KElement newLayout = newRoot.getXPathElement("ParameterSet[@Name=\"Layout\"]");
-			if (newLayout != null)
-			{
-				VJDFAttributeMap vmap = new PartitionHelper(xjdf.getParentNode_KElement()).getPartMapVector();
-				PartitionHelper layoutPartitionH = new SetHelper(newLayout).getPartition(vmap);
-				KElement layoutPartition = layoutPartitionH == null ? null : layoutPartitionH.getPartition();
-				if (layoutPartition != null)
-				{
-					layoutPartition = layoutPartition.getCreateElement("Layout");
-					layoutPartition.mergeElement(xjdf, false);
-				}
-			}
+			XJDFHelper h = new XJDFHelper(newRoot);
+			SetHelper layoutseth = h.getCreateSet("Parameter", "Layout", EnumUsage.Input);
+
+			VJDFAttributeMap vmap = new PartitionHelper(xjdf.getParentNode_KElement()).getPartMapVector();
+			JDFAttributeMap map = vmap.size() == 0 ? null : vmap.get(0);
+
+			PartitionHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
+			KElement layoutPartition = layoutPartitionH.getResource();
+			layoutPartition.mergeElement(xjdf, false);
+
 			return null; // stop after merging
 
 		}

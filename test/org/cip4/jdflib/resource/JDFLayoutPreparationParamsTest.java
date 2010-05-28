@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -97,7 +97,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	{
 		lpp.setFrontMarkList(new VString("RegisterMark FoldMark", null));
 		lpp.setBackMarkList(new VString("RegisterMark ColorBar", null));
-		final StrippingConverter sc = lpp.convertToStripping();
+		final StrippingConverter sc = lpp.convertToStripping(null);
 		final JDFStrippingParams strippingParams = sc.getStrippingParams();
 		assertEquals(strippingParams, n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
 		final VElement v = strippingParams.getChildElementVector(ElementName.STRIPMARK, null);
@@ -109,7 +109,7 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	 */
 	public void testConvertStripSimple()
 	{
-		lpp.convertToStripping();
+		lpp.convertToStripping(null);
 		assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
 		assertNotNull(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
 		assertEquals(EnumType.Stripping, n.getEnumType());
@@ -118,10 +118,28 @@ public class JDFLayoutPreparationParamsTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testConvertStripDeep()
+	{
+		JDFNode nProd = new JDFDoc("JDF").getJDFRoot();
+		nProd.setType(EnumType.Product);
+		n = (JDFNode) nProd.moveElement(n, null);
+		lpp = (JDFLayoutPreparationParams) n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0);
+		assertNotNull(lpp);
+		nProd.getCreateResourcePool().moveElement(lpp, null);
+		lpp.convertToStripping(n);
+		assertNull(n.getResource(ElementName.LAYOUTPREPARATIONPARAMS, null, 0));
+		assertNotNull(n.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0));
+		assertEquals(EnumType.Stripping, n.getEnumType());
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testConvertStripSimpleCombined()
 	{
 		n.setCombined(new VString("LayoutPreparation Imposition", null));
-		lpp.convertToStripping();
+		lpp.convertToStripping(null);
 		final VString types = n.getTypes();
 		assertTrue(types.contains(EnumType.Stripping.getName()));
 		assertTrue(types.contains(EnumType.Imposition.getName()));
