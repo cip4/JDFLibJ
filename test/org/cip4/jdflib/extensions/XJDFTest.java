@@ -302,8 +302,30 @@ public class XJDFTest extends JDFTestCaseBase
 		nP.linkResource(c, EnumUsage.Output, null);
 
 		e = new XJDF20().makeNewJDF(n, null);
-		assertNotNull(e.getXPathElement("ProductList/Product/IntentSet[@Name=\"LayoutIntent\"]"));
+		assertNotNull(e.getXPathElement("ProductList/Product/Intent[@Name=\"LayoutIntent\"]"));
 		assertEquals(e.getXPathAttribute("ProductList/Product/@DescriptiveName", null), "desc");
+	}
+
+	/**
+	*
+	 */
+	public void testToXJDFIntermediate()
+	{
+		final JDFNode nP = new JDFDoc("JDF").getJDFRoot();
+		nP.setType(EnumType.Product);
+		nP.setDescriptiveName("desc");
+		nP.addResource("LayoutIntent", EnumUsage.Input);
+		n = (JDFNode) nP.copyElement(n, null);
+		final JDFResource c = n.addResource("Component", EnumUsage.Output);
+		nP.linkResource(c, EnumUsage.Output, null);
+
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.bSingleNode = true;
+		e = xjdf20.makeNewJDF(nP, null);
+		assertFalse(e.toString().contains("ExposedMedia"));
+		xjdf20.bSingleNode = false;
+		e = xjdf20.makeNewJDF(nP, null);
+		assertTrue(e.toString().contains("ExposedMedia"));
 	}
 
 	/**

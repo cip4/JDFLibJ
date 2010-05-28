@@ -545,8 +545,8 @@ public class MimeWriter extends MimeHelper
 					v.item(i).setAttribute(AttributeName.URL, cid);
 				}
 			}
-			updateXMLMultipart(docJMF, null);
 		}
+		updateXMLMultipart(docJMF, null);
 
 		if (extendReferenced)
 		{

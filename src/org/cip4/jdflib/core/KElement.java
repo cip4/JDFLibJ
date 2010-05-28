@@ -793,6 +793,7 @@ public class KElement extends ElementNSImpl implements Element
 				bDirty = true;
 				removeAttribute(key);
 				super.setAttributeNS(AttributeName.XMLNSURI, key, value);
+				getNamespaceURIFromPrefix(StringUtil.rightStr(key, -6), true);
 			}
 		}
 		else
@@ -818,12 +819,16 @@ public class KElement extends ElementNSImpl implements Element
 				}
 				else
 				{
-					final String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key));
+					String namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), true);
 
 					if (namespaceURI2 != null && !JDFConstants.EMPTYSTRING.equals(namespaceURI2) && !namespaceURI2.equals(nameSpaceURI))
 					{ // in case multiple namespace uris are defined for the same prefix, all we can do is to bail out loudly
-						throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-								+ "; attempting to set URI: " + nameSpaceURI);
+						namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
+						if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
+						{
+							throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+									+ "; attempting to set URI: " + nameSpaceURI);
+						}
 					}
 
 					// remove any twin dom lvl 1 attributes - just in case
@@ -1278,7 +1283,17 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getNamespaceURIFromPrefix(final String prefix)
 	{
+		return getNamespaceURIFromPrefix(prefix, true);
+	}
 
+	/**
+	 * 
+	 * @param prefix
+	 * @param bcache
+	 * @return
+	 */
+	private String getNamespaceURIFromPrefix(final String prefix, boolean bcache)
+	{
 		String strNamespaceURI = null;
 		if (prefix == null || prefix.equals(JDFConstants.EMPTYSTRING))
 		{
@@ -1310,10 +1325,12 @@ public class KElement extends ElementNSImpl implements Element
 				return AttributeName.XMLNSURI;
 			}
 			DocumentJDFImpl documentJDFImpl = (DocumentJDFImpl) getOwnerDocument();
-			strNamespaceURI = documentJDFImpl.getNamespaceURIFromPrefix(prefix);
-			if (strNamespaceURI != null)
-				return strNamespaceURI;
-
+			if (bcache)
+			{
+				strNamespaceURI = documentJDFImpl.getNamespaceURIFromPrefix(prefix);
+				if (strNamespaceURI != null)
+					return strNamespaceURI;
+			}
 			final String elementPrefix = getPrefix();
 			if (prefix.equals(elementPrefix))
 			{
@@ -1362,7 +1379,7 @@ public class KElement extends ElementNSImpl implements Element
 			final KElement e = getParentNode_KElement();
 			if (e != null)
 			{
-				return e.getNamespaceURIFromPrefix(prefix);
+				return e.getNamespaceURIFromPrefix(prefix, bcache);
 			}
 		}
 
@@ -1551,13 +1568,29 @@ public class KElement extends ElementNSImpl implements Element
 		if (nm != null)
 		{
 			siz = nm.getLength();
-			for (int i = 0; i < siz; i++)
+			boolean bCatch = false;
+			// this loop allows us to catch namespace exceptions, then set the namespace and subsequently reset the attributes
+			for (int j = 0; j < 2; j++)
 			{
-				final Node a = nm.item(i);
-				if (ignoreList == null || !ignoreList.contains(a.getLocalName()))
+				for (int i = 0; i < siz; i++)
 				{
-					setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
+					final Node a = nm.item(i);
+					if (ignoreList == null || !ignoreList.contains(a.getLocalName()))
+					{
+						try
+						{
+							setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
+						}
+						catch (JDFException x)
+						{
+							bCatch = true;
+							if (j == 1)
+								throw x;
+						}
+					}
 				}
+				if (!bCatch)
+					break; // one loop is enough in case all sets went through
 			}
 		}
 
@@ -4042,11 +4075,11 @@ public class KElement extends ElementNSImpl implements Element
 			}
 			setAttributes(src);
 			setText(src.getText());
-			setXMLComment(src.getXMLComment(0));
 			KElement e = src.getFirstChildElement();
 			while (e != null)
 			{
-				copyElement(e, null);
+				KElement e2 = copyElement(e, null);
+				e2.setXMLComment(e.getXMLComment(0));
 				e = e.getNextSiblingElement();
 			}
 		}
@@ -5172,12 +5205,6 @@ public class KElement extends ElementNSImpl implements Element
 		return kRet;
 	}
 
-	// ************************** end of methods needed in misc/testNew
-	// *********
-	// //////////////////////////////////////////////////////////////////////////
-	// ************************** start of additional methods
-	// *******************
-
 	/**
 	 * Sets an attribute as defined by XPath to value <br>
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
@@ -5194,7 +5221,6 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		else
 		{
-
 			VElement vEle = getXPathElementVector(path, -1);
 			if (vEle == null)
 			{
@@ -5209,7 +5235,6 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				vEle.get(i).setText(value);
 			}
-
 		}
 	}
 
@@ -5264,7 +5289,7 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Gets an attribute value as defined by XPath namespace prefixes are resolved <br>
+	 * Gets an attribute value as defined by XPath namespace prefixes are resolved or the node text if an element is specified <br>
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported TODO fix bug for attribute searches where the att value contains xpath syntax
 	 * @param path XPath abbreviated syntax representation of the attribute, <code>parentElement/thisElement/@thisAtt</code>
 	 * <code>parentElement/thisElement[2]/@thisAtt</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]/@thisAtt</code>
@@ -5275,14 +5300,22 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String getXPathAttribute(final String path, final String def)
 	{
-		final int pos = path.lastIndexOf(JDFConstants.AET);
+		int pos = path.lastIndexOf(JDFConstants.AET);
+		final String elemPath;
 		if (pos == -1 || pos > 0 && path.charAt(pos - 1) == '[')
 		{
-			throw new JDFException("GetXPathAttribute - bad attribute path: " + path);
+			elemPath = path;
+			pos = -1;
 		}
-		final KElement kEle = getXPathElement(path.substring(0, pos));
-		return kEle == null ? def // xpath element does not exist
-		: kEle.getAttribute_KElement(path.substring(pos + 1), null, def);
+		else
+		{
+			elemPath = path.substring(0, pos);
+		}
+		final KElement kEle = getXPathElement(elemPath);
+		if (kEle == null)
+			return def;
+
+		return pos >= 0 ? kEle.getAttribute_KElement(path.substring(pos + 1), null, def) : kEle.getText();
 	}
 
 	/**
@@ -5994,6 +6027,30 @@ public class KElement extends ElementNSImpl implements Element
 	public boolean hasUnknownElements(final boolean bIgnorePrivate)
 	{
 		return getUnknownElements(bIgnorePrivate, 1).size() > 0;
+	}
+
+	/**
+	 * copy attribute values or text from an xpath in src to this
+	 * 
+	 * @param dstXPath the destination xpath in this element
+	 * @param src the source element, if null; use this
+	 * @param srcXPath the source xpath, if null same as dstXPath
+	 * @return the copied value; may be null if no value was found in srcXPath
+	 */
+	public String copyXPathValue(String dstXPath, KElement src, String srcXPath)
+	{
+		if (src == null)
+		{
+			src = this;
+		}
+		if (srcXPath == null)
+		{
+			srcXPath = dstXPath;
+		}
+
+		String s = src.getXPathAttribute(srcXPath, null);
+		setXPathValue(dstXPath, s);
+		return s;
 	}
 
 	/**
@@ -6922,7 +6979,7 @@ public class KElement extends ElementNSImpl implements Element
 	@Override
 	public KElement clone() //throws CloneNotSupportedException
 	{
-		KElement e = new XMLDoc(getNodeName(), getNamespaceURI()).getRoot();
+		KElement e = createChildFromName(getNodeName(), getNamespaceURI());
 		e.copyInto(this, false);
 		return e;
 

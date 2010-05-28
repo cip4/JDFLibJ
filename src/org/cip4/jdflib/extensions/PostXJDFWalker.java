@@ -90,6 +90,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 */
 	boolean mergeLayout = true;
 	KElement newRoot;
+	boolean bIntentPartition = false;
 
 	/**
 	 * 
@@ -215,6 +216,54 @@ class PostXJDFWalker extends BaseElementWalker
 
 			return mergeLayout ? null : xjdf; // stop after merging
 
+		}
+
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkIntentSet extends WalkElement
+	{
+		/**
+		 * 
+		 */
+		public WalkIntentSet()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return !bIntentPartition && toCheck.getLocalName().equals("IntentSet");
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			KElement intent = xjdf.getElement("Intent");
+			if (intent != null)
+			{
+				intent.copyAttribute("ID", xjdf);
+				intent.copyAttribute("Name", xjdf);
+				xjdf.getParentNode_KElement().moveElement(intent, xjdf);
+				xjdf.deleteNode();
+			}
+			return intent;
 		}
 
 	}

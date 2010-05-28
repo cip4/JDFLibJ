@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -85,15 +85,15 @@ public class JDFPersonTest extends JDFTestCaseBase
 	 */
 	public void testFamilyName()
 	{
-		person.setFamilyName("Müller");
-		assertEquals(person.getFamilyName(), "Müller");
-		assertEquals(person.getDescriptiveName(), "Müller");
+		person.setFamilyName("MÃ¼ller");
+		assertEquals(person.getFamilyName(), "MÃ¼ller");
+		assertEquals(person.getDescriptiveName(), "MÃ¼ller");
 		person.setFamilyName("Meyer");
 		assertEquals(person.getFamilyName(), "Meyer");
 		assertEquals(person.getDescriptiveName(), "Meyer");
-		person.setFamilyName("Müller");
-		assertEquals(person.getFamilyName(), "Müller");
-		assertEquals(person.getDescriptiveName(), "Müller");
+		person.setFamilyName("MÃ¼ller");
+		assertEquals(person.getFamilyName(), "MÃ¼ller");
+		assertEquals(person.getDescriptiveName(), "MÃ¼ller");
 	}
 
 	/**
@@ -118,12 +118,12 @@ public class JDFPersonTest extends JDFTestCaseBase
 	public void testFirstLastName()
 	{
 		testFirstName();
-		person.setFamilyName("Müller");
-		assertEquals(person.getFamilyName(), "Müller");
-		assertEquals(person.getDescriptiveName(), "Joe Müller");
+		person.setFamilyName("Mï¿½ller");
+		assertEquals(person.getFamilyName(), "Mï¿½ller");
+		assertEquals(person.getDescriptiveName(), "Joe Mï¿½ller");
 		person.setFirstName("Mary");
 		assertEquals(person.getFirstName(), "Mary");
-		assertEquals(person.getDescriptiveName(), "Mary Müller");
+		assertEquals(person.getDescriptiveName(), "Mary Mï¿½ller");
 		person.setFamilyName("Meyer");
 		assertEquals(person.getFamilyName(), "Meyer");
 		assertEquals(person.getDescriptiveName(), "Mary Meyer");
@@ -146,7 +146,7 @@ public class JDFPersonTest extends JDFTestCaseBase
 		testFamilyName();
 		person.setFirstName("Joe");
 		assertEquals(person.getFirstName(), "Joe");
-		assertEquals(person.getDescriptiveName(), "Joe Müller");
+		assertEquals(person.getDescriptiveName(), "Joe MÃ¼ller");
 	}
 
 	/**
@@ -171,6 +171,11 @@ public class JDFPersonTest extends JDFTestCaseBase
 		assertEquals("create correct descname", person.getDescriptiveName(), "Joe Cool");
 		person.setFirstName(null);
 		assertEquals("create correct descname", person.getDescriptiveName(), "Cool");
+		person.setNamePrefix("Prof.");
+		person.setFirstName("Joe");
+		assertEquals("create correct descname", person.getDescriptiveName(), "Prof. Joe Cool");
+		person.setNameSuffix("IV");
+		assertEquals("create correct descname", person.getDescriptiveName(), "Prof. Joe Cool IV");
 	}
 
 	@Override

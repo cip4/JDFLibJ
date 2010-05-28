@@ -71,10 +71,13 @@ package org.cip4.jdflib.extensions;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.pool.JDFAuditPool;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -129,6 +132,8 @@ public class XJDFHelper
 		JDFDoc doc = new JDFDoc(XJDF20.rootName);
 		doc.setInitOnCreate(false);
 		theXJDF = doc.getRoot();
+		JDFAuditPool ap = (JDFAuditPool) theXJDF.getCreateElement(ElementName.AUDITPOOL);
+		ap.addAudit(EnumAuditType.Created, null).init();
 	}
 
 	/**
@@ -185,32 +190,34 @@ public class XJDFHelper
 	/**
 	 * @param family 
 	 * @param name 
+	 * @param usage TODO
 	 * @return a new set element
 	 */
-	public SetHelper appendSet(String family, String name)
+	public SetHelper appendSet(String family, String name, EnumUsage usage)
 	{
 		KElement newSet = theXJDF.appendElement(family + "Set");
 		newSet.setAttribute("Name", name);
 		if (name == null)
 			name = "Set";
 		newSet.setAttribute(AttributeName.ID, name + KElement.uniqueID(0));
-		return new SetHelper(newSet);
+		SetHelper h = new SetHelper(newSet);
+		if (usage != null)
+			h.setUsage(usage);
+		return h;
 	}
 
 	/**
 	 * @param family 
 	 * @param name 
-	 * @param enumUsage 
+	 * @param usage 
 	 * @return a new set element
 	 */
-	public SetHelper getCreateSet(String family, String name, EnumUsage enumUsage)
+	public SetHelper getCreateSet(String family, String name, EnumUsage usage)
 	{
 		SetHelper newSet = getSet(name, 0);
 		if (newSet == null)
 		{
-			newSet = appendSet(family, name);
-			if (enumUsage != null)
-				newSet.setUsage(enumUsage);
+			newSet = appendSet(family, name, usage);
 		}
 		return newSet;
 	}
@@ -229,11 +236,12 @@ public class XJDFHelper
 
 	/**
 	 * @param name 
+	 * @param usage TODO
 	 * @return a new set element
 	 */
-	public SetHelper appendParameter(String name)
+	public SetHelper appendParameter(String name, EnumUsage usage)
 	{
-		return appendSet("Parameter", name);
+		return appendSet("Parameter", name, usage);
 	}
 
 	/**
@@ -247,11 +255,12 @@ public class XJDFHelper
 
 	/**
 	 * @param name 
+	 * @param usage TODO
 	 * @return a new set element
 	 */
-	public SetHelper appendResource(String name)
+	public SetHelper appendResource(String name, EnumUsage usage)
 	{
-		return appendSet("Resource", name);
+		return appendSet("Resource", name, usage);
 	}
 
 	protected KElement theXJDF;

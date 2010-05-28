@@ -1645,7 +1645,7 @@ public class DocumentJDFImpl extends DocumentImpl
 		if (prefix == null)
 			prefix = JDFConstants.COLON;
 		String old = nsMap.get(prefix);
-		if (old == null || !old.equals(strNamespaceURI))
+		if (old == null)
 		{
 			setRootNSAttribute(prefix, strNamespaceURI);
 			nsMap.put(prefix, strNamespaceURI);
@@ -1663,7 +1663,7 @@ public class DocumentJDFImpl extends DocumentImpl
 			qualifiedName += JDFConstants.COLON + prefix;
 		KElement element = (KElement) getDocumentElement();
 		if (element != null)
-			element.setAttribute(qualifiedName, strNamespaceURI, AttributeName.XMLNSURI);
+			element.setAttributeNS(AttributeName.XMLNSURI, qualifiedName, strNamespaceURI);
 	}
 
 	/**

@@ -223,6 +223,20 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertTrue(UrlUtil.isURL("HTTP://a/b?c"));
 	}
 
+	/**
+	 * 
+	 */
+	public void testIsXMLType()
+	{
+		assertTrue(UrlUtil.isXMLType("text/xml"));
+		assertTrue(UrlUtil.isXMLType("TEXT/XML"));
+		assertTrue(UrlUtil.isXMLType("TEXT/XML; "));
+		assertTrue(UrlUtil.isXMLType("application/foobar+xml "));
+		assertTrue(UrlUtil.isXMLType("application/xml"));
+		assertTrue(UrlUtil.isXMLType("text/foobar+xml "));
+		assertFalse(UrlUtil.isXMLType("foobar+xml "));
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**

@@ -223,18 +223,18 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		theHelper = new XJDFHelper(null);
 		theXJDF = theHelper.getRoot();
 		theXJDF.setAttribute("Types", "InkZoneCalculation ConventionalPrinting");
-		SetHelper nih = theHelper.appendParameter("NodeInfo");
+		SetHelper nih = theHelper.appendParameter("NodeInfo", null);
 		nih.setUsage(EnumUsage.Input);
 		JDFAttributeMap sheetMap = new JDFAttributeMap("SheetName", "S1");
 		PartitionHelper niS1 = nih.getCreatePartition(sheetMap, true);
 		KElement ni = niS1.getResource();
 		ni.setAttribute("Amount", "5000");
 
-		SetHelper cpSetHelper = theHelper.appendResource(ElementName.CONVENTIONALPRINTINGPARAMS);
+		SetHelper cpSetHelper = theHelper.appendResource(ElementName.CONVENTIONALPRINTINGPARAMS, null);
 		cpSetHelper.setUsage(EnumUsage.Input);
 		cpSetHelper.getCreatePartition(sheetMap, true).getResource().setAttribute(AttributeName.WORKSTYLE, EnumWorkStyle.Perfecting.getName());
 
-		SetHelper mediaSetHelper = theHelper.appendResource(ElementName.MEDIA);
+		SetHelper mediaSetHelper = theHelper.appendResource(ElementName.MEDIA, null);
 		mediaSetHelper.setUsage(EnumUsage.Input);
 		PartitionHelper mediaHelper = mediaSetHelper.getCreatePartition(sheetMap, true);
 		KElement mediaPart = mediaHelper.getPartition();
@@ -244,7 +244,7 @@ public class XJDFGeneratorTest extends XJDFCreatorTest
 		media.setAttribute("Dimension", new JDFXYPair(72, 49).scaleFromCM().toString(), null);
 		media.setAttribute(AttributeName.MEDIATYPE, EnumMediaType.Paper.getName());
 
-		SetHelper compSetHelper = theHelper.appendResource(ElementName.COMPONENT);
+		SetHelper compSetHelper = theHelper.appendResource(ElementName.COMPONENT, null);
 		compSetHelper.setUsage(EnumUsage.Output);
 		PartitionHelper compHelper = compSetHelper.getCreatePartition(sheetMap, true);
 		KElement compPart = compHelper.getPartition();

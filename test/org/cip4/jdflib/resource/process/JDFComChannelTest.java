@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,6 +81,9 @@ public class JDFComChannelTest extends JDFTestCaseBase
 {
 	JDFComChannel cc;
 
+	/**
+	 * 
+	 */
 	public void testSetEMailLocator()
 	{
 		cc.setEMailLocator(" test@cip4.org");
@@ -92,6 +95,9 @@ public class JDFComChannelTest extends JDFTestCaseBase
 		assertEquals("test.2@cip4.org", cc.getEMailAddress());
 	}
 
+	/**
+	 * 
+	 */
 	public void testSetPhoneNumber()
 	{
 		cc.setPhoneNumber(" +49 431 123456 ", ".", EnumChannelType.Phone);
@@ -99,8 +105,29 @@ public class JDFComChannelTest extends JDFTestCaseBase
 		assertEquals("+49431123456", cc.getPhoneNumber(true));
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * 
+	 */
+	public void testSetPhoneNumberShort()
+	{
+		cc.setChannelType(EnumChannelType.Phone);
+		cc.setPhoneNumber(" +49 431 123456 ");
+		assertEquals(JDFComChannel.TEL + "+49.431.123456", cc.getLocator());
+		assertEquals("+49431123456", cc.getPhoneNumber(true));
+		cc.setChannelType(EnumChannelType.PrivateDirectory);
+		try
+		{
+			cc.setPhoneNumber(" +49 431 123456 ");
+			fail("illegal channel type");
+		}
+		catch (IllegalArgumentException x)
+		{
+			// nop
+		}
+	}
+
+	/**
+	 * 
 	 * 
 	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
 	 */

@@ -935,7 +935,15 @@ public class KElementTest extends JDFTestCaseBase
 		assertNotNull(c_clone);
 		assertTrue(c_clone.isEqual(c_clone.clone()));
 		assertNotSame(c_clone, c_clone.clone());
-		assertNotSame(c_clone.getOwnerDocument(), c_clone.clone().getOwnerDocument());
+		assertEquals(c_clone.getOwnerDocument(), c_clone.clone().getOwnerDocument());
+
+		KElement rootClone = e.clone();
+		assertTrue(rootClone.isEqual(e.clone()));
+		assertNotSame(rootClone, e.clone());
+		assertEquals(rootClone.getOwnerDocument(), e.clone().getOwnerDocument());
+		assertTrue(rootClone.isEqual(e));
+		assertNotSame(rootClone, e);
+		assertEquals(rootClone.getOwnerDocument(), e.getOwnerDocument());
 	}
 
 	/**
@@ -1018,6 +1026,23 @@ public class KElementTest extends JDFTestCaseBase
 		long l = getCurrentMem() - mem;
 		assertTrue(l < 1500000);
 
+	}
+
+	/**
+	 * test for copyXPathValue
+	 */
+	public void testCopyXPathValue()
+	{
+		KElement e1 = new XMLDoc("e1", null).getRoot();
+		KElement e1a = new XMLDoc("e1", null).getRoot();
+		e1.setXPathValue("e2/e3", "txt");
+		e1.copyXPathValue("e2/e4", null, "e2/e3");
+		assertEquals(e1.getXPathAttribute("e2/e4", null), "txt");
+		e1.setXPathValue("e2/e3/@fnarf", "att");
+		e1.copyXPathValue("e2/e4/@fnarf", null, "e2/e3/@fnarf");
+		assertEquals(e1.getXPathAttribute("e2/e4/@fnarf", null), "att");
+		e1a.copyXPathValue("e2/e3", e1, null);
+		assertEquals(e1a.getXPathAttribute("e2/e3", null), "txt");
 	}
 
 	/**
@@ -1684,7 +1709,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull(root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, null));
 		root.setXPathAttribute("foo/bar[2]/@a", "b2");
 		root.setXPathAttribute("foo/bar[2]/sub/@c", "d2");
+		root.setXPathValue("b/c[5]/d", "txt");
 		assertEquals(root.getXPathAttribute("foo/bar[@a=\"b2\"]/sub/@c", null), "d2");
+		assertEquals(root.getXPathAttribute("b/c[5]/d", null), "txt");
 		try
 		{
 			root.getXPathAttribute("foo/bar[0]/sub/@c", null);
@@ -2990,6 +3017,16 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
+	public void testSetComment()
+	{
+		KElement root = new XMLDoc("root", null).getRoot();
+		root.setXMLComment("foo");
+		assertNotNull(root.getPreviousSibling());
+	}
 
 	/**
 	 * 

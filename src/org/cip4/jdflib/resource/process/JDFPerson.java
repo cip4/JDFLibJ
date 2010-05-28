@@ -83,6 +83,7 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPerson;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
@@ -224,21 +225,31 @@ public class JDFPerson extends JDFAutoPerson
 	public String getDescriptiveName()
 	{
 		String s = StringUtil.getNonEmpty(super.getDescriptiveName());
+
 		if (s == null)
 		{
+			VString vs = new VString();
+			s = StringUtil.getNonEmpty(getNamePrefix());
+			if (s != null)
+			{
+				vs.add(s);
+			}
 			s = StringUtil.getNonEmpty(getFirstName());
 			if (s != null)
 			{
-				final String s2 = StringUtil.getNonEmpty(getFamilyName());
-				if (s2 != null)
-				{
-					s += " " + s2;
-				}
+				vs.add(s);
 			}
-			else
+			s = StringUtil.getNonEmpty(getFamilyName());
+			if (s != null)
 			{
-				s = getFamilyName();
+				vs.add(s);
 			}
+			s = StringUtil.getNonEmpty(getNameSuffix());
+			if (s != null)
+			{
+				vs.add(s);
+			}
+			s = StringUtil.setvString(vs, " ", null, null);
 		}
 		return s;
 	}

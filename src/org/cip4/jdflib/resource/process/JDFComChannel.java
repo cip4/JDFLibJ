@@ -287,38 +287,56 @@ public class JDFComChannel extends JDFAutoComChannel
 	 * set the phone number of this, if this is a valid phone url, "tel:" or "fax:" is prepended, if it is not yet there
 	 * 
 	 * @param phone the phone number string
+	 * @throws IllegalArgumentException if phone is not a valid phone number
+	 * 
+	 */
+	public void setPhoneNumber(String phone)
+	{
+		if (phone == null)
+		{
+			setLocator(null);
+			return;
+		}
+		EnumChannelType channelType = getChannelType();
+		setPhoneNumber(phone, ".", channelType);
+	}
+
+	/**
+	 * set the phone number of this, if this is a valid phone url, "tel:" or "fax:" is prepended, if it is not yet there
+	 * 
+	 * @param phone the phone number string
 	 * @param replaceForBlank the replacement char for non-leading blanks , typically "." or null are a good idea
 	 * @param channelType the channelType - must be either Fax or Phone
 	 * @throws IllegalArgumentException if phone is not a valid phone number
 	 * 
 	 */
-	public void setPhoneNumber(final String phone, final String replaceForBlank, final EnumChannelType channelType)
+	public void setPhoneNumber(String phone, final String replaceForBlank, EnumChannelType channelType)
 	{
-		String phoneLocal = phone;
-
+		if (channelType == null)
+			channelType = getChannelType();
 		if (!EnumChannelType.Fax.equals(channelType) && !EnumChannelType.Phone.equals(channelType))
 		{
 			throw new IllegalArgumentException("illegal channelType: " + channelType);
 		}
 
-		if (phoneLocal != null)
+		if (phone != null)
 		{
-			phoneLocal = phoneLocal.trim();
+			phone = phone.trim();
 		}
 
-		phoneLocal = StringUtil.replaceCharSet(phoneLocal, " ", replaceForBlank, 0);
-		if (phoneLocal == null || !StringUtil.matches(phoneLocal, JDFConstants.REGEXP_PHONE))
+		phone = StringUtil.replaceCharSet(phone, " ", replaceForBlank, 0);
+		if (phone == null || !StringUtil.matches(phone, JDFConstants.REGEXP_PHONE))
 		{
-			throw new IllegalArgumentException("illegal phone number:" + phoneLocal);
+			throw new IllegalArgumentException("illegal phone number:" + phone);
 		}
 
 		setChannelType(channelType);
-		if (!phoneLocal.toLowerCase().startsWith(TEL))
+		if (!phone.toLowerCase().startsWith(TEL))
 		{
-			phoneLocal = TEL + phoneLocal;
+			phone = TEL + phone;
 		}
 
-		setLocator(phoneLocal);
+		setLocator(phone);
 	}
 
 }

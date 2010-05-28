@@ -277,7 +277,7 @@ public class JDFAuditPool extends JDFPool
 			}
 		}
 		final JDFNode r = getJDFRoot();
-		if (r.hasAttribute(AttributeName.SPAWNID))
+		if (r != null && r.hasAttribute(AttributeName.SPAWNID))
 		{
 			l.setSpawnID(r.getSpawnID(false));
 		}

@@ -1363,4 +1363,25 @@ public class UrlUtil
 		return out;
 	}
 
+	/**
+	 * @param contentType
+	 * @return
+	 */
+	public static boolean isXMLType(String contentType)
+	{
+		if (contentType == null)
+			return false;
+
+		String lower = contentType.toLowerCase().trim();
+		while (lower.endsWith(";"))
+			lower = StringUtil.leftStr(lower, -1);
+
+		if (TEXT_XML.equals(lower) || APPLICATION_XML.equals(lower))
+			return true;
+		if ((lower.startsWith("application") || (lower.startsWith("text"))) && lower.endsWith("+xml"))
+			return true;
+
+		return false;
+	}
+
 }

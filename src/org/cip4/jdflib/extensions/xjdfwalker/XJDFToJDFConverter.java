@@ -208,14 +208,16 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				return bReturn;
 			}
 
-			parent = parent.getParentNode_KElement();
-			if (parent == null)
+			KElement parent2 = parent.getParentNode_KElement();
+			if (parent2 == null)
 			{
 				return bReturn;
 			}
 
-			final boolean bL1 = parent.getLocalName().endsWith("Set");
-			bReturn = bL1 && toCheck.getLocalName().equals(parent.getAttribute("Name"));
+			String parentName = parent2.getLocalName();
+			boolean bL1 = parentName.endsWith("Set") && toCheck.getLocalName().equals(parent2.getAttribute("Name"));
+			bL1 = bL1 || parentName.equals("Product") && toCheck.getLocalName().equals(parent.getAttribute("Name"));
+			bReturn = bL1;
 		}
 
 		return bReturn;
@@ -254,6 +256,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		final JDFComponent c = (JDFComponent) parent.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		c.setDescriptiveName("dummy output");
 		c.setComponentType(EnumComponentType.FinalProduct, null);
+
 		mergeProductLinks(theNode, parent);
 		firstConvert = true;
 		return parent;
@@ -373,28 +376,33 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				for (int i = 0; i < keySize; i++)
 				{
 					final String val = keys.get(i);
-					if (val.endsWith("Ref") && !val.equals("rRef"))
+					if ((val.endsWith("Ref") || val.endsWith("Refs")) && !val.equals("rRef"))
 					{
-						final String value = map.get(val);
-						final IDPart p = idMap.get(value);
-						if (p != null)
+						final String values = map.get(val);
+						VString vValues = StringUtil.tokenize(values, null, false);
+						for (String value : vValues)
 						{
-							final KElement refOld = trackElem != null ? trackElem.getElement(val) : null;
-							final KElement ref = e.appendElement(val);
-							ref.setAttribute("rRef", p.getID());
+							final IDPart p = idMap.get(value);
+							if (p != null)
+							{
+								String refName = val.endsWith("Refs") ? StringUtil.leftStr(val, -1) : val;
+								final KElement refOld = trackElem != null ? trackElem.getElement(refName) : null;
+								final KElement ref = e.appendElement(refName);
+								ref.setAttribute("rRef", p.getID());
 
-							final VJDFAttributeMap vpartmap = p.getPartMap();
-							if (vpartmap != null)
-							{
-								for (int j = 0; j < vpartmap.size(); j++)
+								final VJDFAttributeMap vpartmap = p.getPartMap();
+								if (vpartmap != null)
 								{
-									ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
+									for (int j = 0; j < vpartmap.size(); j++)
+									{
+										ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
+									}
 								}
-							}
-							// we've been here already
-							if (ref.isEqual(refOld))
-							{
-								ref.deleteNode();
+								// we've been here already
+								if (ref.isEqual(refOld))
+								{
+									ref.deleteNode();
+								}
 							}
 							e.removeAttribute(val);
 						}
@@ -616,7 +624,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 * 
 	 * Mar 17, 2010
 	 */
-	public class WalkIntent extends WalkResource
+	public class WalkIntentResource extends WalkResource
 	{
 		/**
 		 * @param e
@@ -705,9 +713,26 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				theNode = createProductRoot(theNode);
 			}
-
 			theNode.setAttributes(e);
+			fixComponent(theNode);
 			return theNode;
+		}
+
+		/**
+		 * @param theNode
+		 * @param e
+		 */
+		private void fixComponent(JDFNode theNode)
+		{
+			JDFComponent c = (JDFComponent) theNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
+			if (c != null)
+			{
+				c.moveAttribute(AttributeName.PRODUCTTYPE, theNode);
+				c.moveAttribute(AttributeName.PRODUCTTYPEDETAILS, theNode);
+				JDFResourceLink rl = theNode.getLink(c, EnumUsage.Output);
+				if (rl != null)
+					rl.moveAttribute(AttributeName.AMOUNT, theNode);
+			}
 		}
 
 		/**
@@ -1155,5 +1180,96 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				}
 			}
 		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for non partitioned intent elements
+	 */
+	public class WalkIntent extends WalkXElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			final JDFNode parent = (JDFNode) trackElem;
+			final JDFNode root = parent.getJDFRoot();
+			EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
+			if (inOut == null)
+			{
+				inOut = EnumUsage.Input;
+			}
+			String id = e.getAttribute(AttributeName.ID, null, null);
+			if (id == null)
+			{
+				// we need an id to copy. technically no id is invalid, but... whatever
+				id = "r" + KElement.uniqueID(0);
+				e.setAttribute(AttributeName.ID, id);
+			}
+			JDFResource r = null;
+			final KElement idElem = parent.getCreateResourcePool().getChildWithAttribute(null, "ID", null, id, 0, true);
+			if (idElem instanceof JDFResource)
+			{
+				r = (JDFResource) idElem;
+			}
+			else
+			{
+				r = (JDFResource) root.getChildWithAttribute(null, "ID", null, id, 0, false);
+				if (r != null)
+				{
+					final JDFResourcePool rp = root.getCreateResourcePool();
+					if (!rp.equals(r.getParentNode_KElement()))
+					{
+						rp.moveElement(r, null);
+					}
+				}
+			}
+			if (r == null)
+			{
+				r = parent.addResource(e.getAttribute("Name"), null);
+			}
+			if (r == null)
+			{
+				return null;
+			}
+			r.setAttributes(e);
+			if (r.getResourceClass() == null)
+			{
+				r.setResourceClass(EnumResourceClass.Intent);
+			}
+			if (inOut != null)
+			{
+				final JDFResourceLink rl = parent.ensureLink(r, inOut, null);
+				if (rl != null)
+				{
+					rl.setrRef(id);
+					r.removeAttribute(AttributeName.USAGE);
+					rl.moveAttribute(AttributeName.PROCESSUSAGE, r);
+					rl.moveAttribute(AttributeName.AMOUNT, r);
+					rl.moveAttribute(AttributeName.ACTUALAMOUNT, r);
+					rl.moveAttribute(AttributeName.MAXAMOUNT, r);
+					rl.moveAttribute(AttributeName.MINAMOUNT, r);
+				}
+			}
+			r.removeAttribute(AttributeName.NAME);
+			r.removeAttribute(AttributeName.USAGE);
+			return r;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			final KElement parent = toCheck.getParentNode_KElement();
+			final boolean bL1 = parent != null && parent.getLocalName().equals("Product");
+			return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals("Intent") && toCheck.hasAttribute(AttributeName.NAME);
+		}
+
 	}
 }

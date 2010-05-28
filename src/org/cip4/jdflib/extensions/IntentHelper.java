@@ -108,7 +108,16 @@ public class IntentHelper
 	}
 
 	/**
-	 * @return
+	 * @return the <Intent> element
+	 */
+
+	public KElement getIntent()
+	{
+		return theIntent;
+	}
+
+	/**
+	 * @return the detailed intent resource
 	 */
 	public KElement getResource()
 	{
@@ -143,6 +152,8 @@ public class IntentHelper
 		}
 		else
 		{
+			if (!dataType.endsWith("Span"))
+				dataType += "Span";
 			KElement span = getResource().getCreateElement(dataType);
 			span.setAttribute("Name", att);
 			span.setAttribute("Actual", val);

@@ -125,6 +125,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
+import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDependencies;
@@ -196,7 +197,11 @@ public class XJDF20 extends BaseElementWalker
 	/**
 	 * if true, spans are made to a simple attribute rather than retained as span
 	 */
-	public boolean bSpanAsAttribute = false;
+	public boolean bSpanAsAttribute = true;
+	/**
+	 * if true, Intents are partitioned
+	 */
+	public boolean bIntentPartition = false;
 
 	/**
 	 * if true add an htmlcolor attribute to color elements for xsl display purposes
@@ -251,6 +256,7 @@ public class XJDF20 extends BaseElementWalker
 
 		PostXJDFWalker pw = new PostXJDFWalker(newRoot);
 		pw.mergeLayout = bMergeLayout;
+		pw.bIntentPartition = bIntentPartition;
 		pw.walkTreeKidsFirst(newRoot);
 
 		newRoot.eraseEmptyNodes(true);
@@ -263,21 +269,8 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	private void loopNodes(final JDFNode node)
 	{
-		final VElement vNodes;
-		if (bSingleNode)
-		{
-			vNodes = new VElement();
-			vNodes.add(node);
-		}
-		else
-		{
-			vNodes = node.getvJDFNode(null, null, false);
-		}
-
-		for (int i = 0; i < vNodes.size(); i++)
-		{
-			walkTree(vNodes.get(i), newRoot);
-		}
+		// the loop is implicit due to the break condition in JDFWalker
+		walkTree(node, newRoot);
 	}
 
 	/**
@@ -945,7 +938,7 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * @param jobPartID
+		 * @param rl
 		 * @return 
 		 */
 		private KElement getProcess(JDFResourceLink rl)
@@ -1150,7 +1143,7 @@ public class XJDF20 extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement jdf, final KElement xjdf)
 		{
-			if (first.contains(jdf.getID()))
+			if (first.contains(jdf.getID()) || bSingleNode && first.size() > 0)
 			{
 				return null;
 			}
@@ -1323,7 +1316,7 @@ public class XJDF20 extends BaseElementWalker
 			prod.renameAttribute(AttributeName.JOBPARTID, AttributeName.PRODUCTID, null, null);
 			prod.removeAttribute("xmlns:xsi");
 			calcChildren(node, prod);
-			calcAmounts(node, prod);
+			readComponent(node, prod);
 			return prod;
 		}
 
@@ -1331,14 +1324,18 @@ public class XJDF20 extends BaseElementWalker
 		 * @param node
 		 * @param prod
 		 */
-		private void calcAmounts(final JDFNode node, final KElement prod)
+		private void readComponent(final JDFNode node, final KElement prod)
 		{
 			final JDFResourceLink cOut = node.getLink(0, "ComponentLink", new JDFAttributeMap("Usage", "Output"), null);
-			if (cOut != null)
-			{
-				setAmountPool(cOut, prod, null);
-			}
+			if (cOut == null)
+				return;
+			setAmountPool(cOut, prod, null);
+			prod.renameAttribute("AmountGood", "Amount", null, null);
+			prod.removeAttribute("AmountWaste");
 
+			JDFComponent component = (JDFComponent) cOut.getTarget();
+			prod.copyAttribute(AttributeName.PRODUCTTYPE, component);
+			prod.copyAttribute(AttributeName.PRODUCTTYPEDETAILS, component);
 		}
 
 		/**
