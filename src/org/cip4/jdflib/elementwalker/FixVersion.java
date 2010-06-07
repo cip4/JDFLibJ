@@ -127,6 +127,7 @@ import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.span.JDFSpanBase;
 import org.cip4.jdflib.span.JDFSpanBase.EnumPriority;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -262,26 +263,41 @@ public class FixVersion extends BaseElementWalker
 			{
 				final String key = it.next();
 				final String value = m.get(key);
-				final EnumAttributeType attType = ai.getAttributeType(key);
-
-				if (EnumAttributeType.isRange(attType))
-				{
-					fixRange(el, key, value);
-				}
-				else if (EnumAttributeType.duration.equals(attType))
-				{
-					fixDuration(el, key, value);
-				}
-				if (bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
-				{
-					fixIDs(el, ai, key, value);
-				}
-				if (AttributeName.ICSVERSIONS.equals(key))
-				{
-					fixICSVesions(el, value);
-				}
+				walkSingleAttribute(el, ai, key, value);
 			}
 			return el;
+		}
+
+		/**
+		 * @param el
+		 * @param ai
+		 * @param key
+		 * @param value
+		 */
+		private void walkSingleAttribute(final JDFElement el, final AttributeInfo ai, final String key, final String value)
+		{
+			final EnumAttributeType attType = ai.getAttributeType(key);
+
+			if (EnumAttributeType.isRange(attType))
+			{
+				fixRange(el, key, value);
+			}
+			else if (EnumAttributeType.duration.equals(attType))
+			{
+				fixDuration(el, key, value);
+			}
+			else if (EnumAttributeType.dateTime.equals(attType))
+			{
+				fixDateTime(el, key, value);
+			}
+			if (bFixIDs && value.length() > 0 && StringUtils.isNumeric(value.substring(0, 1)))
+			{
+				fixIDs(el, ai, key, value);
+			}
+			if (AttributeName.ICSVERSIONS.equals(key))
+			{
+				fixICSVesions(el, value);
+			}
 		}
 
 		/**
@@ -344,6 +360,23 @@ public class FixVersion extends BaseElementWalker
 			try
 			{
 				el.setAttribute(key, new JDFDuration(value).getDurationISO());
+			}
+			catch (final DataFormatException ex)
+			{
+				// nop - continue
+			}
+		}
+
+		/**
+		 * @param el
+		 * @param key
+		 * @param value
+		 */
+		private void fixDateTime(final JDFElement el, final String key, final String value)
+		{
+			try
+			{
+				el.setAttribute(key, new JDFDate(value).getDateTimeISO());
 			}
 			catch (final DataFormatException ex)
 			{

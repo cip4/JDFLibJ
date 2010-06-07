@@ -325,6 +325,21 @@ public class JDFNodeTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testEnsureLinkProcessUsage()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFResource rl = n.addResource("RunList", null);
+		final JDFResourceLink rl1 = n.ensureLink(rl, EnumUsage.Input, null);
+		final JDFResourceLink rl2 = n.ensureLink(rl, EnumUsage.Input, EnumProcessUsage.Marks);
+		assertEquals(rl1, rl2);
+		final JDFResourceLink rl3 = n.ensureLink(rl, EnumUsage.Input, null);
+		assertEquals(rl1, rl3);
+	}
+
+	/**
+	 * 
+	 */
 	public void testEnsureLinkRecursive()
 	{
 		final JDFDoc d = new JDFDoc("JDF");

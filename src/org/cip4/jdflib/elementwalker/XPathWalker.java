@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,9 +75,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -105,9 +109,9 @@ public class XPathWalker extends BaseElementWalker
 			attributeNames = attName;
 		}
 
-		KElement elem;
-		int methCountSiblings;
-		VString attributeNames;
+		protected KElement elem;
+		protected int methCountSiblings;
+		protected VString attributeNames;
 
 		/**
 		 * Gets the XPath full tree representation of 'this'
@@ -143,7 +147,8 @@ public class XPathWalker extends BaseElementWalker
 				{
 					if (e.equals(elem))
 					{
-						path += "[" + Integer.toString(i) + "]";
+						if (methCountSiblings > 0)
+							path += "[" + Integer.toString(i) + "]";
 						break;
 					}
 					do
@@ -192,16 +197,20 @@ public class XPathWalker extends BaseElementWalker
 		return n;
 	}
 
-	private File outTxt = null;
 	protected final PrintWriter writer;
 	boolean bAttribute = false;
+	boolean bElement = true;
 	boolean bAttributeValue = false;
+	boolean bDatatype = false;
+	String separator = " = ";
+
+	protected Set<String> pathsFound;
 
 	/**
 	 * if true, include attributes
 	 * @param attribute
 	 */
-	public void setBAttribute(boolean attribute)
+	public void setAttribute(boolean attribute)
 	{
 		bAttribute = attribute;
 	}
@@ -210,7 +219,7 @@ public class XPathWalker extends BaseElementWalker
 	 * if true, include attribute values
 	 * @param attribute
 	 */
-	public void setBAttributeValue(boolean attribute)
+	public void setAttributeValue(boolean attribute)
 	{
 		bAttributeValue = attribute;
 	}
@@ -221,9 +230,7 @@ public class XPathWalker extends BaseElementWalker
 	 */
 	public XPathWalker(File xpathOutput) throws FileNotFoundException
 	{
-		super(new BaseWalkerFactory());
-		outTxt = xpathOutput;
-		writer = new PrintWriter(outTxt);
+		this(new PrintWriter(xpathOutput));
 	}
 
 	/**
@@ -232,8 +239,8 @@ public class XPathWalker extends BaseElementWalker
 	public XPathWalker(PrintWriter w)
 	{
 		super(new BaseWalkerFactory());
-		outTxt = null;
 		writer = w;
+		pathsFound = null;
 	}
 
 	@Override
@@ -269,20 +276,56 @@ public class XPathWalker extends BaseElementWalker
 		{
 			XPathBuilder xb = new XPathBuilder(e, method, attNames);
 			String s = xb.buildXPath(null);
-			writer.println(s);
+			if (bElement && (pathsFound == null || !pathsFound.contains(s)))
+			{
+				writer.println(s);
+				if (pathsFound != null)
+					pathsFound.add(s);
+			}
 			if (bAttribute)
 			{
 				VString vkeys = e.getAttributeVector_KElement();
 				Collections.sort(vkeys);
 				for (int i = 0; i < vkeys.size(); i++)
 				{
-					writer.print(s + "/@" + vkeys.get(i));
-					if (bAttributeValue)
-						writer.print(" = " + e.getAttribute_KElement(vkeys.get(i)));
-					writer.println();
+					String key = vkeys.get(i);
+					String path = s + "/@" + key;
+					if ((pathsFound == null || !pathsFound.contains(path)))
+					{
+						writer.print(path);
+						String attribute = e.getAttribute_KElement(key);
+						if (bAttributeValue)
+							writer.print(separator + attribute);
+						if (bDatatype)
+						{
+							writeDatatype(e, key);
+						}
+						writer.println();
+						if (pathsFound != null)
+							pathsFound.add(path);
+
+					}
 				}
 			}
 			return e;
+		}
+
+		/**
+		 * @param e
+		 * @param key
+		 */
+		private void writeDatatype(final KElement e, String key)
+		{
+			EnumAttributeType type = e.getAtrType(key);
+			writer.print(separator);
+			if (type != null)
+				writer.print(type.getName());
+			else if (e.knownElements().contains(key))
+			{
+				type = ((KElement) e.getOwnerDocument_KElement().createElement(key)).getAtrType(AttributeName.ACTUAL);
+				if (type != null)
+					writer.print(type.getName());
+			}
 		}
 
 		/**
@@ -295,5 +338,45 @@ public class XPathWalker extends BaseElementWalker
 		{
 			return true;
 		}
+	}
+
+	/**
+	 * @param method the method to set
+	 */
+	public void setMethod(int method)
+	{
+		this.method = method;
+	}
+
+	/**
+	 * @param unique the method to set
+	 */
+	public void setUnique(boolean unique)
+	{
+		pathsFound = unique ? new HashSet<String>() : null;
+	}
+
+	/**
+	 * @param datatype the bDatatype to set
+	 */
+	public void setDatatype(boolean datatype)
+	{
+		bDatatype = datatype;
+	}
+
+	/**
+	 * @param separator the separator to set
+	 */
+	public void setSeparator(String separator)
+	{
+		this.separator = separator;
+	}
+
+	/**
+	 * @param element the bElement to set
+	 */
+	public void setBElement(boolean element)
+	{
+		bElement = element;
 	}
 }

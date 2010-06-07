@@ -95,6 +95,7 @@ import javax.mail.Multipart;
 import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
+import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.PlatformUtil;
@@ -251,7 +252,8 @@ public class XMLDoc
 		m_doc = new DocumentJDFImpl();
 		if (namespaceURI == null)
 		{
-			m_doc.bKElementOnly = true;
+			String rootNode = KElement.xmlnsLocalName(strDocType);
+			m_doc.bKElementOnly = !(ElementName.JDF.equals(rootNode) || ElementName.JMF.equals(rootNode) || XJDF20.rootName.equals(rootNode));
 		}
 		m_doc.bInitOnCreate = true;
 		setRoot(strDocType, namespaceURI);

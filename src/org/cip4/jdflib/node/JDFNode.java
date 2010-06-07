@@ -3742,9 +3742,62 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		JDFResourceLink rl = getLink(0, jdfResource.getNodeName(), m, null);
 		if (rl == null)
 		{
-			rl = linkResource(jdfResource, usage, processUsage);
+			if (processUsage != null)
+			{
+				m.remove(AttributeName.PROCESSUSAGE);
+				rl = getLink(0, jdfResource.getNodeName(), m, null);
+				if (rl != null)
+				{
+					rl.setProcessUsage(processUsage);
+				}
+			}
+			if (rl == null)
+				rl = linkResource(jdfResource, usage, processUsage);
 		}
 		return rl;
+	}
+
+	/**
+	 * ensure that the linked resource and all referenced resources are correctly positioned
+	 * @param r
+	 */
+	public void ensureValidRefsPosition(JDFResource r)
+	{
+		// move the resource to the closest common ancestor if it is not already an ancestor of this
+		VElement refs = r.getvHRefRes(true, true);
+		if (refs == null)
+			refs = new VElement();
+		refs.add(r);
+		for (int i = 0; i < refs.size(); i++)
+		{
+			// move the resource to the closest common ancestor if it is not already an ancestor of this
+			JDFResource r2 = ((JDFResource) refs.get(i)).getResourceRoot();
+			ensureValidResPosition(r2);
+		}
+	}
+
+	/**
+	 * @param r2
+	 */
+	public void ensureValidResPosition(JDFResource r2)
+	{
+		JDFNode parent = r2.getParentJDF();
+		while (parent != null && !parent.isAncestor(this))
+		{
+			parent = r2.getParentJDF();
+			if (parent == null)
+			{
+				break;
+			}
+
+			parent = parent.getParentJDF();
+			if (parent == null)
+			{
+				throw new JDFException("JDFResourceLink appendResource resource is not in the same document");
+			}
+
+			r2 = (JDFResource) parent.getCreateResourcePool().moveElement(r2, null);
+		}
 	}
 
 	/**

@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoExposedMedia.EnumPlateType;
@@ -77,10 +78,12 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -98,6 +101,8 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -109,6 +114,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
+import org.xml.sax.SAXException;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -596,6 +602,71 @@ public class XJDFTest extends JDFTestCaseBase
 		testColorPool();
 		final JDFDoc d2 = new XJDFToJDFConverter(null).convert(e);
 		assertNotNull(d2);
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFNoNamespace()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		e.setXPathAttribute("ParameterSet/Parameter/RunList/FileSpec/@URL", "http://foo/bar.pdf");
+		e.setXPathAttribute("ParameterSet/@Usage", "Input");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		assertTrue(root.getResource("RunList", EnumUsage.Input, 0) instanceof JDFRunList);
+	}
+
+	/**
+	 * @throws IOException 
+	 * @throws SAXException 
+	 *  
+	 */
+	public void testFromXJDFIntentNoNames() throws SAXException, IOException
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		e.setXPathAttribute("ProductList/Product/Intent/LayoutIntent/@Pages", "16");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFResource li = root.getResource("LayoutIntent", EnumUsage.Input, 0);
+		assertTrue(li instanceof JDFLayoutIntent);
+		assertEquals(JDFIntentResource.guessActual(li, "Pages"), "16");
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFNiCiLink()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		e.setXPathAttribute("ParameterSet/Parameter/NodeInfo/@End", "" + System.currentTimeMillis() + 1000 * 24 * 3600 * 3);
+		e.setXPathAttribute("ParameterSet[2]/Parameter/CustomerInfo/@CustomerID", "KundenIdentNummer");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		assertTrue(root.getResource("CustomerInfo", EnumUsage.Input, 0) instanceof JDFCustomerInfo);
+		assertTrue(root.getResource("NodeInfo", EnumUsage.Input, 0) instanceof JDFNodeInfo);
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFParameterID()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		e.setXPathAttribute("ParameterSet[1]/Parameter/CustomerInfo/@ContactRefs", "cr");
+		e.setXPathAttribute("ParameterSet[2]/Parameter[@ID=\"cr\"]/Contact/@ContacTypes", "Customer");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFCustomerInfo ci = (JDFCustomerInfo) root.getResource("CustomerInfo", EnumUsage.Input, 0);
+		assertNotNull(ci.getContact());
 	}
 
 	/**

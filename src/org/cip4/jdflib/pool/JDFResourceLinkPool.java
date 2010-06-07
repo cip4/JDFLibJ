@@ -466,56 +466,16 @@ public class JDFResourceLinkPool extends JDFPool
 		rl.setUsage(usage);
 		rl.setProcessUsage(processUsage);
 
-		ensureValidRefsPosition(rl, r);
+		JDFNode parenNode = getParentJDF();
+		try
+		{
+			parenNode.ensureValidRefsPosition(r);
+		}
+		catch (Exception x)
+		{
+			rl.deleteNode();
+		}
 		return rl;
-	}
-
-	/**
-	 * ensur that the linked resource and all referenced resources are correctly positioned
-	 * @param rl
-	 * @param r
-	 */
-	public void ensureValidRefsPosition(final JDFResourceLink rl, JDFResource r)
-	{
-		// move the resource to the closest common ancestor if it is not already
-		// an ancestor of this
-		VElement refs = r.getvHRefRes(true, true);
-		if (refs == null)
-			refs = new VElement();
-		refs.add(r);
-		for (int i = 0; i < refs.size(); i++)
-		{
-			// move the resource to the closest common ancestor if it is not already
-			// an ancestor of this
-			JDFResource r2 = ((JDFResource) refs.get(i)).getResourceRoot();
-			ensureValidResPosition(rl, r2);
-		}
-	}
-
-	/**
-	 * @param rl
-	 * @param r2
-	 */
-	public void ensureValidResPosition(final JDFResourceLink rl, JDFResource r2)
-	{
-		JDFNode parent = r2.getParentJDF();
-		while (parent != null && !parent.isAncestor(this))
-		{
-			parent = r2.getParentJDF();
-			if (parent == null)
-			{
-				break;
-			}
-
-			parent = parent.getParentJDF();
-			if (parent == null)
-			{
-				rl.deleteNode(); // cleanup
-				throw new JDFException("JDFResourceLink appendResource resource is not in the same document");
-			}
-
-			r2 = (JDFResource) parent.getCreateResourcePool().moveElement(r2, null);
-		}
 	}
 
 	/**

@@ -23,6 +23,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
 import org.cip4.jdflib.node.JDFNode;
@@ -30,15 +32,37 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFBindItem;
+import org.cip4.jdflib.resource.JDFEdgeGluing;
+import org.cip4.jdflib.resource.JDFEmbossingItem;
+import org.cip4.jdflib.resource.JDFHardCoverBinding;
+import org.cip4.jdflib.resource.JDFInsert;
+import org.cip4.jdflib.resource.JDFNumberItem;
 import org.cip4.jdflib.resource.JDFPart;
+import org.cip4.jdflib.resource.JDFProofItem;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFSoftCoverBinding;
+import org.cip4.jdflib.resource.JDFStripBinding;
+import org.cip4.jdflib.resource.JDFTabs;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.intent.JDFArtDelivery;
+import org.cip4.jdflib.resource.intent.JDFDropIntent;
+import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.intent.JDFShapeCut;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.postpress.JDFChannelBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFCoilBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFPlasticCombBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFRingBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFSaddleStitching;
+import org.cip4.jdflib.resource.process.postpress.JDFSideSewing;
+import org.cip4.jdflib.resource.process.postpress.JDFThreadSealing;
+import org.cip4.jdflib.resource.process.postpress.JDFThreadSewing;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -246,13 +270,16 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 */
 	protected JDFNode createProductRoot(JDFNode theNode)
 	{
-		jdfDoc = new JDFDoc("JDF");
-		final JDFNode parent = jdfDoc.getJDFRoot();
+		final JDFNode parent = (JDFNode) jdfDoc.createElement("JDF");
 		parent.setType(EnumType.Product);
-		theNode = (JDFNode) parent.copyElement(theNode, null);
+		theNode = (JDFNode) parent.moveElement(theNode, null);
+		jdfDoc.appendChild(parent);
+
 		parent.moveAttribute(AttributeName.JOBID, theNode);
 		parent.moveAttribute(AttributeName.VERSION, theNode);
 		parent.setJobPartID("rootPart");
+		parent.moveElement(theNode.getResourcePool(), null);
+
 		final JDFComponent c = (JDFComponent) parent.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		c.setDescriptiveName("dummy output");
 		c.setComponentType(EnumComponentType.FinalProduct, null);
@@ -317,6 +344,27 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	public EnumVersion getVersion()
 	{
 		return version;
+	}
+
+	/**
+	 * 
+	 * @param e
+	 * @param trackElem
+	 */
+	protected void attributesToSpan(final KElement e, final KElement trackElem)
+	{
+		final JDFAttributeMap map = e.getAttributeMap();
+		final JDFElement ir = (JDFElement) trackElem;
+		final VString keys = map.getKeys();
+		final VString knownElements = ir.knownElements();
+		for (final String name : keys)
+		{
+			if (knownElements.contains(name))
+			{
+				ir.appendElement(name).setAttribute("Actual", map.get(name));
+				e.removeAttribute(name);
+			}
+		}
 	}
 
 	/**
@@ -458,7 +506,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return super.matches(toCheck) && "XJDF".equals(toCheck.getLocalName());
+			return super.matches(toCheck) && XJDF20.rootName.equals(toCheck.getLocalName());
 		}
 	}
 
@@ -510,19 +558,19 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final JDFNode parent = (JDFNode) trackElem;
 			final JDFNode root = parent.getJDFRoot();
 			EnumUsage inOut = EnumUsage.getEnum(e.getAttribute(AttributeName.USAGE));
-			if (inOut == null && "IntentSet".equals(e.getLocalName()))
-			{
-				inOut = EnumUsage.Input;
-			}
 			String id = e.getAttribute(AttributeName.ID, null, null);
-			if (id == null)
+			if (inOut == null && "ParameterSet".equals(e.getLocalName()))
 			{
-				// we need an id to copy. technically no id is invalid, but... whatever
-				id = "r" + KElement.uniqueID(0);
-				e.setAttribute(AttributeName.ID, id);
+				final SetHelper h = new SetHelper(e);
+				final String name = h.getName();
+				if (!ElementName.CONTACT.equals(name))
+				{
+					inOut = EnumUsage.Input;
+				}
 			}
+
 			JDFResource r = null;
-			final KElement idElem = parent.getCreateResourcePool().getChildWithAttribute(null, "ID", null, id, 0, true);
+			final KElement idElem = root.getCreateResourcePool().getChildWithAttribute(null, "ID", null, id, 0, true);
 			if (idElem instanceof JDFResource)
 			{
 				r = (JDFResource) idElem;
@@ -541,34 +589,44 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			}
 			if (r == null)
 			{
-				r = parent.addResource(e.getAttribute("Name"), null);
-			}
-			if (r == null)
-			{
-				return null;
-			}
-			r.setAttributes(e);
-			if (r.getResourceClass() == null)
-			{
-				final String name = StringUtil.leftStr(e.getLocalName(), -3);
-				r.setResourceClass("Parameter".equals(name) ? EnumResourceClass.Parameter : EnumResourceClass.Handling);
-			}
-			if (inOut != null)
-			{
-				final JDFResourceLink rl = parent.ensureLink(r, inOut, null);
-				if (rl != null)
+				SetHelper h = new SetHelper(e);
+				String name = h.getName();
+				if (name != null)
 				{
-					rl.setrRef(id);
-					r.removeAttribute(AttributeName.USAGE);
-					rl.moveAttribute(AttributeName.PROCESSUSAGE, r);
-					rl.moveAttribute(AttributeName.AMOUNT, r);
-					rl.moveAttribute(AttributeName.ACTUALAMOUNT, r);
-					rl.moveAttribute(AttributeName.MAXAMOUNT, r);
-					rl.moveAttribute(AttributeName.MINAMOUNT, r);
+					r = root.addResource(name, null);
+					r.removeAttribute(AttributeName.STATUS); // don't want the default
 				}
 			}
-			r.removeAttribute(AttributeName.NAME);
-			r.removeAttribute(AttributeName.USAGE);
+			if (r != null)
+			{
+				r.setAttributes(e);
+				if (r.getResourceClass() == null)
+				{
+					final String name = StringUtil.leftStr(e.getLocalName(), -3);
+					r.setResourceClass("Parameter".equals(name) ? EnumResourceClass.Parameter : EnumResourceClass.Handling);
+				}
+				if (inOut != null)
+				{
+					final JDFResourceLink rl = parent.ensureLink(r, inOut, null);
+					if (rl != null)
+					{
+						rl.setrRef(id);
+						r.removeAttribute(AttributeName.USAGE);
+						rl.moveAttribute(AttributeName.PROCESSUSAGE, r);
+						rl.moveAttribute(AttributeName.AMOUNT, r);
+						rl.moveAttribute(AttributeName.ACTUALAMOUNT, r);
+						rl.moveAttribute(AttributeName.MAXAMOUNT, r);
+						rl.moveAttribute(AttributeName.MINAMOUNT, r);
+					}
+				}
+
+				// not linked are also available - they will typically be referenced resources
+				if (!r.hasAttribute(AttributeName.STATUS))
+					r.setResStatus(EnumUsage.Output.equals(inOut) ? EnumResStatus.Unavailable : EnumResStatus.Available, true);
+
+				r.removeAttribute(AttributeName.NAME);
+				r.removeAttribute(AttributeName.USAGE);
+			}
 			return r;
 		}
 
@@ -581,8 +639,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			final KElement parent = toCheck.getParentNode_KElement();
-			final boolean bL1 = parent != null && (parent.getLocalName().equals("XJDF") || parent.getLocalName().equals("Product"));
-			return bL1 && super.matches(toCheck) && toCheck.getLocalName().endsWith("Set") && toCheck.hasAttribute(AttributeName.NAME);
+			final boolean bL1 = parent != null && (parent.getLocalName().equals(XJDF20.rootName) || parent.getLocalName().equals("Product"));
+			String localName = toCheck.getLocalName();
+			return bL1 && super.matches(toCheck) && localName.endsWith("Set")
+					&& (toCheck.hasAttribute(AttributeName.NAME) || toCheck.getElement(StringUtil.leftStr(localName, -3)) != null);
 		}
 
 	}
@@ -594,7 +654,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	{
 		/**
 		 * @param e
-		 * @return thr created resource
+		 * @return the created resource
 		 */
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
@@ -633,19 +693,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			final JDFAttributeMap map = e.getAttributeMap();
-			final JDFIntentResource ir = (JDFIntentResource) trackElem;
-			final VString keys = map.getKeys();
-			final VString knownElements = ir.knownElements();
-			for (final String name : keys)
-			{
-				if (knownElements.contains(name))
-				{
-					ir.appendElement(name).setAttribute("Actual", map.get(name));
-					e.removeAttribute(name);
-				}
-			}
-			return super.walk(e, ir);
+			attributesToSpan(e, trackElem);
+			return super.walk(e, trackElem);
 		}
 
 		/**
@@ -657,6 +706,43 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return super.matches(toCheck) && (toCheck instanceof JDFIntentResource);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
+	 * 
+	 * Mar 17, 2010
+	 */
+	public class WalkIntentElement extends WalkXElement
+	{
+		/**
+		 * @param e
+		 * @return the created element
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			attributesToSpan(e, trackElem);
+			return super.walk(e, trackElem);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFDropIntent) || (toCheck instanceof JDFDropItemIntent) || (toCheck instanceof JDFArtDelivery) || (toCheck instanceof JDFBindItem)
+					|| (toCheck instanceof JDFChannelBinding) || (toCheck instanceof JDFCoilBinding) || (toCheck instanceof JDFEdgeGluing)
+					|| (toCheck instanceof JDFHardCoverBinding) || (toCheck instanceof JDFPlasticCombBinding) || (toCheck instanceof JDFRingBinding)
+					|| (toCheck instanceof JDFSaddleStitching) || (toCheck instanceof JDFSideSewing) || (toCheck instanceof JDFSoftCoverBinding)
+					|| (toCheck instanceof JDFStripBinding) || (toCheck instanceof JDFTabs) || (toCheck instanceof JDFThreadSealing) || (toCheck instanceof JDFThreadSewing)
+					|| (toCheck instanceof JDFEmbossingItem) || (toCheck instanceof JDFInsert) || (toCheck instanceof JDFNumberItem) || (toCheck instanceof JDFProofItem)
+					|| (toCheck instanceof JDFShapeCut);
 		}
 	}
 
@@ -720,7 +806,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 		/**
 		 * @param theNode
-		 * @param e
 		 */
 		private void fixComponent(JDFNode theNode)
 		{
@@ -1228,19 +1313,21 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			}
 			if (r == null)
 			{
-				r = parent.addResource(e.getAttribute("Name"), null);
+				IntentHelper h = new IntentHelper(e);
+				String name = h.getName();
+				if (name != null)
+				{
+					r = parent.addResource(name, null);
+					r.removeAttribute(AttributeName.STATUS);
+				}
 			}
-			if (r == null)
+			if (r != null)
 			{
-				return null;
-			}
-			r.setAttributes(e);
-			if (r.getResourceClass() == null)
-			{
-				r.setResourceClass(EnumResourceClass.Intent);
-			}
-			if (inOut != null)
-			{
+				r.setAttributes(e);
+				if (r.getResourceClass() == null)
+				{
+					r.setResourceClass(EnumResourceClass.Intent);
+				}
 				final JDFResourceLink rl = parent.ensureLink(r, inOut, null);
 				if (rl != null)
 				{
@@ -1252,9 +1339,11 @@ public class XJDFToJDFConverter extends BaseElementWalker
 					rl.moveAttribute(AttributeName.MAXAMOUNT, r);
 					rl.moveAttribute(AttributeName.MINAMOUNT, r);
 				}
+				r.removeAttribute(AttributeName.NAME);
+				r.removeAttribute(AttributeName.USAGE);
+				if (!r.hasAttribute(AttributeName.STATUS))
+					r.setResStatus(EnumResStatus.Available, true);
 			}
-			r.removeAttribute(AttributeName.NAME);
-			r.removeAttribute(AttributeName.USAGE);
 			return r;
 		}
 
@@ -1268,7 +1357,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			final KElement parent = toCheck.getParentNode_KElement();
 			final boolean bL1 = parent != null && parent.getLocalName().equals("Product");
-			return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals("Intent") && toCheck.hasAttribute(AttributeName.NAME);
+			return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals("Intent");
 		}
 
 	}

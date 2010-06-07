@@ -119,7 +119,7 @@ public class JDFDateTest extends TestCase
 		}
 		try
 		{
-			date = new JDFDate("1999");
+			date = new JDFDate("1999-01");
 			fail("date exception: " + date);
 		}
 		catch (final DataFormatException dfe)
@@ -205,6 +205,23 @@ public class JDFDateTest extends TestCase
 		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970);
 		date = new JDFDate(-1);
 		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
+
+	}
+
+	/**
+	 * Method testdateMillis.
+	 * @throws DataFormatException 
+	 */
+	public void testdateStringMillis() throws DataFormatException
+	{
+		long l = System.currentTimeMillis();
+		JDFDate date = new JDFDate("" + l);
+		assertEquals(date.getTimeInMillis(), l, 1000);
+		date = new JDFDate("" + (l / 1000));
+		assertEquals(date.getTimeInMillis(), l, 1000);
+		date = new JDFDate("" + ((l / 1000) - 365 * 24 * 3600 * 5));
+		date.addOffset(0, 0, 0, 365 * 5);
+		assertEquals(date.getTimeInMillis(), l, 1000);
 
 	}
 
@@ -417,6 +434,8 @@ public class JDFDateTest extends TestCase
 		assertEquals(date.getDateISO(), "2007-09-28");
 		date.addOffset(0, 0, 0, 4); // it is now later
 		assertEquals(date.getDateISO(), "2007-10-02");
+		date.addOffset(0, 0, 0, 10 * 365 + 3); // it is now 10 years later (the +3 is for leap years)
+		assertEquals("big steps are ok ", date.getDateISO(), "2017-10-02");
 
 	}
 

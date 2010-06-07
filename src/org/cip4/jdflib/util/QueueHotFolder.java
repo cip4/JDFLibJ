@@ -87,9 +87,9 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
-import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFQueueSubmissionParams;
 import org.cip4.jdflib.jmf.JDFReturnQueueEntryParams;
+import org.cip4.jdflib.jmf.JMFBuilder;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -242,7 +242,7 @@ public class QueueHotFolder
 		qhfl = hfListener;
 		if (_queueCommand == null)
 		{
-			_queueCommand = JDFJMF.createJMF(JDFMessage.EnumFamily.Command, JDFMessage.EnumType.SubmitQueueEntry);
+			_queueCommand = new JMFBuilder().buildSubmitQueueEntry(null);
 		}
 
 		queueCommand = _queueCommand.getCommand(0);

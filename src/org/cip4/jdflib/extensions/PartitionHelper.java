@@ -145,11 +145,20 @@ public class PartitionHelper
 	}
 
 	/**
-	 * @return the generic Partition or Resource element
+	 * @return the generic Parameter or Resource element
 	 */
 	public KElement getPartition()
 	{
 		return thePartition;
+	}
+
+	/**
+	 * get the ID from the generic Parameter or Resource element
+	 * @return the ID , may be null in case this is connected to a null element
+	 */
+	public String getID()
+	{
+		return thePartition == null ? null : thePartition.getID();
 	}
 
 	/**

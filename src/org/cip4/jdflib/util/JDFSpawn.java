@@ -104,7 +104,6 @@ import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
-import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
@@ -1003,8 +1002,8 @@ public class JDFSpawn
 			else
 			// clean up incorrectly positioned resource
 			{
-				JDFResourceLinkPool rlp = (JDFResourceLinkPool) link.getParentNode_KElement();
-				rlp.ensureValidRefsPosition(link, rMain);
+				JDFNode parentNode = link.getParentJDF();
+				parentNode.ensureValidRefsPosition(rMain);
 			}
 		}
 		final VElement vMainPart = rMain.getPartitionVector(vPartMap, null);

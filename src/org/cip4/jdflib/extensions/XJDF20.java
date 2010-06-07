@@ -129,6 +129,7 @@ import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContainer;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFDependencies;
+import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFLayout;
@@ -626,11 +627,13 @@ public class XJDF20 extends BaseElementWalker
 			final JDFResource r = (JDFResource) jdf;
 			final KElement newResLeaf = super.walk(jdf, xjdf);
 
-			newResLeaf.removeAttribute(AttributeName.ID);
-			moveAttribsToBase(xjdf, newResLeaf);
-			removeDeprecatedResourceAttribs(r, newResLeaf);
-			removeDeprecatedResourceAttribs(r, xjdf);
-
+			if (newResLeaf != null)
+			{
+				newResLeaf.removeAttribute(AttributeName.ID);
+				moveAttribsToBase(xjdf, newResLeaf);
+				removeDeprecatedResourceAttribs(r, newResLeaf);
+				removeDeprecatedResourceAttribs(r, xjdf);
+			}
 			return newResLeaf;
 		}
 
@@ -2236,6 +2239,49 @@ public class XJDF20 extends BaseElementWalker
 				//
 			}
 			return super.walk(jdf, xjdf);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkInlineResource extends WalkResource
+	{
+		/**
+		 * 
+		 */
+		public WalkInlineResource()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFEmployee;
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			String descName = jdf.getAttribute(AttributeName.DESCRIPTIVENAME, null, null);
+			KElement e = super.walk(jdf, xjdf);
+			if (e != null)
+			{
+				e.setAttribute(AttributeName.DESCRIPTIVENAME, descName);
+			}
+			return e;
 		}
 	}
 

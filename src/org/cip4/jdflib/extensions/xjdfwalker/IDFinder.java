@@ -206,12 +206,14 @@ public class IDFinder extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			final String idParent = e.getParentNode_KElement().getAttribute(AttributeName.ID, null, null);
-			final String id = e.getAttribute(AttributeName.ID, null, null);
-			if (id != null)
+			String id = e.getAttribute(AttributeName.ID, null, null);
+			if (id == null)
 			{
-				VElement vPart = e.getChildElementVector("Part", null, null, true, 0, false);
-				theMap.put(id, new IDPart(idParent, vPart));
+				id = e.generateDotID("ID", null);
+				e.setID(id);
 			}
+			VElement vPart = e.getChildElementVector("Part", null, null, true, 0, false);
+			theMap.put(id, new IDPart(idParent, vPart));
 			return e;
 		}
 
@@ -259,11 +261,13 @@ public class IDFinder extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			final String id = e.getAttribute(AttributeName.ID, null, null);
-			if (id != null)
+			String id = e.getAttribute(AttributeName.ID, null, null);
+			if (id == null)
 			{
-				theMap.put(id, new IDPart(id, null));
+				id = "IDF_" + KElement.uniqueID(0);
+				e.setID(id);
 			}
+			theMap.put(id, new IDPart(id, null));
 			return e;
 		}
 

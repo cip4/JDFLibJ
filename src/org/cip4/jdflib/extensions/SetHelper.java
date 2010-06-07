@@ -197,7 +197,7 @@ public class SetHelper
 	public PartitionHelper appendPartition(JDFAttributeMap partMap, boolean addRes)
 	{
 		KElement newPart = theSet.appendElement(getPartitionName());
-		newPart.setAttribute("ID", theSet.getAttribute(AttributeName.ID) + "." + StringUtil.formatInteger(myIndex(newPart)));
+		newPart.setID(newPart.generateDotID("ID", null));
 		if (partMap != null && partMap.size() > 0)
 		{
 			JDFPart part = (JDFPart) newPart.appendElement("Part");
@@ -246,7 +246,8 @@ public class SetHelper
 	}
 
 	/**
-	 * @return
+	 * @return the name of the resource set 
+	 * also fixes it in case it needs to be calculated from kids
 	 */
 	public String getName()
 	{
@@ -262,7 +263,9 @@ public class SetHelper
 					KElement res = ph.getResource();
 					if (res != null)
 					{
-						return res.getNodeName();
+						name = res.getNodeName();
+						theSet.setAttribute("Name", name);
+						return name;
 					}
 				}
 			}

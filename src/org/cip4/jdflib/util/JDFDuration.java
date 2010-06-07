@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -227,24 +227,22 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 * @param strDuration
 	 * @throws DataFormatException
 	 */
-	private void init(final String strDuration) throws DataFormatException
+	private void init(String strDuration) throws DataFormatException
 	{
-		String strDurationLocal = strDuration;
 
-		strDurationLocal = StringUtil.zappTokenWS(strDurationLocal, " ");
-
-		boolean bComplete = strDurationLocal.matches(REGEX_DURATION);
+		strDuration = StringUtil.zappTokenWS(strDuration, " ");
+		boolean bComplete = strDuration.matches(REGEX_DURATION);
 		m_lDuration = 0;
 
 		if (bComplete)
 		{
-			bComplete = setDurationISO(strDurationLocal);
+			bComplete = setDurationISO(strDuration);
 		}
 
 		if (!bComplete)
 		{
 			// its not a DateTime nor a Duration
-			throw new DataFormatException("JDFDuration.init: invalid duration String " + strDurationLocal);
+			throw new DataFormatException("JDFDuration.init: invalid duration String " + strDuration);
 		}
 	}
 
@@ -413,18 +411,7 @@ public class JDFDuration implements Comparable<JDFDuration>
 					iMonths = Integer.parseInt(strDate.substring(iDateLastPos, iMPos));
 					final int nYears = iMonths / 12;
 					iduration += (iMonths * 30 + nYears * 5) * 24 * 60 * 60; // add
-					// 5
-					// days
-					// for
-					// each
-					// complete
-					// year
-					// (
-					// 360
-					// --
-					// >
-					// 365
-					// )
+					// 5 days for each complete year ( 360 --> 365)
 					iDateLastPos = ++iMPos;
 				}
 

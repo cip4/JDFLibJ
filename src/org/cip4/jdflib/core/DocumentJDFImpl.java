@@ -90,6 +90,7 @@ import javax.mail.BodyPart;
 
 import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ParentNode;
+import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
@@ -692,7 +693,7 @@ public class DocumentJDFImpl extends DocumentImpl
 			sm_PackageNames.put(ElementName.PRINTCONDITION, "org.cip4.jdflib.resource.process.press.JDFPrintCondition");
 			sm_PackageNames.put(ElementName.PRINTCONDITIONCOLOR, "org.cip4.jdflib.resource.process.JDFPrintConditionColor");
 			sm_PackageNames.put(ElementName.PRINTPREFERENCE, "org.cip4.jdflib.span.JDFSpanPrintPreference");
-			sm_PackageNames.put(ElementName.PRINTPROCESS, "org.cip4.jdflib.span.JDFSpanPrintProcess");
+			sm_PackageNames.put(ElementName.PRINTPROCESS, "org.cip4.jdflib.span.JDFNameSpan");
 			sm_PackageNames.put(ElementName.PRINTROLLINGPARAMS, "org.cip4.jdflib.resource.process.JDFPrintRollingParams");
 			sm_PackageNames.put(ElementName.PRITEM, "org.cip4.jdflib.resource.process.JDFPRItem");
 			sm_PackageNames.put(ElementName.PROCCURRENCE, "org.cip4.jdflib.resource.process.JDFPROccurrence");
@@ -1214,7 +1215,7 @@ public class DocumentJDFImpl extends DocumentImpl
 			return new KElement(this, namespaceURI, qualifiedName, localPart);
 		}
 
-		if (!bInJDFJMF && (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || ElementName.JMF.equals(localPart)))
+		if (!bInJDFJMF && (jdfNSURI.equals(namespaceURI) || ElementName.JDF.equals(localPart) || XJDF20.rootName.equals(localPart) || ElementName.JMF.equals(localPart)))
 		{
 			bInJDFJMF = true;
 		}

@@ -74,13 +74,17 @@ package org.cip4.jdflib.elementwalker;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.PrintWriter;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -99,9 +103,69 @@ public class XPathWalkerTest extends JDFTestCaseBase
 		String s = sm_dirTestData + File.separator + testFile;
 		JDFDoc d = new JDFParser().parseFile(s);
 		XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + File.separator + StringUtil.newExtension(testFile, "txt")));
-		w.setBAttribute(true);
-		w.setBAttributeValue(true);
+		w.setAttribute(true);
+		w.setAttributeValue(true);
 		w.walkAll(d.getRoot());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testDataType() throws Exception
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFResource intent = d.getJDFRoot().addResource(ElementName.LAYOUTINTENT, null);
+		intent.setAttribute("SizePolicy", "Tile");
+		ByteArrayIOStream ios = new ByteArrayIOStream();
+		PrintWriter writer = new PrintWriter(ios);
+		XPathWalker w = new XPathWalker(writer);
+		w.setSeparator(",");
+		w.setAttribute(true);
+		w.setAttributeValue(true);
+		w.setDatatype(true);
+		w.walkAll(intent);
+		String s = ios.toString();
+		assertTrue(s.indexOf("@SizePolicy,Tile,enumeration") > 0);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testCSV() throws Exception
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		ByteArrayIOStream ios = new ByteArrayIOStream();
+		PrintWriter writer = new PrintWriter(ios);
+		XPathWalker w = new XPathWalker(writer);
+		w.setSeparator(",");
+		w.setAttribute(true);
+		w.setAttributeValue(true);
+		w.setDatatype(true);
+		w.walkAll(d.getRoot());
+		String s = ios.toString();
+		assertTrue(s.indexOf("JDF/AuditPool") > 0);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testCSVUnique() throws Exception
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		for (int i = 0; i < 100; i++)
+			d.getJDFRoot().getCreateAuditPool().addModified(null, null);
+		ByteArrayIOStream ios = new ByteArrayIOStream();
+		PrintWriter writer = new PrintWriter(ios);
+		XPathWalker w = new XPathWalker(writer);
+		w.setSeparator(",");
+		w.setAttribute(true);
+		w.setAttributeValue(true);
+		w.setDatatype(true);
+		w.setUnique(true);
+		w.setMethod(0);
+		w.walkAll(d.getRoot());
+		String s = ios.toString();
+		assertTrue(StringUtil.tokenize(s, "\n", false).size() < 50);
 	}
 
 	/**

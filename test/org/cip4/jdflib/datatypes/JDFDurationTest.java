@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,9 +81,17 @@ import junit.framework.TestCase;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFDurationTest extends TestCase
 {
 
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	public final void testNegativeDuration() throws Exception
 	{
 		JDFDuration d = new JDFDuration(" -PT5M ");
@@ -92,7 +100,8 @@ public class JDFDurationTest extends TestCase
 		{
 			new JDFDuration("--PT5M90.95S");
 			fail("bad duration string");
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			// nop
 		}
@@ -112,12 +121,14 @@ public class JDFDurationTest extends TestCase
 		d = new JDFDuration("-PT3600S");
 		assertEquals(d.getDurationISO(), "-PT1H");
 		assertEquals(new JDFDuration("-PT0.95S").getDurationISO(), "-PT0.95S");
-		assertEquals(new JDFDuration("-PT5M30.45S").getDurationISO(),
-				"-PT5M30.45S");
-		assertEquals(new JDFDuration("-PT5M90.95S").getDurationISO(),
-				"-PT6M30.95S");
+		assertEquals(new JDFDuration("-PT5M30.45S").getDurationISO(), "-PT5M30.45S");
+		assertEquals(new JDFDuration("-PT5M90.95S").getDurationISO(), "-PT6M30.95S");
 	}
 
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	public final void testJDFDurationString() throws Exception
 	{
 		JDFDuration d = new JDFDuration(" PT5M ");
@@ -126,7 +137,8 @@ public class JDFDurationTest extends TestCase
 		{
 			new JDFDuration("PT5M90.95aS");
 			fail("bad duration string");
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			// nop
 		}
@@ -134,7 +146,8 @@ public class JDFDurationTest extends TestCase
 		{
 			new JDFDuration("PTM90.95aS");
 			fail("bad duration string");
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			// nop
 		}
@@ -157,24 +170,28 @@ public class JDFDurationTest extends TestCase
 
 	// ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public final void testFractions() throws Exception
 	{
 		assertEquals(new JDFDuration(90.5).getDurationISO(), "PT1M30.5S");
 		assertEquals(new JDFDuration(-90.5).getDurationISO(), "-PT1M30.5S");
 		assertEquals(new JDFDuration("PT0.95S").getDurationISO(), "PT0.95S");
-		assertEquals(new JDFDuration("PT5M30.45S").getDurationISO(),
-				"PT5M30.45S");
-		assertEquals(new JDFDuration("PT5M90.95S").getDurationISO(),
-				"PT6M30.95S");
+		assertEquals(new JDFDuration("PT5M30.45S").getDurationISO(), "PT5M30.45S");
+		assertEquals(new JDFDuration("PT5M90.95S").getDurationISO(), "PT6M30.95S");
 	}
 
 	// //////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public final void testCompareTo()
 	{
 		assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(90.5)), 0);
-		assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-90.5)),
-				0);
+		assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-90.5)), 0);
 		assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(0)), -1);
 		assertEquals(new JDFDuration(-90.5).compareTo(new JDFDuration(-20)), -1);
 		assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(0)), 1);
@@ -182,6 +199,9 @@ public class JDFDurationTest extends TestCase
 		assertEquals(new JDFDuration(90.5).compareTo(new JDFDuration(900)), -1);
 	}
 
+	/**
+	 * 
+	 */
 	public final void testConstructFromDate()
 	{
 		JDFDate start = new JDFDate();
@@ -193,6 +213,9 @@ public class JDFDurationTest extends TestCase
 		assertEquals(new JDFDuration(start, end), new JDFDuration(-100));
 	}
 
+	/**
+	 * 
+	 */
 	public final void testAddSeconds()
 	{
 		final JDFDuration duration = new JDFDuration();
@@ -200,6 +223,9 @@ public class JDFDurationTest extends TestCase
 		assertEquals(duration.getDurationISO(), "PT5.234S");
 	}
 
+	/**
+	 * 
+	 */
 	public final void testSetDuration()
 	{
 		final JDFDuration duration = new JDFDuration();

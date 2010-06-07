@@ -393,13 +393,13 @@ public class XMLDocTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	public void testCreateElementThreads()
+	public void testCreateElementNS()
 	{
-		final XMLDoc d1 = new XMLDoc("JDF", null);
+		final XMLDoc d1 = new XMLDoc("JDF2", null);
 		assertEquals("XMLDoc only creates KElement", d1.getRoot().getClass(), KElement.class);
 		final JDFDoc jd = new JDFDoc("JDF");
 		assertEquals("JDFDoc creates typesafe elements", jd.getRoot().getClass(), JDFNode.class);
-		final XMLDoc d2 = new XMLDoc("JDF", null);
+		final XMLDoc d2 = new XMLDoc("JDF2", null);
 		assertEquals("XMLDoc only creates KElement - Hasmap must not be applied", d2.getRoot().getClass(), KElement.class);
 	}
 

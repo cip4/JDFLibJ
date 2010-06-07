@@ -2617,7 +2617,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			ct.start();
 			root = n2s;
 			n2s = sp.spawn(null, null, new VString("RunList:Output", null), v, false, true, true, true);
-			System.out.println(i + " " + ct.toXML());
+			System.out.println(i + " " + ct);
 			ct.stop();
 			if (i == 7)
 			{
@@ -2638,6 +2638,8 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		JDFNode n2s = root;
 		CPUTimer ct = new CPUTimer(false);
 		JDFSpawn sp = new JDFSpawn(n2s);
+		VElement nodes = new VElement();
+		nodes.add(null);
 		for (int i = 1; i < 400; i++)
 		{
 			VJDFAttributeMap v = new VJDFAttributeMap();
@@ -2645,10 +2647,22 @@ public class JDFSpawnTest extends JDFTestCaseBase
 			map2.put("RunPage", "" + i);
 			v.add(map2);
 			ct.start();
-			sp.spawn(null, null, new VString("RunList:Output", null), v, false, true, true, true);
+			JDFNode node = sp.spawn(null, null, new VString("RunList:Output", null), v, false, true, true, true);
+			nodes.add(node);
 			System.out.println(i + " " + ct.toString());
 			ct.stop();
 		}
+		ct = new CPUTimer(false);
+		for (int i = 1; i < 400; i++)
+		{
+			ct.start();
+			JDFMerge m = new JDFMerge(root);
+			m.mergeJDF((JDFNode) nodes.get(i), null, EnumCleanUpMerge.RemoveAll, EnumAmountMerge.UpdateLink);
+			nodes.setElementAt(null, i);
+			System.out.println(i + " " + ct.toString());
+			ct.stop();
+		}
+		root.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "sm_many.jdf", 0, true);
 	}
 
 	/**

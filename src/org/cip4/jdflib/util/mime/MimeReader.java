@@ -127,6 +127,16 @@ public class MimeReader extends MimeHelper
 	}
 
 	/**
+	 * create a root multipart from a MimeWriter
+	 * @param writer the input writer that will now be read
+	 */
+	public MimeReader(final MimeWriter writer)
+	{
+		super();
+		theMultipart = writer.getMultiPart();
+	}
+
+	/**
 	 * create a root multipart from an input stream
 	 * @param url the url or file name
 	 */

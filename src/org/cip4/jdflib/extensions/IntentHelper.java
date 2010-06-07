@@ -68,13 +68,14 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
-  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
 public class IntentHelper
 {
@@ -91,7 +92,7 @@ public class IntentHelper
 	/**
 	 * @param intent
 	 */
-	public IntentHelper(KElement intent)
+	public IntentHelper(final KElement intent)
 	{
 		theIntent = intent;
 		theIntent.appendAnchor(null);
@@ -100,7 +101,7 @@ public class IntentHelper
 	/**
 	 * @see java.lang.Object#toString()
 	 * @return
-	*/
+	 */
 	@Override
 	public String toString()
 	{
@@ -108,7 +109,7 @@ public class IntentHelper
 	}
 
 	/**
-	 * @return the <Intent> element
+	 * @return the "Intent" element
 	 */
 
 	public KElement getIntent()
@@ -132,7 +133,9 @@ public class IntentHelper
 			while (e != null)
 			{
 				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFComment))
+				{
 					return e;
+				}
 				e = e.getNextSiblingElement();
 			}
 		}
@@ -140,21 +143,54 @@ public class IntentHelper
 	}
 
 	/**
+	 * @return
+	 */
+	public String getName()
+	{
+		String name = theIntent.getAttribute("Name", null, null);
+		if (name == null)
+		{
+			KElement r = getResource();
+			if (r != null)
+			{
+				name = r.getLocalName();
+				theIntent.setAttribute(AttributeName.NAME, name);
+			}
+		}
+		return name;
+	}
+
+	/**
 	 * @param att
 	 * @param val
 	 * @param dataType - if null always set as simple attribute
 	 */
-	public void setSpan(String att, String val, String dataType)
+	public void setSpan(final String att, final String val, final String dataType)
+	{
+		final KElement resource = getResource();
+		setSpan(resource, att, val, dataType);
+	}
+
+	/**
+	 * set the span in a subelement
+	 * @param resource
+	 * @param att
+	 * @param val
+	 * @param dataType
+	 */
+	public void setSpan(final KElement resource, final String att, final String val, String dataType)
 	{
 		if (bSpanAsAttribute || dataType == null)
 		{
-			getResource().setAttribute(att, val);
+			resource.setAttribute(att, val);
 		}
 		else
 		{
 			if (!dataType.endsWith("Span"))
+			{
 				dataType += "Span";
-			KElement span = getResource().getCreateElement(dataType);
+			}
+			final KElement span = resource.getCreateElement(dataType);
 			span.setAttribute("Name", att);
 			span.setAttribute("Actual", val);
 		}

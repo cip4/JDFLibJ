@@ -81,6 +81,8 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
+import org.cip4.jdflib.resource.process.JDFDeliveryParams;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -90,9 +92,16 @@ class PostXJDFWalker extends BaseElementWalker
 	/**
 	 * if true merge stripping and layout
 	 */
-	boolean mergeLayout = true;
-	KElement newRoot;
-	boolean bIntentPartition = false;
+	public boolean mergeLayout = true;
+	protected KElement newRoot;
+	/**
+	 * if false, intents are never partitioned
+	 */
+	public boolean bIntentPartition = false;
+	/**
+	 * if false, all deliveryintents and artdeliveryintents are converted to the respective process resources
+	 */
+	public boolean bDeliveryIntent = true;
 
 	/**
 	 * 
@@ -222,6 +231,54 @@ class PostXJDFWalker extends BaseElementWalker
 
 	/**
 	 * 
+	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	public class WalkArtDeliveryIntentSet extends WalkIntentSet
+	{
+		/**
+		 * 
+		 */
+		public WalkArtDeliveryIntentSet()
+		{
+			super();
+		}
+
+		/**
+		 * 
+		 * @see org.cip4.jdflib.extensions.PostXJDFWalker.WalkIntentSet#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return super.matches(toCheck) && ElementName.ARTDELIVERYINTENT.equals(toCheck.getAttribute("Name"));
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			KElement intent = super.walk(xjdf, dummy);
+			if (intent != null)
+			{
+				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDF20.rootName, 0));
+				SetHelper artDelResHelper = h.getCreateSet("Parameter", ElementName.DELIVERYPARAMS, EnumUsage.Input);
+				PartitionHelper ph = artDelResHelper.appendPartition(null, true);
+				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
+				dp.setFromArtDelivery((JDFArtDeliveryIntent) intent.getElement(ElementName.ARTDELIVERYINTENT));
+			}
+			return intent;
+		}
+	}
+
+	/**
+	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
@@ -243,7 +300,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return !bIntentPartition && toCheck.getLocalName().equals("IntentSet");
+			return toCheck.getLocalName().equals("IntentSet");
 		}
 
 		/**
@@ -256,7 +313,7 @@ class PostXJDFWalker extends BaseElementWalker
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
 			KElement intent = xjdf.getElement("Intent");
-			if (intent != null)
+			if (!bIntentPartition && intent != null)
 			{
 				intent.copyAttribute("ID", xjdf);
 				intent.copyAttribute("Name", xjdf);
@@ -365,7 +422,5 @@ class PostXJDFWalker extends BaseElementWalker
 			}
 			//TODO treat outputs backwards...
 		}
-
 	}
-
 }

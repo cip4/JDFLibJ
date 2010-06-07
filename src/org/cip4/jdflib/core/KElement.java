@@ -4058,7 +4058,7 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public KElement copyInto(KElement src, boolean bRemove)
 	{
-		if (src == null)
+		if (src == null || src == this)
 			return this;
 
 		XMLDoc ownerDocument_KElement = getOwnerDocument_KElement();
@@ -7016,6 +7016,66 @@ public class KElement extends ElementNSImpl implements Element
 	public String getID()
 	{
 		return getAttribute(AttributeName.ID, null, JDFConstants.EMPTYSTRING);
+	}
+
+	/**
+	 * generate a unique id in the syntax newID=oldID.nn <br>
+	 * nn is a unique number, that is generated as the first integer higher than the number of sibling elements with the same name. <br>
+	 * Note that it is the responsibilty of the caller not to provide multiple siblings that use the same base IDs.
+	 * 
+	 * @param key the attribute that is to be set to this ID, e.g. jobpartid
+	 * @param nameSpaceURI the attribute namespace that is to be set to this ID, e.g. jobpartid
+	 * @return String - the newly generated ID in the syntax parentID.nn
+	 */
+	public String generateDotID(final String key, final String nameSpaceURI)
+	{
+		final String nodeName = getLocalName();
+		final JDFElement p = (JDFElement) getParentNode_KElement();
+		final String idPrefix = getIDPrefix();
+		if (p == null)
+		{
+			return idPrefix + uniqueID(0);
+		}
+		String parentID = p.getAttribute(key, nameSpaceURI, null);
+		if (parentID == null)
+		{
+			return idPrefix + uniqueID(0);
+		}
+
+		final VElement vn = p.getChildElementVector(nodeName, nameSpaceURI, null, true, 0, false);
+		final int siz = vn.size();
+		parentID += JDFConstants.DOT;
+
+		for (int i = siz; i < 2 * siz + 2; i++)
+		{
+			final String nn = parentID + i;
+			boolean bFound = false;
+			for (int j = 0; j < siz; j++)
+			{
+				if (nn.equals(((JDFElement) vn.elementAt(j)).getAttribute(key, nameSpaceURI, null)))
+				{
+					bFound = true;
+					break;
+				}
+			}
+			// got an unused id matching out x.y algorithm - return it
+			if (!bFound)
+			{
+				return nn;
+			}
+		}
+		// panic exit!
+		return idPrefix + uniqueID(0);
+	}
+
+	/**
+	 * getIDPrefix
+	 * 
+	 * @return the default ID prefix of non-overwritten JDF elements
+	 */
+	protected String getIDPrefix()
+	{
+		return "l";
 	}
 
 	/**

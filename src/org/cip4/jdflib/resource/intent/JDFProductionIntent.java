@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ package org.cip4.jdflib.resource.intent;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoProductionIntent;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
@@ -144,6 +145,18 @@ public class JDFProductionIntent extends JDFAutoProductionIntent
 	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
 	{
 		return getUnknownPoolElements(JDFElement.EnumPoolType.ProductionIntent, nMax);
+	}
+
+	/**
+	 * returns true if this is a digital print process
+	 * @return
+	 */
+	public boolean isDigital()
+	{
+		String process = guessActual(this, ElementName.PRINTPROCESS);
+		if (process != null)
+			process = process.toLowerCase();
+		return "electrophotography".equals(process) || "inkjet".equals(process) || "digital".equals(process);
 	}
 
 	/**

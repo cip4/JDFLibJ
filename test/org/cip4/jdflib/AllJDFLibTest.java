@@ -207,6 +207,8 @@ import org.cip4.jdflib.resource.PhaseTimeTest;
 import org.cip4.jdflib.resource.ProcessRunTest;
 import org.cip4.jdflib.resource.intent.JDFColorIntentTest;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntentTest;
+import org.cip4.jdflib.resource.intent.JDFIntentResourceTest;
+import org.cip4.jdflib.resource.intent.JDFProductionIntentTest;
 import org.cip4.jdflib.resource.process.JDFAddressTest;
 import org.cip4.jdflib.resource.process.JDFColorConversionParamsTest;
 import org.cip4.jdflib.resource.process.JDFColorTest;
@@ -216,6 +218,7 @@ import org.cip4.jdflib.resource.process.JDFComponentTest;
 import org.cip4.jdflib.resource.process.JDFContactTest;
 import org.cip4.jdflib.resource.process.JDFContentDataTest;
 import org.cip4.jdflib.resource.process.JDFCutBlockTest;
+import org.cip4.jdflib.resource.process.JDFDeliveryParamsTest;
 import org.cip4.jdflib.resource.process.JDFDieLayoutTest;
 import org.cip4.jdflib.resource.process.JDFEmployeeTest;
 import org.cip4.jdflib.resource.process.JDFExposedMediaTest;
@@ -437,6 +440,8 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		// resource.intent
 		suite.addTestSuite(JDFColorIntentTest.class);
 		suite.addTestSuite(JDFDeliveryIntentTest.class);
+		suite.addTestSuite(JDFIntentResourceTest.class);
+		suite.addTestSuite(JDFProductionIntentTest.class);
 
 		// resource.process
 		suite.addTestSuite(JDFAddressTest.class);
@@ -448,6 +453,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFContentDataTest.class);
 		suite.addTestSuite(JDFCutBlockTest.class);
 		suite.addTestSuite(JDFContactTest.class);
+		suite.addTestSuite(JDFDeliveryParamsTest.class);
 		suite.addTestSuite(JDFDieLayoutTest.class);
 		suite.addTestSuite(JDFEmployeeTest.class);
 		suite.addTestSuite(JDFExposedMediaTest.class);

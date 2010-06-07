@@ -801,15 +801,8 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		final JDFNode n22 = d22.getJDFRoot();
 		final JDFResourceLinkPool rlp = n22.getCreateResourceLinkPool();
 		boolean bCaught = false;
-		try
-		{
-			rlp.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
-		}
-		catch (final JDFException e)
-		{
-			bCaught = true;
-		}
-		assertTrue("Resource from other document not linked", bCaught);
+		JDFResourceLink rl = rlp.linkResource(ni, true ? EnumUsage.Input : EnumUsage.Output, null);
+		assertNull(rl);
 		assertNull("NI not linked", rlp.getElement("NodeInfoLink"));
 
 	}
