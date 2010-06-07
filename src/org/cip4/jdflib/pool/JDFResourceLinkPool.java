@@ -461,7 +461,7 @@ public class JDFResourceLinkPool extends JDFPool
 			s = r.getResourceRoot().appendAnchor(null);
 		}
 
-		final JDFResourceLink rl = (JDFResourceLink) appendElement(r.getLinkString(), r.getNamespaceURI());
+		JDFResourceLink rl = (JDFResourceLink) appendElement(r.getLinkString(), r.getNamespaceURI());
 		rl.setTarget(r);
 		rl.setUsage(usage);
 		rl.setProcessUsage(processUsage);
@@ -474,6 +474,7 @@ public class JDFResourceLinkPool extends JDFPool
 		catch (Exception x)
 		{
 			rl.deleteNode();
+			rl = null;
 		}
 		return rl;
 	}
