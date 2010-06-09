@@ -444,9 +444,8 @@ public class JDFResourceLinkPool extends JDFPool
 	 * @param usage usage of the link
 	 * @param processUsage processUsage of the link, null if none
 	 * 
-	 * @return JDFResourceLink - new link resource
+	 * @return JDFResourceLink - new link resource, null if an error occurred
 	 * 
-	 * @throws JDFException - if <code>r</code> is not in the same document as <code>this</code>
 	 */
 	public JDFResourceLink linkResource(JDFResource r, final JDFResourceLink.EnumUsage usage, final EnumProcessUsage processUsage)
 	{

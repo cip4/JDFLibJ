@@ -9394,7 +9394,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			final JDFResourceLinkPool rp = getResourceLinkPool();
 			if (rp != null)
 			{
-				vRes = rp.getInOutLinks(EnumUsage.Output, false, null, null);
+				vRes = rp.getInOutLinks(EnumUsage.Output, true, null, null);
+				if (vRes != null)
+				{
+					for (int i = 0; i < vRes.size(); i++)
+					{
+						JDFResourceLink rl = (JDFResourceLink) vRes.get(i);
+						vRes.setElementAt(rl.getLinkRoot(), i);
+					}
+				}
 			}
 
 			// get heuristic list of partidkeys from the output

@@ -485,6 +485,24 @@ public class StringUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testRegExpPerformance()
+	{
+		CPUTimer ct = new CPUTimer(false);
+		int b = 0;
+		for (int i = 0; i < 100000; i++)
+		{
+			ct.start();
+			if (StringUtil.matches("abc" + i, "(.)?bc(1|2)?00(1)?"))
+				b++;
+			ct.stop();
+		}
+		System.out.print(ct.toString());
+		assertTrue(b > 2);
+	}
+
+	/**
+	 * 
+	 */
 	public void testReplaceString()
 	{
 		assertEquals(StringUtil.replaceString("abbcc", "a", "_"), "_bbcc");

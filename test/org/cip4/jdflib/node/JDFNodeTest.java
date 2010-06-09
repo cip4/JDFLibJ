@@ -128,6 +128,7 @@ import org.cip4.jdflib.resource.process.JDFEmployee;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
@@ -150,6 +151,21 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFDoc d = p.parseFile(sm_dirTestData + strJDFName);
 		final JDFNode n = d.getJDFRoot();
 		n.sortChildren();
+	}
+
+	/**
+	 * performance test
+	 */
+	public void testGetPartIDKeys()
+	{
+		final JDFParser p = new JDFParser();
+		final JDFDoc d = p.parseFile(sm_dirTestData + "evilParts.jdf");
+		final JDFNode n = d.getJDFRoot();
+		CPUTimer ct = new CPUTimer(true);
+		VString v = n.getPartIDKeys(null);
+		ct.stop();
+		System.out.println(ct.toString());
+
 	}
 
 	// /////////////////////////////////////////////////////
