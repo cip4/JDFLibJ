@@ -181,7 +181,7 @@ public class RollingBackupFile extends File
 	private String getPathFor(final String pathname, final String extension, int i)
 	{
 		final String newExtension = i + ((extension == null) ? "" : "." + extension);
-		final String sBak = StringUtil.newExtension(pathname, newExtension);
+		final String sBak = UrlUtil.newExtension(pathname, newExtension);
 		return sBak;
 	}
 

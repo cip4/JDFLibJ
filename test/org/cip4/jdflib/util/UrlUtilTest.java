@@ -87,6 +87,7 @@ import javax.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
@@ -119,6 +120,21 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.getLocalURL("foo/", "foo/bar"), "bar");
 		assertEquals(UrlUtil.getLocalURL(null, "foo/bar"), "foo/bar");
 		assertEquals(UrlUtil.getLocalURL("", "foo/bar"), "foo/bar");
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetMimeTypeFromExt()
+	{
+		assertEquals(UrlUtil.TEXT_UNKNOWN, UrlUtil.getMimeTypeFromURL("www.foobar.com"));
+		assertEquals(UrlUtil.VND_JDF, UrlUtil.getMimeTypeFromURL(".JDF"));
+		assertEquals(UrlUtil.VND_JDF, UrlUtil.getMimeTypeFromURL(".jdf"));
+		assertEquals(UrlUtil.VND_JDF, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.jdf"));
+		assertEquals(UrlUtil.VND_JMF, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.JMF"));
+		assertEquals(UrlUtil.TEXT_XML, UrlUtil.getMimeTypeFromURL("http://fobar.con/snarf.xml"));
+		assertEquals(UrlUtil.getMimeTypeFromURL(null), JDFConstants.MIME_TEXTUNKNOWN);
+		assertEquals(UrlUtil.getMimeTypeFromURL("foo.PDF"), JDFConstants.MIME_PDF);
 	}
 
 	/**
@@ -515,11 +531,11 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 */
 	public void testRemoveExtension()
 	{
-		assertEquals(UrlUtil.removeExtension("a.b"), "a");
-		assertEquals(UrlUtil.removeExtension("a"), "a");
-		assertEquals(UrlUtil.removeExtension("a."), "a");
-		assertEquals(UrlUtil.removeExtension("a.b.c"), "a.b");
-		assertEquals(UrlUtil.removeExtension("."), "");
+		assertEquals(UrlUtil.prefix("a.b"), "a");
+		assertEquals(UrlUtil.prefix("a"), "a");
+		assertEquals(UrlUtil.prefix("a."), "a");
+		assertEquals(UrlUtil.prefix("a.b.c"), "a.b");
+		assertEquals(UrlUtil.prefix("."), "");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -571,5 +587,21 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir));
 		fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
 		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir));
+	}
+
+	/**
+	 * 
+	 */
+	public void testNewExtension()
+	{
+		assertEquals(UrlUtil.newExtension("a.b", "c"), "a.c");
+		assertEquals(UrlUtil.newExtension("a.b.c", "c"), "a.b.c");
+		assertEquals(UrlUtil.newExtension("a.b", null), "a");
+		assertEquals(UrlUtil.newExtension("a.b", ".c"), "a.c");
+		assertEquals(UrlUtil.newExtension("a.b", ".c.d"), "a.c.d");
+		assertEquals(UrlUtil.newExtension("a.b", "c.d"), "a.c.d");
+		assertEquals(UrlUtil.newExtension("a.b.bb", "c.d"), "a.b.c.d");
+		assertEquals(UrlUtil.newExtension(".b", ".c"), ".c");
+		assertEquals(UrlUtil.newExtension("a", ".c"), "a.c");
 	}
 }

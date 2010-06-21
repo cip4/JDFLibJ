@@ -126,19 +126,6 @@ public class MimeUtilTest extends JDFTestCaseBase
 {
 
 	/**
-	 * 
-	 */
-	public void testGetMimeTypeFromExt()
-	{
-		assertEquals(UrlUtil.TEXT_UNKNOWN, MimeUtil.getMimeTypeFromExt("www.foobar.com"));
-		assertEquals(UrlUtil.VND_JDF, MimeUtil.getMimeTypeFromExt(".JDF"));
-		assertEquals(UrlUtil.VND_JDF, MimeUtil.getMimeTypeFromExt(".jdf"));
-		assertEquals(UrlUtil.VND_JDF, MimeUtil.getMimeTypeFromExt("http://fobar.con/snarf.jdf"));
-		assertEquals(UrlUtil.VND_JMF, MimeUtil.getMimeTypeFromExt("http://fobar.con/snarf.JMF"));
-		assertEquals(UrlUtil.TEXT_XML, MimeUtil.getMimeTypeFromExt("http://fobar.con/snarf.xml"));
-	}
-
-	/**
 	 * @throws IOException 
 	 * @throws MessagingException 
 	 * 
@@ -183,7 +170,7 @@ public class MimeUtilTest extends JDFTestCaseBase
 			Multipart mp = mr.getMultiPart();
 			assertEquals(mr.getBodyParts().length, 5);
 			MimeWriter mw = new MimeWriter(mp);
-			mw.writeToDir(new File(StringUtil.newExtension(out.getPath(), null)));
+			mw.writeToDir(new File(UrlUtil.newExtension(out.getPath(), null)));
 		}
 	}
 

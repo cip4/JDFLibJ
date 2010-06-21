@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,8 @@
 
 package org.cip4.jdflib.resource.process;
 
+import java.util.Vector;
+
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.core.AttributeName;
@@ -93,6 +95,7 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFSignature;
 import org.cip4.jdflib.resource.process.postpress.JDFSheet;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -147,6 +150,90 @@ public class JDFLayout extends JDFSurface
 	public String toString()
 	{
 		return "JDFLayout[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * get a vector of all Ord Values, multiple entries are entered multiple times
+	 * @return
+	 */
+	public Vector<Integer> getAllOrds()
+	{
+		Vector<Integer> vi;
+		Vector<JDFContentObject> v = getChildrenByClass(JDFContentObject.class, true, 0);
+		if (v == null || v.size() == 0)
+			vi = null;
+		else
+		{
+			vi = new Vector<Integer>(v.size());
+			for (JDFContentObject co : v)
+			{
+				String s = co.getAttribute(AttributeName.ORD, null, null);
+				int i = StringUtil.parseInt(s, -123456);
+				if (i != 123456)
+					vi.add(new Integer(i));
+			}
+		}
+
+		return vi;
+	}
+
+	/**
+	 * calculate maxOrd from all ord values, note that this is one based, i.e. the number of objects
+	 * @return maxOrd, -1 if none is found
+	 */
+	public int calcMaxOrd()
+	{
+		Vector<Integer> v = getAllOrds();
+		if (v == null)
+			return -1;
+		int maxOrd = -2;
+		for (Integer ii : v)
+		{
+			if (ii.intValue() > maxOrd)
+				maxOrd = ii.intValue();
+		}
+		return maxOrd + 1;
+	}
+
+	/**
+	 * calculate number of same printed elements
+	 * @return the number of equivalent elements, if allways the same, else -1
+	 */
+	public int calcNumSame()
+	{
+		Vector<Integer> v = getAllOrds();
+		if (v == null)
+			return -1;
+		int maxOrd = -2;
+		for (Integer ii : v)
+		{
+			if (ii.intValue() > maxOrd)
+				maxOrd = ii.intValue();
+		}
+		maxOrd++;
+		int minmax = -1;
+		if (maxOrd >= 0)
+		{
+			int[] iii = new int[maxOrd];
+			for (int i : iii)
+				iii[i] = 0;
+			for (Integer ii : v)
+			{
+				iii[ii.intValue()]++;
+			}
+			int max = -1;
+			int min = Integer.MAX_VALUE;
+			for (int i : iii)
+			{
+				if (i > max)
+					max = i;
+				if (i < min)
+					min = i;
+			}
+			if (min == max)
+				minmax = min;
+		}
+		return minmax;
 	}
 
 	// /////////////////////////////////////////////////////////////////

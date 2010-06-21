@@ -1865,7 +1865,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		treeRoot.getCreateElement("Parameter");
 		treeRoot.getCreateElement("ParameterSet");
 		treeRoot.getCreateElement("Intent");
-		treeRoot.getCreateElement("IntentSet");
+		//		treeRoot.getCreateElement("IntentSet");
 		treeRoot.getCreateElement("ChildProduct");
 		treeRoot.getCreateElement("Product");
 		treeRoot.getCreateElement("ProductList");
@@ -1916,7 +1916,8 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	 * @param baseElem
 	 * @param typName
 	 * @param baseType 
-	 * @param v	 * @return 
+	 * @param v
+	 * @return 
 	 */
 	protected KElement appendSimpleType(KElement baseElem, String typName, String baseType, VString v)
 	{

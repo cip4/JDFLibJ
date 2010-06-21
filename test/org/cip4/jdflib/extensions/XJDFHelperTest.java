@@ -99,7 +99,38 @@ public class XJDFHelperTest extends TestCase
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		KElement root = theHelper.getRoot();
 		assertNotNull(theHelper.getSet("NodeInfo", 0));
+		assertNotNull(root);
 
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testRootProducts()
+	{
+		theHelper = new XJDFHelper("jID", "jpID", null);
+		KElement root = theHelper.getRoot();
+		root.setXPathAttribute("ProductList/Product/@ID", "idproduct");
+		root.setXPathAttribute("ProductList/@RootProducts", "idproduct");
+		assertNotNull(theHelper.getRootProductHelpers().get(0));
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testRootProduct()
+	{
+		theHelper = new XJDFHelper("jID", "jpID", null);
+		KElement root = theHelper.getRoot();
+		root.setXPathAttribute("ProductList/Product/@ID", "idproduct");
+		assertNotNull(theHelper.getRootProduct(0));
+		root.setXPathAttribute("ProductList/@RootProducts", "idproduct");
+		assertNotNull(theHelper.getRootProduct(0));
+		assertNotNull(theHelper.getRootProduct(-1));
+		assertNull(theHelper.getRootProduct(1));
+		assertNull(theHelper.getRootProduct(-2));
 	}
 
 	/**

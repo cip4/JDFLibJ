@@ -152,7 +152,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
 		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), StringUtil.newExtension(UrlUtil.fileToUrl(stFile, false), "jdf"));
+		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.newExtension(UrlUtil.fileToUrl(stFile, false), "jdf"));
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		assertEquals(myListener.vJMF.size(), 1);
 		final JDFJMF elementAt = (JDFJMF) myListener.vJMF.elementAt(0);
 		assertEquals(elementAt.getCommand(0).getEnumType(), JDFMessage.EnumType.SubmitQueueEntry);
-		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), StringUtil.newExtension(UrlUtil.fileToUrl(stFile, false), "jdf"));
+		assertEquals(elementAt.getCommand(0).getQueueSubmissionParams(0).getURL(), UrlUtil.newExtension(UrlUtil.fileToUrl(stFile, false), "jdf"));
 	}
 
 	/*

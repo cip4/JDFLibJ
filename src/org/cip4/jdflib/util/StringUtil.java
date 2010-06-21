@@ -866,16 +866,12 @@ public class StringUtil
 	 * inverse of extension
 	 * @param strWork the string to work on
 	 * @return the prefix
+	 * @deprecated use UrlUtil.prefix(strWork);
 	 */
+	@Deprecated
 	public static String prefix(final String strWork)
 	{
-		final String ext = UrlUtil.extension(strWork);
-		if (ext == null)
-		{
-			return strWork;
-		}
-
-		return strWork.substring(0, strWork.length() - ext.length() - 1);
+		return UrlUtil.prefix(strWork);
 	}
 
 	/**
@@ -909,20 +905,12 @@ public class StringUtil
 	 * @param strWork the file path
 	 * @param newExt the new extension (works with or without the initial "."
 	 * @return the strWork with a replaced extension
+	 * @deprecated use UrlUtil.newExtension
 	 */
+	@Deprecated
 	public static String newExtension(final String strWork, String newExt)
 	{
-		if (newExt == null)
-		{
-			return StringUtil.prefix(strWork);
-		}
-
-		if (!newExt.startsWith("."))
-		{
-			newExt = "." + newExt;
-		}
-
-		return StringUtil.prefix(strWork) + newExt;
+		return UrlUtil.newExtension(strWork, newExt);
 	}
 
 	/**
@@ -943,49 +931,12 @@ public class StringUtil
 	 * 
 	 * @param strWork String to work in
 	 * @return the mime type
+	 * @deprecated use MimeUtil.getMimeTypeFromExt(strWork);
 	 */
+	@Deprecated
 	public static String mime(final String strWork)
 	{
-		String extension = UrlUtil.extension(strWork);
-		if (extension == null)
-		{
-			return JDFConstants.MIME_TEXTUNKNOWN;
-		}
-
-		extension = extension.toLowerCase();
-
-		if ("pdf".equals(extension))
-		{
-			return JDFConstants.MIME_PDF;
-		}
-		else if ("png".equals(extension))
-		{
-			return JDFConstants.MIME_PNG;
-		}
-		else if ("tif".equals(extension))
-		{
-			return JDFConstants.MIME_TIFF;
-		}
-		else if ("jdf".equals(extension))
-		{
-			return JDFConstants.MIME_JDF;
-		}
-		else if ("jdf".equals(extension))
-		{
-			return JDFConstants.MIME_JMF;
-		}
-		else if ("xml".equals(extension))
-		{
-			return JDFConstants.MIME_TEXTXML;
-		}
-		else if ("jpg".equals(extension) || "jpeg".equals(extension))
-		{
-			return JDFConstants.MIME_JPG;
-		}
-		else
-		{
-			return JDFConstants.MIME_TEXTUNKNOWN;
-		}
+		return UrlUtil.getMimeTypeFromURL(strWork);
 	}
 
 	/**

@@ -70,6 +70,7 @@
  */
 package org.cip4.jdflib.util;
 
+import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -79,8 +80,6 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
-
-import sun.management.ManagementFactory;
 
 /**
  * class for cpu time measurements

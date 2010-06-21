@@ -153,6 +153,7 @@ import org.cip4.jdflib.examples.StrippingTest;
 import org.cip4.jdflib.examples.VarnishTest;
 import org.cip4.jdflib.examples.WebTest;
 import org.cip4.jdflib.extensions.PartitionHelperTest;
+import org.cip4.jdflib.extensions.ProductHelperTest;
 import org.cip4.jdflib.extensions.SetHelperTest;
 import org.cip4.jdflib.extensions.XJDFGeneratorTest;
 import org.cip4.jdflib.extensions.XJDFHelperTest;
@@ -245,6 +246,7 @@ import org.cip4.jdflib.util.HashUtilTest;
 import org.cip4.jdflib.util.HotFolderTest;
 import org.cip4.jdflib.util.JDFDateTest;
 import org.cip4.jdflib.util.JDFSpawnTest;
+import org.cip4.jdflib.util.MemorySpyTest;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.MyArgsTest;
 import org.cip4.jdflib.util.PlatformUtilTest;
@@ -375,6 +377,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		//extension
 		suite.addTestSuite(IDFinderTest.class);
 		suite.addTestSuite(PartitionHelperTest.class);
+		suite.addTestSuite(ProductHelperTest.class);
 		suite.addTestSuite(SetHelperTest.class);
 		suite.addTestSuite(XJDFHelperTest.class);
 		suite.addTestSuite(XJDFLayoutStripTest.class);
@@ -486,6 +489,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(HotFolderTest.class);
 		suite.addTestSuite(JDFDateTest.class);
 		suite.addTestSuite(JDFSpawnTest.class);
+		suite.addTestSuite(MemorySpyTest.class);
 		suite.addTestSuite(MimeUtilTest.class);
 		suite.addTestSuite(MyArgsTest.class);
 		suite.addTestSuite(PlatformUtilTest.class);

@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -102,7 +103,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 	{
 		String s = sm_dirTestData + File.separator + testFile;
 		JDFDoc d = new JDFParser().parseFile(s);
-		XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + File.separator + StringUtil.newExtension(testFile, "txt")));
+		XPathWalker w = new XPathWalker(new File(sm_dirTestDataTemp + File.separator + UrlUtil.newExtension(testFile, "txt")));
 		w.setAttribute(true);
 		w.setAttributeValue(true);
 		w.walkAll(d.getRoot());
@@ -183,7 +184,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 			XMLDoc d = (i % 2 == 0) ? new XMLDoc("JDF", null) : new JDFDoc("JDF");
 
 			KElement n = d.getRoot();
-			File f = new File(sm_dirTestDataTemp + StringUtil.newExtension(testFile, "txt"));
+			File f = new File(sm_dirTestDataTemp + UrlUtil.newExtension(testFile, "txt"));
 			BufferedReader r = new BufferedReader(new FileReader(f));
 			String s = r.readLine();
 			while (s != null)
@@ -204,7 +205,7 @@ public class XPathWalkerTest extends JDFTestCaseBase
 			}
 			long n2 = System.currentTimeMillis();
 			System.out.println(i + " build time: " + (n2 - n1));
-			d.write2File(sm_dirTestDataTemp + StringUtil.newExtension(testFile, i + ".new.jdf"), 0, true);
+			d.write2File(sm_dirTestDataTemp + UrlUtil.newExtension(testFile, (i + ".new.jdf")), 0, true);
 			long n3 = System.currentTimeMillis();
 			System.out.println("write time: " + (n3 - n2));
 		}

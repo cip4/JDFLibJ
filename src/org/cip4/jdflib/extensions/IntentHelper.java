@@ -172,6 +172,22 @@ public class IntentHelper
 	}
 
 	/**
+	 * get the span attribute - initially try attribute, else Element/@Actual
+	 * @param spanName
+	 * @return 
+	 */
+	public String getSpan(final String spanName)
+	{
+		final KElement resource = getResource();
+		String s = resource.getAttribute(spanName, null, null);
+		if (s == null)
+		{
+			s = resource.getXPathAttribute(spanName + "/@Actual", null);
+		}
+		return s;
+	}
+
+	/**
 	 * set the span in a subelement
 	 * @param resource
 	 * @param att

@@ -444,31 +444,6 @@ public class StringUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	public void testMime()
-	{
-		assertEquals(StringUtil.mime(null), JDFConstants.MIME_TEXTUNKNOWN);
-		assertEquals(StringUtil.mime("foo.PDF"), JDFConstants.MIME_PDF);
-	}
-
-	/**
-	 * 
-	 */
-	public void testNewExtension()
-	{
-		assertEquals(StringUtil.newExtension("a.b", "c"), "a.c");
-		assertEquals(StringUtil.newExtension("a.b.c", "c"), "a.b.c");
-		assertEquals(StringUtil.newExtension("a.b", null), "a");
-		assertEquals(StringUtil.newExtension("a.b", ".c"), "a.c");
-		assertEquals(StringUtil.newExtension("a.b", ".c.d"), "a.c.d");
-		assertEquals(StringUtil.newExtension("a.b", "c.d"), "a.c.d");
-		assertEquals(StringUtil.newExtension("a.b.bb", "c.d"), "a.b.c.d");
-		assertEquals(StringUtil.newExtension(".b", ".c"), ".c");
-		assertEquals(StringUtil.newExtension("a", ".c"), "a.c");
-	}
-
-	/**
-	 * 
-	 */
 	public void testNumOccurrences()
 	{
 		assertEquals(StringUtil.numSubstrings("a", "aa"), 0);

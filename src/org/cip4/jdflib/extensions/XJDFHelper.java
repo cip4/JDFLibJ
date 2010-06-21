@@ -74,10 +74,12 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -160,6 +162,73 @@ public class XJDFHelper
 	public KElement getRoot()
 	{
 		return theXJDF;
+	}
+
+	/**
+	 * get the Root product by index
+	 * - note that this need not be the index in the product list but rather depends on the index of the ID in ProductList/@RootProducts
+	 * 
+	 * @param iProduct the index of root products 
+	 * @return the product, null if no matching product exists
+	 */
+	public ProductHelper getRootProduct(int iProduct)
+	{
+		final Vector<ProductHelper> rootProductHelpers = getRootProductHelpers();
+		if (rootProductHelpers == null)
+		{
+			return null;
+		}
+		if (iProduct < 0)
+			iProduct = rootProductHelpers.size() + iProduct;
+		if (iProduct >= rootProductHelpers.size() || iProduct < 0)
+			return null;
+		ProductHelper productHelper = rootProductHelpers.get(iProduct);
+		return productHelper;
+	}
+
+	/**
+	 * 
+	 * @return the xjdf root element
+	 */
+	public Vector<ProductHelper> getRootProductHelpers()
+	{
+		VString v = getRootProducts();
+		Vector<ProductHelper> vp = new Vector<ProductHelper>();
+		KElement productList = theXJDF.getElement("ProductList");
+		if (v == null)
+		{
+			KElement product = productList.getElement("Product");
+			if (product != null)
+			{
+				vp.add(new ProductHelper(product));
+			}
+		}
+		else
+		{
+			for (String id : v)
+			{
+				KElement product = productList.getChildWithAttribute("Product", AttributeName.ID, null, id, 0, true);
+				if (product != null)
+				{
+					vp.add(new ProductHelper(product));
+				}
+			}
+		}
+		return vp.size() == 0 ? null : vp;
+	}
+
+	/**
+	 * @return
+	 */
+	private VString getRootProducts()
+	{
+		if (theXJDF == null)
+			return null;
+		KElement productList = theXJDF.getElement("ProductList");
+		if (productList == null)
+			return null;
+		VString v = StringUtil.tokenize(productList.getAttribute("RootProducts", null, null), null, false);
+		return v.size() == 0 ? null : v;
 	}
 
 	/**

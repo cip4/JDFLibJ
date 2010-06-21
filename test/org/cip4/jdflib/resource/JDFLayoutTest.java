@@ -71,8 +71,10 @@
 package org.cip4.jdflib.resource;
 
 import java.io.File;
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoLayout;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoRegisterMark.EnumMarkUsage;
@@ -188,6 +190,64 @@ public class JDFLayoutTest extends JDFTestCaseBase
 	}
 
 	// ////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
+	public void testGetAllOrds()
+	{
+		final JDFLayout lo = prepare44();
+		Vector<Integer> v = lo.getAllOrds();
+		assertEquals(v.size(), 32);
+		for (int i = 0; i < 16; i++)
+			assertTrue("pos: " + i, v.contains(new Integer(i)));
+	}
+
+	/**
+	 * 
+	 */
+	public void testCalcMaxOrd()
+	{
+		final JDFLayout lo = prepare44();
+		assertEquals(lo.calcMaxOrd(), 16);
+		((JDFAutoLayout) lo.getLeaves(false).elementAt(0)).appendContentObject().setOrd(20);
+		assertEquals(lo.calcMaxOrd(), 21);
+	}
+
+	/**
+	 * 
+	 */
+	public void testCalcNumSame()
+	{
+		final JDFLayout lo = prepare44();
+		assertEquals(lo.calcNumSame(), 2);
+		((JDFAutoLayout) lo.getLeaves(false).elementAt(0)).appendContentObject().setOrd(20);
+		assertEquals(lo.calcNumSame(), -1);
+	}
+
+	/**
+	 * @return
+	 */
+	private JDFLayout prepare44()
+	{
+		final JDFLayout lo = (JDFLayout) n.appendMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null);
+		lo.appendMedia();
+		for (int i = 0; i < 4; i++)
+		{
+			JDFResource sheet = lo.addPartition(EnumPartIDKey.SheetName, "Sheet" + i);
+			VString fb = new VString("Front Back", null);
+			for (String side : fb)
+			{
+				JDFLayout surf = (JDFLayout) sheet.addPartition(EnumPartIDKey.Side, side);
+				for (int j = 0; j < 4; j++)
+				{
+					JDFContentObject co = surf.appendContentObject();
+					co.setOrd(4 * i + j);
+				}
+			}
+		}
+		return lo;
+	}
 
 	/**
 	 * 

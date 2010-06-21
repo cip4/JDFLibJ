@@ -80,8 +80,6 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -117,7 +115,6 @@ import org.cip4.jdflib.util.mime.MimeReader;
  */
 public class UrlUtil
 {
-	private static HashMap<String, String> mimeMap = null;
 	/**
 	 * 
 	 */
@@ -471,20 +468,16 @@ public class UrlUtil
 	}
 
 	/**
-	 * get the filename extension of pathName
+	 * get the path name without extension of pathName
 	 * 
 	 * @param pathName the pathName to get the extension for
-	 * @return String - the filename extension
+	 * @return String - the filename without extension
+	 * @deprecated use prefix(pathName)
 	 */
+	@Deprecated
 	public static String removeExtension(final String pathName)
 	{
-		if (pathName == null)
-		{
-			return null;
-		}
-
-		final int index = pathName.lastIndexOf(".");
-		return (index == -1) ? pathName : pathName.substring(0, index);
+		return prefix(pathName);
 	}
 
 	/**
@@ -567,7 +560,19 @@ public class UrlUtil
 				retStream = getCidURLStream(urlString, multipart);
 			}
 		}
-		if (retStream == null && isHttp(urlString))
+		if (retStream == null)
+			retStream = getURLInputStream(urlString);
+		return retStream;
+	}
+
+	/**
+	 * @param urlString
+	 * @return
+	 */
+	public static InputStream getURLInputStream(final String urlString)
+	{
+		InputStream retStream = null;
+		if (isHttp(urlString))
 		{
 			try
 			{
@@ -589,15 +594,7 @@ public class UrlUtil
 			final File f = urlToFile(urlString);
 			if ((f != null) && f.canRead())
 			{
-				try
-
-				{
-					retStream = new FileInputStream(f);
-				}
-				catch (final FileNotFoundException x)
-				{
-					//
-				}
+				retStream = FileUtil.getBufferedInputStream(f);
 			}
 		}
 		return retStream;
@@ -855,14 +852,23 @@ public class UrlUtil
 			mimeMap.put("jmf", JDFConstants.MIME_JMF);
 
 			mimeMap.put("xml", JDFConstants.MIME_TEXTXML);
+			mimeMap.put("xsl", TEXT_XML);
+			mimeMap.put("xsd", TEXT_XML);
 
 			mimeMap.put("jpg", JDFConstants.MIME_JPG);
 			mimeMap.put("jpeg", JDFConstants.MIME_JPG);
+			mimeMap.put("png", JDFConstants.MIME_PNG);
 			mimeMap.put("tif", JDFConstants.MIME_TIFF);
 			mimeMap.put("tiff", JDFConstants.MIME_TIFF);
+
+			mimeMap.put("mjm", MimeUtil.MULTIPART_RELATED);
+			mimeMap.put("mjd", MimeUtil.MULTIPART_RELATED);
+			mimeMap.put("mim", MimeUtil.MULTIPART_RELATED);
+
 		}
 		final String extension = UrlUtil.extension(url);
-		return extension == null ? null : mimeMap.get(extension.toLowerCase());
+		String mimeType = extension == null ? null : mimeMap.get(extension.toLowerCase());
+		return mimeType == null ? JDFConstants.MIME_TEXTUNKNOWN : mimeType;
 	}
 
 	/**
@@ -1383,5 +1389,45 @@ public class UrlUtil
 
 		return false;
 	}
+
+	/**
+	 * replace the .extension of a file name
+	 * 
+	 * @param strWork the file path
+	 * @param newExt the new extension (works with or without the initial "."
+	 * @return the strWork with a replaced extension
+	 */
+	public static String newExtension(final String strWork, String newExt)
+	{
+		if (newExt == null)
+		{
+			return UrlUtil.prefix(strWork);
+		}
+
+		if (!newExt.startsWith("."))
+		{
+			newExt = "." + newExt;
+		}
+
+		return UrlUtil.prefix(strWork) + newExt;
+	}
+
+	/**
+	 * inverse of extension
+	 * @param strWork the string to work on
+	 * @return the prefix
+	 */
+	public static String prefix(final String strWork)
+	{
+		final String ext = UrlUtil.extension(strWork);
+		if (ext == null)
+		{
+			return strWork;
+		}
+
+		return strWork.substring(0, strWork.length() - ext.length() - 1);
+	}
+
+	private static HashMap<String, String> mimeMap = null;
 
 }

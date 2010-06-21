@@ -43,6 +43,7 @@ import org.cip4.jdflib.resource.JDFProofItem;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFSoftCoverBinding;
 import org.cip4.jdflib.resource.JDFStripBinding;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFTabs;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
@@ -407,6 +408,16 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		}
 
 		/**
+		 * @param val
+		 * @return
+		 */
+		protected String getRefName(final String val)
+		{
+			final String refName = val.endsWith("Refs") ? StringUtil.leftStr(val, -1) : val;
+			return refName;
+		}
+
+		/**
 		 * @param e
 		 * @param trackElem
 		 */
@@ -433,26 +444,29 @@ public class XJDFToJDFConverter extends BaseElementWalker
 							final IDPart p = idMap.get(value);
 							if (p != null)
 							{
-								String refName = val.endsWith("Refs") ? StringUtil.leftStr(val, -1) : val;
-								final KElement refOld = trackElem != null ? trackElem.getElement(refName) : null;
-								final KElement ref = e.appendElement(refName);
-								ref.setAttribute("rRef", p.getID());
-
-								final VJDFAttributeMap vpartmap = p.getPartMap();
-								if (vpartmap != null)
+								final String refName = getRefName(val);
+								if (refName != null)
 								{
-									for (int j = 0; j < vpartmap.size(); j++)
+									final KElement refOld = trackElem != null ? trackElem.getElement(refName) : null;
+									final KElement ref = e.appendElement(refName);
+									ref.setAttribute("rRef", p.getID());
+
+									final VJDFAttributeMap vpartmap = p.getPartMap();
+									if (vpartmap != null)
 									{
-										ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
+										for (int j = 0; j < vpartmap.size(); j++)
+										{
+											ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
+										}
+									}
+									// we've been here already
+									if (ref.isEqual(refOld))
+									{
+										ref.deleteNode();
 									}
 								}
-								// we've been here already
-								if (ref.isEqual(refOld))
-								{
-									ref.deleteNode();
-								}
+								e.removeAttribute(val);
 							}
-							e.removeAttribute(val);
 						}
 					}
 				}
@@ -839,6 +853,17 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	public class WalkProductList extends WalkXElement
 	{
 		/**
+		 * 
+		 */
+		public WalkProductList()
+		{
+			super();
+			foundProduct = false;
+		}
+
+		boolean foundProduct;
+
+		/**
 		 * @param e
 		 * @return the root, else null if we are in a second pass
 		 */
@@ -846,9 +871,11 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			e.deleteNode();
+			final boolean bFirst = foundProduct;
+			foundProduct = true;
 			// only convert products in the first pass
 			// TODO rethink product conversion switch
-			return createProduct && firstConvert ? jdfDoc.getJDFRoot() : null;
+			return createProduct && !bFirst ? jdfDoc.getJDFRoot() : null;
 		}
 
 		/**
@@ -861,7 +888,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			return super.matches(toCheck) && (toCheck.getLocalName().equals("ProductList"));
 		}
-
 	}
 
 	/**
@@ -1125,6 +1151,37 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			}
 			return k2;
 		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+	 */
+	public class WalkStrippingParams extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFStrippingParams;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXElement#getRefName(java.lang.String)
+		 */
+		@Override
+		protected String getRefName(final String val)
+		{
+			if ("PaperRef".equals(val) || "PlateRef".equals(val) || "ProofRef".equals(val))
+			{
+				return "MediaRef";
+			}
+			return super.getRefName(val);
+		}
+
 	}
 
 	/**

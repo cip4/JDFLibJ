@@ -138,6 +138,14 @@ public class ProductHelper
 	}
 
 	/**
+	 * @return amount the amount to get
+	 */
+	public int getAmount()
+	{
+		return theProduct.getIntAttribute(AttributeName.AMOUNT, null, -1);
+	}
+
+	/**
 	 * @param amount the amount to set
 	 */
 	public void setAmount(int amount)

@@ -141,7 +141,7 @@ public class QueueHotFolder
 
 			if (jdfDoc != null)
 			{
-				final String newURL = StringUtil.newExtension(stringURL, "jdf");
+				final String newURL = UrlUtil.newExtension(stringURL, "jdf");
 				if (!newURL.equalsIgnoreCase(stringURL))
 				{
 					storedFile.delete();

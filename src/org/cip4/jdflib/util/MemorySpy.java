@@ -68,164 +68,179 @@
  *  
  * 
  */
-
-/*
- * @author muchadie
+/**
+ * 
  */
 package org.cip4.jdflib.util;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.CPUTimer.CPUTimerFactory;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.MemoryUsage;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 /**
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * June 11, 2009
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class CPUTimerTest extends JDFTestCaseBase
+public class MemorySpy
 {
-
-	CPUTimer t;
-	CPUTimerFactory fac;
-
-	/**
-	 * 
-	 */
-	public void testCPUTime()
-	{
-		t.start();
-		for (int i = 0; i < 100000000; i++)
-		{
-			Math.sin(i);
-		}
-		assertTrue(t.getTotalCPUTime() > 0);
-	}
+	private final List<MemoryPoolMXBean> memList;
+	private final MemoryMXBean mainBean;
 
 	/**
-	 * 
+	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	  * the scope of the 
 	 */
-	public void testToXML()
+	public static enum MemScope
 	{
-		t.start();
-		for (int i = 0; i < 100000; i++)
-		{
-			t.toXML();
-		}
-		t.stop();
-		System.out.print(t.toXML());
-		assertTrue(t.getTotalCPUTime() > 0);
+		/**		 */
+		current,
+		/**	 */
+		peak,
+		/**			 */
+		init,
+		/**			 */
+		peakCommit,
+		/**			 */
+		commit
 	}
 
 	/**
 	 * 
 	 */
-	public void testStartStop()
+	public MemorySpy()
 	{
-		for (int i = 0; i < 1000; i++)
-		{
-			t.start();
-			for (int ii = 0; ii < 100000; ii++)
-			{
-				Math.sin(ii);
-			}
-			t.stop();
-		}
-		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getTotalCPUTime() / 1000, t.getAverageCPUTime());
-		assertEquals(t.getTotalRealTime() / 1000, t.getAverageRealTime());
+		memList = ManagementFactory.getMemoryPoolMXBeans();
+		mainBean = ManagementFactory.getMemoryMXBean();
 	}
 
 	/**
 	 * 
-	 */
-	public void testGetCurrentTimer()
-	{
-		CPUTimer ct0 = fac.getCurrentTimer(null);
-		assertNull(ct0);
-		ct0 = fac.getCreateCurrentTimer(null);
-		assertNotNull(ct0);
-		CPUTimer ct1 = fac.getCreateCurrentTimer("1");
-		assertNotNull(ct1);
-		assertNotSame(ct0, ct1);
-	}
-
-	/**
-	 * 
-	 */
-	public void testGetFactory()
-	{
-		assertNotNull(CPUTimer.getFactory());
-		assertEquals(fac, CPUTimer.getFactory());
-	}
-
-	/**
-	 * 
-	 */
-	public void testAdd()
-	{
-		long l = 0;
-		long lCPU = 0;
-		for (int ii = 0; ii < 5; ii++)
-		{
-			CPUTimer t1 = new CPUTimer(true);
-			for (int i = 0; i < 3000; i++)
-			{
-				t.toXML();
-			}
-			t.add(t1);
-			l += t1.getTotalRealTime();
-			lCPU += t1.getTotalCPUTime();
-			t1.stop();
-
-		}
-		System.out.print(t.toXML());
-		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getNumStarts(), 5);
-		assertEquals(t.getTotalCPUTime(), lCPU);
-		assertEquals(t.getTotalRealTime(), l);
-
-	}
-
-	/**
-	 * 
-	 */
-	public void testAverage()
-	{
-		assertEquals(0, t.getAverageRealTime());
-		assertEquals(0, t.getAverageCPUTime());
-		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime());
-		assertEquals(t.getTotalRealTime(), t.getAverageRealTime());
-
-		t.start();
-		for (int ii = 0; ii < 50000000; ii++)
-		{
-			Math.sin(ii);
-		}
-		assertTrue(t.getTotalCPUTime() > 0);
-		assertEquals(t.getTotalCPUTime(), t.getAverageCPUTime());
-		assertEquals(t.getTotalRealTime(), t.getAverageRealTime());
-	}
-
-	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
-	 * @throws Exception
-	*/
-	@Override
-	protected void setUp() throws Exception
-	{
-		super.setUp();
-		t = new CPUTimer(false);
-		fac = CPUTimer.getFactory();
-	}
-
-	/**
-	 * @see org.cip4.jdflib.JDFTestCaseBase#toString()
 	 * @return
-	*/
+	 */
+	public Map<String, Long> getSizeMap()
+	{
+		HashMap<String, Long> map = new HashMap<String, Long>();
+		map.put("heap", new Long(mainBean.getHeapMemoryUsage().getUsed()));
+		map.put("non-heap", new Long(mainBean.getNonHeapMemoryUsage().getUsed()));
+		Iterator<MemoryPoolMXBean> it = memList.iterator();
+		while (it.hasNext())
+		{
+			MemoryPoolMXBean poolBean = it.next();
+			map.put(poolBean.getName(), new Long(poolBean.getUsage().getUsed()));
+			map.put("comitted " + poolBean.getName(), new Long(poolBean.getUsage().getCommitted()));
+			map.put("peak " + poolBean.getName(), new Long(poolBean.getPeakUsage().getUsed()));
+		}
+		return map;
+	}
+
+	/**
+	 * 
+	 * @param scope 
+	 * @return
+	 */
+	public long getHeapUsed(MemScope scope)
+	{
+		MemoryUsage usage = mainBean.getHeapMemoryUsage();
+		return getMem(usage, scope);
+	}
+
+	/**
+	 * 
+	 * @param scope 
+	 * @return
+	 */
+	public long getNonHeapUsed(MemScope scope)
+	{
+		MemoryUsage usage = mainBean.getNonHeapMemoryUsage();
+		return getMem(usage, scope);
+	}
+
+	/**
+	 * 
+	 * @param scope 
+	 * @return
+	 */
+	public long getPermGen(MemScope scope)
+	{
+		return getMemFromPool("Perm Gen", scope);
+	}
+
+	/**
+	 * @param name
+	 * @return
+	 */
+	private MemoryPoolMXBean getBeanFromPool(String name)
+	{
+		Iterator<MemoryPoolMXBean> it = memList.iterator();
+		while (it.hasNext())
+		{
+			MemoryPoolMXBean poolBean = it.next();
+			if (name.endsWith(poolBean.getName()))
+				return poolBean;
+		}
+		return null;
+	}
+
+	private long getMem(MemoryUsage usage, MemScope scope)
+	{
+		if (MemScope.current.equals(scope) || MemScope.peak.equals(scope))
+		{
+			return usage.getUsed();
+		}
+		else if (MemScope.commit.equals(scope) || MemScope.peak.equals(scope))
+		{
+			return usage.getCommitted();
+		}
+		else if (MemScope.init.equals(scope))
+		{
+			return usage.getInit();
+		}
+
+		return -1;
+
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param scope
+	 * @return
+	 */
+	public long getMemFromPool(String name, MemScope scope)
+	{
+		MemoryPoolMXBean bean = getBeanFromPool(name);
+		if (bean == null)
+			return -1;
+		boolean peak = MemScope.peak.equals(scope) || MemScope.peakCommit.equals(scope);
+		MemoryUsage usage = peak ? bean.getPeakUsage() : bean.getUsage();
+		return getMem(usage, scope);
+	}
+
+	/**
+	 * 
+	 * @see java.lang.Object#toString()
+	 * @return
+	 */
 	@Override
 	public String toString()
 	{
-		return super.toString() + " " + t;
+		Map<String, Long> sizeMap = getSizeMap();
+		Vector<String> keys = ContainerUtil.getKeyVector(sizeMap);
+		Collections.sort(keys);
+		StringBuffer b = new StringBuffer("MemorySpy: \n");
+		for (String key : keys)
+		{
+			b.append(key);
+			b.append(" = ");
+			b.append(sizeMap.get(key));
+			b.append("\n");
+		}
+		return b.toString();
 	}
-
 }

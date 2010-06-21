@@ -80,7 +80,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.util.HashMap;
 import java.util.Vector;
 
 import javax.activation.DataSource;
@@ -192,9 +191,6 @@ public class MimeUtil extends UrlUtil
 
 	public static final String MULTIPART_RELATED = "multipart/related";
 
-	private static HashMap<String, String> extensionMap = null;
-
-	// private static Logger log = Logger.getLogger(MimeUtil.class);
 	/**
 	 * @param bp
 	 * @param cid
@@ -362,52 +358,17 @@ public class MimeUtil extends UrlUtil
 	 * checkst whether the mime type corresponds to one of "application/vnd.cip4-jdf+xml"; "application/vnd.cip4-jmf+xml"; "text/xml";
 	 * @param fileName the string to test
 	 * @return the mime type
+	 * @deprecated use UrlUtil.getMimeTypeFromURL(fileName);
 	 */
+	@Deprecated
 	public static String getMimeTypeFromExt(final String fileName)
 	{
-		if (fileName == null)
-		{
-			return TEXT_UNKNOWN;
-		}
-		String ext = UrlUtil.extension(fileName);
-		if (ext == null)
-		{
-			return TEXT_UNKNOWN;
-		}
-		ext = ext.toLowerCase();
-		fillExtensionMap();
-		ext = extensionMap.get(ext);
-		return ext == null ? TEXT_UNKNOWN : ext;
+		return UrlUtil.getMimeTypeFromURL(fileName);
+
 	}
 
 	/**
-	 * 
-	 */
-	private static void fillExtensionMap()
-	{
-		if (extensionMap == null)
-		{
-			extensionMap = new HashMap<String, String>();
-
-			extensionMap.put("jdf", VND_JDF);
-
-			extensionMap.put("jmf", VND_JMF);
-
-			extensionMap.put("xml", TEXT_XML);
-			extensionMap.put("xsl", TEXT_XML);
-			extensionMap.put("xsd", TEXT_XML);
-
-			extensionMap.put("txt", TEXT_PLAIN);
-
-			extensionMap.put("mjm", MULTIPART_RELATED);
-			extensionMap.put("mjd", MULTIPART_RELATED);
-			extensionMap.put("mim", MULTIPART_RELATED);
-
-		}
-	}
-
-	/**
-	 * checkst whether the mime type corresponds to one of "application/vnd.cip4-jdf+xml"; "application/vnd.cip4-jmf+xml"; "text/xml";
+	 * checks whether the mime type corresponds to one of "application/vnd.cip4-jdf+xml"; "application/vnd.cip4-jmf+xml"; "text/xml";
 	 * @param mimeType the string to test
 	 * @return true if matches
 	 */
@@ -430,15 +391,6 @@ public class MimeUtil extends UrlUtil
 				|| JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeTypeLocal);
 	}
 
-	// public static MimeMessage parseMime(InputStream mimeStream) {
-	// //MimeMessage
-	// return null;
-	// }
-
-	// public static boolean isMultipart(Message message)
-	// throws MessagingException {
-	// return message.isMimeType("multipart/*");
-	// }
 	/**
 	 * @param docJMF
 	 * @param docJDF
