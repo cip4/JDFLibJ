@@ -184,8 +184,8 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	 */
 	public void testGetMimeTypeFromURL()
 	{
-		assertNull(UrlUtil.getMimeTypeFromURL(null));
-		assertNull(UrlUtil.getMimeTypeFromURL("burp"));
+		assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL(null));
+		assertEquals("text/unknown", UrlUtil.getMimeTypeFromURL("blubb"));
 		assertEquals("application/pdf", UrlUtil.getMimeTypeFromURL("file://a/b/./testtif.foo.PDF"));
 		assertEquals("image/tiff", UrlUtil.getMimeTypeFromURL("http://a/b/./testtif.foo.tiff"));
 	}
