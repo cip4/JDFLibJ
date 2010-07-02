@@ -58,7 +58,9 @@ class URLProxySelector extends ProxySelector
 	@Override
 	public List<Proxy> select(URI uri)
 	{
-		String host = uri == null ? null : uri.getHost().toLowerCase();
+		String host = uri == null ? null : uri.getHost();
+		if (host != null)
+			host = host.toLowerCase();
 		if (host == null || "localhost".equals(host) || "127.0.0.1".equals(host))
 			return noproxies;
 
