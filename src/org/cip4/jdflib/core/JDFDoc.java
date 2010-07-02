@@ -90,8 +90,10 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
+import org.cip4.jdflib.util.UrlUtil.UrlPart;
 import org.w3c.dom.Document;
 
 /**
@@ -337,6 +339,18 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
+	 * parse a JDF input stream
+	 * 
+	 * @param is
+	 * @return the parsed JDFDoc
+	 */
+	public static JDFDoc parseStream(InputStream is)
+	{
+		final JDFParser p = new JDFParser();
+		return p.parseStream(is);
+	}
+
+	/**
 	 * parse a JDF file
 	 * 
 	 * @param fileName
@@ -344,8 +358,8 @@ public class JDFDoc extends XMLDoc
 	 */
 	public static JDFDoc parseFile(final String fileName)
 	{
-		final JDFParser p = new JDFParser();
-		return p.parseFile(fileName);
+		InputStream is = FileUtil.getBufferedInputStream(new File(fileName));
+		return parseStream(is);
 	}
 
 	/**
@@ -357,10 +371,9 @@ public class JDFDoc extends XMLDoc
 	 */
 	public static JDFDoc parseURL(final String url, final BodyPart bp)
 	{
-		final JDFParser p = new JDFParser();
 		final InputStream inStream = UrlUtil.getURLInputStream(url, bp);
 		final File f = UrlUtil.urlToFile(url);
-		final JDFDoc d = p.parseStream(inStream);
+		final JDFDoc d = parseStream(inStream);
 		if (d != null)
 		{
 			if (f != null && f.canRead())
@@ -442,6 +455,23 @@ public class JDFDoc extends XMLDoc
 		final String strContentType = getContentType(e);
 
 		return super.write2HTTPURL(strURL, strContentType, det);
+	}
+
+	/**
+	 * @param strURL
+	 * @param det
+	 * @return
+	 */
+	public UrlPart write2HttpURL(final URL strURL, final HTTPDetails det)
+	{
+		final KElement e = getRoot();
+		if (e == null)
+		{
+			return null;
+		}
+		final String strContentType = getContentType(e);
+
+		return super.write2HttpURL(strURL, strContentType, det);
 	}
 
 	/**

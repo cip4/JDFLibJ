@@ -372,23 +372,18 @@ public class MimeUtil extends UrlUtil
 	 * @param mimeType the string to test
 	 * @return true if matches
 	 */
-	public static boolean isJDFMimeType(final String mimeType)
+	public static boolean isJDFMimeType(String mimeType)
 	{
-		String mimeTypeLocal = mimeType;
 
-		if (mimeTypeLocal == null)
+		if (mimeType == null)
 		{
 			return false;
 		}
 
-		final int posSemicolon = mimeTypeLocal.indexOf(";");
-		if (posSemicolon > 0)
-		{
-			mimeTypeLocal = mimeTypeLocal.substring(0, posSemicolon);
-		}
+		mimeType = StringUtil.token(mimeType, 0, ";");
 
-		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeTypeLocal) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeTypeLocal)
-				|| JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeTypeLocal);
+		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType)
+				|| UrlUtil.APPLICATION_XML.equalsIgnoreCase(mimeType);
 	}
 
 	/**

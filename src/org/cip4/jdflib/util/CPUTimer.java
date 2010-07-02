@@ -347,7 +347,7 @@ public class CPUTimer
 
 	/**
 	 * 
-	 * @return  
+	 * @return  creation time in milliseconds (see System.currentTimeMillis());
 	 * 
 	 *
 	 */

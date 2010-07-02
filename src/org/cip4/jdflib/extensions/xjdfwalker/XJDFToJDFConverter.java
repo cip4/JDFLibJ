@@ -11,6 +11,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
@@ -24,6 +25,7 @@ import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.extensions.IntentHelper;
+import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.extensions.xjdfwalker.IDFinder.IDPart;
@@ -366,6 +368,44 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				e.removeAttribute(name);
 			}
 		}
+	}
+
+	/**
+	 * @param rl
+	 * @param partmap
+	 * @param map
+	 * @param a
+	 */
+	protected void moveToLink(JDFResourceLink rl, final JDFAttributeMap partmap, final JDFAttributeMap map, final String a)
+	{
+		if (map == null || map.isEmpty())
+			return; // nop
+		final VString vGW = new VString("Good Waste", null);
+		for (String gw : vGW)
+		{
+			final JDFAttributeMap pm = new JDFAttributeMap(partmap);
+			pm.put("Condition", gw);
+			if (map.get(a + gw) != null)
+			{
+				if (rl != null)
+				{
+					rl.setAmountPoolAttribute(a, map.get(a + gw), null, pm);
+				}
+				map.remove(a + gw);
+			}
+		}
+	}
+
+	/**
+	 * @param partmap
+	 * @param map
+	 * @param rl
+	 */
+	protected void moveAmountsToLink(JDFAttributeMap partmap, final JDFAttributeMap map, final JDFResourceLink rl)
+	{
+		moveToLink(rl, partmap, map, AttributeName.AMOUNT);
+		moveToLink(rl, partmap, map, AttributeName.ACTUALAMOUNT);
+		moveToLink(rl, partmap, map, AttributeName.MAXAMOUNT);
 	}
 
 	/**
@@ -802,35 +842,38 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			JDFNode theNode = (JDFNode) trackElem;
-			if ("Product".equals(theNode.getType()))
+			if ("Product".equals(theNode.getType()) || theNode != currentJDFNode)
 			{
-				if (theNode.getPreviousSiblingElement("Product", null) != null)
-				{
-					theNode = theNode.addProduct();
-				}
+				theNode = theNode.addProduct();
 			}
 			else
 			{
 				theNode = createProductRoot(theNode);
 			}
 			theNode.setAttributes(e);
-			fixComponent(theNode);
+			fixComponent(theNode, e);
 			return theNode;
 		}
 
 		/**
 		 * @param theNode
+		 * @param xjdfProduct 
 		 */
-		private void fixComponent(JDFNode theNode)
+		private void fixComponent(final JDFNode theNode, KElement xjdfProduct)
 		{
 			JDFComponent c = (JDFComponent) theNode.getResource(ElementName.COMPONENT, EnumUsage.Output, 0);
-			if (c != null)
+			if (c == null)
 			{
-				c.moveAttribute(AttributeName.PRODUCTTYPE, theNode);
-				c.moveAttribute(AttributeName.PRODUCTTYPEDETAILS, theNode);
-				JDFResourceLink rl = theNode.getLink(c, EnumUsage.Output);
-				if (rl != null)
-					rl.moveAttribute(AttributeName.AMOUNT, theNode);
+				c = (JDFComponent) theNode.addResource(ElementName.COMPONENT, EnumUsage.Output);
+				EnumComponentType partialFinal = new ProductHelper(xjdfProduct).isRootProduct() ? EnumComponentType.FinalProduct : EnumComponentType.PartialProduct;
+				c.setComponentType(partialFinal, null);
+			}
+			c.moveAttribute(AttributeName.PRODUCTTYPE, theNode);
+			c.moveAttribute(AttributeName.PRODUCTTYPEDETAILS, theNode);
+			final JDFResourceLink rl = theNode.getLink(c, EnumUsage.Output);
+			if (rl != null)
+			{
+				rl.moveAttribute(AttributeName.AMOUNT, theNode);
 			}
 		}
 
@@ -875,6 +918,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			foundProduct = true;
 			// only convert products in the first pass
 			// TODO rethink product conversion switch
+			if (createProduct && !bFirst && e.numChildElements("Product", null) > 1)
+			{
+				createProductRoot(currentJDFNode);
+			}
 			return createProduct && !bFirst ? jdfDoc.getJDFRoot() : null;
 		}
 
@@ -1022,7 +1069,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 */
 	public class WalkXJDFResource extends WalkXElement
 	{
-		private JDFResourceLink rl = null;
 
 		/**
 		 * @param e
@@ -1032,9 +1078,9 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			final JDFNode theNode = currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : currentJDFNode;
-			JDFResource newPartition;
 			final JDFPart part = (JDFPart) e.getElement(ElementName.PART);
 			JDFAttributeMap partmap = null;
+			final JDFResource newPartition;
 			if (part != null)
 			{
 				newPartition = createPartition(e, trackElem, part);
@@ -1051,38 +1097,11 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 			final JDFAttributeMap map = e.getAttributeMap();
 			map.remove(AttributeName.ID);
-			rl = theNode.getLink(newPartition, null);
-			moveToLink(partmap, map, AttributeName.AMOUNT);
-			moveToLink(partmap, map, AttributeName.ACTUALAMOUNT);
-			moveToLink(partmap, map, AttributeName.MAXAMOUNT);
-
+			final JDFResourceLink rl = theNode.getLink(newPartition, null);
+			moveAmountsToLink(partmap, map, rl);
 			newPartition.setAttributes(map);
 
 			return newPartition;
-		}
-
-		/**
-		 * @param partmap
-		 * @param map
-		 * @param a
-		 */
-		private void moveToLink(final JDFAttributeMap partmap, final JDFAttributeMap map, final String a)
-		{
-			final VString vGW = new VString("Good Waste", null);
-			for (int i = 0; i < vGW.size(); i++)
-			{
-				final String gw = vGW.get(i);
-				final JDFAttributeMap pm = new JDFAttributeMap(partmap);
-				pm.put("Condition", gw);
-				if (map.get(a + gw) != null)
-				{
-					if (rl != null)
-					{
-						rl.setAmountPoolAttribute(a, map.get(a + gw), null, pm);
-					}
-					map.remove(a + gw);
-				}
-			}
 		}
 
 		/**
@@ -1321,6 +1340,43 @@ public class XJDFToJDFConverter extends BaseElementWalker
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+	 */
+	public class WalkNodeInfo extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFNodeInfo;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			final JDFNode theNode = currentJDFNode == null ? ((JDFElement) trackElem).getParentJDF() : currentJDFNode;
+			JDFNodeInfo ni = (JDFNodeInfo) trackElem;
+			JDFAttributeMap partmap = ni.getPartMap();
+
+			final JDFAttributeMap map = e.getAttributeMap();
+			final JDFAttributeMap map2 = map.clone();
+			final JDFResourceLink rl = theNode.getLink(ni, null);
+			moveAmountsToLink(partmap, map, rl);
+			map2.removeKeys(map.getKeys());
+			e.removeAttributes(map2.getKeys());
+
+			return super.walk(e, trackElem);
 		}
 	}
 

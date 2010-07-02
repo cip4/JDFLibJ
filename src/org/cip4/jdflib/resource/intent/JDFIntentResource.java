@@ -160,6 +160,8 @@ public class JDFIntentResource extends JDFResource
 	 */
 	public static String guessActual(JDFElement root, String spanName)
 	{
+		if (root == null)
+			return null;
 		KElement span = root.getElement(spanName);
 		if (span instanceof JDFSpanBase)
 		{

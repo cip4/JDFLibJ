@@ -319,8 +319,14 @@ public class KElementTest extends JDFTestCaseBase
 	{
 		final JDFDoc d = creatXMDoc();
 		final JDFNode n = d.getJDFRoot();
-		JDFAuditPool ap = n.getElementByClass(JDFAuditPool.class, 0);
+		JDFAuditPool ap = n.getElementByClass(JDFAuditPool.class, 0, false);
 		assertNotNull(ap);
+		assertNull(n.getElementByClass(JDFExposedMedia.class, 0, false));
+		assertNull(n.getElementByClass(JDFExposedMedia.class, 99999, true));
+		assertNull(n.getElementByClass(JDFExposedMedia.class, -99999, true));
+		assertNotNull(n.getElementByClass(JDFExposedMedia.class, 0, true));
+		assertNotNull(n.getElementByClass(JDFExposedMedia.class, -1, true));
+		assertNotSame(n.getElementByClass(JDFExposedMedia.class, 0, true), n.getElementByClass(JDFExposedMedia.class, -1, true));
 	}
 
 	/**

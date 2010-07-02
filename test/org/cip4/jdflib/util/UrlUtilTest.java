@@ -98,6 +98,7 @@ import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeWriter;
+import org.cip4.jdflib.util.net.ProxyUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -165,8 +166,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 */
 	public void testWriteToURL()
 	{
-		// assertNotNull(UrlUtil.writeToURL("http://www.example.com", null,
-		// UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+		ProxyUtil.setProxy("proxy", 8080, null, null);
+		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

@@ -38,7 +38,7 @@
  *
  * Usage of this software in commercial products is subject to restrictions. For
  * details please consult info@cip4.org.
-  *
+ *
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -66,89 +66,84 @@
  * <http://www.cip4.org/>.
  *
  *
+ * 04022005 VF initial version
  */
-/**
+/*
+ * Created on Aug 26, 2004
  *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFLayoutElementProductionParams.java
- *
- * Last changes
- *
+ * To change the template for this generated file go to
+ * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package org.cip4.jdflib.resource.process;
+package org.cip4.jdflib.util.net;
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoLayoutElementProductionParams;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
+import java.io.InputStream;
+
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.UrlUtil.UrlPart;
 
 /**
+ * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ * 12.01.2009
  */
-public class JDFLayoutElementProductionParams extends JDFAutoLayoutElementProductionParams
+public class ProxyUtilTest extends JDFTestCaseBase
 {
-	private static final long serialVersionUID = 1L;
+	/**
+	 * @throws Exception
+	 */
+	public void testSetProxy() throws Exception
+	{
+		String proxy = "proxy.ceu.corp.heidelberg.com";
+		int proxyPort = 8080;
+		UrlPart p = UrlUtil.writeToURL("http://" + proxy + ":" + proxyPort, null, UrlUtil.GET, null, null);
+		if (p == null) // we are in the environment where the proxy is correctly set up
+		{
+			System.out.println("no connection to proxy!");
+		}
+		else
+		{
+			p = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
+			ByteArrayIOStream ios = new ByteArrayIOStream(p.getResponseStream());
+			assertEquals(p.getResponseCode(), 200, 0);
+			assertNotNull(ios);
+			ProxyUtil.setProxy(proxy, proxyPort, null, null);
+			p = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
+			ios = new ByteArrayIOStream(p.getResponseStream());
+			assertEquals(p.getResponseCode(), 200, 0);
+			p = UrlUtil.writeToURL("http://www.google.de:80", null, UrlUtil.GET, null, null);
+			assertEquals(p.getResponseCode(), 200, 0);
+			InputStream responseStream = p.getResponseStream();
+			assertNotNull(responseStream);
+			ios = new ByteArrayIOStream(p.getResponseStream());
+			assertEquals(StringUtil.token(p.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
+
+			ProxyUtil.setProxy(null, 0, null, null);
+			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
+			assertNull(p);
+		}
+	}
 
 	/**
-	 * Constructor for JDFLayoutElementProductionParams
-	 * @param myOwnerDocument 
-	 * @param qualifiedName 
 	 * 
 	 */
-	public JDFLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String qualifiedName)
+	public void testWriteToURL()
 	{
-		super(myOwnerDocument, qualifiedName);
+		ProxyUtil.setProxy("http://proxy", 8080, null, null);
+		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
 	/**
-	 * Constructor for JDFLayoutElementProductionParams
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * 
-	 * @param qualifiedName
-	 */
-	public JDFLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
-	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName);
-	}
-
-	/**
-	 * Constructor for JDFLayoutElementProductionParams
-	 * @param myOwnerDocument 
-	 * @param myNamespaceURI 
-	 * @param qualifiedName 
-	 * @param myLocalName 
 	 * 
 	 */
-	public JDFLayoutElementProductionParams(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
+	public void testWriteToURLSystemCall()
 	{
-		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
+		System.setProperty("http.proxyPort", "8080");
+		System.setProperty("http.proxyHost", "proxy.ceu.corp.heidelberg.com");
+		System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");
+		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
-	// **************************************** Methods
-	// *********************************************
-	/**
-	 * toString
-	 * 
-	 * @return String
-	 */
-	@Override
-	public String toString()
-	{
-		return "JDFLayoutElementProductionParams[  --> " + super.toString() + " ]";
-	}
-
-	/**
-	 * for some reason, the auto generator selects jdf 1.4 and not JDF 1.3 as first version - quick fix by hand here
-	 */
-	private static ElemInfoTable partTable = new ElemInfoTable(ElementName.LAYOUTELEMENTPART, 0x33333111);
-
-	@Override
-	protected ElementInfo getTheElementInfo()
-	{
-		return super.getTheElementInfo().updateReplace(partTable);
-	}
 }

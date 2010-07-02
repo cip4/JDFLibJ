@@ -70,6 +70,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -80,6 +81,10 @@ public class ProductHelper
 	 * 
 	 */
 	public static boolean partitionProducts = false;
+	/**
+	 * root products attribute name
+	 */
+	public final static String rootProducts = "RootProducts";
 	protected KElement theProduct;
 
 	/**
@@ -97,7 +102,7 @@ public class ProductHelper
 	public void setRoot()
 	{
 		KElement list = theProduct.getParentNode_KElement();
-		list.appendAttribute("RootProducts", theProduct.getID(), null, " ", true);
+		list.appendAttribute(rootProducts, theProduct.getID(), null, " ", true);
 	}
 
 	/**
@@ -176,6 +181,22 @@ public class ProductHelper
 	public KElement getProduct()
 	{
 		return theProduct;
+	}
+
+	/**
+	 * @return
+	 */
+	public boolean isRootProduct()
+	{
+		String id = theProduct.getID();
+		KElement list = theProduct.getParentNode_KElement();
+		if (list == null)
+			return false; // snafu
+		String ids = list.getAttribute(rootProducts, null, null);
+		if (ids == null)
+			return list.getFirstChildElement("Product", null) == theProduct;
+		else
+			return StringUtil.hasToken(ids, id, " ", 0);
 	}
 
 }

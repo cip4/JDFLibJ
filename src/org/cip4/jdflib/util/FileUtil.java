@@ -724,11 +724,7 @@ public class FileUtil
 	 */
 	public static boolean equals(final File file1, final File file2)
 	{
-		if (file1 == null)
-		{
-			return file2 == null;
-		}
-		return file1.equals(file2);
+		return ContainerUtil.equals(file1, file2);
 	}
 
 	/**
@@ -736,7 +732,7 @@ public class FileUtil
 	 * @param file
 	 * @return the buffered input stream, null if snafu
 	 */
-	public static InputStream getBufferedInputStream(File file)
+	public static BufferedInputStream getBufferedInputStream(File file)
 	{
 		FileInputStream fis;
 		try
@@ -749,5 +745,25 @@ public class FileUtil
 		}
 		BufferedInputStream bis = new BufferedInputStream(fis);
 		return bis;
+	}
+
+	/**
+	 * create a buffered output stream for a file
+	 * @param file
+	 * @return the buffered output stream, null if snafu
+	 */
+	public static BufferedOutputStream getBufferedOutputStream(File file)
+	{
+		FileOutputStream fos;
+		try
+		{
+			fos = new FileOutputStream(file);
+		}
+		catch (FileNotFoundException x)
+		{
+			return null;
+		}
+		BufferedOutputStream bos = new BufferedOutputStream(fos);
+		return bos;
 	}
 }

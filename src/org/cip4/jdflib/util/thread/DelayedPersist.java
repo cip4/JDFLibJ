@@ -68,24 +68,154 @@
  *  
  * 
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.util.thread;
 
-import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Vector;
+
+import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.MyLong;
+import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 
 /**
- * a hotfolder watcher Listener callback
- * 
- * @author prosirai
- * 
+ * class to persist stuff later
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public interface HotFolderListener
+public class DelayedPersist extends Thread
 {
+	private final HashMap<IPersistable, MyLong> persistQueue;
+	private boolean stop;
+	private static DelayedPersist theDelayed = null;
+	private final MyMutex waitMutex;
+
+	private DelayedPersist()
+	{
+		super("DelayedPersist");
+		persistQueue = new HashMap<IPersistable, MyLong>();
+		stop = false;
+		waitMutex = new MyMutex();
+		start();
+	}
 
 	/**
-	 * this interface function is called whenever a new or modified file has stabilized in the hotFolder
 	 * 
-	 * @param hotFile the File that has appeared in the hot folder
+	 * @return
 	 */
-	public void hotFile(File hotFile);
+	public static DelayedPersist getDelayedPersist()
+	{
+		if (theDelayed == null)
+			theDelayed = new DelayedPersist();
+		return theDelayed;
+	}
 
+	/**
+	 * 
+	 */
+	public static void shutDown()
+	{
+		if (theDelayed == null)
+			return;
+		theDelayed.stop = true;
+		ThreadUtil.notify(theDelayed.waitMutex);
+		theDelayed = null;
+	}
+
+	/**
+	 * 
+	 * @param qp
+	 * @param deltaTime
+	 */
+	public void queue(IPersistable qp, long deltaTime)
+	{
+		synchronized (persistQueue)
+		{
+			MyLong l = persistQueue.get(qp);
+			long t = System.currentTimeMillis();
+			if (l == null)
+			{
+				persistQueue.put(qp, new MyLong(t + deltaTime));
+			}
+			else if (t + deltaTime < l.i)
+			{
+				// we want it sooner
+				l.i = t + deltaTime;
+			}
+		}
+		if (deltaTime <= 0)
+			ThreadUtil.notify(waitMutex);
+	}
+
+	/**
+	 * @see java.lang.Thread#run()
+	*/
+	@Override
+	public void run()
+	{
+		while (true)
+		{
+			try
+			{
+				persistQueues();
+			}
+			catch (Exception e)
+			{
+				//	log.error("whazzup? ", e);
+			}
+			if (stop)
+			{
+				//				log.info("end of queue persist loop");
+				break;
+			}
+			ThreadUtil.wait(waitMutex, 10000);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void persistQueues()
+	{
+		long t = System.currentTimeMillis();
+		Vector<IPersistable> theList = new Vector<IPersistable>();
+
+		synchronized (persistQueue)
+		{
+			Vector<IPersistable> v = ContainerUtil.getKeyVector(persistQueue);
+			if (v == null)
+				return;
+			Iterator<IPersistable> it = v.iterator();
+
+			while (it.hasNext())
+			{
+				IPersistable qp = it.next();
+				MyLong l = persistQueue.get(qp);
+				if (l.i < t)
+				{
+					theList.add(qp);
+					persistQueue.remove(qp);
+				}
+			}
+		}
+
+		// now the unsynchronized stuff
+		Iterator<IPersistable> it = theList.iterator();
+		while (it.hasNext())
+		{
+			IPersistable qp = it.next();
+			qp.persist();
+		}
+		System.gc();
+	}
+
+	/**
+	 * @see java.lang.Thread#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return "DelayedPersist Thread " + stop + " queue: " + persistQueue;
+	}
 }

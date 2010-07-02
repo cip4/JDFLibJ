@@ -68,24 +68,159 @@
  *  
  * 
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.util.net;
 
-import java.io.File;
+import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.ThreadUtil.MyMutex;
+import org.cip4.jdflib.util.UrlUtil.UrlPart;
+import org.cip4.jdflib.util.net.IPollHandler.PollResult;
 
 /**
- * a hotfolder watcher Listener callback
- * 
- * @author prosirai
- * 
+ * class to poll a network address
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public interface HotFolderListener
+public class NetPoll
 {
+	/**
+	 * @param url the url to poll - duh!
+	 * @param poller 
+	 * 
+	 */
+	public NetPoll(String url, IPollHandler poller)
+	{
+		super();
+		this.url = url;
+		idleWait = 15000; // milliseconds
+		busyWait = 500; // milliSeconds
+		pollThread = null;
+		this.poller = poller;
+		mutex = new MyMutex();
+		method = UrlUtil.GET;
+		contentType = null;
+	}
+
+	private final String url;
+	protected final int idleWait;
+	protected final int busyWait;
+	private PollThread pollThread;
+	static int threadCount = 0;
+	protected IPollHandler poller;
+	protected MyMutex mutex;
+	protected String method;
+	protected String contentType;
 
 	/**
-	 * this interface function is called whenever a new or modified file has stabilized in the hotFolder
-	 * 
-	 * @param hotFile the File that has appeared in the hot folder
+	 * start the poll loop
 	 */
-	public void hotFile(File hotFile);
+	public void start()
+	{
+		if (pollThread == null)
+		{
+			pollThread = new PollThread();
+			pollThread.start();
+		}
+	}
 
+	/**
+	 * stop the poll loop
+	 */
+	public void stop()
+	{
+		if (pollThread != null)
+		{
+			pollThread.running = false;
+			ThreadUtil.notifyAll(mutex);
+			pollThread = null;
+		}
+	}
+
+	private class PollThread extends Thread
+	{
+		/**
+		 * 
+		 */
+		public PollThread()
+		{
+			super("NetPoll_" + threadCount++);
+			running = true;
+
+		}
+
+		protected boolean running;
+
+		/**
+		 * @see java.lang.Object#toString()
+		 * @return
+		*/
+		@Override
+		public String toString()
+		{
+			return "PollThread: idle: " + idleWait + " busy: " + busyWait + " running: " + running + "\n" + poller;
+		}
+
+		/**
+		 * @see java.lang.Thread#run()
+		*/
+		@Override
+		public void run()
+		{
+			while (running)
+			{
+				IPollDetails details = poll();
+				PollResult result;
+				try
+				{
+					result = poller.handlePoll(details);
+				}
+				catch (Exception x)
+				{
+					result = null;
+				}
+				if (result == null || !PollResult.success.equals(result))
+				{
+					ThreadUtil.wait(mutex, idleWait);
+				}
+				else
+				{
+					ThreadUtil.wait(mutex, busyWait);
+				}
+			}
+		}
+	}
+
+	/**
+	 * @return
+	 */
+	public IPollDetails poll()
+	{
+		UrlPart p = UrlUtil.writeToURL(url, null, method, contentType, null);
+		return p;
+	}
+
+	/**
+	 * @param method the method to set
+	 */
+	public void setMethod(String method)
+	{
+		this.method = method;
+	}
+
+	/**
+	 * @param contentType the contentType to set
+	 */
+	public void setContentType(String contentType)
+	{
+		this.contentType = contentType;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 * @return
+	*/
+	@Override
+	public String toString()
+	{
+		return "NetPoll: " + url + " method: " + method + " content-type: " + contentType + "\n" + pollThread;
+	}
 }

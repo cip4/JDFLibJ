@@ -114,6 +114,7 @@ import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceSubstitute;
+import org.cip4.jdflib.util.JDFDate;
 import org.xml.sax.SAXException;
 
 /**
@@ -192,24 +193,24 @@ public class XJDFTest extends JDFTestCaseBase
 	 */
 	public void testToXJDFMulti()
 	{
-		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
 
 		JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
 		e.setAttribute("JobPartID", null);
-		/*
-				final XJDFToJDFConverter xCon = new XJDFToJDFConverter(n2.getOwnerDocument_JDFElement());
-				final JDFDoc d2 = xCon.convert(e);
-				assertNotNull(d2);
-				final JDFNode nConv = d2.getJDFRoot();
-				assertNotNull(nConv);
-				JDFExposedMedia xm = (JDFExposedMedia) nConv.getResource("ExposedMedia", EnumUsage.Input, 0);
-				final JDFResourceLink rl = nConv.getLink(xm, null);
-				assertNotNull(rl);
-				xm = (JDFExposedMedia) rl.getTarget();
-				assertEquals(xm.getProductID(), "P1");
-				assertEquals(xm.getPlateType(), EnumPlateType.Dummy);
-				*/
+
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(n2.getOwnerDocument_JDFElement());
+		final JDFDoc d2 = xCon.convert(e);
+		assertNotNull(d2);
+		final JDFNode nConv = d2.getJDFRoot();
+		assertNotNull(nConv);
+		JDFExposedMedia xm = (JDFExposedMedia) nConv.getResource("ExposedMedia", EnumUsage.Input, 0);
+		final JDFResourceLink rl = nConv.getLink(xm, null);
+		assertNotNull(rl);
+		xm = (JDFExposedMedia) rl.getTarget();
+		assertEquals(xm.getProductID(), "P1");
+		assertEquals(xm.getPlateType(), EnumPlateType.Dummy);
+
 	}
 
 	/**
@@ -644,13 +645,18 @@ public class XJDFTest extends JDFTestCaseBase
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		e = new XMLDoc("XJDF", null).getRoot();
-		e.setXPathAttribute("ParameterSet/Parameter/NodeInfo/@End", "" + System.currentTimeMillis() + 1000 * 24 * 3600 * 3);
+		e.setXPathAttribute("ParameterSet/Parameter/NodeInfo/@End", new JDFDate(System.currentTimeMillis() + 1000 * 24 * 3600 * 3).getDateTimeISO());
+		e.setXPathAttribute("ParameterSet/Parameter/NodeInfo/@AmountGood", "100");
 		e.setXPathAttribute("ParameterSet[2]/Parameter/CustomerInfo/@CustomerID", "KundenIdentNummer");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		assertTrue(root.getResource("CustomerInfo", EnumUsage.Input, 0) instanceof JDFCustomerInfo);
-		assertTrue(root.getResource("NodeInfo", EnumUsage.Input, 0) instanceof JDFNodeInfo);
+		JDFResource nodeInfo = root.getResource("NodeInfo", EnumUsage.Input, 0);
+		assertTrue(nodeInfo instanceof JDFNodeInfo);
+		JDFResourceLink rl = root.getLink(nodeInfo, EnumUsage.Input);
+		assertNotNull(rl);
+		assertTrue(rl.getAmount(null) == 100);
 	}
 
 	/**

@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
@@ -346,10 +348,21 @@ public class XJDFHelper
 
 	/**
 	 * @param file
+	 * @return 
 	 */
-	public void writeToFile(String file)
+	public boolean writeToFile(String file)
 	{
-		getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
+		boolean b = getRoot().getOwnerDocument_KElement().write2File(file, 2, false);
+		return b;
+	}
+
+	/**
+	 * @param os
+	 * @throws IOException 
+	 */
+	public void writeToStream(OutputStream os) throws IOException
+	{
+		getRoot().getOwnerDocument_KElement().write2Stream(os, 2, false);
 	}
 
 }

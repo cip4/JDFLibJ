@@ -123,7 +123,7 @@ public class XMLDocTest extends JDFTestCaseBase
 		protected abstract void runMyThread();
 
 		/**
-		 * (non-Javadoc)
+		 *  
 		 * 
 		 * @see java.lang.Runnable#run()
 		 */

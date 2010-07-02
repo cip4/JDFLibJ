@@ -261,6 +261,9 @@ import org.cip4.jdflib.util.StringUtilTest;
 import org.cip4.jdflib.util.UrlUtilTest;
 import org.cip4.jdflib.util.VectorMapTest;
 import org.cip4.jdflib.util.mime.MimeWriterTest;
+import org.cip4.jdflib.util.net.NetPollTest;
+import org.cip4.jdflib.util.net.ProxyUtilTest;
+import org.cip4.jdflib.util.thread.DelayedPersistTest;
 
 /**
  * @author MuchaD
@@ -506,6 +509,13 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// util.mime
 		suite.addTestSuite(MimeWriterTest.class);
+
+		// util.net
+		suite.addTestSuite(NetPollTest.class);
+		suite.addTestSuite(ProxyUtilTest.class);
+
+		// util.thread
+		suite.addTestSuite(DelayedPersistTest.class);
 
 		suite.addTestSuite(JDFEnumerationSpanTest.class);
 

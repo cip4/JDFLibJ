@@ -439,6 +439,8 @@ public class StringUtilTest extends JDFTestCaseBase
 
 		assertTrue(StringUtil.matches("a b", "a b"));
 		assertTrue(StringUtil.matches("abc123ä", "abc123ä"));
+		assertTrue(StringUtil.matches("GangBrochureA4", "(Gang)?Bro(.)*"));
+
 	}
 
 	/**

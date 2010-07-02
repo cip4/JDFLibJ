@@ -264,7 +264,7 @@ public class IDFinder extends BaseElementWalker
 			String id = e.getAttribute(AttributeName.ID, null, null);
 			if (id == null)
 			{
-				id = "IDF_" + KElement.uniqueID(0);
+				id = "IDF" + KElement.uniqueID(0);
 				e.setID(id);
 			}
 			theMap.put(id, new IDPart(id, null));

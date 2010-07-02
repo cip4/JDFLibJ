@@ -85,11 +85,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.Proxy;
+import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
@@ -106,6 +109,8 @@ import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 import org.cip4.jdflib.util.mime.MimeReader;
+import org.cip4.jdflib.util.net.IPollDetails;
+import org.cip4.jdflib.util.net.ProxyUtil;
 
 /**
  * collection of helper routines to convert urls
@@ -174,7 +179,7 @@ public class UrlUtil
 	 * @author prosirai
 	 * 
 	 */
-	public static class UrlPart
+	public static class UrlPart implements IPollDetails
 	{
 		/**
 		 * 
@@ -189,15 +194,22 @@ public class UrlUtil
 		 * @param connection
 		 * @throws IOException
 		 */
-		public UrlPart(final URLConnection connection) throws IOException
+		public UrlPart(final HttpURLConnection connection) throws IOException
 		{
-			inStream = connection.getInputStream();
-			contentLength = connection.getContentLength();
+			rc = (connection).getResponseCode();
+			this.connection = connection;
 			contentType = connection.getContentType();
-			if (connection instanceof HttpURLConnection)
-				rc = ((HttpURLConnection) connection).getResponseCode();
-			else
-				rc = 200;
+			contentLength = connection.getContentLength();
+			try
+			{
+				inStream = connection.getInputStream();
+			}
+			catch (IOException x)
+			{
+				inStream = null;
+			}
+			if (inStream == null)
+				inStream = (connection).getErrorStream();
 		}
 
 		/**
@@ -210,6 +222,7 @@ public class UrlUtil
 			inStream = part.getInputStream();
 			contentLength = part.getSize();
 			contentType = part.getContentType();
+			connection = null;
 			rc = 200;
 		}
 
@@ -223,10 +236,11 @@ public class UrlUtil
 			inStream = FileUtil.getBufferedInputStream(f);
 			contentLength = f.length();
 			contentType = null;
+			connection = null;
 			rc = 200;
 		}
 
-		private int rc;
+		private final int rc;
 		/**
 		 * the input stream of this UrlPart
 		 */
@@ -235,10 +249,37 @@ public class UrlUtil
 		 * the content type of this UrlPart
 		 */
 		public String contentType;
+
+		/**
+		 * @return the contentType
+		 */
+		public String getContentType()
+		{
+			return contentType;
+		}
+
+		/**
+		 * @param inStream the inStream to set
+		 */
+		public void setInStream(InputStream inStream)
+		{
+			this.inStream = inStream;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.util.net.IPollDetails#getResponseStream()
+		 * @return
+		*/
+		public InputStream getResponseStream()
+		{
+			return inStream;
+		}
+
 		/**
 		 * the content length of this UrlPart
 		 */
 		public long contentLength;
+		private final HttpURLConnection connection;
 
 		/**
 		 * returns an xmldoc corresponding to this part
@@ -249,6 +290,24 @@ public class UrlUtil
 			final JDFParser p = new JDFParser();
 			final XMLDoc d = p.parseStream(inStream);
 			return d;
+		}
+
+		/**
+		 * @see java.lang.Object#toString()
+		 * @return
+		*/
+		@Override
+		public String toString()
+		{
+			return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc;
+		}
+
+		/**
+		 * @return the connection
+		 */
+		public HttpURLConnection getConnection()
+		{
+			return connection;
 		}
 	}
 
@@ -486,7 +545,7 @@ public class UrlUtil
 	 * 
 	 * @return the array of body parts input stream
 	 */
-	public static UrlPart[] getURLParts(final URLConnection connection)
+	public static UrlPart[] getURLParts(final HttpURLConnection connection)
 	{
 		if (connection == null)
 		{
@@ -1248,6 +1307,20 @@ public class UrlUtil
 	}
 
 	/**
+	 * create a "real" url from a user input url
+	 * add http://
+	 * 
+	 * @param url the input url
+	 * @return the - hopefully - usable url
+	 */
+	public static String cleanHttpURL(String url)
+	{
+		if (!url.toLowerCase().startsWith("http://"))
+			url = "http://" + url;
+		return url;
+	}
+
+	/**
 	 * write a Stream to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
 	 * 
 	 * @param strUrl the URL to write to
@@ -1260,7 +1333,71 @@ public class UrlUtil
 	 */
 	public static UrlPart writeToURL(final String strUrl, final InputStream stream, final String method, String contentType, final HTTPDetails details)
 	{
-		if (isFile(strUrl))
+		return new URLWriter(strUrl, stream, method, contentType, details).writeToURL();
+	}
+
+	private static class URLWriter
+	{
+		private final String strUrl;
+		private final InputStream stream;
+		private final String method;
+		private final String contentType;
+		private final HTTPDetails details;
+
+		/**
+		 * @param strUrl the URL to write to
+		 * @param stream the input stream to read from
+		 * @param method GET or POST
+		 * @param contentType the contenttype to set MUST BE SET!
+		 * @param details
+		 */
+		public URLWriter(String strUrl, InputStream stream, final String method, String contentType, final HTTPDetails details)
+		{
+			this.strUrl = strUrl;
+			this.stream = stream;
+			this.method = method;
+			this.contentType = StringUtil.token(contentType, 0, "\r\n");
+
+			this.details = details;
+
+		}
+
+		/**
+		 * write a Stream to an output URL File: and http: are currently supported Use HttpURLConnection.getInputStream() to retrieve the http response
+		 * 
+		 * @return {@link UrlPart} the opened http connection, null in case of error
+		 * 
+		 */
+		protected UrlPart writeToURL()
+		{
+			UrlPart p = null;
+			if (isFile(strUrl))
+			{
+				p = writeFile();
+			}
+			else
+			{
+				URL url = UrlUtil.stringToURL(strUrl);
+				URI uri = ProxyUtil.getHostURI(url);
+				if (uri == null) // redundant but makes compiler happy
+					return null;
+
+				ProxySelector selector = ProxySelector.getDefault();
+				List<Proxy> list = selector.select(uri);
+				for (Proxy proxy : list)
+				{
+					p = callProxy(proxy);
+					if (p != null)
+						break;
+				}
+			}
+			return p;
+		}
+
+		/**
+		 * @return
+		 */
+		private UrlPart writeFile()
 		{
 			File f = urlToFile(strUrl);
 			f = FileUtil.streamToFile(stream, f);
@@ -1273,39 +1410,53 @@ public class UrlUtil
 				return null;
 			}
 		}
-		else
+
+		/**
+		 * @param proxy
+		 * @return
+		 */
+		private UrlPart callProxy(Proxy proxy)
 		{
+			URL url = UrlUtil.stringToURL(strUrl);
 			try
 			{
-				final URL url = new URL(strUrl);
-				final HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection();
+				final HttpURLConnection httpURLconnection = (HttpURLConnection) url.openConnection(proxy);
+				httpURLconnection.setConnectTimeout(PlatformUtil.getConnectionTimeout());
 				httpURLconnection.setRequestMethod(method);
 				httpURLconnection.setRequestProperty("Connection", KEEPALIVE);
-				contentType = StringUtil.token(contentType, 0, "\r\n");
 				httpURLconnection.setRequestProperty(CONTENT_TYPE, contentType);
-				boolean doOutput = stream != null;
-				httpURLconnection.setDoOutput(doOutput);
 				if (details != null)
 				{
 					details.applyTo(httpURLconnection);
 				}
 
-				if (doOutput)
-				{
-					final OutputStream out = httpURLconnection.getOutputStream();
-					IOUtils.copy(stream, out);
-					out.flush();
-					out.close();
-				}
+				output(httpURLconnection);
 
 				return new UrlPart(httpURLconnection);
 			}
 			catch (final Exception x)
 			{
-				System.out.print(x);
+				// nop System.out.println(x);
+			}
+			return null;
+		}
+
+		/**
+		 * @param httpURLconnection
+		 * @throws IOException
+		 */
+		private void output(final HttpURLConnection httpURLconnection) throws IOException
+		{
+			boolean doOutput = stream != null;
+			httpURLconnection.setDoOutput(doOutput);
+			if (doOutput)
+			{
+				final OutputStream out = httpURLconnection.getOutputStream();
+				IOUtils.copy(stream, out);
+				out.flush();
+				out.close();
 			}
 		}
-		return null;
 	}
 
 	/**

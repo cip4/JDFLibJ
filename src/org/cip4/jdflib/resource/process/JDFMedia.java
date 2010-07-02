@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -89,15 +89,19 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFXYPair;
 
+/**
+ * 
+  * @author Rainer Prosi, Heidelberger Druckmaschinen *
+ */
 public class JDFMedia extends JDFAutoMedia
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFMedia
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
 	 */
 	public JDFMedia(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
@@ -106,31 +110,34 @@ public class JDFMedia extends JDFAutoMedia
 
 	/**
 	 * Constructor for JDFMedia
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFMedia
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
 	 */
-	public JDFMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFMedia(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoMedia#toString()
+	 * @return
+	 */
 	@Override
 	public String toString()
 	{
@@ -159,18 +166,17 @@ public class JDFMedia extends JDFAutoMedia
 			int size = v.size();
 			for (int i = 0; i < size; i++)
 				((JDFMedia) v.get(i)).setThicknessFromWeight(bLocal, false);
-		} else
+		}
+		else
 		{
-			String w = bLocal ? getAttribute_KElement(AttributeName.WEIGHT)
-					: getAttribute(AttributeName.WEIGHT);
+			String w = bLocal ? getAttribute_KElement(AttributeName.WEIGHT) : getAttribute(AttributeName.WEIGHT);
 			if (isWildCard(w))
 				return; // no weight to use
-			String t = bLocal ? getAttribute_KElement(AttributeName.THICKNESS)
-					: getAttribute(AttributeName.THICKNESS);
+			String t = bLocal ? getAttribute_KElement(AttributeName.THICKNESS) : getAttribute(AttributeName.THICKNESS);
 			if (!isWildCard(t))
 				return; // no weight to use
 			setThickness(getWeight() * 1.25); // assume average density of 0.8
-												// g/cm^3
+			// g/cm^3
 			// TODO improve calculation based on grade etc.
 		}
 	}
@@ -178,8 +184,7 @@ public class JDFMedia extends JDFAutoMedia
 	/**
 	 * Set attribute Dimension (in point)
 	 * 
-	 * @param JDFXYPair
-	 *            value: the value (in centimeter) to set the dimension to
+	 * @param  value the value (in centimeter) to set the dimension to
 	 */
 	public void setDimensionCM(JDFXYPair value)
 	{
@@ -196,15 +201,14 @@ public class JDFMedia extends JDFAutoMedia
 	public JDFXYPair getDimensionCM()
 	{
 		JDFXYPair xyp = getDimension();
-		xyp.scale(2.54 / 72.0);
+		xyp.scaleToCM();
 		return xyp;
 	}
 
 	/**
 	 * Set attribute Dimension (in point)
 	 * 
-	 * @param JDFXYPair
-	 *            value: the value (in inch) to set the dimension to
+	 * @param   value  the value (in inch) to set the dimension to
 	 */
 	public void setDimensionInch(JDFXYPair value)
 	{
@@ -223,5 +227,28 @@ public class JDFMedia extends JDFAutoMedia
 		JDFXYPair xyp = getDimension();
 		xyp.scale(1.0 / 72.0);
 		return xyp;
+	}
+
+	/**
+	 * Get the ISO grade of the back side based on backCoatings
+	 * 
+	 * @return 1-5: the grade of the back 0 if no grade value is specified
+	 * note that front is always assumed to have a better coating
+	 */
+	public int getBackGrade()
+	{
+		int frontGrade = getGrade();
+		if (frontGrade == 0 || frontGrade >= 4)
+			return frontGrade; // uncoated or web crap paper
+
+		EnumBackCoatings coatings = super.getBackCoatings();
+		if (coatings == null)
+			return frontGrade; // no back details
+		if (EnumBackCoatings.None.equals(coatings))
+			return 4; // uncoated
+		if (EnumBackCoatings.Matte.equals(coatings))
+			return 2; // matte
+
+		return frontGrade;
 	}
 }

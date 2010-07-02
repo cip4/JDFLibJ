@@ -86,7 +86,6 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Enumeration;
 
 import javax.mail.BodyPart;
@@ -96,13 +95,14 @@ import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.HashUtil;
-import org.cip4.jdflib.util.PlatformUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
+import org.cip4.jdflib.util.UrlUtil.UrlPart;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -1501,41 +1501,37 @@ public class XMLDoc
 	public XMLDoc write2URL(final String strURL, final String strContentType)
 	{
 		XMLDoc docResponse = null;
-		try
+		final URL url = UrlUtil.stringToURL(strURL);
+		final String protocol = url.getProtocol(); // file; ftp; http
+		if (protocol.equalsIgnoreCase("File"))
 		{
-			final URL url = new URL(strURL);
-			final String protocol = url.getProtocol(); // file; ftp; http
-			if (protocol.equalsIgnoreCase("File"))
-			{
-				write2File(UrlUtil.urlToFile(strURL), 0, true);
-				docResponse = new XMLDoc();
-			}
-			else
-			{
-				final URLConnection urlCon = write2HTTPURL(url, strContentType, null);
-				if (urlCon == null)
-				{
-					return null;
-				}
-				final JDFParser parser = new JDFParser();
-				final InputStream inStream = urlCon.getInputStream();
-
-				parser.parseStream(inStream);
-				if (inStream != null) // http keep-alive needs an explicit close
-				{
-					inStream.close();
-				}
-				docResponse = parser.getDocument() == null ? null : new XMLDoc(parser.getDocument());
-			}
-
-			return docResponse;
+			write2File(UrlUtil.urlToFile(strURL), 0, true);
+			docResponse = new XMLDoc();
 		}
-		catch (IOException ex)
+		else
 		{
-			ex = null;
+			final UrlPart p = write2HttpURL(url, strContentType, null);
+			InputStream inStream = p == null ? null : p.getResponseStream();
+			if (inStream == null)
+			{
+				return null;
+			}
+			final JDFParser parser = new JDFParser();
+
+			parser.parseStream(inStream);
+			try
+			{
+				inStream.close();
+			}
+			catch (IOException x)
+			{
+				// nop
+			}
+			docResponse = parser.getDocument() == null ? null : new XMLDoc(parser.getDocument());
 		}
 
 		return docResponse;
+
 	}
 
 	/**
@@ -1546,6 +1542,27 @@ public class XMLDoc
 	 */
 	public HttpURLConnection write2HTTPURL(final URL url, String strContentType, final HTTPDetails det)
 	{
+		UrlPart p = null;
+		for (int i = 0; i < 2; i++) //
+		{
+
+			p = write2HttpURL(url, strContentType, det);
+			if (p == null)
+				ThreadUtil.sleep(1000); // wait and retry once
+			else
+				break;
+		}
+		return p == null ? null : p.getConnection();
+	}
+
+	/**
+	 * @param url the url to write to
+	 * @param strContentType the content type; if null use text/xml
+	 * @param det the details to set
+	 * @return the HttpURLConnection, null if failure
+	 */
+	public UrlPart write2HttpURL(final URL url, String strContentType, final HTTPDetails det)
+	{
 		if (url == null)
 		{
 			return null;
@@ -1554,35 +1571,17 @@ public class XMLDoc
 		{
 			strContentType = UrlUtil.TEXT_XML;
 		}
-		for (int i = 0; i < 2; i++) //
+		try
 		{
-			try
-			{
-				final URLConnection uc = url.openConnection();
-				if (uc instanceof HttpURLConnection)
-				{
-					final HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
-					urlCon.setConnectTimeout(PlatformUtil.getConnectionTimeout());
-					urlCon.setDoOutput(true);
-					urlCon.setRequestProperty("Connection", "keep-alive");
-					urlCon.setRequestProperty("Content-Type", strContentType);
-					if (det != null)
-					{
-						det.applyTo(urlCon);
-					}
-					write2Stream(urlCon.getOutputStream(), 0, true);
-					return urlCon;
-				}
-				else
-				{
-					return null;
-				}
-			}
-			catch (final IOException e)
-			{
-				ThreadUtil.sleep(1000); // wait and retry once
-			}
+			ByteArrayIOStream ios = new ByteArrayIOStream(1000);
+			write2Stream(ios, 0, true);
+			return UrlUtil.writeToURL(url.toExternalForm(), ios.getInputStream(), UrlUtil.POST, strContentType, det);
 		}
+		catch (final IOException e)
+		{
+			//nop
+		}
+
 		return null;
 	}
 
@@ -1765,6 +1764,24 @@ public class XMLDoc
 	public void setValidationResult(final XMLDoc validationResult)
 	{
 		m_doc.m_validationResult = validationResult;
+	}
+
+	/**
+	 * parse a JDF input stream
+	 * 
+	 * @param is
+	 * @return the parsed JDFDoc
+	 */
+	public static XMLDoc parseStream(InputStream is)
+	{
+		final JDFParser p = new JDFParser();
+		p.bKElementOnly = true;
+		XMLDoc d = p.parseStream(is);
+		if (d != null)
+		{
+			d = new XMLDoc(d.getMemberDocument());
+		}
+		return d;
 	}
 
 	/**

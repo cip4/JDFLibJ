@@ -2457,18 +2457,40 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param <a> the data type to return
 	 * @param clazz java class of the requested element
 	 * @param iSkip number of element to get, if negative count backwards (-1 is the last)
+	 * @param bRecurse if true recurse sub elements
 	 * @return KElement the child node
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public <a extends KElement> a getElementByClass(Class<a> clazz, int iSkip)
+	public <a extends KElement> a getElementByClass(Class<a> clazz, int iSkip, boolean bRecurse)
 	{
-		Node n = getFirstChild();
+		if (iSkip < 0)
+		{
+			Vector<a> v = getChildrenByClass(clazz, bRecurse, 0);
+			if (v != null)
+			{
+				iSkip = v.size() + iSkip;
+				return iSkip >= 0 ? v.get(iSkip) : null;
+			}
+		}
+		KElement n = getFirstChildElement();
+		int i = 0;
 		while (n != null)
 		{
 			if (clazz.isInstance(n))
-				return (a) n;
-			n = n.getNextSibling();
+			{
+				if (iSkip == i++)
+				{
+					return (a) n;
+				}
+			}
+			if (bRecurse)
+			{
+				a ret = n.getElementByClass(clazz, iSkip - i, bRecurse);
+				if (ret != null)
+					return ret;
+			}
+			n = n.getNextSiblingElement();
 		}
 		return null;
 	}

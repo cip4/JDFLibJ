@@ -190,6 +190,18 @@ public class SetHelper
 	}
 
 	/**
+	 * remove all partitions in this set
+	 */
+	public void removePartitions()
+	{
+		final VElement v = getPartitions();
+		for (final KElement e : v)
+		{
+			e.deleteNode();
+		}
+	}
+
+	/**
 	 * @param partMap
 	 * @param addRes 
 	 * @return

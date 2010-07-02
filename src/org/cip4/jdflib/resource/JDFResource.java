@@ -1392,7 +1392,7 @@ public class JDFResource extends JDFElement
 			hasIdentical = false;
 			for (KElement r : v)
 			{
-				KElement id = ((JDFResource) r).isLeaf() ? r.getElementByClass(JDFIdentical.class, 0) : null;
+				KElement id = ((JDFResource) r).isLeaf() ? r.getElementByClass(JDFIdentical.class, 0, false) : null;
 				if (id != null)
 				{
 					hasIdentical = true;
@@ -3313,26 +3313,28 @@ public class JDFResource extends JDFElement
 	 * @param partIDKeys the partIDKeys to clone, if null use the existing list from r
 	 * @throws JDFException if this is already inconsistently partitioned
 	 */
-	public void clonePartitions(final JDFResource r, final VString partIDKeys)
+	public void clonePartitions(final JDFResource r, VString partIDKeys)
 	{
 		if (r == null)
 		{
 			return;
 		}
-		final VString vParts = partIDKeys == null ? r.getPartIDKeys() : partIDKeys;
-		final int size = vParts == null ? 0 : vParts.size();
+		if (partIDKeys == null)
+			partIDKeys = r.getPartIDKeys();
+		final int size = partIDKeys == null ? 0 : partIDKeys.size();
 		if (size == 0)
 		{
 			return;
 		}
+		setPartIDKeys(partIDKeys);
 		final VElement vLeaves = r.getLeaves(false); // only need the real leaves
 		final int leafSize = vLeaves.size();
 		for (int i = 0; i < leafSize; i++)
 		{
 			final JDFResource leaf = (JDFResource) vLeaves.get(i);
 			final JDFAttributeMap partMap = leaf.getPartMap();
-			partMap.reduceMap(vParts);
-			getCreatePartition(partMap, vParts);
+			partMap.reduceMap(partIDKeys);
+			getCreatePartition(partMap, partIDKeys);
 		}
 
 	}
@@ -3548,7 +3550,7 @@ public class JDFResource extends JDFElement
 		if (class1.equals(JDFResource.class))
 			return getElement_KElement(getNodeName(), null, 0) == null;
 		else
-			return getElementByClass(class1, 0) == null;
+			return getElementByClass(class1, 0, false) == null;
 	}
 
 	/**

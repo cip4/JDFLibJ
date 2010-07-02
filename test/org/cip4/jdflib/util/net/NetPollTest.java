@@ -1,9 +1,10 @@
 /*
+ *
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -11,7 +12,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ *    notice, this list of conditions and the following disclaimer. 
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -19,21 +20,21 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
+ *    if any, must include the following acknowledgment:  
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of
+ *        The International Cooperation for the Integration of 
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
- *    Alternately, this acknowledgment mrSubRefay appear in the software itself,
+ *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
+ *    software without prior written permission. For written 
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
- *    nor may "CIP4" appear in their name, without prior writtenrestartProcesses()
+ *    nor may "CIP4" appear in their name, without prior written
  *    permission of the CIP4 organization
  *
  * Usage of this software in commercial products is subject to restrictions. For
@@ -45,7 +46,7 @@
  * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
  * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIrSubRefAL DAMAGES (INCLUDING, BUT NOT
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
  * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
@@ -55,59 +56,75 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration
+ * individuals on behalf of the The International Cooperation for the Integration 
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software restartProcesses()
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
- * copyright (c) 1999-2001, Agfa-Gevaert N.V.
- *
- * For more information on The International Cooperation for the
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *
+ *  
+ * 
  */
-package org.cip4.jdflib.extensions;
+package org.cip4.jdflib.util.net;
+
+import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class ProductHelperTest extends JDFTestCaseBase
+public class NetPollTest extends JDFTestCaseBase
 {
-	/**
-	 * 
-	 */
-	public void testSetRoot()
+
+	protected class WebPoller implements IPollHandler
 	{
-		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
-		KElement root = theHelper.getRoot();
-		KElement productList = root.appendElement("ProductList");
-		KElement product = productList.appendElement("Product");
-		ProductHelper ph = new ProductHelper(product);
-		ph.setRoot();
-		assertNotNull(productList.getAttribute("RootProducts", null, null));
-		assertEquals(productList.getAttribute("RootProducts", null, null), product.getID());
+		int n = 0;
+
+		/**
+		 * @see org.cip4.jdflib.util.net.IPollHandler#handlePoll(org.cip4.jdflib.util.net.IPollDetails)
+		 * @param result
+		 * @return
+		*/
+		public PollResult handlePoll(IPollDetails result)
+		{
+			n++;
+			assertNotNull(result);
+			assertEquals(result.getResponseCode(), 200, 0);
+			InputStream responseStream = result.getResponseStream();
+			assertNotNull(responseStream);
+			System.out.println(result);
+			assertEquals(StringUtil.token(result.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
+			return n % 2 == 0 ? PollResult.idle : PollResult.success;
+		}
 	}
 
 	/**
 	 * 
 	 */
-	public void testisRootProduct()
+	public void testDump()
 	{
-		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
-		KElement root = theHelper.getRoot();
-		KElement productList = root.appendElement("ProductList");
-		KElement product = productList.appendElement("Product");
-		ProductHelper ph = new ProductHelper(product);
-		assertTrue(ph.isRootProduct());
-		KElement product2 = productList.appendElement("Product");
-		ProductHelper ph2 = new ProductHelper(product2);
-		assertFalse(ph2.isRootProduct());
-		ph2.setRoot();
-		assertTrue(ph2.isRootProduct());
-		assertFalse(ph.isRootProduct());
+		NetPoll p = new NetPoll("http://localhost:8080/httpdump", new WebPoller());
+		p.start();
+		ThreadUtil.sleep(33333);
+		p.stop();
+	}
 
+	/**
+	 * 
+	 */
+	public void testGoogle()
+	{
+		ProxyUtil.setProxy("proxy", 8080, null, null);
+		NetPoll p = new NetPoll("http://www.google.de", new WebPoller());
+		p.start();
+		ThreadUtil.sleep(33333);
+		p.stop();
 	}
 }

@@ -68,24 +68,18 @@
  *  
  * 
  */
-package org.cip4.jdflib.util;
-
-import java.io.File;
+package org.cip4.jdflib.util.thread;
 
 /**
- * a hotfolder watcher Listener callback
- * 
- * @author prosirai
- * 
+ * Interface called by {@link DelayedPersist} to physically persist 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public interface HotFolderListener
+public interface IPersistable
 {
 
 	/**
-	 * this interface function is called whenever a new or modified file has stabilized in the hotFolder
-	 * 
-	 * @param hotFile the File that has appeared in the hot folder
+	 * physically persist the whatever stuff
+	 * @return true if persist was successful
 	 */
-	public void hotFile(File hotFile);
-
+	public boolean persist();
 }
