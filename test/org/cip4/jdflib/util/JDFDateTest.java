@@ -138,7 +138,7 @@ public class JDFDateTest extends TestCase
 
 		try
 		{
-			date = new JDFDate("1975-01-01T20:00:10.5");
+			date = new JDFDate("1975-01-01T20:00:10-5");
 			fail("date exception: " + date);
 		}
 		catch (final DataFormatException dfe)
