@@ -94,6 +94,7 @@ import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -1643,7 +1644,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 */
 	public void setNamespaceURIFromPrefix(String prefix, String strNamespaceURI)
 	{
-		if (prefix == null)
+		if (StringUtil.getNonEmpty(prefix) == null)
 			prefix = JDFConstants.COLON;
 		String old = nsMap.get(prefix);
 		if (old == null)
