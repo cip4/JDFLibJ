@@ -196,7 +196,7 @@ public class UrlUtil
 		 */
 		public UrlPart(final HttpURLConnection connection) throws IOException
 		{
-			rc = (connection).getResponseCode();
+			rc = connection.getResponseCode();
 			this.connection = connection;
 			contentType = connection.getContentType();
 			contentLength = connection.getContentLength();
@@ -234,10 +234,10 @@ public class UrlUtil
 		public UrlPart(final File f) throws IOException
 		{
 			inStream = FileUtil.getBufferedInputStream(f);
-			contentLength = f.length();
+			contentLength = f == null ? 0 : f.length();
 			contentType = null;
 			connection = null;
-			rc = 200;
+			rc = f == null ? 500 : 200;
 		}
 
 		private final int rc;
@@ -821,9 +821,9 @@ public class UrlUtil
 
 		URL url = null;
 
-		if (urlString == null)
+		if (StringUtil.getNonEmpty(urlString) == null)
 		{
-			return url;
+			return null;
 		}
 
 		if (isEscaped(urlString))
@@ -839,7 +839,8 @@ public class UrlUtil
 			}
 			else
 			{
-				url = new URL(fileToUrl(urlToFile(urlString), true));
+				String fileToUrl = fileToUrl(urlToFile(urlString), true);
+				url = fileToUrl == null ? null : new URL(fileToUrl);
 			}
 		}
 		catch (final MalformedURLException x)
@@ -1111,17 +1112,15 @@ public class UrlUtil
 	 * @param lower
 	 * @return
 	 */
-	public static boolean isMIMEExtenstension(final String lower)
+	public static boolean isMIMEExtenstension(String lower)
 	{
-		String lowerLocal = lower;
-
-		lowerLocal = extension(lowerLocal);
-		if (lowerLocal == null)
+		lower = extension(lower);
+		if (lower == null)
 		{
 			return false;
 		}
 
-		return lowerLocal.equalsIgnoreCase("mjm") || lowerLocal.equalsIgnoreCase("mjd") || lowerLocal.equalsIgnoreCase("mim");
+		return lower.equalsIgnoreCase("mjm") || lower.equalsIgnoreCase("mjd") || lower.equalsIgnoreCase("mim");
 	}
 
 	/**
@@ -1142,6 +1141,21 @@ public class UrlUtil
 		}
 
 		return isURL(bFix ? new String(c) : val);
+	}
+
+	/**
+	 * remove athe protocol part of a url, if it is specified
+	 * @param url
+	 * @return
+	 */
+	public static String removeProtocol(String url)
+	{
+		if (url == null)
+			return null;
+		int pos = url.indexOf("://");
+		if (pos > -1)
+			url = url.substring(pos + 3);
+		return StringUtil.getNonEmpty(url);
 	}
 
 	/**

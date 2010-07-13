@@ -66,105 +66,133 @@
  * <http://www.cip4.org/>.
  *
  *
- * 04022005 VF initial version
+ * 
  */
-/*
- * Created on Aug 26, 2004
- *
- * To change the template for this generated file go to
- * Window - Preferences - Java - Code Generation - Code and Comments
- */
-package org.cip4.jdflib.util.net;
+package org.cip4.jdflib.util.file;
 
-import java.io.InputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.ByteArrayIOStream;
+import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.UrlUtil.UrlPart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
- * 12.01.2009
+ * class to generate rolling backup files using a simple <FileName>.n naming algorithm.
+ * 
+ * The oldest file dies when the maximum number is reached
+ * 
+ * 08.12.2008
  */
-public class ProxyUtilTest extends JDFTestCaseBase
+public class RollingFile extends File
 {
-	/**
-	 * @throws Exception
-	 */
-	public void testSetProxyString() throws Exception
-	{
-		ProxyUtil.setProxy(null);
-		String proxyURL = "http://proxy:8080";
-		ProxyUtil.setProxy(proxyURL);
-		UrlPart p = UrlUtil.writeToURL(proxyURL, null, UrlUtil.GET, null, null);
-		if (p != null)
-		{
-			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-			assertNotNull(p);
-			ProxyUtil.setProxy(null);
-			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-			assertNull(p);
-		}
-
-	}
+	private int pos;
+	private final String base;
+	private final String ext;
+	private int digits;
 
 	/**
-	 * @throws Exception
+	 * @param pathname the base filename
+	 * @param baseName the name of the base file
 	 */
-	public void testSetProxy() throws Exception
+	public RollingFile(final String pathname, final String baseName)
 	{
-		String proxy = "proxy.ceu.corp.heidelberg.com";
-		int proxyPort = 8080;
-		UrlPart p = UrlUtil.writeToURL("http://" + proxy + ":" + proxyPort, null, UrlUtil.GET, null, null);
-		UrlPart p2 = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
-		if (p == null || p2 == null) // we are in the environment where the proxy is correctly set up
-		{
-			System.out.println("no connection to proxy or no tomcat running!");
-		}
-		else
-		{
-			p = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
-			ByteArrayIOStream ios = new ByteArrayIOStream(p.getResponseStream());
-			assertEquals(p.getResponseCode(), 200, 0);
-			assertNotNull(ios);
-			ProxyUtil.setProxy(proxy, proxyPort, null, null);
-			p = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
-			ios = new ByteArrayIOStream(p.getResponseStream());
-			assertEquals(p.getResponseCode(), 200, 0);
-			p = UrlUtil.writeToURL("http://www.google.de:80", null, UrlUtil.GET, null, null);
-			assertEquals(p.getResponseCode(), 200, 0);
-			InputStream responseStream = p.getResponseStream();
-			assertNotNull(responseStream);
-			ios = new ByteArrayIOStream(p.getResponseStream());
-			assertEquals(StringUtil.token(p.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
-
-			ProxyUtil.setProxy(null, 0, null, null);
-			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-			assertNull(p);
-		}
+		super(pathname);
+		ext = UrlUtil.extension(baseName);
+		base = UrlUtil.prefix(baseName);
+		digits = 6;
+		calcPos();
 	}
 
 	/**
 	 * 
 	 */
-	public void testWriteToURL()
+	private void calcPos()
 	{
-		ProxyUtil.setProxy("http://proxy", 8080, null, null);
-		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+		File[] list = readAll();
+		pos = 0;
+		if (list == null)
+			return;
+		for (File f : list)
+		{
+			String name = f.getName();
+			name = UrlUtil.newExtension(name, null);
+			if (base != null)
+				name = name.substring(base.length());
+			int n = StringUtil.parseInt(name, -1);
+			if (n > pos)
+				pos = n;
+		}
+	}
+
+	/**
+	 * read all matching files from this
+	 * @return array of all matching files
+	 */
+	public File[] readAll()
+	{
+		String expression = getFileExpression();
+		File[] list = FileUtil.listFilesWithExpression(this, expression);
+		if (list != null)
+			Arrays.sort(list);
+		return list;
+	}
+
+	/**
+	 * @return
+	 */
+	private String getFileExpression()
+	{
+		String expression = "(.)*";
+		if (base != null)
+			expression = base + expression;
+		if (ext != null)
+			expression = expression + "." + ext;
+		return expression;
+	}
+
+	/**
+	 * @return the file to write, null if error occurred
+	 */
+	public File getNewFile()
+	{
+		File file = FileUtil.getFileInDirectory(this, new File(getNewFileName()));
+		try
+		{
+			file.createNewFile();
+		}
+		catch (IOException x)
+		{
+			file = null;
+		}
+		return file;
+	}
+
+	/**
+	 * @return the file to write, i.e. this
+	 */
+	private String getNewFileName()
+	{
+		String exp = getFileExpression();
+		exp = StringUtil.replaceString(exp, "(.)*", "%0" + digits + "i");
+		exp = StringUtil.sprintf(exp, "" + ++pos);
+		return exp;
 	}
 
 	/**
 	 * 
 	 */
-	public void testWriteToURLSystemCall()
+	private static final long serialVersionUID = 1521423479897L;
+
+	/**
+	 * @param digits the digits to set
+	 */
+	public void setDigits(int digits)
 	{
-		System.setProperty("http.proxyPort", "8080");
-		System.setProperty("http.proxyHost", "proxy.ceu.corp.heidelberg.com");
-		System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");
-		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
+		this.digits = digits;
 	}
 
 }

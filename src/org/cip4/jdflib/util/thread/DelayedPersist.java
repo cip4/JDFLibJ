@@ -118,7 +118,8 @@ public class DelayedPersist extends Thread
 		if (theDelayed == null)
 			return;
 		theDelayed.stop = true;
-		ThreadUtil.notify(theDelayed.waitMutex);
+		theDelayed.persistQueues();
+		ThreadUtil.notifyAll(theDelayed.waitMutex);
 		theDelayed = null;
 	}
 
@@ -191,7 +192,7 @@ public class DelayedPersist extends Thread
 			{
 				IPersistable qp = it.next();
 				MyLong l = persistQueue.get(qp);
-				if (l.i < t)
+				if (stop || l.i < t)
 				{
 					theList.add(qp);
 					persistQueue.remove(qp);

@@ -2059,31 +2059,29 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		private void setPartitionedStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, String statusDetails)
 		{
 			// version >=1.3
-			{
-				JDFNodeInfo ni = getCreateNodeInfo();
-				if (getStatus() != JDFElement.EnumNodeStatus.Part)
-				{ // set a decent default status for implicit
-					ni.setNodeStatus(getStatus());
-					if (statusDetails != null)
-					{
-						ni.setNodeStatusDetails(statusDetails);
-					}
-				}
-
-				JDFNodeInfo niLeaf = getPartitionForMap(mattr, ni);
-
-				if (niLeaf != null)
+			JDFNodeInfo ni = getCreateNodeInfo();
+			if (getStatus() != JDFElement.EnumNodeStatus.Part)
+			{ // set a decent default status for implicit
+				ni.setNodeStatus(getStatus());
+				if (statusDetails != null)
 				{
-					niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
-					niLeaf.setNodeStatus(status);
-					if (statusDetails != null)
-					{
-						niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
-						niLeaf.setNodeStatusDetails(statusDetails);
-					}
+					ni.setNodeStatusDetails(statusDetails);
 				}
-				setStatus(JDFElement.EnumNodeStatus.Part);
 			}
+
+			JDFNodeInfo niLeaf = getPartitionForMap(mattr, ni);
+
+			if (niLeaf != null)
+			{
+				niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUS, null);
+				niLeaf.setNodeStatus(status);
+				if (statusDetails != null)
+				{
+					niLeaf.removeAttributeFromLeaves(AttributeName.NODESTATUSDETAILS, null);
+					niLeaf.setNodeStatusDetails(statusDetails);
+				}
+			}
+			setStatus(JDFElement.EnumNodeStatus.Part);
 		}
 
 		/**
@@ -2114,31 +2112,29 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 */
 		private void setPoolStatus(final JDFAttributeMap mattr, final JDFElement.EnumNodeStatus status, String statusDetails)
 		{
+			// we are setting an individual attribute
+			final JDFStatusPool statusPool = getCreateStatusPool();
+			final EnumNodeStatus stat = getStatus();
+
+			if (!stat.equals(JDFElement.EnumNodeStatus.Pool))
 			{
-				// we are setting an individual attribute
-				final JDFStatusPool statusPool = getCreateStatusPool();
-				final EnumNodeStatus stat = getStatus();
+				statusPool.setStatus(stat);
+				setStatus(JDFElement.EnumNodeStatus.Pool);
+			}
 
-				if (!stat.equals(JDFElement.EnumNodeStatus.Pool))
+			statusPool.setStatus(mattr, status, statusDetails);
+
+			// this can happen if status = the previous status
+			// just remove the pool and reset the status to the original status
+
+			if (statusPool.numChildElements(ElementName.PARTSTATUS, null) == 0)
+			{
+				setStatus(status);
+				if (statusDetails != null)
 				{
-					statusPool.setStatus(stat);
-					setStatus(JDFElement.EnumNodeStatus.Pool);
+					setStatusDetails(statusDetails);
 				}
-
-				statusPool.setStatus(mattr, status, statusDetails);
-
-				// this can happen if status = the previous status
-				// just remove the pool and reset the status to the original status
-
-				if (statusPool.numChildElements(ElementName.PARTSTATUS, null) == 0)
-				{
-					setStatus(status);
-					if (statusDetails != null)
-					{
-						setStatusDetails(statusDetails);
-					}
-					statusPool.deleteNode();
-				}
+				statusPool.deleteNode();
 			}
 		}
 

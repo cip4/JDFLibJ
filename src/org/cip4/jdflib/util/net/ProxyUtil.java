@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.URL;
 
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -61,9 +62,7 @@ public class ProxyUtil
 		}
 		else
 		{
-			int pos = proxy.indexOf("://");
-			if (pos > -1)
-				proxy = proxy.substring(pos + 3);
+			proxy = UrlUtil.removeProtocol(proxy);
 
 			Proxy p = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(StringUtil.token(proxy, 0, ":"), port));
 			URLProxySelector ups = new URLProxySelector(p);
@@ -75,4 +74,22 @@ public class ProxyUtil
 		}
 	}
 
+	/**
+	 * 
+	 * @param proxy
+	 */
+	public static void setProxy(String proxy)
+	{
+		if (StringUtil.getNonEmpty(proxy) == null)
+		{
+			setProxy(null, 0, null, null);
+		}
+		else
+		{
+			proxy = UrlUtil.removeProtocol(proxy);
+			int port = StringUtil.parseInt(StringUtil.token(StringUtil.token(proxy, 1, ":"), 0, "/"), -1);
+			proxy = StringUtil.token(proxy, 0, ":");
+			setProxy(proxy, port, null, null);
+		}
+	}
 }

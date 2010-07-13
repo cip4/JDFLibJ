@@ -433,6 +433,14 @@ public class XMLDoc
 		boolean fSuccess = true;
 		FileOutputStream outStream = null;
 
+		if (file == null)
+		{
+			if (getOriginalFileName() != null)
+				file = new File(getOriginalFileName());
+			else
+				return false;
+		}
+
 		try
 		{
 			if (file.isDirectory() && getOriginalFileName() != null)

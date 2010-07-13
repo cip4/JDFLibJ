@@ -866,6 +866,20 @@ public class XMLDocTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testWriteToFileNull()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		String file = sm_dirTestDataTemp + "null.jdf";
+		new File(file).delete();
+		assertFalse(d.write2File((File) null, 2, false));
+		d.setOriginalFileName(file);
+		d.write2File((File) null, 2, false);
+		assertTrue(new File(file).exists());
+	}
+
+	/**
+	 * 
+	 */
 	public void testWriteToFileURL()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);

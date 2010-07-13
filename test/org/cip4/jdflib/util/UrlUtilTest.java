@@ -170,6 +170,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
 
+	/**
+	 * 
+	 */
+	public void testRemoveProtocol()
+	{
+		assertNull(UrlUtil.removeProtocol(null));
+		assertNull(UrlUtil.removeProtocol("http://"));
+		assertEquals("a", UrlUtil.removeProtocol("http://a"));
+		assertEquals("abb:8080", UrlUtil.removeProtocol("http://abb:8080"));
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
 	/**
 	 * 

@@ -4,10 +4,12 @@
 package org.cip4.jdflib.util.net;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.SocketAddress;
 import java.net.URI;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Vector;
 
@@ -35,8 +37,8 @@ class URLProxySelector extends ProxySelector
 		myproxies.add(Proxy.NO_PROXY);
 	}
 
-	Vector<Proxy> myproxies;
-	Vector<Proxy> noproxies;
+	private final Vector<Proxy> myproxies;
+	private Vector<Proxy> noproxies;
 
 	/**
 	 * @see java.net.ProxySelector#connectFailed(java.net.URI, java.net.SocketAddress, java.io.IOException)
@@ -61,7 +63,19 @@ class URLProxySelector extends ProxySelector
 		String host = uri == null ? null : uri.getHost();
 		if (host != null)
 			host = host.toLowerCase();
-		if (host == null || "localhost".equals(host) || "127.0.0.1".equals(host))
+
+		boolean bLocal = false;
+		try
+		{
+			InetAddress a = InetAddress.getByName(host);
+			bLocal = a.isSiteLocalAddress();
+		}
+		catch (UnknownHostException x)
+		{
+			// nop
+		}
+
+		if (host == null || bLocal || "localhost".equals(host) || "127.0.0.1".equals(host))
 			return noproxies;
 
 		return myproxies;

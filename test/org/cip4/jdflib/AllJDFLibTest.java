@@ -133,6 +133,7 @@ import org.cip4.jdflib.devicecapability.JDFStringStateTest;
 import org.cip4.jdflib.devicecapability.JDFTestTest;
 import org.cip4.jdflib.elementwalker.AttributeReplacerTest;
 import org.cip4.jdflib.elementwalker.BaseWalkerTest;
+import org.cip4.jdflib.elementwalker.EnsureNSUriTest;
 import org.cip4.jdflib.elementwalker.LinkRefFinderTest;
 import org.cip4.jdflib.elementwalker.RemovePrivateTest;
 import org.cip4.jdflib.elementwalker.ResourceIDFinderTest;
@@ -260,9 +261,12 @@ import org.cip4.jdflib.util.StatusCounterTest;
 import org.cip4.jdflib.util.StringUtilTest;
 import org.cip4.jdflib.util.UrlUtilTest;
 import org.cip4.jdflib.util.VectorMapTest;
+import org.cip4.jdflib.util.file.FileSorterTest;
+import org.cip4.jdflib.util.file.RollingFileTest;
 import org.cip4.jdflib.util.mime.MimeWriterTest;
 import org.cip4.jdflib.util.net.NetPollTest;
 import org.cip4.jdflib.util.net.ProxyUtilTest;
+import org.cip4.jdflib.util.net.URLProxySelectorTest;
 import org.cip4.jdflib.util.thread.DelayedPersistTest;
 
 /**
@@ -355,6 +359,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		// elementWalker
 		suite.addTestSuite(AttributeReplacerTest.class);
 		suite.addTestSuite(BaseWalkerTest.class);
+		suite.addTestSuite(EnsureNSUriTest.class);
 		suite.addTestSuite(LinkRefFinderTest.class);
 		suite.addTestSuite(RemovePrivateTest.class);
 		suite.addTestSuite(ResourceIDFinderTest.class);
@@ -498,6 +503,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(PlatformUtilTest.class);
 		suite.addTestSuite(PrefixInputStreamTest.class);
 		suite.addTestSuite(QueueHotFolderTest.class);
+		suite.addTestSuite(RollingFileTest.class);
 		suite.addTestSuite(RollingBackupTest.class);
 		suite.addTestSuite(ScaleUtilTest.class);
 		suite.addTestSuite(SkipInputStreamTest.class);
@@ -507,12 +513,15 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(UrlUtilTest.class);
 		suite.addTestSuite(VectorMapTest.class);
 
+		// util.file
+		suite.addTestSuite(FileSorterTest.class);
 		// util.mime
 		suite.addTestSuite(MimeWriterTest.class);
 
 		// util.net
 		suite.addTestSuite(NetPollTest.class);
 		suite.addTestSuite(ProxyUtilTest.class);
+		suite.addTestSuite(URLProxySelectorTest.class);
 
 		// util.thread
 		suite.addTestSuite(DelayedPersistTest.class);

@@ -1664,7 +1664,9 @@ public class DocumentJDFImpl extends DocumentImpl
 			qualifiedName += JDFConstants.COLON + prefix;
 		KElement element = (KElement) getDocumentElement();
 		if (element != null)
+		{
 			element.setAttributeNS(AttributeName.XMLNSURI, qualifiedName, strNamespaceURI);
+		}
 	}
 
 	/**

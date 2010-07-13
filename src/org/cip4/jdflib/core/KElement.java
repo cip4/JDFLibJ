@@ -840,7 +840,7 @@ public class KElement extends ElementNSImpl implements Element
 						removeAttributeNS(nameSpaceURI, xmlnsLocalName(key));
 						if (xmlnsPrefix(key) == null)
 						{
-							nameSpaceURI = null; // avoid spurios NS1 prefix
+							nameSpaceURI = null; // avoid spurious NS1 prefix
 						}
 					}
 
@@ -2580,7 +2580,7 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * Gets all attribute keys of 'this' as a vector of strings
-	 * @return vWString: a vector of all attribute keys in 'this'
+	 * @return VString: a vector of all attribute keys in 'this'
 	 */
 	public VString getAttributeVector_KElement()
 	{
@@ -4646,6 +4646,8 @@ public class KElement extends ElementNSImpl implements Element
 			fSuccess = true;
 			setAttribute(strNameSpace, strNameSpaceURI, null);
 		}
+		final DocumentJDFImpl doc = (DocumentJDFImpl) getOwnerDocument();
+		doc.setNamespaceURIFromPrefix(strPrefix, strNameSpaceURI);
 
 		return fSuccess;
 	}

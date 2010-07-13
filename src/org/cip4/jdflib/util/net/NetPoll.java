@@ -97,18 +97,27 @@ public class NetPoll
 		this.poller = poller;
 		mutex = new MyMutex();
 		method = UrlUtil.GET;
-		contentType = null;
+		contentType = UrlUtil.TEXT_UNKNOWN;
 	}
 
 	private final String url;
-	protected final int idleWait;
-	protected final int busyWait;
-	private PollThread pollThread;
+	protected int idleWait;
+	protected int busyWait;
+	protected PollThread pollThread;
 	static int threadCount = 0;
 	protected IPollHandler poller;
 	protected MyMutex mutex;
 	protected String method;
 	protected String contentType;
+
+	/**
+	 * return true if we are running
+	 * @return
+	 */
+	public boolean isRunning()
+	{
+		return pollThread != null && pollThread.running;
+	}
 
 	/**
 	 * start the poll loop
@@ -186,6 +195,8 @@ public class NetPoll
 					ThreadUtil.wait(mutex, busyWait);
 				}
 			}
+			// clean up when we leave
+			pollThread = null;
 		}
 	}
 
@@ -222,5 +233,21 @@ public class NetPoll
 	public String toString()
 	{
 		return "NetPoll: " + url + " method: " + method + " content-type: " + contentType + "\n" + pollThread;
+	}
+
+	/**
+	 * @param idleWait the idleWait to set
+	 */
+	public void setIdleWait(int idleWait)
+	{
+		this.idleWait = idleWait;
+	}
+
+	/**
+	 * @param busyWait the busyWait to set
+	 */
+	public void setBusyWait(int busyWait)
+	{
+		this.busyWait = busyWait;
 	}
 }

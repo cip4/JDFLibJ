@@ -1,10 +1,9 @@
 /*
- *
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
- * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -12,7 +11,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -20,17 +19,17 @@
  *    distribution.
  *
  * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
+ *    if any, must include the following acknowledgment:
  *       "This product includes software developed by the
- *        The International Cooperation for the Integration of 
+ *        The International Cooperation for the Integration of
  *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
  *    Alternately, this acknowledgment may appear in the software itself,
  *    if and wherever such third-party acknowledgments normally appear.
  *
- * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of
  *    Processes in  Prepress, Press and Postpress" must
  *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written 
+ *    software without prior written permission. For written
  *    permission, please contact info@cip4.org.
  *
  * 5. Products derived from this software may not be called "CIP4",
@@ -56,75 +55,33 @@
  * ====================================================================
  *
  * This software consists of voluntary contributions made by many
- * individuals on behalf of the The International Cooperation for the Integration 
+ * individuals on behalf of the The International Cooperation for the Integration
  * of Processes in Prepress, Press and Postpress and was
- * originally based on software 
- * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
- * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
- *  
- * For more information on The International Cooperation for the 
+ * originally based on software
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V.
+ *
+ * For more information on The International Cooperation for the
  * Integration of Processes in  Prepress, Press and Postpress , please see
  * <http://www.cip4.org/>.
- *  
+ *
+ *
  * 
  */
-package org.cip4.jdflib.util.net;
 
-import java.io.InputStream;
+package org.cip4.jdflib.util.event;
 
-import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.ThreadUtil;
-import org.cip4.jdflib.util.UrlUtil;
+import java.util.EventListener;
 
 /**
+ * trivial generic event queue interface
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class NetPollTest extends JDFTestCaseBase
+public interface IEventQueue extends EventListener
 {
-
-	protected class WebPoller implements IPollHandler
-	{
-		int n = 0;
-
-		/**
-		 * @see org.cip4.jdflib.util.net.IPollHandler#handlePoll(org.cip4.jdflib.util.net.IPollDetails)
-		 * @param result
-		 * @return
-		*/
-		public PollResult handlePoll(IPollDetails result)
-		{
-			n++;
-			assertNotNull(result);
-			assertEquals(result.getResponseCode(), 200, 0);
-			InputStream responseStream = result.getResponseStream();
-			assertNotNull(responseStream);
-			System.out.println(result);
-			assertEquals(StringUtil.token(result.getContentType(), 0, ";"), UrlUtil.TEXT_HTML);
-			return n % 2 == 0 ? PollResult.idle : PollResult.success;
-		}
-	}
-
 	/**
-	 * 
+	 * called to add an event to this
+	 * @param listener
 	 */
-	public void testDump()
-	{
-		NetPoll p = new NetPoll("http://localhost:8080/httpdump", new WebPoller());
-		p.start();
-		ThreadUtil.sleep(23333);
-		p.stop();
-	}
-
-	/**
-	 * 
-	 */
-	public void testGoogle()
-	{
-		ProxyUtil.setProxy("proxy", 8080, null, null);
-		NetPoll p = new NetPoll("http://www.google.de", new WebPoller());
-		p.start();
-		ThreadUtil.sleep(23333);
-		p.stop();
-	}
+	public void addListener(IEventListener listener);
 }

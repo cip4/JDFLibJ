@@ -366,6 +366,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 					while ("0123456789".indexOf(strDateTime.charAt(indexOfDecimal + decimalLength)) != -1)
 					{
 						decimalLength++;
+						if (indexOfDecimal + decimalLength == strDateTime.length())
+							break;
+
 					}
 				}
 			}
@@ -387,6 +390,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 					setTimeZoneOffsetInMillis(-getTimeZoneOffsetInMillis());
 				}
 			}
+			if (strDateTime.length() == 19 + decimalLength)
+				strDateTime += getTimeZoneISO();
 
 			// interpret the string - low level enhances performance quite a bit...
 			final byte[] b = strDateTime.getBytes();

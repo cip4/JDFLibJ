@@ -111,6 +111,7 @@ import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
+import org.cip4.jdflib.util.UrlUtil.UrlPart;
 
 /**
  * class to create and write mime files
@@ -447,14 +448,15 @@ public class MimeWriter extends MimeHelper
 	 * @throws IOException
 	 * @throws MessagingException
 	 */
-	public HttpURLConnection writeToURL(final String strUrl) throws IOException, MessagingException
+	public UrlPart writeToURL(final String strUrl) throws IOException, MessagingException
 	{
 		HttpURLConnection httpURLconnection = null;
-
-		final URL url = new URL(strUrl);
+		UrlPart p = null;
+		final URL url = UrlUtil.stringToURL(strUrl);
 		if ("File".equalsIgnoreCase(url.getProtocol()))
 		{
-			writeToFile(UrlUtil.urlToFile(strUrl).getAbsolutePath());
+			File outFile = writeToFile(UrlUtil.urlToFile(strUrl).getAbsolutePath());
+			p = outFile == null ? null : new UrlPart(outFile);
 		}
 		else
 		// assume http
@@ -482,8 +484,8 @@ public class MimeWriter extends MimeHelper
 				httpURLconnection = null;
 			}
 		}
-
-		return httpURLconnection;
+		p = httpURLconnection == null ? null : new UrlPart(httpURLconnection);
+		return p;
 	}
 
 	/**
@@ -694,14 +696,14 @@ public class MimeWriter extends MimeHelper
 		JDFDoc doc = null;
 
 		buildMimePackage(docJMF, docJDF, true);
-		final HttpURLConnection uc = writeToURL(strUrl);
+		final UrlPart uc = writeToURL(strUrl);
 		if (uc == null)
 		{
 			return doc; // file
 		}
 
 		final int rc = uc.getResponseCode();
-		final InputStream inputStream = uc.getInputStream();
+		final InputStream inputStream = uc.getResponseStream();
 		if (rc == 200)
 		{
 			final BufferedInputStream bis = new BufferedInputStream(inputStream);

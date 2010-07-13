@@ -2921,6 +2921,37 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testMergeNewNamespace()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("SheetName", "S1");
+		partMap.put("Side", "Front");
+		final JDFTransferCurvePool tcp = (JDFTransferCurvePool) n.addResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output);
+		JDFTransferCurvePool tcpPart = (JDFTransferCurvePool) tcp.getCreatePartition(partMap, new VString("SheetName Side", null));
+
+		tcpPart.setAttribute("MYNS:Foo", "bar", "www.myns.com");
+		n.setAttributeRaw("xmlns:MYNS", "www.MYNS.com");
+		n.setAttributeRaw("MYNS:Foo", "bar");
+
+		final JDFSpawn sp = new JDFSpawn(n);
+		final VJDFAttributeMap spawnParts = new VJDFAttributeMap();
+		spawnParts.add(partMap); // want more granular
+		final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.TRANSFERCURVEPOOL, null), spawnParts, false, false, false, false);
+		JDFTransferCurvePool tcpSpawn = (JDFTransferCurvePool) spNode.getResource(ElementName.TRANSFERCURVEPOOL, EnumUsage.Output, 0);
+		spNode.addNameSpace("MYNS", "www.myns.com");
+		JDFTransferCurvePool tcpSpawnPart = (JDFTransferCurvePool) tcpSpawn.getCreatePartition(partMap, new VString("SheetName Side", null));
+		tcpSpawnPart.setAttribute("MYNS:Foo2", "bar");
+		final JDFMerge m = new JDFMerge(n);
+		final JDFNode merged = m.mergeJDF(spNode, null, null, null);
+		assertTrue(merged.toString().toLowerCase().indexOf("ns1") < 0);
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testMergeNewResource()
 	{
 		final JDFDoc d = new JDFDoc("JDF");

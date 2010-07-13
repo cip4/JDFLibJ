@@ -305,8 +305,8 @@ public class FileUtil
 	protected static class DirectoryFileFilter implements FileFilter
 	{
 
-		/*
-		 * (non-Javadoc)
+		/**
+		 *  
 		 * 
 		 * @see java.io.FileFilter#accept(java.io.File)
 		 */
@@ -476,6 +476,10 @@ public class FileUtil
 		if (fromFile == null || toDir == null)
 		{
 			return null;
+		}
+		if (!toDir.isDirectory())
+		{
+			toDir.mkdirs();
 		}
 		final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
 		final boolean b = moveFile(fromFile, newFile);

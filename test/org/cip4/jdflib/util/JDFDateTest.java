@@ -519,6 +519,22 @@ public class JDFDateTest extends TestCase
 	 * @throws DataFormatException 
 	 * 
 	 */
+	public void testNoTimeZone() throws DataFormatException
+	{
+		JDFDate date = new JDFDate("1999-09-26T11:43:10+03:00");
+		assertNotNull(date);
+		date = new JDFDate("1999-09-26");
+		assertNotNull(date);
+		date = new JDFDate("1999-09-26T11:43:10");
+		assertNotNull(date);
+		date = new JDFDate("1999-09-26T11:43:10.04");
+		assertNotNull(date);
+	}
+
+	/**
+	 * @throws DataFormatException 
+	 * 
+	 */
 	public void testTimeZone() throws DataFormatException
 	{
 		final TimeZone t = TimeZone.getDefault();
