@@ -88,7 +88,7 @@ import org.cip4.jdflib.util.UrlUtil.URLProtocol;
  */
 public class URLExtractor extends BaseElementWalker
 {
-	protected int nSaved;
+	protected Set<String> saved;
 
 	/**
 	 * the URL walker
@@ -132,7 +132,7 @@ public class URLExtractor extends BaseElementWalker
 		super(new BaseWalkerFactory());
 		dir = dumpDir;
 		this.baseURL = baseURL;
-		nSaved = 0;
+		saved = new HashSet<String>();
 		protocols = null;
 	}
 
@@ -189,14 +189,15 @@ public class URLExtractor extends BaseElementWalker
 				if (!protocols.contains(protocol))
 					return e;
 			}
-			File newFile = UrlUtil.moveToDir(u, dir);
+			boolean bOverwrite = !saved.contains(url);
+			File newFile = UrlUtil.moveToDir(u, dir, bOverwrite);
 			if (baseURL != null && newFile != null)
 			{
 				String s = newFile.getName();
 				s = StringUtil.escape(s, UrlUtil.m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
 				u.setURL(UrlUtil.getURLWithDirectory(baseURL, s));
 			}
-			nSaved++;
+			saved.add(url);
 			return e; //  continue
 		}
 

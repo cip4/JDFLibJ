@@ -583,7 +583,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
-		final File f = UrlUtil.moveToDir(fs, newDir);
+		final File f = UrlUtil.moveToDir(fs, newDir, true);
 		assertNotNull("error moving file to dir", f);
 		for (int i = 0; i < 10; i++)
 		{
@@ -594,11 +594,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 			}
 			System.out.println("Waiting " + i);
 		}
-		assertTrue(fs.getURL().contains(UrlUtil.fileToUrl(newDir, false)));
+		long l = f.lastModified();
+		final File f2 = UrlUtil.moveToDir(fs, newDir, false);
+		assertNotNull("error moving file to dir", f2);
+		ThreadUtil.sleep(1000);
+		assertEquals(l, f2.lastModified(), 0);
 		fs.setURL("bad:/blöd");
-		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir));
+		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, true));
 		fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
-		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir));
+		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, true));
 	}
 
 	/**

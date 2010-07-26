@@ -770,7 +770,30 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertNotNull(n.getLink(0, null, null, null));
 		n.removeResource("Media", 0);
 		assertNull(n.getLink(0, null, null, null));
+	}
 
+	/**
+	 * @throws DataFormatException 
+	 * 
+	 */
+	public void testRemoveFromTypes() throws DataFormatException
+	{
+		final JDFDoc gd = new JDFDoc("JDF");
+		final JDFNode n = gd.getJDFRoot();
+		n.setCombined(new VString("Interpreting Rendering Screening", null));
+		JDFResource r1 = n.addResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input);
+		JDFResourceLink rl1 = n.getLink(r1, null);
+		assertEquals(rl1.getCombinedProcessIndex(), new JDFIntegerList("0"));
+		JDFResource r2 = n.addResource(ElementName.RENDERINGPARAMS, EnumUsage.Input);
+		JDFResourceLink rl2 = n.getLink(r2, null);
+		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		JDFResource r3 = n.addResource(ElementName.SCREENINGPARAMS, EnumUsage.Input);
+		JDFResourceLink rl3 = n.getLink(r3, null);
+		assertEquals(rl3.getCombinedProcessIndex(), new JDFIntegerList("2"));
+		n.removeFromTypes("Rendering", 1);
+		assertEquals(rl3.getCombinedProcessIndex(), new JDFIntegerList("2"));
+		n.removeFromTypes("Rendering", 0);
+		assertEquals(rl3.getCombinedProcessIndex(), new JDFIntegerList("1"));
 	}
 
 	// //////////////////////////

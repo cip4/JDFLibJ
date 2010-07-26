@@ -6989,6 +6989,63 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
+	 * remove a type from the types list - also cleaning up combinedprocessindex
+	 * @param type the type
+	 * @param iSkip the index of this type in the list of identical types - typically 0
+	 * 
+	 * 
+	 */
+	public void removeFromTypes(final String type, final int iSkip)
+	{
+		final VString v = getTypes();
+		if (v == null)
+		{
+			return;
+		}
+		int n = 0;
+		int posLast = -1;
+		while (n <= iSkip)
+		{
+			final int pos = v.indexOf(type, posLast + 1);
+			posLast = pos;
+			if (pos < 0)
+			{
+				break;
+			}
+			n++;
+		}
+		if (posLast > 0)
+		{
+			v.remove(posLast);
+			setTypes(v);
+			final VElement vResLinks = getResourceLinks(new JDFAttributeMap(AttributeName.COMBINEDPROCESSINDEX, "*"));
+			if (vResLinks != null)
+			{
+				for (final KElement e : vResLinks)
+				{
+					final JDFResourceLink rl = (JDFResourceLink) e;
+					JDFIntegerList list = rl.getCombinedProcessIndex();
+					if (list != null)
+					{
+						JDFIntegerList newList = new JDFIntegerList();
+						int[] ii = list.getIntArray();
+						for (int i : ii)
+						{
+							if (i < posLast)
+								newList.add(i);
+							else if (i > posLast)
+								newList.add(i - 1);
+							// == is obviously omitted - the type is gone
+
+						}
+						rl.setCombinedProcessIndex(newList);
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * removes a Resource from this ResourceLinkPool and from the resourcePool if it is no longer linked to any other process
 	 * 
 	 * @param nodeName the Nodename of the Resource "NodeInfo" for example

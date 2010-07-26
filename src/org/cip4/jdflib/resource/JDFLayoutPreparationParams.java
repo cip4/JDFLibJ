@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,6 +80,7 @@ package org.cip4.jdflib.resource;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
+import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
 import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -91,9 +92,11 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFAssembly;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
+import org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
 import org.cip4.jdflib.resource.process.JDFStripMark;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
 /**
@@ -239,6 +242,8 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 				media.makeRootResource(null, null, true);
 				strippingParams.refElement(media);
 			}
+			JDFExternalImpositionTemplate template = getExternalImpositionTemplate();
+			strippingParams.copyElement(template, null);
 			setPosition();
 			setStripMarks(getFrontMarkList(), EnumMarkSide.Front);
 			setStripMarks(getBackMarkList(), EnumMarkSide.Back);
@@ -279,6 +284,15 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 			binderySignature.copyAttribute(AttributeName.NUMBERUP, JDFLayoutPreparationParams.this);
 			binderySignature.copyAttribute(AttributeName.FOLDCATALOG, JDFLayoutPreparationParams.this);
 
+			String pageDistribution = getPageDistributionScheme();
+			String foldcatalog = StringUtil.getNonEmpty(getFoldCatalog());
+			if ("Sequential".equals(pageDistribution) && (foldcatalog == null || "F2-1".equals(foldcatalog)))
+				binderySignature.setBinderySignatureType(EnumBinderySignatureType.Grid);
+			else
+				binderySignature.setBinderySignatureType(EnumBinderySignatureType.Fold);
+
+			//TO need to update spec and discuss naming - either copy or or use the head to head terminology
+			binderySignature.copyAttribute(AttributeName.SIDES, JDFLayoutPreparationParams.this);
 		}
 
 		/**
@@ -304,7 +318,11 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 			}
 			else if (EnumFinishingOrder.GatherFold.equals(fo))
 			{
-				assembly.setOrder(EnumOrder.Collecting);
+				String pageDistribution = getPageDistributionScheme();
+				if ("Saddle".equals(pageDistribution))
+					assembly.setOrder(EnumOrder.Collecting);
+				else
+					assembly.setOrder(EnumOrder.Gathering);
 			}
 		}
 

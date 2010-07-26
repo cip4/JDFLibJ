@@ -143,6 +143,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class FixVersion extends BaseElementWalker
 {
 	protected boolean bFixIDs;
+	protected boolean bZappInvalid;
 	protected final EnumVersion version;
 	protected boolean bOK;
 	protected boolean fixICSVersions;
@@ -199,6 +200,7 @@ public class FixVersion extends BaseElementWalker
 		super(new BaseWalkerFactory());
 		new BaseWalker(getFactory()); // need a default walker
 		bFixIDs = true;
+		bZappInvalid = false;
 		version = _version;
 		bOK = true;
 		fixICSVersions = false;
@@ -210,7 +212,9 @@ public class FixVersion extends BaseElementWalker
 	 */
 	public FixVersion(final FixVersion fixVersion)
 	{
-		this(fixVersion.version);
+		super(new BaseWalkerFactory());
+		version = fixVersion.version;
+		bZappInvalid = fixVersion.bZappInvalid;
 		bFixIDs = fixVersion.bFixIDs;
 		fixICSVersions = fixVersion.fixICSVersions;
 		bLayoutPrepToStripping = fixVersion.bLayoutPrepToStripping;
@@ -298,6 +302,12 @@ public class FixVersion extends BaseElementWalker
 			{
 				fixICSVesions(el, value);
 			}
+			if (bZappInvalid && attType != null)
+			{
+				if (!AttributeInfo.validStringForType(value, attType, null))
+					el.removeAttribute_KElement(key, null);
+			}
+
 		}
 
 		/**
@@ -1921,5 +1931,13 @@ public class FixVersion extends BaseElementWalker
 	public String toString()
 	{
 		return "[FixVersion : version=" + (version == null ? "null" : version.getName()) + " LO->Strip" + bLayoutPrepToStripping;
+	}
+
+	/**
+	 * @param zappInvalid the bZappInvalid to set
+	 */
+	public void setBZappInvalid(boolean zappInvalid)
+	{
+		bZappInvalid = zappInvalid;
 	}
 }

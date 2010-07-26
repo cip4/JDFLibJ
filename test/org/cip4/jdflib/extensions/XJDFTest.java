@@ -101,6 +101,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
@@ -673,6 +674,23 @@ public class XJDFTest extends JDFTestCaseBase
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		assertEquals(root.getComment(0).getText(), "bar");
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFColorIntent()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		e.setAttribute("Types", "Product");
+		e.getOwnerDocument_KElement().setInitOnCreate(false);
+		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@NumColors", "4");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
 	}
 
 	/**

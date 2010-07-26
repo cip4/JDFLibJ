@@ -1187,23 +1187,33 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
 		final JDFResourceLink rl = n.getLink(c, null);
 		rl.setAttribute("foo:bar", "abc", "www.foo.com");
-		final JDFAttributeMap mapSheet = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
-		final JDFAttributeMap mapGood = new JDFAttributeMap("Condition", "Good");
-		final JDFAttributeMap mapWaste = new JDFAttributeMap("Condition", "Waste");
-		mapGood.put(EnumPartIDKey.SheetName, "s1");
-		mapWaste.put(EnumPartIDKey.SheetName, "s1");
-		rl.setAmount(40, mapGood);
-		rl.setAmount(11, mapWaste);
+		for (int i = 1; i < 4; i++)
+		{
+			final JDFAttributeMap mapSheet = new JDFAttributeMap(EnumPartIDKey.SheetName, "s" + i);
+			final JDFAttributeMap mapGood = mapSheet.clone();
+			mapGood.put("Condition", "Good");
+			final JDFAttributeMap mapWaste = mapSheet.clone();
+			mapWaste.put("Condition", "Waste");
+			rl.setAmount(40, mapGood);
+			rl.setAmount(11, mapWaste);
+		}
 		final JDFSpawn spawn = new JDFSpawn(n);
 		spawn.vSpawnParts = new VJDFAttributeMap();
-		spawn.vSpawnParts.add(new JDFAttributeMap(EnumPartIDKey.SheetName, "s1"));
+		JDFAttributeMap mapS1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "s1");
+		JDFAttributeMap mapS1Good = mapS1.clone();
+		mapS1Good.put(EnumPartIDKey.Condition, "Good");
+		spawn.vSpawnParts.add(mapS1);
 		spawn.vRWResources_in = new VString("Output", null);
 		final JDFNode nSpawn = spawn.spawn();
 
 		final JDFResourceLink rl2 = (JDFResourceLink) nSpawn.getChildByTagName("ComponentLink", null, 0, null, false, false);
 		assertNotNull(rl2);
-		rl2.setActualAmount(44, mapGood);
-		final JDFAttributeMap mapgf = new JDFAttributeMap(mapGood);
+		assertNotNull(rl2.getAmountPool().getPartAmount(mapS1Good));
+		JDFAttributeMap mapS2Good = mapS1Good.clone();
+		mapS2Good.put(EnumPartIDKey.SheetName, "s2");
+		assertNull("we zapped non-matcing partAmounts", rl2.getAmountPool().getPartAmount(mapS2Good));
+		rl2.setActualAmount(44, mapS1Good);
+		final JDFAttributeMap mapgf = new JDFAttributeMap(mapS1Good);
 		mapgf.put("Side", "Front");
 		rl2.setActualAmount(22, mapgf);
 		final JDFMerge m = new JDFMerge(n);
@@ -1211,8 +1221,9 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		final JDFResourceLink rlmerge = (JDFResourceLink) nSpawn.getChildByTagName("ComponentLink", null, 0, null, false, false);
 		assertTrue(rlmerge.hasAttribute("foo:bar"));
 		assertEquals(rlmerge.getActualAmount(mapgf), 22., 0.);
-		assertEquals("the actualamount was spawned ro", rlmerge.getActualAmount(mapGood), 22., 0.);
-		final JDFComponent comp = (JDFComponent) rlmerge.getTarget().getPartition(mapSheet, null);
+		assertEquals("the actualamount was spawned ro", rlmerge.getActualAmount(mapS1Good), 22., 0.);
+		assertEquals("partamount for sheet2-4 were not touched", rlmerge.getAmount(mapS2Good), 40., 0.);
+		final JDFComponent comp = (JDFComponent) rlmerge.getTarget().getPartition(mapS1, null);
 		assertEquals(comp.getAmount(), 22.0, 0.0);
 		assertEquals(comp.getAmountProduced(), 22.0, 0.0);
 

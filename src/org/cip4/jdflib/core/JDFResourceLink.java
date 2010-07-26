@@ -552,6 +552,25 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
+	 * 
+	 *  remove all partition stuff
+	 * @param bRemovePartMapVector 
+	 * @param bRemoveAmountPool if true, assume all amounts apply to the main resource and copy from the first partamount
+	 */
+	public void unpartition(boolean bRemovePartMapVector, boolean bRemoveAmountPool)
+	{
+		if (bRemovePartMapVector)
+			setPartMapVector(null);
+		JDFAmountPool ap = getAmountPool();
+		if (bRemoveAmountPool && ap != null)
+		{
+			JDFPartAmount pa = ap.getPartAmount(0);
+			setAttributes(pa);
+			ap.deleteNode();
+		}
+	}
+
+	/**
 	 * setTarget - sets the link to the target defined by partLeaf. Automatically generates a part subelement, if partleaf is not the root resource
 	 * 
 	 * @param resourceTarget the resource that this ResourceLink shoud refer to

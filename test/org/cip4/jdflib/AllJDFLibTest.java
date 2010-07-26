@@ -259,6 +259,7 @@ import org.cip4.jdflib.util.ScaleUtilTest;
 import org.cip4.jdflib.util.SkipInputStreamTest;
 import org.cip4.jdflib.util.StatusCounterTest;
 import org.cip4.jdflib.util.StringUtilTest;
+import org.cip4.jdflib.util.UnitParserTest;
 import org.cip4.jdflib.util.UrlUtilTest;
 import org.cip4.jdflib.util.VectorMapTest;
 import org.cip4.jdflib.util.file.FileSorterTest;
@@ -268,6 +269,7 @@ import org.cip4.jdflib.util.net.NetPollTest;
 import org.cip4.jdflib.util.net.ProxyUtilTest;
 import org.cip4.jdflib.util.net.URLProxySelectorTest;
 import org.cip4.jdflib.util.thread.DelayedPersistTest;
+import org.cip4.jdflib.validate.JDFValidatorTest;
 
 /**
  * @author MuchaD
@@ -510,6 +512,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(SScanfTest.class);
 		suite.addTestSuite(StatusCounterTest.class);
 		suite.addTestSuite(StringUtilTest.class);
+		suite.addTestSuite(UnitParserTest.class);
 		suite.addTestSuite(UrlUtilTest.class);
 		suite.addTestSuite(VectorMapTest.class);
 
@@ -527,6 +530,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(DelayedPersistTest.class);
 
 		suite.addTestSuite(JDFEnumerationSpanTest.class);
+
+		// validate
+		suite.addTestSuite(JDFValidatorTest.class);
 
 		return suite;
 	}

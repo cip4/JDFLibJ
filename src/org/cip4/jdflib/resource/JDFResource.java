@@ -4353,92 +4353,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void expand(final boolean bDeleteFromNode)
 	{
-		final VElement leaves = getLeaves(false);
-		if (leaves.size() == 1 && leaves.elementAt(0) == this && isResourceRoot())
-		{
-			return; // this is a non partitioned root node
-		}
-
-		final VString parts = getRootPartAtts();
-
-		final int leafSize = leaves.size();
-
-		for (int i = 0; i < leafSize; i++)
-		{
-			final JDFResource leaf = (JDFResource) leaves.elementAt(i);
-			final VString atts = new VString(leaf.getAttributeVector_JDFResource());
-			int j = 0;
-
-			final int attSize = atts.size();
-			for (j = 0; j < attSize; j++)
-			{
-				final String aj = atts.stringAt(j);
-				if (!parts.contains(aj))
-				{
-					leaf.setAttribute(aj, leaf.getAttribute(aj, null, null), null);
-				}
-			}
-
-			// expand sub-elements - since 190602
-			final VElement vElm = leaf.getChildElementVector(null, null, null, true, 0, false);
-			for (j = 0; j < vElm.size(); j++)
-			{
-				final String nodeName = (vElm.elementAt(j)).getNodeName();
-				// copy non existing element to leaf
-				if (leaf.getElement_JDFElement(nodeName, null, 0) == null)
-				{
-					final VElement vCopy = leaf.getChildElementVector(nodeName, null, null, true, 0, false);
-
-					final int copySize = vCopy.size();
-					for (int k = 0; k < copySize; k++)
-					{
-						leaf.copyElement(vCopy.elementAt(k), null);
-					}
-				}
-			}
-		}
-
-		if (bDeleteFromNode)
-		{
-			final String nodeName = getNodeName();
-
-			for (int i = 0; i < leafSize; i++)
-			{
-				final JDFResource res = (JDFResource) leaves.elementAt(i);
-				JDFElement r = (JDFElement) res.getParentNode_KElement();
-
-				while (r != null && r.getNodeName().equals(nodeName))
-				{
-					final VString atts = new VString(r.getAttributeVector());
-					int j;
-					for (j = 0; j < atts.size(); j++)
-					{
-						final String aj = atts.stringAt(j);
-						if (!parts.contains(aj))
-						{
-							r.removeAttribute(aj, null);
-						}
-					}
-
-					// delete all intermediate elements
-					final VElement vElm = r.getChildElementVector_JDFElement(null, null, null, true, 0, false);
-					for (j = 0; j < vElm.size(); j++)
-					{
-						if (!(vElm.elementAt(j)).getNodeName().equals(nodeName))
-						{
-							(vElm.elementAt(j)).deleteNode();
-						}
-					}
-
-					if (r == this)
-					{
-						break;
-					}
-
-					r = (JDFElement) r.getParentNode_KElement();
-				}
-			}
-		}
+		new Collapser().expand(bDeleteFromNode);
 	}
 
 	/**
@@ -4470,7 +4385,7 @@ public class JDFResource extends JDFElement
 	@Deprecated
 	public void collapse(final boolean bCollapseToNode)
 	{
-		collapse(bCollapseToNode, true);
+		new Collapser().collapse(bCollapseToNode, true);
 	}
 
 	/**
@@ -4483,201 +4398,404 @@ public class JDFResource extends JDFElement
 	 */
 	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 	{
-		final VElement leaves = getLeaves(false);
-		if (leaves.size() == 1 && leaves.elementAt(0) == this)
-		{
-			return; // this is a non partitioned root node
-		}
-
-		final VString parts = getRootPartAtts();
-		for (int i = 0; i < leaves.size(); i++)
-		{
-			JDFResource leaf = (JDFResource) leaves.elementAt(i);
-			final VString atts = leaf.getAttributeVector_JDFResource();
-			atts.removeStrings(parts, Integer.MAX_VALUE);
-			JDFResource parent = (JDFResource) leaf.getParentNode_KElement();
-
-			while (true)
-			{
-				final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
-				collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
-				// since 190602 also collapse elements
-				if (bCollapseElements)
-				{
-					collapseElements(bCollapseToNode, leaf, parent, localLeaves);
-				}
-				if (parent.isResourceRoot() || parent == this)
-				{
-					break;
-				}
-
-				leaf = parent;
-				parent = (JDFResource) parent.getParentNode_KElement();
-
-			}
-		}
+		new Collapser().collapse(bCollapseToNode, bCollapseElements);
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-
-	private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
+	/**
+	 * unpartition this resource by collapsing and removing any empty leaves
+	 * @param bForce if true force collapse by removing non-identical elements
+	 * 
+	 * @return true if successfully unpartitioned
+	 * @default Collapse(false)
+	 */
+	public boolean unpartition(boolean bForce)
 	{
-		final int localSize = localLeaves.size();
-		for (int j = 0; j < atts.size(); j++)
+		return new Collapser().unpartition(bForce);
+	}
+
+	private class Collapser
+	{
+		/**
+		 * 
+		 */
+		protected Collapser()
 		{
-			final String att = atts.stringAt(j);
-			// reduce lower stuff
-			if ((!bCollapseToNode) && (!parent.hasAttribute_KElement(att, null, false)))
+			//nop
+		}
+
+		/**
+		 * @param force 
+		 * @return true if successfully unpartitioned
+		 * @throws JDFException if not root
+		 */
+		protected boolean unpartition(boolean force)
+		{
+			if (!isResourceRoot())
+				throw new JDFException("Unpartition currently only implemented for root nodes");
+
+			// this construct is required to pick up virtual overwrites - e.g. in RunList
+			JDFResource.this.collapse(false, true);
+			VElement v = getLeaves(true);
+			v.remove(JDFResource.this);
+			boolean clean = true;
+			// if force we simply zapp what is not equal
+			if (!force)
 			{
-				final String attVal = leaf.getAttribute_KElement(att, null, JDFConstants.EMPTYSTRING);
-				// Matt-Start
-				if (!parent.getAttribute_KElement(att).equals(attVal))
-				// Matt-End
+				for (KElement e : v)
 				{
-					// check all local children and grandchildren
-					boolean bAllSame = true;
-					for (int l = 0; l < localSize; l++)
+					JDFResource r = (JDFResource) e;
+					if (containsData(r))
 					{
-						if (!(localLeaves.elementAt(l)).getAttribute(att, null, JDFConstants.EMPTYSTRING).equals(attVal))
+						clean = false;
+						break;
+					}
+				}
+			}
+			if (clean)
+			{
+				for (KElement e : v)
+				{
+					e.deleteNode();
+				}
+				removeAttribute(AttributeName.PARTIDKEYS);
+			}
+			return clean;
+		}
+
+		/**
+		 * @param r
+		 * @return
+		 */
+		protected boolean containsData(JDFResource r)
+		{
+			VElement ve = r.getChildElementVector_KElement(null, null, null, true, 0);
+			String locName = r.getLocalName();
+			for (KElement e : ve)
+			{
+				if (!locName.equals(e.getLocalName()))
+				{
+					return true; // gotcha					
+				}
+			}
+			VString v = r.getAttributeVector_KElement();
+			if (v != null)// should actually always be the case...
+			{
+				VString ignoreAtts = r.getPartIDKeys();
+				ignoreAtts.add(AttributeName.CLASS);
+				ignoreAtts.add(AttributeName.ID);
+				ignoreAtts.add(AttributeName.AGENTNAME);
+				ignoreAtts.add(AttributeName.AGENTVERSION);
+				ignoreAtts.add(AttributeName.PARTUSAGE);
+				if (r.isResourceRoot())
+				{
+					ignoreAtts.add("Status");
+				}
+				v.removeStrings(ignoreAtts, 0);
+				return v.size() != 0;
+			}
+			return false;
+		}
+
+		/**
+		 * Expand so that each leaf is complete (except for ID)
+		 * 
+		 * @param bDeleteFromNode if true, removes all intermediate elements and attributes
+		 * 
+		 * @default expand(false)
+		 */
+		protected void expand(final boolean bDeleteFromNode)
+		{
+			final VElement leaves = getLeaves(false);
+			if (leaves.size() == 1 && leaves.elementAt(0) == JDFResource.this && isResourceRoot())
+			{
+				return; // this is a non partitioned root node
+			}
+
+			final VString parts = getRootPartAtts();
+
+			final int leafSize = leaves.size();
+
+			for (int i = 0; i < leafSize; i++)
+			{
+				final JDFResource leaf = (JDFResource) leaves.elementAt(i);
+				final VString atts = new VString(leaf.getAttributeVector_JDFResource());
+				int j = 0;
+
+				final int attSize = atts.size();
+				for (j = 0; j < attSize; j++)
+				{
+					final String aj = atts.stringAt(j);
+					if (!parts.contains(aj))
+					{
+						leaf.setAttribute(aj, leaf.getAttribute(aj, null, null), null);
+					}
+				}
+
+				// expand sub-elements - since 190602
+				final VElement vElm = leaf.getChildElementVector(null, null, null, true, 0, false);
+				for (j = 0; j < vElm.size(); j++)
+				{
+					final String nodeName = (vElm.elementAt(j)).getNodeName();
+					// copy non existing element to leaf
+					if (leaf.getElement_JDFElement(nodeName, null, 0) == null)
+					{
+						final VElement vCopy = leaf.getChildElementVector(nodeName, null, null, true, 0, false);
+
+						final int copySize = vCopy.size();
+						for (int k = 0; k < copySize; k++)
 						{
-							bAllSame = false;
-							break;
+							leaf.copyElement(vCopy.elementAt(k), null);
 						}
 					}
-					// Matt-Start
-					if (bAllSame)
+				}
+			}
+
+			if (bDeleteFromNode)
+			{
+				final String nodeName = getNodeName();
+
+				for (int i = 0; i < leafSize; i++)
+				{
+					final JDFResource res = (JDFResource) leaves.elementAt(i);
+					JDFElement r = (JDFElement) res.getParentNode_KElement();
+
+					while (r != null && r.getNodeName().equals(nodeName))
 					{
-						parent.setAttribute(att, attVal, null);
-						// remove from all leaves...
-						if (removeEqual)
+						final VString atts = new VString(r.getAttributeVector());
+						int j;
+						for (j = 0; j < atts.size(); j++)
 						{
-							for (int l = 0; l < localSize; l++)
+							final String aj = atts.stringAt(j);
+							if (!parts.contains(aj))
 							{
-								localLeaves.elementAt(l).removeAttribute(att);
+								r.removeAttribute(aj, null);
 							}
 						}
 
+						// delete all intermediate elements
+						final VElement vElm = r.getChildElementVector_JDFElement(null, null, null, true, 0, false);
+						for (j = 0; j < vElm.size(); j++)
+						{
+							if (!vElm.elementAt(j).getNodeName().equals(nodeName))
+							{
+								vElm.elementAt(j).deleteNode();
+							}
+						}
+
+						if (r == JDFResource.this)
+						{
+							break;
+						}
+
+						r = (JDFElement) r.getParentNode_KElement();
 					}
 				}
-			}
-			// remove leaf element attribute if it is defined lower in the tree
-			final String parentAttribute = parent.getAttribute(att, null, null);
-			if (parentAttribute != null && parentAttribute.equals(leaf.getAttribute_KElement(att, null, null)))
-			{
-				leaf.removeAttribute(att, null);
 			}
 		}
-	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// /////////////////////////////////////////////
-
-	private void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves)
-	{
-		final int localSize = localLeaves.size();
-		final VElement vElm = leaf.getChildElementVector_JDFElement(null, null, null, true, 0, false);
-		final String resName = parent.getNodeName();
-		for (int j = 0; j < vElm.size(); j++)
+		/**
+		 * collapse all redundant attributes and elements
+		 * 
+		 * @param bCollapseToNode only collapse redundant attriutes and elements that pre-exist in the nodes
+		 * @param bCollapseElements if true, collapse elements, else only collapse attributes
+		 * 
+		 * @default Collapse(false)
+		 */
+		protected void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 		{
-			final String nodeName = (vElm.elementAt(j)).getNodeName();
-			if (resName.equals(nodeName))
+			final VElement leaves = getLeaves(false);
+			if (leaves.size() == 1 && leaves.elementAt(0) == JDFResource.this)
 			{
-				continue; // don't collapse partitions
+				return; // this is a non partitioned root node
 			}
-			final VElement vParentElm = parent.getChildElementVector(nodeName, null, null, true, 0, false);
-			final VElement vLocalElm = leaf.getChildElementVector_JDFElement(nodeName, null, null, true, 0, false);
-			// vector of elements for the first leaf
-			// this is reused for comparison since all leaves must be equal
-			final VElement localNamedElements0 = (localLeaves.elementAt(0)).getChildElementVector(nodeName, null, null, true, 0, false);
 
-			final int elm0Size = localNamedElements0.size();
-			// true if all elements of all local leaves are equal and in the correct sequence
-			// if elm0size==0 we have nothing to do - leave loop
-			boolean bElmEqual = elm0Size > 0;
-
-			if ((bCollapseToNode || vParentElm.size() > 0) && vParentElm.size() != elm0Size)
-				bElmEqual = false;
-
-			// only collapse if pre-existing elements exist in the nodes
-			if (bElmEqual && elm0Size == vParentElm.size())
+			final VString parts = getRootPartAtts();
+			for (int i = 0; i < leaves.size(); i++)
 			{
-				// loop over all elements of leaf 0 and compare with the parent leaf
-				for (int kk = 0; kk < elm0Size; kk++)
+				JDFResource leaf = (JDFResource) leaves.elementAt(i);
+				final VString atts = leaf.getAttributeVector_JDFResource();
+				atts.removeStrings(parts, Integer.MAX_VALUE);
+				JDFResource parent = (JDFResource) leaf.getParentNode_KElement();
+
+				while (true)
 				{
-					final KElement kelem1 = localNamedElements0.elementAt(kk);
-					final KElement kelem2 = vParentElm.elementAt(kk);
-					if (!kelem1.isEqual(kelem2))
+					final VElement localLeaves = parent.getChildElementVector_JDFElement(getNodeName(), null, null, true, 0, false);
+					collapseAttributes(bCollapseToNode, leaf, atts, parent, localLeaves, true);
+					// since 190602 also collapse elements
+					if (bCollapseElements)
 					{
-						bElmEqual = false;
+						collapseElements(bCollapseToNode, leaf, parent, localLeaves);
+					}
+					if (parent.isResourceRoot() || parent == JDFResource.this)
+					{
 						break;
 					}
+
+					leaf = parent;
+					parent = (JDFResource) parent.getParentNode_KElement();
 				}
 			}
+		}
 
-			if (bElmEqual)
+		// //////////////////////////////////////////////////////////////////////////
+
+		private void collapseAttributes(final boolean bCollapseToNode, final JDFResource leaf, final VString atts, final JDFResource parent, final VElement localLeaves, final boolean removeEqual)
+		{
+			final int localSize = localLeaves.size();
+			for (int j = 0; j < atts.size(); j++)
 			{
-				// loop over all local leaves except 0 (which is the one we compare to)
-				for (int k = 1; k < localSize; k++)
+				final String att = atts.stringAt(j);
+				// reduce lower stuff
+				if ((!bCollapseToNode) && (!parent.hasAttribute_KElement(att, null, false)))
 				{
-					// vector of elements for leaf k.
-					final VElement localNamedElements = (localLeaves.elementAt(k)).getChildElementVector(nodeName, null, null, true, 0, false);
-					// not equal if a different number of elements exists
-					if (localNamedElements.size() != elm0Size)
+					final String attVal = leaf.getAttribute_KElement(att, null, JDFConstants.EMPTYSTRING);
+					if (!parent.getAttribute_KElement(att).equals(attVal))
 					{
-						bElmEqual = false;
-						break;
+						// check all local children and grandchildren
+						boolean bAllSame = true;
+						for (int l = 0; l < localSize; l++)
+						{
+							if (!(localLeaves.elementAt(l)).getAttribute(att, null, JDFConstants.EMPTYSTRING).equals(attVal))
+							{
+								bAllSame = false;
+								break;
+							}
+						}
+						// Matt-Start
+						if (bAllSame)
+						{
+							parent.setAttribute(att, attVal, null);
+							// remove from all leaves...
+							if (removeEqual)
+							{
+								for (int l = 0; l < localSize; l++)
+								{
+									localLeaves.elementAt(l).removeAttribute(att);
+								}
+							}
+
+						}
 					}
-					// the number of elements is identical, now compare each one individually
-					// note that the sequence is important and thus we don't have to check ordering permutations
+				}
+				// remove leaf element attribute if it is defined lower in the tree
+				final String parentAttribute = parent.getAttribute(att, null, null);
+				if (parentAttribute != null && parentAttribute.equals(leaf.getAttribute_KElement(att, null, null)))
+				{
+					leaf.removeAttribute(att, null);
+				}
+			}
+		}
+
+		// //////////////////////////////////////////////////////////////////////////
+		// /////////////////////////////////////////////
+
+		private void collapseElements(final boolean bCollapseToNode, final JDFResource leaf, final JDFResource parent, final VElement localLeaves)
+		{
+			final int localSize = localLeaves.size();
+			final VElement vElm = leaf.getChildElementVector_JDFElement(null, null, null, true, 0, false);
+			final String resName = parent.getNodeName();
+			for (int j = 0; j < vElm.size(); j++)
+			{
+				final String nodeName = (vElm.elementAt(j)).getNodeName();
+				if (resName.equals(nodeName))
+				{
+					continue; // don't collapse partitions
+				}
+				final VElement vParentElm = parent.getChildElementVector(nodeName, null, null, true, 0, false);
+				final VElement vLocalElm = leaf.getChildElementVector_JDFElement(nodeName, null, null, true, 0, false);
+				// vector of elements for the first leaf
+				// this is reused for comparison since all leaves must be equal
+				final VElement localNamedElements0 = (localLeaves.elementAt(0)).getChildElementVector(nodeName, null, null, true, 0, false);
+
+				final int elm0Size = localNamedElements0.size();
+				// true if all elements of all local leaves are equal and in the correct sequence
+				// if elm0size==0 we have nothing to do - leave loop
+				boolean bElmEqual = elm0Size > 0;
+
+				if ((bCollapseToNode || vParentElm.size() > 0) && vParentElm.size() != elm0Size)
+					bElmEqual = false;
+
+				// only collapse if pre-existing elements exist in the nodes
+				if (bElmEqual && elm0Size == vParentElm.size())
+				{
+					// loop over all elements of leaf 0 and compare with the parent leaf
 					for (int kk = 0; kk < elm0Size; kk++)
 					{
-						if (!(localNamedElements0.elementAt(kk)).isEqual(localNamedElements.elementAt(kk)))
+						final KElement kelem1 = localNamedElements0.elementAt(kk);
+						final KElement kelem2 = vParentElm.elementAt(kk);
+						if (!kelem1.isEqual(kelem2))
 						{
 							bElmEqual = false;
 							break;
 						}
 					}
-					// rebreak if not equal
-					if (!bElmEqual)
+				}
+
+				if (bElmEqual)
+				{
+					// loop over all local leaves except 0 (which is the one we compare to)
+					for (int k = 1; k < localSize; k++)
 					{
-						break;
+						// vector of elements for leaf k.
+						final VElement localNamedElements = (localLeaves.elementAt(k)).getChildElementVector(nodeName, null, null, true, 0, false);
+						// not equal if a different number of elements exists
+						if (localNamedElements.size() != elm0Size)
+						{
+							bElmEqual = false;
+							break;
+						}
+						// the number of elements is identical, now compare each one individually
+						// note that the sequence is important and thus we don't have to check ordering permutations
+						for (int kk = 0; kk < elm0Size; kk++)
+						{
+							if (!(localNamedElements0.elementAt(kk)).isEqual(localNamedElements.elementAt(kk)))
+							{
+								bElmEqual = false;
+								break;
+							}
+						}
+						// rebreak if not equal
+						if (!bElmEqual)
+						{
+							break;
+						}
 					}
 				}
-			}
-			// all are identical --> zapp em
-			if (bElmEqual)
-			{
-				// delete all intermediate children before copying
-				if (!bCollapseToNode)
+				// all are identical --> zapp em
+				if (bElmEqual)
 				{
-					parent.removeChildren(nodeName, null, null);
-					for (int k = 0; k < elm0Size; k++)
+					// delete all intermediate children before copying
+					if (!bCollapseToNode)
 					{
-						parent.copyElement(localNamedElements0.elementAt(k), null);
+						parent.removeChildren(nodeName, null, null);
+						for (int k = 0; k < elm0Size; k++)
+						{
+							parent.copyElement(localNamedElements0.elementAt(k), null);
+						}
 					}
-				}
-				for (int kk = 0; kk < localSize; kk++)
-				{
-					(localLeaves.elementAt(kk)).removeChildren(nodeName, null, null);
-				}
-				// not all children are equal, but maybe this one individual; if so -> ciao
-			}
-			else if (vParentElm.size() == vLocalElm.size())
-			{
-				boolean bZappEm = vParentElm.size() > 0;
-				for (int k = 0; k < vParentElm.size(); k++)
-				{
-					if (!(vParentElm.elementAt(k)).isEqual(vLocalElm.elementAt(k)))
+					for (int kk = 0; kk < localSize; kk++)
 					{
-						bZappEm = false;
-						break;
+						(localLeaves.elementAt(kk)).removeChildren(nodeName, null, null);
 					}
+					// not all children are equal, but maybe this one individual; if so -> ciao
 				}
-				// this leaves elements are all identical and in the same
-				// sequence; we can inherit so zapp em
-				if (bZappEm)
+				else if (vParentElm.size() == vLocalElm.size())
 				{
-					leaf.removeChildren(nodeName, null, null);
+					boolean bZappEm = vParentElm.size() > 0;
+					for (int k = 0; k < vParentElm.size(); k++)
+					{
+						if (!(vParentElm.elementAt(k)).isEqual(vLocalElm.elementAt(k)))
+						{
+							bZappEm = false;
+							break;
+						}
+					}
+					// this leaves elements are all identical and in the same
+					// sequence; we can inherit so zapp em
+					if (bZappEm)
+					{
+						leaf.removeChildren(nodeName, null, null);
+					}
 				}
 			}
 		}
@@ -6981,6 +7099,15 @@ public class JDFResource extends JDFElement
 		}
 		// all is well
 		return true;
+	}
+
+	/**
+	 * 
+	 * @return true if anything but id, class etc are specified.
+	 */
+	public boolean containsData()
+	{
+		return new Collapser().containsData(this);
 	}
 
 	/**

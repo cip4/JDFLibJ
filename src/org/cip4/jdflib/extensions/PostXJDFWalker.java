@@ -177,8 +177,20 @@ class PostXJDFWalker extends BaseElementWalker
 			KElement layoutPartition = layoutPartitionH.getResource();
 			layoutPartition.mergeElement(xjdf, false);
 
+			mergeSurfaces(map);
 			return null; // stop after merging
 
+		}
+
+		/**
+		 * @param map
+		 */
+		private void mergeSurfaces(JDFAttributeMap map)
+		{
+			// TODO merge surfaces that match map
+			// 2 options 
+			//- either add @Side to the respective content / mark objects + dynamic marks
+			// add Surface elements
 		}
 
 	}

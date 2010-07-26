@@ -1478,9 +1478,10 @@ public class UrlUtil
 	 * @param parent the parent element, trypically a filespec or preview
 	 * @param dir the directory to move to. dir is created if it does not exist. 
 	 * If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
 	 */
-	public static File moveToDir(IURLSetter parent, final File dir)
+	public static File moveToDir(IURLSetter parent, final File dir, final boolean overWrite)
 	{
 		if (dir == null)
 		{
@@ -1516,8 +1517,12 @@ public class UrlUtil
 		File out = FileUtil.getFileInDirectory(dir, localFile);
 		if (out.exists())
 		{
-			out.delete();
+			if (overWrite)
+				out.delete();
+			else
+				return out;
 		}
+
 		InputStream inputStream = new MimeReader(mp).getURLInputStream(url);
 		if (inputStream != null)
 		{

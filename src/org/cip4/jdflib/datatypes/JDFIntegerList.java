@@ -346,7 +346,7 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	/**
-	 * setInt - setsthe integer val at 'pos' from the list.<br>
+	 * setInt - sets the integer val at 'pos' from the list.<br>
 	 * Note: if pos is negative, setInt sets the pos'th integer counting from the end.
 	 * 
 	 * @param pos index of the integer to get

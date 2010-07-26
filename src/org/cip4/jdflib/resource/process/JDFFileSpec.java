@@ -209,7 +209,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	@Deprecated
 	public File moveToDir(final File dir)
 	{
-		return UrlUtil.moveToDir(this, dir);
+		return UrlUtil.moveToDir(this, dir, true);
 	}
 
 	/**

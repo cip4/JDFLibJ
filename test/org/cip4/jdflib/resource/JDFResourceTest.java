@@ -163,6 +163,33 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testUnPartition()
+	{
+		final JDFDoc doc = creatXMDoc();
+		final JDFNode n = doc.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		xm.unpartition(false);
+		assertEquals(xm.getPartIDKeys().size(), 0);
+	}
+
+	/**
+	 * 
+	 */
+	public void testUnPartitionNot()
+	{
+		final JDFDoc doc = creatXMDoc();
+		final JDFNode n = doc.getJDFRoot();
+		final JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		((JDFExposedMedia) xm.getLeaves(false).get(0)).setBrand("foo"); // one is different...
+		xm.unpartition(false);
+		assertEquals(xm.getPartIDKeys().size(), 3);
+		xm.unpartition(true);
+		assertEquals(xm.getPartIDKeys().size(), 0);
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetAttributeVector()
 	{
 		final JDFDoc doc = creatXMDoc();
@@ -835,7 +862,22 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	// ///////////////////////////////////////////////////////////
+	public void testContainsData()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFResource m = n.addResource("Media", EnumUsage.Input);
+		assertFalse(m.containsData());
+		m.addPartition(EnumPartIDKey.Side, "Front");
+		assertTrue(m.containsData());
+		m.unpartition(false);
+		assertFalse(m.containsData());
+		m.setBrand("abc");
+		assertTrue(m.containsData());
+	}
+
+	/**
+	 * 
+	 */
 	public void testCreatePartitions()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);

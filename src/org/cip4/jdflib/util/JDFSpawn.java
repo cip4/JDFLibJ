@@ -88,6 +88,7 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
@@ -102,6 +103,7 @@ import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
+import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -686,8 +688,7 @@ public class JDFSpawn
 
 					vRes = dummy.getTargetVector(-1);
 					dummy.deleteNode();
-					// reset partitions in main
-					liRootLink.setPartMapVector(vLinkMap);
+					reduceLinkPartition(liRootLink, vLinkMap);
 
 				}
 				else if (liRoot instanceof JDFRefElement)
@@ -953,7 +954,7 @@ public class JDFSpawn
 				if (!vPartMap.isEmpty())
 				{
 					final VJDFAttributeMap vNewMap = getSpawnedLinkPartMap(link, vPartMap);
-					link.setPartMapVector(vNewMap);
+					reduceLinkPartition(link, vNewMap);
 					updateSpawnIDs(spawnID, link);
 					final String id = link.getrRef();
 					if (id != null)
@@ -977,6 +978,29 @@ public class JDFSpawn
 							}
 						}
 					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param link
+	 * @param vNewMap
+	 */
+	private void reduceLinkPartition(JDFResourceLink link, final VJDFAttributeMap vNewMap)
+	{
+		link.setPartMapVector(vNewMap);
+		JDFAmountPool ap = link.getAmountPool();
+		if (ap != null)
+		{
+			VElement partAmounts = ap.getChildElementVector(ElementName.PARTAMOUNT, null);
+			if (partAmounts != null)
+			{
+				for (KElement e : partAmounts)
+				{
+					JDFPartAmount pa = (JDFPartAmount) e;
+					if (!pa.getPartMapVector().overlapsMap(vNewMap))
+						pa.deleteNode();
 				}
 			}
 		}

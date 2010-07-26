@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,9 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
@@ -83,6 +86,7 @@ import org.cip4.jdflib.core.VString;
  */
 public class RemovePrivate extends BaseElementWalker
 {
+	protected Set<String> prefixes;
 
 	/**
 	 * 
@@ -90,6 +94,7 @@ public class RemovePrivate extends BaseElementWalker
 	public RemovePrivate()
 	{
 		super(new BaseWalkerFactory());
+		prefixes = null;
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -97,6 +102,17 @@ public class RemovePrivate extends BaseElementWalker
 	protected BaseWalkerFactory getFactory()
 	{
 		return (BaseWalkerFactory) theFactory;
+	}
+
+	/**
+	 * add a prefix if never called -all prefixes are zapped
+	 * @param prefix
+	 */
+	public void addPrefix(String prefix)
+	{
+		if (prefixes == null)
+			prefixes = new HashSet<String>();
+		prefixes.add(prefix);
 	}
 
 	/**
@@ -125,15 +141,28 @@ public class RemovePrivate extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
-
-			final JDFElement j = (JDFElement) e1;
-			final VString unknown = j.getUnknownAttributes(false, -1);
+			final VString unknown;
+			if (prefixes == null)
+			{
+				final JDFElement j = (JDFElement) e1;
+				unknown = j.getUnknownAttributes(false, -1);
+			}
+			else
+			{
+				unknown = e1.getAttributeVector_KElement();
+			}
 			if (unknown != null)
 			{
-				final int uSiz = unknown.size();
-				for (int i = 0; i < uSiz; i++)
+				for (String attName : unknown)
 				{
-					j.removeAttribute(unknown.stringAt(i));
+					if (prefixes != null)
+					{
+						String prefix = KElement.xmlnsPrefix(attName);
+						// not in list - move on
+						if (prefix == null || !prefixes.contains(prefix))
+							continue;
+					}
+					e1.removeAttribute(attName);
 				}
 			}
 			return e1;
@@ -185,12 +214,24 @@ public class RemovePrivate extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			final boolean b = super.matches(toCheck);
+			boolean b = super.matches(toCheck);
 			if (!b)
 			{
 				return false;
 			}
-			return !(toCheck instanceof JDFElement) || !JDFConstants.JDFNAMESPACE.equals(toCheck.getNamespaceURI());
+			if (prefixes != null)
+			{
+				String prefix = toCheck.getPrefix();
+				// not in list - we don't match
+				if (prefix == null || !prefixes.contains(prefix))
+					b = false;
+			}
+			else
+			{
+				b = b || !(toCheck instanceof JDFElement);
+				b = b || !JDFConstants.JDFNAMESPACE.equals(toCheck.getNamespaceURI());
+			}
+			return b;
 		}
 	}
 

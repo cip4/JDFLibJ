@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -89,7 +90,7 @@ import org.cip4.jdflib.util.StringUtil;
 public class XJDFHelper
 {
 	/**
-	 * @param xjdf
+	 * @param xjdf if null a new XJDF is generated, else the xjdf root to be manipulated
 	 */
 	public XJDFHelper(KElement xjdf)
 	{
@@ -106,7 +107,7 @@ public class XJDFHelper
 	}
 
 	/**
-	 * @param jobID 
+	 * @param jobID , if null a new jobid is generated
 	 * @param jobPartID 
 	 * @param parts 
 	 */
@@ -114,6 +115,8 @@ public class XJDFHelper
 	{
 		super();
 		newXJDF();
+		if (jobID == null)
+			jobID = "Job_" + new JDFDate().getFormattedDateTime("MMdd_hhmmss");
 		theXJDF.setAttribute(AttributeName.JOBID, jobID);
 		theXJDF.setAttribute(AttributeName.JOBPARTID, jobPartID);
 		setParts(parts);

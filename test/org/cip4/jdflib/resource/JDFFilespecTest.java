@@ -162,7 +162,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
-		File f = UrlUtil.moveToDir(fs, newDir);
+		File f = UrlUtil.moveToDir(fs, newDir, true);
 		assertNotNull("error moving file to dir", f);
 		for (int i = 0; i < 10; i++)
 		{

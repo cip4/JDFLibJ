@@ -1507,8 +1507,8 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is
-	 * returned. Otherwhise the size of the map (number of attributes from kElem) is returned.
+	 * Sets the attributes from the current element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is
+	 * returned. Otherwise the size of the map (number of attributes from kElem) is returned.
 	 * @param kElem the attribute source
 	 */
 	public void setAttributesRaw(final KElement kElem)
@@ -1995,6 +1995,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param clazz the class of the sibling
 	 * @return KElement the next sibling element of 'this', null if none is found
 	 */
+	@SuppressWarnings("unchecked")
 	public <a extends KElement> a getFirstChildElement(Class<a> clazz)
 	{
 		Node e = getFirstChild();

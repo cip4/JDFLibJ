@@ -1083,6 +1083,27 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	 * test that the position checking algorithm works
 	 * 
 	 */
+	public void testUnPartition()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.Strapping);
+		final JDFResource rBar = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(rBar, null);
+		JDFAttributeMap partMap = new JDFAttributeMap("SheetName", "s1");
+		rl.setActualAmount(42, partMap);
+		rl.setPartMap(partMap);
+		rl.unpartition(false, true);
+		assertEquals(rl.getActualAmount(null), 42, 0.);
+		assertNotNull(rl.getPartMapVector());
+		rl.unpartition(true, true);
+		assertNull(rl.getPartMapVector());
+	}
+
+	/**
+	 * test that the position checking algorithm works
+	 * 
+	 */
 	public void testValidAttributesAmountPool()
 	{
 		final JDFDoc d = new JDFDoc(ElementName.JDF);

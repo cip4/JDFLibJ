@@ -116,10 +116,28 @@ public class JDFRunListTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public final void testUnPartitionNPage()
+	{
+		final JDFRunList rl1 = rl.addPDF("file:///file1.pdf", 0, 2);
+		final JDFRunList rl2 = rl.addPDF("file:///file1.pdf", 3, 5);
+		assertEquals(rl.getNPage(), 6);
+		rl.removeAttribute(AttributeName.NPAGE);
+		assertEquals(rl.getNPage(), 6);
+		assertEquals(rl1.getNPage(), 3);
+		assertEquals(rl2.getNPage(), 3);
+		rl.unpartition(true);
+		assertEquals(rl.getNPage(), 6);
+	}
+
+	/**
+	 * 
+	 */
 	public final void testCollapseNPage()
 	{
 		final JDFRunList rl1 = rl.addPDF("file:///file1.pdf", 0, 2);
 		final JDFRunList rl2 = rl.addPDF("file:///file2.pdf", 1, 3);
+		assertEquals(rl.getNPage(), 6);
+		rl.removeAttribute(AttributeName.NPAGE);
 		assertEquals(rl.getNPage(), 6);
 		assertEquals(rl1.getNPage(), 3);
 		assertEquals(rl2.getNPage(), 3);

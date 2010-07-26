@@ -1359,6 +1359,9 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(e.getPrefix(), "foo");
 		myRoot.removeAttribute("xmlns:foo");
 		assertEquals(e.getPrefix(), "foo");
+		myRoot.setAttribute("xmlns:blub", "diewupp");
+		KElement blub = myRoot.appendElement("blub:diewupp");
+		assertEquals(blub.getPrefix(), "blub");
 
 	}
 
@@ -3008,6 +3011,8 @@ public class KElementTest extends JDFTestCaseBase
 		final KElement root = d.getRoot();
 		assertTrue(root.toXML().contains("<doc/>"));
 		root.setAttribute("test", "\"");
+		root.setAttribute("test2", "&");
+		assertTrue(root.toXML().contains("&amp;"));
 	}
 
 	/**

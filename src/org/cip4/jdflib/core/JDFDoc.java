@@ -358,8 +358,15 @@ public class JDFDoc extends XMLDoc
 	 */
 	public static JDFDoc parseFile(final String fileName)
 	{
-		InputStream is = FileUtil.getBufferedInputStream(new File(fileName));
-		return parseStream(is);
+		final File f = new File(fileName);
+		final InputStream is = FileUtil.getBufferedInputStream(f);
+		final JDFDoc d = parseStream(is);
+		if (f.canRead() && d != null)
+		{
+			d.setOriginalFileName(f.getAbsolutePath());
+		}
+
+		return d;
 	}
 
 	/**

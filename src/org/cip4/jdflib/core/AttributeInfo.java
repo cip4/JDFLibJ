@@ -866,6 +866,9 @@ public class AttributeInfo
 		if (val == null)
 			return false;
 
+		if (iType == null)
+			return true;
+
 		try
 		{
 			if (iType == AttributeInfo.EnumAttributeType.Any)
