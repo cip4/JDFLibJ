@@ -185,6 +185,7 @@ public class UrlUtil
 		 * 
 		 * @return
 		 */
+		@Override
 		public int getResponseCode()
 		{
 			return rc;
@@ -253,6 +254,7 @@ public class UrlUtil
 		/**
 		 * @return the contentType
 		 */
+		@Override
 		public String getContentType()
 		{
 			return contentType;
@@ -270,6 +272,7 @@ public class UrlUtil
 		 * @see org.cip4.jdflib.util.net.IPollDetails#getResponseStream()
 		 * @return
 		*/
+		@Override
 		public InputStream getResponseStream()
 		{
 			return inStream;
@@ -773,7 +776,7 @@ public class UrlUtil
 		{
 			return f;
 		}
-		if (File.separator.equals("\\")) // on windows
+		if (FileUtil.isWindows()) // on windows
 		{
 			if (urlString.startsWith("///") && urlString.length() > 6 && urlString.charAt(4) == ':' && urlString.charAt(5) == '/')
 			{

@@ -82,9 +82,9 @@ import java.util.Vector;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
@@ -692,12 +692,15 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testuncToUrl()
 	{
-		final String unc = "\\\\myHost\\a\\.\\b\\..\\c äöü%.txt";
-		final String iri = "file://myHost/a/c%20äöü%25.txt";
-		final String uri = "file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
+		if (FileUtil.isWindows())
+		{
+			final String unc = "\\\\myHost\\a\\.\\b\\..\\c äöü%.txt";
+			final String iri = "file://myHost/a/c%20äöü%25.txt";
+			final String uri = "file://myHost/a/c%20%c3%a4%c3%b6%c3%bc%25.txt";
 
-		assertEquals("uri ok", StringUtil.uncToUrl(unc, true), uri);
-		assertEquals("iri ok", StringUtil.uncToUrl(unc, false), iri);
+			assertEquals("uri ok", StringUtil.uncToUrl(unc, true), uri);
+			assertEquals("iri ok", StringUtil.uncToUrl(unc, false), iri);
+		}
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

@@ -287,12 +287,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 			assertEquals(UrlUtil.stringToURL("c:\\xyz\\").getPath(), new URL("File:/c:/xyz").getPath());
 			assertEquals(UrlUtil.stringToURL("File:/c:/xyz/").getPath(), new URL("File:/c:/xyz").getPath());
 			assertEquals(UrlUtil.stringToURL("c:\\xyz").getPath(), new URL("File:/c:/xyz").getPath());
-		}
 
-		assertEquals(UrlUtil.stringToURL("http://foo"), new URL("http://foo"));
+			assertEquals(UrlUtil.stringToURL("file://foo/ .txt"), new URL("file://foo/%20.txt"));
+			assertEquals(UrlUtil.stringToURL("file://foo/%.txt"), new URL("file://foo/%25.txt"));
+		}
+		else
+		{
+			assertEquals(UrlUtil.stringToURL("file:/foo/ .txt"), new URL("file:/foo/%20.txt"));
+			assertEquals(UrlUtil.stringToURL("file:/foo/%.txt"), new URL("file:/foo/%25.txt"));
+		}
 		assertEquals(UrlUtil.stringToURL("http://foo/%20.txt"), new URL("http://foo/%20.txt"));
-		assertEquals(UrlUtil.stringToURL("file://foo/ .txt"), new URL("file://foo/%20.txt"));
-		assertEquals(UrlUtil.stringToURL("file://foo/%.txt"), new URL("file://foo/%25.txt"));
+		assertEquals(UrlUtil.stringToURL("http://foo"), new URL("http://foo"));
 		assertNull("empty File: should be null", UrlUtil.stringToURL("File:"));
 		assertEquals(UrlUtil.stringToURL("http%3A%2F%2FDRU-CIP4HD1%3A6331"), new URL("http://DRU-CIP4HD1:6331"));
 	}
@@ -345,7 +350,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 */
 	public void testFileToURL()
 	{
-		if (File.separator.equals("\\"))
+		if (FileUtil.isWindows())
 		{ // on windows
 			final File f = new File("C:\\IO.SYS");
 			String s = UrlUtil.fileToUrl(f, false);
@@ -353,9 +358,9 @@ public class UrlUtilTest extends JDFTestCaseBase
 			s = UrlUtil.fileToUrl(new File("\\\\fooBar\\4€.txt"), false);
 			assertEquals(s, "file://fooBar/4€.txt");
 		}
-		String s = UrlUtil.fileToUrl(new File("//fooBar/4€.txt"), true);
-		assertEquals(s, "file://fooBar/4%e2%82%ac.txt");
-		assertEquals(UrlUtil.fileToUrl(new File("//a/4%.txt"), false), "file://a/4%25.txt");
+		String s = UrlUtil.fileToUrl(new File("/fooBar/4€.txt"), true);
+		assertEquals(s, "file:/fooBar/4%e2%82%ac.txt");
+		assertEquals(UrlUtil.fileToUrl(new File("/a/4%.txt"), false), "file:/a/4%25.txt");
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

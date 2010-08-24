@@ -770,4 +770,12 @@ public class FileUtil
 		BufferedOutputStream bos = new BufferedOutputStream(fos);
 		return bos;
 	}
+
+	/**
+	 * 
+	 * @return true if we are on a windows file system
+	 */
+	public static boolean isWindows() {
+		return File.separator.equals("\\");
+	}
 }
