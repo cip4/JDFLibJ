@@ -185,7 +185,6 @@ public class UrlUtil
 		 * 
 		 * @return
 		 */
-		@Override
 		public int getResponseCode()
 		{
 			return rc;
@@ -254,7 +253,6 @@ public class UrlUtil
 		/**
 		 * @return the contentType
 		 */
-		@Override
 		public String getContentType()
 		{
 			return contentType;
@@ -272,7 +270,6 @@ public class UrlUtil
 		 * @see org.cip4.jdflib.util.net.IPollDetails#getResponseStream()
 		 * @return
 		*/
-		@Override
 		public InputStream getResponseStream()
 		{
 			return inStream;

@@ -1555,7 +1555,7 @@ public class XMLDoc
 		{
 
 			p = write2HttpURL(url, strContentType, det);
-			if (p == null)
+			if (p == null && i == 0)
 				ThreadUtil.sleep(1000); // wait and retry once
 			else
 				break;

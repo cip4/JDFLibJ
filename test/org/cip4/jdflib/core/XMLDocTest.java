@@ -128,7 +128,6 @@ public class XMLDocTest extends JDFTestCaseBase
 		 * 
 		 * @see java.lang.Runnable#run()
 		 */
-		@Override
 		public void run()
 		{
 			try
