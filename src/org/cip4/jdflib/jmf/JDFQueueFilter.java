@@ -104,6 +104,7 @@ import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.EnumUtil;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.VectorMap;
 
@@ -264,7 +265,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 		/**
 		 * remove any redundant details
-		 * @param qe
+		 * @param qe the QueueEntry to clean up
 		 */
 		private void cleanQE(JDFQueueEntry qe)
 		{
@@ -272,13 +273,20 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			{
 				qed = EnumQueueEntryDetails.Brief;
 			}
-			if (EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.Brief, qed))
+			if (EnumUtil.aLessEqualsThanB(qed, EnumQueueEntryDetails.Brief))
 			{
 				qe.removeChildren(ElementName.JOBPHASE, null, null);
 			}
-			if (EnumUtil.aLessEqualsThanB(EnumQueueEntryDetails.JobPhase, qed))
+			if (EnumUtil.aLessEqualsThanB(qed, EnumQueueEntryDetails.JobPhase))
 			{
-				qe.removeChildren(ElementName.JDF, null, null);
+				Vector<JDFJobPhase> v = qe.getChildrenByClass(JDFJobPhase.class, false, -1);
+				if (v != null)
+				{
+					for (JDFJobPhase jp : v)
+					{
+						jp.removeChildren(ElementName.JDF, null, null);
+					}
+				}
 			}
 		}
 
@@ -429,7 +437,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	}
 
 	/**
-	 * @deprected - use copyTo 
+	 * @deprecated - use copyTo 
 	 * modifies queue to match this filter by removing all non-matching entries
 	 * 
 	 * make sure that this is a copy of any original queue as the incoming queue itself is not cloned
@@ -438,6 +446,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 	 * @param lastQueue the last queue to diff against, note that this must be the complete queue prior to the last call of match
 	 * @return
 	 */
+	@Deprecated
 	public JDFQueue apply(final JDFQueue theQueue, final JDFQueue lastQueue)
 	{
 		if (theQueue == null)
@@ -468,19 +477,23 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	protected class QueueEntryMatcher
 	{
-		Set<String> qeDefs;
-		Set<String> devIDs;
-		VString gangNames;
-		VString statusList;
-		String jobID;
-		String jobPartID;
-		VectorMap<String, JDFGeneralID> generalIDS;
+		private final Set<String> qeDefs;
+		private final Set<String> devIDs;
+		private VString gangNames;
+		private VString statusList;
+		private final String jobID;
+		private final String jobPartID;
+		private final JDFDate olderThan;
+		private final JDFDate newerThan;
+		private VectorMap<String, JDFGeneralID> generalIDS;
 
 		protected QueueEntryMatcher()
 		{
 			qeDefs = getQueueEntryDefSet();
 			devIDs = getDeviceIDSet();
 			gangNames = getGangNames();
+			olderThan = getOlderThan();
+			newerThan = getNewerThan();
 			if (gangNames.size() == 0)
 			{
 				gangNames = null;
@@ -550,14 +563,26 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				return false;
 			}
 
-			if (jobID != null && !StringUtil.matches(jobID, qe.getJobID()))
+			if (jobID != null && !StringUtil.matches(qe.getJobID(), jobID))
 			{
 				return false;
 			}
 
-			if (jobPartID != null && !StringUtil.matches(jobPartID, qe.getJobPartID()))
+			if (jobPartID != null && !StringUtil.matches(qe.getJobPartID(), jobPartID))
 			{
 				return false;
+			}
+			if (newerThan != null)
+			{
+				JDFDate subTime = qe.getSubmissionTime();
+				if (subTime != null && newerThan.after(subTime))
+					return false;
+			}
+			if (olderThan != null)
+			{
+				JDFDate subTime = qe.getSubmissionTime();
+				if (subTime != null && olderThan.before(subTime))
+					return false;
 			}
 			// TODO define relationship of n-m overlap in filter and qe
 			if (generalIDS != null)
@@ -724,9 +749,9 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 
 	/**
 	 * copy theQueue to newParent while applying the filter
-	 * @param theQueue
-	 * @param lastQueue
-	 * @param resp 
+	 * @param theQueue the queue to copy
+	 * @param lastQueue the previously created queue
+	 * @param resp the JDF response message, may be null
 	 * @return 
 	 */
 	public JDFQueue copy(JDFQueue theQueue, JDFQueue lastQueue, KElement resp)

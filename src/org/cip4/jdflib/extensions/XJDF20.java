@@ -804,8 +804,9 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * @param re
-		 * @return
+		 * get the name for the attribute to become a reference - may add a "Refs" rather than ref for 
+		 * @param re the refelement to name
+		 * @return the name
 		 */
 		protected String getRefName(final JDFRefElement re)
 		{
@@ -839,7 +840,9 @@ public class XJDF20 extends BaseElementWalker
 					|| ElementName.JOBFIELD.equals(refLocalName) || ElementName.OBJECTRESOLUTION.equals(refLocalName) || ElementName.AUTOMATEDOVERPRINTPARAMS.equals(refLocalName)
 					|| ElementName.EXTERNALIMPOSITIONTEMPLATE.equals(refLocalName) || ElementName.PRODUCTIONPATH.equals(refLocalName) || ElementName.SHAPE.equals(refLocalName)
 					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName)
-					|| ElementName.TRANSFERCURVE.equals(refLocalName) || ElementName.COLORCONTROLSTRIP.equals(refLocalName);
+					|| ElementName.TRANSFERCURVE.equals(refLocalName) || ElementName.COLORCONTROLSTRIP.equals(refLocalName) || ElementName.LAYERLIST.equals(refLocalName)
+					|| ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName) || ElementName.MARKOBJECT.equals(refLocalName)
+					|| ElementName.LAYERDETAILS.equals(refLocalName) || ElementName.BINDERYSIGNATURE.equals(refLocalName);
 		}
 
 		/**
@@ -1041,12 +1044,12 @@ public class XJDF20 extends BaseElementWalker
 		 */
 		protected void makeRefAttribute(final JDFRefElement re, final KElement xjdf)
 		{
-			final String attName = getRefName(re);
 			final JDFResource target = re.getTarget();
 			final JDFResourceLink rl = getLinkForRef(re, target);
 			final VElement v = setResource(rl, target, getRefRoot(xjdf));
 			if (v != null)
 			{
+				final String attName = getRefName(re);
 				for (int i = 0; i < v.size(); i++)
 				{
 					final KElement ref = v.get(i);
@@ -1894,17 +1897,6 @@ public class XJDF20 extends BaseElementWalker
 		{
 			return toCheck instanceof JDFLayout;
 		}
-
-		/**
-		 * @see org.cip4.jdflib.extensions.XJDF20.WalkJDFElement#mustInline(java.lang.String)
-		 */
-		@Override
-		protected boolean mustInline(final String refLocalName)
-		{
-			final boolean b = ElementName.LAYERLIST.equals(refLocalName) || ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName)
-					|| ElementName.MARKOBJECT.equals(refLocalName) || ElementName.LAYERDETAILS.equals(refLocalName);
-			return b || super.mustInline(refLocalName);
-		}
 	}
 
 	/**
@@ -2404,6 +2396,44 @@ public class XJDF20 extends BaseElementWalker
 		public boolean matches(final KElement toCheck)
 		{
 			return (toCheck instanceof JDFRunList);
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkStrippingParams extends WalkMediaRefByType
+	{
+		/**
+		 * 
+		 */
+		public WalkStrippingParams()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			KElement e = super.walk(jdf, xjdf);
+			return e;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFStrippingParams);
 		}
 	}
 

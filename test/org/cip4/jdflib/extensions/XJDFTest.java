@@ -599,6 +599,42 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 *  
 	 */
+	public void testToXJDFLayout()
+	{
+		n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.Stripping);
+		JDFStrippingParams sp = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+		JDFMedia paper = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		paper.setMediaType(EnumMediaType.Paper);
+		JDFMedia plate = (JDFMedia) n.addResource(ElementName.MEDIA, null);
+		plate.setMediaType(EnumMediaType.Plate);
+		JDFStrippingParams sp1 = (JDFStrippingParams) sp.getCreatePartition(sheetMap, new VString("SignatureName SheetName", null));
+		sp.refElement(paper);
+		sp.refElement(plate);
+		VString vbs = new VString("bs1 bs2", null);
+		for (String bs : vbs)
+		{
+			JDFStrippingParams sp11 = (JDFStrippingParams) sp1.addPartition(EnumPartIDKey.BinderySignatureName, bs);
+			JDFBinderySignature bs1 = sp11.appendBinderySignature();
+			bs1.makeRootResource(null, null, true);
+			sp11.appendPosition();
+			sp11.appendPosition();
+			for (int i = 0; i < 2; i++)
+			{
+				JDFStrippingParams spcell1 = (JDFStrippingParams) sp11.addPartition(EnumPartIDKey.CellIndex, "" + i);
+				spcell1.appendStripCellParams();
+			}
+		}
+		XJDF20 xjdf20 = new XJDF20();
+		xjdf20.bMergeLayout = true;
+		e = xjdf20.makeNewJDF(n, null);
+		assertNull(e.getChildByTagName("StrippingParams", null, 0, null, false, true));
+
+	}
+
+	/**
+	 *  
+	 */
 	public void testFromXJDF()
 	{
 		testColorPool();

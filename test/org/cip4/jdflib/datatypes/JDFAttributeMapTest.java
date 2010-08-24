@@ -148,9 +148,9 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertNotSame(m1, m2);
 		m2.put("a2", "v2");
 		assertEquals(m1, m2);
-		m1.put("a2", null);
+		m1.put("a2", (String) null);
 		assertNotSame(m1, m2);
-		m2.put("a2", null);
+		m2.put("a2", (String) null);
 		assertEquals(m1, m2);
 		assertNotSame(m1, null);
 	}
@@ -170,7 +170,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertEquals(m1.get("Side"), "Front");
 		m1.put("Usage", EnumUsage.Input);
 		assertEquals(m1.get("Usage"), "Input");
-		m1.put("null", null);
+		m1.put("null", (String) null);
 		assertEquals(m1.get("null"), null);
 	}
 
@@ -291,11 +291,11 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		assertTrue(m1.overlapMap(m2));
 		m2.put("a3", "v3");
 		assertTrue(m1.overlapMap(m2));
-		m2.put("a4", null);
+		m2.put("a4", (String) null);
 		assertTrue(m1.overlapMap(m2));
-		m2.put("a4", null);
+		m2.put("a4", (String) null);
 		assertTrue(m1.overlapMap(m2));
-		m1.put("a4", null);
+		m1.put("a4", (String) null);
 		assertTrue(m1.overlapMap(m2));
 		assertTrue(m1.overlapMap((JDFAttributeMap) null));
 	}
@@ -346,7 +346,7 @@ public class JDFAttributeMapTest extends JDFTestCaseBase
 		keys.add("a2");
 		m1.removeKeys(keys);
 		assertEquals(m1, m2);
-		m1.put("a2", null);
+		m1.put("a2", (String) null);
 		assertNotSame(m1, m2);
 		m1.removeKeys(keys);
 		assertEquals(m1, m2);

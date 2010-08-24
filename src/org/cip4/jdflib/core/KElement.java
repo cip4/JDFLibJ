@@ -3989,6 +3989,23 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * move all children in a vector of elements in the order of the vector
+	 * @param v the vector of elements to append, if null nothing happens
+	 * @param beforeChild the child before which to append the elements of the vector
+	 */
+	public void moveElements(final VElement v, final KElement beforeChild)
+	{
+		if (v == null)
+		{
+			return;
+		}
+		for (KElement e : v)
+		{
+			moveElement(e, beforeChild);
+		}
+	}
+
+	/**
 	 * Erases all empty text nodes in 'this' and its subelements If there any empty text nodes removes them. If bTrimWhite is true, then trims white spaces from
 	 * both ends of a text node and only then, if it is empty, removes it
 	 * @param bTrimWhite trims whitespace of text, default = true
@@ -4072,10 +4089,10 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/** 
-	 * copies a node into this, ignoring node names
-	 * cleans this first
+	 * copies a node into this, ignoring identical node names i.e. duplicating elements
+	 *  
 	 * @param src
-	 * @param bRemove if true, remove existing information, else retain and overwrite
+	 * @param bRemove if true, remove existing information, else retain and overwrite / merge
 	 * @return this
 	 * 
 	 */

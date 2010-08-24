@@ -5403,17 +5403,15 @@ public class JDFResource extends JDFElement
 		double deltaAmount = previousAmount;
 
 		final JDFAttributeMap partMap = getPartMap();
-		JDFAttributeMap partMapGood = null; // explicit check map for
-		// Condition=good
-		JDFAttributeMap partMapCond = null; // explicit check map for
-		// Condition=anything
+		JDFAttributeMap partMapGood = null; // explicit check map for Condition=good
+		JDFAttributeMap partMapCond = null; // explicit check map for Condition=anything
 
 		if (partMap.get(AttributeName.CONDITION) == null)
 		{
 			partMapGood = new JDFAttributeMap(partMap);
 			partMapGood.put(AttributeName.CONDITION, "Good");
 			partMapCond = new JDFAttributeMap(partMap);
-			partMapCond.put(AttributeName.CONDITION, null);
+			partMapCond.put(AttributeName.CONDITION, (String) null);
 		}
 
 		if (previousAmount < 0)

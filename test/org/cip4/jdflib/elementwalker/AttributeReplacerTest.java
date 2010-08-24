@@ -119,7 +119,7 @@ public class AttributeReplacerTest extends JDFTestCaseBase
 	public void testReplaceMap()
 	{
 		final JDFAttributeMap m = new JDFAttributeMap("ID", "foo");
-		m.put("c", null);
+		m.put("c", (String) null);
 		final AttributeReplacer rep = new AttributeReplacer(m, null);
 		final KElement e = new XMLDoc("r", null).getRoot();
 		e.setAttribute("ID", "a1");

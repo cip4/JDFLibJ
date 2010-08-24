@@ -291,8 +291,7 @@ public class JDFMerge
 			}
 		}
 
-		// if the spawn Audit is not found at the first attempt, something went
-		// badly wrong
+		// if the spawn Audit is not found at the first attempt, something went badly wrong
 		// we will insert a error audit later but continue limping along!
 		bSnafu = iFound != 1;
 
@@ -689,15 +688,10 @@ public class JDFMerge
 		{
 			boolean bWrite = bLocal;
 
-			for (int i = 0; i < spawnIDs.size(); i++) // check for multiple rw
-			// spawns
+			for (int i = 0; i < spawnIDs.size(); i++) // check for multiple rw spawns
 			{
 
 				final String resSpawnID = spawnIDs.stringAt(i);
-				// JDFSpawned spawnedAudit=(JDFSpawned)
-				// (m_ParentNode.getChildByTagName(ElementName.SPAWNED, null, 0,
-				// new JDFAttributeMap(AttributeName.NEWSPAWNID,resSpawnID),
-				// false, true));
 				final JDFSpawned spawnedAudit = newSpawnMap.get(resSpawnID);
 				if (spawnedAudit != null)
 				{
@@ -708,17 +702,12 @@ public class JDFMerge
 					}
 				}
 				else
-				// clean up spurious spawnids of spawns that were initiated off
-				// line
+				// clean up spurious spawnids of spawns that were initiated off line
 				{
 					final String mainSpawnID = leafRes.getJDFRoot().getSpawnID(true);
 					if (KElement.isWildCard(mainSpawnID)) // only remove unknown
-					// spawnids in a
-					// real main ticket
-					// Spawned spawnids
-					// may be specified
-					// in a spawn
-					// ancestor
+					// spawnids in a real main ticket
+					// Spawned spawnids may be specified in a spawn ancestor
 					{
 						leafRes.removeFromAttribute(AttributeName.SPAWNIDS, resSpawnID, null, null, -1);
 						final String spawnIDsNew = leafRes.getAttribute_KElement(AttributeName.SPAWNIDS, null, null);
@@ -1212,7 +1201,6 @@ public class JDFMerge
 				}
 			}
 		}
-
 	}
 
 	/**

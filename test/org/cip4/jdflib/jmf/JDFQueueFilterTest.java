@@ -81,6 +81,7 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
+import org.cip4.jdflib.util.JDFDate;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -107,11 +108,11 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// /////////////////
 
 	/**
 	 * @throws Exception
 	 */
+	@SuppressWarnings("deprecation")
 	public void testMatchDiff() throws Exception
 	{
 		for (int i = 0; i < 100; i++)
@@ -231,6 +232,8 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertTrue("jobID ", filter.matches(qe));
 		filter.setJobID("jID");
 		assertTrue("jobID ", filter.matches(qe));
+		filter.setJobID("j(.)*");
+		assertTrue("jobID ", filter.matches(qe));
 		filter.setJobID("jID2");
 		assertFalse("jobID ", filter.matches(qe));
 		filter.setJobID("jID");
@@ -239,18 +242,35 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		assertTrue("jobPartID ", filter.matches(qe));
 		filter.setJobPartID("part");
 		assertTrue("jobID ", filter.matches(qe));
+		filter.setJobPartID("par(.)*");
+		assertTrue("jobID ", filter.matches(qe));
 		filter.setJobPartID("part2");
 		assertFalse("jobID ", filter.matches(qe));
 		filter.setJobPartID("part");
 
+		JDFDate d = new JDFDate();
+		qe.setSubmissionTime(d);
+		JDFDate d2 = d.clone();
+		d2.addOffset(200, 0, 0, 0);
+		filter.setOlderThan(d2);
+		assertTrue("older ", filter.matches(qe));
+		filter.setOlderThan(null);
+		filter.setNewerThan(d2);
+		assertFalse("newer ", filter.matches(qe));
+		d2.addOffset(0, -10, 0, 0);
+		filter.setNewerThan(d2);
+		assertTrue("newer ", filter.matches(qe));
+		filter.setOlderThan(d2);
+		filter.setNewerThan(null);
+		assertFalse("older ", filter.matches(qe));
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// /////////////////
 
 	/**
 	 * @throws Exception
 	 */
+	@SuppressWarnings("deprecation")
 	public void testMatch() throws Exception
 	{
 		for (int i = 0; i < 100; i++)
@@ -296,6 +316,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	@SuppressWarnings("deprecation")
 	public void testPerformanceDelta()
 	{
 		theQueue.setAutomated(false);
@@ -348,5 +369,29 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.setMaxEntries(100);
 		copy = filter.copy(theQueue, null, null);
 		assertEquals(copy.numChildElements(ElementName.QUEUEENTRY, null), 100);
+	}
+
+	/**
+	 * 
+	 */
+	public void testClean()
+	{
+		theQueue.setAutomated(false);
+		final JDFQueueEntry qe = theQueue.appendQueueEntry();
+		qe.appendJobPhase().appendNode();
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.JDF);
+		JDFQueue q2 = filter.copy(theQueue, null, null);
+		JDFQueueEntry qe2 = q2.getQueueEntry(0);
+		assertNotNull(qe2.getJobPhase().getNode());
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
+		q2 = filter.copy(theQueue, null, null);
+		qe2 = q2.getQueueEntry(0);
+		assertNotNull(qe2.getJobPhase());
+		assertNull(qe2.getJobPhase().getNode());
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.Brief);
+		q2 = filter.copy(theQueue, null, null);
+		qe2 = q2.getQueueEntry(0);
+		assertNull(qe2.getJobPhase());
+
 	}
 }

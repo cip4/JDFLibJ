@@ -74,6 +74,7 @@ import java.util.zip.DataFormatException;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
@@ -82,7 +83,9 @@ import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
+import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFDeliveryParams;
+import org.cip4.jdflib.resource.process.JDFStripCellParams;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -172,14 +175,51 @@ class PostXJDFWalker extends BaseElementWalker
 
 			VJDFAttributeMap vmap = new PartitionHelper(xjdf.getParentNode_KElement()).getPartMapVector();
 			JDFAttributeMap map = vmap.size() == 0 ? null : vmap.get(0);
-
-			PartitionHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
-			KElement layoutPartition = layoutPartitionH.getResource();
-			layoutPartition.mergeElement(xjdf, false);
+			map = mergeStrippingParamsLayout(xjdf, layoutseth, map);
 
 			mergeSurfaces(map);
 			return null; // stop after merging
 
+		}
+
+		/**
+		 * @param xjdf
+		 * @param layoutseth 
+		 * @param map 
+		 * @return 
+		 */
+		private JDFAttributeMap mergeStrippingParamsLayout(KElement xjdf, SetHelper layoutseth, JDFAttributeMap map)
+		{
+			String bsName = map.remove(AttributeName.BINDERYSIGNATURENAME);
+			String cellIndex = map.remove(AttributeName.CELLINDEX);
+			PartitionHelper layoutPartitionH = layoutseth.getCreatePartition(map, true);
+			KElement layoutPartition = layoutPartitionH.getResource();
+			JDFBinderySignature bsOld = (JDFBinderySignature) layoutPartition.getChildWithAttribute(ElementName.BINDERYSIGNATURE, AttributeName.BINDERYSIGNATURENAME, null, bsName, 0, true);
+			VElement childElementVector = xjdf.getChildElementVector(ElementName.STRIPCELLPARAMS, null);
+			if (childElementVector != null)
+			{
+				for (KElement kid : childElementVector)
+				{
+					JDFStripCellParams scp = (JDFStripCellParams) kid;
+					scp.setAttribute(AttributeName.CELLINDEX, cellIndex);
+				}
+			}
+			if (bsOld != null)
+			{
+				bsOld.moveElements(childElementVector, null);
+			}
+			else
+			{
+				JDFBinderySignature bs = (JDFBinderySignature) xjdf.getElement(ElementName.BINDERYSIGNATURE);
+				if (bs != null)
+				{
+					bs.setBinderySignatureName(bsName);
+					bs.moveElements(xjdf.getChildElementVector(ElementName.POSITION, null), null);
+					bs.moveElements(childElementVector, null);
+				}
+				layoutPartition.copyInto(xjdf, false);
+			}
+			return map;
 		}
 
 		/**

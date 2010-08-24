@@ -588,20 +588,35 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param key
 	 * @param value
 	 * @return
+	 * 
 	 */
-	public String put(Object key, Object value)
+	public String put(ValuedEnum key, String value)
 	{
-		if (key instanceof ValuedEnum)
-		{
-			key = ((ValuedEnum) key).getName();
-		}
+		return super.put(key.getName(), value);
+	}
 
-		if (value instanceof ValuedEnum)
-		{
-			value = ((ValuedEnum) value).getName();
-		}
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 * 
+	 */
+	public String put(String key, ValuedEnum value)
+	{
+		return super.put(key, value.getName());
+	}
 
-		return super.put((String) key, (String) value);
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 * 
+	 */
+	public String put(ValuedEnum key, ValuedEnum value)
+	{
+		return super.put(key.getName(), value.getName());
 	}
 
 	/**
