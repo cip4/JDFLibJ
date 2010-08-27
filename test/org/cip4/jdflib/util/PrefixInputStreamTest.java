@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,14 +75,22 @@ import java.io.ByteArrayInputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 
+/**
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class PrefixInputStreamTest extends JDFTestCaseBase
 {
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public void testRead() throws Exception
 	{
-		PrefixInputStream pis = new PrefixInputStream("abc",
-				new ByteArrayInputStream("123".getBytes()));
+		PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		assertEquals(pis.read(), 'a');
 		assertEquals(pis.read(), 'b');
 		assertEquals(pis.read(), 'c');
@@ -93,10 +101,14 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public void testReadBytes() throws Exception
 	{
-		PrefixInputStream pis = new PrefixInputStream("abc",
-				new ByteArrayInputStream("123".getBytes()));
+		PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		byte b[] = new byte[2];
 		assertEquals(pis.read(b), 2);
 		assertEquals(pis.read(b), 1);
@@ -106,10 +118,13 @@ public class PrefixInputStreamTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
+	/**
+	 * @throws Exception 
+	 * 
+	 */
 	public void testReadByteslen() throws Exception
 	{
-		PrefixInputStream pis = new PrefixInputStream("abc",
-				new ByteArrayInputStream("123".getBytes()));
+		PrefixInputStream pis = new PrefixInputStream("abc", new ByteArrayInputStream("123".getBytes()));
 		byte b[] = new byte[2];
 		assertEquals(pis.read(b, 0, 2), 2);
 		assertEquals(pis.read(b, 0, 2), 1);

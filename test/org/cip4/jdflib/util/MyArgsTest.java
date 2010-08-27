@@ -1,11 +1,87 @@
 /*
+ *
+ * The CIP4 Software License, Version 1.0
+ *
+ *
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer. 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:  
+ *       "This product includes software developed by the
+ *        The International Cooperation for the Integration of 
+ *        Processes in  Prepress, Press and Postpress (www.cip4.org)"
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "CIP4" and "The International Cooperation for the Integration of 
+ *    Processes in  Prepress, Press and Postpress" must
+ *    not be used to endorse or promote products derived from this
+ *    software without prior written permission. For written 
+ *    permission, please contact info@cip4.org.
+ *
+ * 5. Products derived from this software may not be called "CIP4",
+ *    nor may "CIP4" appear in their name, without prior written
+ *    permission of the CIP4 organization
+ *
+ * Usage of this software in commercial products is subject to restrictions. For
+ * details please consult info@cip4.org.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE INTERNATIONAL COOPERATION FOR
+ * THE INTEGRATION OF PROCESSES IN PREPRESS, PRESS AND POSTPRESS OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the The International Cooperation for the Integration 
+ * of Processes in Prepress, Press and Postpress and was
+ * originally based on software 
+ * copyright (c) 1999-2001, Heidelberger Druckmaschinen AG 
+ * copyright (c) 1999-2001, Agfa-Gevaert N.V. 
+ *  
+ * For more information on The International Cooperation for the 
+ * Integration of Processes in  Prepress, Press and Postpress , please see
+ * <http://www.cip4.org/>.
+ *  
+ * 
+ */
+/*
  * Created on Aug 12, 2005
  */
 package org.cip4.jdflib.util;
 
 import junit.framework.TestCase;
 
-public class MyArgsTest extends TestCase {
+/**
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
+public class MyArgsTest extends TestCase
+{
 
 	final String[] _testArray = { "/Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/VAHNSC6a7ag5ecAn9379.jdf", "-qc", "-v",
 			"-d /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml",
@@ -17,17 +93,24 @@ public class MyArgsTest extends TestCase {
 
 	MyArgs _myArgs;
 
+	/**
+	 * 
+	 * @see junit.framework.TestCase#setUp()
+	 * @throws Exception
+	 */
 	@Override
-	protected void setUp() throws Exception {
+	protected void setUp() throws Exception
+	{
 		super.setUp();
 		_myArgs = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
 
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.MyArgs(String[], String, String)'
 	 */
-	public void testMyArgsStringArrayStringString() {
+	public void testMyArgsStringArrayStringString()
+	{
 		MyArgs args = new MyArgs(_testArray, "?cqvVntP", "dlLuhpx", null);
 		System.out.println("Without quotes:");
 		System.out.println(args);
@@ -37,77 +120,87 @@ public class MyArgsTest extends TestCase {
 		System.out.println(args2);
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.MyArgs(String[], String, String, String)'
 	 */
-	public void testMyArgsStringArrayStringStringString() {
+	public void testMyArgsStringArrayStringStringString()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.MyArgs(Vector, String, String, String)'
 	 */
-	public void testMyArgsVectorStringStringString() {
+	public void testMyArgsVectorStringStringString()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.initMyArgs(Vector, String, String, String)'
 	 */
-	public void testInitMyArgs() {
+	public void testInitMyArgs()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.toString()'
 	 */
-	public void testToString() {
+	public void testToString()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.parameter(String)'
 	 */
-	public void testParameterString() {
+	public void testParameterString()
+	{
 		String d = _myArgs.parameter("d");
 		assertEquals(d, " /Users/clabu/Documents/workarea/Elk/testarea/jakarta-tomcat-5.0.30/temp/tENgU4Gh3huO2iVH9380.xml");
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.parameter(char)'
 	 */
-	public void testParameterChar() {
+	public void testParameterChar()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.parameterString(String)'
 	 */
-	public void testParameterStringString() {
+	public void testParameterStringString()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.parameterString(char)'
 	 */
-	public void testParameterStringChar() {
+	public void testParameterStringChar()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.nargs()'
 	 */
-	public void testNargs() {
+	public void testNargs()
+	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
 		assertEquals(args.nargs(), 0);
 
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.hasParameter()'
 	 */
-	public void hasParam() {
+	public void hasParam()
+	{
 		String[] s = { "-abc", "foo" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
 		assertTrue(args.hasParameter('a'));
@@ -117,69 +210,78 @@ public class MyArgsTest extends TestCase {
 
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.argument(int)'
 	 */
-	public void testArgument() {
+	public void testArgument()
+	{
 		String[] s = { "-abc", "foo", "bar" };
 		MyArgs args = new MyArgs(s, "ab", "c", null);
 		assertEquals(args.nargs(), 1);
 		assertEquals(args.argument(0), "bar");
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.argumentString(int)'
 	 */
-	public void testArgumentString() {
+	public void testArgumentString()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.intParameter(char, int, int)'
 	 */
-	public void testIntParameterCharIntInt() {
+	public void testIntParameterCharIntInt()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.intParameter(String, int, int)'
 	 */
-	public void testIntParameterStringIntInt() {
+	public void testIntParameterStringIntInt()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.floatParameter(char, double)'
 	 */
-	public void testFloatParameterCharDouble() {
+	public void testFloatParameterCharDouble()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.floatParameter(String, double)'
 	 */
-	public void testFloatParameterStringDouble() {
+	public void testFloatParameterStringDouble()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.boolParameter(char, boolean)'
 	 */
-	public void testBoolParameterCharBoolean() {
+	public void testBoolParameterCharBoolean()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.boolParameter(String, boolean)'
 	 */
-	public void testBoolParameterStringBoolean() {
+	public void testBoolParameterStringBoolean()
+	{
 		// dummy
 	}
 
-	/*
+	/**
 	 * Test method for 'org.cip4.jdflib.util.MyArgs.usage(String)'
 	 */
-	public void testUsage() {
+	public void testUsage()
+	{
 		// dummy
 	}
 

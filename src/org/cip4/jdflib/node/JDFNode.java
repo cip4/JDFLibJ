@@ -3466,7 +3466,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public JDFResource getResource(final String strName, final EnumUsage usage, final int i)
 	{
-		return getResource(strName, usage, null, i);
+		return getResource(strName, usage, (EnumProcessUsage) null, i);
 	}
 
 	/**

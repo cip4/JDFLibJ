@@ -82,9 +82,9 @@ import java.util.Vector;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
@@ -812,7 +812,18 @@ public class StringUtilTest extends JDFTestCaseBase
 		final int pos2 = descName.lastIndexOf(')');
 		final int pos1 = descName.lastIndexOf('(') + 1;
 		assertEquals(v, StringUtil.tokenize(descName.substring(pos1, pos2), ", ", false));
+	}
 
+	/**
+	 * 
+	 */
+	public void testReplaceToken()
+	{
+		final String s = "a/b/c";
+		assertEquals(StringUtil.replaceToken(s, 0, "/", "A"), "A/b/c");
+		assertEquals(StringUtil.replaceToken(s, -1, "/", "A"), "a/b/A");
+		assertEquals(StringUtil.replaceToken(s, 1, "/", "A"), "a/A/c");
+		assertEquals(StringUtil.replaceToken(s, -5, "/", "A"), "a/b/c");
 	}
 
 	/**

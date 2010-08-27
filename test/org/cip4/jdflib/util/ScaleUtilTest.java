@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,33 +75,40 @@ import junit.framework.TestCase;
  * @author Stefan Meißner, CIP4
  * @date 26.01.2010
  */
-public class ScaleUtilTest extends TestCase {
+public class ScaleUtilTest extends TestCase
+{
 
 	/**
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	protected void setUp() throws Exception {
+	@Override
+	protected void setUp() throws Exception
+	{
 		super.setUp();
 	}
 
 	/**
 	 * @see junit.framework.TestCase#tearDown()
 	 */
-	protected void tearDown() throws Exception {
+	@Override
+	protected void tearDown() throws Exception
+	{
 		super.tearDown();
 	}
 
 	/**
 	 * Test method for {@link org.cip4.jdflib.util.ScaleUtil#mm2Dtp(double)}.
 	 */
-	public void testMm2Dtp() {
+	public void testMm2Dtp()
+	{
 		assertEquals("Convertion mm 2 dtp is wrong.", 28.34645, ScaleUtil.mm2Dtp(10d), 0.00001);
 	}
 
 	/**
 	 * Test method for {@link org.cip4.jdflib.util.ScaleUtil#dtp2Mm(double)}.
 	 */
-	public void testDtp2Mm() {
+	public void testDtp2Mm()
+	{
 		assertEquals("Convertion dtp 2 mm is wrong.", 3.52777, ScaleUtil.dtp2Mm(10d), 0.00001);
 	}
 

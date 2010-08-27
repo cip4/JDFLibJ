@@ -1988,6 +1988,21 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals("unqualified names", ns, n.getResource("bar", EnumUsage.Output, null, 0));
 	}
 
+	/**
+	 * 
+	 */
+	public void testGetResourceEmptyRLP()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(EnumType.ResourceDefinition);
+		JDFResource r = n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, 0);
+		assertNull(r);
+		n.getCreateResourceLinkPool();
+		r = n.getResource(ElementName.SADDLESTITCHINGPARAMS, EnumUsage.Input, 0);
+		assertNull(r);
+	}
+
 	// ////////////////////////////////////////////////////////////////////////
 
 	/**

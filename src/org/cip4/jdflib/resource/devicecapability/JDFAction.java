@@ -85,6 +85,11 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.process.JDFPreflightAction;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class JDFAction extends JDFAutoAction
 {
 	private static final long serialVersionUID = 1L;
@@ -96,8 +101,7 @@ public class JDFAction extends JDFAutoAction
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAction(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFAction(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -110,8 +114,7 @@ public class JDFAction extends JDFAutoAction
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -125,8 +128,7 @@ public class JDFAction extends JDFAutoAction
 	 * @param myLocalName
 	 * @throws DOMException
 	 */
-	public JDFAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFAction(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -166,8 +168,7 @@ public class JDFAction extends JDFAutoAction
 		if (commonParent == null)
 			return null;
 
-		final JDFTestPool testPool = (JDFTestPool) commonParent
-				.getElement(ElementName.TESTPOOL);
+		final JDFTestPool testPool = (JDFTestPool) commonParent.getElement(ElementName.TESTPOOL);
 		return testPool;
 	}
 

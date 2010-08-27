@@ -661,8 +661,33 @@ public class StringUtil
 	}
 
 	/**
-	 * get a single token from a String
-	 * <p>
+	 * replace a token in a string
+	 * @param strWork the String to work on
+	 * @param index index of the token to replace
+	 * if<0 return from end (e.g. -1 is the last token)
+	 * @param delim the delimiter
+	 * @param newToken the new token, if null said token is removed
+	 * @return the modified string
+	 */
+	public static String replaceToken(final String strWork, int index, String delim, String newToken)
+	{
+		VString v = tokenize(strWork, delim, false);
+		if (v == null)
+			return null;
+		if (index < 0)
+			index += v.size();
+		if (index >= v.size() || index < 0)
+			return strWork;
+		if (newToken == null)
+			v.remove(index);
+		else
+			v.set(index, newToken);
+		return setvString(v, delim, null, null);
+
+	}
+
+	/**
+	 * get a single token from a String <p/>
 	 * default: Token(strWork, index," \t\n")
 	 * 
 	 * @param strWork the String to work on

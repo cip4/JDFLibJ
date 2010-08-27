@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,8 +75,16 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.datatypes.JDFIntegerRange;
 
+/**
+ * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen
+ *
+ */
 public class HashUtilTest extends TestCase
 {
+	/**
+	 * 
+	 */
 	public void testEqualsAndHashCode()
 	{
 		JDFIntegerRange range1 = new JDFIntegerRange(100, 200);
