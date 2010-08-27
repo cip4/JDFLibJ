@@ -131,20 +131,23 @@ public class DumpDir
 			}
 			final String[] names = baseDir.list();
 			int max = 0;
-			int l;
-			for (int i = 0; i < names.length; i++)
+			if (names != null)
 			{
-				if (names[i].length() > 9)
+				int l;
+				for (int i = 0; i < names.length; i++)
 				{
-					l = StringUtil.parseInt(names[i].substring(1, 9), 0);
-				}
-				else
-				{
-					l = 0;
-				}
-				if (l > max)
-				{
-					max = l + 1;
+					if (names[i].length() > 9)
+					{
+						l = StringUtil.parseInt(names[i].substring(1, 9), 0);
+					}
+					else
+					{
+						l = 0;
+					}
+					if (l > max)
+					{
+						max = l + 1;
+					}
 				}
 			}
 			index.i = max;
