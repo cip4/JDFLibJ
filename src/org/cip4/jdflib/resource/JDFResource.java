@@ -1765,7 +1765,7 @@ public class JDFResource extends JDFElement
 					// unless, of course, someone wrote crap JDF (bSnafu=true)
 					final Iterator<String> it = m.getKeyIterator();
 					int im = 0;
-					while (it.hasNext())// for(int im = 0; im < msiz; im++)
+					while (it.hasNext())
 					{
 						final String strKey = it.next();
 						final String strValue = m.get(strKey);
@@ -1800,14 +1800,9 @@ public class JDFResource extends JDFElement
 					if (dpv.size() > 0)
 					{
 						toAppend.addAll(dpv);
-						bSearchSame = false; // not necessary since we have
-						// something deeper
+						bSearchSame = false; // not necessary since we have something deeper
 
-						if (hasMatchingAttribute && toAppend.size() == 1) // this is
-						// a
-						// potential
-						// complete
-						// match
+						if (hasMatchingAttribute && toAppend.size() == 1) // this is a potential complete match
 						// - we may just stop
 						{
 							final JDFResource root = getResourceRoot();

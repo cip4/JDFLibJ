@@ -574,6 +574,26 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * Method testGetTarget * @throws Exception
+	 */
+	public void testGetTargetVectorMultiPartVersion()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		final JDFAttributeMap mPartLink = new JDFAttributeMap("PartVersion", "v1");
+		final JDFAttributeMap mPartLink2 = new JDFAttributeMap("PartVersion", "v2");
+		JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		r.addPartition(EnumPartIDKey.PartVersion, "v1");
+		r.addPartition(EnumPartIDKey.PartVersion, "v2");
+		JDFResourceLink rl = n.getLink(r, null);
+		VJDFAttributeMap vm = new VJDFAttributeMap();
+		vm.add(mPartLink);
+		vm.add(mPartLink2);
+		rl.setPartMapVector(vm);
+		final VElement v = rl.getTargetVector(-1);
+		assertEquals("The target vector has two pv nodes", v.size(), 2);
+	}
+
+	/**
 	 * 
 	 */
 	public void testGetTargetVectorIdentical()
