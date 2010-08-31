@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,8 +105,7 @@ public class JDFnot extends JDFNodeTerm
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFnot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName)
+	public JDFnot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -119,8 +118,7 @@ public class JDFnot extends JDFNodeTerm
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFnot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName)
+	public JDFnot(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -134,7 +132,7 @@ public class JDFnot extends JDFNodeTerm
 	/**
 	 * Inverts the boolean state of a Term element (and, or, xor, not,
 	 * Evaluation, TestRef).<br>
-	 * To determine the state of Term tests Evaluations that “not” consists of,
+	 * To determine the state of Term tests Evaluations that "not" consists of,
 	 * it checks whether attribute map 'm' has a key, specified by
 	 * Evaluation/BasicPreflightTest/@Name. If 'm' has such key, it checks
 	 * whether its value fits the testlists specified for matching the
@@ -142,7 +140,7 @@ public class JDFnot extends JDFNodeTerm
 	 * 
 	 * @param m
 	 *            key-value pair attribute map
-	 * @return boolean - true, if boolean “not” expression evaluates to “true”
+	 * @return boolean - true, if boolean "not" expression evaluates to "true"
 	 */
 	@Override
 	public boolean fitsMap(JDFAttributeMap m)
@@ -162,19 +160,19 @@ public class JDFnot extends JDFNodeTerm
 	 * @param reportRoot
 	 *            the report to generate. Set to <code>null</code> if no report
 	 *            is requested.
-	 * @return boolean - true, if boolean “not” expression evaluates to “true”
+	 * @return boolean - true, if boolean "not" expression evaluates to "true"
 	 */
 	@Override
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
-		
+
 		VElement v = getTermVector(null);
 		int siz = v.size();
 		boolean b = false;
 		if (reportRootLocal != null)
 			reportRootLocal = reportRootLocal.appendElement("not");
-		
+
 		int count = 0;
 		for (int i = 0; i < siz; i++)
 		{
@@ -184,11 +182,9 @@ public class JDFnot extends JDFNodeTerm
 			if (reportRootLocal != null)
 				reportRootLocal.setAttribute("Value", b, null);
 		}
-		
+
 		if (reportRootLocal != null && count != 1)
-			reportRootLocal.setAttribute("SyntaxWarning",
-					"Warning: not element with more than one term, count="
-							+ String.valueOf(count));
+			reportRootLocal.setAttribute("SyntaxWarning", "Warning: not element with more than one term, count=" + String.valueOf(count));
 
 		return b;
 	}
@@ -196,20 +192,19 @@ public class JDFnot extends JDFNodeTerm
 	// //////////////////////////////////////////////////
 
 	@Override
-	public VString getInvalidElements(EnumValidationLevel level,
-			boolean bIgnorePrivate, int nMax)
+	public VString getInvalidElements(EnumValidationLevel level, boolean bIgnorePrivate, int nMax)
 	{
 		boolean bIgnorePrivateLocal = bIgnorePrivate;
-		
+
 		if (bIgnorePrivateLocal)
 			bIgnorePrivateLocal = false; // dummy to fool compiler
-		
+
 		VString v = super.getInvalidElements(level, bIgnorePrivateLocal, nMax);
 		if (v.size() >= nMax)
 			return v;
 
 		v.appendUnique(getInvalidTerms(1));
-		
+
 		return v;
 	}
 

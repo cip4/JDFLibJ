@@ -549,7 +549,28 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		rl.setPartMap(mPart);
 		final VElement v = rl.getTargetVector(0);
 		assertEquals("The target vector is the node with two leaves", v.size(), 1);
+	}
 
+	/**
+	 * Method testGetTarget * @throws Exception
+	 */
+	public void testGetTargetVectorPartVersion()
+	{
+		final JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		final JDFNode n = d.getJDFRoot();
+		final JDFAttributeMap mPart = new JDFAttributeMap("SignatureName", "Sig1");
+		final JDFAttributeMap mPartLink = new JDFAttributeMap("PartVersion", "En");
+		mPart.put("SheetName", "S1");
+		mPart.put("Side", "Front");
+		mPart.put("PartVersion", "En Fr");
+		final JDFResourceLink rl = n.getMatchingLink("ExposedMedia", EnumProcessUsage.Plate, 0);
+		JDFResource r = rl.getTarget();
+		rl.setPartMap(mPartLink);
+		r.getCreatePartition(mPart, null);
+		mPart.put("PartVersion", "En DK");
+		r.getCreatePartition(mPart, null);
+		final VElement v = rl.getTargetVector(-1);
+		assertEquals("The target vector has two pv nodes", v.size(), 2);
 	}
 
 	/**

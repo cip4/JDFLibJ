@@ -1741,7 +1741,7 @@ public class JDFResource extends JDFElement
 					final String sTmp = resourceElement.getAttribute_KElement(matchingKey, null, null);
 					if (sTmp != null) // found a matching key;
 					{
-						if (sTmp.equals(matchingValue))
+						if (JDFPart.matchesPart(matchingKey, sTmp, matchingValue))
 						{
 							hasMatchingAttribute = true;
 						}

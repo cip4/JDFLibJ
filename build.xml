@@ -29,7 +29,7 @@
 		<property name="dist.dir" value="./dist" />
 		<property name="doc.dir" value="${dist.dir}/doc" />
 		<property name="bin.dir" value="${dist.dir}/bin" />
-		<property name="build.debug" value="no" />
+		<property name="build.debug" value="yes" />
 		<property name="build.optimize" value="on" />
 		<property name="verbose" value="true" />
 
