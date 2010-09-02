@@ -144,16 +144,17 @@ public class HotFolderTest extends JDFTestCaseBase
 	public void testRestartMany() throws Exception
 	{
 		hf = new HotFolder(theHF, null, new MyListener(true));
+		int n0 = Thread.activeCount();
 		for (int i = 0; i < 10; i++)
 		{
-			assertEquals("Loop " + i, Thread.activeCount(), 3);
+			assertEquals("Loop " + i, Thread.activeCount(), n0);
 			hf.restart();
 		}
 		for (int i = 0; i < 3; i++)
 		{
 			Thread.sleep(1);
 			hf.stop();
-			assertEquals(Thread.activeCount(), 2);
+			assertEquals("Loop " + i, Thread.activeCount(), n0 - 1);
 		}
 	}
 
