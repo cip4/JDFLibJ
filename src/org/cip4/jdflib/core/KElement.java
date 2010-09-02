@@ -985,6 +985,17 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * fastest setAttribute with namespace- use only if you know exactly what you are doing
+	 * @param ns the namespace uri
+	 * @param key name of the attribute to set
+	 * @param value value of the attribute
+	 */
+	public void setAttributeNSRaw(String ns, final String key, final String value)
+	{
+		super.setAttributeNS(ns, key, value);
+	}
+
+	/**
 	 * Sets an element attribute
 	 * @param key the name of the attribute to set
 	 * @param value the value for the attribute

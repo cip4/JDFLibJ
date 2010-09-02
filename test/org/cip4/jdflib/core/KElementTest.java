@@ -2598,6 +2598,27 @@ public class KElementTest extends JDFTestCaseBase
 
 	/**
 	 * 
+	 *
+	 */
+	public void testSetMixedLevelNS()
+	{
+		XMLDoc xmlDoc = new XMLDoc("d", null);
+		KElement e = xmlDoc.getRoot();
+		e.setAttribute("a:a", "a1", "www.a.com");
+		e.setAttributeRaw("a:a", "a2");
+		e.setAttributeRaw("b:b", "b1");
+		e.setAttributeNSRaw("www.b.com", "b:b", "b2");
+		e.setAttributeRaw("xmlns:c", "www.c.com");
+		e.setAttributeRaw("c:c", "c1");
+		e.setAttributeNSRaw("www.c.com", "c:c", "c2");
+		String s = xmlDoc.write2String(2);
+		assertTrue(s.indexOf("a1") < 0);
+		assertFalse("calling ns and raw is still broken", s.indexOf("b1") < 0);
+		assertFalse("calling ns and raw is still broken", s.indexOf("c1") < 0);
+	}
+
+	/**
+	 * 
 	 */
 	public void testXMLNameSpace()
 	{

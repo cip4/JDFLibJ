@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,23 +81,23 @@ import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
-import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -114,12 +114,12 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFPhaseTime;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.devicecapability.JDFModule;
 import org.cip4.jdflib.resource.process.JDFComponent;
 import org.cip4.jdflib.resource.process.JDFContact;
@@ -639,7 +639,22 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFIntegerList cpi = rl.getCombinedProcessIndex();
 		assertTrue(cpi.contains(3));
 		assertFalse(cpi.contains(0));
+	}
 
+	/**
+	 * 
+	 */
+	public void testCombinedProcessIndexStar()
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setCombined(new VString("LayoutPreparation ConventionalPrinting foo ManualLabor", null));
+		final JDFResource r = n.addResource("Media", EnumUsage.Input);
+		final JDFResourceLink rl = n.getLink(r, null);
+		final JDFIntegerList cpi = rl.getCombinedProcessIndex();
+		assertTrue(cpi.contains(1));
+		assertTrue(cpi.contains(3));
+		assertFalse(cpi.contains(2));
+		assertFalse(cpi.contains(0));
 	}
 
 	/**

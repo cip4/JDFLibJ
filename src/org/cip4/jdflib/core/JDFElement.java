@@ -4187,18 +4187,6 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Method getChildrenCount.
-	 * 
-	 * @return int
-	 * @deprecated 060727 use numChildNodes(Node.ELEMENT_NODE);
-	 */
-	@Deprecated
-	public int getChildElementCount()
-	{
-		return numChildNodes(Node.ELEMENT_NODE);
-	}
-
-	/**
 	 * Method getChildElement
 	 * 
 	 * @param n Element index n (1 based)

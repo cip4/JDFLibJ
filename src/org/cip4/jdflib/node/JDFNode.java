@@ -138,6 +138,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFCustomerMessage;
@@ -148,12 +149,11 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFPartStatus;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDocUserData;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -169,10 +169,10 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.pool.JDFStatusPool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFBusinessInfo;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -2343,11 +2343,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				boolean bAddCPI = false;
 				final EnumType t = EnumType.getEnum(types.stringAt(i));
 				final String[] typeLinkNames = typeLinkNames(t);
-				if (typeLinkNames != null && ArrayUtils.contains(typeLinkNames, resName))
+				if (typeLinkNames != null && (ArrayUtils.contains(typeLinkNames, resName) || ArrayUtils.contains(typeLinkNames, JDFConstants.STAR)))
 				{
-					// if we already added a cpi, but this is an exchange
-					// resource, only set cpi for the last one
-					final int iPos = ArrayUtils.indexOf(typeLinkNames, resName);
+					// if we already added a cpi, but this is an exchange resource, only set cpi for the last one
+					int iPos = ArrayUtils.indexOf(typeLinkNames, resName);
+					if (iPos < 0)
+						iPos = ArrayUtils.indexOf(typeLinkNames, JDFConstants.STAR);
 					final VString typeInfo = StringUtil.tokenize(typeLinkInfo(t)[iPos], " ", false);
 					boolean bMatchUsage = false;
 					String inOut = null;

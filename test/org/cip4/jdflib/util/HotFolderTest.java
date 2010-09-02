@@ -146,7 +146,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		hf = new HotFolder(theHF, null, new MyListener(true));
 		for (int i = 0; i < 10; i++)
 		{
-			assertEquals(Thread.activeCount(), 3);
+			assertEquals("Loop " + i, Thread.activeCount(), 3);
 			hf.restart();
 		}
 		for (int i = 0; i < 3; i++)
