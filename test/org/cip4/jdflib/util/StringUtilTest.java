@@ -82,9 +82,9 @@ import java.util.Vector;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 
@@ -821,9 +821,17 @@ public class StringUtilTest extends JDFTestCaseBase
 	{
 		final String s = "a/b/c";
 		assertEquals(StringUtil.replaceToken(s, 0, "/", "A"), "A/b/c");
+		assertEquals(StringUtil.replaceToken(s, 0, "/", null), "b/c");
 		assertEquals(StringUtil.replaceToken(s, -1, "/", "A"), "a/b/A");
 		assertEquals(StringUtil.replaceToken(s, 1, "/", "A"), "a/A/c");
+		assertEquals(StringUtil.replaceToken(s, 1, "/", null), "a/c");
 		assertEquals(StringUtil.replaceToken(s, -5, "/", "A"), "a/b/c");
+		final String s2 = "//a/b/c";
+		assertEquals(StringUtil.replaceToken(s2, 0, "/", "A"), "//A/b/c");
+		assertEquals(StringUtil.replaceToken(s2, 2, "/", null), "//a/b");
+		final String s3 = "a";
+		assertEquals(StringUtil.replaceToken(s3, 0, "/", "A"), "A");
+		assertEquals(StringUtil.replaceToken(s3, 0, "/", null), "");
 	}
 
 	/**

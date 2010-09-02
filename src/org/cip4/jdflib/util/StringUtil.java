@@ -678,11 +678,30 @@ public class StringUtil
 			index += v.size();
 		if (index >= v.size() || index < 0)
 			return strWork;
+		VString v2 = tokenize(strWork, delim, true);
+		int n = 0;
+		int i = 0;
+		for (String token : v2)
+		{
+			if (!delim.equals(token))
+			{
+				if (n == index)
+					break;
+				n++;
+			}
+			i++;
+		}
 		if (newToken == null)
-			v.remove(index);
+		{
+			v2.remove(i);
+			if (i > 0)
+				v2.remove(i - 1);
+			else if (i < v2.size() - 1)
+				v2.remove(i);
+		}
 		else
-			v.set(index, newToken);
-		return setvString(v, delim, null, null);
+			v2.set(i, newToken);
+		return setvString(v2, null, null, null);
 
 	}
 
