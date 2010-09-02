@@ -2346,9 +2346,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				if (typeLinkNames != null && (ArrayUtils.contains(typeLinkNames, resName) || ArrayUtils.contains(typeLinkNames, JDFConstants.STAR)))
 				{
 					// if we already added a cpi, but this is an exchange resource, only set cpi for the last one
-					int iPos = ArrayUtils.indexOf(typeLinkNames, resName);
-					if (iPos < 0)
-						iPos = ArrayUtils.indexOf(typeLinkNames, JDFConstants.STAR);
+					int iPos = getResPos(resName, typeLinkNames);
 					final VString typeInfo = StringUtil.tokenize(typeLinkInfo(t)[iPos], " ", false);
 					boolean bMatchUsage = false;
 					String inOut = null;
@@ -2388,6 +2386,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			}
 		}
 
+		private static int getResPos(final String resName, final String[] typeLinkNames)
+		{
+			int iPos = ArrayUtils.indexOf(typeLinkNames, resName);
+			if (iPos < 0)
+				iPos = ArrayUtils.indexOf(typeLinkNames, JDFConstants.STAR);
+			return iPos;
+		}
+
 		/**
 		 * remove any duplicate combinedprocessusages
 		 * 
@@ -2403,7 +2409,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		 */
 		protected static boolean cleanCombinedProcessIndex(final EnumUsage usage, final VString types, final JDFIntegerList cpi, final String resName, final int lastGot, final String[] typeLinkNamesLast, boolean bAddCPI, final VString typeInfo)
 		{
-			final int iPosLast = ArrayUtils.indexOf(typeLinkNamesLast, resName);
+			int iPosLast = getResPos(resName, typeLinkNamesLast);
 			// the i* i?pu ... list of this
 			// the o* i?pu ... list of the previous type
 			final VString typeInfoLast = StringUtil.tokenize(typeLinkInfo(EnumType.getEnum(types.stringAt(lastGot)))[iPosLast], " ", false);
@@ -2426,14 +2432,12 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				{
 					if (!bIn && typeInfo.stringAt(ii).startsWith("i"))
 					{
-						bIn = true; // after finding a matching output in last,
-						// we find an input here
+						bIn = true; // after finding a matching output in last, we find an input here
 					}
 
 					if (!bOut && typeInfo.stringAt(ii).startsWith("o"))
 					{
-						bOut = true; // after finding a matching output in last,
-						// we find an input here
+						bOut = true; // after finding a matching output in last, we find an input here
 					}
 				}
 
