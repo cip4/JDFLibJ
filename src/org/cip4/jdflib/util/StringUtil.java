@@ -213,7 +213,9 @@ public class StringUtil
 			"It's got a cop motor, a 440 cubic inch plant, it's got cop tires, cop suspensions, cop shocks. It's a model made before catalytic converters so it'll run good on regular gas. What do you say, is it the new Bluesmobile or what?",
 			"Yes. The plans were on display in the bottom of a locked filing cabinet, stuck in a disused lavatory with a sign on the door saying 'Beware of the Leopard'",
 			"It's 106 miles to Chicago, we got a full tank of gas, half a pack of cigarettes, it's dark, and we're wearing sunglasses. ",
-			"Ich bin der Geist, der stets verneint! Und das mit Recht; denn alles, was entsteht,  Ist wert, daß es zugrunde geht;  Drum besser wär's, daß nichts entstünde.  So ist denn alles, was ihr Sünde,  Zerstörung, kurz das Böse nennt,  Mein eigentliches Element." };
+			"Ich bin der Geist, der stets verneint! Und das mit Recht; denn alles, was entsteht,  Ist wert, daß es zugrunde geht;  Drum besser wär's, daß nichts entstünde.  So ist denn alles, was ihr Sünde,  Zerstörung, kurz das Böse nennt,  Mein eigentliches Element.",
+			"Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt.",
+			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet." };
 
 	/**
 	 * returns a random string for testing fun stuff - similar to unix fortune but biased towards monty python or the hitchhikers guide to the galaxy

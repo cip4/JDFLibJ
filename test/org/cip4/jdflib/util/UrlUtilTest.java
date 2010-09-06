@@ -162,6 +162,29 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test the standard url escaping routines
+	 */
+	public void testEscape()
+	{
+		assertNull(UrlUtil.escape(null, true));
+		assertNull(UrlUtil.escape(null, false));
+		assertEquals("%20", UrlUtil.escape(" ", false));
+		assertEquals("foo%20bar", UrlUtil.escape("foo bar", true));
+		assertEquals("%e2%82%ac", UrlUtil.escape("€", true));
+		assertEquals("€", UrlUtil.escape("€", false));
+	}
+
+	/**
+	 * test the standard url escaping routines
+	 */
+	public void testAddParameter()
+	{
+		assertEquals("a?b=c", UrlUtil.addParameter("a", "b", "c"));
+		assertEquals("a?b=c&bb=cc", UrlUtil.addParameter("a?b=c", "bb", "cc"));
+		assertEquals("a?b=c%20d", UrlUtil.addParameter("a", "b", "c d"));
+	}
+
+	/**
 	 * 
 	 */
 	public void testWriteToURL()

@@ -138,7 +138,6 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFCustomerMessage;
@@ -149,11 +148,12 @@ import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFPartStatus;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDocUserData;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -169,10 +169,10 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.pool.JDFStatusPool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
-import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFBusinessInfo;
 import org.cip4.jdflib.resource.process.JDFCompany;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -2320,8 +2320,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * Aug 10, 2009
 	 */
 	// **************************************** Constructors
-	// ****************************************
-	// NEWWWW
 	public static class CombinedProcessIndexHelper
 	{
 		/**

@@ -692,15 +692,7 @@ public class UrlUtil
 			s = StringUtil.replaceChar(s, '\\', "/", 0);
 		}
 		s = UrlUtil.cleanDots(s);
-		if (bEscape128)
-		{
-			s = new String(StringUtil.setUTF8String(s));
-			s = StringUtil.escape(s, m_URIEscape, "%", 16, 2, 0x21, 127);
-		}
-		else
-		{
-			s = StringUtil.escape(s, m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
-		}
+		s = escape(s, bEscape128);
 		// if(s.length()>2 && s.charAt(1)==':' && File.separator.equals("\\"))
 		// s=s.charAt(0)+s.substring(2);
 		if (s.charAt(0) != '/')
@@ -808,6 +800,46 @@ public class UrlUtil
 			return null;
 		}
 		return url.toExternalForm();
+	}
+
+	/**
+	 * adds a parameter to a given url using either ? or &
+	 * @param baseUrl the base url - already escaped and ready to go
+	 * @param key the key to add - NOT escaped
+	 * @param val the value to add - NOT escaped
+	 * @return the escaped new url
+	 */
+	public static String addParameter(String baseUrl, String key, String val)
+	{
+		int posQMark = baseUrl.indexOf("?");
+		String flag = posQMark >= 0 ? "&" : "?";
+		StringBuffer buf = new StringBuffer(baseUrl);
+		key = escape(key, true);
+		val = escape(val, true);
+		buf.append(flag).append(key).append("=").append(val);
+		return buf.toString();
+	}
+
+	/**
+	 * standard url escaping
+	 * @param toEscape the string to escape
+	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is 
+	 * @return
+	 */
+	public static String escape(String toEscape, boolean bEscape128)
+	{
+		if (toEscape == null)
+			return null;
+		if (bEscape128)
+		{
+			toEscape = new String(StringUtil.setUTF8String(toEscape));
+			toEscape = StringUtil.escape(toEscape, m_URIEscape, "%", 16, 2, 0x21, 127);
+		}
+		else
+		{
+			toEscape = StringUtil.escape(toEscape, m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
+		}
+		return toEscape;
 	}
 
 	/**
