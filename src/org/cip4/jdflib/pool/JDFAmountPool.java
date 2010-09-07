@@ -230,7 +230,7 @@ public class JDFAmountPool extends JDFAutoAmountPool
 		}
 
 		/**
-		 * returns the attribute occurence in PartAmount, or the default in the ResourceLink
+		 * returns the attribute occurrence in PartAmount, or the default in the ResourceLink
 		 * 
 		 * @param poolParent the parent pool to work on
 		 * @param attrib the attribute name

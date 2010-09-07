@@ -163,7 +163,7 @@ public class VJDFAttributeMap
 
 	/**
 	 * @param sepMap the separator between maps
-	 * @param sepEntry the saparator between map entries
+	 * @param sepEntry the separator between map entries
 	 * @return the string representation
 	 */
 	public String showKeys(final String sepMap, final String sepEntry)
@@ -353,7 +353,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param vec the Vector with JDFAttributeMap elements
 	 */
-	public void setVector(final Vector vec)
+	public void setVector(final Vector<JDFAttributeMap> vec)
 	{
 		m_vec = vec;
 	}
@@ -471,7 +471,7 @@ public class VJDFAttributeMap
 	 * 
 	 * @param set
 	 */
-	public void removeKeys(final Collection set)
+	public void removeKeys(final Collection<String> set)
 	{
 		for (int i = size() - 1; i >= 0; i--)
 		{
@@ -544,7 +544,7 @@ public class VJDFAttributeMap
 	}
 
 	/**
-	 * Tests wether this has a entry with the same key and value entries not more nor less keys
+	 * Tests whether this has a entry with the same key and value entries not more nor less keys
 	 * 
 	 * @param attmap the given JDFAttributeMap element
 	 * @deprecated use contains
@@ -579,7 +579,7 @@ public class VJDFAttributeMap
 				// break. If bEquals is still true after all checks, we found
 				// the map
 				bEquals = true;
-				final Set mapSet = map.keySet();
+				final Set<String> mapSet = map.keySet();
 				final Iterator<String> it = mapSet.iterator();
 				while (it.hasNext())
 				{
@@ -619,7 +619,7 @@ public class VJDFAttributeMap
 	/**
 	 * 
 	 * @param vKeys
-	 * @deprecated use redceMap
+	 * @deprecated use reduceMap
 	 */
 	@SuppressWarnings("unchecked")
 	@Deprecated
@@ -663,6 +663,24 @@ public class VJDFAttributeMap
 		}
 		v.unify();
 		m_vec = v.getVector();
+	}
+
+	/**
+	 * reduce each JDFAttributeMap in <code>this</code> by keySet
+	 * 
+	 * @param keySet
+	 */
+	public VString getKeys()
+	{
+		final VString v = new VString();
+
+		for (JDFAttributeMap map : m_vec)
+		{
+			v.addAll(map.getKeys());
+
+		}
+		v.unify();
+		return v;
 	}
 
 	/**
