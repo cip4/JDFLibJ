@@ -821,6 +821,26 @@ public class UrlUtil
 	}
 
 	/**
+	 * adds a path to a given url , keeping the parameters
+	 * @param baseUrl the base url - already escaped and ready to go
+	 * @param path the path to add
+	 * @return the escaped new url
+	 */
+	public static String addPath(String baseUrl, String path)
+	{
+		if (path == null)
+			return baseUrl;
+		if (baseUrl == null)
+			return path;
+		String request = StringUtil.token(baseUrl, 0, "?");
+		request = StringUtil.addToken(request, "/", path);
+		String params = StringUtil.token(baseUrl, 1, "?");
+		if (params != null)
+			request += "?" + params;
+		return request;
+	}
+
+	/**
 	 * standard url escaping
 	 * @param toEscape the string to escape
 	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is 

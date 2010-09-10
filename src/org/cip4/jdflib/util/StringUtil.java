@@ -665,6 +665,26 @@ public class StringUtil
 	/**
 	 * replace a token in a string
 	 * @param strWork the String to work on
+	 * @param delim the delimiter
+	 * @param newToken the new token, if null said token is removed
+	 * @return the modified string
+	 */
+	public static String addToken(String strWork, String delim, String newToken)
+	{
+		if (strWork == null)
+			return newToken;
+		if (newToken == null)
+			return strWork;
+		while (strWork.endsWith(delim))
+			strWork = leftStr(strWork, -delim.length());
+		while (newToken.startsWith(delim))
+			newToken = rightStr(newToken, -delim.length());
+		return strWork + delim + newToken;
+	}
+
+	/**
+	 * replace a token in a string
+	 * @param strWork the String to work on
 	 * @param index index of the token to replace
 	 * if<0 return from end (e.g. -1 is the last token)
 	 * @param delim the delimiter

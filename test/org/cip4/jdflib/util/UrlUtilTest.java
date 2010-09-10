@@ -175,13 +175,23 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * test the standard url escaping routines
+	 * test adding a parameter
 	 */
 	public void testAddParameter()
 	{
 		assertEquals("a?b=c", UrlUtil.addParameter("a", "b", "c"));
 		assertEquals("a?b=c&bb=cc", UrlUtil.addParameter("a?b=c", "bb", "cc"));
 		assertEquals("a?b=c%20d", UrlUtil.addParameter("a", "b", "c d"));
+	}
+
+	/**
+	 * test adding a path to a url
+	 */
+	public void testAddPath()
+	{
+		assertEquals("A/a", UrlUtil.addPath("A", "a"));
+		assertEquals("A/a", UrlUtil.addPath("A/", "/a"));
+		assertEquals("A/a?b=c", UrlUtil.addPath("A?b=c", "a"));
 	}
 
 	/**

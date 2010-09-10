@@ -837,6 +837,20 @@ public class StringUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testAddToken()
+	{
+		assertNull(StringUtil.addToken(null, "/", null));
+		assertEquals(StringUtil.addToken("a", "/", "b"), "a/b");
+		assertEquals(StringUtil.addToken("a/", "/", "b"), "a/b");
+		assertEquals(StringUtil.addToken("a", "/", "/b"), "a/b");
+		assertEquals(StringUtil.addToken("a/", "/", "/b"), "a/b");
+		assertEquals(StringUtil.addToken("a/", "/", "//b"), "a/b");
+		assertEquals(StringUtil.addToken("//a/", "/", "//b"), "//a/b");
+	}
+
+	/**
+	 * 
+	 */
 	public void testTokenizeDelim()
 	{
 		final String s = "http://aa/b?c";
@@ -992,9 +1006,4 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
-
-	// /////////////////////////////////////////////////////////////////////////
-
-	// /////////////////////////////////////////////////////////////////////////
-
 }

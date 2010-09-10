@@ -73,12 +73,15 @@ package org.cip4.jdflib.jmf;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
+import org.cip4.jdflib.resource.JDFMilestone;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 
 /**
@@ -305,6 +308,24 @@ public class JMFBuilder
 	public JDFJMF buildKnownMessagesQuery()
 	{
 		return createQuery(JDFMessage.EnumType.KnownMessages).getJMFRoot();
+	}
+
+	/**
+	 * build a JMF KnownSubscriptions query
+	 * @param milestoneType the milestone type
+	 * @param jobID the jobID  
+	 * @return the message
+	 */
+	public JDFJMF buildMilestone(String milestoneType, String jobID)
+	{
+		JDFJMF jmf = createJMF(EnumFamily.Signal, JDFMessage.EnumType.Notification);
+		JDFSignal s = jmf.getSignal(0);
+		JDFNotification n = s.appendNotification();
+		n.setClass(EnumClass.Event);
+		n.setJobID(jobID);
+		JDFMilestone ms = n.appendMilestone();
+		ms.setMilestoneType(milestoneType);
+		return jmf;
 	}
 
 	/**
