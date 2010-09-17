@@ -84,17 +84,11 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Vector;
 
-import javax.mail.BodyPart;
-
-import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ParentNode;
 import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.util.ContainerUtil;
-import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -104,7 +98,7 @@ import org.w3c.dom.Node;
  * @author prosirai
  * 
  */
-public class DocumentJDFImpl extends DocumentImpl
+public class DocumentJDFImpl extends DocumentXMLImpl
 {
 
 	/**
@@ -961,7 +955,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * skip initialization when creating a new element
 	 */
 	public boolean bInitOnCreate;
-	private boolean ignoreNSDefault = false;
+	private final boolean ignoreNSDefault = false;
 	private boolean strictNSCheck = bStaticStrictNSCheck;
 	private XMLDocUserData myXMLUserDat;
 
@@ -984,6 +978,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	/**
 	 * @return the strictNSCheck
 	 */
+	@Override
 	public boolean isStrictNSCheck()
 	{
 		return strictNSCheck;
@@ -992,6 +987,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	/**
 	 * @param strictNSCheck the strictNSCheck to set
 	 */
+	@Override
 	public void setStrictNSCheck(final boolean strictNSCheck)
 	{
 		this.strictNSCheck = strictNSCheck;
@@ -1001,106 +997,25 @@ public class DocumentJDFImpl extends DocumentImpl
 
 	private Node m_ParentNode = null;
 
-	// used mainly for memory debugging purposes
-	private long initialMem;
-	boolean bGlobalDirtyFlag = false;
-	boolean bGlobalDirtyPolicy = true;
 	/**
 	 * the original file name if an element was parsed, else null
 	 */
 	public String m_OriginalFileName = null;
-	/**
-	 * the xml output of the schema validation
-	 */
-	public XMLDoc m_validationResult = null;
-	/**
-	 * the mime bodypart that this document was parsed from
-	 */
-	public BodyPart m_Bodypart = null;
-	private final HashMap<String, String> nsMap;
 
 	private static final String jdfNSURI = JDFElement.getSchemaURL();
-
-	/**
-	 * rough guestimate of the memory used by this if called after parsing
-	 * 
-	 * @return the difference of memory used when calling compared to construction time
-	 */
-	public long getDocMemoryUsed()
-	{
-		final Runtime rt = Runtime.getRuntime();
-		final long mem = rt.totalMemory() - rt.freeMemory();
-		if (mem < initialMem)
-		{
-			initialMem = mem;
-		}
-		return mem - initialMem;
-	}
 
 	/**
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#clone()
 	 */
 	@Override
-	public Object clone()
+	public DocumentJDFImpl clone()
 	{
-		DocumentJDFImpl clon;
-		try
-		{
-			clon = (DocumentJDFImpl) super.clone();
-		}
-		catch (final CloneNotSupportedException x)
-		{
-			clon = new DocumentJDFImpl();
-		}
-		clon.m_Bodypart = m_Bodypart;
-		clon.m_OriginalFileName = m_OriginalFileName;
-		clon.docElement = ((KElement) docElement).cloneRoot(new XMLDoc(clon));
-		clon.ownerDocument = clon;
-		clon.firstChild = clon.docElement;
+		DocumentJDFImpl clon = (DocumentJDFImpl) super.clone();
+		clon.myXMLUserDat = new XMLDocUserData(this);
 		clon.bInitOnCreate = bInitOnCreate;
 		clon.bKElementOnly = bKElementOnly;
-		clon.myXMLUserDat = new XMLDocUserData(this);
-		clon.nsMap.clear();
-		clon.setNSMap(this);
-
-		if (userData != null)
-			userData.clear(); // otherwise, clon is indefinitely retained in userdata of the original document and we have a memory leak problem....
-		if (clon.userData != null)
-			clon.userData.clear();
 		return clon;
 	}
-
-	/**
-	 * @param documentJDFImpl
-	 */
-	void setNSMap(DocumentJDFImpl documentJDFImpl)
-	{
-		if (documentJDFImpl == null)
-			return;
-
-		nsMap.putAll(documentJDFImpl.nsMap);
-		Element e = getDocumentElement();
-		if (e != null)
-		{
-			Vector<String> keys = ContainerUtil.getKeyVector(nsMap);
-			if (keys != null)
-			{
-				for (int i = 0; i < keys.size(); i++)
-				{
-					String prefix = keys.get(i);
-					setRootNSAttribute(prefix, nsMap.get(prefix));
-				}
-			}
-		}
-	}
-
-	// public static String getPackage(String nodeName)
-	// {
-	// synchronized (sm_PackageNames)
-	// {
-	// return (String) sm_PackageNames.get(nodeName);
-	// }
-	// }
 
 	/**
 	 * register new custom class in the factory
@@ -1124,6 +1039,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param qualifiedName
 	 * @return the new {@link KElement}
 	 */
+	@Override
 	KElement factoryCreate(final ParentNode parent, final String qualifiedName)
 	{
 		setParentNode(parent); // set the parent in the factory for
@@ -1137,6 +1053,7 @@ public class DocumentJDFImpl extends DocumentImpl
 	 * @param qualifiedName
 	 * @return
 	 */
+	@Override
 	KElement factoryCreate(final ParentNode parent, final String namespaceURI, final String qualifiedName)
 	{
 		setParentNode(parent); // set the parent in the factory for
@@ -1152,9 +1069,6 @@ public class DocumentJDFImpl extends DocumentImpl
 		super();
 		getData();
 
-		final Runtime rt = Runtime.getRuntime();
-		initialMem = rt.totalMemory() - rt.freeMemory();
-		nsMap = new HashMap<String, String>();
 		bInitOnCreate = true;
 		myXMLUserDat = new XMLDocUserData(this);
 	}
@@ -1168,34 +1082,6 @@ public class DocumentJDFImpl extends DocumentImpl
 		if (data == null)
 			data = new DocumentData();
 		return data;
-	}
-
-	/**
-	 * Factory method; creates an <code>Element</code> having this <code>Document</code> as its OwnerDoc.
-	 * 
-	 * @param qualifiedName The name of the element type to instantiate. For XML, this is case-sensitive.
-	 * 
-	 */
-	@Override
-	public Element createElement(final String qualifiedName)
-	{
-		final String namespaceURI = null;
-		final String localPart = KElement.xmlnsLocalName(qualifiedName);
-
-		return createElementNS(namespaceURI, qualifiedName, localPart);
-	}
-
-	/**
-	 * @see org.apache.xerces.dom.CoreDocumentImpl#createElementNS(java.lang.String, java.lang.String)
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @return
-	*/
-	@Override
-	public Element createElementNS(final String namespaceURI, final String qualifiedName)
-	{
-		final String localPart = KElement.xmlnsLocalName(qualifiedName);
-		return createElementNS(namespaceURI, qualifiedName, localPart);
 	}
 
 	/**
@@ -1610,64 +1496,10 @@ public class DocumentJDFImpl extends DocumentImpl
 	/**
 	 * @return the setIgnoreNSDefault; if true no namespaces are collected 
 	 */
+	@Override
 	public boolean isIgnoreNSDefault()
 	{
 		return ignoreNSDefault;
-	}
-
-	/**
-	 * if true no namespaces are heuristically gathered
-	 * 
-	 * @param _setIgnoreNSDefault the setIgnoreNSDefault to set
-	 */
-	public void setIgnoreNSDefault(final boolean _setIgnoreNSDefault)
-	{
-		this.ignoreNSDefault = _setIgnoreNSDefault;
-	}
-
-	/**
-	 * @param prefix
-	 * @return
-	 */
-	public String getNamespaceURIFromPrefix(String prefix)
-	{
-		if (ignoreNSDefault)
-			return null;
-		if (prefix == null)
-			prefix = JDFConstants.COLON;
-		return nsMap.get(prefix);
-	}
-
-	/**
-	 * @param prefix
-	 * @param strNamespaceURI
-	 */
-	public void setNamespaceURIFromPrefix(String prefix, String strNamespaceURI)
-	{
-		if (StringUtil.getNonEmpty(prefix) == null)
-			prefix = JDFConstants.COLON;
-		String old = nsMap.get(prefix);
-		if (old == null)
-		{
-			setRootNSAttribute(prefix, strNamespaceURI);
-			nsMap.put(prefix, strNamespaceURI);
-		}
-	}
-
-	/**
-	 * @param prefix
-	 * @param strNamespaceURI
-	 */
-	private void setRootNSAttribute(String prefix, String strNamespaceURI)
-	{
-		String qualifiedName = "xmlns";
-		if (!JDFConstants.COLON.equals(prefix))
-			qualifiedName += JDFConstants.COLON + prefix;
-		KElement element = (KElement) getDocumentElement();
-		if (element != null)
-		{
-			element.setAttributeNS(AttributeName.XMLNSURI, qualifiedName, strNamespaceURI);
-		}
 	}
 
 	/**

@@ -74,15 +74,15 @@ package org.cip4.jdflib.devicecapability;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFor;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 public class JDFTestTest extends JDFTestCaseBase
 {

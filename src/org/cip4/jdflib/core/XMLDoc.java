@@ -94,7 +94,6 @@ import javax.mail.Multipart;
 import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
-import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.HashUtil;
@@ -134,7 +133,7 @@ import org.w3c.dom.traversal.TreeWalker;
 public class XMLDoc
 {
 
-	protected DocumentJDFImpl m_doc;
+	protected DocumentXMLImpl m_doc;
 
 	// **************************************** Constructors
 	// ****************************************
@@ -143,9 +142,7 @@ public class XMLDoc
 	 */
 	public XMLDoc()
 	{
-		m_doc = new DocumentJDFImpl();
-		m_doc.bKElementOnly = true;
-		getCreateXMLDocUserData();
+		m_doc = getImpl();
 	}
 
 	/**
@@ -195,7 +192,6 @@ public class XMLDoc
 		else if (document instanceof XMLDoc)
 		{
 			m_doc = ((XMLDoc) document).getMemberDocument();
-			getCreateXMLDocUserData();
 			if (m_doc == null)
 			{
 				final String s = document.getClass().toString();
@@ -204,8 +200,7 @@ public class XMLDoc
 		}
 		try
 		{
-			m_doc = (DocumentJDFImpl) document;
-			getCreateXMLDocUserData();
+			m_doc = (DocumentXMLImpl) document;
 		}
 		catch (final Exception e)
 		{
@@ -219,14 +214,13 @@ public class XMLDoc
 	 * 
 	 * @param document
 	 */
-	public XMLDoc(final DocumentJDFImpl document)
+	public XMLDoc(final DocumentXMLImpl document)
 	{
 		if (document == null)
 		{
-			throw new JDFException("XMLDoc(DocumentJDFImpl) null input Document");
+			throw new JDFException("XMLDoc(DocumentXMLImpl) null input Document");
 		}
 		m_doc = document;
-		getCreateXMLDocUserData();
 	}
 
 	/**
@@ -249,28 +243,13 @@ public class XMLDoc
 	 */
 	public XMLDoc(final String strDocType, final String namespaceURI)
 	{
-		m_doc = new DocumentJDFImpl();
-		if (namespaceURI == null)
-		{
-			String rootNode = KElement.xmlnsLocalName(strDocType);
-			m_doc.bKElementOnly = !(ElementName.JDF.equals(rootNode) || ElementName.JMF.equals(rootNode) || XJDF20.rootName.equals(rootNode));
-		}
-		m_doc.bInitOnCreate = true;
+		m_doc = getImpl();
 		setRoot(strDocType, namespaceURI);
-		getCreateXMLDocUserData();
 	}
 
-	/**
-	 * 
-	 * @param strDocType
-	 * @return KElement
-	 * @deprecated use setRoot(String strDocType, String namespaceURI)
-	 * 
-	 */
-	@Deprecated
-	public KElement setRoot(final String strDocType)
+	protected DocumentXMLImpl getImpl()
 	{
-		return setRoot(strDocType, JDFElement.getSchemaURL());
+		return new DocumentXMLImpl();
 	}
 
 	// **************************************** Methods
@@ -286,19 +265,14 @@ public class XMLDoc
 	 */
 	public KElement setRoot(final String strDocType, final String namespaceURI)
 	{
-		KElement root = (JDFElement) m_doc.getDocumentElement();
+		KElement root = (KElement) m_doc.getDocumentElement();
 
 		if (root != null)
 		{
 			throw new JDFException("XMLDoc.setRoot:  root already exists: ");
 		}
 
-		// create a new document root element
-		root = m_doc.factoryCreate(root, namespaceURI, strDocType);
-		if (root != null)
-		{
-			appendChild(root);
-		}
+		root = (KElement) appendChild(m_doc.createElementNS(namespaceURI, strDocType));
 		return root;
 	}
 
@@ -307,7 +281,7 @@ public class XMLDoc
 	 * 
 	 * @return the MemberDocument
 	 */
-	public DocumentJDFImpl getMemberDocument()
+	public DocumentXMLImpl getMemberDocument()
 	{
 		return this.m_doc;
 	}
@@ -344,7 +318,7 @@ public class XMLDoc
 	 */
 	public String write2String(final int indent)
 	{
-		String strResult = JDFConstants.EMPTYSTRING;
+		String strResult = JDFCoreConstants.EMPTYSTRING;
 		ByteArrayOutputStream outStream = null;
 
 		try
@@ -635,7 +609,7 @@ public class XMLDoc
 	}
 
 	/**
-	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace JDFConstants.NONAMESPACE
+	 * createElement create a JDFElement that floats in nirvana. This must be appended to a node with appendChild (created in namespace JDFCoreConstants.NONAMESPACE
 	 * (DOM Level 2)).<br>
 	 * Another way would be to use KElement.appendElement(String elementName, String nameSpaceURI)
 	 * 
@@ -650,12 +624,6 @@ public class XMLDoc
 		if (m_doc != null)
 		{
 			elem = m_doc.createElement(elementName);
-		}
-
-		if (elem instanceof KElement)
-		{
-			if (m_doc.bInitOnCreate)
-				((KElement) elem).init();
 		}
 
 		return elem;
@@ -733,7 +701,7 @@ public class XMLDoc
 	}
 
 	/**
-	 * createAttribute in namespace JDFConstants.NONAMESPACE (DOM Level 2)
+	 * createAttribute in namespace JDFCoreConstants.NONAMESPACE (DOM Level 2)
 	 * 
 	 * @param name attribute name TODO fix handling of namespaces
 	 * @return Attr
@@ -754,11 +722,11 @@ public class XMLDoc
 		{
 			if (name.startsWith("xsi:"))
 			{
-				a = m_doc.createAttributeNS(AttributeName.XSIURI, name);
+				a = m_doc.createAttributeNS(JDFCoreConstants.XSIURI, name);
 			}
 			else if (name.startsWith("xmlns:"))
 			{
-				a = m_doc.createAttributeNS(AttributeName.XMLNSURI, name);
+				a = m_doc.createAttributeNS(JDFCoreConstants.XMLNSURI, name);
 			}
 			else
 			{
@@ -783,7 +751,7 @@ public class XMLDoc
 	/**
 	 * return a NodeList of all elements having the specified tagname
 	 * 
-	 * @param tagname tag name of the elements to find (JDFConstants.star for all elements)
+	 * @param tagname tag name of the elements to find (JDFCoreConstants.star for all elements)
 	 * 
 	 * @return NodeList
 	 */
@@ -1353,89 +1321,9 @@ public class XMLDoc
 		final XMLDoc clon = new XMLDoc();
 		if (m_doc != null)
 		{
-			clon.m_doc = (DocumentJDFImpl) m_doc.clone();
+			clon.m_doc = m_doc.clone();
 		}
 		return clon;
-	}
-
-	/**
-	 * Method getXMLDocUserData - get the associated XMLDocUserData
-	 * 
-	 * @return XMLDocUserData of this object
-	 */
-	protected XMLDocUserData getXMLDocUserData()
-	{
-		return m_doc.getMyUserData();
-	}
-
-	/**
-	 * does the owner document of this have an associated XMLDocUserData
-	 * 
-	 * @return true if XMLDocUserData of this exists
-	 */
-	protected boolean hasXMLDocUserData()
-	{
-		return m_doc.getMyUserData() != null;
-	}
-
-	/**
-	 * get/create the associated XMLDocUserData - it is always there!
-	 * 
-	 * @return the XMLDocUserData of this
-	 */
-	public XMLDocUserData getCreateXMLDocUserData()
-	{
-		return m_doc.getMyUserData();
-	}
-
-	/**
-	 * delete the XMLDocUserData structure
-	 * 
-	 */
-	protected void deleteUserData()
-	{
-		final XMLDocUserData userData = (XMLDocUserData) m_doc.getUserData();
-		if (userData != null)
-		{
-			// delete (userData); hopefully the garbage collector will do his
-			// stuff
-			m_doc.setUserData(null);
-		}
-	}
-
-	/**
-	 * get a vector of all IDs of elements that are dirty
-	 * 
-	 * @return VString - the vector of element IDs
-	 */
-	public VString getDirtyIDs()
-	{
-		final XMLDocUserData xmlUserData = getXMLDocUserData();
-		if (xmlUserData != null)
-		{
-			return xmlUserData.getDirtyIDs();
-		}
-		return null;
-	}
-
-	/**
-	 * clear the vector of all IDs of elements that are dirty
-	 */
-	public void clearDirtyIDs()
-	{
-		getCreateXMLDocUserData().clearDirtyIDs();
-	}
-
-	/**
-	 * is the node with ID dirty?
-	 * 
-	 * @param strID id the id to be checked
-	 * @return boolean - true if the node with ID=id is dirty
-	 */
-	public boolean isDirty(final String strID)
-	{
-		final XMLDocUserData docUserData = getXMLDocUserData();
-		return docUserData == null ? false : docUserData.isDirty(strID);
 	}
 
 	/**
@@ -1459,7 +1347,7 @@ public class XMLDoc
 	 */
 	public String toXML()
 	{
-		String strXML = JDFConstants.EMPTYSTRING;
+		String strXML = JDFCoreConstants.EMPTYSTRING;
 		try
 		{
 			final StringWriter osw = new StringWriter();
@@ -1487,13 +1375,9 @@ public class XMLDoc
 		return strXML;
 	}
 
-	protected void setMemberDoc(final DocumentJDFImpl myDoc)
+	protected void setMemberDoc(final DocumentXMLImpl myDoc)
 	{
 		m_doc = myDoc;
-		if (m_doc != null)
-		{
-			getCreateXMLDocUserData();
-		}
 	}
 
 	/**
@@ -1524,7 +1408,7 @@ public class XMLDoc
 			{
 				return null;
 			}
-			final JDFParser parser = new JDFParser();
+			final XMLParser parser = getXMLParser();
 
 			parser.parseStream(inStream);
 			try
@@ -1540,6 +1424,11 @@ public class XMLDoc
 
 		return docResponse;
 
+	}
+
+	protected XMLParser getXMLParser()
+	{
+		return new XMLParser();
 	}
 
 	/**
@@ -1591,17 +1480,6 @@ public class XMLDoc
 		}
 
 		return null;
-	}
-
-	/**
-	 * register new custom class in the factory
-	 * 
-	 * @param strElement local name
-	 * @param packagepath package path
-	 */
-	public static void registerCustomClass(final String strElement, final String packagepath)
-	{
-		DocumentJDFImpl.registerCustomClass(strElement, packagepath);
 	}
 
 	/**
@@ -1666,14 +1544,6 @@ public class XMLDoc
 	}
 
 	/**
-	 * @return Returns the m_OriginalFileName.
-	 */
-	public XMLDoc getValidationResult()
-	{
-		return m_doc.m_validationResult;
-	}
-
-	/**
 	 * @param nsURI the namespace uri to get the schema location for
 	 * @return String that corresponds to the schema, null if no schemalocation is defined for nsURI
 	 */
@@ -1684,7 +1554,7 @@ public class XMLDoc
 		{
 			return null;
 		}
-		String schemaloc = root.getAttribute(AttributeName.SCHEMALOCATION, AttributeName.XSI, null);
+		String schemaloc = root.getAttribute(JDFCoreConstants.SCHEMALOCATION, JDFCoreConstants.XSI, null);
 		if (schemaloc == null)
 		{
 			return null;
@@ -1739,31 +1609,9 @@ public class XMLDoc
 			final KElement root = getRoot();
 			if (root != null)
 			{
-				root.setAttribute("xs:" + AttributeName.SCHEMALOCATION, schemaLocation, AttributeName.XSI);
+				root.setAttribute("xs:" + JDFCoreConstants.SCHEMALOCATION, schemaLocation, JDFCoreConstants.XSI);
 			}
 		}
-	}
-
-	/**
-	 * if true (the default) initialize element when they are created, 
-	 * else don't call init() when an element is initially created
-	 * 
-	 * @param bInitOnCreate
-	 */
-	public void setInitOnCreate(boolean bInitOnCreate)
-	{
-		m_doc.bInitOnCreate = bInitOnCreate;
-	}
-
-	/**
-	 * if true (the default) initialize element when they are created, 
-	 * else don't call init() when an element is initially created
-	 * 
-	 * @return bInitOnCreate
-	 */
-	public boolean getInitOnCreate()
-	{
-		return m_doc.bInitOnCreate;
 	}
 
 	/**
@@ -1782,8 +1630,7 @@ public class XMLDoc
 	 */
 	public static XMLDoc parseStream(InputStream is)
 	{
-		final JDFParser p = new JDFParser();
-		p.bKElementOnly = true;
+		final XMLParser p = new XMLParser();
 		XMLDoc d = p.parseStream(is);
 		if (d != null)
 		{
@@ -1800,8 +1647,7 @@ public class XMLDoc
 	 */
 	public static XMLDoc parseFile(final String fileName)
 	{
-		final JDFParser p = new JDFParser();
-		p.bKElementOnly = true;
+		final XMLParser p = new XMLParser();
 		XMLDoc d = p.parseFile(fileName);
 		if (d != null)
 		{
@@ -1819,8 +1665,7 @@ public class XMLDoc
 	 */
 	public static XMLDoc parseURL(final String url, final BodyPart bp)
 	{
-		final JDFParser p = new JDFParser();
-		p.bKElementOnly = true;
+		final XMLParser p = new XMLParser();
 		final InputStream inStream = UrlUtil.getURLInputStream(url, bp);
 		final File f = UrlUtil.urlToFile(url);
 		XMLDoc d = p.parseStream(inStream);

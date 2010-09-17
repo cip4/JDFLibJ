@@ -81,10 +81,12 @@ import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.NodeList;
 
 /**
@@ -104,6 +106,38 @@ public class JDFDocTest extends JDFTestCaseBase
 		root.setAttribute("xmlns:FOO", "www.foo.com");
 		final KElement e = (KElement) d.createElement("FOO:bar");
 		assertNull(e.getNamespaceURI());
+	}
+
+	/**
+	 * 
+	 */
+	public void testIsDirty()
+	{
+		final JDFDoc doc = new JDFDoc("test");
+		final KElement e = doc.getRoot();
+		assertFalse(e.isDirty());
+		assertFalse(doc.isDirty(null));
+		doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.Doc);
+		assertFalse(e.isDirty());
+		assertFalse(doc.isDirty(null));
+		e.setAttribute("foo", "bar");
+		assertTrue(e.isDirty());
+		assertTrue(doc.isDirty(null));
+		doc.clearDirtyIDs();
+		assertFalse(doc.isDirty(null));
+		assertFalse(e.isDirty());
+		KElement e2 = e.appendElement("foobar");
+		assertTrue(e.isDirty());
+		assertTrue(doc.isDirty(null));
+		assertTrue(e2.isDirty());
+		doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.XPath);
+		doc.clearDirtyIDs();
+		assertFalse(doc.isDirty(null));
+		assertFalse(e.isDirty());
+		e2 = e.appendElement("foobar");
+		assertTrue(doc.isDirty(null));
+		assertTrue(e.isDirty());
+		assertTrue(e2.isDirty());
 	}
 
 	/**
@@ -255,7 +289,7 @@ public class JDFDocTest extends JDFTestCaseBase
 			final JDFDoc docNoSchema = parser.parseString(s);
 			final JDFNode as2 = (JDFNode) docNoSchema.getRoot();
 			assertFalse("no schema - no default", as2.hasAttribute(AttributeName.TEMPLATE));
-			parser.m_SchemaLocation = sm_dirTestSchema + File.separator + "JDF.xsd";
+			parser.setJDFSchemaLocation(UrlUtil.urlToFile(sm_dirTestSchema + File.separator + "JDF.xsd"));
 			final JDFDoc docSchema = parser.parseString(s);
 			final JDFNode as3 = (JDFNode) docSchema.getRoot();
 			assertTrue("schema parse - default is set", as3.hasAttribute(AttributeName.TEMPLATE));

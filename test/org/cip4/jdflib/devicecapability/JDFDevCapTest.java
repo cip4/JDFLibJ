@@ -81,18 +81,19 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumBoolean;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFElement.EnumBoolean;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFNumberRangeList;
-import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.resource.devicecapability.JDFBooleanState;
 import org.cip4.jdflib.resource.devicecapability.JDFDateTimeState;
 import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFDurationState;
 import org.cip4.jdflib.resource.devicecapability.JDFEnumerationState;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerState;
@@ -105,7 +106,6 @@ import org.cip4.jdflib.resource.devicecapability.JDFRectangleState;
 import org.cip4.jdflib.resource.devicecapability.JDFShapeState;
 import org.cip4.jdflib.resource.devicecapability.JDFStringState;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairState;
-import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.process.JDFLayout;
 
 public class JDFDevCapTest extends TestCase

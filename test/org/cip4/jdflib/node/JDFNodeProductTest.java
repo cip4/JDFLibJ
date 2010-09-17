@@ -79,8 +79,8 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
 
 /**
@@ -106,7 +106,7 @@ public class JDFNodeProductTest extends TestCase
 		// set the type attribute
 		final JDFResourceLink rli = productNode.getMatchingLink("LayoutIntent", JDFNode.EnumProcessUsage.AnyInput, 0);
 
-		boolean bValid = rli.isValid(KElement.EnumValidationLevel.Complete);
+		boolean bValid = rli.isValid(EnumValidationLevel.Complete);
 		assertTrue(bValid);
 
 		final JDFLayoutIntent layoutIntent2 = (JDFLayoutIntent) rli.getTarget();

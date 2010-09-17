@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,7 +81,7 @@ package org.cip4.jdflib.core;
  * 
  * before August 20, 2009
  */
-public abstract class JDFConstants
+public abstract class JDFConstants extends JDFCoreConstants
 {
 	/**
 	 * cip4 namespace uri for any jdf
@@ -98,12 +98,8 @@ public abstract class JDFConstants
 	@Deprecated
 	public static final String WILDCARD = "*";
 	/**
-	 * 
-	 */
-	public static final String EMPTYSTRING = "";
-	/**
-	 * @deprecated use null for no namespace check
-	 */
+	* @deprecated use null for no namespace check
+	*/
 	@Deprecated
 	/** * */public static final String NONAMESPACE = EMPTYSTRING;
 	/** @deprecated use null */
@@ -146,15 +142,6 @@ public abstract class JDFConstants
 	/** @deprecated use null (not "null") */
 	@Deprecated
 	/** * */public static final String NULL = "null";
-	/** * */
-	public static final String TRUE = "true";
-	/** * */
-	public static final String FALSE = "false";
-
-	/** * */
-	public static final String NEGINF = "-INF";
-	/** * */
-	public static final String POSINF = "INF";
 
 	/** * */
 	public static final String INTERNAL = "Internal";
@@ -1454,10 +1441,6 @@ public abstract class JDFConstants
 
 	/** * */
 	public static final String BOOLEAN_UNKNOWN = "Unknown";
-	/** * */
-	public static final String BOOLEAN_TRUE = "true";
-	/** * */
-	public static final String BOOLEAN_FALSE = "false";
 
 	/** * */
 	public static final String REGEXP_HEXBINARY = "([0-9a-fA-F]{2})+";

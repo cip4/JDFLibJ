@@ -81,12 +81,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
@@ -94,15 +97,12 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
-import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumActivation;
+import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAncestorPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -406,7 +406,7 @@ public class JDFSpawn
 		// grab the root node and all it's children
 		if (!idCacheFilled)
 		{
-			node.getOwnerDocument_KElement().getCreateXMLDocUserData().fillIDCache();
+			node.getOwnerDocument_JDFElement().getCreateXMLDocUserData().fillIDCache();
 			idCacheFilled = true;
 		}
 
@@ -586,7 +586,7 @@ public class JDFSpawn
 		// grab the root node and all it's children
 		if (!idCacheFilled)
 		{
-			node.getOwnerDocument_KElement().getCreateXMLDocUserData().fillIDCache();
+			node.getOwnerDocument_JDFElement().getCreateXMLDocUserData().fillIDCache();
 			idCacheFilled = true;
 		}
 		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, false);

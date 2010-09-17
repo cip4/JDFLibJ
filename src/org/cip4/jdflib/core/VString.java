@@ -89,7 +89,6 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -151,7 +150,7 @@ public class VString extends Vector<String>
 		{
 			if (strSep == null)
 			{
-				strSep = JDFConstants.BLANK;
+				strSep = JDFCoreConstants.BLANK;
 			}
 
 			final StringTokenizer sToken = new StringTokenizer(strIn, strSep);
@@ -259,7 +258,7 @@ public class VString extends Vector<String>
 	@Deprecated
 	public String getAllStrings()
 	{
-		return StringUtil.setvString(this, JDFConstants.BLANK, null, null);
+		return StringUtil.setvString(this, JDFCoreConstants.BLANK, null, null);
 	}
 
 	/**
@@ -465,7 +464,7 @@ public class VString extends Vector<String>
 	@Deprecated
 	public String setvString(final VString v, final String sep, final String front, final String end)
 	{
-		String s = front == null ? JDFConstants.EMPTYSTRING : front;
+		String s = front == null ? JDFCoreConstants.EMPTYSTRING : front;
 		final int siz = v.size();
 		for (int i = 0; i < siz; i++)
 		{
@@ -575,9 +574,9 @@ public class VString extends Vector<String>
 	 * @param enumType the object to append
 	 * @return true if successfully added
 	 */
-	public boolean add(final EnumType enumType)
+	public boolean add(final ValuedEnum enumType)
 	{
-		return super.add(((ValuedEnum) enumType).getName());
+		return super.add(enumType.getName());
 	}
 
 }

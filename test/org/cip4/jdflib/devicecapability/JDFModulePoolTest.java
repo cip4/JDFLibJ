@@ -75,9 +75,9 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
-import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 
 public class JDFModulePoolTest extends JDFTestCaseBase
 {

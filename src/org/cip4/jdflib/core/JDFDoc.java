@@ -95,6 +95,7 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
 import org.cip4.jdflib.util.UrlUtil.UrlPart;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -109,8 +110,8 @@ public class JDFDoc extends XMLDoc
 	public JDFDoc()
 	{
 		super();
-		m_doc.bInitOnCreate = true;
-		m_doc.bKElementOnly = false;
+		((DocumentJDFImpl) m_doc).bInitOnCreate = true;
+		((DocumentJDFImpl) m_doc).bKElementOnly = false;
 	}
 
 	/**
@@ -141,8 +142,14 @@ public class JDFDoc extends XMLDoc
 	public JDFDoc(final String strDocType)
 	{
 		super(strDocType, JDFElement.getSchemaURL());
-		m_doc.bInitOnCreate = true;
-		m_doc.bKElementOnly = false;
+		((DocumentJDFImpl) m_doc).bInitOnCreate = true;
+		((DocumentJDFImpl) m_doc).bKElementOnly = false;
+	}
+
+	@Override
+	protected DocumentXMLImpl getImpl()
+	{
+		return new DocumentJDFImpl();
 	}
 
 	// **************************************** Methods
@@ -155,6 +162,16 @@ public class JDFDoc extends XMLDoc
 	public JDFNode getJDFRoot()
 	{
 		return (JDFNode) getJXFRoot(ElementName.JDF);
+	}
+
+	@Override
+	protected void setMemberDoc(final DocumentXMLImpl myDoc)
+	{
+		super.setMemberDoc(myDoc);
+		if (m_doc != null)
+		{
+			getCreateXMLDocUserData();
+		}
 	}
 
 	/**
@@ -409,7 +426,7 @@ public class JDFDoc extends XMLDoc
 	public KElement setRoot(final String strDocType, final String namespaceURI)
 	{
 		final KElement root = super.setRoot(strDocType, namespaceURI);
-		if (root != null && m_doc.bInitOnCreate)
+		if (root != null && ((DocumentJDFImpl) m_doc).bInitOnCreate)
 		{
 			if (root instanceof JDFNode)
 			{
@@ -424,6 +441,17 @@ public class JDFDoc extends XMLDoc
 			}
 		}
 		return root;
+	}
+
+	/**
+	 * register new custom class in the factory
+	 * 
+	 * @param strElement local name
+	 * @param packagepath package path
+	 */
+	public static void registerCustomClass(final String strElement, final String packagepath)
+	{
+		DocumentJDFImpl.registerCustomClass(strElement, packagepath);
 	}
 
 	/**
@@ -445,6 +473,15 @@ public class JDFDoc extends XMLDoc
 
 		final XMLDoc d = super.write2URL(strURL, strContentType);
 		return d == null ? null : new JDFDoc(d.getMemberDocument());
+	}
+
+	/**get the correct parser for this type of document
+	 * 
+	 * @return
+	 */
+	protected XMLParser getXMLParser()
+	{
+		return new JDFParser();
 	}
 
 	/**
@@ -501,83 +538,137 @@ public class JDFDoc extends XMLDoc
 		return strContentType;
 	}
 
-	// //////////////////////////////////////////////////////////////////////
+	@Override
+	public Element createElement(String elementName)
+	{
+		Element elem = super.createElement(elementName);
+		if (elem instanceof KElement)
+		{
+			if (((DocumentJDFImpl) m_doc).bInitOnCreate)
+				((KElement) elem).init();
+		}
+		return elem;
+	}
 
-	// JDFDoc write2URL(String strURL, String schemaLocation) {
+	/**
+	 * Method getXMLDocUserData - get the associated XMLDocUserData
+	 * 
+	 * @return XMLDocUserData of this object
+	 */
+	protected XMLDocUserData getXMLDocUserData()
+	{
+		return ((DocumentJDFImpl) m_doc).getMyUserData();
+	}
 
-	// return XMLDoc.write2URL(strURL,getContentType(),schemaLocation);
-	// }
+	/**
+	 * does the owner document of this have an associated XMLDocUserData
+	 * 
+	 * @return true if XMLDocUserData of this exists
+	 */
+	protected boolean hasXMLDocUserData()
+	{
+		return ((DocumentJDFImpl) m_doc).getMyUserData() != null;
+	}
 
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * delete the XMLDocUserData structure
+	 * 
+	 */
+	protected void deleteUserData()
+	{
+		final XMLDocUserData userData = (XMLDocUserData) m_doc.getUserData();
+		if (userData != null)
+		{
+			// delete (userData); hopefully the garbage collector will do his
+			// stuff
+			m_doc.setUserData(null);
+		}
+	}
 
-	// boolean stringParse(String in, boolean bValidate, boolean bEraseEmpty,
-	// boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
-	// {
-	// boolean b = XMLDoc.stringParse( in, bValidate, bEraseEmpty,
-	// bDoNamespaces, pErrorHandler,schemaLocation);
-	// getJDFRoot().getMinID();
-	// return b;
-	// }
+	/**
+	 * get/create the associated XMLDocUserData - it is always there!
+	 * 
+	 * @return the XMLDocUserData of this
+	 */
+	public XMLDocUserData getCreateXMLDocUserData()
+	{
+		return ((DocumentJDFImpl) m_doc).getMyUserData();
+	}
 
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * get a vector of all IDs of elements that are dirty
+	 * 
+	 * @return VString - the vector of element IDs
+	 */
+	public VString getDirtyIDs()
+	{
+		final XMLDocUserData xmlUserData = getXMLDocUserData();
+		if (xmlUserData != null)
+		{
+			return xmlUserData.getDirtyIDs();
+		}
+		return null;
+	}
 
-	// boolean streamParse(InputStream in, boolean bValidate, boolean
-	// bEraseEmpty,
-	// boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
-	// {
-	// boolean b = XMLDoc.streamParse( in, bValidate, bEraseEmpty,
-	// bDoNamespaces, pErrorHandler,schemaLocation);
-	// getJDFRoot().getMinID();
-	// return b;
-	// }
+	/**
+	 * clear the vector of all IDs of elements that are dirty
+	 */
+	public void clearDirtyIDs()
+	{
+		getCreateXMLDocUserData().clearDirtyIDs();
+	}
 
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * is the node with ID dirty?
+	 * 
+	 * @param strID id the id to be checked
+	 * @return boolean - true if the node with ID=id is dirty
+	 */
+	public boolean isDirty(final String strID)
+	{
+		final XMLDocUserData docUserData = getXMLDocUserData();
+		return docUserData == null ? false : docUserData.isDirty(strID);
+	}
 
-	// boolean parse(String inFile,boolean bValidate, boolean bEraseEmpty,
-	// boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
-	// {
-	// boolean b = XMLDoc.parse( inFile, bValidate, bEraseEmpty,
-	// bDoNamespaces, pErrorHandler,schemaLocation);
-	// getJDFRoot().getMinID();
-	// return b;
-	// }
+	/**
+	 * @return Returns the m_OriginalFileName.
+	 */
+	public XMLDoc getValidationResult()
+	{
+		return ((DocumentJDFImpl) m_doc).m_validationResult;
+	}
 
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * if true (the default) initialize element when they are created, 
+	 * else don't call init() when an element is initially created
+	 * 
+	 * @param bInitOnCreate
+	 */
+	public void setInitOnCreate(boolean bInitOnCreate)
+	{
+		((DocumentJDFImpl) m_doc).bInitOnCreate = bInitOnCreate;
+	}
 
-	// boolean parse(JDF.File inFile, boolean bValidate, boolean bEraseEmpty,
-	// boolean bDoNamespaces, ErrorHandler pErrorHandler, String schemaLocation)
-	// {
-	// boolean b = XMLDoc.parse(inFile, bValidate, bEraseEmpty,
-	// bDoNamespaces, pErrorHandler,schemaLocation);
-	// getJDFRoot().getMinID();
-	// return b;
-	// }
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * if true (the default) initialize element when they are created, 
+	 * else don't call init() when an element is initially created
+	 * 
+	 * @return bInitOnCreate
+	 */
+	public boolean getInitOnCreate()
+	{
+		return ((DocumentJDFImpl) m_doc).bInitOnCreate;
+	}
 
-	// MIMEMessage createMIMEMessage() {
-
-	// JDF.MIMEBasicPart mbp = createMIMEBasicPart();
-	// MIMEMultiPart mmp = new JDF.MIMEMultiPart();
-	// mmp.addBodyPart(mbp, false); // false->don't clone it
-	// mmp.setContentSubType(L"related");
-
-	// // make a MIMEMessage out of it
-	// MIMEMessage mmsg = new JDF.MIMEMessage();
-	// mmsg.setBody(mmp,false);
-
-	// return mmsg;
-	// }
-	// //////////////////////////////////////////////////////////////////////
-
-	// MIMEBasicPart createMIMEBasicPart() {
-	// JDF.MIMEBasicPart mbp = new JDF.MIMEBasicPart
-	// (MIMEBasicPart.APPLICATION);
-	// String docString;
-	// write2String(docString);
-	// mbp.setBodyData (docString);
-	// mbp.setContentSubType(GetContentType().substr(12));
-
-	// return mbp;
-	// }
+	/**
+	 * getMemberDocument
+	 * 
+	 * @return the MemberDocument
+	 */
+	@Override
+	public DocumentJDFImpl getMemberDocument()
+	{
+		return (DocumentJDFImpl) this.m_doc;
+	}
 
 }

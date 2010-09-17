@@ -11,14 +11,14 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
@@ -43,12 +43,12 @@ import org.cip4.jdflib.resource.JDFNumberItem;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFProofItem;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.JDFSoftCoverBinding;
 import org.cip4.jdflib.resource.JDFStripBinding;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFTabs;
-import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
-import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
@@ -110,7 +110,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 * @param xjdf
 	 * @return the converted jdf
 	 */
-	public JDFDoc convert(final KElement xjdf)
+	public JDFDoc convert(KElement xjdf)
 	{
 		if (xjdf == null)
 		{
@@ -122,6 +122,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			jdfDoc.setBodyPart(xjdf.getOwnerDocument_KElement().getBodyPart());
 		}
 		JDFNode root = prepareRoot();
+		xjdf = reparse(xjdf);
+
 		final JDFNode theNode = findNode(xjdf, true);
 		if (theNode == null)
 		{
@@ -139,6 +141,20 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		cleanResources(theNode);
 		firstConvert = false;
 		return jdfDoc;
+	}
+
+	protected KElement reparse(KElement xjdf)
+	{
+		if (xjdf != null)
+		{
+			JDFDoc doc = new JDFDoc(xjdf.getNodeName());
+			doc.setInitOnCreate(false);
+
+			KElement newRoot = doc.getRoot();
+			newRoot.copyInto(xjdf, false);
+			xjdf = newRoot;
+		}
+		return xjdf;
 	}
 
 	/**
@@ -203,10 +219,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 */
 	private JDFNode findNode(KElement xjdf, final boolean create)
 	{
-		if (xjdf != null)
-		{
-			xjdf = xjdf.clone();
-		}
 		final JDFNode root = jdfDoc.getJDFRoot();
 		final String jpID = xjdf.getAttribute(AttributeName.JOBPARTID, null, null);
 		JDFNode n = root.getJobPart(jpID, null);
@@ -1424,7 +1436,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			if (!e.hasChildElement(ElementName.LAYOUTELEMENT, null))
 			{
-				final KElement loe = e.appendElement(ElementName.LAYOUTELEMENT);
+				final JDFElement loe = (JDFElement) e.appendElement(ElementName.LAYOUTELEMENT);
 				final VString vAtt = loe.knownAttributes();
 				final JDFAttributeMap map = e.getAttributeMap();
 				final Iterator<String> it = map.getKeyIterator();

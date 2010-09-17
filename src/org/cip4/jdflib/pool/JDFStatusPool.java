@@ -86,7 +86,6 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFPartStatus;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -402,7 +401,7 @@ public class JDFStatusPool extends JDFAutoStatusPool
 	 */
 	public boolean validStatus()
 	{
-		if (!super.validAttribute(AttributeName.STATUS, null, KElement.EnumValidationLevel.Complete))
+		if (!super.validAttribute(AttributeName.STATUS, null, EnumValidationLevel.Complete))
 		{
 			return false;
 		}

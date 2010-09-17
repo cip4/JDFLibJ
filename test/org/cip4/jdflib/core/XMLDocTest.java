@@ -75,7 +75,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
@@ -241,38 +241,6 @@ public class XMLDocTest extends JDFTestCaseBase
 				}
 			}
 		}
-	}
-
-	/**
-	 * 
-	 */
-	public void testIsDirty()
-	{
-		final XMLDoc doc = new XMLDoc("test", null);
-		final KElement e = doc.getRoot();
-		assertFalse(e.isDirty());
-		assertFalse(doc.isDirty(null));
-		doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.Doc);
-		assertFalse(e.isDirty());
-		assertFalse(doc.isDirty(null));
-		e.setAttribute("foo", "bar");
-		assertTrue(e.isDirty());
-		assertTrue(doc.isDirty(null));
-		doc.clearDirtyIDs();
-		assertFalse(doc.isDirty(null));
-		assertFalse(e.isDirty());
-		KElement e2 = e.appendElement("foobar");
-		assertTrue(e.isDirty());
-		assertTrue(doc.isDirty(null));
-		assertTrue(e2.isDirty());
-		doc.getCreateXMLDocUserData().setDirtyPolicy(EnumDirtyPolicy.XPath);
-		doc.clearDirtyIDs();
-		assertFalse(doc.isDirty(null));
-		assertFalse(e.isDirty());
-		e2 = e.appendElement("foobar");
-		assertTrue(doc.isDirty(null));
-		assertTrue(e.isDirty());
-		assertTrue(e2.isDirty());
 	}
 
 	/**
@@ -480,24 +448,24 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testRegisterClass()
 	{
-		XMLDoc.registerCustomClass("JDFTestType", "org.cip4.jdflib.core.JDFTestType");
-		XMLDoc.registerCustomClass("fnarf:JDFTestType", "org.cip4.jdflib.core.JDFTestType");
+		JDFDoc.registerCustomClass("JDFTestType", "org.cip4.jdflib.core.JDFTestType");
+		JDFDoc.registerCustomClass("fnarf:JDFTestType", "org.cip4.jdflib.core.JDFTestType");
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 
 		JDFTestType tt = (JDFTestType) n.appendElement("JDFTestType", null);
 		tt.setAttribute("fnarf", 3, null);
-		assertTrue("extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
+		assertTrue("extension is valid", tt.isValid(EnumValidationLevel.Complete));
 
 		tt = (JDFTestType) n.appendElement("JDFTestType");
 		tt.setAttribute("fnarf", 3, null);
-		assertTrue("ns extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
+		assertTrue("ns extension is valid", tt.isValid(EnumValidationLevel.Complete));
 		tt.setAttribute("fnarf", "a", null); // illegal - must be integer
-		assertTrue("ns extension is valid", !tt.isValid(KElement.EnumValidationLevel.Complete));
+		assertTrue("ns extension is valid", !tt.isValid(EnumValidationLevel.Complete));
 		tt.removeAttribute("fnarf", null);
-		assertTrue("ns extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
+		assertTrue("ns extension is valid", tt.isValid(EnumValidationLevel.Complete));
 		tt.setAttribute("gnu", "a", null); // illegal - non existent
-		assertFalse("ns extension is valid", tt.isValid(KElement.EnumValidationLevel.Complete));
+		assertFalse("ns extension is valid", tt.isValid(EnumValidationLevel.Complete));
 
 		try
 		{
@@ -530,15 +498,15 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		d = new XMLDoc("bar:foo", JDFConstants.JDFNAMESPACE);
 		e = d.getRoot();
-		assertTrue("E K", e instanceof JDFElement);
+		assertFalse("E K", e instanceof JDFElement);
 
 		d = new XMLDoc("Myfoo", JDFConstants.JDFNAMESPACE);
 		e = d.getRoot();
-		assertTrue("E K", e instanceof JDFElement);
+		assertFalse("E K", e instanceof JDFElement);
 
 		d = new XMLDoc("JDF:Myfoo", JDFConstants.JDFNAMESPACE);
 		e = d.getRoot();
-		assertTrue("E K", e instanceof JDFElement);
+		assertFalse("E K", e instanceof JDFElement);
 
 		d = new XMLDoc("Myfoo", null);
 		e = d.getRoot();
@@ -569,8 +537,8 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testClone()
 	{
-		final XMLDoc doc = new XMLDoc("foobar", null);
-		final XMLDoc doc2 = doc.clone();
+		final JDFDoc doc = new JDFDoc("foobar");
+		final JDFDoc doc2 = doc.clone();
 		assertNotNull(doc.getDocumentElement());
 		assertNotNull(doc2.getDocumentElement());
 		assertNotSame(doc.getDocumentElement(), doc2.getDocumentElement());

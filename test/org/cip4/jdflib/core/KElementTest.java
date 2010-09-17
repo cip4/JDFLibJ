@@ -84,8 +84,8 @@ import java.util.Map;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode;
@@ -1866,36 +1866,6 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * Method testGetElementByID.
-	 * 
-	 */
-	public void testGetDeepElementByID()
-	{
-		final String xmlFile = "bookintent.jdf";
-
-		final JDFParser p = new JDFParser();
-		final JDFDoc jdfDoc = p.parseFile(sm_dirTestData + xmlFile);
-
-		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
-		final XMLDocUserData ud = jdfRoot.getXMLDocUserData();
-
-		// first try
-		final KElement kelem1 = jdfRoot.getDeepElementByID("ID", "n0006", null, ud);
-		assertNotNull("kelem1==null", kelem1);
-		assertEquals("id", kelem1.getAttribute("ID"), "n0006");
-
-		// second try
-		final KElement kelem2 = jdfRoot.getDeepElementByID("Preferred", "198", null, null);
-		assertTrue("kelem2==null", kelem2 != null);
-		if (kelem2 == null)
-		{
-			return; // soothe findbugs ;)
-		}
-		final String strAtrib2 = kelem2.getAttribute("Preferred", "", "");
-		assertTrue("Preferred!=198", strAtrib2.equals("198"));
-	}
-
-	/**
 	 * 
 	 */
 	public void testInsertBefore()
@@ -2173,51 +2143,6 @@ public class KElementTest extends JDFTestCaseBase
 		assertNull(root.getAttribute("n:b", null, null));
 		assertNull(root.getAttribute("n:b", "www.n.com", null));
 		assertNull(root.getAttribute("b", "www.n.com", null));
-	}
-
-	/**
-	 * 
-	 */
-	public void testCache()
-	{
-		final XMLDoc d1 = new XMLDoc("d1", null);
-		final XMLDoc d2 = new XMLDoc("d2", null);
-		assertNotNull(d1.getXMLDocUserData());
-		assertNotNull(d2.getXMLDocUserData());
-		assertTrue(d1.getXMLDocUserData().getIDCache());
-		final KElement e1 = d1.getRoot();
-		final KElement e2 = d2.getRoot();
-		for (int i = 0; i < 4; i++)
-		{
-			e1.setXPathAttribute("e2/e3" + String.valueOf(i) + "/@ID", "i1" + String.valueOf(i));
-			e2.setXPathAttribute("e2/e3" + String.valueOf(i) + "/@ID", "i2" + String.valueOf(i));
-		}
-		KElement e13 = e2.getTarget("i13", "ID");
-		assertNull(e13);
-		e13 = e1.getTarget("i13", "ID");
-		assertNotNull(e13);
-		assertEquals(d1, e1.getOwnerDocument_KElement());
-		KElement e23 = e2.getTarget("i23", "ID");
-		assertNotNull(e23);
-		assertEquals(d2, e2.getOwnerDocument_KElement());
-		e1.moveElement(e23, null);
-		e23 = e2.getTarget("i23", "ID");
-		assertNull(e23);
-		e23 = e1.getTarget("i23", "ID");
-		assertNotNull(e23);
-		assertEquals(d1, e23.getOwnerDocument_KElement());
-		e23.deleteNode();
-		e23 = e1.getTarget("i23", "ID");
-		assertNull(e23);
-
-		e23 = e2.getTarget("i22", "ID");
-		assertNotNull(e23);
-		final KElement e24 = e23.renameElement("fnarf", null);
-		assertEquals(e24, e23);
-		assertEquals(e24.getNodeName(), "fnarf");
-		assertEquals(e24.getLocalName(), "fnarf");
-		assertEquals(e24, e2.getTarget("i22", "ID"));
-
 	}
 
 	/**
@@ -2683,11 +2608,11 @@ public class KElementTest extends JDFTestCaseBase
 		e.appendChild(e3);
 		final KElement e2 = (KElement) e.getFirstChild();
 		assertEquals(e2.getNextSibling(), e3);
-		assertNull(e3.getNamespaceURI());
+		//		assertNull(e3.getNamespaceURI());
 		final KElement e4 = (KElement) d.createElement("foo:e3");
 		assertNull(e4.getNamespaceURI());
 		e.appendChild(e4);
-		assertNull(e4.getNamespaceURI());
+		//		assertNull(e4.getNamespaceURI());
 	}
 
 	/**

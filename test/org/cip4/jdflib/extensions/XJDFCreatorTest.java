@@ -71,6 +71,7 @@ package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 
 /**
@@ -94,7 +95,7 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		theXJDF = new JDFDoc("XJDF").getRoot();
-		theHelper = new XJDFHelper(theXJDF);
+		theHelper = new XJDFHelper((JDFElement) theXJDF);
 		KElement.setLongID(false);
 	}
 

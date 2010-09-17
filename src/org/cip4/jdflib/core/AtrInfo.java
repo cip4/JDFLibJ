@@ -76,8 +76,19 @@
  */
 package org.cip4.jdflib.core;
 
+import java.util.zip.DataFormatException;
+
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
+import org.cip4.jdflib.datatypes.JDFIntegerRange;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.datatypes.JDFNumberRange;
+import org.cip4.jdflib.datatypes.JDFNumberRangeList;
+import org.cip4.jdflib.datatypes.JDFXYPair;
+import org.cip4.jdflib.datatypes.JDFXYPairRange;
+import org.cip4.jdflib.datatypes.JDFXYPairRangeList;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -116,6 +127,212 @@ public class AtrInfo
 		atrType = t;
 		enumEnum = e;
 		atrDefault = null;
+	}
+
+	/**
+	 * checks whether smallAtt is a matching subset of bigAtt depending on datatype
+	 * 
+	 * @param smallAtt the small att to test
+	 * @param bigAtt the big att, e.g. list to test against
+	 * @param dataType the datatype of the big att
+	 * 
+	 * @return true if smallAtt is a matching subset of bigAtt
+	 */
+	public static boolean matchesAttribute(final String smallAtt, final String bigAtt, final AttributeInfo.EnumAttributeType dataType)
+	{
+		if (dataType == null || dataType.equals(AttributeInfo.EnumAttributeType.Any))
+		{
+			return bigAtt.equals(smallAtt);
+		}
+
+		if ((dataType.equals(AttributeInfo.EnumAttributeType.NMTOKENS)) || (dataType.equals(AttributeInfo.EnumAttributeType.enumerations))
+				|| (dataType.equals(AttributeInfo.EnumAttributeType.IDREFS)))
+		{
+			// check for matching individual NMTOKEN
+			if (smallAtt.indexOf(" ") > 0)
+			{
+				final VString vSmall = StringUtil.tokenize(smallAtt, JDFConstants.BLANK, false);
+				for (int i = 0; i < vSmall.size(); i++)
+				{
+					if (!StringUtil.hasToken(bigAtt, vSmall.stringAt(i), JDFConstants.BLANK, 0))
+					{
+						return false;
+					}
+				}
+			}
+			else if (!StringUtil.hasToken(bigAtt, smallAtt, JDFConstants.BLANK, 0))
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		if (dataType.equals(AttributeInfo.EnumAttributeType.NumberRange))
+		{
+			try
+			{
+				final JDFNumberRange r = new JDFNumberRange(bigAtt);
+				if (r.inRange(Double.parseDouble(smallAtt)))
+				{
+					return true;
+				}
+			}
+			catch (final DataFormatException nfe)
+			{
+				// do nothing
+			}
+			catch (final JDFException jdfe)
+			{
+				// do nothing
+			}
+			catch (final IllegalArgumentException iae)
+			{
+				// do nothing
+			}
+		}
+
+		if (dataType.equals(AttributeInfo.EnumAttributeType.NumberRangeList))
+		{
+			try
+			{
+				final JDFNumberRangeList r = new JDFNumberRangeList(bigAtt);
+				if (r.inRange(Double.parseDouble(smallAtt)))
+				{
+					return true;
+				}
+			}
+			catch (final DataFormatException nfe)
+			{
+				// do nothing
+			}
+			catch (final JDFException jdfe)
+			{
+				// do nothing
+			}
+			catch (final IllegalArgumentException iae)
+			{
+				// do nothing
+			}
+		}
+
+		if (dataType.equals(AttributeInfo.EnumAttributeType.IntegerList))
+		{
+			try
+			{
+				final JDFIntegerList rBig = new JDFIntegerList(bigAtt);
+				final Integer i = new Integer(smallAtt);
+				if (rBig.contains(i))
+				{
+					return true;
+				}
+			}
+			catch (final DataFormatException nfe)
+			{
+				// do nothing
+			}
+			catch (final JDFException jdfe)
+			{
+				// do nothing
+			}
+			catch (final IllegalArgumentException iae)
+			{
+				// do nothing
+			}
+		}
+		if (dataType.equals(AttributeInfo.EnumAttributeType.IntegerRange))
+		{
+			try
+			{
+				final JDFIntegerRange rBig = new JDFIntegerRange(bigAtt, Integer.MAX_VALUE);
+				final JDFIntegerRange rSmal = new JDFIntegerRange(smallAtt, Integer.MAX_VALUE);
+				if (rBig.isPartOfRange(rSmal))
+				{
+					return true;
+				}
+			}
+			catch (final DataFormatException nfe)
+			{
+				// do nothing
+			}
+			catch (final JDFException jdfe)
+			{
+				// do nothing
+			}
+			catch (final IllegalArgumentException iae)
+			{
+				// do nothing
+			}
+		}
+
+		if (dataType.equals(AttributeInfo.EnumAttributeType.IntegerRangeList))
+		{
+			try
+			{
+				final JDFIntegerRangeList rBig = new JDFIntegerRangeList(bigAtt, Integer.MAX_VALUE);
+				final JDFIntegerRangeList rSmal = new JDFIntegerRangeList(smallAtt, Integer.MAX_VALUE);
+				if (rBig.isPartOfRange(rSmal))
+				{
+					return true;
+				}
+			}
+			catch (final DataFormatException nfe)
+			{
+				// do nothing
+			}
+			catch (final JDFException jdfe)
+			{
+				// do nothing
+			}
+			catch (final IllegalArgumentException iae)
+			{
+				// do nothing
+			}
+		}
+
+		if (dataType.equals(AttributeInfo.EnumAttributeType.XYPairRange))
+		{
+			try
+			{
+				final JDFXYPair xypair = new JDFXYPair(smallAtt);
+				final JDFXYPairRange r = new JDFXYPairRange(bigAtt);
+				if (r.inRange(xypair))
+				{
+					return true;
+				}
+			}
+			catch (final DataFormatException x)
+			{
+				// do nothing
+			}
+			catch (final IllegalArgumentException x1)
+			{
+				// do nothing
+			}
+		}
+
+		if (dataType.equals(AttributeInfo.EnumAttributeType.XYPairRangeList))
+		{
+			try
+			{
+				final JDFXYPair xypair = new JDFXYPair(smallAtt);
+				final JDFXYPairRangeList r = new JDFXYPairRangeList(bigAtt);
+				if (r.inRange(xypair))
+				{
+					return true;
+				}
+			}
+			catch (final DataFormatException x)
+			{
+				// do nothing
+			}
+			catch (final IllegalArgumentException x1)
+			{
+				// do nothing
+			}
+		}
+
+		return false;
 	}
 
 	/**

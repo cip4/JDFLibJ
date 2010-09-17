@@ -16,20 +16,21 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoMarkObject.EnumAnchor;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumFrontCoatings;
 import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFSeparationList;
-import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNamedColor;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.JDFSeparationList;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
@@ -40,10 +41,10 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
-import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState.EnumUserDisplay;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
+import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFSeparationSpec;
 import org.cip4.jdflib.span.JDFSpanBase;
@@ -402,9 +403,13 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 */
 		private VAttributeDescriptor getKnownAttsBase()
 		{
-			AttributeInfo ai = e2.getAttributeInfo();
-			VString knownAtts = ai.knownAttribs();
 			VAttributeDescriptor vDesc = new VAttributeDescriptor();
+			if (!(e2 instanceof JDFElement))
+				return vDesc;
+
+			JDFElement je = (JDFElement) e2;
+			AttributeInfo ai = je.getAttributeInfo();
+			VString knownAtts = ai.knownAttribs();
 
 			for (int i = knownAtts.size() - 1; i >= 0; i--)
 			{
@@ -426,7 +431,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 				desc.setTyp(typ);
 				vDesc.add(desc);
 			}
-			VString knownRefs = e2.knownElements();
+			VString knownRefs = je.knownElements();
 			for (int i = 0; i < knownRefs.size(); i++)
 			{
 				AttributeDescriptor desc = null;
@@ -480,8 +485,11 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		 */
 		private VString getKnownElmsBase()
 		{
-			VString knownElms = e2.knownElements();
 			VString ret = new VString();
+			if (!(e2 instanceof JDFElement))
+				return ret;
+			JDFElement je = (JDFElement) e2;
+			VString knownElms = je.knownElements();
 			for (int i = knownElms.size() - 1; i >= 0; i--)
 			{
 				String elmName = knownElms.get(i);
@@ -489,7 +497,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 				{
 					continue;
 				}
-				else if (e2.getLastVersion(elmName, true).getValue() < EnumVersion.Version_1_4.getValue())
+				else if (je.getLastVersion(elmName, true).getValue() < EnumVersion.Version_1_4.getValue())
 				{
 					continue;
 				}
@@ -763,7 +771,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			if (e instanceof JDFSpanBase && bSpanAsAttribute)
 			{
 				desc = new AttributeDescriptor(s);
-				AttributeInfo ai = e.getAttributeInfo();
+				AttributeInfo ai = ((JDFElement) e).getAttributeInfo();
 				desc.setTyp(ai.getAttributeType("Actual"));
 				desc.setValuedEnum(ai.getAttributeEnum("Actual"));
 			}
@@ -1244,7 +1252,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 		protected void createbaseAttribs()
 		{
 			super.createbaseAttribs();
-			KElement ni = jdfRoot.addResource(ElementName.NODEINFO, null);
+			JDFNodeInfo ni = (JDFNodeInfo) jdfRoot.addResource(ElementName.NODEINFO, null);
 			baseAttribs.addAll(ni.knownAttributes().getSet());
 			baseAttribs.add(AttributeName.STATUSDETAILS);
 			baseAttribs.add(AttributeName.TYPE);

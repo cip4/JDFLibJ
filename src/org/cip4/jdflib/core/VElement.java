@@ -83,7 +83,6 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.KElement.SimpleNodeComparator;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
-import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -166,12 +165,12 @@ public class VElement extends Vector<KElement>
 		{
 			return -1;
 		}
-		final String id = s.getAttribute_KElement(AttributeName.ID, null, null);
+		final String id = s.getAttribute_KElement(JDFCoreConstants.ID, null, null);
 		for (int i = 0; i < size(); i++)
 		{
 			if (id != null)
 			{
-				if (id.equals(elementAt(i).getAttribute_KElement(AttributeName.ID, null, null)))
+				if (id.equals(elementAt(i).getAttribute_KElement(JDFCoreConstants.ID, null, null)))
 				{
 					return i;
 				}
@@ -639,20 +638,6 @@ public class VElement extends Vector<KElement>
 			ret = ret.getParentNode_KElement();
 		}
 		return ret; // if we get here it is null
-	}
-
-	/**
-	 * Resource
-	 * 
-	 * @param i
-	 * 
-	 * @return JDFResource
-	 * @deprecated used only to facilitate migration from vResource to vElement
-	 */
-	@Deprecated
-	public JDFResource resource(final int i)
-	{
-		return (JDFResource) elementAt(i);
 	}
 
 	/**

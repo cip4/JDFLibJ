@@ -134,6 +134,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFPreview;
 import org.cip4.jdflib.util.ContainerUtil;
+import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
@@ -141,7 +142,9 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.VectorMap;
 import org.cip4.jdflib.util.mime.MimeReader;
 import org.w3c.dom.Attr;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -168,7 +171,7 @@ public class JDFElement extends KElement
 
 	private static EnumVersion defaultVersion = EnumVersion.Version_1_4;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[6];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
 	static
 	{
 		atrInfoTable[0] = new AtrInfoTable(AttributeName.SETTINGSPOLICY, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumSettingsPolicy.getEnum(0), null);
@@ -177,23 +180,174 @@ public class JDFElement extends KElement
 		atrInfoTable[3] = new AtrInfoTable(AttributeName.BESTEFFORTEXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[4] = new AtrInfoTable(AttributeName.MUSTHONOREXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
 		atrInfoTable[5] = new AtrInfoTable(AttributeName.OPERATORINTERVENTIONEXCEPTIONS, 0x33333331, AttributeInfo.EnumAttributeType.NMTOKENS, null, null);
+		atrInfoTable[6] = new AtrInfoTable(JDFConstants.XMLNS, 0x33333333, AttributeInfo.EnumAttributeType.URI, null, null);
 	}
 
 	/**
 	 * @see org.cip4.jdflib.core.KElement#getTheAttributeInfo()
 	 */
-	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return getTheAttributeInfo_JDFElement();
 	}
 
 	/**
-	 * @return the AttributeInfo
+	 * public version of getTheAttributeInfo
+	 * @return
+	 */
+	public AttributeInfo getAttributeInfo()
+	{
+		return getTheAttributeInfo();
+	}
+
+	/**
+	 * returns the data type of a given attribute
+	 * @param attributeName the localname of the attribute to check
+	 * @return the data type of attributeName
+	 */
+	public EnumAttributeType getAtrType(final String attributeName)
+	{
+		final AttributeInfo ai = getTheAttributeInfo();
+		return ai.getAttributeType(attributeName);
+	}
+
+	/**
+	 * get the first JDF version where attribute name or element name is valid
+	 * @param eaName attribute name
+	 * @param bElement true - get ElementInfo, false - get AttributeInfo
+	 * @return JDF version, Version_1_0 if no Info is found
+	 */
+	public EnumVersion getFirstVersion(final String eaName, final boolean bElement)
+	{
+		EnumVersion v = null;
+		if (bElement)
+		{
+			final ElementInfo ei = getTheElementInfo();
+			v = ei.getFirstVersion(eaName);
+		}
+		else
+		{
+			final AttributeInfo ai = getTheAttributeInfo();
+			v = ai.getFirstVersion(eaName);
+		}
+		if (v == null)
+		{
+			v = EnumVersion.Version_1_0;
+		}
+		return v;
+	}
+
+	/**
+	 * Get the dirty status of this element
+	 * @return boolean true if dirty
+	 */
+	@Override
+	public boolean isDirty()
+	{
+		final XMLDocUserData usrDat = getXMLDocUserData();
+		if (usrDat != null)
+		{
+			return usrDat.isDirty(this);
+		}
+		return false;
+	}
+
+	/**
+	 * Set this element as dirty
+	 * @param bAttribute if true, only attributes are dirty, else also sub-elements
+	 */
+	@Override
+	public void setDirty(final boolean bAttribute)
+	{
+		((DocumentJDFImpl) ownerDocument).bGlobalDirtyFlag = true;
+		if (!((DocumentXMLImpl) ownerDocument).bGlobalDirtyPolicy)
+		{
+			final XMLDocUserData usrDat = getXMLDocUserData();
+			if (usrDat != null)
+			{
+				usrDat.setDirty(this, bAttribute);
+			}
+		}
+	}
+
+	/**
+	 * get/create the associated XMLDocUserData
+	 * @return the XMLDocUserData of this
+	 */
+	protected XMLDocUserData getXMLDocUserData()
+	{
+		return (ownerDocument == null) ? null : ((DocumentJDFImpl) ownerDocument).getMyUserData();
+	}
+
+	/**
+	 * get the last JDF version where attribute name or element name is valid
+	 * @param eaName attribute name
+	 * @param bElement true - get ElementInfo, false - get AttributeInfo
+	 * @return JDF version, Version_1_0 if no Info is found
+	 */
+	public EnumVersion getLastVersion(final String eaName, final boolean bElement)
+	{
+		EnumVersion v = null;
+		if (bElement)
+		{
+			final ElementInfo ei = getTheElementInfo();
+			v = ei.getLastVersion(eaName);
+		}
+		else
+		{
+			final AttributeInfo ai = getTheAttributeInfo();
+			v = ai.getLastVersion(eaName);
+		}
+		return v;
+	}
+
+	/**
+	 * Comma separated list of all required attributes. KElement is generic, therefore the list is empty
+	 * @return String the comma separated list of required attribute keys
+	 */
+	public VString requiredAttributes()
+	{
+		return getTheAttributeInfo().requiredAttribs();
+	}
+
+	/**
+	 * Comma separated list of all optional attributes. KElement is generic, therefore only the XML generic attributes are listed <br>
+	 * xmlns: the namespace declaration
+	 * @return String the comma separated list of optional attribute keys
+	 */
+	public VString optionalAttributes()
+	{
+		return getTheAttributeInfo().optionalAttribs();
+	}
+
+	/**
+	 * map of all defaults from the schema
+	 * @return JDFAttributeMap the comma separated list of deprecated attribute keys
+	 */
+	public JDFAttributeMap getDefaultAttributeMap()
+	{
+		return getTheAttributeInfo().getDefaultAttributeMap();
+	}
+
+	/**
+	 * @return
 	 */
 	protected AttributeInfo getTheAttributeInfo_JDFElement()
 	{
-		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+		final AttributeInfo ai = new AttributeInfo(atrInfoTable);
+		ai.setVersion(getAIVersion());
+		return ai;
+	}
+
+	/**
+	 * @return
+	 */
+	private EnumVersion getAIVersion()
+	{
+		Document d = getOwnerDocument();
+		Element e = d.getDocumentElement();
+		String s = e.getAttribute(AttributeName.VERSION);
+		return EnumVersion.getEnum(s);
 	}
 
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[3];
@@ -206,21 +360,643 @@ public class JDFElement extends KElement
 
 	}
 
-	/**
-	 * @see org.cip4.jdflib.core.KElement#getTheElementInfo()
-	 */
-	@Override
-	protected ElementInfo getTheElementInfo()
+	protected ElementInfo getTheElementInfo_JDFElement()
 	{
-		return super.getTheElementInfo().updateReplace(elemInfoTable);
+		final ElementInfo ei = new ElementInfo(null, elemInfoTable);
+		ei.setVersion(getAIVersion());
+		return ei;
+	}
+
+	/**
+	 * list of all deprecated attributes. KElement is generic, therefore the list is empty
+	 * @return String the comma separated list of deprecated attribute keys
+	 */
+	public VString deprecatedAttributes()
+	{
+		return getTheAttributeInfo().deprecatedAttribs();
+	}
+
+	/**
+	 * Comma separated list of all deprecated attributes. KElement is generic, therefore the list is empty
+	 * @return String the comma separated list of deprecated attribute keys
+	 */
+	public VString prereleaseAttributes()
+	{
+		return getTheAttributeInfo().prereleaseAttribs();
+	}
+
+	/**
+	 * KElement is generic, therefore the list is empty
+	 * 
+	 * @return String the comma separated list of known attribute keys
+	 */
+	public VString knownAttributes()
+	{
+		return getTheAttributeInfo().knownAttribs();
+	}
+
+	/**
+	 * checks if the curent element has other attributes then also present in vReqKeys. If the attribute is not present in vReqKeys, the attribut is added to a
+	 * new vector. The new vector is returned if there is no missing element left or the new vector has reached the given size nMax.
+	 * @param vReqKeys the vector with the attributes you already have
+	 * @param nMax vector with the missing attributes
+	 * @return Vector the vector with the missing attributes
+	 * @default getMissingAttributeVector(vReqKeys, 9999999)
+	 */
+	public VString getMissingAttributeVector(final VString vReqKeys, final int nMax)
+	{
+		final VString vMissing = new VString(); // is a StringVector like
+		if (vReqKeys == null || vReqKeys.isEmpty())
+		{
+			return vMissing; // none required - just return null
+		}
+
+		final VString vAtts = getAttributeVector();
+		String prefix = getPrefix();
+		if (prefix != null && !prefix.equals(JDFConstants.EMPTYSTRING))
+		{
+			prefix += JDFConstants.COLON;
+		}
+		else
+		{
+			prefix = JDFConstants.EMPTYSTRING;
+		}
+		for (int i = 0; i < vReqKeys.size() && vMissing.size() < nMax; i++)
+		{
+			final String req = vReqKeys.stringAt(i);
+			if (!vAtts.contains(prefix + req) && !vAtts.contains(req) && (!req.equals(JDFConstants.XMLNS) || super.getNamespaceURI() == null))
+			{
+				vMissing.addElement(prefix + req);
+			}
+		}
+		return vMissing;
+	}
+
+	/**
+	 * checks if the curent element has other attributes that are present in vReqKeys. If the attribute is present in vReqKeys, the attribut is added to a new
+	 * vector. The new vector is returned if there is no missing element left or the new vector has reached the given size nMax.
+	 * @param vReqKeys the vector with the attributes you already have
+	 * @param nMax vector with the missing attributes
+	 * @return Vector the vector with the missing attributes
+	 * @default getMissingAttributeVector(vReqKeys, 9999999)
+	 */
+	private VString getMatchingAttributeVector(final VString vReqKeys, final int nMax)
+	{
+		final VString vAtts = getAttributeVector();
+		final VString vMatching = new VString(); // is a StringVector like
+		// vReqKeys
+
+		String prefix = getPrefix();
+		if (prefix != null && !prefix.equals(JDFConstants.EMPTYSTRING))
+		{
+			prefix += JDFConstants.COLON;
+		}
+		else
+		{
+			prefix = JDFConstants.EMPTYSTRING;
+		}
+		for (int i = 0; i < vReqKeys.size() && vMatching.size() < nMax; i++)
+		{
+			final String req = vReqKeys.elementAt(i);
+			if (vAtts.contains(prefix + req) || vAtts.contains(req))
+			{
+				vMatching.addElement(prefix + req);
+			}
+		}
+		return vMatching;
 	}
 
 	/**
 	 * @return the elementinfo
 	 */
-	protected ElementInfo getTheElementInfo_JDFElement()
+	protected ElementInfo getTheElementInfo()
 	{
-		return super.getTheElementInfo().updateReplace(elemInfoTable);
+		return getTheElementInfo_JDFElement();
+	}
+
+	/**
+	 * get the missing elements as a vector
+	 * <p>
+	 * default: getMissingElements(99999999)
+	 * @param nMax maximum value of missing elements to return
+	 * @return VString vector with nMax missing elements
+	 */
+	public VString getMissingElements(final int nMax)
+	{
+		final VString v = getTheElementInfo().requiredElements();
+		return getMissingElementVector(v, nMax);
+	}
+
+	/**
+	 * @since 060517 changed signature to VString
+	 * @return required elements
+	 */
+	public VString requiredElements()
+	{
+		return getTheElementInfo().requiredElements();
+	}
+
+	/**
+	 * Comma separated list of all optional element names; KElement is generic, therefore the list is empty
+	 * @return VString the comma separated list of optional element names
+	 */
+	public VString optionalElements()
+	{
+		return getTheElementInfo().optionalElements();
+	}
+
+	/**
+	 * comma separated list of all unique Elements that may occur at most once; KElement is generic, therefore the list is empty
+	 * @return String the comma separated list of required element names
+	 */
+	public VString uniqueElements()
+	{
+		return getTheElementInfo().uniqueElements();
+	}
+
+	/**
+	 * comma separated list of all prerelease Elements that may occur in a future version
+	 * @return String the comma separated list of required element names
+	 */
+	public String prereleaseElements()
+	{
+		final VString v = getTheElementInfo().prereleaseElements();
+		return StringUtil.setvString(v, JDFConstants.COMMA, null, null);
+	}
+
+	/**
+	 * Comma separated list of all prerelease elements.
+	 * <p>
+	 * default: getPrereleaseElements(99999999)
+	 * @param nMax
+	 * @return VString vector with nMax missing elements
+	 */
+	public VString getPrereleaseElements(final int nMax)
+	{
+		final VString v = getTheElementInfo().prereleaseElements();
+		return getMatchingElementVector(v, nMax);
+	}
+
+	/**
+	 * Vector of deprecated elements below the current element.
+	 * <p>
+	 * default: getDeprecatedElements(99999999)
+	 * @param nMax
+	 * @return VString vector with nMax missing elements
+	 */
+	public VString getDeprecatedElements(final int nMax)
+	{
+		final VString v = getTheElementInfo().deprecatedElements();
+		return getMatchingElementVector(v, nMax);
+	}
+
+	/**
+	 * Comma separated list of all known element names;
+	 * @return String the comma separated list of known element names
+	 */
+	public VString knownElements()
+	{
+		final VString s = requiredElements();
+		if (s.size() == 0)
+			return optionalElements();
+		s.appendUnique(optionalElements());
+		return s;
+	}
+
+	/**
+	 * Returns a vector with matching elements
+	 * <p>
+	 * default: getMissingElementVector(vReqKeys, 9999999)
+	 * @param vReqKeys vector with all element wich are required
+	 * @param nMax maximum amount of missing element inside the returned vector
+	 * @return Vector the vector with the missing elements
+	 */
+	private VString getMatchingElementVector(final VString vReqKeys, final int nMax)
+	{
+		final VString vAtts = getElementNameVector();
+		final VString vReturn = new VString();
+
+		for (int i = 0; i < vReqKeys.size() && vReturn.size() < nMax; i++)
+		{
+			if (vAtts.contains(vReqKeys.elementAt(i)))
+			{
+				vReturn.addElement(vReqKeys.elementAt(i));
+			}
+		}
+
+		return vReturn;
+	}
+
+	/**
+	 * This function first, gets all required attributes and then compare them with the attributes present and returns a Vector with the missing attributes
+	 * @param nMax maximum size of the returned Vector
+	 * @return VString vector with the missing attribute names
+	 * @default getMissingAttributes(9999999)
+	 */
+	public VString getMissingAttributes(final int nMax)
+	{
+		final VString v = getTheAttributeInfo().requiredAttribs();
+		return getMissingAttributeVector(v, nMax);
+	}
+
+	/**
+	 * This function first, gets all deprecated attributes
+	 * @param nMax maximum size of the returned Vector
+	 * @return Vector vector with the deprecated attributes
+	 * @default getMissingAttributes(9999999)
+	 */
+	public VString getDeprecatedAttributes(final int nMax)
+	{
+		final VString v = deprecatedAttributes();
+		return getMatchingAttributeVector(v, nMax);
+	}
+
+	/**
+	 * Get the unknown attributes
+	 * <p>
+	 * default: getUnknownAttributes(bIgnorePrivate, 9999999)
+	 * @param bIgnorePrivate if true the private attributes will be ignored
+	 * @param nMax mamimum amount of unknown attributes to return
+	 * @return Vector a vector with all unknown atttributes the Element have
+	 */
+	public VString getUnknownAttributes(final boolean bIgnorePrivate, final int nMax)
+	{
+		final VString vKnownAttribs = knownAttributes();
+		final VString v = bIgnorePrivate ? new VString(StringUtil.tokenize(" :JDF", JDFConstants.COLON, false)) : new VString();
+		return getUnknownAttributeVector(vKnownAttribs, v, nMax);
+	}
+
+	/**
+	 * Gets the unknown attributes
+	 * <p>
+	 * default: getUnknownAttributeVector(vKnownKeys, new Vector(), 99999999)
+	 * @param vKnownKeys vector with all known keys
+	 * @param vInNameSpace vector with all namespaces to search in
+	 * @param nMax maximum amount of unknown attributes to return
+	 * @return vector with maximum nMax unknown Attributes
+	 */
+	public VString getUnknownAttributeVector(final VString vKnownKeys, final VString vInNameSpace, int nMax)
+	{
+		if (nMax < 0)
+		{
+			nMax = Integer.MAX_VALUE;
+		}
+
+		final VString vAtts = getAttributeVector_KElement();
+		final VString vUnknown = new VString();
+		if (vKnownKeys.contains("*"))
+		{
+			return vUnknown;
+		}
+
+		final boolean bAllNS = vInNameSpace.isEmpty();
+
+		for (int j = 0; j < vInNameSpace.size(); j++)
+		{
+			// tokenize needs a blank
+			if (vInNameSpace.elementAt(j).equals(JDFConstants.BLANK))
+			{
+				vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
+			}
+		}
+
+		for (int i = 0; i < vAtts.size() && vUnknown.size() < nMax; i++)
+		{
+			final String strAtts = vAtts.elementAt(i);
+			final String ns = KElement.xmlnsPrefix(strAtts);
+			if ((JDFConstants.XSI.equals(ns)) || JDFConstants.XMLNS.equals(ns))
+			{
+				continue;
+			}
+
+			if (bAllNS || ns == null || vInNameSpace.contains(ns))
+			{
+				if (!vKnownKeys.contains(strAtts))
+				{
+					vUnknown.addElement(strAtts);
+				}
+			}
+		}
+
+		return vUnknown;
+	}
+
+	/**
+	 * Get a vector with the unknown elements
+	 * <p>
+	 * default: getUnknownElements(bIgnorePrivate, 99999999)
+	 * @param bIgnorePrivate true, to ignore the private elements
+	 * @param nMax maximum number of elements in the vector returned
+	 * @return Vector a vector with nMax unknown elements in the actual element.
+	 */
+	public VString getUnknownElements(final boolean bIgnorePrivate, final int nMax)
+	{
+		final VString v1 = knownElements();
+		final VString v2 = StringUtil.tokenize(" :JDF", JDFConstants.COLON, false);
+
+		return getUnknownElementVector(v1, bIgnorePrivate ? v2 : new VString(), nMax);
+	}
+
+	/**
+	 * Get a vector with the unknown elements
+	 * <p>
+	 * default: getUnknownElementVector(vKnownKeys, vInNameSpace, 9999999)
+	 * @param vKnownKeys vector of all known elements
+	 * @param vInNameSpace vector of all namespaces to search in
+	 * @param nMax maximum amount of elements to return
+	 * @return Vector a vector containing the unknown elements
+	 */
+	public VString getUnknownElementVector(final VString vKnownKeys, final VString vInNameSpace, final int nMax)
+	{
+		for (int j = 0; j < vInNameSpace.size(); j++)
+		{
+			// tokenize needs a blank
+			if (vInNameSpace.elementAt(j).equals(JDFConstants.BLANK))
+			{
+				vInNameSpace.setElementAt(JDFConstants.EMPTYSTRING, j);
+			}
+		}
+
+		final VString vAtts = getElementNameVector();
+		final VString vUnknown = new VString();
+
+		if (vAtts.size() > 0)
+		{
+			int i = 0;
+			final boolean bAllNS = vInNameSpace.isEmpty();
+
+			do
+			{
+				final String attr = vAtts.elementAt(i);
+				String ns = KElement.xmlnsPrefix(attr);
+				if (ns == null)
+				{
+					ns = JDFConstants.EMPTYSTRING;
+				}
+
+				if (bAllNS || (vInNameSpace.contains(ns)))
+				{
+					if (!vKnownKeys.contains(attr))
+					{
+						vUnknown.addElement(attr);
+					}
+				}
+			}
+			while (vUnknown.size() < nMax && ++i < vAtts.size());
+		}
+
+		return vUnknown;
+	}
+
+	/**
+	 * Get the EnumAttributeType for an attribute
+	 * @param key the local name of the attribute
+	 * @return EnumAttributeType of the attribute
+	 */
+	public ValuedEnum getTypeForAttribute(final String key)
+	{
+		return getTheAttributeInfo().getAttributeType(key);
+	}
+
+	/**
+	 * is the attribute valid and of type iType. iType is of type EnumAttributeType but may be expanded in child classes
+	 * <p>
+	 * default: validAttribute(key, null)
+	 * @param key the attribute name
+	 * @param nameSpaceURI attribute namespace uri
+	 * @param level the validation level
+	 * @return boolean: true if the attribute is valid
+	 */
+	public boolean validAttribute(final String key, final String nameSpaceURI, final EnumValidationLevel level)
+	{
+		return getTheAttributeInfo().validAttribute(key, getAttribute(key, nameSpaceURI, null), level);
+	}
+
+	/**
+	 * Get the ValuedEnum for an enumerated attribute
+	 * @param key the local name of the attribute
+	 * @return ValuedEnum.Unknown of the requested attribute or null if the attribute is not an enum
+	 */
+	public ValuedEnum getEnumforAttribute(final String key)
+	{
+		return getTheAttributeInfo().getAttributeEnum(key);
+	}
+
+	/**
+	 * remove all default attributes from this i.e. all attributes whose value matches the schema default
+	 * @param bRecurse if true, alse recurse subelements, else only local
+	 */
+	public void eraseDefaultAttributes(final boolean bRecurse)
+	{
+		final JDFAttributeMap aMap = getDefaultAttributeMap();
+		if (aMap != null)
+		{
+			final NamedNodeMap nm = getAttributes();
+			if (nm != null)
+			{
+				final int siz = nm.getLength();
+				for (int i = siz - 1; i >= 0; i--)
+				{
+					final Node item = nm.item(i);
+					final String attVal = item.getNodeName();
+					if (aMap.containsKey(attVal) && item.getNodeValue().equals(aMap.get(attVal)))
+					{
+						removeAttribute(attVal);
+					}
+				}
+			}
+		}
+
+		if (bRecurse)
+		{
+			KElement e = getFirstChildElement();
+			while (e != null)
+			{
+				if (e instanceof JDFElement)
+					((JDFElement) e).eraseDefaultAttributes(true);
+				e = e.getNextSiblingElement();
+			}
+		}
+	}
+
+	/**
+	 * Checks, if this has any missing attributes
+	 * @return boolean true, if one or more attributes are missing
+	 */
+	public boolean hasMissingAttributes()
+	{
+		return getMissingAttributes(1).size() > 0;
+	}
+
+	/**
+	 * Checks, if this has are any unknown attributes
+	 * @param bIgnorePrivate if true, looks only in default and JDF namespaces
+	 * @return boolean true, if one or more attributes are unknown
+	 */
+	public boolean hasUnknownAttributes(final boolean bIgnorePrivate)
+	{
+		return getUnknownAttributes(bIgnorePrivate, 1).size() > 0;
+	}
+
+	/**
+	 * Tests, whether 'this' has any missing direct child elements
+	 * @return boolean true, if one or more direct child elements are missing
+	 */
+	public boolean hasMissingElements()
+	{
+		return getMissingElements(1).size() > 0;
+	}
+
+	/**
+	 * Tests, whether 'this' has any unknown direct child elements
+	 * @param bIgnorePrivate if true, only looks in default and JDF namespaces
+	 * @return boolean true if there are any unknown elements (in respect to the parameter)
+	 */
+	public boolean hasUnknownElements(final boolean bIgnorePrivate)
+	{
+		return getUnknownElements(bIgnorePrivate, 1).size() > 0;
+	}
+
+	/**
+	 * This function first, gets all prerelease attributes It ignores any atrributes that have been added by a schema parser
+	 * @param nMax maximum size of the returned Vector
+	 * @return Vector vector with the prerelease attributes
+	 * @default getMissingAttributes(9999999)
+	 */
+	public VString getPrereleaseAttributes(final int nMax)
+	{
+		final VString v = getMatchingAttributeVector(prereleaseAttributes(), nMax);
+		AttributeInfo ai = null;
+		if (!v.isEmpty())
+		{
+			ai = getTheAttributeInfo();
+		}
+
+		// ideally we would find a better method to recognize schema placed
+		// attributes
+		for (int i = v.size() - 1; i >= 0; i--)
+		{
+			final String key = v.stringAt(i);
+			if (ai != null && getAttribute(key).equals(ai.getAttributeDefault(key)))
+			{
+				v.remove(i);
+			}
+		}
+		return v;
+	}
+
+	/**
+	 * Get a vector of direct child element names that exist but are unknown in this element.
+	 * @return a <code>vString</code> that contains missing element keys
+	 */
+	public VString getInsertElements()
+	{
+		final VString vKnownElements = knownElements();
+		final VString vUniqueElements = uniqueElements();
+		final VString vStrRet = getInsertElementVector(vKnownElements, vUniqueElements);
+		return vStrRet;
+	}
+
+	/**
+	 * get a <code>vString</code> vector of direct child element names that may be inserted in this element. This means that a element which is already present
+	 * as a child and has a max occurs of 1 will not be part of the returned <code>vString</code>
+	 * @param vKnownKeys a <code>vString</code> list of known element tag names. If you want a complete list of all known Elements use
+	 * <code>KnownElements()</code> from KElement to get a list. Or call <code>GetInsertElements(int nMax)</code>
+	 * @param vUnique <code>vString</code> a list of elements that may occur only once. Use UniqueElements() to get a <code>String</code> which contains all
+	 * valid unique Elements from this.
+	 * @return VString a vector of strings that contains insertable element keys
+	 * @see #knownElements()
+	 * @see #getInsertElements()
+	 * @see #uniqueElements()
+	 */
+	public VString getInsertElementVector(final VString vKnownKeys, final VString vUnique)
+	{
+		final VString vAtts = new VString(getElementNameVector());
+		final VString vInsert = vKnownKeys;
+
+		for (int i = 0; i < vAtts.size(); i++)
+		{
+			if (vUnique.contains(vAtts.elementAt(i)))
+			{
+				vInsert.removeElement(vAtts.elementAt(i));
+			}
+		}
+
+		return vInsert;
+	}
+
+	/**
+	 * Returns the type of the given attribute for the latest JDF version. Attribute types of previous versions have to be provided by attribute-specific
+	 * functions (if necessary).
+	 * @param attributeName name of the attribute
+	 * @return EnumAttributeType the attribute's type
+	 */
+	public AttributeInfo.EnumAttributeType attributeType(final String attributeName)
+	{
+		return getTheAttributeInfo().getAttributeType(attributeName);
+	}
+
+	/**
+	 * Get the vector of valid attribute values for an enumerated attribute
+	 * @param key the local name of the attribute
+	 * @return vector of valid names, null if key is not an enumeration
+	 */
+	public VString getNamesVector(final String key)
+	{
+		final ValuedEnum enu = getEnumforAttribute(key);
+		if (enu != null)
+		{
+			return EnumUtil.getNamesVector(enu.getClass());
+		}
+		return null;
+	}
+
+	private static final DocumentJDFImpl m_dummyDocumentJDFImpl = new DocumentJDFImpl();
+
+	private boolean checkInstance(final VString vElements, final String requiredKey)
+	{
+		final Class<?> requiredClass = m_dummyDocumentJDFImpl.getFactoryClass(requiredKey);
+		Class<?> elementClass = null;
+		final Iterator<String> elemIter = vElements.iterator();
+		while (elemIter.hasNext() && !requiredClass.equals(elementClass))
+		{
+			final String elemName = elemIter.next();
+			elementClass = m_dummyDocumentJDFImpl.getFactoryClass(elemName);
+		}
+
+		return requiredClass.equals(elementClass);
+	}
+
+	/**
+	 * Returns a vector with missing elements
+	 * <p>
+	 * default: getMissingElementVector(vRequiredKeys, 9999999)
+	 * @param vRequiredKeys vector with all element which are required
+	 * @param nMax maximum amount of missing element inside the returned vector
+	 * @return Vector the vector with the missing elements
+	 */
+	public VString getMissingElementVector(final VString vRequiredKeys, final int nMax)
+	{
+		final VString vMissing = new VString();
+		if (vRequiredKeys == null || vRequiredKeys.isEmpty())
+		{
+			return vMissing; // none required - just return null
+		}
+		final VString vElements = getElementNameVector();
+
+		for (int i = 0; i < vRequiredKeys.size() && vMissing.size() < nMax; i++)
+		{
+			final String requiredKey = vRequiredKeys.elementAt(i);
+			if (!vElements.contains(requiredKey))
+			{
+				if (!checkInstance(vElements, requiredKey))
+				{
+					vMissing.add(requiredKey);
+				}
+			}
+		}
+
+		return vMissing;
 	}
 
 	/**
@@ -1296,7 +2072,6 @@ public class JDFElement extends KElement
 	 * 
 	 * @return boolean the validity of the node
 	 */
-	@Override
 	public boolean isValid(final EnumValidationLevel level)
 	{
 		return isValid_JDFElement(level);
@@ -1902,18 +2677,18 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Get the target element of a link<br>
-	 * overwrites KElement
-	 * 
-	 * @param id value of the ID to search
+	 * looking for a specified target with an id, e.g. resource.<br>
+	 * Offers access to exactly KElements implementation of GetTarget even if called for an instance of one of it's subclasses.
+	 * <p>
+	 * default: getTarget(id, JDFCoreConstants.ID)
+	 * @param id value of the ID tag to search
 	 * @param attrib name of the ID tag, defaults to "ID"
-	 * @return JDFElement - the element that this reference refers to
-	 * 
-	 * default: GetTarget(GetHRef(), AttributeName.ID)
+	 * @return KElement - the element if existing, otherwise <code>null</code>
 	 */
-	public JDFElement getTarget_JDFElement(final String id, final String attrib)
+	@Override
+	public KElement getTarget(final String id, final String attrib)
 	{
-		return (JDFElement) super.getTarget(id, attrib);
+		return getTarget_JDFElement(id, attrib);
 	}
 
 	/**
@@ -2834,6 +3609,77 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * Sets the attributes from the curent element to the attributes from kElem. If the Attributes map from kElem is empty (kElem has no attributes), zero is
+	 * returned. Otherwhise the size of the map (number of attributes from kElem) is returned.
+	 * @param kElem the attribute source
+	 * @param ignoreList 
+	 * @return int number of elements from kElem
+	 */
+	@Override
+	protected int setAttributes(final KElement kElem, final VString ignoreList)
+	{
+		if (kElem == null)
+		{
+			return 0;
+		}
+
+		KElement parent = null;
+		if (kElem instanceof JDFResource)
+		{
+			parent = kElem.getParentNode_KElement();
+			if (parent != null && kElem.getNodeName().equals(parent.getNodeName()))
+			{
+				final JDFResource r = (JDFResource) parent;
+				VString il2 = ignoreList;
+				if (il2 == null)
+				{
+					il2 = new VString();
+					il2.add(AttributeName.ID);
+					il2.add(AttributeName.PARTUSAGE);
+					il2.add(AttributeName.PARTIDKEYS);
+					il2.add(AttributeName.CLASS);
+					il2.appendUnique(r.getPartIDKeys());
+				}
+
+				setAttributes(parent, il2);
+			}
+		}
+
+		int siz = 0;
+		final NamedNodeMap nm = kElem.getAttributes();
+		if (nm != null)
+		{
+			siz = nm.getLength();
+			boolean bCatch = false;
+			// this loop allows us to catch namespace exceptions, then set the namespace and subsequently reset the attributes
+			for (int j = 0; j < 2; j++)
+			{
+				for (int i = 0; i < siz; i++)
+				{
+					final Node a = nm.item(i);
+					if (ignoreList == null || !ignoreList.contains(a.getLocalName()))
+					{
+						try
+						{
+							setAttribute(a.getNodeName(), a.getNodeValue(), a.getNamespaceURI());
+						}
+						catch (JDFException x)
+						{
+							bCatch = true;
+							if (j == 1)
+								throw x;
+						}
+					}
+				}
+				if (!bCatch)
+					break; // one loop is enough in case all sets went through
+			}
+		}
+
+		return siz;
+	}
+
+	/**
 	 * create a string link from an integer
 	 * 
 	 * @param id the integer value to convert to an ID
@@ -3051,7 +3897,7 @@ public class JDFElement extends KElement
 		for (i = 0; i < v.size(); i++)
 		{
 			final KElement e = v.elementAt(i);
-			if (!e.isValid(level))
+			if ((e instanceof JDFElement) && !((JDFElement) e).isValid(level))
 			{
 				vBad.add(e.getLocalName());
 				if (++num >= nMax)
@@ -3490,6 +4336,181 @@ public class JDFElement extends KElement
 		}
 
 		return true;
+	}
+
+	/**
+	 * @see org.apache.xerces.dom.ParentNode#replaceChild(org.w3c.dom.Node, org.w3c.dom.Node)
+	 */
+	@Override
+	public synchronized Node replaceChild(final Node arg0, final Node arg1) throws DOMException
+	{
+		setDirty(false);
+		if (arg1 instanceof JDFElement)
+		{
+			((JDFElement) arg1).clearTargets();
+		}
+		return super.replaceChild(arg0, arg1);
+	}
+
+	/**
+	 * @see org.apache.xerces.dom.ParentNode#removeChild(org.w3c.dom.Node)
+	 */
+	@Override
+	public synchronized Node removeChild(final Node arg0) throws DOMException
+	{
+		setDirty(false);
+		if (arg0 instanceof JDFElement)
+		{
+			((JDFElement) arg0).clearTargets();
+		}
+
+		return super.removeChild(arg0);
+	}
+
+	/**
+	 * Gets the target of link. Follows an ID-IDREF pair by recursively searching for an attrib with the value id
+	 * @param id value of the ID tag to search
+	 * @param attrib name of the ID tag, defaults to "ID"
+	 * @return KElement the target of link - the element node.
+	 */
+	public KElement getTarget_JDFElement(final String id, String attrib)
+	{
+		if (id == null || id.equals(JDFCoreConstants.EMPTYSTRING))
+		{
+			return null;
+		}
+		boolean bID = false;
+		KElement kRet = null;
+		if (attrib == null)
+		{
+			attrib = JDFCoreConstants.ID;
+		}
+
+		// try to find the target ID in the cached list
+		XMLDocUserData userData = getXMLDocUserData();
+		if (attrib.equals(JDFCoreConstants.ID) && userData != null)
+		{
+			kRet = userData.getTarget(id);
+			bID = true;
+		}
+
+		// if it wasn't in the cached list, search for it
+		if (kRet == null)
+		{
+			// loop upwards from here
+			// links are most likely quite local
+			KElement excludeElement = null;
+			KElement root = this;
+			final KElement docRoot = getDocRoot();
+			boolean bFound = false;
+			if (!bID)
+			{
+				userData = null;
+			}
+
+			while (root != null && !bFound)
+			{
+				final KElement deepElement = getDeepElementByID(root, attrib, id, excludeElement, userData);
+
+				// search tree one level higher
+				if (deepElement == null)
+				{
+					if (root == docRoot)
+					{
+						kRet = null;
+						bFound = true;
+					}
+					else
+					{
+						excludeElement = root; // was already looked at
+						root = root.getParentNode_KElement();
+					}
+				}
+				else
+				{
+					kRet = deepElement; // found it; return it
+					bFound = true;
+				}
+			}
+		}
+
+		return kRet;
+	}
+
+	/**
+	 * Inserts the Element elementName before the existing Element node beforeChild. If beforeChild is <code>null</code> , insert elementName at the end of the
+	 * list of children. If elementName is a DocumentFragment object, all of its children are inserted, in the same order, before beforeChild. If the
+	 * elementName is already in the tree, it is removed first.
+	 * <p>
+	 * default: insertBefore(elementName, beforeChild, null)
+	 * @param elementName The elementName to insert the element itself will be created
+	 * @param beforeChild The reference element, i.e., the elemente before which the new element must be inserted
+	 * @param nameSpaceURI The namespace to create elementName in
+	 * @return KElement the element being inserted
+	 */
+	@Override
+	public KElement insertBefore(final String elementName, final Node beforeChild, final String nameSpaceURI)
+	{
+		final KElement newChild = super.insertBefore(elementName, beforeChild, nameSpaceURI);
+		if (newChild != null)
+		{
+			Document od = getOwnerDocument();
+			if (od instanceof DocumentJDFImpl && ((DocumentJDFImpl) od).bInitOnCreate)
+				newChild.init();
+		}
+		return newChild;
+	}
+
+	@Override
+	protected void clearTargets()
+	{
+		final XMLDocUserData ud = getXMLDocUserData();
+		if (ud != null)
+		{
+			if (hasChildElements()) // who knows what is down there -- clear
+			// cache
+			{
+				ud.clearTargets();
+			}
+			else
+			// only need to remove this element
+			{
+				final String id = super.getAttribute(JDFCoreConstants.ID);
+				if (id != null)
+				{
+					ud.removeTarget(id);
+				}
+			}
+		}
+	}
+
+	/** 
+	 * copies a node into this, ignoring identical node names i.e. duplicating elements
+	 *  
+	 * @param src
+	 * @param bRemove if true, remove existing information, else retain and overwrite / merge
+	 * @return this
+	 * 
+	 */
+	@Override
+	public KElement copyInto(KElement src, boolean bRemove)
+	{
+		if (src == null || src == this)
+			return this;
+
+		JDFDoc ownerDocument_JDF = getOwnerDocument_JDFElement();
+		boolean b = ownerDocument_JDF.getInitOnCreate();
+		try
+		{
+			ownerDocument_JDF.setInitOnCreate(false);
+			super.copyInto(src, bRemove);
+		}
+		finally
+		{
+			// rewind
+			ownerDocument_JDF.setInitOnCreate(b);
+		}
+		return this;
 	}
 
 	/**
@@ -4163,6 +5184,180 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * Enumeration for validation level <br>
+	 * <blockquote>
+	 * <ul>
+	 * <li>level ValidationLevel_NoWarnIncomplete: Ignore warnings and don't require all required parameters <br>
+	 * <li>level ValidationLevel_NoWarnComplete: Ignore warnings and require all required parameters <br>
+	 * <li>level ValidationLevel_Incomplete: incomplete elements are valid <br>
+	 * <li>level ValidationLevel_Complete: full validation of an individual resource <br>
+	 * <li>level ValidationLevel_RecursiveIncomplete: incomplete validation of an individual resource and all of its child elements - e.g. for pools <br>
+	 * <li>level ValidationLevel_RecursiveComplete: full validation of an individual resource and all of its child elements - e.g. for pools <br>
+	 * </ul>
+	 * </blockquote>
+	 */
+	@SuppressWarnings("unchecked")
+	public static final class EnumValidationLevel extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		protected EnumValidationLevel(final String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		/**
+		 * @param enumName
+		 * @return
+		 */
+		public static EnumValidationLevel getEnum(final String enumName)
+		{
+			return (EnumValidationLevel) getEnum(EnumValidationLevel.class, enumName);
+		}
+
+		/**
+		 * @param enumValue
+		 * @return
+		 */
+		public static EnumValidationLevel getEnum(final int enumValue)
+		{
+			return (EnumValidationLevel) getEnum(EnumValidationLevel.class, enumValue);
+		}
+
+		/**
+		 * @return
+		 */
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumValidationLevel.class);
+		}
+
+		/**
+		 * @return
+		 */
+		public static List getEnumList()
+		{
+			return getEnumList(EnumValidationLevel.class);
+		}
+
+		/**
+		 * @return
+		 */
+		public static Iterator iterator()
+		{
+			return iterator(EnumValidationLevel.class);
+		}
+
+		/**
+		 * return true if vl is a recursvive EnumValidationLevel
+		 * @param vl the EnumValidationLevel to check
+		 * @return true if vl is recursive
+		 */
+		public static boolean isRecursive(final EnumValidationLevel vl)
+		{
+			return EnumValidationLevel.RecursiveIncomplete.equals(vl) || EnumValidationLevel.RecursiveComplete.equals(vl);
+		}
+
+		/**
+		 * return true if vl is a recursvive EnumValidationLevel
+		 * @param vl the EnumValidationLevel to check
+		 * @return true if vl is recursive
+		 */
+		public static boolean isNoWarn(final EnumValidationLevel vl)
+		{
+			return EnumValidationLevel.NoWarnComplete.equals(vl) || EnumValidationLevel.NoWarnIncomplete.equals(vl);
+		}
+
+		/**
+		 * returns true if the enumeration level is either Complete, NoWarnComplete or RecursiveComplete, i.e. if the parameter is required
+		 * @param level the level to check
+		 * @return true if required
+		 */
+		public static boolean isRequired(final EnumValidationLevel level)
+		{
+			return EnumValidationLevel.Complete.equals(level) || EnumValidationLevel.RecursiveComplete.equals(level) || EnumValidationLevel.NoWarnComplete.equals(level);
+		}
+
+		/**
+		 * ignore warnings and allow missing traits
+		 */
+		public static final EnumValidationLevel NoWarnIncomplete = new EnumValidationLevel("NoWarnIncomplete");
+
+		/**
+		 * ignore warnings and require all traits
+		 */
+		public static final EnumValidationLevel NoWarnComplete = new EnumValidationLevel("NoWarnComplete");
+
+		/**
+		 * show warnings and allow missing traits
+		 */
+		public static final EnumValidationLevel Incomplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_INCOMPLETE);
+
+		/**
+		 * show warnings and require all traits
+		 */
+		public static final EnumValidationLevel Complete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_COMPLETE);
+
+		/**
+		 * show warnings and allow missing traits- also recurse referenced elements
+		 */
+		public static final EnumValidationLevel RecursiveIncomplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_RECURSIVEINCOMPLETE);
+
+		/**
+		 * show warnings and require all traits - also recurse referenced elements
+		 */
+		public static final EnumValidationLevel RecursiveComplete = new EnumValidationLevel(JDFConstants.VALIDATIONLEVEL_RECURSIVECOMPLETE);
+
+		/**
+		 * calculate the corresponding nowarn level based on level
+		 * @param level the level to strip warnings from
+		 * @param noWarning if true, set to nowarne, else set to standard
+		 * @return the validationlevel withot warnings
+		 */
+		public static EnumValidationLevel setNoWarning(final EnumValidationLevel level, final boolean noWarning)
+		{
+			EnumValidationLevel levelLocal = level;
+
+			if (noWarning && !isNoWarn(levelLocal))
+			{
+				levelLocal = isRequired(levelLocal) ? EnumValidationLevel.NoWarnComplete : EnumValidationLevel.NoWarnIncomplete;
+			}
+
+			if (!noWarning && isNoWarn(levelLocal))
+			{
+				levelLocal = isRequired(levelLocal) ? EnumValidationLevel.Complete : EnumValidationLevel.Incomplete;
+			}
+
+			return levelLocal;
+		}
+
+		/**
+		 * calculate the corresponding incomplete level based on level
+		 * @param level the level to test
+		 * @return EnumValidationLevel - the modified level
+		 */
+		public static EnumValidationLevel incompleteLevel(final EnumValidationLevel level)
+		{
+			EnumValidationLevel levelLocal = level;
+
+			if (EnumValidationLevel.Complete.equals(levelLocal))
+			{
+				levelLocal = EnumValidationLevel.Incomplete;
+			}
+			else if (EnumValidationLevel.RecursiveComplete.equals(levelLocal))
+			{
+				levelLocal = EnumValidationLevel.RecursiveIncomplete;
+			}
+			else if (EnumValidationLevel.NoWarnComplete.equals(levelLocal))
+			{
+				levelLocal = EnumValidationLevel.NoWarnIncomplete;
+			}
+			return levelLocal;
+		}
+	}
+
+	/**
 	 * @param enumName
 	 * @return EnumVersion
 	 * @deprecated use EnumVersion.getEnum
@@ -4632,6 +5827,24 @@ public class JDFElement extends KElement
 		return m;
 	}
 
+	/**
+	 * @param elementName the elementname with namespace prefix "xyz:abc"
+	 * @param nameSpaceURI the namespace of the element "null" is valid if the namespace was specified already above. The method will lookup the namespace for
+	 * you. Performance wise its better to add it nevertheless.
+	 * @return KElement the appended element or null
+	 * @throws JDFException if you tried to append an element into an unspecified namespace
+	 */
+	@Override
+	public synchronized KElement appendElement(final String elementName, final String nameSpaceURI)
+	{
+		final KElement newChild = appendElementRaw(elementName, nameSpaceURI);
+		setDirty(false);
+		Document od = getOwnerDocument();
+		if (od instanceof DocumentJDFImpl && ((DocumentJDFImpl) od).bInitOnCreate)
+			newChild.init();
+		return newChild;
+	}
+
 	// ////////////////////////////////////////////////////////////////////
 	/**
 	 * Appends element Comment to the end of 'this'
@@ -4752,6 +5965,107 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * GetChildWithAttribute - Get a child with matching attributes
+	 * <p>
+	 * default: getChildWithAttribute(nodeName, attName, null,attValue, 0, true)
+	 * @param nodeName name of the child node to search for
+	 * @param attName attribute name to search for
+	 * @param nameSpaceURI namespace to search for
+	 * @param attVal the attribute value to search for, Wildcard supported ( <code>null</code>)
+	 * @param index if more then one child meets the condition, you can specify the one to return via an index
+	 * @param bDirect if true, looks only in direct children, else search through all children, grandchildren etc.
+	 * @return KElement the element which matches the above conditions
+	 */
+	@Override
+	public KElement getChildWithAttribute(String nodeName, final String attName, String nameSpaceURI, String attVal, final int index, final boolean bDirect)
+	{
+		KElement kRet = null;
+		XMLDocUserData userData = null;
+
+		final boolean bID = AttributeName.ID.equals(attName);
+		if (bID && !isWildCard(attVal))
+		{
+			userData = getXMLDocUserData();
+			if (userData != null)
+			{
+				kRet = userData.getTarget(attVal);
+				if (kRet != null && ((bDirect && kRet.getParentNode_KElement() != this) || kRet.getOwnerDocument() != getOwnerDocument()))
+				{
+					kRet = null; // it is somewhere else, not a child of this!
+				}
+				if (kRet != null)
+				{
+					return kRet;
+				}
+			}
+		}
+
+		if (isWildCard(nodeName))
+		{
+			nodeName = null;
+		}
+		if (isWildCard(nameSpaceURI))
+		{
+			nameSpaceURI = null;
+		}
+		if (isWildCard(attVal))
+		{
+			attVal = null;
+		}
+
+		if (bDirect)
+		{ // inlined for performance
+			KElement e0 = getFirstChildElement();
+			if (e0 != null)
+			{
+				final boolean bAlwaysFit = nodeName == null && nameSpaceURI == null;
+				do
+				{
+					KElement e = e0;
+					if (e instanceof JDFRefElement)
+					{
+						if (!(this instanceof JDFResourcePool))
+						{
+							// loops!
+							e = ((JDFRefElement) e0).getTarget();
+						}
+					}
+
+					if (e != null)
+					{
+						if ((bAlwaysFit || e.fitsName(nodeName, nameSpaceURI)) && (e.includesAttribute(attName, attVal)))
+						{
+							kRet = e;
+						}
+
+						// update ID cache while searching IDs
+						if (bID && userData != null)
+						{
+							final String idVal = e.getAttribute_KElement(AttributeName.ID, null, null);
+							if (idVal != null)
+							{
+								userData.setTarget(e, idVal);
+							}
+						}
+					}
+
+					e0 = e0.getNextSiblingElement();
+
+				}
+				while (e0 != null && (kRet == null)); // loop to end if we are
+				// filling the cache
+			}
+		}
+		else
+		{
+			final JDFAttributeMap m = new JDFAttributeMap(attName, attVal);
+			kRet = getChildByTagName(nodeName, nameSpaceURI, index, m, bDirect, true);
+		}
+
+		return kRet;
+	}
+
+	/**
 	 * test whether the attributes described by attName and attVal exist<br< also checking ranges and NMTOKENS etc.
 	 * 
 	 * @param attName the name of the attribute to look for
@@ -4777,7 +6091,7 @@ public class JDFElement extends KElement
 		{
 			return true;
 		}
-		return StringUtil.matchesAttribute(attVal, thisVal, dataType);
+		return AtrInfo.matchesAttribute(attVal, thisVal, dataType);
 	}
 
 	/**
@@ -4801,14 +6115,57 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Gets inter-resource linked resource IDs
-	 * 
-	 * @param vDoneRefs (use null as default value)
-	 * @param bRecurse if true, return recursively linked IDs as well
-	 * @return the HashSet of all refElements
-	 * 
-	 * @default getAllRefs(null, false)
+	 * this is an optimized version of GetDeepElement() which returns a complete list of elements. Here we abort, when we found the first element that fits.
+	 * (There is only one element, because the id must be unique)
+	 * @param attName attribute name
+	 * @param id attribute ID value
+	 * @param childToExclude here can be specified, if this method should exclude a child-element when searching This is useful, when searching a tree up
+	 * @param ud userdata with reference to id cache, if null, no caching
+	 * @return KElement the element specified by id and name
 	 */
+	protected static KElement getDeepElementByID(final KElement base, final String attName, final String id, final KElement childToExclude, final XMLDocUserData ud)
+	{
+		Attr attr = base.getAttributeNode(attName);
+		String attVal = attr != null ? attr.getValue() : null;
+		if (attVal != null)
+		{
+			if (ud != null)
+			{
+				ud.setTarget(base, attVal);
+			}
+			if (attVal.equals(id))
+			{
+				return base; // just found ourselves
+			}
+		}
+		// tree walk children
+		KElement childElement = base.getFirstChildElement();
+
+		while (childElement != null)
+		{
+			if (!childElement.equals(childToExclude))
+			{
+				final KElement kDeepElement = JDFElement.getDeepElementByID(childElement, attName, id, childToExclude, ud);
+				if (kDeepElement != null)
+				{
+					return kDeepElement; // just got it
+				}
+			}
+			// not yet found, try next sibling
+			childElement = childElement.getNextSiblingElement();
+		}// end while
+		return null;
+	}
+
+	/**
+	* Gets inter-resource linked resource IDs
+	* 
+	* @param vDoneRefs (use null as default value)
+	* @param bRecurse if true, return recursively linked IDs as well
+	* @return the HashSet of all refElements
+	* 
+	* @default getAllRefs(null, false)
+	*/
 	public HashSet<JDFElement> getAllRefs(HashSet<JDFElement> vDoneRefs, final boolean bRecurse)
 	{
 
@@ -4925,15 +6282,18 @@ public class JDFElement extends KElement
 
 	/**
 	 * gets a reasonable value for an attribute
-	 * @param e
+	 * @param ke
 	 * @param attName
 	 * @return
 	 */
-	static public String getValueForNewAttribute(final KElement e, final String attName)
+	static public String getValueForNewAttribute(final KElement ke, final String attName)
 	{
 
+		if (!(ke instanceof JDFElement))
+			return "New Value";
+		JDFElement e = (JDFElement) ke;
 		// return the default if it exists
-		final JDFAttributeMap map = e == null ? null : e.getDefaultAttributeMap();
+		final JDFAttributeMap map = (e != null) ? null : e.getDefaultAttributeMap();
 		if (map != null && map.containsKey(attName))
 		{
 			return map.get(attName);
@@ -4951,7 +6311,7 @@ public class JDFElement extends KElement
 
 		if (attName.equals("JobPartID") && (e instanceof JDFElement))
 		{
-			return ((JDFElement) e).generateDotID("JobPartID", null);
+			return (e).generateDotID("JobPartID", null);
 		}
 
 		if (attName.equals("Status") && (e instanceof JDFNode))

@@ -84,7 +84,7 @@ public class XMLDocUserDataTest extends JDFTestCaseBase
 	 */
 	public void testGlobalDirty()
 	{
-		final XMLDoc d = new XMLDoc("d", null);
+		final JDFDoc d = new JDFDoc("d");
 		final XMLDocUserData ud = d.getXMLDocUserData();
 		ud.setDirtyPolicy(XMLDocUserData.EnumDirtyPolicy.None);
 		ud.clearDirtyIDs();

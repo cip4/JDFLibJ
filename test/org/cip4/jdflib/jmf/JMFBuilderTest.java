@@ -70,7 +70,7 @@
 package org.cip4.jdflib.jmf;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 
 /**
  * 

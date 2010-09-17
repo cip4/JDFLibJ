@@ -95,6 +95,8 @@ import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFRefElement;
@@ -104,8 +106,6 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.core.XMLErrorHandler;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -174,7 +174,7 @@ public class JDFValidator
 	 * if true, warn on URL attributes that point to Nirvana
 	 */
 	public boolean bWarnDanglingURL = false;
-	public KElement.EnumValidationLevel level = EnumValidationLevel.Incomplete;
+	public EnumValidationLevel level = EnumValidationLevel.Incomplete;
 	public VString allFiles = null;
 
 	public String proxyHost = null;
@@ -447,7 +447,7 @@ public class JDFValidator
 				bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
 				if (!bIsOK)
 				{
-					final EnumVersion v = jdfElement.getParentNode_KElement().getFirstVersion(elmName, true);
+					final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getFirstVersion(elmName, true);
 					testElement.setAttribute("FirstVersion", v.getName());
 					setErrorType(testElement, "PreReleaseElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " First Valid version: "
 							+ v.getName(), indent + 2);
@@ -460,7 +460,7 @@ public class JDFValidator
 				bIsOK = !StringUtil.hasToken(invElems, elmName, " ", 0);
 				if (!bIsOK)
 				{
-					final EnumVersion v = jdfElement.getParentNode_KElement().getLastVersion(elmName, true);
+					final EnumVersion v = ((JDFElement) jdfElement.getParentNode_KElement()).getLastVersion(elmName, true);
 					testElement.setAttribute("LastVersion", v.getName());
 					setErrorType(testElement, "DeprecatedElement", elmName + " is not valid in JDF Version" + jdfElement.getVersion(true).getName() + " Last Valid version: "
 							+ v.getName(), indent + 2);
@@ -1870,7 +1870,7 @@ public class JDFValidator
 	{
 		JDFDoc gd = null;
 		final JDFParser p = new JDFParser();
-		p.m_SchemaLocation = schemaLocation;
+		p.setJDFSchemaLocation(UrlUtil.urlToFile(schemaLocation));
 		p.m_ErrorHandler = errorHandler;
 
 		gd = p.parseFile(xmlFile);
@@ -1900,7 +1900,7 @@ public class JDFValidator
 		if (_schemaLocation != null && _schemaLocation.length() != 0)
 		{
 			final String fileToUrl = UrlUtil.fileToUrl(_schemaLocation, false);
-			schemaLocation = "http://www.CIP4.org/JDFSchema_1_1 " + fileToUrl;
+			schemaLocation = fileToUrl;
 		}
 	}
 
@@ -2333,7 +2333,7 @@ public class JDFValidator
 				else
 				{
 					final JDFParser p = new JDFParser();
-					p.m_SchemaLocation = schemaLocation;
+					p.setJDFSchemaLocation(UrlUtil.urlToFile(schemaLocation));
 					theDoc = p.parseStream(inStream);
 					if (theDoc != null)
 					{

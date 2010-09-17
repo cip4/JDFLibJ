@@ -74,11 +74,12 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.JDFDate;
@@ -92,7 +93,7 @@ public class XJDFHelper
 	/**
 	 * @param xjdf if null a new XJDF is generated, else the xjdf root to be manipulated
 	 */
-	public XJDFHelper(KElement xjdf)
+	public XJDFHelper(JDFElement xjdf)
 	{
 		super();
 		if (xjdf == null)
@@ -103,7 +104,7 @@ public class XJDFHelper
 		{
 			theXJDF = xjdf;
 		}
-		theXJDF.getOwnerDocument_KElement().setInitOnCreate(false);
+		theXJDF.getOwnerDocument_JDFElement().setInitOnCreate(false);
 	}
 
 	/**
@@ -138,7 +139,7 @@ public class XJDFHelper
 	{
 		JDFDoc doc = new JDFDoc(XJDF20.rootName);
 		doc.setInitOnCreate(false);
-		theXJDF = doc.getRoot();
+		theXJDF = (JDFElement) doc.getRoot();
 		JDFAuditPool ap = (JDFAuditPool) theXJDF.getCreateElement(ElementName.AUDITPOOL);
 		ap.addAudit(EnumAuditType.Created, null).init();
 	}
@@ -337,7 +338,7 @@ public class XJDFHelper
 		return appendSet("Resource", name, usage);
 	}
 
-	protected KElement theXJDF;
+	protected JDFElement theXJDF;
 
 	/**
 	 * @see java.lang.Object#toString()

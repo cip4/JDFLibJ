@@ -23,9 +23,6 @@ import java.util.Vector;
 import org.cip4.jdflib.core.DocumentJDFImpl;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFParser;
-//======================================================================================================
-//     Generator
-//======================================================================================================
 
 public class Generator
 {

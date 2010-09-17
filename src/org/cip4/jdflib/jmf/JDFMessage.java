@@ -98,6 +98,7 @@ import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
@@ -3285,7 +3286,7 @@ public class JDFMessage extends JDFAutoMessage
 				{
 					bCatch = true;
 				}
-				if (bCatch || child == null || !child.isValid(level))
+				if (bCatch || child == null || (child instanceof JDFElement) && !((JDFElement) child).isValid(level))
 				{
 					vElem.appendUnique(element);
 					if (++n >= nMax)

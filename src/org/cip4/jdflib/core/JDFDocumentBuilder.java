@@ -51,7 +51,6 @@ public class JDFDocumentBuilder extends DocumentBuilder
 	private void init(JDFParser parser)
 	{
 		m_parser = parser;
-		m_parser.m_DocumentClass = "org.cip4.jdflib.core.DocumentJDFImpl";
 	}
 
 	/**

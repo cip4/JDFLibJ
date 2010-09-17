@@ -85,8 +85,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoDevCap;
 import org.cip4.jdflib.auto.JDFAutoBasicPreflightTest.EnumListType;
+import org.cip4.jdflib.auto.JDFAutoDevCap;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
@@ -1840,7 +1840,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 		JDFAttributeMap missMap = new JDFAttributeMap();
 		JDFAttributeMap capMap = new JDFAttributeMap();
 
-		final JDFAttributeMap defMap = getIgnoreDefaults() ? null : e.getDefaultAttributeMap();
+		final JDFAttributeMap defMap = (getIgnoreDefaults() || !(e instanceof JDFElement)) ? null : ((JDFElement) e).getDefaultAttributeMap();
 		JDFAttributeMap am = new JDFAttributeMap(defMap);
 		am.putAll(e.getAttributeMap()); // only attribute map of 'e'
 		JDFAttributeMap m = getSpanAndAttributesMap(e); // get of 'e' as a map
@@ -1942,12 +1942,13 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 				l2 = EnumValidationLevel.incompleteLevel(level);
 		}
 
-		if (EnumValidationLevel.isRequired(l2))
+		if (EnumValidationLevel.isRequired(l2) && (e instanceof JDFElement))
 		{
-			VString missAts = e.getMissingAttributes(9999999);
+			JDFElement je = (JDFElement) e;
+			VString missAts = je.getMissingAttributes(9999999);
 			for (int i = 0; i < missAts.size(); i++)
 				missMap.put(missAts.stringAt(i), "Attribute");
-			missAts = e.getMissingElements(99999);
+			missAts = je.getMissingElements(99999);
 			for (int i = 0; i < missAts.size(); i++)
 			{
 				final String stringAt = missAts.stringAt(i);
@@ -2027,7 +2028,7 @@ public class JDFDevCap extends JDFAutoDevCap implements ICapabilityElement
 	 */
 	private final JDFAttributeMap getSpanAndAttributesMap(KElement e)
 	{
-		final JDFAttributeMap defMap = getIgnoreDefaults() ? null : e.getDefaultAttributeMap();
+		final JDFAttributeMap defMap = (getIgnoreDefaults() || !(e instanceof JDFElement)) ? null : ((JDFElement) e).getDefaultAttributeMap();
 		JDFAttributeMap m = new JDFAttributeMap(defMap);
 		m.putAll(e.getAttributeMap()); // only attribute map of 'e'
 

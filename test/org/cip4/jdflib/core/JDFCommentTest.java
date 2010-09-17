@@ -73,7 +73,7 @@ package org.cip4.jdflib.core;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFNotification;
@@ -90,8 +90,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 
 		root.setVersion(JDFElement.EnumVersion.Version_1_2);
 		JDFAuditPool ap = root.getCreateAuditPool();
-		JDFNotification notif = ap.addNotification(
-				JDFNotification.EnumClass.Information, "Me", null);
+		JDFNotification notif = ap.addNotification(JDFNotification.EnumClass.Information, "Me", null);
 		JDFComment c = notif.appendComment();
 		c.setText("This element should have no ID attribute");
 		String id = c.getAttribute(AttributeName.ID, null, null);
@@ -113,8 +112,7 @@ public class JDFCommentTest extends JDFTestCaseBase
 		c21.setText(txt2);
 		assertEquals("text is equal in DOM", txt, c11.getText());
 		assertEquals("text is equal in DOM", txt2, c21.getText());
-		final String commentFile = sm_dirTestDataTemp + File.separator
-				+ "CommentTest.JDF";
+		final String commentFile = sm_dirTestDataTemp + File.separator + "CommentTest.JDF";
 		doc.write2File(commentFile, 2, true);
 		JDFParser p = new JDFParser();
 		JDFDoc doc2 = p.parseFile(commentFile);

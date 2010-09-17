@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -112,7 +112,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 				{
 					// ignoreList : abstract classes, classes which are no jdf
 					// elements ...
-					VString ignoreList = new VString("JDFConstants.java JDFDoc.java JDFDocumentBuilder.java "
+					VString ignoreList = new VString("JDFConstants.java JDFCoreConstants.java JDFDoc.java JDFDocumentBuilder.java "
 							+ "JDFException.java JDFParser.java JDFVersions.java JDFAbstractState.java "
 							+ "JDFEvaluation.java JDFNodeTerm.java JDFTerm.java JDFEnumerationSpan.java " + "JDFSpan.java JDFSpanBase.java "
 							+ "JDFDurationSpan.java JDFIntegerSpan.java JDFNameSpan.java JDFNumberSpan.java " + "JDFOptionSpan.java JDFShapeSpan.java JDFSpanNamedColor.java "

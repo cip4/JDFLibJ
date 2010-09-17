@@ -81,8 +81,8 @@ import java.util.HashSet;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
-import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 
 /**

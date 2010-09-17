@@ -80,28 +80,28 @@ import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumSettingsPolicy;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFElement.EnumXYRelation;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.jmf.JDFAcknowledge;
 import org.cip4.jdflib.jmf.JDFCommand;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFJobPhase;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFPipeParams;
 import org.cip4.jdflib.jmf.JDFQueue;
 import org.cip4.jdflib.jmf.JDFQueueEntry;
 import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.jmf.JDFResponse;
-import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.node.JDFAncestor;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -628,7 +628,8 @@ public class JDFElementTest extends JDFTestCaseBase
 	 */
 	public void testGetValueForNewAttribute()
 	{
-		assertTrue(JDFElement.getValueForNewAttribute(null, "ID").startsWith("I"));
+		JDFElement e = new JDFDoc("JMF").getJMFRoot();
+		assertTrue(JDFElement.getValueForNewAttribute(e, "ID").startsWith("I"));
 	}
 
 	/**
@@ -907,10 +908,10 @@ public class JDFElementTest extends JDFTestCaseBase
 			JDFDoc jdfDoc = p.parseFile(file.getPath());
 			assertTrue("parse ok", jdfDoc != null);
 
-			KElement e = null;
+			JDFElement e = null;
 			if (jdfDoc != null)
 			{
-				e = jdfDoc.getRoot();
+				e = (JDFElement) jdfDoc.getRoot();
 				assertTrue("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
 			}
 
@@ -921,7 +922,7 @@ public class JDFElementTest extends JDFTestCaseBase
 			// TODO fix handling of prerelease default attributes
 			if (jdfDoc != null)
 			{
-				e = jdfDoc.getRoot();
+				e = (JDFElement) jdfDoc.getRoot();
 				assertTrue("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
 			}
 		}
@@ -960,10 +961,10 @@ public class JDFElementTest extends JDFTestCaseBase
 			System.out.println("Parsing: " + file.getPath());
 			JDFDoc jdfDoc = p.parseFile(file.getPath());
 			assertTrue("parse ok", jdfDoc != null);
-			KElement e = null;
+			JDFElement e = null;
 			if (jdfDoc != null)
 			{
-				e = jdfDoc.getRoot();
+				e = (JDFElement) jdfDoc.getRoot();
 				assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
 			}
 
@@ -973,10 +974,85 @@ public class JDFElementTest extends JDFTestCaseBase
 			// TODO fix handling of prerelease default attributes
 			if (jdfDoc != null)
 			{
-				e = jdfDoc.getRoot();
+				e = (JDFElement) jdfDoc.getRoot();
 				assertFalse("valid doc: " + file.getPath(), e.isValid(EnumValidationLevel.RecursiveComplete));
 			}
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testCache()
+	{
+		final JDFDoc d1 = new JDFDoc("d1");
+		final JDFDoc d2 = new JDFDoc("d2");
+		assertNotNull(d1.getXMLDocUserData());
+		assertNotNull(d2.getXMLDocUserData());
+		assertTrue(d1.getXMLDocUserData().getIDCache());
+		final KElement e1 = d1.getRoot();
+		final KElement e2 = d2.getRoot();
+		for (int i = 0; i < 4; i++)
+		{
+			e1.setXPathAttribute("e2/e3" + String.valueOf(i) + "/@ID", "i1" + String.valueOf(i));
+			e2.setXPathAttribute("e2/e3" + String.valueOf(i) + "/@ID", "i2" + String.valueOf(i));
+		}
+		KElement e13 = e2.getTarget("i13", "ID");
+		assertNull(e13);
+		e13 = e1.getTarget("i13", "ID");
+		assertNotNull(e13);
+		assertEquals(d1, e1.getOwnerDocument_KElement());
+		KElement e23 = e2.getTarget("i23", "ID");
+		assertNotNull(e23);
+		assertEquals(d2, e2.getOwnerDocument_KElement());
+		e1.moveElement(e23, null);
+		e23 = e2.getTarget("i23", "ID");
+		assertNull(e23);
+		e23 = e1.getTarget("i23", "ID");
+		assertNotNull(e23);
+		assertEquals(d1, e23.getOwnerDocument_KElement());
+		e23.deleteNode();
+		e23 = e1.getTarget("i23", "ID");
+		assertNull(e23);
+
+		e23 = e2.getTarget("i22", "ID");
+		assertNotNull(e23);
+		final KElement e24 = e23.renameElement("fnarf", null);
+		assertEquals(e24, e23);
+		assertEquals(e24.getNodeName(), "fnarf");
+		assertEquals(e24.getLocalName(), "fnarf");
+		assertEquals(e24, e2.getTarget("i22", "ID"));
+
+	}
+
+	/**
+	 * Method testGetElementByID.
+	 * 
+	 */
+	public void testGetDeepElementByID()
+	{
+		final String xmlFile = "bookintent.jdf";
+
+		final JDFParser p = new JDFParser();
+		final JDFDoc jdfDoc = p.parseFile(sm_dirTestData + xmlFile);
+
+		final JDFNode jdfRoot = (JDFNode) jdfDoc.getRoot();
+		final XMLDocUserData ud = jdfRoot.getXMLDocUserData();
+
+		// first try
+		final KElement kelem1 = JDFElement.getDeepElementByID(jdfRoot, "ID", "n0006", null, ud);
+		assertNotNull("kelem1==null", kelem1);
+		assertEquals("id", kelem1.getAttribute("ID"), "n0006");
+
+		// second try
+		final KElement kelem2 = JDFElement.getDeepElementByID(jdfRoot, "Preferred", "198", null, null);
+		assertTrue("kelem2==null", kelem2 != null);
+		if (kelem2 == null)
+		{
+			return; // soothe findbugs ;)
+		}
+		final String strAtrib2 = kelem2.getAttribute("Preferred", "", "");
+		assertTrue("Preferred!=198", strAtrib2.equals("198"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

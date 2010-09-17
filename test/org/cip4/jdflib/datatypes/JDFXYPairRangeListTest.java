@@ -14,10 +14,10 @@ import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairEvaluation;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 public class JDFXYPairRangeListTest extends TestCase
 {

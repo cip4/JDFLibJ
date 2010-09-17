@@ -120,6 +120,34 @@ public class JDFParserTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen *
+	 */
+	static class MyParser extends JDFParser
+	{
+
+		/**
+		 * 
+		 */
+		public MyParser()
+		{
+			super();
+		}
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1819514227719688245L;
+
+		@Override
+		public String getDocumentClass()
+		{
+			return MyDocImpl.class.getName();
+
+		}
+
+	}
+
+	/**
 	 * check speed of the parser
 	 * 
 	 */
@@ -249,8 +277,7 @@ public class JDFParserTest extends JDFTestCaseBase
 	 */
 	public void testMyDocClass()
 	{
-		JDFParser p = new JDFParser();
-		p.m_DocumentClass = MyDocImpl.class.getName();
+		MyParser p = new MyParser();
 		JDFDoc doc = p.parseString("<JMF/>");
 		assertEquals(doc.getRoot().getLocalName(), "JMF");
 		new JDFDoc(doc.getMemberDocument());
@@ -339,7 +366,7 @@ public class JDFParserTest extends JDFTestCaseBase
 		final JDFDoc d = new JDFDoc("JDF");
 		final JDFNode n = d.getJDFRoot();
 		final JDFResource rl = n.addResource("RunList", EnumUsage.Input);
-		rl.setDescriptiveName("Runlist f�r 10 � &&&"); // sum special characters
+		rl.setDescriptiveName("Runlist für 10 € &&&"); // sum special characters
 		s = d.write2String(2);
 		bSearch = JDFParser.m_searchStream;
 	}

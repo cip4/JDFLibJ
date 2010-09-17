@@ -73,9 +73,10 @@ import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -96,7 +97,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 * if true merge stripping and layout
 	 */
 	public boolean mergeLayout = true;
-	protected KElement newRoot;
+	protected JDFElement newRoot;
 	/**
 	 * if false, intents are never partitioned
 	 */
@@ -319,7 +320,7 @@ class PostXJDFWalker extends BaseElementWalker
 			KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDF20.rootName, 0));
+				XJDFHelper h = new XJDFHelper((JDFElement) xjdf.getDeepParent(XJDF20.rootName, 0));
 				SetHelper artDelResHelper = h.getCreateSet("Parameter", ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				PartitionHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();
@@ -381,7 +382,7 @@ class PostXJDFWalker extends BaseElementWalker
 	 * @param newRoot 
 	 *  
 	 */
-	public PostXJDFWalker(KElement newRoot)
+	public PostXJDFWalker(JDFElement newRoot)
 	{
 		super(new BaseWalkerFactory());
 		this.newRoot = newRoot;
@@ -422,7 +423,7 @@ class PostXJDFWalker extends BaseElementWalker
 		@Override
 		public KElement walk(KElement xjdf, KElement dummy)
 		{
-			reorderSets(xjdf);
+			reorderSets((JDFElement) xjdf);
 			return xjdf;
 		}
 
@@ -430,7 +431,7 @@ class PostXJDFWalker extends BaseElementWalker
 		 * @param xjdf 
 		 * 
 		 */
-		private void reorderSets(KElement xjdf)
+		private void reorderSets(JDFElement xjdf)
 		{
 			Vector<SetHelper> v = new XJDFHelper(xjdf).getSets();
 			if (v == null)

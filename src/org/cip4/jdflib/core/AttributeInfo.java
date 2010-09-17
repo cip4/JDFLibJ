@@ -80,8 +80,8 @@ import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeList;
@@ -807,7 +807,7 @@ public class AttributeInfo
 	 * @param level
 	 * @return
 	 */
-	public boolean validAttribute(String key, String attribute, KElement.EnumValidationLevel level)
+	public boolean validAttribute(String key, String attribute, EnumValidationLevel level)
 	{
 		EnumAttributeType typ = getAttributeType(key);
 		if (typ == null) // unknown attributes are by definition valid, the check is done in the unknown method

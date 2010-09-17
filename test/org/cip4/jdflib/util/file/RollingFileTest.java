@@ -9,7 +9,6 @@ import java.io.IOException;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.file.RollingFile;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *

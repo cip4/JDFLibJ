@@ -79,8 +79,8 @@ package org.cip4.jdflib.devicecapability;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.resource.devicecapability.JDFMatrixState;
 
 public class JDFMatrixStateTest extends JDFTestCaseBase

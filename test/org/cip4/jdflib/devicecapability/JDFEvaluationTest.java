@@ -80,10 +80,10 @@ import org.cip4.jdflib.auto.JDFAutoDeviceCap.EnumCombinedMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -100,11 +100,11 @@ import org.cip4.jdflib.resource.devicecapability.JDFEnumerationState;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFIsPresentEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFXYPairEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFnot;
 import org.cip4.jdflib.resource.devicecapability.JDFor;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.process.JDFComponent;
 
 public class JDFEvaluationTest extends JDFTestCaseBase

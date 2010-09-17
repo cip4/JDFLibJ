@@ -71,9 +71,9 @@
 package org.cip4.jdflib.goldenticket;
 
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 
 /**

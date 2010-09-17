@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
@@ -94,10 +95,8 @@ import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -2192,14 +2191,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 		{
 			final JDFDoc d = new JDFDoc("JDF");
 			final JDFNode n = d.getJDFRoot();
-			assertNull(n.getParentJDF());
-			final JDFNode n2 = (JDFNode) n.appendElement("JDF");
-			assertEquals(n, n2.getParentJDF());
-		}
-		{
-			final XMLDoc d = new XMLDoc("ns:foo", "ns");
-			final KElement e = d.getRoot();
-			final JDFNode n = (JDFNode) e.appendElement("JDF");
 			assertNull(n.getParentJDF());
 			final JDFNode n2 = (JDFNode) n.appendElement("JDF");
 			assertEquals(n, n2.getParentJDF());

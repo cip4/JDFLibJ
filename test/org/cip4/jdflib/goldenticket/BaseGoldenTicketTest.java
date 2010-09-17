@@ -74,8 +74,8 @@ import junit.framework.Assert;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen

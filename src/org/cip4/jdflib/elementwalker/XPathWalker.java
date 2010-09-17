@@ -78,10 +78,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
+import org.w3c.dom.Element;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -296,9 +298,9 @@ public class XPathWalker extends BaseElementWalker
 						String attribute = e.getAttribute_KElement(key);
 						if (bAttributeValue)
 							writer.print(separator + attribute);
-						if (bDatatype)
+						if (bDatatype && (e instanceof JDFElement))
 						{
-							writeDatatype(e, key);
+							writeDatatype((JDFElement) e, key);
 						}
 						writer.println();
 						if (pathsFound != null)
@@ -314,7 +316,7 @@ public class XPathWalker extends BaseElementWalker
 		 * @param e
 		 * @param key
 		 */
-		private void writeDatatype(final KElement e, String key)
+		private void writeDatatype(final JDFElement e, String key)
 		{
 			EnumAttributeType type = e.getAtrType(key);
 			writer.print(separator);
@@ -322,9 +324,13 @@ public class XPathWalker extends BaseElementWalker
 				writer.print(type.getName());
 			else if (e.knownElements().contains(key))
 			{
-				type = ((KElement) e.getOwnerDocument_KElement().createElement(key)).getAtrType(AttributeName.ACTUAL);
-				if (type != null)
-					writer.print(type.getName());
+				Element createdElement = e.getOwnerDocument_KElement().createElement(key);
+				if (createdElement instanceof JDFElement)
+				{
+					type = ((JDFElement) createdElement).getAtrType(AttributeName.ACTUAL);
+					if (type != null)
+						writer.print(type.getName());
+				}
 			}
 		}
 

@@ -71,15 +71,16 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
@@ -90,11 +91,11 @@ import org.cip4.jdflib.jmf.JDFDeviceFilter;
 import org.cip4.jdflib.jmf.JDFDeviceInfo;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFQuery;
 import org.cip4.jdflib.jmf.JDFRegistration;
 import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.jmf.JDFResponse;
-import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -106,13 +107,13 @@ import org.cip4.jdflib.resource.JDFLaminatingParams;
 import org.cip4.jdflib.resource.JDFMarkObject;
 import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
+import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFShapeCuttingParams;
 import org.cip4.jdflib.resource.JDFSignature;
 import org.cip4.jdflib.resource.JDFStrippingParams;
-import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
-import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
-import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
 import org.cip4.jdflib.resource.intent.JDFArtDeliveryIntent;
 import org.cip4.jdflib.resource.intent.JDFLayoutIntent;
@@ -643,7 +644,7 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			JDFRunList rl = (JDFRunList) inOutLinks.elementAt(0);
 
 			// is the Runlist Valid?
-			boolean bValid = rl.isValid(KElement.EnumValidationLevel.Complete);
+			boolean bValid = rl.isValid(EnumValidationLevel.Complete);
 
 			// print out validity information
 			System.out.println("DoValid runlist is " + (bValid ? "" : "in") + "valid !");
@@ -652,14 +653,14 @@ public class JDFExampleDocTest extends JDFTestCaseBase
 			rl.setAttribute("InvalidAttribute", "Something really Invalid", "");
 
 			// recheck
-			bValid = rl.isValid(KElement.EnumValidationLevel.Complete);
+			bValid = rl.isValid(EnumValidationLevel.Complete);
 
 			// print out new validity information
 			System.out.println("DoValid runlist is " + (bValid ? "" : "in") + "valid !");
 			System.out.println("the following attributes are inValid: ");
 
 			// get the vector of invalid attributes
-			Vector vInvalidAttributes = rl.getInvalidAttributes(KElement.EnumValidationLevel.Complete, true, 9999999);
+			Vector vInvalidAttributes = rl.getInvalidAttributes(EnumValidationLevel.Complete, true, 9999999);
 
 			// print out the details
 			for (int i = 0; i < vInvalidAttributes.size(); i++)

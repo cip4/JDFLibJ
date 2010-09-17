@@ -88,10 +88,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.enums.ValuedEnum;
-import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -158,7 +157,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	 * @param partIDKey the enumerated partIDKey
 	 * @param value the partition key value
 	 */
-	public JDFAttributeMap(final EnumPartIDKey partIDKey, final String value)
+	public JDFAttributeMap(final ValuedEnum partIDKey, final String value)
 	{
 		this(partIDKey.getName(), value);
 	}
@@ -212,7 +211,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	@Override
 	public String toString()
 	{
-		return "JDFAttributeMap: {" + showKeys(JDFConstants.BLANK) + " ";
+		return "JDFAttributeMap: {" + showKeys(JDFCoreConstants.BLANK) + " ";
 	}
 
 	/**
@@ -232,7 +231,7 @@ public class JDFAttributeMap extends HashMap<String, String>
 	public String put(final String key, final String value)
 	{
 		// check input parameter (valid or invalid)
-		if (key == null || key.equals(JDFConstants.EMPTYSTRING))
+		if (key == null || key.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			return null;
 		}

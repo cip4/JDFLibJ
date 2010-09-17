@@ -88,21 +88,20 @@ import org.cip4.jdflib.auto.JDFAutoDeviceCap.EnumCombinedMethod;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink;
-import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
-import org.cip4.jdflib.core.KElement.EnumValidationLevel;
-import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes.EnumFitsValue;
+import org.cip4.jdflib.datatypes.JDFMatrix;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.jmf.JDFMessageService;
 import org.cip4.jdflib.jmf.JDFResponse;
-import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFDevice;
@@ -114,9 +113,9 @@ import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
 import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
 import org.cip4.jdflib.resource.devicecapability.JDFNameState;
 import org.cip4.jdflib.resource.devicecapability.JDFNumberState;
+import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.devicecapability.JDFTest;
 import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 import org.cip4.jdflib.resource.process.JDFContentObject;
 import org.cip4.jdflib.resource.process.JDFLayout;
 import org.cip4.jdflib.resource.process.JDFRunList;
@@ -415,7 +414,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		final JDFJMF jmfRoot = jmfDevCap.getJMFRoot();
 		assertNotNull("jmfRoot == null Can't start Test", jmfRoot);
 		final JDFDeviceCap deviceCap = (JDFDeviceCap) jmfRoot.getChildByTagName("DeviceCap", "", 0, null, false, true);
-		assertTrue(deviceCap.isValid(KElement.EnumValidationLevel.Incomplete));
+		assertTrue(deviceCap.isValid(EnumValidationLevel.Incomplete));
 	}
 
 	// /////////////////////////////////////////////////////
@@ -449,7 +448,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 			final JDFDeviceCap deviceCap = (JDFDeviceCap) jmfRoot.getChildByTagName("DeviceCap", null, 0, null, false, true);
 
 			final EnumFitsValue testlists = EnumFitsValue.Allowed;
-			final EnumValidationLevel level = KElement.EnumValidationLevel.Complete;
+			final EnumValidationLevel level = EnumValidationLevel.Complete;
 			final VElement vExecNodes = deviceCap.getExecutableJDF(jdfRoot, testlists, level);
 			if (vExecNodes == null)
 			{
@@ -536,7 +535,7 @@ public class JDFDeviceCapTest extends JDFTestCaseBase
 		n.setType("fnarf", false);
 
 		final EnumFitsValue testlists = EnumFitsValue.Allowed;
-		final EnumValidationLevel level = KElement.EnumValidationLevel.Complete;
+		final EnumValidationLevel level = EnumValidationLevel.Complete;
 		VElement vExecNodes = devicecap.getExecutableJDF(n, testlists, level);
 		assertNull("missing resources", vExecNodes);
 

@@ -73,15 +73,9 @@
  */
 package org.cip4.jdflib.core;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 
-import org.apache.xerces.parsers.DOMParser;
 import org.apache.xerces.xni.Augmentations;
 import org.apache.xerces.xni.NamespaceContext;
 import org.apache.xerces.xni.QName;
@@ -92,7 +86,6 @@ import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.SkipInputStream;
 import org.cip4.jdflib.util.UrlUtil;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -102,7 +95,7 @@ import org.xml.sax.SAXNotSupportedException;
 /**
  * @author matternk
  */
-public class JDFParser extends DOMParser
+public class JDFParser extends XMLParser
 {
 	/**
 	 * simple search stream that will find a valid xml wherever it starts
@@ -146,27 +139,6 @@ public class JDFParser extends DOMParser
 	}
 
 	/**
-	 * 
-	 */
-	public XMLErrorHandler m_ErrorHandler = null;
-	/**
-	 * 
-	 */
-	public String m_SchemaLocation = null;
-	/**
-	 * 
-	 */
-	public String m_DocumentClass = DocumentJDFImpl.class.getName();
-	/**
-	 * 
-	 */
-	public Exception m_lastExcept = null;
-	/**
-	 * 
-	 */
-	public static boolean m_searchStream = false;
-
-	/**
 	 * set bKElementOnly=true if you want the output ojects all to be instatnces of KElement rather than instantiated JDF instances
 	 */
 	public boolean bKElementOnly = false;
@@ -174,11 +146,6 @@ public class JDFParser extends DOMParser
 	 * set ignoreNSDefault=true if you do not want any heuristics to be performed regarding DOM level 1 / 2 namespace associations
 	 */
 	public boolean ignoreNSDefault = false;
-
-	/**
-	 * if true, empty pools and whitespace are removed when parsing
-	 */
-	public boolean m_eraseEmpty = true;
 
 	/**
 	 * default constructor
@@ -206,24 +173,19 @@ public class JDFParser extends DOMParser
 		this();
 		bKElementOnly = parser.bKElementOnly;
 		m_eraseEmpty = parser.m_eraseEmpty;
-		initParser(m_SchemaLocation, m_DocumentClass, (XMLErrorHandler) parser.getErrorHandler());
+		initParser(m_SchemaLocation, (XMLErrorHandler) parser.getErrorHandler());
 	}
 
 	/**
-	 * @see org.apache.xerces.parsers.AbstractDOMParser#createElementNode(org.apache.xerces.xni.QName)
+	 * (non-Javadoc) reset all internal variables to a reasonable default
+	 * 
+	 * @see org.apache.xerces.parsers.AbstractDOMParser#reset()
 	 */
 	@Override
-	public Element createElementNode(final QName element)
+	public void cleanup()
 	{
-		if (fCurrentNode.getLocalName() != null)
-		{
-			((DocumentJDFImpl) (this.fDocument)).setParentNode(fCurrentNode);
-		}
-
-		final Element e = super.createElementNode(element);
-		((DocumentJDFImpl) (this.fDocument)).setParentNode(null);
-		return e;
-
+		super.cleanup();
+		bKElementOnly = false;
 	}
 
 	/**
@@ -232,42 +194,20 @@ public class JDFParser extends DOMParser
 	 * @param strFile link to the document to parse, may be either a file path or a url
 	 * @return JDFDoc or null if File not found
 	 */
+	@Override
 	public JDFDoc parseFile(final String strFile)
 	{
-		final File file = UrlUtil.urlToFile(strFile);
-		return parseFile(file);
+		return (JDFDoc) super.parseFile(strFile);
 	}
 
 	/**
 	 * @param file
 	 * @return
 	 */
+	@Override
 	public JDFDoc parseFile(final File file)
 	{
-		if (file == null)
-		{
-			return null;
-		}
-
-		JDFDoc doc = null;
-		if (file.canRead())
-		{
-			try
-			{
-				doc = parseStream(new FileInputStream(file));
-				if (doc != null)
-				{
-					doc.setOriginalFileName(file.getAbsolutePath());
-				}
-				return doc;
-
-			}
-			catch (final FileNotFoundException e)
-			{
-				return null;
-			}
-		}
-		return doc;
+		return (JDFDoc) super.parseFile(file);
 	}
 
 	/**
@@ -291,22 +231,10 @@ public class JDFParser extends DOMParser
 	 * @param stringInput string to parse
 	 * @return JDFDoc or null if parse failed default: parseString(stringInput)
 	 */
+	@Override
 	public JDFDoc parseString(final String stringInput)
 	{
-		if (stringInput == null)
-		{
-			return null;
-		}
-		ByteArrayInputStream is;
-		try
-		{
-			is = new ByteArrayInputStream(stringInput.getBytes("UTF-8"));
-		}
-		catch (final UnsupportedEncodingException x)
-		{
-			is = new ByteArrayInputStream(stringInput.getBytes());
-		}
-		return parseStream(is);
+		return (JDFDoc) super.parseString(stringInput);
 	}
 
 	/**
@@ -315,66 +243,11 @@ public class JDFParser extends DOMParser
 	 * @param inStream stream to parse
 	 * @return JDFDoc or null if parse failed default: parseStream(inStream)
 	 */
+	@Override
 	public JDFDoc parseStream(final InputStream inStream)
 	{
-		if (inStream == null)
-		{
-			return null;
-		}
-		final XMLReaderStream bis = new XMLReaderStream(false, inStream);
-		bis.mark(0);
+		return (JDFDoc) super.parseStream(inStream);
 
-		InputSource inSource = new InputSource(bis);
-		JDFDoc d = parseInputSource(inSource);
-
-		if (d == null && m_searchStream)
-		{
-			try
-			{
-				bis.reset();
-			}
-			catch (final IOException x)
-			{
-				bis.allowClose = true;
-				bis.close();
-				return null;
-			}
-
-			inSource = new InputSource(new XMLReaderStream(true, bis));
-			d = parseInputSource(inSource);
-		}
-		bis.allowClose = true;
-		bis.close();
-		return d;
-	}
-
-	/**
-	 * parse an input source
-	 * 
-	 * @param inSource the InputSource to parse
-	 */
-	@Override
-	public void parse(final InputSource inSource)
-	{
-		parseInputSource(inSource);
-	}
-
-	/**
-	 * parse an input source
-	 * 
-	 * @param inSource the InputSource to parse
-	 * @return JDFDoc the newly parsed doc
-	 */
-	public JDFDoc parseInputSource(final InputSource inSource)
-	{
-		JDFDoc jdfDoc = null;
-		if (inSource != null)
-		{
-			initParser(m_SchemaLocation, m_DocumentClass, m_ErrorHandler);
-			jdfDoc = runParser(inSource, m_eraseEmpty);
-		}
-
-		return jdfDoc;
 	}
 
 	/**
@@ -398,78 +271,25 @@ public class JDFParser extends DOMParser
 		JDFDoc doc = null;
 		if (errorHandler instanceof XMLErrorHandler)
 		{
-			initParser(schemaLocation, documentClassName, (XMLErrorHandler) errorHandler);
+			initParser(schemaLocation, (XMLErrorHandler) errorHandler);
 		}
 		else
 		{
-			initParser(schemaLocation, documentClassName, null);
+			initParser(schemaLocation, null);
 		}
 
-		doc = runParser(inSource, bEraseEmpty);
+		doc = (JDFDoc) runParser(inSource, bEraseEmpty);
 		if (doc == null)
 		{ // this is the error case:
 			if (!bDoNamespaces)
 			{
 				// try again, ignoring name spaces
 				setIgnoreNamespace(false);
-				doc = runParser(inSource, bEraseEmpty);
+				doc = (JDFDoc) runParser(inSource, bEraseEmpty);
 			}
 		}
 
 		return doc;
-	}
-
-	/**
-	 * @param schemaLocation
-	 * @param documentClassName
-	 * @param errorHandler default: initParser(null, DocumentJDFImpl.class.getName(), null);
-	 */
-	private void initParser(final String schemaLocation, final String documentClassName, final XMLErrorHandler errorHandler)
-	{
-		m_SchemaLocation = schemaLocation;
-		m_ErrorHandler = errorHandler;
-		m_DocumentClass = documentClassName;
-
-		try
-		{
-			if (m_SchemaLocation == null || m_SchemaLocation.equals(JDFConstants.EMPTYSTRING))
-			{
-				this.setFeature("http://xml.org/sax/features/validation", false);
-				this.setFeature("http://apache.org/xml/features/validation/schema", false);
-			}
-			else
-			{
-				if (!m_SchemaLocation.startsWith(JDFElement.getSchemaURL()) && m_SchemaLocation.indexOf(" ") < 0)
-				{
-					m_SchemaLocation = JDFElement.getSchemaURL() + " " + m_SchemaLocation;
-				}
-				this.setFeature("http://xml.org/sax/features/validation", true);
-				this.setFeature("http://apache.org/xml/features/validation/schema", true);
-				// this.setFeature(
-				// "http://apache.org/xml/features/validation/schema/element-default"
-				// , false);
-				// this.setFeature(
-				// "http://apache.org/xml/features/validation/schema/normalized-value"
-				// , false);
-				this.setProperty("http://apache.org/xml/properties/schema/external-schemaLocation", m_SchemaLocation);
-			}
-
-			// use our own JDF document for creating JDF elements
-			this.setProperty("http://apache.org/xml/properties/dom/document-class-name", documentClassName);
-
-			this.setFeature("http://apache.org/xml/features/dom/defer-node-expansion", false);
-			this.setFeature("http://xml.org/sax/features/namespaces", true);
-
-			this.setErrorHandler(errorHandler);
-		}
-		catch (final SAXNotRecognizedException e)
-		{
-			m_lastExcept = e;
-		}
-		catch (final SAXNotSupportedException e)
-		{
-			m_lastExcept = e;
-		}
 	}
 
 	/**
@@ -483,57 +303,35 @@ public class JDFParser extends DOMParser
 	}
 
 	/**
-	 * @param inSource
-	 * @param bEraseEmpty
-	 * @return
+	 * 
 	 */
-	private JDFDoc runParser(final InputSource inSource, final boolean bEraseEmpty)
+	@Override
+	public String getDocumentClass()
 	{
-		JDFDoc doc = new JDFDoc();
-		try
+		return DocumentJDFImpl.class.getName();
+	}
+
+	/**
+	 * @see org.apache.xerces.parsers.AbstractDOMParser#createElementNode(org.apache.xerces.xni.QName)
+	 */
+	@Override
+	public Element createElementNode(final QName element)
+	{
+		if (fCurrentNode.getLocalName() != null)
 		{
-			super.parse(inSource);
-			doc.setMemberDoc((DocumentJDFImpl) getDocument());
-			doc.setInitOnCreate(true);
-			if (bEraseEmpty)
-			{
-				doc.getRoot().eraseEmptyNodes(true); // cleanup the XML
-			}
-		}
-		catch (final Exception e)
-		{
-			m_lastExcept = e;
-			doc = null;
-		}
-		catch (final StackOverflowError e)
-		{
-			m_lastExcept = null;
-			doc = null;
+			((DocumentJDFImpl) (this.fDocument)).setParentNode(fCurrentNode);
 		}
 
-		if (doc != null && m_ErrorHandler != null)
-		{
-			doc.setValidationResult(m_ErrorHandler.getXMLOutput());
-			m_ErrorHandler.cleanXML(m_SchemaLocation);
-		}
+		final Element e = super.createElementNode(element);
+		((DocumentJDFImpl) (this.fDocument)).setParentNode(null);
+		return e;
 
-		if (doc != null)
-		{
-			final KElement root = doc.getRoot();
-			final DocumentJDFImpl memberDocument = doc.getMemberDocument();
-			final String namespaceURI = root.getNamespaceURI();
-			boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF) || XJDF20.rootName.equals(root.getLocalName());
-			if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI))
-			{
-				root.setAttribute(JDFConstants.XMLNS, JDFConstants.JDFNAMESPACE);
-			}
-			if (!bJDFRoot && (namespaceURI == null || !namespaceURI.toLowerCase().contains(JDFConstants.CIP4ORG)))
-			{
-				memberDocument.bKElementOnly = true;
-			}
-			memberDocument.setIgnoreNSDefault(ignoreNSDefault);
+	}
 
-		}
+	@Override
+	protected XMLDoc getXMLDoc()
+	{
+		XMLDoc doc = new JDFDoc();
 		return doc;
 	}
 
@@ -574,33 +372,24 @@ public class JDFParser extends DOMParser
 	public void startDocument(final XMLLocator locator, final String encoding, final NamespaceContext namespaceContext, final Augmentations augs) throws XNIException
 	{
 		super.startDocument(locator, encoding, namespaceContext, augs);
+		final DocumentJDFImpl memberDocument = (DocumentJDFImpl) getDocument();
 
-		final Document document = getDocument();
-
-		if (document instanceof DocumentJDFImpl)
-		{
-			final DocumentJDFImpl memberDocument = (DocumentJDFImpl) document;
-
-			memberDocument.bKElementOnly = bKElementOnly;
-			memberDocument.setIgnoreNSDefault(ignoreNSDefault);
-			memberDocument.bInitOnCreate = false;
-		}
+		memberDocument.bKElementOnly = bKElementOnly;
+		memberDocument.bInitOnCreate = false;
 	}
 
-	/**
-	 * (non-Javadoc) reset all internal variables to a reasonable default
-	 * 
-	 * @see org.apache.xerces.parsers.AbstractDOMParser#reset()
-	 */
-	public void cleanup()
+	@Override
+	protected void setDocumentProperties(final KElement root, final DocumentXMLImpl memberDocument, final String namespaceURI)
 	{
-		bKElementOnly = false;
-		m_lastExcept = null;
-		ignoreNSDefault = false;
-		m_eraseEmpty = true;
-		m_ErrorHandler = null;
-		m_SchemaLocation = null;
-		m_DocumentClass = DocumentJDFImpl.class.getName();
+		boolean bJDFRoot = (root instanceof JDFNode) || (root instanceof JDFJMF) || XJDF20.rootName.equals(root.getLocalName());
+		if (bJDFRoot && !JDFConstants.JDFNAMESPACE.equals(namespaceURI))
+		{
+			root.setAttribute(JDFConstants.XMLNS, JDFConstants.JDFNAMESPACE);
+		}
+		if (!bJDFRoot && (namespaceURI == null || !namespaceURI.toLowerCase().contains(JDFConstants.CIP4ORG)))
+		{
+			((DocumentJDFImpl) memberDocument).bKElementOnly = true;
+		}
 	}
 
 }

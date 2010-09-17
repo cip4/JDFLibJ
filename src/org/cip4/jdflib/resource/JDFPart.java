@@ -80,6 +80,7 @@ import java.util.Iterator;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart;
+import org.cip4.jdflib.core.AtrInfo;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementInfo;
@@ -256,11 +257,11 @@ public class JDFPart extends JDFAutoPart
 		}
 		if (tokensSet.contains(key))
 		{
-			b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+			b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
 		}
 		else if (irlSet.contains(key))
 		{
-			b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.IntegerRangeList);
+			b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.IntegerRangeList);
 		}
 		else if (AttributeName.PARTVERSION.equals(key))
 		{
@@ -272,11 +273,11 @@ public class JDFPart extends JDFAutoPart
 			}
 			else if (resTokens.size() == 1)
 			{
-				b = StringUtil.matchesAttribute(resourceValue, linkValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+				b = AtrInfo.matchesAttribute(resourceValue, linkValue, AttributeInfo.EnumAttributeType.NMTOKENS);
 			}
 			else if (linkTokens.size() == 1)
 			{
-				b = StringUtil.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
+				b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.NMTOKENS);
 			}
 			else
 			{
