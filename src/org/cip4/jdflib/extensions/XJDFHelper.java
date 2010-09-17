@@ -93,7 +93,7 @@ public class XJDFHelper
 	/**
 	 * @param xjdf if null a new XJDF is generated, else the xjdf root to be manipulated
 	 */
-	public XJDFHelper(JDFElement xjdf)
+	public XJDFHelper(KElement xjdf)
 	{
 		super();
 		if (xjdf == null)
@@ -104,7 +104,10 @@ public class XJDFHelper
 		{
 			theXJDF = xjdf;
 		}
-		theXJDF.getOwnerDocument_JDFElement().setInitOnCreate(false);
+		if (theXJDF instanceof JDFElement)
+		{
+			((JDFElement) theXJDF).getOwnerDocument_JDFElement().setInitOnCreate(false);
+		}
 	}
 
 	/**
@@ -139,7 +142,7 @@ public class XJDFHelper
 	{
 		JDFDoc doc = new JDFDoc(XJDF20.rootName);
 		doc.setInitOnCreate(false);
-		theXJDF = (JDFElement) doc.getRoot();
+		theXJDF = doc.getRoot();
 		JDFAuditPool ap = (JDFAuditPool) theXJDF.getCreateElement(ElementName.AUDITPOOL);
 		ap.addAudit(EnumAuditType.Created, null).init();
 	}
@@ -338,7 +341,7 @@ public class XJDFHelper
 		return appendSet("Resource", name, usage);
 	}
 
-	protected JDFElement theXJDF;
+	protected KElement theXJDF;
 
 	/**
 	 * @see java.lang.Object#toString()
