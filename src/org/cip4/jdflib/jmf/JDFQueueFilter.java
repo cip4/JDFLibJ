@@ -87,8 +87,8 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoQueueFilter;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
+import org.cip4.jdflib.auto.JDFAutoQueueFilter;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -254,12 +254,18 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 			if (qe == null)
 				return null;
 
-			if (qeMatch.matches(qe) && !noDifference(qe))
+			if (qeMatch.matches(qe))
 			{
 				qe = (JDFQueueEntry) newQueue.copyElement(qe, null);
+				cleanQE(qe);
+				if (noDifference(qe))
+					qe.deleteNode();
+			}
+			else
+			{
+				qe = null;
 			}
 
-			cleanQE(qe);
 			return qe;
 		}
 
@@ -308,6 +314,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				return false;
 			}
 			lastMap.remove(qeID);
+			cleanQE(lastQueueEntry);
 			final boolean equal = qe.isEqual(lastQueueEntry);
 			return equal;
 		}

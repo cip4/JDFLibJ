@@ -374,6 +374,43 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testCopyToDelta()
+	{
+		theQueue.setAutomated(false);
+		for (int i = 0; i < 1200; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setPriority((i * 317) % 99);
+			qe.setQueueEntryID("q" + i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.getEnum(i % 7 + 1));
+			qe.appendJobPhase().setStatusDetails("aa" + i);
+		}
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+
+		final JDFQueue qLast = (JDFQueue) theQueue.getOwnerDocument_JDFElement().clone().getRoot();
+		JDFQueueEntry queueEntryLast = qLast.getQueueEntry(333);
+		JDFQueueEntry queueEntryNew = theQueue.getQueueEntry(333);
+
+		queueEntryLast.getJobPhase().setStatusDetails("other");
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
+		JDFQueue qCopy = filter.copy(theQueue, qLast, null);
+		assertEquals("we modified statusdetails, and are not ignoring job phase", qCopy.numEntries(null), 1);
+		assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), queueEntryNew.getQueueEntryID());
+
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.Brief);
+		qCopy = filter.copy(theQueue, qLast, null);
+		assertEquals("we modified statusdetails, but are ignoring job phase", qCopy.numEntries(null), 0);
+
+		queueEntryLast.setPriority(100);
+		qCopy = filter.copy(theQueue, qLast, null);
+		assertEquals("we changed priority...", qCopy.numEntries(null), 1);
+		assertEquals(qCopy.getQueueEntry(0).getQueueEntryID(), queueEntryNew.getQueueEntryID());
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testClean()
 	{
 		theQueue.setAutomated(false);
