@@ -147,12 +147,9 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	{
 		if (xjdf != null)
 		{
-			JDFDoc doc = new JDFDoc(xjdf.getNodeName());
+			JDFDoc doc = new JDFDoc(xjdf.getOwnerDocument());
 			doc.setInitOnCreate(false);
-
-			KElement newRoot = doc.getRoot();
-			newRoot.copyInto(xjdf, false);
-			xjdf = newRoot;
+			xjdf = doc.getRoot();
 		}
 		return xjdf;
 	}

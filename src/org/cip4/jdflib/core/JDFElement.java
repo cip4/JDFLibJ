@@ -1667,6 +1667,17 @@ public class JDFElement extends KElement
 		public static final EnumNodeStatus Part = new EnumNodeStatus(JDFConstants.PART);
 		/** * */
 		public static final EnumNodeStatus Pool = new EnumNodeStatus(JDFConstants.POOL);
+
+		/** 
+		 * 
+		 * returns true if we are in an end phase (Completed or Aborted)
+		 * @param the status to compare
+		 * @return true if we are in an end phase (Completed or Aborted)
+		 */
+		public static boolean isCompleted(EnumNodeStatus nodeStatus)
+		{
+			return EnumNodeStatus.Completed.equals(nodeStatus) || EnumNodeStatus.Aborted.equals(nodeStatus);
+		}
 	}
 
 	/**

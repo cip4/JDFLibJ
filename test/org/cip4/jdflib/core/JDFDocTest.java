@@ -204,6 +204,23 @@ public class JDFDocTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testCopyXMLDoc()
+	{
+		final XMLDoc d1 = new XMLDoc("JDF", null);
+		KElement root = d1.getRoot();
+		assertFalse(root instanceof JDFNode);
+		JDFDoc d = new JDFDoc(d1);
+		JDFNode n = d.getJDFRoot();
+		assertNotNull(n);
+
+		XMLDoc d2 = new XMLDoc(d);
+		root = d2.getRoot();
+		assertTrue(root instanceof JDFNode);
+	}
+
+	/**
 	 * just a minor test. It only checks that cloned docs are actually different
 	 */
 	public void testCloneNav()

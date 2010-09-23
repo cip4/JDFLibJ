@@ -537,8 +537,8 @@ public class XMLDocTest extends JDFTestCaseBase
 	 */
 	public void testClone()
 	{
-		final JDFDoc doc = new JDFDoc("foobar");
-		final JDFDoc doc2 = doc.clone();
+		final XMLDoc doc = new XMLDoc("foobar", null);
+		final XMLDoc doc2 = doc.clone();
 		assertNotNull(doc.getDocumentElement());
 		assertNotNull(doc2.getDocumentElement());
 		assertNotSame(doc.getDocumentElement(), doc2.getDocumentElement());
@@ -549,7 +549,19 @@ public class XMLDocTest extends JDFTestCaseBase
 		assertFalse(e2.hasAttribute("foo"));
 		assertEquals(doc.getDoctype(), doc2.getDoctype());
 		assertEquals(e2.getOwnerDocument_KElement(), doc2);
-		assertNotSame(doc.getXMLDocUserData(), doc2.getXMLDocUserData());
+	}
+
+	/**
+	 * 
+	 */
+	public void testCopyXMLDoc()
+	{
+		final XMLDoc d1 = new XMLDoc("JDF", null);
+		final KElement root = d1.getRoot();
+		assertFalse(root instanceof JDFNode);
+		XMLDoc d = new XMLDoc(d1);
+		KElement n = d.getRoot();
+		assertFalse(n instanceof JDFNode);
 	}
 
 	/**

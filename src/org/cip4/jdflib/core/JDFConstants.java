@@ -1264,32 +1264,6 @@ public abstract class JDFConstants extends JDFCoreConstants
 	/** * */
 	public static final String IMAGEFILTER_FLATENCODE = "FlateEncode";
 
-	// MIME types
-	/** * */
-	public static final String MIME_PNG = "image/x-png";
-	/** * */
-	public static final String MIME_TIFF = "image/tiff";
-	/** * */
-	public static final String MIME_PDF = "application/pdf";
-	/** * */
-	public static final String MIME_JPG = "image/jpeg";
-	/** * */
-	public static final String MIME_PS = "application/postscript";
-	/** * */
-	public static final String MIME_EPS = "application/postscript";
-	/** * */
-	public static final String MIME_JDF = "application/vnd.cip4-jdf+xml";
-	/** * */
-	public static final String MIME_JMF = "application/vnd.cip4-jmf+xml";
-	/** * */
-	public static final String MIME_CIP3 = "application/vnd.cip3-ppf";
-	/** * */
-	public static final String MIME_PPML = "application/vnd.podi-ppml+xml";
-	/** * */
-	public static final String MIME_TEXTUNKNOWN = "text/unknown";
-	/** * */
-	public static final String MIME_TEXTXML = "text/xml";
-
 	// JDFSheet Surface definitions
 	/** * */
 	public static final String SIDE_FRONT = "Front";

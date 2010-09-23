@@ -124,15 +124,6 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			}
 		}
 
-		/**
-		 * 
-		 * @return
-		 */
-		protected HashMap<String, String> getPackageNames()
-		{
-			return sm_PackageNames;
-		}
-
 		private void fillContextSensitive()
 		{
 			contextSensitive.add(ElementName.HOLETYPE);
@@ -932,15 +923,15 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		}
 
 		/** Caches default package name classes of files. */
-		HashMap<String, String> sm_PackageNames = new HashMap<String, String>();
+		private final HashMap<String, String> sm_PackageNames = new HashMap<String, String>();
 		/** Caches default package name classes of files. */
-		HashSet<String> contextSensitive = new HashSet<String>();
+		private final HashSet<String> contextSensitive = new HashSet<String>();
 
 		/** Caches Classes */
-		HashMap<String, Class<?>> sm_ClassAlreadyInstantiated = new HashMap<String, Class<?>>();
+		private final HashMap<String, Class<?>> sm_ClassAlreadyInstantiated = new HashMap<String, Class<?>>();
 
 		/** Caches JDF element constructors (namespace variant) */
-		HashMap<String, Constructor<?>> sm_hashCtorElementNS = new HashMap<String, Constructor<?>>();
+		private final HashMap<String, Constructor<?>> sm_hashCtorElementNS = new HashMap<String, Constructor<?>>();
 	}
 
 	private static DocumentData data = null;
@@ -955,8 +946,6 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 * skip initialization when creating a new element
 	 */
 	public boolean bInitOnCreate;
-	private final boolean ignoreNSDefault = false;
-	private boolean strictNSCheck = bStaticStrictNSCheck;
 	private XMLDocUserData myXMLUserDat;
 
 	/**
@@ -975,32 +964,9 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		bStaticStrictNSCheck = staticStrictNSCheck;
 	}
 
-	/**
-	 * @return the strictNSCheck
-	 */
-	@Override
-	public boolean isStrictNSCheck()
-	{
-		return strictNSCheck;
-	}
-
-	/**
-	 * @param strictNSCheck the strictNSCheck to set
-	 */
-	@Override
-	public void setStrictNSCheck(final boolean strictNSCheck)
-	{
-		this.strictNSCheck = strictNSCheck;
-	}
-
 	private boolean bInJDFJMF = false;
 
 	private Node m_ParentNode = null;
-
-	/**
-	 * the original file name if an element was parsed, else null
-	 */
-	public String m_OriginalFileName = null;
 
 	private static final String jdfNSURI = JDFElement.getSchemaURL();
 
@@ -1025,13 +991,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	 */
 	public static void registerCustomClass(final String strElement, final String packagepath)
 	{
-		DocumentData theData = getData();
-		synchronized (theData.sm_PackageNames)
-		{
-			theData.sm_PackageNames.put(strElement, packagepath);
-			theData.sm_ClassAlreadyInstantiated.remove(strElement);
-			theData.sm_hashCtorElementNS.remove(strElement);
-		}
+		getData().registerCustomClass(strElement, packagepath);
 	}
 
 	/**
@@ -1491,15 +1451,6 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			ud.clearTargets();
 		}
 		return super.replaceChild(arg0, arg1);
-	}
-
-	/**
-	 * @return the setIgnoreNSDefault; if true no namespaces are collected 
-	 */
-	@Override
-	public boolean isIgnoreNSDefault()
-	{
-		return ignoreNSDefault;
 	}
 
 	/**

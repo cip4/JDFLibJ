@@ -85,7 +85,6 @@ import java.net.URL;
 
 import javax.mail.BodyPart;
 
-import org.apache.xerces.dom.DocumentImpl;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFResourcePool;
@@ -115,13 +114,45 @@ public class JDFDoc extends XMLDoc
 	}
 
 	/**
-	 * constructor
+	 * constructor from a document
+	 * note that the constructor will create a copy of the document in case it is not a typesafe DocumentJDFImpl
 	 * 
 	 * @param document
 	 */
 	public JDFDoc(final Document document)
 	{
 		super(document);
+		// we have to reparse type safe
+		if ((document instanceof DocumentXMLImpl) && !(document instanceof DocumentJDFImpl))
+		{
+			reparse(document);
+		}
+	}
+
+	/**
+	 * constructor
+	 * note that the constructor will create a copy of the document in case it is not a typesafe DocumentJDFImpl
+	 * 
+	 * @param document
+	 */
+	public JDFDoc(final XMLDoc document)
+	{
+		super(document);
+		// we have to reparse type safe
+		Document memberDoc = (document).getMemberDocument();
+		if ((memberDoc instanceof DocumentXMLImpl) && !(memberDoc instanceof DocumentJDFImpl))
+		{
+			reparse(memberDoc);
+		}
+	}
+
+	protected void reparse(final Document document)
+	{
+		JDFDoc doc = new JDFDoc(document.getDocumentElement().getNodeName());
+		doc.setInitOnCreate(false);
+		KElement newRoot = doc.getRoot();
+		newRoot.copyInto((KElement) document.getDocumentElement(), false);
+		m_doc = doc.m_doc;
 	}
 
 	/**
@@ -129,7 +160,7 @@ public class JDFDoc extends XMLDoc
 	 * 
 	 * @param document
 	 */
-	public JDFDoc(final DocumentImpl document)
+	public JDFDoc(final DocumentJDFImpl document)
 	{
 		super(document);
 	}
@@ -479,6 +510,7 @@ public class JDFDoc extends XMLDoc
 	 * 
 	 * @return
 	 */
+	@Override
 	protected XMLParser getXMLParser()
 	{
 		return new JDFParser();

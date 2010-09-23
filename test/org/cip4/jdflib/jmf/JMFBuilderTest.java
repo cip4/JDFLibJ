@@ -103,4 +103,31 @@ public class JMFBuilderTest extends JDFTestCaseBase
 		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "milestone.jmf", 2, false);
 		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
 	}
+
+	/**
+	 * 
+	 * test milestone
+	 */
+	public void testBuildNewJDFCommand()
+	{
+		JDFJMF jmf = b.buildNewJDFCommand();
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "newJDF.jmf", 2, false);
+		assertTrue(jmf.isValid(EnumValidationLevel.Complete));
+	}
+
+	/**
+	 * 
+	 * test milestone
+	 */
+	public void testSenderID()
+	{
+		JDFJMF jmf = b.buildMilestone("PrepressCompleted", "jobID");
+		assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
+		b.setSenderID("fooBar");
+		jmf = b.buildMilestone("PrepressCompleted", "jobID");
+		assertEquals(jmf.getSenderID(), "fooBar");
+		b.setSenderID(null);
+		jmf = b.buildMilestone("PrepressCompleted", "jobID");
+		assertEquals(jmf.getSenderID(), JDFJMF.getTheSenderID());
+	}
 }

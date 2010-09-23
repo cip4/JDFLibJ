@@ -94,6 +94,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 public class JMFBuilder
 {
 	private String acknowledgeURL;
+	private String senderID = null;
 
 	/**
 	 * @return the acknowledgeURL
@@ -201,25 +202,25 @@ public class JMFBuilder
 	public JDFJMF createJMF(final EnumFamily family, final EnumType typ)
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(family, typ);
+		final JDFMessage m = jmf.getMessageElement(null, null, 0);
+		if (EnumFamily.Command.equals(family))
 		{
-			final JDFMessage m = jmf.getMessageElement(null, null, 0);
-			if (EnumFamily.Command.equals(family))
+			final JDFCommand c = (JDFCommand) m;
+			if (acknowledgeURL != null)
 			{
-				final JDFCommand c = (JDFCommand) m;
-				if (acknowledgeURL != null)
-				{
-					c.setAcknowledgeURL(acknowledgeURL);
-				}
-			}
-			else if (EnumFamily.Query.equals(family))
-			{
-				final JDFQuery q = (JDFQuery) m;
-				if (acknowledgeURL != null)
-				{
-					q.setAcknowledgeURL(acknowledgeURL);
-				}
+				c.setAcknowledgeURL(acknowledgeURL);
 			}
 		}
+		else if (EnumFamily.Query.equals(family))
+		{
+			final JDFQuery q = (JDFQuery) m;
+			if (acknowledgeURL != null)
+			{
+				q.setAcknowledgeURL(acknowledgeURL);
+			}
+		}
+		if (senderID != null)
+			jmf.setSenderID(senderID);
 		return jmf;
 	}
 
@@ -395,12 +396,25 @@ public class JMFBuilder
 	 * @param jobPartID
 	 * @return the message
 	 */
-	public JDFJMF buildNewJDFuery(final String jobID, final String jobPartID)
+	public JDFJMF buildNewJDFQuery(final String jobID, final String jobPartID)
 	{
 		final JDFQuery q = createQuery(JDFMessage.EnumType.NewJDF);
 		final JDFNewJDFQuParams nqp = q.appendNewJDFQuParams();
 		nqp.setIdentifier(new NodeIdentifier(jobID, jobPartID, null));
 		return q.getJMFRoot();
+	}
+
+	/**
+	 * build a JMFNewJDF query
+	 * @return the message
+	 */
+	public JDFJMF buildNewJDFCommand()
+	{
+		final JDFCommand c = createCommand(JDFMessage.EnumType.NewJDF);
+		final JDFNewJDFCmdParams ncp = c.appendNewJDFCmdParams();
+		ncp.appendIDInfo();
+
+		return c.getJMFRoot();
 	}
 
 	/**
@@ -566,5 +580,25 @@ public class JMFBuilder
 		EnumType typ = EnumType.getEnum(type);
 		JDFJMF jmfRoot = createJMF(f, typ);
 		return jmfRoot;
+	}
+
+	/**
+	 * 
+	 * get the SenderId used for this builder
+	 * @return
+	 */
+	public String getSenderID()
+	{
+		return senderID;
+	}
+
+	/**
+	 * 
+	 * set the SenderId used for this builder
+	 * @param senderID the new default senderID, if null use the static default from {@link JDFJMF}
+	 */
+	public void setSenderID(String senderID)
+	{
+		this.senderID = senderID;
 	}
 }

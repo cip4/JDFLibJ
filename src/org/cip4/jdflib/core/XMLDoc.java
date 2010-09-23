@@ -189,15 +189,6 @@ public class XMLDoc
 		{
 			throw new JDFException("XMLDoc(Document) null input Document");
 		}
-		else if (document instanceof XMLDoc)
-		{
-			m_doc = ((XMLDoc) document).getMemberDocument();
-			if (m_doc == null)
-			{
-				final String s = document.getClass().toString();
-				throw new JDFException("Quite Snafu: null m_doc for class=" + s);
-			}
-		}
 		try
 		{
 			m_doc = (DocumentXMLImpl) document;
@@ -221,6 +212,21 @@ public class XMLDoc
 			throw new JDFException("XMLDoc(DocumentXMLImpl) null input Document");
 		}
 		m_doc = document;
+	}
+
+	/**
+	 * constructor
+	 * 
+	 * @param document
+	 */
+	public XMLDoc(final XMLDoc other)
+	{
+		m_doc = other.m_doc;
+		if (m_doc == null)
+		{
+			final String s = other.getClass().toString();
+			throw new JDFException("Quite Snafu: null m_doc for class=" + s);
+		}
 	}
 
 	/**
