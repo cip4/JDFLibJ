@@ -580,6 +580,10 @@ public class FileUtil
 		{
 			return null;
 		}
+		if (!toDir.isDirectory())
+		{
+			toDir.mkdirs();
+		}
 		final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
 		final boolean b = copyFile(fromFile, newFile);
 		return b ? newFile : null;
@@ -775,7 +779,8 @@ public class FileUtil
 	 * 
 	 * @return true if we are on a windows file system
 	 */
-	public static boolean isWindows() {
+	public static boolean isWindows()
+	{
 		return File.separator.equals("\\");
 	}
 }

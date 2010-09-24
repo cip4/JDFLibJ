@@ -100,11 +100,11 @@ import javax.mail.Multipart;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
@@ -287,7 +287,7 @@ public class UrlUtil
 		 */
 		public XMLDoc getXMLDoc()
 		{
-			final JDFParser p = new JDFParser();
+			final XMLParser p = new XMLParser();
 			final XMLDoc d = p.parseStream(inStream);
 			return d;
 		}
@@ -326,7 +326,7 @@ public class UrlUtil
 	/**
 	 * 
 	 */
-	public static final String TEXT_UNKNOWN = JDFConstants.MIME_TEXTUNKNOWN;
+	public static final String TEXT_UNKNOWN = JDFCoreConstants.MIME_TEXTUNKNOWN;
 	/**
 	 * the preferred value!
 	 */
@@ -334,15 +334,15 @@ public class UrlUtil
 	/**
 	 * 
 	 */
-	public static final String TEXT_XML = JDFConstants.MIME_TEXTXML;
+	public static final String TEXT_XML = JDFCoreConstants.MIME_TEXTXML;
 	/**
 	 * 
 	 */
-	public static final String VND_JDF = JDFConstants.MIME_JDF;
+	public static final String VND_JDF = JDFCoreConstants.MIME_JDF;
 	/**
 	 * 
 	 */
-	public static final String VND_JMF = JDFConstants.MIME_JMF;
+	public static final String VND_JMF = JDFCoreConstants.MIME_JMF;
 	/**
 	 * 
 	 */
@@ -497,7 +497,7 @@ public class UrlUtil
 	 */
 	public static InputStream getCidURLStream(final String url, final Multipart multipart)
 	{
-		if (url == null || url.equals(JDFConstants.EMPTYSTRING))
+		if (url == null || url.equals(JDFCoreConstants.EMPTYSTRING))
 		{
 			return null;
 		}
@@ -955,23 +955,23 @@ public class UrlUtil
 		if (mimeMap == null)
 		{
 			mimeMap = new HashMap<String, String>();
-			mimeMap.put("pdf", JDFConstants.MIME_PDF);
-			mimeMap.put("ps", JDFConstants.MIME_PS);
+			mimeMap.put("pdf", JDFCoreConstants.MIME_PDF);
+			mimeMap.put("ps", JDFCoreConstants.MIME_PS);
 
-			mimeMap.put("ppf", JDFConstants.MIME_CIP3);
-			mimeMap.put("ppml", JDFConstants.MIME_PPML);
-			mimeMap.put("jdf", JDFConstants.MIME_JDF);
-			mimeMap.put("jmf", JDFConstants.MIME_JMF);
+			mimeMap.put("ppf", JDFCoreConstants.MIME_CIP3);
+			mimeMap.put("ppml", JDFCoreConstants.MIME_PPML);
+			mimeMap.put("jdf", JDFCoreConstants.MIME_JDF);
+			mimeMap.put("jmf", JDFCoreConstants.MIME_JMF);
 
-			mimeMap.put("xml", JDFConstants.MIME_TEXTXML);
+			mimeMap.put("xml", JDFCoreConstants.MIME_TEXTXML);
 			mimeMap.put("xsl", TEXT_XML);
 			mimeMap.put("xsd", TEXT_XML);
 
-			mimeMap.put("jpg", JDFConstants.MIME_JPG);
-			mimeMap.put("jpeg", JDFConstants.MIME_JPG);
-			mimeMap.put("png", JDFConstants.MIME_PNG);
-			mimeMap.put("tif", JDFConstants.MIME_TIFF);
-			mimeMap.put("tiff", JDFConstants.MIME_TIFF);
+			mimeMap.put("jpg", JDFCoreConstants.MIME_JPG);
+			mimeMap.put("jpeg", JDFCoreConstants.MIME_JPG);
+			mimeMap.put("png", JDFCoreConstants.MIME_PNG);
+			mimeMap.put("tif", JDFCoreConstants.MIME_TIFF);
+			mimeMap.put("tiff", JDFCoreConstants.MIME_TIFF);
 
 			mimeMap.put("mjm", MimeUtil.MULTIPART_RELATED);
 			mimeMap.put("mjd", MimeUtil.MULTIPART_RELATED);
@@ -980,7 +980,7 @@ public class UrlUtil
 		}
 		final String extension = UrlUtil.extension(url);
 		String mimeType = extension == null ? null : mimeMap.get(extension.toLowerCase());
-		return mimeType == null ? JDFConstants.MIME_TEXTUNKNOWN : mimeType;
+		return mimeType == null ? JDFCoreConstants.MIME_TEXTUNKNOWN : mimeType;
 	}
 
 	/**
@@ -1284,7 +1284,7 @@ public class UrlUtil
 	public static String getURLWithDirectory(String directory, String url)
 	{
 
-		if (directory == null || JDFConstants.EMPTYSTRING.equals(directory))
+		if (directory == null || JDFCoreConstants.EMPTYSTRING.equals(directory))
 		{
 			return url;
 		}

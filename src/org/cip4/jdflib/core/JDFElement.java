@@ -3243,7 +3243,11 @@ public class JDFElement extends KElement
 				}
 				else if (v.elementAt(i) instanceof JDFRefElement)
 				{
-					v.set(i, ((JDFRefElement) v.elementAt(i)).getTarget());
+					JDFResource target = ((JDFRefElement) v.elementAt(i)).getTarget();
+					if (target == null)
+						v.remove(i);
+					else
+						v.set(i, target);
 				}
 			}
 			if (maxSize > 0)

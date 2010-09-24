@@ -578,14 +578,23 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFResourcePool resPool = root.appendResourcePool();
 		final JDFMedia med = (JDFMedia) root.addResource("Media", EnumUsage.Input);
 		final JDFExposedMedia expMedia = (JDFExposedMedia) root.addResource("ExposedMedia", EnumUsage.Input);
-		expMedia.refElement(med);
-		final VElement e = resPool.getChildrenByTagName("Media", null, null, false, true, 0);
-		assertEquals(e.size(), 2);
-		for (int i = 0; i < e.size(); i++)
+		JDFRefElement ref = expMedia.refElement(med);
+		VElement ve = resPool.getChildrenByTagName("Media", null, null, false, true, 0);
+		assertEquals(ve.size(), 2);
+		for (KElement e : ve)
 		{
-			final JDFMedia m = (JDFMedia) e.item(i);
+			final JDFMedia m = (JDFMedia) e;
 			assertEquals(m, med);
 		}
+
+		ref.setPartMap(new JDFAttributeMap("Side", "Front"));
+		ve = resPool.getChildrenByTagName("Media", null, null, false, true, 0);
+		assertEquals("we skipped the ref pointing to Nirvana", ve.size(), 1);
+		for (KElement e : ve)
+		{
+			assertNotNull(e);
+		}
+
 	}
 
 	/**
