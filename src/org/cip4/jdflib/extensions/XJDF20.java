@@ -1188,7 +1188,7 @@ public class XJDF20 extends BaseElementWalker
 				niLeaf.setNodeStatus(node.getPartStatus(map, 0));
 				niLeaf.setNodeStatusDetails(StringUtil.getNonEmpty(node.getPartStatusDetails(map)));
 			}
-			String types = newRootP.getAttribute(AttributeName.TYPES);
+			String types = newRootP.getAttribute(AttributeName.TYPES, null, null);
 			newRootP.setAttributes(node);
 
 			removeUnused(newRootP);

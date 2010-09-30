@@ -211,7 +211,45 @@ public class FileUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
-	public void testListFiles() throws Exception
+	public void testListFilesWithExtension() throws Exception
+	{
+		final File f = new File(sm_dirTestDataTemp + "/foo");
+		f.mkdir(); // make sure we have one
+		assertTrue(FileUtil.deleteAll(f));
+		assertTrue(f.mkdir());
+		assertNull(FileUtil.listFilesWithExtension(null, null));
+
+		for (char c = 'a'; c < 'g'; c++)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				final File f2 = new File(f.getAbsolutePath() + File.separator + i + "." + c);
+				assertTrue(f2.createNewFile());
+			}
+		}
+		assertEquals(FileUtil.listFilesWithExtension(f, "a").length, 3);
+		assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[0].getName(), "0.a");
+		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 18);
+		assertNull(FileUtil.listFilesWithExtension(f, "CC"));
+		assertNull(FileUtil.listFilesWithExtension(f, ".CC,.dd"));
+		new File(f.getAbsolutePath() + File.separator + "a").createNewFile();
+		assertEquals(FileUtil.listFilesWithExtension(f, null).length, 19);
+		assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 1);
+		new File(f.getAbsolutePath() + File.separator + "b.").createNewFile();
+		assertEquals(FileUtil.listFilesWithExtension(f, ".").length, 2);
+
+		if (PlatformUtil.isWindows())
+		{
+			assertEquals(FileUtil.listFilesWithExtension(f, "C")[0].getName(), "0.c");
+			assertEquals(FileUtil.listFilesWithExtension(f, "a,b,.c")[8].getName(), "2.c");
+		}
+
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testListFilesWithExpression() throws Exception
 	{
 		final File f = new File(sm_dirTestDataTemp + "/foo");
 		f.mkdir(); // make sure we have one
@@ -366,7 +404,42 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertEquals(nf.getName(), f.getName());
 		assertTrue(f.exists());
 		assertTrue(nf.exists());
-		assertNull(FileUtil.copyFileToDir(nf, fd));
+		assertNull("do not copy self", FileUtil.copyFileToDir(nf, fd));
+		assertEquals(nf, FileUtil.copyFileToDir(f, fd));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testEnsureFileInDir() throws Exception
+	{
+		final byte[] b = new byte[55555];
+		for (int i = 0; i < 55555; i++)
+		{
+			b[i] = (byte) (i % 256);
+		}
+		final ByteArrayInputStream is = new ByteArrayInputStream(b);
+		is.close();
+		final File f = new File(sm_dirTestDataTemp + "streamCopy.dat");
+		if (f.exists())
+		{
+			f.delete();
+		}
+		FileUtil.streamToFile(is, f.getPath());
+		final String newdir = sm_dirTestDataTemp + File.separator + "newDirCopy";
+		final File fd = new File(newdir);
+		FileUtil.deleteAll(fd);
+		assertFalse(fd.exists());
+		fd.mkdirs();
+		final File nf = FileUtil.ensureFileInDir(f, fd);
+		assertNotNull(nf);
+		File parentDir = nf.getParentFile();
+		assertEquals(parentDir, fd);
+		assertEquals(nf.getName(), f.getName());
+		assertTrue(f.exists());
+		assertTrue(nf.exists());
+		assertEquals(nf, FileUtil.ensureFileInDir(f, fd));
+		assertEquals(nf, FileUtil.ensureFileInDir(nf, fd));
 	}
 
 	/**
@@ -411,7 +484,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		{
 			b[i] = (byte) (i % 256);
 		}
-		final ByteArrayInputStream is = new ByteArrayInputStream(b);
+		final ByteArrayIOStream is = new ByteArrayIOStream(b);
 		is.close();
 		final File f = new File(sm_dirTestDataTemp + "stream.dat");
 		if (f.exists())
@@ -419,8 +492,9 @@ public class FileUtilTest extends JDFTestCaseBase
 			f.delete();
 		}
 
-		FileUtil.streamToFile(is, sm_dirTestDataTemp + "stream.dat");
+		FileUtil.streamToFile(is.getInputStream(), sm_dirTestDataTemp + "stream.dat");
 		assertTrue(f.exists());
+		assertEquals(f.length(), 55555, 2000);
 
 		final FileInputStream fis = new FileInputStream(f);
 		for (int i = 0; i < 55555; i++)
@@ -435,6 +509,9 @@ public class FileUtilTest extends JDFTestCaseBase
 		final int j = fis.read();
 		assertEquals("eof reached", j, -1);
 		fis.close();
+		FileUtil.streamToFile(is.getInputStream(), sm_dirTestDataTemp + "stream.dat");
+		assertTrue(f.exists());
+		assertEquals("deleted old stuff", f.length(), 55555, 2000);
 
 		final FileInputStream fis2 = new FileInputStream(f);
 		final File f2 = FileUtil.streamToFile(fis2, sm_dirTestDataTemp + "stream2.dat");

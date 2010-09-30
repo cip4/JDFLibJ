@@ -2265,7 +2265,7 @@ public class StringUtil
 	 * @param simpleRegExp the simple regexp
 	 * @return the converted real regexp
 	 */
-	public static String simpleRegExptoRegExp(final String simpleRegExp)
+	public static String simpleRegExptoRegExp(String simpleRegExp)
 	{
 		if (simpleRegExp == null)
 		{
@@ -2275,32 +2275,31 @@ public class StringUtil
 		// attention note sequence, otherwise we get unwanted side effects
 		final String[] in = new String[] { ".", "*" };
 		final String[] out = new String[] { "\\.", "(.*)" };
-		String local = simpleRegExp;
 		for (int i = 0; i < in.length; i++)
 		{
-			final int delta = out[i].indexOf(in[i]);
-			final StringBuffer b = new StringBuffer(local.length() * 2);
+			final int delta = out[i].indexOf(in[i]); // offset of our char
+			final StringBuffer b = new StringBuffer(simpleRegExp.length() * 2);
 			int lastPos = 0;
 			while (lastPos >= 0)
 			{
-				final int pos = local.indexOf(in[i], lastPos);
-				final int pos2 = local.indexOf(out[i], lastPos);
-				if (pos >= 0)
+				final int posSimpleToken = simpleRegExp.indexOf(in[i], lastPos);
+				final int posComplexToken = simpleRegExp.indexOf(out[i], lastPos);
+				if (posSimpleToken >= 0)
 				{
-					final int pos3 = local.indexOf("(", lastPos);
-					b.append(local.substring(lastPos, pos));
-					b.append(pos2 + delta == pos || (pos3 >= 0 && pos3 < pos) ? in[i] : out[i]);
+					final int pos3 = simpleRegExp.indexOf("(", lastPos);
+					b.append(simpleRegExp.substring(lastPos, posSimpleToken));
+					b.append(posComplexToken + delta == posSimpleToken || (pos3 >= 0 && pos3 < posSimpleToken) ? in[i] : out[i]);
 				}
 				else
 				{
-					b.append(local.substring(lastPos));
+					b.append(simpleRegExp.substring(lastPos));
 				}
-				lastPos = pos >= 0 ? pos + 1 : pos;
+				lastPos = posSimpleToken >= 0 ? posSimpleToken + 1 : posSimpleToken;
 			}
 
-			local = b.toString();
+			simpleRegExp = b.toString();
 		}
-		return local;
+		return simpleRegExp;
 	}
 
 	/**

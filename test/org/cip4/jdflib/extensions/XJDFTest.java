@@ -137,7 +137,9 @@ public class XJDFTest extends JDFTestCaseBase
 		KElement.setLongID(false);
 		super.setUp();
 		n = new JDFDoc("JDF").getJDFRoot();
-		n.setType(EnumType.ConventionalPrinting);
+		n.setType(EnumType.Combined);
+		n.addTypes(EnumType.InkZoneCalculation);
+		n.addTypes(EnumType.ConventionalPrinting);
 
 		sheetMap = new JDFAttributeMap();
 		sheetMap.put(EnumPartIDKey.SignatureName, "sig1");
@@ -187,6 +189,16 @@ public class XJDFTest extends JDFTestCaseBase
 		xm = (JDFExposedMedia) rl.getTarget();
 		assertEquals(xm.getProductID(), "P1");
 		assertEquals(xm.getPlateType(), EnumPlateType.Dummy);
+	}
+
+	/**
+	 * 
+	 */
+	public void testToXJDFTypes()
+	{
+		e = new XJDF20().makeNewJDF(n, null);
+		String s = e.getAttribute(AttributeName.TYPES);
+		assertFalse(s.startsWith(" "));
 	}
 
 	/**

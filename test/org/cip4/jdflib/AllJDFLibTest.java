@@ -96,6 +96,7 @@ import org.cip4.jdflib.core.VElementTest;
 import org.cip4.jdflib.core.VStringTest;
 import org.cip4.jdflib.core.XMLDocTest;
 import org.cip4.jdflib.core.XMLDocUserDataTest;
+import org.cip4.jdflib.core.XMLParserTest;
 import org.cip4.jdflib.datatypes.JDFAttributeMapTest;
 import org.cip4.jdflib.datatypes.JDFCMYKColorTest;
 import org.cip4.jdflib.datatypes.JDFDateTimeRangeTest;
@@ -316,6 +317,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(VStringTest.class);
 		suite.addTestSuite(XMLDocTest.class);
 		suite.addTestSuite(XMLDocUserDataTest.class);
+		suite.addTestSuite(XMLParserTest.class);
 
 		// cformat
 		suite.addTestSuite(PrintfFormatTest.class);

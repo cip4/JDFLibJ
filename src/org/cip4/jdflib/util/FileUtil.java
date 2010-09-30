@@ -114,7 +114,7 @@ public class FileUtil
 	/**
 	 * list all files matching given regexp
 	 * @param dir the directory to search
-	 * @param expression regular expression
+	 * @param expression regular expression - uses the simplified syntax
 	 * @return Files[] the matching files, null if none are found
 	 */
 	public static File[] listFilesWithExpression(final File dir, final String expression)
@@ -566,6 +566,30 @@ public class FileUtil
 		{
 			return false;
 		}
+	}
+
+	/**
+	 * copies a File to directory if and only if toFile does not exist
+	 *
+	 * @param fromFile the File to move
+	 * @param toDir the Directory to move to
+	 * @return File the destination File if success, 
+	 */
+	public static File ensureFileInDir(final File fromFile, final File toDir)
+	{
+		if (fromFile == null || toDir == null)
+		{
+			return null;
+		}
+		if (!toDir.isDirectory())
+		{
+			toDir.mkdirs();
+		}
+		final File newFile = getFileInDirectory(toDir, new File(fromFile.getName()));
+		boolean b = newFile.canRead();
+		if (!b)
+			b = copyFile(fromFile, newFile);
+		return b ? newFile : null;
 	}
 
 	/**
