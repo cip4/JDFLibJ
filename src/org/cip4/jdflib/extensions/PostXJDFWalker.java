@@ -264,6 +264,23 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
+		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param xjdf
+		 * @param dummy
+		 * @return null or super depending on the value of mergelayout
+		*/
+		@Override
+		public KElement walk(KElement xjdf, KElement dummy)
+		{
+			if (mergeLayout)
+			{
+				xjdf.deleteNode();
+				return null;
+			}
+			else
+				return super.walk(xjdf, dummy);
+		}
+		/**
 		 * 
 		 * @author Rainer Prosi, Heidelberger Druckmaschinen
 		 * 

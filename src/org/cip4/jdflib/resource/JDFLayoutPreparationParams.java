@@ -218,7 +218,7 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 			strippingParams.clonePartitions(JDFLayoutPreparationParams.this, null);
 			VElement vThis = JDFLayoutPreparationParams.this.getLeaves(false);
 			for (KElement e : vThis)
-				((JDFLayoutPreparationParams) e).new StrippingConverter(null).convertLeaf();
+				((JDFLayoutPreparationParams) e).new StrippingConverter(parent).convertLeaf();
 		}
 
 		/**
