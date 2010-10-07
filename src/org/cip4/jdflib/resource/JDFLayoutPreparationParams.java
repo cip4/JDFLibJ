@@ -78,16 +78,22 @@
 package org.cip4.jdflib.resource;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams;
 import org.cip4.jdflib.auto.JDFAutoAssembly.EnumOrder;
 import org.cip4.jdflib.auto.JDFAutoBinderySignature.EnumBinderySignatureType;
+import org.cip4.jdflib.auto.JDFAutoContentObject.EnumAnchor;
+import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionX;
+import org.cip4.jdflib.auto.JDFAutoImageShift.EnumPositionY;
+import org.cip4.jdflib.auto.JDFAutoLayoutPreparationParams;
 import org.cip4.jdflib.auto.JDFAutoStripMark.EnumMarkSide;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFRectangle;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.process.JDFAssembly;
@@ -95,6 +101,7 @@ import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFExternalImpositionTemplate;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPosition;
+import org.cip4.jdflib.resource.process.JDFSignatureCell;
 import org.cip4.jdflib.resource.process.JDFStripMark;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
@@ -206,9 +213,28 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 		public void convert()
 		{
 			convertParentNode();
+			convertAssembly();
+			strippingParams = (JDFStrippingParams) parent.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
+			strippingParams.clonePartitions(JDFLayoutPreparationParams.this, null);
+			VElement vThis = JDFLayoutPreparationParams.this.getLeaves(false);
+			for (KElement e : vThis)
+				((JDFLayoutPreparationParams) e).new StrippingConverter(null).convertLeaf();
+		}
+
+		/**
+		 * 
+		 * TODO Please insert comment!
+		 */
+		protected void convertLeaf()
+		{
+			strippingParams = (JDFStrippingParams) parent.getResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input, 0);
+			JDFAttributeMap partMap = JDFLayoutPreparationParams.this.getPartMap();
+			if (partMap != null && partMap.size() > 0)
+				strippingParams = (JDFStrippingParams) strippingParams.getPartition(partMap, null);
 			convertStrippingParams();
 			convertBinderySignature();
-			convertAssembly();
+			setSignatureCell();
+			setStripCellParams();
 
 			removeObsolete();
 		}
@@ -235,7 +261,6 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 		 */
 		private void convertStrippingParams()
 		{
-			strippingParams = (JDFStrippingParams) parent.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Input);
 			final JDFMedia media = getMedia();
 			if (media != null)
 			{
@@ -247,6 +272,76 @@ public class JDFLayoutPreparationParams extends JDFAutoLayoutPreparationParams
 			setPosition();
 			setStripMarks(getFrontMarkList(), EnumMarkSide.Front);
 			setStripMarks(getBackMarkList(), EnumMarkSide.Back);
+		}
+
+		/**
+		 * TODO Please insert comment!
+		 */
+		private void setStripCellParams()
+		{
+			JDFPageCell pageCell = JDFLayoutPreparationParams.this.getPageCell();
+			if (pageCell != null)
+			{
+				JDFXYPair ts = pageCell.getTrimSize();
+				if (ts != null)
+					strippingParams.getCreateStripCellParams().setTrimSize(ts);
+			}
+		}
+
+		/**
+		 * copy data from PageCell to SignatureCell
+		 */
+		private void setSignatureCell()
+		{
+			JDFPageCell pageCell = JDFLayoutPreparationParams.this.getPageCell();
+			if (pageCell == null)
+				return;
+			JDFSignatureCell signatureCell = getBinderySignature().getCreateSignatureCell(0);
+			signatureCell.setOrientation(getSigCellOrientation(pageCell.getRotate()));
+			convertImageShift(pageCell, signatureCell);
+			signatureCell.copyElement(pageCell.getFitPolicy(), null);
+		}
+
+		/**
+		 * 
+		 * convert the image shift to 
+		 * @param pageCell
+		 * @param signatureCell
+		 */
+		private void convertImageShift(JDFPageCell pageCell, JDFSignatureCell signatureCell)
+		{
+			JDFImageShift imageShift = pageCell.getImageShift();
+			if (imageShift == null)
+				return;
+			EnumPositionX posX = imageShift.getPositionX();
+			EnumPositionY posY = imageShift.getPositionY();
+			if (posX == null || posY == null)
+				return;
+
+			String anchor = posY.getName() + posX.getName();
+			if ("CenterCenter".equals(anchor))
+				anchor = "Center";
+			EnumAnchor ea = EnumAnchor.getEnum(anchor);
+			if (ea != null)
+				signatureCell.setAttribute(AttributeName.ANCHOR, anchor);
+
+		}
+
+		/**
+		 * TODO Please insert comment!
+		 * @param rotate
+		 * @return
+		 */
+		private org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation getSigCellOrientation(org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate rotate)
+		{
+			if (org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate.Rotate90.equals(rotate))
+				return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Left;
+			else if (org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate.Rotate180.equals(rotate))
+				return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Down;
+			else if (org.cip4.jdflib.auto.JDFAutoPageCell.EnumRotate.Rotate270.equals(rotate))
+				return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Right;
+
+			return org.cip4.jdflib.auto.JDFAutoSignatureCell.EnumOrientation.Up;
 		}
 
 		/**

@@ -192,6 +192,8 @@ public class PackagingGoldenTicket extends MISGoldenTicket
 	private JDFShapeDef makeShapeDef(final EnumUsage usage)
 	{
 		final JDFShapeDef shapeDef = (JDFShapeDef) theNode.addResource(ElementName.SHAPEDEF, usage);
+		shapeDef.setGeneralID("ShapeID", "ShapeDefinitionID");
+		shapeDef.setGeneralID("ShapeName", "Shape Name");
 		final JDFShape size = new JDFShape(100, 70, 30);
 		size.scaleFromMM();
 		shapeDef.setDimensions(size);

@@ -7413,6 +7413,26 @@ public class JDFResource extends JDFElement
 	}
 
 	/**
+	 * Gets string attribute Manufacturer
+	 * 
+	 * @return String the - attribute value
+	 */
+	public String getManufacturer()
+	{
+		return getAttribute(AttributeName.MANUFACTURER, null, JDFConstants.EMPTYSTRING);
+	}
+
+	/**
+	 * Sets attribute Manufacturer
+	 * 
+	 * @param value the value to set the attribute to
+	 */
+	public void setManufacturer(final String value)
+	{
+		setAttribute(AttributeName.MANUFACTURER, value);
+	}
+
+	/**
 	 * Gets string attribute RibbonName
 	 * 
 	 * @return String the - attribute value

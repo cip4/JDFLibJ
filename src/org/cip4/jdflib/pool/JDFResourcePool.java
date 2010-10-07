@@ -600,7 +600,7 @@ public class JDFResourcePool extends JDFPool
 			{
 				kRet = null; // it is somewhere else, not a child of this!
 			}
-			if (kRet != null)
+			if (kRet != null && (kRet instanceof JDFResource))
 			{
 				return (JDFResource) kRet;
 			}

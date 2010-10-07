@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -352,7 +352,7 @@ public class AtrInfo
 	}
 
 	/**
-	 * @return
+	 * @return the enum used for type declaration
 	 */
 	public ValuedEnum getEnumEnum()
 	{
@@ -360,7 +360,7 @@ public class AtrInfo
 	}
 
 	/**
-	 * @return
+	 * @return the default value, null if none set
 	 */
 	public String getAtrDefault()
 	{
@@ -390,7 +390,7 @@ public class AtrInfo
 	/**
 	 * get the first jdf version where an attribute of this type is valid
 	 * 
-	 * @return
+	 * @return the first valid version
 	 */
 	public EnumVersion getFirstVersion()
 	{
@@ -409,7 +409,7 @@ public class AtrInfo
 	/**
 	 * get the last jdf version where an attribute of this type is valid
 	 * 
-	 * @return
+	 * @return the last valid version
 	 */
 	public EnumVersion getLastVersion()
 	{

@@ -129,6 +129,7 @@ class PostXJDFWalker extends BaseElementWalker
 		{
 			return xjdf;
 		}
+
 	}
 
 	/**
@@ -263,23 +264,10 @@ class PostXJDFWalker extends BaseElementWalker
 		}
 
 		/**
-		 * @see org.cip4.jdflib.extensions.XJDF20.WalkResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param xjdf
-		 * @param dummy
-		 * @return
-		*/
-		@Override
-		public KElement walk(KElement xjdf, KElement dummy)
-		{
-			if (mergeLayout)
-			{
-				xjdf.deleteNode();
-			}
-
-			return mergeLayout ? null : xjdf; // stop after merging
-
-		}
-
+		 * 
+		 * @author Rainer Prosi, Heidelberger Druckmaschinen
+		 * 
+		 */
 	}
 
 	/**
@@ -320,7 +308,7 @@ class PostXJDFWalker extends BaseElementWalker
 			KElement intent = super.walk(xjdf, dummy);
 			if (intent != null)
 			{
-				XJDFHelper h = new XJDFHelper((JDFElement) xjdf.getDeepParent(XJDF20.rootName, 0));
+				XJDFHelper h = new XJDFHelper(xjdf.getDeepParent(XJDF20.rootName, 0));
 				SetHelper artDelResHelper = h.getCreateSet("Parameter", ElementName.DELIVERYPARAMS, EnumUsage.Input);
 				PartitionHelper ph = artDelResHelper.appendPartition(null, true);
 				JDFDeliveryParams dp = (JDFDeliveryParams) ph.getResource();

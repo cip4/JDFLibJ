@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.pool;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFParser;
@@ -144,11 +145,11 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 	 */
 	public void testMakeRootResource() throws Exception
 	{
-//		JDFAncestor a1 = 
-			ap.appendAncestor();
+		//		JDFAncestor a1 = 
+		ap.appendAncestor();
 		JDFAncestor a2 = ap.appendAncestor();
-//		JDFAncestor a3 = 
-			ap.appendAncestor();
+		//		JDFAncestor a3 = 
+		ap.appendAncestor();
 		JDFNodeInfo ni2 = a2.appendNodeInfo();
 		ni2.makeRootResource(null, null, true);
 		assertNotNull(a2.getElement("NodeInfoRef", null, 0));
@@ -180,6 +181,18 @@ public class JDFAncestorPoolTest extends JDFTestCaseBase
 		JDFNodeInfo ni1 = a1.appendNodeInfo();
 		ni1.appendJMF().appendQuery(JDFMessage.EnumType.Resource).appendSubscription();
 		assertEquals(ap.getAncestorElement(ElementName.NODEINFO, null, "JMF/Query[@Type=\"Resource\"]"), ni1);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testgetAncestorElementRef() throws Exception
+	{
+		JDFAncestor a1 = ap.appendAncestor();
+		JDFCustomerInfo ci = n.getCreateCustomerInfo();
+		n.getResourceLinkPool().deleteNode();
+		a1.refElement(ci);
+		assertEquals(ap.getAncestorElement(ElementName.CUSTOMERINFO, null, null), ci);
 	}
 
 }

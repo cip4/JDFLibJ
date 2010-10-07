@@ -81,6 +81,11 @@ import org.cip4.jdflib.auto.JDFAutoAssembly;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.ContainerUtil;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -148,5 +153,34 @@ public class JDFAssembly extends JDFAutoAssembly
 	public String toString()
 	{
 		return "JDFAssembly[  --> " + super.toString() + " ]";
+	}
+
+	/**
+	 * get a list of all attributes
+	 * @param attName the attribute to collect
+	 * @return the unified vector of attribute values, null if none found
+	 */
+	public VString getAssemblyAttributes(String attName)
+	{
+		VElement leaves = getLeaves(false);
+		VString v = new VString();
+		for (KElement e : leaves)
+		{
+			VElement sections = e.getChildElementVector(ElementName.ASSEMBLYSECTION, null);
+			String at = e.getAttribute(attName, null, null);
+			if (at != null)
+				v.add(at);
+			if (sections != null)
+			{
+				for (KElement es : sections)
+				{
+					at = es.getAttribute(attName, null, null);
+					if (at != null)
+						v.add(at);
+				}
+			}
+		}
+		ContainerUtil.unify(v);
+		return v.size() == 0 ? null : v;
 	}
 }

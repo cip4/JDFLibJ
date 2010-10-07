@@ -180,6 +180,10 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public boolean bMergeLayout = true;
 	/**
+	 * if true merge stripping and layout
+	 */
+	public boolean bMergeLayoutPrep = true;
+	/**
 	 * if true clean up runlist/LayoutElement
 	 */
 	public boolean bMergeRunList = true;
@@ -230,8 +234,9 @@ public class XJDF20 extends BaseElementWalker
 	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
 		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
+		root.getCreateAuditPool().addModified("XJDF Converter", null);
 		FixVersion vers = new FixVersion(EnumVersion.Version_1_4);
-		vers.setLayoutPrepToStripping(true);
+		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.walkTree(root, null);
 
 		oldRoot = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
@@ -815,7 +820,7 @@ public class XJDF20 extends BaseElementWalker
 
 		/**
 		 * @param re
-		 * @return
+		 * @return true if must inline re
 		 */
 		protected boolean mustInline(final JDFRefElement re)
 		{
@@ -824,7 +829,7 @@ public class XJDF20 extends BaseElementWalker
 
 		/**
 		 * @param refLocalName
-		 * @return
+		 * @return true if must inline refLocalName
 		 */
 		protected boolean mustInline(final String refLocalName)
 		{
@@ -842,7 +847,7 @@ public class XJDF20 extends BaseElementWalker
 					|| ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.SCAVENGERAREA.equals(refLocalName) || ElementName.TRAPREGION.equals(refLocalName)
 					|| ElementName.TRANSFERCURVE.equals(refLocalName) || ElementName.COLORCONTROLSTRIP.equals(refLocalName) || ElementName.LAYERLIST.equals(refLocalName)
 					|| ElementName.PAGECONDITION.equals(refLocalName) || ElementName.CONTENTOBJECT.equals(refLocalName) || ElementName.MARKOBJECT.equals(refLocalName)
-					|| ElementName.LAYERDETAILS.equals(refLocalName) || ElementName.BINDERYSIGNATURE.equals(refLocalName);
+					|| ElementName.FILESPEC.equals(refLocalName) || ElementName.LAYERDETAILS.equals(refLocalName) || ElementName.BINDERYSIGNATURE.equals(refLocalName);
 		}
 
 		/**
@@ -1115,14 +1120,40 @@ public class XJDF20 extends BaseElementWalker
 		}
 
 		/**
-		 * @param jdf
+		 * @param resLinkPool
 		 * @param xjdf
 		 * @return the created resource in this case just remove the pool
 		 */
 		@Override
-		public KElement walk(final KElement jdf, final KElement xjdf)
+		public KElement walk(final KElement resLinkPool, final KElement xjdf)
 		{
+			getLinksFromAncestorPool(resLinkPool);
 			return xjdf;
+		}
+
+		/**
+		 * copy the closest ancestorpool link to here, if none exists
+		 * @param resLinkPool 
+		 */
+		private void getLinksFromAncestorPool(KElement resLinkPool)
+		{
+			KElement parent = resLinkPool.getParentNode_KElement();
+			if (!(parent instanceof JDFNode))
+				return;
+			JDFNode n = (JDFNode) parent;
+			JDFAncestorPool ap = n.getAncestorPool();
+			if (ap == null)
+				return;
+			String[] v = { ElementName.NODEINFO, ElementName.CUSTOMERINFO };
+			for (String s : v)
+			{
+				JDFResource ni = n.getResource(s, null, 0);
+				if (ni == null)
+				{
+					JDFNodeInfo nia = (JDFNodeInfo) ap.getAncestorElement(s, null, null);
+					n.linkResource(nia, EnumUsage.Input, null);
+				}
+			}
 		}
 
 		/**

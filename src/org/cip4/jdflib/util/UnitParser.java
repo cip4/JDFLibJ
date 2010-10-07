@@ -81,7 +81,7 @@ public class UnitParser
 	/**
 	 * extract units if and only if the string has a pattern of "<##>( )mm" or "<##>( )cm" whitespace is ignored
 	 * @param val
-	 * @return
+	 * @return the converted unit string
 	 */
 	public String extractUnits(String val)
 	{

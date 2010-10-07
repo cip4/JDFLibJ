@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -181,7 +181,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 	 * 
 	 * @param element
 	 * @param nameSpaceURI
-	 * @return
+	 * @return an element
 	 */
 	@Deprecated
 	public KElement getAncestorElement(String element, String nameSpaceURI)
@@ -302,8 +302,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 						{
 							// add a low level refelement, the copying takes
 							// place inaddspawnedresources
-							JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.NODEINFO
-									+ JDFConstants.REF);
+							JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.NODEINFO + JDFConstants.REF);
 							re.setrRef(nodeInfo.getID());
 							re.setPartMap(nodeInfo.getPartMap());
 						}
@@ -323,8 +322,7 @@ public class JDFAncestorPool extends JDFAutoAncestorPool
 						{
 							// add a low level refelement, the copying takes
 							// place inaddspawnedresources
-							JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.CUSTOMERINFO
-									+ JDFConstants.REF);
+							JDFRefElement re = (JDFRefElement) ancestor.appendElement(ElementName.CUSTOMERINFO + JDFConstants.REF);
 							re.setrRef(customerInfo.getID());
 							re.setPartMap(customerInfo.getPartMap());
 						}

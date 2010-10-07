@@ -220,7 +220,7 @@ public class JavaCoreStringUtil
 
 		strbufResult.append("import org.cip4.jdflib.util").append(".*;           ").append(strLineEnd);
 
-		strbufResult.append(strDepth1).append("/*").append(strLineEnd);
+		strbufResult.append(strDepth1).append("/**").append(strLineEnd);
 		strbufResult.append(strDepth1).append("*****************************************************************************").append(strLineEnd);
 		strbufResult.append(strDepth1).append("class ").append(strJDFAutoFileName).append(" : public ").append(strExtends).append(strLineEnd).append(strLineEnd);
 		strbufResult.append(strDepth1).append("*****************************************************************************").append(strLineEnd);
@@ -555,19 +555,14 @@ public class JavaCoreStringUtil
 			SchemaAttribute schemaAttribute = (SchemaAttribute) vAttributes.elementAt(i);
 			String attributeName = schemaAttribute.getStrAttributeName();
 
-			if (useEnumAttribute(schemaAttribute.getIsEnum(), attributeName)
-					&& !"MaxVersion".equals(attributeName)
-					&& !"UpdatedStatus".equals(attributeName)
-					&& !"Availability".equals(attributeName)
-					&& !"LinkUsage".equals(attributeName)
-					&& !("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName))
+			if (useEnumAttribute(schemaAttribute.getIsEnum(), attributeName) && !"MaxVersion".equals(attributeName) && !"UpdatedStatus".equals(attributeName)
+					&& !"Availability".equals(attributeName) && !"LinkUsage".equals(attributeName) && !("Usage".equals(attributeName) && "ResourceInfo".equals(complexTypeName))
 					&& !("Usage".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
 					&& !("Classes".equals(attributeName) && "ResourceQuParams".equals(complexTypeName))
 					&& !("Usage".equals(attributeName) && "InsertSheet".equals(complexTypeName))
 					&& !("DeviceStatus".equals(attributeName) && "ModulePhase".equals(complexTypeName))
 					&& !("DeviceStatus".equals(attributeName) && "ModuleStatus".equals(complexTypeName))
-					&& !("HoleType".equals(attributeName) && "HoleMakingParams".equals(complexTypeName))
-					&& !"NodeStatus".equals(attributeName)
+					&& !("HoleType".equals(attributeName) && "HoleMakingParams".equals(complexTypeName)) && !"NodeStatus".equals(attributeName)
 					&& (!"Status".equals(attributeName) || ("Status".equals(attributeName) && ("QueueEntry".equals(complexTypeName) || "Queue".equals(complexTypeName)))))
 			{
 				String attributeTypeName = "Enum" + attributeName;
@@ -640,8 +635,8 @@ public class JavaCoreStringUtil
 						enumName = enumName.replace('-', '_');
 					}
 
-					if ("boolean".equals(enumName) || "double".equals(enumName)) 
-						enumName = enumName + "_";	// lex GeneralID JDF 1.4
+					if ("boolean".equals(enumName) || "double".equals(enumName))
+						enumName = enumName + "_"; // lex GeneralID JDF 1.4
 
 					strbufResult.append(enumName);
 
@@ -763,8 +758,8 @@ public class JavaCoreStringUtil
 	private static void appendAttributeGetterAndSetterForEnum(StringBuffer strbufResult, String complexTypeName, SchemaAttribute schemaAttribute, String attributeName, String modifiedAttributeName, String modifiedAttributeTypeName, String returnType)
 	{
 		// set
-		if (!"Status".equals(attributeName) || "Queue".equals(complexTypeName) || "QueueEntry".equals(complexTypeName)
-				|| "ResourceCmdParams".equals(complexTypeName) || "ResourceInfo".equals(complexTypeName))
+		if (!"Status".equals(attributeName) || "Queue".equals(complexTypeName) || "QueueEntry".equals(complexTypeName) || "ResourceCmdParams".equals(complexTypeName)
+				|| "ResourceInfo".equals(complexTypeName))
 		{
 			strbufResult.append(strDepth2).append(strLineEnd);
 			strbufResult.append(strDepth2).append("/* ---------------------------------------------------------------------").append(strLineEnd);
@@ -928,7 +923,7 @@ public class JavaCoreStringUtil
 	private static void appendAttributeGetterAndSetterForNonEnum(StringBuffer strbufResult, SchemaAttribute schemaAttribute, String modifiedAttributeName, String returnType)
 	{
 		String returnTypeLocal = returnType;
-		
+
 		strbufResult.append(strDepth2).append(strLineEnd);
 		strbufResult.append(strDepth2).append("/* ---------------------------------------------------------------------").append(strLineEnd);
 		strbufResult.append(strDepth2).append("Methods for Attribute ").append(modifiedAttributeName).append(strLineEnd);
@@ -940,7 +935,7 @@ public class JavaCoreStringUtil
 			{
 				// for duration its no longer JDFDate its JDFDuration
 				// TODO das ist ein quick hack, das muss normal in der
-				// Datensammlung geändert werden!
+				// Datensammlung geï¿½ndert werden!
 				returnTypeLocal = "JDFDuration";
 				// set1
 				strbufResult.append(strDepth2).append("/**").append(strLineEnd);
@@ -1297,8 +1292,7 @@ public class JavaCoreStringUtil
 			m_nSchemaElement = (SchemaElement) vElements.elementAt(i);
 			strElementName = m_nSchemaElement.getStrElementName();
 
-			if (strElementName.endsWith("Ref")
-					|| ("ResourceInfo".equals(strComplexTypeName) && "Resource".equals(strElementName)))
+			if (strElementName.endsWith("Ref") || ("ResourceInfo".equals(strComplexTypeName) && "Resource".equals(strElementName)))
 			{
 				// don't write the element setters and getters for Ref-elements  
 				// and for ResourceInfo.Resource (Resource is abstract)
@@ -1309,8 +1303,7 @@ public class JavaCoreStringUtil
 				if ("1".equals(m_nSchemaElement.getStrMaxOccurs()))
 				{
 					// get
-					if ("FileSpec".equals(strComplexTypeName)
-							&& ("JDFDisposition".equals(strReturnType) || "JDFContainer".equals(strReturnType)))
+					if ("FileSpec".equals(strComplexTypeName) && ("JDFDisposition".equals(strReturnType) || "JDFContainer".equals(strReturnType)))
 					{
 						// special case for
 						// 1. deprecated element FileSpec.Disposition, as there exists
@@ -1329,7 +1322,7 @@ public class JavaCoreStringUtil
 						strbufResult.append(strDepth1).append("{").append(strLineEnd);
 						strbufResult.append(strDepth2).append("return (").append(strReturnType).append(") getElement(ElementName.").append(strElementName.toUpperCase()).append(", null, iSkip);").append(strLineEnd);
 						strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);
-						
+
 						// get Collection
 						strbufResult.append(strDepth1).append("/**").append(strLineEnd);
 						strbufResult.append(strDepth1).append(" * Get all ").append(strElementName).append(" from the current element").append(strLineEnd);
@@ -1351,54 +1344,54 @@ public class JavaCoreStringUtil
 						strbufResult.append(strDepth2).append("return v;").append(strLineEnd);
 						strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);
 
-//						// get Collection
-//						strbufResult.append(strDepth1).append("/**").append(strLineEnd);
-//						strbufResult.append(strDepth1).append(" * Get all ").append(strElementName).append(" from the current element").append(strLineEnd);
-//						strbufResult.append(strDepth1).append(" * ").append(strLineEnd);
-//						strbufResult.append(strDepth1).append(" * @return Collection<").append(strReturnType).append(">").append(strLineEnd);
-//						strbufResult.append(strDepth1).append(" */").append(strLineEnd);
-//						strbufResult.append(strDepth1).append("public Collection<").append(strReturnType).append("> getAll").append(strElementName).append("()").append(strLineEnd);
-//						strbufResult.append(strDepth1).append("{").append(strLineEnd);
-//						strbufResult.append(strDepth2).append("Vector<").append(strReturnType).append("> v = new Vector<").append(strReturnType).append(">();").append(strLineEnd).append(strLineEnd);
-//						strbufResult.append(strDepth2).append(strReturnType).append(" kElem = (").append(strReturnType).append(") getFirstChildElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd).append(strLineEnd);
-//						strbufResult.append(strDepth2).append("while (kElem != null)").append(strLineEnd);
-//						strbufResult.append(strDepth2).append("{").append(strLineEnd);
-//						strbufResult.append(strDepth3).append("v.add(kElem);").append(strLineEnd).append(strLineEnd);
-//						strbufResult.append(strDepth3).append("kElem = (").append(strReturnType).append(") kElem.getNextSiblingElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd);
-//						strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
-//						strbufResult.append(strDepth2).append("return v;").append(strLineEnd);
-//						strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);
-//					    /**
-//					     * (28) const get element Container
-//					     * @param iSkip number of elements to skip
-//					     * @return JDFContainer the element
-//					     * default is getContainer(0)     */
-//					    public JDFContainer getContainer(int iSkip)
-//					    {
-//					        return (JDFContainer) getElement(ElementName.CONTAINER, null, iSkip);
-//					    }
-//
-						
-//					    /**
-//					     * Get all JDFContainer from the actual element 
-//					     *
-//					     * @return Collection<JDFContainer>
-//					     */
-//					    public Collection<JDFContainer> getAllContainer()
-//						{
-//							Vector<JDFContainer> v = new Vector<JDFContainer>();
-//
-//							JDFContainer kElem = (JDFContainer) getFirstChildElement(ElementName.CONTAINER, null);
-//
-//							while (kElem != null)
-//							{
-//								v.add(kElem);
-//
-//								kElem = (JDFContainer) kElem.getNextSiblingElement(ElementName.CONTAINER, null);
-//							}
-//
-//							return v;
-//						}
+						//						// get Collection
+						//						strbufResult.append(strDepth1).append("/**").append(strLineEnd);
+						//						strbufResult.append(strDepth1).append(" * Get all ").append(strElementName).append(" from the current element").append(strLineEnd);
+						//						strbufResult.append(strDepth1).append(" * ").append(strLineEnd);
+						//						strbufResult.append(strDepth1).append(" * @return Collection<").append(strReturnType).append(">").append(strLineEnd);
+						//						strbufResult.append(strDepth1).append(" */").append(strLineEnd);
+						//						strbufResult.append(strDepth1).append("public Collection<").append(strReturnType).append("> getAll").append(strElementName).append("()").append(strLineEnd);
+						//						strbufResult.append(strDepth1).append("{").append(strLineEnd);
+						//						strbufResult.append(strDepth2).append("Vector<").append(strReturnType).append("> v = new Vector<").append(strReturnType).append(">();").append(strLineEnd).append(strLineEnd);
+						//						strbufResult.append(strDepth2).append(strReturnType).append(" kElem = (").append(strReturnType).append(") getFirstChildElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd).append(strLineEnd);
+						//						strbufResult.append(strDepth2).append("while (kElem != null)").append(strLineEnd);
+						//						strbufResult.append(strDepth2).append("{").append(strLineEnd);
+						//						strbufResult.append(strDepth3).append("v.add(kElem);").append(strLineEnd).append(strLineEnd);
+						//						strbufResult.append(strDepth3).append("kElem = (").append(strReturnType).append(") kElem.getNextSiblingElement(ElementName.").append(strElementName.toUpperCase()).append(", null);").append(strLineEnd);
+						//						strbufResult.append(strDepth2).append("}").append(strLineEnd).append(strLineEnd);
+						//						strbufResult.append(strDepth2).append("return v;").append(strLineEnd);
+						//						strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);
+						//					    /**
+						//					     * (28) const get element Container
+						//					     * @param iSkip number of elements to skip
+						//					     * @return JDFContainer the element
+						//					     * default is getContainer(0)     */
+						//					    public JDFContainer getContainer(int iSkip)
+						//					    {
+						//					        return (JDFContainer) getElement(ElementName.CONTAINER, null, iSkip);
+						//					    }
+						//
+
+						//					    /**
+						//					     * Get all JDFContainer from the actual element 
+						//					     *
+						//					     * @return Collection<JDFContainer>
+						//					     */
+						//					    public Collection<JDFContainer> getAllContainer()
+						//						{
+						//							Vector<JDFContainer> v = new Vector<JDFContainer>();
+						//
+						//							JDFContainer kElem = (JDFContainer) getFirstChildElement(ElementName.CONTAINER, null);
+						//
+						//							while (kElem != null)
+						//							{
+						//								v.add(kElem);
+						//
+						//								kElem = (JDFContainer) kElem.getNextSiblingElement(ElementName.CONTAINER, null);
+						//							}
+						//
+						//							return v;
+						//						}
 					}
 					else
 					{
@@ -1446,7 +1439,7 @@ public class JavaCoreStringUtil
 					strbufResult.append(strDepth1).append("{").append(strLineEnd);
 					strbufResult.append(strDepth2).append("return (").append(strReturnType).append(") getElement(ElementName.").append(strElementName.toUpperCase()).append(", null, iSkip);").append(strLineEnd);
 					strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);
-					
+
 					// get Collection
 					strbufResult.append(strDepth1).append("/**").append(strLineEnd);
 					strbufResult.append(strDepth1).append(" * Get all ").append(strElementName).append(" from the current element").append(strLineEnd);
@@ -1505,12 +1498,10 @@ public class JavaCoreStringUtil
 						strbufResult.append(strDepth1).append("  * @param refTarget the element that is referenced").append(strLineEnd);
 						strbufResult.append(strDepth1).append("  */").append(strLineEnd);
 						if ("JDFShapeElement".equals(strReturnType))
-							strbufResult.append(strDepth1).append("public void ref").append(strElementName).
-								append("(JDFShapeElement").append(" refTarget)").append(strLineEnd);
+							strbufResult.append(strDepth1).append("public void ref").append(strElementName).append("(JDFShapeElement").append(" refTarget)").append(strLineEnd);
 						else
-							strbufResult.append(strDepth1).append("public void ref").append(strElementName).
-								append("(JDF").append(strElementName).append(" refTarget)").append(strLineEnd);
-						
+							strbufResult.append(strDepth1).append("public void ref").append(strElementName).append("(JDF").append(strElementName).append(" refTarget)").append(strLineEnd);
+
 						strbufResult.append(strDepth1).append("{").append(strLineEnd);
 						strbufResult.append(strDepth2).append("refElement(refTarget);").append(strLineEnd);
 						strbufResult.append(strDepth1).append("}").append(strLineEnd).append(strLineEnd);

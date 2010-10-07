@@ -214,6 +214,7 @@ import org.cip4.jdflib.resource.intent.JDFDeliveryIntentTest;
 import org.cip4.jdflib.resource.intent.JDFIntentResourceTest;
 import org.cip4.jdflib.resource.intent.JDFProductionIntentTest;
 import org.cip4.jdflib.resource.process.JDFAddressTest;
+import org.cip4.jdflib.resource.process.JDFAssemblyTest;
 import org.cip4.jdflib.resource.process.JDFColorConversionParamsTest;
 import org.cip4.jdflib.resource.process.JDFColorTest;
 import org.cip4.jdflib.resource.process.JDFColorantControlTest;
@@ -437,6 +438,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFResourcePoolTest.class);
 
 		// resource
+		suite.addTestSuite(JDFAssemblyTest.class);
 		suite.addTestSuite(ProcessRunTest.class);
 		suite.addTestSuite(PhaseTimeTest.class);
 		suite.addTestSuite(JDFAutoResourceTest.class);

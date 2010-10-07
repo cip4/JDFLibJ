@@ -215,8 +215,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 */
 	public void testGetAttributeMap()
 	{
-		final JDFDoc doc = new JDFDoc(ElementName.JDF);
-		final JDFNode root = doc.getJDFRoot();
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
 		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
 		final JDFExposedMedia xm = (JDFExposedMedia) root.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
 		xm.setResolution(new JDFXYPair(300, 300));
@@ -235,6 +234,19 @@ public class JDFResourceTest extends JDFTestCaseBase
 		am = xm2.getAttributeMap();
 		assertEquals(am.get("foo:bar"), "foobar");
 
+	}
+
+	/**
+	 * tests the hard coded getters and setters
+	 */
+	public void testGetSet()
+	{
+		final JDFNode root = new JDFDoc(ElementName.JDF).getJDFRoot();
+		root.setType(JDFNode.EnumType.ConventionalPrinting.getName(), true);
+		final JDFExposedMedia xm = (JDFExposedMedia) root.appendMatchingResource(ElementName.EXPOSEDMEDIA, JDFNode.EnumProcessUsage.AnyInput, null);
+		xm.setManufacturer("acme");
+		assertEquals(xm.getManufacturer(), "acme");
+		assertTrue(xm.hasAttribute(AttributeName.MANUFACTURER));
 	}
 
 	/**
@@ -675,7 +687,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
 	public void testGetColorPool()
 	{
 		final JDFDoc doc = new JDFDoc(ElementName.JDF);
@@ -688,7 +699,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		final JDFColorSpaceConversionParams cpp = (JDFColorSpaceConversionParams) root.addResource(ElementName.COLORSPACECONVERSIONPARAMS, null, EnumUsage.Input, null, null, null, null);
 		final JDFColorSpaceConversionOp cso = cpp.appendColorSpaceConversionOp();
-		final Vector sourceObjects = new Vector();
+		final Vector<EnumSourceObjects> sourceObjects = new Vector<EnumSourceObjects>();
 		sourceObjects.add(EnumSourceObjects.ImagePhotographic);
 		sourceObjects.add(EnumSourceObjects.LineArt);
 		cso.setSourceObjects(sourceObjects);
@@ -1502,7 +1513,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		m = (JDFMedia) m.makeRootResource(null, null, true);
 		VElement v = m.getLinks(null, null);
 		assertEquals(v.size(), 1);
-		final JDFResourceLink rl = n.linkResource(m, true ? EnumUsage.Input : EnumUsage.Output, null);
+		final JDFResourceLink rl = n.linkResource(m, EnumUsage.Input, null);
 		v = m.getLinks(null, null);
 		assertEquals(v.size(), 2);
 		assertTrue(v.contains(rl));
@@ -1766,7 +1777,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	// //////////////////////////////////////////////////////
 	/**
-	 * @return
+	 * @return the doc
 	 * 
 	 */
 	public static JDFDoc creatRLDoc()

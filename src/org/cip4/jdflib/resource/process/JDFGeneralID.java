@@ -143,7 +143,7 @@ public class JDFGeneralID extends JDFAutoGeneralID implements IMatches
 	/**
 	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
 	 * @param subset
-	 * @return
+	 * @return true if it matches
 	*/
 	public boolean matches(Object subset)
 	{

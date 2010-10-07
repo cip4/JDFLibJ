@@ -253,6 +253,18 @@ public class XJDFTest extends JDFTestCaseBase
 
 	/**
 	 */
+	public void testXJDFNiCi()
+	{
+		XJDF20 xjdf20 = new XJDF20();
+		n = new JDFDoc("JDF").getJDFRoot();
+		JDFNodeInfo ni = (JDFNodeInfo) n.addResource("NodeInfo", null);
+		n.setXPathAttribute("AncestorPool/Ancestor/NodeInforRef/@rRef", ni.getID());
+		e = xjdf20.makeNewJDF(n, null);
+		assertNotNull(e.getXPathElement("ParameterSet/Parameter/NodeInfo"));
+	}
+
+	/**
+	 */
 	public void testMergeStripping()
 	{
 		n = new JDFDoc("JDF").getJDFRoot();
@@ -803,7 +815,7 @@ public class XJDFTest extends JDFTestCaseBase
 
 	/**
 	 * @see junit.framework.TestCase#toString()
-	 * @return
+	 * @return duh string...
 	*/
 	@Override
 	public String toString()
