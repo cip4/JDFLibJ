@@ -126,10 +126,13 @@
 	<target name="dist_all" depends="-init" description="builds lots of jars and wars and good things for distribution">
 		<ant antfile="build.xml" dir="." target="clean"/>
 		<ant antfile="build.xml" dir="." target="spam"/>
+		<ant antfile="build.xml" dir="." target="all"/>
 		<ant antfile="../alces/build.xml" dir="../alces" target="clean" inheritAll="false"/>
 		<ant antfile="../alces/build.xml" dir="../alces" target="dist" inheritAll="false"/>
 		<ant antfile="../JDFEditor/build.xml" dir="../JDFEditor" target="clean" inheritAll="false"/>
 		<ant antfile="../JDFEditor/build.xml" dir="../JDFEditor" target="dist" inheritAll="false"/>
+		<ant antfile="../JDFEditor/build.xml" dir="../JDFEditor" target="dist" inheritAll="false"/>
+		<ant antfile="../JDFEditor/build.xml" dir="../JDFEditor" target="dmgappledist" inheritAll="false"/>
 		<ant antfile="../DropFolder/build.xml" dir="../DropFolder" target="clean" inheritAll="false"/>
 		<ant antfile="../DropFolder/build.xml" dir="../DropFolder" target="dist" inheritAll="false"/>
 		<ant antfile="../Bambi/build-core.xml" dir="../Bambi" target="clean" inheritAll="false"/>
