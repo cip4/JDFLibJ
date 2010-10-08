@@ -96,7 +96,7 @@
 		<delete dir="${dist.dir}" />
 	</target>
 
-	<target name="jar" depends="compile, buildnumber" description="Builds a JAR archive containing the JDFLibJ binaries.">
+	<target name="jar" depends="compile, compileApps,  buildnumber" description="Builds a JAR archive containing the JDFLibJ binaries.">
 		<jar destfile="${dist.dir}/${base.filename}.jar" basedir="${bin.dir}">
 			<manifest>
 				<attribute name="Main-Class" value="org.cip4.jdflib.CheckJDF" />
@@ -121,6 +121,23 @@
 		<copy tofile="../elk/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../alces/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../DropFolder/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+	</target>
+	
+	<target name="dist_all" depends="-init" description="builds lots of jars and wars and good things for distribution">
+		<ant antfile="build.xml" dir="." target="clean"/>
+		<ant antfile="build.xml" dir="." target="spam"/>
+		<ant antfile="../alces/build.xml" dir="../alces" target="clean" inheritAll="false"/>
+		<ant antfile="../alces/build.xml" dir="../alces" target="dist" inheritAll="false"/>
+		<ant antfile="../JDFEditor/build.xml" dir="../JDFEditor" target="clean" inheritAll="false"/>
+		<ant antfile="../JDFEditor/build.xml" dir="../JDFEditor" target="dist" inheritAll="false"/>
+		<ant antfile="../DropFolder/build.xml" dir="../DropFolder" target="clean" inheritAll="false"/>
+		<ant antfile="../DropFolder/build.xml" dir="../DropFolder" target="dist" inheritAll="false"/>
+		<ant antfile="../Bambi/build-core.xml" dir="../Bambi" target="clean" inheritAll="false"/>
+		<ant antfile="../Bambi/build-simworker.xml" dir="../Bambi" target="war" inheritAll="false"/>
+		<ant antfile="../Bambi/build-proxy.xml" dir="../Bambi" target="war" inheritAll="false"/>
+		<ant antfile="../Bambi/build-console.xml" dir="../Bambi" target="war" inheritAll="false"/>
+		<ant antfile="../jdfutility/build.xml" dir="../jdfutility" target="war" inheritAll="false"/>
+		<ant antfile="../jdfutility/build.xml" dir="../jdfutility" target="clean" inheritAll="false"/>			
 	</target>
 
 	<!--  ==================================================================================  -->
