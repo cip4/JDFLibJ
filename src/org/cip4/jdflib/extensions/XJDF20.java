@@ -324,7 +324,7 @@ public class XJDF20 extends BaseElementWalker
 			}
 		}
 		if (resourceClass == null)
-			return null;
+			return "Parameter"; // assume parameter if unknown 3rd party stuff
 
 		String className = "Resource";
 		if (resourceClass.equals(EnumResourceClass.Parameter) || resourceClass.equals(EnumResourceClass.Intent))
