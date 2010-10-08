@@ -5,6 +5,7 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeName;
@@ -13,6 +14,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
+import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
@@ -56,6 +58,8 @@ import org.cip4.jdflib.resource.intent.JDFIntentResource;
 import org.cip4.jdflib.resource.intent.JDFShapeCut;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
 import org.cip4.jdflib.resource.process.JDFComponent;
+import org.cip4.jdflib.resource.process.JDFDependencies;
+import org.cip4.jdflib.resource.process.JDFLayoutElement;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.postpress.JDFChannelBinding;
@@ -139,8 +143,68 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			mergeProductLinks(theNode, root);
 		}
 		cleanResources(theNode);
+		fixDependencies(root);
 		firstConvert = false;
 		return jdfDoc;
+	}
+
+	/**
+	 * TODO Please insert comment!
+	 * @param root 
+	 */
+	private void fixDependencies(JDFNode root)
+	{
+		Vector<JDFDependencies> vDep = root.getChildrenByClass(JDFDependencies.class, true, 0);
+		if (vDep == null)
+			return;
+		for (JDFDependencies dep : vDep)
+		{
+			fixOneDependencies(dep);
+		}
+
+	}
+
+	/**
+	 * TODO Please insert comment!
+	 * @param dep
+	 */
+	private void fixOneDependencies(JDFDependencies dep)
+	{
+		if (dep == null)
+			return;
+		VElement v = dep.getChildElementVector_KElement("RunListRef", null, null, true, 0);
+		if (v == null)
+			return;
+		for (KElement e : v)
+		{
+			JDFRefElement rl = (JDFRefElement) e;
+			rl.renameElement("LayoutElementRef", null);
+			JDFResource root = rl.getTargetRoot();
+			if (root != null)
+			{
+				VElement vR = root.getLeaves(true);
+				VElement v2 = root.getLinksAndRefs(true, false);
+				if (v2 != null)
+					for (KElement rl2 : v2)
+						rl2.renameElement("LayoutElementLink", null);
+				v2 = root.getLinksAndRefs(false, true);
+				if (v2 != null)
+					for (KElement rl2 : v2)
+						rl2.renameElement("LayoutElementRef", null);
+				for (KElement r : vR)
+				{
+					JDFLayoutElement loe = (r instanceof JDFRunList) ? ((JDFRunList) r).getLayoutElement() : null;
+					if (loe != null)
+					{
+						r.moveElements(loe.getChildElementVector_KElement(null, null, null, true, 0), null);
+						r.setAttributes(loe);
+						loe.deleteNode();
+					}
+					r.renameElement(ElementName.LAYOUTELEMENT, null);
+				}
+			}
+		}
+
 	}
 
 	protected KElement reparse(KElement xjdf)
@@ -339,7 +403,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				{
 					e2.setAttribute(key, newVal);
 				}
-
 			}
 		}
 	}
@@ -486,7 +549,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 * @return element to continue with if must continue
 		 */
 		@Override
-		public KElement walk(final KElement e, final KElement trackElem)
+		public KElement walk(final KElement e, KElement trackElem)
 		{
 			final VElement v = trackElem.getChildElementVector(null, null);
 			for (int i = 0; i < v.size(); i++)
@@ -498,10 +561,22 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				}
 			}
 			cleanRefs(e, trackElem);
-			final KElement e2 = trackElem.copyElement(e, null);
-			convertUnits(e2);
-			e2.removeChildren(null, null, null); // will be copied later
-			return e2;
+			convertUnits(trackElem);
+
+			// dirty, dirty but needed in case of inherited inline resources
+			if (isXResourceElement(e))
+			{
+				trackElem.setAttributes(e);
+			}
+			else
+			{
+				final KElement e2 = trackElem.copyElement(e, null);
+				convertUnits(e2);
+				e2.removeChildren(null, null, null); // will be copied later
+				trackElem = e2;
+			}
+			return trackElem;
+
 		}
 
 		/**
@@ -535,37 +610,42 @@ public class XJDFToJDFConverter extends BaseElementWalker
 					if ((val.endsWith("Ref") || val.endsWith("Refs")) && !val.equals("rRef"))
 					{
 						final String values = map.get(val);
-						final VString vValues = StringUtil.tokenize(values, null, false);
-						for (final String value : vValues)
-						{
-							final IDPart p = idMap.get(value);
-							if (p != null)
-							{
-								final String refName = getRefName(val);
-								if (refName != null)
-								{
-									final KElement refOld = trackElem != null ? trackElem.getElement(refName) : null;
-									final KElement ref = e.appendElement(refName);
-									ref.setAttribute("rRef", p.getID());
+						cleanRef(e, trackElem, val, values);
+					}
+				}
+			}
+		}
 
-									final VJDFAttributeMap vpartmap = p.getPartMap();
-									if (vpartmap != null)
-									{
-										for (int j = 0; j < vpartmap.size(); j++)
-										{
-											ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
-										}
-									}
-									// we've been here already
-									if (ref.isEqual(refOld))
-									{
-										ref.deleteNode();
-									}
-								}
-								e.removeAttribute(val);
+		protected void cleanRef(final KElement e, final KElement trackElem, final String val, final String values)
+		{
+			final VString vValues = StringUtil.tokenize(values, null, false);
+			for (final String value : vValues)
+			{
+				final IDPart p = idMap.get(value);
+				if (p != null)
+				{
+					final String refName = getRefName(val);
+					if (refName != null)
+					{
+						final KElement refOld = trackElem != null ? trackElem.getElement(refName) : null;
+						final KElement ref = e.appendElement(refName);
+						ref.setAttribute("rRef", p.getID());
+
+						final VJDFAttributeMap vpartmap = p.getPartMap();
+						if (vpartmap != null)
+						{
+							for (int j = 0; j < vpartmap.size(); j++)
+							{
+								ref.appendElement(ElementName.PART).setAttributes(vpartmap.get(j));
 							}
 						}
+						// we've been here already
+						if (ref.isEqual(refOld))
+						{
+							ref.deleteNode();
+						}
 					}
+					e.removeAttribute(val);
 				}
 			}
 		}
@@ -690,7 +770,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				final SetHelper h = new SetHelper(e);
 				final String name = h.getName();
-				if (!ElementName.CONTACT.equals(name))
+				if (!ElementName.CONTACT.equals(name) && !ElementName.LAYOUTELEMENT.equals(name) && !ElementName.RUNLIST.equals(name))
 				{
 					inOut = EnumUsage.Input;
 				}
@@ -786,13 +866,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 * @return the created resource
 		 */
 		@Override
-		public KElement walk(final KElement e, final KElement trackElem)
+		public KElement walk(final KElement e, KElement trackElem)
 		{
-			cleanRefs(e, trackElem);
 			e.removeAttribute("Class");
-			trackElem.setAttributes(e);
-			convertUnits(trackElem);
-			return trackElem;
+			return super.walk(e, trackElem);
 		}
 
 		/**
@@ -1435,6 +1512,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				final JDFElement loe = (JDFElement) e.appendElement(ElementName.LAYOUTELEMENT);
 				final VString vAtt = loe.knownAttributes();
+				vAtt.appendUnique(ElementName.DEPENDENCIES);
 				final JDFAttributeMap map = e.getAttributeMap();
 				final Iterator<String> it = map.getKeyIterator();
 				while (it.hasNext())
@@ -1457,6 +1535,35 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				}
 			}
 		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for Media elements
+	 */
+	public class WalkLayoutElement extends WalkResource
+	{
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFLayoutElement;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter.WalkXJDFResource#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			if (e.hasAttribute(ElementName.DEPENDENCIES))
+				e.appendElement(ElementName.DEPENDENCIES).moveAttribute("RunListRefs", e, ElementName.DEPENDENCIES, null, null);
+			return super.walk(e, trackElem);
+		}
+
 	}
 
 	/**
