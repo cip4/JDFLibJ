@@ -3437,7 +3437,7 @@ public final class AttributeName
 	/** */
 	public static final String UPDATEDSTATUS = "UpdatedStatus";
 	/** */
-	public static final String UPDATEGRANULARITY = "UpgradeGranularity";
+	public static final String UPDATEGRANULARITY = "UpdateGranularity";
 	/** */
 	public static final String UPDATEID = "UpdateID";
 	/** */

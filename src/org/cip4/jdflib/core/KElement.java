@@ -5821,7 +5821,7 @@ public class KElement extends ElementNSImpl implements Element
 			return idPrefix + uniqueID(0);
 		}
 
-		final VElement vn = p.getChildElementVector(nodeName, nameSpaceURI, null, true, 0, false);
+		final VElement vn = p.getChildElementVector_KElement(nodeName, nameSpaceURI, null, true, 0);
 		final int siz = vn.size();
 		parentID += JDFCoreConstants.DOT;
 
