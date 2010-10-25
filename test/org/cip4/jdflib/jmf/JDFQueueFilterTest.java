@@ -156,6 +156,34 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
+	public void testRemove() throws Exception
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			final JDFQueueEntry qe = theQueue.appendQueueEntry();
+			qe.setQueueEntryID("q" + i);
+		}
+		final JDFQueue copy = (JDFQueue) new JDFDoc("JDF").getRoot().copyElement(theQueue, null);
+		filter.setMaxEntries(10);
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+
+		JDFQueue matchedQueue = filter.copy(theQueue, copy, null);
+		assertNull("identical queue should cancel", matchedQueue.getQueueEntry(0));
+		JDFQueueEntry qe = copy.appendQueueEntry();
+		qe.setQueueEntryID("q11");
+		matchedQueue = filter.copy(theQueue, copy, null);
+		assertEquals("got removed entry", matchedQueue.getQueueEntry(0).getQueueEntryStatus(), EnumQueueEntryStatus.Removed);
+		qe = theQueue.appendQueueEntry();
+		qe.setQueueEntryID("q10");
+		qe = theQueue.appendQueueEntry();
+		qe.setQueueEntryID("q11");
+		matchedQueue = filter.copy(theQueue, copy, null);
+		assertEquals("got new entry", matchedQueue.getQueueEntry(0).getQueueEntryID(), "q10");
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testGetStatusList() throws Exception
 	{
 		Vector<EnumQueueEntryStatus> vs = new Vector<EnumQueueEntryStatus>();
