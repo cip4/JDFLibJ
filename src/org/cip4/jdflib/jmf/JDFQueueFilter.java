@@ -172,7 +172,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				}
 			}
 
-			addRemoved();
+			addRemoved(theQueue);
 			// zapp n>maxEntries
 			final int numEntries = theQueue.numEntries(null);
 			if (numEntries > maxEntries)
@@ -199,16 +199,16 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 		/**
 		 * 
 		 */
-		private void addRemoved()
+		private void addRemoved(JDFQueue copyQueue)
 		{
 			if (lastMap != null && lastMap.size() > 0)
 			{
-				final JDFQueueEntry qeFirst = theQueue.getQueueEntry(0);
+				final JDFQueueEntry qeFirst = copyQueue.getQueueEntry(0);
 				final Iterator<String> qeIt = lastMap.keySet().iterator();
 				while (qeIt.hasNext())
 				{
 					final String qeID = qeIt.next();
-					final JDFQueueEntry qe = (JDFQueueEntry) theQueue.copyElement(lastMap.get(qeID), qeFirst);
+					final JDFQueueEntry qe = (JDFQueueEntry) copyQueue.copyElement(lastMap.get(qeID), qeFirst);
 					qe.setQueueEntryStatus(EnumQueueEntryStatus.Removed);
 					qe.removeAttribute(AttributeName.STATUSDETAILS);
 				}
@@ -259,7 +259,10 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 				qe = (JDFQueueEntry) newQueue.copyElement(qe, null);
 				cleanQE(qe);
 				if (noDifference(qe))
+				{
 					qe.deleteNode();
+					qe = null;
+				}
 			}
 			else
 			{
@@ -339,7 +342,7 @@ public class JDFQueueFilter extends JDFAutoQueueFilter implements INodeIdentifia
 					n++;
 				qe = qe.getNextQueueEntry();
 			}
-			addRemoved();
+			addRemoved(newQueue);
 			final int numEntries = newQueue.numEntries(null);
 			if (numEntries == 0 && lastMap != null) // empty queue in diff mode
 			{
