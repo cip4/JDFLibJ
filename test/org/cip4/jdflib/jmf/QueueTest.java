@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -98,6 +98,7 @@ public class QueueTest extends TestCase
 {
 	JDFQueue q;
 	protected static int iThread = 0;
+	protected static int iThread2 = 0;
 
 	protected class QueueTestThread implements Runnable
 	{
@@ -111,7 +112,7 @@ public class QueueTest extends TestCase
 					final JDFQueueEntry qe = q.appendQueueEntry();
 					qe.setQueueEntryID("q" + t + "_" + i);
 					qe.setPriority((i * 7) % 100);
-					qe.setQueueEntryStatus((t % 2000 == 0) ? EnumQueueEntryStatus.Waiting : EnumQueueEntryStatus.Held);
+					qe.setQueueEntryStatus(((iThread2++) % 2 == 0) ? EnumQueueEntryStatus.Waiting : EnumQueueEntryStatus.Held);
 				}
 			}
 			ThreadUtil.sleep(44);

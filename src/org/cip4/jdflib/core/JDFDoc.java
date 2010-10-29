@@ -148,11 +148,16 @@ public class JDFDoc extends XMLDoc
 
 	protected void reparse(final Document document)
 	{
-		JDFDoc doc = new JDFDoc(document.getDocumentElement().getNodeName());
+		JDFDoc doc = createRoot(document);
 		doc.setInitOnCreate(false);
 		KElement newRoot = doc.getRoot();
 		newRoot.copyInto((KElement) document.getDocumentElement(), false);
 		m_doc = doc.m_doc;
+	}
+
+	protected JDFDoc createRoot(final Document document)
+	{
+		return new JDFDoc(document.getDocumentElement().getNodeName());
 	}
 
 	/**

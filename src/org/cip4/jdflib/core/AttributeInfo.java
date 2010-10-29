@@ -1098,8 +1098,6 @@ public class AttributeInfo
 			}
 			else
 			{
-				// TODO check if we are complete
-				System.out.println("validStringForType: unknown type:" + iType.getName());
 				return false;
 			}
 		}

@@ -71,9 +71,11 @@ package org.cip4.jdflib.core;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.apache.xerces.parsers.DOMParser;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
@@ -88,6 +90,8 @@ import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * @author MuchaD
@@ -388,6 +392,23 @@ public class XMLDocTest extends JDFTestCaseBase
 		final KElement r2 = d2.getRoot();
 		assertFalse(r2 instanceof JDFNode);
 		assertFalse(r2.getElement("AuditPool") instanceof JDFAuditPool);
+	}
+
+	/**
+	 * @throws IOException bang
+	 * @throws SAXException bang
+	 * 
+	 */
+	public void testParseDOM() throws SAXException, IOException
+	{
+		DOMParser domParser = new DOMParser();
+		domParser.parse(new InputSource(new StringReader("<JDF ID=\"1\"><AuditPool><Created ID=\"1\"/></AuditPool></JDF>")));
+		assertNotNull(domParser.getDocument());
+		XMLDoc d = new XMLDoc(domParser.getDocument());
+		assertNotNull(d);
+		assertNotNull(d.getRoot());
+		assertEquals(d.getRoot().getAttribute("ID"), "1");
+		assertNotNull(d.getRoot().getXPathElement("/JDF/AuditPool/Created"));
 	}
 
 	/**

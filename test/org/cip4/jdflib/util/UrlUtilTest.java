@@ -408,7 +408,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	{
 		for (int i = 0; i < 2; i++) // loop over escape and non-escape
 		{
-			final File f = new File("4ï¿½5%ï¿½ï¿½.txt");
+			final File f = new File("4€äöü.txt");
 			final File f2 = FileUtil.getFileInDirectory(new File(sm_dirTestDataTemp), f);
 			f2.delete();
 			assertTrue(f2.createNewFile());
@@ -460,15 +460,15 @@ public class UrlUtilTest extends JDFTestCaseBase
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
 			assertEquals("asccii", f.getCanonicalPath(), f2.getCanonicalPath());
 
-			f = new File("blï¿½d .pdf");
+			f = new File("blö½d .pdf");
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
 			assertEquals("non asccii", f.getCanonicalPath(), f2.getCanonicalPath());
 
-			f = new File("bl%ï¿½d .pdf");
+			f = new File("blöd .pdf");
 			f2 = UrlUtil.urlToFile(UrlUtil.fileToUrl(f, i == 0));
 			assertEquals("non asccii", f.getCanonicalPath(), f2.getCanonicalPath());
 
-			f = new File("blï¿½d ist es 10@%ï¿½.pdf");
+			f = new File("blöd ist es 10€.pdf");
 			final String fileToUrl = UrlUtil.fileToUrl(f, i == 0);
 			f2 = UrlUtil.urlToFile(fileToUrl);
 			assertEquals("escape %20", f.getCanonicalPath(), f2.getCanonicalPath());

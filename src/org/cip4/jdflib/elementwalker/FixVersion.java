@@ -78,6 +78,7 @@ import org.apache.commons.lang.StringUtils;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.auto.JDFAutoColor.EnumMappingSelection;
 import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
@@ -85,17 +86,16 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumSettingsPolicy;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
-import org.cip4.jdflib.core.JDFElement.EnumSettingsPolicy;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -106,13 +106,13 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFPool;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
+import org.cip4.jdflib.resource.JDFLayoutPreparationParams.StrippingConverter;
 import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFStrippingParams;
-import org.cip4.jdflib.resource.JDFTool;
-import org.cip4.jdflib.resource.JDFLayoutPreparationParams.StrippingConverter;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
 import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
@@ -253,11 +253,6 @@ public class FixVersion extends BaseElementWalker
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			final JDFElement el = (JDFElement) e1;
-			// fix any spurious ns typos
-			if (!JDFConstants.JDFNAMESPACE.equals(el.getNamespaceURI()))
-			{
-				el.setNamespaceURI(JDFConstants.JDFNAMESPACE);
-			}
 
 			// replace all "~" with " ~ "
 			final JDFAttributeMap m = el.getAttributeMap();

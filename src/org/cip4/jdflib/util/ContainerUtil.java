@@ -87,9 +87,9 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
-import java.util.Map.Entry;
 
 import org.cip4.jdflib.ifaces.IMatches;
 
@@ -168,31 +168,34 @@ public class ContainerUtil
 	}
 
 	/**
-	 * create a Vector from an Array
-	 * @param <a>
-	 * @param l
+	 * create a Vector from an Array, skipping null elements
+	 * @param <a> the type
+	 * @param array the array to convert
 	 * @return a Vector<a>
 	 */
-	public static <a> Vector<a> toVector(final a[] l)
+	public static <a> Vector<a> toVector(final a[] array)
 	{
-		if (l == null)
+		if (array == null)
 		{
 			return null;
 		}
 		final Vector<a> v = new Vector<a>();
-		v.ensureCapacity(l.length);
-		for (int i = 0; i < l.length; i++)
+		v.ensureCapacity(array.length);
+		for (int i = 0; i < array.length; i++)
 		{
-			v.add(l[i]);
+			if (array[i] != null)
+				v.add(array[i]);
 		}
 		return v;
 	}
 
 	/**
-	 * @param c1
-	 * @param c2
-	 * @param <a>
-	 * @return
+	 * null safe addAll
+	 * 
+	 * @param c1 first collection
+	 * @param c2 second collection
+	 * @param <a> type
+	 * @return c1 with c2 added, c2 if c1==null
 	 * 
 	 */
 	public static <a> Collection<a> addAll(final Collection<a> c1, final Collection<a> c2)

@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.core;
 
+import java.util.HashSet;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
@@ -168,6 +170,7 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 			else
 				assertFalse(ni.hasAttribute("WorkStepID"));
 			long l = System.currentTimeMillis();
+			HashSet<String> s = new HashSet<String>();
 			for (int i = 0; i < 1000; i++)
 			{
 				final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SheetName, "Sheet" + i);
@@ -177,10 +180,63 @@ public class JDFNodeInfoTest extends JDFTestCaseBase
 				if (j == 1)
 				{
 					assertTrue(niPart.hasAttribute("WorkStepID"));
-					assertTrue(niPart.getWorkStepID().startsWith(ni.getWorkStepID()));
+					String workStepID = niPart.getWorkStepID();
+					assertTrue(workStepID.startsWith(ni.getWorkStepID()));
+					assertFalse(s.contains(workStepID));
+					s.add(workStepID);
 				}
 				else
 					assertFalse(niPart.hasAttribute("WorkStepID"));
+			}
+			System.out.println(j + " t: " + (System.currentTimeMillis() - l));
+			//			assertTrue(ni.isValid(EnumValidationLevel.Incomplete));
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testWorkstepIDDotLength()
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			JDFDoc d = new JDFDoc(ElementName.JDF);
+			JDFNode n = d.getJDFRoot();
+			n.setType("ConventionalPrinting", true);
+			JDFNodeInfo.setDefaultWorkStepID(j == 1);
+			JDFNodeInfo ni = n.getCreateNodeInfo();
+			ni.setPartIDKeys(new VString("SignatureName SheetName PartVersion", null));
+			if (j == 1)
+				assertTrue(ni.hasAttribute("WorkStepID"));
+			else
+				assertFalse(ni.hasAttribute("WorkStepID"));
+			long l = System.currentTimeMillis();
+			HashSet<String> s = new HashSet<String>();
+			for (int i = 0; i < 10; i++)
+			{
+				final JDFAttributeMap map = new JDFAttributeMap(EnumPartIDKey.SignatureName, "Sig" + i);
+				for (int ii = 0; ii < 10; ii++)
+				{
+					map.put(EnumPartIDKey.SheetName, "Sheet" + ii);
+					for (int iii = 0; iii < 10; iii++)
+					{
+						map.put(EnumPartIDKey.PartVersion, "PV" + iii);
+
+						n.setPartStatus(map, EnumNodeStatus.Ready, null);
+						JDFNodeInfo niPart = (JDFNodeInfo) ni.getPartition(map, null);
+						assertNotNull(niPart);
+						if (j == 1)
+						{
+							assertTrue(niPart.hasAttribute("WorkStepID"));
+							String workStepID = niPart.getWorkStepID();
+							assertTrue(workStepID.startsWith(ni.getWorkStepID()));
+							assertFalse(s.contains(workStepID));
+							s.add(workStepID);
+						}
+						else
+							assertFalse(niPart.hasAttribute("WorkStepID"));
+					}
+				}
 			}
 			System.out.println(j + " t: " + (System.currentTimeMillis() - l));
 			//			assertTrue(ni.isValid(EnumValidationLevel.Incomplete));

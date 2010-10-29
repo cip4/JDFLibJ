@@ -78,16 +78,22 @@
 package org.cip4.jdflib.core;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 
+import org.apache.xerces.parsers.DOMParser;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -360,6 +366,23 @@ public class JDFDocTest extends JDFTestCaseBase
 		doc.setRoot("JDF", null);
 		JDFNode n = doc.getJDFRoot();
 		assertNull(n.getAuditPool());
+	}
+
+	/**
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * 
+	 */
+	public void testParseDOM() throws SAXException, IOException
+	{
+		DOMParser domParser = new DOMParser();
+		domParser.parse(new InputSource(new StringReader("<JDF ID=\"1\"><AuditPool><Created ID=\"1\"/></AuditPool></JDF>")));
+		assertNotNull(domParser.getDocument());
+		JDFDoc d = new JDFDoc(domParser.getDocument());
+		assertNotNull(d);
+		assertNotNull(d.getRoot());
+		assertEquals(d.getRoot().getAttribute("ID"), "1");
+		assertTrue(d.getRoot().getXPathElement("/JDF/AuditPool/Created") instanceof JDFCreated);
 	}
 
 	/**

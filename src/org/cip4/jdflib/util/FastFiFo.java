@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,8 +105,8 @@ public class FastFiFo<x>
 
 	/**
 	 * pushes an element into the back and returns the previous content of the cell
-	 * @param back
-	 * @return
+	 * @param back the element to push
+	 * @return the element that has been replaced, null if we are not yet full
 	 */
 	synchronized public x push(final x back)
 	{
@@ -140,7 +140,7 @@ public class FastFiFo<x>
 	/**
 	 * peeks into the fifo from the beginning
 	 * @param i the index of the element to peek
-	 * @return
+	 * @return the object at position i
 	 */
 	@SuppressWarnings("unchecked")
 	public x peek(final int i)

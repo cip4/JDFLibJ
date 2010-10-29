@@ -191,13 +191,63 @@ public class XMLDoc
 		}
 		try
 		{
-			m_doc = (DocumentXMLImpl) document;
+			if (document instanceof DocumentXMLImpl)
+			{
+				m_doc = (DocumentXMLImpl) document;
+			}
+			else
+			{
+				m_doc = reparseDOM(document);
+			}
 		}
 		catch (final Exception e)
 		{
 			final String s = e.toString();
 			throw new JDFException("Snafu: XMLDoc(Document) not implemented; class=" + s);
 		}
+	}
+
+	protected XMLDoc createRoot(final Document document)
+	{
+		return new XMLDoc(document.getDocumentElement().getNodeName(), StringUtil.getNonEmpty(document.getDocumentElement().getNamespaceURI()));
+	}
+
+	/**
+	 * reparse a document that 
+	 * @param document
+	 * @return
+	 */
+	private DocumentXMLImpl reparseDOM(Document document)
+	{
+
+		XMLDoc d = createRoot(document);
+
+		DocumentXMLImpl newDoc = d.getMemberDocument();
+		reparseElement(newDoc.getDocumentElement(), document.getDocumentElement());
+		return newDoc;
+	}
+
+	/**
+	 * TODO Please insert comment!
+	 * @param dst
+	 * @param src
+	 */
+	private void reparseElement(Element dst, Element src)
+	{
+		NamedNodeMap atts = src.getAttributes();
+		for (int i = 0; i < atts.getLength(); i++)
+		{
+			Attr item = (Attr) atts.item(i);
+			dst.setAttribute(item.getNodeName(), item.getNodeValue());
+		}
+		NodeList nl = src.getChildNodes();
+		for (int i = 0; i < nl.getLength(); i++)
+		{
+			Node n = nl.item(i);
+			Node childNode = dst.getOwnerDocument().importNode(n, true);
+			dst.insertBefore(childNode, null);
+		}
+
 	}
 
 	/**
@@ -335,7 +385,7 @@ public class XMLDoc
 		}
 		catch (final IOException e)
 		{
-			System.out.println("write2String: " + outStream + " : " + e);
+			//System.out.println("write2String: " + outStream + " : " + e);
 		}
 		finally
 		{
@@ -440,12 +490,12 @@ public class XMLDoc
 		}
 		catch (final FileNotFoundException e)
 		{
-			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+			//			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
 			fSuccess = false;
 		}
 		catch (final IOException e)
 		{
-			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+			//			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
 			fSuccess = false;
 		}
 		finally
@@ -528,7 +578,7 @@ public class XMLDoc
 					throw x; // try three times, else ciao
 				}
 				ThreadUtil.sleep((1000 * (i + 1)));
-				System.out.println("retry exception " + i + " for " + getOriginalFileName());
+				//				System.out.println("retry exception " + i + " for " + getOriginalFileName());
 			}
 		}
 	}

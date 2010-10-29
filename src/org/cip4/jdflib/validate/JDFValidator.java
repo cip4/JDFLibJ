@@ -2027,7 +2027,7 @@ public class JDFValidator
 				{
 					if (!bQuiet)
 					{
-						System.out.println(++n + " " + nam);
+						sysOut.println(++n + " " + nam);
 					}
 					final InputStream inStream = zip.getInputStream(ze);
 					processSingleStream(inStream, nam, null);
@@ -2709,30 +2709,26 @@ public class JDFValidator
 
 		public void println(final String string)
 		{
-			if (!wannaPrint)
+			if (wannaPrint)
 			{
-				return;
+				System.out.println(string);
 			}
-			System.out.println(string);
 		}
 
 		public void println()
 		{
-			if (!wannaPrint)
+			if (wannaPrint)
 			{
-				return;
+				System.out.println();
 			}
-			System.out.println();
-
 		}
 
 		public void print(final String string)
 		{
-			if (!wannaPrint)
+			if (wannaPrint)
 			{
-				return;
+				System.out.println(string);
 			}
-			System.out.println(string);
 		}
 	}
 

@@ -364,7 +364,7 @@ public class XJDFSchemaCreator extends BaseElementWalker
 			if (knownAtts.size() + knownElms.size() == 0)
 			{
 				complexType.deleteNode();
-				System.out.println("deleting empty content: " + name);
+				//				System.out.println("deleting empty content: " + name);
 				return null;
 			}
 			for (int i = 0; i < knownElms.size(); i++)
