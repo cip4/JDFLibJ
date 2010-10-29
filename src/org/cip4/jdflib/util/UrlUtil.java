@@ -1245,7 +1245,7 @@ public class UrlUtil
 	 */
 	public static String getLocalURL(final String directory, final String url)
 	{
-		if (directory == null || url == null || directory.isEmpty())
+		if (directory == null || url == null || directory.length() == 0)
 		{
 			return url;
 		}
