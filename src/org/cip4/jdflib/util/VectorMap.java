@@ -189,8 +189,40 @@ public class VectorMap<key, vectorObject> extends HashMap<key, Vector<vectorObje
 	}
 
 	/**
-	 * get all values as one big vector
-	 * @return 
+	 * 
+	 * append a map, ensuring uniqueness
+	 * @param key the key of the vector
+	 * @param vVal the vector of elements
+	 */
+	public void appendUnique(final key key, final Vector<vectorObject> vVal)
+	{
+		if (vVal == null)
+			return;
+		for (vectorObject val : vVal)
+			putOne(key, val);
+	}
+
+	/**
+	 * 
+	 * append a VectorMap, ensuring uniqueness
+	 * @param map the map to add
+	 *  
+	 */
+	public void appendUnique(final VectorMap<key, vectorObject> map)
+	{
+		if (map == null)
+			return;
+		Iterator<key> it = map.keySet().iterator();
+		while (it.hasNext())
+		{
+			key next = it.next();
+			appendUnique(next, map.get(next));
+		}
+	}
+
+	/**
+	 * get all values as one big vector, multiple entries are retained (see {@link ContainerUtil}.unify())
+	 * @return a vector of all values
 	 */
 	public Vector<vectorObject> getAllValues()
 	{

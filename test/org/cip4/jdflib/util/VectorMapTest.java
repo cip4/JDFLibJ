@@ -133,6 +133,36 @@ public class VectorMapTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testAppendUniqueKey()
+	{
+		assertEquals(m.size("a"), 2);
+		Vector<String> v2 = new Vector<String>();
+		v2.add("v1");
+		v2.add("v2");
+		m.appendUnique("a", v2);
+		assertEquals(m.size("a"), 4);
+		m.appendUnique("a", v2);
+		assertEquals(m.size("a"), 4);
+	}
+
+	/**
+	 * 
+	 */
+	public void testAppendUnique()
+	{
+		assertEquals(m.size("a"), 2);
+		@SuppressWarnings("unchecked")
+		VectorMap<String, String> clone = (VectorMap<String, String>) m.clone();
+		m.appendUnique(clone);
+		assertEquals(m, clone);
+		clone.putOne("d", "d1");
+		m.appendUnique(clone);
+		assertEquals(m, clone);
+	}
+
+	/**
+	 * 
+	 */
 	public void testremoveOne()
 	{
 		m.removeOne("a", "b");

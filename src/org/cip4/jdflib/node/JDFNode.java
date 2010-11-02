@@ -6713,8 +6713,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 						final JDFIntegerList combinedProcessIndex = rl.getCombinedProcessIndex();
 						if (combinedProcessIndex == null || (types != null && combinedProcessIndex.size() == types.size()))
 						{
-							// in case of multiple parts - grab root - else
-							// potential performance hit
+							// in case of multiple parts - grab root - else potential performance hit
 							nici = rl.getPart(1) == null ? rl.getTarget() : rl.getLinkRoot();
 							break;
 						}
@@ -6723,18 +6722,32 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			}
 		}
 
-		KElement nici2 = nici;
-
-		// continue search if not found but retain nici
-		while (nici2 != null && (xPath != null) && (!nici2.hasXPathNode(xPath)))
+		// search kids too
+		if (xPath != null)
 		{
-			if ((nici2 instanceof JDFResource) && !((JDFResource) nici2).isResourceRoot())
+			if (nici instanceof JDFResource)
 			{
-				nici2 = nici2.getParentNode_KElement();
+				VElement vLeaves = ((JDFResource) nici).getLeaves(true);
+				for (KElement leaf : vLeaves)
+				{
+					if (leaf.hasXPathNode(xPath))
+						return nici;
+				}
 			}
-			else
+
+			KElement nici2 = nici;
+
+			// continue search if not found but retain nici
+			while (nici2 != null && (!nici2.hasXPathNode(xPath)))
 			{
-				nici = nici2 = null;
+				if ((nici2 instanceof JDFResource) && !((JDFResource) nici2).isResourceRoot())
+				{
+					nici2 = nici2.getParentNode_KElement();
+				}
+				else
+				{
+					nici = nici2 = null;
+				}
 			}
 		}
 

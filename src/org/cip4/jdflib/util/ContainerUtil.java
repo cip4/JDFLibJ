@@ -287,8 +287,8 @@ public class ContainerUtil
 
 	/**
 	 * create a Vector of entry values from a map
-	 * @param <a>
-	 * @param <b>
+	 * @param <a> type of the map key
+	 * @param <b> type of the map entry
 	 * @param m the map to dump to an array
 	 * @param sortByKey , if true, sort the entries by key
 	 * @return the vector

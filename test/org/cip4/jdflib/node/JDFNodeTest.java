@@ -1548,6 +1548,8 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals(node3.getInheritedNodeInfo("@Start"), niPart);
 		assertNull(node3.getInheritedNodeInfo("@FooBar"));
 		assertEquals(node3.getInheritedNodeInfo("JMF/@ICSVersions"), niAN);
+		niPart.addPartition(EnumPartIDKey.DeliveryUnit0, "D0").setAttribute("FooBar", "f1");
+		assertEquals("search in leaves", node3.getInheritedNodeInfo("@FooBar"), niPart);
 
 	}
 
