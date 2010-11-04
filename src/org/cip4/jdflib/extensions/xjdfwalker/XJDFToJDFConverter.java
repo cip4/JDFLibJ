@@ -83,6 +83,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	// JDFNode theNode;
 	Map<String, IDPart> idMap;
 	boolean firstConvert;
+	boolean firstproductInList;
 	protected JDFNode currentJDFNode = null;
 	/**
 	 * if true, create the product, else ignore it
@@ -104,7 +105,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	public XJDFToJDFConverter(final JDFDoc template)
 	{
 		super(new BaseWalkerFactory());
-		firstConvert = true;
+		firstConvert = firstproductInList = true;
 		jdfDoc = template == null ? null : template.clone();
 		// theNode = null;
 		idMap = null;
@@ -1037,13 +1038,14 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			JDFNode theNode = (JDFNode) trackElem;
 			if ("Product".equals(theNode.getType()))
 			{
-				if (theNode != currentJDFNode)
+				if (theNode != currentJDFNode && !firstproductInList)
 					theNode = theNode.addProduct();
 			}
 			else
 			{
 				theNode = createProductRoot(theNode);
 			}
+			firstproductInList = false;
 			theNode.setAttributes(e);
 			fixComponent(theNode, e);
 			return theNode;

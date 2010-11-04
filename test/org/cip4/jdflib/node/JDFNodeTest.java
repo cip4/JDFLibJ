@@ -904,6 +904,26 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *
+	 *
+	 */
+	public void testSetPartStatusMisMatchPart()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JDF);
+		final JDFNode root = doc.getJDFRoot();
+		root.setVersion(JDFElement.EnumVersion.Version_1_3);
+		final JDFAttributeMap pm = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s1");
+		root.setPartStatus(pm, EnumNodeStatus.Waiting, null);
+		JDFNodeInfo ni = (JDFNodeInfo) root.getNodeInfo().getPartition(pm, null);
+		assertNotNull(ni);
+		JDFResourceLink rl = root.getLink(ni, null);
+		rl.setPartMap(pm);
+		JDFAttributeMap pm2 = new JDFAttributeMap(EnumPartIDKey.SheetName.getName(), "s2");
+		root.setPartStatus(pm2, EnumNodeStatus.Completed, null);
+		assertEquals(root.getPartStatus(pm2, 0), EnumNodeStatus.Completed);
+	}
+
+	/**
 	 * @throws Exception
 	 * 
 	 * 

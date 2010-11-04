@@ -89,10 +89,10 @@ import org.cip4.jdflib.span.JDFNumberSpan;
 import org.cip4.jdflib.span.JDFOptionSpan;
 import org.cip4.jdflib.span.JDFShapeSpan;
 import org.cip4.jdflib.span.JDFSpanBase;
+import org.cip4.jdflib.span.JDFSpanBase.EnumDataType;
 import org.cip4.jdflib.span.JDFStringSpan;
 import org.cip4.jdflib.span.JDFTimeSpan;
 import org.cip4.jdflib.span.JDFXYPairSpan;
-import org.cip4.jdflib.span.JDFSpanBase.EnumDataType;
 import org.w3c.dom.DOMException;
 
 /**
@@ -149,7 +149,7 @@ public class JDFIntentResource extends JDFResource
 	@Override
 	public String toString()
 	{
-		return "JDFInsertingIntent[  --> " + super.toString() + " ]";
+		return "JDFIntent[  --> " + super.toString() + " ]";
 	}
 
 	/**

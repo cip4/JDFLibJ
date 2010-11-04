@@ -1686,7 +1686,8 @@ public class JDFResource extends JDFElement
 					final JDFAttributeMap identityMap = part.getPartMap();
 					if (identityMap == null || identityMap.overlapMap(getPartMap(partIDKeys)))
 					{
-						throw new JDFException("Corrupt Identical Structure!");
+						String s = identityMap == null ? " null map" : identityMap.toString() + " mymap:" + getPartMap(partIDKeys);
+						throw new JDFException("Corrupt Identical Structure!, ID=" + getID() + s);
 					}
 					m.putAll(identityMap);
 
@@ -2078,7 +2079,7 @@ public class JDFResource extends JDFElement
 				loopRes = (JDFResource) loopRes.getParentNode();
 				if (loopRes == null)
 				{
-					throw (new JDFException("JDFResource::GetDeepPart ran into null element while searching tree"));
+					throw (new JDFException("JDFResource::GetDeepPart ran into null element while searching tree, ID=" + getID()));
 				}
 			}
 			// return retRes;
@@ -2122,7 +2123,7 @@ public class JDFResource extends JDFElement
 					if (!vPartIDKeys.contains(partKey)) // allow reordering of the
 					// existing partidkeys
 					{
-						throw new JDFException("reorderPartKeys: reordering incompatible partitions. Key: " + partKey + " " + vPartIDKeys);
+						throw new JDFException("reorderPartKeys: reordering incompatible partitions for ID=" + getID() + ". Key: " + partKey + " " + vPartIDKeys);
 					}
 					vTmpPartIDKeys.add(partKey);
 					vPartIDKeys.remove(partKey);
@@ -2182,8 +2183,8 @@ public class JDFResource extends JDFElement
 			final JDFAttributeMap thisMap = getPartMap();
 			if (!JDFPart.overlapPartMap(thisMap, localPartMap))
 			{
-				throw new JDFException("JDFResource.GetCreatePartition: non-matching partitions: leaf map:" + thisMap + " create map:" + localPartMap + " PartIDKeys:"
-						+ getPartIDKeys());
+				throw new JDFException("JDFResource.GetCreatePartition ID=" + getID() + " : non-matching partitions:\nleaf map:" + thisMap + "\ncreate map:" + localPartMap
+						+ "\nPartIDKeys:" + getPartIDKeys());
 			}
 
 			if (thisMap != null)
@@ -2259,7 +2260,7 @@ public class JDFResource extends JDFElement
 			}
 			else if (partSize > 0)// either non - continuous or more than one left
 			{
-				throw new JDFException("AddPartitionMap: incompatible partmap. Remaining map: " + localPartMap);
+				throw new JDFException("AddPartitionMap: incompatible partmap ID=" + getID() + ". Remaining map: " + localPartMap);
 			}
 			return leaf;
 		}
@@ -2358,14 +2359,14 @@ public class JDFResource extends JDFElement
 			{
 				if (!isLeaf())
 				{
-					throw new JDFException("addPartion: adding inconsistent partition - parent must be a leaf");
+					throw new JDFException("addPartion: adding inconsistent partition ID=" + getID() + " - parent must be a leaf");
 				}
 			}
 			else if (posOfType == 0)
 			{
 				if (!isResourceRootRoot())
 				{
-					throw new JDFException("addPartion: adding inconsistent partition - must be root");
+					throw new JDFException("addPartion: adding inconsistent partition ID=" + getID() + " - must be root");
 				}
 			}
 			else
@@ -2375,7 +2376,7 @@ public class JDFResource extends JDFElement
 					final String parentPart = vs.stringAt(posOfType - 1);
 					if (!hasAttribute_KElement(parentPart, null, false))
 					{
-						throw new JDFException("addPartion: adding inconsistent partition - parent must have partIDKey: " + parentPart);
+						throw new JDFException("addPartion: adding inconsistent partition  ID=" + getID() + "- parent must have partIDKey: " + parentPart);
 					}
 				}
 			}
@@ -2388,7 +2389,7 @@ public class JDFResource extends JDFElement
 			JDFResource p = getFastPartition(new JDFAttributeMap(partType, value), EnumPartUsage.Explicit);
 			if (p != null)
 			{
-				throw new JDFException("addPartion: adding duplicate partition " + partType + "=" + value);
+				throw new JDFException("addPartion: adding duplicate partition for ID=" + getID() + " " + partType + "=" + value);
 			}
 
 			p = (JDFResource) appendElement(getNodeName(), getNamespaceURI());
@@ -2400,88 +2401,6 @@ public class JDFResource extends JDFElement
 			return p;
 		}
 
-		/**
-		 * gets an element as defined by XPath to value <br>
-		 * 
-		 * 
-		 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
-		 * 
-		 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
-		 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
-		 * 
-		 * @return KElement the specified element
-		 * @throws IllegalArgumentException if path is not supported
-		 */
-		// @Override
-		// public KElement getXPathElement(String path)
-		// {
-		// VElement v= getXPathElementVector(path, 1);
-		// if(v==null || v.size()<1) {
-		// final String nodeName=getNodeName();
-		// KElement ke=this;
-		// while (v == null || v.size()==0)
-		// {
-		// ke = ke.getParentNode_KElement();
-		// if (ke == null || !ke.getNodeName().equals(nodeName))
-		// {
-		// return null;
-		// }
-		// v = ke.getXPathElementVector(path, 1);
-		// }
-		// }
-		// return v.item(0);
-		// }
-		//	/**
-		//	 * Recursively adds the partition leaves defined in vPartMap
-		//	 * 
-		//	 * @param vPartMap the vector of maps of part keys
-		//	 * @param vPartIDKeys the vector of partIDKeys strings of the resource. If empty (the default) the Resource PartIDKeys attribute is used
-		//	 * @return VElement - vector of newly created partitions
-		//	 * 
-		//	 * @throws JDFException if there are in the partMap not matching partitions
-		//	 * @throws JDFException if there is an attempt to fill non-matching partIDKeys
-		//	 * @throws JDFException if by adding of last partition key there is either non-continuous partmap or left more than one key
-		//	 * 
-		//	 * @default createPartitions(vPartMap, VString.emptyVector)
-		//	 */
-		//	public VElement createPartitions(final VJDFAttributeMap vPartMap, final VString vPartIDKeys)
-		//	{
-		//		final VString tmp = new VString();
-		//		final VElement vExist = getPartitionVector(vPartMap, null);
-		//
-		//		Set<JDFAttributeMap> setExist = new HashSet<JDFAttributeMap>();
-		//		for (int i = 0; i < vExist.size(); i++)
-		//		{
-		//			JDFResource resource = (JDFResource) vExist.get(i);
-		//			JDFAttributeMap partMap = resource.getPartMap();
-		//			partMap.reduceMap(vPartIDKeys);
-		//			setExist.add(partMap);
-		//		}
-		//
-		//		for (int i = 0; i < vPartMap.size(); i++)
-		//		{
-		//			final JDFAttributeMap map = vPartMap.elementAt(i);
-		//			if (!setExist.contains(map))
-		//			{
-		//				tmp.clear();
-		//				for (int j = 0; j < vPartIDKeys.size(); j++)
-		//				{
-		//					if (map.containsKey(vPartIDKeys.elementAt(j)))
-		//					{
-		//						tmp.add(vPartIDKeys.elementAt(j));
-		//					}
-		//				}
-		//				vExist.add(getCreatePartition(map, tmp));
-		//				setExist.add(map);
-		//			}
-		//			else
-		//			{
-		//				// nop
-		//			}
-		//		}
-		//
-		//		return vExist;
-		//	}
 		/**
 		 * Recursively adds the partition leaves defined in vPartMap
 		 * 

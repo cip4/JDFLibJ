@@ -2060,6 +2060,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		{
 			// version >=1.3
 			JDFNodeInfo ni = getCreateNodeInfo();
+			ni = (JDFNodeInfo) ni.getResourceRoot(); //101104 RP in case we set to a non linked resource, this avoids exceptions
 			if (getStatus() != JDFElement.EnumNodeStatus.Part)
 			{ // set a decent default status for implicit
 				ni.setNodeStatus(getStatus());
@@ -3117,7 +3118,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * get the node's partition status
+	 * get the node's partition status, even if the link does not match mattr
 	 * 
 	 * @param mattr Attribute map of partition
 	 * @param method : -1, 0 or 1; -1 min status; 0 equals, 1 max status
@@ -3132,14 +3133,18 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		}
 		else if (stat == EnumNodeStatus.Part)
 		{
-			JDFNodeInfo ni = getNodeInfo();
-			// this is required to compare lower partitions
-			final int numParts = mattr == null ? 0 : mattr.size();
-			if (ni == null)
+			final JDFNodeInfo niBase = getNodeInfo();
+			if (niBase == null)
 			{
 				return null;
 			}
-			ni = (JDFNodeInfo) ni.getPartition(mattr, null);
+			// this is required to compare lower partitions
+			final int numParts = mattr == null ? 0 : mattr.size();
+			JDFNodeInfo ni = (JDFNodeInfo) niBase.getPartition(mattr, null);
+			if (ni == null)
+			{
+				ni = (JDFNodeInfo) niBase.getResourceRoot().getPartition(mattr, null);
+			}
 			if (ni == null)
 			{
 				return null;

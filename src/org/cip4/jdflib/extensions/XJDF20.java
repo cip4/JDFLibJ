@@ -157,7 +157,13 @@ public class XJDF20 extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		KElement.uniqueID(-1000); // don't start at zero to avoid collisions in short ID scenarios
+		trackAudits = true;
 		init();
+	}
+
+	public void setTrackAudits(boolean trackAudits)
+	{
+		this.trackAudits = trackAudits;
 	}
 
 	/**
@@ -170,6 +176,7 @@ public class XJDF20 extends BaseElementWalker
 	public final static String rootJMF = "JMF";
 
 	private final String m_spawnInfo = "SpawnInfo";
+	private boolean trackAudits;
 	protected VString resAttribs;
 	protected KElement newRoot = null;
 	protected JDFNode oldRoot = null;
@@ -234,7 +241,8 @@ public class XJDF20 extends BaseElementWalker
 	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
 		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
-		root.getCreateAuditPool().addModified("XJDF Converter", null);
+		if (trackAudits)
+			root.getCreateAuditPool().addModified("XJDF Converter", null);
 		FixVersion vers = new FixVersion(EnumVersion.Version_1_4);
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.walkTree(root, null);

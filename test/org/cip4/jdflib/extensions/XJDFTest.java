@@ -329,12 +329,14 @@ public class XJDFTest extends JDFTestCaseBase
 		nP.setType(EnumType.Product);
 		nP.setDescriptiveName("desc");
 		nP.addResource("LayoutIntent", EnumUsage.Input);
+		nP.addResource("BindingIntent", EnumUsage.Input);
 		n = (JDFNode) nP.copyElement(n, null);
 		final JDFResource c = n.addResource("Component", EnumUsage.Output);
 		nP.linkResource(c, EnumUsage.Output, null);
 
 		e = new XJDF20().makeNewJDF(n, null);
 		assertNotNull(e.getXPathElement("ProductList/Product/Intent[@Name=\"LayoutIntent\"]"));
+		assertNotNull(e.getXPathElement("ProductList/Product/Intent[@Name=\"BindingIntent\"]"));
 		assertEquals(e.getXPathAttribute("ProductList/Product/@DescriptiveName", null), "desc");
 	}
 
@@ -371,6 +373,8 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFNode root = d.getJDFRoot();
 		assertEquals(root.getType(), "Product");
 		assertEquals(root.getDescriptiveName(), "desc");
+		assertNotNull(root.getResource(ElementName.LAYOUTINTENT, EnumUsage.Input, 0));
+		assertNotNull(root.getResource(ElementName.BINDINGINTENT, EnumUsage.Input, 0));
 	}
 
 	/**
