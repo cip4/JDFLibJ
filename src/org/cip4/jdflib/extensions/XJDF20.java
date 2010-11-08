@@ -123,6 +123,12 @@ import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.JDFStrippingParams;
+import org.cip4.jdflib.resource.devicecapability.JDFAbstractState;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCap;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCapPool;
+import org.cip4.jdflib.resource.devicecapability.JDFDevCaps;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap;
+import org.cip4.jdflib.resource.devicecapability.JDFEvaluation;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorControlStrip;
 import org.cip4.jdflib.resource.process.JDFComponent;
@@ -304,6 +310,17 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	private void init()
 	{
+		resAttribs = generateResourceAttributes();
+	}
+
+	/**
+	 * 
+	 * TODO Please insert comment!
+	 * @return
+	 */
+	protected VString generateResourceAttributes()
+	{
+		VString resAttribs = new VString();
 		final JDFResourcePool dummyResPool = (JDFResourcePool) new JDFDoc("ResourcePool").getRoot();
 		final JDFResource intRes = dummyResPool.appendResource("intent", EnumResourceClass.Intent, null);
 		final JDFResource physRes = dummyResPool.appendResource("physical", EnumResourceClass.Consumable, null);
@@ -313,9 +330,32 @@ public class XJDF20 extends BaseElementWalker
 		resAttribs.appendUnique(physRes.knownAttributes());
 		resAttribs.appendUnique(intRes.knownAttributes());
 		resAttribs.appendUnique(part.knownAttributes());
+		return resAttribs;
 	}
 
-	String getClassName(final JDFResource r)
+	/**
+	 * 
+	 * TODO Please insert comment!
+	 * @param name
+	 * @return
+	 */
+	public String getClassName(final String name)
+	{
+		if (name == null)
+			return null;
+		KElement e = new JDFDoc(name).getRoot();
+
+		String className = (e instanceof JDFResource) ? getClassName((JDFResource) e) : null;
+		return className;
+	}
+
+	/**
+	 * 
+	 * TODO Please insert comment!
+	 * @param r
+	 * @return
+	 */
+	public String getClassName(final JDFResource r)
 	{
 		if (r == null)
 		{
@@ -1506,6 +1546,42 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
+	* any matching class will be ignored and all children will be moved into the respective parent element
+	*  
+	* @author Rainer Prosi, Heidelberger Druckmaschinen
+	* 
+	*/
+	protected class WalkSkip extends WalkJDFElement
+	{
+
+		public WalkSkip()
+		{
+			super();
+		}
+
+		/**
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			return xjdf;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFDevCapPool || toCheck instanceof JDFDevCaps;
+		}
+	}
+
+	/**
 	 * 
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
@@ -2625,6 +2701,306 @@ public class XJDF20 extends BaseElementWalker
 		{
 			return toCheck instanceof JDFResourceInfo;
 		}
+	}
+
+	/**
+	 * simply stop walking on these
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkDevCap extends WalkDevcapElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			JDFDevCap dc = (JDFDevCap) e;
+			String name = dc.getName();
+			VString v = getXPathVector(dc, name);
+			for (String path : v)
+			{
+				name = StringUtil.token(path, -1, "/");
+				KElement eState = trackElem.getChildWithAttribute("ElementState", "XPath", null, name, 0, true);
+				if (eState == null)
+				{
+					eState = trackElem.appendElement("ElementState");
+
+					eState.setAttribute("XPathRoot", getXPathRoot(path, null));
+					eState.setAttribute("XPath", name);
+					eState.setAttributes(e);
+					eState.removeAttribute(AttributeName.DEVCAPREF);
+					eState.removeAttribute(AttributeName.NAME);
+					eState.removeAttribute(AttributeName.DEVCAPREFS);
+				}
+
+			}
+			return trackElem;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFDevCap;
+		}
+
+	}
+
+	/**
+	 * simply stop walking on these
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkDeviceCap extends WalkElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+
+			KElement e2 = super.walk(e, trackElem);
+			e2.removeAttribute(AttributeName.COMBINEDMETHOD);
+			e2.removeAttribute(AttributeName.GENERICATTRIBUTES);
+			return e2;
+
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFDeviceCap;
+		}
+
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
+	protected class WalkDevcapElement extends WalkElement
+	{
+
+		/**
+		 *  
+		 */
+		public WalkDevcapElement()
+		{
+			super();
+		}
+
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			return trackElem;
+		}
+
+		/**
+		 * TODO Please insert comment!
+		 * @param path
+		 * @param object
+		 * @return
+		 */
+		protected String getXPathRoot(String path, String old)
+		{
+			if (path == null || "/".equals(path) || "".equals(path))
+				return path;
+			String rootPath = StringUtil.replaceToken(path, -1, "/", null);
+			return rootPath;
+		}
+
+		protected VString getXPathVector(JDFElement dc, String name)
+		{
+			VString v = null;
+			if (dc instanceof JDFDevCap)
+				v = ((JDFDevCap) dc).getNamePathVector();
+			else if (dc instanceof JDFAbstractState)
+				v = ((JDFAbstractState) dc).getNamePathVector();
+			else if (dc instanceof JDFEvaluation)
+				v = ((JDFEvaluation) dc).getRefTarget().getNamePathVector();
+
+			if (v != null && v.size() > 0)
+			{
+				VString v2 = new VString();
+				for (String s : v)
+				{
+					s = modifyXPath(s);
+					v2.add(s);
+				}
+				v = v2;
+			}
+			v.unify();
+			return v;
+		}
+
+		public String modifyXPath(String s)
+		{
+			VString vs = StringUtil.tokenize(s, "/", false);
+			//					while (vs.size() > 0 && vs.elementAt(-1).equals(name))
+			//						vs.remove(vs.size() - 1);
+			for (int i = vs.size() - 2; i >= 0; i--)
+			{
+				if (vs.elementAt(i).equals(vs.elementAt(i + 1)))
+					vs.remove(i + 1);
+			}
+			// remove parents of JMF, if any
+			int posJMF = vs.indexOf("JMF");
+			while (posJMF-- > 0)
+				vs.remove(0);
+
+			if (vs.size() == 0)
+			{
+				s = "/";
+			}
+			else
+			{
+				if ("JDF".equals(vs.get(0)))
+					vs.set(0, XJDF20.rootName);
+				if (vs.size() > 1 && ElementName.RESOURCEPOOL.equals(vs.get(1)))
+				{
+					String className = null;
+					if (vs.size() == 3)
+					{
+						String name = vs.get(2);
+						className = getClassName(name);
+						if (className != null)
+						{
+							if ("Intent".equals(className))
+							{
+								vs.set(1, "ProductList/Product");
+							}
+							else
+							{
+								vs.set(1, className + "Set/" + className);
+							}
+						}
+					}
+					if (className == null)
+					{
+						vs.remove(1);
+						vs.remove(0);
+					}
+				}
+				s = StringUtil.setvString(vs, "/", "/", null);
+				if (!s.startsWith("/" + XJDF20.rootName))
+					s = "/" + s;
+			}
+			return s;
+		}
+
+		@Override
+		public boolean matches(KElement e)
+		{
+			// we are abstract...
+			return false;
+		}
+	}
+
+	/**
+	 * simply stop walking on these
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkState extends WalkDevcapElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			JDFAbstractState st = (JDFAbstractState) e;
+			VString v = getXPathVector(st, null);
+			String name = st.getName();
+			String stateName = st.getLocalName();
+			for (String path : v)
+			{
+				KElement eState = trackElem.getChildWithAttribute(stateName, "XPath", null, "@" + name, 0, true);
+				if (eState == null)
+				{
+					eState = trackElem.appendElement(stateName);
+
+					String xPathRoot = getXPathRoot(path, null);
+					if (resAttribs.contains(name) && xPathRoot.contains("Set/"))
+						xPathRoot = StringUtil.replaceToken(xPathRoot, -1, "/", null);
+					eState.setAttributes(e);
+					eState.setAttribute("XPathRoot", xPathRoot);
+					eState.setAttribute("XPath", "@" + name);
+					eState.removeAttribute("Name");
+				}
+
+			}
+			return trackElem;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFAbstractState;
+		}
+
+	}
+
+	/**
+	 * simply stop walking on these
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
+	 */
+	public class WalkEvaluation extends WalkDevcapElement
+	{
+		/**
+		 * @param e
+		 * @return the created resource
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			JDFEvaluation dc = (JDFEvaluation) e;
+			VString v = getXPathVector(dc, null);
+			for (String path : v)
+			{
+				KElement eval = trackElem.appendElement(e.getLocalName());
+				eval.setAttributes(e);
+				// TODO evaluate parent context elemenz
+				eval.setAttribute("XPath", StringUtil.token(path, -1, "/"));
+				eval.removeAttribute(AttributeName.RREF);
+			}
+
+			return trackElem;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFEvaluation;
+		}
+
 	}
 
 	/**

@@ -93,9 +93,9 @@ import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -111,8 +111,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x33333333,
-				AttributeInfo.EnumAttributeType.IDREF, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.RREF, 0x33333333, AttributeInfo.EnumAttributeType.IDREF, null, null);
 	}
 
 	@Override
@@ -124,8 +123,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST,
-				0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
 	}
 
 	@Override
@@ -152,8 +150,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -166,8 +163,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -225,17 +221,17 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	public boolean fitsJDF(KElement jdf, KElement reportRoot)
 	{
 		KElement reportRootLocal = reportRoot;
-		
-		String xPath = getEvalXPath(jdf);
+
 		if (reportRootLocal != null)
 			reportRootLocal = reportRootLocal.appendElement(getLocalName());
-		
+
 		boolean b = false;
+		String xPath = getEvalXPath(jdf);
 		if (xPath != null)
 		{
 			b = fitsPath(jdf, xPath, reportRootLocal);
 		}
-		
+
 		if (reportRootLocal != null)
 		{
 			reportRootLocal.setAttribute("Value", b, null);
@@ -274,7 +270,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 					attr.setAttribute("Name", StringUtil.token(xPath, -1, "/"));
 				}
 			}
-		} else
+		}
+		else
 		// attribute
 		{
 			String attrVal = e.getXPathAttribute(xPath, null);
@@ -291,7 +288,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 					if (!r.hasAttribute_KElement(attName, null, false))
 					{
 						r = (JDFResource) r.getParentNode_KElement();
-					} else
+					}
+					else
 					{
 						break;
 					}
@@ -359,8 +357,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 			return state.getListType();
 		}
 		final JDFBasicPreflightTest basicPreflightTest = getBasicPreflightTest();
-		return basicPreflightTest == null ? null : basicPreflightTest
-				.getListType();
+		return basicPreflightTest == null ? null : basicPreflightTest.getListType();
 	}
 
 	/**
@@ -399,18 +396,16 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 				{
 					String path = vPath.stringAt(i);
 					VString tokens = StringUtil.tokenize(path, "/", false);
-					if (tokens.size() == 3
-							&& tokens.stringAt(1).equals(
-									ElementName.RESOURCEPOOL))
+					if (tokens.size() == 3 && tokens.stringAt(1).equals(ElementName.RESOURCEPOOL))
 					{
 						tokens.set(1, ElementName.RESOURCELINKPOOL);
 						tokens.set(2, tokens.stringAt(2) + "Link");
-						vPath.set(i, StringUtil.setvString(tokens, "/", null,
-								null));
+						vPath.set(i, StringUtil.setvString(tokens, "/", null, null));
 					}
 				}
 			}
-		} else if (stateDC instanceof JDFDevCaps)
+		}
+		else if (stateDC instanceof JDFDevCaps)
 		{
 			if (!(this instanceof JDFIsPresentEvaluation)) // only ispresent may
 															// reference a
@@ -429,9 +424,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 				{
 					String path = vPath.stringAt(i);
 					VString tokens = StringUtil.tokenize(path, "/", false);
-					if (tokens.size() == 3
-							&& tokens.stringAt(1).equals(
-									ElementName.RESOURCEPOOL))
+					if (tokens.size() == 3 && tokens.stringAt(1).equals(ElementName.RESOURCEPOOL))
 					{
 						tokens.set(1, ElementName.RESOURCELINKPOOL);
 						String link = tokens.stringAt(2) + "Link";
@@ -439,12 +432,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 						if (lu != null)
 							link += "[@Usage=\"" + lu.getName() + "\"]";
 						tokens.set(2, link);
-						vPath.set(i, StringUtil.setvString(tokens, "/", null,
-								null));
+						vPath.set(i, StringUtil.setvString(tokens, "/", null, null));
 					}
 				}
 			}
-		} else
+		}
+		else
 		{
 			// we have found our state -> take its xPath and look for
 			// corresponding elem in JDFNode, we test
@@ -454,14 +447,16 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 			{
 				vPath = state.getNamePathVector(true);
 				bElement = true;
-			} else
+			}
+			else
 			{
 
 				final KElement kdc = state.getParentNode_KElement();
 				if (kdc instanceof IDeviceCapable)
 				{
 					vPath = ((IDeviceCapable) kdc).getNamePathVector();
-				} else if (kdc instanceof ICapabilityElement)
+				}
+				else if (kdc instanceof ICapabilityElement)
 				{
 					vPath = ((ICapabilityElement) kdc).getNamePathVector();
 				}
@@ -481,7 +476,8 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 					if (jdf.matchesPath(xPath2, true))
 						finalS = "." + xPath.substring(slash);
 					slash = xPath2.lastIndexOf("/");
-				} while (slash >= 0 && finalS == null);
+				}
+				while (slash >= 0 && finalS == null);
 
 				if (finalS != null && !bElement)
 				{
@@ -505,10 +501,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 		if (e instanceof JDFAbstractState)
 		{
 			return ((JDFAbstractState) e).getNamePath();
-		} else if (e instanceof JDFDevCap)
+		}
+		else if (e instanceof JDFDevCap)
 		{
 			return ((JDFDevCap) e).getNamePath(true);
-		} else if (e instanceof JDFDevCaps)
+		}
+		else if (e instanceof JDFDevCaps)
 		{
 			return ((JDFDevCaps) e).getName();
 		}
@@ -526,10 +524,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 		if (e instanceof JDFAbstractState)
 		{
 			return ((JDFAbstractState) e).getName();
-		} else if (e instanceof JDFDevCap)
+		}
+		else if (e instanceof JDFDevCap)
 		{
 			return ((JDFDevCap) e).getName();
-		} else if (e instanceof JDFDevCaps)
+		}
+		else if (e instanceof JDFDevCaps)
 		{
 			return ((JDFDevCaps) e).getName();
 		}
@@ -543,15 +543,12 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 */
 	public void setRefTarget(JDFElement e)
 	{
-		JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(
-				ElementName.DEVICECAP, 0);
+		JDFDeviceCap deviceCap = (JDFDeviceCap) getDeepParent(ElementName.DEVICECAP, 0);
 		if (deviceCap == null)
-			throw new JDFException(
-					"setRefTarget, called in dangling evaluation");
+			throw new JDFException("setRefTarget, called in dangling evaluation");
 
 		if (!(e instanceof JDFAbstractState) && !(e instanceof JDFDevCap))
-			throw new JDFException(
-					"setRefTarget, called for illegal target type");
+			throw new JDFException("setRefTarget, called for illegal target type");
 
 		final String id = e.appendAnchor(null);
 		setrRef(id);
@@ -628,8 +625,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 */
 	public JDFBasicPreflightTest getCreateBasicPreflightTest()
 	{
-		return (JDFBasicPreflightTest) getCreateElement(
-				ElementName.BASICPREFLIGHTTEST, null, 0);
+		return (JDFBasicPreflightTest) getCreateElement(ElementName.BASICPREFLIGHTTEST, null, 0);
 	}
 
 	/**
@@ -646,8 +642,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	@Deprecated
 	public JDFBasicPreflightTest getCreateBasicPreflightTest(int iSkip)
 	{
-		return (JDFBasicPreflightTest) getCreateElement(
-				ElementName.BASICPREFLIGHTTEST, JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFBasicPreflightTest) getCreateElement(ElementName.BASICPREFLIGHTTEST, JDFConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
@@ -657,8 +652,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 */
 	public JDFBasicPreflightTest getBasicPreflightTest()
 	{
-		return (JDFBasicPreflightTest) getElement(
-				ElementName.BASICPREFLIGHTTEST, null, 0);
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, null, 0);
 	}
 
 	/**
@@ -674,8 +668,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	@Deprecated
 	public JDFBasicPreflightTest getBasicPreflightTest(int iSkip)
 	{
-		return (JDFBasicPreflightTest) getElement(
-				ElementName.BASICPREFLIGHTTEST, JDFConstants.EMPTYSTRING, iSkip);
+		return (JDFBasicPreflightTest) getElement(ElementName.BASICPREFLIGHTTEST, JDFConstants.EMPTYSTRING, iSkip);
 	}
 
 	/**
@@ -688,8 +681,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	@Deprecated
 	public JDFBasicPreflightTest appendBasicPreflightTest()
 	{
-		return (JDFBasicPreflightTest) appendElementN(
-				ElementName.BASICPREFLIGHTTEST, 1, null);
+		return (JDFBasicPreflightTest) appendElementN(ElementName.BASICPREFLIGHTTEST, 1, null);
 	}
 
 	/**
@@ -702,8 +694,7 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	 */
 	public JDFBasicPreflightTest appendBasicPreflightTest(String testName)
 	{
-		JDFBasicPreflightTest pft = (JDFBasicPreflightTest) appendElementN(
-				ElementName.BASICPREFLIGHTTEST, 1, null);
+		JDFBasicPreflightTest pft = (JDFBasicPreflightTest) appendElementN(ElementName.BASICPREFLIGHTTEST, 1, null);
 		if (pft == null)
 			return null;
 		if (testName != null)
@@ -720,12 +711,11 @@ public abstract class JDFEvaluation extends JDFTerm implements JDFBaseDataTypes
 	{
 		try
 		{
-			return new JDFXYPair(getAttribute(AttributeName.TOLERANCE, null,
-					"0 0"));
-		} catch (DataFormatException e)
+			return new JDFXYPair(getAttribute(AttributeName.TOLERANCE, null, "0 0"));
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFEvaluation.getTolerance: Attribute Tolerance is not applicable to create JDFXYPair");
+			throw new JDFException("JDFEvaluation.getTolerance: Attribute Tolerance is not applicable to create JDFXYPair");
 		}
 	}
 

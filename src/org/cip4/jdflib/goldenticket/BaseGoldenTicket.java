@@ -79,18 +79,18 @@ import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFResourceLink;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
-import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
-import org.cip4.jdflib.core.JDFElement.EnumVersion;
-import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
 import org.cip4.jdflib.datatypes.JDFXYPair;
@@ -101,10 +101,10 @@ import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFColor;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -171,6 +171,28 @@ public class BaseGoldenTicket
 	 * 
 	 */
 	public int[] nCols = { 0, 0 };
+
+	/**
+	 * 
+	 * TODO Please insert comment!
+	 * @param n
+	 * @return
+	 */
+	public static VJDFAttributeMap createSheetMap(int n)
+	{
+		VJDFAttributeMap vMap = new VJDFAttributeMap();
+		for (int i = 1; i <= n; i++)
+		{
+			JDFAttributeMap map = new JDFAttributeMap();
+			map.put(EnumPartIDKey.SignatureName, "Sig1");
+			map.put(EnumPartIDKey.SheetName, "Sheet1");
+			map.put(EnumPartIDKey.Side, "Front");
+			vMap.add(new JDFAttributeMap(map));
+			map.put(EnumPartIDKey.Side, "Back");
+			vMap.add(new JDFAttributeMap(map));
+		}
+		return vMap;
+	}
 
 	/**
 	 * 

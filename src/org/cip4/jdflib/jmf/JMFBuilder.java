@@ -73,6 +73,7 @@ package org.cip4.jdflib.jmf;
 
 import java.util.Vector;
 
+import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
@@ -246,11 +247,16 @@ public class JMFBuilder
 
 	/**
 	 * build a JMF Status query
+	 * @param deviceDetails the device details
+	 * @param jobDetails the status details
 	 * @return the message
 	 */
-	public JDFJMF buildStatus()
+	public JDFJMF buildStatus(EnumDeviceDetails deviceDetails, EnumJobDetails jobDetails)
 	{
 		final JDFJMF jmf = createJMF(EnumFamily.Query, EnumType.Status);
+		JDFStatusQuParams statusQuParams = jmf.getCreateQuery(0).getCreateStatusQuParams(0);
+		statusQuParams.setDeviceDetails(deviceDetails);
+		statusQuParams.setJobDetails(jobDetails);
 		return finalize(jmf);
 	}
 
@@ -570,15 +576,28 @@ public class JMFBuilder
 	}
 
 	/**
-	 * create a new jmf message
-	 * @param f
+	 * create a new jmf message with some heuristic parameters
+	 * @param family
 	 * @param type
 	 * @return
 	 */
-	public JDFJMF newJMF(EnumFamily f, String type)
+	public JDFJMF newJMF(EnumFamily family, String type)
 	{
 		EnumType typ = EnumType.getEnum(type);
-		JDFJMF jmfRoot = createJMF(f, typ);
+		final JDFJMF jmfRoot;
+		if (EnumType.Status.getName().equals(type) && EnumFamily.Query.equals(family))
+		{
+			jmfRoot = buildStatus(EnumDeviceDetails.Brief, EnumJobDetails.Brief);
+		}
+		else if (EnumType.KnownDevices.getName().equals(type) && EnumFamily.Query.equals(family))
+		{
+			jmfRoot = buildKnownDevicesQuery(JDFAutoDeviceFilter.EnumDeviceDetails.Full);
+		}
+		else
+		{
+			jmfRoot = createJMF(family, typ);
+		}
+
 		return jmfRoot;
 	}
 
