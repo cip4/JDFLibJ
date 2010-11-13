@@ -101,6 +101,7 @@ import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
+import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -2834,7 +2835,13 @@ public class XJDF20 extends BaseElementWalker
 			else if (dc instanceof JDFAbstractState)
 				v = ((JDFAbstractState) dc).getNamePathVector();
 			else if (dc instanceof JDFEvaluation)
-				v = ((JDFEvaluation) dc).getRefTarget().getNamePathVector();
+			{
+				ICapabilityElement refTarget = ((JDFEvaluation) dc).getRefTarget();
+				if (refTarget != null)
+					v = refTarget.getNamePathVector();
+				else
+					v = null;
+			}
 
 			if (v != null && v.size() > 0)
 			{
@@ -2845,8 +2852,8 @@ public class XJDF20 extends BaseElementWalker
 					v2.add(s);
 				}
 				v = v2;
+				v.unify();
 			}
-			v.unify();
 			return v;
 		}
 
@@ -2930,6 +2937,7 @@ public class XJDF20 extends BaseElementWalker
 			VString v = getXPathVector(st, null);
 			String name = st.getName();
 			String stateName = st.getLocalName();
+			KElement eStateFirst = null;
 			for (String path : v)
 			{
 				KElement eState = trackElem.getChildWithAttribute(stateName, "XPath", null, "@" + name, 0, true);
@@ -2945,9 +2953,10 @@ public class XJDF20 extends BaseElementWalker
 					eState.setAttribute("XPath", "@" + name);
 					eState.removeAttribute("Name");
 				}
-
+				if (eStateFirst == null)
+					eStateFirst = eState;
 			}
-			return trackElem;
+			return eStateFirst;
 		}
 
 		/**
@@ -2978,13 +2987,17 @@ public class XJDF20 extends BaseElementWalker
 		{
 			JDFEvaluation dc = (JDFEvaluation) e;
 			VString v = getXPathVector(dc, null);
-			for (String path : v)
+			if (v != null)
 			{
-				KElement eval = trackElem.appendElement(e.getLocalName());
-				eval.setAttributes(e);
-				// TODO evaluate parent context elemenz
-				eval.setAttribute("XPath", StringUtil.token(path, -1, "/"));
-				eval.removeAttribute(AttributeName.RREF);
+				for (String path : v)
+				{
+					KElement eval = trackElem.appendElement(e.getLocalName());
+					eval.setAttributes(e);
+					// TODO evaluate parent context elemenz
+					eval.setAttribute("XPath", StringUtil.token(path, -1, "/"));
+					eval.setAttribute("XPathRoot", StringUtil.replaceToken(path, -1, "/", null));
+					eval.removeAttribute(AttributeName.RREF);
+				}
 			}
 
 			return trackElem;

@@ -86,6 +86,7 @@ import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.pool.JDFAuditPool;
+import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.FileUtil;
 
@@ -326,6 +327,17 @@ public class JDFParserTest extends JDFTestCaseBase
 		assertTrue(getCurrentMem() - mem < 1000000);
 		JDFParser.m_searchStream = false;
 		assertNull(new JDFParser().parseString(s2));
+	}
+
+	/**
+	 * parse a string with guck up front
+	 * 
+	 */
+	public void testInit()
+	{
+		JDFDoc d = new JDFParser().parseString(new JDFDoc("JDF").write2String(2));
+		JDFCreated c = d.getJDFRoot().getCreateAuditPool().addCreated(null, null);
+		assertTrue(c.getID().length() > 2);
 	}
 
 	/**

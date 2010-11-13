@@ -77,6 +77,7 @@ import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
+import org.cip4.jdflib.node.JDFSpawned;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFModified;
@@ -108,9 +109,12 @@ public class JDFAuditTest extends JDFTestCaseBase
 		final JDFProcessRun pr = ap.addProcessRun(EnumNodeStatus.Completed, "me", null);
 		assertTrue(pr.hasAttribute("End"));
 		assertTrue(pr.hasAttribute("ID"));
+		JDFSpawned sp = ap.addSpawned(n, null, null, null, null);
+		assertTrue(sp.hasAttribute("ID"));
 		n.setVersion(JDFElement.EnumVersion.Version_1_2);
 		final JDFModified mod = ap.addModified("me", n);
 		assertFalse(mod.hasAttribute("ID"));
+
 	}
 
 	// ///////////////////////////////////////////////////////////////////

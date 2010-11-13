@@ -106,7 +106,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 				if (pathname.isDirectory())
 				{
 					// ignore classes in directories "auto", "datatypes" and "util"
-					acceptFile = !name.equals("auto") && !name.equals("datatypes") && !name.equals("util") && !name.equals("validate");
+					acceptFile = !name.equals("auto") && !name.equals("datatypes") && !name.equals("extensions") && !name.equals("util") && !name.equals("validate");
 				}
 				else
 				{
@@ -116,7 +116,7 @@ public class JDFClassInstantiationTest extends JDFTestCaseBase
 							+ "JDFException.java JDFParser.java JDFVersions.java JDFAbstractState.java "
 							+ "JDFEvaluation.java JDFNodeTerm.java JDFTerm.java JDFEnumerationSpan.java " + "JDFSpan.java JDFSpanBase.java "
 							+ "JDFDurationSpan.java JDFIntegerSpan.java JDFNameSpan.java JDFNumberSpan.java " + "JDFOptionSpan.java JDFShapeSpan.java JDFSpanNamedColor.java "
-							+ "JDFStringSpan.java JDFTimeSpan.java JDFXYPairSpan.java " + "JDFResourceLink.java " + "JDFPool.java", null);
+							+ "JDFStringSpan.java JDFTimeSpan.java JDFXYPairSpan.java " + "JDFResourceLink.java " + "JDFPool.java" + "JDFCapsConverter.java", null);
 
 					acceptFile = !ignoreList.contains(name) && name.startsWith("JDF") && name.toLowerCase().endsWith(".java");
 				}

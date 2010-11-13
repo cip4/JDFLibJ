@@ -400,7 +400,7 @@ public class XMLParser extends DOMParser
 	 * @param bEraseEmpty
 	 * @return
 	 */
-	protected final XMLDoc runParser(final InputSource inSource, final boolean bEraseEmpty)
+	protected XMLDoc runParser(final InputSource inSource, final boolean bEraseEmpty)
 	{
 		XMLDoc doc = getXMLDoc();
 		try

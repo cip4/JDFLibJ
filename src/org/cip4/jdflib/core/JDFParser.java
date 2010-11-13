@@ -392,4 +392,13 @@ public class JDFParser extends XMLParser
 		}
 	}
 
+	@Override
+	final protected XMLDoc runParser(InputSource inSource, boolean bEraseEmpty)
+	{
+		XMLDoc doc = super.runParser(inSource, bEraseEmpty);
+		if (doc != null)
+			((JDFDoc) doc).setInitOnCreate(true);
+		return doc;
+	}
+
 }
