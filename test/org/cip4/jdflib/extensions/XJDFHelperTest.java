@@ -72,6 +72,7 @@ package org.cip4.jdflib.extensions;
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.XMLDoc;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
@@ -100,7 +101,18 @@ public class XJDFHelperTest extends TestCase
 		KElement root = theHelper.getRoot();
 		assertNotNull(theHelper.getSet("NodeInfo", 0));
 		assertNotNull(root);
+	}
 
+	/**
+	 * 
+	 * 
+	 */
+	public void testFactory()
+	{
+		XMLDoc d = new XMLDoc(XJDF20.rootName, null);
+		assertNotNull(XJDFHelper.getHelper(d));
+		d = new XMLDoc("abc", null);
+		assertNull(XJDFHelper.getHelper(d));
 	}
 
 	/**
@@ -135,7 +147,7 @@ public class XJDFHelperTest extends TestCase
 
 	/**
 	 * @see junit.framework.TestCase#setUp()
-	 * @throws Exception
+	 * @throws Exception if snafu
 	*/
 	@Override
 	protected void setUp() throws Exception
@@ -143,6 +155,5 @@ public class XJDFHelperTest extends TestCase
 		super.setUp();
 		KElement.setLongID(false);
 		theHelper = new XJDFHelper(null);
-
 	}
 }

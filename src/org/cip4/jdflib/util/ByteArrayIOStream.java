@@ -175,7 +175,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	/**
 	 * gets an input stream based on the current byte contents - note this operates on the internal data
 	 * 
-	 * @return
+	 * @return an input stream
 	 */
 	public ByteArrayInputStream getInputStream()
 	{
@@ -184,7 +184,16 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// //////
+
+	/**
+	 * get the internal buffer - be careful, this is THE buffer
+	 * @return the internal buffer
+	 * 
+	 */
+	public byte[] getBuf()
+	{
+		return buf;
+	}
 
 	/**
 	 * @see java.io.ByteArrayOutputStream#toString()

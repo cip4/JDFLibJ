@@ -885,6 +885,17 @@ public class StringUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testCreateString()
+	{
+		ByteArrayIOStream ios = new ByteArrayIOStream("abc".getBytes());
+		assertEquals(StringUtil.createString(ios.getInputStream()), "abc");
+	}
+
+	// /////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 
+	 */
 	public void testEndsWithIgnoreCase()
 	{
 		final String s = "a.ZIP";

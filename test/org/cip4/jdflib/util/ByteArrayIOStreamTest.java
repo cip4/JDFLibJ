@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -111,8 +111,8 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 	 */
 	public void testConstructStream()
 	{
-		final ByteArrayIOStream ios = new ByteArrayIOStream(20000);
-		for (int i = 0; i < 12345; i++)
+		final ByteArrayIOStream ios = new ByteArrayIOStream();
+		for (int i = 0; i < 1234567; i++)
 		{
 			ios.write(i);
 		}

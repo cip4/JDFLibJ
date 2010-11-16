@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.util.JDFDate;
@@ -90,6 +91,20 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class XJDFHelper
 {
+	/**
+	 * factoy to create a helper from a doc
+	 *  
+	 * @param doc the xmldoc to parse
+	 * @return the helper
+	 */
+	public static XJDFHelper getHelper(XMLDoc doc)
+	{
+		if (doc == null)
+			return null;
+		KElement root = doc.getRoot();
+		return root.getLocalName().equals(XJDF20.rootName) ? new XJDFHelper(root) : null;
+	}
+
 	/**
 	 * @param xjdf if null a new XJDF is generated, else the xjdf root to be manipulated
 	 */

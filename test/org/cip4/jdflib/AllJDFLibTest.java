@@ -273,6 +273,7 @@ import org.cip4.jdflib.util.net.ProxyUtilTest;
 import org.cip4.jdflib.util.net.URLProxySelectorTest;
 import org.cip4.jdflib.util.thread.DelayedPersistTest;
 import org.cip4.jdflib.validate.JDFValidatorTest;
+import org.cip4.jdflib.validate.VersionTranslatorTest;
 
 /**
  * @author MuchaD
@@ -539,6 +540,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// validate
 		suite.addTestSuite(JDFValidatorTest.class);
+		suite.addTestSuite(VersionTranslatorTest.class);
 
 		return suite;
 	}

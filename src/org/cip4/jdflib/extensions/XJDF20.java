@@ -228,6 +228,19 @@ public class XJDF20 extends BaseElementWalker
 	public boolean bHTMLColor = false;
 
 	/**
+	 * @param root the jdf or jmf to transform
+	 * @return the root of the XJDF document
+	 */
+	public KElement convert(final KElement root)
+	{
+		if (root instanceof JDFJMF)
+			return makeNewJMF((JDFJMF) root);
+		if (root instanceof JDFNode)
+			return makeNewJDF((JDFNode) root, null);
+		return null;
+	}
+
+	/**
 	 * @param jmf the jmf to transform
 	 * @return the root of the XJDF document
 	 */
@@ -248,13 +261,15 @@ public class XJDF20 extends BaseElementWalker
 	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
 		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
+
 		if (trackAudits)
 			root.getCreateAuditPool().addModified("XJDF Converter", null);
 		FixVersion vers = new FixVersion(EnumVersion.Version_1_4);
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.walkTree(root, null);
 
-		oldRoot = (JDFNode) root.getChildWithAttribute(null, "ID", null, node.getID(), 0, false);
+		String id = StringUtil.getNonEmpty(node.getID());
+		oldRoot = id == null ? root : (JDFNode) root.getChildWithAttribute(null, "ID", null, id, 0, false);
 		if (oldRoot == null)
 		{
 			oldRoot = root;

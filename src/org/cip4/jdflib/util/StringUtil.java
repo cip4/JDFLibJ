@@ -80,6 +80,8 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -2372,6 +2374,37 @@ public class StringUtil
 				vS.setElementAt(s, i);
 			}
 		}
+	}
+
+	/**
+	 * create a string from an input stream
+	 * @param is the input stream
+	 * @return the string representation
+	 */
+	public static String createString(InputStream is)
+	{
+		StringBuilder b = new StringBuilder();
+		int n = 0;
+		byte[] by = new byte[4000];
+		do
+		{
+			try
+			{
+				n = is.read(by);
+			}
+			catch (IOException e)
+			{
+				n = -1;
+			}
+			if (n > 0)
+			{
+				String s = new String(by, 0, n);
+				b.append(s);
+			}
+		}
+		while (n >= 0);
+
+		return b.toString();
 	}
 
 	// //////////////////////////////////////////////////////////////////////
