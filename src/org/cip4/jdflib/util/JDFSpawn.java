@@ -1577,8 +1577,7 @@ public class JDFSpawn
 				final JDFResource pLeaf = (JDFResource) vSubParts.item(k);
 				if (pLeaf != null)
 				{
-					// set the lock of the leaf to true if it is RO, else
-					// unlock it
+					// set the lock of the leaf to true if it is RO, else unlock it
 					if (bStayinMain)
 					{
 						if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (pLeaf.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))

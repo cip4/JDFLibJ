@@ -4138,7 +4138,8 @@ public class KElement extends ElementNSImpl implements Element
 	public void setXPathValue(final String path, final String value)
 	{
 		final int pos = path.lastIndexOf(JDFCoreConstants.AET);
-		if (pos >= 0)
+		final int pos2 = path.lastIndexOf(JDFCoreConstants.SLASH);
+		if (pos >= 0 && pos > pos2)
 		{
 			setXPathAttribute(path, value);
 		}
@@ -4158,6 +4159,23 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				vEle.get(i).setText(value);
 			}
+		}
+	}
+
+	/**
+	 * 
+	 * sets all xpaths to the values provided in map
+	 * @param map map of XPath / values to set
+	 */
+	public void setXPathValues(JDFAttributeMap map)
+	{
+		if (map == null)
+			return;
+		Iterator<String> it = map.getKeyIterator();
+		while (it.hasNext())
+		{
+			String xpath = it.next();
+			setXPathValue(xpath, map.get(xpath));
 		}
 	}
 

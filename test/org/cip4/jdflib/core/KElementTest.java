@@ -1827,6 +1827,44 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testSetXPathValueText()
+	{
+		final XMLDoc doc = new XMLDoc("root", null);
+		final KElement root = doc.getRoot();
+		root.setXPathValue("foo/bar/@aa", "a");
+		assertEquals(root.getXPathAttribute("foo/bar/@aa", null), "a");
+		root.setXPathValue("foo[@ID=\"1\"]/bar", "snafu");
+		assertEquals(root.getXPathElement("foo[@ID=\"1\"]/bar").getText(), "snafu");
+		root.setXPathValue("foo[@ID=\"2\"]/bar", "snafu2");
+		assertEquals(root.getXPathElement("foo[@ID=\"2\"]/bar").getText(), "snafu2");
+		root.setXPathValue("foo[@ID=\"2\"]/@bar", "bb");
+		assertEquals(root.getXPathAttribute("foo[@ID=\"2\"]/@bar", null), "bb");
+		root.setXPathValue("foo/bar/@c", "d");
+		assertEquals(root.getXPathAttribute("foo/bar/@c", null), "d");
+	}
+
+	/**
+	 * 
+	 */
+	public void testSetXPathValues()
+	{
+		final XMLDoc doc = new XMLDoc("root", null);
+		final KElement root = doc.getRoot();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put("foo[@ID=\"1\"]/bar", "snafu");
+		map.put("foo[@ID=\"2\"]/bar", "snafu2");
+		map.put("foo[@ID=\"2\"]/@bar", "bb");
+		map.put("foo/bar2/@c", "d");
+		root.setXPathValues(map);
+		assertEquals(root.getXPathAttribute("foo/bar2/@c", null), "d");
+		assertEquals(root.getXPathElement("foo[@ID=\"1\"]/bar").getText(), "snafu");
+		assertEquals(root.getXPathElement("foo[@ID=\"2\"]/bar").getText(), "snafu2");
+		assertEquals(root.getXPathAttribute("foo[@ID=\"2\"]/@bar", null), "bb");
+	}
+
+	/**
 	 * Method testGetDeepParentChild.
 	 * 
 	 */

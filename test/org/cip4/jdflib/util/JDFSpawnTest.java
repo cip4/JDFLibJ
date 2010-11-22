@@ -2992,6 +2992,50 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
+	* 
+	*/
+	public void testRemerge()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			final JDFDoc d = new JDFDoc("JDF");
+			final JDFNode n = d.getJDFRoot();
+			final JDFAttributeMap partMap = new JDFAttributeMap();
+			partMap.put("SheetName", "S1");
+			partMap.put("Side", "Front");
+			final JDFExposedMedia xp = (JDFExposedMedia) n.addResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output);
+			xp.getCreatePartition(partMap, new VString("SheetName Side", null));
+
+			final JDFSpawn sp = new JDFSpawn(n);
+			final VJDFAttributeMap spawnParts = new VJDFAttributeMap();
+			spawnParts.add(partMap); // want more granular
+			final JDFNode spNode = sp.spawn(null, null, new VString(ElementName.EXPOSEDMEDIA, null), spawnParts, false, false, false, false);
+
+			JDFExposedMedia xmSpawn = (JDFExposedMedia) spNode.getResource(ElementName.EXPOSEDMEDIA, null, 0);
+			JDFResourceLink rl = spNode.getLink(xmSpawn, null);
+			rl.setActualAmount(2, partMap);
+
+			final JDFMerge m = new JDFMerge(n);
+			if (i == 1)
+				m.setCleanPolicy(EnumCleanUpMerge.RemoveAll);
+
+			final JDFNode merged = m.mergeJDF((JDFNode) spNode.clone());
+
+			JDFExposedMedia xmMerged = (JDFExposedMedia) merged.getResource(ElementName.EXPOSEDMEDIA, null, 0);
+			JDFResourceLink rlm = merged.getLink(xmMerged, null);
+			assertEquals(rlm.getActualAmount(partMap), 2.0);
+
+			rl.setActualAmount(3, partMap);
+			spNode.getCreateAuditPool().addProcessRun(EnumNodeStatus.Suspended, null, spawnParts);
+			final JDFNode remerged = m.remergeJDF(spNode);
+			JDFExposedMedia xmreMerged = (JDFExposedMedia) remerged.getResource(ElementName.EXPOSEDMEDIA, null, 0);
+			JDFResourceLink rlrm = merged.getLink(xmreMerged, null);
+			assertEquals(rlrm.getActualAmount(partMap), 3.0);
+		}
+
+	}
+
+	/**
 	 * 
 	 */
 	public void testMergeRemovedResource()

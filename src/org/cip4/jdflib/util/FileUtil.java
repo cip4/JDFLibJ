@@ -87,6 +87,7 @@ import java.util.Vector;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.ifaces.IStreamWriter;
 
 /**
  * collection of helper routines to work with files
@@ -391,6 +392,35 @@ public class FileUtil
 			return null;
 		}
 		return streamToFile(fis, tmp);
+	}
+
+	/**
+	 * write to a file
+	 * 
+	 * @param file the file to write
+	 * @param w the writer to write to
+	 * 
+	 * @return the file that was created, null if snafu
+	 */
+	public static File writeFile(IStreamWriter w, File file)
+	{
+		boolean b = FileUtil.createNewFile(file);
+		if (!b)
+			return null;
+
+		try
+		{
+			w.writeStream(new FileOutputStream(file));
+		}
+		catch (FileNotFoundException e)
+		{
+			return null;
+		}
+		catch (IOException e)
+		{
+			return null;
+		}
+		return file;
 	}
 
 	/**
@@ -766,6 +796,8 @@ public class FileUtil
 	 */
 	public static BufferedInputStream getBufferedInputStream(File file)
 	{
+		if (file == null)
+			return null;
 		FileInputStream fis;
 		try
 		{

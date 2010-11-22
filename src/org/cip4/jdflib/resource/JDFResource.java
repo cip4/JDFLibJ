@@ -2452,7 +2452,8 @@ public class JDFResource extends JDFElement
 		}
 
 		/**
-		 * heuristic guess of the best possible partidkey sequence
+		 * heuristic guess of the best possible partidkey sequence<br/>
+		 * note that we have no link context and therefore can only search in the local parent node
 		 * 
 		 * @param partMap the partmap that we want to create
 		 * @param vPartIDKeys the known base partidkeys
