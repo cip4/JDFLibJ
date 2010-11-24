@@ -83,9 +83,10 @@ import org.cip4.jdflib.util.mime.MimeReader;
 public class URLExtractorTest extends JDFTestCaseBase
 {
 	/**
+	 * @return the created doc
 	 * 
 	 */
-	public void testWalk()
+	public JDFDoc testWalk()
 	{
 		try
 		{
@@ -106,6 +107,23 @@ public class URLExtractorTest extends JDFTestCaseBase
 		String write2String = d.write2String(0);
 		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
 		assertTrue(FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
+		return d;
+	}
+
+	/**
+	 * 
+	 */
+	public void testIgnoreSelf()
+	{
+
+		JDFDoc d = testWalk();
+		assertNotNull(d);
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtractSelf");
+		URLExtractor ex = new URLExtractor(dumpDir, "http://foo");
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = d.write2String(0);
+		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
+		assertFalse("we did not dump to #2 since our base is also foo", FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
 	}
 
 	/**

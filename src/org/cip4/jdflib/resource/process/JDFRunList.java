@@ -1525,8 +1525,8 @@ public class JDFRunList extends JDFAutoRunList
 	@Override
 	public void collapse(final boolean bCollapseToNode, final boolean bCollapseElements)
 	{
-		fixNPage();
 		super.collapse(bCollapseToNode, bCollapseElements);
+		fixNPage();
 	}
 
 	/**

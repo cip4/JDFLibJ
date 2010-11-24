@@ -141,6 +141,9 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl.getNPage(), 6);
 		assertEquals(rl1.getNPage(), 3);
 		assertEquals(rl2.getNPage(), 3);
+		rl.removeAttribute(AttributeName.NPAGE);
+		rl1.removeAttribute(AttributeName.NPAGE);
+		rl2.removeAttribute(AttributeName.NPAGE);
 
 		rl.collapse(false, true);
 		assertEquals(rl.getNPage(), 6);
@@ -157,6 +160,50 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl1.getNPage(), 3);
 		assertEquals(rl2.getNPage(), 3);
 		assertEquals(rl3.getNPage(), 3);
+
+	}
+
+	/**
+	 * 
+	 */
+	public final void testFixNPage()
+	{
+		JDFRunList rlSh1 = (JDFRunList) rl.addPartition(EnumPartIDKey.SheetName, "S1");
+		JDFRunList rlSet = (JDFRunList) rlSh1.addPartition(EnumPartIDKey.PageTags, "P1");
+		final JDFRunList rl1 = rlSet.addPDF("file:///file1.pdf", 0, 2);
+		final JDFRunList rl2 = rlSet.addPDF("file:///file2.pdf", 1, 3);
+		rl1.setLogicalPage(0);
+		rl2.setLogicalPage(3);
+		assertEquals(rlSet.getNPage(), 6);
+		assertEquals(rl.getNPage(), 6);
+		JDFRunList rlSh2 = (JDFRunList) rl.addPartition(EnumPartIDKey.SheetName, "S2");
+		JDFRunList rlSet2 = (JDFRunList) rlSh2.addPartition(EnumPartIDKey.PageTags, "P2");
+		final JDFRunList rl21 = rlSet2.addPDF("file:///file3.pdf", 0, 2);
+		final JDFRunList rl22 = rlSet2.addPDF("file:///file4.pdf", 1, 3);
+		rl21.setLogicalPage(4);
+		rl22.setLogicalPage(7);
+		assertEquals(rlSet2.getNPage(), 6);
+		assertEquals(rl.getNPage(), 12);
+		rl.removeAttribute(AttributeName.NPAGE);
+		rl1.removeAttribute(AttributeName.NPAGE);
+		rlSh1.removeAttribute(AttributeName.NPAGE);
+		rlSet.removeAttribute(AttributeName.NPAGE);
+		rl1.removeAttribute(AttributeName.NPAGE);
+		rl2.removeAttribute(AttributeName.NPAGE);
+		rl.removeAttribute(AttributeName.NPAGE);
+		rlSh2.removeAttribute(AttributeName.NPAGE);
+		rlSet2.removeAttribute(AttributeName.NPAGE);
+		rl21.removeAttribute(AttributeName.NPAGE);
+		rl22.removeAttribute(AttributeName.NPAGE);
+		rlSet2.removeAttribute(AttributeName.NPAGE);
+		rl.fixNPage();
+		assertEquals(rlSh1.getNPage(), 6);
+		assertEquals(rlSh2.getNPage(), 6);
+		assertEquals(rlSet.getNPage(), 6);
+		assertEquals(rlSet2.getNPage(), 6);
+		assertEquals(rl.getNPage(), 12);
+		assertEquals(rl1.getNPage(), 3);
+		assertEquals(rl2.getNPage(), 3);
 
 	}
 

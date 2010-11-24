@@ -76,6 +76,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -122,6 +123,7 @@ public class URLExtractor extends BaseElementWalker
 	protected File dir;
 	protected String baseURL;
 	protected Set<URLProtocol> protocols;
+	protected VString myURLBase;
 
 	/**
 	 * @param dumpDir the local directory
@@ -138,7 +140,7 @@ public class URLExtractor extends BaseElementWalker
 
 	/**
 	 * add a protocol to the list of protocols that are supported
-	 * @param protocol
+	 * @param protocol the protocol to add
 	 */
 	public void addProtocol(URLProtocol protocol)
 	{
@@ -183,6 +185,10 @@ public class URLExtractor extends BaseElementWalker
 			String url = StringUtil.getNonEmpty(u.getURL());
 			if (url == null)
 				return e;
+			// we have a circular reference to something we put here ourselves - no need to do anythig
+			if (baseURL != null && url.startsWith(baseURL))
+				return e;
+
 			if (protocols != null)
 			{
 				URLProtocol protocol = UrlUtil.getProtocol(url);

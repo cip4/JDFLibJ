@@ -403,8 +403,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			}
 
 			final String parentName = parent2.getLocalName();
-			boolean bL1 = parentName.endsWith("Set") && toCheck.getLocalName().equals(parent2.getAttribute("Name"));
-			bL1 = bL1 || parentName.equals("Product") && toCheck.getLocalName().equals(parent.getAttribute("Name"));
+			boolean bL1 = parentName.endsWith("Set") && toCheck.getNodeName().equals(parent2.getAttribute("Name"));
+			bL1 = bL1 || parentName.equals("Product") && toCheck.getNodeName().equals(parent.getAttribute("Name"));
 			bReturn = bL1;
 		}
 
