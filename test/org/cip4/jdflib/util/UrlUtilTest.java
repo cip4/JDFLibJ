@@ -82,7 +82,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.mail.BodyPart;
-import javax.mail.MessagingException;
 import javax.mail.Multipart;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -491,6 +490,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testisRelativeURL()
+	{
+		assertFalse(UrlUtil.isRelativeURL("\\\\foo\\bar"));
+		assertTrue(UrlUtil.isRelativeURL("c/d/e.f"));
+		assertFalse(UrlUtil.isRelativeURL("/c/d/e.f"));
+		assertFalse(UrlUtil.isRelativeURL("http://c/d/e.f"));
+		assertFalse(UrlUtil.isRelativeURL("http://c:8080/c/d/e.f"));
+		assertFalse(UrlUtil.isRelativeURL("cid:c/d/e.f"));
+	}
+
+	/**
+	 * 
+	 */
 	public void testisUNC()
 	{
 		assertTrue(UrlUtil.isUNC("\\\\foo\\bar"));
@@ -609,13 +621,12 @@ public class UrlUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws IOException 
-	 * @throws MessagingException 
+	 * @throws Exception 
 	 * 
 	 */
-	public void testMoveToDir() throws MessagingException, IOException
+	public void testMoveToDir() throws Exception
 	{
-		new MimeUtilTest().testBuildMimePackageDocJMF();
+		new MimeUtilTest().testBuildMimePackageDoc();
 		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
@@ -624,7 +635,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
-		final File f = UrlUtil.moveToDir(fs, newDir, true);
+		final File f = UrlUtil.moveToDir(fs, newDir, null, true);
 		assertNotNull("error moving file to dir", f);
 		for (int i = 0; i < 10; i++)
 		{
@@ -636,14 +647,21 @@ public class UrlUtilTest extends JDFTestCaseBase
 			System.out.println("Waiting " + i);
 		}
 		long l = f.lastModified();
-		final File f2 = UrlUtil.moveToDir(fs, newDir, false);
+		final File f2 = UrlUtil.moveToDir(fs, newDir, null, false);
 		assertNotNull("error moving file to dir", f2);
 		ThreadUtil.sleep(1000);
 		assertEquals(l, f2.lastModified(), 0);
 		fs.setURL("bad:/blöd");
-		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, true));
+		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
 		fs.setURL("http://really_really_not_there.com/isnt/there?aaa");
-		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, true));
+		assertNull("bad url:", UrlUtil.moveToDir(fs, newDir, null, true));
+		fs.setURL("./blub.pdf");
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/blub.pdf"));
+		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+		fs.setURL("deep/blub.pdf");
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "dummy/deep/blub.pdf"));
+		assertTrue("relative:", UrlUtil.moveToDir(fs, newDir, sm_dirTestDataTemp + "dummy", true).exists());
+
 	}
 
 	/**

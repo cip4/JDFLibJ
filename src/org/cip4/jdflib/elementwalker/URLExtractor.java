@@ -120,20 +120,23 @@ public class URLExtractor extends BaseElementWalker
 
 	}
 
-	protected File dir;
-	protected String baseURL;
+	protected final File dir;
+	protected final String baseURL;
 	protected Set<URLProtocol> protocols;
 	protected VString myURLBase;
+	private final String currentURL;
 
 	/**
-	 * @param dumpDir the local directory
-	 * @param baseURL the base url, for instance in an http server environment
+	 * @param dumpDir the local directory where any files are dumped
+	 * @param currentURL the current local input url for relative urls - in general this will be a file url (cwd)
+	 * @param baseURL the base output url of the extracted data, for instance in an http server environment
 	 */
-	public URLExtractor(final File dumpDir, final String baseURL)
+	public URLExtractor(final File dumpDir, final String currentURL, final String baseURL)
 	{
 		super(new BaseWalkerFactory());
 		dir = dumpDir;
 		this.baseURL = baseURL;
+		this.currentURL = currentURL;
 		saved = new HashSet<String>();
 		protocols = null;
 	}
@@ -174,8 +177,8 @@ public class URLExtractor extends BaseElementWalker
 
 		/**
 		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
-		 * @param e
-		 * @param trackElem
+		 * @param e the element to walk over
+		 * @param trackElem - unused should be null
 		 * @return the element to continue walking
 		 */
 		@Override
@@ -185,7 +188,7 @@ public class URLExtractor extends BaseElementWalker
 			String url = StringUtil.getNonEmpty(u.getURL());
 			if (url == null)
 				return e;
-			// we have a circular reference to something we put here ourselves - no need to do anythig
+			// we have a circular reference to something we put here ourselves - no need to do anything
 			if (baseURL != null && url.startsWith(baseURL))
 				return e;
 
@@ -196,10 +199,10 @@ public class URLExtractor extends BaseElementWalker
 					return e;
 			}
 			boolean bOverwrite = !saved.contains(url);
-			File newFile = UrlUtil.moveToDir(u, dir, bOverwrite);
+			File newFile = UrlUtil.moveToDir(u, dir, currentURL, bOverwrite);
 			if (baseURL != null && newFile != null)
 			{
-				String s = newFile.getName();
+				String s = UrlUtil.isRelativeURL(url) ? url : newFile.getName();
 				s = StringUtil.escape(s, UrlUtil.m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
 				u.setURL(UrlUtil.getURLWithDirectory(baseURL, s));
 			}

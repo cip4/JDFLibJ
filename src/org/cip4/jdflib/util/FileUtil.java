@@ -432,7 +432,7 @@ public class FileUtil
 	{
 		if (fis == null)
 			return null;
-
+		createNewFile(fil);
 		try
 		{
 			final OutputStream fos = new BufferedOutputStream(new FileOutputStream(fil));
@@ -659,7 +659,9 @@ public class FileUtil
 		{
 			return null;
 		}
-		return new File(dir.getPath() + File.separator + localFile.getPath());
+		String fullPath = dir.getPath() + File.separator + localFile.getPath();
+		fullPath = UrlUtil.cleanDots(fullPath);
+		return new File(fullPath);
 	}
 
 	/**

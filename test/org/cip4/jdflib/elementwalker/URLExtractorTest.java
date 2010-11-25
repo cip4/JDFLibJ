@@ -71,7 +71,10 @@ package org.cip4.jdflib.elementwalker;
 import java.io.File;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.UrlUtil.URLProtocol;
@@ -102,7 +105,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		JDFDoc d = mr.getBodyPartHelper(0).getJDFDoc();
 		assertNotNull(d);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtract");
-		URLExtractor ex = new URLExtractor(dumpDir, "http://foo");
+		URLExtractor ex = new URLExtractor(dumpDir, null, "http://foo");
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = d.write2String(0);
 		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
@@ -119,11 +122,32 @@ public class URLExtractorTest extends JDFTestCaseBase
 		JDFDoc d = testWalk();
 		assertNotNull(d);
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtractSelf");
-		URLExtractor ex = new URLExtractor(dumpDir, "http://foo");
+		URLExtractor ex = new URLExtractor(dumpDir, null, "http://foo");
 		ex.walkTree(d.getJDFRoot(), null);
 		String write2String = d.write2String(0);
 		assertTrue(write2String.indexOf("http://foo/url2.pdf") > 0);
 		assertFalse("we did not dump to #2 since our base is also foo", FileUtil.getFileInDirectory(dumpDir, new File("url2.pdf")).canRead());
+	}
+
+	/**
+	 * 
+	 */
+	public void testRelativePath()
+	{
+
+		JDFDoc d = new JDFDoc("JDF");
+		JDFRunList rl = (JDFRunList) d.getJDFRoot().addResource(ElementName.RUNLIST, EnumUsage.Input);
+		rl.addPDF("./content/boo.pdf", 0, -1);
+		d.write2File(sm_dirTestDataTemp + "URLIn/dummy.jdf", 2, false);
+
+		FileUtil.createNewFile(new File(sm_dirTestDataTemp + "URLIn/content/boo.pdf"));
+
+		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLOut");
+		URLExtractor ex = new URLExtractor(dumpDir, sm_dirTestDataTemp + "URLIn", "http://foo");
+		ex.walkTree(d.getJDFRoot(), null);
+		String write2String = d.write2String(0);
+		assertTrue(write2String.indexOf("http://foo/content/boo.pdf") > 0);
+		assertTrue(new File(sm_dirTestDataTemp + "URLOut/content/boo.pdf").exists());
 	}
 
 	/**
@@ -147,7 +171,7 @@ public class URLExtractorTest extends JDFTestCaseBase
 		File dumpDir = new File(sm_dirTestDataTemp + File.separator + "URLExtract");
 		FileUtil.deleteAll(dumpDir);
 
-		URLExtractor ex = new URLExtractor(dumpDir, "http://foo");
+		URLExtractor ex = new URLExtractor(dumpDir, null, "http://foo");
 
 		// only file protocols are modified
 		ex.addProtocol(URLProtocol.file);

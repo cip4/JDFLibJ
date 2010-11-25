@@ -1532,8 +1532,24 @@ public class UrlUtil
 	 * If dir exists and dir is not a directory, the call fails and null is returned
 	 * @param overWrite if true, zapp any old files with the same name
 	 * @return the file that corresponds to the moved url reference, null if an error occurred
+	 * @deprecated use moveToDir(parent, dir, null, overWrite);
 	 */
+	@Deprecated
 	public static File moveToDir(IURLSetter parent, final File dir, final boolean overWrite)
+	{
+		return moveToDir(parent, dir, null, overWrite);
+	}
+
+	/**
+	 * physically store the file at the location specified in dir and also modify this to reflect the new location
+	 * @param parent the parent element, trypically a filespec or preview
+	 * @param dir the directory to move to. dir is created if it does not exist. 
+	 * If dir exists and dir is not a directory, the call fails and null is returned
+	 * @param cwd the current working dir for local urls
+	 * @param overWrite if true, zapp any old files with the same name
+	 * @return the file that corresponds to the moved url reference, null if an error occurred
+	 */
+	public static File moveToDir(IURLSetter parent, final File dir, final String cwd, final boolean overWrite)
 	{
 		if (dir == null)
 		{
@@ -1551,6 +1567,13 @@ public class UrlUtil
 			dir.mkdirs();
 		}
 		String url = parent.getURL();
+		String fileName = null;
+		if (cwd != null && UrlUtil.isRelativeURL(url))
+		{
+			fileName = cleanDots(url);
+			url = UrlUtil.getURLWithDirectory(cwd, url);
+		}
+
 		// check for nop
 		final File oldFile = urlToFile(url);
 		if (oldFile != null)
@@ -1564,7 +1587,10 @@ public class UrlUtil
 
 		XMLDoc d = (parent instanceof KElement) ? ((KElement) parent).getOwnerDocument_KElement() : null;
 		Multipart mp = d == null ? null : d.getMultiPart();
-		final String fileName = getFileName(url, mp);
+		if (fileName == null)
+		{
+			fileName = getFileName(url, mp);
+		}
 		final File localFile = fileName == null ? null : new File(fileName);
 		File out = FileUtil.getFileInDirectory(dir, localFile);
 		if (out.exists())
@@ -1589,6 +1615,18 @@ public class UrlUtil
 			out = null;
 		}
 		return out;
+	}
+
+	/**
+	 * if true this url is relative
+	 * @param url the url string to test
+	 * @return true if relative
+	 */
+	public static boolean isRelativeURL(String url)
+	{
+		if (url == null)
+			return false;
+		return url.indexOf(":/") < 0 && !url.startsWith("/") && !url.startsWith("\\") && !isCID(url);
 	}
 
 	/**
