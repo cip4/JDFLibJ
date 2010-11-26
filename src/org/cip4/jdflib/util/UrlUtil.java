@@ -1099,11 +1099,20 @@ public class UrlUtil
 	 * @param urlString
 	 * @return the normalized string, null if not a valid url
 	 */
-	public static String normalize(final String urlString)
+	public static String normalize(String urlString)
 	{
-		final URL url = stringToURL(urlString);
-		return urlToString(url);
+		if (!UrlUtil.isRelativeURL(urlString))
+		{
+			final URL url = stringToURL(urlString);
+			if (url != null)
+				return urlToString(url);
+		}
+		if (UrlUtil.isEscaped(urlString))
+			urlString = StringUtil.unEscape(urlString, "%", 16, 2);
+		urlString = UrlUtil.escape(urlString, false);
+		urlString = UrlUtil.cleanDots(urlString);
 
+		return urlString;
 	}
 
 	/**
