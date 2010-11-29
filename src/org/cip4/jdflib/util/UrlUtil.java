@@ -782,7 +782,7 @@ public class UrlUtil
 		}
 
 		urlString = new String(StringUtil.setUTF8String(urlString)); // ensure that any non-utf8 gets encoded to utf-8
-		urlString = StringUtil.unEscape(urlString, "%", 16, 2);
+		urlString = UrlUtil.unEscape(urlString);
 		urlString = StringUtil.getUTF8String(urlString.getBytes());
 
 		return new File(urlString);
@@ -844,7 +844,7 @@ public class UrlUtil
 	 * standard url escaping
 	 * @param toEscape the string to escape
 	 * @param bEscape128 if true, also escape >128, else leave non-ascii7 as is 
-	 * @return
+	 * @return the escaped string
 	 */
 	public static String escape(String toEscape, boolean bEscape128)
 	{
@@ -860,6 +860,16 @@ public class UrlUtil
 			toEscape = StringUtil.escape(toEscape, m_URIEscape, "%", 16, 2, 0x21, 0x7fffffff);
 		}
 		return toEscape;
+	}
+
+	/**
+	 * standard url unescaping
+	 * @param toEscape the string to unescape
+	 * @return the escaped string
+	 */
+	public static String unEscape(String toEscape)
+	{
+		return StringUtil.unEscape(toEscape, "%", 16, 2);
 	}
 
 	/**
@@ -880,7 +890,7 @@ public class UrlUtil
 
 		if (isEscaped(urlString))
 		{
-			urlString = StringUtil.unEscape(urlString, "%", 16, 2);
+			urlString = unEscape(urlString);
 		}
 
 		try
@@ -1107,8 +1117,7 @@ public class UrlUtil
 			if (url != null)
 				return urlToString(url);
 		}
-		if (UrlUtil.isEscaped(urlString))
-			urlString = StringUtil.unEscape(urlString, "%", 16, 2);
+		urlString = UrlUtil.unEscape(urlString);
 		urlString = UrlUtil.escape(urlString, false);
 		urlString = UrlUtil.cleanDots(urlString);
 

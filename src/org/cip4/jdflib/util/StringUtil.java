@@ -1945,7 +1945,8 @@ public class StringUtil
 
 		for (int i = 0; i < byteUnEscape.length; i++)
 		{
-			if (byteUnEscape[i] != escapeChar)
+			// only check for escaping in case enough chars remain at the end
+			if (byteUnEscape[i] != escapeChar || i >= byteUnEscape.length - escapeLen)
 			{
 				byteEscape[n++] = byteUnEscape[i];
 			}
@@ -1956,8 +1957,7 @@ public class StringUtil
 					escapeSeq[j] = byteUnEscape[i + j + 1];
 				}
 
-				final String strIsEscaped = new String(escapeSeq); // get the escaped
-				// str 'd6'
+				final String strIsEscaped = new String(escapeSeq); // get the escaped str 'd6'
 				try
 				{
 					final Integer integer = Integer.valueOf(strIsEscaped, iRadix);// and get the int value
