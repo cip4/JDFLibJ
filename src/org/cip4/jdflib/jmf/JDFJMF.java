@@ -696,19 +696,17 @@ public class JDFJMF extends JDFAutoJMF
 	 * @param i the i'th message element to get, if i<0, get from back
 	 * @return the matching message, null if none are found
 	 */
-	public JDFMessage getMessageElement(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ, final int i)
+	public JDFMessage getMessageElement(final JDFMessage.EnumFamily family, final JDFMessage.EnumType typ, int i)
 	{
-		int iLocal = i;
-
-		if (iLocal < 0) // search from back
+		if (i < 0) // search from back
 		{
 			JDFMessage message = null;
 			final VElement v = getMessageVector(family, typ);
 			if (v != null)
 			{
 				final int siz = v.size();
-				iLocal = siz + iLocal;
-				message = (JDFMessage) (iLocal >= 0 ? v.get(iLocal) : null);
+				i = siz + i;
+				message = (JDFMessage) (i >= 0 ? v.get(i) : null);
 			}
 
 			return message;
@@ -726,7 +724,7 @@ public class JDFJMF extends JDFAutoJMF
 			{
 				if (typString == null || typString.equals(((JDFMessage) e).getType()))
 				{
-					if (n++ >= iLocal)
+					if (n++ >= i)
 					{
 						return (JDFMessage) e;
 					}

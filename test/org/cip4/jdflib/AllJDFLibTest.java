@@ -209,6 +209,7 @@ import org.cip4.jdflib.resource.JDFResourceTest;
 import org.cip4.jdflib.resource.JDFStrippingTest;
 import org.cip4.jdflib.resource.PhaseTimeTest;
 import org.cip4.jdflib.resource.ProcessRunTest;
+import org.cip4.jdflib.resource.devicecapability.JDFMatrixEvaluationTest;
 import org.cip4.jdflib.resource.intent.JDFColorIntentTest;
 import org.cip4.jdflib.resource.intent.JDFDeliveryIntentTest;
 import org.cip4.jdflib.resource.intent.JDFIntentResourceTest;
@@ -263,6 +264,7 @@ import org.cip4.jdflib.util.SkipInputStreamTest;
 import org.cip4.jdflib.util.StatusCounterTest;
 import org.cip4.jdflib.util.StringUtilTest;
 import org.cip4.jdflib.util.UnitParserTest;
+import org.cip4.jdflib.util.UrlPartTest;
 import org.cip4.jdflib.util.UrlUtilTest;
 import org.cip4.jdflib.util.VectorMapTest;
 import org.cip4.jdflib.util.file.FileSorterTest;
@@ -457,6 +459,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFResourceTest.class);
 		suite.addTestSuite(JDFStrippingTest.class);
 
+		// resource.devicecapability
+		suite.addTestSuite(JDFMatrixEvaluationTest.class);
+
 		// resource.intent
 		suite.addTestSuite(JDFColorIntentTest.class);
 		suite.addTestSuite(JDFDeliveryIntentTest.class);
@@ -520,6 +525,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(StatusCounterTest.class);
 		suite.addTestSuite(StringUtilTest.class);
 		suite.addTestSuite(UnitParserTest.class);
+		suite.addTestSuite(UrlPartTest.class);
 		suite.addTestSuite(UrlUtilTest.class);
 		suite.addTestSuite(VectorMapTest.class);
 

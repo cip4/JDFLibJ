@@ -72,6 +72,7 @@ package org.cip4.jdflib.core;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -79,6 +80,7 @@ import org.cip4.jdflib.auto.JDFAutoQueue.EnumQueueStatus;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
+import org.cip4.jdflib.core.JDFElement.EnumOrientation;
 import org.cip4.jdflib.core.JDFElement.EnumSettingsPolicy;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -630,6 +632,15 @@ public class JDFElementTest extends JDFTestCaseBase
 	{
 		JDFElement e = new JDFDoc("JMF").getJMFRoot();
 		assertTrue(JDFElement.getValueForNewAttribute(e, "ID").startsWith("I"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testOrientationMap()
+	{
+		Map<String, EnumOrientation> map = EnumOrientation.getEnumMap();
+		assertEquals(map.get("Flip0"), EnumOrientation.Flip0);
 	}
 
 	/**

@@ -573,8 +573,7 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 	public boolean isCompleted()
 	{
 		String status = getAttribute(AttributeName.STATUS, null, null);
-		return // (status==null) ||
-		"Completed".equals(status) || "Removed".equals(status) || "Aborted".equals(status);
+		return "Completed".equals(status) || "Removed".equals(status) || "Aborted".equals(status) || "Suspended".equals(status);
 	}
 
 	/**

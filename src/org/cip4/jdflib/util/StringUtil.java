@@ -1937,6 +1937,8 @@ public class StringUtil
 	 */
 	public static String unEscape(final String strToUnescape, final String strEscapeChar, final int iRadix, final int escapeLen)
 	{
+		if (strToUnescape == null)
+			return null;
 		final byte[] byteUnEscape = strToUnescape.getBytes();
 		final byte[] byteEscape = new byte[byteUnEscape.length];
 		final byte escapeChar = strEscapeChar.getBytes()[0]; // dont even dream of using � as an escape  char

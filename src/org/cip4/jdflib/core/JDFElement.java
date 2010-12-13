@@ -1138,7 +1138,7 @@ public class JDFElement extends KElement
 		/**
 		 * @return a map of all orientation enums
 		 */
-		public static Map getEnumMap()
+		public static Map<String, EnumOrientation> getEnumMap()
 		{
 			return getEnumMap(EnumOrientation.class);
 		}
@@ -1146,7 +1146,7 @@ public class JDFElement extends KElement
 		/**
 		 * @return a list of all orientation enums
 		 */
-		public static List getEnumList()
+		public static List<EnumOrientation> getEnumList()
 		{
 			return getEnumList(EnumOrientation.class);
 		}
@@ -1154,7 +1154,7 @@ public class JDFElement extends KElement
 		/**
 		 * @return an iterator over the enum objects
 		 */
-		public static Iterator iterator()
+		public static Iterator<EnumOrientation> iterator()
 		{
 			return iterator(EnumOrientation.class);
 		}
@@ -3755,7 +3755,7 @@ public class JDFElement extends KElement
 	/**
 	 * get invalid attributes
 	 * 
-	 * @param level {@linkplain KElement.EnumValidationLevel validation level}
+	 * @param level {@linkplain JDFElement.EnumValidationLevel validation level}
 	 * @param bIgnorePrivate if true, do not worry about attributes in other namespaces
 	 * @param nMax maximum size of the returned vector
 	 * @return VString - a vector of invalid attribute names

@@ -507,7 +507,7 @@ public class MimeUtil extends UrlUtil
 	{
 		final MimeWriter mimeWriter = new MimeWriter(mp);
 		mimeWriter.setMIMEDetails(mimeDetails);
-		UrlPart part = mimeWriter.writeToURL(strUrl);
+		org.cip4.jdflib.util.UrlPart part = mimeWriter.writeToURL(strUrl);
 		return part == null ? null : part.getConnection();
 	}
 

@@ -87,6 +87,7 @@ import org.cip4.jdflib.resource.process.JDFDieLayout;
 import org.cip4.jdflib.resource.process.JDFDieLayoutProductionParams;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
 import org.cip4.jdflib.resource.process.JDFMedia;
+import org.cip4.jdflib.resource.process.JDFObjectModel;
 import org.cip4.jdflib.resource.process.JDFRepeatDesc;
 import org.cip4.jdflib.resource.process.JDFShapeDef;
 import org.cip4.jdflib.resource.process.JDFShapeDefProductionParams;
@@ -143,7 +144,9 @@ public class PackagingGoldenTicket extends MISGoldenTicket
 	public void createDieLayoutProduction()
 	{
 		theNode.addTypes(EnumType.DieLayoutProduction);
-		makeShapeDef(EnumUsage.Input);
+		JDFShapeDef shapeDef = (JDFShapeDef) theNode.getResource(ElementName.SHAPEDEF, null, 0);
+		if (shapeDef == null)
+			makeShapeDef(EnumUsage.Input);
 
 		final JDFDieLayoutProductionParams dlp = (JDFDieLayoutProductionParams) theNode.addResource(ElementName.DIELAYOUTPRODUCTIONPARAMS, EnumUsage.Input);
 		dlp.setPosition(EnumPosition.TopCenter);
@@ -178,6 +181,8 @@ public class PackagingGoldenTicket extends MISGoldenTicket
 		final JDFFileSpec fs = st.appendFileSpec();
 		fs.setAbsoluteFileURL(new File("\\\\Server\\share\\dir\\CADFile für mich.cad"), true);
 
+		JDFObjectModel objModel = sdpp.appendObjectModel();
+		objModel.appendFileSpec().setURL("http://vrml.file");
 		final JDFShapeDef sdOut = makeShapeDef(EnumUsage.Output);
 		final JDFMedia m = sdOut.appendMedia();
 		m.setDescriptiveName("Details of the box media");

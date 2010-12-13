@@ -104,12 +104,10 @@ import org.cip4.jdflib.core.JDFCoreConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.mime.BodyPartHelper;
 import org.cip4.jdflib.util.mime.MimeHelper;
 import org.cip4.jdflib.util.mime.MimeReader;
-import org.cip4.jdflib.util.net.IPollDetails;
 import org.cip4.jdflib.util.net.ProxyUtil;
 
 /**
@@ -170,144 +168,6 @@ public class UrlUtil
 					urlCon.setChunkedStreamingMode(chunkSize);
 				}
 			}
-		}
-	}
-
-	/**
-	 * simple struct to contain the stream and type of a bodypart
-	 * 
-	 * @author prosirai
-	 * 
-	 */
-	public static class UrlPart implements IPollDetails
-	{
-		/**
-		 * 
-		 * @return
-		 */
-		public int getResponseCode()
-		{
-			return rc;
-		}
-
-		/**
-		 * @param connection
-		 * @throws IOException
-		 */
-		public UrlPart(final HttpURLConnection connection) throws IOException
-		{
-			rc = connection.getResponseCode();
-			this.connection = connection;
-			contentType = connection.getContentType();
-			contentLength = connection.getContentLength();
-			try
-			{
-				inStream = connection.getInputStream();
-			}
-			catch (IOException x)
-			{
-				inStream = null;
-			}
-			if (inStream == null)
-				inStream = (connection).getErrorStream();
-		}
-
-		/**
-		 * @param part
-		 * @throws MessagingException
-		 * @throws IOException
-		 */
-		public UrlPart(final BodyPart part) throws MessagingException, IOException
-		{
-			inStream = part.getInputStream();
-			contentLength = part.getSize();
-			contentType = part.getContentType();
-			connection = null;
-			rc = 200;
-		}
-
-		/**
-		 * 
-		 * @param f
-		 * @throws IOException
-		 */
-		public UrlPart(final File f) throws IOException
-		{
-			inStream = FileUtil.getBufferedInputStream(f);
-			contentLength = f == null ? 0 : f.length();
-			contentType = null;
-			connection = null;
-			rc = f == null ? 500 : 200;
-		}
-
-		private final int rc;
-		/**
-		 * the input stream of this UrlPart
-		 */
-		public InputStream inStream;
-		/**
-		 * the content type of this UrlPart
-		 */
-		public String contentType;
-
-		/**
-		 * @return the contentType
-		 */
-		public String getContentType()
-		{
-			return contentType;
-		}
-
-		/**
-		 * @param inStream the inStream to set
-		 */
-		public void setInStream(InputStream inStream)
-		{
-			this.inStream = inStream;
-		}
-
-		/**
-		 * @see org.cip4.jdflib.util.net.IPollDetails#getResponseStream()
-		 * @return
-		*/
-		public InputStream getResponseStream()
-		{
-			return inStream;
-		}
-
-		/**
-		 * the content length of this UrlPart
-		 */
-		public long contentLength;
-		private final HttpURLConnection connection;
-
-		/**
-		 * returns an xmldoc corresponding to this part
-		 * @return the doc, null if not xml
-		 */
-		public XMLDoc getXMLDoc()
-		{
-			final XMLParser p = new XMLParser();
-			final XMLDoc d = p.parseStream(inStream);
-			return d;
-		}
-
-		/**
-		 * @see java.lang.Object#toString()
-		 * @return
-		*/
-		@Override
-		public String toString()
-		{
-			return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc;
-		}
-
-		/**
-		 * @return the connection
-		 */
-		public HttpURLConnection getConnection()
-		{
-			return connection;
 		}
 	}
 
@@ -545,7 +405,7 @@ public class UrlUtil
 	 * 
 	 * @return the array of body parts input stream
 	 */
-	public static UrlPart[] getURLParts(final HttpURLConnection connection)
+	public static org.cip4.jdflib.util.UrlPart[] getURLParts(final HttpURLConnection connection)
 	{
 		if (connection == null)
 		{
@@ -554,16 +414,16 @@ public class UrlUtil
 		final String urlContentType = connection.getContentType();
 		if (!MimeUtil.MULTIPART_RELATED.equalsIgnoreCase(urlContentType))
 		{
-			UrlPart p;
+			org.cip4.jdflib.util.UrlPart p;
 			try
 			{
-				p = new UrlPart(connection);
+				p = new org.cip4.jdflib.util.UrlPart(connection);
 			}
 			catch (final IOException x)
 			{
 				return null;
 			}
-			return new UrlPart[] { p };
+			return new org.cip4.jdflib.util.UrlPart[] { p };
 		}
 
 		Multipart mp;
@@ -1019,7 +879,7 @@ public class UrlUtil
 	 * test whether a given url is NOT a cid this may be a local identifier
 	 * 
 	 * @param url the url to test
-	 * @return
+	 * @return true if we are either a cid or a local url
 	 */
 	public static boolean isNotCID(final String url)
 	{
@@ -1215,8 +1075,8 @@ public class UrlUtil
 
 	/**
 	 * remove athe protocol part of a url, if it is specified
-	 * @param url
-	 * @return
+	 * @param url the url string to work on
+	 * @return the input string without the protocol and ":"
 	 */
 	public static String removeProtocol(String url)
 	{
@@ -1225,6 +1085,8 @@ public class UrlUtil
 		int pos = url.indexOf("://");
 		if (pos > -1)
 			url = url.substring(pos + 3);
+		else if (isCID(url))
+			url = StringUtil.rightStr(url, -4);
 		return StringUtil.getNonEmpty(url);
 	}
 

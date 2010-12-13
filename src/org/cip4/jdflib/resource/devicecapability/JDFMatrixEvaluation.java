@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2004 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -108,15 +108,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[4];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.ROTATEMOD, 0x33333333,
-				AttributeInfo.EnumAttributeType.double_, null, null);
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHIFT, 0x33333333,
-				AttributeInfo.EnumAttributeType.NumberList, null, null);
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333,
-				AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMS,
-				0x33333333, AttributeInfo.EnumAttributeType.enumerations,
-				EnumOrientation.getEnum(0), null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.ROTATEMOD, 0x33333333, AttributeInfo.EnumAttributeType.double_, null, null);
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.SHIFT, 0x33333333, AttributeInfo.EnumAttributeType.NumberList, null, null);
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.TOLERANCE, 0x33333333, AttributeInfo.EnumAttributeType.XYPair, null, "0 0");
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.TRANSFORMS, 0x33333333, AttributeInfo.EnumAttributeType.enumerations, EnumOrientation.getEnum(0), null);
 	}
 
 	@Override
@@ -128,8 +123,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
 	static
 	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST,
-				0x33333333);
+		elemInfoTable[0] = new ElemInfoTable(ElementName.BASICPREFLIGHTTEST, 0x33333333);
 	}
 
 	@Override
@@ -144,8 +138,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	 * @param myOwnerDocument
 	 * @param qualifiedName
 	 */
-	public JDFMatrixEvaluation(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName)
+	public JDFMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String qualifiedName)
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -157,8 +150,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	 * @param myNamespaceURI
 	 * @param qualifiedName
 	 */
-	public JDFMatrixEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName)
+	public JDFMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -171,8 +163,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	 * @param qualifiedName
 	 * @param myLocalName
 	 */
-	public JDFMatrixEvaluation(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
+	public JDFMatrixEvaluation(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName)
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -215,22 +206,28 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 
 		try
 		{
-			return new JDFRectangle(getAttribute(AttributeName.SHIFT, null,
-					JDFConstants.EMPTYSTRING));
-		} catch (DataFormatException e)
+			return new JDFRectangle(getAttribute(AttributeName.SHIFT, null, JDFConstants.EMPTYSTRING));
+		}
+		catch (DataFormatException e)
 		{
-			throw new JDFException(
-					"JDFMatrixEvaluation.getShift: AttributeValue not capable to create JDFRectangle");
+			throw new JDFException("JDFMatrixEvaluation.getShift: AttributeValue not capable to create JDFRectangle");
 		}
 	}
 
-	public Vector getTransforms()
+	/**
+	 * 
+	 * @return
+	 */
+	public Vector<EnumOrientation> getTransforms()
 	{
-		return getEnumerationsAttribute(AttributeName.TRANSFORMS, null,
-				JDFElement.EnumOrientation.getEnum(0), false);
+		return (Vector<EnumOrientation>) getEnumerationsAttribute(AttributeName.TRANSFORMS, null, JDFElement.EnumOrientation.getEnum(0), false);
 	}
 
-	public void setTransforms(Vector value)
+	/**
+	 * 
+	 * @param value
+	 */
+	public void setTransforms(Vector<EnumOrientation> value)
 	{
 		setEnumerationsAttribute(AttributeName.TRANSFORMS, value, null);
 	}
@@ -252,8 +249,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 
 	public JDFValue getValue(int iSkip)
 	{
-		JDFValue e = (JDFValue) getElement(ElementName.VALUE,
-				JDFConstants.EMPTYSTRING, iSkip);
+		JDFValue e = (JDFValue) getElement(ElementName.VALUE, JDFConstants.EMPTYSTRING, iSkip);
 		return e;
 	}
 
@@ -298,10 +294,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 		try
 		{
 			return new JDFMatrix(e.getValue());
-		} catch (DataFormatException dfe)
+		}
+		catch (DataFormatException dfe)
 		{
-			throw new JDFException(
-					"JDFMatrixState.getValueValue: AttributeValue not capable to create JDFMatrix");
+			throw new JDFException("JDFMatrixState.getValueValue: AttributeValue not capable to create JDFMatrix");
 		}
 	}
 
@@ -338,7 +334,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 				sb.append(JDFConstants.BLANK);
 				i++;
 				sb.append(vs.elementAt(i));
-			} while ((i + 1) % 6 != 0);
+			}
+			while ((i + 1) % 6 != 0);
 			matrixList.add(sb.toString());
 			if ((i + 1) < siz)
 			{
@@ -358,12 +355,12 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 			try
 			{
 				matrix = new JDFMatrix(str);
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				return false;
 			}
-			if ((fitsRotateMod(matrix) && fitsShift(matrix)
-					&& fitsTransforms(matrix) && fitsValueElem(matrix)) == false)
+			if ((fitsRotateMod(matrix) && fitsShift(matrix) && fitsTransforms(matrix) && fitsValueElem(matrix)) == false)
 				return false;
 		}
 		return true;
@@ -379,7 +376,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	 * @return boolean - true, if <code>matrixList</code> matches specified
 	 *         value of ListType
 	 */
-	private final boolean fitsListType(VString matrixList)
+	public final boolean fitsListType(VString matrixList)
 	{
 		EnumListType listType = getListType();
 
@@ -389,23 +386,26 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 			try
 			{
 				new JDFMatrix(matrixList.elementAt(i));
-			} catch (JDFException e)
+			}
+			catch (JDFException e)
 			{
 				return false;
-			} catch (DataFormatException dfe)
+			}
+			catch (DataFormatException dfe)
 			{
 				return false;
 			}
 		}
 
-		if (listType.equals(EnumListType.SingleValue)
-				|| listType.equals(EnumListType.getEnum(0)))
+		if (listType.equals(EnumListType.SingleValue) || listType.equals(EnumListType.getEnum(0)))
 		{// default ListType = SingleValue
 			return (size == 1);
-		} else if (listType.equals(EnumListType.List))
+		}
+		else if (listType.equals(EnumListType.List))
 		{
 			return true;
-		} else if (listType.equals(EnumListType.UniqueList))
+		}
+		else if (listType.equals(EnumListType.UniqueList))
 		{
 			for (int i = 0; i < size; i++)
 			{
@@ -421,10 +421,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 				}
 			}
 			return true;
-		} else
+		}
+		else
 		{
-			throw new JDFException(
-					"JDFMatrixEvaluation.fitsListType illegal ListType attribute");
+			throw new JDFException("JDFMatrixEvaluation.fitsListType illegal ListType attribute");
 		}
 	}
 
@@ -437,11 +437,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	 * 
 	 * @return boolean - true, if 'matrix' matches subelement Value
 	 */
-	private final boolean fitsValueElem(JDFMatrix matrix)
+	public final boolean fitsValueElem(JDFMatrix matrix)
 	{
 
-		VElement v = getChildElementVector(ElementName.VALUE, null, null, true,
-				0, false);
+		VElement v = getChildElementVector(ElementName.VALUE, null, null, true, 0, false);
 		int siz = v.size();
 		if (siz == 0)
 		{
@@ -467,7 +466,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	 * @return boolean - true, if <code>matrix</code> matches the RotateMod or
 	 *         if RotateMod is not specified
 	 */
-	private final boolean fitsRotateMod(JDFMatrix matrix)
+	public final boolean fitsRotateMod(JDFMatrix matrix)
 	{
 		if (!hasAttribute(AttributeName.ROTATEMOD))
 			return true;
@@ -489,13 +488,13 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 		{
 			nT = getTolerance().getX();
 			pT = getTolerance().getY();
-		} else
+		}
+		else
 		{
 			nT = pT = EPSILON;
 		}
 
-		double param = a
-				/ java.lang.Math.sqrt(java.lang.Math.abs(a * d - b * c));
+		double param = a / java.lang.Math.sqrt(java.lang.Math.abs(a * d - b * c));
 
 		if (((param - EPSILON) > 1) || ((param + EPSILON) < -1))
 		{
@@ -513,11 +512,9 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 		double fi = java.lang.Math.acos(param) * 180 / java.lang.Math.PI; //0~180
 
 		double result = (fi + nT) - (rm * (int) ((fi + nT) / rm));
-		double result180 = (fi + 180 + nT)
-				- (rm * (int) ((fi + 180 + nT) / rm));
+		double result180 = (fi + 180 + nT) - (rm * (int) ((fi + 180 + nT) / rm));
 
-		return (java.lang.Math.abs(result) <= (nT + pT) || java.lang.Math
-				.abs(result180) <= (nT + pT)); // (fi+nT)%rm <= (nT+pT)
+		return (java.lang.Math.abs(result) <= (nT + pT) || java.lang.Math.abs(result180) <= (nT + pT)); // (fi+nT)%rm <= (nT+pT)
 
 	}
 
@@ -530,7 +527,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	 * @return boolean - true, if 'matrix' matches the Shift or if Shift is not
 	 *         specified
 	 */
-	private final boolean fitsShift(JDFMatrix matrix)
+	public final boolean fitsShift(JDFMatrix matrix)
 	{
 		if (!hasAttribute(AttributeName.SHIFT))
 			return true;
@@ -553,8 +550,7 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 		double nT = getTolerance().getX(); // negative tolerance
 		double pT = getTolerance().getY(); // positive tolerance
 
-		return ((Tx - nT >= minTx) && (Tx + pT <= maxTx) && (Ty - nT >= minTy) && (Ty
-				+ pT <= maxTy));
+		return ((Tx - nT >= minTx) && (Tx + pT <= maxTx) && (Ty - nT >= minTy) && (Ty + pT <= maxTy));
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -568,9 +564,10 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 	 * @return boolean - true, if <code>matrix</code> matches the Transforms or
 	 *         if Transforms is not specified
 	 */
-	private final boolean fitsTransforms(JDFMatrix matrix)
+	public final boolean fitsTransforms(JDFMatrix matrix)
 	{
-		if (!hasAttribute(AttributeName.TRANSFORMS))
+		Vector<EnumOrientation> vTransf = getTransforms();
+		if (vTransf == null || vTransf.size() == 0)
 			return true;
 
 		double nT; // negative tolerance
@@ -580,7 +577,8 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 		{
 			nT = getTolerance().getX();
 			pT = getTolerance().getY();
-		} else
+		}
+		else
 		{
 			nT = pT = EPSILON;
 		}
@@ -595,87 +593,55 @@ public class JDFMatrixEvaluation extends JDFEvaluation
 		if (det == 0)
 			return false;
 
-		a = a / java.lang.Math.sqrt(java.lang.Math.abs(det));
-		b = b / java.lang.Math.sqrt(java.lang.Math.abs(det));
-		c = c / java.lang.Math.sqrt(java.lang.Math.abs(det));
-		d = d / java.lang.Math.sqrt(java.lang.Math.abs(det));
+		det = java.lang.Math.sqrt(java.lang.Math.abs(det));
+		a = a / det;
+		b = b / det;
+		c = c / det;
+		d = d / det;
 
-		Vector<Integer> vTransf = getTransforms();
-		int siz = vTransf.size();
-		for (int i = 0; i < siz; i++)
+		for (EnumOrientation orientation : vTransf)
 		{
-			EnumOrientation orientation = EnumOrientation.getEnum((vTransf
-					.elementAt(i)).intValue());
-
 			if (orientation.equals(EnumOrientation.Flip0)) // a=1 b=0 c=0 d=-1
 			{
-				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT)
-						&& (c < pT) && (c > -nT) && (d + 1 < pT)
-						&& (d + 1 > -nT))
+				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d + 1 < pT) && (d + 1 > -nT))
 					return true;
-				continue;
-			} else if (orientation.equals(EnumOrientation.Flip90)) // a=0 b=-1
-																	// c=-1 d=0
+			}
+			else if (orientation.equals(EnumOrientation.Flip90)) // a=0 b=-1 c=-1 d=0
 			{
-				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT)
-						&& (c + 1 < pT) && (c + 1 > -nT) && (d < pT)
-						&& (d > -nT))
+				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT) && (c + 1 < pT) && (c + 1 > -nT) && (d < pT) && (d > -nT))
 					return true;
-				continue;
-			} else if (orientation.equals(EnumOrientation.Flip180)) // a=-1 b=0
-																	// c=0 d=1
+			}
+			else if (orientation.equals(EnumOrientation.Flip180)) // a=-1 b=0 c=0 d=1
 			{
-				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT)
-						&& (c < pT) && (c > -nT) && (d - 1 < pT)
-						&& (d - 1 > -nT))
+				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d - 1 < pT) && (d - 1 > -nT))
 					return true;
-				continue;
-			} else if (orientation.equals(EnumOrientation.Flip270)) // a=0 b=1
-																	// c=1 d=0
+			}
+			else if (orientation.equals(EnumOrientation.Flip270)) // a=0 b=1 c=1 d=0
 			{
-				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT)
-						&& (c - 1 < pT) && (c - 1 > -nT) && (d < pT)
-						&& (d > -nT))
+				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT) && (c - 1 < pT) && (c - 1 > -nT) && (d < pT) && (d > -nT))
 					return true;
-				continue;
-			} else if (orientation.equals(EnumOrientation.Rotate0)) // a=1 b=0
-																	// c=0 d=1
+			}
+			else if (orientation.equals(EnumOrientation.Rotate0)) // a=1 b=0 c=0 d=1
 			{
-				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT)
-						&& (c < pT) && (c > -nT) && (d - 1 < pT)
-						&& (d - 1 > -nT))
+				if ((a - 1 < pT) && (a - 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d - 1 < pT) && (d - 1 > -nT))
 					return true;
-				continue;
-			} else if (orientation.equals(EnumOrientation.Rotate90)) // a=0 b=1
-																		// c=-1
-																		// d=0
+			}
+			else if (orientation.equals(EnumOrientation.Rotate90)) // a=0 b=1 c=-1  d=0
 			{
-				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT)
-						&& (c + 1 < pT) && (c + 1 > -nT) && (d < pT)
-						&& (d > -nT))
+				if ((a < pT) && (a > -nT) && (b - 1 < pT) && (b - 1 > -nT) && (c + 1 < pT) && (c + 1 > -nT) && (d < pT) && (d > -nT))
 					return true;
-				continue;
-			} else if (orientation.equals(EnumOrientation.Rotate180)) // a=-1
-																		// b=0
-																		// c=0
-																		// d=-1
+			}
+			else if (orientation.equals(EnumOrientation.Rotate180)) // a=-1  b=0 c=0 d=-1
 			{
-				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT)
-						&& (c < pT) && (c > -nT) && (d + 1 < pT)
-						&& (d + 1 > -nT))
+				if ((a + 1 < pT) && (a + 1 > -nT) && (b < pT) && (b > -nT) && (c < pT) && (c > -nT) && (d + 1 < pT) && (d + 1 > -nT))
 					return true;
-				continue;
-			} else if (orientation.equals(EnumOrientation.Rotate270)) // a=0
-																		// b=-1
-																		// c=1
-																		// d=0
+			}
+			else if (orientation.equals(EnumOrientation.Rotate270)) // a=0 b=-1 c=1 d=0
 			{
-				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT)
-						&& (c - 1 < pT) && (c - 1 > -nT) && (d < pT)
-						&& (d > -nT))
+				if ((a < pT) && (a > -nT) && (b + 1 < pT) && (b + 1 > -nT) && (c - 1 < pT) && (c - 1 > -nT) && (d < pT) && (d > -nT))
 					return true;
-				continue;
-			} else
+			}
+			else
 			{
 				return true;
 			}

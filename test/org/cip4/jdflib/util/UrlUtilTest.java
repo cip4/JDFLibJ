@@ -211,6 +211,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertNull(UrlUtil.removeProtocol("http://"));
 		assertEquals("a", UrlUtil.removeProtocol("http://a"));
 		assertEquals("abb:8080", UrlUtil.removeProtocol("http://abb:8080"));
+		assertEquals("foo", UrlUtil.removeProtocol("cid:foo"));
+		assertEquals("foo", UrlUtil.removeProtocol("CID:foo"));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -300,7 +302,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * @throws Exception
+	 * @throws Exception if snafu
 	 */
 	public void testStringToURL() throws Exception
 	{

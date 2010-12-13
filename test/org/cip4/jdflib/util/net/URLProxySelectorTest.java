@@ -11,8 +11,8 @@ import java.util.List;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.UrlUtil.UrlPart;
 
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *

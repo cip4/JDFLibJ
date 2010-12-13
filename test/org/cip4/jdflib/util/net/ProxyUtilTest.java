@@ -81,8 +81,8 @@ import java.io.InputStream;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.UrlUtil.UrlPart;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -92,7 +92,7 @@ import org.cip4.jdflib.util.UrlUtil.UrlPart;
 public class ProxyUtilTest extends JDFTestCaseBase
 {
 	/**
-	 * @throws Exception
+	 * @throws Exception is snafu
 	 */
 	public void testSetProxyString() throws Exception
 	{
@@ -112,9 +112,27 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * @throws Exception
+	 * @throws Exception if snafu
 	 */
 	public void testSetProxy() throws Exception
+	{
+		try
+		{
+			ProxyUtil.setProxy(null, 0, null, null);
+			ProxyUtil.setProxy("dummy", 0, null, null);
+			ProxyUtil.setProxy("dummy", 880, "a", null);
+			ProxyUtil.setProxy("dummy", 80, "a", "b");
+		}
+		catch (Exception x)
+		{
+			fail(x.toString());
+		}
+	}
+
+	/**
+	 * @throws Exception if snafu
+	 */
+	public void testSetProxyWrite() throws Exception
 	{
 		String proxy = "proxy.ceu.corp.heidelberg.com";
 		int proxyPort = 8080;

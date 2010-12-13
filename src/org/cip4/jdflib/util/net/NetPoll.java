@@ -71,9 +71,9 @@
 package org.cip4.jdflib.util.net;
 
 import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.ThreadUtil.MyMutex;
-import org.cip4.jdflib.util.UrlUtil.UrlPart;
 import org.cip4.jdflib.util.net.IPollHandler.PollResult;
 
 /**

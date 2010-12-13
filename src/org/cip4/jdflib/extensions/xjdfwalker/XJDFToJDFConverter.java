@@ -80,6 +80,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
+import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFRefElement;
@@ -736,6 +737,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			currentJDFNode = (JDFNode) trackElem;
 			currentJDFNode.setAttributes(e);
 			currentJDFNode.setVersion(getVersion());
+			currentJDFNode.setStatus(EnumNodeStatus.Part);
 			removeInheritedJobID();
 			setTypes();
 			return currentJDFNode;
