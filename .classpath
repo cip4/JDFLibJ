@@ -5,7 +5,7 @@
 	<classpathentry excluding="**/.svn/**" including="**/*.java" kind="src" path="test"/>
 	<classpathentry kind="lib" path="lib/activation-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-2.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.5.jar"/>
 	<classpathentry kind="lib" path="lib/junit.jar" sourcepath="O:/xerces/src"/>
 	<classpathentry kind="lib" path="lib/mailapi.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
