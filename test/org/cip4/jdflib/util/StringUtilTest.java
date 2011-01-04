@@ -105,6 +105,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.simpleRegExptoRegExp("a(.+)b"), "a(.+)b");
 		assertEquals(StringUtil.simpleRegExptoRegExp("a\\.b"), "a\\.b");
 		assertEquals(StringUtil.simpleRegExptoRegExp("*.b"), "(.*)\\.b");
+		assertEquals("don't reconvert real regexp", StringUtil.simpleRegExptoRegExp("(.*)\\.b"), "(.*)\\.b");
 		assertTrue(StringUtil.matches("foo.txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
 		assertTrue(StringUtil.matches(".tx", StringUtil.simpleRegExptoRegExp("*.tx*")));
 		assertFalse(StringUtil.matches("foo_txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
@@ -376,6 +377,18 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.stripNot("a1b321", "12"), "121");
 		assertNull(StringUtil.stripNot("a1b321", null));
 		assertNull(StringUtil.stripNot("a1b321", "7"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testStripQuote()
+	{
+		assertEquals(StringUtil.stripQuote(",123,", ",", true), "123");
+		assertEquals(StringUtil.stripQuote(",123,", ",", false), "123");
+		assertEquals(StringUtil.stripQuote(",123, ", ",", false), ",123, ");
+		assertEquals(StringUtil.stripQuote(" 	,123, ", ",", true), "123");
+		assertEquals(StringUtil.stripQuote(",", ",", true), ",");
 	}
 
 	/**

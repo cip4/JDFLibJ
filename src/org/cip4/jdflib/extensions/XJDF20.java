@@ -2720,7 +2720,7 @@ public class XJDF20 extends BaseElementWalker
 	}
 
 	/**
-	 * simply stop walking on these
+	 *  
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen walker for the various resource sets
 	 */
 	public class WalkDevCap extends WalkDevcapElement

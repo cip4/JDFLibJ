@@ -121,6 +121,7 @@
 		<copy tofile="../elk/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../alces/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../DropFolder/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+		<copy tofile="../PrintTalkJ/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 	</target>
 	
 	<target name="dist_all" depends="-init" description="builds lots of jars and wars and good things for distribution">

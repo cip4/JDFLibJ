@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.util;
 
+import org.cip4.jdflib.core.JDFConstants;
+
 /**
  * class to format integers, longs, doubles etc.
  * 
@@ -75,5 +77,128 @@ package org.cip4.jdflib.util;
  */
 public class NumberFormatter
 {
-	// TODO add details (precision etc.)
+	/**
+	 * set up the defaults
+	 */
+	public NumberFormatter()
+	{
+		super();
+		zapp0 = true;
+	}
+
+	/**
+	 * if set, remove trailing 0
+	 *  
+	 * @param zapp0
+	 */
+	public void setZapp0(boolean zapp0)
+	{
+		this.zapp0 = zapp0;
+	}
+
+	private boolean zapp0;
+
+	/**
+	 * returns a formatted double. Truncates to 8exactly precision digits after the "." <br>
+	 * If precision=0, the . is stripped
+	 * 
+	 * @param d the double to format
+	 * @param precision maximum precision, depending on value of zapp0, trailing 0s are discarded or kept
+	 * @return the formatted string that represents d TBD handle exp format
+	 */
+	public String formatDouble(final double d, int precision)
+	{
+		final Double[] ad = { new Double(d) };
+		if (precision > 0)
+		{
+			String s = StringUtil.sprintf("%." + precision + "f", ad);
+			s = zappTrailing(s);
+			return s;
+		}
+		else
+		{
+			return StringUtil.sprintf("%" + precision + "i", ad);
+		}
+
+	}
+
+	private String zappTrailing(String s)
+	{
+		int posDot = s.indexOf('.');
+		if (zapp0 && posDot >= 0)
+		{
+			int n;
+
+			int length = s.length();
+			for (n = length; n > posDot; n--)
+			{
+				if (s.charAt(n - 1) != '0')
+				{
+					break;
+				}
+			}
+			s = s.substring(0, n);
+		}
+		return s;
+	}
+
+	/**
+	 * returns a formatted double. Truncates to 8 digits after the "." <br>
+	 * If the double is representable as an integer, any ".0" is stripped.
+	 * 
+	 * @param d the double to format
+	 * @return the formatted string that represents d TBD handle exp format
+	 */
+	public String formatDouble(final double d)
+	{
+		String s;
+		if (d == Double.MAX_VALUE)
+		{
+			s = JDFConstants.POSINF;
+		}
+		else if (d == -Double.MAX_VALUE)
+		{
+			s = JDFConstants.NEGINF;
+		}
+		else
+		{
+			s = String.valueOf(d);
+			if (s.endsWith(".0"))
+			{
+				s = s.substring(0, s.length() - 2);
+			}
+			if (s.indexOf("E") >= 0)
+			{
+				s = formatDouble(d, 10);
+			}
+
+			if (s.length() > 10)
+			{
+				final int posDot = s.indexOf(JDFConstants.DOT);
+				if (posDot >= 0)
+				{
+					int l = s.length();
+					if (l - posDot > 8)
+					{
+						l = posDot + 9;
+						s = s.substring(0, l);
+						if (s.endsWith("999"))
+						{
+							return formatDouble(d + 0.000000004);
+						}
+						zappTrailing(s);
+					}
+				}
+			}
+			if (s.endsWith("."))
+			{
+				s = StringUtil.leftStr(s, -1);
+			}
+			if ("-0".equals(s))
+			{
+				s = "0";
+			}
+		}
+		return s;
+	}
 }

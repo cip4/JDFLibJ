@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -254,6 +254,7 @@ import org.cip4.jdflib.util.JDFSpawnTest;
 import org.cip4.jdflib.util.MemorySpyTest;
 import org.cip4.jdflib.util.MimeUtilTest;
 import org.cip4.jdflib.util.MyArgsTest;
+import org.cip4.jdflib.util.NumberFormatterTest;
 import org.cip4.jdflib.util.PlatformUtilTest;
 import org.cip4.jdflib.util.PrefixInputStreamTest;
 import org.cip4.jdflib.util.QueueHotFolderTest;
@@ -514,6 +515,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(MemorySpyTest.class);
 		suite.addTestSuite(MimeUtilTest.class);
 		suite.addTestSuite(MyArgsTest.class);
+		suite.addTestSuite(NumberFormatterTest.class);
 		suite.addTestSuite(PlatformUtilTest.class);
 		suite.addTestSuite(PrefixInputStreamTest.class);
 		suite.addTestSuite(QueueHotFolderTest.class);

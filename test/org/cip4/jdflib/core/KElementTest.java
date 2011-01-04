@@ -2503,6 +2503,18 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	 *  test to emulate the creation of spurious NS1 prefixes
+	 */
+	public void testNS1Raw()
+	{
+		XMLDoc d = new XMLDoc("a", "www.b.com");
+		KElement root = d.getRoot();
+		root.setAttributeNSRaw("www.a1.com", "a:b", "val1");
+		root.setAttributeNSRaw("www.a2.com", "a:c", "val2");
+		assertTrue(root.toString().indexOf("NS1") > 0);
+	}
+
+	/**
 	 * 
 	 */
 	public void testSetAttribute_NameSpaceHandling()

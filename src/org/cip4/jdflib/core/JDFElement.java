@@ -6326,7 +6326,7 @@ public class JDFElement extends KElement
 
 		if (attName.equals("JobPartID") && (e instanceof JDFElement))
 		{
-			return (e).generateDotID("JobPartID", null);
+			return e.generateDotID("JobPartID", null);
 		}
 
 		if (attName.equals("Status") && (e instanceof JDFNode))

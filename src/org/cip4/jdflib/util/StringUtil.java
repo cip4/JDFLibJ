@@ -123,8 +123,10 @@ public class StringUtil
 	// ******************************************
 
 	/**
-	 * returns a random string really important routine - written on a friday afternoon ;-) please add more at your leisure.... parts (c) Monty Python, Star
-	 * Trek, Douglas Adams
+	 * returns a random string <br/>
+	 * really important routine - written on a friday afternoon ;-) <br/>
+	 * please add more at your leisure.... <br/>
+	 * parts (c) Monty Python, Star Trek, Douglas Adams, Black Adder, Goethe
 	 * 
 	 */
 	private static String[] strings = {
@@ -206,6 +208,7 @@ public class StringUtil
 			"It's 106 miles to Chicago, we got a full tank of gas, half a pack of cigarettes, it's dark, and we're wearing sunglasses. ",
 			"Ich bin der Geist, der stets verneint! Und das mit Recht; denn alles, was entsteht,  Ist wert, daß es zugrunde geht;  Drum besser wär's, daß nichts entstünde.  So ist denn alles, was ihr Sünde,  Zerstörung, kurz das Böse nennt,  Mein eigentliches Element.",
 			"Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt.",
+			"Du hast wohl recht; ich finde nicht die Spur\nvon einem Geist, und alles ist Dressur.",
 			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet." };
 
 	/**
@@ -256,7 +259,7 @@ public class StringUtil
 	 * @param template - comma separated string - the values are parsed and the appropriate objects are created more objects exist in template than the number
 	 * of '%' tokens in format, the remainder of objects is ignored duplicate '\\,' is taken as literal ','
 	 * @return String the formatted string
-	 * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format
+	 * @throws IllegalArgumentException in case format and o do not match, i.e. not enough objects are passed to fill format
 	 */
 	public static String sprintf(final String format, String template)
 	{
@@ -264,8 +267,7 @@ public class StringUtil
 		{
 			return null;
 		}
-		template = StringUtil.replaceString(template, "\\,", "__comma__äö-eher selten"); // quick
-		// hack ;-)
+		template = StringUtil.replaceString(template, "\\,", "__comma__äö-eher selten"); // quick hack ;-)
 
 		final VString vTemplate = tokenize(template, ",", false);
 		final Object[] vObj = new Object[vTemplate.size()];
@@ -282,8 +284,7 @@ public class StringUtil
 			}
 			else
 			{
-				vObj[i] = StringUtil.replaceString(s, "__comma__äö-eher selten", ","); // quick
-				// hack ;-)
+				vObj[i] = StringUtil.replaceString(s, "__comma__äö-eher selten", ","); // undo quick hack ;-)
 			}
 		}
 		return sprintf(format, vObj);
@@ -1636,65 +1637,7 @@ public class StringUtil
 	 */
 	public static String formatDouble(final double d)
 	{
-		String s;
-		if (d == Double.MAX_VALUE)
-		{
-			s = JDFConstants.POSINF;
-		}
-		else if (d == -Double.MAX_VALUE)
-		{
-			s = JDFConstants.NEGINF;
-		}
-		else
-		{
-			s = String.valueOf(d);
-			if (s.endsWith(".0"))
-			{
-				s = s.substring(0, s.length() - 2);
-			}
-			if (s.indexOf("E") >= 0)
-			{
-				final Double[] ad = { new Double(d) };
-				s = sprintf("%10.10f", ad);
-			}
-
-			if (s.length() > 10)
-			{
-				final int posDot = s.indexOf(JDFConstants.DOT);
-				if (posDot >= 0)
-				{
-					int l = s.length();
-					if (l - posDot > 8)
-					{
-						l = posDot + 9;
-						s = s.substring(0, l);
-						if (s.endsWith("999"))
-						{
-							return formatDouble(d + 0.000000004);
-						}
-
-						int n;
-						for (n = l; n > posDot; n--)
-						{
-							if (!s.substring(n - 1, n).equals("0"))
-							{
-								break;
-							}
-						}
-						s = s.substring(0, n);
-					}
-				}
-			}
-			if (s.endsWith("."))
-			{
-				s = leftStr(s, -1);
-			}
-			if ("-0".equals(s))
-			{
-				s = "0";
-			}
-		}
-		return s;
+		return new NumberFormatter().formatDouble(d);
 	}
 
 	/**
@@ -2264,7 +2207,9 @@ public class StringUtil
 	}
 
 	/**
-	 * converts a simple regexp to a real regexp * --> (.*) . --> \.
+	 * converts a simple regexp to a real regexp <br/>
+	 * * --> (.*) <br/>
+	 * . --> \.
 	 * 
 	 * @param simpleRegExp the simple regexp
 	 * @return the converted real regexp
@@ -2292,7 +2237,8 @@ public class StringUtil
 				{
 					final int pos3 = simpleRegExp.indexOf("(", lastPos);
 					b.append(simpleRegExp.substring(lastPos, posSimpleToken));
-					b.append(posComplexToken + delta == posSimpleToken || (pos3 >= 0 && pos3 < posSimpleToken) ? in[i] : out[i]);
+					boolean isAlreadyComplex = posComplexToken + delta == posSimpleToken || (pos3 >= 0 && pos3 < posSimpleToken);
+					b.append(isAlreadyComplex ? in[i] : out[i]);
 				}
 				else
 				{
@@ -2504,33 +2450,49 @@ public class StringUtil
 	 * @param bIgnoreCase if true ignore the case of the prefix
 	 * @return
 	 */
-	public static String stripPrefix(final String str, final String prefix, final boolean bIgnoreCase)
+	public static String stripPrefix(String str, String prefix, final boolean bIgnoreCase)
 	{
-		String strLocal = str;
-		String prefixLocal = prefix;
-
-		if (strLocal == null)
+		if (str == null || prefix == null)
 		{
-			return null;
-		}
-
-		if (prefixLocal == null)
-		{
-			return strLocal;
+			return str;
 		}
 
 		if (bIgnoreCase)
 		{
-			strLocal = strLocal.toLowerCase();
-			prefixLocal = prefixLocal.toLowerCase();
+			str = str.toLowerCase();
+			prefix = prefix.toLowerCase();
 		}
 
-		if (strLocal.startsWith(prefixLocal))
+		if (str.startsWith(prefix))
 		{
-			strLocal = StringUtil.rightStr(strLocal, -prefixLocal.length());
+			str = StringUtil.rightStr(str, -prefix.length());
 		}
 
-		return strLocal;
+		return str;
+	}
+
+	/**
+	 * strip leading and trailing quotes from a string
+	 * @param str the work string
+	 * @param quote the quote character
+	 * @param bTrim if true, trim whitespace prior to trimming quotes
+	 * 
+	 * @return the work string trimmed and trailing + leading quote chars removed
+	 */
+	public static String stripQuote(String str, String quote, boolean bTrim)
+	{
+		if (str == null || quote == null)
+		{
+			return str;
+		}
+		if (bTrim)
+			str = str.trim();
+		if (str.length() >= 2)
+		{
+			if (str.startsWith(quote) && str.endsWith(quote))
+				str = str.substring(1, str.length() - 1);
+		}
+		return str;
 	}
 
 	/**
