@@ -184,9 +184,12 @@ public class NumberFormatter
 						s = s.substring(0, l);
 						if (s.endsWith("999"))
 						{
-							return formatDouble(d + 0.000000004);
+							double delta = 0.000000004;
+							if (d < 0)
+								delta = -delta;
+							return formatDouble(d + delta);
 						}
-						zappTrailing(s);
+						s = zappTrailing(s);
 					}
 				}
 			}

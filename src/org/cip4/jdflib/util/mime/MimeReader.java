@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,7 +86,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.cip4.jdflib.core.JDFDoc;
-import org.cip4.jdflib.core.JDFParser;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.StreamUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -230,8 +230,47 @@ public class MimeReader extends MimeHelper
 			{
 				return null;
 			}
-			final JDFParser p = new JDFParser();
-			return p.parseStream(bis);
+			return JDFDoc.parseStream(bis);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	* get the JDF Doc from a stream, also handle non mime streams gracefully
+	* @param stream the stream to search in
+	* @param index the index of the body part to search
+	* @return JDFDoc the parsed xml JDFDoc, null if stream does not contain xml
+	*/
+	public XMLDoc getXMLDoc(final InputStream stream, final int index)
+	{
+		final InputStream bis = StreamUtil.getBufferedInputStream(stream);
+		bis.mark(markSize);
+		final Multipart mp = getMultiPart(bis);
+		if (mp != null)
+		{
+			theMultipart = mp;
+			final BodyPartHelper bph = getBodyPartHelper(index);
+			if (bph != null)
+			{
+				return bph.getXMLDoc();
+			}
+		}
+		// not a mime - try direct xml
+		if (index == 0)
+		{
+
+			try
+			{
+				bis.reset();
+			}
+			catch (final IOException e)
+			{
+				return null;
+			}
+			return XMLDoc.parseStream(bis);
 		}
 		else
 		{

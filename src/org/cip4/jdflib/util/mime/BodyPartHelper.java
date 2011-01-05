@@ -21,14 +21,15 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.core.XMLParser;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.MimeUtil.ByteArrayDataSource;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.MimeUtil.ByteArrayDataSource;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -300,6 +301,38 @@ public class BodyPartHelper
 			final InputStream is = theBodyPart.getInputStream();
 			final JDFParser p = new JDFParser();
 			final JDFDoc doc = p.parseStream(is);
+			if (doc != null)
+			{
+				doc.setBodyPart(theBodyPart);
+			}
+			return doc;
+		}
+		catch (final IOException e)
+		{
+			return null; // snafu
+		}
+		catch (final MessagingException e)
+		{
+			return null; // snafu
+		}
+	}
+
+	/**
+	 * get the JDF Doc from a given body part
+	 * @return JDFDoc the parsed xml JDFDoc, null if bp does not contain xml
+	 */
+	public XMLDoc getXMLDoc()
+	{
+		if (theBodyPart == null)
+		{
+			return null;
+		}
+
+		try
+		{
+			final InputStream is = theBodyPart.getInputStream();
+			final XMLParser p = new XMLParser();
+			final XMLDoc doc = p.parseStream(is);
 			if (doc != null)
 			{
 				doc.setBodyPart(theBodyPart);

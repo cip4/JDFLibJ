@@ -81,6 +81,17 @@ public class NumberFormatterTest extends JDFTestCaseBase
 	 * 
 	 *  
 	 */
+	public void testFormat()
+	{
+		NumberFormatter numberFormatter = new NumberFormatter();
+		numberFormatter.setZapp0(true);
+		assertEquals("-3", numberFormatter.formatDouble(-2.999999999));
+	}
+
+	/**
+	 * 
+	 *  
+	 */
 	public void testFormatPrecision()
 	{
 		NumberFormatter numberFormatter = new NumberFormatter();
