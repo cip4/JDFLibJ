@@ -182,6 +182,19 @@ public class JDFDateTest extends TestCase
 	}
 
 	/**
+	 * Method testYearMonth
+	 * @throws Exception
+	 */
+	public void testYearMonth() throws Exception
+	{
+		JDFDate date = new JDFDate();
+		String strDate = date.getDateTimeISO();
+		date = new JDFDate("2006-11");
+		strDate = date.getDateTimeISO();
+		assertTrue(strDate.startsWith("2006-11"));
+	}
+
+	/**
 	 * Method testdateTimeZone.
 	 * @throws Exception
 	 */
@@ -492,6 +505,33 @@ public class JDFDateTest extends TestCase
 	{
 		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
 		assertEquals("20081219070011", date.getDateTime());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testGetMonth() throws Exception
+	{
+		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
+		assertEquals(12, date.getMonth());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testGetYear() throws Exception
+	{
+		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
+		assertEquals(2008, date.getYear());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testGetDay() throws Exception
+	{
+		final JDFDate date = new JDFDate("2008-12-19T07:00:11.300+00:00");
+		assertEquals(19, date.getDay());
 	}
 
 	// /////////////////////////////////////////////////////

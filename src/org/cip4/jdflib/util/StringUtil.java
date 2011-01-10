@@ -209,6 +209,7 @@ public class StringUtil
 			"Ich bin der Geist, der stets verneint! Und das mit Recht; denn alles, was entsteht,  Ist wert, daß es zugrunde geht;  Drum besser wär's, daß nichts entstünde.  So ist denn alles, was ihr Sünde,  Zerstörung, kurz das Böse nennt,  Mein eigentliches Element.",
 			"Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt.",
 			"Du hast wohl recht; ich finde nicht die Spur\nvon einem Geist, und alles ist Dressur.",
+			"Wie nur dem Kopf nicht alle Hoffnung schwindet,\nDer immerfort an schalem Zeuge klebt,\nMit gier'ger Hand nach Schätzen gräbt,\nUnd froh ist, wenn er Regenwürmer findet!",
 			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet." };
 
 	/**

@@ -83,6 +83,7 @@
 
 package org.cip4.jdflib.util;
 
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -346,6 +347,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 				setTimeZoneOffsetInMillis(fastCalendar.getTimeZoneOffset(lTimeInMillis));
 				if (l > 1000 && l < 5000)
 					strDateTime += "-01-01";
+				if (strDateTime.length() == 7)
+					strDateTime += "-01";
 				strDateTime += "T00:00:00" + getTimeZoneISO();
 			}
 
@@ -683,6 +686,36 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public Date getTime()
 	{
 		return new Date(lTimeInMillis);
+	}
+
+	/**
+	 * 
+	 *get the month as an integer
+	 * @return (1-12)
+	 */
+	public int getMonth()
+	{
+		return 1 + getCalendar().get(Calendar.MONTH);
+	}
+
+	/**
+	 * 
+	 *get the year as an integer
+	 * @return the year
+	 */
+	public int getYear()
+	{
+		return getCalendar().get(Calendar.YEAR);
+	}
+
+	/**
+	 * 
+	 *get the day of month as an integer
+	 * @return the year
+	 */
+	public int getDay()
+	{
+		return getCalendar().get(Calendar.DAY_OF_MONTH);
 	}
 
 	/**
