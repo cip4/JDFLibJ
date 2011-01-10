@@ -103,9 +103,10 @@ public class JDFDateTest extends TestCase
 	}
 
 	/**
+	 * @throws DataFormatException 
 	 * 
 	 */
-	public void testBadDate()
+	public void testBadDate() throws DataFormatException
 	{
 		JDFDate date;
 		try
@@ -117,15 +118,7 @@ public class JDFDateTest extends TestCase
 		{
 			//
 		}
-		try
-		{
-			date = new JDFDate("1999-01");
-			fail("date exception: " + date);
-		}
-		catch (final DataFormatException dfe)
-		{
-			//
-		}
+		date = new JDFDate("1999-01");
 
 		try
 		{
