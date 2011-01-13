@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -3048,22 +3048,35 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		synchronized (this)
 		{
-			Node childNode = null;
-			if (src.getOwnerDocument() == this.getOwnerDocument())
-			{
-				childNode = src.cloneNode(true);
-			}
-			else
-			{
-				childNode = this.getOwnerDocument().importNode(src, true);
-			}
-
-			if (beforeChild != null && beforeChild.getParentNode() != this)
-			{
-				throw new JDFException("KElement.copyElement: beforeChild " + beforeChild + " is not child of this: " + toString());
-			}
-			return (KElement) this.insertBefore(childNode, beforeChild);
+			return (KElement) copyNode(src, beforeChild);
 		}
+	}
+
+	/**
+	 * same as copyElement but over any node type
+	 * 
+	 *  
+	 * @param src
+	 * @param beforeChild
+	 * @return
+	 */
+	private Node copyNode(final Node src, final KElement beforeChild)
+	{
+		Node childNode = null;
+		if (src.getOwnerDocument() == this.getOwnerDocument())
+		{
+			childNode = src.cloneNode(true);
+		}
+		else
+		{
+			childNode = this.getOwnerDocument().importNode(src, true);
+		}
+
+		if (beforeChild != null && beforeChild.getParentNode() != this)
+		{
+			throw new JDFException("KElement.copyElement: beforeChild " + beforeChild + " is not child of this: " + toString());
+		}
+		return this.insertBefore(childNode, beforeChild);
 	}
 
 	/** 
@@ -3087,12 +3100,11 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		setAttributes(src);
 		setText(src.getText());
-		KElement e = src.getFirstChildElement();
+		Node e = src.getFirstChild();
 		while (e != null)
 		{
-			KElement e2 = copyElement(e, null);
-			e2.setXMLComment(e.getXMLComment(0));
-			e = e.getNextSiblingElement();
+			copyNode(e, null);
+			e = e.getNextSibling();
 		}
 
 		return this;
@@ -5770,6 +5782,7 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
+	 * the clone is the same document
 	 * @see java.lang.Object#clone()
 	 * @return
 	*/
@@ -5780,6 +5793,19 @@ public class KElement extends ElementNSImpl implements Element
 		e.copyInto(this, false);
 		return e;
 
+	}
+
+	/**
+	 * same as @see clone but the clone is in a new document
+	 * @see java.lang.Object#clone()
+	 * @return
+	*/
+	public KElement cloneNewDoc() //throws CloneNotSupportedException
+	{
+		XMLDoc d = new XMLDoc(getNodeName(), getNamespaceURI());
+		KElement e = d.getRoot();
+		e.copyInto(this, false);
+		return e;
 	}
 
 	/**

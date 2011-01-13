@@ -992,6 +992,30 @@ public class JDFElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws CloneNotSupportedException 
+	 * 
+	 */
+	public void testCloneNewDoc() throws CloneNotSupportedException
+	{
+		final XMLDoc doc = new JDFDoc("JDF");
+		KElement e = doc.getRoot();
+		KElement d = e.getCreateXPathElement("a/b/c/d[3]");
+		KElement c_clone = d.getParentNode_KElement().cloneNewDoc();
+		assertNotNull(c_clone);
+		assertTrue(c_clone.isEqual(c_clone.cloneNewDoc()));
+		assertNotSame(c_clone, c_clone.cloneNewDoc());
+		assertNotSame(c_clone.getOwnerDocument(), c_clone.cloneNewDoc().getOwnerDocument());
+
+		KElement rootClone = e.cloneNewDoc();
+		assertTrue(rootClone.isEqual(e.cloneNewDoc()));
+		assertNotSame(rootClone, e.cloneNewDoc());
+		assertNotSame(rootClone.getOwnerDocument(), e.cloneNewDoc().getOwnerDocument());
+		assertTrue(rootClone.isEqual(e));
+		assertNotSame(rootClone, e);
+		assertNotSame(rootClone.getOwnerDocument(), e.getOwnerDocument());
+	}
+
+	/**
 	 * 
 	 */
 	public void testCache()

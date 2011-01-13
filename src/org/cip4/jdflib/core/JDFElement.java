@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -4497,6 +4497,23 @@ public class JDFElement extends KElement
 				}
 			}
 		}
+	}
+
+	/**
+	 * same as @see clone but the clone is in a new document
+	 * @see java.lang.Object#clone()
+	 * @return
+	*/
+	@Override
+	public KElement cloneNewDoc() //throws CloneNotSupportedException
+	{
+		JDFDoc d = new JDFDoc();
+		d.setInitOnCreate(false);
+		d.setRoot(getNodeName(), getNamespaceURI());
+		KElement e = d.getRoot();
+		e.copyInto(this, false);
+		d.setInitOnCreate(true);
+		return e;
 	}
 
 	/** 

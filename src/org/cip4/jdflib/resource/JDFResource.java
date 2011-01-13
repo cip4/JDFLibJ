@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -2284,21 +2284,24 @@ public class JDFResource extends JDFElement
 			JDFResource ret = JDFResource.this;
 			final String nodeName = ret.getNodeName();
 
-			final int size = Math.min(partIDKeys.size(), m.size());
+			final int size = partIDKeys.size();
 			// internal consistency check - if the map can't fit don't even start searching 
+			int nFirst = 0;
 			for (int i = 0; i < size; i++)
 			{
 				final String attName = partIDKeys.get(i);
 				final String attVal = m.get(attName);
 				if (attVal == null)
 				{
-					return null;
+					nFirst = i + 1;
+					if (i + m.size() >= size)
+						return null;
 				}
 			}
 
 			final String ns = ret.getNamespaceURI();
 			boolean bPrefix = KElement.xmlnsPrefix(nodeName) != null;
-			for (int i = 0; i < size; i++)
+			for (int i = nFirst; i < size; i++)
 			{
 				final String attName = partIDKeys.get(i);
 				final String attVal = m.get(attName);
@@ -2381,7 +2384,7 @@ public class JDFResource extends JDFElement
 				}
 			}
 
-			if (!hasAttribute(partType.getName(), null, false))
+			if (vs == null || !vs.contains(partType.getName()))
 			{
 				addPartIDKey(partType);
 			}

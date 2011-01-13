@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -950,6 +950,30 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue(rootClone.isEqual(e));
 		assertNotSame(rootClone, e);
 		assertEquals(rootClone.getOwnerDocument(), e.getOwnerDocument());
+	}
+
+	/**
+	 * @throws CloneNotSupportedException 
+	 * 
+	 */
+	public void testCloneNewDoc() throws CloneNotSupportedException
+	{
+		final XMLDoc doc = new XMLDoc("root", null);
+		KElement e = doc.getRoot();
+		KElement d = e.getCreateXPathElement("a/b/c/d[3]");
+		KElement c_clone = d.getParentNode_KElement().cloneNewDoc();
+		assertNotNull(c_clone);
+		assertTrue(c_clone.isEqual(c_clone.cloneNewDoc()));
+		assertNotSame(c_clone, c_clone.cloneNewDoc());
+		assertNotSame(c_clone.getOwnerDocument(), c_clone.cloneNewDoc().getOwnerDocument());
+
+		KElement rootClone = e.cloneNewDoc();
+		assertTrue(rootClone.isEqual(e.cloneNewDoc()));
+		assertNotSame(rootClone, e.cloneNewDoc());
+		assertNotSame(rootClone.getOwnerDocument(), e.cloneNewDoc().getOwnerDocument());
+		assertTrue(rootClone.isEqual(e));
+		assertNotSame(rootClone, e);
+		assertNotSame(rootClone.getOwnerDocument(), e.getOwnerDocument());
 	}
 
 	/**

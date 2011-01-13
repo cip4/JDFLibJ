@@ -37,6 +37,33 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testEnsureNSAlias()
+	{
+		XMLDoc d = new XMLDoc("foo", "bar");
+		KElement root = d.getRoot();
+		root.addNameSpace("n1", "n6");
+		root.addNameSpace("n2", "n6");
+		root.setAttribute("n1:gg", "gg");
+		root.setAttribute("n3:gg", "other", "www.n3.com");
+		KElement e = root.appendElement("n2:bar", "n6");
+		e.appendElement("n1:gg").setAttribute("n1:test", "123");
+		e.appendElement("n2:gg").setAttribute("n2:test", "123");
+		e.appendElement("n3:next").setAttribute("n3:test", "456");
+
+		EnsureNSUri ensure = new EnsureNSUri();
+		ensure.addNS("n1", "www.n1.com");
+		ensure.addAlias("n2", "n1");
+		ensure.walk(root);
+
+		assertTrue(root.toXML().indexOf("n2") < 0);
+		assertTrue("undeclared n3 namespace is retained", root.toXML().indexOf("n3:test") > 0);
+		assertTrue(root.toXML().indexOf("<n3:next") > 0);
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testBigEnsureNS()
 	{
 		CPUTimer ct = new CPUTimer(true);

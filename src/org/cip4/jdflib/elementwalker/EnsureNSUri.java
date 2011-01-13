@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,6 +78,7 @@ import org.apache.xerces.dom.AttrNSImpl;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Attr;
 
 /**
@@ -88,7 +89,8 @@ import org.w3c.dom.Attr;
 public class EnsureNSUri extends BaseElementWalker
 {
 
-	protected HashMap<String, String> nsMap;
+	protected final HashMap<String, String> nsMap;
+	protected final HashMap<String, String> aliasMap;
 
 	/**
 	 * add a prefix / uri pair
@@ -98,6 +100,16 @@ public class EnsureNSUri extends BaseElementWalker
 	public void addNS(String prefix, String uri)
 	{
 		nsMap.put(prefix, uri);
+	}
+
+	/**
+	 * add a an alias
+	 * @param badPrefix the ns prefix to rename (e.g. ns1)
+	 * @param goodPrefix the destination prefix
+	 */
+	public void addAlias(String badPrefix, String goodPrefix)
+	{
+		aliasMap.put(badPrefix, goodPrefix);
 	}
 
 	/**
@@ -122,6 +134,7 @@ public class EnsureNSUri extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		nsMap = new HashMap<String, String>();
+		aliasMap = new HashMap<String, String>();
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -158,45 +171,94 @@ public class EnsureNSUri extends BaseElementWalker
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
 			String s = e1.getPrefix();
-			if (nsMap.get(s) != null)
-				e1.setNamespaceURI(nsMap.get(s));
+			String destPrefix = getAlias(s);
+			String srcPrefix = s;
+
+			if (destPrefix != null)
+			{
+				if (nsMap.get(destPrefix) != null)
+				{
+					e1.setNamespaceURI(nsMap.get(destPrefix));
+				}
+				if (!destPrefix.equals(srcPrefix))
+				{
+					e1.setPrefix(destPrefix);
+				}
+			}
+
 			VString atts = e1.getAttributeVector_KElement();
+
 			for (String att : atts)
 			{
-				String prefix = KElement.xmlnsPrefix(att);
-				if (prefix == null)
-					prefix = ":";
-				String uri = nsMap.get(prefix);
+				processAttribute(e1, att);
+			}
+			return e1;
+		}
+
+		private void processAttribute(final KElement e1, String att)
+		{
+			String origPrefix = KElement.xmlnsPrefix(att);
+			String prefix = getAlias(origPrefix);
+			if (prefix == null)
+				prefix = ":";
+			String uri = nsMap.get(prefix);
+			if (uri != null)
+			{
+				processStandardAttribute(e1, att, origPrefix, prefix, uri);
+			}
+			else if (JDFConstants.XMLNS.equals(prefix) || JDFConstants.XMLNS.equals(att))
+			{
+				processXmlns(e1, att);
+			}
+		}
+
+		private void processStandardAttribute(final KElement e1, String att, String origPrefix, String prefix, String uri)
+		{
+			Attr attr = e1.getDOMAttr(att, null, false);
+			if (!uri.equals(attr.getNamespaceURI()))
+			{
+				if (attr instanceof AttrNSImpl)
+				{
+					String val = e1.getAttribute(att);
+					e1.removeAttribute(att);
+					if (origPrefix != null && !origPrefix.equals(prefix))
+						att = StringUtil.replaceToken(att, 0, ":", prefix);
+					e1.setAttributeNS(uri, att, val);
+				}
+			}
+		}
+
+		private void processXmlns(final KElement e1, String att)
+		{
+			String uri;
+			String locName = KElement.xmlnsLocalName(att);
+			String alias = getAlias(locName);
+			if (alias != null && !alias.equals(locName))
+			{
+				e1.removeAttribute(att);
+			}
+			else
+			{
+				if (locName == null)
+					locName = ":";
+				uri = nsMap.get(locName);
 				if (uri != null)
 				{
 					Attr attr = e1.getDOMAttr(att, null, false);
-					if (!uri.equals(attr.getNamespaceURI()))
+					if (!uri.equals(attr.getValue()))
 					{
-						if (attr instanceof AttrNSImpl)
-						{
-							String val = e1.getAttribute(att);
-							e1.removeAttribute(att);
-							e1.setAttributeNS(uri, att, val);
-						}
-					}
-				}
-				else if (JDFConstants.XMLNS.equals(prefix) || JDFConstants.XMLNS.equals(att))
-				{
-					String locName = KElement.xmlnsLocalName(att);
-					if (locName == null)
-						locName = ":";
-					uri = nsMap.get(locName);
-					if (uri != null)
-					{
-						Attr attr = e1.getDOMAttr(att, null, false);
-						if (!uri.equals(attr.getValue()))
-						{
-							attr.setNodeValue(uri);
-						}
+						attr.setNodeValue(uri);
 					}
 				}
 			}
-			return e1;
+		}
+
+		private String getAlias(String s)
+		{
+			if (s == null)
+				return s;
+			String s2 = aliasMap.get(s);
+			return s2 == null ? s : s2;
 		}
 
 		/**
