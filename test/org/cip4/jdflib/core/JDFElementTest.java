@@ -1216,6 +1216,17 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals("round trip enumerations", root.getEnumerationsAttribute("dummy", null, EnumNodeStatus.Aborted, false), v);
 	}
 
+	/**
+	 * 
+	 */
+	public void testSetXSIType()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFElement root = d.getJDFRoot();
+		root.setXSIType("foo");
+		assertFalse(root.toXML().contains("NS1"));
+	}
+
 	// /////////////////////////////////////////////////////////////////////////
 
 	/**

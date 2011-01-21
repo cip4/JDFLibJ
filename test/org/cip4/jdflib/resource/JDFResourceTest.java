@@ -829,11 +829,14 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 			final JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.SheetName, "S1");
 			rlComp.setActualAmount(42, m1);
-			comp.updateAmounts(10);
+			comp.updateAmounts(false);
+			assertEquals(c1.getAmount(), 42., 0.1);
+			assertEquals(c1.getAmountProduced(), 42., 0.1);
+			comp.updateAmounts(false);
 			assertEquals(c1.getAmount(), 42., 0.1);
 			assertEquals(c1.getAmountProduced(), 42., 0.1);
 			rlMedia.setActualAmount(21, m1);
-			media.updateAmounts(0);
+			media.updateAmounts(true);
 			assertEquals("amount=100, - the 21 actual", media.getAmount(), 100 - 21, 0.1);
 			assertEquals(media.getAmountRequired(), 100., 0.1);
 
@@ -848,7 +851,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 			m1.put(EnumPartIDKey.Condition, "OtherWaste");
 			rlComp.setActualAmount(20, m1);
 
-			comp.updateAmounts(0);
+			comp.updateAmounts(false);
 			assertEquals("Anything but Condition=Good is ignored", c1.getAmountProduced(), 42., 0.1);
 		}
 	}
@@ -873,7 +876,7 @@ public class JDFResourceTest extends JDFTestCaseBase
 		rlComp.setActualAmount(42, m1);
 		m1.put("Side", "Back");
 		rlComp.setActualAmount(40, m1);
-		comp.updateAmounts(0);
+		comp.updateAmounts(false);
 		assertEquals(c1.getAmount(), 40., 0.1);
 		assertEquals(c1.getAmountProduced(), 40., 0.1);
 

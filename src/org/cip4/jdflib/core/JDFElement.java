@@ -2990,12 +2990,13 @@ public class JDFElement extends KElement
 	}
 
 	/**
-	 * Creates an inter resource link to a target resource.
+	 * Creates an inter resource link to a target resource.<br/>
+	 * note that if target is a subelement rather than a root resource, it WILL be promoted to root level (rSubRef is deprecated)
 	 * 
 	 * @param target - Target resource to link to
 	 * @return
 	 */
-	public JDFRefElement refElement(final JDFResource target)
+	public JDFRefElement refElement(JDFResource target)
 	{
 		final JDFRefElement newRef = (JDFRefElement) appendElement(target.getNodeName() + JDFConstants.REF, target.getNamespaceURI());
 
@@ -3004,7 +3005,7 @@ public class JDFElement extends KElement
 		// check whether it is a resource element
 		if (target.isResourceElement())
 		{
-			newRef.appendHRef(target, AttributeName.RSUBREF, null);
+			target = target.makeRootResource(null, null, true);
 		}
 
 		// check whether it is a resource leaf or root
@@ -3016,12 +3017,10 @@ public class JDFElement extends KElement
 		// ID is appended to the resource root of target
 		newRef.appendHRef(root, AttributeName.RREF, null);
 
-		// move the resource to the closest common ancestor if it is not already
-		// an ancestor of this
+		// move the resource to the closest common ancestor if it is not already an ancestor of this
 		JDFNode parent = root.getParentJDF();
 
-		// move the resource to the closest common ancestor if it is not already
-		// an ancestor of this
+		// move the resource to the closest common ancestor if it is not already an ancestor of this
 		while (parent != null && !parent.isAncestor(this))
 		{
 			parent = root.getParentJDF();

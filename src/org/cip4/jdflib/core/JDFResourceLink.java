@@ -52,27 +52,27 @@
  *
  *
  *//**
- *
- * Copyright (c) 2001-2005 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFResourceLink.java
- *
- * Last changes 2002-07-02 JG - added Get/SetProcessUsage 2002-07-02 JG - MyString -> KString :
- * all strings now 16 bit 2002-07-02 JG - now inherits from JDFElement 2002-07-02 JG -
- * GetProcessUsage and GetLinkedResourceName are now 2 sepaarte functions 2002-07-02 JG -
- * completely removed selector handling 2002-07-02 JG - HasResourcePartMap bug fix if no parts
- * in this - now returns true for no parts in this 2002-07-02 JG - removed JDFResource
- * GetPartition(boolean bCreate=false, int i=0); 2002-07-02 JG - added AppendPart 2002-07-02 JG -
- * added CombinedProcessIndex, PipeProtocol support 2002-07-02 JG - added AmountPool 2002-07-02
- * JG - added Transformation + Orientation support 2002-07-02 JG - removed GetAmount(boolean
- * bSelector) 2002-07-02 JG - removed GetPartTarget(int iPart=0,int iSelector=-1); 2002-07-02 JG -
- * modified GetNamedProcessUsage to default to xxx:Input / xxx:Output respectively 2002-07-02 JG -
- * SetPartition() now uses JDFResource::EnumPartIDKey 2002-07-02 JG - added GetTarget 2002-07-02
- * JG - GetTargetVector is now const 2002-07-02 JG - added GetTarget() 22-10-2003 KM -
- * IsExecutable() added bCheckChildren 22-10-2003 KM - IsExecutable() fixed bCheckChildren
- * 22-10-2003 KM - GetTarget() now returns the lowest common denominator resource if all leaves
- * are available
- */
+*
+* Copyright (c) 2001-2005 Heidelberger Druckmaschinen AG, All Rights Reserved.
+*
+* JDFResourceLink.java
+*
+* Last changes 2002-07-02 JG - added Get/SetProcessUsage 2002-07-02 JG - MyString -> KString :
+* all strings now 16 bit 2002-07-02 JG - now inherits from JDFElement 2002-07-02 JG -
+* GetProcessUsage and GetLinkedResourceName are now 2 sepaarte functions 2002-07-02 JG -
+* completely removed selector handling 2002-07-02 JG - HasResourcePartMap bug fix if no parts
+* in this - now returns true for no parts in this 2002-07-02 JG - removed JDFResource
+* GetPartition(boolean bCreate=false, int i=0); 2002-07-02 JG - added AppendPart 2002-07-02 JG -
+* added CombinedProcessIndex, PipeProtocol support 2002-07-02 JG - added AmountPool 2002-07-02
+* JG - added Transformation + Orientation support 2002-07-02 JG - removed GetAmount(boolean
+* bSelector) 2002-07-02 JG - removed GetPartTarget(int iPart=0,int iSelector=-1); 2002-07-02 JG -
+* modified GetNamedProcessUsage to default to xxx:Input / xxx:Output respectively 2002-07-02 JG -
+* SetPartition() now uses JDFResource::EnumPartIDKey 2002-07-02 JG - added GetTarget 2002-07-02
+* JG - GetTargetVector is now const 2002-07-02 JG - added GetTarget() 22-10-2003 KM -
+* IsExecutable() added bCheckChildren 22-10-2003 KM - IsExecutable() fixed bCheckChildren
+* 22-10-2003 KM - GetTarget() now returns the lowest common denominator resource if all leaves
+* are available
+*/
 
 package org.cip4.jdflib.core;
 
@@ -94,10 +94,10 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.CombinedProcessIndexHelper;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFAmountPool;
-import org.cip4.jdflib.pool.JDFPool;
-import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFAmountPool.AmountMap;
 import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
+import org.cip4.jdflib.pool.JDFPool;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
@@ -1828,20 +1828,28 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 		else if (amountPool != null)
 		{
 
-			final VElement v = r.getLeaves(false);
+			final VElement vResLeaves = r.getLeaves(false);
 			final HashSet<JDFPartAmount> hsDone = new HashSet<JDFPartAmount>();
-			for (int i = 0; i < v.size(); i++)
+			for (int i = 0; i < vResLeaves.size(); i++)
 			{
-				final JDFResource rp = (JDFResource) v.get(i);
-				final JDFAttributeMap m = rp.getPartMap();
+				final JDFResource resLeaf = (JDFResource) vResLeaves.get(i);
+				final JDFAttributeMap m = resLeaf.getPartMap();
 				if (m == null || m.overlapMap(mPart))
 				{
 					final JDFAttributeMap m2 = m == null ? mPart : m.getOrMap(mPart);
+
 					final JDFPartAmount pa = amountPool.getPartAmount(mPart);
 					// don't count ParAmount elements with multiple parts more than once
 					if (!hsDone.contains(pa))
 					{
-						final double delta = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2);
+						double delta = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2);
+						if (m2.get(AttributeName.CONDITION) == null)
+						{
+							JDFAttributeMap m2Good = m2 == null ? new JDFAttributeMap() : m2.clone();
+							m2Good.put(AttributeName.CONDITION, "Good");
+							double deltaGood = AmountPoolHelper.getAmountPoolMinDouble(this, attName, m2Good);
+							delta = Math.max(delta, deltaGood);
+						}
 						if (delta > 0)
 						{
 							d += delta;

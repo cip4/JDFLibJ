@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -523,7 +523,9 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	/**
 	 * format the date with no time added
 	 * @return date and time as String of form yyyy-mm-dd
+	* @deprecated use @see {@link JDFDate#getDateISO()}
 	 */
+	@Deprecated
 	public String getDateTimeISOBD()
 	{
 		final String timePatternBD = "yyyy'-'MM'-'dd'";

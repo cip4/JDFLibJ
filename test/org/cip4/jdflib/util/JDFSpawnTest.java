@@ -3073,8 +3073,50 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	}
 
 	/**
-		 * 
-		 */
+	 * test merging amounts - also over multiple nodes
+	 * 
+	 */
+	public void testMergeAmount()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.ProcessGroup);
+		JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode n3 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFComponent c = (JDFComponent) n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFResourceLink rl = n.ensureLink(c, EnumUsage.Output, null);
+		rl.setAmount(700, null);
+		JDFResourceLink rl2 = n2.ensureLink(c, EnumUsage.Output, null);
+		rl2.setAmount(200, null);
+		JDFResourceLink rl3 = n3.ensureLink(c, EnumUsage.Output, null);
+		rl3.setAmount(400, null);
+		JDFSpawn sp2 = new JDFSpawn(n2);
+		sp2.vRWResources_in = new VString("Component", null);
+		JDFNode n2s = sp2.spawn();
+		JDFResourceLink rl2s = n2s.ensureLink(c, EnumUsage.Output, null);
+		rl2s.setActualAmount(222, new JDFAttributeMap("Condition", "Good"));
+		rl2s.setActualAmount(33, new JDFAttributeMap("Condition", "Waste"));
+		JDFMerge merge = new JDFMerge(n);
+		merge.setAmountPolicy(EnumAmountMerge.LinkOnly);
+		n = merge.mergeJDF(n2s);
+		n = n.getParentJDF();
+		JDFSpawn sp3 = new JDFSpawn(n3);
+		sp3.vRWResources_in = new VString("Component", null);
+		JDFNode n3s = sp3.spawn();
+		JDFResourceLink rl3s = n3s.ensureLink(c, EnumUsage.Output, null);
+		rl3s.setActualAmount(555, new JDFAttributeMap("Condition", "Good"));
+		rl3s.setActualAmount(66, new JDFAttributeMap("Condition", "Waste"));
+		merge = new JDFMerge(n);
+		merge.setAmountPolicy(EnumAmountMerge.LinkOnly);
+		n = merge.mergeJDF(n3s);
+		n = n.getParentJDF();
+		assertEquals(((JDFComponent) n.getResource("Component", null, 0)).getAmountProduced(), 777, 0);
+		System.out.print(n);
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testMergeJDF()
 	{
 		// job.jdf subjdf.jdf -o merged.jdf

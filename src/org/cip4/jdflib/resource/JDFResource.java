@@ -5311,14 +5311,16 @@ public class JDFResource extends JDFElement
 	 * update the amount of a resource based on the connected resource links Only Condition="Good" is counted if no explicit partioning by condition is
 	 * specified
 	 * 
-	 * @param previousAmount the previous resource Amount
+	 * @param keepPrevious if true, the previous amounts etc. are retained, if false they are completely recalculated from the linkx
+	 * 
+	 * lsince 2011.1.15 note the change of interface. The prior usage of previousamount was inheritently flawed. 
+	 * Update note: if you used a previousAmount!=0, you probably want to use keepPrevious=false whereas a 0 value retains the orignal value (leepPrevious=true)
 	 */
-	public void updateAmounts(final double previousAmount)
+	public void updateAmounts(boolean keepPrevious)
 	{
-		double amount = StringUtil.parseDouble(getAttribute_KElement(AttributeName.AMOUNT), 0);
-		double amountProduced = StringUtil.parseDouble(getAttribute_KElement(AttributeName.AMOUNTPRODUCED), 0);
+		double amount = keepPrevious ? StringUtil.parseDouble(getAttribute_KElement(AttributeName.AMOUNT), 0) : 0.0;
+		double amountProduced = keepPrevious ? StringUtil.parseDouble(getAttribute_KElement(AttributeName.AMOUNTPRODUCED), 0) : 0.0;
 		double amountRequired = 0;
-		double deltaAmount = previousAmount;
 
 		final JDFAttributeMap partMap = getPartMap();
 		JDFAttributeMap partMapGood = null; // explicit check map for Condition=good
@@ -5332,13 +5334,6 @@ public class JDFResource extends JDFElement
 			partMapCond.put(AttributeName.CONDITION, (String) null);
 		}
 
-		if (previousAmount < 0)
-		{
-			deltaAmount = getAmount();
-		}
-
-		// if no output resourcelinks exist, assume that
-		boolean hasOutputLink = false;
 		boolean mustWrite = hasAttribute(AttributeName.AMOUNT);
 
 		final VElement resLinks = getLinks(getLinkString(), null);
@@ -5412,16 +5407,8 @@ public class JDFResource extends JDFElement
 								amountProduced += rlActualAmount;
 							}
 
-							hasOutputLink = true;
 						}
 					}
-				}
-
-				// only update the amounts by the previous values if no onput
-				// creates the resource, e.g. consumables
-				if (!hasOutputLink)
-				{
-					amount += deltaAmount;
 				}
 
 				if (mustWrite)

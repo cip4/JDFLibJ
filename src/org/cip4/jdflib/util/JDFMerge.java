@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -728,14 +728,7 @@ public class JDFMerge
 			if ((amountPolicy != EnumAmountMerge.None) && targetRes.isPhysical())
 			{
 				final JDFResource trgKeep = trg;
-				trg = root.getPartition(srcMap, EnumPartUsage.Implicit); // must
-				// repeat
-				// since
-				// replaceelement
-				// does
-				// not
-				// modify
-				// itself
+				trg = root.getPartition(srcMap, EnumPartUsage.Implicit); // must repeat since replaceelement does not modify itself
 				if (trg == null)
 				{
 					trg = trgKeep;
@@ -743,13 +736,8 @@ public class JDFMerge
 				final VElement vr = trg.getLeaves(true);
 				for (int l = 0; l < vr.size(); l++)
 				{
-					double amo = 0;
 					final JDFResource r = (JDFResource) vr.elementAt(l);
-					if (amountPolicy != EnumAmountMerge.LinkOnly)
-					{
-						amo = r.getAmount();
-					}
-					r.updateAmounts(amo);
+					r.updateAmounts(EnumAmountMerge.UpdateLink.equals(amountPolicy));
 				}
 			}
 		}
@@ -1607,21 +1595,40 @@ public class JDFMerge
 		return "JDFMerge: " + spawnID + " parts: " + parts + "\n" + subJDFNode;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public EnumCleanUpMerge getCleanPolicy()
 	{
 		return cleanPolicy;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param cleanPolicy
+	 */
 	public void setCleanPolicy(EnumCleanUpMerge cleanPolicy)
 	{
 		this.cleanPolicy = cleanPolicy;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public EnumAmountMerge getAmountPolicy()
 	{
 		return amountPolicy;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param amountPolicy
+	 */
 	public void setAmountPolicy(EnumAmountMerge amountPolicy)
 	{
 		this.amountPolicy = amountPolicy;
