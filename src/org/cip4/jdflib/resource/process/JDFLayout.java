@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -196,8 +196,8 @@ public class JDFLayout extends JDFSurface
 	}
 
 	/**
-	 * calculate number of same printed elements
-	 * @return the number of equivalent elements, if allways the same, else -1
+	 * calculate number of same printed elements, non existing slots (i.e. ords that are not on the sheet at all) are ignored
+	 * @return the number of equivalent elements, if always the same, else -1
 	 */
 	public int calcNumSame()
 	{
@@ -225,10 +225,13 @@ public class JDFLayout extends JDFSurface
 			int min = Integer.MAX_VALUE;
 			for (int i : iii)
 			{
-				if (i > max)
-					max = i;
-				if (i < min)
-					min = i;
+				if (i > 0)
+				{
+					if (i > max)
+						max = i;
+					if (i < min)
+						min = i;
+				}
 			}
 			if (min == max)
 				minmax = min;
