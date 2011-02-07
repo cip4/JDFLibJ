@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,9 +71,9 @@
 package org.cip4.jdflib.util.net;
 
 import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 import org.cip4.jdflib.util.net.IPollHandler.PollResult;
 
 /**
@@ -205,12 +205,12 @@ public class NetPoll
 	 */
 	public IPollDetails poll()
 	{
-		UrlPart p = UrlUtil.writeToURL(url, null, method, contentType, null);
+		UrlPart p = UrlUtil.writeToURL(getUrl(), null, method, contentType, null);
 		return p;
 	}
 
 	/**
-	 * @param method the method to set
+	 * @param method the http transfer method to set (GET / POST)
 	 */
 	public void setMethod(String method)
 	{
@@ -236,7 +236,7 @@ public class NetPoll
 	}
 
 	/**
-	 * @param idleWait the idleWait to set
+	 * @param idleWait the number of wait milliseconds to set
 	 */
 	public void setIdleWait(int idleWait)
 	{
@@ -249,5 +249,15 @@ public class NetPoll
 	public void setBusyWait(int busyWait)
 	{
 		this.busyWait = busyWait;
+	}
+
+	/**
+	 * 
+	 * get the URL
+	 * @return
+	 */
+	protected String getUrl()
+	{
+		return url;
 	}
 }

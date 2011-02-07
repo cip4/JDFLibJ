@@ -330,6 +330,8 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals("ä", StringUtil.escape("ä", null, "%", 16, 2, 0x21, -1));
 		assertEquals("ä is 2 bytes --> __", "a__a", StringUtil.escape("aäa", null, "_", -1, 0, 0x21, 127));
 		assertEquals("a____a", StringUtil.escape("a€_a", null, "_", -1, 0, 0x21, 127));
+		assertEquals("a%20b", StringUtil.escape("a b", " \t", "%", 16, 2, 0, -19));
+
 		// assertEquals("a_€a", StringUtil.escape("a€a", null, "_", 0, 0, 0x21, 127));
 	}
 
