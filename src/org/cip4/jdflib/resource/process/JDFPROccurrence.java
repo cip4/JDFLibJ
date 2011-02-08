@@ -89,8 +89,8 @@
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoPROccurrence;
 import org.cip4.jdflib.auto.JDFAutoAction.EnumSeverity;
+import org.cip4.jdflib.auto.JDFAutoPROccurrence;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;

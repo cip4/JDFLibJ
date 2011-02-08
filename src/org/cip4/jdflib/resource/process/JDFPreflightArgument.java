@@ -78,8 +78,8 @@
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoPreflightArgument;
 import org.cip4.jdflib.auto.JDFAutoBoxArgument.EnumBox;
+import org.cip4.jdflib.auto.JDFAutoPreflightArgument;
 import org.cip4.jdflib.core.ElementName;
 import org.w3c.dom.DOMException;
 

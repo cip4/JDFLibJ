@@ -70,33 +70,16 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                        
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.zip.DataFormatException;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.w3c.dom.Element;                         
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.*;                           
-import org.cip4.jdflib.auto.*;                      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.core.ElementInfo;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.node.*;                      
-import org.cip4.jdflib.pool.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.postpress.*;
-import org.cip4.jdflib.resource.process.press.*;    
-import org.cip4.jdflib.resource.process.prepress.*; 
-import org.cip4.jdflib.util.*;           
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.datatypes.JDFNameRangeList;
+import org.cip4.jdflib.datatypes.JDFTransferFunction;
+import org.cip4.jdflib.resource.JDFResource;
     /**
     *****************************************************************************
     class JDFAutoTransferCurve : public JDFResource
@@ -109,22 +92,21 @@ public abstract class JDFAutoTransferCurve extends JDFResource
 
     private static final long serialVersionUID = 1L;
 
-    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[13];
+    private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[12];
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.CURVE, 0x22222222, AttributeInfo.EnumAttributeType.TransferFunction, null, null);
         atrInfoTable[1] = new AtrInfoTable(AttributeName.SEPARATION, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
-        atrInfoTable[3] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[4] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[5] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[6] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[7] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[8] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[9] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[10] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[11] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
-        atrInfoTable[12] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[3] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[4] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[5] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[6] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[7] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[8] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[9] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[10] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+        atrInfoTable[11] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -255,28 +237,6 @@ public abstract class JDFAutoTransferCurve extends JDFResource
         public String getSeparation()
         {
             return getAttribute(AttributeName.SEPARATION, null, JDFConstants.EMPTYSTRING);
-        }
-
-        
-        /* ---------------------------------------------------------------------
-        Methods for Attribute BinderySignaturePaginationIndex
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute BinderySignaturePaginationIndex
-          * @param value: the value to set the attribute to
-          */
-        public void setBinderySignaturePaginationIndex(String value)
-        {
-            setAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, value, null);
-        }
-
-        /**
-          * (23) get String attribute BinderySignaturePaginationIndex
-          * @return the value of the attribute
-          */
-        public String getBinderySignaturePaginationIndex()
-        {
-            return getAttribute(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, null, JDFConstants.EMPTYSTRING);
         }
 
         

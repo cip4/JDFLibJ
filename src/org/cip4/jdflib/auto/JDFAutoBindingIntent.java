@@ -70,33 +70,47 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;                        
-import java.util.Iterator;                          
-import java.util.List;                              
-import java.util.Map;                               
-import java.util.Vector;                            
-import java.util.zip.DataFormatException;           
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
-import org.apache.commons.lang.enums.ValuedEnum;    
-import org.w3c.dom.Element;                         
-import org.apache.xerces.dom.CoreDocumentImpl;      
-import org.cip4.jdflib.*;                           
-import org.cip4.jdflib.auto.*;                      
-import org.cip4.jdflib.core.*;                      
-import org.cip4.jdflib.core.ElementInfo;                      
-import org.cip4.jdflib.span.*;                      
-import org.cip4.jdflib.node.*;                      
-import org.cip4.jdflib.pool.*;                      
-import org.cip4.jdflib.jmf.*;                       
-import org.cip4.jdflib.datatypes.*;                 
-import org.cip4.jdflib.resource.*;                  
-import org.cip4.jdflib.resource.devicecapability.*; 
-import org.cip4.jdflib.resource.intent.*;           
-import org.cip4.jdflib.resource.process.*;          
-import org.cip4.jdflib.resource.process.postpress.*;
-import org.cip4.jdflib.resource.process.press.*;    
-import org.cip4.jdflib.resource.process.prepress.*; 
-import org.cip4.jdflib.util.*;           
+import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.xerces.dom.CoreDocumentImpl;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElemInfoTable;
+import org.cip4.jdflib.core.ElementInfo;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.resource.JDFBindList;
+import org.cip4.jdflib.resource.JDFEdgeGluing;
+import org.cip4.jdflib.resource.JDFHardCoverBinding;
+import org.cip4.jdflib.resource.JDFSoftCoverBinding;
+import org.cip4.jdflib.resource.JDFStripBinding;
+import org.cip4.jdflib.resource.JDFTabs;
+import org.cip4.jdflib.resource.JDFTape;
+import org.cip4.jdflib.resource.intent.JDFBookCase;
+import org.cip4.jdflib.resource.intent.JDFIntentResource;
+import org.cip4.jdflib.resource.process.postpress.JDFAdhesiveBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFChannelBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFCoilBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFPlasticCombBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFRingBinding;
+import org.cip4.jdflib.resource.process.postpress.JDFSaddleStitching;
+import org.cip4.jdflib.resource.process.postpress.JDFSideSewing;
+import org.cip4.jdflib.resource.process.postpress.JDFSideStitching;
+import org.cip4.jdflib.resource.process.postpress.JDFThreadSealing;
+import org.cip4.jdflib.resource.process.postpress.JDFThreadSewing;
+import org.cip4.jdflib.resource.process.postpress.JDFWireCombBinding;
+import org.cip4.jdflib.span.JDFSpanBindingLength;
+import org.cip4.jdflib.span.JDFSpanBindingSide;
+import org.cip4.jdflib.span.JDFSpanBindingType;
+import org.cip4.jdflib.span.JDFSpanNamedColor;
+import org.cip4.jdflib.span.JDFStringSpan;
     /**
     *****************************************************************************
     class JDFAutoBindingIntent : public JDFIntentResource

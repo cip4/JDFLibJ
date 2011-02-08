@@ -83,8 +83,8 @@ package org.cip4.jdflib.jmf;
 import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoMessageService;
 import org.cip4.jdflib.auto.JDFAutoDevCaps.EnumContext;
+import org.cip4.jdflib.auto.JDFAutoMessageService;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;

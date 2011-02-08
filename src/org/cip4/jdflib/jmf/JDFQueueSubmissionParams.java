@@ -83,8 +83,8 @@ package org.cip4.jdflib.jmf;
 import java.net.URL;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
+import org.cip4.jdflib.auto.JDFAutoQueueSubmissionParams;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;

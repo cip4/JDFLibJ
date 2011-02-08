@@ -88,8 +88,8 @@
 package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoPRGroup;
 import org.cip4.jdflib.auto.JDFAutoAction.EnumSeverity;
+import org.cip4.jdflib.auto.JDFAutoPRGroup;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.KElement;

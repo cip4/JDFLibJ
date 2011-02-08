@@ -88,8 +88,8 @@ import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.node.JDFNode;
-import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
+import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.resource.JDFResource;
 
 public class JDFResourceQuParams extends JDFAutoResourceQuParams implements INodeIdentifiable

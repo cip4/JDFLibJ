@@ -81,8 +81,8 @@ package org.cip4.jdflib.resource.process;
 import java.util.Set;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoPreflightReport;
 import org.cip4.jdflib.auto.JDFAutoAction.EnumSeverity;
+import org.cip4.jdflib.auto.JDFAutoPreflightReport;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VString;

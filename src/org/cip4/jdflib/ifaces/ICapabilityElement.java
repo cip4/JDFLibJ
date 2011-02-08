@@ -71,9 +71,9 @@
 package org.cip4.jdflib.ifaces;
 
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFModuleCap;
 import org.cip4.jdflib.resource.devicecapability.JDFModulePool;
-import org.cip4.jdflib.resource.devicecapability.JDFDeviceCap.EnumAvailability;
 import org.cip4.jdflib.resource.devicecapability.JDFTerm.EnumTerm;
 
 /**

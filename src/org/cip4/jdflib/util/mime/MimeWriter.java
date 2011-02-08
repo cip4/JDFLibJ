@@ -108,10 +108,10 @@ import org.cip4.jdflib.jmf.JDFResponse;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.MimeUtil;
+import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
-import org.cip4.jdflib.util.MimeUtil.MIMEDetails;
 
 /**
  * class to create and write mime files

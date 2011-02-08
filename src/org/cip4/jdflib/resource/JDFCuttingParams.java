@@ -81,7 +81,6 @@ import java.util.Vector;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoCuttingParams;
-import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.w3c.dom.DOMException;
 
 /**

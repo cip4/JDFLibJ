@@ -81,11 +81,8 @@
 
 package org.cip4.jdflib.resource;
 
-import java.util.zip.DataFormatException;
-
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoProcessRun;
-import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFException;

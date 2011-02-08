@@ -84,8 +84,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoResponse;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
+import org.cip4.jdflib.auto.JDFAutoResponse;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.resource.JDFNotification;
 
