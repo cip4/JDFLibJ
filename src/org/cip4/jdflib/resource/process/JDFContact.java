@@ -87,8 +87,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.auto.JDFAutoContact;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
+import org.cip4.jdflib.auto.JDFAutoContact;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;

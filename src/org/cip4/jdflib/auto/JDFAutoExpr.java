@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,21 +70,39 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.devicecapability.JDFTerm;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.w3c.dom.Element;                         
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.*;                           
+import org.cip4.jdflib.auto.*;                      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.core.ElementInfo;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.node.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.devicecapability.*; 
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
+import org.cip4.jdflib.resource.process.press.*;    
+import org.cip4.jdflib.resource.process.prepress.*; 
+import org.cip4.jdflib.util.*;           
+    /**
+    *****************************************************************************
+    class JDFAutoExpr : public JDFElement
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoExpr extends JDFElement
 {
@@ -99,23 +117,9 @@ public abstract class JDFAutoExpr extends JDFElement
         atrInfoTable[2] = new AtrInfoTable(AttributeName.VALUE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-    }
-
-
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[1];
-    static
-    {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.TERM, 0x33333333);
-    }
-    
-    @Override
-	protected ElementInfo getTheElementInfo()
-    {
-        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -163,8 +167,7 @@ public abstract class JDFAutoExpr extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoExpr[  --> " + super.toString() + " ]";
     }
@@ -239,60 +242,5 @@ public abstract class JDFAutoExpr extends JDFElement
         {
             return getAttribute(AttributeName.VALUE, null, JDFConstants.EMPTYSTRING);
         }
-
-/* ***********************************************************************
- * Element getter / setter
- * ***********************************************************************
- */
-
-    /** (26) getCreateTerm
-     * 
-     * @param iSkip number of elements to skip
-     * @return JDFTerm the element
-     */
-    public JDFTerm getCreateTerm(int iSkip)
-    {
-        return (JDFTerm)getCreateElement_KElement(ElementName.TERM, null, iSkip);
-    }
-
-    /**
-     * (27) const get element Term
-     * @param iSkip number of elements to skip
-     * @return JDFTerm the element
-     * default is getTerm(0)     */
-    public JDFTerm getTerm(int iSkip)
-    {
-        return (JDFTerm) getElement(ElementName.TERM, null, iSkip);
-    }
-
-    /**
-     * Get all Term from the current element
-     * 
-     * @return Collection<JDFTerm>, null if none are available
-     */
-    public Collection<JDFTerm> getAllTerm()
-    {
-        final VElement vc = getChildElementVector(ElementName.TERM, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFTerm> v = new Vector<JDFTerm>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTerm) vc.get(i));
-        }
-
-        return v;
-    }
-
-    /**
-     * (30) append element Term
-     */
-    public JDFTerm appendTerm() throws JDFException
-    {
-        return (JDFTerm) appendElement(ElementName.TERM, null);
-    }
 
 }// end namespace JDF

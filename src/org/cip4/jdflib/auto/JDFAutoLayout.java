@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,36 +70,39 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-import java.util.zip.DataFormatException;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.resource.JDFLayerList;
-import org.cip4.jdflib.resource.JDFMarkObject;
-import org.cip4.jdflib.resource.JDFPageCondition;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFSignature;
-import org.cip4.jdflib.resource.process.JDFContentObject;
-import org.cip4.jdflib.resource.process.JDFInsertSheet;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.JDFMediaSource;
-import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.w3c.dom.Element;                         
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.*;                           
+import org.cip4.jdflib.auto.*;                      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.core.ElementInfo;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.node.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.devicecapability.*; 
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
+import org.cip4.jdflib.resource.process.press.*;    
+import org.cip4.jdflib.resource.process.prepress.*; 
+import org.cip4.jdflib.util.*;           
+    /**
+    *****************************************************************************
+    class JDFAutoLayout : public JDFResource
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoLayout extends JDFResource
 {
@@ -128,29 +131,28 @@ public abstract class JDFAutoLayout extends JDFResource
         atrInfoTable[16] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
 
 
-    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[9];
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[10];
     static
     {
         elemInfoTable[0] = new ElemInfoTable(ElementName.CONTENTOBJECT, 0x33333333);
         elemInfoTable[1] = new ElemInfoTable(ElementName.INSERTSHEET, 0x33333333);
         elemInfoTable[2] = new ElemInfoTable(ElementName.LAYERLIST, 0x66666661);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33333333);
-        elemInfoTable[4] = new ElemInfoTable(ElementName.MEDIA, 0x33333331);
-        elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
-        elemInfoTable[6] = new ElemInfoTable(ElementName.PAGECONDITION, 0x33331111);
-        elemInfoTable[7] = new ElemInfoTable(ElementName.SIGNATURE, 0x44444333);
-        elemInfoTable[8] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666661);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.LOGICALSTACKPARAMS, 0x66661111);
+        elemInfoTable[4] = new ElemInfoTable(ElementName.MARKOBJECT, 0x33333333);
+        elemInfoTable[5] = new ElemInfoTable(ElementName.MEDIA, 0x33333331);
+        elemInfoTable[6] = new ElemInfoTable(ElementName.MEDIASOURCE, 0x77777776);
+        elemInfoTable[7] = new ElemInfoTable(ElementName.PAGECONDITION, 0x33331111);
+        elemInfoTable[8] = new ElemInfoTable(ElementName.SIGNATURE, 0x44444333);
+        elemInfoTable[9] = new ElemInfoTable(ElementName.TRANSFERCURVEPOOL, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -200,15 +202,13 @@ public abstract class JDFAutoLayout extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLayout[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -216,8 +216,7 @@ public abstract class JDFAutoLayout extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -949,6 +948,32 @@ public abstract class JDFAutoLayout extends JDFResource
     public JDFLayerList appendLayerList() throws JDFException
     {
         return (JDFLayerList) appendElementN(ElementName.LAYERLIST, 1, null);
+    }
+
+    /**
+     * (24) const get element LogicalStackParams
+     * @return JDFLogicalStackParams the element
+     */
+    public JDFLogicalStackParams getLogicalStackParams()
+    {
+        return (JDFLogicalStackParams) getElement(ElementName.LOGICALSTACKPARAMS, null, 0);
+    }
+
+    /** (25) getCreateLogicalStackParams
+     * 
+     * @return JDFLogicalStackParams the element
+     */
+    public JDFLogicalStackParams getCreateLogicalStackParams()
+    {
+        return (JDFLogicalStackParams) getCreateElement_KElement(ElementName.LOGICALSTACKPARAMS, null, 0);
+    }
+
+    /**
+     * (29) append element LogicalStackParams
+     */
+    public JDFLogicalStackParams appendLogicalStackParams() throws JDFException
+    {
+        return (JDFLogicalStackParams) appendElementN(ElementName.LOGICALSTACKPARAMS, 1, null);
     }
 
     /** (26) getCreateMarkObject

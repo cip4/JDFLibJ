@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,17 +70,39 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.resource.JDFResource;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.w3c.dom.Element;                         
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.*;                           
+import org.cip4.jdflib.auto.*;                      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.core.ElementInfo;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.node.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.devicecapability.*; 
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
+import org.cip4.jdflib.resource.process.press.*;    
+import org.cip4.jdflib.resource.process.prepress.*; 
+import org.cip4.jdflib.util.*;           
+    /**
+    *****************************************************************************
+    class JDFAutoVarnishingParams : public JDFResource
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoVarnishingParams extends JDFResource
 {
@@ -91,13 +113,12 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
     static
     {
         atrInfoTable[0] = new AtrInfoTable(AttributeName.MODULEINDEX, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[1] = new AtrInfoTable(AttributeName.ABSOLUTEWIDTH, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
-        atrInfoTable[2] = new AtrInfoTable(AttributeName.ANCHOR, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumAnchor.getEnum(0), null);
+        atrInfoTable[1] = new AtrInfoTable(AttributeName.MODULETYPE, 0x33331111, AttributeInfo.EnumAttributeType.NMTOKEN, null, null);
+        atrInfoTable[2] = new AtrInfoTable(AttributeName.VARNISHAREA, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumVarnishArea.getEnum(0), null);
         atrInfoTable[3] = new AtrInfoTable(AttributeName.VARNISHMETHOD, 0x33331111, AttributeInfo.EnumAttributeType.enumeration, EnumVarnishMethod.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -147,15 +168,13 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoVarnishingParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -163,54 +182,53 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
 
 
         /**
-        * Enumeration strings for Anchor
+        * Enumeration strings for VarnishArea
         */
 
-        public static class EnumAnchor extends ValuedEnum
+        public static class EnumVarnishArea extends ValuedEnum
         {
             private static final long serialVersionUID = 1L;
             private static int m_startValue = 0;
 
-            private EnumAnchor(String name)
+            private EnumVarnishArea(String name)
             {
                 super(name, m_startValue++);
             }
 
-            public static EnumAnchor getEnum(String enumName)
+            public static EnumVarnishArea getEnum(String enumName)
             {
-                return (EnumAnchor) getEnum(EnumAnchor.class, enumName);
+                return (EnumVarnishArea) getEnum(EnumVarnishArea.class, enumName);
             }
 
-            public static EnumAnchor getEnum(int enumValue)
+            public static EnumVarnishArea getEnum(int enumValue)
             {
-                return (EnumAnchor) getEnum(EnumAnchor.class, enumValue);
+                return (EnumVarnishArea) getEnum(EnumVarnishArea.class, enumValue);
             }
 
             public static Map getEnumMap()
             {
-                return getEnumMap(EnumAnchor.class);
+                return getEnumMap(EnumVarnishArea.class);
             }
 
             public static List getEnumList()
             {
-                return getEnumList(EnumAnchor.class);
+                return getEnumList(EnumVarnishArea.class);
             }
 
             public static Iterator iterator()
             {
-                return iterator(EnumAnchor.class);
+                return iterator(EnumVarnishArea.class);
             }
 
-            public static final EnumAnchor Full = new EnumAnchor("Full");
-            public static final EnumAnchor Spot = new EnumAnchor("Spot");
+            public static final EnumVarnishArea Full = new EnumVarnishArea("Full");
+            public static final EnumVarnishArea Spot = new EnumVarnishArea("Spot");
         }      
 
 
@@ -289,46 +307,46 @@ public abstract class JDFAutoVarnishingParams extends JDFResource
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute AbsoluteWidth
+        Methods for Attribute MOduleType
         --------------------------------------------------------------------- */
         /**
-          * (36) set attribute AbsoluteWidth
+          * (36) set attribute MOduleType
           * @param value: the value to set the attribute to
           */
-        public void setAbsoluteWidth(String value)
+        public void setMOduleType(String value)
         {
-            setAttribute(AttributeName.ABSOLUTEWIDTH, value, null);
+            setAttribute(AttributeName.MODULETYPE, value, null);
         }
 
         /**
-          * (23) get String attribute AbsoluteWidth
+          * (23) get String attribute MOduleType
           * @return the value of the attribute
           */
-        public String getAbsoluteWidth()
+        public String getMOduleType()
         {
-            return getAttribute(AttributeName.ABSOLUTEWIDTH, null, JDFConstants.EMPTYSTRING);
+            return getAttribute(AttributeName.MODULETYPE, null, JDFConstants.EMPTYSTRING);
         }
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute Anchor
+        Methods for Attribute VarnishArea
         --------------------------------------------------------------------- */
         /**
-          * (5) set attribute Anchor
+          * (5) set attribute VarnishArea
           * @param enumVar: the enumVar to set the attribute to
           */
-        public void setAnchor(EnumAnchor enumVar)
+        public void setVarnishArea(EnumVarnishArea enumVar)
         {
-            setAttribute(AttributeName.ANCHOR, enumVar==null ? null : enumVar.getName(), null);
+            setAttribute(AttributeName.VARNISHAREA, enumVar==null ? null : enumVar.getName(), null);
         }
 
         /**
-          * (9) get attribute Anchor
+          * (9) get attribute VarnishArea
           * @return the value of the attribute
           */
-        public EnumAnchor getAnchor()
+        public EnumVarnishArea getVarnishArea()
         {
-            return EnumAnchor.getEnum(getAttribute(AttributeName.ANCHOR, null, null));
+            return EnumVarnishArea.getEnum(getAttribute(AttributeName.VARNISHAREA, null, null));
         }
 
         

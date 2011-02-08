@@ -1749,6 +1749,10 @@ public final class AttributeName
 	public static final String LOGICALPRINTERSECTION = "LogicalPrinterSection";
 	/** */
 	public static final String LOGICALSTACKORD = "LogicalStackOrd";
+	/**
+	 * 
+	 */
+	public static final String LOGICALSTACKSEQUENCE = "LogicalStackSequence";
 	/** */
 	public static final String LOTCONTROL = "LotControl";
 	/** */
@@ -1840,6 +1844,8 @@ public final class AttributeName
 	public static final String MAXRESOLUTION = "MaxResolution";
 	/** */
 	public static final String MAXSEARCHRECURSION = "MaxSearchRecursion";
+	/** */
+	public static final String MAXSTACKDEPTH = "MaxStackDepth";
 	/** */
 	public static final String MAXSETORD = "MaxSetOrd";
 	/** */
@@ -2720,6 +2726,8 @@ public final class AttributeName
 	/** */
 	public static final String RESTORETIME = "RestoreTime";
 	/** */
+	public static final String RESTRICTIONS = "Restrictions";
+	/** */
 	public static final String RESTRICTEDCONTENTOBJECTS = "RestrictedContentObjects";
 	/** */
 	public static final String RESTTIME = "RestTime";
@@ -3495,6 +3503,8 @@ public final class AttributeName
 	public static final String VALUETEMPLATE = "ValueTemplate";
 	/** */
 	public static final String VALUEUSAGE = "ValueUsage";
+	/** */
+	public static final String VARNISHAREA = "VarnishArea";
 	/** */
 	public static final String VARNISHMETHOD = "VarnishMethod";
 	/** */

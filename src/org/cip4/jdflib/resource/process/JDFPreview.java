@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -79,8 +79,16 @@
 
 package org.cip4.jdflib.resource.process;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPreview;
+import org.cip4.jdflib.core.AtrInfoTable;
+import org.cip4.jdflib.core.AttributeInfo;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.w3c.dom.DOMException;
 
@@ -90,6 +98,20 @@ import org.w3c.dom.DOMException;
 public class JDFPreview extends JDFAutoPreview implements IURLSetter
 {
 	private static final long serialVersionUID = 1L;
+	/*
+	 * we loosened the schema without loosening the spec to allow incomplete without URL, but still needed here
+	 */
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[1];
+	static
+	{
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
+	}
+
+	@Override
+	protected AttributeInfo getTheAttributeInfo()
+	{
+		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+	}
 
 	/**
 	 * Constructor for JDFPreview
@@ -131,6 +153,50 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	}
 
 	/**
+	* Enumeration strings for PreviewFileType
+	*/
+
+	public static class EnumPreviewFileType extends ValuedEnum
+	{
+		private static final long serialVersionUID = 1L;
+		private static int m_startValue = 0;
+
+		private EnumPreviewFileType(String name)
+		{
+			super(name, m_startValue++);
+		}
+
+		public static EnumPreviewFileType getEnum(String enumName)
+		{
+			return (EnumPreviewFileType) getEnum(EnumPreviewFileType.class, enumName);
+		}
+
+		public static EnumPreviewFileType getEnum(int enumValue)
+		{
+			return (EnumPreviewFileType) getEnum(EnumPreviewFileType.class, enumValue);
+		}
+
+		public static Map getEnumMap()
+		{
+			return getEnumMap(EnumPreviewFileType.class);
+		}
+
+		public static List getEnumList()
+		{
+			return getEnumList(EnumPreviewFileType.class);
+		}
+
+		public static Iterator iterator()
+		{
+			return iterator(EnumPreviewFileType.class);
+		}
+
+		public static final EnumPreviewFileType PNG = new EnumPreviewFileType("PNG");
+		public static final EnumPreviewFileType CIP3Multiple = new EnumPreviewFileType("CIP3Multiple");
+		public static final EnumPreviewFileType CIP3Single = new EnumPreviewFileType("CIP3Single");
+	}
+
+	/**
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoPreview#toString()
 	 * @return
@@ -140,5 +206,13 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	{
 		return "JDFPreview[  --> " + super.toString() + " ]";
 	}
-} // class JDFIDPLayout
-// ==========================================================================
+
+	/**
+	 * TODO Please insert comment!
+	 * @param enumPreviewFileType
+	 */
+	public void setPreviewFileType(EnumPreviewFileType enumPreviewFileType)
+	{
+		super.setPreviewFileType(enumPreviewFileType == null ? null : enumPreviewFileType.getName());
+	}
+}

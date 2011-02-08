@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,8 +82,6 @@ import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.core.AtrInfoTable;
 import org.cip4.jdflib.core.AttributeInfo;
 import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFConstants;
@@ -94,40 +92,46 @@ import org.cip4.jdflib.datatypes.JDFNameRangeList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.process.JDFGeneralID;
 
+/**
+*****************************************************************************
+class JDFAutoPreview : public JDFElement
+
+*****************************************************************************
+*/
+
 public abstract class JDFAutoPreview extends JDFResource
 {
 
 	private static final long serialVersionUID = 1L;
 
-	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
+	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[19];
 	static
 	{
-		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewFileType.getEnum(0), "PNG");
-		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x33333311, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
-		atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x22222222, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[3] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
-		atrInfoTable[4] = new AtrInfoTable(AttributeName.CTM, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
-		atrInfoTable[5] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333331, AttributeInfo.EnumAttributeType.URL, null, null);
-		atrInfoTable[6] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[0] = new AtrInfoTable(AttributeName.PREVIEWFILETYPE, 0x33333333, AttributeInfo.EnumAttributeType.string, null, "PNG");
+		atrInfoTable[1] = new AtrInfoTable(AttributeName.PREVIEWUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPreviewUsage.getEnum(0), "Separation");
+		atrInfoTable[2] = new AtrInfoTable(AttributeName.URL, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[3] = new AtrInfoTable(AttributeName.PARTUSAGE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumPartUsage.getEnum(0), null);
+		atrInfoTable[4] = new AtrInfoTable(AttributeName.COMPENSATION, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumCompensation.getEnum(0), null);
+		atrInfoTable[5] = new AtrInfoTable(AttributeName.CTM, 0x33333333, AttributeInfo.EnumAttributeType.matrix, null, null);
+		atrInfoTable[6] = new AtrInfoTable(AttributeName.DIRECTORY, 0x33333333, AttributeInfo.EnumAttributeType.URL, null, null);
+		atrInfoTable[7] = new AtrInfoTable(AttributeName.MIMETYPEDETAILS, 0x33333333, AttributeInfo.EnumAttributeType.string, null, null);
+		atrInfoTable[8] = new AtrInfoTable(AttributeName.BINDERYSIGNATUREPAGINATIONINDEX, 0x33333333, AttributeInfo.EnumAttributeType.Any, null, null);
+		atrInfoTable[9] = new AtrInfoTable(AttributeName.METADATA0, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[10] = new AtrInfoTable(AttributeName.METADATA1, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[11] = new AtrInfoTable(AttributeName.METADATA2, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[12] = new AtrInfoTable(AttributeName.METADATA3, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[13] = new AtrInfoTable(AttributeName.METADATA4, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[14] = new AtrInfoTable(AttributeName.METADATA5, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[15] = new AtrInfoTable(AttributeName.METADATA6, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[16] = new AtrInfoTable(AttributeName.METADATA7, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[17] = new AtrInfoTable(AttributeName.METADATA8, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
+		atrInfoTable[18] = new AtrInfoTable(AttributeName.METADATA9, 0x33333333, AttributeInfo.EnumAttributeType.NameRangeList, null, null);
 	}
 
 	@Override
 	protected AttributeInfo getTheAttributeInfo()
 	{
 		return super.getTheAttributeInfo().updateReplace(atrInfoTable);
-	}
-
-	private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
-	static
-	{
-		elemInfoTable[0] = new ElemInfoTable(ElementName.COMMENT, 0x33333333);
-		elemInfoTable[1] = new ElemInfoTable(ElementName.GENERALID, 0x33333333);
-	}
-
-	@Override
-	protected ElementInfo getTheElementInfo()
-	{
-		return super.getTheElementInfo().updateReplace(elemInfoTable);
 	}
 
 	/**
@@ -167,50 +171,6 @@ public abstract class JDFAutoPreview extends JDFResource
 	public String toString()
 	{
 		return " JDFAutoPreview[  --> " + super.toString() + " ]";
-	}
-
-	/**
-	* Enumeration strings for PreviewFileType
-	*/
-
-	public static class EnumPreviewFileType extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumPreviewFileType(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		public static EnumPreviewFileType getEnum(String enumName)
-		{
-			return (EnumPreviewFileType) getEnum(EnumPreviewFileType.class, enumName);
-		}
-
-		public static EnumPreviewFileType getEnum(int enumValue)
-		{
-			return (EnumPreviewFileType) getEnum(EnumPreviewFileType.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPreviewFileType.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPreviewFileType.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumPreviewFileType.class);
-		}
-
-		public static final EnumPreviewFileType PNG = new EnumPreviewFileType("PNG");
-		public static final EnumPreviewFileType CIP3Multiple = new EnumPreviewFileType("CIP3Multiple");
-		public static final EnumPreviewFileType CIP3Single = new EnumPreviewFileType("CIP3Single");
 	}
 
 	/**
@@ -257,50 +217,6 @@ public abstract class JDFAutoPreview extends JDFResource
 		public static final EnumPreviewUsage SeparationRaw = new EnumPreviewUsage("SeparationRaw");
 		public static final EnumPreviewUsage ThumbNail = new EnumPreviewUsage("ThumbNail");
 		public static final EnumPreviewUsage Viewable = new EnumPreviewUsage("Viewable");
-	}
-
-	/**
-	* Enumeration strings for PartUsage
-	*/
-
-	public static class EnumPartUsage extends ValuedEnum
-	{
-		private static final long serialVersionUID = 1L;
-		private static int m_startValue = 0;
-
-		private EnumPartUsage(String name)
-		{
-			super(name, m_startValue++);
-		}
-
-		public static EnumPartUsage getEnum(String enumName)
-		{
-			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumName);
-		}
-
-		public static EnumPartUsage getEnum(int enumValue)
-		{
-			return (EnumPartUsage) getEnum(EnumPartUsage.class, enumValue);
-		}
-
-		public static Map getEnumMap()
-		{
-			return getEnumMap(EnumPartUsage.class);
-		}
-
-		public static List getEnumList()
-		{
-			return getEnumList(EnumPartUsage.class);
-		}
-
-		public static Iterator iterator()
-		{
-			return iterator(EnumPartUsage.class);
-		}
-
-		public static final EnumPartUsage Explicit = new EnumPartUsage("Explicit");
-		public static final EnumPartUsage Implicit = new EnumPartUsage("Implicit");
-		public static final EnumPartUsage Sparse = new EnumPartUsage("Sparse");
 	}
 
 	/**
@@ -358,21 +274,21 @@ public abstract class JDFAutoPreview extends JDFResource
 	Methods for Attribute PreviewFileType
 	--------------------------------------------------------------------- */
 	/**
-	  * (5) set attribute PreviewFileType
-	  * @param enumVar: the enumVar to set the attribute to
+	  * (36) set attribute PreviewFileType
+	  * @param value: the value to set the attribute to
 	  */
-	public void setPreviewFileType(EnumPreviewFileType enumVar)
+	public void setPreviewFileType(String value)
 	{
-		setAttribute(AttributeName.PREVIEWFILETYPE, enumVar == null ? null : enumVar.getName(), null);
+		setAttribute(AttributeName.PREVIEWFILETYPE, value, null);
 	}
 
 	/**
-	  * (9) get attribute PreviewFileType
+	  * (23) get String attribute PreviewFileType
 	  * @return the value of the attribute
 	  */
-	public EnumPreviewFileType getPreviewFileType()
+	public String getPreviewFileType()
 	{
-		return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG"));
+		return getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG");
 	}
 
 	/* ---------------------------------------------------------------------
@@ -420,14 +336,6 @@ public abstract class JDFAutoPreview extends JDFResource
 	/* ---------------------------------------------------------------------
 	Methods for Attribute PartUsage
 	--------------------------------------------------------------------- */
-	/**
-	  * (5) set attribute PartUsage
-	  * @param enumVar: the enumVar to set the attribute to
-	  */
-	public void setPartUsage(EnumPartUsage enumVar)
-	{
-		setAttribute(AttributeName.PARTUSAGE, enumVar == null ? null : enumVar.getName(), null);
-	}
 
 	/* ---------------------------------------------------------------------
 	Methods for Attribute Compensation

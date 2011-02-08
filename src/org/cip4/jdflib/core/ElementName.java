@@ -984,6 +984,8 @@ public final class ElementName
 	/** */
 	public static final String LOCATION = "Location";
 	/** */
+	public static final String LOGICALSTACKPARAMS = "LogicalStackParams";
+	/** */
 	public static final String LONGFOLD = "LongFold";
 	/** */
 	public static final String LONGGLUE = "LongGlue";
@@ -1611,6 +1613,8 @@ public final class ElementName
 	public static final String SPINETAPINGPARAMS = "SpineTapingParams";
 	/** */
 	public static final String SPLIT = "Split";
+	/** */
+	public static final String STACK = "Stack";
 	/** */
 	public static final String STACKING = "Stacking";
 	/** */

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,20 +70,39 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Vector;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.devicecapability.JDFActionPool;
-import org.cip4.jdflib.resource.devicecapability.JDFTestPool;
-import org.cip4.jdflib.resource.process.JDFLayoutElementPart;
-import org.cip4.jdflib.resource.process.JDFShapeDef;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.w3c.dom.Element;                         
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.*;                           
+import org.cip4.jdflib.auto.*;                      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.core.ElementInfo;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.node.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.devicecapability.*; 
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
+import org.cip4.jdflib.resource.process.press.*;    
+import org.cip4.jdflib.resource.process.prepress.*; 
+import org.cip4.jdflib.util.*;           
+    /**
+    *****************************************************************************
+    class JDFAutoLayoutElementProductionParams : public JDFResource
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
 {
@@ -93,14 +112,13 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[4];
     static
     {
-        elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x33331111);
+        elemInfoTable[0] = new ElemInfoTable(ElementName.ACTIONPOOL, 0x66661111);
         elemInfoTable[1] = new ElemInfoTable(ElementName.LAYOUTELEMENTPART, 0x33331111);
         elemInfoTable[2] = new ElemInfoTable(ElementName.SHAPEDEF, 0x66661111);
-        elemInfoTable[3] = new ElemInfoTable(ElementName.TESTPOOL, 0x33331111);
+        elemInfoTable[3] = new ElemInfoTable(ElementName.TESTPOOL, 0x66661111);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -150,15 +168,13 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoLayoutElementProductionParams[  --> " + super.toString() + " ]";
     }
 
 
-    @Override
-	public boolean  init()
+    public boolean  init()
     {
         boolean bRet = super.init();
         setResourceClass(JDFResource.EnumResourceClass.Parameter);
@@ -166,8 +182,7 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
     }
 
 
-    @Override
-	public EnumResourceClass getValidClass()
+    public EnumResourceClass getValidClass()
     {
         return JDFResource.EnumResourceClass.Parameter;
     }
@@ -178,54 +193,30 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
  * ***********************************************************************
  */
 
-    /** (26) getCreateActionPool
-     * 
-     * @param iSkip number of elements to skip
+    /**
+     * (24) const get element ActionPool
      * @return JDFActionPool the element
      */
-    public JDFActionPool getCreateActionPool(int iSkip)
+    public JDFActionPool getActionPool()
     {
-        return (JDFActionPool)getCreateElement_KElement(ElementName.ACTIONPOOL, null, iSkip);
+        return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, 0);
     }
 
-    /**
-     * (27) const get element ActionPool
-     * @param iSkip number of elements to skip
-     * @return JDFActionPool the element
-     * default is getActionPool(0)     */
-    public JDFActionPool getActionPool(int iSkip)
-    {
-        return (JDFActionPool) getElement(ElementName.ACTIONPOOL, null, iSkip);
-    }
-
-    /**
-     * Get all ActionPool from the current element
+    /** (25) getCreateActionPool
      * 
-     * @return Collection<JDFActionPool>, null if none are available
+     * @return JDFActionPool the element
      */
-    public Collection<JDFActionPool> getAllActionPool()
+    public JDFActionPool getCreateActionPool()
     {
-        final VElement vc = getChildElementVector(ElementName.ACTIONPOOL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFActionPool> v = new Vector<JDFActionPool>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFActionPool) vc.get(i));
-        }
-
-        return v;
+        return (JDFActionPool) getCreateElement_KElement(ElementName.ACTIONPOOL, null, 0);
     }
 
     /**
-     * (30) append element ActionPool
+     * (29) append element ActionPool
      */
     public JDFActionPool appendActionPool() throws JDFException
     {
-        return (JDFActionPool) appendElement(ElementName.ACTIONPOOL, null);
+        return (JDFActionPool) appendElementN(ElementName.ACTIONPOOL, 1, null);
     }
 
     /** (26) getCreateLayoutElementPart
@@ -313,54 +304,30 @@ public abstract class JDFAutoLayoutElementProductionParams extends JDFResource
         refElement(refTarget);
     }
 
-    /** (26) getCreateTestPool
-     * 
-     * @param iSkip number of elements to skip
+    /**
+     * (24) const get element TestPool
      * @return JDFTestPool the element
      */
-    public JDFTestPool getCreateTestPool(int iSkip)
+    public JDFTestPool getTestPool()
     {
-        return (JDFTestPool)getCreateElement_KElement(ElementName.TESTPOOL, null, iSkip);
+        return (JDFTestPool) getElement(ElementName.TESTPOOL, null, 0);
     }
 
-    /**
-     * (27) const get element TestPool
-     * @param iSkip number of elements to skip
-     * @return JDFTestPool the element
-     * default is getTestPool(0)     */
-    public JDFTestPool getTestPool(int iSkip)
-    {
-        return (JDFTestPool) getElement(ElementName.TESTPOOL, null, iSkip);
-    }
-
-    /**
-     * Get all TestPool from the current element
+    /** (25) getCreateTestPool
      * 
-     * @return Collection<JDFTestPool>, null if none are available
+     * @return JDFTestPool the element
      */
-    public Collection<JDFTestPool> getAllTestPool()
+    public JDFTestPool getCreateTestPool()
     {
-        final VElement vc = getChildElementVector(ElementName.TESTPOOL, null);
-        if (vc == null || vc.size() == 0)
-        {
-            return null;
-        }
-
-        final Vector<JDFTestPool> v = new Vector<JDFTestPool>();
-        for (int i = 0; i < vc.size(); i++)
-        {
-            v.add((JDFTestPool) vc.get(i));
-        }
-
-        return v;
+        return (JDFTestPool) getCreateElement_KElement(ElementName.TESTPOOL, null, 0);
     }
 
     /**
-     * (30) append element TestPool
+     * (29) append element TestPool
      */
     public JDFTestPool appendTestPool() throws JDFException
     {
-        return (JDFTestPool) appendElement(ElementName.TESTPOOL, null);
+        return (JDFTestPool) appendElementN(ElementName.TESTPOOL, 1, null);
     }
 
 }// end namespace JDF

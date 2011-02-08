@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2005 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2010 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,41 +70,39 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-import java.util.zip.DataFormatException;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFElement;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-import org.cip4.jdflib.resource.JDFTool;
-import org.cip4.jdflib.resource.process.JDFCompany;
-import org.cip4.jdflib.resource.process.JDFComponent;
-import org.cip4.jdflib.resource.process.JDFContact;
-import org.cip4.jdflib.resource.process.JDFDigitalMedia;
-import org.cip4.jdflib.resource.process.JDFExposedMedia;
-import org.cip4.jdflib.resource.process.JDFRunList;
-import org.cip4.jdflib.resource.process.prepress.JDFScanParams;
-import org.cip4.jdflib.span.JDFDurationSpan;
-import org.cip4.jdflib.span.JDFNameSpan;
-import org.cip4.jdflib.span.JDFSpanArtHandling;
-import org.cip4.jdflib.span.JDFSpanDeliveryCharge;
-import org.cip4.jdflib.span.JDFSpanTransfer;
-import org.cip4.jdflib.span.JDFStringSpan;
-import org.cip4.jdflib.span.JDFTimeSpan;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.w3c.dom.Element;                         
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.*;                           
+import org.cip4.jdflib.auto.*;                      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.core.ElementInfo;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.node.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.devicecapability.*; 
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
+import org.cip4.jdflib.resource.process.press.*;    
+import org.cip4.jdflib.resource.process.prepress.*; 
+import org.cip4.jdflib.util.*;           
+    /**
+    *****************************************************************************
+    class JDFAutoArtDelivery : public JDFElement
+
+    *****************************************************************************
+    */
 
 public abstract class JDFAutoArtDelivery extends JDFElement
 {
@@ -123,8 +121,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         atrInfoTable[6] = new AtrInfoTable(AttributeName.PREFLIGHTSTATUS, 0x33333331, AttributeInfo.EnumAttributeType.enumeration, EnumPreflightStatus.getEnum(0), null);
     }
     
-    @Override
-	protected AttributeInfo getTheAttributeInfo()
+    protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
     }
@@ -151,8 +148,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
         elemInfoTable[15] = new ElemInfoTable(ElementName.TOOL, 0x66666661);
     }
     
-    @Override
-	protected ElementInfo getTheElementInfo()
+    protected ElementInfo getTheElementInfo()
     {
         return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
@@ -202,8 +198,7 @@ public abstract class JDFAutoArtDelivery extends JDFElement
     }
 
 
-    @Override
-	public String toString()
+    public String toString()
     {
         return " JDFAutoArtDelivery[  --> " + super.toString() + " ]";
     }

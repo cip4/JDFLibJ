@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFAudit;
-import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.ISignalAudit;
 import org.cip4.jdflib.pool.JDFAuditPool;

@@ -530,6 +530,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			sm_PackageNames.put(ElementName.LEVEL, "org.cip4.jdflib.span.JDFSpanLevel");
 			sm_PackageNames.put(ElementName.LOC, "org.cip4.jdflib.resource.devicecapability.JDFLoc");
 			sm_PackageNames.put(ElementName.LOCATION, "org.cip4.jdflib.resource.JDFLocation");
+			sm_PackageNames.put(ElementName.LOGICALSTACKPARAMS, "org.cip4.jdflib.resource.process.JDFLogicalStackParams");
 			sm_PackageNames.put(ElementName.LONGFOLD, "org.cip4.jdflib.resource.process.JDFLongFold");
 			sm_PackageNames.put(ElementName.LONGGLUE, "org.cip4.jdflib.resource.process.JDFLongGlue");
 			sm_PackageNames.put(ElementName.LONGITUDINALRIBBONOPERATIONPARAMS, "org.cip4.jdflib.resource.process.JDFLongitudinalRibbonOperationParams");
@@ -806,6 +807,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			sm_PackageNames.put(ElementName.SPINESANDING, "org.cip4.jdflib.span.JDFOptionSpan");
 			sm_PackageNames.put(ElementName.SPINESHREDDING, "org.cip4.jdflib.span.JDFOptionSpan");
 			sm_PackageNames.put(ElementName.SPINETAPINGPARAMS, "org.cip4.jdflib.resource.JDFSpineTapingParams");
+			sm_PackageNames.put(ElementName.STACK, "org.cip4.jdflib.resource.process.JDFStack");
 			sm_PackageNames.put(ElementName.STACKINGPARAMS, "org.cip4.jdflib.resource.JDFStackingParams");
 			sm_PackageNames.put(ElementName.STATION, "org.cip4.jdflib.resource.process.JDFStation");
 			sm_PackageNames.put(ElementName.STATUSPOOL, "org.cip4.jdflib.pool.JDFStatusPool");
