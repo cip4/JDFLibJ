@@ -90,8 +90,8 @@ public interface IPollHandler
 
 	/**
 	 * 
-	 * @param result the polling details (rc, stream, conten type) to be evaluated
-	 * @return true if the result was successfull processed, else false
+	 * @param result the polling details (rc, stream, content type) to be evaluated
+	 * @return true if the result was successfully processed, else false
 	 */
 	public PollResult handlePoll(IPollDetails result);
 }

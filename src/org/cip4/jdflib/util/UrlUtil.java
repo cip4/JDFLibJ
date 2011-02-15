@@ -192,9 +192,13 @@ public class UrlUtil
 	 */
 	public static final String TEXT_UNKNOWN = JDFCoreConstants.MIME_TEXTUNKNOWN;
 	/**
-	 * the preferred value!
+	 * the preferred value for XML!
 	 */
 	public static final String APPLICATION_XML = "application/xml";
+	/**
+	 * pdf, duh...
+	 */
+	public static final String APPLICATION_PDF = JDFCoreConstants.MIME_PDF;
 	/**
 	 * 
 	 */

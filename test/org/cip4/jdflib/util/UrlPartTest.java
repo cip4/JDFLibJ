@@ -1,7 +1,7 @@
 /**
  * The CIP4 Software License, Version 1.0
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.util;
 
+import java.io.File;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.net.ProxyUtil;
 
@@ -102,6 +104,16 @@ public class UrlPartTest extends JDFTestCaseBase
 		assertNotNull(writeToURL);
 		writeToURL.buffer();
 		assertTrue(writeToURL.toString().contains(new ByteArrayIOStream(writeToURL.getResponseStream()).toString()));
+	}
+
+	/**
+	 * @throws Exception 
+	 * 
+	 */
+	public void testFile() throws Exception
+	{
+		UrlPart p = new UrlPart(new File("Test.xml"));
+		assertEquals(p.getContentType(), UrlUtil.TEXT_XML);
 	}
 
 }

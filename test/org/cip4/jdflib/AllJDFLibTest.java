@@ -248,7 +248,6 @@ import org.cip4.jdflib.util.EnumUtilTest;
 import org.cip4.jdflib.util.FastFiFoTest;
 import org.cip4.jdflib.util.FileUtilTest;
 import org.cip4.jdflib.util.HashUtilTest;
-import org.cip4.jdflib.util.HotFolderTest;
 import org.cip4.jdflib.util.JDFDateTest;
 import org.cip4.jdflib.util.JDFSpawnTest;
 import org.cip4.jdflib.util.MemorySpyTest;
@@ -257,7 +256,6 @@ import org.cip4.jdflib.util.MyArgsTest;
 import org.cip4.jdflib.util.NumberFormatterTest;
 import org.cip4.jdflib.util.PlatformUtilTest;
 import org.cip4.jdflib.util.PrefixInputStreamTest;
-import org.cip4.jdflib.util.QueueHotFolderTest;
 import org.cip4.jdflib.util.RollingBackupTest;
 import org.cip4.jdflib.util.SScanfTest;
 import org.cip4.jdflib.util.ScaleUtilTest;
@@ -270,6 +268,9 @@ import org.cip4.jdflib.util.UrlUtilTest;
 import org.cip4.jdflib.util.VectorMapTest;
 import org.cip4.jdflib.util.file.FileSorterTest;
 import org.cip4.jdflib.util.file.RollingFileTest;
+import org.cip4.jdflib.util.hotfolder.HotFolderTest;
+import org.cip4.jdflib.util.hotfolder.QueueHotFolderTest;
+import org.cip4.jdflib.util.hotfolder.StorageHotFolderTest;
 import org.cip4.jdflib.util.mime.MimeWriterTest;
 import org.cip4.jdflib.util.net.NetPollTest;
 import org.cip4.jdflib.util.net.ProxyUtilTest;
@@ -509,7 +510,6 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(FastFiFoTest.class);
 		suite.addTestSuite(FileUtilTest.class);
 		suite.addTestSuite(HashUtilTest.class);
-		suite.addTestSuite(HotFolderTest.class);
 		suite.addTestSuite(JDFDateTest.class);
 		suite.addTestSuite(JDFSpawnTest.class);
 		suite.addTestSuite(MemorySpyTest.class);
@@ -518,7 +518,6 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(NumberFormatterTest.class);
 		suite.addTestSuite(PlatformUtilTest.class);
 		suite.addTestSuite(PrefixInputStreamTest.class);
-		suite.addTestSuite(QueueHotFolderTest.class);
 		suite.addTestSuite(RollingFileTest.class);
 		suite.addTestSuite(RollingBackupTest.class);
 		suite.addTestSuite(ScaleUtilTest.class);
@@ -533,6 +532,10 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// util.file
 		suite.addTestSuite(FileSorterTest.class);
+		// util.hotfolder
+		suite.addTestSuite(HotFolderTest.class);
+		suite.addTestSuite(QueueHotFolderTest.class);
+		suite.addTestSuite(StorageHotFolderTest.class);
 		// util.mime
 		suite.addTestSuite(MimeWriterTest.class);
 

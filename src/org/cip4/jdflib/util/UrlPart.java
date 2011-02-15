@@ -76,8 +76,17 @@ public class UrlPart implements IPollDetails
 	public UrlPart(final File f) throws IOException
 	{
 		inStream = FileUtil.getBufferedInputStream(f);
-		contentLength = f == null ? 0 : f.length();
-		contentType = null;
+		if (f == null)
+		{
+			contentLength = 0;
+			contentType = null;
+		}
+		else
+		{
+			contentLength = f.length();
+			contentType = UrlUtil.getMimeTypeFromURL(f.getName());
+		}
+
 		connection = null;
 		rc = f == null ? 500 : 200;
 		bufferStream = null;

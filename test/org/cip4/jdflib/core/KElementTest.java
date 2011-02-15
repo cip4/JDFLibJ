@@ -2595,6 +2595,18 @@ public class KElementTest extends JDFTestCaseBase
 		}
 	}
 
+	public void testRemoveNS1()
+	{
+		XMLDoc d = new XMLDoc("foo", null);
+		KElement root = d.getRoot();
+		root.setAttribute("NS1:foo", "bar", "www.ns1.com");
+		root.setAttribute("xxx:foo2", "bar", "www.yyy.com");
+		root.renameAttribute("NS1:foo", "xxx:foo", null, null);
+		root.removeAttribute("xmlns:NS1");
+		assertTrue(d.toXML().indexOf("NS1") < 0);
+
+	}
+
 	/**
 	 * 
 	 *
