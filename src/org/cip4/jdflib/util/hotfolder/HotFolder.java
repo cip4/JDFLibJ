@@ -77,7 +77,7 @@
  * Last changes
  *
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
 import java.util.HashSet;
@@ -85,6 +85,9 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * a very simple hotfolder watcher subdirectories are ignored
@@ -119,8 +122,8 @@ public class HotFolder implements Runnable
 	}
 
 	/**
-	 * cache the extension list
-	 * @return
+	 * cache the extension list, null if any wildcard is accepted
+	 * @return the comma separated list of extensions
 	 */
 	private String getAllExtensions()
 	{
@@ -138,6 +141,11 @@ public class HotFolder implements Runnable
 			if (ext != null)
 			{
 				allextensions.addAll(ext);
+			}
+			else
+			{
+				// an extension=null exists, i.e. wildcard
+				return null;
 			}
 		}
 		allextensions.unify();
@@ -251,61 +259,30 @@ public class HotFolder implements Runnable
 			{
 				lastModified = lastMod;
 				final File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
-				final int fileListLength = files != null ? files.length : 0;
-
-				for (int i = lastFileTime.size() - 1; i >= 0; i--)
+				if (files != null)
 				{
-					boolean found = false;
-					for (int j = 0; j < fileListLength; j++)
-					// loop over all matching files in the directory
+					final int fileListLength = files.length;
+
+					for (int i = lastFileTime.size() - 1; i >= 0; i--)
 					{
-						if (files != null)
+						boolean found = false;
+						final FileTime lftAt = lastFileTime.elementAt(i);
+						for (int j = 0; j < fileListLength; j++)
+						// loop over all matching files in the directory
 						{
-							final FileTime lftAt = lastFileTime.elementAt(i);
 							final File fileJ = files[j];
 							if (fileJ != null && fileJ.equals(lftAt.f))
 							{
-								found = true;
-								if (fileJ.lastModified() == lftAt.modified)
-								{
-									if (fileJ.exists())
-									{
-										for (int k = 0; k < hfl.size(); k++)
-										{
-											try
-											{
-												hfl.get(k).hotFile(fileJ); // exists and stabilized - call callbacks
-											}
-											catch (final Exception x)
-											{
-												//
-											}
-										}
-									}
-									else
-									{
-										found = false;
-									}
-								}
-								else
-								{
-									lftAt.modified = files[j].lastModified();
-								}
-
-								files[j] = null; // this file has been processed,
-								// remove from list for performance
+								found = found || processSingleFile(files, lftAt, j, fileJ);
 							}
+						}
+
+						if (!found)
+						{
+							lastFileTime.remove(i); // not there anymore
 						}
 					}
 
-					if (!found)
-					{
-						lastFileTime.remove(i); // not there anymore
-					}
-				}
-
-				if (files != null)
-				{
 					for (int i = 0; i < fileListLength; i++) // the file is new -
 					// add to list for next check
 					{
@@ -321,6 +298,46 @@ public class HotFolder implements Runnable
 		}
 
 		runThread.interrupt();
+	}
+
+	private boolean processSingleFile(final File[] files, final FileTime lftAt, int j, final File fileJ)
+	{
+		boolean found;
+		found = true;
+		if (fileJ.lastModified() == lftAt.modified)
+		{
+			if (fileJ.exists())
+			{
+				hotFiles(fileJ);
+			}
+			else
+			{
+				found = false;
+			}
+		}
+		else
+		{
+			lftAt.modified = files[j].lastModified();
+		}
+
+		files[j] = null; // this file has been processed,
+		// remove from list for performance
+		return found;
+	}
+
+	private void hotFiles(final File fileJ)
+	{
+		for (int k = 0; k < hfl.size(); k++)
+		{
+			try
+			{
+				hfl.get(k).hotFile(fileJ); // exists and stabilized - call callbacks
+			}
+			catch (final Exception x)
+			{
+				//
+			}
+		}
 	}
 
 	/**

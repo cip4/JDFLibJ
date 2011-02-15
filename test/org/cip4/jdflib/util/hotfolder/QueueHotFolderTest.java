@@ -74,7 +74,7 @@
  * To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
 
@@ -83,6 +83,9 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * @author Rainer

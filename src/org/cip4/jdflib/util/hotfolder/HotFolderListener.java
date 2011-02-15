@@ -68,7 +68,7 @@
  *  
  * 
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
 

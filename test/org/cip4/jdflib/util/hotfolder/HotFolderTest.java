@@ -74,12 +74,13 @@
  * To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
 import java.io.FileOutputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.ThreadUtil;
 
 /**
  * @author Rainer
@@ -204,6 +205,7 @@ public class HotFolderTest extends JDFTestCaseBase
 		final File file1 = new File(theHF + File.separator + "f1.xml");
 		final File file2 = new File(theHF + File.separator + "f1.foo");
 		final File file3 = new File(theHF + File.separator + "f1.txt2");
+		final File file4 = new File(theHF + File.separator + "f1");
 		file.createNewFile();
 		assertTrue(file.exists());
 		file1.createNewFile();
@@ -212,16 +214,25 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertTrue(file2.exists());
 		file3.createNewFile();
 		assertTrue(file3.exists());
+		file4.createNewFile();
+		assertTrue(file4.exists());
 
 		ThreadUtil.sleep(2000);
 		assertFalse(file.exists());
 		assertFalse(file3.exists());
 		assertTrue(file1.exists());
+		assertTrue(file4.exists());
 
 		hf.addListener(new MyListener(true), ".xml");
 		ThreadUtil.sleep(3000);
 		assertFalse(file1.exists());
 		assertTrue(file2.exists());
+		assertTrue(file4.exists());
+
+		hf.addListener(new MyListener(true), null);
+		ThreadUtil.sleep(3000);
+		assertFalse(file2.exists());
+		assertFalse(file4.exists());
 	}
 
 	/**
