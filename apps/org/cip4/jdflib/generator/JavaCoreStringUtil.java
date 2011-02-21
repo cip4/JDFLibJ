@@ -205,6 +205,7 @@ public class JavaCoreStringUtil
 		strbufResult.append("import org.cip4.jdflib.*;                           ").append(strLineEnd);
 		strbufResult.append("import org.cip4.jdflib.auto.*;                      ").append(strLineEnd);
 		strbufResult.append("import org.cip4.jdflib.core.*;                      ").append(strLineEnd);
+		strbufResult.append("import org.cip4.jdflib.core.ElementInfo;                      ").append(strLineEnd);
 		strbufResult.append("import org.cip4.jdflib.span.*;                      ").append(strLineEnd);
 		strbufResult.append("import org.cip4.jdflib.node.*;                      ").append(strLineEnd);
 		strbufResult.append("import org.cip4.jdflib.pool.*;                      ").append(strLineEnd);
