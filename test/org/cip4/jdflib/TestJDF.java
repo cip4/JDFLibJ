@@ -81,8 +81,8 @@ public class TestJDF extends JDFTestCaseBase
 	{
 		JDFResource.setUnpartitiondImplicit(true);
 		CPUTimer ct = new CPUTimer(true);
-		final JDFDoc d = new JDFParser().parseFile("C:/data/JDF/Arne/export.jdf");
-		JDFNode n = d.getJDFRoot().getJobPart("1001.0", null);
+		final JDFDoc d = new JDFParser().parseFile("/data/JDF/2011_01052/main.jdf");
+		JDFNode n = d.getJDFRoot().getJobPart("ImP1.MR", null);
 		ct.stop();
 		System.out.println(ct);
 		JDFSpawn spawn = new JDFSpawn(n);
@@ -97,10 +97,16 @@ public class TestJDF extends JDFTestCaseBase
 		ct.start();
 		JDFAttributeMap map = new JDFAttributeMap();
 		map.put("SignatureName", "Sig001");
-		map.put("SheetName", "Sheets");
+		map.put("SheetName", "A_FB 001");
+		map.put("PartVersion", "All");
 		spawn.vSpawnParts.add(map);
-		spawn.bSpawnIdentical = false;
-		spawn.bFixResources = false;
+		JDFAttributeMap map2 = new JDFAttributeMap();
+		map2.put("SignatureName", "Sig002");
+		map2.put("SheetName", "A_FB 002");
+		map2.put("PartVersion", "All");
+		spawn.vSpawnParts.add(map2);
+		//		spawn.bSpawnIdentical = false;
+		//		spawn.bFixResources = false;
 		spawn.spawn();
 
 	}

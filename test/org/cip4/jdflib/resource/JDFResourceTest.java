@@ -1476,8 +1476,27 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 	}
 
+	/**
+	 * 
+	 */
+	public void testGetPartitionVectorSkip()
+	{
+		JDFResource r = new JDFDoc("JDF").getJDFRoot().addResource("NodeInfo", EnumUsage.Input);
+		JDFResource sheet = r.addPartition(EnumPartIDKey.SignatureName, "s1").addPartition(EnumPartIDKey.SheetName, "1");
+		JDFResource f = sheet.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.PartVersion, "v1");
+		JDFResource b = sheet.addPartition(EnumPartIDKey.Side, "Back").addPartition(EnumPartIDKey.PartVersion, "v1");
+		JDFResource sheet2 = r.addPartition(EnumPartIDKey.SignatureName, "s2").addPartition(EnumPartIDKey.SheetName, "2");
+		JDFResource f2 = sheet2.addPartition(EnumPartIDKey.Side, "Front").addPartition(EnumPartIDKey.PartVersion, "v1");
+		JDFResource b2 = sheet2.addPartition(EnumPartIDKey.Side, "Back").addPartition(EnumPartIDKey.PartVersion, "v1");
+		JDFAttributeMap m = new JDFAttributeMap();
+		m.put(EnumPartIDKey.SheetName, "1");
+		m.put(EnumPartIDKey.PartVersion, "v1");
+		VElement v = r.getPartitionVector(m, EnumPartUsage.Explicit);
+		assertTrue(v.contains(f));
+		assertTrue(v.contains(b));
+	}
+
 	// //////////////////////////////////////////////////////////////////////////
-	// /
 
 	/**
 	 * 
