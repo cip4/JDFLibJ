@@ -151,11 +151,11 @@ public class SpawnJDF
 		final String usage = "SpawnJDF: JDF spawn processor;\n" + "-i input JDF;\n" + "-o output JDF;\n" + "-p jobpartId;\n" + "-T <Timing>;\n"
 				+ "-k keys comma separated list of part keys\n" + "-w spawn global resources rw(default=ro)\n" + "-d delete node from original file" + "-n export as new jdf";
 
-		final boolean doEscapes = args.boolParameter('e', false);
-		final boolean bTime = args.boolParameter('T', false);
+		final boolean doEscapes = args.boolParameter('e');
+		final boolean bTime = args.boolParameter('T');
 		System.out.println(prg + "e: doEscapes=" + doEscapes);
 
-		final boolean useVDOMParser = args.boolParameter('v', false);
+		final boolean useVDOMParser = args.boolParameter('v');
 		System.out.println(prg + "v: useVDOMParser=" + useVDOMParser);
 
 		final VString vRWResources = new VString(StringUtil.tokenize(args.parameter('w'), ",", false));
@@ -178,7 +178,7 @@ public class SpawnJDF
 		final String task = args.parameter('t');
 		System.out.println(prg + "t: task=" + task);
 
-		final boolean v = args.boolParameter('v', false);
+		final boolean v = args.boolParameter('v');
 		System.out.println(prg + "v: =" + v);
 
 		final String strPartID = args.parameter('p');
@@ -199,7 +199,7 @@ public class SpawnJDF
 
 			final JDFNode rootIn = (JDFNode) docIn.getRoot();
 			// always assume jdf 1.3 or higher when spawning to jdf 2.0
-			if (args.boolParameter('n', false))
+			if (args.boolParameter('n'))
 			{
 				rootIn.fixVersion(EnumVersion.Version_1_3);
 			}
@@ -236,7 +236,7 @@ public class SpawnJDF
 				final JDFNode node = spawn.spawn(xmlFile, outFile, vRWResources, vSpawnParts, false, true, true, true);
 				final KElement rootOut;
 
-				if (args.boolParameter('n', false))
+				if (args.boolParameter('n'))
 				{
 					rootOut = makeNewJDF(node, rootIn);
 				}

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,6 +73,7 @@ import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumMediaType;
+import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
 import org.cip4.jdflib.auto.JDFAutoResourceCmdParams.EnumUpdateMethod;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
@@ -384,7 +385,7 @@ public class JMFResourceTest extends JDFTestCaseBase
 		mPartRQP.setAttribute(AttributeName.DIMENSION, "");
 		mediaRQP.removeAttribute(AttributeName.DIMENSION);
 		rqp.applyResourceCommand(jdf);
-//		final JDFMedia m2Sheet4 = (JDFMedia) 
+		//		final JDFMedia m2Sheet4 = (JDFMedia) 
 		m2.getPartition(sheetMap, null);
 		assertEquals("retained root dimension", m2.getDimension(), new JDFXYPair(20, 30));
 		// assertFalse("removed leaf dimension", m2Sheet4.hasAttribute_KElement(AttributeName.DIMENSION, null, false));
@@ -457,6 +458,48 @@ public class JMFResourceTest extends JDFTestCaseBase
 			final JDFResourceCmdParams params = cmd.getResourceCmdParams(0);
 			params.applyResourceCommand(jdfDoc.getJDFRoot());
 		}
+	}
+
+	/**
+	 * Method testResourceCommandPartIDKeys
+	 * 
+	 */
+	public void testResourceCommandIdentical()
+	{
+		final JDFDoc jdfDoc = JDFDoc.parseFile(sm_dirTestData + "ResourceCommandTest.jdf");
+		final JDFNode root = jdfDoc.getJDFRoot();
+
+		final JDFAttributeMap amAttr = new JDFAttributeMap();
+
+		amAttr.put("Start", "2006-11-02T14:13:18+01:00");
+		amAttr.put("End", "2006-11-02T15:13:18+01:00");
+		String partID, resID;
+
+		final JDFAttributeMap amParts = new JDFAttributeMap();
+		amParts.put("SignatureName", "Sig001");
+		amParts.put("SheetName", "FB 001");
+		amParts.put("Side", "Front");
+		partID = "SFP0.C";
+		resID = "Link49087948_000508";
+		final JDFNode n = root.getJobPart(partID, null);
+		final JDFNodeInfo ni = (JDFNodeInfo) n.getChildWithAttribute(ElementName.NODEINFO, "ID", null, resID, 0, false);
+		assertNotNull(ni);
+		JDFResource niPart = ni.getPartition(amParts, null);
+		JDFAttributeMap map2 = amParts.clone();
+		map2.put("Side", "Back");
+		assertNotNull(niPart);
+		JDFResource niBack = ni.getCreatePartition(map2, null);
+		niBack.setIdentical(niPart);
+
+		JDFResourceCmdParams params = createResourceParams(partID, resID, map2, amAttr);
+		params.applyResourceCommand(n);
+		assertNotNull(n);
+		final JDFNodeInfo nip = (JDFNodeInfo) ni.getPartition(amParts, null);
+		assertNotNull(nip);
+		assertFalse(nip.hasAttribute_KElement("ID", null, false));
+		assertFalse(nip.hasAttribute_KElement("SheetName", null, false));
+		assertEquals(EnumSide.Back, niBack.getSide());
+		assertEquals(EnumSide.Front, niPart.getSide());
 	}
 
 	private JDFResourceCmdParams createResourceParams(final String strJobPartID, final String strResourceID, final JDFAttributeMap amParts, final JDFAttributeMap amAttr)

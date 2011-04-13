@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -223,6 +223,18 @@ public class FixVersionTest extends TestCase
 		assertEquals(m.getResStatus(true), EnumResStatus.Available);
 		assertTrue(m.fixVersion(EnumVersion.Version_1_3));
 		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+	}
+
+	/**
+	 * 
+	 */
+	public void testConvert()
+	{
+		final JDFMedia m = (JDFMedia) n.addResource("Media", null, EnumUsage.Input, null, null, null, null);
+		m.setResStatus(EnumResStatus.Available, true);
+		assertEquals(m.getResStatus(true), EnumResStatus.Available);
+		assertTrue(new FixVersion(EnumVersion.Version_1_1).convert(n));
+		assertEquals(n.getVersion(true), EnumVersion.Version_1_1);
 	}
 
 	// //////////////////////////////////////////////////////////////////////

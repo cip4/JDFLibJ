@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -80,6 +80,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.cip4.jdflib.core.VString;
+
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
@@ -130,4 +132,21 @@ public class StreamUtil
 		}
 		return new BufferedOutputStream(os);
 	}
+
+	/**
+	 * read and tokenize a stream
+	 * @param in the input stream to read
+	 * @return a vector of strings, one for each line
+	 */
+	public static VString getLines(InputStream in)
+	{
+		if (in == null)
+			return null;
+
+		ByteArrayIOStream ios = new ByteArrayIOStream(in);
+		byte[] bytes = ios.getBuf();
+		final String s = bytes == null ? null : new String(bytes, 0, bytes.length);
+		return StringUtil.tokenize(s, "\n\r", false);
+	}
+
 }

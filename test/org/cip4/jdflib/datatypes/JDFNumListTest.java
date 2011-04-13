@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -273,6 +273,18 @@ public class JDFNumListTest extends JDFTestCaseBase
 		assertEquals(nl.doubleAt(-1), 3.3, 0.0);
 		assertEquals(nl.doubleAt(3), 0.0, 0.0);
 
+	}
+
+	/**
+	 * @throws Exception 
+	 * 
+	 */
+	public void testGetDoubleList() throws Exception
+	{
+		final JDFNumberList nl = new JDFNumberList("1.1 2.2 3.3");
+		assertEquals(nl.getDoubleList().length, 3);
+		assertEquals(nl.getDoubleList()[1], 2.2, 0.0);
+		assertEquals(nl.getDoubleList()[2], 3.3, 0.0);
 	}
 
 	/**

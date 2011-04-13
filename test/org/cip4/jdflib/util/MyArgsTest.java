@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -194,6 +194,38 @@ public class MyArgsTest extends TestCase
 		MyArgs args = new MyArgs(s, "ab", "c", null);
 		assertEquals(args.nargs(), 0);
 
+	}
+
+	/**
+	 * Test method for 'org.cip4.jdflib.util.MyArgs.nargs()'
+	 */
+	public void testSetFlag()
+	{
+		String[] s = { "-abc", "foo" };
+		MyArgs args = new MyArgs(s, "ab", "c", null);
+		assertTrue(args.boolParameter('a'));
+		args.setFlag('a', false);
+		assertFalse(args.boolParameter('a'));
+		assertFalse(args.boolParameter('d'));
+		args.setFlag('d', true);
+		assertTrue(args.boolParameter('d'));
+	}
+
+	/**
+	 * Test method for 'org.cip4.jdflib.util.MyArgs.nargs()'
+	 */
+	public void testSetParameter()
+	{
+		String[] s = { "-abc", "foo" };
+		MyArgs args = new MyArgs(s, "ab", "c", null);
+		assertEquals(args.parameter('c'), "foo");
+		args.setParam('c', null);
+		assertNull(args.parameter('c'));
+		args.setParam('c', "bar");
+		assertEquals(args.parameter('c'), "bar");
+		assertNull(args.parameter('d'));
+		args.setParam('d', "bar");
+		assertEquals(args.parameter('d'), "bar");
 	}
 
 	/**

@@ -87,6 +87,7 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
+import org.cip4.jdflib.util.StringUtil.StringReplacer;
 
 /**
  * @author MatternK
@@ -108,6 +109,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals("don't reconvert real regexp", StringUtil.simpleRegExptoRegExp("(.*)\\.b"), "(.*)\\.b");
 		assertTrue(StringUtil.matches("foo.txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
 		assertTrue(StringUtil.matches(".tx", StringUtil.simpleRegExptoRegExp("*.tx*")));
+		assertTrue(StringUtil.matches("55", StringUtil.simpleRegExptoRegExp("55|56")));
+		assertTrue(StringUtil.matches("56", StringUtil.simpleRegExptoRegExp("55|56")));
+		assertFalse(StringUtil.matches("57", StringUtil.simpleRegExptoRegExp("55|56")));
 		assertFalse(StringUtil.matches("foo_txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
 	}
 
@@ -507,6 +511,19 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.replaceString("abbcc", "cc", "_"), "abb_");
 		assertEquals(StringUtil.replaceString("abbcc", "bb", null), "acc");
 		assertEquals(StringUtil.replaceString("000000", "00", "0"), "0");
+		assertEquals(StringUtil.replaceString("000", "0", "00"), "000000");
+	}
+
+	/**
+	 * 
+	 */
+	public void testStringReplacer()
+	{
+		StringReplacer sr = new StringReplacer("000000");
+		assertEquals(sr.replaceString("00", "0"), "0");
+		sr = new StringReplacer("000000");
+		sr.setReRead(false);
+		assertEquals(sr.replaceString("00", "0"), "000");
 	}
 
 	/**
@@ -849,6 +866,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		final String s3 = "a";
 		assertEquals(StringUtil.replaceToken(s3, 0, "/", "A"), "A");
 		assertEquals(StringUtil.replaceToken(s3, 0, "/", null), "");
+		final String s4 = "a_b";
+		assertEquals(StringUtil.replaceToken(s4, 0, "_", "c"), "c_b");
+		assertEquals(StringUtil.replaceToken(s4, 0, "_", null), "b");
 	}
 
 	/**

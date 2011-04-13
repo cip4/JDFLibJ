@@ -3968,16 +3968,16 @@ public class JDFElement extends KElement
 	 */
 	public String jdfVersion()
 	{
-		return "1.3";
+		return "1.4";
 	}
 
 	/**
 	 * returns the official JDF schema URI for a particular version
+	 * fool proof schema url as of November 5th, 2003
 	 * 
 	 * @return the URL that fits to majorVersion and minorVersion - null if not supported
 	 */
-	public static String getSchemaURL() // fool proof schema url as of November
-	// 5th, 2003
+	public static String getSchemaURL()
 	{
 		return getSchemaURL(1, 1); // "http://www.CIP4.org/JDFSchema_1_1"
 	}
@@ -4000,8 +4000,7 @@ public class JDFElement extends KElement
 				return "http://www.CIP4.org/JDFSchema_1_1";
 			}
 		}
-		// not supported
-		return null;
+		return "http://www.CIP4.org/JDFSchema_" + majorVersion + "_" + minorVersion;
 	}
 
 	/**

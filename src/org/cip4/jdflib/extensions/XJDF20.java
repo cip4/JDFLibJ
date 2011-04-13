@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -182,6 +182,17 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public final static String rootJMF = "JMF";
 
+	/**
+	 * returns the official JDF schema URI for  2.0
+	 * 
+	 * 
+	 * @return the URL that fits to majorVersion and minorVersion - null if not supported
+	 */
+	public static String getSchemaURL()
+	{
+		return JDFElement.getSchemaURL(2, 0);
+	}
+
 	private final String m_spawnInfo = "SpawnInfo";
 	private boolean trackAudits;
 	protected VString resAttribs;
@@ -318,6 +329,7 @@ public class XJDF20 extends BaseElementWalker
 		final JDFDoc newDoc = new JDFDoc(bJMF ? rootJMF : rootName);
 		newDoc.setInitOnCreate(false);
 		newRoot = newDoc.getRoot();
+		newRoot.setNamespaceURI(getSchemaURL());
 		first = new HashSet<String>();
 	}
 

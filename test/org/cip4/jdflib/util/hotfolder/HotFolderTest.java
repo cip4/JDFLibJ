@@ -80,6 +80,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.ThreadUtil;
 
 /**
@@ -258,6 +260,33 @@ public class HotFolderTest extends JDFTestCaseBase
 		assertFalse(file.exists());
 		assertTrue("in subdir", file1.exists());
 		assertTrue(file2.exists());
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testLog() throws Exception
+	{
+		hf = new HotFolder(theHF, ".txt", new MyListener(true));
+		File backup = new File(sm_dirTestDataTemp + "backup/hfbackup.keep");
+		FileUtil.deleteAll(backup.getParentFile());
+
+		hf.setBackup(new RollingBackupFile(backup, 5));
+		assertTrue(backup.getParentFile().isDirectory());
+		hf.restart();
+		for (int i = 0; i < 10; i++)
+		{
+			final File file = new File(theHF + File.separator + "f" + i + ".txt");
+			file.createNewFile();
+		}
+		final File file1 = new File(theHF + File.separator + "f1.txt");
+
+		for (int i = 0; i < 15 && file1.exists(); i++)
+		{
+			ThreadUtil.sleep(1000);
+		}
+
+		assertFalse(file1.exists());
 	}
 
 	/**

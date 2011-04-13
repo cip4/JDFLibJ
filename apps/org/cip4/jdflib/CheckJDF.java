@@ -110,35 +110,23 @@ import org.cip4.jdflib.validate.JDFValidator;
 public class CheckJDF extends JDFValidator
 {
 
-	final private static String usage = "\n******************************************************************************************\n"
-			+ "Usage: <input JDF files>\n"
-			+ "-V(ersion) -q(uiet) -c(omplete) -n(amespace) -v(alidate) -t(ime)\n"
-			+ "-u(RL)<URL> -h(ost) -p(ort) -l(ocation)<schemaLocation> -L(ocation)<schemaLocation>\n"
+	final private static String usage = "\n******************************************************************************************\n" + "Usage: <input JDF files>\n"
+			+ "-V(ersion) -q(uiet) -c(omplete) -n(amespace) -v(alidate) -t(ime)\n" + "-u(RL)<URL> -h(ost) -p(ort) -l(ocation)<schemaLocation> -L(ocation)<schemaLocation>\n"
 			+ "-d(eviceCapabilities)<input JDM file>  -P(resentValueLists) \n\n"
 
-			+ "-? usage info\n"
-			+ "-q is quiet for valid files\n"
-			+ "-Q is completely quiet for all files\n"
-			+ "-n will report all elements from foreign name spaces\n"
-			+ "-c requires all required elements and attributes to exist, else incomplete JDF is OK\n"
-			+ "-d location of a device capabilities file to test against\n"
-			+ "-f force version to a given jdf version (1.0, 1.1, 1.2, 1.3)\n"
-			+ "-m print multiple IDs\n"
+			+ "-? usage info\n" + "-q is quiet for valid files\n" + "-Q is completely quiet for all files\n" + "-n will report all elements from foreign name spaces\n"
+			+ "-c requires all required elements and attributes to exist, else incomplete JDF is OK\n" + "-d location of a device capabilities file to test against\n"
+			+ "-f force version to a given jdf version (1.0, 1.1, 1.2, 1.3)\n" + "-m print multiple IDs\n"
 			+ "-P device capabilities parameter. Use present value lists, otherwise allowed value lists\n"
-			+ "-u URL to send the JMF to. In this case, checkJDF will validate the response from the URL\n"
-			+ "-U check for dangling URL attributes\n"
-			+ "-h proxy host name\n"
+			+ "-u URL to send the JMF to. In this case, checkJDF will validate the response from the URL\n" + "-U check for dangling URL attributes\n" + "-h proxy host name\n"
 			+ "-p proxy port name\n"
 			+ "-v validate using XML Schema validation;\n   the Schema can be defined in the xsi:schemaLocation tag in the JDF or using the -l or -L switch\n"
 			+ "-V Always print a version stamp, even in quiet mode (-q)\n"
 			+ "-L location of the schema for the Namespace \"http://www.CIP4.org/JDFSchema_1_1\"\n   Note that blanks ' ' are invalid in the file names\n"
 			+ "-l location of additional private schema for validation in the same format as xsi:schemaLocation\n   "
 			+ "except that multiple schema and schema/namespace pairs are separated by commas ',' not blanks ' '\n   "
-			+ "The JDF schema specified in the -L switch should not be included in this list\n"
-			+ "-t print out Timing information\n"
-			+ "-T Translation language for the xslt output\n"
-			+ "-w print out Warnings (deprecated etc.)\n"
-			+ "-x output filename that contains an xml formatted error report\n"
+			+ "The JDF schema specified in the -L switch should not be included in this list\n" + "-t print out Timing information\n"
+			+ "-T Translation language for the xslt output\n" + "-w print out Warnings (deprecated etc.)\n" + "-x output filename that contains an xml formatted error report\n"
 			+ "-X XSL stylesheet to apply to the xml formatted error report as specified in -x\n";
 
 	public CheckJDF()
@@ -182,20 +170,19 @@ public class CheckJDF extends JDFValidator
 
 	private String parseArgs(String[] commandLineArgs)
 	{
-		MyArgs args = new MyArgs(commandLineArgs, "?cmqPQvVntwU", "dlfLuhpTxX",
-				null);
+		MyArgs args = new MyArgs(commandLineArgs, "?cmqPQvVntwU", "dlfLuhpTxX", null);
 
-		if (args.boolParameter('?', false))
+		if (args.boolParameter('?'))
 		{
 			sysOut.println("JDFValidator:\n" + version + '\n' + usage);
 			System.exit(0);
 		}
-		bWarning = args.boolParameter('w', false);
-		bTiming = args.boolParameter('t', false);
-		bQuiet = args.boolParameter('q', false);
-		bWarnDanglingURL = args.boolParameter('U', false);
+		bWarning = args.boolParameter('w');
+		bTiming = args.boolParameter('t');
+		bQuiet = args.boolParameter('q');
+		bWarnDanglingURL = args.boolParameter('U');
 
-		this.setPrint(!args.boolParameter('Q', false));
+		this.setPrint(!args.boolParameter('Q'));
 		xmlOutputName = args.parameterString('x');
 		xslStyleSheet = args.parameterString('X');
 		getTranslation(args);
@@ -203,17 +190,16 @@ public class CheckJDF extends JDFValidator
 		KElement xmlRoot = pOut.getRoot();
 		xmlRoot.setAttribute("Language", "EN");
 
-		boolean bVersion = !bQuiet || args.boolParameter('V', false);
+		boolean bVersion = !bQuiet || args.boolParameter('V');
 		if (bVersion)
 		{
 			sysOut.println('\n' + version + '\n');
 			sysOut.println(args.toString());
-			xmlRoot.setAttribute("Arguments", StringUtil.setvString(
-					commandLineArgs, " ", null, null));
+			xmlRoot.setAttribute("Arguments", StringUtil.setvString(commandLineArgs, " ", null, null));
 		}
 
-		bPrintNameSpace = args.boolParameter('n', false);
-		bMultiID = args.boolParameter('m', false);
+		bPrintNameSpace = args.boolParameter('n');
+		bMultiID = args.boolParameter('m');
 
 		if (args.hasParameter('h'))
 		{
@@ -223,10 +209,11 @@ public class CheckJDF extends JDFValidator
 
 		if (args.hasParameter('c'))
 		{
-			if (args.boolParameter('c', false))
+			if (args.boolParameter('c'))
 			{
 				level = EnumValidationLevel.Complete;
-			} else
+			}
+			else
 			{
 				level = EnumValidationLevel.Incomplete;
 			}
@@ -246,13 +233,10 @@ public class CheckJDF extends JDFValidator
 			VString vs = new VString(schemaLocation0, JDFConstants.COMMA);
 			if (vs.size() % 2 != 0)
 			{
-				sysOut
-						.println("error in schema location: format is \"NameSpaceURI1,Location1,NameSpaceURI2,Location2\"\n - bailing out!"
-								+ usage);
+				sysOut.println("error in schema location: format is \"NameSpaceURI1,Location1,NameSpaceURI2,Location2\"\n - bailing out!" + usage);
 				System.exit(3);
 			}
-			schemaLocation0 = StringUtil.setvString(vs, JDFConstants.BLANK,
-					JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
+			schemaLocation0 = StringUtil.setvString(vs, JDFConstants.BLANK, JDFConstants.EMPTYSTRING, JDFConstants.EMPTYSTRING);
 			schemaLocation += schemaLocation0;
 		}
 
@@ -262,14 +246,12 @@ public class CheckJDF extends JDFValidator
 			File fDC = UrlUtil.urlToFile(devCapFile);
 			if (fDC == null || !fDC.canRead())
 			{
-				sysOut.println("Error reading devcap file: " + devCapFile
-						+ "\n - bailing out!\n" + usage);
+				sysOut.println("Error reading devcap file: " + devCapFile + "\n - bailing out!\n" + usage);
 				System.exit(3);
 			}
 		}
 
-		bValidate = (args.boolParameter('v', false))
-				|| (schemaLocation != null);
+		bValidate = (args.boolParameter('v')) || (schemaLocation != null);
 		String jdfVersion = args.parameterString('f');
 		if (jdfVersion != null)
 		{
@@ -285,7 +267,7 @@ public class CheckJDF extends JDFValidator
 		}
 
 		testlists = EnumFitsValue.Allowed;
-		if (args.boolParameter('P', false))
+		if (args.boolParameter('P'))
 		{
 			testlists = EnumFitsValue.Present;
 		}

@@ -119,15 +119,15 @@ import org.cip4.jdflib.util.net.ProxyUtil;
 public class UrlUtil
 {
 	/**
-	 * 
+	 * http post method
 	 */
 	public static final String POST = "POST";
 	/**
-	 * 
+	 *  http get method
 	 */
 	public static final String GET = "GET";
 	/**
-	 * 
+	 *  http head method
 	 */
 	public static final String HEAD = "HEAD";
 
@@ -264,6 +264,37 @@ public class UrlUtil
 		relPath = new String(utf8);
 		relPath = StringUtil.escape(relPath, m_URIEscape, "%", 16, 2, 0x21, bEscape128 ? 128 : -1);
 		return relPath;
+	}
+
+	/**
+	 * get a prinect url for this host and path
+	 * @param bSecure if true, make https
+	 * @param host hostname
+	 * @param port the port, duh
+	 * @param path may be null
+	 * @return
+	 */
+	public static String createHttpUrl(boolean bSecure, String host, int port, String path)
+	{
+		if (path != null && !path.startsWith("/"))
+			path = "/" + path;
+		try
+		{
+			if (port > 0)
+			{
+				URL url = new URL("http" + (bSecure ? "s" : ""), host, port, path);
+				return url.toExternalForm();
+			}
+			else
+			{
+				URL url = new URL("http" + (bSecure ? "s" : ""), host, path);
+				return url.toExternalForm();
+			}
+		}
+		catch (MalformedURLException x)
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1279,8 +1310,8 @@ public class UrlUtil
 	 * 
 	 * @param strUrl the URL to write to
 	 * @param stream the input stream to read from
-	 * @param method GET or POST
-	 * @param contentType the contenttype to set MUST BE SET!
+	 * @param method HEAD, GET or POST
+	 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 	 * @param details
 	 * @return {@link UrlPart} the opened http connection, null in case of error
 	 * 
@@ -1301,8 +1332,8 @@ public class UrlUtil
 		/**
 		 * @param strUrl the URL to write to
 		 * @param stream the input stream to read from
-		 * @param method GET or POST
-		 * @param contentType the contenttype to set MUST BE SET!
+		 * @param method HEAD, GET or POST
+		 * @param contentType the contenttype to set, if NULL defaults to TEXT/UNKNOWN
 		 * @param details
 		 */
 		public URLWriter(String strUrl, InputStream stream, final String method, String contentType, final HTTPDetails details)
@@ -1310,6 +1341,8 @@ public class UrlUtil
 			this.strUrl = strUrl;
 			this.stream = stream;
 			this.method = method;
+			if (contentType == null)
+				contentType = TEXT_UNKNOWN;
 			this.contentType = StringUtil.token(contentType, 0, "\r\n");
 
 			this.details = details;
@@ -1390,7 +1423,7 @@ public class UrlUtil
 			}
 			catch (final Exception x)
 			{
-				// nop System.out.println(x);
+				//				System.out.println(x);
 			}
 			return null;
 		}

@@ -94,11 +94,14 @@ public class EnsureNSUri extends BaseElementWalker
 
 	/**
 	 * add a prefix / uri pair
-	 * @param prefix
-	 * @param uri
+	 * @param prefix the namespace prefix - may be null for empty namespace
+	 * @param uri the URI must not be null 
+	 * @throws IllegalArgumentException if uri is null
 	 */
 	public void addNS(String prefix, String uri)
 	{
+		if (uri == null)
+			throw new IllegalArgumentException("uri MUST NOT be null");
 		nsMap.put(prefix, uri);
 	}
 
@@ -109,6 +112,8 @@ public class EnsureNSUri extends BaseElementWalker
 	 */
 	public void addAlias(String badPrefix, String goodPrefix)
 	{
+		if (goodPrefix == null)
+			goodPrefix = "<";
 		aliasMap.put(badPrefix, goodPrefix);
 	}
 
@@ -123,6 +128,13 @@ public class EnsureNSUri extends BaseElementWalker
 		{
 			String next = it.next();
 			root.addNameSpace(next, nsMap.get(next));
+		}
+		Iterator<String> itAlias = aliasMap.keySet().iterator();
+		while (itAlias.hasNext())
+		{
+			String next = itAlias.next();
+			String zappAtt = next == null ? "xmlns" : "xmlns:" + next;
+			root.removeAttribute(zappAtt);
 		}
 		walkTree(root, null);
 	}
@@ -174,16 +186,13 @@ public class EnsureNSUri extends BaseElementWalker
 			String destPrefix = getAlias(s);
 			String srcPrefix = s;
 
-			if (destPrefix != null)
+			if (nsMap.get(destPrefix) != null)
 			{
-				if (nsMap.get(destPrefix) != null)
-				{
-					e1.setNamespaceURI(nsMap.get(destPrefix));
-				}
-				if (!destPrefix.equals(srcPrefix))
-				{
-					e1.setPrefix(destPrefix);
-				}
+				e1.setNamespaceURI(nsMap.get(destPrefix));
+			}
+			if (destPrefix != null && !destPrefix.equals(srcPrefix) || (srcPrefix != null && destPrefix == null))
+			{
+				e1.setPrefix(destPrefix);
 			}
 
 			VString atts = e1.getAttributeVector_KElement();
@@ -199,10 +208,8 @@ public class EnsureNSUri extends BaseElementWalker
 		{
 			String origPrefix = KElement.xmlnsPrefix(att);
 			String prefix = getAlias(origPrefix);
-			if (prefix == null)
-				prefix = ":";
 			String uri = nsMap.get(prefix);
-			if (uri != null)
+			if (uri != null && !JDFConstants.XMLNS.equals(att))
 			{
 				processStandardAttribute(e1, att, origPrefix, prefix, uri);
 			}
@@ -258,6 +265,8 @@ public class EnsureNSUri extends BaseElementWalker
 			if (s == null)
 				return s;
 			String s2 = aliasMap.get(s);
+			if ("<".equals(s2))
+				return null;
 			return s2 == null ? s : s2;
 		}
 

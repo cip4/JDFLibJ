@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -86,8 +86,10 @@ import java.util.Vector;
 
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * a very simple hotfolder watcher subdirectories are ignored
@@ -104,14 +106,13 @@ public class HotFolder implements Runnable
 	/**
 	 * the time in milliseconds to wait for stabilization
 	 */
-	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds -
-	// also minimum length of non-modification
-	private boolean interrupt = false; // if set to true, the watcher interupted
-	// and the thread ends
+	public int stabilizeTime = defaultStabilizeTime; // time between reads in milliseconds - also minimum length of non-modification
+	private boolean interrupt = false; // if set to true, the watcher interupted and the thread ends
 	private static int nThread = 0;
 
 	private final File dir;
 	private String allExtensions;
+	private RollingBackupFile logRoller;
 
 	/**
 	 * @return the hot folder directory
@@ -327,6 +328,11 @@ public class HotFolder implements Runnable
 
 	private void hotFiles(final File fileJ)
 	{
+		if (logRoller != null)
+		{
+			String name = fileJ.getName();
+			FileUtil.copyFile(fileJ, logRoller.getNewFile(UrlUtil.extension(name)));
+		}
 		for (int k = 0; k < hfl.size(); k++)
 		{
 			try
@@ -458,6 +464,19 @@ public class HotFolder implements Runnable
 	public void setStabilizeTime(int stabilizeTime)
 	{
 		this.stabilizeTime = stabilizeTime;
+	}
+
+	/**
+	 * 
+	 * create a backup file
+	 * @param backup
+	 */
+	public void setBackup(RollingBackupFile backup)
+	{
+		if (backup != null)
+			backup.getParentFile().mkdirs();
+
+		logRoller = backup;
 	}
 
 }

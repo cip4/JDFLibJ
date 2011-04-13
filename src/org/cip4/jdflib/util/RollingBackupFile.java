@@ -71,6 +71,7 @@
 package org.cip4.jdflib.util;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -110,8 +111,19 @@ public class RollingBackupFile extends File
 	 */
 	public File getNewFile()
 	{
-		init();
-		return this;
+		final String extension = FileUtil.getExtension(this);
+		return getNewFile(extension);
+	}
+
+	/**
+	 * 
+	 * get a new file for a given extension
+	 * @param extension
+	 * @return
+	 */
+	public File getNewFile(final String extension)
+	{
+		return init(extension);
 	}
 
 	/**
@@ -155,21 +167,58 @@ public class RollingBackupFile extends File
 	/**
 	 * the big simple rolling method
 	 */
-	private synchronized void init()
+	private synchronized File init(String extension)
 	{
-		final String pathname = getPath();
-		final String extension = FileUtil.getExtension(this);
+		String pathname = getPath();
+		pathname = UrlUtil.newExtension(pathname, extension);
+		HashMap<Integer, String> map = getExtensionMap();
 		for (int i = nBackup; i > 0; i--)
 		{
-			final String sBak = getPathFor(pathname, extension, i);
-			final String sNewBak = (i == 1) ? pathname : getPathFor(pathname, extension, i - 1);
-			final File lastFile = new File(sBak);
-			if (lastFile.exists())
+			String ext = map.get(new Integer(i - 1));
+			String ext2 = map.get(new Integer(i));
+			if (ext != null)
 			{
-				lastFile.delete();
+				final String sBak = getPathFor(pathname, ext, i);
+				final String sNewBak = (i == 1) ? UrlUtil.newExtension(pathname, ext) : getPathFor(pathname, ext, i - 1);
+				final String sBak2 = UrlUtil.newExtension(sBak, ext2);
+				final File lastFile2 = new File(sBak2);
+				if (lastFile2.exists())
+				{
+					lastFile2.delete();
+				}
+				final File lastFile = new File(sBak);
+				new File(sNewBak).renameTo(lastFile);
 			}
-			new File(sNewBak).renameTo(lastFile);
 		}
+		return new File(pathname);
+	}
+
+	/**
+	 * TODO Please insert comment!
+	 * @return
+	 */
+	private HashMap<Integer, String> getExtensionMap()
+	{
+		File[] oldFiles = FileUtil.listFilesWithExpression(getParentFile(), UrlUtil.newExtension(getName(), null) + "*");
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+		if (oldFiles != null)
+		{
+			for (File file : oldFiles)
+			{
+				String name = file.getName();
+				String ext = UrlUtil.extension(name);
+				if (ext != null)
+				{
+					String delta = StringUtil.token(name, -2, ".");
+					int i = StringUtil.parseInt(delta, -1);
+					if (i >= 0)
+						map.put(new Integer(i), ext);
+					else if (delta != null && delta.equals(UrlUtil.prefix(name)))
+						map.put(new Integer(0), ext);
+				}
+			}
+		}
+		return map;
 	}
 
 	/**

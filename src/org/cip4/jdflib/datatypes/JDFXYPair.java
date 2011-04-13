@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,7 +82,9 @@ package org.cip4.jdflib.datatypes;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.HashUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * This class represents a x y pair (JDFXYPair). It is a whitespace separated list of 2 numbers.
@@ -115,6 +117,7 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * constructs a xy pair with all values set via a String
+	 * if a single numerical value is specified, s is padded with " 0"
 	 * 
 	 * @param s the given String
 	 * 
@@ -311,5 +314,38 @@ public class JDFXYPair extends JDFNumList
 	public boolean isLess(final JDFXYPair x)
 	{
 		return (!isGreaterOrEqual(x));
+	}
+
+	/**
+	 * setString with some heuristics to allow for a single numerical or values like "i/j"
+	 * @see org.cip4.jdflib.datatypes.JDFNumList#setString(java.lang.String)
+	 */
+	@Override
+	public void setString(String string) throws DataFormatException
+	{
+		try
+		{
+			super.setString(string);
+		}
+		catch (DataFormatException x)
+		{
+			Double d = StringUtil.parseDouble(string, Double.NaN);
+			if (!Double.isNaN(d))
+			{
+				super.setString(string + " 0");
+			}
+			else
+			{
+				VString v = StringUtil.tokenize(string, "/", false);
+				if (v.size() == 2)
+				{
+					super.setString(StringUtil.replaceChar(string, '/', " ", 0));
+				}
+				else
+				{
+					throw x;
+				}
+			}
+		}
 	}
 }

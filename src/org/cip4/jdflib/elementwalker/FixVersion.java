@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1887,6 +1887,18 @@ public class FixVersion extends BaseElementWalker
 	public void setLayoutPrepToStripping(final boolean layoutPrepToStripping)
 	{
 		bLayoutPrepToStripping = layoutPrepToStripping;
+	}
+
+	/**
+	 * convert the element e to whichever version has been set up here
+	 * 
+	 * @param e the element to convert - typically a JDF element
+	 * @return true if all went well
+	 */
+	public boolean convert(KElement e)
+	{
+		walkTree(e, null);
+		return isOK();
 	}
 
 	/**

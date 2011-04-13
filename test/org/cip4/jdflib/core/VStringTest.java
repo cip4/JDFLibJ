@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -128,6 +128,18 @@ public class VStringTest extends TestCase
 		assertEquals("c", v.elementAt(3));
 		assertEquals("c", v.elementAt(-2));
 		assertEquals("b", v.elementAt(-3));
+	}
+
+	/**
+	 * @throws Exception 
+	 * 
+	 */
+	public void testRemove() throws Exception
+	{
+		final VString v = new VString("a b c", null);
+		assertEquals(v.remove(-1), "c");
+		assertEquals(v.remove(-1), "b");
+		assertEquals(v.size(), 1);
 	}
 
 	/**

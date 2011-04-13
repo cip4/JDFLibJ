@@ -127,6 +127,23 @@ public class KElementTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testEquals()
+	{
+		final KElement e1 = new JDFDoc("a").getRoot();
+		final KElement e2 = e1.clone();
+
+		assertTrue(e1.isEqual(e2));
+		e1.setAttribute("a1", "v1");
+		e1.setAttribute("a2", "v2");
+		e2.setAttribute("a2", "v2");
+		assertFalse(e1.equals(e2));
+		e2.setAttribute("a1", "v1");
+		assertFalse(e1.equals(e2));
+	}
+
+	/**
+	 * 
+	 */
 	public void testIsEqualBig()
 	{
 		JDFDoc d = JDFDoc.parseFile(sm_dirTestData + "matsch.jdf");

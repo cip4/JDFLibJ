@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -605,8 +605,7 @@ public class JDFSpawn
 			{
 				final JDFElement liRoot = iter.next();
 
-				// test for direct children of resourcepool - these will be
-				// added later
+				// test for direct children of resourcepool - these will be added later
 				if (liRoot.getDeepParent(ElementName.RESOURCEPOOL, 0) != null)
 				{
 					continue;
@@ -696,7 +695,7 @@ public class JDFSpawn
 					vResRoot.add(((JDFRefElement) liRoot).getTarget());
 
 					// create a temporary dummy copy of the link so that we have
-					// a gauranteed copy that behaves the same as the original
+					// a guaranteed copy that behaves the same as the original
 					final JDFRefElement dummy = (JDFRefElement) rootOut.copyElement(liRoot, null);
 					vRes.add(dummy.getTarget());
 					dummy.deleteNode();
@@ -725,8 +724,8 @@ public class JDFSpawn
 					final JDFResource r = (JDFResource) vRes.elementAt(resParts);
 					final JDFResource rRoot1 = (JDFResource) vResRoot.elementAt(resParts);
 
-					spawnPart(rRoot1, spawnID, copyStatus, true);
-					spawnPart(r, spawnID, copyStatus, false);
+					new PartSpawn().spawnPart(rRoot1, spawnID, copyStatus, true);
+					new PartSpawn().spawnPart(r, spawnID, copyStatus, false);
 					if (resParts == 0 && vSpawnParts != null && vSpawnParts.size() != 0 && (bResRW || bSpawnROPartsOnly))
 					{
 						if (EnumSpawnStatus.SpawnedRW.equals(rRoot1.getSpawnStatus()))
@@ -1490,9 +1489,9 @@ public class JDFSpawn
 
 			if (!bInformative) // in case of informative, we kill main anyhow - no use modifying it
 			{
-				spawnPart(r, spawnID, copyStatus, true);
+				new PartSpawn().spawnPart(r, spawnID, copyStatus, true);
 			}
-			spawnPart(rNew, spawnID, copyStatus, false);
+			new PartSpawn().spawnPart(rNew, spawnID, copyStatus, false);
 
 			if (bRW)
 			{
@@ -1546,19 +1545,74 @@ public class JDFSpawn
 		return;
 	}
 
-	/**
-	 * @param r
-	 * @param spawnID
-	 * @param copyStatus
-	 * @param bStayinMain
-	 */
-	private void spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
+	private class PartSpawn
 	{
-
-		if (vSpawnParts != null && vSpawnParts.size() > 0)
+		/**
+		 * @param r
+		 * @param spawnID
+		 * @param copyStatus
+		 * @param bStayinMain
+		 */
+		private void spawnPart(final JDFResource r, final String spawnID, final JDFResource.EnumSpawnStatus copyStatus, final boolean bStayinMain)
 		{
-			final VElement vSubParts;
-			final JDFAttributeMap partMap = r.getPartMap();
+
+			if (vSpawnParts != null && vSpawnParts.size() > 0)
+			{
+				final JDFAttributeMap partMap = r.getPartMap();
+				VElement vSubParts = getSubParts(r, partMap);
+				for (int k = 0; k < vSubParts.size(); k++)
+				{
+					final JDFResource pLeaf = (JDFResource) vSubParts.item(k);
+					if (pLeaf != null)
+					{
+						// set the lock of the leaf to true if it is RO, else unlock it
+						if (bStayinMain)
+						{
+							if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (pLeaf.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
+							{
+								pLeaf.setSpawnStatus(copyStatus);
+								pLeaf.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
+							}
+							pLeaf.appendSpawnIDs(spawnID);
+						}
+						else
+						{
+							pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
+							pLeaf.setSpawnIDs(new VString(spawnID, null));
+						}
+					}
+				}
+			}
+			else
+			// no partitions
+			{
+				if (bStayinMain)
+				{
+					if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (r.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
+					{
+						r.setSpawnStatus(copyStatus);
+						r.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
+					}
+				}
+				else
+				{
+					r.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
+				}
+
+				if (bStayinMain)
+				{
+					r.appendSpawnIDs(spawnID);
+				}
+				else
+				{
+					r.setSpawnIDs(new VString(spawnID, null));
+				}
+			}
+		}
+
+		private VElement getSubParts(final JDFResource r, final JDFAttributeMap partMap)
+		{
+			VElement vSubParts;
 			if (setSpawnParts.contains(partMap))
 			{
 				vSubParts = new VElement();
@@ -1571,54 +1625,10 @@ public class JDFSpawn
 
 				//100208 spawn only as requested - NOT explicit, don't automatically create anything
 				vSubParts = r.getPartitionVector(vSpawnParts, null);
+				if (vSubParts == null || vSubParts.size() == 0)
+					vSubParts = r.getPartitionVector(vSpawnParts, EnumPartUsage.Implicit);
 			}
-			for (int k = 0; k < vSubParts.size(); k++)
-			{
-				final JDFResource pLeaf = (JDFResource) vSubParts.item(k);
-				if (pLeaf != null)
-				{
-					// set the lock of the leaf to true if it is RO, else unlock it
-					if (bStayinMain)
-					{
-						if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (pLeaf.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
-						{
-							pLeaf.setSpawnStatus(copyStatus);
-							pLeaf.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
-						}
-						pLeaf.appendSpawnIDs(spawnID);
-					}
-					else
-					{
-						pLeaf.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
-						pLeaf.setSpawnIDs(new VString(spawnID, null));
-					}
-				}
-			}
-		}
-		else
-		// no partitions
-		{
-			if (bStayinMain)
-			{
-				if ((copyStatus == EnumSpawnStatus.SpawnedRW) || (r.getSpawnStatus() != EnumSpawnStatus.SpawnedRW))
-				{
-					r.setSpawnStatus(copyStatus);
-					r.setLocked(copyStatus == EnumSpawnStatus.SpawnedRW);
-				}
-			}
-			else
-			{
-				r.setLocked(copyStatus != EnumSpawnStatus.SpawnedRW);
-			}
-
-			if (bStayinMain)
-			{
-				r.appendSpawnIDs(spawnID);
-			}
-			else
-			{
-				r.setSpawnIDs(new VString(spawnID, null));
-			}
+			return vSubParts;
 		}
 	}
 

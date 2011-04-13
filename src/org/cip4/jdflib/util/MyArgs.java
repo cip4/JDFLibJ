@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,7 +92,6 @@ public class MyArgs
 	// Variables
 	// //////////////////////////////////////////////////////////////////////////
 	// ////
-	private String m_usageTable;
 	private VString m_onlyArgs;
 	private String m_switchParameterString;
 	private String m_argumentParameterString;
@@ -386,59 +385,108 @@ public class MyArgs
 	 * convert character to boolean
 	 * 
 	 * @param c
-	 * @param defaultValue
+	 * 
 	 * @return default: BoolParameter(c + JDFConstants.EMPTYSTRING, false)
 	 */
-	public boolean boolParameter(final char c, final boolean defaultValue)
+	public boolean boolParameter(final char c)
+	{
+		return boolParameter(c + JDFConstants.EMPTYSTRING);
+	}
+
+	/**
+	 * convert character to boolean
+	 * 
+	 * @param c
+	 * 
+	 * @return default: BoolParameter(c + JDFConstants.EMPTYSTRING, false)
+	 * @deprecated defaultValue==true is kind of stupid...
+	 */
+	@Deprecated
+	public boolean boolParameter(final char c, boolean defaultValue)
 	{
 		return boolParameter(c + JDFConstants.EMPTYSTRING, defaultValue);
+	}
+
+	/** 
+	 * set or remove a boolean flag
+	 *  
+	 * @param c the flag key
+	 * @param val if true, set else remove
+	 */
+	public void setFlag(char c, boolean val)
+	{
+		if (val)
+			m_flags.add("" + c);
+		else
+			m_flags.remove("" + c);
+	}
+
+	/** 
+	 * set or remove a boolean flag
+	 *  
+	 * @param c the flag key
+	 * @param val the parameter value, if null remove
+	 */
+	public void setParam(char c, String val)
+	{
+		if (val != null)
+			m_Parameters.put("" + c, val);
+		else
+			m_Parameters.remove("" + c);
 	}
 
 	/**
 	 * @param s
 	 * @param defaultValue
 	 * @return default: BoolParameter(s + JDFConstants.EMPTYSTRING, false)
+	 * @deprecated defaultValue==true is kind of stupid...
 	 */
+	@Deprecated
 	public boolean boolParameter(final String s, final boolean defaultValue)
 	{
 		return m_flags.contains(s) ? true : defaultValue;
 	}
 
 	/**
+	 * @param s
+	 * 
+	 * @return 
+	 */
+	public boolean boolParameter(final String s)
+	{
+		return m_flags.contains(s);
+	}
+
+	/**
 	 * @param paramString
-	 * @return default: Usage(JDFConstants.EMPTYSTRING)
+	 * @return default: null
 	 */
 	public String usage(final String paramString)
 	{
-		m_usageTable = "\n.\n.\n.usage: ";
+		String usageTable = paramString == null ? "" : paramString;
+
+		usageTable += "\n.\n.\n.usage: ";
 		if (m_argV.size() > 0)
 		{
-			m_usageTable += m_argV.stringAt(0);
+			usageTable += m_argV.stringAt(0);
 		}
 
 		if (m_switchParameterString != null)
 		{
-			m_usageTable += "\n\t switches:   -" + m_switchParameterString;
+			usageTable += "\n\t switches:   -" + m_switchParameterString;
 		}
 		if (m_argumentParameterString != null)
 		{
-			m_usageTable += "\n\t Parameters: -" + m_argumentParameterString;
+			usageTable += "\n\t Parameters: -" + m_argumentParameterString;
 		}
 		if (m_requiredParameterString != null)
 		{
-			m_usageTable += "\n\t Required:   -" + m_requiredParameterString;
+			usageTable += "\n\t Required:   -" + m_requiredParameterString;
 		}
 
-		m_usageTable += "\n\t Argument(s)\n";
+		usageTable += "\n\t Argument(s)\n";
 
-		if (paramString.length() != 0)
-		{
-			m_usageTable += "\n" + paramString + "\n";
-		}
-
-		m_usageTable += "\n.\n.\n.\n";
-
-		return m_usageTable;
+		return usageTable;
 	}
 
 	/**

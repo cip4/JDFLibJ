@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,8 +74,10 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
+import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
+import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -91,6 +93,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
@@ -139,6 +142,7 @@ import org.cip4.jdflib.resource.process.postpress.JDFSaddleStitching;
 import org.cip4.jdflib.resource.process.postpress.JDFSideSewing;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSealing;
 import org.cip4.jdflib.resource.process.postpress.JDFThreadSewing;
+import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UnitParser;
 
@@ -473,6 +477,13 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				{
 					e2.setAttribute(key, newVal);
 				}
+				//update dates in case they were specified in milliseconds
+				if ((e2 instanceof JDFElement) && EnumAttributeType.dateTime.equals(((JDFElement) e2).getAttributeInfo().getAttributeType(key)))
+				{
+					JDFDate d = JDFDate.createDate(val);
+					if (d != null && !val.equals(d.getDateTimeISO()))
+						e2.setAttribute(key, d.getDateTimeISO());
+				}
 			}
 		}
 	}
@@ -631,7 +642,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				}
 			}
 			cleanRefs(e, trackElem);
-			convertUnits(trackElem);
 
 			// dirty, dirty but needed in case of inherited inline resources
 			if (isXResourceElement(e))
@@ -645,8 +655,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				e2.removeChildren(null, null, null); // will be copied later
 				trackElem = e2;
 			}
+			convertUnits(trackElem);
 			return trackElem;
-
 		}
 
 		/**
@@ -957,7 +967,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	}
 
 	/**
-	 * 
+	 * TODO discuss and implement varying numcolors for front and back, e.g. 4/1
 	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
 	public class WalkColorIntent extends WalkIntentResource
@@ -971,14 +981,33 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			if (e.hasAttribute("NumColors") && !e.hasAttribute("ColorsUsed"))
 			{
-				int n = e.getIntAttribute("NumColors", null, 0);
-				if (n > 0)
+				JDFXYPair xyp;
+				try
 				{
-					VString v = new VString("Black Cyan Magenta Yellow Spot1 Spot2 Spot3 Spot4", null);
-					while (v.size() > n)
-						v.remove(n);
-					((JDFSeparationList) trackElem.appendElement(ElementName.COLORSUSED)).setSeparations(v);
+					xyp = new JDFXYPair(e.getAttribute("NumColors", null, null));
+				}
+				catch (DataFormatException e1)
+				{
+					xyp = null;
+				}
+				if (xyp != null)
+				{
+					double[] list = xyp.getDoubleList();
 					e.removeAttribute("NumColors");
+					for (int i = list.length - 1; i >= 0; i--)
+					{
+						int n = (int) (list[i] + 0.5);
+						if (n > 0)
+						{
+							VString v = new VString("Black Cyan Magenta Yellow Spot1 Spot2 Spot3 Spot4", null);
+							while (v.size() > n)
+								v.remove(n);
+							JDFSeparationList newElem = ((JDFSeparationList) trackElem.appendElement(ElementName.COLORSUSED));
+							newElem.setSeparations(v);
+							if (i == 1)
+								newElem.renameElement(ElementName.COLORSUSED + "Back", null);
+						}
+					}
 				}
 			}
 			return super.walk(e, trackElem);

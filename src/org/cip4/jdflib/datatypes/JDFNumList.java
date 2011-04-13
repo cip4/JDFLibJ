@@ -152,7 +152,20 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public JDFNumList(final String sl) throws DataFormatException
 	{
-		final VString v = StringUtil.tokenize(sl, null, false);
+		super();
+		setString(sl);
+	}
+
+	/**
+	 * 
+	 * sets this to the value specified in string
+	 * @param string
+	 * @throws DataFormatException
+	 */
+	public void setString(final String string) throws DataFormatException
+	{
+		m_numList.clear();
+		final VString v = StringUtil.tokenize(string, null, false);
 		if (v != null)
 		{
 			final int size = v.size();
@@ -205,6 +218,19 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	public String getString()
 	{
 		return toString();
+	}
+
+	/**
+	 * 
+	 * get the list of values as doubles
+	 * @return
+	 */
+	public double[] getDoubleList()
+	{
+		double[] list = new double[m_numList.size()];
+		for (int i = 0; i < size(); i++)
+			list[i] = doubleAt(i);
+		return list;
 	}
 
 	/**

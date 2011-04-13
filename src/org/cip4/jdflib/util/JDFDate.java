@@ -311,7 +311,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 
 		try
 		{
-			handleString(strDateTime);
+			new StringHandler(strDateTime).handle();
 		}
 		catch (final IndexOutOfBoundsException ie)
 		{
@@ -325,38 +325,131 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		}
 	}
 
-	/**
-	 * @param strDateTime
-	 * @throws DataFormatException
-	 */
-	private void handleString(String strDateTime) throws DataFormatException
+	private class StringHandler
 	{
-		long l = StringUtil.parseLong(strDateTime, -1);
-		if (l > 5000)
-		{
-			long l0 = System.currentTimeMillis();
-			if (l0 / l >= 900) // this is roughly 10 years back
-				l *= 1000; // assume seconds
-			lTimeInMillis = l;
-			m_TimeZoneOffsetInMillis = fastCalendar.getTimeZoneOffset(lTimeInMillis);
-		}
-		else
-		{
-			if (strDateTime.indexOf("T") == -1)
-			{
-				setTimeZoneOffsetInMillis(fastCalendar.getTimeZoneOffset(lTimeInMillis));
-				if (l > 1000 && l < 5000)
-					strDateTime += "-01-01";
-				if (strDateTime.length() == 7)
-					strDateTime += "-01";
-				strDateTime += "T00:00:00" + getTimeZoneISO();
-			}
+		private String strDateTime;
+		private long l;
 
+		public StringHandler(String strDateTime)
+		{
+			super();
+			this.strDateTime = strDateTime;
+			l = StringUtil.parseLong(strDateTime, -1);
+		}
+
+		/**
+		 * @param strDateTime
+		 * @throws DataFormatException
+		 */
+		private void handle() throws DataFormatException
+		{
+			if (l > 5000)
+			{
+				handleLongValue();
+			}
+			else
+			{
+				handleISOValue();
+			}
+		}
+
+		/**
+		 * @param strDateTime
+		 * @return
+		 * @throws DataFormatException
+		 */
+		private String handleZulu(String strDateTime) throws DataFormatException
+		{
+			final int length = strDateTime.length();
+			char lastChar = strDateTime.charAt(length - 1);
+
+			if (lastChar >= 'a' && lastChar <= 'z')
+				lastChar += 'A' - 'a';
+
+			final int iCmp = lastChar - 'A';
+			final boolean bZulu = (iCmp >= 0) && (iCmp <= 25);
+			// The last character is a ZULU style timezone
+			if (bZulu)
+			{
+				final String strBuffer = strDateTime.substring(0, length - 1);
+				String bias = null;
+				if (iCmp >= 0 && iCmp <= 8) // A-I
+				{
+					bias = "+0" + String.valueOf(iCmp + 1);
+				}
+				else if (iCmp == 9) // J
+				{
+					throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+				}
+				else if (iCmp >= 10 && iCmp <= 12) // K-M
+				{
+					bias = "+" + String.valueOf(iCmp);
+				}
+				else if (iCmp >= 13 && iCmp <= 21) // N-V
+				{
+					bias = "-0" + String.valueOf(iCmp - 12);
+				}
+				else if (iCmp >= 22 && iCmp <= 24) // W-Y
+				{
+					bias = "-1" + String.valueOf(iCmp - 22);
+				}
+				else if (iCmp == 25) // Z
+				{
+					bias = "+00";
+				}
+
+				bias += ":00";
+
+				strDateTime = strBuffer + bias; // add the alphabetical timezone
+			}
+			return strDateTime;
+		}
+
+		private void handleISOValue() throws DataFormatException
+		{
+			addMissingTime();
 			// check for zulu style time zone
 			strDateTime = handleZulu(strDateTime);
 
-			int decimalLength = 0;
+			int decimalLength = handleDecimal();
+			handleTimeZone(decimalLength);
+
+			// interpret the string - low level enhances performance quite a bit...
+			final byte[] b = strDateTime.getBytes();
+			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
+			{
+				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+			}
+
+			lTimeInMillis = fastCalendar.getTimeInMillis(b, decimalLength, getTimeZoneOffsetInMillis());
+		}
+
+		private void handleTimeZone(int decimalLength)
+		{
+			// if the time looks like 2004-07-14T18:21:47
+			// check if there is an +xx:00 or -xx:00 at the end specifying the time zone
+			if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
+			{
+				setTimeZoneOffsetInMillis(fastCalendar.getTimeZoneOffset(lTimeInMillis));
+			}
+			else
+			{
+				// handle sign explicitly, because "+02" is no valid Integer,
+				// while "-02" and "02" are valid Integer
+				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTime.substring(20 + decimalLength, 22 + decimalLength)).intValue());
+				if (strDateTime.charAt(19 + decimalLength) == '-')
+				{
+					setTimeZoneOffsetInMillis(-getTimeZoneOffsetInMillis());
+				}
+			}
+			if (strDateTime.length() == 19 + decimalLength)
+				strDateTime += getTimeZoneISO();
+		}
+
+		private int handleDecimal()
+		{
 			final int indexOfDecimal = strDateTime.indexOf('.');
+			int decimalLength = 0;
 			if (indexOfDecimal != -1)
 			{
 				if (indexOfDecimal != 19)
@@ -375,88 +468,31 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 					}
 				}
 			}
+			return decimalLength;
+		}
 
-			// if the time looks like 2004-07-14T18:21:47
-			// check if there is an +xx:00 or -xx:00 at the end specifying the
-			// timezone
-			if ((strDateTime.indexOf('+', 19) == -1) && (strDateTime.indexOf('-', 19) == -1))
+		private void addMissingTime()
+		{
+			if (strDateTime.indexOf("T") == -1)
 			{
 				setTimeZoneOffsetInMillis(fastCalendar.getTimeZoneOffset(lTimeInMillis));
+				if (l > 1000 && l < 5000)
+					strDateTime += "-01-01";
+				if (strDateTime.length() == 7)
+					strDateTime += "-01";
+				// nothing said and we don't know whether earliest or latest - take noon as best guess
+				strDateTime += "T12:00:00" + getTimeZoneISO();
 			}
-			else
-			{
-				// handle sign explicitly, because "+02" is no valid Integer,
-				// while "-02" and "02" are valid Integer
-				setTimeZoneOffsetInMillis(3600 * 1000 * new Integer(strDateTime.substring(20 + decimalLength, 22 + decimalLength)).intValue());
-				if (strDateTime.charAt(19 + decimalLength) == '-')
-				{
-					setTimeZoneOffsetInMillis(-getTimeZoneOffsetInMillis());
-				}
-			}
-			if (strDateTime.length() == 19 + decimalLength)
-				strDateTime += getTimeZoneISO();
-
-			// interpret the string - low level enhances performance quite a bit...
-			final byte[] b = strDateTime.getBytes();
-			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
-			{
-				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
-			}
-
-			lTimeInMillis = fastCalendar.getTimeInMillis(b, decimalLength, getTimeZoneOffsetInMillis());
 		}
-	}
 
-	/**
-	 * @param strDateTime
-	 * @return
-	 * @throws DataFormatException
-	 */
-	private String handleZulu(String strDateTime) throws DataFormatException
-	{
-		final int length = strDateTime.length();
-		char lastChar = strDateTime.charAt(length - 1);
-
-		if (lastChar >= 'a' && lastChar <= 'z')
-			lastChar += 'A' - 'a';
-
-		final int iCmp = lastChar - 'A';
-		final boolean bZulu = (iCmp >= 0) && (iCmp <= 25);
-		// The last character is a ZULU style timezone
-		if (bZulu)
+		private void handleLongValue()
 		{
-			final String strBuffer = strDateTime.substring(0, length - 1);
-			String bias = null;
-			if (iCmp >= 0 && iCmp <= 8) // A-I
-			{
-				bias = "+0" + String.valueOf(iCmp + 1);
-			}
-			else if (iCmp == 9) // J
-			{
-				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
-			}
-			else if (iCmp >= 10 && iCmp <= 12) // K-M
-			{
-				bias = "+" + String.valueOf(iCmp);
-			}
-			else if (iCmp >= 13 && iCmp <= 21) // N-V
-			{
-				bias = "-0" + String.valueOf(iCmp - 12);
-			}
-			else if (iCmp >= 22 && iCmp <= 24) // W-Y
-			{
-				bias = "-1" + String.valueOf(iCmp - 22);
-			}
-			else if (iCmp == 25) // Z
-			{
-				bias = "+00";
-			}
-
-			bias += ":00";
-
-			strDateTime = strBuffer + bias; // add the alphabetical timezone
+			long l0 = System.currentTimeMillis();
+			if (l0 / l >= 900) // this is roughly 10 years back
+				l *= 1000; // assume seconds
+			lTimeInMillis = l;
+			m_TimeZoneOffsetInMillis = fastCalendar.getTimeZoneOffset(lTimeInMillis);
 		}
-		return strDateTime;
 	}
 
 	/**

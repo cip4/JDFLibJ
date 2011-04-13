@@ -609,8 +609,6 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertEquals(root, JDFElement.getParentJDF(k));
 	}
 
-	// /////////////////////////////////////////////////7
-
 	/**
 	 * 
 	 */
@@ -623,6 +621,16 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertNull(ap.getSettingsPolicy(true));
 		n.setSettingsPolicy(EnumSettingsPolicy.MustHonor);
 		assertEquals(ap.getSettingsPolicy(true), EnumSettingsPolicy.MustHonor);
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetSchemaVersion()
+	{
+		assertEquals(JDFElement.getSchemaURL(), "http://www.CIP4.org/JDFSchema_1_1");
+		assertEquals(JDFElement.getSchemaURL(1, 3), "http://www.CIP4.org/JDFSchema_1_1");
+		assertEquals(JDFElement.getSchemaURL(2, 0), "http://www.CIP4.org/JDFSchema_2_0");
 	}
 
 	/**

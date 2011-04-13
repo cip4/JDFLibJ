@@ -208,11 +208,21 @@ public class JDFPreview extends JDFAutoPreview implements IURLSetter
 	}
 
 	/**
-	 * TODO Please insert comment!
+	 * this method is provided for backwards compatibility with enum previewfiletype
 	 * @param enumPreviewFileType
 	 */
 	public void setPreviewFileType(EnumPreviewFileType enumPreviewFileType)
 	{
 		super.setPreviewFileType(enumPreviewFileType == null ? null : enumPreviewFileType.getName());
 	}
+
+	/**
+	 * this method is provided for backwards compatibility with enum previewfiletype
+	 * @return the value of the attribute
+	 */
+	public EnumPreviewFileType getEnumPreviewFileType()
+	{
+		return EnumPreviewFileType.getEnum(getAttribute(AttributeName.PREVIEWFILETYPE, null, "PNG"));
+	}
+
 }

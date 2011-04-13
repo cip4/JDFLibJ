@@ -1869,6 +1869,20 @@ public class JDFResourceTest extends JDFTestCaseBase
 	/**
 	* 
 	*/
+	public void testRunPage()
+	{
+		final JDFDoc d = new JDFDoc(ElementName.JDF);
+		final JDFNode n = d.getJDFRoot();
+		JDFResource r1 = n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		assertEquals("leaf partIDKey copied", r1.getRunPage(), 0);
+		assertFalse(r1.hasAttribute(AttributeName.RUNPAGE));
+		r1 = r1.addPartition(EnumPartIDKey.RunPage, "2");
+		assertEquals(r1.getRunPage(), 2);
+	}
+
+	/**
+	* 
+	*/
 	public void testSetLocked()
 	{
 		final JDFDoc doc = creatXMDoc();

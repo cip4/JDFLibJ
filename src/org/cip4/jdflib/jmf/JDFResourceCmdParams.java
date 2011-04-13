@@ -139,16 +139,21 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 
 			final int size = vNodes.size();
 			for (int i = 0; i < size; i++)
+				applyNode(vNodes, i);
+		}
+
+		private void applyNode(final VElement vNodes, int i)
+		{
 			{
 				final JDFNode node = (JDFNode) vNodes.elementAt(i);
 				if (!matchesNode(node))
 				{
-					continue;
+					return;
 				}
 				final JDFResource resCmd = getResource(null);
 				if (resCmd == null)
 				{
-					continue;
+					return;
 				}
 
 				final boolean isIncremental = (getUpdateMethod() == EnumUpdateMethod.Incremental);
@@ -171,7 +176,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 					resTarget = createNewResource(node, resCmd);
 					if (resTarget == null)
 					{
-						continue;
+						return;
 					}
 				}
 
@@ -203,23 +208,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 						resTargetPart.setAttributes(map);
 					}
 
-					final JDFResource resCmdPart = resCmd.getPartition(amParts, EnumPartUsage.Implicit);
-					final JDFAttributeMap map = resCmdPart.getAttributeMap();
-					final VString keys = map.getKeys();
-					if (keys != null)
-					{
-						final int keySize = keys.size();
-						for (int k = 0; k < keySize; k++)
-						{
-							final String key = keys.elementAt(k);
-							final String value = map.get(key);
-							if (value == null)
-							{
-								resCmdPart.removeAttribute(key);
-								resTargetPart.removeAttribute(key);
-							}
-						}
-					}
+					final JDFResource resCmdPart = cleanResCmdPart(resCmd, vsPartIDKeys, amParts, resTargetPart);
 
 					resTargetPart.mergeElement(resCmdPart, false);
 					resTarget.setID(id);
@@ -230,6 +219,40 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 					fixNodeStatusFromNodeInfo(node, resTarget);
 				}
 			}
+		}
+
+		/**
+		 * 
+		 * clean up the res cmd resource prior to merging it 
+		 * @param resCmd
+		 * @param vsPartIDKeys
+		 * @param amParts
+		 * @param resTargetPart
+		 * @return
+		 */
+		private JDFResource cleanResCmdPart(final JDFResource resCmd, VString vsPartIDKeys, final JDFAttributeMap amParts, final JDFResource resTargetPart)
+		{
+			final JDFResource resCmdPart = (JDFResource) resCmd.getPartition(amParts, EnumPartUsage.Implicit).clone();
+			final JDFAttributeMap mapCmdAttribs = resCmdPart.getAttributeMap();
+			final VString keys = mapCmdAttribs.getKeys();
+			if (keys != null)
+			{
+				for (final String key : keys)
+				{
+					final String value = mapCmdAttribs.get(key);
+					if (value == null)
+					{
+						resCmdPart.removeAttribute(key);
+						resTargetPart.removeAttribute(key);
+					}
+					else if (vsPartIDKeys != null && vsPartIDKeys.contains(key))
+					{
+						// we remove the command partIDKe because it could refer to an identical
+						resCmdPart.removeAttribute(key);
+					}
+				}
+			}
+			return resCmdPart;
 		}
 
 		/**
@@ -570,6 +593,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * (5) set attribute Usage
 	 * @param enumVar the enumVar to set the attribute to
 	 */
+	@Override
 	public void setUsage(final JDFResourceLink.EnumUsage enumVar)
 	{
 		setAttribute(AttributeName.USAGE, enumVar == null ? null : enumVar.getName(), null);
@@ -579,6 +603,7 @@ public class JDFResourceCmdParams extends JDFAutoResourceCmdParams implements IN
 	 * (9) get attribute Usage
 	 * @return the value of the attribute
 	 */
+	@Override
 	public JDFResourceLink.EnumUsage getUsage()
 	{
 		return JDFResourceLink.EnumUsage.getEnum(getAttribute(AttributeName.USAGE, null, null));

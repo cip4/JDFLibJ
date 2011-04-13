@@ -579,4 +579,19 @@ public class VString extends Vector<String>
 		return super.add(enumType.getName());
 	}
 
+	/**
+	 * remove but also implementing the usual neg number syntax 
+	 * @param index if 0, or positive count from front, else if negative from back
+	 * @see java.util.Vector#remove(int)
+	 */
+	@Override
+	public synchronized String remove(int index)
+	{
+		if (index < 0)
+		{
+			index += size();
+		}
+		return super.remove(index);
+	}
+
 }

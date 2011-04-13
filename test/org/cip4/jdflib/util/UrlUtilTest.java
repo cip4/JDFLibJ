@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -620,6 +620,17 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.cleanDots("File://a/../b"), "File://b");
 		assertEquals(UrlUtil.cleanDots("File://a/.././c/../b.pdf"), "File://b.pdf");
 		assertEquals(UrlUtil.cleanDots("/."), "/.");
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testCreateHttpUrl()
+	{
+		assertEquals(UrlUtil.createHttpUrl(false, "d", 0, "a"), "http://d/a");
+		assertEquals(UrlUtil.createHttpUrl(false, "d", 8080, "a"), "http://d:8080/a");
+		assertEquals(UrlUtil.createHttpUrl(true, "d", 8080, "a"), "https://d:8080/a");
 	}
 
 	/**

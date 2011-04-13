@@ -9,23 +9,36 @@
 package org.cip4.jdflib;
 
 import java.io.File;
+import java.io.InputStream;
 
 import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
+import org.cip4.jdflib.jmf.JDFResourceCmdParams;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFMerge;
 import org.cip4.jdflib.util.JDFSpawn;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlPart;
+import org.cip4.jdflib.util.UrlUtil;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -64,6 +77,41 @@ public class TestJDF extends JDFTestCaseBase
 
 	/**
 	 * 
+	 * TODO Please insert comment!
+	 * @throws Throwable
+	 */
+	public void testSpawnRW() throws Throwable
+	{
+		JDFDoc jdfDoc = new JDFParser().parseFile("/data/JDF/aquafitmain.jdf");
+
+		JDFNode nodeProc = jdfDoc.getJDFRoot().getJobPart("1003.I", null);
+
+		final VJDFAttributeMap vamParts = new VJDFAttributeMap();
+
+		final JDFAttributeMap amParts0 = new JDFAttributeMap();
+
+		amParts0.put("RunPage", "0");
+		amParts0.put("SheetName", "Faltschachtel");
+		amParts0.put("Side", "Front");
+		amParts0.put("SignatureName", "SIG001");
+		amParts0.put("Separation", "Magenta");
+
+		vamParts.add(amParts0);
+
+		final VString vsRWResourceIDs = new VString("r_110412_072923347_007064 r_110412_072919155_016691 Link_110412_072920686_018184 r_110412_072923300_007044 Link_110412_072921327_018304 r_110412_073508639_001995 r_110412_072923300_007043 r_110412_073508655_002008");
+
+		final JDFSpawn spawn = new JDFSpawn(nodeProc);
+
+		JDFNode nodeSubJDF = spawn.spawn("aquafit(11-0078)", JDFConstants.EMPTYSTRING, vsRWResourceIDs, vamParts, true, true, true, false);
+		nodeSubJDF.getOwnerDocument_JDFElement().write2File("/data/JDF/Out.Spawned.spawn.jdf", 2);
+		String strOutJDFPath = "/data/JDF/Out.Spawned.MAIN.jdf";
+		jdfDoc.write2File(strOutJDFPath, 2);
+
+		// Link_110412_072920686_018182
+	}
+
+	/**
+	 * 
 	 */
 	public void testgetPartition()
 	{
@@ -72,6 +120,36 @@ public class TestJDF extends JDFTestCaseBase
 		JDFResource r = (n.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0));
 		JDFResource rp = r.getPartition(new JDFAttributeMap("SignatureName", "Sig001"), null);
 		assertNull(rp);
+	}
+
+	/**
+	 * 
+	 */
+	public void testMergeAmount()
+	{
+		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Jira/PD-1735/amount.jdf");
+		final JDFNode n = d.getJDFRoot();
+		JDFResource rr = (JDFResource) n.getChildWithAttribute(ElementName.COMPONENT, "ID", null, "PrintedPaper", 0, false);
+		final VElement vr = rr.getLeaves(true);
+		for (KElement r : vr)
+			((JDFResource) r).updateAmounts(false);
+		d.write2File("/share/data/JDF/Jira/PD-1735/amountnew.jdf", 2, false);
+	}
+
+	/**
+	 * 
+	 */
+	public void testelementsbytag()
+	{
+		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/Bodo/media.jdf");
+		final JDFNode n = d.getJDFRoot();
+		NodeList mediaList = n.getElementsByTagName("Media");
+		for (int i = 0; i < mediaList.getLength(); i++)
+		{
+			Node node = mediaList.item(i);
+			JDFMedia media = (JDFMedia) node;
+		}
+		d.write2File("test.jdf", 2, false);
 	}
 
 	/**
@@ -109,6 +187,40 @@ public class TestJDF extends JDFTestCaseBase
 		//		spawn.bFixResources = false;
 		spawn.spawn();
 
+	}
+
+	public void testPing()
+	{
+		String s = "a";
+		InputStream is = new ByteArrayIOStream(s.getBytes()).getInputStream();
+		UrlPart p = UrlUtil.writeToURL("http://10.51.201.148:8010", is, UrlUtil.POST, UrlUtil.VND_JMF, null);
+		//		UrlPart p = UrlUtil.writeToURL("http://10.51.206.254:8010/jmf", is, UrlUtil.POST, UrlUtil.VND_JMF, null);
+		p.buffer();
+	}
+
+	public void testResourceCommand3() throws Exception
+	{
+		final JDFDoc jdfDoc = JDFDoc.parseFile("/data/JDF/RainerSchielke/rescmd/main.jdf");
+
+		final JDFNode nodeRoot = jdfDoc.getJDFRoot();
+
+		final JDFDoc jmf = JDFDoc.parseFile("/data/JDF/RainerSchielke/rescmd/cmd.jdf");
+
+		final JDFJMF inJMF = jmf.getJMFRoot();
+
+		final VElement veMessages = inJMF.getMessageVector(null, null);
+
+		for (int i = 0; i < veMessages.size(); i++)
+		{
+			final JDFMessage msg = (JDFMessage) veMessages.elementAt(i);
+
+			if (msg.getType().equals(JDFMessage.EnumType.Resource.getName()))
+			{
+				final JDFResourceCmdParams resCmdParams = msg.getResourceCmdParams(0);
+
+				resCmdParams.applyResourceCommand(nodeRoot);
+			}
+		}
 	}
 
 	/**

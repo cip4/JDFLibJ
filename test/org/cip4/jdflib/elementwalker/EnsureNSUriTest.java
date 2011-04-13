@@ -31,7 +31,27 @@ public class EnsureNSUriTest extends JDFTestCaseBase
 		ensure.walk(root);
 
 		assertTrue(root.toXML().indexOf("n6") < 0);
+	}
 
+	/**
+	 * 
+	 */
+	public void testEnsureNSNull()
+	{
+		XMLDoc d = new XMLDoc("foo", null);
+		KElement root = d.getRoot();
+		KElement e = root.appendElement("bar", "n66");
+		e.appendElement("gg", "n77").setAttribute("ntest", "123");
+		e.appendElement("blub:bb", "www.blub.com").setAttribute("blub:ntest", "123");
+
+		EnsureNSUri ensure = new EnsureNSUri();
+		ensure.addNS(null, "www.n1.com");
+		ensure.addAlias("blub", null);
+		ensure.walk(root);
+
+		assertTrue(root.toXML().indexOf("n6") < 0);
+		assertTrue(root.toXML().indexOf("n7") < 0);
+		assertTrue(root.toXML().indexOf("blub") < 0);
 	}
 
 	/**

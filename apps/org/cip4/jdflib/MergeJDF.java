@@ -40,9 +40,7 @@ public class MergeJDF
 		String prg = "MergeJDF" + ":\t";
 		System.out.print(prg + "START.");
 
-		String usage = "MergeJDF: JDF merger simulation;\n"
-				+ "Arguments: 1=parent input JDF, 2=child input JDF;\n"
-				+ "-o: output JDF;\n" + ""
+		String usage = "MergeJDF: JDF merger simulation;\n" + "Arguments: 1=parent input JDF, 2=child input JDF;\n" + "-o: output JDF;\n" + ""
 				+ "-d: delete completed tasks from the output JDF\n";
 		MyArgs args = new MyArgs(argv, "dev", "ou", null);
 		System.out.println("MyArgs-args:" + args);
@@ -55,8 +53,7 @@ public class MergeJDF
 		String unspawn = args.parameter('u');
 		System.out.println(prg + "u: " + unspawn);
 
-		if (!fileExists(xmlFile1)
-				|| (!fileExists(xmlFile2) && unspawn.equals("")))
+		if (!fileExists(xmlFile1) || (!fileExists(xmlFile2) && unspawn.equals("")))
 		{
 			System.err.println(args.usage(usage + ": one File does not exist"));
 			System.exit(1);
@@ -68,7 +65,7 @@ public class MergeJDF
 		String outFile = args.parameter('o');
 		System.out.println(prg + "o: outFile=" + outFile);
 
-		boolean v = args.boolParameter('v', false);
+		boolean v = args.boolParameter('v');
 		System.out.println(prg + "v: " + v);
 
 		JDFParser p = new JDFParser();
@@ -79,14 +76,16 @@ public class MergeJDF
 		{
 			System.err.println(args.usage(xmlFile1 + ": Parse Error"));
 			System.exit(2);
-		} else
+		}
+		else
 		{
 			root = (JDFNode) gd.getRoot();
 
 			if (unspawn != null)
 			{
 				new JDFSpawn(root).unSpawn(unspawn);
-			} else
+			}
+			else
 			{
 				JDFParser p2 = new JDFParser();
 				JDFDoc gd2 = p2.parseFile(xmlFile2);
@@ -96,20 +95,19 @@ public class MergeJDF
 				{
 					System.err.println(args.usage(xmlFile2 + ": Parse Error"));
 					System.exit(2);
-				} else
+				}
+				else
 				{
 					root2 = (JDFNode) gd2.getRoot();
 				}
 
 				try
 				{
-					new JDFMerge(root).mergeJDF(root2, xmlFile2,
-							JDFNode.EnumCleanUpMerge.None,
-							JDFResource.EnumAmountMerge.UpdateLink);
-				} catch (JDFException toCatch)
+					new JDFMerge(root).mergeJDF(root2, xmlFile2, JDFNode.EnumCleanUpMerge.None, JDFResource.EnumAmountMerge.UpdateLink);
+				}
+				catch (JDFException toCatch)
 				{
-					System.err.println("Error during JDF-Merge.\n"
-							+ "  Exception message is " + toCatch.getMessage());
+					System.err.println("Error during JDF-Merge.\n" + "  Exception message is " + toCatch.getMessage());
 					System.exit(3);
 				}
 			}

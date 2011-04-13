@@ -209,6 +209,7 @@ public class StringUtil
 			"Ich bin der Geist, der stets verneint! Und das mit Recht; denn alles, was entsteht,  Ist wert, daß es zugrunde geht;  Drum besser wär's, daß nichts entstünde.  So ist denn alles, was ihr Sünde,  Zerstörung, kurz das Böse nennt,  Mein eigentliches Element.",
 			"Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt.",
 			"Du hast wohl recht; ich finde nicht die Spur\nvon einem Geist, und alles ist Dressur.",
+			"'I got very bored and depressed, so I went and plugged myself in to its external computer feed. I talked to the computer at great length and explained my view of the Universe to it', said Marvin. 'And what happened?' pressed Ford. 'It committed suicide.'",
 			"Wie nur dem Kopf nicht alle Hoffnung schwindet,\nDer immerfort an schalem Zeuge klebt,\nMit gier'ger Hand nach Schätzen gräbt,\nUnd froh ist, wenn er Regenwürmer findet!",
 			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet." };
 
@@ -863,39 +864,88 @@ public class StringUtil
 	 */
 	public static String replaceString(String strWork, final String toReplace, final String replaceBy)
 	{
+		return new StringReplacer(strWork).replaceString(toReplace, replaceBy);
+	}
 
-		if (strWork == null)
+	/**
+	 * class that provides additional functionality for replacing string
+	 * @author rainer prosi
+	 * @date Apr 3, 2011
+	 */
+	public static class StringReplacer
+	{
+		private String strWork;
+		private boolean reRead;
+
+		/**
+		 * 
+		 * set the reread algorithm - if true (the default) the replaced string is checked again. If false
+		 * the algorithm continues after the replacement
+		 * @param reRead
+		 */
+		public void setReRead(boolean reRead)
 		{
-			return strWork;
+			this.reRead = reRead;
 		}
 
-		final int lenIn = strWork.length();
-		int indexOf = strWork.indexOf(toReplace);
-		if (indexOf < 0)
+		/**
+		 * 
+		 * @param str
+		 */
+		public StringReplacer(String str)
 		{
-			return strWork;
+			super();
+			this.strWork = str;
+			reRead = true;
 		}
 
-		final int len = toReplace.length();
-		final StringBuffer b = new StringBuffer(strWork.length() * 2);
-		do
+		/**
+		 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the
+		 * original remain thus replaceString("a000000", "00", "0") will return "a0" rather than "a000"
+		 * 
+		 * @param strWork String to work on
+		 * @param toReplace String to match and replace
+		 * @param replaceBy String to insert for toReplace, null if nothing should be inserted
+		 * @return the String with replaced characters
+		 */
+		public String replaceString(final String toReplace, final String replaceBy)
 		{
-			b.append(strWork.substring(0, indexOf));
-			if (replaceBy != null)
+			if (replaceBy != null && replaceBy.contains(toReplace))
+				reRead = false;
+
+			if (strWork == null)
 			{
-				b.append(replaceBy);
+				return strWork;
 			}
-			strWork = strWork.substring(indexOf + len);
-			indexOf = strWork.indexOf(toReplace);
+
+			final int lenIn = strWork.length();
+			int indexOf = strWork.indexOf(toReplace);
+			if (indexOf < 0)
+			{
+				return strWork;
+			}
+
+			final int len = toReplace.length();
+			final StringBuffer b = new StringBuffer(strWork.length() * 2);
+			do
+			{
+				b.append(strWork.substring(0, indexOf));
+				if (replaceBy != null)
+				{
+					b.append(replaceBy);
+				}
+				strWork = strWork.substring(indexOf + len);
+				indexOf = strWork.indexOf(toReplace);
+			}
+			while (indexOf >= 0);
+
+			b.append(strWork);
+
+			final String outString = b.toString();
+			final int lenOut = outString.length();
+
+			return lenOut == lenIn || !reRead ? outString : StringUtil.replaceString(outString, toReplace, replaceBy);
 		}
-		while (indexOf >= 0);
-
-		b.append(strWork);
-
-		final String outString = b.toString();
-		final int lenOut = outString.length();
-
-		return lenOut == lenIn ? outString : replaceString(outString, toReplace, replaceBy);
 	}
 
 	/**

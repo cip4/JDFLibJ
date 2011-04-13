@@ -110,6 +110,7 @@ import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFPool;
+import org.cip4.jdflib.pool.JDFResourceLinkPool;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFIdentical;
@@ -3547,10 +3548,11 @@ public class JDFResource extends JDFElement
 	public JDFAttributeMap getAttributeMap()
 	{
 		final KElement ke = getParentNode_KElement();
-		JDFAttributeMap ret = null;
+		final JDFAttributeMap ret;
+		// follow partitioned inheritance
 		if (ke != null && ke.getNodeName().equals(getNodeName()))
 		{
-			ret = ((JDFResource) ke).getAttributeMap();
+			ret = ke.getAttributeMap();
 			ret.putAll(super.getAttributeMap());
 		}
 		else
@@ -5313,7 +5315,7 @@ public class JDFResource extends JDFElement
 	 * 
 	 * @param keepPrevious if true, the previous amounts etc. are retained, if false they are completely recalculated from the linkx
 	 * 
-	 * lsince 2011.1.15 note the change of interface. The prior usage of previousamount was inheritently flawed. 
+	 * @since 2011.1.15 note the change of interface. The prior usage of previousamount was inheritently flawed. 
 	 * Update note: if you used a previousAmount!=0, you probably want to use keepPrevious=false whereas a 0 value retains the orignal value (leepPrevious=true)
 	 */
 	public void updateAmounts(boolean keepPrevious)
@@ -5344,12 +5346,17 @@ public class JDFResource extends JDFElement
 			for (int i = 0; i < linkSize; i++)
 			{
 				final JDFResourceLink rl = (JDFResourceLink) resLinks.elementAt(i);
+				KElement linkParent = rl.getParentNode_KElement();
+				// we have a reource audit - must be ignored
+				if (!(linkParent instanceof JDFResourceLinkPool))
+					continue;
 
 				final JDFNode n = rl.getParentJDF();
 				if (n != null)
 				{
 					final JDFNode.EnumType typ = EnumType.getEnum(n.getType());
-					if (!JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ))
+					boolean bIsLeaf = !JDFNode.EnumType.ProcessGroup.equals(typ) && !JDFNode.EnumType.Product.equals(typ);
+					if (bIsLeaf)
 					{
 						double rlActualAmount = 0;
 						double rlAmount = 0;

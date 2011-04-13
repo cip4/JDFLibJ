@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -120,11 +120,9 @@ public class SetHelper
 	 */
 	public PartitionHelper getPartition(JDFAttributeMap map)
 	{
-		VElement v = getPartitions();
-		for (int i = 0; i < v.size(); i++)
+		Vector<PartitionHelper> v = getPartitions();
+		for (PartitionHelper ph : v)
 		{
-			KElement part = v.get(i);
-			PartitionHelper ph = new PartitionHelper(part);
 			if (ph.matches(map))
 				return ph;
 		}
@@ -194,10 +192,10 @@ public class SetHelper
 	 */
 	public void removePartitions()
 	{
-		final VElement v = getPartitions();
-		for (final KElement e : v)
+		Vector<PartitionHelper> v = getPartitions();
+		for (PartitionHelper ph : v)
 		{
-			e.deleteNode();
+			ph.getPartition().deleteNode();
 		}
 	}
 
@@ -238,12 +236,19 @@ public class SetHelper
 	}
 
 	/**
-	 * @return
+	 * @return the vector of partition helpers 
 	 */
-	public VElement getPartitions()
+	public Vector<PartitionHelper> getPartitions()
 	{
 		VElement v = theSet.getChildElementVector(getPartitionName(), null);
-		return v;
+
+		Vector<PartitionHelper> v2 = new Vector<PartitionHelper>();
+		if (v != null)
+		{
+			for (KElement e : v)
+				v2.add(new PartitionHelper(e));
+		}
+		return v2;
 	}
 
 	/**
@@ -266,19 +271,15 @@ public class SetHelper
 		String name = theSet.getAttribute("Name", null, null);
 		if (name == null)
 		{
-			VElement v = getPartitions();
-			if (v != null)
+			Vector<PartitionHelper> v = getPartitions();
+			for (PartitionHelper ph : v)
 			{
-				for (int i = 0; i < v.size(); i++)
+				KElement res = ph.getResource();
+				if (res != null)
 				{
-					PartitionHelper ph = new PartitionHelper(v.get(i));
-					KElement res = ph.getResource();
-					if (res != null)
-					{
-						name = res.getNodeName();
-						theSet.setAttribute("Name", name);
-						return name;
-					}
+					name = res.getNodeName();
+					theSet.setAttribute("Name", name);
+					return name;
 				}
 			}
 		}
@@ -301,11 +302,9 @@ public class SetHelper
 	 */
 	public PartitionHelper getPartition(VJDFAttributeMap vmap)
 	{
-		VElement v = getPartitions();
-		for (int i = 0; i < v.size(); i++)
+		Vector<PartitionHelper> v = getPartitions();
+		for (PartitionHelper ph : v)
 		{
-			KElement part = v.get(i);
-			PartitionHelper ph = new PartitionHelper(part);
 			if (ph.matches(vmap))
 				return ph;
 		}
