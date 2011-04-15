@@ -2612,6 +2612,10 @@ public class KElementTest extends JDFTestCaseBase
 		}
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testRemoveNS1()
 	{
 		XMLDoc d = new XMLDoc("foo", null);
@@ -2621,7 +2625,6 @@ public class KElementTest extends JDFTestCaseBase
 		root.renameAttribute("NS1:foo", "xxx:foo", null, null);
 		root.removeAttribute("xmlns:NS1");
 		assertTrue(d.toXML().indexOf("NS1") < 0);
-
 	}
 
 	/**

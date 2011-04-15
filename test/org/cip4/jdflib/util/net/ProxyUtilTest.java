@@ -99,15 +99,16 @@ public class ProxyUtilTest extends JDFTestCaseBase
 		ProxyUtil.setProxy(null);
 		String proxyURL = "http://proxy:8080";
 		ProxyUtil.setProxy(proxyURL);
-		UrlPart p = UrlUtil.writeToURL(proxyURL, null, UrlUtil.GET, null, null);
-		if (p != null)
-		{
-			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-			assertNotNull(p);
-			ProxyUtil.setProxy(null);
-			p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
-			assertNull(p);
-		}
+		UrlPart p = null;
+		//UrlUtil.writeToURL(proxyURL, null, UrlUtil.GET, null, null);
+		//		if (p != null)
+		//		{
+		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
+		assertNotNull(p);
+		ProxyUtil.setProxy(null);
+		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
+		assertNull(p);
+		//		}
 
 	}
 
@@ -136,7 +137,8 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	{
 		String proxy = "proxy.ceu.corp.heidelberg.com";
 		int proxyPort = 8080;
-		UrlPart p = UrlUtil.writeToURL("http://" + proxy + ":" + proxyPort, null, UrlUtil.GET, null, null);
+		UrlPart p = null;
+		//UrlUtil.writeToURL("http://" + proxy + ":" + proxyPort, null, UrlUtil.GET, null, null);
 		UrlPart p2 = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
 		if (p == null || p2 == null) // we are in the environment where the proxy is correctly set up
 		{
