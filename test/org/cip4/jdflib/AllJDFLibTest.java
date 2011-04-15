@@ -261,6 +261,7 @@ import org.cip4.jdflib.util.SScanfTest;
 import org.cip4.jdflib.util.ScaleUtilTest;
 import org.cip4.jdflib.util.SkipInputStreamTest;
 import org.cip4.jdflib.util.StatusCounterTest;
+import org.cip4.jdflib.util.StreamUtilTest;
 import org.cip4.jdflib.util.StringUtilTest;
 import org.cip4.jdflib.util.UnitParserTest;
 import org.cip4.jdflib.util.UrlPartTest;
@@ -524,6 +525,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(SkipInputStreamTest.class);
 		suite.addTestSuite(SScanfTest.class);
 		suite.addTestSuite(StatusCounterTest.class);
+		suite.addTestSuite(StreamUtilTest.class);
 		suite.addTestSuite(StringUtilTest.class);
 		suite.addTestSuite(UnitParserTest.class);
 		suite.addTestSuite(UrlPartTest.class);

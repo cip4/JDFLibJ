@@ -984,6 +984,10 @@ public class StringUtilTest extends JDFTestCaseBase
 	public void testIsNMTOKEN()
 	{
 		assertTrue(StringUtil.isNMTOKEN("abc"));
+		assertTrue(StringUtil.isNMTOKEN("ä"));
+		assertFalse(StringUtil.isNMTOKEN("$"));
+		assertTrue(StringUtil.isNMTOKEN("öpü"));
+		assertTrue(StringUtil.isNMTOKEN("1öpü2.:-_"));
 		assertFalse(StringUtil.isNMTOKEN(" abc"));
 		assertFalse(StringUtil.isNMTOKEN("a bc"));
 		assertFalse(StringUtil.isNMTOKEN("a\nbc"));

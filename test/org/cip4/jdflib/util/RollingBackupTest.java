@@ -112,7 +112,7 @@ public class RollingBackupTest extends JDFTestCaseBase
 			assertTrue(rbf.createNewFile());
 			assertEquals(dir.listFiles().length, Math.min(i + 1, 5));
 		}
-		final File backRoot2 = FileUtil.getFileInDirectory(dir, new File("Roll.xml"));
+		final File backRoot2 = FileUtil.getFileInDirectory(dir, new File("Roll2.xml"));
 		final RollingBackupFile rbf2 = new RollingBackupFile(backRoot2.getPath(), 4);
 		for (int i = 0; i < 10; i++)
 		{

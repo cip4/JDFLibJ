@@ -95,8 +95,6 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFBaseDataTypes;
 
-import com.sun.imageio.metadata.XmlNames;
-
 /**
  * collection of static string utilities
  * 
@@ -903,7 +901,6 @@ public class StringUtil
 		 * replace a string in a given String if the replacement string is contained by the string to replace, recursively replace until no ocurrences of the
 		 * original remain thus replaceString("a000000", "00", "0") will return "a0" rather than "a000"
 		 * 
-		 * @param strWork String to work on
 		 * @param toReplace String to match and replace
 		 * @param replaceBy String to insert for toReplace, null if nothing should be inserted
 		 * @return the String with replaced characters
@@ -1060,7 +1057,6 @@ public class StringUtil
 	 */
 	public static boolean isNMTOKEN(final String strWork)
 	{
-		// TODO add more exceptions
 		if (strWork == null)
 		{
 			return false;
@@ -1073,9 +1069,10 @@ public class StringUtil
 		{
 			return true;
 		}
-		// if an error occurs for XmlNames do an "Organize Imports" (different
-		// packages in Java 1.4 and 5.0)
-		return XmlNames.isNmtoken(strWork);
+		// validate the value against the xsd definition 
+		// Nmtoken ::= (NameChar)+ NameChar ::= Letter | Digit | '.' | '-' | '_' | ':' | CombiningChar | Extender 
+		// CombiningChar | Extender should be handled by \pL
+		return matches(strWork, "(\\pL|[0-9]|\\.|:|\\-|_)+");
 	}
 
 	/**

@@ -117,6 +117,7 @@ import org.cip4.jdflib.resource.JDFNumberItem;
 import org.cip4.jdflib.resource.JDFPart;
 import org.cip4.jdflib.resource.JDFProofItem;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.JDFSoftCoverBinding;
@@ -124,6 +125,7 @@ import org.cip4.jdflib.resource.JDFStripBinding;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.JDFTabs;
 import org.cip4.jdflib.resource.intent.JDFArtDelivery;
+import org.cip4.jdflib.resource.intent.JDFColorIntent;
 import org.cip4.jdflib.resource.intent.JDFDropIntent;
 import org.cip4.jdflib.resource.intent.JDFDropItemIntent;
 import org.cip4.jdflib.resource.intent.JDFIntentResource;
@@ -430,6 +432,24 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 		final boolean bL1 = parent.getLocalName().endsWith("Set");
 		return bL1 && parent.hasAttribute(AttributeName.NAME);
+	}
+
+	/**
+	 * make a separationlist from an attribute
+	 * @param rPart
+	 * @param elem the separation list attribute / element
+	 */
+	protected JDFSeparationList createSeparationList(final KElement rPart, final String elem)
+	{
+		final String c = rPart.getAttribute(elem, null, null);
+		JDFSeparationList sepList = null;
+		if (c != null)
+		{
+			sepList = (JDFSeparationList) rPart.getCreateElement(elem);
+			sepList.setSeparations(new VString(c, null));
+			rPart.removeAttribute(elem);
+		}
+		return sepList;
 	}
 
 	/**
@@ -979,38 +999,86 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
+			if (e.hasAttribute("ColorsUsed"))
+			{
+				evaluateColorsUsed(e);
+			}
 			if (e.hasAttribute("NumColors") && !e.hasAttribute("ColorsUsed"))
 			{
-				JDFXYPair xyp;
-				try
+				evaluateNumColors(e, trackElem);
+			}
+			repartitionSide(e, trackElem);
+			return super.walk(e, trackElem);
+		}
+
+		/**
+		 * repartition in case stuff that is side dependent exists - note that trackEleme is the new element
+		 * @param e
+		 */
+		private void repartitionSide(final KElement e, final KElement trackElem)
+		{
+			KElement slBack = e.getElement("ColorsUsedBack");
+			if (slBack != null)
+			{
+				JDFResource ciFront = ((JDFResource) trackElem).addPartition(EnumPartIDKey.Side, "Front");
+				ciFront.moveElement(e.getElement("ColorsUsed"), null);
+				JDFResource ciBack = ((JDFResource) trackElem).addPartition(EnumPartIDKey.Side, "Back");
+				ciBack.moveElement(e.getElement("ColorsUsedBack"), null).renameElement("ColorsUsed", null);
+			}
+		}
+
+		/**
+		 * @param e
+		 */
+		private void evaluateColorsUsed(final KElement e)
+		{
+			JDFSeparationList sl = createSeparationList(e, "ColorsUsed");
+			if (e.hasAttribute("ColorsUsedBack"))
+			{
+				if (sl != null)
+					sl = (JDFSeparationList) sl.deleteNode();
+				e.renameAttribute("ColorsUsedBack", "ColorsUsed", null, null);
+				JDFSeparationList slBack = createSeparationList(e, "ColorsUsed");
+				slBack.renameElement("ColorsUsedBack", null);
+				if (sl != null)
+					e.moveElement(sl, slBack);
+			}
+		}
+
+		/**
+		 * @param e
+		 * @param trackElem
+		 */
+		private void evaluateNumColors(final KElement e, final KElement trackElem)
+		{
+			JDFXYPair xyp;
+			try
+			{
+				xyp = new JDFXYPair(e.getAttribute("NumColors", null, null));
+			}
+			catch (DataFormatException e1)
+			{
+				xyp = null;
+			}
+			if (xyp != null)
+			{
+				double[] list = xyp.getDoubleList();
+				e.removeAttribute("NumColors");
+				for (int i = list.length - 1; i >= 0; i--)
 				{
-					xyp = new JDFXYPair(e.getAttribute("NumColors", null, null));
-				}
-				catch (DataFormatException e1)
-				{
-					xyp = null;
-				}
-				if (xyp != null)
-				{
-					double[] list = xyp.getDoubleList();
-					e.removeAttribute("NumColors");
-					for (int i = list.length - 1; i >= 0; i--)
+					int n = (int) (list[i] + 0.5);
+					if (n > 0)
 					{
-						int n = (int) (list[i] + 0.5);
-						if (n > 0)
-						{
-							VString v = new VString("Black Cyan Magenta Yellow Spot1 Spot2 Spot3 Spot4", null);
-							while (v.size() > n)
-								v.remove(n);
-							JDFSeparationList newElem = ((JDFSeparationList) trackElem.appendElement(ElementName.COLORSUSED));
-							newElem.setSeparations(v);
-							if (i == 1)
-								newElem.renameElement(ElementName.COLORSUSED + "Back", null);
-						}
+						VString v = new VString("Black Cyan Magenta Yellow Spot1 Spot2 Spot3 Spot4", null);
+						while (v.size() > n)
+							v.remove(n);
+						JDFSeparationList newElem = ((JDFSeparationList) trackElem.appendElement(ElementName.COLORSUSED));
+						newElem.setSeparations(v);
+						if (i == 1)
+							newElem.renameElement(ElementName.COLORSUSED + "Back", null);
 					}
 				}
 			}
-			return super.walk(e, trackElem);
 		}
 
 		/**
@@ -1021,7 +1089,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return super.matches(toCheck) && (toCheck instanceof JDFIntentResource);
+			return super.matches(toCheck) && (toCheck instanceof JDFColorIntent);
 		}
 	}
 
@@ -1560,20 +1628,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			createSeparationList(rPart, ElementName.COLORANTORDER);
 			createSeparationList(rPart, ElementName.DEVICECOLORANTORDER);
 			return rPart;
-		}
-
-		/**
-		 * @param rPart
-		 * @param elem
-		 */
-		private void createSeparationList(final KElement rPart, final String elem)
-		{
-			final String c = rPart.getAttribute(elem, null, null);
-			if (c != null)
-			{
-				((JDFSeparationList) rPart.getCreateElement(elem)).setSeparations(new VString(c, null));
-				rPart.removeAttribute(elem);
-			}
 		}
 	}
 
