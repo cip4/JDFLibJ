@@ -69,6 +69,7 @@
 package org.cip4.jdflib.validate;
 
 import java.io.InputStream;
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -90,8 +91,8 @@ public class VersionTranslatorTest extends JDFTestCaseBase
 		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_2_0);
 		String s = "<JDF Type=\"Product\"/>";
 		ByteArrayIOStream bis = new ByteArrayIOStream(s.getBytes());
-		InputStream is2 = vt.convertStream(bis.getInputStream());
-		assertTrue(StringUtil.createString(is2).indexOf("<XJDF") >= 0);
+		Vector<InputStream> is2 = vt.convertStream(bis.getInputStream());
+		assertTrue(StringUtil.createString(is2.get(0)).indexOf("<XJDF") >= 0);
 
 	}
 
@@ -103,7 +104,7 @@ public class VersionTranslatorTest extends JDFTestCaseBase
 		VersionTranslator vt = new VersionTranslator(EnumVersion.Version_1_4);
 		String s = "<XJDF Types=\"Product\"/>";
 		ByteArrayIOStream bis = new ByteArrayIOStream(s.getBytes());
-		InputStream is2 = vt.convertStream(bis.getInputStream());
-		assertTrue(StringUtil.createString(is2).indexOf("<JDF") >= 0);
+		Vector<InputStream> is2 = vt.convertStream(bis.getInputStream());
+		assertTrue(StringUtil.createString(is2.get(0)).indexOf("<JDF") >= 0);
 	}
 }

@@ -66,137 +66,128 @@
  * <http://www.cip4.org/>.
  *
  */
+/**
+ * 
+ */
 package org.cip4.jdflib.elementwalker;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VElement;
+import org.cip4.jdflib.ifaces.IElementConverter;
+import org.cip4.jdflib.ifaces.IURLSetter;
+import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
- * 
- * elementwalker class that allows you to traverse a dom tree starting at a given root
- * 
- * @author prosirai
- * 
+ * @author Rainer Prosi, Heidelberger Druckmaschinen 
+ * walker that extracts all URLs and dumps them to a directory 
+ * URLS are modified to reflect the new location
  */
-public class ElementWalker
+public class URLMapper extends BaseElementWalker implements IElementConverter
 {
-	protected IWalkerFactory theFactory;
 
 	/**
-	 * @param _theFactory used to find the individual instances for the children
-	 */
-	public ElementWalker(final IWalkerFactory _theFactory)
-	{
-		super();
-		this.theFactory = _theFactory;
-	}
-
-	/**
-	 * walk the tree starting at e.
+	 * the URL walker
 	 * 
-	 * @param e the root element to walk, must not be null
-	 * @param trackElem a parallel element to e that may additionally be modified during the walk, may be null
-	 * @return n the number of traversed elements
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen 
 	 */
-	public int walkTree(final KElement e, final KElement trackElem)
+	public class WalkElement extends BaseWalker
 	{
-		if (e == null)
+		/**
+		 * 
+		 */
+		public WalkElement()
 		{
-			return 0;
+			super(getFactory());
 		}
-		int n = 0;
 
-		final IWalker w = theFactory.getWalker(e);
-		KElement b = null;
-		if (w != null)
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e
+		 * @param trackElem
+		 * @return
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			n++;
-			b = doWalk(e, trackElem, w);
+			return e;
 		}
-		if (b != null) // follow kids if still alive or no walker found
-		{
-			// do not follow refelements
-			final VElement v = e.getChildElementVector_KElement(null, null, null, true, -1);
-			for (KElement e2 : v)
-			{
-				n += walkTree(e2, b);
-			}
-		}
-		return n;
 	}
 
-	/**
-	 * @param e
-	 * @param trackElem
-	 * @param w
-	 * @return
-	 */
-	private KElement doWalk(final KElement e, final KElement trackElem, final IWalker w)
-	{
-		KElement b = null;
-		try
-		{
-			w.prepareWalk(e, trackElem);
-		}
-		finally
-		{
-			// nop
-		}
-		try
-		{
-			b = w.walk(e, trackElem);
-		}
-		finally
-		{
-			// nop
-		}
-		try
-		{
-			w.finalizeWalk(e, trackElem);
-		}
-		finally
-		{
-			// nop
-		}
-		return b;
-	}
+	private final String baseIn;
+	private final String baseOut;
 
 	/**
-	 * walk the tree starting at e.
+	 * @param baseIn the input (to be modified) base url
+	 * @param baseOut the output base url
 	 * 
-	 * @param e the root element to walk
-	 * @return n the number of traversed elements
 	 */
-	public int walkTreeKidsFirst(final KElement e)
+	public URLMapper(final String baseIn, final String baseOut)
 	{
-		if (e == null)
-		{
-			return 0;
-		}
-		int n = 0;
-		// do not follow refelements - also MUST use VElement rather than iterator to retain walking ability, even if elements are deleted
-		final VElement v = e.getChildElementVector_KElement(null, null, null, true, -1);
-		for (KElement e2 : v)
-		{
-			n += walkTreeKidsFirst(e2);
-		}
-
-		final IWalker w = theFactory.getWalker(e);
-		if (w != null)
-		{
-			n++;
-			doWalk(e, null, w);
-		}
-		return n;
+		super(new BaseWalkerFactory());
+		this.baseIn = baseIn;
+		this.baseOut = baseOut;
 	}
 
-	/**
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
-	public String toString()
+	protected BaseWalkerFactory getFactory()
 	{
-		return getClass().getCanonicalName() + " : " + theFactory;
+		return (BaseWalkerFactory) theFactory;
+	}
+
+	/**
+	 * the resource walker note the naming convention Walkxxx so that it is automagically instantiated by the super classes
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	public class WalkURL extends WalkElement
+	{
+
+		/**
+		 * fills this into the factory
+		 */
+		public WalkURL()
+		{
+			super();
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e the element to walk over
+		 * @param trackElem - unused should be null
+		 * @return the element to continue walking
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			IURLSetter u = (IURLSetter) e;
+			String url = StringUtil.getNonEmpty(u.getURL());
+			if (url == null)
+				return e;
+			String relativeURL = UrlUtil.getLocalURL(baseIn, url);
+			if (relativeURL != null)
+				u.setURL(UrlUtil.getURLWithDirectory(baseOut, relativeURL));
+			return e; //  continue
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof IURLSetter);
+		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IElementConverter#convert(org.cip4.jdflib.core.KElement)
+	 */
+	public KElement convert(KElement e)
+	{
+		walkTree(e, null);
+		return e;
 	}
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,7 +76,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.cip4.jdflib.core.KElement;
-import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.ifaces.IElementConverter;
 import org.cip4.jdflib.ifaces.IURLSetter;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -87,9 +87,8 @@ import org.cip4.jdflib.util.UrlUtil.URLProtocol;
  * walker that extracts all URLs and dumps them to a directory 
  * URLS are modified to reflect the new location
  */
-public class URLExtractor extends BaseElementWalker
+public class URLExtractor extends BaseElementWalker implements IElementConverter
 {
-	protected Set<String> saved;
 
 	/**
 	 * the URL walker
@@ -117,14 +116,13 @@ public class URLExtractor extends BaseElementWalker
 		{
 			return e;
 		}
-
 	}
 
 	protected final File dir;
 	protected final String baseURL;
 	protected Set<URLProtocol> protocols;
-	protected VString myURLBase;
-	private final String currentURL;
+	protected final String currentURL;
+	protected Set<String> saved;
 
 	/**
 	 * @param dumpDir the local directory where any files are dumped
@@ -199,7 +197,7 @@ public class URLExtractor extends BaseElementWalker
 					return e;
 			}
 			boolean bOverwrite = !saved.contains(url);
-			File newFile = UrlUtil.moveToDir(u, dir, currentURL, bOverwrite);
+			final File newFile = UrlUtil.moveToDir(u, dir, currentURL, bOverwrite);
 			if (baseURL != null && newFile != null)
 			{
 				String s = UrlUtil.isRelativeURL(url) ? url : newFile.getName();
@@ -220,5 +218,14 @@ public class URLExtractor extends BaseElementWalker
 		{
 			return (toCheck instanceof IURLSetter);
 		}
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IElementConverter#convert(org.cip4.jdflib.core.KElement)
+	 */
+	public KElement convert(KElement e)
+	{
+		walkTree(e, null);
+		return e;
 	}
 }

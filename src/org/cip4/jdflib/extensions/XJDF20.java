@@ -1226,8 +1226,8 @@ public class XJDF20 extends BaseElementWalker
 				JDFResource ni = n.getResource(s, null, 0);
 				if (ni == null)
 				{
-					JDFNodeInfo nia = (JDFNodeInfo) ap.getAncestorElement(s, null, null);
-					n.linkResource(nia, EnumUsage.Input, null);
+					JDFResource resAnc = (JDFResource) ap.getAncestorElement(s, null, null);
+					n.linkResource(resAnc, EnumUsage.Input, null);
 				}
 			}
 		}

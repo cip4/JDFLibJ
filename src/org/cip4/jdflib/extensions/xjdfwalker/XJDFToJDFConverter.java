@@ -672,11 +672,25 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				final KElement e2 = trackElem.copyElement(e, null);
 				convertUnits(e2);
+				fixNamespace(e2);
 				e2.removeChildren(null, null, null); // will be copied later
 				trackElem = e2;
 			}
 			convertUnits(trackElem);
 			return trackElem;
+		}
+
+		/**
+		 * move namespace to 1.1 for all 2.x values
+		 * @param e2
+		 */
+		private void fixNamespace(KElement e2)
+		{
+			String namespace = e2.getNamespaceURI();
+			if (JDFElement.getSchemaURL(2, 0).equals(StringUtil.leftStr(namespace, -1) + 0))
+			{
+				e2.setNamespaceURI(JDFElement.getSchemaURL(1, 1));
+			}
 		}
 
 		/**

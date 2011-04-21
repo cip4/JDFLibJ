@@ -70,6 +70,7 @@ package org.cip4.jdflib.validate;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Vector;
 
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -110,7 +111,7 @@ public class VersionTranslator
 	 * @param stream the input stream to convert
 	 * @return the converted stream
 	 */
-	public InputStream convertStream(InputStream stream)
+	public Vector<InputStream> convertStream(InputStream stream)
 	{
 		JDFParser p = new JDFParser();
 		JDFDoc d = p.parseStream(stream);
@@ -129,7 +130,17 @@ public class VersionTranslator
 		{
 			bios = null;
 		}
-		return bios == null ? null : bios.getInputStream();
+		final Vector<InputStream> v;
+		if (bios == null)
+		{
+			v = null;
+		}
+		else
+		{
+			v = new Vector<InputStream>();
+			v.add(bios.getInputStream());
+		}
+		return v;
 	}
 
 	/**

@@ -139,6 +139,7 @@ import org.cip4.jdflib.elementwalker.LinkRefFinderTest;
 import org.cip4.jdflib.elementwalker.RemovePrivateTest;
 import org.cip4.jdflib.elementwalker.ResourceIDFinderTest;
 import org.cip4.jdflib.elementwalker.URLExtractorTest;
+import org.cip4.jdflib.elementwalker.URLMapperTest;
 import org.cip4.jdflib.elementwalker.UnlinkFinderTest;
 import org.cip4.jdflib.elementwalker.XPathWalkerTest;
 import org.cip4.jdflib.examples.AmountTest;
@@ -377,6 +378,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(ResourceIDFinderTest.class);
 		suite.addTestSuite(UnlinkFinderTest.class);
 		suite.addTestSuite(URLExtractorTest.class);
+		suite.addTestSuite(URLMapperTest.class);
 		suite.addTestSuite(XPathWalkerTest.class);
 
 		// examples

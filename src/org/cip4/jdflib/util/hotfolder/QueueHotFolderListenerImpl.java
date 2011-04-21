@@ -69,6 +69,7 @@
 package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
+import java.util.Vector;
 
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
@@ -121,10 +122,14 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	 * @param storedFile
 	 * @return the JDFDoc for the file
 	 */
-	protected JDFDoc getJDFFromFile(final File storedFile)
+	protected Vector<JDFDoc> getJDFsFromFile(final File storedFile)
 	{
 		final JDFDoc jdfDoc = JDFDoc.parseFile(storedFile.getPath());
-		return jdfDoc;
+		if (jdfDoc == null)
+			return null;
+		Vector<JDFDoc> v = new Vector<JDFDoc>();
+		v.add(jdfDoc);
+		return v;
 	}
 
 	/**
@@ -134,6 +139,7 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	public void hotFile(final File hotFile)
 	{
 		final String stringURL = UrlUtil.fileToUrl(hotFile, false);
+		final String newURL = UrlUtil.newExtension(stringURL, "jdf");
 
 		final JDFDoc jmfDoc = new JDFDoc("JMF");
 		final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
@@ -141,28 +147,29 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 		newCommand.removeAttribute(AttributeName.ID);
 		newCommand.appendAnchor(null);
 		final EnumType cType = newCommand.getEnumType();
-		final JDFDoc jdfDoc = getJDFFromFile(hotFile);
+		final Vector<JDFDoc> vjdfDoc = getJDFsFromFile(hotFile);
 
-		if (jdfDoc != null)
+		if (vjdfDoc != null)
 		{
-			final String newURL = UrlUtil.newExtension(stringURL, "jdf");
-			if (!newURL.equalsIgnoreCase(stringURL))
+			for (JDFDoc jdfDoc : vjdfDoc)
 			{
-				hotFile.delete();
-				jdfDoc.write2File(UrlUtil.urlToFile(newURL), 2, false);
-			}
+				if (!newURL.equalsIgnoreCase(stringURL))
+				{
+					hotFile.delete();
+					jdfDoc.write2File(UrlUtil.urlToFile(newURL), 2, false);
+				}
+				final JDFNode jdfRoot = jdfDoc.getJDFRoot();
 
-			final JDFNode jdfRoot = jdfDoc.getJDFRoot();
-
-			if (EnumType.ReturnQueueEntry.equals(cType))
-			{
-				extractReturnParams(newURL, newCommand, jdfRoot);
+				if (EnumType.ReturnQueueEntry.equals(cType))
+				{
+					extractReturnParams(newURL, newCommand, jdfRoot);
+				}
+				else if (EnumType.SubmitQueueEntry.equals(cType))
+				{
+					extractSubmitParams(newURL, newCommand, jdfRoot);
+				}
+				qhfl.submitted(jmfRoot);
 			}
-			else if (EnumType.SubmitQueueEntry.equals(cType))
-			{
-				extractSubmitParams(newURL, newCommand, jdfRoot);
-			}
-			qhfl.submitted(jmfRoot);
 		}
 	}
 

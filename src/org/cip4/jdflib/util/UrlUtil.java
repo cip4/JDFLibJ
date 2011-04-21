@@ -1157,6 +1157,7 @@ public class UrlUtil
 
 	/**
 	 * get the local url without directory
+	 * schemes in the base url are case insensitive, all others are case sensitive
 	 * 
 	 * @param directory the url of the directory
 	 * @param url the absolute url
@@ -1181,9 +1182,17 @@ public class UrlUtil
 		VString vURL = StringUtil.tokenize(url, "/", false);
 		if (vDirectory.size() >= vURL.size())
 			return null;
-		for (String s : vDirectory)
+		if (vDirectory.size() > 0 && vURL.size() > 0)
 		{
-			if (vURL.get(0).equals(s))
+			if (vDirectory.get(0).endsWith(":"))
+				vDirectory.set(0, vDirectory.get(0).toLowerCase());
+			if (vURL.get(0).endsWith(":"))
+				vURL.set(0, vURL.get(0).toLowerCase());
+		}
+		for (String dirChunk : vDirectory)
+		{
+			String urlChunk = vURL.get(0);
+			if (urlChunk.equals(dirChunk))
 				vURL.remove(0);
 			else
 				return null;

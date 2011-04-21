@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -92,6 +92,8 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * hook for guaranteed prewalk initialization
+	 * @param e 
+	 * @param trackElem 
 	 */
 	public void prepareWalk(final KElement e, final KElement trackElem)
 	{
@@ -100,6 +102,8 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 
 	/**
 	 * hook for guaranteed postwalk finalization
+	 * @param e 
+	 * @param trackElem 
 	 */
 	public void finalizeWalk(final KElement e, final KElement trackElem)
 	{

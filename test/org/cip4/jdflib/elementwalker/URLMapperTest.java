@@ -66,25 +66,34 @@
  *  
  * 
  */
-package org.cip4.jdflib.ifaces;
+package org.cip4.jdflib.elementwalker;
 
-import java.io.InputStream;
-import java.util.Vector;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
+import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.process.JDFFileSpec;
 
 /**
- * class that converts one stream into another
+ * TODO Please insert comment!
  * @author rainerprosi
- * @date Apr 8, 2011
+ * @date Apr 21, 2011
  */
-public interface IStreamConverter
+public class URLMapperTest extends JDFTestCaseBase
 {
-
 	/**
 	 * 
-	 * convert a stream
-	 * @param stream the input stream to convert
-	 * @return the converted set of streams; may be null
+	 * TODO Please insert comment!
 	 */
-	public Vector<InputStream> convert(InputStream stream);
+	public void testMapToUrl()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFFileSpec fs = (JDFFileSpec) n.addResource(ElementName.FILESPEC, EnumUsage.Input);
+		fs.setURL("file://foo/bar/a.b");
+		URLMapper m = new URLMapper("File://foo", "http://www.foo.com");
+		m.convert(n);
+		assertEquals(fs.getURL(), "http://www.foo.com/bar/a.b");
 
+	}
 }

@@ -3100,6 +3100,9 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		setAttributes(src);
 		setText(src.getText());
+		String srcNS = StringUtil.getNonEmpty(src.getNamespaceURI());
+		if (srcNS != null)
+			setNamespaceURI(srcNS);
 		Node e = src.getFirstChild();
 		while (e != null)
 		{

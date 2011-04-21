@@ -120,6 +120,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals(UrlUtil.getLocalURL("foo/", "foo/bar"), "bar");
 		assertEquals(UrlUtil.getLocalURL(null, "foo/bar"), "foo/bar");
 		assertEquals(UrlUtil.getLocalURL("", "foo/bar"), "foo/bar");
+		assertEquals(UrlUtil.getLocalURL("file://foo", "File://foo/bar/a.b"), "bar/a.b");
 	}
 
 	/**

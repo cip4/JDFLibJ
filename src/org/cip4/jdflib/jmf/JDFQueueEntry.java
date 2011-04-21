@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -431,8 +431,11 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 					removeAttribute(AttributeName.ENDTIME);
 
 				}
-				if (!EnumQueueEntryStatus.Removed.equals(value))
+				// in case cleanup removed this from queue, we don't want to reintroduce it through sorting
+				if (!EnumQueueEntryStatus.Removed.equals(value) && queue.equals(getParentNode_KElement()))
+				{
 					queue.sortChild(this);
+				}
 				queue.setStatusFromEntries();
 			}
 		}
@@ -569,11 +572,12 @@ public class JDFQueueEntry extends JDFAutoQueueEntry implements Comparable<KElem
 
 	/**
 	 * @return true if this entry is completed
+	 * @since 110420 removed suspended from the list as suspended is NOT a completed end state
 	 */
 	public boolean isCompleted()
 	{
 		String status = getAttribute(AttributeName.STATUS, null, null);
-		return "Completed".equals(status) || "Removed".equals(status) || "Aborted".equals(status) || "Suspended".equals(status);
+		return "Completed".equals(status) || "Removed".equals(status) || "Aborted".equals(status);
 	}
 
 	/**

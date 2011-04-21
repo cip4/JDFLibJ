@@ -171,9 +171,11 @@ public class JMFBuilder
 	 * @param queueEntryId queue entry ID of the queue to abort
 	 * @return the message
 	 */
-	public JDFJMF buildRenoveQueueEntry(final String queueEntryId)
+	public JDFJMF buildReturnQueueEntry(final String queueEntryId)
 	{
-		final JDFJMF jmf = buildQueueEntryCommand(queueEntryId, EnumType.RemoveQueueEntry);
+		final JDFJMF jmf = createJMF(EnumFamily.Command, EnumType.ReturnQueueEntry);
+		final JDFCommand command = jmf.getCommand(0);
+		command.appendReturnQueueEntryParams().setQueueEntryID(queueEntryId);
 		return finalize(jmf);
 	}
 
