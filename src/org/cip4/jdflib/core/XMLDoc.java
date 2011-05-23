@@ -91,6 +91,8 @@ import java.util.Enumeration;
 import javax.mail.BodyPart;
 import javax.mail.Multipart;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.ElementDefinitionImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
@@ -134,6 +136,7 @@ public class XMLDoc
 {
 
 	protected DocumentXMLImpl m_doc;
+	protected final Log log;
 
 	// **************************************** Constructors
 	// ****************************************
@@ -143,6 +146,7 @@ public class XMLDoc
 	public XMLDoc()
 	{
 		m_doc = getImpl();
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -185,6 +189,7 @@ public class XMLDoc
 	 */
 	public XMLDoc(final Document document)
 	{
+		log = LogFactory.getLog(getClass());
 		if (document == null)
 		{
 			throw new JDFException("XMLDoc(Document) null input Document");
@@ -202,6 +207,7 @@ public class XMLDoc
 		}
 		catch (final Exception e)
 		{
+			log.error("exception constructing Document", e);
 			final String s = e.toString();
 			throw new JDFException("Snafu: XMLDoc(Document) not implemented; class=" + s);
 		}
@@ -257,6 +263,7 @@ public class XMLDoc
 	 */
 	public XMLDoc(final DocumentXMLImpl document)
 	{
+		log = LogFactory.getLog(getClass());
 		if (document == null)
 		{
 			throw new JDFException("XMLDoc(DocumentXMLImpl) null input Document");
@@ -271,6 +278,7 @@ public class XMLDoc
 	 */
 	public XMLDoc(final XMLDoc other)
 	{
+		log = LogFactory.getLog(getClass());
 		m_doc = other.m_doc;
 		if (m_doc == null)
 		{
@@ -288,7 +296,7 @@ public class XMLDoc
 	@Deprecated
 	public XMLDoc(final String strDocType)
 	{
-		new XMLDoc(strDocType, null);
+		this(strDocType, null);
 	}
 
 	/**
@@ -299,6 +307,7 @@ public class XMLDoc
 	 */
 	public XMLDoc(final String strDocType, final String namespaceURI)
 	{
+		log = LogFactory.getLog(getClass());
 		m_doc = getImpl();
 		setRoot(strDocType, namespaceURI);
 	}
@@ -385,7 +394,7 @@ public class XMLDoc
 		}
 		catch (final IOException e)
 		{
-			//System.out.println("write2String: " + outStream + " : " + e);
+			log.error("write2String: ", e);
 		}
 		finally
 		{
@@ -397,7 +406,7 @@ public class XMLDoc
 				}
 				catch (final IOException e1)
 				{
-					// nop
+					log.error("error closing: ", e1);
 				}
 			}
 		}
@@ -441,6 +450,7 @@ public class XMLDoc
 
 		if (oFilePath == null)
 		{
+			log.error("writing to null File, bailing out");
 			return false;
 		}
 
@@ -466,9 +476,14 @@ public class XMLDoc
 		if (file == null)
 		{
 			if (getOriginalFileName() != null)
+			{
 				file = new File(getOriginalFileName());
+			}
 			else
+			{
+				log.error("writing to null File, bailing out");
 				return false;
+			}
 		}
 
 		try
@@ -490,12 +505,12 @@ public class XMLDoc
 		}
 		catch (final FileNotFoundException e)
 		{
-			//			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+			log.error("writing to File, bailing out", e);
 			fSuccess = false;
 		}
 		catch (final IOException e)
 		{
-			//			System.out.println("Write2File: " + file.getAbsolutePath() + " : " + e);
+			log.error("writing to File, bailing out", e);
 			fSuccess = false;
 		}
 		finally
@@ -508,11 +523,10 @@ public class XMLDoc
 				}
 				catch (final IOException e1)
 				{
-					// nop
+					log.error("closing File, bailing out", e1);
 				}
 			}
 		}
-
 		return fSuccess;
 	}
 
@@ -573,12 +587,13 @@ public class XMLDoc
 			}
 			catch (final IOException x)
 			{
-				if (i >= 3)
+				if (i >= 2)
 				{
+					log.error("writing to File, bailing out", x);
 					throw x; // try three times, else ciao
 				}
 				ThreadUtil.sleep((1000 * (i + 1)));
-				//				System.out.println("retry exception " + i + " for " + getOriginalFileName());
+				log.warn("retry exception " + i + " for " + getOriginalFileName(), x);
 			}
 		}
 	}
