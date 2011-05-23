@@ -209,7 +209,7 @@ public class StorageHotFolder
 	/**
 	 * 
 	 * set the directory for successful done
-	 * @param ok
+	 * @param ok the local directory for ok files in the input hot folder
 	 */
 	public void setOKStorage(File ok)
 	{
@@ -231,7 +231,7 @@ public class StorageHotFolder
 	/**
 	 * 
 	 * set the directory for error done
-	 * @param error
+	 * @param error the local directory for error files in the input hot folder
 	 */
 	public void setErrorStorage(File error)
 	{

@@ -180,9 +180,9 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	public void testOKError() throws Exception
 	{
 		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
-		File error = FileUtil.getFileInDirectory(tmpHFDir, new File("error"));
+		File error = new File("error");
 		hf.setErrorStorage(error);
-		File ok = FileUtil.getFileInDirectory(tmpHFDir, new File("ok"));
+		File ok = new File("ok");
 		hf.setOKStorage(ok);
 		hf.setMaxStore(42);
 		for (int i = 0; i < 4; i++)
@@ -190,6 +190,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
+		ok = FileUtil.getFileInDirectory(theHFDir, ok);
+		error = FileUtil.getFileInDirectory(theHFDir, error);
 		ThreadUtil.sleep(2000);
 		assertEquals(ok.listFiles().length, 2, 0);
 		assertEquals(error.listFiles().length, 2, 0);
