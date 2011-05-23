@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -84,7 +84,9 @@ import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
+import org.cip4.jdflib.resource.process.JDFIdentificationField;
 import org.cip4.jdflib.resource.process.JDFPreview;
+import org.cip4.jdflib.util.FileUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
@@ -96,7 +98,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 * @throws Exception
+	 * 
 	 */
 	public void testSchema()
 	{
@@ -106,7 +108,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 * @throws Exception
+	 *  
 	 */
 	public void testDieMaking()
 	{
@@ -122,7 +124,7 @@ public class JDFSchemaTest extends JDFTestCaseBase
 
 	/**
 	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
-	 * @throws Exception
+	 *  
 	 */
 	public void testPreviewResource()
 	{
@@ -131,6 +133,40 @@ public class JDFSchemaTest extends JDFTestCaseBase
 		n.setType(EnumType.PreviewGeneration);
 		final JDFPreview pv = (JDFPreview) n.addResource(ElementName.PREVIEW, EnumUsage.Output);
 		pv.setPartUsage(EnumPartUsage.Explicit);
+		final String s = d0.write2String(2);
+		final JDFDoc d = p.parseString(s);
+		assertNotNull(d);
+		assertNull(p.m_lastExcept);
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 *  
+	 */
+	public void testSchemafolder()
+	{
+		File[] jdfs = FileUtil.listFilesWithExtension(new File(sm_dirTestData + "schema"), "jdf");
+
+		for (File jdf : jdfs)
+		{
+			final JDFDoc d = p.parseFile(jdf);
+			assertNotNull(d);
+			log.info("Parsing: " + jdf.getName());
+			assertNull("schema error in: " + jdf.getName(), p.m_lastExcept);
+		}
+	}
+
+	/**
+	 * parse a simple JDF against all official schemas this test catches corrupt xml schemas
+	 * 
+	 */
+	public void testIdentificationField()
+	{
+		final JDFDoc d0 = new JDFDoc("JDF");
+		final JDFNode n = d0.getJDFRoot();
+		n.setType(EnumType.Verification);
+		final JDFIdentificationField idf = (JDFIdentificationField) n.addResource(ElementName.IDENTIFICATIONFIELD, EnumUsage.Input);
+		idf.setPartUsage(EnumPartUsage.Explicit);
 		final String s = d0.write2String(2);
 		final JDFDoc d = p.parseString(s);
 		assertNotNull(d);

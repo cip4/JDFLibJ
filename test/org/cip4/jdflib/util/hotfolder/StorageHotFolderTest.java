@@ -120,12 +120,13 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		theHFDir = new File(sm_dirTestDataTemp + File.separator + "HFTest");
+		FileUtil.deleteAll(theHFDir);
 		theHFDir.mkdirs();
 
 		tmpHFDir = new File(sm_dirTestDataTemp + File.separator + "HFTemp");
 		FileUtil.deleteAll(tmpHFDir);
 
-		HotFolder.setDefaultStabilizeTime(500);
+		HotFolder.setDefaultStabilizeTime(200);
 	}
 
 	/** 

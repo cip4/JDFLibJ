@@ -73,6 +73,8 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.auto.JDFAutoComChannel.EnumChannelType;
 import org.cip4.jdflib.core.DocumentJDFImpl;
 import org.cip4.jdflib.core.JDFAudit;
@@ -105,6 +107,18 @@ import org.cip4.jdflib.util.logging.LogConfigurator;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
+	public JDFTestCaseBase()
+	{
+		super();
+		LogConfigurator.configureLog(null, null);
+	}
+
+	public JDFTestCaseBase(String name)
+	{
+		super(name);
+		LogConfigurator.configureLog(null, null);
+	}
+
 	static protected final String sm_dirTestSchema = ".." + File.separator + "schema" + File.separator + "Version_1_4" + File.separator;
 	static protected final String sm_dirTestData = "test" + File.separator + "data" + File.separator;
 	static protected final String sm_dirTestDataTemp = sm_dirTestData + "temp" + File.separator;
@@ -187,6 +201,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	protected String author;
 	protected String senderID;
 	protected long mem;
+	protected Log log;
 
 	// //////////////////////////////////////////////////////////////////////////
 	// /
@@ -204,7 +219,7 @@ public abstract class JDFTestCaseBase extends TestCase
 		agentVersion = JDFAudit.getStaticAgentVersion();
 		author = JDFAudit.getStaticAuthor();
 		mem = getCurrentMem();
-		LogConfigurator.configureLog(null, null);
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**

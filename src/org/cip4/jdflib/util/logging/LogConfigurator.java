@@ -89,6 +89,8 @@ import org.cip4.jdflib.util.UrlUtil;
 public class LogConfigurator
 {
 
+	static private boolean configured = false;
+
 	/**
 	 * @param logDir the log directory, null console only
 	 * @param logName the name of the log file
@@ -97,6 +99,12 @@ public class LogConfigurator
 	public static void configureLog(String logDir, final String logName)
 	{
 		Log log = LogFactory.getLog(LogConfigurator.class);
+		if (configured)
+		{
+			log.debug("ignoring redundant configuration");
+			return;
+		}
+		configured = true;
 		try
 		{
 			Layout layout = new PatternLayout("%d " + PatternLayout.TTCC_CONVERSION_PATTERN);
