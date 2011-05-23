@@ -70,8 +70,11 @@ package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.file.FileSorter;
 
 /**
  * hotfolder listener that also moves to a done dir
@@ -81,7 +84,13 @@ import org.cip4.jdflib.util.UrlUtil;
 class StorageHotFolderListener implements HotFolderListener
 {
 	private final File storage;
+	private File errorStorage;
+	private File okStorage;
 	private final StorageHotFolder parent;
+	private final Log log;
+	private int nHotOK;
+	private int nHotError;
+	private int maxStore;
 
 	/**
 	 * @param storageDir 
@@ -91,9 +100,55 @@ class StorageHotFolderListener implements HotFolderListener
 	StorageHotFolderListener(File storageDir, HotFolderListener hfListener, StorageHotFolder parent)
 	{
 		super();
+		nHotOK = nHotError = 0;
+		setMaxStore(42);
+		errorStorage = null;
+		okStorage = null;
+		log = LogFactory.getLog(getClass());
+		if (hfListener == null)
+		{
+			log.error("hfListner MUST NOT be null");
+			throw new IllegalArgumentException("hfListner MUST NOT be null");
+		}
 		theListener = hfListener;
 		storage = storageDir;
 		this.parent = parent;
+	}
+
+	/**
+	 * 
+	 * set the directory for successful done
+	 * @param ok
+	 */
+	void setOKStorage(File ok)
+	{
+		okStorage = ok;
+		if (ok != null)
+		{
+			okStorage.mkdirs();
+			if (!okStorage.isDirectory())
+			{
+				log.error("OK Directory is not a directory: " + okStorage.getAbsolutePath());
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * set the directory for error done
+	 * @param error
+	 */
+	void setErrorStorage(File error)
+	{
+		errorStorage = error;
+		if (error != null)
+		{
+			errorStorage.mkdirs();
+			if (!errorStorage.isDirectory())
+			{
+				log.error("Error Directory is not a directory: " + errorStorage.getAbsolutePath());
+			}
+		}
 	}
 
 	HotFolderListener theListener;
@@ -101,16 +156,86 @@ class StorageHotFolderListener implements HotFolderListener
 	/**
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 	 */
-	public void hotFile(File hotFile)
+	public boolean hotFile(File hotFile)
 	{
 		final File storedFile = getStoredFile(hotFile);
 		if (storedFile == null)
 		{
-			return; // not good
+			log.warn("snafu retrieving file " + hotFile.getAbsolutePath());
+			copyCompleted(hotFile, false);
+			return false; // not good
 		}
-		if (theListener != null)
+		boolean b = theListener.hotFile(storedFile);
+		copyCompleted(storedFile, b);
+		return b;
+	}
+
+	/**
+	 * copy to ok or completed
+	 * @param storedFile the file to move 
+	 * @param bOK if true, ok else error
+	 */
+	void copyCompleted(final File storedFile, boolean bOK)
+	{
+		if (bOK)
 		{
-			theListener.hotFile(storedFile);
+			if (okStorage != null)
+			{
+				File copied = FileUtil.moveFileToDir(storedFile, okStorage);
+				if (copied == null)
+					log.warn("could not move ok " + storedFile + " to " + okStorage.getAbsolutePath());
+				else
+					copied.setLastModified(System.currentTimeMillis());
+
+				cleanup(bOK);
+			}
+			else
+			{
+				boolean ok = storedFile.delete();
+				if (!ok)
+					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
+			}
+		}
+		else
+		{
+			if (errorStorage != null)
+			{
+				File copied = FileUtil.moveFileToDir(storedFile, errorStorage);
+				if (copied == null)
+					log.warn("could not move error " + storedFile + " to " + okStorage.getAbsolutePath());
+				else
+					copied.setLastModified(System.currentTimeMillis());
+
+				cleanup(bOK);
+			}
+			else
+			{
+				boolean ok = storedFile.delete();
+				if (!ok)
+					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
+			}
+		}
+	}
+
+	/**
+	 * remove old suff from ok and error folder
+	 * @param bOK if true cleanup the ok folder, else the error folder
+	 */
+	private void cleanup(boolean bOK)
+	{
+		int nHot = bOK ? nHotOK++ : nHotError++;
+		if (nHot % 13 == 0)
+		{
+			FileSorter fs = new FileSorter(bOK ? okStorage : errorStorage);
+			File[] list = fs.sortLastModified(true);
+			for (int i = maxStore; i < list.length; i++)
+			{
+				boolean ok = list[i].delete();
+				if (!ok)
+				{
+					log.warn("failed to delete temporary file " + list[i].getAbsolutePath());
+				}
+			}
 		}
 	}
 
@@ -120,6 +245,35 @@ class StorageHotFolderListener implements HotFolderListener
 		File newFile = new File(UrlUtil.newExtension(hotFileName, parent.getFileNameIncrement() + "." + UrlUtil.extension(hotFileName)));
 		File newAbsoluteFile = FileUtil.getFileInDirectory(storage, newFile);
 		boolean ok = FileUtil.moveFile(hotFile, newAbsoluteFile);
+		if (ok)
+		{
+			log.info("moving file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
+		}
+		else
+		{
+			log.error("cannot move file from: " + hotFile.getAbsolutePath() + " to " + newAbsoluteFile.getAbsolutePath());
+		}
+
 		return ok ? newAbsoluteFile : null;
 	}
+
+	/**
+	 * Setter for maxStore attribute.
+	 * @param maxStore the maxStore to set
+	 */
+	void setMaxStore(int maxStore)
+	{
+		this.maxStore = maxStore;
+	}
+
+	/**
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "StorageHotFolderListener: ok=" + okStorage + " error=" + errorStorage;
+	}
+
 }

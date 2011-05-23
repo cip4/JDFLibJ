@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFPerson;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.logging.LogConfigurator;
 
 /**
  * base class for JDFLib test case classes
@@ -203,6 +204,7 @@ public abstract class JDFTestCaseBase extends TestCase
 		agentVersion = JDFAudit.getStaticAgentVersion();
 		author = JDFAudit.getStaticAuthor();
 		mem = getCurrentMem();
+		LogConfigurator.configureLog(null, null);
 	}
 
 	/**

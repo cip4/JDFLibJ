@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -75,7 +75,7 @@ import java.io.File;
 /**
  * a hotfolder watcher Listener callback
  * 
- * @author prosirai
+ * @author rainer prosi 
  * 
  */
 public interface HotFolderListener
@@ -85,7 +85,8 @@ public interface HotFolderListener
 	 * this interface function is called whenever a new or modified file has stabilized in the hotFolder
 	 * 
 	 * @param hotFile the File that has appeared in the hot folder
+	 * @return true if all went well, else false
 	 */
-	public void hotFile(File hotFile);
+	public boolean hotFile(File hotFile);
 
 }

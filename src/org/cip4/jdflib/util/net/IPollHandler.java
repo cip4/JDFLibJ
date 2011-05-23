@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -91,7 +91,8 @@ public interface IPollHandler
 	/**
 	 * 
 	 * @param result the polling details (rc, stream, content type) to be evaluated
-	 * @return true if the result was successfully processed, else false
+	 * @param url the url that the result was extracted from, may be null
+	 * @return success or idle  if the result was successfully processed, else false
 	 */
-	public PollResult handlePoll(IPollDetails result);
+	public PollResult handlePoll(IPollDetails result, String url);
 }

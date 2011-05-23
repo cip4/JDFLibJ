@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -410,7 +410,13 @@ public class FileUtil
 
 		try
 		{
-			w.writeStream(new FileOutputStream(file));
+			OutputStream fos = FileUtil.getBufferedOutputStream(file);
+			if (fos == null)
+				return null;
+
+			w.writeStream(fos);
+			fos.flush();
+			fos.close();
 		}
 		catch (FileNotFoundException e)
 		{
@@ -421,6 +427,22 @@ public class FileUtil
 			return null;
 		}
 		return file;
+	}
+
+	/** 
+	 * create a File object with a new extension
+	 * @see UrlUtil#newExtension(String, String) for details of handling null etc.
+	 * @param f the file, if null always returns null
+	 * @param newExt the new extension
+	 * @return the file with the new extension
+	 */
+	public static File newExtension(File f, String newExt)
+	{
+		if (f == null)
+		{
+			return null;
+		}
+		return new File(UrlUtil.newExtension(f.getPath(), newExt));
 	}
 
 	/**
@@ -623,6 +645,32 @@ public class FileUtil
 	}
 
 	/**
+	 * remove any internal "../" "./" and "//" from a url
+	 * 
+	 * @param file the file to clean
+	 * @return File - the clean file
+	 */
+	public static File cleanDots(final File file)
+	{
+		if (file == null)
+		{
+			return null;
+		}
+		String path = file.getPath();
+		if (File.separator != "/")
+		{
+			path = StringUtil.replaceString(path, File.separator, "/");
+			path = UrlUtil.cleanDots(path);
+			path = StringUtil.replaceString(path, "/", File.separator);
+		}
+		else
+		{
+			path = UrlUtil.cleanDots(path);
+		}
+		return new File(path);
+	}
+
+	/**
 	 * copies a File to directory if toFile exists, it is brutally overwritten unless fromFile equals toFile
 	 * @param fromFile the File to move
 	 * @param toDir the Directory to move to
@@ -660,8 +708,8 @@ public class FileUtil
 			return null;
 		}
 		String fullPath = dir.getPath() + File.separator + localFile.getPath();
-		fullPath = UrlUtil.cleanDots(fullPath);
-		return new File(fullPath);
+		File fullFile = new File(fullPath);
+		return cleanDots(fullFile);
 	}
 
 	/**

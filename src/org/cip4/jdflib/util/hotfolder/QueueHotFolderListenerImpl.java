@@ -69,8 +69,9 @@
 package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
-import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFDoc;
@@ -95,6 +96,8 @@ import org.cip4.jdflib.util.UrlUtil;
 public class QueueHotFolderListenerImpl implements HotFolderListener
 {
 
+	protected final Log log;
+
 	/**
 	 * 
 	 * @param qhfl
@@ -103,6 +106,7 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	public QueueHotFolderListenerImpl(QueueHotFolderListener qhfl, JDFJMF _queueCommand)
 	{
 		super();
+		log = LogFactory.getLog(getClass());
 		this.qhfl = qhfl;
 		if (_queueCommand == null)
 		{
@@ -117,29 +121,12 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 	final JDFCommand queueCommand; // the jdf command template that is
 
 	/**
-	 * extract the JDF document from the file
-	 * 
-	 * @param storedFile
-	 * @return the JDFDoc for the file
-	 */
-	protected Vector<JDFDoc> getJDFsFromFile(final File storedFile)
-	{
-		final JDFDoc jdfDoc = JDFDoc.parseFile(storedFile.getPath());
-		if (jdfDoc == null)
-			return null;
-		Vector<JDFDoc> v = new Vector<JDFDoc>();
-		v.add(jdfDoc);
-		return v;
-	}
-
-	/**
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 	 * @param hotFile
 	 */
-	public void hotFile(final File hotFile)
+	public boolean hotFile(final File hotFile)
 	{
 		final String stringURL = UrlUtil.fileToUrl(hotFile, false);
-		final String newURL = UrlUtil.newExtension(stringURL, "jdf");
 
 		final JDFDoc jmfDoc = new JDFDoc("JMF");
 		final JDFJMF jmfRoot = jmfDoc.getJMFRoot();
@@ -147,30 +134,20 @@ public class QueueHotFolderListenerImpl implements HotFolderListener
 		newCommand.removeAttribute(AttributeName.ID);
 		newCommand.appendAnchor(null);
 		final EnumType cType = newCommand.getEnumType();
-		final Vector<JDFDoc> vjdfDoc = getJDFsFromFile(hotFile);
+		final JDFDoc jdfDoc = JDFDoc.parseFile(hotFile.getPath());
 
-		if (vjdfDoc != null)
+		final JDFNode jdfRoot = jdfDoc.getJDFRoot();
+
+		log.info("generating queue command: " + queueCommand.getType());
+		if (EnumType.ReturnQueueEntry.equals(cType))
 		{
-			for (JDFDoc jdfDoc : vjdfDoc)
-			{
-				if (!newURL.equalsIgnoreCase(stringURL))
-				{
-					hotFile.delete();
-					jdfDoc.write2File(UrlUtil.urlToFile(newURL), 2, false);
-				}
-				final JDFNode jdfRoot = jdfDoc.getJDFRoot();
-
-				if (EnumType.ReturnQueueEntry.equals(cType))
-				{
-					extractReturnParams(newURL, newCommand, jdfRoot);
-				}
-				else if (EnumType.SubmitQueueEntry.equals(cType))
-				{
-					extractSubmitParams(newURL, newCommand, jdfRoot);
-				}
-				qhfl.submitted(jmfRoot);
-			}
+			extractReturnParams(stringURL, newCommand, jdfRoot);
 		}
+		else if (EnumType.SubmitQueueEntry.equals(cType))
+		{
+			extractSubmitParams(stringURL, newCommand, jdfRoot);
+		}
+		return qhfl.submitted(jmfRoot);
 	}
 
 	/**

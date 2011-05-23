@@ -29,7 +29,6 @@ import org.cip4.jdflib.node.JDFNode.EnumCleanUpMerge;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumAmountMerge;
 import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.CPUTimer;
 import org.cip4.jdflib.util.JDFMerge;
@@ -57,22 +56,22 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	public static void main(final String[] argv)
 	{
-		//		testCollapse();
-		testSpawn2();
+		testCollapse();
+		//testSpawn2();
 	}
 
 	/**
 	 * 
 	 */
-	private static void testCollapse()
+	public static void testCollapse()
 	{
-		final JDFDoc d = new JDFParser().parseFile("/share/data/data.jdf");
+		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/UlfPrien/jdfportal.jdf");
 		final JDFNode n = d.getJDFRoot();
-		JDFRunList r = (JDFRunList) n.getResource("RunList", EnumUsage.Input, 1);
-		r.getLayoutElement().deleteNode();
+		JDFResource r = n.getResource("ColorantControl", EnumUsage.Input, 0);
+		r.expand(true);
+		d.write2File("/share/data/JDF/UlfPrien/jdfportal_new.jdf", 2, false);
 		r.collapse(false, true);
-
-		d.write2File("C:/data/jdf/signa/collapse/data2.jdf", 2, false);
+		d.write2File("/share/data/JDF/UlfPrien/jdfportal_new2.jdf", 2, false);
 	}
 
 	/**

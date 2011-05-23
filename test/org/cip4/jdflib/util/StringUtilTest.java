@@ -101,10 +101,12 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testSimpleRegexp()
 	{
+		assertEquals(StringUtil.simpleRegExptoRegExp("??"), "(.)(.)");
+		assertEquals(StringUtil.simpleRegExptoRegExp("(a?)"), "(a?)");
+		assertEquals(StringUtil.simpleRegExptoRegExp("*b??"), "(.*)b(.)(.)");
 		assertEquals(StringUtil.simpleRegExptoRegExp("ab"), "ab");
 		assertEquals(StringUtil.simpleRegExptoRegExp("a.b"), "a\\.b");
 		assertEquals(StringUtil.simpleRegExptoRegExp("a(.+)b"), "a(.+)b");
-		assertEquals(StringUtil.simpleRegExptoRegExp("a\\.b"), "a\\.b");
 		assertEquals(StringUtil.simpleRegExptoRegExp("*.b"), "(.*)\\.b");
 		assertEquals("don't reconvert real regexp", StringUtil.simpleRegExptoRegExp("(.*)\\.b"), "(.*)\\.b");
 		assertTrue(StringUtil.matches("foo.txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
@@ -113,6 +115,13 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matches("56", StringUtil.simpleRegExptoRegExp("55|56")));
 		assertFalse(StringUtil.matches("57", StringUtil.simpleRegExptoRegExp("55|56")));
 		assertFalse(StringUtil.matches("foo_txt", StringUtil.simpleRegExptoRegExp("*.tx*")));
+		assertTrue(StringUtil.matches("aa", StringUtil.simpleRegExptoRegExp("??")));
+		assertTrue(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("*b?")));
+		assertTrue(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("ab(.)")));
+		assertFalse(StringUtil.matches("ab", StringUtil.simpleRegExptoRegExp("ab(.)")));
+		assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("ab(.)")));
+		assertFalse(StringUtil.matches("abc", StringUtil.simpleRegExptoRegExp("*b??")));
+		assertFalse(StringUtil.matches("abcd", StringUtil.simpleRegExptoRegExp("*b?")));
 	}
 
 	/**
@@ -413,12 +422,16 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertFalse(StringUtil.matches("a", "(.+ )*(bb)( .+)*"));
 		assertFalse(StringUtil.matches("a c", "(.+ )*(bb)( .+)*"));
 		assertFalse(StringUtil.matches("a b c", "(.+ )*(bb)( .+)*"));
+		assertFalse(StringUtil.matches("123456", "\\d{5,5}"));
+		assertFalse(StringUtil.matches("1234", "\\d{5,5}"));
+		assertTrue(StringUtil.matches("12345", "\\d{5,5}"));
 		assertTrue(StringUtil.matches("abc", "*"));
 		assertTrue(StringUtil.matches("abc", ".*"));
 		assertTrue(StringUtil.matches("abc", ".+"));
 		assertTrue(StringUtil.matches("abc", ""));
 		assertTrue(StringUtil.matches("äbc", "..."));
 		assertFalse(StringUtil.matches("abc", "...."));
+		assertFalse(StringUtil.matches("abc", ".."));
 		assertTrue(StringUtil.matches("€bc", null));
 		assertTrue(StringUtil.matches("€", "€?"));
 		assertTrue(StringUtil.matches("€€", "€{0,2}"));
@@ -457,11 +470,13 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertTrue(StringUtil.matches("ab", "a(.*)"));
 		assertTrue(StringUtil.matches("a", "a(.*)"));
 		assertFalse(StringUtil.matches("a", "a(.(.*))"));
+		assertTrue(StringUtil.matches("a", "ab?"));
+		assertTrue(StringUtil.matches("ab", "ab?"));
+		assertFalse(StringUtil.matches("ac", "ab?"));
 
 		assertTrue(StringUtil.matches("a b", "a b"));
 		assertTrue(StringUtil.matches("abc123ä", "abc123ä"));
 		assertTrue(StringUtil.matches("GangBrochureA4", "(Gang)?Bro(.)*"));
-
 	}
 
 	/**

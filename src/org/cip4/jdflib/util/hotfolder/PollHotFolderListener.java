@@ -71,6 +71,8 @@ package org.cip4.jdflib.util.hotfolder;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.net.IPollDetails;
 import org.cip4.jdflib.util.net.IPollHandler;
@@ -84,6 +86,8 @@ import org.cip4.jdflib.util.net.IPollHandler.PollResult;
 public class PollHotFolderListener implements HotFolderListener
 {
 
+	private final Log log;
+
 	/**
 	 * 
 	 * @param theHandler the poll handler to watch this folder with
@@ -92,6 +96,7 @@ public class PollHotFolderListener implements HotFolderListener
 	{
 		super();
 		this.theHandler = theHandler;
+		log = LogFactory.getLog(getClass());
 	}
 
 	IPollHandler theHandler;
@@ -100,7 +105,7 @@ public class PollHotFolderListener implements HotFolderListener
 	 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
 	 * @param hotFile
 	 */
-	public void hotFile(final File hotFile)
+	public boolean hotFile(final File hotFile)
 	{
 		IPollDetails result;
 		try
@@ -109,8 +114,10 @@ public class PollHotFolderListener implements HotFolderListener
 		}
 		catch (IOException e)
 		{
+			log.error("Exception processing hotfile", e);
 			result = null;
 		}
-		PollResult det = theHandler.handlePoll(result);
+		PollResult det = theHandler.handlePoll(result, hotFile.getParent());
+		return PollResult.idle.equals(det) || PollResult.success.equals(det);
 	}
 }

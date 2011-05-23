@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -84,8 +84,9 @@ public interface QueueHotFolderListener
 	/**
 	 * this interface function is called whenever a new or modified file has stabilized in the hotFolder
 	 * 
-	 * @param submissionJMF the JMF (in general a returnqueueentry or submitqueuentry) that references th jdf file
+	 * @param submissionJMF the JMF (in general a returnqueueentry or submitqueuentry) that references the jdf file
+	 * @return true if successful
 	 */
-	public void submitted(JDFJMF submissionJMF);
+	public boolean submitted(JDFJMF submissionJMF);
 
 }

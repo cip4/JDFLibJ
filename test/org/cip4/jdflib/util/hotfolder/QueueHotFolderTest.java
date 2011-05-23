@@ -107,9 +107,10 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		 * 
 		 * @see org.cip4.jdflib.util.QueueHotFolderListener#submitted(org.cip4.jdflib .jmf.JDFJMF)
 		 */
-		public void submitted(final JDFJMF submissionJMF)
+		public boolean submitted(final JDFJMF submissionJMF)
 		{
 			vJMF.add(submissionJMF);
+			return true;
 		}
 	}
 

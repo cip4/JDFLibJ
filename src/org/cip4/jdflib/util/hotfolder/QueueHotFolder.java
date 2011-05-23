@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -68,15 +68,6 @@
  *  
  * 
  */
-/**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * KString.java
- *
- * Last changes
- *
- */
 package org.cip4.jdflib.util.hotfolder;
 
 import java.io.File;
@@ -86,13 +77,13 @@ import org.cip4.jdflib.jmf.JDFJMF;
 /**
  * a hotfolder that emulates JMF queue functionality by applying a specific queue submission or queue return message to any file that is dropped into it
  * 
- * @author prosirai
+ * @author Rainer Prosi
  * 
  */
 public class QueueHotFolder extends StorageHotFolder
 {
 
-	protected QueueHotFolderListener theQueueListener;
+	private final QueueHotFolderListener theQueueListener;
 
 	/**
 	 * 
@@ -119,4 +110,11 @@ public class QueueHotFolder extends StorageHotFolder
 		return "QueueHotFolder: " + hf;
 	}
 
+	/**
+	 * @return the theQueueListener
+	 */
+	public QueueHotFolderListener getQueueListener()
+	{
+		return theQueueListener;
+	}
 }

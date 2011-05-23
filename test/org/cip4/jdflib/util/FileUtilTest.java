@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -116,6 +116,29 @@ public class FileUtilTest extends JDFTestCaseBase
 	{
 		assertNull(FileUtil.getExtension(new File("foo")));
 		assertEquals("txt", FileUtil.getExtension(new File("foo.txt")));
+	}
+
+	/**
+	 * 
+	 */
+	public void testCleanDots()
+	{
+		assertEquals(FileUtil.cleanDots(new File(".")), new File("."));
+		assertEquals(FileUtil.cleanDots(new File("..")), new File(".."));
+		assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile("a/..")), UrlUtil.urlToFile("."));
+		assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile(".././../c.pdf")), UrlUtil.urlToFile("../../c.pdf"));
+		assertEquals(FileUtil.cleanDots(UrlUtil.urlToFile(".././a/../c.pdf")), UrlUtil.urlToFile("../c.pdf"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testNewExtension()
+	{
+		assertNull(FileUtil.getExtension(new File("foo")));
+		assertEquals(new File("foo.bar"), FileUtil.newExtension(new File("foo"), "bar"));
+		assertEquals(new File("foo.bar"), FileUtil.newExtension(new File("foo"), ".bar"));
+		assertEquals(new File("a/foo.bar"), FileUtil.newExtension(new File("a/foo"), ".bar"));
 	}
 
 	/**
@@ -537,6 +560,7 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("c/d")), new File("a/b/c/d"));
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c")), new File("a/b/c"));
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d")), new File("a/b/c/d"));
+		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("../c/d")), new File("a/c/d"));
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b"), new File("/c/d/")), new File("a/b/c/d"));
 		assertEquals(FileUtil.getFileInDirectory(new File("a/b/"), new File("/c/d/")), new File("a/b/c/d"));
 

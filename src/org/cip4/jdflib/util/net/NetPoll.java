@@ -70,6 +70,7 @@
  */
 package org.cip4.jdflib.util.net;
 
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 import org.cip4.jdflib.util.UrlPart;
@@ -90,7 +91,8 @@ public class NetPoll
 	public NetPoll(String url, IPollHandler poller)
 	{
 		super();
-		this.url = url;
+		this.vUrl = new VString();
+		vUrl.add(url);
 		idleWait = 15000; // milliseconds
 		busyWait = 500; // milliSeconds
 		pollThread = null;
@@ -100,7 +102,7 @@ public class NetPoll
 		contentType = UrlUtil.TEXT_UNKNOWN;
 	}
 
-	private final String url;
+	private final VString vUrl;
 	protected int idleWait;
 	protected int busyWait;
 	protected PollThread pollThread;
@@ -165,7 +167,7 @@ public class NetPoll
 		@Override
 		public String toString()
 		{
-			return "PollThread: idle: " + idleWait + " busy: " + busyWait + " running: " + running + "\n" + poller;
+			return "PollThread: idle: " + getIdleWait() + " busy: " + busyWait + " running: " + running + "\n" + poller;
 		}
 
 		/**
@@ -174,13 +176,15 @@ public class NetPoll
 		@Override
 		public void run()
 		{
+			int n = 0;
 			while (running)
 			{
-				IPollDetails details = poll();
+				String url = vUrl.get(n);
+				IPollDetails details = poll(url);
 				PollResult result;
 				try
 				{
-					result = poller.handlePoll(details);
+					result = poller.handlePoll(details, url);
 				}
 				catch (Exception x)
 				{
@@ -188,7 +192,10 @@ public class NetPoll
 				}
 				if (result == null || !PollResult.success.equals(result))
 				{
-					ThreadUtil.wait(mutex, idleWait);
+					ThreadUtil.wait(mutex, getIdleWait());
+					// we only move on to the next in case nothing is waiting
+					int size = getUrlSize();
+					n = ++n % size;
 				}
 				else
 				{
@@ -200,12 +207,21 @@ public class NetPoll
 		}
 	}
 
+	protected int getUrlSize()
+	{
+		int size = vUrl.size();
+		if (size <= 0)
+			size = 1;
+		return size;
+	}
+
 	/**
+	 * @param iPos 
 	 * @return
 	 */
-	public IPollDetails poll()
+	protected IPollDetails poll(String baseUrl)
 	{
-		UrlPart p = UrlUtil.writeToURL(getUrl(), null, method, contentType, null);
+		UrlPart p = UrlUtil.writeToURL(getUrl(baseUrl), null, method, contentType, null);
 		return p;
 	}
 
@@ -215,6 +231,14 @@ public class NetPoll
 	public void setMethod(String method)
 	{
 		this.method = method;
+	}
+
+	/**
+	 * @param url the additional url to add
+	 */
+	public void addURL(String url)
+	{
+		vUrl.appendUnique(url);
 	}
 
 	/**
@@ -232,7 +256,7 @@ public class NetPoll
 	@Override
 	public String toString()
 	{
-		return "NetPoll: " + url + " method: " + method + " content-type: " + contentType + "\n" + pollThread;
+		return "NetPoll: " + vUrl + " method: " + method + " content-type: " + contentType + "\n" + pollThread;
 	}
 
 	/**
@@ -253,11 +277,47 @@ public class NetPoll
 
 	/**
 	 * 
-	 * get the URL
+	 * get the URL based on a baseurl
+	 * @param baseUrl 
 	 * @return
 	 */
-	protected String getUrl()
+	protected String getUrl(String baseUrl)
 	{
-		return url;
+		return baseUrl;
+	}
+
+	/**
+	 * 
+	 * get the vector of urls
+	 *  
+	 * @return
+	 */
+	public VString getUrls()
+	{
+		return vUrl;
+	}
+
+	/**
+	 * make sur we stop all threads prior to dying
+	 * @see java.lang.Object#finalize()
+	 */
+	@Override
+	protected void finalize() throws Throwable
+	{
+		stop();
+		super.finalize();
+	}
+
+	/**
+	 * get the idle wait period divided by the # of urls to ping
+	 *  
+	 * @return
+	 */
+	protected int getIdleWait()
+	{
+		int iw = idleWait / getUrlSize();
+		if (iw < busyWait)
+			iw = busyWait;
+		return iw;
 	}
 }

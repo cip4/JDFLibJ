@@ -89,7 +89,8 @@ public class DumpDirTest extends JDFTestCaseBase
 	 */
 	public void testDump() throws Exception
 	{
-		DumpDir dir = new DumpDir(new File(sm_dirTestDataTemp + File.separator + "TestDumpDir"));
+		File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
+		DumpDir dumpDir = new DumpDir(theDir);
 		ByteArrayIOStream bis = new ByteArrayIOStream();
 		for (int i = 1; i < 1000; i++)
 			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
@@ -97,7 +98,8 @@ public class DumpDirTest extends JDFTestCaseBase
 		System.gc();
 		final Runtime rt = Runtime.getRuntime();
 		for (int i = 0; i < 1000; i++)
-			dir.newFileFromStream("header", bis.getInputStream());
+			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + i);
+		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
 		System.gc();
 		long mem2 = rt.totalMemory() - rt.freeMemory();
 		assertEquals(mem2, mem, 1000000);

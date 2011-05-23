@@ -88,11 +88,10 @@ public class NetPollTest extends JDFTestCaseBase
 		int n = 0;
 
 		/**
-		 * @see org.cip4.jdflib.util.net.IPollHandler#handlePoll(org.cip4.jdflib.util.net.IPollDetails)
-		 * @param result
-		 * @return
-		*/
-		public PollResult handlePoll(IPollDetails result)
+		 * 
+		 * @see org.cip4.jdflib.util.net.IPollHandler#handlePoll(org.cip4.jdflib.util.net.IPollDetails, java.lang.String)
+		 */
+		public PollResult handlePoll(IPollDetails result, String url)
 		{
 			n++;
 			assertNotNull(result);
@@ -111,6 +110,8 @@ public class NetPollTest extends JDFTestCaseBase
 	public void testDump()
 	{
 		NetPoll p = new NetPoll("http://localhost:8080/httpdump", new WebPoller());
+		p.addURL("http://localhost:8080/httpdump/a1");
+		p.addURL("http://localhost:8080/httpdump/a2");
 		p.start();
 		ThreadUtil.sleep(23333);
 		p.stop();

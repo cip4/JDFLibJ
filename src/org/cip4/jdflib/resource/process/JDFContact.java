@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -151,31 +151,26 @@ public class JDFContact extends JDFAutoContact
 			return iterator(EnumContactType.class);
 		}
 
-		public static final EnumContactType Accounting = new EnumContactType(
-				"Accounting");
-		public static final EnumContactType Administrator = new EnumContactType(
-				"Administrator");
-		public static final EnumContactType Approver = new EnumContactType(
-				"Approver");
-		public static final EnumContactType ArtReturn = new EnumContactType(
-				"ArtReturn");
-		public static final EnumContactType Billing = new EnumContactType(
-				"Billing");
-		public static final EnumContactType Customer = new EnumContactType(
-				"Customer");
-		public static final EnumContactType Delivery = new EnumContactType(
-				"Delivery");
-		public static final EnumContactType DeliveryCharge = new EnumContactType(
-				"DeliveryCharge");
+		public static final EnumContactType Accounting = new EnumContactType("Accounting");
+		public static final EnumContactType Administrator = new EnumContactType("Administrator");
+		public static final EnumContactType Agency = new EnumContactType("Agency");
+		public static final EnumContactType Approver = new EnumContactType("Approver");
+		public static final EnumContactType ArtReturn = new EnumContactType("ArtReturn");
+		public static final EnumContactType Author = new EnumContactType("Author");
+		public static final EnumContactType Billing = new EnumContactType("Billing");
+		public static final EnumContactType Customer = new EnumContactType("Customer");
+		public static final EnumContactType Delivery = new EnumContactType("Delivery");
+		public static final EnumContactType DeliveryCharge = new EnumContactType("DeliveryCharge");
+		public static final EnumContactType Designer = new EnumContactType("Designer");
+		public static final EnumContactType Editor = new EnumContactType("Editor");
+		public static final EnumContactType Illustrator = new EnumContactType("Illustrator");
 		public static final EnumContactType Owner = new EnumContactType("Owner");
-		public static final EnumContactType Pickup = new EnumContactType(
-				"Pickup");
-		public static final EnumContactType Sender = new EnumContactType(
-				"Sender");
-		public static final EnumContactType Supplier = new EnumContactType(
-				"Supplier");
-		public static final EnumContactType SurplusReturn = new EnumContactType(
-				"SurplusReturn");
+		public static final EnumContactType Photographer = new EnumContactType("Photographer");
+		public static final EnumContactType Pickup = new EnumContactType("Pickup");
+		public static final EnumContactType Sender = new EnumContactType("Sender");
+		public static final EnumContactType Supplier = new EnumContactType("Supplier");
+		public static final EnumContactType SurplusReturn = new EnumContactType("SurplusReturn");
+		public static final EnumContactType TelephoneSanitizer = new EnumContactType("TelephoneSanitizer");
 	}
 
 	/**
@@ -185,8 +180,7 @@ public class JDFContact extends JDFAutoContact
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFContact(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFContact(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
@@ -199,8 +193,7 @@ public class JDFContact extends JDFAutoContact
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
@@ -214,8 +207,7 @@ public class JDFContact extends JDFAutoContact
 	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -253,7 +245,7 @@ public class JDFContact extends JDFAutoContact
 	 * @return vKString the vaue of the attribute
 	 */
 	@Deprecated
-	public VString getExtendedContactTypes() 
+	public VString getExtendedContactTypes()
 	{
 		return getContactTypes();
 	}
@@ -278,8 +270,7 @@ public class JDFContact extends JDFAutoContact
 	public void addContactTypes(EnumContactType typ)
 	{
 		if (typ != null)
-			appendAttribute(AttributeName.CONTACTTYPES, typ.getName(), null,
-					" ", true);
+			appendAttribute(AttributeName.CONTACTTYPES, typ.getName(), null, " ", true);
 
 	}
 

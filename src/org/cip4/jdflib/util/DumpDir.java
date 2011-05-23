@@ -169,9 +169,23 @@ public class DumpDir
 	 * 
 	 * @param header the header to print prior to the xml
 	 * @return
+	 * @deprecated - use 2 parameter version; default= newFile(header,null);
+	 */
+	@Deprecated
+	public File newFile(final String header)
+	{
+		return newFile(header, null);
+	}
+
+	/**
+	 * create a new File in this dump
+	 * 
+	 * @param header the header to print prior to the xml
+	 * @param ext the additional extension to add prior to .tmp
+	 * @return
 	 * 
 	 */
-	public File newFile(final String header)
+	public File newFile(final String header, String ext)
 	{
 		final int inc = increment();
 		if (!quiet && (inc % 200 == 0))
@@ -179,7 +193,7 @@ public class DumpDir
 			System.out.println("jmf dump service " + baseDir + " - " + inc + " " + new JDFDate().getDateTime());
 		}
 
-		final String s = StringUtil.sprintf("m%08i.tmp", "" + inc);
+		final String s = ext == null ? StringUtil.sprintf("m%08i.tmp", "" + inc) : StringUtil.sprintf("m%08i.%s.tmp", "" + inc + "," + ext);
 		final File f = FileUtil.getFileInDirectory(baseDir, new File(s));
 		if (header != null)
 		{
@@ -196,12 +210,26 @@ public class DumpDir
 	 * @param header the header to print prior to the stream
 	 * @param is the input stream to fill
 	 * @return the new file
-	 * 
+	 * @deprecated use the 3 parameter version
 	 */
-
+	@Deprecated
 	public File newFileFromStream(final String header, InputStream is)
 	{
-		final File dump = newFile(null);
+		return newFileFromStream(header, is, null);
+	}
+
+	/**
+	 * create a new File in this dump and fill it from is
+	 * 
+	 * @param header the header to print prior to the stream
+	 * @param is the input stream to fill
+	 * @param ext the additional extension
+	 * @return the new file
+	 * 
+	 */
+	public File newFileFromStream(final String header, InputStream is, String ext)
+	{
+		final File dump = newFile(null, ext);
 		if (!(is instanceof BufferedInputStream))
 		{
 			is = new BufferedInputStream(is);
@@ -271,14 +299,13 @@ public class DumpDir
 		{
 			synchronized (listMap.get(baseDir))
 			{
-				final String[] names = baseDir.list();
-				if (names.length > maxKeep)
+				final File[] names = FileUtil.listFilesWithExtension(baseDir, "tmp");
+				if (names != null && names.length > maxKeep)
 				{
 					Arrays.sort(names);
 					for (int i = 0; i < names.length - maxKeep; i++)
 					{
-						File f = new File(names[i]);
-						f = FileUtil.getFileInDirectory(baseDir, f);
+						File f = names[i];
 						if (f != null)
 						{
 							f.delete();

@@ -84,12 +84,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
-import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.file.FileSorter;
 
 /**
  * a very simple hotfolder watcher subdirectories are ignored
@@ -112,7 +114,6 @@ public class HotFolder implements Runnable
 
 	private final File dir;
 	private String allExtensions;
-	private RollingBackupFile logRoller;
 
 	/**
 	 * @return the hot folder directory
@@ -158,6 +159,7 @@ public class HotFolder implements Runnable
 	private final Vector<FileTime> lastFileTime;
 	protected final Vector<ExtensionListener> hfl;
 	private Thread runThread;
+	private final Log log;
 
 	/**
 	 * constructor for a simple hotfolder watcher that is automagically started in its own thread
@@ -194,6 +196,7 @@ public class HotFolder implements Runnable
 	 */
 	public HotFolder(final File _dir, final String ext, final HotFolderListener _hfl)
 	{
+		log = LogFactory.getLog(getClass());
 		dir = _dir;
 		dir.mkdirs();
 		lastFileTime = new Vector<FileTime>();
@@ -251,7 +254,7 @@ public class HotFolder implements Runnable
 	 */
 	public void run()
 	{
-
+		log.info("starting hot folder at: " + dir.getAbsolutePath());
 		while (!interrupt)
 		{
 			final long lastMod = dir.lastModified();
@@ -259,12 +262,12 @@ public class HotFolder implements Runnable
 			// has the directory been touched?
 			{
 				lastModified = lastMod;
-				final File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
+				File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
 				if (files != null)
 				{
 					final int fileListLength = files.length;
 
-					for (int i = lastFileTime.size() - 1; i >= 0; i--)
+					for (int i = 0; i < lastFileTime.size(); i++)
 					{
 						boolean found = false;
 						final FileTime lftAt = lastFileTime.elementAt(i);
@@ -280,17 +283,20 @@ public class HotFolder implements Runnable
 
 						if (!found)
 						{
-							lastFileTime.remove(i); // not there anymore
+							lastFileTime.remove(i--); // not there anymore - note the -- for und remove
 						}
 					}
+					Vector<File> vf = ContainerUtil.toVector(files);
+					for (int i = vf.size() - 1; i >= 0; i--)
+						if (vf.get(i) == null)
+							vf.remove(i);
 
-					for (int i = 0; i < fileListLength; i++) // the file is new -
-					// add to list for next check
+					files = vf.toArray(new File[0]);
+					files = new FileSorter(files).sortLastModified(false);
+
+					for (File f : files) // the file is new - add to list for next check
 					{
-						if (files[i] != null)
-						{
-							lastFileTime.add(new FileTime(files[i]));
-						}
+						lastFileTime.add(new FileTime(f));
 					}
 				}
 			}
@@ -328,20 +334,15 @@ public class HotFolder implements Runnable
 
 	private void hotFiles(final File fileJ)
 	{
-		if (logRoller != null)
-		{
-			String name = fileJ.getName();
-			FileUtil.copyFile(fileJ, logRoller.getNewFile(UrlUtil.extension(name)));
-		}
-		for (int k = 0; k < hfl.size(); k++)
+		for (ExtensionListener xl : hfl)
 		{
 			try
 			{
-				hfl.get(k).hotFile(fileJ); // exists and stabilized - call callbacks
+				xl.hotFile(fileJ); // exists and stabilized - call callbacks
 			}
 			catch (final Exception x)
 			{
-				//
+				log.error("exception processing hot files", x);
 			}
 		}
 	}
@@ -465,18 +466,4 @@ public class HotFolder implements Runnable
 	{
 		this.stabilizeTime = stabilizeTime;
 	}
-
-	/**
-	 * 
-	 * create a backup file
-	 * @param backup
-	 */
-	public void setBackup(RollingBackupFile backup)
-	{
-		if (backup != null)
-			backup.getParentFile().mkdirs();
-
-		logRoller = backup;
-	}
-
 }

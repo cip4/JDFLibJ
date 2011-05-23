@@ -4311,7 +4311,7 @@ public class JDFResource extends JDFElement
 	/**
 	 * collapse all redundant attributes and elements
 	 * 
-	 * @param bCollapseToNode only collapse redundant attriutes and elements that pre-exist in the nodes
+	 * @param bCollapseToNode only collapse redundant attributes and elements that pre-exist in the nodes
 	 * @param bCollapseElements if true, collapse elements, else only collapse attributes
 	 * 
 	 * @default Collapse(false)

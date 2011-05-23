@@ -81,7 +81,6 @@ import java.io.FileOutputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.ThreadUtil;
 
 /**
@@ -108,13 +107,13 @@ public class HotFolderTest extends JDFTestCaseBase
 		 * 
 		 * @see org.cip4.jdflib.util.HotFolderListener#hotFile(java.io.File)
 		 */
-		public void hotFile(File hotFile)
+		public boolean hotFile(File hotFile)
 		{
 			boolean zapp = false;
 			if (bZapp)
 				zapp = hotFile.delete();
 			System.out.println(System.currentTimeMillis() + " " + hotFile.getPath() + "," + bZapp + "," + zapp);
-
+			return zapp;
 		}
 
 	}
@@ -271,8 +270,6 @@ public class HotFolderTest extends JDFTestCaseBase
 		File backup = new File(sm_dirTestDataTemp + "backup/hfbackup.keep");
 		FileUtil.deleteAll(backup.getParentFile());
 
-		hf.setBackup(new RollingBackupFile(backup, 5));
-		assertTrue(backup.getParentFile().isDirectory());
 		hf.restart();
 		for (int i = 0; i < 10; i++)
 		{

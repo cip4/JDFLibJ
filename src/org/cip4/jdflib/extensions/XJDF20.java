@@ -294,6 +294,8 @@ public class XJDF20 extends BaseElementWalker
 		final KElement productList = newRoot.appendElement("ProductList");
 
 		final JDFNode rootIn = node.getJDFRoot();
+		prepareRoot(node);
+
 		walkTree(rootIn, productList);
 		if (productList.getElement("Product") == null)
 		{
@@ -309,6 +311,19 @@ public class XJDF20 extends BaseElementWalker
 		newRoot.eraseEmptyNodes(true);
 		newRoot.getOwnerDocument_KElement().setBodyPart(node.getOwnerDocument_KElement().getBodyPart());
 		return newRoot;
+	}
+
+	/**
+	 * prepares the root so that inherited stuff from the ancestorpool does not get lost
+	 * @param node
+	 */
+	private void prepareRoot(JDFNode node)
+	{
+		if (node != null)
+		{
+			node.ensureLink(node.getInheritedCustomerInfo(null), EnumUsage.Input, null);
+			node.ensureLink(node.getInheritedNodeInfo(null), EnumUsage.Input, null);
+		}
 	}
 
 	/**

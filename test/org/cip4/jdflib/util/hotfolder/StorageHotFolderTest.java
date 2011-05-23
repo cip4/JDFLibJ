@@ -76,12 +76,37 @@ import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 
 /**
- * TODO Please insert comment!
+ * 
  * @author rainerprosi
  * @date Feb 14, 2011
  */
 public class StorageHotFolderTest extends JDFTestCaseBase
 {
+
+	public class CountListener implements HotFolderListener
+	{
+		/**
+		 * 
+		 */
+		public CountListener()
+		{
+			super();
+			iCount = 0;
+		}
+
+		private int iCount;
+
+		/**
+		 * dummy that alternates ok and false 
+		 * @see org.cip4.jdflib.util.hotfolder.HotFolderListener#hotFile(java.io.File)
+		 */
+		public boolean hotFile(File hotFile)
+		{
+			return iCount++ % 2 == 0;
+		}
+
+	}
+
 	File theHFDir;
 	File tmpHFDir;
 	StorageHotFolder hf;
@@ -120,13 +145,13 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	 */
 	public void testSimple() throws IOException
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, null);
+		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 		ThreadUtil.sleep(2000);
 		assertFalse(file.exists());
-		final File fileNew = new File(tmpHFDir + File.separator + "f1.txt");
+		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 	}
 
 	/**
@@ -136,16 +161,46 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 	 */
 	public void testAddListener() throws IOException
 	{
-		hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", null);
+		hf = new StorageHotFolder(theHFDir, tmpHFDir, ".xml", new CountListener());
 		final File file = new File(theHFDir + File.separator + "f1.txt");
 		file.createNewFile();
 		assertTrue(file.exists());
 		ThreadUtil.sleep(2000);
 		assertTrue(file.exists());
-		hf.addListener(null, ".txt");
+		hf.addListener(new CountListener(), ".txt");
 		ThreadUtil.sleep(2000);
 		assertFalse(file.exists());
-		final File fileNew = new File(tmpHFDir + File.separator + "f1.txt");
 	}
 
+	/**
+	 * 
+	 * ok or error folder testing
+	 * @throws Exception 
+	 */
+	public void testOKError() throws Exception
+	{
+		hf = new StorageHotFolder(theHFDir, tmpHFDir, null, new CountListener());
+		File error = FileUtil.getFileInDirectory(tmpHFDir, new File("error"));
+		hf.setErrorStorage(error);
+		File ok = FileUtil.getFileInDirectory(tmpHFDir, new File("ok"));
+		hf.setOKStorage(ok);
+		hf.setMaxStore(42);
+		for (int i = 0; i < 4; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+			file.createNewFile();
+		}
+		ThreadUtil.sleep(2000);
+		assertEquals(ok.listFiles().length, 2, 0);
+		assertEquals(error.listFiles().length, 2, 0);
+		for (int i = 0; i < 100; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "f" + i + ".dat");
+			file.createNewFile();
+		}
+		ThreadUtil.sleep(2000);
+		assertEquals(ok.listFiles().length, 42, 13);
+		assertEquals(error.listFiles().length, 42, 13);
+
+	}
 }

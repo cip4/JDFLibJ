@@ -301,19 +301,17 @@ public class StringUtil
 	 * @return String the formatted string
 	 * @throws IllegalArgumentException in case format and o do not match, i.e. not eough objects are passed to fill format
 	 */
-	public static String sprintf(final String format, final Object[] objects)
+	public static String sprintf(String format, final Object[] objects)
 	{
-		String formatLocal = format;
-
-		if (objects == null || formatLocal == null)
+		if (objects == null || format == null)
 		{
 			return null;
 		}
 
-		formatLocal = StringUtil.replaceString(formatLocal, "%%", "__percent__äö-eher selten"); // quick
+		format = StringUtil.replaceString(format, "%%", "__percent__äö-eher selten"); // quick
 		// hack ;-)
-		final boolean bStart = formatLocal.startsWith("%");
-		final VString tokens = tokenize(formatLocal, "%", false);
+		final boolean bStart = format.startsWith("%");
+		final VString tokens = tokenize(format, "%", false);
 		final int nStart = (bStart ? 0 : 1);
 		if (tokens.size() > objects.length + nStart)
 		{
@@ -322,10 +320,10 @@ public class StringUtil
 
 		// tokenize does not return an empty token if we start with %
 		String s = bStart ? "" : tokens.stringAt(0);
-		final PrintfFormat f = new PrintfFormat("");
 
 		for (int i = nStart; i < tokens.size(); i++)
 		{
+			final PrintfFormat f = new PrintfFormat("");
 			f.set("%" + tokens.stringAt(i));
 			final Object ob = objects[i - nStart];
 			if (ob instanceof String)
@@ -2256,8 +2254,10 @@ public class StringUtil
 
 	/**
 	 * converts a simple regexp to a real regexp <br/>
-	 * * --> (.*) <br/>
-	 * . --> \.
+	 * * --> (.*) (any # of chars) <br/>
+	 * . --> \. (literal ".")<br/>
+	 * ? --> . (exactly one character)
+	 * if one of ([|\ is found in the expression we assume it is a real regexp that has already been converted
 	 * 
 	 * @param simpleRegExp the simple regexp
 	 * @return the converted real regexp
@@ -2268,25 +2268,24 @@ public class StringUtil
 		{
 			return null;
 		}
+		// don't resimplify explicit regexp
+		if (StringUtils.containsAny(simpleRegExp, "([|"))
+			return simpleRegExp;
 
 		// attention note sequence, otherwise we get unwanted side effects
-		final String[] in = new String[] { ".", "*" };
-		final String[] out = new String[] { "\\.", "(.*)" };
+		final String[] in = new String[] { ".", "*", "?" };
+		final String[] out = new String[] { "\\.", "(.*)", "(.)" };
 		for (int i = 0; i < in.length; i++)
 		{
-			final int delta = out[i].indexOf(in[i]); // offset of our char
 			final StringBuffer b = new StringBuffer(simpleRegExp.length() * 2);
 			int lastPos = 0;
 			while (lastPos >= 0)
 			{
 				final int posSimpleToken = simpleRegExp.indexOf(in[i], lastPos);
-				final int posComplexToken = simpleRegExp.indexOf(out[i], lastPos);
 				if (posSimpleToken >= 0)
 				{
-					final int pos3 = simpleRegExp.indexOf("(", lastPos);
 					b.append(simpleRegExp.substring(lastPos, posSimpleToken));
-					boolean isAlreadyComplex = posComplexToken + delta == posSimpleToken || (pos3 >= 0 && pos3 < posSimpleToken);
-					b.append(isAlreadyComplex ? in[i] : out[i]);
+					b.append(out[i]);
 				}
 				else
 				{
@@ -2297,6 +2296,9 @@ public class StringUtil
 
 			simpleRegExp = b.toString();
 		}
+		StringReplacer sr = new StringReplacer(simpleRegExp);
+		sr.setReRead(true);
+		//	simpleRegExp = sr.replaceString("?", "(.)");
 		return simpleRegExp;
 	}
 
