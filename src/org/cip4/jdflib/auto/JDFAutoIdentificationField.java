@@ -70,20 +70,33 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.DataFormatException;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.datatypes.JDFMatrix;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.resource.JDFResource;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.w3c.dom.Element;                         
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.*;                           
+import org.cip4.jdflib.auto.*;                      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.core.ElementInfo;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.node.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.devicecapability.*; 
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
+import org.cip4.jdflib.resource.process.press.*;    
+import org.cip4.jdflib.resource.process.prepress.*; 
+import org.cip4.jdflib.util.*;           
     /**
     *****************************************************************************
     class JDFAutoIdentificationField : public JDFResource
@@ -116,6 +129,19 @@ public abstract class JDFAutoIdentificationField extends JDFResource
     protected AttributeInfo getTheAttributeInfo()
     {
         return super.getTheAttributeInfo().updateReplace(atrInfoTable);
+    }
+
+
+    private static ElemInfoTable[] elemInfoTable = new ElemInfoTable[2];
+    static
+    {
+        elemInfoTable[0] = new ElemInfoTable(ElementName.BARCODEDETAILS, 0x66666111);
+        elemInfoTable[1] = new ElemInfoTable(ElementName.EXTRAVALUES, 0x66666111);
+    }
+    
+    protected ElementInfo getTheElementInfo()
+    {
+        return super.getTheElementInfo().updateReplace(elemInfoTable);
     }
 
 
@@ -622,5 +648,62 @@ public abstract class JDFAutoIdentificationField extends JDFResource
         {
             return getAttribute(AttributeName.VALUETEMPLATE, null, JDFConstants.EMPTYSTRING);
         }
+
+/* ***********************************************************************
+ * Element getter / setter
+ * ***********************************************************************
+ */
+
+    /**
+     * (24) const get element BarcodeDetails
+     * @return JDFBarcodeDetails the element
+     */
+    public JDFBarcodeDetails getBarcodeDetails()
+    {
+        return (JDFBarcodeDetails) getElement(ElementName.BARCODEDETAILS, null, 0);
+    }
+
+    /** (25) getCreateBarcodeDetails
+     * 
+     * @return JDFBarcodeDetails the element
+     */
+    public JDFBarcodeDetails getCreateBarcodeDetails()
+    {
+        return (JDFBarcodeDetails) getCreateElement_KElement(ElementName.BARCODEDETAILS, null, 0);
+    }
+
+    /**
+     * (29) append element BarcodeDetails
+     */
+    public JDFBarcodeDetails appendBarcodeDetails() throws JDFException
+    {
+        return (JDFBarcodeDetails) appendElementN(ElementName.BARCODEDETAILS, 1, null);
+    }
+
+    /**
+     * (24) const get element ExtraValues
+     * @return JDFExtraValues the element
+     */
+    public JDFExtraValues getExtraValues()
+    {
+        return (JDFExtraValues) getElement(ElementName.EXTRAVALUES, null, 0);
+    }
+
+    /** (25) getCreateExtraValues
+     * 
+     * @return JDFExtraValues the element
+     */
+    public JDFExtraValues getCreateExtraValues()
+    {
+        return (JDFExtraValues) getCreateElement_KElement(ElementName.EXTRAVALUES, null, 0);
+    }
+
+    /**
+     * (29) append element ExtraValues
+     */
+    public JDFExtraValues appendExtraValues() throws JDFException
+    {
+        return (JDFExtraValues) appendElementN(ElementName.EXTRAVALUES, 1, null);
+    }
 
 }// end namespace JDF

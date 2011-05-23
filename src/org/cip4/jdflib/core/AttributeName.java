@@ -3244,7 +3244,9 @@ public final class AttributeName
 	/** */
 	public static final String TEMPLATEID = "TemplateID";
 	/** */
-	public static final String TEMPLATEVERSION = "TemplateVersion";
+	public static final String TEMPLATETYPE = "TemplateVersion";
+	/** */
+	public static final String TEMPLATEVERSION = "TemplateType";
 	/** */
 	public static final String TESTREF = "TestRef";
 	/** */

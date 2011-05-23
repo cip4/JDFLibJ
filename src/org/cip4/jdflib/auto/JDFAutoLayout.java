@@ -70,37 +70,33 @@
 
 package org.cip4.jdflib.auto;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-import java.util.zip.DataFormatException;
+import java.util.Collection;                        
+import java.util.Iterator;                          
+import java.util.List;                              
+import java.util.Map;                               
+import java.util.Vector;                            
+import java.util.zip.DataFormatException;           
 
-import org.apache.commons.lang.enums.ValuedEnum;
-import org.apache.xerces.dom.CoreDocumentImpl;
-import org.cip4.jdflib.core.AtrInfoTable;
-import org.cip4.jdflib.core.AttributeInfo;
-import org.cip4.jdflib.core.AttributeName;
-import org.cip4.jdflib.core.ElemInfoTable;
-import org.cip4.jdflib.core.ElementInfo;
-import org.cip4.jdflib.core.ElementName;
-import org.cip4.jdflib.core.JDFConstants;
-import org.cip4.jdflib.core.JDFException;
-import org.cip4.jdflib.core.VElement;
-import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
-import org.cip4.jdflib.datatypes.JDFRectangle;
-import org.cip4.jdflib.resource.JDFLayerList;
-import org.cip4.jdflib.resource.JDFMarkObject;
-import org.cip4.jdflib.resource.JDFPageCondition;
-import org.cip4.jdflib.resource.JDFResource;
-import org.cip4.jdflib.resource.JDFSignature;
-import org.cip4.jdflib.resource.process.JDFContentObject;
-import org.cip4.jdflib.resource.process.JDFInsertSheet;
-import org.cip4.jdflib.resource.process.JDFLogicalStackParams;
-import org.cip4.jdflib.resource.process.JDFMedia;
-import org.cip4.jdflib.resource.process.JDFMediaSource;
-import org.cip4.jdflib.resource.process.JDFTransferCurvePool;
+import org.apache.commons.lang.enums.ValuedEnum;    
+import org.w3c.dom.Element;                         
+import org.apache.xerces.dom.CoreDocumentImpl;      
+import org.cip4.jdflib.*;                           
+import org.cip4.jdflib.auto.*;                      
+import org.cip4.jdflib.core.*;                      
+import org.cip4.jdflib.core.ElementInfo;                      
+import org.cip4.jdflib.span.*;                      
+import org.cip4.jdflib.node.*;                      
+import org.cip4.jdflib.pool.*;                      
+import org.cip4.jdflib.jmf.*;                       
+import org.cip4.jdflib.datatypes.*;                 
+import org.cip4.jdflib.resource.*;                  
+import org.cip4.jdflib.resource.devicecapability.*; 
+import org.cip4.jdflib.resource.intent.*;           
+import org.cip4.jdflib.resource.process.*;          
+import org.cip4.jdflib.resource.process.postpress.*;
+import org.cip4.jdflib.resource.process.press.*;    
+import org.cip4.jdflib.resource.process.prepress.*; 
+import org.cip4.jdflib.util.*;           
     /**
     *****************************************************************************
     class JDFAutoLayout : public JDFResource
@@ -131,8 +127,8 @@ public abstract class JDFAutoLayout extends JDFResource
         atrInfoTable[12] = new AtrInfoTable(AttributeName.SHEETNAMEFORMAT, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[13] = new AtrInfoTable(AttributeName.SHEETNAMETEMPLATE, 0x33331111, AttributeInfo.EnumAttributeType.string, null, null);
         atrInfoTable[14] = new AtrInfoTable(AttributeName.SOURCEWORKSTYLE, 0x33333111, AttributeInfo.EnumAttributeType.enumeration, EnumSourceWorkStyle.getEnum(0), null);
-        atrInfoTable[15] = new AtrInfoTable(AttributeName.STACKDEPTH, 0x33331111, AttributeInfo.EnumAttributeType.integer, null, null);
-        atrInfoTable[16] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[15] = new AtrInfoTable(AttributeName.SURFACECONTENTSBOX, 0x33333111, AttributeInfo.EnumAttributeType.rectangle, null, null);
+        atrInfoTable[16] = new AtrInfoTable(AttributeName.TEMPLATETYPE, 0x33333333, AttributeInfo.EnumAttributeType.enumeration, EnumTemplateType.getEnum(0), null);
     }
     
     protected AttributeInfo getTheAttributeInfo()
@@ -408,6 +404,51 @@ public abstract class JDFAutoLayout extends JDFResource
             public static final EnumSourceWorkStyle WorkAndTurn = new EnumSourceWorkStyle("WorkAndTurn");
             public static final EnumSourceWorkStyle WorkAndTumble = new EnumSourceWorkStyle("WorkAndTumble");
             public static final EnumSourceWorkStyle WorkAndTwist = new EnumSourceWorkStyle("WorkAndTwist");
+        }      
+
+
+
+        /**
+        * Enumeration strings for TemplateType
+        */
+
+        public static class EnumTemplateType extends ValuedEnum
+        {
+            private static final long serialVersionUID = 1L;
+            private static int m_startValue = 0;
+
+            private EnumTemplateType(String name)
+            {
+                super(name, m_startValue++);
+            }
+
+            public static EnumTemplateType getEnum(String enumName)
+            {
+                return (EnumTemplateType) getEnum(EnumTemplateType.class, enumName);
+            }
+
+            public static EnumTemplateType getEnum(int enumValue)
+            {
+                return (EnumTemplateType) getEnum(EnumTemplateType.class, enumValue);
+            }
+
+            public static Map getEnumMap()
+            {
+                return getEnumMap(EnumTemplateType.class);
+            }
+
+            public static List getEnumList()
+            {
+                return getEnumList(EnumTemplateType.class);
+            }
+
+            public static Iterator iterator()
+            {
+                return iterator(EnumTemplateType.class);
+            }
+
+            public static final EnumTemplateType Normal = new EnumTemplateType("Normal");
+            public static final EnumTemplateType ConditionalSheets = new EnumTemplateType("ConditionalSheets");
         }      
 
 
@@ -760,28 +801,6 @@ public abstract class JDFAutoLayout extends JDFResource
 
         
         /* ---------------------------------------------------------------------
-        Methods for Attribute StackDepth
-        --------------------------------------------------------------------- */
-        /**
-          * (36) set attribute StackDepth
-          * @param value: the value to set the attribute to
-          */
-        public void setStackDepth(int value)
-        {
-            setAttribute(AttributeName.STACKDEPTH, value, null);
-        }
-
-        /**
-          * (15) get int attribute StackDepth
-          * @return int the value of the attribute
-          */
-        public int getStackDepth()
-        {
-            return getIntAttribute(AttributeName.STACKDEPTH, null, 0);
-        }
-
-        
-        /* ---------------------------------------------------------------------
         Methods for Attribute SurfaceContentsBox
         --------------------------------------------------------------------- */
         /**
@@ -812,6 +831,28 @@ public abstract class JDFAutoLayout extends JDFResource
                 return null;
             }
             return nPlaceHolder;
+        }
+
+        
+        /* ---------------------------------------------------------------------
+        Methods for Attribute TemplateType
+        --------------------------------------------------------------------- */
+        /**
+          * (5) set attribute TemplateType
+          * @param enumVar: the enumVar to set the attribute to
+          */
+        public void setTemplateType(EnumTemplateType enumVar)
+        {
+            setAttribute(AttributeName.TEMPLATETYPE, enumVar==null ? null : enumVar.getName(), null);
+        }
+
+        /**
+          * (9) get attribute TemplateType
+          * @return the value of the attribute
+          */
+        public EnumTemplateType getTemplateType()
+        {
+            return EnumTemplateType.getEnum(getAttribute(AttributeName.TEMPLATETYPE, null, null));
         }
 
 /* ***********************************************************************
