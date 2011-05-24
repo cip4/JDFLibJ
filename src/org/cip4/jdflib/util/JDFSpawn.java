@@ -81,6 +81,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -127,6 +129,7 @@ public class JDFSpawn
 	private final Set<String> noIdentical;
 	private final Map<String, KElement> mapResources;
 	private boolean idCacheFilled;
+	private final Log log;
 	/**
 	 * if true, reduce read only partitions, else retain entire resource
 	 */
@@ -195,6 +198,7 @@ public class JDFSpawn
 	 */
 	public JDFSpawn(final JDFNode nodeToSpawn)
 	{
+		log = LogFactory.getLog(getClass());
 		node = nodeToSpawn;
 		informativeRoot = null;
 		mapRefs = new HashMap<JDFResource, VString>();
@@ -311,6 +315,7 @@ public class JDFSpawn
 
 			if (spawnParentNode == null)
 			{
+				log.error("JDFNode.Spawn cannot spawn unpartitioned root node");
 				throw new JDFException("JDFNode.Spawn cannot spawn unpartitioned root node");
 			}
 		}
@@ -365,6 +370,7 @@ public class JDFSpawn
 				vBad.appendUnique((iterCheck.next()).getAttribute(AttributeName.ID));
 			}
 			strIDs += StringUtil.setvString(vBad, JDFConstants.BLANK, null, null);
+			log.error(strIDs);
 			throw new JDFException(strIDs, exMultiSpawnRW);
 		}
 	}
@@ -492,8 +498,7 @@ public class JDFSpawn
 		JDFAncestorPool ancestorPool = parent.getJDFRoot().getAncestorPool();
 		String lastAncestorID = JDFConstants.EMPTYSTRING;
 
-		if (!(parent.equals(node))) // only do this if we are not spawning
-		// parallel
+		if (!(parent.equals(node))) // only do this if we are not spawning parallel
 		{
 			rootOut.removeChild(ElementName.ANCESTORPOOL, null, 0); // just in
 			// case
@@ -510,16 +515,14 @@ public class JDFSpawn
 		ancestorPool = rootOut.getCreateAncestorPool();
 		ancestorPool.setPartMapVector(vSpawnParts);
 
-		// avoid double counting of this node's root element in case of
-		// partitioned spawning
+		// avoid double counting of this node's root element in case of partitioned spawning
 		int startAncestorLoop = 0;
 		if ((vs.size() > 0) && ((vs.elementAt(0)).equals(lastAncestorID)))
 		{
 			startAncestorLoop = 1;
 		}
 
-		// 010702 RP reversed in getAncestorIDs: the last in the list is the
-		// actual
+		// 010702 RP reversed in getAncestorIDs: the last in the list is the actual
 		for (int i = startAncestorLoop; i < vs.size(); i++)
 		{
 			final JDFAncestor ancestor = ancestorPool.appendAncestor();
@@ -648,10 +651,6 @@ public class JDFSpawn
 				{
 					continue;
 				}
-				// 080505 must always check existing resources, otherwise we can
-				// lose references
-				// if(!isThereAlready)
-				// {
 				// copy any missing linked resources, just in case
 				// the root is in the original jdf and can be used as a hook to
 				// the original document
@@ -660,9 +659,6 @@ public class JDFSpawn
 				// waiting
 				copySpawnedResource(rPool, rRoot, copyStatus, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
 				nSpawned += vvRO.size() + vvRW.size();
-				// }
-				// else
-				// {
 
 				// get the effected resources
 				VElement vRes = new VElement();
@@ -688,7 +684,6 @@ public class JDFSpawn
 					vRes = dummy.getTargetVector(-1);
 					dummy.deleteNode();
 					reduceLinkPartition(liRootLink, vLinkMap);
-
 				}
 				else if (liRoot instanceof JDFRefElement)
 				{
@@ -702,6 +697,7 @@ public class JDFSpawn
 				}
 				else
 				{
+					log.error("we have a link that is neither ref nor link. Whazzup? " + liRoot == null ? " null" : liRoot.getNodeName());
 					continue; // snafu - should never get here
 				}
 				addIdentical(vResRoot);
@@ -978,6 +974,10 @@ public class JDFSpawn
 						}
 					}
 				}
+			}
+			else
+			{
+				log.warn("invalid link id=" + link.getrRef() + " Skipping");
 			}
 		}
 	}
@@ -1801,12 +1801,16 @@ public class JDFSpawn
 	 */
 	public JDFNode unSpawn(String spawnID)
 	{
+		log.info("Unspawning node ID=" + spawnID);
 		final JDFNode nodeParent = findUnSpawnNode(node, spawnID);
 		if (nodeParent != null && spawnID == null)
 		{
 			JDFSpawned spawnAudit = (JDFSpawned) nodeParent.getAuditPool().getAudit(0, EnumAuditType.Spawned, null, null);
 			if (spawnAudit != null)
+			{
 				spawnID = spawnAudit.getNewSpawnID();
+				log.info("calculating spawnID from parent: SpawnID=" + spawnID);
+			}
 		}
 		return unSpawnNode(nodeParent, spawnID);
 	}
@@ -1832,14 +1836,12 @@ public class JDFSpawn
 			if (auditPool != null)
 			{
 				final JDFAudit spawnAudit = auditPool.getAudit(0, JDFAudit.EnumAuditType.Spawned, mapSpawn, null);
-				// we have a matching spawned audit -> n is the parent node that
-				// spawned spawnID
+				// we have a matching spawned audit -> n is the parent node that spawned spawnID
 				// let n fix the rest!
 				if (spawnAudit != null)
 				{
 					// loop over all
-					// look into the audit pool and search something, which was
-					// merged
+					// look into the audit pool and search something, which was merged
 					final JDFAttributeMap mapMerge = new JDFAttributeMap(JDFConstants.MERGEID, spawnID);
 
 					final JDFAudit mergedAudit = auditPool.getAudit(0, JDFAudit.EnumAuditType.Merged, mapMerge, null);
@@ -1868,6 +1870,7 @@ public class JDFSpawn
 	{
 		if (parent == null)
 		{
+			log.warn("No parent to unspawn, bailing out");
 			return null;
 		}
 		JDFSpawned spawnAudit = null;
@@ -1878,12 +1881,12 @@ public class JDFSpawn
 			final JDFAuditPool auditPool = parent.getAuditPool();
 			if (auditPool != null)
 			{
-				// look into the audit pool and search something, which was
-				// spawned
+				// look into the audit pool and search something, which was spawned
 				final JDFAttributeMap mapSpawn = new JDFAttributeMap(JDFConstants.NEWSPAWNID, strSpawnID);
 				spawnAudit = (JDFSpawned) auditPool.getAudit(0, JDFAudit.EnumAuditType.Spawned, mapSpawn, null);
 				if (spawnAudit == null)
 				{
+					log.warn("No parent audit to unspawn, bailing out");
 					return null; // nothing was spawned so we can undo nothing
 				}
 
@@ -1891,8 +1894,7 @@ public class JDFSpawn
 				final VJDFAttributeMap parts = spawnAudit.getPartMapVector();
 				final VString vs = spawnAudit.getrRefsROCopied();
 
-				int i = 0;
-				for (i = 0; i < vs.size(); i++)
+				for (int i = 0; i < vs.size(); i++)
 				{
 					final JDFResource oldRes = (JDFResource) parent.getTarget(vs.elementAt(i), AttributeName.ID);
 					if (oldRes != null)
@@ -1904,7 +1906,7 @@ public class JDFSpawn
 				// merge rw resources
 				final VString vRWCopied = spawnAudit.getrRefsRWCopied();
 
-				for (i = 0; i < vRWCopied.size(); i++)
+				for (int i = 0; i < vRWCopied.size(); i++)
 				{
 					final JDFResource oldRes = (JDFResource) parent.getTarget(vRWCopied.elementAt(i), AttributeName.ID);
 					if (oldRes != null)
@@ -1929,7 +1931,7 @@ public class JDFSpawn
 						{
 							final VElement vRes = resPool.getPoolChildren(null, null, null);
 
-							for (i = 0; i < vRes.size(); i++)
+							for (int i = 0; i < vRes.size(); i++)
 							{
 								final JDFResource res1 = (JDFResource) vRes.elementAt(i);
 								res1.unSpawnPart(strSpawnID, JDFResource.EnumSpawnStatus.SpawnedRW);
@@ -1949,7 +1951,7 @@ public class JDFSpawn
 					final EnumNodeStatus parentStatus = parent.getStatus();
 					if (JDFElement.EnumNodeStatus.Pool.equals(parentStatus) || JDFElement.EnumNodeStatus.Part.equals(parentStatus))
 					{
-						for (i = 0; i < parts.size(); i++)
+						for (int i = 0; i < parts.size(); i++)
 						{
 							if ((parent.getPartStatus(parts.elementAt(i), 0).equals(JDFElement.EnumNodeStatus.Spawned)) || fHasAuditStatus)
 							{

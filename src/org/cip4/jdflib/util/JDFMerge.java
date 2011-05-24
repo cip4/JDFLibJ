@@ -76,6 +76,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
@@ -127,6 +129,7 @@ public class JDFMerge
 	private JDFNode overWriteNode;
 	private HashMap<String, JDFSpawned> newSpawnMap = null;
 	private String urlMerge;
+	private final Log log;
 
 	/**
 	 * set this to true if you want to update the stati of the relevant parent nodes based on the new Stati of the merged node
@@ -154,7 +157,7 @@ public class JDFMerge
 		parts = null;
 		cleanPolicy = EnumCleanUpMerge.None;
 		amountPolicy = EnumAmountMerge.None;
-
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -255,7 +258,7 @@ public class JDFMerge
 		}
 		catch (JDFException x)
 		{
-			// ok can't merge, lets remerge
+			log.error("Snafu merging - trying default merge", x);
 		}
 
 		subJDFNode = _toMerge;
@@ -678,17 +681,14 @@ public class JDFMerge
 			JDFAttributeMap trgMap = trg.getPartMap();
 
 			// RP 220605 - not puristic, but pragmatic
-			// found only a root or high level partition for an rw resource
-			// partition
-			// try to create the new partition and pray that it will not be
-			// subsequently completely overwritten
-			// this is still better than throwing an exception or silently
-			// ignoring the rw resource
+			// found only a root or high level partition for an rw resource partition
+			// try to create the new partition and pray that it will not be  subsequently completely overwritten
+			// this is still better than throwing an exception or silentlyignoring the rw resource
 			if ((src.getLocked() == false) && (trgMap.getKeys().size() < srcMap.getKeys().size()))
 			{
+				LogFactory.getLog(JDFMerge.class).warn("creting non existing rw partition: " + srcMap);
 				trg = targetRes.getCreatePartition(srcMap, partIDKeys);
-				// fool the algorithm to think that the new partition is rw
-				// (which it probably was)
+				// fool the algorithm to think that the new partition is rw (which it probably was)
 				trg.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
 				trgMap = trg.getPartMap(); // 061114 fix!
 			}
