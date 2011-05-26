@@ -207,7 +207,8 @@ public class SetHelper
 	public PartitionHelper appendPartition(JDFAttributeMap partMap, boolean addRes)
 	{
 		KElement newPart = theSet.appendElement(getPartitionName());
-		newPart.setID(newPart.generateDotID("ID", null));
+		PartitionHelper partitionHelper = new PartitionHelper(newPart);
+		partitionHelper.cleanUp();
 		if (partMap != null && partMap.size() > 0)
 		{
 			JDFPart part = (JDFPart) newPart.appendElement("Part");
@@ -221,7 +222,7 @@ public class SetHelper
 			KElement newRes = newPart.appendElement(resName);
 			newRes.removeAttribute(AttributeName.CLASS);
 		}
-		return new PartitionHelper(newPart);
+		return partitionHelper;
 	}
 
 	/**
@@ -259,6 +260,18 @@ public class SetHelper
 		if (!theSet.hasAttribute("Name"))
 		{
 			theSet.setAttribute("Name", getName());
+		}
+		if (!theSet.hasAttribute("ID"))
+		{
+			theSet.appendAnchor(null);
+		}
+		Vector<PartitionHelper> kids = getPartitions();
+		if (kids != null)
+		{
+			for (PartitionHelper kid : kids)
+			{
+				kid.cleanUp();
+			}
 		}
 	}
 

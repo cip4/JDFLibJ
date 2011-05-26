@@ -91,4 +91,20 @@ public class PartitionHelperTest extends TestCase
 		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
 		assertEquals(ph.getResource(), m);
 	}
+
+	/**
+	 * 
+	 */
+	public void testCleanup()
+	{
+		JDFDoc d = new JDFDoc("XJDF");
+		KElement root = d.getRoot();
+
+		root.getCreateXPathElement("ResourceSet/Resource/Part");
+		KElement m = root.getCreateXPathElement("ResourceSet/Resource/Media");
+		PartitionHelper ph = new PartitionHelper(root.getXPathElement("ResourceSet/Resource"));
+		assertNull(m.getParentNode_KElement().getAttribute("ID", null, null));
+		ph.cleanUp();
+		assertEquals(ph.getPartition().getID(), m.getParentNode_KElement().getAttribute("ID", null, null));
+	}
 }
