@@ -98,7 +98,7 @@ public class StorageHotFolder
 	protected final HotFolder hf; // the active hot folder
 	private final File storageDir;
 	private int nInc;
-	private final Log log;
+	protected final Log log;
 
 	/**
 	 * @return the hotfolder directory

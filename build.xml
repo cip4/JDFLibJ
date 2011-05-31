@@ -122,6 +122,12 @@
 		<copy tofile="../alces/src/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../DropFolder/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
 		<copy tofile="../PrintTalkJ/lib/${major.filename}.jar" file="${dist.dir}/${major.filename}.jar"/>
+		
+		<copy tofile="../Bambi/version.properties" file="version.properties"/>
+		<copy tofile="../JDFUtility/version.properties" file="version.properties"/>
+		<copy tofile="../JDFEditor/version.properties" file="version.properties"/>
+		<copy tofile="../DropFolder/version.properties" file="version.properties"/>
+		<copy tofile="..//PrintTalkJ/version.properties" file="version.properties"/>
 	</target>
 	
 	<target name="dist_all" depends="-init" description="builds lots of jars and wars and good things for distribution">

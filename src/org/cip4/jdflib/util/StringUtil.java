@@ -778,14 +778,14 @@ public class StringUtil
 	}
 
 	/**
-	 * replace a character in a given String
+	 * replace any of a set of characters in a given String
 	 * <p>
-	 * default: replaceChar(strWork, c, s, 0)
+	 * default: replaceCharSet(strWork, c, s, 0)
 	 * 
 	 * @param strWork String to work on
 	 * @param charSet characters to replace
 	 * @param replaceString String to insert for c
-	 * @param offset
+	 * @param offset where to start replacing
 	 * @return the String with replaced characters
 	 */
 	public static String replaceCharSet(final String strWork, final String charSet, final String replaceString, final int offset)
@@ -804,12 +804,12 @@ public class StringUtil
 	}
 
 	/**
-	 * replace any of a set of characters in a given String
+	 * replace multiple occurrences of a character in a given String
 	 * <p>
 	 * default: replaceChar(strWork, c, s, 0)
 	 * 
 	 * @param strWork String to work on
-	 * @param c characters to replace
+	 * @param c character to replace
 	 * @param replaceString String to insert for c
 	 * @param offset
 	 * @return the String with replaced characters

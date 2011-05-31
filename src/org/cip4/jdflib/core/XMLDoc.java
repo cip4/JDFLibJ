@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -1711,7 +1711,7 @@ public class XMLDoc
 	}
 
 	/**
-	 * parse a JDF file
+	 * parse an XML file
 	 * 
 	 * @param fileName
 	 * @return the parsed JDFDoc
@@ -1720,10 +1720,19 @@ public class XMLDoc
 	{
 		final XMLParser p = new XMLParser();
 		XMLDoc d = p.parseFile(fileName);
-		if (d != null)
-		{
-			d = new XMLDoc(d.getMemberDocument());
-		}
+		return d;
+	}
+
+	/**
+	 * parse an XML file
+	 * 
+	 * @param file
+	 * @return the parsed JDFDoc
+	 */
+	public static XMLDoc parseFile(final File file)
+	{
+		final XMLParser p = new XMLParser();
+		XMLDoc d = p.parseFile(file);
 		return d;
 	}
 

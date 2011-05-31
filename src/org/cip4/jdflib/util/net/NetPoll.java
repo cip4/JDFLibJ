@@ -84,15 +84,14 @@ import org.cip4.jdflib.util.net.IPollHandler.PollResult;
 public class NetPoll
 {
 	/**
-	 * @param url the url to poll - duh!
+	 * @param urls the urls to poll - duh!
 	 * @param poller 
 	 * 
 	 */
-	public NetPoll(String url, IPollHandler poller)
+	public NetPoll(VString urls, IPollHandler poller)
 	{
 		super();
-		this.vUrl = new VString();
-		vUrl.add(url);
+		this.vUrl = urls;
 		idleWait = 15000; // milliseconds
 		busyWait = 500; // milliSeconds
 		pollThread = null;
@@ -100,6 +99,17 @@ public class NetPoll
 		mutex = new MyMutex();
 		method = UrlUtil.GET;
 		contentType = UrlUtil.TEXT_UNKNOWN;
+	}
+
+	/**
+	 * shorthand constructor for single String
+	 * @param url the url to poll - duh!
+	 * @param poller 
+	 * 
+	 */
+	public NetPoll(String url, IPollHandler poller)
+	{
+		this(new VString(url, null), poller);
 	}
 
 	private final VString vUrl;

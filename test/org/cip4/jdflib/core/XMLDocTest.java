@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -377,9 +377,9 @@ public class XMLDocTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * test whether xmldoc.parsegives a clean empty kelent only doc
+	 * test whether xmldoc.parse gives a clean empty kelement only doc
 	 */
-	public void testParseFile()
+	public void testParseFileString()
 	{
 		final XMLDoc d = new XMLDoc("JDF", null);
 		final KElement root = d.getRoot();
@@ -392,6 +392,22 @@ public class XMLDocTest extends JDFTestCaseBase
 		final KElement r2 = d2.getRoot();
 		assertFalse(r2 instanceof JDFNode);
 		assertFalse(r2.getElement("AuditPool") instanceof JDFAuditPool);
+	}
+
+	/**
+	 * test whether xmldoc.parse gives a clean empty kelement only doc
+	 */
+	public void testParseFile()
+	{
+		final XMLDoc d = new XMLDoc("Foo", null);
+		final KElement root = d.getRoot();
+		final String fn = sm_dirTestDataTemp + "xmldocParseTest2.xml";
+		d.write2File(fn, 0, true);
+
+		final XMLDoc d2 = XMLDoc.parseFile(new File(fn));
+		assertFalse(d2 instanceof JDFDoc);
+		final KElement r2 = d2.getRoot();
+		assertTrue(root.isEqual(r2));
 	}
 
 	/**

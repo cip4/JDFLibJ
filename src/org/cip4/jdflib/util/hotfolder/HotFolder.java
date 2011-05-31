@@ -217,8 +217,10 @@ public class HotFolder implements Runnable
 		{
 			stop();
 		}
-		runThread = new Thread(this, "HotFolder_" + nThread++ + "_" + dir.getAbsolutePath());
+		String threadName = "HotFolder_" + nThread++ + "_" + dir.getAbsolutePath();
+		runThread = new Thread(this, threadName);
 		interrupt = false;
+		log.info("Starting hotfolder: " + threadName);
 		runThread.start();
 	}
 
@@ -234,6 +236,7 @@ public class HotFolder implements Runnable
 			synchronized (runThread)
 			{
 				runThread.notifyAll();
+				log.info("Stopping hot folder: " + runThread.getName());
 				try
 				{
 					// kill the old thread with extreme prejudice -otherwise we may have multiple concurring hf watcher threads
@@ -241,7 +244,7 @@ public class HotFolder implements Runnable
 				}
 				catch (final InterruptedException x)
 				{
-					// nop
+					log.info("interupted while dying... ", x);
 				}
 			}
 			runThread = null;

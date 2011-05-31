@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -73,6 +73,7 @@ package org.cip4.jdflib.util.net;
 import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -113,7 +114,21 @@ public class NetPollTest extends JDFTestCaseBase
 		p.addURL("http://localhost:8080/httpdump/a1");
 		p.addURL("http://localhost:8080/httpdump/a2");
 		p.start();
-		ThreadUtil.sleep(23333);
+		ThreadUtil.sleep(3333);
+		p.stop();
+	}
+
+	/**
+	 * 
+	 */
+	public void testMulti()
+	{
+		VString v = new VString("http://localhost:8080/httpdump", null);
+		v.add("http://localhost:8080/httpdump/a1");
+		v.add("http://localhost:8080/httpdump/a2");
+		NetPoll p = new NetPoll(v, new WebPoller());
+		p.start();
+		ThreadUtil.sleep(3333);
 		p.stop();
 	}
 
@@ -125,7 +140,7 @@ public class NetPollTest extends JDFTestCaseBase
 		ProxyUtil.setProxy("proxy", 8080, null, null);
 		NetPoll p = new NetPoll("http://www.google.de", new WebPoller());
 		p.start();
-		ThreadUtil.sleep(23333);
+		ThreadUtil.sleep(3333);
 		p.stop();
 	}
 }

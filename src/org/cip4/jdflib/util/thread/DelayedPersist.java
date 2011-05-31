@@ -74,6 +74,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.MyLong;
 import org.cip4.jdflib.util.ThreadUtil;
@@ -89,10 +91,12 @@ public class DelayedPersist extends Thread
 	private boolean stop;
 	private static DelayedPersist theDelayed = null;
 	private final MyMutex waitMutex;
+	private final Log log;
 
 	private DelayedPersist()
 	{
 		super("DelayedPersist");
+		log = LogFactory.getLog(getClass());
 		persistQueue = new HashMap<IPersistable, MyLong>();
 		stop = false;
 		waitMutex = new MyMutex();
@@ -154,6 +158,7 @@ public class DelayedPersist extends Thread
 	@Override
 	public void run()
 	{
+		log.info("starting queue persist loop");
 		while (true)
 		{
 			try
@@ -162,11 +167,11 @@ public class DelayedPersist extends Thread
 			}
 			catch (Exception e)
 			{
-				//	log.error("whazzup? ", e);
+				log.error("whazzup queuing delayedPersist ", e);
 			}
 			if (stop)
 			{
-				//				log.info("end of queue persist loop");
+				log.info("end of queue persist loop");
 				break;
 			}
 			ThreadUtil.wait(waitMutex, 10000);

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -123,6 +123,7 @@ public class XJDFHelperTest extends TestCase
 	{
 		theHelper = new XJDFHelper("jID", "jpID", null);
 		KElement root = theHelper.getRoot();
+		assertNull(theHelper.getRootProductHelpers());
 		root.setXPathAttribute("ProductList/Product/@ID", "idproduct");
 		root.setXPathAttribute("ProductList/@RootProducts", "idproduct");
 		assertNotNull(theHelper.getRootProductHelpers().get(0));
