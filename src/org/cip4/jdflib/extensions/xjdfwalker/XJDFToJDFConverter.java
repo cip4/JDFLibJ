@@ -159,6 +159,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	Map<String, IDPart> idMap;
 	boolean firstConvert;
 	boolean firstproductInList;
+	boolean foundProduct;
 	protected JDFNode currentJDFNode = null;
 	/**
 	 * if true, create the product, else ignore it
@@ -184,6 +185,15 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		jdfDoc = template == null ? null : template.clone();
 		// theNode = null;
 		idMap = null;
+		foundProduct = false;
+	}
+
+	/**
+	 * reset the product so that multiple independent product xjdf elements can be merged
+	 */
+	public void resetProduct()
+	{
+		foundProduct = false;
 	}
 
 	/**
@@ -358,7 +368,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	{
 		final JDFNode root = jdfDoc.getJDFRoot();
 		final String jpID = xjdf.getAttribute(AttributeName.JOBPARTID, null, null);
-		JDFNode n = root.getJobPart(jpID, null);
+		JDFNode n = jpID == null ? null : root.getJobPart(jpID, null);
 		if (n == null)
 		{
 			if (!root.hasAttribute(AttributeName.TYPE))
@@ -570,10 +580,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 * @param e
 	 * @param trackElem
 	 */
-	protected void attributesToSpan(final KElement e, final KElement trackElem)
+	protected void attributesToSpan(final KElement e)
 	{
 		final JDFAttributeMap map = e.getAttributeMap();
-		final JDFElement ir = (JDFElement) trackElem;
+		final JDFElement ir = (JDFElement) e;
 		final VString keys = map.getKeys();
 		final VString knownElements = ir.knownElements();
 		for (final String name : keys)
@@ -1122,7 +1132,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			attributesToSpan(e, trackElem);
+			attributesToSpan(e);
 			return super.walk(e, trackElem);
 		}
 
@@ -1153,7 +1163,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			attributesToSpan(e, trackElem);
+			attributesToSpan(e);
 			return super.walk(e, trackElem);
 		}
 
@@ -1278,10 +1288,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public WalkProductList()
 		{
 			super();
-			foundProduct = false;
 		}
-
-		boolean foundProduct;
 
 		/**
 		 * @param e
@@ -1299,7 +1306,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				createProductRoot(currentJDFNode);
 			}
-			return createProduct && !bFirst ? jdfDoc.getJDFRoot() : null;
+			KElement theReturn = currentJDFNode;
+			if (!"Product".equals(currentJDFNode.getType()))
+				theReturn = jdfDoc.getJDFRoot();
+			return createProduct && !bFirst ? theReturn : null;
 		}
 
 		/**

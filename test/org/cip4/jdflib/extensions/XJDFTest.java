@@ -175,7 +175,9 @@ public class XJDFTest extends JDFTestCaseBase
 		e = new XJDF20().makeNewJDF(n, null);
 
 		final JDFNode n2 = new JDFDoc("JDF").getJDFRoot();
-		n2.setType(EnumType.ConventionalPrinting);
+		n2.setType(EnumType.ProcessGroup);
+		n2.addTypes(EnumType.InkZoneCalculation);
+		n2.addTypes(EnumType.ConventionalPrinting);
 		e.setAttribute("JobPartID", null);
 
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(n2.getOwnerDocument_JDFElement());
@@ -209,13 +211,16 @@ public class XJDFTest extends JDFTestCaseBase
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.ProcessGroup);
 
-		JDFNode n2 = n.addJDFNode(EnumType.ConventionalPrinting);
+		JDFNode n2 = n.addJDFNode(EnumType.ProcessGroup);
+		n2.addTypes(EnumType.InkZoneCalculation);
+		n2.addTypes(EnumType.ConventionalPrinting);
 		e.setAttribute("JobPartID", null);
 
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(n2.getOwnerDocument_JDFElement());
 		final JDFDoc d2 = xCon.convert(e);
 		assertNotNull(d2);
-		final JDFNode nConv = d2.getJDFRoot();
+		JDFNode nConv = d2.getJDFRoot();
+		nConv = (JDFNode) nConv.getvJDFNode(EnumType.ProcessGroup.getName(), null, true).get(0);
 		assertNotNull(nConv);
 		JDFExposedMedia xm = (JDFExposedMedia) nConv.getResource("ExposedMedia", EnumUsage.Input, 0);
 		final JDFResourceLink rl = nConv.getLink(xm, null);
@@ -264,15 +269,18 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
 	 */
 	public void testMergeStripping()
 	{
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.Stripping);
 		JDFRunList rl = (JDFRunList) n.appendMatchingResource(ElementName.RUNLIST, EnumProcessUsage.AnyInput, null);
+		assertNotNull(rl);
 		JDFStrippingParams sp = (JDFStrippingParams) n.appendMatchingResource(ElementName.STRIPPINGPARAMS, EnumProcessUsage.AnyInput, null);
 		JDFBinderySignature bs = (JDFBinderySignature) n.addResource(ElementName.BINDERYSIGNATURE, null, null, null, null, null, null);
 		JDFLayout lo = (JDFLayout) n.addResource("Layout", EnumUsage.Output);
+		assertNotNull(lo);
 		sp.refBinderySignature(bs);
 		sp.appendPosition();
 
@@ -425,6 +433,31 @@ public class XJDFTest extends JDFTestCaseBase
 		testToXJDFWithProduct();
 		d = xCon.convert(e);
 		root = d.getJDFRoot();
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFWithProductMultiProduct()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		XJDFHelper h = new XJDFHelper("jobID", "p0", null);
+		ProductHelper ph0 = h.appendProduct();
+		ph0.setRoot();
+		assertNotNull(ph0);
+		h.getRoot().setAttribute("Types", "Product");
+		JDFDoc d = xCon.convert(h.getRoot());
+
+		XJDFHelper h1 = new XJDFHelper("jobID", "p1", null);
+		h1.getRoot().setAttribute("Types", "Product");
+		h1.appendProduct();
+		d = xCon.convert(h1.getRoot());
+		XJDFHelper h2 = new XJDFHelper("jobID", "p2", null);
+		h2.appendProduct();
+		h2.getRoot().setAttribute("Types", "Product");
+		d = xCon.convert(h2.getRoot());
+		assertNotNull(d);
+
 	}
 
 	/**
