@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -117,7 +117,9 @@ public class JDFMatrix extends JDFNumList
 	 * @param Vector v - the given Vector
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
+	 * @deprecated use typesafe constructors
 	 */
+	@Deprecated
 	public JDFMatrix(final Vector v) throws DataFormatException
 	{
 		super(v);

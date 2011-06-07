@@ -203,7 +203,8 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public JDFNumList(final JDFNumList nl) throws DataFormatException
 	{
-		this(nl.copyNumList());
+		this.m_numList = nl.copyNumList();
+		isValid();
 	}
 
 	// **************************************** Methods

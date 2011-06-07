@@ -107,6 +107,7 @@ public class JDFXYPair extends JDFNumList
 	 * @param v Vector of Double
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
+	 * @deprecated use typesafe constructors
 	 */
 	@Deprecated
 	@SuppressWarnings("unchecked")

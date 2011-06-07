@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -106,7 +106,9 @@ public class JDFRGBColor extends JDFNumList
 	 * @param v Vector of Double
 	 * 
 	 * @throws DataFormatException - if the Vector has not a valid format
+	 * @deprecated use typesafe constructors
 	 */
+	@Deprecated
 	public JDFRGBColor(final Vector v) throws DataFormatException
 	{
 		super(v);
