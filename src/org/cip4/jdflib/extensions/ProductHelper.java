@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,8 +68,11 @@
  */
 package org.cip4.jdflib.extensions;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -172,6 +175,79 @@ public class ProductHelper
 		}
 		if (amount > 0)
 			e.setAttribute("Amount", amount, null);
+	}
+
+	/**
+	 * get the nth child of this
+	 * @param nChild the index of the child
+	 * @return 
+	 */
+	public ProductHelper getChild(int nChild)
+	{
+		KElement e = theProduct.getElement("ChildProduct", null, nChild);
+		if (e == null)
+		{
+			return null;
+		}
+		String id = e.getAttribute("ChildRef", null, null);
+		if (id == null)
+		{
+			return null;
+		}
+		KElement list = theProduct.getParentNode_KElement();
+		KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
+		return kid == null ? null : new ProductHelper(kid);
+	}
+
+	/**
+	 * get the nth child of this
+	 * @param nChild the index of the child
+	 * @return 
+	 */
+	public ProductHelper getChild(String productType, int n)
+	{
+		Vector<ProductHelper> v = getChildren();
+		if (v == null || v.size() < n)
+		{
+			return null;
+		}
+		for (ProductHelper p : v)
+		{
+			if (productType == null || productType.equals(p.getProduct().getAttribute(AttributeName.PRODUCTTYPE)))
+			{
+				if (n-- == 0)
+					return p;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * get the vector of children of this
+	 * 
+	 * @return 
+	 */
+	public Vector<ProductHelper> getChildren()
+	{
+		VElement v = theProduct.getChildElementVector("ChildProduct", null);
+		if (v == null)
+		{
+			return null;
+		}
+		Vector<ProductHelper> vRet = new Vector<ProductHelper>();
+		KElement list = theProduct.getParentNode_KElement();
+		for (KElement e : v)
+		{
+			String id = e.getAttribute("ChildRef", null, null);
+			if (id == null)
+			{
+				continue;
+			}
+			KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
+			if (kid != null)
+				vRet.add(new ProductHelper(kid));
+		}
+		return vRet;
 	}
 
 	/**

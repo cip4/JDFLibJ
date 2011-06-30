@@ -713,6 +713,34 @@ public class FileUtil
 	}
 
 	/**
+	 * forces deletion of a file
+	 * @param file the file to delete
+	 * @return true if the file no longer exists
+	 */
+	public static boolean forceDelete(final File file)
+	{
+		if (file == null)
+		{
+			return true;
+		}
+		if (!file.exists())
+		{
+			return true;
+		}
+		boolean bOK = file.delete();
+		int i = 1;
+		while (!bOK)
+		{
+			ThreadUtil.sleep(i * i * 100);
+			bOK = file.delete();
+			;
+			if (i++ > 6)
+				break;
+		}
+		return bOK;
+	}
+
+	/**
 	 * create a new directory and return null if the directory could not be created
 	 * 
 	 * @param newDir the path or URL of the new directory

@@ -208,7 +208,7 @@ public class JDFDateTest extends TestCase
 	public void testdateMillis()
 	{
 		JDFDate date = new JDFDate(1);
-		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970);
+		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
 		date = new JDFDate(-1);
 		assertEquals(date.getCalendar().get(Calendar.YEAR), 1970, 1);
 

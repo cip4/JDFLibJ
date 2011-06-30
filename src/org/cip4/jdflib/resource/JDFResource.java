@@ -80,6 +80,8 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumPreviewType;
 import org.cip4.jdflib.auto.JDFAutoPart.EnumSide;
@@ -133,6 +135,7 @@ public class JDFResource extends JDFElement
 	private static final long serialVersionUID = 1L;
 	private static boolean autoAgent = false;
 	private static boolean bUnpartitiondImplicit = false;
+	private static final Log rLog = LogFactory.getLog(JDFResource.class);
 
 	private static HashSet<String> validParentNodeNameSet = null;
 	private static HashSet<String> validRootParentNodeNameSet = null;

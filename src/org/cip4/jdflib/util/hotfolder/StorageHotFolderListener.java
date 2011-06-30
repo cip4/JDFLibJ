@@ -73,7 +73,7 @@ import java.io.File;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.RollingBackupFile;
 import org.cip4.jdflib.util.file.FileSorter;
 
 /**
@@ -158,6 +158,7 @@ class StorageHotFolderListener implements HotFolderListener
 	 */
 	public boolean hotFile(File hotFile)
 	{
+		log.info("processing hot file: " + hotFile);
 		final File storedFile = getStoredFile(hotFile);
 		if (storedFile == null)
 		{
@@ -181,6 +182,9 @@ class StorageHotFolderListener implements HotFolderListener
 		{
 			if (okStorage != null)
 			{
+				File backup = FileUtil.getFileInDirectory(okStorage, new File(storedFile.getName()));
+				RollingBackupFile roller = new RollingBackupFile(backup, 10);
+				roller.getNewFile();
 				File copied = FileUtil.moveFileToDir(storedFile, okStorage);
 				if (copied == null)
 					log.warn("could not move ok " + storedFile + " to " + okStorage.getAbsolutePath());
@@ -191,7 +195,7 @@ class StorageHotFolderListener implements HotFolderListener
 			}
 			else
 			{
-				boolean ok = storedFile.delete();
+				boolean ok = FileUtil.forceDelete(storedFile);
 				if (!ok)
 					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
 			}
@@ -200,6 +204,9 @@ class StorageHotFolderListener implements HotFolderListener
 		{
 			if (errorStorage != null)
 			{
+				File backup = FileUtil.getFileInDirectory(errorStorage, new File(storedFile.getName()));
+				RollingBackupFile roller = new RollingBackupFile(backup, 10);
+				roller.getNewFile();
 				File copied = FileUtil.moveFileToDir(storedFile, errorStorage);
 				if (copied == null)
 					log.warn("could not move error " + storedFile + " to " + okStorage.getAbsolutePath());
@@ -210,7 +217,7 @@ class StorageHotFolderListener implements HotFolderListener
 			}
 			else
 			{
-				boolean ok = storedFile.delete();
+				boolean ok = FileUtil.forceDelete(storedFile);
 				if (!ok)
 					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
 			}
@@ -218,7 +225,7 @@ class StorageHotFolderListener implements HotFolderListener
 	}
 
 	/**
-	 * remove old suff from ok and error folder
+	 * remove old stuff from ok and error folder
 	 * @param bOK if true cleanup the ok folder, else the error folder
 	 */
 	private void cleanup(boolean bOK)
@@ -230,7 +237,7 @@ class StorageHotFolderListener implements HotFolderListener
 			File[] list = fs.sortLastModified(true);
 			for (int i = maxStore; i < list.length; i++)
 			{
-				boolean ok = list[i].delete();
+				boolean ok = FileUtil.forceDelete(list[i]);
 				if (!ok)
 				{
 					log.warn("failed to delete temporary file " + list[i].getAbsolutePath());
@@ -242,8 +249,7 @@ class StorageHotFolderListener implements HotFolderListener
 	private File getStoredFile(File hotFile)
 	{
 		String hotFileName = hotFile.getName();
-		File newFile = new File(UrlUtil.newExtension(hotFileName, parent.getFileNameIncrement() + "." + UrlUtil.extension(hotFileName)));
-		File newAbsoluteFile = FileUtil.getFileInDirectory(storage, newFile);
+		File newAbsoluteFile = FileUtil.getFileInDirectory(storage, new File(hotFileName));
 		boolean ok = FileUtil.moveFile(hotFile, newAbsoluteFile);
 		if (ok)
 		{

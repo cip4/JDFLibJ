@@ -221,6 +221,7 @@ public class HotFolder implements Runnable
 		runThread = new Thread(this, threadName);
 		interrupt = false;
 		log.info("Starting hotfolder: " + threadName);
+		lastModified = -1;
 		runThread.start();
 	}
 
@@ -365,6 +366,12 @@ public class HotFolder implements Runnable
 		{
 			f = _f;
 			modified = -1;
+		}
+
+		@Override
+		public String toString()
+		{
+			return f + " " + modified;
 		}
 	}
 

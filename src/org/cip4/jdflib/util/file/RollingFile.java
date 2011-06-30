@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -96,7 +96,9 @@ public class RollingFile extends File
 
 	/**
 	 * @param pathname the base filename
-	 * @param baseName the name of the base file
+	 * @param baseName the name of the base file, <br/>
+	 * if a filename with double "." , e.g. xxx..txt is specified, the algorithm will generate names such as xxx.000001.txt, <br/>
+	 * if a single "." e.g. xxx.txt is specified, the algorithm will generate names such as xxx000001.txt, <br/>
 	 */
 	public RollingFile(final String pathname, final String baseName)
 	{

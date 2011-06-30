@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -84,12 +84,16 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	private class TestWait extends WaitTimeout<Integer>
 	{
 
+		private final int sleep;
+
 		/**
 		 * @param millis
 		 */
-		public TestWait(final int millis)
+		public TestWait(final int millis, final int sleep)
 		{
 			super(millis);
+			this.sleep = sleep;
+			start();
 		}
 
 		/**
@@ -98,7 +102,8 @@ public class ThreadUtilTest extends JDFTestCaseBase
 		@Override
 		protected Integer handle()
 		{
-			ThreadUtil.sleep(1000);
+			if (sleep > 0)
+				ThreadUtil.sleep(sleep);
 			return new Integer(42);
 		}
 
@@ -110,8 +115,17 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	 */
 	public void testWaitTimeout()
 	{
-		assertEquals(new TestWait(1400).getWaitedObject().intValue(), 42);
-		assertNull(new TestWait(400).getWaitedObject());
+		assertEquals(new TestWait(1400, 1000).getWaitedObject().intValue(), 42);
+		assertNull(new TestWait(400, 1000).getWaitedObject());
+	}
+
+	/**
+	 *  
+	 */
+	public void testWaitTimeoutMany()
+	{
+		for (int i = 1; i < 10000; i++)
+			assertEquals("Loop " + i, new TestWait(33, 0).getWaitedObject().intValue(), 42);
 	}
 
 }

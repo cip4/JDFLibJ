@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -129,6 +129,8 @@ import java.util.Vector;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.AtrInfoTable;
@@ -372,6 +374,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			ElementName.NODEINFO, ElementName.PREFLIGHTREPORT, ElementName.PREVIEW, ElementName.TOOL, ElementName.USAGECOUNTER };
 
 	private static final long serialVersionUID = 1L;
+	private static final Log nLog = LogFactory.getLog(JDFElement.class);
 
 	/**
 	 * Enumeration for the policy of cleaning up the Spawn and Merge audits
@@ -7088,7 +7091,11 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				kRet = rl.getTarget();
 				rlp.removeChild(rl);
-				if (!kRet.deleteUnLinked())
+				if (kRet == null)
+				{
+					nLog.warn("resourcelink does not reference a resource - deleting link, rRef=" + rl.getrRef());
+				}
+				else if (!kRet.deleteUnLinked())
 				{
 					kRet = null;
 				}

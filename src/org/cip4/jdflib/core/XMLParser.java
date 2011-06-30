@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -81,6 +81,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.parsers.DOMParser;
 import org.apache.xerces.xni.Augmentations;
 import org.apache.xerces.xni.NamespaceContext;
@@ -133,7 +135,7 @@ public class XMLParser extends DOMParser
 			}
 			catch (final Exception x)
 			{
-				// nop
+				log.error("Error closing reader stream", x);
 			}
 		}
 
@@ -174,6 +176,7 @@ public class XMLParser extends DOMParser
 	 * if true, empty pools and whitespace are removed when parsing
 	 */
 	public boolean m_eraseEmpty = true;
+	protected Log log;
 
 	/**
 	 * default constructor
@@ -181,6 +184,7 @@ public class XMLParser extends DOMParser
 	public XMLParser()
 	{
 		super();
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -241,6 +245,7 @@ public class XMLParser extends DOMParser
 			}
 			catch (final FileNotFoundException e)
 			{
+				log.error("cannot find file to parse:", e);
 				return null;
 			}
 		}
@@ -257,6 +262,7 @@ public class XMLParser extends DOMParser
 	{
 		if (stringInput == null)
 		{
+			log.error("cannot parse null string");
 			return null;
 		}
 		ByteArrayInputStream is;
@@ -266,6 +272,7 @@ public class XMLParser extends DOMParser
 		}
 		catch (final UnsupportedEncodingException x)
 		{
+			log.warn("bad encoding ", x);
 			is = new ByteArrayInputStream(stringInput.getBytes());
 		}
 		return parseStream(is);
@@ -299,6 +306,7 @@ public class XMLParser extends DOMParser
 			{
 				bis.allowClose = true;
 				bis.close();
+				log.error("Error parsing stream", x);
 				return null;
 			}
 
@@ -360,12 +368,6 @@ public class XMLParser extends DOMParser
 			{
 				this.setFeature("http://xml.org/sax/features/validation", true);
 				this.setFeature("http://apache.org/xml/features/validation/schema", true);
-				// this.setFeature(
-				// "http://apache.org/xml/features/validation/schema/element-default"
-				// , false);
-				// this.setFeature(
-				// "http://apache.org/xml/features/validation/schema/normalized-value"
-				// , false);
 				this.setProperty("http://apache.org/xml/properties/schema/external-schemaLocation", m_SchemaLocation);
 			}
 
@@ -377,10 +379,12 @@ public class XMLParser extends DOMParser
 		}
 		catch (final SAXNotRecognizedException e)
 		{
+			log.error("error parsing", e);
 			m_lastExcept = e;
 		}
 		catch (final SAXNotSupportedException e)
 		{
+			log.error("error parsing", e);
 			m_lastExcept = e;
 		}
 	}
@@ -415,11 +419,13 @@ public class XMLParser extends DOMParser
 		catch (final Exception e)
 		{
 			m_lastExcept = e;
+			log.error("error parsing", e);
 			doc = null;
 		}
 		catch (final StackOverflowError e)
 		{
 			m_lastExcept = null;
+			log.error("error parsing", e);
 			doc = null;
 		}
 

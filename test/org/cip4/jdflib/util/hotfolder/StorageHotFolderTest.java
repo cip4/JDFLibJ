@@ -186,6 +186,8 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		File ok = new File("ok");
 		hf.setOKStorage(ok);
 		hf.setMaxStore(42);
+		ThreadUtil.sleep(1000);
+
 		for (int i = 0; i < 4; i++)
 		{
 			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
@@ -194,15 +196,25 @@ public class StorageHotFolderTest extends JDFTestCaseBase
 		ok = FileUtil.getFileInDirectory(theHFDir, ok);
 		error = FileUtil.getFileInDirectory(theHFDir, error);
 		ThreadUtil.sleep(2000);
-		assertEquals(ok.listFiles().length, 2, 0);
-		assertEquals(error.listFiles().length, 2, 0);
-		for (int i = 0; i < 100; i++)
+		assertEquals(ok.listFiles().length, 2, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		assertEquals(error.listFiles().length, 2, 1);
+		for (int i = 0; i < 4; i++)
 		{
-			final File file = new File(theHFDir + File.separator + "f" + i + ".dat");
+			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
 			file.createNewFile();
 		}
-		ThreadUtil.sleep(2000);
+		ThreadUtil.sleep(1000);
+		assertEquals(ok.listFiles().length, 4, 1);
+		assertEquals(tmpHFDir.listFiles().length, 0, 1);
+		for (int i = 0; i < 100; i++)
+		{
+			final File file = new File(theHFDir + File.separator + "f" + i + ".txt");
+			file.createNewFile();
+		}
+		ThreadUtil.sleep(1000);
 		assertEquals(ok.listFiles().length, 42, 13);
+		assertEquals(tmpHFDir.listFiles().length, 0, 0);
 		assertEquals(error.listFiles().length, 42, 13);
 
 	}

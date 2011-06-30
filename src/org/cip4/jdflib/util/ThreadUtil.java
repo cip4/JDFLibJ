@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -130,6 +130,14 @@ public class ThreadUtil
 			setup();
 			mutex = new MyMutex();
 			myThread = new Thread(this, "WaitThread" + threadNumber++);
+		}
+
+		/**
+		 * 
+		 * start the thread
+		 */
+		public final void start()
+		{
 			myThread.start();
 		}
 

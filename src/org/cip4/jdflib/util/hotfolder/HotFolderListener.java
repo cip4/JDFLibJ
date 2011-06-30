@@ -83,6 +83,7 @@ public interface HotFolderListener
 
 	/**
 	 * this interface function is called whenever a new or modified file has stabilized in the hotFolder
+	 * note: make sure to close all streams so that deleting temp files does not fail
 	 * 
 	 * @param hotFile the File that has appeared in the hot folder
 	 * @return true if all went well, else false

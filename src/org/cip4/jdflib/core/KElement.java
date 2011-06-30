@@ -89,6 +89,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.AttrNSImpl;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.apache.xerces.dom.ElementNSImpl;
@@ -124,6 +126,7 @@ import org.w3c.dom.Text;
 public class KElement extends ElementNSImpl implements Element
 {
 	private static final long serialVersionUID = 1L;
+	private static final Log kLog = LogFactory.getLog(JDFElement.class);
 
 	private static int m_lStoreID = 0;
 	private static boolean bIDDate = true;
@@ -497,8 +500,10 @@ public class KElement extends ElementNSImpl implements Element
 						namespaceURI2 = getNamespaceURIFromPrefix(xmlnsPrefix(key), false);
 						if (!ContainerUtil.equals(namespaceURI2, nameSpaceURI))
 						{
-							throw new JDFException("KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
-									+ "; attempting to set URI: " + nameSpaceURI);
+							String message = "KElement.setAttribute: inconsistent namespace URI for prefix: " + xmlnsPrefix(key) + "; existing URI: " + namespaceURI2
+									+ "; attempting to set URI: " + nameSpaceURI;
+							kLog.error(message);
+							throw new JDFException(message);
 						}
 					}
 
@@ -514,7 +519,6 @@ public class KElement extends ElementNSImpl implements Element
 							nameSpaceURI = null; // avoid spurious NS1 prefix
 						}
 					}
-
 					super.setAttributeNS(nameSpaceURI, key, value);
 				}
 			}
@@ -876,7 +880,6 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public String appendAttribute(final String key, final String value, final String nameSpaceURI, String sep, final boolean bUnique)
 	{
-
 		if (value == null)
 		{
 			return getAttribute(key, nameSpaceURI, null);
@@ -954,7 +957,6 @@ public class KElement extends ElementNSImpl implements Element
 				bNameOK = false;
 			}
 		}
-
 		return bNameOK;
 	}
 

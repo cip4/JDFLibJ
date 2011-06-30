@@ -85,7 +85,6 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
-import org.cip4.jdflib.util.StringUtil;
 
 /**
  * a hotfolder that handles storage of "hotfolded" data
@@ -97,7 +96,6 @@ public class StorageHotFolder
 {
 	protected final HotFolder hf; // the active hot folder
 	private final File storageDir;
-	private int nInc;
 	protected final Log log;
 
 	/**
@@ -136,7 +134,6 @@ public class StorageHotFolder
 		listenerImpl = new Vector<StorageHotFolderListener>();
 		listenerImpl.add(new StorageHotFolderListener(storageDir, hfListener, this));
 		hf = new HotFolder(_hotFolderDir, ext, listenerImpl.get(0));
-		nInc = 0;
 	}
 
 	/**
@@ -195,15 +192,6 @@ public class StorageHotFolder
 		hf.addListener(storageListener, ext);
 		listenerImpl.add(storageListener);
 		return storageListener;
-	}
-
-	/**
-	 *  
-	 * @return the file name increment in 6 digits
-	 */
-	public synchronized String getFileNameIncrement()
-	{
-		return StringUtil.sprintf("%06i", "" + nInc++);
 	}
 
 	/**

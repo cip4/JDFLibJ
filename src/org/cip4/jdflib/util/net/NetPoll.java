@@ -226,12 +226,13 @@ public class NetPoll
 	}
 
 	/**
-	 * @param iPos 
-	 * @return
+	 * @param baseUrl the url to write to 
+	 * @return the details, null if no connection could be made
 	 */
 	protected IPollDetails poll(String baseUrl)
 	{
-		UrlPart p = UrlUtil.writeToURL(getUrl(baseUrl), null, method, contentType, null);
+		String url = getUrl(baseUrl);
+		UrlPart p = UrlUtil.writeToURL(url, null, method, contentType, null);
 		return p;
 	}
 

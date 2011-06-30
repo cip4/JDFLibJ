@@ -1889,15 +1889,14 @@ public class JDFResourceLink extends JDFElement implements IAmountPoolContainer
 	}
 
 	/**
-	 * set attribute ProcessUsage
+	 * set attribute ProcessUsage - this method is no longer deprecated since ICS documents may specify additional values that are not encoded in the enums
 	 * 
-	 * @param s
-	 * @deprecated use the enum method
+	 * @param processUsage
+	 * 
 	 */
-	@Deprecated
-	public void setProcessUsage(final String s)
+	public void setProcessUsage(final String processUsage)
 	{
-		setAttribute(AttributeName.PROCESSUSAGE, s, null);
+		setAttribute(AttributeName.PROCESSUSAGE, processUsage, null);
 	}
 
 	/**

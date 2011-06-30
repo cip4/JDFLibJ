@@ -79,6 +79,7 @@ package org.cip4.jdflib.util;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
@@ -358,6 +359,24 @@ public class FileUtilTest extends JDFTestCaseBase
 		{
 			assertFalse(FileUtil.equals(new File("a"), new File("A")));
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testForceDelete() throws Exception
+	{
+		File f = new File(sm_dirTestDataTemp + "forcedelete.txt");
+		assertTrue(FileUtil.forceDelete(null));
+		assertTrue(FileUtil.forceDelete(f));
+		f.createNewFile();
+		assertTrue(FileUtil.forceDelete(f));
+		f.createNewFile();
+		FileOutputStream fos = new FileOutputStream(f);
+		fos.write(32);
+		fos.flush();
+		fos.close();
+		assertTrue(FileUtil.forceDelete(f));
 	}
 
 	// /////////////////////////////////////////////////////////////////////////

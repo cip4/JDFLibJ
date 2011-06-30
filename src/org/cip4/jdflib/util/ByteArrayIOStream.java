@@ -87,6 +87,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Shared input / outputStream class write once, read many...
@@ -96,6 +98,7 @@ import org.apache.commons.io.IOUtils;
  */
 public class ByteArrayIOStream extends ByteArrayOutputStream
 {
+	private final Log log;
 
 	/**
 	 * creates an empty input output stream class
@@ -103,6 +106,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream()
 	{
 		super();
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -113,6 +117,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream(final int i)
 	{
 		super(i);
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -123,7 +128,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream(final InputStream is)
 	{
 		super(1000);
-
+		log = LogFactory.getLog(getClass());
 		if (is == null)
 		{
 			return;
@@ -139,7 +144,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		}
 		catch (final IOException e)
 		{
-			// nop - we filled to the end
+			log.error("error copying streams to buffer", e);
 		}
 	}
 
@@ -151,6 +156,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream(final File f) throws IOException
 	{
 		super(10);
+		log = LogFactory.getLog(getClass());
 		if (f.length() > 10)
 		{
 			this.buf = new byte[(int) f.length() + 100];
@@ -168,6 +174,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	public ByteArrayIOStream(final byte[] b)
 	{
 		super();
+		log = LogFactory.getLog(getClass());
 		buf = b;
 		count = b.length;
 	}

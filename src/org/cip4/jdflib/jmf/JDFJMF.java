@@ -87,11 +87,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoJMF;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFException;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
@@ -107,6 +110,7 @@ public class JDFJMF extends JDFAutoJMF
 {
 	private static final long serialVersionUID = 1L;
 	private static String theSenderID = null;
+	private static final Log mLog = LogFactory.getLog(JDFElement.class);
 
 	/**
 	 * Constructor for JDFJMF
@@ -722,15 +726,15 @@ public class JDFJMF extends JDFAutoJMF
 		{
 			if (e instanceof JDFMessage)
 			{
-				if (typString == null || typString.equals(((JDFMessage) e).getType()))
+				JDFMessage m = (JDFMessage) e;
+				if (typString == null || typString.equals(m.getType()))
 				{
 					if (n++ >= i)
 					{
-						return (JDFMessage) e;
+						return m;
 					}
 				}
 			}
-
 			e = e.getNextSiblingElement(familyString, null);
 		}
 
@@ -814,7 +818,6 @@ public class JDFJMF extends JDFAutoJMF
 				}
 			}
 		}
-
 		return vM;
 	}
 

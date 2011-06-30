@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -69,6 +69,7 @@
 package org.cip4.jdflib.extensions;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.KElement;
 
 /**
@@ -76,6 +77,30 @@ import org.cip4.jdflib.core.KElement;
  */
 public class ProductHelperTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 */
+	public void testGetChild()
+	{
+		XJDFHelper theHelper = new XJDFHelper("jID", "jpID", null);
+		KElement root = theHelper.getRoot();
+		KElement productList = root.appendElement("ProductList");
+		KElement product = productList.appendElement("Product");
+		ProductHelper ph = new ProductHelper(product);
+		KElement cover = productList.appendElement("Product");
+		cover.setAttribute(AttributeName.PRODUCTTYPE, "Cover");
+		KElement body = productList.appendElement("Product");
+		body.setAttribute(AttributeName.PRODUCTTYPE, "Body");
+		ProductHelper phCover = new ProductHelper(cover);
+		ph.setChild(phCover, 1);
+		ProductHelper phBody = new ProductHelper(body);
+		ph.setChild(phBody, 1);
+		assertEquals(ph.getChild(0).getProduct(), phCover.getProduct());
+		assertEquals(ph.getChild(1).getProduct(), phBody.getProduct());
+		assertEquals(ph.getChild("Body", 0).getProduct(), phBody.getProduct());
+		assertNull(ph.getChild("Body", 1));
+	}
+
 	/**
 	 * 
 	 */

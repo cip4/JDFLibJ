@@ -105,6 +105,8 @@ import javax.mail.BodyPart;
 import javax.mail.Multipart;
 
 import org.apache.commons.lang.enums.ValuedEnum;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoQueueEntry.EnumQueueEntryStatus;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
@@ -168,7 +170,7 @@ public class JDFElement extends KElement
 	}
 
 	private static final long serialVersionUID = 1L;
-
+	private static final Log jLog = LogFactory.getLog(JDFElement.class);
 	private static EnumVersion defaultVersion = EnumVersion.Version_1_4;
 
 	private static AtrInfoTable[] atrInfoTable = new AtrInfoTable[7];
@@ -3236,17 +3238,27 @@ public class JDFElement extends KElement
 			final int size = v.size();
 			for (int i = size - 1; i >= 0; i--)
 			{
-				if (!v.elementAt(i).fitsName(elementName, nameSpaceURI))
+				KElement refElem = v.elementAt(i);
+				if (!refElem.fitsName(elementName, nameSpaceURI))
 				{
 					v.remove(i);
 				}
-				else if (v.elementAt(i) instanceof JDFRefElement)
+				else if (refElem instanceof JDFRefElement)
 				{
-					JDFResource target = ((JDFRefElement) v.elementAt(i)).getTarget();
+					KElement target = ((JDFRefElement) refElem).getTarget();
 					if (target == null)
+					{
+						jLog.warn("Ignoring missing refelemnt target: " + refElem.getNodeName() + " rRef=" + refElem.getAttribute(AttributeName.RREF));
 						v.remove(i);
+					}
 					else
+					{
+						if (!(target instanceof JDFResource))
+						{
+							jLog.warn("target is not a resource: " + refElem.getNodeName() + " rRef=" + refElem.getAttribute(AttributeName.RREF));
+						}
 						v.set(i, target);
+					}
 				}
 			}
 			if (maxSize > 0)

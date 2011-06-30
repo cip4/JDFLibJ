@@ -220,6 +220,10 @@ public class UrlUtil
 	 */
 	public static final String CONTENT_TYPE = "Content-Type";
 	/**
+	 * more commonly used strings
+	 */
+	public static final String CONTENT_LENGTH = "Content-Length";
+	/**
 	 * 
 	 */
 	public static final String BASE64 = "base64";

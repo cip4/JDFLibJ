@@ -120,6 +120,7 @@ public class QueueHotFolderTest extends JDFTestCaseBase
 		super.setUp();
 		theHF = new File(sm_dirTestDataTemp + File.separator + "QHFTest");
 		theStorage = new File(sm_dirTestDataTemp + File.separator + "QHFStore");
+		FileUtil.deleteAll(theHF);
 		theHF.mkdirs();
 		FileUtil.deleteAll(theStorage);
 		theStorage.mkdirs();

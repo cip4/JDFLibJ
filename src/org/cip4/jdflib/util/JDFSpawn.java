@@ -93,6 +93,7 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumNodeStatus;
 import org.cip4.jdflib.core.JDFException;
+import org.cip4.jdflib.core.JDFNodeInfo;
 import org.cip4.jdflib.core.JDFPartAmount;
 import org.cip4.jdflib.core.JDFRefElement;
 import org.cip4.jdflib.core.JDFResourceLink;
@@ -1154,7 +1155,40 @@ public class JDFSpawn
 		{
 			spawnAudit.setStatus(partStatus);
 		}
-		node.setPartStatus(vSpawnParts, EnumNodeStatus.Spawned, null);
+		final VJDFAttributeMap vMap = getNIPartitions();
+		node.setPartStatus(vMap, EnumNodeStatus.Spawned, null);
+	}
+
+	/**
+	 * 
+	 *get the actual nodeinfo attribute map based on vmAttribute
+	 * @return
+	 */
+	private VJDFAttributeMap getNIPartitions()
+	{
+		final VJDFAttributeMap vMap;
+		if (vSpawnParts != null)
+		{
+			JDFNodeInfo nodeInfo = node.getNodeInfo();
+			VElement vNI = nodeInfo == null ? null : nodeInfo.getPartitionVector(vSpawnParts, EnumPartUsage.Explicit);
+			if (vNI != null)
+			{
+				vMap = new VJDFAttributeMap();
+				for (KElement e : vNI)
+				{
+					vMap.add(((JDFResource) e).getPartMap());
+				}
+			}
+			else
+			{
+				vMap = vSpawnParts;
+			}
+		}
+		else
+		{
+			vMap = vSpawnParts;
+		}
+		return vMap;
 	}
 
 	/**

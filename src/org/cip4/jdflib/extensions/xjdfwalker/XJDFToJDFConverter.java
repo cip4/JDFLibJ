@@ -591,6 +591,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			if (knownElements.contains(name))
 			{
 				final KElement subElem = ir.appendElement(name);
+				subElem.init();
 				subElem.setAttribute("Actual", map.get(name));
 				convertUnits(subElem);
 				e.removeAttribute(name);
@@ -1211,7 +1212,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			return super.matches(toCheck) && (toCheck instanceof JDFAuditPool);
 		}
-
 	}
 
 	/**
