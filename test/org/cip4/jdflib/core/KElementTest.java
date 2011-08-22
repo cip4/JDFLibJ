@@ -2225,6 +2225,36 @@ public class KElementTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * test sequence of getting / setting if attributes in default and explicit ns exist
+	 */
+	public void testSetAttributeNSMix()
+	{
+		final XMLDoc doc = new XMLDoc("a", null);
+		final KElement root = doc.getRoot();
+		root.setAttribute("n:b", "1", "www.n.com");
+		assertEquals(root.getAttribute("n:b"), "1");
+		assertEquals(root.getAttribute("n:b", "www.n.com", null), "1");
+		assertEquals(root.getAttribute("b", "www.n.com", null), "1");
+		root.setAttribute("b", "2");
+		assertEquals(root.getAttribute("n:b"), "1");
+		assertEquals(root.getAttribute("n:b", "www.n.com", null), "1");
+		assertEquals(root.getAttribute("b", "www.n.com", null), "1");
+		assertEquals(root.getAttribute("b"), "2");
+
+		root.setAttribute("c", "3");
+		assertEquals(root.getAttribute("n:c"), "");
+		assertEquals(root.getAttribute("n:c", "www.n.com", null), null);
+		assertEquals(root.getAttribute("c", "www.n.com", null), null);
+		assertEquals(root.getAttribute("c"), "3");
+		root.setAttribute("n:c", "4", "www.n.com");
+		assertEquals(root.getAttribute("n:c"), "4");
+		assertEquals(root.getAttribute("n:c", "www.n.com", null), "4");
+		assertEquals(root.getAttribute("c", "www.n.com", null), "4");
+		assertEquals(root.getAttribute("c"), "3");
+
+	}
+
+	/**
 	 * 
 	 *
 	 */

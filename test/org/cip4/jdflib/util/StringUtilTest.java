@@ -371,13 +371,14 @@ public class StringUtilTest extends JDFTestCaseBase
 	}
 
 	/**
-	 * test regexp matching utility
+	 * test prefix stripper
 	 * 
 	 */
 	public void testStripPrefix()
 	{
 		assertEquals(StringUtil.stripPrefix("a:b", "a:", true), "b");
 		assertEquals(StringUtil.stripPrefix("a:b", "A:", true), "b");
+		assertEquals(StringUtil.stripPrefix("a:B", "A:", true), "B");
 		assertEquals(StringUtil.stripPrefix("a:b", "A:", false), "a:b");
 		assertEquals(StringUtil.stripPrefix("abcdef", "ABC", true), "def");
 		assertNull(StringUtil.stripPrefix(null, "A:", false));

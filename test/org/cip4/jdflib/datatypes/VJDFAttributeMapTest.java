@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -220,7 +220,7 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		final VJDFAttributeMap v2 = new VJDFAttributeMap();
 		v2.add(m2);
 		v2.add(m3);
-		v.addall(v2);
+		v.addAll(v2);
 		assertEquals(v.size(), 4);
 		assertTrue(v.contains(m1));
 		assertTrue(v.contains(m2));

@@ -728,6 +728,18 @@ public class FixVersion extends BaseElementWalker
 			{
 				jmf.setVersion(version);
 				jmf.setMaxVersion(version);
+				if (EnumUtil.aLessThanB(EnumVersion.Version_1_3, version))
+				{
+					if (!jmf.hasAttribute(AttributeName.AGENTNAME))
+						jmf.setAgentName(JDFAudit.getStaticAgentName());
+					if (!jmf.hasAttribute(AttributeName.AGENTVERSION))
+						jmf.setAgentName(JDFAudit.getStaticAgentVersion());
+				}
+				else
+				{
+					jmf.removeAttribute(AttributeName.AGENTNAME);
+					jmf.removeAttribute(AttributeName.AGENTVERSION);
+				}
 			}
 			return super.walk(e1, trackElem);
 		}

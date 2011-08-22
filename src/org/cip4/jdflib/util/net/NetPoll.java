@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.util.net;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.ThreadUtil.MyMutex;
@@ -83,6 +85,8 @@ import org.cip4.jdflib.util.net.IPollHandler.PollResult;
  */
 public class NetPoll
 {
+	private final Log log;
+
 	/**
 	 * @param urls the urls to poll - duh!
 	 * @param poller 
@@ -99,6 +103,7 @@ public class NetPoll
 		mutex = new MyMutex();
 		method = UrlUtil.GET;
 		contentType = UrlUtil.TEXT_UNKNOWN;
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -139,6 +144,7 @@ public class NetPoll
 		if (pollThread == null)
 		{
 			pollThread = new PollThread();
+			log.info("starting poll thread " + pollThread.getName());
 			pollThread.start();
 		}
 	}
@@ -150,6 +156,7 @@ public class NetPoll
 	{
 		if (pollThread != null)
 		{
+			log.info("shutting down poll thread " + pollThread.getName());
 			pollThread.running = false;
 			ThreadUtil.notifyAll(mutex);
 			pollThread = null;
@@ -187,6 +194,11 @@ public class NetPoll
 		public void run()
 		{
 			int n = 0;
+			if (vUrl == null || vUrl.size() == 0)
+			{
+				log.warn("polling 0 urls - bailing out");
+				running = false;
+			}
 			while (running)
 			{
 				String url = vUrl.get(n);

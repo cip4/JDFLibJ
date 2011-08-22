@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -190,7 +190,6 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 				}
 			}
 		}
-
 		isValid();
 	}
 
@@ -267,27 +266,6 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 		}
 
 		return sb.toString();
-	}
-
-	/**
-	 * getNumberList - returns the object in a JDFNumberList format
-	 * 
-	 * @return JDFNumberList - the object in JDFNumberList format
-	 */
-	protected JDFNumberList getNumberList()
-	{
-		JDFNumberList nl = null;
-
-		try
-		{
-			nl = new JDFNumberList(m_numList);
-		}
-		catch (final Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return nl;
 	}
 
 	/**
@@ -407,7 +385,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Object clone() throws CloneNotSupportedException
+	public JDFNumList clone() throws CloneNotSupportedException
 	{
 		final JDFNumList num = (JDFNumList) super.clone();
 		num.m_numList = ((Vector<Object>) m_numList.clone());
@@ -555,6 +533,87 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 			m_numList.setElementAt(new Double(number), i);
 		}
 		return this;
+	}
+
+	/**
+	 * modify numlist to absolute values
+	 * @see Math#abs
+	 * @return 
+	 */
+	public JDFNumList abs()
+	{
+		final int size = m_numList.size();
+		for (int i = 0; i < size; i++)
+		{
+			final double number = Math.abs(doubleAt(i));
+			m_numList.setElementAt(new Double(number), i);
+		}
+		return this;
+	}
+
+	/**
+	 * nodify numlist to absolute values
+	 * @see Math#abs
+	 * @return 
+	 */
+	public boolean matches(JDFNumList l, double delta)
+	{
+		if (l == null)
+			return false;
+		if (size() != l.size())
+			return false;
+		JDFNumList dif;
+		try
+		{
+			dif = clone();
+		}
+		catch (CloneNotSupportedException e)
+		{
+			return false;
+		}
+		dif.subtract(l);
+		dif.abs();
+		for (int i = 0; i < size(); i++)
+			if (dif.doubleAt(i) > delta)
+				return false;
+		return true;
+	}
+
+	/**
+	 * subtract l from this, 
+	 * @param l the list to subtract from this
+	 * @throws IllegalArgumentException if sizes don't match
+	 */
+	public void subtract(JDFNumList l)
+	{
+		if (l == null || size() != l.size())
+			return;
+
+		double[] me = getDoubleList();
+		double[] them = l.getDoubleList();
+		for (int i = 0; i < me.length; i++)
+		{
+			me[i] -= them[i];
+			m_numList.setElementAt(new Double(me[i]), i);
+		}
+	}
+
+	/**
+	 * getIntArray - returns this integer list as an int array
+	 * 
+	 * @return int[] - the int array
+	 */
+	public int[] getIntArray()
+	{
+		final int size = m_numList.size();
+		final int[] intArray = new int[size];
+
+		for (int i = 0; i < size; i++)
+		{
+			intArray[i] = ((Double) m_numList.elementAt(i)).intValue();
+		}
+
+		return intArray;
 	}
 
 	/**

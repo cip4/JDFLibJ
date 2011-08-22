@@ -78,6 +78,8 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.zip.DataFormatException;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.node.JDFNode;
@@ -160,6 +162,25 @@ public class JDFNumListTest extends JDFTestCaseBase
 		assertEquals(2 * iArray[2], ar[2]);
 	}
 
+	// ////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public final void testAbs()
+	{
+		final int[] iArray = new int[3];
+		iArray[0] = 1;
+		iArray[1] = -2;
+		iArray[2] = 4;
+		final JDFIntegerList il = new JDFIntegerList(iArray);
+		il.abs();
+		final int[] ar = il.getIntArray();
+		assertEquals(iArray.length, ar.length);
+		assertEquals(1, ar[0]);
+		assertEquals(2, ar[1]);
+		assertEquals(4, ar[2]);
+	}
+
 	/**
 	 * 
 	 */
@@ -182,6 +203,38 @@ public class JDFNumListTest extends JDFTestCaseBase
 		assertEquals(s.getX(), 10. * 72. / 2.54, 0);
 		assertEquals(s.getY(), 20. * 72. / 2.54, 0);
 		assertEquals(s.getZ(), 5. * 72. / 2.54, 0);
+	}
+
+	/**
+	 * @throws CloneNotSupportedException 
+	 * 
+	 */
+	public final void testClone() throws CloneNotSupportedException
+	{
+		JDFShape s = new JDFShape(100, 200, 50);
+		s = (JDFShape) s.clone();
+		assertEquals(s.getX(), 100., 0);
+		assertEquals(s.getY(), 200., 0);
+		assertEquals(s.getZ(), 50., 0);
+	}
+
+	/**
+	 * @throws CloneNotSupportedException 
+	 * @throws DataFormatException 
+	 * 
+	 */
+	public final void testMatches() throws CloneNotSupportedException, DataFormatException
+	{
+		JDFShape s = new JDFShape(100, 200, 50);
+		JDFShape s2 = new JDFShape(102, 198, 52);
+		assertTrue(s.matches(s2, 555));
+		assertTrue(s.matches(s2, 2));
+		assertFalse(s.matches(s2, 1));
+		JDFIntegerList il = new JDFIntegerList("100 200 300");
+		JDFIntegerList il2 = new JDFIntegerList("100 197 303");
+		assertTrue(il.matches(il2, 555));
+		assertTrue(il.matches(il2, 3));
+		assertFalse(il.matches(il2, 1));
 	}
 
 	// ////////////////////////////////////////////////////////////

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -465,8 +465,7 @@ public class MimeWriter extends MimeHelper
 			httpURLconnection.setRequestMethod(UrlUtil.POST);
 			httpURLconnection.setRequestProperty("Connection", "close");
 			String contentType = theMultipart.getContentType();
-			contentType = StringUtil.token(contentType, 0, "\r");
-			contentType = StringUtil.token(contentType, 0, "\n");
+			contentType = StringUtil.token(contentType, 0, "\r\n; ");
 			httpURLconnection.setRequestProperty(UrlUtil.CONTENT_TYPE, contentType);
 			httpURLconnection.setDoOutput(true);
 			if (md != null && md.httpDetails != null)

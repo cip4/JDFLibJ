@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of Processes in
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of Processes in
  * Prepress, Press and Postpress (CIP4). All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
@@ -82,11 +82,12 @@ import org.cip4.jdflib.util.HashUtil;
  * @version 1.0 2002-01-24
  * 
  */
-public class VJDFAttributeMap
+public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 {
-	// **************************************** Attributes
-	// ******************************************
-	private Vector<JDFAttributeMap> m_vec = new Vector<JDFAttributeMap>();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// **************************************** Constructors
 	// ****************************************
@@ -95,7 +96,7 @@ public class VJDFAttributeMap
 	 */
 	public VJDFAttributeMap()
 	{
-		// default super constructor
+		super();
 	}
 
 	/**
@@ -105,13 +106,9 @@ public class VJDFAttributeMap
 	 */
 	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
 	{
-		m_vec.clear();
 		if (toAdd != null)
 		{
-			for (int i = 0; i < toAdd.size(); i++)
-			{
-				m_vec.add(toAdd.get(i));
-			}
+			addAll(toAdd);
 		}
 	}
 
@@ -122,33 +119,15 @@ public class VJDFAttributeMap
 	 */
 	public VJDFAttributeMap(final JDFAttributeMap[] toAdd)
 	{
-		m_vec.clear();
-		for (int i = 0; i < toAdd.length; i++)
+		clear();
+		if (toAdd != null)
 		{
-			m_vec.add(toAdd[i]);
-		}
-	}
-
-	/**
-	 * copy constructor - clones the vector including the contents!
-	 * 
-	 * @param v the VJDFAttributeMap to copy
-	 */
-	public VJDFAttributeMap(final VJDFAttributeMap v)
-	{
-		if (v != null)
-		{
-			clear();
-			final int size = v.size();
-			for (int i = 0; i < size; i++)
+			for (JDFAttributeMap map : toAdd)
 			{
-				add(new JDFAttributeMap(v.elementAt(i)));
+				add(map);
 			}
 		}
 	}
-
-	// **************************************** Methods
-	// *********************************************
 
 	/**
 	 * toString
@@ -187,10 +166,12 @@ public class VJDFAttributeMap
 	 * Returns the vector with JDFAttributeMap elements
 	 * 
 	 * @return Vector - the vector with JDFAttributeMap elements
+	 * @deprecated - use this
 	 */
+	@Deprecated
 	public Vector<JDFAttributeMap> getVector()
 	{
-		return m_vec;
+		return this;
 	}
 
 	/**
@@ -253,7 +234,7 @@ public class VJDFAttributeMap
 
 		if (!vec.isEmpty())
 		{
-			m_vec = vec;
+			setVector(vec);
 		}
 	}
 
@@ -355,17 +336,9 @@ public class VJDFAttributeMap
 	 */
 	public void setVector(final Vector<JDFAttributeMap> vec)
 	{
-		m_vec = vec;
-	}
-
-	/**
-	 * Return the size of the JDFAttributeMap vector
-	 * 
-	 * @return int - the size
-	 */
-	public int size()
-	{
-		return m_vec.size();
+		clear();
+		if (vec != null)
+			addAll(vec);
 	}
 
 	/**
@@ -376,14 +349,11 @@ public class VJDFAttributeMap
 	public int maxSize()
 	{
 		int maxSize = 0;
-		if (m_vec != null)
+		for (JDFAttributeMap map : this)
 		{
-			for (JDFAttributeMap map : m_vec)
+			if (map != null && map.size() > maxSize)
 			{
-				if (map != null && map.size() > maxSize)
-				{
-					maxSize = map.size();
-				}
+				maxSize = map.size();
 			}
 		}
 		return maxSize;
@@ -397,9 +367,9 @@ public class VJDFAttributeMap
 	public int minSize()
 	{
 		int minSize = 9999999;
-		if (m_vec != null && m_vec.size() > 0)
+		if (size() > 0)
 		{
-			for (JDFAttributeMap map : m_vec)
+			for (JDFAttributeMap map : this)
 			{
 				if (map != null && map.size() < minSize)
 				{
@@ -417,28 +387,19 @@ public class VJDFAttributeMap
 	}
 
 	/**
-	 * Return true if the JDFAttributeMap vector is empty
-	 * 
-	 * @return boolean - true if empty otherwise false
-	 */
-	public boolean isEmpty()
-	{
-		return m_vec.isEmpty();
-	}
-
-	/**
 	 * Returns the element at the given position
 	 * 
 	 * @param i the given position (may be<0 to count backwards)
 	 * @return JDFAttributeMap - the selected element
 	 */
+	@Override
 	public JDFAttributeMap elementAt(int i)
 	{
 		if (i < 0)
 		{
 			i += size();
 		}
-		return m_vec.elementAt(i);
+		return super.elementAt(i);
 	}
 
 	/**
@@ -447,23 +408,14 @@ public class VJDFAttributeMap
 	 * @param i the given position
 	 * @return JDFAttributeMap - the selected element
 	 */
+	@Override
 	public JDFAttributeMap get(int i)
 	{
 		if (i < 0)
 		{
 			i += size();
 		}
-		return m_vec.get(i);
-	}
-
-	/**
-	 * Method removeElementAt.
-	 * 
-	 * @param index the position of the element to remove
-	 */
-	public void removeElementAt(final int index)
-	{
-		m_vec.removeElementAt(index);
+		return super.get(i);
 	}
 
 	/**
@@ -482,65 +434,6 @@ public class VJDFAttributeMap
 			}
 		}
 		unify();
-	}
-
-	/**
-	 * Sets the element at the given position
-	 * 
-	 * @param obj the element to set
-	 * @param i the given position
-	 */
-	public void setElementAt(final JDFAttributeMap obj, final int i)
-	{
-		m_vec.setElementAt(obj, i);
-	}
-
-	/**
-	 * Appends the specified element to the end of this Vector
-	 * 
-	 * @param obj the given element
-	 */
-	public void add(final JDFAttributeMap obj)
-	{
-		m_vec.add(obj);
-	}
-
-	/**
-	 * Appends all the specified elements to the end of this Vector
-	 * 
-	 * @param obj the given element
-	 */
-	public void addall(final VJDFAttributeMap obj)
-	{
-		if (obj != null)
-		{
-			for (int i = 0; i < obj.size(); i++)
-			{
-				m_vec.add(obj.elementAt(i));
-			}
-		}
-	}
-
-	/**
-	 * Adds the specified component to the end of this vector, increasing its size by one
-	 * 
-	 * @param obj the given element
-	 */
-	public void addElement(final JDFAttributeMap obj)
-	{
-		m_vec.addElement(obj);
-	}
-
-	/**
-	 * Tests if the specified object is a component in this vector
-	 * 
-	 * @param obj the given JDFAttributeMap element
-	 * 
-	 * @return boolean - true if and only if the specified object is the same as a component in this vector, as determined by the equals method; false otherwise
-	 */
-	public boolean contains(final JDFAttributeMap obj)
-	{
-		return m_vec.contains(obj);
 	}
 
 	/**
@@ -609,14 +502,6 @@ public class VJDFAttributeMap
 	}
 
 	/**
-	 * Removes all of the elements from this Vector
-	 */
-	public void clear()
-	{
-		m_vec.clear();
-	}
-
-	/**
 	 * 
 	 * @param vKeys
 	 * @deprecated use reduceMap
@@ -627,9 +512,9 @@ public class VJDFAttributeMap
 	{
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 
-		for (int i = 0; i < m_vec.size(); i++)
+		for (int i = 0; i < size(); i++)
 		{
-			final JDFAttributeMap map = m_vec.elementAt(i);
+			final JDFAttributeMap map = elementAt(i);
 			map.reduceMap(vKeys);
 
 			if (!map.isEmpty())
@@ -638,7 +523,7 @@ public class VJDFAttributeMap
 			}
 		}
 		v.unify();
-		m_vec = v.getVector();
+		setVector(v);
 	}
 
 	/**
@@ -650,9 +535,8 @@ public class VJDFAttributeMap
 	{
 		final VJDFAttributeMap v = new VJDFAttributeMap();
 
-		for (int i = 0; i < m_vec.size(); i++)
+		for (JDFAttributeMap map : this)
 		{
-			final JDFAttributeMap map = m_vec.elementAt(i);
 			final boolean bNullMap = map.isEmpty();
 			map.reduceMap(keySet);
 
@@ -662,19 +546,19 @@ public class VJDFAttributeMap
 			}
 		}
 		v.unify();
-		m_vec = v.getVector();
+		setVector(v);
 	}
 
 	/**
 	 * reduce each JDFAttributeMap in <code>this</code> by keySet
 	 * 
-	 * @param keySet
+	 * @return the vector of all keys
 	 */
 	public VString getKeys()
 	{
 		final VString v = new VString();
 
-		for (JDFAttributeMap map : m_vec)
+		for (JDFAttributeMap map : this)
 		{
 			v.addAll(map.getKeys());
 
@@ -689,15 +573,15 @@ public class VJDFAttributeMap
 	 */
 	public void appendUnique(final JDFAttributeMap map)
 	{
-		for (int i = 0; i < m_vec.size(); i++)
+		for (int i = 0; i < size(); i++)
 		{
-			if ((m_vec.elementAt(i)).equals(map))
+			if (elementAt(i).equals(map))
 			{
 				return;
 			}
 		}
 
-		m_vec.addElement(map);
+		addElement(map);
 	}
 
 	/**
@@ -705,21 +589,7 @@ public class VJDFAttributeMap
 	 */
 	public void unify()
 	{
-		ContainerUtil.unify(m_vec);
-		// final int size = m_vec.size();
-		// final LinkedHashSet<JDFAttributeMap> lhsIn = new LinkedHashSet<JDFAttributeMap>(size);
-		//
-		// for (int i = 0; i < size; i++)
-		// {
-		// final JDFAttributeMap amMap = m_vec.elementAt(i);
-		// if (!lhsIn.contains(amMap))
-		// {
-		// lhsIn.add(amMap);
-		// }
-		// }
-		//
-		// m_vec.clear();
-		// m_vec.addAll(lhsIn);
+		ContainerUtil.unify(this);
 	}
 
 	/**
@@ -729,8 +599,20 @@ public class VJDFAttributeMap
 	 */
 	public void appendUnique(final VJDFAttributeMap map)
 	{
-		addall(map);
+		addAll(map);
 		unify();
+	}
+
+	/**
+	 * 
+	 * deprecated legacy support
+	 * @param v
+	 * @deprecated use addAll
+	 */
+	@Deprecated
+	public void addall(VJDFAttributeMap v)
+	{
+		addAll(v);
 	}
 
 	/**
@@ -907,7 +789,7 @@ public class VJDFAttributeMap
 	@Override
 	public int hashCode()
 	{
-		return HashUtil.hashCode(0, this.m_vec);
+		return HashUtil.hashCode(0, this);
 	}
 
 	/**

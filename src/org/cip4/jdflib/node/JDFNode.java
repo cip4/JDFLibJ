@@ -4669,7 +4669,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				{
 					node.updatePartStatus(vMap, updateKids, false, method);
 				}
-				statusMaps.addall(node.getStatusPartMapVector());
+				statusMaps.addAll(node.getStatusPartMapVector());
 			}
 			statusMaps.unify();
 			if (statusMaps.size() > 0)

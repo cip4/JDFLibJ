@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -146,6 +146,7 @@ public class BiHashMap<a, b> implements Map<a, b>
 	 * both key and value must be non-null
 	 * @param key the key
 	 * @param val the value
+	 * @return 
 	 */
 	public b put(final a key, final b val)
 	{

@@ -448,6 +448,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 * make a separationlist from an attribute
 	 * @param rPart
 	 * @param elem the separation list attribute / element
+	 * @return 
 	 */
 	protected JDFSeparationList createSeparationList(final KElement rPart, final String elem)
 	{
@@ -578,7 +579,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	/**
 	 * 
 	 * @param e
-	 * @param trackElem
+	 * 
 	 */
 	protected void attributesToSpan(final KElement e)
 	{
@@ -1456,7 +1457,6 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 */
 	public class WalkXJDFResource extends WalkXElement
 	{
-
 		/**
 		 * @param e
 		 * @return the created resource
@@ -1472,6 +1472,11 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			{
 				newPartition = createPartition(e, trackElem, part);
 				partmap = part.getPartMap();
+			}
+			else if (e.getPreviousSiblingElement(e.getNodeName(), null) != null)
+			{
+				newPartition = theNode.getJDFRoot().addResource(trackElem.getLocalName(), null);
+				newPartition.copyAttribute("ID", e);
 			}
 			else
 			{
@@ -1876,6 +1881,5 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			final boolean bL1 = parent != null && parent.getLocalName().equals("Product");
 			return bL1 && super.matches(toCheck) && toCheck.getLocalName().equals("Intent");
 		}
-
 	}
 }

@@ -589,11 +589,11 @@ public class XMLDoc
 			{
 				if (i >= 2)
 				{
-					log.error("writing to File, bailing out", x);
+					log.error("writing to Stream, bailing out", x);
 					throw x; // try three times, else ciao
 				}
 				ThreadUtil.sleep((1000 * (i + 1)));
-				log.warn("retry exception " + i + " for " + getOriginalFileName(), x);
+				log.warn("retry IO exception " + i + " for writing to stream; original XML file=" + getOriginalFileName(), x);
 			}
 		}
 	}

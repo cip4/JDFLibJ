@@ -260,18 +260,15 @@ public class JDFSpawn
 		// merge this node into it
 		rootOut.copyInto(node, true); // "copy" this node into the new created document
 		docOut.setNSMap(node.getOwnerDocument_KElement());
-		final String spawnID = "Sp" + KElement.uniqueID(-666); // create a spawn
-		// id for this transaction
+		final String spawnID = "Sp" + KElement.uniqueID(-666); // create a spawn id for this transaction
 		rootOut.setSpawnID(spawnID);
 		rootOut.setVersion(node.getVersion(true));
 
 		// need copy in order to fix up 1.3 NodeInfo spawn
-		final String nodeInfoNonAncestor = "NodeInfo:Input"; // named process
-		// usage
+		final String nodeInfoNonAncestor = "NodeInfo:Input"; // named process usage
 		if (!vRWResources.contains(nodeInfoNonAncestor))
 		{
-			vRWResources.addElement(nodeInfoNonAncestor); // the local nodeinfo
-			// MUST always be rw
+			vRWResources.addElement(nodeInfoNonAncestor); // the local nodeinfo MUST always be rw
 		}
 
 		JDFNode spawnParentNode = null;
@@ -305,9 +302,7 @@ public class JDFSpawn
 			{
 				throw new JDFException("JDFNode.Spawn attempting to spawn incompatible partitions");
 			}
-			setSpawnParts = ContainerUtil.toHashSet(vSpawnParts.getVector());
-
-			// Spawn a complete node -> no partition handling
+			setSpawnParts = ContainerUtil.toHashSet(vSpawnParts);
 		}
 		else
 		// Spawn a complete node -> no partition handling

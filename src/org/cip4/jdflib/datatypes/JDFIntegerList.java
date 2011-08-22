@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -377,7 +377,7 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	/**
-	 * must keep this because otherwise the object vector gets corrupted with Double objects (non-Javadoc)
+	 * must keep this because otherwise the object vector gets corrupted with Double objects 
 	 * 
 	 * @see org.cip4.jdflib.datatypes.JDFNumList#scale(double)
 	 */
@@ -398,6 +398,7 @@ public class JDFIntegerList extends JDFNumList
 	 * 
 	 * @return int[] - the int array
 	 */
+	@Override
 	public int[] getIntArray()
 	{
 		final int size = m_numList.size();
@@ -436,6 +437,41 @@ public class JDFIntegerList extends JDFNumList
 	{
 		m_numList.clear();
 		m_numList.add(new Integer(i));
+	}
+
+	/**
+	 * @see org.cip4.jdflib.datatypes.JDFNumList#abs()
+	 */
+	@Override
+	public JDFNumList abs()
+	{
+		final int[] a = getIntArray();
+		for (int i = 0; i < a.length; i++)
+		{
+			a[i] = Math.abs(a[i]);
+		}
+		setIntArray(a);
+		return this;
+	}
+
+	/**
+	 * subtract l from this, 
+	 * @param l the list to subtract from this
+	 * @throws IllegalArgumentException if sizes don't match
+	 */
+	@Override
+	public void subtract(JDFNumList l)
+	{
+		if (l == null || size() != l.size())
+			return;
+
+		int[] me = getIntArray();
+		int[] them = l.getIntArray();
+		for (int i = 0; i < me.length; i++)
+		{
+			me[i] -= them[i];
+			m_numList.setElementAt(new Integer(me[i]), i);
+		}
 	}
 
 }

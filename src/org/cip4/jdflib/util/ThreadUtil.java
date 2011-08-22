@@ -110,7 +110,7 @@ public class ThreadUtil
 		 */
 		protected void setup()
 		{
-			// nop
+			baseName = "WaitThread";
 		}
 
 		private MyMutex mutex;
@@ -118,6 +118,7 @@ public class ThreadUtil
 		private a theObject;
 		private static int threadNumber = 0;
 		private Thread myThread = null;
+		protected String baseName;
 
 		/**
 		 * @param millis wait timeout in milliseconds
@@ -129,7 +130,7 @@ public class ThreadUtil
 			theObject = null;
 			setup();
 			mutex = new MyMutex();
-			myThread = new Thread(this, "WaitThread" + threadNumber++);
+			myThread = new Thread(this, baseName + threadNumber++);
 		}
 
 		/**

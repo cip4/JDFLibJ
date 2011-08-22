@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -409,7 +409,7 @@ public class CPUTimer
 	}
 
 	/**
-	 * stop/pause measuring times - decrement the number of start/stop so that we don'r recount the next start
+	 * stop/pause measuring times - decrement the number of start/stop so that we don't recount the next start
 	 * 
 	 *
 	 */
@@ -462,7 +462,7 @@ public class CPUTimer
 
 	/**
 	 * 
-	 * @return
+	 * @return the XML representation of this
 	 */
 	public KElement toXML()
 	{
@@ -487,5 +487,13 @@ public class CPUTimer
 		if (CPUTimerFactory.theFactory == null)
 			CPUTimerFactory.theFactory = new CPUTimerFactory();
 		return CPUTimerFactory.theFactory;
+	}
+
+	/**
+	 * simple print utility for lazy folks
+	 */
+	public void println()
+	{
+		System.out.println(toString());
 	}
 }

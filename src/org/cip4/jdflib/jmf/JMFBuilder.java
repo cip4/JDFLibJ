@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,6 +76,7 @@ import java.util.Vector;
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
+import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
 import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -317,6 +318,20 @@ public class JMFBuilder
 	public JDFJMF buildKnownMessagesQuery()
 	{
 		return createQuery(JDFMessage.EnumType.KnownMessages).getJMFRoot();
+	}
+
+	/**
+	 * build a JMF Knownmessages query
+	 * @return the message
+	 */
+	public JDFJMF buildResourceCatalogQuery(String resType)
+	{
+		JDFQuery query = createQuery(JDFMessage.EnumType.Resource);
+		JDFResourceQuParams quParams = query.getCreateResourceQuParams(0);
+		quParams.setResourceName(resType);
+		quParams.setExact(true);
+		quParams.setResourceDetails(EnumResourceDetails.Full);
+		return query.getJMFRoot();
 	}
 
 	/**

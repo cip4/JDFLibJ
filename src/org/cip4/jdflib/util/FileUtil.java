@@ -487,14 +487,16 @@ public class FileUtil
 		}
 		try
 		{
-			InputStream fis = getBufferedInputStream(file);
 			final int len = (int) file.length();
 			if (len <= 0)
 			{
 				return null;
 			}
+			InputStream fis = getBufferedInputStream(file);
 			byte[] b = new byte[len];
 			final int l = fis.read(b);
+			fis.close();
+			fis = null;
 			if (l != len)
 			{
 				if (l == 0)

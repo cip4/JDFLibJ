@@ -2502,22 +2502,13 @@ public class StringUtil
 	 */
 	public static String stripPrefix(String str, String prefix, final boolean bIgnoreCase)
 	{
-		if (str == null || prefix == null)
+		if (str != null && prefix != null)
 		{
-			return str;
+			if (bIgnoreCase && str.toLowerCase().startsWith(prefix.toLowerCase()) || (str.startsWith(prefix)))
+			{
+				str = StringUtil.rightStr(str, -prefix.length());
+			}
 		}
-
-		if (bIgnoreCase)
-		{
-			str = str.toLowerCase();
-			prefix = prefix.toLowerCase();
-		}
-
-		if (str.startsWith(prefix))
-		{
-			str = StringUtil.rightStr(str, -prefix.length());
-		}
-
 		return str;
 	}
 

@@ -175,6 +175,7 @@ public class JDFIdentical extends JDFAutoIdentical
 	 * @see org.cip4.jdflib.core.JDFElement#getTarget()
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public JDFResource getTarget()
 	{
 		final JDFAttributeMap identityMap = getPartMap();
@@ -194,7 +195,7 @@ public class JDFIdentical extends JDFAutoIdentical
 
 	/**
 	 * add Part in case it is inconsistent
-	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.KElement.EnumValidationLevel, boolean, int)
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
 	public VString getInvalidElements(final EnumValidationLevel level, final boolean ignorePrivate, final int max)

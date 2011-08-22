@@ -720,6 +720,30 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 *  
 	 */
+	public void testFromXJDFRunList()
+	{
+		XJDFHelper h = new XJDFHelper(null);
+		e = h.getRoot();
+		e.setAttribute("JobPartID", "Root");
+		SetHelper sh = h.getCreateSet("Parameter", "RunList", EnumUsage.Input);
+		sh.getSet().setID("R");
+		sh.getCreatePartition(new JDFAttributeMap("Run", "r1"), true).getResource().appendElement("FileSpec");
+		XJDFToJDFConverter conv = new XJDFToJDFConverter(null);
+		conv.convert(e);
+		h = new XJDFHelper(null);
+		e = h.getRoot();
+		e.setAttribute("JobPartID", "Root");
+		sh = h.getCreateSet("Parameter", "RunList", EnumUsage.Input);
+		sh.getSet().setID("R");
+		sh.getCreatePartition(new JDFAttributeMap("Run", "r2"), true).getResource().appendElement("FileSpec");
+		JDFDoc d = conv.convert(e);
+		assertNotNull(d);
+
+	}
+
+	/**
+	 *  
+	 */
 	public void testFromXJDFNoNamespace()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
@@ -789,17 +813,34 @@ public class XJDFTest extends JDFTestCaseBase
 	/**
 	 *  
 	 */
+	public void testFromXJDFContact()
+	{
+		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+		e = new XMLDoc("XJDF", null).getRoot();
+		e.appendElement("ParameterSet").setAttribute("Name", "Contact");
+		e.getCreateXPathElement("ProductList/Product/Comment").setText("bar");
+		final JDFDoc d = xCon.convert(e);
+		assertNotNull(d);
+		JDFNode root = d.getJDFRoot();
+		assertEquals(root.getComment(0).getText(), "bar");
+	}
+
+	/**
+	 *  
+	 */
 	public void testFromXJDFColorIntent()
 	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		e = new XMLDoc("XJDF", null).getRoot();
 		e.setAttribute("Types", "Product");
 		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@NumColors", "4/1");
+		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@Coatings", "DullVarnish");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
+		assertEquals(ci.getCoatings().getActual(), "DullVarnish");
 	}
 
 	/**

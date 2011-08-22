@@ -130,6 +130,21 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
+	 * factory for JDFXYPair that silently returns null in case of illegal strings
+	 */
+	public static JDFXYPair createXYPair(String s)
+	{
+		try
+		{
+			return new JDFXYPair(s);
+		}
+		catch (DataFormatException x)
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * constructs a xy pair with all values set via a JDFXYPair
 	 * 
 	 * @param xy the given xy pair
