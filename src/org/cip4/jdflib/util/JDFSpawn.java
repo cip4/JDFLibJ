@@ -1783,7 +1783,6 @@ public class JDFSpawn
 		parentURL = _parentURL;
 		bInformative = false;
 		return spawn();
-
 	}
 
 	// ///////////////////////////////////////////////////////////////////////

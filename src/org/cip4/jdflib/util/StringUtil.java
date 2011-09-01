@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -235,21 +235,22 @@ public class StringUtil
 	 */
 	public static String zappTokenWS(final String str, final String delim)
 	{
-		String s = JDFConstants.EMPTYSTRING;
+		StringBuffer s = new StringBuffer();
 
 		final VString vs = new VString(str, delim);
 		final int size = vs.size();
 
 		if (size > 0)
 		{
-			s = (vs.elementAt(0)).trim();
+			s.append(vs.elementAt(0).trim());
 
 			for (int i = 1; i < size; i++)
 			{
-				s = s + delim + (vs.elementAt(i)).trim();
+				s.append(delim);
+				s.append(vs.elementAt(i).trim());
 			}
 		}
-		return s;
+		return s.toString();
 	}
 
 	/**
@@ -2561,7 +2562,45 @@ public class StringUtil
 		return b.length() > 0 ? b.toString() : null;
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// //////
+	/**
+	 * returns a new string that has all characters trimmed from the front and backofwork that are not in trimChars
+	 * 
+	 * @param work
+	 * @param trimChars
+	 * @return
+	 */
+	public static String trim(final String work, final String trimChars)
+	{
+		if (work == null)
+		{
+			return null;
+		}
+		if (trimChars == null)
+			return work;
 
+		int nStart = 0;
+		int nEnd = work.length();
+		for (int i = 0; i < work.length(); i++)
+		{
+			if (trimChars.indexOf(work.charAt(i)) >= 0)
+			{
+				nStart = i + 1;
+			}
+			else
+				break;
+		}
+		for (int i = work.length() - 1; i >= 0; i--)
+		{
+			if (trimChars.indexOf(work.charAt(i)) >= 0)
+			{
+				nEnd = i;
+			}
+			else
+				break;
+		}
+		String trimmed = work.substring(nStart, nEnd);
+		return trimmed.length() > 0 ? trimmed : null;
+	}
+
+	// //////////////////////////////////////////////////////////////////////////
 }

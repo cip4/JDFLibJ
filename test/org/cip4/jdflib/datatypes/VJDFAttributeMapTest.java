@@ -105,7 +105,7 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		v2 = v.clone();
 		assertEquals(v, v2);
 		m1.put("a3", "a4");
-		assertNotSame("modification did not migrate!", v, v2);
+		assertFalse("modification did not migrate!", v.equals(v2));
 	}
 
 	/**
@@ -329,7 +329,24 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 		v2.add(m1);
 		assertEquals("mixed ordering", v, v2);
 		v2.add(m1);
-		assertNotSame("mixed ordering -other cardinality ", v, v2);
+		assertFalse("mixed ordering -other cardinality ", v.equals(v2));
+	}
+
+	/**
+	 * test Equals()
+	 */
+	public void testIndexOf()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a2", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		v.add(m2);
+		assertEquals(v.indexOf(m1), 0);
+		assertEquals(v.indexOf(m2), 1);
+		assertEquals(v.indexOf(new JDFAttributeMap()), -1);
 	}
 
 	/**

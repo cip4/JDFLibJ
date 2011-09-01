@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -76,6 +76,7 @@ import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -101,7 +102,8 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 		{
 			final JDFDeviceInfo di = dl.appendDeviceInfo();
 			di.setDeviceID("I" + i);
-			di.appendDevice();
+			JDFDevice dev = di.appendDevice();
+			dev.appendDeviceCap();
 			di.appendModuleStatus();
 			di.setDeviceStatus(EnumDeviceStatus.Running);
 			di.setStatusDetails("foo");
@@ -159,6 +161,26 @@ public class JDFDeviceFilterTest extends JDFTestCaseBase
 		{
 			final JDFDeviceInfo deviceInfo = dl.getDeviceInfo(i);
 			assertNotNull(deviceInfo.getDevice());
+			assertNull(deviceInfo.getDevice().getDeviceCap(0));
+			assertNotNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
+			assertNotNull(deviceInfo.getDeviceStatus());
+			assertNotNull(deviceInfo.getDeviceID());
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testApplyToCaps()
+	{
+		final JDFDeviceFilter filter = (JDFDeviceFilter) new JDFDoc("DeviceFilter").getRoot();
+		filter.setDeviceDetails(EnumDeviceDetails.Capability);
+		filter.applyTo(dl);
+		for (int i = 0; i < 10; i++)
+		{
+			final JDFDeviceInfo deviceInfo = dl.getDeviceInfo(i);
+			assertNotNull(deviceInfo.getDevice());
+			assertNotNull(deviceInfo.getDevice().getDeviceCap(0));
 			assertNotNull(StringUtil.getNonEmpty(deviceInfo.getStatusDetails()));
 			assertNotNull(deviceInfo.getDeviceStatus());
 			assertNotNull(deviceInfo.getDeviceID());

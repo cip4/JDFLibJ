@@ -86,6 +86,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IStreamWriter;
 
@@ -735,9 +736,11 @@ public class FileUtil
 		{
 			ThreadUtil.sleep(i * i * 100);
 			bOK = file.delete();
-			;
 			if (i++ > 6)
+			{
+				LogFactory.getLog(FileUtil.class).warn("cannot force delete of file: " + file.getAbsolutePath());
 				break;
+			}
 		}
 		return bOK;
 	}

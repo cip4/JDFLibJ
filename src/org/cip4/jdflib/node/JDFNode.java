@@ -9490,9 +9490,9 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			if (vRes != null && vRes.size() > 0)
 			{
 				final JDFResource r = (JDFResource) vRes.elementAt(0);
-				final JDFResource resRoot = r.getResourceRoot();
-				if (resRoot != null)
+				if (r != null)
 				{
+					final JDFResource resRoot = r.getResourceRoot();
 					matchingPartIDKeys = resRoot.getPartIDKeys();
 				}
 			}

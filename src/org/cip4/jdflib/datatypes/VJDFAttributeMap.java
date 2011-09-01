@@ -106,9 +106,13 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	 */
 	public VJDFAttributeMap(final Vector<JDFAttributeMap> toAdd)
 	{
+		super();
 		if (toAdd != null)
 		{
-			addAll(toAdd);
+			for (JDFAttributeMap map : toAdd)
+			{
+				add(map.clone());
+			}
 		}
 	}
 
@@ -733,7 +737,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 				}
 			}
 		}
-
 		return false;
 	}
 
@@ -767,10 +770,10 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 			return false;
 		}
 
-		final VJDFAttributeMap vOther = new VJDFAttributeMap(((VJDFAttributeMap) other).getVector().toArray(new JDFAttributeMap[0]));
-		for (int i = 0; i < size; i++)
+		final VJDFAttributeMap vOther = new VJDFAttributeMap();
+		vOther.addAll((VJDFAttributeMap) other);
+		for (JDFAttributeMap map : this)
 		{
-			final JDFAttributeMap map = elementAt(i);
 			final int index = vOther.indexOf(map);
 			if (index < 0)
 			{
@@ -790,27 +793,6 @@ public class VJDFAttributeMap extends Vector<JDFAttributeMap>
 	public int hashCode()
 	{
 		return HashUtil.hashCode(0, this);
-	}
-
-	/**
-	 * returns the index of a given JDFAttributeMap, -1 if not present
-	 * 
-	 * @param map the given JDFAttributeMap
-	 * @return 
-	 */
-	public int indexOf(final JDFAttributeMap map)
-	{
-		int index = -1;
-		final int size = this.size();
-		for (int i = 0; i < size; i++)
-		{
-			if (this.elementAt(i).equals(map))
-			{
-				index = i;
-				break;
-			}
-		}
-		return index;
 	}
 
 	/**

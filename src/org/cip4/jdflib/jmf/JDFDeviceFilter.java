@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -75,6 +75,7 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFDeviceList;
 import org.cip4.jdflib.util.EnumUtil;
 
@@ -168,9 +169,11 @@ public class JDFDeviceFilter extends JDFAutoDeviceFilter// JDFResource
 			return;
 		}
 		final EnumDeviceDetails det = getDeviceDetails();
-		if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.Modules))
+		if (EnumUtil.aLessThanB(det, EnumDeviceDetails.Capability))
 		{
-			deviceInfo.removeChildren(ElementName.DEVICECAP, null, null);
+			JDFDevice dev = deviceInfo.getDevice();
+			if (dev != null)
+				dev.removeChildren(ElementName.DEVICECAP, null, null);
 		}
 		if (EnumUtil.aLessEqualsThanB(det, EnumDeviceDetails.Brief))
 		{

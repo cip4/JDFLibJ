@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -272,11 +272,7 @@ public class StringUtilTest extends JDFTestCaseBase
 		final byte[] green = new byte[] { 'g', 'r', (byte) 0xfc, 'n' };
 		final String greenString = StringUtil.getUTF8String(green);
 
-		// TODO Not UTF8 compatible
-		if (PlatformUtil.isWindows())
-		{
-			assertEquals("incorrectly encoded grün is also heuristically fixed", greenString, "grün");
-		}
+		assertEquals("incorrectly encoded grün is also heuristically fixed", greenString, "grün");
 	}
 
 	/**
@@ -405,6 +401,19 @@ public class StringUtilTest extends JDFTestCaseBase
 		assertEquals(StringUtil.stripQuote(",123, ", ",", false), ",123, ");
 		assertEquals(StringUtil.stripQuote(" 	,123, ", ",", true), "123");
 		assertEquals(StringUtil.stripQuote(",", ",", true), ",");
+	}
+
+	/**
+	 * 
+	 */
+	public void testTrim()
+	{
+		assertEquals(StringUtil.trim(",123,", ","), "123");
+		assertEquals(StringUtil.trim(", ,123,", ", &"), "123");
+		assertEquals(StringUtil.trim("123", ", &"), "123");
+		assertEquals(StringUtil.trim("123&", ", &"), "123");
+		assertEquals(StringUtil.trim(" 123", ", &"), "123");
+		assertEquals(StringUtil.trim("", ", &"), null);
 	}
 
 	/**
@@ -760,9 +769,9 @@ public class StringUtilTest extends JDFTestCaseBase
 	 */
 	public void testZappTokenWS()
 	{
-		String s = " 1 2 3~    4";
-		s = StringUtil.zappTokenWS(s, JDFConstants.TILDE);
-		assertEquals("new string", "1 2 3~4", s);
+		assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4 ", JDFConstants.TILDE));
+		assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4", JDFConstants.TILDE));
+		assertEquals("new string", "1 2 3~4", StringUtil.zappTokenWS(" 1 2 3~    4~", JDFConstants.TILDE));
 		assertEquals(StringUtil.zappTokenWS(" n2 ", null), "n2");
 	}
 

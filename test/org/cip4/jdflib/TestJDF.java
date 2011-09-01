@@ -158,8 +158,8 @@ public class TestJDF extends JDFTestCaseBase
 	{
 		JDFResource.setUnpartitiondImplicit(true);
 		CPUTimer ct = new CPUTimer(true);
-		final JDFDoc d = new JDFParser().parseFile("/data/JDF/2011_01052/main.jdf");
-		JDFNode n = d.getJDFRoot().getJobPart("ImP1.MR", null);
+		final JDFDoc d = new JDFParser().parseFile("/share/data/fehler/15495-PD/export.jdf");
+		JDFNode n = d.getJDFRoot().getJobPart("IPr4.I", null);
 		ct.stop();
 		System.out.println(ct);
 		JDFSpawn spawn = new JDFSpawn(n);
@@ -174,17 +174,21 @@ public class TestJDF extends JDFTestCaseBase
 		ct.start();
 		JDFAttributeMap map = new JDFAttributeMap();
 		map.put("SignatureName", "Sig001");
-		map.put("SheetName", "A_FB 001");
-		map.put("PartVersion", "All");
+		map.put("SheetName", "radson_001");
+		map.put("Side", "Front");
+		map.put("PartVersion", "SL");
 		spawn.vSpawnParts.add(map);
 		JDFAttributeMap map2 = new JDFAttributeMap();
-		map2.put("SignatureName", "Sig002");
-		map2.put("SheetName", "A_FB 002");
-		map2.put("PartVersion", "All");
+		map2.put("SignatureName", "Sig001");
+		map2.put("SheetName", "radson_001");
+		map2.put("Side", "Back");
+		map2.put("PartVersion", "SL");
 		spawn.vSpawnParts.add(map2);
 		//		spawn.bSpawnIdentical = false;
 		//		spawn.bFixResources = false;
-		spawn.spawn();
+		spawn.bSpawnROPartsOnly = true;
+		JDFNode n2 = spawn.spawn();
+		n2.getOwnerDocument_JDFElement().write2File("/share/data/fehler/15495-PD/spawn.jdf", 2, false);
 
 	}
 
