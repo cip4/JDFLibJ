@@ -254,12 +254,14 @@ public class JDFResourceTest extends JDFTestCaseBase
 	 */
 	public void testOverlapPartMap()
 	{
-		final JDFAttributeMap m1 = new JDFAttributeMap("PartVersion", "DE EN");
+		final JDFAttributeMap m1 = new JDFAttributeMap("PartVersion", "DE");
 		m1.put("Run", "r2");
 		final JDFAttributeMap m2 = new JDFAttributeMap("PartVersion", "DE EN");
-		assertTrue(JDFPart.overlapPartMap(m1, m2));
+		assertTrue(JDFPart.overlapPartMap(m1, m2, false));
+		assertFalse(JDFPart.overlapPartMap(m1, m2, true));
 		m2.put("Run", "r2");
-		assertTrue(JDFPart.overlapPartMap(m1, m2));
+		assertTrue(JDFPart.overlapPartMap(m1, m2, false));
+		assertFalse(JDFPart.overlapPartMap(m1, m2, true));
 	}
 
 	/**
@@ -300,23 +302,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 		final JDFMedia m2 = (JDFMedia) m.makeRootResource(null, null, true);
 		assertEquals(m, m2);
 		assertEquals(m2.getParentNode_KElement(), p);
-	}
-
-	/**
-	 * test the the generalized partition matching
-	 */
-	public void testMatchesPart()
-	{
-		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN FR", "DE EN FR"));
-		assertTrue(JDFPart.matchesPart("RunIndex", "1 ~ 4", "2 3"));
-		assertTrue(JDFPart.matchesPart("RunIndex", "1 ~ 3 5 ~ 6", "3 5"));
-		assertFalse(JDFPart.matchesPart("RunIndex", "1 ~ 3 6 ~ 8", "3 ~ 6"));
-		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE EN"));
-		assertFalse(JDFPart.matchesPart("PartVersion", "DE EN", "DEU"));
-		assertTrue(JDFPart.matchesPart("Run", "R1", "R1"));
-		assertFalse(JDFPart.matchesPart("Run", "R1 R2", "R1"));
-		assertFalse(JDFPart.matchesPart("Run", "R2", "R1"));
-		assertFalse(JDFPart.matchesPart("RunIndex", "1 ~ 4", "5"));
 	}
 
 	/**

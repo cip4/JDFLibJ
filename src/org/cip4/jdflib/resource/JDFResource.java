@@ -1290,9 +1290,10 @@ public class JDFResource extends JDFElement
 	 * 
 	  * @author Rainer Prosi, Heidelberger Druckmaschinen *
 	 */
-	private class PartitionGetter
+	public class PartitionGetter
 	{
 		private boolean hasIdentical;
+		private boolean strictPartVersion;
 
 		/**
 		 * 
@@ -1301,6 +1302,7 @@ public class JDFResource extends JDFElement
 		{
 			super();
 			hasIdentical = true;
+			strictPartVersion = false;
 		}
 
 		/**
@@ -1403,6 +1405,34 @@ public class JDFResource extends JDFElement
 					break;
 				}
 			}
+		}
+
+		/**
+		 * Gets the vector of parts (resource leaves or nodes) that match mAttribute
+		 * 
+		 * @param m the map of key-value partitions (where key - PartIDKey, value - its value)
+		 * @param partUsage also accept nodes that are are not completely specified in the partmap, e.g. if partitioned by run, RunPage and only Run is specified
+		 * 
+		 * @return VElement - the vector of matching resource leaves or nodes
+		 * 
+		 * @default getPartitionVector(m, null)
+		 */
+		VElement getPartitionLeafVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
+		{
+			final VElement v = getPartitionVector(m, partUsage);
+			if (v == null)
+			{
+				return null;
+			}
+			final VElement vNew = new VElement();
+			for (int i = 0; i < v.size(); i++)
+			{
+				final JDFResource r = (JDFResource) v.get(i);
+				final VElement vr = r.getLeaves(false);
+				vNew.addAll(vr);
+			}
+			vNew.unify();
+			return vNew;
 		}
 
 		/**
@@ -1664,7 +1694,7 @@ public class JDFResource extends JDFElement
 					{
 						final String thisMapValue = thisMap.get(strKey);
 
-						if (thisMapValue != null && JDFPart.matchesPart(strKey, thisMapValue, mMapValue))
+						if (thisMapValue != null && JDFPart.matchesPart(strKey, thisMapValue, mMapValue, strictPartVersion))
 						{
 							matchingDepth++;
 						}
@@ -1672,7 +1702,7 @@ public class JDFResource extends JDFElement
 				}
 
 				// check if we are incompatible from the start...
-				if (!JDFPart.overlapPartMap(thisMap, m))
+				if (!JDFPart.overlapPartMap(thisMap, m, strictPartVersion))
 				{
 					return vReturn;
 				}
@@ -1746,7 +1776,7 @@ public class JDFResource extends JDFElement
 					final String sTmp = resourceElement.getAttribute_KElement(matchingKey, null, null);
 					if (sTmp != null) // found a matching key;
 					{
-						if (JDFPart.matchesPart(matchingKey, sTmp, matchingValue))
+						if (JDFPart.matchesPart(matchingKey, sTmp, matchingValue, strictPartVersion))
 						{
 							hasMatchingAttribute = true;
 						}
@@ -1779,7 +1809,7 @@ public class JDFResource extends JDFElement
 
 						if (sTmp != null)// found a matching key;
 						{
-							if (JDFPart.matchesPart(strKey, sTmp, strValue))
+							if (JDFPart.matchesPart(strKey, sTmp, strValue, strictPartVersion))
 							{
 								hasMatchingAttribute = true;
 							}
@@ -2185,7 +2215,7 @@ public class JDFResource extends JDFElement
 			}
 
 			final JDFAttributeMap thisMap = getPartMap();
-			if (!JDFPart.overlapPartMap(thisMap, localPartMap))
+			if (!JDFPart.overlapPartMap(thisMap, localPartMap, strictPartVersion))
 			{
 				throw new JDFException("JDFResource.GetCreatePartition ID=" + getID() + " : non-matching partitions:\nleaf map:" + thisMap + "\ncreate map:" + localPartMap
 						+ "\nPartIDKeys:" + getPartIDKeys());
@@ -2500,6 +2530,17 @@ public class JDFResource extends JDFElement
 			// all beginning elements are equal but we have more - use these as a
 			// best guess
 			return nodeKeys;
+		}
+
+		/**
+		 * 
+		 * if set to true, partversion will only match if the string matches exactly<br/>
+		 * if set to false (the default) partversions will match if tokens overlap
+		 * @param strictPartVersion
+		 */
+		public void setStrictPartVersion(boolean strictPartVersion)
+		{
+			this.strictPartVersion = strictPartVersion;
 		}
 
 	}
@@ -4882,20 +4923,7 @@ public class JDFResource extends JDFElement
 	 */
 	public VElement getPartitionLeafVector(final JDFAttributeMap m, final EnumPartUsage partUsage)
 	{
-		final VElement v = getPartitionVector(m, partUsage);
-		if (v == null)
-		{
-			return null;
-		}
-		final VElement vNew = new VElement();
-		for (int i = 0; i < v.size(); i++)
-		{
-			final JDFResource r = (JDFResource) v.get(i);
-			final VElement vr = r.getLeaves(false);
-			vNew.addAll(vr);
-		}
-		vNew.unify();
-		return vNew;
+		return new PartitionGetter().getPartitionLeafVector(m, partUsage);
 	}
 
 	/**

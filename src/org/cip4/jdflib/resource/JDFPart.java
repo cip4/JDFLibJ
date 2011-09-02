@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -222,8 +222,23 @@ public class JDFPart extends JDFAutoPart
 	 * @param resourceValue the value of key in the resource
 	 * @param linkValue the value of key in the part element or ref
 	 * @return boolean: true if linkValue matches the value or list in resourceValue
+	 * @deprecated use 4 parameter version
 	 */
+	@Deprecated
 	public static boolean matchesPart(final String key, final String resourceValue, final String linkValue)
+	{
+		return matchesPart(key, resourceValue, linkValue, false);
+	}
+
+	/**
+	 * check whether the partition values match partversions match if either only one token is specified, and the large list contains that token or vice versa
+	 * @param key the partition key
+	 * @param resourceValue the value of key in the resource
+	 * @param linkValue the value of key in the part element or ref
+	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
+	 * @return boolean: true if linkValue matches the value or list in resourceValue
+	 */
+	public static boolean matchesPart(final String key, final String resourceValue, final String linkValue, boolean strictPartVersion)
 	{
 		if (resourceValue.equals(linkValue))
 		{
@@ -263,7 +278,7 @@ public class JDFPart extends JDFAutoPart
 		{
 			b = AtrInfo.matchesAttribute(linkValue, resourceValue, AttributeInfo.EnumAttributeType.IntegerRangeList);
 		}
-		else if (AttributeName.PARTVERSION.equals(key))
+		else if (!strictPartVersion && AttributeName.PARTVERSION.equals(key))
 		{
 			final VString resTokens = StringUtil.tokenize(resourceValue, null, false);
 			final VString linkTokens = StringUtil.tokenize(linkValue, null, false);
@@ -297,8 +312,23 @@ public class JDFPart extends JDFAutoPart
 	 * @param resourceMap the map to compare
 	 * @param linkMap the map to compare
 	 * @return boolean: true if identical keys have the same values in both maps
+	 * @deprecated use 3 parameter version
 	 */
+	@Deprecated
 	public static boolean overlapPartMap(final JDFAttributeMap resourceMap, final JDFAttributeMap linkMap)
+	{
+		return overlapPartMap(resourceMap, linkMap, false);
+	}
+
+	/**
+	 * overlapMap - identical keys must have the same values in both maps<br>
+	 * similar to JDFAttribute.overlapMap, but uses matchesPart instead of equals for the comparison
+	 * @param resourceMap the map to compare
+	 * @param linkMap the map to compare
+	 * @param strictPartVersion if true, partversion strings MUST match exactly, else token matching applies
+	 * @return boolean: true if identical keys have the same values in both maps
+	 */
+	public static boolean overlapPartMap(final JDFAttributeMap resourceMap, final JDFAttributeMap linkMap, boolean strictPartVersion)
 	{
 		if ((resourceMap == null) || (linkMap == null))
 		{
@@ -314,7 +344,7 @@ public class JDFPart extends JDFAutoPart
 			if (resVal != null)
 			{
 				final String linkVal = linkMap.get(key);
-				if (!matchesPart(key, resVal, linkVal))
+				if (!matchesPart(key, resVal, linkVal, strictPartVersion))
 				{
 					return false;
 				}

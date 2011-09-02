@@ -79,6 +79,7 @@ import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumQueueEntryDetails;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.NodeIdentifier;
 import org.cip4.jdflib.util.JDFDate;
@@ -108,6 +109,50 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 */
+	public void testMatchDiff_RemoveNonMatching() throws Exception
+	{
+		JDFDoc d = new JDFDoc(ElementName.QUEUE);
+		JDFQueue newQueue = (JDFQueue) d.getRoot();
+		for (int i = 5; i < 10; i++)
+		{
+			final JDFQueueEntry qe = newQueue.appendQueueEntry();
+			qe.setQueueEntryID("q" + i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+			qe.appendJobPhase().setStatus(JDFElement.EnumNodeStatus.InProgress);
+		}
+		System.out.println("NewQueue:\n" + newQueue.toXML());
+
+		d = new JDFDoc(ElementName.QUEUE);
+		JDFQueue oldQueue = (JDFQueue) d.getRoot();
+		for (int i = 0; i < 10; i++)
+		{
+			final JDFQueueEntry qe = oldQueue.appendQueueEntry();
+			qe.setQueueEntryID("q" + i);
+			qe.setQueueEntryStatus(EnumQueueEntryStatus.Running);
+			qe.appendJobPhase().setStatus(JDFElement.EnumNodeStatus.InProgress);
+		}
+		System.out.println("OldQueue:\n" + oldQueue.toXML());
+
+		d = new JDFDoc(ElementName.JMF);
+		JDFResponse resp = ((JDFJMF) d.getRoot()).appendResponse();
+
+		d = new JDFDoc(ElementName.JMF);
+		JDFJMF theJMF = d.getJMFRoot();
+		JDFQueueFilter filter = theJMF.appendCommand(EnumType.AbortQueueEntry).appendQueueFilter();
+		filter.setUpdateGranularity(EnumUpdateGranularity.ChangesOnly);
+		Vector<EnumQueueEntryStatus> v = new Vector<EnumQueueEntryStatus>();
+		v.add(EnumQueueEntryStatus.Aborted);
+		filter.setStatusList(v);
+		filter.setQueueEntryDetails(EnumQueueEntryDetails.JobPhase);
+		System.out.println("Filter:\n" + filter.toXML());
+
+		filter.copy(newQueue, oldQueue, resp);
+		System.out.println("Result:\n" + resp.toXML());
+		assertEquals(newQueue.getQueueEntryVector().size(), 5);
+	}
 
 	/**
 	 * @throws Exception

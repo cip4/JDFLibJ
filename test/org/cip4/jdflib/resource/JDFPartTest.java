@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -139,14 +139,21 @@ public class JDFPartTest extends JDFTestCaseBase
 	 */
 	public void testMatchesPartPartVersion()
 	{
-		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng"));
-		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra"));
-		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng"));
-		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "eng"));
-		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng"));
-		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng"));
-		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng"));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "eng", false));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng", false));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng", false));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng", false));
 
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng fra", true));
+		assertTrue(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng", "eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng eng", "eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra", "fra eng", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.PARTVERSION, "eng fra eng", "fra eng", true));
 	}
 
 	/**
@@ -154,8 +161,25 @@ public class JDFPartTest extends JDFTestCaseBase
 	 */
 	public void testMatchesPart()
 	{
-		assertTrue(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng"));
-		assertFalse(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng2"));
+		assertTrue(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng", true));
+		assertTrue(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng", false));
+		assertFalse(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng2", true));
+		assertFalse(JDFPart.matchesPart(AttributeName.SHEETNAME, "eng", "eng2", false));
+
+		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN FR", "DE EN FR", false));
+		assertTrue(JDFPart.matchesPart("RunIndex", "1 ~ 4", "2 3", false));
+		assertTrue(JDFPart.matchesPart("RunIndex", "1 ~ 3 5 ~ 6", "3 5", false));
+		assertFalse(JDFPart.matchesPart("RunIndex", "1 ~ 3 6 ~ 8", "3 ~ 6", false));
+		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE", false));
+		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE EN", false));
+		assertFalse(JDFPart.matchesPart("PartVersion", "DE EN", "DE", true));
+		assertTrue(JDFPart.matchesPart("PartVersion", "DE EN", "DE EN", true));
+		assertFalse(JDFPart.matchesPart("PartVersion", "DE EN", "DEU", false));
+		assertTrue(JDFPart.matchesPart("Run", "R1", "R1", false));
+		assertFalse(JDFPart.matchesPart("Run", "R1 R2", "R1", false));
+		assertFalse(JDFPart.matchesPart("Run", "R2", "R1", false));
+		assertFalse(JDFPart.matchesPart("RunIndex", "1 ~ 4", "5", false));
+
 	}
 	// //////////////////////////////////////////////////////////////
 }

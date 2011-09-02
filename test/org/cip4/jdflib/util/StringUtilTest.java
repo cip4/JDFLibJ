@@ -675,6 +675,9 @@ public class StringUtilTest extends JDFTestCaseBase
 		s = "-123.45";
 		assertEquals(StringUtil.parseDouble(s, 0), -123.450, 0.);
 		assertTrue(StringUtil.isNumber(s));
+		s = ".45";
+		assertEquals("missing leading zero ok", StringUtil.parseDouble(s, 0), 0.450, 0.);
+		assertTrue(StringUtil.isNumber(s));
 		s = "-123.45a";
 		assertEquals(StringUtil.parseDouble(s, 0.), 0., 0.);
 		assertFalse(StringUtil.isNumber(s));

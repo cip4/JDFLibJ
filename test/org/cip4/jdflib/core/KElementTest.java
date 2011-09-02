@@ -1740,6 +1740,15 @@ public class KElementTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testGetReal()
+	{
+		KElement e = new XMLParser().parseString("<foo bar=\".42\"/>").getRoot();
+		assertEquals(e.getRealAttribute("bar", null, 0.0), 0.42);
+	}
+
+	/**
+	 * 
+	 */
 	public void testGetXPathAttribute()
 	{
 		JDFAudit.setStaticAuthor(JDFAudit.software());
