@@ -104,4 +104,17 @@ public class NumberFormatterTest extends JDFTestCaseBase
 		assertEquals("3.2", numberFormatter.formatDouble(3.2, 2));
 		assertEquals("3.2", numberFormatter.formatDouble(3.199, 2));
 	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testFormatInt()
+	{
+		NumberFormatter numberFormatter = new NumberFormatter();
+		numberFormatter.setZapp0(false);
+		assertEquals("3", numberFormatter.formatInt(3, 0));
+		assertEquals("3", numberFormatter.formatInt(3, 1));
+		assertEquals("03", numberFormatter.formatInt(3, 2));
+	}
 }

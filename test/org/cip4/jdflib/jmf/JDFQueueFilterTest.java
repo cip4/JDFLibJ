@@ -138,6 +138,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 
 		d = new JDFDoc(ElementName.JMF);
 		JDFResponse resp = ((JDFJMF) d.getRoot()).appendResponse();
+		resp.setType(EnumType.AbortQueueEntry);
 
 		d = new JDFDoc(ElementName.JMF);
 		JDFJMF theJMF = d.getJMFRoot();
@@ -152,6 +153,7 @@ public class JDFQueueFilterTest extends JDFTestCaseBase
 		filter.copy(newQueue, oldQueue, resp);
 		System.out.println("Result:\n" + resp.toXML());
 		assertEquals(newQueue.getQueueEntryVector().size(), 5);
+		assertNotNull(resp.getQueue(0));
 	}
 
 	/**

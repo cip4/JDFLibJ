@@ -102,6 +102,29 @@ public class NumberFormatter
 	 * returns a formatted double. Truncates to 8exactly precision digits after the "." <br>
 	 * If precision=0, the . is stripped
 	 * 
+	 * @param i the integer to format
+	 * @param length maximum precision, depending on value of zapp0, trailing 0s are discarded or kept
+	 * @return the formatted string that represents d TBD handle exp format
+	 */
+	public String formatInt(final int i, int length)
+	{
+		final Integer[] ad = { new Integer(i) };
+		if (length > 0)
+		{
+			String s = StringUtil.sprintf("%0" + length + "i", ad);
+			return s;
+		}
+		else
+		{
+			return StringUtil.sprintf("%i", ad);
+		}
+
+	}
+
+	/**
+	 * returns a formatted double. Truncates to 8exactly precision digits after the "." <br>
+	 * If precision=0, the . is stripped
+	 * 
 	 * @param d the double to format
 	 * @param precision maximum precision, depending on value of zapp0, trailing 0s are discarded or kept
 	 * @return the formatted string that represents d TBD handle exp format
@@ -117,7 +140,7 @@ public class NumberFormatter
 		}
 		else
 		{
-			return StringUtil.sprintf("%" + precision + "i", ad);
+			return StringUtil.sprintf("%i", ad);
 		}
 
 	}

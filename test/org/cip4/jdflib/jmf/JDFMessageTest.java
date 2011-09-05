@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -89,6 +89,16 @@ import org.cip4.jdflib.util.JDFDate;
 public class JDFMessageTest extends TestCase
 {
 	private JDFJMF jmf;
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testEnumFamily()
+	{
+		assertEquals(EnumFamily.getEnumMap().get("Signal"), EnumFamily.Signal);
+		assertNotNull(EnumFamily.getEnumList().get(2));
+	}
 
 	/**
 	 * 

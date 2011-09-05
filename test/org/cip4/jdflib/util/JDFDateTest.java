@@ -175,6 +175,19 @@ public class JDFDateTest extends TestCase
 	}
 
 	/**
+	 * Method testdateOnly
+	 * @throws Exception
+	 */
+	public void testMissing0() throws Exception
+	{
+		JDFDate date = new JDFDate();
+		String strDate = date.getDateTimeISO();
+		date = new JDFDate("2006-7-6");
+		strDate = date.getDateTimeISO();
+		assertTrue(strDate.startsWith("2006-07-06T"));
+	}
+
+	/**
 	 * Method testYearMonth
 	 * @throws Exception
 	 */

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -238,7 +238,7 @@ public class JDFMessage extends JDFAutoMessage
 		/**
 		 * @return
 		 */
-		public static Map getEnumMap()
+		public static Map<String, EnumFamily> getEnumMap()
 		{
 			return getEnumMap(EnumFamily.class);
 		}
@@ -246,7 +246,7 @@ public class JDFMessage extends JDFAutoMessage
 		/**
 		 * @return
 		 */
-		public static List getEnumList()
+		public static List<EnumFamily> getEnumList()
 		{
 			return getEnumList(EnumFamily.class);
 		}
@@ -322,7 +322,7 @@ public class JDFMessage extends JDFAutoMessage
 		/**
 		 * @return
 		 */
-		public static Map getEnumMap()
+		public static Map<String, EnumType> getEnumMap()
 		{
 			return getEnumMap(EnumType.class);
 		}
@@ -330,7 +330,7 @@ public class JDFMessage extends JDFAutoMessage
 		/**
 		 * @return
 		 */
-		public static List getEnumList()
+		public static List<EnumType> getEnumList()
 		{
 			return getEnumList(EnumType.class);
 		}
@@ -338,7 +338,7 @@ public class JDFMessage extends JDFAutoMessage
 		/**
 		 * @return
 		 */
-		public static Iterator iterator()
+		public static Iterator<EnumType> iterator()
 		{
 			return iterator(EnumType.class);
 		}
@@ -723,7 +723,7 @@ public class JDFMessage extends JDFAutoMessage
 		// we assume that anyone calling the typesafe methods knows what he is
 		// doing
 		final String sTyp = getType();
-		if (KElement.xmlnsPrefix(sTyp) != null)
+		if (KElement.xmlnsPrefix(sTyp) != null || !isInJDFNameSpaceStatic(this) || StringUtil.getNonEmpty(sTyp) == null)
 		{
 			return true;
 		}
@@ -1369,7 +1369,7 @@ public class JDFMessage extends JDFAutoMessage
 	{
 		if (strictValidation && !isValidMessageElement(nodeName, iSkip))
 		{
-			throw new JDFException("getValidElement: illegal element :" + nodeName);
+			throw new JDFException("getValidElement: illegal element :" + nodeName + " Family=" + getLocalName() + " Type=" + getType() + " ID=" + getID());
 		}
 
 		return getElement_JDFElement(nodeName, nameSpaceURI, iSkip);
@@ -3238,7 +3238,7 @@ public class JDFMessage extends JDFAutoMessage
 	/**
 	 *  
 	 * 
-	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core .KElement.EnumValidationLevel, boolean, int)
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidElements(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
 	public VString getInvalidElements(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
@@ -3356,7 +3356,7 @@ public class JDFMessage extends JDFAutoMessage
 
 	/**
 	 *  
-	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib. core.KElement.EnumValidationLevel, boolean, int)
+	 * @see org.cip4.jdflib.core.JDFElement#getInvalidAttributes(org.cip4.jdflib.core.JDFElement.EnumValidationLevel, boolean, int)
 	 */
 	@Override
 	public VString getInvalidAttributes(final EnumValidationLevel level, final boolean bIgnorePrivate, final int nMax)
@@ -3434,7 +3434,7 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 * @see org.cip4.jdflib.core.KElement#getDeprecatedElements(int)
+	 * @see org.cip4.jdflib.core.JDFElement#getDeprecatedElements(int)
 	 * @param nMax
 	 * @return
 	 */
@@ -3451,7 +3451,7 @@ public class JDFMessage extends JDFAutoMessage
 	}
 
 	/**
-	 * @see org.cip4.jdflib.core.KElement#getLastVersion(java.lang.String, boolean)
+	 * @see org.cip4.jdflib.core.JDFElement#getLastVersion(java.lang.String, boolean)
 	 * @param eaName
 	 * @param bElement
 	 * @return

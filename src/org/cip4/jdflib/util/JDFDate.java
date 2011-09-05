@@ -93,6 +93,7 @@ import java.util.zip.DataFormatException;
 
 import org.apache.commons.lang.time.FastDateFormat;
 import org.cip4.jdflib.core.JDFConstants;
+import org.cip4.jdflib.core.VString;
 
 /**
  * class to manipulate date and time according to ISO 8601<br/>
@@ -415,13 +416,85 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 			handleTimeZone(decimalLength);
 
 			// interpret the string - low level enhances performance quite a bit...
-			final byte[] b = strDateTime.getBytes();
+			byte[] b = strDateTime.getBytes();
 			if (b[4] != '-' || b[7] != '-' || b[10] != 'T' || b[13] != ':' || b[16] != ':' || strDateTime.length() - decimalLength != 25) // 6 digit tz
 			{
-				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+				cleanDateTime();
+				b = strDateTime.getBytes();
 			}
 
 			lTimeInMillis = fastCalendar.getTimeInMillis(b, decimalLength, getTimeZoneOffsetInMillis());
+		}
+
+		private void cleanDateTime() throws DataFormatException
+		{
+			cleanDate();
+			cleanTime();
+		}
+
+		/**
+		 * TODO Please insert comment!
+		 * @throws DataFormatException 
+		 */
+		private void cleanDate() throws DataFormatException
+		{
+			String date = StringUtil.token(strDateTime, 0, "T");
+			VString dates = StringUtil.tokenize(date, "-", false);
+			if (dates != null && dates.size() >= 3)
+			{
+				int year = StringUtil.parseInt(dates.get(0), 0);
+				if (year <= 0 || year > 9999)
+					throw new DataFormatException("JDFDate.init: invalid date Year " + dates.get(0));
+				int month = StringUtil.parseInt(dates.get(1), 0);
+				if (month <= 0 || month > 12)
+					throw new DataFormatException("JDFDate.init: invalid date Month " + dates.get(1));
+
+				int day = StringUtil.parseInt(dates.get(2), 0);
+				if (day <= 0 || day > 31)
+					throw new DataFormatException("JDFDate.init: invalid date Day " + dates.get(2));
+				NumberFormatter nf = new NumberFormatter();
+				String newDate = nf.formatInt(year, 4) + "-" + nf.formatInt(month, 2) + "-" + nf.formatInt(day, 2);
+				strDateTime = StringUtil.replaceToken(strDateTime, 0, "T", newDate);
+			}
+			else
+			{
+				throw new DataFormatException("JDFDate.init: invalid date String " + strDateTime);
+			}
+		}
+
+		/**
+		 * TODO Please insert comment!
+		 * @throws DataFormatException 
+		 */
+		private void cleanTime() throws DataFormatException
+		{
+			String time = StringUtil.token(strDateTime, 1, "T");
+			String timeZone = StringUtil.token(time, 1, "+");
+			if (timeZone == null)
+				throw new DataFormatException("bad time zone ");
+			time = StringUtil.token(time, 0, "+");
+			VString times = StringUtil.tokenize(time, ":", false);
+			if (times != null && times.size() >= 3)
+			{
+				int hours = StringUtil.parseInt(times.get(0), -1);
+				if (hours < 0 || hours > 23)
+					throw new DataFormatException("JDFDate.init: invalid time hours " + times.get(0));
+				int minutes = StringUtil.parseInt(times.get(1), -1);
+				if (minutes < 0 || minutes >= 60)
+					throw new DataFormatException("JDFDate.init: invalid time minutes " + times.get(1));
+
+				int seconds = StringUtil.parseInt(times.get(2), -1);
+				if (seconds < 0 || seconds >= 60)
+					throw new DataFormatException("JDFDate.init: invalid time seconds " + times.get(2));
+				NumberFormatter nf = new NumberFormatter();
+
+				String newDate = nf.formatInt(hours, 2) + "-" + nf.formatInt(minutes, 2) + "-" + nf.formatInt(seconds, 2) + "+" + timeZone;
+				strDateTime = StringUtil.replaceToken(strDateTime, 1, "T", newDate);
+			}
+			else
+			{
+				throw new DataFormatException("JDFDate.init: invalid time String " + strDateTime);
+			}
 		}
 
 		private void handleTimeZone(int decimalLength)
