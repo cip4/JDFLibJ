@@ -880,7 +880,10 @@ public class FileUtil
 	public static BufferedInputStream getBufferedInputStream(File file)
 	{
 		if (file == null)
+		{
+			LogFactory.getLog(FileUtil.class).warn("extracting stream from null file");
 			return null;
+		}
 		FileInputStream fis;
 		try
 		{
@@ -888,6 +891,7 @@ public class FileUtil
 		}
 		catch (FileNotFoundException x)
 		{
+			LogFactory.getLog(FileUtil.class).warn("extracting stream from non-existing file: " + file.getAbsolutePath(), x);
 			return null;
 		}
 		BufferedInputStream bis = new BufferedInputStream(fis);

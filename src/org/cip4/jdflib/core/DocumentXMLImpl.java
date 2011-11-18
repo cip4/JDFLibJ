@@ -195,11 +195,6 @@ public class DocumentXMLImpl extends DocumentImpl
 		clon.firstChild = clon.docElement;
 		clon.nsMap.clear();
 		clon.setNSMap(this);
-
-		if (userData != null)
-			userData.clear(); // otherwise, clon is indefinitely retained in userdata of the original document and we have a memory leak problem....
-		if (clon.userData != null)
-			clon.userData.clear();
 		return clon;
 	}
 

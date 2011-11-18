@@ -139,7 +139,7 @@ public class JDFDoc extends XMLDoc
 	{
 		super(document);
 		// we have to reparse type safe
-		Document memberDoc = (document).getMemberDocument();
+		Document memberDoc = document == null ? null : document.getMemberDocument();
 		if ((memberDoc instanceof DocumentXMLImpl) && !(memberDoc instanceof DocumentJDFImpl))
 		{
 			reparse(memberDoc);
@@ -151,13 +151,16 @@ public class JDFDoc extends XMLDoc
 		JDFDoc doc = createRoot(document);
 		doc.setInitOnCreate(false);
 		KElement newRoot = doc.getRoot();
-		newRoot.copyInto((KElement) document.getDocumentElement(), false);
+		if (newRoot != null)
+			newRoot.copyInto((KElement) document.getDocumentElement(), false);
 		m_doc = doc.m_doc;
 	}
 
+	@Override
 	protected JDFDoc createRoot(final Document document)
 	{
-		return new JDFDoc(document.getDocumentElement().getNodeName());
+		Element documentElement = document.getDocumentElement();
+		return documentElement == null ? new JDFDoc() : new JDFDoc(documentElement.getNodeName());
 	}
 
 	/**
@@ -605,21 +608,6 @@ public class JDFDoc extends XMLDoc
 	protected boolean hasXMLDocUserData()
 	{
 		return ((DocumentJDFImpl) m_doc).getMyUserData() != null;
-	}
-
-	/**
-	 * delete the XMLDocUserData structure
-	 * 
-	 */
-	protected void deleteUserData()
-	{
-		final XMLDocUserData userData = (XMLDocUserData) m_doc.getUserData();
-		if (userData != null)
-		{
-			// delete (userData); hopefully the garbage collector will do his
-			// stuff
-			m_doc.setUserData(null);
-		}
 	}
 
 	/**

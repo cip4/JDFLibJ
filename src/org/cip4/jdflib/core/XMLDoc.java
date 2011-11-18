@@ -274,17 +274,12 @@ public class XMLDoc
 	/**
 	 * constructor
 	 * 
-	 * @param document
+	 * @param other
 	 */
 	public XMLDoc(final XMLDoc other)
 	{
 		log = LogFactory.getLog(getClass());
-		m_doc = other.m_doc;
-		if (m_doc == null)
-		{
-			final String s = other.getClass().toString();
-			throw new JDFException("Quite Snafu: null m_doc for class=" + s);
-		}
+		m_doc = other == null ? null : other.m_doc;
 	}
 
 	/**

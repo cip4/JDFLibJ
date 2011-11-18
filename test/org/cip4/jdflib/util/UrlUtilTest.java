@@ -199,6 +199,11 @@ public class UrlUtilTest extends JDFTestCaseBase
 	 */
 	public void testWriteToURL()
 	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
 		ProxyUtil.setProxy("proxy", 8080, null, null);
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}

@@ -124,6 +124,7 @@ public class JDFSpawn
 {
 
 	private JDFNode node;
+	private JDFNode rootOut;
 	private JDFNode informativeRoot;
 	private final Map<JDFNode, HashSet<String>> mapAllRefs;
 	private final Map<JDFResource, VString> mapRefs;
@@ -252,7 +253,7 @@ public class JDFSpawn
 
 		// create a new jdf document that contains the node to be spawned
 		final JDFDoc docOut = new JDFDoc(ElementName.JDF);
-		final JDFNode rootOut = (JDFNode) docOut.getRoot();
+		rootOut = (JDFNode) docOut.getRoot();
 
 		// prepare the nodeinfos in main prior to spawning
 		prepareNodeInfos();
@@ -317,13 +318,13 @@ public class JDFSpawn
 		}
 
 		// setup the ancestor nodes
-		setSpawnParent(rootOut, spawnParentNode);
+		setSpawnParent(spawnParentNode);
 
-		final JDFSpawned spawnAudit = createSpawnAudit(rootOut, spawnID, spawnParentNode);
+		final JDFSpawned spawnAudit = createSpawnAudit(spawnID, spawnParentNode);
 
 		// find resources that must be copied
-		addSpawnedResources(rootOut, spawnAudit);
-		finalizeSpawn(rootOut, spawnAudit);
+		addSpawnedResources(spawnAudit);
+		finalizeSpawn(spawnAudit);
 
 		// return the spawned node
 		return rootOut;
@@ -467,9 +468,9 @@ public class JDFSpawn
 
 	// ///////////////////////////////////////////////////////////////////////
 
-	private VElement prepareSpawnLinks(final JDFNode rootOut)
+	private VElement prepareSpawnLinks(final JDFNode node)
 	{
-		final VElement vn = rootOut.getvJDFNode(null, null, false);
+		final VElement vn = node.getvJDFNode(null, null, false);
 		final int size = vn.size();
 		final VElement outLinks = new VElement();
 
@@ -484,11 +485,10 @@ public class JDFSpawn
 	}
 
 	/**
-	 * @param rootOut 
 	 * @param parent 
 	 * 
 	 */
-	private void setSpawnParent(final JDFNode rootOut, final JDFNode parent)
+	private void setSpawnParent(final JDFNode parent)
 	{
 		final VString vs = parent.getAncestorIDs();
 		JDFAncestorPool ancestorPool = parent.getJDFRoot().getAncestorPool();
@@ -539,7 +539,7 @@ public class JDFSpawn
 
 	// ///////////////////////////////////////////////////////////////////////
 
-	private JDFSpawned createSpawnAudit(final JDFNode rootOut, final String spawnID, final JDFNode spawnParentNode)
+	private JDFSpawned createSpawnAudit(final String spawnID, final JDFNode spawnParentNode)
 	{
 		// throw in the audits
 		final JDFAuditPool p = spawnParentNode.getCreateAuditPool();
@@ -565,17 +565,15 @@ public class JDFSpawn
 	 * add any resources that live in ancestor nodes to this node
 	 * 
 	 * @param spawnAudit :
-	 * @param rootOut :
 	 * @return int number of resources added to the spawned node
 	 */
-	private int addSpawnedResources(final JDFNode rootOut, final JDFSpawned spawnAudit)
+	private int addSpawnedResources(final JDFSpawned spawnAudit)
 	{
 		final VString vRWResources = new VString(vRWResources_in);
 		int nSpawned = 0;
 		final JDFResourcePool rPool = rootOut.getCreateResourcePool();
 
-		// must copy the ap to the nood to have a decent hook on ap referenced
-		// resources
+		// must copy the ap to the nood to have a decent hook on ap referenced resources
 		JDFAncestorPool ap = rootOut.getAncestorPool();
 		if (ap != null)
 		{
@@ -591,8 +589,7 @@ public class JDFSpawn
 		final HashSet<JDFElement> vRootLinks = node.getAllRefs(null, false);
 
 		// create a HashSet with all IDs of the newly created Node
-		final HashSet<String> allIDsCopied = getAllIdsCopied(rootOut);
-
+		final HashSet<String> allIDsCopied = getAllIdsCopied();
 		final String spawnID = spawnAudit.getNewSpawnID();
 
 		// first check only read only resources, since there may be a collision
@@ -648,11 +645,9 @@ public class JDFSpawn
 					continue;
 				}
 				// copy any missing linked resources, just in case
-				// the root is in the original jdf and can be used as a hook to
-				// the original document
+				// the root is in the original jdf and can be used as a hook to  the original document
 				// get a list of all resources referenced by this link
-				// always do a copyresource in case some dangling rRefs are
-				// waiting
+				// always do a copyresource in case some dangling rRefs are waiting
 				copySpawnedResource(rPool, rRoot, copyStatus, spawnID, vRWResources, vvRW, vvRO, allIDsCopied);
 				nSpawned += vvRO.size() + vvRW.size();
 
@@ -664,14 +659,12 @@ public class JDFSpawn
 					final JDFResourceLink liRootLink = (JDFResourceLink) liRoot;
 					final VJDFAttributeMap vLinkMap = liRootLink.getPartMapVector();
 					// make sure that spawned resources are sufficiently
-					// partitioned if spawning rw so that no merge conflicts
-					// arise
+					// partitioned if spawning rw so that no merge conflicts arise
 					// create a temporary dummy copy of the link so that we have
 					// a guaranteed copy that behaves the same as the original
 					final JDFResourceLink dummy = (JDFResourceLink) rootOut.getCreateResourceLinkPool().copyElement(liRoot, null);
-					fixResLinks(rootOut, bResRW, liRootLink, dummy);
-					// reduce partitions in main so that the links remain
-					// consistent
+					fixResLinks(bResRW, liRootLink, dummy);
+					// reduce partitions in main so that the links remain consistent
 					liRootLink.setPartMapVector(vSpawnParts);
 					dummy.setPartMapVector(vSpawnParts);
 
@@ -726,7 +719,7 @@ public class JDFSpawn
 						}
 					}
 				}
-				if (!bRealyRW && EnumSpawnStatus.SpawnedRW.equals(copyStatus))
+				if (!bRealyRW && EnumSpawnStatus.SpawnedRO.equals(copyStatus))
 				{
 					bResRW = false;
 					if (!vvRO.contains(rRoot.getID()) && !vvRW.contains(rRoot.getID()))
@@ -738,39 +731,7 @@ public class JDFSpawn
 				{
 					vvRW.add(rRoot.getID());
 				}
-				// }
-				VString rRefsRW = spawnAudit.getrRefsRWCopied();
-				VString rRefsRO = spawnAudit.getrRefsROCopied();
-				Iterator<String> iterRefs = vvRW.iterator();
-				while (iterRefs.hasNext())
-				{
-					final String s = iterRefs.next();
-					rRefsRW.add(s);
-					final int ind = rRefsRO.index(s);
-					if (ind >= 0)
-					{
-						rRefsRO.remove(ind);
-					}
-				}
-				iterRefs = vvRO.iterator();
-				while (iterRefs.hasNext())
-				{
-					final String s = iterRefs.next();
-					rRefsRO.add(s);
-				}
-				rRefsRO.unify();
-				rRefsRW.unify();
-				if (rRefsRO.isEmpty())
-				{
-					rRefsRO = null;
-				}
-				if (rRefsRW.isEmpty())
-				{
-					rRefsRW = null;
-				}
-
-				spawnAudit.setrRefsROCopied(rRefsRO);
-				spawnAudit.setrRefsRWCopied(rRefsRW);
+				calcAuditSpawnIDs(spawnAudit, vvRO, vvRW);
 			}
 		}
 
@@ -783,11 +744,44 @@ public class JDFSpawn
 		return nSpawned;
 	}
 
+	protected void calcAuditSpawnIDs(final JDFSpawned spawnAudit, final HashSet<String> vvRO, final HashSet<String> vvRW)
+	{
+		{
+			VString rRefsRW = spawnAudit.getrRefsRWCopied();
+			VString rRefsRO = spawnAudit.getrRefsROCopied();
+			for (String s : vvRW)
+			{
+				rRefsRW.add(s);
+				final int ind = rRefsRO.index(s);
+				if (ind >= 0)
+				{
+					rRefsRO.remove(ind);
+				}
+			}
+			for (String s : vvRO)
+			{
+				rRefsRO.add(s);
+			}
+			rRefsRO.unify();
+			rRefsRW.unify();
+			if (rRefsRO.isEmpty())
+			{
+				rRefsRO = null;
+			}
+			if (rRefsRW.isEmpty())
+			{
+				rRefsRW = null;
+			}
+
+			spawnAudit.setrRefsROCopied(rRefsRO);
+			spawnAudit.setrRefsRWCopied(rRefsRW);
+		}
+	}
+
 	/**
-	 * @param rootOut
 	 * @return
 	 */
-	private HashSet<String> getAllIdsCopied(final JDFNode rootOut)
+	private HashSet<String> getAllIdsCopied()
 	{
 		// the node will be reused, whereas rootout is a new copy every time
 		HashSet<String> allIDsCopied = mapAllRefs.get(node);
@@ -863,12 +857,11 @@ public class JDFSpawn
 	/**
 	 * fix linked resources so that all partitions in vSpawnParts actually exist
 	 * 
-	 * @param rootOut
 	 * @param bResRW
 	 * @param liRootLink
 	 * @param dummy
 	 */
-	private void fixResLinks(final JDFNode rootOut, final boolean bResRW, final JDFResourceLink liRootLink, final JDFResourceLink dummy)
+	private void fixResLinks(final boolean bResRW, final JDFResourceLink liRootLink, final JDFResourceLink dummy)
 	{
 		if (bFixResources && vSpawnParts != null && vSpawnParts.size() != 0 && bResRW)
 		{
@@ -908,14 +901,13 @@ public class JDFSpawn
 
 	// ///////////////////////////////////////////////////////////////////////
 
-	private void finalizeSpawn(final JDFNode rootOut, final JDFSpawned spawnAudit)
+	private void finalizeSpawn(final JDFSpawned spawnAudit)
 	{
-		final VElement outLinks = prepareSpawnLinks(rootOut);
-		final VElement mainLinks = prepareSpawnLinks(node);
-
 		// add parts to resource links if necessary
 		if (vSpawnParts != null && !vSpawnParts.isEmpty())
 		{
+			final VElement outLinks = prepareSpawnLinks(rootOut);
+			final VElement mainLinks = prepareSpawnLinks(node);
 			finalizePartitions(spawnAudit, outLinks, mainLinks);
 		}
 		finalizeStatusAndAudits(spawnAudit);
@@ -936,37 +928,30 @@ public class JDFSpawn
 			JDFResourceLink link = (JDFResourceLink) outLinks.elementAt(i);
 			final JDFResource r = link.getLinkRoot();
 
-			// 2005-03-11 KM if the link is null continue, the JDF ist
-			// invalid but in the best case only an audit is missing and the JDF is still operable
+			// 2005-03-11 KM if the link is null continue, the JDF is invalid but in the best case only an audit is missing and the JDF is still operable
 			// in the worst caste the spawned JDF is not executable at all
 			if (r != null)
 			{
 				final VJDFAttributeMap vPartMap = getSpawnLinkMap(vSpawnParts, r);
-				if (!vPartMap.isEmpty())
-				{
-					final VJDFAttributeMap vNewMap = getSpawnedLinkPartMap(link, vPartMap);
-					reduceLinkPartition(link, vNewMap);
-					updateSpawnIDs(spawnID, link);
-					final String id = link.getrRef();
-					if (id != null)
-					{
-						link = (JDFResourceLink) mainLinks.elementAt(i);
+				final VJDFAttributeMap vNewMap = getSpawnedLinkPartMap(link, vPartMap);
+				reduceLinkPartition(link, vNewMap);
+				updateSpawnIDs(spawnID, link);
+				final String id = link.getrRef();
+				link = (JDFResourceLink) mainLinks.elementAt(i);
 
+				if (id.equals(link.getrRef()))
+				{
+					updateSpawnIDsInMain(spawnID, link, vPartMap);
+				}
+				else
+				// the sequence of links changed - must search, hopefully we never get here
+				{
+					for (int ii = 0; ii < mainLinkLen; ii++)
+					{
+						link = (JDFResourceLink) mainLinks.elementAt(ii);
 						if (id.equals(link.getrRef()))
 						{
 							updateSpawnIDsInMain(spawnID, link, vPartMap);
-						}
-						else
-						// the sequence of links changed - must search, hopefully we never get here
-						{
-							for (int ii = 0; ii < mainLinkLen; ii++)
-							{
-								link = (JDFResourceLink) mainLinks.elementAt(ii);
-								if (id.equals(link.getrRef()))
-								{
-									updateSpawnIDsInMain(spawnID, link, vPartMap);
-								}
-							}
 						}
 					}
 				}
@@ -1081,18 +1066,16 @@ public class JDFSpawn
 		}
 		else
 		{
-			for (int l = 0; l < vLinkMap.size(); l++)
+			for (JDFAttributeMap linkMap : vLinkMap)
 			{
-				JDFAttributeMap linkMap = vLinkMap.elementAt(l);
 				if (setSpawnParts.contains(linkMap))
 				{
 					vNewMap.add(linkMap);
 				}
 				else
 				{
-					for (int k = 0; k < vPartMap.size(); k++)
+					for (JDFAttributeMap m : vPartMap)
 					{
-						JDFAttributeMap m = new JDFAttributeMap(vPartMap.elementAt(k));
 						m = m.orMap(linkMap);
 
 						if (!m.isEmpty())
@@ -1196,7 +1179,7 @@ public class JDFSpawn
 		final VJDFAttributeMap vPartMap = new VJDFAttributeMap(vLocalSpawnParts);
 
 		// 160802 RP leave implied resource link parts if PartUsage=implicit
-		if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit))
+		if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit) || true)
 		{
 			final VString vPartKeys = r.getPartIDKeys();
 			final Vector<EnumPartIDKey> vImplicitPartitions = r.getImplicitPartitions();
@@ -1401,6 +1384,11 @@ public class JDFSpawn
 		return ks <= 0;
 	}
 
+	/**
+	 * 
+	 *  
+	 * @param r
+	 */
 	private void reducePartitions(final JDFResource r)
 	{
 		if (r == null || vSpawnParts == null || vSpawnParts.size() == 0)
@@ -1500,6 +1488,7 @@ public class JDFSpawn
 	{
 		if (r == null)
 		{
+			log.error("attempting to copy null resource - bailing out");
 			return;
 		}
 

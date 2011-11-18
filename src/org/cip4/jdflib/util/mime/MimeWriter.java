@@ -93,6 +93,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
@@ -122,6 +124,8 @@ import org.cip4.jdflib.util.UrlUtil;
  */
 public class MimeWriter extends MimeHelper
 {
+	private final Log log;
+
 	/**
 	 * used for some after the fact cleanup - beware as it may hurt performance
 	 * @author prosirai
@@ -223,6 +227,7 @@ public class MimeWriter extends MimeHelper
 	public MimeWriter()
 	{
 		super();
+		log = LogFactory.getLog(getClass());
 		createMimePackage();
 	}
 
@@ -233,6 +238,7 @@ public class MimeWriter extends MimeHelper
 	public MimeWriter(final Multipart mp)
 	{
 		super();
+		log = LogFactory.getLog(getClass());
 		theMultipart = mp;
 	}
 
@@ -251,6 +257,7 @@ public class MimeWriter extends MimeHelper
 		}
 		catch (final MessagingException x)
 		{
+			log.error("cannot create mime package", x);
 			return;
 		}
 		theMultipart = multipart;
@@ -281,11 +288,11 @@ public class MimeWriter extends MimeHelper
 		}
 		catch (final MessagingException e)
 		{
-			// nop
+			log.error("cannot update mime package", e);
 		}
 		catch (IOException x)
 		{
-			// nop
+			log.error("cannot update mime package", x);
 		}
 		return new BodyPartHelper(bp);
 	}
@@ -324,11 +331,11 @@ public class MimeWriter extends MimeHelper
 		}
 		catch (final MessagingException x)
 		{
-			// skip this one
+			log.error("cannot update mime package", x);
 		}
 		catch (final IOException x)
 		{
-			// skip this one
+			log.error("cannot update mime package", x);
 		}
 
 		return messageBodyPart;
@@ -350,14 +357,17 @@ public class MimeWriter extends MimeHelper
 		}
 		catch (final FileNotFoundException e)
 		{
+			log.error("cannot write mime package", e);
 			return null;
 		}
 		catch (final IOException e)
 		{
+			log.error("cannot write mime package", e);
 			return null;
 		}
 		catch (final MessagingException e)
 		{
+			log.error("cannot write mime package", e);
 			return null;
 		}
 	}
@@ -379,12 +389,14 @@ public class MimeWriter extends MimeHelper
 
 		if (!exists)
 		{
-			throw new FileNotFoundException();
+			log.error("cannot create directory: " + directory);
+			throw new FileNotFoundException("cannot create directory: " + directory);
 		}
 
 		if (!directory.canWrite())
 		{
-			throw new IOException();
+			log.error("cannot write to directory: " + directory);
+			throw new IOException("cannot write to directory: " + directory);
 		}
 
 		final int parts = getCount();
@@ -481,6 +493,7 @@ public class MimeWriter extends MimeHelper
 			catch (final ConnectException x)
 			{
 				httpURLconnection = null;
+				log.error("cannot write to URL; " + strUrl, x);
 			}
 		}
 		p = httpURLconnection == null ? null : new UrlPart(httpURLconnection);
@@ -572,6 +585,7 @@ public class MimeWriter extends MimeHelper
 
 		if (docJDF == null)
 		{
+			log.error("cannot extend null JDF document");
 			return 0;
 		}
 
@@ -654,7 +668,7 @@ public class MimeWriter extends MimeHelper
 		}
 		catch (final MessagingException e)
 		{
-			// nop
+			log.error("cannot add bodypart", e);
 		}
 	}
 

@@ -17,53 +17,58 @@ import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+ * @author rainer prosi
+ * @date Oct 18, 2011
+ */
 public class JDFDeviceNSpace extends JDFAutoDeviceNSpace
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFDeviceNSpace
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
-	public JDFDeviceNSpace(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFDeviceNSpace(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeviceNSpace
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
-	public JDFDeviceNSpace(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFDeviceNSpace(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFDeviceNSpace
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
-	 * @throws DOMException
 	 */
-	public JDFDeviceNSpace(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFDeviceNSpace(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
+	/**
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoDeviceNSpace#toString()
+	 */
 	@Override
 	public String toString()
 	{
@@ -78,8 +83,7 @@ public class JDFDeviceNSpace extends JDFAutoDeviceNSpace
 	public VString getSeparations()
 	{
 		VString vName = new VString();
-		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null,
-				null, false, 0, false);
+		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
 		int nSep = v.size();
 		for (int i = 0; i < nSep; i++)
 		{

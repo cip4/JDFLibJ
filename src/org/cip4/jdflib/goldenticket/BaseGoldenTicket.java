@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -506,59 +506,7 @@ public class BaseGoldenTicket
 		theNode.setPartStatus(vMap, EnumNodeStatus.Completed, null);
 		runphases(good, waste, bOutAvail, bFirst);
 
-		// VElement vResLinks=theExpandedNode.getResourceLinks(null);
-		// int siz= vResLinks!=null ? vResLinks.size() : 0;
-		// for(int i=0;i<siz;i++)
-		// {
-		// JDFResourceLink rl=(JDFResourceLink)vResLinks.elementAt(i);
-		//
-		// if(bOutAvail )
-		// {
-		// VElement vRes=rl.getTargetVector(-1);
-		//
-		// for(int j=0;j<vRes.size();j++)
-		// {
-		// VElement leaves=((JDFResource)vRes.elementAt(j)).getLeaves(false);
-		// for(int k=0;k<leaves.size();k++)
-		// {
-		// JDFResource r=(JDFResource) leaves.elementAt(k);
-		// JDFAttributeMap map=r.getPartMap();
-		// if(vMap==null || vMap.overlapsMap(map))
-		// {
-		// r.setResStatus(EnumResStatus.Available, true);
-		// EnumResourceClass rc=r.getResourceClass();
-		// if(((EnumResourceClass.Handling.equals(rc)||EnumResourceClass.
-		// Consumable.equals(rc)||EnumResourceClass.Quantity.equals(rc)) &&
-		// EnumUsage.Output.equals(rl.getUsage()))
-		// ||(EnumResourceClass.Consumable.equals(rc)
-		// &&EnumUsage.Input.equals(rl.getUsage())))
-		// {
-		// if(good>=0)
-		// {
-		// map.put("Condition", "Good");
-		// JDFPartAmount pa=rl.getCreateAmountPool().getPartAmount(map);
-		// double preSet=pa==null ? 0 : pa.getActualAmount(null);
-		// rl.setActualAmount(preSet+good, map);
-		// }
-		// if(waste>=0)
-		// {
-		// map.put("Condition", "Waste");
-		// JDFPartAmount pa=rl.getCreateAmountPool().getPartAmount(map);
-		// double preSet=pa==null ? 0 : pa.getActualAmount(null);
-		// rl.setActualAmount(preSet+waste, map);
-		// }
-		// }
-		// }
-		// }
-		// }
-		// }
-		// }
 		theExpandedNode.synchParentAmounts();
-		// base requires no generic excute support
-		// JDFProcessRun pr=(JDFProcessRun)
-		// theNode.getCreateAuditPool().addAudit(EnumAuditType.ProcessRun,
-		// null);
-
 	}
 
 	protected void runphases(final int pgood, final int pwaste, final boolean bOutAvail, final boolean bFirst)

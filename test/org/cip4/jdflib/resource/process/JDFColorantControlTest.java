@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -229,6 +229,28 @@ public class JDFColorantControlTest extends JDFTestCaseBase
 		assertTrue(cc.getSeparations().contains("Cyan"));
 		cc.appendColorantParams().appendSeparation("Snarf Blue");
 		assertTrue(cc.getSeparations().contains("Snarf Blue"));
+		cc.setProcessColorModel("DeviceN");
+		assertTrue(cc.getSeparations().contains("Snarf Blue"));
+	}
+
+	/**
+	* tests the separationlist class
+	* 
+	*/
+	public final void testGetAllSeparations()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode root = doc.getJDFRoot();
+		final JDFResourcePool resPool = root.getCreateResourcePool();
+		final KElement kElem = resPool.appendResource(ElementName.COLORANTCONTROL, null, null);
+		assertTrue(kElem instanceof JDFColorantControl);
+		final JDFColorantControl cc = ((JDFColorantControl) kElem);
+		cc.setProcessColorModel("DeviceCMYK");
+		assertTrue(cc.getAllSeparations().contains("Cyan"));
+		cc.appendColorantParams().appendSeparation("Snarf Blue");
+		assertTrue(cc.getAllSeparations().contains("Snarf Blue"));
+		cc.setProcessColorModel("DeviceN");
+		assertTrue(cc.getAllSeparations().contains("Snarf Blue"));
 	}
 
 	// //////////////////////////////////////////////////////////////////////

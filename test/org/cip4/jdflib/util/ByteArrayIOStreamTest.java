@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -141,6 +141,24 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 		{
 			assertEquals(is.read(), i % 256);
 		}
+	}
+
+	/**
+	 * @throws IOException
+	 * 
+	 */
+	public void testConstructBadFile() throws IOException
+	{
+		File f = new File(sm_dirTestDataTemp + "bios.fil");
+		f.delete();
+		ByteArrayIOStream ios = new ByteArrayIOStream(f);
+		InputStream is = ios.getInputStream();
+		assertEquals(is.available(), 0);
+		// now null
+		f = null;
+		ios = new ByteArrayIOStream(f);
+		is = ios.getInputStream();
+		assertEquals(is.available(), 0);
 	}
 
 	/**

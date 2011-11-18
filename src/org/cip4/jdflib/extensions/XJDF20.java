@@ -103,6 +103,7 @@ import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
 import org.cip4.jdflib.elementwalker.FixVersion;
 import org.cip4.jdflib.ifaces.ICapabilityElement;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
@@ -168,6 +169,11 @@ public class XJDF20 extends BaseElementWalker
 		init();
 	}
 
+	/**
+	 * 
+	 * if true, add a modified audit
+	 * @param trackAudits
+	 */
 	public void setTrackAudits(boolean trackAudits)
 	{
 		this.trackAudits = trackAudits;
@@ -225,6 +231,10 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public boolean bUpdateVersion = true;
 	/**
+	 * set to update version stamps
+	 */
+	public boolean bTypeSafeMessage = true;
+	/**
 	 * if true, spans are made to a simple attribute rather than retained as span
 	 */
 	public boolean bSpanAsAttribute = true;
@@ -261,6 +271,7 @@ public class XJDF20 extends BaseElementWalker
 		prepareNewDoc(true);
 		walkTree(root, newRoot);
 		newRoot.eraseEmptyNodes(true);
+		postWalk();
 		return newRoot;
 	}
 
@@ -274,7 +285,7 @@ public class XJDF20 extends BaseElementWalker
 		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
 
 		if (trackAudits)
-			root.getCreateAuditPool().addModified("XJDF Converter", null);
+			root.getCreateAuditPool().addCreated("XJDF Converter", null);
 		FixVersion vers = new FixVersion(EnumVersion.Version_1_4);
 		vers.setLayoutPrepToStripping(bMergeLayoutPrep);
 		vers.walkTree(root, null);
@@ -303,14 +314,19 @@ public class XJDF20 extends BaseElementWalker
 		}
 		walkingProduct = false;
 
+		postWalk();
+		newRoot.getOwnerDocument_KElement().setBodyPart(node.getOwnerDocument_KElement().getBodyPart());
+
+		return newRoot;
+	}
+
+	private void postWalk()
+	{
 		PostXJDFWalker pw = new PostXJDFWalker((JDFElement) newRoot);
 		pw.mergeLayout = bMergeLayout;
 		pw.bIntentPartition = bIntentPartition;
 		pw.walkTreeKidsFirst(newRoot);
-
 		newRoot.eraseEmptyNodes(true);
-		newRoot.getOwnerDocument_KElement().setBodyPart(node.getOwnerDocument_KElement().getBodyPart());
-		return newRoot;
 	}
 
 	/**
@@ -544,7 +560,7 @@ public class XJDF20 extends BaseElementWalker
 						while (it.hasNext())
 						{
 							final String key = it.next();
-							if (key.indexOf(AttributeName.AMOUNT) > 0)
+							if (key.indexOf(AttributeName.AMOUNT) >= 0)
 							{
 								// TODO rethink AmountGood, AmountWaste
 								newLeaf.setAttribute(key + condition, attMap.get(key));
@@ -1542,6 +1558,8 @@ public class XJDF20 extends BaseElementWalker
 
 			eNew.setAttributes(jdf);
 			eNew.setText(jdf.getText());
+			for (int i = 10; i >= 0; i--)
+				eNew.appendXMLComment(jdf.getXMLComment(i), null);
 			removeUnused(eNew);
 			return eNew;
 		}
@@ -1826,8 +1844,14 @@ public class XJDF20 extends BaseElementWalker
 					for (int j = 0; j < vR.size(); j++)
 					{
 						pA.appendAttribute("rRef", vR.get(j).getAttribute(AttributeName.ID), null, " ", true);
-						pA.copyElement(rl.getAmountPool(), null);
+
+						setAmountPool(rl, pA, null);
 						rl.deleteNode();
+						for (String extension : new String[] { "", "Good", "Waste" })
+						{
+							pA.removeAttribute(AttributeName.AMOUNT + extension);
+							pA.renameAttribute(AttributeName.ACTUALAMOUNT + extension, AttributeName.AMOUNT + extension, null, null);
+						}
 					}
 					phaseAmount.add(pA);
 				}
@@ -2484,6 +2508,53 @@ public class XJDF20 extends BaseElementWalker
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen
 	 * 
 	 */
+	protected class WalkComponent extends WalkResource
+	{
+		/**
+		 * 
+		 */
+		public WalkComponent()
+		{
+			super();
+		}
+
+		/**
+		 * invert XXXSpan/@Datatype=foo to FooSpan/@Name=Datatype
+		 * @param xjdf
+		 * @return true if must continue
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			final JDFComponent k = (JDFComponent) super.walk(jdf, xjdf);
+			String comptype = k.getAttribute(AttributeName.COMPONENTTYPE);
+			comptype = StringUtil.replaceString(comptype, "FinalProduct", null);
+			comptype = StringUtil.replaceString(comptype, "PartialProduct", null);
+			k.setAttribute(AttributeName.COMPONENTTYPE, StringUtil.getNonEmpty(comptype));
+
+			String prodType = k.getAttribute(AttributeName.PRODUCTTYPE);
+			if ("Unknown".equals(prodType))
+				k.removeAttribute(AttributeName.PRODUCTTYPE);
+			return k;
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return toCheck instanceof JDFComponent;
+		}
+	}
+
+	/**
+	 * 
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen
+	 * 
+	 */
 	protected class WalkMediaRefByType extends WalkResource
 	{
 
@@ -2648,7 +2719,7 @@ public class XJDF20 extends BaseElementWalker
 
 	/**
 	 * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
-	 * walker for the various resource sets
+	 * walker for JMF roots
 	 */
 	public class WalkJMF extends WalkJDFElement
 	{
@@ -2666,6 +2737,7 @@ public class XJDF20 extends BaseElementWalker
 			first.add(jdf.getID());
 			final JDFJMF jmf = (JDFJMF) jdf;
 			setRootAttributes(jmf, xjdf);
+
 			return xjdf;
 		}
 
@@ -2692,6 +2764,46 @@ public class XJDF20 extends BaseElementWalker
 				newRootP.setAttribute("Version", "2.0");
 				newRootP.setAttribute("MaxVersion", "2.0");
 			}
+			newRootP.setAttributes(jmf);
+			removeUnused(newRootP);
+		}
+	}
+
+	/**
+	 * @author Rainer Prosi, Heidelberger Druckmaschinen <br/>
+	 * walker for JMF mesaages
+	 */
+	public class WalkMessage extends WalkJDFElement
+	{
+		/**
+		 * @param jdf
+		 * @return the created message
+		 */
+		@Override
+		public KElement walk(final KElement jdf, final KElement xjdf)
+		{
+			JDFMessage m = (JDFMessage) jdf;
+			if (bTypeSafeMessage)
+				jdf.renameElement(m.getNodeName() + m.getType(), null);
+			return super.walk(jdf, xjdf);
+		}
+
+		@Override
+		protected void removeUnused(final KElement newRootP)
+		{
+			super.removeUnused(newRootP);
+			newRootP.removeAttribute(AttributeName.TYPE);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if it matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return (toCheck instanceof JDFMessage);
 		}
 	}
 
@@ -2858,7 +2970,7 @@ public class XJDF20 extends BaseElementWalker
 		/**
 		 * TODO Please insert comment!
 		 * @param path
-		 * @param object
+		 * @param old
 		 * @return
 		 */
 		protected String getXPathRoot(String path, String old)
@@ -3075,6 +3187,22 @@ public class XJDF20 extends BaseElementWalker
 			}
 		}
 		return omaMaps;
+	}
+
+	/**
+	 * set to keep as much of the original structure as possible - used e.g. for xslt display of JDF nodes
+	 */
+	public void retainAll()
+	{
+		bUpdateVersion = false;
+		bHTMLColor = false;
+		bMergeLayout = false;
+		bIntentPartition = false;
+		bSpanAsAttribute = false;
+		bMergeLayoutPrep = false;
+		bMergeRunList = false;
+		bTypeSafeMessage = false;
+		bRetainSpawnInfo = true;
 	}
 
 }

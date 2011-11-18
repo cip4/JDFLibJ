@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,6 +87,7 @@ import java.util.HashSet;
 
 import org.apache.xerces.dom.ParentNode;
 import org.cip4.jdflib.extensions.XJDF20;
+import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
 import org.w3c.dom.DOMException;
@@ -1018,8 +1019,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	@Override
 	KElement factoryCreate(final ParentNode parent, final String namespaceURI, final String qualifiedName)
 	{
-		setParentNode(parent); // set the parent in the factory for
-		// private Elements
+		setParentNode(parent); // set the parent in the factory for private Elements
 		return (KElement) createElementNS(namespaceURI, qualifiedName);
 	}
 
@@ -1367,7 +1367,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		}
 		else
 		{
-			if (isDeepResource(strName))
+			if (isDeepResource(strName, nameSpaceURI))
 			{
 				strClassPath = data.sm_PackageNames.get("ResDefault");
 			}
@@ -1399,7 +1399,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		m_ParentNode = node;
 	}
 
-	private boolean isDeepResource(final String strName)
+	private boolean isDeepResource(final String strName, String nameSpaceURI)
 	{
 		if (m_ParentNode == null)
 		{
@@ -1408,6 +1408,11 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		if (m_ParentNode instanceof JDFResourcePool)
 		{
 			return true;
+		}
+		// we assume any foreign ns thingy in resourceInfo is a resource
+		if (m_ParentNode instanceof JDFResourceInfo)
+		{
+			return !jdfNSURI.equals(nameSpaceURI);
 		}
 		if (m_ParentNode instanceof JDFResource) // partitioned resource leaf
 		{

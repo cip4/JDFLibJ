@@ -1292,6 +1292,15 @@ public class JDFResource extends JDFElement
 	 */
 	public class PartitionGetter
 	{
+		/**
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "PartitionGetter strict=" + strictPartVersion + "\n" + JDFResource.this.toString();
+		}
+
 		private boolean hasIdentical;
 		private boolean strictPartVersion;
 
@@ -1830,7 +1839,9 @@ public class JDFResource extends JDFElement
 
 				if (!badChild)
 				{
-					final VElement dpv = resourceElement.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
+					PartitionGetter pg = resourceElement.new PartitionGetter();
+					pg.setStrictPartVersion(strictPartVersion);
+					final VElement dpv = pg.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
 
 					if (dpv.size() > 0)
 					{
@@ -2252,7 +2263,9 @@ public class JDFResource extends JDFElement
 					{
 						if (!creating)
 						{
-							final JDFResource nextLeaf = leaf.getPartition(new JDFAttributeMap(key, value), EnumPartUsage.Explicit);
+							final PartitionGetter pg = leaf.new PartitionGetter();
+							pg.setStrictPartVersion(strictPartVersion);
+							final JDFResource nextLeaf = pg.getPartition(new JDFAttributeMap(key, value), EnumPartUsage.Explicit);
 							if (nextLeaf == null)
 							{
 								creating = true;
@@ -2784,7 +2797,6 @@ public class JDFResource extends JDFElement
 				setAgentName(JDFAudit.getStaticAgentName());
 				setAgentVersion(JDFAudit.getStaticAgentVersion());
 			}
-
 		}
 		return true;
 	}
@@ -3128,8 +3140,7 @@ public class JDFResource extends JDFElement
 		if (validParentNodeNameSet == null)
 		{
 			validParentNodeNameSet = new HashSet<String>();
-			final String nodeNames[] = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", ElementName.OCCUPATION, // copy of
-					// validRootParentNodeNames
+			final String nodeNames[] = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams", // copy of validRootParentNodeNames
 					"DeviceInfo", "DropItemIntent", "DropItem", "ProductionIntent", "CustomerInfo", "NodeInfo", "Ancestor", "Occupation", ElementName.PHASETIME };
 			for (int i = 0; i < nodeNames.length; i++)
 			{
@@ -3152,10 +3163,7 @@ public class JDFResource extends JDFElement
 		{
 			validRootParentNodeNameSet = new HashSet<String>();
 			final String[] nodeNames = { "ResourcePool", "PipeParams", "ResourceInfo", "ResourceCmdParams" }; // must
-			// also
-			// copy
-			// to
-			// validParentNodeNames
+			// also copy to validParentNodeNames
 			for (int i = 0; i < nodeNames.length; i++)
 			{
 				validRootParentNodeNameSet.add(nodeNames[i]);
@@ -6875,9 +6883,7 @@ public class JDFResource extends JDFElement
 		{
 			parent = null;
 		}
-
 		return (JDFResource) parent;
-
 	}
 
 	/**
@@ -6903,7 +6909,7 @@ public class JDFResource extends JDFElement
 	 */
 	public void setPartUsage(final EnumPartUsage value)
 	{
-		setAttribute(AttributeName.PARTUSAGE, value.getName(), null);
+		setAttribute(AttributeName.PARTUSAGE, value == null ? null : value.getName(), null);
 	}
 
 	/**

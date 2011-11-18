@@ -628,9 +628,9 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	}
 
 	/**
-	 * return true if this contains the Double or Integer object o
+	 * return true if this contains at least one element from l
 	 * 
-	 * @param l
+	 * @param l the list to check for 
 	 * @return
 	 */
 	public boolean contains(final JDFNumList l)
@@ -647,6 +647,28 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * return true if this contains all elements from l
+	 * 
+	 * @param l the list to check for 
+	 * @return 
+	 */
+	public boolean containsAll(final JDFNumList l)
+	{
+		if (l == null)
+		{
+			return true;
+		}
+		for (int i = 0; i < l.size(); i++)
+		{
+			if (!contains(l.elementAt(i)))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

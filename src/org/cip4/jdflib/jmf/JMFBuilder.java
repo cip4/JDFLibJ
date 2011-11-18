@@ -96,7 +96,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 public class JMFBuilder
 {
 	private String acknowledgeURL;
-	private String senderID = null;
+	private String senderID;
 
 	/**
 	 * @return the acknowledgeURL
@@ -117,10 +117,11 @@ public class JMFBuilder
 	/**
 	 * 
 	 */
-	public JMFBuilder() // all static
+	public JMFBuilder()
 	{
 		super();
 		acknowledgeURL = null;
+		senderID = JDFJMF.getTheSenderID();
 	}
 
 	/**
@@ -321,7 +322,8 @@ public class JMFBuilder
 	}
 
 	/**
-	 * build a JMF Knownmessages query
+	 * build a JMF Resource query
+	 * @param resType type of resource to query, e.g. Media
 	 * @return the message
 	 */
 	public JDFJMF buildResourceCatalogQuery(String resType)
@@ -335,7 +337,7 @@ public class JMFBuilder
 	}
 
 	/**
-	 * build a JMF KnownSubscriptions query
+	 * build a JMF Milestone querysignal
 	 * @param milestoneType the milestone type
 	 * @param jobID the jobID  
 	 * @return the message
@@ -636,5 +638,28 @@ public class JMFBuilder
 	public void setSenderID(String senderID)
 	{
 		this.senderID = senderID;
+	}
+
+	/**
+	 * 
+	 * @see java.lang.Object#clone()
+	 */
+	@Override
+	public JMFBuilder clone()
+	{
+		JMFBuilder bNew = new JMFBuilder();
+		bNew.setAcknowledgeURL(getAcknowledgeURL());
+		bNew.setSenderID(getSenderID());
+		return bNew;
+	}
+
+	/**
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "JMFBuilder: " + senderID + " AcknowledgeURL:" + acknowledgeURL;
 	}
 }

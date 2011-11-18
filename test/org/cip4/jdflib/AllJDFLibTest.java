@@ -179,6 +179,7 @@ import org.cip4.jdflib.jmf.JDFQueueEntryTest;
 import org.cip4.jdflib.jmf.JDFQueueFilterTest;
 import org.cip4.jdflib.jmf.JDFQueueSubmissionParamsTest;
 import org.cip4.jdflib.jmf.JDFSubscriptionInfoTest;
+import org.cip4.jdflib.jmf.JMFBuilderFactoryTest;
 import org.cip4.jdflib.jmf.JMFBuilderTest;
 import org.cip4.jdflib.jmf.JMFKnownMessagesTest;
 import org.cip4.jdflib.jmf.JMFResourceInfoTest;
@@ -427,6 +428,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFQueueSubmissionParamsTest.class);
 		suite.addTestSuite(JDFSubscriptionInfoTest.class);
 		suite.addTestSuite(JMFBuilderTest.class);
+		suite.addTestSuite(JMFBuilderFactoryTest.class);
 		suite.addTestSuite(JMFResourceTest.class);
 		suite.addTestSuite(JMFResourceInfoTest.class);
 		suite.addTestSuite(JMFStatusTest.class);

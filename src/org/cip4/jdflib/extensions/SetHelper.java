@@ -84,6 +84,15 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class SetHelper
 {
+	/**
+	 * 
+	 */
+	public static final String PARAMETER = "Parameter";
+	/**
+	 * 
+	 */
+	public static final String RESOURCE = "Resource";
+
 	private int myIndex(final KElement e)
 	{
 		final KElement parent = e.getParentNode_KElement();

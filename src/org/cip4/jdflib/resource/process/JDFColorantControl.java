@@ -254,7 +254,9 @@ public class JDFColorantControl extends JDFAutoColorantControl
 		}
 		else if ("DeviceN".equals(model))
 		{
-			vName = getDeviceNSpace(0).getSeparations();
+			JDFDeviceNSpace deviceNSpace = getDeviceNSpace(0);
+			if (deviceNSpace != null)
+				vName = deviceNSpace.getSeparations();
 		}
 
 		final JDFSeparationList colpar = getColorantParams();

@@ -69,8 +69,7 @@
  */
 package org.cip4.jdflib.core;
 
-import junit.framework.TestCase;
-
+import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoApprovalDetails.EnumApprovalState;
 import org.cip4.jdflib.core.JDFAudit.EnumAuditType;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -85,6 +84,7 @@ import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFDevice;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.JDFTool;
 import org.cip4.jdflib.resource.process.JDFApprovalDetails;
 import org.cip4.jdflib.resource.process.JDFApprovalSuccess;
@@ -97,7 +97,7 @@ import org.cip4.jdflib.util.StringUtil;
  * 
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class FixVersionTest extends TestCase
+public class FixVersionTest extends JDFTestCaseBase
 {
 	private JDFDoc mDoc;
 	private JDFNode n;
@@ -153,6 +153,52 @@ public class FixVersionTest extends TestCase
 		rp.setAttribute(AttributeName.RREFS, "a b", null);
 		n.fixVersion(null);
 		assertFalse(rp.hasAttribute(AttributeName.RREFS));
+	}
+
+	/**
+	 * 
+	 */
+	public void testNamespace()
+	{
+		KElement ns = n.appendElement("foo:abc", "www.foobar.com");
+		n.fixVersion(null);
+		KElement ns2 = n.getElement("foo:abc");
+		assertEquals(ns, ns2);
+		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		n.fixVersion(EnumVersion.Version_1_3);
+		ns2 = n.getElement("foo:abc");
+		assertEquals(ns, ns2);
+		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+	}
+
+	/**
+	 * 
+	 */
+	public void testNamespaceRes()
+	{
+		KElement ns = n.addResource("foo:abc", EnumResourceClass.Parameter, null, null, null, "www.foobar.com", null);
+		n.fixVersion(null);
+		KElement ns2 = n.getResourcePool().getElement("foo:abc");
+		assertEquals(ns, ns2);
+		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+		n.fixVersion(EnumVersion.Version_1_3);
+		ns2 = n.getResourcePool().getElement("foo:abc");
+		assertEquals(ns, ns2);
+		assertEquals(ns2.getNamespaceURI(), "www.foobar.com");
+	}
+
+	/**
+	 * 
+	 */
+	public void testNamespaceParse()
+	{
+		n = JDFDoc.parseFile(sm_dirTestData + "fixns.jdf").getJDFRoot();
+		n.fixVersion(null);
+		KElement ns2 = n.getResourcePool().getElement("foo:myresource");
+		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
+		n.fixVersion(EnumVersion.Version_1_3);
+		ns2 = n.getResourcePool().getElement("foo:myresource");
+		assertEquals(ns2.getNamespaceURI(), "http://www.foo.com/schema");
 	}
 
 	/**
@@ -324,9 +370,14 @@ public class FixVersionTest extends TestCase
 		assertEquals(as.getAssemblyID(), "");
 	}
 
-	// //////////////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////////
-	// //////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 * @see junit.framework.TestCase#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return super.toString() + "\n" + n;
+	}
 
 }

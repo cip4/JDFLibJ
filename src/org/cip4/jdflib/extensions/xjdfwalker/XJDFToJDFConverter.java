@@ -591,13 +591,26 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		{
 			if (knownElements.contains(name))
 			{
-				final KElement subElem = ir.appendElement(name);
-				subElem.init();
-				subElem.setAttribute("Actual", map.get(name));
-				convertUnits(subElem);
-				e.removeAttribute(name);
+				attributeToSpan(e, name);
 			}
 		}
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param e
+	 * @param name
+	 * @return the new span element
+	 */
+	protected KElement attributeToSpan(final KElement e, final String name)
+	{
+		final KElement subElem = e.appendElement(name);
+		subElem.init();
+		subElem.setAttribute("Actual", e.getAttribute(name));
+		convertUnits(subElem);
+		e.removeAttribute(name);
+		return subElem;
 	}
 
 	/**
@@ -1025,16 +1038,18 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
-			if (e.hasAttribute("ColorsUsed"))
-			{
-				evaluateColorsUsed(e);
-			}
+			evaluateColorsUsed(e);
 			if (e.hasAttribute("NumColors") && !e.hasAttribute("ColorsUsed"))
 			{
 				evaluateNumColors(e, trackElem);
 			}
+			evaluateBackAttribute(e, "Coatings");
+			evaluateBackAttribute(e, "ColorStandard");
+			evaluateBackAttribute(e, "Coverage");
+
+			KElement ret = super.walk(e, trackElem);
 			repartitionSide(e, trackElem);
-			return super.walk(e, trackElem);
+			return ret;
 		}
 
 		/**
@@ -1043,13 +1058,21 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 */
 		private void repartitionSide(final KElement e, final KElement trackElem)
 		{
-			KElement slBack = e.getElement("ColorsUsedBack");
-			if (slBack != null)
+			KElement cuBack = e.getElement("ColorsUsedBack");
+			if (cuBack != null)
 			{
-				JDFResource ciFront = ((JDFResource) trackElem).addPartition(EnumPartIDKey.Side, "Front");
+				JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
 				ciFront.moveElement(e.getElement("ColorsUsed"), null);
-				JDFResource ciBack = ((JDFResource) trackElem).addPartition(EnumPartIDKey.Side, "Back");
+				JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
 				ciBack.moveElement(e.getElement("ColorsUsedBack"), null).renameElement("ColorsUsed", null);
+			}
+			KElement coatBack = e.getElement("CoatingsBack");
+			if (coatBack != null)
+			{
+				JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
+				ciFront.moveElement(e.getElement("Coatings"), null);
+				JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
+				ciBack.moveElement(e.getElement("CoatingsBack"), null).renameElement("Coatings", null);
 			}
 		}
 
@@ -1068,6 +1091,19 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				slBack.renameElement("ColorsUsedBack", null);
 				if (sl != null)
 					e.moveElement(sl, slBack);
+			}
+		}
+
+		private void evaluateBackAttribute(final KElement e, String front)
+		{
+			String back = front + "Back";
+			if (e.hasAttribute(back))
+			{
+				String frontVal = e.getAttribute(front, null, null);
+				e.renameAttribute(back, front, null, null);
+				KElement span = attributeToSpan(e, front);
+				span.renameElement(back, null);
+				e.setAttribute(front, frontVal);
 			}
 		}
 

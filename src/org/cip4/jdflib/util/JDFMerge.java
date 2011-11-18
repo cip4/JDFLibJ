@@ -686,7 +686,7 @@ public class JDFMerge
 			// this is still better than throwing an exception or silentlyignoring the rw resource
 			if ((src.getLocked() == false) && (trgMap.getKeys().size() < srcMap.getKeys().size()))
 			{
-				LogFactory.getLog(JDFMerge.class).warn("creting non existing rw partition: " + srcMap);
+				LogFactory.getLog(JDFMerge.class).warn("creating non existing rw partition: " + srcMap);
 				trg = targetRes.getCreatePartition(srcMap, partIDKeys);
 				// fool the algorithm to think that the new partition is rw (which it probably was)
 				trg.setSpawnStatus(EnumSpawnStatus.SpawnedRW);
@@ -1431,36 +1431,16 @@ public class JDFMerge
 				leafRes.removeFromSpawnIDs(spawnID);
 				calcSpawnStatus(leafRes, false);
 			}
+
 			if (!newRes.getParentJDF().getID().equals(oldRes.getParentJDF().getID()))
 			{
-				// this has been copied from lower down up and MUST be
-				// deleted...
+				// this has been copied from lower down up and MUST be deleted...
 				newRes.deleteNode();
 			}
 			else
 			{
-				// don't use a simple for because deleting a parent may
-				// invalidate later resources!
-				VElement newResLeafsSpawned = newRes.getNodesWithSpawnID(spawnID);
-				// just in case: if no SpawnID exists assume the whole thing
-				if (newResLeafsSpawned.size() == 0)
-				{
-					newResLeafsSpawned.add(newRes);
-				}
-				while (newResLeafsSpawned.size() > 0)
-				{
-					// use the last because it is potentially the root...
-					final JDFResource leafRes = (JDFResource) newResLeafsSpawned.elementAt(newResLeafsSpawned.size() - 1);
-					final boolean bZappRoot = leafRes.equals(newRes);
-					leafRes.deleteNode();
-					// we killed the root, nothing can be left...
-					if (bZappRoot)
-					{
-						break;
-					}
-					// regenerate the list
-					newResLeafsSpawned = newRes.getNodesWithSpawnID(spawnID);
-				}
+				// replace the ro in the tomerge node with a clean copy of the ro resource from main
+				newRes.replaceElement(oldRes);
 			}
 		}
 	}

@@ -209,6 +209,7 @@ public class StringUtil
 			"Du hast wohl recht; ich finde nicht die Spur\nvon einem Geist, und alles ist Dressur.",
 			"'I got very bored and depressed, so I went and plugged myself in to its external computer feed. I talked to the computer at great length and explained my view of the Universe to it', said Marvin. 'And what happened?' pressed Ford. 'It committed suicide.'",
 			"Wie nur dem Kopf nicht alle Hoffnung schwindet,\nDer immerfort an schalem Zeuge klebt,\nMit gier'ger Hand nach Schätzen gräbt,\nUnd froh ist, wenn er Regenwürmer findet!",
+			"Der Dadaist ist ein Künstler, bei dem das Produkt als solches nebensächlich ist. Er ist ein Geistesreisender, der immer neue Erfahrungen macht. Ein Zeichen dafür, dass Dadaismus doch produktiv im herkömmlichen Sinne der bildenden Kunst ist, zeigt der groteske Humor, der sich in den Gedichten und Bildern wieder findet. Auch die Ironie, die die Künstler in ihre Werke einfließen lassen, spricht für modale Präsenz von „Sinn im Unsinn“, der immer dort ist, wo er nicht zu sein scheint.",
 			"Im übrigen will ich keines Menschen Urteil, ich will nur Kenntnisse verbreiten, ich berichte nur, auch Ihnen, hohe Herren von der Akademie, habe ich nur berichtet." };
 
 	/**
@@ -684,6 +685,8 @@ public class StringUtil
 	 */
 	public static String replaceToken(final String strWork, int index, String delim, String newToken)
 	{
+		if (delim == null)
+			delim = " ";
 		VString v = tokenize(strWork, delim, false);
 		if (v == null)
 			return null;
@@ -1319,12 +1322,11 @@ public class StringUtil
 	 */
 	public static int posOfToken(final String strWork, final String name, final String separator, final int iSkip)
 	{
+		if (strWork == null || name == null || strWork.indexOf(name) < 0)
+			return -1;
+
 		int posOfToken = -1;
-		final VString vNames = new VString();
-		if (!name.equals(JDFConstants.EMPTYSTRING))
-		{
-			vNames.addAll(StringUtil.tokenize(strWork, separator, false));
-		}
+		VString vNames = StringUtil.tokenize(strWork, separator, false);
 
 		if (iSkip == -1 || iSkip == 0)
 		{
@@ -2297,9 +2299,6 @@ public class StringUtil
 
 			simpleRegExp = b.toString();
 		}
-		StringReplacer sr = new StringReplacer(simpleRegExp);
-		sr.setReRead(true);
-		//	simpleRegExp = sr.replaceString("?", "(.)");
 		return simpleRegExp;
 	}
 

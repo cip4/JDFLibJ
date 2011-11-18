@@ -791,7 +791,7 @@ public class JDFLayoutTest extends JDFTestCaseBase
 			final JDFLayout lo = (JDFLayout) n.getMatchingResource(ElementName.LAYOUT, EnumProcessUsage.AnyInput, null, 0);
 			assertNull(lo.getSignature("fooBar"));
 			assertEquals(lo.getSignature("SignatureName1"), lo.getSignature(0));
-			assertEquals(lo.getSheet("SheetName1"), lo.getSheet(0));
+			assertEquals("loop " + i, lo.getSheet("SheetName1"), lo.getSheet(0));
 			final JDFSignature signature2 = lo.getSignature("SignatureName2");
 			assertEquals(signature2.getSheet("SheetName1"), lo.getSignature(1).getSheet(0));
 			assertEquals(lo.getCreateSignature("fooBar"), lo.getSignature(-1));

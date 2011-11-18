@@ -96,20 +96,20 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 */
 	public void testSetProxyString() throws Exception
 	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
 		ProxyUtil.setProxy(null);
 		String proxyURL = "http://proxy:8080";
 		ProxyUtil.setProxy(proxyURL);
 		UrlPart p = null;
-		//UrlUtil.writeToURL(proxyURL, null, UrlUtil.GET, null, null);
-		//		if (p != null)
-		//		{
 		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
 		assertNotNull(p);
 		ProxyUtil.setProxy(null);
 		p = UrlUtil.writeToURL("http://www.google.de", null, UrlUtil.GET, null, null);
 		assertNull(p);
-		//		}
-
 	}
 
 	/**
@@ -135,14 +135,18 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 */
 	public void testSetProxyWrite() throws Exception
 	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
 		String proxy = "proxy.ceu.corp.heidelberg.com";
 		int proxyPort = 8080;
-		UrlPart p = null;
 		//UrlUtil.writeToURL("http://" + proxy + ":" + proxyPort, null, UrlUtil.GET, null, null);
-		UrlPart p2 = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
-		if (p == null || p2 == null) // we are in the environment where the proxy is correctly set up
+		UrlPart p = UrlUtil.writeToURL("http://localhost:8080/httpdump", null, UrlUtil.GET, null, null);
+		if (p == null) // we are in the environment where the proxy is correctly set up
 		{
-			System.out.println("no connection to proxy or no tomcat running!");
+			log.warn("no connection to proxy or no tomcat running!");
 		}
 		else
 		{
@@ -172,6 +176,11 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 */
 	public void testWriteToURL()
 	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
 		ProxyUtil.setProxy("http://proxy", 8080, null, null);
 		assertNotNull(UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null));
 	}
@@ -181,6 +190,11 @@ public class ProxyUtilTest extends JDFTestCaseBase
 	 */
 	public void testWriteToURLSystemCall()
 	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
 		System.setProperty("http.proxyPort", "8080");
 		System.setProperty("http.proxyHost", "proxy.ceu.corp.heidelberg.com");
 		System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");

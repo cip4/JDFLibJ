@@ -653,9 +653,11 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals(e.getAttribute("a"), "abc1 abc2");
 		e.setAttribute("a", " abc1 abc2 abc ");
 		e.removeFromAttribute("a", "abc1", null, " ", 333);
-		assertEquals(e.getAttribute("a"), "abc2 abc ");
+		assertEquals(e.getAttribute("a"), "abc2 abc");
 		e.removeFromAttribute("a", "abc", null, " ", 333);
 		assertEquals(e.getAttribute("a"), "abc2");
+		e.setAttribute("a", " abc1 abc2 abc ");
+		e.removeFromAttribute("a", "abc1", null, null, 333);
 	}
 
 	// //////////////////////////////////////////////////////////////
@@ -3213,7 +3215,25 @@ public class KElementTest extends JDFTestCaseBase
 		assertTrue("", h.contains("c"));
 		assertTrue("", h.contains("d"));
 		assertFalse("", h.contains("a2"));
+	}
 
+	/**
+	 * 
+	 * test the flush method also for xml comments, cdata and similar crap
+	 */
+	public void testFlush()
+	{
+		final XMLDoc doc = new XMLDoc("doc", null);
+		KElement root = doc.getRoot();
+		root.setXPathAttribute("foo/bar/murks/@a", "bbbb");
+		root.appendXMLComment("aaabbbccc", null);
+		root.setAttribute("fff", "ccc");
+		root.appendCData("asb");
+		root.flush();
+		String xml = root.toXML();
+		int pos = xml.indexOf("<d");
+		xml = xml.substring(pos).trim();
+		assertEquals(xml, "<doc/>");
 	}
 
 }

@@ -139,6 +139,24 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	/**
+	 * 
+	 * convert a string to an integerlist, and retun null if the string is no good
+	 * @param s the string to parse
+	 * @return the integerlist, null if snafu
+	 */
+	public static JDFIntegerList getIntegerList(String s)
+	{
+		try
+		{
+			return new JDFIntegerList(s);
+		}
+		catch (DataFormatException e)
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * constructs an integer list with all values set via a Vector of Intger objects
 	 * 
 	 * @param v the given vector

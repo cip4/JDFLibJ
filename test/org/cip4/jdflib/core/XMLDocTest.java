@@ -590,6 +590,16 @@ public class XMLDocTest extends JDFTestCaseBase
 
 	/**
 	 * 
+	 * test graceful null handling
+	 */
+	public void testNull()
+	{
+		new XMLDoc((XMLDoc) null);
+		new XMLDoc((String) null, null);
+	}
+
+	/**
+	 * 
 	 */
 	public void testCopyXMLDoc()
 	{

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -70,6 +70,7 @@
 package org.cip4.jdflib.pool;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFCustomerInfo;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -91,6 +92,18 @@ public class JDFResourcePoolTest extends JDFTestCaseBase
 {
 
 	/**
+	 * 
+	 * make sure that coomments are not cast as resources
+	 * @throws Exception
+	 */
+	public void testaddComment() throws Exception
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFComment c = n.appendResourcePool().appendComment();
+		assertTrue(c instanceof JDFComment);
+	}
+
+	/**
 	 * Method testLinkResource.
 	 * 
 	 * @throws Exception
@@ -99,20 +112,17 @@ public class JDFResourcePoolTest extends JDFTestCaseBase
 	{
 		JDFDoc d = new JDFDoc("JDF");
 		JDFNode n = d.getJDFRoot();
-		JDFResource r = n.addResource("Component", null, null, null, null,
-				null, null);
+		JDFResource r = n.addResource("Component", null, null, null, null, null, null);
 		JDFResourcePool rp = n.getResourcePool();
 		assertTrue(r instanceof JDFComponent);
 		assertFalse(n.hasChildElement("ResourceLinkPool", null));
 		JDFResourceLinkPool rlp = n.getCreateResourceLinkPool();
 		assertEquals(rp.getUnlinkedResources().elementAt(0), r);
 
-		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input,
-				EnumProcessUsage.BookBlock);
+		JDFResourceLink rl = rlp.linkResource(r, EnumUsage.Input, EnumProcessUsage.BookBlock);
 		assertNotNull(rl);
 		assertNull(rp.getUnlinkedResources());
-		JDFResource rx = n.addResource("ExposedMedia", null, null, null, null,
-				null, null);
+		JDFResource rx = n.addResource("ExposedMedia", null, null, null, null, null, null);
 		assertEquals(rp.getUnlinkedResources().elementAt(0), rx);
 
 		n.setVersion(EnumVersion.Version_1_2);

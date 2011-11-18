@@ -151,6 +151,7 @@ public class XMLParser extends DOMParser
 	protected String m_SchemaLocation = null;
 
 	/**
+	 * @return the class name
 	 * 
 	 */
 	public String getDocumentClass()
@@ -349,7 +350,6 @@ public class XMLParser extends DOMParser
 
 	/**
 	 * @param schemaLocation
-	 * @param documentClassName
 	 * @param errorHandler default: initParser(null, DocumentJDFImpl.class.getName(), null);
 	 */
 	protected void initParser(final String schemaLocation, final XMLErrorHandler errorHandler)
@@ -458,8 +458,10 @@ public class XMLParser extends DOMParser
 	}
 
 	/**
+	 * set the physical schema location
+	 * 
 	 * @param nsURI the schema namespace uri
-	 * @param nsURI the schema location url
+	 * @param locationURL the schema location url
 	 */
 	public void setSchemaLocation(String nsURI, String locationURL)
 	{

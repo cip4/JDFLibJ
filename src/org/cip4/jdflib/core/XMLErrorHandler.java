@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,6 +77,8 @@
 
 package org.cip4.jdflib.core;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
@@ -88,6 +90,7 @@ public class XMLErrorHandler implements ErrorHandler
 
 	private final XMLDoc xmlOutput;
 	private final KElement root;
+	private final Log log;
 
 	/**
 	 * 
@@ -97,6 +100,7 @@ public class XMLErrorHandler implements ErrorHandler
 		super();
 		xmlOutput = new XMLDoc("SchemaValidationOutput", null);
 		root = xmlOutput.getRoot();
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -108,6 +112,7 @@ public class XMLErrorHandler implements ErrorHandler
 		String warn = exception.getMessage();
 		KElement kEl = root.appendElement("Warning");
 		kEl.setAttribute("Message", warn);
+		log.warn(warn);
 	}
 
 	/**
@@ -116,14 +121,14 @@ public class XMLErrorHandler implements ErrorHandler
 	*/
 	public void error(final SAXParseException exception)
 	{
-		// print out all parser errors except undefined variables for non-JDF
-		// stuff
+		// print out all parser errors except undefined variables for non-JDF stuff
 		String er = exception.getMessage();
 
 		if ((er.indexOf("http://www.CIP4.org/JDFSchema") != -1) || (er.indexOf("is not declared for") == -1))
 		{
 			KElement kEl = root.appendElement("Error");
 			kEl.setAttribute("Message", er);
+			log.error(er);
 		}
 	}
 
@@ -136,7 +141,7 @@ public class XMLErrorHandler implements ErrorHandler
 		String er = exception.getMessage();
 		KElement kEl = root.appendElement("FatalError");
 		kEl.setAttribute("Message", er);
-
+		log.fatal(er);
 		throw new JDFException("Fatal error in the Parser:" + er);
 	}
 

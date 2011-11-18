@@ -2281,24 +2281,22 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				synchStatus = minStatus;
 			}
-			else
+			else if (EnumUtil.aLessEqualsThanB(minStatus, EnumNodeStatus.Ready))
 			{
-				if (EnumUtil.aLessEqualsThanB(minStatus, EnumNodeStatus.Ready))
+				if (EnumUtil.aLessEqualsThanB(EnumNodeStatus.InProgress, maxStatus))
 				{
-					if (EnumUtil.aLessEqualsThanB(EnumNodeStatus.InProgress, maxStatus))
-					{
-						synchStatus = EnumNodeStatus.InProgress;
-					}
-					else
-					{
-						synchStatus = maxStatus;
-					}
+					synchStatus = EnumNodeStatus.InProgress;
 				}
 				else
 				{
-					synchStatus = minStatus;
+					synchStatus = maxStatus;
 				}
 			}
+			else
+			{
+				synchStatus = minStatus;
+			}
+
 			return synchStatus;
 		}
 
@@ -5777,6 +5775,24 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
+	 * Check whether typ or types contains type
+	 * 
+	 * @param type the type to check for
+	 * @return boolean - true if attribute Type is either in Type or types always true for null
+	 *  
+	 */
+	public boolean containsType(String type)
+	{
+		if (type == null)
+			return true;
+
+		String myType = getTypesString();
+		if (myType == null)
+			return false;
+		return StringUtil.hasToken(myType, type, " ", 0);
+	}
+
+	/**
 	 * get a vector of Link names that may be inserted in this element if the links need a processusage, the format is LinkName:ProcessUsage
 	 * 
 	 * @param nMax maximum size of the returned vector
@@ -6537,8 +6553,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 */
 	public JDFResourceLink linkMatchingResource(final JDFResource resource, final EnumProcessUsage processUsage, final JDFAttributeMap partMap)
 	{
-		JDFResourceLink rl = null;
-
 		final String resName = resource.getLocalName();
 		final VString vtyp = getMatchType(resName, processUsage);
 
@@ -6556,14 +6570,13 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					}
 				}
 
-				rl = linkResource(resource, typ.charAt(0) == 'i' ? EnumUsage.Input : EnumUsage.Output, null);
+				JDFResourceLink rl = linkResource(resource, typ.charAt(0) == 'i' ? EnumUsage.Input : EnumUsage.Output, null);
 				if (typ.length() > 2)
 				{
 					rl.setProcessUsage(EnumProcessUsage.getEnum(typ.substring(2)));
 				}
 
 				rl.setPartMap(partMap);
-
 				return rl;
 			}
 		}

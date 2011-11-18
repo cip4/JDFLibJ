@@ -86,6 +86,11 @@ public class UrlPartTest extends JDFTestCaseBase
 	 */
 	public void testToString()
 	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
 		ProxyUtil.setProxy("proxy", 8080, null, null);
 		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);
@@ -99,6 +104,11 @@ public class UrlPartTest extends JDFTestCaseBase
 	 */
 	public void testBuffer()
 	{
+		if (!isTestNetwork())
+		{
+			log.info("skipping network test");
+			return;
+		}
 		ProxyUtil.setProxy("proxy", 8080, null, null);
 		UrlPart writeToURL = UrlUtil.writeToURL("http://www.example.com", null, UrlUtil.GET, UrlUtil.TEXT_PLAIN, null);
 		assertNotNull(writeToURL);

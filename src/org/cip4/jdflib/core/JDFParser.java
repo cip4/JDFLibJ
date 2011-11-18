@@ -247,7 +247,6 @@ public class JDFParser extends XMLParser
 	public JDFDoc parseStream(final InputStream inStream)
 	{
 		return (JDFDoc) super.parseStream(inStream);
-
 	}
 
 	/**

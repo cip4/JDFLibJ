@@ -68,6 +68,8 @@
  */
 package org.cip4.jdflib.elementwalker;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.KElement;
 
 /**
@@ -76,9 +78,9 @@ import org.cip4.jdflib.core.KElement;
  */
 public class BaseWalker implements IWalker, Comparable<BaseWalker>
 {
-	// depth is calculated automatically from the class hierarchy and used to
-	// sort walkers from explicit to abstract
+	// depth is calculated automatically from the class hierarchy and used to sort walkers from explicit to abstract
 	protected int depth;
+	protected final Log log;
 
 	/**
 	 * the mother routine for walking....
@@ -116,8 +118,11 @@ public class BaseWalker implements IWalker, Comparable<BaseWalker>
 	 */
 	public BaseWalker(final BaseWalkerFactory factory)
 	{
+		super();
+		log = LogFactory.getLog(getClass());
 		depth = 0;
 		addToFactory(factory);
+
 	}
 
 	/**

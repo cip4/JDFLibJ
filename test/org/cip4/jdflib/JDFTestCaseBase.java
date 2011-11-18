@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -107,16 +107,25 @@ import org.cip4.jdflib.util.logging.LogConfigurator;
  */
 public abstract class JDFTestCaseBase extends TestCase
 {
+	/**
+	 * 
+	 */
 	public JDFTestCaseBase()
 	{
 		super();
 		LogConfigurator.configureLog(null, null);
+		setTestNetwork(false);
 	}
 
+	/**
+	 * 
+	 * @param name
+	 */
 	public JDFTestCaseBase(String name)
 	{
 		super(name);
 		LogConfigurator.configureLog(null, null);
+		setTestNetwork(false);
 	}
 
 	static protected final String sm_dirTestSchema = ".." + File.separator + "schema" + File.separator + "Version_1_4" + File.separator;
@@ -202,6 +211,7 @@ public abstract class JDFTestCaseBase extends TestCase
 	protected String senderID;
 	protected long mem;
 	protected Log log;
+	private boolean bTestNetwork;
 
 	// //////////////////////////////////////////////////////////////////////////
 	// /
@@ -295,6 +305,24 @@ public abstract class JDFTestCaseBase extends TestCase
 	public String toString()
 	{
 		return "[" + StringUtil.token(this.getClass().getName(), -1, ".") + " Version:  " + defaultVersion + " " + new File(sm_dirTestData).getAbsolutePath() + " ]\n";
+	}
+
+	/**
+	 * Setter for bTestNetwork attribute.
+	 * @param bTestNetwork the bTestNetwork to set
+	 */
+	public void setTestNetwork(boolean bTestNetwork)
+	{
+		this.bTestNetwork = bTestNetwork;
+	}
+
+	/**
+	 * Getter for bTestNetwork attribute.
+	 * @return the bTestNetwork
+	 */
+	public boolean isTestNetwork()
+	{
+		return bTestNetwork;
 	}
 
 }

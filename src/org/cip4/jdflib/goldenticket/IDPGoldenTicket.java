@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -70,22 +70,30 @@
  */
 package org.cip4.jdflib.goldenticket;
 
+import org.cip4.jdflib.auto.JDFAutoDigitalPrintingParams.EnumSides;
+import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.datatypes.JDFXYPair;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.resource.JDFInterpretingParams;
+import org.cip4.jdflib.resource.JDFLayoutPreparationParams;
 import org.cip4.jdflib.resource.process.JDFDigitalPrintingParams;
+import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.resource.process.JDFUsageCounter;
 
 /**
  * @author Rainer Prosi class that generates golden tickets based on ICS levels etc
  */
 public class IDPGoldenTicket extends MISGoldenTicket
 {
+	boolean bUsageCounter;
+
 	/**
 	 * @param previous
 	 * @param _vparts
@@ -101,7 +109,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 		workStyle = previous.workStyle;
 		thePreviousNode = previous.theNode;
 		theParentNode = previous.theParentNode;
-
+		bUsageCounter = true;
 	}
 
 	/**
@@ -111,7 +119,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	protected void fillCatMaps()
 	{
 		super.fillCatMaps();
-		catMap.put("IDP.DigitalPrinting", new VString("Interpreting Rendering DigitalPrinting", null));
+		catMap.put("IDP.DigitalPrinting", new VString("LayoutPreparation Interpreting Rendering DigitalPrinting", null));
 		setCategory("IDP.DigitalPrinting");
 	}
 
@@ -123,7 +131,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	{
 		super(parent);
 		grayBox = false;
-
+		bUsageCounter = true;
 	}
 
 	/**
@@ -134,7 +142,7 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	{
 		super(1, null, 2);
 		grayBox = false;
-
+		bUsageCounter = true;
 		icsLevel = _icsLevel;
 	}
 
@@ -153,9 +161,22 @@ public class IDPGoldenTicket extends MISGoldenTicket
 		super.init();
 		setActivePart(vParts, true);
 		initDocumentRunList();
-		initDigitalPrintingParams();
 		initOutputComponent();
 		initInterpretingParams();
+		initUsageCounter();
+		JDFMedia m = initPaperMedia();
+		initDigitalPrintingParams(m);
+		initLayoutPrep();
+	}
+
+	/**
+	 * TODO Please insert comment!
+	 */
+	private JDFLayoutPreparationParams initLayoutPrep()
+	{
+		JDFLayoutPreparationParams layPP = (JDFLayoutPreparationParams) theNode.getCreateResource(ElementName.LAYOUTPREPARATIONPARAMS, EnumUsage.Input, 0);
+		layPP.setSides(JDFLayoutPreparationParams.EnumSides.TwoSidedFlipY);
+		return layPP;
 	}
 
 	/**
@@ -165,17 +186,33 @@ public class IDPGoldenTicket extends MISGoldenTicket
 	private JDFInterpretingParams initInterpretingParams()
 	{
 		return (JDFInterpretingParams) theNode.getCreateResource(ElementName.INTERPRETINGPARAMS, EnumUsage.Input, 0);
-
 	}
 
 	/**
 	 * @return 
 	 * 
 	 */
-	private JDFDigitalPrintingParams initDigitalPrintingParams()
+	private JDFUsageCounter initUsageCounter()
 	{
-		return (JDFDigitalPrintingParams) theNode.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, 0);
+		if (!bUsageCounter)
+			return null;
+		JDFUsageCounter usageCounter = (JDFUsageCounter) theNode.getCreateResource(ElementName.USAGECOUNTER, EnumUsage.Input, 0);
+		usageCounter.setScope(EnumScope.Job);
+		return usageCounter;
+	}
 
+	/**
+	 * @param m 
+	 * @return 
+	 * 
+	 */
+	private JDFDigitalPrintingParams initDigitalPrintingParams(JDFMedia m)
+	{
+		JDFDigitalPrintingParams digiParams = (JDFDigitalPrintingParams) theNode.getCreateResource(ElementName.DIGITALPRINTINGPARAMS, EnumUsage.Input, 0);
+		digiParams.setSides(EnumSides.TwoSidedFlipY);
+		if (m != null)
+			digiParams.refElement(m);
+		return digiParams;
 	}
 
 	/**
@@ -212,6 +249,14 @@ public class IDPGoldenTicket extends MISGoldenTicket
 		theNode.getLink(rl, EnumUsage.Input).setProcessUsage((EnumProcessUsage) null);
 
 		return rl;
+	}
+
+	@Override
+	protected JDFMedia initPaperMedia()
+	{
+		super.initPaperMedia();
+		paperMedia.setDimensionInch(new JDFXYPair(8.5, 11));
+		return paperMedia;
 	}
 
 }

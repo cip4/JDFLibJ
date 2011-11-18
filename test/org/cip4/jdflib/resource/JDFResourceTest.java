@@ -117,6 +117,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.JDFResource.PartitionGetter;
 import org.cip4.jdflib.resource.process.JDFBinderySignature;
 import org.cip4.jdflib.resource.process.JDFColorPool;
 import org.cip4.jdflib.resource.process.JDFColorantControl;
@@ -1348,12 +1349,42 @@ public class JDFResourceTest extends JDFTestCaseBase
 
 		// tests for partition list
 		// DE from DE FR
-		assertEquals(xm.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "DE FR"), null), xmp);
+		assertEquals(xm.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "DE"), null), xmp);
 		assertNull(xm.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "GR"), null));
 
 		// get 2 from 1~3
 		assertEquals(m.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetIndex.getName(), "2"), null), mp);
 		assertNull(m.getPartition(new JDFAttributeMap(EnumPartIDKey.SheetIndex.getName(), "42"), null));
+	}
+
+	/**
+	 * test whether getpartition works for lists and ranges
+	 */
+	public void testStrictPartsPartition()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.ConventionalPrinting);
+		JDFResource xmRoot = n.appendMatchingResource(ElementName.EXPOSEDMEDIA, EnumProcessUsage.AnyInput, null);
+		final JDFExposedMedia xm = (JDFExposedMedia) xmRoot.addPartition(EnumPartIDKey.SheetName, "S1");
+		final JDFExposedMedia xmp = (JDFExposedMedia) xm.addPartition(EnumPartIDKey.PartVersion, "DE FR");
+
+		// tests for partition list
+		// DE from DE FR
+		JDFAttributeMap m1 = new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "DE");
+		m1.put(EnumPartIDKey.SheetName, "S1");
+		assertEquals(xmRoot.getPartition(m1, null), xmp);
+		assertEquals(xmRoot.getCreatePartition(m1, null), xmp);
+		assertNull(xmRoot.getPartition(new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "GR"), null));
+
+		PartitionGetter pg = xmRoot.new PartitionGetter();
+		pg.setStrictPartVersion(true);
+
+		JDFAttributeMap m = new JDFAttributeMap(EnumPartIDKey.PartVersion.getName(), "DE FR");
+		m.put(EnumPartIDKey.SheetName, "S1");
+		assertEquals(pg.getPartition(m, null), xmp);
+		assertNull(pg.getPartition(m1, null));
+		assertEquals(pg.getCreatePartition(m1, null).getPartVersion(), "DE");
 	}
 
 	// ////////////////////////////////////////////////////////////

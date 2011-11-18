@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -308,6 +308,51 @@ public class JDFResourceLinkTest extends JDFTestCaseBase
 		n.setCombined(new VString("ImageSetting ConventionalPrinting ConventionalPrinting", null));
 		rl.generateCombinedProcessIndex();
 		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1 2"));
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testGenerateCPIComponent() throws Exception
+	{
+		JDFNode n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		JDFResource r = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		JDFResource r2 = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		JDFResourceLink rl = n.getLink(r, null);
+		JDFResourceLink rl2 = n.getLink(r2, null);
+		assertNull(" No CPI if no type", rl.getCombinedProcessIndex());
+		assertNull(" No CPI if no type", rl2.getCombinedProcessIndex());
+		rl.generateCombinedProcessIndex();
+		assertNull(" No CPI if no type", rl.getCombinedProcessIndex());
+		assertNull(" No CPI if no type", rl2.getCombinedProcessIndex());
+
+		n = new JDFDoc(ElementName.JDF).getJDFRoot();
+		n.setVersion(JDFElement.EnumVersion.Version_1_3);
+		n.setType(EnumType.ProcessGroup);
+		r = n.addResource(ElementName.COMPONENT, EnumUsage.Input);
+		r2 = n.addResource(ElementName.COMPONENT, EnumUsage.Output);
+		rl = n.getLink(r, null);
+		rl2 = n.getLink(r2, null);
+		assertNull(" No CPI for gray box", rl.getCombinedProcessIndex());
+		rl.generateCombinedProcessIndex();
+		assertNull(" No CPI for gray box", rl.getCombinedProcessIndex());
+
+		n.setCombined(new VString("ConventionalPrinting", null));
+		rl.generateCombinedProcessIndex();
+		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("0"));
+		rl2.generateCombinedProcessIndex();
+		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("0"));
+
+		n.setCombined(new VString("ImageSetting ConventionalPrinting", null));
+		rl.generateCombinedProcessIndex();
+		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		rl2.generateCombinedProcessIndex();
+		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		n.setCombined(new VString("ImageSetting ConventionalPrinting ConventionalPrinting", null));
+		rl.generateCombinedProcessIndex();
+		rl2.generateCombinedProcessIndex();
+		assertEquals(rl.getCombinedProcessIndex(), new JDFIntegerList("1"));
+		assertEquals(rl2.getCombinedProcessIndex(), new JDFIntegerList("2"));
 	}
 
 	/**

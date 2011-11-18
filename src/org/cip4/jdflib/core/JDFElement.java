@@ -186,6 +186,7 @@ public class JDFElement extends KElement
 	}
 
 	/**
+	 * @return 
 	 * @see org.cip4.jdflib.core.KElement#getTheAttributeInfo()
 	 */
 	protected AttributeInfo getTheAttributeInfo()

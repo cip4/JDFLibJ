@@ -91,10 +91,10 @@ public class URLProxySelectorTest extends JDFTestCaseBase
 	 */
 	public void testSelect() throws URISyntaxException
 	{
-		// currently, our proxy dies if you ping it directly
 		for (int i = 0; i < 1; i++)
 		{
-			if (i == 1)
+			// currently, our proxy dies if you ping it directly
+			if (i == 1 && isTestNetwork())
 			{
 				UrlPart p = UrlUtil.writeToURL("http://proxy:8080", null, UrlUtil.GET, null, null);
 				if (p == null)
@@ -112,9 +112,16 @@ public class URLProxySelectorTest extends JDFTestCaseBase
 			uri = UrlUtil.stringToURL("http://68.123.4.5").toURI();
 			l = ups.select(uri);
 			assertEquals(2, l.size());
-			uri = UrlUtil.stringToURL("http://kie-wf19prdy").toURI();
-			l = ups.select(uri);
-			assertEquals(1, l.size());
+			if (!isTestNetwork())
+			{
+				log.info("skipping network test");
+			}
+			else
+			{
+				uri = UrlUtil.stringToURL("http://kie-wf19prdy").toURI();
+				l = ups.select(uri);
+				assertEquals(1, l.size());
+			}
 		}
 	}
 }

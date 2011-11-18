@@ -659,6 +659,23 @@ public class JDFNodeTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testContainsType()
+	{
+		JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		n.setCombined(new VString("LayoutPreparation ConventionalPrinting foo ManualLabor", null));
+		assertTrue(n.containsType("foo"));
+		assertTrue(n.containsType("LayoutPreparation"));
+		assertTrue(n.containsType("ManualLabor"));
+		assertFalse(n.containsType("Combined"));
+		n = new JDFDoc("JDF").getJDFRoot();
+		n.setType(EnumType.AssetListCreation);
+		assertTrue(n.containsType(EnumType.AssetListCreation.getName()));
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testCloneResourceToModify()
 	{
 		final JDFDoc d = JDFTestCaseBase.creatXMDoc();

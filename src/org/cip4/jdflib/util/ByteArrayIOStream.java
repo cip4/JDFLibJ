@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,7 +82,6 @@ package org.cip4.jdflib.util;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -127,7 +126,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	 */
 	public ByteArrayIOStream(final InputStream is)
 	{
-		super(1000);
+		super(10000);
 		log = LogFactory.getLog(getClass());
 		if (is == null)
 		{
@@ -157,13 +156,20 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	{
 		super(10);
 		log = LogFactory.getLog(getClass());
-		if (f.length() > 10)
+		if (f != null && f.length() > 10)
 		{
-			this.buf = new byte[(int) f.length() + 100];
+			buf = new byte[(int) f.length() + 100];
 		}
-		final FileInputStream fis = new FileInputStream(f);
-		IOUtils.copy(fis, this);
-		fis.close();
+		final InputStream fis = FileUtil.getBufferedInputStream(f);
+		if (fis != null)
+		{
+			IOUtils.copy(fis, this);
+			fis.close();
+		}
+		else
+		{
+			log.warn("cannot create buffered stream for: " + f);
+		}
 	}
 
 	/**

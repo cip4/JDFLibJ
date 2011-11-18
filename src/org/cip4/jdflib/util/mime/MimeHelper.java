@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -76,6 +76,8 @@ import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.core.JDFParser;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -92,6 +94,7 @@ public class MimeHelper
 	protected Multipart theMultipart;
 	private static boolean bNeedAParser = true;
 	protected int markSize;
+	private final Log log;
 
 	/**
 	 * 
@@ -99,7 +102,7 @@ public class MimeHelper
 	public MimeHelper()
 	{
 		super();
-
+		log = LogFactory.getLog(getClass());
 		// there is a bug in xerces that screws up the reference count for shared files when the static stuff in domparser is initialized.
 		// make sure that this happens prior to any mime related tasks and all is well
 		if (bNeedAParser)
@@ -131,6 +134,7 @@ public class MimeHelper
 		}
 		catch (final MessagingException e)
 		{
+			log.error("Cannot get count", e);
 			return 0;
 		}
 	}
@@ -165,7 +169,7 @@ public class MimeHelper
 		}
 		catch (final MessagingException x)
 		{
-			// nop
+			log.error("Cannot create part; cid=" + cid, x);
 		}
 		return bp;
 	}
@@ -191,6 +195,7 @@ public class MimeHelper
 		cid = StringUtil.getNonEmpty(cid);
 		if (UrlUtil.isNotCID(cid))
 		{
+			log.warn("incorrect CID format: cid=" + cid);
 			return null;
 		}
 		try

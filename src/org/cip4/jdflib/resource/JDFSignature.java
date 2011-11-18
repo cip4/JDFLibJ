@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -353,7 +353,7 @@ public class JDFSignature extends JDFAutoLayout
 	}
 
 	/**
-	 * get a specific layout element
+	 * get a specific layout element, in old style (pre 1.3) layouts, this must be a direct child wherea post 1.3 layouts allow for search of lower level elements (grandchildren etc.) 
 	 * 
 	 * @param layout
 	 * @param elementName
@@ -361,10 +361,8 @@ public class JDFSignature extends JDFAutoLayout
 	 * @param iSkip the index of the element, negative values count backwards from the end
 	 * @return JDFLayout: the element
 	 */
-	protected static JDFLayout getLayoutElement(final JDFResource layout, final String elementName, final String partitionKeyName, final int iSkip)
+	protected static JDFLayout getLayoutElement(final JDFResource layout, final String elementName, final String partitionKeyName, int iSkip)
 	{
-		int iSkipLocal = iSkip;
-
 		JDFLayout s = null;
 		if (JDFLayout.isNewLayout(layout))
 		{
@@ -378,20 +376,19 @@ public class JDFSignature extends JDFAutoLayout
 				}
 			}
 			v = v2;
-			if (iSkipLocal < 0)
+			if (iSkip < 0)
 			{
-				iSkipLocal = v.size() + iSkipLocal;
+				iSkip = v.size() + iSkip;
 			}
 
-			if (iSkipLocal >= 0 && v.size() > iSkipLocal)
+			if (iSkip >= 0 && v.size() > iSkip)
 			{
-				s = (JDFLayout) v.elementAt(iSkipLocal);
+				s = (JDFLayout) v.elementAt(iSkip);
 			}
 		}
 		else
 		{
-			s = (JDFLayout) layout.getElement(elementName, null, iSkipLocal);
-
+			s = (JDFLayout) layout.getElement(elementName, null, iSkip);
 		}
 		return s;
 	}

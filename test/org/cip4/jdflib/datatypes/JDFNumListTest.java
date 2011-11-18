@@ -265,7 +265,6 @@ public class JDFNumListTest extends JDFTestCaseBase
 		assertFalse(l.contains(0));
 	}
 
-	// ////////////////////////////////////////////////////////////
 	/**
 	 * @throws Exception 
 	 * 
@@ -277,6 +276,18 @@ public class JDFNumListTest extends JDFTestCaseBase
 		assertTrue(l.contains(4));
 		assertTrue(l.contains(3));
 		assertFalse(l.contains(0));
+	}
+
+	/**
+	 * @throws Exception 
+	 * 
+	 */
+	public final void testContainsAll() throws Exception
+	{
+		final JDFIntegerList l = new JDFIntegerList("1 2 3 4 3");
+		assertTrue(l.containsAll(null));
+		assertTrue(l.containsAll(new JDFIntegerList("1 2 4 3")));
+		assertFalse(l.containsAll(new JDFIntegerList("1 2 4 3 5")));
 	}
 
 	// ////////////////////////////////////////////////////////////

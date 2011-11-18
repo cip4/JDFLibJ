@@ -88,8 +88,10 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFCMYKColor;
+import org.cip4.jdflib.datatypes.JDFIntegerList;
 import org.cip4.jdflib.extensions.xjdfwalker.XJDFToJDFConverter;
 import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.node.JDFNode;
@@ -296,9 +298,18 @@ public class XJDFTest extends JDFTestCaseBase
 
 	/**
 	 */
+	public void testJMFMessageRoot()
+	{
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.Status);
+		e = new XJDF20().makeNewJMF(jmf);
+		assertEquals(e.getFirstChildElement().getLocalName(), "QueryStatus");
+	}
+
+	/**
+	 */
 	public void testJMFToXJDF()
 	{
-		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, org.cip4.jdflib.jmf.JDFMessage.EnumType.Resource);
+		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Signal, JDFMessage.EnumType.Resource);
 		final JDFResourceInfo ri = jmf.getCreateSignal(0).appendResourceInfo();
 		ri.setResourceName("ExposedMedia");
 		final JDFExposedMedia xm = (JDFExposedMedia) ri.appendResource("ExposedMedia");
@@ -311,9 +322,8 @@ public class XJDFTest extends JDFTestCaseBase
 		final JDFExposedMedia xmPart = (JDFExposedMedia) xm.getCreatePartition(partMap, new VString("SignatureName SheetName Side Separation", null));
 		xmPart.appendMedia();
 		e = new XJDF20().makeNewJMF(jmf);
-		final JDFPart pNew = (JDFPart) e.getXPathElement("Signal/ResourceInfo/ResourceSet/Resource/Part");
+		final JDFPart pNew = (JDFPart) e.getXPathElement("SignalResource/ResourceInfo/ResourceSet/Resource/Part");
 		assertEquals(pNew.getPartMap(), partMap);
-
 	}
 
 	/**
@@ -672,9 +682,10 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * @throws Exception 
 	 *  
 	 */
-	public void testToXJDFLayout()
+	public void testToXJDFLayout() throws Exception
 	{
 		n = new JDFDoc("JDF").getJDFRoot();
 		n.setType(EnumType.Stripping);
@@ -691,20 +702,22 @@ public class XJDFTest extends JDFTestCaseBase
 		{
 			JDFStrippingParams sp11 = (JDFStrippingParams) sp1.addPartition(EnumPartIDKey.BinderySignatureName, bs);
 			JDFBinderySignature bs1 = sp11.appendBinderySignature();
+			bs1.appendSignatureCell().setFrontPages(new JDFIntegerList("0 2 4"));
+			bs1.appendSignatureCell().setFrontPages(new JDFIntegerList("6 8 10"));
 			bs1.makeRootResource(null, null, true);
 			sp11.appendPosition();
 			sp11.appendPosition();
 			for (int i = 0; i < 2; i++)
 			{
 				JDFStrippingParams spcell1 = (JDFStrippingParams) sp11.addPartition(EnumPartIDKey.CellIndex, "" + i);
-				spcell1.appendStripCellParams();
+				spcell1.appendStripCellParams().setSpine(42.);
 			}
 		}
 		XJDF20 xjdf20 = new XJDF20();
 		xjdf20.bMergeLayout = true;
 		e = xjdf20.makeNewJDF(n, null);
 		assertNull(e.getChildByTagName("StrippingParams", null, 0, null, false, true));
-
+		e.getOwnerDocument_KElement().write2File(sm_dirTestData + "mergelayout.xjdf", 2, false);
 	}
 
 	/**
@@ -835,12 +848,13 @@ public class XJDFTest extends JDFTestCaseBase
 		e.setAttribute("Types", "Product");
 		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@NumColors", "4/1");
 		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@Coatings", "DullVarnish");
+		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@CoatingsBack", "GlossVarnish");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
 		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
-		assertEquals(ci.getCoatings().getActual(), "DullVarnish");
+		assertEquals(((JDFColorIntent) (ci.getPartition(new JDFAttributeMap("Side", "Front"), null))).getCoatings().getActual(), "DullVarnish");
 	}
 
 	/**

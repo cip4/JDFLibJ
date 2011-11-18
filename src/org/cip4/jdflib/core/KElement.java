@@ -2595,50 +2595,28 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param nMax maximum number of value instances to remove (-1 = all)
 	 * @return int number of removed instances
 	 */
-	public int removeFromAttribute(final String key, final String token, final String nameSpaceURI, final String sep, int nMax)
+	public int removeFromAttribute(final String key, final String token, final String nameSpaceURI, String sep, int nMax)
 	{
 		String strAttrValue = getAttribute_KElement(key, nameSpaceURI, null);
-		if (strAttrValue == null)
+		if (strAttrValue == null || token == null)
 			return 0;
+
 		int n = 0;
-		int lenToken = token.length();
-		if (lenToken == 0)
-			return 0;
-		int iPos = StringUtil.indexOfToken(strAttrValue, token, " ", 0);
-		while (iPos >= 0)
+		int posOfToken = StringUtil.posOfToken(strAttrValue, token, sep, 0);
+		while (posOfToken >= 0)
 		{
-			int lenString = strAttrValue.length();
-			if (iPos == 0 && lenToken == lenString)
-			{
-				removeAttribute_KElement(key, nameSpaceURI);
-				return ++n;
-			}
-			int l = lenToken;
-			while (iPos > 0 && sep.indexOf(strAttrValue.charAt(iPos - 1)) >= 0)
-			{
-				iPos--;
-				l++;
-			}
-			while (iPos + l < lenString && sep.indexOf(strAttrValue.charAt(iPos + l)) >= 0)
-				l++;
-			if (iPos > 0 && iPos + l == lenString)
-				strAttrValue = strAttrValue.substring(0, iPos);
-			else if (iPos > 0 && iPos + l < lenString)
-				strAttrValue = strAttrValue.substring(0, iPos + 1) + strAttrValue.substring(iPos + l);
-			else if (iPos == 0 && iPos + l == lenString)
-			{
-				strAttrValue = null;
-				break;
-			}
-			else if (iPos == 0 && iPos + l < lenString)
-				strAttrValue = strAttrValue.substring(iPos + l);
-			else
-				throw new JDFException("should never get here");
-			if (n++ == nMax)
-				break;
-			iPos = StringUtil.indexOfToken(strAttrValue, token, " ", 0);
+			strAttrValue = StringUtil.replaceToken(strAttrValue, posOfToken, sep, null);
+			n++;
+			posOfToken = StringUtil.posOfToken(strAttrValue, token, sep, 0);
 		}
-		setAttribute(key, strAttrValue, nameSpaceURI);
+
+		// we had a change - update
+		if (n > 0)
+		{
+			strAttrValue = strAttrValue.trim();
+			setAttribute(key, StringUtil.getNonEmpty(strAttrValue), nameSpaceURI);
+		}
+
 		return n;
 	}
 
@@ -2648,14 +2626,13 @@ public class KElement extends ElementNSImpl implements Element
 	 */
 	public boolean flush()
 	{
-		final VElement list = getChildElementVector(null, null, null, true, 0, false);
-
-		for (int i = list.size() - 1; i >= 0; i--)
+		Node node = getFirstChild();
+		while (node != null)
 		{
-			final Node node = list.elementAt(i);
+			Node next = node.getNextSibling();
 			removeChild(node);
+			node = next;
 		}
-
 		removeAttributes(null);
 		return true;
 	}
@@ -2701,7 +2678,6 @@ public class KElement extends ElementNSImpl implements Element
 			if (nm != null)
 			{
 				final int siz = nm.getLength();
-
 				for (int i = siz - 1; i >= 0; i--)
 				{
 					removeAttribute(nm.item(i).getNodeName());
@@ -2710,9 +2686,9 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		else
 		{
-			for (int i = 0; i < attribs.size(); i++)
+			for (String attrib : attribs)
 			{
-				removeAttribute(attribs.elementAt(i));
+				removeAttribute(attrib);
 			}
 		}
 	}
