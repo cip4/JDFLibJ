@@ -1206,19 +1206,6 @@ public class JDFResourceTest extends JDFTestCaseBase
 			//
 		}
 		doc.write2File(sm_dirTestDataTemp + "identical.jdf", 2, false);
-		// the following now works, even though it would be marked as invalid
-		// manually screw up the resource
-		// c3y.appendIdentical().setPartMap(c1.getPartMap());
-		// try
-		// {
-		// c.getPartition(c3y.getPartMap(), null);
-		// fail("myself set parent");
-		// }
-		// catch (final JDFException x)
-		// {
-		// //
-		// }
-
 	}
 
 	/**
@@ -1292,6 +1279,27 @@ public class JDFResourceTest extends JDFTestCaseBase
 		assertEquals(r, rSheet);
 		r = fp.getPartition(m2, EnumPartUsage.Explicit);
 		assertNull(r);
+	}
+
+	/**
+	 * test whether getpartition works for when map has too many keys
+	 */
+	public void testGetPartitionExplicitOver()
+	{
+		final JDFDoc doc = new JDFDoc("JDF");
+		final JDFNode n = doc.getJDFRoot();
+		n.setType(EnumType.Folding);
+		final JDFFoldingParams fp = (JDFFoldingParams) n.addResource(ElementName.FOLDINGPARAMS, null, EnumUsage.Input, null, null, null, null);
+		final JDFAttributeMap m = new JDFAttributeMap("SignatureName", "Sig1");
+		m.put("SheetName", "Sheet1");
+		final JDFResource rSheet = fp.getCreatePartition(m, new VString("SignatureName SheetName", " "));
+		m.put("BlockName", "Block1");
+		JDFResource r = fp.getPartition(m, EnumPartUsage.Explicit);
+		assertNull(r);
+		r = rSheet.getPartition(m, EnumPartUsage.Explicit);
+		assertNull(r);
+		r = fp.getCreatePartition(m, null);
+		assertNotNull(r);
 	}
 
 	/**

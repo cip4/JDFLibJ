@@ -5791,25 +5791,25 @@ public class KElement extends ElementNSImpl implements Element
 
 	/**
 	 * create and append a unique id, keep the existing one if it already exists
-	 * @param strName
+	 * @param newID the new id. if null, then a reasonably unique id is generated
 	 * 
 	 * @return String - the value of the ID attribute after setting
 	 * 
 	 * @default appendAnchor(null)
 	 */
-	public String appendAnchor(String strName)
+	public String appendAnchor(String newID)
 	{
 		String id = this.getAttribute(JDFCoreConstants.ID, null, null);
 		if (id != null)
 		{
 			return id;
 		}
-		else if ((strName == null) || strName.equals(JDFCoreConstants.EMPTYSTRING))
+		else if ((newID == null) || newID.equals(JDFCoreConstants.EMPTYSTRING))
 		{
-			strName = "id_" + uniqueID(0);
+			newID = "id_" + uniqueID(0);
 		}
-		setAttribute(JDFCoreConstants.ID, strName, null);
-		return strName;
+		setAttribute(JDFCoreConstants.ID, newID, null);
+		return newID;
 	}
 
 	/**

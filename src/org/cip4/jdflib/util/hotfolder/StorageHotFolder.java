@@ -123,6 +123,7 @@ public class StorageHotFolder
 		log = LogFactory.getLog(getClass());
 		this.storageDir = storageDir;
 		storageDir.mkdirs(); // just in case
+		storageDir.setWritable(true);
 		if (!storageDir.isDirectory())
 		{
 			log.error("Storage Directory is not a directory: " + storageDir.getAbsolutePath());

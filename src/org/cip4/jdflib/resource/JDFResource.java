@@ -1673,6 +1673,20 @@ public class JDFResource extends JDFElement
 			{
 				m.reduceMap(partIDKeys); // also ok for sparse!
 			}
+			else
+			//explicit
+			{
+				VString keys = m.getKeys();
+				if (partIDKeys != null)
+				{
+					if (!partIDKeys.containsAll(keys))
+						return vReturn;
+				}
+				else if (keys.size() > 0)
+				{
+					return vReturn;
+				}
+			}
 			if (m.isEmpty())
 			{
 				vReturn.add(JDFResource.this);
@@ -1689,13 +1703,6 @@ public class JDFResource extends JDFElement
 				while (it.hasNext())// for(int i = 0; i < msiz; i++)
 				{
 					final String strKey = it.next();
-					// final EnumPartIDKey partIDKey = EnumPartIDKey.getEnum(strKey);
-					//
-					// // check map and throw exception if bad
-					// if (partIDKey == null)
-					// {
-					// throw new JDFException("GetPartIDKeyEnum: illegal key:" + strKey);
-					// }
 
 					// check whether we are already in a leaf when initially calling
 					final String mMapValue = m.get(strKey);
@@ -1718,8 +1725,7 @@ public class JDFResource extends JDFElement
 			}
 
 			// if we find an <Identical> element, we must clean up the map and merge
-			// in the values of
-			// identical can only be in a leaf
+			// in the values of identical can only be in a leaf
 			final JDFIdentical identical = getIdentical();
 			if (identical != null)
 			{
@@ -1735,8 +1741,7 @@ public class JDFResource extends JDFElement
 					m.putAll(identityMap);
 
 					// the identity map is always complete from the root, we therefore
-					// can start searching
-					// in the root
+					// can start searching in the root
 					return getResourceRoot().getDeepPartVector(m, partUsage, -1, partIDKeys);
 				}
 			}
@@ -1797,16 +1802,13 @@ public class JDFResource extends JDFElement
 					}
 					else
 					{
-						bSnafu = true; // should never get here, but in case of a
-						// corrupt leaf structure,
+						bSnafu = true; // should never get here, but in case of a corrupt leaf structure,
 						// it could happen and will be handled gracefully
 					}
 				}
 
-				if ((nChildren++ == 0) || bSnafu) // must only search the first
-				// element, since only one key
-				{ // is allowed and all keys must be in the same sequence;
-					// unless, of course, someone wrote crap JDF (bSnafu=true)
+				if ((nChildren++ == 0) || bSnafu) // must only search the first element, since only one key
+				{ // is allowed and all keys must be in the same sequence; unless, of course, someone wrote crap JDF (bSnafu=true)
 					final Iterator<String> it = m.getKeyIterator();
 					int im = 0;
 					while (it.hasNext())
@@ -1909,11 +1911,9 @@ public class JDFResource extends JDFElement
 					}
 				}
 
-				if (!bSame) // something in the children warrants a closer look and
-				// we are at the end
+				if (!bSame) // something in the children warrants a closer look and we are at the end
 				{
-					// none match and this is the last with bad kids and we want
-					// incomplete stuff
+					// none match and this is the last with bad kids and we want incomplete stuff
 					if (toAppend.isEmpty() && hasBadChildren && (partUsage.equals(EnumPartUsage.Implicit)) && !hasMatchingAttribute)
 					{
 						final JDFResource root = getResourceRoot();
@@ -1974,7 +1974,6 @@ public class JDFResource extends JDFElement
 		}
 
 		// //////////////////////////////////////////////////////////////////////////
-		// /////
 		private JDFAttributeMap removeImplicitPartions(JDFAttributeMap m)
 		{
 			if (m == null)

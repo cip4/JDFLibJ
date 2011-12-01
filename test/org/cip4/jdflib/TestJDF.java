@@ -114,10 +114,10 @@ public class TestJDF extends JDFTestCaseBase
 	 */
 	public void testgetPartition()
 	{
-		final JDFDoc d = new JDFParser().parseFile("/share/data/data.jdf");
+		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/StefanBartels/crap.jdf");
 		final JDFNode n = d.getJDFRoot();
-		JDFResource r = (n.getResource(ElementName.COLORANTCONTROL, EnumUsage.Input, 0));
-		JDFResource rp = r.getPartition(new JDFAttributeMap("SignatureName", "Sig001"), null);
+		JDFResource r = (n.getResource(ElementName.EXPOSEDMEDIA, EnumUsage.Output, 0));
+		JDFResource rp = r.getPartition(new JDFAttributeMap("SignatureName", "Sig0001"), null);
 		assertNull(rp);
 	}
 

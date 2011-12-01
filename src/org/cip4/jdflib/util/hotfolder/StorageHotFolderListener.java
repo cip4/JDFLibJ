@@ -126,6 +126,7 @@ class StorageHotFolderListener implements HotFolderListener
 		if (ok != null)
 		{
 			okStorage.mkdirs();
+			okStorage.setWritable(true);
 			if (!okStorage.isDirectory())
 			{
 				log.error("OK Directory is not a directory: " + okStorage.getAbsolutePath());
@@ -144,6 +145,7 @@ class StorageHotFolderListener implements HotFolderListener
 		if (error != null)
 		{
 			errorStorage.mkdirs();
+			errorStorage.setWritable(true);
 			if (!errorStorage.isDirectory())
 			{
 				log.error("Error Directory is not a directory: " + errorStorage.getAbsolutePath());
@@ -187,10 +189,13 @@ class StorageHotFolderListener implements HotFolderListener
 				roller.getNewFile();
 				File copied = FileUtil.moveFileToDir(storedFile, okStorage);
 				if (copied == null)
-					log.warn("could not move ok " + storedFile + " to " + okStorage.getAbsolutePath());
+				{
+					handleBad(storedFile, true);
+				}
 				else
+				{
 					copied.setLastModified(System.currentTimeMillis());
-
+				}
 				cleanup(bOK);
 			}
 			else
@@ -209,9 +214,13 @@ class StorageHotFolderListener implements HotFolderListener
 				roller.getNewFile();
 				File copied = FileUtil.moveFileToDir(storedFile, errorStorage);
 				if (copied == null)
-					log.warn("could not move error " + storedFile + " to " + okStorage.getAbsolutePath());
+				{
+					handleBad(storedFile, false);
+				}
 				else
+				{
 					copied.setLastModified(System.currentTimeMillis());
+				}
 
 				cleanup(bOK);
 			}
@@ -221,6 +230,23 @@ class StorageHotFolderListener implements HotFolderListener
 				if (!ok)
 					log.warn("failed to delete temporary file " + storedFile.getAbsolutePath());
 			}
+		}
+	}
+
+	protected void handleBad(final File storedFile, boolean bOK)
+	{
+		if (bOK)
+			log.warn("could not move ok " + storedFile + " to " + okStorage.getAbsolutePath());
+		else
+			log.warn("could not move error " + storedFile + " to " + errorStorage.getAbsolutePath());
+		boolean bZapp = storedFile.delete();
+		if (bZapp)
+		{
+			log.warn("utterly removed hot file: " + storedFile);
+		}
+		else
+		{
+			log.error("cannot process hot file: " + storedFile);
 		}
 	}
 

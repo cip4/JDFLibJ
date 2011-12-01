@@ -199,6 +199,8 @@ public class HotFolder implements Runnable
 		log = LogFactory.getLog(getClass());
 		dir = _dir;
 		dir.mkdirs();
+		dir.setWritable(true);
+
 		lastFileTime = new Vector<FileTime>();
 		hfl = new Vector<ExtensionListener>();
 		runThread = null;
@@ -217,6 +219,11 @@ public class HotFolder implements Runnable
 		{
 			stop();
 		}
+		if (!dir.canWrite())
+		{
+			log.error("Cannot use read only hot folder at");
+		}
+
 		String threadName = "HotFolder_" + nThread++ + "_" + dir.getAbsolutePath();
 		runThread = new Thread(this, threadName);
 		interrupt = false;
@@ -266,11 +273,10 @@ public class HotFolder implements Runnable
 			// has the directory been touched?
 			{
 				lastModified = lastMod;
-				File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
+				File[] files = getHotFiles();
 				if (files != null)
 				{
 					final int fileListLength = files.length;
-
 					for (int i = 0; i < lastFileTime.size(); i++)
 					{
 						boolean found = false;
@@ -309,6 +315,23 @@ public class HotFolder implements Runnable
 		}
 
 		runThread.interrupt();
+	}
+
+	private File[] getHotFiles()
+	{
+		File[] files = FileUtil.listFilesWithExtension(dir, getAllExtensions());
+		if (files != null)
+		{
+			for (int i = 0; i < files.length; i++)
+			{
+				if (!files[i].canWrite())
+				{
+					log.warn("ignoring read only file in hot folder: " + files[i]);
+					files[i] = null;
+				}
+			}
+		}
+		return files;
 	}
 
 	private boolean processSingleFile(final File[] files, final FileTime lftAt, int j, final File fileJ)

@@ -74,6 +74,7 @@ package org.cip4.jdflib.jmf;
 import java.util.Vector;
 
 import org.cip4.jdflib.auto.JDFAutoDeviceFilter;
+import org.cip4.jdflib.auto.JDFAutoDeviceInfo.EnumDeviceStatus;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
 import org.cip4.jdflib.auto.JDFAutoQueueFilter.EnumUpdateGranularity;
 import org.cip4.jdflib.auto.JDFAutoResourceQuParams.EnumResourceDetails;
@@ -262,6 +263,25 @@ public class JMFBuilder
 		statusQuParams.setDeviceDetails(deviceDetails);
 		statusQuParams.setJobDetails(jobDetails);
 		return finalize(jmf);
+	}
+
+	/**
+	 * build a JMF Status query
+	 * @param deviceDetails the device details
+	 * @param jobDetails the status details
+	 * @return the message
+	 */
+	public JDFJMF buildStatusSignal(EnumDeviceDetails deviceDetails, EnumJobDetails jobDetails)
+	{
+		final JDFJMF jmf = buildStatus(deviceDetails, jobDetails);
+		final JDFJMF jmfSignal = createJMF(EnumFamily.Signal, EnumType.Status);
+		final JDFSignal signal = jmfSignal.getSignal(0);
+		signal.setQuery(jmf.getQuery(0));
+		signal.copyElement(jmf.getQuery(0).getStatusQuParams(), null);
+		final JDFDeviceInfo di = signal.appendDeviceInfo();
+		di.setDeviceStatus(EnumDeviceStatus.Unknown);
+		JDFJobPhase jp = di.appendJobPhase();
+		return jmfSignal;
 	}
 
 	/**

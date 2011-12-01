@@ -1,7 +1,5 @@
-/*
- *
+/**
  * The CIP4 Software License, Version 1.0
- *
  *
  * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
@@ -68,79 +66,73 @@
  *  
  * 
  */
+package org.cip4.jdflib.examples;
 
-package org.cip4.jdflib.jmf;
-
-import java.util.HashMap;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumDeviceDetails;
+import org.cip4.jdflib.auto.JDFAutoStatusQuParams.EnumJobDetails;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.jmf.JDFDeviceInfo;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JDFJobPhase;
+import org.cip4.jdflib.jmf.JDFSignal;
+import org.cip4.jdflib.jmf.JMFBuilder;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 
 /**
- * factory for statically getting JMFBuilders
- * 
- * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
- * 
- * June 20, 2009 split off from JMFFactory
+ * jmf example file test
+ * @author rainer prosi
+ * @date Nov 22, 2011
  */
-public class JMFBuilderFactory
+public class JMFExampleTest extends JDFTestCaseBase
 {
-	final private HashMap<Object, JMFBuilder> theBuilders;
-	private static JMFBuilderFactory theSingleton = null;
-
-	/**
-	 * @param key 
-	 * @param acknowledgeURL the acknowledgeURL to set
-	 */
-	public static void setAcknowledgeURL(final Object key, final String acknowledgeURL)
-	{
-		JMFBuilder b = getJMFBuilder(key);
-		b.setAcknowledgeURL(acknowledgeURL);
-	}
-
-	/**
-	 * @param key 
-	 * @param senderID the senderID to set
-	 */
-	public static void setSenderID(final Object key, final String senderID)
-	{
-		JMFBuilder b = getJMFBuilder(key);
-		b.setSenderID(senderID);
-	}
-
-	/**
-	 * get a JMFBuilder, create it if it has not yet been stored in the map
-	 * @param key
-	 * @return
-	 */
-	public static synchronized JMFBuilder getJMFBuilder(Object key)
-	{
-		if (theSingleton == null)
-			theSingleton = new JMFBuilderFactory();
-		return theSingleton.getBuilderForKey(key);
-	}
-
-	/**
-	 * get a JMFBuilder, create it if it has not yet been stored in the map
-	 * @param key
-	 * @return
-	 */
-	private synchronized JMFBuilder getBuilderForKey(Object key)
-	{
-		if (key == null)
-			key = JMFBuilderFactory.class;
-		JMFBuilder b = theBuilders.get(key);
-		if (b == null)
-		{
-			b = new JMFBuilder();
-			theBuilders.put(key, b);
-		}
-		return b;
-	}
-
 	/**
 	 * 
+	 *  new activity element in JobPhase
 	 */
-	private JMFBuilderFactory()
+	public void testActivity()
 	{
-		super();
-		theBuilders = new HashMap<Object, JMFBuilder>();
+		JMFBuilder b = JMFBuilderFactory.getJMFBuilder(null);
+		JDFJMF jmf = b.buildStatusSignal(EnumDeviceDetails.Full, EnumJobDetails.MIS);
+		JDFSignal signal = jmf.getSignal(0);
+		JDFDeviceInfo di = signal.getDeviceInfo(0);
+		{
+			KElement activity = di.appendElement("Activity");
+			activity.appendElement(ElementName.EMPLOYEE);
+			activity.appendElement(ElementName.EMPLOYEE);
+			activity.appendElement(ElementName.COSTCENTER);
+			activity.appendElement(ElementName.MISDETAILS);
+			activity.setAttribute("ActivityDetails", "Washup");
+			activity.setAttribute("ActivityID", "ID1234");
+			activity.setXMLComment("The following activity is NOT job related (direct child of deviceInfo) \ndo we need both cost center and MISDetails here?");
+		}
+		{
+			JDFJobPhase jp = di.getJobPhase(0);
+			KElement activity = jp.appendElement("Activity");
+			activity.appendElement(ElementName.EMPLOYEE);
+			activity.appendElement(ElementName.EMPLOYEE);
+			activity.appendElement(ElementName.COSTCENTER);
+			activity.appendElement(ElementName.MISDETAILS);
+			activity.setAttribute("ActivityDetails", "Washup");
+			activity.setAttribute("ActivityID", "ID1234");
+			activity.setXMLComment("The following activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
+			activity = jp.appendElement("Activity");
+			activity.appendElement(ElementName.EMPLOYEE);
+			activity.appendElement(ElementName.COSTCENTER);
+			activity.appendElement(ElementName.MISDETAILS);
+			activity.setAttribute("ActivityDetails", "Polishing");
+			activity.setAttribute("ActivityID", "ID1235");
+			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
+		}
+
+		jmf.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "Activity.jmf", 2, false);
+	}
+
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		JMFBuilderFactory.setSenderID(null, "SenderID");
 	}
 }

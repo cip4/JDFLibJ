@@ -1326,7 +1326,7 @@ public class XMLDoc
 	}
 
 	/**
-	 * creats a TreeWalker
+	 * creates a TreeWalker
 	 * 
 	 * @param root the root of the iterator
 	 * @param whatToShow the whatToShow mask
@@ -1340,7 +1340,7 @@ public class XMLDoc
 	}
 
 	/**
-	 * creats a TreeWalker
+	 * creates a TreeWalker
 	 * 
 	 * @param root the root of the iterator
 	 * @param whatToShow the whatToShow mask

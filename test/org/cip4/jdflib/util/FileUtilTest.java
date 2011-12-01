@@ -230,6 +230,8 @@ public class FileUtilTest extends JDFTestCaseBase
 		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
 		list = FileUtil.listFilesInTree(root, StringUtil.simpleRegExptoRegExp("dir*/*.txt"));
 		assertEquals(list.size(), 4);
+		Vector<File> list2 = FileUtil.listFilesInTree(root, StringUtil.simpleRegExptoRegExp("*.txt"));
+		assertEquals(list2.size(), 6);
 	}
 
 	/**
