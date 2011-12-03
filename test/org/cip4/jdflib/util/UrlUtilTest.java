@@ -513,6 +513,7 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertFalse(UrlUtil.isRelativeURL("/c/d/e.f"));
 		assertFalse(UrlUtil.isRelativeURL("http://c/d/e.f"));
 		assertFalse(UrlUtil.isRelativeURL("http://c:8080/c/d/e.f"));
+		assertFalse(UrlUtil.isRelativeURL("c:\\foo"));
 		assertFalse(UrlUtil.isRelativeURL("cid:c/d/e.f"));
 	}
 

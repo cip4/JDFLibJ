@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -73,7 +73,10 @@ package org.cip4.jdflib.core;
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoMedia.EnumGrainDirection;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
+import org.cip4.jdflib.jmf.JDFJMF;
+import org.cip4.jdflib.jmf.JMFBuilderFactory;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.resource.JDFNotification;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFMedia;
 
@@ -85,11 +88,26 @@ import org.cip4.jdflib.resource.process.JDFMedia;
  */
 public class JDFRefElementTest extends JDFTestCaseBase
 {
+	/**
+	 * 
+	 * tests refelements pointing to non resources
+	 */
+	public void testGetBadTarget()
+	{
+		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(this).buildMilestone("Foo", "1234");
+		JDFNotification notification = jmf.getSignal(0).getNotification();
+		KElement foo = notification.appendElement("Foo");
+		String id = foo.appendAnchor(null);
+		JDFRefElement re = (JDFRefElement) notification.appendElement("FooRef");
+		re.setrRef(id);
+		assertNull("non resources are null rather than class casts...", re.getTarget());
+		assertNull("non resources are null rather than class casts...", re.getTargetRoot());
+	}
 
 	/**
-	 * Method testGetLinkRootJMF
+	 * Method testGetTarget
 	 * 
-	 * @throws Exception
+	 *  
 	 */
 	public void testGetTarget()
 	{
@@ -112,14 +130,31 @@ public class JDFRefElementTest extends JDFTestCaseBase
 		assertEquals(xmPart.getMedia(), medPart);
 		JDFRefElement re = (JDFRefElement) xmPart.getElement("MediaRef");
 		assertEquals(re.getPartMap(), mPart);
+		assertEquals(re.getTarget(), medPart);
+	}
 
+	/**
+	* Method testGetTargetRoot
+	* 
+	*  
+	*/
+	public void testGetTargetRoot()
+	{
+		JDFDoc d = JDFTestCaseBase.creatXMDoc();
+		JDFNode n = d.getJDFRoot();
+		JDFExposedMedia xm = (JDFExposedMedia) n.getMatchingResource("ExposedMedia", JDFNode.EnumProcessUsage.AnyInput, null, 0);
+		JDFMedia m = xm.getMedia();
+		m = (JDFMedia) m.makeRootResource(null, null, true);
+		xm.refElement(m);
+		JDFRefElement re = (JDFRefElement) xm.getElement("MediaRef");
+		assertEquals(re.getTargetRoot(), m);
 	}
 
 	// ///////////////////////////////////////////////////////////////////
 	/**
-	 * Method testGetLinkRootJMF
+	 * Method testInlineRefelement
 	 * 
-	 * @throws Exception
+	 *  
 	 */
 	public void testInlineRefelement()
 	{

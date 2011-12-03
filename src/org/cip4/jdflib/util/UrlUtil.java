@@ -1560,7 +1560,7 @@ public class UrlUtil
 	{
 		if (url == null)
 			return false;
-		return url.indexOf(":/") < 0 && !url.startsWith("/") && !url.startsWith("\\") && !isCID(url);
+		return url.indexOf(":/") < 0 && url.indexOf(":\\") < 0 && !url.startsWith("/") && !url.startsWith("\\") && !isCID(url);
 	}
 
 	/**

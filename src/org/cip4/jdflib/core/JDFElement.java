@@ -4984,7 +4984,11 @@ public class JDFElement extends KElement
 					final KElement jmf = getDeepParent(ElementName.JMF, 0);
 					if (jmf != null)
 					{
-						ret = (JDFResource) jmf.getChildWithAttribute(null, AttributeName.ID, null, myid, 0, false);
+						KElement rootElem = jmf.getChildWithAttribute(null, AttributeName.ID, null, myid, 0, false);
+						if (rootElem instanceof JDFResource)
+						{
+							ret = (JDFResource) rootElem;
+						}
 					}
 				}
 			}

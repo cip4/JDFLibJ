@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,15 +78,19 @@ import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG<br/>
- * removes any private extensions
+ * removes any private extensions, including prefixed keys in GeneralID elements
  * 
  */
 public class RemovePrivate extends BaseElementWalker
 {
-	protected Set<String> prefixes;
+	Set<String> prefixes;
+	boolean zappGeneralID;
+	boolean zappElements;
+	boolean zappAttributes;
 
 	/**
 	 * 
@@ -95,6 +99,7 @@ public class RemovePrivate extends BaseElementWalker
 	{
 		super(new BaseWalkerFactory());
 		prefixes = null;
+		zappAttributes = zappElements = zappGeneralID = true;
 		new BaseWalker(getFactory()); // need a default walker
 	}
 
@@ -141,9 +146,14 @@ public class RemovePrivate extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
+			if (!zappAttributes)
+				return e1;
+
 			final VString unknown;
 			if (prefixes == null)
 			{
+				if (!(e1 instanceof JDFElement))
+					return e1;
 				final JDFElement j = (JDFElement) e1;
 				unknown = j.getUnknownAttributes(false, -1);
 			}
@@ -214,7 +224,7 @@ public class RemovePrivate extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			boolean b = super.matches(toCheck);
+			boolean b = zappElements && super.matches(toCheck);
 			if (!b)
 			{
 				return false;
@@ -228,11 +238,83 @@ public class RemovePrivate extends BaseElementWalker
 			}
 			else
 			{
-				b = b || !(toCheck instanceof JDFElement);
-				b = b || !JDFConstants.JDFNAMESPACE.equals(toCheck.getNamespaceURI());
+				b = !(toCheck instanceof JDFElement);
+				b = b && !JDFConstants.JDFNAMESPACE.equals(toCheck.getNamespaceURI());
 			}
 			return b;
 		}
 	}
 
+	/**
+	 * zapp me
+	 * 
+	 * @author prosirai
+	 * 
+	 */
+	public class WalkGeneralID extends WalkElement
+	{
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#walk(org.cip4.jdflib.core.KElement, org.cip4.jdflib.core.KElement)
+		 * @param e - the element to track
+		 * @param trackElem - always null
+		 * @return the element to continue walking
+		 */
+		@Override
+		public KElement walk(final KElement e, final KElement trackElem)
+		{
+			String idUsage = ((JDFGeneralID) e).getIDUsage();
+			String prefix = KElement.xmlnsPrefix(idUsage);
+			if (prefix != null && !"JDF".equalsIgnoreCase(prefix))
+			{
+				if (prefixes == null || prefixes.contains(prefix))
+				{
+					e.deleteNode();
+					return null;
+				}
+			}
+			return super.walk(e, trackElem);
+		}
+
+		/**
+		 * @see org.cip4.jdflib.elementwalker.BaseWalker#matches(org.cip4.jdflib.core.KElement)
+		 * @param toCheck
+		 * @return true if matches
+		 */
+		@Override
+		public boolean matches(final KElement toCheck)
+		{
+			return zappGeneralID && (toCheck instanceof JDFGeneralID);
+		}
+	}
+
+	/**
+	 * 
+	 * if set to true, generalID elements with proprietary namespace prefixes are zapped, else kept
+	 * @param zappGeneralID if true, zapp 'em (the default) else keep 'em
+	 */
+	public void setZappGeneralID(boolean zappGeneralID)
+	{
+		this.zappGeneralID = zappGeneralID;
+	}
+
+	/**
+	 * 
+	 * if set to true, attributes with proprietary namespace prefixes are zapped, else kept
+	 * @param zappAttributes if true, zapp 'em (the default) else keep 'em
+	 */
+	public void setZappAttributes(boolean zappAttributes)
+	{
+		this.zappAttributes = zappAttributes;
+	}
+
+	/**
+	 * 
+	 * if set to true, attributes with proprietary namespace prefixes are zapped, else kept
+	 * @param zappElements if true, zapp 'em (the default) else keep 'em
+	 */
+	public void setZappElements(boolean zappElements)
+	{
+		this.zappElements = zappElements;
+	}
 }

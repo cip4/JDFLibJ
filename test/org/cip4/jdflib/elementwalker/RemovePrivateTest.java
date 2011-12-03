@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -71,6 +71,7 @@ package org.cip4.jdflib.elementwalker;
 import junit.framework.TestCase;
 
 import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.node.JDFNode;
 
 /**
@@ -94,6 +95,71 @@ public class RemovePrivateTest extends TestCase
 		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
 		assertNull(n.getElement("e", "www.blah.com", 0));
 		assertNotNull(n.getAuditPool());
+	}
+
+	/**
+	 * 
+	 */
+	public void testZappAttributes()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.setAttribute("foo:bar", "blub", "www.foo.com");
+		n.appendElement("blah:e", "www.blah.com");
+		n.getCreateAuditPool().setAttribute("foo:bar", "blub", "www.foo.com");
+		n.getCreateAuditPool().appendElement("blah:e", "www.blah.com");
+		RemovePrivate rp = new RemovePrivate();
+		rp.setZappAttributes(false);
+		rp.walkTree(n, null);
+		assertEquals("blub", n.getAttribute("foo:bar", "www.foo.com", null));
+		assertNull(n.getElement("e", "www.blah.com", 0));
+		assertNotNull(n.getAuditPool());
+	}
+
+	/**
+	 * 
+	 */
+	public void testZappElements()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.setAttribute("foo:bar", "blub", "www.foo.com");
+		KElement e1 = n.appendElement("blah:e", "www.blah.com");
+		n.getCreateAuditPool().setAttribute("foo:bar", "blub", "www.foo.com");
+		n.getCreateAuditPool().appendElement("blah:e", "www.blah.com");
+		RemovePrivate rp = new RemovePrivate();
+		rp.setZappElements(false);
+		rp.walkTree(n, null);
+		assertNull(n.getAttribute("foo:bar", "www.foo.com", null));
+		assertEquals(e1, n.getElement("e", "www.blah.com", 0));
+		assertNotNull(n.getAuditPool());
+	}
+
+	/**
+	 * 
+	 */
+	public void testGeneralID()
+	{
+		JDFDoc d = new JDFDoc("JDF");
+		JDFNode n = d.getJDFRoot();
+		n.appendGeneralID("foo:key", "bar");
+		RemovePrivate rp = new RemovePrivate();
+		rp.walkTree(n, null);
+		assertNull(n.getGeneralID(0));
+		n.appendGeneralID("key", "bar");
+		rp.walkTree(n, null);
+		assertEquals(n.getGeneralID("key"), "bar");
+		n.appendGeneralID("foo:key", "bar");
+		rp.addPrefix("blub");
+		rp.walkTree(n, null);
+		assertEquals(n.getGeneralID("foo:key"), "bar");
+		rp.addPrefix("foo");
+		rp.setZappGeneralID(false);
+		rp.walkTree(n, null);
+		assertEquals(n.getGeneralID("foo:key"), "bar");
+		rp.setZappGeneralID(true);
+		rp.walkTree(n, null);
+		assertNull(n.getGeneralID("foo:key"));
 	}
 
 	/**

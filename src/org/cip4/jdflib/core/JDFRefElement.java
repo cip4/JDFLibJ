@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -254,7 +254,8 @@ public class JDFRefElement extends JDFElement
 	}
 
 	/**
-	 * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.KElement.EnumValidationLevel)
+	 * 
+	 * @see org.cip4.jdflib.core.JDFElement#isValid(org.cip4.jdflib.core.JDFElement.EnumValidationLevel)
 	 */
 	@Override
 	public boolean isValid(final EnumValidationLevel level)
@@ -316,7 +317,7 @@ public class JDFRefElement extends JDFElement
 			final String s = getrSubRef();
 			final KElement subRef = getTarget_KElement(s, AttributeName.ID);
 
-			if (subRef != null)
+			if (subRef instanceof JDFResource)
 			{
 				return (JDFResource) subRef;
 			}
@@ -333,7 +334,6 @@ public class JDFRefElement extends JDFElement
 	 * 
 	 * @return JDFResource - the reference target partition
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public JDFResource getTarget()
 	{
