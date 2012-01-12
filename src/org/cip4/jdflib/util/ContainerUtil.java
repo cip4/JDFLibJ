@@ -416,6 +416,25 @@ public class ContainerUtil
 	}
 
 	/**
+	 * return true if a matches b or both are null
+	 * @param a Object to compare
+	 * @param b Object to compare
+	 * @return boolean true if a equals b or both are null
+	 */
+	public static boolean matches(final IMatches a, final Object b)
+	{
+		if (a == null)
+		{
+			return b == null;
+		}
+		if (b == null)
+		{
+			return false;
+		}
+		return a.matches(b);
+	}
+
+	/**
 	 * static implementation of compare for any comparable object that gracefully handles null<br/>
 	 * null is always the smallest
 	 * @param c0

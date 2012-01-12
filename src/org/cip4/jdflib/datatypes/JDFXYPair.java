@@ -131,6 +131,8 @@ public class JDFXYPair extends JDFNumList
 
 	/**
 	 * factory for JDFXYPair that silently returns null in case of illegal strings
+	 * @param s the string to parse
+	 * @return the JDFXYPair, null if s is not compatible
 	 */
 	public static JDFXYPair createXYPair(String s)
 	{

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -245,11 +245,13 @@ public class XJDFTest extends JDFTestCaseBase
 		rlr1.getLayoutElement().setElementType(JDFLayoutElement.EnumElementType.Page);
 
 		rl.addPDF("test2.pdf", 3, 6);
+
 		e = xjdf20.makeNewJDF(n, null);
 		KElement rlSet = e.getXPathElement("ParameterSet[@Name=\"RunList\"]");
 		assertNotNull(rlSet);
 		KElement rl2 = rlSet.getXPathElement("Parameter/RunList");
 		assertNotNull(rl2);
+		assertEquals("0 ~ 2", rl2.getAttribute(AttributeName.PAGES));
 		assertNull(rl2.getElement("LayoutElement"));
 
 		XJDFToJDFConverter xc = new XJDFToJDFConverter(null);
@@ -297,15 +299,21 @@ public class XJDFTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
 	 */
 	public void testJMFMessageRoot()
 	{
 		final JDFJMF jmf = JDFJMF.createJMF(EnumFamily.Query, JDFMessage.EnumType.Status);
-		e = new XJDF20().makeNewJMF(jmf);
-		assertEquals(e.getFirstChildElement().getLocalName(), "QueryStatus");
+		XJDF20 xjdf20 = new XJDF20();
+		e = xjdf20.makeNewJMF(jmf);
+		if (xjdf20.bAbstractMessage)
+			assertEquals(e.getFirstChildElement().getLocalName(), "QueryStatus");
+		else
+			assertEquals(e.getFirstChildElement().getFirstChildElement().getLocalName(), "StatusQuery");
 	}
 
 	/**
+	 * 
 	 */
 	public void testJMFToXJDF()
 	{

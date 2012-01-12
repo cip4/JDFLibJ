@@ -172,7 +172,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	/**
 	 * 
 	 */
-	private EnumVersion version = EnumVersion.Version_1_3;
+	private EnumVersion version = EnumVersion.Version_1_4;
 
 	/**
 	 * @param template the jdfdoc to fill this into
@@ -213,7 +213,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		}
 		JDFNode root = prepareRoot();
 		xjdf = reparse(xjdf);
-
+		xjdf.setAttribute(AttributeName.VERSION, version.getName());
 		final JDFNode theNode = findNode(xjdf, true);
 		if (theNode == null)
 		{

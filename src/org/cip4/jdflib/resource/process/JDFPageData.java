@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,50 +80,56 @@ package org.cip4.jdflib.resource.process;
 
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoPageData;
+import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
+import org.cip4.jdflib.resource.JDFPageList;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date before... Jan 9, 2012
+ */
 public class JDFPageData extends JDFAutoPageData
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFPageData
-	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 */
-	public JDFPageData(CoreDocumentImpl myOwnerDocument, String qualifiedName)
-			throws DOMException
+	public JDFPageData(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPageData
-	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
-	public JDFPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName) throws DOMException
+	public JDFPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFPageData
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
-	 * @throws DOMException
 	 */
-	public JDFPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI,
-			String qualifiedName, String myLocalName) throws DOMException
+	public JDFPageData(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -148,6 +154,53 @@ public class JDFPageData extends JDFAutoPageData
 	{
 		JDFPageElement pe = appendPageElement();
 		pe.setContentListIndex(letter.getIndex());
+	}
 
+	/**
+	 * if not explicitly specified, assume that the PageData elements are all ordered
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getPageIndex()
+	 */
+	@Override
+	public JDFIntegerRangeList getPageIndex()
+	{
+		JDFIntegerRangeList pi = super.getPageIndex();
+		if (pi.size() > 0)
+			return pi;
+		KElement prev = getPreviousSiblingElement(ElementName.PAGEDATA, null);
+		int n = 0;
+		while (prev != null)
+		{
+			n++;
+			prev = prev.getPreviousSiblingElement(ElementName.PAGEDATA, null);
+		}
+		JDFIntegerRangeList integerRangeList = new JDFIntegerRangeList();
+		integerRangeList.append(n);
+		return integerRangeList;
+	}
+
+	/**
+	 * gets the AssemblyID but alse inherits from the parent PageList
+	 * @see org.cip4.jdflib.auto.JDFAutoPageData#getAssemblyID()
+	 */
+	@Override
+	public String getAssemblyID()
+	{
+		if (hasAttribute(AttributeName.ASSEMBLYID))
+			return super.getAssemblyID();
+		JDFPageList parent = getPageList();
+		if (parent != null)
+			return parent.getAssemblyID();
+		return super.getAssemblyID();
+	}
+
+	/**
+	 * returns the parent pageList if the parent is a pagelist
+	 * @return
+	 */
+	public JDFPageList getPageList()
+	{
+		KElement parent = getParentNode_KElement();
+		return (parent instanceof JDFPageList) ? (JDFPageList) parent : null;
 	}
 }

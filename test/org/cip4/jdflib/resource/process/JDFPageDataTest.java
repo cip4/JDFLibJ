@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,6 +78,12 @@ import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.resource.JDFPageList;
 
+/**
+ * 
+ * 
+ * @author rainer prosi
+ * @date Jan 9, 2012
+ */
 public class JDFPageDataTest extends JDFTestCaseBase
 {
 
@@ -92,7 +98,6 @@ public class JDFPageDataTest extends JDFTestCaseBase
 	@Override
 	protected void setUp() throws Exception
 	{
-		// TODO Auto-generated method stub
 		super.setUp();
 		JDFDoc doc = new JDFDoc("JDF");
 		JDFNode n = doc.getJDFRoot();
@@ -103,6 +108,9 @@ public class JDFPageDataTest extends JDFTestCaseBase
 
 	// ///////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 
+	 */
 	public void testRefContentData()
 	{
 		for (int i = 0; i < 10; i++)
@@ -111,7 +119,31 @@ public class JDFPageDataTest extends JDFTestCaseBase
 		JDFPageData pd = pl.appendPageData();
 		pd.refContentData(cd);
 		assertEquals(pd.getPageElement(0).getContentListIndex(), 10);
-
 	}
 
+	/**
+	 * 
+	 */
+	public void testGetPageIndex()
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			pl.appendPageData();
+			assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().getInt(0), i);
+			assertEquals(pl.getPageData(i).getPageIndex().getIntegerList().size(), 1);
+		}
+	}
+
+	/**
+	* 
+	*/
+	public void testGetAssemblyID()
+	{
+		JDFPageData d = pl.appendPageData();
+		assertEquals(d.getAssemblyID(), "");
+		pl.setAssemblyID("foo");
+		assertEquals(d.getAssemblyID(), "foo");
+		d.setAssemblyID("bar");
+		assertEquals(d.getAssemblyID(), "bar");
+	}
 }

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -3393,14 +3393,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	/**
 	 * get attribute Activation; defaults to Active
 	 * 
-	 * @param bWalkThroughAnchestors if true, walks through all anchestors which may overwrite the local activation state
+	 * @param bWalkThroughAncestors if true, walks through all ancestors which may overwrite the local activation state; if false only the explicit activation, if any, is returned
 	 * 
 	 * @return the enumeration value of the attribute
 	 */
-	public JDFNode.EnumActivation getActivation(final boolean bWalkThroughAnchestors)
+	public JDFNode.EnumActivation getActivation(final boolean bWalkThroughAncestors)
 	{
 		EnumActivation res = null;
-		if (bWalkThroughAnchestors)
+		if (bWalkThroughAncestors)
 		{
 			res = EnumActivation.Active;
 			JDFNode p = this;
@@ -3415,11 +3415,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 					final int value = a.getValue();
 					if ((value <= EnumActivation.TestRun.getValue()) || (res.getValue() < EnumActivation.Active.getValue()))
 					{
-						res = (value < res.getValue()) ? a : res; // smaller
-						// enums are
-						// inherited
-						// to all
-						// descendants
+						res = (value < res.getValue()) ? a : res; // smaller enums are inherited to alldescendants
 					}
 					else
 					{ // special case for non-linear test run / test run and go
@@ -3997,7 +3993,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * isExecutable - checks whether a node is executable by checking the resources linked by the resourcelinkpool and @Status or NodeInfo/@NodeStatus
+	 * isExecutable - checks whether a node is executable by checking the resources linked by the resourcelinkpool and @Status or NodeInfo/@NodeStatus and JDF/@Activation
 	 * 
 	 * @param partMap the Attribute to check
 	 * @param bCheckChildren if true, calculates the availability Status of a resource from all child partition leaves, else the Status is taken from the
@@ -4018,6 +4014,10 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 		final VElement v = resourceLinkPool.getPoolChildren(null, null, null);
 		final EnumNodeStatus status = getPartStatus(partMap, 0);
 		if ((status != EnumNodeStatus.Waiting) && (status != EnumNodeStatus.Ready))
+		{
+			return false;
+		}
+		if (!fitsActivation(EnumActivation.Active, true))
 		{
 			return false;
 		}
@@ -4210,16 +4210,16 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * the activation state of this node
 	 * 
 	 * @param active
-	 * @param bWalkThroughAnchestors if true, walks through all anchestors which may overwrite the local activation state
-	 * @return boolean
+	 * @param bWalkThroughAncestors if true, walks through all anchestors which may overwrite the local activation state
+	 * @return boolean true if the activations are compatible
 	 */
-	public boolean fitsActivation(final EnumActivation active, final boolean bWalkThroughAnchestors)
+	public boolean fitsActivation(final EnumActivation active, final boolean bWalkThroughAncestors)
 	{
 		if (active == null)
 		{
 			return true;
 		}
-		final EnumActivation a = getActivation(bWalkThroughAnchestors);
+		final EnumActivation a = getActivation(bWalkThroughAncestors);
 		if (active.equals(EnumActivation.TestRun))
 		{
 			return a.equals(EnumActivation.TestRun) || a.equals(EnumActivation.TestRunAndGo);

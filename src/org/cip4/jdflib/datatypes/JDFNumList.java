@@ -553,14 +553,16 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 
 	/**
 	 * nodify numlist to absolute values
+	 * @param other 
+	 * @param delta 
 	 * @see Math#abs
 	 * @return 
 	 */
-	public boolean matches(JDFNumList l, double delta)
+	public boolean matches(JDFNumList other, double delta)
 	{
-		if (l == null)
+		if (other == null)
 			return false;
-		if (size() != l.size())
+		if (size() != other.size())
 			return false;
 		JDFNumList dif;
 		try
@@ -571,7 +573,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 		{
 			return false;
 		}
-		dif.subtract(l);
+		dif.subtract(other);
 		dif.abs();
 		for (int i = 0; i < size(); i++)
 			if (dif.doubleAt(i) > delta)

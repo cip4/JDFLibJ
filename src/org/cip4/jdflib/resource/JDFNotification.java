@@ -67,17 +67,17 @@
  *
  *
  *//**
- * ========================================================================== 
- * class JDFNotification extends JDFAutoNotification
- * created 2001-09-06T10:02:57GMT+02:00 
- * ==========================================================================
- * ==========================================================================
- * @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
- * @Author : sabjon@topmail.de   using a code generator 
- * Warning! very preliminary test version. 
- * Interface subject to change without prior notice! 
- * Revision history:   ...
- */
+* ========================================================================== 
+* class JDFNotification extends JDFAutoNotification
+* created 2001-09-06T10:02:57GMT+02:00 
+* ==========================================================================
+* ==========================================================================
+* @COPYRIGHT Heidelberger Druckmaschinen AG, 1999-2001 ALL RIGHTS RESERVED
+* @Author : sabjon@topmail.de   using a code generator 
+* Warning! very preliminary test version. 
+* Interface subject to change without prior notice! 
+* Revision history:   ...
+*/
 
 package org.cip4.jdflib.resource;
 
@@ -88,6 +88,7 @@ import java.util.Map;
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.xerces.dom.CoreDocumentImpl;
 import org.cip4.jdflib.auto.JDFAutoNotification;
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElemInfoTable;
 import org.cip4.jdflib.core.ElementInfo;
 import org.cip4.jdflib.core.ElementName;
@@ -95,6 +96,7 @@ import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.ifaces.INodeIdentifiable;
 import org.cip4.jdflib.ifaces.ISignalAudit;
 import org.cip4.jdflib.jmf.JDFJMF;
@@ -102,11 +104,12 @@ import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
 import org.cip4.jdflib.jmf.JDFMessage.EnumType;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.NodeIdentifier;
+import org.cip4.jdflib.util.ContainerUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  */
-public class JDFNotification extends JDFAutoNotification implements INodeIdentifiable, ISignalAudit
+public class JDFNotification extends JDFAutoNotification implements INodeIdentifiable, ISignalAudit, IMatches
 {
 	private static final long serialVersionUID = 1L;
 
@@ -622,6 +625,34 @@ public class JDFNotification extends JDFAutoNotification implements INodeIdentif
 		final JDFJMF newJMF = JDFJMF.createJMF(EnumFamily.Signal, EnumType.Notification);
 		newJMF.getSignal(0).copyElement(this, null);
 		return newJMF;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+	 */
+	public boolean matches(Object subset)
+	{
+		if (!(subset instanceof JDFNotification))
+			return false;
+		JDFNotification other = (JDFNotification) subset;
+		JDFAttributeMap map = getAttributeMap();
+		JDFAttributeMap map2 = other.getAttributeMap();
+
+		map.remove(AttributeName.ID);
+		map2.remove(AttributeName.ID);
+		map.remove(AttributeName.TIMESTAMP);
+		map2.remove(AttributeName.TIMESTAMP);
+		if (!map.equals(map2))
+			return false;
+
+		if (!ContainerUtil.matches(getEmployee(0), other.getEmployee(0)))
+			return false;
+		if (!ContainerUtil.equals(getNotificationDetails(), other.getNotificationDetails()))
+			return false;
+		if (!ContainerUtil.matches(getCostCenter(), other.getCostCenter()))
+			return false;
+		return true;
+
 	}
 
 } // class JDFNotification

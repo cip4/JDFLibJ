@@ -187,7 +187,6 @@ public class JDFElement extends KElement
 
 	/**
 	 * @return 
-	 * @see org.cip4.jdflib.core.KElement#getTheAttributeInfo()
 	 */
 	protected AttributeInfo getTheAttributeInfo()
 	{
@@ -5126,7 +5125,7 @@ public class JDFElement extends KElement
 			{
 				return EnumVersion.Version_2_0;
 			}
-			return EnumVersion.Version_1_3; // the default
+			return EnumVersion.Version_1_4; // the default
 		}
 
 		/**
@@ -5738,11 +5737,17 @@ public class JDFElement extends KElement
 	 */
 	public JDFGeneralID appendGeneralID()
 	{
-		return (JDFGeneralID) appendElement(ElementName.GENERALID, null);
+		KElement appendElement = appendElement(ElementName.GENERALID, null);
+		KElement next = getFirstChildElement();
+		while (next instanceof JDFGeneralID)
+			next = next.getNextSiblingElement();
+		moveElement(appendElement, next);
+		return (JDFGeneralID) appendElement;
 	}
 
 	/**
 	 * append a GeneralID with idValue, duplicate entries are retained
+	 * generalID elements are always placed first and new GeneralID elements are appended at the end of the list
 	 * 
 	 * @param idUsage the IDUsage attribute of the generalID
 	 * @param idValue the IDValue attribute of the generalID

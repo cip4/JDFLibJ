@@ -277,7 +277,7 @@ public class JDFIntegerRangeList extends JDFRangeList
 	public int getElement(int i) throws NoSuchElementException
 	{
 		int iLocal = i;
-		
+
 		int n = this.getElementCount();
 
 		if ((iLocal >= n) || (iLocal < -n))
@@ -530,11 +530,11 @@ public class JDFIntegerRangeList extends JDFRangeList
 	 */
 	public boolean isOverlapping(JDFIntegerRange newRange, JDFIntegerRange oldRange)
 	{
-		Vector<Integer> rangeListToCheck = rangeList;
+		Vector<JDFRange> rangeListToCheck = rangeList;
 
 		if (oldRange != null)
 		{
-			rangeListToCheck = (Vector) rangeList.clone();
+			rangeListToCheck = (Vector<JDFRange>) rangeList.clone();
 			rangeListToCheck.remove(oldRange);
 		}
 
@@ -549,7 +549,7 @@ public class JDFIntegerRangeList extends JDFRangeList
 	 * 
 	 * @return boolean - true if overlapping otherwise false
 	 */
-	private boolean checkOverlap(Vector vRangeList, JDFIntegerRange newRange)
+	private boolean checkOverlap(Vector<JDFRange> vRangeList, JDFIntegerRange newRange)
 	{
 		int rangeLower = newRange.getLowerValue();
 		int rangeUpper = newRange.getUpperValue();

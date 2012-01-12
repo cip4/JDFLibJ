@@ -1076,8 +1076,7 @@ public class JDFSpawn
 				{
 					for (JDFAttributeMap m : vPartMap)
 					{
-						m = m.orMap(linkMap);
-
+						m = m.clone().orMap(linkMap);
 						if (!m.isEmpty())
 						{
 							vNewMap.add(m);

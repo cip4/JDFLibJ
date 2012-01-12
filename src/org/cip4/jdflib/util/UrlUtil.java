@@ -692,6 +692,37 @@ public class UrlUtil
 	}
 
 	/**
+	 * Retrieve a file for a relative or absolute file url
+	 * 
+	 * @param urlString the file url to retrieve a file for
+	 * @return the file located at url
+	 */
+	public static String urlToUNC(String urlString)
+	{
+		if (urlString == null)
+		{
+			return null;
+		}
+
+		if (isCID(urlString) || isHttp(urlString))
+		{
+			return null;
+		}
+
+		if (isFile(urlString))
+		{
+			urlString = urlString.substring(5); // remove "file:"
+		}
+
+		if (StringUtil.getNonEmpty(urlString) == null)
+		{
+			return null;
+		}
+		urlString = unEscape(urlString);
+		return StringUtil.replaceChar(urlString, '/', "\\", 0);
+	}
+
+	/**
 	 * null safe url to string converter
 	 * @param url
 	 * @return
@@ -1371,6 +1402,8 @@ public class UrlUtil
 		protected UrlPart writeToURL()
 		{
 			UrlPart p = null;
+			UrlPart p0 = null;
+
 			if (isFile(strUrl))
 			{
 				p = writeFile();
@@ -1384,14 +1417,21 @@ public class UrlUtil
 
 				ProxySelector selector = ProxySelector.getDefault();
 				List<Proxy> list = selector.select(uri);
+				if (!list.contains(Proxy.NO_PROXY))
+					list.add(Proxy.NO_PROXY);
 				for (Proxy proxy : list)
 				{
 					p = callProxy(proxy);
 					if (p != null)
-						break;
+					{
+						if (p.getResponseCode() == 200)
+							return p;
+						else
+							p0 = p;
+					}
 				}
 			}
-			return p;
+			return p == null ? p0 : p;
 		}
 
 		/**

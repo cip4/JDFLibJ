@@ -235,6 +235,19 @@ public class FileUtilTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 */
+	public void testListTreeFilter()
+	{
+		final File root = new File(sm_dirTestData + File.separator + "dir1");
+		Vector<File> list = FileUtil.listFilesInTree(root, new FileUtil.DirectoryFileFilter());
+		for (File f : list)
+			assertTrue(f.isDirectory());
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2a"))));
+		assertTrue(list.contains(FileUtil.getFileInDirectory(root, new File("dir2b"))));
+	}
+
+	/**
 	 * @throws Exception
 	 */
 	public void testListFilesWithExtension() throws Exception

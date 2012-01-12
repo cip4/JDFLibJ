@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -77,7 +77,9 @@ package org.cip4.jdflib.ifaces;
 public interface IMatches
 {
 	/**
-	 * returns true if subset is a subset of this 
+	 * returns true if subset somehow matches this
+	 * 
+	 *  the semantics are defined by the filtering algorithm, thus it could be a filter or a subset
 	 * 
 	 * i.e. subset contains either equivalent elements or null and no
 	 * non-matching elements matches(null) always returns true

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -108,15 +108,6 @@ public class JDFPageListTest extends JDFTestCaseBase
 	 */
 	public void testContentData()
 	{
-		d = new JDFDoc("JDF");
-		n = d.getJDFRoot();
-		n.setType(EnumType.Approval);
-		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
-		pl = rl.appendPageList();
-		pl.makeRootResource("PageList", null, true);
-
-		cl = pl.appendContentList();
-		cl.makeRootResource("ContentList", null, true);
 		JDFContentData cd0 = cl.appendContentData();
 		cd0.setAttribute(AttributeName.CONTENTLISTINDEX, "1 2 3");
 		KElement book = cd0.appendElement("ContentMetaData");
@@ -168,7 +159,56 @@ public class JDFPageListTest extends JDFTestCaseBase
 		c2.setPageListIndex(new JDFIntegerRangeList("9~16"));
 		c.setXMLComment("this is the output component with two stacks\n the imposition engine is aware of the pagelist index and can set it appropriately");
 		d.write2File(sm_dirTestDataTemp + "ContentMetaDataStack.jdf", 2, false);
-
 	}
+
+	/**
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetNPage() throws Exception
+	{
+		assertEquals(pl.getNPage(), 0);
+		JDFPageData pd1 = pl.appendPageData();
+		assertEquals(pl.getNPage(), 1);
+		JDFPageData pd2 = pl.appendPageData();
+		assertEquals(pl.getNPage(), 2);
+		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
+		pd2.setPageIndex(new JDFIntegerRangeList("1 3 5"));
+		assertEquals(pl.getNPage(), 6);
+	}
+
+	/**
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetPageDataByIndex() throws Exception
+	{
+		assertEquals(pl.getNPage(), 0);
+		JDFPageData pd1 = pl.appendPageData();
+		JDFPageData pd2 = pl.appendPageData();
+		assertEquals(pl.getPageDataByIndex(0), pd1);
+		assertEquals(pl.getPageDataByIndex(-2), pd1);
+		pd1.setPageIndex(new JDFIntegerRangeList("0 2 4"));
+		pd2.setPageIndex(new JDFIntegerRangeList("1 3 5"));
+		assertEquals(pl.getPageDataByIndex(0), pd1);
+		assertEquals(pl.getPageDataByIndex(-2), pd1);
+		assertEquals(pl.getPageDataByIndex(-5), pd2);
+	}
+
 	// //////////////////////////////////////////////////////////////
+
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		d = new JDFDoc("JDF");
+		n = d.getJDFRoot();
+		n.setType(EnumType.Approval);
+		JDFRunList rl = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		pl = rl.appendPageList();
+		pl.makeRootResource("PageList", null, true);
+
+		cl = pl.appendContentList();
+		cl.makeRootResource("ContentList", null, true);
+	}
 }

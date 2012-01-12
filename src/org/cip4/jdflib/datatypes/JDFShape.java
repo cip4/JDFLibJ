@@ -88,8 +88,22 @@ import org.cip4.jdflib.util.HashUtil;
  */
 public class JDFShape extends JDFNumList
 {
-	// **************************************** Constructors
-	// ****************************************
+	/**
+	 * factory for JDFShape that silently returns null in case of illegal strings
+	 * @param s the string to parse - if JDFXYPair compatible, a 0  z dimension value is assumed
+	 * @return the JDFShape, null if s is not compatible
+	 */
+	public static JDFShape createShape(String s)
+	{
+		try
+		{
+			return new JDFShape(s);
+		}
+		catch (DataFormatException x)
+		{
+			return null;
+		}
+	}
 
 	/**
 	 * constructor - constructs a shape with all values set to 0.0 Double
@@ -130,7 +144,7 @@ public class JDFShape extends JDFNumList
 	 * 
 	 * @param shape the given shape
 	 * 
-	 * @throws DataFormatException - if the JDFShape has not a valid format
+	 * 
 	 */
 	public JDFShape(final JDFShape shape)
 	{
@@ -177,9 +191,8 @@ public class JDFShape extends JDFNumList
 	/**
 	 * constructor - constructs a new JDFShape with the given 2 double values third is default = 0.
 	 * 
-	 * @param height the height
-	 * @param width the width
-	 * @param length the length = 0.0
+	 * @param x the width
+	 * @param y the height
 	 */
 	public JDFShape(final double x, final double y)
 	{
@@ -199,8 +212,8 @@ public class JDFShape extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		// with defaultlength = 0.0
-		if (m_numList.size() != MAX_SHAPE_DIMENSION && m_numList.size() != MAX_SHAPE_DIMENSION - 1) // Shape
+		// with default Z = 0.0
+		if (m_numList.size() > MAX_SHAPE_DIMENSION || m_numList.size() < MAX_SHAPE_DIMENSION - 2) // Shape
 		{
 			throw new DataFormatException("Data format exception!");
 		}
@@ -211,6 +224,10 @@ public class JDFShape extends JDFNumList
 			{
 				throw new DataFormatException("Data format exception!");
 			}
+		}
+		if (m_numList.size() == 1)
+		{
+			m_numList.addElement(new Double(0.0));
 		}
 		if (m_numList.size() == 2)
 		{
@@ -262,7 +279,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public boolean isGreaterOrEqual(final JDFShape x)
 	{
-		return ((getY() >= x.getY()) && (getX() >= x.getX()) && (getZ() >= x.getZ()));
+		return (equals(x) || ((getY() >= x.getY()) && (getX() >= x.getX()) && (getZ() >= x.getZ())));
 	}
 
 	/**
@@ -273,7 +290,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public boolean isLessOrEqual(final JDFShape x)
 	{
-		return ((getY() <= x.getY()) && (getX() <= x.getX()) && (getZ() <= x.getZ()));
+		return equals(x) || ((getY() <= x.getY()) && (getX() <= x.getX()) && (getZ() <= x.getZ()));
 	}
 
 	/**
@@ -337,7 +354,7 @@ public class JDFShape extends JDFNumList
 	/**
 	 * setY - sets the height
 	 * 
-	 * @param height the height
+	 * @param y the height
 	 */
 	public void setY(final double y)
 	{

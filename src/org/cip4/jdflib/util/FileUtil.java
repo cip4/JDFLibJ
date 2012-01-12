@@ -132,6 +132,33 @@ public class FileUtil
 	/**
 	 * list all files matching given regexp
 	 * @param dir the directory to search
+	 * @param filter the filter to apply to files 
+	 * @return Files[] the matching files, null if none are found
+	 */
+	public static Vector<File> listFilesInTree(final File dir, final FileFilter filter)
+	{
+		Vector<File> v = null;
+		if (dir == null || filter == null)
+		{
+			return null;
+		}
+		final File[] f = dir.listFiles(filter);
+		v = ContainerUtil.toVector(f);
+		File[] dirs = listDirectories(dir);
+		if (dirs != null)
+		{
+			for (File d : dirs)
+			{
+				Vector<File> v2 = listFilesInTree(d, filter);
+				v = (Vector<File>) ContainerUtil.addAll(v, v2);
+			}
+		}
+		return v;
+	}
+
+	/**
+	 * list all files matching given regexp
+	 * @param dir the directory to search
 	 * @param expression comma separated list of regular expression of a tree with slashes separating directories
 	 * @return Files[] the matching files, null if none are found
 	 */
@@ -152,9 +179,9 @@ public class FileUtil
 			File[] dirs = listDirectories(dir);
 			if (dirs != null)
 			{
-				for (int i = 0; i < dirs.length; i++)
+				for (File d : dirs)
 				{
-					Vector<File> v2 = listFilesInTree(dirs[i], expression);
+					Vector<File> v2 = listFilesInTree(d, expression);
 					v = (Vector<File>) ContainerUtil.addAll(v, v2);
 				}
 			}
@@ -162,15 +189,15 @@ public class FileUtil
 		else
 		{
 			final String nextDir = expression.substring(0, posSlash);
-			final File[] f = listFilesWithExpression(dir, nextDir);
-			if (f != null)
+			final File[] files = listFilesWithExpression(dir, nextDir);
+			if (files != null)
 			{
 				v = new Vector<File>();
-				for (int i = 0; i < f.length; i++)
+				for (File file : files)
 				{
-					if (f[i].isDirectory())
+					if (file.isDirectory())
 					{
-						v.add(f[i]);
+						v.add(file);
 					}
 				}
 
@@ -259,9 +286,8 @@ public class FileUtil
 			if (fileExtensionVector != null)
 			{
 				m_extension = new HashSet<String>();
-				for (int i = 0; i < fileExtensionVector.size(); i++)
+				for (String st : fileExtensionVector)
 				{
-					String st = fileExtensionVector.stringAt(i);
 					if (st.startsWith("."))
 					{
 						st = st.substring(1);
@@ -306,7 +332,6 @@ public class FileUtil
 	 */
 	protected static class DirectoryFileFilter implements FileFilter
 	{
-
 		/**
 		 *  
 		 * 

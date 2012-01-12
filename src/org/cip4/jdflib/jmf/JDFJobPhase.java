@@ -471,6 +471,14 @@ public class JDFJobPhase extends JDFAutoJobPhase implements INodeIdentifiable
 		{
 			return false;
 		}
+		if (!ContainerUtil.matches(getCostCenter(), lastphase.getCostCenter()))
+		{
+			return false;
+		}
+
+		if (!ContainerUtil.equals(getMISDetails(), lastphase.getMISDetails()))
+			return false;
+
 		return true;
 	}
 

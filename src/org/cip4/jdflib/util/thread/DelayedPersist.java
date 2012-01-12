@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,7 +71,6 @@
 package org.cip4.jdflib.util.thread;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Vector;
 
 import org.apache.commons.logging.Log;
@@ -121,6 +120,7 @@ public class DelayedPersist extends Thread
 	{
 		if (theDelayed == null)
 			return;
+		theDelayed.log.info("shutting down delayed persist");
 		theDelayed.stop = true;
 		theDelayed.persistQueues();
 		ThreadUtil.notifyAll(theDelayed.waitMutex);
@@ -149,7 +149,9 @@ public class DelayedPersist extends Thread
 			}
 		}
 		if (deltaTime <= 0)
+		{
 			ThreadUtil.notify(waitMutex);
+		}
 	}
 
 	/**
@@ -191,11 +193,9 @@ public class DelayedPersist extends Thread
 			Vector<IPersistable> v = ContainerUtil.getKeyVector(persistQueue);
 			if (v == null)
 				return;
-			Iterator<IPersistable> it = v.iterator();
 
-			while (it.hasNext())
+			for (IPersistable qp : v)
 			{
-				IPersistable qp = it.next();
 				MyLong l = persistQueue.get(qp);
 				if (stop || l.i < t)
 				{
@@ -206,10 +206,8 @@ public class DelayedPersist extends Thread
 		}
 
 		// now the unsynchronized stuff
-		Iterator<IPersistable> it = theList.iterator();
-		while (it.hasNext())
+		for (IPersistable qp : theList)
 		{
-			IPersistable qp = it.next();
 			qp.persist();
 		}
 		System.gc();

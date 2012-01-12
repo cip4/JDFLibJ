@@ -116,6 +116,7 @@ import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
 import org.cip4.jdflib.resource.process.JDFComChannel;
 import org.cip4.jdflib.resource.process.JDFContact;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
+import org.cip4.jdflib.resource.process.JDFGeneralID;
 import org.cip4.jdflib.resource.process.JDFMedia;
 import org.cip4.jdflib.util.StringUtil;
 
@@ -149,6 +150,20 @@ public class JDFElementTest extends JDFTestCaseBase
 		assertNotNull(bar.getNamespaceURI());
 		final KElement foo2 = bar.appendElement("pt:foo", "www.pt.com");
 		assertEquals(foo2.getNamespaceURI(), "www.pt.com");
+	}
+
+	/**
+	 * 
+	 */
+	public void testAppendGeneralID()
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode r = d.getJDFRoot();
+		JDFGeneralID gi1 = r.setGeneralID("foo", "bar");
+		assertEquals(gi1.getNextSiblingElement(), r.getAuditPool());
+		JDFGeneralID gi2 = r.appendGeneralID("foo2", "bar2");
+		assertEquals(gi1.getNextSiblingElement(), gi2);
+		assertEquals(gi2.getNextSiblingElement(), r.getAuditPool());
 	}
 
 	/**

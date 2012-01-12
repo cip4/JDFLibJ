@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -98,17 +98,19 @@ import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.ifaces.IAmountPoolContainer;
+import org.cip4.jdflib.ifaces.IMatches;
 import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.pool.JDFAmountPool;
 import org.cip4.jdflib.pool.JDFAmountPool.AmountPoolHelper;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen ResourceInfo element class
  */
-public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolContainer
+public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolContainer, IMatches
 {
 	private static final long serialVersionUID = 1L;
 
@@ -487,7 +489,7 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	}
 
 	/**
-	 * if a Resource is available, return it's name, null if none is availabel
+	 * if a Resource is available, return it's name, null if none is available
 	 * 
 	 * @see org.cip4.jdflib.auto.JDFAutoResourceInfo#getResourceName()
 	 */
@@ -664,6 +666,58 @@ public class JDFResourceInfo extends JDFAutoResourceInfo implements IAmountPoolC
 	public double getAmountPoolSumDouble(final String attName, final VJDFAttributeMap vPart)
 	{
 		return AmountPoolHelper.getAmountPoolSumDouble(this, attName, vPart);
+	}
+
+	/**
+	 * do i match a resource name, type or resourcequparams? if object==null; return true
+	 * 
+	 * @see org.cip4.jdflib.ifaces.IMatches#matches(java.lang.Object)
+	 */
+	public boolean matches(Object subset)
+	{
+		if (subset == null)
+		{
+			return true;
+		}
+		else
+		{
+			String resourceName = getResourceName();
+			if (subset instanceof String)
+			{
+				return subset.equals(resourceName);
+			}
+			else if (subset instanceof JDFResource)
+			{
+				return subset.getClass().getSimpleName().equals("JDF" + resourceName);
+			}
+			else if (subset instanceof JDFResourceQuParams)
+			{
+				JDFResourceQuParams rqp = (JDFResourceQuParams) subset;
+				return matchersRQP(resourceName, rqp);
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * the matching against rqp is not completely implemented
+	 * @param resourceName
+	 * @param rqp
+	 * @return
+	 */
+	protected boolean matchersRQP(String resourceName, JDFResourceQuParams rqp)
+	{
+		VString resourceNames = rqp.getResourceName();
+		boolean bRet = resourceNames.isEmpty() || resourceNames.contains(resourceName);
+		String productID = rqp.getProductID();
+		if (StringUtil.getNonEmpty(productID) != null)
+			bRet = bRet && ContainerUtil.equals(getProductID(), productID);
+		String resourceID = rqp.getResourceID();
+		if (StringUtil.getNonEmpty(resourceID) != null)
+			bRet = bRet && ContainerUtil.equals(getResourceID(), resourceID);
+
+		return bRet;
 	}
 
 }

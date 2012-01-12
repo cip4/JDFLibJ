@@ -10,6 +10,7 @@ package org.cip4.jdflib;
 
 import java.io.File;
 import java.io.InputStream;
+import java.net.Inet4Address;
 
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFConstants;
@@ -158,8 +159,8 @@ public class TestJDF extends JDFTestCaseBase
 	{
 		JDFResource.setUnpartitiondImplicit(true);
 		CPUTimer ct = new CPUTimer(true);
-		final JDFDoc d = new JDFParser().parseFile("/share/data/fehler/15495-PD/export.jdf");
-		JDFNode n = d.getJDFRoot().getJobPart("IPr4.I", null);
+		final JDFDoc d = new JDFParser().parseFile("/share/data/fehler/ver.jdf");
+		JDFNode n = d.getJDFRoot().getJobPart("PG__200DV000004.I", null);
 		ct.stop();
 		System.out.println(ct);
 		JDFSpawn spawn = new JDFSpawn(n);
@@ -173,30 +174,32 @@ public class TestJDF extends JDFTestCaseBase
 		spawn.vSpawnParts = new VJDFAttributeMap();
 		ct.start();
 		JDFAttributeMap map = new JDFAttributeMap();
-		map.put("SignatureName", "Sig001");
-		map.put("SheetName", "radson_001");
+		map.put("SignatureName", "SN106739");
+		map.put("SheetName", "ST106739");
 		map.put("Side", "Front");
-		map.put("PartVersion", "SL");
+		map.put("PartVersion", "EN_001 GE_002 EN_001 GE_002");
 		spawn.vSpawnParts.add(map);
 		JDFAttributeMap map2 = new JDFAttributeMap();
-		map2.put("SignatureName", "Sig001");
-		map2.put("SheetName", "radson_001");
+		map2.put("SignatureName", "SN106739");
+		map2.put("SheetName", "ST106739");
 		map2.put("Side", "Back");
-		map2.put("PartVersion", "SL");
+		map2.put("PartVersion", "EN_001 GE_002 EN_001 GE_002");
 		spawn.vSpawnParts.add(map2);
 		//		spawn.bSpawnIdentical = false;
 		//		spawn.bFixResources = false;
 		spawn.bSpawnROPartsOnly = true;
+
 		JDFNode n2 = spawn.spawn();
-		n2.getOwnerDocument_JDFElement().write2File("/share/data/fehler/15495-PD/spawn.jdf", 2, false);
+		n2.getOwnerDocument_JDFElement().write2File("/share/data/fehler/spawn.jdf", 2, false);
 
 	}
 
-	public void testPing()
+	public void testPing() throws Exception
 	{
 		String s = "a";
 		InputStream is = new ByteArrayIOStream(s.getBytes()).getInputStream();
-		UrlPart p = UrlUtil.writeToURL("http://10.51.201.148:8010", is, UrlUtil.POST, UrlUtil.VND_JMF, null);
+		UrlPart p = UrlUtil.writeToURL("http://kie-WF22PRDY:6311/StorageService-J/Storage", is, UrlUtil.GET, UrlUtil.VND_JMF, null);
+		Inet4Address.getByName("kie-WF22PRDY").getHostAddress();
 		//		UrlPart p = UrlUtil.writeToURL("http://10.51.206.254:8010/jmf", is, UrlUtil.POST, UrlUtil.VND_JMF, null);
 		p.buffer();
 	}

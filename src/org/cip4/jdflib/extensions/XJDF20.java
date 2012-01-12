@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import org.cip4.jdflib.auto.JDFAutoGeneralID.EnumDataType;
 import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFAudit;
+import org.cip4.jdflib.core.JDFComment;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
@@ -231,9 +232,13 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public boolean bUpdateVersion = true;
 	/**
-	 * set to update version stamps
+	 * set to define type safe messages
 	 */
 	public boolean bTypeSafeMessage = true;
+	/**
+	 * set to define type safe messages
+	 */
+	public boolean bAbstractMessage = true;
 	/**
 	 * if true, spans are made to a simple attribute rather than retained as span
 	 */
@@ -2784,8 +2789,37 @@ public class XJDF20 extends BaseElementWalker
 		{
 			JDFMessage m = (JDFMessage) jdf;
 			if (bTypeSafeMessage)
-				jdf.renameElement(m.getNodeName() + m.getType(), null);
+			{
+				makeTypesafe(m);
+			}
 			return super.walk(jdf, xjdf);
+		}
+
+		protected void makeTypesafe(JDFMessage m)
+		{
+			String type = m.getType();
+			if (ElementName.COMMAND.equals(type) || ElementName.REGISTRATION.equals(type))
+				type = ElementName.QUERY;
+			if (ElementName.ACKNOWLEDGE.equals(type))
+				type = ElementName.RESPONSE;
+
+			if (bAbstractMessage)
+			{
+				m.renameElement(m.getNodeName() + type, null);
+			}
+			else
+			{
+				VElement v = m.getChildElementVector(null, null);
+				KElement newElem = m.appendElement(type + m.getNodeName(), null);
+				for (KElement e : v)
+				{
+					if (e instanceof JDFComment)
+						continue;
+					if (e instanceof JDFGeneralID)
+						continue;
+					newElem.moveElement(e, null);
+				}
+			}
 		}
 
 		@Override

@@ -93,7 +93,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 {
 	// **************************************** Constructors
 	// ****************************************
-	protected Vector rangeList = new Vector();
+	protected Vector<JDFRange> rangeList = new Vector<JDFRange>();
 
 	// **************************************** Constructors
 	// ****************************************
@@ -140,7 +140,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 		int sz = rangeList.size();
 		for (int i = 0; i < sz; i++)
 		{
-			JDFRange r = (JDFRange) rangeList.elementAt(i);
+			JDFRange r = rangeList.elementAt(i);
 
 			if (r.isPartOfRange(x))
 			{
@@ -232,7 +232,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	{
 		if ((i < 0) || (i >= rangeList.size()))
 			throw new JDFException("JDFDateTimeRangeList.at(i): illegal index" + i);
-		return (JDFRange) rangeList.elementAt(i);
+		return rangeList.elementAt(i);
 	}
 
 	/**
@@ -242,7 +242,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	 */
 	public final JDFRange begin()
 	{
-		return (JDFRange) rangeList.firstElement();
+		return rangeList.firstElement();
 	}
 
 	/**
@@ -252,7 +252,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	 */
 	public final JDFRange end()
 	{
-		return (JDFRange) rangeList.lastElement();
+		return rangeList.lastElement();
 	}
 
 	/**

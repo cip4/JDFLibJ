@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -71,6 +71,8 @@
 
 package org.cip4.jdflib.resource.process;
 
+import java.util.Vector;
+
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoUsageCounter.EnumScope;
 import org.cip4.jdflib.core.ElementName;
@@ -85,12 +87,47 @@ import org.cip4.jdflib.node.JDFNode.EnumProcessUsage;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFAuditPool;
 import org.cip4.jdflib.resource.JDFResourceAudit;
+import org.cip4.jdflib.resource.process.JDFUsageCounter.EnumCounterType;
 import org.cip4.jdflib.util.StringUtil;
 
+/**
+ * 
+ * TODO Please insert comment!
+ * @author rainerprosi
+ * @date Jan 10, 2012
+ */
 public class JDFUsageCounterTest extends JDFTestCaseBase
 {
 
-	/*
+	/**
+	 * Test method for setCounterTypes
+	 */
+	public void testSetUsageCounterTypes()
+	{
+		JDFUsageCounter uc = (JDFUsageCounter) new JDFDoc(ElementName.USAGECOUNTER).getRoot();
+		Vector<EnumCounterType> v = new Vector<JDFUsageCounter.EnumCounterType>();
+		v.add(EnumCounterType.Auxiliary);
+		v.add(EnumCounterType.Black);
+		uc.setCounterTypes(v);
+		Vector<EnumCounterType> v2 = uc.getEnumCounterTypes();
+		assertEquals(v, v2);
+		assertEquals(v.size(), 2);
+	}
+
+	/**
+	 * Test method for appendCounterTypes
+	 */
+	public void testAppendCounterTypes()
+	{
+		JDFUsageCounter uc = (JDFUsageCounter) new JDFDoc(ElementName.USAGECOUNTER).getRoot();
+		uc.appendCounterType(EnumCounterType.Auxiliary);
+		uc.appendCounterType(EnumCounterType.Color);
+		uc.appendCounterType(null);
+		Vector<EnumCounterType> v = uc.getEnumCounterTypes();
+		assertEquals(v.size(), 2);
+	}
+
+	/**
 	 * Test method for
 	 * 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
 	 */
@@ -151,9 +188,9 @@ public class JDFUsageCounterTest extends JDFTestCaseBase
 		doc.write2File(sm_dirTestDataTemp + "UCList.jdf", 2, false);
 	}
 
-	////////////////////////////////////////////////////////////////////////////
-	// /
-
+	/**
+	 * 	
+	 */
 	public final void testMatchesString()
 	{
 		JDFUsageCounter c = (JDFUsageCounter) new JDFDoc(ElementName.USAGECOUNTER).getRoot();

@@ -125,6 +125,18 @@ public class JDFNotificationTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testMatches()
+	{
+		assertTrue(n.matches(n));
+		JDFNotification n2 = (JDFNotification) new JDFDoc("Notification").getRoot();
+		assertTrue(n.matches(n2));
+		n2.setModuleID("m1");
+		assertFalse(n.matches(n2));
+	}
+
+	/**
+	 * 
+	 */
 	public void testgetCreateNotificationDetails()
 	{
 		final JDFSystemTimeSet ms = n.getCreateSystemTimeSet();

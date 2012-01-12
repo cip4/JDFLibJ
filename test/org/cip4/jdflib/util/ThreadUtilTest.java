@@ -72,6 +72,7 @@
 package org.cip4.jdflib.util;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.ThreadUtil.MyMutex;
 import org.cip4.jdflib.util.ThreadUtil.WaitTimeout;
 
 /**
@@ -88,6 +89,7 @@ public class ThreadUtilTest extends JDFTestCaseBase
 
 		/**
 		 * @param millis
+		 * @param sleep 
 		 */
 		public TestWait(final int millis, final int sleep)
 		{
@@ -126,6 +128,15 @@ public class ThreadUtilTest extends JDFTestCaseBase
 	{
 		for (int i = 1; i < 10000; i++)
 			assertEquals("Loop " + i, new TestWait(33, 0).getWaitedObject().intValue(), 42);
+	}
+
+	/**
+	 *  
+	 */
+	public void testMyMutex()
+	{
+		for (int i = 0; i < 10000; i++)
+			assertEquals("MyMutex: " + i + " [main]", new MyMutex().toString());
 	}
 
 }

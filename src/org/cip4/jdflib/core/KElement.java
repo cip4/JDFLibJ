@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1456,7 +1456,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
 	 * @param maxSize maximum size of the element vector (0=any)
 	 * @param bResolveTarget if true, IDRef elements are followed, dummy at this level but needed in JDFElement
-	 * @return VElement vector with all found elements
+	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null, null, true, 0, true)
 	 */
 	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI, final JDFAttributeMap mAttrib, final boolean bAnd, final int maxSize, final boolean bResolveTarget)
@@ -1469,7 +1469,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * convenience for getChildElementVector(nodeName, nameSpaceURI, null, true, 0, true)
 	 * @param nodeName element name you are searching for
 	 * @param nameSpaceURI nameSpace you are searching for
-	 * @return VElement vector with all found elements
+	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @default getChildElementVector(null, null)
 	 */
 	public VElement getChildElementVector(final String nodeName, final String nameSpaceURI)
@@ -1485,7 +1485,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param mAttrib attributes you are lokking for
 	 * @param bAnd if true, a child is only added if it has all attributes specified in Attributes mAttrib
 	 * @param maxSize maximum size of the element vector
-	 * @return VElement vector with all found elements
+	 * @return VElement vector with all found elements, an empty vector if no elements match
 	 * @see org.cip4.jdflib.core.KElement#getChildElementVector(java.lang.String, java.lang.String, org.cip4.jdflib.datatypes.JDFAttributeMap, boolean, int)
 	 * @default getChildElementVector(null, null, null, true, 0)
 	 */

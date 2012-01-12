@@ -70,6 +70,8 @@
  */
 package org.cip4.jdflib.util;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen
  * 
@@ -85,7 +87,30 @@ public class ThreadUtil
 	 */
 	public static class MyMutex
 	{
-		// placeholder
+
+		/**
+		 * 
+		 */
+		public MyMutex()
+		{
+			super();
+			iMutex = nMutex.incrementAndGet();
+			ownerThread = Thread.currentThread().getName();
+		}
+
+		final private int iMutex;
+		private static AtomicInteger nMutex = new AtomicInteger(0);
+		private final String ownerThread;
+
+		/**
+		 * 
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString()
+		{
+			return "MyMutex: " + iMutex + " [" + ownerThread + "]";
+		}
 	}
 
 	/**

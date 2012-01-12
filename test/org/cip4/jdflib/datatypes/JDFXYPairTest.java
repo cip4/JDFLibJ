@@ -190,4 +190,21 @@ public class JDFXYPairTest extends TestCase
 		assertTrue(ab.isLessOrEqual(xy));
 		assertTrue(ab.isGreaterOrEqual(xy));
 	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public final void testcreateXYPair()
+	{
+		assertNull(JDFXYPair.createXYPair(null));
+		assertNull(JDFXYPair.createXYPair(""));
+		assertNull(JDFXYPair.createXYPair("a"));
+		assertNotNull(JDFXYPair.createXYPair("1"));
+		assertNull(JDFXYPair.createXYPair("1 2 a"));
+		assertNotNull(JDFXYPair.createXYPair("1 2"));
+		assertNotNull(JDFXYPair.createXYPair("  1 2 "));
+		assertNotNull(JDFXYPair.createXYPair("  1. 2 "));
+		assertNotNull(JDFXYPair.createXYPair("  1.00 2.00 "));
+	}
 }

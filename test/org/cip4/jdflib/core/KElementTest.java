@@ -1752,16 +1752,16 @@ public class KElementTest extends JDFTestCaseBase
 	 */
 	public void testGetXPathAttribute()
 	{
-		JDFAudit.setStaticAuthor(JDFAudit.software());
+		JDFAudit.setStaticAgentName("foo Agent");
 		final JDFDoc jdfDoc = new JDFDoc(ElementName.JDF);
 		final JDFNode root = (JDFNode) jdfDoc.getRoot();
 		root.setID("rootID");
 		assertEquals(root.getXPathAttribute("@ID", null), "rootID");
 
 		final String nodeName = "Created";
-		String attribute = "Author";
+		String attribute = "AgentName";
 		String attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "dummydefault");
-		assertEquals(attValue, JDFAudit.software());
+		assertEquals(attValue, JDFAudit.getStaticAgentName());
 
 		attribute = "notExistingAttribute";
 		attValue = root.getXPathAttribute("AuditPool/" + nodeName + "@" + attribute, "dummydefault");

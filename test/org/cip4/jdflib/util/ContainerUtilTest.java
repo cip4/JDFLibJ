@@ -76,8 +76,11 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.ElementName;
+import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.ifaces.IMatches;
+import org.cip4.jdflib.resource.process.JDFCostCenter;
 
 /**
  * general utilities for containers and objects
@@ -130,6 +133,25 @@ public class ContainerUtilTest extends JDFTestCaseBase
 		assertFalse(ContainerUtil.equals("", null));
 		assertFalse(ContainerUtil.equals("", " "));
 		assertTrue(ContainerUtil.equals("a", "a"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testMatches()
+	{
+		JDFCostCenter cs = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		cs.setCostCenterID("CS");
+		JDFCostCenter cs2 = (JDFCostCenter) new JDFDoc(ElementName.COSTCENTER).getRoot();
+		cs2.setCostCenterID("CS");
+		assertTrue(ContainerUtil.matches(cs, cs2));
+		assertTrue(ContainerUtil.matches(cs, "CS"));
+		assertTrue(ContainerUtil.matches(null, null));
+		cs2.setCostCenterID("CS2");
+		assertFalse(ContainerUtil.matches(cs, cs2));
+		assertFalse(ContainerUtil.matches(cs, null));
+		assertFalse(ContainerUtil.matches(cs, "CS2"));
+		assertFalse(ContainerUtil.matches(null, "CS2"));
 	}
 
 	/**

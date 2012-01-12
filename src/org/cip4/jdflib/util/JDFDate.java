@@ -107,6 +107,30 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	private long lTimeInMillis = 0;
 	private int m_TimeZoneOffsetInMillis = 0; // in miliseconds from GMT-time
 	private static FastCalendar fastCalendar = new FastCalendar();
+	/**
+	 * 
+	 */
+	public static final String DATETIMEISO = "yyyy'-'MM'-'dd'T'HH:mm:ssZZ";
+	/**
+	 * 
+	 */
+	public static final String DATETIMEREADABLE = "dd MMM yyyy HH:mm";
+	/**
+	 * 
+	 */
+	public static final String DATENUMERIC_DDMM = "dd/MM/yyyy";
+	/**
+	 * 
+	 */
+	public static final String DATENUMERIC_MMDD = "MM/dd/yyyy";
+	/**
+	 * 
+	 */
+	public static final String DATETIMENUMERIC_DDMM = "dd/MM/yyyy HH:mm";
+	/**
+	 * 
+	 */
+	public static final String DATETIMENUMERIC_MMDD = "MM/dd/yyyy HH:mm";
 
 	private static class FastCalendar
 	{
@@ -625,8 +649,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public String getDateTimeISO()
 	{
-		final String timePattern = "yyyy'-'MM'-'dd'T'HH:mm:ssZZ";
-		return getDateFormat(timePattern).format(lTimeInMillis);
+		return getDateFormat(DATETIMEISO).format(lTimeInMillis);
 	}
 
 	/**

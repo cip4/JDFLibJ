@@ -341,13 +341,11 @@ public class JDFDeviceInfo extends JDFAutoDeviceInfo
 			{
 				bGood = bGood && getEmployee(i).matches(employee);
 			}
-
 		}
 		if (!bGood)
 		{
 			return false;
 		}
-
 		final int numJobPhases = numChildElements(ElementName.JOBPHASE, null);
 		if (numJobPhases != lastInfo.numChildElements(ElementName.JOBPHASE, null))
 		{

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -67,14 +67,14 @@
  *
  *
  *//**
- *
- * Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
- *
- * JDFUsageCounter.java
- *
- * Last changes
- *
- */
+*
+* Copyright (c) 2001 Heidelberger Druckmaschinen AG, All Rights Reserved.
+*
+* JDFUsageCounter.java
+*
+* Last changes
+*
+*/
 package org.cip4.jdflib.resource.process;
 
 import java.util.Iterator;
@@ -89,49 +89,51 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+ *
+ * @author rainer prosi
+ * @date Jan 10, 2012
+ */
 public class JDFUsageCounter extends JDFAutoUsageCounter
 {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructor for JDFUsageCounter
+	 * @param myOwnerDocument 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
-	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument,
-			String qualifiedName) throws DOMException
+	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFUsageCounter
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @throws DOMException 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @throws DOMException
 	 */
-	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName) throws DOMException
+	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName);
 	}
 
 	/**
 	 * Constructor for JDFUsageCounter
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
 	 * @throws DOMException
 	 */
-	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument,
-			String myNamespaceURI, String qualifiedName, String myLocalName)
-			throws DOMException
+	public JDFUsageCounter(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
 	{
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
@@ -149,6 +151,12 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 		return "JDFUsageCounter[  --> " + super.toString() + " ]";
 	}
 
+	/**
+	 * 
+	 *  
+	 * @author rainerprosi
+	 * @date Jan 10, 2012
+	 */
 	public static class EnumCounterType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -159,59 +167,91 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 			super(name, m_startValue++);
 		}
 
+		/**
+		 * 
+		 *  
+		 * @param enumName
+		 * @return
+		 */
 		public static EnumCounterType getEnum(String enumName)
 		{
 			return (EnumCounterType) getEnum(EnumCounterType.class, enumName);
 		}
 
+		/**
+		 * 
+		 *  
+		 * @param enumValue
+		 * @return
+		 */
 		public static EnumCounterType getEnum(int enumValue)
 		{
 			return (EnumCounterType) getEnum(EnumCounterType.class, enumValue);
 		}
 
+		/**
+		 * 
+		 * TODO Please insert comment!
+		 * @return
+		 */
 		public static Map getEnumMap()
 		{
 			return getEnumMap(EnumCounterType.class);
 		}
 
+		/**
+		 * 
+		 * 
+		 * @return
+		 */
 		public static List getEnumList()
 		{
 			return getEnumList(EnumCounterType.class);
 		}
 
+		/**
+		 * 
+		 *  
+		 * @return
+		 */
 		public static Iterator iterator()
 		{
 			return iterator(EnumCounterType.class);
 		}
 
+		/** */
 		public static final EnumCounterType Blank = new EnumCounterType("Blank");
-		public static final EnumCounterType Insert = new EnumCounterType(
-				"Insert");
-		public static final EnumCounterType InsertPrefuser = new EnumCounterType(
-				"InsertPrefuser");
-		public static final EnumCounterType OneSided = new EnumCounterType(
-				"OneSided");
-		public static final EnumCounterType TwoSided = new EnumCounterType(
-				"TwoSided");
-		public static final EnumCounterType NormalSize = new EnumCounterType(
-				"NormalSize");
-		public static final EnumCounterType LargeSize = new EnumCounterType(
-				"LargeSize");
+		/** */
+		public static final EnumCounterType Insert = new EnumCounterType("Insert");
+		/** */
+		public static final EnumCounterType InsertPrefuser = new EnumCounterType("InsertPrefuser");
+		/** */
+		public static final EnumCounterType OneSided = new EnumCounterType("OneSided");
+		/** */
+		public static final EnumCounterType TwoSided = new EnumCounterType("TwoSided");
+		/** */
+		public static final EnumCounterType NormalSize = new EnumCounterType("NormalSize");
+		/** */
+		public static final EnumCounterType LargeSize = new EnumCounterType("LargeSize");
+		/** */
 		public static final EnumCounterType Black = new EnumCounterType("Black");
-		public static final EnumCounterType HighlightColor = new EnumCounterType(
-				"HighlightColor");
+		/** */
+		public static final EnumCounterType HighlightColor = new EnumCounterType("HighlightColor");
+		/** */
 		public static final EnumCounterType Color = new EnumCounterType("Color");
-		public static final EnumCounterType Separation = new EnumCounterType(
-				"Separation");
-		public static final EnumCounterType Varnish = new EnumCounterType(
-				"Varnish");
+		/** */
+		public static final EnumCounterType Separation = new EnumCounterType("Separation");
+		/** */
+		public static final EnumCounterType Varnish = new EnumCounterType("Varnish");
+		/** */
 		public static final EnumCounterType User = new EnumCounterType("User");
-		public static final EnumCounterType Auxiliary = new EnumCounterType(
-				"Auxiliary");
-		public static final EnumCounterType Impressions = new EnumCounterType(
-				"Impressions");
-		public static final EnumCounterType Clicks = new EnumCounterType(
-				"Clicks");
+		/** */
+		public static final EnumCounterType Auxiliary = new EnumCounterType("Auxiliary");
+		/** */
+		public static final EnumCounterType Impressions = new EnumCounterType("Impressions");
+		/** */
+		public static final EnumCounterType Clicks = new EnumCounterType("Clicks");
+		/** */
 		public static final EnumCounterType pt = new EnumCounterType("pt");
 	}
 
@@ -234,13 +274,27 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 	/**
 	 * (5) set attribute CounterTypes
 	 * 
-	 * @param enumVar
+	 * @param vVar vector of EnumCounterType 
 	 *            : the enumVar to set the attribute to
 	 */
-	public void setCounterTypes(Vector vVar)
+	public void setCounterTypes(Vector<EnumCounterType> vVar)
 	{
 		final String s = StringUtil.setvString(vVar);
 		setAttribute(AttributeName.COUNTERTYPES, s, null);
+	}
+
+	/**
+	 * append a countertype to attribute CounterTypes
+	 * 
+	 * @param cType  EnumCounterType 
+	 *            : the enumVar to set the attribute to
+	 */
+	public void appendCounterType(EnumCounterType cType)
+	{
+		if (cType != null)
+		{
+			appendAttribute(AttributeName.COUNTERTYPES, cType.getName(), null, null, true);
+		}
 	}
 
 	/**
@@ -248,14 +302,13 @@ public class JDFUsageCounter extends JDFAutoUsageCounter
 	 * 
 	 * @return the value of the attribute
 	 */
-	public Vector getEnumCounterTypes()
+	public Vector<EnumCounterType> getEnumCounterTypes()
 	{
-		return getEnumerationsAttribute(AttributeName.COUNTERTYPES, null,
-				EnumCounterType.Auxiliary, false);
+		return (Vector<EnumCounterType>) getEnumerationsAttribute(AttributeName.COUNTERTYPES, null, EnumCounterType.Auxiliary, false);
 	}
 
 	/**
-	 * also checks for matchin counterID or CounteType mangled with "_", e.g.
+	 * also checks for matching counterID or CounteType mangled with "_", e.g.
 	 * UsageCounter:ID_CounterA UsageCounter:Black_SingleSided etc.
 	 */
 	@Override

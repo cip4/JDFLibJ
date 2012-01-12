@@ -115,6 +115,7 @@ import org.cip4.jdflib.datatypes.JDFRectangleRangeListTest;
 import org.cip4.jdflib.datatypes.JDFRectangleRangeTest;
 import org.cip4.jdflib.datatypes.JDFRectangleTest;
 import org.cip4.jdflib.datatypes.JDFShapeRangeListTest;
+import org.cip4.jdflib.datatypes.JDFShapeTest;
 import org.cip4.jdflib.datatypes.JDFURLTest;
 import org.cip4.jdflib.datatypes.JDFXYPairRangeListTest;
 import org.cip4.jdflib.datatypes.JDFXYPairTest;
@@ -225,6 +226,7 @@ import org.cip4.jdflib.resource.process.JDFComChannelTest;
 import org.cip4.jdflib.resource.process.JDFComponentTest;
 import org.cip4.jdflib.resource.process.JDFContactTest;
 import org.cip4.jdflib.resource.process.JDFContentDataTest;
+import org.cip4.jdflib.resource.process.JDFCostCenterTest;
 import org.cip4.jdflib.resource.process.JDFCutBlockTest;
 import org.cip4.jdflib.resource.process.JDFDeliveryParamsTest;
 import org.cip4.jdflib.resource.process.JDFDieLayoutTest;
@@ -269,6 +271,7 @@ import org.cip4.jdflib.util.UnitParserTest;
 import org.cip4.jdflib.util.UrlPartTest;
 import org.cip4.jdflib.util.UrlUtilTest;
 import org.cip4.jdflib.util.VectorMapTest;
+import org.cip4.jdflib.util.file.FileJanitorTest;
 import org.cip4.jdflib.util.file.FileSorterTest;
 import org.cip4.jdflib.util.file.RollingFileTest;
 import org.cip4.jdflib.util.hotfolder.HotFolderTest;
@@ -350,6 +353,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFRectangleRangeListTest.class);
 		suite.addTestSuite(JDFRectangleRangeTest.class);
 		suite.addTestSuite(JDFRectangleTest.class);
+		suite.addTestSuite(JDFShapeTest.class);
 		suite.addTestSuite(JDFShapeRangeListTest.class);
 		suite.addTestSuite(JDFXYPairRangeListTest.class);
 		suite.addTestSuite(JDFXYPairTest.class);
@@ -485,6 +489,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFContentDataTest.class);
 		suite.addTestSuite(JDFCutBlockTest.class);
 		suite.addTestSuite(JDFContactTest.class);
+		suite.addTestSuite(JDFCostCenterTest.class);
 		suite.addTestSuite(JDFDeliveryParamsTest.class);
 		suite.addTestSuite(JDFDieLayoutTest.class);
 		suite.addTestSuite(JDFEmployeeTest.class);
@@ -538,6 +543,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// util.file
 		suite.addTestSuite(FileSorterTest.class);
+		suite.addTestSuite(FileJanitorTest.class);
 		// util.hotfolder
 		suite.addTestSuite(HotFolderTest.class);
 		suite.addTestSuite(QueueHotFolderTest.class);
