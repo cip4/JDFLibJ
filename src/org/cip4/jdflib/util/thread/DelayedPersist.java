@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -129,18 +129,18 @@ public class DelayedPersist extends Thread
 
 	/**
 	 * 
-	 * @param qp
-	 * @param deltaTime
+	 * @param persistable the thing to send off
+	 * @param deltaTime if<=null persist immediately
 	 */
-	public void queue(IPersistable qp, long deltaTime)
+	public void queue(IPersistable persistable, long deltaTime)
 	{
 		synchronized (persistQueue)
 		{
-			MyLong l = persistQueue.get(qp);
+			MyLong l = persistQueue.get(persistable);
 			long t = System.currentTimeMillis();
 			if (l == null)
 			{
-				persistQueue.put(qp, new MyLong(t + deltaTime));
+				persistQueue.put(persistable, new MyLong(t + deltaTime));
 			}
 			else if (t + deltaTime < l.i)
 			{

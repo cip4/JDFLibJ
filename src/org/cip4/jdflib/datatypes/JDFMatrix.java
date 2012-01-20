@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -218,19 +218,15 @@ public class JDFMatrix extends JDFNumList
 	}
 
 	/**
-	 * constructs a matrix with all values set via a JDFMatrix
+	 * constructs a rectangle with all values set via a JDFNumberList
 	 * 
-	 * @param JDma the given matrix
+	 * @param nl the given number list
+	 * 
+	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFMatrix(final JDFMatrix ma)
+	public JDFMatrix(final JDFNumList nl) throws DataFormatException
 	{
-		super(MAX_MATRIX_DIMENSION);
-		setA(ma.getA());
-		setB(ma.getB());
-		setC(ma.getC());
-		setD(ma.getD());
-		setTx(ma.getTx());
-		setTy(ma.getTy());
+		super(nl);
 	}
 
 	/**
@@ -238,21 +234,12 @@ public class JDFMatrix extends JDFNumList
 	 * 
 	 * @param nl the given number list
 	 * 
-	 * @throws DataFormatException - if the JDFNumberList has not a valid format
+	 * 
 	 */
-	public JDFMatrix(final JDFNumberList nl) throws DataFormatException
+	public JDFMatrix(final JDFMatrix nl)
 	{
-		super(MAX_MATRIX_DIMENSION);
-		if (nl.size() != MAX_MATRIX_DIMENSION)
-		{
-			throw new DataFormatException("JDFMatrix: can't construct JDFMatrix from this JDFNuberList value");
-		}
-		m_numList.set(0, nl.m_numList.get(0));
-		m_numList.set(1, nl.m_numList.get(1));
-		m_numList.set(2, nl.m_numList.get(2));
-		m_numList.set(3, nl.m_numList.get(3));
-		m_numList.set(4, nl.m_numList.get(4));
-		m_numList.set(5, nl.m_numList.get(5));
+		super();
+		addAll(nl);
 	}
 
 	/**
@@ -286,14 +273,14 @@ public class JDFMatrix extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		if (m_numList.size() != MAX_MATRIX_DIMENSION)
+		if (size() != MAX_MATRIX_DIMENSION)
 		{
-			throw new DataFormatException("Data format exception!");
+			throw new DataFormatException("wrong size! " + size());
 		}
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (Object o : this)
 		{
-			if (!(m_numList.elementAt(i) instanceof Double))
+			if (!(o instanceof Double))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -308,7 +295,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public double getA()
 	{
-		return ((Double) m_numList.get(0)).doubleValue();
+		return doubleAt(0);
 	}
 
 	/**
@@ -318,7 +305,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public void setA(final double p_a)
 	{
-		m_numList.set(0, new Double(p_a));
+		set(0, p_a);
 	}
 
 	/**
@@ -328,7 +315,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public double getB()
 	{
-		return ((Double) m_numList.get(1)).doubleValue();
+		return doubleAt(1);
 	}
 
 	/**
@@ -338,7 +325,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public void setB(final double p_b)
 	{
-		m_numList.set(1, new Double(p_b));
+		set(1, p_b);
 	}
 
 	/**
@@ -348,7 +335,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public double getC()
 	{
-		return ((Double) m_numList.get(2)).doubleValue();
+		return doubleAt(2);
 	}
 
 	/**
@@ -358,7 +345,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public void setC(final double p_c)
 	{
-		m_numList.set(2, new Double(p_c));
+		set(2, p_c);
 	}
 
 	/**
@@ -368,7 +355,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public double getD()
 	{
-		return ((Double) m_numList.get(3)).doubleValue();
+		return doubleAt(3);
 	}
 
 	/**
@@ -378,7 +365,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public void setD(final double p_d)
 	{
-		m_numList.set(3, new Double(p_d));
+		set(3, p_d);
 	}
 
 	/**
@@ -388,7 +375,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public double getTx()
 	{
-		return ((Double) m_numList.get(4)).doubleValue();
+		return doubleAt(4);
 	}
 
 	/**
@@ -398,7 +385,7 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public void setTx(final double p_tx)
 	{
-		m_numList.set(4, new Double(p_tx));
+		set(4, p_tx);
 	}
 
 	/**
@@ -408,17 +395,17 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public double getTy()
 	{
-		return ((Double) m_numList.get(5)).doubleValue();
+		return doubleAt(5);
 	}
 
 	/**
 	 * setTy - sets the ty coordinate
 	 * 
-	 * @param p_y the ty coordinate
+	 * @param p_ty the ty coordinate
 	 */
 	public void setTy(final double p_ty)
 	{
-		m_numList.set(5, new Double(p_ty));
+		set(5, p_ty);
 	}
 
 	/**
@@ -464,15 +451,13 @@ public class JDFMatrix extends JDFNumList
 	 */
 	public AffineTransform getAffineTransform()
 	{
-		// 2001-10-19 D.Schlenz:
-		// switched getB() and getC() in constructor call of AffineTransform
 		return new AffineTransform(this.getA(), this.getB(), this.getC(), this.getD(), this.getTx(), this.getTy());
 	}
 
 	/**
 	 * setAffineTransform -
 	 * 
-	 * @param AffineTransform matrix to be stored
+	 * @param affineTrans matrix to be stored
 	 */
 	public void setAffineTransform(final AffineTransform affineTrans)
 	{
@@ -489,8 +474,8 @@ public class JDFMatrix extends JDFNumList
 	/**
 	 * shifts Tx and Ty by the amount specified
 	 * 
-	 * @param tX shift in x direction
-	 * @param tY shift in y direction
+	 * @param tx shift in x direction
+	 * @param ty shift in y direction
 	 */
 	public void shift(final double tx, final double ty)
 	{
@@ -514,7 +499,7 @@ public class JDFMatrix extends JDFNumList
 	 * concatinates this with m
 	 * 
 	 * @param m the matrix to concatinate
-	 * @param tY shift in y direction
+	 * 
 	 */
 	public void concat(final JDFMatrix m)
 	{
@@ -536,6 +521,5 @@ public class JDFMatrix extends JDFNumList
 			return;
 		}
 		shift(point.getX(), point.getY());
-
 	}
 }

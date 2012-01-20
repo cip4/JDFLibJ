@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -88,6 +88,11 @@ import java.util.zip.DataFormatException;
  */
 public class JDFCMYKColor extends JDFNumList
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// **************************************** Constructors
 	// ****************************************
 	/**
@@ -125,25 +130,13 @@ public class JDFCMYKColor extends JDFNumList
 	}
 
 	/**
-	 * constructs a CMYK color with a given JDFCMYKColor
-	 * 
-	 * @param cmyk - the given CMYK colors
-	 * 
-	 * @throws DataFormatException - if the String has not a valid format
-	 */
-	public JDFCMYKColor(final JDFCMYKColor cmyk) throws DataFormatException
-	{
-		this(cmyk.toString());
-	}
-
-	/**
 	 * constructs a CMYK color with a given JDFNumberList
 	 * 
 	 * @param nl - the given number list
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFCMYKColor(final JDFNumberList nl) throws DataFormatException
+	public JDFCMYKColor(final JDFNumList nl) throws DataFormatException
 	{
 		super(nl);
 	}
@@ -159,10 +152,10 @@ public class JDFCMYKColor extends JDFNumList
 	public JDFCMYKColor(final double c, final double m, final double y, final double k)
 	{
 		super(MAX_CMYK_COLOR);
-		m_numList.set(0, new Double(c));
-		m_numList.set(1, new Double(m));
-		m_numList.set(2, new Double(y));
-		m_numList.set(3, new Double(k));
+		set(0, new Double(c));
+		set(1, new Double(m));
+		set(2, new Double(y));
+		set(3, new Double(k));
 	}
 
 	// **************************************** Methods
@@ -175,14 +168,14 @@ public class JDFCMYKColor extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		if (m_numList.size() != MAX_CMYK_COLOR)
+		if (size() != MAX_CMYK_COLOR)
 		{
 			throw new DataFormatException("Data format exception!");
 		}
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (Object o : this)
 		{
-			if (!(m_numList.elementAt(i) instanceof Double))
+			if (!(o instanceof Double))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -197,7 +190,7 @@ public class JDFCMYKColor extends JDFNumList
 	 */
 	public double getC()
 	{
-		return ((Double) m_numList.elementAt(0)).doubleValue();
+		return doubleAt(0);
 	}
 
 	/**
@@ -207,7 +200,7 @@ public class JDFCMYKColor extends JDFNumList
 	 */
 	public void setC(final double c)
 	{
-		m_numList.set(0, new Double(c));
+		set(0, c);
 	}
 
 	/**
@@ -217,7 +210,7 @@ public class JDFCMYKColor extends JDFNumList
 	 */
 	public double getM()
 	{
-		return ((Double) m_numList.elementAt(1)).doubleValue();
+		return doubleAt(1);
 	}
 
 	/**
@@ -227,7 +220,7 @@ public class JDFCMYKColor extends JDFNumList
 	 */
 	public void setM(final double m)
 	{
-		m_numList.set(1, new Double(m));
+		set(1, m);
 	}
 
 	/**
@@ -237,7 +230,7 @@ public class JDFCMYKColor extends JDFNumList
 	 */
 	public double getY()
 	{
-		return ((Double) m_numList.elementAt(2)).doubleValue();
+		return doubleAt(2);
 	}
 
 	/**
@@ -247,7 +240,7 @@ public class JDFCMYKColor extends JDFNumList
 	 */
 	public void setY(final double y)
 	{
-		m_numList.set(2, new Double(y));
+		set(2, y);
 	}
 
 	/**
@@ -257,7 +250,7 @@ public class JDFCMYKColor extends JDFNumList
 	 */
 	public double getK()
 	{
-		return ((Double) m_numList.elementAt(3)).doubleValue();
+		return doubleAt(3);
 	}
 
 	/**
@@ -267,7 +260,7 @@ public class JDFCMYKColor extends JDFNumList
 	 */
 	public void setK(final double k)
 	{
-		m_numList.set(3, new Double(k));
+		set(3, k);
 	}
 
 	/**
@@ -291,7 +284,7 @@ public class JDFCMYKColor extends JDFNumList
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			m_numList.set(i, new Double(0.0));
+			set(i, 0.0);
 		}
 		if ("Black".equalsIgnoreCase(name))
 		{

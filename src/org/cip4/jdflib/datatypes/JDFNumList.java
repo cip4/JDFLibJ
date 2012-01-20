@@ -77,6 +77,8 @@
  */
 package org.cip4.jdflib.datatypes;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
@@ -88,12 +90,8 @@ import org.cip4.jdflib.util.StringUtil;
  * This abstract class is the representation of a number list (Integer and Double object). Intern these objects are collected in a vector and there are several
  * methods to provide an access to the data.
  */
-public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
+public abstract class JDFNumList extends Vector<Object> implements JDFBaseDataTypes, Cloneable
 {
-	// **************************************** Constructors
-	// ****************************************
-	protected Vector<Object> m_numList = new Vector<Object>();
-
 	// **************************************** Constructors
 	// ****************************************
 	/**
@@ -101,7 +99,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public JDFNumList()
 	{
-		// default super constructor
+		super();// default super constructor
 	}
 
 	/**
@@ -111,19 +109,11 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public JDFNumList(final int size)
 	{
+		super(size);
 		for (int i = 0; i < size; i++)
 		{
-			m_numList.addElement(new Double(0.0));
+			addElement(new Double(0.0));
 		}
-	}
-
-	/**
-	 * same as Vector.clear()
-	 * 
-	 */
-	public void clear()
-	{
-		m_numList.clear();
 	}
 
 	/**
@@ -138,7 +128,8 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	@Deprecated
 	public JDFNumList(final Vector v) throws DataFormatException
 	{
-		this.m_numList = v;
+		super();
+		addAll(v);
 		isValid();
 	}
 
@@ -158,13 +149,24 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 
 	/**
 	 * 
+	 *  
+	 * @param pos
+	 * @param d
+	 */
+	public void set(int pos, double d)
+	{
+		super.set(pos, new Double(d));
+	}
+
+	/**
+	 * 
 	 * sets this to the value specified in string
 	 * @param string
 	 * @throws DataFormatException
 	 */
 	public void setString(final String string) throws DataFormatException
 	{
-		m_numList.clear();
+		clear();
 		final VString v = StringUtil.tokenize(string, null, false);
 		if (v != null)
 		{
@@ -179,14 +181,14 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 					int theInt = StringUtil.parseInt(s, minValue);
 					if (theInt == minValue)
 						throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-					m_numList.addElement(new Integer(theInt));
+					addElement(new Integer(theInt));
 				}
 				else
 				{
 					double theDouble = StringUtil.parseDouble(s, Double.NaN);
 					if (Double.isNaN(theDouble))
 						throw new DataFormatException("JDFNumList: bad numeric value: " + s);
-					m_numList.addElement(new Double(theDouble));
+					addElement(new Double(theDouble));
 				}
 			}
 		}
@@ -202,7 +204,8 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public JDFNumList(final JDFNumList nl) throws DataFormatException
 	{
-		this.m_numList = nl.copyNumList();
+		super();
+		addAll(nl);
 		isValid();
 	}
 
@@ -227,7 +230,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public double[] getDoubleList()
 	{
-		double[] list = new double[m_numList.size()];
+		double[] list = new double[size()];
 		for (int i = 0; i < size(); i++)
 			list[i] = doubleAt(i);
 		return list;
@@ -243,14 +246,14 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	{
 		final StringBuffer sb = new StringBuffer();
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (int i = 0; i < size(); i++)
 		{
 			if (i > 0)
 			{
 				sb.append(JDFConstants.BLANK);
 			}
 
-			final Object o = m_numList.elementAt(i);
+			final Object o = elementAt(i);
 			if (o instanceof Double)
 			{
 				sb.append(StringUtil.formatDouble(((Double) o).doubleValue()));
@@ -313,17 +316,7 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	@Override
 	public int hashCode()
 	{
-		return this.m_numList.toString().hashCode();
-	}
-
-	/**
-	 * size - returns the size of the list
-	 * 
-	 * @return int - the size of the list
-	 */
-	public int size()
-	{
-		return m_numList.size();
+		return toString().hashCode();
 	}
 
 	/**
@@ -332,18 +325,19 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * @param i the index
 	 * @return Object - the range object at the given position, null if i is out of range
 	 */
+	@Override
 	public Object elementAt(int i)
 	{
 		if (i < 0)
 		{
-			i = m_numList.size() + i;
+			i = size() + i;
 		}
 
-		if (i < 0 || i >= m_numList.size())
+		if (i < 0 || i >= size())
 		{
 			return null;
 		}
-		return m_numList.elementAt(i);
+		return super.elementAt(i);
 	}
 
 	/**
@@ -370,26 +364,13 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * copyNumList - returns a clone of the numList vector
 	 * 
 	 * @return Vector - the clone of the numList vector
+	 * @deprecated use clone()
 	 */
+	@Deprecated
 	@SuppressWarnings("unchecked")
 	public Vector<Object> copyNumList()
 	{
-		return (Vector<Object>) m_numList.clone();
-	}
-
-	/**
-	 * clone - Returns a clone of this instance
-	 * 
-	 * @return Object - the clone
-	 * @throws CloneNotSupportedException
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public JDFNumList clone() throws CloneNotSupportedException
-	{
-		final JDFNumList num = (JDFNumList) super.clone();
-		num.m_numList = ((Vector<Object>) m_numList.clone());
-		return num;
+		return clone();
 	}
 
 	/**
@@ -397,25 +378,18 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * 
 	 * @param i the position from where to remove the element
 	 * 
-	 * @return boolean - true if successfull otherwise false
 	 */
-	public boolean removeElementAt(final int i)
+	@Override
+	public void removeElementAt(int i)
 	{
-		int iLocal = i;
-
-		if (iLocal < 0)
+		if (i < 0)
 		{
-			iLocal = iLocal + size();
+			i += size();
 		}
-
-		if ((iLocal < size()) && (iLocal >= 0))
+		if ((i < size()) && (i >= 0))
 		{
-			m_numList.removeElementAt(iLocal);
-
-			return true;
+			super.removeElementAt(i);
 		}
-
-		return false;
 	}
 
 	/**
@@ -423,25 +397,20 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 * 
 	 * @param obj the object
 	 * @param i the given position
-	 * @return boolean - true if successfull otherwise false
+	 * @return boolean - true if successful otherwise false
 	 */
-	public boolean replaceElementAt(final Object obj, final int i)
+	public boolean replaceElementAt(final Object obj, int i)
 	{
-		int iLocal = i;
-
-		if (iLocal < 0)
+		if (i < 0)
 		{
-			iLocal = iLocal + size();
+			i += size();
 		}
 
-		if ((iLocal < m_numList.size()) && (iLocal > -1))
+		if ((i < size()) && (i >= 0))
 		{
-			m_numList.removeElementAt(iLocal);
-			m_numList.insertElementAt(obj, iLocal);
-
+			set(i, obj);
 			return true;
 		}
-
 		return false;
 	}
 
@@ -526,11 +495,11 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public JDFNumList scale(final double factor)
 	{
-		final int size = m_numList.size();
+		final int size = size();
 		for (int i = 0; i < size; i++)
 		{
 			final double number = doubleAt(i) * factor;
-			m_numList.setElementAt(new Double(number), i);
+			setElementAt(new Double(number), i);
 		}
 		return this;
 	}
@@ -542,17 +511,27 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public JDFNumList abs()
 	{
-		final int size = m_numList.size();
+		final int size = size();
 		for (int i = 0; i < size; i++)
 		{
 			final double number = Math.abs(doubleAt(i));
-			m_numList.setElementAt(new Double(number), i);
+			setElementAt(new Double(number), i);
 		}
 		return this;
 	}
 
 	/**
-	 * nodify numlist to absolute values
+	 * 
+	 * @see java.util.Vector#clone()
+	 */
+	@Override
+	public JDFNumList clone()
+	{
+		return (JDFNumList) super.clone();
+	}
+
+	/**
+	 * are all values within +/- delta?
 	 * @param other 
 	 * @param delta 
 	 * @see Math#abs
@@ -565,19 +544,14 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 		if (size() != other.size())
 			return false;
 		JDFNumList dif;
-		try
-		{
-			dif = clone();
-		}
-		catch (CloneNotSupportedException e)
-		{
-			return false;
-		}
+		dif = clone();
 		dif.subtract(other);
 		dif.abs();
 		for (int i = 0; i < size(); i++)
+		{
 			if (dif.doubleAt(i) > delta)
 				return false;
+		}
 		return true;
 	}
 
@@ -596,7 +570,30 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 		for (int i = 0; i < me.length; i++)
 		{
 			me[i] -= them[i];
-			m_numList.setElementAt(new Double(me[i]), i);
+			setElementAt(new Double(me[i]), i);
+		}
+	}
+
+	/**
+	 * ensure that each instance exists only once
+	 *  
+	 *  
+	 */
+	public void unify()
+	{
+		Set<Object> set = new HashSet<Object>();
+		int j = 0;
+		for (int i = 0; i < size(); i++)
+		{
+			if (set.contains(elementAt(j)))
+			{
+				remove(j);
+			}
+			else
+			{
+				set.add(elementAt(j));
+				j++;
+			}
 		}
 	}
 
@@ -607,26 +604,15 @@ public abstract class JDFNumList implements JDFBaseDataTypes, Cloneable
 	 */
 	public int[] getIntArray()
 	{
-		final int size = m_numList.size();
+		final int size = size();
 		final int[] intArray = new int[size];
 
 		for (int i = 0; i < size; i++)
 		{
-			intArray[i] = ((Double) m_numList.elementAt(i)).intValue();
+			intArray[i] = ((Double) elementAt(i)).intValue();
 		}
 
 		return intArray;
-	}
-
-	/**
-	 * return true if this contains the Double or Integer object o
-	 * 
-	 * @param o
-	 * @return
-	 */
-	public boolean contains(final Object o)
-	{
-		return m_numList.contains(o);
 	}
 
 	/**

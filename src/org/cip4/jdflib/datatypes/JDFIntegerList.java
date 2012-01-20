@@ -80,7 +80,6 @@
 package org.cip4.jdflib.datatypes;
 
 import java.util.StringTokenizer;
-import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.JDFConstants;
@@ -123,7 +122,7 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public JDFIntegerList()
 	{
-		// default super constructor
+		super();
 	}
 
 	/**
@@ -157,21 +156,6 @@ public class JDFIntegerList extends JDFNumList
 	}
 
 	/**
-	 * constructs an integer list with all values set via a Vector of Intger objects
-	 * 
-	 * @param v the given vector
-	 * 
-	 * @throws DataFormatException - if the Vector has not a valid format
-	 * @deprecated use typesafe constructors
-	 */
-	@SuppressWarnings("unchecked")
-	@Deprecated
-	public JDFIntegerList(final Vector v) throws DataFormatException
-	{
-		super(v);
-	}
-
-	/**
 	 * constructs an integer list with all values set via a JDFIntegerList
 	 * 
 	 * @param il the given integer list
@@ -180,7 +164,7 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public JDFIntegerList(final JDFIntegerList il) throws DataFormatException
 	{
-		this(il.m_numList);
+		super(il);
 	}
 
 	/**
@@ -214,9 +198,9 @@ public class JDFIntegerList extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		for (int i = 0; i < m_numList.size(); i++)
+		for (int i = 0; i < size(); i++)
 		{
-			if (!(m_numList.elementAt(i) instanceof Integer))
+			if (!(elementAt(i) instanceof Integer))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -271,14 +255,12 @@ public class JDFIntegerList extends JDFNumList
 	 * addIntegerList - adds an integer list to this integer list
 	 * 
 	 * @param il the given integer list
+	 * @deprecated - use addAll()
 	 */
+	@Deprecated
 	public void addIntegerList(final JDFIntegerList il)
 	{
-		final int size = il.size();
-		for (int i = 0; i < size; i++)
-		{
-			m_numList.addElement(il.elementAt(i));
-		}
+		addAll(il);
 	}
 
 	/**
@@ -288,27 +270,19 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public void add(final int x)
 	{
-		m_numList.add(new Integer(x));
-	}
-
-	/**
-	 * add - add an Integer object to the vector
-	 * 
-	 * @param x the Integer object
-	 */
-	public void add(final Integer x)
-	{
-		m_numList.add(x);
+		add(new Integer(x));
 	}
 
 	/**
 	 * add - adds a complete integer list to the vector
 	 * 
 	 * @param il the given integer list
+	 * @deprecated - usa addAll
 	 */
+	@Deprecated
 	public void add(final JDFIntegerList il)
 	{
-		m_numList.addAll(il.copyNumList());
+		addAll(il);
 	}
 
 	/**
@@ -321,19 +295,16 @@ public class JDFIntegerList extends JDFNumList
 	public void add(final String s) throws DataFormatException
 	{
 		final StringTokenizer sToken = new StringTokenizer(s, JDFConstants.BLANK);
-		final Vector<Object> numList = m_numList;
-
 		while (sToken.hasMoreTokens())
 		{
-			final int i = StringUtil.parseInt(sToken.nextToken(), 0);
-
-			try
+			if (StringUtil.isInteger(s))
 			{
-				numList.addElement(new Integer(i));
+				final int i = StringUtil.parseInt(sToken.nextToken(), 0);
+				add(new Integer(i));
 			}
-			catch (final NumberFormatException e)
+			else
 			{
-				throw new DataFormatException("Data format exception!");
+				throw new DataFormatException("Bad integer: " + s);
 			}
 		}
 	}
@@ -389,7 +360,7 @@ public class JDFIntegerList extends JDFNumList
 		}
 		else
 		{
-			m_numList.set(pos, new Integer(val));
+			set(pos, new Integer(val));
 		}
 
 	}
@@ -419,12 +390,12 @@ public class JDFIntegerList extends JDFNumList
 	@Override
 	public int[] getIntArray()
 	{
-		final int size = m_numList.size();
+		final int size = size();
 		final int[] intArray = new int[size];
 
 		for (int i = 0; i < size; i++)
 		{
-			intArray[i] = ((Integer) m_numList.elementAt(i)).intValue();
+			intArray[i] = getInt(i);
 		}
 
 		return intArray;
@@ -438,10 +409,10 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public void setIntArray(final int[] iArray)
 	{
-		m_numList.clear();
+		clear();
 		for (int i = 0; i < iArray.length; i++)
 		{
-			m_numList.add(new Integer(iArray[i]));
+			add(new Integer(iArray[i]));
 		}
 	}
 
@@ -453,8 +424,8 @@ public class JDFIntegerList extends JDFNumList
 	 */
 	public void setInt(final int i)
 	{
-		m_numList.clear();
-		m_numList.add(new Integer(i));
+		clear();
+		add(new Integer(i));
 	}
 
 	/**
@@ -488,7 +459,7 @@ public class JDFIntegerList extends JDFNumList
 		for (int i = 0; i < me.length; i++)
 		{
 			me[i] -= them[i];
-			m_numList.setElementAt(new Integer(me[i]), i);
+			setElementAt(new Integer(me[i]), i);
 		}
 	}
 

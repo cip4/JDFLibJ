@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,11 @@ import org.cip4.jdflib.util.HashUtil;
 public class JDFShape extends JDFNumList
 {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * factory for JDFShape that silently returns null in case of illegal strings
 	 * @param s the string to parse - if JDFXYPair compatible, a 0  z dimension value is assumed
 	 * @return the JDFShape, null if s is not compatible
@@ -140,18 +145,15 @@ public class JDFShape extends JDFNumList
 	}
 
 	/**
-	 * constructor - constructs a shape with all values set via a JDFShape
+	 * constructor - constructs a shape with all values set via a JDFNumberList
 	 * 
-	 * @param shape the given shape
+	 * @param nl the given number list
 	 * 
-	 * 
+	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFShape(final JDFShape shape)
+	public JDFShape(final JDFNumList nl) throws DataFormatException
 	{
-		super(MAX_SHAPE_DIMENSION);
-		setY(shape.getY());
-		setX(shape.getX());
-		setZ(shape.getZ());
+		super(nl);
 	}
 
 	/**
@@ -161,16 +163,10 @@ public class JDFShape extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFShape(final JDFNumberList nl) throws DataFormatException
+	public JDFShape(final JDFShape nl)
 	{
-		super(MAX_SHAPE_DIMENSION);
-		if (nl.size() != MAX_SHAPE_DIMENSION)
-		{
-			throw new DataFormatException("JDFShape: can't construct JDFShape from this JDFNuberList value");
-		}
-		m_numList.set(0, nl.m_numList.get(0));
-		m_numList.set(1, nl.m_numList.get(1));
-		m_numList.set(2, nl.m_numList.get(2));
+		super();
+		addAll(nl);
 	}
 
 	/**
@@ -213,25 +209,25 @@ public class JDFShape extends JDFNumList
 	public boolean isValid() throws DataFormatException
 	{
 		// with default Z = 0.0
-		if (m_numList.size() > MAX_SHAPE_DIMENSION || m_numList.size() < MAX_SHAPE_DIMENSION - 2) // Shape
+		if (size() > MAX_SHAPE_DIMENSION || size() < MAX_SHAPE_DIMENSION - 2) // Shape
 		{
-			throw new DataFormatException("Data format exception!");
+			throw new DataFormatException("Data format exception! size=" + size());
 		}
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (Object o : this)
 		{
-			if (!(m_numList.elementAt(i) instanceof Double))
+			if (!(o instanceof Double))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
 		}
-		if (m_numList.size() == 1)
+		if (size() == 1)
 		{
-			m_numList.addElement(new Double(0.0));
+			addElement(new Double(0.0));
 		}
-		if (m_numList.size() == 2)
+		if (size() == 2)
 		{
-			m_numList.addElement(new Double(0.0));
+			addElement(new Double(0.0));
 		}
 		return true;
 	}
@@ -336,7 +332,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public double getY()
 	{
-		return ((Double) m_numList.elementAt(1)).doubleValue();
+		return doubleAt(1);
 	}
 
 	/**
@@ -358,7 +354,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public void setY(final double y)
 	{
-		m_numList.set(1, new Double(y));
+		set(1, y);
 	}
 
 	/**
@@ -382,7 +378,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public double getX()
 	{
-		return ((Double) m_numList.elementAt(0)).doubleValue();
+		return doubleAt(0);
 	}
 
 	/**
@@ -392,7 +388,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public void setX(final double x)
 	{
-		m_numList.set(0, new Double(x));
+		set(0, x);
 	}
 
 	/**
@@ -426,7 +422,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public double getZ()
 	{
-		return ((Double) m_numList.elementAt(2)).doubleValue();
+		return doubleAt(2);
 	}
 
 	/**
@@ -448,7 +444,7 @@ public class JDFShape extends JDFNumList
 	 */
 	public void setZ(final double z)
 	{
-		m_numList.set(2, new Double(z));
+		set(2, z);
 	}
 
 }

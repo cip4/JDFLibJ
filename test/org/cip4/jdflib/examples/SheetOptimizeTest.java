@@ -84,10 +84,12 @@ import org.cip4.jdflib.core.JDFResourceLink;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.core.JDFSeparationList;
 import org.cip4.jdflib.core.KElement;
+import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
 import org.cip4.jdflib.datatypes.JDFNumberRange;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFStrippingParams;
 import org.cip4.jdflib.resource.process.JDFAssembly;
@@ -217,5 +219,84 @@ public class SheetOptimizeTest extends JDFTestCaseBase
 		strpLink.getAmountPool().setXMLComment("\n planned ideal amounts go here - I assume we do not want an entire process network and that the amounts are minimum # of planned good copies");
 
 		d.write2File(sm_dirTestDataTemp + "sheetOptimize.jdf", 2, false);
+	}
+
+	/**
+	 * test sheetoptimization
+	 * TODO selective part from larger stripping (cover, creep etc.)
+	 * TODO productID
+	 * TODO margins vs. output stripping
+	 * 
+	 * @throws Exception x
+	 */
+	public void testDescribeSheetOptimizeNew() throws Exception
+	{
+		KElement.setLongID(false);
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setXMLComment("this is a process PRIOR to stripping - the output is the completed strippingparams\n"
+				+ "note that each GangElement is essentially a simplified stripping description of the individual product with additional amounts");
+		n.setType("SheetOptimizing", false);
+
+		final JDFResource sheetOptParams = n.addResource("SheetOptimizingParams", EnumUsage.Input);
+		sheetOptParams.setXMLComment("Similar to DieLayoutProductionParams\nalso add general parameters for optimization"
+				+ "\nalso discuss reusing repeatdesc versus dedicated GangElement");
+
+		final JDFConvertingConfig cc = (JDFConvertingConfig) sheetOptParams.appendElement(ElementName.CONVERTINGCONFIG, null);
+		cc.setSheetHeight(new JDFNumberRange(600, 800));
+		cc.setSheetWidth(new JDFNumberRange(900, 1100));
+		cc.appendDevice().setDeviceID("SM102-a");
+		cc.setMarginBottom(36);
+		cc.setMarginTop(36);
+		cc.setMarginLeft(36);
+		cc.setMarginRight(36);
+		cc.setXMLComment("Here we also should ask ourselves whether we want to reuse ConvertingConfig or create our own resource?");
+
+		createNewGangElement(n, 1, sheetOptParams);
+		createNewGangElement(n, 2, sheetOptParams);
+
+		JDFStrippingParams stripparams = (JDFStrippingParams) n.addResource(ElementName.STRIPPINGPARAMS, EnumUsage.Output);
+		stripparams.setXMLComment("This is the empty shell describes the optimided gang jobs and should be filled by the optimizer");
+		stripparams.setResStatus(EnumResStatus.Unavailable, false);
+		JDFResourceLink strpLink = n.getLink(stripparams, null);
+		strpLink.setAmount(1234, new JDFAttributeMap("SheetName", "S1"));
+		strpLink.getAmountPool().setXMLComment("\n planned ideal amounts go here - I assume we do not want an entire process network and that the amounts are minimum # of planned good copies");
+
+		d.write2File(sm_dirTestDataTemp + "sheetOptimizeNew.jdf", 2, false);
+	}
+
+	protected void createNewGangElement(final JDFNode n, final int i, final JDFResource sheetOptParams)
+	{
+		final JDFRunList rl2 = (JDFRunList) n.addResource("RunList", EnumUsage.Input);
+		rl2.addPDF("file" + i + ".pdf", 0, -1);
+
+		final JDFElement repDesca = (JDFElement) sheetOptParams.appendElement("GangElement", null);
+		repDesca.setAttribute("OrderQuantity", i * 2000, null);
+		repDesca.setAttribute("JobID", "IndividualJobID_" + i);
+		repDesca.setAttribute(AttributeName.GRAINDIRECTION, "LongEdge");
+		repDesca.setXMLComment("description of an individual job with 3 Fold sheets, one of which must be ganged: AssemblyID=AssemID" + i + "3");
+		repDesca.appendElement(ElementName.MEDIA).setXMLComment("Should Media go here or be inferred from the output Stripping which is matched by some partition key in SheetoptimizingParams?");
+		repDesca.refElement(rl2);
+		repDesca.setAttribute(AttributeName.ASSEMBLYIDS, "AssemID" + i + "3");
+
+		JDFAssembly assembly = (JDFAssembly) n.addResource(ElementName.ASSEMBLY, EnumUsage.Input);
+		assembly.setJobID(repDesca.getAttribute(AttributeName.JOBID));
+		assembly.setAssemblyIDs(new VString("AssemID" + i + "1 AssemID" + i + "2 AssemID" + i + "3", null));
+
+		JDFSeparationList sl = (JDFSeparationList) repDesca.appendElement(ElementName.SEPARATIONLIST);
+		sl.setCMYK();
+		sl.renameElement("Colors", null);
+		repDesca.copyElement(sl, null).renameElement("BackColors", null);
+		JDFStrippingParams sp = (JDFStrippingParams) repDesca.appendElement(ElementName.STRIPPINGPARAMS);
+		sp.setXMLComment("This Input StrippingParams describes the individual set of foldingsheets with NO sheet context.");
+		sp.makeRootResource(null, null, true);
+		JDFStrippingParams spa = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS_" + i + "_1");
+		spa.setAssemblyIDs(new VString("AssemID" + i + "1 AssemID" + i + "2", null));
+		JDFBinderySignature bsa = (JDFBinderySignature) spa.appendElement(ElementName.BINDERYSIGNATURE);
+		bsa.setFoldCatalog("F16-2");
+		spa = (JDFStrippingParams) sp.addPartition(EnumPartIDKey.BinderySignatureName, "BS_" + i + "_2");
+		spa.setAssemblyIDs(new VString("AssemID" + i + "3", null));
+		bsa = (JDFBinderySignature) spa.appendElement(ElementName.BINDERYSIGNATURE);
+		bsa.setFoldCatalog("F8-2");
 	}
 }

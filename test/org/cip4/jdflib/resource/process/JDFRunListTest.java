@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -91,6 +91,7 @@ import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.node.JDFNode.EnumType;
 import org.cip4.jdflib.pool.JDFResourcePool;
+import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.devicecapability.JDFIntegerEvaluation;
 import org.cip4.jdflib.resource.devicecapability.JDFNameEvaluation;
@@ -339,6 +340,35 @@ public class JDFRunListTest extends JDFTestCaseBase
 		assertEquals(rl.getIndexPartition(3), rlp2);
 		assertEquals(rl.getIndexPartition(6), rlp2);
 		assertNull(rl.getIndexPartition(7));
+	}
+
+	/**
+	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * @throws Exception 
+	 */
+	public final void testGetPageListIndex() throws Exception
+	{
+		JDFIntegerRangeList pageListIndex = rl.getPageListIndex();
+		assertNotNull(pageListIndex);
+		assertEquals(pageListIndex.getElementCount(), 0);
+		rl.setPageListIndex(new JDFIntegerRangeList("0 ~11"));
+		pageListIndex = rl.getPageListIndex();
+		assertEquals(pageListIndex.getElementCount(), 12);
+	}
+
+	/**
+	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * @throws Exception 
+	 */
+	public final void testGetPageListIndexNegative() throws Exception
+	{
+		JDFPageList pl = (JDFPageList) root.addResource(ElementName.PAGELIST, EnumUsage.Input);
+		pl.appendPageData().setPageIndex(new JDFIntegerRangeList("0 ~11"));
+		rl.refPageList(pl);
+		rl.setPageListIndex(new JDFIntegerRangeList("0 ~ -1"));
+		JDFIntegerRangeList pageListIndex = rl.getPageListIndex();
+		assertNotNull(pageListIndex);
+		assertEquals(pageListIndex.getElementCount(), 12);
 	}
 
 	/**

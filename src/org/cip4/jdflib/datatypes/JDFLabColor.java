@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -87,6 +87,11 @@ import java.util.zip.DataFormatException;
  */
 public class JDFLabColor extends JDFNumList
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// **************************************** Constructors
 	// ****************************************
 	/**
@@ -124,27 +129,15 @@ public class JDFLabColor extends JDFNumList
 	}
 
 	/**
-	 * constructs a Lab color with all values set via a JDFLabColor
-	 * 
-	 * @param lab the given Lab colors
-	 * 
-	 * @throws DataFormatException - if the String has not a valid format
-	 */
-	public JDFLabColor(final JDFLabColor lab) throws DataFormatException
-	{
-		this(lab.toString());
-	}
-
-	/**
 	 * constructs a Lab color with all values set via a JDFNumberList
 	 * 
 	 * @param nl the given number list
 	 * 
 	 * @throws DataFormatException - if the String does not have a valid format
 	 */
-	public JDFLabColor(final JDFNumberList nl) throws DataFormatException
+	public JDFLabColor(final JDFNumList nl) throws DataFormatException
 	{
-		this(nl.toString());
+		super(nl);
 	}
 
 	/**
@@ -157,9 +150,9 @@ public class JDFLabColor extends JDFNumList
 	public JDFLabColor(final double l, final double a, final double b)
 	{
 		super(MAX_LAB_COLOR);
-		m_numList.set(0, new Double(l));
-		m_numList.set(1, new Double(a));
-		m_numList.set(2, new Double(b));
+		set(0, l);
+		set(1, a);
+		set(2, b);
 	}
 
 	// **************************************** Methods
@@ -172,14 +165,14 @@ public class JDFLabColor extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		if (m_numList.size() != MAX_LAB_COLOR)
+		if (size() != MAX_LAB_COLOR)
 		{
 			throw new DataFormatException("Data format exception!");
 		}
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (Object o : this)
 		{
-			if (!(m_numList.elementAt(i) instanceof Double))
+			if (!(o instanceof Double))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -194,7 +187,7 @@ public class JDFLabColor extends JDFNumList
 	 */
 	public double getL()
 	{
-		return ((Double) m_numList.elementAt(0)).doubleValue();
+		return doubleAt(0);
 	}
 
 	/**
@@ -204,7 +197,7 @@ public class JDFLabColor extends JDFNumList
 	 */
 	public void setL(final double l)
 	{
-		m_numList.set(0, new Double(l));
+		set(0, l);
 	}
 
 	/**
@@ -214,7 +207,7 @@ public class JDFLabColor extends JDFNumList
 	 */
 	public double getA()
 	{
-		return ((Double) m_numList.elementAt(1)).doubleValue();
+		return doubleAt(1);
 	}
 
 	/**
@@ -224,7 +217,7 @@ public class JDFLabColor extends JDFNumList
 	 */
 	public void setA(final double a)
 	{
-		m_numList.set(1, new Double(a));
+		set(1, a);
 	}
 
 	/**
@@ -234,7 +227,7 @@ public class JDFLabColor extends JDFNumList
 	 */
 	public double getB()
 	{
-		return ((Double) m_numList.elementAt(2)).doubleValue();
+		return doubleAt(2);
 	}
 
 	/**
@@ -244,6 +237,6 @@ public class JDFLabColor extends JDFNumList
 	 */
 	public void setB(final double b)
 	{
-		m_numList.set(2, new Double(b));
+		set(2, b);
 	}
 }

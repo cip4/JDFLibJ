@@ -83,7 +83,6 @@ import java.util.Vector;
 import java.util.zip.DataFormatException;
 
 import org.cip4.jdflib.core.VString;
-import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.StringUtil;
 
 /**
@@ -91,6 +90,11 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFXYPair extends JDFNumList
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// **************************************** Constructors
 	// ****************************************
 	/**
@@ -147,16 +151,15 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
-	 * constructs a xy pair with all values set via a JDFXYPair
+	 * constructs a xy pair with all values set via a JDFNumberList
 	 * 
-	 * @param xy the given xy pair
+	 * @param nl the given number list
 	 * 
+	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFXYPair(final JDFXYPair xy)
+	public JDFXYPair(final JDFNumList nl) throws DataFormatException
 	{
-		super(MAX_XY_DIMENSION);
-		setX(xy.getX());
-		setY(xy.getY());
+		super(nl);
 	}
 
 	/**
@@ -166,15 +169,10 @@ public class JDFXYPair extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFXYPair(final JDFNumberList nl) throws DataFormatException
+	public JDFXYPair(final JDFXYPair nl)
 	{
-		super(MAX_XY_DIMENSION);
-		if (nl.size() != MAX_XY_DIMENSION)
-		{
-			throw new DataFormatException("JDFXYPair: can't construct JDFXYPair from this JDFNuberList value");
-		}
-		m_numList.set(0, nl.m_numList.get(0));
-		m_numList.set(1, nl.m_numList.get(1));
+		super();
+		addAll(nl);
 	}
 
 	/**
@@ -186,8 +184,8 @@ public class JDFXYPair extends JDFNumList
 	public JDFXYPair(final double x, final double y)
 	{
 		super(MAX_XY_DIMENSION);
-		m_numList.set(0, new Double(x));
-		m_numList.set(1, new Double(y));
+		set(0, new Double(x));
+		set(1, new Double(y));
 	}
 
 	// **************************************** Methods
@@ -200,14 +198,14 @@ public class JDFXYPair extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		if (m_numList.size() != MAX_XY_DIMENSION)
+		if (size() != MAX_XY_DIMENSION)
 		{
-			throw new DataFormatException("Data format exception!");
+			throw new DataFormatException("Data format exception!" + size());
 		}
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (Object o : this)
 		{
-			if (!(m_numList.elementAt(i) instanceof Double))
+			if (!(o instanceof Double))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -222,7 +220,7 @@ public class JDFXYPair extends JDFNumList
 	 */
 	public double getX()
 	{
-		return ((Double) m_numList.get(0)).doubleValue();
+		return doubleAt(0);
 	}
 
 	/**
@@ -232,7 +230,7 @@ public class JDFXYPair extends JDFNumList
 	 */
 	public void setX(final double x)
 	{
-		m_numList.set(0, new Double(x));
+		set(0, x);
 	}
 
 	/**
@@ -242,7 +240,7 @@ public class JDFXYPair extends JDFNumList
 	 */
 	public double getY()
 	{
-		return ((Double) m_numList.get(1)).doubleValue();
+		return doubleAt(1);
 	}
 
 	/**
@@ -252,7 +250,7 @@ public class JDFXYPair extends JDFNumList
 	 */
 	public void setY(final double y)
 	{
-		m_numList.set(1, new Double(y));
+		set(1, y);
 	}
 
 	/**
@@ -279,15 +277,6 @@ public class JDFXYPair extends JDFNumList
 		final JDFXYPair xyPair = (JDFXYPair) other;
 
 		return (Math.abs(this.getX() - xyPair.getX()) <= EPSILON) && (Math.abs(this.getY() - xyPair.getY()) <= EPSILON);
-	}
-
-	/**
-	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 */
-	@Override
-	public int hashCode()
-	{
-		return HashUtil.hashCode(super.hashCode(), this.toString());
 	}
 
 	/**

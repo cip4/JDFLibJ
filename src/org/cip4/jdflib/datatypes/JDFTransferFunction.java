@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,11 @@ import org.cip4.jdflib.core.JDFConstants;
  */
 public class JDFTransferFunction extends JDFNumList
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// **************************************** Constructors
 	// ****************************************
 	/**
@@ -147,9 +152,10 @@ public class JDFTransferFunction extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFTransferFunction(final JDFTransferFunction tf) throws DataFormatException
+	public JDFTransferFunction(final JDFTransferFunction tf)
 	{
-		super(tf);
+		super();
+		addAll(tf);
 	}
 
 	// **************************************** Methods
@@ -162,14 +168,14 @@ public class JDFTransferFunction extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		if ((m_numList.size() % 2) != 0)
+		if ((size() % 2) != 0)
 		{
 			throw new DataFormatException("Data format exception!");
 		}
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (Object o : this)
 		{
-			if (!(m_numList.elementAt(i) instanceof Double))
+			if (!(o instanceof Double))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -184,8 +190,8 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	public void add(final JDFXYPair xy)
 	{
-		m_numList.add(new Double(xy.getX()));
-		m_numList.add(new Double(xy.getY()));
+		add(new Double(xy.getX()));
+		add(new Double(xy.getY()));
 	}
 
 	/**
@@ -196,8 +202,8 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	public void add(final Double x, final Double y)
 	{
-		m_numList.add(x);
-		m_numList.add(y);
+		add(x);
+		add(y);
 	}
 
 	/**
@@ -208,8 +214,8 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	public void add(final double x, final double y)
 	{
-		m_numList.add(new Double(x));
-		m_numList.add(new Double(y));
+		add(new Double(x));
+		add(new Double(y));
 	}
 
 	/**
@@ -234,7 +240,7 @@ public class JDFTransferFunction extends JDFNumList
 
 			try
 			{
-				m_numList.addElement(new Double(t));
+				addElement(new Double(t));
 			}
 			catch (final NumberFormatException e)
 			{
@@ -250,6 +256,6 @@ public class JDFTransferFunction extends JDFNumList
 	 */
 	public void add(final JDFTransferFunction tf)
 	{
-		m_numList.addAll(tf.copyNumList());
+		addAll(tf);
 	}
 }

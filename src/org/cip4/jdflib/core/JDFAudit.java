@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -102,7 +102,7 @@ public class JDFAudit extends JDFElement implements Comparator<JDFAudit>
 
 	private static final long serialVersionUID = 1L;
 	final private static String m_libAgentName = "CIP4 JDF Writer Java";
-	final private static String m_libAgentVersion = "1.4a BLD 66";
+	final private static String m_libAgentVersion = "1.4a BLD 67";
 
 	// use reasonable defaults
 	private static String m_strAgentName = m_libAgentName;

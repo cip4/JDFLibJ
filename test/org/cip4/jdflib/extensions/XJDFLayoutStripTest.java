@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -68,6 +68,7 @@
  */
 package org.cip4.jdflib.extensions;
 
+import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.datatypes.JDFAttributeMap;
@@ -94,7 +95,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		bssh = theHelper.getCreateSet("Parameter", ElementName.BINDERYSIGNATURE, EnumUsage.Input);
 		PartitionHelper bsh = bssh.appendPartition(new JDFAttributeMap(), true);
 		JDFBinderySignature bs = (JDFBinderySignature) bsh.getCreateResource();
-		initBS(bs);
+		initBS(bs, 0);
 
 		for (int k = 0; k < 2; k++)
 		{
@@ -142,9 +143,10 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 	/**
 	 * @param bs
 	 */
-	private void initBS(JDFBinderySignature bs)
+	private void initBS(JDFBinderySignature bs, int i)
 	{
 		bs.setFoldCatalog("F8-4");
+		bs.setAttribute(AttributeName.ASSEMBLYID, "Ass_ID" + i);
 		bs.appendElement("StripCellParams");
 	}
 
@@ -169,7 +171,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		PartitionHelper loh = losh.appendPartition(getSheetMap(1), true);
 		JDFLayout lo = (JDFLayout) loh.getResource();
 		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
-		initBS(bs);
+		initBS(bs, 0);
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -210,7 +212,7 @@ public class XJDFLayoutStripTest extends XJDFCreatorTest
 		PartitionHelper loh = losh.appendPartition(getSheetMap(1), true);
 		JDFLayout lo = (JDFLayout) loh.getResource();
 		JDFBinderySignature bs = (JDFBinderySignature) lo.appendElement(ElementName.BINDERYSIGNATURE);
-		initBS(bs);
+		initBS(bs, 0);
 		bs.removeChild("StripCellParams", null, 0);
 
 		for (int i = 0; i < 2; i++)

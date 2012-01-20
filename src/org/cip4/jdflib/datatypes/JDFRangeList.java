@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -184,8 +184,7 @@ public abstract class JDFRangeList implements JDFBaseDataTypes
 	/**
 	 * toString - serialize to string
 	 * 
-	 * @return String - a list of ranges in the format PT30M30S~PT35M (duration (JDFDuration) has a
-	 *         format=P1Y2M3DT12H30M30S)
+	 * @return String - a list of ranges in the format a ~ b
 	 */
 	@Override
 	public final String toString()

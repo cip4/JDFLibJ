@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2006 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -159,8 +159,7 @@ public class JDFDevCapTest extends TestCase
 
 		}
 		final VElement devCapVector = dc.getDevCapVector(null, true);
-		VElement vMatch = ((JDFDevCap) devCapVector.item(0))
-				.getMatchingElementsFromParent(e, devCapVector);
+		VElement vMatch = ((JDFDevCap) devCapVector.item(0)).getMatchingElementsFromParent(e, devCapVector);
 		assertEquals(vMatch.size(), 2);
 		assertEquals(vMatch.item(0), e.getElement("Media", null, 0));
 		assertEquals(vMatch.item(1), e.getElement("Media", null, 1));
@@ -189,8 +188,7 @@ public class JDFDevCapTest extends TestCase
 		final VElement devCapVector = dc.getDevCapVector(null, true);
 		for (int i = 0; i < 2; i++)
 		{
-			VElement vMatch = ((JDFDevCap) devCapVector.item(i))
-					.getMatchingElementsFromParent(e, devCapVector);
+			VElement vMatch = ((JDFDevCap) devCapVector.item(i)).getMatchingElementsFromParent(e, devCapVector);
 			assertEquals(vMatch.size(), 1);
 			assertEquals(vMatch.item(0), e.getElement("Media", null, i));
 		}
@@ -333,23 +331,16 @@ public class JDFDevCapTest extends TestCase
 		JDFDoc d = new JDFDoc("DevCap");
 		JDFDevCap dc = (JDFDevCap) d.getRoot();
 		dc.setDevNS(null);
-		assertEquals(dc.getInvalidAttributes(EnumValidationLevel.Complete,
-				true, 0).size(), 0);
-		dc.setName("Foo");
-		assertTrue(dc.getInvalidAttributes(
-				EnumValidationLevel.RecursiveComplete, true, 0).contains(
-				"DevNS"));
-		assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true,
-				0).contains("DevNS"));
+		assertEquals(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).size(), 0);
+		dc.setName("Foo9182");
+		assertTrue(dc.getInvalidAttributes(EnumValidationLevel.RecursiveComplete, true, 0).contains("DevNS"));
+		assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
 		dc.setName("FooLink");
-		assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true,
-				0).contains("DevNS"));
+		assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
 		dc.setName("ScreeningParams");
-		assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true,
-				0).contains("DevNS"));
+		assertFalse(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
 		dc.setName("ScreeningParams_");
-		assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true,
-				0).contains("DevNS"));
+		assertTrue(dc.getInvalidAttributes(EnumValidationLevel.Complete, true, 0).contains("DevNS"));
 
 	}
 
@@ -600,8 +591,7 @@ public class JDFDevCapTest extends TestCase
 
 		JDFDoc d3 = new JDFDoc("parent");
 		KElement parent = d3.getRoot();
-		dc.stateReport(foo, EnumFitsValue.Allowed,
-				EnumValidationLevel.Complete, false, true, parent);
+		dc.stateReport(foo, EnumFitsValue.Allowed, EnumValidationLevel.Complete, false, true, parent);
 		assertTrue(parent.toString().indexOf("bar1") >= 0);
 		assertFalse(parent.toString().indexOf("bar2") >= 0);
 	}

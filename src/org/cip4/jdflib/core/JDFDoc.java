@@ -485,7 +485,7 @@ public class JDFDoc extends XMLDoc
 	/**
 	 * register new custom class in the factory
 	 * 
-	 * @param strElement local name
+	 * @param strElement fully qualified name
 	 * @param packagepath package path
 	 */
 	public static void registerCustomClass(final String strElement, final String packagepath)

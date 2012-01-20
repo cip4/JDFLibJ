@@ -88,8 +88,10 @@ import org.cip4.jdflib.core.XMLDocUserData.EnumDirtyPolicy;
 import org.cip4.jdflib.jmf.JDFJMF;
 import org.cip4.jdflib.jmf.JDFMessage;
 import org.cip4.jdflib.node.JDFNode;
+import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFCreated;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.util.UrlUtil;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -281,6 +283,19 @@ public class JDFDocTest extends JDFTestCaseBase
 		assertNull(doc);
 		doc = new JDFDoc("JDF");
 		assertNotNull(doc.getNodeName());
+	}
+
+	/**
+	 * just a minor test. It only checks the precessgroup count and also the class casts in GetProcessGroups
+	 */
+	public void testRegisterCustomClass()
+	{
+		JDFDoc.registerCustomClass("Foo123", JDFRunList.class.getName());
+		JDFResourcePool resourcePool = new JDFDoc("JDF").getJDFRoot().getCreateResourcePool();
+		KElement e = resourcePool.appendElement("Foo123");
+		assertTrue(e instanceof JDFRunList);
+		KElement e2 = resourcePool.appendElement("WWW:Foo123", "WWW.com");
+		assertFalse(e2 instanceof JDFRunList);
 	}
 
 	/**

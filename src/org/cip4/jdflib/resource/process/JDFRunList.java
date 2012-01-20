@@ -96,6 +96,7 @@ import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.datatypes.JDFIntegerRangeList;
 import org.cip4.jdflib.datatypes.VJDFAttributeMap;
+import org.cip4.jdflib.resource.JDFPageList;
 import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -1665,5 +1666,28 @@ public class JDFRunList extends JDFAutoRunList
 			irl.setDef(nPage);
 		}
 		return irl;
+	}
+
+	/**
+	 * get the pageListIndex with a reasonable def for number of pages<br/> 
+	 * first try the pagelist, then do for local npage
+	 * 
+	 * @see org.cip4.jdflib.auto.JDFAutoRunList#getPageListIndex()
+	 */
+	@Override
+	public JDFIntegerRangeList getPageListIndex()
+	{
+		JDFIntegerRangeList list = super.getPageListIndex();
+		JDFPageList pl = getPageList();
+		int nPage = 0;
+
+		if (pl != null)
+		{
+			nPage = pl.getNPage();
+		}
+		if (nPage <= 0)
+			nPage = getNPage();
+		list.setDef(nPage);
+		return list;
 	}
 }

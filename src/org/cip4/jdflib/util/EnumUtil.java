@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -181,7 +181,8 @@ public class EnumUtil
 	}
 
 	/**
-	 * checks whether the value of an enum is less than another
+	 * checks whether the value of an enum is less than another <br/>
+	 * null is always smaller
 	 * 
 	 * @param a the first enum; if this is smaller we return true
 	 * @param b the second enum
@@ -195,11 +196,12 @@ public class EnumUtil
 	}
 
 	/**
-	 * checks whether the value of an enum is less or equal to another
+	 * checks whether the value of an enum is less or equal to another <br/>
+	 * null is always smaller
 	 * 
 	 * @param a the first enum; if this is smaller we return true
 	 * @param b the second enum
-	 * @return boolean a is < b
+	 * @return boolean a is <= b
 	 */
 	public static boolean aLessEqualsThanB(final ValuedEnum a, final ValuedEnum b)
 	{

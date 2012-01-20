@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -133,7 +133,7 @@ public class FileUtil
 	 * list all files matching given regexp
 	 * @param dir the directory to search
 	 * @param filter the filter to apply to files 
-	 * @return Files[] the matching files, null if none are found
+	 * @return Vector<File>  the matching files, null if none are found
 	 */
 	public static Vector<File> listFilesInTree(final File dir, final FileFilter filter)
 	{

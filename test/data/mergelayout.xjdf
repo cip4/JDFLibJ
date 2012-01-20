@@ -2,12 +2,10 @@
 <XJDF xmlns="http://www.CIP4.org/JDFSchema_2_0" ID="n_001016"
   JobID="n_002028" JobPartID="n_001016" MaxVersion="2.0"
   Types="Stripping" Version="2.0">
-  <!--Very preliminary experimental prototype trial version: using: CIP4 JDF Writer Java 1.4a BLD 66-->
+  <!--Very preliminary experimental prototype trial version: using: JDF Base golden ticket generator null-->
   <AuditPool>
-    <Created AgentName="CIP4 JDF Writer Java" AgentVersion="1.4a BLD 66"
-      ID="a_001017" TimeStamp="2012-01-11T17:36:14+01:00"/>
-    <Created AgentName="CIP4 JDF Writer Java" AgentVersion="1.4a BLD 66"
-      ID="a_002027" TimeStamp="2012-01-11T17:36:14+01:00">
+    <Created AgentName="JDF Base golden ticket generator" ID="a_001017" TimeStamp="2012-01-20T12:59:38+01:00"/>
+    <Created AgentName="JDF Base golden ticket generator" ID="a_002027" TimeStamp="2012-01-20T12:59:38+01:00">
       <Employee DescriptiveName="XJDF Converter"/>
     </Created>
   </AuditPool>

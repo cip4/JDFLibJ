@@ -96,9 +96,9 @@ public class JDFRefElementTest extends JDFTestCaseBase
 	{
 		JDFJMF jmf = JMFBuilderFactory.getJMFBuilder(this).buildMilestone("Foo", "1234");
 		JDFNotification notification = jmf.getSignal(0).getNotification();
-		KElement foo = notification.appendElement("Foo");
+		KElement foo = notification.appendElement("Fooo");
 		String id = foo.appendAnchor(null);
-		JDFRefElement re = (JDFRefElement) notification.appendElement("FooRef");
+		JDFRefElement re = (JDFRefElement) notification.appendElement("FoooRef");
 		re.setrRef(id);
 		assertNull("non resources are null rather than class casts...", re.getTarget());
 		assertNull("non resources are null rather than class casts...", re.getTargetRoot());

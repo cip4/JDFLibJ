@@ -94,6 +94,19 @@ public class JDFIntegerRangeListTest extends JDFTestCaseBase
 
 	/**
 	 * 
+	 */
+	public void testGetIntegerRangeList()
+	{
+		assertEquals(JDFIntegerRangeList.getIntegerRangeList("8").getElement(0), 8);
+		assertEquals(JDFIntegerRangeList.getIntegerRangeList("8~22").getElement(-1), 22);
+		assertEquals(JDFIntegerRangeList.getIntegerRangeList("8~6 7 22").getElement(-1), 22);
+		assertNull(JDFIntegerRange.getIntegerRange("8~22a"));
+		assertNull(JDFIntegerRange.getIntegerRange(""));
+		assertNull(JDFIntegerRange.getIntegerRange(null));
+	}
+
+	/**
+	 * 
 	 * 
 	 * @throws Exception
 	 */

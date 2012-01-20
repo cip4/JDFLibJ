@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -81,7 +81,6 @@ package org.cip4.jdflib.datatypes;
 import java.util.Vector;
 import java.util.zip.DataFormatException;
 
-import org.cip4.jdflib.util.HashUtil;
 import org.cip4.jdflib.util.ScaleUtil;
 
 /**
@@ -90,6 +89,11 @@ import org.cip4.jdflib.util.ScaleUtil;
  */
 public class JDFRectangle extends JDFNumList
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// **************************************** Constructors
 	// ****************************************
 	/**
@@ -147,17 +151,9 @@ public class JDFRectangle extends JDFNumList
 	 * 
 	 * @throws DataFormatException - if the JDFNumberList has not a valid format
 	 */
-	public JDFRectangle(final JDFNumberList nl) throws DataFormatException
+	public JDFRectangle(final JDFNumList nl) throws DataFormatException
 	{
-		super(MAX_RECTANGLE_DIMENSION);
-		if (nl.size() != MAX_RECTANGLE_DIMENSION)
-		{
-			throw new DataFormatException("JDFRectangle: can't construct JDFRectangle from this JDFNuberList value");
-		}
-		m_numList.set(0, nl.m_numList.get(0));
-		m_numList.set(1, nl.m_numList.get(1));
-		m_numList.set(2, nl.m_numList.get(2));
-		m_numList.set(3, nl.m_numList.get(3));
+		super(nl);
 	}
 
 	/**
@@ -187,30 +183,19 @@ public class JDFRectangle extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		if (m_numList.size() != MAX_RECTANGLE_DIMENSION)
+		if (size() != MAX_RECTANGLE_DIMENSION)
 		{
-			throw new DataFormatException("Data format exception!");
+			throw new DataFormatException("Data format exception! wrong size: " + size());
 		}
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (Object o : this)
 		{
-			if (!(m_numList.elementAt(i) instanceof Double))
+			if (!(o instanceof Double))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * hashCode complements equals() to fulfill the equals/hashCode contract
-	 * 
-	 * @return int
-	 */
-	@Override
-	public int hashCode()
-	{
-		return HashUtil.hashCode(super.hashCode(), this.toString());
 	}
 
 	/**
@@ -220,7 +205,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public double getLlx()
 	{
-		return ((Double) m_numList.elementAt(0)).doubleValue();
+		return doubleAt(0);
 	}
 
 	/**
@@ -230,7 +215,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public void setLlx(final double x)
 	{
-		m_numList.set(0, new Double(x));
+		set(0, x);
 	}
 
 	/**
@@ -251,7 +236,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public double getLly()
 	{
-		return ((Double) m_numList.elementAt(1)).doubleValue();
+		return doubleAt(1);
 	}
 
 	/**
@@ -261,7 +246,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public void setLly(final double y)
 	{
-		m_numList.set(1, new Double(y));
+		set(1, y);
 	}
 
 	/**
@@ -282,7 +267,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public double getUrx()
 	{
-		return ((Double) m_numList.elementAt(2)).doubleValue();
+		return doubleAt(2);
 	}
 
 	/**
@@ -292,7 +277,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public void setUrx(final double x)
 	{
-		m_numList.set(2, new Double(x));
+		set(2, x);
 	}
 
 	/**
@@ -313,7 +298,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public double getUry()
 	{
-		return ((Double) m_numList.elementAt(3)).doubleValue();
+		return doubleAt(3);
 	}
 
 	/**
@@ -323,7 +308,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public void setUry(final double y)
 	{
-		m_numList.set(3, new Double(y));
+		set(3, y);
 	}
 
 	/**
@@ -344,7 +329,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public double getWidth()
 	{
-		return Math.abs(((Double) m_numList.elementAt(2)).doubleValue() - ((Double) m_numList.elementAt(0)).doubleValue());
+		return Math.abs(getUrx() - getLlx());
 	}
 
 	/**
@@ -354,7 +339,7 @@ public class JDFRectangle extends JDFNumList
 	 */
 	public double getHeight()
 	{
-		return Math.abs(((Double) m_numList.elementAt(3)).doubleValue() - ((Double) m_numList.elementAt(1)).doubleValue());
+		return Math.abs(getUry() - getLly());
 	}
 
 	/**

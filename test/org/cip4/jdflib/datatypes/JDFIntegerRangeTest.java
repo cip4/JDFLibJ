@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -175,6 +175,19 @@ public class JDFIntegerRangeTest extends JDFTestCaseBase
 		range.scale(2);
 		assertEquals(range.getLeft(), 8);
 		assertEquals(range.getRight(), 10);
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetIntegerRange()
+	{
+		assertEquals(JDFIntegerRange.getIntegerRange("8").getLeft(), 8);
+		assertEquals(JDFIntegerRange.getIntegerRange("8~22").getLeft(), 8);
+		assertEquals(JDFIntegerRange.getIntegerRange("8~22").getRight(), 22);
+		assertNull(JDFIntegerRange.getIntegerRange("8~22a"));
+		assertNull(JDFIntegerRange.getIntegerRange(""));
+		assertNull(JDFIntegerRange.getIntegerRange(null));
 	}
 
 	/**

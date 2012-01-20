@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -95,6 +95,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartIDKey;
 import org.cip4.jdflib.resource.process.JDFExposedMedia;
 import org.cip4.jdflib.resource.process.JDFRunList;
+import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Element;
 
@@ -2048,6 +2049,21 @@ public class KElementTest extends JDFTestCaseBase
 		jdfDoc = JDFDoc.parseFile(sm_dirTestDataTemp + "longAtt.jdf");
 		root = jdfDoc.getJDFRoot();
 		assertEquals(root.getAttribute("long"), longString);
+	}
+
+	/**
+	 * 
+	 */
+	public void testSetAttribute_SpecialChar()
+	{
+		KElement root = new XMLDoc("a", null).getRoot();
+
+		String string = "a\n\"b";
+		root.setAttribute("cr", string);
+		String s = root.toXML();
+		XMLDoc doc = XMLDoc.parseStream(new ByteArrayIOStream(s.getBytes()).getInputStream());
+		assertEquals(doc.getRoot().getAttribute("cr"), string);
+		assertNotNull(doc);
 	}
 
 	// //////////////////////////////////////////////////////////////////////////

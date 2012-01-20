@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,9 +95,27 @@ public class JDFIntegerRange extends JDFRange
 	// ******************************************
 	private int m_left = 0; // the left value of the range
 	private int m_right = 0; // the right value of the range
-	private int m_xDef = m_defaultXDef; // the static default when generating a
-	// list
+	private int m_xDef = m_defaultXDef; // the static default when generating a list
 	private static int m_defaultXDef = 0;
+
+	/**
+	 * 
+	 * create a JDFIntegerRange from a string - return null if no go
+	 * 
+	 * @param range
+	 * @return
+	 */
+	public static JDFIntegerRange getIntegerRange(String range)
+	{
+		try
+		{
+			return new JDFIntegerRange(range);
+		}
+		catch (DataFormatException e)
+		{
+			return null;
+		}
+	}
 
 	// **************************************** Constructors
 	// ****************************************

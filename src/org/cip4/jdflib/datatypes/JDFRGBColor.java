@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -90,6 +90,11 @@ import org.cip4.jdflib.util.StringUtil;
  */
 public class JDFRGBColor extends JDFNumList
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// **************************************** Constructors
 	// ****************************************
 	/**
@@ -127,27 +132,15 @@ public class JDFRGBColor extends JDFNumList
 	}
 
 	/**
-	 * constructs a RGB color with all values set via a JDFRGBColor
-	 * 
-	 * @param rgb the given rgb colors
-	 * 
-	 * @throws DataFormatException - if the String has not a valid format
-	 */
-	public JDFRGBColor(final JDFRGBColor rgb) throws DataFormatException
-	{
-		this(rgb.toString());
-	}
-
-	/**
 	 * constructs a RGB color with all values set via a JDFNumberList
 	 * 
 	 * @param nl the given number list
 	 * 
 	 * @throws DataFormatException - if the String has not a valid format
 	 */
-	public JDFRGBColor(final JDFNumberList nl) throws DataFormatException
+	public JDFRGBColor(final JDFNumList nl) throws DataFormatException
 	{
-		this(nl.toString());
+		super(nl);
 	}
 
 	/**
@@ -160,9 +153,9 @@ public class JDFRGBColor extends JDFNumList
 	public JDFRGBColor(final double r, final double g, final double b)
 	{
 		super(MAX_RGB_COLOR);
-		m_numList.set(0, new Double(r));
-		m_numList.set(1, new Double(g));
-		m_numList.set(2, new Double(b));
+		set(0, r);
+		set(1, g);
+		set(2, b);
 	}
 
 	// **************************************** Methods
@@ -175,14 +168,14 @@ public class JDFRGBColor extends JDFNumList
 	@Override
 	public boolean isValid() throws DataFormatException
 	{
-		if (m_numList.size() != MAX_RGB_COLOR)
+		if (size() != MAX_RGB_COLOR)
 		{
-			throw new DataFormatException("Data format exception!");
+			throw new DataFormatException("wrong size:" + size());
 		}
 
-		for (int i = 0; i < m_numList.size(); i++)
+		for (Object o : this)
 		{
-			if (!(m_numList.elementAt(i) instanceof Double))
+			if (!(o instanceof Double))
 			{
 				throw new DataFormatException("Data format exception!");
 			}
@@ -197,7 +190,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public double getR()
 	{
-		return ((Double) m_numList.elementAt(0)).doubleValue();
+		return doubleAt(0);
 	}
 
 	/**
@@ -207,7 +200,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public void setR(final double red)
 	{
-		m_numList.set(0, new Double(red));
+		set(0, red);
 	}
 
 	/**
@@ -217,7 +210,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public double getG()
 	{
-		return ((Double) m_numList.elementAt(1)).doubleValue();
+		return doubleAt(1);
 	}
 
 	/**
@@ -227,7 +220,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public void setG(final double green)
 	{
-		m_numList.set(1, new Double(green));
+		set(1, green);
 	}
 
 	/**
@@ -237,7 +230,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public double getB()
 	{
-		return ((Double) m_numList.elementAt(2)).doubleValue();
+		return doubleAt(2);
 	}
 
 	/**
@@ -247,7 +240,7 @@ public class JDFRGBColor extends JDFNumList
 	 */
 	public void setB(final double blue)
 	{
-		m_numList.set(2, new Double(blue));
+		set(2, blue);
 	}
 
 	/**
