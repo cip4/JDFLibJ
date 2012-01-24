@@ -4,8 +4,8 @@
   Types="Stripping" Version="2.0">
   <!--Very preliminary experimental prototype trial version: using: JDF Base golden ticket generator null-->
   <AuditPool>
-    <Created AgentName="JDF Base golden ticket generator" ID="a_001017" TimeStamp="2012-01-20T12:59:38+01:00"/>
-    <Created AgentName="JDF Base golden ticket generator" ID="a_002027" TimeStamp="2012-01-20T12:59:38+01:00">
+    <Created AgentName="JDF Base golden ticket generator" ID="a_001017" TimeStamp="2012-01-24T10:51:21+01:00"/>
+    <Created AgentName="JDF Base golden ticket generator" ID="a_002027" TimeStamp="2012-01-24T10:51:21+01:00">
       <Employee DescriptiveName="XJDF Converter"/>
     </Created>
   </AuditPool>
