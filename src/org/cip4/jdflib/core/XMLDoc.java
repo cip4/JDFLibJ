@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -79,7 +79,6 @@ package org.cip4.jdflib.core;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -104,6 +103,7 @@ import org.cip4.jdflib.util.ThreadUtil;
 import org.cip4.jdflib.util.UrlPart;
 import org.cip4.jdflib.util.UrlUtil;
 import org.cip4.jdflib.util.UrlUtil.HTTPDetails;
+import org.cip4.jdflib.util.zip.ZipReader;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -466,8 +466,6 @@ public class XMLDoc
 	public boolean write2File(File file, final int indent, final boolean bPreserveSpace)
 	{
 		boolean fSuccess = true;
-		FileOutputStream outStream = null;
-
 		if (file == null)
 		{
 			if (getOriginalFileName() != null)
@@ -480,6 +478,7 @@ public class XMLDoc
 				return false;
 			}
 		}
+		OutputStream outStream = null;
 
 		try
 		{
@@ -494,8 +493,12 @@ public class XMLDoc
 			fSuccess = FileUtil.createNewFile(file);
 			if (fSuccess)
 			{
-				outStream = new FileOutputStream(file);
+				outStream = FileUtil.getBufferedOutputStream(file);
 				write2Stream(outStream, indent, bPreserveSpace);
+				if (getOriginalFileName() == null)
+				{
+					setOriginalFileName(file.getPath());
+				}
 			}
 		}
 		catch (final FileNotFoundException e)
@@ -1594,6 +1597,26 @@ public class XMLDoc
 	}
 
 	/**
+	 * set the ZipReader
+	 * 
+	 * @param zip the value to set
+	 */
+	public void setZipReader(final ZipReader zip)
+	{
+		m_doc.m_ZipReader = zip;
+	}
+
+	/**
+	 * get the ZipReader
+	 * 
+	 * @return zip the value to set
+	 */
+	public ZipReader getZipReader()
+	{
+		return m_doc.m_ZipReader;
+	}
+
+	/**
 	 * @return Returns the m_OriginalFileName.
 	 */
 	public String getOriginalFileName()
@@ -1696,12 +1719,10 @@ public class XMLDoc
 	 */
 	public static XMLDoc parseStream(InputStream is)
 	{
+		if (is == null)
+			return null;
 		final XMLParser p = new XMLParser();
 		XMLDoc d = p.parseStream(is);
-		if (d != null)
-		{
-			d = new XMLDoc(d.getMemberDocument());
-		}
 		return d;
 	}
 

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -402,6 +402,8 @@ public class JDFDoc extends XMLDoc
 	 */
 	public static JDFDoc parseStream(InputStream is)
 	{
+		if (is == null)
+			return null;
 		final JDFParser p = new JDFParser();
 		return p.parseStream(is);
 	}
@@ -421,7 +423,6 @@ public class JDFDoc extends XMLDoc
 		{
 			d.setOriginalFileName(f.getAbsolutePath());
 		}
-
 		return d;
 	}
 

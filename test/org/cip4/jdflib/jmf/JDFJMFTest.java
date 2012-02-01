@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2009 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -82,7 +82,6 @@ import org.cip4.jdflib.core.JDFElement;
 import org.cip4.jdflib.core.JDFElement.EnumValidationLevel;
 import org.cip4.jdflib.core.JDFElement.EnumVersion;
 import org.cip4.jdflib.core.JDFParser;
-import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VElement;
 import org.cip4.jdflib.core.VString;
 import org.cip4.jdflib.jmf.JDFMessage.EnumFamily;
@@ -255,7 +254,7 @@ public class JDFJMFTest extends JDFTestCaseBase
 		final JDFResponse r = jmf2.appendResponse();
 		final JDFQuery q = jmf.appendQuery();
 		q.setType("KnownMessages");
-		KElement kmp = q.appendKnownMsgQuParams();
+		q.appendKnownMsgQuParams();
 		r.setQuery(q);
 		assertEquals("refID", q.getID(), r.getrefID());
 
@@ -268,6 +267,44 @@ public class JDFJMFTest extends JDFTestCaseBase
 		assertEquals(s.getKnownMsgQuParams(0).getNextSiblingElement(), s.getMessageService(0));
 
 		s = jmf.appendSignal();
+		s.convertResponse(r, null);
+		assertEquals("type", r.getType(), s.getType());
+		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));
+		assertTrue(s.getXSIType().startsWith("Signal"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testConvertResponseToSignalNameSpace()
+	{
+		final JDFDoc doc = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmfQuery = doc.getJMFRoot();
+		final JDFDoc doc2 = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmfResp = doc2.getJMFRoot();
+		final JDFDoc docSig = new JDFDoc(ElementName.JMF);
+		final JDFJMF jmfSig = docSig.getJMFRoot();
+
+		JDFSignal s = jmfSig.appendSignal();
+		final JDFResponse r = jmfResp.appendResponse();
+		final JDFQuery q = jmfQuery.appendQuery();
+		q.setType("KnownMessages");
+		q.appendKnownMsgQuParams();
+		r.setQuery(q);
+		assertEquals("refID", q.getID(), r.getrefID());
+
+		final JDFMessageService ms = r.appendMessageService();
+		jmfResp.setAttribute("xmlns:foo", "www.foo.com");
+		ms.setType("KnownMessages");
+		ms.setAttribute("foo:key", "val");
+		ms.appendElement("foo:bar");
+		s.convertResponse(r, q);
+		assertEquals("type", r.getType(), s.getType());
+		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));
+		assertTrue(s.getXSIType().startsWith("Signal"));
+		assertEquals(s.getKnownMsgQuParams(0).getNextSiblingElement(), s.getMessageService(0));
+
+		s = jmfQuery.appendSignal();
 		s.convertResponse(r, null);
 		assertEquals("type", r.getType(), s.getType());
 		assertTrue("ms equal", ms.isEqual(s.getMessageService(0)));

@@ -1,7 +1,5 @@
-/*
- *
+/**
  * The CIP4 Software License, Version 1.0
- *
  *
  * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
@@ -68,179 +66,81 @@
  *  
  * 
  */
-package org.cip4.jdflib.util;
+package org.cip4.jdflib.util.zip;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
+import java.util.Vector;
+import java.util.zip.ZipEntry;
 
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
-
-import org.cip4.jdflib.core.XMLDoc;
-import org.cip4.jdflib.core.XMLParser;
-import org.cip4.jdflib.util.net.IPollDetails;
+import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.util.FileUtil;
 
 /**
- * simple struct to contain the stream and type of a bodypart
- * 
- * @author prosirai
- * 
+ *  
+ * @author rainer prosi
+ * @date Feb 1, 2012
  */
-public class UrlPart implements IPollDetails
+public class ZipReaderTest extends JDFTestCaseBase
 {
 	/**
 	 * 
-	 * @return the response code
+	 * 
 	 */
-	public int getResponseCode()
+	public void testunpack()
 	{
-		return rc;
-	}
-
-	/**
-	 * @param connection
-	 * @throws IOException
-	 */
-	public UrlPart(final HttpURLConnection connection) throws IOException
-	{
-		rc = connection.getResponseCode();
-		this.connection = connection;
-		contentType = connection.getContentType();
-		contentLength = connection.getContentLength();
-
-		try
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		File dir = new File(sm_dirTestDataTemp + "schema.zip.dir");
+		for (int i = 0; i < 3; i++)
 		{
-			inStream = connection.getInputStream();
+			r.buffer();
+			FileUtil.deleteAll(dir);
+			r.unPack(dir);
+			assertTrue(dir.isDirectory());
+			File dir2 = dir = FileUtil.getFileInDirectory(dir, new File("schema"));
+			assertEquals(dir2.listFiles().length, 3);
 		}
-		catch (IOException x)
-		{
-			inStream = null;
-		}
-		if (inStream == null)
-			inStream = (connection).getErrorStream();
-		bufferStream = null;
-	}
-
-	/**
-	 * @param part
-	 * @throws MessagingException
-	 * @throws IOException
-	 */
-	public UrlPart(final BodyPart part) throws MessagingException, IOException
-	{
-		inStream = part.getInputStream();
-		contentLength = part.getSize();
-		contentType = part.getContentType();
-		connection = null;
-		bufferStream = null;
-		rc = 200;
 	}
 
 	/**
 	 * 
-	 * @param f
-	 * @throws IOException
+	 *  
 	 */
-	public UrlPart(final File f) throws IOException
+	public void testGetEntryStream()
 	{
-		inStream = FileUtil.getBufferedInputStream(f);
-		if (f == null)
-		{
-			contentLength = 0;
-			contentType = null;
-		}
-		else
-		{
-			contentLength = f.length();
-			contentType = UrlUtil.getMimeTypeFromURL(f.getName());
-		}
-
-		connection = null;
-		rc = f == null ? 500 : 200;
-		bufferStream = null;
-	}
-
-	private final int rc;
-	/**
-	 * the input stream of this UrlPart
-	 */
-	private InputStream inStream;
-	/**
-	 * the content type of this UrlPart
-	 */
-	private final String contentType;
-	private ByteArrayIOStream bufferStream;
-
-	/**
-	 * @return the contentType
-	 */
-	public String getContentType()
-	{
-		return contentType;
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		InputStream i = r.getInputStream("schema/Conditions.jdf");
+		assertNotNull(JDFDoc.parseStream(i));
+		i = r.getInputStream("schema/BarcodeDetails.jdf");
+		assertNotNull(JDFDoc.parseStream(i));
+		i = r.getInputStream("schema/Conditions.jdf");
+		assertNotNull(i);
 	}
 
 	/**
-	 * @param inStream the inStream to set
+	 * 
+	 *  
 	 */
-	public void setInStream(InputStream inStream)
+	public void testGetEntry()
 	{
-		this.inStream = inStream;
-		bufferStream = null;
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		ZipEntry e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(e);
+		e = r.getEntry("schema/BarcodeDetails.jdf");
+		assertNotNull(e);
+		e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(e);
 	}
 
 	/**
-	 * @see org.cip4.jdflib.util.net.IPollDetails#getResponseStream()
-	 * @return the response stream
-	*/
-	public InputStream getResponseStream()
-	{
-		return bufferStream == null ? inStream : bufferStream.getInputStream();
-	}
-
-	/**
-	 * the content length of this UrlPart
+	 * 
+	 *  
 	 */
-	public long contentLength;
-	private final HttpURLConnection connection;
-
-	/**
-	 * returns an xmldoc corresponding to this part
-	 * @return the doc, null if not xml
-	 */
-	public XMLDoc getXMLDoc()
+	public void testGetEntries()
 	{
-		final XMLParser p = new XMLParser();
-		final XMLDoc d = p.parseStream(getResponseStream());
-		return d;
-	}
-
-	/**
-	 * buffer my input stream
-	 *   
-	 */
-	public void buffer()
-	{
-		if (bufferStream == null)
-			bufferStream = new ByteArrayIOStream(inStream);
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 * @return the string representation
-	*/
-	@Override
-	public String toString()
-	{
-		return "URLPart: " + contentType + " length=" + contentLength + " rc=" + rc + "\n" + ((bufferStream == null) ? " <not buffered>" : bufferStream);
-	}
-
-	/**
-	 * @return the connection
-	 */
-	public HttpURLConnection getConnection()
-	{
-		return connection;
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		Vector<ZipEntry> entries = r.getEntries();
+		assertEquals(entries.size(), 15);
 	}
 }

@@ -157,13 +157,15 @@
 	<target name="doc" depends="-init, buildnumber" description="Builds the JDFLibJ Javadoc">
 		<echo>Generating JavaDoc...</echo>
 		<mkdir dir="${doc.dir}" />
-		<javadoc access="public" author="true" classpathref="project.class.path" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="org.cip4.jdflib.generator.gui,org.cip4.jdflib.devicecapability,org.cip4.jdflib.resource.process,org.cip4.jdflib.resource.devicecapability,org.cip4.jdflib.node,org.cip4.jdflib.generator,org.cip4.jdflib.core,org.cip4.jdflib.auto,org.cip4.jdflib.pool,org.cip4.jdflib.datatypes,org.cip4.jdflib.util,org.cip4.jdflib.span,org.cip4.jdflib.resource,org.cip4.jdflib.resource.process.press,org.cip4.jdflib.jmf,org.cip4.jdflib.resource.process.postpress,org.cip4.jdflib.resource.intent,org.cip4.jdflib.resource.process.prepress" source="1.3" sourcefiles="test/org/cip4/jdflib/CheckJDFTest.java,apps/org/cip4/jdflib/TestJDF.java,apps/org/cip4/jdflib/CheckJDF.java,test/org/cip4/jdflib/EmptyNamespace.java,apps/org/cip4/jdflib/MergeJDF.java,test/org/cip4/jdflib/AllJDFLibTest.java,apps/org/cip4/jdflib/SpawnJDF.java" sourcepath="test;src;apps" splitindex="true" use="true" version="true" />
 		<javadoc destdir="${doc.dir}" sourcepath="${jdflib.src.dir}" version="true" private="yes" source="1.5" classpathref="project.class.path" use="true" notree="false" windowtitle="JDFLibJ-${jdflib.version}BLD${build.number}" nonavbar="false" noindex="false" splitindex="true" author="true" nodeprecatedlist="false" nodeprecated="false" additionalparam="-J-Xmx180m">
 
 			<packageset dir="${jdflib.src.dir}" defaultexcludes="yes">
 				<include name="**" />
 			</packageset>
 		</javadoc>
+		<zip destfile="${dist.dir}/${base.filename}-doc.zip">
+				<zipfileset dir="${doc.dir}"/>
+		</zip>
 	</target>
 
 

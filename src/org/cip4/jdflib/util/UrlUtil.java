@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -90,7 +90,6 @@ import java.net.ProxySelector;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -195,6 +194,10 @@ public class UrlUtil
 	 * the preferred value for XML!
 	 */
 	public static final String APPLICATION_XML = "application/xml";
+	/**
+	 * zip, maybe?
+	 */
+	public static final String APPLICATION_ZIP = "application/zip";
 	/**
 	 * pdf, duh...
 	 */
@@ -513,18 +516,9 @@ public class UrlUtil
 	 */
 	public static InputStream getURLInputStream(final String urlString, final BodyPart bodyPart)
 	{
-		InputStream retStream = null;
-		if (isCID(urlString) || bodyPart != null)
-		{
-			if (bodyPart != null)
-			{
-				final Multipart multipart = bodyPart.getParent();
-				retStream = getCidURLStream(urlString, multipart);
-			}
-		}
-		if (retStream == null)
-			retStream = getURLInputStream(urlString);
-		return retStream;
+		URLReader reader = new URLReader(urlString);
+		reader.setBodyPart(bodyPart);
+		return reader.getURLInputStream();
 	}
 
 	/**
@@ -533,33 +527,7 @@ public class UrlUtil
 	 */
 	public static InputStream getURLInputStream(final String urlString)
 	{
-		InputStream retStream = null;
-		if (isHttp(urlString))
-		{
-			try
-			{
-				final URL url = new URL(urlString);
-				final URLConnection urlConnection = url.openConnection();
-				retStream = urlConnection.getInputStream();
-			}
-			catch (final MalformedURLException x)
-			{
-				//
-			}
-			catch (final IOException x)
-			{
-				//
-			}
-		}
-		if (retStream == null) // assume file
-		{
-			final File f = urlToFile(urlString);
-			if ((f != null) && f.canRead())
-			{
-				retStream = FileUtil.getBufferedInputStream(f);
-			}
-		}
-		return retStream;
+		return getURLInputStream(urlString, null);
 	}
 
 	/**
@@ -1476,7 +1444,7 @@ public class UrlUtil
 			}
 			catch (final Exception x)
 			{
-				//				System.out.println(x);
+				//	System.out.println(x);
 			}
 			return null;
 		}

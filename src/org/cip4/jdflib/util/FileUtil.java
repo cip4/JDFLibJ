@@ -805,6 +805,39 @@ public class FileUtil
 	}
 
 	/**
+	 * check whether a file is a directory. If a unix file is a symbolic link to a directory, it is also assumed to be a directory
+	 * @param f the file to test
+	 * @return true if f is a directory or link to a directory
+	 */
+	public static boolean isDirectory(final File f)
+	{
+		if (f == null)
+			return false;
+		if (f.isDirectory())
+			return true;
+
+		try
+		{
+			File canonical = f.getCanonicalFile();
+			return canonical.isDirectory();
+		}
+		catch (IOException e)
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * check whether a file is a directory. If a unix file is a symbolic link to a directory, it is also assumed to be a directory
+	 * @param s the file to test
+	 * @return true if f is a directory or link to a directory
+	 */
+	public static boolean isDirectory(final String s)
+	{
+		return isDirectory(UrlUtil.urlToFile(s));
+	}
+
+	/**
 	 * check whether a file is absolute
 	 * @param f the file to test
 	 * @return true if f is absolute;

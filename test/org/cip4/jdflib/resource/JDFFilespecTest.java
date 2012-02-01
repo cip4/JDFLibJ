@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,7 +89,9 @@ import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFResourceLink.EnumUsage;
 import org.cip4.jdflib.node.JDFNode;
 import org.cip4.jdflib.resource.process.JDFFileSpec;
+import org.cip4.jdflib.resource.process.JDFRunList;
 import org.cip4.jdflib.resource.process.prepress.JDFColorSpaceConversionParams;
+import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.MimeUtil;
 import org.cip4.jdflib.util.MimeUtilTest;
@@ -124,15 +126,13 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		}
 	}
 
-	// //////////////////////////////////////////////////////////////
-
 	/**
 	 * @throws Exception x
 	 */
 	public void testGetURLCidStream() throws Exception
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF();
-		final String fileName = sm_dirTestDataTemp + "testMimePackageDoc.mjm";
+		final String fileName = sm_dirTestDataTemp + "testMimePackageDoc0.mjm";
 		assertTrue(new File(fileName).canRead());
 		final Multipart mp = MimeUtil.getMultiPart(fileName);
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
@@ -148,7 +148,24 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		assertTrue(i > 0);
 		final String s = new String(b);
 		assertTrue(s.indexOf("I C C") >= 0);
+	}
 
+	/**
+	 * @throws Exception x
+	 */
+	public void testLocalGetURLStream() throws Exception
+	{
+		final JDFNode n = new JDFDoc("JDF").getJDFRoot();
+		JDFRunList rli = (JDFRunList) n.addResource(ElementName.RUNLIST, EnumUsage.Input);
+		n.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "localjdf.jdf", 2, false);
+		rli = rli.addRun("dummy.txt", 0, -1);
+		String contents = "Test contents";
+		ByteArrayIOStream bos = new ByteArrayIOStream(contents.getBytes());
+		FileUtil.streamToFile(bos.getInputStream(), sm_dirTestDataTemp + "dummy.txt");
+		InputStream is = rli.getFileSpec().getURLInputStream();
+		assertNotNull(is);
+		ByteArrayIOStream bos2 = new ByteArrayIOStream(is);
+		assertEquals(contents.getBytes().length, bos2.size());
 	}
 
 	/**
@@ -159,7 +176,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 	public void testMoveToDir() throws MessagingException, IOException
 	{
 		new MimeUtilTest().testBuildMimePackageDocJMF();
-		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc.mjm");
+		final Multipart mp = MimeUtil.getMultiPart(sm_dirTestDataTemp + "testMimePackageDoc0.mjm");
 		final BodyPart bp = MimeUtil.getPartByCID(mp, "jdf.JDF");
 		final JDFDoc d = MimeUtil.getJDFDoc(bp);
 		final JDFNode n = d.getJDFRoot();
@@ -167,7 +184,7 @@ public class JDFFilespecTest extends JDFTestCaseBase
 		assertNotNull(cscp);
 		final JDFFileSpec fs = cscp.getFinalTargetDevice();
 		final File newDir = new File(sm_dirTestDataTemp + "newDir");
-		File f = UrlUtil.moveToDir(fs, newDir, true);
+		File f = UrlUtil.moveToDir(fs, newDir, null, true);
 		assertNotNull("error moving file to dir", f);
 		for (int i = 0; i < 10; i++)
 		{

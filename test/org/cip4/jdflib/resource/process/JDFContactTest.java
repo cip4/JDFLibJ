@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -100,20 +100,35 @@ public class JDFContactTest extends JDFTestCaseBase
 		co = (JDFContact) n.addResource(ElementName.CONTACT, null);
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testsetContactType()
 	{
 		co.setContactTypes(EnumContactType.Accounting);
 		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testaddContactType()
 	{
 		co.addContactTypes(null);
 		assertTrue(co.getContactTypes().isEmpty());
 		co.addContactTypes(EnumContactType.Accounting);
 		assertEquals(co.getAttribute(AttributeName.CONTACTTYPES), "Accounting");
+		co.addContactTypes(EnumContactType.Delivery);
+		assertTrue(co.getContactTypes().contains("Accounting"));
+		assertTrue(co.getContactTypes().contains("Delivery"));
 	}
 
+	/**
+	 * 
+	 *  
+	 */
 	public void testsetPerson()
 	{
 		assertNull(co.setPerson(null, null));

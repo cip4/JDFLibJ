@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -93,10 +93,22 @@ import org.cip4.jdflib.core.AttributeName;
 import org.cip4.jdflib.core.VString;
 import org.w3c.dom.DOMException;
 
+/**
+ * 
+ *  
+ * @author rainer prosi
+ * @date way before Jan 31, 2012
+ */
 public class JDFContact extends JDFAutoContact
 {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 *  
+	 * @author rainerprosi
+	 * @date Jan 31, 2012
+	 */
 	public static final class EnumContactType extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -151,32 +163,51 @@ public class JDFContact extends JDFAutoContact
 			return iterator(EnumContactType.class);
 		}
 
+		/** */
 		public static final EnumContactType Accounting = new EnumContactType("Accounting");
+		/** */
 		public static final EnumContactType Administrator = new EnumContactType("Administrator");
+		/** */
 		public static final EnumContactType Agency = new EnumContactType("Agency");
+		/** */
 		public static final EnumContactType Approver = new EnumContactType("Approver");
+		/** */
 		public static final EnumContactType ArtReturn = new EnumContactType("ArtReturn");
+		/** */
 		public static final EnumContactType Author = new EnumContactType("Author");
+		/** */
 		public static final EnumContactType Billing = new EnumContactType("Billing");
+		/** */
 		public static final EnumContactType Customer = new EnumContactType("Customer");
+		/** */
 		public static final EnumContactType Delivery = new EnumContactType("Delivery");
+		/** */
 		public static final EnumContactType DeliveryCharge = new EnumContactType("DeliveryCharge");
+		/** */
 		public static final EnumContactType Designer = new EnumContactType("Designer");
+		/** */
 		public static final EnumContactType Editor = new EnumContactType("Editor");
+		/** */
 		public static final EnumContactType Illustrator = new EnumContactType("Illustrator");
+		/** */
 		public static final EnumContactType Owner = new EnumContactType("Owner");
+		/** */
 		public static final EnumContactType Photographer = new EnumContactType("Photographer");
+		/** */
 		public static final EnumContactType Pickup = new EnumContactType("Pickup");
+		/** */
 		public static final EnumContactType Sender = new EnumContactType("Sender");
+		/** */
 		public static final EnumContactType Supplier = new EnumContactType("Supplier");
+		/** */
 		public static final EnumContactType SurplusReturn = new EnumContactType("SurplusReturn");
+		/** */
 		public static final EnumContactType TelephoneSanitizer = new EnumContactType("TelephoneSanitizer");
 	}
 
 	/**
 	 * Constructor for JDFContact
-	 * 
-	 * @param ownerDocument
+	 * @param myOwnerDocument 
 	 * @param qualifiedName
 	 * @throws DOMException
 	 */
@@ -187,10 +218,10 @@ public class JDFContact extends JDFAutoContact
 
 	/**
 	 * Constructor for JDFContact
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
 	 * @throws DOMException
 	 */
 	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName) throws DOMException
@@ -200,11 +231,11 @@ public class JDFContact extends JDFAutoContact
 
 	/**
 	 * Constructor for JDFContact
+	 * @param myOwnerDocument 
+	 * @param myNamespaceURI 
+	 * @param qualifiedName 
+	 * @param myLocalName 
 	 * 
-	 * @param ownerDocument
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param localName
 	 * @throws DOMException
 	 */
 	public JDFContact(CoreDocumentImpl myOwnerDocument, String myNamespaceURI, String qualifiedName, String myLocalName) throws DOMException
@@ -229,8 +260,7 @@ public class JDFContact extends JDFAutoContact
 	 * Set attribute ContactTypes
 	 * 
 	 * @deprecated use getContactTypes
-	 *@param vKString
-	 *            value: the value to set the attribute to
+	 *@param value the value to set the attribute to
 	 */
 	@Deprecated
 	public void setExtendedContactTypes(VString value)
@@ -290,6 +320,7 @@ public class JDFContact extends JDFAutoContact
 	/**
 	 * @param firstName
 	 * @param familyName
+	 * @return 
 	 */
 	public JDFPerson setPerson(String firstName, String familyName)
 	{

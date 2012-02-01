@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -267,6 +267,7 @@ import org.cip4.jdflib.util.SkipInputStreamTest;
 import org.cip4.jdflib.util.StatusCounterTest;
 import org.cip4.jdflib.util.StreamUtilTest;
 import org.cip4.jdflib.util.StringUtilTest;
+import org.cip4.jdflib.util.URLReaderTest;
 import org.cip4.jdflib.util.UnitParserTest;
 import org.cip4.jdflib.util.UrlPartTest;
 import org.cip4.jdflib.util.UrlUtilTest;
@@ -282,6 +283,7 @@ import org.cip4.jdflib.util.net.NetPollTest;
 import org.cip4.jdflib.util.net.ProxyUtilTest;
 import org.cip4.jdflib.util.net.URLProxySelectorTest;
 import org.cip4.jdflib.util.thread.DelayedPersistTest;
+import org.cip4.jdflib.util.zip.ZipReaderTest;
 import org.cip4.jdflib.validate.JDFValidatorTest;
 import org.cip4.jdflib.validate.VersionTranslatorTest;
 
@@ -539,6 +541,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(UnitParserTest.class);
 		suite.addTestSuite(UrlPartTest.class);
 		suite.addTestSuite(UrlUtilTest.class);
+		suite.addTestSuite(URLReaderTest.class);
 		suite.addTestSuite(VectorMapTest.class);
 
 		// util.file
@@ -558,6 +561,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
 
 		// util.thread
 		suite.addTestSuite(DelayedPersistTest.class);
+
+		// util.zip
+		suite.addTestSuite(ZipReaderTest.class);
 
 		suite.addTestSuite(JDFEnumerationSpanTest.class);
 

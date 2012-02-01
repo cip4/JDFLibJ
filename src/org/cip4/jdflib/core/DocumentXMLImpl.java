@@ -89,6 +89,7 @@ import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xerces.dom.ParentNode;
 import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.zip.ZipReader;
 import org.w3c.dom.Element;
 
 /**
@@ -150,11 +151,15 @@ public class DocumentXMLImpl extends DocumentImpl
 	/**
 	 * the original file name if an element was parsed, else null
 	 */
-	public String m_OriginalFileName = null;
+	protected String m_OriginalFileName = null;
 	/**
 	 * the mime bodypart that this document was parsed from
 	 */
-	public BodyPart m_Bodypart = null;
+	protected BodyPart m_Bodypart = null;
+	/**
+	 * we need this for grabbing local urls in a zip stream
+	 */
+	protected ZipReader m_ZipReader = null;
 	protected final HashMap<String, String> nsMap;
 
 	/**

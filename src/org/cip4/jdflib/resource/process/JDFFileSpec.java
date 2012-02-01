@@ -181,12 +181,7 @@ public class JDFFileSpec extends JDFAutoFileSpec implements IURLSetter
 	 */
 	public InputStream getURLInputStream()
 	{
-		final String url = StringUtil.getNonEmpty(getURL());
-		if (url == null)
-		{
-			return null;
-		}
-		return new MimeReader(getOwnerDocument_KElement().getMultiPart()).getURLInputStream(url);
+		return getURLInputStream(getURL());
 	}
 
 	/**

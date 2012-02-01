@@ -101,9 +101,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import javax.mail.BodyPart;
-import javax.mail.Multipart;
-
 import org.apache.commons.lang.enums.ValuedEnum;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -140,9 +137,8 @@ import org.cip4.jdflib.util.EnumUtil;
 import org.cip4.jdflib.util.JDFDate;
 import org.cip4.jdflib.util.JDFDuration;
 import org.cip4.jdflib.util.StringUtil;
-import org.cip4.jdflib.util.UrlUtil;
+import org.cip4.jdflib.util.URLReader;
 import org.cip4.jdflib.util.VectorMap;
-import org.cip4.jdflib.util.mime.MimeReader;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -6448,7 +6444,7 @@ public class JDFElement extends KElement
 
 				if (EnumAttributeType.JDFJMFVersion.equals(attyp))
 				{
-					return "1.3";
+					return "1.4";
 				}
 
 				if (EnumAttributeType.matrix.equals(attyp))
@@ -6468,32 +6464,26 @@ public class JDFElement extends KElement
 
 	/**
 	 * returns the jdf doc referenced by url
+	 * @param url 
+	 *  
 	 * 
 	 * @return the document
 	 */
-	protected JDFDoc getURLDoc()
+	protected JDFDoc getURLDoc(String url)
 	{
-		final String url = getAttribute(AttributeName.URL, null, JDFConstants.EMPTYSTRING);
-		if (isWildCard(url))
-		{
-			return null;
-		}
-		final Multipart multiPart = getOwnerDocument_KElement().getMultiPart();
-		MimeReader mimeReader = new MimeReader(multiPart);
-		final InputStream is = mimeReader.getURLInputStream(url);
-		if (is == null)
-		{
-			return null;
-		}
-		final JDFParser p = new JDFParser();
-		final JDFDoc d = p.parseStream(is);
-		if (d != null)
-		{
-			d.setOriginalFileName(UrlUtil.urlToFileName(url));
-			BodyPart bp = mimeReader.getPartByCID(url);
-			d.setBodyPart(bp);
-		}
-		return d;
+		URLReader r = new URLReader(url, getOwnerDocument_JDFElement());
+		return r.getJDFDoc();
 	}
 
+	/**
+	 * get the input stream that reads from URL
+	 * @param url 
+	 * 
+	 * @return InputStream the input stream that the url points to, null if the url is inaccessible
+	 */
+	protected InputStream getURLInputStream(String url)
+	{
+		URLReader r = new URLReader(url, getOwnerDocument_JDFElement());
+		return r.getURLInputStream();
+	}
 }

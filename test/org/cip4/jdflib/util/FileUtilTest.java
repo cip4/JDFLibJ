@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -108,6 +108,21 @@ public class FileUtilTest extends JDFTestCaseBase
 			assertTrue(FileUtil.isAbsoluteFile("c:\\a"));
 			assertTrue(FileUtil.isAbsoluteFile(new File("c:/a")));
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testisDirectory()
+	{
+		assertFalse(FileUtil.isDirectory(new File("foo")));
+		assertFalse(FileUtil.isDirectory("foo"));
+		assertFalse(FileUtil.isDirectory((String) null));
+		assertFalse(FileUtil.isDirectory((File) null));
+		assertTrue(FileUtil.isDirectory("/"));
+		assertTrue(FileUtil.isDirectory(sm_dirTestData + "SampleFiles"));
+		//		assertTrue(FileUtil.isDirectory(sm_dirTestData + "Samples2"));
+
 	}
 
 	/**

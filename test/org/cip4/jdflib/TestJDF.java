@@ -64,6 +64,20 @@ public class TestJDF extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testWriteJMF()
+	{
+		final JDFDoc d = new JDFDoc("JMF");
+		JDFJMF jmf = d.getJMFRoot();
+		jmf.appendCommand().setType("getVersion");
+		//	JDFDoc d2 = d.write2URL("http://kie-schielke-nb:6311/StorageService-J/Storage");
+		JDFDoc d2 = d.write2URL("http://kie-wf16prdy:6311/StorageService-J/Storage");
+		assertNotNull(d2);
+
+	}
+
+	/**
+	 * 
+	 */
 	public static void testCollapse()
 	{
 		final JDFDoc d = new JDFParser().parseFile("/share/data/JDF/UlfPrien/jdfportal.jdf");
@@ -227,6 +241,33 @@ public class TestJDF extends JDFTestCaseBase
 				resCmdParams.applyResourceCommand(nodeRoot);
 			}
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public void testSpawnMerge24536()
+	{
+		JDFResource.setUnpartitiondImplicit(true);
+		JDFDoc d = JDFDoc.parseFile("main2.jdf");
+		JDFNode root = d.getJDFRoot();
+		JDFNode nodeToSpawn = root.getJobPart("SFP1.C", null);
+		JDFSpawn spawn = new JDFSpawn(nodeToSpawn);
+		spawn.vRWResources_in = new VString("Output NodeInfo", null);
+		spawn.vSpawnParts = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put("SignatureName", "Sig001");
+		map.put("SheetName", "FB 001");
+		map.put("Side", "Back");
+		spawn.vSpawnParts.add(map);
+		spawn.bSpawnRWPartsMultiple = true;
+		JDFNode spawned = spawn.spawn();
+		spawned.getOwnerDocument_JDFElement().write2File("newspawn.jdf", 2, false);
+		root.getOwnerDocument_JDFElement().write2File("afterspawn.jdf", 2, false);
+		JDFMerge merge = new JDFMerge(root);
+		merge.mergeJDF(spawned);
+		root.getOwnerDocument_JDFElement().write2File("aftermerge.jdf", 2, false);
+
 	}
 
 	/**
