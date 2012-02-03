@@ -69,12 +69,11 @@
 package org.cip4.jdflib.util.zip;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 
 import org.cip4.jdflib.JDFTestCaseBase;
-import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.FileUtil;
 
 /**
@@ -110,12 +109,41 @@ public class ZipReaderTest extends JDFTestCaseBase
 	public void testGetEntryStream()
 	{
 		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
-		InputStream i = r.getInputStream("schema/Conditions.jdf");
-		assertNotNull(JDFDoc.parseStream(i));
-		i = r.getInputStream("schema/BarcodeDetails.jdf");
-		assertNotNull(JDFDoc.parseStream(i));
-		i = r.getInputStream("schema/Conditions.jdf");
-		assertNotNull(i);
+		ZipEntry e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(r.getInputStream());
+		e = r.getEntry("schema/BarcodeDetails.jdf");
+		assertNotNull(r.getInputStream());
+		e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(r.getInputStream());
+		assertNotNull(e);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testGetXMLDoc()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		ZipEntry e = r.getEntry("schema/Conditions.jdf");
+		XMLDoc xmlDoc = r.getXMLDoc();
+		assertNotNull(xmlDoc);
+		assertEquals(r, xmlDoc.getZipReader());
+		assertNotNull(e);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testGetJDFDoc()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		ZipEntry e = r.getMatchingEntry("*Conditions.jdf", 0);
+		XMLDoc xmlDoc = r.getJDFDoc();
+		assertNotNull(xmlDoc);
+		assertEquals(r, xmlDoc.getZipReader());
+		assertNotNull(e);
 	}
 
 	/**
@@ -130,6 +158,42 @@ public class ZipReaderTest extends JDFTestCaseBase
 		e = r.getEntry("schema/BarcodeDetails.jdf");
 		assertNotNull(e);
 		e = r.getEntry("schema/Conditions.jdf");
+		assertNotNull(e);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testGetMatchingEntry()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		ZipEntry e = r.getMatchingEntry("*.jdf", 0);
+		assertTrue(e.getName().endsWith(".jdf"));
+		ZipEntry e2 = r.getMatchingEntry("*.jdf", 1);
+		assertNotNull(e2);
+		assertTrue(e2.getName().endsWith(".jdf"));
+		ZipEntry e3 = r.getMatchingEntry("*.jdf", 2);
+		assertNull(e3);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testGetIgnoreCase()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		ZipEntry e = r.getMatchingEntry("*.jdf", 0);
+		assertTrue(e.getName().endsWith(".jdf"));
+		ZipEntry e3 = r.getMatchingEntry("*.JDF", 0);
+		assertNull(e3);
+		e = r.getEntry("schema/barcodedetails.jdf");
+		assertNull(e);
+		r.setCaseSensitive(false);
+		ZipEntry e2 = r.getMatchingEntry("*.JDF", 0);
+		assertTrue(e2.getName().endsWith(".jdf"));
+		e = r.getEntry("schema/barcodedetails.jdf");
 		assertNotNull(e);
 	}
 

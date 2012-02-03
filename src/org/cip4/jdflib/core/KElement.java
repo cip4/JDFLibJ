@@ -5777,13 +5777,15 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * same as @see clone but the clone is in a new document
+	 * same as @see clone but the clone is in a new document <br/>
+	 * the document gets copies of context sensitive stuff like zip, mime, filename...
 	 * @see java.lang.Object#clone()
 	 * @return
 	*/
 	public KElement cloneNewDoc() //throws CloneNotSupportedException
 	{
 		XMLDoc d = new XMLDoc(getNodeName(), getNamespaceURI());
+		d.copyMeta(getOwnerDocument_KElement());
 		KElement e = d.getRoot();
 		e.copyInto(this, false);
 		return e;

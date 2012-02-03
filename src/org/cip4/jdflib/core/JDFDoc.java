@@ -150,6 +150,7 @@ public class JDFDoc extends XMLDoc
 	{
 		JDFDoc doc = createRoot(document);
 		doc.setInitOnCreate(false);
+		doc.copyMeta(this);
 		KElement newRoot = doc.getRoot();
 		if (newRoot != null)
 			newRoot.copyInto((KElement) document.getDocumentElement(), false);

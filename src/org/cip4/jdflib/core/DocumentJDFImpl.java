@@ -983,6 +983,9 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		clon.myXMLUserDat = new XMLDocUserData(this);
 		clon.bInitOnCreate = bInitOnCreate;
 		clon.bKElementOnly = bKElementOnly;
+		clon.m_Bodypart = m_Bodypart;
+		clon.m_ZipReader = m_ZipReader;
+		clon.m_OriginalFileName = m_OriginalFileName;
 		return clon;
 	}
 

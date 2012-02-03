@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Vector;
+import java.util.zip.ZipEntry;
 
 import javax.mail.BodyPart;
 import javax.mail.Multipart;
@@ -129,7 +130,8 @@ public class URLReader
 		InputStream retStream = null;
 		if (zip != null)
 		{
-			retStream = zip.getInputStream(urlString);
+			ZipEntry e = zip.getEntry(urlString);
+			retStream = e == null ? null : zip.getInputStream();
 		}
 		return retStream;
 	}

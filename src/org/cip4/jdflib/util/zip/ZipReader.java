@@ -81,8 +81,11 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cip4.jdflib.core.JDFDoc;
+import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
+import org.cip4.jdflib.util.StringUtil;
 
 /**
  * class to read a zip file or stream
@@ -96,6 +99,27 @@ public class ZipReader
 	ZipInputStream zis;
 	final Log log;
 	ZipEntry currentEntry;
+	boolean caseSensitive;
+
+	/**
+	 * 
+	 *return true if all checks are cese sensitive (the default)
+	 * @return
+	 */
+	public boolean isCaseSensitive()
+	{
+		return caseSensitive;
+	}
+
+	/**
+	 * 
+	 * set the case sensitivity for matching strings and regexp
+	 * @param caseSensitive
+	 */
+	public void setCaseSensitive(boolean caseSensitive)
+	{
+		this.caseSensitive = caseSensitive;
+	}
 
 	/**
 	 * 
@@ -107,6 +131,7 @@ public class ZipReader
 		is = inStream;
 		zis = new ZipInputStream(is);
 		bos = null;
+		caseSensitive = true;
 	}
 
 	/**
@@ -215,6 +240,9 @@ public class ZipReader
 			}
 			else
 			{
+				File parent = absoluteFile.getParentFile();
+				if (parent != null)
+					parent.mkdirs();
 				final OutputStream fos = new BufferedOutputStream(new FileOutputStream(absoluteFile));
 				IOUtils.copy(zis, fos);
 				fos.flush();
@@ -247,8 +275,39 @@ public class ZipReader
 		while (ze != null)
 		{
 			String name = ze.getName();
-			if (urlString.equals(name))
+			boolean matches = caseSensitive ? urlString.equals(name) : urlString.equalsIgnoreCase(name);
+			if (matches)
 				return ze;
+
+			ze = getNextEntry();
+		}
+		return null;
+	}
+
+	/**
+	 * get an entry by name - note that we need to buffer the entire file for this random access method
+	 * 
+	 * @param expr the regexp to match - simplified regexp is accepted
+	 * @param iSkip how many to skip - default= 0
+	 * @return
+	 */
+	public ZipEntry getMatchingEntry(String expr, int iSkip)
+	{
+		buffer();
+		ZipEntry ze = getNextEntry();
+		expr = StringUtil.simpleRegExptoRegExp(expr);
+		int n = 0;
+		while (ze != null)
+		{
+			String name = ze.getName();
+			boolean matches = caseSensitive ? StringUtil.matches(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
+			if (matches)
+			{
+				if (n >= iSkip)
+					return ze;
+				else
+					n++;
+			}
 
 			ze = getNextEntry();
 		}
@@ -261,10 +320,41 @@ public class ZipReader
 	 * @param urlString
 	 * @return
 	 */
-	public InputStream getInputStream(String urlString)
+	public InputStream getInputStream()
 	{
-		ZipEntry ze = getEntry(urlString);
-		return ze == null ? null : zis;
+		return currentEntry == null ? null : zis;
+	}
+
+	/**
+	 * 
+	 * get the xmlDoc of the current entry - note not threadsafe!
+	 *  
+	 * @return
+	 */
+	public XMLDoc getXMLDoc()
+	{
+		if (currentEntry == null)
+			return null;
+		XMLDoc doc = XMLDoc.parseStream(zis);
+		if (doc != null)
+			doc.setZipReader(this);
+		return doc;
+	}
+
+	/**
+	 * 
+	 * get the xmlDoc of the current entry - note not threadsafe!
+	 *  
+	 * @return
+	 */
+	public JDFDoc getJDFDoc()
+	{
+		if (currentEntry == null)
+			return null;
+		JDFDoc doc = JDFDoc.parseStream(zis);
+		if (doc != null)
+			doc.setZipReader(this);
+		return doc;
 	}
 
 	/**

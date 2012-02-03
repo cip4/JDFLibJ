@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -379,11 +379,25 @@ public class MimeUtil extends UrlUtil
 		{
 			return false;
 		}
-
 		mimeType = StringUtil.token(mimeType, 0, ";");
-
 		return JDFConstants.MIME_JDF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_JMF.equalsIgnoreCase(mimeType) || JDFConstants.MIME_TEXTXML.equalsIgnoreCase(mimeType)
 				|| UrlUtil.APPLICATION_XML.equalsIgnoreCase(mimeType);
+	}
+
+	/**
+	 * checks whether the mime type corresponds to mimetyoe
+	 * @param toCheck the string to check against
+	 * @param mimeType the mime type
+	 * @return true if matches
+	 */
+	public static boolean isMimeType(String toCheck, String mimeType)
+	{
+		if (toCheck == null)
+		{
+			return false;
+		}
+		toCheck = StringUtil.token(toCheck, 0, ";");
+		return mimeType.equalsIgnoreCase(toCheck);
 	}
 
 	/**

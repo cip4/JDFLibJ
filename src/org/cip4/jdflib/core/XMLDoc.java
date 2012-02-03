@@ -1781,4 +1781,16 @@ public class XMLDoc
 		return d;
 	}
 
+	/**
+	 * copy metadata from other document
+	 * @param dMine
+	 */
+	public void copyMeta(XMLDoc dMine)
+	{
+		setBodyPart(dMine.getBodyPart());
+		setZipReader(dMine.getZipReader());
+		setOriginalFileName(dMine.getOriginalFileName());
+
+	}
+
 }

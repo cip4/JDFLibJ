@@ -4511,9 +4511,10 @@ public class JDFElement extends KElement
 	 * @return
 	*/
 	@Override
-	public KElement cloneNewDoc() //throws CloneNotSupportedException
+	public KElement cloneNewDoc()
 	{
 		JDFDoc d = new JDFDoc();
+		d.copyMeta(getOwnerDocument_KElement());
 		d.setInitOnCreate(false);
 		d.setRoot(getNodeName(), getNamespaceURI());
 		KElement e = d.getRoot();
