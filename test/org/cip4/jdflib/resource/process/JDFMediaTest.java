@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -117,7 +117,8 @@ public class JDFMediaTest extends TestCase
 		KElement kElem = resPool.appendResource(ElementName.MEDIA, EnumResourceClass.Consumable, null);
 		assertTrue(kElem instanceof JDFMedia);
 		JDFMedia media = ((JDFMedia) kElem);
-
+		assertNull(media.getDimensionCM());
+		assertNull(media.getDimensionInch());
 		media.setDimensionCM(new JDFXYPair(2.54, 2.54));
 
 		JDFXYPair result = media.getDimension();

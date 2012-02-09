@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2008 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -394,6 +394,26 @@ public class JDFAuditPoolTest extends JDFTestCaseBase
 		assertEquals(myAuditPool.getAudit(-2, EnumAuditType.Deleted, null, null), a1);
 		assertEquals(myAuditPool.getAudit(0, EnumAuditType.Deleted, null, null), a1);
 		assertEquals(myAuditPool.getAudit(-1, EnumAuditType.Created, null, null), a2);
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetAuditPartitioned()
+	{
+		final JDFPhaseTime a3 = (JDFPhaseTime) myAuditPool.addAudit(EnumAuditType.PhaseTime, null);
+		VJDFAttributeMap vParts = new VJDFAttributeMap();
+		JDFAttributeMap map = new JDFAttributeMap("Run", "R1");
+		map.put("PageNumber", "3");
+		vParts.add(map);
+		a3.setPartMapVector(vParts);
+		assertEquals(myAuditPool.getAudit(0, EnumAuditType.PhaseTime, null, vParts), a3);
+		map.clear();
+		assertEquals(myAuditPool.getAudit(0, EnumAuditType.PhaseTime, null, vParts), a3);
+		map.put("PageNumber", "3");
+		assertEquals(myAuditPool.getAudit(0, EnumAuditType.PhaseTime, null, vParts), a3);
+		map.put("PageNumber", "34");
+		assertNull(myAuditPool.getAudit(0, EnumAuditType.PhaseTime, null, vParts));
 	}
 
 	/**

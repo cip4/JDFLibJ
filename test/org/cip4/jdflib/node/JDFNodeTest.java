@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -162,9 +162,9 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		CPUTimer ct = new CPUTimer(true);
 		VString v = n.getPartIDKeys(null);
+		assertNotNull(v);
 		ct.stop();
 		System.out.println(ct.toString());
-
 	}
 
 	// /////////////////////////////////////////////////////
@@ -981,7 +981,7 @@ public class JDFNodeTest extends JDFTestCaseBase
 			assertEquals(pt.getPartMapVector(), vMap);
 			jmf = docJMF.getJMFRoot();
 			assertNotNull(jmf);
-			assertEquals(jmf.numChildElements(ElementName.RESPONSE, null), 1);
+			assertEquals("both apply - strange part maps", jmf.numChildElements(ElementName.RESPONSE, null), 2);
 			docJMF.write2File(sm_dirTestDataTemp + File.separator + "setup.jmf", 2, true);
 			Thread.sleep(1000);
 			su.setPhase(EnumNodeStatus.InProgress, "Run", EnumDeviceStatus.Running, null);

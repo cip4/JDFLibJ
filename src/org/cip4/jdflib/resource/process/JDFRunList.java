@@ -1356,11 +1356,11 @@ public class JDFRunList extends JDFAutoRunList
 			return 0;
 		}
 
-		if (hasAttribute(AttributeName.NPAGE))
+		if (hasAttribute(AttributeName.NPAGE, null, false))
 		{
 			return super.getNPage();
 		}
-		if (hasAttribute(AttributeName.PAGES))
+		if (hasAttribute(AttributeName.PAGES, null, false))
 		{
 			final JDFIntegerRangeList pages = getPages();
 			int nPage = pages.getElementCount();

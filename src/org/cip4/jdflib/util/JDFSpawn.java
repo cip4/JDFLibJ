@@ -1178,7 +1178,7 @@ public class JDFSpawn
 		final VJDFAttributeMap vPartMap = new VJDFAttributeMap(vLocalSpawnParts);
 
 		// 160802 RP leave implied resource link parts if PartUsage=implicit
-		if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit) || true)
+		if (!r.getPartUsage().equals(JDFResource.EnumPartUsage.Implicit))
 		{
 			final VString vPartKeys = r.getPartIDKeys();
 			final Vector<EnumPartIDKey> vImplicitPartitions = r.getImplicitPartitions();

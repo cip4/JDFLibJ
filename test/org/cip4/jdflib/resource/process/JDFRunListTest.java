@@ -360,6 +360,21 @@ public class JDFRunListTest extends JDFTestCaseBase
 	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
 	 * @throws Exception 
 	 */
+	public final void testGetPageListIndexPartition() throws Exception
+	{
+		JDFIntegerRangeList pageListIndex = rl.getPageListIndex();
+		assertNotNull(pageListIndex);
+		assertEquals(pageListIndex.getElementCount(), 0);
+		rl.setPageListIndex(new JDFIntegerRangeList("0 ~11"));
+		JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "test");
+		pageListIndex = rlp.getPageListIndex();
+		assertEquals(pageListIndex.getElementCount(), 12);
+	}
+
+	/**
+	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * @throws Exception 
+	 */
 	public final void testGetPageListIndexNegative() throws Exception
 	{
 		JDFPageList pl = (JDFPageList) root.addResource(ElementName.PAGELIST, EnumUsage.Input);
@@ -367,6 +382,22 @@ public class JDFRunListTest extends JDFTestCaseBase
 		rl.refPageList(pl);
 		rl.setPageListIndex(new JDFIntegerRangeList("0 ~ -1"));
 		JDFIntegerRangeList pageListIndex = rl.getPageListIndex();
+		assertNotNull(pageListIndex);
+		assertEquals(pageListIndex.getElementCount(), 12);
+	}
+
+	/**
+	 * Test method for 'org.cip4.jdflib.resource.process.JDFMedia.setDimensionCM(JDFXYPair)'
+	 * @throws Exception 
+	 */
+	public final void testGetPageListIndexNegativePartition() throws Exception
+	{
+		JDFPageList pl = (JDFPageList) root.addResource(ElementName.PAGELIST, EnumUsage.Input);
+		pl.appendPageData().setPageIndex(new JDFIntegerRangeList("0 ~11"));
+		rl.refPageList(pl);
+		rl.setPageListIndex(new JDFIntegerRangeList("0 ~ -1"));
+		JDFRunList rlp = (JDFRunList) rl.addPartition(EnumPartIDKey.Run, "test");
+		JDFIntegerRangeList pageListIndex = rlp.getPageListIndex();
 		assertNotNull(pageListIndex);
 		assertEquals(pageListIndex.getElementCount(), 12);
 	}

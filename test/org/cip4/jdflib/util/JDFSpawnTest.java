@@ -320,8 +320,32 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		JDFSpawn spawn = new JDFSpawn(nRoot);
 		spawn.vSpawnParts = vMap;
 		final JDFNode spawnedNode = spawn.spawn();
-		assertNull(spawnedNode.getResourceLinkPool().getPoolChild(0, ElementName.CUSTOMERINFO + "Link", null, null).getPartMapVector());
+		assertEquals(1, spawnedNode.getResourceLinkPool().getPoolChild(0, ElementName.CUSTOMERINFO + "Link", null, null).getPartMapVector().size());
 		assertEquals(1, spawnedNode.getResourceLinkPool().getPoolChild(0, ElementName.NODEINFO + "Link", null, null).getPartMapVector().size());
+	}
+
+	/**
+	 * 
+	 */
+	public void testSpawnPartImplicitColorant()
+	{
+		final JDFDoc dRoot = new JDFDoc("JDF");
+		final JDFNode nRoot = dRoot.getJDFRoot();
+		final JDFResource r = nRoot.addResource(ElementName.COLORANTCONTROL, EnumUsage.Input);
+		r.setPartUsage(EnumPartUsage.Implicit);
+		final VJDFAttributeMap vMap = new VJDFAttributeMap();
+		final JDFAttributeMap map = new JDFAttributeMap();
+		map.put("SignatureName", "Sig1");
+		map.put("SheetName", "S1");
+		vMap.add(map.clone());
+		map.put("SheetName", "S2");
+		vMap.add(map.clone());
+		r.addPartition(EnumPartIDKey.SignatureName, "Sig1");
+		nRoot.getCreateNodeInfo().addPartition(EnumPartIDKey.SignatureName, "Sig1");
+		JDFSpawn spawn = new JDFSpawn(nRoot);
+		spawn.vSpawnParts = vMap;
+		final JDFNode spawnedNode = spawn.spawn();
+		assertEquals(2, spawnedNode.getResourceLinkPool().getPoolChild(0, ElementName.COLORANTCONTROL + "Link", null, null).getPartMapVector().size());
 	}
 
 	/**

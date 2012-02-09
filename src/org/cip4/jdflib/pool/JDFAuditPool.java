@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -599,9 +599,8 @@ public class JDFAuditPool extends JDFPool
 	 * 
 	 * default: getAudits(null, null, null)
 	 */
-	public VElement getAudits(final JDFAudit.EnumAuditType typ, final JDFAttributeMap mAttributes, final VJDFAttributeMap vParts)
+	public VElement getAudits(final JDFAudit.EnumAuditType typ, final JDFAttributeMap mAttributes, VJDFAttributeMap vParts)
 	{
-		VJDFAttributeMap vPartsLocal = vParts;
 		String strAuditType = null;
 		if (typ != null)
 		{
@@ -609,9 +608,9 @@ public class JDFAuditPool extends JDFPool
 		}
 
 		final VElement vElem = getPoolChildrenGeneric(strAuditType, mAttributes, null);
-		if (vPartsLocal != null && vPartsLocal.size() == 0)
+		if (vParts != null && vParts.size() == 0)
 		{
-			vPartsLocal = null;
+			vParts = null;
 		}
 
 		for (int i = vElem.size() - 1; i >= 0; i--)
@@ -624,7 +623,7 @@ public class JDFAuditPool extends JDFPool
 			}
 
 			final JDFAudit audit = (JDFAudit) vElem.elementAt(i);
-			if (vPartsLocal != null && !vPartsLocal.equals(audit.getPartMapVector()))
+			if (vParts != null && !vParts.overlapsMap(audit.getPartMapVector()))
 			{
 				vElem.removeElementAt(i);
 				continue; // look at next element
@@ -663,21 +662,18 @@ public class JDFAuditPool extends JDFPool
 	 * 
 	 * default: getAudit(index, typ, null)
 	 */
-	public JDFAudit getAudit(final int index, final JDFAudit.EnumAuditType typ, final JDFAttributeMap mAttributes, final VJDFAttributeMap vParts)
+	public JDFAudit getAudit(int index, final JDFAudit.EnumAuditType typ, final JDFAttributeMap mAttributes, final VJDFAttributeMap vParts)
 	{
-		int indexLocal = index;
-
 		final VElement v = getAudits(typ, mAttributes, vParts);
-		if (indexLocal < 0)
+		if (index < 0)
 		{
-			indexLocal = v.size() + indexLocal;
+			index = v.size() + index;
 		}
-		if (indexLocal >= v.size() || indexLocal < 0)
+		if (index >= v.size() || index < 0)
 		{
 			return null;
 		}
-
-		return (JDFAudit) v.elementAt(indexLocal);
+		return (JDFAudit) v.elementAt(index);
 	}
 
 	/**
