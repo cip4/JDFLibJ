@@ -80,7 +80,7 @@ import org.cip4.jdflib.resource.process.JDFGeneralID;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class PartitionHelper
+public class PartitionHelper extends BaseXJDFHelper
 {
 	/**
 	 * @param partition
@@ -88,10 +88,8 @@ public class PartitionHelper
 	public PartitionHelper(KElement partition)
 	{
 		super();
-		this.thePartition = partition;
+		this.theElement = partition;
 	}
-
-	protected KElement thePartition;
 
 	/**
 	 * @return
@@ -99,7 +97,7 @@ public class PartitionHelper
 	public VJDFAttributeMap getPartMapVector()
 	{
 		VJDFAttributeMap vMap = new VJDFAttributeMap();
-		VElement vParts = thePartition.getChildElementVector(ElementName.PART, null);
+		VElement vParts = theElement.getChildElementVector(ElementName.PART, null);
 		if (vParts != null)
 		{
 			for (int i = 0; i < vParts.size(); i++)
@@ -149,16 +147,7 @@ public class PartitionHelper
 	 */
 	public KElement getPartition()
 	{
-		return thePartition;
-	}
-
-	/**
-	 * get the ID from the generic Parameter or Resource element
-	 * @return the ID , may be null in case this is connected to a null element
-	 */
-	public String getID()
-	{
-		return thePartition == null ? null : thePartition.getID();
+		return theElement;
 	}
 
 	/**
@@ -166,13 +155,13 @@ public class PartitionHelper
 	 */
 	public KElement getResource()
 	{
-		KElement set = thePartition.getParentNode_KElement();
+		KElement set = theElement.getParentNode_KElement();
 		String name = set != null ? set.getAttribute("Name", null, null) : null;
 		if (name != null)
-			return thePartition.getElement(name);
+			return theElement.getElement(name);
 		else
 		{
-			KElement e = thePartition.getFirstChildElement();
+			KElement e = theElement.getFirstChildElement();
 			while (e != null)
 			{
 				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFComment))
@@ -188,10 +177,10 @@ public class PartitionHelper
 	 */
 	public KElement getCreateResource()
 	{
-		KElement set = thePartition.getParentNode_KElement();
+		KElement set = theElement.getParentNode_KElement();
 		String name = set != null ? set.getAttribute("Name", null, null) : null;
 		if (name != null)
-			return thePartition.getCreateElement(name);
+			return theElement.getCreateElement(name);
 		return null;
 	}
 
@@ -202,7 +191,7 @@ public class PartitionHelper
 	@Override
 	public String toString()
 	{
-		return "PartitionHelper: " + thePartition;
+		return "PartitionHelper: " + theElement;
 	}
 
 	/**
@@ -210,9 +199,9 @@ public class PartitionHelper
 	 */
 	public void cleanUp()
 	{
-		if (!thePartition.hasAttribute("ID"))
+		if (!theElement.hasAttribute("ID"))
 		{
-			thePartition.setID(thePartition.generateDotID("ID", null));
+			theElement.setID(theElement.generateDotID("ID", null));
 		}
 	}
 }

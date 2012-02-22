@@ -130,7 +130,7 @@ public class KElement extends ElementNSImpl implements Element
 
 	private static int m_lStoreID = 0;
 	private static boolean bIDDate = true;
-	private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyMMdd_kkmmssSS");
+	private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyMMdd_kkmmssSSS");
 
 	/**
 	 * Constructor for KElement
@@ -5574,7 +5574,7 @@ public class KElement extends ElementNSImpl implements Element
 	}
 
 	/**
-	 * remove an attribute that is described by the xpath path quietly returns if the attribute does not exist
+	 * remove an attribute or text that is described by the xpath path quietly returns if the attribute or text does not exist
 	 * @param path the XPath to the attribute that is to be removed
 	 * @throws JDFException if the XPath is corrupt
 	 */
@@ -5583,12 +5583,41 @@ public class KElement extends ElementNSImpl implements Element
 		final int pos = path.lastIndexOf(JDFCoreConstants.AET);
 		if (pos == -1)
 		{
-			throw new JDFException("RemoveXPathAttribute - bad attribute path: " + path);
+			final KElement kEle = getXPathElement(path);
+			if (kEle != null)
+			{
+				kEle.removeAllText();
+			}
 		}
-		final KElement kEle = getXPathElement(path.substring(0, pos));
-		if (kEle != null)
+		else
 		{
-			kEle.removeAttribute(path.substring(pos + 1), null);
+			final KElement kEle = getXPathElement(path.substring(0, pos));
+			if (kEle != null)
+			{
+				kEle.removeAttribute(path.substring(pos + 1), null);
+			}
+		}
+	}
+
+	/**
+	 * remove an attribute or element that is described by the xpath path quietly returns if the element does not exist
+	 * @param path the XPath to the attribute that is to be removed
+	 * @throws JDFException if the XPath is corrupt
+	 */
+	public void removeXPathElement(final String path)
+	{
+		final int pos = path.lastIndexOf(JDFCoreConstants.AET);
+		if (pos == -1)
+		{
+			final KElement kEle = getXPathElement(path);
+			if (kEle != null)
+			{
+				kEle.deleteNode();
+			}
+		}
+		else
+		{
+			removeXPathAttribute(path);
 		}
 	}
 

@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -77,12 +77,8 @@ import org.cip4.jdflib.resource.process.JDFGeneralID;
 /**
  * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class IntentHelper
+public class IntentHelper extends BaseXJDFHelper
 {
-	/**
-	 * 
-	 */
-	protected KElement theIntent;
 
 	/**
 	 * 
@@ -94,8 +90,9 @@ public class IntentHelper
 	 */
 	public IntentHelper(final KElement intent)
 	{
-		theIntent = intent;
-		theIntent.appendAnchor(null);
+		super();
+		theElement = intent;
+		theElement.appendAnchor(null);
 	}
 
 	/**
@@ -105,7 +102,7 @@ public class IntentHelper
 	@Override
 	public String toString()
 	{
-		return "IntentHelper: " + theIntent;
+		return "IntentHelper: " + theElement;
 	}
 
 	/**
@@ -114,7 +111,7 @@ public class IntentHelper
 
 	public KElement getIntent()
 	{
-		return theIntent;
+		return theElement;
 	}
 
 	/**
@@ -122,14 +119,14 @@ public class IntentHelper
 	 */
 	public KElement getResource()
 	{
-		String name = theIntent.getAttribute("Name", null, null);
+		String name = theElement.getAttribute("Name", null, null);
 		if (name != null)
 		{
-			return theIntent.getCreateElement(name);
+			return theElement.getCreateElement(name);
 		}
 		else
 		{
-			KElement e = theIntent.getFirstChildElement();
+			KElement e = theElement.getFirstChildElement();
 			while (e != null)
 			{
 				if (!(e instanceof JDFPart) && !(e instanceof JDFGeneralID) && !(e instanceof JDFComment))
@@ -147,14 +144,14 @@ public class IntentHelper
 	 */
 	public String getName()
 	{
-		String name = theIntent.getAttribute("Name", null, null);
+		String name = theElement.getAttribute("Name", null, null);
 		if (name == null)
 		{
 			KElement r = getResource();
 			if (r != null)
 			{
 				name = r.getLocalName();
-				theIntent.setAttribute(AttributeName.NAME, name);
+				theElement.setAttribute(AttributeName.NAME, name);
 			}
 		}
 		return name;

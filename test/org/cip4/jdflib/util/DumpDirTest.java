@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2007 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -105,4 +105,24 @@ public class DumpDirTest extends JDFTestCaseBase
 		assertEquals(mem2, mem, 1000000);
 	}
 
+	/**
+	 * @throws Exception
+	 */
+	public void testCleanup() throws Exception
+	{
+		File theDir = new File(sm_dirTestDataTemp + File.separator + "TestDumpDir");
+		DumpDir dumpDir = new DumpDir(theDir);
+		ByteArrayIOStream bis = new ByteArrayIOStream();
+		for (int i = 1; i < 100; i++)
+			bis.write("Fooooooooooooooooooooooooooooooooooooooooo".getBytes());
+
+		System.gc();
+		final Runtime rt = Runtime.getRuntime();
+		for (int i = 0; i < 1000; i++)
+			dumpDir.newFileFromStream("header", bis.getInputStream(), "a" + (i % 2 == 0 ? "x." : "y.") + i);
+		assertEquals(FileUtil.listFilesWithExtension(theDir, "tmp").length, 500, 111);
+		System.gc();
+		long mem2 = rt.totalMemory() - rt.freeMemory();
+		assertEquals(mem2, mem, 1000000);
+	}
 }

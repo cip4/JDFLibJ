@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,7 +82,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class SetHelper
+public class SetHelper extends BaseXJDFHelper
 {
 	/**
 	 * 
@@ -93,35 +93,14 @@ public class SetHelper
 	 */
 	public static final String RESOURCE = "Resource";
 
-	private int myIndex(final KElement e)
-	{
-		final KElement parent = e.getParentNode_KElement();
-		int n = 0;
-		final String nodeName = e.getNodeName();
-		final String namespaceURI = e.getNamespaceURI();
-		KElement sib = parent.getFirstChildElement(nodeName, namespaceURI);
-		while (sib != e)
-		{
-			sib = sib.getNextSiblingElement(nodeName, namespaceURI);
-			if (sib == null)
-			{
-				return -1;
-			}
-			n++;
-		}
-		return n;
-	}
-
 	/**
 	 * @param set the set to help on
 	 */
 	public SetHelper(KElement set)
 	{
 		super();
-		this.theSet = set;
+		this.theElement = set;
 	}
-
-	protected KElement theSet;
 
 	/**
 	 * @param map
@@ -136,6 +115,20 @@ public class SetHelper
 				return ph;
 		}
 		return null;
+	}
+
+	/**
+	 * @param index
+	 * @return 
+	 */
+	public PartitionHelper getPartition(int index)
+	{
+		Vector<PartitionHelper> v = getPartitions();
+		if (index < 0)
+			index += v.size();
+		if (index >= v.size())
+			return null;
+		return (index < 0) ? null : v.get(index);
 	}
 
 	/**
@@ -192,8 +185,33 @@ public class SetHelper
 			JDFAttributeMap m = vmap.get(i);
 			vp.add(getCreatePartition(m, addRes));
 		}
-
 		return vp;
+	}
+
+	/**
+	 * @param index
+	 * @param addRes 
+	 * @return 
+	 */
+	public PartitionHelper getCreatePartition(int index, boolean addRes)
+	{
+		Vector<PartitionHelper> v = getPartitions();
+		int size = v.size();
+		if (index < 0)
+			index += size;
+		while (index < 0)
+		{
+			appendPartition(null, addRes);
+			index++;
+		}
+		while (index >= size)
+		{
+			appendPartition(null, addRes);
+			size++;
+		}
+		if (size != v.size())
+			v = getPartitions();
+		return v.get(index);
 	}
 
 	/**
@@ -215,7 +233,7 @@ public class SetHelper
 	 */
 	public PartitionHelper appendPartition(JDFAttributeMap partMap, boolean addRes)
 	{
-		KElement newPart = theSet.appendElement(getPartitionName());
+		KElement newPart = theElement.appendElement(getPartitionName());
 		PartitionHelper partitionHelper = new PartitionHelper(newPart);
 		partitionHelper.cleanUp();
 		if (partMap != null && partMap.size() > 0)
@@ -250,7 +268,7 @@ public class SetHelper
 	 */
 	public Vector<PartitionHelper> getPartitions()
 	{
-		VElement v = theSet.getChildElementVector(getPartitionName(), null);
+		VElement v = theElement.getChildElementVector(getPartitionName(), null);
 
 		Vector<PartitionHelper> v2 = new Vector<PartitionHelper>();
 		if (v != null)
@@ -266,13 +284,13 @@ public class SetHelper
 	 */
 	public void cleanUp()
 	{
-		if (!theSet.hasAttribute("Name"))
+		if (!theElement.hasAttribute("Name"))
 		{
-			theSet.setAttribute("Name", getName());
+			theElement.setAttribute("Name", getName());
 		}
-		if (!theSet.hasAttribute("ID"))
+		if (!theElement.hasAttribute("ID"))
 		{
-			theSet.appendAnchor(null);
+			theElement.appendAnchor(null);
 		}
 		Vector<PartitionHelper> kids = getPartitions();
 		if (kids != null)
@@ -290,7 +308,7 @@ public class SetHelper
 	 */
 	public String getName()
 	{
-		String name = theSet.getAttribute("Name", null, null);
+		String name = theElement.getAttribute("Name", null, null);
 		if (name == null)
 		{
 			Vector<PartitionHelper> v = getPartitions();
@@ -300,7 +318,7 @@ public class SetHelper
 				if (res != null)
 				{
 					name = res.getNodeName();
-					theSet.setAttribute("Name", name);
+					theElement.setAttribute("Name", name);
 					return name;
 				}
 			}
@@ -314,7 +332,7 @@ public class SetHelper
 	 */
 	public String getPartitionName()
 	{
-		String name = StringUtil.leftStr(theSet.getLocalName(), -3);
+		String name = StringUtil.leftStr(theElement.getLocalName(), -3);
 		return name;
 	}
 
@@ -338,7 +356,7 @@ public class SetHelper
 	 */
 	public KElement getSet()
 	{
-		return theSet;
+		return theElement;
 	}
 
 	/**
@@ -346,7 +364,7 @@ public class SetHelper
 	 */
 	public void setUsage(EnumUsage value)
 	{
-		theSet.setAttribute(AttributeName.USAGE, value == null ? null : value.getName());
+		theElement.setAttribute(AttributeName.USAGE, value == null ? null : value.getName());
 	}
 
 	/**
@@ -356,7 +374,7 @@ public class SetHelper
 	@Override
 	public String toString()
 	{
-		return "SetHelper: " + theSet;
+		return "SetHelper: " + theElement;
 	}
 
 }

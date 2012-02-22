@@ -461,7 +461,6 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	 * inner class EnumActivation:<br>
 	 * Enumeration for attribute Activation
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumActivation extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -6866,7 +6865,7 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * gets the existing local NodeInfo if it is a resource or an element
+	 * gets the existing local NodeInfo for a given CombinedProcessIndex
 	 * 
 	 * @param combinedProcessIndex the combinedprocessindex that must be explicitly specified in the link
 	 * @return the existing NodeInfo.
@@ -6892,17 +6891,14 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 	}
 
 	/**
-	 * gets the existing local NodeInfo if it is a resource or an element
+	 * gets the existing local NodeInfo if it is a resource or an element and the NodeInfo is unique for all CombinedProcessIndex values 
 	 * 
-	 * @return the existing NodeInfo.
+	 * @return the existing NodeInfo, null if multiple NodeInfos exist, or the CombinedProcessIndex of the Link does not apply to the entire node
 	 */
 	public JDFNodeInfo getNodeInfo()
 	{
 		return (JDFNodeInfo) getNiCi(ElementName.NODEINFO, false, null);
 	}
-
-	// //////////////////////////////////////////////////////////////////////////
-	// ///////
 
 	/**
 	 * get first NodeInfo element from child list or child list of any ancestor

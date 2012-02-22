@@ -1546,8 +1546,35 @@ public class KElementTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
-	// /////////////////////////////////////////////////////////////////
 	public void testRemoveXPathElement()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement root = d.getRoot();
+		root.setXPathAttribute("a/b[2]/@att", "foo");
+		assertEquals(root.getXPathAttribute("a/b[2]/@att", null), "foo");
+		root.removeXPathElement("a/b[2]");
+		assertNull(root.getXPathElement("a/b[2]"));
+		assertNotNull(root.getXPathElement("a/b[1]"));
+	}
+
+	/**
+	 * 
+	 */
+	public void testRemoveXPathValue()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement root = d.getRoot();
+		root.setXPathValue("a/b[2]/att", "foo");
+		assertEquals(root.getXPathAttribute("a/b[2]/att", null), "foo");
+		root.removeXPathAttribute("a/b[2]/att");
+		assertNotNull(root.getXPathElement("a/b[2]/att"));
+		assertNull(root.getXPathAttribute("a/b[2]/att", null));
+	}
+
+	/**
+	 * 
+	 */
+	public void testRemoveXPathAttribute2()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
@@ -3062,6 +3089,20 @@ public class KElementTest extends JDFTestCaseBase
 			s = StringUtil.replaceString(s, "--", "__");
 			assertEquals(e.getXMLComment(i), s);
 			assertEquals(e2.getXMLComment(i), s);
+		}
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testUniqueID()
+	{
+		String regExp = "_??????_?????????_??????";
+		regExp = StringUtil.simpleRegExptoRegExp(regExp);
+		for (int i = 0; i < 1000; i++)
+		{
+			assertTrue(StringUtil.matches(KElement.uniqueID(0), regExp));
 		}
 	}
 

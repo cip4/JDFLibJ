@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -1415,7 +1415,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		@Override
 		public boolean matches(final KElement toCheck)
 		{
-			return super.matches(toCheck) && (toCheck instanceof JDFPart) && isXResource(toCheck.getParentNode_KElement());
+			boolean matches = super.matches(toCheck);
+			boolean m1 = (toCheck instanceof JDFPart) && isXResource(toCheck.getParentNode_KElement());
+			boolean m2 = "ChildProduct".equals(toCheck.getLocalName());
+			return matches && (m1 || m2);
 		}
 
 	}

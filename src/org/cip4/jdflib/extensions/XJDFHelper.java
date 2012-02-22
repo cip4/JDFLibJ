@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,8 +89,21 @@ import org.cip4.jdflib.util.StringUtil;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class XJDFHelper
+public class XJDFHelper extends BaseXJDFHelper
 {
+	/**
+	 * 
+	 */
+	public static final String PRODUCT = "Product";
+	/**
+	 * 
+	 */
+	public static final String RESOURCE = "Resource";
+	/**
+	 * 
+	 */
+	public static final String PARAMETER = "Parameter";
+
 	/**
 	 * factoy to create a helper from a doc
 	 *  
@@ -117,11 +130,11 @@ public class XJDFHelper
 		}
 		else
 		{
-			theXJDF = xjdf;
+			theElement = xjdf;
 		}
-		if (theXJDF instanceof JDFElement)
+		if (theElement instanceof JDFElement)
 		{
-			((JDFElement) theXJDF).getOwnerDocument_JDFElement().setInitOnCreate(false);
+			((JDFElement) theElement).getOwnerDocument_JDFElement().setInitOnCreate(false);
 		}
 	}
 
@@ -136,8 +149,8 @@ public class XJDFHelper
 		newXJDF();
 		if (jobID == null)
 			jobID = "Job_" + new JDFDate().getFormattedDateTime("MMdd_hhmmss");
-		theXJDF.setAttribute(AttributeName.JOBID, jobID);
-		theXJDF.setAttribute(AttributeName.JOBPARTID, jobPartID);
+		theElement.setAttribute(AttributeName.JOBID, jobID);
+		theElement.setAttribute(AttributeName.JOBPARTID, jobPartID);
 		setParts(parts);
 	}
 
@@ -146,7 +159,7 @@ public class XJDFHelper
 	 */
 	private void setParts(VJDFAttributeMap parts)
 	{
-		SetHelper niHelper = getCreateSet("Parameter", "NodeInfo", EnumUsage.Input);
+		SetHelper niHelper = getCreateSet(PARAMETER, "NodeInfo", EnumUsage.Input);
 		niHelper.getCreatePartitions(parts, true);
 	}
 
@@ -157,8 +170,8 @@ public class XJDFHelper
 	{
 		JDFDoc doc = new JDFDoc(XJDF20.rootName);
 		doc.setInitOnCreate(false);
-		theXJDF = doc.getRoot();
-		JDFAuditPool ap = (JDFAuditPool) theXJDF.getCreateElement(ElementName.AUDITPOOL);
+		theElement = doc.getRoot();
+		JDFAuditPool ap = (JDFAuditPool) theElement.getCreateElement(ElementName.AUDITPOOL);
 		ap.addAudit(EnumAuditType.Created, null).init();
 	}
 
@@ -168,7 +181,7 @@ public class XJDFHelper
 	public Vector<SetHelper> getSets()
 	{
 		Vector<SetHelper> v = new Vector<SetHelper>();
-		KElement e = theXJDF.getFirstChildElement();
+		KElement e = theElement.getFirstChildElement();
 		while (e != null)
 		{
 			if (e.getLocalName().endsWith("Set"))
@@ -181,11 +194,11 @@ public class XJDFHelper
 
 	/**
 	 * 
-	 * @return the xjdf root element
+	 * @return the 
 	 */
-	public KElement getRoot()
+	public String getJobID()
 	{
-		return theXJDF;
+		return getXPathValue("@JobID");
 	}
 
 	/**
@@ -218,12 +231,12 @@ public class XJDFHelper
 	{
 		VString v = getRootProducts();
 		Vector<ProductHelper> vp = new Vector<ProductHelper>();
-		KElement productList = theXJDF.getElement("ProductList");
+		KElement productList = theElement.getElement("ProductList");
 		if (productList == null)
 			return null;
 		if (v == null)
 		{
-			KElement product = productList.getElement("Product");
+			KElement product = productList.getElement(PRODUCT);
 			if (product != null)
 			{
 				vp.add(new ProductHelper(product));
@@ -233,7 +246,7 @@ public class XJDFHelper
 		{
 			for (String id : v)
 			{
-				KElement product = productList.getChildWithAttribute("Product", AttributeName.ID, null, id, 0, true);
+				KElement product = productList.getChildWithAttribute(PRODUCT, AttributeName.ID, null, id, 0, true);
 				if (product != null)
 				{
 					vp.add(new ProductHelper(product));
@@ -248,9 +261,9 @@ public class XJDFHelper
 	 */
 	private VString getRootProducts()
 	{
-		if (theXJDF == null)
+		if (theElement == null)
 			return null;
-		KElement productList = theXJDF.getElement("ProductList");
+		KElement productList = theElement.getElement("ProductList");
 		if (productList == null)
 			return null;
 		VString v = StringUtil.tokenize(productList.getAttribute("RootProducts", null, null), null, false);
@@ -259,12 +272,36 @@ public class XJDFHelper
 
 	/**
 	 * @param name 
+	 * @param iSet 
+	 * @param iPart 
+	 * @return PartitionHelper for the requested partition, null if it ain't there
+	 */
+	public PartitionHelper getPartition(String name, int iSet, int iPart)
+	{
+		SetHelper sh = getSet(name, iSet);
+		return sh == null ? null : sh.getPartition(iPart);
+	}
+
+	/**
+	 * @param name 
+	 * @param iSet 
+	 * @param iPart 
+	 * @return resource for the requested partition, null if it ain't there
+	 */
+	public KElement getResource(String name, int iSet, int iPart)
+	{
+		PartitionHelper ph = getPartition(name, iSet, iPart);
+		return ph == null ? null : ph.getResource();
+	}
+
+	/**
+	 * @param name 
 	 * @param iSkip 
-	 * @return the vector of parametersets and resourcesets
+	 * @return the SetHelper for the vector of parametersets and resourcesets
 	 */
 	public SetHelper getSet(String name, int iSkip)
 	{
-		KElement e = theXJDF.getFirstChildElement();
+		KElement e = theElement.getFirstChildElement();
 		int n = 0;
 		KElement e2 = null;
 		while (e != null)
@@ -290,7 +327,7 @@ public class XJDFHelper
 	 */
 	public SetHelper appendSet(String family, String name, EnumUsage usage)
 	{
-		KElement newSet = theXJDF.appendElement(family + "Set");
+		KElement newSet = theElement.appendElement(family + "Set");
 		newSet.setAttribute("Name", name);
 		if (name == null)
 			name = "Set";
@@ -336,7 +373,7 @@ public class XJDFHelper
 	 */
 	public SetHelper appendParameter(String name, EnumUsage usage)
 	{
-		return appendSet("Parameter", name, usage);
+		return appendSet(PARAMETER, name, usage);
 	}
 
 	/**
@@ -344,7 +381,7 @@ public class XJDFHelper
 	 */
 	public ProductHelper appendProduct()
 	{
-		KElement product = theXJDF.getCreateElement("ProductList").appendElement("Product");
+		KElement product = theElement.getCreateElement("ProductList").appendElement(PRODUCT);
 		return new ProductHelper(product);
 	}
 
@@ -355,10 +392,8 @@ public class XJDFHelper
 	 */
 	public SetHelper appendResource(String name, EnumUsage usage)
 	{
-		return appendSet("Resource", name, usage);
+		return appendSet(RESOURCE, name, usage);
 	}
-
-	protected KElement theXJDF;
 
 	/**
 	 * @see java.lang.Object#toString()
@@ -367,7 +402,7 @@ public class XJDFHelper
 	@Override
 	public String toString()
 	{
-		return "XJDFHelper: " + theXJDF;
+		return "XJDFHelper: " + theElement;
 	}
 
 	/**

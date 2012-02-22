@@ -2202,22 +2202,43 @@ public class JDFNodeTest extends JDFTestCaseBase
 		final JDFNode n = d.getJDFRoot();
 		n.setType(JDFNode.EnumType.ProcessGroup);
 		n.setTypes(new VString("a b c", null));
-		final JDFNodeInfo n2 = n.appendNodeInfo();
-		final JDFResourceLink rl = n.getLink(n2, null);
+		final JDFNodeInfo ni2 = n.appendNodeInfo();
+		final JDFResourceLink rl = n.getLink(ni2, null);
 		rl.setCombinedProcessIndex(new JDFIntegerList("1 2"));
 		final JDFAttributeMap map = new JDFAttributeMap("SheetName", "S1");
 		n.setPartStatus(map, EnumNodeStatus.FailedTestRun, null);
 		assertNotNull(n.getNodeInfo());
-		assertNotSame(n2, n.getNodeInfo());
-		assertEquals(n2, n.getNodeInfo(1));
-		assertEquals(n2, n.getNodeInfo(2));
+		assertNotSame(ni2, n.getNodeInfo());
+		assertEquals(ni2, n.getNodeInfo(1));
+		assertEquals(ni2, n.getNodeInfo(2));
 		assertNull(n.getNodeInfo(0));
 		assertNull(n.getNodeInfo(3));
 
 		assertEquals(n.getPartStatus(map, 0), EnumNodeStatus.FailedTestRun);
 		n.removeAttribute(AttributeName.TYPES);
 		assertNotNull("invalid types attribute, but still retrieve ni with no cpi", n.getNodeInfo());
-		assertNotSame("invalid types attribute, but...", n.getNodeInfo(), n2);
+		assertNotSame("invalid types attribute, but...", n.getNodeInfo(), ni2);
+	}
+
+	/**
+	* @throws DataFormatException
+	*/
+	public void testGetNodeInfoCombinedProc() throws DataFormatException
+	{
+		final JDFDoc d = new JDFDoc("JDF");
+		final JDFNode n = d.getJDFRoot();
+		n.setType(JDFNode.EnumType.ProcessGroup);
+		n.setTypes(new VString("a b", null));
+		final JDFNodeInfo ni1 = n.appendNodeInfo();
+		final JDFResourceLink rl1 = n.getLink(ni1, null);
+		rl1.setCombinedProcessIndex(new JDFIntegerList("0"));
+		final JDFNodeInfo ni2 = n.appendNodeInfo();
+		final JDFResourceLink rl2 = n.getLink(ni2, null);
+		rl2.setCombinedProcessIndex(new JDFIntegerList("1"));
+		assertNull(n.getNodeInfo());
+		assertEquals(ni2, n.getNodeInfo(1));
+		assertEquals(ni1, n.getNodeInfo(0));
+		assertNull(n.getNodeInfo(3));
 	}
 
 	// ////////////////////////////////////////////////////////////

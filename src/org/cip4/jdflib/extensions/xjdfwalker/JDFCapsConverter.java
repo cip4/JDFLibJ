@@ -83,7 +83,7 @@ import org.cip4.jdflib.jmf.JDFJMF;
 public class JDFCapsConverter
 {
 	/**
-	 * @param template the jdfdoc to fill this into
+	 *
 	 * 
 	 */
 	public JDFCapsConverter()
@@ -92,7 +92,8 @@ public class JDFCapsConverter
 	}
 
 	/**
-	 * @param xjdf
+	 *  @param devcapRoot 
+	 * @param i the index
 	 * @return the converted jdf
 	 */
 	public KElement convert(JDFElement devcapRoot, int i)

@@ -1303,6 +1303,25 @@ public class JDFResource extends JDFElement
 
 		private boolean hasIdentical;
 		private boolean strictPartVersion;
+		private boolean followIdentical;
+
+		/**
+		 * Getter for followIdentical attribute.
+		 * @return the followIdentical
+		 */
+		public boolean isFollowIdentical()
+		{
+			return followIdentical;
+		}
+
+		/**
+		 * Setter for followIdentical attribute.
+		 * @param followIdentical the followIdentical to set
+		 */
+		public void setFollowIdentical(boolean followIdentical)
+		{
+			this.followIdentical = followIdentical;
+		}
 
 		/**
 		 * 
@@ -1310,8 +1329,9 @@ public class JDFResource extends JDFElement
 		public PartitionGetter()
 		{
 			super();
-			hasIdentical = true;
+			hasIdentical = false;
 			strictPartVersion = false;
+			followIdentical = true;
 		}
 
 		/**
@@ -1353,7 +1373,8 @@ public class JDFResource extends JDFElement
 			}
 
 			VElement vAllLeaves = getLeaves(true);
-			findIdentical(vAllLeaves);
+			if (followIdentical)
+				findIdentical(vAllLeaves);
 			if (vm == null)
 			{
 				if (hasIdentical)
@@ -1841,8 +1862,7 @@ public class JDFResource extends JDFElement
 
 				if (!badChild)
 				{
-					PartitionGetter pg = resourceElement.new PartitionGetter();
-					pg.setStrictPartVersion(strictPartVersion);
+					PartitionGetter pg = newPartitionGetterForLeaf(resourceElement);
 					final VElement dpv = pg.getDeepPartVector(m, partUsage, hasMatchingAttribute ? matchingDepth + 1 : matchingDepth, partIDKeys);
 
 					if (dpv.size() > 0)
@@ -1971,6 +1991,20 @@ public class JDFResource extends JDFElement
 			}
 
 			return vReturn;
+		}
+
+		/**
+		 * 
+		 *  
+		 * @param resourceElement
+		 * @return
+		 */
+		private PartitionGetter newPartitionGetterForLeaf(JDFResource resourceElement)
+		{
+			PartitionGetter pg = resourceElement.new PartitionGetter();
+			pg.setStrictPartVersion(strictPartVersion);
+			pg.setFollowIdentical(followIdentical);
+			return pg;
 		}
 
 		// //////////////////////////////////////////////////////////////////////////
@@ -2262,8 +2296,7 @@ public class JDFResource extends JDFElement
 					{
 						if (!creating)
 						{
-							final PartitionGetter pg = leaf.new PartitionGetter();
-							pg.setStrictPartVersion(strictPartVersion);
+							final PartitionGetter pg = newPartitionGetterForLeaf(leaf);
 							final JDFResource nextLeaf = pg.getPartition(new JDFAttributeMap(key, value), EnumPartUsage.Explicit);
 							if (nextLeaf == null)
 							{
@@ -2374,12 +2407,14 @@ public class JDFResource extends JDFElement
 					break;
 				}
 			}
-			final JDFIdentical id = ret == null ? null : ret.getIdentical();
-			if (id != null)
+			if (followIdentical)
 			{
-				ret = id.getTarget();
+				final JDFIdentical id = ret == null ? null : ret.getIdentical();
+				if (id != null)
+				{
+					ret = id.getTarget();
+				}
 			}
-
 			return ret;
 		}
 

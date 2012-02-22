@@ -80,6 +80,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * 
@@ -95,6 +97,7 @@ public class DumpDir
 	private File baseDir = null;
 	private static HashMap<File, MyInteger> listMap = new HashMap<File, MyInteger>();
 	private final int maxKeep = 500;
+	final protected Log log;
 	/**
 	 * if true, no printouts
 	 */
@@ -119,6 +122,7 @@ public class DumpDir
 	 */
 	public DumpDir(final File dir)
 	{
+		log = LogFactory.getLog(getClass());
 		baseDir = dir;
 		baseDir.mkdirs();
 		synchronized (listMap)
@@ -190,7 +194,7 @@ public class DumpDir
 		final int inc = increment();
 		if (!quiet && (inc % 200 == 0))
 		{
-			System.out.println("jmf dump service " + baseDir + " - " + inc + " " + new JDFDate().getDateTime());
+			log.info("jmf dump service " + baseDir + " - " + inc + " " + new JDFDate().getDateTime());
 		}
 
 		final String s = ext == null ? StringUtil.sprintf("m%08i.tmp", "" + inc) : StringUtil.sprintf("m%08i.%s.tmp", "" + inc + "," + ext);
@@ -248,7 +252,7 @@ public class DumpDir
 			}
 			catch (final IOException x)
 			{
-				// nop
+				log.error("error dumping dump stream", x);
 			}
 		}
 
@@ -306,21 +310,31 @@ public class DumpDir
 					for (int i = 0; i < names.length - maxKeep; i++)
 					{
 						File f = names[i];
-						if (f != null)
-						{
-							f.delete();
-							String name = f.getName();
-							name = UrlUtil.newExtension(name, "*");
-							final File[] dirnames = FileUtil.listFilesWithExpression(baseDir, name);
-							if (dirnames != null)
-							{
-								for (File dir : dirnames)
-								{
-									FileUtil.deleteAll(dir);
-								}
-							}
-						}
+						cleanupSingle(f);
 					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * clean up single file including any unpacked directories
+	 * @param f
+	 */
+	private void cleanupSingle(File f)
+	{
+		if (f != null)
+		{
+			f.delete();
+			String name = f.getName();
+			name = UrlUtil.newExtension(name, "*");
+			final File[] dirnames = FileUtil.listFilesWithExpression(baseDir, name);
+			if (dirnames != null)
+			{
+				for (File dir : dirnames)
+				{
+					FileUtil.deleteAll(dir);
 				}
 			}
 		}

@@ -1801,17 +1801,6 @@ public class XJDFSchemaCreator extends BaseElementWalker
 	}
 
 	/**
-	 * @param schemaRoot
-	 * @param name
-	 */
-	private void appendRootElement(KElement schemaRoot, String name)
-	{
-		KElement e = schemaRoot.appendElement("xs:element");
-		e.setAttribute("type", name);
-		e.setAttribute("name", name);
-	}
-
-	/**
 	 * @return 
 	 */
 	private KElement createTree()

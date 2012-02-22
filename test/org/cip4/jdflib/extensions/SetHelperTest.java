@@ -92,6 +92,19 @@ public class SetHelperTest extends TestCase
 	/**
 	 * 
 	 */
+	public void testGetPartition()
+	{
+		SetHelper sh = new SetHelper(root.getElement("ResourceSet"));
+		assertEquals(sh.getName(), "Media");
+		assertNull(sh.getPartition(1));
+		assertNotNull(sh.getCreatePartition(1, true));
+		assertNotNull(sh.getPartition(-1));
+		assertNull(sh.getPartition(-3));
+	}
+
+	/**
+	 * 
+	 */
 	public void testCleanup()
 	{
 		KElement element = root.getElement("ResourceSet");

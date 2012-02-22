@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -89,6 +89,19 @@ public class XJDFHelperTest extends TestCase
 	{
 		KElement rlSet = theHelper.appendSet("Parameter", "RunList", null).getSet();
 		assertEquals(rlSet, theHelper.getSet("RunList", 0).getSet());
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public void testGetPartition()
+	{
+		KElement rlSet = theHelper.getCreateSet("Parameter", "RunList", null).getCreatePartition(0, true).getResource();
+		assertEquals(rlSet, theHelper.getResource("RunList", 0, 0));
+		assertNull(theHelper.getResource("RunList", 0, 1));
+		assertNull(theHelper.getResource("RunList", 1, 1));
+		assertNull(theHelper.getResource("RunList", 1, 0));
 	}
 
 	/**

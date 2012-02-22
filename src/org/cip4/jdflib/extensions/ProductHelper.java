@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -78,7 +78,7 @@ import org.cip4.jdflib.util.StringUtil;
 /**
   * @author Rainer Prosi, Heidelberger Druckmaschinen *
  */
-public class ProductHelper
+public class ProductHelper extends BaseXJDFHelper
 {
 	/**
 	 * 
@@ -88,15 +88,14 @@ public class ProductHelper
 	 * root products attribute name
 	 */
 	public final static String rootProducts = "RootProducts";
-	protected KElement theProduct;
 
 	/**
 	 * @param product
 	 */
 	public ProductHelper(KElement product)
 	{
-		theProduct = product;
-		theProduct.appendAnchor(null);
+		theElement = product;
+		theElement.appendAnchor(null);
 	}
 
 	/**
@@ -104,8 +103,8 @@ public class ProductHelper
 	 */
 	public void setRoot()
 	{
-		KElement list = theProduct.getParentNode_KElement();
-		list.appendAttribute(rootProducts, theProduct.getID(), null, " ", true);
+		KElement list = theElement.getParentNode_KElement();
+		list.appendAttribute(rootProducts, theElement.getID(), null, " ", true);
 	}
 
 	/**
@@ -117,7 +116,7 @@ public class ProductHelper
 		IntentHelper ih = getIntent(name);
 		if (ih == null)
 		{
-			KElement intent = theProduct.appendElement("Intent");
+			KElement intent = theElement.appendElement("Intent");
 			ih = new IntentHelper(intent);
 			intent.appendElement(name);
 			intent.setAttribute("Name", name);
@@ -131,7 +130,7 @@ public class ProductHelper
 	 */
 	public IntentHelper getIntent(String name)
 	{
-		KElement intent = theProduct.getChildWithAttribute("Intent", "Name", null, name, 0, true);
+		KElement intent = theElement.getChildWithAttribute("Intent", "Name", null, name, 0, true);
 		return intent == null ? null : new IntentHelper(intent);
 	}
 
@@ -142,7 +141,7 @@ public class ProductHelper
 	@Override
 	public String toString()
 	{
-		return "ProductHelper: " + theProduct;
+		return "ProductHelper: " + theElement;
 	}
 
 	/**
@@ -150,7 +149,7 @@ public class ProductHelper
 	 */
 	public int getAmount()
 	{
-		return theProduct.getIntAttribute(AttributeName.AMOUNT, null, -1);
+		return theElement.getIntAttribute(AttributeName.AMOUNT, null, -1);
 	}
 
 	/**
@@ -158,7 +157,7 @@ public class ProductHelper
 	 */
 	public void setAmount(int amount)
 	{
-		theProduct.setAttribute(AttributeName.AMOUNT, amount, null);
+		theElement.setAttribute(AttributeName.AMOUNT, amount, null);
 	}
 
 	/**
@@ -167,11 +166,11 @@ public class ProductHelper
 	 */
 	public void setChild(ProductHelper phCover, int amount)
 	{
-		KElement e = theProduct.getChildWithAttribute("ChildProduct", "Childref", null, phCover.theProduct.getID(), 0, true);
+		KElement e = theElement.getChildWithAttribute("ChildProduct", "Childref", null, phCover.theElement.getID(), 0, true);
 		if (e == null)
 		{
-			e = theProduct.appendElement("ChildProduct");
-			e.copyAttribute("ChildRef", phCover.theProduct, "ID", null, null);
+			e = theElement.appendElement("ChildProduct");
+			e.copyAttribute("ChildRef", phCover.theElement, "ID", null, null);
 		}
 		if (amount > 0)
 			e.setAttribute("Amount", amount, null);
@@ -184,7 +183,7 @@ public class ProductHelper
 	 */
 	public ProductHelper getChild(int nChild)
 	{
-		KElement e = theProduct.getElement("ChildProduct", null, nChild);
+		KElement e = theElement.getElement("ChildProduct", null, nChild);
 		if (e == null)
 		{
 			return null;
@@ -194,14 +193,15 @@ public class ProductHelper
 		{
 			return null;
 		}
-		KElement list = theProduct.getParentNode_KElement();
+		KElement list = theElement.getParentNode_KElement();
 		KElement kid = list.getChildWithAttribute("Product", "ID", null, id, 0, true);
 		return kid == null ? null : new ProductHelper(kid);
 	}
 
 	/**
 	 * get the nth child of this
-	 * @param nChild the index of the child
+	 * @param productType the productType attribute
+	 * @param n the index of the child
 	 * @return 
 	 */
 	public ProductHelper getChild(String productType, int n)
@@ -229,13 +229,13 @@ public class ProductHelper
 	 */
 	public Vector<ProductHelper> getChildren()
 	{
-		VElement v = theProduct.getChildElementVector("ChildProduct", null);
+		VElement v = theElement.getChildElementVector("ChildProduct", null);
 		if (v == null)
 		{
 			return null;
 		}
 		Vector<ProductHelper> vRet = new Vector<ProductHelper>();
-		KElement list = theProduct.getParentNode_KElement();
+		KElement list = theElement.getParentNode_KElement();
 		for (KElement e : v)
 		{
 			String id = e.getAttribute("ChildRef", null, null);
@@ -256,7 +256,7 @@ public class ProductHelper
 	 */
 	public KElement getProduct()
 	{
-		return theProduct;
+		return theElement;
 	}
 
 	/**
@@ -264,13 +264,13 @@ public class ProductHelper
 	 */
 	public boolean isRootProduct()
 	{
-		String id = theProduct.getID();
-		KElement list = theProduct.getParentNode_KElement();
+		String id = theElement.getID();
+		KElement list = theElement.getParentNode_KElement();
 		if (list == null)
 			return false; // snafu
 		String ids = list.getAttribute(rootProducts, null, null);
 		if (ids == null)
-			return list.getFirstChildElement("Product", null) == theProduct;
+			return list.getFirstChildElement("Product", null) == theElement;
 		else
 			return StringUtil.hasToken(ids, id, " ", 0);
 	}
