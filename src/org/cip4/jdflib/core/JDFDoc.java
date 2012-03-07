@@ -231,6 +231,8 @@ public class JDFDoc extends XMLDoc
 	private KElement getJXFRoot(final String rootName)
 	{
 		KElement root = getRoot();
+		if (root == null)
+			return null;
 
 		if (!root.getLocalName().equals(rootName))
 		{

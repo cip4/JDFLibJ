@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -128,6 +128,57 @@ public class JDFDuration implements Comparable<JDFDuration>
 	// 68hours are allowed
 
 	private static final String REGEX_DURATION = "([-])?[P](((\\d)+)[Y])?((\\d)+[M])?((\\d)+[D])?" + "([T]((\\d)+[H])?((\\d)+[M])?((\\d)+([.](\\d)+)?[S])?)?";
+
+	/**
+	 * does some heuristics to create a duration if duration is purely numeric, we guess days
+	 * @param duration 
+	 * @return 
+	 */
+	public static JDFDuration createDuration(String duration)
+	{
+		if (duration == null)
+			return null;
+		// all characters in a valid duration are upper
+		duration = duration.toUpperCase();
+		duration = StringUtil.replaceString(duration, " ", null);
+		if (StringUtil.matches(duration, REGEX_DURATION))
+		{
+			try
+			{
+				return new JDFDuration(duration);
+			}
+			catch (DataFormatException e)
+			{
+				// NOP
+			}
+		}
+		if (!duration.startsWith("P"))
+		{
+			if (StringUtil.isNumber(duration))
+			{
+				//assume days
+				double d = StringUtil.parseDouble(duration, 0);
+				return new JDFDuration(d * 24 * 60 * 60);
+			}
+			else
+			{
+				return createDuration("P" + duration);
+			}
+		}
+		if (duration.length() < 3)
+			return null;
+		int posD = duration.indexOf("D");
+		int posT = duration.indexOf("T");
+		if (posD > 0 && posD < duration.length() - 1 && posT < 0)
+		{
+			return createDuration(StringUtil.replaceString(duration, "D", "DT"));
+		}
+		if (posD < 0 && posT < 0)
+		{
+			return createDuration(StringUtil.replaceString(duration, "P", "PT"));
+		}
+		return null;
+	}
 
 	/**
 	 * Allocates a <code>JDFDuration</code> object and initializes it with 0

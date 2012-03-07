@@ -90,6 +90,7 @@ import org.cip4.jdflib.core.JDFPartAmountTest;
 import org.cip4.jdflib.core.JDFRefElementTest;
 import org.cip4.jdflib.core.JDFResourceLinkTest;
 import org.cip4.jdflib.core.JDFSchemaTest;
+import org.cip4.jdflib.core.JDFSeparationListTest;
 import org.cip4.jdflib.core.JDFSourceResourceTest;
 import org.cip4.jdflib.core.KElementTest;
 import org.cip4.jdflib.core.VElementTest;
@@ -325,6 +326,7 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		suite.addTestSuite(JDFResourceLinkTest.class);
 		suite.addTestSuite(JDFSchemaTest.class);
 		suite.addTestSuite(JDFRefElementTest.class);
+		suite.addTestSuite(JDFSeparationListTest.class);
 		suite.addTestSuite(JDFSourceResourceTest.class);
 		suite.addTestSuite(KElementTest.class);
 		suite.addTestSuite(VElementTest.class);

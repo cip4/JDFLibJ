@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -82,6 +82,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.cip4.jdflib.JDFTestCaseBase;
+import org.cip4.jdflib.util.ByteArrayIOStream.ByteArrayIOInputStream;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
@@ -216,7 +217,54 @@ public class ByteArrayIOStreamTest extends JDFTestCaseBase
 			n++;
 		}
 		assertEquals(n, 50000);
+	}
 
+	/**
+	 * @throws Exception
+	 */
+	public void testInReadMulti2() throws Exception
+	{
+		final ByteArrayIOStream ios = new ByteArrayIOStream();
+		for (int i = 0; i < 50000; i++)
+		{
+			ios.write(i);
+		}
+		final ByteArrayIOInputStream is = ios.getInputStream();
+		final InputStream is2 = is.getNewStream();
+		int n = 0;
+		int i;
+		while ((i = is.read()) >= 0)
+		{
+			final int jj = is2.read();
+			assertEquals("" + n, i, n % 256);
+			assertEquals(jj, i);
+			n++;
+		}
+		assertEquals(n, 50000);
+	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void testGetBufferedInputStream() throws Exception
+	{
+		final ByteArrayIOStream ios = new ByteArrayIOStream();
+		for (int i = 0; i < 50000; i++)
+		{
+			ios.write(i);
+		}
+		final ByteArrayIOInputStream is = ios.getInputStream();
+		final InputStream is2 = ByteArrayIOStream.getBufferedInputStream(is);
+		int n = 0;
+		int i;
+		while ((i = is.read()) >= 0)
+		{
+			final int jj = is2.read();
+			assertEquals("" + n, i, n % 256);
+			assertEquals(jj, i);
+			n++;
+		}
+		assertEquals(n, 50000);
 	}
 
 }

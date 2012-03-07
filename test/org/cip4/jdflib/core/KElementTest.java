@@ -1737,6 +1737,7 @@ public class KElementTest extends JDFTestCaseBase
 		assertEquals("", root.getElement("foo").getElement("bar").getNextSiblingElement("bar", null).numChildElements("fnarf", null), 5);
 		assertNotNull("create by attribute value now implemented", root.getCreateXPathElement("./foo/bar[@blub=\"b1\"]/fnarf[@a=\"b\"]"));
 		assertEquals("getCreate actually sets the attribute", "blahblah", root.getCreateXPathElement("./foo/bar[@blub=\"blahblah\"]").getAttribute("blub"));
+		//TODO		assertEquals("getCreate actually sets the attribute", "blahblah", root.getCreateXPathElement("./foo/bar[gaga/@blub=\"blahblah\"]").getXPathAttribute("gaga/blub", null));
 	}
 
 	/**
@@ -1810,6 +1811,22 @@ public class KElementTest extends JDFTestCaseBase
 			// nop
 		}
 
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetXPathAttributeWithPath()
+	{
+		JDFAudit.setStaticAgentName("foo Agent");
+		KElement root = new XMLDoc("a", null).getRoot();
+		root.getCreateXPathElement("b[1]/c");
+		root.getCreateXPathElement("b[5]/c");
+		KElement c = root.getCreateXPathElement("b[3]/c");
+		root.setXPathAttribute("b[3]/part/@foo", "bar");
+		assertEquals(root.getXPathElement("b[part/@foo=\"bar\"]/c"), c);
+		assertEquals(root.getXPathElement("b[./part/@foo=\"bar\"]"), c.getParentNode_KElement());
+		assertEquals(root.getXPathElement("b[part/@foo=\"bar\"]"), c.getParentNode_KElement());
 	}
 
 	/**
@@ -3172,6 +3189,22 @@ public class KElementTest extends JDFTestCaseBase
 		final XMLDoc d = new XMLDoc("doc", null);
 		final KElement root = d.getRoot();
 		final String s = root.toXML();
+		final JDFParser p = new JDFParser();
+		assertNotNull(p.parseString(s));
+	}
+
+	/**
+	 * 
+	 */
+	public void testToXMLParseNS()
+	{
+		final XMLDoc d = new XMLDoc("doc", null);
+		final KElement root = d.getRoot();
+		root.addNameSpace("foo1", "www.foo1.com");
+		KElement ns = root.appendElement("foo1:bar");
+		root.setXSIType("typ");
+		ns.setAttribute(JDFCoreConstants.XSITYPE, "foobar");
+		final String s = ns.toXML();
 		final JDFParser p = new JDFParser();
 		assertNotNull(p.parseString(s));
 	}

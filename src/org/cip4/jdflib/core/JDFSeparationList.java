@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -150,12 +150,11 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	{
 		VString vName = new VString();
 		VElement v = getChildElementVector(ElementName.SEPARATIONSPEC, null, null, false, 0, false);
-		int nSep = v.size();
-		for (int i = 0; i < nSep; i++)
+		for (KElement e : v)
 		{
-			JDFSeparationSpec sep = (JDFSeparationSpec) v.elementAt(i);
+			JDFSeparationSpec sep = (JDFSeparationSpec) e;
 			String sepName = sep.getName();
-			vName.appendUnique(sepName);
+			vName.add(sepName);
 		}
 		return vName;
 	}
@@ -226,4 +225,18 @@ public class JDFSeparationList extends JDFAutoSeparationList
 		return ss.getName();
 	}
 
+	/**
+	 * 
+	 * ensure that all separations are unique
+	 * @return the unified vector of separation names
+	 */
+	public VString unify()
+	{
+		VString v = getSeparations();
+		int l = v.size();
+		v.unify();
+		if (v.size() != l)
+			setSeparations(v);
+		return v;
+	}
 }

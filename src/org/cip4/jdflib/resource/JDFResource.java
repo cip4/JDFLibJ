@@ -722,7 +722,6 @@ public class JDFResource extends JDFElement
 	/**
 	 * Enumeration for attribute Status
 	 */
-	@SuppressWarnings("unchecked")
 	public static final class EnumLotControl extends ValuedEnum
 	{
 		private static final long serialVersionUID = 1L;
@@ -1591,7 +1590,7 @@ public class JDFResource extends JDFElement
 			VString partIDKeys = getPartIDKeys();
 			for (int parent = 0; true; parent++)
 			{
-				Set<JDFAttributeMap> allMaps = ContainerUtil.toHashSet(vm.getVector());
+				Set<JDFAttributeMap> allMaps = ContainerUtil.toHashSet(vm);
 				VElement leaves = getLeaves(false);
 				boolean canFindExplicit = bImplicit; // if implicit, we can always find
 				if (parent > 0)

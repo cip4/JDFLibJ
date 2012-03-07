@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -105,7 +105,19 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 {
 	private static final long serialVersionUID = 1L;
 	private long lTimeInMillis = 0;
-	private int m_TimeZoneOffsetInMillis = 0; // in miliseconds from GMT-time
+	private int m_TimeZoneOffsetInMillis = 0; // in milliseconds from GMT-time
+	static int defaultHour = 12;
+
+	/**
+	 * Setter for defaultHour attribute.
+	 * @param defaultHour the defaultHour to set
+	 */
+	public static void setDefaultHour(int defaultHour)
+	{
+		if (defaultHour >= 0 && defaultHour <= 23)
+			JDFDate.defaultHour = defaultHour;
+	}
+
 	private static FastCalendar fastCalendar = new FastCalendar();
 	/**
 	 * 
@@ -487,7 +499,7 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		}
 
 		/**
-		 * TODO Please insert comment!
+		 *  
 		 * @throws DataFormatException 
 		 */
 		private void cleanTime() throws DataFormatException
@@ -577,9 +589,20 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 					strDateTime += "-01-01";
 				if (strDateTime.length() == 7)
 					strDateTime += "-01";
-				// nothing said and we don't know whether earliest or latest - take noon as best guess
-				strDateTime += "T12:00:00" + getTimeZoneISO();
+				// nothing said and we don't know whether earliest or latest - take default as best guess
+				strDateTime += getDefaultTime() + getTimeZoneISO();
 			}
+			else if (strDateTime.length() < 16)
+			{
+				String buffer = getDefaultTime() + getTimeZoneISO();
+				buffer = buffer.substring(16 - strDateTime.length());
+				strDateTime += buffer;
+			}
+		}
+
+		private String getDefaultTime()
+		{
+			return "T" + new NumberFormatter().formatInt(defaultHour, 2) + ":00:00";
 		}
 
 		private void handleLongValue()
@@ -704,7 +727,10 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public String getTimeZoneISO()
 	{
 		final String timePattern = "ZZ";
-		return getDateFormat(timePattern).format(lTimeInMillis);
+		long t = lTimeInMillis;
+		if (t < 5000)
+			t = System.currentTimeMillis();
+		return getDateFormat(timePattern).format(t);
 	}
 
 	/**

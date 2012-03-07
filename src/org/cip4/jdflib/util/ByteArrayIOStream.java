@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -97,7 +97,54 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ByteArrayIOStream extends ByteArrayOutputStream
 {
+	/**
+	 * 
+	 * get a completely buffered and resizable input stream
+	 * @param is
+	 * @return
+	 */
+	public static ByteArrayIOInputStream getBufferedInputStream(InputStream is)
+	{
+		if (is == null)
+			return null;
+		if (is instanceof ByteArrayIOInputStream)
+			return ((ByteArrayIOInputStream) is).getNewStream();
+		return new ByteArrayIOStream(is).getInputStream();
+	}
+
 	private final Log log;
+
+	/**
+	 * 
+	 *bytearrayinputstream that allows duplication without copying
+	 * @author rainer prosi
+	 * @date Feb 29, 2012
+	 */
+	public static class ByteArrayIOInputStream extends ByteArrayInputStream
+	{
+		private final ByteArrayIOStream parent;
+
+		/**
+		 * @param buf
+		 * @param parent
+		 *  
+		 */
+		ByteArrayIOInputStream(byte[] buf, ByteArrayIOStream parent)
+		{
+			super(buf, 0, parent.size());
+			this.parent = parent;
+		}
+
+		/**
+		 * 
+		 * get a new input stream that starts fresh at 0 
+		 * @return
+		 */
+		public ByteArrayIOInputStream getNewStream()
+		{
+			return new ByteArrayIOInputStream(buf, parent);
+		}
+	}
 
 	/**
 	 * creates an empty input output stream class
@@ -190,9 +237,9 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	 * 
 	 * @return an input stream
 	 */
-	public ByteArrayInputStream getInputStream()
+	public ByteArrayIOInputStream getInputStream()
 	{
-		final ByteArrayInputStream is = new ByteArrayInputStream(buf, 0, size());
+		final ByteArrayIOInputStream is = new ByteArrayIOInputStream(buf, this);
 		return is;
 	}
 

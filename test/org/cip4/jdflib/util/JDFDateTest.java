@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -80,15 +80,17 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
-import junit.framework.TestCase;
+import org.cip4.jdflib.JDFTestCaseBase;
 
 /**
  * @author Dr. Rainer Prosi, Heidelberger Druckmaschinen AG
  * 
  * before June 10, 2009
  */
-public class JDFDateTest extends TestCase
+public class JDFDateTest extends JDFTestCaseBase
 {
+	int defaultTime;
+
 	/**
 	 * @throws DataFormatException
 	 * 
@@ -178,6 +180,26 @@ public class JDFDateTest extends TestCase
 	 * Method testdateOnly
 	 * @throws Exception
 	 */
+	public void testdateOnlyDefault() throws Exception
+	{
+		JDFDate date = new JDFDate();
+		date = new JDFDate("2006-11-26");
+		assertTrue(date.getDateTimeISO().startsWith("2006-11-26T12"));
+		JDFDate.setDefaultHour(23);
+		date = new JDFDate("2006-11-26");
+		assertTrue(date.getDateTimeISO().startsWith("2006-11-26T23"));
+		JDFDate.setDefaultHour(0);
+		date = new JDFDate("2006-11-26");
+		assertTrue(date.getDateTimeISO().startsWith("2006-11-26T00"));
+		JDFDate.setDefaultHour(7);
+		date = new JDFDate("2006-11-26");
+		assertTrue(date.getDateTimeISO().startsWith("2006-11-26T07"));
+	}
+
+	/**
+	 * Method testdateOnly
+	 * @throws Exception
+	 */
 	public void testMissing0() throws Exception
 	{
 		JDFDate date = new JDFDate();
@@ -185,6 +207,19 @@ public class JDFDateTest extends TestCase
 		date = new JDFDate("2006-7-6");
 		strDate = date.getDateTimeISO();
 		assertTrue(strDate.startsWith("2006-07-06T"));
+	}
+
+	/**
+	 * Method testdateOnly
+	 * @throws Exception
+	 */
+	public void testMissingMinutes() throws Exception
+	{
+		JDFDate date = new JDFDate();
+		String strDate = date.getDateTimeISO();
+		date = new JDFDate("2006-07-06T12");
+		strDate = date.getDateTimeISO();
+		assertTrue(strDate.startsWith("2006-07-06T12:00"));
 	}
 
 	/**
@@ -606,5 +641,25 @@ public class JDFDateTest extends TestCase
 			assertEquals(d.getDateTimeISO(), d4.getDateTimeISO());
 		}
 		assertTrue(bSummer);
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		defaultTime = JDFDate.defaultHour;
+	}
+
+	/**
+	 * @see org.cip4.jdflib.JDFTestCaseBase#tearDown()
+	 */
+	@Override
+	protected void tearDown() throws Exception
+	{
+		JDFDate.setDefaultHour(defaultTime);
+		super.tearDown();
 	}
 }

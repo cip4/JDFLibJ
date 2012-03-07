@@ -70,7 +70,6 @@
  */
 package org.cip4.jdflib.util;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -234,11 +233,7 @@ public class DumpDir
 	public File newFileFromStream(final String header, InputStream is, String ext)
 	{
 		final File dump = newFile(null, ext);
-		if (!(is instanceof BufferedInputStream))
-		{
-			is = new BufferedInputStream(is);
-			is.mark(100000);
-		}
+		is = ByteArrayIOStream.getBufferedInputStream(is);
 
 		final FileOutputStream fs = newHeader(header, dump, false);
 		if (fs != null)

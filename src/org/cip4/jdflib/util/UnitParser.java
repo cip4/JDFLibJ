@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -78,14 +78,23 @@ import org.cip4.jdflib.core.VString;
  */
 public class UnitParser
 {
+
 	/**
-	 * extract units if and only if the string has a pattern of "<##>( )mm" or "<##>( )cm" whitespace is ignored
-	 * @param val
+	 * 
+	 */
+	public UnitParser()
+	{
+		super();
+	}
+
+	/**
+	 * extract units if and only if the string has a pattern of "<##>mm" or "<##>cm"or "<##>in" whitespace is ignored
+	 * @param val the string to convert
 	 * @return the converted unit string
 	 */
 	public String extractUnits(String val)
 	{
-		if (val == null || val.length() < 3 || val.indexOf("m") < 0)
+		if (val == null || val.length() < 3 || (val.indexOf("m") < 0) && val.indexOf("in") < 0)
 		{
 			return val;
 		}
@@ -104,6 +113,11 @@ public class UnitParser
 			else if (tmp.endsWith("cm"))
 			{
 				factor = 72. / 2.54;
+				tmp = StringUtil.leftStr(tmp, -2);
+			}
+			else if (tmp.endsWith("in"))
+			{
+				factor = 72.;
 				tmp = StringUtil.leftStr(tmp, -2);
 			}
 			if (!StringUtil.isNumber(tmp))

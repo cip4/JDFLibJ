@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -361,10 +361,9 @@ public class JDFSpawn
 		{
 			String strIDs = "JDFNode.spawn: multiply spawned rw resources: ";
 			final VString vBad = new VString();
-			final Iterator<JDFResource> iterCheck = vCheck.iterator();
-			while (iterCheck.hasNext())
+			for (JDFResource check : vCheck)
 			{
-				vBad.appendUnique((iterCheck.next()).getAttribute(AttributeName.ID));
+				vBad.appendUnique(check.getID());
 			}
 			strIDs += StringUtil.setvString(vBad, JDFConstants.BLANK, null, null);
 			log.error(strIDs);

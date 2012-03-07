@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -72,6 +72,7 @@ package org.cip4.jdflib.util;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Vector;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.auto.JDFAutoNotification.EnumClass;
@@ -367,7 +368,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		media.makeRootResource("mediaID", nRoot, true);
 
 		final JDFNode nodeImageSet = nRoot.addJDFNode("ImageSetting");
-		nodeImageSet.linkResource(xm, false ? EnumUsage.Input : EnumUsage.Output, null);
+		nodeImageSet.linkResource(xm, EnumUsage.Output, null);
 		VString v = new VString();
 		v.add(ElementName.EXPOSEDMEDIA);
 		final VJDFAttributeMap vMap = new VJDFAttributeMap();
@@ -752,10 +753,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 				final JDFDoc doc = new JDFDoc("JDF");
 				JDFNode n = doc.getJDFRoot();
 				n.setType(EnumType.ProcessGroup);
-				if (i == i)
-				{
-					n = n.addJDFNode(EnumType.ProcessGroup);
-				}
+				n = n.addJDFNode(EnumType.ProcessGroup);
 				final JDFNode n2 = n.addJDFNode(EnumType.ImageSetting);
 				final JDFResource xm = n2.addResource("ExposedMedia", EnumUsage.Input);
 				final JDFResource m = n.addResource("Media", null);
@@ -2654,6 +2652,41 @@ public class JDFSpawnTest extends JDFTestCaseBase
 	/**
 	 * 
 	 */
+	public void testNestedSpawn()
+	{
+		JDFNode root = JDFDoc.parseFile(sm_dirTestData + "spawnRoot.jdf").getJDFRoot();
+		JDFAttributeMap map = new JDFAttributeMap();
+		map.put("Run", "Run_100303_102859963_000349");
+		JDFNode n2s = root;
+		VJDFAttributeMap v = new VJDFAttributeMap();
+		JDFAttributeMap map2 = new JDFAttributeMap(map);
+		Vector<JDFNode> vn = new Vector<JDFNode>();
+		for (int i = 1; i < 10; i++)
+		{
+			for (int j = i; j < 40; j++)
+			{
+				map2.put("RunPage", "" + j);
+				v.add(new JDFAttributeMap(map2));
+			}
+			JDFSpawn sp = new JDFSpawn(n2s);
+			JDFNode n3s = sp.spawn(null, null, new VString("RunList NodeInfo", null), v, false, true, true, true);
+			vn.add(n3s);
+			n2s.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "rootMainNest" + i + ".jdf", 2, false);
+			n3s.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "rootSubNest" + i + ".jdf", 2, false);
+			n2s = n3s;
+		}
+		JDFMerge m = new JDFMerge(root);
+		for (int i = 0; i < 9; i++)
+		{
+			JDFNode mn = m.mergeJDF(vn.elementAt(i));
+			mn.getOwnerDocument_JDFElement().write2File(sm_dirTestDataTemp + "mergeNest" + i + ".jdf", 2, false);
+		}
+
+	}
+
+	/**
+	 * 
+	 */
 	public void testSpawnRootNestedPerformance()
 	{
 		JDFNode root = JDFDoc.parseFile(sm_dirTestData + "spawnRoot.jdf").getJDFRoot();
@@ -2661,7 +2694,7 @@ public class JDFSpawnTest extends JDFTestCaseBase
 		map.put("Run", "Run_100303_102859963_000349");
 		JDFNode n2s = root;
 		CPUTimer ct = new CPUTimer(true);
-		for (int i = 1; i < 10; i++)
+		for (int i = 1; i < 100; i++)
 		{
 			JDFSpawn sp = new JDFSpawn(n2s);
 			VJDFAttributeMap v = new VJDFAttributeMap();

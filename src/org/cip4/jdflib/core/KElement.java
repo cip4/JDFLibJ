@@ -3775,7 +3775,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * serialize this to a string
 	 * @param indent
 	 * @return String the dom element serialized as a string
-	 * @throws JDFException if an error occurs while serializing
+	 * @throws JDFException if an io exception occurs while serializing
 	 */
 	@SuppressWarnings("deprecation")
 	public String toXML(final int indent)
@@ -3800,7 +3800,7 @@ public class KElement extends ElementNSImpl implements Element
 		}
 		catch (final IOException e)
 		{
-			throw new JDFException("ERROR while serializing " + getClass().getName() + " element");
+			throw new JDFException("IOException while serializing " + getClass().getName() + " element " + e.getMessage());
 		}
 	}
 
@@ -4310,21 +4310,11 @@ public class KElement extends ElementNSImpl implements Element
 		return map.size() > 0 ? map : null;
 	}
 
-	// public Node getXPathNode(String path)
-	// {
-	// Document doc=getOwnerDocument();
-
-	// XPathEvaluator ev=(XPathEvaluator)doc.getFeature("XPath", null);
-
-	// XPathExpression ex=ev.createExpression(path, ev.createNSResolver(this));
-	// return (Node) ex.evaluate(this, XPathResult.ANY_UNORDERED_NODE_TYPE,
-	// null);
-	// }
 	/**
 	 * gets an element as defined by XPath to value <br>
 	 * @tbd enhance the subsets of allowed XPaths, now only .,..,/,@ are supported
 	 * @param path XPath abbreviated syntax representation of the attribute, e.g <code>parentElement/thisElement</code>
-	 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[@foo=\"bar\"]</code>
+	 * <code>parentElement/thisElement[2]</code> <code>parentElement[@a=\"b\"]/thisElement[./foo/@foo=\"bar\"]</code>
 	 * @return KElement the specified element
 	 * @throws IllegalArgumentException if path is not supported
 	 */
@@ -4438,9 +4428,16 @@ public class KElement extends ElementNSImpl implements Element
 			}
 		}
 
-		path = StringUtil.replaceString(path, "[@", "|||");
-		final int posB0 = path.indexOf("[");
-		final int posBAt = path.indexOf("|||");
+		int posB0 = path.indexOf("[");
+		int posBAt = posB0;
+		if (posB0 >= 0)
+		{
+			char next = path.charAt(posB0 + 1);
+			if (next < '0' || next > '9')
+				posB0 = -1;
+			else
+				posBAt = -1;
+		}
 		int iSkip = 0;
 		String newPath = path;
 		int pos = newPath.indexOf(JDFCoreConstants.SLASH);
@@ -4465,8 +4462,7 @@ public class KElement extends ElementNSImpl implements Element
 			newPath = path.substring(0, posB0) + path.substring(posB1 + 1);
 			pos = newPath.indexOf(JDFCoreConstants.SLASH);
 		}
-		else if (posBAt != -1 && (posBAt < pos || pos == -1)) // parse for
-		// [@a="b"]
+		else if (posBAt != -1 && (posBAt < pos || pos == -1)) // parse for [@a="b"]
 		{
 			final int posB1 = path.indexOf("]");
 			map = getXPathAtMap(path, posBAt, posB1);
@@ -4480,7 +4476,7 @@ public class KElement extends ElementNSImpl implements Element
 			VElement ve;
 			if (bLocal)
 			{
-				ve = getChildElementVector_KElement(elmName, null, map, true, 0);
+				ve = getPathVector(elmName, map);
 			}
 			else
 			{
@@ -4499,8 +4495,7 @@ public class KElement extends ElementNSImpl implements Element
 			final int iFirst = bExplicitSkip ? iSkip : 0;
 			final int iLast = bExplicitSkip ? iSkip + 1 : ve.size();
 			for (int i = iFirst; i < iLast; i++) // loop in case multiple
-			// elements contain the same
-			// attribute
+			// elements contain the same attribute
 			{
 				VElement eRet = null;
 				final KElement ee = ve.item(i);
@@ -4532,7 +4527,7 @@ public class KElement extends ElementNSImpl implements Element
 
 		if (bLocal)
 		{
-			vRet = getChildElementVector_KElement(newPath, null, map, true, 0);
+			vRet.addAll(getPathVector(newPath, map));
 		}
 		else
 		{
@@ -4546,10 +4541,35 @@ public class KElement extends ElementNSImpl implements Element
 		return vRet;
 	}
 
+	private VElement getPathVector(String newPath, JDFAttributeMap map)
+	{
+		VElement v = getChildElementVector_KElement(newPath, null, null, true, 0);
+		VElement vRet = new VElement();
+		if (v != null)
+		{
+			if (map != null && map.size() > 0)
+			{
+				for (String key : map.getKeys())
+				{
+					for (KElement e : v)
+					{
+						if (e.getXPathAttribute(key, "").equals(map.get(key)))
+							vRet.add(e);
+					}
+				}
+			}
+			else
+			{
+				vRet = v;
+			}
+		}
+		return vRet;
+	}
+
 	private JDFAttributeMap getXPathAtMap(final String path, final int posBAt, final int posB1)
 	{
 		final JDFAttributeMap map = new JDFAttributeMap();
-		final String attEqVal = path.substring(posBAt + 3, posB1);
+		final String attEqVal = path.substring(posBAt + 1, posB1);
 		// TODO multiple attributes, maybe tokenize by ","
 		final String attName = StringUtil.token(attEqVal, 0, "=");
 		final String attVal = attEqVal.substring(attName.length() + 2, attEqVal.length() - 1);
