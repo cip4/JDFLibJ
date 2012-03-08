@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -114,7 +114,6 @@ public class JDFXYPair extends JDFNumList
 	 * @deprecated use typesafe constructors
 	 */
 	@Deprecated
-	@SuppressWarnings("unchecked")
 	public JDFXYPair(final Vector v) throws DataFormatException
 	{
 		super(v);
@@ -165,9 +164,22 @@ public class JDFXYPair extends JDFNumList
 	/**
 	 * constructs a xy pair with all values set via a JDFNumberList
 	 * 
+	 * @param shape the given number list
+	 * 
+	 */
+	public JDFXYPair(final JDFShape shape)
+	{
+		super();
+		add(shape.getX());
+		add(shape.getY());
+	}
+
+	/**
+	 * constructs a xy pair with all values set via a JDFNumberList
+	 * 
 	 * @param nl the given number list
 	 * 
-	 * @throws DataFormatException - if the JDFNumberList has not a valid format
+	 *  
 	 */
 	public JDFXYPair(final JDFXYPair nl)
 	{
@@ -244,6 +256,17 @@ public class JDFXYPair extends JDFNumList
 	}
 
 	/**
+	 * swap x and y coordinates - 
+	 * 
+	 */
+	public void swapXY()
+	{
+		double tmp = getX();
+		setX(getY());
+		setY(tmp);
+	}
+
+	/**
 	 * setY - sets the y coordinate
 	 * 
 	 * @param y the y coordinate
@@ -310,6 +333,16 @@ public class JDFXYPair extends JDFNumList
 	public boolean isGreater(final JDFXYPair x)
 	{
 		return (!isLessOrEqual(x));
+	}
+
+	/**
+	 * return true if y is > x
+	 *  
+	 * @return
+	 */
+	public boolean isPortrait()
+	{
+		return getX() < getY();
 	}
 
 	/**

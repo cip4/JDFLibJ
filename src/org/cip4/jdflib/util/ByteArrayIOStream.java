@@ -144,6 +144,15 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		{
 			return new ByteArrayIOInputStream(buf, parent);
 		}
+
+		/**
+		 * @see java.io.ByteArrayInputStream#toString()
+		 */
+		@Override
+		public synchronized String toString()
+		{
+			return "ByteArrayIOInputStream:\n" + new String(buf, 0, count);
+		}
 	}
 
 	/**

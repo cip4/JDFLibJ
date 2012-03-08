@@ -851,18 +851,50 @@ public class XJDFTest extends JDFTestCaseBase
 	 */
 	public void testFromXJDFColorIntent()
 	{
+		for (int i = 0; i < 3; i += 2)
+		{
+			final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
+			e = new XMLDoc("XJDF", null).getRoot();
+			e.setAttribute("Types", "Product");
+			e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@NumColors", "4/1");
+			e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@Coatings", "DullVarnish");
+			e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@CoatingsBack", "GlossVarnish");
+			if (i != 0)
+			{
+				e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@ColorsUsed", "Spot1 Black Spot");
+				e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@ColorsUsedBack", "Spot2 Spot");
+			}
+			final JDFDoc d = xCon.convert(e);
+			assertNotNull(d);
+			JDFNode root = d.getJDFRoot();
+			JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
+			JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), null);
+			JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), null);
+			assertNull(ci.getColorsUsed());
+			assertEquals(cib.getColorsUsed().getSeparations().size(), 1 + i);
+			assertEquals(cif.getColorsUsed().getSeparations().size(), 4 + i);
+			assertEquals(cif.getCoatings().getActual(), "DullVarnish");
+		}
+	}
+
+	/**
+	 *  
+	 */
+	public void testFromXJDFColorIntentFront()
+	{
 		final XJDFToJDFConverter xCon = new XJDFToJDFConverter(null);
 		e = new XMLDoc("XJDF", null).getRoot();
 		e.setAttribute("Types", "Product");
-		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@NumColors", "4/1");
-		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@Coatings", "DullVarnish");
-		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@CoatingsBack", "GlossVarnish");
+		e.setXPathAttribute("ProductList/Product/Intent[@Name=\"ColorIntent\"]/ColorIntent/@NumColors", "4/0");
 		final JDFDoc d = xCon.convert(e);
 		assertNotNull(d);
 		JDFNode root = d.getJDFRoot();
 		JDFColorIntent ci = (JDFColorIntent) root.getResource(ElementName.COLORINTENT, EnumUsage.Input, 0);
-		assertEquals(ci.getColorsUsed().getSeparations().size(), 4);
-		assertEquals(((JDFColorIntent) (ci.getPartition(new JDFAttributeMap("Side", "Front"), null))).getCoatings().getActual(), "DullVarnish");
+		JDFColorIntent cif = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Front"), null);
+		JDFColorIntent cib = (JDFColorIntent) ci.getPartition(new JDFAttributeMap("Side", "Back"), null);
+		assertNull(ci.getColorsUsed());
+		assertNull(cib);
+		assertEquals(cif.getColorsUsed().getSeparations().size(), 4);
 	}
 
 	/**

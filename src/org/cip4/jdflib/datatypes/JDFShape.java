@@ -161,12 +161,23 @@ public class JDFShape extends JDFNumList
 	 * 
 	 * @param nl the given number list
 	 * 
-	 * @throws DataFormatException - if the JDFNumberList has not a valid format
+	 * 
 	 */
 	public JDFShape(final JDFShape nl)
 	{
 		super();
 		addAll(nl);
+	}
+
+	/**
+	 * swap x and y coordinates - 
+	 * 
+	 */
+	public void swapXY()
+	{
+		double tmp = getX();
+		setX(getY());
+		setY(tmp);
 	}
 
 	/**

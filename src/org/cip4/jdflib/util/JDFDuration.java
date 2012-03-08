@@ -395,22 +395,42 @@ public class JDFDuration implements Comparable<JDFDuration>
 	 */
 	public boolean setDurationISO(final String a_aDuration)
 	{
-		boolean result = true;
-
-		String strDate = null;
-		String strTime = null;
-		int iYears = 0;
-		int iMonths = 0;
-		int iDays = 0;
-		int iHours = 0;
-		int iMinutes = 0;
-		int iSeconds = 0;
-		int iduration = 0;
-		int iTimeLastPos = 0;
-		int iDateLastPos = 0;
-		int factor = 1; // the factor for negative durations
-
 		int iPPos = a_aDuration.indexOf("P");
+		int factor = parseFactor(a_aDuration, iPPos);
+
+		final String strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
+
+		// divide periodInstant into date and time part, which are separated by 'T'
+		int iTPos = strPeriod.indexOf("T");
+		final String strDate;
+		final String strTime;
+		if (iTPos == 0)
+		{ // e.g. if durationInstant looks like "PT10H30M" - without datepart
+			strTime = strPeriod.substring(1);
+			strDate = null;
+		}
+		else
+		{ // e.g. if durationInstant looks like "P1Y2M3DT10H30M"
+			strDate = StringUtil.token(strPeriod, 0, "T");
+			strTime = StringUtil.token(strPeriod, 1, "T");
+		}
+		m_lDuration = 0;
+		try
+		{
+			parseDate(strDate);
+			parseTime(strTime);
+			m_lDuration *= factor;
+		}
+		catch (final NumberFormatException e)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	private int parseFactor(final String a_aDuration, int iPPos)
+	{
+		int factor = 1; // the factor for negative durations
 		if (iPPos > 0) // check for negative duration
 		{
 			final char c = a_aDuration.charAt(iPPos - 1);
@@ -419,115 +439,84 @@ public class JDFDuration implements Comparable<JDFDuration>
 				factor = -1;
 			}
 		}
+		return factor;
+	}
 
-		final String strPeriod = a_aDuration.substring(++iPPos, a_aDuration.length());
-
-		// devide periodInstant into date and time part, which are separated by
-		// 'T'
-		int iTPos = strPeriod.indexOf("T");
-
-		if (iTPos >= 0)
+	private void parseTime(final String strTime)
+	{
+		if (strTime != null)
 		{
-			if (iTPos == 0)
-			{ // e.g. if durationInstant looks like "PT10H30M" - without date
-				// part
-				strTime = strPeriod.substring(1, strPeriod.length());
-			}
-			else
-			{ // e.g. if durationInstant looks like "P1Y2M3DT10H30M"
-				strDate = strPeriod.substring(0, iTPos);
-				strTime = strPeriod.substring(++iTPos, strPeriod.length());
-			}
-		}
-		else
-		{ // e.g. if durationInstant looks like "P1Y2M3D" - without time part
-			strDate = strPeriod;
-		}
-		double fracSecs = 0;
-		try
-		{
-			if (strDate != null)
+			int iHPos = strTime.indexOf("H");
+			int iTimeLastPos = 0;
+			if (iHPos > 0)
 			{
-				int iYPos = strDate.indexOf("Y");
-				if (iYPos > 0)
-				{
-					iYears = Integer.parseInt(strDate.substring(0, iYPos));
-					iduration += iYears * 365 * 24 * 60 * 60;
-					iDateLastPos = ++iYPos;
-				}
-
-				int iMPos = strDate.indexOf("M");
-				if (iMPos > 0)
-				{
-					iMonths = Integer.parseInt(strDate.substring(iDateLastPos, iMPos));
-					final int nYears = iMonths / 12;
-					iduration += (iMonths * 30 + nYears * 5) * 24 * 60 * 60; // add
-					// 5 days for each complete year ( 360 --> 365)
-					iDateLastPos = ++iMPos;
-				}
-
-				final int iDPos = strDate.indexOf("D");
-				if (iDPos > 0)
-				{
-					iDays = Integer.parseInt(strDate.substring(iDateLastPos, iDPos));
-					iduration += iDays * 24 * 60 * 60;
-				}
+				int iHours = Integer.parseInt(strTime.substring(0, iHPos));
+				m_lDuration += iHours * 60 * 60;
+				iTimeLastPos = ++iHPos;
+			}
+			int iMPos = strTime.indexOf("M");
+			if (iMPos > 0)
+			{
+				int iMinutes = Integer.parseInt(strTime.substring(iTimeLastPos, iMPos));
+				m_lDuration += iMinutes * 60;
+				iTimeLastPos = ++iMPos;
 			}
 
-			if (strTime != null)
+			final int iSPos = strTime.indexOf("S");
+			if (iSPos > 0)
 			{
-				int iHPos = strTime.indexOf("H");
-				if (iHPos > 0)
+				int iDotPos = strTime.indexOf(".");
+				if (iDotPos > 0)
 				{
-					iHours = Integer.parseInt(strTime.substring(0, iHPos));
-					iduration += iHours * 60 * 60;
-					iTimeLastPos = ++iHPos;
-				}
-				int iMPos = strTime.indexOf("M");
-				if (iMPos > 0)
-				{
-					iMinutes = Integer.parseInt(strTime.substring(iTimeLastPos, iMPos));
-					iduration += iMinutes * 60;
-					iTimeLastPos = ++iMPos;
-				}
-
-				final int iSPos = strTime.indexOf("S");
-				if (iSPos > 0)
-				{
-					int iDotPos = strTime.indexOf(".");
-					if (iDotPos > 0)
+					int iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iDotPos));
+					iDotPos++;
+					final int mLen = iSPos - iDotPos;
+					if (mLen > 0)
 					{
-						iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iDotPos));
-						iDotPos++;
-						final int mLen = iSPos - iDotPos;
-						if (mLen > 0)
-						{
-							final String sMilli = "0." + strTime.substring(iDotPos, iSPos);
-							fracSecs = Double.parseDouble(sMilli);
-						}
-						iduration += iSeconds;
-
+						final String sMilli = "0." + strTime.substring(iDotPos, iSPos);
+						m_lDuration += Double.parseDouble(sMilli);
 					}
-					else
-					{
-						iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iSPos));
-						iduration += iSeconds;
-					}
+					m_lDuration += iSeconds;
+				}
+				else
+				{
+					int iSeconds = Integer.parseInt(strTime.substring(iTimeLastPos, iSPos));
+					m_lDuration += iSeconds;
 				}
 			}
+		}
+	}
 
-			m_lDuration = iduration;
-			if (fracSecs != 0)
-			{
-				m_lDuration += fracSecs;
-			}
-			m_lDuration *= factor;
-		}
-		catch (final NumberFormatException e)
+	private void parseDate(final String strDate)
+	{
+		if (strDate != null)
 		{
-			result = false;
+			int iYPos = strDate.indexOf("Y");
+			int iDateLastPos = 0;
+			if (iYPos > 0)
+			{
+				int iYears = Integer.parseInt(strDate.substring(0, iYPos));
+				m_lDuration += iYears * 365 * 24 * 60 * 60;
+				iDateLastPos = ++iYPos;
+			}
+
+			int iMPos = strDate.indexOf("M");
+			if (iMPos > 0)
+			{
+				int iMonths = Integer.parseInt(strDate.substring(iDateLastPos, iMPos));
+				final int nYears = iMonths / 12;
+				m_lDuration += (iMonths * 30 + nYears * 5) * 24 * 60 * 60; // add
+				// 5 days for each complete year ( 360 --> 365)
+				iDateLastPos = ++iMPos;
+			}
+
+			final int iDPos = strDate.indexOf("D");
+			if (iDPos > 0)
+			{
+				int iDays = Integer.parseInt(strDate.substring(iDateLastPos, iDPos));
+				m_lDuration += iDays * 24 * 60 * 60;
+			}
 		}
-		return result;
 	}
 
 	/**

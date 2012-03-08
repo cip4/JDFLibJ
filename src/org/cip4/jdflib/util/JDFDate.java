@@ -124,6 +124,18 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public static final String DATETIMEISO = "yyyy'-'MM'-'dd'T'HH:mm:ssZZ";
 	/**
+	 * iso - seconds are 0
+	 */
+	public static final String DATETIMEISO_0 = "yyyy'-'MM'-'dd'T'HH:mm:'00'ZZ";
+	/**
+	 * iso - seconds + minutes are 0
+	 */
+	public static final String DATETIMEISO_00 = "yyyy'-'MM'-'dd'T'HH:'00':'00'ZZ";
+	/**
+	 * iso - seconds + minutes + hours are 0
+	 */
+	public static final String DATETIMEISO_000 = "yyyy'-'MM'-'dd'T00':'00':'00'ZZ";
+	/**
 	 * 
 	 */
 	public static final String DATETIMEREADABLE = "dd MMM yyyy HH:mm";
@@ -624,7 +636,6 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	 */
 	public String getFormattedDateTime(final String format)
 	{
-
 		return getDateFormat(format).format(getCalendar());
 	}
 
@@ -652,7 +663,8 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	}
 
 	/**
-	 * add a given offset to this multiple calls stack
+	 * add a given offset to this <br/>
+	 * note: multiple calls stack
 	 * 
 	 * @param seconds seconds to add to this
 	 * @param minutes minutes to add to this
@@ -662,6 +674,24 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 	public void addOffset(final int seconds, final int minutes, final int hours, final int days)
 	{
 		lTimeInMillis += 1000l * (seconds + 60l * minutes + 3600l * hours + 3600l * 24l * days);
+	}
+
+	/**
+	 * 
+	 * create a date with a relative offset defined in duration
+	 * @param duration
+	 * @param hour the fixed hour, if -1 don't set
+	 * @param minute the fixed minute, if -1 don't set
+	 * @return
+	 */
+	public JDFDate createDateFromDuration(JDFDuration duration, int hour, int minute)
+	{
+		JDFDate d = new JDFDate(this);
+		if (duration != null)
+			d.setTimeInMillis(d.getTimeInMillis() + duration.getDuration() * 1000);
+		if (hour >= 0 && minute >= 0)
+			d.setTime(hour, minute, 0);
+		return d;
 	}
 
 	/**
@@ -783,6 +813,27 @@ public class JDFDate implements Comparable<Object>, Cloneable, Comparator<JDFDat
 		final GregorianCalendar gregorianCalendar = new GregorianCalendar(new SimpleTimeZone(getTimeZoneOffsetInMillis(), JDFConstants.EMPTYSTRING));
 		gregorianCalendar.setTimeInMillis(getTimeInMillis());
 		return gregorianCalendar;
+	}
+
+	/**
+	 * 
+	 *set the time without modifying the date
+	 * @param h
+	 * @param m
+	 * @param s
+	 */
+	public void setTime(int h, int m, int s)
+	{
+		String st = getFormattedDateTime(DATETIMEISO_000);
+		try
+		{
+			init(st);
+		}
+		catch (DataFormatException e)
+		{
+			// NOP
+		}
+		addOffset(s, m, h, 0);
 	}
 
 	/**

@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -149,6 +149,33 @@ public class JDFXYPairTest extends TestCase
 
 	/**
 	 * 
+	 *  
+	 * @throws Exception
+	 */
+	public final void testIsPortrait() throws Exception
+	{
+		JDFXYPair xy = new JDFXYPair("4 5");
+		assertTrue(xy.isPortrait());
+		xy.setY(4);
+		assertFalse(xy.isPortrait());
+	}
+
+	/**
+	 * 
+	 *  
+	 * @throws Exception
+	 */
+	public final void testSwapXY() throws Exception
+	{
+		JDFXYPair xy = new JDFXYPair("4 5");
+		JDFXYPair yx = new JDFXYPair("5 4");
+		assertNotSame(xy, yx);
+		yx.swapXY();
+		assertEquals(xy, yx);
+	}
+
+	/**
+	 * 
 	 * 
 	 */
 	public final void testIsGreaterOrEqual()
@@ -173,6 +200,17 @@ public class JDFXYPairTest extends TestCase
 		JDFXYPair ac = new JDFXYPair(ab);
 		ac.setX(3.0);
 		assertEquals(ab.getX(), 1.0, 0.0);
+	}
+
+	/**
+	 *  
+	 */
+	public final void testShapeConstruct()
+	{
+
+		JDFShape ab = new JDFShape(1.0, 2.0, 3.0);
+		JDFXYPair ac = new JDFXYPair(ab);
+		assertEquals(ac, new JDFXYPair(1.0, 2.0));
 	}
 
 	/**

@@ -74,11 +74,13 @@ package org.cip4.jdflib.extensions.xjdfwalker;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
-import java.util.zip.DataFormatException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.auto.JDFAutoComponent.EnumComponentType;
 import org.cip4.jdflib.core.AttributeInfo.EnumAttributeType;
 import org.cip4.jdflib.core.AttributeName;
+import org.cip4.jdflib.core.DocumentJDFImpl;
 import org.cip4.jdflib.core.ElementName;
 import org.cip4.jdflib.core.JDFDoc;
 import org.cip4.jdflib.core.JDFElement;
@@ -98,6 +100,7 @@ import org.cip4.jdflib.datatypes.VJDFAttributeMap;
 import org.cip4.jdflib.elementwalker.BaseElementWalker;
 import org.cip4.jdflib.elementwalker.BaseWalker;
 import org.cip4.jdflib.elementwalker.BaseWalkerFactory;
+import org.cip4.jdflib.elementwalker.EnsureNSUri;
 import org.cip4.jdflib.extensions.IntentHelper;
 import org.cip4.jdflib.extensions.ProductHelper;
 import org.cip4.jdflib.extensions.SetHelper;
@@ -161,6 +164,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	boolean firstproductInList;
 	boolean foundProduct;
 	protected JDFNode currentJDFNode = null;
+	final Log log;
 	/**
 	 * if true, create the product, else ignore it
 	 */
@@ -186,6 +190,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		// theNode = null;
 		idMap = null;
 		foundProduct = false;
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
@@ -231,6 +236,10 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		cleanResources(theNode);
 		fixDependencies(root);
 		firstConvert = false;
+		EnsureNSUri fixNS = new EnsureNSUri();
+		fixNS.addNS(null, JDFElement.getSchemaURL());
+		fixNS.walk(root);
+
 		return jdfDoc;
 	}
 
@@ -293,13 +302,34 @@ public class XJDFToJDFConverter extends BaseElementWalker
 
 	}
 
+	/**
+	 * 
+	 * @param xjdf
+	 * @return
+	 */
 	protected KElement reparse(KElement xjdf)
 	{
-		if (xjdf != null)
+		if (xjdf != null && !(xjdf.getOwnerDocument() instanceof DocumentJDFImpl))
 		{
 			JDFDoc doc = new JDFDoc(xjdf.getOwnerDocument());
 			doc.setInitOnCreate(false);
-			xjdf = doc.getRoot();
+			KElement xjdf2 = doc.getRoot();
+			if (!xjdf2.getLocalName().equals(xjdf.getLocalName()))
+				xjdf2 = xjdf2.getChildByTagName(xjdf.getNodeName(), xjdf.getNamespaceURI(), 0, xjdf.getAttributeMap(), false, true);
+			int i = 0;
+			while (xjdf2 != null)
+			{
+				if (xjdf.isEqual(xjdf2))
+				{
+					xjdf = xjdf2;
+					break;
+				}
+				xjdf2 = xjdf2.getChildByTagName(xjdf.getNodeName(), xjdf.getNamespaceURI(), ++i, xjdf.getAttributeMap(), false, true);
+			}
+			if (xjdf2 == null)
+			{
+				log.error("SNAFU converting xjdf - retaining old");
+			}
 		}
 		return xjdf;
 	}
@@ -1031,6 +1061,14 @@ public class XJDFToJDFConverter extends BaseElementWalker
 	 */
 	public class WalkColorIntent extends WalkIntentResource
 	{
+		public WalkColorIntent()
+		{
+			super();
+			backAtts = new VString("Coatings ColorStandard Coverage", null);
+		}
+
+		final VString backAtts;
+
 		/**
 		 * @param e
 		 * @return the created resource
@@ -1039,13 +1077,14 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		public KElement walk(final KElement e, final KElement trackElem)
 		{
 			evaluateColorsUsed(e);
-			if (e.hasAttribute("NumColors") && !e.hasAttribute("ColorsUsed"))
+			if (e.hasAttribute("NumColors"))
 			{
 				evaluateNumColors(e, trackElem);
 			}
-			evaluateBackAttribute(e, "Coatings");
-			evaluateBackAttribute(e, "ColorStandard");
-			evaluateBackAttribute(e, "Coverage");
+			for (String att : backAtts)
+			{
+				evaluateBackAttribute(e, att);
+			}
 
 			KElement ret = super.walk(e, trackElem);
 			repartitionSide(e, trackElem);
@@ -1059,20 +1098,74 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		private void repartitionSide(final KElement e, final KElement trackElem)
 		{
 			KElement cuBack = e.getElement("ColorsUsedBack");
-			if (cuBack != null)
+			KElement cuFront = e.getElement("ColorsUsed");
+			if (cuBack != null && cuFront != null)
 			{
-				JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
-				ciFront.moveElement(e.getElement("ColorsUsed"), null);
-				JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
-				ciBack.moveElement(e.getElement("ColorsUsedBack"), null).renameElement("ColorsUsed", null);
+				VElement sepsFront = cuFront.getChildElementVector(ElementName.SEPARATIONSPEC, null);
+				VElement sepsBack = cuBack.getChildElementVector(ElementName.SEPARATIONSPEC, null);
+				if (!sepsFront.isEqual(sepsBack))
+				{
+					if (cuFront.getElement(ElementName.SEPARATIONSPEC) != null)
+					{
+						JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
+						ciFront.moveElement(cuFront, null);
+					}
+					else
+					{
+						cuFront.deleteNode();
+					}
+					if (cuBack.getElement(ElementName.SEPARATIONSPEC) != null)
+					{
+						JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
+						cuBack.renameElement("ColorsUsed", null);
+						ciBack.moveElement(cuBack, null);
+					}
+					else
+					{
+						cuBack.deleteNode();
+					}
+				}
 			}
-			KElement coatBack = e.getElement("CoatingsBack");
-			if (coatBack != null)
+			else if (cuBack == null && cuFront != null)
 			{
-				JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
-				ciFront.moveElement(e.getElement("Coatings"), null);
-				JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
-				ciBack.moveElement(e.getElement("CoatingsBack"), null).renameElement("Coatings", null);
+				if (cuFront.getElement(ElementName.SEPARATIONSPEC) != null)
+				{
+					JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
+					ciFront.moveElement(cuFront, null);
+				}
+				else
+				{
+					cuFront.deleteNode();
+				}
+			}
+			else if (cuBack != null && cuFront == null)
+			{
+				if (cuBack.getElement(ElementName.SEPARATIONSPEC) != null)
+				{
+					JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
+					ciBack.moveElement(cuBack, null);
+				}
+				else
+				{
+					cuBack.deleteNode();
+				}
+			}
+			for (String att : backAtts)
+			{
+				String back = att + "Back";
+				KElement coatBack = e.getElement(back);
+				if (coatBack != null)
+				{
+					KElement coatings = e.getElement(att);
+					if (coatings != null)
+					{
+						JDFResource ciFront = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Front", null);
+						ciFront.moveElement(coatings, null);
+					}
+					JDFResource ciBack = ((JDFResource) trackElem).getCreatePartition(EnumPartIDKey.Side, "Back", null);
+					ciBack.moveElement(e.getElement(back), null).renameElement(att, null);
+				}
+				evaluateBackAttribute(e, att);
 			}
 		}
 
@@ -1113,15 +1206,7 @@ public class XJDFToJDFConverter extends BaseElementWalker
 		 */
 		private void evaluateNumColors(final KElement e, final KElement trackElem)
 		{
-			JDFXYPair xyp;
-			try
-			{
-				xyp = new JDFXYPair(e.getAttribute("NumColors", null, null));
-			}
-			catch (DataFormatException e1)
-			{
-				xyp = null;
-			}
+			JDFXYPair xyp = JDFXYPair.createXYPair(e.getAttribute("NumColors", null, null));
 			if (xyp != null)
 			{
 				double[] list = xyp.getDoubleList();
@@ -1129,18 +1214,40 @@ public class XJDFToJDFConverter extends BaseElementWalker
 				for (int i = list.length - 1; i >= 0; i--)
 				{
 					int n = (int) (list[i] + 0.5);
-					if (n > 0)
+					VString v = getDefaultSeparations(n);
+					KElement cuf = null;
+					if (i == 1)
 					{
-						VString v = new VString("Black Cyan Magenta Yellow Spot1 Spot2 Spot3 Spot4", null);
-						while (v.size() > n)
-							v.remove(n);
-						JDFSeparationList newElem = ((JDFSeparationList) trackElem.appendElement(ElementName.COLORSUSED));
-						newElem.setSeparations(v);
-						if (i == 1)
-							newElem.renameElement(ElementName.COLORSUSED + "Back", null);
+						cuf = e.getElement(ElementName.COLORSUSED);
+						if (cuf != null)
+						{
+							cuf.renameElement(ElementName.COLORSUSED + "Front", null);
+						}
+						KElement cub = e.getElement(ElementName.COLORSUSED + "Back");
+						if (cub != null)
+						{
+							cub.renameElement(ElementName.COLORSUSED, null);
+						}
+					}
+					JDFSeparationList newElem = ((JDFSeparationList) e.getCreateElement(ElementName.COLORSUSED));
+					newElem.appendSeparations(v);
+					newElem.unify();
+					if (i == 1)
+					{
+						newElem.renameElement(ElementName.COLORSUSED + "Back", null);
+						if (cuf != null)
+							cuf.renameElement(ElementName.COLORSUSED, null);
 					}
 				}
 			}
+		}
+
+		private VString getDefaultSeparations(int n)
+		{
+			VString v = new VString("Black Cyan Magenta Yellow Spot1 Spot2 Spot3 Spot4", null);
+			while (v.size() > n)
+				v.remove(n);
+			return v;
 		}
 
 		/**

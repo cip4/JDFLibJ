@@ -128,8 +128,6 @@ public class JDFSeparationList extends JDFAutoSeparationList
 		super(myOwnerDocument, myNamespaceURI, qualifiedName, myLocalName);
 	}
 
-	// **************************************** Methods
-	// *********************************************
 	/**
 	 * toString
 	 * 
@@ -167,6 +165,16 @@ public class JDFSeparationList extends JDFAutoSeparationList
 	public void setSeparations(VString vSeps)
 	{
 		removeChildren(ElementName.SEPARATIONSPEC, null, null);
+		appendSeparations(vSeps);
+	}
+
+	/**
+	 * append all separation names in the SeparationSpec elements without removing any prior elements
+	 * 
+	 * @param vSeps the vector of separation names to append
+	 */
+	public void appendSeparations(VString vSeps)
+	{
 		if (vSeps == null)
 			return;
 

@@ -101,6 +101,47 @@ public class JDFDateTest extends JDFTestCaseBase
 		assertNull(JDFDate.createDate(null));
 		final String dateString = "2008-12-19T07:00:11.300+00:00";
 		assertEquals(JDFDate.createDate(dateString), new JDFDate(dateString));
+	}
+
+	/**
+	 * @throws DataFormatException
+	 * 
+	 */
+	public void testRoundDate() throws DataFormatException
+	{
+		JDFDate d = new JDFDate();
+		assertTrue(d.getFormattedDateTime(JDFDate.DATETIMEISO_00).contains(":00:00"));
+		JDFDate d1 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_0));
+		assertTrue(d.after(d1));
+		JDFDate d2 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_00));
+		assertTrue(d1.after(d2));
+		JDFDate d3 = new JDFDate(d.getFormattedDateTime(JDFDate.DATETIMEISO_000));
+		assertTrue(d2.after(d3));
+	}
+
+	/**
+	 * @throws DataFormatException
+	 * 
+	 */
+	public void testSetTime() throws DataFormatException
+	{
+		JDFDate d = new JDFDate();
+		JDFDate d1 = new JDFDate();
+		d1.setTime(22, 0, 0);
+		assertTrue(d1.getFormattedDateTime(JDFDate.DATETIMEISO).contains("T22:00:00"));
+		assertEquals(d.getDay(), d1.getDay());
+	}
+
+	/**
+	 * @throws DataFormatException 
+	 * 
+	 *  
+	 */
+	public void testCreateDateFromDuration() throws DataFormatException
+	{
+		JDFDate d = new JDFDate();
+		JDFDate d1 = d.createDateFromDuration(new JDFDuration("P1DT18H"), 18, 0);
+		assertTrue(d1.isLater(d));
 
 	}
 
