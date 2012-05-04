@@ -86,6 +86,7 @@ import org.cip4.jdflib.core.XMLDoc;
 import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
+import org.cip4.jdflib.util.UrlUtil;
 
 /**
  * class to read a zip file or stream
@@ -99,6 +100,26 @@ public class ZipReader
 	ZipInputStream zis;
 	final Log log;
 	ZipEntry currentEntry;
+	String rootEntry;
+
+	/**
+	 * Getter for rootEntry name attribute.
+	 * @return the rootEntry name, null if not set 
+	 */
+	public String getRootEntry()
+	{
+		return rootEntry;
+	}
+
+	/**
+	 * Setter for rootEntry attribute. use this to allow local searches relative to rootEntry
+	 * @param rootEntry the rootEntry to set
+	 */
+	public void setRootEntry(String rootEntry)
+	{
+		this.rootEntry = StringUtil.getNonEmpty(rootEntry);
+	}
+
 	boolean caseSensitive;
 
 	/**
@@ -136,11 +157,14 @@ public class ZipReader
 
 	/**
 	 * 
-	 * @param file
+	 * @param file the file to read
 	 */
 	public ZipReader(File file)
 	{
 		this(FileUtil.getBufferedInputStream(file));
+		//the local path is either really at null or in a directory root defined by filename (e.g. when using mac os compress of a directory)
+		if (file != null)
+			setRootEntry(UrlUtil.newExtension(file.getName(), null) + "/");
 	}
 
 	/**
@@ -170,7 +194,7 @@ public class ZipReader
 	}
 
 	/**
-	 * 
+	 * get the next entry - this can be used in non-buffered mode
 	 *returns null in case of snafu
 	 * @return
 	 */
@@ -271,11 +295,19 @@ public class ZipReader
 			log.error("cannot retrieve null entry");
 			return null;
 		}
+		urlString = UrlUtil.cleanDots(urlString);
 		ZipEntry ze = getNextEntry();
 		while (ze != null)
 		{
-			String name = ze.getName();
+			String name = UrlUtil.cleanDots(ze.getName());
 			boolean matches = caseSensitive ? urlString.equals(name) : urlString.equalsIgnoreCase(name);
+			if (!matches && rootEntry != null && name.startsWith(rootEntry))
+			{
+				name = StringUtil.rightStr(name, -rootEntry.length());
+				if (name != null && name.length() > 0)
+					matches = caseSensitive ? urlString.equals(name) : urlString.equalsIgnoreCase(name);
+			}
+
 			if (matches)
 				return ze;
 
@@ -301,6 +333,12 @@ public class ZipReader
 		{
 			String name = ze.getName();
 			boolean matches = caseSensitive ? StringUtil.matches(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
+			if (!matches && rootEntry != null && name.startsWith(rootEntry))
+			{
+				name = StringUtil.rightStr(name, -rootEntry.length());
+				if (name != null && name.length() > 0)
+					matches = caseSensitive ? StringUtil.matches(name, expr) : StringUtil.matchesIgnoreCase(name, expr);
+			}
 			if (matches)
 			{
 				if (n >= iSkip)
@@ -317,7 +355,7 @@ public class ZipReader
 	/**
 	 * 
 	 * get the stream to read this from; note that we must close manually
-	 * @param urlString
+	 *
 	 * @return
 	 */
 	public InputStream getInputStream()
@@ -378,5 +416,14 @@ public class ZipReader
 		{
 			zis = new ZipInputStream(bos.getInputStream());
 		}
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ZipReader root=" + rootEntry;
 	}
 }

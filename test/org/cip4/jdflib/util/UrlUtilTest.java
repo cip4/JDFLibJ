@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -460,9 +460,19 @@ public class UrlUtilTest extends JDFTestCaseBase
 	/**
 	 * @throws Exception
 	 */
+	public void testURLToUNC() throws Exception
+	{
+		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("\\\\host\\dir\\file"));
+		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("//host/dir/file"));
+		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("file://host/dir/file"));
+		assertEquals("\\\\host\\dir\\file", UrlUtil.urlToUNC("file:\\\\host\\dir\\file"));
+	}
+
+	/**
+	 * @throws Exception
+	 */
 	public void testURLToFile() throws Exception
 	{
-
 		for (int i = 0; i < 2; i++)
 		{
 			File f = UrlUtil.urlToFile(".");
@@ -580,12 +590,12 @@ public class UrlUtilTest extends JDFTestCaseBase
 		assertEquals("relative url", "File://dir/a.b", UrlUtil.getURLWithDirectory("File://dir", url));
 
 		url = "/a.b";
-		assertEquals("absolute url no host", "File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
-		assertEquals("absolute url no host", "File://a.b", UrlUtil.getURLWithDirectory("File://dir", url));
+		assertEquals("absolute url no host", "File://a.b", UrlUtil.getURLWithDirectory("File://host/", url));
+		assertEquals("absolute url no host", "File://a.b", UrlUtil.getURLWithDirectory("File://host", url));
 
 		url = "/a.b:c";
-		assertEquals("absolute url no host - colon", "File://a.b:c", UrlUtil.getURLWithDirectory("File://dir/", url));
-		assertEquals("absolute url no host - colon", "File://a.b:c", UrlUtil.getURLWithDirectory("File://dir", url));
+		assertEquals("absolute url no host - colon", "File://a.b:c", UrlUtil.getURLWithDirectory("File://host/", url));
+		assertEquals("absolute url no host - colon", "File://a.b:c", UrlUtil.getURLWithDirectory("File://host", url));
 
 		url = "//a.b";
 		assertEquals("absolute url with default host", "File://a.b", UrlUtil.getURLWithDirectory("File://dir/", url));
@@ -698,8 +708,8 @@ public class UrlUtilTest extends JDFTestCaseBase
 	public void testNormalize()
 	{
 		assertEquals(UrlUtil.normalize("a.b"), "a.b");
-		assertEquals(UrlUtil.normalize("./a.b"), "./a.b");
-		assertEquals(UrlUtil.normalize("././a.b"), "./a.b");
+		assertEquals(UrlUtil.normalize("./a.b"), "a.b");
+		assertEquals(UrlUtil.normalize("././a.b"), "a.b");
 		assertEquals(UrlUtil.normalize("http://a/a.b"), "http://a/a.b");
 		assertEquals(UrlUtil.normalize("http://a/a%20.b"), "http://a/a%20.b");
 		assertEquals(UrlUtil.normalize("HTTP://a/a.b"), "http://a/a.b");

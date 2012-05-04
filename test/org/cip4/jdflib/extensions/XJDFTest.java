@@ -266,9 +266,12 @@ public class XJDFTest extends JDFTestCaseBase
 	{
 		XJDF20 xjdf20 = new XJDF20();
 		n = new JDFDoc("JDF").getJDFRoot();
-		JDFNodeInfo ni = (JDFNodeInfo) n.addResource("NodeInfo", null);
-		n.setXPathAttribute("AncestorPool/Ancestor/NodeInforRef/@rRef", ni.getID());
-		e = xjdf20.makeNewJDF(n, null);
+		for (int i = 1; i < 4; i++)
+		{
+			JDFNodeInfo ni = (JDFNodeInfo) n.addResource("NodeInfo", null);
+			n.setXPathAttribute("AncestorPool/Ancestor[" + i + "]/NodeInforRef/@rRef", ni.getID());
+			e = xjdf20.makeNewJDF(n, null);
+		}
 		assertNotNull(e.getXPathElement("ParameterSet/Parameter/NodeInfo"));
 	}
 
@@ -725,7 +728,7 @@ public class XJDFTest extends JDFTestCaseBase
 		xjdf20.bMergeLayout = true;
 		e = xjdf20.makeNewJDF(n, null);
 		assertNull(e.getChildByTagName("StrippingParams", null, 0, null, false, true));
-		e.getOwnerDocument_KElement().write2File(sm_dirTestData + "mergelayout.xjdf", 2, false);
+		e.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "mergelayout.xjdf", 2, false);
 	}
 
 	/**

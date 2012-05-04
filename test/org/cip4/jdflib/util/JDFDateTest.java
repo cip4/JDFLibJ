@@ -585,7 +585,20 @@ public class JDFDateTest extends JDFTestCaseBase
 		assertEquals(dateString, date.getFormattedDateTime("yyyy'-'MM'-'dd'T'HH:mm:ss.SSSZZ"));
 		assertEquals(dateString, date.getFormattedDateTime("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"));
 		assertEquals("11 19-20:00:11", date.getFormattedDateTime("MM dd-HH:mm:ss"));
+	}
 
+	/**
+	 * @throws Exception
+	 */
+	public void testGetFormattedDateTimeSingleMonth() throws Exception
+	{
+		String dateString = "2008-01-19T20:00:11+00:00";
+		final JDFDate date = new JDFDate(dateString);
+		assertEquals("01", date.getFormattedDateTime("MM"));
+		assertEquals("1", date.getFormattedDateTime("M"));
+		date.addOffset(0, 0, 0, 300);
+		assertEquals("11", date.getFormattedDateTime("MM"));
+		assertEquals("11", date.getFormattedDateTime("M"));
 	}
 
 	/**

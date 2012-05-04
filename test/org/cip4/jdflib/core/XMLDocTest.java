@@ -816,9 +816,9 @@ public class XMLDocTest extends JDFTestCaseBase
 
 		out += File.separator + "d%25.xml";
 
-		final File f = new File(out);
+		final File f = UrlUtil.urlToFile(out);
 		f.delete();
-		assertTrue(d.write2File(out, 2, true));
+		assertTrue(d.write2File(f, 2, true));
 		assertTrue(f.canRead());
 	}
 
@@ -942,7 +942,7 @@ public class XMLDocTest extends JDFTestCaseBase
 	public void testUmlaut()
 	{
 		final XMLDoc d = new XMLDoc("doc", null);
-		final String out = sm_dirTestDataTemp + "dir" + File.separator + "dir%20 Grï¿½nï¿½";
+		final String out = sm_dirTestDataTemp + "dir" + File.separator + "dir%20 Grüün";
 		final File dir = new File(out);
 		if (dir.isDirectory())
 		{
@@ -952,9 +952,9 @@ public class XMLDocTest extends JDFTestCaseBase
 		{
 			dir.mkdirs();
 		}
-		final String out2 = out + File.separator + "7ï¿½ .xml";
+		final String out2 = out + File.separator + "7ä .xml";
 
-		final File f = new File(out2);
+		final File f = UrlUtil.urlToFile(out2);
 		f.delete();
 		assertTrue(d.write2File(out2, 0, true));
 		assertTrue(f.canRead());

@@ -449,7 +449,7 @@ public class XMLDoc
 			return false;
 		}
 
-		return write2File(new File(oFilePath), indent, bPreserveSpace);
+		return write2File(UrlUtil.urlToFile(oFilePath), indent, bPreserveSpace);
 	}
 
 	/**

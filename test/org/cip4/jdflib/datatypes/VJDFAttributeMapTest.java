@@ -163,6 +163,25 @@ public class VJDFAttributeMapTest extends JDFTestCaseBase
 	}
 
 	/**
+	 * 
+	 *  
+	 */
+	public void testHash()
+	{
+		final JDFAttributeMap m1 = new JDFAttributeMap("a1", "v1");
+		m1.put("a2", "v2");
+		final JDFAttributeMap m2 = new JDFAttributeMap(m1);
+		m2.put("a3", "v3");
+		final VJDFAttributeMap v = new VJDFAttributeMap();
+		v.add(m1);
+		int i = v.hashCode();
+		v.add(m2);
+		int i2 = v.hashCode();
+		assertNotSame(i, i2);
+
+	}
+
+	/**
 	 * tests OvelapsMap for individual maps
 	 */
 	public void testGetOrMaps()

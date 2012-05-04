@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -95,7 +95,7 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 	{
 		super.setUp();
 		theXJDF = new JDFDoc("XJDF").getRoot();
-		theHelper = new XJDFHelper((JDFElement) theXJDF);
+		theHelper = new XJDFHelper(theXJDF);
 		KElement.setLongID(false);
 	}
 
@@ -107,5 +107,23 @@ public class XJDFCreatorTest extends JDFTestCaseBase
 	public String toString()
 	{
 		return "XJDFCreatorTest: " + theHelper;
+	}
+
+	/**
+	 * 
+	 * TODO Please insert comment!
+	 */
+	public void testXJDFXPath()
+	{
+		KElement root = new JDFDoc("XJDF").getRoot();
+		root.setNamespaceURI(JDFElement.getSchemaURL(2, 0));
+		root.setXPathAttribute("ProductList/Product/@Amount", "1000");
+		root.setXPathAttribute("GeneralID[@IDUsage=\"CatalogID\"]/@IDValue", "Cover");
+		root.setXPathAttribute("GeneralID[@IDUsage=\"foo\"]/@IDValue", "bar");
+		root.setXPathAttribute("ParameterSet[@Name=\"RunList\"]/Parameter/Part/@Run", "Cover");
+		root.setXPathAttribute("ParameterSet[@Name=\"RunList\"]/Parameter[Part/@Run=\"Cover\"]/RunList/FileSpec/@URL", "Cover");
+		root.setXPathAttribute("ParameterSet[@Name=\"RunList\"]/Parameter[2]/Part/@Run", "Body");
+		root.setXPathAttribute("ParameterSet[@Name=\"RunList\"]/Parameter[Part/@Run=\"Body\"]/RunList/FileSpec/@URL", "Body");
+		root.getOwnerDocument_KElement().write2File(sm_dirTestDataTemp + "xpath.xml", 2, false);
 	}
 }

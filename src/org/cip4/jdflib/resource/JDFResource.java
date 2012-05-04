@@ -3271,7 +3271,8 @@ public class JDFResource extends JDFElement
 		HashMap<JDFAttributeMap, JDFResource> map = new HashMap<JDFAttributeMap, JDFResource>();
 		boolean bIdentical = getChildrenByClass(JDFIdentical.class, true, 1) != null;
 		final VString partIDKeys = getPartIDKeys();
-		for (int i = 0; i < v.size(); i++)
+		int size = v.size();
+		for (int i = 0; i < size; i++)
 		{
 			JDFResource r = (JDFResource) v.get(i);
 			final JDFIdentical id = bIdentical ? r.getIdentical() : null;

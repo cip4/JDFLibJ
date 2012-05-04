@@ -272,7 +272,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public KElement makeNewJMF(final JDFJMF jmf)
 	{
-		final KElement root = jmf.getOwnerDocument_JDFElement().clone().getJMFRoot();
+		final JDFJMF root = (JDFJMF) jmf.cloneNewDoc();
 		prepareNewDoc(true);
 		walkTree(root, newRoot);
 		newRoot.eraseEmptyNodes(true);
@@ -287,8 +287,7 @@ public class XJDF20 extends BaseElementWalker
 	 */
 	public KElement makeNewJDF(final JDFNode node, final VJDFAttributeMap vMap)
 	{
-		final JDFNode root = node.getOwnerDocument_JDFElement().clone().getJDFRoot();
-
+		final JDFNode root = (JDFNode) node.getJDFRoot().cloneNewDoc();
 		if (trackAudits)
 			root.getCreateAuditPool().addCreated("XJDF Converter", null);
 		FixVersion vers = new FixVersion(EnumVersion.Version_1_4);
@@ -309,10 +308,8 @@ public class XJDF20 extends BaseElementWalker
 		walkingProduct = true;
 		final KElement productList = newRoot.appendElement("ProductList");
 
-		final JDFNode rootIn = node.getJDFRoot();
-		prepareRoot(node);
-
-		walkTree(rootIn, productList);
+		prepareRoot(root);
+		walkTree(root, productList);
 		if (productList.getElement("Product") == null)
 		{
 			productList.deleteNode();

@@ -1525,7 +1525,8 @@ public class XJDFToJDFConverter extends BaseElementWalker
 			boolean matches = super.matches(toCheck);
 			boolean m1 = (toCheck instanceof JDFPart) && isXResource(toCheck.getParentNode_KElement());
 			boolean m2 = "ChildProduct".equals(toCheck.getLocalName());
-			return matches && (m1 || m2);
+			boolean m3 = "ProcessList".equals(toCheck.getLocalName());
+			return matches && (m1 || m2 || m3);
 		}
 
 	}

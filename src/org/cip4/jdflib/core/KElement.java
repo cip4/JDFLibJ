@@ -1218,7 +1218,7 @@ public class KElement extends ElementNSImpl implements Element
 	 * @param ignoreList 
 	 * @return int number of elements from kElem
 	 */
-	protected int setAttributes(final KElement kElem, final VString ignoreList)
+	public int setAttributes(final KElement kElem, final VString ignoreList)
 	{
 		if (kElem == null)
 		{
@@ -4476,7 +4476,7 @@ public class KElement extends ElementNSImpl implements Element
 			VElement ve;
 			if (bLocal)
 			{
-				ve = getPathVector(elmName, map);
+				ve = getPathVector(elmName, map, false);
 			}
 			else
 			{
@@ -4527,7 +4527,7 @@ public class KElement extends ElementNSImpl implements Element
 
 		if (bLocal)
 		{
-			vRet.addAll(getPathVector(newPath, map));
+			vRet.addAll(getPathVector(newPath, map, false));
 		}
 		else
 		{
@@ -4541,7 +4541,7 @@ public class KElement extends ElementNSImpl implements Element
 		return vRet;
 	}
 
-	private VElement getPathVector(String newPath, JDFAttributeMap map)
+	private VElement getPathVector(String newPath, JDFAttributeMap map, boolean create)
 	{
 		VElement v = getChildElementVector_KElement(newPath, null, null, true, 0);
 		VElement vRet = new VElement();
@@ -4562,6 +4562,15 @@ public class KElement extends ElementNSImpl implements Element
 			{
 				vRet = v;
 			}
+		}
+		else
+		{
+			KElement e = appendElement(newPath);
+			for (String key : map.getKeys())
+			{
+				e.setXPathValue(key, map.get(key));
+			}
+			vRet.add(e);
 		}
 		return vRet;
 	}
@@ -4595,13 +4604,28 @@ public class KElement extends ElementNSImpl implements Element
 			return e;
 		}
 		final int slash = path.indexOf("/");
-		if (slash > 0)
+		final int posB0 = path.indexOf("[");
+		final int brack = posB0 < slash ? path.indexOf("]") : -1;
+		final int slashBrack;
+		if (slash > 0 && brack > 0)
 		{
-			String next = path.substring(0, slash);
+			slashBrack = Math.max(slash, brack + 1);
+		}
+		else if (brack > 0)
+		{
+			slashBrack = brack + 1;
+		}
+		else
+		{
+			slashBrack = slash;
+		}
+		if (slashBrack > 0)
+		{
+			String next = path.substring(0, slashBrack);
 			e = getXPathElement(next);
 			if (e != null)
 			{
-				next = path.substring(slash + 1);
+				next = path.substring(slashBrack + 1);
 				return e.getCreateXPathElement(next);
 			}
 		}
@@ -4641,7 +4665,6 @@ public class KElement extends ElementNSImpl implements Element
 				return getParentNode_KElement();
 			}
 		}
-		final int posB0 = path.indexOf("[");
 		int iSkip = 0;
 		String newPath = path;
 		int pos = newPath.indexOf(JDFCoreConstants.SLASH);
@@ -4656,35 +4679,32 @@ public class KElement extends ElementNSImpl implements Element
 			if (!StringUtil.isInteger(siSkip))
 			{
 				iSkip = -1; // flag for snafu
-				if (siSkip.startsWith("@"))
+				final VString v = StringUtil.tokenize(siSkip, "=", false);
+				if (v.size() == 2)
 				{
-					final VString v = StringUtil.tokenize(siSkip, "=", false);
-					if (v.size() == 2)
+					attName = v.get(0);
+					attVal = v.get(1);
+					if (attName.length() > 1 && attVal.startsWith("\"") && attVal.endsWith("\""))
 					{
-						attName = v.get(0);
-						attVal = v.get(1);
-						if (attName.length() > 1 && attVal.startsWith("\"") && attVal.endsWith("\""))
+						attVal = attVal.substring(1, attVal.length() - 1);
+						final String kidName = pos >= 0 ? newPath.substring(0, pos) : newPath;
+						final VElement vNewChild = getChildElementVector(kidName, null);
+						for (int j = 0; j < vNewChild.size(); j++)
 						{
-							attName = attName.substring(1); // remove "@"
-							attVal = attVal.substring(1, attVal.length() - 1);
-							final String kidName = pos >= 0 ? newPath.substring(0, pos) : newPath;
-							final VElement vNewChild = getChildElementVector(kidName, null);
-							for (int j = 0; j < vNewChild.size(); j++)
+							final KElement tryKid = vNewChild.get(j);
+							if (attName.equals(tryKid.getXPathAttribute(attName, null)))
 							{
-								final KElement tryKid = vNewChild.get(j);
-								if (attName.equals(tryKid.getAttribute(attName)))
-								{
-									iSkip = j + 1;
-									break;
-								}
+								iSkip = j + 1;
+								break;
 							}
-							if (iSkip == -1)
-							{
-								iSkip = vNewChild.size();
-							}
+						}
+						if (iSkip == -1)
+						{
+							iSkip = vNewChild.size();
 						}
 					}
 				}
+
 				if (iSkip < 0)
 				{
 					throw new IllegalArgumentException("GetCreateXPath: illegal path:" + path);
@@ -4706,7 +4726,7 @@ public class KElement extends ElementNSImpl implements Element
 			e = getCreateElement_KElement(newPath.substring(0, pos), null, iSkip);
 			if (attName != null && !e.hasAttribute(attName))
 			{
-				e.setAttribute(attName, attVal);
+				e.setXPathAttribute(attName, attVal);
 			}
 			return e.getCreateXPathElement(newPath.substring(pos + 1));
 		}
@@ -4716,9 +4736,9 @@ public class KElement extends ElementNSImpl implements Element
 			appendElement(newPath, null);
 		}
 		final KElement newElem = getCreateElement_KElement(newPath, null, iSkip);
-		if (attName != null && !newElem.hasAttribute_KElement(attName, null, false))
+		if (attName != null)
 		{
-			newElem.setAttribute(attName, attVal);
+			newElem.setXPathAttribute(attName, attVal);
 		}
 		return newElem;
 	}

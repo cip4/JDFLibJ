@@ -90,6 +90,7 @@ import org.cip4.jdflib.extensions.XJDF20;
 import org.cip4.jdflib.jmf.JDFResourceInfo;
 import org.cip4.jdflib.pool.JDFResourcePool;
 import org.cip4.jdflib.resource.JDFResource;
+import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -972,6 +973,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 	private Node m_ParentNode = null;
 
 	private static final String jdfNSURI = JDFElement.getSchemaURL();
+	private static final String jdfNSURIPrefix = StringUtil.leftStr(JDFElement.getSchemaURL(), -3);
 
 	/**
 	 * @see org.apache.xerces.dom.CoreDocumentImpl#clone()
@@ -1287,7 +1289,8 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 		else
 		{
 			strClassPath = data.sm_PackageNames.get(qualifiedName);
-			if (strClassPath == null && (null == strNameSpaceURI || jdfNSURI.equals(strNameSpaceURI) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
+			if (strClassPath == null
+					&& (null == strNameSpaceURI || (strNameSpaceURI != null && strNameSpaceURI.startsWith(jdfNSURIPrefix)) || JDFConstants.EMPTYSTRING.equals(strNameSpaceURI)))
 			{ // the maps only contain local names for jdf - recheck in case of prefix
 				strClassPath = data.sm_PackageNames.get(localPart);
 			}
@@ -1365,7 +1368,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			else
 			{
 				// should never get her - needed for compiler happiness
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 		else
@@ -1376,7 +1379,7 @@ public class DocumentJDFImpl extends DocumentXMLImpl
 			}
 			else
 			{
-				strClassPath = (nameSpaceURI == null && bInJDFJMF || JDFConstants.JDFNAMESPACE.equals(nameSpaceURI)) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
+				strClassPath = (nameSpaceURI == null && bInJDFJMF || (nameSpaceURI != null && nameSpaceURI.startsWith(jdfNSURIPrefix))) ? data.sm_PackageNames.get("EleDefault") : data.sm_PackageNames.get("OtherNSDefault");
 			}
 		}
 

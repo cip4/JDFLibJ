@@ -174,6 +174,7 @@ import org.cip4.jdflib.resource.JDFResource;
 import org.cip4.jdflib.resource.JDFResource.EnumPartUsage;
 import org.cip4.jdflib.resource.JDFResource.EnumResStatus;
 import org.cip4.jdflib.resource.JDFResource.EnumResourceClass;
+import org.cip4.jdflib.resource.JDFResource.PartitionGetter;
 import org.cip4.jdflib.resource.JDFResourceAudit;
 import org.cip4.jdflib.resource.process.JDFBusinessInfo;
 import org.cip4.jdflib.resource.process.JDFCompany;
@@ -3149,6 +3150,15 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				return null;
 			}
+			JDFAttributeMap identicalSrcMap = null;
+			if (mattr != null && !mattr.overlapMap(ni.getPartMap()))
+			{
+				PartitionGetter partitionGetter = niBase.new PartitionGetter();
+				partitionGetter.setFollowIdentical(false);
+				JDFNodeInfo identicalSrc = (JDFNodeInfo) partitionGetter.getPartition(mattr, null);
+				if (identicalSrc != null)
+					identicalSrcMap = identicalSrc.getPartMap();
+			}
 			stat = null;
 
 			final VElement vLeaves = ni.getLeaves(false);
@@ -3158,6 +3168,8 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 			{
 				JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
 				JDFAttributeMap map = niCmp.getPartMap();
+				if (identicalSrcMap != null)
+					map.putAll(identicalSrcMap);
 				if (map != null && !map.overlapMap(mattr))
 				{
 					continue;
@@ -3248,14 +3260,24 @@ public class JDFNode extends JDFElement implements INodeIdentifiable
 				return null;
 			}
 			statDetails = ni.getNodeStatusDetails();
+			JDFAttributeMap identicalSrcMap = null;
+			if (mattr != null && !mattr.overlapMap(ni.getPartMap()))
+			{
+				PartitionGetter partitionGetter = ni.new PartitionGetter();
+				partitionGetter.setFollowIdentical(false);
+				JDFNodeInfo identicalSrc = (JDFNodeInfo) partitionGetter.getPartition(mattr, null);
+				if (identicalSrc != null)
+					identicalSrcMap = identicalSrc.getPartMap();
+			}
 
 			final VElement vLeaves = ni.getLeaves(false);
 			final int size = vLeaves.size();
-
 			for (int i = 0; i < size; i++)
 			{
 				final JDFNodeInfo niCmp = (JDFNodeInfo) vLeaves.elementAt(i);
 				final JDFAttributeMap map = niCmp.getPartMap();
+				if (identicalSrcMap != null)
+					map.putAll(identicalSrcMap);
 				if (map != null && !map.overlapMap(mattr))
 				{
 					continue;

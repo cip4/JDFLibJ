@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -74,6 +74,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cip4.jdflib.util.FileUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.cip4.jdflib.util.UrlUtil;
@@ -93,6 +95,7 @@ public class RollingFile extends File
 	private final String base;
 	private final String ext;
 	private int digits;
+	protected final Log log;
 
 	/**
 	 * @param pathname the base filename
@@ -107,12 +110,13 @@ public class RollingFile extends File
 		base = UrlUtil.prefix(baseName);
 		digits = 6;
 		calcPos();
+		log = LogFactory.getLog(getClass());
 	}
 
 	/**
 	 * 
 	 */
-	private void calcPos()
+	protected void calcPos()
 	{
 		File[] list = readAll();
 		pos = 0;
@@ -146,7 +150,7 @@ public class RollingFile extends File
 	/**
 	 * @return
 	 */
-	private String getFileExpression()
+	protected String getFileExpression()
 	{
 		String expression = "(.)*";
 		if (base != null)
@@ -162,13 +166,16 @@ public class RollingFile extends File
 	public File getNewFile()
 	{
 		File file = FileUtil.getFileInDirectory(this, new File(getNewFileName()));
-		try
+		if (!file.exists())
 		{
-			file.createNewFile();
-		}
-		catch (IOException x)
-		{
-			file = null;
+			try
+			{
+				file.createNewFile();
+			}
+			catch (IOException x)
+			{
+				file = null;
+			}
 		}
 		return file;
 	}
@@ -176,7 +183,7 @@ public class RollingFile extends File
 	/**
 	 * @return the file to write, i.e. this
 	 */
-	private String getNewFileName()
+	protected String getNewFileName()
 	{
 		String exp = getFileExpression();
 		exp = StringUtil.replaceString(exp, "(.)*", "%0" + digits + "i");

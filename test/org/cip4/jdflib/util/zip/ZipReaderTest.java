@@ -69,11 +69,14 @@
 package org.cip4.jdflib.util.zip;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 
 import org.cip4.jdflib.JDFTestCaseBase;
 import org.cip4.jdflib.core.XMLDoc;
+import org.cip4.jdflib.util.ByteArrayIOStream;
 import org.cip4.jdflib.util.FileUtil;
 
 /**
@@ -159,6 +162,86 @@ public class ZipReaderTest extends JDFTestCaseBase
 		assertNotNull(e);
 		e = r.getEntry("schema/Conditions.jdf");
 		assertNotNull(e);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testGetEntryAutoFileRoot()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		ZipEntry e = r.getEntry("Conditions.jdf");
+		assertNotNull(e);
+		e = r.getEntry("BarcodeDetails.jdf");
+		assertNotNull(e);
+		e = r.getEntry("Conditions.jdf");
+		assertNotNull(e);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testSetRoot()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "schema.zip");
+		r.setRootEntry("schema/");
+		ZipEntry e = r.getEntry("Conditions.jdf");
+		assertNotNull(e);
+		e = r.getEntry("BarcodeDetails.jdf");
+		assertNotNull(e);
+		e = r.getEntry("Conditions.jdf");
+		assertNotNull(e);
+		e = r.getMatchingEntry("Condition?.jdf", 0);
+		assertNotNull(e);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testGetBigEntry()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
+		ZipEntry e = r.getEntry("dir1/bigzip.pdf");
+		assertNotNull(e);
+	}
+
+	/**
+	 * @throws IOException 
+	 * 
+	 *  
+	 */
+	public void testGetBigEntryStream() throws IOException
+	{
+		ByteArrayIOStream bos = new ByteArrayIOStream(new File(sm_dirTestData + "dir1.zip"));
+		ZipReader r = new ZipReader(bos.getInputStream());
+		ZipEntry e = r.getEntry("dir1/bigzip.pdf");
+		assertNotNull(e);
+		InputStream inputStream = r.getInputStream();
+		assertNotNull(inputStream);
+		int n = 0;
+		byte[] b = new byte[1000];
+		while (true)
+		{
+			int i = inputStream.read(b);
+			n += i;
+			if (i < 0)
+				break;
+		}
+		assertTrue(n > 190000000);
+	}
+
+	/**
+	 * 
+	 *  
+	 */
+	public void testGetBigEntries()
+	{
+		ZipReader r = new ZipReader(sm_dirTestData + "dir1.zip");
+		Vector<ZipEntry> v = r.getEntries();
+		assertNotNull(v);
 	}
 
 	/**

@@ -122,17 +122,15 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	 */
 	public static class ByteArrayIOInputStream extends ByteArrayInputStream
 	{
-		private final ByteArrayIOStream parent;
 
 		/**
 		 * @param buf
-		 * @param parent
+		 * @param count
 		 *  
 		 */
-		ByteArrayIOInputStream(byte[] buf, ByteArrayIOStream parent)
+		ByteArrayIOInputStream(byte[] buf, int count)
 		{
-			super(buf, 0, parent.size());
-			this.parent = parent;
+			super(buf, 0, count);
 		}
 
 		/**
@@ -142,7 +140,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		 */
 		public ByteArrayIOInputStream getNewStream()
 		{
-			return new ByteArrayIOInputStream(buf, parent);
+			return new ByteArrayIOInputStream(buf, count);
 		}
 
 		/**
@@ -152,6 +150,24 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 		public synchronized String toString()
 		{
 			return "ByteArrayIOInputStream:\n" + new String(buf, 0, count);
+		}
+
+		/**
+		 * 
+		 * @return
+		 */
+		public byte[] getBuf()
+		{
+			return buf;
+		}
+
+		/**
+		 * 
+		 * @return
+		 */
+		public int getCount()
+		{
+			return count;
 		}
 	}
 
@@ -177,29 +193,39 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 
 	/**
 	 * creates an input output stream class from any stream
+	 * if is alraedy is a buffered inputstream, no copy is made
 	 * 
 	 * @param is the inputstream to buffer
 	 */
 	public ByteArrayIOStream(final InputStream is)
 	{
-		super(10000);
+		super(1000);
 		log = LogFactory.getLog(getClass());
 		if (is == null)
 		{
 			return;
 		}
-		try
+		if (is instanceof ByteArrayIOInputStream)
 		{
-			final int available = is.available();
-			if (available > 1000)
-			{
-				buf = new byte[available + 1000];
-			}
-			IOUtils.copy(is, this);
+			ByteArrayIOInputStream bis = (ByteArrayIOInputStream) is;
+			buf = bis.getBuf();
+			count = bis.getCount();
 		}
-		catch (final IOException e)
+		else
 		{
-			log.error("error copying streams to buffer", e);
+			try
+			{
+				final int available = is.available();
+				if (available > 1000)
+				{
+					buf = new byte[available + 1000];
+				}
+				IOUtils.copy(is, this);
+			}
+			catch (final IOException e)
+			{
+				log.error("error copying streams to buffer", e);
+			}
 		}
 	}
 
@@ -248,7 +274,7 @@ public class ByteArrayIOStream extends ByteArrayOutputStream
 	 */
 	public ByteArrayIOInputStream getInputStream()
 	{
-		final ByteArrayIOInputStream is = new ByteArrayIOInputStream(buf, this);
+		final ByteArrayIOInputStream is = new ByteArrayIOInputStream(buf, count);
 		return is;
 	}
 

@@ -977,6 +977,27 @@ public class FileUtil
 	}
 
 	/**
+	 * create a buffered output stream for a file
+	 * @param file
+	 * @param append 
+	 * @return the buffered output stream, null if snafu
+	 */
+	public static BufferedOutputStream getBufferedOutputStream(File file, boolean append)
+	{
+		FileOutputStream fos;
+		try
+		{
+			fos = new FileOutputStream(file, append);
+		}
+		catch (FileNotFoundException x)
+		{
+			return null;
+		}
+		BufferedOutputStream bos = new BufferedOutputStream(fos);
+		return bos;
+	}
+
+	/**
 	 * 
 	 * @return true if we are on a windows file system
 	 */

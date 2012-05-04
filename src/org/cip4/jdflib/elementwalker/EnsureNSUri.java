@@ -2,7 +2,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2011 The International Cooperation for the Integration of
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights
  * reserved.
  *
@@ -66,9 +66,6 @@
  * <http://www.cip4.org/>.
  *
  */
-/**
- * 
- */
 package org.cip4.jdflib.elementwalker;
 
 import java.util.HashMap;
@@ -78,6 +75,8 @@ import org.apache.xerces.dom.AttrNSImpl;
 import org.cip4.jdflib.core.JDFConstants;
 import org.cip4.jdflib.core.KElement;
 import org.cip4.jdflib.core.VString;
+import org.cip4.jdflib.util.BiHashMap;
+import org.cip4.jdflib.util.ContainerUtil;
 import org.cip4.jdflib.util.StringUtil;
 import org.w3c.dom.Attr;
 
@@ -89,7 +88,7 @@ import org.w3c.dom.Attr;
 public class EnsureNSUri extends BaseElementWalker
 {
 
-	protected final HashMap<String, String> nsMap;
+	protected final BiHashMap<String, String> nsMap;
 	protected final HashMap<String, String> aliasMap;
 
 	/**
@@ -102,6 +101,8 @@ public class EnsureNSUri extends BaseElementWalker
 	{
 		if (uri == null)
 			throw new IllegalArgumentException("uri MUST NOT be null");
+		if (prefix == null)
+			prefix = "";
 		nsMap.put(prefix, uri);
 	}
 
@@ -127,7 +128,8 @@ public class EnsureNSUri extends BaseElementWalker
 		while (it.hasNext())
 		{
 			String next = it.next();
-			root.addNameSpace(next, nsMap.get(next));
+			String strNameSpaceURI = nsMap.get(next);
+			root.addNameSpace(next, strNameSpaceURI);
 		}
 		Iterator<String> itAlias = aliasMap.keySet().iterator();
 		while (itAlias.hasNext())
@@ -145,7 +147,7 @@ public class EnsureNSUri extends BaseElementWalker
 	public EnsureNSUri()
 	{
 		super(new BaseWalkerFactory());
-		nsMap = new HashMap<String, String>();
+		nsMap = new BiHashMap<String, String>();
 		aliasMap = new HashMap<String, String>();
 		new BaseWalker(getFactory()); // need a default walker
 	}
@@ -182,15 +184,17 @@ public class EnsureNSUri extends BaseElementWalker
 		@Override
 		public KElement walk(final KElement e1, final KElement trackElem)
 		{
-			String s = e1.getPrefix();
-			String destPrefix = getAlias(s);
-			String srcPrefix = s;
+			String prefix = e1.getPrefix();
+			String uri = e1.getNamespaceURI();
+			String destPrefix = getAlias(prefix, uri);
 
 			if (nsMap.get(destPrefix) != null)
 			{
 				e1.setNamespaceURI(nsMap.get(destPrefix));
 			}
-			if (destPrefix != null && !destPrefix.equals(srcPrefix) || (srcPrefix != null && destPrefix == null))
+			if ("".equals(destPrefix))
+				destPrefix = null;
+			if (destPrefix != null && !destPrefix.equals(prefix) || (prefix != null && destPrefix == null))
 			{
 				e1.setPrefix(destPrefix);
 			}
@@ -207,8 +211,10 @@ public class EnsureNSUri extends BaseElementWalker
 		private void processAttribute(final KElement e1, String att)
 		{
 			String origPrefix = KElement.xmlnsPrefix(att);
-			String prefix = getAlias(origPrefix);
+			String prefix = getAlias(origPrefix, null);
 			String uri = nsMap.get(prefix);
+			if ("".equals(prefix))
+				prefix = null;
 			if (uri != null && !JDFConstants.XMLNS.equals(att))
 			{
 				processStandardAttribute(e1, att, origPrefix, prefix, uri);
@@ -222,7 +228,7 @@ public class EnsureNSUri extends BaseElementWalker
 		private void processStandardAttribute(final KElement e1, String att, String origPrefix, String prefix, String uri)
 		{
 			Attr attr = e1.getDOMAttr(att, null, false);
-			if (!uri.equals(attr.getNamespaceURI()))
+			if (!uri.equals(attr.getNamespaceURI()) || !ContainerUtil.equals(prefix, origPrefix))
 			{
 				if (attr instanceof AttrNSImpl)
 				{
@@ -230,7 +236,10 @@ public class EnsureNSUri extends BaseElementWalker
 					e1.removeAttribute(att);
 					if (origPrefix != null && !origPrefix.equals(prefix))
 						att = StringUtil.replaceToken(att, 0, ":", prefix);
-					e1.setAttributeNS(uri, att, val);
+					if (prefix == null)
+						e1.setAttribute(att, val);
+					else
+						e1.setAttributeNS(uri, att, val);
 				}
 			}
 		}
@@ -239,7 +248,7 @@ public class EnsureNSUri extends BaseElementWalker
 		{
 			String uri;
 			String locName = KElement.xmlnsLocalName(att);
-			String alias = getAlias(locName);
+			String alias = getAlias(locName, null);
 			if (alias != null && !alias.equals(locName))
 			{
 				e1.removeAttribute(att);
@@ -260,14 +269,24 @@ public class EnsureNSUri extends BaseElementWalker
 			}
 		}
 
-		private String getAlias(String s)
+		private String getAlias(String prefix, String uri)
 		{
-			if (s == null)
-				return s;
-			String s2 = aliasMap.get(s);
+			if (prefix == null)
+				return "";
+			String s2 = aliasMap.get(prefix);
 			if ("<".equals(s2))
-				return null;
-			return s2 == null ? s : s2;
+				return "";
+			if (s2 == null && uri != null)
+			{
+				String newPrefix = nsMap.getKey(uri);
+				String newURI = nsMap.get(prefix);
+				if (newURI == null && newPrefix != null && !ContainerUtil.equals(prefix, newPrefix))
+				{
+					addAlias(prefix, newPrefix);
+					s2 = newPrefix;
+				}
+			}
+			return s2 == null ? prefix : s2;
 		}
 
 		/**

@@ -3638,7 +3638,7 @@ public class JDFElement extends KElement
 	 * @return int number of elements from kElem
 	 */
 	@Override
-	protected int setAttributes(final KElement kElem, final VString ignoreList)
+	public int setAttributes(final KElement kElem, final VString ignoreList)
 	{
 		if (kElem == null)
 		{

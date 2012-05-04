@@ -3,7 +3,7 @@
  * The CIP4 Software License, Version 1.0
  *
  *
- * Copyright (c) 2001-2010 The International Cooperation for the Integration of 
+ * Copyright (c) 2001-2012 The International Cooperation for the Integration of 
  * Processes in  Prepress, Press and Postpress (CIP4).  All rights 
  * reserved.
  *
@@ -74,6 +74,8 @@
  * Copyright (c) 2004 Heidelberger Druckmaschinen AG, All Rights Reserved.
  */
 package org.cip4.jdflib.util;
+
+import java.util.Collection;
 
 /**
  * This class provides some hashCode calculation utilities. Use the static methods of this class to generate
@@ -174,6 +176,24 @@ public class HashUtil extends Object
 	public static final int hashCode(final int source, final Object x)
 	{
 		return (null == x) ? 0 : PRIME * source + x.hashCode();
+	}
+
+	/**
+	 * @param source
+	 * @param c
+	 * @return
+	 */
+	public static final int hashCode(int source, final Collection<?> c)
+	{
+		if (null != c)
+		{
+			for (Object o : c)
+			{
+				source = hashCode(source, o);
+			}
+		}
+
+		return source;
 	}
 
 	/**

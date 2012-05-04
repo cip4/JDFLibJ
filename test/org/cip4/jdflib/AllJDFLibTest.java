@@ -275,6 +275,7 @@ import org.cip4.jdflib.util.UrlUtilTest;
 import org.cip4.jdflib.util.VectorMapTest;
 import org.cip4.jdflib.util.file.FileJanitorTest;
 import org.cip4.jdflib.util.file.FileSorterTest;
+import org.cip4.jdflib.util.file.RollingDateFileTest;
 import org.cip4.jdflib.util.file.RollingFileTest;
 import org.cip4.jdflib.util.hotfolder.HotFolderTest;
 import org.cip4.jdflib.util.hotfolder.QueueHotFolderTest;
@@ -549,6 +550,9 @@ public class AllJDFLibTest extends JDFTestCaseBase
 		// util.file
 		suite.addTestSuite(FileSorterTest.class);
 		suite.addTestSuite(FileJanitorTest.class);
+		suite.addTestSuite(RollingFileTest.class);
+		suite.addTestSuite(RollingDateFileTest.class);
+
 		// util.hotfolder
 		suite.addTestSuite(HotFolderTest.class);
 		suite.addTestSuite(QueueHotFolderTest.class);

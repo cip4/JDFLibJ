@@ -1236,10 +1236,14 @@ public class UrlUtil
 			try
 			{
 				final URI dirURI = new URI(directory);
-				directory = dirURI.getScheme() + ":";
-				if (!url.startsWith("//"))
+				String scheme = dirURI.getScheme();
+				if (scheme != null)
 				{
-					url = "/" + url;
+					directory = scheme + ":";
+					if (!url.startsWith("//"))
+					{
+						url = "/" + url;
+					}
 				}
 			}
 			catch (final URISyntaxException x)
@@ -1262,21 +1266,22 @@ public class UrlUtil
 	 * @param url the url to clean
 	 * @return String - the clean path
 	 */
-	public static String cleanDots(final String url)
+	public static String cleanDots(String url)
 	{
 		if (url == null)
 		{
 			return null;
 		}
-		String dummy = url;
+		while (url.length() > 2 && url.startsWith("./"))
+			url = url.substring(2);
 		final int posDouble = url.indexOf("//");
 		String prefix = url.startsWith("/") ? "/" : "";
 		if (posDouble >= 0)
 		{
 			prefix = url.substring(0, posDouble + 2);
-			dummy = url.substring(posDouble + 2);
+			url = url.substring(posDouble + 2);
 		}
-		final VString vs = StringUtil.tokenize(dummy, "/", false);
+		final VString vs = StringUtil.tokenize(url, "/", false);
 		for (int i = vs.size() - 1; i > 0; i--)
 		{
 			if (vs.stringAt(i).equals("") || vs.stringAt(i).equals("."))
@@ -1299,7 +1304,6 @@ public class UrlUtil
 				}
 			}
 		}
-
 		return prefix + (vs.isEmpty() ? "." : StringUtil.setvString(vs, "/", null, null));
 	}
 

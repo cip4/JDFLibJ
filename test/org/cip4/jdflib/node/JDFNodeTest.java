@@ -1668,7 +1668,6 @@ public class JDFNodeTest extends JDFTestCaseBase
 	}
 
 	// //////////////////////////////////////////////////////////////////////////
-	// ///////////
 	/**
 	 * 
 	 */
@@ -1697,6 +1696,33 @@ public class JDFNodeTest extends JDFTestCaseBase
 		assertEquals("If parent is different from single leaf: null ", EnumNodeStatus.Completed, partStatus);
 		partStatus = createJDF.getPartStatus(partMap, 0);
 		assertEquals("If parent is different from single leaf: null ", EnumNodeStatus.Waiting, partStatus);
+	}
+
+	/**
+	 * 
+	 */
+	public void testGetPartStatusIdentical()
+	{
+		final JDFNode createJDF = new JDFDoc("JDF").getJDFRoot();
+		createJDF.getCreateResourcePool();
+		final JDFNodeInfo createNodeInfo = createJDF.getCreateNodeInfo();
+		createNodeInfo.setNodeStatus(EnumNodeStatus.Waiting);
+		createJDF.setStatus(EnumNodeStatus.Part);
+		final JDFAttributeMap partMap = new JDFAttributeMap();
+		partMap.put("Run", "1");
+		final JDFNodeInfo createPartition = (JDFNodeInfo) createNodeInfo.getCreatePartition(partMap, null);
+		final JDFAttributeMap partMap2 = new JDFAttributeMap();
+		partMap2.put("Run", "2");
+		final JDFNodeInfo createPartition2 = (JDFNodeInfo) createNodeInfo.getCreatePartition(partMap2, null);
+		createNodeInfo.setNodeStatus(EnumNodeStatus.Waiting);
+		createPartition2.setIdentical(createPartition);
+		EnumNodeStatus partStatus = createJDF.getPartStatus(null, 0);
+		assertEquals("two leaves ", EnumNodeStatus.Waiting, partStatus);
+		createPartition.setNodeStatus(EnumNodeStatus.Completed);
+		partStatus = createJDF.getPartStatus(partMap, 0);
+		assertEquals("If parent is different from identical leaves: null ", EnumNodeStatus.Completed, partStatus);
+		partStatus = createJDF.getPartStatus(partMap2, 0);
+		assertEquals("If parent is different from identical leaves: null ", EnumNodeStatus.Completed, partStatus);
 	}
 
 	/**

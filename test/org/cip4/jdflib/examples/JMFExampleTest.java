@@ -99,30 +99,25 @@ public class JMFExampleTest extends JDFTestCaseBase
 		JDFDeviceInfo di = signal.getDeviceInfo(0);
 		{
 			KElement activity = di.appendElement("Activity");
-			activity.appendElement(ElementName.EMPLOYEE);
-			activity.appendElement(ElementName.EMPLOYEE);
-			activity.appendElement(ElementName.COSTCENTER);
-			activity.appendElement(ElementName.MISDETAILS);
-			activity.setAttribute("ActivityDetails", "Washup");
+			activity.setAttribute("PersonalID", "P1");
+			activity.setAttribute("ActivityName", "Polishing");
 			activity.setAttribute("ActivityID", "ID1234");
 			activity.setXMLComment("The following activity is NOT job related (direct child of deviceInfo) \ndo we need both cost center and MISDetails here?");
+			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P1");
+			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P2");
+			di.appendElement(ElementName.EMPLOYEE).setAttribute("PersonalID", "P3");
 		}
 		{
 			JDFJobPhase jp = di.getJobPhase(0);
 			KElement activity = jp.appendElement("Activity");
-			activity.appendElement(ElementName.EMPLOYEE);
-			activity.appendElement(ElementName.EMPLOYEE);
-			activity.appendElement(ElementName.COSTCENTER);
-			activity.appendElement(ElementName.MISDETAILS);
-			activity.setAttribute("ActivityDetails", "Washup");
+			activity.setAttribute("ActivityName", "Washup");
 			activity.setAttribute("ActivityID", "ID1234");
+			activity.setAttribute("PersonalID", "P2");
 			activity.setXMLComment("The following activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
 			activity = jp.appendElement("Activity");
-			activity.appendElement(ElementName.EMPLOYEE);
-			activity.appendElement(ElementName.COSTCENTER);
-			activity.appendElement(ElementName.MISDETAILS);
-			activity.setAttribute("ActivityDetails", "Polishing");
-			activity.setAttribute("ActivityID", "ID1235");
+			activity.setAttribute("ActivityName", "NosePoking");
+			activity.setAttribute("ActivityID", "ID1236");
+			activity.setAttribute("PersonalID", "P3");
 			activity.setXMLComment("The following 2nd activity is job related (direct child of jobphase) \ndo we need both cost center and MISDetails here?");
 		}
 
